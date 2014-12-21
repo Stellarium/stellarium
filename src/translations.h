@@ -487,5 +487,6 @@ class Translations
 		N_("&Open");
 		N_("File &name:");
 		N_("Copy &Link Location");
+		N_("Abort");
 	}
 };
