@@ -455,11 +455,12 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 	// This test seemed necessary for reasonable fps in case too many comet elements are loaded.
 	// Problematic: Early-out here of course disables the wanted hint circles for dim comets.
-	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
-//	if ((getVMagnitude(core)-8.0f) > core->getSkyDrawer()->getLimitMagnitude())
-//	{
-//		return;
-//	}
+	// The line makes hints for comets 5 magnitudes below sky limiting magnitude visible.
+	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comet elements!)
+	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	{
+		return;
+	}
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
