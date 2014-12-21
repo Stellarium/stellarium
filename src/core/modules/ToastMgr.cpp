@@ -23,10 +23,17 @@
 #include "StelToast.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
+#include "StelApp.hpp"
+
+#include <QSettings>
 
 ToastMgr::ToastMgr()
 {
-	survey = new ToastSurvey("/home/fabien/projects/DSSToStellarium/results/{level}/{x}_{y}.jpg", 11);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	QString dssHost = conf->value("dss/host", "http://dss.astro.altspu.ru").toString();
+	survey = new ToastSurvey(dssHost+"/results/{level}/{x}_{y}.jpg", 11);
 	survey->setParent(this);
 }
 
