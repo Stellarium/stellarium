@@ -26,9 +26,13 @@ This is a shader for phong/per-pixel lighting.
 #version 120
 
 //macros that can be set by ShaderManager (simple true/false flags)
-#define SHADOWS 1
-#define SHADOW_FILTER 1
-#define SHADOW_FILTER_HQ 1
+#define SHADOWS 0
+#define SHADOW_FILTER 0
+#define SHADOW_FILTER_HQ 0
+#define MAT_AMBIENT 1
+#define MAT_DIFFUSETEX 1
+#define BUMP 0
+#define HEIGHT 0
 
 #if SHADOW_FILTER_HQ
 #define FILTER_STEPS 64
@@ -122,15 +126,24 @@ const vec2 poissonDisk[FILTER_STEPS] = vec2[](
 #define FILTER_STEPS 0
 #endif
 
+#if MAT_DIFFUSETEX
 uniform sampler2D u_texDiffuse;
+#endif
+#if BUMP
+uniform sampler2D u_texBump;
+#endif
+#if HEIGHT
+uniform sampler2D u_texHeight;
+#endif
 
 //light info
-uniform vec3 u_vLightDirection; //in view space, from point to light
 uniform vec3 u_vLightAmbient;
 uniform vec3 u_vLightDiffuse;
 
 //material info
+#if MAT_AMBIENT
 uniform vec3 u_vMatAmbient;
+#endif
 uniform vec3 u_vMatDiffuse;
 uniform vec3 u_vMatSpecular;
 uniform float u_vMatShininess;
@@ -147,7 +160,8 @@ uniform sampler2DShadow u_texShadow3;
 
 varying vec3 v_normal;
 varying vec2 v_texcoord;
-varying vec3 v_halfvec;
+varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
+varying vec3 v_eye;
 
 #if SHADOWS
 varying vec3 v_viewPos; //position of fragment in view space
@@ -202,43 +216,83 @@ float getShadow()
 }
 #endif
 
-vec3 calcLighting(vec3 normal)
+void calcLighting(in vec3 normal,out vec3 texCol,out vec3 specCol)
 {
-	vec3 ret;
+	vec3 L = normalize(v_lightVec);
 	
 	//ambient + small constant lighting
+	#if MAT_AMBIENT
 	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatAmbient;
-	ret+=Iamb;
+	#else
+	//Add the lightsources ambient at least
+	vec3 Iamb = u_vLightAmbient + vec3(0.025,0.025,0.025);
+	#endif
 	
 	//basic lambert term
-	float NdotL = dot(normal, u_vLightDirection);
+	float NdotL = dot(normal, L);
 	vec3 Idiff = u_vLightDiffuse * u_vMatDiffuse * max(0.0,NdotL);
-	
-	#if SHADOWS
-	float shd = getShadow();
-	ret+=Idiff*shd;
-	#else
-	ret+=Idiff;
-	#endif
+	vec3 Ispec;
 	
 	if(NdotL>0.0)
 	{
-		//specular term according to Blinn-Phong model (light specular is assumed to be white for now)
-		vec3 Ispec = u_vMatSpecular * pow( dot(normal, v_halfvec), 4 * u_vMatShininess);
-		#if SHADOWS
-		ret+=Ispec*shd;
-		#else
-		ret+=Ispec;
-		#endif
+		//calculate phong reflection vector
+		vec3 R = reflect(-L,normal);
+		
+		float RdotE = dot(normalize(R), normalize(v_eye));
+		
+		if(RdotE>0.0)
+		{
+			//specular term according to Phong model (light specular is assumed to be white for now)
+			Ispec = u_vMatSpecular * pow( RdotE, u_vMatShininess);
+		}
 	}
 	
-	return ret;
+	#if SHADOWS
+	float shd = getShadow();
+	texCol = (Iamb + Idiff) * shd;
+	specCol = Ispec * shd;
+	#else
+	texCol = Iamb + Idiff;
+	specCol = Ispec;
+	#endif
 }
+
+#if BUMP
+vec3 getBumpNormal(vec2 texCoords)
+{
+	return texture2D(u_texBump, texCoords).xyz * 2.0 - 1.0;
+}
+#endif
+
+#if HEIGHT
+const float heightScale = 0.015f; //const for now
+#endif
 
 void main(void)
 {
-	vec4 texVal = texture2D(u_texDiffuse,v_texcoord);
-	vec3 ill = calcLighting(normalize(v_normal));
+	vec2 texCoords = v_texcoord;
+	#if HEIGHT
+	//pertube texture coords with heightmap
+	float height = texture2D(u_texHeight, texCoords).r;
+	//*scale +bias
+	height = height * heightScale - 0.5*heightScale;
+		
+	texCoords = texCoords + (height * normalize(v_eye).xz);
+	#endif
 	
-	gl_FragColor = vec4(ill,u_vMatAlpha) * texVal;
+	#if BUMP
+	vec3 normal = getBumpNormal(texCoords);
+	#else
+	vec3 normal = v_normal;
+	#endif
+
+	vec3 texCol,specCol;
+	calcLighting(normalize(normal),texCol,specCol);
+	
+	#if MAT_DIFFUSETEX
+	vec4 texVal = texture2D(u_texDiffuse,texCoords);
+	gl_FragColor = vec4((texCol+specCol) * texVal.rgb ,u_vMatAlpha * texVal.a);
+	#else
+	gl_FragColor = vec4(texCol + specCol,u_vMatAlpha);
+	#endif
 }

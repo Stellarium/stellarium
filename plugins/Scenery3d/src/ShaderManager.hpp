@@ -79,6 +79,10 @@ public:
 
 		//! Defines the Diffuse texture slot
 		UNIFORM_TEX_DIFFUSE,
+		//! Defines the Bump texture slot
+		UNIFORM_TEX_BUMP,
+		//! Defines the Height texture slot
+		UNIFORM_TEX_HEIGHT,
 		//! First shadow map
 		UNIFORM_TEX_SHADOW0,
 		UNIFORM_TEX_SHADOW1,
@@ -96,8 +100,10 @@ public:
 		//! Material global transparency
 		UNIFORM_MTL_ALPHA,
 
-		//! Light direction vector (view space)
+		//! Light direction vector (world space)
 		UNIFORM_LIGHT_DIRECTION,
+		//! Light direction vector (view space)
+		UNIFORM_LIGHT_DIRECTION_VIEW,
 		//! Light ambient intensity
 		UNIFORM_LIGHT_AMBIENT,
 		//! Light diffuse intensity
@@ -139,6 +145,8 @@ private:
 		SHADOWS         = (1<<2),
 		//Shader applies bump/normal maps
 		BUMP            = (1<<3),
+		//Shader applies height maps (in addition to bump map)
+		HEIGHT          = (1<<3),
 		//Shader applies alpha testing (w. fragment discard)
 		ALPHATEST	= (1<<4),
 		//Shader filters shadows
@@ -179,7 +187,6 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	uint flags = SHADING;
 	if(globals.pixelLighting)            flags|= PIXEL_LIGHTING;
 	if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
-	if(globals.pixelLighting && globals.bump)    flags|= BUMP;
 	if(globals.pixelLighting && globals.shadows && globals.shadowFilter) flags|= SHADOW_FILTER;
 	if(globals.pixelLighting && globals.shadows && globals.shadowFilter && globals.shadowFilterHQ) flags|= SHADOW_FILTER_HQ;
 
@@ -191,6 +198,10 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 			flags|= MAT_SPECULAR;
 		if(mat->texture)
 			flags|= MAT_DIFFUSETEX;
+		if(mat->bump_texture && globals.bump)
+			flags|= BUMP;
+		if(mat->height_texture && globals.bump)
+			flags|= HEIGHT;
 	}
 
 	return findOrLoadShader(flags);
