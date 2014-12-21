@@ -88,7 +88,7 @@ public:
             emission[1] = 0.0f;
             emission[2] = 0.0f;
             emission[3] = 0.0f;
-            shininess = 0.0f;
+	    shininess = 8.0f;
 	    alpha = 1.0f;
             illum = DIFFUSE;
             textureName.clear();

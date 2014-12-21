@@ -32,7 +32,7 @@ uniform mat4 u_mMVP;
 uniform mat3 u_mNormal;
 
 //light info
-uniform vec3 u_vLightDirection; //in view space
+uniform vec3 u_vLightDirectionView; //in view space
 uniform vec3 u_vLightAmbient;
 uniform vec3 u_vLightDiffuse;
 
@@ -56,11 +56,12 @@ vec3 calcLighting(vec3 normal)
 	//ambient + small constant lighting
 	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatAmbient;
 #else
+	//Add the lightsources ambient at least
 	vec3 Iamb = u_vLightAmbient + vec3(0.025,0.025,0.025);
 #endif
 	
 	//basic lambert term
-	float NdotL = dot(normal, u_vLightDirection);
+	float NdotL = dot(normal, u_vLightDirectionView);
 	vec3 Idiff = u_vLightDiffuse * u_vMatDiffuse * max(0.0,NdotL);
 	
 	return Iamb + Idiff;
