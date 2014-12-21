@@ -1381,7 +1381,7 @@ void Oculars::paintCCDBounds()
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 
 			// flip are needed and allowed?
-			const float ratioLimit = 0.125f;
+			float ratioLimit = 0.125f;
 			if (getFlagUseFlipForCCD() && (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit))
 			{
 				core->setFlipHorz(telescope->isHFlipped());
@@ -1427,35 +1427,39 @@ void Oculars::paintCCDBounds()
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
-				// draw cross at center
-				float cross = width>height ? height/50.f : width/50.f;
-				a = transform.map(QPoint(0.f, -cross));
-				b = transform.map(QPoint(0.f, cross));
-				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-				a = transform.map(QPoint(-cross, 0.f));
-				b = transform.map(QPoint(cross, 0.f));
-				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-				// calculate coordinates of the center and show it
-				Vec3d centerPosition;
-				Vec2f center = projector->getViewportCenter();
-				projector->unProject(center[0], center[1], centerPosition);
-				double cx, cy;
-				QString cxt, cyt;
-				StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
-				bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
-				if (withDecimalDegree)
+				ratioLimit = 0.25f;
+				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
-					cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
-					cyt = StelUtils::radToDecDegStr(cy);
+					// draw cross at center
+					float cross = width>height ? height/50.f : width/50.f;
+					a = transform.map(QPoint(0.f, -cross));
+					b = transform.map(QPoint(0.f, cross));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					a = transform.map(QPoint(-cross, 0.f));
+					b = transform.map(QPoint(cross, 0.f));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// calculate coordinates of the center and show it
+					Vec3d centerPosition;
+					Vec2f center = projector->getViewportCenter();
+					projector->unProject(center[0], center[1], centerPosition);
+					double cx, cy;
+					QString cxt, cyt;
+					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
+					bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+					if (withDecimalDegree)
+					{
+						cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
+						cyt = StelUtils::radToDecDegStr(cy);
+					}
+					else
+					{
+						cxt = StelUtils::radToHmsStr(cx, true);
+						cyt = StelUtils::radToDmsStr(cy, true);
+					}
+					QString coords = QString("%1 - %2: %3/%4").arg(q_("Coordinates of cross")).arg(qc_("RA/Dec (J2000.0)", "abbreviated in the plugin")).arg(cxt).arg(cyt);
+					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
+					painter.drawText(a.x(), a.y(), coords, -ccdRotationAngle);
 				}
-				else
-				{
-					cxt = StelUtils::radToHmsStr(cx, true);
-					cyt = StelUtils::radToDmsStr(cy, true);
-				}
-				QString coords = QString("%1 - %2: %3/%4").arg(q_("Coordinates of cross")).arg(qc_("RA/Dec (J2000.0)", "abbreviated in the plugin")).arg(cxt).arg(cyt);
-				a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
-				painter.drawText(a.x(), a.y(), coords, -ccdRotationAngle);
 			}
 		}
 	}
