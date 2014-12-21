@@ -1,12 +1,22 @@
 #!/usr/bin/python
-import Image, ImageFilter, ImageStat, ImageChops, ImageOps, ImageDraw, ImageFont
-import os
-import json
-from subprocess import Popen, PIPE, STDOUT
-import sys
-import dssUtils
 
------------------------------------------------------------
+# This file is part of Stellarium. Stellarium is free software: you can
+# redistribute it and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation, version 2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 51
+# Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Copyright Fabien Chereau <fabien.chereau@gmail.com>
+
+
+# -----------------------------------------------------------
 # Generate the survey, i.e.
 # Cut and re-project toast tiles from color DSS plates
 # -----------------------------------------------------------
@@ -14,6 +24,14 @@ import dssUtils
 #
 # input : the "preparedPlates" directory created in step 1 must be present
 # output: a "results" directory containing the survey ready for display in Stellarium
+
+
+import Image, ImageFilter, ImageStat, ImageChops, ImageOps, ImageDraw, ImageFont
+import os
+import json
+from subprocess import Popen, PIPE, STDOUT
+import sys
+import dssUtils
 
 # Test code where I tried to use a low res image from Axel mellinger as reference
 # for color harmonization (the image we use for the milky way in Stellarium)
