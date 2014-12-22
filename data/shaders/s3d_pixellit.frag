@@ -36,7 +36,8 @@ This is a shader for phong/per-pixel lighting.
 
 #if SHADOW_FILTER_HQ
 #define FILTER_STEPS 64
-const vec2 poissonDisk[FILTER_STEPS] = vec2[](
+//NOTE: Intel does NOT like it for some reason if this is a const array, so we set it as uniform
+uniform vec2 poissonDisk[FILTER_STEPS] = vec2[](
    vec2(-0.613392, 0.617481),
    vec2(0.170019, -0.040254),
    vec2(-0.299417, 0.791925),
@@ -104,7 +105,8 @@ const vec2 poissonDisk[FILTER_STEPS] = vec2[](
 );
 #elif SHADOW_FILTER
 #define FILTER_STEPS 16
-const vec2 poissonDisk[FILTER_STEPS] = vec2[]( 
+//NOTE: Intel does NOT like it for some reason if this is a const array, so we set it as uniform
+uniform vec2 poissonDisk[FILTER_STEPS] = vec2[]( 
    vec2( -0.94201624, -0.39906216 ), 
    vec2( 0.94558609, -0.76890725 ), 
    vec2( -0.094184101, -0.92938870 ), 
@@ -230,7 +232,7 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 	//basic lambert term
 	float NdotL = dot(normal, L);
 	vec3 Idiff = u_vLightDiffuse * u_vMatDiffuse * max(0.0,NdotL);
-	vec3 Ispec;
+	vec3 Ispec = vec3(0,0,0);
 	
 	if(NdotL>0.0)
 	{
