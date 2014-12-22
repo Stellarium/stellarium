@@ -31,8 +31,10 @@ This is a shader for phong/per-pixel lighting.
 #define SHADOW_FILTER_HQ 0
 #define MAT_AMBIENT 1
 #define MAT_DIFFUSETEX 1
+#define MAT_SPECULAR 1
 #define BUMP 0
 #define HEIGHT 0
+#define ALPHATEST 1
 
 #if SHADOW_FILTER_HQ
 #define FILTER_STEPS 64
@@ -147,8 +149,10 @@ uniform vec3 u_vLightDiffuse;
 uniform vec3 u_vMatAmbient;
 #endif
 uniform vec3 u_vMatDiffuse;
+#if MAT_SPECULAR
 uniform vec3 u_vMatSpecular;
 uniform float u_vMatShininess;
+#endif
 uniform float u_vMatAlpha;
 
 #if SHADOWS
@@ -158,6 +162,9 @@ uniform sampler2DShadow u_texShadow0;
 uniform sampler2DShadow u_texShadow1;
 uniform sampler2DShadow u_texShadow2;
 uniform sampler2DShadow u_texShadow3;
+#endif
+#if ALPHATEST
+uniform float u_fAlphaThresh;
 #endif
 
 varying vec3 v_normal;
@@ -219,14 +226,14 @@ float getShadow()
 
 void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 {
-	vec3 L = normalize(v_lightVec);
+	vec3 L = v_lightVec; //no normalize here, or it may cause divide by zero
 	
 	//ambient + small constant lighting
 	#if MAT_AMBIENT
 	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatAmbient;
 	#else
 	//Add the lightsources ambient at least
-	vec3 Iamb = u_vLightAmbient + vec3(0.025,0.025,0.025);
+	vec3 Iamb = max(u_vLightAmbient,0.0) + vec3(0.025,0.025,0.025);
 	#endif
 	
 	//basic lambert term
@@ -234,6 +241,7 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 	vec3 Idiff = u_vLightDiffuse * u_vMatDiffuse * max(0.0,NdotL);
 	vec3 Ispec = vec3(0,0,0);
 	
+	#if MAT_SPECULAR
 	if(NdotL>0.0)
 	{
 		//calculate phong reflection vector
@@ -247,12 +255,14 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 			Ispec = u_vMatSpecular * pow( RdotE, u_vMatShininess);
 		}
 	}
+	#endif
 	
 	#if SHADOWS
 	float shd = getShadow();
-	texCol = (Iamb + Idiff) * shd;
+	texCol = Iamb + Idiff * shd;
 	specCol = Ispec * shd;
 	#else
+	//texCol = Iamb + Idiff;
 	texCol = Iamb + Idiff;
 	specCol = Ispec;
 	#endif
@@ -271,6 +281,15 @@ const float heightScale = 0.015f; //const for now
 
 void main(void)
 {
+#if MAT_DIFFUSETEX
+	vec4 texVal = texture2D(u_texDiffuse,v_texcoord);
+	#if ALPHATEST
+	//check if alpha lies below threshold
+	if(texVal.a < u_fAlphaThresh)
+		discard;
+	#endif
+#endif
+
 	vec2 texCoords = v_texcoord;
 	vec3 eye = normalize(-v_viewPos);
 	
@@ -293,10 +312,8 @@ void main(void)
 	calcLighting(normalize(normal),eye,texCol,specCol);
 	
 	#if MAT_DIFFUSETEX
-	vec4 texVal = texture2D(u_texDiffuse,texCoords);
 	gl_FragColor = vec4((texCol+specCol) * texVal.rgb ,u_vMatAlpha * texVal.a);
 	#else
 	gl_FragColor = vec4(texCol + specCol,u_vMatAlpha);
 	#endif
-	
 }

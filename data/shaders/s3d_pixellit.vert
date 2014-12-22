@@ -98,7 +98,7 @@ void main(void)
 	v_lightVec = TBN * u_vLightDirectionView;
 	v_viewPos = TBN * v_viewPos;
 	#else
-	v_lightVec = normalize(u_vLightDirectionView);
+	v_lightVec = u_vLightDirectionView;
 	#endif
 	
 	//calc final position

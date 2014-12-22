@@ -25,13 +25,30 @@ This is the fragment shader for vertex lighting, which does not need to do many 
  
 #version 120
 
+#define MAT_DIFFUSETEX 1
+#define ALPHATEST 1
+
+#if MAT_DIFFUSETEX
 uniform sampler2D u_texDiffuse;
+#endif
+
+#if ALPHATEST
+uniform float u_fAlphaThresh;
+#endif
 
 varying vec2 v_texcoord;
 varying vec4 v_illumination;
 
 void main(void)
 {
+#if MAT_DIFFUSETEX
 	vec4 texVal = texture2D(u_texDiffuse,v_texcoord);
+#if ALPHATEST
+	if(texVal.a < u_fAlphaThresh)
+		discard;
+#endif
 	gl_FragColor = v_illumination * texVal;
+#else
+	gl_FragColor = v_illumination;
+#endif
 }
