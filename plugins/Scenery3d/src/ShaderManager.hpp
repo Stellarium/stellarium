@@ -111,6 +111,8 @@ public:
 
 		//! Squared frustum splits (vec4)
 		UNIFORM_VEC_SQUAREDSPLITS,
+		//! Alpha test threshold
+		UNIFORM_FLOAT_ALPHA_THRESH,
 	};
 
 
@@ -194,13 +196,15 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	{
 		if(mat->illum>0)
 			flags|= MAT_AMBIENT;
+		if(mat->illum==4)
+			flags|= ALPHATEST;
 		if(mat->illum == OBJ::SPECULAR && globals.pixelLighting)
 			flags|= MAT_SPECULAR;
 		if(mat->texture)
 			flags|= MAT_DIFFUSETEX;
-		if(mat->bump_texture && globals.bump)
+		if(mat->bump_texture && globals.bump && globals.pixelLighting)
 			flags|= BUMP;
-		if(mat->height_texture && globals.bump)
+		if(mat->height_texture && globals.bump && globals.pixelLighting)
 			flags|= HEIGHT;
 	}
 
