@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-22 03:38+0600\n"
+"POT-Creation-Date: 2014-12-22 09:57+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5044,13 +5044,8 @@ msgid "Select previous eyepiece"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1459
-msgid "Coordinates of cross"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1459
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
 msgctxt "abbreviated in the plugin"
-msgid "RA/Dec (J2000.0)"
+msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:1586
@@ -9386,6 +9381,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
+msgctxt "abbreviated in the plugin"
+msgid "RA/Dec (J2000.0)"
 msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153

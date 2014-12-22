@@ -1456,7 +1456,7 @@ void Oculars::paintCCDBounds()
 						cxt = StelUtils::radToHmsStr(cx, true);
 						cyt = StelUtils::radToDmsStr(cy, true);
 					}
-					QString coords = QString("%1 - %2: %3/%4").arg(q_("Coordinates of cross")).arg(qc_("RA/Dec (J2000.0)", "abbreviated in the plugin")).arg(cxt).arg(cyt);
+					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
 					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
 					painter.drawText(a.x(), a.y(), coords, -ccdRotationAngle);
 				}
