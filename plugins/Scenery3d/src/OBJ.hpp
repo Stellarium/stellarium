@@ -67,7 +67,7 @@ public:
     //! Only XYZ and XZY may occur in real life, but we can cope with all...
     enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
     //!< Supported OpenGL illumination models. Use specular sparingly!
-    enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, TRANSLUCENT=9 };
+    enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, ALPHATEST=4, TRANSLUCENT=9 };
 
     struct Material
     {

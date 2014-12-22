@@ -580,6 +580,9 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_AMBIENT,lightInfo.ambient);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_DIFFUSE,lightInfo.directional);
 
+	//set alpha test threshold (this is scene-global for now)
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
+
 	//-- Shadowing setup -- this was previously in generateCubeMap_drawSceneWithShadows
 	//first check if shader supports shadows
 	GLint loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_SQUAREDSPLITS);
@@ -689,6 +692,11 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	QOpenGLShaderProgram* curShader = NULL;
 	QSet<QOpenGLShaderProgram*> initialized;
 
+	//override some shader Params
+	GlobalShaderParameters pm = shaderParameters;
+	if(venusOn)
+		pm.shadowFilter = false;
+
 	//bind VAO
 	objModel.bindGL();
 
@@ -705,7 +713,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		if(shading && lastMaterial!=pMaterial)
 		{
 			//get a shader from shadermgr that fits the current state + material combo
-			QOpenGLShaderProgram* newShader = shaderManager.getShader(shaderParameters,pMaterial);
+			QOpenGLShaderProgram* newShader = shaderManager.getShader(pm,pMaterial);
 			if(!newShader)
 			{
 				//shader invalid, can't draw
@@ -784,7 +792,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
         int iIllum = pStelModel->pMaterial->illum;
         if(iIllum < 0 || iIllum > 2)
         {
-            if(iIllum != 9)
+	    if(iIllum != 9 && iIllum != 4)
             {
                 //Map to default
                 iIllum = 0;
@@ -1281,6 +1289,10 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
     QString directionalSourceString;
 
+    //GZ: this should not matter here, just to make OpenGL happy.
+    lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
+    directionalSourceString="(Sun, below horiz.)";
+
     if(sinSunAngle > -0.3f) // sun above -18 deg?
     {
         ambientBrightness += qMin(0.3, sinSunAngle+0.3);
@@ -1337,11 +1349,6 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
         } else directionalSourceString="(Venus, flooded by ambient)";
         //Alternately, construct a term around Venus brightness, like
         // directionalBrightness=(mag/-100)
-    }
-    else
-    {   //GZ: this should not matter here, just to make OpenGL happy.
-        lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
-        directionalSourceString="(Sun, below horiz.)";
     }
 
     // correct light mixture. Directional is good to increase for sunrise/sunset shadow casting.

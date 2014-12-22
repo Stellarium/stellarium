@@ -66,6 +66,7 @@ ShaderMgr::ShaderMgr()
 
 		//others
 		uniformStrings["u_vSquaredSplits"] = UNIFORM_VEC_SQUAREDSPLITS;
+		uniformStrings["u_fAlphaThresh"] = UNIFORM_FLOAT_ALPHA_THRESH;
 	}
 	if(featureFlagsStrings.size()==0)
 	{
@@ -363,7 +364,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 		}
 		else
 		{
-			qWarning()<<i<<loc<<str<<size<<type<<" UNKNOWN!!!";
+			qWarning()<<i<<loc<<str<<size<<type<<" --- unknown ---";
 		}
 	}
 }
