@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-22 11:23+0600\n"
-"PO-Revision-Date: 2014-12-22 02:46+0000\n"
+"PO-Revision-Date: 2014-12-23 02:37+0000\n"
 "Last-Translator: Mihai Roharik <roharik@free.fr>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-22 05:54+0000\n"
+"X-Launchpad-Export-Date: 2014-12-23 06:31+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
@@ -228,11 +228,11 @@ msgstr "Nebuloasă planetară"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "Nebuloasă întunecată"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Galaxie neregulată"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -348,7 +348,7 @@ msgstr "Viteza: %1 km/s"
 #: src/core/modules/Comet.cpp:230
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Diametrul comei (estimare): %1 km"
 
 #: src/core/modules/Comet.cpp:234
 #, no-c-format, qt-format
@@ -437,7 +437,7 @@ msgstr "Câmp de magnitudine: <b>%1</b>%2<b>%3/%4</b> (Sistem fotometric: %5)"
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "%1 ani lumină"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:204
@@ -879,6 +879,11 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E. M. Reingold şi N. Dershowitz prezintă această aproximare polinomială în "
+"<em>Calendrical Calculations</em> (Calcule calendaristice) (ediţia a 3-a, "
+"2007) şi în <em>Calendrical Tabulations</em> (Tabele calendaristice) (2002). "
+"Se bazează pe <em>Astronomical Algorithms</em> (Algoritmi astronomici) a lui "
+"Jean Meeus (1991)."
 
 #: src/core/StelCore.cpp:1580
 #, qt-format
@@ -887,6 +892,10 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Această soluţie importantă a fost publicată de L. V. Morrison şi F. R. "
+"Stephenson în articolul <em>Historical values of the Earth's clock error %1T "
+"and the calculation of eclipses</em> (Valori istorice ale erorilor "
+"orologiului Terrei %1T şi calculul eclipselor) (%2) cu adăugiri în (%3)."
 
 #: src/core/StelCore.cpp:1583
 #, qt-format
@@ -896,6 +905,11 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Din lungimea zilei (LOD; aşa cum este calculată de către Stephenson şi "
+"Morrison (%2)), Victor Reijs a obţinut o formulă %1T folosind o optimizare "
+"simplex cu o funcţie cosinusoidală şi pătratică. Aceasta se bazează pe o "
+"posibila periodicitate descrisă de către Stephenson (%2). Mai multe "
+"informaţii pot fi găsite %3aici%4."
 
 #: src/core/StelCore.cpp:1586
 #, qt-format
@@ -926,6 +940,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Această soluţie a lui S. Islam, M. Sadiq şi M. S. Qureshi, bazată pe Meeus & "
+"Simons (2000), a fost publicată în articolul <em>Error Minimization of "
+"Polynomial Approximation of DeltaT</em> (Minimizarea erorii şi aproximarea "
+"polinomială a lui delta T) (%1) şi revăzută de către Sana Islam în 2013."
 
 #: src/core/StelCore.cpp:1595
 #, qt-format
@@ -1221,7 +1239,7 @@ msgstr "Licență"
 
 #: src/gui/ConfigurationDialog.cpp:889
 msgid "Shortcut"
-msgstr ""
+msgstr "Comandă rapidă"
 
 #: src/gui/ConfigurationDialog.cpp:913
 msgid "Running script: "
@@ -1410,7 +1428,7 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 #: src/gui/ConfigurationDialog.cpp:1256
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Ecuaţie personalizată a lui %1T"
 
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:295
@@ -1432,6 +1450,8 @@ msgstr ""
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
 msgstr ""
+" Calculatorul sau materialul pe care îl folosiţi nu este compatibil cu "
+"ultima versiune de Stellarium!"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:332
@@ -1757,11 +1777,11 @@ msgstr "Abreviat"
 
 #: src/gui/ViewDialog.cpp:414
 msgid "Native"
-msgstr ""
+msgstr "Nativ(ă)"
 
 #: src/gui/ViewDialog.cpp:415
 msgid "Translated"
-msgstr ""
+msgstr "Tradus"
 
 #: src/gui/ViewDialog.cpp:539
 msgid "No description"
@@ -1914,7 +1934,7 @@ msgstr "harta stelara"
 #: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "Ecuatorial (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
@@ -1924,12 +1944,12 @@ msgstr "Ecuatorial"
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Orizontal"
 
 #: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galactic"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
@@ -1945,7 +1965,7 @@ msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
-msgstr ""
+msgstr "Altitudine"
 
 #: src/gui/SearchDialog.cpp:267
 msgid "Longitude"
@@ -1973,7 +1993,7 @@ msgstr "Universitatea Harvard (USA)"
 
 #: src/gui/SearchDialog.cpp:744
 msgid "Paste and Search"
-msgstr ""
+msgstr "Lipire şi căutare"
 
 #: src/gui/ShortcutsDialog.cpp:496
 msgid "Action"
@@ -1990,7 +2010,7 @@ msgstr "Scurtătură alternativă"
 #: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr ""
+msgstr "Ecuaţie personalizată pentru %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
@@ -2040,6 +2060,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Subsistemul DirectX/OpenGL are probleme. A se vedea jurnalul pentru "
+"detalii.\n"
+"Doriţi să ignoraţi acest lucru, să eliminaţi acest mesaj pe viitor şi să "
+"încercaţi să continuarea în mod degradat?"
 
 #: src/StelMainView.cpp:629
 msgid ""
@@ -2065,7 +2089,7 @@ msgstr ""
 #: src/StelMainView.cpp:830
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:34
 msgid "N"
@@ -2143,7 +2167,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:71
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Roiuri globulare de stele"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:73
@@ -2158,7 +2182,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:77
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Nebuloase întunecate"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:79
@@ -2168,7 +2192,7 @@ msgstr "Galaxii neregulate"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:81
 msgid "Clusters associated with nebulosity"
-msgstr ""
+msgstr "Roiuri asociate cu nebulozitate"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:83
@@ -2186,7 +2210,7 @@ msgstr "Arabă"
 
 #: src/translations.h:90
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Staţii lunare arabe"
 
 #: src/translations.h:91
 msgid "Aztec"
@@ -2194,7 +2218,7 @@ msgstr "Aztecă"
 
 #: src/translations.h:92
 msgid "Boorong"
-msgstr ""
+msgstr "Boorong"
 
 #: src/translations.h:93
 msgid "Chinese"
@@ -2214,7 +2238,7 @@ msgstr "Indian Vedic"
 
 #: src/translations.h:97
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Staţii lunare japoneze"
 
 #: src/translations.h:98
 msgid "Korean"
@@ -2230,7 +2254,7 @@ msgstr "Maori"
 
 #: src/translations.h:101
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongolă"
 
 #: src/translations.h:102
 msgid "Navajo"
@@ -2255,7 +2279,7 @@ msgstr "Samită"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:108
 msgid "Siberian"
-msgstr ""
+msgstr "Siberiană"
 
 #: src/translations.h:109
 msgid "Tupi-Guarani"
@@ -2321,7 +2345,7 @@ msgstr "Geneva"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:136
 msgid "Grossmugl"
-msgstr ""
+msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:138
@@ -2356,7 +2380,7 @@ msgstr "Eclipsă Solară 2009"
 #. TRANSLATORS: Name of script
 #: src/translations.h:154
 msgid "Startup Script"
-msgstr ""
+msgstr "Script de început"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:156
@@ -2436,7 +2460,7 @@ msgstr "Evenimente ale Pământului de pe Mercur"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:186
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Evenimente terestre de pe un oraş plutitor pe Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:188
@@ -2507,6 +2531,8 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
+"Datorită ciudăţeniilor din orbita şi rotaţia lui Mercur în anumite locuri "
+"Soarele va răsări şi apune de 3 ori într-o zi mercuriană."
 
 #: src/translations.h:210
 msgid ""
@@ -3589,7 +3615,7 @@ msgstr "&Copiați"
 
 #: src/translations.h:475
 msgid "&Paste"
-msgstr ""
+msgstr "&Lipește"
 
 #: src/translations.h:476 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1094
@@ -3601,11 +3627,11 @@ msgstr "Șterge"
 
 #: src/translations.h:477
 msgid "Select All"
-msgstr ""
+msgstr "Selectează tot"
 
 #: src/translations.h:478
 msgid "Look in:"
-msgstr ""
+msgstr "Caută în:"
 
 #: src/translations.h:479
 msgid "Directory:"
@@ -3617,7 +3643,7 @@ msgstr "Dosar"
 
 #: src/translations.h:481
 msgid "&Choose"
-msgstr ""
+msgstr "&Alege"
 
 #: src/translations.h:482 src/ui_configurationDialog.h:1207
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3638,11 +3664,11 @@ msgstr "Dosare"
 
 #: src/translations.h:486
 msgid "Computer"
-msgstr ""
+msgstr "Ordinator"
 
 #: src/translations.h:487
 msgid "&Open"
-msgstr ""
+msgstr "&Deschide"
 
 #: src/translations.h:488
 msgid "File &name:"
@@ -3650,11 +3676,11 @@ msgstr ""
 
 #: src/translations.h:489
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Copiază adresa &legăturii"
 
 #: src/translations.h:490
 msgid "Abort"
-msgstr ""
+msgstr "Renunţă"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
@@ -3745,7 +3771,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Întoarcere la locaţia implicită"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -3769,7 +3795,7 @@ msgstr "Planetă:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "Foloseşte locaţia actuală ca locaţie implicită"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
@@ -3939,7 +3965,7 @@ msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:706
 msgid "Search options"
-msgstr ""
+msgstr "Opțiuni de căutare"
 
 #: src/ui_searchDialogGui.h:707
 msgid "Use autofill only from the beginning of words"
@@ -3982,6 +4008,8 @@ msgstr "Etichete și marcheri"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Etichete şi marcaje pentru obiectele de cer profund (roiuri stelare, galaxii "
+"şi nebuloase)"
 
 #: src/ui_viewDialog.h:1237 src/ui_viewDialog.h:1294
 msgctxt "Deep-sky objects"
@@ -4096,12 +4124,12 @@ msgstr "Stele căzătoare"
 
 #: src/ui_viewDialog.h:1279
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Rată orară la zenit"
 
 #: src/ui_viewDialog.h:1281
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "Rată orară zenitală"
 
 #: src/ui_viewDialog.h:1284
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4231,7 +4259,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
-msgstr ""
+msgstr "din peisaj, dacă este indicat"
 
 #: src/ui_viewDialog.h:1346
 msgid "Add/remove landscapes..."
@@ -4243,7 +4271,7 @@ msgstr "Folosește această reprezentare autohtonă ca implicită"
 
 #: src/ui_viewDialog.h:1349
 msgid "Show names"
-msgstr ""
+msgstr "Afișare nume"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
@@ -4263,11 +4291,11 @@ msgstr "Configurație"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "Setări de limbă"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "Limba programului"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
@@ -4436,7 +4464,7 @@ msgstr "Clasa spectrală, tipul nebuloasei, etc."
 
 #: src/ui_configurationDialog.h:1101
 msgid "Additional information"
-msgstr ""
+msgstr "Informaţii suplimentare"
 
 #: src/ui_configurationDialog.h:1103
 msgid "Topocentric equatorial coordinates"
@@ -4496,11 +4524,11 @@ msgstr "Ascunde cursorul mausului atunci când acesta este inactiv"
 
 #: src/ui_configurationDialog.h:1128
 msgid "Mouse cursor timeout:"
-msgstr ""
+msgstr "Durată afişare cursor:"
 
 #: src/ui_configurationDialog.h:1130
 msgid "seconds"
-msgstr ""
+msgstr "secunde"
 
 #: src/ui_configurationDialog.h:1132
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
@@ -4543,7 +4571,7 @@ msgstr "Data de sistem la:"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Time correction"
-msgstr ""
+msgstr "Corecţie de timp"
 
 #: src/ui_configurationDialog.h:1152
 msgid "Edit equation"
@@ -4785,6 +4813,10 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
+"Extincţia este micşorarea strălucirii unei stele din cauza atmosferei "
+"terestre. Este indicată în magnitudini/masa de aer, unde masa de aer este "
+"numărul de atmosfere pe care trebuie să le parcurgă lumina. (zenit: 1; "
+"orizont: aproximativ 40)"
 
 #: src/ui_AtmosphereDialog.h:186
 msgid "Extinction Coefficient:"
@@ -4877,6 +4909,7 @@ msgstr "Măsurătorul Unghiului este activat:"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:490
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
+"Trage cu butonul din stînga pentru măsurare, clic stînga pentru ştergere"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:492
@@ -4886,7 +4919,7 @@ msgstr "Clic dreapta modifică numai punctul final."
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:494
 msgid "PA="
-msgstr ""
+msgstr "Unghi de poziţie="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
@@ -4895,7 +4928,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid "Contributors"
-msgstr ""
+msgstr "Colaboratori"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
@@ -4947,6 +4980,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Situl Launchpad oferă ajutor. Fiţi siguri că notaţi \"%1\" în subiect în "
+"momentul postării."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
@@ -5038,7 +5073,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -5302,15 +5337,15 @@ msgstr "Senzor #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1945
 msgid "&Lens"
-msgstr ""
+msgstr "&Lentilă"
 
 #: plugins/Oculars/src/Oculars.cpp:1946
 msgid "&Previous lens"
-msgstr ""
+msgstr "&Precedenta lentilă"
 
 #: plugins/Oculars/src/Oculars.cpp:1947
 msgid "&Next lens"
-msgstr ""
+msgstr "&Următoarea lentilă"
 
 #: plugins/Oculars/src/Oculars.cpp:1977
 msgid "&Telescope"
@@ -5334,11 +5369,11 @@ msgstr "Ocular următor"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 msgid "Previous lens"
-msgstr ""
+msgstr "Lentila precedentă"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 msgid "Next lens"
-msgstr ""
+msgstr "Lentila următoare"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous CCD frame"
@@ -5399,7 +5434,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
 msgid "Lens: None"
-msgstr ""
+msgstr "Lentilă: nici una"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Multiplicity: N/A"
@@ -5484,6 +5519,10 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Puteţi afişa un căutător Telrad; acest lucru poate fi făcut numai cînd nu "
+"este activată vederea prin ocular. Această funcţionalitate afişează trei "
+"cercuri concentrice de 0.5%1, 2.0%1 şi 4.0%1, ajutînd să vizualizaţi ceea ce "
+"s-ar vedea cu ochiul liber printr-un căutător Telrad (sau similar)."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:517
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -5617,7 +5656,7 @@ msgstr "Binocluri"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "Are fire reticulare permanente"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -5626,7 +5665,7 @@ msgstr "Lentile"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Multiplier:"
-msgstr ""
+msgstr "Multiplicator:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1107
 msgid ""
@@ -5746,7 +5785,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1685
 msgid "weather"
-msgstr ""
+msgstr "meteorologici"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1687
@@ -5761,12 +5800,12 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1691
 msgid "gps"
-msgstr ""
+msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1693
 msgid "iridium"
-msgstr ""
+msgstr "Iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1704
@@ -6163,7 +6202,7 @@ msgstr "Configurarea sateliţilor"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
-msgstr ""
+msgstr "Actualizări"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
@@ -6589,7 +6628,7 @@ msgstr "D&ecimal"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:305
 msgid "&Slew"
-msgstr ""
+msgstr "&Rotire"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "Configure &telescopes..."
@@ -6796,73 +6835,73 @@ msgstr ""
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:188
 msgid "January"
-msgstr ""
+msgstr "Ianuarie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:189
 msgid "February"
-msgstr ""
+msgstr "Februarie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:190
 msgid "March"
-msgstr ""
+msgstr "Martie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:191
 msgid "April"
-msgstr ""
+msgstr "Aprilie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:192
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:193
 msgid "June"
-msgstr ""
+msgstr "Iunie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:194
 msgid "July"
-msgstr ""
+msgstr "Iulie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:195
 msgid "August"
-msgstr ""
+msgstr "August"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:196
 msgid "September"
-msgstr ""
+msgstr "Septembrie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:197
 msgid "October"
-msgstr ""
+msgstr "Octombrie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:198
 msgid "November"
-msgstr ""
+msgstr "Noiembrie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
 #: plugins/MeteorShowers/src/MeteorShower.cpp:199
 msgid "December"
-msgstr ""
+msgstr "Decembrie"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:265
 msgid "First week"
@@ -6882,39 +6921,39 @@ msgstr "A patra săptămînă"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:269
 msgid "Last week"
-msgstr ""
+msgstr "Săptămîna trecută"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:278
 msgid "Sunday"
-msgstr ""
+msgstr "duminică"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:279
 msgid "Monday"
-msgstr ""
+msgstr "luni"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:280
 msgid "Tuesday"
-msgstr ""
+msgstr "marți"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:281
 msgid "Wednesday"
-msgstr ""
+msgstr "miercuri"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:282
 msgid "Thursday"
-msgstr ""
+msgstr "joi"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:283
 msgid "Friday"
-msgstr ""
+msgstr "vineri"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:284
 msgid "Saturday"
-msgstr ""
+msgstr "sîmbătă"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr ""
+msgstr "Plugin fus orar"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:448
 msgid "Define a time zone"
@@ -6925,7 +6964,7 @@ msgstr "Defineşte un fus orar"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:383
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:392
 msgid "Time zone"
-msgstr ""
+msgstr "Fus orar"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:451
 msgid "Timezone name:"
@@ -6955,7 +6994,7 @@ msgstr "Începutul orei de vară"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:457
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:461
 msgid "Day:"
-msgstr ""
+msgstr "Ziua:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:458
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:462
@@ -6965,7 +7004,7 @@ msgstr "Ora schimbării:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Date:"
-msgstr ""
+msgstr "Data:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 msgid "Daylight saving time end"
@@ -6993,7 +7032,7 @@ msgstr "Foloseşte setările sistemului (setare implicită)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
-msgstr ""
+msgstr "Timp universal coordonat (UTC)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "(offset = local time - UTC time)"
@@ -7017,6 +7056,8 @@ msgstr "Formaturi de afişare"
 msgid ""
 "These settings control the way time and date are displayed in the bottom bar."
 msgstr ""
+"Aceste setări controlează felul în care ora şi data sînt afişate pe bara de "
+"jos."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:210
@@ -7051,7 +7092,7 @@ msgstr "zz-ll-aaaa"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "ll-zz-aaaa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
@@ -7088,12 +7129,12 @@ msgstr "Presetare dată/oră la demarare"
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:188
 msgid "system"
-msgstr ""
+msgstr "sistem"
 
 #. TRANSLATORS: A pre-set time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:190
 msgid "preset"
-msgstr ""
+msgstr "predefinit"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:198
 msgid "mmddyyyy"
@@ -7127,7 +7168,7 @@ msgstr "Afişează stelele"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:276
 msgid "Colors"
-msgstr ""
+msgstr "Culori"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:352
 msgid "Nebula names"
@@ -7143,7 +7184,7 @@ msgstr "Linia ecuatorului galactic"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
-msgstr ""
+msgstr "Efecte"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:413
 msgid "Manual zoom"
@@ -7167,11 +7208,11 @@ msgstr "Durata zoomului:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Cursor timeout:"
-msgstr ""
+msgstr "Durata de afişare a cursorului:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:434
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Alegerea peisajului stabileşte locaţia"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:455
 msgid "Run local script"
@@ -7188,7 +7229,7 @@ msgstr "Script pe CD/DVD"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:472
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:476
 msgid "Administration"
-msgstr ""
+msgstr "Administrare"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Load default configuration"
@@ -7200,7 +7241,7 @@ msgstr "Salvează configuraţia curentă"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:485
 msgid "Shut down"
-msgstr ""
+msgstr "Închidere"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:560
 msgid "[no TUI node]"
@@ -7296,7 +7337,7 @@ msgstr "Plugin de editare a sitemului solar"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
-msgstr ""
+msgstr "Import date"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Select the type"
@@ -7380,7 +7421,7 @@ msgstr "Obiecte din sistemul solar"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
 msgid "Warning"
-msgstr ""
+msgstr "Avertizare"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:296
 msgid ""
@@ -7433,7 +7474,7 @@ msgstr "Adaugă obiecte noi în sistemul solar"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Importare elemente orbitale în format MPC..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System"
@@ -7843,7 +7884,7 @@ msgstr "Măsura dispersiei:"
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:190
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:193
@@ -7875,6 +7916,8 @@ msgstr "Paralaxa anuală: %1 milisecunde de arc"
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
+"Distanţa calculată cu modelul de densitate electronică: %1 kpc (%2 ani-"
+"lumină)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:220
 #, qt-format
@@ -8349,6 +8392,7 @@ msgstr "Exoplanete: o versiune interactivă a XKCD 1071"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
+"HEK (Vînătoarea de exoluni cu Kepler - The Hunt for Exomoons with Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
@@ -8410,7 +8454,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr ""
+msgstr "PlanetQuest - Căutarea unei alte Terre"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Open Exoplanet Catalogue"
@@ -8506,67 +8550,67 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:170
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "ian"
 
 #: plugins/Observability/src/Observability.cpp:171
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "feb"
 
 #: plugins/Observability/src/Observability.cpp:172
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "mar"
 
 #: plugins/Observability/src/Observability.cpp:173
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "apr"
 
 #: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "mai"
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "iun"
 
 #: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "iul"
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "aug"
 
 #: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "sep"
 
 #: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "oct"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "noi"
 
 #: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "dec"
 
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:184
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #. TRANSLATORS: Short for "minutes".
 #: plugins/Observability/src/Observability.cpp:186
@@ -8674,7 +8718,7 @@ msgstr "Nu este observabil pe timpul nopţii."
 #: plugins/Observability/src/Observability.cpp:212
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Nopţi deasupra orizontului: %1"
 
 #: plugins/Observability/src/Observability.cpp:213
 msgid "TODAY:"
@@ -8720,14 +8764,23 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
+"Plugin care analizează observabilitatea sursei selectate (sau centrul "
+"ecranului, dacă nici o sursă nu este selectată). Pluginul poate indica orele "
+"de răsărit, tranzit şi apus, precum şi cea mai bună epocă a anului (adică "
+"cea mai mare distanţă unghiulară faţă de Soare), intervalul de timp în care "
+"sursa este deasupra orizontului în timpul nopţii şi datele "
+"răsăritului/apusului acronic şi cosmic.<br>Sînt luate în consideraţie "
+"efemeridele obiectelor din sistemul solar şi efectele de paralaxă.<br><br> "
+"Autorul le mulţumeşte lui Alexander Wolf şi Georg Zotti pentru "
+"sfaturi.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "Explicaţii despre unii parametri"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "Altitudinea Soarelui la crepuscul:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid ""
@@ -8736,20 +8789,26 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"Orice obiect ceresc va fi considerat vizibil cînd Soarele este sub această "
+"altitudine. Altitudinea şi crepusculul astronomic sînt cuprinse de obicei "
+"între -12 şi -18 grade. Acest parametru este folosit numai pentru estimarea "
+"intervalului de epoci observabile (a se vedea mai jos)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Altitudinea orizontului:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"Altitudine minimă de observaţie (datorită munţilor, clădirilor sau doar "
+"limitelor monturii telescopului)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Today ephemeris:"
-msgstr ""
+msgstr "Efemeridele zilei:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid ""
@@ -8758,10 +8817,14 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
+"Auto-explicativ.  Programul indică orele pentru răsărit, apus şi culminaţie "
+"(tranzit). Orele pentru aceste efemeride sînt oferite în două feluri: ca "
+"intervale de timp (cu referinţă faţă de ora curentă) şi ca ore exacte (ora "
+"locală)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "Răsărit/apus acronic/cosmic/heliacal"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -8783,10 +8846,25 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"Zilele răsăritului/apusului cosmic al unui obiect sînt estimate ca fiind "
+"zilele cînd obiectul răsare (sau apune) la răsăritul/apusul Soarelui. Datele "
+"exacte ale acestor efemeride depind de locaţia observatorului. Răsăritul "
+"(sau apusul) acronic intervin cînd steaua răsare/apune la apusul/răsăritul "
+"Soarelui (adică invers decît Soarele). Pe de o parte, este evident că sursa "
+"este dificil observabilă (sau nu este observabilă deloc) între apusul cosmic "
+"şi răsăritul cosmic. Pe de altă parte, la datele din jurul apusului şi "
+"răsăritului acronic, altitudinea obiectului este înaltă cînd Soarele este "
+"sub orizont (întrucît obiectul poate fi observat bine). Data răsăritului "
+"heliacal este prima zi a anului cînd o stea devine vizibilă. Aceasta se "
+"întîmplă cînd steaua este aproape de orizontul estic înainte de sfîrşitul "
+"nopţii astronomice (adică la crepusculul astronomic). În nopţile următoare, "
+"steaua devine vizibilă pe perioade mai lungi, pînă atinge asfinţitul "
+"heliacal (adică ultima noapte a anului cînd steaua este încă vizibilă). La "
+"asfinţitul heliacal, steaua apune după începutul nopţii astronomice."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
-msgstr ""
+msgstr "Separaţia maximă faţă de Soare:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid ""
@@ -8799,6 +8877,14 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
+"Se întîmplă cînd separaţia angulară între Soare si obiect este maximă. De "
+"cele mai multe ori, aceasta revine la a spune că longitudinile ecuatoriale "
+"ale Soarelui şi obiectului sînt separate cu 180 de grade, aşa încît Soarele "
+"este în opoziţie faţă de obiect. Cînd un obiect se află la cea mai mare "
+"separaţie angulară posibilă faţă de Soare (indiferent dacă este o planetă "
+"sau o stea), culminează la miezul nopţii şi în cea mai întunecată zonă a "
+"cerului la acea declinaţie. Prin urmare, aceasta este 'cea mai bună' noapte "
+"pentru a observa acel obiect."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Nights with source above horizon:"
@@ -8823,10 +8909,28 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
+"Programul calculează datele între care obiectul se află deasupra orizontului "
+"cel puţin un moment în timpul nopţii. Prin 'noapte', programul consideră "
+"intervalul de timp cînd altitudinea Soarelui este sub cea a crepusculului "
+"(care poate fi stabilit de către utilizator; a se vedea mai jos). Cînd "
+"obiectele sînt fixe pe cer (sau sînt planete exterioare), intervalul de "
+"observabilitate pentru anul în curs poate fi de două feluri: fie un interval "
+"de la o dată la o alta (de exemplu, 20 ianuarie pînă la 15 septembrie) fie "
+"în două etape (de la 1 ianuarie pînă la o dată anume şi de la o altă dată "
+"pînă la 31 decembrie). În primul caz, prima dată (20 ianuarie în exemplu) va "
+"fi apropiată de aşa-zisul 'răsărit heliacal al unei stele' iar a doua dată "
+"(15 septembrie în exemplu) va fi apropiată de 'apusul heliacal'. În al "
+"doilea caz, (de exemplu un interval de la 1 ianuarie la 20 mai şi de la 21 "
+"septembrie la 31 decembrie), prima dată (20 mai în exemplu) ar fi aproape de "
+"apusul heliacal iar a doua (21 septembrie în exemplu) aproape de răsăritul "
+"heliacal. Ecuaţii mai exacte pentru estimarea răsăritului/apusului heliacal "
+"al stelelor şi planetelor (care nu vor depinde de simpla introducere de "
+"către utilizator a elevaţiei crepusculului Soarelui) vor fi implementate în "
+"versiunile următoare ale acestui plugin."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Full Moon:"
-msgstr ""
+msgstr "Luna plină:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
@@ -8837,20 +8941,20 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:200
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Altitudinea Soarelui la crepuscul: %1 grade."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Altitudinea orizontului: %1 grade."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
-msgstr ""
+msgstr "Configurare observabilitate"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "Configurare plugin observabilitate"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
@@ -8874,7 +8978,7 @@ msgstr "Dimensiunea fontului"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Observing conditions"
-msgstr ""
+msgstr "Condiţii de observaţie"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
@@ -8886,15 +8990,15 @@ msgstr "Efermidele de astăzi (răsărit, apus, timpuri de tranzit)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "Datele răsăritului/apusului acronic/cosmic/heliacal"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
-msgstr ""
+msgstr "Data separaţiei maxime faţă de Soare"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "Nopţi cu originea deasupra orizontului"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:356
 msgid "Dates of previous and next Full Moon"
@@ -8904,22 +9008,24 @@ msgstr "Datele anterioare şi următoare a Lunii Pline"
 #: plugins/FOV/src/ui_fovWindow.h:388 plugins/FOV/src/ui_fovWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:409
 msgid "Field of View"
-msgstr ""
+msgstr "Cîmp vizual"
 
 #: plugins/FOV/src/FOV.cpp:43
 msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"Acest plugin permite zoomarea în trepte cu ajutorul clavierului ca în "
+"programul <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "Fixează cîmpul vizual la %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "Plugin cîmp vizual"
 
 #: plugins/FOV/src/ui_fovWindow.h:392
 msgid ""
@@ -8929,6 +9035,11 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Stellarium foloseşte implicit zoomarea continuă cu ajutorul mouse-ului sau "
+"cu tastele. Unii utilizatori preferă zoom în trepte de cîmp vizual fix, ca "
+"în programul Cartes du Ciel, şi acest plugin oferă această funcţionalitate. "
+"Puteţi edita valorile şi folosi tastatura pentru alegerea rapidă a cîmpului "
+"vizual. Toate valorile sînt în grade."
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
@@ -8943,10 +9054,16 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"Acest plugin consideră 58 de stele de navigaţie - steaua polară şi cele 57 "
+"de \"stele alese\" care sînt listate în <em>The Nautical Almanac</em> "
+"(Almanahul nautic) publicat în comun de către Biroul almanahului nautic al "
+"Majestăţii Sale şi de Observatorul Naval al Statelor Unite începînd cu 1958; "
+"aceste stele sînt de asemenea utilizate în ajutoare de navigaţie precum "
+"2102D Star Finder and Identifier."
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Marchează stelele de navigaţie"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
@@ -8955,31 +9072,31 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
-msgstr ""
+msgstr "Ecuaţia timpului"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Acest plugin indică soluţia la ecuaţia timpului"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Indică soluţia la ecuaţia timpului"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:259
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "min"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:261
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Pluginul ecuaţia timpului"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:270
 msgid ""
@@ -8993,28 +9110,37 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"Ecuaţia timpului descrie discrepanţa între două tipuri de oră solară. "
+"Acestea sînt ora solară aparentă, care urmăreşte direct mişcarea Soarelui, "
+"şi ora solară medie, care urmăreşte un Soare \"mediu\", cu amiezile separate "
+"de exact 24 de ore. Nu există o definiţie universal acceptată a semnului "
+"acetei ecuaţii. Unele publicaţii îl consideră pozitiv cînd cadranul solar "
+"este înaintea orologiului; alţii, cînd orologiul este înaintea cadranului "
+"solar. În lumea anglofonă, prima uzitare este cea mai întîlnită, dar nu este "
+"întotdeauna urmată. Oricine utilizează tabele sau grafice publicate ar "
+"trebui mai întîi să verifice convenţia de folosire a semnului."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "Afişează butonul de plugin pe bara de unelte"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Foloseşte minute şi secunde"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Schimbă semnul ecuaţiei"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
-msgstr ""
+msgstr "Mărimea fontului:"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Ploi de meteoriţi"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
@@ -9022,183 +9148,187 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Acest plugin afişează ploile de meteoriţi şi un marcator pentru fiecare "
+"radiant activ sau inactiv, cu informaţii despre activitatea lui."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Afişează ploile de meteoriţi"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
-msgstr ""
+msgstr "Etichetele radianţilor"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Fereastra de configuraţie a ploilor de meteoriţi"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"Vechiul fişier showers.json nu mai este compatibil - este folosit fişierul "
+"implicit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
 msgid "Quadrantids"
-msgstr ""
+msgstr "Quadrantide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
 msgid "Lyrids"
-msgstr ""
+msgstr "Lyride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centauride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Aquariide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
 msgid "June Bootids"
-msgstr ""
+msgstr "Bootide de iunie"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Austrinide din Pisces"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "δ-Aquariide de sud"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricornide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "ε-Perseide de septembrie"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
 msgid "Draconids"
-msgstr ""
+msgstr "Draconide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
 msgid "Leonids"
-msgstr ""
+msgstr "Leonide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppide-Velide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
 msgid "Ursids"
-msgstr ""
+msgstr "Urside"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
 msgid "Perseids"
-msgstr ""
+msgstr "Perseide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leonide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
 msgid "June Lyrids"
-msgstr ""
+msgstr "Lyride de iunie"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygnide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Tauride de sud"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Tauride de nord"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Monocerotide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
 msgid "Geminids"
-msgstr ""
+msgstr "Geminide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minoride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minoride de decembrie"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
@@ -9208,47 +9338,47 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
 msgid "Orionids"
-msgstr ""
+msgstr "Orionide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromedide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lyride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centauride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
@@ -9258,218 +9388,218 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiide de nord"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
 msgid "Arietids"
-msgstr ""
+msgstr "Arietide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Crateride"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
 msgid "May Librids"
-msgstr ""
+msgstr "Libride de mai"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
 msgid "June Scutids"
-msgstr ""
+msgstr "Scutide de iunie"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariide de sud"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariide de nord"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1361
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Arietide de toamnă"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orionide"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Cometa 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Cometa 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Cometa 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Cometa 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Cometa 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Comet Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Cometa 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Cometa 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Cometa 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Cometa 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Cometa 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Cometa 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "Cometa C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Cometa C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Cometa Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Planeta minoră 2003 EH1 şi cometa C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Planeta minoră (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Planeta minoră 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1405
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Cometa 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1407
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Planeta minoră 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1409
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "Planeta minoră (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:325
 msgid "generic data"
-msgstr ""
+msgstr "date generice"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:327
 msgid "real data"
-msgstr ""
+msgstr "date reale"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
-msgstr ""
+msgstr "ploaie de meteoriţi"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Deriva radiantului (pe zi)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Viteza geocentrului meteoric: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:365
 #, qt-format
@@ -9483,24 +9613,24 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
-msgstr ""
+msgstr "Activ(ă)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
-msgstr ""
+msgstr "Activitate"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Maximum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:392
 msgid "Solar longitude is"
-msgstr ""
+msgstr "Longitudinea solară este"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
-msgstr ""
+msgstr "variabil(ă)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
 msgid "ZHR"
@@ -9508,43 +9638,43 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:182
 msgid "Data Type"
-msgstr ""
+msgstr "Tip de date"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Peak"
-msgstr ""
+msgstr "Vîrf"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:194
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Data de început este ulterioară datei de sfîrşit!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:198
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Intervalul trebuie să fie mai mic decît un an!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:218
 msgid "Variable"
-msgstr ""
+msgstr "Variabil(ă)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:221
 msgid "Real"
-msgstr ""
+msgstr "Real(ă)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:221
 msgid "Generic"
-msgstr ""
+msgstr "Generic"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Plugin ploi de meteoriţi"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
 msgid "Terms"
-msgstr ""
+msgstr "Termeni"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
 msgid "Meteor shower"
-msgstr ""
+msgstr "Ploaie de meteoriţi"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 msgid ""
@@ -9557,10 +9687,18 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"O ploaie de meteoriţi este un eveniment astronomic în care un mare număr de "
+"meteoriţi par să provină dintr-un punct anume al cerului. Aceştia sînt "
+"datoraţi unor valuri de rămăşiţe numite meteoroizi, care pătrund în "
+"atmosfera terestră cu viteze ridicate pe traiectorii paralele. Cei mai mulţi "
+"meteoriţi sînt mai mici decît un grăunte de nisip, aşa încît aproape toţi se "
+"dezintegrează şi nu ating niciodată suprafaţa Pămîntului. Ploile de "
+"meteoriţi foarte intense sau neobişnuite sînt cunoscute drept izbucniri sau "
+"furtuni de meteoriţi şi pot depăşi 1000 de meteoriţi pe oră."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
 msgid "Radiant"
-msgstr ""
+msgstr "Radiant"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 msgid ""
@@ -9569,6 +9707,10 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Radiantul sau radiantul aparent al unei ploi de meteoriţi este punctul de pe "
+"cer din care (pentru un observator aflat pe o planetă) par să îşi aibă "
+"originea. Dexemplu, Perseidele sînt meteoriţi care par să vină dintr-un "
+"punct din constelaţia Perseu."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
 msgid ""
@@ -9577,6 +9719,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Un observator poate sa vadă un meteorit oriunde pe cer dar direcţia de "
+"deplasare, cînd este reconstituită, va fi înspre radiant. Un meteorit a "
+"cărui direcţie nu este îndreptată spre radiantul cunoscut al unei ploi anume "
+"este numit sporadic şi nu este considerat ca făcînd parte din acea ploaie."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid ""
@@ -9584,10 +9730,13 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Multe ploi au un punct radiant care îşi schimbă poziţia în timpul "
+"intervalului de manifestare. De exemplu, punctul radiant al Delta "
+"Aurigidelor derivă cu mai mult de un grad pe noapte."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Rata orară zenitală (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
 msgid ""
@@ -9597,6 +9746,11 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"În astronomie, rata orară zenitală a unei ploi de meteoriţi este numărul de "
+"meteoriţi pe care un observator i-ar vedea timp de o oră sub un cer senin şi "
+"negru (cu magnitudinea limită vizibilă de 6.5) dacă radiantul ploii s-ar "
+"afla la zenit. Rata care poate fi efectiv observată este aproape întotdeauna "
+"mai scăzută şi cu atît mai mică cu cît radiantul este mai aproape de orizont."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
 msgid "Population index"
@@ -9612,7 +9766,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 msgid "Notes"
-msgstr ""
+msgstr "Note"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 msgid ""
@@ -9621,119 +9775,120 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
 msgid "Info"
-msgstr ""
+msgstr "Informaţii"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid "Info about meteor showers you can get here:"
 msgstr ""
+"Informaţii despre ploile de meteoriţi care pot fi observate în acest loc:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Ploaie de meteoriţi%2 - articol în Wikipedia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:293
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1Organizaţia Meteorică Internaţională%2\""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:357
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "Ploaia de meteoriţi este actualizată"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Configuraţie ploaie de meteoriţi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Configuraţie plugin ploaie de meteoriţi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Actualizare date de pe internet"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Ploi de meteoriţi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "Afişează butonul ploi de meteoriţi pe bare de unelte"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Activează afişarea ploilor de meteoriţi la demaraj"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Culorile marcatorilor de radianţi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Radiant activ - Date generice"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Schimbă culoarea"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Radiant inactiv"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Radiant activ - Date reale"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "Radianţi pentru ploile de meteoriţi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "Afişează etichetele radianţilor"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Afişează numai radianţii activi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Mărime font etichete (în pixeli)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "Radianţi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "Caută"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "De la:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "zz/LLL/aaaa"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "La:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Rezultate"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "Caută evenimente"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
@@ -9741,20 +9896,20 @@ msgstr ""
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Coordonatele indicatorului"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Acest plugin afişează coordonatele indicatorului."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Afişează coordonatele indicatorului"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "Ascensie dreaptă / Declinaţie (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
@@ -9764,12 +9919,12 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "Azimut / Altitudine"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Longitudine galactică / Latitudine"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
@@ -9788,67 +9943,67 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "Pugin coordonate indicator"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
-msgstr ""
+msgstr "Partea centrală superioară a ecranului"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "La mijlocul părţii superioare a jumătăţii din dreapta a ecranului"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "Colţul din dreapta jos al ecranului"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Poziţie personalizată"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Înălţare dreapta / Declinaţie (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Înălţare dreapta / Declinaţie"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "Longitudine ecliptică / Latitudine"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "Longitudine ecliptică / Latitudine (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Longitudine galactică / Latitudine"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Coordonatele poziţiei personalizate:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Afişează coordonatele cursorului pe ecran."
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Activează afişarea coordonatelor la demarare"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "Afişează butonul de pluginuri pe bara de unelte"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "Care sistem de coordonate va fi utilizat pentru afişare"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
-msgstr ""
+msgstr "Coordonate:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"

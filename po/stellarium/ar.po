@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-22 11:23+0600\n"
-"PO-Revision-Date: 2014-12-03 21:01+0000\n"
+"PO-Revision-Date: 2014-12-23 02:27+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-22 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-12-23 06:09+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -2259,7 +2259,7 @@ msgstr "الهندي الفيدي"
 
 #: src/translations.h:97
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "منازل القمر اليابانية"
 
 #: src/translations.h:98
 msgid "Korean"
@@ -3698,7 +3698,7 @@ msgstr "انسخ موقع &الرابط"
 
 #: src/translations.h:490
 msgid "Abort"
-msgstr ""
+msgstr "أجهظ"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
@@ -5677,7 +5677,7 @@ msgstr "المنظار الثنائي"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "لديه شعرتان متقاطعتان دائمتان"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -8089,47 +8089,47 @@ msgstr "نافذة إعدادات الكواكب الخارجية"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "حار"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "دافيء"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "بارد"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Miniterran"
-msgstr ""
+msgstr "أرضي صغير"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:857
 msgid "Subterran"
-msgstr ""
+msgstr "أقل من الأرضي"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:859
 msgid "Terran"
-msgstr ""
+msgstr "أرضي"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:861
 msgid "Superterran"
-msgstr ""
+msgstr "أرضي ضخم"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:863
 msgid "Jovian"
-msgstr ""
+msgstr "بحجم المشتري"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:865
 msgid "Neptunian"
-msgstr ""
+msgstr "بحجم نبتون"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
@@ -8202,7 +8202,7 @@ msgstr "سنة الاكتشاف"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Planetary class"
-msgstr ""
+msgstr "الفئة الكوكبية"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
@@ -8216,7 +8216,7 @@ msgstr "متوسط حرارة السطح"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "درجة حرارة التوازن"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
@@ -8277,10 +8277,12 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"<P DIR=RTL>هذه الإضافة تعرض الكواكب الخارجية القابلة للحياة (العلامة "
+"البرتقالية) وبعض المعلومات عنها"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "<p dir=rtl>الفئة الكوكبية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8288,6 +8290,9 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"تصنيف الكوكب حسب النوع الطيفي لشمسه (F , G , K , M)، وحسب المنطقة القابلة "
+"للحياة (حار، دافيء، بارد)، وحسب الحجم (أرضي صغير ، أقل من الأرضي ، أرضي ، "
+"أرضي ضخم ، بحجم المشتري ، بحجم نبتون). الأرض =  G ، دافيء ، أرضي"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Habitable Class"
@@ -8327,7 +8332,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "<P DIR=RTL>درجة التوازن الحراري"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid ""
@@ -8336,6 +8341,9 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"درجة التوازن الحراري لكوكب هي درجة حرارة مئوية نظرية يكون عليها الكوكب إذا "
+"افترضنا أنه جسم أسود يستمد حرارته من شمسه الأم بافتراض قيمة بياض بوند = 0.3. "
+"على سبيل المثال درجة التوازن الحراري للأرض هي -18.15 درجة مئوية أو 255 كلفن."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Earth Similarity Index (ESI)"
@@ -8353,23 +8361,23 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "<P DIR=RTL>معلومات إضافية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "منطقة دائرية حول النجم القابلة للحياة"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "درجة التوازن الحراري للكوكب"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
-msgstr ""
+msgstr "قابلية الكوكب للحياة"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "مؤشر المشابهة للأرض"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -9911,7 +9919,7 @@ msgstr "‎العرض المجرّي / الطول المجرّي‎"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "‎خط العرض الكسوفي/خط الطول الكسوفي‎"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
 msgctxt "abbreviated in the plugin"
@@ -9953,7 +9961,7 @@ msgstr "الميل / المطلع المستقيم"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "خط العرض الكسوفي/خط الطول الكسوفي"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
@@ -11030,3 +11038,9 @@ msgstr "الإحداثي الرأسي"
 #~ "<p dir=rtl>هذه الإضافة تعرض الكواكب الخارجية التي يمكن أن تكون قابلة للحياة "
 #~ "(العلامة البرتقالية) وبعض المعلومات - الفئة القابلة للحياة، متوسط درجة حرارة "
 #~ "السطح ومؤشر مشابهتها للأرض."
+
+#~ msgid "on date"
+#~ msgstr "الحقبة الحالية"
+
+#~ msgid "Coordinates of cross"
+#~ msgstr "إحداثيات الشعرتين"
