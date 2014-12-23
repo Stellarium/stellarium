@@ -549,9 +549,9 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	Vec3d xy;
-	if (realisticModeFlag)
+	if (prj->projectCheck(XYZ,xy))
 	{
-		if (prj->project(XYZ,xy))
+		if (realisticModeFlag)
 		{
 			double mag = getVMagnitude(core);
 			RCMag rcMag;
@@ -576,10 +576,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 			painter.setProjector(origP); // Restrore projector state
 		}
-	}
-	else
-	{
-		if (prj->project(XYZ,xy))
+		else
 		{
 			if (Satellite::showLabels)
 				painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
