@@ -548,34 +548,37 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
+	Vec3d xy;
 	if (realisticModeFlag)
 	{
-		double mag = getVMagnitude(core);
-		RCMag rcMag;
-		Vec3f color = Vec3f(1.f,1.f,1.f);
-
-		StelProjectorP origP = painter.getProjector(); // Save projector state
-		painter.setProjector(prj);
-
-		sd->preDrawPointSource(&painter);
-		if (mag <= sd->getLimitMagnitude())
+		if (prj->project(XYZ,xy))
 		{
-			sd->computeRCMag(mag, &rcMag);
-			sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, true);
-			painter.setColor(color[0], color[1], color[2], 1);
+			double mag = getVMagnitude(core);
+			RCMag rcMag;
+			Vec3f color = Vec3f(1.f,1.f,1.f);
 
-			if (Satellite::showLabels)
-				painter.drawText(XYZ, name, 0, 10, 10, false);
+			StelProjectorP origP = painter.getProjector(); // Save projector state
+			painter.setProjector(prj);
 
+			sd->preDrawPointSource(&painter);
+			if (mag <= sd->getLimitMagnitude())
+			{
+				sd->computeRCMag(mag, &rcMag);
+				sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, true);
+				painter.setColor(color[0], color[1], color[2], 1);
+
+				if (Satellite::showLabels)
+					painter.drawText(XYZ, name, 0, 10, 10, false);
+
+			}
+
+			sd->postDrawPointSource(&painter);
+
+			painter.setProjector(origP); // Restrore projector state
 		}
-
-		sd->postDrawPointSource(&painter);
-
-		painter.setProjector(origP); // Restrore projector state
 	}
 	else
 	{
-		Vec3d xy;
 		if (prj->project(XYZ,xy))
 		{
 			if (Satellite::showLabels)
