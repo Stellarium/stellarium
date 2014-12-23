@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-22 11:23+0600\n"
-"PO-Revision-Date: 2014-10-18 10:45+0000\n"
+"PO-Revision-Date: 2014-12-22 08:49+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-22 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-12-23 06:37+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -304,7 +304,7 @@ msgstr "วันสุริยคติปานกลาง: %1"
 
 #: src/core/modules/Planet.cpp:285
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "คาบการหมุนไม่แน่นอน"
 
 #: src/core/modules/Planet.cpp:291
 #, qt-format
@@ -4641,11 +4641,11 @@ msgstr "เปิดการใช้งานบรรยากาศโดย
 
 #: src/ui_configurationDialog.h:1188
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยมสำหรับพิกัด"
 
 #: src/ui_configurationDialog.h:1190
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "ใช้องศาแบบทศนิยม"
 
 #: src/ui_configurationDialog.h:1191
 msgid "Screenshots"
@@ -4827,7 +4827,7 @@ msgstr "บันทึกสคริปต์ลงในแฟ้มข้อ
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "ล้าง"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"
@@ -5027,15 +5027,15 @@ msgstr "การปรับแต่งโปรแกรมเสริมก
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "แสดงด้วยพิกัดศูนย์สูตร"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "แสดงมุมตำแหน่ง"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "แสดงพิกัดขอบฟ้า"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
@@ -5043,19 +5043,19 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "แสดงมุมตำแหน่ง "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "แสดงเครื่องหมายจุดเริ่มต้นติดกับท้องฟ้าที่หมุน"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "แสดงจุดสิ้นสุดติดกับท้องฟ้าที่หมุน"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "รูปแบบ"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -5578,7 +5578,7 @@ msgstr "คืนค่าเริ่มต้นของขอบเขตภ
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "มุมมองเซนเซอร์"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -7143,7 +7143,7 @@ msgstr "เนบิวลา"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "เส้นศูนย์สูตรดาราจักร"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -8029,47 +8029,47 @@ msgstr "หน้าต่างการตั้งค่าดาวเคร
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "ร้อน"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "อบอุ่น"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "หนาวเย็น"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Miniterran"
-msgstr ""
+msgstr "โลกขนาดจิ๋ว"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:857
 msgid "Subterran"
-msgstr ""
+msgstr "โลกขนาดเล็ก"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:859
 msgid "Terran"
-msgstr ""
+msgstr "ใกล้เคียงโลก"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:861
 msgid "Superterran"
-msgstr ""
+msgstr "โลกขนาดใหญ่"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:863
 msgid "Jovian"
-msgstr ""
+msgstr "ใกล้เคียงดาวพฤหัสบดี"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:865
 msgid "Neptunian"
-msgstr ""
+msgstr "ใกล้เคียงดาวเนปจูน"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
@@ -8142,7 +8142,7 @@ msgstr "ค.ศ. ที่ค้นพบ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Planetary class"
-msgstr ""
+msgstr "ชั้นดาวเคราะห์"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
@@ -8156,7 +8156,7 @@ msgstr "อุณหภูมิพื้นผิวเฉลี่ย"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "อุณหภูมิสมดุล"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
@@ -8221,7 +8221,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "ชั้นดาวเคราะห์"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8268,7 +8268,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "อุณหภูมิที่ภาวะสมดุล"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid ""
@@ -8293,7 +8293,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "ข้อมูลเพิ่มเติม"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
@@ -8305,15 +8305,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
-msgstr ""
+msgstr "การอยู่อาศัยได้ของดาวเคราะห์"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "ดัชนีความเหมือนโลก"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr "เว็บไซต์เกี่ยวกับดาวเคราะห์ระบบอื่น"
+msgstr "เว็บไซต์เกี่ยวกับดาวเคราะห์ต่างระบบ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets: an interactive version of XKCD 1071"
@@ -9870,7 +9870,7 @@ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "ลองจิจูด/ละติจูดฟ้า"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
