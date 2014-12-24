@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-22 11:23+0600\n"
-"PO-Revision-Date: 2014-12-22 08:49+0000\n"
+"POT-Creation-Date: 2014-12-23 18:34+0600\n"
+"PO-Revision-Date: 2014-12-24 05:53+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-23 06:37+0000\n"
+"X-Launchpad-Export-Date: 2014-12-24 06:21+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -144,7 +144,7 @@ msgstr "พื้น"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "ความสว่าง"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -1122,7 +1122,7 @@ msgstr "มุมทิศ/มุมเงย: %1/%2"
 #: src/core/StelObject.cpp:196 src/core/StelObject.cpp:198
 #: src/core/StelObject.cpp:204 src/core/StelObject.cpp:206
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "ลองจิจูด/ละติจูดฟ้า"
 
 #: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #, qt-format
@@ -1767,15 +1767,15 @@ msgstr "ขอบเขตโชติมาตรที่เห็นได้
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Abbreviated"
-msgstr ""
+msgstr "อักษรย่อ"
 
 #: src/gui/ViewDialog.cpp:414
 msgid "Native"
-msgstr ""
+msgstr "พื้นเมือง"
 
 #: src/gui/ViewDialog.cpp:415
 msgid "Translated"
-msgstr ""
+msgstr "แปล"
 
 #: src/gui/ViewDialog.cpp:539
 msgid "No description"
@@ -1928,46 +1928,46 @@ msgstr "แผนที่ดาว"
 #: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "ศูนย์สูตร (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "ศูนย์สูตร"
 
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "ขอบฟ้า"
 
 #: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "ดาราจักร"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "ไรต์แอสเซนชัน"
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
-msgstr ""
+msgstr "เดคลิเนชัน"
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
-msgstr ""
+msgstr "มุมทิศ"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
-msgstr ""
+msgstr "มุมเงย"
 
 #: src/gui/SearchDialog.cpp:267
 msgid "Longitude"
-msgstr ""
+msgstr "ลองจิจูด"
 
 #: src/gui/SearchDialog.cpp:270
 msgid "Latitude"
-msgstr ""
+msgstr "ละติจูด"
 
 #: src/gui/SearchDialog.cpp:510
 msgid "Simbad Lookup Error"
@@ -2024,10 +2024,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"ไม่พบ OpenGL 2 ในระบบ กรุณาอัปเกรดฮาร์ดแวร์ หรือใช้โปรแกรมรุ่น MESA "
+"หรือรุ่นที่เก่ากว่า"
 
 #: src/StelMainView.cpp:382
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "ไม่สามารถเข้าถึงทรัพยากร OpenGL ที่จำเป็น"
 
 #: src/StelMainView.cpp:441
 msgid "Save screenshot"
@@ -2042,11 +2044,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"รุ่นของ OpenGL ไม่สูงพอ กรุณาติดตั้งไดรเวอร์รุ่นปรับปรุง หรือใช้โปรแกรมรุ่น "
+"MESA (หรือ ANGLE)"
 
 #: src/StelMainView.cpp:536
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"รุ่นของ OpenGL ไม่สูงพอ กรุณาติดตั้งไดรเวอร์รุ่นปรับปรุง "
+"หรือเปลี่ยนการ์ดแสดงผล"
 
 #: src/StelMainView.cpp:578
 msgid ""
@@ -2137,47 +2143,47 @@ msgstr "ดาวเคราะห์น้อย"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:60
 msgid "Moons"
-msgstr ""
+msgstr "ดาวบริวาร"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:62
 msgid "Plutoids"
-msgstr ""
+msgstr "พลูตอยด์"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:67
 msgid "Bright galaxies"
-msgstr ""
+msgstr "ดาราจักรสว่าง"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:69
 msgid "Open star clusters"
-msgstr ""
+msgstr "กระจุกดาวเปิด"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:71
 msgid "Globular star clusters"
-msgstr ""
+msgstr "กระจุกดาวทรงกลม"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:73
 msgid "Nebulae"
-msgstr ""
+msgstr "เนบิวลา"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:75
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "เนบิวลาดาวเคราะห์"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:77
 msgid "Dark nebulae"
-msgstr ""
+msgstr "เนบิวลามืด"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:79
 msgid "Irregular galaxies"
-msgstr ""
+msgstr "ดาราจักไร้รูปร่าง"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:81
@@ -2187,12 +2193,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:83
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "วัตถุในบัญชีเมซีเย"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:85
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "วัตถุในบัญชีคาลด์เวลล์"
 
 #: src/translations.h:89
 msgid "Arabic"
@@ -2244,7 +2250,7 @@ msgstr "เมารี"
 
 #: src/translations.h:101
 msgid "Mongolian"
-msgstr ""
+msgstr "มองโกเลีย"
 
 #: src/translations.h:102
 msgid "Navajo"
@@ -2269,7 +2275,7 @@ msgstr "เซมี"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:108
 msgid "Siberian"
-msgstr ""
+msgstr "ไซบีเรีย"
 
 #: src/translations.h:109
 msgid "Tupi-Guarani"
@@ -2285,7 +2291,7 @@ msgstr "ตะวันตก"
 
 #: src/translations.h:112
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "ตะวันตก (เอช.เอ. เรย์)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:118
@@ -2340,7 +2346,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:138
 msgid "Zero Horizon"
-msgstr ""
+msgstr "ขอบฟ้าเปิดโล่ง"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:144
@@ -3677,15 +3683,19 @@ msgstr ""
 
 #: src/translations.h:490
 msgid "Abort"
+msgstr "ยกเลิก"
+
+#: src/translations.h:491
+msgid "Ignore"
 msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "วันและเวลาตามปฏิทินเกรกอเรียน"
 
 #: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
-msgstr ""
+msgstr "วันจูเลียน"
 
 #: src/ui_dateTimeDialogGui.h:383
 msgid "Modified Julian Date"
@@ -3768,7 +3778,7 @@ msgstr " ม."
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "กลับไปใช้ตำแหน่งที่ตั้งปริยาย"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4277,11 +4287,11 @@ msgstr "การตั้งค่า"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "การตั้งค่าภาษา"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "ภาษาในโปรแกรม"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
