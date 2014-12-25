@@ -366,6 +366,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
 	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateListTab()));
 	updateListTab();
 
 	// Set the focus directly on the line edit
@@ -724,6 +725,7 @@ void SearchDialog::updateListTab()
 	{
 		ui->searchInEnglishCheckBox->show();
 	}
+	ui->objectTypeComboBox->blockSignals(true);
 	ui->objectTypeComboBox->clear();
 	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
 	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
@@ -733,7 +735,8 @@ void SearchDialog::updateListTab()
 			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ? it.value(): q_(it.value()));
 			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
 		}
-	}
+	}	
+	ui->objectTypeComboBox->blockSignals(false);
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
 }
 

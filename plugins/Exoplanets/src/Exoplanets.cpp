@@ -397,6 +397,9 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!flagShowExoplanets)
+		return result;
+
 	if (inEnglish)
 	{
 		foreach (const ExoplanetP& planet, ep)
