@@ -228,7 +228,10 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		oss << "<h2>" << name << "</h2>";
 		if (!description.isEmpty())
-			oss << q_(description) << "<br/>";
+		{
+			// Let's convert possibile \n chars into <br/> in description of satellite
+			oss << q_(description).replace("\n", "<br/>") << "<br/>";
+		}
 	}
 	
 	if (flags & CatalogNumber)
