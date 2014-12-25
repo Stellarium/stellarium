@@ -717,9 +717,10 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	QUrlQuery q(url);
 	q.addQueryItem("ty","e");//Type: ephemerides
 	q.addQueryItem("TextArea", query);//Object name query
-	//q.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	q.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	//Switch to MPC 1-line format --AW
 	//XEphem's format is used instead because it doesn't truncate object names.
-	q.addQueryItem("e", "3");//Elements format: XEphem
+	//q.addQueryItem("e", "3");//Elements format: XEphem
 	//Yes, all of the rest are necessary
 	q.addQueryItem("d","");
 	q.addQueryItem("l","");
@@ -839,8 +840,17 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 	QTemporaryFile file;
 	if (file.open())
 	{
-		file.write(reply->readAll());
+		file.write(reply->readAll());		
 		file.close();
+
+		QRegExp cometProvisionalDesignation("[PCDX]/");
+		QRegExp cometDesignation("(\\d)+[PCDX]/");
+		QString queryData = ui->lineEditQuery->text().trimmed();
+
+		if (cometDesignation.indexIn(queryData) == 0 || cometProvisionalDesignation.indexIn(queryData) == 0)
+			objects = readElementsFromFile(MpcComets, file.fileName());
+		else
+			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
 
 		/*
 		//Try to read it as a comet first?
@@ -848,7 +858,8 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		if (objects.isEmpty())
 			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
 		*/
-		objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
+		//XEphem given wrong data for comets --AW
+		//objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
 	}
 	else
 	{
