@@ -112,7 +112,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 	double currentEpoch = core->getCurrentEpoch();
-	QString cepoch = q_("on date");
+	QString cepoch = qc_("on date", "coordinates for current epoch");
 	if (currentEpoch>0 && currentEpoch<9000.)
 	{
 		// OK, we can show epoch in format YYYY.F
