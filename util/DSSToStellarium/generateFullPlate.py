@@ -153,7 +153,7 @@ def generatePlate(plateName, maxLevel):
 if __name__ == '__main__':
   maxLevel = 11
 
-  for plate in dssUtils.getTestingPlatesNames():
+  for plate in dssUtils.getAllPlatesNames():
       generatePlate(plate, maxLevel)
 
   os.system("python createUpperToastLevels.py")
