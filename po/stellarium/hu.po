@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-23 18:34+0600\n"
-"PO-Revision-Date: 2014-12-12 13:48+0000\n"
+"PO-Revision-Date: 2014-12-25 10:18+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-24 06:06+0000\n"
+"X-Launchpad-Export-Date: 2014-12-26 05:50+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -1123,7 +1123,7 @@ msgstr ""
 #: src/core/StelObject.cpp:115
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "dátum szerint"
 
 #: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
 #: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
@@ -3718,7 +3718,7 @@ msgstr ""
 
 #: src/translations.h:491
 msgid "Ignore"
-msgstr ""
+msgstr "Kihagy"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
@@ -5059,7 +5059,7 @@ msgstr ""
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
-msgstr ""
+msgstr "A bővítményről további információk %1itt%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -5265,11 +5265,11 @@ msgstr "Előző távcső"
 
 #: plugins/Oculars/src/Oculars.cpp:1330
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Következő nézőke"
 
 #: plugins/Oculars/src/Oculars.cpp:1332
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Előző nézőke"
 
 #: plugins/Oculars/src/Oculars.cpp:1459
 msgctxt "abbreviated in the plugin"
@@ -7680,6 +7680,8 @@ msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Ha nova fényességcsökkenése nem ismert, a bővítmény általános értékeket "
+"jelenít meg."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
@@ -7688,6 +7690,7 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"További információk a bővítményről és a katalógus formátumáról %1itt%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
 msgid "Novae is updated"
@@ -8075,7 +8078,7 @@ msgstr "Kis Föld"
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:857
 msgid "Subterran"
-msgstr ""
+msgstr "Földnél kisebb"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:859
@@ -8187,7 +8190,7 @@ msgstr "Egyensúlyi hőm."
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
 msgid "ESI"
-msgstr ""
+msgstr "Földhasonlósági index"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
 msgid "Exoplanets Plug-in"
@@ -9882,7 +9885,7 @@ msgstr "Galaktikus hosszúság/szélesség"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "A megadott pozíció koordinátái:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
