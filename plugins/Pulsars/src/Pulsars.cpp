@@ -401,6 +401,9 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 QStringList Pulsars::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!flagShowPulsars)
+		return result;
+
 	if (inEnglish)
 	{
 		foreach(const PulsarP& pulsar, psr)
