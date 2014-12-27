@@ -42,6 +42,7 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
+#include "StelOpenGL.hpp"
 #include "OBJ.hpp"
 #include "ShaderManager.hpp"
 #include "StelFileMgr.hpp"
