@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-23 18:34+0600\n"
-"PO-Revision-Date: 2014-12-24 06:01+0000\n"
+"PO-Revision-Date: 2014-12-27 05:13+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-25 05:45+0000\n"
+"X-Launchpad-Export-Date: 2014-12-27 05:41+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -1096,12 +1096,12 @@ msgstr ""
 #: src/core/StelObject.cpp:115
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "ของวัน"
 
 #: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
 #: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
 msgid "RA/Dec"
-msgstr ""
+msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน"
 
 #: src/core/StelObject.cpp:151 src/core/StelObject.cpp:155
 #, qt-format
@@ -1445,7 +1445,7 @@ msgstr "Stellarium รุ่นนี้ล้าสมัยแล้ว! ร�
 #: src/gui/HelpDialog.cpp:325
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
-msgstr ""
+msgstr " ขออภัย ฮาร์ดแวร์ของคุณเข้ากันไม่ได้กับรุ่นล่าสุดของ Stellarium!"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:332
@@ -2060,6 +2060,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"ระบบ DirectX/OpenGL ES ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
+"ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
 #: src/StelMainView.cpp:629
 msgid ""
@@ -2067,6 +2069,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"ระบบ OpenGL/Mesa ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
+"ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
 #: src/StelMainView.cpp:684
 msgid ""
@@ -2074,6 +2078,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"ระบบ OpenGL ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
+"ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
 #: src/StelMainView.cpp:721
 msgid ""
@@ -2081,6 +2087,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"ระบบ  OpenGL ES ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
+"ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
 #: src/StelMainView.cpp:830
 #, qt-format
@@ -2214,7 +2222,7 @@ msgstr "แอซเทก"
 
 #: src/translations.h:92
 msgid "Boorong"
-msgstr ""
+msgstr "บูรอง"
 
 #: src/translations.h:93
 msgid "Chinese"
@@ -2456,7 +2464,7 @@ msgstr "เหตุการณ์ที่โลกเมื่อมองจ
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:186
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "เหตุการณ์เกี่ยวกับโลกเมื่อสังเกตจากนครลอยฟ้าบนดาวศุกร์"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:188
@@ -2467,11 +2475,15 @@ msgstr "เหตุการณ์ที่โลกเมื่อมองจ
 #: src/translations.h:190
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
+"โลกและดาวศุกร์เมื่อทำมุมห่างดวงอาทิตย์ที่สุดและสว่างที่สุดเมื่อสังเกตจากดาวอั"
+"งคาร"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
+"โลกและดาวอังคารเมื่อทำมุมห่างดวงอาทิตย์ที่สุดและผ่านหน้าดวงอาทิตย์เมื่อสังเกต"
+"จากคัลลิสโต"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:194
@@ -3602,23 +3614,23 @@ msgstr "ซิมบับเว"
 
 #: src/translations.h:471
 msgid "&Undo"
-msgstr ""
+msgstr "เ&ลิกทำ"
 
 #: src/translations.h:472
 msgid "&Redo"
-msgstr ""
+msgstr "&ทำซ้ำ"
 
 #: src/translations.h:473
 msgid "Cu&t"
-msgstr ""
+msgstr "&ตัด"
 
 #: src/translations.h:474
 msgid "&Copy"
-msgstr ""
+msgstr "&คัดลอก"
 
 #: src/translations.h:475
 msgid "&Paste"
-msgstr ""
+msgstr "&วาง"
 
 #: src/translations.h:476 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1094
@@ -3671,15 +3683,15 @@ msgstr "คอมพิวเตอร์"
 
 #: src/translations.h:487
 msgid "&Open"
-msgstr ""
+msgstr "เ&ปิด"
 
 #: src/translations.h:488
 msgid "File &name:"
-msgstr ""
+msgstr "&ชื่อไฟล์:"
 
 #: src/translations.h:489
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "คัดลอก&ตำแหน่งลิงก์"
 
 #: src/translations.h:490
 msgid "Abort"
@@ -3699,7 +3711,7 @@ msgstr "วันจูเลียน"
 
 #: src/ui_dateTimeDialogGui.h:383
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "วันที่จูเลียนดัดแปร"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3735,11 +3747,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "รีเซตรายชื่อที่ตั้งเพื่อแสดงที่ตั้งทั้งหมด"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "รีเซตรายชื่อที่ตั้ง"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -3802,11 +3814,11 @@ msgstr "ดาวเคราะห์:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "ใช้ที่ตั้งปัจจุบันเป็นค่าปริยาย"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "รับที่ตั้งจากเครือข่าย"
 
 #: src/ui_searchDialogGui.h:606
 msgid "Find Object"
@@ -3932,7 +3944,7 @@ msgstr "ระบบพิกัด:"
 #: src/ui_searchDialogGui.h:695
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
-msgstr ""
+msgstr "หมายเหตุ: พิกัดที่ใช้ในเครื่องมือนี้ไม่ได้คิดผลจากการหักเหแสง"
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
@@ -4100,7 +4112,7 @@ msgstr "ความสว่างของทางช้างเผือก
 
 #: src/ui_viewDialog.h:1268
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "ความสว่างของแสงจักรราศี:"
 
 #: src/ui_viewDialog.h:1269
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
@@ -4210,7 +4222,7 @@ msgstr "แสดงเส้นสุริยวิถี"
 
 #: src/ui_viewDialog.h:1324
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "แสดงเส้นศูนย์สูตรดาราจักร"
 
 #: src/ui_viewDialog.h:1328
 msgid "Projection"
@@ -4242,16 +4254,17 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1338
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "ความสว่างต่ำสุด:"
 
 #: src/ui_viewDialog.h:1340
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
+"ตั้งค่าในช่วง 0 ถึง 1 (ภูมิทัศน์ในเวลากลางคืนจากมืดสนิทถึงสว่างที่สุด)"
 
 #: src/ui_viewDialog.h:1343
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "ใช้ความสว่างต่ำสุดที่อาจกำหนดไว้ในไฟล์ landscape.ini"
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
@@ -4267,7 +4280,7 @@ msgstr "ใช้คุณลักษณะท้องฟ้านี้เป
 
 #: src/ui_viewDialog.h:1349
 msgid "Show names"
-msgstr ""
+msgstr "แสดงชื่อ"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
@@ -4486,7 +4499,7 @@ msgstr "ระยะห่าง"
 
 #: src/ui_configurationDialog.h:1112
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
-msgstr ""
+msgstr "พิกัดฟ้า, วิษุวัตของวันและ J2000 (สำหรับโลกเท่านั้น)"
 
 #: src/ui_configurationDialog.h:1114
 msgid "Ecliptic coordinates"
@@ -5239,7 +5252,7 @@ msgstr "เลือกเลนส์ใกล้ตาก่อนหน้า
 #: plugins/Oculars/src/Oculars.cpp:1459
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr ""
+msgstr "RA/Dec (J2000.0) ของกากบาท"
 
 #: plugins/Oculars/src/Oculars.cpp:1586
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
@@ -5332,11 +5345,11 @@ msgstr "เ&ลนส์"
 
 #: plugins/Oculars/src/Oculars.cpp:1946
 msgid "&Previous lens"
-msgstr ""
+msgstr "เลนส์&ก่อนหน้า"
 
 #: plugins/Oculars/src/Oculars.cpp:1947
 msgid "&Next lens"
-msgstr ""
+msgstr "เลนส์&ถัดไป"
 
 #: plugins/Oculars/src/Oculars.cpp:1977
 msgid "&Telescope"
@@ -5596,7 +5609,7 @@ msgstr "ใช้หน่วยองศาและลิปดาสำหร
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "ใช้การกลับด้านสำหรับซีซีดี"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
@@ -9828,27 +9841,27 @@ msgstr "RA/Dec"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "มุมทิศ/มุมเงย"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "ลองจิจูด/ละติจูดดาราจักร"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "ลองจิจูด/ละติจูดฟ้า"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "ลองจิจูด/ละติจูดฟ้า (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:245
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
