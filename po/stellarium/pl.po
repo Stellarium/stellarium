@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-23 18:34+0600\n"
-"PO-Revision-Date: 2014-12-07 05:18+0000\n"
+"PO-Revision-Date: 2014-12-27 03:39+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-24 06:15+0000\n"
+"X-Launchpad-Export-Date: 2014-12-27 05:41+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -2247,7 +2247,7 @@ msgstr "arabska"
 
 #: src/translations.h:90
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Arabskie stacje księżycowe"
 
 #: src/translations.h:91
 msgid "Aztec"
@@ -2275,7 +2275,7 @@ msgstr "wedyjska (Indie)"
 
 #: src/translations.h:97
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Japońskie stacje księżycowe"
 
 #: src/translations.h:98
 msgid "Korean"
@@ -3719,11 +3719,11 @@ msgstr "Kopiuj adres &odnośnika"
 
 #: src/translations.h:490
 msgid "Abort"
-msgstr ""
+msgstr "Przerwij"
 
 #: src/translations.h:491
 msgid "Ignore"
-msgstr ""
+msgstr "Zignoruj"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
@@ -4142,7 +4142,7 @@ msgstr "Jasność Drogi Mlecznej:"
 
 #: src/ui_viewDialog.h:1268
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "Jasność światła zodiakalnego:"
 
 #: src/ui_viewDialog.h:1269
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
@@ -4231,7 +4231,7 @@ msgstr "Siatka równikowa (na J2000)"
 
 #: src/ui_viewDialog.h:1303
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "Siatka równikowa (na dzień)"
 
 #: src/ui_viewDialog.h:1304
 msgid "Ecliptic grid (on J2000)"
@@ -5117,11 +5117,11 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Przywiąż punkt początkowy do obracającego się nieba"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Przywiąż punkt końcowy do obracającego się nieba"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
@@ -5663,10 +5663,12 @@ msgstr "Wyświetlaj panel sterowania"
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
+"Zaznacz tę opcję jeśli chcesz, żeby pole widzenia było takie samo jak przy "
+"uruchamianiu Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Przywróć początkowe wartości pola widzenia"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
@@ -5710,7 +5712,7 @@ msgstr "Nazwa:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
 msgid "aFOV:"
-msgstr ""
+msgstr "Pozorne pole widzenia:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1097
 #: plugins/Oculars/src/ui_ocularDialog.h:1124
@@ -8156,17 +8158,17 @@ msgstr "Okno konfiguracji wtyczki Egzoplanety"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "Gorąca"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "Ciepła"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "Zimna"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
@@ -8283,7 +8285,7 @@ msgstr "Średnia temp. powierzchni"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Temp. równowagi"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
@@ -8310,6 +8312,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Lista planet potencjalnie nadających się do zamieszkania i dane o nich "
+"pochodzą z \"%1The Habitable Exoplanets Catalog%3\" stworzonego przez "
+"%2Planetary Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:142
 #, qt-format
@@ -8318,6 +8323,9 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Bieżący katalog zawiera informacje o %1 układach planetarnych, które mają "
+"razem %2 egzoplanet (w tym %3 egzoplanet potencjalnie nadających się do "
+"zamieszkania)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
@@ -8339,6 +8347,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Ta wtyczka wyświetla egzoplanety nadające się do zamieszkania (oznaczone na "
+"pomarańczowo) i niektóre informacje o nich."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
@@ -8381,7 +8391,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Temperatura równowagi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid ""
@@ -8407,7 +8417,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "Informacje dodatkowe"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
@@ -8415,7 +8425,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Planetarna temperatura równowagi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
@@ -8547,10 +8557,13 @@ msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
 msgstr ""
+"Pokaz układów planetarnych, zawierający egzoplanety nadające się do "
+"zamieszkania"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
 msgstr ""
+"Włącz pokazywanie wyłącznie egzoplanet nadających się do zamieszkania"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
@@ -8752,7 +8765,7 @@ msgstr "Nieobserwowalne w czasie ciemnych nocy."
 #: plugins/Observability/src/Observability.cpp:212
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Noce nad horyzontem: %1"
 
 #: plugins/Observability/src/Observability.cpp:213
 msgid "TODAY:"
@@ -8927,12 +8940,12 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:200
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Wysokość Słońca w czasie zmierzchu: %1 st."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Wysokość horyzontu: %1 st."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -9007,7 +9020,7 @@ msgstr ""
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "Ustaw pole widzenia na %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
@@ -9021,10 +9034,16 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Stellarium domyślnie stosuje płynne przybliżanie/oddalanie za pomocą kółka "
+"myszy lub skrótów klawiaturowych. Niektórzy użytkownicy preferują skokową "
+"zmianę do najbliższej stałej wartości pola widzenia jak w programie Cartes "
+"du Ciel; ta wtyczka to umożliwia. Można zmieniać wartości i używać "
+"klawiatury do szybkiej zmiany pola widzenia. Wszystkie wartości podaje się w "
+"stopniach."
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Gwiazdy nawigacyjne"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -9038,7 +9057,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Zaznacz gwiazdy nawigacyjne"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
@@ -9047,27 +9066,27 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
-msgstr ""
+msgstr "Równanie czasu"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Ta wtyczka pokazuje rozwiązanie równania czasu."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Pokaż rozwiązanie Równania czasu"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:259
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:261
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
@@ -9092,11 +9111,11 @@ msgstr "Pokaż przycisk wtyczek na pasku narzędzi"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Używaj minut i sekund"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Zmień znak równania"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
@@ -9106,7 +9125,7 @@ msgstr "Rozmiar czcionki:"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Deszcze meteorów"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
@@ -9114,23 +9133,28 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Ta wtyczka pokazuje deszcze meteorów i znacznik dla każdego aktywnego i "
+"nieaktywnego radiantu, wyświetlając informacje o jego rzeczywistej "
+"aktywności."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Pokaż deszcze meteorów"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
-msgstr ""
+msgstr "Etykiety radiantów"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Okno konfiguracji wtyczki Deszcze meteorów"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"Stary plik showers.json nie jest zgodny z aktualną wersją - zostanie użyty "
+"plik domyślny"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1245

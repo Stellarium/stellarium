@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-23 18:34+0600\n"
-"PO-Revision-Date: 2014-12-25 10:18+0000\n"
+"PO-Revision-Date: 2014-12-26 21:14+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-26 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-12-27 05:41+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -3714,7 +3714,7 @@ msgstr ""
 
 #: src/translations.h:490
 msgid "Abort"
-msgstr ""
+msgstr "Megszakít"
 
 #: src/translations.h:491
 msgid "Ignore"
@@ -5076,7 +5076,7 @@ msgstr "Egyenlítői koordinátákkal"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Pozíciós szög kijelzése"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
@@ -5088,15 +5088,15 @@ msgstr "(pl. Dobson starhopping)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Pozíciós szög kijelzése "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Kezdőpont jelölése az égbolton"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Végpont jelölése az égbolton"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
@@ -7531,6 +7531,8 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"A bővítmény különböző szupernóvákhoz egyszerű modellel fénygörbét jelenít "
+"meg. A tipikus fénygörbe %1itt látható%2 (a jobb oldali skála napokat mutat)."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 msgid "Acknowledgments"
@@ -7666,7 +7668,7 @@ msgstr "Minden nóva csúcsértékben fényesebb, mint %1"
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
-msgstr ""
+msgstr "A bővítmény egyszerű modellel fénygörbét jelenít meg nóvákhoz."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #, qt-format
@@ -9730,7 +9732,7 @@ msgstr "Radiánsjelölők színe"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Aktív radiáns - általános adat"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
@@ -9831,7 +9833,7 @@ msgstr "Gal. Long/Lat"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "Ekl. h./sz."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
 msgctxt "abbreviated in the plugin"
@@ -9873,7 +9875,7 @@ msgstr "Rektaszcenzió/deklináció"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "Ekliptikus hosszúság/szélesség"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
