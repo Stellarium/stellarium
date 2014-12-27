@@ -163,7 +163,7 @@ QFontMetrics StelPainter::getFontMetrics() const
 // Standard methods for drawing primitives
 
 // Fill with black around the circle
-void StelPainter::drawViewportShape(void)
+void StelPainter::drawViewportShape(const GLfloat innerRadius)
 {
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
@@ -171,7 +171,6 @@ void StelPainter::drawViewportShape(void)
 	glDisable(GL_BLEND);
 	setColor(0.f,0.f,0.f);
 
-	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
 	GLint slices = 256;
 	GLfloat sweepAngle = 360.;
@@ -223,6 +222,11 @@ void StelPainter::drawViewportShape(void)
 	}
 	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
 	enableClientStates(false);
+}
+
+void StelPainter::drawViewportShape(void)
+{
+	this->drawViewportShape(0.5*prj->viewportFovDiameter);
 }
 
 
@@ -337,7 +341,7 @@ static void sSphereMapTexCoordFast(float rho_div_fov, const float costheta, cons
 	out << 0.5f + rho_div_fov * costheta << 0.5f + rho_div_fov * sintheta;
 }
 
-void StelPainter::sSphereMap(const float radius, const int slices, const int stacks, const float textureFov, const int orientInside)
+void StelPainter::sSphereMap(float radius, int slices, int stacks, float textureFov, int orientInside)
 {
 	float rho,x,y,z;
 	int i, j;
@@ -410,7 +414,7 @@ void StelPainter::sSphereMap(const float radius, const int slices, const int sta
 	}
 }
 
-void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const float xshift, const float yshift)
+void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
 {
 	float dx, dy, d, theta, theta_o, psi;
 	dx = x - prj->viewportCenter[0];
@@ -479,7 +483,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const 
 	}
 }
 
-void StelPainter::drawText(const Vec3d& v, const QString& str, const float angleDeg, const float xshift, const float yshift, const bool noGravity)
+void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	Vec3d win;
 	if (prj->project(v, win))
@@ -512,7 +516,7 @@ struct StringTexture
 	}
 };
 
-void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, const bool noGravity)
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
@@ -544,7 +548,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 		// Translate/rotate
 		if (!noGravity)
-			angleDeg += prj->defautAngleForGravityText;
+			angleDeg += prj->defaultAngleForGravityText;
 
 		if (std::fabs(angleDeg)>1.f)
 		{
@@ -699,8 +703,8 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
-		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos, const Vec3f *colors, QVarLengthArray<Vec3f, 4096> *outColors,
-		const double maxSqDistortion, const int nbI, const bool checkDisc1, const bool checkDisc2, const bool checkDisc3) const
+        const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos, const Vec3f *colors, QVarLengthArray<Vec3f, 4096> *outColors,
+        double maxSqDistortion, int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
 	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
@@ -1275,7 +1279,7 @@ private:
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, const bool checkDiscontinuity)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
 {
 	if (checkDiscontinuity && prj->hasDiscontinuity())
 	{
@@ -1314,7 +1318,7 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, const bool che
 	enableClientStates(false);
 }
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, const bool textured, const bool colored, const SphericalCap* clippingCap, const bool doSubDivide, const double maxSqDistortion)
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, bool colored, const SphericalCap* clippingCap, bool doSubDivide, double maxSqDistortion)
 {
 	if (va.vertex.isEmpty())
 		return;
@@ -1357,6 +1361,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
+		case SphericalPolygonDrawModeTextureFillColormodulated:
 			glEnable(GL_CULL_FACE);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
@@ -1376,7 +1381,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 /*************************************************************************
  draw a simple circle, 2d viewport coordinates in pixel
 *************************************************************************/
-void StelPainter::drawCircle(const float x, const float y, float r)
+void StelPainter::drawCircle(float x, float y, float r)
 {
 	if (r <= 1.0)
 		return;
@@ -1408,7 +1413,7 @@ void StelPainter::drawCircle(const float x, const float y, float r)
 }
 
 
-void StelPainter::drawSprite2dMode(const float x, const float y, float radius)
+void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1427,19 +1432,19 @@ void StelPainter::drawSprite2dMode(const float x, const float y, float radius)
 	enableClientStates(false);
 }
 
-void StelPainter::drawSprite2dModeNoDeviceScale(const float x, const float y, const float radius)
+void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius)
 {
 	drawSprite2dMode(x, y, radius/(prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio()));
 }
 
-void StelPainter::drawSprite2dMode(const Vec3d& v, const float radius)
+void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 {
 	Vec3d win;
 	if (prj->project(v, win))
 		drawSprite2dMode(win[0], win[1], radius);
 }
 
-void StelPainter::drawSprite2dMode(const float x, const float y, float radius, const float rotation)
+void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotation)
 {
 	static float vertexData[8];
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1465,7 +1470,7 @@ void StelPainter::drawSprite2dMode(const float x, const float y, float radius, c
 	enableClientStates(false);
 }
 
-void StelPainter::drawRect2d(const float x, const float y, const float width, const float height, const bool textured)
+void StelPainter::drawRect2d(float x, float y, float width, float height, bool textured)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1491,7 +1496,7 @@ void StelPainter::drawRect2d(const float x, const float y, const float width, co
 /*************************************************************************
  Draw a GL_POINT at the given position
 *************************************************************************/
-void StelPainter::drawPoint2d(const float x, const float y)
+void StelPainter::drawPoint2d(float x, float y)
 {
 	static float vertexData[] = {0.,0.};
 	vertexData[0]=x;
@@ -1606,8 +1611,8 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
-StelVertexArray StelPainter::computeSphereNoLight(const float radius, const float oneMinusOblateness, const int slices, const int stacks,
-						  const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
+StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks,
+                          int orientInside, bool flipTexture, float topAngle, float bottomAngle)
 {
 	StelVertexArray result(StelVertexArray::Triangles);
 	GLfloat x, y, z;
@@ -1677,7 +1682,7 @@ StelVertexArray StelPainter::computeSphereNoLight(const float radius, const floa
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(const float radius, const float height, const int slices, const int orientInside)
+void StelPainter::sCylinder(float radius, float height, int slices, int orientInside)
 {
 	if (orientInside)
 		glCullFace(GL_FRONT);
@@ -1707,7 +1712,7 @@ void StelPainter::sCylinder(const float radius, const float height, const int sl
 		glCullFace(GL_BACK);
 }
 
-void StelPainter::enableTexture2d(const bool b)
+void StelPainter::enableTexture2d(bool b)
 {
 	texture2dEnabled = b;
 }
@@ -1889,7 +1894,7 @@ void StelPainter::setArrays(const Vec3f* vertices, const Vec2f* texCoords, const
 	setNormalPointer(GL_FLOAT, normalArray);
 }
 
-void StelPainter::enableClientStates(const bool vertex, const bool texture, const bool color, const bool normal)
+void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
 {
 	vertexArray.enabled = vertex;
 	texCoordArray.enabled = texture;
@@ -1897,7 +1902,7 @@ void StelPainter::enableClientStates(const bool vertex, const bool texture, cons
 	normalArray.enabled = normal;
 }
 
-void StelPainter::drawFromArray(const DrawingMode mode, const int count, const int offset, const bool doProj, const unsigned short* indices)
+void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned short* indices)
 {
 	ArrayDesc projectedVertexArray = vertexArray;
 	if (doProj)

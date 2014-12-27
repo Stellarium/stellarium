@@ -180,13 +180,13 @@ public:
 	inline int getDx0() const
 	{
 		Uint16 v = d[5] | (d[6] & 0x3F) << 8;
-		return (Int16)v;
+		return ((Int16)(v << 2)) >> 2;
 	}
 
 	inline int getDx1() const
 	{
 		Uint16 v = d[6] >> 6 | d[7] << 2 | (d[8] & 0xF) << 10;
-		return (Int16)v;
+		return ((Int16)(v << 2)) >> 2;
 	}
 
 	inline int getBVIndex() const

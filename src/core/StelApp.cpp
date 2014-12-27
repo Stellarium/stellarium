@@ -28,6 +28,7 @@
 #include "LandscapeMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 #include "MeteorMgr.hpp"
 #include "LabelMgr.hpp"
 #include "StarMgr.hpp"
@@ -430,6 +431,11 @@ void StelApp::init(QSettings* conf)
 	MilkyWay* milky_way = new MilkyWay();
 	milky_way->init();
 	getModuleMgr().registerModule(milky_way);
+
+	// Init zodiacal light
+	ZodiacalLight* zodiacal_light = new ZodiacalLight();
+	zodiacal_light->init();
+	getModuleMgr().registerModule(zodiacal_light);
 
 	// Init sky image manager
 	skyImageMgr = new StelSkyLayerMgr();

@@ -229,6 +229,8 @@ SET(stellarium_lib_SRCS
 	core/modules/StarWrapper.cpp
 	core/modules/StarWrapper.hpp
 	core/modules/ZoneArray.cpp
+	core/modules/ZodiacalLight.hpp
+	core/modules/ZodiacalLight.cpp
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
 	StelMainView.hpp
@@ -238,7 +240,6 @@ SET(stellarium_lib_SRCS
 	CLIProcessor.hpp
 	CLIProcessor.cpp
 	translations.h
-	config.h
 )
 
 # On windows, QZipReader is already included in the lib

@@ -464,6 +464,9 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 QStringList Satellites::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+		return result;
+
 	if (inEnglish)
 	{
 		foreach(const SatelliteP& sat, satellites)
