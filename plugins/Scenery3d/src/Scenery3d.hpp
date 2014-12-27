@@ -142,11 +142,12 @@ private:
     Vec3d viewPos;
     int drawn;
 
-    QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
-    StelVertexArray cubePlaneFront, cubePlaneBack,
-                cubePlaneLeft, cubePlaneRight,
-                cubePlaneTop, cubePlaneBottom;
-
+    //QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
+    GLuint cubeMapTex; //GL_TEXTURE_CUBE_MAP
+    GLuint cubeRB; //renderbuffer for depth
+    GLuint cubeFBO; //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBO ourselves
+    QVector<Vec3f> cubePlaneFront, cubeVertices;
+    QMatrix4x4 cubeRotation[6];
 
     QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
     QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
