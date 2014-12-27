@@ -233,6 +233,9 @@ public:
 	//! Set whether texturing is enabled.
 	void enableTexture2d(bool b);
 
+	//! Set whether cube map mode is enabled.
+	void enableCubeMap(bool b);
+
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
 	void setVertexPointer(int size, int type, const void* pointer) {
@@ -342,7 +345,7 @@ private:
 	QFont currentFont;
 
 	Vec4f currentColor;
-	bool texture2dEnabled;
+	bool texture2dEnabled,cubeMapEnabled;
 	
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {
@@ -373,6 +376,16 @@ private:
 		int texture;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
+
+	static QOpenGLShaderProgram* cubeShaderProgram;
+	struct CubeShaderVars {
+		int projectionMatrix;
+		int texColor;
+		int vertex;
+		int originalPos;
+		int cubetex;
+	};
+	static CubeShaderVars cubeShaderVars;
 
 
 	//! The descriptor for the current opengl vertex array
