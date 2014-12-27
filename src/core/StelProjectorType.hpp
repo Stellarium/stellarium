@@ -20,8 +20,6 @@
 #ifndef _STELPROJECTORTYPE_HPP_
 #define _STELPROJECTORTYPE_HPP_
 
-#include "config.h"
-
 #include <QSharedPointer>
 
 //! @file StelProjectorType.hpp

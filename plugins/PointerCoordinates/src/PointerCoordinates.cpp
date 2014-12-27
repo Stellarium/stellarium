@@ -203,6 +203,25 @@ void PointerCoordinates::draw(StelCore *core)
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition));
+			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDay()), &lambda, &beta); // Calculate ecliptic position and show it...
+			if (lambda<0) lambda+=2.0*M_PI;
+			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(lambda);
+				cyt = StelUtils::radToDecDegStr(beta);
+			}
+			else
+			{
+				cxt = StelUtils::radToDmsStr(lambda, true);
+				cyt = StelUtils::radToDmsStr(beta, true);
+			}
+			break;
+		}
+		case EclipticJ2000:
+		{
+			double lambda, beta;
+			StelUtils::rectToSphe(&cx,&cy, mousePosition);
 			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsSystem = qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin");

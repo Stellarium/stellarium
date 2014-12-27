@@ -39,7 +39,8 @@ public:
 //! Manage sky cultures for stellarium.
 //! Different human cultures have used different names for stars, and visualised
 //! different constellations in the sky (and in different parts of the sky).
-//! In the installation data directory and user data directory are the "skycultures" sub-directory containing one sub-directory per sky culture.
+//! In the installation data directory and user data directory are the "skycultures"
+//! sub-directories containing one sub-directory per sky culture.
 //! This sub-directory name is that we refer to as sky culture ID here.
 //! @author Fabien Chereau
 class StelSkyCultureMgr : public QObject
@@ -106,7 +107,7 @@ private:
 	
 	//! Get the directory associated with a specified translated culture name.
 	//! @param cultureName The culture name in the current language.
-	//! @return The directory assocuated with cultureName.
+	//! @return The directory associated with cultureName.
 	QString skyCultureI18ToDirectory(const QString& cultureName) const;
 	
 	QMap<QString, StelSkyCulture> dirToNameEnglish;

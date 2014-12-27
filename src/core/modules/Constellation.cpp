@@ -26,6 +26,8 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
+#include "ConstellationMgr.hpp"
 
 #include <algorithm>
 #include <QString>
@@ -65,7 +67,9 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	if (istr.status()!=QTextStream::Ok)
 		return false;
 
-	abbreviation = abb.toUpper();
+	// It's better to allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
+	//abbreviation = abb.toUpper();
+	abbreviation=abb;
 
 	asterism = new StelObjectP[numberOfSegments*2];
 	for (unsigned int i=0;i<numberOfSegments*2;++i)
@@ -121,15 +125,33 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 	}
 }
 
-void Constellation::drawName(StelPainter& sPainter) const
+void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const
 {
 	if (!nameFader.getInterstate())
 		return;
 
 	if (checkVisibility())
 	{
+		QString name;
+		switch (style)
+		{
+			case ConstellationMgr::constellationsTranslated:
+				name=nameI18;
+				break;
+			case ConstellationMgr::constellationsNative:
+				name=nativeName;
+				break;
+			case ConstellationMgr::constellationsEnglish:
+				name=englishName;
+				break;
+			case ConstellationMgr::constellationsAbbreviated:
+				name=(abbreviation.startsWith('.') ? "" : abbreviation);
+				break;
+			Q_ASSERT(0);
+		}
+
 		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
-		sPainter.drawText(XYname[0], XYname[1], nameI18, 0., -sPainter.getFontMetrics().width(nameI18)/2, 0, false);
+		sPainter.drawText(XYname[0], XYname[1], name, 0., -sPainter.getFontMetrics().width(name)/2, 0, false);
 	}
 }
 

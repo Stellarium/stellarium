@@ -86,8 +86,9 @@ QVariantMap Supernova::getMap(void)
 QString Supernova::getNameI18n(void) const
 {
 	QString name = designation;
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	if (note.size()!=0)
-		name = QString("%1 (%2)").arg(name).arg(q_(note));
+		name = QString("%1 (%2)").arg(name).arg(trans.qtranslate(note));
 
 	return name;
 }
@@ -96,7 +97,7 @@ QString Supernova::getEnglishName(void) const
 {
 	QString name = designation;
 	if (note.size()!=0)
-		name = QString("%1 (%2)").arg(name).arg(note);
+		name = QString("%1 (%2)").arg(name).arg(note);	
 
 	return name;
 }
@@ -119,11 +120,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << designation;
-		if (note.size()!=0)
-		    oss << " (" << q_(note) << ")";
-		
-		oss << "</h2>";
+		oss << "<h2>" << getNameI18n() << "</h2>";
 	}
 
 	if (flags&ObjectType)
@@ -164,7 +161,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 {
 	double vmag = 20;
 	double currentJD = core->getJDay();
-	double deltaJD = std::abs(peakJD-currentJD);
+	double deltaJD = qAbs(peakJD-currentJD);
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
 

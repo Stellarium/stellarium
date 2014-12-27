@@ -65,7 +65,6 @@ relative_scale                      = 1.0
 absolute_scale                      = 1.0
 star_twinkle_amount                 = 0.2
 flag_star_twinkle                   = true
-flag_point_star                     = false
 
 #Johannes:
 #I recommend setting mag_converter_max_fov to 180, so that the sky gets not so
@@ -182,10 +181,10 @@ flag_atmosphere                     = true
 flag_landscape_sets_location        = false
 atmosphere_fade_duration            = 0.5
 # This is for people who require some minimum visibility for the landscapes
-minimal_brightness                  = 0.01
+minimal_brightness                  = 0.10
 flag_minimal_brightness             = false
 # This allows use of a minimum value even given in the respective landscape.ini
-flag_landscape_sets_minimal_brightness = false
+flag_landscape_sets_minimal_brightness = true
 flag_enable_illumination_layer      = true
 
 [viewing]

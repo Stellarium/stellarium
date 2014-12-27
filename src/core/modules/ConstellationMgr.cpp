@@ -34,6 +34,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "SolarSystem.hpp"
 
 #include <vector>
 #include <QDebug>
@@ -49,6 +50,7 @@ using namespace std;
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
+	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
 	  artFadeDuration(1.),
 	  artIntensity(0),
 	  artDisplayed(0),
@@ -58,7 +60,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
-	isolateSelected = false;
+	isolateSelected = false;	
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -91,8 +93,32 @@ void ConstellationMgr::init()
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
-	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
-			       conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
+	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
+	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
+
+	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
+	if (starloreDisplayStyle=="translated")
+	{
+		setConstellationDisplayStyle(constellationsTranslated);
+	}
+	else if (starloreDisplayStyle=="native")
+	{
+		setConstellationDisplayStyle(constellationsNative);
+	}
+	else if (starloreDisplayStyle=="abbreviated")
+	{
+		setConstellationDisplayStyle(constellationsAbbreviated);
+	}
+	else if (starloreDisplayStyle=="english")
+	{
+		setConstellationDisplayStyle(constellationsEnglish);
+	}
+	else
+	{
+		qDebug() << "Warning: viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
+		conf->setValue("viewing/constellation_name_style", "translated");
+		setConstellationDisplayStyle(constellationsTranslated);
+	}
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -131,7 +157,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
 	if (conArtFile.isEmpty())
 	{
-		qDebug() << "No constellationsart.fab file found for sky culture " << QDir::toNativeSeparators(skyCultureDir);
+		qDebug() << "No constellationsart.fab file found for sky culture dir" << QDir::toNativeSeparators(skyCultureDir);
 	}
 
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
@@ -157,12 +183,12 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	updateI18n();
 
 	// load constellation boundaries
-	// First try load constellation boundaries from sky culture
+	// First try loading constellation boundaries from sky culture. You may inhibit borders with an empty file.
 	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
 	bool existBoundaries = false;
 	if (fic.isEmpty())
 	{
-		qWarning() << "ERROR loading constellation boundaries file in sky culture: " << skyCultureDir;
+		qWarning() << "No separate constellation boundaries file in sky culture dir" << skyCultureDir << "- Using generic IAU boundaries.";
 		// OK, Second try load generic constellation boundaries
 		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
 		if (fic.isEmpty())
@@ -312,6 +338,29 @@ float ConstellationMgr::getFontSize() const
 	return asterFont.pixelSize();
 }
 
+void ConstellationMgr::setConstellationDisplayStyle(int style)
+{
+	constellationDisplayStyle=(ConstellationMgr::ConstellationDisplayStyle) style;
+	if (constellationDisplayStyle==constellationsTranslated)
+		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(true);
+	else
+		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(false);
+
+	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
+}
+
+QString ConstellationMgr::getConstellationDisplayStyleString()
+{
+	ConstellationDisplayStyle displayStyle = getConstellationDisplayStyle();
+	return (displayStyle == constellationsAbbreviated ? "abbreviated" : (displayStyle == constellationsNative ? "native" : "translated"));
+}
+
+ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
+{
+	return constellationDisplayStyle;
+}
+
+
 void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
 {
 	QFile in(fileName);
@@ -340,7 +389,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	asterisms.clear();
 	Constellation *cons = NULL;
 
-	// read the file, adding a record per non-comment line
+	// read the file of line patterns, adding a record per non-comment line
 	int currentLineNumber = 0;	// line in file
 	int readOk = 0;			// count of records processed OK
 	while (!in.atEnd())
@@ -363,7 +412,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 		else
 		{
-			qWarning() << "ERROR reading constellation rec at line " << currentLineNumber << "for culture" << cultureName;
+			qWarning() << "ERROR reading constellation lines record at line " << currentLineNumber << "for culture" << cultureName;
 			delete cons;
 		}
 	}
@@ -563,7 +612,7 @@ void ConstellationMgr::drawNames(StelPainter& sPainter) const
 	{
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->drawName(sPainter);
+			(*iter)->drawName(sPainter, constellationDisplayStyle);
 	}
 }
 
@@ -584,13 +633,19 @@ Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
 Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviation) const
 {
 	// search in uppercase only
-	QString tname = abbreviation.toUpper();
+	//QString tname = abbreviation.toUpper();
 
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		if ((*iter)->abbreviation == tname)
+		//if ((*iter)->abbreviation.toUpper() == tname)
+		if ((*iter)->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
+		{
+			//if ((*iter)->abbreviation != abbreviation)
+			//	qDebug() << "ConstellationMgr::findFromAbbreviation: not a perfect match, but sufficient:" << (*iter)->abbreviation << "vs." << abbreviation;
 			return (*iter);
+		}
+		//else qDebug() << "Comparison mismatch: " << abbreviation << "vs." << (*iter)->abbreviation;
 	}
 	return NULL;
 }
@@ -627,7 +682,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\n");
+	// abbreviation is allowed to start with a dot to mark as "hidden".
+	QRegExp recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\n");
 
 	// Some more variables to use in the parsing
 	Constellation *aster;
@@ -650,7 +706,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 		if (!recRx.exactMatch(record))
 		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile);
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile) << ":" << record;
 		}
 		else
 		{
@@ -662,6 +718,9 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 				aster->nativeName = recRx.capturedTexts().at(2);
 				aster->englishName = recRx.capturedTexts().at(3);
 				readOk++;
+				// Some skycultures already have empty nativeNames. Fill those.
+				if (aster->nativeName.isEmpty())
+					aster->nativeName=aster->englishName;
 			}
 			else
 			{
@@ -902,7 +961,7 @@ bool ConstellationMgr::getFlagArt(void) const
 	return artDisplayed;
 }
 
-void ConstellationMgr::setFlagLabels(bool displayed)
+void ConstellationMgr::setFlagLabels(const bool displayed)
 {
 	if (namesDisplayed != displayed)
 	{
@@ -955,7 +1014,18 @@ bool ConstellationMgr::getFlagIsolateSelected(void) const
 	return isolateSelected;
 }
 
-StelObject* ConstellationMgr::getSelected(void) const {
+void ConstellationMgr::setFlagConstellationPick(const bool mode)
+{
+	constellationPickEnabled = mode;
+}
+
+bool ConstellationMgr::getFlagConstellationPick(void) const
+{
+	return constellationPickEnabled;
+}
+
+StelObject* ConstellationMgr::getSelected(void) const
+{
 	return *selected.begin();  // TODO return all or just remove this method
 }
 
@@ -983,40 +1053,60 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 	{
 		selected.push_back(c);
 
-		// Propagate current settings to newly selected constellation
-		c->setFlagLines(getFlagLines());
-		c->setFlagLabels(getFlagLabels());
-		c->setFlagArt(getFlagArt());
-		c->setFlagBoundaries(getFlagBoundaries());
-
 		if (isolateSelected)
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+			if (!getFlagConstellationPick())
 			{
+				// Propagate current settings to newly selected constellation
+				c->setFlagLines(getFlagLines());
+				c->setFlagLabels(getFlagLabels());
+				c->setFlagArt(getFlagArt());
+				c->setFlagBoundaries(getFlagBoundaries());
 
-				bool match = 0;
-				vector < Constellation * >::const_iterator s_iter;
-				for (s_iter = selected.begin(); s_iter != selected.end(); ++s_iter)
+				vector < Constellation * >::const_iterator iter;
+				for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 				{
-					if( (*iter)==(*s_iter) )
+					bool match = false;
+					vector < Constellation * >::const_iterator s_iter;
+					for (s_iter = selected.begin(); s_iter != selected.end(); ++s_iter)
 					{
-						match=true; // this is a selected constellation
-						break;
+						if( (*iter)==(*s_iter) )
+						{
+							match=true; // this is a selected constellation
+							break;
+						}
+					}
+
+					if(!match)
+					{
+						// Not selected constellation
+						(*iter)->setFlagLines(false);
+						(*iter)->setFlagLabels(false);
+						(*iter)->setFlagArt(false);
+						(*iter)->setFlagBoundaries(false);
 					}
 				}
-
-				if(!match)
+			}
+			else
+			{
+				vector < Constellation * >::const_iterator iter;
+				for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 				{
-					// Not selected constellation
 					(*iter)->setFlagLines(false);
 					(*iter)->setFlagLabels(false);
 					(*iter)->setFlagArt(false);
 					(*iter)->setFlagBoundaries(false);
-					}
-					}
-			Constellation::singleSelected = true;  // For boundaries
+				}
+
+				// Propagate current settings to newly selected constellation
+				c->setFlagLines(getFlagLines());
+				c->setFlagLabels(getFlagLabels());
+				c->setFlagArt(getFlagArt());
+				c->setFlagBoundaries(getFlagBoundaries());
 			}
+
+			Constellation::singleSelected = true;  // For boundaries
+		}
 		else
 			Constellation::singleSelected = false; // For boundaries
 	}
@@ -1036,8 +1126,6 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 
 		// And remove all selections
 		selected.clear();
-
-
 	}
 }
 
@@ -1224,7 +1312,8 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 		find = false;
 		if (useStartOfWords)
 		{
-			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+			//if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())  // WHY SO LONG?
+			if (cn.startsWith(objPrefix, Qt::CaseInsensitive))
 				find = true;
 		}
 		else
@@ -1256,7 +1345,8 @@ QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int 
 		find = false;
 		if (useStartOfWords)
 		{
-			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+			//if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())  // WHY SO LONG?
+			if (cn.startsWith(objPrefix, Qt::CaseInsensitive))
 				find = true;
 		}
 		else

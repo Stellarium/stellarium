@@ -1,5 +1,11 @@
 
 ########### install files ###############
 
-INSTALL(FILES landscape.ini Zero-h1024.png Zero-h2048.png Zero-h512.png DESTINATION share/${PACKAGE}/landscapes/zero)
+# install landscape.ini
+INSTALL (FILES landscape.ini DESTINATION share/${PACKAGE}/landscapes/zero )
 
+# install textures and descriptions
+INSTALL (DIRECTORY ./ DESTINATION share/${PACKAGE}/landscapes/zero 
+	FILES_MATCHING PATTERN "*.txt" 
+	PATTERN "description.*.utf8" 
+	PATTERN "CMakeFiles" EXCLUDE )

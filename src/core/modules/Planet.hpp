@@ -147,8 +147,8 @@ public:
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
-	virtual QString getEnglishName(void) const {return englishName;}
-	virtual QString getNameI18n(void) const {return nameI18;}
+	virtual QString getEnglishName(void) const;
+	virtual QString getNameI18n(void) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
@@ -179,6 +179,8 @@ public:
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
 	PlanetType getPlanetType() const {return pType;}
 
+	void setNativeName(QString planet) { nativeName = planet; }
+
 	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
 	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
 	void setApparentMagnitudeAlgorithm(QString algorithm);
@@ -192,7 +194,8 @@ public:
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double dateJD);
-	virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
+	//virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
+	void computePosition(const double dateJD);// GZ: gets overridden in Comet!
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
@@ -237,14 +240,22 @@ public:
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
-	// update displayed elements. @param deltaTime: ms (?)
-	void update(int deltaTime);
+	// update displayed elements. @param deltaTime: ms (since last call)
+	virtual void update(int deltaTime);
 
 	void setFlagHints(bool b){hintFader = b;}
 	bool getFlagHints(void) const {return hintFader;}
 
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
+
+	bool flagNativeName;
+	void setFlagNativeName(bool b) { flagNativeName = b; }
+	bool getFlagNativeName(void) { return flagNativeName; }
+
+	bool flagTranslatedName;
+	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
+	bool getFlagTranslatedName(void) { return flagTranslatedName; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -291,7 +302,8 @@ protected:
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
-	QString texMapName;              // Texture file path	
+	QString nativeName;              // Can be used in a skyculture
+	QString texMapName;              // Texture file path
 	QString normalMapName;              // Texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
@@ -332,7 +344,7 @@ protected:
 	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex;
+	static StelTextureSP hintCircleTex;	
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	
@@ -378,7 +390,6 @@ protected:
 	
 	static void initShader();
 	static void deinitShader();
-
 };
 
 #endif // _PLANET_HPP_

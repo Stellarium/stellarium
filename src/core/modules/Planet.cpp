@@ -113,11 +113,14 @@ Planet::Planet(const QString& englishName,
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
+	nativeName = "";
 	if (englishName!="Pluto")
 	{
 		deltaJD = 0.001*StelCore::JD_SECOND;
 	}
 	flagLabels = true;
+	flagNativeName = true;
+	flagTranslatedName = true;
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -156,7 +159,30 @@ Planet::~Planet()
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	nameI18 = trans.qtranslate(englishName);
+	if (!nativeName.isEmpty() && getFlagNativeName())
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(nativeName);
+		else
+			nameI18 = nativeName;
+	}
+	else
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(englishName);
+		else
+			nameI18 = englishName;
+	}
+}
+
+QString Planet::getEnglishName() const
+{
+	return englishName;
+}
+
+QString Planet::getNameI18n() const
+{
+	return nameI18;
 }
 
 // Return the information string "ready to print" :)
@@ -167,7 +193,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
+		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -175,7 +201,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
@@ -249,10 +275,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
-			if (std::abs(siderealDay)>0)
+			if (qAbs(siderealDay)>0)
 			{
-				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";
-				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br>";
+				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br>";
+			}
+			else if (re.period==0.)
+			{
+				oss << q_("The period of rotation is chaotic") << "<br>";
 			}
 		}
 		if (englishName.compare("Sun")!=0)
@@ -276,7 +306,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 	QString str;
 	QTextStream oss(&str);
 	oss.setRealNumberPrecision(2);
-	oss << nameI18;
+	oss << getNameI18n();
 
 	if (sphereScale != 1.f)
 	{
@@ -580,7 +610,12 @@ double Planet::getSiderealTime(double jd) const
 	}
 
 	double t = jd - re.epoch;
-	double rotations = t / (double) re.period;
+	// oops... avoid division by zero (typical case for moons with chaotic period of rotation)
+	double rotations = 1.f; // NOTE: Maybe 1e-3 will be better?
+	if (re.period!=0.) // OK, it's not a moon with chaotic period of rotation :)
+	{
+		rotations = t / (double) re.period;
+	}
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
@@ -588,7 +623,7 @@ double Planet::getSiderealTime(double jd) const
 	if (englishName=="Jupiter")
 	{
 		// use semi-empirical coefficient for GRS drift
-		return remainder * 360. + re.offset - 0.2483 * std::abs(jd - 2456172);
+		return remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172);
 	}
 	else
 		return remainder * 360. + re.offset;
@@ -602,7 +637,7 @@ double Planet::getMeanSolarDay() const
 		return msd;
 
 	double sday = getSiderealDay();	
-	double coeff = std::abs(sday/getSiderealPeriod());
+	double coeff = qAbs(sday/getSiderealPeriod());
 	float sign = 1;
 	// planets with retrograde rotation
 	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
@@ -679,7 +714,7 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
 	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
-	// GZ: improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
+	// improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
 	if (pType == Planet::isAsteroid)
 			deltaJD=distance*StelCore::JD_SECOND;
 	return distance;
@@ -703,7 +738,7 @@ float Planet::getPhase(const Vec3d& obsPos) const
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
 	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
-	return 0.5f * std::abs(1.f + cos_chi);
+	return 0.5f * qAbs(1.f + cos_chi);
 }
 
 // Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
@@ -755,7 +790,15 @@ float Planet::getVMagnitude(const StelCore* core) const
 			if (d>=radius)
 			{
 				// The satellite is totally inside the inner shadow.
-				shadowFactor = 1e-9;
+				if (englishName=="Moon")
+				{
+					// Fit a more realistic magnitude for the Moon case.
+					// I used some empirical data for fitting. --AW
+					// TODO: This factor should be improved!
+					shadowFactor = 2.718e-5;
+				}
+				else
+					shadowFactor = 1e-9;
 			}
 			else if (d>-radius)
 			{
@@ -928,11 +971,14 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 {
 	if (hidden)
 		return;
-	// GZ: Try to improve speed for minor planets: test if visible at all.
+	// Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
-	// AW: Apply this rule to asteroids only
-	// Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
-	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
+	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
+	//      Maybe make another configurable flag for those interested?
+	// Problematic: Early-out here of course disables the wanted hint circles for dim asteroids.
+	// The line makes hints for asteroids 5 magnitudes below sky limiting magnitude visible.
+	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
+	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
 	{
 		return;
 	}
@@ -1122,51 +1168,53 @@ void Planet::initShader()
 		"        highp float sunRadius = sunInfo.w;\n"
 		"        highp float L = length(sunPosition - P);\n"
 		"        highp float R = asin(sunRadius / L);\n"
-		"        for (int i = 0; i < shadowCount; ++i)\n"
+		"        for (int i = 0; i < 4; ++i)\n"
 		"        {\n"
-		"            highp vec3 satellitePosition = shadowData[i].xyz;\n"
-		"            highp float satelliteRadius = shadowData[i].w;\n"
-		"            highp float l = length(satellitePosition - P);\n"
-		"            highp float r = asin(satelliteRadius / l);\n"
-		"            highp float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));\n"
+		"            if (shadowCount>i)\n"
+		"            {\n"
+		"                highp vec3 satellitePosition = shadowData[0].xyz;\n"
+		"                highp float satelliteRadius = shadowData[0].w;\n"
+		"                highp float l = length(satellitePosition - P);\n"
+		"                highp float r = asin(satelliteRadius / l);\n"
+		"                highp float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));\n"
 		"\n"
-		"            mediump float illumination = 1.0;\n"
-		"            if(d >= R + r)\n"
-		"            {\n"
-		"                // distance too far\n"
-		"                illumination = 1.0;\n"
-		"            }\n"
-		"            else if(r >= R + d)\n"
-		"            {\n"
-		"                // umbra\n"
+		"                mediump float illumination = 1.0;\n"
+		"                if(d >= R + r)\n"
+		"                {\n"
+		"                    // distance too far\n"
+		"                    illumination = 1.0;\n"
+		"                }\n"
+		"                else if(r >= R + d)\n"
+		"                {\n"
+		"                    // umbra\n"
 		"#ifdef IS_MOON\n"
-		"                illumination = d / (r - R) * 0.6;\n"
+		"                    illumination = d / (r - R) * 0.6;\n"
 		"#else\n"
-		"                illumination = 0.0;\n"
+		"                    illumination = 0.0;\n"
 		"#endif\n"
-		"            }\n"
-		"            else if(d + r <= R)\n"
-		"            {\n"
-		"                // penumbra completely inside\n"
-		"                illumination = 1.0 - r * r / (R * R);\n"
-		"            }\n"
-		"            else\n"
-		"            {\n"
-		"                // penumbra partially inside\n"
+		"                }\n"
+		"                else if(d + r <= R)\n"
+		"                {\n"
+		"                    // penumbra completely inside\n"
+		"                    illumination = 1.0 - r * r / (R * R);\n"
+		"                }\n"
+		"                else\n"
+		"                {\n"
+		"                    // penumbra partially inside\n"
 		"#ifdef IS_MOON\n"
-		"                illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
+		"                    illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
 		"#else\n"
-		"                mediump float x = (R * R + d * d - r * r) / (2.0 * d);\n"
-		"                mediump float alpha = acos(x / R);\n"
-		"                mediump float beta = acos((d - x) / r);\n"
-		"                mediump float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
-		"                mediump float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
-		"                mediump float AS = R * R * 2.0 * 1.57079633;\n"
-		"                illumination = 1.0 - (AR + Ar) / AS;\n"
+		"                    mediump float x = (R * R + d * d - r * r) / (2.0 * d);\n"
+		"                    mediump float alpha = acos(x / R);\n"
+		"                    mediump float beta = acos((d - x) / r);\n"
+		"                    mediump float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
+		"                    mediump float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
+		"                    mediump float AS = R * R * 2.0 * 1.57079633;\n"
+		"                    illumination = 1.0 - (AR + Ar) / AS;\n"
 		"#endif\n"
+		"                }\n"
+		"                final_illumination = min(illumination, final_illumination);\n"
 		"            }\n"
-		"\n"
-		"            final_illumination = min(illumination, final_illumination);\n"
 		"        }\n"
 		"    }\n"
 		"\n"
@@ -1269,6 +1317,10 @@ void Planet::deinitShader()
 {
 	delete planetShaderProgram;
 	planetShaderProgram = NULL;
+	delete ringPlanetShaderProgram;
+	ringPlanetShaderProgram = NULL;
+	delete moonShaderProgram;
+	moonShaderProgram = NULL;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
