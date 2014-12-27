@@ -46,10 +46,12 @@ QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::cubeShaderProgram=NULL;
 StelPainter::BasicShaderVars StelPainter::basicShaderVars;
 StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
 StelPainter::BasicShaderVars StelPainter::colorShaderVars;
 StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
+StelPainter::CubeShaderVars StelPainter::cubeShaderVars;
 
 StelPainter::GLState::GLState()
 {
@@ -109,6 +111,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	// Deactivate drawing in depth buffer by default
 	glDepthMask(GL_FALSE);
 	enableTexture2d(false);
+	enableCubeMap(false);
 	setProjector(proj);
 }
 
@@ -1717,6 +1720,11 @@ void StelPainter::enableTexture2d(bool b)
 	texture2dEnabled = b;
 }
 
+void StelPainter::enableCubeMap(bool b)
+{
+	cubeMapEnabled = b;
+}
+
 void StelPainter::initGLShaders()
 {
 	qWarning() << "Intializing basic GL shaders... ";
@@ -1860,6 +1868,43 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
+
+	// Cube-map sampling progam
+	QOpenGLShader vshaderCubemap(QOpenGLShader::Vertex);
+	const char *vshaderCubemapSrc =
+		"attribute highp vec3 vertex;\n"
+		"attribute highp vec3 originalPos;\n"
+		"uniform mediump mat4 projectionMatrix;\n"
+		"varying mediump vec3 cubec;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
+		"    cubec = normalize(originalPos.xyz);\n"
+		"}\n";
+	vshaderCubemap.compileSourceCode(vshaderCubemapSrc);
+	if (!vshaderCubemap.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshaderCubemap: " << vshaderCubemap.log(); }
+
+	QOpenGLShader fshaderCubemap(QOpenGLShader::Fragment);
+	const char *fshaderCubemapSrc =
+		"varying mediump vec3 cubec;\n"
+		"uniform mediump vec4 texColor;\n"
+		"uniform samplerCube cubetex;\n"
+		"void main(void)\n"
+		"{\n"
+		"    gl_FragColor = textureCube(cubetex, cubec)*texColor;\n"
+		"}\n";
+	fshaderCubemap.compileSourceCode(fshaderCubemapSrc);
+	if (!fshaderCubemap.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshaderCubemap: " << fshaderCubemap.log(); }
+
+	cubeShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	cubeShaderProgram->addShader(&vshaderCubemap);
+	cubeShaderProgram->addShader(&fshaderCubemap);
+	linkProg(cubeShaderProgram, "cubeShaderProgram");
+	cubeShaderVars.projectionMatrix = cubeShaderProgram->uniformLocation("projectionMatrix");
+	cubeShaderVars.vertex = cubeShaderProgram->attributeLocation("vertex");
+	cubeShaderVars.originalPos = cubeShaderProgram->attributeLocation("originalPos");
+	cubeShaderVars.texColor = cubeShaderProgram->uniformLocation("texColor");
+	cubeShaderVars.cubetex = cubeShaderProgram->uniformLocation("cubetex");
 }
 
 
@@ -1873,6 +1918,8 @@ void StelPainter::deinitGLShaders()
 	texturesShaderProgram = NULL;
 	delete texturesColorShaderProgram;
 	texturesColorShaderProgram = NULL;
+	delete cubeShaderProgram;
+	cubeShaderProgram = NULL;
 }
 
 
@@ -1921,12 +1968,26 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
-		pr = basicShaderProgram;
-		pr->bind();
-		pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
-		pr->enableAttributeArray(basicShaderVars.vertex);
-		pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
-		pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		if(!cubeMapEnabled)
+		{
+			pr = basicShaderProgram;
+			pr->bind();
+			pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+			pr->enableAttributeArray(basicShaderVars.vertex);
+			pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
+			pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		}
+		else
+		{
+			pr = cubeShaderProgram;
+			pr->bind();
+			pr->setAttributeArray(cubeShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+			pr->enableAttributeArray(cubeShaderVars.vertex);
+			pr->setAttributeArray(cubeShaderVars.originalPos, (const GLfloat*)vertexArray.pointer, vertexArray.size);
+			pr->enableAttributeArray(cubeShaderVars.originalPos);
+			pr->setUniformValue(cubeShaderVars.projectionMatrix, qMat);
+			pr->setUniformValue(cubeShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
+		}
 	}
 	else if (texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
@@ -1995,6 +2056,10 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->disableAttributeArray(colorShaderVars.vertex);
 		pr->disableAttributeArray(colorShaderVars.color);
 	}
+	else if (pr == cubeShaderProgram)
+	{
+		pr->disableAttributeArray(cubeShaderVars.vertex);
+	}
 	if (pr)
 		pr->release();
 }
@@ -2009,8 +2074,7 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	}
 
 	Q_ASSERT(array.size == 3);
-	Q_ASSERT(array.type == GL_DOUBLE);
-	Vec3d* vecArray = (Vec3d*)array.pointer;
+	Q_ASSERT(array.type == GL_DOUBLE || array.type == GL_FLOAT);
 
 	// We have two different cases :
 	// 1) We are not using an indice array.  In that case the size of the array is known
@@ -2018,7 +2082,10 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	if (!indices)
 	{
 		polygonVertexArray.resize(offset + count);
-		prj->project(count, vecArray + offset, polygonVertexArray.data() + offset);
+		if(array.type == GL_DOUBLE)
+			prj->project(count, ((Vec3d*)array.pointer) + offset, polygonVertexArray.data() + offset);
+		else
+			prj->project(count, ((Vec3f*)array.pointer) + offset, polygonVertexArray.data() + offset);
 	} else
 	{
 		// we need to find the max value of the indices !
@@ -2028,7 +2095,10 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 			max = std::max(max, indices[i]);
 		}
 		polygonVertexArray.resize(max+1);
-		prj->project(max + 1, vecArray + offset, polygonVertexArray.data() + offset);
+		if(array.type == GL_DOUBLE)
+			prj->project(max + 1, ((Vec3d*)array.pointer) + offset, polygonVertexArray.data() + offset);
+		else
+			prj->project(max + 1, ((Vec3f*)array.pointer) + offset, polygonVertexArray.data() + offset);
 	}
 
 	ArrayDesc ret;
