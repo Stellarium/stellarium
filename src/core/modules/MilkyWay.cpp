@@ -128,7 +128,7 @@ void MilkyWay::draw(StelCore* core)
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
 		{
 			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
-			Q_ASSERT(vertAltAz.lengthSquared()-1.0 < 0.001f);
+			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);

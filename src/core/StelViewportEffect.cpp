@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "config.h"
 #include "StelViewportEffect.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -25,6 +24,7 @@
 #include "SphericMirrorCalculator.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <QOpenGLFramebufferObject>
 #include <QSettings>
@@ -117,9 +117,9 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 			texture_triangle_base_length = 256.f;
 		else if (texture_triangle_base_length < 2.f)
 			texture_triangle_base_length = 2.f;
-		max_x = (int)trunc(0.5 + screen_w/texture_triangle_base_length);
+        max_x = (int)StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length);
 		step_x = screen_w / (double)(max_x-0.5);
-		max_y = (int)trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
+        max_y = (int)StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
 		step_y = screen_h/ (double)max_y;
 
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
