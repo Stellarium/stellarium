@@ -352,7 +352,7 @@ p, li { white-space: pre-wrap; }
               <string>Quality settings</string>
              </property>
              <layout class="QGridLayout" name="gridLayout">
-              <item row="5" column="0" colspan="2">
+              <item row="6" column="0" colspan="2">
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <item>
                  <widget class="QLabel" name="label">
@@ -452,6 +452,16 @@ p, li { white-space: pre-wrap; }
                 </property>
                 <property name="tristate">
                  <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QCheckBox" name="checkBoxEnableGeometryShader">
+                <property name="toolTip">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This enables the use of hardware-based Geometry shaders to accelerate the cubemap creation (used when any projection other than &amp;quot;Perspective&amp;quot; is used). May be faster on newer hardware.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="text">
+                 <string>Use Geometry Shader</string>
                 </property>
                </widget>
               </item>

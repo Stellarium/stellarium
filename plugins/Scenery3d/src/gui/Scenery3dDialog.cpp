@@ -45,6 +45,8 @@ void Scenery3dDialog::createDialogContent()
 		SLOT(setEnableShadows(bool)));
 	connect(ui->checkBoxEnableBump, SIGNAL(clicked(bool)), mgr,
 		SLOT(setEnableBumps(bool)));
+	connect(ui->checkBoxEnableGeometryShader, SIGNAL(clicked(bool)), mgr,
+		SLOT(setEnableGeometryShader(bool)));
 
 	//connectSlotsByName does not work in our case
 	connect(ui->comboBoxShadowFiltering, SIGNAL(currentIndexChanged(int)),this,
@@ -56,6 +58,8 @@ void Scenery3dDialog::createDialogContent()
 	connect(mgr, SIGNAL(enableBumpsChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, SIGNAL(enableShadowsFilterChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, SIGNAL(enableShadowsFilterHQChanged(bool)), SLOT(updateFromManager()));
+	connect(mgr, SIGNAL(enableGeometryShaderChanged(bool)),SLOT(updateFromManager()));
+	connect(mgr, SIGNAL(isGeometryShaderSupportedChanged(bool)), SLOT(updateFromManager()));
 
     // Fill the scenery list
     QListWidget* l = ui->scenery3dListWidget;
@@ -118,4 +122,7 @@ void Scenery3dDialog::updateFromManager()
 		ui->comboBoxShadowFiltering->setCurrentIndex(1);
 	else
 		ui->comboBoxShadowFiltering->setCurrentIndex(0);
+
+	ui->checkBoxEnableGeometryShader->setChecked(mgr->getEnableGeometryShader());
+	ui->checkBoxEnableGeometryShader->setEnabled(mgr->getIsGeometryShaderSupported());
 }
