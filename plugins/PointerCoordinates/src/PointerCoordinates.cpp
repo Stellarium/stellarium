@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "SkyGui.hpp"
+#include "StelMainView.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -116,7 +117,7 @@ void PointerCoordinates::draw(StelCore *core)
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
-	QPoint p = QCursor::pos(); // get screen coordinates of mouse cursor
+	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 	Vec3d mousePosition;
 	float wh = prj->getViewportWidth()/2; // get half of width of the screen
 	float hh = prj->getViewportHeight()/2; // get half of height of the screen

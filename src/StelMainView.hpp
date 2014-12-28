@@ -76,6 +76,8 @@ public:
 	//! Return the parent gui widget, this should be used as parent to all
 	//! the StelDialog instances.
 	QGraphicsWidget* getGuiWidget() const {return guiWidget;}
+	//! Return mouse position coordinates
+	QPoint getMousePos();
 public slots:
 
 	//!	Set whether fullscreen is activated or not
