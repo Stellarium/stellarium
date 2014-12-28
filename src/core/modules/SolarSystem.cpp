@@ -67,6 +67,9 @@ SolarSystem::SolarSystem()
 	, flagLightTravelTime(false)
 	, flagShow(false)
 	, flagMarker(false)
+	, flagNativeNames(false)
+	, flagTranslatedNames(false)
+	, flagIsolatedTrails(false)
 	, allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
@@ -140,6 +143,8 @@ void SolarSystem::init()
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
 	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
+	// Is enabled the showing of isolated trails for selected objects only?
+	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", false).toBool());
 
 	recreateTrails();
 
@@ -176,9 +181,18 @@ void SolarSystem::recreateTrails()
 	if (allTrails!=NULL)
 		delete allTrails;
 	allTrails = new TrailGroup(365.f);
-	foreach (const PlanetP& p, getSun()->satellites)
+
+	PlanetP p = getSelected();
+	if (p!=NULL && getFlagIsolatedTrails())
 	{
 		allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
+	}
+	else
+	{
+		foreach (const PlanetP& p, getSun()->satellites)
+		{
+			allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
+		}
 	}
 }
 
@@ -1267,6 +1281,8 @@ QString SolarSystem::getPlanetHashString(void)
 void SolarSystem::setFlagTrails(bool b)
 {
 	trailFader = b;
+	if (getFlagIsolatedTrails())
+		recreateTrails();
 	if (b)
 		allTrails->reset();
 }
@@ -1482,7 +1498,11 @@ void SolarSystem::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Planet");
 	if (!newSelected.empty())
+	{
 		setSelected(qSharedPointerCast<Planet>(newSelected[0]));
+		if (getFlagIsolatedTrails())
+			recreateTrails();
+	}
 }
 
 // Activate/Deactivate planets display
@@ -1518,6 +1538,13 @@ void SolarSystem::setFlagTranslatedNames(bool b)
 }
 
 bool SolarSystem::getFlagTranslatedNames() const {return flagTranslatedNames; }
+
+void SolarSystem::setFlagIsolatedTrails(bool b)
+{
+	flagIsolatedTrails = b;
+}
+
+bool SolarSystem::getFlagIsolatedTrails() const { return flagIsolatedTrails; }
 
 // Set/Get planets names color
 void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
