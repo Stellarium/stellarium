@@ -12,6 +12,7 @@ SET(Scenery3d_SRCS
     AABB.cpp
     Frustum.hpp
     Frustum.cpp
+    GLFuncs.hpp
     Line.hpp
     Line.cpp
     Plane.hpp
