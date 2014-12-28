@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-23 18:34+0600\n"
-"PO-Revision-Date: 2014-12-01 21:51+0000\n"
-"Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
+"PO-Revision-Date: 2014-12-27 20:04+0000\n"
+"Last-Translator: Joan Salvat <jsalvat@hotmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-24 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-12-28 05:37+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -2066,7 +2066,7 @@ msgstr ""
 
 #: src/StelMainView.cpp:382
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "No es poden obtenir els recursos OpenGL necessaris"
 
 #: src/StelMainView.cpp:441
 msgid "Save screenshot"
@@ -2097,6 +2097,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"El vostre subsistema DirectX/OpenGL ES té problemes. Vegeu el registre per "
+"obtenir-ne els detalls.\n"
+"Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
+"degradat igualment?"
 
 #: src/StelMainView.cpp:629
 msgid ""
@@ -2104,6 +2108,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"El vostre subsistema OpenGL/Mesa té problemes. Vegeu el registre per obtenir-"
+"ne els detalls.\n"
+"Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
+"degradat igualment?"
 
 #: src/StelMainView.cpp:684
 msgid ""
@@ -2111,6 +2119,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"El vostre subsistema OpenGL té problemes. Vegeu el registre per obtenir-ne "
+"els detalls.\n"
+"Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
+"degradat igualment?"
 
 #: src/StelMainView.cpp:721
 msgid ""
@@ -2118,6 +2130,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"El vostre subsistema OpenGL ES té problemes. Vegeu el registre per obtenir-"
+"ne els detalls.\n"
+"Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
+"degradat igualment?"
 
 #: src/StelMainView.cpp:830
 #, qt-format
@@ -2312,7 +2328,7 @@ msgstr "Sami"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:108
 msgid "Siberian"
-msgstr ""
+msgstr "Siberià"
 
 #: src/translations.h:109
 msgid "Tupi-Guarani"
@@ -3723,15 +3739,15 @@ msgstr "Copia la &ubicació de l'en&llaç"
 
 #: src/translations.h:490
 msgid "Abort"
-msgstr ""
+msgstr "Interrompre"
 
 #: src/translations.h:491
 msgid "Ignore"
-msgstr ""
+msgstr "Ignorar"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "Data i hora al calendari Gregorià"
 
 #: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
@@ -4287,23 +4303,27 @@ msgstr "Fes servir aquest ﻿paisatge per omissió"
 #: src/ui_viewDialog.h:1336
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"Utilitzeu la mínima brillantor per deixar el paisatge visible també en la "
+"foscor"
 
 #: src/ui_viewDialog.h:1338
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Mínima brillantor"
 
 #: src/ui_viewDialog.h:1340
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
+"Rang de valors 0..1 (el paisatge és negre a la nit - el paisatge és "
+"totalment lluminós)"
 
 #: src/ui_viewDialog.h:1343
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "Utilitzeu la mínima brillantor que pugui ser fixada en landscape.ini"
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
-msgstr ""
+msgstr "del paisatge, si s'especifica"
 
 #: src/ui_viewDialog.h:1346
 msgid "Add/remove landscapes..."
@@ -4315,15 +4335,15 @@ msgstr "Fes servir aquesta cultura del cel per omissió"
 
 #: src/ui_viewDialog.h:1349
 msgid "Show names"
-msgstr ""
+msgstr "Mostra els noms"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "Seleccioneu si voleu els noms abreujats, originals o traduïts"
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "Utilitzeu noms nadius de planetes de la cultura actual"
 
 #: src/ui_viewDialog.h:1356
 msgid "Visible"
@@ -4335,11 +4355,11 @@ msgstr "Configuració"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "Paràmetres d'idioma"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "Llenguatge de programació"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
@@ -4703,11 +4723,11 @@ msgstr "Auto-activat per l'atmosfera"
 
 #: src/ui_configurationDialog.h:1188
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "Utilitzeu graus decimals per les coordenades"
 
 #: src/ui_configurationDialog.h:1190
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "Utilitzeu graus decimals"
 
 #: src/ui_configurationDialog.h:1191
 msgid "Screenshots"
@@ -4990,6 +5010,10 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"Els punts inicial i final en el mode horitzontal es poden vincular amb el "
+"cel giratori, que pot ser útil per mantenir les relacions entre paisatge i "
+"alguns objectes celestes o (ambdos vinculats) a l'hora d'aplicar la tècnica "
+"Dobsoniana de salt d'estels."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -5096,35 +5120,35 @@ msgstr "Configuració del connector de mesura d'angles"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Mostra en coordenades equatorials"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Visualitza amb angle de posició"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Visualitza en coordenades horitzontals"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(p. ex. per salt d'estels Dobsonià)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Visualitza amb angle de posició "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Adjuntar punt d'inici a cel giratori"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Adjuntar punt final a cel giratori"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -7251,7 +7275,7 @@ msgstr "Consells de nebulosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Línia de l'equador galàctic"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -8158,17 +8182,17 @@ msgstr "Finestra de configuració per exoplanetes"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "Calent"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "Temperat"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "Fred"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
@@ -8193,12 +8217,12 @@ msgstr ""
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:863
 msgid "Jovian"
-msgstr ""
+msgstr "Jovià"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:865
 msgid "Neptunian"
-msgstr ""
+msgstr "Neptunià"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
@@ -8271,7 +8295,7 @@ msgstr "Any del descobriment"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Planetary class"
-msgstr ""
+msgstr "Classe planetària"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
@@ -8285,7 +8309,7 @@ msgstr "Temp. mitjana de la superfície"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Temp. d'equilibri"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
@@ -8348,6 +8372,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Aquest connector pot mostrar possibles exoplanetes habitables (marcadors de "
+"color taronja) i una mica d'informació sobre aquests planetes."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
@@ -8359,6 +8385,9 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Classificació de planeta de tipus espectral estrella amfitriona (F, G, K, "
+"M), zona habitable (calent, fred) i grandària (mini terran, sub terran, "
+"terran, superterran, jovià, neptuniá) (Terra = Terran G-calenta )."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Habitable Class"
@@ -8397,7 +8426,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Temperatura d'equilibri"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid ""
@@ -8406,6 +8435,11 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"La temperatura d'equilibri planetari és una temperatura teòrica en (°C) a la "
+"que el planeta estaria en tant es considera simplement com si es tractés "
+"d'un cos negre que s'escalfa només per la seva estrella mare (suposant un "
+"albedo 0.3 de bons). Com a exemple, la temperatura d'equilibri planetari de "
+"la Terra és -18.15 ° C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Earth Similarity Index (ESI)"
@@ -8423,7 +8457,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "Informació addicional"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
@@ -8431,15 +8465,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Temperatura d'equilibri planetari"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
-msgstr ""
+msgstr "Habitabilitat planetària"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Índex de Similitud amb la Terra"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -9103,6 +9137,12 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"Aquest connector marca 58 estrelles de navegació - Polaris i les 57 "
+"\"estrelles seleccionades\" que s'enumeren a <em>The Nautical Almanac</em>, "
+"publicat conjuntament per l'Oficina de l'Almanac Nàutic de Sa Majestat i "
+"l'Observatori Naval dels Estats Units des de 1958; en conseqüència, aquestes "
+"estrelles també s'utilitzen en ajudes a la navegació, com ara la 2102D Star "
+"Finder and Identifier."
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
@@ -9184,7 +9224,7 @@ msgstr "Mida de la font:"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Pluja de meteors"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
@@ -9192,10 +9232,12 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Aquest plugin mostra pluges de meteors i un marcador per a cada element "
+"radiant actiu i inactiu, que mostra informació real sobre la seva activitat."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Mostra pluja de meteors"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
@@ -9203,12 +9245,14 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Finestra de configuració de pluja de meteors"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"L'antic arxiu showers.json ja no és compatible - s'utilitzarà el fitxer per "
+"defecte"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
@@ -9223,162 +9267,162 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
 msgid "α-Centaurids"
-msgstr ""
+msgstr "Alfa centàurids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
 msgid "γ-Normids"
-msgstr ""
+msgstr "Gamma Nòrmids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
 msgid "η-Aquariids"
-msgstr ""
+msgstr "Eta Aquàrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
 msgid "June Bootids"
-msgstr ""
+msgstr "Boòtides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Píscides Australs"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Delta Aquàrides Australs"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
 msgid "α-Capricornids"
-msgstr ""
+msgstr "Alfa Capricòrnides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
 msgid "α-Aurigids"
-msgstr ""
+msgstr "Alfa Aurígides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "Epsilon Perseides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
 msgid "Draconids"
-msgstr ""
+msgstr "Dracònides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
 msgid "Leonids"
-msgstr ""
+msgstr "Leònides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
 msgid "Phoenicids"
-msgstr ""
+msgstr "Fenícides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Púppides-Vèlides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
 msgid "Ursids"
-msgstr ""
+msgstr "Úrsides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
 msgid "Perseids"
-msgstr ""
+msgstr "Perseides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
 msgid "δ-Leonids"
-msgstr ""
+msgstr "Delta leònides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
 msgid "π-Puppids"
-msgstr ""
+msgstr "Pi Púppides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
 msgid "June Lyrids"
-msgstr ""
+msgstr "Lírides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "Kappa Cígnides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "Epsilon Lírides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "Delta Aurígides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
 msgid "ε-Geminids"
-msgstr ""
+msgstr "Epsilon Gemínides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Tàurides Australs"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Tàurides Boreals"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monoceròtides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "Alfa Monoceròtides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "Sigma Hídrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
 msgid "Geminids"
-msgstr ""
+msgstr "Gemínides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Minòrides del Lleó"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Minòrides del Lleó de Desembre"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Coma Berenícides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
 msgid "Orionids"
-msgstr ""
+msgstr "Oriònides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
@@ -9388,7 +9432,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
 msgid "η-Lyrids"
-msgstr ""
+msgstr "Eta Lírides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
@@ -9413,7 +9457,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "Theta Centàurides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
@@ -9518,123 +9562,123 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Cometa 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Cometa 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Cometa 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Cometa 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Cometa 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Cometa Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Cometa 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Cometa 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Cometa 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Cometa 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Cometa 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Cometa 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "Cometa C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Cometa C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Cometa Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Planeta menor 2003 EH1 i Cometa C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Planeta menor (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Planeta menor 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1405
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Cometa 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1407
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Planeta menor 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1409
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "Planeta menor (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:325
 msgid "generic data"
-msgstr ""
+msgstr "dades genèriques"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:327
 msgid "real data"
-msgstr ""
+msgstr "dades reals"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
-msgstr ""
+msgstr "pluja de meteorits"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Deriva radiant (per dia)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
@@ -9657,7 +9701,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
-msgstr ""
+msgstr "Activitat"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
@@ -9666,7 +9710,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:392
 msgid "Solar longitude is"
-msgstr ""
+msgstr "La longitud solar és"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
@@ -9690,31 +9734,31 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:198
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "L'interval de temps ha de ser inferior a un any!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:218
 msgid "Variable"
-msgstr ""
+msgstr "Variable"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:221
 msgid "Real"
-msgstr ""
+msgstr "Real"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:221
 msgid "Generic"
-msgstr ""
+msgstr "Genèric"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Connector de pluja de meteorits"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
 msgid "Terms"
-msgstr ""
+msgstr "Termes"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
 msgid "Meteor shower"
-msgstr ""
+msgstr "pluja de meteorits"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 msgid ""
@@ -9727,10 +9771,19 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Una pluja de meteors és un esdeveniment celestial en què s'observen un "
+"nombre de meteors irradiar o originar-se d'un punt del cel nocturn. Aquests "
+"meteors són causats per corrents de deixalles còsmiques anomenades "
+"meteoroides que entren a l'atmosfera terrestre a velocitats extremadament "
+"altes en trajectòries paral·leles. La majoria dels meteors són més petits "
+"que un gra de sorra, de manera que gairebé tots ells es desintegren i mai "
+"arriben a colpejar la superfície de la Terra. Pluges intenses o inusuals de "
+"meteors són conegudes com esclats de meteors i tempestes de meteors, que "
+"poden produir més de 1.000 meteors per hora."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
 msgid "Radiant"
-msgstr ""
+msgstr "Radiant"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 msgid ""
@@ -9782,16 +9835,18 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 msgid "Notes"
-msgstr ""
+msgstr "Anotacions"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"Aquest connector va ser creat com a projecte de l'ESA Summer of Code in "
+"Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
 msgid "Info"
-msgstr ""
+msgstr "Informació"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid "Info about meteor showers you can get here:"
