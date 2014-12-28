@@ -94,6 +94,9 @@ public:
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
+    bool getGeometryShaderCubemapEnabled() { return useGSCubemapping; }
+    void setGeometryShaderCubemapEnabled(bool val) { useGSCubemapping = val; reinitCubemapping = true; }
+    bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
 
     uint getCubemapSize() const { return cubemapSize; }
     void setCubemapSize(uint size) { cubemapSize = size; }
@@ -122,6 +125,9 @@ private:
     bool lightCamEnabled;       // switchable value: switches camera to light camera
     bool frustEnabled;
     bool venusOn;
+    bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
+    bool useGSCubemapping;
+    bool reinitCubemapping;
 
     unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
     unsigned int shadowmapSize;
@@ -144,6 +150,7 @@ private:
 
     //QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     GLuint cubeMapTex; //GL_TEXTURE_CUBE_MAP
+    GLuint cubeMapDepth;
     GLuint cubeRB; //renderbuffer for depth
     GLuint cubeFBO; //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBO ourselves
     QVector<Vec3f> cubePlaneFront, cubeVertices;
@@ -207,9 +214,13 @@ private:
     QFont debugTextFont;
 
     // --- initialization
-    ///! Re-initializes shadowmapping related objects
+    //! Initializes cubemapping to the currently set parameters (6tex/cubemap/GS approaches)
+    void initCubemapping();
+    //! Cleans up cubemapping related objects
+    void deleteCubemapping();
+    //! Re-initializes shadowmapping related objects
     bool initShadowmapping();
-    ///! Cleans up shadowmapping related objects
+    //! Cleans up shadowmapping related objects
     void deleteShadowmapping();
 
     // --- drawing methods ---

@@ -56,6 +56,8 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
 	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
+	Q_PROPERTY(bool enableGeometryShader READ getEnableGeometryShader WRITE setEnableGeometryShader NOTIFY enableGeometryShaderChanged)
+	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
 
 public:
     Scenery3dMgr();
@@ -80,6 +82,8 @@ signals:
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
     void enableTorchLightChanged(const bool val);
+    void enableGeometryShaderChanged(const bool val);
+    void isGeometryShaderSupportedChanged(const bool val);
 
 public slots:
     //! Clears the shader cache, forcing a reload of shaders on use
@@ -118,6 +122,11 @@ public slots:
     //! Set to true to add an additional light source centered at the current position, useful in night scenes.
     void setEnableTorchLight(const bool enableTorchLight);
     bool getEnableTorchLight() const;
+    //! Set to true to enable geometry shader processing for cubemap creation
+    void setEnableGeometryShader(const bool enableGeometryShader);
+    bool getEnableGeometryShader() const;
+
+    bool getIsGeometryShaderSupported() const;
 
     QString getCurrentScenery3dID() const;
     bool setCurrentScenery3dID(const QString& id);

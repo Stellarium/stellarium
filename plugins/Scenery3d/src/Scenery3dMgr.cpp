@@ -157,6 +157,8 @@ void Scenery3dMgr::init()
 	scenery3d->init();
 	qWarning() << "init scenery3d object...done\n";
 
+	emit isGeometryShaderSupportedChanged(getIsGeometryShaderSupported());
+
 	// Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
 	try
 	{
@@ -583,6 +585,31 @@ void Scenery3dMgr::setEnableTorchLight(const bool enableTorchLight)
 		scenery3d->setTorchEnabled(enableTorchLight);
 		emit enableTorchLightChanged(enableTorchLight);
 	}
+}
+
+bool Scenery3dMgr::getEnableGeometryShader() const
+{
+	return scenery3d->getGeometryShaderCubemapEnabled();
+}
+
+void Scenery3dMgr::setEnableGeometryShader(const bool enableGeometryShader)
+{
+	if(enableGeometryShader != getEnableGeometryShader())
+	{
+		bool val = enableGeometryShader;
+		if( ! scenery3d->isGeometryShaderCubemapSupported())
+		{
+			val = false;
+		}
+		scenery3d->setGeometryShaderCubemapEnabled(val);
+		showMessage(QString(N_("Geometry shader support: %1")).arg(val?"enabled":"disabled"));
+		emit enableGeometryShaderChanged(val);
+	}
+}
+
+bool Scenery3dMgr::getIsGeometryShaderSupported() const
+{
+	return scenery3d->isGeometryShaderCubemapSupported();
 }
 
 void Scenery3dMgr::showMessage(const QString& message)
