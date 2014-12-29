@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-23 18:34+0600\n"
-"PO-Revision-Date: 2014-12-27 20:04+0000\n"
+"PO-Revision-Date: 2014-12-28 18:35+0000\n"
 "Last-Translator: Joan Salvat <jsalvat@hotmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-28 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-12-29 05:45+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -1130,7 +1130,7 @@ msgstr ""
 #: src/core/StelObject.cpp:115
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "en data"
 
 #: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
 #: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
@@ -2259,7 +2259,7 @@ msgstr "Àrab"
 
 #: src/translations.h:90
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Cases de la Lluna a la cultura Àrab"
 
 #: src/translations.h:91
 msgid "Aztec"
@@ -2287,7 +2287,7 @@ msgstr "Vèdica Índia"
 
 #: src/translations.h:97
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Cases de la Lluna a la cultura Japonesa"
 
 #: src/translations.h:98
 msgid "Korean"
@@ -4363,7 +4363,7 @@ msgstr "Llenguatge de programació"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "Idioma de la Cultura del Cel"
 
 #: src/ui_configurationDialog.h:1041
 msgid "Check updates"
@@ -4908,7 +4908,7 @@ msgstr "desa l'script a un fitxer"
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "esborra"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"
@@ -8377,7 +8377,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Classe Planetària"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8461,7 +8461,7 @@ msgstr "Informació addicional"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Zona habitable circumestelar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
@@ -8786,12 +8786,12 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Heliacal rise/set. "
-msgstr ""
+msgstr "Sense ortus/ocàs helíac. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No Acronycal rise/set. "
-msgstr ""
+msgstr "Sense ortus/ocàs acrònic "
 
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
@@ -8919,7 +8919,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "Ortus/ocàs acrònic/còsmic/helíac"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -8941,6 +8941,23 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"Els dies de ortus/ocàs còsmic d'un objecte s'estimen com els dies en què "
+"l'objecte surt (o es pon), juntament amb la sortida/posta del sol. Les dates "
+"exactes d'aquestes efemèrides depenen de la ubicació de l'observador. Per "
+"contra, ortus/ocàs acrònic ocorre quan la sortida de l'estrella (o posta) "
+"coincideix amb la posta (sortida) del Sol (és a dir, oposat al Sol). En el "
+"primer cas, és obvi que la font és dificilment observable (o no observable "
+"en absolut) en les dates entre l'ortus còsmic i l'ocàs còsmic. D'altra "
+"banda, les dates al voltant de l'ortus/ocàs acrònic són aquelles en què "
+"l'altitud de l'objecte celeste sol ser alta quan el Sol està molt per sota "
+"de l'horitzó (d'aquí que l'objecte pot ser ben observat). La data de l'ortus "
+"helíac és el primer dia de l'any, quan una estrella es fa visible. Això "
+"passa quan l'estrella és a prop de l'horitzó oriental més o menys abans del "
+"final de la nit astronòmica (és a dir, en el crepuscle astronòmic). A les "
+"nits següents, l'estrella serà visibile durant períodes més llargs de temps, "
+"fins que arriba el seu ocàs helíac (és a dir, l'última nit de l'any quan "
+"l'estrella és encara visible). En l'ortus helíac, l'estrella surt més o "
+"menys després del començament de la nit astronòmica."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -9064,7 +9081,7 @@ msgstr "Condicions d'observació"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "Opcions de visualització"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -9072,7 +9089,7 @@ msgstr "Efemèrides d'avui (temps de sortida, posta i trànsit)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "Dates d'ortus/ocàs acrònic/còsmic/helíac"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
@@ -9241,7 +9258,7 @@ msgstr "Mostra pluja de meteors"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
-msgstr ""
+msgstr "Etiquetes del radiants"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
@@ -9257,12 +9274,12 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
 msgid "Quadrantids"
-msgstr ""
+msgstr "Quadràntides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
 msgid "Lyrids"
-msgstr ""
+msgstr "Lírides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
@@ -9427,7 +9444,7 @@ msgstr "Oriònides"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromèdides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
@@ -9697,7 +9714,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
-msgstr ""
+msgstr "Activa"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
@@ -9714,23 +9731,23 @@ msgstr "La longitud solar és"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
-msgstr ""
+msgstr "variable"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
 msgid "ZHR"
-msgstr ""
+msgstr "THZ"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:182
 msgid "Data Type"
-msgstr ""
+msgstr "Tipus de dades"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Peak"
-msgstr ""
+msgstr "Pic"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:194
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Data d'inici més gran que la data final!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:198
 msgid "Time interval must be less than one year!"
@@ -9792,6 +9809,10 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"El radiant o el radiant aparent d'una pluja de meteorits és el punt en el "
+"cel, d'on (per a un observador planetari) els meteors semblen originar-se. "
+"Les Perseides, per exemple, són meteors que semblen provenir d'un punt dins "
+"de la constel·lació de Perseu."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
 msgid ""
@@ -9800,6 +9821,11 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Un observador pot veure un meteor en qualsevol lloc en el cel, però al tirar "
+"enrrera en la direcció del seu moviment, s'apuntarà a la font radiant. Un "
+"meteorit, la direcció del qual no ve de la font radiant coneguda per una "
+"pluja en concret, es coneix com a meteor esporàdic i no es considera part de "
+"la pluja."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid ""
@@ -9807,10 +9833,13 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Moltes pluges tenen un punt radiant que canvia de posició durant el seu "
+"l'interval. Per exemple, el punt radiant per a les Delta Aurígides es desvia "
+"en més d'un grau per nit."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Taxa Horària Zenital (THZ)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
 msgid ""
@@ -9820,10 +9849,15 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"En astronomia, la Taxa Horària Zenital (THZ) d'una pluja de meteorits és el "
+"nombre de meteors que un sol observador podria veure en una hora sota un cel "
+"clar i fosc (limitant la magnitud aparent a 6,5) si el punt radiant de la "
+"pluja fos al zenit. La taxa efectiva que es pot veure és gairebé sempre "
+"menor i disminueix com més a prop és el punt radiant de l'horitzó."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
 msgid "Population index"
-msgstr ""
+msgstr "Índex de població"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 msgid ""
@@ -9832,6 +9866,11 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"L'índex poblacional indica la distribució de magnitud dels meteors en pluges "
+"de meteorits. Els valors per sota de 2,5 corresponen a distribucions on els "
+"meteors brillants són més freqüents del normal, mentre que els valors per "
+"sobre de 3,0 signifiquen que la proporció de meteors dèbils és més gran del "
+"que és habitual."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 msgid "Notes"
@@ -9850,7 +9889,7 @@ msgstr "Informació"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "Podeu obtenir aquí informació sobre les pluges de meteors:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
@@ -9866,82 +9905,82 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:357
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "S'actualitzen les Pluges de Meteors"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Configuració de Pluges de Meteors"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Configuració del connector de Pluges de Meteors"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Actualitzar les dades des d'Internet"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Pluges de Meteors"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "Mostra el botó de Pluges de Meteors a la barra d'eines"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Activeu la visualització de les Pluges de Meteors en l'arrencada"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Color del marcador dels radiants"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Radiant Actiu - Dades Genèriques"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Canvia el color"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Radiant Inactiu"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Radiant Actiu - Dades Reals"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "Radiants de les pluges de meteors"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "Mostra les etiquetes dels radiants"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Mostra només els radiants actius"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Mida de la font de les etiquetes (en píxels)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "Radiants"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "Cercar"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "Des de"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
@@ -9950,15 +9989,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "Per a:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Resultats"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "Cerca esdeveniments"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
@@ -9966,15 +10005,15 @@ msgstr ""
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Coordenades del Punter"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Aquest connector mostra les coordenades del punter del ratolí."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Mostra les coordenades del punter del ratolí"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
 msgctxt "abbreviated in the plugin"
@@ -9984,12 +10023,12 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "AR/Dec"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "Az/Alt"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
 msgctxt "abbreviated in the plugin"
@@ -10013,83 +10052,83 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "Connector de Coordenades del Punter"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
-msgstr ""
+msgstr "El centre de la part superior de la pantalla"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "Al centre de la part superior dreta de la pantalla"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "La cantonada inferior dreta de la pantalla"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Posició personalitzada:"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Ascensió/Declinació Recta (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Ascensió/Declinació Recta"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "Longitud/latitud eclíptica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "Longitud/latitud eclíptica (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Longitud/latitud galàctica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Coordenades de la posició personalitzada:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Mostra les coordenades del cursor del ratolí a la pantalla."
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Activeu la visualització de les coordenades a l'arrencada"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "Mostra el botó del connector a la barra d'eines"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "Quin sistema de coordenades s'utilitza per mostrar"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
-msgstr ""
+msgstr "Coordenades:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "Lloc de la cadena amb les coordenades del punter del ratolí"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
-msgstr ""
+msgstr "Lloc de la cadena:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "Coordenada X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Coordenada Y"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Quadrícula Equatorial"
