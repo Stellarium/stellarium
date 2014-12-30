@@ -28,7 +28,6 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "StelOpenGL.hpp"
 #include "GLFuncs.hpp"
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
@@ -664,6 +663,13 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		//Send squared splits to the shader
 		shader->setUniformValue(loc, squaredSplits.v[0], squaredSplits.v[1], squaredSplits.v[2], squaredSplits.v[3]);
 	}
+
+	loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MAT_CUBEMVP);
+	if(loc>=0)
+	{
+		//upload cube mvp matrices
+		shader->setUniformValueArray(loc,cubeMVP,6);
+	}
 }
 
 void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
@@ -731,8 +737,6 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 
 void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 {
-	drawn = 0;
-
 	QOpenGLShaderProgram* curShader = NULL;
 	QSet<QOpenGLShaderProgram*> initialized;
 
@@ -807,6 +811,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		}
 
 		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
+		drawnTriangles+=pStelModel->triangleCount;
 	}
 
 	if(shading&&curShader)
@@ -1421,6 +1426,17 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     return shadowcaster;
 }
 
+void Scenery3d::calcCubeMVP()
+{
+	QMatrix4x4 tmp;
+	for(int i = 0;i<6;++i)
+	{
+		tmp = cubeRotation[i];
+		tmp.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+		cubeMVP[i] = projectionMatrix * tmp;
+	}
+}
+
 void Scenery3d::generateCubeMap()
 {
 	//setup projection matrix - this is a 90-degree quadratic perspective
@@ -1440,13 +1456,31 @@ void Scenery3d::generateCubeMap()
 
 	glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
 
-	for(int i=0;i<6;++i)
+	if(useGSCubemapping && supportsGSCubemapping)
 	{
-		modelViewMatrix = cubeRotation[i];
+		modelViewMatrix.setToIdentity();
+		//Hack: because the modelviewmatrix is used for lighting in shader, but we dont want to perform MV transformations 6 times,
+		// we just set the position because that currently is all that is needeed for correct lighting
 		modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,cubeMapTex,0);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		//render all 6 faces at once
+		shaderParameters.geometryShader = true;
+		calcCubeMVP();
 		drawArrays(true,true);
+		shaderParameters.geometryShader = false;
+	}
+	else
+	{
+		//traditional 6-pass version
+		for(int i=0;i<6;++i)
+		{
+			modelViewMatrix = cubeRotation[i];
+			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,cubeMapTex,0);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			drawArrays(true,true);
+		}
 	}
 
 	//cubemap fbo must be released
@@ -1646,7 +1680,7 @@ void Scenery3d::drawDebug()
     }
 
     screen_y -= 100.f;
-    QString str = QString("Drawn: %1").arg(drawn);
+    QString str = QString("Drawn Tris: %1").arg(drawnTriangles);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
     str = "View Pos";
@@ -1678,20 +1712,21 @@ void Scenery3d::drawDebug()
 
 void Scenery3d::init()
 {
-	//init extensions
-	glExtFuncs.init(QOpenGLContext::currentContext());
-
 	OBJ::setupGL();
 
+	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	//initialize additional functions needed and not provided through StelOpenGL
+	glExtFuncs.init(ctx);
+
 	//enable seamless cubemapping if HW supports it
-	if(QOpenGLContext::currentContext()->hasExtension("GL_ARB_seamless_cube_map"))
+	if(ctx->hasExtension("GL_ARB_seamless_cube_map"))
 	{
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 		qDebug()<<"[Scenery3d] Seamless cubemap filtering enabled";
 	}
 
 	//check if GS cubemapping is possible
-	if(QOpenGLContext::currentContext()->hasExtension("GL_ARB_geometry_shader4"))
+	if(QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry,ctx)) //this checks if version >= 3.2
 	{
 		this->supportsGSCubemapping = true;
 		qDebug()<<"[Scenery3d] Geometry shader supported";
@@ -1765,7 +1800,8 @@ void Scenery3d::initCubemapping()
 	if(supportsGSCubemapping && useGSCubemapping)
 	{
 		//use a cube map for depth, and attach all cube faces at once
-		glExtFuncs.glFramebufferTextureARB(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT,cubeMapTex,0);
+		//note that this function will be a NULL pointer if GS is not supported, so it is important to check before using
+		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapTex,0);
 
 		glGenTextures(1,&cubeMapDepth);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapDepth);
@@ -1784,7 +1820,7 @@ void Scenery3d::initCubemapping()
 		}
 
 		//attach depth cubemap
-		glExtFuncs.glFramebufferTextureARB(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, cubeMapDepth, 0);
+		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cubeMapDepth, 0);
 	}
 	else
 	{
@@ -1924,6 +1960,8 @@ void Scenery3d::draw(StelCore* core)
 	//cant draw if no models
 	if(!hasModels)
 		return;
+
+	drawnTriangles = 0;
 
 	if(reinitCubemapping)
 	{

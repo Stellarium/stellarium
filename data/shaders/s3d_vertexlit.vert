@@ -86,7 +86,7 @@ void main(void)
 	VAR_ILLUMINATION = vec4(calcLighting(normal), u_vMatAlpha);	
 	VAR_TEXCOORD = a_texcoord;
 	#if GEOMETRY_SHADER
-	gl_Position = a_vertex;
+	gl_Position = a_vertex; //pass on unchanged
 	#else
 	gl_Position = u_mMVP * a_vertex;
 	#endif
