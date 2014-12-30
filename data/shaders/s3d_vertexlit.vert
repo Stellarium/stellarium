@@ -26,9 +26,12 @@ This is a shader for basic vertex lighting. This should be the minimum quality s
 #version 120
 
 #define MAT_AMBIENT 1
+#define GEOMETRY_SHADER 1
 
 //matrices
+#if ! GEOMETRY_SHADER
 uniform mat4 u_mMVP;
+#endif
 uniform mat3 u_mNormal;
 
 //light info
@@ -47,8 +50,16 @@ attribute vec4 a_vertex;
 attribute vec3 a_normal;
 attribute vec2 a_texcoord;
 
-varying vec2 v_texcoord;
-varying vec4 v_illumination;
+#if GEOMETRY_SHADER
+#define VAR_TEXCOORD v_texcoordGS
+#define VAR_ILLUMINATION v_illuminationGS
+#else
+#define VAR_TEXCOORD v_texcoord
+#define VAR_ILLUMINATION v_illumination
+#endif
+
+varying vec2 VAR_TEXCOORD;
+varying vec4 VAR_ILLUMINATION;
 
 vec3 calcLighting(vec3 normal)
 {
@@ -72,7 +83,11 @@ void main(void)
 	//transform normal
 	vec3 normal = u_mNormal * a_normal;
 	
-	v_illumination = vec4(calcLighting(normal), u_vMatAlpha);	
-	v_texcoord = a_texcoord;
+	VAR_ILLUMINATION = vec4(calcLighting(normal), u_vMatAlpha);	
+	VAR_TEXCOORD = a_texcoord;
+	#if GEOMETRY_SHADER
+	gl_Position = a_vertex;
+	#else
 	gl_Position = u_mMVP * a_vertex;
+	#endif
 }

@@ -24,6 +24,7 @@
 
 #include <QDir>
 #include <QOpenGLShaderProgram>
+#include <QCryptographicHash>
 
 ShaderMgr::t_UniformStrings ShaderMgr::uniformStrings;
 ShaderMgr::t_FeatureFlagStrings ShaderMgr::featureFlagsStrings;
@@ -82,6 +83,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["MAT_AMBIENT"] = MAT_AMBIENT;
 		featureFlagsStrings["MAT_SPECULAR"] = MAT_SPECULAR;
 		featureFlagsStrings["MAT_DIFFUSETEX"] = MAT_DIFFUSETEX;
+		featureFlagsStrings["GEOMETRY_SHADER"] = GEOMETRY_SHADER;
 	}
 }
 
@@ -101,6 +103,7 @@ void ShaderMgr::clearCache()
 
 	m_shaderCache.clear();
 	m_uniformCache.clear();
+	m_shaderContentCache.clear();
 	qDebug()<<"[Scenery3d] Shader cache cleared";
 }
 
@@ -113,24 +116,60 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	if(it!=m_shaderCache.end())
 		return *it;
 
-	//get shader names, create program and load shaders
-	QString vShader = getVShaderName(flags);
-	QString gShader = getGShaderName(flags);
-	QString fShader = getFShaderName(flags);
+	//get shader file names
+	QString vShaderFile = getVShaderName(flags);
+	QString gShaderFile = getGShaderName(flags);
+	QString fShaderFile = getFShaderName(flags);
+	qDebug()<<"Loading Scenery3d shader: vs:"<<vShaderFile<<", gs:"<<gShaderFile<<", fs:"<<fShaderFile<<"";
 
-	QOpenGLShaderProgram *prog = new QOpenGLShaderProgram();
-	if(!loadShader(*prog,vShader,gShader,fShader,flags))
+	//load shader files & preprocess
+	QByteArray vShader,gShader,fShader;
+
+	QOpenGLShaderProgram *prog = NULL;
+
+	if(preprocessShader(vShaderFile,flags,vShader) &&
+			preprocessShader(gShaderFile,flags,gShader) &&
+			preprocessShader(fShaderFile,flags,fShader)
+			)
 	{
-		delete prog;
-		prog = NULL;
-		qCritical()<<"[Scenery3d] ERROR: Shader '"<<flags<<"' could not be created. Fix errors and reload shaders or restart program.";
+		//check if this content-hash was already created for optimization
+		//(so that shaders with different flags, but identical implementation use the same program)
+		QCryptographicHash hash(QCryptographicHash::Sha256);
+		hash.addData(vShader);
+		hash.addData(gShader);
+		hash.addData(fShader);
+
+		QByteArray contentHash = hash.result();
+		if(m_shaderContentCache.contains(contentHash))
+		{
+			qDebug()<<"[Scenery3d] Using existing shader with content-hash"<<contentHash.toHex();
+			prog = m_shaderContentCache[contentHash];
+		}
+		else
+		{
+			//we have to compile the shader
+			prog = new QOpenGLShaderProgram();
+
+			if(!loadShader(*prog,vShader,gShader,fShader))
+			{
+				delete prog;
+				prog = NULL;
+				qCritical()<<"[Scenery3d] ERROR: Shader '"<<flags<<"' could not be compiled. Fix errors and reload shaders or restart program.";
+			}
+			else
+			{
+				qDebug()<<"[Scenery3d] Shader '"<<flags<<"' created";
+			}
+			m_shaderContentCache[contentHash] = prog;
+		}
 	}
 	else
 	{
-		qDebug()<<"[Scenery3d] Shader '"<<flags<<"' created";
+		qCritical()<<"[Scenery3d] ERROR: Shader '"<<flags<<"' could not be loaded/preprocessed.";
 	}
 
-	//may put null in cache on fail
+
+	//may put null in cache on fail!
 	m_shaderCache[flags] = prog;
 
 	return prog;
@@ -154,8 +193,13 @@ QString ShaderMgr::getVShaderName(uint flags)
 
 QString ShaderMgr::getGShaderName(uint flags)
 {
-	Q_UNUSED(flags);
-	//currently no Gshaders used
+	if(flags & GEOMETRY_SHADER)
+	{
+		if(flags & PIXEL_LIGHTING)
+			return "s3d_pixellit.geom";
+		else
+			return "s3d_vertexlit.geom";
+	}
 	return QString();
 }
 
@@ -171,18 +215,28 @@ QString ShaderMgr::getFShaderName(uint flags)
 	return QString();
 }
 
-QByteArray ShaderMgr::preprocessShader(const QString &fileName, uint flags)
+bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByteArray &processedSource)
 {
-	//open and load file
-	QFile file(fileName);
-	if(!file.open(QFile::ReadOnly))
+	if(fileName.isEmpty())
 	{
-		qWarning()<<"Could not open file"<<fileName;
-		return QByteArray();
+		//no shader of this type
+		return true;
 	}
 
-	QByteArray ret;
-	ret.reserve(file.size());
+	QDir dir("data/shaders/");
+	QString filePath = StelFileMgr::findFile(dir.filePath(fileName),StelFileMgr::File);
+
+	//open and load file
+	QFile file(filePath);
+	qDebug()<<"File path:"<<filePath;
+	if(!file.open(QFile::ReadOnly))
+	{
+		qCritical()<<"Could not open file"<<filePath;
+		return false;
+	}
+
+	processedSource.clear();
+	processedSource.reserve(file.size());
 
 	//use a text stream for "parsing"
 	QTextStream in(&file),lineStream;
@@ -217,32 +271,22 @@ QByteArray ShaderMgr::preprocessShader(const QString &fileName, uint flags)
 		}
 
 		//write output
-		ret.append(write);
-		ret.append('\n');
+		processedSource.append(write);
+		processedSource.append('\n');
 	}
-	return ret;
+	return true;
 }
 
-bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader, const uint flags)
+bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vShader, const QByteArray& gShader, const QByteArray& fShader)
 {
-	qDebug()<<"Loading Scenery3d shader: vs:"<<vShader<<", gs:"<<gShader<<", fs:"<<fShader<<"";
-
 	//clear old shader data, if exists
 	program.removeAllShaders();
 
-	QDir dir("data/shaders/");
-
 	if(!vShader.isEmpty())
 	{
-		QString vs = StelFileMgr::findFile(dir.filePath(vShader),StelFileMgr::File);
-
-		QByteArray code = preprocessShader(vs,flags);
-		if(code.isEmpty())
-			return false;
-
-		if(!program.addShaderFromSourceCode(QOpenGLShader::Vertex,code))
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Vertex,vShader))
 		{
-			qCritical() << "Scenery3d: unable to compile " << vs << " vertex shader file";
+			qCritical() << "Scenery3d: unable to compile vertex shader";
 			qCritical() << program.log();
 			return false;
 		}
@@ -251,7 +295,7 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<vShader<<" warnings:";
+				qWarning()<<"Vertex shader warnings:";
 				qWarning()<<log;
 			}
 		}
@@ -259,15 +303,9 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 
 	if(!gShader.isEmpty())
 	{
-		QString gs = StelFileMgr::findFile(dir.filePath(gShader),StelFileMgr::File);
-
-		QByteArray code = preprocessShader(gs,flags);
-		if(code.isEmpty())
-			return false;
-
-		if(!program.addShaderFromSourceCode(QOpenGLShader::Geometry,code))
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Geometry,gShader))
 		{
-			qCritical() << "Scenery3d: unable to compile " << gs << " geometry shader file";
+			qCritical() << "Scenery3d: unable to compile geometry shader";
 			qCritical() << program.log();
 			return false;
 		}
@@ -276,7 +314,7 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<fShader<<" warnings:";
+				qWarning()<<"Geometry shader warnings:";
 				qWarning()<<log;
 			}
 		}
@@ -284,15 +322,9 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 
 	if(!fShader.isEmpty())
 	{
-		QString fs = StelFileMgr::findFile(dir.filePath(fShader),StelFileMgr::File);
-
-		QByteArray code = preprocessShader(fs,flags);
-		if(code.isEmpty())
-			return false;
-
-		if(!program.addShaderFromSourceCode(QOpenGLShader::Fragment,code))
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Fragment,fShader))
 		{
-			qCritical() << "Scenery3d: unable to compile " << fs << " fragment shader file";
+			qCritical() << "Scenery3d: unable to compile fragment shader";
 			qCritical() << program.log();
 			return false;
 		}
@@ -301,7 +333,7 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<fShader<<" warnings:";
+				qWarning()<<"Fragment shader warnings:";
 				qWarning()<<log;
 			}
 		}
@@ -319,7 +351,7 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 	//link program
 	if(!program.link())
 	{
-		qCritical()<<"Scenery3d: unable to link shader files "<<vShader<<", "<<gShader<<", "<<fShader;
+		qCritical()<<"Scenery3d: unable to link shader";
 		qCritical()<<program.log();
 		return false;
 	}
