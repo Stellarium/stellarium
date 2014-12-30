@@ -26,9 +26,10 @@ This is a shader for phong/per-pixel lighting.
 #version 120
 
 //macros that can be set by ShaderManager (simple true/false flags)
-#define SHADOWS 0
+#define SHADOWS 1
 #define BUMP 0
 #define HEIGHT 0
+#define GEOMETRY_SHADER 1
 
 //matrices
 uniform mat4 u_mModelView;
@@ -52,55 +53,78 @@ attribute vec2 a_texcoord;
 attribute vec4 a_tangent;
 #endif
 
-varying vec3 v_normal; //normal in view space
-varying vec2 v_texcoord;
-varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
-varying vec3 v_viewPos; //position of fragment in view space
+#if GEOMETRY_SHADER
+#define VAR_TEXCOORD v_texcoordGS
+#define VAR_NORMAL v_normalGS
+#define VAR_LIGHTVEC v_lightVecGS
+#define VAR_VIEWPOS v_viewPosGS
+#define VAR_SHADOWCOORD0 v_shadowCoord0GS
+#define VAR_SHADOWCOORD1 v_shadowCoord1GS
+#define VAR_SHADOWCOORD2 v_shadowCoord2GS
+#define VAR_SHADOWCOORD3 v_shadowCoord3GS
+#else
+#define VAR_TEXCOORD v_texcoord
+#define VAR_NORMAL v_normal
+#define VAR_LIGHTVEC v_lightVec
+#define VAR_VIEWPOS v_viewPos
+#define VAR_SHADOWCOORD0 v_shadowCoord0
+#define VAR_SHADOWCOORD1 v_shadowCoord1
+#define VAR_SHADOWCOORD2 v_shadowCoord2
+#define VAR_SHADOWCOORD3 v_shadowCoord3
+#endif
+
+varying vec3 VAR_NORMAL; //normal in view space
+varying vec2 VAR_TEXCOORD;
+varying vec3 VAR_LIGHTVEC; //light vector, in VIEW or TBN space according to bump settings
+varying vec3 VAR_VIEWPOS; //position of fragment in view space
 
 #if SHADOWS
-
-varying vec4 v_shadowCoord0;
-varying vec4 v_shadowCoord1;
-varying vec4 v_shadowCoord2;
-varying vec4 v_shadowCoord3;
+varying vec4 VAR_SHADOWCOORD0;
+varying vec4 VAR_SHADOWCOORD1;
+varying vec4 VAR_SHADOWCOORD2;
+varying vec4 VAR_SHADOWCOORD3;
 #endif
 
 
 void main(void)
 {
 	//transform normal
-	v_normal = normalize(u_mNormal * a_normal);
+	VAR_NORMAL = normalize(u_mNormal * a_normal);
 	
 	//pass on tex coord
-	v_texcoord = a_texcoord;
+	VAR_TEXCOORD = a_texcoord;
 	
 	//calc vertex pos in view space
 	vec4 viewPos = u_mModelView * a_vertex;
-	v_viewPos = viewPos.xyz;
+	VAR_VIEWPOS = viewPos.xyz;
 	
 	#if SHADOWS
 	//calculate shadowmap coords
-	v_shadowCoord0 = u_mShadow0 * a_vertex;
-	v_shadowCoord1 = u_mShadow1 * a_vertex;
-	v_shadowCoord2 = u_mShadow2 * a_vertex;
-	v_shadowCoord3 = u_mShadow3 * a_vertex;
+	VAR_SHADOWCOORD0 = u_mShadow0 * a_vertex;
+	VAR_SHADOWCOORD1 = u_mShadow1 * a_vertex;
+	VAR_SHADOWCOORD2 = u_mShadow2 * a_vertex;
+	VAR_SHADOWCOORD3 = u_mShadow3 * a_vertex;
 	#endif
 	
 	#if BUMP
 	//create View-->TBN matrix
 	vec3 t = normalize(u_mNormal * a_tangent.xyz);
 	//bitangent recreated from normal and tangent instead passed as attribute for a bit more orthonormality
-	vec3 b = cross(v_normal, t) * a_tangent.w; //w coordinate stores handedness of tangent space
+	vec3 b = cross(VAR_NORMAL, t) * a_tangent.w; //w coordinate stores handedness of tangent space
 	
-	mat3 TBN = mat3(t.x, b.x, v_normal.x,
-					t.y, b.y, v_normal.y,
-					t.z, b.z, v_normal.z);
-	v_lightVec = TBN * u_vLightDirectionView;
-	v_viewPos = TBN * v_viewPos;
+	mat3 TBN = mat3(t.x, b.x, VAR_NORMAL.x,
+					t.y, b.y, VAR_NORMAL.y,
+					t.z, b.z, VAR_NORMAL.z);
+	VAR_LIGHTVEC = TBN * u_vLightDirectionView;
+	VAR_VIEWPOS = TBN * VAR_VIEWPOS;
 	#else
-	v_lightVec = u_vLightDirectionView;
+	VAR_LIGHTVEC = u_vLightDirectionView;
 	#endif
 	
 	//calc final position
+	#if GEOMETRY_SHADER
+	gl_Position = a_vertex; //pass on unchanged
+	#else
 	gl_Position = u_mProjection * viewPos;
+	#endif
 }

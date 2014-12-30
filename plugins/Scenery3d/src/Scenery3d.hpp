@@ -146,7 +146,7 @@ private:
     Vec3d viewUp;
     Vec3d viewDir;
     Vec3d viewPos;
-    int drawn;
+    int drawnTriangles;
 
     //QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     GLuint cubeMapTex; //GL_TEXTURE_CUBE_MAP
@@ -154,7 +154,8 @@ private:
     GLuint cubeRB; //renderbuffer for depth
     GLuint cubeFBO; //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBO ourselves
     QVector<Vec3f> cubePlaneFront, cubeVertices;
-    QMatrix4x4 cubeRotation[6];
+    QMatrix4x4 cubeRotation[6]; //rotational matrices for cube faces
+    QMatrix4x4 cubeMVP[6]; //cube face MVP matrices
 
     QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
     QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
@@ -222,6 +223,8 @@ private:
     bool initShadowmapping();
     //! Cleans up shadowmapping related objects
     void deleteShadowmapping();
+
+    void calcCubeMVP();
 
     // --- drawing methods ---
     //! Basic setup for default perspective drawing. Standard OpenGL forward rendering.

@@ -77,6 +77,8 @@ public:
 		UNIFORM_MAT_SHADOW1,
 		UNIFORM_MAT_SHADOW2,
 		UNIFORM_MAT_SHADOW3,
+		//! The first cube MVP (array mat4, total 6)
+		UNIFORM_MAT_CUBEMVP,
 
 		//! Defines the Diffuse texture slot
 		UNIFORM_TEX_DIFFUSE,
@@ -198,6 +200,7 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
 	if(globals.pixelLighting && globals.shadows && globals.shadowFilter) flags|= SHADOW_FILTER;
 	if(globals.pixelLighting && globals.shadows && globals.shadowFilter && globals.shadowFilterHQ) flags|= SHADOW_FILTER_HQ;
+	if(globals.geometryShader) flags|= GEOMETRY_SHADER;
 
 	if(mat)
 	{

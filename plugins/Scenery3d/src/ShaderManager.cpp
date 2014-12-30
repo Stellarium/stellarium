@@ -42,6 +42,8 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_mShadow1"] = UNIFORM_MAT_SHADOW1;
 		uniformStrings["u_mShadow2"] = UNIFORM_MAT_SHADOW2;
 		uniformStrings["u_mShadow3"] = UNIFORM_MAT_SHADOW3;
+		uniformStrings["u_mCubeMVP"] = UNIFORM_MAT_CUBEMVP;
+		uniformStrings["u_mCubeMVP[0]"] = UNIFORM_MAT_CUBEMVP;
 
 		//textures
 		uniformStrings["u_texDiffuse"] = UNIFORM_TEX_DIFFUSE;
