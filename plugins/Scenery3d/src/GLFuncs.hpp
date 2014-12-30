@@ -29,10 +29,12 @@
 struct GLExtFuncs
 {
 	PFNGLFRAMEBUFFERTEXTUREARBPROC glFramebufferTextureARB;
+	PFNGLPROGRAMPARAMETERIARBPROC glProgramParameteriARB;
 
 	void init(QOpenGLContext* ctx)
 	{
 		glFramebufferTextureARB = (PFNGLFRAMEBUFFERTEXTUREARBPROC)ctx->getProcAddress("glFramebufferTextureARB");
+		glProgramParameteriARB = (PFNGLPROGRAMPARAMETERIARBPROC)ctx->getProcAddress("glProgramParameteriARB");
 	}
 };
 

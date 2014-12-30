@@ -156,6 +156,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.bump = false;
 	shaderParameters.shadowFilter = true;
 	shaderParameters.shadowFilterHQ = false;
+	shaderParameters.geometryShader = false;
 
     torchEnabled = false;
     textEnabled = false;
