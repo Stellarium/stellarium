@@ -106,7 +106,6 @@ public:
     void setTorchBrightness(float brightness) { torchBrightness = brightness; }
 
     enum ShadowCaster { None, Sun, Moon, Venus };
-    enum Effect { No, BumpMapping, ShadowMapping, All};
 
     //! Returns the shader manager this instance uses
     ShaderMgr& getShaderManager()    {	    return shaderManager;    }
@@ -186,9 +185,6 @@ private:
     //Debug shader
     QOpenGLShaderProgram* debugShader;
 
-    //Currently selected effect
-    Effect curEffect;
-
     //Scene AABB
     AABB sceneBoundingBox;
 
@@ -254,8 +250,6 @@ private:
     //! Sets up shader uniforms specific to one material
     void setupMaterialUniforms(QOpenGLShaderProgram *shader, const OBJ::Material& mat);
 
-    //Sends texture data to the shader based on which effect is selected;
-    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
     //! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
     Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
 
@@ -287,8 +281,6 @@ private:
 
     //! Loads the model contained in the current scene
     void loadModel();
-    //TODO FS: only temporary, will be removed
-    void nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double centerX,  double centerY,  double centerZ,  double upX,  double upY,  double upZ);
 };
 
 QMatrix4x4 Scenery3d::convertToQMatrix(const Mat4d &mat)
