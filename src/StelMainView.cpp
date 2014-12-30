@@ -374,6 +374,9 @@ StelMainView::StelMainView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
+	// Even if setting a version here, it is ignored in StelQGLWidget()!
+	// TBD: Maybe this must make a differentiation between OpenGL and OpenGL ES!
+	// glFormat.setVersion(2, 1);
 	QGLContext* context=new QGLContext(glFormat);
 
 	if (context->format() != glFormat)
@@ -383,6 +386,8 @@ StelMainView::StelMainView(QWidget* parent)
 		exit(1);
 	}
 	glWidget = new StelQGLWidget(context, this);
+	// This does not return the version number set previously!
+	// qDebug() << "glWidget.context.format.version, result:" << glWidget->context()->format().majorVersion() << "." << glWidget->context()->format().minorVersion();
 #endif
 
 	setViewport(glWidget);
@@ -431,7 +436,7 @@ void StelMainView::init(QSettings* conf)
 #endif
 
 	// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
-	processOpenGLdiagnosticsAndWarnings(conf);
+	processOpenGLdiagnosticsAndWarnings(conf, glWidget);
 
 
 	stelApp= new StelApp();
@@ -491,9 +496,13 @@ void StelMainView::init(QSettings* conf)
 // If problems are detected, warn the user one time, but continue. Warning panel will be suppressed on next start.
 // Work in progress, as long as we get reports about bad systems or until OpenGL startup is finalized and safe.
 // Several tests do not apply to MacOS X.
-void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings* conf) const
+#if STEL_USE_NEW_OPENGL_WIDGETS
+	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
+#else
+	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const
+#endif
 {
-	QOpenGLContext* context=QOpenGLContext::currentContext();
+	QOpenGLContext* context=glWidget->context()->contextHandle();
 	QSurfaceFormat format=context->format();
 
 	// These tests are not required on MacOS X
@@ -515,6 +524,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings* conf) const
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	qDebug() << "GL renderer is" << glRenderer;
+	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
 	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting a #version line), but in case of using ANGLE we need hardware
@@ -525,7 +535,8 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings* conf) const
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
 #ifndef Q_OS_MAC
 	if ( openGLerror ||
-	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1))) ||
+	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
+	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))  )
 	{
 		#ifdef Q_OS_WIN
@@ -601,16 +612,16 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings* conf) const
 #endif
 #ifndef Q_OS_MAC
 	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
-	if (glDriver.contains("Mesa", Qt::CaseInsensitive))
+	if (isMesa)
 	{
-		QRegExp mesaRegExp("Mesa (\\d+)\\.(\\d+)"); // we need only major version. Minor should always be here. Test?
+		QRegExp mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
 		int mesaPos=mesaRegExp.indexIn(glDriver);
 
 		if (mesaPos >-1)
 		{
-			float mesaVersion=mesaRegExp.cap(1).toFloat() + 0.1*mesaRegExp.cap(2).toFloat();
+			float mesaVersion=mesaRegExp.cap(1).toFloat();
 			qDebug() << "MESA Version Number after parsing: " << mesaVersion;
-			if ((mesaVersion<10.0))
+			if ((mesaVersion<10.0f))
 			{
 				openGLerror=true;
 				qDebug() << "This is not enough: we need Mesa 10.0 or later.";
@@ -665,7 +676,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings* conf) const
 	{
 		float glslVersion=glslRegExp.cap(1).toFloat();
 		qDebug() << "GLSL Version Number after parsing: " << glslVersion;
-		if (glslVersion<1.3)
+		if (glslVersion<1.3f)
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL1.30 or later.";
