@@ -35,6 +35,7 @@ struct GlobalShaderParameters
 	bool shadows;
 	bool shadowFilter;
 	bool shadowFilterHQ;
+	bool geometryShader;
 };
 
 //! A simple shader cache class that gives us the correct shader depending on desired configuration.
@@ -161,6 +162,8 @@ private:
 		MAT_SPECULAR	= (1<<8),
 		//has diffuse texture
 		MAT_DIFFUSETEX	= (1<<9),
+		//needs geometry shader cubemapping
+		GEOMETRY_SHADER = (1<<10),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -171,12 +174,16 @@ private:
 	QString getFShaderName(uint flags);
 	QOpenGLShaderProgram* findOrLoadShader(uint flags);
 	//! A simple shader preprocessor that can replace #defines
-	QByteArray preprocessShader(const QString& fileName, uint flags);
-	bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader, const uint flags);
+	bool preprocessShader(const QString& fileName, const uint flags, QByteArray& processedSource);
+	//compiles and links the shader with this specified source code
+	bool loadShader(QOpenGLShaderProgram& program, const QByteArray& vShader, const QByteArray& gShader, const QByteArray& fShader);
 	void buildUniformCache(QOpenGLShaderProgram& program);
 
 	typedef QHash<uint,QOpenGLShaderProgram*> t_ShaderCache;
 	t_ShaderCache m_shaderCache;
+
+	typedef QHash<QByteArray,QOpenGLShaderProgram*> t_ShaderContentCache;
+	t_ShaderContentCache m_shaderContentCache;
 
 	typedef QHash<UNIFORM,GLuint> t_UniformCacheEntry;
 	typedef QHash<const QOpenGLShaderProgram*, t_UniformCacheEntry> t_UniformCache;
