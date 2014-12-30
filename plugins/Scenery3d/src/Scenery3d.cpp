@@ -160,7 +160,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
     torchEnabled = false;
     textEnabled = false;
     debugEnabled = false;
-    curEffect = No;
     lightCamEnabled = false;
     hasModels = false;
     sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
@@ -816,108 +815,6 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 
 	//release VAO
 	objModel.unbindGL();
-}
-
-void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
-{
-    tangEnabled = false;
-    //TODO move this to setupXXXUniforms
-
-    //dummy for now
-    QOpenGLShaderProgram* curShader=NULL;
-    if(cur != No)
-    {
-        curShader->setUniformValue("boolDebug", debugEnabled);
-	curShader->setUniformValue("fTransparencyThresh", currentScene.transparencyThreshold);
-
-        curShader->setUniformValue("boolVenus", venusOn);
-
-        int iIllum = pStelModel->pMaterial->illum;
-        if(iIllum < 0 || iIllum > 2)
-        {
-	    if(iIllum != 9 && iIllum != 4)
-            {
-                //Map to default
-                iIllum = 0;
-                qWarning() << "[Scenery3D] Illumination model was invalid. Forced to Illumination model 0.";
-            }
-        }
-
-        curShader->setUniformValue("iIllum", iIllum);
-
-        if (pStelModel->pMaterial->texture)
-        {
-            glActiveTexture(GL_TEXTURE0);
-            pStelModel->pMaterial->texture.data()->bind();
-
-            //Send texture to shader
-            curShader->setUniformValue("tex", 0);
-            //Indicate that we are in texture Mode
-            curShader->setUniformValue("onlyColor", false);
-        }
-        else
-        {
-            //No texture, send color and indication
-            curShader->setUniformValue("vecColor", pStelModel->pMaterial->diffuse[0], pStelModel->pMaterial->diffuse[1], pStelModel->pMaterial->diffuse[2], pStelModel->pMaterial->diffuse[3]);
-            curShader->setUniformValue("onlyColor", true);
-        }
-
-        //Bump Mapping
-        if(cur == BumpMapping || cur == All)
-        {
-            //Send tangents to shader
-	    if(objModel.hasTangents())
-            {
-                tangLocation = curShader->attributeLocation("vecTangent");
-                glEnableVertexAttribArray(tangLocation);
-		glVertexAttribPointer(tangLocation, 4, GL_FLOAT, 0, objModel.getVertexSize(), objModel.getVertexArray()->tangent);
-                tangEnabled = true;
-            }
-
-            curShader->setUniformValue("s", parallaxScale);
-
-            if (pStelModel->pMaterial->bump_texture)
-            {
-                glActiveTexture(GL_TEXTURE1);
-                pStelModel->pMaterial->bump_texture.data()-> bind();
-
-                //Send bump map to shader
-                curShader->setUniformValue("bmap", 1);
-                //Flag for bumped lighting
-                curShader->setUniformValue("boolBump", true);
-            }
-            else
-            {
-                curShader->setUniformValue("boolBump", false);
-            }
-
-            if (pStelModel->pMaterial->height_texture)
-            {
-                glActiveTexture(GL_TEXTURE2);
-                pStelModel->pMaterial->height_texture.data()-> bind();
-
-                //Send bump map to shader
-                curShader->setUniformValue("hmap", 2);
-
-                //Flag for parallax mapping
-                curShader->setUniformValue("boolHeight", true);
-            }
-            else
-            {
-                curShader->setUniformValue("boolHeight", false);
-            }
-        }
-    }
-    else // No-shader code, more classical OpenGL pipeline
-    {
-        //TODO FS: remove
-        glActiveTexture(GL_TEXTURE0);
-        if (pStelModel->pMaterial->texture)
-        {
-            glActiveTexture(GL_TEXTURE0);
-            pStelModel->pMaterial->texture.data()->bind();
-        }
-    }
 }
 
 void Scenery3d::computeFrustumSplits(float zNear, float zFar)
@@ -1705,10 +1602,6 @@ void Scenery3d::drawDebug()
     painter.drawText(screen_x, screen_y, str);
 
     screen_y -= 30.0f;
-    str = QString("Current shader: %1").arg(static_cast<int>(curEffect));
-    painter.drawText(screen_x, screen_y, str);
-
-    screen_y -= 30.0f;
     str = QString("Venus: %1").arg(static_cast<int>(venusOn));
     painter.drawText(screen_x, screen_y, str);
 }
@@ -2008,20 +1901,4 @@ void Scenery3d::draw(StelCore* core)
 	{
 		drawDebug();
 	}
-}
-
-// Replacement for gluLookAt. See http://www.opengl.org/sdk/docs/man2/xhtml/gluLookAt.xml
-void Scenery3d::nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double centerX,  double centerY,  double centerZ,  double upX,  double upY,  double upZ)
-{
-    Vec3d f(centerX-eyeX, centerY-eyeY, centerZ-eyeZ);
-    Vec3d up(upX, upY, upZ);
-    f.normalize();
-    up.normalize();
-    Vec3d s=f ^ up;   // f x up cross product
-    Vec3d snorm=s;
-    snorm.normalize();
-    Vec3d u=snorm ^ f;
-    Mat4f M(s[0], u[0], -f[0], 0.0f, s[1], u[1], -f[1], 0.0f, s[2], u[2], -f[2], 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
-    glMultMatrixf(M.r);
-    glTranslated(-eyeX, -eyeY, -eyeZ);
 }
