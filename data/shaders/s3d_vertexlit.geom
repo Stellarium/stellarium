@@ -17,26 +17,41 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
+ 
+ 
+/*
+This is a geometry-shader (using 3.2 core functionality) based acceleration of cubemap rendering.
+For vertex-based lighting, this is pretty simple: the lighting is performed in the
+ Vertex shader in a common view space
+*/
 
-#ifndef _GLFUNCS_HPP_
-#define _GLFUNCS_HPP_
+#version 150
 
-#include <QOpenGLContext>
+layout(triangles) in;
+layout(triangle_strip,max_vertices = 18) out;
 
-//! Defines some OpenGL functions not resolved through StelOpenGL, needed for Geometry shader
-//! Using the QOpenGLFunctions_*_* would solve this better, but it conflicts with the
-//! current StelOpenGL header dramatically.
-struct GLExtFuncs
+in vec2 v_texcoordGS[];
+in vec4 v_illuminationGS[];
+out vec2 v_texcoord;
+out vec4 v_illumination;
+
+uniform mat4 u_mCubeMVP[6];
+
+void main(void)
 {
-	//! Since 3.2
-	PFNGLFRAMEBUFFERTEXTUREPROC glFramebufferTexture;
-
-	void init(QOpenGLContext* ctx)
+	//iterate over cubemap faces
+	for(gl_Layer=0; gl_Layer<6;++gl_Layer)
 	{
-		glFramebufferTexture = (PFNGLFRAMEBUFFERTEXTUREPROC)ctx->getProcAddress("glFramebufferTexture");
+		//iterate over triangle vertices
+		for(int vtx = 0;vtx<3;++vtx)
+		{
+			//calc new position in current cubemap face
+			gl_Position = u_mCubeMVP[gl_Layer] * gl_in[vtx].gl_Position;
+			//pass on other varyings
+			v_texcoord = v_texcoordGS[vtx];
+			v_illumination = v_illuminationGS[vtx];
+			EmitVertex();
+		}
+		EndPrimitive();
 	}
-};
-
-extern GLExtFuncs glExtFuncs;
-
-#endif
+}

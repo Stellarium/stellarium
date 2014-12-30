@@ -26,7 +26,7 @@ This is a shader for phong/per-pixel lighting.
 #version 120
 
 //macros that can be set by ShaderManager (simple true/false flags)
-#define SHADOWS 0
+#define SHADOWS 1
 #define SHADOW_FILTER 0
 #define SHADOW_FILTER_HQ 0
 #define MAT_AMBIENT 1
