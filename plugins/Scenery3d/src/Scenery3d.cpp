@@ -634,13 +634,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 	//this fixes weird time-dependent crashes (this was fun to debug)
 	if(shaderParameters.shadows && loc >= 0)
 	{
-		//Calculate texture matrix for projection
-		//This matrix takes us from eye space to the light's clip space
-		//It is postmultiplied by the inverse of the current view matrix when specifying texgen
-		static const QMatrix4x4 biasMatrix(0.5f, 0.0f, 0.0f, 0.5f,
-					     0.0f, 0.5f, 0.0f, 0.5f,
-					     0.0f, 0.0f, 0.5f, 0.5f,
-					     0.0f, 0.0f, 0.0f, 1.0f);	//bias from [-1, 1] to [0, 1]
+
 
 		//Holds the squared frustum splits necessary for the lookup in the shader
 		Vec4f squaredSplits = Vec4f(0.0f);
@@ -653,7 +647,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		    glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
 		    //Compute texture matrix
-		    QMatrix4x4 texMat = biasMatrix * shadowCPM.at(i);
+		    QMatrix4x4 texMat = shadowCPM.at(i);
 
 		    //Send to shader
 		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 3+i);
@@ -1071,8 +1065,17 @@ void Scenery3d::computeCropMatrix(int frustumIndex,const Vec3f& shadowDir)
 
     //Crop the light projection matrix
     projectionMatrix = crop * lightProj;
+
+    //Calculate texture matrix for projection
+    //This matrix takes us from eye space to the light's clip space
+    //It is postmultiplied by the inverse of the current view matrix when specifying texgen
+    static const QMatrix4x4 biasMatrix(0.5f, 0.0f, 0.0f, 0.5f,
+				 0.0f, 0.5f, 0.0f, 0.5f,
+				 0.0f, 0.0f, 0.5f, 0.5f,
+				 0.0f, 0.0f, 0.0f, 1.0f);	//bias from [-1, 1] to [0, 1]
+
     //store final matrix for retrieval later
-    shadowCPM[frustumIndex] = projectionMatrix * modelViewMatrix;
+    shadowCPM[frustumIndex] = biasMatrix * projectionMatrix * modelViewMatrix;
 }
 
 void Scenery3d::adjustFrustum()
