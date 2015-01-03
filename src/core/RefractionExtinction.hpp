@@ -128,7 +128,7 @@ public:
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(Vec3d& altAzPos) const;
 
-	//! Remove refraction from position ("reduce").
+	//! Remove refraction from observed position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3d& altAzPos) const;
@@ -138,7 +138,7 @@ public:
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(Vec3f& altAzPos) const;
 
-	//! Remove refraction from position ("reduce").
+	//! Remove refraction from observed position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3f& altAzPos) const;
@@ -177,9 +177,7 @@ private:
 	//! Temperature[Celsius deg] (10).
 	float temperature;
 	//! Numerator of refraction formula, to be cached for speed.
-	float press_temp_corr_Saemundson;
-	//! Numerator of refraction formula, to be cached for speed.
-	float press_temp_corr_Bennett;
+	float press_temp_corr;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;
