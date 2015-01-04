@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-23 18:34+0600\n"
-"PO-Revision-Date: 2014-12-27 05:13+0000\n"
+"PO-Revision-Date: 2015-01-03 10:17+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-28 05:38+0000\n"
+"X-Launchpad-Export-Date: 2015-01-04 05:52+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -8241,6 +8241,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"โปรแกรมเสริมนี้แสดงดาวเคราะห์ต่างระบบที่สิ่งมีชีวิตอาจอยู่อาศัยได้ "
+"(ทำเครื่องหมายด้วยสีส้ม) และข้อมูลเกี่ยวกับดาวเคราะห์นั้น"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
@@ -8300,6 +8302,10 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"อุณหภูมิดาวเคราะห์ที่ภาวะสมดุล คือ อุณหภูมิทางทฤษฎี (°C) "
+"ของดาวเคราะห์เมื่อสมมุติให้เป็นวัตถุดำได้รับความร้อนจากดาวฤกษ์ที่ศูนย์กลางของ"
+"ระบบ (กำหนดให้ดาวเคราะห์มีอัตราส่วนสะท้อน 0.3) ตัวอย่างเช่น "
+"โลกมีอุณหภูมิที่ภาวะสมดุลเท่ากับ -18.15°C (255 เคลวิน)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Earth Similarity Index (ESI)"
@@ -8320,11 +8326,11 @@ msgstr "ข้อมูลเพิ่มเติม"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "เขตที่อยู่อาศัยได้รอบดาว"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "อุณหภูมิดาวเคราะห์ที่ภาวะสมดุล"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
