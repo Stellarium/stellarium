@@ -88,6 +88,11 @@ IF(OPTIMIZE_INTEL_ATOM)
  ENDIF()
 ENDIF()
 
+SET(RASPI_BUILD 1 CACHE BOOL "Build for Raspberry Pi.")
+IF(RASPI_BUILD)
+ SET(QT_OPENGL_ES_2 1)
+ENDIF(RASPI_BUILD)
+
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
