@@ -144,7 +144,7 @@ void SolarSystem::init()
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
 	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
-	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", false).toBool());
+	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 
 	recreateTrails();
 
