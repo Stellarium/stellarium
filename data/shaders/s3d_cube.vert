@@ -36,6 +36,6 @@ varying vec3 v_texcoord;
 
 void main(void)
 {
-	v_texcoord = normalize(a_texcoord);
+	v_texcoord = a_texcoord;
 	gl_Position = u_mProjection * vec4(a_vertex,1.0);
 }
