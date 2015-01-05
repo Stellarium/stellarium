@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QTimer>
 #include <QOpenGLShaderProgram>
+#include <QtConcurrent>
 
 #include <stdexcept>
 
@@ -46,7 +47,8 @@ Scenery3dMgr::Scenery3dMgr() :
     scenery3d(NULL),
     flagEnabled(false),
     cleanedUp(false),
-    debugShader(NULL)
+    debugShader(NULL),
+    currentLoadFuture(this)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
@@ -57,6 +59,8 @@ Scenery3dMgr::Scenery3dMgr() :
     messageTimer->setInterval(2000);
     messageTimer->setSingleShot(true);
     connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
+
+    connect(&currentLoadFuture,SIGNAL(finished()), this, SLOT(loadSceneCompleted()));
 
     //create scenery3d object
     scenery3d = new Scenery3d(this);
@@ -318,49 +322,81 @@ QString Scenery3dMgr::getCurrentScenery3dID() const
 	return scenery3d->getCurrentScene().id;
 }
 
-bool Scenery3dMgr::loadScene(const SceneInfo& scene)
+void Scenery3dMgr::loadScene(const SceneInfo& scene)
 {
+	//TODO perform cancel of old loading
+	currentLoadFuture.waitForFinished();
+
+	currentLoadScene = scene;
+
+	// Loading may take a while...
+	showMessage(QString(N_("Loading scene. Please be patient!")));
+	progressBar = StelApp::getInstance().addProgressBar();
+	progressBar->setFormat(QString(N_("Loading scene '%1'")).arg(scene.name));
+	progressBar->setValue(0);
+
+	QFuture<bool> future = QtConcurrent::run(this,&Scenery3dMgr::loadSceneBackground);
+	currentLoadFuture.setFuture(future);
+}
+
+bool Scenery3dMgr::loadSceneBackground()
+{
+	return scenery3d->loadScene(currentLoadScene);
+}
+
+void Scenery3dMgr::loadSceneCompleted()
+{
+	bool ok = currentLoadFuture.result();
+
+	progressBar->setValue(100);
+	StelApp::getInstance().removeProgressBar(progressBar);
+	progressBar=NULL;
+
+	if(!ok)
+	{
+		showMessage(N_("Could not load scene, please check log for error messages!"));
+		return;
+	}
+
+	//do stuff that requires the main thread
+
 	//move to the location specified by the scene
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
 	lmgr->setFlagLandscapeSetsLocation(true);
-	lmgr->setCurrentLandscapeName(scene.landscapeName, 0.); // took a second, implicitly.
+	lmgr->setCurrentLandscapeName(currentLoadScene.landscapeName, 0.); // took a second, implicitly.
 	// Switched to immediate landscape loading: Else,
 	// Landscape and Navigator at this time have old coordinates! But it should be possible to
 	// delay rot_z computation up to this point and live without an own location section even
 	// with meridian_convergence=from_grid.
 	lmgr->setFlagLandscapeSetsLocation(landscapeSetsLocation); // restore
 
-	// Loading may take a while...
-	showMessage(QString(N_("Loading scenery3d. Please be patient!")));
-	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-	scenery3d->loadScene(scene);
-	clearMessage();
-	QApplication::restoreOverrideCursor();
 
-	if (scene.hasLocation())
+	if (currentLoadScene.hasLocation())
 	{
 		qDebug() << "Scenery3D: Setting location to given coordinates.";
-		StelApp::getInstance().getCore()->moveObserverTo(*(scene.location.data()), 0., 0.);
+		StelApp::getInstance().getCore()->moveObserverTo(*(currentLoadScene.location.data()), 0., 0.);
 	}
 	else qDebug() << "Scenery3D: No coordinates given in scenery3d.";
 
-	if (scene.hasLookAtFOV())
+	if (currentLoadScene.hasLookAtFOV())
 	{
 		qDebug() << "Scenery3D: Setting orientation.";
 		StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
-		Vec3f lookat=scene.lookAt_fov;
+		Vec3f lookat=currentLoadScene.lookAt_fov;
 		// This vector is (az_deg, alt_deg, fov_deg)
 		Vec3d v;
 		StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
 		mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
-		mm->zoomTo(lookat[2], 3.);
+		mm->zoomTo(lookat[2], 0.);
 	} else qDebug() << "Scenery3D: Not setting orientation, no data.";
+
+
+	//perform GL upload + other calculations that require the location to be set
+	scenery3d->finalizeLoad();
 
 	enableAction->setCheckable(true);
 	setEnableScene(true);
-
-	return true;
 }
 
 bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
@@ -373,7 +409,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 	{
 		if(!SceneInfo::loadByID(id,scene))
 		{
-			showMessage("Could not load scene, please check log for error messages!");
+			showMessage(N_("Could not load scene info, please check log for error messages!"));
 			return false;
 		}
 	}
@@ -382,7 +418,8 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 		qCritical() << "ERROR while loading 3D scenery with id " <<  id  << ", (" << e.what() << ")";
 	}
 
-	return loadScene(scene);
+	loadScene(scene);
+	return true;
 }
 
 bool Scenery3dMgr::setCurrentScenery3dName(const QString& name)
@@ -390,21 +427,14 @@ bool Scenery3dMgr::setCurrentScenery3dName(const QString& name)
 	if (name.isEmpty())
 	    return false;
 
-	SceneInfo scene;
-	try
-	{
-	    if(!SceneInfo::loadByName(name,scene))
-	    {
-		    showMessage("Could not load scene, please check log for error messages!");
-		    return false;
-	    }
-	}
-	catch (std::runtime_error& e)
-	{
-	    qCritical() << "ERROR while loading 3D scenery with name " <<  name  << ", (" << e.what() << ")";
-	}
+	QString id = SceneInfo::getIDFromName(name);
 
-	return loadScene(scene);
+	if(id.isEmpty())
+	{
+		showMessage(QString(N_("Could not find scene ID for %1")).arg(name));
+		return false;
+	}
+	return setCurrentScenery3dID(id);
 }
 
 bool Scenery3dMgr::setDefaultScenery3dID(const QString& id)

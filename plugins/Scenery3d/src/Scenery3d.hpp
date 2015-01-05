@@ -53,7 +53,7 @@ public:
     }
 
     //! Loads the specified scene
-    void loadScene(const SceneInfo& scene);
+    bool loadScene(const SceneInfo& scene);
 
     //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
     //! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
@@ -110,14 +110,16 @@ public:
     //! Returns the shader manager this instance uses
     ShaderMgr& getShaderManager()    {	    return shaderManager;    }
 
+    //! Loads the model into GL and sets the loaded scene to be the current one
+    void finalizeLoad();
+
 private:
     Scenery3dMgr* parent;
-    SceneInfo currentScene;
+    SceneInfo currentScene,loadingScene;
     ShaderMgr shaderManager;
 
     float torchBrightness; // ^L toggle light brightness
 
-    bool hasModels;             // flag to see if there's anything to draw
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
     bool torchEnabled;          // switchable value (^L): adds artificial ambient light
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
@@ -137,10 +139,9 @@ private:
 
     StelCore* core;
     StelProjectorP altAzProjector;
-    OBJ objModel;
-    OBJ groundModel;
+    QSharedPointer<OBJ> objModel, objModelLoad, groundModel, groundModelLoad;
     Heightmap* heightmap;
-    OBJ::vertexOrder objVertexOrder; // some OBJ files have left-handed coordinate counting or swapped axes. Allows accounting for those.
+    Heightmap* heightmapLoad;
 
     Vec3d viewUp;
     Vec3d viewDir;
@@ -164,7 +165,7 @@ private:
     QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
 
     //Combines zRot and rot2grid from scene metadata
-    Mat4d zRot2Grid;
+    Mat4d zRot2Grid, zRot2GridLoad;
 
 
     /// ---- Rendering information ----
@@ -279,9 +280,6 @@ private:
     void computeCropMatrix(int frustumIndex, const Vec3f &shadowDir);
     //Computes the light projection values
     void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
-
-    //! Loads the model contained in the current scene
-    void loadModel();
 };
 
 #endif

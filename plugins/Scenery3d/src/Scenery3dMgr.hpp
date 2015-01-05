@@ -24,6 +24,7 @@
 #include <QMap>
 #include <QStringList>
 #include <QFont>
+#include <QtConcurrent>
 
 #include "StelCore.hpp"
 #include "StelPluginInterface.hpp"
@@ -31,13 +32,14 @@
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelActionMgr.hpp"
+#include "StelProgressController.hpp"
 
 #include "gui/Scenery3dDialog.hpp"
+#include "SceneInfo.hpp"
 
 class Scenery3d;
 class QSettings;
 class StelButton;
-struct SceneInfo;
 
 class QOpenGLShaderProgram;
 
@@ -138,6 +140,7 @@ public slots:
 
 private slots:
     void clearMessage();
+    void loadSceneCompleted();
 
 private:
     //! Loads config values from app settings
@@ -148,7 +151,10 @@ private:
     //! Loads the given vertex and fragment shaders into the given program.
     bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader);
 
-    bool loadScene(const SceneInfo& scene);
+    void loadScene(const SceneInfo& scene);
+
+    //! This is run asynchronously in a background thread
+    bool loadSceneBackground();
 
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
@@ -169,6 +175,10 @@ private:
     Vec3f textColor;
     QFont font;
     QString currentMessage;
+
+    StelProgressController* progressBar;
+    SceneInfo currentLoadScene;
+    QFutureWatcher<bool> currentLoadFuture;
 };
 
 

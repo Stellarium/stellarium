@@ -98,11 +98,13 @@ void Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged(int index)
 
 void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 {
-    mgr->setCurrentScenery3dName(item->text());
-    StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-    Q_ASSERT(gui);
-    ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-    ui->scenery3dTextBrowser->setHtml(mgr->getCurrentScenery3dHtmlDescription());
+    if(mgr->setCurrentScenery3dName(item->text()))
+    {
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->scenery3dTextBrowser->setHtml(mgr->getCurrentScenery3dHtmlDescription());
+    }
 }
 
 // Update the widget to make sure it is synchrone if a value was changed programmatically

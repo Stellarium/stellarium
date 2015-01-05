@@ -53,7 +53,7 @@ SET(extLinkerOption  ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL
 
 ############### For building the static library ######################
 ADD_LIBRARY(Scenery3d-static STATIC ${Scenery3d_SRCS} ${Scenery3d_RES_CXX} ${Scenery3d_UIS_H} )
-QT5_USE_MODULES(Scenery3d-static Core Gui Widgets)
+QT5_USE_MODULES(Scenery3d-static Core Concurrent Gui Widgets)
 SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES OUTPUT_NAME "Scenery3d")
 TARGET_LINK_LIBRARIES(Scenery3d-static ${extLinkerOption})
 SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
