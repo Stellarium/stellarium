@@ -92,63 +92,82 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	useGSCubemapping = false;
 	reinitCubemapping = true;
 
-	//create the front cubemap face vertices
-	//created a 20x20 subdivision to give a good approximation of non-linear projections
-
-	//TODO optimize this by using indexed geometry and TRIANGLE_FAN!
-	// This currently uses 20x20x6=2400 vertices per face, 14400 in total.
-	// This may be a bit much for CPU transformation in each frame.
-
+	//create a 20x20 cube subdivision to give a good approximation of non-linear projections
 	const int sub = 20;
-	const float d_sub_v = 2.0 / sub;
-	for (int y = 0; y < sub; y++) {
-		for (int x = 0; x < sub; x++) {
-			float x0 = -1.0 + x * d_sub_v;
-			float x1 = x0 + d_sub_v;
-			float y0 = -1.0 + y * d_sub_v;
-			float y1 = y0 + d_sub_v;
+	const int vtxCount = (sub+1) * (sub+1);
+	const double d_sub_v = 2.0 / sub;
 
-			Vec3f v[] = {
-				Vec3f(x0, 1.0, y0),
-				Vec3f(x1, 1.0, y0),
-				Vec3f(x1, 1.0, y1),
-				Vec3f(x0, 1.0, y0),
-				Vec3f(x1, 1.0, y1),
-				Vec3f(x0, 1.0, y1),
-			};
-			for (int i=0; i<6; i++) {
-				v[i].normalize();
-				cubePlaneFront<< v[i];
-			}
+	//create the front cubemap face vertices
+	QVector<Vec3f> cubePlaneFront;
+	QVector<unsigned short> frontIndices;
+	cubePlaneFront.reserve(vtxCount);
+	//store the indices of the vertices
+	//this could easily be recalculated as needed but this makes it a bit more readable
+	unsigned short vertexIdx[sub+1][sub+1] = {0};
+
+	//first, create the actual vertex positions, (20+1)^2 vertices
+	for (int y = 0; y <= sub; y++) {
+		for (int x = 0; x <= sub; x++) {
+			float xp = -1.0 + x * d_sub_v;
+			float yp = -1.0 + y * d_sub_v;
+			cubePlaneFront<< Vec3f(xp, 1.0f, yp);
+			vertexIdx[y][x] = y*(sub+1)+x;
 		}
 	}
 
-	int vtxCount = cubePlaneFront.size();
+	Q_ASSERT(cubePlaneFront.size() == vtxCount);
 
-	//only positions are required for cubemapping
-	QVector<Vec3f> cubeVtx;
-	cubeVtx.reserve(vtxCount * 6);
+	//generate indices for each of the 20x20 subfaces
+	//TODO optimize for TRIANGLE_STRIP?
+	for ( int y = 0; y < sub; y++)
+	{
+		for( int x = 0; x<sub; x++)
+		{
+			//first tri (top one)
+			frontIndices<<vertexIdx[y+1][x];
+			frontIndices<<vertexIdx[y][x];
+			frontIndices<<vertexIdx[y+1][x+1];
+
+			//second tri
+			frontIndices<<vertexIdx[y+1][x+1];
+			frontIndices<<vertexIdx[y][x];
+			frontIndices<<vertexIdx[y][x+1];
+		}
+	}
+
+	int idxCount = frontIndices.size();
+
+	//create the other faces
+	//note that edge vertices of the faces are duplicated
+
+	cubeVertices.reserve(vtxCount * 6);
+	cubeIndices.reserve(idxCount * 6);
 	//init with copies of front face
-	cubeVtx<<cubePlaneFront;  //E face y=1
-	cubeVtx<<cubePlaneFront;  //S face x=1
-	cubeVtx<<cubePlaneFront;  //N face x=-1
-	cubeVtx<<cubePlaneFront;  //W face y=-1
-	cubeVtx<<cubePlaneFront;  //down face z=-1
-	cubeVtx<<cubePlaneFront;  //up face z=1
+	cubeVertices<<cubePlaneFront;  //E face y=1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //S face x=1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //N face x=-1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //W face y=-1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //down face z=-1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //up face z=1
+	cubeIndices<<frontIndices;
 
+	qDebug()<<"[Scenery3d] Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndices.size()<<"indices";
 
 	//create the other cube faces by rotating the front face
-#define PLANE(_STARTIDX_, _MAT_) for(int i=_STARTIDX_;i<_STARTIDX_ + vtxCount;i++){ _MAT_.transfo(cubeVtx[i]); }
+#define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
+	for(int i =_PLANEID_ * idxCount; i < (_PLANEID_+1)*idxCount;++i) { cubeIndices[i] = cubeIndices[i] + _PLANEID_ * vtxCount; }
 
-	PLANE(1 * vtxCount, Mat4f::zrotation(-M_PI_2));
-	PLANE(2 * vtxCount, Mat4f::zrotation(M_PI_2));
-	PLANE(3 * vtxCount, Mat4f::zrotation(M_PI));
-	PLANE(4 * vtxCount, Mat4f::xrotation(-M_PI_2));
-	PLANE(5 * vtxCount, Mat4f::xrotation(M_PI_2));
+	PLANE(1, Mat4f::zrotation(-M_PI_2));
+	PLANE(2, Mat4f::zrotation(M_PI_2));
+	PLANE(3, Mat4f::zrotation(M_PI));
+	PLANE(4, Mat4f::xrotation(-M_PI_2));
+	PLANE(5, Mat4f::xrotation(M_PI_2));
 #undef PLANE
-
-	cubeVertices = cubeVtx;
-
 
 	shaderParameters.pixelLighting = false;
 	shaderParameters.shadows = false;
@@ -1431,7 +1450,7 @@ void Scenery3d::drawFromCubeMap()
 
     //TODO the original vertex positions are static data, they should be stored in a VBO instead of uploaded each frame.
     // It would probably be best to reimplement this ourselves.
-    painter.drawFromArray(StelPainter::Triangles,cubeVertices.count());
+    painter.drawFromArray(StelPainter::Triangles,cubeIndices.count(),0,true,cubeIndices.constData());
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
