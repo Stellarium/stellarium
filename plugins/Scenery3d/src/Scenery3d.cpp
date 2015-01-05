@@ -92,83 +92,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	useGSCubemapping = false;
 	reinitCubemapping = true;
 
-	//create a 20x20 cube subdivision to give a good approximation of non-linear projections
-	const int sub = 20;
-	const int vtxCount = (sub+1) * (sub+1);
-	const double d_sub_v = 2.0 / sub;
-
-	//create the front cubemap face vertices
-	QVector<Vec3f> cubePlaneFront;
-	QVector<unsigned short> frontIndices;
-	cubePlaneFront.reserve(vtxCount);
-	//store the indices of the vertices
-	//this could easily be recalculated as needed but this makes it a bit more readable
-	unsigned short vertexIdx[sub+1][sub+1] = {0};
-
-	//first, create the actual vertex positions, (20+1)^2 vertices
-	for (int y = 0; y <= sub; y++) {
-		for (int x = 0; x <= sub; x++) {
-			float xp = -1.0 + x * d_sub_v;
-			float yp = -1.0 + y * d_sub_v;
-			cubePlaneFront<< Vec3f(xp, 1.0f, yp);
-			vertexIdx[y][x] = y*(sub+1)+x;
-		}
-	}
-
-	Q_ASSERT(cubePlaneFront.size() == vtxCount);
-
-	//generate indices for each of the 20x20 subfaces
-	//TODO optimize for TRIANGLE_STRIP?
-	for ( int y = 0; y < sub; y++)
-	{
-		for( int x = 0; x<sub; x++)
-		{
-			//first tri (top one)
-			frontIndices<<vertexIdx[y+1][x];
-			frontIndices<<vertexIdx[y][x];
-			frontIndices<<vertexIdx[y+1][x+1];
-
-			//second tri
-			frontIndices<<vertexIdx[y+1][x+1];
-			frontIndices<<vertexIdx[y][x];
-			frontIndices<<vertexIdx[y][x+1];
-		}
-	}
-
-	int idxCount = frontIndices.size();
-
-	//create the other faces
-	//note that edge vertices of the faces are duplicated
-
-	cubeVertices.reserve(vtxCount * 6);
-	cubeIndices.reserve(idxCount * 6);
-	//init with copies of front face
-	cubeVertices<<cubePlaneFront;  //E face y=1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //S face x=1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //N face x=-1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //W face y=-1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //down face z=-1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //up face z=1
-	cubeIndices<<frontIndices;
-
-	qDebug()<<"[Scenery3d] Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndices.size()<<"indices";
-
-	//create the other cube faces by rotating the front face
-#define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
-	for(int i =_PLANEID_ * idxCount; i < (_PLANEID_+1)*idxCount;++i) { cubeIndices[i] = cubeIndices[i] + _PLANEID_ * vtxCount; }
-
-	PLANE(1, Mat4f::zrotation(-M_PI_2));
-	PLANE(2, Mat4f::zrotation(M_PI_2));
-	PLANE(3, Mat4f::zrotation(M_PI));
-	PLANE(4, Mat4f::xrotation(-M_PI_2));
-	PLANE(5, Mat4f::xrotation(M_PI_2));
-#undef PLANE
-
 	shaderParameters.pixelLighting = false;
 	shaderParameters.shadows = false;
 	shaderParameters.bump = false;
@@ -201,35 +124,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
-
-
-	//initialize cube rotations... found by trial and error :)
-	QMatrix4x4 stackBase;
-
-	//all angles were found using some experimenting :)
-	//this is the EAST face (y=1)
-	stackBase.rotate(90.0f,-1.0f,0.0f,0.0f);
-
-	//south (x=1) ok
-	cubeRotation[0] = stackBase;
-	cubeRotation[0].rotate(-90.0f,0.0f,1.0f,0.0f);
-	cubeRotation[0].rotate(90.0f,0.0f,0.0f,1.0f);
-	//NORTH (x=-1) ok
-	cubeRotation[1] = stackBase;
-	cubeRotation[1].rotate(90.0f,0.0f,1.0f,0.0f);
-	cubeRotation[1].rotate(-90.0f,0.0f,0.0f,1.0f);
-	//EAST (y=1) ok
-	cubeRotation[2] = stackBase;
-	//west (y=-1) ok
-	cubeRotation[3] = stackBase;
-	cubeRotation[3].rotate(180.0f,-1.0f,0.0f,0.0f);
-	//top (z=1) ok
-	cubeRotation[4] = stackBase;
-	cubeRotation[4].rotate(-90.0f,1.0f,0.0f,0.0f);
-	//bottom (z=-1)
-	cubeRotation[5] = stackBase;
-	cubeRotation[5].rotate(90.0f,1.0f,0.0f,0.0f);
-	cubeRotation[5].rotate(180.0f,0.0f,0.0f,1.0f);
 
 
 	qDebug()<<"Scenery3d constructor...done";
@@ -1760,6 +1654,114 @@ void Scenery3d::initCubemapping()
 
 	//unbind FB
 	glBindFramebuffer(GL_FRAMEBUFFER,0);
+
+	//initialize cube rotations... found by trial and error :)
+	QMatrix4x4 stackBase;
+
+	//all angles were found using some experimenting :)
+	//this is the EAST face (y=1)
+	stackBase.rotate(90.0f,-1.0f,0.0f,0.0f);
+
+	//south (x=1) ok
+	cubeRotation[0] = stackBase;
+	cubeRotation[0].rotate(-90.0f,0.0f,1.0f,0.0f);
+	cubeRotation[0].rotate(90.0f,0.0f,0.0f,1.0f);
+	//NORTH (x=-1) ok
+	cubeRotation[1] = stackBase;
+	cubeRotation[1].rotate(90.0f,0.0f,1.0f,0.0f);
+	cubeRotation[1].rotate(-90.0f,0.0f,0.0f,1.0f);
+	//EAST (y=1) ok
+	cubeRotation[2] = stackBase;
+	//west (y=-1) ok
+	cubeRotation[3] = stackBase;
+	cubeRotation[3].rotate(180.0f,-1.0f,0.0f,0.0f);
+	//top (z=1) ok
+	cubeRotation[4] = stackBase;
+	cubeRotation[4].rotate(-90.0f,1.0f,0.0f,0.0f);
+	//bottom (z=-1)
+	cubeRotation[5] = stackBase;
+	cubeRotation[5].rotate(90.0f,1.0f,0.0f,0.0f);
+	cubeRotation[5].rotate(180.0f,0.0f,0.0f,1.0f);
+
+
+	//create a 20x20 cube subdivision to give a good approximation of non-linear projections
+	const int sub = 20;
+	const int vtxCount = (sub+1) * (sub+1);
+	const double d_sub_v = 2.0 / sub;
+
+	//create the front cubemap face vertices
+	QVector<Vec3f> cubePlaneFront;
+	QVector<unsigned short> frontIndices;
+	cubePlaneFront.reserve(vtxCount);
+	//store the indices of the vertices
+	//this could easily be recalculated as needed but this makes it a bit more readable
+	unsigned short vertexIdx[sub+1][sub+1] = {0};
+
+	//first, create the actual vertex positions, (20+1)^2 vertices
+	for (int y = 0; y <= sub; y++) {
+		for (int x = 0; x <= sub; x++) {
+			float xp = -1.0 + x * d_sub_v;
+			float yp = -1.0 + y * d_sub_v;
+			cubePlaneFront<< Vec3f(xp, 1.0f, yp);
+			vertexIdx[y][x] = y*(sub+1)+x;
+		}
+	}
+
+	Q_ASSERT(cubePlaneFront.size() == vtxCount);
+
+	//generate indices for each of the 20x20 subfaces
+	//TODO optimize for TRIANGLE_STRIP?
+	for ( int y = 0; y < sub; y++)
+	{
+		for( int x = 0; x<sub; x++)
+		{
+			//first tri (top one)
+			frontIndices<<vertexIdx[y+1][x];
+			frontIndices<<vertexIdx[y][x];
+			frontIndices<<vertexIdx[y+1][x+1];
+
+			//second tri
+			frontIndices<<vertexIdx[y+1][x+1];
+			frontIndices<<vertexIdx[y][x];
+			frontIndices<<vertexIdx[y][x+1];
+		}
+	}
+
+	int idxCount = frontIndices.size();
+
+	//create the other faces
+	//note that edge vertices of the faces are duplicated
+
+	cubeVertices.clear();
+	cubeIndices.clear();
+	cubeVertices.reserve(vtxCount * 6);
+	cubeIndices.reserve(idxCount * 6);
+	//init with copies of front face
+	cubeVertices<<cubePlaneFront;  //E face y=1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //S face x=1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //N face x=-1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //W face y=-1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //down face z=-1
+	cubeIndices<<frontIndices;
+	cubeVertices<<cubePlaneFront;  //up face z=1
+	cubeIndices<<frontIndices;
+
+	qDebug()<<"[Scenery3d] Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndices.size()<<"indices";
+
+	//create the other cube faces by rotating the front face
+#define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
+	for(int i =_PLANEID_ * idxCount; i < (_PLANEID_+1)*idxCount;++i) { cubeIndices[i] = cubeIndices[i] + _PLANEID_ * vtxCount; }
+
+	PLANE(1, Mat4f::zrotation(-M_PI_2));
+	PLANE(2, Mat4f::zrotation(M_PI_2));
+	PLANE(3, Mat4f::zrotation(M_PI));
+	PLANE(4, Mat4f::xrotation(-M_PI_2));
+	PLANE(5, Mat4f::xrotation(M_PI_2));
+#undef PLANE
 
 	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
 }
