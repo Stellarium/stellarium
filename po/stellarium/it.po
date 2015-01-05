@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 18:34+0600\n"
+"POT-Creation-Date: 2015-01-05 11:10+0600\n"
 "PO-Revision-Date: 2014-12-17 18:20+0000\n"
 "Last-Translator: Gio <gio.scino@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-24 06:07+0000\n"
+"X-Launchpad-Export-Date: 2015-01-05 05:40+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
-#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:161
+#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:166
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:442
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:447
 msgid "Display Options"
 msgstr "Opzioni di visualizzazione"
 
@@ -59,7 +59,7 @@ msgstr "Nomi delle stelle"
 msgid "Meridian"
 msgstr "Meridiano"
 
-#: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1322
+#: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1318
 msgid "Ecliptic"
 msgstr "Eclittica"
 
@@ -67,7 +67,7 @@ msgstr "Eclittica"
 msgid "Equator"
 msgstr "Equatore"
 
-#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1318
+#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1322
 msgid "Horizon"
 msgstr "Orizzonte"
 
@@ -165,7 +165,7 @@ msgstr "Pianeta: "
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:180
 #, qt-format
@@ -355,22 +355,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Lunghezza coda dei gas (estimate): %1 Mln km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:162 src/translations.h:54
+#: src/core/modules/SolarSystem.cpp:167 src/translations.h:54
 #: src/ui_viewDialog.h:1233
 msgid "Planets"
 msgstr "Pianeti"
 
-#: src/core/modules/SolarSystem.cpp:163
+#: src/core/modules/SolarSystem.cpp:168
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "Etichette del pianeta"
 
-#: src/core/modules/SolarSystem.cpp:164
+#: src/core/modules/SolarSystem.cpp:169
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "Orbite pianeti"
 
-#: src/core/modules/SolarSystem.cpp:165
+#: src/core/modules/SolarSystem.cpp:170
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "Traiettorie pianeti"
@@ -1164,7 +1164,7 @@ msgid "Deep-sky objects background images"
 msgstr "Oggetti immagini di sfondo cielo-profondo"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:441
+#: src/StelMainView.cpp:446
 msgid "Miscellaneous"
 msgstr "Varie"
 
@@ -2004,23 +2004,23 @@ msgstr "Longitudine"
 msgid "Latitude"
 msgstr "Latitudine"
 
-#: src/gui/SearchDialog.cpp:510
+#: src/gui/SearchDialog.cpp:511
 msgid "Simbad Lookup Error"
 msgstr "Errore nella ricerca Simbad"
 
-#: src/gui/SearchDialog.cpp:518
+#: src/gui/SearchDialog.cpp:519
 msgid "Simbad Lookup"
 msgstr "Ricerca Simbad"
 
-#: src/gui/SearchDialog.cpp:686
+#: src/gui/SearchDialog.cpp:687
 msgid "University of Strasbourg (France)"
 msgstr "Università di Strasburgo (Francia)"
 
-#: src/gui/SearchDialog.cpp:687
+#: src/gui/SearchDialog.cpp:688
 msgid "Harvard University (USA)"
 msgstr "Università di Harvard (Stati Uniti d'America)"
 
-#: src/gui/SearchDialog.cpp:744
+#: src/gui/SearchDialog.cpp:747
 msgid "Paste and Search"
 msgstr "Incolla e Cerca"
 
@@ -2062,19 +2062,19 @@ msgstr ""
 "OpenGL 2 non trovato in questo sistema. Si prega di aggiornare l'hardware o "
 "utilizzare MESA o una versione precedente."
 
-#: src/StelMainView.cpp:382
+#: src/StelMainView.cpp:385
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Impossibile acquisire le risorse necessarie OpenGL."
 
-#: src/StelMainView.cpp:441
+#: src/StelMainView.cpp:446
 msgid "Save screenshot"
 msgstr "Salva schermata"
 
-#: src/StelMainView.cpp:442
+#: src/StelMainView.cpp:447
 msgid "Full-screen mode"
 msgstr "Modalità schermo intero"
 
-#: src/StelMainView.cpp:533
+#: src/StelMainView.cpp:544
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2082,14 +2082,14 @@ msgstr ""
 "Versione OpenGL insufficiente. Per favore aggiornare i driver o l'hardware "
 "grafico, o in alternativa utilizzare la versione MESA o ANGLE."
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:547
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Versione OpenGL insufficiente. Per favore aggiornare i driver o l'hardware "
 "grafico."
 
-#: src/StelMainView.cpp:578
+#: src/StelMainView.cpp:589
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2100,7 +2100,7 @@ msgstr ""
 "Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
 "comunque in modalità degradata?"
 
-#: src/StelMainView.cpp:629
+#: src/StelMainView.cpp:640
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2110,7 +2110,7 @@ msgstr ""
 "Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
 "comunque in modalità degradata?"
 
-#: src/StelMainView.cpp:684
+#: src/StelMainView.cpp:695
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2120,7 +2120,7 @@ msgstr ""
 "Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
 "comunque in modalità degradata?"
 
-#: src/StelMainView.cpp:721
+#: src/StelMainView.cpp:732
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2130,7 +2130,7 @@ msgstr ""
 "Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
 "comunque in modalità degradata?"
 
-#: src/StelMainView.cpp:830
+#: src/StelMainView.cpp:841
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4264,12 +4264,12 @@ msgid "Show meridian line"
 msgstr "Mostra la linea del meridiano"
 
 #: src/ui_viewDialog.h:1316
-msgid "Show horizon line"
-msgstr "Mostra la linea dell'orizzonte"
-
-#: src/ui_viewDialog.h:1320
 msgid "Show ecliptic line"
 msgstr "Mostra l'eclittica"
+
+#: src/ui_viewDialog.h:1320
+msgid "Show horizon line"
+msgstr "Mostra la linea dell'orizzonte"
 
 #: src/ui_viewDialog.h:1324
 msgid "Show Galactic equator line"
@@ -5838,136 +5838,136 @@ msgstr ""
 "default"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1675
+#: plugins/Satellites/src/Satellites.cpp:1678
 msgid "visual"
 msgstr "visuali"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1677
+#: plugins/Satellites/src/Satellites.cpp:1680
 msgid "scientific"
 msgstr "scientifici"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1679
+#: plugins/Satellites/src/Satellites.cpp:1682
 msgid "communications"
 msgstr "comunicazioni"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1681
+#: plugins/Satellites/src/Satellites.cpp:1684
 msgid "navigation"
 msgstr "navigazione"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1683
+#: plugins/Satellites/src/Satellites.cpp:1686
 msgid "amateur"
 msgstr "amatoriali"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1685
+#: plugins/Satellites/src/Satellites.cpp:1688
 msgid "weather"
 msgstr "meteo"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1687
+#: plugins/Satellites/src/Satellites.cpp:1690
 msgid "geostationary"
 msgstr "geostazionario"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1689
+#: plugins/Satellites/src/Satellites.cpp:1692
 msgid "non-operational"
 msgstr "non operativo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1691
+#: plugins/Satellites/src/Satellites.cpp:1694
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1693
+#: plugins/Satellites/src/Satellites.cpp:1696
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1704
+#: plugins/Satellites/src/Satellites.cpp:1707
 msgid "The Hubble Space Telescope"
 msgstr "Telescopio Spaziale Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1706
+#: plugins/Satellites/src/Satellites.cpp:1709
 msgid "The International Space Station"
 msgstr "Stazione Spaziale Internazionale"
 
-#: plugins/Satellites/src/Satellite.cpp:239
-#: plugins/Satellites/src/Satellite.cpp:243
+#: plugins/Satellites/src/Satellite.cpp:242
+#: plugins/Satellites/src/Satellite.cpp:246
 msgid "Catalog #"
 msgstr "N° del catalogo"
 
-#: plugins/Satellites/src/Satellite.cpp:245
+#: plugins/Satellites/src/Satellite.cpp:248
 msgid "International Designator"
 msgstr "Designante internazionale"
 
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:255
 msgid "artificial satellite"
 msgstr "satellite artificiale"
 
-#: plugins/Satellites/src/Satellite.cpp:257
+#: plugins/Satellites/src/Satellite.cpp:260
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Magnitudine approx.: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:267
+#: plugins/Satellites/src/Satellite.cpp:270
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Intervallo (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Satellites/src/Satellite.cpp:273
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Rapporto dell'intervallo (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:273
+#: plugins/Satellites/src/Satellite.cpp:276
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Altitudine (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:279
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Sottopunto (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:290
+#: plugins/Satellites/src/Satellite.cpp:293
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Coordinate TEME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:298
+#: plugins/Satellites/src/Satellite.cpp:301
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Velocità TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:309
 msgid "The satellite and the observer are in sunlight."
 msgstr "Il satellite e l'osservatore sono alla luce del sole"
 
-#: plugins/Satellites/src/Satellite.cpp:309
+#: plugins/Satellites/src/Satellite.cpp:312
 msgid "The satellite is visible."
 msgstr "Il satellite è visibile."
 
-#: plugins/Satellites/src/Satellite.cpp:312
+#: plugins/Satellites/src/Satellite.cpp:315
 msgid "The satellite is eclipsed."
 msgstr "Il satellite è eclissato."
 
-#: plugins/Satellites/src/Satellite.cpp:315
+#: plugins/Satellites/src/Satellite.cpp:318
 msgid "The satellite is not visible"
 msgstr "Il satellite non è visibile"
 
-#: plugins/Satellites/src/Satellite.cpp:340
+#: plugins/Satellites/src/Satellite.cpp:343
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
@@ -8176,47 +8176,47 @@ msgid "Exoplanets configuration window"
 msgstr "Finestra di configurazione degli esopianeti"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:848
+#: plugins/Exoplanets/src/Exoplanets.cpp:851
 msgid "Hot"
 msgstr "Caldo"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:850
+#: plugins/Exoplanets/src/Exoplanets.cpp:853
 msgid "Warm"
 msgstr "Tiepido"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:852
+#: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Cold"
 msgstr "Freddo"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:855
+#: plugins/Exoplanets/src/Exoplanets.cpp:858
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:857
+#: plugins/Exoplanets/src/Exoplanets.cpp:860
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:859
+#: plugins/Exoplanets/src/Exoplanets.cpp:862
 msgid "Terran"
 msgstr "Terrestre"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:861
+#: plugins/Exoplanets/src/Exoplanets.cpp:864
 msgid "Superterran"
 msgstr "Superterrestre"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:863
+#: plugins/Exoplanets/src/Exoplanets.cpp:866
 msgid "Jovian"
 msgstr "Gioviano"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:865
+#: plugins/Exoplanets/src/Exoplanets.cpp:868
 msgid "Neptunian"
 msgstr "Nettuniano"
 
@@ -9133,7 +9133,7 @@ msgstr "Evidenzia le stelle per la navigazione"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:257
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:252
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:267
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
@@ -9149,13 +9149,13 @@ msgid "Show solution for Equation of Time"
 msgstr "Mostra la soluzione dell'equazione del tempo"
 
 #. TRANSLATORS: minutes.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:259
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:254
 msgctxt "time"
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: seconds.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:261
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:256
 msgctxt "time"
 msgid "s"
 msgstr "s"
@@ -9967,53 +9967,53 @@ msgstr "Risultati"
 msgid "Search Events"
 msgstr "Cerca eventi"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
 msgstr "Coordinate del puntatore"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:59
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr "Questo plugin mostra le coordinate del puntatore del mouse."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
 msgid "Show coordinates of the mouse pointer"
 msgstr "Mostra coordinate del puntatore mouse"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:138
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "RA/Dec (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:154
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "RA/Dec"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:174
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Az/Alt"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:190
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "Gal. Long/Lat"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Ecl. Long/Lat (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:245
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:246
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "HA/Dec"
