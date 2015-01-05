@@ -23,6 +23,7 @@
 #include "StelDialog.hpp"
 
 #include <QObject>
+#include <QStringList>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
@@ -57,6 +58,7 @@ private slots:
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
 	void setBortleScaleToolTip(int Bindex);
+	void populateBortleScaleToolTip();
 	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
@@ -85,6 +87,8 @@ private:
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
         AtmosphereDialog * atmosphereDialog;
+
+	QStringList bslist, nelm;
 };
 
 #endif // _VIEWDIALOG_HPP_
