@@ -243,8 +243,8 @@ void ViewDialog::createDialogContent()
 	connect(ui->localLandscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
 	populateLandscapeMinimalBrightness();
 
-	// Light pollution	
-	populateLightPollution();	
+	// Light pollution
+	populateLightPollution();
 	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
 	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
 	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
@@ -332,7 +332,6 @@ void ViewDialog::populateLandscapeMinimalBrightness()
 
 void ViewDialog::populateLightPollution()
 {
-	populateBortleScaleToolTip();
 	StelCore *core = StelApp::getInstance().getCore();
 	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
 	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
@@ -353,29 +352,28 @@ void ViewDialog::populateLightPollution()
 	setBortleScaleToolTip(bIdx);
 }
 
-void ViewDialog::populateBortleScaleToolTip()
+void ViewDialog::setBortleScaleToolTip(int Bindex)
 {
-	bslist.clear();
-	nelm.clear();
-
+	int i = Bindex-1;
+	QStringList list, nelm;
 	//TRANSLATORS: Short description for Class 1 of the Bortle scale
-	bslist.append(q_("Excellent dark-sky site"));
+	list.append(q_("Excellent dark-sky site"));
 	//TRANSLATORS: Short description for Class 2 of the Bortle scale
-	bslist.append(q_("Typical truly dark site"));
+	list.append(q_("Typical truly dark site"));
 	//TRANSLATORS: Short description for Class 3 of the Bortle scale
-	bslist.append(q_("Rural sky"));
+	list.append(q_("Rural sky"));
 	//TRANSLATORS: Short description for Class 4 of the Bortle scale
-	bslist.append(q_("Rural/suburban transition"));
+	list.append(q_("Rural/suburban transition"));
 	//TRANSLATORS: Short description for Class 5 of the Bortle scale
-	bslist.append(q_("Suburban sky"));
+	list.append(q_("Suburban sky"));
 	//TRANSLATORS: Short description for Class 6 of the Bortle scale
-	bslist.append(q_("Bright suburban sky"));
+	list.append(q_("Bright suburban sky"));
 	//TRANSLATORS: Short description for Class 7 of the Bortle scale
-	bslist.append(q_("Suburban/urban transition"));
+	list.append(q_("Suburban/urban transition"));
 	//TRANSLATORS: Short description for Class 8 of the Bortle scale
-	bslist.append(q_("City sky"));
+	list.append(q_("City sky"));
 	//TRANSLATORS: Short description for Class 9 of the Bortle scale
-	bslist.append(q_("Inner-city sky"));
+	list.append(q_("Inner-city sky"));
 
 	nelm.append("7.6–8.0");
 	nelm.append("7.1–7.5");
@@ -386,13 +384,9 @@ void ViewDialog::populateBortleScaleToolTip()
 	nelm.append("4.6–5.0");
 	nelm.append("4.1–4.5");
 	nelm.append("4.0");
-}
 
-void ViewDialog::setBortleScaleToolTip(int Bindex)
-{
-	int i = Bindex-1;
 	QString tooltip = QString("%1 (%2 %3)")
-			.arg(bslist.at(i))
+			.arg(list.at(i))
 			.arg(q_("The naked-eye limiting magnitude is"))
 			.arg(nelm.at(i));
 
