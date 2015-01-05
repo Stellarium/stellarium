@@ -153,7 +153,9 @@ private:
     GLuint cubeRB; //renderbuffer for depth
     GLuint cubeFBO; //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBO ourselves
     QVector<Vec3f> cubeVertices, transformedCubeVertices;
-    QVector<unsigned short> cubeIndices;
+    QOpenGLBuffer cubeVertexBuffer;
+    QOpenGLBuffer cubeIndexBuffer;
+    int cubeIndexCount;
     QMatrix4x4 cubeRotation[6]; //rotational matrices for cube faces
     QMatrix4x4 cubeMVP[6]; //cube face MVP matrices
 
