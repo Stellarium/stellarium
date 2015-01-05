@@ -1,6 +1,6 @@
 /*
  * Stellarium Scenery3d Plug-in
- * 
+ *
  * Copyright (C) 2011 Simon Parzer, Peter Neubauer, Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
@@ -49,7 +49,7 @@ public:
     //! Sets the shaders for the plugin
     void setShaders(QOpenGLShaderProgram* debugShader = 0)
     {
-        this->debugShader = debugShader;
+	this->debugShader = debugShader;
     }
 
     //! Loads the specified scene
@@ -152,7 +152,7 @@ private:
     GLuint cubeMapDepth;
     GLuint cubeRB; //renderbuffer for depth
     GLuint cubeFBO; //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBO ourselves
-    QVector<Vec3f> cubeVertices;
+    QVector<Vec3f> cubeVertices, transformedCubeVertices;
     QVector<unsigned short> cubeIndices;
     QMatrix4x4 cubeRotation[6]; //rotational matrices for cube faces
     QMatrix4x4 cubeMVP[6]; //cube face MVP matrices
@@ -278,18 +278,8 @@ private:
     //Computes the light projection values
     void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
 
-    inline QMatrix4x4 convertToQMatrix(const Mat4d& mat);
-
     //! Loads the model contained in the current scene
     void loadModel();
 };
-
-QMatrix4x4 Scenery3d::convertToQMatrix(const Mat4d &mat)
-{
-	return QMatrix4x4( mat.r[0], mat.r[4], mat.r[8],mat.r[12],
-			   mat.r[1], mat.r[5], mat.r[9],mat.r[13],
-			   mat.r[2], mat.r[6],mat.r[10],mat.r[14],
-			   mat.r[3], mat.r[7],mat.r[11],mat.r[15] );
-}
 
 #endif
