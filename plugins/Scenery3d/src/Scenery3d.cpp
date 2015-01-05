@@ -79,7 +79,8 @@ GLExtFuncs glExtFuncs;
 
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
     : parent(parent), currentScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
-      absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL)
+      absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),
+      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer)
 {
 	qDebug()<<"Scenery3d constructor...";
 
@@ -131,10 +132,13 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 
 Scenery3d::~Scenery3d()
 {
-    if (heightmap) {
-	delete heightmap;
-	heightmap = NULL;
-    }
+	if (heightmap) {
+		delete heightmap;
+		heightmap = NULL;
+	}
+
+	cubeVertexBuffer.destroy();
+	cubeIndexBuffer.destroy();
 
 	deleteShadowmapping();
 	deleteCubemapping();
@@ -1344,12 +1348,19 @@ void Scenery3d::drawFromCubeMap()
     projectionMatrix = convertToQMatrix(altAzProjector->getProjectionMatrix());
     cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
     cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_CUBEMAP),0);
-    cubeShader->setAttributeArray(ShaderMgr::ATTLOC_TEXCOORD,reinterpret_cast<const GLfloat*>(cubeVertices.constData()),3);
+    cubeVertexBuffer.bind();
+    cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
+    cubeVertexBuffer.release();
     cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
     cubeShader->setAttributeArray(ShaderMgr::ATTLOC_VERTEX, reinterpret_cast<const GLfloat*>(transformedCubeVertices.constData()),3);
     cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
 
-    glDrawElements(GL_TRIANGLES,cubeIndices.size(),GL_UNSIGNED_SHORT,cubeIndices.constData());
+    cubeIndexBuffer.bind();
+    glDrawElements(GL_TRIANGLES,cubeIndexCount,GL_UNSIGNED_SHORT, NULL);
+    cubeIndexBuffer.release();
+
+    cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
+    cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
@@ -1533,6 +1544,11 @@ void Scenery3d::init()
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
 	//initialize additional functions needed and not provided through StelOpenGL
 	glExtFuncs.init(ctx);
+
+	cubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+	cubeVertexBuffer.create();
+	cubeIndexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+	cubeIndexBuffer.create();
 
 	//enable seamless cubemapping if HW supports it
 	if(ctx->hasExtension("GL_ARB_seamless_cube_map"))
@@ -1740,8 +1756,8 @@ void Scenery3d::initCubemapping()
 	//note that edge vertices of the faces are duplicated
 
 	cubeVertices.clear();
-	cubeIndices.clear();
 	cubeVertices.reserve(vtxCount * 6);
+	QVector<unsigned short> cubeIndices; //index data is not needed afterwards on CPU side, so use a local vector
 	cubeIndices.reserve(idxCount * 6);
 	//init with copies of front face
 	cubeVertices<<cubePlaneFront;  //E face y=1
@@ -1758,8 +1774,9 @@ void Scenery3d::initCubemapping()
 	cubeIndices<<frontIndices;
 
 	transformedCubeVertices.resize(cubeVertices.size());
+	cubeIndexCount = cubeIndices.size();
 
-	qDebug()<<"[Scenery3d] Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndices.size()<<"indices";
+	qDebug()<<"[Scenery3d] Using cube with"<<cubeVertices.size()<<"vertices and" <<cubeIndexCount<<"indices";
 
 	//create the other cube faces by rotating the front face
 #define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
@@ -1771,6 +1788,15 @@ void Scenery3d::initCubemapping()
 	PLANE(4, Mat4f::xrotation(-M_PI_2));
 	PLANE(5, Mat4f::xrotation(M_PI_2));
 #undef PLANE
+
+	//upload original cube vertices + indices to GL
+	cubeVertexBuffer.bind();
+	cubeVertexBuffer.allocate(cubeVertices.constData(),cubeVertices.size() * sizeof(Vec3f));
+	cubeVertexBuffer.release();
+
+	cubeIndexBuffer.bind();
+	cubeIndexBuffer.allocate(cubeIndices.constData(),cubeIndices.size() * sizeof(unsigned short));
+	cubeIndexBuffer.release();
 
 	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
 }
