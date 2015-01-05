@@ -70,5 +70,15 @@ inline QVector3D operator*(const QMatrix3x3& mat, const QVector3D& vec)
 	return QVector3D(x,y,z);
 }
 
+template<typename T>
+inline QMatrix4x4 convertToQMatrix(const Matrix4<T>& mat)
+{
+	return QMatrix4x4( mat.r[0], mat.r[4], mat.r[8],mat.r[12],
+			   mat.r[1], mat.r[5], mat.r[9],mat.r[13],
+			   mat.r[2], mat.r[6],mat.r[10],mat.r[14],
+			   mat.r[3], mat.r[7],mat.r[11],mat.r[15] );
+}
+
+
 #endif
 

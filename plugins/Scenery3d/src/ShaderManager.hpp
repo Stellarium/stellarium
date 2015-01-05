@@ -54,7 +54,7 @@ public:
 		//! This is the OpenGL attribute location where vertex normals are mapped to
 		ATTLOC_NORMAL,
 		//! This is the OpenGL attribute location where vertex texture coordinates are mapped to
-		ATTLOC_TEXTURE,
+		ATTLOC_TEXCOORD,
 		//! This is the OpenGL attribute location where vertex tangents are mapped to
 		ATTLOC_TANGENT,
 		//! This is the OpenGL attribute location where vertex bitangents are mapped to
@@ -86,6 +86,8 @@ public:
 		UNIFORM_TEX_BUMP,
 		//! Defines the Height texture slot
 		UNIFORM_TEX_HEIGHT,
+		//! Defines a cubemap slot
+		UNIFORM_TEX_CUBEMAP,
 		//! First shadow map
 		UNIFORM_TEX_SHADOW0,
 		UNIFORM_TEX_SHADOW1,
@@ -126,6 +128,9 @@ public:
 	//! Returns a shader that can only transform geometry, nothing else
 	inline QOpenGLShaderProgram* getTransformShader();
 
+	//! Returns the cubemapping shader
+	inline QOpenGLShaderProgram* getCubeShader();
+
 	//! Returns the location of this uniform for this shader, or -1 if this uniform does not exist.
 	//! This is cached to elimate the overhead of the glGet calls
 	inline GLint uniformLocation(const QOpenGLShaderProgram* shad,UNIFORM uni);
@@ -142,7 +147,7 @@ private:
 	{
 		//Transform-only shader (all flags off) (use for depth-only render)
 		TRANSFORM	= 0,
-		//The shader has some sort of color output
+		//The shader has some sort of light-dependant color output
 		SHADING		= (1<<0),
 		//Per-pixel lighting
 		PIXEL_LIGHTING  = (1<<1),
@@ -166,6 +171,8 @@ private:
 		MAT_DIFFUSETEX	= (1<<9),
 		//needs geometry shader cubemapping
 		GEOMETRY_SHADER = (1<<10),
+		//shader performs cubemap lookup
+		CUBEMAP		= (1<<11),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -224,6 +231,11 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 QOpenGLShaderProgram* ShaderMgr::getTransformShader()
 {
 	return findOrLoadShader(TRANSFORM);
+}
+
+QOpenGLShaderProgram* ShaderMgr::getCubeShader()
+{
+	return findOrLoadShader(CUBEMAP);
 }
 
 GLint ShaderMgr::uniformLocation(const QOpenGLShaderProgram *shad, UNIFORM uni)
