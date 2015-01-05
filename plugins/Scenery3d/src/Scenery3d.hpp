@@ -152,7 +152,8 @@ private:
     GLuint cubeMapDepth;
     GLuint cubeRB; //renderbuffer for depth
     GLuint cubeFBO; //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBO ourselves
-    QVector<Vec3f> cubePlaneFront, cubeVertices;
+    QVector<Vec3f> cubeVertices;
+    QVector<unsigned short> cubeIndices;
     QMatrix4x4 cubeRotation[6]; //rotational matrices for cube faces
     QMatrix4x4 cubeMVP[6]; //cube face MVP matrices
 

@@ -2059,6 +2059,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	else if (pr == cubeShaderProgram)
 	{
 		pr->disableAttributeArray(cubeShaderVars.vertex);
+		pr->disableAttributeArray(cubeShaderVars.originalPos);
 	}
 	if (pr)
 		pr->release();
