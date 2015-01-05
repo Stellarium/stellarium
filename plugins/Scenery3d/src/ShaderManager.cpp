@@ -49,6 +49,7 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_texDiffuse"] = UNIFORM_TEX_DIFFUSE;
 		uniformStrings["u_texBump"] = UNIFORM_TEX_BUMP;
 		uniformStrings["u_texHeight"] = UNIFORM_TEX_HEIGHT;
+		uniformStrings["u_texCubemap"] = UNIFORM_TEX_CUBEMAP;
 		uniformStrings["u_texShadow0"] = UNIFORM_TEX_SHADOW0;
 		uniformStrings["u_texShadow1"] = UNIFORM_TEX_SHADOW1;
 		uniformStrings["u_texShadow2"] = UNIFORM_TEX_SHADOW2;
@@ -186,6 +187,10 @@ QString ShaderMgr::getVShaderName(uint flags)
 		else
 			return "s3d_pixellit.vert";
 	}
+	else if (flags & CUBEMAP)
+	{
+		return "s3d_cube.vert";
+	}
 	else
 	{
 		return "s3d_transform.vert";
@@ -213,6 +218,10 @@ QString ShaderMgr::getFShaderName(uint flags)
 			return "s3d_vertexlit.frag";
 		else
 			return "s3d_pixellit.frag";
+	}
+	else if (flags & CUBEMAP)
+	{
+		return "s3d_cube.frag";
 	}
 	return QString();
 }
@@ -345,7 +354,7 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	//This enables us to use a single VAO configuration for all shaders!
 	program.bindAttributeLocation("a_vertex",ATTLOC_VERTEX);
 	program.bindAttributeLocation("a_normal", ATTLOC_NORMAL);
-	program.bindAttributeLocation("a_texcoord",ATTLOC_TEXTURE);
+	program.bindAttributeLocation("a_texcoord",ATTLOC_TEXCOORD);
 	program.bindAttributeLocation("a_tangent",ATTLOC_TANGENT);
 	program.bindAttributeLocation("a_bitangent",ATTLOC_BITANGENT);
 
