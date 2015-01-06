@@ -48,6 +48,7 @@ Scenery3dMgr::Scenery3dMgr() :
     flagEnabled(false),
     cleanedUp(false),
     debugShader(NULL),
+    progressBar(NULL),
     currentLoadFuture(this)
 {
     setObjectName("Scenery3dMgr");
@@ -336,8 +337,21 @@ void Scenery3dMgr::progressReceive(const QString &str, int val, int min, int max
 
 void Scenery3dMgr::loadScene(const SceneInfo& scene)
 {
-	//TODO perform cancel of old loading
+	scenery3d->setLoadCancel(true);
+
+	//If currently loading, we have to wait until it is finished
+	//This currently blocks the GUI thread until the loading can be canceled
+	//  (which is for now rather rough-grained and so may take a while)
 	currentLoadFuture.waitForFinished();
+	scenery3d->setLoadCancel(false);
+
+	if(progressBar)
+	{
+		//kinda hack: it can be that this here is executed before loadSceneBackground is called
+		//so we push the call back into the queue to ensure correct execution order
+		QMetaObject::invokeMethod(this,"loadScene",Qt::QueuedConnection,Q_ARG(SceneInfo, scene));
+		return;
+	}
 
 	currentLoadScene = scene;
 
@@ -353,7 +367,8 @@ void Scenery3dMgr::loadScene(const SceneInfo& scene)
 
 bool Scenery3dMgr::loadSceneBackground()
 {
-	return scenery3d->loadScene(currentLoadScene);
+	bool val = scenery3d->loadScene(currentLoadScene);
+	return val;
 }
 
 void Scenery3dMgr::loadSceneCompleted()
@@ -369,6 +384,8 @@ void Scenery3dMgr::loadSceneCompleted()
 		showMessage(N_("Could not load scene, please check log for error messages!"));
 		return;
 	}
+	else
+		showMessage(N_("Scene successfully loaded"));
 
 	//do stuff that requires the main thread
 
@@ -411,10 +428,10 @@ void Scenery3dMgr::loadSceneCompleted()
 	setEnableScene(true);
 }
 
-bool Scenery3dMgr::loadScenery3dByID(const QString& id)
+SceneInfo Scenery3dMgr::loadScenery3dByID(const QString& id)
 {
 	if (id.isEmpty())
-		return false;
+		return SceneInfo();
 
 	SceneInfo scene;
 	try
@@ -422,7 +439,7 @@ bool Scenery3dMgr::loadScenery3dByID(const QString& id)
 		if(!SceneInfo::loadByID(id,scene))
 		{
 			showMessage(N_("Could not load scene info, please check log for error messages!"));
-			return false;
+			return SceneInfo();
 		}
 	}
 	catch (std::runtime_error& e)
@@ -432,20 +449,20 @@ bool Scenery3dMgr::loadScenery3dByID(const QString& id)
 	}
 
 	loadScene(scene);
-	return true;
+	return scene;
 }
 
-bool Scenery3dMgr::loadScenery3dByName(const QString& name)
+SceneInfo Scenery3dMgr::loadScenery3dByName(const QString& name)
 {
 	if (name.isEmpty())
-	    return false;
+	    return SceneInfo();
 
 	QString id = SceneInfo::getIDFromName(name);
 
 	if(id.isEmpty())
 	{
 		showMessage(QString(N_("Could not find scene ID for %1")).arg(name));
-		return false;
+		return SceneInfo();
 	}
 	return loadScenery3dByID(id);
 }

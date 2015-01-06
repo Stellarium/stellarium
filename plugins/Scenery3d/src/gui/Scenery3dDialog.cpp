@@ -106,9 +106,9 @@ void Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged(int index)
 
 void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 {
-	if(mgr->loadScenery3dByName(item->text())) //this if makes sure the .ini has been loaded
+	SceneInfo info = mgr->loadScenery3dByName(item->text());
+	if(info.isValid) //this if makes sure the .ini has been loaded
 	{
-		SceneInfo info = mgr->getLoadingScene();  //use the currently loading scene to display info
 		ui->scenery3dTextBrowser->setHtml(getHtmlDescription(info));
 	}
 }
