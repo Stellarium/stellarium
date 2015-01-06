@@ -135,17 +135,17 @@ public slots:
 
     bool getIsGeometryShaderSupported() const;
 
-    SceneInfo getLoadingScene() const { return currentLoadScene; }
+    //! Gets the scene info that is currently being displayed.
     SceneInfo getCurrentScene() const;
 
     //! This starts the scene loading process. This is asynchronous, this method returns after metadata loading.
     //! @param name a valid scene name
-    //! @return true if the scene metadata could be loaded (available with getLoadingScene())
-    bool loadScenery3dByName(const QString& name);
+    //! @return The loaded SceneInfo. Check SceneInfo::isValid to make sure loading was successful.
+    SceneInfo loadScenery3dByName(const QString& name);
     //! This starts the scene loading process. This is asynchronous, this method returns after metadata loading.
     //! @param id a valid scene id/folder path
-    //! @return true if the scene metadata could be loaded (available with getLoadingScene())
-    bool loadScenery3dByID(const QString& id);
+    //! @return The loaded SceneInfo. Check SceneInfo::isValid to make sure loading was successful.
+    SceneInfo loadScenery3dByID(const QString& id);
 
     QString getDefaultScenery3dID() const { return defaultScenery3dID; }
     bool setDefaultScenery3dID(const QString& id);
@@ -154,6 +154,7 @@ private slots:
     void clearMessage();
     void loadSceneCompleted();
     void progressReceive(const QString& str, int val, int min, int max);
+    void loadScene(const SceneInfo& scene);
 
 private:
     //! Loads config values from app settings
@@ -163,8 +164,6 @@ private:
 
     //! Loads the given vertex and fragment shaders into the given program.
     bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader);
-
-    void loadScene(const SceneInfo& scene);
 
     //! This is run asynchronously in a background thread
     bool loadSceneBackground();

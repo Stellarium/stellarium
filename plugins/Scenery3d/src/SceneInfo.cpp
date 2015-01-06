@@ -29,6 +29,12 @@
 #include <QFileInfo>
 
 const QString SceneInfo::SCENES_PATH("scenery3d/");
+int SceneInfo::metaTypeId = initMetaType();
+
+int SceneInfo::initMetaType()
+{
+	return qRegisterMetaType<SceneInfo>();
+}
 
 bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 {

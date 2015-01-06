@@ -105,6 +105,8 @@ public:
     float getTorchBrightness() const { return torchBrightness; }
     void setTorchBrightness(float brightness) { torchBrightness = brightness; }
 
+    void setLoadCancel(bool val) { loadCancel = val; }
+
     enum ShadowCaster { None, Sun, Moon, Venus };
 
     //! Returns the shader manager this instance uses
@@ -129,6 +131,8 @@ private:
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
     bool useGSCubemapping;
     bool reinitCubemapping;
+
+    bool loadCancel; //true if loading process should be canceled
 
     unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
     unsigned int shadowmapSize;
