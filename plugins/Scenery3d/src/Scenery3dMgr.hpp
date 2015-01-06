@@ -135,13 +135,20 @@ public slots:
 
     bool getIsGeometryShaderSupported() const;
 
-    QString getCurrentScenery3dID() const;
-    bool setCurrentScenery3dID(const QString& id);
-    QString getCurrentScenery3dName() const;
-    bool setCurrentScenery3dName(const QString& name);
+    SceneInfo getLoadingScene() const { return currentLoadScene; }
+    SceneInfo getCurrentScene() const;
+
+    //! This starts the scene loading process. This is asynchronous, this method returns after metadata loading.
+    //! @param name a valid scene name
+    //! @return true if the scene metadata could be loaded (available with getLoadingScene())
+    bool loadScenery3dByName(const QString& name);
+    //! This starts the scene loading process. This is asynchronous, this method returns after metadata loading.
+    //! @param id a valid scene id/folder path
+    //! @return true if the scene metadata could be loaded (available with getLoadingScene())
+    bool loadScenery3dByID(const QString& id);
+
     QString getDefaultScenery3dID() const { return defaultScenery3dID; }
     bool setDefaultScenery3dID(const QString& id);
-    QString getCurrentScenery3dHtmlDescription() const;
 
 private slots:
     void clearMessage();

@@ -32,8 +32,10 @@
 //! and can be loaded from special .ini files in a scene's folder.
 struct SceneInfo
 {
-	SceneInfo() : id(),name(),description(),location()
+	SceneInfo() : isValid(false),id(),name(),description(),location()
 	{}
+	//! If this is a valid sceneInfo object loaded from file
+	bool isValid;
 	//! ID of the scene (relative directory)
 	QString id;
 	//! The full path to the scene's folder. Other paths (model files) are to be seen relative to this path.

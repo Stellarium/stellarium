@@ -5,6 +5,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+#include "StelTranslator.hpp"
 
 #include <QTimer>
 
@@ -35,8 +36,7 @@ void Scenery3dDialog::createDialogContent()
 
 	//connect UI events
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->scenery3dListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this,
-		SLOT(scenery3dChanged(QListWidgetItem*)));
+	connect(ui->scenery3dListWidget, &QListWidget::currentItemChanged, this, &Scenery3dDialog::scenery3dChanged);
 
 	//checkboxes can connect directly to manager
 	connect(ui->checkBoxEnablePixelLight, SIGNAL(clicked(bool)),mgr,
@@ -64,15 +64,23 @@ void Scenery3dDialog::createDialogContent()
     // Fill the scenery list
     QListWidget* l = ui->scenery3dListWidget;
     l->blockSignals(true);
-    l->clear();
-
     l->addItems( SceneInfo::getAllSceneNames() );
-    QList<QListWidgetItem*> currentItems = l->findItems(mgr->getCurrentScenery3dName(), Qt::MatchExactly);
-    if (currentItems.size() > 0) {
-        l->setCurrentItem(currentItems.at(0));
+
+    SceneInfo current = mgr->getCurrentScene();
+
+    StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+    Q_ASSERT(gui);
+    ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+
+    if(current.isValid)
+    {
+	    QList<QListWidgetItem*> currentItems = l->findItems(current.name, Qt::MatchExactly);
+	    if (currentItems.size() > 0) {
+		    l->setCurrentItem(currentItems.at(0));
+	    }
+	    ui->scenery3dTextBrowser->setHtml(getHtmlDescription(current));
     }
     l->blockSignals(false);
-    ui->scenery3dTextBrowser->setHtml(mgr->getCurrentScenery3dHtmlDescription());
 
     updateFromManager();
 }
@@ -98,13 +106,21 @@ void Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged(int index)
 
 void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 {
-    if(mgr->setCurrentScenery3dName(item->text()))
-    {
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->scenery3dTextBrowser->setHtml(mgr->getCurrentScenery3dHtmlDescription());
-    }
+	if(mgr->loadScenery3dByName(item->text())) //this if makes sure the .ini has been loaded
+	{
+		SceneInfo info = mgr->getLoadingScene();  //use the currently loading scene to display info
+		ui->scenery3dTextBrowser->setHtml(getHtmlDescription(info));
+	}
+}
+
+QString Scenery3dDialog::getHtmlDescription(const SceneInfo &si) const
+{
+	QString desc = QString("<h3>%1</h3>").arg(si.name);
+	desc += si.description;
+	desc+="<br><br>";
+	desc+="<b>"+q_("Author: ")+"</b>";
+	desc+= si.author;
+	return desc;
 }
 
 // Update the widget to make sure it is synchrone if a value was changed programmatically
