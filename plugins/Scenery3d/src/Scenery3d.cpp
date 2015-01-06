@@ -163,6 +163,8 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	else if (loadingScene.vertexOrder.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
 	else if (loadingScene.vertexOrder.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
 
+	parent->updateProgress("Loading model...",1,0,6);
+
 	//load model
 	objModelLoad.reset(new OBJ());
 	QString modelFile = StelFileMgr::findFile( loadingScene.fullPath+ "/" + loadingScene.modelScenery);
@@ -173,6 +175,8 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	    return false;
 	}
 
+	parent->updateProgress("Transforming model...",2,0,6);
+
 	//transform the vertices of the model to match the grid
 	objModelLoad->transform(zRot2GridLoad);
 
@@ -180,6 +184,8 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		groundModelLoad = objModelLoad;
 	else if (loadingScene.modelGround != "NULL")
 	{
+		parent->updateProgress("Loading ground...",3,0,6);
+
 		groundModelLoad.reset(new OBJ());
 		modelFile = StelFileMgr::findFile(loadingScene.fullPath + "/" + loadingScene.modelGround);
 		qDebug()<<"Loading "<<modelFile;
@@ -188,6 +194,8 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 			qCritical()<<"Failed to load OBJ file.";
 			return false;
 		}
+
+		parent->updateProgress("Transforming ground...",4,0,6);
 
 		groundModelLoad->transform( zRot2GridLoad );
 	}
@@ -208,6 +216,8 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	else qDebug() << "Ground outside model stays " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
 
 	//calculate heightmap
+
+	parent->updateProgress("Calculating collision map...",5,0,6);
 
 	if(heightmapLoad)
 	{
