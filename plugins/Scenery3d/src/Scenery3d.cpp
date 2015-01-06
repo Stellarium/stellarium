@@ -154,6 +154,9 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 {
 	loadingScene = scene;
 
+	if(loadCancel)
+		return false;
+
 	//setup some state
 	zRot2GridLoad = loadingScene.zRotateMatrix*loadingScene.obj2gridMatrix;
 
@@ -176,10 +179,16 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	    return false;
 	}
 
+	if(loadCancel)
+		return false;
+
 	parent->updateProgress(N_("Transforming model..."),2,0,6);
 
 	//transform the vertices of the model to match the grid
 	objModelLoad->transform(zRot2GridLoad);
+
+	if(loadCancel)
+		return false;
 
 	if(loadingScene.modelGround.isEmpty())
 		groundModelLoad = objModelLoad;
@@ -197,9 +206,14 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		}
 
 		parent->updateProgress(N_("Transforming ground..."),4,0,6);
+		if(loadCancel)
+			return false;
 
 		groundModelLoad->transform( zRot2GridLoad );
 	}
+
+	if(loadCancel)
+		return false;
 
 	if(loadingScene.hasLocation())
 	{
@@ -217,7 +231,8 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	else qDebug() << "Ground outside model stays " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
 
 	//calculate heightmap
-
+	if(loadCancel)
+		return false;
 	parent->updateProgress(N_("Calculating collision map..."),5,0,6);
 
 	if(heightmapLoad)
