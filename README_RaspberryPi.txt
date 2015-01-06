@@ -66,9 +66,13 @@ mkdir -p builds/raspi
 cd builds/raspi
 cmake ../..
 
-Now we must add some dependencies. TODO: change CMakeLists.txt to make that automatic.
-Edit build/src/CMakeFiles/stellarium.dir/link.txt and add 
+Now we must add some dependencies. 
+Edit build/src/CMakeFiles/stellarium.dir/link.txt and add this line to the end:
 
+-Wl,-rpath-link,/usr/lib/arm-linux-gnueabihf -Wl,-rpath-link,/lib/arm-linux-gnueabihf -Wl,-O1  /opt/vc/lib/libGLESv2.so
+
+
+TODO: Find out what to change in CMakeLists.txt to make that automatic.
 
 4) Make
 =========
@@ -76,11 +80,15 @@ Edit build/src/CMakeFiles/stellarium.dir/link.txt and add
 make
 make install
 
+This takes again some time but should now compile without further issues.
+
 
 5) CHANGES MADE TO THE CODE:
 ================================
 
 CMakeFile.txt: added Raspi settings, minQt=5.4, prevent CMake policy warning for >3.0.2.
+               For now, deactivated building most plugins to save build time. Can be reactivated later, 
+               on this platform select only what you need.
 StelOpenGL.hpp add some lines to define GL_DOUBLE, set that to regular float. Hopefully effect is small...
 
 6) PROBLEMS DETECTED
@@ -92,6 +100,7 @@ After make install, running it displays the splash screen, but aborts with:
 EGLFS: OpenGL windows cannot be mixed with others.
 Aborted
 
+This also occurs if launched from the command line. In this case, system returns to command line prompt but keyboard is deactivated. 
 
 Some explanation is here, and may be another thing to consider in Qt5.4 porting. 
 http://comments.gmane.org/gmane.comp.lib.qt.user/11116
