@@ -5,6 +5,7 @@
 #include "ui_scenery3dDialog.h"
 
 class Scenery3dMgr;
+class SceneInfo;
 
 class Scenery3dDialog : public StelDialog
 {
@@ -28,6 +29,8 @@ private slots:
     void updateFromManager();
 
 private:
+    QString getHtmlDescription(const SceneInfo& si) const;
+
     Ui_scenery3dDialogForm* ui;
     Scenery3dMgr* mgr;
 };

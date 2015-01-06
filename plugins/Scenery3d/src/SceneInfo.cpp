@@ -234,6 +234,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	}
 	ini.endGroup();
 
+	info.isValid = true;
 	return true;
 }
 
