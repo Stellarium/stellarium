@@ -318,11 +318,6 @@ bool Scenery3dMgr::configureGui(bool show)
     return true;
 }
 
-QString Scenery3dMgr::getCurrentScenery3dID() const
-{
-	return scenery3d->getCurrentScene().id;
-}
-
 void Scenery3dMgr::updateProgress(const QString &str, int val, int min, int max)
 {
 	emit progressReport(str,val,min,max);
@@ -416,7 +411,7 @@ void Scenery3dMgr::loadSceneCompleted()
 	setEnableScene(true);
 }
 
-bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
+bool Scenery3dMgr::loadScenery3dByID(const QString& id)
 {
 	if (id.isEmpty())
 		return false;
@@ -432,6 +427,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 	}
 	catch (std::runtime_error& e)
 	{
+		//TODO do away with the exceptions if possible
 		qCritical() << "ERROR while loading 3D scenery with id " <<  id  << ", (" << e.what() << ")";
 	}
 
@@ -439,7 +435,7 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 	return true;
 }
 
-bool Scenery3dMgr::setCurrentScenery3dName(const QString& name)
+bool Scenery3dMgr::loadScenery3dByName(const QString& name)
 {
 	if (name.isEmpty())
 	    return false;
@@ -451,7 +447,12 @@ bool Scenery3dMgr::setCurrentScenery3dName(const QString& name)
 		showMessage(QString(N_("Could not find scene ID for %1")).arg(name));
 		return false;
 	}
-	return setCurrentScenery3dID(id);
+	return loadScenery3dByID(id);
+}
+
+SceneInfo Scenery3dMgr::getCurrentScene() const
+{
+	return scenery3d->getCurrentScene();
 }
 
 bool Scenery3dMgr::setDefaultScenery3dID(const QString& id)
@@ -462,22 +463,6 @@ bool Scenery3dMgr::setDefaultScenery3dID(const QString& id)
 
     conf->setValue("init_location/scenery3d_name", id);
     return true;
-}
-
-QString Scenery3dMgr::getCurrentScenery3dName() const
-{
-    return scenery3d->getCurrentScene().name;
-}
-
-QString Scenery3dMgr::getCurrentScenery3dHtmlDescription() const
-{
-	SceneInfo si = scenery3d->getCurrentScene();
-    QString desc = QString("<h3>%1</h3>").arg(si.name);
-    desc += si.description;
-    desc+="<br><br>";
-    desc+="<b>"+q_("Author: ")+"</b>";
-    desc+= si.author;
-    return desc;
 }
 
 void Scenery3dMgr::setEnableScene(const bool enable)

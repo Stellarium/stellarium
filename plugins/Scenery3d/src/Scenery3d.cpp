@@ -32,6 +32,7 @@
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
 #include "SolarSystem.hpp"
@@ -78,7 +79,7 @@ static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 GLExtFuncs glExtFuncs;
 
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
-    : parent(parent), currentScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
+    : parent(parent), currentScene(), loadingScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
       absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),heightmapLoad(NULL),
       cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer)
 {
@@ -163,7 +164,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	else if (loadingScene.vertexOrder.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
 	else if (loadingScene.vertexOrder.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
 
-	parent->updateProgress("Loading model...",1,0,6);
+	parent->updateProgress(N_("Loading model..."),1,0,6);
 
 	//load model
 	objModelLoad.reset(new OBJ());
@@ -175,7 +176,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	    return false;
 	}
 
-	parent->updateProgress("Transforming model...",2,0,6);
+	parent->updateProgress(N_("Transforming model..."),2,0,6);
 
 	//transform the vertices of the model to match the grid
 	objModelLoad->transform(zRot2GridLoad);
@@ -184,7 +185,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		groundModelLoad = objModelLoad;
 	else if (loadingScene.modelGround != "NULL")
 	{
-		parent->updateProgress("Loading ground...",3,0,6);
+		parent->updateProgress(N_("Loading ground..."),3,0,6);
 
 		groundModelLoad.reset(new OBJ());
 		modelFile = StelFileMgr::findFile(loadingScene.fullPath + "/" + loadingScene.modelGround);
@@ -195,7 +196,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 			return false;
 		}
 
-		parent->updateProgress("Transforming ground...",4,0,6);
+		parent->updateProgress(N_("Transforming ground..."),4,0,6);
 
 		groundModelLoad->transform( zRot2GridLoad );
 	}
@@ -210,21 +211,21 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 
 	if(scene.groundNullHeightFromModel)
 	{
-		loadingScene.groundNullHeight = ((groundModelLoad->isLoaded()) ? groundModelLoad->getBoundingBox().min[2] : objModelLoad->getBoundingBox().min[2]);
+		loadingScene.groundNullHeight = ((!groundModelLoad.isNull() && groundModelLoad->isLoaded()) ? groundModelLoad->getBoundingBox().min[2] : objModelLoad->getBoundingBox().min[2]);
 		qDebug() << "Ground outside model is " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
 	}
 	else qDebug() << "Ground outside model stays " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
 
 	//calculate heightmap
 
-	parent->updateProgress("Calculating collision map...",5,0,6);
+	parent->updateProgress(N_("Calculating collision map..."),5,0,6);
 
 	if(heightmapLoad)
 	{
 		delete heightmapLoad;
 	}
 
-	if(groundModelLoad->isLoaded())
+	if( !groundModelLoad.isNull() && groundModelLoad->isLoaded())
 	{
 		heightmapLoad = new Heightmap(groundModelLoad.data());
 		heightmapLoad->setNullHeight(loadingScene.groundNullHeight);
@@ -699,7 +700,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			if(!newShader)
 			{
 				//shader invalid, can't draw
-				parent->showMessage("Scenery3d shader error, can't draw. Check debug output for details.");
+				parent->showMessage(N_("Scenery3d shader error, can't draw. Check debug output for details."));
 				break;
 			}
 			if(newShader!=curShader)
@@ -1036,7 +1037,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	QOpenGLShaderProgram* tfshd = shaderManager.getTransformShader();
 	if(!tfshd)
 	{
-		parent->showMessage("Shadow transformation shader can not be used, can not use shadows. Check log for details.");
+		parent->showMessage(N_("Shadow transformation shader can not be used, can not use shadows. Check log for details."));
 		return false;
 	}
 	tfshd->bind();
@@ -1926,7 +1927,7 @@ bool Scenery3d::initShadowmapping()
 
 	if(!valid)
 	{
-		parent->showMessage("Shadow mapping can not be used on your hardware, check logs for details");
+		parent->showMessage(N_("Shadow mapping can not be used on your hardware, check logs for details"));
 	}
 	return valid;
 }
