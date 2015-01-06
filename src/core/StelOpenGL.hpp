@@ -155,6 +155,33 @@
 #  define GL_LINE_SMOOTH 0x0B20
 # endif
 
+// In GLES on RaspberryPI, GL_DOUBLE is not defined.
+#if defined(RASPI_BUILD)
+#pragma message "======================== Building on RaspberryPi!"
+# ifndef GL_DOUBLE
+#  define GL_DOUBLE GL_FLOAT
+# endif
+# ifndef GLdouble
+typedef GLfloat GLdouble;
+# endif
+#endif
+
+#if defined(QT_OPENGL_ES_1) 
+#pragma message "==========================This goes to OpenGL ES 1"
+#elif defined(QT_OPENGL_ES_2) 
+#pragma message "==========================This goes to OpenGL ES 2"
+#else 
+#pragma message "==========================This goes to Desktop OpenGL"
+#endif
+
+// another option could be (forum.openscenegraph.org/viewtopic.php?t=11504
+// #ifndef GL_DOUBLE
+// #define GL_DOUBLE 0x140A
+// #endif
+// #ifndef GLdouble
+// #define GLdouble double
+// #endif
+
 const char* getGLErrorText(int code);
 int checkGLErrors(const char *file, int line);
 
