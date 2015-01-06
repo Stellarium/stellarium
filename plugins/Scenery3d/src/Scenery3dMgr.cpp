@@ -58,9 +58,10 @@ Scenery3dMgr::Scenery3dMgr() :
     messageTimer = new QTimer(this);
     messageTimer->setInterval(2000);
     messageTimer->setSingleShot(true);
-    connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
+    connect(messageTimer, &QTimer::timeout, this, &Scenery3dMgr::clearMessage);
+    connect(&currentLoadFuture,&QFutureWatcherBase::finished, this, &Scenery3dMgr::loadSceneCompleted);
 
-    connect(&currentLoadFuture,SIGNAL(finished()), this, SLOT(loadSceneCompleted()));
+    connect(this, &Scenery3dMgr::progressReport, this, &Scenery3dMgr::progressReceive, Qt::QueuedConnection);
 
     //create scenery3d object
     scenery3d = new Scenery3d(this);
@@ -320,6 +321,22 @@ bool Scenery3dMgr::configureGui(bool show)
 QString Scenery3dMgr::getCurrentScenery3dID() const
 {
 	return scenery3d->getCurrentScene().id;
+}
+
+void Scenery3dMgr::updateProgress(const QString &str, int val, int min, int max)
+{
+	emit progressReport(str,val,min,max);
+}
+
+void Scenery3dMgr::progressReceive(const QString &str, int val, int min, int max)
+{
+	//update progress bar
+	if(progressBar)
+	{
+		progressBar->setFormat(str);
+		progressBar->setRange(min,max);
+		progressBar->setValue(val);
+	}
 }
 
 void Scenery3dMgr::loadScene(const SceneInfo& scene)

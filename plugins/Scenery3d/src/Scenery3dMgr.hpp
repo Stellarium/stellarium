@@ -74,6 +74,8 @@ public:
     virtual bool configureGui(bool show);
     virtual void handleKeys(QKeyEvent* e);
 
+    //! Sends the progressReport() signal, which eventually updates the progress bar. Can be called from another thread.
+    void updateProgress(const QString& str, int val, int min, int max);
 signals:
     void enableSceneChanged(const bool val);
     void enablePixelLightingChanged(const bool val);
@@ -86,6 +88,9 @@ signals:
     void enableTorchLightChanged(const bool val);
     void enableGeometryShaderChanged(const bool val);
     void isGeometryShaderSupportedChanged(const bool val);
+
+    //! This signal is emitted from another thread than this QObject belongs to, so use QueuedConnection.
+    void progressReport(const QString& str, int val, int min, int max);
 
 public slots:
     //! Clears the shader cache, forcing a reload of shaders on use
@@ -141,6 +146,7 @@ public slots:
 private slots:
     void clearMessage();
     void loadSceneCompleted();
+    void progressReceive(const QString& str, int val, int min, int max);
 
 private:
     //! Loads config values from app settings
