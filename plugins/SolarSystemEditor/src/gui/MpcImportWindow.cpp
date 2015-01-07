@@ -202,7 +202,7 @@ void MpcImportWindow::resetDialog()
 void MpcImportWindow::populateBookmarksList()
 {
 	ui->comboBoxBookmarks->clear();
-        ui->comboBoxBookmarks->addItem("Select bookmark...");
+	ui->comboBoxBookmarks->addItem(q_("Select bookmark..."));
 	QStringList bookmarkTitles(bookmarks.value(importType).keys());
 	bookmarkTitles.sort();
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
@@ -329,7 +329,7 @@ void MpcImportWindow::selectFile()
 
 void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 {
-	if (bookmarkTitle.isEmpty() || bookmarkTitle == "Select bookmark...")
+	if (bookmarkTitle.isEmpty() || bookmarks.value(importType).value(bookmarkTitle).isEmpty())
 	{
 		ui->lineEditURL->clear();
 		return;
