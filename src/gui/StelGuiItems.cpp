@@ -554,12 +554,12 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
-	QString tz = locmgr.getPrintableTimeZoneLocal(jd-deltaT/86400.);
-	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-	QString newDate = getFlagShowTime() ? QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-deltaT/86400.)).arg(locmgr.getPrintableTimeLocal(jd-deltaT/86400.)).arg(tz) : " ";
+	double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
+	QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
+	QString newDate = getFlagShowTime() ? QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz) : " ";
 	if (getFlagTimeJd())
 	{
-		newDate = QString("%1").arg(jd+locmgr.getGMTShift(jd)/24.-deltaT/86400., 0, 'f', 5); // UTC -> local tz
+		newDate = QString("%1").arg(jd-dt, 0, 'f', 5);
 	}
 
 	if (datetime->text()!=newDate)
