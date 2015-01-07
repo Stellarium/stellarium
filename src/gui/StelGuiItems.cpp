@@ -553,12 +553,13 @@ void BottomStelBar::updateText(bool updatePos)
 		core->getCurrentDeltaTAlgorithmValidRange(jd, &validRangeInfo);
 	}
 
+	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
+	QString tz = locmgr.getPrintableTimeZoneLocal(jd-deltaT/86400.);
 	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-	QString newDate = getFlagShowTime() ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd-deltaT/86400.) +"   "
-			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd-deltaT/86400.) : " ";
+	QString newDate = getFlagShowTime() ? QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-deltaT/86400.)).arg(locmgr.getPrintableTimeLocal(jd-deltaT/86400.)).arg(tz) : " ";
 	if (getFlagTimeJd())
 	{
-		newDate = QString("%1").arg(jd+StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.-deltaT/86400., 0, 'f', 5); // UTC -> local tz
+		newDate = QString("%1").arg(jd+locmgr.getGMTShift(jd)/24.-deltaT/86400., 0, 'f', 5); // UTC -> local tz
 	}
 
 	if (datetime->text()!=newDate)
@@ -581,7 +582,7 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString newLocation = "";
 	const StelLocation* loc = &core->getCurrentLocation();
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	const StelTranslator& trans = locmgr.getSkyTranslator();
 	if (getFlagShowLocation() && !loc->name.isEmpty())
 	{
 		newLocation = trans.qtranslate(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
