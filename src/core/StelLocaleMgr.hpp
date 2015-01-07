@@ -119,6 +119,9 @@ public:
 	
 	//! Get a localized, formatted string representation of the time component of a Julian date.
 	QString getPrintableTimeLocal(double JD) const;
+
+	//! Get a localized, formatted string representation of the time zone of a Julian date.
+	QString getPrintableTimeZoneLocal(double JD) const;
 	
 	//! @enum STzFormat
 	enum STzFormat
