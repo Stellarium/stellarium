@@ -64,9 +64,9 @@
 }
 
 #define MAXSPLITS 4
-#define NEARZ 1.0f;
+#define NEARZ 0.3f
 //If FARZ is too small for your model change it up
-#define FARZ 15000.0f
+#define FARZ 10000.0f
 
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
@@ -247,6 +247,8 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	}
 	else
 		heightmapLoad = NULL;
+
+	parent->updateProgress(N_("Finalizing load..."),6,0,6);
 
 	return true;
 }
@@ -1296,11 +1298,10 @@ void Scenery3d::calcCubeMVP()
 
 void Scenery3d::generateCubeMap()
 {
-	//setup projection matrix - this is a 90-degree quadratic perspective
-	float zNear = 1.0f;
-	float zFar = 10000.0f;
+	//setup projection matrix - this is a 90-degree perspective with aspect 1.0
+	const float fov = 90.0f;
 	projectionMatrix.setToIdentity();
-	projectionMatrix.perspective(90.0f,1.0f,zNear,zFar);
+	projectionMatrix.perspective(fov,1.0f,NEARZ,FARZ);
 
 	//set opengl viewport to the size of cubemap
 	glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1414,14 +1415,9 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     //calculate standard perspective projection matrix, use QMatrix4x4 for that
     float fov = altAzProjector->getFov();
     float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
-    float zNear = 1.0f;
-    float zFar = 10000.0f;
-    float f = 2.0 / tan(fov * M_PI / 360.0);
-    projectionMatrix = QMatrix4x4 (
-		    f / aspect, 0, 0, 0,
-		    0, f, 0, 0,
-		    0, 0, (zFar + zNear) / (zNear - zFar), -1,
-		    0, 0, 2.0 * zFar * zNear / (zNear - zFar), 0  );
+
+    projectionMatrix.setToIdentity();
+    projectionMatrix.perspective(fov,aspect,NEARZ,FARZ);
 
     //calc modelview transform
     modelViewMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
@@ -1900,8 +1896,10 @@ bool Scenery3d::initShadowmapping()
 			//Bind the depth map and setup parameters
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
+			bool isES = QOpenGLContext::currentContext()->isOpenGLES();
+
 			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
