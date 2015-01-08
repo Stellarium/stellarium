@@ -1002,7 +1002,7 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 	return false;
 
     Material* pMaterial = 0;
-    int illum = 0;
+    int iTmp = 0;
     int numMaterials = 0;
     char buffer[256] = {0};
 
@@ -1107,9 +1107,15 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 	    break;
 
 	case 'i': // illum
-	    fscanf(pFile, "%d", &illum);
+	    fscanf(pFile, "%d", &iTmp);
 
-	    pMaterial->illum = (Illum) illum;
+	    if(iTmp>SPECULAR && iTmp != TRANSLUCENT)
+	    {
+		    qWarning()<<"[Scenery3d] Treating illum "<<iTmp<<"as TRANSLUCENT";
+		    iTmp = TRANSLUCENT;
+	    }
+
+	    pMaterial->illum = (Illum) iTmp;
 	    break;
 
 	case 'm': //! map_Kd, map_bump
@@ -1151,33 +1157,27 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 	    fgets(buffer, sizeof(buffer), pFile);
 	    sscanf(buffer, "%s %s", buffer, buffer);
 
+	    //use default constructor here to prevent manual re-initialization, and make sure default values are honored
+	    m_materials[numMaterials] = Material();
 	    pMaterial = &m_materials[numMaterials];
-	    pMaterial->ambient[0] = 0.2f;
-	    pMaterial->ambient[1] = 0.2f;
-	    pMaterial->ambient[2] = 0.2f;
-	    pMaterial->ambient[3] = 1.0f;
-	    pMaterial->diffuse[0] = 0.8f;
-	    pMaterial->diffuse[1] = 0.8f;
-	    pMaterial->diffuse[2] = 0.8f;
-	    pMaterial->diffuse[3] = 1.0f;
-	    pMaterial->specular[0] = 0.0f;
-	    pMaterial->specular[1] = 0.0f;
-	    pMaterial->specular[2] = 0.0f;
-	    pMaterial->specular[3] = 1.0f;
-	    pMaterial->shininess = 8.0f;
-	    pMaterial->alpha = 1.0f;
 	    pMaterial->name = buffer;
-	    pMaterial->textureName.clear();
-	    pMaterial->texture.clear();
-	    pMaterial->bumpMapName.clear();
-	    pMaterial->bump_texture.clear();
-	    pMaterial->heightMapName.clear();
-	    pMaterial->height_texture.clear();
-
 
 	    materialCache[pMaterial->name] = numMaterials;
 	    ++numMaterials;
 	    break;
+
+	case 'b': // bool flags alphatest or backfaceculling
+		if (strstr(buffer, "bAlphatest") != 0)
+		{
+			fscanf(pFile, "%d", &iTmp);
+			pMaterial->alphatest = iTmp;
+		}
+		else if (strstr(buffer, "bBackface") != 0)
+		{
+			fscanf(pFile, "%d", &iTmp);
+			pMaterial->backfacecull = !iTmp;
+		}
+		break;
 
 	default:
 	    fgets(buffer, sizeof(buffer), pFile);
@@ -1373,39 +1373,37 @@ void OBJ::unbindBuffersGL()
 	glDisableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
 }
 
-void OBJ::transform(Mat4d mat)
+void OBJ::transform(QMatrix4x4 mat)
 {
-    m = mat;
     pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
     pBoundingBox.max = Vec3f(-std::numeric_limits<float>::max()); //numeric_limits<T>::lowest() is C++11, but this is the same
+
+    QMatrix3x3 normalMat = mat.normalMatrix();
 
     //Transform all vertices and normals by mat
     for(int i=0; i<getNumberOfVertices(); ++i)
     {
 	Vertex *pVertex = &m_vertexArray[i];
 
-	Vec3d pos = Vec3d(pVertex->position.v[0], pVertex->position.v[1], pVertex->position.v[2]);
-	mat.transfo(pos);
-	pVertex->position.v[0] = pos.v[0];
-	pVertex->position.v[1] = pos.v[1];
-	pVertex->position.v[2] = pos.v[2];
+	QVector3D tf = mat * QVector3D(pVertex->position.v[0], pVertex->position.v[1], pVertex->position.v[2]);
+	pVertex->position.v[0] = tf.x();
+	pVertex->position.v[1] = tf.y();
+	pVertex->position.v[2] = tf.z();
 
-	Vec3d nor = Vec3d(pVertex->normal.v[0], pVertex->normal.v[1], pVertex->normal.v[2]);
-	mat.transfo(nor);
-	pVertex->normal.v[0] = nor.v[0];
-	pVertex->normal.v[1] = nor.v[1];
-	pVertex->normal.v[2] = nor.v[2];
+	tf = normalMat * QVector3D(pVertex->normal.v[0], pVertex->normal.v[1], pVertex->normal.v[2]);
+	pVertex->normal.v[0] = tf.x();
+	pVertex->normal.v[1] = tf.y();
+	pVertex->normal.v[2] = tf.z();
 
-	Vec3d tang = Vec3d(pVertex->tangent.v[0], pVertex->tangent.v[1], pVertex->tangent.v[2]);
-	mat.transfo(tang);
-	pVertex->tangent.v[0] = tang.v[0];
-	pVertex->tangent.v[1] = tang.v[1];
-	pVertex->tangent.v[2] = tang.v[2];
+	tf = normalMat * QVector3D(pVertex->tangent.v[0], pVertex->tangent.v[1], pVertex->tangent.v[2]);
+	pVertex->tangent.v[0] = tf.x();
+	pVertex->tangent.v[1] = tf.y();
+	pVertex->tangent.v[2] = tf.z();
 
-	Vec3d biTang = Vec3d(pVertex->bitangent.v[0], pVertex->bitangent.v[1], pVertex->bitangent.v[2]);
-	pVertex->bitangent.v[0] = biTang.v[0];
-	pVertex->bitangent.v[1] = biTang.v[1];
-	pVertex->bitangent.v[2] = biTang.v[2];
+	tf = normalMat * QVector3D(pVertex->bitangent.v[0], pVertex->bitangent.v[1], pVertex->bitangent.v[2]);
+	pVertex->bitangent.v[0] = tf.x();
+	pVertex->bitangent.v[1] = tf.y();
+	pVertex->bitangent.v[2] = tf.z();
 
 	//Update bounding box in case it changed
 	pBoundingBox.min = Vec3f( std::min(static_cast<float>(pVertex->position[0]), pBoundingBox.min[0]),
@@ -1464,7 +1462,7 @@ void OBJ::renderAABBs()
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
 	StelModel* pStelModel = &m_stelModels[i];
-	pStelModel->bbox.render(&m);
+	pStelModel->bbox.render();
     }
 }
 
@@ -1498,7 +1496,6 @@ OBJ& OBJ::operator=(const OBJ& other)
 	m_numberOfStelModels = other.m_numberOfStelModels;
 
 	pBoundingBox = other.pBoundingBox;
-	m = other.m;
 
 	m_basePath = other.m_basePath;
 

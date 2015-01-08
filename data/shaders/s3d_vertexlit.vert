@@ -83,7 +83,7 @@ void main(void)
 	//transform normal
 	vec3 normal = u_mNormal * a_normal;
 	
-	VAR_ILLUMINATION = vec4(calcLighting(normal), u_vMatAlpha);	
+	VAR_ILLUMINATION = vec4(calcLighting(normal), u_vMatAlpha);	//u_vMatAlpha = 1.0 if blending is disabled
 	VAR_TEXCOORD = a_texcoord;
 	#if GEOMETRY_SHADER
 	gl_Position = a_vertex; //pass on unchanged

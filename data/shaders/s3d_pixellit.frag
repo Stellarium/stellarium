@@ -26,6 +26,7 @@ This is a shader for phong/per-pixel lighting.
 #version 120
 
 //macros that can be set by ShaderManager (simple true/false flags)
+#define BLENDING 1
 #define SHADOWS 1
 #define SHADOW_FILTER 0
 #define SHADOW_FILTER_HQ 0
@@ -311,9 +312,13 @@ void main(void)
 	vec3 texCol,specCol;
 	calcLighting(normalize(normal),eye,texCol,specCol);
 	
-	#if MAT_DIFFUSETEX
+#if MAT_DIFFUSETEX
+	#if BLENDING
 	gl_FragColor = vec4((texCol+specCol) * texVal.rgb ,u_vMatAlpha * texVal.a);
-	#else
-	gl_FragColor = vec4(texCol + specCol,u_vMatAlpha);
+    #else
+	gl_FragColor = vec4((texCol+specCol) * texVal.rgb , 1.0);
 	#endif
+#else
+	gl_FragColor = vec4(texCol + specCol,u_vMatAlpha); //u_vMatAlpha is automatically set to 1.0 if blending is disabled
+#endif
 }
