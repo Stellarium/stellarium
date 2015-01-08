@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-05 18:27+0600\n"
-"PO-Revision-Date: 2014-11-07 09:11+0000\n"
-"Last-Translator: Sizhuang Liu <Unknown>\n"
+"POT-Creation-Date: 2015-01-07 21:43+0600\n"
+"PO-Revision-Date: 2015-01-08 04:06+0000\n"
+"Last-Translator: jdk <m8r-xld2xv@mailinator.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-06 06:09+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-08 06:08+0000\n"
+"X-Generator: Launchpad (build 17298)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
@@ -73,7 +73,7 @@ msgstr "地平线"
 
 #: src/core/modules/GridLinesMgr.cpp:603
 msgid "Galactic Equator"
-msgstr ""
+msgstr "银河赤道"
 
 #: src/core/modules/GridLinesMgr.cpp:737
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -121,7 +121,7 @@ msgstr "银道坐标网格"
 
 #: src/core/modules/GridLinesMgr.cpp:746 src/ui_viewDialog.h:1326
 msgid "Galactic equator"
-msgstr ""
+msgstr "Galactic equator"
 
 #: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1254
 msgid "Atmosphere"
@@ -231,7 +231,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "不规则星系"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -302,7 +302,7 @@ msgstr "平太阳日: %1"
 
 #: src/core/modules/Planet.cpp:289
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "自转周期不规则"
 
 #: src/core/modules/Planet.cpp:295
 #, qt-format
@@ -1154,7 +1154,7 @@ msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:796 src/gui/ViewDialog.cpp:490
+#: src/gui/ConfigurationDialog.cpp:796 src/gui/ViewDialog.cpp:491
 msgid "Contact"
 msgstr "联系信息"
 
@@ -1643,129 +1643,129 @@ msgstr "自动隐藏水平工具栏"
 msgid "Auto hide vertical button bar"
 msgstr "自动隐藏垂直工具栏"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:729
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:730
 msgid "Space"
 msgstr "空格键"
 
-#: src/gui/StelGuiItems.cpp:587
+#: src/gui/StelGuiItems.cpp:588
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1 米"
 
-#: src/gui/StelGuiItems.cpp:636
+#: src/gui/StelGuiItems.cpp:637
 msgid "Field of view"
 msgstr "视野"
 
-#: src/gui/StelGuiItems.cpp:654
+#: src/gui/StelGuiItems.cpp:655
 msgid "Frames per second"
 msgstr "帧每秒"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:359
+#: src/gui/ViewDialog.cpp:360
 msgid "Excellent dark-sky site"
 msgstr "完美的黑暗天空观测地"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:361
+#: src/gui/ViewDialog.cpp:362
 msgid "Typical truly dark site"
 msgstr "典型的真正黑暗观测地"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:363
+#: src/gui/ViewDialog.cpp:364
 msgid "Rural sky"
 msgstr "乡村的星空"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:365
+#: src/gui/ViewDialog.cpp:366
 msgid "Rural/suburban transition"
 msgstr "乡村/郊区的过渡"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:367
+#: src/gui/ViewDialog.cpp:368
 msgid "Suburban sky"
 msgstr "郊区的天空"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:369
+#: src/gui/ViewDialog.cpp:370
 msgid "Bright suburban sky"
 msgstr "明亮郊区的天空"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:371
+#: src/gui/ViewDialog.cpp:372
 msgid "Suburban/urban transition"
 msgstr "郊区/城市过渡"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:373
+#: src/gui/ViewDialog.cpp:374
 msgid "City sky"
 msgstr "城市天空"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:375
+#: src/gui/ViewDialog.cpp:376
 msgid "Inner-city sky"
 msgstr "市中心的天空"
 
-#: src/gui/ViewDialog.cpp:389
+#: src/gui/ViewDialog.cpp:390
 msgid "The naked-eye limiting magnitude is"
 msgstr "祼眼极限星等"
 
-#: src/gui/ViewDialog.cpp:413
+#: src/gui/ViewDialog.cpp:414
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:414
+#: src/gui/ViewDialog.cpp:415
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:415
+#: src/gui/ViewDialog.cpp:416
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:539
+#: src/gui/ViewDialog.cpp:540
 msgid "No description"
 msgstr "没有描述"
 
-#: src/gui/ViewDialog.cpp:627
+#: src/gui/ViewDialog.cpp:628
 msgid "No shooting stars"
 msgstr "无流星"
 
-#: src/gui/ViewDialog.cpp:635
+#: src/gui/ViewDialog.cpp:636
 msgid "Normal rate"
 msgstr "日常频率"
 
-#: src/gui/ViewDialog.cpp:638
+#: src/gui/ViewDialog.cpp:639
 msgid "Standard Orionids rate"
 msgstr "猎户座流星雨的一般速率"
 
-#: src/gui/ViewDialog.cpp:641
+#: src/gui/ViewDialog.cpp:642
 msgid "Standard Perseids rate"
 msgstr "标准英仙座流星雨频率"
 
-#: src/gui/ViewDialog.cpp:644
+#: src/gui/ViewDialog.cpp:645
 msgid "Standard Geminids rate"
 msgstr "双子座流星雨的一般速率"
 
-#: src/gui/ViewDialog.cpp:647
+#: src/gui/ViewDialog.cpp:648
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:650
+#: src/gui/ViewDialog.cpp:651
 msgid "Meteor storm rate"
 msgstr "流星暴等级"
 
-#: src/gui/ViewDialog.cpp:653
+#: src/gui/ViewDialog.cpp:654
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:656
+#: src/gui/ViewDialog.cpp:657
 msgid "Exceptional Leonid rate"
 msgstr "超量狮子座流星雨"
 
-#: src/gui/ViewDialog.cpp:659
+#: src/gui/ViewDialog.cpp:660
 msgid "Very high rate (1966 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:662
+#: src/gui/ViewDialog.cpp:663
 msgid "Highest rate ever (1833 Leonids)"
 msgstr ""
 
@@ -3750,174 +3750,174 @@ msgstr ""
 msgid "Get location from Network"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:614
 msgid "Find Object"
 msgstr "寻找天体"
 
-#: src/ui_searchDialogGui.h:607
+#: src/ui_searchDialogGui.h:615
 msgid "Find Object or Position"
 msgstr "查找物体或位置"
 
-#: src/ui_searchDialogGui.h:610 src/ui_searchDialogGui.h:614
+#: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
 msgstr "使用 tab 键选择项目"
 
-#: src/ui_searchDialogGui.h:619
+#: src/ui_searchDialogGui.h:627
 msgid "iota"
 msgstr "ι"
 
-#: src/ui_searchDialogGui.h:622
+#: src/ui_searchDialogGui.h:630
 msgid "alpha"
 msgstr "α"
 
-#: src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:633
 msgid "beta"
 msgstr "β"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:636
 msgid "gamma"
 msgstr "γ"
 
-#: src/ui_searchDialogGui.h:631
+#: src/ui_searchDialogGui.h:639
 msgid "delta"
 msgstr "δ"
 
-#: src/ui_searchDialogGui.h:634
+#: src/ui_searchDialogGui.h:642
 msgid "epsilon"
 msgstr "ε"
 
-#: src/ui_searchDialogGui.h:637
+#: src/ui_searchDialogGui.h:645
 msgid "zeta"
 msgstr "ζ"
 
-#: src/ui_searchDialogGui.h:640
+#: src/ui_searchDialogGui.h:648
 msgid "eta"
 msgstr "η"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:651
 msgid "theta"
 msgstr "θ"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:654
 msgid "kappa"
 msgstr "κ"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:657
 msgid "lambda"
 msgstr "λ"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:660
 msgid "mu"
 msgstr "µ"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:663
 msgid "nu"
 msgstr "ν"
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:666
 msgid "xi"
 msgstr "ξ"
 
-#: src/ui_searchDialogGui.h:661
+#: src/ui_searchDialogGui.h:669
 msgid "omicron"
 msgstr "ο"
 
-#: src/ui_searchDialogGui.h:664
+#: src/ui_searchDialogGui.h:672
 msgid "pi"
 msgstr "π"
 
-#: src/ui_searchDialogGui.h:667
+#: src/ui_searchDialogGui.h:675
 msgid "rho"
 msgstr "ρ"
 
-#: src/ui_searchDialogGui.h:670
+#: src/ui_searchDialogGui.h:678
 msgid "sigma"
 msgstr "σ"
 
-#: src/ui_searchDialogGui.h:673
+#: src/ui_searchDialogGui.h:681
 msgid "tau"
 msgstr "τ"
 
-#: src/ui_searchDialogGui.h:676
+#: src/ui_searchDialogGui.h:684
 msgid "upsilon"
 msgstr "υ"
 
-#: src/ui_searchDialogGui.h:679
+#: src/ui_searchDialogGui.h:687
 msgid "phi"
 msgstr "φ"
 
-#: src/ui_searchDialogGui.h:682
+#: src/ui_searchDialogGui.h:690
 msgid "chi"
 msgstr "χ"
 
-#: src/ui_searchDialogGui.h:685
+#: src/ui_searchDialogGui.h:693
 msgid "psi"
 msgstr "ψ"
 
-#: src/ui_searchDialogGui.h:688
+#: src/ui_searchDialogGui.h:696
 msgid "omega"
 msgstr "ω"
 
-#: src/ui_searchDialogGui.h:690
+#: src/ui_searchDialogGui.h:698
 msgid "Greek letters for Bayer designations"
 msgstr "拜耳命名法的希腊字母"
 
-#: src/ui_searchDialogGui.h:691
+#: src/ui_searchDialogGui.h:699
 msgid "Object"
 msgstr "物件"
 
-#: src/ui_searchDialogGui.h:693
+#: src/ui_searchDialogGui.h:701
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Coordinate system:"
 msgstr "指标系统："
 
-#: src/ui_searchDialogGui.h:695
+#: src/ui_searchDialogGui.h:703
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:696
+#: src/ui_searchDialogGui.h:704
 msgid "Position"
 msgstr "位置"
 
-#: src/ui_searchDialogGui.h:698
+#: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "有些天体需要在开启相应的插件后才能显示"
 
-#: src/ui_searchDialogGui.h:700
+#: src/ui_searchDialogGui.h:708
 msgid "names in English"
 msgstr "英文名"
 
-#: src/ui_searchDialogGui.h:701
+#: src/ui_searchDialogGui.h:709
 msgid "Search in list..."
 msgstr "在列表中搜索..."
 
-#: src/ui_searchDialogGui.h:702
+#: src/ui_searchDialogGui.h:710
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "列表"
 
-#: src/ui_searchDialogGui.h:703
+#: src/ui_searchDialogGui.h:711
 msgid "On-line astronomical database SIMBAD"
 msgstr "SIMBAD 在线天文数据库"
 
-#: src/ui_searchDialogGui.h:704
+#: src/ui_searchDialogGui.h:712
 msgid "Extend search with SIMBAD"
 msgstr "使用 SIMBAD 深度搜索"
 
-#: src/ui_searchDialogGui.h:705
+#: src/ui_searchDialogGui.h:713
 msgid "Server:"
 msgstr "服务器："
 
-#: src/ui_searchDialogGui.h:706
+#: src/ui_searchDialogGui.h:714
 msgid "Search options"
 msgstr "搜索选项"
 
-#: src/ui_searchDialogGui.h:707
+#: src/ui_searchDialogGui.h:715
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1329
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1329
 #: src/ui_viewDialog.h:1347 src/ui_viewDialog.h:1355
 #: src/ui_configurationDialog.h:1208 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -7139,6 +7139,10 @@ msgid ""
 msgstr ""
 "彗星<i>名称</i>应当以 %1 或 %2 "
 "为前缀。如果有多个彗星匹配这个名称，则只会返回第一个结果。例如，搜索“%3”将会返回“%4”，即哈雷彗星，但搜索“%5”将会返回小行星“%6”。"
+
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:205
+msgid "Select bookmark..."
+msgstr ""
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-05 18:27+0600\n"
+"POT-Creation-Date: 2015-01-07 21:43+0600\n"
 "PO-Revision-Date: 2014-10-13 07:33+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-06 05:48+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-08 05:41+0000\n"
+"X-Generator: Launchpad (build 17298)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -1224,7 +1224,7 @@ msgstr "Пачатковы напрамак агляду, азімут/вышы�
 msgid "Authors"
 msgstr "Стваральнікі"
 
-#: src/gui/ConfigurationDialog.cpp:796 src/gui/ViewDialog.cpp:490
+#: src/gui/ConfigurationDialog.cpp:796 src/gui/ViewDialog.cpp:491
 msgid "Contact"
 msgstr "Кантакт"
 
@@ -1727,129 +1727,129 @@ msgstr "Аўтаматычна хаваць гарызантальную пан�
 msgid "Auto hide vertical button bar"
 msgstr "Аўтаматычна хаваць вэртыкальную панэль кнопак"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:729
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:730
 msgid "Space"
 msgstr "Прабел"
 
-#: src/gui/StelGuiItems.cpp:587
+#: src/gui/StelGuiItems.cpp:588
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1 м"
 
-#: src/gui/StelGuiItems.cpp:636
+#: src/gui/StelGuiItems.cpp:637
 msgid "Field of view"
 msgstr "Поле зроку"
 
-#: src/gui/StelGuiItems.cpp:654
+#: src/gui/StelGuiItems.cpp:655
 msgid "Frames per second"
 msgstr "Кадраў за сэкунду"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:359
+#: src/gui/ViewDialog.cpp:360
 msgid "Excellent dark-sky site"
 msgstr "Беззаганна цёмная мясьціна"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:361
+#: src/gui/ViewDialog.cpp:362
 msgid "Typical truly dark site"
 msgstr "Тыповая сапраўды цёмная мясьціна"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:363
+#: src/gui/ViewDialog.cpp:364
 msgid "Rural sky"
 msgstr "Вясковае неба"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:365
+#: src/gui/ViewDialog.cpp:366
 msgid "Rural/suburban transition"
 msgstr "Пераход вёска/прыгарад"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:367
+#: src/gui/ViewDialog.cpp:368
 msgid "Suburban sky"
 msgstr "Прыгараднае неба"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:369
+#: src/gui/ViewDialog.cpp:370
 msgid "Bright suburban sky"
 msgstr "Яркае прыгараднае неба"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:371
+#: src/gui/ViewDialog.cpp:372
 msgid "Suburban/urban transition"
 msgstr "Пераход горад/прыгарад"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:373
+#: src/gui/ViewDialog.cpp:374
 msgid "City sky"
 msgstr "Гарадзкое неба"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:375
+#: src/gui/ViewDialog.cpp:376
 msgid "Inner-city sky"
 msgstr "Унутрыгарадзкое неба"
 
-#: src/gui/ViewDialog.cpp:389
+#: src/gui/ViewDialog.cpp:390
 msgid "The naked-eye limiting magnitude is"
 msgstr "Гранічная велічыня няўзброенага вока"
 
-#: src/gui/ViewDialog.cpp:413
+#: src/gui/ViewDialog.cpp:414
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:414
+#: src/gui/ViewDialog.cpp:415
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:415
+#: src/gui/ViewDialog.cpp:416
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:539
+#: src/gui/ViewDialog.cpp:540
 msgid "No description"
 msgstr "Без апісаньня"
 
-#: src/gui/ViewDialog.cpp:627
+#: src/gui/ViewDialog.cpp:628
 msgid "No shooting stars"
 msgstr "Бязь зьнічак"
 
-#: src/gui/ViewDialog.cpp:635
+#: src/gui/ViewDialog.cpp:636
 msgid "Normal rate"
 msgstr "Нармальная часьціня"
 
-#: src/gui/ViewDialog.cpp:638
+#: src/gui/ViewDialog.cpp:639
 msgid "Standard Orionids rate"
 msgstr "Звычайная часьціня Арыянідаў"
 
-#: src/gui/ViewDialog.cpp:641
+#: src/gui/ViewDialog.cpp:642
 msgid "Standard Perseids rate"
 msgstr "Звычайная часьціня Пэрсэідаў"
 
-#: src/gui/ViewDialog.cpp:644
+#: src/gui/ViewDialog.cpp:645
 msgid "Standard Geminids rate"
 msgstr "Звычайная часьціня Джэмінідаў"
 
-#: src/gui/ViewDialog.cpp:647
+#: src/gui/ViewDialog.cpp:648
 msgid "Exceptional Perseid rate"
 msgstr "Выключная часьціня Пэрсэідаў"
 
-#: src/gui/ViewDialog.cpp:650
+#: src/gui/ViewDialog.cpp:651
 msgid "Meteor storm rate"
 msgstr "Часьціня мэтэорнага шторму"
 
-#: src/gui/ViewDialog.cpp:653
+#: src/gui/ViewDialog.cpp:654
 msgid "Exceptional Draconid rate"
 msgstr "Выключная часьціня Драканідаў"
 
-#: src/gui/ViewDialog.cpp:656
+#: src/gui/ViewDialog.cpp:657
 msgid "Exceptional Leonid rate"
 msgstr "Выключная часьціня Леанідаў"
 
-#: src/gui/ViewDialog.cpp:659
+#: src/gui/ViewDialog.cpp:660
 msgid "Very high rate (1966 Leonids)"
 msgstr "Вельмі высокая (Леаніды ў 1966)"
 
-#: src/gui/ViewDialog.cpp:662
+#: src/gui/ViewDialog.cpp:663
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Найбольшая калі (Леаніды ў 1833)"
 
@@ -3874,175 +3874,175 @@ msgstr ""
 msgid "Get location from Network"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:614
 msgid "Find Object"
 msgstr "Шукаць аб'ект"
 
-#: src/ui_searchDialogGui.h:607
+#: src/ui_searchDialogGui.h:615
 msgid "Find Object or Position"
 msgstr "Шукаць аб'ект ці становішча"
 
-#: src/ui_searchDialogGui.h:610 src/ui_searchDialogGui.h:614
+#: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
 msgstr "Выбіраць адкуканыя элемэнты клявішай tab"
 
-#: src/ui_searchDialogGui.h:619
+#: src/ui_searchDialogGui.h:627
 msgid "iota"
 msgstr "ёта"
 
-#: src/ui_searchDialogGui.h:622
+#: src/ui_searchDialogGui.h:630
 msgid "alpha"
 msgstr "альфа"
 
-#: src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:633
 msgid "beta"
 msgstr "бэта"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:636
 msgid "gamma"
 msgstr "ґама"
 
-#: src/ui_searchDialogGui.h:631
+#: src/ui_searchDialogGui.h:639
 msgid "delta"
 msgstr "дэльта"
 
-#: src/ui_searchDialogGui.h:634
+#: src/ui_searchDialogGui.h:642
 msgid "epsilon"
 msgstr "эпсылян"
 
-#: src/ui_searchDialogGui.h:637
+#: src/ui_searchDialogGui.h:645
 msgid "zeta"
 msgstr "зэта"
 
-#: src/ui_searchDialogGui.h:640
+#: src/ui_searchDialogGui.h:648
 msgid "eta"
 msgstr "эта"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:651
 msgid "theta"
 msgstr "тэта"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:654
 msgid "kappa"
 msgstr "капа"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:657
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:660
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:663
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:666
 msgid "xi"
 msgstr "ксі"
 
-#: src/ui_searchDialogGui.h:661
+#: src/ui_searchDialogGui.h:669
 msgid "omicron"
 msgstr "амікрон"
 
-#: src/ui_searchDialogGui.h:664
+#: src/ui_searchDialogGui.h:672
 msgid "pi"
 msgstr "пі"
 
-#: src/ui_searchDialogGui.h:667
+#: src/ui_searchDialogGui.h:675
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:670
+#: src/ui_searchDialogGui.h:678
 msgid "sigma"
 msgstr "сіґма"
 
-#: src/ui_searchDialogGui.h:673
+#: src/ui_searchDialogGui.h:681
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:676
+#: src/ui_searchDialogGui.h:684
 msgid "upsilon"
 msgstr "іпсылян"
 
-#: src/ui_searchDialogGui.h:679
+#: src/ui_searchDialogGui.h:687
 msgid "phi"
 msgstr "фі"
 
-#: src/ui_searchDialogGui.h:682
+#: src/ui_searchDialogGui.h:690
 msgid "chi"
 msgstr "хі"
 
-#: src/ui_searchDialogGui.h:685
+#: src/ui_searchDialogGui.h:693
 msgid "psi"
 msgstr "псі"
 
-#: src/ui_searchDialogGui.h:688
+#: src/ui_searchDialogGui.h:696
 msgid "omega"
 msgstr "амэга"
 
-#: src/ui_searchDialogGui.h:690
+#: src/ui_searchDialogGui.h:698
 msgid "Greek letters for Bayer designations"
 msgstr "Грэцкія літары для абазначэньняў Баера"
 
-#: src/ui_searchDialogGui.h:691
+#: src/ui_searchDialogGui.h:699
 msgid "Object"
 msgstr "Аб'ект"
 
-#: src/ui_searchDialogGui.h:693
+#: src/ui_searchDialogGui.h:701
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Coordinate system:"
 msgstr "Каардынатная сыстэма:"
 
-#: src/ui_searchDialogGui.h:695
+#: src/ui_searchDialogGui.h:703
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:696
+#: src/ui_searchDialogGui.h:704
 msgid "Position"
 msgstr "Становішча"
 
-#: src/ui_searchDialogGui.h:698
+#: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 "Некаторыя аб'екты можна адшукаць пасьля актываваньня адпаведных дадаткаў"
 
-#: src/ui_searchDialogGui.h:700
+#: src/ui_searchDialogGui.h:708
 msgid "names in English"
 msgstr "назвы ангельскай"
 
-#: src/ui_searchDialogGui.h:701
+#: src/ui_searchDialogGui.h:709
 msgid "Search in list..."
 msgstr "Шукаць у сьпісе…"
 
-#: src/ui_searchDialogGui.h:702
+#: src/ui_searchDialogGui.h:710
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "Сьпісы"
 
-#: src/ui_searchDialogGui.h:703
+#: src/ui_searchDialogGui.h:711
 msgid "On-line astronomical database SIMBAD"
 msgstr "Сеціўная астранамічная база SIMBAD"
 
-#: src/ui_searchDialogGui.h:704
+#: src/ui_searchDialogGui.h:712
 msgid "Extend search with SIMBAD"
 msgstr "Пашыраны пошук па SIMBAD"
 
-#: src/ui_searchDialogGui.h:705
+#: src/ui_searchDialogGui.h:713
 msgid "Server:"
 msgstr "Сэрвэр:"
 
-#: src/ui_searchDialogGui.h:706
+#: src/ui_searchDialogGui.h:714
 msgid "Search options"
 msgstr "Настройкі пошуку"
 
-#: src/ui_searchDialogGui.h:707
+#: src/ui_searchDialogGui.h:715
 msgid "Use autofill only from the beginning of words"
 msgstr "Выкарыстоўваць аўтазапаўненьне толькі ў пачатку словаў"
 
-#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1329
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1329
 #: src/ui_viewDialog.h:1347 src/ui_viewDialog.h:1355
 #: src/ui_configurationDialog.h:1208 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -7396,6 +7396,10 @@ msgstr ""
 "<i>Назвы</i> камэт мусяць мець прэфікс %1 ці %2. Калі назьве адпавядае "
 "некалькі камэт, то толькі першы вынік будзе атрыманы. Напрыклад, пры пошуку "
 "«%3» будзе атрымана %4, камэта Гэйлі, але пры пошуку «%5» — астэроід %6."
+
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:205
+msgid "Select bookmark..."
+msgstr ""
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
