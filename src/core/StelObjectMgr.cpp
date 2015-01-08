@@ -310,6 +310,7 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 		result = module->listAllObjectsByType(objType, inEnglish);
 	else
 		result = module->listAllObjects(inEnglish);
+
 	return result;
 }
 
