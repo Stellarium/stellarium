@@ -103,21 +103,29 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
+		QStringList sciNames;
+		if (!sciName.isEmpty())
+			sciNames.append(sciName);
+		if (!addSciName.isEmpty())
+			sciNames.append(addSciName);
+		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=sciName)
+			sciNames.append(varSciName);
+		const QString sciNamesList = sciNames.join(" - ");
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
-			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
+			if (!commonNameI18.isEmpty() || !sciNamesList.isEmpty())
 			{
-				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
-					oss << "(";
-				oss << (sciName=="" ? "" : sciName);
-				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
-				if (varSciName!="" && varSciName!=sciName)
-					oss << (sciName=="" ? "" : " - ") << varSciName;
-				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
-					oss << ")";
+				if (!commonNameI18.isEmpty())
+					oss << commonNameI18;
+
+				if (!commonNameI18.isEmpty() && !sciNamesList.isEmpty())
+					oss << " (" << sciNamesList << ")";
+
+				if (commonNameI18.isEmpty() && !sciNamesList.isEmpty())
+					oss << sciNamesList;
+
 				nameWasEmpty=false;
 			}
 		}
