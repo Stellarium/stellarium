@@ -542,7 +542,7 @@ void BottomStelBar::updateText(bool updatePos)
 	double jd = core->getJDay();
 	double deltaT = 0.;
 	double sigma = -1.;
-	QString sigmaInfo = "";
+	QString sigmaInfo = "";	
 	QString validRangeInfo = "";
 	bool displayDeltaT = false;
 	if (core->getCurrentLocation().planetName.contains("Earth"))
@@ -556,31 +556,33 @@ void BottomStelBar::updateText(bool updatePos)
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
 	double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
 	QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
-	QString newDate = getFlagShowTime() ? QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)) : " ";
+	QString newDateInfo = getFlagShowTime() ? QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)) : " ";
+	QString newDateAppx = QString("JD %1").arg(jd-dt, 0, 'f', 5);
 	if (getFlagTimeJd())
 	{
-		newDate = QString("%1").arg(jd-dt, 0, 'f', 5);
+		newDateAppx = newDateInfo;
+		newDateInfo = QString("JD %1").arg(jd-dt, 0, 'f', 5);
 	}
 
-	if (datetime->text()!=newDate)
+	if (datetime->text()!=newDateInfo)
 	{
 		updatePos = true;		
-		datetime->setText(newDate);
+		datetime->setText(newDateInfo);
 		if (displayDeltaT && core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 		{
 			if (sigma>0)
 				sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
-			QString tooltip;
+			QString deltaTInfo = "";
 			if (qAbs(deltaT)>60.)
-				tooltip = QString("<p style='white-space:pre'>%1T = %2 (%3s)%6 [n-dot @ -23.8946\"/cy%4%5]<br>%7 %8</p>").arg(QChar(0x0394)).arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(QChar(0x00B2)).arg(sigmaInfo).arg(validRangeInfo).arg(q_("Time Zone")).arg(tz);
+				deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeInfo);
 			else
-				tooltip = QString("<p style='white-space:pre'>%1T = %2s%5 [n-dot @ -23.8946\"/cy%3%4]<br>%6 %7</p>").arg(QChar(0x0394)).arg(deltaT, 3, 'f', 3).arg(QChar(0x00B2)).arg(sigmaInfo).arg(validRangeInfo).arg(q_("Time Zone")).arg(tz);
+				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeInfo);
 
-			datetime->setToolTip(tooltip);
+			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5 %6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(q_("Time Zone")).arg(tz).arg(newDateAppx));
 		}
 		else
-			datetime->setToolTip("");
+			datetime->setToolTip(QString("%1 %2<br>%3").arg(q_("Time Zone")).arg(tz).arg(newDateAppx));
 	}
 
 	QString newLocation = "";
