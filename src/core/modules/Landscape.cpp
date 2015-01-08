@@ -606,7 +606,14 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	sPainter.setProjector(core->getProjection(transfo));
 	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 
-	groundTex->bind();
+	if(groundTex.isNull())
+	{
+		qWarning()<<"LandscapeOldStyle groundTex is invalid!";
+	}
+	else
+	{
+		groundTex->bind();
+	}
 	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
 	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
 }
