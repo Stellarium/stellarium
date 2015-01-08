@@ -588,7 +588,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			painter.drawSprite2dMode(xy[0], xy[1], 11);
 		}
 	}
-	if (orbitDisplayed && Satellite::orbitLinesFlag) drawOrbit(painter);
+	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid) drawOrbit(painter);
 }
 
 
