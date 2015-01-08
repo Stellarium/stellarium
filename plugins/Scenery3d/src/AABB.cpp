@@ -140,7 +140,7 @@ void AABB::expand(const Vec3f &v)
     else if(v.v[2] < min.v[2]) min.v[2] = v.v[2];
 }
 
-void AABB::render(Mat4d* pMat)
+void AABB::render()
 {
     Vec3f nbl = getCorner(MinMinMin);
     Vec3f nbr = getCorner(MaxMinMin);

@@ -87,6 +87,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["MAT_SPECULAR"] = MAT_SPECULAR;
 		featureFlagsStrings["MAT_DIFFUSETEX"] = MAT_DIFFUSETEX;
 		featureFlagsStrings["GEOMETRY_SHADER"] = GEOMETRY_SHADER;
+		featureFlagsStrings["BLENDING"] = BLENDING;
 	}
 }
 

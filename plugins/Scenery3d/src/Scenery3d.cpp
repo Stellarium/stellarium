@@ -185,7 +185,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	parent->updateProgress(N_("Transforming model..."),2,0,6);
 
 	//transform the vertices of the model to match the grid
-	objModelLoad->transform(zRot2GridLoad);
+	objModelLoad->transform( convertToQMatrix( zRot2GridLoad ) );
 
 	if(loadCancel)
 		return false;
@@ -209,7 +209,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		if(loadCancel)
 			return false;
 
-		groundModelLoad->transform( zRot2GridLoad );
+		groundModelLoad->transform( convertToQMatrix( zRot2GridLoad ) );
 	}
 
 	if(loadCancel)
@@ -700,6 +700,9 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	//bind VAO
 	objModel->bindGL();
 
+	//assume backfaceculling is on
+	bool backfaceCullState = true;
+
 	//TODO optimize: clump models with same material together when first loading to minimize state changes
 	const OBJ::Material* lastMaterial = NULL;
 	bool blendEnabled = false;
@@ -739,6 +742,17 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			setupMaterialUniforms(curShader,*pMaterial);
 			lastMaterial = pMaterial;
 
+			if(backfaceCullState && !pMaterial->backfacecull)
+			{
+				glDisable(GL_CULL_FACE);
+				backfaceCullState = false;
+			}
+			else if(!backfaceCullState && pMaterial->backfacecull)
+			{
+				glEnable(GL_CULL_FACE);
+				backfaceCullState = true;
+			}
+
 			if(pMaterial->illum == OBJ::TRANSLUCENT )
 			{
 				//TODO provide Z-sorting for transparent objects (center of bounding box should be fine)
@@ -765,6 +779,9 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
 		drawnTriangles+=pStelModel->triangleCount;
 	}
+
+	if(!backfaceCullState)
+		glEnable(GL_CULL_FACE);
 
 	if(shading&&curShader)
 		curShader->release();

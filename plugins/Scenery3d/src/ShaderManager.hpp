@@ -173,6 +173,9 @@ private:
 		GEOMETRY_SHADER = (1<<10),
 		//shader performs cubemap lookup
 		CUBEMAP		= (1<<11),
+		//shader performs blending, otherwise it is expected to output alpha 1.0
+		//it is required for correct blending for our cubemapping
+		BLENDING	= (1<<12),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -213,10 +216,12 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	{
 		if(mat->illum>0)
 			flags|= MAT_AMBIENT;
-		if(mat->illum==4)
+		if(mat->alphatest)
 			flags|= ALPHATEST;
 		if(mat->illum == OBJ::SPECULAR && globals.pixelLighting)
 			flags|= MAT_SPECULAR;
+		if(mat->illum == OBJ::TRANSLUCENT)
+			flags|= BLENDING;
 		if(mat->texture)
 			flags|= MAT_DIFFUSETEX;
 		if(mat->bump_texture && globals.bump && globals.pixelLighting)

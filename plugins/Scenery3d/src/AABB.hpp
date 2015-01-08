@@ -33,7 +33,7 @@ public:
     Vec3f positiveVertex(Vec3f& normal) const;
     Vec3f negativeVertex(Vec3f& normal) const;
 
-    void render(Mat4d* pMat = 0);
+    void render();
 
     //! Return the plane equation for specified plane as Vec4f
     Vec4f getEquation(AABB::Plane p) const;

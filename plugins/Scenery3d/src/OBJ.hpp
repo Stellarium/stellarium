@@ -67,7 +67,7 @@ public:
     //! Only XYZ and XZY may occur in real life, but we can cope with all...
     enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
     //!< Supported OpenGL illumination models. Use specular sparingly!
-    enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, ALPHATEST=4, TRANSLUCENT=9 };
+    enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, TRANSLUCENT=9 };
 
     struct Material
     {
@@ -89,14 +89,11 @@ public:
             emission[2] = 0.0f;
             emission[3] = 0.0f;
 	    shininess = 8.0f;
+	    name = "<invalid>";
 	    alpha = 1.0f;
+	    alphatest = false;
+	    backfacecull = true;
             illum = DIFFUSE;
-            textureName.clear();
-            texture.clear();
-            bumpMapName.clear();
-            bump_texture.clear();
-            heightMapName.clear();
-            height_texture.clear();
         }
         //! Material name
         QString name;
@@ -110,6 +107,10 @@ public:
         float shininess;
         //! Transparency [0..1]
         float alpha;
+	//! If to perform binary alpha testing. Default off.
+	bool alphatest;
+	//! If to perform backface culling. Default on.
+	bool backfacecull;
         //!< illumination model, copied from MTL.
         Illum illum;
         //! Texture name
@@ -159,7 +160,7 @@ public:
     bool load(const QString& filename, const enum vertexOrder order, bool rebuildNormals = false);
     //! Transform all the vertices through multiplication with a 4x4 matrix.
     //! @param mat Matrix to multiply vertices with.
-    void transform(Mat4d mat);
+    void transform(QMatrix4x4 mat);
     //! Returns a Material
     Material &getMaterial(int i);
     //! Returns a StelModel
