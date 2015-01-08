@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-05 18:27+0600\n"
+"POT-Creation-Date: 2015-01-07 21:43+0600\n"
 "PO-Revision-Date: 2014-09-15 16:40+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-06 05:48+0000\n"
-"X-Generator: Launchpad (build 17286)\n"
+"X-Launchpad-Export-Date: 2015-01-08 05:42+0000\n"
+"X-Generator: Launchpad (build 17298)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
@@ -1141,7 +1141,7 @@ msgstr "Посока на наблюдение при стартиране (Аз
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:796 src/gui/ViewDialog.cpp:490
+#: src/gui/ConfigurationDialog.cpp:796 src/gui/ViewDialog.cpp:491
 msgid "Contact"
 msgstr "За контакт"
 
@@ -1641,129 +1641,129 @@ msgstr "Автоматично скриване на хоризонталнат�
 msgid "Auto hide vertical button bar"
 msgstr "Автоматично скриване на вертикалната лента с бутони"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:729
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:730
 msgid "Space"
 msgstr "Интервал"
 
-#: src/gui/StelGuiItems.cpp:587
+#: src/gui/StelGuiItems.cpp:588
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:636
+#: src/gui/StelGuiItems.cpp:637
 msgid "Field of view"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:654
+#: src/gui/StelGuiItems.cpp:655
 msgid "Frames per second"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:359
+#: src/gui/ViewDialog.cpp:360
 msgid "Excellent dark-sky site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:361
+#: src/gui/ViewDialog.cpp:362
 msgid "Typical truly dark site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:363
+#: src/gui/ViewDialog.cpp:364
 msgid "Rural sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:365
+#: src/gui/ViewDialog.cpp:366
 msgid "Rural/suburban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:367
+#: src/gui/ViewDialog.cpp:368
 msgid "Suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:369
+#: src/gui/ViewDialog.cpp:370
 msgid "Bright suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:371
+#: src/gui/ViewDialog.cpp:372
 msgid "Suburban/urban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:373
+#: src/gui/ViewDialog.cpp:374
 msgid "City sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:375
+#: src/gui/ViewDialog.cpp:376
 msgid "Inner-city sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:389
+#: src/gui/ViewDialog.cpp:390
 msgid "The naked-eye limiting magnitude is"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:413
+#: src/gui/ViewDialog.cpp:414
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:414
+#: src/gui/ViewDialog.cpp:415
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:415
+#: src/gui/ViewDialog.cpp:416
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:539
+#: src/gui/ViewDialog.cpp:540
 msgid "No description"
 msgstr "Няма описание"
 
-#: src/gui/ViewDialog.cpp:627
+#: src/gui/ViewDialog.cpp:628
 msgid "No shooting stars"
 msgstr "Няма падащи звезди"
 
-#: src/gui/ViewDialog.cpp:635
+#: src/gui/ViewDialog.cpp:636
 msgid "Normal rate"
 msgstr "Нормална честота"
 
-#: src/gui/ViewDialog.cpp:638
+#: src/gui/ViewDialog.cpp:639
 msgid "Standard Orionids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:641
+#: src/gui/ViewDialog.cpp:642
 msgid "Standard Perseids rate"
 msgstr "Обичайна честота за Персеидите"
 
-#: src/gui/ViewDialog.cpp:644
+#: src/gui/ViewDialog.cpp:645
 msgid "Standard Geminids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:647
+#: src/gui/ViewDialog.cpp:648
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:650
+#: src/gui/ViewDialog.cpp:651
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:653
+#: src/gui/ViewDialog.cpp:654
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:656
+#: src/gui/ViewDialog.cpp:657
 msgid "Exceptional Leonid rate"
 msgstr "Изключителна честота на Леонидите"
 
-#: src/gui/ViewDialog.cpp:659
+#: src/gui/ViewDialog.cpp:660
 msgid "Very high rate (1966 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:662
+#: src/gui/ViewDialog.cpp:663
 msgid "Highest rate ever (1833 Leonids)"
 msgstr ""
 
@@ -3760,174 +3760,174 @@ msgstr ""
 msgid "Get location from Network"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:614
 msgid "Find Object"
 msgstr "Намиране на обект"
 
-#: src/ui_searchDialogGui.h:607
+#: src/ui_searchDialogGui.h:615
 msgid "Find Object or Position"
 msgstr "Намиране на обект или координати"
 
-#: src/ui_searchDialogGui.h:610 src/ui_searchDialogGui.h:614
+#: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:619
+#: src/ui_searchDialogGui.h:627
 msgid "iota"
 msgstr "йота"
 
-#: src/ui_searchDialogGui.h:622
+#: src/ui_searchDialogGui.h:630
 msgid "alpha"
 msgstr "алфа"
 
-#: src/ui_searchDialogGui.h:625
+#: src/ui_searchDialogGui.h:633
 msgid "beta"
 msgstr "бета"
 
-#: src/ui_searchDialogGui.h:628
+#: src/ui_searchDialogGui.h:636
 msgid "gamma"
 msgstr "гама"
 
-#: src/ui_searchDialogGui.h:631
+#: src/ui_searchDialogGui.h:639
 msgid "delta"
 msgstr "делта"
 
-#: src/ui_searchDialogGui.h:634
+#: src/ui_searchDialogGui.h:642
 msgid "epsilon"
 msgstr "епсилон"
 
-#: src/ui_searchDialogGui.h:637
+#: src/ui_searchDialogGui.h:645
 msgid "zeta"
 msgstr "зета"
 
-#: src/ui_searchDialogGui.h:640
+#: src/ui_searchDialogGui.h:648
 msgid "eta"
 msgstr "ета"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:651
 msgid "theta"
 msgstr "тета"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:654
 msgid "kappa"
 msgstr "капа"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:657
 msgid "lambda"
 msgstr "ламбда"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:660
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:663
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:666
 msgid "xi"
 msgstr "кси"
 
-#: src/ui_searchDialogGui.h:661
+#: src/ui_searchDialogGui.h:669
 msgid "omicron"
 msgstr "омикрон"
 
-#: src/ui_searchDialogGui.h:664
+#: src/ui_searchDialogGui.h:672
 msgid "pi"
 msgstr "пи"
 
-#: src/ui_searchDialogGui.h:667
+#: src/ui_searchDialogGui.h:675
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:670
+#: src/ui_searchDialogGui.h:678
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:673
+#: src/ui_searchDialogGui.h:681
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:676
+#: src/ui_searchDialogGui.h:684
 msgid "upsilon"
 msgstr "ипсилон"
 
-#: src/ui_searchDialogGui.h:679
+#: src/ui_searchDialogGui.h:687
 msgid "phi"
 msgstr "фи"
 
-#: src/ui_searchDialogGui.h:682
+#: src/ui_searchDialogGui.h:690
 msgid "chi"
 msgstr "хи"
 
-#: src/ui_searchDialogGui.h:685
+#: src/ui_searchDialogGui.h:693
 msgid "psi"
 msgstr "пси"
 
-#: src/ui_searchDialogGui.h:688
+#: src/ui_searchDialogGui.h:696
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:690
+#: src/ui_searchDialogGui.h:698
 msgid "Greek letters for Bayer designations"
 msgstr "Гръцки букви за Байерови означения"
 
-#: src/ui_searchDialogGui.h:691
+#: src/ui_searchDialogGui.h:699
 msgid "Object"
 msgstr "Обект"
 
-#: src/ui_searchDialogGui.h:693
+#: src/ui_searchDialogGui.h:701
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Coordinate system:"
 msgstr "Координатна система:"
 
-#: src/ui_searchDialogGui.h:695
+#: src/ui_searchDialogGui.h:703
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:696
+#: src/ui_searchDialogGui.h:704
 msgid "Position"
 msgstr "Координати"
 
-#: src/ui_searchDialogGui.h:698
+#: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:700
+#: src/ui_searchDialogGui.h:708
 msgid "names in English"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:701
+#: src/ui_searchDialogGui.h:709
 msgid "Search in list..."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:702
+#: src/ui_searchDialogGui.h:710
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "Списъци"
 
-#: src/ui_searchDialogGui.h:703
+#: src/ui_searchDialogGui.h:711
 msgid "On-line astronomical database SIMBAD"
 msgstr "Онлайн астрономическа база данни SIMBAD"
 
-#: src/ui_searchDialogGui.h:704
+#: src/ui_searchDialogGui.h:712
 msgid "Extend search with SIMBAD"
 msgstr "Разширяване на търсенето със SIMBAD"
 
-#: src/ui_searchDialogGui.h:705
+#: src/ui_searchDialogGui.h:713
 msgid "Server:"
 msgstr "Сървър:"
 
-#: src/ui_searchDialogGui.h:706
+#: src/ui_searchDialogGui.h:714
 msgid "Search options"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:707
+#: src/ui_searchDialogGui.h:715
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1329
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1329
 #: src/ui_viewDialog.h:1347 src/ui_viewDialog.h:1355
 #: src/ui_configurationDialog.h:1208 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -7231,6 +7231,10 @@ msgstr ""
 "една комета съотвества на дадено име, ще бъде върнат само първият резултат. "
 "Например, търсенето на \"%3\" ще върне %4, Халеевата комета, но търсене за "
 "\"%5\" ще върне астероида %6."
+
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:205
+msgid "Select bookmark..."
+msgstr ""
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
