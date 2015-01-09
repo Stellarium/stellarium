@@ -159,7 +159,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		return false;
 
 	//setup some state
-	zRot2GridLoad = loadingScene.zRotateMatrix*loadingScene.obj2gridMatrix;
+	QMatrix4x4 zRot2Grid = convertToQMatrix( loadingScene.zRotateMatrix*loadingScene.obj2gridMatrix );
 
 	OBJ::vertexOrder objVertexOrder=OBJ::XYZ;
 	if (loadingScene.vertexOrder.compare("XZY") == 0) objVertexOrder=OBJ::XZY;
@@ -186,7 +186,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	parent->updateProgress(N_("Transforming model..."),2,0,6);
 
 	//transform the vertices of the model to match the grid
-	objModelLoad->transform( convertToQMatrix( zRot2GridLoad ) );
+	objModelLoad->transform( zRot2Grid );
 
 	if(loadCancel)
 		return false;
@@ -210,7 +210,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		if(loadCancel)
 			return false;
 
-		groundModelLoad->transform( convertToQMatrix( zRot2GridLoad ) );
+		groundModelLoad->transform( zRot2Grid );
 	}
 
 	if(loadCancel)
@@ -263,8 +263,6 @@ void Scenery3d::finalizeLoad()
 	objModelLoad.clear();
 	groundModel = groundModelLoad;
 	groundModelLoad.clear();
-
-	zRot2Grid = zRot2GridLoad;
 
 	//upload GL
 	objModel->uploadBuffersGL();
@@ -537,7 +535,7 @@ void Scenery3d::update(double deltaTime)
 	move *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
 	//Bring move into world-grid space
-	zRot2Grid.transfo(move);
+	currentScene.zRotateMatrix.transfo(move);
 
 	absolutePosition.v[0] += move.v[0];
 	absolutePosition.v[1] += move.v[1];
@@ -553,7 +551,7 @@ void Scenery3d::update(double deltaTime)
 	viewDir = core->getMovementMgr()->getViewDirectionJ2000();
 	viewDir = core->j2000ToAltAz(viewDir);
 	//Bring viewDir into world-grid space
-	zRot2Grid.transfo(viewDir);
+	currentScene.zRotateMatrix.transfo(viewDir);
 	//Switch components as they aren't correct anymore
 	Vec3d tmp = viewDir;
 	viewDir.v[0] = tmp.v[1];
