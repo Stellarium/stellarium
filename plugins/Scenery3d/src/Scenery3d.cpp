@@ -94,6 +94,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	useGSCubemapping = false;
 	reinitCubemapping = true;
 
+	shaderParameters.shadowTransform = false;
 	shaderParameters.pixelLighting = false;
 	shaderParameters.shadows = false;
 	shaderParameters.bump = false;
@@ -709,8 +710,10 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		const OBJ::Material* pMaterial = pStelModel->pMaterial;
 		Q_ASSERT(pMaterial);
 
-		if(shading && lastMaterial!=pMaterial)
+		if(lastMaterial!=pMaterial)
 		{
+			lastMaterial = pMaterial;
+
 			//get a shader from shadermgr that fits the current state + material combo
 			QOpenGLShaderProgram* newShader = shaderManager.getShader(pm,pMaterial);
 			if(!newShader)
@@ -725,18 +728,37 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 				curShader->bind();
 				if(!initialized.contains(curShader))
 				{
-					//needs init
-					setupPassUniforms(curShader);
-					setupFrameUniforms(curShader);
+					//needs first-time initialization for this pass
+					if(shading)
+					{
+						setupPassUniforms(curShader);
+						setupFrameUniforms(curShader);
+					}
+					else
+					{
+						//really only mvp+alpha thresh required, so only set this
+						SET_UNIFORM(curShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
+						SET_UNIFORM(curShader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
+					}
 
-					//rebind vao
-					//objModel.bindGL();
+					//we remember if we have initialized this shader already, so we can skip "global" initialization later if we encounter it again
 					initialized.insert(curShader);
 				}
 			}
-
-			setupMaterialUniforms(curShader,*pMaterial);
-			lastMaterial = pMaterial;
+			if(shading)
+			{
+				//perform full material setup
+				setupMaterialUniforms(curShader,*pMaterial);
+			}
+			else
+			{
+				//set diffuse tex if possible for alpha testing
+				if( ! pMaterial->texture.isNull())
+				{
+					pMaterial->texture->bind(0);
+					SET_UNIFORM(curShader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
+				}
+			}
 
 			if(pMaterial->illum == OBJ::TRANSLUCENT )
 			{
@@ -759,19 +781,19 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 					blendEnabled=false;
 				}
 			}
+
+			if(backfaceCullState && !pMaterial->backfacecull)
+			{
+				glDisable(GL_CULL_FACE);
+				backfaceCullState = false;
+			}
+			else if(!backfaceCullState && pMaterial->backfacecull)
+			{
+				glEnable(GL_CULL_FACE);
+				backfaceCullState = true;
+			}
 		}
 
-		//also check backface cull state when not shading (for one-sided objects that should cast shadows)
-		if(backfaceCullState && !pMaterial->backfacecull)
-		{
-			glDisable(GL_CULL_FACE);
-			backfaceCullState = false;
-		}
-		else if(!backfaceCullState && pMaterial->backfacecull)
-		{
-			glEnable(GL_CULL_FACE);
-			backfaceCullState = true;
-		}
 
 		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
 		drawnTriangles+=pStelModel->triangleCount;
@@ -780,7 +802,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	if(!backfaceCullState)
 		glEnable(GL_CULL_FACE);
 
-	if(shading&&curShader)
+	if(curShader)
 		curShader->release();
 
 	if(blendEnabled)
@@ -1064,14 +1086,7 @@ bool Scenery3d::generateShadowMap()
 
 bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 {
-	//bind transform shader
-	QOpenGLShaderProgram* tfshd = shaderManager.getTransformShader();
-	if(!tfshd)
-	{
-		parent->showMessage(N_("Shadow transformation shader can not be used, can not use shadows. Check log for details."));
-		return false;
-	}
-	tfshd->bind();
+	shaderParameters.shadowTransform = true;
 
 	//Fix selfshadowing
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -1110,9 +1125,6 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 			//the final light matrix is stored in shadowCPM
 			computeCropMatrix(i,shadowDir);
 
-			//really only mvp required, so only call this
-			setupFrameUniforms(tfshd);
-
 			glBindFramebuffer(GL_FRAMEBUFFER,shadowFBOs.at(i));
 
 			//Clear everything
@@ -1141,7 +1153,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	glCullFace(GL_BACK);
 	glDisable(GL_CULL_FACE);
 
-	tfshd->release();
+	shaderParameters.shadowTransform = false;
 
 	return true;
 }
