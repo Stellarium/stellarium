@@ -556,7 +556,7 @@ void BottomStelBar::updateText(bool updatePos)
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
 	double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
 	QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
-	QString newDateInfo = getFlagShowTime() ? QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)) : " ";
+	QString newDateInfo = getFlagShowTime() ? QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz) : " ";
 	QString newDateAppx = QString("JD %1").arg(jd-dt, 0, 'f', 5);
 	if (getFlagTimeJd())
 	{
@@ -579,10 +579,10 @@ void BottomStelBar::updateText(bool updatePos)
 			else
 				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeInfo);
 
-			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5 %6<br>%7</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(q_("Time Zone")).arg(tz).arg(newDateAppx));
+			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx));
 		}
 		else
-			datetime->setToolTip(QString("%1 %2<br>%3").arg(q_("Time Zone")).arg(tz).arg(newDateAppx));
+			datetime->setToolTip(QString("%1").arg(newDateAppx));
 	}
 
 	QString newLocation = "";
