@@ -26,14 +26,22 @@ For vertex-based lighting, this is pretty simple: the lighting is performed in t
 */
 
 #version 150
+#define MAT_SPECULAR 1
 
 layout(triangles) in;
 layout(triangle_strip,max_vertices = 18) out;
 
 in vec2 v_texcoordGS[];
-in vec4 v_illuminationGS[];
+in vec3 v_texilluminationGS[];
+#if MAT_SPECULAR
+in vec3 v_specilluminationGS[];
+#endif
+
 out vec2 v_texcoord;
-out vec4 v_illumination;
+out vec3 v_texillumination;
+#if MAT_SPECULAR
+out vec3 v_specillumination;
+#endif
 
 uniform mat4 u_mCubeMVP[6];
 
@@ -49,7 +57,10 @@ void main(void)
 			gl_Position = u_mCubeMVP[gl_Layer] * gl_in[vtx].gl_Position;
 			//pass on other varyings
 			v_texcoord = v_texcoordGS[vtx];
-			v_illumination = v_illuminationGS[vtx];
+			v_texillumination = v_texilluminationGS[vtx];
+			#if MAT_SPECULAR
+			v_specillumination = v_specilluminationGS[vtx];
+			#endif
 			EmitVertex();
 		}
 		EndPrimitive();

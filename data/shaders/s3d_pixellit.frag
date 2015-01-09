@@ -233,8 +233,8 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 	#if MAT_AMBIENT
 	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatAmbient;
 	#else
-	//Add the lightsources ambient at least
-	vec3 Iamb = max(u_vLightAmbient,0.0) + vec3(0.025,0.025,0.025);
+	//The diffuse color is the ambient color - same as glColorMaterial with GL_AMBIENT_AND_DIFFUSE
+	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatDiffuse;
 	#endif
 	
 	//basic lambert term
