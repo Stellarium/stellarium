@@ -1491,22 +1491,22 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showHorizonLineCheckBox">
-                   <property name="toolTip">
-                    <string>Show horizon line</string>
-                   </property>
-                   <property name="text">
-                    <string>Horizon</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
                   <widget class="QCheckBox" name="showEclipticLineCheckBox">
                    <property name="toolTip">
                     <string>Show ecliptic line</string>
                    </property>
                    <property name="text">
                     <string>Ecliptic</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showHorizonLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show horizon line</string>
+                   </property>
+                   <property name="text">
+                    <string>Horizon</string>
                    </property>
                   </widget>
                  </item>
@@ -2131,8 +2131,8 @@
   <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
   <tabstop>showMeridianLineCheckBox</tabstop>
-  <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showGalacticEquatorLineCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>

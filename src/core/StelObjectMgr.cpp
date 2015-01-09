@@ -310,6 +310,7 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 		result = module->listAllObjectsByType(objType, inEnglish);
 	else
 		result = module->listAllObjects(inEnglish);
+
 	return result;
 }
 
@@ -326,7 +327,11 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["SolarSystem:moon"] = "Moons";
 			result["SolarSystem:asteroid"] = "Asteroids";
 			result["SolarSystem:comet"] = "Comets";
-			result["SolarSystem:plutoid"] = "Plutoids";
+			result["SolarSystem:plutino"] = "Plutinos";
+			result["SolarSystem:cubewano"] = "Cubewanos";
+			result["SolarSystem:dwarf planet"] = "Dwarf planets";
+			result["SolarSystem:scattered disc object"] = "Scattered disc objects";
+			result["SolarSystem:Oort cloud object"] = "Oort cloud objects";
 		}
 		// Deep-sky objects by type + couple amateur catalogue
 		if (m->objectName()=="NebulaMgr")

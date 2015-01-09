@@ -132,13 +132,17 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		pTypeMap.clear();
 	}
-	pTypeMap.insert(Planet::isStar,     "star");
-	pTypeMap.insert(Planet::isPlanet,   "planet");
-	pTypeMap.insert(Planet::isMoon,     "moon");
-	pTypeMap.insert(Planet::isAsteroid, "asteroid");
-	pTypeMap.insert(Planet::isPlutoid,  "plutoid");
-	pTypeMap.insert(Planet::isComet,    "comet");
-	pTypeMap.insert(Planet::isUNDEFINED,"UNDEFINED"); // something must be broken before we ever see this!
+	pTypeMap.insert(Planet::isStar,		"star");
+	pTypeMap.insert(Planet::isPlanet,	"planet");
+	pTypeMap.insert(Planet::isMoon,		"moon");
+	pTypeMap.insert(Planet::isAsteroid,	"asteroid");
+	pTypeMap.insert(Planet::isPlutino,	"plutino");
+	pTypeMap.insert(Planet::isComet,	"comet");
+	pTypeMap.insert(Planet::isDwarfPlanet,	"dwarf planet");
+	pTypeMap.insert(Planet::isCubewano,	"cubewano");
+	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
+	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
+	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
 
 	if (vMagAlgorithmMap.count() > 0)
 	{

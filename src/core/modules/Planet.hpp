@@ -87,8 +87,12 @@ public:
 		isPlanet,                 // ssystem.ini: type="planet"
 		isMoon,                   // ssystem.ini: type="moon"
 		isAsteroid,               // ssystem.ini: type="asteroid"
-		isPlutoid,                // ssystem.ini: type="plutoid"
+		isPlutino,                // ssystem.ini: type="plutino"
 		isComet,                  // ssystem.ini: type="comet"
+		isDwarfPlanet,		  // ssystem.ini: type="dwarf planet"
+		isCubewano,		  // ssystem.ini: type="cubewano"
+		isSDO,			  // ssystem.ini: type="sdo"
+		isOCO,			  // ssystem.ini: type="oco"
 		isUNDEFINED               // ssystem.ini: type=<anything else>
 	};
 
