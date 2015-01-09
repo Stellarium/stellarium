@@ -30,6 +30,7 @@ class QOpenGLShaderProgram;
 //! A structure for global shader parameters
 struct GlobalShaderParameters
 {
+	bool shadowTransform;
 	bool pixelLighting;
 	bool bump;
 	bool shadows;
@@ -125,9 +126,6 @@ public:
 	//! Returns a shader that supports the specified operations. Must be called within a GL context.
 	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const OBJ::Material *mat = NULL);
 
-	//! Returns a shader that can only transform geometry, nothing else
-	inline QOpenGLShaderProgram* getTransformShader();
-
 	//! Returns the cubemapping shader
 	inline QOpenGLShaderProgram* getCubeShader();
 
@@ -145,37 +143,38 @@ private:
 	//A Bitflag enum which contains features that shaders can implement, and which this manager can dynamically select
 	enum FeatureFlags
 	{
-		//Transform-only shader (all flags off) (use for depth-only render)
-		TRANSFORM	= 0,
-		//The shader has some sort of light-dependant color output
-		SHADING		= (1<<0),
+		INVALID		= 0,
+		//Transform-only shader (all flags off) (use for depth-only render), should be mutually exclusive with SHADING
+		TRANSFORM	= (1<<0),
+		//The shader has some sort of light-dependant color output,  should be mutually exclusive with TRANSFORM
+		SHADING		= (1<<1),
 		//Per-pixel lighting
-		PIXEL_LIGHTING  = (1<<1),
+		PIXEL_LIGHTING  = (1<<2),
 		//Shader applies shadows from shadow maps
-		SHADOWS         = (1<<2),
+		SHADOWS         = (1<<3),
 		//Shader applies bump/normal maps
-		BUMP            = (1<<3),
+		BUMP            = (1<<4),
 		//Shader applies height maps (in addition to bump map)
-		HEIGHT          = (1<<3),
+		HEIGHT          = (1<<5),
 		//Shader applies alpha testing (w. fragment discard)
-		ALPHATEST	= (1<<4),
+		ALPHATEST	= (1<<6),
 		//Shader filters shadows
-		SHADOW_FILTER	= (1<<5),
+		SHADOW_FILTER	= (1<<7),
 		//shader filters shadows (higher quality)
-		SHADOW_FILTER_HQ = (1<<6),
+		SHADOW_FILTER_HQ = (1<<8),
 		//uses ambient material
-		MAT_AMBIENT	= (1<<7),
+		MAT_AMBIENT	= (1<<9),
 		//uses specular material
-		MAT_SPECULAR	= (1<<8),
+		MAT_SPECULAR	= (1<<10),
 		//has diffuse texture
-		MAT_DIFFUSETEX	= (1<<9),
+		MAT_DIFFUSETEX	= (1<<11),
 		//needs geometry shader cubemapping
-		GEOMETRY_SHADER = (1<<10),
+		GEOMETRY_SHADER = (1<<12),
 		//shader performs cubemap lookup
-		CUBEMAP		= (1<<11),
+		CUBEMAP		= (1<<13),
 		//shader performs blending, otherwise it is expected to output alpha 1.0
 		//it is required for correct blending for our cubemapping
-		BLENDING	= (1<<12),
+		BLENDING	= (1<<14),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -205,18 +204,27 @@ private:
 QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals,const OBJ::Material* mat)
 {
 	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
-	uint flags = SHADING;
-	if(globals.pixelLighting)            flags|= PIXEL_LIGHTING;
-	if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
-	if(globals.pixelLighting && globals.shadows && globals.shadowFilter) flags|= SHADOW_FILTER;
-	if(globals.pixelLighting && globals.shadows && globals.shadowFilter && globals.shadowFilterHQ) flags|= SHADOW_FILTER_HQ;
-	if(globals.geometryShader) flags|= GEOMETRY_SHADER;
+
+	uint flags = INVALID;
+	if(!globals.shadowTransform)
+	{
+		flags = SHADING;
+		if(globals.pixelLighting)            flags|= PIXEL_LIGHTING;
+		if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilter) flags|= SHADOW_FILTER;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilter && globals.shadowFilterHQ) flags|= SHADOW_FILTER_HQ;
+		if(globals.geometryShader) flags|= GEOMETRY_SHADER;
+	}
+	else
+	{
+		flags = TRANSFORM;
+	}
 
 	if(mat)
 	{
 		if(mat->illum>0)
 			flags|= MAT_AMBIENT;
-		if(mat->alphatest)
+		if(mat->alphatest && mat->texture) //alpha test needs diffuse texture, otherwise it would not make sense
 			flags|= ALPHATEST;
 		if(mat->illum == OBJ::SPECULAR)
 			flags|= MAT_SPECULAR;
@@ -231,11 +239,6 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	}
 
 	return findOrLoadShader(flags);
-}
-
-QOpenGLShaderProgram* ShaderMgr::getTransformShader()
-{
-	return findOrLoadShader(TRANSFORM);
 }
 
 QOpenGLShaderProgram* ShaderMgr::getCubeShader()
