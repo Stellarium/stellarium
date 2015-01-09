@@ -633,13 +633,9 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 	{
 		shader->setUniformValue(loc,projectionMatrix * modelViewMatrix);
 	}
-	else
-	{
-		//note that we DO NOT set the projection matrix here, done in setupPassUniforms already
 
-		//this macro saves a bit of writing
-		SET_UNIFORM(shader,ShaderMgr::UNIFORM_MAT_MODELVIEW, modelViewMatrix);
-	}
+	//this macro saves a bit of writing
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MAT_MODELVIEW, modelViewMatrix);
 
 	//-- Lighting setup --
 	//check if we require a normal matrix, this is assumed to be required for all "shading" shaders
@@ -742,17 +738,6 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			setupMaterialUniforms(curShader,*pMaterial);
 			lastMaterial = pMaterial;
 
-			if(backfaceCullState && !pMaterial->backfacecull)
-			{
-				glDisable(GL_CULL_FACE);
-				backfaceCullState = false;
-			}
-			else if(!backfaceCullState && pMaterial->backfacecull)
-			{
-				glEnable(GL_CULL_FACE);
-				backfaceCullState = true;
-			}
-
 			if(pMaterial->illum == OBJ::TRANSLUCENT )
 			{
 				//TODO provide Z-sorting for transparent objects (center of bounding box should be fine)
@@ -774,6 +759,18 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 					blendEnabled=false;
 				}
 			}
+		}
+
+		//also check backface cull state when not shading (for one-sided objects that should cast shadows)
+		if(backfaceCullState && !pMaterial->backfacecull)
+		{
+			glDisable(GL_CULL_FACE);
+			backfaceCullState = false;
+		}
+		else if(!backfaceCullState && pMaterial->backfacecull)
+		{
+			glEnable(GL_CULL_FACE);
+			backfaceCullState = true;
 		}
 
 		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
