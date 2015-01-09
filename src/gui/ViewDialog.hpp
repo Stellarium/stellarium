@@ -84,7 +84,7 @@ private:
 	void updateSkyCultureText();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
-        AtmosphereDialog * atmosphereDialog;
+	AtmosphereDialog * atmosphereDialog;
 };
 
 #endif // _VIEWDIALOG_HPP_

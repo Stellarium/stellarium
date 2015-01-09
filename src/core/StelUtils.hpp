@@ -154,7 +154,7 @@ namespace StelUtils
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
-	//! @param v the resulting 3D unti vector
+	//! @param v the resulting 3D unit vector
 	void spheToRect(const float lng, const float lat, Vec3f& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.

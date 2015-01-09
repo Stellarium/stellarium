@@ -877,7 +877,7 @@ void StarMgr::draw(StelCore* core)
 }
 
 
-// Return a stl vector containing the stars located
+// Return a QList containing the stars located
 // inside the limFov circle around position v
 QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const StelCore* core) const
 {

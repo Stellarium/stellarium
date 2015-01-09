@@ -144,7 +144,7 @@ void SolarSystem::init()
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
 	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
-	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", false).toBool());
+	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 
 	recreateTrails();
 
@@ -818,10 +818,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// Create the Solar System body and add it to the list
 		QString type = pd.value(secname+"/type").toString();		
 		PlanetP p;
-		// New class objects, named "plutoid", has properties similar to asteroids and we should calculate their
-		// positions like for asteroids. Plutoids have one exception: Pluto - we should use special
-		// function for calculation of orbit of Pluto.
-		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
+		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
+		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
+		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
+		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "sdo" || type == "oco") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/lighting").toBool(),
