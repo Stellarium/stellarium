@@ -33,7 +33,9 @@ This is a shader for phong/per-pixel lighting.
 
 //matrices
 uniform mat4 u_mModelView;
+#if ! GEOMETRY_SHADER
 uniform mat4 u_mProjection;
+#endif
 uniform mat3 u_mNormal;
 
 uniform vec3 u_vLightDirectionView; //in view space, from point to light

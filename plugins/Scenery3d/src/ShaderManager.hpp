@@ -218,7 +218,7 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 			flags|= MAT_AMBIENT;
 		if(mat->alphatest)
 			flags|= ALPHATEST;
-		if(mat->illum == OBJ::SPECULAR && globals.pixelLighting)
+		if(mat->illum == OBJ::SPECULAR)
 			flags|= MAT_SPECULAR;
 		if(mat->illum == OBJ::TRANSLUCENT)
 			flags|= BLENDING;

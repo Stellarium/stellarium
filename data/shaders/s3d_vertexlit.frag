@@ -37,8 +37,11 @@ uniform sampler2D u_texDiffuse;
 uniform float u_fAlphaThresh;
 #endif
 
+uniform float u_vMatAlpha;
+
 varying vec2 v_texcoord;
-varying vec4 v_illumination;
+varying vec3 v_texillumination;
+varying vec3 v_specillumination;
 
 void main(void)
 {
@@ -51,12 +54,11 @@ void main(void)
 	#endif
 
 	#if BLENDING
-	gl_FragColor = v_illumination * texVal;
+	gl_FragColor = vec4(v_texillumination * texVal.rgb + v_specillumination, texVal.a * u_vMatAlpha);
 	#else
-	gl_FragColor = v_illumination * vec4(texVal.rgb, 1.0);
+	gl_FragColor = vec4(v_texillumination * texVal.rgb + v_specillumination, 1.0);
 	#endif
-	
 #else
-	gl_FragColor = v_illumination;
+	gl_FragColor = vec4(v_texillumination + v_specillumination,u_vMatAlpha); //u_vMatAlpha is automatically set to 1.0 if blending is disabled
 #endif
 }
