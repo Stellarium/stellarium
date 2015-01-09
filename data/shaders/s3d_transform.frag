@@ -20,25 +20,18 @@
  
  
 /*
-This is a shader for MVP transformation only. Used to fill depth maps.
+This fragment shader is only used if the material is alpha-tested to allow for better shadows.
 */
  
 #version 110
-#define ALPHATEST 1
 
-//matrices
-uniform mat4 u_mMVP;
+uniform float u_fAlphaThresh;
+uniform sampler2D u_texDiffuse;
 
-attribute vec4 a_vertex;
-#if ALPHATEST
-attribute vec2 a_texcoord;
 varying vec2 v_texcoord;
-#endif
 
 void main(void)
 {
-#if ALPHATEST
-	v_texcoord = a_texcoord;
-#endif
-	gl_Position = u_mMVP * a_vertex;
+	if(texture2D(u_texDiffuse,v_texcoord).a < u_fAlphaThresh)
+		discard;
 }

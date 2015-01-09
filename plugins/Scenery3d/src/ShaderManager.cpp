@@ -98,8 +98,11 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::clearCache()
 {
-	qDebug()<<"[Scenery3d] Clearing"<<m_shaderCache.size()<<"shaders";
-	for(t_ShaderCache::iterator it = m_shaderCache.begin();it!=m_shaderCache.end();++it)
+	qDebug()<<"[Scenery3d] Clearing"<<m_shaderContentCache.size()<<"shaders";
+
+	//iterate over the shaderContentCache - this contains the same amount of shaders as actually exist!
+	//the shaderCache could contain duplicate entries
+	for(t_ShaderContentCache::iterator it = m_shaderContentCache.begin();it!=m_shaderContentCache.end();++it)
 	{
 		if((*it))
 			delete (*it);
@@ -162,7 +165,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 			}
 			else
 			{
-				qDebug()<<"[Scenery3d] Shader '"<<flags<<"' created";
+				qDebug()<<"[Scenery3d] Shader '"<<flags<<"' created, content-hash"<<contentHash.toHex();
 			}
 			m_shaderContentCache[contentHash] = prog;
 		}
@@ -192,7 +195,7 @@ QString ShaderMgr::getVShaderName(uint flags)
 	{
 		return "s3d_cube.vert";
 	}
-	else
+	else if (flags & TRANSFORM)
 	{
 		return "s3d_transform.vert";
 	}
@@ -223,6 +226,10 @@ QString ShaderMgr::getFShaderName(uint flags)
 	else if (flags & CUBEMAP)
 	{
 		return "s3d_cube.frag";
+	}
+	else if ((flags & (TRANSFORM | ALPHATEST)) == (TRANSFORM | ALPHATEST) )
+	{
+		return "s3d_transform.frag";
 	}
 	return QString();
 }
