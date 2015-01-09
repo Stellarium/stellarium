@@ -168,10 +168,6 @@ private:
     QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
     QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
 
-    //Combines zRot and rot2grid from scene metadata
-    Mat4d zRot2Grid, zRot2GridLoad;
-
-
     /// ---- Rendering information ----
     //final model view matrix for shader upload
     QMatrix4x4 modelViewMatrix;
