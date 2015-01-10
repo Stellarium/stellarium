@@ -71,7 +71,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), star
 	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
+	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -982,7 +982,6 @@ void ConfigurationDialog::downloadStars()
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
-	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
@@ -1034,6 +1033,7 @@ void ConfigurationDialog::downloadFinished()
 		starCatalogDownloadReply->deleteLater();
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
 		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
