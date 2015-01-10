@@ -136,7 +136,7 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 	const double refr_alt_rad=geom_alt_deg*M_PI/180.;
 	const double sinRef=std::sin(refr_alt_rad);
 	const double shortenxy=std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo)); // we need double's mantissa length here, sorry!
-	if (sinGeo>0) Q_ASSERT(shortenxy<=1.0); // usual case: should have pushed vector upward.
+	//if (sinGeo>0) Q_ASSERT(shortenxy<=1.0); // usual case: should have pushed vector upward.
 
 	altAzPos[0]*=shortenxy;
 	altAzPos[1]*=shortenxy;
@@ -178,7 +178,7 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 	const double geo_alt_rad=obs_alt_deg*M_PI/180.;
 	const double sinGeo=std::sin(geo_alt_rad);
 	const double longerxy=std::sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs));
-	if (sinGeo>0) Q_ASSERT(longerxy>=1.); // // usual case: should have pushed vector downward.
+	//if (sinGeo>0) Q_ASSERT(longerxy>=1.); // // usual case: should have pushed vector downward.
 	altAzPos[0]*=longerxy;
 	altAzPos[1]*=longerxy;
 	altAzPos[2]=sinGeo*length;
