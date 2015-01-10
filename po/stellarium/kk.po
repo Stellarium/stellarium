@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-01-07 21:43+0600\n"
+"POT-Creation-Date: 2015-01-09 23:54+0600\n"
 "PO-Revision-Date: 2012-05-09 17:54+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Kazakh <kk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-08 05:52+0000\n"
+"X-Launchpad-Export-Date: 2015-01-10 05:44+0000\n"
 "X-Generator: Launchpad (build 17298)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -152,19 +152,19 @@ msgstr ""
 msgid "Location: "
 msgstr "Орыны: "
 
-#: src/core/modules/LandscapeMgr.cpp:612
+#: src/core/modules/LandscapeMgr.cpp:610
 #, qt-format
 msgid ", %1 m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:616
-msgid "Planet: "
+#: src/core/modules/LandscapeMgr.cpp:615
+msgid "Celestial body:"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
-#: src/core/modules/StarWrapper.cpp:173
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:178
+#: src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:180
@@ -174,7 +174,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:216
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
-#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
+#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:189
 #, qt-format
@@ -183,7 +183,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
-#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
@@ -251,7 +251,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:174
-#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr ""
@@ -376,110 +376,110 @@ msgid "Planet trails"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:171
 #: src/translations.h:42
 msgid "star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:199
 #: plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:144
+#: src/core/modules/StarWrapper.cpp:152
 msgid "eruptive variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:146
+#: src/core/modules/StarWrapper.cpp:154
 msgid "pulsating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:148
+#: src/core/modules/StarWrapper.cpp:156
 msgid "rotating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:150
+#: src/core/modules/StarWrapper.cpp:158
 msgid "cataclysmic variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:153
+#: src/core/modules/StarWrapper.cpp:161
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:157
+#: src/core/modules/StarWrapper.cpp:165
 msgid "variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:169
 msgid "double star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:168
+#: src/core/modules/StarWrapper.cpp:176
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:207
+#: src/core/modules/StarWrapper.cpp:215
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:209
+#: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/StarWrapper.cpp:218
+#: src/core/modules/StarWrapper.cpp:226
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:224
+#: src/core/modules/StarWrapper.cpp:232
 #: plugins/Exoplanets/src/Exoplanet.cpp:204
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:227
+#: src/core/modules/StarWrapper.cpp:235
 #, qt-format
 msgid "Parallax: %1\""
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:233
+#: src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/StarWrapper.cpp:243
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:239
+#: src/core/modules/StarWrapper.cpp:247
 #, qt-format
 msgid "Period: %1 days"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:249
+#: src/core/modules/StarWrapper.cpp:257
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:251
+#: src/core/modules/StarWrapper.cpp:259
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:257
+#: src/core/modules/StarWrapper.cpp:265
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:259
+#: src/core/modules/StarWrapper.cpp:267
 #, qt-format
 msgid "Rising time: %1%"
 msgstr ""
@@ -1591,20 +1591,20 @@ msgstr ""
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:730
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:735
 msgid "Space"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:588
+#: src/gui/StelGuiItems.cpp:593
 #, c-format, qt-format
 msgid "%1m"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:637
+#: src/gui/StelGuiItems.cpp:642
 msgid "Field of view"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:655
+#: src/gui/StelGuiItems.cpp:660
 msgid "Frames per second"
 msgstr ""
 
@@ -1876,7 +1876,7 @@ msgstr ""
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:747
+#: src/gui/SearchDialog.cpp:748
 msgid "Paste and Search"
 msgstr ""
 
@@ -4758,22 +4758,22 @@ msgid "Angle measure"
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:488
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:509
 msgid "The Angle Measure is enabled:"
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:490
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:511
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:492
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:513
 msgid "Right-clicking changes the end point only."
 msgstr ""
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:494
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:515
 msgid "PA="
 msgstr ""
 
@@ -9443,37 +9443,37 @@ msgstr ""
 msgid "Show coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:138
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:144
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:154
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:174
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:190
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:215
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:234
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:246
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:252
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
