@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-07 21:43+0600\n"
-"PO-Revision-Date: 2015-01-07 16:35+0000\n"
+"POT-Creation-Date: 2015-01-09 23:54+0600\n"
+"PO-Revision-Date: 2015-01-09 19:08+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-08 06:05+0000\n"
+"X-Launchpad-Export-Date: 2015-01-10 05:54+0000\n"
 "X-Generator: Launchpad (build 17298)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -158,19 +158,19 @@ msgstr "Автор: "
 msgid "Location: "
 msgstr "Розташування: "
 
-#: src/core/modules/LandscapeMgr.cpp:612
+#: src/core/modules/LandscapeMgr.cpp:610
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 м"
 
-#: src/core/modules/LandscapeMgr.cpp:616
-msgid "Planet: "
-msgstr "Планета: "
+#: src/core/modules/LandscapeMgr.cpp:615
+msgid "Celestial body:"
+msgstr "Небесне тіло:"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
-#: src/core/modules/StarWrapper.cpp:173
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:178
+#: src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:180
@@ -180,7 +180,7 @@ msgstr "Тип: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:216
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
-#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
+#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:189
 #, qt-format
@@ -189,7 +189,7 @@ msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
-#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
@@ -257,7 +257,7 @@ msgstr "Віддалені об’єкти"
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:174
-#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
@@ -382,111 +382,111 @@ msgid "Planet trails"
 msgstr "Траєкторії планет"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:171
 #: src/translations.h:42
 msgid "star"
 msgstr "зірка"
 
-#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:199
 #: plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Показник кольору (B — V): <b>%1</b>"
 
-#: src/core/modules/StarWrapper.cpp:144
+#: src/core/modules/StarWrapper.cpp:152
 msgid "eruptive variable star"
 msgstr "еруптивна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:146
+#: src/core/modules/StarWrapper.cpp:154
 msgid "pulsating variable star"
 msgstr "пульсаційна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:148
+#: src/core/modules/StarWrapper.cpp:156
 msgid "rotating variable star"
 msgstr "затемнена змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:150
+#: src/core/modules/StarWrapper.cpp:158
 msgid "cataclysmic variable star"
 msgstr "катаклізмічна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:153
+#: src/core/modules/StarWrapper.cpp:161
 msgid "eclipsing binary system"
 msgstr "подвійна система з затемненнями"
 
-#: src/core/modules/StarWrapper.cpp:157
+#: src/core/modules/StarWrapper.cpp:165
 msgid "variable star"
 msgstr "змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:169
 msgid "double star"
 msgstr "подвійна зірка"
 
-#: src/core/modules/StarWrapper.cpp:168
+#: src/core/modules/StarWrapper.cpp:176
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "Тип: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:207
+#: src/core/modules/StarWrapper.cpp:215
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "Діапазон величини: <b>%1</b>%2<b>%3</b> (фотометрична система: %4)"
 
-#: src/core/modules/StarWrapper.cpp:209
+#: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 "Діапазон величини: <b>%1</b>%2<b>%3/%4</b> (фотометрична система: %5)"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/StarWrapper.cpp:218
+#: src/core/modules/StarWrapper.cpp:226
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr "Відстань: %1 св. р."
 
-#: src/core/modules/StarWrapper.cpp:224
+#: src/core/modules/StarWrapper.cpp:232
 #: plugins/Exoplanets/src/Exoplanet.cpp:204
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектральний тип: %1"
 
-#: src/core/modules/StarWrapper.cpp:227
+#: src/core/modules/StarWrapper.cpp:235
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Паралакс: %1\""
 
-#: src/core/modules/StarWrapper.cpp:233
+#: src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr "Епоха мінімальної світності: ЮД %1"
 
-#: src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/StarWrapper.cpp:243
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr "Еопха максимальної світності: ЮД %1"
 
-#: src/core/modules/StarWrapper.cpp:239
+#: src/core/modules/StarWrapper.cpp:247
 #, qt-format
 msgid "Period: %1 days"
 msgstr "Період: %1 днів"
 
-#: src/core/modules/StarWrapper.cpp:249
+#: src/core/modules/StarWrapper.cpp:257
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "Наступний мінімум світності: %1 ВКЧ (UTC)"
 
-#: src/core/modules/StarWrapper.cpp:251
+#: src/core/modules/StarWrapper.cpp:259
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "Наступний максимум світності: %1 ВКЧ (UTC)"
 
-#: src/core/modules/StarWrapper.cpp:257
+#: src/core/modules/StarWrapper.cpp:265
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Тривалість затемнення: %1%"
 
-#: src/core/modules/StarWrapper.cpp:259
+#: src/core/modules/StarWrapper.cpp:267
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Тривалість сходу: %1%"
@@ -1749,20 +1749,20 @@ msgstr "Автоматично ховати горизонтальні клав�
 msgid "Auto hide vertical button bar"
 msgstr "Автоматично ховати вертикальні клавіші"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:730
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:735
 msgid "Space"
 msgstr "Пробіл"
 
-#: src/gui/StelGuiItems.cpp:588
+#: src/gui/StelGuiItems.cpp:593
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:637
+#: src/gui/StelGuiItems.cpp:642
 msgid "Field of view"
 msgstr "Поле зору"
 
-#: src/gui/StelGuiItems.cpp:655
+#: src/gui/StelGuiItems.cpp:660
 msgid "Frames per second"
 msgstr "Кадрів в секунду"
 
@@ -2035,7 +2035,7 @@ msgstr "Стразбурзький університет (Франція)"
 msgid "Harvard University (USA)"
 msgstr "Гарвардський університет (США)"
 
-#: src/gui/SearchDialog.cpp:747
+#: src/gui/SearchDialog.cpp:748
 msgid "Paste and Search"
 msgstr "Вставити і шукати"
 
@@ -5021,24 +5021,24 @@ msgid "Angle measure"
 msgstr "Вимірювання кутів"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:488
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:509
 msgid "The Angle Measure is enabled:"
 msgstr "Вимірювання кутів увімкнено:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:490
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:511
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Перетягування з натиснутою лівою кнопкою миші вимірює, клацання лівою "
 "кнопкою — скидає."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:492
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:513
 msgid "Right-clicking changes the end point only."
 msgstr "Клацанням правою кнопкою можна змінити лише кінцеву точку."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:494
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:515
 msgid "PA="
 msgstr "КР="
 
@@ -10084,37 +10084,37 @@ msgstr ""
 msgid "Show coordinates of the mouse pointer"
 msgstr "Показувати координати вказівника миші"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:138
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:144
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "ПС/Схил (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:154
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "ПС/Схил"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:174
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Аз/Вис"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:190
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "Гал. довг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:215
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr "Екл. довг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:234
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Екл. довг./шир. (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:246
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:252
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "ПС/Схил"
@@ -10523,6 +10523,9 @@ msgstr "Координата Y"
 
 #~ msgid "Callisto"
 #~ msgstr "Каллісто"
+
+#~ msgid "Planet: "
+#~ msgstr "Планета: "
 
 #, no-c-format, qt-format
 #~ msgid "Distance: %1AU"
