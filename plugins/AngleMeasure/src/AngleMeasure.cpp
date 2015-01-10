@@ -327,13 +327,15 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),startPoint);
+		/* FIXME: Temporary block patch
 		{ // Nick Fedoseev patch: improve click match
-		   Vec3d win;
-		   prj->project(endPoint,win);
-		   float dx = event->x() - win.v[0];
-		   float dy = event->y() - win.v[1];
-		   prj->unProject(event->x()+dx, event->y()+dy, startPoint);
+			Vec3d win;
+			prj->project(endPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, startPoint);
 		}
+		*/
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),startPointHor);
 
@@ -364,13 +366,15 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),endPoint);
+		/* FIXME: Temporary block patch
 		{ // Nick Fedoseev patch: improve click match
-		   Vec3d win;
-		   prj->project(endPoint,win);
-		   float dx = event->x() - win.v[0];
-		   float dy = event->y() - win.v[1];
-		   prj->unProject(event->x()+dx, event->y()+dy, endPoint);
+			Vec3d win;
+			prj->project(endPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
 		}
+		*/
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),endPointHor);
 		calculateEnds();
