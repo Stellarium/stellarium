@@ -179,7 +179,7 @@ private:
 	////! Numerator of refraction formula, to be cached for speed.
 	//7float press_temp_corr_Saemundson;
 	//! Correction factor for refraction formula, to be cached for speed.
-	float press_temp_corr;
+	double press_temp_corr;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;
