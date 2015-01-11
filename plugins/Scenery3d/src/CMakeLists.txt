@@ -21,6 +21,7 @@ SET(Scenery3d_SRCS
     SPolygon.cpp
     Polyhedron.hpp
     Polyhedron.cpp
+    S3DEnum.hpp
     SceneInfo.hpp
     SceneInfo.cpp
     Scenery3d.hpp
@@ -28,9 +29,10 @@ SET(Scenery3d_SRCS
     Scenery3dMgr.hpp
     Scenery3dMgr.cpp
     gui/Scenery3dDialog.hpp
+    gui/Scenery3dDialog_p.hpp
     gui/Scenery3dDialog.cpp
-	ShaderManager.hpp
-	ShaderManager.cpp
+    ShaderManager.hpp
+    ShaderManager.cpp
     OBJ.hpp
     OBJ.cpp
     Util.hpp

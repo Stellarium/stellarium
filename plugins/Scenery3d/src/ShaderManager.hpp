@@ -87,8 +87,6 @@ public:
 		UNIFORM_TEX_BUMP,
 		//! Defines the Height texture slot
 		UNIFORM_TEX_HEIGHT,
-		//! Defines a cubemap slot
-		UNIFORM_TEX_CUBEMAP,
 		//! First shadow map
 		UNIFORM_TEX_SHADOW0,
 		UNIFORM_TEX_SHADOW1,
@@ -129,6 +127,9 @@ public:
 	//! Returns the cubemapping shader
 	inline QOpenGLShaderProgram* getCubeShader();
 
+	//! Returns the basic texturing shader
+	inline QOpenGLShaderProgram* getTextureShader();
+
 	//! Returns the location of this uniform for this shader, or -1 if this uniform does not exist.
 	//! This is cached to elimate the overhead of the glGet calls
 	inline GLint uniformLocation(const QOpenGLShaderProgram* shad,UNIFORM uni);
@@ -166,7 +167,7 @@ private:
 		MAT_AMBIENT	= (1<<9),
 		//uses specular material
 		MAT_SPECULAR	= (1<<10),
-		//has diffuse texture
+		//has diffuse texture. On its own (i.e. esp. without SHADING) it defines the basic texture shader.
 		MAT_DIFFUSETEX	= (1<<11),
 		//needs geometry shader cubemapping
 		GEOMETRY_SHADER = (1<<12),
@@ -244,6 +245,11 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 QOpenGLShaderProgram* ShaderMgr::getCubeShader()
 {
 	return findOrLoadShader(CUBEMAP);
+}
+
+QOpenGLShaderProgram* ShaderMgr::getTextureShader()
+{
+	return findOrLoadShader(MAT_DIFFUSETEX);
 }
 
 GLint ShaderMgr::uniformLocation(const QOpenGLShaderProgram *shad, UNIFORM uni)

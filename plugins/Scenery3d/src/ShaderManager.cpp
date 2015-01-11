@@ -49,7 +49,6 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_texDiffuse"] = UNIFORM_TEX_DIFFUSE;
 		uniformStrings["u_texBump"] = UNIFORM_TEX_BUMP;
 		uniformStrings["u_texHeight"] = UNIFORM_TEX_HEIGHT;
-		uniformStrings["u_texCubemap"] = UNIFORM_TEX_CUBEMAP;
 		uniformStrings["u_texShadow0"] = UNIFORM_TEX_SHADOW0;
 		uniformStrings["u_texShadow1"] = UNIFORM_TEX_SHADOW1;
 		uniformStrings["u_texShadow2"] = UNIFORM_TEX_SHADOW2;
@@ -199,6 +198,10 @@ QString ShaderMgr::getVShaderName(uint flags)
 	{
 		return "s3d_transform.vert";
 	}
+	else if (flags & MAT_DIFFUSETEX)
+	{
+		return "s3d_texture.vert";
+	}
 	return QString();
 }
 
@@ -230,6 +233,10 @@ QString ShaderMgr::getFShaderName(uint flags)
 	else if ((flags & (TRANSFORM | ALPHATEST)) == (TRANSFORM | ALPHATEST) )
 	{
 		return "s3d_transform.frag";
+	}
+	else if (flags & MAT_DIFFUSETEX)
+	{
+		return "s3d_texture.frag";
 	}
 	return QString();
 }
