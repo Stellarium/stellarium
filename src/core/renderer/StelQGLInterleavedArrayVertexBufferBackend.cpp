@@ -47,7 +47,7 @@ StelQGLInterleavedArrayVertexBufferBackend
 
 StelQGLInterleavedArrayVertexBufferBackend::~StelQGLInterleavedArrayVertexBufferBackend()
 {
-	std::free(vertices);
+	::free(vertices);
 	if(NULL != projectedPositions)
 	{
 		::free(projectedPositions);
