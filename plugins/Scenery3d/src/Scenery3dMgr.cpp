@@ -23,6 +23,7 @@
 #include <QString>
 #include <QDir>
 #include <QFile>
+#include <QKeyEvent>
 #include <QTimer>
 #include <QOpenGLShaderProgram>
 #include <QtConcurrent>
@@ -31,6 +32,7 @@
 
 #include "Scenery3dMgr.hpp"
 #include "Scenery3d.hpp"
+#include "Scenery3dDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelActionMgr.hpp"
@@ -155,8 +157,7 @@ void Scenery3dMgr::init()
 
 	reloadShaders();
 	setEnableShadows(false);
-	setEnableShadowsFilter(true);
-	setEnableShadowsFilterHQ(false);
+	setShadowFilterQuality(S3DEnum::LOW);
 
 	//Initialize Shadow Mapping
 	qWarning() << "init scenery3d object.";
@@ -562,36 +563,62 @@ void Scenery3dMgr::setEnableBumps(const bool enableBumps)
 	}
 }
 
-bool Scenery3dMgr::getEnableShadowsFilter() const
+S3DEnum::ShadowFilterQuality Scenery3dMgr::getShadowFilterQuality() const
 {
-	return scenery3d->getShadowsFilterEnabled();
-}
-
-void Scenery3dMgr::setEnableShadowsFilter(const bool enableShadowsFilter)
-{
-	if(enableShadowsFilter != getEnableShadowsFilter())
+	if(scenery3d->getShadowsFilterEnabled())
 	{
-		showMessage(QString(N_("Shadow filter quality: %1")).arg(enableShadowsFilter? (getEnableShadowsFilterHQ() ? N_("high"):N_("low")) : N_("off")));
-		scenery3d->setShadowsFilterEnabled(enableShadowsFilter);
-		emit enableShadowsFilterChanged(enableShadowsFilter);
+		if(scenery3d->getShadowsFilterHQEnabled())
+			return S3DEnum::HIGH;
+		else
+			return S3DEnum::LOW;
 	}
+	else
+		return S3DEnum::OFF;
 }
 
-bool Scenery3dMgr::getEnableShadowsFilterHQ() const
+void Scenery3dMgr::setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val)
 {
-	return scenery3d->getShadowsFilterHQEnabled();
+	S3DEnum::ShadowFilterQuality oldVal = getShadowFilterQuality();
+	if(oldVal == val)
+		return;
+
+	bool on, hq;
+
+	QString msg(N_("Shadow filter quality: %1"));
+	QString type;
+
+	switch (val) {
+		case S3DEnum::HIGH:
+			type = N_("high");
+			hq = true;
+			on = true;
+			break;
+		case S3DEnum::LOW:
+			type = N_("low");
+			hq = false;
+			on = true;
+			break;
+		default:
+			type = N_("off");
+			hq=false;
+			on=false;
+	}
+
+	showMessage(msg.arg(type));
+
+	scenery3d->setShadowsFilterEnabled(on);
+	scenery3d->setShadowsFilterHQEnabled(hq);
+	emit shadowFilterQualityChanged(val);
 }
 
-void Scenery3dMgr::setEnableShadowsFilterHQ(const bool enableShadowsFilterHQ)
+S3DEnum::CubemappingMode Scenery3dMgr::getCubemappingMode() const
 {
-	if(enableShadowsFilterHQ != getEnableShadowsFilterHQ())
-	{
-		scenery3d->setShadowsFilterHQEnabled(enableShadowsFilterHQ);
-		showMessage(QString(N_("Shadow filter quality: %1")).arg(getEnableShadowsFilter()? (enableShadowsFilterHQ ? N_("high"):N_("low")) : N_("off")));
-		if(enableShadowsFilterHQ) // turn on normal filtering
-			setEnableShadowsFilter(true);
-		emit enableShadowsFilterHQChanged(enableShadowsFilterHQ);
-	}
+	return scenery3d->getCubemappingMode();
+}
+
+void Scenery3dMgr::setCubemappingMode(const S3DEnum::CubemappingMode val)
+{
+	scenery3d->setCubemappingMode(val);
 }
 
 bool Scenery3dMgr::getEnableDebugInfo() const
@@ -633,26 +660,6 @@ void Scenery3dMgr::setEnableTorchLight(const bool enableTorchLight)
 	{
 		scenery3d->setTorchEnabled(enableTorchLight);
 		emit enableTorchLightChanged(enableTorchLight);
-	}
-}
-
-bool Scenery3dMgr::getEnableGeometryShader() const
-{
-	return scenery3d->getGeometryShaderCubemapEnabled();
-}
-
-void Scenery3dMgr::setEnableGeometryShader(const bool enableGeometryShader)
-{
-	if(enableGeometryShader != getEnableGeometryShader())
-	{
-		bool val = enableGeometryShader;
-		if( ! scenery3d->isGeometryShaderCubemapSupported())
-		{
-			val = false;
-		}
-		scenery3d->setGeometryShaderCubemapEnabled(val);
-		showMessage(QString(N_("Geometry shader support: %1")).arg(val?"enabled":"disabled"));
-		emit enableGeometryShaderChanged(val);
 	}
 }
 

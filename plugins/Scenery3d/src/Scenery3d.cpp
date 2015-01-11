@@ -40,6 +40,7 @@
 #include "Scenery3dMgr.hpp"
 #include "AABB.hpp"
 
+#include <QKeyEvent>
 #include <QSettings>
 #include <stdexcept>
 #include <cmath>
@@ -81,17 +82,13 @@ GLExtFuncs glExtFuncs;
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
     : parent(parent), currentScene(), loadingScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
       absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),heightmapLoad(NULL),
+      cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), cubeFBO(0), cubeSideFBO(),
       cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer)
 {
 	qDebug()<<"Scenery3d constructor...";
 
-	cubeMapTex = 0;
-	cubeFBO = 0;
-	cubeRB = 0;
-	cubeMapDepth = 0;
-
 	supportsGSCubemapping = false;
-	useGSCubemapping = false;
+	cubemappingMode = S3DEnum::CUBEMAP;
 	reinitCubemapping = true;
 
 	shaderParameters.shadowTransform = false;
@@ -1336,18 +1333,20 @@ void Scenery3d::generateCubeMap()
 	glDepthMask(GL_TRUE);
 	glEnable(GL_CULL_FACE);
 
-	glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
-
-	if(useGSCubemapping && supportsGSCubemapping)
+	if(cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
 	{
-		modelViewMatrix.setToIdentity();
+		//single FBO
+		glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
+
 		//Hack: because the modelviewmatrix is used for lighting in shader, but we dont want to perform MV transformations 6 times,
 		// we just set the position because that currently is all that is needeed for correct lighting
+		modelViewMatrix.setToIdentity();
 		modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		//render all 6 faces at once
 		shaderParameters.geometryShader = true;
+		//calculate the final required matrices for each face
 		calcCubeMVP();
 		drawArrays(true,true);
 		shaderParameters.geometryShader = false;
@@ -1357,10 +1356,13 @@ void Scenery3d::generateCubeMap()
 		//traditional 6-pass version
 		for(int i=0;i<6;++i)
 		{
+			//bind a single side of the cube
+			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
+
 			modelViewMatrix = cubeRotation[i];
 			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,cubeMapTex,0);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 			drawArrays(true,true);
 		}
 	}
@@ -1380,58 +1382,80 @@ void Scenery3d::generateCubeMap()
 
 void Scenery3d::drawFromCubeMap()
 {
-    QOpenGLShaderProgram* cubeShader = shaderManager.getCubeShader();
-    cubeShader->bind();
+	QOpenGLShaderProgram* cubeShader;
 
-    glEnable(GL_BLEND);
-    //note that GL_ONE is required here for correct blending (see drawArrays)
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    //depth test and culling is necessary for correct display,
-    //because the cube faces can be projected in quite "weird" ways
-    glEnable(GL_DEPTH_TEST);
-    //glDepthFunc(GL_LESS);
-    glDepthMask(GL_TRUE);
-    glEnable(GL_CULL_FACE);
+	if(cubemappingMode>=S3DEnum::CUBEMAP)
+		cubeShader = shaderManager.getCubeShader();
+	else
+		cubeShader = shaderManager.getTextureShader();
 
-    glClear(GL_DEPTH_BUFFER_BIT);
+	cubeShader->bind();
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_CUBE_MAP,cubeMapTex);
+	//We simulate the generate behavoir of drawStelVertexArray ourselves
+	//check if discontinuties exist
+	//if(altAzProjector->hasDiscontinuity())
+	//{
+	//TODO fix similar to StelVertexArray::removeDiscontinuousTriangles
+	//this may only happen for some projections, and even then it may be preferable to simply ignore them (as done now) to retain performance
+	//}
 
-    //We simulate the generate behavoir of drawStelVertexArray ourselves
-    //check if discontinuties exist
-    //if(altAzProjector->hasDiscontinuity())
-    //{
-	    //TODO fix similar to StelVertexArray::removeDiscontinuousTriangles
-		//this may only happen for some projections, and even then it may be preferable to simply ignore them (as done now) to retain performance
-    //}
+	//transform vertices on CPU side - maybe we could do this multithreaded, kicked off at the beginning of the frame?
+	altAzProjector->project(cubeVertices.count(),cubeVertices.constData(),transformedCubeVertices.data());
 
-    //transform vertices on CPU side - maybe we could do this multithreaded, kicked off at the beginning of the frame?
-    altAzProjector->project(cubeVertices.count(),cubeVertices.constData(),transformedCubeVertices.data());
+	//setup shader params
+	projectionMatrix = convertToQMatrix(altAzProjector->getProjectionMatrix());
+	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
+	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_DIFFUSE),0);
+	cubeVertexBuffer.bind();
+	if(cubemappingMode>=S3DEnum::CUBEMAP)
+		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
+	else // 2D tex coords are stored in the same buffer, but with an offset
+		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
+	cubeVertexBuffer.release();
+	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
+	cubeShader->setAttributeArray(ShaderMgr::ATTLOC_VERTEX, reinterpret_cast<const GLfloat*>(transformedCubeVertices.constData()),3);
+	cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
 
-    //setup shader params
-    projectionMatrix = convertToQMatrix(altAzProjector->getProjectionMatrix());
-    cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
-    cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_CUBEMAP),0);
-    cubeVertexBuffer.bind();
-    cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
-    cubeVertexBuffer.release();
-    cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
-    cubeShader->setAttributeArray(ShaderMgr::ATTLOC_VERTEX, reinterpret_cast<const GLfloat*>(transformedCubeVertices.constData()),3);
-    cubeShader->enableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
+	glEnable(GL_BLEND);
+	//note that GL_ONE is required here for correct blending (see drawArrays)
+	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	//depth test and culling is necessary for correct display,
+	//because the cube faces can be projected in quite "weird" ways
+	glEnable(GL_DEPTH_TEST);
+	//glDepthFunc(GL_LESS);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_CULL_FACE);
 
-    cubeIndexBuffer.bind();
-    glDrawElements(GL_TRIANGLES,cubeIndexCount,GL_UNSIGNED_SHORT, NULL);
-    cubeIndexBuffer.release();
+	glClear(GL_DEPTH_BUFFER_BIT);
 
-    cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
-    cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
+	cubeIndexBuffer.bind();
+	glActiveTexture(GL_TEXTURE0);
+	if(cubemappingMode>=S3DEnum::CUBEMAP)
+	{
+		//can render in a single draw call
+		glBindTexture(GL_TEXTURE_CUBE_MAP,cubeMapCubeTex);
+		glDrawElements(GL_TRIANGLES,cubeIndexCount,GL_UNSIGNED_SHORT, NULL);
+	}
+	else
+	{
+		//use 6 drawcalls
+		int faceIndexCount = cubeIndexCount / 6;
+		for(int i =0;i<6;++i)
+		{
+			glBindTexture(GL_TEXTURE_2D, cubeMapTex[i]);
+			glDrawElements(GL_TRIANGLES,faceIndexCount, GL_UNSIGNED_SHORT, (const GLvoid*)(i * faceIndexCount * sizeof(short)));
+		}
+	}
+	cubeIndexBuffer.release();
 
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_BLEND);
+	cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_TEXCOORD);
+	cubeShader->disableAttributeArray(ShaderMgr::ATTLOC_VERTEX);
 
-    cubeShader->release();
+	glDisable(GL_CULL_FACE);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+
+	cubeShader->release();
 }
 
 void Scenery3d::drawDirect() // for Perspective Projection only!
@@ -1629,74 +1653,104 @@ void Scenery3d::init()
 
 void Scenery3d::deleteCubemapping()
 {
-	//delete cube map
+	//delete cube map - we have to check each possible variable because we dont know which ones are active
+	//delete in reverse, FBOs first - but it should not matter
 	if(cubeFBO)
 	{
 		glDeleteFramebuffers(1,&cubeFBO);
 		cubeFBO = 0;
 	}
 
+	if(cubeSideFBO[0])
+	{
+		//we assume if one is created, all have been created
+		glDeleteFramebuffers(6,cubeSideFBO);
+		std::fill(cubeSideFBO,cubeSideFBO + 6,0);
+	}
+
+	//delete depth
 	if(cubeRB)
 	{
 		glDeleteRenderbuffers(1,&cubeRB);
 		cubeRB = 0;
 	}
 
-	if(cubeMapTex)
+	if(cubeMapCubeDepth)
 	{
-		glDeleteTextures(1,&cubeMapTex);
-		cubeMapTex = 0;
+		glDeleteTextures(1,&cubeMapCubeDepth);
+		cubeMapCubeDepth = 0;
 	}
 
-	if(cubeMapDepth)
+	//delete colors
+	if(cubeMapTex[0])
 	{
-		glDeleteTextures(1,&cubeMapDepth);
-		cubeMapDepth = 0;
+		glDeleteTextures(6,cubeMapTex);
+		std::fill(cubeMapTex, cubeMapTex + 6,0);
+	}
+
+	if(cubeMapCubeTex)
+	{
+		glDeleteTextures(1,&cubeMapCubeTex);
+		cubeMapCubeTex = 0;
 	}
 }
 
-void Scenery3d::initCubemapping()
+bool Scenery3d::initCubemapping()
 {
+	bool ret = false;
 	qDebug()<<"[Scenery3d] Initializing cubemap...";
+
+	//remove old cubemap objects if they exist
 	deleteCubemapping();
 
-	//TODO FS: Intel does not seem to like the "real" cubemap approach very	much. While it works without problems,
-	// the performance is worse than with the 6 textured planes (17fps in rev. 4999 --> 7 fps in rev. 5000 for
-	// Testscene in cubemap mode). On AMD, performance seems about the same, maybe a bit better than the old approach.
-	// This could also be caused by the additional data that must be submitted to cubemap shader (the original vertex positions)
-	// or the combined cube vertices maybe cause a GPU stall while transforming on CPU?
-	// Will investigate possible options.
-
-	//gen cube tex
-	glGenTextures(1,&cubeMapTex);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapTex);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
+	//if we are on an ES context, it may not be possible to specify texture bitdepth
 	bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
-	//create faces
-	for (int i=0;i<6;++i)
+
+	glActiveTexture(GL_TEXTURE0);
+
+	if(cubemappingMode >= S3DEnum::CUBEMAP) //CUBEMAP or CUBEMAP_GSACCEL
 	{
-		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,isEs ? GL_RGBA : GL_RGBA8,
-			     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+		//gen cube tex
+		glGenTextures(1,&cubeMapCubeTex);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapCubeTex);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		//create faces
+		for (int i=0;i<6;++i)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,isEs ? GL_RGBA : GL_RGBA8,
+				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+		}
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+	}
+	else //TEXTURES mode
+	{
+		//create 6 textures
+		glGenTextures(6,cubeMapTex);
+		for(int i = 0;i<6;++i)
+		{
+			glBindTexture(GL_TEXTURE_2D, cubeMapTex[i]);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+			glTexImage2D(GL_TEXTURE_2D,0,isEs ? GL_RGBA : GL_RGBA8,
+				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+		}
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-
-	//create fbo
-	glGenFramebuffers(1,&cubeFBO);
-	glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
-
-	if(supportsGSCubemapping && useGSCubemapping)
+	//create depth texture/RB
+	if(cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
 	{
-		//use a cube map for depth, and attach all cube faces at once
-		//note that this function will be a NULL pointer if GS is not supported, so it is important to check before using
-		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapTex,0);
-
-		glGenTextures(1,&cubeMapDepth);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapDepth);
+		//a single cubemap depth texture
+		glGenTextures(1,&cubeMapCubeDepth);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapCubeDepth);
 		//this all has probably not much effect on depth processing because we don't intend to sample
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -1711,31 +1765,68 @@ void Scenery3d::initCubemapping()
 				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,NULL);
 		}
 
-		//attach depth cubemap
-		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cubeMapDepth, 0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
 	else
 	{
-		//use a single depth renderbuffer & bind one cube face at a time
-
-		//gen renderbuffer for single-face depth
+		//gen renderbuffer for single-face depth, reused for all faces to save some memory
 		glGenRenderbuffers(1,&cubeRB);
 		glBindRenderbuffer(GL_RENDERBUFFER,cubeRB);
 		GLenum format = isEs ? GL_DEPTH_COMPONENT16 : GL_DEPTH_COMPONENT24;
 		glRenderbufferStorage(GL_RENDERBUFFER, format,cubemapSize,cubemapSize);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, cubeRB);
-		//temp binding
-		glFramebufferTexture2D(GL_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_CUBE_MAP_POSITIVE_X,cubeMapTex,0);
 	}
 
-	//check validity
-	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	//generate FBO/FBOs
+	if(cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
 	{
-		qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, probably can't use cube map";
+		//only 1 FBO used
+		//create fbo
+		glGenFramebuffers(1,&cubeFBO);
+		glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
+
+		//attach cube tex + cube depth
+		//note that this function will be a NULL pointer if GS is not supported, so it is important to check support before using
+		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapCubeTex,0);
+		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cubeMapCubeDepth, 0);
+
+		//check validity
+		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, probably can't use cube map";
+		else
+			ret = true;
+	}
+	else
+	{
+		//6 FBOs used
+		glGenFramebuffers(6,cubeSideFBO);
+
+		for(int i=0;i<6;++i)
+		{
+			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
+
+			//attach color - 1 side of cubemap or single texture
+			if(cubemappingMode == S3DEnum::CUBEMAP)
+				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,cubeMapCubeTex,0);
+			else
+				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cubeMapTex[i],0);
+
+
+			//attach shared depth buffer
+			glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER, cubeRB);
+
+			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			{
+				qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, probably can't use cube map";
+				ret = false;
+				break;
+			}
+			else
+				ret = true;
+		}
 	}
 
-	//unbind FB
+	//unbind last framebuffer
 	glBindFramebuffer(GL_FRAMEBUFFER,0);
 
 	//initialize cube rotations... found by trial and error :)
@@ -1745,37 +1836,65 @@ void Scenery3d::initCubemapping()
 	//this is the EAST face (y=1)
 	stackBase.rotate(90.0f,-1.0f,0.0f,0.0f);
 
-	//south (x=1) ok
-	cubeRotation[0] = stackBase;
-	cubeRotation[0].rotate(-90.0f,0.0f,1.0f,0.0f);
-	cubeRotation[0].rotate(90.0f,0.0f,0.0f,1.0f);
-	//NORTH (x=-1) ok
-	cubeRotation[1] = stackBase;
-	cubeRotation[1].rotate(90.0f,0.0f,1.0f,0.0f);
-	cubeRotation[1].rotate(-90.0f,0.0f,0.0f,1.0f);
-	//EAST (y=1) ok
-	cubeRotation[2] = stackBase;
-	//west (y=-1) ok
-	cubeRotation[3] = stackBase;
-	cubeRotation[3].rotate(180.0f,-1.0f,0.0f,0.0f);
-	//top (z=1) ok
-	cubeRotation[4] = stackBase;
-	cubeRotation[4].rotate(-90.0f,1.0f,0.0f,0.0f);
-	//bottom (z=-1)
-	cubeRotation[5] = stackBase;
-	cubeRotation[5].rotate(90.0f,1.0f,0.0f,0.0f);
-	cubeRotation[5].rotate(180.0f,0.0f,0.0f,1.0f);
+	if(cubemappingMode >= S3DEnum::CUBEMAP)
+	{
+		//cubemap mode needs other rotations than texture mode
+
+		//south (x=1) ok
+		cubeRotation[0] = stackBase;
+		cubeRotation[0].rotate(-90.0f,0.0f,1.0f,0.0f);
+		cubeRotation[0].rotate(90.0f,0.0f,0.0f,1.0f);
+		//NORTH (x=-1) ok
+		cubeRotation[1] = stackBase;
+		cubeRotation[1].rotate(90.0f,0.0f,1.0f,0.0f);
+		cubeRotation[1].rotate(-90.0f,0.0f,0.0f,1.0f);
+		//EAST (y=1) ok
+		cubeRotation[2] = stackBase;
+		//west (y=-1) ok
+		cubeRotation[3] = stackBase;
+		cubeRotation[3].rotate(180.0f,-1.0f,0.0f,0.0f);
+		//top (z=1) ok
+		cubeRotation[4] = stackBase;
+		cubeRotation[4].rotate(-90.0f,1.0f,0.0f,0.0f);
+		//bottom (z=-1)
+		cubeRotation[5] = stackBase;
+		cubeRotation[5].rotate(90.0f,1.0f,0.0f,0.0f);
+		cubeRotation[5].rotate(180.0f,0.0f,0.0f,1.0f);
+	}
+	else
+	{
+		cubeRotation[0] = stackBase;
+
+		cubeRotation[1] = stackBase;
+		cubeRotation[1].rotate(90.0f,0.0f,0.0f,1.0f);
+
+		cubeRotation[2] = stackBase;
+		cubeRotation[2].rotate(90.0f,0.0f,0.0f,-1.0f);
+
+		cubeRotation[3] = stackBase;
+		cubeRotation[3].rotate(180.0f,0.0f,0.0f,1.0f);
+
+		cubeRotation[4] = stackBase;
+		cubeRotation[4].rotate(90.0f,1.0f,0.0f,0.0f);
+
+		cubeRotation[5] = stackBase;
+		cubeRotation[5].rotate(90.0f,-1.0f,0.0f,0.0f);
+	}
 
 
 	//create a 20x20 cube subdivision to give a good approximation of non-linear projections
 	const int sub = 20;
 	const int vtxCount = (sub+1) * (sub+1);
 	const double d_sub_v = 2.0 / sub;
+	const double d_sub_tex = 1.0 / sub;
 
 	//create the front cubemap face vertices
 	QVector<Vec3f> cubePlaneFront;
+	QVector<Vec2f> cubePlaneFrontTex;
 	QVector<unsigned short> frontIndices;
 	cubePlaneFront.reserve(vtxCount);
+	cubePlaneFrontTex.reserve(vtxCount);
+
 	//store the indices of the vertices
 	//this could easily be recalculated as needed but this makes it a bit more readable
 	unsigned short vertexIdx[sub+1][sub+1] = {0};
@@ -1785,11 +1904,18 @@ void Scenery3d::initCubemapping()
 		for (int x = 0; x <= sub; x++) {
 			float xp = -1.0 + x * d_sub_v;
 			float yp = -1.0 + y * d_sub_v;
+
+			float tx = x * d_sub_tex;
+			float ty = y * d_sub_tex;
+
 			cubePlaneFront<< Vec3f(xp, 1.0f, yp);
+			cubePlaneFrontTex<<Vec2f(tx,ty);
+
 			vertexIdx[y][x] = y*(sub+1)+x;
 		}
 	}
 
+	Q_ASSERT(cubePlaneFrontTex.size() == vtxCount);
 	Q_ASSERT(cubePlaneFront.size() == vtxCount);
 
 	//generate indices for each of the 20x20 subfaces
@@ -1817,21 +1943,26 @@ void Scenery3d::initCubemapping()
 
 	cubeVertices.clear();
 	cubeVertices.reserve(vtxCount * 6);
+	cubeTexcoords.clear();
+	cubeTexcoords.reserve(vtxCount * 6);
 	QVector<unsigned short> cubeIndices; //index data is not needed afterwards on CPU side, so use a local vector
 	cubeIndices.reserve(idxCount * 6);
 	//init with copies of front face
-	cubeVertices<<cubePlaneFront;  //E face y=1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //S face x=1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //N face x=-1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //W face y=-1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //down face z=-1
-	cubeIndices<<frontIndices;
-	cubeVertices<<cubePlaneFront;  //up face z=1
-	cubeIndices<<frontIndices;
+	for(int i = 0;i<6;++i)
+	{
+		//order is as follows
+		//E face y=1
+		//S face x=1
+		//N face x=-1
+		//W face y=-1
+		//down face z=-1
+		//up face z=1
+		cubeVertices<<cubePlaneFront;
+		cubeTexcoords<<cubePlaneFrontTex;
+		cubeIndices<<frontIndices;
+	}
+
+	Q_ASSERT(cubeVertices.size() == cubeTexcoords.size());
 
 	transformedCubeVertices.resize(cubeVertices.size());
 	cubeIndexCount = cubeIndices.size();
@@ -1851,7 +1982,10 @@ void Scenery3d::initCubemapping()
 
 	//upload original cube vertices + indices to GL
 	cubeVertexBuffer.bind();
-	cubeVertexBuffer.allocate(cubeVertices.constData(),cubeVertices.size() * sizeof(Vec3f));
+	//store original vertex pos (=3D vertex coords) + 2D tex coords in same buffer
+	cubeVertexBuffer.allocate(cubeVertices.size() * (sizeof(Vec3f) + sizeof(Vec2f)) );
+	cubeVertexBuffer.write(0, cubeVertices.constData(), cubeVertices.size() * sizeof(Vec3f));
+	cubeVertexBuffer.write(cubeVertices.size() * sizeof(Vec3f), cubeTexcoords.constData(), cubeTexcoords.size() * sizeof(Vec2f));
 	cubeVertexBuffer.release();
 
 	cubeIndexBuffer.bind();
@@ -1859,6 +1993,8 @@ void Scenery3d::initCubemapping()
 	cubeIndexBuffer.release();
 
 	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
+
+	return ret;
 }
 
 void Scenery3d::deleteShadowmapping()
@@ -1977,7 +2113,7 @@ void Scenery3d::draw(StelCore* core)
 
 	drawnTriangles = 0;
 
-	if(reinitCubemapping)
+	if(reinitCubemapping && core->getCurrentProjectionType()!= StelCore::ProjectionPerspective)
 	{
 		//init cubemaps
 		initCubemapping();

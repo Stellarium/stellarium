@@ -25,10 +25,12 @@
 #include "StelModule.hpp"
 #include "StelPainter.hpp"
 #include "Landscape.hpp"
+
 #include "OBJ.hpp"
 #include "Heightmap.hpp"
 #include "Frustum.hpp"
 #include "Polyhedron.hpp"
+#include "S3DEnum.hpp"
 #include "SceneInfo.hpp"
 #include "ShaderManager.hpp"
 
@@ -94,8 +96,10 @@ public:
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
-    bool getGeometryShaderCubemapEnabled() { return useGSCubemapping; }
-    void setGeometryShaderCubemapEnabled(bool val) { useGSCubemapping = val; reinitCubemapping = true; }
+    S3DEnum::CubemappingMode getCubemappingMode() const { return cubemappingMode; }
+    //! Changes cubemapping mode and forces re-initialization on next draw call.
+    //! Note that NO CHECKING is done if the chosen mode is supported on this hardware, you have to make sure before calling this.
+    void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true;}
     bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
 
     uint getCubemapSize() const { return cubemapSize; }
@@ -129,7 +133,7 @@ private:
     bool frustEnabled;
     bool venusOn;
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
-    bool useGSCubemapping;
+    S3DEnum::CubemappingMode cubemappingMode;
     bool reinitCubemapping;
 
     bool loadCancel; //true if loading process should be canceled
@@ -152,21 +156,26 @@ private:
     Vec3d viewPos;
     int drawnTriangles;
 
-    //QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
-    GLuint cubeMapTex; //GL_TEXTURE_CUBE_MAP
-    GLuint cubeMapDepth;
-    GLuint cubeRB; //renderbuffer for depth
-    GLuint cubeFBO; //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBO ourselves
+    /// ---- Cubemapping variables ----
+    GLuint cubeMapCubeTex; //GL_TEXTURE_CUBE_MAP, used in CUBEMAP or CUBEMAP_GSACCEL modes
+    GLuint cubeMapCubeDepth; //this is a depth-cubemap, only used in CUBEMAP_GSACCEL mode
+    GLuint cubeMapTex[6]; //GL_TEXTURE_2D, for "legacy" TEXTURES mode
+    GLuint cubeRB; //renderbuffer for depth of a single face in TEXTURES and CUBEMAP modes (attached to multiple FBOs)
+
+     //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBOs ourselves
+    GLuint cubeFBO; //used in CUBEMAP_GSACCEL mode - only a single FBO exists, with a cubemap for color and one for depth
+    GLuint cubeSideFBO[6]; //used in TEXTURES and CUBEMAP mode, 6 textures/cube faces for color and a shared depth renderbuffer (we don't require the depth after rendering)
+
+    //cube geometry
     QVector<Vec3f> cubeVertices, transformedCubeVertices;
+    QVector<Vec2f> cubeTexcoords;
     QOpenGLBuffer cubeVertexBuffer;
     QOpenGLBuffer cubeIndexBuffer;
     int cubeIndexCount;
-    QMatrix4x4 cubeRotation[6]; //rotational matrices for cube faces
-    QMatrix4x4 cubeMVP[6]; //cube face MVP matrices
 
-    QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
-    QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
-    QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
+    //cube rendering matrices
+    QMatrix4x4 cubeRotation[6]; //rotational matrices for cube faces. The cam position is added to this in each frame.
+    QMatrix4x4 cubeMVP[6]; //cube face MVP matrices
 
     /// ---- Rendering information ----
     //final model view matrix for shader upload
@@ -209,14 +218,17 @@ private:
     //Camera values
     float camNear, camFar, camFOV, camAspect;
 
-
     float parallaxScale;
 
     QFont debugTextFont;
 
+    QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
+    QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
+    QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
+
     // --- initialization
     //! Initializes cubemapping to the currently set parameters (6tex/cubemap/GS approaches)
-    void initCubemapping();
+    bool initCubemapping();
     //! Cleans up cubemapping related objects
     void deleteCubemapping();
     //! Re-initializes shadowmapping related objects
