@@ -352,115 +352,123 @@ p, li { white-space: pre-wrap; }
               <item row="6" column="0" colspan="2">
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <item>
-                 <widget class="QLabel" name="label">
-                  <property name="text">
-                   <string>Shadowmap size:</string>
-                  </property>
-                 </widget>
+                 <layout class="QFormLayout" name="formLayout">
+                  <item row="0" column="0" colspan="2">
+                   <widget class="QCheckBox" name="checkBoxEnablePixelLight">
+                    <property name="text">
+                     <string>Per-Pixel lighting (required for other effects)</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0" colspan="2">
+                   <widget class="QCheckBox" name="checkBoxEnableShadows">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string>Shadows</string>
+                    </property>
+                    <property name="checked">
+                     <bool>false</bool>
+                    </property>
+                    <property name="tristate">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label">
+                    <property name="text">
+                     <string>Shadowmap size:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="comboBoxShadowmapSize">
+                    <property name="currentIndex">
+                     <number>2</number>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string>256</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>512</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>1024</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>2048</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="comboBoxShadowmapSize">
-                  <property name="currentIndex">
-                   <number>2</number>
-                  </property>
-                  <item>
-                   <property name="text">
-                    <string>256</string>
-                   </property>
+                 <layout class="QFormLayout" name="formLayout_2">
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_2">
+                    <property name="text">
+                     <string>Filtering Quality:</string>
+                    </property>
+                   </widget>
                   </item>
-                  <item>
-                   <property name="text">
-                    <string>512</string>
-                   </property>
+                  <item row="1" column="1">
+                   <widget class="QComboBox" name="comboBoxShadowFiltering">
+                    <item>
+                     <property name="text">
+                      <string>Off</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>Low</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>High (slow)</string>
+                     </property>
+                    </item>
+                   </widget>
                   </item>
-                  <item>
-                   <property name="text">
-                    <string>1024</string>
-                   </property>
+                  <item row="0" column="0" colspan="2">
+                   <widget class="QCheckBox" name="checkBoxEnableBump">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string>Bump mapping</string>
+                    </property>
+                    <property name="checked">
+                     <bool>false</bool>
+                    </property>
+                    <property name="tristate">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
                   </item>
-                  <item>
-                   <property name="text">
-                    <string>2048</string>
-                   </property>
+                  <item row="2" column="1">
+                   <widget class="QComboBox" name="comboBoxCubemapMode"/>
                   </item>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_2">
-                  <property name="text">
-                   <string>Filtering Quality:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QComboBox" name="comboBoxShadowFiltering">
-                  <item>
-                   <property name="text">
-                    <string>Off</string>
-                   </property>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_3">
+                    <property name="text">
+                     <string>Cubemapping mode:</string>
+                    </property>
+                   </widget>
                   </item>
-                  <item>
-                   <property name="text">
-                    <string>Low</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>High (slow)</string>
-                   </property>
-                  </item>
-                 </widget>
+                 </layout>
                 </item>
                </layout>
-              </item>
-              <item row="1" column="0">
-               <widget class="QCheckBox" name="checkBoxEnablePixelLight">
-                <property name="text">
-                 <string>Per-Pixel lighting (required for other effects)</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QCheckBox" name="checkBoxEnableBump">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>Bump mapping</string>
-                </property>
-                <property name="checked">
-                 <bool>false</bool>
-                </property>
-                <property name="tristate">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QCheckBox" name="checkBoxEnableShadows">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>Shadows</string>
-                </property>
-                <property name="checked">
-                 <bool>false</bool>
-                </property>
-                <property name="tristate">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QCheckBox" name="checkBoxEnableGeometryShader">
-                <property name="toolTip">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This enables the use of hardware-based Geometry shaders to accelerate the cubemap creation (used when any projection other than &amp;quot;Perspective&amp;quot; is used). If this is not used, all polygons must be drawn 6 times, therefore this option might provide a speedup on compatible hardware.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-                <property name="text">
-                 <string>Use Geometry Shader</string>
-                </property>
-               </widget>
               </item>
              </layout>
             </widget>

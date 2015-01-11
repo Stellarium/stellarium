@@ -20,17 +20,21 @@
  
  
 /*
-This is a shader that applies cubemapping to pre-transformed geometry
+This is a shader that applies a texture to pre-transformed geometry
 */
  
 #version 110
 
-//this is a samplerCube instead of a sampler2D here
-uniform samplerCube u_texDiffuse;
+//matrices
+uniform mat4 u_mProjection;
 
-varying vec3 v_texcoord;
+attribute vec3 a_vertex;
+attribute vec2 a_texcoord;
+
+varying vec2 v_texcoord;
 
 void main(void)
 {
-	gl_FragColor = textureCube(u_texDiffuse, v_texcoord);
+	v_texcoord = a_texcoord;
+	gl_Position = u_mProjection * vec4(a_vertex,1.0);
 }

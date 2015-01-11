@@ -34,10 +34,11 @@
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 
-#include "gui/Scenery3dDialog.hpp"
 #include "SceneInfo.hpp"
+#include "S3DEnum.hpp"
 
 class Scenery3d;
+class Scenery3dDialog;
 class QSettings;
 class StelButton;
 
@@ -53,12 +54,11 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enablePixelLighting READ getEnablePixelLighting WRITE setEnablePixelLighting NOTIFY enablePixelLightingChanged)
 	Q_PROPERTY(bool enableShadows READ getEnableShadows WRITE setEnableShadows NOTIFY enableShadowsChanged)
 	Q_PROPERTY(bool enableBumps READ getEnableBumps WRITE setEnableBumps NOTIFY enableBumpsChanged)
-	Q_PROPERTY(bool enableShadowsFilter READ getEnableShadowsFilter WRITE setEnableShadowsFilter NOTIFY enableShadowsFilterChanged)
-	Q_PROPERTY(bool enableShadowsFilterHQ READ getEnableShadowsFilterHQ WRITE setEnableShadowsFilterHQ NOTIFY enableShadowsFilterHQChanged)
+	Q_PROPERTY(S3DEnum::ShadowFilterQuality shadowFilterQuality READ getShadowFilterQuality WRITE setShadowFilterQuality NOTIFY shadowFilterQualityChanged)
+	Q_PROPERTY(S3DEnum::CubemappingMode cubemappingMode READ getCubemappingMode WRITE setCubemappingMode NOTIFY cubemappingModeChanged)
 	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
 	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
-	Q_PROPERTY(bool enableGeometryShader READ getEnableGeometryShader WRITE setEnableGeometryShader NOTIFY enableGeometryShaderChanged)
 	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
 
 public:
@@ -81,12 +81,11 @@ signals:
     void enablePixelLightingChanged(const bool val);
     void enableShadowsChanged(const bool val);
     void enableBumpsChanged(const bool val);
-    void enableShadowsFilterChanged(const bool val);
-    void enableShadowsFilterHQChanged(const bool val);
+    void shadowFilterQualityChanged(const S3DEnum::ShadowFilterQuality val);
+    void cubemappingModeChanged(const S3DEnum::CubemappingMode val);
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
     void enableTorchLightChanged(const bool val);
-    void enableGeometryShaderChanged(const bool val);
     void isGeometryShaderSupportedChanged(const bool val);
 
     //! This signal is emitted from another thread than this QObject belongs to, so use QueuedConnection.
@@ -102,40 +101,46 @@ public slots:
     //! Enables/Disables the plugin
     void setEnableScene(const bool val);
     bool getEnableScene() const {return flagEnabled; }
+
     void setEnablePixelLighting(const bool val);
     bool getEnablePixelLighting(void) const;
+
     //! Use this to set/get the enableShadows flag.
     //! If set to true, shadow mapping is enabled for the 3D scene.
     void setEnableShadows(const bool enableShadows);
     bool getEnableShadows(void) const;
+
     //! Use this to set/get the enableBumps flag.
     //! If set to true, bump mapping is enabled for the 3D scene.
     void setEnableBumps(const bool enableBumps);
     bool getEnableBumps(void) const;
-    //! Use this to set/get the enableFilter flag.
-    //! If set to true, the shadows in the 3D scene are filtered.
-    void setEnableShadowsFilter(const bool enableShadowsFilter);
-    bool getEnableShadowsFilter(void) const;
-    //! Use this to set/get the enableFilter flag.
-    //! If set to true, the shadows in the 3D scene are filtered using more taps per pass.
-    void setEnableShadowsFilterHQ(const bool enableShadowsFilterHQ);
-    bool getEnableShadowsFilterHQ(void) const;
+
+    //! Returns the current shadow filter quality.
+    S3DEnum::ShadowFilterQuality getShadowFilterQuality(void) const;
+    //! Sets the shadow filter quality
+    void setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val);
+
+    //! Returns the current cubemapping mode
+    S3DEnum::CubemappingMode getCubemappingMode(void) const;
+    //! Sets the cubemapping mode
+    void setCubemappingMode(const S3DEnum::CubemappingMode val);
+
     //! Set to true to show some rendering debug information
     void setEnableDebugInfo(const bool debugEnabled);
     bool getEnableDebugInfo() const;
+
     //! Set to true to show the current standing positin as text on screen.
     void setEnableLocationInfo(const bool enableLocationInfo);
     bool getEnableLocationInfo() const;
+
     //! Set to true to add an additional light source centered at the current position, useful in night scenes.
     void setEnableTorchLight(const bool enableTorchLight);
     bool getEnableTorchLight() const;
-    //! Set to true to enable geometry shader processing for cubemap creation
-    void setEnableGeometryShader(const bool enableGeometryShader);
-    bool getEnableGeometryShader() const;
 
     bool getIsGeometryShaderSupported() const;
 
-    //! Gets the scene info that is currently being displayed.
+    //! Gets the SceneInfo of the scene that is currently being displayed.
+    //! Check SceneInfo::isValid to determine if a scene is displayed.
     SceneInfo getCurrentScene() const;
 
     //! This starts the scene loading process. This is asynchronous, this method returns after metadata loading.

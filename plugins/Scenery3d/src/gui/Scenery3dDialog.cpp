@@ -1,6 +1,8 @@
 #include "Scenery3dDialog.hpp"
+#include "Scenery3dDialog_p.hpp"
 #include "Scenery3dMgr.hpp"
 #include "SceneInfo.hpp"
+#include "S3DEnum.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -34,6 +36,8 @@ void Scenery3dDialog::createDialogContent()
 	//load Ui from form file
 	ui->setupUi(dialog);
 
+	ui->comboBoxCubemapMode->setModel(new CubemapModeListModel(ui->comboBoxCubemapMode));
+
 	//connect UI events
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->scenery3dListWidget, &QListWidget::currentItemChanged, this, &Scenery3dDialog::scenery3dChanged);
@@ -45,21 +49,21 @@ void Scenery3dDialog::createDialogContent()
 		SLOT(setEnableShadows(bool)));
 	connect(ui->checkBoxEnableBump, SIGNAL(clicked(bool)), mgr,
 		SLOT(setEnableBumps(bool)));
-	connect(ui->checkBoxEnableGeometryShader, SIGNAL(clicked(bool)), mgr,
-		SLOT(setEnableGeometryShader(bool)));
 
-	//connectSlotsByName does not work in our case
-	connect(ui->comboBoxShadowFiltering, SIGNAL(currentIndexChanged(int)),this,
-		SLOT(on_comboBoxShadowFiltering_currentIndexChanged(int)));
+	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
+	//the "new" syntax is extremly ugly in case signals have overloads
+	connect(ui->comboBoxCubemapMode, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapMode_currentIndexChanged);
+	connect(ui->comboBoxShadowFiltering, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged);
 
 	//connect Scenery3d update events
 	connect(mgr, SIGNAL(enablePixelLightingChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, SIGNAL(enableShadowsChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, SIGNAL(enableBumpsChanged(bool)), SLOT(updateFromManager()));
-	connect(mgr, SIGNAL(enableShadowsFilterChanged(bool)), SLOT(updateFromManager()));
-	connect(mgr, SIGNAL(enableShadowsFilterHQChanged(bool)), SLOT(updateFromManager()));
-	connect(mgr, SIGNAL(enableGeometryShaderChanged(bool)),SLOT(updateFromManager()));
+	connect(mgr, &Scenery3dMgr::cubemappingModeChanged, this, &Scenery3dDialog::updateFromManager);
 	connect(mgr, SIGNAL(isGeometryShaderSupportedChanged(bool)), SLOT(updateFromManager()));
+
+	//this is the modern type-safe way to connect signals to slots (with compile-time checking)
+	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged,this, &Scenery3dDialog::updateFromManager);
 
     // Fill the scenery list
     QListWidget* l = ui->scenery3dListWidget;
@@ -88,19 +92,12 @@ void Scenery3dDialog::createDialogContent()
 void Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged(int index)
 {
 	qDebug()<<index;
-	switch(index)
-	{
-		case 0:
-			mgr->setEnableShadowsFilter(false);
-			mgr->setEnableShadowsFilterHQ(false);
-			break;
-		case 1:
-			mgr->setEnableShadowsFilterHQ(false);
-			mgr->setEnableShadowsFilter(true);
-			break;
-		case 2:
-			mgr->setEnableShadowsFilterHQ(true);
-	}
+	mgr->setShadowFilterQuality(static_cast<S3DEnum::ShadowFilterQuality>(index));
+}
+
+void Scenery3dDialog::on_comboBoxCubemapMode_currentIndexChanged(int index)
+{
+	mgr->setCubemappingMode(static_cast<S3DEnum::CubemappingMode>(index));
 }
 
 
@@ -134,13 +131,9 @@ void Scenery3dDialog::updateFromManager()
 	ui->checkBoxEnableShadows->setChecked(mgr->getEnableShadows());
 	ui->checkBoxEnableShadows->setEnabled(pix);
 
-	if(mgr->getEnableShadowsFilterHQ() && mgr->getEnableShadowsFilter())
-		ui->comboBoxShadowFiltering->setCurrentIndex(2);
-	else if (mgr->getEnableShadowsFilter())
-		ui->comboBoxShadowFiltering->setCurrentIndex(1);
-	else
-		ui->comboBoxShadowFiltering->setCurrentIndex(0);
+	ui->comboBoxShadowFiltering->setCurrentIndex(mgr->getShadowFilterQuality());
+	ui->comboBoxCubemapMode->setCurrentIndex(mgr->getCubemappingMode());
 
-	ui->checkBoxEnableGeometryShader->setChecked(mgr->getEnableGeometryShader());
-	ui->checkBoxEnableGeometryShader->setEnabled(mgr->getIsGeometryShaderSupported());
+	CubemapModeListModel* model = dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model());
+	model->setGSSupported(mgr->getIsGeometryShaderSupported());
 }

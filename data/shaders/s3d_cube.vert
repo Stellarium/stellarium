@@ -23,7 +23,7 @@
 This is a shader that applies cubemapping to pre-transformed geometry
 */
  
-#version 120
+#version 110
 
 //matrices
 uniform mat4 u_mProjection;

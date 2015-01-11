@@ -22,6 +22,7 @@ protected:
 
 private slots:
 	void on_comboBoxShadowFiltering_currentIndexChanged(int index);
+	void on_comboBoxCubemapMode_currentIndexChanged(int index);
     void scenery3dChanged(QListWidgetItem* item);
 
     //! Update the widget to make sure it is synchrone if a value was changed programmatically
