@@ -938,7 +938,10 @@ void StelMainView::minFpsChanged()
 
 void StelMainView::mouseMoveEvent(QMouseEvent* event)
 {
-	if (event->buttons())
+	// We notify the applicatio to increase the fps if a button has been
+	// clicked, but also if the cursor is currently hidden, so that it gets
+	// restored.
+	if (event->buttons() || QGuiApplication::overrideCursor()!=0)
 		thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseMoveEvent(event);
 }
