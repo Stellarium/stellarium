@@ -1421,6 +1421,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				           << "is missing in the update lists.";
 			missingCount++;
 		}
+		// All satellites, who has invalid orbit should be removed.
+		if (!sat->orbitValid)
+		{
+			toBeRemoved.append(sat->id);
+			qWarning() << "Satellite" << sat->id << sat->name
+				   << "has invalid orbit and will be removed.";
+			missingCount++;
+		}
 	}
 	
 	// Only those not in the loaded collection have remained

@@ -442,6 +442,7 @@ void Satellite::update(double)
 			// the satellite.
 			qWarning() << "Satellite has invalid orbit:" << name << id;
 			orbitValid = false;
+			displayed = false; // He shouldn't be displayed!
 			return;
 		}
 
@@ -540,7 +541,8 @@ bool Satellite::operator <(const Satellite& another) const
 
 void Satellite::draw(StelCore* core, StelPainter& painter, float)
 {
-	if (core->getJDay() < jdLaunchYearJan1) return;
+	if (core->getJDay()<jdLaunchYearJan1 || !displayed)
+		return;
 
 	XYZ = getJ2000EquatorialPos(core);
 	StelSkyDrawer* sd = core->getSkyDrawer();
