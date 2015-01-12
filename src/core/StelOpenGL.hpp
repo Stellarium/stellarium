@@ -83,9 +83,6 @@
 #define glGetShaderInfoLog(...)     GLFUNC_(glGetShaderInfoLog(__VA_ARGS__))
 #define glGetShaderPrecisionFormat(...) GLFUNC_(glGetShaderPrecisionFormat(__VA_ARGS__))
 #define glGetShaderSource(...)      GLFUNC_(glGetShaderSource(__VA_ARGS__))
-#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
-#define glGetString(...)            GLFUNC_(glGetString(__VA_ARGS__))
-#endif
 #define glGetUniformfv(...)         GLFUNC_(glGetUniformfv(__VA_ARGS__))
 #define glGetUniformiv(...)         GLFUNC_(glGetUniformiv(__VA_ARGS__))
 #define glGetUniformLocation(...)   GLFUNC_(glGetUniformLocation(__VA_ARGS__))
@@ -138,6 +135,35 @@
 #define glVertexAttrib4f(...)       GLFUNC_(glVertexAttrib4f(__VA_ARGS__))
 #define glVertexAttrib4fv(...)      GLFUNC_(glVertexAttrib4fv(__VA_ARGS__))
 #define glVertexAttribPointer(...)  GLFUNC_(glVertexAttribPointer(__VA_ARGS__))
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 3, 0)
+#define glGetString(...)            GLFUNC_(glGetString(__VA_ARGS__))
+#endif
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+#define glBindTexture(...)          GLFUNC_(glBindTexture(__VA_ARGS__))
+#define glBlendFunc(...)            GLFUNC_(glBlendFunc(__VA_ARGS__))
+#define glClear(...)                GLFUNC_(glClear(__VA_ARGS__))
+#define glClearColor(...)           GLFUNC_(glClearColor(__VA_ARGS__))
+#define glCullFace(...)             GLFUNC_(glCullFace(__VA_ARGS__))
+#define glDeleteTextures(...)       GLFUNC_(glDeleteTextures(__VA_ARGS__))
+#define glDepthMask(...)            GLFUNC_(glDepthMask(__VA_ARGS__))
+#define glDisable(...)              GLFUNC_(glDisable(__VA_ARGS__))
+#define glDrawArrays(...)           GLFUNC_(glDrawArrays(__VA_ARGS__))
+#define glDrawElements(...)         GLFUNC_(glDrawElements(__VA_ARGS__))
+#define glEnable(...)               GLFUNC_(glEnable(__VA_ARGS__))
+#define glGenTextures(...)          GLFUNC_(glGenTextures(__VA_ARGS__))
+#define glGetError(...)             GLFUNC_(glGetError(__VA_ARGS__))
+#define glGetIntegerv(...)          GLFUNC_(glGetIntegerv(__VA_ARGS__))
+#define glFrontFace(...)            GLFUNC_(glFrontFace(__VA_ARGS__))
+#define glIsEnabled(...)            GLFUNC_(glIsEnabled(__VA_ARGS__))
+#define glIsTexture(...)            GLFUNC_(glIsTexture(__VA_ARGS__))
+#define glStencilMask(...)          GLFUNC_(glStencilMask(__VA_ARGS__))
+#define glTexImage2D(...)           GLFUNC_(glTexImage2D(__VA_ARGS__))
+#define glTexParameterf(...)        GLFUNC_(glTexParameterf(__VA_ARGS__))
+#define glTexParameteri(...)        GLFUNC_(glTexParameteri(__VA_ARGS__))
+#define glViewport(...)             GLFUNC_(glViewport(__VA_ARGS__))
+#endif
 
 #ifndef NDEBUG
 # define GL(line) do { \
