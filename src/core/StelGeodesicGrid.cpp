@@ -374,7 +374,7 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 		if (!corner0_inside[i] && !corner1_inside[i] && !corner2_inside[i])
 		{
 			// totally outside this SphericalCap
-			return;
+			goto end;
 		}
 		else if (corner0_inside[i] && corner1_inside[i] && corner2_inside[i])
 		{
@@ -443,6 +443,7 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 #endif
 		}
 	}
+end:
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	delete[] halfs_used;
 #endif
