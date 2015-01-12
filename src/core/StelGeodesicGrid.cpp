@@ -447,6 +447,7 @@ end:
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	delete[] halfs_used;
 #endif
+	return;
 }
 
 /*************************************************************************
