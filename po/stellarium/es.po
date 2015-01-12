@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 02:48+0600\n"
+"POT-Creation-Date: 2015-01-12 01:03+0600\n"
 "PO-Revision-Date: 2015-01-10 03:05+0000\n"
 "Last-Translator: Miguel de Dios <tres.14159@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-11 05:51+0000\n"
+"X-Launchpad-Export-Date: 2015-01-12 06:19+0000\n"
 "X-Generator: Launchpad (build 17298)\n"
 "Language: es_ES\n"
 
@@ -490,11 +490,6 @@ msgstr "Tiempo de ascenso: %1%"
 #: src/core/StelApp.cpp:487
 msgid "Night mode"
 msgstr "Modo nocturno"
-
-#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:286
-msgid "SpaceShip"
-msgstr "Nave Espacial"
 
 #: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:374 src/ui_dateTimeDialogGui.h:377
@@ -10665,6 +10660,9 @@ msgstr "Coordenada Y"
 
 #~ msgid "(geometric)"
 #~ msgstr "(geométrica)"
+
+#~ msgid "SpaceShip"
+#~ msgstr "Nave Espacial"
 
 #~ msgid "Nix"
 #~ msgstr "Nix"

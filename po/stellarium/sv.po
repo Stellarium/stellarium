@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 02:48+0600\n"
+"POT-Creation-Date: 2015-01-12 01:03+0600\n"
 "PO-Revision-Date: 2014-10-28 20:37+0000\n"
 "Last-Translator: Anders Jonsson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-11 05:51+0000\n"
+"X-Launchpad-Export-Date: 2015-01-12 06:20+0000\n"
 "X-Generator: Launchpad (build 17298)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -487,11 +487,6 @@ msgstr "Uppgångstid: %1%"
 #: src/core/StelApp.cpp:487
 msgid "Night mode"
 msgstr "Nattläge"
-
-#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:286
-msgid "SpaceShip"
-msgstr "Rymdskepp"
 
 #: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:374 src/ui_dateTimeDialogGui.h:377
@@ -10257,6 +10252,9 @@ msgstr ""
 
 #~ msgid "(geometric)"
 #~ msgstr "(geometrisk)"
+
+#~ msgid "SpaceShip"
+#~ msgstr "Rymdskepp"
 
 #~ msgid "Amalthea"
 #~ msgstr "Amalthea"
