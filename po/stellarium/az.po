@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 02:48+0600\n"
+"POT-Creation-Date: 2015-01-12 01:03+0600\n"
 "PO-Revision-Date: 2014-01-05 15:27+0000\n"
 "Last-Translator: Nadir Teymurov <nadir_teymurov@mail.ru>\n"
 "Language-Team: Azerbaijani <az@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-11 05:31+0000\n"
+"X-Launchpad-Export-Date: 2015-01-12 05:56+0000\n"
 "X-Generator: Launchpad (build 17298)\n"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
@@ -496,11 +496,6 @@ msgstr ""
 #: src/core/StelApp.cpp:487
 msgid "Night mode"
 msgstr "Gecə şəraiti"
-
-#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:286
-msgid "SpaceShip"
-msgstr "Kosmik Gəmi"
 
 #: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:374 src/ui_dateTimeDialogGui.h:377
@@ -9701,6 +9696,9 @@ msgstr ""
 
 #~ msgid "Galactic Plane"
 #~ msgstr "Qalaktik Dairə"
+
+#~ msgid "SpaceShip"
+#~ msgstr "Kosmik Gəmi"
 
 #, qt-format
 #~ msgid "Galactic longitude/latitude (J2000): %1/%2"

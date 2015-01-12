@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-11 02:48+0600\n"
+"POT-Creation-Date: 2015-01-12 01:03+0600\n"
 "PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-11 05:55+0000\n"
+"X-Launchpad-Export-Date: 2015-01-12 06:24+0000\n"
 "X-Generator: Launchpad (build 17298)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -487,11 +487,6 @@ msgstr "日出時間: %1%"
 #: src/core/StelApp.cpp:487
 msgid "Night mode"
 msgstr "夜間模式"
-
-#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:286
-msgid "SpaceShip"
-msgstr "太空船"
 
 #: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:374 src/ui_dateTimeDialogGui.h:377
@@ -10050,6 +10045,9 @@ msgstr ""
 
 #~ msgid "Miranda"
 #~ msgstr "米蘭達 (天衞五)"
+
+#~ msgid "SpaceShip"
+#~ msgstr "太空船"
 
 #~ msgid "Landscape: "
 #~ msgstr "地形: "
