@@ -879,13 +879,13 @@ Vec3d Planet::getHeliocentricPos(Vec3d p) const
 	// 	}
 	// }
 	Vec3d pos = p;
-	const Planet* ourParent = &(*parent);
+	const Planet* ourParent = parent.data();
 	const Planet* parentsParent;
 	// int i = 0;
 	if (NULL != ourParent)
 	{
 		// const Planet* const parentsParent = &(*(ourParent->parent));
-		while (NULL != (parentsParent = &(*(ourParent->parent))))
+		while (NULL != (parentsParent = ourParent->parent.data()))
 		{
 			pos += ourParent->eclipticPos;
 			ourParent = parentsParent;
