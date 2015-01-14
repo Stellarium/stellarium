@@ -345,6 +345,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setFlagShowFps(confSettings->value("gui/flag_show_fps", true).toBool());
 	setFlagTimeJd(confSettings->value("gui/flag_time_jd", false).toBool());
 	setFlagFovDms(confSettings->value("gui/flag_fov_dms", false).toBool());
+	setFlagShowTz(confSettings->value("gui/flag_show_tz", true).toBool());
 }
 
 BottomStelBar::~BottomStelBar()
@@ -556,7 +557,14 @@ void BottomStelBar::updateText(bool updatePos)
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
 	double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
 	QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
-	QString newDateInfo = getFlagShowTime() ? QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz) : " ";
+	QString newDateInfo = " ";
+	if (getFlagShowTime())
+	{
+		if (getFlagShowTz())
+			newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz);
+		else
+			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt));
+	}
 	QString newDateAppx = QString("JD %1").arg(jd-dt, 0, 'f', 5);
 	if (getFlagTimeJd())
 	{
