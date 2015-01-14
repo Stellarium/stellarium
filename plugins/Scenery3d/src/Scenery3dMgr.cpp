@@ -45,12 +45,15 @@
 #include "StelTranslator.hpp"
 #include "LandscapeMgr.hpp"
 
+#define S3D_CONFIG_PREFIX QString("Scenery3d")
+
 Scenery3dMgr::Scenery3dMgr() :
     scenery3d(NULL),
     flagEnabled(false),
     cleanedUp(false),
     debugShader(NULL),
     progressBar(NULL),
+    currentLoadScene(),
     currentLoadFuture(this)
 {
     setObjectName("Scenery3dMgr");
@@ -139,9 +142,6 @@ void Scenery3dMgr::init()
 	loadConfig();
 	createActions();
 
-	//on startup, make this not checkable because no scene is loaded
-	this->enableAction->setCheckable(false);
-
 	// graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
 	// In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
 	if ( !QOpenGLContext::currentContext()->hasExtension("GL_EXT_framebuffer_object")) {
@@ -156,8 +156,6 @@ void Scenery3dMgr::init()
 	}
 
 	reloadShaders();
-	setEnableShadows(false);
-	setShadowFilterQuality(S3DEnum::LOW);
 
 	//Initialize Shadow Mapping
 	qWarning() << "init scenery3d object.";
@@ -187,6 +185,8 @@ void Scenery3dMgr::init()
 	{
 		qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
 	}
+
+	showMessage("Scenery3d plugin loaded!");
 }
 
 void Scenery3dMgr::deinit()
@@ -214,12 +214,19 @@ void Scenery3dMgr::loadConfig()
 {
 	conf = StelApp::getInstance().getSettings();
 
-	conf->beginGroup("Scenery3d");
+	conf->beginGroup(S3D_CONFIG_PREFIX);
 
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
-	scenery3d->setCubemapSize(conf->value("cubemapSize",2048).toInt());
-	scenery3d->setShadowmapSize(conf->value("shadowmapSize", 1024).toInt());
-	scenery3d->setTorchBrightness(conf->value("extralight_brightness", 0.5f).toFloat());
+	scenery3d->setCubemappingMode( static_cast<S3DEnum::CubemappingMode>(conf->value("cubemap_mode",1).toInt()) );
+	scenery3d->setCubemapSize(conf->value("cubemap_size",2048).toInt());
+	scenery3d->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());
+	scenery3d->setShadowFilterQuality( static_cast<S3DEnum::ShadowFilterQuality>(conf->value("shadow_filter_quality", 1).toInt()) );
+	scenery3d->setTorchBrightness(conf->value("torch_brightness", 0.5f).toFloat());
+	scenery3d->setBumpsEnabled(conf->value("flag_bumpmap").toBool());
+	scenery3d->setShadowsEnabled(conf->value("flag_shadow").toBool());
+	scenery3d->setPixelLightingEnabled(conf->value("flag_pixel_lighting").toBool());
+
+	defaultScenery3dID = conf->value("default_location_id","").toString();
 
 	conf->endGroup();
 }
@@ -232,7 +239,7 @@ void Scenery3dMgr::createActions()
 	//also add cubemap/shadowmap size (=quality) options to GUI?
 
 	//enable action will be set checkable if a scene was loaded
-	this->enableAction = addAction("actionShow_Scenery3d", groupName, N_("Toggle 3D landscape"),this,"enableScene","Ctrl+3");
+	addAction("actionShow_Scenery3d", groupName, N_("Toggle 3D landscape"),this,"enableScene","Ctrl+3");
 	addAction("actionShow_Scenery3d_dialog", groupName, N_("Show settings dialog"), scenery3dDialog, "visible", "Ctrl+Shift+3");
 	addAction("actionShow_Scenery3d_shadows", groupName, N_("Toggle shadows"), this, "enableShadows","Ctrl+R, S");
 	addAction("actionSwitch_Scenery3d_shadowfilter", groupName, N_("Toggle shadow filtering"), this, "enableShadowsFilter","Ctrl+R, F");
@@ -425,8 +432,14 @@ void Scenery3dMgr::loadSceneCompleted()
 	//perform GL upload + other calculations that require the location to be set
 	scenery3d->finalizeLoad();
 
-	enableAction->setCheckable(true);
+	//clear loading scene
+	SceneInfo s = currentLoadScene;
+	currentLoadScene = SceneInfo();
+
+	//show the scene
 	setEnableScene(true);
+
+	emit currentSceneChanged(s);
 }
 
 SceneInfo Scenery3dMgr::loadScenery3dByID(const QString& id)
@@ -473,35 +486,49 @@ SceneInfo Scenery3dMgr::getCurrentScene() const
 	return scenery3d->getCurrentScene();
 }
 
-bool Scenery3dMgr::setDefaultScenery3dID(const QString& id)
+void Scenery3dMgr::setDefaultScenery3dID(const QString& id)
 {
-    if (id.isEmpty())
-	return false;
     defaultScenery3dID = id;
 
-    conf->setValue("init_location/scenery3d_name", id);
-    return true;
+    conf->setValue(S3D_CONFIG_PREFIX + "/default_location_id", id);
 }
 
 void Scenery3dMgr::setEnableScene(const bool enable)
 {
-    if(enable!=flagEnabled)
-    {
-	flagEnabled=enable;
-	if (scenery3d->getCubemapSize()==0)
+	if(enable && ! getCurrentScene().isValid)
 	{
-	    //TODO FS: remove this?
-	    if (flagEnabled)
-	    {
-		oldProjectionType= StelApp::getInstance().getCore()->getCurrentProjectionType();
-		StelApp::getInstance().getCore()->setCurrentProjectionType(StelCore::ProjectionPerspective);
-	    }
-	    else
-		StelApp::getInstance().getCore()->setCurrentProjectionType(oldProjectionType);
+		//check if a default scene is set and load that
+		QString id = getDefaultScenery3dID();
+		if(!id.isEmpty())
+		{
+			if(!currentLoadScene.isValid)
+				loadScenery3dByID(id);
+			return;
+		}
+		else
+		{
+			flagEnabled = false;
+			showMessage("Please load a scene first!");
+			emit enableSceneChanged(false);
+		}
 	}
+	if(enable!=flagEnabled)
+	{
+		flagEnabled=enable;
+		if (scenery3d->getCubemapSize()==0)
+		{
+			//TODO FS: remove this?
+			if (flagEnabled)
+			{
+				oldProjectionType= StelApp::getInstance().getCore()->getCurrentProjectionType();
+				StelApp::getInstance().getCore()->setCurrentProjectionType(StelCore::ProjectionPerspective);
+			}
+			else
+				StelApp::getInstance().getCore()->setCurrentProjectionType(oldProjectionType);
+		}
 
-	emit enableSceneChanged(flagEnabled);
-    }
+		emit enableSceneChanged(flagEnabled);
+	}
 }
 
 bool Scenery3dMgr::getEnablePixelLighting() const
@@ -521,6 +548,7 @@ void Scenery3dMgr::setEnablePixelLighting(const bool val)
 		showMessage(QString(N_("Per-Pixel shading %1")).arg(val? N_("on") : N_("off")));
 
 		scenery3d->setPixelLightingEnabled(val);
+		conf->setValue(S3D_CONFIG_PREFIX + "/flag_pixel_lighting", val);
 		emit enablePixelLightingChanged(val);
 	}
 }
@@ -545,6 +573,8 @@ void Scenery3dMgr::setEnableShadows(const bool enableShadows)
 			scenery3d->setShadowsEnabled(false);
 			emit enableShadowsChanged(false);
 		}
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/flag_shadow",getEnableShadows());
 	}
 }
 
@@ -559,21 +589,15 @@ void Scenery3dMgr::setEnableBumps(const bool enableBumps)
 	{
 		showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
 		scenery3d->setBumpsEnabled(enableBumps);
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/flag_bumpmap", enableBumps);
 		emit enableBumpsChanged(enableBumps);
 	}
 }
 
 S3DEnum::ShadowFilterQuality Scenery3dMgr::getShadowFilterQuality() const
 {
-	if(scenery3d->getShadowsFilterEnabled())
-	{
-		if(scenery3d->getShadowsFilterHQEnabled())
-			return S3DEnum::HIGH;
-		else
-			return S3DEnum::LOW;
-	}
-	else
-		return S3DEnum::OFF;
+    return scenery3d->getShadowFilterQuality();
 }
 
 void Scenery3dMgr::setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val)
@@ -582,32 +606,24 @@ void Scenery3dMgr::setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val
 	if(oldVal == val)
 		return;
 
-	bool on, hq;
-
 	QString msg(N_("Shadow filter quality: %1"));
 	QString type;
 
 	switch (val) {
 		case S3DEnum::HIGH:
 			type = N_("high");
-			hq = true;
-			on = true;
 			break;
 		case S3DEnum::LOW:
 			type = N_("low");
-			hq = false;
-			on = true;
 			break;
 		default:
 			type = N_("off");
-			hq=false;
-			on=false;
 	}
 
 	showMessage(msg.arg(type));
 
-	scenery3d->setShadowsFilterEnabled(on);
-	scenery3d->setShadowsFilterHQEnabled(hq);
+	conf->setValue(S3D_CONFIG_PREFIX + "/shadow_filter_quality",val);
+	scenery3d->setShadowFilterQuality(val);
 	emit shadowFilterQualityChanged(val);
 }
 
@@ -619,6 +635,9 @@ S3DEnum::CubemappingMode Scenery3dMgr::getCubemappingMode() const
 void Scenery3dMgr::setCubemappingMode(const S3DEnum::CubemappingMode val)
 {
 	scenery3d->setCubemappingMode(val);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_mode",val);
+	emit cubemappingModeChanged(val);
 }
 
 bool Scenery3dMgr::getEnableDebugInfo() const
@@ -661,6 +680,18 @@ void Scenery3dMgr::setEnableTorchLight(const bool enableTorchLight)
 		scenery3d->setTorchEnabled(enableTorchLight);
 		emit enableTorchLightChanged(enableTorchLight);
 	}
+}
+
+float Scenery3dMgr::getTorchStrength() const
+{
+	return scenery3d->getTorchBrightness();
+}
+
+void Scenery3dMgr::setTorchStrength(const float torchStrength)
+{
+	scenery3d->setTorchBrightness(torchStrength);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/torch_brightness",torchStrength);
 }
 
 bool Scenery3dMgr::getIsGeometryShaderSupported() const
