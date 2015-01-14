@@ -53,7 +53,6 @@ public:
 	const StelLocation locationForString(const QString& s) const;
 
 	//! Return the StelLocation from a CLI
-	//! Can match location name, or coordinates
 	const StelLocation locationFromCLI() const;
 
 	//! Return a valid location when no valid one was found.
