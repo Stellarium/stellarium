@@ -242,8 +242,6 @@ void Scenery3dMgr::createActions()
 	addAction("actionShow_Scenery3d", groupName, N_("Toggle 3D landscape"),this,"enableScene","Ctrl+3");
 	addAction("actionShow_Scenery3d_dialog", groupName, N_("Show settings dialog"), scenery3dDialog, "visible", "Ctrl+Shift+3");
 	addAction("actionShow_Scenery3d_shadows", groupName, N_("Toggle shadows"), this, "enableShadows","Ctrl+R, S");
-	addAction("actionSwitch_Scenery3d_shadowfilter", groupName, N_("Toggle shadow filtering"), this, "enableShadowsFilter","Ctrl+R, F");
-	addAction("actionSwitch_Scenery3d_shadowfilterhq", groupName, N_("Toggle shadow filtering quality"), this, "enableShadowsFilterHQ","Ctrl+R, Q");
 	addAction("actionShow_Scenery3d_debuginfo", groupName, N_("Toggle debug information"), this, "enableDebugInfo","Ctrl+R, D");
 	addAction("actionShow_Scenery3d_locationinfo", groupName, N_("Toggle location text"), this, "enableLocationInfo","Ctrl+R, T");
 	addAction("actionShow_Scenery3d_torchlight", groupName, N_("Toggle torchlight"), this, "enableTorchLight", "Ctrl+R, L");
@@ -562,7 +560,7 @@ void Scenery3dMgr::setEnableShadows(const bool enableShadows)
 {
 	if(enableShadows != getEnableShadows())
 	{
-		if (scenery3d->getShadowmapSize())
+		if (scenery3d->getShadowmapSize() && getEnablePixelLighting())
 		{
 			showMessage(QString(N_("Shadows %1")).arg(enableShadows? N_("on") : N_("off")));
 			scenery3d->setShadowsEnabled(enableShadows);
