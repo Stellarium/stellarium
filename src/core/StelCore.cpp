@@ -111,13 +111,20 @@ void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	defaultLocationID = conf->value("init_location/location", "auto").toString();
+	if (conf->childGroups().contains("location_run_once"))
+		defaultLocationID = "stellarium_cli";
+	else
+		defaultLocationID = conf->value("init_location/location", "auto").toString();
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
 	StelLocation location=locationMgr->getLastResortLocation(); // first location: Paris. Required if no IP connection on first launch!
 	if (defaultLocationID == "auto")
 	{
 		locationMgr->locationFromIP();
+	}
+	else if (defaultLocationID == "stellarium_cli")
+	{
+		location = locationMgr->locationFromCLI();
 	}
 	else
 	{
