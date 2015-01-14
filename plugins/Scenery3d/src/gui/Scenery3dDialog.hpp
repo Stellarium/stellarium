@@ -9,13 +9,13 @@ class SceneInfo;
 
 class Scenery3dDialog : public StelDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    Scenery3dDialog(QObject* parent = NULL);
+	Scenery3dDialog(QObject* parent = NULL);
 	~Scenery3dDialog();
 
 public slots:
-        void retranslate();
+	void retranslate();
 
 protected:
 	void createDialogContent();
@@ -23,17 +23,21 @@ protected:
 private slots:
 	void on_comboBoxShadowFiltering_currentIndexChanged(int index);
 	void on_comboBoxCubemapMode_currentIndexChanged(int index);
-    void scenery3dChanged(QListWidgetItem* item);
+	void on_sliderTorchStrength_valueChanged(int value);
+	void on_checkBoxDefaultScene_stateChanged(int value);
+	void scenery3dChanged(QListWidgetItem* item);
 
-    //! Update the widget to make sure it is synchrone if a value was changed programmatically
-    //! This is called automatically from the signals in the manager class
-    void updateFromManager();
+	void updateCurrentScene(const SceneInfo& sceneInfo);
+
+	//! Update the widget to make sure it is synchrone if a value was changed programmatically
+	//! This is called automatically from the signals in the manager class
+	void updateFromManager();
 
 private:
-    QString getHtmlDescription(const SceneInfo& si) const;
+	QString getHtmlDescription(const SceneInfo& si) const;
 
-    Ui_scenery3dDialogForm* ui;
-    Scenery3dMgr* mgr;
+	Ui_scenery3dDialogForm* ui;
+	Scenery3dMgr* mgr;
 };
 
 #endif

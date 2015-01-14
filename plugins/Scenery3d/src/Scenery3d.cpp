@@ -95,8 +95,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.pixelLighting = false;
 	shaderParameters.shadows = false;
 	shaderParameters.bump = false;
-	shaderParameters.shadowFilter = true;
-	shaderParameters.shadowFilterHQ = false;
+	shaderParameters.shadowFilterQuality = S3DEnum::LOW;
 	shaderParameters.geometryShader = false;
 
     torchEnabled = false;
@@ -687,7 +686,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	//override some shader Params
 	GlobalShaderParameters pm = shaderParameters;
 	if(venusOn)
-		pm.shadowFilter = false;
+		pm.shadowFilterQuality = S3DEnum::OFF;
 
 	//bind VAO
 	objModel->bindGL();
@@ -1702,6 +1701,13 @@ bool Scenery3d::initCubemapping()
 
 	//remove old cubemap objects if they exist
 	deleteCubemapping();
+
+	//last compatibility check before possible crash
+	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
+	{
+		parent->showMessage(N_("Selected cubemapping mode is not supported. Falling back to '6 Textures' mode."));
+		cubemappingMode = S3DEnum::TEXTURES;
+	}
 
 	//if we are on an ES context, it may not be possible to specify texture bitdepth
 	bool isEs = QOpenGLContext::currentContext()->isOpenGLES();

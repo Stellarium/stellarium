@@ -59,6 +59,7 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
 	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
+	Q_PROPERTY(float torchStrength READ getTorchStrength WRITE setTorchStrength NOTIFY torchStrengthChanged)
 	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
 
 public:
@@ -86,7 +87,10 @@ signals:
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
     void enableTorchLightChanged(const bool val);
+    void torchStrengthChanged(const float val);
     void isGeometryShaderSupportedChanged(const bool val);
+
+    void currentSceneChanged(const SceneInfo& sceneInfo);
 
     //! This signal is emitted from another thread than this QObject belongs to, so use QueuedConnection.
     void progressReport(const QString& str, int val, int min, int max);
@@ -137,11 +141,19 @@ public slots:
     void setEnableTorchLight(const bool enableTorchLight);
     bool getEnableTorchLight() const;
 
+    //! Sets the strength of the additional ambient illumination that can be toggled when pressing a button.
+    void setTorchStrength(const float torchStrength);
+    float getTorchStrength() const;
+
     bool getIsGeometryShaderSupported() const;
 
     //! Gets the SceneInfo of the scene that is currently being displayed.
     //! Check SceneInfo::isValid to determine if a scene is displayed.
     SceneInfo getCurrentScene() const;
+
+    //! Gets the SceneInfo of the scene that is currently in the process of being loaded.
+    //! Check SceneInfo::isValid to determine if a scene is loaded.
+    SceneInfo getLoadingScene() const { return currentLoadScene; }
 
     //! This starts the scene loading process. This is asynchronous, this method returns after metadata loading.
     //! @param name a valid scene name
@@ -153,7 +165,7 @@ public slots:
     SceneInfo loadScenery3dByID(const QString& id);
 
     QString getDefaultScenery3dID() const { return defaultScenery3dID; }
-    bool setDefaultScenery3dID(const QString& id);
+    void setDefaultScenery3dID(const QString& id);
 
 private slots:
     void clearMessage();
@@ -181,7 +193,6 @@ private:
     bool flagEnabled;
     bool cleanedUp;
 
-    StelAction* enableAction;
     StelCore::ProjectionType oldProjectionType;
 
     QOpenGLShaderProgram* debugShader;
