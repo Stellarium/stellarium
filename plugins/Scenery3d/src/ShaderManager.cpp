@@ -234,7 +234,7 @@ QString ShaderMgr::getFShaderName(uint flags)
 	{
 		return "s3d_transform.frag";
 	}
-	else if (flags & MAT_DIFFUSETEX)
+    else if (flags == MAT_DIFFUSETEX)
 	{
 		return "s3d_texture.frag";
 	}
