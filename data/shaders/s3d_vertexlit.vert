@@ -23,7 +23,7 @@
 This is a shader for basic vertex lighting. This should be the minimum quality supported.
 */
  
-#version 120
+#version 110
 
 #define MAT_AMBIENT 1
 #define MAT_SPECULAR 1
