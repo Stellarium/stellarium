@@ -89,10 +89,8 @@ public:
     void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; }
     bool getTorchEnabled(void) const { return torchEnabled;}
     void setTorchEnabled(bool torchEnabled) { this->torchEnabled = torchEnabled; }
-    bool getShadowsFilterEnabled(void) const { return shaderParameters.shadowFilter; }
-    void setShadowsFilterEnabled(bool filterShadowsEnabled) { shaderParameters.shadowFilter = filterShadowsEnabled; }
-    bool getShadowsFilterHQEnabled(void) const { return shaderParameters.shadowFilterHQ; }
-    void setShadowsFilterHQEnabled(bool filterHQ) { shaderParameters.shadowFilterHQ = filterHQ; }
+    S3DEnum::ShadowFilterQuality getShadowFilterQuality() const { return shaderParameters.shadowFilterQuality; }
+    void setShadowFilterQuality(S3DEnum::ShadowFilterQuality quality) { shaderParameters.shadowFilterQuality = quality; }
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 

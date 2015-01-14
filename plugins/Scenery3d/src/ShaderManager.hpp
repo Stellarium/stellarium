@@ -22,6 +22,7 @@
 #define _SHADERMANAGER_HPP_
 #include "OBJ.hpp"
 #include "StelOpenGL.hpp"
+#include "S3DEnum.hpp"
 
 #include <QMap>
 
@@ -34,8 +35,7 @@ struct GlobalShaderParameters
 	bool pixelLighting;
 	bool bump;
 	bool shadows;
-	bool shadowFilter;
-	bool shadowFilterHQ;
+	S3DEnum::ShadowFilterQuality shadowFilterQuality;
 	bool geometryShader;
 };
 
@@ -212,8 +212,8 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 		flags = SHADING;
 		if(globals.pixelLighting)            flags|= PIXEL_LIGHTING;
 		if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
-		if(globals.pixelLighting && globals.shadows && globals.shadowFilter) flags|= SHADOW_FILTER;
-		if(globals.pixelLighting && globals.shadows && globals.shadowFilter && globals.shadowFilterHQ) flags|= SHADOW_FILTER_HQ;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::OFF) flags|= SHADOW_FILTER;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::LOW) flags|= SHADOW_FILTER_HQ;
 		if(globals.geometryShader) flags|= GEOMETRY_SHADER;
 	}
 	else
