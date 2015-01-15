@@ -435,8 +435,12 @@ void StelMainView::init(QSettings* conf)
 	glWidget->makeCurrent();
 #endif
 
-	// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
-	processOpenGLdiagnosticsAndWarnings(conf, glWidget);
+	// Should be check of requirements disabled?
+	if (!conf->value("main/check_requirements", false).toBool())
+	{
+		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
+		processOpenGLdiagnosticsAndWarnings(conf, glWidget);
+	}
 
 
 	stelApp= new StelApp();
