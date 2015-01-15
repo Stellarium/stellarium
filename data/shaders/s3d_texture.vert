@@ -23,15 +23,13 @@
 This is a shader that applies a texture to pre-transformed geometry
 */
  
-#version 110
-
 //matrices
 uniform mat4 u_mProjection;
 
 attribute vec3 a_vertex;
-attribute vec2 a_texcoord;
+attribute mediump vec2 a_texcoord;
 
-varying vec2 v_texcoord;
+varying mediump vec2 v_texcoord;
 
 void main(void)
 {
