@@ -147,7 +147,7 @@ int main(int argc, char **argv)
 	#if QT_VERSION>=QT_VERSION_CHECK(5, 3, 1)
 	QCoreApplication::addLibraryPath(".");
 	#endif
-	
+
 	QGuiApplication::setDesktopSettingsAware(false);
 
 #ifndef USE_QUICKVIEW
