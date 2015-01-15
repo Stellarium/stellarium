@@ -1,3 +1,5 @@
+#version 120
+
 /*
  * Stellarium Scenery3d Plug-in
  *
@@ -21,10 +23,9 @@
  
 /*
 This is a shader for phong/per-pixel lighting.
+Note: This shader currently requires some #version 120 features!
 */
  
-#version 120
-
 //macros that can be set by ShaderManager (simple true/false flags)
 #define SHADOWS 1
 #define BUMP 0

@@ -23,11 +23,9 @@
 This is a shader that applies a texture to pre-transformed geometry
 */
  
-#version 110
-
 uniform sampler2D u_texDiffuse;
 
-varying vec2 v_texcoord;
+varying mediump vec2 v_texcoord;
 
 void main(void)
 {

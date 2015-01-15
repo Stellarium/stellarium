@@ -23,8 +23,6 @@
 This is a shader that applies cubemapping to pre-transformed geometry
 */
  
-#version 110
-
 //matrices
 uniform mat4 u_mProjection;
 
@@ -32,7 +30,7 @@ uniform mat4 u_mProjection;
 attribute vec3 a_vertex;
 attribute vec3 a_texcoord;
 
-varying vec3 v_texcoord;
+varying highp vec3 v_texcoord;
 
 void main(void)
 {

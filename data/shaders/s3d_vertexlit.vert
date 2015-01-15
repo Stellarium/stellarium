@@ -22,8 +22,6 @@
 /*
 This is a shader for basic vertex lighting. This should be the minimum quality supported.
 */
- 
-#version 110
 
 #define MAT_AMBIENT 1
 #define MAT_SPECULAR 1
@@ -37,23 +35,23 @@ uniform mat4 u_mModelView;
 uniform mat3 u_mNormal;
 
 //light info
-uniform vec3 u_vLightDirectionView; //in view space
-uniform vec3 u_vLightAmbient;
-uniform vec3 u_vLightDiffuse;
+uniform mediump vec3 u_vLightDirectionView; //in view space
+uniform mediump vec3 u_vLightAmbient;
+uniform mediump vec3 u_vLightDiffuse;
 
 //material info
 #if MAT_AMBIENT
-uniform vec3 u_vMatAmbient;
+uniform mediump vec3 u_vMatAmbient;
 #endif
-uniform vec3 u_vMatDiffuse;
+uniform mediump vec3 u_vMatDiffuse;
 #if MAT_SPECULAR
-uniform vec3 u_vMatSpecular;
-uniform float u_vMatShininess;
+uniform mediump vec3 u_vMatSpecular;
+uniform mediump float u_vMatShininess;
 #endif
 
 attribute vec4 a_vertex;
 attribute vec3 a_normal;
-attribute vec2 a_texcoord;
+attribute mediump vec2 a_texcoord;
 
 #if GEOMETRY_SHADER
 #define VAR_TEXCOORD v_texcoordGS
@@ -65,10 +63,10 @@ attribute vec2 a_texcoord;
 #define VAR_SPECILLUMINATION v_specillumination
 #endif
 
-varying vec2 VAR_TEXCOORD;
-varying vec3 VAR_TEXILLUMINATION;
+varying mediump vec2 VAR_TEXCOORD;
+varying mediump vec3 VAR_TEXILLUMINATION;
 #if MAT_SPECULAR
-varying vec3 VAR_SPECILLUMINATION;
+varying mediump vec3 VAR_SPECILLUMINATION;
 #endif
 
 void calcLighting(vec3 normal, vec3 viewPos, out vec3 texIll, out vec3 specIll)
