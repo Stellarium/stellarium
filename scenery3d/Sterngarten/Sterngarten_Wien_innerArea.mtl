@@ -78,16 +78,35 @@ bBackface 1
 map_Kd Sterngarten_Wien_innerArea/Fencing_Mesh.png
 
 newmtl Tafel_Sterngarten
+# This material is special: Note Ke values. Those describe emissive surfaces. 
+# These don't illuminate their neighbourhood, but are visible also at night.
+# You can think of an illuminated showcase. 
+# Note that the real Sterngarten does not have light panels, this is just for demonstration.
+# The color is mostly red to avoid overly strong irritation of the eyes.
+# The brightness is modulated with solar altitude similar to the landscapes. 
+# Brightness should include Ke*map_Ke*solarAltitudeTerm.
+# If there is no map_Ke, of course only Ke*solarAltitudeTerm.
 Ka 0.000000 0.000000 0.000000
 Kd 0.909804 0.878431 0.823529
 Ks 0.330000 0.330000 0.330000
+Ke 0.5 0.2 0.1
 map_Kd Sterngarten_Wien_innerArea/Tafel_Sterngarten.jpg
+map_Ke Sterngarten_Wien_innerArea/Tafel_Sterngarten.jpg
 
 newmtl Tafel_Wienplan
+# This material is special: Note Ke values. Those describe emissive surfaces. 
+# These don't illuminate their neighbourhood, but are visible also at night.
+# You can think of an illuminated showcase. 
+# Note that the real Sterngarten does not have light panels, this is just for demonstration.
+# The brightness is modulated with solar altitude similar to the landscapes. 
+# Brightness should include Ke*map_Ke*solarAltitudeTerm.
+# If there is no map_Ke, of course only Ke*solarAltitudeTerm.
 Ka 0.000000 0.000000 0.000000
 Kd 0.858824 0.811765 0.721569
 Ks 0.330000 0.330000 0.330000
+Ke 0.3 0.3 0.2
 map_Kd Sterngarten_Wien_innerArea/Tafel_Wienplan.jpg
+map_Ke Sterngarten_Wien_innerArea/Tafel_Wienplan.jpg
 
 newmtl Google_Earth_Snapshot_1
 Ka 0.000000 0.000000 0.000000
