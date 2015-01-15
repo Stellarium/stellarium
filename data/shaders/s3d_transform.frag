@@ -23,12 +23,10 @@
 This fragment shader is only used if the material is alpha-tested to allow for better shadows.
 */
  
-#version 110
-
-uniform float u_fAlphaThresh;
+uniform lowp float u_fAlphaThresh;
 uniform sampler2D u_texDiffuse;
 
-varying vec2 v_texcoord;
+varying mediump vec2 v_texcoord;
 
 void main(void)
 {

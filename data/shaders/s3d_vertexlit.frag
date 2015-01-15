@@ -22,8 +22,6 @@
 /*
 This is the fragment shader for vertex lighting, which does not need to do many things
 */
- 
-#version 110
 
 #define BLENDING 1
 #define MAT_DIFFUSETEX 1
@@ -35,28 +33,28 @@ uniform sampler2D u_texDiffuse;
 #endif
 
 #if ALPHATEST
-uniform float u_fAlphaThresh;
+uniform lowp float u_fAlphaThresh;
 #endif
 
-uniform float u_vMatAlpha;
+uniform mediump float u_vMatAlpha;
 
-varying vec2 v_texcoord;
-varying vec3 v_texillumination;
+varying mediump vec2 v_texcoord;
+varying mediump vec3 v_texillumination;
 #if MAT_SPECULAR
-varying vec3 v_specillumination;
+varying mediump vec3 v_specillumination;
 #endif
 
 void main(void)
 {
 #if MAT_DIFFUSETEX
-	vec4 texVal = texture2D(u_texDiffuse,v_texcoord);
+	lowp vec4 texVal = texture2D(u_texDiffuse,v_texcoord);
 	
 	#if ALPHATEST
 	if(texVal.a < u_fAlphaThresh)
 		discard;
 	#endif
 	
-	vec3 color = v_texillumination * texVal.rgb;
+	lowp vec3 color = v_texillumination * texVal.rgb;
 	#if MAT_SPECULAR
 	color += v_specillumination;
 	#endif
@@ -67,7 +65,7 @@ void main(void)
 	gl_FragColor = vec4(color, 1.0);
 	#endif
 #else
-	vec3 color = v_texillumination;
+	lowp vec3 color = v_texillumination;
 	#if MAT_SPECULAR
 	color += v_specillumination;
 	#endif

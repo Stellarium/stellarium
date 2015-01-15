@@ -1,3 +1,5 @@
+#version 150
+
 /*
  * Stellarium Scenery3d Plug-in
  *
@@ -20,12 +22,11 @@
  
  
 /*
-This is a geometry-shader (using 3.2 core functionality) based acceleration of cubemap rendering.
+This is a geometry-shader (using 3.2 core functionality, #version 150) based acceleration of cubemap rendering.
 For vertex-based lighting, this is pretty simple: the lighting is performed in the
  Vertex shader in a common view space
 */
 
-#version 150
 #define MAT_SPECULAR 1
 
 layout(triangles) in;
