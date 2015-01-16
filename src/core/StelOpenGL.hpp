@@ -184,4 +184,15 @@
 const char* getGLErrorText(int code);
 int checkGLErrors(const char *file, int line);
 
+// To build on arm platforms we need to re-introduce the Qt 5.4 removed
+// typedefs and defines of GLdouble/GL_DOUBLE, which are not present in GLES
+#if defined(QT_OPENGL_ES_2)
+# ifndef GL_DOUBLE
+#  define GL_DOUBLE GL_FLOAT
+# endif
+# ifndef GLdouble
+typedef GLfloat GLdouble;
+# endif
+#endif
+
 #endif // _STELOPENGL_HPP_
