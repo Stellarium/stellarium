@@ -118,6 +118,11 @@ void registerPluginsDir(QDir& appDir)
 	QString platformsPath = appDir.absoluteFilePath(platformsRelPath);
 	pathes << appDir.absolutePath();
 	pathes << platformsPath;
+	// OS X
+	QString pluginsRelPath = "plugins";
+	appDir.cdUp();
+	QString pluginsPath = appDir.absoluteFilePath(pluginsRelPath);
+	pathes << pluginsPath;
 
 	pathes << QCoreApplication::libraryPaths();
 	QCoreApplication::setLibraryPaths(pathes);
