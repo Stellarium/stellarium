@@ -436,7 +436,7 @@ void StelMainView::init(QSettings* conf)
 #endif
 
 	// Should be check of requirements disabled?
-	if (!conf->value("main/check_requirements", false).toBool())
+	if (!conf->value("main/check_requirements", true).toBool())
 	{
 		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
 		processOpenGLdiagnosticsAndWarnings(conf, glWidget);
