@@ -10,21 +10,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-12 01:03+0600\n"
+"POT-Creation-Date: 2015-01-17 01:35+0600\n"
 "PO-Revision-Date: 2014-12-28 18:35+0000\n"
 "Last-Translator: Joan Salvat <jsalvat@hotmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-12 05:59+0000\n"
-"X-Generator: Launchpad (build 17298)\n"
+"X-Launchpad-Export-Date: 2015-01-17 05:43+0000\n"
+"X-Generator: Launchpad (build 17304)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:166
-#: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:447
+#: src/core/StelApp.cpp:487 src/core/StelCore.cpp:192
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:451
 msgid "Display Options"
 msgstr "Opcions de visualització"
 
@@ -170,7 +170,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:180
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Tipus <b>%1</b>"
@@ -179,7 +179,7 @@ msgstr "Tipus <b>%1</b>"
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:189
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (extincted to: <b>%2</b>)"
@@ -188,7 +188,7 @@ msgstr "Magnitud: <b>%1</b> (extincted to: <b>%2</b>)"
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
-#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
@@ -436,13 +436,13 @@ msgstr "Rang de magnitud: <b>%1</b>%2<b>%3/%4</b> (Sistema fotomètric: %5)"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:226
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr "Distància: %1 a.ll."
 
 #: src/core/modules/StarWrapper.cpp:232
-#: plugins/Exoplanets/src/Exoplanet.cpp:204
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Tipus espectral: %1"
@@ -491,186 +491,186 @@ msgstr "Hora de sortida: %1%"
 msgid "Night mode"
 msgstr "Mode nocturn"
 
-#: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
+#: src/core/StelCore.cpp:190 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:374 src/ui_dateTimeDialogGui.h:377
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr "Data i hora"
 
-#: src/core/StelCore.cpp:184 src/core/StelMovementMgr.cpp:129
+#: src/core/StelCore.cpp:191 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
 msgstr "Moviment i selecció"
 
-#: src/core/StelCore.cpp:187
+#: src/core/StelCore.cpp:194
 msgid "Increase time speed"
 msgstr "Incrementa la velocitat del temps"
 
-#: src/core/StelCore.cpp:188
+#: src/core/StelCore.cpp:195
 msgid "Decrease time speed"
 msgstr "Disminueix la velocitat del temps"
 
-#: src/core/StelCore.cpp:189
+#: src/core/StelCore.cpp:196
 msgid "Increase time speed (a little)"
 msgstr "Augmentar velocitat del temps (una mica)"
 
-#: src/core/StelCore.cpp:190
+#: src/core/StelCore.cpp:197
 msgid "Decrease time speed (a little)"
 msgstr "Reduir velocitat del temps (una mica)"
 
-#: src/core/StelCore.cpp:191
+#: src/core/StelCore.cpp:198
 msgid "Set normal time rate"
 msgstr "Estableix ràtio normal del temps"
 
-#: src/core/StelCore.cpp:192
+#: src/core/StelCore.cpp:199
 msgid "Set time rate to zero"
 msgstr "Estableix ràtio del temps a zero"
 
-#: src/core/StelCore.cpp:193
+#: src/core/StelCore.cpp:200
 msgid "Set time to now"
 msgstr "Estableix hora actual"
 
-#: src/core/StelCore.cpp:194
+#: src/core/StelCore.cpp:201
 msgid "Add 1 solar hour"
 msgstr "Afegeix 1 hora solar"
 
-#: src/core/StelCore.cpp:195
+#: src/core/StelCore.cpp:202
 msgid "Add 1 solar day"
 msgstr "Afegeix 1 dia solar"
 
-#: src/core/StelCore.cpp:196
+#: src/core/StelCore.cpp:203
 msgid "Add 1 solar week"
 msgstr "Agefeix 1 setmana solar"
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:204
 msgid "Subtract 1 solar hour"
 msgstr "Resta 1 hora solar"
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:205
 msgid "Subtract 1 solar day"
 msgstr "Resta 1 dia solar"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:206
 msgid "Subtract 1 solar week"
 msgstr "Resta 1 setmana solar"
 
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:207
 msgid "Add 1 sidereal day"
 msgstr "Afegeix 1 dia sideral"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:208
 msgid "Add 1 sidereal week"
 msgstr "Afegeix 1 setmana sideral"
 
-#: src/core/StelCore.cpp:202
+#: src/core/StelCore.cpp:209
 msgid "Add 1 sidereal month"
 msgstr "Afegeix 1 mes sideral"
 
-#: src/core/StelCore.cpp:203
+#: src/core/StelCore.cpp:210
 msgid "Add 1 sidereal year"
 msgstr "Afegeix 1 any sideral"
 
-#: src/core/StelCore.cpp:204
+#: src/core/StelCore.cpp:211
 msgid "Add 1 sidereal century"
 msgstr "Afegir un segle  sideral"
 
-#: src/core/StelCore.cpp:205
+#: src/core/StelCore.cpp:212
 msgid "Add 1 synodic month"
 msgstr "Afegir un mes sinòdic"
 
-#: src/core/StelCore.cpp:206
+#: src/core/StelCore.cpp:213
 msgid "Add 1 draconic month"
 msgstr "Afegir un mes draconic"
 
-#: src/core/StelCore.cpp:207
+#: src/core/StelCore.cpp:214
 msgid "Add 1 draconic year"
 msgstr "Afegir un any draconic"
 
-#: src/core/StelCore.cpp:208
+#: src/core/StelCore.cpp:215
 msgid "Add 1 anomalistic month"
 msgstr "Afegir un mes anomalísti"
 
-#: src/core/StelCore.cpp:209
+#: src/core/StelCore.cpp:216
 msgid "Add 1 mean tropical month"
 msgstr "Afegir un mes tropical mitjà"
 
-#: src/core/StelCore.cpp:210
+#: src/core/StelCore.cpp:217
 msgid "Add 1 mean tropical year"
 msgstr "Afegir un any tropical mitjà"
 
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:218
 msgid "Add 1 mean tropical century"
 msgstr "Afegir 1 segle tropicà mitjà"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 sidereal day"
 msgstr "Resta 1 dia sideral"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 sidereal week"
 msgstr "Resta 1 setmana sideral"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 sidereal month"
 msgstr "Resta 1 mes sideral"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:222
 msgid "Subtract 1 sidereal year"
 msgstr "Resta 1 any sideral"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:223
 msgid "Subtract 1 sidereal century"
 msgstr "Restar 1 segle  sideral"
 
-#: src/core/StelCore.cpp:217
+#: src/core/StelCore.cpp:224
 msgid "Subtract 1 synodic month"
 msgstr "Resta un mes sinòdic"
 
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:225
 msgid "Subtract 1 draconic month"
 msgstr "Resta un mes draconic"
 
-#: src/core/StelCore.cpp:219
+#: src/core/StelCore.cpp:226
 msgid "Subtract 1 draconic year"
 msgstr "Resta un any draconic"
 
-#: src/core/StelCore.cpp:220
+#: src/core/StelCore.cpp:227
 msgid "Subtract 1 anomalistic month"
 msgstr "Resta un mes anomalístic"
 
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:228
 msgid "Subtract 1 mean tropical month"
 msgstr "Resta un mes tropical mitjà"
 
-#: src/core/StelCore.cpp:222
+#: src/core/StelCore.cpp:229
 msgid "Subtract 1 mean tropical year"
 msgstr "Resta una any tropical mitjà"
 
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:230
 msgid "Subtract 1 mean tropical century"
 msgstr "Restar 1 segle tropicà mitjà"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:232
 msgid "Set home planet to selected planet"
 msgstr "Estableix planeta seleccionat com a planeta casa"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:233
 msgid "Go to home"
 msgstr "Ves a casa"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:234
 msgid "Flip scene horizontally"
 msgstr "Volteja escena horitzontalment"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:235
 msgid "Flip scene vertically"
 msgstr "Volteja escena verticalment"
 
-#: src/core/StelCore.cpp:1508
+#: src/core/StelCore.cpp:1515
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "La correcció està desactivada. Fer servir només si saps que estas fent!"
 
-#: src/core/StelCore.cpp:1511
+#: src/core/StelCore.cpp:1518
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -682,7 +682,7 @@ msgstr ""
 "Relativity Confirmed by Ancient Solar Eclipses</em> (%1). Veure més "
 "informació %2aquí%3"
 
-#: src/core/StelCore.cpp:1514
+#: src/core/StelCore.cpp:1521
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -691,7 +691,7 @@ msgstr ""
 "Aquesta equació empírica va ser publicada per G. M . Clemente a l'article "
 "<em>On the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:1517
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -704,7 +704,7 @@ msgstr ""
 "Jean Meeus al seu <em>Astronomical Formulae for Calculators</em>. També va "
 "ser adoptada per el programari de PC SunTracker Pro."
 
-#: src/core/StelCore.cpp:1521
+#: src/core/StelCore.cpp:1528
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -714,7 +714,7 @@ msgstr ""
 "(1952) que va ser adoptada a <em>Astronomical Ephemeris</em> i a <em>Canon "
 "of Solar Eclipses</em> per Mucke i Meeus (1983)."
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1532
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -726,7 +726,7 @@ msgstr ""
 "mateixa relació va ser adoptada de manera implícita a les taules syzygy de "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1529
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -737,7 +737,7 @@ msgstr ""
 "l'article <em>The accelerations of the earth and moon from early "
 "astronomical observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1532
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -746,7 +746,7 @@ msgstr ""
 "Aquesta equació va ser publicada per F. R. Stephenson a l'article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:1535
+#: src/core/StelCore.cpp:1542
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -760,7 +760,7 @@ msgstr ""
 "period 1800-1975</em> (%1) tal com es pot comprovar a les dades publicades "
 "per Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1545
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -770,7 +770,7 @@ msgstr ""
 "4000 to +2800</em>  de P. Breetagnon i L. Simon (1986) i per el programari "
 "de PC RedShift."
 
-#: src/core/StelCore.cpp:1541
+#: src/core/StelCore.cpp:1548
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -781,12 +781,12 @@ msgstr ""
 "ser article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1544
+#: src/core/StelCore.cpp:1551
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Aquest aalgoritme es fa servir al programari de planetari de PC Guide 7."
 
-#: src/core/StelCore.cpp:1547
+#: src/core/StelCore.cpp:1554
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -796,7 +796,7 @@ msgstr ""
 "Canon of Solar Eclipses: 1986-2035</em> (1987) i en el seu <em>Fifty Year "
 "Canon of Lunar Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1550
+#: src/core/StelCore.cpp:1557
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -805,7 +805,7 @@ msgstr ""
 "Aquesta fórmula va ser obtinguda per K.M. Borkowski (%1) del anàlisi de les "
 "dades recavades de 31 eclipsis solars datats entre el 2137 aC i el 1751 dC."
 
-#: src/core/StelCore.cpp:1553
+#: src/core/StelCore.cpp:1560
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -818,7 +818,7 @@ msgstr ""
 "the Period 1800-1988</em> (%1) i les dades s'ajusten als valors "
 "proporcionats per Stephenson i Morrison (1984)."
 
-#: src/core/StelCore.cpp:1556
+#: src/core/StelCore.cpp:1563
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -828,7 +828,7 @@ msgstr ""
 "versió curta del la teoria lunar ELP 2000-85 al seu <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1559
+#: src/core/StelCore.cpp:1566
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -839,7 +839,7 @@ msgstr ""
 "l'article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 
-#: src/core/StelCore.cpp:1562
+#: src/core/StelCore.cpp:1569
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -848,7 +848,7 @@ msgstr ""
 "F. R. Stepenson va publicar aquesta fórmula al seu llibre <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1565
+#: src/core/StelCore.cpp:1572
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -858,7 +858,7 @@ msgstr ""
 "utilitzat. Taula per 1620..2000, i inclou una variant de Chapront, Chapront-"
 "Touze i Francou (1997) per dades fora de 1620..2000."
 
-#: src/core/StelCore.cpp:1568
+#: src/core/StelCore.cpp:1575
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -868,7 +868,7 @@ msgstr ""
 "Laboratory) de la NASA fa servir aquesta fórmula al seu web interactiu %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:1571
+#: src/core/StelCore.cpp:1578
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -877,7 +877,7 @@ msgstr ""
 "Aquest polinomi va ser publicat per J. Meeus i L. Simon al seu article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1574
+#: src/core/StelCore.cpp:1581
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -887,7 +887,7 @@ msgstr ""
 "Personal Computer</em> (2000) proporciona polinòmics simples de 3è ordre "
 "quadrant les dades del passat recent."
 
-#: src/core/StelCore.cpp:1577
+#: src/core/StelCore.cpp:1584
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -899,7 +899,7 @@ msgstr ""
 "Tabulations</em> (2002). Es basat en <em>Astronomical Algorithms</em> (1991) "
 "de Jean Meeus."
 
-#: src/core/StelCore.cpp:1580
+#: src/core/StelCore.cpp:1587
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -910,7 +910,7 @@ msgstr ""
 "Stephenson al seu article <em>Historical values of the Earth's clock error "
 "%1T and the calculation of eclipses</em> (%2) amb apèndix a (%3)."
 
-#: src/core/StelCore.cpp:1583
+#: src/core/StelCore.cpp:1590
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -923,7 +923,7 @@ msgstr ""
 "amb un cosinus i la funció quadrada. Això es basa en una periodicitat "
 "possible descrit per Stephenson (%2). Veure més informació %3aquí%4."
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1593
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -939,11 +939,11 @@ msgstr ""
 "fórmula s'utilitza també a les efemèrides solar, lunar i planetària del "
 "programari SOLEX."
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1593
 msgid "Used by default."
 msgstr "Fet servir per omissió."
 
-#: src/core/StelCore.cpp:1589
+#: src/core/StelCore.cpp:1596
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -954,7 +954,7 @@ msgstr ""
 "va ser publicada a l'article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:1592
+#: src/core/StelCore.cpp:1599
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -966,7 +966,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1) i revisada per Sana Islam al "
 "2013."
 
-#: src/core/StelCore.cpp:1595
+#: src/core/StelCore.cpp:1602
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -975,15 +975,15 @@ msgstr ""
 "Aquesta es una fórmula quadràtica per el càlcul de %1T amb coeficients "
 "definits per l'usuari."
 
-#: src/core/StelCore.cpp:1598 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1605 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Error"
 
-#: src/core/StelCore.cpp:1648
+#: src/core/StelCore.cpp:1655
 msgid "with meaningless values outside this range"
 msgstr "amb valors sense sentit fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1674
+#: src/core/StelCore.cpp:1681
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -991,22 +991,22 @@ msgstr ""
 "amb una mitjana d'error de menys d'un segon, màx. 1.9s d'error, i els valors "
 "sense sentit fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1696 src/core/StelCore.cpp:1701
-#: src/core/StelCore.cpp:1728 src/core/StelCore.cpp:1733
+#: src/core/StelCore.cpp:1703 src/core/StelCore.cpp:1708
+#: src/core/StelCore.cpp:1735 src/core/StelCore.cpp:1740
 msgid "with zero values outside this range"
 msgstr "amb valors zero fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1706
+#: src/core/StelCore.cpp:1713
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "amb un típic 1-segon de precisió i els valors zero fora d'aquest rang"
 
-#: src/core/StelCore.cpp:1743
+#: src/core/StelCore.cpp:1750
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "El rang vàlid d'ús: entre anys %1 i %2, %3."
 
-#: src/core/StelCore.cpp:1745
+#: src/core/StelCore.cpp:1752
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "El rang vàlid d'ús: entre els anys %1 i %2."
@@ -1163,7 +1163,7 @@ msgid "Deep-sky objects background images"
 msgstr "Imatges de fons d'objectes de l'espai profund"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:446
+#: src/StelMainView.cpp:450
 msgid "Miscellaneous"
 msgstr "Miscel·lània"
 
@@ -1731,20 +1731,20 @@ msgstr "Ocultar automàticament la barra de botons horitzontal"
 msgid "Auto hide vertical button bar"
 msgstr "Ocultar automàticament la barra de botons vertical"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:735
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:743
 msgid "Space"
 msgstr "Espai"
 
-#: src/gui/StelGuiItems.cpp:593
+#: src/gui/StelGuiItems.cpp:601
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:642
+#: src/gui/StelGuiItems.cpp:650
 msgid "Field of view"
 msgstr "Camp de visió"
 
-#: src/gui/StelGuiItems.cpp:660
+#: src/gui/StelGuiItems.cpp:668
 msgid "Frames per second"
 msgstr "Fotogrames per segon"
 
@@ -2063,15 +2063,15 @@ msgstr ""
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "No es poden obtenir els recursos OpenGL necessaris"
 
-#: src/StelMainView.cpp:446
+#: src/StelMainView.cpp:450
 msgid "Save screenshot"
 msgstr "Desa la captura de pantalla"
 
-#: src/StelMainView.cpp:447
+#: src/StelMainView.cpp:451
 msgid "Full-screen mode"
 msgstr "Mode pantalla completa"
 
-#: src/StelMainView.cpp:544
+#: src/StelMainView.cpp:548
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2079,14 +2079,14 @@ msgstr ""
 "Versió OpenGL insuficient. Si us plau, actualitzi els controladors de "
 "maquinari de gràfics, o utilitzi una versió MESA (o ANGLE)."
 
-#: src/StelMainView.cpp:547
+#: src/StelMainView.cpp:551
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Versió OpenGL insuficient. Si us plau, actualitzi els controladors o "
 "maquinari de gràfics."
 
-#: src/StelMainView.cpp:589
+#: src/StelMainView.cpp:593
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2097,7 +2097,7 @@ msgstr ""
 "Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
 "degradat igualment?"
 
-#: src/StelMainView.cpp:640
+#: src/StelMainView.cpp:644
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2108,7 +2108,7 @@ msgstr ""
 "Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
 "degradat igualment?"
 
-#: src/StelMainView.cpp:695
+#: src/StelMainView.cpp:699
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2119,7 +2119,7 @@ msgstr ""
 "Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
 "degradat igualment?"
 
-#: src/StelMainView.cpp:732
+#: src/StelMainView.cpp:736
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2130,7 +2130,7 @@ msgstr ""
 "Ignorar i suprimir el present avís en el futur i provar de continuar en mode "
 "degradat igualment?"
 
-#: src/StelMainView.cpp:841
+#: src/StelMainView.cpp:845
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5891,62 +5891,62 @@ msgstr ""
 "L'arxiu satellites.json ja no és compatible - fent servir l'arxiu per defecte"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1678
+#: plugins/Satellites/src/Satellites.cpp:1686
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1680
+#: plugins/Satellites/src/Satellites.cpp:1688
 msgid "scientific"
 msgstr "científic"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1682
+#: plugins/Satellites/src/Satellites.cpp:1690
 msgid "communications"
 msgstr "comunicacions"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1684
+#: plugins/Satellites/src/Satellites.cpp:1692
 msgid "navigation"
 msgstr "navegació"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1686
+#: plugins/Satellites/src/Satellites.cpp:1694
 msgid "amateur"
 msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1688
+#: plugins/Satellites/src/Satellites.cpp:1696
 msgid "weather"
 msgstr "meteo"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1690
+#: plugins/Satellites/src/Satellites.cpp:1698
 msgid "geostationary"
 msgstr "geostacionaris"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1692
+#: plugins/Satellites/src/Satellites.cpp:1700
 msgid "non-operational"
 msgstr "no operatius"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1694
+#: plugins/Satellites/src/Satellites.cpp:1702
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1696
+#: plugins/Satellites/src/Satellites.cpp:1704
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1707
+#: plugins/Satellites/src/Satellites.cpp:1715
 msgid "The Hubble Space Telescope"
 msgstr "Telescopi Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1709
+#: plugins/Satellites/src/Satellites.cpp:1717
 msgid "The International Space Station"
 msgstr "La Estació Espacial Internacional"
 
@@ -6171,7 +6171,7 @@ msgstr "Veieu %1aquest document%2 per obtenir més detalls."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:317
 msgid "Internet updates disabled"
 msgstr "Actualitzacions per Internet deshabilitades"
@@ -6186,8 +6186,8 @@ msgstr "Actualitzacions per Internet deshabilitades"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:210
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:319
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:347
 msgid "Updating now..."
@@ -6198,7 +6198,7 @@ msgstr "Actualitzant ara..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:321
 msgid "Next update: < 1 minute"
 msgstr "Propera actualització: < 1 minut"
@@ -6208,7 +6208,7 @@ msgstr "Propera actualització: < 1 minut"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
 #, qt-format
 msgid "Next update: %1 minutes"
@@ -6219,7 +6219,7 @@ msgstr "Propera actualització: %1 minuts"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:325
 #, qt-format
 msgid "Next update: %1 hours"
@@ -6230,7 +6230,7 @@ msgstr "Propera actualització: %1 hores"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:202
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:350
 msgid "Update error"
 msgstr "Error en l'actualització"
@@ -6259,7 +6259,7 @@ msgstr "[nova font]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:204
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:338
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
@@ -6271,7 +6271,7 @@ msgstr "Actualitza ara"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid "Update from files"
 msgstr "Actualitza a partir de fitxers"
 
@@ -8284,95 +8284,86 @@ msgstr "Jovià"
 msgid "Neptunian"
 msgstr "Neptunià"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:180
+#: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "planetary system"
 msgstr "Sistema planetari"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Metallicity"
 msgstr "Metal·licitat"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Mass"
 msgstr "Massa"
 
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Sun"
 msgstr "Sol"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Radius"
 msgstr "Radi"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Temperatura efectiva: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
 msgstr "Exoplaneta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
 msgstr "Període"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "days"
 msgstr "dies"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Jup"
 msgstr "Júp"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Semi-Major Axis"
 msgstr "Eix semimajor"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "AU"
 msgstr "UA"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:238
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Eccentricity"
 msgstr "Excentricitat"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:239
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Inclination"
 msgstr "Inclinació"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Angle Distance"
 msgstr "Distància Angular"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Discovered year"
 msgstr "Any del descobriment"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Planetary class"
 msgstr "Classe planetària"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:243
-msgid "Habitable class"
-msgstr "Classe habitable"
-
-#. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:245
-msgid "Mean surface temp."
-msgstr "Temp. mitjana de la superfície"
-
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:247
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Equilibrium temp."
 msgstr "Temp. d'equilibri"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:249
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "ESI"
 msgstr "IST"
 
@@ -8450,45 +8441,10 @@ msgstr ""
 "terran, superterran, jovià, neptuniá) (Terra = Terran G-calenta )."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
-msgid "Habitable Class"
-msgstr "Classe habitable"
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
-msgid ""
-"Classifies habitable planets based on temperature: hypopsychroplanets (O or "
-"hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
-"medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
-"or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
-"life, whereas class O or E would only support extremophilic life. Non-"
-"habitable planets are simply given the class X (or NH)."
-msgstr ""
-"Classifica planetes habitables basats en la temperatura: hypopsychroplanetes "
-"(O o hP) = molt fred (menys de -50 ° C); psychroplanetes (P) = fred; "
-"mesoplanetes (M) = temperatura mitja (0-50 º C); termoplanetes (T) = "
-"calenta; hipertermoplanetes (E o hT) = molt calent (per sobre de 100 ° C). "
-"Els mesoplanetes serien ideals per a la vida complexa, mentre que la classe "
-"S o E només donarien suport a la vida extremòfila. Els planetes no "
-"habitables se'ls hi dona la classe X (o NH)."
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
-msgid "Mean Surface Temperature"
-msgstr "Temperatura Mitjana de la Superfície"
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
-msgid ""
-"Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
-"ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
-"0.3 in all cases)."
-msgstr ""
-"Temperatura en (° C) sobre la base d'una atmosfera terrestre similar a la "
-"relació de massa del planeta i un efecte hivernacle a causa de l'1 per cent "
-"de CO2 (suposant un albedo de 0,3 en tots els casos)."
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
 msgstr "Temperatura d'equilibri"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -8501,11 +8457,11 @@ msgstr ""
 "albedo 0.3 de bons). Com a exemple, la temperatura d'equilibri planetari de "
 "la Terra és -18.15 ° C (255 K)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Earth Similarity Index (ESI)"
 msgstr "Índex de Similitud amb la Terra (IST)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -8515,110 +8471,110 @@ msgstr ""
 "la Terra. IST depèn de radi del planeta, la densitat, la velocitat "
 "d'escapament, i la temperatura de la superfície."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Additional info"
 msgstr "Informació addicional"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Circumstellar habitable zone"
 msgstr "Zona habitable circumestelar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
 msgstr "Temperatura d'equilibri planetari"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Planetary habitability"
 msgstr "Habitabilitat planetària"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Earth Similarity Index"
 msgstr "Índex de Similitud amb la Terra"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Llocs web professionals generals corresponents a planetes extrasolars"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanetes: una versió interactiva de XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
 "HEK (The Hunt for Exomoons with Kepler - La Caça de Exollunes amb Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exoplanetes en sistemes binaris i múltiples (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "Naming exoplanets (IAU)"
 msgstr "Noms d'exoplanetes (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Alguns astrònoms i grups actius en els estudis de planetes extrasolars"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "update: 16 April 2012"
 msgstr "actualitzat: 16 abril 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "The Exoplanet Data Explorer"
 msgstr "L'Explorador de Dades d'Exoplanetes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Anglo-Australian Planet Search"
 msgstr "El Cercador de Planetes Anglo-Australià"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Programa de Recerca de planetes extrasolar de Ginebra"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA's Progrma d'Exploració d'Exoplanetes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
 msgstr "Planetes Pulsar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
 msgstr "L'Arxiu d'Exoplanetes de la NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Comissió UAI 53: Els planetes extrasolars"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "The Habitable Zone Gallery"
 msgstr "La Galeria de la Zona Habitable"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - La Recerca per a una Altra Terra"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Open Exoplanet Catalogue"
 msgstr "Obrir el Catàleg d'Exoplanetes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Catàleg de d'Exoplanetes Habitables"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Exoplanets is updated"
 msgstr "Exoplanetes està actualitzat"
 
@@ -11233,11 +11189,23 @@ msgstr "Coordenada Y"
 #~ msgid "Use brightness settings for landscapes"
 #~ msgstr "Utilitzeu els ajustos de brillantor de paisatges"
 
+#~ msgid "Mean surface temp."
+#~ msgstr "Temp. mitjana de la superfície"
+
 #~ msgid "Daphne"
 #~ msgstr "Daphne"
 
 #~ msgid "Great Comet of 1680 (C/1680 V1)"
 #~ msgstr "Gran Cometa de 1680 (C/1680 V1)"
+
+#~ msgid "Habitable class"
+#~ msgstr "Classe habitable"
+
+#~ msgid "Habitable Class"
+#~ msgstr "Classe habitable"
+
+#~ msgid "Mean Surface Temperature"
+#~ msgstr "Temperatura Mitjana de la Superfície"
 
 #~ msgid ""
 #~ "This plugin can display potential habitable exoplanets (orange marker) and "
@@ -11247,6 +11215,31 @@ msgstr "Coordenada Y"
 #~ "Aquest plugin pot mostrar possibles exoplanetes habitables (marcador "
 #~ "taronja) i una alguna informació sobre aquests planetes de classe habitable, "
 #~ "temperatura mitjana de superfície i l'Índex de Similitud amb la Terra."
+
+#~ msgid ""
+#~ "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
+#~ "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
+#~ "medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
+#~ "or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
+#~ "life, whereas class O or E would only support extremophilic life. Non-"
+#~ "habitable planets are simply given the class X (or NH)."
+#~ msgstr ""
+#~ "Classifica planetes habitables basats en la temperatura: hypopsychroplanetes "
+#~ "(O o hP) = molt fred (menys de -50 ° C); psychroplanetes (P) = fred; "
+#~ "mesoplanetes (M) = temperatura mitja (0-50 º C); termoplanetes (T) = "
+#~ "calenta; hipertermoplanetes (E o hT) = molt calent (per sobre de 100 ° C). "
+#~ "Els mesoplanetes serien ideals per a la vida complexa, mentre que la classe "
+#~ "S o E només donarien suport a la vida extremòfila. Els planetes no "
+#~ "habitables se'ls hi dona la classe X (o NH)."
+
+#~ msgid ""
+#~ "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
+#~ "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
+#~ "0.3 in all cases)."
+#~ msgstr ""
+#~ "Temperatura en (° C) sobre la base d'una atmosfera terrestre similar a la "
+#~ "relació de massa del planeta i un efecte hivernacle a causa de l'1 per cent "
+#~ "de CO2 (suposant un albedo de 0,3 en tots els casos)."
 
 #, qt-format
 #~ msgid "Ecliptic Topocentric (of J2000): %1/%2"

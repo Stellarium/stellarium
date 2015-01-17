@@ -7,22 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-12 01:03+0600\n"
+"POT-Creation-Date: 2015-01-17 01:35+0600\n"
 "PO-Revision-Date: 2014-11-30 13:42+0000\n"
 "Last-Translator: Nadanomics <hb7701@naver.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-12 06:10+0000\n"
-"X-Generator: Launchpad (build 17298)\n"
+"X-Launchpad-Export-Date: 2015-01-17 05:50+0000\n"
+"X-Generator: Launchpad (build 17304)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:166
-#: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:447
+#: src/core/StelApp.cpp:487 src/core/StelCore.cpp:192
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:451
 msgid "Display Options"
 msgstr "화면 설정"
 
@@ -168,7 +168,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:180
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "분류: <b>%1</b>"
@@ -177,7 +177,7 @@ msgstr "분류: <b>%1</b>"
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:189
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "등급: <b>%1</b> (소광 후:  <b>%2</b>)"
@@ -186,7 +186,7 @@ msgstr "등급: <b>%1</b> (소광 후:  <b>%2</b>)"
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
-#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "등급: <b>%1</b>"
@@ -434,13 +434,13 @@ msgstr "등급 범위: <b>%1</b>%2<b>%3/%4</b> (측광계: %5)"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:226
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr "거리: %1 광년"
 
 #: src/core/modules/StarWrapper.cpp:232
-#: plugins/Exoplanets/src/Exoplanet.cpp:204
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "스펙트럼형: %1"
@@ -489,185 +489,185 @@ msgstr "광도 증가기간: %1%"
 msgid "Night mode"
 msgstr "야간 모드"
 
-#: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
+#: src/core/StelCore.cpp:190 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:374 src/ui_dateTimeDialogGui.h:377
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr "날짜 및 시간"
 
-#: src/core/StelCore.cpp:184 src/core/StelMovementMgr.cpp:129
+#: src/core/StelCore.cpp:191 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
 msgstr "이동 및 선택"
 
-#: src/core/StelCore.cpp:187
+#: src/core/StelCore.cpp:194
 msgid "Increase time speed"
 msgstr "시간 빠르기 증가"
 
-#: src/core/StelCore.cpp:188
+#: src/core/StelCore.cpp:195
 msgid "Decrease time speed"
 msgstr "시간 빠르기 감소"
 
-#: src/core/StelCore.cpp:189
+#: src/core/StelCore.cpp:196
 msgid "Increase time speed (a little)"
 msgstr "시간 빠르기 증가 (약간)"
 
-#: src/core/StelCore.cpp:190
+#: src/core/StelCore.cpp:197
 msgid "Decrease time speed (a little)"
 msgstr "시간 빠르기 감소 (약간)"
 
-#: src/core/StelCore.cpp:191
+#: src/core/StelCore.cpp:198
 msgid "Set normal time rate"
 msgstr "정상 속도로"
 
-#: src/core/StelCore.cpp:192
+#: src/core/StelCore.cpp:199
 msgid "Set time rate to zero"
 msgstr "시간 멈춤"
 
-#: src/core/StelCore.cpp:193
+#: src/core/StelCore.cpp:200
 msgid "Set time to now"
 msgstr "현재 시각으로 설정"
 
-#: src/core/StelCore.cpp:194
+#: src/core/StelCore.cpp:201
 msgid "Add 1 solar hour"
 msgstr "1 태양시 더하기"
 
-#: src/core/StelCore.cpp:195
+#: src/core/StelCore.cpp:202
 msgid "Add 1 solar day"
 msgstr "1 태양일 더하기"
 
-#: src/core/StelCore.cpp:196
+#: src/core/StelCore.cpp:203
 msgid "Add 1 solar week"
 msgstr "1 태양주 더하기"
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:204
 msgid "Subtract 1 solar hour"
 msgstr "1 태양시 빼기"
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:205
 msgid "Subtract 1 solar day"
 msgstr "1 태양일 빼기"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:206
 msgid "Subtract 1 solar week"
 msgstr "1 태양주 빼기"
 
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:207
 msgid "Add 1 sidereal day"
 msgstr "1 항성일 더하기"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:208
 msgid "Add 1 sidereal week"
 msgstr "1 항성주 더하기"
 
-#: src/core/StelCore.cpp:202
+#: src/core/StelCore.cpp:209
 msgid "Add 1 sidereal month"
 msgstr "1 항성월 더하기"
 
-#: src/core/StelCore.cpp:203
+#: src/core/StelCore.cpp:210
 msgid "Add 1 sidereal year"
 msgstr "1 항성년 더하기"
 
-#: src/core/StelCore.cpp:204
+#: src/core/StelCore.cpp:211
 msgid "Add 1 sidereal century"
 msgstr "1 항성세기 더하기"
 
-#: src/core/StelCore.cpp:205
+#: src/core/StelCore.cpp:212
 msgid "Add 1 synodic month"
 msgstr "1 삭망월 더하기"
 
-#: src/core/StelCore.cpp:206
+#: src/core/StelCore.cpp:213
 msgid "Add 1 draconic month"
 msgstr "1 교점월 더하기"
 
-#: src/core/StelCore.cpp:207
+#: src/core/StelCore.cpp:214
 msgid "Add 1 draconic year"
 msgstr "1 교점년 더하기"
 
-#: src/core/StelCore.cpp:208
+#: src/core/StelCore.cpp:215
 msgid "Add 1 anomalistic month"
 msgstr "1 근점월 더하기"
 
-#: src/core/StelCore.cpp:209
+#: src/core/StelCore.cpp:216
 msgid "Add 1 mean tropical month"
 msgstr "1 평균회귀월 더하기"
 
-#: src/core/StelCore.cpp:210
+#: src/core/StelCore.cpp:217
 msgid "Add 1 mean tropical year"
 msgstr "1 평균회귀년 더하기"
 
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:218
 msgid "Add 1 mean tropical century"
 msgstr "1 평균회귀세기 더하기"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 sidereal day"
 msgstr "1 항성일 빼기"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 sidereal week"
 msgstr "1 항성주 빼기"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 sidereal month"
 msgstr "1 항성월 빼기"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:222
 msgid "Subtract 1 sidereal year"
 msgstr "1 항성년 빼기"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:223
 msgid "Subtract 1 sidereal century"
 msgstr "1 항성세기 빼기"
 
-#: src/core/StelCore.cpp:217
+#: src/core/StelCore.cpp:224
 msgid "Subtract 1 synodic month"
 msgstr "1 삭망월 빼기"
 
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:225
 msgid "Subtract 1 draconic month"
 msgstr "1 교점월 빼기"
 
-#: src/core/StelCore.cpp:219
+#: src/core/StelCore.cpp:226
 msgid "Subtract 1 draconic year"
 msgstr "1 교점년 빼기"
 
-#: src/core/StelCore.cpp:220
+#: src/core/StelCore.cpp:227
 msgid "Subtract 1 anomalistic month"
 msgstr "1 근점월 빼기"
 
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:228
 msgid "Subtract 1 mean tropical month"
 msgstr "1 평균회귀월 빼기"
 
-#: src/core/StelCore.cpp:222
+#: src/core/StelCore.cpp:229
 msgid "Subtract 1 mean tropical year"
 msgstr "1 평균회귀년 빼기"
 
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:230
 msgid "Subtract 1 mean tropical century"
 msgstr "1 평균회귀세기 빼기"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:232
 msgid "Set home planet to selected planet"
 msgstr "선택된 행성을 모행성으로 설정"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:233
 msgid "Go to home"
 msgstr "집으로 이동"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:234
 msgid "Flip scene horizontally"
 msgstr "좌우 반전"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:235
 msgid "Flip scene vertically"
 msgstr "상하 반전"
 
-#: src/core/StelCore.cpp:1508
+#: src/core/StelCore.cpp:1515
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "보정이 비활성화됩니다. 당신이 무엇을 하는지 알고 있는 경우에만 사용하십시오!"
 
-#: src/core/StelCore.cpp:1511
+#: src/core/StelCore.cpp:1518
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -678,7 +678,7 @@ msgstr ""
 "of Relativity Confirmed by Ancient Solar Eclipses</em> (%1)에 사용되었습니다. 더 많은 "
 "정보는 %2여기%3를 참고하십시오."
 
-#: src/core/StelCore.cpp:1514
+#: src/core/StelCore.cpp:1521
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -687,7 +687,7 @@ msgstr ""
 "이 실험식은 G. M. Clemence의 논문 <em>On the system of astronomical constants</em> "
 "(%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1517
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -699,7 +699,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em>에 사용되었습니다. 또한 이 공식은 컴퓨터 프로그램 "
 "SunTracker Pro에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1521
+#: src/core/StelCore.cpp:1528
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -708,7 +708,7 @@ msgstr ""
 "이 공식은 IAU (1952)를 약간 보정한 버전으로 Mucke & Meeus (1983)의 <em>Astronomical "
 "Ephemeris</em> 와 <em>Canon of Solar Eclipses</em> 에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1532
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -718,7 +718,7 @@ msgstr ""
 "Tuckerman 표 (1962, 1964)는 기원전 601년부터 서기 1649년까지 5일 간격과 10일 간격으로 태양, 달, 행성의 "
 "위치를 담고 있습니다. 이 관계는 Goldstine (1973)의 삭망 표에도 내재되었습니다."
 
-#: src/core/StelCore.cpp:1529
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -728,7 +728,7 @@ msgstr ""
 "이 공식은 P. M. Muller와 F. R. Stephenson의 논문 <em>The accelerations of the earth "
 "and moon from early astronomical observations</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1532
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -737,7 +737,7 @@ msgstr ""
 "이 공식은  F. R. Stephenson의 논문 <em>Pre-Telescopic Astronomical "
 "Observations</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1535
+#: src/core/StelCore.cpp:1542
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -749,7 +749,7 @@ msgstr ""
 "L. D. Schmadel와 G. Zech의 논문 <em>Polynomial approximations for the correction "
 "delta T E.T.-U.T. in the period 1800-1975</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1545
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -758,7 +758,7 @@ msgstr ""
 "이 알고리즘은 P. Bretagnon와 L. Simon's의 <em>Planetary Programs and Tables from -"
 "4000 to +2800</em> (1986)와 컴퓨터 플라네타리움 프로그램 ResShift에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1541
+#: src/core/StelCore.cpp:1548
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -768,11 +768,11 @@ msgstr ""
 "이 공식은 F. R. Stephenson와 L. V. Morrison의 논문 <em>Long-term changes in the "
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1544
+#: src/core/StelCore.cpp:1551
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "이 알고리즘은 컴퓨터 플라네타리움 프로그램 Guide 7에 사용되었습니다."
 
-#: src/core/StelCore.cpp:1547
+#: src/core/StelCore.cpp:1554
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -781,7 +781,7 @@ msgstr ""
 "이 알고리즘은 F. Espenak의 <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> "
 "(1987)와 <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em>(1989)에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1550
+#: src/core/StelCore.cpp:1557
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -789,7 +789,7 @@ msgid ""
 msgstr ""
 "이 공식은 K.M. Borkowski (%1)의 기원전 2137년부터 서기 1713년 사이의 31개 일식기록 데이터 분석에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1553
+#: src/core/StelCore.cpp:1560
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -801,7 +801,7 @@ msgstr ""
 "Zech의 논문 <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1556
+#: src/core/StelCore.cpp:1563
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -810,7 +810,7 @@ msgstr ""
 "이 공식은 M. Chapront-Touze와 J. Chapront의 <em>Lunar Tables and Programs from "
 "4000 B.C. to A.D. 8000</em> (1991)의 ELP 2000-85 lunar theory의 요약버젼에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1559
+#: src/core/StelCore.cpp:1566
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -820,7 +820,7 @@ msgstr ""
 "이 방정식은 F. R. Stephenson와 L. V. Morrison의 논문 <em>Long-Term Fluctuations in "
 "the Earth's Rotation: 700 BC to AD 1990</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1562
+#: src/core/StelCore.cpp:1569
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -829,7 +829,7 @@ msgstr ""
 "이 공식은 F. R. Stephenson의 책 <em>Historical Eclipses and Earth's Rotation</em> "
 "(%1)에서 발표되였습니다."
 
-#: src/core/StelCore.cpp:1565
+#: src/core/StelCore.cpp:1572
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -839,7 +839,7 @@ msgstr ""
 "1620년부터 2000년을 표로 제공하고, 그 이외의 시간대은 Chapront, Chapront-Touze & Francou "
 "(1997)의 변형을 포함하고 있습니다."
 
-#: src/core/StelCore.cpp:1568
+#: src/core/StelCore.cpp:1575
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -847,7 +847,7 @@ msgid ""
 msgstr ""
 "NASA 제트 추진 연구소의 JPL 태양계 역학 그룹이 자신들의 웹 사이트인 %1JPL Horizons%2에서 이 공식을 사용합니다."
 
-#: src/core/StelCore.cpp:1571
+#: src/core/StelCore.cpp:1578
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -856,7 +856,7 @@ msgstr ""
 "이 다항식은 J. Meeus와 L. Simons의 논문 <em>Polynomial approximations to Delta T, "
 "1620-2000 AD</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1574
+#: src/core/StelCore.cpp:1581
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -865,7 +865,7 @@ msgstr ""
 "O. Montenbruck와 T. Pfleger의 <em>Astronomy on the Personal Computer</em> "
 "(2000) 4판은 최근 자료를 근사하는 3차 다항식을 제공합니다."
 
-#: src/core/StelCore.cpp:1577
+#: src/core/StelCore.cpp:1584
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -876,7 +876,7 @@ msgstr ""
 "Calculations</em> (3판, 2007)와 <em>Calendrical Tabulations</em> (2002)에서 "
 "선보였습니다. 이 식은 Jean Meeus의 <em>Astronomical Algorithms</em> (1991)을 기반으로 합니다."
 
-#: src/core/StelCore.cpp:1580
+#: src/core/StelCore.cpp:1587
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -887,7 +887,7 @@ msgstr ""
 "Earth's clock error %1T and the calculation of eclipses</em> (%2)와 그 "
 "부록(%3)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1583
+#: src/core/StelCore.cpp:1590
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -899,7 +899,7 @@ msgstr ""
 "쓰는 단체 최적화된 %1T 공식을 만들었습니다. 이 식은 Stephenson (%2)이 서술한 가능한 주기를 기반으로 하고 있습니다. 더 "
 "많은 정보는 %3여기%4를 참고하십시오."
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1593
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -913,11 +913,11 @@ msgstr ""
 "of Solar Eclipses: -1900 to +3000</em> (2006)에 쓰였습니다. 이 공식은 또한 태양, 달, 행성의 "
 "천문력 프로그램 SOLEX에도 쓰였습니다."
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1593
 msgid "Used by default."
 msgstr "기본 설정"
 
-#: src/core/StelCore.cpp:1589
+#: src/core/StelCore.cpp:1596
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -927,7 +927,7 @@ msgstr ""
 "이 공식은 Stephenson & Morrison (1984)을 기반으로 B. Banjevic의 논문 <em>Ancient "
 "eclipses and dating the fall of Babylon</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1592
+#: src/core/StelCore.cpp:1599
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -938,42 +938,42 @@ msgstr ""
 "논문 <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1)에 "
 "발표되었고 2013년에 Sana Islam이 재논의하였습니다."
 
-#: src/core/StelCore.cpp:1595
+#: src/core/StelCore.cpp:1602
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "이 공식은 사용자 정의 상수를 써서 계산하는 %1T의 2차 방정식입니다."
 
-#: src/core/StelCore.cpp:1598 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1605 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "오류"
 
-#: src/core/StelCore.cpp:1648
+#: src/core/StelCore.cpp:1655
 msgid "with meaningless values outside this range"
 msgstr "범위 밖에서는 의미없는 값을 가짐"
 
-#: src/core/StelCore.cpp:1674
+#: src/core/StelCore.cpp:1681
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr "평균 오차 1초 미만, 최대 오차 1.9초, 범위 밖에서는 의미없은 값을 가짐"
 
-#: src/core/StelCore.cpp:1696 src/core/StelCore.cpp:1701
-#: src/core/StelCore.cpp:1728 src/core/StelCore.cpp:1733
+#: src/core/StelCore.cpp:1703 src/core/StelCore.cpp:1708
+#: src/core/StelCore.cpp:1735 src/core/StelCore.cpp:1740
 msgid "with zero values outside this range"
 msgstr "범위 밖에서는 값이 0임"
 
-#: src/core/StelCore.cpp:1706
+#: src/core/StelCore.cpp:1713
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "범위 밖에서는 평균적으로 1초 정도의 정확성과 0의 값을 가짐"
 
-#: src/core/StelCore.cpp:1743
+#: src/core/StelCore.cpp:1750
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "유효 시간범위: %1년에서 %2년까지, %3"
 
-#: src/core/StelCore.cpp:1745
+#: src/core/StelCore.cpp:1752
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "유효 시간범위: %1년에서 %2까지"
@@ -1113,7 +1113,7 @@ msgid "Deep-sky objects background images"
 msgstr "딥스카이 천체 배경 이미지"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:446
+#: src/StelMainView.cpp:450
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -1667,20 +1667,20 @@ msgstr "수평 버튼 바 자동 숨기기"
 msgid "Auto hide vertical button bar"
 msgstr "수직 버튼 바 자동 숨기기"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:735
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:743
 msgid "Space"
 msgstr "Space"
 
-#: src/gui/StelGuiItems.cpp:593
+#: src/gui/StelGuiItems.cpp:601
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:642
+#: src/gui/StelGuiItems.cpp:650
 msgid "Field of view"
 msgstr "시야각"
 
-#: src/gui/StelGuiItems.cpp:660
+#: src/gui/StelGuiItems.cpp:668
 msgid "Frames per second"
 msgstr "초당 프레임 수"
 
@@ -1997,27 +1997,27 @@ msgstr ""
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "필수적인 OpenGL 요소를 얻을 수 없습니다."
 
-#: src/StelMainView.cpp:446
+#: src/StelMainView.cpp:450
 msgid "Save screenshot"
 msgstr "스크린샷 저장"
 
-#: src/StelMainView.cpp:447
+#: src/StelMainView.cpp:451
 msgid "Full-screen mode"
 msgstr "전체 화면 모드"
 
-#: src/StelMainView.cpp:544
+#: src/StelMainView.cpp:548
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
 "OpenGL 버전이 낮습니다. 드라이브나 그래픽 하드웨어를 업데이트하시거나 MESA(또는 ANGLE) 버전을 사용해 주세요."
 
-#: src/StelMainView.cpp:547
+#: src/StelMainView.cpp:551
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL 버전이 낮습니다. 드라이브나 그래픽 하드웨어를 업데이트해주세요."
 
-#: src/StelMainView.cpp:589
+#: src/StelMainView.cpp:593
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2026,7 +2026,7 @@ msgstr ""
 "DirectX/OpenGL ES 의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:640
+#: src/StelMainView.cpp:644
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2035,7 +2035,7 @@ msgstr ""
 "OpenGL/Mesa 의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:695
+#: src/StelMainView.cpp:699
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2044,7 +2044,7 @@ msgstr ""
 "OpenGL의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:732
+#: src/StelMainView.cpp:736
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2053,7 +2053,7 @@ msgstr ""
 "OpenGL ES의 하위 시스템이 오류를 일으켰습니다. 자세한 상황을 보려면 로그를 보십시오. \n"
 "이 요소에 대한 알림을 다음에 표시하고 문제가 있는 채로 어떻게든 계속하시겠습니까?"
 
-#: src/StelMainView.cpp:841
+#: src/StelMainView.cpp:845
 #, qt-format
 msgid "Stellarium %1"
 msgstr "스텔라리움 %1"
@@ -5714,62 +5714,62 @@ msgid ""
 msgstr "예전 satellites.json 파일은 더이상 호환이 되지 않습니다 - 기본 파일 사용중"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1678
+#: plugins/Satellites/src/Satellites.cpp:1686
 msgid "visual"
 msgstr "눈으로 보이는 위성"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1680
+#: plugins/Satellites/src/Satellites.cpp:1688
 msgid "scientific"
 msgstr "과학위성"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1682
+#: plugins/Satellites/src/Satellites.cpp:1690
 msgid "communications"
 msgstr "통신위성"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1684
+#: plugins/Satellites/src/Satellites.cpp:1692
 msgid "navigation"
 msgstr "항행위성"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1686
+#: plugins/Satellites/src/Satellites.cpp:1694
 msgid "amateur"
 msgstr "아마츄어"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1688
+#: plugins/Satellites/src/Satellites.cpp:1696
 msgid "weather"
 msgstr "기상위성"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1690
+#: plugins/Satellites/src/Satellites.cpp:1698
 msgid "geostationary"
 msgstr "정지위성"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1692
+#: plugins/Satellites/src/Satellites.cpp:1700
 msgid "non-operational"
 msgstr "작동 중지"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1694
+#: plugins/Satellites/src/Satellites.cpp:1702
 msgid "gps"
 msgstr "GPS 위성"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1696
+#: plugins/Satellites/src/Satellites.cpp:1704
 msgid "iridium"
 msgstr "이리듐 위성"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1707
+#: plugins/Satellites/src/Satellites.cpp:1715
 msgid "The Hubble Space Telescope"
 msgstr "허블우주망원경"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1709
+#: plugins/Satellites/src/Satellites.cpp:1717
 msgid "The International Space Station"
 msgstr "국제우주정거장"
 
@@ -5974,7 +5974,7 @@ msgstr "세부사항은 %1이 문서%2를 참고하세요."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:317
 msgid "Internet updates disabled"
 msgstr "인터넷 업데이트를 할 수 없습니다."
@@ -5989,8 +5989,8 @@ msgstr "인터넷 업데이트를 할 수 없습니다."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:210
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:319
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:347
 msgid "Updating now..."
@@ -6001,7 +6001,7 @@ msgstr "지금 업데이트중입니다."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:321
 msgid "Next update: < 1 minute"
 msgstr "다음 업데이트: 1분 미만"
@@ -6011,7 +6011,7 @@ msgstr "다음 업데이트: 1분 미만"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
 #, qt-format
 msgid "Next update: %1 minutes"
@@ -6022,7 +6022,7 @@ msgstr "다음 업데이트: %1 분"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:325
 #, qt-format
 msgid "Next update: %1 hours"
@@ -6033,7 +6033,7 @@ msgstr "다음 업데이트 : %1 시간"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:202
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:350
 msgid "Update error"
 msgstr "업데이트 오류"
@@ -6062,7 +6062,7 @@ msgstr "[새로운 소스]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:204
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:338
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
@@ -6074,7 +6074,7 @@ msgstr "지금 업데이트"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid "Update from files"
 msgstr "파일에서 업데이트"
 
@@ -8006,95 +8006,86 @@ msgstr ""
 msgid "Neptunian"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:180
+#: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "planetary system"
 msgstr "행성계"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Metallicity"
 msgstr "중원소 함량"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Mass"
 msgstr "질량"
 
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Sun"
 msgstr "태양"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Radius"
 msgstr "반지름"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "유효온도: %1K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
 msgstr "외계 행성"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
 msgstr "공전 주기"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "days"
 msgstr "일"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Jup"
 msgstr "목성"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Semi-Major Axis"
 msgstr "장축"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:238
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Eccentricity"
 msgstr "이심률"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:239
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Inclination"
 msgstr "궤도 경사각"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Angle Distance"
 msgstr "각거리"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Discovered year"
 msgstr "발견된 년도"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Planetary class"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:243
-msgid "Habitable class"
-msgstr "생명체 거주 등급"
-
-#. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:245
-msgid "Mean surface temp."
-msgstr "평균 표면 온도"
-
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:247
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Equilibrium temp."
 msgstr ""
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:249
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "ESI"
 msgstr "지구유사성지수(ESI)"
 
@@ -8160,41 +8151,10 @@ msgid ""
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
-msgid "Habitable Class"
-msgstr "생명체 거주 등급"
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
-msgid ""
-"Classifies habitable planets based on temperature: hypopsychroplanets (O or "
-"hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
-"medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
-"or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
-"life, whereas class O or E would only support extremophilic life. Non-"
-"habitable planets are simply given the class X (or NH)."
-msgstr ""
-"생명체 거주 가능한 행성을 온도로 구분합니다: hypopsychroplanets (O 또는 hP) = 매우 추움 (−50°C 미만); "
-"psychroplanets (P) = 추움; mesoplanets (M) = 중간 온도 (0–50°C); thermoplanets (T) "
-"= 뜨거움; hyperthermoplanets (E 또는 hT) = 매우 뜨거움 (above 100°C). Mesoplanet이 복합적인 "
-"생물에 가장 이상적일테고, O등급이나 E등급은 극한 생물만이 살 수 있을 것입니다. 거주 불가능한 행성은 X등급 (또는 NH등급)입니다."
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
-msgid "Mean Surface Temperature"
-msgstr "평균 표면 온도"
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
-msgid ""
-"Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
-"ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
-"0.3 in all cases)."
-msgstr ""
-"지구와 유사한 공기와 유사한 행성 밀도와 이산화탄소를 1%로 가정하고 계산한 온실효과(반사도는 모든 경우에 0.3이라 가정)를 따져서 "
-"구한 온도(°C)"
-
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -8202,11 +8162,11 @@ msgid ""
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Earth Similarity Index (ESI)"
 msgstr "지구 유사성 지수(ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -8215,107 +8175,107 @@ msgstr ""
 "지구와의 유사성을 0에서 1 사이로 표현하고 지구와 가장 비슷한 행성을 1로 둔 지수입니다. ESI는 행성의 반지름, 밀도, 탈출 속도, "
 "표면 온도에 좌우됩니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Additional info"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Circumstellar habitable zone"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Planetary habitability"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Earth Similarity Index"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "외계 행성관련 일반적인 전문 웹 사이트"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "외계행성: XKCD 1071의 상호작용 버전"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "쌍성계 및 다중성계의 외계 행성 (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "Naming exoplanets (IAU)"
 msgstr "외계행성 명명법(IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "외계 행성을 연구하는 몇몇 천문학자와 그룹들"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "update: 16 April 2012"
 msgstr "업데이트: 2012년 4월 16일"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "The Exoplanet Data Explorer"
 msgstr "외계행성 데이터 탐색기"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Anglo-Australian Planet Search"
 msgstr "The Anglo-Australian Planet Search"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "제네바 외계 행성 탐색 프로그램"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA의 외계 행성 탐사 프로그램"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
 msgstr "펄서 행성들"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
 msgstr "NASA 외계 행성 목록"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "IAU 위원회 53: 외계 행성"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "The Habitable Zone Gallery"
 msgstr "The Habitable Zone Gallery (외계행성에 대한 소개 웹사이트)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - 또 다른 지구를 위한 탐사"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Open Exoplanet Catalogue"
 msgstr "외계 행성 카탈로그 열기"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "The Habitable Exoplanets Catalog"
 msgstr "거주 가능한 외계 행성 카탈로그"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Exoplanets is updated"
 msgstr "외계 행성이 업데이트되었습니다."
 
@@ -10380,6 +10340,18 @@ msgstr "Y축 좌표"
 #~ msgid "Daphne"
 #~ msgstr "다프네"
 
+#~ msgid "Habitable Class"
+#~ msgstr "생명체 거주 등급"
+
+#~ msgid "Mean surface temp."
+#~ msgstr "평균 표면 온도"
+
+#~ msgid "Habitable class"
+#~ msgstr "생명체 거주 등급"
+
+#~ msgid "Mean Surface Temperature"
+#~ msgstr "평균 표면 온도"
+
 #, qt-format
 #~ msgid "RA/DE (of date): %1/%2"
 #~ msgstr "적경/적위 (현재): %1/%2"
@@ -10445,6 +10417,27 @@ msgstr "Y축 좌표"
 #~ msgstr ""
 #~ "이 플러그인은 잠재적 생명체 거주 가능한 외계 행성들(주황색 표식)과 정보들 - 생명체 거주 등급, 평균 표면 온도, 지구 유사성 지수 -"
 #~ " 를 표시합니다."
+
+#~ msgid ""
+#~ "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
+#~ "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
+#~ "medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E "
+#~ "or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex "
+#~ "life, whereas class O or E would only support extremophilic life. Non-"
+#~ "habitable planets are simply given the class X (or NH)."
+#~ msgstr ""
+#~ "생명체 거주 가능한 행성을 온도로 구분합니다: hypopsychroplanets (O 또는 hP) = 매우 추움 (−50°C 미만); "
+#~ "psychroplanets (P) = 추움; mesoplanets (M) = 중간 온도 (0–50°C); thermoplanets (T) "
+#~ "= 뜨거움; hyperthermoplanets (E 또는 hT) = 매우 뜨거움 (above 100°C). Mesoplanet이 복합적인 "
+#~ "생물에 가장 이상적일테고, O등급이나 E등급은 극한 생물만이 살 수 있을 것입니다. 거주 불가능한 행성은 X등급 (또는 NH등급)입니다."
+
+#~ msgid ""
+#~ "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
+#~ "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
+#~ "0.3 in all cases)."
+#~ msgstr ""
+#~ "지구와 유사한 공기와 유사한 행성 밀도와 이산화탄소를 1%로 가정하고 계산한 온실효과(반사도는 모든 경우에 0.3이라 가정)를 따져서 "
+#~ "구한 온도(°C)"
 
 #, qt-format
 #~ msgid "Obliquity (of date): %1"
