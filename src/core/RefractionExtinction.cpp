@@ -28,7 +28,7 @@ Extinction::Extinction() : ext_coeff(50), undergroundExtinctionMode(UndergroundE
 }
 
 // airmass computation for cosine of zenith angle z
-float Extinction::airmass(float cosZ, const bool apparent_z) const
+double Extinction::airmass(float cosZ, const bool apparent_z) const
 {
 	if (cosZ<-0.035f) // about -2 degrees. Here, RozenbergZ>574 and climbs fast!
 	{
@@ -46,7 +46,7 @@ float Extinction::airmass(float cosZ, const bool apparent_z) const
 	if (apparent_z)
 	{
 		// Rozenberg 1966, reported by Schaefer (1993-2000).
-		return 1.0f/(cosZ+0.025f*std::exp(-11.f*cosZ));
+		return 1.0/(cosZ+0.025*std::exp(-11.f*cosZ));
 	}
 	else
 	{
