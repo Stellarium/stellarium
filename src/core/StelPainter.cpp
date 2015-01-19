@@ -650,7 +650,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	tessArc.append(win1);
 
 
-	if (rotCenter.lengthSquared()<0.00000001)
+	if (rotCenter.lengthSquared()<1e-11)
 	{
 		// Great circle
 		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth
