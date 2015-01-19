@@ -461,7 +461,7 @@ void Planet::computePosition(const double dateJD)
 		}
 		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
