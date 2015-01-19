@@ -444,6 +444,10 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJD)
 {
+	// Make sure the parent position is computed for the dateJD, otherwise
+	// getHeliocentricPos() would return incorect values.
+	if (parent)
+		parent->computePositionWithoutOrbits(dateJD);
 
 	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-dateJD)>deltaOrbitJD || !orbitCached))
 	{
