@@ -20,8 +20,6 @@
 #ifndef _STELSPHEREGEOMETRY_HPP_
 #define _STELSPHEREGEOMETRY_HPP_
 
-#include "config.h"
-
 #include "OctahedronPolygon.hpp"
 #include "StelVertexArray.hpp"
 #include "VecMath.hpp"
@@ -284,7 +282,7 @@ public:
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
 	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {//n.normalize();
-															 Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+		Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
 	// FIXME: GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
 	// for efficiency n.normalize() should not be called at this point.
 	// However, when zooming in a bit in Hammer-Aitoff and Mercator projections, this Assertion fires.

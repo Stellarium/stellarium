@@ -342,10 +342,12 @@ void OcularDialog::createDialogContent()
 	ui->telescopeListView->setModel(telescopeTableModel);
 	ui->lensListView->setModel(lensTableModel);
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView;
 	installKineticScrolling(addscroll);
+#endif
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -355,6 +357,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
+	connect(ui->checkBoxUseFlipForCCD, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseFlipForCCD(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -483,6 +486,10 @@ void OcularDialog::createDialogContent()
 	if (settings->value("use_initial_fov", false).toBool())
 	{
 		ui->checkBoxInitialFOV->setChecked(true);
+	}
+	if (settings->value("use_ccd_flip", true).toBool())
+	{
+		ui->checkBoxUseFlipForCCD->setChecked(true);
 	}
 
 	//Initialize the style

@@ -17,8 +17,6 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config.h"
-
 #include "AngleMeasure.hpp"
 #include "AngleMeasureDialog.hpp"
 #include "ui_angleMeasureDialog.h"
@@ -53,10 +51,12 @@ void AngleMeasureDialog::createDialogContent()
 	am = GETSTELMODULE(AngleMeasure);
 	ui->setupUi(dialog);
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
+#endif
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));

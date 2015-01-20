@@ -47,14 +47,17 @@ class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool labelsDisplayed
-			   READ getFlagLabels
-			   WRITE setFlagLabels)
+		   READ getFlagLabels
+		   WRITE setFlagLabels)
 	Q_PROPERTY(bool orbitsDisplayed
-			   READ getFlagOrbits
-			   WRITE setFlagOrbits)
+		   READ getFlagOrbits
+		   WRITE setFlagOrbits)
 	Q_PROPERTY(bool trailsDisplayed
-			   READ getFlagTrails
-			   WRITE setFlagTrails)
+		   READ getFlagTrails
+		   WRITE setFlagTrails)
+	Q_PROPERTY(bool planetsDisplayed
+		   READ getFlagPlanets
+		   WRITE setFlagPlanets)
 
 public:
 	SolarSystem();
@@ -261,6 +264,39 @@ public slots:
 	//! @return a phase
 	float getPhaseForPlanet(QString planetName) const;
 
+	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
+	//! Possible values:
+	//! * Planesas (algorithm provided by Pere Planesas (Observatorio Astronomico Nacional))
+	//! * Mueller (G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961])
+	//! * Harris (Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes)
+	//! Details:
+	//! J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.283-286.
+	//! O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
+	//! Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
+	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = Harris
+	//! @param algorithm the case in-sensitive algorithm name
+	//! @note: The structure of algorithms is almost identical, just the numbers are different! You should activate
+	//! Mueller's algorithm for simulate the eye's impression. (Esp. Venus!)
+	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
+
+	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+	QString getApparentMagnitudeAlgorithmOnEarth() const;
+
+	//! Set flag which enable use native names for planets or not.
+	void setFlagNativeNames(bool b);
+	//! Get the current value of the flag which enables showing native names for planets or not.
+	bool getFlagNativeNames(void) const;
+
+	//! Set flag which enable use translated names for planets or not.
+	void setFlagTranslatedNames(bool b);
+	//! Get the current value of the flag which enables showing translated names for planets or not.
+	bool getFlagTranslatedNames(void) const;
+
+	//! Set flag which enabled the showing of isolated trails for selected objects only or not
+	void setFlagIsolatedTrails(bool b);
+	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
+	bool getFlagIsolatedTrails(void) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -316,6 +352,10 @@ private slots:
 	//! Load a color scheme
 	void setStelStyle(const QString& section);
 
+	//! Called when the sky culture is updated.
+	//! Loads native names of planets for a given sky culture.
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	void updateSkyCulture(const QString& skyCultureDir);
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -342,7 +382,6 @@ private:
 	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
-
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
@@ -381,11 +420,16 @@ private:
 
 	bool flagShow;
 	bool flagMarker;
+	bool flagNativeNames;
+	bool flagTranslatedNames;
+	bool flagIsolatedTrails;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
 	Vec3f trailColor;
 	Vec3f pointerColor;
+
+	QHash<QString, QString> planetNativeNamesMap;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED

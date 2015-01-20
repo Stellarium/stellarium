@@ -93,10 +93,12 @@ void SatellitesDialog::createDialogContent()
 	        this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
+#endif
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
@@ -152,7 +154,7 @@ void SatellitesDialog::createDialogContent()
 	filterModel = new SatellitesListFilterModel(this);
 	filterModel->setSourceModel(GETSTELMODULE(Satellites)->getSatellitesListModel());
 	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-	ui->satellitesList->setModel(filterModel);
+	ui->satellitesList->setModel(filterModel);	
 	connect(ui->lineEditSearch, SIGNAL(textEdited(QString)),
 	        filterModel, SLOT(setFilterWildcard(QString)));
 	
@@ -163,7 +165,7 @@ void SatellitesDialog::createDialogContent()
 	        SLOT(updateSatelliteData()));
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
 	        this, SLOT(trackSatellite(QModelIndex)));
-	
+
 	// Two-state input, three-state display
 	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)),
 	        ui->displayedCheckbox, SLOT(setChecked(bool)));
@@ -205,12 +207,20 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSourceButton, SIGNAL(clicked()), this, SLOT(addSourceRow()));
 	connect(plugin, SIGNAL(settingsChanged()),
 	        this, SLOT(toggleCheckableSources()));
+	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), this, SLOT(repaintSourceList()));
 
 	// About tab
 	populateAboutPage();
 
 	populateFilterMenu();
 	populateSourcesList();
+}
+
+void SatellitesDialog::repaintSourceList()
+{
+	// Enable force repaint sourceList to avoiding artifacts
+	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+	ui->sourceList->repaint();
 }
 
 void SatellitesDialog::filterListByGroup(int index)
@@ -284,6 +294,10 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleSecondLineEdit->setCursorPosition(0);
 	}
 	
+	// Enable force repaint satellitesList to avoiding artifacts
+	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+	ui->satellitesList->repaint();
+
 	// TODO: Fix the comms button...
 //	ui->commsButton->setEnabled(sat->comms.count()>0);
 	

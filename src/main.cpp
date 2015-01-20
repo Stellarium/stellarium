@@ -43,7 +43,6 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QFontDatabase>
-#include <QGLFormat>
 #include <QGuiApplication>
 #include <QSettings>
 #include <QSplashScreen>
@@ -111,6 +110,20 @@ void clearCache()
 	cacheMgr->clear(); // Removes all items from the cache.
 }
 
+void registerPluginsDir(QDir& appDir)
+{
+	QStringList pathes;
+	// Windows
+	pathes << appDir.absolutePath();
+	pathes << appDir.absoluteFilePath("platforms");
+	// OS X
+	appDir.cdUp();	
+	pathes << appDir.absoluteFilePath("plugins");
+	// All systems
+	pathes << QCoreApplication::libraryPaths();
+	QCoreApplication::setLibraryPaths(pathes);
+}
+
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
@@ -145,10 +158,10 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
-	#if QT_VERSION>=QT_VERSION_CHECK(5, 3, 1)
-	QCoreApplication::addLibraryPath(".");
-	#endif
-	
+	QFileInfo appInfo(QString::fromUtf8(argv[0]));
+	QDir appDir(appInfo.absolutePath());
+	registerPluginsDir(appDir);
+
 	QGuiApplication::setDesktopSettingsAware(false);
 
 #ifndef USE_QUICKVIEW
@@ -344,55 +357,24 @@ int main(int argc, char **argv)
 	app.installTranslator(&trans);
 
 	StelMainView mainWin;
+	mainWin.init(confSettings); // May exit(0) when OpenGL subsystem insufficient
+	splash.finish(&mainWin);
+	app.exec();
+	mainWin.deinit();
 
-	bool appCanRun = true;
-	// some basic diagnostics
-	if (!QGLFormat::hasOpenGL()){
-		qWarning() << "Oops... This system does not support OpenGL.";
-		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
-		appCanRun = false;
-	}
+	delete confSettings;
+	StelLogger::deinit();
 
-	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1) && !(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_ES_Version_2_0)) // Check supported version of OpenGL
-	{
-		// OK, minimal required version of OpenGL is 2.1 and OpenGL Shading Language is 1.20 (or OpenGL ES is 2.0 and GLSL ES is 2.0).
-		// Recommended OpenGL 3.0 and OpenGL Shading Language 1.30 and above.
-		// If platform does not support this version then say to user about troubles and quit from application.
-		#ifdef Q_OS_WIN
-		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
-		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."));
-		#else
-		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
-		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."));
-		#endif
-		appCanRun = false;
-	}
+	#ifdef Q_OS_WIN
+	if(timerGrain)
+		timeEndPeriod(timerGrain);
+	#endif //Q_OS_WIN
+	#ifdef Q_OS_MAC
+	delete(newArgv);
+	delete(option);
+	delete(value);
+	#endif
 
-	if (appCanRun)
-	{
-		mainWin.init(confSettings);
-		splash.finish(&mainWin);
-		app.exec();
-		mainWin.deinit();
-
-		delete confSettings;
-		StelLogger::deinit();
-
-		#ifdef Q_OS_WIN
-		if(timerGrain)
-			timeEndPeriod(timerGrain);
-		#endif //Q_OS_WIN
-		#ifdef Q_OS_MAC
-		delete(newArgv);
-		delete(option);
-		delete(value);
-		#endif
-
-		return 0;
-	}
-	else
-	{
-		app.quit();
-	}
+	return 0;
 }
 

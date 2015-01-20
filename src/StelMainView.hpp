@@ -20,20 +20,29 @@
 #ifndef _STELMAINGRAPHICSVIEW_HPP_
 #define _STELMAINGRAPHICSVIEW_HPP_
 
-#include "config.h"
-
 #include <QDeclarativeView>
 #include <QCoreApplication>
 #include <QEventLoop>
 #include <QOpenGLContext>
 
+// This define (only used here and in StelMainView.cpp) is temporarily used
+// to allow uncompromised compiling while the migration to the new QOpenGL... classes
+// has not been done. As soon as Qt5.4 is out, we should finish this migration process!
+#define STEL_USE_NEW_OPENGL_WIDGETS 0
+
 class QDeclarativeItem;
+#if STEL_USE_NEW_OPENGL_WIDGETS
+class QOpenGLWidget;
+class StelQOpenGLWidget;
+#else
 class QGLWidget;
+class StelQGLWidget;
+#endif
 class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
-class StelQGLWidget;
 class QMoveEvent;
+class QSettings;
 
 //! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
@@ -67,6 +76,8 @@ public:
 	//! Return the parent gui widget, this should be used as parent to all
 	//! the StelDialog instances.
 	QGraphicsWidget* getGuiWidget() const {return guiWidget;}
+	//! Return mouse position coordinates
+	QPoint getMousePos();
 public slots:
 
 	//!	Set whether fullscreen is activated or not
@@ -147,9 +158,15 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 	
-	QString getSupportedOpenGLVersion() const;
-	//! provide extensive OpenGL dignostics in logfile.
+	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
+	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
+	//! to provide feedback to the user about bad OpenGL drivers.
+#if STEL_USE_NEW_OPENGL_WIDGETS
+	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
+#else
+	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const;
+#endif
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
@@ -160,7 +177,11 @@ private:
 	QDeclarativeItem* skyItem;
 
 	//! The openGL window
+#if STEL_USE_NEW_OPENGL_WIDGETS
+	StelQOpenGLWidget* glWidget;
+#else
 	StelQGLWidget* glWidget;
+#endif
 	StelGuiBase* gui;
 	class StelApp* stelApp;
 

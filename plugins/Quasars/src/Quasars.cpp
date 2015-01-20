@@ -16,7 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "config.h"
 
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
@@ -405,6 +404,9 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 QStringList Quasars::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!flagShowQuasars)
+		return result;
+
 	if (inEnglish)
 	{
 		foreach (const QuasarP& quasar, QSO)

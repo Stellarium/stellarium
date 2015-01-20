@@ -464,6 +464,9 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 QStringList Satellites::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+		return result;
+
 	if (inEnglish)
 	{
 		foreach(const SatelliteP& sat, satellites)
@@ -1416,6 +1419,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			else
 				qWarning() << "Satellites:" << sat->id << sat->name
 				           << "is missing in the update lists.";
+			missingCount++;
+		}
+		// All satellites, who has invalid orbit should be removed.
+		if (!sat->orbitValid)
+		{
+			toBeRemoved.append(sat->id);
+			qWarning() << "Satellite" << sat->id << sat->name
+				   << "has invalid orbit and will be removed.";
 			missingCount++;
 		}
 	}
