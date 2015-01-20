@@ -21,8 +21,6 @@
 #ifndef _DIALOG_HPP_
 #define _DIALOG_HPP_
 
-#include "config.h"
-
 #include <QWidget>
 #include <QFrame>
 #include <QMouseEvent>

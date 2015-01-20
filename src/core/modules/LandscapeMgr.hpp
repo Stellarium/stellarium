@@ -57,6 +57,10 @@ class LandscapeMgr : public StelModule
 			   READ getFlagLandscape
 			   WRITE setFlagLandscape
 			   NOTIFY landscapeDisplayedChanged)
+	Q_PROPERTY(bool illuminationDisplayed
+			   READ getFlagIllumination
+			   WRITE setFlagIllumination
+			   NOTIFY illuminationDisplayedChanged)
 	Q_PROPERTY(bool databaseUsage
 			READ getFlagUseLightPollutionFromDatabase
 			WRITE setFlagUseLightPollutionFromDatabase
@@ -92,7 +96,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager
 	//! Return the global landscape luminance [0..1], for being used e.g for setting eye adaptation.
-	//! GZ 2014-01-03: THIS IS MISLEADING. Returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
+	//! It returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
 	//! The actual brightness is of no concern here. You may use getAtmosphereAverageLuminance() for this.
 	float getLuminance() const;
 	//! return average luminance [cd/m^2] of atmosphere. Around 10 at sunset, 6400 in daylight, >0 in dark night.
@@ -172,6 +176,10 @@ public slots:
 	bool getFlagFog() const;
 	//! Set flag for displaying Fog.
 	void setFlagFog(const bool displayed);
+	//! Get flag for displaying illumination layer
+	bool getFlagIllumination() const;
+	//! Set flag for displaying illumination layer
+	void setFlagIllumination(const bool on);
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -187,9 +195,9 @@ public slots:
 	//! Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
 	void setFlagLandscapeSetsMinimalBrightness(bool b) {flagLandscapeSetsMinimalBrightness=b;}
 	//! Return the minimal brightness value of the landscape
-	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
+	double getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
 	//! Set the minimal brightness value of the landscape.
-	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
+	void setDefaultMinimalBrightness(const double b) {defaultMinimalBrightness=b;}
 	//! Sets the value of the flag usage light pollution (and bortle index) from locations database.
 	void setFlagUseLightPollutionFromDatabase(const bool usage);
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
@@ -312,11 +320,14 @@ public slots:
 	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
 	void setFlagAtmosphereAutoEnable(bool b);
 
+
+
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
+	void illuminationDisplayedChanged(const bool displayed);
 	void lightPollutionUsageChanged(const bool usage);
 
 	//! Emitted when a landscape has been installed or un-installed.
@@ -358,6 +369,7 @@ private:
 	float getAtmosphereLightPollutionLuminance() const;
 	//! Set light pollution luminance level.
 	void setAtmosphereLightPollutionLuminance(const float f);
+
 
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the

@@ -64,6 +64,7 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 
 AngleMeasure::AngleMeasure()
 	: flagShowAngleMeasure(false)
+	, withDecimalDegree(false)
 	, dragging(false)
 	, angle(0.)
 	, flagUseDmsFormat(false)
@@ -166,6 +167,8 @@ void AngleMeasure::update(double deltaTime)
 	lineVisible.update((int)(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
 
+	withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+
 	// if altAz endpoint linked to the rotating sky, move respective point(s)
 	if (flagShowHorizontalStartSkylinked)
 	{
@@ -186,12 +189,10 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 	StelPainter painter(prj);
 	painter.setFont(font);
 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		glEnable(GL_TEXTURE_2D);
-
 		Vec3d xy;
 		QString displayedText;
 		if (frameType==StelCore::FrameEquinoxEqu)
@@ -220,9 +221,11 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		}
 
 		glDisable(GL_TEXTURE_2D);
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-		// glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_BLEND);
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glEnable(GL_LINE_SMOOTH);
+		#endif
 
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
@@ -242,6 +245,10 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
 			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
 		}
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glDisable(GL_LINE_SMOOTH);
+		#endif
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{
@@ -255,8 +262,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
-
-
+	glDisable(GL_BLEND);
 }
 
 //! Draw any parts on the screen which are for our module
@@ -279,24 +285,29 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	double y = cos(p2.latitude())*sin(p2.longitude()-p1.longitude());
 	double x = cos(p1.latitude())*sin(p2.latitude()) - sin(p1.latitude())*cos(p2.latitude())*cos(p2.longitude()-p1.longitude());
 	double r = std::atan2(y,x);
-	// GZ ATAN2 makes many tests unnecessary...
-//	if (x<0)
-//		r += M_PI;
-//	if (y<0)
-//		r += 2*M_PI;
-//	if (r>(2*M_PI))
-//		r -= 2*M_PI;
 	if (r<0)
 		r+= 2*M_PI;
 
 	unsigned int d, m;
 	double s;
 	bool sign;
-	StelUtils::radToDms(r, sign, d, m, s);
-	if (flagUseDmsFormat)
-		return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+
+	if (withDecimalDegree)
+	{
+		StelUtils::radToDecDeg(r, sign, s);
+		if (flagUseDmsFormat)
+			return QString("%1d").arg(s, 0, 'f', 5);
+		else
+			return QString("%1%2").arg(s, 0, 'f', 5).arg(QChar(0x00B0));
+	}
 	else
-		return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	{
+		StelUtils::radToDms(r, sign, d, m, s);
+		if (flagUseDmsFormat)
+			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+		else
+			return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	}
 }
 
 void AngleMeasure::handleKeys(QKeyEvent* event)
@@ -316,6 +327,13 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),startPoint);
+		{ // Nick Fedoseev patch: improve click match
+			Vec3d win;
+			prj->project(startPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, startPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),startPointHor);
 
@@ -346,6 +364,13 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),endPoint);
+		{ // Nick Fedoseev patch: improve click match
+			Vec3d win;
+			prj->project(endPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),endPointHor);
 		calculateEnds();
@@ -361,6 +386,13 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(x,y,endPoint);
+		{ // Nick Fedoseev patch: improve click match
+		   Vec3d win;
+		   prj->project(endPoint,win);
+		   float dx = x - win.v[0];
+		   float dy = y - win.v[1];
+		   prj->unProject(x+dx, y+dy, endPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();
@@ -397,21 +429,36 @@ void AngleMeasure::calculateEndsOneLine(const Vec3d start, const Vec3d end, Vec3
 	angle = start.angle(end);
 }
 
-// GZ Misnomer! should be called formatAngleString()
+// Misnomer! should be called formatAngleString()
 QString AngleMeasure::calculateAngle(bool horizontal) const
 {
 	unsigned int d, m;
 	double s;
 	bool sign;
 
-	if (horizontal)
-		StelUtils::radToDms(angleHor, sign, d, m, s);
+	if (withDecimalDegree)
+	{
+		if (horizontal)
+			StelUtils::radToDecDeg(angleHor, sign, s);
+		else
+			StelUtils::radToDecDeg(angle, sign, s);
+
+		if (flagUseDmsFormat)
+			return QString("%1d").arg(s, 0, 'f', 5);
+		else
+			return QString("%1%2").arg(s, 0, 'f', 5).arg(QChar(0x00B0));
+	}
 	else
-		StelUtils::radToDms(angle, sign, d, m, s);
-	if (flagUseDmsFormat)
-		return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
-	else
-		return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	{
+		if (horizontal)
+			StelUtils::radToDms(angleHor, sign, d, m, s);
+		else
+			StelUtils::radToDms(angle, sign, d, m, s);
+		if (flagUseDmsFormat)
+			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+		else
+			return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	}
 }
 
 void AngleMeasure::enableAngleMeasure(bool b)

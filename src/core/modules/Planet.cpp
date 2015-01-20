@@ -55,6 +55,9 @@ QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
 Planet::RingPlanetShaderVars Planet::ringPlanetShaderVars;
 QOpenGLShaderProgram* Planet::moonShaderProgram=NULL;
 Planet::MoonShaderVars Planet::moonShaderVars;
+
+QMap<Planet::PlanetType, QString> Planet::pTypeMap;
+QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
 	
 Planet::Planet(const QString& englishName,
 	       int flagLighting,
@@ -101,22 +104,24 @@ Planet::Planet(const QString& englishName,
 
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
-	pType=pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
+	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
+	vMagAlgorithm = Planet::UndefinedAlgorithm;
 
-	eclipticPos=Vec3d(0.,0.,0.);
+	eclipticPos = Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
+	nativeName = "";
 	if (englishName!="Pluto")
 	{
 		deltaJD = 0.001*StelCore::JD_SECOND;
 	}
 	flagLabels = true;
+	flagNativeName = true;
+	flagTranslatedName = true;
 }
-
-QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
 void Planet::init()
@@ -127,13 +132,27 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		pTypeMap.clear();
 	}
-	pTypeMap.insert(Planet::isStar,     "star");
-	pTypeMap.insert(Planet::isPlanet,   "planet");
-	pTypeMap.insert(Planet::isMoon,     "moon");
-	pTypeMap.insert(Planet::isAsteroid, "asteroid");
-	pTypeMap.insert(Planet::isPlutoid,  "plutoid");
-	pTypeMap.insert(Planet::isComet,    "comet");
-	pTypeMap.insert(Planet::isUNDEFINED, "UNDEFINED"); // something must be broken before we ever see this!
+	pTypeMap.insert(Planet::isStar,		"star");
+	pTypeMap.insert(Planet::isPlanet,	"planet");
+	pTypeMap.insert(Planet::isMoon,		"moon");
+	pTypeMap.insert(Planet::isAsteroid,	"asteroid");
+	pTypeMap.insert(Planet::isPlutino,	"plutino");
+	pTypeMap.insert(Planet::isComet,	"comet");
+	pTypeMap.insert(Planet::isDwarfPlanet,	"dwarf planet");
+	pTypeMap.insert(Planet::isCubewano,	"cubewano");
+	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
+	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
+	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
+
+	if (vMagAlgorithmMap.count() > 0)
+	{
+		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
+		vMagAlgorithmMap.clear();
+	}
+	vMagAlgorithmMap.insert(Planet::Planesas,	"planesas");
+	vMagAlgorithmMap.insert(Planet::Mueller,	"mueller");
+	vMagAlgorithmMap.insert(Planet::Harris,		"harris");
+	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
 }
 
 Planet::~Planet()
@@ -144,7 +163,30 @@ Planet::~Planet()
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	nameI18 = trans.qtranslate(englishName);
+	if (!nativeName.isEmpty() && getFlagNativeName())
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(nativeName);
+		else
+			nameI18 = nativeName;
+	}
+	else
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(englishName);
+		else
+			nameI18 = englishName;
+	}
+}
+
+QString Planet::getEnglishName() const
+{
+	return englishName;
+}
+
+QString Planet::getNameI18n() const
+{
+	return nameI18;
 }
 
 // Return the information string "ready to print" :)
@@ -155,7 +197,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
+		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -163,7 +205,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
@@ -237,10 +279,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
-			if (std::abs(siderealDay)>0)
+			if (qAbs(siderealDay)>0)
 			{
-				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";
-				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br>";
+				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br>";
+			}
+			else if (re.period==0.)
+			{
+				oss << q_("The period of rotation is chaotic") << "<br>";
 			}
 		}
 		if (englishName.compare("Sun")!=0)
@@ -264,7 +310,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 	QString str;
 	QTextStream oss(&str);
 	oss.setRealNumberPrecision(2);
-	oss << nameI18;
+	oss << getNameI18n();
 
 	if (sphereScale != 1.f)
 	{
@@ -361,7 +407,7 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 	// If the planet p is farther from the sun than this planet, it can't cast shadow on it.
 	if (planetPos.lengthSquared()>thisPos.lengthSquared())
 		return false;
-	
+
 	Vec3d ppVector = planetPos;
 	ppVector.normalize();
 	
@@ -398,6 +444,10 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJD)
 {
+	// Make sure the parent position is computed for the dateJD, otherwise
+	// getHeliocentricPos() would return incorect values.
+	if (parent)
+		parent->computePositionWithoutOrbits(dateJD);
 
 	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-dateJD)>deltaOrbitJD || !orbitCached))
 	{
@@ -415,7 +465,7 @@ void Planet::computePosition(const double dateJD)
 		}
 		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
@@ -568,7 +618,12 @@ double Planet::getSiderealTime(double jd) const
 	}
 
 	double t = jd - re.epoch;
-	double rotations = t / (double) re.period;
+	// oops... avoid division by zero (typical case for moons with chaotic period of rotation)
+	double rotations = 1.f; // NOTE: Maybe 1e-3 will be better?
+	if (re.period!=0.) // OK, it's not a moon with chaotic period of rotation :)
+	{
+		rotations = t / (double) re.period;
+	}
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
@@ -576,7 +631,7 @@ double Planet::getSiderealTime(double jd) const
 	if (englishName=="Jupiter")
 	{
 		// use semi-empirical coefficient for GRS drift
-		return remainder * 360. + re.offset - 0.2483 * std::abs(jd - 2456172);
+		return remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172);
 	}
 	else
 		return remainder * 360. + re.offset;
@@ -590,7 +645,7 @@ double Planet::getMeanSolarDay() const
 		return msd;
 
 	double sday = getSiderealDay();	
-	double coeff = std::abs(sday/getSiderealPeriod());
+	double coeff = qAbs(sday/getSiderealPeriod());
 	float sign = 1;
 	// planets with retrograde rotation
 	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
@@ -667,7 +722,7 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
 	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
-	// GZ: improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
+	// improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
 	if (pType == Planet::isAsteroid)
 			deltaJD=distance*StelCore::JD_SECOND;
 	return distance;
@@ -691,7 +746,7 @@ float Planet::getPhase(const Vec3d& obsPos) const
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
 	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
-	return 0.5f * std::abs(1.f + cos_chi);
+	return 0.5f * qAbs(1.f + cos_chi);
 }
 
 // Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
@@ -743,7 +798,15 @@ float Planet::getVMagnitude(const StelCore* core) const
 			if (d>=radius)
 			{
 				// The satellite is totally inside the inner shadow.
-				shadowFactor = 1e-9;
+				if (englishName=="Moon")
+				{
+					// Fit a more realistic magnitude for the Moon case.
+					// I used some empirical data for fitting. --AW
+					// TODO: This factor should be improved!
+					shadowFactor = 2.718e-5;
+				}
+				else
+					shadowFactor = 1e-9;
 			}
 			else if (d>-radius)
 			{
@@ -760,108 +823,135 @@ float Planet::getVMagnitude(const StelCore* core) const
 	{
 		const double phaseDeg=phase*180./M_PI;
 		const double d = 5. * log10(sqrt(observerPlanetRq*planetRq));
-		//double f1 = phaseDeg/100.;
 
-		/*
-		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-		if (englishName=="Mercury")
-		{
-			if ( phaseDeg > 150. ) f1 = 1.5;
-			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1;
-		}
-		if (englishName=="Venus")
-			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1;
-		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phaseDeg;
-		if (englishName=="Jupiter")
-			return -9.25 + d + 0.005*phaseDeg;
-		if (englishName=="Saturn")
-		{
-			// TODO re-add rings computation
-			// double rings = -2.6*sinx + 1.25*sinx*sinx;
-			return -8.88 + d + 0.044*phaseDeg;// + rings;
-		}
-		if (englishName=="Uranus")
-			return -7.19 + d + 0.0028*phaseDeg;
-		if (englishName=="Neptune")
-			return -6.87 + d;
-		if (englishName=="Pluto")
-			return -1.01 + d + 0.041*phaseDeg;
-		*/
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are two solutions:
 		// (1) G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
 		// (2) Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
 		// The structure is almost identical, just the numbers are different!
 		// I activate (1) for now, because we want to simulate the eye's impression. (Esp. Venus!)
-		// (1)
-		if (englishName=="Mercury")
-		    {
-			double ph50=phaseDeg-50.0;
-			return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50;
-		    }
-		if (englishName=="Venus")
-			return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg;
-		if (englishName=="Mars")
-			return -1.3 + d + 0.01486*phaseDeg;
-		if (englishName=="Jupiter")
-			return -8.93 + d;
-		if (englishName=="Saturn")
+		// AW: (2) activated by default
+
+		switch (core->getCurrentPlanet()->getApparentMagnitudeAlgorithm())
 		{
-			// add rings computation
-			// GZ: implemented from Meeus, Astr.Alg.1992
-			const double jd=core->getJDay();
-			const double T=(jd-2451545.0)/36525.0;
-			const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
-			const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-			SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-			double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
-			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-			return -8.68 + d + 0.044*phaseDeg + rings;
+			case Planesas:
+			{
+				// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+				double f1 = phaseDeg/100.;
+
+				if (englishName=="Mercury")
+				{
+					if ( phaseDeg > 150. ) f1 = 1.5;
+					return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1;
+				}
+				if (englishName=="Venus")
+					return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1;
+				if (englishName=="Mars")
+					return -1.52 + d + 0.016*phaseDeg;
+				if (englishName=="Jupiter")
+					return -9.25 + d + 0.005*phaseDeg;
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					// implemented from Meeus, Astr.Alg.1992
+					const double jd=core->getJDay();
+					const double T=(jd-2451545.0)/36525.0;
+					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+					double rings = -2.6*sinx + 1.25*sinx*sinx;
+					return -8.88 + d + 0.044*phaseDeg + rings;
+				}
+				if (englishName=="Uranus")
+					return -7.19 + d + 0.0028*phaseDeg;
+				if (englishName=="Neptune")
+					return -6.87 + d;
+				if (englishName=="Pluto")
+					return -1.01 + d + 0.041*phaseDeg;
+
+				break;
+			}
+			case Mueller:
+			{
+				// (1)
+				if (englishName=="Mercury")
+				{
+					double ph50=phaseDeg-50.0;
+					return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50;
+				}
+				if (englishName=="Venus")
+					return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg;
+				if (englishName=="Mars")
+					return -1.3 + d + 0.01486*phaseDeg;
+				if (englishName=="Jupiter")
+					return -8.93 + d;
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					// implemented from Meeus, Astr.Alg.1992
+					const double jd=core->getJDay();
+					const double T=(jd-2451545.0)/36525.0;
+					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+					SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.68 + d + 0.044*phaseDeg + rings;
+				}
+				if (englishName=="Uranus")
+					return -6.85 + d;
+				if (englishName=="Neptune")
+					return -7.05 + d;
+				if (englishName=="Pluto")
+					return -1.0 + d;
+
+				break;
+			}
+			case Harris:
+			case UndefinedAlgorithm:	// activated by default
+			{
+				// (2)
+				if (englishName=="Mercury")
+					return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg;
+				if (englishName=="Venus")
+					return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg;
+				if (englishName=="Mars")
+					return -1.52 + d + 0.016*phaseDeg;
+				if (englishName=="Jupiter")
+					return -9.40 + d + 0.005*phaseDeg;
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					// implemented from Meeus, Astr.Alg.1992
+					const double jd=core->getJDay();
+					const double T=(jd-2451545.0)/36525.0;
+					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.88 + d + 0.044*phaseDeg + rings;
+				}
+				if (englishName=="Uranus")
+					return -7.19f + d;
+				if (englishName=="Neptune")
+					return -6.87f + d;
+				if (englishName=="Pluto")
+					return -1.00f + d;
+
+				break;
+			}
 		}
-		if (englishName=="Uranus")
-			return -6.85 + d;
-		if (englishName=="Neptune")
-			return -7.05 + d;
-		if (englishName=="Pluto")
-			return -1.0 + d;
-		/*
-		// (2)
-		if (englishName=="Mercury")
-			return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg;
-		if (englishName=="Venus")
-			return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg;
-		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phaseDeg;
-		if (englishName=="Jupiter")
-			return -9.40 + d + 0.005*phaseDeg;
-		if (englishName=="Saturn")
-		{
-			// add rings computation
-			// GZ: implemented from Meeus, Astr.Alg.1992
-			const double jd=core->getJDay();
-			const double T=(jd-2451545.0)/36525.0;
-			const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
-			const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-			double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
-			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-			return -8.88 + d + 0.044*phaseDeg + rings;
-		}
-		if (englishName=="Uranus")
-			return -7.19f + d;
-		if (englishName=="Neptune")
-			return -6.87f + d;
-		if (englishName=="Pluto")
-			return -1.00f + d;
-	*/
-	// TODO: decide which set of formulae is best?
 	}
 
 	// This formula seems to give wrong results
@@ -889,11 +979,14 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 {
 	if (hidden)
 		return;
-	// GZ: Try to improve speed for minor planets: test if visible at all.
+	// Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
-	// AW: Apply this rule to asteroids only
-	// Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
-	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
+	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
+	//      Maybe make another configurable flag for those interested?
+	// Problematic: Early-out here of course disables the wanted hint circles for dim asteroids.
+	// The line makes hints for asteroids 5 magnitudes below sky limiting magnitude visible.
+	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
+	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
 	{
 		return;
 	}
@@ -1083,56 +1176,58 @@ void Planet::initShader()
 		"        highp float sunRadius = sunInfo.w;\n"
 		"        highp float L = length(sunPosition - P);\n"
 		"        highp float R = asin(sunRadius / L);\n"
-		"        for (int i = 0; i < shadowCount; ++i)\n"
+		"        for (int i = 0; i < 4; ++i)\n"
 		"        {\n"
-		"            highp vec3 satellitePosition = shadowData[i].xyz;\n"
-		"            highp float satelliteRadius = shadowData[i].w;\n"
-		"            highp float l = length(satellitePosition - P);\n"
-		"            highp float r = asin(satelliteRadius / l);\n"
-		"            highp float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));\n"
+		"            if (shadowCount>i)\n"
+		"            {\n"
+		"                highp vec3 satellitePosition = shadowData[0].xyz;\n"
+		"                highp float satelliteRadius = shadowData[0].w;\n"
+		"                highp float l = length(satellitePosition - P);\n"
+		"                highp float r = asin(satelliteRadius / l);\n"
+		"                highp float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));\n"
 		"\n"
-		"            mediump float illumination = 1.0;\n"
-		"            if(d >= R + r)\n"
-		"            {\n"
-		"                // distance too far\n"
-		"                illumination = 1.0;\n"
-		"            }\n"
-		"            else if(r >= R + d)\n"
-		"            {\n"
-		"                // umbra\n"
+		"                mediump float illumination = 1.0;\n"
+		"                if(d >= R + r)\n"
+		"                {\n"
+		"                    // distance too far\n"
+		"                    illumination = 1.0;\n"
+		"                }\n"
+		"                else if(r >= R + d)\n"
+		"                {\n"
+		"                    // umbra\n"
 		"#ifdef IS_MOON\n"
-		"                illumination = d / (r - R) * 0.6;\n"
+		"                    illumination = d / (r - R) * 0.6;\n"
 		"#else\n"
-		"                illumination = 0.0;\n"
+		"                    illumination = 0.0;\n"
 		"#endif\n"
-		"            }\n"
-		"            else if(d + r <= R)\n"
-		"            {\n"
-		"                // penumbra completely inside\n"
-		"                illumination = 1.0 - r * r / (R * R);\n"
-		"            }\n"
-		"            else\n"
-		"            {\n"
-		"                // penumbra partially inside\n"
+		"                }\n"
+		"                else if(d + r <= R)\n"
+		"                {\n"
+		"                    // penumbra completely inside\n"
+		"                    illumination = 1.0 - r * r / (R * R);\n"
+		"                }\n"
+		"                else\n"
+		"                {\n"
+		"                    // penumbra partially inside\n"
 		"#ifdef IS_MOON\n"
-		"                illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
+		"                    illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
 		"#else\n"
-		"                mediump float x = (R * R + d * d - r * r) / (2.0 * d);\n"
-		"                mediump float alpha = acos(x / R);\n"
-		"                mediump float beta = acos((d - x) / r);\n"
-		"                mediump float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
-		"                mediump float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
-		"                mediump float AS = R * R * 2.0 * 1.57079633;\n"
-		"                illumination = 1.0 - (AR + Ar) / AS;\n"
+		"                    mediump float x = (R * R + d * d - r * r) / (2.0 * d);\n"
+		"                    mediump float alpha = acos(x / R);\n"
+		"                    mediump float beta = acos((d - x) / r);\n"
+		"                    mediump float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
+		"                    mediump float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
+		"                    mediump float AS = R * R * 2.0 * 1.57079633;\n"
+		"                    illumination = 1.0 - (AR + Ar) / AS;\n"
 		"#endif\n"
+		"                }\n"
+		"                final_illumination = min(illumination, final_illumination);\n"
 		"            }\n"
-		"\n"
-		"            final_illumination = min(illumination, final_illumination);\n"
 		"        }\n"
 		"    }\n"
 		"\n"
 		"#ifdef IS_MOON\n"
-		"    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
+		"    highp vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
 		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
 		"    // normal now contains the real surface normal taking normal map into account\n"
 		"    // Use an Oren-Nayar model for rough surfaces\n"
@@ -1144,14 +1239,14 @@ void Planet::initShader()
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		"    mediump float roughness = 1.;\n"
+		"    mediump float roughness = 1.0;\n"
 		"    mediump float roughnessSquared = roughness * roughness;\n"
 		"    mediump float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
 		"    mediump float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
 		"    mediump float C = sin(alpha) * tan(beta);\n"
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 2.;\n"
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
 		"#endif\n"
-		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
+		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 2.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
 		"    {\n"
@@ -1188,7 +1283,7 @@ void Planet::initShader()
 	QOpenGLShader ringFragmentShader(QOpenGLShader::Fragment);
 	ringFragmentShader.compileSourceCode(arr.constData());
 	if (!ringFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling ringFragmentShader: " << ringFragmentShader.log(); }
-	
+
 	ringPlanetShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	ringPlanetShaderProgram->addShader(&vshader);
 	ringPlanetShaderProgram->addShader(&ringFragmentShader);
@@ -1214,7 +1309,7 @@ void Planet::initShader()
 	QOpenGLShader moonFragmentShader(QOpenGLShader::Fragment);
 	moonFragmentShader.compileSourceCode(arr.constData());
 	if (!moonFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonFragmentShader: " << moonFragmentShader.log(); }
-	
+
 	moonShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	moonShaderProgram->addShader(&moonVertexShader);
 	moonShaderProgram->addShader(&moonFragmentShader);
@@ -1230,6 +1325,10 @@ void Planet::deinitShader()
 {
 	delete planetShaderProgram;
 	planetShaderProgram = NULL;
+	delete ringPlanetShaderProgram;
+	ringPlanetShaderProgram = NULL;
+	delete moonShaderProgram;
+	moonShaderProgram = NULL;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
@@ -1706,4 +1805,9 @@ void Planet::update(int deltaTime)
 	hintFader.update(deltaTime);
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
+}
+
+void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
+{
+	vMagAlgorithm = vMagAlgorithmMap.key(algorithm.toLower(), Planet::UndefinedAlgorithm);
 }

@@ -20,8 +20,7 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
-#include "config.h"
-
+#include <cmath>
 #include "VecMath.hpp"
 
 #include <QVariantMap>
@@ -35,6 +34,8 @@
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
+
+#define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
@@ -85,9 +86,10 @@ namespace StelUtils
 
 	//! Convert an angle in radian to a decimal degree string.
 	//! @param angle input angle in radian
+	//! @param precision
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	//! @param useC Define if function should use 0-360 degrees
-	QString radToDecDegStr(const double angle, const bool useD=false, const bool useC=false);
+	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool useC=false);
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
@@ -152,7 +154,7 @@ namespace StelUtils
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
-	//! @param v the resulting 3D unti vector
+	//! @param v the resulting 3D unit vector
 	void spheToRect(const float lng, const float lat, Vec3f& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
@@ -173,10 +175,8 @@ namespace StelUtils
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
-	// GZ: some additions. I need those just for quick conversions for text display.
 	//! Coordinate Transformation from equatorial to ecliptical
 	void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
-	// GZ: done
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.
@@ -610,7 +610,7 @@ namespace StelUtils
 	//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
 	//! Values are stored in the global static array cos_sin_rho.
 	//! Used for the sin/cos values along a meridian.
-	//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+	//! This allows leaving away pole caps. The array now contains values for the region minAngle+segments*phi
 	//! @param dRho a difference angle between the stops
 	//! @param segments number of segments
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
@@ -618,6 +618,15 @@ namespace StelUtils
 
 	//! Uncompress gzip or zlib compressed data.
 	QByteArray uncompress(const QByteArray& data);
+
+#ifdef _MSC_BUILD
+    inline double trunc(double x)
+    {
+        return (x < 0 ? std::ceil(x) : std::floor(x));
+    }
+#else
+    inline double trunc(double x) { return ::trunc(x); }
+#endif
 }
 
 #endif // _STELUTILS_HPP_

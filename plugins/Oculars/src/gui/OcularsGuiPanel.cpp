@@ -17,7 +17,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "config.h"
 #include "Oculars.hpp"
 #include "OcularsGuiPanel.hpp"
 #include "StelApp.hpp"
@@ -513,7 +512,7 @@ void OcularsGuiPanel::updateOcularControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldOcularName->boundingRect().height() - prevOcularButton->boundingRect().height()) / 2.;
-	prevOcularButton->setPos(posX, round(posY + heightAdjustment));
+    prevOcularButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevOcularButton->boundingRect().width();
 	widgetWidth += prevOcularButton->boundingRect().width();
 
@@ -604,7 +603,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldLensName->boundingRect().height() - prevLensButton->boundingRect().height()) / 2.;
-	prevLensButton->setPos(posX, round(posY + heightAdjustment));
+    prevLensButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevLensButton->boundingRect().width();
 	widgetWidth += prevLensButton->boundingRect().width();
 
@@ -965,7 +964,7 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	{
 		qreal parentWidth = buttonOcular->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
-		spacing = round((parentWidth-width)/nGaps);
+        spacing = qRound((parentWidth-width)/nGaps);
 	}
 	buttonOcular->setPos(posX, posY);
 	posX += buttonOcular->getButtonPixmapWidth() + spacing;
