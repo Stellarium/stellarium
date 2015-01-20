@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-17 01:35+0600\n"
-"PO-Revision-Date: 2015-01-14 02:12+0000\n"
-"Last-Translator: Luciano Barea <lubareac@hotmail.com>\n"
+"PO-Revision-Date: 2015-01-18 10:48+0000\n"
+"Last-Translator: José A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-17 05:57+0000\n"
+"X-Launchpad-Export-Date: 2015-01-19 05:42+0000\n"
 "X-Generator: Launchpad (build 17304)\n"
 "Language: es_ES\n"
 
@@ -162,7 +162,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:615
 msgid "Celestial body:"
-msgstr "Cuerpo celeste"
+msgstr "Cuerpo celeste:"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
@@ -274,7 +274,7 @@ msgstr "Distancia: %1ua (%2 km)"
 #: src/core/modules/Comet.cpp:211
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr "Distancia: %1 UA (%2 Mio km)"
+msgstr "Distancia: %1ua (%2 M km)"
 
 #: src/core/modules/Planet.cpp:263
 #, qt-format
@@ -291,7 +291,7 @@ msgstr "Diámetro aparente: %1"
 #: src/core/modules/Comet.cpp:244
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr "Periodo sideral: %1 días (%2 a)"
+msgstr "Período sideral: %1 días (%2 a)"
 
 #: src/core/modules/Planet.cpp:284
 #, qt-format
@@ -305,7 +305,7 @@ msgstr "Día solar medio: %1"
 
 #: src/core/modules/Planet.cpp:289
 msgid "The period of rotation is chaotic"
-msgstr "El periodo de rotación es caótico"
+msgstr "El período de rotación es caótico"
 
 #: src/core/modules/Planet.cpp:295
 #, qt-format
@@ -340,7 +340,7 @@ msgstr "Distancia desde el sol: %1UA (%2 km)"
 #: src/core/modules/Comet.cpp:194
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Distancia desde el sol: %1UA (%2 Mio km)"
+msgstr "Distancia desde el sol: %1ua (%2 M km)"
 
 #: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
@@ -355,7 +355,7 @@ msgstr "Diámetro de coma (estimado): %1 km"
 #: src/core/modules/Comet.cpp:234
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr "Longitud de la cola de gas (estimada): %1 Mio km"
+msgstr "Longitud de la cola de gas (estimada): %1 M km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:167 src/translations.h:62
@@ -396,7 +396,7 @@ msgstr "estrella variable eruptiva"
 
 #: src/core/modules/StarWrapper.cpp:154
 msgid "pulsating variable star"
-msgstr "estrella pulsante variable"
+msgstr "estrella variable pulsante"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "rotating variable star"
@@ -5571,7 +5571,7 @@ msgstr "Multiplicidad: N/A"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 msgid "Focal length of eyepiece"
-msgstr "Longitud focal del ocular"
+msgstr "Longitud focal de ocular"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
 #, qt-format
@@ -6059,7 +6059,7 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"Las posiciones predichas sólo son buenas por un periodo bastante corto de "
+"Las posiciones predichas sólo son buenas por un período bastante corto de "
 "tiempo (del orden de días, semanas o tal vez un mes en el pasado y el "
 "futuro). Espere altas rarezas cuando se miren en fechas fuera de este rango."
 
@@ -8031,12 +8031,12 @@ msgstr "púlsar con interferencias"
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr "Periodo baricéntrico: %1 s."
+msgstr "Período baricéntrico: %1 s."
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr "Tiempo derivativo de periodo baricéntrico: %1"
+msgstr "Tiempo derivativo de período baricéntrico: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "Dispersion measure:"
@@ -8060,7 +8060,7 @@ msgstr "Tasa de perdida de energía de rotación: %1 ergios/s"
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr "Periodo binario de púlsar: %1 días"
+msgstr "Período binario de púlsar: %1 días"
 
 #: plugins/Pulsars/src/Pulsar.cpp:207
 #, qt-format
@@ -8324,7 +8324,7 @@ msgstr "Exoplaneta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
-msgstr "Periodo"
+msgstr "Período"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "days"
@@ -8965,6 +8965,24 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"Los días de salida/puesta Cósmica de un objeto son estimados a los días en "
+"que el objeto sale (u oculta) junto a la salida/puesta del Sol. Las fechas "
+"exactas de estas efemerides dependen de la ubucación del observador. Por el "
+"contrario, la salida (o puesta) Acrónica sucede cuando la estrella sale/pone "
+"con el ocaso/amanecer del Sol (i.e., opuesto al Sol). Por una parte, es "
+"obvio que la fuente es difícilmente observable (o no del todo observable) en "
+"las fechas entre la puesta Cósmica y salida Cósmica. Por otro lado, en torno "
+"a las fechas de salida y puesta Acrónica son aquellas cuando la altitud del "
+"cuerpo celeste suele ser alta cuando el Sol está muy por debajo del "
+"horizonte (por lo tanto el objeto puede ser observado bien). La fecha de la "
+"salida Helíaca es el primer día del año cuando una estrella comienza a ser "
+"visible. Sucede cuando la estrella es cercana al horizonte oriental "
+"aproximadamente antes del fin de la noche astronómica (i.e., al crepúsculo "
+"astronómico). En las siguientes noches, la estrella será visible durande "
+"mayores períodos de tiempo, hasta que alcance su puesta Helíaca (i.e., la "
+"última noche del año cuando la estrella aún es visible). En la puesta "
+"Helíaca, la estrella se oculta justo después del comienzo de la noche "
+"astronómica."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
