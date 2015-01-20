@@ -301,10 +301,12 @@ void SearchDialog::createDialogContent()
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);	
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->objectsListWidget;
 	installKineticScrolling(addscroll);
+#endif
 
 	populateCoordinateSystemsList();
 	populateCoordinateAxis();
@@ -364,6 +366,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
 	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateListTab()));
 	updateListTab();
 
 	// Set the focus directly on the line edit
@@ -722,7 +725,8 @@ void SearchDialog::updateListTab()
 	{
 		ui->searchInEnglishCheckBox->show();
 	}
-	ui->objectTypeComboBox->clear();
+	ui->objectTypeComboBox->blockSignals(true);
+	ui->objectTypeComboBox->clear();	
 	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
 	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
 	{
@@ -731,7 +735,9 @@ void SearchDialog::updateListTab()
 			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ? it.value(): q_(it.value()));
 			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
 		}
-	}
+	}	
+	ui->objectTypeComboBox->model()->sort(0, Qt::AscendingOrder);
+	ui->objectTypeComboBox->blockSignals(false);
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
 }
 

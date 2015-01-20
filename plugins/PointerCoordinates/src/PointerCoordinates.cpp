@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "SkyGui.hpp"
+#include "StelMainView.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -116,7 +117,7 @@ void PointerCoordinates::draw(StelCore *core)
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
-	QPoint p = QCursor::pos(); // get screen coordinates of mouse cursor
+	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 	Vec3d mousePosition;
 	float wh = prj->getViewportWidth()/2; // get half of width of the screen
 	float hh = prj->getViewportHeight()/2; // get half of height of the screen
@@ -124,27 +125,49 @@ void PointerCoordinates::draw(StelCore *core)
 	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
 	prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
+	{ // Nick Fedoseev patch
+	   Vec3d win;
+	   prj->project(mousePosition,win);
+	   float dx = prj->getViewportPosX()+wh+mx - win.v[0];
+	   float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
+	   prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
+	  }
+	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 
-	QString coordsText;
+	QString coordsSystem, cxt, cyt;
 	double cx, cy;
 	switch (getCurrentCoordinateSystem())
 	{
 		case RaDecJ2000:
 		{
 			StelUtils::rectToSphe(&cx,&cy,mousePosition); // Calculate RA/DE (J2000.0) and show it...
-			coordsText = QString("%1: %2/%3")
-					.arg(qc_("RA/Dec (J2000.0)", "abbreviated in the plugin"))
-					.arg(StelUtils::radToHmsStr(cx, true))
-					.arg(StelUtils::radToDmsStr(cy, true));
+			coordsSystem = qc_("RA/Dec (J2000.0)", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
+				cyt = StelUtils::radToDecDegStr(cy);
+			}
+			else
+			{
+				cxt = StelUtils::radToHmsStr(cx, true);
+				cyt = StelUtils::radToDmsStr(cy, true);
+			}
 			break;
 		}
 		case RaDec:
 		{
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition)); // Calculate RA/DE and show it...
-			coordsText = QString("%1: %2/%3")
-					.arg(qc_("RA/Dec", "abbreviated in the plugin"))
-					.arg(StelUtils::radToHmsStr(cx, true))
-					.arg(StelUtils::radToDmsStr(cy, true));
+			coordsSystem = qc_("RA/Dec", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
+				cyt = StelUtils::radToDecDegStr(cy);
+			}
+			else
+			{
+				cxt = StelUtils::radToHmsStr(cx, true);
+				cyt = StelUtils::radToDmsStr(cy, true);
+			}
 			break;
 		}
 		case AltAzi:
@@ -154,31 +177,71 @@ void PointerCoordinates::draw(StelCore *core)
 			if (cy > M_PI*2)
 				cy -= M_PI*2;
 
-			coordsText = QString("%1: %2/%3")
-					.arg(qc_("Az/Alt", "abbreviated in the plugin"))
-					.arg(StelUtils::radToDmsStr(cy))
-					.arg(StelUtils::radToDmsStr(cx));
+			coordsSystem = qc_("Az/Alt", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(cy);
+				cyt = StelUtils::radToDecDegStr(cx);
+			}
+			else
+			{
+				cxt = StelUtils::radToDmsStr(cy);
+				cyt = StelUtils::radToDmsStr(cx);
+			}
 			break;
 		}
 		case Galactic:
 		{
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToGalactic(mousePosition)); // Calculate galactic position and show it...
-			coordsText = QString("%1: %2/%3")
-					.arg(qc_("Gal. Long/Lat", "abbreviated in the plugin"))
-					.arg(StelUtils::radToDmsStr(cx, true))
-					.arg(StelUtils::radToDmsStr(cy, true));
+			coordsSystem = qc_("Gal. Long/Lat", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(cx);
+				cyt = StelUtils::radToDecDegStr(cy);
+			}
+			else
+			{
+				cxt = StelUtils::radToDmsStr(cx, true);
+				cyt = StelUtils::radToDmsStr(cy, true);
+			}
 			break;
 		}
 		case Ecliptic:
 		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition));
+			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDay()), &lambda, &beta); // Calculate ecliptic position and show it...
+			if (lambda<0) lambda+=2.0*M_PI;
+			coordsSystem = qc_("Ecl. Long/Lat", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(lambda);
+				cyt = StelUtils::radToDecDegStr(beta);
+			}
+			else
+			{
+				cxt = StelUtils::radToDmsStr(lambda, true);
+				cyt = StelUtils::radToDmsStr(beta, true);
+			}
+			break;
+		}
+		case EclipticJ2000:
+		{
+			double lambda, beta;
+			StelUtils::rectToSphe(&cx,&cy, mousePosition);
 			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
-			coordsText = QString("%1: %2/%3")
-					.arg(qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin"))
-					.arg(StelUtils::radToDmsStr(lambda, true))
-					.arg(StelUtils::radToDmsStr(beta, true));
+			coordsSystem = qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin");
+			if (withDecimalDegree)
+			{
+				cxt = StelUtils::radToDecDegStr(lambda);
+				cyt = StelUtils::radToDecDegStr(beta);
+			}
+			else
+			{
+				cxt = StelUtils::radToDmsStr(lambda, true);
+				cyt = StelUtils::radToDmsStr(beta, true);
+			}
 			break;
 		}
 		case HourAngle:
@@ -186,14 +249,14 @@ void PointerCoordinates::draw(StelCore *core)
 			Vec3d v = core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto);
 			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime()+((core->getDeltaT(core->getJDay())/240.)*M_PI/180.))*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
 			cx = 2.*M_PI-cx;
-			coordsText = QString("%1: %2/%3")
-					.arg(qc_("HA/Dec", "abbreviated in the plugin"))
-					.arg(StelUtils::radToHmsStr(cx))
-					.arg(StelUtils::radToDmsStr(cy));
+			coordsSystem = qc_("HA/Dec", "abbreviated in the plugin");
+			cxt = StelUtils::radToHmsStr(cx);
+			cyt = StelUtils::radToDmsStr(cy);
 			break;		
 		}
 	}
 
+	QString coordsText = QString("%1: %2/%3").arg(coordsSystem).arg(cxt).arg(cyt);
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
 }
 

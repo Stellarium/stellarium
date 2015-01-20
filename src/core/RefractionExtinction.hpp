@@ -45,7 +45,7 @@
 class Extinction
 {
 public:
-	//! Define the extinction strategy for rendering underground objects (usefull when ground is not rendered)
+	//! Define the extinction strategy for rendering underground objects (useful when ground is not rendered)
 	enum UndergroundExtinctionMode {
 		UndergroundExtinctionZero = 0,	//!< Zero extinction: stars visible in full brightness
 		UndergroundExtinctionMax = 1,   //!< Maximum extinction: coef 42, i.e practically invisible
@@ -176,10 +176,10 @@ private:
 	float pressure;
 	//! Temperature[Celsius deg] (10).
 	float temperature;
-	//! Numerator of refraction formula, to be cached for speed.
-	float press_temp_corr_Saemundson;
-	//! Numerator of refraction formula, to be cached for speed.
-	float press_temp_corr_Bennett;
+	////! Numerator of refraction formula, to be cached for speed.
+	//7float press_temp_corr_Saemundson;
+	//! Correction factor for refraction formula, to be cached for speed.
+	double press_temp_corr;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;

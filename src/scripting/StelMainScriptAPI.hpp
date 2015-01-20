@@ -80,6 +80,7 @@ public slots:
 	//! @note for fully compatibles behavior of this function with the version 0.11.4
 	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
+	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
 	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 
 	//! get the simulation date and time as a string in ISO format,
@@ -164,8 +165,20 @@ public slots:
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
-	//! - size : angular size in decimal degrees
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
 	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
 	QVariantMap getObjectInfo(const QString& name);
 
 	//! Fetch a map with data about an latest selected object's position, magnitude and so on
@@ -181,10 +194,22 @@ public slots:
 	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
-	//! - vmage : visual magnitude (extincted)
-	//! - size : angular size in decimal degrees
+	//! - vmage : visual magnitude (extincted)	
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
 	//! - name : english name
 	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
 	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
@@ -649,11 +674,42 @@ public slots:
 	//! @return value of Milky Way intensity, e.g. "1.2"
 	double getMilkyWayIntensity();
 
+	//! Show or hide the Zodiacal Light.
+	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
+	void setZodiacalLightVisible(bool b);
+
+	//! Set Zodiacal Light intensity.
+	//! @param i value of intensity for the Zodiacal Light
+	void setZodiacalLightIntensity(double i);
+
+	//! Get Zodiacal Light intensity.
+	//! @return value of Zodiacal Light intensity, e.g. "1.2"
+	double getZodiacalLightIntensity();
+
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
 	double jdFromDateString(const QString& dt, const QString& spec);
-	
+
+	// Methods wait() and waitFor() was added for documentation.
+	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
+
+	//! Pauses the script for \e t milliseconds
+	//! @param t the number of milliseconds to wait
+	//! @note This method is pure JavaScript implementation.
+	void wait(double t) { Q_UNUSED(t) }
+
+	//! Waits until a specified simulation date/time. This function
+	//! will take into account the rate (and direction) in which simulation
+	//! time is passing. e.g. if a future date is specified and the
+	//! time is moving backwards, the function will return immediately.
+	//! If the time rate is 0, the function will not wait.  This is to
+	//! prevent infinite wait time.
+	//! @param dt the date string to use
+	//! @param spec "local" or "utc"
+	//! @note This method is pure JavaScript implementation.
+	void waitFor(const QString& dt, const QString& spec="utc") { Q_UNUSED(dt); Q_UNUSED(spec) }
+
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
 							 double c1, double c2,

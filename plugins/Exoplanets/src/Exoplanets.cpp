@@ -16,7 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "config.h"
 
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
@@ -398,6 +397,9 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 QStringList Exoplanets::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!flagShowExoplanets)
+		return result;
+
 	if (inEnglish)
 	{
 		foreach (const ExoplanetP& planet, ep)
@@ -840,4 +842,35 @@ void Exoplanets::setMarkerColor(QString c, bool h)
 		Exoplanet::habitableExoplanetMarkerColor = nc;
 	else
 		Exoplanet::exoplanetMarkerColor = nc;
+}
+
+void Exoplanets::translations()
+{
+#if 0
+	// TRANSLATORS: Habitable zone
+	N_("Hot");
+	// TRANSLATORS: Habitable zone
+	N_("Warm");
+	// TRANSLATORS: Habitable zone
+	N_("Cold");
+
+	// TRANSLATORS: Planet size
+	N_("Miniterran");
+	// TRANSLATORS: Planet size
+	N_("Subterran");
+	// TRANSLATORS: Planet size
+	N_("Terran");
+	// TRANSLATORS: Planet size
+	N_("Superterran");
+	// TRANSLATORS: Planet size
+	N_("Jovian");
+	// TRANSLATORS: Planet size
+	N_("Neptunian");
+
+	/* For copy/paste:
+	// TRANSLATORS:
+	N_("");
+	*/
+
+#endif
 }

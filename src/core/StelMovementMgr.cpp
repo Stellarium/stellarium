@@ -36,7 +36,7 @@
 StelMovementMgr::StelMovementMgr(StelCore* acore)
 	: currentFov(60.)
 	, initFov(60.)
-	, minFov(0.0001)
+	, minFov(0.001389)
 	, maxFov(100.)
 	, initConstellationIntensity(0.45)
 	, core(acore)
@@ -102,7 +102,7 @@ void StelMovementMgr::init()
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
 
-	minFov = 0.0001;
+	minFov = 0.001389; // minimal FOV = 5"
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
@@ -321,8 +321,10 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 
 bool StelMovementMgr::handlePinch(qreal scale, bool started)
 {
+#ifdef Q_OS_WIN
 	if (flagEnableMouseNavigation == false)
 		return true;
+#endif
 
 	static double previousFov = 0;
 	if (started)
@@ -796,7 +798,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, float moveDuration, int zoom
 	move.aim=aim;
 	move.aim.normalize();
 	move.aim*=2.;
-	move.start=viewDirectionJ2000;
+	move.start=viewDirectionJ2000;	
 	move.start.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;

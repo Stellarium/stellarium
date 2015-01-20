@@ -517,11 +517,11 @@ void LandscapeOldStyle::draw(StelCore* core)
 		drawGround(core, painter);
 	drawFog(core, painter);
 
-	// GZ: ALSO HERE - Self-luminous layer (Light pollution etc). This looks striking!
-	if (lightScapeBrightness>0.0f && core->getSkyDrawer()->getFlagHasAtmosphere())
+	// Self-luminous layer (Light pollution etc). This looks striking!
+	if (lightScapeBrightness>0.0f && illumFader.getInterstate())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		drawDecor(core, painter, true); // GZ: NEW
+		drawDecor(core, painter, true);
 	}
 
 	// If a horizon line also has been defined, draw it.
@@ -545,6 +545,10 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 {
 	if (!fogFader.getInterstate())
 		return;
+	if(!landFader.getInterstate())
+		return;
+	if (!(core->getSkyDrawer()->getFlagHasAtmosphere()))
+		return;
 
 	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
@@ -555,9 +559,9 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
 	sPainter.setProjector(core->getProjection(transfo));
 	glBlendFunc(GL_ONE, GL_ONE);
-	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-			  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-			  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness));
+	sPainter.setColor(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+			  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+			  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
 	fogTex->bind();
 	const float height = (calibrated?
 				radius*(std::tan((fogAltAngle+fogAngleShift)*M_PI/180.)  - std::tan(fogAngleShift*M_PI/180.))
@@ -576,7 +580,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 	if (!landFader.getInterstate())
 		return;
 	if (drawLight)
-		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+		sPainter.setColor(illumFader.getInterstate()*lightScapeBrightness, illumFader.getInterstate()*lightScapeBrightness, illumFader.getInterstate()*lightScapeBrightness, landFader.getInterstate());
 	else
 		sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 
@@ -585,7 +589,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 		if (side.light==drawLight)
 		{
 			side.tex->bind();
-			sPainter.drawSphericalTriangles(side.arr, true, NULL, false);
+			sPainter.drawSphericalTriangles(side.arr, true, false, NULL, false);
 		}
 	}
 }
@@ -723,13 +727,31 @@ void LandscapePolygonal::draw(StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
+	//#ifdef GL_POLYGON_SMOOTH
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. Anyway, Polygon smoothing makes the triangles visible. May be Interesting for debugging only.
+	//if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+	//	glEnable(GL_POLYGON_SMOOTH);
+	//#endif
 	sPainter.setColor(landscapeBrightness*groundColor[0], landscapeBrightness*groundColor[1], landscapeBrightness*groundColor[2], landFader.getInterstate());
 	sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
+	//#ifdef GL_POLYGON_SMOOTH
+	//if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+	//	glDisable(GL_POLYGON_SMOOTH);
+	//#endif
 
 	if (horizonPolygonLineColor[0] >= 0)
 	{
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glEnable(GL_LINE_SMOOTH);
+		#endif
 		sPainter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glDisable(GL_LINE_SMOOTH);
+		#endif
 	}
 	glDisable(GL_CULL_FACE);
 }
@@ -815,21 +837,23 @@ void LandscapeFisheye::draw(StelCore* core)
 	mapTex->bind();
 	sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	// NEW since 0.13: Fog also for fisheye...
-	if (mapTexFog)
+	if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 	{
 		//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
-		sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-				  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-				  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), fogFader.getInterstate());
+		sPainter.setColor(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
 		mapTexFog->bind();
 		sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	}
 
-	if (mapTexIllum && lightScapeBrightness>0.0f && core->getSkyDrawer()->getFlagHasAtmosphere())
+	if (mapTexIllum && lightScapeBrightness>0.0f && illumFader.getInterstate())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+		sPainter.setColor(illumFader.getInterstate()*lightScapeBrightness,
+				  illumFader.getInterstate()*lightScapeBrightness,
+				  illumFader.getInterstate()*lightScapeBrightness, landFader.getInterstate());
 		mapTexIllum->bind();
 		sPainter.sSphereMap(radius, cols, rows, texFov, 1);
 	}
@@ -971,22 +995,23 @@ void LandscapeSpherical::draw(StelCore* core)
 	// seam is at East, except if angleRotateZ has been given.
 	sPainter.sSphere(radius, 1.0, cols, rows, 1, true, mapTexTop, mapTexBottom);
 	// Since 0.13: Fog also for sphericals...
-	if (mapTexFog)
+	if ((mapTexFog) && (core->getSkyDrawer()->getFlagHasAtmosphere()))
 	{
-		//glBlendFunc(GL_ONE, GL_ONE); // GZ: blending mode as found in the old_style landscapes...
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
-		sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-						  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-						  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), fogFader.getInterstate());
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+		sPainter.setColor(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
 		mapTexFog->bind();
 		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom)), 1, true, fogTexTop, fogTexBottom);
 	}
 
 	// Self-luminous layer (Light pollution etc). This looks striking!
-	if (mapTexIllum && lightScapeBrightness>0.0f && core->getSkyDrawer()->getFlagHasAtmosphere())
+	if (mapTexIllum && (lightScapeBrightness>0.0f) && illumFader.getInterstate())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+		sPainter.setColor(lightScapeBrightness*illumFader.getInterstate(),
+				  lightScapeBrightness*illumFader.getInterstate(),
+				  lightScapeBrightness*illumFader.getInterstate(), landFader.getInterstate());
 		mapTexIllum->bind();
 		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom)), 1, true, illumTexTop, illumTexBottom);
 	}	

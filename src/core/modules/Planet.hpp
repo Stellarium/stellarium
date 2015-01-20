@@ -76,6 +76,7 @@ public:
 	friend class SolarSystem;
 
 	Q_ENUMS(PlanetType)
+	Q_ENUMS(ApparentMagnitudeAlgorithm)
 	//! numeric typecodes for the type descriptions in ssystem.ini
 	// GZ: Until 0.13 QStrings were used for types.
 	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
@@ -86,9 +87,21 @@ public:
 		isPlanet,                 // ssystem.ini: type="planet"
 		isMoon,                   // ssystem.ini: type="moon"
 		isAsteroid,               // ssystem.ini: type="asteroid"
-		isPlutoid,                // ssystem.ini: type="plutoid"
+		isPlutino,                // ssystem.ini: type="plutino"
 		isComet,                  // ssystem.ini: type="comet"
+		isDwarfPlanet,		  // ssystem.ini: type="dwarf planet"
+		isCubewano,		  // ssystem.ini: type="cubewano"
+		isSDO,			  // ssystem.ini: type="sdo"
+		isOCO,			  // ssystem.ini: type="oco"
 		isUNDEFINED               // ssystem.ini: type=<anything else>
+	};
+
+	enum ApparentMagnitudeAlgorithm
+	{
+		Planesas,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+		Mueller,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Harris,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		UndefinedAlgorithm
 	};
 
 	Planet(const QString& englishName,
@@ -138,8 +151,8 @@ public:
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
-	virtual QString getEnglishName(void) const {return englishName;}
-	virtual QString getNameI18n(void) const {return nameI18;}
+	virtual QString getEnglishName(void) const;
+	virtual QString getNameI18n(void) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
@@ -170,6 +183,12 @@ public:
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
 	PlanetType getPlanetType() const {return pType;}
 
+	void setNativeName(QString planet) { nativeName = planet; }
+
+	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
+	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
+	void setApparentMagnitudeAlgorithm(QString algorithm);
+
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
@@ -179,7 +198,8 @@ public:
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double dateJD);
-	virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
+	//virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
+	void computePosition(const double dateJD);// GZ: gets overridden in Comet!
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
@@ -224,14 +244,22 @@ public:
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
-	// update displayed elements. @param deltaTime: ms (?)
-	void update(int deltaTime);
+	// update displayed elements. @param deltaTime: ms (since last call)
+	virtual void update(int deltaTime);
 
 	void setFlagHints(bool b){hintFader = b;}
 	bool getFlagHints(void) const {return hintFader;}
 
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
+
+	bool flagNativeName;
+	void setFlagNativeName(bool b) { flagNativeName = b; }
+	bool getFlagNativeName(void) { return flagNativeName; }
+
+	bool flagTranslatedName;
+	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
+	bool getFlagTranslatedName(void) { return flagTranslatedName; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
@@ -278,7 +306,8 @@ protected:
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
-	QString texMapName;              // Texture file path	
+	QString nativeName;              // Can be used in a skyculture
+	QString texMapName;              // Texture file path
 	QString normalMapName;              // Texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
@@ -313,13 +342,15 @@ protected:
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
-	bool halo;                       // Does the planet have a halo?
-	// QString pTypeStr;			 // Type of body, old version just had a string here.
-	PlanetType pType;                // GZ this is now a proper type...
+	bool halo;                       // Does the planet have a halo?	
+	PlanetType pType;                // Type of body
+
+	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex;
-	static QMap<PlanetType, QString> pTypeMap; // GZ: maps fast type to english name.
+	static StelTextureSP hintCircleTex;	
+	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
+	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	
 	// Shader-related variables
 	struct PlanetShaderVars {
@@ -363,7 +394,6 @@ protected:
 	
 	static void initShader();
 	static void deinitShader();
-
 };
 
 #endif // _PLANET_HPP_

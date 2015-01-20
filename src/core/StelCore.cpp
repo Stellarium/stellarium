@@ -111,13 +111,20 @@ void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	defaultLocationID = conf->value("init_location/location", "auto").toString();
+	if (conf->childGroups().contains("location_run_once"))
+		defaultLocationID = "stellarium_cli";
+	else
+		defaultLocationID = conf->value("init_location/location", "auto").toString();
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
-	StelLocation location;
+	StelLocation location=locationMgr->getLastResortLocation(); // first location: Paris. Required if no IP connection on first launch!
 	if (defaultLocationID == "auto")
 	{
 		locationMgr->locationFromIP();
+	}
+	else if (defaultLocationID == "stellarium_cli")
+	{
+		location = locationMgr->locationFromCLI();
 	}
 	else
 	{
@@ -562,7 +569,7 @@ void StelCore::lookAtJ2000(const Vec3d& pos, const Vec3d& aup)
 
 Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return matAltAzToEquinoxEqu*v;
 	Vec3d r(v);
 	skyDrawer->getRefraction().backward(r);
@@ -572,7 +579,7 @@ Vec3d StelCore::altAzToEquinoxEqu(const Vec3d& v, RefractionMode refMode) const
 
 Vec3d StelCore::equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return matEquinoxEquToAltAz*v;
 	Vec3d r(v);
 	r.transfo4d(matEquinoxEquToAltAz);
@@ -582,7 +589,7 @@ Vec3d StelCore::equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode) const
 
 Vec3d StelCore::altAzToJ2000(const Vec3d& v, RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return matEquinoxEquToJ2000*matAltAzToEquinoxEqu*v;
 	Vec3d r(v);
 	skyDrawer->getRefraction().backward(r);
@@ -592,7 +599,7 @@ Vec3d StelCore::altAzToJ2000(const Vec3d& v, RefractionMode refMode) const
 
 Vec3d StelCore::j2000ToAltAz(const Vec3d& v, RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return matJ2000ToAltAz*v;
 	Vec3d r(v);
 	r.transfo4d(matJ2000ToAltAz);
@@ -623,7 +630,7 @@ Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
 //! Transform vector from heliocentric ecliptic coordinate to altazimuthal
 Vec3d StelCore::heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return matHeliocentricEclipticToAltAz*v;
 	Vec3d r(v);
 	r.transfo4d(matHeliocentricEclipticToAltAz);
@@ -646,7 +653,7 @@ Vec3d StelCore::heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const
 
 StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTransform(RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticToAltAz));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
@@ -658,7 +665,7 @@ StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTran
 //! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
 StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticModelViewTransform(RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
@@ -670,7 +677,7 @@ StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticModelViewT
 //! Get the modelview matrix for observer-centric equatorial at equinox drawing
 StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
@@ -682,7 +689,7 @@ StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(Refr
 //! Get the modelview matrix for observer-centric altazimuthal drawing
 StelProjector::ModelViewTranformP StelCore::getAltAzModelViewTransform(RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 	{
 		// Catch problem with improperly initialized matAltAzModelView
 		Q_ASSERT(matAltAzModelView[0]==matAltAzModelView[0]);
@@ -697,7 +704,7 @@ StelProjector::ModelViewTranformP StelCore::getAltAzModelViewTransform(Refractio
 //! Get the modelview matrix for observer-centric J2000 equatorial drawing
 StelProjector::ModelViewTranformP StelCore::getJ2000ModelViewTransform(RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
@@ -709,7 +716,7 @@ StelProjector::ModelViewTranformP StelCore::getJ2000ModelViewTransform(Refractio
 //! Get the modelview matrix for observer-centric Galactic equatorial drawing
 StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(RefractionMode refMode) const
 {
-	if (refMode==RefractionOff || skyDrawer==false || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz*matJ2000ToEquinoxEqu*matGalacticToJ2000));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
@@ -773,16 +780,25 @@ void StelCore::returnToHome()
 	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
 	// between planets using SpaceShip and second method give does not exist data
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
-	StelLocation loc = locationMgr.locationForString(defaultLocationID);
+	StelLocation loc;
+	if (defaultLocationID == "auto")
+	{
+		locationMgr.locationFromIP();
+		loc = locationMgr.getLastResortLocation();
+	}
+	else
+		loc = locationMgr.locationForString(defaultLocationID);
+
 	if (loc.isValid())
 		moveObserverTo(loc, 0.);
 
 	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
+	QSettings* conf = StelApp::getInstance().getSettings();
 
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
-	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
-	landscapeMgr->setFlagFog(p->hasAtmosphere());
+	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+	landscapeMgr->setFlagFog(p->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 

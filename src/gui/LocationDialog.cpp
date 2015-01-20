@@ -87,10 +87,12 @@ void LocationDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->citiesListView;
 	installKineticScrolling(addscroll);
+#endif
 
 	populatePlanetList();
 	populateCountryList();
@@ -282,6 +284,7 @@ void LocationDialog::populatePlanetList()
 	QComboBox* planets = ui->planetNameComboBox;
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	QStringList planetNames(ssystem->getAllPlanetEnglishNames());
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 
 	//Save the current selection to be restored later
 	planets->blockSignals(true);
@@ -292,7 +295,7 @@ void LocationDialog::populatePlanetList()
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	foreach(const QString& name, planetNames)
 	{
-		planets->addItem(q_(name), name);
+		planets->addItem(trans.qtranslate(name), name);
 	}
 	//Restore the selection
 	index = planets->findData(selectedPlanetId, Qt::UserRole, Qt::MatchCaseSensitive);
