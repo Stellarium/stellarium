@@ -60,6 +60,7 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
 	Q_PROPERTY(float torchStrength READ getTorchStrength WRITE setTorchStrength NOTIFY torchStrengthChanged)
+	Q_PROPERTY(float torchRange READ getTorchRange WRITE setTorchRange NOTIFY torchRangeChanged)
 	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
 
 public:
@@ -88,6 +89,7 @@ signals:
     void enableLocationInfoChanged(const bool val);
     void enableTorchLightChanged(const bool val);
     void torchStrengthChanged(const float val);
+    void torchRangeChanged(const float val);
     void isGeometryShaderSupportedChanged(const bool val);
 
     void currentSceneChanged(const SceneInfo& sceneInfo);
@@ -141,9 +143,13 @@ public slots:
     void setEnableTorchLight(const bool enableTorchLight);
     bool getEnableTorchLight() const;
 
-    //! Sets the strength of the additional ambient illumination that can be toggled when pressing a button.
+    //! Sets the strength of the additional illumination that can be toggled when pressing a button.
     void setTorchStrength(const float torchStrength);
     float getTorchStrength() const;
+
+    //! Sets the range of the torchlight.
+    void setTorchRange(const float torchRange);
+    float getTorchRange() const;
 
     bool getIsGeometryShaderSupported() const;
 

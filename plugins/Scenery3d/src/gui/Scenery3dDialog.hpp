@@ -24,6 +24,7 @@ private slots:
 	void on_comboBoxShadowFiltering_currentIndexChanged(int index);
 	void on_comboBoxCubemapMode_currentIndexChanged(int index);
 	void on_sliderTorchStrength_valueChanged(int value);
+	void on_sliderTorchRange_valueChanged(int value);
 	void on_checkBoxDefaultScene_stateChanged(int value);
 	void scenery3dChanged(QListWidgetItem* item);
 

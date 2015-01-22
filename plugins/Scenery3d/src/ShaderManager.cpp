@@ -63,10 +63,12 @@ ShaderMgr::ShaderMgr()
 		//pre-modulated lighting (light * material)
 		uniformStrings["u_vMixAmbient"] = UNIFORM_MIX_AMBIENT;
 		uniformStrings["u_vMixDiffuse"] = UNIFORM_MIX_DIFFUSE;
+		uniformStrings["u_vMixTorchDiffuse"] = UNIFORM_MIX_TORCHDIFFUSE;
 		uniformStrings["u_vMixEmissive"] = UNIFORM_MIX_EMISSIVE;
 
 		//light
 		uniformStrings["u_vLightDirectionView"] = UNIFORM_LIGHT_DIRECTION_VIEW;
+		uniformStrings["u_fTorchAttenuation"] = UNIFORM_TORCH_ATTENUATION;
 
 		//others
 		uniformStrings["u_vSquaredSplits"] = UNIFORM_VEC_SQUAREDSPLITS;
@@ -89,6 +91,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["GEOMETRY_SHADER"] = GEOMETRY_SHADER;
 		featureFlagsStrings["CUBEMAP"] = CUBEMAP;
 		featureFlagsStrings["BLENDING"] = BLENDING;
+		featureFlagsStrings["TORCH"] = TORCH;
 	}
 }
 
