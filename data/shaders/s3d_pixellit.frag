@@ -241,6 +241,7 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 	
 #if SHADOWS
 	float shd = getShadow();
+	Idiff *= shd;
 #endif
 	
 #if TORCH
