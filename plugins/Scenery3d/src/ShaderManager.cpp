@@ -56,20 +56,17 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_texShadow3"] = UNIFORM_TEX_SHADOW3;
 
 		//materials
-		uniformStrings["u_vMatAmbient"] = UNIFORM_MTL_AMBIENT;
-		uniformStrings["u_vMatDiffuse"] = UNIFORM_MTL_DIFFUSE;
 		uniformStrings["u_vMatSpecular"] = UNIFORM_MTL_SPECULAR;
 		uniformStrings["u_vMatShininess"] = UNIFORM_MTL_SHININESS;
 		uniformStrings["u_vMatAlpha"] = UNIFORM_MTL_ALPHA;
 
-		//pre-modulated lighting
+		//pre-modulated lighting (light * material)
+		uniformStrings["u_vMixAmbient"] = UNIFORM_MIX_AMBIENT;
+		uniformStrings["u_vMixDiffuse"] = UNIFORM_MIX_DIFFUSE;
 		uniformStrings["u_vMixEmissive"] = UNIFORM_MIX_EMISSIVE;
 
 		//light
-		uniformStrings["u_vLightDirection"] = UNIFORM_LIGHT_DIRECTION;
 		uniformStrings["u_vLightDirectionView"] = UNIFORM_LIGHT_DIRECTION_VIEW;
-		uniformStrings["u_vLightAmbient"] = UNIFORM_LIGHT_AMBIENT;
-		uniformStrings["u_vLightDiffuse"] = UNIFORM_LIGHT_DIFFUSE;
 
 		//others
 		uniformStrings["u_vSquaredSplits"] = UNIFORM_VEC_SQUAREDSPLITS;
@@ -86,7 +83,6 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["ALPHATEST"] = ALPHATEST;
 		featureFlagsStrings["SHADOW_FILTER"] = SHADOW_FILTER;
 		featureFlagsStrings["SHADOW_FILTER_HQ"] = SHADOW_FILTER_HQ;
-		featureFlagsStrings["MAT_AMBIENT"] = MAT_AMBIENT;
 		featureFlagsStrings["MAT_SPECULAR"] = MAT_SPECULAR;
 		featureFlagsStrings["MAT_DIFFUSETEX"] = MAT_DIFFUSETEX;
 		featureFlagsStrings["MAT_EMISSIVETEX"] = MAT_EMISSIVETEX;
