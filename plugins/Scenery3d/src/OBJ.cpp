@@ -1056,7 +1056,6 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 		       &pMaterial->ambient[0],
 		       &pMaterial->ambient[1],
 		       &pMaterial->ambient[2]);
-		pMaterial->ambient[3] = 1.0f;
 		break;
 
 	    case 'd': //! Kd
@@ -1064,7 +1063,6 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 		       &pMaterial->diffuse[0],
 		       &pMaterial->diffuse[1],
 		       &pMaterial->diffuse[2]);
-		pMaterial->diffuse[3] = 1.0f;
 		break;
 
 	    case 's': //! Ks
@@ -1072,7 +1070,6 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 		       &pMaterial->specular[0],
 		       &pMaterial->specular[1],
 		       &pMaterial->specular[2]);
-		pMaterial->specular[3] = 1.0f;
 		break;
 
 	    case 'e': //! Ke
@@ -1080,7 +1077,6 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 		       &pMaterial->emission[0],
 		       &pMaterial->emission[1],
 		       &pMaterial->emission[2]);
-		pMaterial->emission[3] = 1.0f;
 		break;
 
 	    default:
@@ -1128,6 +1124,15 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 		std::string tex;
 		parseTextureString(buffer, tex);
 		pMaterial->textureName = QString::fromStdString(tex);
+	    }
+	    else if (strstr(buffer, "map_Ke") != 0)
+	    {
+		fgets(buffer, sizeof(buffer), pFile);
+		sscanf("%[^\n]", buffer);
+
+		std::string tex;
+		parseTextureString(buffer, tex);
+		pMaterial->emissiveMapName = QString::fromStdString(tex);
 	    }
 	    else if (strstr(buffer, "map_bump") != 0)
 	    {
@@ -1221,6 +1226,19 @@ void OBJ::uploadTexturesGL()
 	    }
 	}
 
+	if(!pMaterial->emissiveMapName.isEmpty())
+	{
+		StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->emissiveMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
+		if(!tex.isNull())
+		{
+		    pMaterial->emissive_texture = tex;
+		}
+		else
+		{
+		    qWarning() << getTime() << "[Scenery3d] Failed to load emissive texture:" << pMaterial->emissiveMapName;
+		}
+	}
+
 	//qDebug() << getTime() << "[Scenery3d] Normal Map:" << pMaterial->bumpMapName;
 	if(!pMaterial->bumpMapName.isEmpty())
 	{
@@ -1248,6 +1266,7 @@ void OBJ::uploadTexturesGL()
 		qWarning() << getTime() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName;
 	    }
 	}
+
     }
 
     qDebug()<<"[Scenery3d] Uploaded OBJ textures to GL";

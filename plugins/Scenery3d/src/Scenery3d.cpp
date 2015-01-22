@@ -596,14 +596,14 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		    squaredSplits.v[i] = frustumArray.at(i).zFar * frustumArray.at(i).zFar;
 
 		    //Bind current depth map texture
-		    glActiveTexture(GL_TEXTURE3+i);
+		    glActiveTexture(GL_TEXTURE4+i);
 		    glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
 		    //Compute texture matrix
 		    QMatrix4x4 texMat = shadowCPM.at(i);
 
 		    //Send to shader
-		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 3+i);
+		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 4+i);
 		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_MAT_SHADOW0+i),texMat);
 		}
 
@@ -653,10 +653,13 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 
 void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::Material &mat)
 {
-	//send off material parameters without further changes for now
-	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_AMBIENT),1,mat.ambient);
-	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_DIFFUSE),1,mat.diffuse);
-	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_SPECULAR),1,mat.specular);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_AMBIENT,mat.ambient);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_DIFFUSE,mat.diffuse);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SPECULAR,mat.specular);
+
+	//precalcuate emissive info
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_EMISSIVE, mat.emission * lightInfo.emissive);
+
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.shininess);
 	//force alpha to 1 here for non-translucent mats (fixes incorrect blending in cubemap)
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA, mat.illum == OBJ::TRANSLUCENT? mat.alpha : 1.0f);
@@ -666,15 +669,20 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 		mat.texture->bind(0); //this already sets glActiveTexture(0)
 		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
 	}
+	if(mat.emissive_texture)
+	{
+		mat.emissive_texture->bind(1);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_EMISSIVE,1);
+	}
 	if(shaderParameters.bump && mat.bump_texture)
 	{
-		mat.bump_texture->bind(1);
-		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_BUMP,1);
+		mat.bump_texture->bind(2);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_BUMP,2);
 	}
 	if(shaderParameters.bump && mat.height_texture)
 	{
-		mat.bump_texture->bind(2);
-		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_HEIGHT,2);
+		mat.height_texture->bind(3);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_HEIGHT,3);
 	}
 }
 
@@ -1155,27 +1163,31 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 void Scenery3d::calculateLighting()
 {
 	//calculate which light source we need + intensity
-	float ambientBrightness, directionalBrightness; // was: lightBrightness;
+	float ambientBrightness, directionalBrightness,emissiveFactor;
 	Vec3f lightsourcePosition; //should be normalized already
-	lightInfo.lightSource = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
+	lightInfo.lightSource = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition, emissiveFactor);
 	lightInfo.lightDirectionWorld = QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]);
 
 	//if the night vision mode is on, use red-tinted lighting
 	bool red=StelApp::getInstance().getVisionModeNight();
 
-	//for now, lighting is only white
-	lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
-	lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
-
 	if(red)
 	{
 		lightInfo.ambient     = QVector3D(ambientBrightness,0,0);
 		lightInfo.directional = QVector3D(directionalBrightness,0,0);
+		lightInfo.emissive = QVector3D(emissiveFactor,0,0);
+	}
+	else
+	{
+		//for now, lighting is only white
+		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
+		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
+		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
 	}
 
 }
 
-Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition)
+Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition, float &emissiveFactor)
 {
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
@@ -1220,6 +1232,15 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     //GZ: this should not matter here, just to make OpenGL happy.
     lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
     directionalSourceString="(Sun, below horiz.)";
+
+    //calculate emissive factor
+    //uses the same model as LandscapeMgr::update uses for the sun, but inverse
+    //could be tweaked so that the factor is even lower when sun is high
+    float sunAngleLandscape = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+    if(sunAngleLandscape > -0.1/1.5 )
+	    emissiveFactor = 1.0 - 1.5*(sunAngleLandscape+0.1/1.5);
+    else
+	    emissiveFactor = 1.0;
 
     if(sinSunAngle > -0.3f) // sun above -18 deg?
     {
@@ -1300,7 +1321,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 		 .arg(shadowCasterName).arg(lightsourcePosition.v[0], 6, 'f', 4)
 		 .arg(lightsourcePosition.v[1], 6, 'f', 4).arg(lightsourcePosition.v[2], 6, 'f', 4);
     lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(sunAmbientString).arg(moonAmbientString).arg(backgroundAmbientString);
-    lightMessage3=QString("               Directional %1 by: %2 ").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString);
+    lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString).arg(emissiveFactor);
 
     return shadowcaster;
 }
@@ -2036,12 +2057,16 @@ bool Scenery3d::initShadowmapping()
 		frustumArray.resize(frustumSplits);
 		focusBodies.resize(frustumSplits);
 
-		//Query how many texture units we have at disposal
-		GLint maxTex, maxComb;
-		glGetIntegerv(GL_MAX_TEXTURE_COORDS, &maxTex);
-		glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxComb);
+		//Query how many texture units we have at disposal in a fragment shader
+		//we currently need 8 in the worst case: diffuse, emissive, bump, height + 4x shadowmap
+		GLint texUnits;
+		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texUnits);
 
-		qDebug() << "Available texture units:" << std::max(maxTex, maxComb);
+		qDebug() << "Available texture units:" << texUnits;
+		if(texUnits < 8)
+		{
+			qWarning()<<"Insufficient texture units available for all effects";
+		}
 
 		//For shadowmapping, we use create 1 SM FBO for each frustum split - this seems to be the optimal solution on modern GPUs,
 		//see http://www.reddit.com/r/opengl/comments/1rsnhy/most_efficient_fbo_usage_in_multipass_pipeline/
@@ -2056,8 +2081,8 @@ bool Scenery3d::initShadowmapping()
 			//Bind the FBO
 			glBindFramebuffer(GL_FRAMEBUFFER, shadowFBOs.at(i));
 
-			//Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 3
-			glActiveTexture(GL_TEXTURE3+i);
+			//Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 4
+			glActiveTexture(GL_TEXTURE4+i);
 
 			//Bind the depth map and setup parameters
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
