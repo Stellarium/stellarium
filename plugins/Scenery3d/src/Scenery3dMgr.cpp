@@ -690,6 +690,20 @@ void Scenery3dMgr::setTorchStrength(const float torchStrength)
 	scenery3d->setTorchBrightness(torchStrength);
 
 	conf->setValue(S3D_CONFIG_PREFIX + "/torch_brightness",torchStrength);
+
+	emit torchStrengthChanged(torchStrength);
+}
+
+float Scenery3dMgr::getTorchRange() const
+{
+	return scenery3d->getTorchRange();
+}
+
+void Scenery3dMgr::setTorchRange(const float torchRange)
+{
+	scenery3d->setTorchRange(torchRange);
+
+	emit torchRangeChanged(torchRange);
 }
 
 bool Scenery3dMgr::getIsGeometryShaderSupported() const

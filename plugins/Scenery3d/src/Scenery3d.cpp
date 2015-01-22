@@ -99,8 +99,10 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.bump = false;
 	shaderParameters.shadowFilterQuality = S3DEnum::LOW;
 	shaderParameters.geometryShader = false;
+	shaderParameters.torchLight = false;
 
-    torchEnabled = false;
+	torchRange = 5.0f;
+
     textEnabled = false;
     debugEnabled = false;
     lightCamEnabled = false;
@@ -577,6 +579,9 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 	//set alpha test threshold (this is scene-global for now)
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
 
+	//torch attenuation factor
+	SET_UNIFORM(shader, ShaderMgr::UNIFORM_TORCH_ATTENUATION, lightInfo.torchAttenuation);
+
 	//-- Shadowing setup -- this was previously in generateCubeMap_drawSceneWithShadows
 	//first check if shader supports shadows
 	GLint loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_SQUAREDSPLITS);
@@ -662,6 +667,7 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 	}
 
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_DIFFUSE, mat.diffuse * lightInfo.directional);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_TORCHDIFFUSE, mat.diffuse * lightInfo.torchDiffuse);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_EMISSIVE,mat.emission * lightInfo.emissive);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SPECULAR,mat.specular); //light has no specular color in our model
 
@@ -1176,11 +1182,16 @@ void Scenery3d::calculateLighting()
 	//if the night vision mode is on, use red-tinted lighting
 	bool red=StelApp::getInstance().getVisionModeNight();
 
+	float torchDiff = shaderParameters.torchLight ? torchBrightness : 0.0f;
+	lightInfo.torchAttenuation = 1.0f / (torchRange * torchRange);
+
 	if(red)
 	{
 		lightInfo.ambient     = QVector3D(ambientBrightness,0,0);
 		lightInfo.directional = QVector3D(directionalBrightness,0,0);
 		lightInfo.emissive = QVector3D(emissiveFactor,0,0);
+
+		lightInfo.torchDiffuse = QVector3D(torchDiff,0,0);
 	}
 	else
 	{
@@ -1188,6 +1199,8 @@ void Scenery3d::calculateLighting()
 		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
 		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
 		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
+
+		lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
 	}
 
 }
@@ -1225,7 +1238,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     float sinSunAngle  = sunPosition[2];
     float sinMoonAngle = moonPosition[2];
     float sinVenusAngle = venusPosition[2];
-    ambientBrightness=MINIMUM_AMBIENT+(torchEnabled? torchBrightness : 0);
+    ambientBrightness=MINIMUM_AMBIENT;
     directionalBrightness=0.0f;
     ShadowCaster shadowcaster = None;
     // DEBUG AIDS: Helper strings to be displayed
@@ -1303,13 +1316,6 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	} else directionalSourceString="(Venus, flooded by ambient)";
 	//Alternately, construct a term around Venus brightness, like
 	// directionalBrightness=(mag/-100)
-    }
-
-    // correct light mixture. Directional is good to increase for sunrise/sunset shadow casting.
-    if (shadowcaster)
-    {
-	ambientBrightness-=(torchEnabled? torchBrightness*0.8 : 0);
-	directionalBrightness+=(torchEnabled? torchBrightness*0.8 : 0);
     }
 
     // DEBUG: Prepare output message
@@ -1580,6 +1586,7 @@ void Scenery3d::drawDebug()
     painter.drawText(20, 160, lightMessage);
     painter.drawText(20, 145, lightMessage2);
     painter.drawText(20, 130, lightMessage3);
+    painter.drawText(20, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
     // PRINT OTHER MESSAGES HERE:
 
     float screen_x = altAzProjector->getViewportWidth()  - 500.0f;

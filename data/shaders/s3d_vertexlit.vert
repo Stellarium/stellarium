@@ -25,6 +25,7 @@ This is a shader for basic vertex lighting. This should be the minimum quality s
 
 #define MAT_SPECULAR 1
 #define GEOMETRY_SHADER 1
+#define TORCH 1
 
 //matrices
 #if ! GEOMETRY_SHADER
@@ -42,6 +43,11 @@ uniform mediump vec3 u_vMixDiffuse; // light diffuse * mat diffuse
 #if MAT_SPECULAR
 uniform mediump vec3 u_vMatSpecular;
 uniform mediump float u_vMatShininess;
+#endif
+
+#if TORCH
+uniform mediump vec3 u_vMixTorchDiffuse;
+uniform mediump float u_fTorchAttenuation;
 #endif
 
 attribute vec4 a_vertex;
@@ -70,8 +76,20 @@ void calcLighting(vec3 normal, vec3 viewPos, out vec3 texIll, out vec3 specIll)
 	float NdotL = dot(normal, u_vLightDirectionView);
 	vec3 Idiff = u_vMixDiffuse * max(0.0,NdotL);
 	
-#if MAT_SPECULAR
+#if MAT_SPECULAR || TORCH
 	vec3 eye = normalize(-viewPos);
+#endif
+
+#if TORCH
+	//calculate additional diffuse, modeled by a point light centered on the cam pos
+	float camDistSq = dot(viewPos,viewPos);
+	float att = max(0.0, 1.0 - camDistSq * u_fTorchAttenuation);
+	att *= att;
+	
+	Idiff += att * u_vMixTorchDiffuse * max(0.0, dot(normal,eye));
+#endif
+
+#if MAT_SPECULAR
 	
 	specIll = vec3(0,0,0);
 	if(NdotL>0.0)

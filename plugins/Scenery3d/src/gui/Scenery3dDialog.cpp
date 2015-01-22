@@ -60,6 +60,7 @@ void Scenery3dDialog::createDialogContent()
 	connect(ui->comboBoxShadowFiltering, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged);
 
 	connect(ui->sliderTorchStrength, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchStrength_valueChanged);
+	connect(ui->sliderTorchRange, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
 	connect(ui->checkBoxDefaultScene, &QCheckBox::stateChanged, this, &Scenery3dDialog::on_checkBoxDefaultScene_stateChanged);
 
 	//connect Scenery3d update events
@@ -69,6 +70,7 @@ void Scenery3dDialog::createDialogContent()
 	connect(mgr, &Scenery3dMgr::cubemappingModeChanged, this, &Scenery3dDialog::updateFromManager);
 	connect(mgr, SIGNAL(isGeometryShaderSupportedChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, &Scenery3dMgr::torchStrengthChanged, this, &Scenery3dDialog::updateFromManager);
+	connect(mgr, &Scenery3dMgr::torchRangeChanged, this, &Scenery3dDialog::updateFromManager);
 
 	//this is the modern type-safe way to connect signals to slots (with compile-time checking)
 	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged,this, &Scenery3dDialog::updateFromManager);
@@ -126,6 +128,12 @@ void Scenery3dDialog::on_sliderTorchStrength_valueChanged(int value)
 {
 	float val =  ((float)value)  / ui->sliderTorchStrength->maximum();
 	mgr->setTorchStrength(val);
+}
+
+void Scenery3dDialog::on_sliderTorchRange_valueChanged(int value)
+{
+	float val = value / 100.0f;
+	mgr->setTorchRange(val);
 }
 
 void Scenery3dDialog::updateCurrentScene(const SceneInfo &sceneInfo)
@@ -211,6 +219,10 @@ void Scenery3dDialog::updateFromManager()
 	ui->sliderTorchStrength->blockSignals(true);
 	ui->sliderTorchStrength->setValue(mgr->getTorchStrength() * 100.0f);
 	ui->sliderTorchStrength->blockSignals(false);
+
+	ui->sliderTorchRange->blockSignals(true);
+	ui->sliderTorchRange->setValue(mgr->getTorchRange() * 100.0f);
+	ui->sliderTorchRange->blockSignals(false);
 
 	CubemapModeListModel* model = dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model());
 	model->setGSSupported(mgr->getIsGeometryShaderSupported());

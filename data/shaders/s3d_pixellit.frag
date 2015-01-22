@@ -37,6 +37,7 @@ Note: This shader currently requires some #version 120 features!
 #define BUMP 0
 #define HEIGHT 0
 #define ALPHATEST 1
+#define TORCH 1
 
 #if SHADOW_FILTER_HQ
 #define FILTER_STEPS 64
@@ -168,6 +169,11 @@ uniform sampler2DShadow u_texShadow3;
 uniform float u_fAlphaThresh;
 #endif
 
+#if TORCH
+uniform vec3 u_vMixTorchDiffuse;
+uniform float u_fTorchAttenuation;
+#endif
+
 varying vec3 v_normal;
 varying vec2 v_texcoord;
 varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
@@ -232,7 +238,19 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 	//basic lambert term
 	float NdotL = dot(normal, L);
 	vec3 Idiff = u_vMixDiffuse * max(0.0,NdotL);
-	vec3 Ispec = vec3(0,0,0);
+	
+#if SHADOWS
+	float shd = getShadow();
+#endif
+	
+#if TORCH
+	//calculate additional diffuse, modeled by a point light centered on the cam pos
+	float camDistSq = dot(v_viewPos,v_viewPos);
+	float att = max(0.0, 1.0 - camDistSq * u_fTorchAttenuation);
+	att *= att;
+	
+	Idiff += att * u_vMixTorchDiffuse * max(0.0, dot(normal,eye));
+#endif
 	
 	#if MAT_SPECULAR
 	if(NdotL>0.0)
@@ -245,19 +263,18 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 		if(RdotE>0.0)
 		{
 			//specular term according to Phong model (light specular is assumed to be white for now)
-			Ispec = u_vMatSpecular * pow( RdotE, u_vMatShininess);
+			specCol = u_vMatSpecular * pow( RdotE, u_vMatShininess);
+			#if SHADOWS
+			specCol *= shd;
+			#endif
 		}
 	}
+	#else
+	specCol = vec3(0,0,0);
 	#endif
 	
-	#if SHADOWS
-	float shd = getShadow();
-	texCol = u_vMixAmbient + Idiff * shd;
-	specCol = Ispec * shd;
-	#else
+	
 	texCol = u_vMixAmbient + Idiff;
-	specCol = Ispec;
-	#endif
 }
 
 #if BUMP
