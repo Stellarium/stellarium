@@ -95,10 +95,6 @@ public:
 		UNIFORM_TEX_SHADOW2,
 		UNIFORM_TEX_SHADOW3,
 
-		//! Material ambient color
-		UNIFORM_MTL_AMBIENT,
-		//! Material diffuse color
-		UNIFORM_MTL_DIFFUSE,
 		//! Material specular color
 		UNIFORM_MTL_SPECULAR,
 		//! Material specular shininess (exponent)
@@ -106,17 +102,15 @@ public:
 		//! Material global transparency
 		UNIFORM_MTL_ALPHA,
 
+		//! (Light ambient + const factor) * Material ambient or diffuse, depending on Illum model
+		UNIFORM_MIX_AMBIENT,
+		//! Light directional * Material diffuse
+		UNIFORM_MIX_DIFFUSE,
 		//! Material emissive color * light emissive
 		UNIFORM_MIX_EMISSIVE,
 
-		//! Light direction vector (world space)
-		UNIFORM_LIGHT_DIRECTION,
 		//! Light direction vector (view space)
 		UNIFORM_LIGHT_DIRECTION_VIEW,
-		//! Light ambient intensity
-		UNIFORM_LIGHT_AMBIENT,
-		//! Light diffuse intensity
-		UNIFORM_LIGHT_DIFFUSE,
 
 		//! Squared frustum splits (vec4)
 		UNIFORM_VEC_SQUAREDSPLITS,
@@ -168,21 +162,19 @@ private:
 		SHADOW_FILTER	= (1<<7),
 		//shader filters shadows (higher quality)
 		SHADOW_FILTER_HQ = (1<<8),
-		//uses ambient material
-		MAT_AMBIENT	= (1<<9),
 		//uses specular material
-		MAT_SPECULAR	= (1<<10),
+		MAT_SPECULAR	= (1<<9),
 		//has diffuse texture. On its own (i.e. esp. without SHADING) it defines the basic texture shader.
-		MAT_DIFFUSETEX	= (1<<11),
+		MAT_DIFFUSETEX	= (1<<10),
 		//has emissive texture
-		MAT_EMISSIVETEX = (1<<12),
+		MAT_EMISSIVETEX = (1<<11),
 		//needs geometry shader cubemapping
-		GEOMETRY_SHADER = (1<<13),
+		GEOMETRY_SHADER = (1<<12),
 		//shader performs cubemap lookup
-		CUBEMAP		= (1<<14),
+		CUBEMAP		= (1<<13),
 		//shader performs blending, otherwise it is expected to output alpha 1.0
 		//it is required for correct blending for our cubemapping
-		BLENDING	= (1<<15),
+		BLENDING	= (1<<14),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -230,8 +222,6 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 
 	if(mat)
 	{
-		if(mat->illum>0)
-			flags|= MAT_AMBIENT;
 		if(mat->alphatest && mat->texture) //alpha test needs diffuse texture, otherwise it would not make sense
 			flags|= ALPHATEST;
 		if(mat->illum == OBJ::SPECULAR)

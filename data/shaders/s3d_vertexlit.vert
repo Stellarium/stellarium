@@ -23,7 +23,6 @@
 This is a shader for basic vertex lighting. This should be the minimum quality supported.
 */
 
-#define MAT_AMBIENT 1
 #define MAT_SPECULAR 1
 #define GEOMETRY_SHADER 1
 
@@ -36,14 +35,10 @@ uniform mat3 u_mNormal;
 
 //light info
 uniform mediump vec3 u_vLightDirectionView; //in view space
-uniform mediump vec3 u_vLightAmbient;
-uniform mediump vec3 u_vLightDiffuse;
 
 //material info
-#if MAT_AMBIENT
-uniform mediump vec3 u_vMatAmbient;
-#endif
-uniform mediump vec3 u_vMatDiffuse;
+uniform mediump vec3 u_vMixAmbient; // = light ambient * mtl ambient/diffuse depending on Illum model
+uniform mediump vec3 u_vMixDiffuse; // light diffuse * mat diffuse
 #if MAT_SPECULAR
 uniform mediump vec3 u_vMatSpecular;
 uniform mediump float u_vMatShininess;
@@ -71,17 +66,9 @@ varying mediump vec3 VAR_SPECILLUMINATION;
 
 void calcLighting(vec3 normal, vec3 viewPos, out vec3 texIll, out vec3 specIll)
 {
-#if MAT_AMBIENT
-	//ambient + small constant lighting
-	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatAmbient;
-#else
-	//The diffuse color is the ambient color - same as glColorMaterial with GL_AMBIENT_AND_DIFFUSE
-	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatDiffuse;
-#endif
-	
 	//basic lambert term
 	float NdotL = dot(normal, u_vLightDirectionView);
-	vec3 Idiff = u_vLightDiffuse * u_vMatDiffuse * max(0.0,NdotL);
+	vec3 Idiff = u_vMixDiffuse * max(0.0,NdotL);
 	
 #if MAT_SPECULAR
 	vec3 eye = normalize(-viewPos);
@@ -102,7 +89,7 @@ void calcLighting(vec3 normal, vec3 viewPos, out vec3 texIll, out vec3 specIll)
 	}
 #endif
 	
-	texIll = Iamb + Idiff;
+	texIll = u_vMixAmbient + Idiff;
 }
 
 void main(void)

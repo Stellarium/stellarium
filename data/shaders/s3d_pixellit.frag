@@ -31,7 +31,6 @@ Note: This shader currently requires some #version 120 features!
 #define SHADOWS 1
 #define SHADOW_FILTER 0
 #define SHADOW_FILTER_HQ 0
-#define MAT_AMBIENT 1
 #define MAT_DIFFUSETEX 1
 #define MAT_EMISSIVETEX 1
 #define MAT_SPECULAR 1
@@ -146,15 +145,9 @@ uniform sampler2D u_texBump;
 uniform sampler2D u_texHeight;
 #endif
 
-//light info
-uniform vec3 u_vLightAmbient;
-uniform vec3 u_vLightDiffuse;
-
 //material info
-#if MAT_AMBIENT
-uniform vec3 u_vMatAmbient;
-#endif
-uniform vec3 u_vMatDiffuse;
+uniform vec3 u_vMixAmbient; // = light ambient * mtl ambient/diffuse depending on Illum model
+uniform vec3 u_vMixDiffuse; // light diffuse * mat diffuse
 #if MAT_SPECULAR
 uniform vec3 u_vMatSpecular;
 uniform float u_vMatShininess;
@@ -236,17 +229,9 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 {
 	vec3 L = v_lightVec; //no normalize here, or it may cause divide by zero
 	
-	//ambient + small constant lighting
-	#if MAT_AMBIENT
-	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatAmbient;
-	#else
-	//The diffuse color is the ambient color - same as glColorMaterial with GL_AMBIENT_AND_DIFFUSE
-	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatDiffuse;
-	#endif
-	
 	//basic lambert term
 	float NdotL = dot(normal, L);
-	vec3 Idiff = u_vLightDiffuse * u_vMatDiffuse * max(0.0,NdotL);
+	vec3 Idiff = u_vMixDiffuse * max(0.0,NdotL);
 	vec3 Ispec = vec3(0,0,0);
 	
 	#if MAT_SPECULAR
@@ -267,11 +252,10 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 	
 	#if SHADOWS
 	float shd = getShadow();
-	texCol = Iamb + Idiff * shd;
+	texCol = u_vMixAmbient + Idiff * shd;
 	specCol = Ispec * shd;
 	#else
-	//texCol = Iamb + Idiff;
-	texCol = Iamb + Idiff;
+	texCol = u_vMixAmbient + Idiff;
 	specCol = Ispec;
 	#endif
 }

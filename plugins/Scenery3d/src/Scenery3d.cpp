@@ -72,7 +72,9 @@
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
 
-static const float AMBIENT_BRIGHTNESS_FACTOR=0.05f;
+//! The minimal amount of ambient illumination
+//! Old version set this in 2 different places (as ambient of GL_LIGHT0 + a global scene ambient), for a total of 0.075 effective minimum.
+static const float MINIMUM_AMBIENT=0.075f;
 static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
 static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 
@@ -572,10 +574,6 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 	//send projection matrix
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MAT_PROJECTION, projectionMatrix);
 
-	//send light strength
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_AMBIENT,lightInfo.ambient);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_DIFFUSE,lightInfo.directional);
-
 	//set alpha test threshold (this is scene-global for now)
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_FLOAT_ALPHA_THRESH,currentScene.transparencyThreshold);
 
@@ -641,8 +639,6 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 		shader->setUniformValue(loc,normalMatrix);
 
 		//assume light direction is only required when normal matrix is also used (would not make much sense alone)
-		SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION, lightInfo.lightDirectionWorld); //set light dir in world space
-
 		//check if the shader wants view space info
 		loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION_VIEW);
 		if(loc>=0)
@@ -653,12 +649,21 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 
 void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::Material &mat)
 {
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_AMBIENT,mat.ambient);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_DIFFUSE,mat.diffuse);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SPECULAR,mat.specular);
+	//ambient is calculated depending on illum model
+	if(mat.illum > OBJ::DIFFUSE)
+	{
+		//material uses own ambient color
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.ambient * lightInfo.ambient);
+	}
+	else
+	{
+		//material uses diffuse as ambient color
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.diffuse * lightInfo.ambient);
+	}
 
-	//precalcuate emissive info
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_EMISSIVE, mat.emission * lightInfo.emissive);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_DIFFUSE, mat.diffuse * lightInfo.directional);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_EMISSIVE,mat.emission * lightInfo.emissive);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SPECULAR,mat.specular); //light has no specular color in our model
 
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.shininess);
 	//force alpha to 1 here for non-translucent mats (fixes incorrect blending in cubemap)
@@ -1220,7 +1225,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     float sinSunAngle  = sunPosition[2];
     float sinMoonAngle = moonPosition[2];
     float sinVenusAngle = venusPosition[2];
-    ambientBrightness=AMBIENT_BRIGHTNESS_FACTOR+(torchEnabled? torchBrightness : 0);
+    ambientBrightness=MINIMUM_AMBIENT+(torchEnabled? torchBrightness : 0);
     directionalBrightness=0.0f;
     ShadowCaster shadowcaster = None;
     // DEBUG AIDS: Helper strings to be displayed
