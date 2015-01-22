@@ -37,6 +37,7 @@ struct GlobalShaderParameters
 	bool shadows;
 	S3DEnum::ShadowFilterQuality shadowFilterQuality;
 	bool geometryShader;
+	bool torchLight;
 };
 
 //! A simple shader cache class that gives us the correct shader depending on desired configuration.
@@ -106,11 +107,15 @@ public:
 		UNIFORM_MIX_AMBIENT,
 		//! Light directional * Material diffuse
 		UNIFORM_MIX_DIFFUSE,
+		//! Torch color * mat diffuse
+		UNIFORM_MIX_TORCHDIFFUSE,
 		//! Material emissive color * light emissive
 		UNIFORM_MIX_EMISSIVE,
 
 		//! Light direction vector (view space)
 		UNIFORM_LIGHT_DIRECTION_VIEW,
+		//! Torchlight attenuation factor (1 float, like in the second model at http://framebunker.com/blog/lighting-2-attenuation/)
+		UNIFORM_TORCH_ATTENUATION,
 
 		//! Squared frustum splits (vec4)
 		UNIFORM_VEC_SQUAREDSPLITS,
@@ -175,6 +180,8 @@ private:
 		//shader performs blending, otherwise it is expected to output alpha 1.0
 		//it is required for correct blending for our cubemapping
 		BLENDING	= (1<<14),
+		//shader uses an additional point light positioned at the camera that performs additional diffuse illumination
+		TORCH		= (1<<15),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -214,6 +221,7 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::OFF) flags|= SHADOW_FILTER;
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::LOW) flags|= SHADOW_FILTER_HQ;
 		if(globals.geometryShader) flags|= GEOMETRY_SHADER;
+		if(globals.torchLight) flags|= TORCH;
 	}
 	else
 	{

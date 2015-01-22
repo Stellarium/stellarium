@@ -87,8 +87,8 @@ public:
     void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; }
     bool getBumpsEnabled(void) const { return shaderParameters.bump; }
     void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; }
-    bool getTorchEnabled(void) const { return torchEnabled;}
-    void setTorchEnabled(bool torchEnabled) { this->torchEnabled = torchEnabled; }
+    bool getTorchEnabled(void) const { return shaderParameters.torchLight; }
+    void setTorchEnabled(bool torchEnabled) { shaderParameters.torchLight = torchEnabled; }
     S3DEnum::ShadowFilterQuality getShadowFilterQuality() const { return shaderParameters.shadowFilterQuality; }
     void setShadowFilterQuality(S3DEnum::ShadowFilterQuality quality) { shaderParameters.shadowFilterQuality = quality; }
     bool getLocationInfoEnabled(void) const { return textEnabled; }
@@ -106,6 +106,8 @@ public:
     void setShadowmapSize(uint size) { shadowmapSize = size; }
     float getTorchBrightness() const { return torchBrightness; }
     void setTorchBrightness(float brightness) { torchBrightness = brightness; }
+    float getTorchRange() const { return torchRange; }
+    void setTorchRange(float range) { torchRange = range; }
 
     void setLoadCancel(bool val) { loadCancel = val; }
 
@@ -123,9 +125,9 @@ private:
     ShaderMgr shaderManager;
 
     float torchBrightness; // ^L toggle light brightness
+    float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/
 
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
-    bool torchEnabled;          // switchable value (^L): adds artificial ambient light
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
     bool lightCamEnabled;       // switchable value: switches camera to light camera
     bool frustEnabled;
@@ -190,6 +192,9 @@ private:
 	    QVector3D ambient;
 	    QVector3D directional;
 	    QVector3D emissive;
+
+	    QVector3D torchDiffuse;
+	    float torchAttenuation;
     } lightInfo;
 
     GlobalShaderParameters shaderParameters;
