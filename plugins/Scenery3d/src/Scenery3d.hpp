@@ -189,6 +189,7 @@ private:
 	    QVector3D lightDirectionWorld;
 	    QVector3D ambient;
 	    QVector3D directional;
+	    QVector3D emissive;
     } lightInfo;
 
     GlobalShaderParameters shaderParameters;
@@ -265,7 +266,7 @@ private:
     void setupMaterialUniforms(QOpenGLShaderProgram *shader, const OBJ::Material& mat);
 
     //! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
-    Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
+    Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition, float &emissiveFactor);
 
     //! @return height at -absolutePosition, which is the current eye point.
     float groundHeight();

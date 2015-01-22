@@ -33,6 +33,7 @@ Note: This shader currently requires some #version 120 features!
 #define SHADOW_FILTER_HQ 0
 #define MAT_AMBIENT 1
 #define MAT_DIFFUSETEX 1
+#define MAT_EMISSIVETEX 1
 #define MAT_SPECULAR 1
 #define BUMP 0
 #define HEIGHT 0
@@ -135,6 +136,9 @@ uniform vec2 poissonDisk[FILTER_STEPS] = vec2[](
 #if MAT_DIFFUSETEX
 uniform sampler2D u_texDiffuse;
 #endif
+#if MAT_EMISSIVETEX
+uniform sampler2D u_texEmissive;
+#endif
 #if BUMP
 uniform sampler2D u_texBump;
 #endif
@@ -156,6 +160,8 @@ uniform vec3 u_vMatSpecular;
 uniform float u_vMatShininess;
 #endif
 uniform float u_vMatAlpha;
+
+uniform vec3 u_vMixEmissive;
 
 #if SHADOWS
 //shadow related uniforms
@@ -310,14 +316,21 @@ void main(void)
 	vec3 normal = v_normal;
 	#endif
 
-	vec3 texCol,specCol;
+	vec3 texCol,specCol; //texCol gets multiplied with diffuse map, specCol not
 	calcLighting(normalize(normal),eye,texCol,specCol);
+	
+	#if MAT_EMISSIVETEX
+	//use existing specCol to avoid using another vec3
+	specCol += u_vMixEmissive * texture2D(u_texEmissive,v_texcoord).rgb;
+	#else
+	specCol += u_vMixEmissive;
+	#endif
 	
 #if MAT_DIFFUSETEX
 	#if BLENDING
-	gl_FragColor = vec4((texCol+specCol) * texVal.rgb ,u_vMatAlpha * texVal.a);
+	gl_FragColor = vec4(texCol * texVal.rgb + specCol,u_vMatAlpha * texVal.a);
     #else
-	gl_FragColor = vec4((texCol+specCol) * texVal.rgb , 1.0);
+	gl_FragColor = vec4(texCol * texVal.rgb + specCol, 1.0);
 	#endif
 #else
 	gl_FragColor = vec4(texCol + specCol,u_vMatAlpha); //u_vMatAlpha is automatically set to 1.0 if blending is disabled

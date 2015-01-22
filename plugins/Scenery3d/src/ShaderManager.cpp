@@ -47,6 +47,7 @@ ShaderMgr::ShaderMgr()
 
 		//textures
 		uniformStrings["u_texDiffuse"] = UNIFORM_TEX_DIFFUSE;
+		uniformStrings["u_texEmissive"] = UNIFORM_TEX_EMISSIVE;
 		uniformStrings["u_texBump"] = UNIFORM_TEX_BUMP;
 		uniformStrings["u_texHeight"] = UNIFORM_TEX_HEIGHT;
 		uniformStrings["u_texShadow0"] = UNIFORM_TEX_SHADOW0;
@@ -60,6 +61,9 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_vMatSpecular"] = UNIFORM_MTL_SPECULAR;
 		uniformStrings["u_vMatShininess"] = UNIFORM_MTL_SHININESS;
 		uniformStrings["u_vMatAlpha"] = UNIFORM_MTL_ALPHA;
+
+		//pre-modulated lighting
+		uniformStrings["u_vMixEmissive"] = UNIFORM_MIX_EMISSIVE;
 
 		//light
 		uniformStrings["u_vLightDirection"] = UNIFORM_LIGHT_DIRECTION;
@@ -85,7 +89,9 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["MAT_AMBIENT"] = MAT_AMBIENT;
 		featureFlagsStrings["MAT_SPECULAR"] = MAT_SPECULAR;
 		featureFlagsStrings["MAT_DIFFUSETEX"] = MAT_DIFFUSETEX;
+		featureFlagsStrings["MAT_EMISSIVETEX"] = MAT_EMISSIVETEX;
 		featureFlagsStrings["GEOMETRY_SHADER"] = GEOMETRY_SHADER;
+		featureFlagsStrings["CUBEMAP"] = CUBEMAP;
 		featureFlagsStrings["BLENDING"] = BLENDING;
 	}
 }
