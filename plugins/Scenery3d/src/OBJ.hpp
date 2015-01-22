@@ -74,20 +74,16 @@ public:
         Material() {
             ambient[0] = 0.2f;
             ambient[1] = 0.2f;
-            ambient[2] = 0.2f;
-            ambient[3] = 1.0f;
+	    ambient[2] = 0.2f;
             diffuse[0] = 0.8f;
             diffuse[1] = 0.8f;
-            diffuse[2] = 0.8f;
-            diffuse[3] = 1.0f;
+	    diffuse[2] = 0.8f;
             specular[0] = 0.0f;
             specular[1] = 0.0f;
-            specular[2] = 0.0f;
-            specular[3] = 1.0f;
+	    specular[2] = 0.0f;
             emission[0] = 0.0f;
             emission[1] = 0.0f;
-            emission[2] = 0.0f;
-            emission[3] = 0.0f;
+	    emission[2] = 0.0f;
 	    shininess = 8.0f;
 	    name = "<invalid>";
 	    alpha = 1.0f;
@@ -98,11 +94,10 @@ public:
         //! Material name
         QString name;
         //! Ka, Kd, Ks, Ke
-	//TODO remove 4. component, not used anyway and obj only supports 3 components.
-        float ambient[4];
-        float diffuse[4];
-        float specular[4];
-        float emission[4];
+	QVector3D ambient;
+	QVector3D diffuse;
+	QVector3D specular;
+	QVector3D emission;
         //! Shininess [0..128]
         float shininess;
         //! Transparency [0..1]
@@ -124,7 +119,11 @@ public:
         //! Height map name
         QString heightMapName;
         //!< Shared pointer to height map texture of the model. This can be null.
-        StelTextureSP height_texture;
+	StelTextureSP height_texture;
+	//! Name of emissive texture
+	QString emissiveMapName;
+	//!< Shared pointer to emissive texture of the model. This can be null.
+	StelTextureSP emissive_texture;
     };
 
     //! A vertex struct holds the vertex itself (position), corresponding texture coordinates, normals, tangents and bitangents

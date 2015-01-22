@@ -83,6 +83,8 @@ public:
 
 		//! Defines the Diffuse texture slot
 		UNIFORM_TEX_DIFFUSE,
+		//! Defines the emissive texture slot
+		UNIFORM_TEX_EMISSIVE,
 		//! Defines the Bump texture slot
 		UNIFORM_TEX_BUMP,
 		//! Defines the Height texture slot
@@ -103,6 +105,9 @@ public:
 		UNIFORM_MTL_SHININESS,
 		//! Material global transparency
 		UNIFORM_MTL_ALPHA,
+
+		//! Material emissive color * light emissive
+		UNIFORM_MIX_EMISSIVE,
 
 		//! Light direction vector (world space)
 		UNIFORM_LIGHT_DIRECTION,
@@ -169,13 +174,15 @@ private:
 		MAT_SPECULAR	= (1<<10),
 		//has diffuse texture. On its own (i.e. esp. without SHADING) it defines the basic texture shader.
 		MAT_DIFFUSETEX	= (1<<11),
+		//has emissive texture
+		MAT_EMISSIVETEX = (1<<12),
 		//needs geometry shader cubemapping
-		GEOMETRY_SHADER = (1<<12),
+		GEOMETRY_SHADER = (1<<13),
 		//shader performs cubemap lookup
-		CUBEMAP		= (1<<13),
+		CUBEMAP		= (1<<14),
 		//shader performs blending, otherwise it is expected to output alpha 1.0
 		//it is required for correct blending for our cubemapping
-		BLENDING	= (1<<14),
+		BLENDING	= (1<<15),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -233,6 +240,8 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 			flags|= BLENDING;
 		if(mat->texture)
 			flags|= MAT_DIFFUSETEX;
+		if(mat->emissive_texture)
+			flags|= MAT_EMISSIVETEX;
 		if(mat->bump_texture && globals.bump && globals.pixelLighting)
 			flags|= BUMP;
 		if(mat->height_texture && globals.bump && globals.pixelLighting)
