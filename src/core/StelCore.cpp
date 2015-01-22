@@ -415,7 +415,7 @@ void StelCore::preDraw()
 {
 	// Init openGL viewing with fov, screen size and clip planes
 	currentProjectorParams.zNear = 0.000001;
-	currentProjectorParams.zFar = 50.;
+	currentProjectorParams.zFar = 500.;
 
 	skyDrawer->preDraw();
 
