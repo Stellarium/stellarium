@@ -173,8 +173,16 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	if (core->getProjection(StelCore::FrameJ2000)->unProject(x,y,v))
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	if (prj->unProject(x,y,v))
 	{
+		// Nick Fedoseev patch: improve click match for refracted coordinates
+		Vec3d win;
+		prj->project(v,win);
+		float dx = x - win.v[0];
+		float dy = y - win.v[1];
+		prj->unProject(x+dx, y+dy, v);
+
 		return cleverFind(core, v);
 	}
 	return StelObjectP();

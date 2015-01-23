@@ -47,7 +47,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.5; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.7; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -75,8 +75,8 @@ close HCSV;
 for ($i=1;$i<scalar(@habitable);$i++) {
 	$status  = $csvdata->parse($habitable[$i]);
 	@hdata = $csvdata->fields();
-	%hs = (%hs, $hdata[0], 1);
-	%hp = (%hp, $hdata[0]." ".$hdata[1], $habitable[$i]);
+	%hs = (%hs, $hdata[1], 1);
+	%hp = (%hp, $hdata[1]." ".$hdata[2], $habitable[$i]);
 }
 
 open (CSV, "<$CSV");
@@ -256,11 +256,11 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$key = $starName." ".$pname;
 		if (exists($hp{$key})) {
 			$status  = $csvdata->parse($hp{$key});
-			($hsname,$hpname,$hptype,$hclass,$mstemp,$eqtemp,$esi) = $csvdata->fields();
+			($hsn,$hsname,$hpname,$hptype,$eqtemp,$esi) = $csvdata->fields();
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hptype,hclass,mstemp,eqtemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hptype, $hclass, $mstemp, $eqtemp, $esi);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hptype,eqtemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hptype, $eqtemp, $esi);
 	}
 #	else
 #	{
@@ -297,6 +297,10 @@ while (@stars = $sth->fetchrow_array()) {
 	$sefftemp	= $stars[10];
 	$hasHabitPl	= $stars[11];
 	
+	if ($sname eq "Kapteyn's") {
+		$sname .= " Star"; # cosmetic fix for translation support
+	}
+	
 	$out  = "\t\t\"".$sname."\":\n";
 	$out .= "\t\t{\n";
 	$out .= "\t\t\t\"exoplanets\":\n";
@@ -322,10 +326,8 @@ while (@stars = $sth->fetchrow_array()) {
 		$angdist	= $planets[9];
 		$discovered	= $planets[10];
 		$hpltype	= $planets[11];
-		$habitclass	= $planets[12];
-		$meanstemp	= $planets[13];
-		$eqktemp	= $planets[14];
-		$esindex	= $planets[15];
+		$eqktemp	= $planets[12];
+		$esindex	= $planets[13];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
@@ -354,12 +356,6 @@ while (@stars = $sth->fetchrow_array()) {
 		}
 		if ($hpltype ne '') {
 			$out .= "\t\t\t\t\"pclass\": \"".$hpltype."\",\n";
-		}
-		if ($habitclass ne '') {
-			$out .= "\t\t\t\t\"hclass\": \"".$habitclass."\",\n";
-		}
-		if ($meanstemp > 0) {
-			$out .= "\t\t\t\t\"MSTemp\": ".$meanstemp.",\n";
 		}
 		if ($eqktemp > 0) {
 			$out .= "\t\t\t\t\"EqTemp\": ".$eqktemp.",\n";

@@ -275,7 +275,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = M_PI;
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle,false,true);
+					text = StelUtils::radToDecDegStr(textAngle);
 				else
 					text = StelUtils::radToHmsStrAdapt(textAngle);
 			}
