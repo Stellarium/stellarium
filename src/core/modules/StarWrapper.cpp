@@ -248,6 +248,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 		/*
 		// FIXME: This calculations don't contains correction to Earth's rotation around the Sun.
+		// Details for Algol:
+		//	https://sourceforge.net/p/stellarium/discussion/278769/thread/05aae684/
+		//	http://calgary.rasc.ca/algol_minima.htm
 		if (vEpoch>0 && vPeriod>0)
 		{
 			// Calculate next minimum or maximum light
