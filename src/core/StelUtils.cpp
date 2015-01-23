@@ -556,6 +556,7 @@ double getDecAngle(const QString& str)
 {
 	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*([hHDd\xBA])\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$"); // DMS/HMS
 	QRegExp re2("^\\s*([\\+\\-])?\\s*(\\d+(\\.\\d+)?).?([NSEWnsew])?\\s*$"); // Decimal
+	QRegExp re3("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?"); // DMS like +121°33'38.28"
 
 	if (re1.exactMatch(str))
 	{
@@ -583,6 +584,16 @@ double getDecAngle(const QString& str)
 		if (cardinal.toLower() == "s" || cardinal.toLower() == "w" || neg)
 			deg *= -1.;
 		return (deg * 2 * M_PI / 360.);
+	}
+	else if (re3.exactMatch(str))
+	{
+		float deg = re3.capturedTexts()[1].toFloat();
+		float min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toFloat();
+		float sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toFloat();
+		float r = qAbs(deg) + min / 60 + sec / 3600;
+		if (deg<0)
+			r *= -1.;
+		return (r * 2 * M_PI / 360.);
 	}
 
 	qDebug() << "getDecAngle failed to parse angle string:" << str;

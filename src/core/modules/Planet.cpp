@@ -407,7 +407,7 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 	// If the planet p is farther from the sun than this planet, it can't cast shadow on it.
 	if (planetPos.lengthSquared()>thisPos.lengthSquared())
 		return false;
-	
+
 	Vec3d ppVector = planetPos;
 	ppVector.normalize();
 	
@@ -444,6 +444,10 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJD)
 {
+	// Make sure the parent position is computed for the dateJD, otherwise
+	// getHeliocentricPos() would return incorect values.
+	if (parent)
+		parent->computePositionWithoutOrbits(dateJD);
 
 	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-dateJD)>deltaOrbitJD || !orbitCached))
 	{
@@ -461,7 +465,7 @@ void Planet::computePosition(const double dateJD)
 		}
 		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
@@ -1223,7 +1227,7 @@ void Planet::initShader()
 		"    }\n"
 		"\n"
 		"#ifdef IS_MOON\n"
-		"    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
+		"    highp vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
 		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
 		"    // normal now contains the real surface normal taking normal map into account\n"
 		"    // Use an Oren-Nayar model for rough surfaces\n"
@@ -1235,14 +1239,14 @@ void Planet::initShader()
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		"    mediump float roughness = 1.;\n"
+		"    mediump float roughness = 1.0;\n"
 		"    mediump float roughnessSquared = roughness * roughness;\n"
 		"    mediump float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
 		"    mediump float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
 		"    mediump float C = sin(alpha) * tan(beta);\n"
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 2.;\n"
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
 		"#endif\n"
-		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
+		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 2.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
 		"    {\n"

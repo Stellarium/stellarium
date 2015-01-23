@@ -926,6 +926,30 @@
 			"RA": "10h58m28s",
 			"DE": "-10d46m13s"
 		},
+		"BD-114672":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.53,
+				"period": 1667.0,
+				"semiAxis": 2.28,
+				"eccentricity": 0.05,
+				"angleDistance": 0.091575,
+				"discovered": 2010,
+				"planetName": "b"
+			}
+			],
+			"distance": 27.3,
+			"stype": "K7V",
+			"smass": 0.571,
+			"smetal": -0.48,
+			"Vmag": 10.02,
+			"sradius": 0.52,
+			"effectiveTemp": 4475.0,
+			"RA": "18h33m29s",
+			"DE": "-11d38m10s"
+		},
 		"BD-17 63":
 		{
 			"exoplanets":
@@ -1878,8 +1902,6 @@
 				"eccentricity": 0.11,
 				"discovered": 2014,
 				"pclass": "M-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 312,
 				"EqTemp": 268,
 				"ESI": 75,
 				"planetName": "b"
@@ -1891,8 +1913,6 @@
 				"eccentricity": 0.09,
 				"discovered": 2014,
 				"pclass": "M-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 282,
 				"EqTemp": 239,
 				"ESI": 77,
 				"planetName": "c"
@@ -2138,8 +2158,6 @@
 				"eccentricity": 0.05,
 				"discovered": 2014,
 				"pclass": "M-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 276,
 				"EqTemp": 231,
 				"ESI": 71,
 				"planetName": "b"
@@ -2252,8 +2270,6 @@
 				"angleDistance": 0.018289,
 				"discovered": 2011,
 				"pclass": "M-Warm Terran",
-				"hclass": "M",
-				"MSTemp": 286,
 				"EqTemp": 247,
 				"ESI": 84,
 				"planetName": "c"
@@ -2274,8 +2290,6 @@
 				"eccentricity": 0.02,
 				"discovered": 2013,
 				"pclass": "M-Warm Terran",
-				"hclass": "P",
-				"MSTemp": 227,
 				"EqTemp": 189,
 				"ESI": 60,
 				"planetName": "e"
@@ -2287,8 +2301,6 @@
 				"eccentricity": 0.03,
 				"discovered": 2013,
 				"pclass": "M-Warm Terran",
-				"hclass": "P",
-				"MSTemp": 259,
 				"EqTemp": 221,
 				"ESI": 77,
 				"planetName": "f"
@@ -2400,8 +2412,6 @@
 				"eccentricity": 0.1,
 				"discovered": 2014,
 				"pclass": "M-Warm Superterran",
-				"hclass": "P",
-				"MSTemp": 242,
 				"EqTemp": 198,
 				"ESI": 59,
 				"planetName": "c"
@@ -2434,8 +2444,6 @@
 				"eccentricity": 0.03,
 				"discovered": 2014,
 				"pclass": "M-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 295,
 				"EqTemp": 253,
 				"ESI": 81,
 				"planetName": "c"
@@ -4451,6 +4459,29 @@
 			"RA": "11h52m52.9s",
 			"DE": "-50d17m34s"
 		},
+		"HD 103720":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.62,
+				"period": 4.5557,
+				"semiAxis": 0.0498,
+				"eccentricity": 0.086,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 41.6,
+			"stype": "K3V",
+			"smass": 0.794,
+			"smetal": -0.02,
+			"Vmag": 9.49,
+			"sradius": 0.73,
+			"effectiveTemp": 5017.0,
+			"RA": "11h56m41s",
+			"DE": "-2d46m44s"
+		},
 		"HD 103774":
 		{
 			"exoplanets":
@@ -4706,6 +4737,29 @@
 			"RA": "12h25m46s",
 			"DE": "-64d1m18.9s"
 		},
+		"HD 108341":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 3.5,
+				"period": 1129.0,
+				"semiAxis": 2.0,
+				"eccentricity": 0.85,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 49.4,
+			"stype": "K2V",
+			"smass": 0.843,
+			"smetal": 0.04,
+			"Vmag": 9.36,
+			"sradius": 0.79,
+			"effectiveTemp": 5122.0,
+			"RA": "12h27m31s",
+			"DE": "-71d25m23s"
+		},
 		"HD 108863":
 		{
 			"exoplanets":
@@ -4914,19 +4968,18 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.27,
-				"period": 263.3,
-				"semiAxis": 0.71,
-				"eccentricity": 0.61,
-				"angleDistance": 0.044937,
+				"mass": 0.36,
+				"period": 663.2,
+				"semiAxis": 1.24,
+				"eccentricity": 0.14,
 				"discovered": 2010,
 				"planetName": "b"
 			},
 			{
-				"mass": 0.71,
-				"period": 1657.0,
-				"semiAxis": 2.43,
-				"eccentricity": 0.32,
+				"mass": 0.93,
+				"period": 1818.0,
+				"semiAxis": 2.44,
+				"eccentricity": 0.2,
 				"angleDistance": 0.153797,
 				"discovered": 2010,
 				"planetName": "c"
@@ -4934,11 +4987,11 @@
 			],
 			"distance": 15.8,
 			"stype": "K9V",
-			"smass": 0.7,
-			"smetal": -0.17,
-			"Vmag": 9.02,
-			"sradius": 0.65,
-			"effectiveTemp": 4685.0,
+			"smass": 0.585,
+			"smetal": -0.24,
+			"Vmag": 9.06,
+			"sradius": 0.53,
+			"effectiveTemp": 4462.0,
 			"RA": "13h4m57s",
 			"DE": "-52d26m35s"
 		},
@@ -6207,6 +6260,26 @@
 			"effectiveTemp": 4757.0,
 			"RA": "16h10m4s",
 			"DE": "26d44m34s"
+		},
+		"HD 145934":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 2.28,
+				"period": 2730.0,
+				"semiAxis": 4.6,
+				"eccentricity": 0.053,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"stype": "K0",
+			"smass": 1.748,
+			"Vmag": 7.6,
+			"sradius": 5.38,
+			"RA": "16h13m10s",
+			"DE": "13d14m22s"
 		},
 		"HD 1461":
 		{
@@ -9768,6 +9841,29 @@
 			"RA": "4h48m36s",
 			"DE": "-5d40m27s"
 		},
+		"HD 30669":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.47,
+				"period": 1684.0,
+				"semiAxis": 2.69,
+				"eccentricity": 0.18,
+				"discovered": 2014,
+				"planetName": "30669"
+			}
+			],
+			"distance": 57.0,
+			"stype": "G9V",
+			"smass": 0.92,
+			"smetal": 0.13,
+			"Vmag": 9.11,
+			"sradius": 0.91,
+			"effectiveTemp": 5400.0,
+			"RA": "4h48m29s",
+			"DE": "-28d25m9s"
+		},
 		"HD 30856":
 		{
 			"exoplanets":
@@ -10322,8 +10418,6 @@
 				"eccentricity": 0.29,
 				"discovered": 2012,
 				"pclass": "K-Warm Superterran",
-				"hclass": "P",
-				"MSTemp": 270,
 				"EqTemp": 227,
 				"ESI": 74,
 				"planetName": "g"
@@ -10991,6 +11085,29 @@
 			"effectiveTemp": 4854.0,
 			"RA": "0h58m13.9s",
 			"DE": "33d57m2.8s"
+		},
+		"HD 564":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.33,
+				"period": 492.3,
+				"semiAxis": 1.2,
+				"eccentricity": 0.096,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 54.0,
+			"stype": "G3V",
+			"smass": 0.92,
+			"smetal": 0.13,
+			"Vmag": 8.29,
+			"sradius": 1.01,
+			"effectiveTemp": 59.02,
+			"RA": "0h9m53s",
+			"DE": "-50d16m4s"
 		},
 		"HD 5891":
 		{
@@ -12702,6 +12819,31 @@
 			"RA": "21h26m23s",
 			"DE": "-37d49m46s"
 		},
+		"HIP 116454":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.03719,
+				"radius": 0.226,
+				"period": 9.1265,
+				"semiAxis": 0.098,
+				"eccentricity": 0.205,
+				"inclination": 88.43,
+				"discovered": 2014,
+				"planetName": "116454"
+			}
+			],
+			"distance": 55.2,
+			"stype": "K2",
+			"smass": 0.775,
+			"smetal": -0.16,
+			"Vmag": 10.19,
+			"sradius": 0.716,
+			"effectiveTemp": 5089.0,
+			"RA": "23h35m49s",
+			"DE": "0d26m44s"
+		},
 		"HIP 12961":
 		{
 			"exoplanets":
@@ -13225,6 +13367,30 @@
 			"Vmag": 10.9,
 			"RA": "12h44m19.9s",
 			"DE": "-8d40m17s"
+		},
+		"KOI-4427":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.164,
+				"period": 147.6606,
+				"semiAxis": 0.419,
+				"eccentricity": 0.02,
+				"inclination": 89.97,
+				"discovered": 2015,
+				"planetName": "a"
+			}
+			],
+			"distance": 240.0,
+			"smass": 0.526,
+			"smetal": -0.07,
+			"Vmag": 9.34,
+			"sradius": 0.505,
+			"effectiveTemp": 3813.0,
+			"hasHP": true,
+			"RA": "19h40m28s",
+			"DE": "39d16m27s"
 		},
 		"KELT-1":
 		{
@@ -14080,7 +14246,7 @@
 			"RA": "19h22m20s",
 			"DE": "40d34m39s"
 		},
-		"Kapteyn's":
+		"Kapteyn's Star":
 		{
 			"exoplanets":
 			[
@@ -14091,8 +14257,6 @@
 				"eccentricity": 0.21,
 				"discovered": 2014,
 				"pclass": "M-Warm Terran",
-				"hclass": "P",
-				"MSTemp": 246,
 				"EqTemp": 205,
 				"ESI": 67,
 				"planetName": "b"
@@ -16200,8 +16364,6 @@
 				"semiAxis": 0.677,
 				"discovered": 2014,
 				"pclass": "K-Warm Superterran",
-				"hclass": "P",
-				"MSTemp": 253,
 				"EqTemp": 206,
 				"ESI": 61,
 				"planetName": "d"
@@ -16594,10 +16756,7 @@
 				"semiAxis": 0.356,
 				"discovered": 2014,
 				"pclass": "K-Warm Terran",
-				"hclass": "P",
-				"MSTemp": 227,
-				"EqTemp": 192,
-				"ESI": 64,
+				"ESI": 188,
 				"planetName": "f"
 			}
 			],
@@ -17658,8 +17817,6 @@
 				"angleDistance": 0.004468,
 				"discovered": 2011,
 				"pclass": "G-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 310,
 				"EqTemp": 261,
 				"ESI": 71,
 				"planetName": "b"
@@ -19756,8 +19913,6 @@
 				"semiAxis": 0.341,
 				"discovered": 2014,
 				"pclass": "K-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 291,
 				"EqTemp": 248,
 				"ESI": 79,
 				"planetName": "c"
@@ -20184,6 +20339,9 @@
 				"period": 34.142347,
 				"semiAxis": 0.174,
 				"discovered": 2014,
+				"pclass": "M-Warm Terran",
+				"EqTemp": 267,
+				"ESI": 85,
 				"planetName": "e"
 			},
 			{
@@ -20192,10 +20350,8 @@
 				"semiAxis": 0.263,
 				"discovered": 2014,
 				"pclass": "K-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 316,
-				"EqTemp": 273,
-				"ESI": 78,
+				"EqTemp": 194,
+				"ESI": 60,
 				"planetName": "f"
 			}
 			],
@@ -20255,8 +20411,6 @@
 				"semiAxis": 0.305,
 				"discovered": 2014,
 				"pclass": "K-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 322,
 				"EqTemp": 271,
 				"ESI": 68,
 				"planetName": "d"
@@ -23923,6 +24077,101 @@
 			"RA": "19h0m58s",
 			"DE": "46d40m5.9s"
 		},
+		"Kepler-436":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.244,
+				"period": 64.00205,
+				"semiAxis": 0.339,
+				"eccentricity": 0.19,
+				"inclination": 89.93,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 618.0,
+			"smass": 0.729,
+			"smetal": 0.01,
+			"Vmag": 7.0,
+			"sradius": 0.697,
+			"effectiveTemp": 4551.0,
+			"RA": "20h6m53s",
+			"DE": "44d24m43s"
+		},
+		"Kepler-437":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.191,
+				"period": 66.65062,
+				"semiAxis": 0.288,
+				"eccentricity": 0.02,
+				"inclination": 89.9,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 417.0,
+			"smass": 0.707,
+			"smetal": 0.0,
+			"Vmag": 7.2,
+			"sradius": 0.68,
+			"effectiveTemp": 4551.0,
+			"RA": "19h49m23s",
+			"DE": "44d1m37s"
+		},
+		"Kepler-438":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.0999,
+				"period": 35.23319,
+				"semiAxis": 0.166,
+				"eccentricity": 0.03,
+				"inclination": 89.86,
+				"discovered": 2015,
+				"pclass": "K-Warm Terran",
+				"EqTemp": 276,
+				"ESI": 88,
+				"planetName": "b"
+			}
+			],
+			"distance": 145.0,
+			"smass": 0.544,
+			"smetal": 0.16,
+			"Vmag": 9.55,
+			"sradius": 0.52,
+			"effectiveTemp": 3748.0,
+			"hasHP": true,
+			"RA": "18h46m35s",
+			"DE": "41d57m4s"
+		},
+		"Kepler-439":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.2,
+				"period": 178.1396,
+				"semiAxis": 0.563,
+				"eccentricity": 0.03,
+				"inclination": 89.95,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 693.0,
+			"smass": 0.884,
+			"smetal": 0.02,
+			"sradius": 0.866,
+			"effectiveTemp": 5431.0,
+			"RA": "18h43m12s",
+			"DE": "44d2m2s"
+		},
 		"Kepler-44":
 		{
 			"exoplanets":
@@ -23948,6 +24197,192 @@
 			"effectiveTemp": 5757.0,
 			"RA": "20h0m25s",
 			"DE": "45d45m43.9s"
+		},
+		"Kepler-440":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.166,
+				"period": 101.11141,
+				"semiAxis": 0.242,
+				"eccentricity": 0.34,
+				"inclination": 89.93,
+				"discovered": 2015,
+				"pclass": "K-Warm Superterran",
+				"EqTemp": 273,
+				"ESI": 75,
+				"planetName": "b"
+			}
+			],
+			"distance": 261.0,
+			"smass": 0.575,
+			"smetal": -0.3,
+			"Vmag": 8.33,
+			"sradius": 0.559,
+			"effectiveTemp": 4134.0,
+			"hasHP": true,
+			"RA": "19h1m24s",
+			"DE": "41d27m8s"
+		},
+		"Kepler-441":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.146,
+				"period": 207.2482,
+				"semiAxis": 0.64,
+				"eccentricity": 0.1,
+				"inclination": 89.97,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 284.0,
+			"smass": 0.572,
+			"smetal": -0.57,
+			"Vmag": 8.02,
+			"sradius": 0.55,
+			"effectiveTemp": 4340.0,
+			"RA": "18h58m16s",
+			"DE": "49d0m46s"
+		},
+		"Kepler-442":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.12,
+				"period": 112.3053,
+				"semiAxis": 0.409,
+				"eccentricity": 0.04,
+				"inclination": 89.94,
+				"discovered": 2015,
+				"pclass": "K-Warm Terran",
+				"EqTemp": 233,
+				"ESI": 84,
+				"planetName": "b"
+			}
+			],
+			"distance": 342.0,
+			"smass": 0.609,
+			"smetal": -0.37,
+			"Vmag": 7.73,
+			"sradius": 0.598,
+			"effectiveTemp": 4402.0,
+			"hasHP": true,
+			"RA": "19h1m28s",
+			"DE": "39d16m48s"
+		},
+		"Kepler-443":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.208,
+				"period": 177.6693,
+				"semiAxis": 0.495,
+				"eccentricity": 0.11,
+				"inclination": 89.94,
+				"discovered": 2015,
+				"pclass": "K-Warm Superterran",
+				"EqTemp": 247,
+				"ESI": 71,
+				"planetName": "b"
+			}
+			],
+			"distance": 779.0,
+			"smass": 0.738,
+			"smetal": -0.01,
+			"Vmag": 6.83,
+			"sradius": 0.706,
+			"effectiveTemp": 4723.0,
+			"hasHP": true,
+			"RA": "19h14m27s",
+			"DE": "49d58m7s"
+		},
+		"Kepler-445":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.02,
+				"radius": 0.141,
+				"period": 2.984151,
+				"eccentricity": 0.0,
+				"inclination": 89.74,
+				"discovered": 2015,
+				"planetName": "b"
+			},
+			{
+				"mass": 0.027,
+				"radius": 0.224,
+				"period": 4.871229,
+				"eccentricity": 0.0,
+				"inclination": 89.91,
+				"discovered": 2015,
+				"planetName": "c"
+			},
+			{
+				"mass": 0.011,
+				"radius": 0.112,
+				"period": 8.15275,
+				"eccentricity": 0.0,
+				"inclination": 89.61,
+				"discovered": 2015,
+				"planetName": "d"
+			}
+			],
+			"distance": 90.0,
+			"smass": 0.18,
+			"smetal": 0.19,
+			"Vmag": 18.0,
+			"sradius": 0.21,
+			"effectiveTemp": 3157.0,
+			"RA": "19h54m57s",
+			"DE": "46d29m55s"
+		},
+		"Kepler-446":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.014,
+				"radius": 0.134,
+				"period": 1.565409,
+				"eccentricity": 0.0,
+				"inclination": 87.42,
+				"discovered": 2015,
+				"planetName": "b"
+			},
+			{
+				"mass": 0.009,
+				"radius": 0.098,
+				"period": 3.036179,
+				"eccentricity": 0.0,
+				"inclination": 88.97,
+				"discovered": 2015,
+				"planetName": "c"
+			},
+			{
+				"mass": 0.01,
+				"radius": 0.12,
+				"period": 5.148921,
+				"eccentricity": 0.0,
+				"inclination": 88.72,
+				"discovered": 2015,
+				"planetName": "d"
+			}
+			],
+			"distance": 120.0,
+			"smass": 0.22,
+			"smetal": -0.3,
+			"Vmag": 16.5,
+			"sradius": 0.24,
+			"effectiveTemp": 3359.0,
+			"RA": "18h48m59.9s",
+			"DE": "44d55m16s"
 		},
 		"Kepler-45":
 		{
@@ -24496,8 +24931,6 @@
 				"inclination": 89.8,
 				"discovered": 2012,
 				"pclass": "K-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 314,
 				"EqTemp": 267,
 				"ESI": 73,
 				"planetName": "b"
@@ -24552,8 +24985,6 @@
 				"inclination": 89.98,
 				"discovered": 2013,
 				"pclass": "K-Warm Superterran",
-				"hclass": "M",
-				"MSTemp": 302,
 				"EqTemp": 261,
 				"ESI": 83,
 				"planetName": "e"
@@ -24566,8 +24997,6 @@
 				"inclination": 89.9,
 				"discovered": 2013,
 				"pclass": "K-Warm Terran",
-				"hclass": "P",
-				"MSTemp": 240,
 				"EqTemp": 201,
 				"ESI": 67,
 				"planetName": "f"
@@ -25596,8 +26025,8 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.0119560771481,
-				"radius": 0.132304634319983,
+				"mass": 0.0126,
+				"radius": 0.13230463432,
 				"period": 4.72673978,
 				"semiAxis": 0.0542,
 				"inclination": 89.49,
@@ -25805,6 +26234,21 @@
 			"smass": 0.12,
 			"RA": "18h0m23s",
 			"DE": "-30d45m16.9s"
+		},
+		"MOA-2011-BLG-274":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.8,
+				"semiAxis": 40.0,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 800.0,
+			"RA": "17h54m42s",
+			"DE": "-28d54m59s"
 		},
 		"MOA-2011-BLG-293L":
 		{
