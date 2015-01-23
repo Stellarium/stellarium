@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-17 01:35+0600\n"
-"PO-Revision-Date: 2015-01-18 04:22+0000\n"
-"Last-Translator: pp/bs <Unknown>\n"
+"PO-Revision-Date: 2015-01-22 17:19+0000\n"
+"Last-Translator: Szymon Pietrzak <sz.pietrzak29@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-19 05:42+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
+"X-Launchpad-Export-Date: 2015-01-23 05:55+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -146,7 +146,7 @@ msgstr "Ziemia"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Oświetlenie"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -308,7 +308,7 @@ msgstr "Średni czas słoneczny: %1"
 
 #: src/core/modules/Planet.cpp:289
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "Okres obrotu jest chaotyczny"
 
 #: src/core/modules/Planet.cpp:295
 #, qt-format
@@ -4337,6 +4337,7 @@ msgstr "Użyj powiązanej planety oraz pozycji"
 #: src/ui_viewDialog.h:1332
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
+"Pokaż warstwę oświetlenia (jasne okna, zanieczyszczenie światłem itp.)"
 
 #: src/ui_viewDialog.h:1333
 msgid "Show ground"
@@ -7916,6 +7917,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Zapewnia wizualizację niektórych kwazarów jaśniejszych od 16. wielkości "
+"wizualnej . Katalog kwazarów został skompilowany z \"Quasars and Active "
+"Galactic Nuclei\" (wyd. 13.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 msgid "Veron+ 2010"
@@ -8346,7 +8350,7 @@ msgstr "Rok odkrycia"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Planetary class"
-msgstr ""
+msgstr "Klasa planetarna"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:240
@@ -8418,7 +8422,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Klasa planetarna"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8459,7 +8463,7 @@ msgstr "Informacje dodatkowe"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Ekosfera"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
@@ -8471,7 +8475,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Skala podobieństwa do Ziemi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "General professional Web sites relevant to extrasolar planets"
