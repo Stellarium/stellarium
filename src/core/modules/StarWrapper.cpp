@@ -246,18 +246,20 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (vPeriod>0)
 			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
 
+		/*
+		// FIXME: This calculations don't contains correction to Earth's rotation around the Sun.
 		if (vEpoch>0 && vPeriod>0)
 		{
 			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			int npDelta = (core->getJDay()-vsEpoch)/vPeriod;
-			double npDate = vsEpoch + ((npDelta+1)*vPeriod);
+			double vsEpoch = 2400000+vEpoch;			
+			double npDate = vsEpoch + ((::floor((core->getJDay()-vsEpoch)/vPeriod)+1.0)*vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			if (ebsFlag)
 				oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
 			else
 				oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
 		}
+		*/
 
 		if (vMm>0)
 		{
