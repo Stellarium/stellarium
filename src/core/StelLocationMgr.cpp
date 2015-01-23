@@ -208,6 +208,24 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 	return ret;
 }
 
+const StelLocation StelLocationMgr::locationFromCLI() const
+{
+	StelLocation ret;
+	QSettings* conf = StelApp::getInstance().getSettings();
+	bool ok;
+	conf->beginGroup("location_run_once");
+	ret.latitude = parseAngle(StelUtils::radToDmsStr(conf->value("latitude").toFloat(), true), &ok);
+	if (!ok) ret.role = '!';
+	ret.longitude = parseAngle(StelUtils::radToDmsStr(conf->value("longitude").toFloat(), true), &ok);
+	if (!ok) ret.role = '!';
+	ret.altitude = conf->value("altitude", 0).toInt(&ok);
+	ret.planetName = conf->value("home_planet", "Earth").toString();
+	ret.landscapeKey = conf->value("landscape_name", "guereins").toString();
+	conf->endGroup();
+	conf->remove("location_run_once");
+	return ret;
+}
+
 // Get whether a location can be permanently added to the list of user locations
 bool StelLocationMgr::canSaveUserLocation(const StelLocation& loc) const
 {

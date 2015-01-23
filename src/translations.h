@@ -142,10 +142,16 @@ class Translations
 		N_("Ocean");
 		// TRANSLATORS: Landscape name: Garching bei Munchen
 		N_("Garching");
-		// TRANSLATORS: Name of landscape and planet
+		// TRANSLATORS: Name of landscape
 		N_("Mars");
-		// TRANSLATORS: Name of landscape and planet
+		// TRANSLATORS: Name of landscape
+		N_("Jupiter");
+		// TRANSLATORS: Name of landscape
 		N_("Saturn");
+		// TRANSLATORS: Name of landscape
+		N_("Uranus");
+		// TRANSLATORS: Name of landscape
+		N_("Neptune");
 		// TRANSLATORS: Name of landscape
 		N_("Geneva");
 		// TRANSLATORS: Name of landscape
