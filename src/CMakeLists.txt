@@ -647,7 +647,13 @@ SET(tests_testRefraction_SRCS
         tests/testRefraction.hpp
         tests/testRefraction.cpp
         core/RefractionExtinction.hpp
-        core/RefractionExtinction.cpp)
+        core/RefractionExtinction.cpp
+        core/StelUtils.hpp
+        core/StelUtils.cpp)
+IF(WIN32)
+        # StelUtils required zlib sources
+        SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
+ENDIF()
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
 QT5_USE_MODULES(testRefraction Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
