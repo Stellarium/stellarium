@@ -39,6 +39,7 @@
 //predeclarations
 class QOpenGLFramebufferObject;
 class Scenery3dMgr;
+class LandscapeMgr;
 
 //! Representation of a complete 3D scenery
 class Scenery3d
@@ -151,6 +152,7 @@ private:
     float eye_height;
 
     StelCore* core;
+    LandscapeMgr* landscapeMgr;
     StelProjectorP altAzProjector;
     QSharedPointer<OBJ> objModel, objModelLoad, groundModel, groundModelLoad;
     Heightmap* heightmap;

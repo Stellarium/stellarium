@@ -35,6 +35,7 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
+#include "LandscapeMgr.hpp"
 #include "SolarSystem.hpp"
 
 #include "Scenery3dMgr.hpp"
@@ -1273,13 +1274,20 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     directionalSourceString="(Sun, below horiz.)";
 
     //calculate emissive factor
-    //uses the same model as LandscapeMgr::update uses for the sun, but inverse
-    //could be tweaked so that the factor is even lower when sun is high
-    float sunAngleLandscape = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
-    if(sunAngleLandscape > -0.1/1.5 )
-	    emissiveFactor = 1.0 - 1.5*(sunAngleLandscape+0.1/1.5);
+    Landscape* l = landscapeMgr->getCurrentLandscape();
+
+    if(l!=NULL)
+    {
+	    emissiveFactor = l->getEffectiveLightscapeBrightness();
+    }
     else
-	    emissiveFactor = 1.0;
+    {
+	    // I don't know if this can ever happen, but in this case,
+	    // directly use the same model as LandscapeMgr::update uses for the lightscapeBrightness
+	    emissiveFactor = 0.0f;
+	    if (sunPosition[2]<-0.14f) emissiveFactor=1.0f;
+	    else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14)/(-0.05+0.14);
+    }
 
     if(sinSunAngle > -0.3f) // sun above -18 deg?
     {
@@ -1717,6 +1725,8 @@ void Scenery3d::init()
 
 	//finally, set core to enable update().
 	this->core=StelApp::getInstance().getCore();
+	landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	Q_ASSERT(landscapeMgr);
 }
 
 void Scenery3d::deleteCubemapping()

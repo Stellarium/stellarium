@@ -153,6 +153,9 @@ public slots:
 	//! @param changeLocationDuration the duration of the transition animation
 	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
 
+	//! Get the current landscape object.
+	Landscape* getCurrentLandscape() const { return landscape; }
+
 	//! Get the default landscape ID.
 	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
 	//! Change the default landscape to the landscape with the ID specified.
