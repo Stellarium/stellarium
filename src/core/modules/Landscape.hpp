@@ -78,6 +78,12 @@ public:
 	//! This is called in each draw().
 	void setBrightness(const float b, const float pollutionBrightness=0.0f) {landscapeBrightness = b; lightScapeBrightness=pollutionBrightness; }
 
+	//! Returns the current brightness level
+	float getBrightness() const { return landscapeBrightness; }
+
+	//! Gets the currently effective lightscape brightness (modulated by the fader)
+	float getEffectiveLightscapeBrightness() const { return lightScapeBrightness * illumFader.getInterstate(); }
+
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(const bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
