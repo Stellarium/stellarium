@@ -399,12 +399,18 @@ p, li { white-space: pre-wrap; }
                 <property name="text">
                  <string>Torch strength (%1):</string>
                 </property>
+                <property name="buddy">
+                 <cstring>sliderTorchStrength</cstring>
+                </property>
                </widget>
               </item>
               <item row="1" column="0">
                <widget class="QLabel" name="label_4">
                 <property name="text">
                  <string>Torch range:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>sliderTorchRange</cstring>
                 </property>
                </widget>
               </item>
@@ -449,6 +455,9 @@ p, li { white-space: pre-wrap; }
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <item>
                  <layout class="QFormLayout" name="formLayout">
+                  <property name="fieldGrowthPolicy">
+                   <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                  </property>
                   <item row="0" column="0" colspan="2">
                    <widget class="QCheckBox" name="checkBoxEnablePixelLight">
                     <property name="text">
@@ -476,6 +485,9 @@ p, li { white-space: pre-wrap; }
                    <widget class="QLabel" name="label">
                     <property name="text">
                      <string>Shadowmap size:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>comboBoxShadowmapSize</cstring>
                     </property>
                    </widget>
                   </item>
@@ -510,10 +522,32 @@ p, li { white-space: pre-wrap; }
                 </item>
                 <item>
                  <layout class="QFormLayout" name="formLayout_2">
+                  <property name="fieldGrowthPolicy">
+                   <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                  </property>
+                  <item row="0" column="0" colspan="2">
+                   <widget class="QCheckBox" name="checkBoxEnableBump">
+                    <property name="enabled">
+                     <bool>true</bool>
+                    </property>
+                    <property name="text">
+                     <string>Bump mapping</string>
+                    </property>
+                    <property name="checked">
+                     <bool>false</bool>
+                    </property>
+                    <property name="tristate">
+                     <bool>false</bool>
+                    </property>
+                   </widget>
+                  </item>
                   <item row="1" column="0">
                    <widget class="QLabel" name="label_2">
                     <property name="text">
                      <string>Filtering Quality:</string>
+                    </property>
+                    <property name="buddy">
+                     <cstring>comboBoxShadowFiltering</cstring>
                     </property>
                    </widget>
                   </item>
@@ -536,31 +570,58 @@ p, li { white-space: pre-wrap; }
                     </item>
                    </widget>
                   </item>
-                  <item row="0" column="0" colspan="2">
-                   <widget class="QCheckBox" name="checkBoxEnableBump">
-                    <property name="enabled">
-                     <bool>true</bool>
-                    </property>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_3">
                     <property name="text">
-                     <string>Bump mapping</string>
+                     <string>Cubemapping mode:</string>
                     </property>
-                    <property name="checked">
-                     <bool>false</bool>
-                    </property>
-                    <property name="tristate">
-                     <bool>false</bool>
+                    <property name="buddy">
+                     <cstring>comboBoxCubemapMode</cstring>
                     </property>
                    </widget>
                   </item>
                   <item row="2" column="1">
                    <widget class="QComboBox" name="comboBoxCubemapMode"/>
                   </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_3">
+                  <item row="3" column="0" colspan="2">
+                   <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
+                    <property name="toolTip">
+                     <string>When checked, the cubemap is only recreated in specific time intervals, instead of each frame. Saves energy and may increase subjective application performance. Note that the cubemap is always re-rendered when the user moves.</string>
+                    </property>
                     <property name="text">
-                     <string>Cubemapping mode:</string>
+                     <string>Lazy cubemap re-rendering</string>
                     </property>
                    </widget>
+                  </item>
+                  <item row="4" column="0" colspan="2">
+                   <layout class="QHBoxLayout" name="lazyIntervalLayout">
+                    <property name="leftMargin">
+                     <number>40</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="labelLazyDrawingInterval">
+                      <property name="text">
+                       <string>Interval:</string>
+                      </property>
+                      <property name="buddy">
+                       <cstring>spinLazyDrawingInterval</cstring>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QDoubleSpinBox" name="spinLazyDrawingInterval">
+                      <property name="toolTip">
+                       <string>The interval (in timeline seconds) in which no redraw is performed</string>
+                      </property>
+                      <property name="minimum">
+                       <double>0.100000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>600.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </item>
                  </layout>
                 </item>

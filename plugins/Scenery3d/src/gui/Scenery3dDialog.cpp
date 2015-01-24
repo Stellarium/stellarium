@@ -53,6 +53,8 @@ void Scenery3dDialog::createDialogContent()
 		SLOT(setEnableShadows(bool)));
 	connect(ui->checkBoxEnableBump, SIGNAL(clicked(bool)), mgr,
 		SLOT(setEnableBumps(bool)));
+	connect(ui->checkBoxEnableLazyDrawing, &QCheckBox::clicked, mgr, &Scenery3dMgr::setEnableLazyDrawing);
+	connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3dMgr::setLazyDrawingInterval);
 
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
 	//the "new" syntax is extremly ugly in case signals have overloads
@@ -71,6 +73,8 @@ void Scenery3dDialog::createDialogContent()
 	connect(mgr, SIGNAL(isGeometryShaderSupportedChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, &Scenery3dMgr::torchStrengthChanged, this, &Scenery3dDialog::updateFromManager);
 	connect(mgr, &Scenery3dMgr::torchRangeChanged, this, &Scenery3dDialog::updateFromManager);
+	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, this, &Scenery3dDialog::updateFromManager);
+	connect(mgr, &Scenery3dMgr::lazyDrawingIntervalChanged, this, &Scenery3dDialog::updateFromManager);
 
 	//this is the modern type-safe way to connect signals to slots (with compile-time checking)
 	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged,this, &Scenery3dDialog::updateFromManager);
@@ -223,6 +227,24 @@ void Scenery3dDialog::updateFromManager()
 	ui->sliderTorchRange->blockSignals(true);
 	ui->sliderTorchRange->setValue(mgr->getTorchRange() * 100.0f);
 	ui->sliderTorchRange->blockSignals(false);
+
+	bool val = mgr->getEnableLazyDrawing();
+	ui->checkBoxEnableLazyDrawing->setChecked(val);
+
+	if(val)
+	{
+		ui->labelLazyDrawingInterval->show();
+		ui->spinLazyDrawingInterval->show();
+	}
+	else
+	{
+		ui->labelLazyDrawingInterval->hide();
+		ui->spinLazyDrawingInterval->hide();
+	}
+
+	ui->spinLazyDrawingInterval->blockSignals(true);
+	ui->spinLazyDrawingInterval->setValue(mgr->getLazyDrawingInterval());
+	ui->spinLazyDrawingInterval->blockSignals(false);
 
 	CubemapModeListModel* model = dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model());
 	model->setGSSupported(mgr->getIsGeometryShaderSupported());

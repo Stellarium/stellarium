@@ -26,6 +26,7 @@ private slots:
 	void on_sliderTorchStrength_valueChanged(int value);
 	void on_sliderTorchRange_valueChanged(int value);
 	void on_checkBoxDefaultScene_stateChanged(int value);
+
 	void scenery3dChanged(QListWidgetItem* item);
 
 	void updateCurrentScene(const SceneInfo& sceneInfo);

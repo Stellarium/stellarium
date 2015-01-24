@@ -222,8 +222,11 @@ void Scenery3dMgr::loadConfig()
 	scenery3d->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());
 	scenery3d->setShadowFilterQuality( static_cast<S3DEnum::ShadowFilterQuality>(conf->value("shadow_filter_quality", 1).toInt()) );
 	scenery3d->setTorchBrightness(conf->value("torch_brightness", 0.5f).toFloat());
+	scenery3d->setTorchRange(conf->value("torch_range",5.0f).toFloat());
 	scenery3d->setBumpsEnabled(conf->value("flag_bumpmap").toBool());
 	scenery3d->setShadowsEnabled(conf->value("flag_shadow").toBool());
+	scenery3d->setLazyCubemapEnabled(conf->value("flag_lazy_cubemap").toBool());
+	scenery3d->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	scenery3d->setPixelLightingEnabled(conf->value("flag_pixel_lighting").toBool());
 
 	defaultScenery3dID = conf->value("default_location_id","").toString();
@@ -703,7 +706,36 @@ void Scenery3dMgr::setTorchRange(const float torchRange)
 {
 	scenery3d->setTorchRange(torchRange);
 
+	conf->setValue(S3D_CONFIG_PREFIX+ "/torch_range",torchRange);
+
 	emit torchRangeChanged(torchRange);
+}
+
+bool Scenery3dMgr::getEnableLazyDrawing() const
+{
+	return scenery3d->getLazyCubemapEnabled();
+}
+
+void Scenery3dMgr::setEnableLazyDrawing(const bool val)
+{
+	showMessage(QString(N_("Lazy cubemapping: %1")).arg(val?N_("enabled"):N_("disabled")));
+	scenery3d->setLazyCubemapEnabled(val);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/flag_lazy_cubemap",val);
+	emit enableLazyDrawingChanged(val);
+}
+
+double Scenery3dMgr::getLazyDrawingInterval() const
+{
+	return scenery3d->getLazyCubemapInterval();
+}
+
+void Scenery3dMgr::setLazyDrawingInterval(const double val)
+{
+	scenery3d->setLazyCubemapInterval(val);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_lazy_interval",val);
+	emit lazyDrawingIntervalChanged(val);
 }
 
 bool Scenery3dMgr::getIsGeometryShaderSupported() const
