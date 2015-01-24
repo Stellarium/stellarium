@@ -94,6 +94,11 @@ public:
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
+    bool getLazyCubemapEnabled() const { return lazyDrawing; }
+    void setLazyCubemapEnabled(bool val) { lazyDrawing = val; }
+    double getLazyCubemapInterval() const { return lazyInterval; }
+    void setLazyCubemapInterval(double val) { lazyInterval = val; }
+
     S3DEnum::CubemappingMode getCubemappingMode() const { return cubemappingMode; }
     //! Changes cubemapping mode and forces re-initialization on next draw call.
     //! Note that NO CHECKING is done if the chosen mode is supported on this hardware, you have to make sure before calling this.
@@ -157,6 +162,11 @@ private:
     int drawnTriangles;
 
     /// ---- Cubemapping variables ----
+    bool lazyDrawing; //if lazy-drawing mode is enabled
+    bool needsCubemapUpdate; //if the draw-call has to recreate the cubemap
+    double lazyInterval; //the lazy-drawing time interval
+    double lastCubemapUpdate; //when the last lazy draw happened (JDay)
+    qint64 lastCubemapUpdateRealTime; //when the last lazy draw happened (real system time, QDateTime::currentMSecsSinceEpoch)
     GLuint cubeMapCubeTex; //GL_TEXTURE_CUBE_MAP, used in CUBEMAP or CUBEMAP_GSACCEL modes
     GLuint cubeMapCubeDepth; //this is a depth-cubemap, only used in CUBEMAP_GSACCEL mode
     GLuint cubeMapTex[6]; //GL_TEXTURE_2D, for "legacy" TEXTURES mode
