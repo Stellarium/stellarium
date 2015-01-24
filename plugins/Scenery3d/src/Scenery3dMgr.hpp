@@ -61,6 +61,8 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
 	Q_PROPERTY(float torchStrength READ getTorchStrength WRITE setTorchStrength NOTIFY torchStrengthChanged)
 	Q_PROPERTY(float torchRange READ getTorchRange WRITE setTorchRange NOTIFY torchRangeChanged)
+	Q_PROPERTY(bool enableLazyDrawing READ getEnableLazyDrawing WRITE setEnableLazyDrawing NOTIFY enableLazyDrawingChanged)
+	Q_PROPERTY(double lazyDrawingInterval READ getLazyDrawingInterval WRITE setLazyDrawingInterval NOTIFY lazyDrawingIntervalChanged)
 	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
 
 public:
@@ -90,6 +92,8 @@ signals:
     void enableTorchLightChanged(const bool val);
     void torchStrengthChanged(const float val);
     void torchRangeChanged(const float val);
+    void enableLazyDrawingChanged(const bool val);
+    void lazyDrawingIntervalChanged(const double val);
     void isGeometryShaderSupportedChanged(const bool val);
 
     void currentSceneChanged(const SceneInfo& sceneInfo);
@@ -150,6 +154,14 @@ public slots:
     //! Sets the range of the torchlight.
     void setTorchRange(const float torchRange);
     float getTorchRange() const;
+
+    //! Sets the state of the cubemap lazy-drawing mode
+    void setEnableLazyDrawing(const bool val);
+    bool getEnableLazyDrawing() const;
+
+    //! Sets the interval for cubemap lazy-drawing mode
+    void setLazyDrawingInterval(const double val);
+    double getLazyDrawingInterval() const;
 
     bool getIsGeometryShaderSupported() const;
 

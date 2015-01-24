@@ -84,6 +84,7 @@ GLExtFuncs glExtFuncs;
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
     : parent(parent), currentScene(), loadingScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
       absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),heightmapLoad(NULL),
+      lazyDrawing(false), needsCubemapUpdate(true), lazyInterval(2.0), lastCubemapUpdate(0.0),
       cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), cubeFBO(0), cubeSideFBO(),
       cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer)
 {
@@ -300,9 +301,6 @@ void Scenery3d::finalizeLoad()
 	//Set the scene's AABB
 	setSceneAABB(cur->getBoundingBox());
 
-	//finally, set core to enable update().
-	this->core=StelApp::getInstance().getCore();
-
 	//Find a good splitweight based on the scene's size
 	float maxSize = -std::numeric_limits<float>::max();
 	maxSize = std::max(sceneBoundingBox.max.v[0], maxSize);
@@ -317,6 +315,9 @@ void Scenery3d::finalizeLoad()
 	    splitWeight = 0.70f;
 	else
 	    splitWeight = 0.99f;
+
+	//reset the cubemap time so that is ensured it is immediately rerendered
+	lastCubemapUpdate = 0.0;
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -531,6 +532,26 @@ void Scenery3d::update(double deltaTime)
 	Vec3d move(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
 		   ( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
 		   movement[2]);
+
+	//get current time
+	double curTime = core->getJDay();
+
+	if(lazyDrawing)
+	{
+		//check if cubemap requires redraw
+		if(move.lengthSquared() > 0.0 || qAbs(curTime-lastCubemapUpdate) > lazyInterval * StelCore::JD_SECOND || reinitCubemapping)
+		{
+			needsCubemapUpdate = true;
+		}
+		else
+		{
+			needsCubemapUpdate = false;
+		}
+	}
+	else
+	{
+		needsCubemapUpdate = true;
+	}
 
 	move *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
@@ -1523,7 +1544,13 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
 
 void Scenery3d::drawWithCubeMap()
 {
-	generateCubeMap();
+	if(needsCubemapUpdate)
+	{
+		//lazy redrawing: update cubemap in slower intervals
+		generateCubeMap();
+		lastCubemapUpdate = core->getJDay();
+		lastCubemapUpdateRealTime = QDateTime::currentMSecsSinceEpoch();
+	}
 	drawFromCubeMap();
 }
 
@@ -1647,6 +1674,12 @@ void Scenery3d::drawDebug()
     screen_y -= 15.0f;
     str = QString("%1 %2 %3").arg(viewUp.v[0], 7, 'f', 2).arg(viewUp.v[1], 7, 'f', 2).arg(viewUp.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJDay()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
+    painter.drawText(screen_x, screen_y, str);
 
     screen_y -= 30.0f;
     str = QString("Venus: %1").arg(static_cast<int>(venusOn));
@@ -1681,6 +1714,9 @@ void Scenery3d::init()
 	}
 
 	//shadow map init happens on first usage of shadows
+
+	//finally, set core to enable update().
+	this->core=StelApp::getInstance().getCore();
 }
 
 void Scenery3d::deleteCubemapping()
@@ -2172,10 +2208,16 @@ void Scenery3d::draw(StelCore* core)
 	//recalculate lighting info
 	calculateLighting();
 
+	bool isPerspectiveProjection = core->getCurrentProjectionType() == StelCore::ProjectionPerspective;
+
 	if (shaderParameters.shadows)
 	{
-		if(!generateShadowMap())
-			return;
+		if(isPerspectiveProjection || needsCubemapUpdate)
+		{
+			//only calculate shadows if enabled & update required
+			if(!generateShadowMap())
+				return;
+		}
 	}
 	else
 	{
@@ -2183,7 +2225,7 @@ void Scenery3d::draw(StelCore* core)
 		deleteShadowmapping();
 	}
 
-	if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
+	if (isPerspectiveProjection)
 	{
 		//when Stellarium uses perspective projection we can use the fast direct method
 		drawDirect();
