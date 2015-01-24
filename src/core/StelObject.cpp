@@ -188,7 +188,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	{
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		double ecl= ssystem->getEarth()->getRotObliquity(2451545.0);
-		double ra_equ, dec_equ, lambda, beta;		
+		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
