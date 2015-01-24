@@ -40,7 +40,7 @@ void TestRefraction::testSaemudsonEquation()
 	Refraction refCls;
 	float acceptableError = 0.07;
 
-	// Theoretical values, what gives the Saemudson equation for refraction.
+	// Theoretical values, what gives the Saemundsson equation for refraction.
 	// Calculating apparent altitudes from the true altitudes.
 	QVariantList data;
 	data << 0 << 28.982;
@@ -146,7 +146,7 @@ void TestRefraction::testComplexRefraction()
 	Refraction refCls;
 	float acceptableError = 0.14;
 
-	// The delta of the theoretical values, what gives Saemudson and Bennett equations for refraction.
+	// The delta of the theoretical values, what gives Saemundsson and Bennett equations for refraction.
 	// true alt. -> apparent alt. -> true alt.
 	QVariantList data;
 	data << 0 << 5.496;
