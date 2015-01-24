@@ -28,9 +28,10 @@ class TestRefraction : public QObject
 {
 	Q_OBJECT
 private slots:
-	void initTestCase();
-	void testBase();
-	void benchmark();
+	void initTestCase();	
+	void testSaemudsonEquation();
+	void testBennettEquation();
+	void testComplexRefraction();
 };
 
 #endif // _TESTREFRACTION_HPP_

@@ -70,18 +70,18 @@ void TestDeltaT::historicalTest()
 	data << 1800  << 14    << 1;
 	data << 1850  << 7     << 1;
 	data << 1900  << -3    << 1;
-	data << 1950  << 29    << 0.1;
-	data << 1955  << 31.1  << 0.1;
-	data << 1960  << 33.2  << 0.1;
-	data << 1965  << 35.7  << 0.1;
-	data << 1970  << 40.2  << 0.1;
-	data << 1975  << 45.5  << 0.1;
-	data << 1980  << 50.5  << 0.1;
-	data << 1985  << 54.3  << 0.1;
-	data << 1990  << 56.9  << 0.1;
-	data << 1995  << 60.8  << 0.1;
-	data << 2000  << 63.8  << 0.1;
-	data << 2005  << 64.7  << 0.1;
+	data << 1950  << 29    << 1;
+	data << 1955  << 31.1  << 1;
+	data << 1960  << 33.2  << 1;
+	data << 1965  << 35.7  << 1;
+	data << 1970  << 40.2  << 1;
+	data << 1975  << 45.5  << 1;
+	data << 1980  << 50.5  << 1;
+	data << 1985  << 54.3  << 1;
+	data << 1990  << 56.9  << 1;
+	data << 1995  << 60.8  << 1;
+	data << 2000  << 63.8  << 1;
+	data << 2005  << 64.7  << 1;
 
 	while(data.count() >= 3) 
 	{
@@ -92,12 +92,13 @@ void TestDeltaT::historicalTest()
 		double acceptableError = data.takeFirst().toDouble();		
 		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
 		double result = StelUtils::getDeltaTByEspenakMeeus(JD);
-		double actualError = qAbs(expectedResult) - qAbs(result);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 error=%5 acceptable=%6")
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
 							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
 							.arg(year)
 							.arg(result)
+							.arg(expectedResult)
 							.arg(actualError)
 							.arg(acceptableError)
 							.toUtf8());
