@@ -29,8 +29,7 @@ class TestExtinction : public QObject
 	Q_OBJECT
 private slots:
 	void initTestCase();
-	void testBase();
-	void benchmark();
+	void testBase();	
 };
 
 #endif // _TESTEXTINCTION_HPP_

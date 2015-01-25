@@ -35,7 +35,7 @@ void TestRefraction::initTestCase()
 	QVERIFY(v[2]>=0);
 }
 
-void TestRefraction::testSaemudsonEquation()
+void TestRefraction::testSaemundssonEquation()
 {
 	Refraction refCls;
 	float acceptableError = 0.07;

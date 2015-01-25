@@ -43,7 +43,3 @@ void TestExtinction::testBase()
 	extCls.forward(vert, &mag);
 	QVERIFY(mag==2.25);
 }
-
-void TestExtinction::benchmark()
-{
-}
