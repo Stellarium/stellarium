@@ -599,7 +599,7 @@
                </property>
                <layout class="QGridLayout" name="gridLayout_2">
                 <item row="0" column="0">
-                 <widget class="QLabel" name="label_3">
+                 <widget class="QLabel" name="labelName">
                   <property name="text">
                    <string>Name:</string>
                   </property>
@@ -625,7 +625,7 @@
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QLabel" name="label_4">
+                 <widget class="QLabel" name="labelFOV">
                   <property name="text">
                    <string>aFOV:</string>
                   </property>
@@ -645,14 +645,14 @@
                  </widget>
                 </item>
                 <item row="2" column="0">
-                 <widget class="QLabel" name="label_5">
+                 <widget class="QLabel" name="labelFL">
                   <property name="text">
                    <string>Focal length:</string>
                   </property>
                  </widget>
                 </item>
                 <item row="3" column="0">
-                 <widget class="QLabel" name="label_10">
+                 <widget class="QLabel" name="labelFS">
                   <property name="text">
                    <string>Field stop:</string>
                   </property>
