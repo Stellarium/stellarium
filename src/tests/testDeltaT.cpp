@@ -24,13 +24,8 @@
 #include <QString>
 #include <QDebug>
 #include <QtGlobal>
-#include <QVector>
-
-#include <cstdlib>
 
 #include "StelUtils.hpp"
-
-#define ERROR_THRESHOLD_PERCENT 5.0
 
 QTEST_MAIN(TestDeltaT)
 
@@ -38,7 +33,7 @@ void TestDeltaT::initTestCase()
 {
 }
 
-void TestDeltaT::historicalTest()
+void TestDeltaT::testDeltaTByEspenakMeeus()
 {
 	// test data from http://eclipse.gsfc.nasa.gov/SEcat5/deltat.html#tab1
 	QVariantList data;
