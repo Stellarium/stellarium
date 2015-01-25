@@ -1349,7 +1349,7 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	{
 		double t = y - 1975;
 		//r = (45.45 + 1.067*t - std::pow(t,2)/260 - std::pow(t,3) / 718);
-		r = ((-t/718.0 +1/260.0)*t + 1.067)*t +45.45;
+		r = ((-t/718.0 -1/260.0)*t + 1.067)*t +45.45;
 	}
 	else if (y < 2005)
 	{
