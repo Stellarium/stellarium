@@ -29,7 +29,7 @@ class TestRefraction : public QObject
 	Q_OBJECT
 private slots:
 	void initTestCase();	
-	void testSaemudsonEquation();
+	void testSaemundssonEquation();
 	void testBennettEquation();
 	void testComplexRefraction();
 };
