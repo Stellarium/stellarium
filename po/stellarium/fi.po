@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 01:35+0600\n"
-"PO-Revision-Date: 2015-01-11 08:18+0000\n"
+"POT-Creation-Date: 2015-01-25 16:51+0600\n"
+"PO-Revision-Date: 2015-01-25 21:19+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-17 05:45+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
+"X-Launchpad-Export-Date: 2015-01-26 05:48+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
@@ -205,43 +205,43 @@ msgstr "Pintakirkkaus: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Koko: %1"
 
-#: src/core/modules/Nebula.cpp:375
+#: src/core/modules/Nebula.cpp:386
 msgid "Galaxy"
 msgstr "Galaksi"
 
-#: src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:389
 msgid "Open cluster"
 msgstr "Avonainen tähtijoukko"
 
-#: src/core/modules/Nebula.cpp:381
+#: src/core/modules/Nebula.cpp:392
 msgid "Globular cluster"
 msgstr "Pallomainen tähtijoukko"
 
-#: src/core/modules/Nebula.cpp:384
+#: src/core/modules/Nebula.cpp:395
 msgid "Nebula"
 msgstr "Tähtisumu"
 
-#: src/core/modules/Nebula.cpp:387
+#: src/core/modules/Nebula.cpp:398
 msgid "Planetary nebula"
 msgstr "Planetaarinen sumu"
 
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:401
 msgid "Dark nebula"
 msgstr "Pimeä sumu"
 
-#: src/core/modules/Nebula.cpp:393
+#: src/core/modules/Nebula.cpp:404
 msgid "Irregular galaxy"
 msgstr "Epäsäännöllinen galaksi"
 
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:407
 msgid "Cluster associated with nebulosity"
 msgstr "Tähtijoukko ja -sumu"
 
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:410
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: src/core/modules/Nebula.cpp:402
+#: src/core/modules/Nebula.cpp:413
 msgid "Undocumented type"
 msgstr "Dokumentoimaton tyyppi"
 
@@ -464,22 +464,12 @@ msgstr "Enimmäisvalon epookki: %1 JD"
 msgid "Period: %1 days"
 msgstr "Jakso: %1 päivää"
 
-#: src/core/modules/StarWrapper.cpp:257
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr "Seuraava valominimi: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:259
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr "Seuraava valomaksimi: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/StarWrapper.cpp:270
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Pimennyksen kesto: %1%"
 
-#: src/core/modules/StarWrapper.cpp:267
+#: src/core/modules/StarWrapper.cpp:272
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Nousuaika: %1%"
@@ -1220,7 +1210,7 @@ msgstr "Yhteystieto"
 
 #: src/gui/ConfigurationDialog.cpp:798
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1234,7 +1224,7 @@ msgstr "Versio"
 
 #: src/gui/ConfigurationDialog.cpp:881
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -5017,7 +5007,7 @@ msgid "Angle Measure Plug-in"
 msgstr "Kulmanmittaustyökalu"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Contributors"
 msgstr "Tekijät"
 
@@ -5566,19 +5556,40 @@ msgid ""
 msgstr ""
 "Tämän okulaari/barlow/kaukoputki -yhdistelmän antama todellinen näkökenttä"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+msgid "tFOV:"
+msgstr "tod. näkök."
+
+#. TRANSLATORS: Magnification factor for binoculars
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+msgid "Magnification factor:"
+msgstr "Suurennuskerroin:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
+msgid "aFOV:"
+msgstr "Näenn. näkökenttä"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
+msgid "Focal length:"
+msgstr "Polttoväli"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
 msgstr "Okulaarit-laajennus"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Barlow lens feature"
 msgstr "Barlow-linssit"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Overview"
 msgstr "Yhteenveto"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5590,7 +5601,7 @@ msgstr ""
 "kaukoputkia, kuten myös CCD-ilmaisimia. Ensimmäisellä käynnistyskerralla "
 "näytetään joitakin esimerkkejä, joilla pääset alkuun."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5608,7 +5619,7 @@ msgstr ""
 "suosittelemme jättämään mittakaavan muuttamisen pois, ellei sille ole "
 "tarvetta."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5618,7 +5629,7 @@ msgstr ""
 "pohjoiseen. Tätä ominaisuutta ei ole voitu toteutettaa, joten tällä hetkellä "
 "risitikko on suunnattu ruudun yläreunaan."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5631,28 +5642,28 @@ msgstr ""
 "0,5%1, 2,0%1, ja 4,0%1, auttaen arvioimaan miltä näyttäisi katsoa paljain "
 "silmin Telradin-etsimen (tai vastaavan) läpi."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Jos kohtaat ongelmia, voit ilmoittaa niistä. Nauti!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
 msgstr "Pikanäppäimet"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "Laajennuksen näppäinkomentoja voi muokata Yleistä-välilehdellä."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "[no key defined]"
 msgstr "[näppäintä ei ole määritelty]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
 msgstr "Asettaa okulaarinäkymän käyttöön/pois."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
 msgstr "Avaa pudotusvalikon navigointiin."
 
@@ -5741,15 +5752,6 @@ msgstr "Lisää"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "Nimi:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
-msgid "aFOV:"
-msgstr "Näenn. näkökenttä"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
-msgid "Focal length:"
-msgstr "Polttoväli"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
@@ -10925,6 +10927,14 @@ msgstr "Koordinaatti Y"
 
 #~ msgid "Dark Nebula"
 #~ msgstr "Pimeä sumu"
+
+#, qt-format
+#~ msgid "Next minimum light: %1 UTC"
+#~ msgstr "Seuraava valominimi: %1 UTC"
+
+#, qt-format
+#~ msgid "Next maximum light: %1 UTC"
+#~ msgstr "Seuraava valomaksimi: %1 UTC"
 
 #~ msgid "Earth Events from Venus"
 #~ msgstr "Maan tapahtumia venuksesta"

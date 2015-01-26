@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 01:35+0600\n"
-"PO-Revision-Date: 2015-01-09 19:08+0000\n"
+"POT-Creation-Date: 2015-01-25 16:51+0600\n"
+"PO-Revision-Date: 2015-01-25 12:41+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-17 06:01+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
+"X-Launchpad-Export-Date: 2015-01-26 06:05+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -211,43 +211,43 @@ msgstr "Яскравість поверхні: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Розмір: %1"
 
-#: src/core/modules/Nebula.cpp:375
+#: src/core/modules/Nebula.cpp:386
 msgid "Galaxy"
 msgstr "Галактика"
 
-#: src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:389
 msgid "Open cluster"
 msgstr "Розсіяне зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:381
+#: src/core/modules/Nebula.cpp:392
 msgid "Globular cluster"
 msgstr "Кулясте зоряне скупчення"
 
-#: src/core/modules/Nebula.cpp:384
+#: src/core/modules/Nebula.cpp:395
 msgid "Nebula"
 msgstr "Туманність"
 
-#: src/core/modules/Nebula.cpp:387
+#: src/core/modules/Nebula.cpp:398
 msgid "Planetary nebula"
 msgstr "Планетарна туманність"
 
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:401
 msgid "Dark nebula"
 msgstr "Темна туманність"
 
-#: src/core/modules/Nebula.cpp:393
+#: src/core/modules/Nebula.cpp:404
 msgid "Irregular galaxy"
 msgstr "Неправильна галактика"
 
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:407
 msgid "Cluster associated with nebulosity"
 msgstr "Зоряне скупчення, пов'язане з туманністю"
 
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:410
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: src/core/modules/Nebula.cpp:402
+#: src/core/modules/Nebula.cpp:413
 msgid "Undocumented type"
 msgstr "Недокументований тип"
 
@@ -471,22 +471,12 @@ msgstr "Еопха максимальної світності: ЮД %1"
 msgid "Period: %1 days"
 msgstr "Період: %1 днів"
 
-#: src/core/modules/StarWrapper.cpp:257
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr "Наступний мінімум світності: %1 ВКЧ (UTC)"
-
-#: src/core/modules/StarWrapper.cpp:259
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr "Наступний максимум світності: %1 ВКЧ (UTC)"
-
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/StarWrapper.cpp:270
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Тривалість затемнення: %1%"
 
-#: src/core/modules/StarWrapper.cpp:267
+#: src/core/modules/StarWrapper.cpp:272
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Тривалість сходу: %1%"
@@ -1244,7 +1234,7 @@ msgstr "Контакти"
 
 #: src/gui/ConfigurationDialog.cpp:798
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1258,7 +1248,7 @@ msgstr "Версія"
 
 #: src/gui/ConfigurationDialog.cpp:881
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -5057,7 +5047,7 @@ msgid "Angle Measure Plug-in"
 msgstr "Додаток вимірювання кутів"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Contributors"
 msgstr "Учасники розробки"
 
@@ -5610,19 +5600,40 @@ msgstr ""
 "Дійсне поле зору, яке забезпечується цією комбінацією окуляра, лінзи і "
 "телескопа"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+msgid "tFOV:"
+msgstr "Реальне поле зору:"
+
+#. TRANSLATORS: Magnification factor for binoculars
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+msgid "Magnification factor:"
+msgstr "Коефіцієнт збільшення:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
+msgid "aFOV:"
+msgstr "Видиме ПЗ:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
+msgid "Focal length:"
+msgstr "Фокусна відстань:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
 msgstr "Додаток окулярів"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Barlow lens feature"
 msgstr "Функція лінзи Барлоу"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Overview"
 msgstr "Перегляд"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5634,7 +5645,7 @@ msgstr ""
 "змін та вилучення записів окулярів та телескопів, а також датчиків ПЗЗ. Під "
 "час першого запуску програми список буде заповнено типовими пунктами."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5651,7 +5662,7 @@ msgstr ""
 "може бути масштабування зображення з втратою значної корисної площі "
 "зображення на екрані. Тому не рекомендуємо вам вмикати цей режим без потреби."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5662,7 +5673,7 @@ msgstr ""
 "але, на жаль, це не вдалося. У поточній версії визначено вирівнювання за "
 "верхньою частиною екрана."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5676,29 +5687,29 @@ msgstr ""
 "допоможе вам побачити те, що ви маєте побачити неозброєним оком за допомогою "
 "шукача Telrad або подібного."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 "Якщо знайдете якісь вади, повідомте авторові. Приємного користування!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
 msgstr "Клавіші керування"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "Клавіші керування можна змінити за допомогою вкладки «Загальне»."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "[no key defined]"
 msgstr "[клавіш не визначено]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
 msgstr "Вмикає або вимикає накладку окуляра."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
 msgstr "Відкриває контекстне меню навігації."
 
@@ -5790,15 +5801,6 @@ msgstr "Додати"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "Назва:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
-msgid "aFOV:"
-msgstr "Видиме ПЗ:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
-msgid "Focal length:"
-msgstr "Фокусна відстань:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
@@ -11175,6 +11177,14 @@ msgstr "Координата Y"
 
 #~ msgid "Dark Nebula"
 #~ msgstr "Темна туманність"
+
+#, qt-format
+#~ msgid "Next minimum light: %1 UTC"
+#~ msgstr "Наступний мінімум світності: %1 ВКЧ (UTC)"
+
+#, qt-format
+#~ msgid "Next maximum light: %1 UTC"
+#~ msgstr "Наступний максимум світності: %1 ВКЧ (UTC)"
 
 #~ msgid "Earth Events from Venus"
 #~ msgstr "Події, пов’язані з Землею, з Венери"

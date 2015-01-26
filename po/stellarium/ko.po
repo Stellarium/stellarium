@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 01:35+0600\n"
+"POT-Creation-Date: 2015-01-25 16:51+0600\n"
 "PO-Revision-Date: 2014-11-30 13:42+0000\n"
 "Last-Translator: Nadanomics <hb7701@naver.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-17 05:50+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
+"X-Launchpad-Export-Date: 2015-01-26 05:54+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -206,43 +206,43 @@ msgstr "표면 밝기: <b>%1</b>"
 msgid "Size: %1"
 msgstr "크기: %1"
 
-#: src/core/modules/Nebula.cpp:375
+#: src/core/modules/Nebula.cpp:386
 msgid "Galaxy"
 msgstr "은하"
 
-#: src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:389
 msgid "Open cluster"
 msgstr "산개성단"
 
-#: src/core/modules/Nebula.cpp:381
+#: src/core/modules/Nebula.cpp:392
 msgid "Globular cluster"
 msgstr "구상성단"
 
-#: src/core/modules/Nebula.cpp:384
+#: src/core/modules/Nebula.cpp:395
 msgid "Nebula"
 msgstr "성운"
 
-#: src/core/modules/Nebula.cpp:387
+#: src/core/modules/Nebula.cpp:398
 msgid "Planetary nebula"
 msgstr "행성상성운"
 
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:401
 msgid "Dark nebula"
 msgstr "암흑성운"
 
-#: src/core/modules/Nebula.cpp:393
+#: src/core/modules/Nebula.cpp:404
 msgid "Irregular galaxy"
 msgstr "불규칙은하"
 
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:407
 msgid "Cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:410
 msgid "Unknown"
 msgstr "알려지지 않음"
 
-#: src/core/modules/Nebula.cpp:402
+#: src/core/modules/Nebula.cpp:413
 msgid "Undocumented type"
 msgstr "기록되지 않은 유형"
 
@@ -465,22 +465,12 @@ msgstr "최대 광도 시간 기준점: %1 JD"
 msgid "Period: %1 days"
 msgstr "주기: %1 일"
 
-#: src/core/modules/StarWrapper.cpp:257
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr "다음 최소 광도: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:259
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr "다음 최대 광도: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/StarWrapper.cpp:270
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "식의 지속기간: %1%"
 
-#: src/core/modules/StarWrapper.cpp:267
+#: src/core/modules/StarWrapper.cpp:272
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "광도 증가기간: %1%"
@@ -1182,7 +1172,7 @@ msgstr "연락처"
 
 #: src/gui/ConfigurationDialog.cpp:798
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1196,7 +1186,7 @@ msgstr "버전"
 
 #: src/gui/ConfigurationDialog.cpp:881
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -4898,7 +4888,7 @@ msgid "Angle Measure Plug-in"
 msgstr "각도 측정 플러그인"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Contributors"
 msgstr "도움을 주신 분"
 
@@ -5434,19 +5424,40 @@ msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "이 접안부/렌즈/망원경 조합이 지원하는 실제 시야각"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+msgid "tFOV:"
+msgstr ""
+
+#. TRANSLATORS: Magnification factor for binoculars
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+msgid "Magnification factor:"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
+msgid "aFOV:"
+msgstr "겉보기 시야각:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
+msgid "Focal length:"
+msgstr "초점거리:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
 msgstr "접안렌즈 플러그인"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Barlow lens feature"
 msgstr "바로우 렌즈 부분"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Overview"
 msgstr "개요"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5456,7 +5467,7 @@ msgstr ""
 "이 플러그인은 당신이 접안렌즈를 통해 볼 수 있는 시야를 재현합니다. 설정에서 접안렌즈와 망원경와 CCD 센서를 추가, 수정 또는 삭제할 "
 "수 있습니다. 맨 처음 시작할 때 몇몇 샘플이 주어집니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5470,7 +5481,7 @@ msgstr ""
 "위함입니다. 같은 접안렌즈를 초점거리가 다른 두 망원경에 대면 서로 다른 시야를 가지게 됩니다. 이 때 이미지의 배율이 높으면 버려지는 "
 "화면의 양이 늘어난다는 상반관계가 존재하므로 필요하지 않은 경우에는 사용하지 않는 것을 권합니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5479,7 +5490,7 @@ msgstr ""
 "여러분은 시야에서 십자표시를 켜고 끌 수 있습니다. 이상적으론 이 십자표시가 북쪽으로 정렬되어야 하지만 그렇게 할 수 없었습니다.  "
 "그래서 지금은 화면의 위에 맞춰 정렬됩니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5490,28 +5501,28 @@ msgstr ""
 "여러분은 텔라드 파인더를 켜고 끌 수 있습니다; 이 때 접안렌즈로 보고 있지 않은 상태여야 합니다. 이 기능은 중심이 같은 0.5%1, "
 "2.0%1, 4.0%1의 크기의 원을 그려 텔라드(혹은 비슷한) 파인더를 맨눈으로 보았을 때 어떻게 보이는지를 짐작하게 해 줍니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "당신이 어떠한 문제를 발견했다면 즉시 알려주세요."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
 msgstr "단축키"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "플러그인 단축키는 일반 탭에서 편집할 수 있습니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "[no key defined]"
 msgstr "[설정된 키가 없습니다]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
 msgstr "접안부 오버레이 켜기/끄기"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
 msgstr "팝업 탐색 메뉴 열기"
 
@@ -5599,15 +5610,6 @@ msgstr "추가"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "이름:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
-msgid "aFOV:"
-msgstr "겉보기 시야각:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
-msgid "Focal length:"
-msgstr "초점거리:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
@@ -10351,6 +10353,14 @@ msgstr "Y축 좌표"
 
 #~ msgid "Mean Surface Temperature"
 #~ msgstr "평균 표면 온도"
+
+#, qt-format
+#~ msgid "Next minimum light: %1 UTC"
+#~ msgstr "다음 최소 광도: %1 UTC"
+
+#, qt-format
+#~ msgid "Next maximum light: %1 UTC"
+#~ msgstr "다음 최대 광도: %1 UTC"
 
 #, qt-format
 #~ msgid "RA/DE (of date): %1/%2"
