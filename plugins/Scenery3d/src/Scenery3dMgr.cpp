@@ -738,6 +738,40 @@ void Scenery3dMgr::setLazyDrawingInterval(const double val)
 	emit lazyDrawingIntervalChanged(val);
 }
 
+uint Scenery3dMgr::getCubemapSize() const
+{
+	return scenery3d->getCubemapSize();
+}
+
+void Scenery3dMgr::setCubemapSize(const uint val)
+{
+	if(val != getCubemapSize())
+	{
+		scenery3d->setCubemapSize(val);
+		showMessage(N_("Cubemap size changed"));
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_size",val);
+		emit cubemapSizeChanged(val);
+	}
+}
+
+uint Scenery3dMgr::getShadowmapSize() const
+{
+	return scenery3d->getShadowmapSize();
+}
+
+void Scenery3dMgr::setShadowmapSize(const uint val)
+{
+	if(val != getShadowmapSize())
+	{
+		scenery3d->setShadowmapSize(val);
+		showMessage(N_("Shadowmap size changed"));
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/shadowmap_size",val);
+		emit shadowmapSizeChanged(val);
+	}
+}
+
 bool Scenery3dMgr::getIsGeometryShaderSupported() const
 {
 	return scenery3d->isGeometryShaderCubemapSupported();

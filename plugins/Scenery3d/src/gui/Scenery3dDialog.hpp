@@ -26,10 +26,15 @@ private slots:
 	void on_sliderTorchStrength_valueChanged(int value);
 	void on_sliderTorchRange_valueChanged(int value);
 	void on_checkBoxDefaultScene_stateChanged(int value);
+	void on_comboBoxCubemapSize_currentIndexChanged(int index);
+	void on_comboBoxShadowmapSize_currentIndexChanged(int index);
 
 	void scenery3dChanged(QListWidgetItem* item);
 
 	void updateCurrentScene(const SceneInfo& sceneInfo);
+
+	void initResolutionCombobox(QComboBox* cb);
+	void setResolutionCombobox(QComboBox* cb, uint val);
 
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This is called automatically from the signals in the manager class
