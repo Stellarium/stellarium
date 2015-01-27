@@ -1604,12 +1604,22 @@ void SolarSystem::reloadPlanets()
 	bool flagOrbits = getFlagOrbits();
 	bool flagNative = getFlagNativeNames();
 	bool flagTrans = getFlagTranslatedNames();
-	
+	bool hasSelection = false;
+
 	// Save observer location (fix for LP bug # 969211)
 	// TODO: This can probably be done better with a better understanding of StelObserver --BM
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = core->getCurrentLocation();
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 
+	// Whether any planet are selected? Save the current selection...
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Planet");
+	if (!selectedObject.isEmpty())
+	{
+		// ... unselect current planet.
+		hasSelection = true;
+		objMgr->unSelect();
+	}
 	// Unload all Solar System objects
 	selected.clear();//Release the selected one
 	foreach (Orbit* orb, orbits)
@@ -1653,6 +1663,12 @@ void SolarSystem::reloadPlanets()
 	setFlagOrbits(flagOrbits);
 	setFlagNativeNames(flagNative);
 	setFlagTranslatedNames(flagTrans);
+
+	if (hasSelection)
+	{
+		// Restore selection...
+		objMgr->setSelectedObject(selectedObject);
+	}
 
 	// Restore translations
 	updateI18n();
