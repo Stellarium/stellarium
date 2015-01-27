@@ -9,6 +9,8 @@
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 
+#include <QLineEdit>
+#include <QStandardItemModel>
 #include <QTimer>
 
 Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent)
@@ -60,6 +62,8 @@ void Scenery3dDialog::createDialogContent()
 	//the "new" syntax is extremly ugly in case signals have overloads
 	connect(ui->comboBoxCubemapMode, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapMode_currentIndexChanged);
 	connect(ui->comboBoxShadowFiltering, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged);
+	connect(ui->comboBoxCubemapSize,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged);
+	connect(ui->comboBoxShadowmapSize,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxShadowmapSize_currentIndexChanged);
 
 	connect(ui->sliderTorchStrength, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchStrength_valueChanged);
 	connect(ui->sliderTorchRange, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
@@ -114,7 +118,41 @@ void Scenery3dDialog::createDialogContent()
 	}
 	l->blockSignals(false);
 
+	//init resolution boxes
+	initResolutionCombobox(ui->comboBoxCubemapSize);
+	initResolutionCombobox(ui->comboBoxShadowmapSize);
+
 	updateFromManager();
+}
+
+void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
+{
+	bool oldval = cb->blockSignals(true);
+	for(uint i = 256;i<=4096;i*=2)
+	{
+		cb->addItem(QString::number(i),i);
+	}
+	cb->blockSignals(oldval);
+}
+
+void Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged(int index)
+{
+	bool ok;
+	uint val = ui->comboBoxCubemapSize->currentData().toUInt(&ok);
+	if(ok)
+	{
+		mgr->setCubemapSize(val);
+	}
+}
+
+void Scenery3dDialog::on_comboBoxShadowmapSize_currentIndexChanged(int index)
+{
+	bool ok;
+	uint val = ui->comboBoxShadowmapSize->currentData().toUInt(&ok);
+	if(ok)
+	{
+		mgr->setShadowmapSize(val);
+	}
 }
 
 void Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged(int index)
@@ -206,6 +244,26 @@ QString Scenery3dDialog::getHtmlDescription(const SceneInfo &si) const
 	return desc;
 }
 
+void Scenery3dDialog::setResolutionCombobox(QComboBox *cb, uint val)
+{
+	cb->blockSignals(true);
+	int idx = cb->findData(val);
+	if(idx>=0)
+	{
+		//valid entry
+		cb->setCurrentIndex(idx);
+	}
+	else
+	{
+		//add entry for the current value, making sure it is at first place
+		cb->clear();
+		cb->addItem(QString::number(val),val);
+		initResolutionCombobox(cb);
+		cb->setCurrentIndex(0);
+	}
+	cb->blockSignals(false);
+}
+
 // Update the widget to make sure it is synchrone if a value was changed programmatically
 void Scenery3dDialog::updateFromManager()
 {
@@ -245,6 +303,9 @@ void Scenery3dDialog::updateFromManager()
 	ui->spinLazyDrawingInterval->blockSignals(true);
 	ui->spinLazyDrawingInterval->setValue(mgr->getLazyDrawingInterval());
 	ui->spinLazyDrawingInterval->blockSignals(false);
+
+	setResolutionCombobox(ui->comboBoxCubemapSize,mgr->getCubemapSize());
+	setResolutionCombobox(ui->comboBoxShadowmapSize,mgr->getShadowmapSize());
 
 	CubemapModeListModel* model = dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model());
 	model->setGSSupported(mgr->getIsGeometryShaderSupported());

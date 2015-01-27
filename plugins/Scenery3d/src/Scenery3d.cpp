@@ -86,7 +86,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
     : parent(parent), currentScene(), loadingScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
       absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),heightmapLoad(NULL),
       lazyDrawing(false), needsCubemapUpdate(true), lazyInterval(2.0), lastCubemapUpdate(0.0),
-      cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), cubeFBO(0), cubeSideFBO(),
+      cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), cubeFBO(0), cubeSideFBO(), cubeMappingCreated(false),
       cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer)
 {
 	qDebug()<<"Scenery3d constructor...";
@@ -1052,8 +1052,9 @@ void Scenery3d::adjustFrustum()
 
 bool Scenery3d::generateShadowMap()
 {
-	//test if shadow mapping has been initialized
-	if(shadowFBOs.size()==0)
+	//test if shadow mapping has been initialized,
+	//or needs to be re-initialized because of setting changes
+	if(reinitShadowmapping || shadowFBOs.size()==0)
 	{
 		if(!initShadowmapping())
 			return false; //can't use shadowmaps
@@ -1731,45 +1732,50 @@ void Scenery3d::init()
 
 void Scenery3d::deleteCubemapping()
 {
-	//delete cube map - we have to check each possible variable because we dont know which ones are active
-	//delete in reverse, FBOs first - but it should not matter
-	if(cubeFBO)
+	if(cubeMappingCreated)
 	{
-		glDeleteFramebuffers(1,&cubeFBO);
-		cubeFBO = 0;
-	}
+		//delete cube map - we have to check each possible variable because we dont know which ones are active
+		//delete in reverse, FBOs first - but it should not matter
+		if(cubeFBO)
+		{
+			glDeleteFramebuffers(1,&cubeFBO);
+			cubeFBO = 0;
+		}
 
-	if(cubeSideFBO[0])
-	{
-		//we assume if one is created, all have been created
-		glDeleteFramebuffers(6,cubeSideFBO);
-		std::fill(cubeSideFBO,cubeSideFBO + 6,0);
-	}
+		if(cubeSideFBO[0])
+		{
+			//we assume if one is created, all have been created
+			glDeleteFramebuffers(6,cubeSideFBO);
+			std::fill(cubeSideFBO,cubeSideFBO + 6,0);
+		}
 
-	//delete depth
-	if(cubeRB)
-	{
-		glDeleteRenderbuffers(1,&cubeRB);
-		cubeRB = 0;
-	}
+		//delete depth
+		if(cubeRB)
+		{
+			glDeleteRenderbuffers(1,&cubeRB);
+			cubeRB = 0;
+		}
 
-	if(cubeMapCubeDepth)
-	{
-		glDeleteTextures(1,&cubeMapCubeDepth);
-		cubeMapCubeDepth = 0;
-	}
+		if(cubeMapCubeDepth)
+		{
+			glDeleteTextures(1,&cubeMapCubeDepth);
+			cubeMapCubeDepth = 0;
+		}
 
-	//delete colors
-	if(cubeMapTex[0])
-	{
-		glDeleteTextures(6,cubeMapTex);
-		std::fill(cubeMapTex, cubeMapTex + 6,0);
-	}
+		//delete colors
+		if(cubeMapTex[0])
+		{
+			glDeleteTextures(6,cubeMapTex);
+			std::fill(cubeMapTex, cubeMapTex + 6,0);
+		}
 
-	if(cubeMapCubeTex)
-	{
-		glDeleteTextures(1,&cubeMapCubeTex);
-		cubeMapCubeTex = 0;
+		if(cubeMapCubeTex)
+		{
+			glDeleteTextures(1,&cubeMapCubeTex);
+			cubeMapCubeTex = 0;
+		}
+
+		cubeMappingCreated = false;
 	}
 }
 
@@ -1780,6 +1786,15 @@ bool Scenery3d::initCubemapping()
 
 	//remove old cubemap objects if they exist
 	deleteCubemapping();
+
+	if(cubemapSize<=0)
+	{
+		//TODO this will likely cause problems if this ever happens
+		//but since Framebuffers seem to be required in the Qt5 build anyway, this should probably not happen
+		qWarning()<<"[Scenery3d] Cubemapping not supported or disabled";
+	}
+
+	cubeMappingCreated = true;
 
 	//last compatibility check before possible crash
 	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
@@ -2077,6 +2092,9 @@ bool Scenery3d::initCubemapping()
 	cubeIndexBuffer.allocate(cubeIndices.constData(),cubeIndices.size() * sizeof(unsigned short));
 	cubeIndexBuffer.release();
 
+	//reset cubemap timer to make sure it is rerendered immediately after re-init
+	lastCubemapUpdate = 0.0;
+
 	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
 
 	return ret;
@@ -2202,11 +2220,21 @@ void Scenery3d::draw(StelCore* core)
 
 	drawnTriangles = 0;
 
-	if(reinitCubemapping && core->getCurrentProjectionType()!= StelCore::ProjectionPerspective)
+	bool isPerspectiveProjection = core->getCurrentProjectionType() == StelCore::ProjectionPerspective;
+
+	if(!isPerspectiveProjection)
 	{
-		//init cubemaps
-		initCubemapping();
-		reinitCubemapping = false;
+		if(!cubeMappingCreated || reinitCubemapping)
+		{
+			//init cubemaps
+			initCubemapping();
+			reinitCubemapping = false;
+		}
+	}
+	else
+	{
+		//remove cubemapping objects when switching to perspective proj to save GPU memory
+		deleteCubemapping();
 	}
 
 	//update projector from core
@@ -2217,8 +2245,6 @@ void Scenery3d::draw(StelCore* core)
 
 	//recalculate lighting info
 	calculateLighting();
-
-	bool isPerspectiveProjection = core->getCurrentProjectionType() == StelCore::ProjectionPerspective;
 
 	if (shaderParameters.shadows)
 	{
