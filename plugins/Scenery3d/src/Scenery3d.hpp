@@ -85,7 +85,7 @@ public:
     bool getPixelLightingEnabled() const { return shaderParameters.pixelLighting; }
     void setPixelLightingEnabled(const bool val) { shaderParameters.pixelLighting = val; }
     bool getShadowsEnabled(void) const { return shaderParameters.shadows; }
-    void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; }
+    void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; reinitShadowmapping = true; }
     bool getBumpsEnabled(void) const { return shaderParameters.bump; }
     void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; }
     bool getTorchEnabled(void) const { return shaderParameters.torchLight; }
@@ -107,9 +107,9 @@ public:
     bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
 
     uint getCubemapSize() const { return cubemapSize; }
-    void setCubemapSize(uint size) { cubemapSize = size; }
+    void setCubemapSize(uint size) { cubemapSize = size; reinitCubemapping = true; }
     uint getShadowmapSize() const { return shadowmapSize; }
-    void setShadowmapSize(uint size) { shadowmapSize = size; }
+    void setShadowmapSize(uint size) { shadowmapSize = size; reinitShadowmapping = true; }
     float getTorchBrightness() const { return torchBrightness; }
     void setTorchBrightness(float brightness) { torchBrightness = brightness; }
     float getTorchRange() const { return torchRange; }
@@ -140,7 +140,7 @@ private:
     bool venusOn;
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
     S3DEnum::CubemappingMode cubemappingMode;
-    bool reinitCubemapping;
+    bool reinitCubemapping,reinitShadowmapping;
 
     bool loadCancel; //true if loading process should be canceled
 
@@ -173,6 +173,7 @@ private:
     GLuint cubeMapCubeDepth; //this is a depth-cubemap, only used in CUBEMAP_GSACCEL mode
     GLuint cubeMapTex[6]; //GL_TEXTURE_2D, for "legacy" TEXTURES mode
     GLuint cubeRB; //renderbuffer for depth of a single face in TEXTURES and CUBEMAP modes (attached to multiple FBOs)
+    bool cubeMappingCreated; //true if any cubemapping objects have been initialized and need to be cleaned up eventually
 
      //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBOs ourselves
     GLuint cubeFBO; //used in CUBEMAP_GSACCEL mode - only a single FBO exists, with a cubemap for color and one for depth

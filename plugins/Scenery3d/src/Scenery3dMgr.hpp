@@ -64,6 +64,8 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enableLazyDrawing READ getEnableLazyDrawing WRITE setEnableLazyDrawing NOTIFY enableLazyDrawingChanged)
 	Q_PROPERTY(double lazyDrawingInterval READ getLazyDrawingInterval WRITE setLazyDrawingInterval NOTIFY lazyDrawingIntervalChanged)
 	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
+	Q_PROPERTY(uint cubemapSize READ getCubemapSize WRITE setCubemapSize NOTIFY cubemapSizeChanged)
+	Q_PROPERTY(uint shadowmapSize READ getShadowmapSize WRITE setShadowmapSize NOTIFY shadowmapSizeChanged)
 
 public:
     Scenery3dMgr();
@@ -95,6 +97,8 @@ signals:
     void enableLazyDrawingChanged(const bool val);
     void lazyDrawingIntervalChanged(const double val);
     void isGeometryShaderSupportedChanged(const bool val);
+    void cubemapSizeChanged(const uint val);
+    void shadowmapSizeChanged(const uint val);
 
     void currentSceneChanged(const SceneInfo& sceneInfo);
 
@@ -162,6 +166,16 @@ public slots:
     //! Sets the interval for cubemap lazy-drawing mode
     void setLazyDrawingInterval(const double val);
     double getLazyDrawingInterval() const;
+
+    //! Sets the size used for cubemap rendering.
+    //! For best compatibility and performance, this should be a power of 2.
+    void setCubemapSize(const uint val);
+    uint getCubemapSize() const;
+
+    //! Sets the size used for shadowmap rendering.
+    //! For best compatibility and performance, this should be a power of 2.
+    void setShadowmapSize(const uint val);
+    uint getShadowmapSize() const;
 
     bool getIsGeometryShaderSupported() const;
 
