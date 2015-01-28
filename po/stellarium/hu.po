@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-25 16:51+0600\n"
-"PO-Revision-Date: 2014-12-30 08:15+0000\n"
+"PO-Revision-Date: 2015-01-27 21:06+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-26 05:51+0000\n"
+"X-Launchpad-Export-Date: 2015-01-28 05:45+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -161,7 +161,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:615
 msgid "Celestial body:"
-msgstr ""
+msgstr "Égi objektum:"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
@@ -1261,7 +1261,7 @@ msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"Csillag katalógusok letöltve!\n"
+"Csillagkatalógusok letöltve! \n"
 "Indítsa újra a Stellariumot, hogy láthatóvá váljanak!"
 
 #: src/gui/ConfigurationDialog.cpp:989
@@ -2145,27 +2145,27 @@ msgstr "hold"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr ""
+msgstr "plutínó"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
 msgid "dwarf planet"
-msgstr ""
+msgstr "törpebolygó"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "kubevanó"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "scattered disc object"
-msgstr ""
+msgstr "szórt korong objektum"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
 msgid "Oort cloud object"
-msgstr ""
+msgstr "Oort felhő objektum"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:64
@@ -2187,27 +2187,27 @@ msgstr "Holdak"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:70
 msgid "Plutinos"
-msgstr ""
+msgstr "plutínók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:72
 msgid "Dwarf planets"
-msgstr ""
+msgstr "törpebolygók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "kubevanók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:76
 msgid "Scattered disc objects"
-msgstr ""
+msgstr "szórt korong objektumok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:78
 msgid "Oort cloud objects"
-msgstr ""
+msgstr "Oort felhő objektumok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
@@ -4753,7 +4753,7 @@ msgstr "Színek megfordítása"
 
 #: src/ui_configurationDialog.h:1195
 msgid "Star catalog updates"
-msgstr "Csillag katalógus frissítések"
+msgstr "Csillagkatalógus frissítés"
 
 #: src/ui_configurationDialog.h:1197
 msgid "Click here to start downloading"
@@ -4789,7 +4789,7 @@ msgstr "A futó szkript leállítása"
 
 #: src/ui_configurationDialog.h:1220
 msgid "Load at startup"
-msgstr "Betöltés inuláskor"
+msgstr "Betöltés induláskor"
 
 #: src/ui_configurationDialog.h:1221
 msgid "configure"
@@ -5540,7 +5540,7 @@ msgstr ""
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "Magnification factor:"
-msgstr ""
+msgstr "Nagyítási arány:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
@@ -6668,7 +6668,7 @@ msgstr "&Kiválasztott objektum"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Center of the screen"
-msgstr ""
+msgstr "A képernyő közepe"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Hours-minutes-seconds format"
@@ -7372,7 +7372,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:205
 msgid "Select bookmark..."
-msgstr ""
+msgstr "Könyvjelző választása..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
