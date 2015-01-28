@@ -1056,6 +1056,7 @@ bool Scenery3d::generateShadowMap()
 	//or needs to be re-initialized because of setting changes
 	if(reinitShadowmapping || shadowFBOs.size()==0)
 	{
+		reinitShadowmapping = false;
 		if(!initShadowmapping())
 			return false; //can't use shadowmaps
 	}

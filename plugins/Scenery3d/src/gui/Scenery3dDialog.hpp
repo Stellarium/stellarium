@@ -6,6 +6,7 @@
 
 class Scenery3dMgr;
 class SceneInfo;
+class StoredViewDialog;
 
 class Scenery3dDialog : public StelDialog
 {
@@ -36,6 +37,8 @@ private slots:
 	void initResolutionCombobox(QComboBox* cb);
 	void setResolutionCombobox(QComboBox* cb, uint val);
 
+	void openStoredViewDialog();
+
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This is called automatically from the signals in the manager class
 	void updateFromManager();
@@ -43,6 +46,8 @@ private slots:
 private:
 	QString getHtmlDescription(const SceneInfo& si) const;
 
+
+	StoredViewDialog* storedViewDialog;
 	Ui_scenery3dDialogForm* ui;
 	Scenery3dMgr* mgr;
 };
