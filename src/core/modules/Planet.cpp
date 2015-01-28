@@ -1652,12 +1652,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->setAttributeArray(shaderVars->texCoord, (const GLfloat*)model.texCoordArr.constData(), 2));
 	GL(shader->enableAttributeArray(shaderVars->texCoord));
 
-	if (rings)
-	{
-		glDepthMask(GL_TRUE);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		glEnable(GL_DEPTH_TEST);
-	}
+	glDepthMask(GL_TRUE);
+	glEnable(GL_DEPTH_TEST);
 	
 	if (!drawOnlyRing)
 		GL(glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
@@ -1765,6 +1761,9 @@ void Planet::drawOrbit(const StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
+	glDepthMask(GL_TRUE);
+	glEnable(GL_DEPTH_TEST);
+
 	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
@@ -1783,19 +1782,20 @@ void Planet::drawOrbit(const StelCore* core)
 		{
 			vertexArray.append(onscreen[0]);
 			vertexArray.append(onscreen[1]);
+			vertexArray.append(onscreen[2]);
 		}
 		else if (!vertexArray.isEmpty())
 		{
-			sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-			sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
+			sPainter.setVertexPointer(3, GL_FLOAT, vertexArray.constData());
+			sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/3, 0, false);
 			vertexArray.clear();
 		}
 	}
 	orbit[ORBIT_SEGMENTS/2]=savePos;
 	if (!vertexArray.isEmpty())
 	{
-		sPainter.setVertexPointer(2, GL_FLOAT, vertexArray.constData());
-		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/2, 0, false);
+		sPainter.setVertexPointer(3, GL_FLOAT, vertexArray.constData());
+		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size()/3, 0, false);
 	}
 	sPainter.enableClientStates(false);
 }

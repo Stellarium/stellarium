@@ -1097,6 +1097,8 @@ void SolarSystem::draw(StelCore* core)
 			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
 
 	// Draw the elements
+	glDepthMask(GL_TRUE);
+	glClear(GL_DEPTH_BUFFER_BIT);
 	foreach (const PlanetP& p, systemPlanets)
 	{
 		p->draw(core, maxMagLabel, planetNameFont);
