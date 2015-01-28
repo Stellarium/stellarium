@@ -426,7 +426,7 @@ void Scenery3dMgr::loadSceneCompleted()
 		Vec3d v;
 		StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
 		mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
-		mm->zoomTo(lookat[2], 0.);
+		mm->zoomTo(lookat[2]);
 	} else qDebug() << "Scenery3D: Not setting orientation, no data.";
 
 
@@ -775,6 +775,44 @@ void Scenery3dMgr::setShadowmapSize(const uint val)
 bool Scenery3dMgr::getIsGeometryShaderSupported() const
 {
 	return scenery3d->isGeometryShaderCubemapSupported();
+}
+
+void Scenery3dMgr::setView(const StoredView &view)
+{
+	//update position
+	//TODO
+
+	//update view vector
+	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
+
+	// This vector is (az_deg, alt_deg, fov_deg)
+	Vec3d v;
+	StelUtils::spheToRect(view.view_fov[0]*M_PI/180.0, view.view_fov[1]*M_PI/180.0, v);
+	mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
+	mm->zoomTo(view.view_fov[2]);
+}
+
+StoredView Scenery3dMgr::getCurrentView()
+{
+	StoredView view;
+	view.isGlobal = false;
+	StelCore* core = StelApp::getInstance().getCore();
+	StelMovementMgr* mm = core->getMovementMgr();
+
+	//get view vec
+	Vec3d vd = mm->getViewDirectionJ2000();
+	//convert to alt/az format
+	vd = core->j2000ToAltAz(vd, StelCore::RefractionOff);
+	//convert to spherical angles
+	StelUtils::rectToSphe(&view.view_fov[0],&view.view_fov[1],vd);
+	//convert to degrees
+	view.view_fov[0]*=180.0/M_PI;
+	view.view_fov[1]*=180.0/M_PI;
+
+	view.view_fov[2] = mm->getAimFov();
+
+
+	return view;
 }
 
 void Scenery3dMgr::showMessage(const QString& message)

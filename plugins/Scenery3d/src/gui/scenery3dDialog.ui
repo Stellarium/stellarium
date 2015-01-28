@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
+    <width>577</width>
     <height>468</height>
    </rect>
   </property>
@@ -328,7 +328,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item row="1" column="1">
-            <layout class="QGridLayout" name="gridLayout_4">
+            <layout class="QVBoxLayout" name="verticalLayout">
              <property name="leftMargin">
               <number>3</number>
              </property>
@@ -341,284 +341,286 @@ p, li { white-space: pre-wrap; }
              <property name="bottomMargin">
               <number>3</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxDefaultScene">
-               <property name="text">
-                <string>Set as default scene</string>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="checkBoxDefaultScene">
+                 <property name="text">
+                  <string>Set as default scene</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButtonOpenStoredViewDialog">
+                 <property name="text">
+                  <string>Load/save viewpoints</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QTabWidget" name="tabWidget">
+               <property name="currentIndex">
+                <number>1</number>
                </property>
+               <widget class="QWidget" name="tab">
+                <attribute name="title">
+                 <string>Visual options</string>
+                </attribute>
+                <layout class="QFormLayout" name="formLayout_4">
+                 <property name="fieldGrowthPolicy">
+                  <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelTorchStrength">
+                   <property name="text">
+                    <string>Torch strength (%1):</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>sliderTorchStrength</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QSlider" name="sliderTorchStrength">
+                   <property name="maximum">
+                    <number>100</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_4">
+                   <property name="text">
+                    <string>Torch range:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>sliderTorchRange</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSlider" name="sliderTorchRange">
+                   <property name="maximum">
+                    <number>10000</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>100</number>
+                   </property>
+                   <property name="pageStep">
+                    <number>1000</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="tab_2">
+                <attribute name="title">
+                 <string>Quality/Performance settings</string>
+                </attribute>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <layout class="QFormLayout" name="formLayout">
+                   <property name="fieldGrowthPolicy">
+                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QCheckBox" name="checkBoxEnablePixelLight">
+                     <property name="toolTip">
+                      <string>Required for bump mapping and shadows!</string>
+                     </property>
+                     <property name="text">
+                      <string>Per-Pixel lighting</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="2">
+                    <widget class="QCheckBox" name="checkBoxEnableShadows">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="text">
+                      <string>Shadows</string>
+                     </property>
+                     <property name="checked">
+                      <bool>false</bool>
+                     </property>
+                     <property name="tristate">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0">
+                    <widget class="QLabel" name="label">
+                     <property name="text">
+                      <string>Shadowmap size:</string>
+                     </property>
+                     <property name="buddy">
+                      <cstring>comboBoxShadowmapSize</cstring>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="1">
+                    <widget class="QComboBox" name="comboBoxShadowmapSize">
+                     <property name="currentIndex">
+                      <number>-1</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="label_5">
+                     <property name="text">
+                      <string>Cubemap size:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QComboBox" name="comboBoxCubemapSize"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QFormLayout" name="formLayout_2">
+                   <property name="fieldGrowthPolicy">
+                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QCheckBox" name="checkBoxEnableBump">
+                     <property name="enabled">
+                      <bool>true</bool>
+                     </property>
+                     <property name="text">
+                      <string>Bump mapping</string>
+                     </property>
+                     <property name="checked">
+                      <bool>false</bool>
+                     </property>
+                     <property name="tristate">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0">
+                    <widget class="QLabel" name="label_2">
+                     <property name="text">
+                      <string>Filtering Quality:</string>
+                     </property>
+                     <property name="buddy">
+                      <cstring>comboBoxShadowFiltering</cstring>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="1">
+                    <widget class="QComboBox" name="comboBoxShadowFiltering">
+                     <item>
+                      <property name="text">
+                       <string>Off</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Low</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>High (slow)</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item row="2" column="0">
+                    <widget class="QLabel" name="label_3">
+                     <property name="text">
+                      <string>Cubemapping mode:</string>
+                     </property>
+                     <property name="buddy">
+                      <cstring>comboBoxCubemapMode</cstring>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="1">
+                    <widget class="QComboBox" name="comboBoxCubemapMode"/>
+                   </item>
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the cubemap is only recreated in specific time intervals, instead of each frame.&lt;br/&gt;Saves energy and may increase subjective application performance.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note that the cubemap is always re-rendered when the view position changes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="text">
+                      <string>Lazy cubemap re-rendering</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0" colspan="2">
+                    <layout class="QHBoxLayout" name="lazyIntervalLayout">
+                     <property name="leftMargin">
+                      <number>40</number>
+                     </property>
+                     <item>
+                      <widget class="QLabel" name="labelLazyDrawingInterval">
+                       <property name="text">
+                        <string>Interval:</string>
+                       </property>
+                       <property name="buddy">
+                        <cstring>spinLazyDrawingInterval</cstring>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QDoubleSpinBox" name="spinLazyDrawingInterval">
+                       <property name="toolTip">
+                        <string>The interval (in timeline seconds) in which no redraw is performed</string>
+                       </property>
+                       <property name="minimum">
+                        <double>0.100000000000000</double>
+                       </property>
+                       <property name="maximum">
+                        <double>600.000000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
               </widget>
              </item>
             </layout>
-           </item>
-          </layout>
-         </item>
-         <item row="3" column="2">
-          <layout class="QVBoxLayout" name="verticalLayout_10">
-           <property name="leftMargin">
-            <number>3</number>
-           </property>
-           <property name="topMargin">
-            <number>3</number>
-           </property>
-           <property name="rightMargin">
-            <number>3</number>
-           </property>
-           <property name="bottomMargin">
-            <number>3</number>
-           </property>
-           <item>
-            <widget class="QGroupBox" name="groupBox_2">
-             <property name="title">
-              <string>Visual options</string>
-             </property>
-             <layout class="QFormLayout" name="formLayout_3">
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item row="0" column="1">
-               <widget class="QSlider" name="sliderTorchStrength">
-                <property name="maximum">
-                 <number>100</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="labelTorchStrength">
-                <property name="text">
-                 <string>Torch strength (%1):</string>
-                </property>
-                <property name="buddy">
-                 <cstring>sliderTorchStrength</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_4">
-                <property name="text">
-                 <string>Torch range:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>sliderTorchRange</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QSlider" name="sliderTorchRange">
-                <property name="maximum">
-                 <number>10000</number>
-                </property>
-                <property name="singleStep">
-                 <number>100</number>
-                </property>
-                <property name="pageStep">
-                 <number>1000</number>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="groupBox">
-             <property name="title">
-              <string>Quality/Performance settings</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout">
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item row="6" column="0" colspan="2">
-               <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                 <layout class="QFormLayout" name="formLayout">
-                  <property name="fieldGrowthPolicy">
-                   <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-                  </property>
-                  <item row="0" column="0" colspan="2">
-                   <widget class="QCheckBox" name="checkBoxEnablePixelLight">
-                    <property name="text">
-                     <string>Per-Pixel lighting (required for other effects)</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0" colspan="2">
-                   <widget class="QCheckBox" name="checkBoxEnableShadows">
-                    <property name="enabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="text">
-                     <string>Shadows</string>
-                    </property>
-                    <property name="checked">
-                     <bool>false</bool>
-                    </property>
-                    <property name="tristate">
-                     <bool>false</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label">
-                    <property name="text">
-                     <string>Shadowmap size:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>comboBoxShadowmapSize</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="1">
-                   <widget class="QComboBox" name="comboBoxShadowmapSize">
-                    <property name="currentIndex">
-                     <number>-1</number>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_5">
-                    <property name="text">
-                     <string>Cubemap size:</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="QComboBox" name="comboBoxCubemapSize"/>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QFormLayout" name="formLayout_2">
-                  <property name="fieldGrowthPolicy">
-                   <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-                  </property>
-                  <item row="0" column="0" colspan="2">
-                   <widget class="QCheckBox" name="checkBoxEnableBump">
-                    <property name="enabled">
-                     <bool>true</bool>
-                    </property>
-                    <property name="text">
-                     <string>Bump mapping</string>
-                    </property>
-                    <property name="checked">
-                     <bool>false</bool>
-                    </property>
-                    <property name="tristate">
-                     <bool>false</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_2">
-                    <property name="text">
-                     <string>Filtering Quality:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>comboBoxShadowFiltering</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QComboBox" name="comboBoxShadowFiltering">
-                    <item>
-                     <property name="text">
-                      <string>Off</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>Low</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>High (slow)</string>
-                     </property>
-                    </item>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_3">
-                    <property name="text">
-                     <string>Cubemapping mode:</string>
-                    </property>
-                    <property name="buddy">
-                     <cstring>comboBoxCubemapMode</cstring>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="QComboBox" name="comboBoxCubemapMode"/>
-                  </item>
-                  <item row="3" column="0" colspan="2">
-                   <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
-                    <property name="toolTip">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the cubemap is only recreated in specific time intervals, instead of each frame.&lt;br/&gt;Saves energy and may increase subjective application performance.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note that the cubemap is always re-rendered when the view position changes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                    </property>
-                    <property name="text">
-                     <string>Lazy cubemap re-rendering</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0" colspan="2">
-                   <layout class="QHBoxLayout" name="lazyIntervalLayout">
-                    <property name="leftMargin">
-                     <number>40</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="labelLazyDrawingInterval">
-                      <property name="text">
-                       <string>Interval:</string>
-                      </property>
-                      <property name="buddy">
-                       <cstring>spinLazyDrawingInterval</cstring>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QDoubleSpinBox" name="spinLazyDrawingInterval">
-                      <property name="toolTip">
-                       <string>The interval (in timeline seconds) in which no redraw is performed</string>
-                      </property>
-                      <property name="minimum">
-                       <double>0.100000000000000</double>
-                      </property>
-                      <property name="maximum">
-                       <double>600.000000000000000</double>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
            </item>
           </layout>
          </item>

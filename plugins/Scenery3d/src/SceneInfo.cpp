@@ -25,6 +25,7 @@
 #include "StelUtils.hpp"
 
 #include <QDebug>
+#include <QDir>
 #include <QSettings>
 #include <QFileInfo>
 
@@ -38,7 +39,7 @@ int SceneInfo::initMetaType()
 
 bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 {
-	QString file = StelFileMgr::findFile(SCENES_PATH + id + "/scenery3d.ini");
+	QString file = StelFileMgr::findFile(SCENES_PATH + id + "/scenery3d.ini", StelFileMgr::File);
 	if(file.isEmpty())
 	{
 		qCritical()<<"scenery3d.ini file with id "<<id<<" does not exist!";
@@ -303,4 +304,84 @@ QMap<QString, QString> SceneInfo::getNameToIDMap()
 		result[k] = dir;
 	}
 	return result;
+}
+
+StoredViewList StoredView::getGlobalViewsForScene(const SceneInfo &scene)
+{
+	StoredViewList ret;
+
+	//return empty
+	if(!scene.isValid)
+		return ret;
+
+	//load global viewpoints
+	QFileInfo globalfile( QDir(scene.fullPath), "viewpoints.ini");
+
+	if(!globalfile.isFile())
+	{
+		qWarning()<<globalfile.absoluteFilePath()<<" is not a file";
+	}
+	else
+	{
+		QSettings ini(globalfile.absoluteFilePath(),StelIniFormat);
+		if (ini.status() != QSettings::NoError)
+		{
+			qWarning() << "Error reading global viewpoint file " << globalfile.absoluteFilePath();
+		}
+		else
+		{
+			int size = ini.beginReadArray("StoredViews");
+			readArray(ini,ret,size,true);
+			ini.endArray();
+		}
+	}
+
+	return ret;
+}
+
+StoredViewList StoredView::getUserViewsForScene(const SceneInfo &scene)
+{
+	StoredViewList ret;
+
+	//return empty
+	if(!scene.isValid)
+		return ret;
+
+	//load user viewpoints
+	QString file = StelFileMgr::findFile(SceneInfo::SCENES_PATH + "userviews.ini", StelFileMgr::File);
+	if(file.isEmpty())
+	{
+		qWarning()<<"No userviews.ini exists.";
+	}
+	else
+	{
+		QSettings ini(file,StelIniFormat);
+		if (ini.status() != QSettings::NoError)
+		{
+			qWarning() << "Error reading user viewpoint file " << file;
+		}
+		else
+		{
+			int size = ini.beginReadArray(scene.id);
+			readArray(ini,ret,size,false);
+			ini.endArray();
+		}
+	}
+
+	return ret;
+}
+
+void StoredView::readArray(QSettings &ini, StoredViewList &list, int size, bool isGlobal)
+{
+	for(int i =0;i<size;++i)
+	{
+		ini.setArrayIndex(i);
+
+		StoredView sv;
+		sv.isGlobal = isGlobal;
+		sv.position = StelUtils::strToVec3f(ini.value("position").toString());
+		sv.view_fov = StelUtils::strToVec3f(ini.value("view_fov").toString());
+
+		list.append(sv);
+	}
 }

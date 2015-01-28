@@ -173,11 +173,12 @@ private:
     GLuint cubeMapCubeDepth; //this is a depth-cubemap, only used in CUBEMAP_GSACCEL mode
     GLuint cubeMapTex[6]; //GL_TEXTURE_2D, for "legacy" TEXTURES mode
     GLuint cubeRB; //renderbuffer for depth of a single face in TEXTURES and CUBEMAP modes (attached to multiple FBOs)
-    bool cubeMappingCreated; //true if any cubemapping objects have been initialized and need to be cleaned up eventually
 
      //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBOs ourselves
     GLuint cubeFBO; //used in CUBEMAP_GSACCEL mode - only a single FBO exists, with a cubemap for color and one for depth
     GLuint cubeSideFBO[6]; //used in TEXTURES and CUBEMAP mode, 6 textures/cube faces for color and a shared depth renderbuffer (we don't require the depth after rendering)
+
+    bool cubeMappingCreated; //true if any cubemapping objects have been initialized and need to be cleaned up eventually
 
     //cube geometry
     QVector<Vec3f> cubeVertices, transformedCubeVertices;
