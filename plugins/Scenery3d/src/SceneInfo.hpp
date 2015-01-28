@@ -27,6 +27,7 @@
 #include <QMap>
 #include <QSharedPointer>
 
+class QSettings;
 
 //! Contains all the metadata necessary for a Scenery3d scene,
 //! and can be loaded from special .ini files in a scene's folder.
@@ -120,6 +121,36 @@ private:
 	//! Builds a mapping of available scene names to the folders they are contained in, similar to the LandscapeMgr's method
 	static QMap<QString,QString> getNameToIDMap();
 	static int initMetaType();
+};
+
+class StoredView;
+typedef QList<StoredView> StoredViewList;
+
+//! A structure which stores a specific view position, view direction and FOV, together with a textual description.
+struct StoredView
+{
+	StoredView() : position(0,0,0), view_fov(0,0,-1000)
+	{}
+
+	//! A descriptive label
+	QString label;
+	//! A description of the view
+	QString description;
+	//! Stored grid position
+	Vec3f position;
+	//! Alt/Az angles in degrees + field of view
+	Vec3f view_fov;
+	//! True if this is a position stored next to the scene definition (viewpoints.ini). If false, this is a user-defined view (from userdir\stellarium\scenery3d\userviews.ini).
+	bool isGlobal;
+
+	//! Returns a list of all global views of a scene.
+	//! If the scene is invalid, an empty list is returned.
+	static StoredViewList getGlobalViewsForScene(const SceneInfo& scene);
+	//! Returns a list of all user-generated views of a scene.
+	//! If the scene is invalid, an empty list is returned.
+	static StoredViewList getUserViewsForScene(const SceneInfo& scene);
+private:
+	static void readArray(QSettings& ini,StoredViewList& list, int size, bool isGlobal);
 };
 
 Q_DECLARE_METATYPE(SceneInfo)

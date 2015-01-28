@@ -199,6 +199,11 @@ public slots:
     QString getDefaultScenery3dID() const { return defaultScenery3dID; }
     void setDefaultScenery3dID(const QString& id);
 
+    //! Changes the current view to the given view
+    void setView(const StoredView& view);
+    //! Returns the current view data
+    StoredView getCurrentView();
+
 private slots:
     void clearMessage();
     void loadSceneCompleted();

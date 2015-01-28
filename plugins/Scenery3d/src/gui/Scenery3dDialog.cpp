@@ -3,6 +3,7 @@
 #include "Scenery3dMgr.hpp"
 #include "SceneInfo.hpp"
 #include "S3DEnum.hpp"
+#include "StoredViewDialog.hpp"
 
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
@@ -13,13 +14,16 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent), storedViewDialog(NULL)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
 
 Scenery3dDialog::~Scenery3dDialog()
 {
+	if(storedViewDialog)
+		delete storedViewDialog;
+
 	delete ui;
 }
 
@@ -68,6 +72,8 @@ void Scenery3dDialog::createDialogContent()
 	connect(ui->sliderTorchStrength, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchStrength_valueChanged);
 	connect(ui->sliderTorchRange, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
 	connect(ui->checkBoxDefaultScene, &QCheckBox::stateChanged, this, &Scenery3dDialog::on_checkBoxDefaultScene_stateChanged);
+
+	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, this, &Scenery3dDialog::openStoredViewDialog);
 
 	//connect Scenery3d update events
 	connect(mgr, SIGNAL(enablePixelLightingChanged(bool)), SLOT(updateFromManager()));
@@ -133,6 +139,13 @@ void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
 		cb->addItem(QString::number(i),i);
 	}
 	cb->blockSignals(oldval);
+}
+
+void Scenery3dDialog::openStoredViewDialog()
+{
+	if(storedViewDialog == NULL)
+		storedViewDialog = new StoredViewDialog();
+	storedViewDialog->setVisible(true);
 }
 
 void Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged(int index)
