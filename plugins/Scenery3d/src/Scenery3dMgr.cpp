@@ -33,6 +33,7 @@
 #include "Scenery3dMgr.hpp"
 #include "Scenery3d.hpp"
 #include "Scenery3dDialog.hpp"
+#include "StoredViewDialog.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelActionMgr.hpp"
@@ -58,6 +59,7 @@ Scenery3dMgr::Scenery3dMgr() :
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
+    storedViewDialog = new StoredViewDialog();
 
     font.setPixelSize(16);
     messageFader.setDuration(500);
@@ -80,6 +82,7 @@ Scenery3dMgr::~Scenery3dMgr()
 	if(!cleanedUp)
 		deinit();
 
+	delete storedViewDialog;
 	delete scenery3dDialog;
 }
 
@@ -177,9 +180,14 @@ void Scenery3dMgr::init()
 								   QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
 								   QPixmap(":/graphicGui/glow32x32.png"),
 								   "actionShow_Scenery3d_dialog");
+		StelButton* toolbarStoredViewButton = new StelButton(NULL, QPixmap(":/graphicGui/btNightView-on.png"),
+								   QPixmap(":/graphicGui/btNightView-off.png"),
+								   QPixmap(":/graphicGui/glow32x32.png"),
+								   "actionShow_Scenery3d_storedViewDialog");
 
 		gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
 		gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
+		gui->getButtonBar()->addButton(toolbarStoredViewButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)
 	{
@@ -244,6 +252,7 @@ void Scenery3dMgr::createActions()
 	//enable action will be set checkable if a scene was loaded
 	addAction("actionShow_Scenery3d", groupName, N_("Toggle 3D landscape"),this,"enableScene","Ctrl+3");
 	addAction("actionShow_Scenery3d_dialog", groupName, N_("Show settings dialog"), scenery3dDialog, "visible", "Ctrl+Shift+3");
+	addAction("actionShow_Scenery3d_storedViewDialog", groupName, N_("Show viewpoint dialog"), storedViewDialog, "visible", "Ctrl+Shift+4");
 	addAction("actionShow_Scenery3d_shadows", groupName, N_("Toggle shadows"), this, "enableShadows","Ctrl+R, S");
 	addAction("actionShow_Scenery3d_debuginfo", groupName, N_("Toggle debug information"), this, "enableDebugInfo","Ctrl+R, D");
 	addAction("actionShow_Scenery3d_locationinfo", groupName, N_("Toggle location text"), this, "enableLocationInfo","Ctrl+R, T");
@@ -326,6 +335,11 @@ bool Scenery3dMgr::configureGui(bool show)
 	if (show)
 		scenery3dDialog->setVisible(show);
     return true;
+}
+
+void Scenery3dMgr::showStoredViewDialog()
+{
+	storedViewDialog->setVisible(true);
 }
 
 void Scenery3dMgr::updateProgress(const QString &str, int val, int min, int max)
@@ -780,7 +794,10 @@ bool Scenery3dMgr::getIsGeometryShaderSupported() const
 void Scenery3dMgr::setView(const StoredView &view)
 {
 	//update position
-	//TODO
+	//important: set eye height first
+	scenery3d->setEyeHeight(view.position[3]);
+	//then, set grid position
+	scenery3d->setGridPosition(Vec3d(view.position[0],view.position[1],view.position[2]));
 
 	//update view vector
 	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
@@ -808,9 +825,15 @@ StoredView Scenery3dMgr::getCurrentView()
 	//convert to degrees
 	view.view_fov[0]*=180.0/M_PI;
 	view.view_fov[1]*=180.0/M_PI;
-
+	//3rd comp is fov
 	view.view_fov[2] = mm->getAimFov();
 
+	//get current grid pos + eye height
+	Vec3d pos = scenery3d->getCurrentGridPosition();
+	view.position[0] = pos[0];
+	view.position[1] = pos[1];
+	view.position[2] = pos[2];
+	view.position[3] = scenery3d->getEyeHeight();
 
 	return view;
 }
