@@ -153,7 +153,13 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
+		QString cometType = qc_("non-periodic", "type of comet");
+		if (semiMajorAxis>0.0)
+		{
+			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
+			cometType = qc_("periodic", "type of comet");
+		}
+		oss << q_("Type: <b>%1</b> (%2)").arg(q_(getPlanetTypeString())).arg(cometType) << "<br />";
 	}
 
 	if (flags&Magnitude)
