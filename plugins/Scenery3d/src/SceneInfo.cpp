@@ -19,7 +19,11 @@
  */
 
 #include "SceneInfo.hpp"
+#include "Util.hpp"
+#include "Scenery3dMgr.hpp"
 
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
@@ -30,6 +34,9 @@
 #include <QFileInfo>
 
 const QString SceneInfo::SCENES_PATH("scenery3d/");
+const QString StoredView::USERVIEWS_FILE = SceneInfo::SCENES_PATH + "userviews.ini";
+QSettings* StoredView::userviews = NULL;
+
 int SceneInfo::metaTypeId = initMetaType();
 
 int SceneInfo::initMetaType()
@@ -347,28 +354,45 @@ StoredViewList StoredView::getUserViewsForScene(const SceneInfo &scene)
 	if(!scene.isValid)
 		return ret;
 
-	//load user viewpoints
-	QString file = StelFileMgr::findFile(SceneInfo::SCENES_PATH + "userviews.ini", StelFileMgr::File);
-	if(file.isEmpty())
+	QSettings* ini = getUserViews();
+	if (ini->status() != QSettings::NoError)
 	{
-		qWarning()<<"No userviews.ini exists.";
+		qWarning() << "Error reading user viewpoint file";
 	}
 	else
 	{
-		QSettings ini(file,StelIniFormat);
-		if (ini.status() != QSettings::NoError)
-		{
-			qWarning() << "Error reading user viewpoint file " << file;
-		}
-		else
-		{
-			int size = ini.beginReadArray(scene.id);
-			readArray(ini,ret,size,false);
-			ini.endArray();
-		}
+		int size = ini->beginReadArray(scene.id);
+		readArray(*ini,ret,size,false);
+		ini->endArray();
 	}
 
 	return ret;
+}
+
+void StoredView::saveUserViews(const SceneInfo &scene, const StoredViewList &list)
+{
+	//this should never happen
+	Q_ASSERT(scene.isValid);
+
+	QSettings* ini = getUserViews();
+
+	if (ini->status() != QSettings::NoError)
+	{
+		qWarning() << "Error reading user viewpoint file";
+	}
+	else
+	{
+		//clear old array
+		ini->remove(scene.id);
+
+		ini->beginWriteArray(scene.id,list.size());
+		//add data
+		writeArray(*ini,list);
+		ini->endArray();
+
+		//explicit flushing here, may not be necessary
+		ini->sync();
+	}
 }
 
 void StoredView::readArray(QSettings &ini, StoredViewList &list, int size, bool isGlobal)
@@ -379,9 +403,58 @@ void StoredView::readArray(QSettings &ini, StoredViewList &list, int size, bool 
 
 		StoredView sv;
 		sv.isGlobal = isGlobal;
-		sv.position = StelUtils::strToVec3f(ini.value("position").toString());
+		sv.label = ini.value("label").toString();
+		sv.description = ini.value("description").toString();
+		sv.position = strToVec4d(ini.value("position").toString());
 		sv.view_fov = StelUtils::strToVec3f(ini.value("view_fov").toString());
 
 		list.append(sv);
 	}
+}
+
+void StoredView::writeArray(QSettings &ini, const StoredViewList &list)
+{
+	for(int i =0;i<list.size();++i)
+	{
+		const StoredView& view = list.at(i);
+		ini.setArrayIndex(i);
+
+		ini.setValue("label", view.label);
+		ini.setValue("description", view.description);
+		ini.setValue("position", vec4dToStr(view.position));
+		ini.setValue("view_fov", vec3fToStr(view.view_fov));
+	}
+}
+
+QSettings* StoredView::getUserViews()
+{
+	if(userviews)
+		return userviews;
+
+	//this handling follows same way as the main() code does to make sure it has a config file
+	QString file = StelFileMgr::findFile(USERVIEWS_FILE, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (file.isEmpty())
+	{
+		file = StelFileMgr::findFile(USERVIEWS_FILE, StelFileMgr::New);
+		if (file.isEmpty())
+		{
+			qCritical("Could not create userview file %s.", qPrintable(USERVIEWS_FILE));
+		}
+	}
+
+	if(!StelFileMgr::exists(file))
+	{
+		//create an empty file, or QSettings may complain
+		//is this somehow easier to do in Qt?
+		QFileInfo f(file);
+		QDir().mkpath(f.absolutePath());
+		QFile qfile(file);
+		qfile.open(QIODevice::WriteOnly);
+		qfile.close();
+	}
+
+	//QSettings gets deleted when plugin is shut down (also saves settings)
+	//TODO StelIniFormat has bugs with saving HTML! so we use the default Qt format here, no idead if this may cause some problems.
+	userviews = new QSettings(file,QSettings::IniFormat,GETSTELMODULE(Scenery3dMgr));
+	return userviews;
 }

@@ -32,6 +32,7 @@ SET(Scenery3d_SRCS
     gui/Scenery3dDialog_p.hpp
     gui/Scenery3dDialog.cpp
     gui/StoredViewDialog.hpp
+    gui/StoredViewDialog_p.hpp
     gui/StoredViewDialog.cpp
     ShaderManager.hpp
     ShaderManager.cpp
