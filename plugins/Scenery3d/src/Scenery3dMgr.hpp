@@ -39,6 +39,7 @@
 
 class Scenery3d;
 class Scenery3dDialog;
+class StoredViewDialog;
 class QSettings;
 class StelButton;
 
@@ -111,6 +112,9 @@ public slots:
 
     //! Display text message on screen, fade out automatically
     void showMessage(const QString& message);
+
+    //! Shows the stored view dialog
+    void showStoredViewDialog();
 
     //! Enables/Disables the plugin
     void setEnableScene(const bool val);
@@ -201,7 +205,8 @@ public slots:
 
     //! Changes the current view to the given view
     void setView(const StoredView& view);
-    //! Returns the current view data
+    //! Returns a StoredView that represents the current observer position + view direction.
+    //! Label and description are empty.
     StoredView getCurrentView();
 
 private slots:
@@ -224,6 +229,7 @@ private:
 
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
+    StoredViewDialog* storedViewDialog;
 
     QSettings* conf;
     QString defaultScenery3dID;

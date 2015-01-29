@@ -14,16 +14,13 @@
 #include <QStandardItemModel>
 #include <QTimer>
 
-Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent), storedViewDialog(NULL)
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent)
 {
 	ui = new Ui_scenery3dDialogForm;
 }
 
 Scenery3dDialog::~Scenery3dDialog()
 {
-	if(storedViewDialog)
-		delete storedViewDialog;
-
 	delete ui;
 }
 
@@ -73,7 +70,7 @@ void Scenery3dDialog::createDialogContent()
 	connect(ui->sliderTorchRange, &QSlider::valueChanged, this, &Scenery3dDialog::on_sliderTorchRange_valueChanged);
 	connect(ui->checkBoxDefaultScene, &QCheckBox::stateChanged, this, &Scenery3dDialog::on_checkBoxDefaultScene_stateChanged);
 
-	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, this, &Scenery3dDialog::openStoredViewDialog);
+	connect(ui->pushButtonOpenStoredViewDialog, &QPushButton::clicked, mgr, &Scenery3dMgr::showStoredViewDialog);
 
 	//connect Scenery3d update events
 	connect(mgr, SIGNAL(enablePixelLightingChanged(bool)), SLOT(updateFromManager()));
@@ -108,6 +105,7 @@ void Scenery3dDialog::createDialogContent()
 	Q_ASSERT(gui);
 	ui->scenery3dTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->checkBoxDefaultScene->setVisible(false);
+	ui->pushButtonOpenStoredViewDialog->setVisible(false);
 
 	if(current.isValid)
 	{
@@ -119,6 +117,7 @@ void Scenery3dDialog::createDialogContent()
 			ui->checkBoxDefaultScene->setChecked(current.id == mgr->getDefaultScenery3dID());
 			ui->checkBoxDefaultScene->blockSignals(false);
 			ui->checkBoxDefaultScene->setVisible(true);
+			ui->pushButtonOpenStoredViewDialog->setVisible(true);
 		}
 		ui->scenery3dTextBrowser->setHtml(getHtmlDescription(current));
 	}
@@ -139,13 +138,6 @@ void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
 		cb->addItem(QString::number(i),i);
 	}
 	cb->blockSignals(oldval);
-}
-
-void Scenery3dDialog::openStoredViewDialog()
-{
-	if(storedViewDialog == NULL)
-		storedViewDialog = new StoredViewDialog();
-	storedViewDialog->setVisible(true);
 }
 
 void Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged(int index)
@@ -206,6 +198,7 @@ void Scenery3dDialog::updateCurrentScene(const SceneInfo &sceneInfo)
 
 		ui->checkBoxDefaultScene->blockSignals(true);
 		ui->checkBoxDefaultScene->setVisible(true);
+		ui->pushButtonOpenStoredViewDialog->setVisible(true);
 		ui->checkBoxDefaultScene->setChecked(sceneInfo.id == mgr->getDefaultScenery3dID());
 		ui->checkBoxDefaultScene->blockSignals(false);
 	}
@@ -242,6 +235,7 @@ void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 	}
 	else
 	{
+		ui->pushButtonOpenStoredViewDialog->setVisible(false);
 		ui->checkBoxDefaultScene->setVisible(false);
 		ui->checkBoxDefaultScene->setChecked(false);
 	}

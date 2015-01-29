@@ -54,6 +54,34 @@ extern bool CompareVerts(const Vec3f &v1, const Vec3f &v2);
 //! Compares two floats to eachother
 extern bool CompareFloats(float c1, float c2);
 
+//! Like StelUtils::strToVec3d, but with 4 components
+inline Vec4d strToVec4d(const QString& str)
+{
+	QStringList l = str.split(",");
+
+	if(l.size()<4)
+		return Vec4d(0.0,0.0,0.0,0.0);
+
+	return Vec4d(l[0].toDouble(), l[1].toDouble(), l[2].toDouble(), l[3].toDouble());
+}
+
+inline QString vec4dToStr(const Vec4d& vec)
+{
+	return QString("%1,%2,%3,%4")
+			.arg(vec[0],0,'f',10)
+			.arg(vec[1],0,'f',10)
+			.arg(vec[2],0,'f',10)
+			.arg(vec[3],0,'f',10);
+}
+
+inline QString vec3fToStr(const Vec3f& vec)
+{
+	return QString("%1,%2,%3")
+			.arg(vec[0],0,'f',6)
+			.arg(vec[1],0,'f',6)
+			.arg(vec[2],0,'f',6);
+}
+
 //! Provide Qt 3x3 matrix-vector multiplication, which does not exist for some reason
 inline QVector3D operator*(const QMatrix3x3& mat, const QVector3D& vec)
 {

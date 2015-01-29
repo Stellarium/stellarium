@@ -117,6 +117,17 @@ public:
 
     void setLoadCancel(bool val) { loadCancel = val; }
 
+    //! Sets the observer position to the specified grid coordinates.
+    //! The height is assumed to be at the feet, so make sure to set the eye height with setEyeHeight before, if necessary.
+    void setGridPosition(Vec3d pos);
+    //! Gets the current position on the scene's grid (height at feet)
+    Vec3d getCurrentGridPosition() const;
+
+    //! Sets the observer eye height.
+    void setEyeHeight(const float eyeheight) { eye_height = eyeheight; }
+    //! Gets the current observer eye height (vertical difference from feet to camera position).
+    float getEyeHeight() const { return eye_height; }
+
     enum ShadowCaster { None, Sun, Moon, Venus };
 
     //! Returns the shader manager this instance uses

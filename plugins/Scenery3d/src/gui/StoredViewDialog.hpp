@@ -38,9 +38,14 @@ public slots:
 protected:
 	void createDialogContent();
 private slots:
-	void initializeList();
-	void updateViewSelection(const QModelIndex& idx);
+	void updateViewSelection(const QModelIndex &idx);
 	void resetViewSelection();
+
+	void updateCurrentView();
+
+	void loadView();
+	void deleteView();
+	void addUserView();
 private:
 	Ui_storedViewDialogForm* ui;
 

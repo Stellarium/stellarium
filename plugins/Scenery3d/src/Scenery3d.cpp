@@ -1564,6 +1564,33 @@ void Scenery3d::drawWithCubeMap()
 	drawFromCubeMap();
 }
 
+Vec3d Scenery3d::getCurrentGridPosition() const
+{
+	// this is the observer position (camera eye position) in model-grid coordinates, relative to the origin
+	Vec3d pos=currentScene.zRotateMatrix* (- absolutePosition);
+	// this is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
+	pos+= currentScene.modelWorldOffset;
+
+	//subtract the eye_height to get the foot position
+	pos[2]-=eye_height;
+	return pos;
+}
+
+void Scenery3d::setGridPosition(Vec3d pos)
+{
+	//this is basically the same as getCurrentGridPosition, but in reverse
+	pos[2]+=eye_height;
+	pos-=currentScene.modelWorldOffset;
+
+	//need the inverse rotation
+	Mat4d invRotate = currentScene.zRotateMatrix.inverse();
+	//calc opengl position
+	absolutePosition = - (invRotate * pos);
+
+	//reset cube map time
+	lastCubemapUpdate = 0.0;
+}
+
 void Scenery3d::drawCoordinatesText()
 {
     StelPainter painter(altAzProjector);
@@ -1573,23 +1600,19 @@ void Scenery3d::drawCoordinatesText()
     float screen_y = altAzProjector->getViewportHeight() -  60.0f;
     QString str;
 
-    // model_pos is the observer position (camera eye position) in model-grid coordinates
-    Vec3d model_pos=currentScene.zRotateMatrix*Vec3d(-absolutePosition.v[0], absolutePosition.v[1], -absolutePosition.v[2]);
-    model_pos[1] *= -1.0;
+    Vec3d gridPos = getCurrentGridPosition();
 
-    // world_pos is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
-    Vec3d world_pos= model_pos + currentScene.modelWorldOffset;
     // problem: long grid names!
     painter.drawText(altAzProjector->getViewportWidth()-10-qMax(240, painter.getFontMetrics().boundingRect(currentScene.gridName).width()),
 		     screen_y, currentScene.gridName);
     screen_y -= 17.0f;
-    str = QString("East:   %1m").arg(world_pos[0], 10, 'f', 2);
+    str = QString("East:   %1m").arg(gridPos[0], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("North:  %1m").arg(world_pos[1], 10, 'f', 2);
+    str = QString("North:  %1m").arg(gridPos[1], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("Height: %1m").arg(world_pos[2]-eye_height, 10, 'f', 2);
+    str = QString("Height: %1m").arg(gridPos[2], 10, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
     str = QString("Eye:    %1m").arg(eye_height, 10, 'f', 2);
