@@ -441,44 +441,43 @@ IF(WIN32 AND NOT MSVC)
 ENDIF()
 
 IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
-  IF(RC_COMPILER_PATH)
-    ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_BINARY_DIR}/stellarium-rc.o
-                       COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
-                       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
-    SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
-  ELSE()
-    IF(MSVC)
-      SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_SOURCE_DIR}/data/stellarium.rc)
+    IF(RC_COMPILER_PATH)
+        ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_BINARY_DIR}/stellarium-rc.o
+                           COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
+                           WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
+        SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
+    ELSE()
+        IF(MSVC)
+            SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_SOURCE_DIR}/data/stellarium.rc)
+        ENDIF()
     ENDIF()
-  ENDIF()
 ENDIF()
 
 IF(GENERATE_STELMAINLIB)
- ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
- TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
- QT5_USE_MODULES(stelMain Core Concurrent Declarative Gui Network OpenGL Script Widgets)
- IF(ENABLE_SOUND)
-   QT5_USE_MODULES(stelMain Multimedia)
- ENDIF()
- INSTALL(TARGETS stelMain DESTINATION lib)
- ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
- #stelMain should be after the plug-ins, otherwise the build crashes
- TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
+    ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
+    TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+    QT5_USE_MODULES(stelMain Core Concurrent Declarative Gui Network OpenGL Script Widgets)
+    IF(ENABLE_SOUND)
+        QT5_USE_MODULES(stelMain Multimedia)
+    ENDIF()
+    INSTALL(TARGETS stelMain DESTINATION lib)
+    ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
+    #stelMain should be after the plug-ins, otherwise the build crashes
+    TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
 ELSE()
- ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
- TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
- # This will add the ANGLE lib if the Qt version supports it.
- TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
+    ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+    TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+    # This will add the ANGLE lib if the Qt version supports it.
+    TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
- QT5_USE_MODULES(stellarium Core Concurrent Declarative Gui Network OpenGL Script Widgets)
- IF(ENABLE_SOUND)
-   QT5_USE_MODULES(stellarium Multimedia)
- ENDIF()
+    QT5_USE_MODULES(stellarium Core Concurrent Declarative Gui Network OpenGL Script Widgets)
+    IF(ENABLE_SOUND)
+        QT5_USE_MODULES(stellarium Multimedia)
+    ENDIF()
 
- IF(APPLE)
-  SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
- ENDIF()
-
+    IF(APPLE)
+        SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
+    ENDIF()
 ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
@@ -632,6 +631,34 @@ QT5_USE_MODULES(testConversions Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
 ADD_TEST(testConversions)
+
+SET(tests_testExtinction_SRCS
+        tests/testExtinction.hpp
+        tests/testExtinction.cpp
+        core/RefractionExtinction.hpp
+        core/RefractionExtinction.cpp)
+ADD_EXECUTABLE(testExtinction EXCLUDE_FROM_ALL ${tests_testExtinction_SRCS})
+QT5_USE_MODULES(testExtinction Core Gui Widgets Script Declarative Test)
+TARGET_LINK_LIBRARIES(testExtinction ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testExtinction)
+ADD_TEST(testExtinction)
+
+SET(tests_testRefraction_SRCS
+        tests/testRefraction.hpp
+        tests/testRefraction.cpp
+        core/RefractionExtinction.hpp
+        core/RefractionExtinction.cpp
+        core/StelUtils.hpp
+        core/StelUtils.cpp)
+IF(WIN32)
+        # StelUtils required zlib sources
+        SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
+ENDIF()
+ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
+QT5_USE_MODULES(testRefraction Core Gui Widgets Script Declarative Test)
+TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testRefraction)
+ADD_TEST(testRefraction)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 FOREACH(NAME ${STELLARIUM_TESTS})
