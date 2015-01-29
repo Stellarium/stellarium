@@ -287,6 +287,16 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	}
 }
 
+QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
+{
+	double shift = StelUtils::getGMTShiftFromQT(JD);
+	QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
+	if(shift<0.0f)
+		return "UTC-" + tz.toString("hh:mm");
+	else
+		return "UTC+" + tz.toString("hh:mm");
+}
+
 // Convert the time format enum to its associated string and reverse
 StelLocaleMgr::STimeFormat StelLocaleMgr::stringToSTimeFormat(const QString& tf) const
 {

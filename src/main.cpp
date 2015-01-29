@@ -110,6 +110,20 @@ void clearCache()
 	cacheMgr->clear(); // Removes all items from the cache.
 }
 
+void registerPluginsDir(QDir& appDir)
+{
+	QStringList pathes;
+	// Windows
+	pathes << appDir.absolutePath();
+	pathes << appDir.absoluteFilePath("platforms");
+	// OS X
+	appDir.cdUp();	
+	pathes << appDir.absoluteFilePath("plugins");
+	// All systems
+	pathes << QCoreApplication::libraryPaths();
+	QCoreApplication::setLibraryPaths(pathes);
+}
+
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
@@ -125,18 +139,6 @@ int main(int argc, char **argv)
 			timerGrain = 0;
 	}
 #endif
-#ifdef Q_OS_MAC
-	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
-	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
-	 char * option = new char[20];
-	 char * value = new char[21];
-	 strcpy( option, "-platformpluginpath");
-	 strcpy( value, "../plugins/platforms");
-	 newArgv[argc++] = option;
-	 newArgv[argc++] = value;
-	 argv = newArgv;
-
-#endif
 
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
@@ -144,10 +146,10 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
-	#if QT_VERSION>=QT_VERSION_CHECK(5, 3, 1)
-	QCoreApplication::addLibraryPath(".");
-	#endif
-	
+	QFileInfo appInfo(QString::fromUtf8(argv[0]));
+	QDir appDir(appInfo.absolutePath());
+	registerPluginsDir(appDir);
+
 	QGuiApplication::setDesktopSettingsAware(false);
 
 #ifndef USE_QUICKVIEW
@@ -355,11 +357,6 @@ int main(int argc, char **argv)
 	if(timerGrain)
 		timeEndPeriod(timerGrain);
 	#endif //Q_OS_WIN
-	#ifdef Q_OS_MAC
-	delete(newArgv);
-	delete(option);
-	delete(value);
-	#endif
 
 	return 0;
 }

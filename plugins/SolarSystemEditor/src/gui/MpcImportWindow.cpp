@@ -125,6 +125,8 @@ void MpcImportWindow::createDialogContent()
 
 	connect(ui->pushButtonSendQuery, SIGNAL(clicked()),
 	        this, SLOT(sendQuery()));
+	connect(ui->lineEditQuery, SIGNAL(returnPressed()),
+		this, SLOT(sendQuery()));
 	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()),
 	        this, SLOT(abortQuery()));
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)),
@@ -202,7 +204,7 @@ void MpcImportWindow::resetDialog()
 void MpcImportWindow::populateBookmarksList()
 {
 	ui->comboBoxBookmarks->clear();
-        ui->comboBoxBookmarks->addItem("Select bookmark...");
+	ui->comboBoxBookmarks->addItem(q_("Select bookmark..."));
 	QStringList bookmarkTitles(bookmarks.value(importType).keys());
 	bookmarkTitles.sort();
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
@@ -329,7 +331,7 @@ void MpcImportWindow::selectFile()
 
 void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 {
-	if (bookmarkTitle.isEmpty() || bookmarkTitle == "Select bookmark...")
+	if (bookmarkTitle.isEmpty() || bookmarks.value(importType).value(bookmarkTitle).isEmpty())
 	{
 		ui->lineEditURL->clear();
 		return;

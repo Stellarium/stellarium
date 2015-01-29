@@ -73,7 +73,6 @@ void StelFileMgr::init()
 		qFatal("Error: cannot create user config directory: %s", e.what());
 	}
 
-
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 
@@ -476,7 +475,7 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 {
 	// This function is implemented using code from QSettings implementation in QT
 	// (GPL edition, version 4.3).
-	
+
 	// Stellarium works only on wide-character versions of Windows anyway,
 	// therefore it's using only the wide-char version of the code. --BM
 	QLibrary library(QLatin1String("shell32"));

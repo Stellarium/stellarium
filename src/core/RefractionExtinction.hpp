@@ -55,7 +55,7 @@ public:
 	Extinction();
 	
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(apparent_altitude).
+	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(geometric_altitude).
 	//! This call must therefore be done before application of Refraction if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(const Vec3d& altAzPos, float* mag) const
@@ -71,7 +71,7 @@ public:
 	}
 
 	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(apparent_altitude).
+	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(geometric_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(const Vec3d& altAzPos, float* mag) const
 	{
@@ -96,7 +96,7 @@ private:
 	//! The default (@param apparent_z = true) is computing airmass from observed altitude, following Rozenberg (1966) [X(90)~40].
 	//! if (@param apparent_z = false), we have geometrical altitude and compute airmass from that,
 	//! following Young: Air mass and refraction. Applied Optics 33(6), pp.1108-1110, 1994. [X(90)~32].
-	//! A problem ist that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
+	//! A problem is that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
 	//! So, it seems better to compute refraction first, and then use the Rozenberg formula here.
 	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS SUBHORIZONTAL_AIRMASS BELOW -2 DEGREES!
 	float airmass(float cosZ, const bool apparent_z=true) const;
@@ -110,7 +110,7 @@ private:
 
 //! @class Refraction
 //! This class performs refraction computations, following literature from atmospheric optics and astronomy.
-//! Refraction solutions can only be aproximate, given the turbulent, unpredictable real atmosphere.
+//! Refraction solutions can only be approximate, given the turbulent, unpredictable real atmosphere.
 //! Typical horizons do not go down below -1, so strange effects (distortion) between -2 and -5 should be covered.
 //! Note that forward/backward are no absolute reverse operations!
 //! All the computations should be in effect
@@ -128,7 +128,7 @@ public:
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(Vec3d& altAzPos) const;
 
-	//! Remove refraction from observed position ("reduce").
+	//! Remove refraction from position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3d& altAzPos) const;
@@ -138,7 +138,7 @@ public:
 	//! Note that forward/backward are no absolute reverse operations!
 	void forward(Vec3f& altAzPos) const;
 
-	//! Remove refraction from observed position ("reduce").
+	//! Remove refraction from position ("reduce").
 	//! @param altAzPos is the apparent star position vector, to be transformed into geometrical position.
 	//! Note that forward/backward are no absolute reverse operations!
 	void backward(Vec3f& altAzPos) const;
@@ -176,8 +176,10 @@ private:
 	float pressure;
 	//! Temperature[Celsius deg] (10).
 	float temperature;
-	//! Numerator of refraction formula, to be cached for speed.
-	float press_temp_corr;
+	////! Numerator of refraction formula, to be cached for speed.
+	//7float press_temp_corr_Saemundson;
+	//! Correction factor for refraction formula, to be cached for speed.
+	double press_temp_corr;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;
