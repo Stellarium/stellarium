@@ -908,8 +908,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 
-			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
-
+			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
+			const double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
+			if (eccentricity<1 && pericenterDistance>0)
+			{
+				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
+			}
 		}
 		else
 		{
