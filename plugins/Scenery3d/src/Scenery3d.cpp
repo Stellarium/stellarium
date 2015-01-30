@@ -601,7 +601,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 
 	//-- Shadowing setup -- this was previously in generateCubeMap_drawSceneWithShadows
 	//first check if shader supports shadows
-	GLint loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_SQUAREDSPLITS);
+	GLint loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_SPLITDATA);
 
 	//ALWAYS update the shader matrices, even if "no" shadow is cast
 	//this fixes weird time-dependent crashes (this was fun to debug)
@@ -610,10 +610,23 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 
 
 		//Holds the squared frustum splits necessary for the lookup in the shader
-		Vec4f squaredSplits = Vec4f(0.0f);
+		Vec4f splitData;
 		for(int i=0; i<frustumSplits; i++)
 		{
-		    squaredSplits.v[i] = frustumArray.at(i).zFar * frustumArray.at(i).zFar;
+			float zVal;
+			if(i<frustumSplits-1)
+			{
+				//the frusta have a slight overlap
+				//use the center of this overlap for more robust filtering
+				zVal = (frustumArray.at(i).zFar + frustumArray.at(i+1).zNear) / 2.0f;
+			}
+			else
+				zVal = frustumArray.at(i).zFar;
+
+			//see Nvidia CSM example for this calculation
+			//http://developer.download.nvidia.com/SDK/10/opengl/screenshots/samples/cascaded_shadow_maps.html
+			//the distance needs to be in the final clip space, not in eye space (or it would be a clipping sphere instead of a plane!)
+			splitData.v[i] = 0.5f*(-zVal * projectionMatrix.constData()[10] + projectionMatrix.constData()[14])/zVal + 0.5f;
 
 		    //Bind current depth map texture
 		    glActiveTexture(GL_TEXTURE4+i);
@@ -628,7 +641,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		}
 
 		//Send squared splits to the shader
-		shader->setUniformValue(loc, squaredSplits.v[0], squaredSplits.v[1], squaredSplits.v[2], squaredSplits.v[3]);
+		shader->setUniformValue(loc, splitData.v[0], splitData.v[1], splitData.v[2], splitData.v[3]);
 	}
 
 	loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MAT_CUBEMVP);
@@ -909,10 +922,10 @@ void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,fl
     }
 
     //Make sure planes arent too small
-    //orthoNear = minZ;
-    //orthoFar = maxZ;
-    orthoNear = std::max(minZ, 0.01f);
-    orthoFar = std::max(maxZ, orthoNear + 1.0f);
+    orthoNear = minZ;
+    orthoFar = maxZ;
+    //orthoNear = std::max(minZ, 0.01f);
+    //orthoFar = std::max(maxZ, orthoNear + 1.0f);
 }
 
 QMatrix4x4 Scenery3d::computeCropMatrix(const Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
@@ -923,12 +936,6 @@ QMatrix4x4 Scenery3d::computeCropMatrix(const Polyhedron& focusBody,const QMatri
     float minX = std::numeric_limits<float>::max();
     float minY = minX;
     float minZ = minX;
-
-    //! Uncomment this and the other marked lines to get no artifacts (but way worse shadow quality
-    //! making the second split pretty much useless
-    AABB bb;
-    for(int i=0; i<focusBody.getVertCount(); i++)
-	bb.expand(focusBody.getVerts().at(i));
 
     //Project the frustum into light space and find the boundaries
     for(int i=0; i<focusBody.getVertCount(); i++)
@@ -945,18 +952,22 @@ QMatrix4x4 Scenery3d::computeCropMatrix(const Polyhedron& focusBody,const QMatri
 	if(transf.z() < minZ) minZ = transf.z();
     }
 
-    //To avoid artifacts and far plane clipping
-    maxZ = 1.0f;
+    //To avoid artifacts and far plane clipping, extend the planes by 5% on both sides
+    float zRange = maxZ-minZ;
+    maxZ+=zRange*0.05;
+    minZ-=zRange*0.05;
 
     //Build the crop matrix and apply it to the light projection matrix
     float scaleX = 2.0f/(maxX - minX);
     float scaleY = 2.0f/(maxY - minY);
-    float scaleZ = 1.0f/(maxZ - minZ);
+    float scaleZ = 1.0f/(maxZ - minZ); //could also be 1, but this rescales the Z range to fit better
+    //float scaleZ = 1.0f;
 
-    float offsetZ = -minZ*scaleZ;
+    float offsetZ = -minZ * scaleZ;
+    //float offsetZ = 0.0f;
 
     //Reducing swimming as specified in Practical cascaded shadow maps by Zhang et al.
-    float quantizer = 64.0f;
+    const float quantizer = 64.0f;
     scaleX = 1.0f/std::ceil(1.0f/scaleX*quantizer) * quantizer;
     scaleY = 1.0f/std::ceil(1.0f/scaleY*quantizer) * quantizer;
 
@@ -1025,8 +1036,8 @@ void Scenery3d::adjustFrustum()
     }
 
     //Setup the newly found near and far planes but make sure they're not too small
-    minZ = std::max(minZ, 0.01f);
-    maxZ = std::max(maxZ, minZ+1.0f);
+    //minZ = std::max(minZ, 0.01f);
+    //maxZ = std::max(maxZ, minZ+1.0f);
 
     //Setup the subfrusta
     for(int i=0; i<frustumSplits; i++)
@@ -1107,7 +1118,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 
 	//Fix selfshadowing
 	glEnable(GL_POLYGON_OFFSET_FILL);
-	glPolygonOffset(1.05f,2.0f);
+	glPolygonOffset(0.75f,1.0f);
 	//! This is now done in shader via a bias. If that's ever a problem uncomment this part and the disabling farther down and change
 	//! glCullFace(GL_FRONT) to GL_BACK (farther up from here)
 
