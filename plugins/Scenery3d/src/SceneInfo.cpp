@@ -76,6 +76,15 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	info.modelGround = ini.value("ground","").toString();
 	info.vertexOrder = ini.value("obj_order","XYZ").toString();
 
+	info.camNearZ = ini.value("camNearZ",0.3f).toFloat();
+	info.camFarZ = ini.value("camFarZ",10000.0f).toFloat();
+	info.shadowFarZ = ini.value("shadowDistance",info.camFarZ).toFloat();
+	info.shadowSplitWeight = ini.value("shadowSplitWeight",-1.0f).toFloat();
+
+	//constrain shadow range to cam far z, makes no sense to extend it further
+	if(info.shadowFarZ>info.camFarZ)
+		info.shadowFarZ = info.camFarZ;
+
 	// In case we don't have an axis-aligned OBJ model, this is the chance to correct it.
 	info.obj2gridMatrix = Mat4d::identity();
 	if (ini.contains("obj2grid_trafo"))

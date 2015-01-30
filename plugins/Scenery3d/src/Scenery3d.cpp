@@ -66,9 +66,6 @@
 }
 
 #define MAXSPLITS 4
-#define NEARZ 0.3f
-//If FARZ is too small for your model change it up
-#define FARZ 10000.0f
 
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
@@ -117,12 +114,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
     frustumSplits = 4;
     //Make sure we dont exceed MAXSPLITS or go below 1
     frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
-
-
-    camFOV = 90.0f;
-    camAspect = 1.0f;
-    camNear = NEARZ;
-    camFar = FARZ;
 
     parallaxScale = 0.015f;
 
@@ -307,15 +298,19 @@ void Scenery3d::finalizeLoad()
 	maxSize = std::max(sceneBoundingBox.max.v[0], maxSize);
 	maxSize = std::max(sceneBoundingBox.max.v[1], maxSize);
 
-	//qDebug() << "MAXSIZE:" << maxSize;
-	if(maxSize < 100.0f)
-	    splitWeight = 0.5f;
-	else if(maxSize < 200.0f)
-	    splitWeight = 0.60f;
-	else if(maxSize < 400.0f)
-	    splitWeight = 0.70f;
-	else
-	    splitWeight = 0.99f;
+
+	if(currentScene.shadowSplitWeight<0)
+	{
+		//qDebug() << "MAXSIZE:" << maxSize;
+		if(maxSize < 100.0f)
+			currentScene.shadowSplitWeight = 0.5f;
+		else if(maxSize < 200.0f)
+			currentScene.shadowSplitWeight = 0.60f;
+		else if(maxSize < 400.0f)
+			currentScene.shadowSplitWeight = 0.70f;
+		else
+			currentScene.shadowSplitWeight = 0.99f;
+	}
 
 	//reset the cubemap time so that is ensured it is immediately rerendered
 	lastCubemapUpdate = 0.0;
@@ -847,24 +842,26 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	objModel->unbindGL();
 }
 
-void Scenery3d::computeFrustumSplits(float zNear, float zFar)
+void Scenery3d::computeFrustumSplits()
 {
-    float ratio = zFar/zNear;
+	//the frustum arrays all already contain the same adjusted frustum from adjustFrustum
+	float zNear = frustumArray[0].zNear;
+	float zFar = frustumArray[0].zFar;
+	float zRatio = zFar / zNear;
+	float zRange = zFar - zNear;
 
-    //Compute the z-planes for the subfrusta
-    frustumArray[0].zNear = zNear;
+	//Compute the z-planes for the subfrusta
+	for(int i=1; i<frustumSplits; i++)
+	{
+		float s_i = i/static_cast<float>(frustumSplits);
 
-    for(int i=1; i<frustumSplits; i++)
-    {
-	float s_i = i/static_cast<float>(frustumSplits);
+		frustumArray[i].zNear = currentScene.shadowSplitWeight*(zNear*powf(zRatio, s_i)) + (1.0f-currentScene.shadowSplitWeight)*(zNear + (zRange)*s_i);
+		//Set the previous zFar to the newly computed zNear
+		//use a small overlap for robustness
+		frustumArray[i-1].zFar = frustumArray[i].zNear * 1.005f;
+	}
 
-	frustumArray[i].zNear = splitWeight*(zNear*powf(ratio, s_i)) + (1.0f-splitWeight)*(zNear + (zFar - zNear)*s_i);
-	//Set the previous zFar to the newly computed zNear
-	frustumArray[i-1].zFar = frustumArray[i].zNear * 1.005f;
-    }
-
-    //Make sure the last zFar is set correctly
-    frustumArray[frustumSplits-1].zFar = zFar;
+	//last zFar is already the zFar of the adjusted frustum
 }
 
 void Scenery3d::computePolyhedron(Polyhedron& body,const Frustum& frustum,const Vec3f& shadowDir)
@@ -883,7 +880,7 @@ void Scenery3d::computePolyhedron(Polyhedron& body,const Frustum& frustum,const 
 void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,float& orthoNear,float& orthoFar)
 {
     //Focus the light first on the entire scene
-    float maxZ = 0.0f;
+    float maxZ = -std::numeric_limits<float>::max();
     float minZ = std::numeric_limits<float>::max();
     orthoExtent = 0.0f;
 
@@ -912,28 +909,14 @@ void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,fl
     }
 
     //Make sure planes arent too small
-    orthoNear = std::max(minZ, 1.0f);
+    //orthoNear = minZ;
+    //orthoFar = maxZ;
+    orthoNear = std::max(minZ, 0.01f);
     orthoFar = std::max(maxZ, orthoNear + 1.0f);
 }
 
-void Scenery3d::computeCropMatrix(int frustumIndex,const Vec3f& shadowDir)
+QMatrix4x4 Scenery3d::computeCropMatrix(const Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
 {
-    //Compute the light frustum, only need to do this once because we're just cropping it afterwards
-	static float orthoExtent,orthoFar,orthoNear;
-    if(frustumIndex == 0)
-    {
-	computeOrthoProjVals(shadowDir,orthoExtent,orthoNear,orthoFar);
-    }
-
-    //Calculating a fitting Projection Matrix for the light
-    QMatrix4x4 lightProj;
-    //Mat4f lightProj, lightMVP, c;
-
-    //Setup the Ortho Projection based on found z values
-    lightProj.ortho(-orthoExtent,orthoExtent,-orthoExtent,orthoExtent,orthoNear,orthoFar);
-
-    QMatrix4x4 lightMVP = lightProj*modelViewMatrix;
-
     float maxX = -std::numeric_limits<float>::max();
     float maxY = maxX;
     float maxZ = maxX;
@@ -944,13 +927,13 @@ void Scenery3d::computeCropMatrix(int frustumIndex,const Vec3f& shadowDir)
     //! Uncomment this and the other marked lines to get no artifacts (but way worse shadow quality
     //! making the second split pretty much useless
     AABB bb;
-    for(int i=0; i<focusBodies.at(frustumIndex).getVertCount(); i++)
-	bb.expand(focusBodies.at(frustumIndex).getVerts().at(i));
+    for(int i=0; i<focusBody.getVertCount(); i++)
+	bb.expand(focusBody.getVerts().at(i));
 
     //Project the frustum into light space and find the boundaries
-    for(int i=0; i<focusBodies.at(frustumIndex).getVertCount(); i++)
+    for(int i=0; i<focusBody.getVertCount(); i++)
     {
-	const Vec3f tmp = focusBodies.at(frustumIndex).getVerts().at(i);
+	const Vec3f tmp = focusBody.getVerts().at(i);
 	QVector4D transf4 = lightMVP*QVector4D(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
 	QVector3D transf = transf4.toVector3DAffine();
 
@@ -1001,20 +984,22 @@ void Scenery3d::computeCropMatrix(int frustumIndex,const Vec3f& shadowDir)
 				 0.0f, 0.0f, 0.5f, 0.5f,
 				 0.0f, 0.0f, 0.0f, 1.0f);	//bias from [-1, 1] to [0, 1]
 
-    //store final matrix for retrieval later
-    shadowCPM[frustumIndex] = biasMatrix * projectionMatrix * modelViewMatrix;
+    //calc final matrix
+    return biasMatrix * projectionMatrix * modelViewMatrix;
 }
 
 void Scenery3d::adjustFrustum()
 {
-    //Create the cam frustum because it might have changed from before
-    Frustum camFrust;
-    camFrust.setCamInternals(camFOV, camAspect, camNear, camFar);
-    camFrust.calcFrustum(viewPos, viewDir, viewUp);
+	//calc cam frustum for shadowing range
+	//note that this is only correct in the perspective projection case, cubemapping WILL introduce shadow artifacts in most cases
+	float fov = altAzProjector->getFov();
+	float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
+	camFrustShadow.setCamInternals(fov,aspect,currentScene.camNearZ,currentScene.shadowFarZ);
+	camFrustShadow.calcFrustum(viewPos, viewDir, viewUp);
 
     //Compute H = V intersect S according to Zhang et al.
     Polyhedron p;
-    p.add(camFrust);
+    p.add(camFrustShadow);
     p.intersect(sceneBoundingBox);
     p.makeUniqueVerts();
 
@@ -1040,13 +1025,13 @@ void Scenery3d::adjustFrustum()
     }
 
     //Setup the newly found near and far planes but make sure they're not too small
-    camNear = std::max(minZ, 1.0f);
-    camFar = std::max(maxZ, camNear+1.0f);
+    minZ = std::max(minZ, 0.01f);
+    maxZ = std::max(maxZ, minZ+1.0f);
 
     //Setup the subfrusta
     for(int i=0; i<frustumSplits; i++)
     {
-	frustumArray[i].setCamInternals(camFOV, camAspect, camNear, camFar);
+	frustumArray[i].setCamInternals(fov, aspect, minZ, maxZ);
     }
 }
 
@@ -1060,11 +1045,6 @@ bool Scenery3d::generateShadowMap()
 		if(!initShadowmapping())
 			return false; //can't use shadowmaps
 	}
-
-	//Needed so we can actually adjust the frustum upwards after it was already adjusted downwards.
-	//This resets it and they'll be recomputed in adjustFrustum();
-	camNear = NEARZ;
-	camFar = FARZ;
 
 	//Adjust the frustum to the scene before analyzing the view samples
 	adjustFrustum();
@@ -1115,7 +1095,7 @@ bool Scenery3d::generateShadowMap()
 	modelViewMatrix.lookAt(shadowDir,vZero,vZeroZeroOne);
 
 	//Compute and set z-distances for each split
-	computeFrustumSplits(camNear, camFar);
+	computeFrustumSplits();
 
 	//perform actual rendering
 	return renderShadowMaps(shadowDirV3f);
@@ -1143,10 +1123,21 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	//Set viewport to shadowmap
 	glViewport(0, 0, shadowmapSize, shadowmapSize);
 
+	//Compute an orthographic projection that encompasses the whole scene
+	//a crop matrix is used to restrict this projection to the subfrusta
+	float orthoExtent,orthoFar,orthoNear;
+	computeOrthoProjVals(shadowDir,orthoExtent,orthoNear,orthoFar);
+
+	QMatrix4x4 lightProj;
+	lightProj.ortho(-orthoExtent,orthoExtent,-orthoExtent,orthoExtent,orthoNear,orthoFar);
+
+	//multiply with lights modelView matrix
+	QMatrix4x4 lightMVP = lightProj*modelViewMatrix;
+
 	//For each split
 	for(int i=0; i<frustumSplits; i++)
 	{
-		//Calculate the Frustum for this split
+		//Calculate the sub-Frustum for this split
 		frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
 
 		//Find the convex body that encompasses all shadow receivers and casters for this split
@@ -1155,17 +1146,16 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 
 		//qDebug() << i << ".split vert count:" << focusBodies[i]->getVertCount();
 
+		glBindFramebuffer(GL_FRAMEBUFFER,shadowFBOs.at(i));
+		//Clear everything, also if focusbody is empty
+		glClear(GL_DEPTH_BUFFER_BIT);
+
 		if(focusBodies[i].getVertCount())
 		{
 			//Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
 			//This alters the ProjectionMatrix of the light
-			//the final light matrix is stored in shadowCPM
-			computeCropMatrix(i,shadowDir);
-
-			glBindFramebuffer(GL_FRAMEBUFFER,shadowFBOs.at(i));
-
-			//Clear everything
-			glClear(GL_DEPTH_BUFFER_BIT);
+			//the final light matrix used for lookups is stored in shadowCPM
+			shadowCPM[i] = computeCropMatrix(focusBodies.at(i),lightProj,lightMVP);
 
 			//Draw the scene
 			drawArrays(false);
@@ -1384,7 +1374,7 @@ void Scenery3d::generateCubeMap()
 	//setup projection matrix - this is a 90-degree perspective with aspect 1.0
 	const float fov = 90.0f;
 	projectionMatrix.setToIdentity();
-	projectionMatrix.perspective(fov,1.0f,NEARZ,FARZ);
+	projectionMatrix.perspective(fov,1.0f,currentScene.camNearZ,currentScene.camFarZ);
 
 	//set opengl viewport to the size of cubemap
 	glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1527,7 +1517,7 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
 
     projectionMatrix.setToIdentity();
-    projectionMatrix.perspective(fov,aspect,NEARZ,FARZ);
+    projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
 
     //calc modelview transform
     modelViewMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
@@ -1683,7 +1673,7 @@ void Scenery3d::drawDebug()
 		}
 	}
 
-	painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(splitWeight, 3, 'f', 2));
+	painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(currentScene.shadowSplitWeight, 3, 'f', 2));
     }
 
     screen_y -= 100.f;
