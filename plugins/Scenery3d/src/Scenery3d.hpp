@@ -238,14 +238,12 @@ private:
     QVector<QMatrix4x4> shadowCPM;
     //Number of splits for CSM
     int frustumSplits;
-    //Weight for splitting the frustums
-    float splitWeight;
+    // Frustum of the view camera, constrainted to the shadowFarZ instead of the camFarZ
+    Frustum camFrustShadow;
     //Array holding the split frustums
     QVector<Frustum> frustumArray;
     //Vector holding the convex split bodies for focused shadow mapping
     QVector<Polyhedron> focusBodies;
-    //Camera values
-    float camNear, camFar, camFOV, camAspect;
 
     float parallaxScale;
 
@@ -314,11 +312,11 @@ private:
     //Adjust the frustum to the loaded scene bounding box according to Zhang et al.
     void adjustFrustum();
     //Computes the frustum splits
-    void computeFrustumSplits(float zNear, float zFar);
+    void computeFrustumSplits();
     //Computes the focus body for given frustum
     void computePolyhedron(Polyhedron& body, const Frustum& frustum, const Vec3f &shadowDir);
     //Computes the crop matrix to focus the light
-    void computeCropMatrix(int frustumIndex, const Vec3f &shadowDir);
+    QMatrix4x4 computeCropMatrix(const Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
     //Computes the light projection values
     void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
 };
