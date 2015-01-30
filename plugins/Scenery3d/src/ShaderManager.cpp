@@ -71,7 +71,7 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_fTorchAttenuation"] = UNIFORM_TORCH_ATTENUATION;
 
 		//others
-		uniformStrings["u_vSquaredSplits"] = UNIFORM_VEC_SQUAREDSPLITS;
+		uniformStrings["u_vSplits"] = UNIFORM_VEC_SPLITDATA;
 		uniformStrings["u_fAlphaThresh"] = UNIFORM_FLOAT_ALPHA_THRESH;
 	}
 	if(featureFlagsStrings.size()==0)
