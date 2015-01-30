@@ -159,7 +159,7 @@ uniform vec3 u_vMixEmissive;
 
 #if SHADOWS
 //shadow related uniforms
-uniform vec4 u_vSquaredSplits; //the frustum splits
+uniform vec4 u_vSplits; //the frustum splits
 uniform sampler2DShadow u_texShadow0;
 uniform sampler2DShadow u_texShadow1;
 uniform sampler2DShadow u_texShadow2;
@@ -207,22 +207,23 @@ float sampleShadow(in sampler2DShadow tex, in vec4 coord)
 float getShadow()
 {
 	//simplification of the smap.f.glsl shader
-	float dist = dot(v_viewPos,v_viewPos); //squared length of view vec
+	//IMPORTANT: use clip coords here, not distance to camera
+	float dist = gl_FragCoord.z;
 	
 	//check in which split the fragment falls
-	if(dist < u_vSquaredSplits.x)
+	if(dist < u_vSplits.x)
 	{
 		return sampleShadow(u_texShadow0,v_shadowCoord0);
 	}
-	else if(dist < u_vSquaredSplits.y)
+	else if(dist < u_vSplits.y)
 	{
 		return sampleShadow(u_texShadow1,v_shadowCoord1);
 	}
-	else if(dist < u_vSquaredSplits.z)
+	else if(dist < u_vSplits.z)
 	{
 		return sampleShadow(u_texShadow2,v_shadowCoord2);
 	}
-	else if(dist < u_vSquaredSplits.w)
+	else if(dist < u_vSplits.w)
 	{
 		return sampleShadow(u_texShadow3,v_shadowCoord3);
 	}

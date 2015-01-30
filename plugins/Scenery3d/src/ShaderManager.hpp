@@ -118,7 +118,7 @@ public:
 		UNIFORM_TORCH_ATTENUATION,
 
 		//! Squared frustum splits (vec4)
-		UNIFORM_VEC_SQUAREDSPLITS,
+		UNIFORM_VEC_SPLITDATA,
 		//! Alpha test threshold
 		UNIFORM_FLOAT_ALPHA_THRESH,
 	};
