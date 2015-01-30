@@ -58,6 +58,17 @@ struct SceneInfo
 	//! Optional string depicting vertex order of models (XYZ, ZXY, ...)
 	QString vertexOrder;
 
+	//! Distance to cam near clipping plane. Default 0.3.
+	float camNearZ;
+	//! Distance to cam far clipping plane. Default 10000.0
+	float camFarZ;
+	//! An optional shadow far clipping plane, constraining the shadowmaps to a smaller region than is visible.
+	//! Must be smaller or equal to camFarZ. Default equals camFarZ.
+	float shadowFarZ;
+	//! Weighting of the shadow frustum splits between uniform (at 0) and logarithmic (at 1) splits
+	//! When -1, should be calculated from the scene using the old algorithm
+	float shadowSplitWeight;
+
 	//! Optional more accurate location information, which will override the landscape's position.
 	QSharedPointer<StelLocation> location;
 	//! Optional initial look-at vector (azimuth, elevation and FOV in degrees)
