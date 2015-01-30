@@ -821,7 +821,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
-		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "sdo" || type == "oco") && !englishName.contains("Pluto"))
+		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/lighting").toBool(),
