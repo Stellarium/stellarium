@@ -256,7 +256,6 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	}
 
 	float aSize = 2.*getAngularSize(core)*M_PI/180.;
-	qWarning() << getEnglishName() << aSize;
 	if (flags&Size && aSize>1e-6)
 		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
 
