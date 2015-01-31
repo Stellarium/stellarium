@@ -63,7 +63,7 @@ public:
 	//! @return version string, e.g. "0.12.4"
 	QString getLatestVersionFromJson(void);
 	int getRequiredOpenGLVersionFromJson(void);
-	void setUpdatesMessage(bool hasUpdates, QString version="", int OpenGL=0);
+	void setUpdatesMessage(bool hasUpdates, QString version="");
 	QString getUpdatesMessage();
 
 public slots:

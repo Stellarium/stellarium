@@ -279,15 +279,14 @@ void HelpDialog::restoreDefaultJsonFile(void)
 
 void HelpDialog::readJsonFile()
 {
-	QString version = getLatestVersionFromJson();
-	unsigned int OpenGLversion = getRequiredOpenGLVersionFromJson();
+	QString version = getLatestVersionFromJson();	
 	if (version!=currentVersion)
 	{
-		setUpdatesMessage(true, version, OpenGLversion);
+		setUpdatesMessage(true, version);
 	}
 }
 
-void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version, int OpenGL)
+void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version)
 {
 	if (version.contains("unknown"))
 	{
@@ -319,11 +318,7 @@ void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version, int OpenGL)
 		else
 		{
 			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
-			updatesMessage = q_("This version of Stellarium is outdated! Latest version is %1.").arg(version);
-			if (!(QGLFormat::openGLVersionFlags() & OpenGL))
-			{
-				updatesMessage.append(q_(" Sorry, your hardware is not compatible with newest version of Stellarium!"));
-			}
+			updatesMessage = q_("This version of Stellarium is outdated! Latest version is %1.").arg(version);			
 		}		
 	}
 	else
