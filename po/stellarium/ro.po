@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 01:35+0600\n"
-"PO-Revision-Date: 2014-12-23 18:50+0000\n"
+"POT-Creation-Date: 2015-01-30 00:01+0600\n"
+"PO-Revision-Date: 2015-01-27 18:13+0000\n"
 "Last-Translator: Mihai Roharik <roharik@free.fr>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-17 05:54+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
+"X-Launchpad-Export-Date: 2015-01-30 05:58+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -160,12 +160,11 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:615
 msgid "Celestial body:"
-msgstr ""
+msgstr "Corpuri ceresti"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
-#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:178
-#: src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/StarWrapper.cpp:178 src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -174,7 +173,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Tip: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:216
-#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
+#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:168
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
@@ -183,7 +182,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitudine: <b>%1</b> (extins spre: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:219
-#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:171
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
@@ -206,43 +205,43 @@ msgstr "Luminozitatea suprafetei: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Mărime: %1"
 
-#: src/core/modules/Nebula.cpp:375
+#: src/core/modules/Nebula.cpp:386
 msgid "Galaxy"
 msgstr "Galaxie"
 
-#: src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:389
 msgid "Open cluster"
 msgstr "Roi deschis"
 
-#: src/core/modules/Nebula.cpp:381
+#: src/core/modules/Nebula.cpp:392
 msgid "Globular cluster"
 msgstr "Roi globular"
 
-#: src/core/modules/Nebula.cpp:384
+#: src/core/modules/Nebula.cpp:395
 msgid "Nebula"
 msgstr "Nebuloasă"
 
-#: src/core/modules/Nebula.cpp:387
+#: src/core/modules/Nebula.cpp:398
 msgid "Planetary nebula"
 msgstr "Nebuloasă planetară"
 
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:401
 msgid "Dark nebula"
 msgstr "Nebuloasă întunecată"
 
-#: src/core/modules/Nebula.cpp:393
+#: src/core/modules/Nebula.cpp:404
 msgid "Irregular galaxy"
 msgstr "Galaxie neregulată"
 
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:407
 msgid "Cluster associated with nebulosity"
 msgstr "Roi asociat cu nebulozitate"
 
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:410
 msgid "Unknown"
 msgstr "Necunoscut(ă)"
 
-#: src/core/modules/Nebula.cpp:402
+#: src/core/modules/Nebula.cpp:413
 msgid "Undocumented type"
 msgstr "Tip nedocumentat"
 
@@ -251,7 +250,7 @@ msgid "Deep-sky objects"
 msgstr "Obiecte extra-solare"
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
-#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:174
+#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:180
 #: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
@@ -263,13 +262,13 @@ msgid "Obliquity (of date, for Earth): %1"
 msgstr "Oblicitate (a datei, pentru Pământ): %1"
 
 #: src/core/modules/Planet.cpp:243 src/core/modules/MinorPlanet.cpp:244
-#: src/core/modules/Comet.cpp:204
+#: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Distanţă: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:250 src/core/modules/MinorPlanet.cpp:251
-#: src/core/modules/Comet.cpp:211
+#: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Distanța: %1AU (%2 Mil. km.)"
@@ -286,7 +285,6 @@ msgstr "Diametru aparent: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:281 src/core/modules/MinorPlanet.cpp:266
-#: src/core/modules/Comet.cpp:244
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Perioadă siderală: %1 zile (%2 a)"
@@ -330,30 +328,53 @@ msgstr "Iluminare: %1%"
 msgid "Provisional designation: %1"
 msgstr "Denumire provizorie: %1"
 
-#: src/core/modules/Comet.cpp:187
+#: src/core/modules/Comet.cpp:156
+msgctxt "type of comet"
+msgid "non-periodic"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:160
+msgctxt "type of comet"
+msgid "periodic"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
+#: plugins/Pulsars/src/Pulsar.cpp:166
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
+#, qt-format
+msgid "Type: <b>%1</b> (%2)"
+msgstr "Tip: <b>%1</b> (%2)"
+
+#: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Distanta de la Soare: %1UA (%2 km)"
 
-#: src/core/modules/Comet.cpp:194
+#: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Distanta de la Soare: %1UA (%2 Mio km)"
 
-#: src/core/modules/Comet.cpp:221
+#. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
+#: src/core/modules/Comet.cpp:230
+#, qt-format
+msgid "Sidereal period: %1 a"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "Viteza: %1 km/s"
 
-#: src/core/modules/Comet.cpp:230
+#: src/core/modules/Comet.cpp:246
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr "Diametrul comei (estimare): %1 km"
 
-#: src/core/modules/Comet.cpp:234
+#: src/core/modules/Comet.cpp:250
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Lungimea cozii gazoase (estimare): %1 Mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:167 src/translations.h:62
@@ -465,22 +486,12 @@ msgstr "Perioada de luminozitate maximă: %1 JD"
 msgid "Period: %1 days"
 msgstr "Perioada: %1 zile"
 
-#: src/core/modules/StarWrapper.cpp:257
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr "Următorul minim al luminozităţii : %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:259
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr "Următorul maxim al luminozităţii : %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/StarWrapper.cpp:270
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Durata eclipsei: %1%"
 
-#: src/core/modules/StarWrapper.cpp:267
+#: src/core/modules/StarWrapper.cpp:272
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Timpul răsăritului: %1%"
@@ -750,6 +761,11 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Aceasta ecuatie polinomiala de ordin 12 (depasita si inlocuita de catre "
+"Schmadel & Zech (1988)) a fost publicata de catre L.D. Schmadel and G. Zech "
+"in articolul <em>Aproximari polinomiale pt corectare delta T E.T. - U.T. in "
+"perioada 1800-1975</m> (%1) corespunzatoare datelor publicate de Brouwer "
+"(1952)."
 
 #: src/core/StelCore.cpp:1545
 msgid ""
@@ -757,6 +773,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Algoritmul a fost adoptat in <em>Programe astronomice si Tabele de la -4000 "
+"la +2800</em> (P. Bretagnon & L. Simon, 1986) si in RedShift, program de tip "
+"planetarium, PC."
 
 #: src/core/StelCore.cpp:1548
 #, qt-format
@@ -780,6 +799,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Algoritm prezentat de catre F. Espenak in cartile sale <em>Canon de 50 de "
+"ani de eclipse solare: 1986-2035</em> (1987) si <em>Canon de 50 de ani de "
+"eclipse lunare: 1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:1557
 #, qt-format
@@ -859,6 +881,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"Acest polinom a fost publicat de J. Meeus şi L. Simons în articolul "
+"<em>Aproximări polinomiale pentru Delta T, 1620-2000 AD</em> (%1)."
 
 #: src/core/StelCore.cpp:1581
 msgid ""
@@ -866,6 +890,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"A patra ediţie din O. Montenbruck & T. Pfleger, <em>Astronomy on the "
+"Personal Computer</em> (<em>Astronomie pe ordinator</em>) (2000) oferă "
+"estimări cu polinoame de ordinul 3 pentru perioade din trecutul apropiat."
 
 #: src/core/StelCore.cpp:1584
 msgid ""
@@ -915,6 +942,13 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Această soluţie a lui F. Espenak şi J. Meeus, bazată pe Morrison & "
+"Stephenson (2004) şi pe o estimare polinomială plecînd de la tabelele de "
+"valori pentru perioada 1600-2000, este utilizată pentru %1Situl web al "
+"eclipselor al NASA%2 şi în lucrarea lor <em>Five Millennium Canon of Solar "
+"Eclipses: -1900 to +3000</em> (<em>Cinci milenii de eclipse solare: de la -"
+"1900 la +3000</em>) (2006). Această formulă este de asemenea folosită în "
+"programul SOLEX de calcul al efemeridelor solare, lunare si planetare."
 
 #: src/core/StelCore.cpp:1593
 msgid "Used by default."
@@ -927,6 +961,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Această soluţie a lui B. Banjevic, bazată pe Stephenson & Morrison (1984), a "
+"fost publicată în articolul <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1) (Eclipse vechi şi datarea căderii Babilonului</em> (%1))."
 
 #: src/core/StelCore.cpp:1599
 #, qt-format
@@ -1096,12 +1133,12 @@ msgstr ""
 #: src/core/StelObject.cpp:115
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "la data curenta"
 
 #: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
 #: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
 msgid "RA/Dec"
-msgstr ""
+msgstr "Ascensie dreaptă / Declinaţie"
 
 #: src/core/StelObject.cpp:151 src/core/StelObject.cpp:155
 #, qt-format
@@ -1131,7 +1168,7 @@ msgstr "Latitudine/Longitudine galactică: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Imagini de fundal cu obiecte extra-solare (deep-sky)"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
 #: src/StelMainView.cpp:450
@@ -1203,7 +1240,7 @@ msgstr "Contact"
 
 #: src/gui/ConfigurationDialog.cpp:798
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1217,7 +1254,7 @@ msgstr "Versiune"
 
 #: src/gui/ConfigurationDialog.cpp:881
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -1428,18 +1465,19 @@ msgstr "Ecuaţie personalizată a lui %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:295
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Stellarium nu poate verifica dacă aceasta este ultima versiune."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:317
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Se pare ca utilizati o versiunea BETA a Stellarium"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
 msgstr ""
+"Această versiune de Stellarium este depășită! Ultima versiune este %1."
 
 #: src/gui/HelpDialog.cpp:325
 msgid ""
@@ -1511,6 +1549,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Mai jos sînt listate numai acţiunile care au taste alocate. Alte acţiuni pot "
+"fi disponibile cu tasta \"%1\"."
 
 #: src/gui/HelpDialog.cpp:442
 msgid ""
@@ -1711,7 +1751,7 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:650
 msgid "Field of view"
-msgstr ""
+msgstr "Camp vizual"
 
 #: src/gui/StelGuiItems.cpp:668
 msgid "Frames per second"
@@ -1720,12 +1760,12 @@ msgstr "Cadre/secundă"
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:360
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Loc cu cer negru excelent"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:362
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Loc cu cer negru"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:364
@@ -1735,7 +1775,7 @@ msgstr "Cer rural"
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:366
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Loc cu cer rural/suburban"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:368
@@ -1745,22 +1785,22 @@ msgstr "Cer suburban"
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:370
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "Cer suburban luminos"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:372
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Cer între suburban şi urban"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:374
 msgid "City sky"
-msgstr ""
+msgstr "Cer urban"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:376
 msgid "Inner-city sky"
-msgstr ""
+msgstr "Cer urban cu poluare luminoasă puternică"
 
 #: src/gui/ViewDialog.cpp:390
 msgid "The naked-eye limiting magnitude is"
@@ -1792,7 +1832,7 @@ msgstr "Rată normală"
 
 #: src/gui/ViewDialog.cpp:639
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Frecvenţă standard a Orionidelor"
 
 #: src/gui/ViewDialog.cpp:642
 msgid "Standard Perseids rate"
@@ -1800,19 +1840,19 @@ msgstr "Rata Perseidelor standard"
 
 #: src/gui/ViewDialog.cpp:645
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Frecvenţă standard a Geminidelor"
 
 #: src/gui/ViewDialog.cpp:648
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Frecvenţă excepţională a Perseidelor"
 
 #: src/gui/ViewDialog.cpp:651
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Frecvenţa furtunii de meteoriţi"
 
 #: src/gui/ViewDialog.cpp:654
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Frecvenţă excepţională a Draconidelor"
 
 #: src/gui/ViewDialog.cpp:657
 msgid "Exceptional Leonid rate"
@@ -1820,11 +1860,11 @@ msgstr "Rata Leonidelor excepțională"
 
 #: src/gui/ViewDialog.cpp:660
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Rată foarte mare (1966 Leonide)"
 
 #: src/gui/ViewDialog.cpp:663
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Cea mai mare rată înregistrată vreodată (1833 Leonide)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -1948,11 +1988,11 @@ msgstr "Galactic"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "Ascensie dreapta"
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
-msgstr ""
+msgstr "Declinaţie"
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
@@ -1972,11 +2012,11 @@ msgstr "Latitudine"
 
 #: src/gui/SearchDialog.cpp:511
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Eroare de căutare în baza de date Simbad"
 
 #: src/gui/SearchDialog.cpp:519
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Căutare în baza de date Simbad"
 
 #: src/gui/SearchDialog.cpp:687
 msgid "University of Strasbourg (France)"
@@ -2010,7 +2050,7 @@ msgstr "Ecuaţie personalizată pentru %1T"
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "O ecuaţie tipică de calcul a %1T este de felul următor:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
@@ -2025,10 +2065,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"OpenGL 2 nu a fost găsit pe acest calculator. Vă rugăm să actualizaţi "
+"materialul sau să folosiţi MESA sau o versiune mai veche."
 
 #: src/StelMainView.cpp:385
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Nu pot fi găsite resursele OpenGL necesare."
 
 #: src/StelMainView.cpp:450
 msgid "Save screenshot"
@@ -2043,11 +2085,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Versiunea OpenGL este prea veche. Vă rugăm să actualizaţi driverele, cardul "
+"de imagine sau să folosiţi versiunea MESA (sau ANGLE)."
 
 #: src/StelMainView.cpp:551
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Versiunea OpenGL este prea veche. Vă rugăm să actualizaţi driverele sau "
+"cardul de imagine."
 
 #: src/StelMainView.cpp:593
 msgid ""
@@ -2066,6 +2112,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Subsistemul OpenGL/Mesa are probleme. Consultaţi logul pentru detalii.\n"
+"Doriţi să ignoraţi acest lucru şi să eliminaţi acest mesaj în viitor şi să "
+"încercaţi funcţionarea în mod degradat?"
 
 #: src/StelMainView.cpp:699
 msgid ""
@@ -2073,6 +2122,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Subsistemul OpenGL are probleme. Consultaţi logul pentru detalii.\n"
+"Doriţi să ignoraţi acest lucru şi să eliminaţi acest mesaj în viitor şi să "
+"încercaţi funcţionarea în mod degradat?"
 
 #: src/StelMainView.cpp:736
 msgid ""
@@ -2080,6 +2132,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Subsistemul OpenGL ES are probleme. Consultaţi logul pentru detalii.\n"
+"Doriţi să ignoraţi acest lucru şi să eliminaţi acest mesaj în viitor şi să "
+"încercaţi funcţionarea în mod degradat?"
 
 #: src/StelMainView.cpp:845
 #, qt-format
@@ -2125,27 +2180,27 @@ msgstr "lună"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr ""
+msgstr "Plutonioni"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
 msgid "dwarf planet"
-msgstr ""
+msgstr "Planete Pitice"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "Obiect din centura lui Kuiper"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "scattered disc object"
-msgstr ""
+msgstr "Obiect din regiunea indepartata de Soare"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
 msgid "Oort cloud object"
-msgstr ""
+msgstr "Obiect din Norul lui Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:64
@@ -2162,42 +2217,42 @@ msgstr "Asteroizi"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:68
 msgid "Moons"
-msgstr ""
+msgstr "Luni"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:70
 msgid "Plutinos"
-msgstr ""
+msgstr "Plutoizi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:72
 msgid "Dwarf planets"
-msgstr ""
+msgstr "Planete pitice"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "Obiecte din centura lui Kuiper"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:76
 msgid "Scattered disc objects"
-msgstr ""
+msgstr "Obiecte din regiunea indepartata de Soare."
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:78
 msgid "Oort cloud objects"
-msgstr ""
+msgstr "Obiecte din Norul lui Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
 msgid "Bright galaxies"
-msgstr ""
+msgstr "Galaxii strălucitoare"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:85
 msgid "Open star clusters"
-msgstr ""
+msgstr "Roiuri deschise de stele"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:87
@@ -2207,12 +2262,12 @@ msgstr "Roiuri globulare de stele"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:89
 msgid "Nebulae"
-msgstr ""
+msgstr "Nebuloasă"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:91
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Nebuloasă planetară"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:93
@@ -2330,7 +2385,7 @@ msgstr "Occidentală"
 
 #: src/translations.h:128
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "Vestica (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:134
@@ -2400,7 +2455,7 @@ msgstr "Grossmugl"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:160
 msgid "Zero Horizon"
-msgstr ""
+msgstr "Orizont zero"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:166
@@ -2521,11 +2576,15 @@ msgstr "Evenimente ale Pământului de pe Marte"
 #: src/translations.h:212
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
+"Cele mai mari elongaţii şi străluciri ale Terrei şi ale lui Venus observate "
+"de pe Marte."
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:214
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
+"Cele mai mari elongaţii si tranziturile Terrei şi ale lui Venus observate de "
+"pe Callisto."
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
@@ -2626,6 +2685,12 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Phobos trece înaintea lui Marte si tranzitează Soarele, trece prin faţa lui, "
+"apoi retrogradează spre Soare şi îl tranzitează numai parţial din nou "
+"(vizibil numai din hemisfera sudică a lui Deimos), apoi Marte eclipsează "
+"complet Soarele în timp ce Phobos tranzitează pe întuneric între Marte şi "
+"Deimos. Cînd Phobos apare din spatele lui Marte este încă eclipsat şi "
+"estompat în umbra lui Marte, şi va fi luminat mai tîrziu."
 
 #: src/translations.h:237
 msgid ""
@@ -2682,6 +2747,10 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"Cele mai mari elongaţii şi tranzituri ale Terrei văzute de pe Callisto între "
+"anii 2000 şi 3000. De ce Callisto? Dintre cele 4 luni galileene, Callisto "
+"este singura în afara centurei de radiaţii a lui Jupiter. Prin urmare, dacă "
+"oamenii vor coloniza vreodată lunile lui Jupiter, Callisto va fi aceea."
 
 #: src/translations.h:249
 msgid "Andorra"
@@ -3706,7 +3775,7 @@ msgstr "Fişiere de tipul:"
 
 #: src/translations.h:506
 msgid "Date Modified"
-msgstr ""
+msgstr "Dată modificată"
 
 #: src/translations.h:507
 msgid "Directories"
@@ -3722,7 +3791,7 @@ msgstr "&Deschide"
 
 #: src/translations.h:510
 msgid "File &name:"
-msgstr ""
+msgstr "&name fişier:"
 
 #: src/translations.h:511
 msgid "Copy &Link Location"
@@ -3734,7 +3803,7 @@ msgstr "Renunţă"
 
 #: src/translations.h:513
 msgid "Ignore"
-msgstr ""
+msgstr "Ignoră"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
@@ -3865,7 +3934,7 @@ msgstr "Caută obiect sau poziţie"
 
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Folosiţi tasta tab pentru a selecta obiectele găsite"
 
 #: src/ui_searchDialogGui.h:627
 msgid "iota"
@@ -4068,7 +4137,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1237 src/ui_viewDialog.h:1294
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "Obiecte extra solare (Deep-Sky)"
 
 #: src/ui_viewDialog.h:1238
 msgid "Planets and satellites"
@@ -4980,7 +5049,7 @@ msgid "Angle Measure Plug-in"
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Contributors"
 msgstr "Colaboratori"
 
@@ -5520,19 +5589,40 @@ msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "Cîmpul vizual obţinut cu această combinaţie ocular/lentilă/telescop"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+msgid "tFOV:"
+msgstr ""
+
+#. TRANSLATORS: Magnification factor for binoculars
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+msgid "Magnification factor:"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
+msgid "aFOV:"
+msgstr "aFOV:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
+msgid "Focal length:"
+msgstr "Distanța focală:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
 msgstr "Plugin Oculare"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Barlow lens feature"
 msgstr "Caracteristici lentilă Barlow"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Overview"
 msgstr "Sumar"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5544,7 +5634,7 @@ msgstr ""
 "telescoape, precum şi senzori CCD. Prima utilizare va genera cîteva exemple "
 "pentru antrenament."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5555,7 +5645,7 @@ msgid ""
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5565,7 +5655,7 @@ msgstr ""
 "aliniat cu nordul. Nu am reuşit să fac asta. În prezent este aliniat cu "
 "partea de sus a ecranului."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5578,28 +5668,28 @@ msgstr ""
 "cercuri concentrice de 0.5%1, 2.0%1 şi 4.0%1, ajutînd să vizualizaţi ceea ce "
 "s-ar vedea cu ochiul liber printr-un căutător Telrad (sau similar)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
 msgstr "Taste rapide"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "[no key defined]"
 msgstr "[nici o tastă definită]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
@@ -5690,15 +5780,6 @@ msgstr "Adaugă"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "Nume:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
-msgid "aFOV:"
-msgstr "aFOV:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
-msgid "Focal length:"
-msgstr "Distanța focală:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
@@ -7344,17 +7425,17 @@ msgid "Import orbital elements in MPC format..."
 msgstr "Importare elemente orbitale în format MPC..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:155
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr ""
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:156
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:158
 msgid "Only one result will be returned if the query is successful."
 msgstr ""
 "Dacă solicitarea se termină cu succes, va fi returnat un singur rezultat."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:157
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
@@ -7362,7 +7443,7 @@ msgstr ""
 "Atît cometele cît şi asteroizii pot fi identificaţi după numărul, numele (în "
 "engleză) sau denumirea lor provizorie."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:164
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:166
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -7375,7 +7456,7 @@ msgstr ""
 "rezultat. De exemplu, o căutare după \"%3\" va returna %4, cometa Halley, "
 "dar o căutare după \"%5\" va returna asteroidul %6."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:207
 msgid "Select bookmark..."
 msgstr ""
 
@@ -7710,12 +7791,6 @@ msgstr ""
 #: plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae configuration window"
 msgstr "Fereastră de configurare a novelor strălucitoare"
-
-#: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:344
-#, qt-format
-msgid "Type: <b>%1</b> (%2)"
-msgstr "Tip: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
@@ -10496,6 +10571,14 @@ msgstr "Coordonate Y"
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #~ msgstr "Magnitudine: <b>%1</b> (B-V: <b>%2</b>)"
+
+#, qt-format
+#~ msgid "Next minimum light: %1 UTC"
+#~ msgstr "Următorul minim al luminozităţii : %1 UTC"
+
+#, qt-format
+#~ msgid "Next maximum light: %1 UTC"
+#~ msgstr "Următorul maxim al luminozităţii : %1 UTC"
 
 #~ msgid "(geometric)"
 #~ msgstr "(geometric)"
