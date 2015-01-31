@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-30 00:01+0600\n"
-"PO-Revision-Date: 2015-01-27 00:02+0000\n"
-"Last-Translator: Hachmann <Unknown>\n"
+"PO-Revision-Date: 2015-01-30 22:48+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-30 05:48+0000\n"
+"X-Launchpad-Export-Date: 2015-01-31 05:48+0000\n"
 "X-Generator: Launchpad (build 17306)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -332,12 +332,12 @@ msgstr "Vorläufige Bezeichnung: %1"
 #: src/core/modules/Comet.cpp:156
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "nichtperiodisch"
 
 #: src/core/modules/Comet.cpp:160
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "periodisch"
 
 #: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
 #: plugins/Pulsars/src/Pulsar.cpp:166
@@ -360,7 +360,7 @@ msgstr "Entfernung von der Sonne: %1AE (%2 Mio km)"
 #: src/core/modules/Comet.cpp:230
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr ""
+msgstr "Siderischer Umlauf: %1 J"
 
 #: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
