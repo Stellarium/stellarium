@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 01:35+0600\n"
+"POT-Creation-Date: 2015-01-30 00:01+0600\n"
 "PO-Revision-Date: 2014-11-30 13:42+0000\n"
 "Last-Translator: Nadanomics <hb7701@naver.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-17 05:50+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
+"X-Launchpad-Export-Date: 2015-01-30 05:53+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -163,9 +163,8 @@ msgid "Celestial body:"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
-#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:178
-#: src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/StarWrapper.cpp:178 src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -174,7 +173,7 @@ msgid "Type: <b>%1</b>"
 msgstr "분류: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:216
-#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
+#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:168
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
@@ -183,7 +182,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "등급: <b>%1</b> (소광 후:  <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:219
-#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:171
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
@@ -206,43 +205,43 @@ msgstr "표면 밝기: <b>%1</b>"
 msgid "Size: %1"
 msgstr "크기: %1"
 
-#: src/core/modules/Nebula.cpp:375
+#: src/core/modules/Nebula.cpp:386
 msgid "Galaxy"
 msgstr "은하"
 
-#: src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:389
 msgid "Open cluster"
 msgstr "산개성단"
 
-#: src/core/modules/Nebula.cpp:381
+#: src/core/modules/Nebula.cpp:392
 msgid "Globular cluster"
 msgstr "구상성단"
 
-#: src/core/modules/Nebula.cpp:384
+#: src/core/modules/Nebula.cpp:395
 msgid "Nebula"
 msgstr "성운"
 
-#: src/core/modules/Nebula.cpp:387
+#: src/core/modules/Nebula.cpp:398
 msgid "Planetary nebula"
 msgstr "행성상성운"
 
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:401
 msgid "Dark nebula"
 msgstr "암흑성운"
 
-#: src/core/modules/Nebula.cpp:393
+#: src/core/modules/Nebula.cpp:404
 msgid "Irregular galaxy"
 msgstr "불규칙은하"
 
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:407
 msgid "Cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:410
 msgid "Unknown"
 msgstr "알려지지 않음"
 
-#: src/core/modules/Nebula.cpp:402
+#: src/core/modules/Nebula.cpp:413
 msgid "Undocumented type"
 msgstr "기록되지 않은 유형"
 
@@ -251,7 +250,7 @@ msgid "Deep-sky objects"
 msgstr "딥스카이 천체"
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
-#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:174
+#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:180
 #: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
@@ -263,13 +262,13 @@ msgid "Obliquity (of date, for Earth): %1"
 msgstr "황도 경사: %1"
 
 #: src/core/modules/Planet.cpp:243 src/core/modules/MinorPlanet.cpp:244
-#: src/core/modules/Comet.cpp:204
+#: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "거리: %1AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:250 src/core/modules/MinorPlanet.cpp:251
-#: src/core/modules/Comet.cpp:211
+#: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "거리: %1AU (%2 백만 km)"
@@ -286,7 +285,6 @@ msgstr "시직경: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:281 src/core/modules/MinorPlanet.cpp:266
-#: src/core/modules/Comet.cpp:244
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "공전주기: %1일 (%2 율리우스년)"
@@ -330,27 +328,50 @@ msgstr "밝은 부분: %1%"
 msgid "Provisional designation: %1"
 msgstr "임시 명칭: %1"
 
-#: src/core/modules/Comet.cpp:187
+#: src/core/modules/Comet.cpp:156
+msgctxt "type of comet"
+msgid "non-periodic"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:160
+msgctxt "type of comet"
+msgid "periodic"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
+#: plugins/Pulsars/src/Pulsar.cpp:166
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
+#, qt-format
+msgid "Type: <b>%1</b> (%2)"
+msgstr "종류: <b>%1</b>(%2)"
+
+#: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "태양과의 거리: %1AU (%2 km)"
 
-#: src/core/modules/Comet.cpp:194
+#: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "태양과의 거리: %1AU (%2 백만 km)"
 
-#: src/core/modules/Comet.cpp:221
+#. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
+#: src/core/modules/Comet.cpp:230
+#, qt-format
+msgid "Sidereal period: %1 a"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "속도: %1 km/s"
 
-#: src/core/modules/Comet.cpp:230
+#: src/core/modules/Comet.cpp:246
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr "코마 직경 (추정): %1 km"
 
-#: src/core/modules/Comet.cpp:234
+#: src/core/modules/Comet.cpp:250
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "가스 꼬리 길이 (추정): %1 백만 km"
@@ -465,22 +486,12 @@ msgstr "최대 광도 시간 기준점: %1 JD"
 msgid "Period: %1 days"
 msgstr "주기: %1 일"
 
-#: src/core/modules/StarWrapper.cpp:257
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr "다음 최소 광도: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:259
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr "다음 최대 광도: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/StarWrapper.cpp:270
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "식의 지속기간: %1%"
 
-#: src/core/modules/StarWrapper.cpp:267
+#: src/core/modules/StarWrapper.cpp:272
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "광도 증가기간: %1%"
@@ -1182,7 +1193,7 @@ msgstr "연락처"
 
 #: src/gui/ConfigurationDialog.cpp:798
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1196,7 +1207,7 @@ msgstr "버전"
 
 #: src/gui/ConfigurationDialog.cpp:881
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -4898,7 +4909,7 @@ msgid "Angle Measure Plug-in"
 msgstr "각도 측정 플러그인"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Contributors"
 msgstr "도움을 주신 분"
 
@@ -5434,19 +5445,40 @@ msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "이 접안부/렌즈/망원경 조합이 지원하는 실제 시야각"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+msgid "tFOV:"
+msgstr ""
+
+#. TRANSLATORS: Magnification factor for binoculars
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+msgid "Magnification factor:"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
+msgid "aFOV:"
+msgstr "겉보기 시야각:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
+msgid "Focal length:"
+msgstr "초점거리:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
 msgstr "접안렌즈 플러그인"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Barlow lens feature"
 msgstr "바로우 렌즈 부분"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Overview"
 msgstr "개요"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5456,7 +5488,7 @@ msgstr ""
 "이 플러그인은 당신이 접안렌즈를 통해 볼 수 있는 시야를 재현합니다. 설정에서 접안렌즈와 망원경와 CCD 센서를 추가, 수정 또는 삭제할 "
 "수 있습니다. 맨 처음 시작할 때 몇몇 샘플이 주어집니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5470,7 +5502,7 @@ msgstr ""
 "위함입니다. 같은 접안렌즈를 초점거리가 다른 두 망원경에 대면 서로 다른 시야를 가지게 됩니다. 이 때 이미지의 배율이 높으면 버려지는 "
 "화면의 양이 늘어난다는 상반관계가 존재하므로 필요하지 않은 경우에는 사용하지 않는 것을 권합니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5479,7 +5511,7 @@ msgstr ""
 "여러분은 시야에서 십자표시를 켜고 끌 수 있습니다. 이상적으론 이 십자표시가 북쪽으로 정렬되어야 하지만 그렇게 할 수 없었습니다.  "
 "그래서 지금은 화면의 위에 맞춰 정렬됩니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5490,28 +5522,28 @@ msgstr ""
 "여러분은 텔라드 파인더를 켜고 끌 수 있습니다; 이 때 접안렌즈로 보고 있지 않은 상태여야 합니다. 이 기능은 중심이 같은 0.5%1, "
 "2.0%1, 4.0%1의 크기의 원을 그려 텔라드(혹은 비슷한) 파인더를 맨눈으로 보았을 때 어떻게 보이는지를 짐작하게 해 줍니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "당신이 어떠한 문제를 발견했다면 즉시 알려주세요."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
 msgstr "단축키"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "플러그인 단축키는 일반 탭에서 편집할 수 있습니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "[no key defined]"
 msgstr "[설정된 키가 없습니다]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
 msgstr "접안부 오버레이 켜기/끄기"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
 msgstr "팝업 탐색 메뉴 열기"
 
@@ -5599,15 +5631,6 @@ msgstr "추가"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "이름:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
-msgid "aFOV:"
-msgstr "겉보기 시야각:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
-msgid "Focal length:"
-msgstr "초점거리:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
@@ -7203,22 +7226,22 @@ msgid "Import orbital elements in MPC format..."
 msgstr "MPC 포맷 안의 궤도 요소 가져오기"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:155
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "MPC에서 %1 조회:"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:156
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:158
 msgid "Only one result will be returned if the query is successful."
 msgstr "조회가 성공하면 하나의 결과만이 나옵니다."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:157
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
 msgstr "혜성과 소행성들은 모두 번호, 이름(영어) 또는 임시 명칭으로 식별할 수 있습니다."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:164
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:166
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -7229,7 +7252,7 @@ msgstr ""
 "혜성 <i>이름</i>들은 앞에 %1나 %2이 붙어야 합니다. 하나보다 많은 혜성이 조건을 만족한다면 첫 번째 결과만이 나옵니다. 예를 "
 "들어 \"%3\"로 검색하면 %4, 즉 헬리 혜성이 나오지만, \"%5\"로 검색하면 소행성 %6가 나옵니다."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:207
 msgid "Select bookmark..."
 msgstr ""
 
@@ -7544,12 +7567,6 @@ msgstr "우리 은하의 몇몇 밝은 신성을 보여주는 플러그인."
 #: plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae configuration window"
 msgstr "밝은 신성 설정 창"
-
-#: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:344
-#, qt-format
-msgid "Type: <b>%1</b> (%2)"
-msgstr "종류: <b>%1</b>(%2)"
 
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
@@ -10351,6 +10368,14 @@ msgstr "Y축 좌표"
 
 #~ msgid "Mean Surface Temperature"
 #~ msgstr "평균 표면 온도"
+
+#, qt-format
+#~ msgid "Next minimum light: %1 UTC"
+#~ msgstr "다음 최소 광도: %1 UTC"
+
+#, qt-format
+#~ msgid "Next maximum light: %1 UTC"
+#~ msgstr "다음 최대 광도: %1 UTC"
 
 #, qt-format
 #~ msgid "RA/DE (of date): %1/%2"

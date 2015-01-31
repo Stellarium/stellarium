@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 01:35+0600\n"
-"PO-Revision-Date: 2015-01-18 04:22+0000\n"
-"Last-Translator: pp/bs <Unknown>\n"
+"POT-Creation-Date: 2015-01-30 00:01+0600\n"
+"PO-Revision-Date: 2015-01-22 17:19+0000\n"
+"Last-Translator: Szymon Pietrzak <sz.pietrzak29@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-19 05:42+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
+"X-Launchpad-Export-Date: 2015-01-30 05:58+0000\n"
+"X-Generator: Launchpad (build 17306)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -146,7 +146,7 @@ msgstr "Ziemia"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Oświetlenie"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -166,9 +166,8 @@ msgid "Celestial body:"
 msgstr "Ciało niebieskie:"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
-#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:156
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:178
-#: src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/StarWrapper.cpp:178 src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -177,7 +176,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Typ: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:216
-#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
+#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:168
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
@@ -187,7 +186,7 @@ msgstr ""
 "Wielkość gwiazdowa: <b>%1</b> (po uwzględnieniu ekstynkcji: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:219
-#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:171
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
@@ -211,43 +210,43 @@ msgstr "Jasność powierzchni: <b>%1</b>"
 msgid "Size: %1"
 msgstr "Rozmiar: %1"
 
-#: src/core/modules/Nebula.cpp:375
+#: src/core/modules/Nebula.cpp:386
 msgid "Galaxy"
 msgstr "Galaktyka"
 
-#: src/core/modules/Nebula.cpp:378
+#: src/core/modules/Nebula.cpp:389
 msgid "Open cluster"
 msgstr "Gromada otwarta"
 
-#: src/core/modules/Nebula.cpp:381
+#: src/core/modules/Nebula.cpp:392
 msgid "Globular cluster"
 msgstr "Gromada kulista"
 
-#: src/core/modules/Nebula.cpp:384
+#: src/core/modules/Nebula.cpp:395
 msgid "Nebula"
 msgstr "Mgławica"
 
-#: src/core/modules/Nebula.cpp:387
+#: src/core/modules/Nebula.cpp:398
 msgid "Planetary nebula"
 msgstr "Mgławica planetarna"
 
-#: src/core/modules/Nebula.cpp:390
+#: src/core/modules/Nebula.cpp:401
 msgid "Dark nebula"
 msgstr "Mgławice ciemne"
 
-#: src/core/modules/Nebula.cpp:393
+#: src/core/modules/Nebula.cpp:404
 msgid "Irregular galaxy"
 msgstr "Galaktyka nieregularna"
 
-#: src/core/modules/Nebula.cpp:396
+#: src/core/modules/Nebula.cpp:407
 msgid "Cluster associated with nebulosity"
 msgstr "Gromada powiązana z obszarem mgławicowym"
 
-#: src/core/modules/Nebula.cpp:399
+#: src/core/modules/Nebula.cpp:410
 msgid "Unknown"
 msgstr "Nieznany"
 
-#: src/core/modules/Nebula.cpp:402
+#: src/core/modules/Nebula.cpp:413
 msgid "Undocumented type"
 msgstr "Typ nieudokumentowany"
 
@@ -256,7 +255,7 @@ msgid "Deep-sky objects"
 msgstr "Obiekty głębokiego nieba"
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
-#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:174
+#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:180
 #: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
@@ -268,13 +267,13 @@ msgid "Obliquity (of date, for Earth): %1"
 msgstr "Kąt nachylenia osi (data, dla Ziemi): %1"
 
 #: src/core/modules/Planet.cpp:243 src/core/modules/MinorPlanet.cpp:244
-#: src/core/modules/Comet.cpp:204
+#: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Odległość: %1 AU (%2 km)"
 
 #: src/core/modules/Planet.cpp:250 src/core/modules/MinorPlanet.cpp:251
-#: src/core/modules/Comet.cpp:211
+#: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Odległość: %1 AU (%2 mln km)"
@@ -291,7 +290,6 @@ msgstr "Średnica widoma: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:281 src/core/modules/MinorPlanet.cpp:266
-#: src/core/modules/Comet.cpp:244
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Okres gwiazdowy: %1 dni (%2 a)"
@@ -308,7 +306,7 @@ msgstr "Średni czas słoneczny: %1"
 
 #: src/core/modules/Planet.cpp:289
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "Okres obrotu jest chaotyczny"
 
 #: src/core/modules/Planet.cpp:295
 #, qt-format
@@ -335,27 +333,50 @@ msgstr "Oświetlone: %1%"
 msgid "Provisional designation: %1"
 msgstr "Oznaczenie tymczasowe: %1"
 
-#: src/core/modules/Comet.cpp:187
+#: src/core/modules/Comet.cpp:156
+msgctxt "type of comet"
+msgid "non-periodic"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:160
+msgctxt "type of comet"
+msgid "periodic"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
+#: plugins/Pulsars/src/Pulsar.cpp:166
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
+#, qt-format
+msgid "Type: <b>%1</b> (%2)"
+msgstr "Typ: <b>%1</b> (%2)"
+
+#: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Odległość od Słońca: %1 AU (%2 km)"
 
-#: src/core/modules/Comet.cpp:194
+#: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Odległość od Słońca: %1 AU (%2 mln km)"
 
-#: src/core/modules/Comet.cpp:221
+#. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
+#: src/core/modules/Comet.cpp:230
+#, qt-format
+msgid "Sidereal period: %1 a"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "Prędkość: %1 km/s"
 
-#: src/core/modules/Comet.cpp:230
+#: src/core/modules/Comet.cpp:246
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr "Ś): %1 km"
 
-#: src/core/modules/Comet.cpp:234
+#: src/core/modules/Comet.cpp:250
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Długość ogona gazowego (szacunkowa): %1 mln km"
@@ -473,22 +494,12 @@ msgstr "Epoka dla maksymalnego światła: %1 JD"
 msgid "Period: %1 days"
 msgstr "Okres: %1 dni"
 
-#: src/core/modules/StarWrapper.cpp:257
-#, qt-format
-msgid "Next minimum light: %1 UTC"
-msgstr "Następne minimalne światło: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:259
-#, qt-format
-msgid "Next maximum light: %1 UTC"
-msgstr "Następne maksymalne światło: %1 UTC"
-
-#: src/core/modules/StarWrapper.cpp:265
+#: src/core/modules/StarWrapper.cpp:270
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Czas trwania zaćmienia: %1%"
 
-#: src/core/modules/StarWrapper.cpp:267
+#: src/core/modules/StarWrapper.cpp:272
 #, qt-format
 msgid "Rising time: %1%"
 msgstr ""
@@ -1230,7 +1241,7 @@ msgstr "Kontakt"
 
 #: src/gui/ConfigurationDialog.cpp:798
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1244,7 +1255,7 @@ msgstr "Wersja"
 
 #: src/gui/ConfigurationDialog.cpp:881
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -4337,6 +4348,7 @@ msgstr "Użyj powiązanej planety oraz pozycji"
 #: src/ui_viewDialog.h:1332
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
+"Pokaż warstwę oświetlenia (jasne okna, zanieczyszczenie światłem itp.)"
 
 #: src/ui_viewDialog.h:1333
 msgid "Show ground"
@@ -5042,7 +5054,7 @@ msgid "Angle Measure Plug-in"
 msgstr "Wtyczka Miernik kątów"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Contributors"
 msgstr "Współautorzy"
 
@@ -5594,19 +5606,40 @@ msgstr ""
 "Rzeczywiste pole widzenia zapewniane przez tę kombinację: "
 "okular/soczewka/teleskop"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+msgid "tFOV:"
+msgstr ""
+
+#. TRANSLATORS: Magnification factor for binoculars
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+msgid "Magnification factor:"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
+msgid "aFOV:"
+msgstr "Pozorne pole widzenia:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
+msgid "Focal length:"
+msgstr "Ogniskowa:"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
 msgstr "Wtyczka Okulary"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Barlow lens feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Overview"
 msgstr "Przegląd"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5618,7 +5651,7 @@ msgstr ""
 "teleskopów, jak również sensorów CCD. Podczas pierwszego uruchomienia "
 "zostanie tutaj umieszczonych kilka przykładowych ustawień."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5636,7 +5669,7 @@ msgstr ""
 "jest pozostawienie tej opcji wyłączonej i włączanie jej tylko wtedy, gdy "
 "jest to potrzebne."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5647,7 +5680,7 @@ msgstr ""
 "udało mi się jednak tego osiągnąć, dlatego obecnie jest on wyrównany do "
 "górnej krawędzi ekranu."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5660,30 +5693,30 @@ msgstr ""
 "trzy współosiowe okręgi: 0.5%1, 2.0%1 i 4.0%1, które odpowiadają temu, co "
 "można zobaczyć gołym okiem przez celownik Telrad (lub podobny)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 "Jeśli natkniesz się na jakieś problemy, poinformuj mnie o nich. Miłego "
 "korzystania z programu!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:520
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
 msgstr "Skróty klawiaturowe"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "Skróty klawiaturowe tej wtyczki można modyfikować na karcie Ogólne."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 msgid "[no key defined]"
 msgstr "[nie określono klawisza]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
 msgstr "Włącza/wyłącza nakładkę okularu."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
 msgstr "Otwiera menu nawigacji."
 
@@ -5774,15 +5807,6 @@ msgstr "Dodaj"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "Nazwa:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
-msgid "aFOV:"
-msgstr "Pozorne pole widzenia:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
-msgid "Focal length:"
-msgstr "Ogniskowa:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
@@ -7434,16 +7458,16 @@ msgid "Import orbital elements in MPC format..."
 msgstr "Zaimportuj elementy orbitalne w formacie MPC..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:153
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:155
 #, qt-format
 msgid "Query the MPC's %1:"
 msgstr "Wyszukaj informacje w %1:"
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:156
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:158
 msgid "Only one result will be returned if the query is successful."
 msgstr "W odpowiedzi na zapytanie zostanie zwrócony najwyżej jeden wynik."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:157
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
@@ -7451,7 +7475,7 @@ msgstr ""
 "Można podawać numery, nazwy (angielskie) lub tymczasowe oznaczenia zarówno "
 "komet, jak i asteroid."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:164
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:166
 #, qt-format
 msgid ""
 "Comet <i>names</i> need to be prefixed with %1 or %2. If more than one comet "
@@ -7464,7 +7488,7 @@ msgstr ""
 "przykład, wpisanie \"%3\" zwróci w wyniku %4, Kometę Halleya, lecz wpisanie "
 "\"%5\" zwróci asteroidę %6."
 
-#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:205
+#: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:207
 msgid "Select bookmark..."
 msgstr "Wybierz zakładkę..."
 
@@ -7798,12 +7822,6 @@ msgstr "Wtyczka pokazująca niektóre jasne nowe Drogi Mlecznej."
 msgid "Bright Novae configuration window"
 msgstr "Okno konfiguracji Jasnych nowych"
 
-#: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:344
-#, qt-format
-msgid "Type: <b>%1</b> (%2)"
-msgstr "Typ: <b>%1</b> (%2)"
-
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
 msgstr "nowa"
@@ -7916,6 +7934,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Zapewnia wizualizację niektórych kwazarów jaśniejszych od 16. wielkości "
+"wizualnej . Katalog kwazarów został skompilowany z \"Quasars and Active "
+"Galactic Nuclei\" (wyd. 13.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 msgid "Veron+ 2010"
@@ -8346,7 +8367,7 @@ msgstr "Rok odkrycia"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Planetary class"
-msgstr ""
+msgstr "Klasa planetarna"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:240
@@ -8418,7 +8439,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Klasa planetarna"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8459,7 +8480,7 @@ msgstr "Informacje dodatkowe"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Ekosfera"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
@@ -8471,7 +8492,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Skala podobieństwa do Ziemi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -10918,6 +10939,14 @@ msgstr "Współrzędna Y"
 
 #~ msgid "1000"
 #~ msgstr "1000"
+
+#, qt-format
+#~ msgid "Next minimum light: %1 UTC"
+#~ msgstr "Następne minimalne światło: %1 UTC"
+
+#, qt-format
+#~ msgid "Next maximum light: %1 UTC"
+#~ msgstr "Następne maksymalne światło: %1 UTC"
 
 #~ msgid "Use brightness settings for landscapes"
 #~ msgstr "Używaj ustawień jasności dla krajobrazów"
