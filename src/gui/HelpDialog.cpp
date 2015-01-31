@@ -30,8 +30,6 @@
 #include <QPair>
 #include <QtAlgorithms>
 #include <QDebug>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
 #include <QFileInfo>
 #include <QFile>
 #include <QDir>
@@ -51,24 +49,11 @@
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
-#include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog(parent)
-	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
 {
 	ui = new Ui_helpDialogForm;
-
-	conf = StelApp::getInstance().getSettings();
-	setUpdatesEnabled(conf->value("main/check_updates_enabled", true).toBool()); // Enable check for updates by default
-	QString lang = conf->value("localization/app_locale", "en").toString();
-	if (lang=="system" || lang=="C")
-		lang = "en";
-	updateUrl = QString("http://www.stellarium.org/%1/updates.php").arg(lang);
-	currentVersion = StelUtils::getApplicationVersion();
-
-	conf->setValue("main/check_updates_enabled", getUpdatesEnabled());
 }
 
 HelpDialog::~HelpDialog()
@@ -102,28 +87,6 @@ void HelpDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	setUpdatesMessage(false);
-	if (getUpdatesEnabled())
-	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/data");
-		jsonDataPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/updates.json";
-
-		// If the json file does not already exist, create it from the resource in the Qt resource
-		if(!QFileInfo(jsonDataPath).exists())
-		{
-			//qDebug() << "HelpDialog::createDialogContent() updates.json does not exist - copying default file to " << QDir::toNativeSeparators(jsonDataPath);
-			restoreDefaultJsonFile();
-		}
-
-		//qDebug() << "HelpDialog::createDialogContent() using file: " << QDir::toNativeSeparators(jsonDataPath);
-
-		// Set up download manager and the update schedule
-		downloadMgr = new QNetworkAccessManager(this);
-		connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
-		updateState = CompleteNoUpdates;
-		updateJSON();
-	}
-
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
@@ -142,195 +105,6 @@ void HelpDialog::createDialogContent()
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
-}
-
-void HelpDialog::updateDownloadComplete(QNetworkReply *reply)
-{
-	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "HelpDialog::updateDownloadComplete() FAILED to download" << reply->url() << " Error: " << reply->errorString();
-	}
-	else
-	{
-		// download completed successfully.
-		QString jsonFilePath = StelFileMgr::findFile("data", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/updates.json";
-		if (jsonFilePath.isEmpty())
-		{
-			qWarning() << "HelpDialog::updateDownloadComplete(): cannot write JSON data to file data/updates.json";
-			return;
-		}
-		QFile jsonFile(jsonFilePath);
-		if (jsonFile.exists())
-			jsonFile.remove();
-
-		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
-		{
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
-		}
-	}
-}
-
-void HelpDialog::updateJSON(void)
-{
-	if (updateState==HelpDialog::Updating)
-	{
-		qWarning() << "HelpDialog: already updating...  will not start again current update is complete.";
-		return;
-	}
-
-	updateState = HelpDialog::Updating;
-	emit(updateStateChanged(updateState));
-
-	// Get info about operating system
-	QString OS = StelUtils::getOperatingSystemInfo();
-	if (OS.contains("Linux"))
-		OS = "Linux";
-	// Set user agent as "Stellarium/$version$ ($platform$)"
-	QString UserAgent = QString("Stellarium/%1 (%2)").arg(currentVersion).arg(OS);
-	QNetworkRequest request;
-	request.setUrl(QUrl(updateUrl));
-	request.setRawHeader("User-Agent", UserAgent.toUtf8());
-	downloadMgr->get(request);
-
-	updateState = HelpDialog::CompleteUpdates;
-	emit(updateStateChanged(updateState));
-	readJsonFile();
-}
-
-QString HelpDialog::getLatestVersionFromJson()
-{
-	QString jsonVersion("unknown");
-	QFile jsonDataFile(jsonDataPath);
-	if (!jsonDataFile.open(QIODevice::ReadOnly))
-	{
-		qWarning() << "HelpDialog::getLatestVersionFromJson() cannot open " << QDir::toNativeSeparators(jsonDataPath);
-		return jsonVersion;
-	}
-
-	QVariantMap map;
-	try
-	{
-		map = StelJsonParser::parse(&jsonDataFile).toMap();
-		if (map.contains("latestVersion"))
-		{
-			jsonVersion = map.value("latestVersion").toString();
-		}
-		jsonDataFile.close();
-	}
-	catch(std::runtime_error& e)
-	{
-		qDebug() << "HelpDialog::getLatestVersionFromJson() error:" << e.what();
-	}
-
-	//qDebug() << "HelpDialog::getLatestVersionFromJson() latest version from file:" << jsonVersion;
-	return jsonVersion;
-}
-
-int HelpDialog::getRequiredOpenGLVersionFromJson()
-{
-	int jsonVersion = 0;
-	QFile jsonDataFile(jsonDataPath);
-	if (!jsonDataFile.open(QIODevice::ReadOnly))
-	{
-		qWarning() << "HelpDialog::getRequiredOpenGLVersionFromJson() cannot open " << QDir::toNativeSeparators(jsonDataPath);
-		return jsonVersion;
-	}
-
-	QVariantMap map;
-	try
-	{
-		map = StelJsonParser::parse(&jsonDataFile).toMap();
-		if (map.contains("requiredOpenGLVersion"))
-		{
-			jsonVersion = map.value("requiredOpenGLVersion").toInt();
-		}
-		jsonDataFile.close();
-	}
-	catch(std::runtime_error& e)
-	{
-		qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() error:" << e.what();
-	}
-
-	//qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() required OpenGL version from file:" << jsonVersion;
-	return jsonVersion;
-}
-
-/*
-  Replace the JSON file with the default from the compiled-in resource
-*/
-void HelpDialog::restoreDefaultJsonFile(void)
-{
-	QFile src(StelFileMgr::findFile("data/updates.json"));
-	if (!src.copy(jsonDataPath))
-	{
-		qWarning() << "HelpDialog::restoreDefaultJsonFile() cannot copy json resource to " + QDir::toNativeSeparators(jsonDataPath);
-	}
-	else
-	{
-		//qDebug() << "HelpDialog::restoreDefaultJsonFile() copied default updates.json to " << QDir::toNativeSeparators(jsonDataPath);
-		// The resource is read only, and the new file inherits this...  make sure the new file
-		// is writable by the Stellarium process so that updates can be done.
-		QFile dest(jsonDataPath);
-		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
-	}
-}
-
-void HelpDialog::readJsonFile()
-{
-	QString version = getLatestVersionFromJson();	
-	if (version!=currentVersion)
-	{
-		setUpdatesMessage(true, version);
-	}
-}
-
-void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version)
-{
-	if (version.contains("unknown"))
-	{
-		// TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
-		updatesMessage = q_("Oops... Stellarium can't check latest version.");
-		return;
-	}
-	int cVMajor = 0, cVMinor = 0, cVPatch = 0, rVMajor = 0, rVMinor = 0, rVPatch = 0;
-	QRegExp vRx("(\\d+)\\.(\\d+)\\.(\\d+)");
-	if (vRx.exactMatch(currentVersion))
-	{
-		cVMajor = vRx.capturedTexts().at(1).toInt();
-		cVMinor = vRx.capturedTexts().at(2).toInt();
-		cVPatch = vRx.capturedTexts().at(3).toInt();
-	}
-	if (vRx.exactMatch(version))
-	{
-		rVMajor = vRx.capturedTexts().at(1).toInt();
-		rVMinor = vRx.capturedTexts().at(2).toInt();
-		rVPatch = vRx.capturedTexts().at(3).toInt();
-	}
-	if (hasUpdates)
-	{
-		if ((cVMajor>rVMajor) || (cVMinor>rVMinor) || (cVPatch>rVPatch))
-		{
-			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
-			updatesMessage = q_("Looks like you are using the development version of Stellarium.");
-		}
-		else
-		{
-			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
-			updatesMessage = q_("This version of Stellarium is outdated! Latest version is %1.").arg(version);			
-		}		
-	}
-	else
-	{
-		// TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
-		updatesMessage = q_("This is latest stable version of Stellarium.");
-	}
-}
-
-QString HelpDialog::getUpdatesMessage()
-{
-	return updatesMessage;
 }
 
 void HelpDialog::showShortcutsWindow()
@@ -482,8 +256,6 @@ void HelpDialog::updateText(void)
 	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
 	newHtml += "<h3>Copyright &copy; 2000-2014 Stellarium Developers</h3>";
-	if (getUpdatesEnabled())
-		newHtml += "<p><strong>" + getUpdatesMessage() + "</strong></p>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
 	newHtml += "as published by the Free Software Foundation; either version 2 ";
