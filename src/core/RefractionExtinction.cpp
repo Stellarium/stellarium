@@ -111,8 +111,10 @@ void Refraction::updatePrecomputed()
 
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
+	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
 	const double sinGeo = altAzPos[2]/length;
+	Q_ASSERT(fabs(sinGeo)<=1.0);
 	double geom_alt_rad = std::asin(sinGeo);
 	double geom_alt_deg = 180./M_PI*geom_alt_rad;
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
@@ -135,19 +137,24 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 
 	const double refr_alt_rad=geom_alt_deg*M_PI/180.;
 	const double sinRef=std::sin(refr_alt_rad);
-	const double shortenxy=std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo)); // we need double's mantissa length here, sorry!
+
+	const double shortenxy=((fabs(sinGeo)>=1.0) ? 1.0 :
+			std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo))); // we need double's mantissa length here, sorry!
 
 	altAzPos[0]*=shortenxy;
 	altAzPos[1]*=shortenxy;
 	altAzPos[2]=sinRef*length;
+	//Q_ASSERT(std::fabs(altAzPos.length()-1.)<0.0001);
 
 }
 
 void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
+	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
 	const double sinObs = altAzPos[2]/length;
+	Q_ASSERT(fabs(sinObs)<=1.0);
 	double obs_alt_deg=180./M_PI*std::asin(sinObs);
 	if (obs_alt_deg > 0.22879f)
 	{
@@ -176,10 +183,12 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 
 	const double geo_alt_rad=obs_alt_deg*M_PI/180.;
 	const double sinGeo=std::sin(geo_alt_rad);
-	const double longerxy=std::sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs));
+	const double longerxy=((fabs(sinObs)>=1.0) ? 1.0 :
+			std::sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs)));
 	altAzPos[0]*=longerxy;
 	altAzPos[1]*=longerxy;
 	altAzPos[2]=sinGeo*length;
+	//Q_ASSERT(std::fabs(altAzPos.length()-1.)<0.0001); // WHY DOES THIS FIRE???
 }
 
 void Refraction::forward(Vec3d& altAzPos) const
