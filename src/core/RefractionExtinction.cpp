@@ -20,6 +20,7 @@
  * Principal implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
+#include <math.h>
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
@@ -115,9 +116,15 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 
 	// Something very strange is going on here! We either have NaNs or null-vectors!
 
-	Q_ASSERT(!isnan(altAzPos[0]));
-	Q_ASSERT(!isnan(altAzPos[1]));
-	Q_ASSERT(!isnan(altAzPos[2]));
+	// GZ: Stupid hack. I don't know if this helps in any way.
+	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
+	{
+		altAzPos[2]=1.0;
+		qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zenith vector.";
+	}
+	Q_ASSERT(!std::isnan(altAzPos[0]));
+	Q_ASSERT(!std::isnan(altAzPos[1]));
+	Q_ASSERT(!std::isnan(altAzPos[2]));
 	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
 
 	const double length = altAzPos.length();
@@ -164,9 +171,16 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 
 	// Something very strange is going on here! We either have NaNs or null-vectors!
 
-	Q_ASSERT(!isnan(altAzPos[0]));
-	Q_ASSERT(!isnan(altAzPos[1]));
-	Q_ASSERT(!isnan(altAzPos[2]));
+	// GZ: Stupid hack. I don't know if this helps in any way.
+	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
+	{
+		altAzPos[2]=1.0;
+		qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zenith vector.";
+	}
+
+	Q_ASSERT(!std::isnan(altAzPos[0]));
+	Q_ASSERT(!std::isnan(altAzPos[1]));
+	Q_ASSERT(!std::isnan(altAzPos[2]));
 	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
 
 	const double length = altAzPos.length();
