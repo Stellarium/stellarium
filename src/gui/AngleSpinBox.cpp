@@ -395,7 +395,7 @@ void AngleSpinBox::formatText(void)
 			if (!sign)
 				signInd = negativePrefix(currentPrefixType);
 
-			if (angleSpinBoxFormat == DMSLetters)
+			if ((angleSpinBoxFormat == DMSLetters) || (angleSpinBoxFormat == DMSLettersUnsigned))
 				lineEdit()->setText(QString("%1%2d %3m %4s")
                                     .arg(signInd).arg(d).arg(m).arg(s, 0, 'f', decimalPlaces, ' '));
 			else
