@@ -27,7 +27,7 @@
 
 #include "gVector.hpp"
 #include <cassert>
-#include <math.h>
+#include <cmath>
 gVector::gVector()
 	: br_stl::gVectorTempl<double>()
 {
@@ -101,5 +101,5 @@ double gVector::Magnitude() const
 	for(unsigned int i=0; i<size(); i++)
 		magnitude += (operator[](i) * operator[](i));
 
-	return sqrt(magnitude);
+	return std::sqrt(magnitude);
 }
