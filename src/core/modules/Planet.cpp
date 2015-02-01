@@ -1608,9 +1608,14 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
 	
-	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
+	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();	
 	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform()->forward(eyePos);
 	projector->getModelViewTransform()->backward(eyePos);
+	static Vec3d eyePos0;
+	if (eyePos[0] != eyePos[0]) // detect for nan
+		eyePos = eyePos0;   // restore last non-nan value in place of nan
+	else
+		eyePos0 = eyePos;   // Save non-nan value
 	eyePos.normalize();
 	
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
