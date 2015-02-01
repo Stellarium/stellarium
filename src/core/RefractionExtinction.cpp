@@ -112,6 +112,14 @@ void Refraction::updatePrecomputed()
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
 	//altAzPos.normalize(); // TRY TO AVOID THIS!
+
+	// Something very strange is going on here! We either have NaNs or null-vectors!
+
+	Q_ASSERT(!isnan(altAzPos[0]));
+	Q_ASSERT(!isnan(altAzPos[1]));
+	Q_ASSERT(!isnan(altAzPos[2]));
+	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
+
 	const double length = altAzPos.length();
 	Q_ASSERT(length>0.0);
 	const double sinGeo = altAzPos[2]/length;
@@ -153,6 +161,14 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	//altAzPos.normalize(); // TRY TO AVOID THIS!
+
+	// Something very strange is going on here! We either have NaNs or null-vectors!
+
+	Q_ASSERT(!isnan(altAzPos[0]));
+	Q_ASSERT(!isnan(altAzPos[1]));
+	Q_ASSERT(!isnan(altAzPos[2]));
+	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
+
 	const double length = altAzPos.length();
 	Q_ASSERT(length>0.0);
 	const double sinObs = altAzPos[2]/length;
