@@ -1610,7 +1610,14 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	
 	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();	
 	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform()->forward(eyePos);
+	// Hunt for NaNs...
+	Q_ASSERT(eyePos[0]==eyePos[0]);
+	Q_ASSERT(eyePos[1]==eyePos[1]);
+	Q_ASSERT(eyePos[2]==eyePos[2]);
 	projector->getModelViewTransform()->backward(eyePos);
+	Q_ASSERT(eyePos[0]==eyePos[0]);
+	Q_ASSERT(eyePos[1]==eyePos[1]);
+	Q_ASSERT(eyePos[2]==eyePos[2]);
 	// DIRTY HACK against flickering moon and rings! TODO: Find cause for NaN!
 	static Vec3d eyePos0;
 	if (eyePos[0] != eyePos[0]) { // detect for nan
