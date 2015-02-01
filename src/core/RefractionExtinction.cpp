@@ -120,7 +120,7 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
 	{
 		altAzPos[2]=1.0;
-		qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zenith vector.";
+		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zenith vector.";
 	}
 	Q_ASSERT(!std::isnan(altAzPos[0]));
 	Q_ASSERT(!std::isnan(altAzPos[1]));
@@ -175,7 +175,7 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
 	{
 		altAzPos[2]=1.0;
-		qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zenith vector.";
+		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zenith vector.";
 	}
 
 	Q_ASSERT(!std::isnan(altAzPos[0]));
