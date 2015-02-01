@@ -36,8 +36,8 @@ public:
 	//! Used to decide how to display the angle.
 	enum DisplayFormat
 	{
-		DMSLetters,             //!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-180..180d]
-		DMSSymbols,             //!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-180..180°]
+		DMSLetters,             //!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-360..360d]
+		DMSSymbols,             //!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-360..360°]
 		DMSLettersUnsigned,     //!< Degrees, minutes and seconds, e.g. 180d 4m 8s, [0..360d]
 		DMSSymbolsUnsigned,     //!< Degrees, minutes and seconds, e.g. 180° 4' 8", [0..360°]
 		HMSLetters,             //!< Hours, minutes and seconds, e.g. 12h 4m 6s
