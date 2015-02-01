@@ -113,6 +113,7 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
 	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
+	Q_ASSERT(length>0.0);
 	const double sinGeo = altAzPos[2]/length;
 	Q_ASSERT(fabs(sinGeo)<=1.0);
 	double geom_alt_rad = std::asin(sinGeo);
@@ -153,6 +154,7 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
+	Q_ASSERT(length>0.0);
 	const double sinObs = altAzPos[2]/length;
 	Q_ASSERT(fabs(sinObs)<=1.0);
 	double obs_alt_deg=180./M_PI*std::asin(sinObs);
