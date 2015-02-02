@@ -49,12 +49,6 @@ public:
     Scenery3d(Scenery3dMgr *parent);
     virtual ~Scenery3d();
 
-    //! Sets the shaders for the plugin
-    void setShaders(QOpenGLShaderProgram* debugShader = 0)
-    {
-	this->debugShader = debugShader;
-    }
-
     //! Loads the specified scene
     bool loadScene(const SceneInfo& scene);
 
@@ -146,8 +140,7 @@ private:
 
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
-    bool lightCamEnabled;       // switchable value: switches camera to light camera
-    bool frustEnabled;
+    bool fixShadowData; //for debugging, fixes all shadow mapping related data (shadowmap contents, matrices, frustums, focus bodies...) at their current values
     bool venusOn;
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
     S3DEnum::CubemappingMode cubemappingMode;
@@ -224,9 +217,6 @@ private:
 
     GlobalShaderParameters shaderParameters;
 
-    //Debug shader
-    QOpenGLShaderProgram* debugShader;
-
     //Scene AABB
     AABB sceneBoundingBox;
 
@@ -301,10 +291,6 @@ private:
 
     //Sets the scenes' AABB
     void setSceneAABB(const AABB &bbox);
-    //Renders the Scene's AABB
-    void renderSceneAABB(StelPainter &painter);
-    //Renders the Frustum
-    void renderFrustum(StelPainter &painter);
 
     //Save the Frustum to be able to move away from it and analyze it
     void saveFrusts();
@@ -316,7 +302,7 @@ private:
     //Computes the focus body for given frustum
     void computePolyhedron(Polyhedron& body, const Frustum& frustum, const Vec3f &shadowDir);
     //Computes the crop matrix to focus the light
-    QMatrix4x4 computeCropMatrix(const Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
+    QMatrix4x4 computeCropMatrix(Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
     //Computes the light projection values
     void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
 };

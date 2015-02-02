@@ -3,7 +3,7 @@
 #include "StelOpenGL.hpp"
 #include <limits>
 
-Frustum::Frustum()
+Frustum::Frustum() : bbox(Vec3f(0),Vec3f(0)),drawBbox(Vec3f(0),Vec3f(0))
 {
     for(unsigned int i=0; i<CORNERCOUNT; i++)
     {
@@ -20,15 +20,10 @@ Frustum::Frustum()
     aspect = 0.0f;
     zNear = 0.0f;
     zFar = 0.0f;
-    bbox = new AABB(Vec3f(0.0f), Vec3f(0.0f));
-    drawBbox = new AABB(Vec3f(0.0f), Vec3f(0.0f));
 }
 
 Frustum::~Frustum()
 {
-    delete bbox;
-    delete drawBbox;
-
     for(unsigned int i=0; i<planes.size(); i++)
     {
         delete planes[i];
@@ -94,22 +89,24 @@ void Frustum::calcFrustum(Vec3d p, Vec3d l, Vec3d u)
     planes[FARP]->setPoints(corners[FTR], corners[FTL], corners[FBL], SPolygon::CCW);
 
 
-    bbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
+    //reset bbox
+    bbox.min = Vec3f(std::numeric_limits<float>::max());
+    bbox.max = Vec3f(-std::numeric_limits<float>::max());
 
     for(unsigned int i=0; i<CORNERCOUNT; i++)
     {
         Vec3f curVert = corners[i];
-        bbox->min = Vec3f(std::min(static_cast<float>(curVert[0]), bbox->min[0]),
-                          std::min(static_cast<float>(curVert[1]), bbox->min[1]),
-                          std::min(static_cast<float>(curVert[2]), bbox->min[2]));
+	bbox.min = Vec3f(std::min(static_cast<float>(curVert[0]), bbox.min[0]),
+			  std::min(static_cast<float>(curVert[1]), bbox.min[1]),
+			  std::min(static_cast<float>(curVert[2]), bbox.min[2]));
 
-        bbox->max = Vec3f(std::max(static_cast<float>(curVert[0]), bbox->max[0]),
-                          std::max(static_cast<float>(curVert[1]), bbox->max[1]),
-                          std::max(static_cast<float>(curVert[2]), bbox->max[2]));
+	bbox.max = Vec3f(std::max(static_cast<float>(curVert[0]), bbox.max[0]),
+			  std::max(static_cast<float>(curVert[1]), bbox.max[1]),
+			  std::max(static_cast<float>(curVert[2]), bbox.max[2]));
     }
 }
 
-int Frustum::pointInFrustum(Vec3f p)
+int Frustum::pointInFrustum(const Vec3f& p)
 {
     int result = INSIDE;
     for(int i=0; i<PLANECOUNT; i++)
@@ -123,12 +120,12 @@ int Frustum::pointInFrustum(Vec3f p)
     return result;
 }
 
-int Frustum::boxInFrustum(const AABB* bbox)
+int Frustum::boxInFrustum(const AABB& bbox)
 {
     int result = INSIDE;
     for(unsigned int i=0; i<PLANECOUNT; i++)
     {
-        if(planes[i]->isBehind(bbox->positiveVertex(planes[i]->normal)))
+	if(planes[i]->isBehind(bbox.positiveVertex(planes[i]->normal)))
         {
             return OUTSIDE;
         }
@@ -137,7 +134,7 @@ int Frustum::boxInFrustum(const AABB* bbox)
     return result;
 }
 
-void Frustum::saveCorners()
+void Frustum::saveDrawingCorners()
 {
     for(unsigned int i=0; i<CORNERCOUNT; i++)
         drawCorners[i] = corners[i];
@@ -145,19 +142,7 @@ void Frustum::saveCorners()
     for(unsigned int i=0; i<PLANECOUNT; i++)
         planes[i]->saveValues();
 
-    drawBbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
-
-    for(unsigned int i=0; i<CORNERCOUNT; i++)
-    {
-        Vec3f curVert = drawCorners[i];
-        drawBbox->min = Vec3f(std::min(static_cast<float>(curVert[0]), drawBbox->min[0]),
-                              std::min(static_cast<float>(curVert[1]), drawBbox->min[1]),
-                              std::min(static_cast<float>(curVert[2]), drawBbox->min[2]));
-
-        drawBbox->max = Vec3f(std::max(static_cast<float>(curVert[0]), drawBbox->max[0]),
-                              std::max(static_cast<float>(curVert[1]), drawBbox->max[1]),
-                              std::max(static_cast<float>(curVert[2]), drawBbox->max[2]));
-    }
+    drawBbox = bbox;
 }
 
 void Frustum::resetCorners()
@@ -169,7 +154,7 @@ void Frustum::resetCorners()
         planes[i]->resetValues();
 }
 
-void Frustum::drawFrustum()
+void Frustum::drawFrustum() const
 {
     Vec3f ntl = drawCorners[NTL];
     Vec3f ntr = drawCorners[NTR];
@@ -269,5 +254,5 @@ void Frustum::drawFrustum()
         glVertex3f(b.v[0],b.v[1],b.v[2]);
     glEnd();
 
-    //drawBbox->render();
+    drawBbox.render();
 }

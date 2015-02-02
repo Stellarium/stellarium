@@ -60,6 +60,11 @@ public:
     //! Makes the unique vertices vector
     void makeUniqueVerts();
 
+    void render() const;
+
+    //! This is used for debugging of the crop matrix
+    //! It contains the world-space representation of the orthographic projection used for shadowmapping.
+    Box debugBox;
 private:
     //! Vector holding all unique vertices of this polyhedron
     QVector<Vec3f> uniqueVerts;
