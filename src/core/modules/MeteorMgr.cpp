@@ -89,9 +89,6 @@ void MeteorMgr::setMaxVelocity(int maxv)
 
 void MeteorMgr::update(double deltaTime)
 {
-#ifdef _MSC_BUILD
-	return;
-#endif
 	if (!flagShow)
 	{
 		return;
