@@ -243,7 +243,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 
 			try
 			{
-				StelFileMgr::makeSureDirExistsAndIsWritable(screenshotDir);
+				StelFileMgr::setScreenshotDir(screenshotDir);
 				confSettings->setValue("main/screenshot_dir", screenshotDir);
 			}
 			catch (std::runtime_error &e)
