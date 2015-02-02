@@ -387,6 +387,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item>
               <widget class="QTabWidget" name="tabWidget">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="currentIndex">
                 <number>1</number>
                </property>
@@ -609,6 +615,9 @@ p, li { white-space: pre-wrap; }
                        </property>
                        <property name="maximum">
                         <double>600.000000000000000</double>
+                       </property>
+                       <property name="singleStep">
+                        <double>0.100000000000000</double>
                        </property>
                       </widget>
                      </item>
