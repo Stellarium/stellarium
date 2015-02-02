@@ -71,6 +71,7 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_fTorchAttenuation"] = UNIFORM_TORCH_ATTENUATION;
 
 		//others
+		uniformStrings["u_vColor"] = UNIFORM_VEC_COLOR;
 		uniformStrings["u_vSplits"] = UNIFORM_VEC_SPLITDATA;
 		uniformStrings["u_fAlphaThresh"] = UNIFORM_FLOAT_ALPHA_THRESH;
 	}
@@ -92,6 +93,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["CUBEMAP"] = CUBEMAP;
 		featureFlagsStrings["BLENDING"] = BLENDING;
 		featureFlagsStrings["TORCH"] = TORCH;
+		featureFlagsStrings["DEBUG"] = DEBUG;
 	}
 }
 
@@ -207,6 +209,10 @@ QString ShaderMgr::getVShaderName(uint flags)
 	{
 		return "s3d_texture.vert";
 	}
+	else if (flags & DEBUG)
+	{
+		return "s3d_debug.vert";
+	}
 	return QString();
 }
 
@@ -239,9 +245,13 @@ QString ShaderMgr::getFShaderName(uint flags)
 	{
 		return "s3d_transform.frag";
 	}
-    else if (flags == MAT_DIFFUSETEX)
+	else if (flags == MAT_DIFFUSETEX)
 	{
 		return "s3d_texture.frag";
+	}
+	else if (flags & DEBUG)
+	{
+		return "s3d_debug.frag";
 	}
 	return QString();
 }

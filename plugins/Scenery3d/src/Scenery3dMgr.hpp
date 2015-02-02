@@ -221,9 +221,6 @@ private:
     //! Creates all actions required by the plugin
     void createActions();
 
-    //! Loads the given vertex and fragment shaders into the given program.
-    bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader);
-
     //! This is run asynchronously in a background thread
     bool loadSceneBackground();
 
@@ -237,8 +234,6 @@ private:
     bool cleanedUp;
 
     StelCore::ProjectionType oldProjectionType;
-
-    QOpenGLShaderProgram* debugShader;
 
     //screen messages (taken largely from AngleMeasure as of 2012-01-21)
     LinearFader messageFader;

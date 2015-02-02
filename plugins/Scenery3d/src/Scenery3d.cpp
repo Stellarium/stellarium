@@ -54,7 +54,6 @@
 #include <iostream>
 #include <fstream>
 
-#define GROUND_MODEL 0
 #define GET_GLERROR()                                   \
 {                                                       \
     GLenum err = glGetError();                          \
@@ -104,10 +103,8 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 
     textEnabled = false;
     debugEnabled = false;
-    lightCamEnabled = false;
     sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
-    frustEnabled = false;
-
+    fixShadowData = false;
     venusOn = false;
 
     //Preset frustumSplits
@@ -285,11 +282,9 @@ void Scenery3d::finalizeLoad()
 	}
 	eye_height = currentScene.eyeLevel;
 
+	//TODO: maybe introduce a switch in scenery3d.ini that allows the "ground" bounding box to be used for shadow calculations
+	//this would allow some scenes to have better shadows
 	OBJ* cur = objModel.data();
-#if GROUND_MODEL
-	cur = &groundModel;
-#endif
-
 	//Set the scene's AABB
 	setSceneAABB(cur->getBoundingBox());
 
@@ -333,7 +328,10 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 	    case Qt::Key_Down:      movement[1] =  1.0f * speedup; e->accept(); break;
 	    case Qt::Key_Right:     movement[0] =  1.0f * speedup; e->accept(); break;
 	    case Qt::Key_Left:      movement[0] = -1.0f * speedup; e->accept(); break;
+#ifdef QT_DEBUG
+	    //leave this out on non-debug builds to reduce conflict chance
 	    case Qt::Key_P:         saveFrusts(); e->accept(); break;
+#endif
 	}
     }
     else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
@@ -350,11 +348,13 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 
 void Scenery3d::saveFrusts()
 {
-    frustEnabled = !frustEnabled;
+    fixShadowData = !fixShadowData;
+
+    camFrustShadow.saveDrawingCorners();
 
     for(int i=0; i<frustumSplits; i++)
     {
-	if(frustEnabled) frustumArray[i].saveCorners();
+	if(fixShadowData) frustumArray[i].saveDrawingCorners();
 	else frustumArray[i].resetCorners();
     }
 }
@@ -362,156 +362,6 @@ void Scenery3d::saveFrusts()
 void Scenery3d::setSceneAABB(const AABB& bbox)
 {
     sceneBoundingBox = bbox;
-}
-
-void Scenery3d::renderSceneAABB(StelPainter& painter)
-{
-    //sceneBoundingBox.render(&zRot2Grid);
-    //sceneBoundingBox.render();
-
-    Vec3d aabb[8];
-
-    aabb[0] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMinMin));
-    aabb[1] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMinMin));
-    aabb[2] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMinMax));
-    aabb[3] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMinMax));
-    aabb[4] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMaxMin));
-    aabb[5] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMaxMin));
-    aabb[6] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMaxMax));
-    aabb[7] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMaxMax));
-
-    /* commented out for compiler warning
-    unsigned int inds[36] = {
-	3, 2, 0,
-	2, 1, 0,
-	2, 7, 1,
-	7, 4, 1,
-	7, 6, 4,
-	6, 5, 4,
-	6, 3, 5,
-	3, 0, 5,
-	0, 1, 4,
-	4, 5, 0,
-	3, 2, 7,
-	7, 6, 3
-    };*/
-
-    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-    debugShader->bind();
-    painter.setArrays(aabb, NULL, NULL, NULL);
-    //TODO FS fix
-    //painter.drawFromArray(StelPainter::Triangles, 36, 0, false, inds);
-    //Done. Unbind shader
-    glUseProgram(0);
-    glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-}
-
-void Scenery3d::renderFrustum(StelPainter &painter)
-{
-    debugShader->bind();
-
-    for(int i=0; i<frustumSplits; i++)
-    {
-	Vec3f ntl = frustumArray[i].drawCorners[Frustum::NTL];
-	Vec3f ntr = frustumArray[i].drawCorners[Frustum::NTR];
-	Vec3f nbr = frustumArray[i].drawCorners[Frustum::NBR];
-	Vec3f nbl = frustumArray[i].drawCorners[Frustum::NBL];
-	Vec3f ftr = frustumArray[i].drawCorners[Frustum::FTR];
-	Vec3f ftl = frustumArray[i].drawCorners[Frustum::FTL];
-	Vec3f fbl = frustumArray[i].drawCorners[Frustum::FBL];
-	Vec3f fbr = frustumArray[i].drawCorners[Frustum::FBR];
-
-	glColor3f(1.0f, 0.0f, 0.0f);
-
-	glBegin(GL_LINE_LOOP);
-	    //near plane
-	    glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-	    glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-	    glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-	    glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	    //far plane
-	    glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-	    glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-	    glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-	    glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	    //bottom plane
-	    glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-	    glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-	    glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-	    glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	    //top plane
-	    glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-	    glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-	    glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-	    glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	    //left plane
-	    glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-	    glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-	    glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-	    glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	    // right plane
-	    glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-	    glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-	    glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-	    glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-	glEnd();
-
-	Vec3f a,b;
-	glBegin(GL_LINES);
-	    // near
-	    a = (ntr + ntl + nbr + nbl) * 0.25;
-	    b = a + frustumArray[i].planes[Frustum::NEARP]->sNormal;
-	    glVertex3f(a.v[0],a.v[1],a.v[2]);
-	    glVertex3f(b.v[0],b.v[1],b.v[2]);
-
-	    // far
-	    a = (ftr + ftl + fbr + fbl) * 0.25;
-	    b = a + frustumArray[i].planes[Frustum::FARP]->sNormal;
-	    glVertex3f(a.v[0],a.v[1],a.v[2]);
-	    glVertex3f(b.v[0],b.v[1],b.v[2]);
-
-	    // left
-	    a = (ftl + fbl + nbl + ntl) * 0.25;
-	    b = a + frustumArray[i].planes[Frustum::LEFT]->sNormal;
-	    glVertex3f(a.v[0],a.v[1],a.v[2]);
-	    glVertex3f(b.v[0],b.v[1],b.v[2]);
-
-	    // right
-	    a = (ftr + nbr + fbr + ntr) * 0.25;
-	    b = a + frustumArray[i].planes[Frustum::RIGHT]->sNormal;
-	    glVertex3f(a.v[0],a.v[1],a.v[2]);
-	    glVertex3f(b.v[0],b.v[1],b.v[2]);
-
-	    // top
-	    a = (ftr + ftl + ntr + ntl) * 0.25;
-	    b = a + frustumArray[i].planes[Frustum::TOP]->sNormal;
-	    glVertex3f(a.v[0],a.v[1],a.v[2]);
-	    glVertex3f(b.v[0],b.v[1],b.v[2]);
-
-	    // bottom
-	    a = (fbr + fbl + nbr + nbl) * 0.25;
-	    b = a + frustumArray[i].planes[Frustum::BOTTOM]->sNormal;
-	    glVertex3f(a.v[0],a.v[1],a.v[2]);
-	    glVertex3f(b.v[0],b.v[1],b.v[2]);
-	glEnd();
-	//Done. Unbind shader
-	debugShader->release();
-    }
 }
 
 void Scenery3d::update(double deltaTime)
@@ -567,12 +417,6 @@ void Scenery3d::update(double deltaTime)
 	//View Direction
 	viewDir = core->getMovementMgr()->getViewDirectionJ2000();
 	viewDir = core->j2000ToAltAz(viewDir);
-	//Bring viewDir into world-grid space
-	currentScene.zRotateMatrix.transfo(viewDir);
-	//Switch components as they aren't correct anymore
-	Vec3d tmp = viewDir;
-	viewDir.v[0] = tmp.v[1];
-	viewDir.v[1] = -tmp.v[0];
 
 	//View Position is already in world-grid space
 	viewPos = -absolutePosition;
@@ -928,7 +772,7 @@ void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,fl
     //orthoFar = std::max(maxZ, orthoNear + 1.0f);
 }
 
-QMatrix4x4 Scenery3d::computeCropMatrix(const Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
+QMatrix4x4 Scenery3d::computeCropMatrix(Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
 {
     float maxX = -std::numeric_limits<float>::max();
     float maxY = maxX;
@@ -952,10 +796,26 @@ QMatrix4x4 Scenery3d::computeCropMatrix(const Polyhedron& focusBody,const QMatri
 	if(transf.z() < minZ) minZ = transf.z();
     }
 
-    //To avoid artifacts and far plane clipping, extend the planes by 5% on both sides
-    float zRange = maxZ-minZ;
-    maxZ+=zRange*0.05;
-    minZ-=zRange*0.05;
+    //To avoid artifacts caused by far plane clipping, extend far plane by 5%
+    //or if cubemapping is used, set it to 1
+    if(core->getCurrentProjectionType()==StelCore::ProjectionPerspective)
+    {
+	    float zRange = maxZ-minZ;
+	    maxZ = std::min(maxZ + zRange*0.05f, 1.0f);
+    }
+    else
+    {
+	    maxZ = 1.0f;
+    }
+
+
+    //minZ = std::max(minZ - zRange*0.05f, 0.0f);
+
+#ifdef QT_DEBUG
+    AABB deb(Vec3f(minX,minY,minZ),Vec3f(maxX,maxY,maxZ));
+    focusBody.debugBox = deb.toBox();
+    focusBody.debugBox.transform(lightMVP.inverted());
+#endif
 
     //Build the crop matrix and apply it to the light projection matrix
     float scaleX = 2.0f/(maxX - minX);
@@ -1003,6 +863,8 @@ void Scenery3d::adjustFrustum()
 {
 	//calc cam frustum for shadowing range
 	//note that this is only correct in the perspective projection case, cubemapping WILL introduce shadow artifacts in most cases
+
+	//TODO make shadows in cubemapping mode better by projecting the frusta, more closely estimating the required shadow extents
 	float fov = altAzProjector->getFov();
 	float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
 	camFrustShadow.setCamInternals(fov,aspect,currentScene.camNearZ,currentScene.shadowFarZ);
@@ -1039,6 +901,10 @@ void Scenery3d::adjustFrustum()
     //minZ = std::max(minZ, 0.01f);
     //maxZ = std::max(maxZ, minZ+1.0f);
 
+    //save adjusted values and recalc combined frustum for debugging
+    camFrustShadow.setCamInternals(fov,aspect,minZ,maxZ);
+    camFrustShadow.calcFrustum(viewPos,viewDir,viewUp);
+
     //Setup the subfrusta
     for(int i=0; i<frustumSplits; i++)
     {
@@ -1056,6 +922,9 @@ bool Scenery3d::generateShadowMap()
 		if(!initShadowmapping())
 			return false; //can't use shadowmaps
 	}
+
+	if(fixShadowData)
+		return true;
 
 	//Adjust the frustum to the scene before analyzing the view samples
 	adjustFrustum();
@@ -1118,9 +987,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 
 	//Fix selfshadowing
 	glEnable(GL_POLYGON_OFFSET_FILL);
-	glPolygonOffset(0.75f,1.0f);
-	//! This is now done in shader via a bias. If that's ever a problem uncomment this part and the disabling farther down and change
-	//! glCullFace(GL_FRONT) to GL_BACK (farther up from here)
+	glPolygonOffset(0.5f,2.0f);
 
 	//GL state
 	//enable depth + front face culling
@@ -1166,7 +1033,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 			//Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
 			//This alters the ProjectionMatrix of the light
 			//the final light matrix used for lookups is stored in shadowCPM
-			shadowCPM[i] = computeCropMatrix(focusBodies.at(i),lightProj,lightMVP);
+			shadowCPM[i] = computeCropMatrix(focusBodies[i],lightProj,lightMVP);
 
 			//Draw the scene
 			drawArrays(false);
@@ -1640,6 +1507,47 @@ void Scenery3d::drawCoordinatesText()
 
 void Scenery3d::drawDebug()
 {
+	//render debug boxes
+	QOpenGLShaderProgram* debugShader = shaderManager.getDebugShader();
+	if(debugShader)
+	{
+		debugShader->bind();
+
+		//ensure that opengl matrix stack is empty
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+
+		//set mvp
+		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
+		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
+
+		sceneBoundingBox.render();
+
+		if(fixShadowData)
+		{
+			camFrustShadow.drawFrustum();
+			//SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,1.0f,1.0f));
+			frustumArray.at(0).drawFrustum();
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.0f,1.0f,0.0f,1.0f));
+			focusBodies.at(0).render();
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.0f,1.0f,1.0f,1.0f));
+			focusBodies.at(0).debugBox.render();
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,0.0f,1.0f));
+			focusBodies.at(1).render();
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,1.0f,1.0f));
+			focusBodies.at(1).debugBox.render();
+		}
+
+		debugShader->release();
+	}
+	else
+	{
+		qWarning()<<"[Scenery3d] Cannot use debug shader, probably on OpenGL ES context";
+	}
+
+
     StelPainter painter(altAzProjector);
     painter.setFont(debugTextFont);
     painter.setColor(1,0,1,1);
@@ -1708,12 +1616,15 @@ void Scenery3d::drawDebug()
     screen_y -= 15.0f;
     str = QString("%1 %2 %3").arg(viewUp.v[0], 7, 'f', 2).arg(viewUp.v[1], 7, 'f', 2).arg(viewUp.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
-    painter.drawText(screen_x, screen_y, str);
-    screen_y -= 15.0f;
-    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJDay()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
-    painter.drawText(screen_x, screen_y, str);
+    if(core->getCurrentProjectionType() != StelCore::ProjectionPerspective)
+    {
+	    screen_y -= 15.0f;
+	    str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
+	    painter.drawText(screen_x, screen_y, str);
+	    screen_y -= 15.0f;
+	    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJDay()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
+	    painter.drawText(screen_x, screen_y, str);
+    }
 
     screen_y -= 30.0f;
     str = QString("Venus: %1").arg(static_cast<int>(venusOn));
@@ -2191,7 +2102,7 @@ bool Scenery3d::initShadowmapping()
 			bool isES = QOpenGLContext::currentContext()->isOpenGLES();
 
 			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
-			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT16, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
