@@ -117,16 +117,19 @@ public:
 		//! Torchlight attenuation factor (1 float, like in the second model at http://framebunker.com/blog/lighting-2-attenuation/)
 		UNIFORM_TORCH_ATTENUATION,
 
+		//! simple color vec4
+		UNIFORM_VEC_COLOR,
 		//! Squared frustum splits (vec4)
 		UNIFORM_VEC_SPLITDATA,
 		//! Alpha test threshold
 		UNIFORM_FLOAT_ALPHA_THRESH,
 	};
 
-
-
 	//! Returns a shader that supports the specified operations. Must be called within a GL context.
 	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const OBJ::Material *mat = NULL);
+
+	//! Returns the Frustum/Boundingbox Debug shader
+	inline QOpenGLShaderProgram* getDebugShader();
 
 	//! Returns the cubemapping shader
 	inline QOpenGLShaderProgram* getCubeShader();
@@ -182,6 +185,8 @@ private:
 		BLENDING	= (1<<14),
 		//shader uses an additional point light positioned at the camera that performs additional diffuse illumination
 		TORCH		= (1<<15),
+		//debug shader for AABBs/Frustums
+		DEBUG		= (1<<16)
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -247,6 +252,11 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	}
 
 	return findOrLoadShader(flags);
+}
+
+QOpenGLShaderProgram* ShaderMgr::getDebugShader()
+{
+	return findOrLoadShader(DEBUG);
 }
 
 QOpenGLShaderProgram* ShaderMgr::getCubeShader()

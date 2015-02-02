@@ -52,7 +52,6 @@ Scenery3dMgr::Scenery3dMgr() :
     scenery3d(NULL),
     flagEnabled(false),
     cleanedUp(false),
-    debugShader(NULL),
     progressBar(NULL),
     currentLoadScene(),
     currentLoadFuture(this)
@@ -208,13 +207,6 @@ void Scenery3dMgr::deinit()
 		scenery3d = NULL;
 	}
 
-	//delete shaders
-	if(!debugShader)
-	{
-		delete debugShader;
-		debugShader = NULL;
-	}
-
 	cleanedUp = true;
 }
 
@@ -265,69 +257,8 @@ void Scenery3dMgr::reloadShaders()
 	showMessage(N_("Scenery3d shaders reloaded"));
 
 	qDebug()<<"(Re)loading Scenery3d shaders";
-	//create shader objects, if not existing
-	//the shaders get this manager as parent, so we dont have to manage deletion ourselves, it is done by Qt.
-	if(!debugShader)
-		debugShader = new QOpenGLShaderProgram(this);
 
-	loadShader(*debugShader,"debug.v.glsl","debug.f.glsl");
-
-	scenery3d->setShaders(debugShader);
 	scenery3d->getShaderManager().clearCache();
-}
-
-bool Scenery3dMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader)
-{
-    qDebug()<<"Loading Scenery3d shader: '"<<vShader<<"', '"<<fShader<<"'";
-
-    //clear old shader data, if exists
-    program.removeAllShaders();
-
-    QDir dir("data/shaders/");
-    QString vs = StelFileMgr::findFile(dir.filePath(vShader),StelFileMgr::File);
-
-    if(!program.addShaderFromSourceFile(QOpenGLShader::Vertex,vs))
-    {
-	qCritical() << "Scenery3d: unable to compile " << vs << " vertex shader file";
-	qCritical() << program.log();
-	return false;
-    }
-    else
-    {
-	QString log = program.log().trimmed();
-	if(!log.isEmpty())
-	{
-	    qWarning()<<vShader<<" warnings:";
-	    qWarning()<<log;
-	}
-    }
-
-    QString fs = StelFileMgr::findFile(dir.filePath(fShader),StelFileMgr::File);
-    if(!program.addShaderFromSourceFile(QOpenGLShader::Fragment,fs))
-    {
-	qCritical() << "Scenery3d: unable to compile " << fs << " fragment shader file";
-	qCritical() << program.log();
-	return false;
-    }
-    else
-    {
-	QString log = program.log().trimmed();
-	if(!log.isEmpty())
-	{
-	    qWarning()<<fShader<<" warnings:";
-	    qWarning()<<log;
-	}
-    }
-
-    //link program
-    if(!program.link())
-    {
-	qCritical()<<"Scenery3d: unable to link shader files "<<vShader<<", "<<fShader;
-	qCritical()<<program.log();
-	return false;
-    }
-
-    return true;
 }
 
 bool Scenery3dMgr::configureGui(bool show)

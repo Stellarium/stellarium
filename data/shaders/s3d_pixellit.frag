@@ -29,7 +29,7 @@ Note: This shader currently requires some #version 120 features!
 //macros that can be set by ShaderManager (simple true/false flags)
 #define BLENDING 1
 #define SHADOWS 1
-#define SHADOW_FILTER 0
+#define SHADOW_FILTER 1
 #define SHADOW_FILTER_HQ 0
 #define MAT_DIFFUSETEX 1
 #define MAT_EMISSIVETEX 1
@@ -192,10 +192,14 @@ float sampleShadow(in sampler2DShadow tex, in vec4 coord)
 	#if FILTER_STEPS
 	// a filter is defined
 	float sum =0.0;
+	
+	vec3 texC = coord.xyz / coord.w;
 	for(int i=0;i<FILTER_STEPS;++i)
 	{
 		//TODO this should be texture size dependent!
-		sum+=shadow2DProj(tex,vec4(coord.xy + poissonDisk[i]/700.0, coord.z, coord.w)).x;
+		//sum+=shadow2D(tex,vec3(coord.xy + poissonDisk[i]/700.0, texC.z)).x;
+		sum+=shadow2D(tex,vec3(texC.xy + poissonDisk[i]/700.0, texC.z)).x;
+		//sum+=shadow2DProj(tex,vec4(coord.xy + poissonDisk[i]/700.0, coord.zw)).x;
 	}
 	return sum / FILTER_STEPS;
 	#else
@@ -270,6 +274,14 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 			specCol *= shd;
 			#endif
 		}
+		else
+		{
+			specCol = vec3(0,0,0);
+		}
+	}
+	else
+	{
+		specCol = vec3(0,0,0);
 	}
 	#else
 	specCol = vec3(0,0,0);

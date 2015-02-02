@@ -61,7 +61,7 @@ Plane::Plane(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order 
 
 Plane::~Plane() {}
 
-void Plane::setPoints(Vec3f &v1, Vec3f &v2, Vec3f &v3, SPolygon::Order o)
+void Plane::setPoints(const Vec3f &v1,const Vec3f &v2,const Vec3f &v3, SPolygon::Order o)
 {
     Vec3f edge1 = v2-v1;
     Vec3f edge2 = v3-v1;
@@ -81,12 +81,12 @@ void Plane::setPoints(Vec3f &v1, Vec3f &v2, Vec3f &v3, SPolygon::Order o)
     distance = v1.dot(normal);
 }
 
-float Plane::calcDistance(Vec3f p) const
+float Plane::calcDistance(const Vec3f p) const
 {
     return p.dot(normal) - distance;
 }
 
-bool Plane::isBehind(Vec3f p) const
+bool Plane::isBehind(const Vec3f &p) const
 {
     bool result = false;
 

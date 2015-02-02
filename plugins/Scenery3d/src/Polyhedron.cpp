@@ -23,6 +23,7 @@
 
 #include "Polyhedron.hpp"
 #include "Util.hpp"
+#include "StelOpenGL.hpp"
 #include <limits>
 
 Polyhedron::Polyhedron()
@@ -252,4 +253,34 @@ int Polyhedron::getVertCount() const
 const QVector<Vec3f> &Polyhedron::getVerts() const
 {
     return uniqueVerts;
+}
+
+void Polyhedron::render() const
+{
+	//render each polygon
+	glColor3f(0.4f,0.4f,0.4f);
+	for(int i = 0;i<polygons.size();++i)
+	{
+		glBegin(GL_LINE_LOOP);
+		const SPolygon& poly = polygons.at(i);
+		for(int j = 0;j<poly.vertices.size();++j)
+		{
+			glVertex3fv(poly.vertices.at(j).v);
+		}
+		glEnd();
+	}
+
+
+	//also show the uniqueVerts
+	glPointSize(4.0f);
+	glColor3f(1.0f,1.0f,1.0f);
+
+
+	glBegin(GL_POINTS);
+	for(int i =0;i<uniqueVerts.size();++i)
+	{
+
+		glVertex3fv(uniqueVerts.at(i).v);
+	}
+	glEnd();
 }
