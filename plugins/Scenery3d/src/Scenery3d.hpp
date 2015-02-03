@@ -209,6 +209,7 @@ private:
 	    QVector3D lightDirectionWorld;
 	    QVector3D ambient;
 	    QVector3D directional;
+	    QVector3D specular;
 	    QVector3D emissive;
 
 	    QVector3D torchDiffuse;

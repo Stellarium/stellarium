@@ -96,8 +96,6 @@ public:
 		UNIFORM_TEX_SHADOW2,
 		UNIFORM_TEX_SHADOW3,
 
-		//! Material specular color
-		UNIFORM_MTL_SPECULAR,
 		//! Material specular shininess (exponent)
 		UNIFORM_MTL_SHININESS,
 		//! Material global transparency
@@ -107,6 +105,8 @@ public:
 		UNIFORM_MIX_AMBIENT,
 		//! Light directional * Material diffuse
 		UNIFORM_MIX_DIFFUSE,
+		//! Light specular * Material specular color
+		UNIFORM_MIX_SPECULAR,
 		//! Torch color * mat diffuse
 		UNIFORM_MIX_TORCHDIFFUSE,
 		//! Material emissive color * light emissive
