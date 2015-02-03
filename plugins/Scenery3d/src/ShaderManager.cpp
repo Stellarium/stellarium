@@ -56,13 +56,13 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_texShadow3"] = UNIFORM_TEX_SHADOW3;
 
 		//materials
-		uniformStrings["u_vMatSpecular"] = UNIFORM_MTL_SPECULAR;
 		uniformStrings["u_vMatShininess"] = UNIFORM_MTL_SHININESS;
 		uniformStrings["u_vMatAlpha"] = UNIFORM_MTL_ALPHA;
 
 		//pre-modulated lighting (light * material)
 		uniformStrings["u_vMixAmbient"] = UNIFORM_MIX_AMBIENT;
 		uniformStrings["u_vMixDiffuse"] = UNIFORM_MIX_DIFFUSE;
+		uniformStrings["u_vMixSpecular"] = UNIFORM_MIX_SPECULAR;
 		uniformStrings["u_vMixTorchDiffuse"] = UNIFORM_MIX_TORCHDIFFUSE;
 		uniformStrings["u_vMixEmissive"] = UNIFORM_MIX_EMISSIVE;
 

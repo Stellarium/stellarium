@@ -150,7 +150,7 @@ uniform sampler2D u_texHeight;
 uniform vec3 u_vMixAmbient; // = light ambient * mtl ambient/diffuse depending on Illum model
 uniform vec3 u_vMixDiffuse; // light diffuse * mat diffuse
 #if MAT_SPECULAR
-uniform vec3 u_vMatSpecular;
+uniform vec3 u_vMixSpecular;
 uniform float u_vMatShininess;
 #endif
 uniform float u_vMatAlpha;
@@ -239,10 +239,17 @@ float getShadow()
 void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 {
 	vec3 L = v_lightVec; //no normalize here, or it may cause divide by zero
-	
+
 	//basic lambert term
-	float NdotL = dot(normal, L);
-	vec3 Idiff = u_vMixDiffuse * max(0.0,NdotL);
+	float NdotL = clamp(dot(normal, L),0.0,1.0);
+#if BUMP
+	//use the original NdotL (which equals L.z because original normal is (0,0,1) in TBN space!) to modify the result
+	//this hides incorrect illumination on the backside of objects
+	float origNormalFactor = 1.0 - 1.0 / (1.0 + 100.0 * max(L.z,0.0));
+	NdotL *=  origNormalFactor;
+#endif
+	vec3 Idiff = u_vMixDiffuse * NdotL;
+
 	
 #if SHADOWS
 	float shd = getShadow();
@@ -259,7 +266,7 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 #endif
 	
 	#if MAT_SPECULAR
-	if(NdotL>0.0)
+	if(NdotL>0.001)
 	{
 		//calculate phong reflection vector
 		vec3 R = reflect(-L,normal);
@@ -269,9 +276,12 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 		if(RdotE>0.0)
 		{
 			//specular term according to Phong model (light specular is assumed to be white for now)
-			specCol = u_vMatSpecular * pow( RdotE, u_vMatShininess);
+			specCol = u_vMixSpecular * pow( RdotE, u_vMatShininess);
 			#if SHADOWS
 			specCol *= shd;
+			#endif
+			#if BUMP
+			specCol *= origNormalFactor;
 			#endif
 		}
 		else
@@ -286,8 +296,7 @@ void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 	#else
 	specCol = vec3(0,0,0);
 	#endif
-	
-	
+		
 	texCol = u_vMixAmbient + Idiff;
 }
 
@@ -345,6 +354,7 @@ void main(void)
 	#if BLENDING
 	gl_FragColor = vec4(texCol * texVal.rgb + specCol,u_vMatAlpha * texVal.a);
     #else
+	//gl_FragColor = vec4(texCol * texVal.rgb + specCol, 1.0);
 	gl_FragColor = vec4(texCol * texVal.rgb + specCol, 1.0);
 	#endif
 #else

@@ -543,7 +543,7 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_DIFFUSE, mat.diffuse * lightInfo.directional);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_TORCHDIFFUSE, mat.diffuse * lightInfo.torchDiffuse);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_EMISSIVE,mat.emission * lightInfo.emissive);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SPECULAR,mat.specular); //light has no specular color in our model
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_SPECULAR,mat.specular * lightInfo.specular);
 
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.shininess);
 	//force alpha to 1 here for non-translucent mats (fixes incorrect blending in cubemap)
@@ -1071,6 +1071,9 @@ void Scenery3d::calculateLighting()
 	lightInfo.lightSource = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition, emissiveFactor);
 	lightInfo.lightDirectionWorld = QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]);
 
+	//specular factor is calculated from other values for now
+	float specular = std::min(ambientBrightness*directionalBrightness*5.0f,1.0f);
+
 	//if the night vision mode is on, use red-tinted lighting
 	bool red=StelApp::getInstance().getVisionModeNight();
 
@@ -1079,10 +1082,10 @@ void Scenery3d::calculateLighting()
 
 	if(red)
 	{
-		lightInfo.ambient     = QVector3D(ambientBrightness,0,0);
+		lightInfo.ambient = QVector3D(ambientBrightness,0, 0);
 		lightInfo.directional = QVector3D(directionalBrightness,0,0);
 		lightInfo.emissive = QVector3D(emissiveFactor,0,0);
-
+		lightInfo.specular = QVector3D(specular,0,0);
 		lightInfo.torchDiffuse = QVector3D(torchDiff,0,0);
 	}
 	else
@@ -1091,10 +1094,9 @@ void Scenery3d::calculateLighting()
 		lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
 		lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
 		lightInfo.emissive = QVector3D(emissiveFactor,emissiveFactor,emissiveFactor);
-
+		lightInfo.specular = QVector3D(specular,specular,specular);
 		lightInfo.torchDiffuse = QVector3D(torchDiff,torchDiff,torchDiff);
 	}
-
 }
 
 Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition, float &emissiveFactor)

@@ -41,7 +41,7 @@ uniform mediump vec3 u_vLightDirectionView; //in view space
 uniform mediump vec3 u_vMixAmbient; // = light ambient * mtl ambient/diffuse depending on Illum model
 uniform mediump vec3 u_vMixDiffuse; // light diffuse * mat diffuse
 #if MAT_SPECULAR
-uniform mediump vec3 u_vMatSpecular;
+uniform mediump vec3 u_vMixSpecular;
 uniform mediump float u_vMatShininess;
 #endif
 
@@ -102,7 +102,7 @@ void calcLighting(vec3 normal, vec3 viewPos, out vec3 texIll, out vec3 specIll)
 		if(RdotE>0.0)
 		{
 			//specular term according to Phong model (light specular is assumed to be white for now)
-			specIll = u_vMatSpecular * pow( RdotE, u_vMatShininess);
+			specIll = u_vMixSpecular * pow( RdotE, u_vMatShininess);
 		}
 	}
 #endif
