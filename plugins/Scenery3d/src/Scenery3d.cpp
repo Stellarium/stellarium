@@ -69,9 +69,6 @@
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
 
-//! The minimal amount of ambient illumination
-//! Old version set this in 2 different places (as ambient of GL_LIGHT0 + a global scene ambient), for a total of 0.075 effective minimum.
-static const float MINIMUM_AMBIENT=0.075f;
 static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
 static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 
@@ -1132,7 +1129,23 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     float sinSunAngle  = sunPosition[2];
     float sinMoonAngle = moonPosition[2];
     float sinVenusAngle = venusPosition[2];
-    ambientBrightness=MINIMUM_AMBIENT;
+
+    //set the minimum ambient brightness
+    //this uses the LandscapeMgr values
+    Landscape* l = landscapeMgr->getCurrentLandscape();
+    if (landscapeMgr->getFlagLandscapeUseMinimalBrightness())
+    {
+	    // Setting from landscape.ini has priority if enabled
+	    if (landscapeMgr->getFlagLandscapeSetsMinimalBrightness() && l && l->getLandscapeMinimalBrightness()>=0)
+		    ambientBrightness = l->getLandscapeMinimalBrightness();
+	    else
+		    ambientBrightness = landscapeMgr->getDefaultMinimalBrightness();
+    }
+    else
+    {
+	    ambientBrightness = 0.0f;
+    }
+
     directionalBrightness=0.0f;
     ShadowCaster shadowcaster = None;
     // DEBUG AIDS: Helper strings to be displayed
@@ -1146,8 +1159,6 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     directionalSourceString="(Sun, below horiz.)";
 
     //calculate emissive factor
-    Landscape* l = landscapeMgr->getCurrentLandscape();
-
     if(l!=NULL)
     {
 	    emissiveFactor = l->getEffectiveLightscapeBrightness();
