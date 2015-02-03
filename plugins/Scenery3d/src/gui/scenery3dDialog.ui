@@ -394,7 +394,7 @@ p, li { white-space: pre-wrap; }
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -404,17 +404,17 @@ p, li { white-space: pre-wrap; }
                  <property name="fieldGrowthPolicy">
                   <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
                  </property>
-                 <item row="0" column="0">
+                 <item row="1" column="0">
                   <widget class="QLabel" name="labelTorchStrength">
                    <property name="text">
-                    <string>Torch strength (%1):</string>
+                    <string>Torch strength:</string>
                    </property>
                    <property name="buddy">
                     <cstring>sliderTorchStrength</cstring>
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
+                 <item row="1" column="1">
                   <widget class="QSlider" name="sliderTorchStrength">
                    <property name="maximum">
                     <number>100</number>
@@ -424,7 +424,7 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="0">
+                 <item row="2" column="0">
                   <widget class="QLabel" name="label_4">
                    <property name="text">
                     <string>Torch range:</string>
@@ -434,7 +434,7 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
-                 <item row="1" column="1">
+                 <item row="2" column="1">
                   <widget class="QSlider" name="sliderTorchRange">
                    <property name="maximum">
                     <number>10000</number>
@@ -447,6 +447,13 @@ p, li { white-space: pre-wrap; }
                    </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0" colspan="2">
+                  <widget class="QCheckBox" name="checkBoxTorchlight">
+                   <property name="text">
+                    <string>Torchlight (%1)</string>
                    </property>
                   </widget>
                  </item>

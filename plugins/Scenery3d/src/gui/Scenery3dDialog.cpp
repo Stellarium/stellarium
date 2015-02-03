@@ -40,9 +40,10 @@ void Scenery3dDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	//change ui a bit
-	StelAction* ac = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Scenery3d_torchlight");
+	StelActionMgr* acMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* ac = acMgr->findAction("actionShow_Scenery3d_torchlight");
 	if(ac)
-		ui->labelTorchStrength->setText(ui->labelTorchStrength->text().arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+		ui->checkBoxTorchlight->setText(ui->checkBoxTorchlight->text().arg(ac->getShortcut().toString(QKeySequence::NativeText)));
 	ui->comboBoxCubemapMode->setModel(new CubemapModeListModel(ui->comboBoxCubemapMode));
 
 	//connect UI events
@@ -58,6 +59,14 @@ void Scenery3dDialog::createDialogContent()
 		SLOT(setEnableBumps(bool)));
 	connect(ui->checkBoxEnableLazyDrawing, &QCheckBox::clicked, mgr, &Scenery3dMgr::setEnableLazyDrawing);
 	connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3dMgr::setLazyDrawingInterval);
+
+	ac = acMgr->findAction("actionShow_Scenery3d_torchlight");
+	if(ac)
+	{
+		ui->checkBoxTorchlight->setChecked(ac->isChecked());
+		connect(ac,&StelAction::toggled,ui->checkBoxTorchlight, &QCheckBox::setChecked);
+		connect(ui->checkBoxTorchlight,&QCheckBox::toggled,ac, &StelAction::setChecked);
+	}
 
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
 	//the "new" syntax is extremly ugly in case signals have overloads
