@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-03 10:59+0600\n"
-"PO-Revision-Date: 2015-01-31 05:45+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2015-02-04 02:56+0000\n"
+"Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-03 06:11+0000\n"
-"X-Generator: Launchpad (build 17330)\n"
+"X-Launchpad-Export-Date: 2015-02-04 05:50+0000\n"
+"X-Generator: Launchpad (build 17331)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -144,7 +144,7 @@ msgstr "Зямля"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Асьвятленьне"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -277,7 +277,7 @@ msgstr "Адлегласьць: %1 АА (%2 млн км)"
 #: src/core/modules/Planet.cpp:263
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr "Бачны дыямэтр: %1, з колцамі: %2"
+msgstr "Бачны дыямэтар: %1, з кольцамі: %2"
 
 #: src/core/modules/Planet.cpp:269 src/core/modules/MinorPlanet.cpp:260
 #, qt-format
@@ -1129,7 +1129,7 @@ msgstr ""
 #: src/core/StelObject.cpp:115
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "дата"
 
 #: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
 #: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
@@ -2133,7 +2133,7 @@ msgstr "месяц"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr ""
+msgstr "плютына"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
@@ -2143,7 +2143,7 @@ msgstr "карлікавая плянэта"
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "кубэвана"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
@@ -2175,7 +2175,7 @@ msgstr "Месяцы"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:70
 msgid "Plutinos"
-msgstr ""
+msgstr "Плютыны"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:72
@@ -2185,12 +2185,12 @@ msgstr "Карлікавыя плянэты"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "Кубэваны"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:76
 msgid "Scattered disc objects"
-msgstr ""
+msgstr "Аб'екты раскіданага дыску"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:78
@@ -2210,7 +2210,7 @@ msgstr "Адкрытыя скопішчы"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:87
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Шаравое зоркавае скопішча"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:89
@@ -2253,7 +2253,7 @@ msgstr "Арабскія"
 
 #: src/translations.h:106
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Арабскія станцыі на Месяцы"
 
 #: src/translations.h:107
 msgid "Aztec"
@@ -2281,7 +2281,7 @@ msgstr "Індыйская ведычная"
 
 #: src/translations.h:113
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Японскія станцыя на Месяцы"
 
 #: src/translations.h:114
 msgid "Korean"
@@ -2408,7 +2408,7 @@ msgstr "Ґрасмуґль"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:160
 msgid "Zero Horizon"
-msgstr ""
+msgstr "Нулявы гарызонт"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:166
@@ -3752,7 +3752,7 @@ msgstr "Іґнараваць"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "Дата й час паводле Ґрыґарыянскага каледара"
 
 #: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
@@ -3760,7 +3760,7 @@ msgstr "Юліянская дата"
 
 #: src/ui_dateTimeDialogGui.h:383
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "Зьменены Юліянскі каляндар"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3839,7 +3839,7 @@ msgstr " м"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Вернуцца да прадвызначанага"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -3863,7 +3863,7 @@ msgstr "Плянэта:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "Выкарыстоўваць бягучае месца як прадвызначанае"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
@@ -4163,7 +4163,7 @@ msgstr "Яркасьць Млечнага шляху:"
 
 #: src/ui_viewDialog.h:1268
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "Яркасьць задыякальнага сьвятла:"
 
 #: src/ui_viewDialog.h:1269
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
@@ -4319,7 +4319,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
-msgstr ""
+msgstr "з краявіду, калі зададзена"
 
 #: src/ui_viewDialog.h:1346
 msgid "Add/remove landscapes..."
@@ -4339,7 +4339,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "Выкарыстоўваць родныя назвы плянэт бягучай культуры"
 
 #: src/ui_viewDialog.h:1356
 msgid "Visible"
@@ -4359,7 +4359,7 @@ msgstr "Мова праґрамы"
 
 #: src/ui_configurationDialog.h:1021
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "Мова культуры неба:"
 
 #: src/ui_configurationDialog.h:1022
 msgid "Default options"
@@ -4704,11 +4704,11 @@ msgstr "Аўтазадзейнічаньне атмасфэры"
 
 #: src/ui_configurationDialog.h:1167
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "Выкарыстоўваць дзесятковыя ґрадусы для каардынат"
 
 #: src/ui_configurationDialog.h:1169
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "Дзесятковыя ґрадусы"
 
 #: src/ui_configurationDialog.h:1170
 msgid "Screenshots"
@@ -5096,15 +5096,15 @@ msgstr "Настаўленьні дадатку «Мераньне вуглоў�
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Паказваць у экватарыяльных каардынатах"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Паказваць з пазыцыйным вуглом"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Паказваць у гарызантальных каардынатах"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
@@ -5112,7 +5112,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Паказваць з пазыцыйным вуглом "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
@@ -5297,7 +5297,7 @@ msgstr "Выберы папярэдні акуляр"
 #: plugins/Oculars/src/Oculars.cpp:1459
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr ""
+msgstr "ПУ/Сх (J2000.0) крыжа:"
 
 #: plugins/Oculars/src/Oculars.cpp:1586
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
@@ -5726,7 +5726,7 @@ msgstr "Бінокль"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "Мае пастаянныя перакрыжаваньні"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -6680,7 +6680,7 @@ msgstr "&Бягучы аб'ект"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Center of the screen"
-msgstr ""
+msgstr "Цэнтр экрана"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Hours-minutes-seconds format"
@@ -8350,6 +8350,9 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Клясыфікацыя плянэт паводле спэктральнага тыпу зоркі (F, G, K, M), зоны "
+"прыдатнай да жыцьця (гарачая, цёплая, халодная) і памеру (мінізямля, "
+"субзямля, зямля, супэрзямля, юпітэр, нэптун) (Зямля = G-цёплая зямля)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Equilibrium Temperature"
@@ -8362,6 +8365,10 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"Раўнаважная тэмпэратура плянэты гэта тэарэтычная тэмпэратура ў (°C), якую "
+"мела б плянэта, калі б была проста чорным целам, якое награваецца толькі "
+"сваёй бацькоўскай зоркай (альбэда лічыцца роўным 0,3). Напрыклад, "
+"раўнаважная тэмпэратура Зямлі роўная -18,15°C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Earth Similarity Index (ESI)"
@@ -9938,7 +9945,7 @@ msgstr "Экл Д/Ш (J2000.0)"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:252
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "ГВ/Сх"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
@@ -11165,3 +11172,9 @@ msgstr "Каардыната Y"
 #~ msgstr ""
 #~ "Экліптычныя топацэнтрычныя каардынаты, раўнадзенства даты й J2000 (толькі "
 #~ "для Зямлі)"
+
+#~ msgid ""
+#~ " Sorry, your hardware is not compatible with newest version of Stellarium!"
+#~ msgstr ""
+#~ " Выбачай, але тваё абсталяваньне не сумяшчальнае з апошняй вэрсіяй "
+#~ "Stellarium!"
