@@ -26,6 +26,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelUtils.hpp"
 
 #include <QDebug>
@@ -70,7 +71,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	ini.beginGroup("model");
 	info.name = ini.value("name").toString();
 	info.author = ini.value("author").toString();
-	info.description = ini.value("description").toString();
+	info.description = ini.value("description","No description").toString();
 	info.landscapeName = ini.value("landscape").toString();
 	info.modelScenery = ini.value("scenery").toString();
 	info.modelGround = ini.value("ground","").toString();
@@ -259,6 +260,45 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 
 	info.isValid = true;
 	return true;
+}
+
+QString SceneInfo::getLocalizedHTMLDescription() const
+{
+	if(!this->isValid)
+		return QString();
+
+	//This is taken from ViewDialog.cpp
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+	{
+		lang = lang.split("_").at(0);
+	}
+
+	QString descFile = StelFileMgr::findFile( fullPath + "/description."+lang+".utf8");
+	if(descFile.isEmpty())
+	{
+		//fall back to english
+		qWarning()<<"[Scenery3d] No scene description found for language"<<lang<<", falling back to english";
+		descFile = StelFileMgr::findFile( fullPath + "/description.en.utf8");
+	}
+
+	if(descFile.isEmpty())
+	{
+		//fall back to stored description
+		qWarning()<<"[Scenery3d] No external scene description found";
+		return QString();
+	}
+
+	//load the whole file and return it as string
+	QFile f(descFile);
+	QString htmlFile;
+	if(f.open(QIODevice::ReadOnly))
+	{
+		htmlFile = QString::fromUtf8(f.readAll());
+		f.close();
+	}
+
+	return htmlFile;
 }
 
 QString SceneInfo::getIDFromName(const QString &name)

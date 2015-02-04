@@ -36,13 +36,16 @@ private slots:
 	void initResolutionCombobox(QComboBox* cb);
 	void setResolutionCombobox(QComboBox* cb, uint val);
 
+	void updateShortcutStrings();
+
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This is called automatically from the signals in the manager class
 	void updateFromManager();
 
 private:
-	QString getHtmlDescription(const SceneInfo& si) const;
+	void updateTextBrowser(const SceneInfo& si);
 
+	QVector<QAbstractButton*> shortcutButtons;
 	Ui_scenery3dDialogForm* ui;
 	Scenery3dMgr* mgr;
 };

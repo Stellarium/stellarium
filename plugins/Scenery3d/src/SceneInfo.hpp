@@ -46,6 +46,9 @@ struct SceneInfo
 	//! Author of the scene
 	QString author;
 	//! A description, which can be displayed in the GUI - supporting HTML tags!
+	//! Note that this description, as stored in the scenery3d.ini, is only meant as a fallback.
+	//! The better way would be to create description.<lang>.utf8 files in the scene's folder.
+	//! This can then be retrieved using getLocalizedHTMLDescription.
 	QString description;
 	//! Copyright string
 	QString copyright;
@@ -111,6 +114,11 @@ struct SceneInfo
 	bool hasLocation() const { return !location.isNull(); }
 	//! Returns true if the lookat_fov is valid
 	bool hasLookAtFOV() const { return lookAt_fov[2] >= 0; }
+
+	//! Tries to find a description.<language>.utf8 file for this scene, and returns its contents.
+	//! If no such file exists, the description.en.utf8 is checked. If this is also missing,
+	//! a null QString is returned. Consider using the value of SceneInfo::description in this case.
+	QString getLocalizedHTMLDescription() const;
 
 	//! The folder for scenery is found here
 	static const QString SCENES_PATH;

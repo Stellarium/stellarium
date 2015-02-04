@@ -457,6 +457,13 @@ p, li { white-space: pre-wrap; }
                    </property>
                   </widget>
                  </item>
+                 <item row="3" column="0" colspan="2">
+                  <widget class="QCheckBox" name="checkBoxShowGridCoordinates">
+                   <property name="text">
+                    <string>Show grid coordinates (%1)</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </widget>
                <widget class="QWidget" name="tab_2">
