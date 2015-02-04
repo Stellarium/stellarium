@@ -27,7 +27,16 @@ Scenery3dDialog::~Scenery3dDialog()
 void Scenery3dDialog::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+
+		//update description
+		SceneInfo si = mgr->getLoadingScene(); //the scene that is currently being loaded
+		if(!si.isValid)
+			si = mgr->getCurrentScene(); //the scene that is currently displayed
+		updateTextBrowser(si);
+		updateShortcutStrings();
+	}
 }
 
 void Scenery3dDialog::createDialogContent()
@@ -39,11 +48,10 @@ void Scenery3dDialog::createDialogContent()
 	//load Ui from form file
 	ui->setupUi(dialog);
 
+	//hook up retranslate event
+	connect(&StelApp::getInstance(), &StelApp::languageChanged, this, &Scenery3dDialog::retranslate);
+
 	//change ui a bit
-	StelActionMgr* acMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* ac = acMgr->findAction("actionShow_Scenery3d_torchlight");
-	if(ac)
-		ui->checkBoxTorchlight->setText(ui->checkBoxTorchlight->text().arg(ac->getShortcut().toString(QKeySequence::NativeText)));
 	ui->comboBoxCubemapMode->setModel(new CubemapModeListModel(ui->comboBoxCubemapMode));
 
 	//connect UI events
@@ -60,13 +68,31 @@ void Scenery3dDialog::createDialogContent()
 	connect(ui->checkBoxEnableLazyDrawing, &QCheckBox::clicked, mgr, &Scenery3dMgr::setEnableLazyDrawing);
 	connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3dMgr::setLazyDrawingInterval);
 
-	ac = acMgr->findAction("actionShow_Scenery3d_torchlight");
+	//hook up some Scenery3d actions
+	StelActionMgr* acMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* ac = acMgr->findAction("actionShow_Scenery3d_torchlight");
 	if(ac)
 	{
+		ui->checkBoxTorchlight->setProperty("stelActionKey",ac->getId());
 		ui->checkBoxTorchlight->setChecked(ac->isChecked());
 		connect(ac,&StelAction::toggled,ui->checkBoxTorchlight, &QCheckBox::setChecked);
 		connect(ui->checkBoxTorchlight,&QCheckBox::toggled,ac, &StelAction::setChecked);
+		//reacting to key combo changes does not work yet
+		//connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
+		shortcutButtons.append(ui->checkBoxTorchlight);
 	}
+	ac = acMgr->findAction("actionShow_Scenery3d_locationinfo");
+	if(ac)
+	{
+		ui->checkBoxShowGridCoordinates->setProperty("stelActionKey",ac->getId());
+		ui->checkBoxShowGridCoordinates->setChecked(ac->isChecked());
+		connect(ac,&StelAction::toggled,ui->checkBoxShowGridCoordinates, &QCheckBox::setChecked);
+		connect(ui->checkBoxShowGridCoordinates,&QCheckBox::toggled,ac, &StelAction::setChecked);
+		//connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
+		shortcutButtons.append(ui->checkBoxShowGridCoordinates);
+	}
+
+	updateShortcutStrings();
 
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
 	//the "new" syntax is extremly ugly in case signals have overloads
@@ -128,7 +154,7 @@ void Scenery3dDialog::createDialogContent()
 			ui->checkBoxDefaultScene->setVisible(true);
 			ui->pushButtonOpenStoredViewDialog->setVisible(true);
 		}
-		ui->scenery3dTextBrowser->setHtml(getHtmlDescription(current));
+		updateTextBrowser(current);
 	}
 	l->blockSignals(false);
 
@@ -137,6 +163,25 @@ void Scenery3dDialog::createDialogContent()
 	initResolutionCombobox(ui->comboBoxShadowmapSize);
 
 	updateFromManager();
+}
+
+void Scenery3dDialog::updateShortcutStrings()
+{
+	StelActionMgr* acMgr = StelApp::getInstance().getStelActionManager();
+
+	foreach(QAbstractButton* bt, shortcutButtons)
+	{
+		QVariant v = bt->property("stelActionKey");
+		if(v.isValid())
+		{
+			QString s = v.toString();
+			StelAction* ac = acMgr->findAction(s);
+			if(ac)
+			{
+				bt->setText(bt->text().arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+			}
+		}
+	}
 }
 
 void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
@@ -203,7 +248,7 @@ void Scenery3dDialog::updateCurrentScene(const SceneInfo &sceneInfo)
 			ui->scenery3dListWidget->setCurrentItem(currentItems.at(0));
 		}
 		ui->scenery3dListWidget->blockSignals(false);
-		ui->scenery3dTextBrowser->setHtml(getHtmlDescription(sceneInfo));
+		updateTextBrowser(sceneInfo);
 
 		ui->checkBoxDefaultScene->blockSignals(true);
 		ui->checkBoxDefaultScene->setVisible(true);
@@ -239,7 +284,7 @@ void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 		ui->checkBoxDefaultScene->setChecked(info.id == mgr->getDefaultScenery3dID());
 		ui->checkBoxDefaultScene->blockSignals(false);
 
-		ui->scenery3dTextBrowser->setHtml(getHtmlDescription(info));
+		updateTextBrowser(info);
 		ui->checkBoxDefaultScene->setVisible(true);
 	}
 	else
@@ -250,14 +295,33 @@ void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 	}
 }
 
-QString Scenery3dDialog::getHtmlDescription(const SceneInfo &si) const
+void Scenery3dDialog::updateTextBrowser(const SceneInfo &si)
 {
-	QString desc = QString("<h3>%1</h3>").arg(si.name);
-	desc += si.description;
-	desc+="<br><br>";
-	desc+="<b>"+q_("Author: ")+"</b>";
-	desc+= si.author;
-	return desc;
+	if(!si.isValid)
+	{
+		ui->scenery3dTextBrowser->setHtml("");
+		ui->scenery3dTextBrowser->setSearchPaths(QStringList());
+	}
+	else
+	{
+		QStringList list;
+		list<<si.fullPath;
+		ui->scenery3dTextBrowser->setSearchPaths(list);
+
+		//first, try to find a localized description
+		QString desc = si.getLocalizedHTMLDescription();
+		if(desc.isEmpty())
+		{
+			//use the "old" way to create an description from data contained in the .ini
+			desc = QString("<h3>%1</h3>").arg(si.name);
+			desc+= si.description;
+			desc+="<br><br>";
+			desc+="<b>"+q_("Author: ")+"</b>";
+			desc+= si.author;
+		}
+
+		ui->scenery3dTextBrowser->setHtml(desc);
+	}
 }
 
 void Scenery3dDialog::setResolutionCombobox(QComboBox *cb, uint val)
