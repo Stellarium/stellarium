@@ -103,21 +103,29 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
+		QStringList sciNames;
+		if (!sciName.isEmpty())
+			sciNames.append(sciName);
+		if (!addSciName.isEmpty())
+			sciNames.append(addSciName);
+		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=sciName)
+			sciNames.append(varSciName);
+		const QString sciNamesList = sciNames.join(" - ");
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
-			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
+			if (!commonNameI18.isEmpty() || !sciNamesList.isEmpty())
 			{
-				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
-					oss << "(";
-				oss << (sciName=="" ? "" : sciName);
-				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
-				if (varSciName!="" && varSciName!=sciName)
-					oss << (sciName=="" ? "" : " - ") << varSciName;
-				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
-					oss << ")";
+				if (!commonNameI18.isEmpty())
+					oss << commonNameI18;
+
+				if (!commonNameI18.isEmpty() && !sciNamesList.isEmpty())
+					oss << " (" << sciNamesList << ")";
+
+				if (commonNameI18.isEmpty() && !sciNamesList.isEmpty())
+					oss << sciNamesList;
+
 				nameWasEmpty=false;
 			}
 		}
@@ -238,18 +246,23 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (vPeriod>0)
 			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
 
+		/*
+		// FIXME: This calculations don't contains correction to Earth's rotation around the Sun.
+		// Details for Algol:
+		//	https://sourceforge.net/p/stellarium/discussion/278769/thread/05aae684/
+		//	http://calgary.rasc.ca/algol_minima.htm
 		if (vEpoch>0 && vPeriod>0)
 		{
 			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;
-			int npDelta = (core->getJDay()-vsEpoch)/vPeriod;
-			double npDate = vsEpoch + ((npDelta+1)*vPeriod);
+			double vsEpoch = 2400000+vEpoch;			
+			double npDate = vsEpoch + ((::floor((core->getJDay()-vsEpoch)/vPeriod)+1.0)*vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			if (ebsFlag)
 				oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
 			else
 				oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
 		}
+		*/
 
 		if (vMm>0)
 		{

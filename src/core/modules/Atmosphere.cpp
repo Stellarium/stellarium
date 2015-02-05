@@ -123,7 +123,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		delete[] colorGrid;
 		delete [] posGrid;
 		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
-		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
+		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*std::sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
 		colorGrid = new Vec4f[(1+skyResolutionX)*(1+skyResolutionY)];
 		float stepX = (float)prj->getViewportWidth() / (skyResolutionX-0.5);
@@ -264,17 +264,24 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 
 		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
 
+		// Use mirroring for sun only
 		if (point[2]<=0)
 		{
 			point[2] = -point[2];
 			// The sky below the ground is the symmetric of the one above :
 			// it looks nice and gives proper values for brightness estimation
+			// Use the Skybright.cpp 's models for brightness which gives better results.
+			lumi = skyb.getLuminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]-
+					moon_pos[2]*point[2], sunPos[0]*point[0]+sunPos[1]*point[1]+
+					sunPos[2]*point[2], point[2]);
 		}
-
-		// Use the Skybright.cpp 's models for brightness which gives better results.
-		lumi = skyb.getLuminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]+
-				moon_pos[2]*point[2], sunPos[0]*point[0]+sunPos[1]*point[1]+
-				sunPos[2]*point[2], point[2]);
+		else
+		{
+			// Use the Skybright.cpp 's models for brightness which gives better results.
+			lumi = skyb.getLuminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]+
+					moon_pos[2]*point[2], sunPos[0]*point[0]+sunPos[1]*point[1]+
+					sunPos[2]*point[2], point[2]);
+		}
 		lumi *= eclipseFactor;
 		// Add star background luminance
 		lumi += 0.0001f;

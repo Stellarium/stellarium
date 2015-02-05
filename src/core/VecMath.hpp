@@ -621,7 +621,7 @@ template<class T> Vector3<T> Vector3<T>::operator^(const Vector3<T>& b) const
 // Angle in radian between two vectors
 template<class T> T Vector3<T>::angle(const Vector3<T>& b) const
 {
-	const T cosAngle = dot(b)/sqrt(lengthSquared()*b.lengthSquared());
+	const T cosAngle = dot(b)/std::sqrt(lengthSquared()*b.lengthSquared());
 	return cosAngle>=1 ? 0 : (cosAngle<=-1 ? M_PI : std::acos(cosAngle));
 }
 
@@ -634,7 +634,7 @@ template<class T> T Vector3<T>::angleNormalized(const Vector3<T>& b) const
 
 template<class T> T Vector3<T>::length() const
 {
-	return (T) sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+	return (T) std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 }
 
 template<class T> T Vector3<T>::lengthSquared() const
@@ -804,7 +804,7 @@ template<class T> T Vector4<T>::dot(const Vector4<T>& b) const
 
 template<class T> T Vector4<T>::length() const
 {
-	return (T) sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]);
+	return (T) std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]);
 }
 
 template<class T> T Vector4<T>::lengthSquared() const
@@ -814,7 +814,7 @@ template<class T> T Vector4<T>::lengthSquared() const
 
 template<class T> void Vector4<T>::normalize()
 {
-	T s = (T) (1. / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]));
+	T s = (T) (1. / std::sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]));
 	v[0] *= s;
 	v[1] *= s;
 	v[2] *= s;

@@ -464,6 +464,8 @@ void OcularDialog::createDialogContent()
 					telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
+	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
+
 	// set the initial state
 	QSettings *settings = Oculars::appSettings();
 	if (settings->value("require_selection_to_zoom", 1.0).toBool()) {
@@ -494,6 +496,22 @@ void OcularDialog::createDialogContent()
 
 	//Initialize the style
 	updateStyle();
+}
+
+void OcularDialog::setLabelsDescriptionText(bool state)
+{
+	if (state)
+	{
+		// TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
+		ui->labelFOV->setText(q_("tFOV:"));
+		// TRANSLATORS: Magnification factor for binoculars
+		ui->labelFL->setText(q_("Magnification factor:"));
+	}
+	else
+	{
+		ui->labelFOV->setText(q_("aFOV:"));
+		ui->labelFL->setText(q_("Focal length:"));
+	}
 }
 
 void OcularDialog::initAboutText()

@@ -605,17 +605,15 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 	if (landscape->hasLocation())
 	{
 		desc+="<b>"+q_("Location: ")+"</b>";
-		//if (landscape->getLocation().longitude>-500.0 && landscape->getLocation().latitude>-500.0)
-		//{
-			desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
-			desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
-			desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
-			QString planetName = landscape->getLocation().planetName;
-			//if (!planetName.isEmpty())
-			//{
-				desc += "<br><b>"+q_("Planet: ")+"</b>"+ q_(planetName);
-			//}
-		//}
+		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
+		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
+		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
+		QString planetName = landscape->getLocation().planetName;
+		if (!planetName.isEmpty())
+		{
+			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+			desc += "<br><b>"+q_("Celestial body:")+"</b> "+ trans.qtranslate(planetName);
+		}
 		desc += "<br><br>";
 	}
 	// TBD: Activate this or delete?
