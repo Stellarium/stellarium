@@ -29,9 +29,6 @@
 
 class StelObject;
 
-typedef unsigned char Uint8;
-typedef int Int32;
-typedef unsigned int Uint32;
 typedef short int Int16;
 typedef unsigned short int Uint16;
 
@@ -89,16 +86,16 @@ struct Star1 { // 28 byte
 	// componentIds         8
 	// hip                  24
 	//
-	// Int32 x0             32
-	// Int32 x1             32
+	// qint32 x0            32
+	// qint32 x1            32
 	//
 	// unsigned char bV     8
 	// unsigned char mag    8
 	// Uint16 spInt         16
 	//
-	// Int32 dx0,dx1,plx    32
+	// qint32 dx0,dx1,plx   32
 private:
-	Uint8 d[28];
+	quint8 d[28];
 
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
@@ -113,21 +110,21 @@ public:
 	inline int getBVIndex() const {return d[12];}
 	inline int getMag() const {return d[13];}
 	inline int getSpInt() const {return ((Uint16*)d)[7];}
-	inline int getX0() const { return qFromLittleEndian(((Int32*)d)[1]); }
-	inline int getX1() const { return qFromLittleEndian(((Int32*)d)[2]); }
-	inline int getDx0() const {return qFromLittleEndian(((Int32*)d)[4]);}
-	inline int getDx1() const {return qFromLittleEndian(((Int32*)d)[5]);}
-	inline int getPlx() const {return qFromLittleEndian(((Int32*)d)[6]);}
+	inline int getX0() const { return qFromLittleEndian(((qint32*)d)[1]); }
+	inline int getX1() const { return qFromLittleEndian(((qint32*)d)[2]); }
+	inline int getDx0() const {return qFromLittleEndian(((qint32*)d)[4]);}
+	inline int getDx1() const {return qFromLittleEndian(((qint32*)d)[5]);}
+	inline int getPlx() const {return qFromLittleEndian(((qint32*)d)[6]);}
 
 	inline int getHip() const
 	{
-		Uint32 v = d[0] | d[1] << 8 | d[2] << 16;
-		return ((Int32)v) << 8 >> 8;
+		quint32 v = d[0] | d[1] << 8 | d[2] << 16;
+		return ((qint32)v) << 8 >> 8;
 	}
 
 	inline int getComponentIds() const
 	{
-		return (Int32)d[3];
+		return (qint32)d[3];
 	}
 
 	float getBV(void) const {return IndexToBV(getBVIndex());}
@@ -162,19 +159,19 @@ struct Star2 {  // 10 byte
 	*/
 
 private:
-	Uint8 d[10];
+	quint8 d[10];
 
 public:
 	inline int getX0() const
 	{
-		Uint32 v = d[0] | d[1] << 8 | (d[2] & 0xF) << 16;
-		return ((Int32)v) << 12 >> 12;
+		quint32 v = d[0] | d[1] << 8 | (d[2] & 0xF) << 16;
+		return ((qint32)v) << 12 >> 12;
 	}
 
 	inline int getX1() const
 	{
-		Uint32 v = d[2] >> 4 | d[3] << 4 | d[4] << 12;
-		return ((Int32)v) << 12 >> 12;
+		quint32 v = d[2] >> 4 | d[3] << 4 | d[4] << 12;
+		return ((qint32)v) << 12 >> 12;
 	}
 
 	inline int getDx0() const
@@ -232,19 +229,19 @@ struct Star3 {  // 6 byte
 	unsigned int mag     :5
 	*/
 private:
-	Uint8 d[6];
+	quint8 d[6];
 
 public:
 	inline int getX0() const
 	{
-		Uint32 v = d[0] | d[1] << 8 | (d[2] & 0x3) << 16;
-		return ((Int32)v) << 14 >> 14;
+		quint32 v = d[0] | d[1] << 8 | (d[2] & 0x3) << 16;
+		return ((qint32)v) << 14 >> 14;
 	}
 
 	inline int getX1() const
 	{
-		Uint32 v = d[2] >> 2 | d[3] << 6 | (d[4] & 0xF) << 14;
-		return ((Int32)v) << 14 >> 14;
+		quint32 v = d[2] >> 2 | d[3] << 6 | (d[4] & 0xF) << 14;
+		return ((qint32)v) << 14 >> 14;
 	}
 
 	inline int getBVIndex() const
