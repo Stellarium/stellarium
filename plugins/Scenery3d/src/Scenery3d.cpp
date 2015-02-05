@@ -75,6 +75,11 @@ static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 //this is the place where this is initialized
 GLExtFuncs glExtFuncs;
 
+#ifdef _MSC_VER
+//disable a stupid warning about array value-initialization
+#pragma warning(disable : 4351)
+#endif
+
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
     : parent(parent), currentScene(), loadingScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
       absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),heightmapLoad(NULL),

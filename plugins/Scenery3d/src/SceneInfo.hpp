@@ -142,7 +142,7 @@ private:
 	static int initMetaType();
 };
 
-class StoredView;
+struct StoredView;
 typedef QList<StoredView> StoredViewList;
 
 //! A structure which stores a specific view position, view direction and FOV, together with a textual description.
