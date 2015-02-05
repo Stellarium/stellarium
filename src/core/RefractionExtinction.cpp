@@ -112,21 +112,18 @@ void Refraction::updatePrecomputed()
 
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
-	//altAzPos.normalize(); // TRY TO AVOID THIS!
-
-	// Something very strange is going on here! We either have NaNs or null-vectors!
-
-	// GZ: Stupid hack. I don't know if this helps in any way.
+	// Under some circumstances there are zero coordinates. Just leave them alone.
 	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
 	{
-		altAzPos[2]=1.0;
-		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zenith vector.";
+		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zero vector.";
+		return;
 	}
 	Q_ASSERT(!std::isnan(altAzPos[0]));
 	Q_ASSERT(!std::isnan(altAzPos[1]));
 	Q_ASSERT(!std::isnan(altAzPos[2]));
 	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
 
+	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
 	Q_ASSERT(length>0.0);
 	const double sinGeo = altAzPos[2]/length;
@@ -164,18 +161,14 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 
 }
 
+// going from observed position to geometrical position.
 void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
-	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
-	//altAzPos.normalize(); // TRY TO AVOID THIS!
-
-	// Something very strange is going on here! We either have NaNs or null-vectors!
-
-	// GZ: Stupid hack. I don't know if this helps in any way.
+	// Under some circumstances there are zero coordinates. Just leave them alone.
 	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
 	{
-		altAzPos[2]=1.0;
-		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zenith vector.";
+		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zero vector.";
+		return;
 	}
 
 	Q_ASSERT(!std::isnan(altAzPos[0]));
@@ -183,6 +176,7 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 	Q_ASSERT(!std::isnan(altAzPos[2]));
 	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
 
+	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
 	Q_ASSERT(length>0.0);
 	const double sinObs = altAzPos[2]/length;

@@ -1609,25 +1609,13 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	lightPos3.normalize();
 	
 	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();	
-	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform()->forward(eyePos);
-	// Hunt for NaNs...
-	Q_ASSERT(eyePos[0]==eyePos[0]);
-	Q_ASSERT(eyePos[1]==eyePos[1]);
-	Q_ASSERT(eyePos[2]==eyePos[2]);
+	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
+	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
+	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(eyePos);
+	//qDebug() << "-->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
 	projector->getModelViewTransform()->backward(eyePos);
-	Q_ASSERT(eyePos[0]==eyePos[0]);
-	Q_ASSERT(eyePos[1]==eyePos[1]);
-	Q_ASSERT(eyePos[2]==eyePos[2]);
-	// DIRTY HACK against flickering moon and rings! TODO: Find cause for NaN!
-	static Vec3d eyePos0;
-	if (eyePos[0] != eyePos[0]) { // detect for nan
-		qDebug() << "NaN detected!!!";
-		eyePos = eyePos0;   // restore last non-nan value in place of nan
-	}
-	else
-		eyePos0 = eyePos;   // Save non-nan value
-	eyePos.normalize();
-	
+	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
+
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
 	GL(shader->setUniformValue(shaderVars->eyeDirection, eyePos[0], eyePos[1], eyePos[2]));
