@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "SkyGui.hpp"
+#include "StelMainView.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
@@ -116,7 +117,7 @@ void PointerCoordinates::draw(StelCore *core)
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
-	QPoint p = QCursor::pos(); // get screen coordinates of mouse cursor
+	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 	Vec3d mousePosition;
 	float wh = prj->getViewportWidth()/2; // get half of width of the screen
 	float hh = prj->getViewportHeight()/2; // get half of height of the screen
@@ -124,7 +125,13 @@ void PointerCoordinates::draw(StelCore *core)
 	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
 	prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
-
+	{ // Nick Fedoseev patch
+	   Vec3d win;
+	   prj->project(mousePosition,win);
+	   float dx = prj->getViewportPosX()+wh+mx - win.v[0];
+	   float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
+	   prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
+	  }
 	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 
 	QString coordsSystem, cxt, cyt;

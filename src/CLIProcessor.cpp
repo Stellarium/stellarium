@@ -27,6 +27,7 @@
 #include <iostream>
 
 #include <QGuiApplication>
+#include <QStandardPaths>
 #include <QDir>
 
 #include <stdio.h>
@@ -148,25 +149,11 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 		confSettings->setValue("video/fullscreen", true);
 	else if (fullScreen==0)
 		confSettings->setValue("video/fullscreen", false);
-	if (!landscapeId.isEmpty()) confSettings->setValue("init_location/landscape_name", landscapeId);
-	if (!homePlanet.isEmpty()) confSettings->setValue("init_location/home_planet", homePlanet);
-	if (altitude!=-1) confSettings->setValue("init_location/altitude", altitude);
-	if (!longitude.isEmpty())
-	{
-		QRegExp longLatRx("[\\-+]?\\d+d\\d+\\'\\d+(\\.\\d+)?\"");
-		if (longLatRx.exactMatch(longitude))
-			confSettings->setValue("init_location/longitude", longitude);
-		else
-			qWarning() << "WARNING: --longitude argument has unrecognised format";
-	}
-	if (!latitude.isEmpty())
-	{
-		QRegExp longLatRx("[\\-+]?\\d+d\\d+\\'\\d+(\\.\\d+)?\"");
-		if (longLatRx.exactMatch(latitude))
-			confSettings->setValue("init_location/latitude", latitude);
-		else
-			qWarning() << "WARNING: --latitude argument has unrecognised format";
-	}
+	if (!landscapeId.isEmpty()) confSettings->setValue("location_run_once/landscape_name", landscapeId);
+	if (!homePlanet.isEmpty()) confSettings->setValue("location_run_once/home_planet", homePlanet);
+	if (altitude!=-1) confSettings->setValue("location_run_once/altitude", altitude);
+	if (!longitude.isEmpty()) confSettings->setValue("location_run_once/longitude", StelUtils::getDecAngle(longitude)); // Store longitude in radian
+	if (!latitude.isEmpty()) confSettings->setValue("location_run_once/latitude", StelUtils::getDecAngle(latitude)); // Store latitude in radian
 
 	if (!skyDate.isEmpty() || !skyTime.isEmpty())
 	{
@@ -244,6 +231,24 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 			catch (std::runtime_error& e)
 			{
 				qWarning() << "WARNING: problem while setting screenshot from config file setting: " << e.what();
+			}
+		}
+		else
+		{
+			QString screenshotDirSuffix = "/Stellarium";
+			if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+				screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+			else
+				screenshotDir = StelFileMgr::getUserDir().append(screenshotDirSuffix);
+
+			try
+			{
+				StelFileMgr::setScreenshotDir(screenshotDir);
+				confSettings->setValue("main/screenshot_dir", screenshotDir);
+			}
+			catch (std::runtime_error &e)
+			{
+				qDebug("Error: cannot create screenshot directory: %s", e.what());
 			}
 		}
 	}

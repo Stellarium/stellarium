@@ -255,8 +255,8 @@ void SearchDialog::populateCoordinateAxis()
 		case horizontal:
 		{
 			ui->AxisXLabel->setText(q_("Azimuth"));
-			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
-			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
 			ui->AxisYLabel->setText(q_("Altitude"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -265,8 +265,8 @@ void SearchDialog::populateCoordinateAxis()
 		case galactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
-			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
-			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
 			ui->AxisYLabel->setText(q_("Latitude"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -726,7 +726,7 @@ void SearchDialog::updateListTab()
 		ui->searchInEnglishCheckBox->show();
 	}
 	ui->objectTypeComboBox->blockSignals(true);
-	ui->objectTypeComboBox->clear();
+	ui->objectTypeComboBox->clear();	
 	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
 	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
 	{
@@ -736,6 +736,7 @@ void SearchDialog::updateListTab()
 			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
 		}
 	}	
+	ui->objectTypeComboBox->model()->sort(0, Qt::AscendingOrder);
 	ui->objectTypeComboBox->blockSignals(false);
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
 }

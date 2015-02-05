@@ -154,7 +154,7 @@ namespace StelUtils
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
-	//! @param v the resulting 3D unti vector
+	//! @param v the resulting 3D unit vector
 	void spheToRect(const float lng, const float lat, Vec3f& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
@@ -591,7 +591,8 @@ namespace StelUtils
 	double getDeltaTStandardError(const double jDay);
 
 	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
-	template <typename T> int sign(T val) {
+	template <typename T> int sign(T val)
+	{
 		return (T(0) < val) - (val < T(0));
 	}
 	
@@ -620,12 +621,12 @@ namespace StelUtils
 	QByteArray uncompress(const QByteArray& data);
 
 #ifdef _MSC_BUILD
-    inline double trunc(double x)
-    {
-        return (x < 0 ? std::ceil(x) : std::floor(x));
-    }
+	inline double trunc(double x)
+	{
+		return (x < 0 ? std::ceil(x) : std::floor(x));
+	}
 #else
-    inline double trunc(double x) { return ::trunc(x); }
+	inline double trunc(double x) { return ::trunc(x); }
 #endif
 }
 

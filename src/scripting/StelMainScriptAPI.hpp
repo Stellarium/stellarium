@@ -80,6 +80,7 @@ public slots:
 	//! @note for fully compatibles behavior of this function with the version 0.11.4
 	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
+	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
 	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 
 	//! get the simulation date and time as a string in ISO format,

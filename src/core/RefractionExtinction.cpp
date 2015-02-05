@@ -20,6 +20,7 @@
  * Principal implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  */
 
+#include <math.h>
 #include "StelApp.hpp"
 #include "RefractionExtinction.hpp"
 
@@ -106,50 +107,98 @@ void Refraction::setPostTransfoMat(const Mat4d& m)
 
 void Refraction::updatePrecomputed()
 {
-	press_temp_corr_Bennett=pressure/1010.f * 283.f/(273.f+temperature) / 60.f;
-	press_temp_corr_Saemundson=1.02f*press_temp_corr_Bennett;
+	press_temp_corr=pressure/1010.f * 283.f/(273.f+temperature) / 60.f;
 }
 
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
+	//altAzPos.normalize(); // TRY TO AVOID THIS!
+
+	// Something very strange is going on here! We either have NaNs or null-vectors!
+
+	// GZ: Stupid hack. I don't know if this helps in any way.
+	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
+	{
+		altAzPos[2]=1.0;
+		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zenith vector.";
+	}
+	Q_ASSERT(!std::isnan(altAzPos[0]));
+	Q_ASSERT(!std::isnan(altAzPos[1]));
+	Q_ASSERT(!std::isnan(altAzPos[2]));
+	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
+
 	const double length = altAzPos.length();
-	double geom_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
+	Q_ASSERT(length>0.0);
+	const double sinGeo = altAzPos[2]/length;
+	Q_ASSERT(fabs(sinGeo)<=1.0);
+	double geom_alt_rad = std::asin(sinGeo);
+	double geom_alt_deg = 180./M_PI*geom_alt_rad;
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-		float r=press_temp_corr_Saemundson / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f;
+		double r=press_temp_corr * ( 1.02 / std::tan((geom_alt_deg+10.3/(geom_alt_deg+5.11))*M_PI/180.) + 0.0019279);
 		geom_alt_deg += r;
 		if (geom_alt_deg > 90.)
 			geom_alt_deg=90.;
-		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
 	else if(geom_alt_deg>MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG)
 	{
 		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG and bottom of transition zone
-		float r_m5=press_temp_corr_Saemundson / std::tan((MIN_GEO_ALTITUDE_DEG+10.3f/(MIN_GEO_ALTITUDE_DEG+5.11f))*M_PI/180.f) + 0.0019279f;
+		float r_m5=press_temp_corr * ( 1.02f / std::tan((MIN_GEO_ALTITUDE_DEG+10.3f/(MIN_GEO_ALTITUDE_DEG+5.11f))*M_PI/180.f) + 0.0019279f);
 		geom_alt_deg += r_m5*(geom_alt_deg-(MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG))/TRANSITION_WIDTH_GEO_DEG;
-		altAzPos[2]=std::sin(geom_alt_deg*M_PI/180.)*length;
 	}
+	else return;
+	// At this point we have corrected geometric altitude. Note that if we just change altAzPos[2], we would change vector length, so this would change our angles.
+	// We have to shorten X,Y components of the vector as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
+
+	const double refr_alt_rad=geom_alt_deg*M_PI/180.;
+	const double sinRef=std::sin(refr_alt_rad);
+
+	const double shortenxy=((fabs(sinGeo)>=1.0) ? 1.0 :
+			std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo))); // we need double's mantissa length here, sorry!
+
+	altAzPos[0]*=shortenxy;
+	altAzPos[1]*=shortenxy;
+	altAzPos[2]=sinRef*length;
+	//Q_ASSERT(std::fabs(altAzPos.length()-1.)<0.0001);
+
 }
 
 void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
+	//altAzPos.normalize(); // TRY TO AVOID THIS!
+
+	// Something very strange is going on here! We either have NaNs or null-vectors!
+
+	// GZ: Stupid hack. I don't know if this helps in any way.
+	if( (fabs(altAzPos[0])==0.0) && (fabs(altAzPos[1])==0.0) && (fabs(altAzPos[2])==0.0) )
+	{
+		altAzPos[2]=1.0;
+		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zenith vector.";
+	}
+
+	Q_ASSERT(!std::isnan(altAzPos[0]));
+	Q_ASSERT(!std::isnan(altAzPos[1]));
+	Q_ASSERT(!std::isnan(altAzPos[2]));
+	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
+
 	const double length = altAzPos.length();
-	float obs_alt_deg=180./M_PI*std::asin(altAzPos[2]/length);
-	if (obs_alt_deg > 0.22879)
+	Q_ASSERT(length>0.0);
+	const double sinObs = altAzPos[2]/length;
+	Q_ASSERT(fabs(sinObs)<=1.0);
+	double obs_alt_deg=180./M_PI*std::asin(sinObs);
+	if (obs_alt_deg > 0.22879f)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
-		float r=press_temp_corr_Bennett / std::tan((obs_alt_deg+7.31f/(obs_alt_deg+4.4f))*M_PI/180.) + 0.0013515f;
+		double r=press_temp_corr * (1. / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4))*M_PI/180.) + 0.0013515);
 		obs_alt_deg -= r;
-		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.f)*length;
 	}
 	else if (obs_alt_deg > MIN_APP_ALTITUDE_DEG)
 	{
 		// backward refraction from polynomial fit against Saemundson[-5...-0.3]
 		float r=(((((0.0444f*obs_alt_deg+.7662f)*obs_alt_deg+4.9746f)*obs_alt_deg+13.599f)*obs_alt_deg+8.052f)*obs_alt_deg-11.308f)*obs_alt_deg+34.341f;
-		obs_alt_deg -= press_temp_corr_Bennett*r;
-		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
+		obs_alt_deg -= press_temp_corr*r;
 	}
 	else if (obs_alt_deg > MIN_APP_ALTITUDE_DEG-TRANSITION_WIDTH_APP_DEG)
 	{
@@ -158,9 +207,20 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 				+4.9746f)*MIN_APP_ALTITUDE_DEG+13.599f)*MIN_APP_ALTITUDE_DEG
 			      +8.052f)*MIN_APP_ALTITUDE_DEG-11.308f)*MIN_APP_ALTITUDE_DEG+34.341f;
 
-		obs_alt_deg -= r_min*press_temp_corr_Bennett*(obs_alt_deg-(MIN_APP_ALTITUDE_DEG-TRANSITION_WIDTH_APP_DEG))/TRANSITION_WIDTH_APP_DEG;
-		altAzPos[2]=std::sin(obs_alt_deg*M_PI/180.)*length;
+		obs_alt_deg -= r_min*press_temp_corr*(obs_alt_deg-(MIN_APP_ALTITUDE_DEG-TRANSITION_WIDTH_APP_DEG))/TRANSITION_WIDTH_APP_DEG;
 	}
+	else return;
+	// At this point we have corrected observed altitude. Note that if we just change altAzPos[2], we would change vector length, so this would change our angles.
+	// We have to make X,Y components of the vector a bit longer as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
+
+	const double geo_alt_rad=obs_alt_deg*M_PI/180.;
+	const double sinGeo=std::sin(geo_alt_rad);
+	const double longerxy=((fabs(sinObs)>=1.0) ? 1.0 :
+			std::sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs)));
+	altAzPos[0]*=longerxy;
+	altAzPos[1]*=longerxy;
+	altAzPos[2]=sinGeo*length;
+	//Q_ASSERT(std::fabs(altAzPos.length()-1.)<0.0001); // WHY DOES THIS FIRE???
 }
 
 void Refraction::forward(Vec3d& altAzPos) const

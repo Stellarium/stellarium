@@ -73,7 +73,6 @@ void StelFileMgr::init()
 		qFatal("Error: cannot create user config directory: %s", e.what());
 	}
 
-
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 
@@ -124,25 +123,7 @@ void StelFileMgr::init()
 	}
 	
 	// Then add the installation directory to the search path
-	fileLocations.append(installDir);
-
-	// Wasn't set path to screenshots directory via --screenshot-dir?
-	if (screenshotDir.isEmpty())
-	{
-		QString screenshotDirSuffix = "/Stellarium";
-		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
-			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
-		else
-			screenshotDir = userDir.append(screenshotDirSuffix);
-	}
-	try
-	{
-		makeSureDirExistsAndIsWritable(screenshotDir);
-	}
-	catch (std::runtime_error &e)
-	{
-		qDebug("Error: cannot create screenshot directory: %s", e.what());
-	}
+	fileLocations.append(installDir);	
 }
 
 
@@ -476,7 +457,7 @@ QString StelFileMgr::getWin32SpecialDirPath(int csidlId)
 {
 	// This function is implemented using code from QSettings implementation in QT
 	// (GPL edition, version 4.3).
-	
+
 	// Stellarium works only on wide-character versions of Windows anyway,
 	// therefore it's using only the wide-char version of the code. --BM
 	QLibrary library(QLatin1String("shell32"));

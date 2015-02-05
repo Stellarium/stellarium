@@ -79,6 +79,7 @@ void ViewDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateZhrDescription();
 		populateLists();
+		populateLightPollution();
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
@@ -385,9 +386,9 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 	nelm.append("4.0");
 
 	QString tooltip = QString("%1 (%2 %3)")
-			.arg(list.at(i).toLocal8Bit().constData())
+			.arg(list.at(i))
 			.arg(q_("The naked-eye limiting magnitude is"))
-			.arg(nelm.at(i).toLocal8Bit().constData());
+			.arg(nelm.at(i));
 
 	ui->lightPollutionSpinBox->setToolTip(tooltip);
 }

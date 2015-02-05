@@ -38,8 +38,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <cmath>
 #include <cstdlib>
 
-static const float icosahedron_G = 0.5*(1.0+sqrt(5.0));
-static const float icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
+static const float icosahedron_G = 0.5*(1.0+std::sqrt(5.0));
+static const float icosahedron_b = 1.0/std::sqrt(1.0+icosahedron_G*icosahedron_G);
 static const float icosahedron_a = icosahedron_b*icosahedron_G;
 
 static const Vec3f icosahedron_corners[12] =
@@ -374,7 +374,7 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 		if (!corner0_inside[i] && !corner1_inside[i] && !corner2_inside[i])
 		{
 			// totally outside this SphericalCap
-			return;
+			goto end;
 		}
 		else if (corner0_inside[i] && corner1_inside[i] && corner2_inside[i])
 		{
@@ -443,9 +443,11 @@ void StelGeodesicGrid::searchZones(int lev,int index,
 #endif
 		}
 	}
+end:
 #if defined __STRICT_ANSI__ || !defined __GNUC__
 	delete[] halfs_used;
 #endif
+	return;
 }
 
 /*************************************************************************
