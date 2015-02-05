@@ -118,10 +118,6 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zero vector.";
 		return;
 	}
-	Q_ASSERT(!std::isnan(altAzPos[0]));
-	Q_ASSERT(!std::isnan(altAzPos[1]));
-	Q_ASSERT(!std::isnan(altAzPos[2]));
-	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
 
 	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
@@ -170,11 +166,6 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zero vector.";
 		return;
 	}
-
-	Q_ASSERT(!std::isnan(altAzPos[0]));
-	Q_ASSERT(!std::isnan(altAzPos[1]));
-	Q_ASSERT(!std::isnan(altAzPos[2]));
-	Q_ASSERT( (fabs(altAzPos[0])>0.0) || (fabs(altAzPos[1])>0.0) || (fabs(altAzPos[2])>0.0) );
 
 	//altAzPos.normalize(); // TRY TO AVOID THIS!
 	const double length = altAzPos.length();
