@@ -5,7 +5,7 @@
 #include "ui_scenery3dDialog.h"
 
 class Scenery3dMgr;
-class SceneInfo;
+struct SceneInfo;
 
 class Scenery3dDialog : public StelDialog
 {
