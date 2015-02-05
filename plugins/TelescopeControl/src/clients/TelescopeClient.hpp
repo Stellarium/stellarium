@@ -200,6 +200,7 @@ private:
 	Equinox equinox;
 	
 private slots:
+	void socketConnected(void);
 	void socketFailed(QAbstractSocket::SocketError socketError);
 };
 
