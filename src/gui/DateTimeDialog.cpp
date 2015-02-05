@@ -122,14 +122,8 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
-	StelApp::getInstance().getCore()->setJDay(jday+StelApp::getInstance().getCore()->getDeltaT(jday)/86400.);
-	return true;
-}
-
-bool DateTimeDialog::validMjd(double mjday)
-{
-	pushToWidgets();	
-	StelApp::getInstance().getCore()->setMJDay(mjday+StelApp::getInstance().getCore()->getDeltaT(mjday)/86400.);
+	StelCore *core = StelApp::getInstance().getCore();
+	core->setJDay(jday+core->getDeltaT(jday)/86400.);
 	return true;
 }
 
@@ -208,7 +202,7 @@ void DateTimeDialog::mjdChanged(double nmjd)
 {
 	if ( mjd != nmjd)
 	{
-		validMjd(nmjd);
+		validJd(2400000.5 + nmjd);
 	}
 }
 
@@ -240,14 +234,8 @@ void DateTimeDialog::pushToWidgets()
 	{
 		ui->spinner_second->setValue(second);
 	}
-	if (!ui->spinner_jd->hasFocus())
-	{
-		ui->spinner_jd->setValue(jd);
-	}
-	if (!ui->spinner_mjd->hasFocus())
-	{
-		ui->spinner_mjd->setValue(mjd);
-	}
+	ui->spinner_jd->setValue(jd);
+	ui->spinner_mjd->setValue(mjd);
 	connectSpinnerEvents();
 }
 
