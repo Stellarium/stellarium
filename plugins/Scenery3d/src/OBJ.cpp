@@ -56,12 +56,39 @@
 #include <iostream>
 #include <limits>
 
-namespace
+bool StelModelCompFunc(const OBJ::StelModel& lhs, const OBJ::StelModel& rhs)
 {
-    bool StelModelCompFunc(const OBJ::StelModel& lhs, const OBJ::StelModel& rhs)
-    {
-	return lhs.pMaterial->alpha > rhs.pMaterial->alpha;
-    }
+	const OBJ::Material* lMat = lhs.pMaterial;
+	const OBJ::Material* rMat = rhs.pMaterial;
+
+	//same material, should be in the same batch
+	if(lMat == rMat)
+		return false;
+	else
+	{
+		//transparent should be drawn at the end
+		if(lMat->hasTransparency != rMat->hasTransparency)
+		{
+			return lMat->hasTransparency < rMat->hasTransparency;
+		}
+		else if(lMat->hasTransparency && lMat->alpha != rMat->alpha)
+		{
+			//order by alpha - larger values first
+			return lMat->alpha > rMat->alpha;
+		}
+		else if(lMat->hasSpecularity!=rMat->hasSpecularity)
+		{
+			//no transparency, order by specularity
+			return lMat->hasSpecularity < rMat->hasSpecularity;
+		}
+		else
+		{
+			//order by pointer address, this should induce some order in the materials
+			//because they are all stored successively in a vector!
+			//making sure that material switches are minimized
+			return lMat < rMat;
+		}
+	}
 }
 
 bool OBJ::vertexArraysSupported=false;
@@ -349,6 +376,12 @@ int OBJ::addVertex(VertCacheT& vertexCache, int hash, const Vertex *pVertex)
 
 void OBJ::buildStelModels(const IntVector& attributeArray)
 {
+	//TODO FS this can be further optimized!
+	//Imagine the case where 2 objects with the same model are not next to each other in the OBJ
+	//then the current approach creates 2 StelModels
+	//One could recombine them afterwards, or sort the vertices by their material before calling this
+	//This would reduce material switching during rendering.
+
     //Group model's triangles based on material
     StelModel* pStelModel = 0;
     int materialId = -1;
@@ -387,10 +420,6 @@ void OBJ::buildStelModels(const IntVector& attributeArray)
 	    ++pStelModel->triangleCount;
 	}
     }
-
-    // Sort the meshes based on its material alpha. Fully opaque meshes
-    // towards the front and fully transparent towards the back.
-    std::sort(m_stelModels.begin(), m_stelModels.end(), StelModelCompFunc);
 }
 
 void OBJ::generateNormals()
@@ -694,7 +723,8 @@ void OBJ::importFirstPass(QFile& pFile, MatCacheT& materialCache)
 	    while(!lineStream.atEnd())
 	    {
 		lineStream>>buffer;
-		++m_numberOfTriangles;
+		if(!buffer.isEmpty())
+			++m_numberOfTriangles;
 	    }
 
 	    break;
@@ -754,9 +784,9 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
     unsigned int v[3] = {0};
     unsigned int vt[3] = {0};
     unsigned int vn[3] = {0};
-    int numVertices = 0;
-    int numTexCoords = 0;
-    int numNormals = 0;
+    unsigned int numVertices = 0;
+    unsigned int numTexCoords = 0;
+    unsigned int numNormals = 0;
     unsigned int numTriangles = 0;
     int activeMaterial = 0;
     char buffer[256] = {0};
@@ -987,6 +1017,12 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 	}
     }
 
+    //some sanity assertions to notice loader errors as they happen
+    Q_ASSERT(numVertices == m_numberOfVertexCoords);
+    Q_ASSERT(numNormals == m_numberOfNormals);
+    Q_ASSERT(numTexCoords == m_numberOfTextureCoords);
+    Q_ASSERT(numTriangles == m_numberOfTriangles);
+
     //Build the StelModels
     buildStelModels(attributeArray);
     m_hasStelModels = m_numberOfStelModels > 0;
@@ -1105,13 +1141,13 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 	case 'i': // illum
 	    fscanf(pFile, "%d", &iTmp);
 
-	    if(iTmp>SPECULAR && iTmp != TRANSLUCENT)
+	    if(iTmp>Material::I_SPECULAR && iTmp != Material::I_TRANSLUCENT)
 	    {
 		    qWarning()<<"[Scenery3d] Treating illum "<<iTmp<<"as TRANSLUCENT";
-		    iTmp = TRANSLUCENT;
+		    iTmp = Material::I_TRANSLUCENT;
 	    }
 
-	    pMaterial->illum = (Illum) iTmp;
+	    pMaterial->illum = (Material::Illum) iTmp;
 	    break;
 
 	case 'm': //! map_Kd, map_bump
@@ -1195,6 +1231,88 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
     return true;
 }
 
+void OBJ::Material::finalize()
+{
+	//check if texture has an alpha channel
+	bool alphaChannel = false;
+	if(!texture.isNull())
+		alphaChannel = texture->hasAlphaChannel();
+
+
+	//test if specular coefficient is non-zero
+	hasSpecularity = specular.lengthSquared()>0.0001f;
+
+	//test if we require blending
+	if(alpha< .0f)
+	{
+		//no alpha value set, no transparency
+		hasTransparency = false;
+	}
+	else if (alpha <1.0f)
+	{
+		//alpha value set, between 0 and 1
+		hasTransparency = true;
+	}
+	else
+	{
+		//alpha = 1, check if texture has alpha channel, otherwise it makes no sense enabling transparency
+		hasTransparency = alphaChannel;
+	}
+
+	if(illum>=0)
+	{
+		if(ambient[0]< .0f) //set to old default value
+			ambient = QVector3D(0.2f,0.2f,0.2f);
+
+		//an "Illum" was set, replace with "legacy" values
+		switch(illum)
+		{
+			case I_DIFFUSE:
+				//explicitely set Ka to Kd
+				ambient = diffuse;
+				hasSpecularity = false;
+				hasTransparency = false;
+				break;
+			case I_DIFFUSE_AND_AMBIENT:
+				//enable specular
+				hasSpecularity = false;
+				hasTransparency = false;
+				break;
+			case I_SPECULAR:
+				hasSpecularity = true;
+				hasTransparency = false;
+				break;
+			case I_TRANSLUCENT:
+				hasSpecularity = false;
+				if(alpha<.0f)
+				{
+					alpha = 1.0f;
+					hasTransparency = alphaChannel;
+				}
+				else
+				{
+					hasTransparency = true;
+				}
+				break;
+			default:
+				break;
+		}
+	}
+	else
+	{
+		if(ambient[0]< .0f)
+		{
+			//ambient was not set, old "illum 0" behaviour, set Ka to Kd
+			ambient = diffuse;
+		}
+
+		if(alpha <.0f)
+		{
+			alpha = 1.0f;
+		}
+	}
+}
+
 void OBJ::uploadTexturesGL()
 {
     StelTextureMgr textureMgr;
@@ -1267,7 +1385,12 @@ void OBJ::uploadTexturesGL()
 	    }
 	}
 
+	//we have texture information, now finalize the material
+	pMaterial->finalize();
     }
+
+    //optimize the StelModel order depending on their materials
+    std::sort(m_stelModels.begin(), m_stelModels.end(), StelModelCompFunc);
 
     qDebug()<<"[Scenery3d] Uploaded OBJ textures to GL";
 }
@@ -1394,9 +1517,6 @@ void OBJ::unbindBuffersGL()
 
 void OBJ::transform(QMatrix4x4 mat)
 {
-    pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox.max = Vec3f(-std::numeric_limits<float>::max()); //numeric_limits<T>::lowest() is C++11, but this is the same
-
     QMatrix3x3 normalMat = mat.normalMatrix();
 
     //Transform all vertices and normals by mat
@@ -1423,16 +1543,10 @@ void OBJ::transform(QMatrix4x4 mat)
 	pVertex->bitangent.v[0] = tf.x();
 	pVertex->bitangent.v[1] = tf.y();
 	pVertex->bitangent.v[2] = tf.z();
-
-	//Update bounding box in case it changed
-	pBoundingBox.min = Vec3f( std::min(static_cast<float>(pVertex->position[0]), pBoundingBox.min[0]),
-				  std::min(static_cast<float>(pVertex->position[1]), pBoundingBox.min[1]),
-				  std::min(static_cast<float>(pVertex->position[2]), pBoundingBox.min[2]));
-
-	pBoundingBox.max = Vec3f( std::max(static_cast<float>(pVertex->position[0]), pBoundingBox.max[0]),
-				  std::max(static_cast<float>(pVertex->position[1]), pBoundingBox.max[1]),
-				  std::max(static_cast<float>(pVertex->position[2]), pBoundingBox.max[2]));
     }
+
+    //Update bounding box in case it changed
+    findBounds();
 }
 
 void OBJ::findBounds()
@@ -1441,37 +1555,31 @@ void OBJ::findBounds()
     pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
     pBoundingBox.max = Vec3f(-std::numeric_limits<float>::max());
 
-    for(int i=0; i<getNumberOfVertices(); ++i)
-    {
-	Vertex* pVertex = &m_vertexArray[i];
-
-	pBoundingBox.min = Vec3f( std::min(static_cast<float>(pVertex->position[0]), pBoundingBox.min[0]),
-				  std::min(static_cast<float>(pVertex->position[1]), pBoundingBox.min[1]),
-				  std::min(static_cast<float>(pVertex->position[2]), pBoundingBox.min[2]));
-
-	pBoundingBox.max = Vec3f( std::max(static_cast<float>(pVertex->position[0]), pBoundingBox.max[0]),
-				  std::max(static_cast<float>(pVertex->position[1]), pBoundingBox.max[1]),
-				  std::max(static_cast<float>(pVertex->position[2]), pBoundingBox.max[2]));
-    }
-
     //Find AABB per Stel Model
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
-	StelModel* pStelModel = &m_stelModels[i];
-    pStelModel->bbox = AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
+	StelModel& pStelModel = m_stelModels[i];
+	pStelModel.bbox = AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
 
-	for(int j=pStelModel->startIndex; j<pStelModel->triangleCount*3; ++j)
+	for(int j=pStelModel.startIndex; j<(pStelModel.startIndex + pStelModel.triangleCount*3); ++j)
 	{
-	    unsigned int vertexIndex = m_indexArray[j];
-	    Vertex* pVertex = &m_vertexArray[vertexIndex];
+	    const Vertex& pVertex = m_vertexArray.at(m_indexArray[j]);
 
-	    pStelModel->bbox.min = Vec3f( std::min(static_cast<float>(pVertex->position[0]), pStelModel->bbox.min[0]),
-					  std::min(static_cast<float>(pVertex->position[1]), pStelModel->bbox.min[1]),
-					  std::min(static_cast<float>(pVertex->position[2]), pStelModel->bbox.min[2]));
+	    pBoundingBox.min = Vec3f( std::min(static_cast<float>(pVertex.position[0]), pBoundingBox.min[0]),
+				      std::min(static_cast<float>(pVertex.position[1]), pBoundingBox.min[1]),
+				      std::min(static_cast<float>(pVertex.position[2]), pBoundingBox.min[2]));
 
-	    pStelModel->bbox.max = Vec3f( std::max(static_cast<float>(pVertex->position[0]), pStelModel->bbox.max[0]),
-					  std::max(static_cast<float>(pVertex->position[1]), pStelModel->bbox.max[1]),
-					  std::max(static_cast<float>(pVertex->position[2]), pStelModel->bbox.max[2]));
+	    pBoundingBox.max = Vec3f( std::max(static_cast<float>(pVertex.position[0]), pBoundingBox.max[0]),
+				      std::max(static_cast<float>(pVertex.position[1]), pBoundingBox.max[1]),
+				      std::max(static_cast<float>(pVertex.position[2]), pBoundingBox.max[2]));
+
+	    pStelModel.bbox.min = Vec3f( std::min(static_cast<float>(pVertex.position[0]), pStelModel.bbox.min[0]),
+					  std::min(static_cast<float>(pVertex.position[1]), pStelModel.bbox.min[1]),
+					  std::min(static_cast<float>(pVertex.position[2]), pStelModel.bbox.min[2]));
+
+	    pStelModel.bbox.max = Vec3f( std::max(static_cast<float>(pVertex.position[0]), pStelModel.bbox.max[0]),
+					  std::max(static_cast<float>(pVertex.position[1]), pStelModel.bbox.max[1]),
+					  std::max(static_cast<float>(pVertex.position[2]), pStelModel.bbox.max[2]));
 	}
     }
 }
@@ -1480,8 +1588,7 @@ void OBJ::renderAABBs()
 {
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
-	StelModel* pStelModel = &m_stelModels[i];
-	pStelModel->bbox.render();
+	m_stelModels.at(i).bbox.render();
     }
 }
 

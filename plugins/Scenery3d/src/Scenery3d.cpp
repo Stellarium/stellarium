@@ -535,16 +535,7 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::Material &mat)
 {
 	//ambient is calculated depending on illum model
-	if(mat.illum > OBJ::DIFFUSE)
-	{
-		//material uses own ambient color
-		SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.ambient * lightInfo.ambient);
-	}
-	else
-	{
-		//material uses diffuse as ambient color
-		SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.diffuse * lightInfo.ambient);
-	}
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_AMBIENT,mat.ambient * lightInfo.ambient);
 
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_DIFFUSE, mat.diffuse * lightInfo.directional);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MIX_TORCHDIFFUSE, mat.diffuse * lightInfo.torchDiffuse);
@@ -553,7 +544,7 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.shininess);
 	//force alpha to 1 here for non-translucent mats (fixes incorrect blending in cubemap)
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA, mat.illum == OBJ::TRANSLUCENT? mat.alpha : 1.0f);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.hasTransparency ? mat.alpha : 1.0f);
 
 	if(mat.texture)
 	{
@@ -603,8 +594,11 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		const OBJ::Material* pMaterial = pStelModel->pMaterial;
 		Q_ASSERT(pMaterial);
 
+		++drawnModels;
+
 		if(lastMaterial!=pMaterial)
 		{
+			++materialSwitches;
 			lastMaterial = pMaterial;
 
 			//get a shader from shadermgr that fits the current state + material combo
@@ -621,6 +615,8 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 				curShader->bind();
 				if(!initialized.contains(curShader))
 				{
+					++shaderSwitches;
+
 					//needs first-time initialization for this pass
 					if(shading)
 					{
@@ -653,7 +649,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 				}
 			}
 
-			if(pMaterial->illum == OBJ::TRANSLUCENT )
+			if(pMaterial->hasTransparency )
 			{
 				//TODO provide Z-sorting for transparent objects (center of bounding box should be fine)
 				if(!blendEnabled)
@@ -1556,6 +1552,11 @@ void Scenery3d::drawDebug()
 
 		sceneBoundingBox.render();
 
+		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.4f,0.4f,0.4f,1.0f));
+		objModel->renderAABBs();
+
+		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
+
 		if(fixShadowData)
 		{
 			camFrustShadow.drawFrustum();
@@ -1627,7 +1628,13 @@ void Scenery3d::drawDebug()
     }
 
     screen_y -= 100.f;
-    QString str = QString("Drawn Tris: %1").arg(drawnTriangles);
+    QString str = QString("Last frame stats:");
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("%1 tris, %2 mdls").arg(drawnTriangles).arg(drawnModels);
+    painter.drawText(screen_x, screen_y, str);
+    screen_y -= 15.0f;
+    str = QString("%1 mats, %2 shaders").arg(materialSwitches).arg(shaderSwitches);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
     str = "View Pos";
@@ -2186,7 +2193,7 @@ void Scenery3d::draw(StelCore* core)
 		return;
 
 	//reset render statistic
-	drawnTriangles = 0;
+	drawnTriangles = drawnModels = materialSwitches = shaderSwitches = 0;
 
 	requiresCubemap = core->getCurrentProjectionType() != StelCore::ProjectionPerspective;
 	//update projector from core
