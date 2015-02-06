@@ -80,7 +80,10 @@ public:
 
 	//! Returns the current brightness level
 	float getBrightness() const { return landscapeBrightness; }
-
+	//! Returns the lightscape brightness
+	float getLightscapeBrightness() const { return lightScapeBrightness; }
+	//! Returns the lightscape brighness modulated with the fader's target state (i.e. binary on/off)
+	float getTargetLightscapeBrightness() const { return lightScapeBrightness * illumFader; }
 	//! Gets the currently effective lightscape brightness (modulated by the fader)
 	float getEffectiveLightscapeBrightness() const { return lightScapeBrightness * illumFader.getInterstate(); }
 

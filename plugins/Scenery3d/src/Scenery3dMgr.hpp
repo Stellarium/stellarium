@@ -167,6 +167,9 @@ public slots:
     void setEnableLazyDrawing(const bool val);
     bool getEnableLazyDrawing() const;
 
+    //! Forces a redraw of the cubemap
+    void forceCubemapRedraw();
+
     //! Sets the interval for cubemap lazy-drawing mode
     void setLazyDrawingInterval(const double val);
     double getLazyDrawingInterval() const;
