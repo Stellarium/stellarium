@@ -42,14 +42,13 @@ moving.)\footnote{Bug or feature? I (GZ) had to change keyboard
   handling in the main program, somewhat breaking the plugin
   concept. TBD: Discuss with the core team.}
 
-[Ctrl-K] toggles coordinate display. If you have georeferenced models
+Further key bindings exist which can be configured using the Stellarium
+default key-binding interface. Some options are also available in the
+Scenery3d dialog. For example coordinate display can be enabled. If you have georeferenced models
 in a true geographical coordinate grid, e.g. UTM or Gauss-Krueger, you
 will especially like this, and this makes the plugin usable for
 scientific purposes. Display shows grid name, Easting, Northing,
 Altitude of ground, and eye height above ground.
-
-Press [Ctrl+Space] to toggle shadow display. Note that currently
-textures are not displayed when shadow map is active. \footnote{ShadowMap is currently being improved by Andrei Borza/TUW.}
 
 \section{Hardware Requirements}
 \label{sec:HardwareRequirements}
@@ -67,19 +66,12 @@ perspective projection, and the program will switch to it as soon as
 you switch on, and switch back once you switch off the Scenery3d
 plugin.
 
-You can influence rendering quality, but also speed, with 2 config
-variables in the global \filename{config.ini}, which default to these values:
-\begin{verbatim}
-[Scenery3d]
-cubemapSize                         = 1024
-shadowmapSize                       = 1024
-\end{verbatim}
-
-Larger numbers will improve image quality. On fast computers, try
-sizes of upto 4096, on slower ones maybe only 512, but always use a
-power of 2.  Use \verb|cubemapSize=0| to switch off using the framebuffer
-hardware extension, but you will be limited to perspective projection
-in this case.
+You can influence rendering quality, but also speed, using the plugin's 
+GUI, which provides some options such as enabling the use
+of shadows, bumpmapping or configuring the sizes of the textures used
+for the cubemap or shadowmaps. Larger values there improve the quality,
+but require faster hardware for smooth results. For further information
+on the different options, consult the tooltips in the interface.
 
 
 \section{Model Configuration}
@@ -161,24 +153,34 @@ the material for the respective face group. If necessary, you must
 edit your OBJ file.
 
 The MTL file contains the material parameters. The minimum that should be specified is 
-either \cmd{map\_Kd} or a \cmd{Kd} line specifying color values used for the respective faces. But there are 
-other options in MTL files, and the supported parameters and defaults are listed in Table~\ref{tab:MTL}.
+either \cmd{map\_Kd} or a \cmd{Kd} line specifying color values used for the respective faces. But there are other options in MTL files, and the supported parameters and defaults are listed in Table~\ref{tab:MTL}.
+
+If no ambient color is specified, the diffuse color values are taken for the ambient color. An optional emissive term \cmd{Ke} can be added, which is modulated to only be visible during nighttime. It can optionally also be modulated by the emissive texture \cmd{map\_Ke}. 
+
+If a value for \cmd{Ks} is specified, specularity is evaluated using the \href{https://en.wikipedia.org/wiki/Phong_reflection_model}{Phong reflection model} with \cmd{Ns} as the exponential shininess constant. Larger shininess means smaller specular highlights (more metal-like appearance). Specularity is not modulated by the texture maps.
+
+If a value for \cmd{d} or \cmd{Tr} exists, alpha blending is enabled for this material. This simulates transparency effects. Transparency can be further controlled using the alpha channel of the \cmd{map\_Kd} texture.
+
+A simpler and usually more performant way to achieve simple ``cutout'' transparency effects is alpha-testing, by setting \cmd{bAlphatest} to 1. This simply discards all pixels of the model where the alpha value of the \cmd{map\_Kd} is below the \cmd{transparency\_threshold} value from \filename{scenery3d.ini}, making ``holes'' in the model. This also produces better shadows for such objects. If required, alpha testing can be combined with ``real'' blending-basded transparency.
+
+Sometimes, some exported objects only have a single side, and are only visible from one side when looked at in Scenery3d. This is caused by an optimization called \href{https://en.wikipedia.org/wiki/Back-face_culling}{back-face culling}, which skips drawing the back sides of objects because they are usually not visible anyway. If possible, avoid such ``thin'' geometry, this will also produce better shadows on the object. As a workaround, you can also set \cmd{bBackface} to 1 to disable back-face culling for this material.
+
+The optional \cmd{map\_bump} enables the use of a tangent-space \href{https://en.wikipedia.org/wiki/Normal_mapping}{normal maps}, which provides a dramatic improvement in surface detail under illumination.
 
 \begin{table}
 \begin{tabular}{llll}
 Parameter&Default      &Range     & Meaning\\
-Ka       &0.2 0.2 0.2  & 0..1 each& R/G/B Ambient color\\
-Kd       &0.8 0.8 0.8  & 0..1 each& R/G/B Diffuse color\\
-Ks       &0.0 0.0 0.0  & 0..1 each& R/G/B Specular color\\
-Ns       &0.0          & 0...128  & shinyness \\
-d or Tr  &1.0          & 0..1     & opacity \\
-illum    &0            & 0, 1, 2  & 0: Ka=Kd, Ns=0 \\
-         &             &          & 1: Kd, Ka as given, Ns=0\\
-         &             &          & 2: Kd, Ka, Ks, Ns as given, glossy highlights\\
-         &             &          & 9: Only Kd and d evaluated.\\
-         &             &          & \hphantom{9:} allows semitransparent objects, limited application.\\
-map\_Kd  & (none)      & filename & texture map to be mixed with Ka, Kd \\
-map\_bump& (none)      & filename & normal map for surface roughness  
+\cmd{Ka}       &set to \cmd{Kd} values & $0\dots1$ each& R/G/B Ambient color\\
+\cmd{Kd}      &0.8 0.8 0.8  & $0\dots1$ each& R/G/B Diffuse color\\
+\cmd{Ke}      &0.0 0.0 0.0  & $0\dots1$ each& R/G/B Emissive color\\
+\cmd{Ks}      &0.0 0.0 0.0  & $0\dots1$ each& R/G/B Specular color\\
+\cmd{Ns}       &8.0          & $0\dots\infty$  & shinyness \\
+\cmd{d} or \cmd{Tr}  &1.0          & $0\dots1$     & opacity \\
+\cmd{bAlphatest}&0           & 0 or 1   & perform alpha test \\
+\cmd{bBackface}&0            & 0 or 1   & render backface \\
+\cmd{map\_Kd}  & (none)      & filename & texture map to be mixed with Ka, Kd \\
+\cmd{map\_Ke}  & (none)      & filename & texture map to be mixed with Ke \\
+\cmd{map\_bump}& (none)      & filename & normal map for surface roughness  
 \end{tabular}
 \caption{MTL parameters evaluated}
 \label{tab:MTL}
@@ -187,7 +189,10 @@ map\_bump& (none)      & filename & normal map for surface roughness
 On reasonably good hardware (tested on a notebook PC with NVidia M9800
 GTS), models up to 100.000 triangles are fluent, up to 250.000 are
 still ``interactive''.  If display is too slow, switch to perspective
-projection: all other projections require almost sixfold effort! 
+projection: all other projections require almost sixfold effort!
+You can also try if the new ``lazy'' cubemap mode works for you, where
+the scene is only rendered in specific timesteps or when movement happens.
+See in the GUI for details.
 
 
 \subsection{Configuring OBJ for Scenery3d}
@@ -263,14 +268,39 @@ landscape called \filename{Zero}.
 \begin{verbatim}
 scenery=<Temple>.obj         The complete model, including visible ground.
 ground=<Temple>_ground.obj   Optional: separate ground plane. (NULL for zero altitude.)
-description=<Description>    What you can see in this scenery, what to 
-                             look for, historical context, etc.
+description=<Description>    A basic scene description (including HTML)
+\end{verbatim}
+The \filename{scenery3d.ini} may contain a simple scene description, but it is recommended to use the new \emph{localizable} description format: in the scene's directory (where \filename{scenery3d.ini} lies) create files in the format \filename{description.<lang\_code>.utf8} which can contain arbitrary \cmd{UTF-8}-encoded HTML content. \cmd{lang\_code} stands for the ISO 639 language code.
+\begin{verbatim}
 author=<Your Name yourname@yourplace.com>
 copyright=<Copyright Info>
 
 obj_order=XYZ      | Use this if you have used an exporter which swaps Y/Z coordinates.
                    | Defaults to XYZ, other options: XZY, YZX, YXZ, ZXY, ZYX
+camNearZ=0.3       This defines the distance of the camera near plane, default 0.3.
+                   Everything closer than this value to the camera can not be 
+                   displayed. Must be larger than zero. It may seem tempting 
+                   to set this very small, but this will lead to accuracy issues. 
+                   Recommendation is not to go under 0.1
+camFarZ=10000      Defines the maximal viewing distance, default 10000.
+shadowDistance=<val>  The maximal distance shadows are displayed. If left out, the
+                      value from camFarZ is used here. If this is set to a smaller
+                      value, this may increase the quality of the shadows that are
+                      still visible.
+shadowSplitWeight=0..1 Decimal value for further shadow tweaking. If you require
+                       better shadows up close, try setting this to higher values.
+                       The default is calculated using a heuristic that incorporates
+                       scene size.
 
+[general]
+\end{verbatim}
+The general section defines some further import/rendering options.
+\begin{verbatim}
+transparency_threshold=0.5   Defines the alpha threshold for alpha-testing, 
+                             as described in section 4.1. Default 0.5
+scenery_generate_normals=0   Boolean, if true normals are recalculated by the
+                             plugin, instead of imported. Default false
+ground_generate_normals=0   Boolean, same as above, for ground model. Default false.
 
 [location]
 \end{verbatim}
