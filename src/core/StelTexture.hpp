@@ -76,6 +76,10 @@ public:
 	//! Return the width and heigth of the texture in pixels
 	bool getDimensions(int &width, int &height);
 
+	//! Returns whether the texture has an alpha channel (GL_RGBA or GL_LUMINANCE_ALPHA format)
+	//! This only returns valid information after the texture is fully loaded.
+	bool hasAlphaChannel() const { return alphaChannel ; }
+
 	//! Get the error message which caused the texture loading to fail
 	//! @return the human friendly error message or empty string if no errors occured
 	const QString& getErrorMessage() const {return errorMessage;}
@@ -147,6 +151,9 @@ private:
 
 	//! True when something when wrong in the loading process
 	bool errorOccured;
+
+	//! True if this texture contains an alpha channel
+	bool alphaChannel;
 
 	//! Human friendly error message if loading failed
 	QString errorMessage;

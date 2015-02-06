@@ -63,68 +63,80 @@ class Heightmap;
 class OBJ
 {
 public:
-    //! OBJ files can have vertices encoded in different order.
-    //! Only XYZ and XZY may occur in real life, but we can cope with all...
-    enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
-    //!< Supported OpenGL illumination models. Use specular sparingly!
-    enum Illum { DIFFUSE, DIFFUSE_AND_AMBIENT, SPECULAR, TRANSLUCENT=9 };
+	//! OBJ files can have vertices encoded in different order.
+	//! Only XYZ and XZY may occur in real life, but we can cope with all...
+	enum vertexOrder { XYZ, XZY, YXZ, YZX, ZXY, ZYX };
 
-    struct Material
-    {
-        Material() {
-            ambient[0] = 0.2f;
-            ambient[1] = 0.2f;
-	    ambient[2] = 0.2f;
-            diffuse[0] = 0.8f;
-            diffuse[1] = 0.8f;
-	    diffuse[2] = 0.8f;
-            specular[0] = 0.0f;
-            specular[1] = 0.0f;
-	    specular[2] = 0.0f;
-            emission[0] = 0.0f;
-            emission[1] = 0.0f;
-	    emission[2] = 0.0f;
-	    shininess = 8.0f;
-	    name = "<invalid>";
-	    alpha = 1.0f;
-	    alphatest = false;
-	    backfacecull = true;
-            illum = DIFFUSE;
-        }
-        //! Material name
-        QString name;
-        //! Ka, Kd, Ks, Ke
-	QVector3D ambient;
-	QVector3D diffuse;
-	QVector3D specular;
-	QVector3D emission;
-        //! Shininess [0..128]
-        float shininess;
-        //! Transparency [0..1]
-        float alpha;
-	//! If to perform binary alpha testing. Default off.
-	bool alphatest;
-	//! If to perform backface culling. Default on.
-	bool backfacecull;
-        //!< illumination model, copied from MTL.
-        Illum illum;
-        //! Texture name
-        QString textureName;
-        //!< Shared pointer to texture of the model. This can be null.
-        StelTextureSP texture;
-        //! Bump map name
-        QString bumpMapName;
-        //!< Shared pointer to bump map texture of the model. This can be null.
-        StelTextureSP bump_texture;
-        //! Height map name
-        QString heightMapName;
-        //!< Shared pointer to height map texture of the model. This can be null.
-	StelTextureSP height_texture;
-	//! Name of emissive texture
-	QString emissiveMapName;
-	//!< Shared pointer to emissive texture of the model. This can be null.
-	StelTextureSP emissive_texture;
-    };
+	//! Encapsulates all information that the describes the surface appearance of a StelModel
+	struct Material
+	{
+		//! MTL Illumination models, do not use externally anymore. See the developer doc for info.
+		//! @deprecated This is from the old illum model, do not consider this outside this class!
+		enum Illum { I_NONE=-1, I_DIFFUSE=0, I_DIFFUSE_AND_AMBIENT=1, I_SPECULAR=2, I_TRANSLUCENT=9 };
+		Illum illum;
+
+		//! Creates a material with the default values
+		Material() {
+			ambient[0] = -1.f;
+			ambient[1] = -1.f;
+			ambient[2] = -1.f;
+			diffuse[0] = 0.8f;
+			diffuse[1] = 0.8f;
+			diffuse[2] = 0.8f;
+			specular[0] = 0.0f;
+			specular[1] = 0.0f;
+			specular[2] = 0.0f;
+			emission[0] = 0.0f;
+			emission[1] = 0.0f;
+			emission[2] = 0.0f;
+			shininess = 8.0f;
+			name = "<invalid>";
+			alpha = -1.0f;
+			alphatest = false;
+			backfacecull = true;
+			illum = I_NONE;
+		}
+
+		//! Needs to be called after everything is loaded
+		void finalize();
+
+		//! Material name
+		QString name;
+		//! Ka, Kd, Ks, Ke
+		QVector3D ambient;
+		QVector3D diffuse;
+		QVector3D specular;
+		QVector3D emission;
+		//! Shininess [0..128]
+		float shininess;
+		//! Transparency [0..1]
+		float alpha;
+		//! If to perform binary alpha testing. Default off.
+		bool alphatest;
+		//! If to perform backface culling. Default on.
+		bool backfacecull;
+		//! Quick check if this material has specularity
+		bool hasSpecularity;
+		//! Quick check if this material has "real" transparency (i.e. needs blending)
+		bool hasTransparency;
+
+		//! Texture name
+		QString textureName;
+		//!< Shared pointer to texture of the model. This can be null.
+		StelTextureSP texture;
+		//! Bump map name
+		QString bumpMapName;
+		//!< Shared pointer to bump map texture of the model. This can be null.
+		StelTextureSP bump_texture;
+		//! Height map name
+		QString heightMapName;
+		//!< Shared pointer to height map texture of the model. This can be null.
+		StelTextureSP height_texture;
+		//! Name of emissive texture
+		QString emissiveMapName;
+		//!< Shared pointer to emissive texture of the model. This can be null.
+		StelTextureSP emissive_texture;
+	};
 
     //! A vertex struct holds the vertex itself (position), corresponding texture coordinates, normals, tangents and bitangents
     struct Vertex
@@ -275,7 +287,6 @@ private:
 
     //! Bounding box for the entire scene
     AABB pBoundingBox;
-    Mat4d m;
 
     //! Base path to this file
     QString m_basePath;
