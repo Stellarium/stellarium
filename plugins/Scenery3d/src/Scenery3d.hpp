@@ -77,15 +77,15 @@ public:
     bool getDebugEnabled() const { return debugEnabled; }
     void setDebugEnabled(bool debugEnabled) { this->debugEnabled = debugEnabled; }
     bool getPixelLightingEnabled() const { return shaderParameters.pixelLighting; }
-    void setPixelLightingEnabled(const bool val) { shaderParameters.pixelLighting = val; }
+    void setPixelLightingEnabled(const bool val) { shaderParameters.pixelLighting = val; invalidateCubemap(); }
     bool getShadowsEnabled(void) const { return shaderParameters.shadows; }
-    void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; reinitShadowmapping = true; }
+    void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; reinitShadowmapping = true; invalidateCubemap(); }
     bool getBumpsEnabled(void) const { return shaderParameters.bump; }
-    void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; }
+    void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; invalidateCubemap(); }
     bool getTorchEnabled(void) const { return shaderParameters.torchLight; }
-    void setTorchEnabled(bool torchEnabled) { shaderParameters.torchLight = torchEnabled; }
+    void setTorchEnabled(bool torchEnabled) { shaderParameters.torchLight = torchEnabled; invalidateCubemap(); }
     S3DEnum::ShadowFilterQuality getShadowFilterQuality() const { return shaderParameters.shadowFilterQuality; }
-    void setShadowFilterQuality(S3DEnum::ShadowFilterQuality quality) { shaderParameters.shadowFilterQuality = quality; }
+    void setShadowFilterQuality(S3DEnum::ShadowFilterQuality quality) { shaderParameters.shadowFilterQuality = quality; invalidateCubemap();}
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
@@ -93,6 +93,9 @@ public:
     void setLazyCubemapEnabled(bool val) { lazyDrawing = val; }
     double getLazyCubemapInterval() const { return lazyInterval; }
     void setLazyCubemapInterval(double val) { lazyInterval = val; }
+
+    //! Does a cubemap redraw at the next possible opportunity when lazy-drawing is enabled.
+    inline void invalidateCubemap() {  lastCubemapUpdate = 0.0; }
 
     S3DEnum::CubemappingMode getCubemappingMode() const { return cubemappingMode; }
     //! Changes cubemapping mode and forces re-initialization on next draw call.
@@ -105,9 +108,9 @@ public:
     uint getShadowmapSize() const { return shadowmapSize; }
     void setShadowmapSize(uint size) { shadowmapSize = size; reinitShadowmapping = true; }
     float getTorchBrightness() const { return torchBrightness; }
-    void setTorchBrightness(float brightness) { torchBrightness = brightness; }
+    void setTorchBrightness(float brightness) { torchBrightness = brightness; invalidateCubemap(); }
     float getTorchRange() const { return torchRange; }
-    void setTorchRange(float range) { torchRange = range; }
+    void setTorchRange(float range) { torchRange = range; invalidateCubemap(); }
 
     void setLoadCancel(bool val) { loadCancel = val; }
 
@@ -168,6 +171,7 @@ private:
     int drawnTriangles;
 
     /// ---- Cubemapping variables ----
+    bool requiresCubemap; //true if cubemapping is required (if projection is anything else than Perspective)
     bool lazyDrawing; //if lazy-drawing mode is enabled
     bool needsCubemapUpdate; //if the draw-call has to recreate the cubemap
     double lazyInterval; //the lazy-drawing time interval
@@ -249,6 +253,7 @@ private:
     bool initCubemapping();
     //! Cleans up cubemapping related objects
     void deleteCubemapping();
+
     //! Re-initializes shadowmapping related objects
     bool initShadowmapping();
     //! Cleans up shadowmapping related objects

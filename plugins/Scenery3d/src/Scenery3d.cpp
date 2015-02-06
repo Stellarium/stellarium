@@ -89,6 +89,10 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 {
 	qDebug()<<"Scenery3d constructor...";
 
+	//the arrays should all contain only zeroes
+	Q_ASSERT(cubeMapTex[0]==0);
+	Q_ASSERT(cubeSideFBO[0]==0);
+
 	supportsGSCubemapping = false;
 	cubemappingMode = S3DEnum::CUBEMAP;
 	reinitCubemapping = true;
@@ -310,7 +314,7 @@ void Scenery3d::finalizeLoad()
 	}
 
 	//reset the cubemap time so that is ensured it is immediately rerendered
-	lastCubemapUpdate = 0.0;
+	invalidateCubemap();
 }
 
 void Scenery3d::handleKeys(QKeyEvent* e)
@@ -800,7 +804,7 @@ QMatrix4x4 Scenery3d::computeCropMatrix(Polyhedron& focusBody,const QMatrix4x4& 
 
     //To avoid artifacts caused by far plane clipping, extend far plane by 5%
     //or if cubemapping is used, set it to 1
-    if(core->getCurrentProjectionType()==StelCore::ProjectionPerspective)
+    if(!requiresCubemap)
     {
 	    float zRange = maxZ-minZ;
 	    maxZ = std::min(maxZ + zRange*0.05f, 1.0f);
@@ -1154,6 +1158,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     directionalBrightness=0.0f;
     ShadowCaster shadowcaster = None;
     // DEBUG AIDS: Helper strings to be displayed
+    //TODO move these string manipulations to drawDebug, it is a bit dumb to do this every frame, even if not needed
     QString sunAmbientString;
     QString moonAmbientString;
     QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
@@ -1166,7 +1171,15 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     //calculate emissive factor
     if(l!=NULL)
     {
-	    emissiveFactor = l->getEffectiveLightscapeBrightness();
+	    if(requiresCubemap && lazyDrawing)
+	    {
+		    emissiveFactor = l->getTargetLightscapeBrightness();
+	    }
+	    else
+	    {
+		    //use an interpolated value for smooth fade in/out
+		    emissiveFactor = l->getEffectiveLightscapeBrightness();
+	    }
     }
     else
     {
@@ -1474,7 +1487,7 @@ void Scenery3d::setGridPosition(Vec3d pos)
 	absolutePosition = - (invRotate * pos);
 
 	//reset cube map time
-	lastCubemapUpdate = 0.0;
+	invalidateCubemap();
 }
 
 void Scenery3d::drawCoordinatesText()
@@ -1634,7 +1647,7 @@ void Scenery3d::drawDebug()
     screen_y -= 15.0f;
     str = QString("%1 %2 %3").arg(viewUp.v[0], 7, 'f', 2).arg(viewUp.v[1], 7, 'f', 2).arg(viewUp.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
-    if(core->getCurrentProjectionType() != StelCore::ProjectionPerspective)
+    if(requiresCubemap)
     {
 	    screen_y -= 15.0f;
 	    str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
@@ -2047,7 +2060,7 @@ bool Scenery3d::initCubemapping()
 	cubeIndexBuffer.release();
 
 	//reset cubemap timer to make sure it is rerendered immediately after re-init
-	lastCubemapUpdate = 0.0;
+	invalidateCubemap();
 
 	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
 
@@ -2172,11 +2185,14 @@ void Scenery3d::draw(StelCore* core)
 	if(!objModel || !objModel->hasStelModels())
 		return;
 
+	//reset render statistic
 	drawnTriangles = 0;
 
-	bool isPerspectiveProjection = core->getCurrentProjectionType() == StelCore::ProjectionPerspective;
+	requiresCubemap = core->getCurrentProjectionType() != StelCore::ProjectionPerspective;
+	//update projector from core
+	altAzProjector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 
-	if(!isPerspectiveProjection)
+	if(requiresCubemap)
 	{
 		if(!cubeMappingCreated || reinitCubemapping)
 		{
@@ -2191,9 +2207,6 @@ void Scenery3d::draw(StelCore* core)
 		deleteCubemapping();
 	}
 
-	//update projector from core
-	altAzProjector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-
 	//turn off blending, because it seems to be enabled somewhere we do not have access
 	glDisable(GL_BLEND);
 
@@ -2202,7 +2215,7 @@ void Scenery3d::draw(StelCore* core)
 
 	if (shaderParameters.shadows)
 	{
-		if(isPerspectiveProjection || needsCubemapUpdate)
+		if(!requiresCubemap || needsCubemapUpdate)
 		{
 			//only calculate shadows if enabled & update required
 			if(!generateShadowMap())
@@ -2215,7 +2228,7 @@ void Scenery3d::draw(StelCore* core)
 		deleteShadowmapping();
 	}
 
-	if (isPerspectiveProjection)
+	if (!requiresCubemap)
 	{
 		//when Stellarium uses perspective projection we can use the fast direct method
 		drawDirect();

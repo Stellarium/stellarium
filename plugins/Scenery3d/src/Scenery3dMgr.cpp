@@ -193,6 +193,11 @@ void Scenery3dMgr::init()
 		qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
 	}
 
+	//finally, hook up the lightscape toggle event to cubemap redraw
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_LandscapeIllumination");
+	Q_ASSERT(action);
+	connect(action, &StelAction::toggled, this, &Scenery3dMgr::forceCubemapRedraw);
+
 	showMessage("Scenery3d plugin loaded!");
 }
 
@@ -685,6 +690,11 @@ void Scenery3dMgr::setLazyDrawingInterval(const double val)
 
 	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_lazy_interval",val);
 	emit lazyDrawingIntervalChanged(val);
+}
+
+void Scenery3dMgr::forceCubemapRedraw()
+{
+	scenery3d->invalidateCubemap();
 }
 
 uint Scenery3dMgr::getCubemapSize() const
