@@ -168,7 +168,8 @@ private:
     Vec3d viewUp;
     Vec3d viewDir;
     Vec3d viewPos;
-    int drawnTriangles;
+    int drawnTriangles,drawnModels;
+    int materialSwitches, shaderSwitches;
 
     /// ---- Cubemapping variables ----
     bool requiresCubemap; //true if cubemapping is required (if projection is anything else than Perspective)

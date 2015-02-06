@@ -37,7 +37,7 @@
 
 #include <cstdlib>
 
-StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), id(0), avgLuminance(-1.f)
+StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f)
 {
 	width = -1;
 	height = -1;
@@ -279,14 +279,17 @@ bool StelTexture::glLoad(const GLData& data)
 		case GL_RGBA:
 			//RGBA pixels are always in 4 byte aligned rows
 			glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+			alphaChannel = true;
 			break;
 		case GL_LUMINANCE_ALPHA:
 			//these ones are at least always in 2 byte aligned rows, but may also be 4 aligned
 			glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
+			alphaChannel = true;
 			break;
 		default:
 			//for the other cases, they may be on any alignment (depending on image width)
 			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+			alphaChannel = false;
 	}
 
 	//do pixel transfer

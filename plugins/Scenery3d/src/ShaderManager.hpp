@@ -235,11 +235,11 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 
 	if(mat)
 	{
-		if(mat->alphatest && mat->texture) //alpha test needs diffuse texture, otherwise it would not make sense
+		if(mat->alphatest && mat->texture && mat->texture->hasAlphaChannel()) //alpha test needs diffuse texture, otherwise it would not make sense
 			flags|= ALPHATEST;
-		if(mat->illum == OBJ::SPECULAR)
+		if(mat->hasSpecularity)
 			flags|= MAT_SPECULAR;
-		if(mat->illum == OBJ::TRANSLUCENT)
+		if(mat->hasTransparency)
 			flags|= BLENDING;
 		if(mat->texture)
 			flags|= MAT_DIFFUSETEX;
