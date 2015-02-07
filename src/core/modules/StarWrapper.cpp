@@ -234,15 +234,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (s->getPlx())
 			oss << q_("Parallax: %1\"").arg(0.00001*s->getPlx(), 0, 'f', 5) << "<br />";
 
-		if (vEpoch>0)
-		{
-			double vsEpoch = 2400000+vEpoch;
-			if (ebsFlag)
-				oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
-			else
-				oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
-		}
-
 		if (vPeriod>0)
 			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
 
