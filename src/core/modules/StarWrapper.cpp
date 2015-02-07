@@ -254,7 +254,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (vEpoch>0 && vPeriod>0)
 		{
 			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;			
+			double vsEpoch = 2400000+vEpoch;
 			double npDate = vsEpoch + ((::floor((core->getJDay()-vsEpoch)/vPeriod)+1.0)*vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			if (ebsFlag)
