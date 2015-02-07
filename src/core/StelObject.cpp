@@ -28,7 +28,6 @@
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
 #include "SolarSystem.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
 
 #include <QRegExp>
@@ -186,7 +185,6 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 	if (flags&EclipticCoord)
 	{
-		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		double ecl = core->getCurrentPlanet()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
