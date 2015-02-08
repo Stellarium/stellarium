@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-03 10:59+0600\n"
-"PO-Revision-Date: 2015-02-04 02:56+0000\n"
+"PO-Revision-Date: 2015-02-07 06:11+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-05 05:44+0000\n"
+"X-Launchpad-Export-Date: 2015-02-08 05:48+0000\n"
 "X-Generator: Launchpad (build 17331)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2033,10 +2033,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"Сыстэма не падтрымлівае OpenGL 2. Калі ласка, абнаві апаратнае "
+"забесьпячэньне, выкарыстоўвац MESA ці ранейшую вэрсію."
 
 #: src/StelMainView.cpp:385
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Немагчыма атрымаць патрэбныя рэсурсы OpenGL."
 
 #: src/StelMainView.cpp:450
 msgid "Save screenshot"
@@ -2067,6 +2069,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"З тваёй падсыстэмай DirectX/OpenGL ES праблемы. Глядзі падрабязнасьці ў "
+"часопісе.\n"
+"Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
+"паспрабаваць працягнуць у пагоршаным рэжыме?"
 
 #: src/StelMainView.cpp:644
 msgid ""
@@ -2074,6 +2080,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"З тваёй падсыстэмай OpenGL/Mesa праблемы. Глядзі падрабязнасьці ў часопісе.\n"
+"Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
+"паспрабаваць працягнуць у пагоршаным рэжыме?"
 
 #: src/StelMainView.cpp:699
 msgid ""
@@ -2081,6 +2090,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"З тваёй падсыстэмай OpenGL праблемы. Глядзі падрабязнасьці ў часопісе.\n"
+"Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
+"паспрабаваць працягнуць у пагоршаным рэжыме?"
 
 #: src/StelMainView.cpp:736
 msgid ""
@@ -2088,6 +2100,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"З тваёй падсыстэмай OpenGL ES праблемы. Глядзі падрабязнасьці ў часопісе.\n"
+"Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
+"паспрабаваць працягнуць у пагоршаным рэжыме?"
 
 #: src/StelMainView.cpp:845
 #, qt-format
@@ -3796,11 +3811,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "Вернуць стан сьпісу месцаў, каб адлюстроўваліся ўсе вядомыя месцы"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Вернуць стан сьпісу месцаў"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -3867,7 +3882,7 @@ msgstr "Выкарыстоўваць бягучае месца як прадвы
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "Атрымаць месца зь Сеціва"
 
 #: src/ui_searchDialogGui.h:614
 msgid "Find Object"
@@ -3994,6 +4009,7 @@ msgstr "Каардынатная сыстэма:"
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"Заўвага: гэтая прылада не выкарыстоўвае карэкцыю рэфракцыі для каардынат."
 
 #: src/ui_searchDialogGui.h:704
 msgid "Position"
@@ -4290,7 +4306,7 @@ msgstr "Ужываць адпаведныя плянэту й месца"
 
 #: src/ui_viewDialog.h:1332
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "Паказваць ровень сьвятла (яркія вокны, засьвечваньне, і г.д.)"
 
 #: src/ui_viewDialog.h:1333
 msgid "Show ground"
@@ -4303,6 +4319,7 @@ msgstr "Ужываць гэты краявід як прадвызначаны"
 #: src/ui_viewDialog.h:1336
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"Выкарыстоўваць мінімальную яркасьць, пры якой краявід будзе бачны ў цемры"
 
 #: src/ui_viewDialog.h:1338
 msgid "Minimal brightness:"
@@ -4311,11 +4328,12 @@ msgstr "Найменшая яркасьць:"
 #: src/ui_viewDialog.h:1340
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr ""
+msgstr "Шэраг значэньняў 0..1 (краявід чорны ў ночы, краявід цалкам бачны)"
 
 #: src/ui_viewDialog.h:1343
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
+"Выкарыстоўваць найменшую яркасьць якая, магчыма, вызначана ў landscape.ini"
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
@@ -4335,7 +4353,7 @@ msgstr "Паказваць назвы"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "Выберы якія жадаеш назвы: абрэвіятуры, арыґінальныя ці перакладзеныя"
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
@@ -4990,6 +5008,10 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"Пачатковы й канцавы пункты ў гарызантальным рэжыме можна злучыць зь небам, "
+"якое паварочваецца, што можа дапамагчы захоўваць сувязь між краявідам і "
+"пэўным аб'ектам на небе ці (калі злучаныя абодва пункты) для навіґацыі па "
+"зоркавых ланцужках у тэлескоп на манціроўцы Добсана."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -5108,7 +5130,7 @@ msgstr "Паказваць у гарызантальных каардыната�
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(напр., для навіґацыі па зоркавых ланцужках)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
@@ -5116,11 +5138,11 @@ msgstr "Паказваць з пазыцыйным вуглом "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Злучыць пачатковы пункт да неба"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Злучыць канцавы пункт да неба"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
@@ -5678,7 +5700,7 @@ msgstr "Вернуць ПЗ да пачатковага значэньня"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "Від у сэнсар"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -5686,7 +5708,7 @@ msgstr "Паказваць ПЗ ПЗС у ґрадусах і мінутах"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "Перакульваць ПЗС"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
@@ -10005,7 +10027,7 @@ msgstr "Паказваць ґузік дадатку на панэлі прыл�
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "Якая сыстэма каардынат будзе выкарыстоўвацца пры адлюстраваньні"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
