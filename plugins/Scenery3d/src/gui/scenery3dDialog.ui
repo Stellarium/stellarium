@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>577</width>
-    <height>468</height>
+    <width>673</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="font">
@@ -394,7 +394,7 @@ p, li { white-space: pre-wrap; }
                 </sizepolicy>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -592,7 +592,11 @@ p, li { white-space: pre-wrap; }
                     </widget>
                    </item>
                    <item row="2" column="1">
-                    <widget class="QComboBox" name="comboBoxCubemapMode"/>
+                    <widget class="QComboBox" name="comboBoxCubemapMode">
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This determines the way the scene is rendered when Stellarium uses a projection other than &amp;quot;Perspective&amp;quot;. The scene is always rendered onto a cube, and this cube is then warped according to the real projection. The cube is described using an image called &amp;quot;cubemap&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;6 Textures&lt;/span&gt; uses 6 single textures, one for each cube side. This is the most compatible method, but may be slower than the others.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cubemap&lt;/span&gt; uses a single GL_TEXTURE_CUBEMAP. Recommended for most users.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; uses a modern GPU feature to render all 6 sides of the cube at once. It may be the fastest method depending on the scene and your GPU hardware. If not supported, this cannot be selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
                    </item>
                    <item row="3" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
@@ -605,11 +609,11 @@ p, li { white-space: pre-wrap; }
                     </widget>
                    </item>
                    <item row="4" column="0" colspan="2">
-                    <layout class="QHBoxLayout" name="lazyIntervalLayout">
+                    <layout class="QFormLayout" name="formLayout_3">
                      <property name="leftMargin">
-                      <number>40</number>
+                      <number>20</number>
                      </property>
-                     <item>
+                     <item row="0" column="0">
                       <widget class="QLabel" name="labelLazyDrawingInterval">
                        <property name="text">
                         <string>Interval:</string>
@@ -619,7 +623,7 @@ p, li { white-space: pre-wrap; }
                        </property>
                       </widget>
                      </item>
-                     <item>
+                     <item row="0" column="1">
                       <widget class="QDoubleSpinBox" name="spinLazyDrawingInterval">
                        <property name="toolTip">
                         <string>The interval (in timeline seconds) in which no redraw is performed</string>
@@ -632,6 +636,29 @@ p, li { white-space: pre-wrap; }
                        </property>
                        <property name="singleStep">
                         <double>0.100000000000000</double>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0" colspan="2">
+                      <widget class="QCheckBox" name="checkBoxDominantFace">
+                       <property name="toolTip">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, only the face that corresponds to your viewing direction is updated on movement.&lt;/p&gt;&lt;p&gt;This will speed up rendering, but the appearance will look &amp;quot;broken&amp;quot; until you stop moving.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;This does NOT work with the &amp;quot;Geometry-Shader&amp;quot; cubemapping mode!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="text">
+                        <string>Only update dominant face when moving</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="0" colspan="2">
+                      <widget class="QCheckBox" name="checkBoxSecondDominantFace">
+                       <property name="enabled">
+                        <bool>true</bool>
+                       </property>
+                       <property name="toolTip">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This updates a second face, so that the visual apperance seems less &amp;quot;broken&amp;quot;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="text">
+                        <string>Also update second-most dominant face</string>
                        </property>
                       </widget>
                      </item>

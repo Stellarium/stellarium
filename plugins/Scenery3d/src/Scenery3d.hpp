@@ -94,6 +94,10 @@ public:
     double getLazyCubemapInterval() const { return lazyInterval; }
     void setLazyCubemapInterval(double val) { lazyInterval = val; }
 
+    //This has the be the most crazy method name in the plugin
+    void getLazyCubemapUpdateOnlyDominantFaceOnMoving(bool &val, bool &alsoSecondDominantFace) { val = updateOnlyDominantOnMoving; alsoSecondDominantFace = updateSecondDominantOnMoving; }
+    void setLazyCubemapUpdateOnlyDominantFaceOnMoving(bool val, bool alsoSecondDominantFace) { updateOnlyDominantOnMoving = val; updateSecondDominantOnMoving = alsoSecondDominantFace; }
+
     //! Does a cubemap redraw at the next possible opportunity when lazy-drawing is enabled.
     inline void invalidateCubemap() {  lastCubemapUpdate = 0.0; }
 
@@ -155,6 +159,7 @@ private:
     unsigned int shadowmapSize;
 
     Vec3d absolutePosition;     // current eyepoint in model
+    Vec3d moveVector;           // position change in scene coords
     Vec3f movement;		// speed values for moving around the scenery
     float eye_height;
 
@@ -174,14 +179,20 @@ private:
     /// ---- Cubemapping variables ----
     bool requiresCubemap; //true if cubemapping is required (if projection is anything else than Perspective)
     bool lazyDrawing; //if lazy-drawing mode is enabled
-    bool needsCubemapUpdate; //if the draw-call has to recreate the cubemap
+    bool updateOnlyDominantOnMoving; //if movement updates only dominant face directly
+    bool updateSecondDominantOnMoving; //if movement also updates the second-most dominant face
+    bool needsMovementEndUpdate;
+    bool needsCubemapUpdate; //if the draw-call has to recreate the cubemap completely
+    bool needsMovementUpdate; //if the draw-call has to recreate either the whole cubemap or the dominant face
     double lazyInterval; //the lazy-drawing time interval
     double lastCubemapUpdate; //when the last lazy draw happened (JDay)
     qint64 lastCubemapUpdateRealTime; //when the last lazy draw happened (real system time, QDateTime::currentMSecsSinceEpoch)
+    qint64 lastMovementEndRealTime; //the timepoint when the last movement was stopped
     GLuint cubeMapCubeTex; //GL_TEXTURE_CUBE_MAP, used in CUBEMAP or CUBEMAP_GSACCEL modes
     GLuint cubeMapCubeDepth; //this is a depth-cubemap, only used in CUBEMAP_GSACCEL mode
     GLuint cubeMapTex[6]; //GL_TEXTURE_2D, for "legacy" TEXTURES mode
     GLuint cubeRB; //renderbuffer for depth of a single face in TEXTURES and CUBEMAP modes (attached to multiple FBOs)
+    int dominantFace,secondDominantFace;
 
      //because of use that deviates very much from QOpenGLFramebufferObject typical usage, we manage the FBOs ourselves
     GLuint cubeFBO; //used in CUBEMAP_GSACCEL mode - only a single FBO exists, with a cubemap for color and one for depth

@@ -83,7 +83,8 @@ GLExtFuncs glExtFuncs;
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
     : parent(parent), currentScene(), loadingScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
       absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),heightmapLoad(NULL),
-      lazyDrawing(false), needsCubemapUpdate(true), lazyInterval(2.0), lastCubemapUpdate(0.0),
+      lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
+      needsCubemapUpdate(true), needsMovementUpdate(false), lazyInterval(2.0), lastCubemapUpdate(0.0),
       cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), cubeFBO(0), cubeSideFBO(), cubeMappingCreated(false),
       cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer)
 {
@@ -381,7 +382,10 @@ void Scenery3d::update(double deltaTime)
 	double alt, az;
 	StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
 
-	Vec3d move(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
+	//if we were moving in the last update
+	bool wasMoving = moveVector.lengthSquared()>0.0;
+
+	moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
 		   ( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
 		   movement[2]);
 
@@ -390,14 +394,41 @@ void Scenery3d::update(double deltaTime)
 
 	if(lazyDrawing)
 	{
+		needsMovementUpdate = false;
+
 		//check if cubemap requires redraw
-		if(move.lengthSquared() > 0.0 || qAbs(curTime-lastCubemapUpdate) > lazyInterval * StelCore::JD_SECOND || reinitCubemapping)
+		if(qAbs(curTime-lastCubemapUpdate) > lazyInterval * StelCore::JD_SECOND || reinitCubemapping)
 		{
 			needsCubemapUpdate = true;
+			needsMovementEndUpdate = false;
+		}
+		else if (moveVector.lengthSquared() > 0.0 )
+		{
+			if(updateOnlyDominantOnMoving)
+			{
+				needsMovementUpdate = true;
+				needsMovementEndUpdate = true;
+				needsCubemapUpdate = false;
+			}
+			else
+			{
+				needsCubemapUpdate = true;
+				needsMovementEndUpdate = false;
+			}
 		}
 		else
 		{
-			needsCubemapUpdate = false;
+			if(wasMoving)
+				lastMovementEndRealTime = QDateTime::currentMSecsSinceEpoch();
+
+			if(needsMovementEndUpdate && (QDateTime::currentMSecsSinceEpoch() - lastMovementEndRealTime)  > 700)
+			{
+				//if the last movement was some time ago, update the whole cubemap
+				needsCubemapUpdate = true;
+				needsMovementEndUpdate = false;
+			}
+			else
+				needsCubemapUpdate = false;
 		}
 	}
 	else
@@ -405,14 +436,14 @@ void Scenery3d::update(double deltaTime)
 		needsCubemapUpdate = true;
 	}
 
-	move *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
+	moveVector *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
 	//Bring move into world-grid space
-	currentScene.zRotateMatrix.transfo(move);
+	currentScene.zRotateMatrix.transfo(moveVector);
 
-	absolutePosition.v[0] += move.v[0];
-	absolutePosition.v[1] += move.v[1];
-	eye_height -= move.v[2];
+	absolutePosition.v[0] += moveVector.v[0];
+	absolutePosition.v[1] += moveVector.v[1];
+	eye_height -= moveVector.v[2];
 	absolutePosition.v[2] = -groundHeight()-eye_height;
 
 	//View Up in our case always pointing positive up
@@ -426,6 +457,29 @@ void Scenery3d::update(double deltaTime)
 
 	//View Position is already in world-grid space
 	viewPos = -absolutePosition;
+
+	//find cubemap face this vector points at
+	//only consider horizontal plane (XY)
+	dominantFace = qAbs(viewDir.v[0])<qAbs(viewDir.v[1]);
+	secondDominantFace = !dominantFace;
+
+	//uncomment this to also consider up/down faces
+	/*
+	double max = qAbs(viewDir.v[dominantFace]);
+	if(qAbs(viewDir.v[2])>max)
+	{
+		secondDominantFace = dominantFace;
+		dominantFace = 2;
+	}
+	else if (qAbs(viewDir.v[2])>qAbs(viewDir.v[secondDominantFace]))
+	{
+		secondDominantFace = 2;
+	}
+	*/
+
+	//check sign
+	dominantFace = dominantFace*2 + (viewDir.v[dominantFace]<0.0);
+	secondDominantFace = secondDominantFace*2 + (viewDir.v[secondDominantFace]<0.0);
     }
 }
 
@@ -1310,17 +1364,43 @@ void Scenery3d::generateCubeMap()
 	}
 	else
 	{
-		//traditional 6-pass version
-		for(int i=0;i<6;++i)
+		if(needsMovementUpdate && updateOnlyDominantOnMoving)
 		{
-			//bind a single side of the cube
-			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
+			//update only the dominant face
+			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[dominantFace]);
 
-			modelViewMatrix = cubeRotation[i];
+			modelViewMatrix = cubeRotation[dominantFace];
 			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			drawArrays(true,true);
+
+			if(updateSecondDominantOnMoving)
+			{
+				//update also the second-most dominant face
+				glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[secondDominantFace]);
+
+				modelViewMatrix = cubeRotation[secondDominantFace];
+				modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+				drawArrays(true,true);
+			}
+		}
+		else
+		{
+			//traditional 6-pass version
+			for(int i=0;i<6;++i)
+			{
+				//bind a single side of the cube
+				glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
+
+				modelViewMatrix = cubeRotation[i];
+				modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+				drawArrays(true,true);
+			}
 		}
 	}
 
@@ -1335,6 +1415,12 @@ void Scenery3d::generateCubeMap()
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = altAzProjector->getViewport();
 	glViewport(vp[0], vp[1], vp[2], vp[3]);
+
+	if(needsCubemapUpdate)
+	{
+		lastCubemapUpdate = core->getJDay();
+		lastCubemapUpdateRealTime = QDateTime::currentMSecsSinceEpoch();
+	}
 }
 
 void Scenery3d::drawFromCubeMap()
@@ -1449,12 +1535,10 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
 
 void Scenery3d::drawWithCubeMap()
 {
-	if(needsCubemapUpdate)
+	if(needsCubemapUpdate || needsMovementUpdate)
 	{
 		//lazy redrawing: update cubemap in slower intervals
 		generateCubeMap();
-		lastCubemapUpdate = core->getJDay();
-		lastCubemapUpdateRealTime = QDateTime::currentMSecsSinceEpoch();
 	}
 	drawFromCubeMap();
 }
@@ -1643,10 +1727,10 @@ void Scenery3d::drawDebug()
     str = QString("%1 %2 %3").arg(viewPos.v[0], 7, 'f', 2).arg(viewPos.v[1], 7, 'f', 2).arg(viewPos.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = "View Dir";
+    str = "View Dir, dominant faces";
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("%1 %2 %3").arg(viewDir.v[0], 7, 'f', 2).arg(viewDir.v[1], 7, 'f', 2).arg(viewDir.v[2], 7, 'f', 2);
+    str = QString("%1 %2 %3, %4/%5").arg(viewDir.v[0], 7, 'f', 2).arg(viewDir.v[1], 7, 'f', 2).arg(viewDir.v[2], 7, 'f', 2).arg(dominantFace).arg(secondDominantFace);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
     str = "View Up";
@@ -1938,21 +2022,21 @@ bool Scenery3d::initCubemapping()
 	else
 	{
 		cubeRotation[0] = stackBase;
+		cubeRotation[0].rotate(90.0f,0.0f,0.0f,1.0f);
 
 		cubeRotation[1] = stackBase;
-		cubeRotation[1].rotate(90.0f,0.0f,0.0f,1.0f);
+		cubeRotation[1].rotate(90.0f,0.0f,0.0f,-1.0f);
 
 		cubeRotation[2] = stackBase;
-		cubeRotation[2].rotate(90.0f,0.0f,0.0f,-1.0f);
 
 		cubeRotation[3] = stackBase;
 		cubeRotation[3].rotate(180.0f,0.0f,0.0f,1.0f);
 
 		cubeRotation[4] = stackBase;
-		cubeRotation[4].rotate(90.0f,1.0f,0.0f,0.0f);
+		cubeRotation[4].rotate(90.0f,-1.0f,0.0f,0.0f);
 
 		cubeRotation[5] = stackBase;
-		cubeRotation[5].rotate(90.0f,-1.0f,0.0f,0.0f);
+		cubeRotation[5].rotate(90.0f,1.0f,0.0f,0.0f);
 	}
 
 
@@ -2024,13 +2108,14 @@ bool Scenery3d::initCubemapping()
 	//init with copies of front face
 	for(int i = 0;i<6;++i)
 	{
-		//order is as follows
-		//E face y=1
+		//order of geometry should be as follows:
+		//basically "reversed" cubemap order
 		//S face x=1
 		//N face x=-1
+		//E face y=1
 		//W face y=-1
-		//down face z=-1
 		//up face z=1
+		//down face z=-1
 		cubeVertices<<cubePlaneFront;
 		cubeTexcoords<<cubePlaneFrontTex;
 		cubeIndices<<frontIndices;
@@ -2047,11 +2132,12 @@ bool Scenery3d::initCubemapping()
 #define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
 	for(int i =_PLANEID_ * idxCount; i < (_PLANEID_+1)*idxCount;++i) { cubeIndices[i] = cubeIndices[i] + _PLANEID_ * vtxCount; }
 
-	PLANE(1, Mat4f::zrotation(-M_PI_2));
-	PLANE(2, Mat4f::zrotation(M_PI_2));
-	PLANE(3, Mat4f::zrotation(M_PI));
-	PLANE(4, Mat4f::xrotation(-M_PI_2));
-	PLANE(5, Mat4f::xrotation(M_PI_2));
+	PLANE(0, Mat4f::zrotation(-M_PI_2)); //S
+	PLANE(1, Mat4f::zrotation(M_PI_2));  //N
+	PLANE(2, Mat4f::identity());  //E
+	PLANE(3, Mat4f::zrotation(M_PI)); //W
+	PLANE(4, Mat4f::xrotation(M_PI_2)); //U
+	PLANE(5, Mat4f::xrotation(-M_PI_2)); //D
 #undef PLANE
 
 	//upload original cube vertices + indices to GL
