@@ -66,6 +66,8 @@ void Scenery3dDialog::createDialogContent()
 	connect(ui->checkBoxEnableBump, SIGNAL(clicked(bool)), mgr,
 		SLOT(setEnableBumps(bool)));
 	connect(ui->checkBoxEnableLazyDrawing, &QCheckBox::clicked, mgr, &Scenery3dMgr::setEnableLazyDrawing);
+	connect(ui->checkBoxDominantFace, &QCheckBox::clicked, mgr, &Scenery3dMgr::setOnlyDominantFaceWhenMoving);
+	connect(ui->checkBoxSecondDominantFace, &QCheckBox::clicked, mgr, &Scenery3dMgr::setSecondDominantFaceWhenMoving);
 	connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3dMgr::setLazyDrawingInterval);
 
 	//hook up some Scenery3d actions
@@ -117,6 +119,8 @@ void Scenery3dDialog::createDialogContent()
 	connect(mgr, &Scenery3dMgr::torchRangeChanged, this, &Scenery3dDialog::updateFromManager);
 	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, this, &Scenery3dDialog::updateFromManager);
 	connect(mgr, &Scenery3dMgr::lazyDrawingIntervalChanged, this, &Scenery3dDialog::updateFromManager);
+	connect(mgr, &Scenery3dMgr::onlyDominantFaceWhenMovingChanged, this, &Scenery3dDialog::updateFromManager);
+	connect(mgr, &Scenery3dMgr::secondDominantFaceWhenMovingChanged, this, &Scenery3dDialog::updateFromManager);
 
 	//this is the modern type-safe way to connect signals to slots (with compile-time checking)
 	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged,this, &Scenery3dDialog::updateFromManager);
@@ -369,15 +373,23 @@ void Scenery3dDialog::updateFromManager()
 	bool val = mgr->getEnableLazyDrawing();
 	ui->checkBoxEnableLazyDrawing->setChecked(val);
 
+	ui->checkBoxDominantFace->setChecked(mgr->getOnlyDominantFaceWhenMoving());
+	ui->checkBoxSecondDominantFace->setEnabled(mgr->getOnlyDominantFaceWhenMoving());
+	ui->checkBoxSecondDominantFace->setChecked(mgr->getSecondDominantFaceWhenMoving());
+
 	if(val)
 	{
 		ui->labelLazyDrawingInterval->show();
 		ui->spinLazyDrawingInterval->show();
+		ui->checkBoxDominantFace->show();
+		ui->checkBoxSecondDominantFace->show();
 	}
 	else
 	{
 		ui->labelLazyDrawingInterval->hide();
 		ui->spinLazyDrawingInterval->hide();
+		ui->checkBoxDominantFace->hide();
+		ui->checkBoxSecondDominantFace->hide();
 	}
 
 	ui->spinLazyDrawingInterval->blockSignals(true);
