@@ -64,6 +64,8 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(float torchRange READ getTorchRange WRITE setTorchRange NOTIFY torchRangeChanged)
 	Q_PROPERTY(bool enableLazyDrawing READ getEnableLazyDrawing WRITE setEnableLazyDrawing NOTIFY enableLazyDrawingChanged)
 	Q_PROPERTY(double lazyDrawingInterval READ getLazyDrawingInterval WRITE setLazyDrawingInterval NOTIFY lazyDrawingIntervalChanged)
+	Q_PROPERTY(bool onlyDominantFaceWhenMoving READ getOnlyDominantFaceWhenMoving WRITE setOnlyDominantFaceWhenMoving NOTIFY onlyDominantFaceWhenMovingChanged)
+	Q_PROPERTY(bool secondDominantFaceWhenMoving READ getSecondDominantFaceWhenMoving WRITE setSecondDominantFaceWhenMoving NOTIFY secondDominantFaceWhenMovingChanged)
 	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
 	Q_PROPERTY(uint cubemapSize READ getCubemapSize WRITE setCubemapSize NOTIFY cubemapSizeChanged)
 	Q_PROPERTY(uint shadowmapSize READ getShadowmapSize WRITE setShadowmapSize NOTIFY shadowmapSizeChanged)
@@ -97,6 +99,8 @@ signals:
     void torchRangeChanged(const float val);
     void enableLazyDrawingChanged(const bool val);
     void lazyDrawingIntervalChanged(const double val);
+    void onlyDominantFaceWhenMovingChanged(const bool val);
+    void secondDominantFaceWhenMovingChanged(const bool val);
     void isGeometryShaderSupportedChanged(const bool val);
     void cubemapSizeChanged(const uint val);
     void shadowmapSizeChanged(const uint val);
@@ -166,6 +170,13 @@ public slots:
     //! Sets the state of the cubemap lazy-drawing mode
     void setEnableLazyDrawing(const bool val);
     bool getEnableLazyDrawing() const;
+
+    //! When true, only the face which currently is most dominantly visible is updated while moving.
+    void setOnlyDominantFaceWhenMoving(const bool val);
+    bool getOnlyDominantFaceWhenMoving() const;
+
+    void setSecondDominantFaceWhenMoving(const bool val);
+    bool getSecondDominantFaceWhenMoving() const;
 
     //! Forces a redraw of the cubemap
     void forceCubemapRedraw();

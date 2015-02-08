@@ -238,6 +238,10 @@ void Scenery3dMgr::loadConfig()
 	scenery3d->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	scenery3d->setPixelLightingEnabled(conf->value("flag_pixel_lighting").toBool());
 
+	bool v1 = conf->value("flag_lazy_dominantface",false).toBool();
+	bool v2 = conf->value("flag_lazy_seconddominantface",true).toBool();
+	scenery3d->setLazyCubemapUpdateOnlyDominantFaceOnMoving(v1,v2);
+
 	defaultScenery3dID = conf->value("default_location_id","").toString();
 
 	conf->endGroup();
@@ -246,9 +250,6 @@ void Scenery3dMgr::loadConfig()
 void Scenery3dMgr::createActions()
 {
 	QString groupName = N_("Scenery3d: 3D landscapes");
-
-	//TODO make some of these a GUI setting instead of a switch (quality options, etc)
-	//also add cubemap/shadowmap size (=quality) options to GUI?
 
 	//enable action will be set checkable if a scene was loaded
 	addAction("actionShow_Scenery3d", groupName, N_("Toggle 3D landscape"),this,"enableScene","Ctrl+3");
@@ -690,6 +691,40 @@ void Scenery3dMgr::setLazyDrawingInterval(const double val)
 
 	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_lazy_interval",val);
 	emit lazyDrawingIntervalChanged(val);
+}
+
+bool Scenery3dMgr::getOnlyDominantFaceWhenMoving() const
+{
+	bool v1,v2;
+	scenery3d->getLazyCubemapUpdateOnlyDominantFaceOnMoving(v1,v2);
+	return v1;
+}
+
+void Scenery3dMgr::setOnlyDominantFaceWhenMoving(const bool val)
+{
+	bool v1,v2;
+	scenery3d->getLazyCubemapUpdateOnlyDominantFaceOnMoving(v1,v2);
+	scenery3d->setLazyCubemapUpdateOnlyDominantFaceOnMoving(val,v2);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/flag_lazy_dominantface",val);
+	emit onlyDominantFaceWhenMovingChanged(val);
+}
+
+bool Scenery3dMgr::getSecondDominantFaceWhenMoving() const
+{
+	bool v1,v2;
+	scenery3d->getLazyCubemapUpdateOnlyDominantFaceOnMoving(v1,v2);
+	return v2;
+}
+
+void Scenery3dMgr::setSecondDominantFaceWhenMoving(const bool val)
+{
+	bool v1,v2;
+	scenery3d->getLazyCubemapUpdateOnlyDominantFaceOnMoving(v1,v2);
+	scenery3d->setLazyCubemapUpdateOnlyDominantFaceOnMoving(v1,val);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/flag_lazy_seconddominantface",val);
+	emit secondDominantFaceWhenMovingChanged(val);
 }
 
 void Scenery3dMgr::forceCubemapRedraw()
