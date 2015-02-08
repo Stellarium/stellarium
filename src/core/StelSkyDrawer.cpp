@@ -411,7 +411,7 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 }
 
 // Draw a point source halo.
-bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const RCMag& rcMag, const Vec3f& color, bool checkInScreen)
+bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag& rcMag, const Vec3f& color, bool checkInScreen)
 {
 	Q_ASSERT(sPainter);
 
@@ -419,7 +419,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3d& v, const
 		return false;
 
 	Vec3d win;
-	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
+	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(Vec3d(v[0],v[1],v[2]), win) : sPainter->getProjector()->project(Vec3d(v[0],v[1],v[2]), win)))
 		return false;
 
 	const float radius = rcMag.radius;
@@ -539,7 +539,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	if (!noStarHalo)
 	{
 		preDrawPointSource(painter);
-		drawPointSource(painter, Vec3d(v[0],v[1],v[2]), rcm, color);
+		drawPointSource(painter, v, rcm, color);
 		postDrawPointSource(painter);
 	}
 	flagStarTwinkle=save;
