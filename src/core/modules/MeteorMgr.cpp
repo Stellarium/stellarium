@@ -111,13 +111,16 @@ void MeteorMgr::update(double deltaTime)
 
 	// step through and update all active meteors
 	std::vector<Meteor*>::iterator iter;
-	for (iter = active.begin(); iter != active.end(); ++iter)
+	for (iter = active.begin(); iter != active.end(); )
 	{
 		if (!(*iter)->update(deltaTime))
 		{
 			delete *iter;
 			iter = active.erase(iter);
-			iter--;  // important!
+		}
+		       else
+		{
+			++iter;
 		}
 	}
 
