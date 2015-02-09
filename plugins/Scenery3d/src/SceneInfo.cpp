@@ -249,7 +249,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	{
 		qDebug() << "scenery3d.ini: setting initial dir/fov.";
 		info.lookAt_fov=StelUtils::strToVec3f(ini.value("start_az_alt_fov").toString());
-		info.lookAt_fov[0]=180.0f-info.lookAt_fov[0];
+		//info.lookAt_fov[0]=180.0f-info.lookAt_fov[0];
 	}
 	else
 	{

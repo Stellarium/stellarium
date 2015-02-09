@@ -38,9 +38,18 @@ public:
 
     Vec3f min, max;
 
+    //! Creates an AABB with minimum vertex set to infinity and maximum vertex set to -infinity
     AABB();
     AABB(Vec3f min, Vec3f max);
     ~AABB();
+
+    //! Resets minimum to infinity and maximum to -infinity
+    void reset();
+    //! Resets minimum and maximum to zero vectors
+    void resetToZero();
+
+    //! Updates the bounding box to include the specified vertex.
+    void expand(const Vec3f& vec);
 
     Vec3f getCorner(Corner corner) const;
 
@@ -52,8 +61,6 @@ public:
 
     //! Return the plane equation for specified plane as Vec4f
     Vec4f getEquation(AABB::Plane p) const;
-    //! Expand the BB to include the given vertex
-    void expand(const Vec3f &v);
     //! Returns a box object that represents the AABB.
     Box toBox();
 };

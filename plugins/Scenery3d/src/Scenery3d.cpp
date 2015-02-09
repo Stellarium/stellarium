@@ -2285,6 +2285,10 @@ void Scenery3d::draw(StelCore* core)
 	//update projector from core
 	altAzProjector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 
+	//perform Z-sorting for correct transparency
+	//this uses the object's centroids for sorting, so the OBJ must be created correctly
+	objModel->transparencyDepthSort(-vecdToFloat(absolutePosition));
+
 	if(requiresCubemap)
 	{
 		if(!cubeMappingCreated || reinitCubemapping)

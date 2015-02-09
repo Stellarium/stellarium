@@ -138,6 +138,8 @@ OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLB
     m_numberOfMaterials = 0;
     m_numberOfStelModels = 0;
 
+    m_firstTransparentIndex = -1;
+
     pBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
     //the constructor does no GL stuff, so it is always safe even if VAOs are not supported
     m_vertexArrayObject = new QOpenGLVertexArrayObject();
@@ -237,12 +239,15 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     return true;
 }
 
-void OBJ::addTrianglePos(const PosVector &vertexCoords, IntVector& attributeArray, VertCacheT& vertexCache, unsigned int index, int material, int v0, int v1, int v2)
+void OBJ::addFaceAttrib(AttributeVector &attributeArray, uint index, int material, int object)
+{
+	attributeArray[index].materialIndex = material;
+	attributeArray[index].objectIndex = object;
+}
+
+void OBJ::addTrianglePos(const PosVector &vertexCoords, VertCacheT& vertexCache, unsigned int index, int v0, int v1, int v2)
 {
     Vertex vertex;
-
-    //Add the material index to the index for grouping models
-    attributeArray[index] = material;
 
     //Add v0
     vertex.position = vertexCoords[v0];
@@ -257,13 +262,10 @@ void OBJ::addTrianglePos(const PosVector &vertexCoords, IntVector& attributeArra
     m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
-void OBJ::addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector &normals, IntVector& attributeArray, VertCacheT& vertexCache,
-			       unsigned int index, int material, int v0, int v1, int v2, int vn0, int vn1, int vn2)
+void OBJ::addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector &normals, VertCacheT& vertexCache,
+			       unsigned int index, int v0, int v1, int v2, int vn0, int vn1, int vn2)
 {
     Vertex vertex;
-
-    //Add the material index to the index for grouping models
-    attributeArray[index] = material;
 
     //Add v0//vn0
     vertex.position = vertexCoords[v0];
@@ -281,13 +283,10 @@ void OBJ::addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector &n
     m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
-void OBJ::addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, IntVector& attributeArray, VertCacheT& vertexCache,
-				 unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2)
+void OBJ::addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, VertCacheT& vertexCache,
+				 unsigned int index, int v0, int v1, int v2, int vt0, int vt1, int vt2)
 {
     Vertex vertex;
-
-    //Add the material index to the index for grouping models
-    attributeArray[index] = material;
 
     //Add v0/vt0
     vertex.position = vertexCoords[v0];
@@ -305,13 +304,10 @@ void OBJ::addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector 
     m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
-void OBJ::addTrianglePosTexCoordNormal(PosVector& vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, IntVector& attributeArray, VertCacheT& vertexCache,
-				       unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
+void OBJ::addTrianglePosTexCoordNormal(PosVector& vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, VertCacheT& vertexCache,
+				       unsigned int index, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
 {
     Vertex vertex;
-
-    //Add the material index to the index for grouping models
-    attributeArray[index] = material;
 
     //Add v0/vt0/vn0
     vertex.position = vertexCoords[v0];
@@ -374,7 +370,7 @@ int OBJ::addVertex(VertCacheT& vertexCache, int hash, const Vertex *pVertex)
     return index;
 }
 
-void OBJ::buildStelModels(const IntVector& attributeArray)
+void OBJ::buildStelModels(const AttributeVector &attributeArray)
 {
 	//TODO FS this can be further optimized!
 	//Imagine the case where 2 objects with the same model are not next to each other in the OBJ
@@ -385,15 +381,28 @@ void OBJ::buildStelModels(const IntVector& attributeArray)
     //Group model's triangles based on material
     StelModel* pStelModel = 0;
     int materialId = -1;
+    int objId = -1;
     int numStelModels = 0;
 
     // Count the number of meshes.
     for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
     {
-	if (attributeArray[i] != materialId)
+	if (attributeArray[i].materialIndex != materialId)
 	{
-	    materialId = attributeArray[i];
+		//a change of material always requires a new model
+		objId = attributeArray[i].objectIndex;
+	    materialId = attributeArray[i].materialIndex;
 	    ++numStelModels;
+	}
+	else if (attributeArray[i].objectIndex != objId)
+	{
+		if(materialId>=0 && m_materials.at(materialId).hasTransparency)
+		{
+			//if the obj index changes, we need a new stel model if the material is potentially transparent, otherwise it is ignored
+			//note that the stelmodel may get flagged as non-transparent later when texture information is available, but this poses no real problem
+			++numStelModels;
+		}
+		objId = attributeArray[i].objectIndex;
 	}
     }
 
@@ -402,13 +411,17 @@ void OBJ::buildStelModels(const IntVector& attributeArray)
     m_stelModels.resize(m_numberOfStelModels);
     numStelModels = 0;
     materialId = -1;
+    objId = -1;
 
     // Build the StelModel. One StelModel for each unique material.
     for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
     {
-	if (attributeArray[i] != materialId)
+	if (attributeArray[i].materialIndex != materialId || //if a new material is used
+	(attributeArray[i].objectIndex != objId && materialId>=0 && m_materials.at(materialId).hasTransparency)) //or a new object is used, material being transparent
 	{
-	    materialId = attributeArray[i];
+	    materialId = attributeArray[i].materialIndex;
+	    objId = attributeArray[i].objectIndex;
+
 	    pStelModel = &m_stelModels[numStelModels++];
 			pStelModel->triangleCount = 0;
 	    pStelModel->pMaterial = &m_materials[materialId];
@@ -789,16 +802,19 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
     unsigned int numNormals = 0;
     unsigned int numTriangles = 0;
     int activeMaterial = 0;
+    int activeObject = 0;
     char buffer[256] = {0};
     QString name;
     QMap<QString,int>::const_iterator iter;
 
     //these were member variables before, but were only used during loading, so we just define them here to save some memory
-    IntVector attributeArray(m_numberOfTriangles);
+    AttributeVector attributeArray(m_numberOfTriangles);
     PosVector vertexCoords(m_numberOfVertexCoords);
     VF2Vector textureCoords(m_numberOfTextureCoords);
     VF3Vector normals(m_numberOfNormals);
     VertCacheT vertexCache;
+
+#define ADD_ATTRIB addFaceAttrib(attributeArray,numTriangles,activeMaterial,activeObject);
 
     float fTmp[3] = {0.0f};
     double dTmp[3] = {0.0};
@@ -828,8 +844,10 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
 		vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-		addTrianglePosNormal(vertexCoords,normals,attributeArray,vertexCache,
-					numTriangles++, activeMaterial,
+
+		ADD_ATTRIB
+		addTrianglePosNormal(vertexCoords,normals,vertexCache,
+					numTriangles++,
 				     v[0], v[1], v[2],
 				     vn[0], vn[1], vn[2]);
 
@@ -841,8 +859,9 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		    v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
 		    vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-		    addTrianglePosNormal(vertexCoords,normals,attributeArray,vertexCache,
-					    numTriangles++, activeMaterial,
+		    ADD_ATTRIB
+		    addTrianglePosNormal(vertexCoords,normals,vertexCache,
+					    numTriangles++,
 					 v[0], v[1], v[2],
 					 vn[0], vn[1], vn[2]);
 
@@ -867,8 +886,9 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
 		vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-		addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,attributeArray,vertexCache,
-					     numTriangles++, activeMaterial,
+		ADD_ATTRIB
+		addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,vertexCache,
+					     numTriangles++,
 					     v[0], v[1], v[2],
 					     vt[0], vt[1], vt[2],
 					     vn[0], vn[1], vn[2]);
@@ -883,8 +903,9 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		    vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
 		    vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-		    addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,attributeArray,vertexCache,
-						 numTriangles++, activeMaterial,
+		    ADD_ATTRIB
+		    addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,vertexCache,
+						 numTriangles++,
 						 v[0], v[1], v[2],
 						 vt[0], vt[1], vt[2],
 						 vn[0], vn[1], vn[2]);
@@ -907,8 +928,9 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		vt[1] = (vt[1] < 0) ? vt[1]+numTexCoords-1 : vt[1]-1;
 		vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
 
-		addTrianglePosTexCoord(vertexCoords,textureCoords,attributeArray,vertexCache,
-				       numTriangles++, activeMaterial,
+		ADD_ATTRIB
+		addTrianglePosTexCoord(vertexCoords,textureCoords,vertexCache,
+				       numTriangles++,
 				       v[0], v[1], v[2],
 				       vt[0], vt[1], vt[2]);
 
@@ -920,8 +942,9 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		    v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
 		    vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
 
-		    addTrianglePosTexCoord(vertexCoords,textureCoords,attributeArray,vertexCache,
-					   numTriangles++, activeMaterial,
+		    ADD_ATTRIB
+		    addTrianglePosTexCoord(vertexCoords,textureCoords,vertexCache,
+					   numTriangles++,
 					   v[0], v[1], v[2],
 					   vt[0], vt[1], vt[2]);
 
@@ -939,7 +962,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
 		v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
 
-		addTrianglePos(vertexCoords, attributeArray, vertexCache, numTriangles++, activeMaterial, v[0], v[1], v[2]);
+		ADD_ATTRIB
+		addTrianglePos(vertexCoords, vertexCache, numTriangles++, v[0], v[1], v[2]);
 
 		v[1] = v[2];
 
@@ -947,7 +971,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 		{
 		    v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
 
-		    addTrianglePos(vertexCoords, attributeArray, vertexCache, numTriangles++, activeMaterial, v[0], v[1], v[2]);
+		    ADD_ATTRIB
+		    addTrianglePos(vertexCoords, vertexCache, numTriangles++, v[0], v[1], v[2]);
 
 		    v[1] = v[2];
 		}
@@ -961,6 +986,12 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 	    iter = materialCache.find(buffer);
 	    activeMaterial = (iter == materialCache.end()) ? 0 : iter.value();
 	    break;
+	case 'o':
+	case 'g':
+			//grouping separators, we consider treat o and g the same in that they may require splitting of objects
+			//we ignore the grouping name
+			++activeObject;
+			break;
 
 	case 'v': //! v, vn, or vt.
 	    switch (buffer[1])
@@ -1126,6 +1157,8 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 	    {
 	    case 'r': //! Tr
 		fscanf(pFile, "%f", &pMaterial->alpha);
+		//preliminarily mark as transparent for building of StelModels
+		pMaterial->hasTransparency = true;
 		break;
 
 	    default:
@@ -1136,6 +1169,8 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 
 	case 'd':
 	    fscanf(pFile, "%f", &pMaterial->alpha);
+	    //preliminarily mark as transparent for building of StelModels
+	    pMaterial->hasTransparency = true;
 	    break;
 
 	case 'i': // illum
@@ -1148,6 +1183,11 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 	    }
 
 	    pMaterial->illum = (Material::Illum) iTmp;
+	    if(pMaterial->illum == Material::I_TRANSLUCENT)
+	    {
+		    //preliminarily mark as transparent for building of StelModels
+		    pMaterial->hasTransparency = true;
+	    }
 	    break;
 
 	case 'm': //! map_Kd, map_bump
@@ -1313,6 +1353,23 @@ void OBJ::Material::finalize()
 	}
 }
 
+Vec3f zSortValue;
+bool zSortFunction(const OBJ::StelModel& mLeft, const OBJ::StelModel& mRight)
+{
+	float dist1 = (mLeft.centroid - zSortValue).lengthSquared();
+	float dist2 = (mRight.centroid - zSortValue).lengthSquared();
+	return dist1>dist2;
+}
+
+void OBJ::transparencyDepthSort(const Vec3f position)
+{
+	if(m_firstTransparentIndex>=0)
+	{
+		zSortValue = position;
+		std::sort(m_stelModels.begin()+m_firstTransparentIndex, m_stelModels.end(),zSortFunction);
+	}
+}
+
 void OBJ::uploadTexturesGL()
 {
     StelTextureMgr textureMgr;
@@ -1390,7 +1447,20 @@ void OBJ::uploadTexturesGL()
     }
 
     //optimize the StelModel order depending on their materials
+    //among other criteria, it is always ensured that the transparent objects are now together among the end of the list
     std::sort(m_stelModels.begin(), m_stelModels.end(), StelModelCompFunc);
+
+    //find the first stelmodel that is transparent
+    //this is required for the depth sorting
+    m_firstTransparentIndex = -1;
+    for(int i=0;i<m_stelModels.size();++i)
+    {
+	    if(m_stelModels.at(i).pMaterial->hasTransparency)
+	    {
+		    m_firstTransparentIndex = i;
+		    break;
+	    }
+    }
 
     qDebug()<<"[Scenery3d] Uploaded OBJ textures to GL";
 }
@@ -1552,35 +1622,25 @@ void OBJ::transform(QMatrix4x4 mat)
 void OBJ::findBounds()
 {
     //Find Bounding Box for entire Scene
-    pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox.max = Vec3f(-std::numeric_limits<float>::max());
+	pBoundingBox.reset();
 
     //Find AABB per Stel Model
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
 	StelModel& pStelModel = m_stelModels[i];
-	pStelModel.bbox = AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
+	pStelModel.bbox.reset();
+	pStelModel.centroid = Vec3f(0.0f);
 
 	for(int j=pStelModel.startIndex; j<(pStelModel.startIndex + pStelModel.triangleCount*3); ++j)
 	{
 	    const Vertex& pVertex = m_vertexArray.at(m_indexArray[j]);
 
-	    pBoundingBox.min = Vec3f( std::min(static_cast<float>(pVertex.position[0]), pBoundingBox.min[0]),
-				      std::min(static_cast<float>(pVertex.position[1]), pBoundingBox.min[1]),
-				      std::min(static_cast<float>(pVertex.position[2]), pBoundingBox.min[2]));
-
-	    pBoundingBox.max = Vec3f( std::max(static_cast<float>(pVertex.position[0]), pBoundingBox.max[0]),
-				      std::max(static_cast<float>(pVertex.position[1]), pBoundingBox.max[1]),
-				      std::max(static_cast<float>(pVertex.position[2]), pBoundingBox.max[2]));
-
-	    pStelModel.bbox.min = Vec3f( std::min(static_cast<float>(pVertex.position[0]), pStelModel.bbox.min[0]),
-					  std::min(static_cast<float>(pVertex.position[1]), pStelModel.bbox.min[1]),
-					  std::min(static_cast<float>(pVertex.position[2]), pStelModel.bbox.min[2]));
-
-	    pStelModel.bbox.max = Vec3f( std::max(static_cast<float>(pVertex.position[0]), pStelModel.bbox.max[0]),
-					  std::max(static_cast<float>(pVertex.position[1]), pStelModel.bbox.max[1]),
-					  std::max(static_cast<float>(pVertex.position[2]), pStelModel.bbox.max[2]));
+	    pBoundingBox.expand(pVertex.position);
+	    pStelModel.bbox.expand(pVertex.position);
+	    pStelModel.centroid += pVertex.position;
 	}
+
+	pStelModel.centroid /= (pStelModel.triangleCount*3);
     }
 }
 
@@ -1613,6 +1673,8 @@ OBJ& OBJ::operator=(const OBJ& other)
 	m_hasNormals = other.m_hasNormals;
 	m_hasTangents = other.m_hasTangents;
 	m_hasStelModels = other.m_hasStelModels;
+
+	m_firstTransparentIndex = other.m_firstTransparentIndex;
 
 	m_numberOfVertexCoords = other.m_numberOfVertexCoords;
 	m_numberOfTextureCoords = other.m_numberOfTextureCoords;
