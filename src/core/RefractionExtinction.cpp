@@ -112,25 +112,25 @@ void Refraction::updatePrecomputed()
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
 	const double length = altAzPos.length();
-    if (length==0.0)
-    {
-        // Under some circumstances there are zero coordinates. Just leave them alone.
-        //qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zero vector.";
-        return;
-    }
+	if (length==0.0)
+	{
+		// Under some circumstances there are zero coordinates. Just leave them alone.
+		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zero vector.";
+		return;
+	}
 
-    Q_ASSERT(length>0.0);
+	Q_ASSERT(length>0.0);
 	const double sinGeo = altAzPos[2]/length;
 	Q_ASSERT(fabs(sinGeo)<=1.0);
 	double geom_alt_rad = std::asin(sinGeo);
-    float geom_alt_deg = 180./M_PI*geom_alt_rad;
+	float geom_alt_deg = 180./M_PI*geom_alt_rad;
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-        float r=press_temp_corr * ( 1.02f / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f);
+		float r=press_temp_corr * ( 1.02f / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f);
 		geom_alt_deg += r;
-        if (geom_alt_deg > 90.f)
-            geom_alt_deg=90.f;
+		if (geom_alt_deg > 90.f)
+			geom_alt_deg=90.f;
 	}
 	else if(geom_alt_deg>MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG)
 	{
@@ -157,20 +157,20 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
 	const double length = altAzPos.length();
-    if (length==0.0)
-    {
-        // Under some circumstances there are zero coordinates. Just leave them alone.
-        //qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zero vector.";
-        return;
-    }
+	if (length==0.0)
+	{
+		// Under some circumstances there are zero coordinates. Just leave them alone.
+		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zero vector.";
+		return;
+	}
 	Q_ASSERT(length>0.0);
 	const double sinObs = altAzPos[2]/length;
 	Q_ASSERT(fabs(sinObs)<=1.0);
-    float obs_alt_deg=180./M_PI*std::asin(sinObs);
+	float obs_alt_deg=180./M_PI*std::asin(sinObs);
 	if (obs_alt_deg > 0.22879f)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
-        float r=press_temp_corr * (1.f / std::tan((obs_alt_deg+7.31f/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f);
+		float r=press_temp_corr * (1.f / std::tan((obs_alt_deg+7.31f/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f);
 		obs_alt_deg -= r;
 	}
 	else if (obs_alt_deg > MIN_APP_ALTITUDE_DEG)
