@@ -177,7 +177,7 @@ private:
 	//! Temperature[Celsius deg] (10).
 	float temperature;
 	//! Correction factor for refraction formula, to be cached for speed.
-    float press_temp_corr;
+	float press_temp_corr;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;

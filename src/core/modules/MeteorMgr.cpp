@@ -118,7 +118,7 @@ void MeteorMgr::update(double deltaTime)
 			delete *iter;
 			iter = active.erase(iter);
 		}
-		       else
+		else
 		{
 			++iter;
 		}
