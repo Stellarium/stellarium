@@ -158,7 +158,7 @@ private:
     unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
     unsigned int shadowmapSize;
 
-    Vec3d absolutePosition;     // current eyepoint in model
+    Vec3d absolutePosition;     // current eyepoint in model (note: this is actually the negated position, i.e. the value used to translate the view matrix)
     Vec3d moveVector;           // position change in scene coords
     Vec3f movement;		// speed values for moving around the scenery
     float eye_height;
