@@ -158,6 +158,8 @@ public:
         const Material* pMaterial;
 	//AABB is managed by this
 	AABB bbox;
+	//The centroid location of all vertices of this model
+	Vec3f centroid;
     };
 
     //! Initializes values
@@ -176,6 +178,10 @@ public:
     Material &getMaterial(int i);
     //! Returns a StelModel
     const StelModel& getStelModel(int i) const;
+
+    //! Sorts the transparent StelModels according to their distance to the specified position.
+    //! They are sorted so that they can be drawn back-to-front.
+    void transparencyDepthSort(const Vec3f position);
 
     //! Getters for various datastructures
     int getNumberOfIndices() const;
@@ -228,7 +234,13 @@ public:
     //! Copy assignment operator. No deep copies are performed, but QVectors have copy-on-write semantics, so this is no problem. Does not copy GL objects.
     OBJ& operator=(const OBJ& other);
 private:
-    typedef QVector<int> IntVector;
+    struct FaceAttributes
+    {
+	    int materialIndex;
+	    int objectIndex;
+    };
+
+    typedef QVector<FaceAttributes> AttributeVector;
     typedef QVector<Vec3f> VF3Vector;
     typedef QVector<Vec2f> VF2Vector;
     typedef Vec3f VPos;
@@ -236,20 +248,21 @@ private:
     typedef QMap<QString,int> MatCacheT;
     typedef QMap<int, QVector<int> > VertCacheT;
 
-    void addTrianglePos(const PosVector& vertexCoords, IntVector& attributeArray, VertCacheT &vertexCache, unsigned int index, int material, int v0, int v1, int v2);
-    void addTrianglePosNormal(const PosVector &vertexCoords,const VF3Vector& normals, IntVector &attributeArray, VertCacheT &vertexCache, unsigned int index, int material,
+    void addFaceAttrib(AttributeVector& attributeArray, uint index, int material, int object);
+    void addTrianglePos(const PosVector& vertexCoords, VertCacheT &vertexCache, unsigned int index, int v0, int v1, int v2);
+    void addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector& normals, VertCacheT &vertexCache, unsigned int index,
 			      int v0, int v1, int v2,
 			      int vn0, int vn1, int vn2);
-    void addTrianglePosTexCoord(const PosVector &vertexCoords,const VF2Vector &textureCoords, IntVector &attributeArray, VertCacheT &vertexCache, unsigned int index, int material,
+    void addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, VertCacheT &vertexCache, unsigned int index,
 				int v0, int v1, int v2,
 				int vt0, int vt1, int vt2);
-    void addTrianglePosTexCoordNormal(PosVector &vertexCoords,const VF2Vector &textureCoords,const VF3Vector &normals, IntVector &attributeArray, VertCacheT &vertexCache, unsigned int index, int material,
+    void addTrianglePosTexCoordNormal(PosVector &vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, VertCacheT &vertexCache, unsigned int index,
 				      int v0, int v1, int v2,
 				      int vt0, int vt1, int vt2,
 				      int vn0, int vn1, int vn2);
     int addVertex(VertCacheT &vertexCache, int hash, const Vertex* pVertex);
     //! Builds the StelModels based on material
-    void buildStelModels(const IntVector &attributeArray);
+    void buildStelModels(const AttributeVector &attributeArray);
     //! Generates normals in case they aren't specified/need rebuild
     void generateNormals();
     //! Generates tangents (and bitangents/binormals) (useful for NormalMapping, Parallax Mapping, ...)
@@ -276,6 +289,8 @@ private:
     bool m_hasTangents;
     bool m_hasStelModels;
     static bool vertexArraysSupported;
+
+    int m_firstTransparentIndex;
 
     //! Structure sizes
     unsigned int m_numberOfVertexCoords;

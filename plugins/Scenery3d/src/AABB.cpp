@@ -82,10 +82,7 @@ void Box::render() const
 
 AABB::AABB()
 {
-    float minVal = std::numeric_limits<float>::max();
-    float maxVal = -std::numeric_limits<float>::max();
-
-    AABB(Vec3f(minVal), Vec3f(maxVal));
+	*this = AABB(std::numeric_limits<float>::max(),-std::numeric_limits<float>::max());
 }
 
 AABB::AABB(Vec3f min, Vec3f max)
@@ -95,6 +92,26 @@ AABB::AABB(Vec3f min, Vec3f max)
 }
 
 AABB::~AABB() {}
+
+void AABB::reset()
+{
+	*this = AABB();
+}
+
+void AABB::resetToZero()
+{
+	*this = AABB(Vec3f(0.0f),Vec3f(0.0f));
+}
+
+void AABB::expand(const Vec3f &vec)
+{
+	min = Vec3f(	std::min(vec.v[0], min.v[0]),
+			std::min(vec.v[1], min.v[1]),
+			std::min(vec.v[2], min.v[2]));
+	max = Vec3f(	std::max(vec.v[0], max.v[0]),
+			std::max(vec.v[1], max.v[1]),
+			std::max(vec.v[2], max.v[2]));
+}
 
 Vec3f AABB::getCorner(Corner corner) const
 {
@@ -204,18 +221,6 @@ Vec3f AABB::negativeVertex(Vec3f& normal) const
         out.v[2] = min.v[2];
 
     return out;
-}
-
-void AABB::expand(const Vec3f &v)
-{
-    if(v.v[0] > max.v[0]) max.v[0] = v.v[0];
-    else if(v.v[0] < min.v[0]) min.v[0] = v.v[0];
-
-    if(v.v[1] > max.v[1]) max.v[1] = v.v[1];
-    else if(v.v[1] < min.v[1]) min.v[1] = v.v[1];
-
-    if(v.v[2] > max.v[2]) max.v[2] = v.v[2];
-    else if(v.v[2] < min.v[2]) min.v[2] = v.v[2];
 }
 
 void AABB::render() const
