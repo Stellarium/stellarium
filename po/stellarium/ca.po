@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-03 10:59+0600\n"
-"PO-Revision-Date: 2014-12-28 18:35+0000\n"
-"Last-Translator: Joan Salvat <jsalvat@hotmail.com>\n"
+"PO-Revision-Date: 2015-02-08 18:55+0000\n"
+"Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-04 05:52+0000\n"
+"X-Launchpad-Export-Date: 2015-02-09 05:48+0000\n"
 "X-Generator: Launchpad (build 17331)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -162,7 +162,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:615
 msgid "Celestial body:"
-msgstr ""
+msgstr "Cos celeste:"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
@@ -333,12 +333,12 @@ msgstr "Nomenament provisional: %1"
 #: src/core/modules/Comet.cpp:156
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "no periòdic"
 
 #: src/core/modules/Comet.cpp:160
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "periòdic"
 
 #: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
 #: plugins/Pulsars/src/Pulsar.cpp:166
@@ -361,7 +361,7 @@ msgstr "Distància del Sol: %1UA (%2 Milions km)"
 #: src/core/modules/Comet.cpp:230
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr ""
+msgstr "Període sideral: %1 a"
 
 #: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
@@ -2156,27 +2156,27 @@ msgstr "lluna"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr ""
+msgstr "plutí"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
 msgid "dwarf planet"
-msgstr ""
+msgstr "planeta nan"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "cubewano"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "scattered disc object"
-msgstr ""
+msgstr "objecte disc dispers"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
 msgid "Oort cloud object"
-msgstr ""
+msgstr "objecte del núvol d'Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:64
@@ -2198,27 +2198,27 @@ msgstr "Llunes"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:70
 msgid "Plutinos"
-msgstr ""
+msgstr "Plutins"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:72
 msgid "Dwarf planets"
-msgstr ""
+msgstr "Planetes nans"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "Cubewanos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:76
 msgid "Scattered disc objects"
-msgstr ""
+msgstr "Objectes de disc dispers"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:78
 msgid "Oort cloud objects"
-msgstr ""
+msgstr "Objectes del núvol d'Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
@@ -5342,7 +5342,7 @@ msgstr "Selecciona l'ocular previ"
 #: plugins/Oculars/src/Oculars.cpp:1459
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr ""
+msgstr "RA/Dec (J2000.0) de creu"
 
 #: plugins/Oculars/src/Oculars.cpp:1586
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
@@ -5565,12 +5565,12 @@ msgstr ""
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr ""
+msgstr "CDVv"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "Magnification factor:"
-msgstr ""
+msgstr "Factor d'ampliació:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
@@ -5724,7 +5724,7 @@ msgstr "Restaura el CDV als valors inicials"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "Vista del sensor"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -5732,7 +5732,7 @@ msgstr "Utilitzeu graus i minuts per FOV de la CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "Fes la volta per CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
@@ -5772,7 +5772,7 @@ msgstr "Binoculars"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "Té la mira permanent"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -6731,7 +6731,7 @@ msgstr "&Objecte actual"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Center of the screen"
-msgstr ""
+msgstr "Centre de la pantalla"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Hours-minutes-seconds format"
@@ -7447,7 +7447,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:207
 msgid "Select bookmark..."
-msgstr ""
+msgstr "Seleccionar marcador ..."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
@@ -8232,22 +8232,22 @@ msgstr "Fred"
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:858
 msgid "Miniterran"
-msgstr ""
+msgstr "Miniterraqui"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:860
 msgid "Subterran"
-msgstr ""
+msgstr "Subterraqui"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:862
 msgid "Terran"
-msgstr ""
+msgstr "Terraqui"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:864
 msgid "Superterran"
-msgstr ""
+msgstr "Superterraqui"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:866
@@ -8768,12 +8768,12 @@ msgstr "Major separació del sol: %1 (a %2 graus.)"
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "Sortida/posada acronical: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr ""
+msgstr "Sortida/posada heliacal: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Heliacal rise/set. "
@@ -8787,7 +8787,7 @@ msgstr "Sense ortus/ocàs acrònic "
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Sortida/posada cosmical:%1/%2."
 
 #: plugins/Observability/src/Observability.cpp:209
 msgid "No Cosmical rise/set."
@@ -9036,7 +9036,7 @@ msgstr "Altitud del Sol al crepuscle:: %1 graus."
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Altitud horitzontal: %1 deg."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -9445,22 +9445,22 @@ msgstr "Eta Lírides"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiid"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchid"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchid"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
@@ -9470,102 +9470,102 @@ msgstr "Theta Centàurides"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiids meridional"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiids septentrional"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
 msgid "Arietids"
-msgstr ""
+msgstr "Arietids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancrids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Craterids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
 msgid "May Librids"
-msgstr ""
+msgstr "Librids del maig"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
 msgid "June Scutids"
-msgstr ""
+msgstr "Scutids del juny"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariids meridional"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariids septentrional"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1361
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Arietids de la tardor"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orionids"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
@@ -9691,17 +9691,17 @@ msgstr "Deriva radiant (per dia)"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Velocitat meteòrica geocèntrica: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:365
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Índex de la població: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:370
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "Prové de: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
@@ -9714,7 +9714,7 @@ msgstr "Activitat"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Màxim: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:392
 msgid "Solar longitude is"
@@ -9886,13 +9886,13 @@ msgstr "Podeu obtenir aquí informació sobre les pluges de meteors:"
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Pluja de meteors%2 - article a vikipèdia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:293
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:357
 msgid "Meteor showers is updated"
@@ -9976,7 +9976,7 @@ msgstr "Des de"
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "dd/MMM/aaaa"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
@@ -10009,7 +10009,7 @@ msgstr "Mostra les coordenades del punter del ratolí"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:144
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "AR/De1P/Halley"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
 msgctxt "abbreviated in the plugin"
@@ -10024,22 +10024,22 @@ msgstr "Az/Alt"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Gal. Long/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:215
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "Ecl. Long/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:234
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "Ecl. Long/Lat (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:252
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "AH/Dec"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
