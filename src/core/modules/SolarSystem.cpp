@@ -104,6 +104,13 @@ SolarSystem::~SolarSystem()
 	{
 		p->satellites.clear();
 	}
+
+	//delete comet textures created in loadPlanets
+	Comet::comaTexture.clear();
+	Comet::tailTexture.clear();
+
+	//deinit of SolarSystem is NOT called at app end automatically
+	deinit();
 }
 
 /*************************************************************************
@@ -172,7 +179,8 @@ void SolarSystem::init()
 
 void SolarSystem::deinit()
 {
-	Planet::deinitShader();
+	if(Planet::planetShaderProgram)
+		Planet::deinitShader();
 }
 
 void SolarSystem::recreateTrails()
@@ -1005,11 +1013,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// special case: load earth shadow texture
 	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
 
-	// GZ: Also comets just have static textures.
+	// Also comets just have static textures.
 	Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
+	//tail textures. We use paraboloid tail bodies, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
 	Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: I think we need only one texture for the tails.
 
 	return true;
 }

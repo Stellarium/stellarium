@@ -546,7 +546,7 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 	*lng = atan2(v[1],v[0]);
 }
 
-void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
+void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
 {
 	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
 	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
