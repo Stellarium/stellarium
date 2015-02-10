@@ -235,6 +235,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox e
 	
 	interpolatedPosition.reset();
 	
+	connect(tcpSocket, SIGNAL(connected()), this, SLOT(socketConnected()));
 	connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketFailed(QAbstractSocket::SocketError)));
 }
 
@@ -513,6 +514,12 @@ void TelescopeTCP::performCommunication()
 			performReading();
 		}
 	}
+}
+
+void TelescopeTCP::socketConnected(void)
+{
+	qDebug() << "TelescopeTCP(" << name <<"): turning off Nagle algorithm.";
+	tcpSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 }
 
 //TODO: More informative error messages?
