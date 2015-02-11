@@ -794,9 +794,9 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 {
     //TODO convert to Qt IO functions (QFile)
 
-    unsigned int v[3] = {0};
-    unsigned int vt[3] = {0};
-    unsigned int vn[3] = {0};
+    int v[3] = {0};
+    int vt[3] = {0};
+    int vn[3] = {0};
     unsigned int numVertices = 0;
     unsigned int numTexCoords = 0;
     unsigned int numNormals = 0;
