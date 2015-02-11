@@ -480,15 +480,12 @@ QSettings* StoredView::getUserViews()
 	if(userviews)
 		return userviews;
 
-	//this handling follows same way as the main() code does to make sure it has a config file
+	//try to find an writable location
 	QString file = StelFileMgr::findFile(USERVIEWS_FILE, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
 	if (file.isEmpty())
 	{
-		file = StelFileMgr::findFile(USERVIEWS_FILE, StelFileMgr::New);
-		if (file.isEmpty())
-		{
-			qCritical("Could not create userview file %s.", qPrintable(USERVIEWS_FILE));
-		}
+		//make sure the new file goes into user dir
+		file = StelFileMgr::getUserDir() + "/" + USERVIEWS_FILE;
 	}
 
 	if(!StelFileMgr::exists(file))
