@@ -476,7 +476,7 @@ void StelMainView::init(QSettings* conf)
 		setFullScreen(false);
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);	
+		move(x, y);
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
