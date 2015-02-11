@@ -10,6 +10,7 @@ TimeZoneConfiguration               = true
 
 [video]
 fullscreen                          = true
+screen_number                       = 0
 screen_w                            = 1024
 screen_h                            = 768
 screen_x                            = 0
