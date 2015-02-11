@@ -51,7 +51,7 @@ QT5_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
 ################# compiles .ui files ############
 SET(Scenery3d_UIS
   gui/scenery3dDialog.ui
-  gui/storedviewDialog.ui
+  gui/storedViewDialog.ui
 )
 QT5_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
 
