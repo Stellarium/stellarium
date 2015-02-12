@@ -3,7 +3,7 @@
 #
 # Tool for create a GCVS catalog for Stellarium
 #
-# Copyright (C) 2013 Alexander Wolf
+# Copyright (C) 2013, 2015 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -27,7 +27,7 @@
 
 use LWP::UserAgent;
 
-$GCVS   = "./varcat-hip.dat"; 	# GCVS part
+$GCVS   = "./iii.dat"; 	# GCVS
 $HIPV	= "./vcat-hip.dat";
 $fpart 	= "http://simbad.u-strasbg.fr/simbad/sim-id?Ident=";
 $lpart 	= "&NbIdent=1&Radius=2&Radius.unit=arcmin&submit=submit+id";
@@ -38,10 +38,11 @@ $ua = LWP::UserAgent->new(
 );
 
 $ua->agent("Opera/9.80 (X11; Linux i686; U; ru) Presto/2.9.168 Version/11.50");
-
+$i = 0;
 open (OUT, ">$HIPV");
 open (GV, "$GCVS");
 while (<GV>) {
+    $i++;
     $rawstring = $_;
     $designation = substr($rawstring,8,9);
     $designation =~ s/[ ]{1,}/+/gi;
@@ -62,6 +63,10 @@ while (<GV>) {
 	    $add .= " ";
         }
 	print OUT $hipn.$add."|".$rawstring;
+    }
+    if ($i==10) {
+	$i = 0;
+	sleep 10;
     }
 }
 close GV;
