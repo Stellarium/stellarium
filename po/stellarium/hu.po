@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-12 00:14+0600\n"
-"PO-Revision-Date: 2015-01-31 06:55+0000\n"
+"PO-Revision-Date: 2015-02-12 20:36+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-12 05:56+0000\n"
+"X-Launchpad-Export-Date: 2015-02-13 05:53+0000\n"
 "X-Generator: Launchpad (build 17336)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -5661,7 +5661,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "FOV visszaállítása a kezdeti értékre"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
@@ -6307,7 +6307,7 @@ msgstr "Szakaszok száma:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:700
 #: plugins/Satellites/src/ui_satellitesDialog.h:704
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Egy szegmens ideje másodpercben"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Segment length (s):"
@@ -7873,11 +7873,11 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:164
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "%1regisztrált felpörgéssel"
 
 #: plugins/Pulsars/src/Pulsar.cpp:166
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "pulzár felpörgéssel"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:178
@@ -7977,7 +7977,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:347
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "pulzáló kibocsájtással a rádiósávban"
 
 #: plugins/Pulsars/src/Pulsar.cpp:352
 msgid "with intermittently pulsed radio emission"
@@ -8069,7 +8069,7 @@ msgstr "Pulzár gomb az eszköztáron"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Eltérő színek használata a felpörgéses pulzárokhoz"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
@@ -8942,11 +8942,11 @@ msgstr ""
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "FOV beállítása %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "Látótér bővítmény"
 
 #: plugins/FOV/src/ui_fovWindow.h:392
 msgid ""
@@ -9858,11 +9858,11 @@ msgstr "A képernyő felső közepe"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "jobb felső negyed közepe"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "jobb alsó negyed közepe"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
