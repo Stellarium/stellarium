@@ -546,7 +546,7 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 	*lng = atan2(v[1],v[0]);
 }
 
-void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
+void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
 {
 	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
 	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
@@ -1349,7 +1349,7 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	{
 		double t = y - 1975;
 		//r = (45.45 + 1.067*t - std::pow(t,2)/260 - std::pow(t,3) / 718);
-		r = ((-t/718.0 +1/260.0)*t + 1.067)*t +45.45;
+		r = ((-t/718.0 -1/260.0)*t + 1.067)*t +45.45;
 	}
 	else if (y < 2005)
 	{
@@ -1377,14 +1377,14 @@ double getDeltaTByEspenakMeeus(const double jDay)
 double getDeltaTBySchoch(const double jDay)
 {
 	double u=(jDay-2378496.0)/36525.0; // (1800-jan-0.5)
-	return -36.28 + 36.28*std::pow(u,2);
+	return -36.28 + 36.28*u*u;
 }
 
 // Implementation of algorithm by Clemence (1948) for DeltaT computation
 double getDeltaTByClemence(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-	return +8.72 + 26.75*u + 11.22*std::pow(u,2);
+	return +8.72 + 26.75*u + 11.22*u*u;
 }
 
 // Implementation of algorithm by IAU (1952) for DeltaT computation
@@ -1445,7 +1445,7 @@ double getDeltaTBySchmadelZech1979(const double jDay)
 double getDeltaTByMorrisonStephenson1982(const double jDay)
 {
 	double u=(jDay-2382148.0)/36525.0; // (1810-jan-0.5)
-	return -15.0+32.50*std::pow(u,2);
+	return -15.0+32.50*u*u;
 }
 
 // Implementation of algorithm by Stephenson & Morrison (1984) for DeltaT computation
@@ -1571,7 +1571,7 @@ double getDeltaTByReijs(const double jDay)
 {
 	double OffSetYear = (2385800.0 - jDay)/365.25;
 
-	return ((1.8 * std::pow(OffSetYear,2)/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
+	return ((1.8 * OffSetYear*OffSetYear/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
 }
 
 // Implementation of algorithm by Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) for DeltaT computation

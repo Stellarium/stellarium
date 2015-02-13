@@ -139,18 +139,6 @@ int main(int argc, char **argv)
 			timerGrain = 0;
 	}
 #endif
-#ifdef Q_OS_MAC
-	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
-	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
-	 char * option = new char[20];
-	 char * value = new char[21];
-	 strcpy( option, "-platformpluginpath");
-	 strcpy( value, "../plugins/platforms");
-	 newArgv[argc++] = option;
-	 newArgv[argc++] = value;
-	 argv = newArgv;
-
-#endif
 
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
@@ -369,11 +357,6 @@ int main(int argc, char **argv)
 	if(timerGrain)
 		timeEndPeriod(timerGrain);
 	#endif //Q_OS_WIN
-	#ifdef Q_OS_MAC
-	delete(newArgv);
-	delete(option);
-	delete(value);
-	#endif
 
 	return 0;
 }

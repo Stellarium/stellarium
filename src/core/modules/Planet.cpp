@@ -735,7 +735,7 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq)));
+	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq)));
 }
 
 // Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
@@ -745,7 +745,7 @@ float Planet::getPhase(const Vec3d& obsPos) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
 	return 0.5f * qAbs(1.f + cos_chi);
 }
 
@@ -794,7 +794,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 			// Compute d = distance from satellite center to border of inner shadow.
 			// d>0 means inside the shadow cone.
-			double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
+			double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/std::sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
 			if (d>=radius)
 			{
 				// The satellite is totally inside the inner shadow.
@@ -822,7 +822,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
 		const double phaseDeg=phase*180./M_PI;
-		const double d = 5. * log10(sqrt(observerPlanetRq*planetRq));
+		const double d = 5. * log10(std::sqrt(observerPlanetRq*planetRq));
 
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are two solutions:
@@ -861,7 +861,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 					double rings = -2.6*sinx + 1.25*sinx*sinx;
 					return -8.88 + d + 0.044*phaseDeg + rings;
@@ -900,7 +900,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
 					return -8.68 + d + 0.044*phaseDeg + rings;
@@ -937,7 +937,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
 					return -8.88 + d + 0.044*phaseDeg + rings;
@@ -986,7 +986,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// Problematic: Early-out here of course disables the wanted hint circles for dim asteroids.
 	// The line makes hints for asteroids 5 magnitudes below sky limiting magnitude visible.
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
-	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
+	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid)
 	{
 		return;
 	}
@@ -1227,26 +1227,28 @@ void Planet::initShader()
 		"    }\n"
 		"\n"
 		"#ifdef IS_MOON\n"
-		"    highp vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
+		"    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
 		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
 		"    // normal now contains the real surface normal taking normal map into account\n"
 		"    // Use an Oren-Nayar model for rough surfaces\n"
 		"    // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar\n"
-		"    highp float cosAngleLightNormal = dot(normal, lightDirection);\n"
-		"    highp float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
+		// GZ next 2 don't require highp IMHO
+		"    mediump float cosAngleLightNormal = dot(normal, lightDirection);\n"
+		"    mediump float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
 		"    mediump float angleLightNormal = acos(cosAngleLightNormal);\n"
 		"    mediump float angleEyeNormal = acos(cosAngleEyeNormal);\n"
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		"    mediump float roughness = 1.0;\n"
-		"    mediump float roughnessSquared = roughness * roughness;\n"
-		"    mediump float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
-		"    mediump float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
-		"    mediump float C = sin(alpha) * tan(beta);\n"
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
+		// GZ next 5 can be lowp instead of mediump
+		"    lowp float roughness = 1.0;\n"
+		"    lowp float roughnessSquared = roughness * roughness;\n"
+		"    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
+		"    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
+		"    lowp float C = sin(alpha) * tan(beta);\n"
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 2.0;\n"
 		"#endif\n"
-		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 2.0);\n"
+		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
 		"    {\n"
@@ -1608,11 +1610,15 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
 	
-	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
-	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform()->forward(eyePos);
+	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();	
+	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
+	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
+	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(eyePos);
+	//qDebug() << "-->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
 	projector->getModelViewTransform()->backward(eyePos);
 	eyePos.normalize();
-	
+	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
+
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
 	GL(shader->setUniformValue(shaderVars->eyeDirection, eyePos[0], eyePos[1], eyePos[2]));

@@ -176,7 +176,7 @@ namespace StelUtils
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
 	//! Coordinate Transformation from equatorial to ecliptical
-	void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
+	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.
@@ -591,7 +591,8 @@ namespace StelUtils
 	double getDeltaTStandardError(const double jDay);
 
 	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
-	template <typename T> int sign(T val) {
+	template <typename T> int sign(T val)
+	{
 		return (T(0) < val) - (val < T(0));
 	}
 	
@@ -620,12 +621,12 @@ namespace StelUtils
 	QByteArray uncompress(const QByteArray& data);
 
 #ifdef _MSC_BUILD
-    inline double trunc(double x)
-    {
-        return (x < 0 ? std::ceil(x) : std::floor(x));
-    }
+	inline double trunc(double x)
+	{
+		return (x < 0 ? std::ceil(x) : std::floor(x));
+	}
 #else
-    inline double trunc(double x) { return ::trunc(x); }
+	inline double trunc(double x) { return ::trunc(x); }
 #endif
 }
 
