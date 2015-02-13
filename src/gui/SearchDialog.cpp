@@ -255,8 +255,8 @@ void SearchDialog::populateCoordinateAxis()
 		case horizontal:
 		{
 			ui->AxisXLabel->setText(q_("Azimuth"));
-			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
-			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
 			ui->AxisYLabel->setText(q_("Altitude"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -265,8 +265,8 @@ void SearchDialog::populateCoordinateAxis()
 		case galactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
-			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
-			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
 			ui->AxisYLabel->setText(q_("Latitude"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);

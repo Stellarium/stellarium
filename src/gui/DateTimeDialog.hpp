@@ -34,8 +34,7 @@ public:
 	~DateTimeDialog();
 	double newJd();
 	bool valid(int y, int m, int d, int h, int min, int s);
-	bool validJd(double jday);
-	bool validMjd(double mjday);
+	bool validJd(double jday);	
 	//! Notify that the application style changed
 	void styleChanged();
 public slots:
