@@ -38,6 +38,8 @@
 #else
 #include <QGLWidget>
 #endif
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QFileInfo>
 #include <QIcon>
@@ -467,8 +469,22 @@ void StelMainView::init(QSettings* conf)
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
 	resize(size);
 
+	QDesktopWidget *desktop = QApplication::desktop();
+	int screen = conf->value("video/screen_number", 0).toInt();
+	if (screen < 0 || screen >= desktop->screenCount())
+	{
+		qWarning() << "WARNING: screen" << screen << "not found";
+		screen = 0;
+	}
+	QRect screenGeom = desktop->screenGeometry(screen);
+
 	if (fullscreen)
 	{
+		// The fullscreen window appears on screen where is the majority of
+		// the normal window. So we first resize (shrink) the normal window
+		// to screen area.
+		move(screenGeom.x(), screenGeom.y());
+		resize(screenGeom.width(), screenGeom.height());
 		setFullScreen(true);
 	}
 	else
@@ -476,7 +492,7 @@ void StelMainView::init(QSettings* conf)
 		setFullScreen(false);
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);
+		move(x + screenGeom.x(), y + screenGeom.y());
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
