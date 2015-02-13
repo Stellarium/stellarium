@@ -123,7 +123,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		}
 		max_x = (int)StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length);
 		step_x = screen_w / (double)(max_x-0.5);
-		max_y = (int)StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
+		max_y = (int)StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*std::sqrt(3.0)));
 		step_y = screen_h/ (double)max_y;
 
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();

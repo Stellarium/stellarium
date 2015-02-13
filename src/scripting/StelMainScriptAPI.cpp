@@ -221,7 +221,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	if (ssmgr->searchByName(planet))
 		loc.planetName = planet;
 	loc.name = name;
-	core->moveObserverTo(loc, duration);
+	core->moveObserverTo(loc, duration, duration);
 }
 
 void StelMainScriptAPI::setObserverLocation(const QString id, float duration)

@@ -153,7 +153,13 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
+		QString cometType = qc_("non-periodic", "type of comet");
+		if (semiMajorAxis>0.0)
+		{
+			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
+			cometType = qc_("periodic", "type of comet");
+		}
+		oss << q_("Type: <b>%1</b> (%2)").arg(q_(getPlanetTypeString())).arg(cometType) << "<br />";
 	}
 
 	if (flags&Magnitude)
@@ -216,12 +222,22 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 	if (flags&Extra)
 	{
+		// If semi-major axis not zero then calculate and display orbital period for comet in days
+		double siderealPeriod = getSiderealPeriod();
+		if (siderealPeriod>0)
+		{
+			// TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
+			oss << q_("Sidereal period: %1 a").arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+		}
+
 		// GZ: Add speed. I don't know where else to place that bit of information.
 		// xgettext:no-c-format
 		oss << QString(q_("Speed: %1 km/s"))
 			   .arg(((CometOrbit*)userDataPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
 		oss << "<br>";
+
 	}
+
 
 	if (flags&Size)
 	{
@@ -234,14 +250,6 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString(q_("Gas tail length (estimate): %1 Mio km"))
 			   .arg(tailFactors[1]*AU*1e-6, 0, 'G', 3);
 		oss << "<br>";
-	}
-
-	// If semi-major axis not zero then calculate and display orbital period for comet in days
-	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra) && (siderealPeriod>0))
-	{
-		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 	}
 
 	postProcessInfoString(str, flags);

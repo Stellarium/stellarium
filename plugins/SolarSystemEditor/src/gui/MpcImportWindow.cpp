@@ -125,6 +125,8 @@ void MpcImportWindow::createDialogContent()
 
 	connect(ui->pushButtonSendQuery, SIGNAL(clicked()),
 	        this, SLOT(sendQuery()));
+	connect(ui->lineEditQuery, SIGNAL(returnPressed()),
+		this, SLOT(sendQuery()));
 	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()),
 	        this, SLOT(abortQuery()));
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)),

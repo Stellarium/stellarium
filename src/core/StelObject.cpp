@@ -28,7 +28,6 @@
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
 #include "SolarSystem.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
 
 #include <QRegExp>
@@ -184,21 +183,20 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		}
 	}
 
-	if ((flags&EclipticCoord) && (core->getCurrentLocation().planetName=="Earth"))
+	if (flags&EclipticCoord)
 	{
-		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		double ecl= ssystem->getEarth()->getRotObliquity(2451545.0);
-		double ra_equ, dec_equ, lambda, beta;		
+		double ecl = core->getCurrentPlanet()->getRotObliquity(2451545.0);
+		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
-		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
 		if (withDecimalDegree)
 			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
 		else
 			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
-		ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
+		ecl = core->getCurrentPlanet()->getRotObliquity(core->getJDay());
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
+		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
 		if (withDecimalDegree)
 			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";

@@ -65,6 +65,7 @@
 #include <QFileDialog>
 #include <QComboBox>
 #include <QDir>
+#include <QDesktopWidget>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	: StelDialog(parent)
@@ -165,11 +166,6 @@ void ConfigurationDialog::createDialogContent()
 	updateCurrentSkyLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectSkyLanguage(const QString&)));
-
-
-
-	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
-	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
@@ -314,11 +310,6 @@ void ConfigurationDialog::createDialogContent()
 
 	updateConfigLabels();
 	updateTabBarListWidgetWidth();
-}
-
-void ConfigurationDialog::setUpdatesFlag(bool b)
-{
-	StelApp::getInstance().getSettings()->setValue("main/check_updates_enabled", b);
 }
 
 void ConfigurationDialog::updateCurrentLanguage()
@@ -708,15 +699,19 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("main/screenshot_dir", StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors", StelMainView::getInstance().getFlagInvertScreenShotColors());
 
+	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
+	conf->setValue("video/screen_number", screenNum);
+
 	// full screen and window size
 	conf->setValue("video/fullscreen", StelMainView::getInstance().isFullScreen());
 	if (!StelMainView::getInstance().isFullScreen())
 	{
+		QRect screenGeom = QApplication::desktop()->screenGeometry(screenNum);
 		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
-		conf->setValue("video/screen_x", mainWindow.x());
-		conf->setValue("video/screen_y", mainWindow.y());
+		conf->setValue("video/screen_x", mainWindow.x() - screenGeom.x());
+		conf->setValue("video/screen_y", mainWindow.y() - screenGeom.y());
 	}
 
 	// clear the restore defaults flag if it is set.

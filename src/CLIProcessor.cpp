@@ -27,6 +27,7 @@
 #include <iostream>
 
 #include <QGuiApplication>
+#include <QStandardPaths>
 #include <QDir>
 
 #include <stdio.h>
@@ -230,6 +231,24 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 			catch (std::runtime_error& e)
 			{
 				qWarning() << "WARNING: problem while setting screenshot from config file setting: " << e.what();
+			}
+		}
+		else
+		{
+			QString screenshotDirSuffix = "/Stellarium";
+			if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+				screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+			else
+				screenshotDir = StelFileMgr::getUserDir().append(screenshotDirSuffix);
+
+			try
+			{
+				StelFileMgr::setScreenshotDir(screenshotDir);
+				confSettings->setValue("main/screenshot_dir", screenshotDir);
+			}
+			catch (std::runtime_error &e)
+			{
+				qDebug("Error: cannot create screenshot directory: %s", e.what());
 			}
 		}
 	}
