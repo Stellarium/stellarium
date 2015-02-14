@@ -123,25 +123,7 @@ void StelFileMgr::init()
 	}
 	
 	// Then add the installation directory to the search path
-	fileLocations.append(installDir);
-
-	// Wasn't set path to screenshots directory via --screenshot-dir?
-	if (screenshotDir.isEmpty())
-	{
-		QString screenshotDirSuffix = "/Stellarium";
-		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
-			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
-		else
-			screenshotDir = userDir.append(screenshotDirSuffix);
-	}
-	try
-	{
-		makeSureDirExistsAndIsWritable(screenshotDir);
-	}
-	catch (std::runtime_error &e)
-	{
-		qDebug("Error: cannot create screenshot directory: %s", e.what());
-	}
+	fileLocations.append(installDir);	
 }
 
 

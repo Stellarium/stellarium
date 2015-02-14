@@ -176,7 +176,7 @@ namespace StelUtils
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
 	//! Coordinate Transformation from equatorial to ecliptical
-	void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
+	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.

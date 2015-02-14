@@ -418,8 +418,8 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	if (rcMag.radius<=0.f)
 		return false;
 
-	Vec3f win;
-	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
+	Vec3d win;
+	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(Vec3d(v[0],v[1],v[2]), win) : sPainter->getProjector()->project(Vec3d(v[0],v[1],v[2]), win)))
 		return false;
 
 	const float radius = rcMag.radius;

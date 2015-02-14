@@ -154,7 +154,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	foreach (const StelObjectP& obj, candidates)
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
-		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
+		float distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
 		float priority =  obj->getSelectPriority(core);
 		// qDebug() << (*iter).getShortInfoString(core) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)

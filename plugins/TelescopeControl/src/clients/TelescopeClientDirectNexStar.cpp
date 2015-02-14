@@ -114,7 +114,7 @@ void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos)
 		const double ra_signed = atan2(position[1], position[0]);
 		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
-		const double dec = atan2(position[2], sqrt(position[0]*position[0]+position[1]*position[1]));
+		const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
 		unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
 		int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
 

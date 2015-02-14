@@ -269,43 +269,6 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBoxUpdates">
-            <property name="title">
-             <string>Check updates</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayoutForUpdatesBox">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="labelUpdates">
-               <property name="text">
-                <string>Enable checking updates of Stellarium via Internet. Info for updates of stable versions you can look on the tab &quot;About&quot; of &quot;Help&quot; window.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
            <widget class="QGroupBox" name="groupBox_6">
             <property name="title">
              <string>Default options</string>

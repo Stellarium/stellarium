@@ -73,14 +73,14 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	mm.position[1] = mm.posTrain[1] = mm.xydistance*sin(angle) + mm.obs[1];
 
 	// D is distance from center of earth
-	float D = sqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);
+	float D = std::sqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);
 
 	if (D > high_range)     // won't be visible, meteor still dead
 	{
 		return false;
 	}
 
-	mm.posTrain[2] = mm.position[2] = mm.startH = sqrt(high_range*high_range - D*D);
+	mm.posTrain[2] = mm.position[2] = mm.startH = std::sqrt(high_range*high_range - D*D);
 
 	// determine end of burn point, and nearest point to observer for distance mag calculation
 	// mag should be max at nearest point still burning
@@ -91,8 +91,8 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	}
 	else
 	{
-		mm.endH = sqrt(low_range*low_range - D*D);
-		mm.minDist = sqrt(mm.xydistance*mm.xydistance + pow(mm.endH - mm.obs[2], 2));
+		mm.endH = std::sqrt(low_range*low_range - D*D);
+		mm.minDist = std::sqrt(mm.xydistance*mm.xydistance + pow(mm.endH - mm.obs[2], 2));
 	}
 
 	if (mm.minDist > VISIBLE_RADIUS)
@@ -253,7 +253,7 @@ bool Meteor::update(double deltaTime)
 	m_alive = updateMeteorModel(deltaTime, m_speed, meteor);
 
 	// determine visual magnitude based on distance to observer
-	double dist = sqrt(meteor.xydistance*meteor.xydistance + pow(meteor.position[2]-meteor.obs[2], 2));
+	double dist = std::sqrt(meteor.xydistance*meteor.xydistance + pow(meteor.position[2]-meteor.obs[2], 2));
 	if (dist == 0)
 	{
 		dist = .01;    // just to be cautious (meteor hits observer!)

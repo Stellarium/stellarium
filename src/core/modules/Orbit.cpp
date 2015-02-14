@@ -65,11 +65,11 @@ static void InitHyp(const double q, const double n, const double e, const double
       const double f2=e*sinh(E);
       const double f=f2-E-M;
       const double f1=e*cosh(E)-1.0;
-      E+= (-5.0*f)/(f1+StelUtils::sign(f1)*sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
+      E+= (-5.0*f)/(f1+StelUtils::sign(f1)*std::sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
       if (fabs(E-Ep) < EPSILON) break;
   }
   rCosNu = a*(e-cosh(E));
-  rSinNu = a*sqrt(e*e-1.0)*sinh(E);
+  rSinNu = a*std::sqrt(e*e-1.0)*sinh(E);
 }
 
 //! Solve true anomaly nu for parabolic orbit.
@@ -95,7 +95,7 @@ static void InitPar(const double q, const double n, const double dt, double &rCo
 //    const double M=dt*sqrt(GAUSS_GRAV_CONST/(2.0*q*q*q));
 //    const double W=1.5*M;
     const double W=dt*n;
-    const double Y=cbrt(W+sqrt(W*W+1));
+    const double Y=cbrt(W+std::sqrt(W*W+1));
     const double tanNu2=Y-1.0/Y; // Heafner (5.5.8) has an error here, writes (Y-1)/Y.
     rCosNu=q*(1.0-tanNu2*tanNu2);
     rSinNu=2.0*q*tanNu2;
@@ -129,11 +129,11 @@ static void InitEll(const double q, const double n, const double e, const double
       const double f2=e*sin(E);
       const double f=E-f2-M;
       const double f1=1.0-e*cos(E);
-      E+= (-5.0*f)/(f1+StelUtils::sign(f1)*sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
+      E+= (-5.0*f)/(f1+StelUtils::sign(f1)*std::sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
       if (fabs(E-Ep) < EPSILON) break;
   }
   // Note: q=a*(1-e)
-  const double h1 = q*sqrt((1.0+e)/(1.0-e));  // elsewhere: a sqrt(1-e²)     ... q / (1-e) sqrt( (1+e)(1-e)) = q sqrt((1+e)/(1-e))
+  const double h1 = q*std::sqrt((1.0+e)/(1.0-e));  // elsewhere: a sqrt(1-e²)     ... q / (1-e) sqrt( (1+e)(1-e)) = q sqrt((1+e)/(1-e))
   rCosNu = a*(cos(E)-e);
   rSinNu = h1*sin(E);
 }
@@ -171,11 +171,11 @@ void Init3D(const double i, const double Omega, const double w, const double rCo
   ry = Py*rCosNu+Qy*rSinNu;
   rz = Pz*rCosNu+Qz*rSinNu;
   if (withVelVector) {
-      const double r=sqrt(rSinNu*rSinNu+rCosNu*rCosNu);
+      const double r=std::sqrt(rSinNu*rSinNu+rCosNu*rCosNu);
       const double sinNu=rSinNu/r;
       const double cosNu=rCosNu/r;
       const double p=q*(1.0+e);
-      const double sqrtMuP=sqrt(GAUSS_GRAV_CONST/p);
+      const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST/p);
       rdotx=sqrtMuP*((e+cosNu)*Qx - sinNu*Px); // Heafner, 5.3.19 r'
       rdoty=sqrtMuP*((e+cosNu)*Qy - sinNu*Py);
       rdotz=sqrtMuP*((e+cosNu)*Qz - sinNu*Pz);
@@ -349,7 +349,7 @@ struct SolveKeplerLaguerreConway : public unary_function<double, double>
         double f = E - s - M;
         double f1 = 1 - c;
         double f2 = s;
-        E += -5 * f / (f1 + sign(f1) * sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
+	E += -5 * f / (f1 + sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
 
         return E;
     }
@@ -369,7 +369,7 @@ struct SolveKeplerLaguerreConwayHyp : public unary_function<double, double>
         double f = s - x - M;
         double f1 = c - 1;
         double f2 = s;
-        x += -5 * f / (f1 + sign(f1) * sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
+	x += -5 * f / (f1 + sign(f1) * std::sqrt(abs(16 * f1 * f1 - 20 * f * f2)));
 
         return x;
     }
@@ -436,13 +436,13 @@ Vec3d EllipticalOrbit::positionAtE(const double E) const
     {
         double a = pericenterDistance / (1.0 - eccentricity);
         x = a * (cos(E) - eccentricity);
-        z = a * sqrt(1 - eccentricity * eccentricity) * -sin(E);
+	z = a * std::sqrt(1 - eccentricity * eccentricity) * -sin(E);
     }
     else if (eccentricity > 1.0) // N.B. This is odd at least: elliptical must have ecc<1!
     {
         double a = pericenterDistance / (1.0 - eccentricity);
         x = -a * (eccentricity - cosh(E));
-        z = -a * sqrt(eccentricity * eccentricity - 1) * -sinh(E);
+	z = -a * std::sqrt(eccentricity * eccentricity - 1) * -sinh(E);
     }
     else
     {

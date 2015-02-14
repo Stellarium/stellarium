@@ -118,7 +118,7 @@ void ArtificialPlanet::setRot(const Vec3d &r)
 Vec3d ArtificialPlanet::getRot(const Planet* p)
 {
 	const Mat4d m(p->getRotEquatorialToVsop87());
-	const double cos_r1 = sqrt(m.r[0]*m.r[0]+m.r[8]*m.r[8]);
+	const double cos_r1 = std::sqrt(m.r[0]*m.r[0]+m.r[8]*m.r[8]);
 	Vec3d r;
 	r[1] = atan2(m.r[4],cos_r1);
 	// not well defined if cos(r[1])==0:

@@ -86,7 +86,7 @@ Vec3d InterpolatedPosition::get(qint64 now) const
 				double f = rval.lengthSquared();
 				if (f > 0.0)
 				{
-					return (1.0/sqrt(f))*rval;
+					return (1.0/std::sqrt(f))*rval;
 				}
 			}
 			break;

@@ -72,7 +72,7 @@ double  mag
           double x[3]
         )
    {
-     return sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
+     return std::sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
    }  // end mag
 
 /* -----------------------------------------------------------------------------
@@ -245,7 +245,7 @@ void newtonnu
          // ---------------------- elliptical -----------------------
 	 if ( ecc < 1.0-sv  )
            {
-             sine= ( sqrt( 1.0 -ecc*ecc ) * sin(nu) ) / ( 1.0 +ecc*cos(nu) );
+	     sine= ( std::sqrt( 1.0 -ecc*ecc ) * sin(nu) ) / ( 1.0 +ecc*cos(nu) );
              cose= ( ecc + cos(nu) ) / ( 1.0  + ecc*cos(nu) );
              e0  = atan2( sine,cose );
              m   = e0 - ecc*sin(e0);
@@ -256,7 +256,7 @@ void newtonnu
                {
                  if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < M_PI-acos(1.0 /ecc)))
                    {
-                     sine= ( sqrt( ecc*ecc-1.0  ) * sin(nu) ) / ( 1.0  + ecc*cos(nu) );
+		     sine= ( std::sqrt( ecc*ecc-1.0  ) * sin(nu) ) / ( 1.0  + ecc*cos(nu) );
 #ifdef _MSC_BUILD
 		     e0  = StelUtils::asinh( sine );
 #else

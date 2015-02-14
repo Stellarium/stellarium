@@ -569,7 +569,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (mag <= sd->getLimitMagnitude())
 			{
 				sd->computeRCMag(mag, &rcMag);
-				sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, true);
+				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, true);
 				painter.setColor(color[0], color[1], color[2], 1);
 
 				if (Satellite::showLabels)

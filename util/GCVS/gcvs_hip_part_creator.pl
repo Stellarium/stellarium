@@ -64,6 +64,7 @@ while (<SC>) {
     $designationstr =~ s/zet/ζ/;
     $designationstr =~ s/eta/η/;
     $designationstr =~ s/the/θ/;
+    $designationstr =~ s/tet/θ/; # typo
     $designationstr =~ s/iot/ι/;
     $designationstr =~ s/kap/κ/;
     $designationstr =~ s/lam/λ/;
@@ -81,6 +82,7 @@ while (<SC>) {
     $designationstr =~ s/khi/χ/;
     $designationstr =~ s/psi/ψ/;
     $designationstr =~ s/ome/ω/;
+    $designationstr =~ s/V0/V/; # remove leading zero
 
     $ampflag = 0;
     if ($ampflagstr eq '(') {

@@ -124,8 +124,6 @@ private slots:
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 
-	void setUpdatesFlag(bool b);
-
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);
 	void setDeltaTAlgorithmDescription();
