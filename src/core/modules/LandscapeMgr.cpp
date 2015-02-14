@@ -551,39 +551,22 @@ bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
  *********************************************************************/
 QStringList LandscapeMgr::getAllLandscapeNames() const
 {
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	QStringList result;
-
-	// We just look over the map of names to IDs and extract the keys
-	foreach (QString i, nameToDirMap.keys())
-	{
-		result += i;
-	}
-	return result;
+	return getNameToDirMap().keys();
 }
 
 QStringList LandscapeMgr::getAllLandscapeIDs() const
 {
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	QStringList result;
-
-	// We just look over the map of names to IDs and extract the keys
-	foreach (QString i, nameToDirMap.values())
-	{
-		result += i;
-	}
-	return result;
+	return getNameToDirMap().values();
 }
 
 QStringList LandscapeMgr::getUserLandscapeIDs() const
 {
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	QStringList result;
-	foreach (QString id, nameToDirMap.values())
+	foreach (QString id, getNameToDirMap().values())
 	{
 		if(!packagedLandscapeIDs.contains(id))
 		{
-			result += id;
+			result.append(id);
 		}
 	}
 	return result;
