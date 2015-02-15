@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-15 18:40+0600\n"
+"POT-Creation-Date: 2015-02-15 18:53+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:192
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:453
 msgid "Display Options"
@@ -493,6 +494,14 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:258
 #, qt-format
 msgid "Rising time: %1%"
+msgstr ""
+
+#: src/core/modules/MilkyWay.cpp:73
+msgid "Milky Way"
+msgstr ""
+
+#: src/core/modules/ZodiacalLight.cpp:81
+msgid "Zodiacal Light"
 msgstr ""
 
 #: src/core/StelApp.cpp:487
