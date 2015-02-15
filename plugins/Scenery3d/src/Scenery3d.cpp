@@ -511,9 +511,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 	//this fixes weird time-dependent crashes (this was fun to debug)
 	if(shaderParameters.shadows && loc >= 0)
 	{
-
-
-		//Holds the squared frustum splits necessary for the lookup in the shader
+		//Holds the frustum splits necessary for the lookup in the shader
 		Vec4f splitData;
 		for(int i=0; i<frustumSplits; i++)
 		{
@@ -536,16 +534,19 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		    glActiveTexture(GL_TEXTURE4+i);
 		    glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
-		    //Compute texture matrix
-		    QMatrix4x4 texMat = shadowCPM.at(i);
-
-		    //Send to shader
 		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 4+i);
-		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_MAT_SHADOW0+i),texMat);
+		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_MAT_SHADOW0+i), shadowCPM.at(i));
 		}
 
 		//Send squared splits to the shader
 		shader->setUniformValue(loc, splitData.v[0], splitData.v[1], splitData.v[2], splitData.v[3]);
+
+		if(shaderParameters.shadowFilterQuality>S3DEnum::OFF)
+		{
+			//send size of light ortho for each frustum
+			loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_LIGHTORTHOSCALE);
+			shader->setUniformValueArray(loc,shadowFrustumSize.constData(),4);
+		}
 	}
 
 	loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MAT_CUBEMVP);
@@ -828,7 +829,7 @@ void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,fl
     //orthoFar = std::max(maxZ, orthoNear + 1.0f);
 }
 
-QMatrix4x4 Scenery3d::computeCropMatrix(Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
+void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale, Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
 {
     float maxX = -std::numeric_limits<float>::max();
     float maxY = maxX;
@@ -887,6 +888,8 @@ QMatrix4x4 Scenery3d::computeCropMatrix(Polyhedron& focusBody,const QMatrix4x4& 
     scaleX = 1.0f/std::ceil(1.0f/scaleX*quantizer) * quantizer;
     scaleY = 1.0f/std::ceil(1.0f/scaleY*quantizer) * quantizer;
 
+    orthoScale = QVector2D(scaleX,scaleY);
+
     float offsetX = -0.5f*(maxX + minX)*scaleX;
     float offsetY = -0.5f*(maxY + minY)*scaleY;
 
@@ -912,7 +915,7 @@ QMatrix4x4 Scenery3d::computeCropMatrix(Polyhedron& focusBody,const QMatrix4x4& 
 				 0.0f, 0.0f, 0.0f, 1.0f);	//bias from [-1, 1] to [0, 1]
 
     //calc final matrix
-    return biasMatrix * projectionMatrix * modelViewMatrix;
+    cropMatrix = biasMatrix * projectionMatrix * modelViewMatrix;
 }
 
 void Scenery3d::adjustFrustum()
@@ -1089,7 +1092,10 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 			//Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
 			//This alters the ProjectionMatrix of the light
 			//the final light matrix used for lookups is stored in shadowCPM
-			shadowCPM[i] = computeCropMatrix(focusBodies[i],lightProj,lightMVP);
+			computeCropMatrix(shadowCPM[i], shadowFrustumSize[i], focusBodies[i],lightProj,lightMVP);
+
+			//the shadow frustum size is only the scaling, multiply it with the extents of the original matrix
+			shadowFrustumSize[i] *= (1.0f / orthoExtent);
 
 			//Draw the scene
 			drawArrays(false);
@@ -1703,6 +1709,7 @@ void Scenery3d::drawDebug()
 			int tmp = screen_y - debugTextureSize-30;
 			painter.drawText(screen_x-100, tmp, QString("zNear: %1").arg(frustumArray[i].zNear, 7, 'f', 2));
 			painter.drawText(screen_x-100, tmp-15.0f, QString("zFar: %1").arg(frustumArray[i].zFar, 7, 'f', 2));
+			painter.drawText(screen_x-100, tmp-30.0f, QString("scale: %1/%2").arg(shadowFrustumSize[i].x(), 7, 'f', 2).arg(shadowFrustumSize[i].y(),7,'f',2));
 
 			screen_x -= 280;
 		}
@@ -2171,6 +2178,7 @@ void Scenery3d::deleteShadowmapping()
 		shadowFBOs.clear();
 		shadowMapsArray.clear();
 		shadowCPM.clear();
+		shadowFrustumSize.clear();
 		frustumArray.clear();
 		focusBodies.clear();
 
@@ -2190,6 +2198,7 @@ bool Scenery3d::initShadowmapping()
 		shadowFBOs.resize(frustumSplits);
 		shadowMapsArray.resize(frustumSplits);
 		shadowCPM.resize(frustumSplits);
+		shadowFrustumSize.resize(frustumSplits);
 		frustumArray.resize(frustumSplits);
 		focusBodies.resize(frustumSplits);
 
@@ -2224,17 +2233,25 @@ bool Scenery3d::initShadowmapping()
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
 			bool isES = QOpenGLContext::currentContext()->isOpenGLES();
+			//pcss is only enabled if filtering is also enabled
+			bool pcssEnabled = shaderParameters.pcss && shaderParameters.shadowFilterQuality>S3DEnum::OFF;
 
 			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
-			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT16, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : (pcssEnabled ? GL_DEPTH_COMPONENT32F : GL_DEPTH_COMPONENT16), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL,0);
 
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			GLint filter = pcssEnabled ? GL_NEAREST : GL_LINEAR;
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 			//we use hardware-accelerated depth compare mode
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LESS);
+			if(!pcssEnabled)
+			{
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+			}
 
 			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
 			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);

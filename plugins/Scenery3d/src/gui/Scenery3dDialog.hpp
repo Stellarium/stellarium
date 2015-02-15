@@ -31,6 +31,10 @@ private slots:
 
 	void scenery3dChanged(QListWidgetItem* item);
 
+	void updateTorchStrength(float val);
+	void updateTorchRange(float val);
+	void updateLazyDrawingInterval(float val);
+
 	void updateCurrentScene(const SceneInfo& sceneInfo);
 
 	void initResolutionCombobox(QComboBox* cb);
@@ -38,11 +42,11 @@ private slots:
 
 	void updateShortcutStrings();
 
-	//! Update the widget to make sure it is synchrone if a value was changed programmatically
-	//! This is called automatically from the signals in the manager class
-	void updateFromManager();
-
 private:
+	//! Connects the UI to update events from the Scenery3dMgr
+	void createUpdateConnections();
+	//! This updates the whole GUI to represent current Scenery3dMgr values
+	void updateFromManager();
 	void updateTextBrowser(const SceneInfo& si);
 
 	QVector<QAbstractButton*> shortcutButtons;

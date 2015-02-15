@@ -36,6 +36,7 @@ struct GlobalShaderParameters
 	bool bump;
 	bool shadows;
 	S3DEnum::ShadowFilterQuality shadowFilterQuality;
+	bool pcss;
 	bool geometryShader;
 	bool torchLight;
 };
@@ -74,7 +75,7 @@ public:
 		UNIFORM_MAT_MVP,
 		//! Defines the 3x3 Normal matrix (transpose of the inverse MV matrix)
 		UNIFORM_MAT_NORMAL,
-		//! The first shadow matrix
+		//! The shadow matrices (4x 4x4 Matrices)
 		UNIFORM_MAT_SHADOW0,
 		UNIFORM_MAT_SHADOW1,
 		UNIFORM_MAT_SHADOW2,
@@ -90,7 +91,7 @@ public:
 		UNIFORM_TEX_BUMP,
 		//! Defines the Height texture slot
 		UNIFORM_TEX_HEIGHT,
-		//! First shadow map
+		//! Shadow maps, 4x
 		UNIFORM_TEX_SHADOW0,
 		UNIFORM_TEX_SHADOW1,
 		UNIFORM_TEX_SHADOW2,
@@ -121,6 +122,8 @@ public:
 		UNIFORM_VEC_COLOR,
 		//! Squared frustum splits (vec4)
 		UNIFORM_VEC_SPLITDATA,
+		//! Scaling of each frustum's light ortho projection (4xvec2)
+		UNIFORM_VEC_LIGHTORTHOSCALE,
 		//! Alpha test threshold
 		UNIFORM_FLOAT_ALPHA_THRESH,
 	};
@@ -186,7 +189,9 @@ private:
 		//shader uses an additional point light positioned at the camera that performs additional diffuse illumination
 		TORCH		= (1<<15),
 		//debug shader for AABBs/Frustums
-		DEBUG		= (1<<16)
+		DEBUG		= (1<<16),
+		//PCSS shadow filtering
+		PCSS		= (1<<17)
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -225,6 +230,7 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 		if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::OFF) flags|= SHADOW_FILTER;
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::LOW) flags|= SHADOW_FILTER_HQ;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::OFF && globals.pcss) flags|= PCSS;
 		if(globals.geometryShader) flags|= GEOMETRY_SHADER;
 		if(globals.torchLight) flags|= TORCH;
 	}

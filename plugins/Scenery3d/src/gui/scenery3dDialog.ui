@@ -502,7 +502,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="0">
+                   <item row="4" column="0">
                     <widget class="QLabel" name="label">
                      <property name="text">
                       <string>Shadowmap size:</string>
@@ -512,31 +512,24 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="1">
+                   <item row="4" column="1">
                     <widget class="QComboBox" name="comboBoxShadowmapSize">
                      <property name="currentIndex">
                       <number>-1</number>
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="0">
+                   <item row="3" column="0">
                     <widget class="QLabel" name="label_5">
                      <property name="text">
                       <string>Cubemap size:</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
+                   <item row="3" column="1">
                     <widget class="QComboBox" name="comboBoxCubemapSize"/>
                    </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <layout class="QFormLayout" name="formLayout_2">
-                   <property name="fieldGrowthPolicy">
-                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-                   </property>
-                   <item row="0" column="0" colspan="2">
+                   <item row="2" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnableBump">
                      <property name="enabled">
                       <bool>true</bool>
@@ -552,6 +545,13 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QFormLayout" name="formLayout_2">
+                   <property name="fieldGrowthPolicy">
+                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                   </property>
                    <item row="1" column="0">
                     <widget class="QLabel" name="label_2">
                      <property name="text">
@@ -581,7 +581,7 @@ p, li { white-space: pre-wrap; }
                      </item>
                     </widget>
                    </item>
-                   <item row="2" column="0">
+                   <item row="5" column="0">
                     <widget class="QLabel" name="label_3">
                      <property name="text">
                       <string>Cubemapping mode:</string>
@@ -591,14 +591,14 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
+                   <item row="5" column="1">
                     <widget class="QComboBox" name="comboBoxCubemapMode">
                      <property name="toolTip">
                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This determines the way the scene is rendered when Stellarium uses a projection other than &amp;quot;Perspective&amp;quot;. The scene is always rendered onto a cube, and this cube is then warped according to the real projection. The cube is described using an image called &amp;quot;cubemap&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;6 Textures&lt;/span&gt; uses 6 single textures, one for each cube side. This is the most compatible method, but may be slower than the others.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cubemap&lt;/span&gt; uses a single GL_TEXTURE_CUBEMAP. Recommended for most users.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; uses a modern GPU feature to render all 6 sides of the cube at once. It may be the fastest method depending on the scene and your GPU hardware. If not supported, this cannot be selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="3" column="0" colspan="2">
+                   <item row="6" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
                      <property name="toolTip">
                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the cubemap is only recreated in specific time intervals, instead of each frame.&lt;br/&gt;Saves energy and may increase subjective application performance.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note that the cubemap is always re-rendered when the view position changes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -608,7 +608,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="4" column="0" colspan="2">
+                   <item row="7" column="0" colspan="2">
                     <layout class="QFormLayout" name="formLayout_3">
                      <property name="leftMargin">
                       <number>20</number>
@@ -659,6 +659,20 @@ p, li { white-space: pre-wrap; }
                        </property>
                        <property name="text">
                         <string>Also update second-most dominant face</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item row="3" column="0" colspan="2">
+                    <layout class="QFormLayout" name="formLayout_5">
+                     <property name="leftMargin">
+                      <number>20</number>
+                     </property>
+                     <item row="0" column="0" colspan="2">
+                      <widget class="QCheckBox" name="checkBoxPCSS">
+                       <property name="text">
+                        <string>PCSS</string>
                        </property>
                       </widget>
                      </item>

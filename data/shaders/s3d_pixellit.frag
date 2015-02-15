@@ -29,8 +29,9 @@ Note: This shader currently requires some #version 120 features!
 //macros that can be set by ShaderManager (simple true/false flags)
 #define BLENDING 1
 #define SHADOWS 1
-#define SHADOW_FILTER 1
+#define SHADOW_FILTER 0
 #define SHADOW_FILTER_HQ 0
+#define PCSS 0
 #define MAT_DIFFUSETEX 1
 #define MAT_EMISSIVETEX 1
 #define MAT_SPECULAR 1
@@ -158,13 +159,28 @@ uniform float u_vMatAlpha;
 uniform vec3 u_vMixEmissive;
 
 #if SHADOWS
+//in a later version, this may become configurable
+#define FRUSTUM_SPLITS 4
 //shadow related uniforms
 uniform vec4 u_vSplits; //the frustum splits
-uniform sampler2DShadow u_texShadow0;
-uniform sampler2DShadow u_texShadow1;
-uniform sampler2DShadow u_texShadow2;
-uniform sampler2DShadow u_texShadow3;
+#if PCSS
+	#define SHADOWSAMPLER sampler2D
+#else
+	#define SHADOWSAMPLER sampler2DShadow
 #endif
+
+//for some reason, Intel does absolutely not like it if the shadowmaps are passed as an array
+//nothing is drawn, but no error is shown ...
+//therefore, use 4 ugly uniforms
+uniform SHADOWSAMPLER u_texShadow0;
+uniform SHADOWSAMPLER u_texShadow1;
+uniform SHADOWSAMPLER u_texShadow2;
+uniform SHADOWSAMPLER u_texShadow3;
+
+//info about scale is needed for filtering
+uniform vec2 u_vLightOrthoScale[FRUSTUM_SPLITS];
+#endif //SHADOWS
+
 #if ALPHATEST
 uniform float u_fAlphaThresh;
 #endif
@@ -180,6 +196,7 @@ varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump 
 varying vec3 v_viewPos; //position of fragment in view space
 
 #if SHADOWS
+//varying arrays seem to cause some problems, so we use 4 vecs for now...
 varying vec4 v_shadowCoord0;
 varying vec4 v_shadowCoord1;
 varying vec4 v_shadowCoord2;
@@ -187,7 +204,7 @@ varying vec4 v_shadowCoord3;
 #endif
 
 #if SHADOWS
-float sampleShadow(in sampler2DShadow tex, in vec4 coord)
+float sampleShadow(in SHADOWSAMPLER tex, in vec4 coord, in vec2 filterRadiusUV)
 {
 	#if FILTER_STEPS
 	// a filter is defined
@@ -196,10 +213,15 @@ float sampleShadow(in sampler2DShadow tex, in vec4 coord)
 	vec3 texC = coord.xyz / coord.w;
 	for(int i=0;i<FILTER_STEPS;++i)
 	{
-		//TODO this should be texture size dependent!
-		//sum+=shadow2D(tex,vec3(coord.xy + poissonDisk[i]/700.0, texC.z)).x;
-		sum+=shadow2D(tex,vec3(texC.xy + poissonDisk[i]/700.0, texC.z)).x;
-		//sum+=shadow2DProj(tex,vec4(coord.xy + poissonDisk[i]/700.0, coord.zw)).x;
+		vec2 offset = poissonDisk[i] * filterRadiusUV;
+		//TODO offsets should probably depend on light ortho size?
+		#if PCSS
+		//texture is a normal sampler2D because we need depth values in blocker calculation
+		//so we have to do comparison ourselves 
+		sum+= (texture2D(tex,texC.xy + offset).r > texC.z) ? 1.0f : 0.0f;
+		#else
+		sum+=shadow2D(tex,vec3(texC.xy + offset, texC.z)).x;
+		#endif
 	}
 	return sum / FILTER_STEPS;
 	#else
@@ -208,29 +230,105 @@ float sampleShadow(in sampler2DShadow tex, in vec4 coord)
 	#endif
 }
 
+#if PCSS
+//Based on the PCSS implementation of NVidia, ported to GLSL with some modifications
+//see http://developer.download.nvidia.com/whitepapers/2008/PCSS_Integration.pdf
+
+#define BLOCKER_SEARCH_NUM_SAMPLES 16
+#define NEAR_PLANE 1.0
+#define LIGHT_SIZE 0.4
+
+float PenumbraSize(in float zReceiver, in float zBlocker)
+{
+	return (zReceiver - zBlocker) * LIGHT_SIZE / zBlocker;
+}
+
+void FindBlocker(in SHADOWSAMPLER tex,in vec2 uv, in float zReceiver, in vec2 searchWidth, out float avgBlockerDepth, out float numBlockers)
+{	
+	float blockerSum = 0;
+	numBlockers = 0;
+	
+	for(int i=0;i<BLOCKER_SEARCH_NUM_SAMPLES;++i)
+	{
+		float shadowMapDepth = texture2D(tex,uv + poissonDisk[i] * searchWidth).r;
+		if(shadowMapDepth < zReceiver)
+		{
+			blockerSum+=shadowMapDepth;
+			++numBlockers;
+		}
+	}
+	
+	//divide by zero is ignored here, but basically handled by the calling function
+	avgBlockerDepth = blockerSum / numBlockers;
+}
+
+float ShadowPCSS(in SHADOWSAMPLER tex, in vec4 coords, in vec2 offsetScale)
+{
+	vec3 coordsProj = coords.xyz/coords.w;
+	
+	float avgBlockerDepth = 0.0f;
+	float numBlockers = 0.0f;
+	
+	float zReceiver = coordsProj.z;
+	
+	vec2 searchWidth = offsetScale * (zReceiver-1.0) / (zReceiver);
+
+	FindBlocker(tex,coordsProj.xy,zReceiver,searchWidth,avgBlockerDepth,numBlockers);
+	if(numBlockers<1)
+		return 1.0f;
+	
+	float penumbraRatio = PenumbraSize(zReceiver, avgBlockerDepth);
+	float filterRadiusUV = penumbraRatio;
+	
+	return sampleShadow(tex,coords,filterRadiusUV * offsetScale);
+}
+#endif
+
 float getShadow()
 {
 	//simplification of the smap.f.glsl shader
 	//IMPORTANT: use clip coords here, not distance to camera
 	float dist = gl_FragCoord.z;
-	
+		
 	//check in which split the fragment falls
+	//I tried using indices to simplify the code a bit, but this lead to very strange artifacts...
+	#if PCSS
 	if(dist < u_vSplits.x)
 	{
-		return sampleShadow(u_texShadow0,v_shadowCoord0);
+		return ShadowPCSS(u_texShadow0,v_shadowCoord0,u_vLightOrthoScale[0]);
 	}
 	else if(dist < u_vSplits.y)
 	{
-		return sampleShadow(u_texShadow1,v_shadowCoord1);
+		return ShadowPCSS(u_texShadow1,v_shadowCoord1,u_vLightOrthoScale[1]);
 	}
 	else if(dist < u_vSplits.z)
 	{
-		return sampleShadow(u_texShadow2,v_shadowCoord2);
+		return ShadowPCSS(u_texShadow2,v_shadowCoord2,u_vLightOrthoScale[2]);
 	}
 	else if(dist < u_vSplits.w)
 	{
-		return sampleShadow(u_texShadow3,v_shadowCoord3);
+		return ShadowPCSS(u_texShadow3,v_shadowCoord3,u_vLightOrthoScale[3]);
 	}
+	#else
+	//If all calculations are correct, this should be 1cm
+	#define DEFAULT_RADIUS 1.0/100.0
+	if(dist < u_vSplits.x)
+	{
+		return sampleShadow(u_texShadow0,v_shadowCoord0,u_vLightOrthoScale[0] * DEFAULT_RADIUS);
+	}
+	else if(dist < u_vSplits.y)
+	{
+		return sampleShadow(u_texShadow1,v_shadowCoord1,u_vLightOrthoScale[1] * DEFAULT_RADIUS);
+	}
+	else if(dist < u_vSplits.z)
+	{
+		return sampleShadow(u_texShadow2,v_shadowCoord2,u_vLightOrthoScale[2] * DEFAULT_RADIUS);
+	}
+	else if(dist < u_vSplits.w)
+	{
+		return sampleShadow(u_texShadow3,v_shadowCoord3,u_vLightOrthoScale[3] * DEFAULT_RADIUS);
+	}
+	#endif
 	
 	return 1.0;
 }
