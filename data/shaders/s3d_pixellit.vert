@@ -82,6 +82,7 @@ varying vec3 VAR_LIGHTVEC; //light vector, in VIEW or TBN space according to bum
 varying vec3 VAR_VIEWPOS; //position of fragment in view space
 
 #if SHADOWS
+//varying arrays seem to cause some problems, so we use 4 vecs for now...
 varying vec4 VAR_SHADOWCOORD0;
 varying vec4 VAR_SHADOWCOORD1;
 varying vec4 VAR_SHADOWCOORD2;

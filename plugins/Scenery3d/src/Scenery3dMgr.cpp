@@ -583,6 +583,16 @@ void Scenery3dMgr::setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val
 	emit shadowFilterQualityChanged(val);
 }
 
+bool Scenery3dMgr::getEnablePCSS() const
+{
+	return scenery3d->getPCSS();
+}
+
+void Scenery3dMgr::setEnablePCSS(const bool val)
+{
+	scenery3d->setPCSS(val);
+}
+
 S3DEnum::CubemappingMode Scenery3dMgr::getCubemappingMode() const
 {
 	return scenery3d->getCubemappingMode();

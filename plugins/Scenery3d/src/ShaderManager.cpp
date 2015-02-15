@@ -43,6 +43,7 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_mShadow2"] = UNIFORM_MAT_SHADOW2;
 		uniformStrings["u_mShadow3"] = UNIFORM_MAT_SHADOW3;
 		uniformStrings["u_mCubeMVP"] = UNIFORM_MAT_CUBEMVP;
+		uniformStrings["u_mCubeMVP[]"] = UNIFORM_MAT_CUBEMVP;
 		uniformStrings["u_mCubeMVP[0]"] = UNIFORM_MAT_CUBEMVP;
 
 		//textures
@@ -73,6 +74,9 @@ ShaderMgr::ShaderMgr()
 		//others
 		uniformStrings["u_vColor"] = UNIFORM_VEC_COLOR;
 		uniformStrings["u_vSplits"] = UNIFORM_VEC_SPLITDATA;
+		uniformStrings["u_vLightOrthoScale"] = UNIFORM_VEC_LIGHTORTHOSCALE;
+		uniformStrings["u_vLightOrthoScale[]"] = UNIFORM_VEC_LIGHTORTHOSCALE;
+		uniformStrings["u_vLightOrthoScale[0]"] = UNIFORM_VEC_LIGHTORTHOSCALE;
 		uniformStrings["u_fAlphaThresh"] = UNIFORM_FLOAT_ALPHA_THRESH;
 	}
 	if(featureFlagsStrings.size()==0)
@@ -94,6 +98,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["BLENDING"] = BLENDING;
 		featureFlagsStrings["TORCH"] = TORCH;
 		featureFlagsStrings["DEBUG"] = DEBUG;
+		featureFlagsStrings["PCSS"] = PCSS;
 	}
 }
 

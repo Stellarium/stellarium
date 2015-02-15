@@ -56,6 +56,7 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enableShadows READ getEnableShadows WRITE setEnableShadows NOTIFY enableShadowsChanged)
 	Q_PROPERTY(bool enableBumps READ getEnableBumps WRITE setEnableBumps NOTIFY enableBumpsChanged)
 	Q_PROPERTY(S3DEnum::ShadowFilterQuality shadowFilterQuality READ getShadowFilterQuality WRITE setShadowFilterQuality NOTIFY shadowFilterQualityChanged)
+	Q_PROPERTY(bool enablePCSS READ getEnablePCSS WRITE setEnablePCSS NOTIFY enablePCSSChanged)
 	Q_PROPERTY(S3DEnum::CubemappingMode cubemappingMode READ getCubemappingMode WRITE setCubemappingMode NOTIFY cubemappingModeChanged)
 	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
 	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
@@ -91,6 +92,7 @@ signals:
     void enableShadowsChanged(const bool val);
     void enableBumpsChanged(const bool val);
     void shadowFilterQualityChanged(const S3DEnum::ShadowFilterQuality val);
+    void enablePCSSChanged(const bool val);
     void cubemappingModeChanged(const S3DEnum::CubemappingMode val);
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
@@ -141,6 +143,9 @@ public slots:
     S3DEnum::ShadowFilterQuality getShadowFilterQuality(void) const;
     //! Sets the shadow filter quality
     void setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val);
+
+    void setEnablePCSS(const bool val);
+    bool getEnablePCSS() const;
 
     //! Returns the current cubemapping mode
     S3DEnum::CubemappingMode getCubemappingMode(void) const;
