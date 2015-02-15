@@ -483,9 +483,9 @@ void StelMainView::init(QSettings* conf)
 		// The fullscreen window appears on screen where is the majority of
 		// the normal window. So we first resize (shrink) the normal window
 		// to screen area.
-		setFullScreen(true);
 		move(screenGeom.x(), screenGeom.y());
 		resize(screenGeom.width(), screenGeom.height());
+		setFullScreen(true);
 	}
 	else
 	{
