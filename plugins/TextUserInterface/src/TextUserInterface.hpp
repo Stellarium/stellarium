@@ -21,6 +21,7 @@
 
 #include "StelModule.hpp"
 #include "DummyDialog.hpp"
+#include "StelCore.hpp"
 
 #include <QObject>
 #include <QString>
@@ -81,6 +82,7 @@ private:
 	bool tuiObjInfo;
 	bool tuiGravityUi;
 	TuiNode* currentNode;
+	Vec3f color;
 
 	double getLatitude(void);
 	double getLongitude(void);

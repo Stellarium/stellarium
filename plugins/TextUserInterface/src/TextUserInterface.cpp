@@ -506,6 +506,7 @@ void TextUserInterface::loadConfiguration(void)
 	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
 	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
 	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
+	color = StelUtils::strToVec3f(conf->value("tui/tui_font_color", "0.3,1,0.3").toString());
 }
 
 /*************************************************************************
@@ -564,7 +565,7 @@ void TextUserInterface::draw(StelCore* core)
 
 		StelPainter painter(core->getProjection(StelCore::FrameJ2000));
 		painter.setFont(font);
-		painter.setColor(0.3,1,0.3);
+		painter.setColor(color[0],color[1],color[2]);
 		painter.drawText(text_x, text_y, tuiText, 0, 0, 0, !tuiGravityUi);
 	}
 
@@ -583,7 +584,7 @@ void TextUserInterface::draw(StelCore* core)
 
 		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
 		painter.setFont(font);
-		painter.setColor(0.3,1,0.3);
+		painter.setColor(color[0],color[1],color[2]);
 		painter.drawText(text_x, text_y, newDate, 0, 0, 0, !tuiGravityUi);
 	}
 
@@ -611,7 +612,7 @@ void TextUserInterface::draw(StelCore* core)
 
 		StelPainter painter(core->getProjection(StelCore::FrameJ2000));
 		painter.setFont(font);
-		painter.setColor(0.3,1,0.3);
+		painter.setColor(color[0],color[1],color[2]);
 		painter.drawText(text_x, text_y, objInfo, 0, 0, 0, !tuiGravityUi);
 	}
 }
