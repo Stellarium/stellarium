@@ -11,18 +11,18 @@ class CubemapModeListModel : public QAbstractListModel
 
 private:
 	bool gsSupported;
-public:
-
-
-	CubemapModeListModel(QObject* parent = NULL) : QAbstractListModel(parent),gsSupported(false)
-	{}
-
+public slots:
 	void setGSSupported(bool supported)
 	{
 		gsSupported = supported;
 		QModelIndex idx = index(S3DEnum::CUBEMAP_GSACCEL);
 		emit dataChanged(idx,idx);
 	}
+public:
+
+
+	CubemapModeListModel(QObject* parent = NULL) : QAbstractListModel(parent),gsSupported(false)
+	{}
 
 	int rowCount(const QModelIndex &parent) const
 	{

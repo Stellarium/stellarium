@@ -86,6 +86,8 @@ public:
     void setTorchEnabled(bool torchEnabled) { shaderParameters.torchLight = torchEnabled; invalidateCubemap(); }
     S3DEnum::ShadowFilterQuality getShadowFilterQuality() const { return shaderParameters.shadowFilterQuality; }
     void setShadowFilterQuality(S3DEnum::ShadowFilterQuality quality) { shaderParameters.shadowFilterQuality = quality; invalidateCubemap();}
+    bool getPCSS() const { return shaderParameters.pcss; }
+    void setPCSS(bool val) { shaderParameters.pcss = val; reinitShadowmapping = true; }
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
@@ -243,6 +245,8 @@ private:
     QVector<GLuint> shadowMapsArray;
     //Holds the shadow transformation matrix per split (Crop/Projection/View)
     QVector<QMatrix4x4> shadowCPM;
+    //Holds the xy-scaling of the orthographic light cam + near plane pos
+    QVector<QVector2D> shadowFrustumSize;
     //Number of splits for CSM
     int frustumSplits;
     // Frustum of the view camera, constrainted to the shadowFarZ instead of the camFarZ
@@ -320,7 +324,7 @@ private:
     //Computes the focus body for given frustum
     void computePolyhedron(Polyhedron& body, const Frustum& frustum, const Vec3f &shadowDir);
     //Computes the crop matrix to focus the light
-    QMatrix4x4 computeCropMatrix(Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
+    void computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale, Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
     //Computes the light projection values
     void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
 };
