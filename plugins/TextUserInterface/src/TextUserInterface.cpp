@@ -43,6 +43,7 @@
 #include "LandscapeMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 #include "StelLocation.hpp"
 #include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -423,19 +424,25 @@ void TextUserInterface::init()
 	                                 GETSTELMODULE(MilkyWay)->getIntensity(),
 	                                 0, 10.0, 0.1, 
 	                                 m6, m6_4);
-	TuiNode* m6_6 = new TuiNode(N_("Nebula label frequency:"), m6, m6_5);
-	TuiNode* m6_7 = new TuiNodeFloat(N_("Zoom duration:"),
+	TuiNode* m6_6 = new TuiNodeDouble(N_("Zodiacal light intensity:"),
+					 GETSTELMODULE(ZodiacalLight),
+					 SLOT(setIntensity(double)),
+					 GETSTELMODULE(ZodiacalLight)->getIntensity(),
+					 0, 10.0, 0.1,
+					 m6, m6_5);
+	TuiNode* m6_7 = new TuiNode(N_("Nebula label frequency:"), m6, m6_6);
+	TuiNode* m6_8 = new TuiNodeFloat(N_("Zoom duration:"),
 	                                 movementMgr,
 	                                 SLOT(setAutoMoveDuration(float)), 
 	                                 movementMgr->getAutoMoveDuration(),
 	                                 0, 20.0, 0.1,
-	                                 m6, m6_6);
-	TuiNode* m6_8 = new TuiNode(N_("Cursor timeout:"), m6, m6_7);
-	TuiNode* m6_9 = new TuiNodeBool(N_("Setting landscape sets location"),
+					 m6, m6_7);
+	TuiNode* m6_9 = new TuiNode(N_("Cursor timeout:"), m6, m6_8);
+	TuiNode* m6_10 = new TuiNodeBool(N_("Setting landscape sets location"),
 	                                landscapeMgr,
 	                                SLOT(setFlagLandscapeSetsLocation(bool)), 
 	                                landscapeMgr->getFlagLandscapeSetsLocation(), 
-	                                m6, m6_8);
+					m6, m6_9);
 	m6_1->setNextNode(m6_2);
 	m6_2->setNextNode(m6_3);
 	m6_3->setNextNode(m6_4);
@@ -444,7 +451,8 @@ void TextUserInterface::init()
 	m6_6->setNextNode(m6_7);
 	m6_7->setNextNode(m6_8);
 	m6_8->setNextNode(m6_9);
-	m6_9->setNextNode(m6_1);
+	m6_9->setNextNode(m6_10);
+	m6_10->setNextNode(m6_1);
 	m6_1->loopToTheLast();
 	m6->setChildNode(m6_1);
 
