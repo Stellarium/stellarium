@@ -156,6 +156,10 @@ void Frustum::resetCorners()
 
 void Frustum::drawFrustum() const
 {
+// Minimum to avoid trouble when building on pure OpenGL ES systems
+// Not sure about ANGLE!
+#if !defined(QT_OPENGL_ES_2)
+
     Vec3f ntl = drawCorners[NTL];
     Vec3f ntr = drawCorners[NTR];
     Vec3f nbr = drawCorners[NBR];
@@ -255,4 +259,5 @@ void Frustum::drawFrustum() const
     glEnd();
 
     drawBbox.render();
+#endif
 }
