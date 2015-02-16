@@ -20,6 +20,9 @@ void Box::transform(const QMatrix4x4& tf)
 
 void Box::render() const
 {
+// Minimum to avoid trouble when building on pure OpenGL ES systems
+// Not sure about ANGLE!
+#if !defined(QT_OPENGL_ES_2)
 	Vec3f nbl = vertices[0];
 	Vec3f nbr = vertices[1];
 	Vec3f ntr = vertices[2];
@@ -78,6 +81,7 @@ void Box::render() const
 	    glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
 	    glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
 	glEnd();
+#endif
 }
 
 AABB::AABB()

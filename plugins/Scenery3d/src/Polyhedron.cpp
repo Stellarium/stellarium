@@ -257,6 +257,11 @@ const QVector<Vec3f> &Polyhedron::getVerts() const
 
 void Polyhedron::render() const
 {
+// Minimum to avoid trouble when building on pure OpenGL ES systems
+// Not sure about ANGLE!
+// TODO: If this is required for functionality, find some compatible workaround? (Or disable plugin in ES2 altogether...)
+#if !defined(QT_OPENGL_ES_2)
+
 	//render each polygon
 	glColor3f(0.4f,0.4f,0.4f);
 	for(int i = 0;i<polygons.size();++i)
@@ -283,4 +288,5 @@ void Polyhedron::render() const
 		glVertex3fv(uniqueVerts.at(i).v);
 	}
 	glEnd();
+#endif
 }
