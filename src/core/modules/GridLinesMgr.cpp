@@ -762,7 +762,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
 	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
-	addAction("actionShow_Meridian_Opposition_Line", displayGroup, N_("Meridian of Opposition line"), "meridianOppositionLineDisplayed", "");
+	addAction("actionShow_Meridian_Opposition_Line", displayGroup, N_("Meridian of Opposition line"), "meridianOppositionLineDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
