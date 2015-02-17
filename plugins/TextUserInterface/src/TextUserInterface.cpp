@@ -373,6 +373,11 @@ void TextUserInterface::init()
 					 SLOT(setColorGalacticEquatorLine(Vec3f)),
 					 gridLinesMgr->getColorGalacticEquatorLine(),
 					 m5, m5_19);
+	TuiNode* m5_21 = new TuiNodeColor(N_("Meridian of opposition line"),
+					 gridLinesMgr,
+					 SLOT(setColorMeridianOppositionLine(Vec3f)),
+					 gridLinesMgr->getColorMeridianOppositionLine(),
+					 m5, m5_20);
 
 	m5_1->setNextNode(m5_2);
 	m5_2->setNextNode(m5_3);
@@ -393,7 +398,8 @@ void TextUserInterface::init()
 	m5_17->setNextNode(m5_18);
 	m5_18->setNextNode(m5_19);
 	m5_19->setNextNode(m5_20);
-	m5_20->setNextNode(m5_1);
+	m5_20->setNextNode(m5_21);
+	m5_21->setNextNode(m5_1);
 	m5_1->loopToTheLast();
 	m5->setChildNode(m5_1);
 
@@ -810,6 +816,7 @@ void TextUserInterface::saveDefaultSettings(void)
 	conf->setValue("color/planet_orbits_color", colToConf(ssmgr->getOrbitsColor()));
 	conf->setValue("color/object_trails_color", colToConf(ssmgr->getTrailsColor()));
 	conf->setValue("color/meridian_color", colToConf(glmgr->getColorMeridianLine()));
+	conf->setValue("color/meridian_opposition_color", colToConf(glmgr->getColorMeridianOppositionLine()));
 	conf->setValue("color/azimuthal_color", colToConf(glmgr->getColorAzimuthalGrid()));
 	conf->setValue("color/equator_color", colToConf(glmgr->getColorEquatorGrid()));
 	conf->setValue("color/equatorial_J2000_color", colToConf(glmgr->getColorEquatorJ2000Grid()));
