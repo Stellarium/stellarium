@@ -18,6 +18,37 @@ or build it directly on your Pi. For the latter, follow this:
 
 http://qt-project.org/wiki/Native_Build_of_Qt5_on_a_Raspberry_Pi
 
+
+don't forget 
+
+$ sudo apt-get install mtdev-tools (NO, does not help)
+MTDEV detects, but is not found during build.
+
+my configure call: 
+
+./configure -v -opengl es2 -device linux-rasp-pi-g++ -device-option CROSS_COMPILE=/usr/bin/ -opensource -confirm-license -optimized-qmake -reduce-exports -release -qt-pcre -make libs -prefix /usr/local/qt5 -skip qtwebkit -skip qtwebengine --enable-egl -strip -qreal float  -no-mtdev  2>&1 | tee GZ_configure-out.txt
+
+We skip qtweb... stuff: not needed and takes lots of time.
+
+N.B. Setting qreal to float may cause incompatibilities with other software, but I don't care for now. maybe it speeds things up somewhat.
+
+Configure takes about 1-2 hours (?)
+
+Now: date > GZ_makeLog.txt;   make 2>&1 | tee -a GZ_makeLog.txt ; date >> GZ_makeLog.txt
+
+
+
+WAIT!!! See (8): Prepare wayland/maynard/weston before running qmake!
+... not needed. Qt configure explicitly says all setup is done in the module. So Build Qt first.
+
+
+Packages to install before building: 
+
+apt-get install gperf
+
+
+
+
 Consider overclocking with raspi-config to high (900/950MHz) or even
 Turbo (1GHz), but keep an eye on the temperature. For Turbo, a better
 power supply (5V/1.5A) is recommended.
