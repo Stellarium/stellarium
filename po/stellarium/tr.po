@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-15 18:53+0600\n"
-"PO-Revision-Date: 2014-11-24 13:54+0000\n"
+"PO-Revision-Date: 2015-02-16 19:34+0000\n"
 "Last-Translator: Ali <aliofage@msn.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-16 06:17+0000\n"
+"X-Launchpad-Export-Date: 2015-02-17 05:54+0000\n"
 "X-Generator: Launchpad (build 17341)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -247,7 +247,7 @@ msgstr "Belgelenmemiş tür"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Derin Uzay objeleri"
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:180
@@ -331,12 +331,12 @@ msgstr ""
 #: src/core/modules/Comet.cpp:156
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "periyodik olmayan"
 
 #: src/core/modules/Comet.cpp:160
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "periyodik"
 
 #: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
 #: plugins/Pulsars/src/Pulsar.cpp:166
@@ -348,12 +348,12 @@ msgstr ""
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Güneşten uzaklığı: %1AU (%2 km)"
 
 #: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Güneşten uzaklığı: %1AU (%2 Mio km)"
 
 #. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
 #: src/core/modules/Comet.cpp:230
@@ -364,7 +364,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Hız: %1 km/s"
 
 #: src/core/modules/Comet.cpp:246
 #, no-c-format, qt-format
@@ -445,12 +445,12 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:215
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Parlaklık aralığı: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Parlaklık aralığı: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:226
@@ -458,7 +458,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Uzaklık: %1 ly"
 
 #: src/core/modules/StarWrapper.cpp:232
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -474,7 +474,7 @@ msgstr "Iraklık açısı: %1\""
 #: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Periyot: %1 days"
 
 #: src/core/modules/StarWrapper.cpp:247
 #, qt-format
@@ -498,7 +498,7 @@ msgstr ""
 
 #: src/core/modules/MilkyWay.cpp:73
 msgid "Milky Way"
-msgstr ""
+msgstr "Samanyolu"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
