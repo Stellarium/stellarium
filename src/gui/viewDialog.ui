@@ -1466,6 +1466,13 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QCheckBox" name="showCardinalPointsCheckBox">
+                   <property name="text">
+                    <string>Cardinal points</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item>
@@ -1520,18 +1527,14 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QCheckBox" name="showMeridianOppositionLineCheckBox">
+                   <property name="text">
+                    <string>Meridian of opposition</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_16">
-               <item>
-                <widget class="QCheckBox" name="showCardinalPointsCheckBox">
-                 <property name="text">
-                  <string>Cardinal points</string>
-                 </property>
-                </widget>
                </item>
               </layout>
              </item>
@@ -2128,7 +2131,6 @@
   <tabstop>showEclipticGridJ2000CheckBox</tabstop>
   <tabstop>showAzimuthalGridCheckBox</tabstop>
   <tabstop>showGalacticGridCheckBox</tabstop>
-  <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
   <tabstop>showMeridianLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
