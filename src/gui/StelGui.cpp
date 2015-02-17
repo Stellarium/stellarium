@@ -642,6 +642,12 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 void StelGui::setFlagShowDecimalDegrees(bool b)
 {
 	flagShowDecimalDegrees=b;
+	if (searchDialog->visible())
+	{
+		// Update format of input fields if Search Dialog is open
+		// TODO: Use slot/signal?
+		searchDialog->populateCoordinateAxis();
+	}
 }
 
 void StelGui::setVisible(bool b)
