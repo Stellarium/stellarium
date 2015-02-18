@@ -109,6 +109,9 @@ public:
     void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true;}
     bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
 
+    S3DEnum::CubemapShadowMode getCubemapShadowMode() const { return cubemapShadowMode; }
+    void setCubemapShadowMode(S3DEnum::CubemapShadowMode mode) { cubemapShadowMode = mode; reinitShadowmapping = true; }
+
     uint getCubemapSize() const { return cubemapSize; }
     void setCubemapSize(uint size) { cubemapSize = size; reinitCubemapping = true; }
     uint getShadowmapSize() const { return shadowmapSize; }
@@ -153,6 +156,7 @@ private:
     bool venusOn;
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
     S3DEnum::CubemappingMode cubemappingMode;
+    S3DEnum::CubemapShadowMode cubemapShadowMode;
     bool reinitCubemapping,reinitShadowmapping;
 
     bool loadCancel; //true if loading process should be canceled
