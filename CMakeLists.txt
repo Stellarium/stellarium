@@ -83,17 +83,6 @@ IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  ENDIF()
 ENDIF()
 
-SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
-IF(OPTIMIZE_INTEL_ATOM)
- IF (MSVC)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2 ")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2 ")
- ELSE()
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
- ENDIF()
-ENDIF()
-
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
