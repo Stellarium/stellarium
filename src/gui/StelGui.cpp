@@ -74,14 +74,6 @@
 #include <QColor>
 #include <QAction>
 
-StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
-{
-	// Allow to load the resources when used as a static plugin
-	Q_INIT_RESOURCE(guiRes);
-
-	return new StelGui();
-}
-
 StelGui::StelGui()
 	: topLevelGraphicsWidget(NULL)
 	, skyGui(NULL)
