@@ -13,13 +13,3 @@ FOREACH(NAME ${STELLARIUM_PLUGINS})
   ENDIF()
 ENDFOREACH()
 
-IF(USE_PLUGIN_SVMT)
-  SET(SOURCE_SVMT_PATH "../../svmt/" CACHE PATH "The location of the SVMT plugin main directory i.e. the one containing the top level CMakeLists.txt")
-  ADD_SUBDIRECTORY( ${SOURCE_SVMT_PATH} svmt )
-ENDIF()
-
-IF(USE_PLUGIN_VIRGO)
-  SET(VIRGO_PROJECT_PATH "../extmodules/VirGO/" CACHE PATH "The location of the VirGO plugin main directory i.e. the one containing the top level CMakeLists.txt")
-  ADD_SUBDIRECTORY( ${VIRGO_PROJECT_PATH} VirGO )
-ENDIF()
-

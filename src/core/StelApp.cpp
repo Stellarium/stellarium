@@ -77,16 +77,6 @@
 #include <QCoreApplication>
 #include <QScreen>
 
-Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
-
-#ifdef USE_STATIC_PLUGIN_VIRGO
-Q_IMPORT_PLUGIN(VirGOStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SVMT
-Q_IMPORT_PLUGIN(SVMTStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
 #endif
