@@ -88,8 +88,6 @@ public:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
-	bool getFlagShowDecimalDegrees() const;
-
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
@@ -196,8 +194,6 @@ private:
 	StelButton* btShowNebulaeBackground;
 
 	bool initDone;
-
-	bool flagShowDecimalDegrees;
 
 	QSizeF savedProgressBarSize;
 

@@ -106,7 +106,6 @@ StelGui::StelGui()
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(NULL)
 	, initDone(false)
-	, flagShowDecimalDegrees(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 }
@@ -360,7 +359,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());	
-	setFlagShowDecimalDegrees(conf->value("gui/flag_show_decimal_degrees", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -641,11 +639,10 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 
 void StelGui::setFlagShowDecimalDegrees(bool b)
 {
-	flagShowDecimalDegrees=b;
+	StelApp::getInstance().setFlagShowDecimalDegrees(b);
 	if (searchDialog->visible())
 	{
 		// Update format of input fields if Search Dialog is open
-		// TODO: Use slot/signal?
 		searchDialog->populateCoordinateAxis();
 	}
 }
@@ -726,11 +723,6 @@ bool StelGui::getFlagShowFlipButtons() const
 bool StelGui::getFlagShowNebulaBackgroundButton() const
 {
 	return flagShowNebulaBackgroundButton;
-}
-
-bool StelGui::getFlagShowDecimalDegrees() const
-{
-	return flagShowDecimalDegrees;
 }
 
 bool StelGui::initComplete(void) const

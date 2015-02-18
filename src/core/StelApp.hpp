@@ -207,6 +207,11 @@ public slots:
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
 
+	//! Set flag for showing decimal degree in various places.
+	void setFlagShowDecimalDegrees(bool b);
+	//! Get flag for showing decimal degree in various places.
+	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
+	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
@@ -354,6 +359,8 @@ private:
 	QOpenGLFramebufferObject* renderBuffer;
 
 	StelViewportEffect* viewportEffect;
+	
+	bool flagShowDecimalDegrees;
 };
 
 #endif // _STELAPP_HPP_
