@@ -58,6 +58,7 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(S3DEnum::ShadowFilterQuality shadowFilterQuality READ getShadowFilterQuality WRITE setShadowFilterQuality NOTIFY shadowFilterQualityChanged)
 	Q_PROPERTY(bool enablePCSS READ getEnablePCSS WRITE setEnablePCSS NOTIFY enablePCSSChanged)
 	Q_PROPERTY(S3DEnum::CubemappingMode cubemappingMode READ getCubemappingMode WRITE setCubemappingMode NOTIFY cubemappingModeChanged)
+	Q_PROPERTY(S3DEnum::CubemapShadowMode cubemapShadowMode READ getCubemapShadowMode WRITE setCubemapShadowMode NOTIFY cubemapShadowModeChanged)
 	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
 	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
@@ -94,6 +95,7 @@ signals:
     void shadowFilterQualityChanged(const S3DEnum::ShadowFilterQuality val);
     void enablePCSSChanged(const bool val);
     void cubemappingModeChanged(const S3DEnum::CubemappingMode val);
+    void cubemapShadowModeChanged(const S3DEnum::CubemapShadowMode val);
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
     void enableTorchLightChanged(const bool val);
@@ -151,6 +153,9 @@ public slots:
     S3DEnum::CubemappingMode getCubemappingMode(void) const;
     //! Sets the cubemapping mode
     void setCubemappingMode(const S3DEnum::CubemappingMode val);
+
+    S3DEnum::CubemapShadowMode getCubemapShadowMode() const;
+    void setCubemapShadowMode(const S3DEnum::CubemapShadowMode val);
 
     //! Set to true to show some rendering debug information
     void setEnableDebugInfo(const bool debugEnabled);

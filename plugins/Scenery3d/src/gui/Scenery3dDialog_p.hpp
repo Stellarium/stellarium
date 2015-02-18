@@ -15,7 +15,7 @@ public slots:
 	void setGSSupported(bool supported)
 	{
 		gsSupported = supported;
-		QModelIndex idx = index(S3DEnum::CUBEMAP_GSACCEL);
+		QModelIndex idx = index(S3DEnum::CM_CUBEMAP_GSACCEL);
 		emit dataChanged(idx,idx);
 	}
 public:
@@ -35,11 +35,11 @@ public:
 		{
 			switch (index.row())
 			{
-				case S3DEnum::TEXTURES:
+				case S3DEnum::CM_TEXTURES:
 					return QVariant(QString(N_("6 Textures")));
-				case S3DEnum::CUBEMAP:
+				case S3DEnum::CM_CUBEMAP:
 					return QVariant(QString(N_("Cubemap")));
-				case S3DEnum::CUBEMAP_GSACCEL:
+				case S3DEnum::CM_CUBEMAP_GSACCEL:
 					return QVariant(QString(N_("Geometry shader")));
 			}
 		}
@@ -51,7 +51,7 @@ public:
 		//disable the third item depending on geometry shader support flag
 		Qt::ItemFlags parFlags = QAbstractListModel::flags(index);
 
-		if(index.row() == S3DEnum::CUBEMAP_GSACCEL)
+		if(index.row() == S3DEnum::CM_CUBEMAP_GSACCEL)
 		{
 			if(gsSupported)
 			{
@@ -68,5 +68,37 @@ public:
 	}
 };
 
+class CubemapShadowModeListModel : public QAbstractListModel
+{
+	Q_OBJECT
+
+public:
+
+
+	CubemapShadowModeListModel(QObject* parent = NULL) : QAbstractListModel(parent)
+	{}
+
+	int rowCount(const QModelIndex &parent) const
+	{
+		return 3;
+	}
+
+	QVariant data(const QModelIndex &index, int role) const
+	{
+		if(role == Qt::DisplayRole || role == Qt::EditRole)
+		{
+			switch (index.row())
+			{
+				case S3DEnum::CSM_PERSPECTIVE:
+					return QVariant(QString(N_("View-optimized")));
+				case S3DEnum::CSM_BASIC:
+					return QVariant(QString(N_("Basic")));
+				case S3DEnum::CSM_FULL:
+					return QVariant(QString(N_("Full (slow)")));
+			}
+		}
+		return QVariant();
+	}
+};
 
 #endif
