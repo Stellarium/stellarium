@@ -105,6 +105,13 @@ IF(APPLE)
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
+# This activates Link Time Optimization on recent GCC
+# Unfortunately, it also seems to break static plugins
+# It's providing a 20% size reduction, and probably a faster code when activated
+#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
+#SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
+
 ########### Others ###########
 # Activate translation
 SET(ENABLE_NLS 1 CACHE BOOL "Define whether program translation should be supported.")
