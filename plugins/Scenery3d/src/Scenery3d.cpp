@@ -95,14 +95,14 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	Q_ASSERT(cubeSideFBO[0]==0);
 
 	supportsGSCubemapping = false;
-	cubemappingMode = S3DEnum::CUBEMAP;
+	cubemappingMode = S3DEnum::CM_CUBEMAP;
 	reinitCubemapping = true;
 
 	shaderParameters.shadowTransform = false;
 	shaderParameters.pixelLighting = false;
 	shaderParameters.shadows = false;
 	shaderParameters.bump = false;
-	shaderParameters.shadowFilterQuality = S3DEnum::LOW;
+	shaderParameters.shadowFilterQuality = S3DEnum::SFQ_LOW;
 	shaderParameters.geometryShader = false;
 	shaderParameters.torchLight = false;
 
@@ -541,7 +541,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		//Send squared splits to the shader
 		shader->setUniformValue(loc, splitData.v[0], splitData.v[1], splitData.v[2], splitData.v[3]);
 
-		if(shaderParameters.shadowFilterQuality>S3DEnum::OFF)
+		if(shaderParameters.shadowFilterQuality>S3DEnum::SFQ_OFF)
 		{
 			//send size of light ortho for each frustum
 			loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_LIGHTORTHOSCALE);
@@ -631,7 +631,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 	//override some shader Params
 	GlobalShaderParameters pm = shaderParameters;
 	if(venusOn)
-		pm.shadowFilterQuality = S3DEnum::OFF;
+		pm.shadowFilterQuality = S3DEnum::SFQ_OFF;
 
 	//bind VAO
 	objModel->bindGL();
@@ -973,15 +973,6 @@ void Scenery3d::adjustFrustum()
 
 bool Scenery3d::generateShadowMap()
 {
-	//test if shadow mapping has been initialized,
-	//or needs to be re-initialized because of setting changes
-	if(reinitShadowmapping || shadowFBOs.size()==0)
-	{
-		reinitShadowmapping = false;
-		if(!initShadowmapping())
-			return false; //can't use shadowmaps
-	}
-
 	if(fixShadowData)
 		return true;
 
@@ -1336,6 +1327,14 @@ void Scenery3d::calcCubeMVP()
 
 void Scenery3d::generateCubeMap()
 {
+	//do shadow pass
+	//only calculate shadows if enabled
+	if(shaderParameters.shadows)
+	{
+		if(!generateShadowMap())
+			return;
+	}
+
 	//setup projection matrix - this is a 90-degree perspective with aspect 1.0
 	const float fov = 90.0f;
 	projectionMatrix.setToIdentity();
@@ -1350,7 +1349,7 @@ void Scenery3d::generateCubeMap()
 	glDepthMask(GL_TRUE);
 	glEnable(GL_CULL_FACE);
 
-	if(cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
+	if(cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
 		//single FBO
 		glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
@@ -1433,7 +1432,7 @@ void Scenery3d::drawFromCubeMap()
 {
 	QOpenGLShaderProgram* cubeShader;
 
-	if(cubemappingMode>=S3DEnum::CUBEMAP)
+	if(cubemappingMode>=S3DEnum::CM_CUBEMAP)
 		cubeShader = shaderManager.getCubeShader();
 	else
 		cubeShader = shaderManager.getTextureShader();
@@ -1456,7 +1455,7 @@ void Scenery3d::drawFromCubeMap()
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_DIFFUSE),0);
 	cubeVertexBuffer.bind();
-	if(cubemappingMode>=S3DEnum::CUBEMAP)
+	if(cubemappingMode>=S3DEnum::CM_CUBEMAP)
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
 	else // 2D tex coords are stored in the same buffer, but with an offset
 		cubeShader->setAttributeBuffer(ShaderMgr::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
@@ -1479,7 +1478,7 @@ void Scenery3d::drawFromCubeMap()
 
 	cubeIndexBuffer.bind();
 	glActiveTexture(GL_TEXTURE0);
-	if(cubemappingMode>=S3DEnum::CUBEMAP)
+	if(cubemappingMode>=S3DEnum::CM_CUBEMAP)
 	{
 		//can render in a single draw call
 		glBindTexture(GL_TEXTURE_CUBE_MAP,cubeMapCubeTex);
@@ -1509,6 +1508,14 @@ void Scenery3d::drawFromCubeMap()
 
 void Scenery3d::drawDirect() // for Perspective Projection only!
 {
+	//do shadow pass
+	//only calculate shadows if enabled
+	if(shaderParameters.shadows)
+	{
+		if(!generateShadowMap())
+			return;
+	}
+
     //calculate standard perspective projection matrix, use QMatrix4x4 for that
     float fov = altAzProjector->getFov();
     float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
@@ -1862,10 +1869,10 @@ bool Scenery3d::initCubemapping()
 	cubeMappingCreated = true;
 
 	//last compatibility check before possible crash
-	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
+	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
 		parent->showMessage(N_("Selected cubemapping mode is not supported. Falling back to '6 Textures' mode."));
-		cubemappingMode = S3DEnum::TEXTURES;
+		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
 
 	//if we are on an ES context, it may not be possible to specify texture bitdepth
@@ -1873,7 +1880,7 @@ bool Scenery3d::initCubemapping()
 
 	glActiveTexture(GL_TEXTURE0);
 
-	if(cubemappingMode >= S3DEnum::CUBEMAP) //CUBEMAP or CUBEMAP_GSACCEL
+	if(cubemappingMode >= S3DEnum::CM_CUBEMAP) //CUBEMAP or CUBEMAP_GSACCEL
 	{
 		//gen cube tex
 		glGenTextures(1,&cubeMapCubeTex);
@@ -1911,7 +1918,7 @@ bool Scenery3d::initCubemapping()
 	}
 
 	//create depth texture/RB
-	if(cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
+	if(cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
 		//a single cubemap depth texture
 		glGenTextures(1,&cubeMapCubeDepth);
@@ -1943,7 +1950,7 @@ bool Scenery3d::initCubemapping()
 	}
 
 	//generate FBO/FBOs
-	if(cubemappingMode == S3DEnum::CUBEMAP_GSACCEL)
+	if(cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
 		//only 1 FBO used
 		//create fbo
@@ -1971,7 +1978,7 @@ bool Scenery3d::initCubemapping()
 			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
 
 			//attach color - 1 side of cubemap or single texture
-			if(cubemappingMode == S3DEnum::CUBEMAP)
+			if(cubemappingMode == S3DEnum::CM_CUBEMAP)
 				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,cubeMapCubeTex,0);
 			else
 				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cubeMapTex[i],0);
@@ -2001,7 +2008,7 @@ bool Scenery3d::initCubemapping()
 	//this is the EAST face (y=1)
 	stackBase.rotate(90.0f,-1.0f,0.0f,0.0f);
 
-	if(cubemappingMode >= S3DEnum::CUBEMAP)
+	if(cubemappingMode >= S3DEnum::CM_CUBEMAP)
 	{
 		//cubemap mode needs other rotations than texture mode
 
@@ -2234,7 +2241,7 @@ bool Scenery3d::initShadowmapping()
 
 			bool isES = QOpenGLContext::currentContext()->isOpenGLES();
 			//pcss is only enabled if filtering is also enabled
-			bool pcssEnabled = shaderParameters.pcss && shaderParameters.shadowFilterQuality>S3DEnum::OFF;
+			bool pcssEnabled = shaderParameters.pcss && shaderParameters.shadowFilterQuality>S3DEnum::SFQ_OFF;
 
 			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
 			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : (pcssEnabled ? GL_DEPTH_COMPONENT32F : GL_DEPTH_COMPONENT16), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
@@ -2329,11 +2336,13 @@ void Scenery3d::draw(StelCore* core)
 
 	if (shaderParameters.shadows)
 	{
-		if(!requiresCubemap || needsCubemapUpdate)
+		//test if shadow mapping has been initialized,
+		//or needs to be re-initialized because of setting changes
+		if(reinitShadowmapping || shadowFBOs.size()==0)
 		{
-			//only calculate shadows if enabled & update required
-			if(!generateShadowMap())
-				return;
+			reinitShadowmapping = false;
+			if(!initShadowmapping())
+				return; //can't use shadowmaps
 		}
 	}
 	else

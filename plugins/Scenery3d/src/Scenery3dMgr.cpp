@@ -227,9 +227,11 @@ void Scenery3dMgr::loadConfig()
 
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
 	scenery3d->setCubemappingMode( static_cast<S3DEnum::CubemappingMode>(conf->value("cubemap_mode",1).toInt()) );
+	scenery3d->setCubemapShadowMode( static_cast<S3DEnum::CubemapShadowMode>(conf->value("cubemap_shadow_mode",0).toInt()) );
 	scenery3d->setCubemapSize(conf->value("cubemap_size",2048).toInt());
 	scenery3d->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());
 	scenery3d->setShadowFilterQuality( static_cast<S3DEnum::ShadowFilterQuality>(conf->value("shadow_filter_quality", 1).toInt()) );
+	scenery3d->setPCSS(conf->value("flag_pcss").toBool());
 	scenery3d->setTorchBrightness(conf->value("torch_brightness", 0.5f).toFloat());
 	scenery3d->setTorchRange(conf->value("torch_range",5.0f).toFloat());
 	scenery3d->setBumpsEnabled(conf->value("flag_bumpmap").toBool());
@@ -566,10 +568,10 @@ void Scenery3dMgr::setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val
 	QString type;
 
 	switch (val) {
-		case S3DEnum::HIGH:
+		case S3DEnum::SFQ_HIGH:
 			type = N_("high");
 			break;
-		case S3DEnum::LOW:
+		case S3DEnum::SFQ_LOW:
 			type = N_("low");
 			break;
 		default:
@@ -591,6 +593,9 @@ bool Scenery3dMgr::getEnablePCSS() const
 void Scenery3dMgr::setEnablePCSS(const bool val)
 {
 	scenery3d->setPCSS(val);
+	conf->setValue(S3D_CONFIG_PREFIX + "/flag_pcss",val);
+
+	emit enablePCSSChanged(val);
 }
 
 S3DEnum::CubemappingMode Scenery3dMgr::getCubemappingMode() const
@@ -604,6 +609,19 @@ void Scenery3dMgr::setCubemappingMode(const S3DEnum::CubemappingMode val)
 
 	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_mode",val);
 	emit cubemappingModeChanged(val);
+}
+
+S3DEnum::CubemapShadowMode Scenery3dMgr::getCubemapShadowMode() const
+{
+	return scenery3d->getCubemapShadowMode();
+}
+
+void Scenery3dMgr::setCubemapShadowMode(const S3DEnum::CubemapShadowMode val)
+{
+	scenery3d->setCubemapShadowMode(val);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_shadow_mode",val);
+	emit cubemapShadowModeChanged(val);
 }
 
 bool Scenery3dMgr::getEnableDebugInfo() const

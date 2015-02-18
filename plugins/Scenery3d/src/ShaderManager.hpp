@@ -228,9 +228,9 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 		flags = SHADING;
 		if(globals.pixelLighting)            flags|= PIXEL_LIGHTING;
 		if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
-		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::OFF) flags|= SHADOW_FILTER;
-		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::LOW) flags|= SHADOW_FILTER_HQ;
-		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::OFF && globals.pcss) flags|= PCSS;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::SFQ_OFF) flags|= SHADOW_FILTER;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::SFQ_LOW) flags|= SHADOW_FILTER_HQ;
+		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::SFQ_OFF && globals.pcss) flags|= PCSS;
 		if(globals.geometryShader) flags|= GEOMETRY_SHADER;
 		if(globals.torchLight) flags|= TORCH;
 	}

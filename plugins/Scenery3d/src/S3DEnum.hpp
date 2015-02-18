@@ -28,29 +28,44 @@
 struct S3DEnum
 {
 	Q_GADGET
-	Q_ENUMS(CubemappingMode ShadowFilterQuality)
+	Q_ENUMS(CubemappingMode ShadowFilterQuality CubemapShadowMode)
 
 public:
 	//! Determines the method used for cubemap creation
 	enum CubemappingMode
 	{
 		//! Uses 6 textures, one for each side of the cube. Seems to be the best for old Intel drivers.
-		TEXTURES,
+		CM_TEXTURES,
 		//! Uses a single GL_TEXTURE_CUBEMAP, seems to work a bit better on "modern" GPUs
-		CUBEMAP,
+		CM_CUBEMAP,
 		//! Uses a single GL_TEXTURE_CUBEMAP and a geometry shader to render all 6 sides in one pass.
-		CUBEMAP_GSACCEL
+		CM_CUBEMAP_GSACCEL
 	};
 
 	//! Contains different shadow filter settings
 	enum ShadowFilterQuality
 	{
 		//! Disables shadow filtering (hardware PCF is still applied)
-		OFF,
+		SFQ_OFF,
 		//! Uses a 16-tap Poisson disk
-		LOW,
+		SFQ_LOW,
 		//! Uses a 64-tap Poisson disk
-		HIGH
+		SFQ_HIGH
+	};
+
+	//! Determines how shadows are handled in cubemapping mode
+	enum CubemapShadowMode
+	{
+		//! Shadows are adjusted to a perspective frustum (same as in non-CM mode, up to 4 shadow passes).
+		//! Most performant, but causes missing shadows on high FOV
+		//! This is the behaviour all old versions used
+		CSM_PERSPECTIVE,
+		//! Use a single shadow cascade for each view (6 shadow passes)
+		//! Correct shadows on all sides, but probably bad quality
+		CSM_BASIC,
+		//! Use all shadow cascades on each view (i.e. 6*4 shadow passes...)
+		//! Best looking results, but worst performance
+		CSM_FULL,
 	};
 };
 
