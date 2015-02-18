@@ -132,7 +132,7 @@ void PointerCoordinates::draw(StelCore *core)
 	   float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
 	   prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
 	  }
-	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;

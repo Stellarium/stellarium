@@ -242,7 +242,7 @@ void SearchDialog::populateCoordinateSystemsList()
 
 void SearchDialog::populateCoordinateAxis()
 {
-	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 	bool xnormal = true;
 
 	ui->AxisXSpinBox->setDecimals(2);
