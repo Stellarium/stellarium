@@ -29,7 +29,6 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelGui.hpp"
 
 #include <set>
 #include <QSettings>
@@ -166,7 +165,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	direc.normalize();
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
-	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 
 	QString text;
 	if (d->text.isEmpty())
@@ -306,7 +305,7 @@ void SkyGrid::draw(const StelCore* core) const
 	if (!fader.getInterstate())
 		return;
 
-	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
