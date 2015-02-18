@@ -446,21 +446,22 @@ void Scenery3d::update(double deltaTime)
 	eye_height -= moveVector.v[2];
 	absolutePosition.v[2] = -groundHeight()-eye_height;
 
+
 	//View Up in our case always pointing positive up
-	viewUp.v[0] = 0;
-	viewUp.v[1] = 0;
-	viewUp.v[2] = 1;
+	mainViewUp.v[0] = 0;
+	mainViewUp.v[1] = 0;
+	mainViewUp.v[2] = 1;
+
+
+	viewPos = -absolutePosition;
 
 	//View Direction
-	viewDir = core->getMovementMgr()->getViewDirectionJ2000();
-	viewDir = core->j2000ToAltAz(viewDir);
-
-	//View Position is already in world-grid space
-	viewPos = -absolutePosition;
+	mainViewDir = core->getMovementMgr()->getViewDirectionJ2000();
+	mainViewDir = core->j2000ToAltAz(mainViewDir);
 
 	//find cubemap face this vector points at
 	//only consider horizontal plane (XY)
-	dominantFace = qAbs(viewDir.v[0])<qAbs(viewDir.v[1]);
+	dominantFace = qAbs(mainViewDir.v[0])<qAbs(mainViewDir.v[1]);
 	secondDominantFace = !dominantFace;
 
 	//uncomment this to also consider up/down faces
@@ -478,8 +479,8 @@ void Scenery3d::update(double deltaTime)
 	*/
 
 	//check sign
-	dominantFace = dominantFace*2 + (viewDir.v[dominantFace]<0.0);
-	secondDominantFace = secondDominantFace*2 + (viewDir.v[secondDominantFace]<0.0);
+	dominantFace = dominantFace*2 + (mainViewDir.v[dominantFace]<0.0);
+	secondDominantFace = secondDominantFace*2 + (mainViewDir.v[secondDominantFace]<0.0);
     }
 }
 
@@ -623,7 +624,7 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 	}
 }
 
-void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
+bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 {
 	QOpenGLShaderProgram* curShader = NULL;
 	QSet<QOpenGLShaderProgram*> initialized;
@@ -638,6 +639,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 
 	//assume backfaceculling is on
 	bool backfaceCullState = true;
+	bool success = true;
 
 	//TODO optimize: clump models with same material together when first loading to minimize state changes
 	const OBJ::Material* lastMaterial = NULL;
@@ -662,6 +664,7 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			{
 				//shader invalid, can't draw
 				parent->showMessage(N_("Scenery3d shader error, can't draw. Check debug output for details."));
+				success = false;
 				break;
 			}
 			if(newShader!=curShader)
@@ -754,9 +757,11 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 
 	//release VAO
 	objModel->unbindGL();
+
+	return success;
 }
 
-void Scenery3d::computeFrustumSplits()
+void Scenery3d::computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp)
 {
 	//the frustum arrays all already contain the same adjusted frustum from adjustFrustum
 	float zNear = frustumArray[0].zNear;
@@ -773,9 +778,12 @@ void Scenery3d::computeFrustumSplits()
 		//Set the previous zFar to the newly computed zNear
 		//use a small overlap for robustness
 		frustumArray[i-1].zFar = frustumArray[i].zNear * 1.005f;
+
+		frustumArray[i-1].calcFrustum(viewPos,viewDir,viewUp);
 	}
 
 	//last zFar is already the zFar of the adjusted frustum
+	frustumArray[frustumSplits-1].calcFrustum(viewPos,viewDir,viewUp);
 }
 
 void Scenery3d::computePolyhedron(Polyhedron& body,const Frustum& frustum,const Vec3f& shadowDir)
@@ -918,14 +926,12 @@ void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale,
     cropMatrix = biasMatrix * projectionMatrix * modelViewMatrix;
 }
 
-void Scenery3d::adjustFrustum()
+void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp, const float fov, const float aspect)
 {
 	//calc cam frustum for shadowing range
 	//note that this is only correct in the perspective projection case, cubemapping WILL introduce shadow artifacts in most cases
 
 	//TODO make shadows in cubemapping mode better by projecting the frusta, more closely estimating the required shadow extents
-	float fov = altAzProjector->getFov();
-	float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
 	camFrustShadow.setCamInternals(fov,aspect,currentScene.camNearZ,currentScene.shadowFarZ);
 	camFrustShadow.calcFrustum(viewPos, viewDir, viewUp);
 
@@ -964,21 +970,18 @@ void Scenery3d::adjustFrustum()
     camFrustShadow.setCamInternals(fov,aspect,minZ,maxZ);
     camFrustShadow.calcFrustum(viewPos,viewDir,viewUp);
 
-    //Setup the subfrusta
+    //Re-set the subfrusta
     for(int i=0; i<frustumSplits; i++)
     {
 	frustumArray[i].setCamInternals(fov, aspect, minZ, maxZ);
     }
+
+    //Compute and set z-distances for each split
+    computeFrustumSplits(viewPos,viewDir,viewUp);
 }
 
-bool Scenery3d::generateShadowMap()
+void Scenery3d::calculateShadowCaster()
 {
-	if(fixShadowData)
-		return true;
-
-	//Adjust the frustum to the scene before analyzing the view samples
-	adjustFrustum();
-
 	//Determine sun position
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
@@ -993,47 +996,42 @@ bool Scenery3d::generateShadowMap()
 	venusPosition.normalize();
 
 	//find the direction the shadow is cast (= light direction)
-	Vec3f shadowDirV3f;
-
 	//Select view position based on which planet is visible
 	if (sunPosition[2]>0)
 	{
-		shadowDirV3f = Vec3f(sunPosition.v[0],sunPosition.v[1],sunPosition.v[2]);
+		lightInfo.shadowDirection = Vec3f(sunPosition.v[0],sunPosition.v[1],sunPosition.v[2]);
 		lightInfo.shadowCaster = Sun;
 		venusOn = false;
 	}
 	else if (moonPosition[2]>0)
 	{
-		shadowDirV3f = Vec3f(moonPosition.v[0],moonPosition.v[1],moonPosition.v[2]);
+		lightInfo.shadowDirection = Vec3f(moonPosition.v[0],moonPosition.v[1],moonPosition.v[2]);
 		lightInfo.shadowCaster = Moon;
 		venusOn = false;
 	}
 	else
 	{
 		//TODO fix case where not even Venus is visible, led to problems for me today
-		shadowDirV3f = Vec3f(venusPosition.v[0],venusPosition.v[1],venusPosition.v[2]);
+		lightInfo.shadowDirection = Vec3f(venusPosition.v[0],venusPosition.v[1],venusPosition.v[2]);
 		lightInfo.shadowCaster = Venus;
 		venusOn = true;
 	}
 
-	QVector3D shadowDir(shadowDirV3f.v[0],shadowDirV3f.v[1],shadowDirV3f.v[2]);
+	QVector3D shadowDir(lightInfo.shadowDirection.v[0],lightInfo.shadowDirection.v[1],lightInfo.shadowDirection.v[2]);
 	static const QVector3D vZero = QVector3D();
 	static const QVector3D vZeroZeroOne = QVector3D(0,0,1);
 
 	//calculate lights modelview matrix
-	modelViewMatrix.setToIdentity();
-	modelViewMatrix.lookAt(shadowDir,vZero,vZeroZeroOne);
-
-	//Compute and set z-distances for each split
-	computeFrustumSplits();
-
-	//perform actual rendering
-	return renderShadowMaps(shadowDirV3f);
+	lightInfo.shadowModelView.setToIdentity();
+	lightInfo.shadowModelView.lookAt(shadowDir,vZero,vZeroZeroOne);
 }
 
-bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
+bool Scenery3d::renderShadowMaps()
 {
 	shaderParameters.shadowTransform = true;
+
+	//projection matrix gets updated below in updateCropMatrix
+	modelViewMatrix = lightInfo.shadowModelView;
 
 	//Fix selfshadowing
 	glEnable(GL_POLYGON_OFFSET_FILL);
@@ -1054,7 +1052,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	//Compute an orthographic projection that encompasses the whole scene
 	//a crop matrix is used to restrict this projection to the subfrusta
 	float orthoExtent,orthoFar,orthoNear;
-	computeOrthoProjVals(shadowDir,orthoExtent,orthoNear,orthoFar);
+	computeOrthoProjVals(lightInfo.shadowDirection,orthoExtent,orthoNear,orthoFar);
 
 	QMatrix4x4 lightProj;
 	lightProj.ortho(-orthoExtent,orthoExtent,-orthoExtent,orthoExtent,orthoNear,orthoFar);
@@ -1062,15 +1060,14 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	//multiply with lights modelView matrix
 	QMatrix4x4 lightMVP = lightProj*modelViewMatrix;
 
+	bool success = true;
+
 	//For each split
 	for(int i=0; i<frustumSplits; i++)
 	{
-		//Calculate the sub-Frustum for this split
-		frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
-
 		//Find the convex body that encompasses all shadow receivers and casters for this split
 		focusBodies[i].clear();
-		computePolyhedron(focusBodies[i],frustumArray[i],shadowDir);
+		computePolyhedron(focusBodies[i],frustumArray[i],lightInfo.shadowDirection);
 
 		//qDebug() << i << ".split vert count:" << focusBodies[i]->getVertCount();
 
@@ -1089,7 +1086,11 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 			shadowFrustumSize[i] *= (1.0f / orthoExtent);
 
 			//Draw the scene
-			drawArrays(false);
+			if(!drawArrays(false))
+			{
+				success = false;
+				break;
+			}
 		}
 	}
 
@@ -1113,7 +1114,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 
 	shaderParameters.shadowTransform = false;
 
-	return true;
+	return success;
 }
 
 void Scenery3d::calculateLighting()
@@ -1331,14 +1332,24 @@ void Scenery3d::generateCubeMap()
 	//only calculate shadows if enabled
 	if(shaderParameters.shadows)
 	{
-		if(!generateShadowMap())
-			return;
+		//shadow caster info only needs to be calculated once
+		calculateShadowCaster();
+
+		if(cubemapShadowMode == S3DEnum::CSM_PERSPECTIVE || cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
+		{
+			//in this mode, shadow frusta are calculated the same as in perspective mode
+			float fov = altAzProjector->getFov();
+			float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
+
+			adjustShadowFrustum(viewPos,mainViewDir,mainViewUp,fov,aspect);
+			if(!renderShadowMaps())
+				return; //shadow map rendering failed, do an early abort
+		}
 	}
 
 	//setup projection matrix - this is a 90-degree perspective with aspect 1.0
-	const float fov = 90.0f;
 	projectionMatrix.setToIdentity();
-	projectionMatrix.perspective(fov,1.0f,currentScene.camNearZ,currentScene.camFarZ);
+	projectionMatrix.perspective(90.0f,1.0f,currentScene.camNearZ,currentScene.camFarZ);
 
 	//set opengl viewport to the size of cubemap
 	glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1351,6 +1362,8 @@ void Scenery3d::generateCubeMap()
 
 	if(cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
+		//In this mode, only the "perspective" shadow mode can be used (otherwise it would need up to 6*4 shadowmaps at once)
+
 		//single FBO
 		glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
 
@@ -1369,6 +1382,8 @@ void Scenery3d::generateCubeMap()
 	}
 	else
 	{
+		QMatrix4x4 squareProjection = projectionMatrix;
+
 		if(needsMovementUpdate && updateOnlyDominantOnMoving)
 		{
 			//update only the dominant face
@@ -1397,6 +1412,32 @@ void Scenery3d::generateCubeMap()
 			//traditional 6-pass version
 			for(int i=0;i<6;++i)
 			{
+				if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
+				{
+					//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
+
+					//extract view dir from the MV matrix
+					QVector4D viewDir = -cubeRotation[i].row(2);
+
+					//somewhere, there are problems when the view direction points exactly up or down, causing missing shadows
+					//this is NOT fixed by choosing a different up vector here as could be expected
+					//the problem seems to occur during final rendering because shadowmap textures look alright and the scaling values seem valid
+					//for now, fix this by adding a tiny value to X in these cases
+					adjustShadowFrustum(viewPos,Vec3d(i>3?viewDir[0]+0.000001:viewDir[0],viewDir[1],viewDir[2]),Vec3d(0,0,1),90.0f,1.0f);
+					//render shadowmap
+					if(!renderShadowMaps())
+						return;
+
+					//projection needs to be reset
+					projectionMatrix = squareProjection;
+
+					//gl state + viewport must be reset
+					glEnable(GL_DEPTH_TEST);
+					glDepthMask(GL_TRUE);
+					glEnable(GL_CULL_FACE);
+					glViewport(0, 0, cubemapSize, cubemapSize);
+				}
+
 				//bind a single side of the cube
 				glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
 
@@ -1508,25 +1549,35 @@ void Scenery3d::drawFromCubeMap()
 
 void Scenery3d::drawDirect() // for Perspective Projection only!
 {
-	//do shadow pass
-	//only calculate shadows if enabled
-	if(shaderParameters.shadows)
-	{
-		if(!generateShadowMap())
-			return;
-	}
-
     //calculate standard perspective projection matrix, use QMatrix4x4 for that
     float fov = altAzProjector->getFov();
     float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
 
+    //calc modelview transform
+    QMatrix4x4 mvMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
+    mvMatrix.optimize(); //may make inversion faster?
+
+
+    //do shadow pass
+    //only calculate shadows if enabled
+    if(shaderParameters.shadows)
+    {
+	    calculateShadowCaster();
+
+	    //no need to extract view information, use the direction from stellarium
+	    adjustShadowFrustum(viewPos,mainViewDir,mainViewUp,fov,aspect);
+
+	    //this call modifies projection + mv matrices, so we have to set them afterwards
+	    if(!renderShadowMaps())
+		    return; //shadow map rendering failed, do an early abort
+    }
+
+    mvMatrix.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
+
+    //set final rendering matrices
+    modelViewMatrix = mvMatrix;
     projectionMatrix.setToIdentity();
     projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
-
-    //calc modelview transform
-    modelViewMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
-    modelViewMatrix.optimize(); //may make inversion faster?
-    modelViewMatrix.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
@@ -1744,13 +1795,13 @@ void Scenery3d::drawDebug()
     str = "View Dir, dominant faces";
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("%1 %2 %3, %4/%5").arg(viewDir.v[0], 7, 'f', 2).arg(viewDir.v[1], 7, 'f', 2).arg(viewDir.v[2], 7, 'f', 2).arg(dominantFace).arg(secondDominantFace);
+    str = QString("%1 %2 %3, %4/%5").arg(mainViewDir.v[0], 7, 'f', 2).arg(mainViewDir.v[1], 7, 'f', 2).arg(mainViewDir.v[2], 7, 'f', 2).arg(dominantFace).arg(secondDominantFace);
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
     str = "View Up";
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
-    str = QString("%1 %2 %3").arg(viewUp.v[0], 7, 'f', 2).arg(viewUp.v[1], 7, 'f', 2).arg(viewUp.v[2], 7, 'f', 2);
+    str = QString("%1 %2 %3").arg(mainViewUp.v[0], 7, 'f', 2).arg(mainViewUp.v[1], 7, 'f', 2).arg(mainViewUp.v[2], 7, 'f', 2);
     painter.drawText(screen_x, screen_y, str);
     if(requiresCubemap)
     {

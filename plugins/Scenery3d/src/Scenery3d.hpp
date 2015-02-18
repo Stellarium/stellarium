@@ -176,9 +176,10 @@ private:
     Heightmap* heightmap;
     Heightmap* heightmapLoad;
 
-    Vec3d viewUp;
-    Vec3d viewDir;
+    Vec3d mainViewUp;
+    Vec3d mainViewDir;
     Vec3d viewPos;
+
     int drawnTriangles,drawnModels;
     int materialSwitches, shaderSwitches;
 
@@ -226,8 +227,11 @@ private:
     // a struct which encapsulates lighting info
     struct LightParameters
     {
-	    ShadowCaster lightSource;
 	    ShadowCaster shadowCaster;
+	    Vec3f shadowDirection;
+	    QMatrix4x4 shadowModelView;
+
+	    ShadowCaster lightSource;
 	    QVector3D lightDirectionWorld;
 	    QVector3D ambient;
 	    QVector3D directional;
@@ -286,20 +290,21 @@ private:
     void drawDirect();
     //! When another projection than perspective is selected, rendering is performed using a cubemap.
     void drawWithCubeMap();
-    //! Setup shadow map information + render
-    bool generateShadowMap();
     //! Performs the actual rendering of the shadow map
-    bool renderShadowMaps(const Vec3f &shadowDir);
+    bool renderShadowMaps();
     //! Generates a 6-sided cube map by drawing a view in each direction
     void generateCubeMap();
     //! Uses the StelPainter to draw a warped cube textured with our cubemap
     void drawFromCubeMap();
     //! This is the method that performs the actual drawing.
     //! If shading is true, a suitable shader for each material is selected and initialized. Submits 1 draw call for each StelModel.
-    void drawArrays(bool shading=true, bool blendAlphaAdditive=false);
+    //! @return false on shader errors
+    bool drawArrays(bool shading=true, bool blendAlphaAdditive=false);
 
 
     // --- shading related stuff ---
+    //! Finds out the shadow caster and determines shadow parameters for current frame
+    void calculateShadowCaster();
     //! Calculates lighting related stuff and puts it in the lightInfo structure
     void calculateLighting();
     //! Sets uniforms constant over the whole pass (=projection matrix, lighting & shadow info)
@@ -321,10 +326,10 @@ private:
     //Save the Frustum to be able to move away from it and analyze it
     void saveFrusts();
 
-    //Adjust the frustum to the loaded scene bounding box according to Zhang et al.
-    void adjustFrustum();
+    //! Adjust the frustum to the loaded scene bounding box according to Zhang et al.
+    void adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp, const float fov, const float aspect);
     //Computes the frustum splits
-    void computeFrustumSplits();
+    void computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp);
     //Computes the focus body for given frustum
     void computePolyhedron(Polyhedron& body, const Frustum& frustum, const Vec3f &shadowDir);
     //Computes the crop matrix to focus the light
