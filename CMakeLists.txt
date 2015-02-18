@@ -130,7 +130,7 @@ ELSE()
 ENDIF()
 
 
-SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
 
@@ -173,34 +173,12 @@ ADD_PLUGIN(Quasars 1)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
-ADD_PLUGIN(SVMT 0)
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
 ADD_PLUGIN(TimeZoneConfiguration 1)
-ADD_PLUGIN(VirGO 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-IF(USE_PLUGIN_SVMT)
-    SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
-    SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-    SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-ENDIF()
-
-IF(USE_PLUGIN_VIRGO)
-    ## Library for loading FITS image files
-    FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-        /usr/include
-        /usr/local/include
-        DOC "Should point to the directory where the include files for libcfitsio are installed")
-    FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-        PATHS
-        /usr/lib/
-        /usr/local/lib
-        /opt/local/lib
-        DOC "cfitsio link options")
-    SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-ENDIF()
 
 IF(USE_PLUGIN_LOGBOOK)
     SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module

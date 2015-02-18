@@ -24,7 +24,7 @@
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelGuiBase.hpp"
+#include "StelGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
@@ -417,17 +417,7 @@ StelMainView::~StelMainView()
 
 void StelMainView::init(QSettings* conf)
 {
-	// Look for a static GUI plugins.
-	foreach (QObject *plugin, QPluginLoader::staticInstances())
-	{
-		StelGuiPluginInterface* pluginInterface = qobject_cast<StelGuiPluginInterface*>(plugin);
-		if (pluginInterface)
-		{
-			gui = pluginInterface->getStelGuiBase();
-		}
-		break;
-	}
-	Q_ASSERT(gui);
+	gui = new StelGui();
 
 #if STEL_USE_NEW_OPENGL_WIDGETS
 	//glWidget->initializeGL(); // protected...
