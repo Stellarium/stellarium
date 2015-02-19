@@ -598,7 +598,24 @@ p, li { white-space: pre-wrap; }
                    <property name="fieldGrowthPolicy">
                     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
                    </property>
-                   <item row="6" column="0" colspan="2">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_3">
+                     <property name="text">
+                      <string>Cubemapping mode:</string>
+                     </property>
+                     <property name="buddy">
+                      <cstring>comboBoxCubemapMode</cstring>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QComboBox" name="comboBoxCubemapMode">
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This determines the way the scene is rendered when Stellarium uses a projection other than &amp;quot;Perspective&amp;quot;. The scene is always rendered onto a cube, and this cube is then warped according to the real projection. The cube is described using an image called &amp;quot;cubemap&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;6 Textures&lt;/span&gt; uses 6 single textures, one for each cube side. This is the most compatible method, but may be slower than the others.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cubemap&lt;/span&gt; uses a single GL_TEXTURE_CUBEMAP. Recommended for most users.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; uses a modern GPU feature to render all 6 sides of the cube at once. It may be the fastest method depending on the scene and your GPU hardware. If not supported, this cannot be selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
                      <property name="toolTip">
                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the cubemap is only recreated in specific time intervals, instead of each frame.&lt;br/&gt;Saves energy and may increase subjective application performance.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note that the cubemap is always re-rendered when the view position changes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -608,7 +625,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="7" column="0" colspan="2">
+                   <item row="2" column="0" colspan="2">
                     <layout class="QFormLayout" name="formLayout_3">
                      <property name="leftMargin">
                       <number>20</number>
@@ -664,37 +681,23 @@ p, li { white-space: pre-wrap; }
                      </item>
                     </layout>
                    </item>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="label_3">
-                     <property name="text">
-                      <string>Cubemapping mode:</string>
-                     </property>
-                     <property name="buddy">
-                      <cstring>comboBoxCubemapMode</cstring>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QComboBox" name="comboBoxCubemapMode">
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QCheckBox" name="checkBoxSimpleShadows">
                      <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This determines the way the scene is rendered when Stellarium uses a projection other than &amp;quot;Perspective&amp;quot;. The scene is always rendered onto a cube, and this cube is then warped according to the real projection. The cube is described using an image called &amp;quot;cubemap&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;6 Textures&lt;/span&gt; uses 6 single textures, one for each cube side. This is the most compatible method, but may be slower than the others.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cubemap&lt;/span&gt; uses a single GL_TEXTURE_CUBEMAP. Recommended for most users.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; uses a modern GPU feature to render all 6 sides of the cube at once. It may be the fastest method depending on the scene and your GPU hardware. If not supported, this cannot be selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uses only a single shadow cascade instead of up to four.&lt;/p&gt;&lt;p&gt;Provides a speedup in exchange for shadow quality, especially in large scenes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0">
-                    <widget class="QLabel" name="label_6">
                      <property name="text">
-                      <string>Cubemap shadows:</string>
-                     </property>
-                     <property name="buddy">
-                      <cstring>comboBoxCubemapShadowMode</cstring>
+                      <string>Simple shadows</string>
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
-                    <widget class="QComboBox" name="comboBoxCubemapShadowMode">
+                   <item row="4" column="0" colspan="2">
+                    <widget class="QCheckBox" name="checkBoxCubemapShadows">
                      <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This determines how shadows are displayed in Cubemapping mode.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;View-optimized&lt;/span&gt; works similar to the non-cubemapping mode, and is the fastest mode. When using high FOV values, shadows may be missing for some parts of the image.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Basic&lt;/span&gt; does not have missing shadows, but worse shadow quality. Its a bit slower than &amp;quot;View-optimized&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Full&lt;/span&gt; uses full-quality shadows for all sides. This is the slowest method by far.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculates shadows for each cubemap face separately.&lt;/p&gt;&lt;p&gt;Fixes missing shadows when using high FOV values.&lt;/p&gt;&lt;p&gt;This does not work when using the &lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; cubemapping mode!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="text">
+                      <string>Full cubemap shadows</string>
                      </property>
                     </widget>
                    </item>

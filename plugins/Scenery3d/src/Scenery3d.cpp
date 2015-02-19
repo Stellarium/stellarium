@@ -104,7 +104,9 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.shadowFilterQuality = S3DEnum::SFQ_LOW;
 	shaderParameters.geometryShader = false;
 	shaderParameters.torchLight = false;
-	cubemapShadowMode = S3DEnum::CSM_PERSPECTIVE;
+
+	simpleShadows = false;
+	fullCubemapShadows = false;
 
 	torchRange = 5.0f;
 
@@ -857,7 +859,7 @@ void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale,
 
     //To avoid artifacts caused by far plane clipping, extend far plane by 5%
     //or if cubemapping is used, set it to 1
-    if(!requiresCubemap  || cubemapShadowMode > S3DEnum::CSM_PERSPECTIVE)
+    if(!requiresCubemap  || fullCubemapShadows)
     {
 	    float zRange = maxZ-minZ;
 	    maxZ = std::min(maxZ + zRange*0.05f, 1.0f);
@@ -1364,7 +1366,7 @@ void Scenery3d::renderIntoCubemapSixPasses()
 
 	if(needsMovementUpdate && updateOnlyDominantOnMoving)
 	{
-		if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
+		if(shaderParameters.shadows && fullCubemapShadows)
 		{
 			//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
 			renderShadowMapsForFace(dominantFace);
@@ -1383,7 +1385,7 @@ void Scenery3d::renderIntoCubemapSixPasses()
 
 		if(updateSecondDominantOnMoving)
 		{
-			if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
+			if(shaderParameters.shadows && fullCubemapShadows)
 			{
 				//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
 				renderShadowMapsForFace(secondDominantFace);
@@ -1406,7 +1408,7 @@ void Scenery3d::renderIntoCubemapSixPasses()
 		//traditional 6-pass version
 		for(int i=0;i<6;++i)
 		{
-			if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
+			if(shaderParameters.shadows && fullCubemapShadows)
 			{
 				//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
 				renderShadowMapsForFace(i);
@@ -1438,7 +1440,8 @@ void Scenery3d::generateCubeMap()
 		//shadow caster info only needs to be calculated once
 		calculateShadowCaster();
 
-		if(cubemapShadowMode == S3DEnum::CSM_PERSPECTIVE || cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
+		//GS mode only supports the perspective shadows
+		if(!fullCubemapShadows || cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 		{
 			//in this mode, shadow frusta are calculated the same as in perspective mode
 			float fov = altAzProjector->getFov();
@@ -2275,7 +2278,7 @@ bool Scenery3d::initShadowmapping()
 
 	bool valid = false;
 
-	if(requiresCubemap && cubemapShadowMode == S3DEnum::CSM_BASIC)
+	if(simpleShadows)
 	{
 		shaderParameters.frustumSplits = 1;
 	}

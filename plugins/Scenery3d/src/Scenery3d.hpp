@@ -80,6 +80,8 @@ public:
     void setPixelLightingEnabled(const bool val) { shaderParameters.pixelLighting = val; invalidateCubemap(); }
     bool getShadowsEnabled(void) const { return shaderParameters.shadows; }
     void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; reinitShadowmapping = true; invalidateCubemap(); }
+    bool getUseSimpleShadows() const {return simpleShadows; }
+    void setUseSimpleShadows(bool val) { simpleShadows = val; reinitShadowmapping = true; }
     bool getBumpsEnabled(void) const { return shaderParameters.bump; }
     void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; invalidateCubemap(); }
     bool getTorchEnabled(void) const { return shaderParameters.torchLight; }
@@ -106,11 +108,11 @@ public:
     S3DEnum::CubemappingMode getCubemappingMode() const { return cubemappingMode; }
     //! Changes cubemapping mode and forces re-initialization on next draw call.
     //! Note that NO CHECKING is done if the chosen mode is supported on this hardware, you have to make sure before calling this.
-    void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true; reinitShadowmapping = true;}
+    void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true; }
     bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
 
-    S3DEnum::CubemapShadowMode getCubemapShadowMode() const { return cubemapShadowMode; }
-    void setCubemapShadowMode(S3DEnum::CubemapShadowMode mode) { cubemapShadowMode = mode; reinitShadowmapping = true; }
+    void setUseFullCubemapShadows(bool val) { fullCubemapShadows = val; invalidateCubemap();}
+    bool getUseFullCubemapShadows() const { return fullCubemapShadows; }
 
     uint getCubemapSize() const { return cubemapSize; }
     void setCubemapSize(uint size) { cubemapSize = size; reinitCubemapping = true; }
@@ -154,8 +156,9 @@ private:
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
     bool fixShadowData; //for debugging, fixes all shadow mapping related data (shadowmap contents, matrices, frustums, focus bodies...) at their current values
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
+    bool simpleShadows;
+    bool fullCubemapShadows;
     S3DEnum::CubemappingMode cubemappingMode;
-    S3DEnum::CubemapShadowMode cubemapShadowMode;
     bool reinitCubemapping,reinitShadowmapping;
 
     bool loadCancel; //true if loading process should be canceled
