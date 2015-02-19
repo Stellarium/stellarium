@@ -28,6 +28,7 @@ Note: This shader currently requires some #version 120 features!
  
 //macros that can be set by ShaderManager (simple true/false flags)
 #define SHADOWS 1
+#define SINGLE_SHADOW_FRUSTUM 0
 #define BUMP 0
 #define HEIGHT 0
 #define GEOMETRY_SHADER 1
@@ -44,9 +45,11 @@ uniform vec3 u_vLightDirectionView; //in view space, from point to light
 #if SHADOWS
 //shadow transforms
 uniform mat4 u_mShadow0;
+#if !SINGLE_SHADOW_FRUSTUM 
 uniform mat4 u_mShadow1;
 uniform mat4 u_mShadow2;
 uniform mat4 u_mShadow3;
+#endif
 #endif
 
 attribute vec4 a_vertex;
@@ -84,11 +87,12 @@ varying vec3 VAR_VIEWPOS; //position of fragment in view space
 #if SHADOWS
 //varying arrays seem to cause some problems, so we use 4 vecs for now...
 varying vec4 VAR_SHADOWCOORD0;
+#if !SINGLE_SHADOW_FRUSTUM 
 varying vec4 VAR_SHADOWCOORD1;
 varying vec4 VAR_SHADOWCOORD2;
 varying vec4 VAR_SHADOWCOORD3;
 #endif
-
+#endif
 
 void main(void)
 {
@@ -105,9 +109,11 @@ void main(void)
 	#if SHADOWS
 	//calculate shadowmap coords
 	VAR_SHADOWCOORD0 = u_mShadow0 * a_vertex;
+	#if !SINGLE_SHADOW_FRUSTUM 
 	VAR_SHADOWCOORD1 = u_mShadow1 * a_vertex;
 	VAR_SHADOWCOORD2 = u_mShadow2 * a_vertex;
 	VAR_SHADOWCOORD3 = u_mShadow3 * a_vertex;
+	#endif
 	#endif
 	
 	#if BUMP
