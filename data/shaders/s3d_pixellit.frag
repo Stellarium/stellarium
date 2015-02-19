@@ -31,6 +31,7 @@ Note: This shader currently requires some #version 120 features!
 #define SHADOWS 1
 #define SHADOW_FILTER 0
 #define SHADOW_FILTER_HQ 0
+#define SINGLE_SHADOW_FRUSTUM 1
 #define PCSS 0
 #define MAT_DIFFUSETEX 1
 #define MAT_EMISSIVETEX 1
@@ -160,7 +161,11 @@ uniform vec3 u_vMixEmissive;
 
 #if SHADOWS
 //in a later version, this may become configurable
+#if SINGLE_SHADOW_FRUSTUM
+#define FRUSTUM_SPLITS 1
+#else
 #define FRUSTUM_SPLITS 4
+#endif
 //shadow related uniforms
 uniform vec4 u_vSplits; //the frustum splits
 #if PCSS
@@ -173,9 +178,11 @@ uniform vec4 u_vSplits; //the frustum splits
 //nothing is drawn, but no error is shown ...
 //therefore, use 4 ugly uniforms
 uniform SHADOWSAMPLER u_texShadow0;
+#if !SINGLE_SHADOW_FRUSTUM
 uniform SHADOWSAMPLER u_texShadow1;
 uniform SHADOWSAMPLER u_texShadow2;
 uniform SHADOWSAMPLER u_texShadow3;
+#endif
 
 //info about scale is needed for filtering
 uniform vec2 u_vLightOrthoScale[FRUSTUM_SPLITS];
@@ -198,9 +205,11 @@ varying vec3 v_viewPos; //position of fragment in view space
 #if SHADOWS
 //varying arrays seem to cause some problems, so we use 4 vecs for now...
 varying vec4 v_shadowCoord0;
+#if !SINGLE_SHADOW_FRUSTUM
 varying vec4 v_shadowCoord1;
 varying vec4 v_shadowCoord2;
 varying vec4 v_shadowCoord3;
+#endif
 #endif
 
 #if SHADOWS
@@ -297,6 +306,7 @@ float getShadow()
 	{
 		return ShadowPCSS(u_texShadow0,v_shadowCoord0,u_vLightOrthoScale[0]);
 	}
+	#if !SINGLE_SHADOW_FRUSTUM
 	else if(dist < u_vSplits.y)
 	{
 		return ShadowPCSS(u_texShadow1,v_shadowCoord1,u_vLightOrthoScale[1]);
@@ -309,6 +319,7 @@ float getShadow()
 	{
 		return ShadowPCSS(u_texShadow3,v_shadowCoord3,u_vLightOrthoScale[3]);
 	}
+	#endif
 	#else
 	//If all calculations are correct, this should be 1cm
 	#define DEFAULT_RADIUS 1.0/100.0
@@ -316,6 +327,7 @@ float getShadow()
 	{
 		return sampleShadow(u_texShadow0,v_shadowCoord0,u_vLightOrthoScale[0] * DEFAULT_RADIUS);
 	}
+	#if !SINGLE_SHADOW_FRUSTUM
 	else if(dist < u_vSplits.y)
 	{
 		return sampleShadow(u_texShadow1,v_shadowCoord1,u_vLightOrthoScale[1] * DEFAULT_RADIUS);
@@ -328,6 +340,7 @@ float getShadow()
 	{
 		return sampleShadow(u_texShadow3,v_shadowCoord3,u_vLightOrthoScale[3] * DEFAULT_RADIUS);
 	}
+	#endif
 	#endif
 	
 	return 1.0;

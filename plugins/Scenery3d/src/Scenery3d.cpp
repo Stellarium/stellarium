@@ -64,8 +64,6 @@
     }                                                   \
 }
 
-#define MAXSPLITS 4
-
 //macro for easier uniform setting
 #define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
 
@@ -97,6 +95,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	supportsGSCubemapping = false;
 	cubemappingMode = S3DEnum::CM_CUBEMAP;
 	reinitCubemapping = true;
+	cubemappingUsedLastFrame = false;
 
 	shaderParameters.shadowTransform = false;
 	shaderParameters.pixelLighting = false;
@@ -105,6 +104,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	shaderParameters.shadowFilterQuality = S3DEnum::SFQ_LOW;
 	shaderParameters.geometryShader = false;
 	shaderParameters.torchLight = false;
+	cubemapShadowMode = S3DEnum::CSM_PERSPECTIVE;
 
 	torchRange = 5.0f;
 
@@ -112,12 +112,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
     debugEnabled = false;
     sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
     fixShadowData = false;
-    venusOn = false;
-
-    //Preset frustumSplits
-    frustumSplits = 4;
-    //Make sure we dont exceed MAXSPLITS or go below 1
-    frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
 
     parallaxScale = 0.015f;
 
@@ -359,7 +353,7 @@ void Scenery3d::saveFrusts()
 
     camFrustShadow.saveDrawingCorners();
 
-    for(int i=0; i<frustumSplits; i++)
+    for(int i=0; i<shaderParameters.frustumSplits; i++)
     {
 	if(fixShadowData) frustumArray[i].saveDrawingCorners();
 	else frustumArray[i].resetCorners();
@@ -514,10 +508,10 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 	{
 		//Holds the frustum splits necessary for the lookup in the shader
 		Vec4f splitData;
-		for(int i=0; i<frustumSplits; i++)
+		for(int i=0; i<shaderParameters.frustumSplits; i++)
 		{
 			float zVal;
-			if(i<frustumSplits-1)
+			if(i<shaderParameters.frustumSplits-1)
 			{
 				//the frusta have a slight overlap
 				//use the center of this overlap for more robust filtering
@@ -631,7 +625,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 
 	//override some shader Params
 	GlobalShaderParameters pm = shaderParameters;
-	if(venusOn)
+	if(lightInfo.shadowCaster == Venus)
 		pm.shadowFilterQuality = S3DEnum::SFQ_OFF;
 
 	//bind VAO
@@ -770,9 +764,9 @@ void Scenery3d::computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, c
 	float zRange = zFar - zNear;
 
 	//Compute the z-planes for the subfrusta
-	for(int i=1; i<frustumSplits; i++)
+	for(int i=1; i<shaderParameters.frustumSplits; i++)
 	{
-		float s_i = i/static_cast<float>(frustumSplits);
+		float s_i = i/static_cast<float>(shaderParameters.frustumSplits);
 
 		frustumArray[i].zNear = currentScene.shadowSplitWeight*(zNear*powf(zRatio, s_i)) + (1.0f-currentScene.shadowSplitWeight)*(zNear + (zRange)*s_i);
 		//Set the previous zFar to the newly computed zNear
@@ -783,7 +777,7 @@ void Scenery3d::computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, c
 	}
 
 	//last zFar is already the zFar of the adjusted frustum
-	frustumArray[frustumSplits-1].calcFrustum(viewPos,viewDir,viewUp);
+	frustumArray[shaderParameters.frustumSplits-1].calcFrustum(viewPos,viewDir,viewUp);
 }
 
 void Scenery3d::computePolyhedron(Polyhedron& body,const Frustum& frustum,const Vec3f& shadowDir)
@@ -863,7 +857,7 @@ void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale,
 
     //To avoid artifacts caused by far plane clipping, extend far plane by 5%
     //or if cubemapping is used, set it to 1
-    if(!requiresCubemap)
+    if(!requiresCubemap  || cubemapShadowMode > S3DEnum::CSM_PERSPECTIVE)
     {
 	    float zRange = maxZ-minZ;
 	    maxZ = std::min(maxZ + zRange*0.05f, 1.0f);
@@ -971,7 +965,7 @@ void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, co
     camFrustShadow.calcFrustum(viewPos,viewDir,viewUp);
 
     //Re-set the subfrusta
-    for(int i=0; i<frustumSplits; i++)
+    for(int i=0; i<shaderParameters.frustumSplits; i++)
     {
 	frustumArray[i].setCamInternals(fov, aspect, minZ, maxZ);
     }
@@ -1001,20 +995,17 @@ void Scenery3d::calculateShadowCaster()
 	{
 		lightInfo.shadowDirection = Vec3f(sunPosition.v[0],sunPosition.v[1],sunPosition.v[2]);
 		lightInfo.shadowCaster = Sun;
-		venusOn = false;
 	}
 	else if (moonPosition[2]>0)
 	{
 		lightInfo.shadowDirection = Vec3f(moonPosition.v[0],moonPosition.v[1],moonPosition.v[2]);
 		lightInfo.shadowCaster = Moon;
-		venusOn = false;
 	}
 	else
 	{
 		//TODO fix case where not even Venus is visible, led to problems for me today
 		lightInfo.shadowDirection = Vec3f(venusPosition.v[0],venusPosition.v[1],venusPosition.v[2]);
 		lightInfo.shadowCaster = Venus;
-		venusOn = true;
 	}
 
 	QVector3D shadowDir(lightInfo.shadowDirection.v[0],lightInfo.shadowDirection.v[1],lightInfo.shadowDirection.v[2]);
@@ -1063,7 +1054,7 @@ bool Scenery3d::renderShadowMaps()
 	bool success = true;
 
 	//For each split
-	for(int i=0; i<frustumSplits; i++)
+	for(int i=0; i<shaderParameters.frustumSplits; i++)
 	{
 		//Find the convex body that encompasses all shadow receivers and casters for this split
 		focusBodies[i].clear();
@@ -1326,8 +1317,120 @@ void Scenery3d::calcCubeMVP()
 	}
 }
 
+void Scenery3d::renderIntoCubemapGeometryShader()
+{
+	//single FBO
+	glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
+
+	//Hack: because the modelviewmatrix is used for lighting in shader, but we dont want to perform MV transformations 6 times,
+	// we just set the position because that currently is all that is needeed for correct lighting
+	modelViewMatrix.setToIdentity();
+	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//render all 6 faces at once
+	shaderParameters.geometryShader = true;
+	//calculate the final required matrices for each face
+	calcCubeMVP();
+	drawArrays(true,true);
+	shaderParameters.geometryShader = false;
+}
+
+void Scenery3d::renderShadowMapsForFace(int face)
+{
+	//extract view dir from the MV matrix
+	QVector4D viewDir = -cubeRotation[face].row(2);
+
+	//somewhere, there are problems when the view direction points exactly up or down, causing missing shadows
+	//this is NOT fixed by choosing a different up vector here as could be expected
+	//the problem seems to occur during final rendering because shadowmap textures look alright and the scaling values seem valid
+	//for now, fix this by adding a tiny value to X in these cases
+	adjustShadowFrustum(viewPos,Vec3d(face>3?viewDir[0]+0.000001:viewDir[0],viewDir[1],viewDir[2]),Vec3d(0,0,1),90.0f,1.0f);
+	//render shadowmap
+	if(!renderShadowMaps())
+		return;
+
+	//gl state + viewport must be reset
+	glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_CULL_FACE);
+	glViewport(0, 0, cubemapSize, cubemapSize);
+}
+
+void Scenery3d::renderIntoCubemapSixPasses()
+{
+	//store current projection (= 90° cube projection)
+	QMatrix4x4 squareProjection = projectionMatrix;
+
+	if(needsMovementUpdate && updateOnlyDominantOnMoving)
+	{
+		if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
+		{
+			//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
+			renderShadowMapsForFace(dominantFace);
+			//projection needs to be reset
+			projectionMatrix = squareProjection;
+		}
+
+		//update only the dominant face
+		glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[dominantFace]);
+
+		modelViewMatrix = cubeRotation[dominantFace];
+		modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		drawArrays(true,true);
+
+		if(updateSecondDominantOnMoving)
+		{
+			if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
+			{
+				//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
+				renderShadowMapsForFace(secondDominantFace);
+				//projection needs to be reset
+				projectionMatrix = squareProjection;
+			}
+
+			//update also the second-most dominant face
+			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[secondDominantFace]);
+
+			modelViewMatrix = cubeRotation[secondDominantFace];
+			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			drawArrays(true,true);
+		}
+	}
+	else
+	{
+		//traditional 6-pass version
+		for(int i=0;i<6;++i)
+		{
+			if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
+			{
+				//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
+				renderShadowMapsForFace(i);
+				//projection needs to be reset
+				projectionMatrix = squareProjection;
+			}
+
+			//bind a single side of the cube
+			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
+
+			modelViewMatrix = cubeRotation[i];
+			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+			drawArrays(true,true);
+		}
+	}
+}
+
 void Scenery3d::generateCubeMap()
 {
+	//recalculate lighting info
+	calculateLighting();
+
 	//do shadow pass
 	//only calculate shadows if enabled
 	if(shaderParameters.shadows)
@@ -1363,91 +1466,11 @@ void Scenery3d::generateCubeMap()
 	if(cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
 		//In this mode, only the "perspective" shadow mode can be used (otherwise it would need up to 6*4 shadowmaps at once)
-
-		//single FBO
-		glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
-
-		//Hack: because the modelviewmatrix is used for lighting in shader, but we dont want to perform MV transformations 6 times,
-		// we just set the position because that currently is all that is needeed for correct lighting
-		modelViewMatrix.setToIdentity();
-		modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		//render all 6 faces at once
-		shaderParameters.geometryShader = true;
-		//calculate the final required matrices for each face
-		calcCubeMVP();
-		drawArrays(true,true);
-		shaderParameters.geometryShader = false;
+		renderIntoCubemapGeometryShader();
 	}
 	else
 	{
-		QMatrix4x4 squareProjection = projectionMatrix;
-
-		if(needsMovementUpdate && updateOnlyDominantOnMoving)
-		{
-			//update only the dominant face
-			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[dominantFace]);
-
-			modelViewMatrix = cubeRotation[dominantFace];
-			modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-			drawArrays(true,true);
-
-			if(updateSecondDominantOnMoving)
-			{
-				//update also the second-most dominant face
-				glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[secondDominantFace]);
-
-				modelViewMatrix = cubeRotation[secondDominantFace];
-				modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-				drawArrays(true,true);
-			}
-		}
-		else
-		{
-			//traditional 6-pass version
-			for(int i=0;i<6;++i)
-			{
-				if(shaderParameters.shadows && cubemapShadowMode>S3DEnum::CSM_PERSPECTIVE)
-				{
-					//in the BASIC and FULL modes, the shadow frustum needs to be adapted to the cube side
-
-					//extract view dir from the MV matrix
-					QVector4D viewDir = -cubeRotation[i].row(2);
-
-					//somewhere, there are problems when the view direction points exactly up or down, causing missing shadows
-					//this is NOT fixed by choosing a different up vector here as could be expected
-					//the problem seems to occur during final rendering because shadowmap textures look alright and the scaling values seem valid
-					//for now, fix this by adding a tiny value to X in these cases
-					adjustShadowFrustum(viewPos,Vec3d(i>3?viewDir[0]+0.000001:viewDir[0],viewDir[1],viewDir[2]),Vec3d(0,0,1),90.0f,1.0f);
-					//render shadowmap
-					if(!renderShadowMaps())
-						return;
-
-					//projection needs to be reset
-					projectionMatrix = squareProjection;
-
-					//gl state + viewport must be reset
-					glEnable(GL_DEPTH_TEST);
-					glDepthMask(GL_TRUE);
-					glEnable(GL_CULL_FACE);
-					glViewport(0, 0, cubemapSize, cubemapSize);
-				}
-
-				//bind a single side of the cube
-				glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
-
-				modelViewMatrix = cubeRotation[i];
-				modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-				drawArrays(true,true);
-			}
-		}
+		renderIntoCubemapSixPasses();
 	}
 
 	//cubemap fbo must be released
@@ -1557,6 +1580,8 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     QMatrix4x4 mvMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
     mvMatrix.optimize(); //may make inversion faster?
 
+    //recalculate lighting info
+    calculateLighting();
 
     //do shadow pass
     //only calculate shadows if enabled
@@ -1756,7 +1781,7 @@ void Scenery3d::drawDebug()
 
 	if(shaderParameters.shadows)
 	{
-		for(int i=0; i<frustumSplits; i++)
+		for(int i=0; i<shaderParameters.frustumSplits; i++)
 		{
 			std::string cap = "SM "+toString(i);
 			painter.drawText(screen_x+70, screen_y+130, QString(cap.c_str()));
@@ -1814,7 +1839,7 @@ void Scenery3d::drawDebug()
     }
 
     screen_y -= 30.0f;
-    str = QString("Venus: %1").arg(static_cast<int>(venusOn));
+    str = QString("Venus: %1").arg(lightInfo.shadowCaster == Venus);
     painter.drawText(screen_x, screen_y, str);
 }
 
@@ -2250,15 +2275,25 @@ bool Scenery3d::initShadowmapping()
 
 	bool valid = false;
 
+	if(requiresCubemap && cubemapShadowMode == S3DEnum::CSM_BASIC)
+	{
+		shaderParameters.frustumSplits = 1;
+	}
+	else
+	{
+		//TODO support changing this option by the user and/or the scene?
+		shaderParameters.frustumSplits = 4;
+	}
+
 	if(shadowmapSize>0)
 	{
 		//Define shadow maps array - holds MAXSPLITS textures
-		shadowFBOs.resize(frustumSplits);
-		shadowMapsArray.resize(frustumSplits);
-		shadowCPM.resize(frustumSplits);
-		shadowFrustumSize.resize(frustumSplits);
-		frustumArray.resize(frustumSplits);
-		focusBodies.resize(frustumSplits);
+		shadowFBOs.resize(shaderParameters.frustumSplits);
+		shadowMapsArray.resize(shaderParameters.frustumSplits);
+		shadowCPM.resize(shaderParameters.frustumSplits);
+		shadowFrustumSize.resize(shaderParameters.frustumSplits);
+		frustumArray.resize(shaderParameters.frustumSplits);
+		focusBodies.resize(shaderParameters.frustumSplits);
 
 		//Query how many texture units we have at disposal in a fragment shader
 		//we currently need 8 in the worst case: diffuse, emissive, bump, height + 4x shadowmap
@@ -2276,10 +2311,10 @@ bool Scenery3d::initShadowmapping()
 		//The point seems to be that switching attachments may cause re-validation of the FB.
 
 		//Generate the FBO ourselves. We do this because Qt does not support depth-only FBOs to save some memory.
-		glGenFramebuffers(frustumSplits,shadowFBOs.data());
-		glGenTextures(frustumSplits,shadowMapsArray.data());
+		glGenFramebuffers(shaderParameters.frustumSplits,shadowFBOs.data());
+		glGenTextures(shaderParameters.frustumSplits,shadowMapsArray.data());
 
-		for(int i=0; i<frustumSplits; i++)
+		for(int i=0; i<shaderParameters.frustumSplits; i++)
 		{
 			//Bind the FBO
 			glBindFramebuffer(GL_FRAMEBUFFER, shadowFBOs.at(i));
@@ -2323,7 +2358,7 @@ bool Scenery3d::initShadowmapping()
 				qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, can't use FBO";
 				break;
 			}
-			else if (i==frustumSplits-1)
+			else if (i==shaderParameters.frustumSplits-1)
 			{
 				valid = true;
 			}
@@ -2382,14 +2417,11 @@ void Scenery3d::draw(StelCore* core)
 	//turn off blending, because it seems to be enabled somewhere we do not have access
 	glDisable(GL_BLEND);
 
-	//recalculate lighting info
-	calculateLighting();
-
 	if (shaderParameters.shadows)
 	{
 		//test if shadow mapping has been initialized,
 		//or needs to be re-initialized because of setting changes
-		if(reinitShadowmapping || shadowFBOs.size()==0)
+		if(reinitShadowmapping || shadowFBOs.size()==0 || (cubemappingUsedLastFrame != requiresCubemap))
 		{
 			reinitShadowmapping = false;
 			if(!initShadowmapping())
@@ -2417,4 +2449,6 @@ void Scenery3d::draw(StelCore* core)
 	{
 		drawDebug();
 	}
+
+	cubemappingUsedLastFrame = requiresCubemap;
 }

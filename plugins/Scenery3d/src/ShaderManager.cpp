@@ -99,6 +99,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["TORCH"] = TORCH;
 		featureFlagsStrings["DEBUG"] = DEBUG;
 		featureFlagsStrings["PCSS"] = PCSS;
+		featureFlagsStrings["SINGLE_SHADOW_FRUSTUM"] = SINGLE_SHADOW_FRUSTUM;
 	}
 }
 
