@@ -68,37 +68,5 @@ public:
 	}
 };
 
-class CubemapShadowModeListModel : public QAbstractListModel
-{
-	Q_OBJECT
-
-public:
-
-
-	CubemapShadowModeListModel(QObject* parent = NULL) : QAbstractListModel(parent)
-	{}
-
-	int rowCount(const QModelIndex &parent) const
-	{
-		return 3;
-	}
-
-	QVariant data(const QModelIndex &index, int role) const
-	{
-		if(role == Qt::DisplayRole || role == Qt::EditRole)
-		{
-			switch (index.row())
-			{
-				case S3DEnum::CSM_PERSPECTIVE:
-					return QVariant(QString(N_("View-optimized")));
-				case S3DEnum::CSM_BASIC:
-					return QVariant(QString(N_("Basic")));
-				case S3DEnum::CSM_FULL:
-					return QVariant(QString(N_("Full (slow)")));
-			}
-		}
-		return QVariant();
-	}
-};
 
 #endif

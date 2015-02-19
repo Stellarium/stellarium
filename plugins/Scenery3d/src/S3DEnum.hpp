@@ -28,7 +28,7 @@
 struct S3DEnum
 {
 	Q_GADGET
-	Q_ENUMS(CubemappingMode ShadowFilterQuality CubemapShadowMode)
+	Q_ENUMS(CubemappingMode ShadowFilterQuality)
 
 public:
 	//! Determines the method used for cubemap creation
@@ -51,21 +51,6 @@ public:
 		SFQ_LOW,
 		//! Uses a 64-tap Poisson disk
 		SFQ_HIGH
-	};
-
-	//! Determines how shadows are handled in cubemapping mode
-	enum CubemapShadowMode
-	{
-		//! Shadows are adjusted to a perspective frustum (same as in non-CM mode, up to 4 shadow passes).
-		//! Most performant, but causes missing shadows on high FOV
-		//! This is the behaviour all old versions used
-		CSM_PERSPECTIVE,
-		//! Use a single shadow cascade for each view (6 shadow passes)
-		//! Correct shadows on all sides, but probably bad quality
-		CSM_BASIC,
-		//! Use all shadow cascades on each view (i.e. 6*4 shadow passes...)
-		//! Best looking results, but worst performance
-		CSM_FULL,
 	};
 };
 

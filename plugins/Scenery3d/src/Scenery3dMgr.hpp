@@ -54,11 +54,12 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(bool enableScene  READ getEnableScene WRITE setEnableScene NOTIFY enableSceneChanged)
 	Q_PROPERTY(bool enablePixelLighting READ getEnablePixelLighting WRITE setEnablePixelLighting NOTIFY enablePixelLightingChanged)
 	Q_PROPERTY(bool enableShadows READ getEnableShadows WRITE setEnableShadows NOTIFY enableShadowsChanged)
+	Q_PROPERTY(bool useSimpleShadows READ getUseSimpleShadows WRITE setUseSimpleShadows NOTIFY useSimpleShadowsChanged)
 	Q_PROPERTY(bool enableBumps READ getEnableBumps WRITE setEnableBumps NOTIFY enableBumpsChanged)
 	Q_PROPERTY(S3DEnum::ShadowFilterQuality shadowFilterQuality READ getShadowFilterQuality WRITE setShadowFilterQuality NOTIFY shadowFilterQualityChanged)
 	Q_PROPERTY(bool enablePCSS READ getEnablePCSS WRITE setEnablePCSS NOTIFY enablePCSSChanged)
 	Q_PROPERTY(S3DEnum::CubemappingMode cubemappingMode READ getCubemappingMode WRITE setCubemappingMode NOTIFY cubemappingModeChanged)
-	Q_PROPERTY(S3DEnum::CubemapShadowMode cubemapShadowMode READ getCubemapShadowMode WRITE setCubemapShadowMode NOTIFY cubemapShadowModeChanged)
+	Q_PROPERTY(bool useFullCubemapShadows READ getUseFullCubemapShadows WRITE setUseFullCubemapShadows NOTIFY useFullCubemapShadowsChanged)
 	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
 	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
 	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
@@ -91,11 +92,12 @@ signals:
     void enableSceneChanged(const bool val);
     void enablePixelLightingChanged(const bool val);
     void enableShadowsChanged(const bool val);
+    void useSimpleShadowsChanged(const bool val);
     void enableBumpsChanged(const bool val);
     void shadowFilterQualityChanged(const S3DEnum::ShadowFilterQuality val);
     void enablePCSSChanged(const bool val);
     void cubemappingModeChanged(const S3DEnum::CubemappingMode val);
-    void cubemapShadowModeChanged(const S3DEnum::CubemapShadowMode val);
+    void useFullCubemapShadowsChanged(const bool val);
     void enableDebugInfoChanged(const bool val);
     void enableLocationInfoChanged(const bool val);
     void enableTorchLightChanged(const bool val);
@@ -136,6 +138,10 @@ public slots:
     void setEnableShadows(const bool enableShadows);
     bool getEnableShadows(void) const;
 
+    //! If true, only 1 shadow cascade is used, giving a speedup
+    void setUseSimpleShadows(const bool simpleShadows);
+    bool getUseSimpleShadows() const;
+
     //! Use this to set/get the enableBumps flag.
     //! If set to true, bump mapping is enabled for the 3D scene.
     void setEnableBumps(const bool enableBumps);
@@ -154,8 +160,8 @@ public slots:
     //! Sets the cubemapping mode
     void setCubemappingMode(const S3DEnum::CubemappingMode val);
 
-    S3DEnum::CubemapShadowMode getCubemapShadowMode() const;
-    void setCubemapShadowMode(const S3DEnum::CubemapShadowMode val);
+    bool getUseFullCubemapShadows() const;
+    void setUseFullCubemapShadows(const bool useFullCubemapShadows);
 
     //! Set to true to show some rendering debug information
     void setEnableDebugInfo(const bool debugEnabled);

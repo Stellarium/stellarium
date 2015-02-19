@@ -53,7 +53,6 @@ void Scenery3dDialog::createDialogContent()
 
 	//change ui a bit
 	ui->comboBoxCubemapMode->setModel(new CubemapModeListModel(ui->comboBoxCubemapMode));
-	ui->comboBoxCubemapShadowMode->setModel(new CubemapShadowModeListModel(ui->comboBoxCubemapShadowMode));
 
 	//connect UI events
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -71,6 +70,9 @@ void Scenery3dDialog::createDialogContent()
 	connect(ui->checkBoxSecondDominantFace, &QCheckBox::clicked, mgr, &Scenery3dMgr::setSecondDominantFaceWhenMoving);
 	connect(ui->checkBoxPCSS, &QCheckBox::clicked, mgr, &Scenery3dMgr::setEnablePCSS);
 	connect(ui->spinLazyDrawingInterval, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), mgr, &Scenery3dMgr::setLazyDrawingInterval);
+
+	connect(ui->checkBoxSimpleShadows, &QCheckBox::clicked, mgr, &Scenery3dMgr::setUseSimpleShadows);
+	connect(ui->checkBoxCubemapShadows, &QCheckBox::clicked, mgr, &Scenery3dMgr::setUseFullCubemapShadows);
 
 	//hook up some Scenery3d actions
 	StelActionMgr* acMgr = StelApp::getInstance().getStelActionManager();
@@ -99,7 +101,6 @@ void Scenery3dDialog::createDialogContent()
 	//connectSlotsByName does not work in our case (because this class does not "own" the GUI in the Qt sense)
 	//the "new" syntax is extremly ugly in case signals have overloads
 	connect(ui->comboBoxCubemapMode, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapMode_currentIndexChanged);
-	connect(ui->comboBoxCubemapShadowMode, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapShadowMode_currentIndexChanged);
 	connect(ui->comboBoxShadowFiltering, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged);
 	connect(ui->comboBoxCubemapSize,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged);
 	connect(ui->comboBoxShadowmapSize,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Scenery3dDialog::on_comboBoxShadowmapSize_currentIndexChanged);
@@ -165,9 +166,13 @@ void Scenery3dDialog::createUpdateConnections()
 	connect(mgr, &Scenery3dMgr::enableBumpsChanged, ui->checkBoxEnableBump, &QCheckBox::setChecked);
 	connect(mgr, &Scenery3dMgr::enablePCSSChanged,ui->checkBoxPCSS,&QCheckBox::setChecked);
 
+	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxSimpleShadows, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3dMgr::useSimpleShadowsChanged, ui->checkBoxSimpleShadows, &QCheckBox::setChecked);
+	connect(mgr, &Scenery3dMgr::useFullCubemapShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setChecked);
+
 	connect(mgr, &Scenery3dMgr::cubemappingModeChanged, ui->comboBoxCubemapMode, &QComboBox::setCurrentIndex);
 	connect(mgr, &Scenery3dMgr::isGeometryShaderSupportedChanged, dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model()), &CubemapModeListModel::setGSSupported);
-	connect(mgr, &Scenery3dMgr::cubemapShadowModeChanged, ui->comboBoxCubemapShadowMode, &QComboBox::setCurrentIndex);
 	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged, ui->comboBoxShadowFiltering, &QComboBox::setCurrentIndex);
 
 	connect(mgr, &Scenery3dMgr::torchStrengthChanged, this, &Scenery3dDialog::updateTorchStrength);
@@ -245,11 +250,6 @@ void Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged(int index)
 void Scenery3dDialog::on_comboBoxCubemapMode_currentIndexChanged(int index)
 {
 	mgr->setCubemappingMode(static_cast<S3DEnum::CubemappingMode>(index));
-}
-
-void Scenery3dDialog::on_comboBoxCubemapShadowMode_currentIndexChanged(int index)
-{
-	mgr->setCubemapShadowMode(static_cast<S3DEnum::CubemapShadowMode>(index));
 }
 
 void Scenery3dDialog::on_sliderTorchStrength_valueChanged(int value)
@@ -404,9 +404,13 @@ void Scenery3dDialog::updateFromManager()
 	ui->checkBoxEnableShadows->setEnabled(pix);
 	ui->checkBoxPCSS->setChecked(mgr->getEnablePCSS());
 
+	ui->checkBoxSimpleShadows->setEnabled(mgr->getEnableShadows());
+	ui->checkBoxCubemapShadows->setEnabled(mgr->getEnableShadows());
+	ui->checkBoxSimpleShadows->setChecked(mgr->getUseSimpleShadows());
+	ui->checkBoxCubemapShadows->setChecked(mgr->getUseFullCubemapShadows());
+
 	ui->comboBoxShadowFiltering->setCurrentIndex(mgr->getShadowFilterQuality());
 	ui->comboBoxCubemapMode->setCurrentIndex(mgr->getCubemappingMode());
-	ui->comboBoxCubemapShadowMode->setCurrentIndex(mgr->getCubemapShadowMode());
 
 	updateTorchStrength(mgr->getTorchStrength());
 	updateTorchRange(mgr->getTorchRange());
