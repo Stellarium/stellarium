@@ -227,7 +227,6 @@ void Scenery3dMgr::loadConfig()
 
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
 	scenery3d->setCubemappingMode( static_cast<S3DEnum::CubemappingMode>(conf->value("cubemap_mode",1).toInt()) );
-	scenery3d->setCubemapShadowMode( static_cast<S3DEnum::CubemapShadowMode>(conf->value("cubemap_shadow_mode",0).toInt()) );
 	scenery3d->setCubemapSize(conf->value("cubemap_size",2048).toInt());
 	scenery3d->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());
 	scenery3d->setShadowFilterQuality( static_cast<S3DEnum::ShadowFilterQuality>(conf->value("shadow_filter_quality", 1).toInt()) );
@@ -236,6 +235,8 @@ void Scenery3dMgr::loadConfig()
 	scenery3d->setTorchRange(conf->value("torch_range",5.0f).toFloat());
 	scenery3d->setBumpsEnabled(conf->value("flag_bumpmap").toBool());
 	scenery3d->setShadowsEnabled(conf->value("flag_shadow").toBool());
+	scenery3d->setUseSimpleShadows(conf->value("flag_shadow_simple").toBool());
+	scenery3d->setUseFullCubemapShadows(conf->value("flag_cubemap_fullshadows").toBool());
 	scenery3d->setLazyCubemapEnabled(conf->value("flag_lazy_cubemap").toBool());
 	scenery3d->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
 	scenery3d->setPixelLightingEnabled(conf->value("flag_pixel_lighting").toBool());
@@ -536,6 +537,19 @@ void Scenery3dMgr::setEnableShadows(const bool enableShadows)
 	}
 }
 
+bool Scenery3dMgr::getUseSimpleShadows() const
+{
+	return scenery3d->getUseSimpleShadows();
+}
+
+void Scenery3dMgr::setUseSimpleShadows(const bool simpleShadows)
+{
+	scenery3d->setUseSimpleShadows(simpleShadows);
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/flag_shadow_simple",simpleShadows);
+	emit useSimpleShadowsChanged(simpleShadows);
+}
+
 bool Scenery3dMgr::getEnableBumps() const
 {
 	return scenery3d->getBumpsEnabled();
@@ -611,17 +625,17 @@ void Scenery3dMgr::setCubemappingMode(const S3DEnum::CubemappingMode val)
 	emit cubemappingModeChanged(val);
 }
 
-S3DEnum::CubemapShadowMode Scenery3dMgr::getCubemapShadowMode() const
+bool Scenery3dMgr::getUseFullCubemapShadows() const
 {
-	return scenery3d->getCubemapShadowMode();
+	return scenery3d->getUseFullCubemapShadows();
 }
 
-void Scenery3dMgr::setCubemapShadowMode(const S3DEnum::CubemapShadowMode val)
+void Scenery3dMgr::setUseFullCubemapShadows(const bool useFullCubemapShadows)
 {
-	scenery3d->setCubemapShadowMode(val);
+	scenery3d->setUseFullCubemapShadows(useFullCubemapShadows);
 
-	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_shadow_mode",val);
-	emit cubemapShadowModeChanged(val);
+	conf->setValue(S3D_CONFIG_PREFIX + "/flag_cubemap_fullshadows",useFullCubemapShadows);
+	emit useFullCubemapShadowsChanged(useFullCubemapShadows);
 }
 
 bool Scenery3dMgr::getEnableDebugInfo() const
