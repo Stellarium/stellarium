@@ -28,6 +28,7 @@ For vertex-based lighting, this is pretty simple: the lighting is performed in t
 */
 
 #define SHADOWS 1
+#define SINGLE_SHADOW_FRUSTUM 0
 
 layout(triangles) in;
 layout(triangle_strip,max_vertices = 18) out;
@@ -43,13 +44,16 @@ out vec3 v_viewPos;
 
 #if SHADOWS
 in vec4 v_shadowCoord0GS[];
+out vec4 v_shadowCoord0;
+
+#if !SINGLE_SHADOW_FRUSTUM
 in vec4 v_shadowCoord1GS[];
 in vec4 v_shadowCoord2GS[];
 in vec4 v_shadowCoord3GS[];
-out vec4 v_shadowCoord0;
 out vec4 v_shadowCoord1;
 out vec4 v_shadowCoord2;
 out vec4 v_shadowCoord3;
+#endif
 #endif
 
 uniform mat4 u_mCubeMVP[6];
@@ -71,9 +75,11 @@ void main(void)
 			v_viewPos = v_viewPosGS[vtx];
 			#if SHADOWS
 			v_shadowCoord0 = v_shadowCoord0GS[vtx];
+			#if !SINGLE_SHADOW_FRUSTUM
 			v_shadowCoord1 = v_shadowCoord1GS[vtx];
 			v_shadowCoord2 = v_shadowCoord2GS[vtx];
 			v_shadowCoord3 = v_shadowCoord3GS[vtx];
+			#endif
 			#endif
 			EmitVertex();
 		}
