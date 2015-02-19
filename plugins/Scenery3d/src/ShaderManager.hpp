@@ -39,6 +39,8 @@ struct GlobalShaderParameters
 	bool pcss;
 	bool geometryShader;
 	bool torchLight;
+	//for now, only 1 or 4 really supported
+	int frustumSplits;
 };
 
 //! A simple shader cache class that gives us the correct shader depending on desired configuration.
@@ -191,7 +193,9 @@ private:
 		//debug shader for AABBs/Frustums
 		DEBUG		= (1<<16),
 		//PCSS shadow filtering
-		PCSS		= (1<<17)
+		PCSS		= (1<<17),
+		//only a single shadow frustum is used
+		SINGLE_SHADOW_FRUSTUM  = (1<<18),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -233,6 +237,7 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::SFQ_OFF && globals.pcss) flags|= PCSS;
 		if(globals.geometryShader) flags|= GEOMETRY_SHADER;
 		if(globals.torchLight) flags|= TORCH;
+		if(globals.frustumSplits == 1) flags|= SINGLE_SHADOW_FRUSTUM;
 	}
 	else
 	{

@@ -106,7 +106,7 @@ public:
     S3DEnum::CubemappingMode getCubemappingMode() const { return cubemappingMode; }
     //! Changes cubemapping mode and forces re-initialization on next draw call.
     //! Note that NO CHECKING is done if the chosen mode is supported on this hardware, you have to make sure before calling this.
-    void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true;}
+    void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true; reinitShadowmapping = true;}
     bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
 
     S3DEnum::CubemapShadowMode getCubemapShadowMode() const { return cubemapShadowMode; }
@@ -153,7 +153,6 @@ private:
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
     bool fixShadowData; //for debugging, fixes all shadow mapping related data (shadowmap contents, matrices, frustums, focus bodies...) at their current values
-    bool venusOn;
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
     S3DEnum::CubemappingMode cubemappingMode;
     S3DEnum::CubemapShadowMode cubemapShadowMode;
@@ -185,6 +184,7 @@ private:
 
     /// ---- Cubemapping variables ----
     bool requiresCubemap; //true if cubemapping is required (if projection is anything else than Perspective)
+    bool cubemappingUsedLastFrame; //true if cubemapping was used for the last frame. Used to determine if a projection switch occured.
     bool lazyDrawing; //if lazy-drawing mode is enabled
     bool updateOnlyDominantOnMoving; //if movement updates only dominant face directly
     bool updateSecondDominantOnMoving; //if movement also updates the second-most dominant face
@@ -255,8 +255,6 @@ private:
     QVector<QMatrix4x4> shadowCPM;
     //Holds the xy-scaling of the orthographic light cam + near plane pos
     QVector<QVector2D> shadowFrustumSize;
-    //Number of splits for CSM
-    int frustumSplits;
     // Frustum of the view camera, constrainted to the shadowFarZ instead of the camFarZ
     Frustum camFrustShadow;
     //Array holding the split frustums
@@ -292,8 +290,14 @@ private:
     void drawWithCubeMap();
     //! Performs the actual rendering of the shadow map
     bool renderShadowMaps();
+    //! Creates shadowmaps for the specified cubemap face
+    void renderShadowMapsForFace(int face);
     //! Generates a 6-sided cube map by drawing a view in each direction
     void generateCubeMap();
+    //! Uses a geometry shader to render 6 faces in 1 pass
+    void renderIntoCubemapGeometryShader();
+    //! Uses 6 traditional rendering passes to render into a cubemap or 6 textures.
+    void renderIntoCubemapSixPasses();
     //! Uses the StelPainter to draw a warped cube textured with our cubemap
     void drawFromCubeMap();
     //! This is the method that performs the actual drawing.
