@@ -694,7 +694,7 @@ p, li { white-space: pre-wrap; }
                    <item row="4" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxCubemapShadows">
                      <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculates shadows for each cubemap face separately.&lt;/p&gt;&lt;p&gt;Fixes missing shadows when using high FOV values.&lt;/p&gt;&lt;p&gt;This does not work when using the &lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; cubemapping mode!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculates shadows for each cubemap face separately.&lt;/p&gt;&lt;p&gt;If disabled, the shadowed area is calculated using a perspective projection, which may cause missing shadows with high FOV values, but is quite a bit faster!&lt;/p&gt;&lt;p&gt;This does not work when using the &lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; cubemapping mode!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                      <property name="text">
                       <string>Full cubemap shadows</string>
