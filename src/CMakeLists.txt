@@ -355,7 +355,7 @@ IF(GUI_MODE STREQUAL "Standard")
 	QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
 	SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
-	SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 ENDIF()
 
 #############################################################################################
@@ -365,7 +365,7 @@ IF (GUI_MODE STREQUAL "None")
 	SET(stellarium_gui_SRCS
 		noGui/StelNoGui.hpp
 		noGui/StelNoGui.cpp)
-	SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${stellarium_gui_SRCS})
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS})
 ENDIF()
 
 
