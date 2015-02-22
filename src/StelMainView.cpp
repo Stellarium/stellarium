@@ -513,6 +513,10 @@ void StelMainView::init(QSettings* conf)
 	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const
 #endif
 {
+#ifdef Q_OS_MAC
+	Q_UNUSED(conf);
+#endif
+
 	QOpenGLContext* context=glWidget->context()->contextHandle();
 	QSurfaceFormat format=context->format();
 
@@ -534,8 +538,7 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "Driver version string:" << glDriver;
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-	qDebug() << "GL renderer is" << glRenderer;
-	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
+	qDebug() << "GL renderer is" << glRenderer;	
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
 	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting a #version line), but in case of using ANGLE we need hardware
@@ -545,6 +548,7 @@ void StelMainView::init(QSettings* conf)
 	// This test is apparently not applicable on MacOS X due to its behaving differently from all other known OSes.
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
 #ifndef Q_OS_MAC
+	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
 	if ( openGLerror ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
