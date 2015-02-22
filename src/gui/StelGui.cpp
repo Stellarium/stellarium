@@ -586,19 +586,15 @@ void StelGui::setFlagShowFlipButtons(bool b)
 		if (flipVert==NULL) {
 			// Create the vertical flip button
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			flipVert = new StelButton(NULL,
-																QPixmap(":/graphicGui/btFlipVertical-on.png"),
-																QPixmap(":/graphicGui/btFlipVertical-off.png"),
-																pxmapGlow32x32,
-																"actionVertical_Flip");
+			QPixmap pxmapOn(":/graphicGui/btFlipVertical-on.png");
+			QPixmap pxmapOff(":/graphicGui/btFlipVertical-off.png");
+			flipVert = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionVertical_Flip");
 		}
 		if (flipHoriz==NULL) {
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			flipHoriz = new StelButton(NULL,
-																 QPixmap(":/graphicGui/btFlipHorizontal-on.png"),
-																 QPixmap(":/graphicGui/btFlipHorizontal-off.png"),
-																 pxmapGlow32x32,
-																 "actionHorizontal_Flip");
+			QPixmap pxmapOn(":/graphicGui/btFlipHorizontal-on.png");
+			QPixmap pxmapOff(":/graphicGui/btFlipHorizontal-off.png");
+			flipHoriz = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionHorizontal_Flip");
 		}
 		getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit_Global");
 		getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
@@ -620,7 +616,9 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 		if (btShowNebulaeBackground==NULL) {
 			// Create the nebulae background button
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			btShowNebulaeBackground = new StelButton(NULL, QPixmap(":/graphicGui/btDSS-on.png"), QPixmap(":/graphicGui/btDSS-off.png"), pxmapGlow32x32, "actionShow_DSS");
+			QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
+			QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
+			btShowNebulaeBackground = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSS");
 		}
 		getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
 	} else {
