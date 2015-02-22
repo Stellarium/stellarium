@@ -157,6 +157,12 @@ SET(stellarium_lib_SRCS
 	core/StelProgressController.hpp
 	core/StelAddOnMgr.cpp
 	core/StelAddOnMgr.hpp
+	core/AddOn.cpp
+	core/AddOn.hpp
+	core/AddOnTableModel.cpp
+	core/AddOnTableModel.hpp
+	core/AddOnTableView.cpp
+	core/AddOnTableView.hpp
 
 	${gl_lib_SRCS}
 
@@ -235,13 +241,6 @@ SET(stellarium_lib_SRCS
 	core/modules/ZodiacalLight.cpp
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
-
-	core/addons/AddOn.cpp
-	core/addons/AddOn.hpp
-	core/addons/AddOnTableModel.cpp
-	core/addons/AddOnTableModel.hpp
-	core/addons/AddOnTableView.cpp
-	core/addons/AddOnTableView.hpp
 
 	StelMainView.hpp
 	StelMainView.cpp

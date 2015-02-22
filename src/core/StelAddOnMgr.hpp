@@ -26,7 +26,7 @@
 #include <QObject>
 #include <QSettings>
 
-#include "addons/AddOn.hpp"
+#include "AddOn.hpp"
 
 #define ADDON_MANAGER_VERSION "0.0.2"
 #define ADDON_MANAGER_CATALOG_VERSION 1
