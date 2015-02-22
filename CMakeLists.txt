@@ -452,7 +452,6 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_BINARY_DIR}
 	${CMAKE_SOURCE_DIR}/src
 	${CMAKE_SOURCE_DIR}/src/core
-	${CMAKE_SOURCE_DIR}/src/core/addons
 	${CMAKE_SOURCE_DIR}/src/core/modules
 	${CMAKE_SOURCE_DIR}/src/core/planetsephems
 	${CMAKE_SOURCE_DIR}/src/core/external
