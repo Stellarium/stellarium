@@ -726,3 +726,39 @@ QProgressBar::chunk {
 QListWidget#satellitesList, QListWidget#sourceList {
 		font-size: 8pt;
 }
+
+QTreeView {
+        background-color: rgb(76, 77, 80);
+        color: rgb(238, 238, 238);
+        font-size: 12px;
+}
+
+QTreeView::item:selected#treeView {
+        background-color: rgb(59, 144, 235);
+        color: rgb(255,255,255);
+}
+
+QTreeView::item:!enabled#treeView {
+        color : rgb(58,59,62);
+}
+
+QTextBrowser#selectedLineInfo {
+        background-color: rgb(76, 77, 80);
+}
+
+QHeaderView::section {
+        background-color: rgb(31, 31, 31);
+        font: bold;
+        color: rgb(255, 255, 255);
+        font-size: 12px;
+        padding-left: 4px;
+        border: 1px solid rgb(108, 108, 108);
+}
+
+#configurationDialogForm QPushButton#screenshotBrowseButton, QPushButton#pushButtonPickExecutablesDirectory {
+        image: url(:/graphicGui/folder.png);
+}
+
+#configurationDialogForm QPushButton#getStarsButton {
+        image: url(:/graphicGui/btTimeRealtime-off.png);
+}
