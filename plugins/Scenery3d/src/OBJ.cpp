@@ -1279,8 +1279,8 @@ void OBJ::Material::finalize()
 		alphaChannel = texture->hasAlphaChannel();
 
 
-	//test if specular coefficient is non-zero
-	hasSpecularity = specular.lengthSquared()>0.0001f;
+	//test if specular coefficient and shininess is non-zero
+	hasSpecularity = specular.lengthSquared()>0.0001f  && shininess > 0.0001f;
 
 	//test if we require blending
 	if(alpha< .0f)

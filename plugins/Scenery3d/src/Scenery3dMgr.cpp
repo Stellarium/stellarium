@@ -578,22 +578,6 @@ void Scenery3dMgr::setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val
 	if(oldVal == val)
 		return;
 
-	QString msg(N_("Shadow filter quality: %1"));
-	QString type;
-
-	switch (val) {
-		case S3DEnum::SFQ_HIGH:
-			type = N_("high");
-			break;
-		case S3DEnum::SFQ_LOW:
-			type = N_("low");
-			break;
-		default:
-			type = N_("off");
-	}
-
-	showMessage(msg.arg(type));
-
 	conf->setValue(S3D_CONFIG_PREFIX + "/shadow_filter_quality",val);
 	scenery3d->setShadowFilterQuality(val);
 	emit shadowFilterQualityChanged(val);
