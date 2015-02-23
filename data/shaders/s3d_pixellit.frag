@@ -3,7 +3,7 @@
 /*
  * Stellarium Scenery3d Plug-in
  *
- * Copyright (C) 2014 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
+ * Copyright (C) 2014, 2015 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -185,7 +185,7 @@ uniform SHADOWSAMPLER u_texShadow3;
 #endif
 
 //info about scale is needed for filtering
-uniform vec2 u_vLightOrthoScale[FRUSTUM_SPLITS];
+uniform vec4 u_vLightOrthoScale[FRUSTUM_SPLITS];
 #endif //SHADOWS
 
 #if ALPHATEST
@@ -213,6 +213,7 @@ varying vec4 v_shadowCoord3;
 #endif
 
 #if SHADOWS
+
 float sampleShadow(in SHADOWSAMPLER tex, in vec4 coord, in vec2 filterRadiusUV)
 {
 	#if FILTER_STEPS
@@ -226,6 +227,7 @@ float sampleShadow(in SHADOWSAMPLER tex, in vec4 coord, in vec2 filterRadiusUV)
 		//TODO offsets should probably depend on light ortho size?
 		#if PCSS
 		//texture is a normal sampler2D because we need depth values in blocker calculation
+		//opengl does not allow to sample this texture in 2 different ways (unless sampler objects are used, but needs version >= 3.3)
 		//so we have to do comparison ourselves 
 		sum+= (texture2D(tex,texC.xy + offset).r > texC.z) ? 1.0f : 0.0f;
 		#else
@@ -240,17 +242,29 @@ float sampleShadow(in SHADOWSAMPLER tex, in vec4 coord, in vec2 filterRadiusUV)
 }
 
 #if PCSS
-//Based on the PCSS implementation of NVidia, ported to GLSL with some modifications
+//Based on the PCSS implementation of NVidia, ported to GLSL 
 //see http://developer.download.nvidia.com/whitepapers/2008/PCSS_Integration.pdf
+//Some modifications to work better with directional light are included
 
-#define BLOCKER_SEARCH_NUM_SAMPLES 16
-#define NEAR_PLANE 1.0
-#define LIGHT_SIZE 0.4
+//convert shadowmap depth to view-space Z value (for an orthographic projection)
+float depthToViewZ(float depth, float nearPlane, float farPlane)
+{
+	return depth * (farPlane - nearPlane) + nearPlane;
+}
+
+#define SEARCH_WIDTH 0.08
+#define LIGHT_SCALE 0.003
 
 float PenumbraSize(in float zReceiver, in float zBlocker)
 {
-	return (zReceiver - zBlocker) * LIGHT_SIZE / zBlocker;
+	//this is the classical way as proposed by nvidia, but it does not work well with directional light (it is assumed the light is positioned at the near plane)
+	//return (zReceiver - zBlocker) * LIGHT_SIZE / zBlocker;
+	//instead, just use the distance to the blocker as scaling because the difference between zReceiver and zBlocker is small compared to their difference to the light, so we skip the division
+	//we call this function using view space units, so the scaling should be quite small
+	return (zReceiver - zBlocker) * LIGHT_SCALE;
 }
+
+#define BLOCKER_SEARCH_NUM_SAMPLES 16
 
 void FindBlocker(in SHADOWSAMPLER tex,in vec2 uv, in float zReceiver, in vec2 searchWidth, out float avgBlockerDepth, out float numBlockers)
 {	
@@ -271,25 +285,29 @@ void FindBlocker(in SHADOWSAMPLER tex,in vec2 uv, in float zReceiver, in vec2 se
 	avgBlockerDepth = blockerSum / numBlockers;
 }
 
-float ShadowPCSS(in SHADOWSAMPLER tex, in vec4 coords, in vec2 offsetScale)
+float ShadowPCSS(in SHADOWSAMPLER tex, in vec4 coords, in vec4 offsetScale)
 {
 	vec3 coordsProj = coords.xyz/coords.w;
 	
 	float avgBlockerDepth = 0.0f;
 	float numBlockers = 0.0f;
 	
-	float zReceiver = coordsProj.z;
+	//convert depths to view space, this makes sure a consistent result is achieved regardless of the near/far planes of the frustum splits
+	float zReceiver = depthToViewZ(coordsProj.z, offsetScale.z, offsetScale.w);
 	
-	vec2 searchWidth = offsetScale * (zReceiver-1.0) / (zReceiver);
+	//search width estimation is also tricky for directional light, so we just use a constant value
+	vec2 searchWidth = offsetScale.xy * SEARCH_WIDTH;
 
-	FindBlocker(tex,coordsProj.xy,zReceiver,searchWidth,avgBlockerDepth,numBlockers);
+	FindBlocker(tex,coordsProj.xy,coordsProj.z,searchWidth,avgBlockerDepth,numBlockers);
 	if(numBlockers<1)
 		return 1.0f;
 	
-	float penumbraRatio = PenumbraSize(zReceiver, avgBlockerDepth);
-	float filterRadiusUV = penumbraRatio;
+	//this is the searchwidth in m
+	float penumbraRatio = PenumbraSize(zReceiver, depthToViewZ(avgBlockerDepth,offsetScale.z, offsetScale.w));
+	//multiply with the ortho projection scaling to get the uv radius
+	vec2 filterRadiusUV = penumbraRatio * offsetScale.xy;
 	
-	return sampleShadow(tex,coords,filterRadiusUV * offsetScale);
+	return sampleShadow(tex,coords,filterRadiusUV );
 }
 #endif
 
@@ -325,20 +343,20 @@ float getShadow()
 	#define DEFAULT_RADIUS 1.0/100.0
 	if(dist < u_vSplits.x)
 	{
-		return sampleShadow(u_texShadow0,v_shadowCoord0,u_vLightOrthoScale[0] * DEFAULT_RADIUS);
+		return sampleShadow(u_texShadow0,v_shadowCoord0,u_vLightOrthoScale[0].xy * DEFAULT_RADIUS);
 	}
 	#if !SINGLE_SHADOW_FRUSTUM
 	else if(dist < u_vSplits.y)
 	{
-		return sampleShadow(u_texShadow1,v_shadowCoord1,u_vLightOrthoScale[1] * DEFAULT_RADIUS);
+		return sampleShadow(u_texShadow1,v_shadowCoord1,u_vLightOrthoScale[1].xy * DEFAULT_RADIUS);
 	}
 	else if(dist < u_vSplits.z)
 	{
-		return sampleShadow(u_texShadow2,v_shadowCoord2,u_vLightOrthoScale[2] * DEFAULT_RADIUS);
+		return sampleShadow(u_texShadow2,v_shadowCoord2,u_vLightOrthoScale[2].xy * DEFAULT_RADIUS);
 	}
 	else if(dist < u_vSplits.w)
 	{
-		return sampleShadow(u_texShadow3,v_shadowCoord3,u_vLightOrthoScale[3] * DEFAULT_RADIUS);
+		return sampleShadow(u_texShadow3,v_shadowCoord3,u_vLightOrthoScale[3].xy * DEFAULT_RADIUS);
 	}
 	#endif
 	#endif

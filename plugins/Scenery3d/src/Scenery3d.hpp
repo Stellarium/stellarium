@@ -1,7 +1,7 @@
 /*
  * Stellarium Scenery3d Plug-in
  *
- * Copyright (C) 2011 Simon Parzer, Peter Neubauer, Georg Zotti
+ * Copyright (C) 2011-15 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,15 +81,15 @@ public:
     bool getShadowsEnabled(void) const { return shaderParameters.shadows; }
     void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; reinitShadowmapping = true; invalidateCubemap(); }
     bool getUseSimpleShadows() const {return simpleShadows; }
-    void setUseSimpleShadows(bool val) { simpleShadows = val; reinitShadowmapping = true; }
+    void setUseSimpleShadows(bool val) { simpleShadows = val; reinitShadowmapping = true; invalidateCubemap(); }
     bool getBumpsEnabled(void) const { return shaderParameters.bump; }
     void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; invalidateCubemap(); }
     bool getTorchEnabled(void) const { return shaderParameters.torchLight; }
     void setTorchEnabled(bool torchEnabled) { shaderParameters.torchLight = torchEnabled; invalidateCubemap(); }
     S3DEnum::ShadowFilterQuality getShadowFilterQuality() const { return shaderParameters.shadowFilterQuality; }
-    void setShadowFilterQuality(S3DEnum::ShadowFilterQuality quality) { shaderParameters.shadowFilterQuality = quality; invalidateCubemap();}
+    void setShadowFilterQuality(S3DEnum::ShadowFilterQuality quality) { shaderParameters.shadowFilterQuality = quality; reinitShadowmapping=true; invalidateCubemap();}
     bool getPCSS() const { return shaderParameters.pcss; }
-    void setPCSS(bool val) { shaderParameters.pcss = val; reinitShadowmapping = true; }
+    void setPCSS(bool val) { shaderParameters.pcss = val; reinitShadowmapping = true; invalidateCubemap(); }
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
@@ -256,10 +256,14 @@ private:
     QVector<GLuint> shadowMapsArray;
     //Holds the shadow transformation matrix per split (Crop/Projection/View)
     QVector<QMatrix4x4> shadowCPM;
-    //Holds the xy-scaling of the orthographic light cam + near plane pos
-    QVector<QVector2D> shadowFrustumSize;
+    //Holds the xy-scaling of the orthographic light cam + pos of near/far planes in view coords
+    //Needed for consistent shadow filter sizes and PCSS effect
+    QVector<QVector4D> shadowFrustumSize;
     // Frustum of the view camera, constrainted to the shadowFarZ instead of the camFarZ
     Frustum camFrustShadow;
+    //near/far planes for the orthographic light that fits the whole scene
+    float lightOrthoNear;
+    float lightOrthoFar;
     //Array holding the split frustums
     QVector<Frustum> frustumArray;
     //Vector holding the convex split bodies for focused shadow mapping
@@ -340,7 +344,7 @@ private:
     //Computes the focus body for given frustum
     void computePolyhedron(Polyhedron& body, const Frustum& frustum, const Vec3f &shadowDir);
     //Computes the crop matrix to focus the light
-    void computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale, Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
+    void computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D &orthoScale, Polyhedron &focusBody, const QMatrix4x4 &lightProj, const QMatrix4x4 &lightMVP);
     //Computes the light projection values
     void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
 };

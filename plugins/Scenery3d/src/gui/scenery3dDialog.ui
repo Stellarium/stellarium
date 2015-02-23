@@ -560,9 +560,17 @@ p, li { white-space: pre-wrap; }
                    </item>
                    <item row="5" column="1">
                     <widget class="QComboBox" name="comboBoxShadowFiltering">
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Determines how the shadows are filtered, in increasing quality from top to bottom.&lt;/p&gt;&lt;p&gt;PCSS requires the quality set to LOW or HIGH.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
                      <item>
                       <property name="text">
                        <string>Off</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>Hardware</string>
                       </property>
                      </item>
                      <item>
@@ -572,7 +580,17 @@ p, li { white-space: pre-wrap; }
                      </item>
                      <item>
                       <property name="text">
+                       <string>Low + Hardware</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
                        <string>High (slow)</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>High + Hardware (slow)</string>
                       </property>
                      </item>
                     </widget>
@@ -584,6 +602,9 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <item row="0" column="0" colspan="2">
                       <widget class="QCheckBox" name="checkBoxPCSS">
+                       <property name="toolTip">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Approximate calculation of shadow penumbras (sharper shadows near contact points, blurred shadows further away).&lt;/p&gt;&lt;p&gt;Requires &lt;span style=&quot; font-weight:600;&quot;&gt;LOW&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;HIGH&lt;/span&gt; shadow filtering (without &lt;span style=&quot; font-weight:600;&quot;&gt;Hardware&lt;/span&gt;).&lt;/p&gt;&lt;p&gt;Causes a performance hit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
                        <property name="text">
                         <string>PCSS</string>
                        </property>

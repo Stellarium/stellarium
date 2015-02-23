@@ -1,7 +1,7 @@
 /*
  * Stellarium Scenery3d Plug-in
  *
- * Copyright (C) 2011-12 Simon Parzer, Peter Neubauer, Andrei Borza, Georg Zotti
+ * Copyright (C) 2011-15 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -538,7 +538,7 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		//Send squared splits to the shader
 		shader->setUniformValue(loc, splitData.v[0], splitData.v[1], splitData.v[2], splitData.v[3]);
 
-		if(shaderParameters.shadowFilterQuality>S3DEnum::SFQ_OFF)
+		if(shaderParameters.shadowFilterQuality>S3DEnum::SFQ_HARDWARE)
 		{
 			//send size of light ortho for each frustum
 			loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_LIGHTORTHOSCALE);
@@ -833,7 +833,7 @@ void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,fl
     //orthoFar = std::max(maxZ, orthoNear + 1.0f);
 }
 
-void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale, Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
+void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D& orthoScale, Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
 {
     float maxX = -std::numeric_limits<float>::max();
     float maxY = maxX;
@@ -892,7 +892,7 @@ void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector2D& orthoScale,
     scaleX = 1.0f/std::ceil(1.0f/scaleX*quantizer) * quantizer;
     scaleY = 1.0f/std::ceil(1.0f/scaleY*quantizer) * quantizer;
 
-    orthoScale = QVector2D(scaleX,scaleY);
+    orthoScale = QVector4D(scaleX,scaleY,minZ,maxZ);
 
     float offsetX = -0.5f*(maxX + minX)*scaleX;
     float offsetY = -0.5f*(maxY + minY)*scaleY;
@@ -1044,11 +1044,11 @@ bool Scenery3d::renderShadowMaps()
 
 	//Compute an orthographic projection that encompasses the whole scene
 	//a crop matrix is used to restrict this projection to the subfrusta
-	float orthoExtent,orthoFar,orthoNear;
-	computeOrthoProjVals(lightInfo.shadowDirection,orthoExtent,orthoNear,orthoFar);
+	float orthoExtent;
+	computeOrthoProjVals(lightInfo.shadowDirection,orthoExtent,lightOrthoNear,lightOrthoFar);
 
 	QMatrix4x4 lightProj;
-	lightProj.ortho(-orthoExtent,orthoExtent,-orthoExtent,orthoExtent,orthoNear,orthoFar);
+	lightProj.ortho(-orthoExtent,orthoExtent,-orthoExtent,orthoExtent,lightOrthoNear,lightOrthoFar);
 
 	//multiply with lights modelView matrix
 	QMatrix4x4 lightMVP = lightProj*modelViewMatrix;
@@ -1076,7 +1076,10 @@ bool Scenery3d::renderShadowMaps()
 			computeCropMatrix(shadowCPM[i], shadowFrustumSize[i], focusBodies[i],lightProj,lightMVP);
 
 			//the shadow frustum size is only the scaling, multiply it with the extents of the original matrix
-			shadowFrustumSize[i] *= (1.0f / orthoExtent);
+			shadowFrustumSize[i] = QVector4D(shadowFrustumSize[i][0] / orthoExtent, shadowFrustumSize[i][1] / orthoExtent,
+					//shadowFrustumSize[i][2], shadowFrustumSize[i][3]);
+					(.5f * shadowFrustumSize[i][2] + .5f) *(lightOrthoFar - lightOrthoNear) + lightOrthoNear,
+					(.5f * shadowFrustumSize[i][3] + .5f) *(lightOrthoFar - lightOrthoNear) + lightOrthoNear );
 
 			//Draw the scene
 			if(!drawArrays(false))
@@ -1776,12 +1779,6 @@ void Scenery3d::drawDebug()
 	float screen_x = altAzProjector->getViewportWidth() - debugTextureSize - 30;
 	float screen_y = altAzProjector->getViewportHeight() - debugTextureSize - 30;
 
-//	std::string cap = "Camera depth";
-//	painter.drawText(screen_x-150, screen_y+130, QString(cap.c_str()));
-
-//	glBindTexture(GL_TEXTURE_2D, camDepthTex);
-//	painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
-
 	if(shaderParameters.shadows)
 	{
 		for(int i=0; i<shaderParameters.frustumSplits; i++)
@@ -1793,15 +1790,16 @@ void Scenery3d::drawDebug()
 			painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
 
 			int tmp = screen_y - debugTextureSize-30;
-			painter.drawText(screen_x-100, tmp, QString("zNear: %1").arg(frustumArray[i].zNear, 7, 'f', 2));
-			painter.drawText(screen_x-100, tmp-15.0f, QString("zFar: %1").arg(frustumArray[i].zFar, 7, 'f', 2));
-			painter.drawText(screen_x-100, tmp-30.0f, QString("scale: %1/%2").arg(shadowFrustumSize[i].x(), 7, 'f', 2).arg(shadowFrustumSize[i].y(),7,'f',2));
+			painter.drawText(screen_x-125, tmp, QString("cam n/f: %1/%2").arg(frustumArray[i].zNear, 7, 'f', 2).arg(frustumArray[i].zFar, 7, 'f', 2));
+			painter.drawText(screen_x-125, tmp-15.0f, QString("uv scale: %1/%2").arg(shadowFrustumSize[i].x(), 7, 'f', 2).arg(shadowFrustumSize[i].y(),7,'f',2));
+			painter.drawText(screen_x-125, tmp-30.0f, QString("ortho n/f: %1/%2").arg(shadowFrustumSize[i].z(), 7, 'f', 2).arg(shadowFrustumSize[i].w(),7,'f',2));
 
-			screen_x -= 280;
+			screen_x -= 290;
 		}
+		painter.drawText(screen_x+165.0f, screen_y-215.0f, QString("Splitweight: %1").arg(currentScene.shadowSplitWeight, 3, 'f', 2));
+		painter.drawText(screen_x+165.0f, screen_y-230.0f, QString("Light near/far: %1/%2").arg(lightOrthoNear, 3, 'f', 2).arg(lightOrthoFar, 3, 'f', 2));
 	}
 
-	painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(currentScene.shadowSplitWeight, 3, 'f', 2));
     }
 
     screen_y -= 100.f;
@@ -2330,19 +2328,21 @@ bool Scenery3d::initShadowmapping()
 
 			bool isES = QOpenGLContext::currentContext()->isOpenGLES();
 			//pcss is only enabled if filtering is also enabled
-			bool pcssEnabled = shaderParameters.pcss && shaderParameters.shadowFilterQuality>S3DEnum::SFQ_OFF;
+			bool pcssEnabled = shaderParameters.pcss && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW || shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH);
 
 			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
 			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : (pcssEnabled ? GL_DEPTH_COMPONENT32F : GL_DEPTH_COMPONENT16), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL,0);
 
-			GLint filter = pcssEnabled ? GL_NEAREST : GL_LINEAR;
+			GLint filter = (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
+					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW_HARDWARE
+					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH_HARDWARE) ? GL_LINEAR : GL_NEAREST;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-			//we use hardware-accelerated depth compare mode
+			//we use hardware-accelerated depth compare mode, unless pcss is used
 			if(!pcssEnabled)
 			{
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
