@@ -2,6 +2,7 @@
 #define _SCENERY3DDIALOG_HPP_
 
 #include "StelDialog.hpp"
+#include "S3DEnum.hpp"
 #include "ui_scenery3dDialog.h"
 
 class Scenery3dMgr;
@@ -34,6 +35,7 @@ private slots:
 	void updateTorchStrength(float val);
 	void updateTorchRange(float val);
 	void updateLazyDrawingInterval(float val);
+	void updateShadowFilterQuality(S3DEnum::ShadowFilterQuality quality);
 
 	void updateCurrentScene(const SceneInfo& sceneInfo);
 

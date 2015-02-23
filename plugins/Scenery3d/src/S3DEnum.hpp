@@ -45,12 +45,18 @@ public:
 	//! Contains different shadow filter settings
 	enum ShadowFilterQuality
 	{
-		//! Disables shadow filtering (hardware PCF is still applied)
+		//! Disables shadow filtering completely
 		SFQ_OFF,
+		//! Enables OpenGL hardware shadow filtering
+		SFQ_HARDWARE,
 		//! Uses a 16-tap Poisson disk
 		SFQ_LOW,
+		//! Uses a 16-tap Poisson disk + hardware filtering
+		SFQ_LOW_HARDWARE,
 		//! Uses a 64-tap Poisson disk
-		SFQ_HIGH
+		SFQ_HIGH,
+		//! Uses a 64-tap Poisson disk + hardware filtering
+		SFQ_HIGH_HARDWARE
 	};
 };
 

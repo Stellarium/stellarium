@@ -173,7 +173,7 @@ void Scenery3dDialog::createUpdateConnections()
 
 	connect(mgr, &Scenery3dMgr::cubemappingModeChanged, ui->comboBoxCubemapMode, &QComboBox::setCurrentIndex);
 	connect(mgr, &Scenery3dMgr::isGeometryShaderSupportedChanged, dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model()), &CubemapModeListModel::setGSSupported);
-	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged, ui->comboBoxShadowFiltering, &QComboBox::setCurrentIndex);
+	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged, this, &Scenery3dDialog::updateShadowFilterQuality);
 
 	connect(mgr, &Scenery3dMgr::torchStrengthChanged, this, &Scenery3dDialog::updateTorchStrength);
 	connect(mgr, &Scenery3dMgr::torchRangeChanged, this, &Scenery3dDialog::updateTorchRange);
@@ -371,6 +371,12 @@ void Scenery3dDialog::setResolutionCombobox(QComboBox *cb, uint val)
 	cb->blockSignals(false);
 }
 
+void Scenery3dDialog::updateShadowFilterQuality(S3DEnum::ShadowFilterQuality quality)
+{
+	ui->checkBoxPCSS->setEnabled(quality == S3DEnum::SFQ_HIGH || quality == S3DEnum::S3DEnum::SFQ_LOW);
+	ui->comboBoxShadowFiltering->setCurrentIndex(quality);
+}
+
 void Scenery3dDialog::updateTorchRange(float val)
 {
 	ui->sliderTorchRange->blockSignals(true);
@@ -409,7 +415,7 @@ void Scenery3dDialog::updateFromManager()
 	ui->checkBoxSimpleShadows->setChecked(mgr->getUseSimpleShadows());
 	ui->checkBoxCubemapShadows->setChecked(mgr->getUseFullCubemapShadows());
 
-	ui->comboBoxShadowFiltering->setCurrentIndex(mgr->getShadowFilterQuality());
+	updateShadowFilterQuality(mgr->getShadowFilterQuality());
 	ui->comboBoxCubemapMode->setCurrentIndex(mgr->getCubemappingMode());
 
 	updateTorchStrength(mgr->getTorchStrength());
