@@ -1529,6 +1529,9 @@
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showMeridianOppositionLineCheckBox">
+                   <property name="toolTip">
+                    <string>The line of meridian who passes through the northern and southern celestial pole, and the solar opposition point in ecliptic coordinate system.</string>
+                   </property>
                    <property name="text">
                     <string>Meridian of opposition</string>
                    </property>
