@@ -647,9 +647,9 @@ void SkyLine::draw(StelCore *core) const
 		Vec3d coord;
 		double lambda, beta;
 		StelUtils::rectToSphe(&lambda, &beta, core->getCurrentPlanet()->getHeliocentricEclipticPos());
-		StelUtils::spheToRect(lambda + M_PI/2., beta, coord);
+		StelUtils::spheToRect(lambda + M_PI/2., 0., coord);
 		meridianSphericalCap.n.set(coord[0],coord[1],coord[2]);
-		fpt.set(0,0,0);
+		fpt.set(0,0,1);
 	}
 
 	Vec3d p1, p2;
