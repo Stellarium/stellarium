@@ -42,6 +42,7 @@
 #include "StelLocation.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelSkyLayerMgr.hpp"
 #include "SolarSystem.hpp"
 #include "MeteorMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -590,6 +591,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
+	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
 	// view dialog / landscape tab settings
