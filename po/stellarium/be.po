@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-15 18:53+0600\n"
-"PO-Revision-Date: 2015-02-07 06:11+0000\n"
+"PO-Revision-Date: 2015-02-22 08:01+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-16 05:54+0000\n"
-"X-Generator: Launchpad (build 17341)\n"
+"X-Launchpad-Export-Date: 2015-02-23 05:10+0000\n"
+"X-Generator: Launchpad (build 17355)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -162,7 +162,7 @@ msgstr ", %1 м"
 
 #: src/core/modules/LandscapeMgr.cpp:598
 msgid "Celestial body:"
-msgstr ""
+msgstr "Нябеснае цела:"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
@@ -333,12 +333,12 @@ msgstr "Часовае абазначэньне: %1"
 #: src/core/modules/Comet.cpp:156
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "непэрыядычныя"
 
 #: src/core/modules/Comet.cpp:160
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "пэрыядычныя"
 
 #: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
 #: plugins/Pulsars/src/Pulsar.cpp:166
@@ -501,11 +501,11 @@ msgstr "Час узыходжаньня: %1%"
 
 #: src/core/modules/MilkyWay.cpp:73
 msgid "Milky Way"
-msgstr ""
+msgstr "Млечны шлях"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Задыякальнае сьвятло"
 
 #: src/core/StelApp.cpp:487
 msgid "Night mode"
@@ -5553,12 +5553,12 @@ msgstr ""
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr ""
+msgstr "сПЗ:"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "Magnification factor:"
-msgstr ""
+msgstr "Каэфіцыент павелічэньня:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
@@ -7308,7 +7308,7 @@ msgstr "Яркасьць Млечнага шляху:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:427
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "Яркасьць задыякальнага сьвятла:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Nebula label frequency:"
@@ -7428,7 +7428,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:207
 msgid "Select bookmark..."
-msgstr ""
+msgstr "Выберы закладку…"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
@@ -8901,6 +8901,22 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"Дні касьмічнага ўзыходу/захаду аб'екту прыблізна вызначаюцца як дні, калі "
+"аб'ект узыходзіць (ці заходзіць) разам з узыходам/захадам Сонца. Дакладныя "
+"даты гэтых эфэмэрыд залежаць ад месцазнаходжаньня назіральніка. Акранічны "
+"ўзыход (ці захад), наадварот, адбываецца калі зорка ўзыходзіць/заходзіць "
+"адначасна з захадам/узыходам Сонца (г.зн., адваротна Сонцу). З аднаго боку, "
+"відавочна, што аб'ект цяжка назіраць (калі ўвогуле магчыма) у дні між "
+"касьмічным захадам і ўзыходам. Зь іншага боку, у даты каля акранічнага "
+"захаду й узыходу нябесны аб'ект знаходзіцца высока, калі Сонца дастаткова "
+"нізка пад гарызонтам (таму аб'ект добра назіраць). Дата геліякальнага "
+"ўзыходу гэта першы дзень году, калі зорка становіцца бачнай. Ён адбываецца "
+"калі зорка блізкая да ўсходняга гарызонту прыблізна перад сканчэньнем "
+"астранамічнай ночы (г.зн., на астранамічным зьмярканьні). У наступныя ночы "
+"зорка будзе бачнай на працягу даўжэйшых інтэрвалаў часу, пакуль яна не "
+"дасягне геліякальнага захаду (г.зн., апошняй ночы году, калі зорка яшчэ "
+"бачная). На геліякальным захадзе зорка заходзіць прыьлізна пасьля пачатку "
+"астранамічнай ночы."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
