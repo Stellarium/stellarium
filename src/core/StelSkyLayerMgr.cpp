@@ -84,6 +84,7 @@ void StelSkyLayerMgr::init()
 	}
 	conf->endGroup();
 
+	setFlagShow(!conf->value("astro/flag_nebula_display_no_texture", false).toBool());
 	addAction("actionShow_DSS", N_("Display Options"), N_("Deep-sky objects background images"), "visible", "I");
 }
 
