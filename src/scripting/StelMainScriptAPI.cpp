@@ -967,7 +967,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
-		glmgr->setFlagMeridianOppositionLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
@@ -1001,7 +1001,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
-		glmgr->setFlagMeridianOppositionLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
@@ -1035,7 +1035,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
-		glmgr->setFlagMeridianOppositionLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);

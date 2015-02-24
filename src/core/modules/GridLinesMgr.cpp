@@ -72,7 +72,7 @@ public:
 		MERIDIAN,
 		HORIZON,
 		GALACTICEQUATOR,
-		MERIDIANOPPOSITION
+		LONGITUDE
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
@@ -603,9 +603,10 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameGalactic;
 			label = q_("Galactic Equator");
 			break;
-		case MERIDIANOPPOSITION:
+		case LONGITUDE:
 			frameType = StelCore::FrameObservercentricEcliptic;
-			label = q_("Meridian of opposition");
+			// TRANSLATORS: Full term is "opposition/conjunction longitude"
+			label = q_("O./C. longitude");
 			break;
 	}
 }
@@ -642,7 +643,7 @@ void SkyLine::draw(StelCore *core) const
 		meridianSphericalCap.n.set(0,1,0);
 	}
 
-	if (line_type==MERIDIANOPPOSITION)
+	if (line_type==LONGITUDE)
 	{
 		Vec3d coord;
 		double lambda, beta;
@@ -702,7 +703,7 @@ GridLinesMgr::GridLinesMgr()
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 	horizonLine = new SkyLine(SkyLine::HORIZON);
 	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
-	meridianOppositionLine = new SkyLine(SkyLine::MERIDIANOPPOSITION);
+	longitudeLine = new SkyLine(SkyLine::LONGITUDE);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -717,7 +718,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete meridianLine;
 	delete horizonLine;
 	delete galacticEquatorLine;
-	delete meridianOppositionLine;
+	delete longitudeLine;
 }
 
 /*************************************************************************
@@ -745,7 +746,7 @@ void GridLinesMgr::init()
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
-	setFlagMeridianOppositionLine(conf->value("viewing/flag_meridian_opposition_line").toBool());
+	setFlagLongitudeLine(conf->value("viewing/flag_longitude_line").toBool());
 	
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -762,7 +763,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
 	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
-	addAction("actionShow_Meridian_Opposition_Line", displayGroup, N_("Meridian of Opposition line"), "meridianOppositionLineDisplayed");
+	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -778,7 +779,7 @@ void GridLinesMgr::update(double deltaTime)
 	meridianLine->update(deltaTime);
 	horizonLine->update(deltaTime);
 	galacticEquatorLine->update(deltaTime);
-	meridianOppositionLine->update(deltaTime);
+	longitudeLine->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -793,7 +794,7 @@ void GridLinesMgr::draw(StelCore* core)
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	galacticEquatorLine->draw(core);
-	meridianOppositionLine->draw(core);
+	longitudeLine->draw(core);
 }
 
 void GridLinesMgr::setStelStyle(const QString& section)
@@ -812,7 +813,7 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
 	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value(section+"/galactic_equator_color", defaultColor).toString()));
-	setColorMeridianOppositionLine(StelUtils::strToVec3f(conf->value(section+"/meridian_opposition_color", defaultColor).toString()));
+	setColorLongitudeLine(StelUtils::strToVec3f(conf->value(section+"/longitude_color", defaultColor).toString()));
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -822,7 +823,7 @@ void GridLinesMgr::updateLineLabels()
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
 	galacticEquatorLine->updateLabel();
-	meridianOppositionLine->updateLabel();
+	longitudeLine->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -1026,28 +1027,28 @@ void GridLinesMgr::setColorMeridianLine(const Vec3f& newColor)
 	}
 }
 
-//! Set flag for displaying Meridian of Opposition Line
-void GridLinesMgr::setFlagMeridianOppositionLine(const bool displayed)
+//! Set flag for displaying opposition/conjunction longitude line
+void GridLinesMgr::setFlagLongitudeLine(const bool displayed)
 {
-	if(displayed != meridianOppositionLine->isDisplayed()) {
-		meridianOppositionLine->setDisplayed(displayed);
-		emit meridianOppositionLineDisplayedChanged(displayed);
+	if(displayed != longitudeLine->isDisplayed()) {
+		longitudeLine->setDisplayed(displayed);
+		emit longitudeLineDisplayedChanged(displayed);
 	}
 }
-//! Get flag for displaying Meridian of Opposition Line
-bool GridLinesMgr::getFlagMeridianOppositionLine(void) const
+//! Get flag for displaying opposition/conjunction longitude line
+bool GridLinesMgr::getFlagLongitudeLine(void) const
 {
-	return meridianOppositionLine->isDisplayed();
+	return longitudeLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorMeridianOppositionLine(void) const
+Vec3f GridLinesMgr::getColorLongitudeLine(void) const
 {
-	return meridianOppositionLine->getColor();
+	return longitudeLine->getColor();
 }
-void GridLinesMgr::setColorMeridianOppositionLine(const Vec3f& newColor)
+void GridLinesMgr::setColorLongitudeLine(const Vec3f& newColor)
 {
-	if(newColor != meridianOppositionLine->getColor()) {
-		meridianOppositionLine->setColor(newColor);
-		emit meridianOppositionLineColorChanged(newColor);
+	if(newColor != longitudeLine->getColor()) {
+		longitudeLine->setColor(newColor);
+		emit longitudeLineColorChanged(newColor);
 	}
 }
 

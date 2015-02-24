@@ -1528,12 +1528,12 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showMeridianOppositionLineCheckBox">
+                  <widget class="QCheckBox" name="showLongitudeLineCheckBox">
                    <property name="toolTip">
-                    <string>The line of meridian who passes through the northern and southern celestial pole, and the solar opposition point in ecliptic coordinate system.</string>
+                    <string>Opposition/conjunction longitude line - the line of ecliptic longitude which passes through the both ecliptic poles, the Sun and opposition point.</string>
                    </property>
                    <property name="text">
-                    <string>Meridian of opposition</string>
+                    <string>O./C. longitude</string>
                    </property>
                   </widget>
                  </item>

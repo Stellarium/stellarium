@@ -110,7 +110,7 @@ Oculars::Oculars():
 	flagEclipticLine(false),
 	flagEclipticJ2000Grid(false),
 	flagMeridianLine(false),
-	flagMeridianOppositionLine(false),
+	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
 	flagAdaptation(false),
@@ -1783,7 +1783,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEclipticLine(flagEclipticLine);
 	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
-	gridManager->setFlagMeridianOppositionLine(flagMeridianOppositionLine);
+	gridManager->setFlagLongitudeLine(flagLongitudeLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
@@ -1827,7 +1827,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
-			flagMeridianOppositionLine = gridManager->getFlagMeridianOppositionLine();
+			flagLongitudeLine = gridManager->getFlagLongitudeLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
 
@@ -1868,7 +1868,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
-	gridManager->setFlagMeridianOppositionLine(false);
+	gridManager->setFlagLongitudeLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
