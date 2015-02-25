@@ -229,6 +229,9 @@ Vec3f AABB::negativeVertex(Vec3f& normal) const
 
 void AABB::render() const
 {
+// Minimum to avoid trouble when building on pure OpenGL ES systems
+// Not sure about ANGLE!
+#if !defined(QT_OPENGL_ES_2)
     Vec3f nbl = getCorner(MinMinMin);
     Vec3f nbr = getCorner(MaxMinMin);
     Vec3f ntr = getCorner(MaxMinMax);
@@ -287,6 +290,7 @@ void AABB::render() const
         glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
         glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
     glEnd();
+#endif
 }
 
 Box AABB::toBox()
