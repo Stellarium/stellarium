@@ -269,6 +269,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEquatorLineCheckBox, "actionShow_Equator_Line");
 	connectCheckBox(ui->showEclipticLineCheckBox, "actionShow_Ecliptic_Line");
 	connectCheckBox(ui->showMeridianLineCheckBox, "actionShow_Meridian_Line");
+	connectCheckBox(ui->showLongitudeLineCheckBox, "actionShow_Longitude_Line");
 	connectCheckBox(ui->showHorizonLineCheckBox, "actionShow_Horizon_Line");
 	connectCheckBox(ui->showEquatorialGridCheckBox, "actionShow_Equatorial_Grid");
 	connectCheckBox(ui->showGalacticGridCheckBox, "actionShow_Galactic_Grid");
