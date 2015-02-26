@@ -146,7 +146,7 @@ void Scenery3dMgr::init()
 
 	// graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
 	// In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
-	if ( !QOpenGLContext::currentContext()->hasExtension("GL_EXT_framebuffer_object")) {
+	if ( !QOpenGLContext::currentContext()->hasExtension("GL_EXT_framebuffer_object") && ! QOpenGLContext::currentContext()->isOpenGLES() ) {
 
 		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
 

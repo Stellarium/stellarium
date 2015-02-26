@@ -28,13 +28,18 @@
 //! current StelOpenGL header dramatically.
 struct GLExtFuncs
 {
+#ifndef QT_OPENGL_ES
 	//! Since 3.2
 	PFNGLFRAMEBUFFERTEXTUREPROC glFramebufferTexture;
+#endif
 
 	void init(QOpenGLContext* ctx)
 	{
+		#ifndef QT_OPENGL_ES
 		glFramebufferTexture = (PFNGLFRAMEBUFFERTEXTUREPROC)ctx->getProcAddress("glFramebufferTexture");
+		#endif
 	}
+
 };
 
 extern GLExtFuncs glExtFuncs;
