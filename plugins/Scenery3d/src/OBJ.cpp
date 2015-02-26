@@ -1417,7 +1417,7 @@ void OBJ::uploadTexturesGL()
 	//qDebug() << getTime() << "[Scenery3d] Normal Map:" << pMaterial->bumpMapName;
 	if(!pMaterial->bumpMapName.isEmpty())
 	{
-	    StelTextureSP bumpTex = textureMgr.createTexture(absolutePath(pMaterial->bumpMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	    StelTextureSP bumpTex = textureMgr.createTexture(absolutePath(pMaterial->bumpMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
 	    if(!bumpTex.isNull())
 	    {
 		pMaterial->bump_texture = bumpTex;
@@ -1431,7 +1431,7 @@ void OBJ::uploadTexturesGL()
 	//qDebug() << getTime() << "[Scenery3d] Height Map:" << pMaterial->heightMapName;
 	if(!pMaterial->heightMapName.isEmpty())
 	{
-	    StelTextureSP heightTex = textureMgr.createTexture(absolutePath(pMaterial->heightMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	    StelTextureSP heightTex = textureMgr.createTexture(absolutePath(pMaterial->heightMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
 	    if(!heightTex.isNull())
 	    {
 		pMaterial->height_texture = heightTex;

@@ -230,11 +230,10 @@ private:
     // a struct which encapsulates lighting info
     struct LightParameters
     {
-	    ShadowCaster shadowCaster;
-	    Vec3f shadowDirection;
 	    QMatrix4x4 shadowModelView;
 
 	    ShadowCaster lightSource;
+	    Vec3f lightDirectionV3f;
 	    QVector3D lightDirectionWorld;
 	    QVector3D ambient;
 	    QVector3D directional;

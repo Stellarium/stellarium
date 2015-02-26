@@ -21,6 +21,7 @@
 #include "SPolygon.hpp"
 #include "Plane.hpp"
 #include "Util.hpp"
+#include "StelOpenGL.hpp"
 
 SPolygon::SPolygon() {}
 
@@ -114,4 +115,19 @@ void SPolygon::addUniqueVert(const Vec3f &v)
     {
 	vertices.append(v);
     }
+}
+
+void SPolygon::render()
+{
+#if !defined(QT_OPENGL_ES_2)
+	//render each polygon
+	glColor3f(0.4f,0.4f,0.4f);
+
+	glBegin(GL_LINE_LOOP);
+	for(int j = 0;j<vertices.size();++j)
+	{
+		glVertex3fv(vertices.at(j).v);
+	}
+	glEnd();
+#endif
 }
