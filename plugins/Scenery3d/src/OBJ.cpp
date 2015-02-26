@@ -1516,6 +1516,7 @@ void OBJ::unbindGL()
 	}
 }
 
+#ifndef QT_OPENGL_ES
 void OBJ::bindGLFixedFunction()
 {
 	m_vertexBuffer.bind();
@@ -1541,6 +1542,7 @@ void OBJ::unbindGLFixedFunction()
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 }
+#endif
 
 void OBJ::bindBuffersGL()
 {
