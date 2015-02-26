@@ -992,8 +992,8 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs", "http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", "http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "http://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
-	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.net/downloads/transfer?file=Soft00Cmt.txt");
-	bookmarks[MpcComets].insert("MPCORB: comets", "http://www.minorplanetcenter.net/downloads/transfer?file=CometEls.txt");
+	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.net/downloads/transfer?file=Comets/Soft00Cmt.txt");
+	bookmarks[MpcComets].insert("MPCORB: comets", "http://www.minorplanetcenter.net/downloads/transfer?file=Comets/CometEls.txt");
 
 	//Try to save them to a file
 	saveBookmarks();
