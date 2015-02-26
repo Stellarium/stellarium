@@ -252,8 +252,8 @@ float depthToViewZ(float depth, float nearPlane, float farPlane)
 	return depth * (farPlane - nearPlane) + nearPlane;
 }
 
-#define SEARCH_WIDTH 0.08
 #define LIGHT_SCALE 0.003
+#define SEARCH_WIDTH 0.08
 
 float PenumbraSize(in float zReceiver, in float zBlocker)
 {
@@ -270,6 +270,14 @@ void FindBlocker(in SHADOWSAMPLER tex,in vec2 uv, in float zReceiver, in vec2 se
 {	
 	float blockerSum = 0;
 	numBlockers = 0;
+	
+	//make sure original position is also sampled to avoid artifacts when shadow map resolution is bad or light angle very flat
+	float shadowMapDepth = texture2D(tex,uv).r;
+	if(shadowMapDepth<zReceiver)
+	{
+		blockerSum+=shadowMapDepth;
+		++numBlockers;
+	}
 	
 	for(int i=0;i<BLOCKER_SEARCH_NUM_SAMPLES;++i)
 	{
@@ -305,7 +313,10 @@ float ShadowPCSS(in SHADOWSAMPLER tex, in vec4 coords, in vec4 offsetScale)
 	//this is the searchwidth in m
 	float penumbraRatio = PenumbraSize(zReceiver, depthToViewZ(avgBlockerDepth,offsetScale.z, offsetScale.w));
 	//multiply with the ortho projection scaling to get the uv radius
+	
 	vec2 filterRadiusUV = penumbraRatio * offsetScale.xy;
+	//constraining seems to not make much difference in our scenes
+	//vec2 filterRadiusUV = min(searchWidth, penumbraRatio * offsetScale.xy);
 	
 	return sampleShadow(tex,coords,filterRadiusUV );
 }

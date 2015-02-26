@@ -169,27 +169,27 @@ Vec4f AABB::getEquation(AABB::Plane p) const
     switch(p)
     {
     case Front:
-        out = Vec4f(0.0f, -1.0f, 0.0f, std::abs(min.v[1]));
+	out = Vec4f(0.0f, -1.0f, 0.0f, -min.v[1]);
         break;
 
     case Back:
-        out = Vec4f(0.0f, 1.0f, 0.0f, std::abs(max.v[1]));
+	out = Vec4f(0.0f, 1.0f, 0.0f, max.v[1]);
         break;
 
     case Bottom:
-        out = Vec4f(0.0f, 0.0f, -1.0f, std::abs(min.v[2]));
+	out = Vec4f(0.0f, 0.0f, -1.0f, -min.v[2]);
         break;
 
     case Top:
-        out = Vec4f(0.0f, 0.0f, 1.0f, std::abs(max.v[2]));
+	out = Vec4f(0.0f, 0.0f, 1.0f, max.v[2]);
         break;
 
     case Left:
-        out = Vec4f(-1.0f, 0.0f, 0.0f, std::abs(min.v[0]));
+	out = Vec4f(-1.0f, 0.0f, 0.0f, -min.v[0]);
         break;
 
     case Right:
-        out = Vec4f(1.0f, 0.0f, 0.0f, std::abs(max.v[0]));
+	out = Vec4f(1.0f, 0.0f, 0.0f, max.v[0]);
         break;
 
     default:

@@ -52,6 +52,8 @@ public:
     //! Add the vertex v to vertices if it is not already present
     void addUniqueVert(const Vec3f &v);
 
+    void render();
+
 private:
 
 };

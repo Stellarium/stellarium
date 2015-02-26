@@ -627,8 +627,19 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 
 	//override some shader Params
 	GlobalShaderParameters pm = shaderParameters;
-	if(lightInfo.shadowCaster == Venus)
-		pm.shadowFilterQuality = S3DEnum::SFQ_OFF;
+	switch(lightInfo.lightSource)
+	{
+		case Venus:
+			//turn shadow filter off to get sharper shadows
+			pm.shadowFilterQuality = S3DEnum::SFQ_OFF;
+			break;
+		case None:
+			//disable shadow rendering to speed things up
+			pm.shadows = false;
+			break;
+		default:
+			break;
+	}
 
 	//bind VAO
 	objModel->bindGL();
@@ -924,6 +935,8 @@ void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D& orthoScale,
 
 void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp, const float fov, const float aspect)
 {
+	if(fixShadowData)
+		return;
 	//calc cam frustum for shadowing range
 	//note that this is only correct in the perspective projection case, cubemapping WILL introduce shadow artifacts in most cases
 
@@ -978,49 +991,20 @@ void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, co
 
 void Scenery3d::calculateShadowCaster()
 {
-	//Determine sun position
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-	//zRotateMatrix.transfo(sunPosition); // GZ: These rotations were commented out - testing 20120122->correct!
-	sunPosition.normalize();
-	// GZ: at night, a near-full Moon can cast good shadows.
-	Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-	//zRotateMatrix.transfo(moonPosition);
-	moonPosition.normalize();
-	Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
-	//zRotateMatrix.transfo(venusPosition);
-	venusPosition.normalize();
-
-	//find the direction the shadow is cast (= light direction)
-	//Select view position based on which planet is visible
-	if (sunPosition[2]>0)
-	{
-		lightInfo.shadowDirection = Vec3f(sunPosition.v[0],sunPosition.v[1],sunPosition.v[2]);
-		lightInfo.shadowCaster = Sun;
-	}
-	else if (moonPosition[2]>0)
-	{
-		lightInfo.shadowDirection = Vec3f(moonPosition.v[0],moonPosition.v[1],moonPosition.v[2]);
-		lightInfo.shadowCaster = Moon;
-	}
-	else
-	{
-		//TODO fix case where not even Venus is visible, led to problems for me today
-		lightInfo.shadowDirection = Vec3f(venusPosition.v[0],venusPosition.v[1],venusPosition.v[2]);
-		lightInfo.shadowCaster = Venus;
-	}
-
-	QVector3D shadowDir(lightInfo.shadowDirection.v[0],lightInfo.shadowDirection.v[1],lightInfo.shadowDirection.v[2]);
+	//shadow source and direction has been calculated in calculateLightSource
 	static const QVector3D vZero = QVector3D();
 	static const QVector3D vZeroZeroOne = QVector3D(0,0,1);
 
 	//calculate lights modelview matrix
 	lightInfo.shadowModelView.setToIdentity();
-	lightInfo.shadowModelView.lookAt(shadowDir,vZero,vZeroZeroOne);
+	lightInfo.shadowModelView.lookAt(lightInfo.lightDirectionWorld,vZero,vZeroZeroOne);
 }
 
 bool Scenery3d::renderShadowMaps()
 {
+	if(fixShadowData)
+		return true;
+
 	shaderParameters.shadowTransform = true;
 
 	//projection matrix gets updated below in updateCropMatrix
@@ -1045,7 +1029,7 @@ bool Scenery3d::renderShadowMaps()
 	//Compute an orthographic projection that encompasses the whole scene
 	//a crop matrix is used to restrict this projection to the subfrusta
 	float orthoExtent;
-	computeOrthoProjVals(lightInfo.shadowDirection,orthoExtent,lightOrthoNear,lightOrthoFar);
+	computeOrthoProjVals(lightInfo.lightDirectionV3f,orthoExtent,lightOrthoNear,lightOrthoFar);
 
 	QMatrix4x4 lightProj;
 	lightProj.ortho(-orthoExtent,orthoExtent,-orthoExtent,orthoExtent,lightOrthoNear,lightOrthoFar);
@@ -1060,7 +1044,7 @@ bool Scenery3d::renderShadowMaps()
 	{
 		//Find the convex body that encompasses all shadow receivers and casters for this split
 		focusBodies[i].clear();
-		computePolyhedron(focusBodies[i],frustumArray[i],lightInfo.shadowDirection);
+		computePolyhedron(focusBodies[i],frustumArray[i],lightInfo.lightDirectionV3f);
 
 		//qDebug() << i << ".split vert count:" << focusBodies[i]->getVertCount();
 
@@ -1068,7 +1052,7 @@ bool Scenery3d::renderShadowMaps()
 		//Clear everything, also if focusbody is empty
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		if(focusBodies[i].getVertCount())
+		if(lightInfo.lightSource != None && focusBodies[i].getVertCount())
 		{
 			//Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
 			//This alters the ProjectionMatrix of the light
@@ -1117,9 +1101,9 @@ void Scenery3d::calculateLighting()
 {
 	//calculate which light source we need + intensity
 	float ambientBrightness, directionalBrightness,emissiveFactor;
-	Vec3f lightsourcePosition; //should be normalized already
-	lightInfo.lightSource = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition, emissiveFactor);
-	lightInfo.lightDirectionWorld = QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]);
+	lightInfo.lightSource = calculateLightSource(ambientBrightness, directionalBrightness, lightInfo.lightDirectionV3f, emissiveFactor);
+
+	lightInfo.lightDirectionWorld = QVector3D(lightInfo.lightDirectionV3f.v[0],lightInfo.lightDirectionV3f.v[1],lightInfo.lightDirectionV3f.v[2]);
 
 	//specular factor is calculated from other values for now
 	float specular = std::min(ambientBrightness*directionalBrightness*5.0f,1.0f);
@@ -1209,7 +1193,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     QString directionalSourceString;
 
     //GZ: this should not matter here, just to make OpenGL happy.
-    lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
+    Vec3d lightPosition = sunPosition;
     directionalSourceString="(Sun, below horiz.)";
 
     //calculate emissive factor
@@ -1253,7 +1237,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     if (sinSunAngle>0.0f)
     {
 	directionalBrightness=qMin(0.7, sqrt(sinSunAngle+0.1)); // limit to 0.7 in order to keep total below 1.
-	lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
+	lightPosition = sunPosition;
 	if (shaderParameters.shadows) shadowcaster = Sun;
 	directionalSourceString="Sun";
     }
@@ -1270,7 +1254,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	directionalBrightness = qMax(0.0f, directionalBrightness);
 	if (directionalBrightness > 0)
 	{
-	    lightsourcePosition.set(moonPosition.v[0], moonPosition.v[1], moonPosition.v[2]);
+	    lightPosition = moonPosition;
 	    if (shaderParameters.shadows) shadowcaster = Moon;
 	    directionalSourceString="Moon";
 	} else directionalSourceString="Moon";
@@ -1284,7 +1268,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	directionalBrightness = qMax(0.0f, directionalBrightness);
 	if (directionalBrightness > 0)
 	{
-	    lightsourcePosition.set(venusPosition.v[0], venusPosition.v[1], venusPosition.v[2]);
+	    lightPosition = venusPosition;
 	    if (shaderParameters.shadows) shadowcaster = Venus;
 	    directionalSourceString="Venus";
 	} else directionalSourceString="(Venus, flooded by ambient)";
@@ -1292,6 +1276,25 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	// directionalBrightness=(mag/-100)
     }
 
+    //convert to float
+    lightsourcePosition.set(lightPosition.v[0], lightPosition.v[1], lightPosition.v[2]);
+
+    float landscapeOpacity = 0.0f;
+
+    //check landscape occlusion, modify directional if needed
+    if(directionalBrightness>0)
+    {
+	    if(l)
+	    {
+		    landscapeOpacity = l->getOpacity(lightPosition);
+
+		    //lerp between the determined opacity and 1.0, depending on landscape fade (visibility)
+		    float fadeValue = 1.0f + l->getEffectiveLandFadeValue() * (-landscapeOpacity);
+		    directionalBrightness *= fadeValue;
+	    }
+    }
+
+    //TODO remove the string stuff from this method...
     // DEBUG: Prepare output message
     QString shadowCasterName;
     switch (shadowcaster) {
@@ -1306,7 +1309,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 		 .arg(shadowCasterName).arg(lightsourcePosition.v[0], 6, 'f', 4)
 		 .arg(lightsourcePosition.v[1], 6, 'f', 4).arg(lightsourcePosition.v[2], 6, 'f', 4);
     lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(sunAmbientString).arg(moonAmbientString).arg(backgroundAmbientString);
-    lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString).arg(emissiveFactor);
+    lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString).arg(emissiveFactor).arg(landscapeOpacity);
 
     return shadowcaster;
 }
@@ -1732,14 +1735,15 @@ void Scenery3d::drawDebug()
 		sceneBoundingBox.render();
 
 		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.4f,0.4f,0.4f,1.0f));
-		objModel->renderAABBs();
+		//objModel->renderAABBs();
 
 		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
 
 		if(fixShadowData)
 		{
 			camFrustShadow.drawFrustum();
-			//SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,1.0f,1.0f));
+			/*
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,1.0f,1.0f));
 			frustumArray.at(0).drawFrustum();
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.0f,1.0f,0.0f,1.0f));
 			focusBodies.at(0).render();
@@ -1749,6 +1753,7 @@ void Scenery3d::drawDebug()
 			focusBodies.at(1).render();
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,1.0f,1.0f));
 			focusBodies.at(1).debugBox.render();
+			*/
 		}
 
 		debugShader->release();
@@ -1767,6 +1772,9 @@ void Scenery3d::drawDebug()
     painter.drawText(20, 145, lightMessage2);
     painter.drawText(20, 130, lightMessage3);
     painter.drawText(20, 115, QString("Torch range %1, brightness %2/%3/%4").arg(torchRange).arg(lightInfo.torchDiffuse[0]).arg(lightInfo.torchDiffuse[1]).arg(lightInfo.torchDiffuse[2]));
+    QString str = QString("BB: %1/%2/%3 %4/%5/%6").arg(sceneBoundingBox.min.v[0], 7, 'f', 2).arg(sceneBoundingBox.min.v[1], 7, 'f', 2).arg(sceneBoundingBox.min.v[2], 7, 'f', 2)
+		    .arg(sceneBoundingBox.max.v[0], 7, 'f', 2).arg(sceneBoundingBox.max.v[1], 7, 'f', 2).arg(sceneBoundingBox.max.v[2], 7, 'f', 2);
+    painter.drawText(10, 100, str);
     // PRINT OTHER MESSAGES HERE:
 
     float screen_x = altAzProjector->getViewportWidth()  - 500.0f;
@@ -1803,7 +1811,7 @@ void Scenery3d::drawDebug()
     }
 
     screen_y -= 100.f;
-    QString str = QString("Last frame stats:");
+    str = QString("Last frame stats:");
     painter.drawText(screen_x, screen_y, str);
     screen_y -= 15.0f;
     str = QString("%1 tris, %2 mdls").arg(drawnTriangles).arg(drawnModels);
@@ -1840,7 +1848,7 @@ void Scenery3d::drawDebug()
     }
 
     screen_y -= 30.0f;
-    str = QString("Venus: %1").arg(lightInfo.shadowCaster == Venus);
+    str = QString("Venus: %1").arg(lightInfo.lightSource == Venus);
     painter.drawText(screen_x, screen_y, str);
 }
 
