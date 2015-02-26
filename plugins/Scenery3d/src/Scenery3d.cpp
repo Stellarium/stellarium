@@ -2355,7 +2355,7 @@ bool Scenery3d::initShadowmapping()
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
 #ifndef QT_OPENGL_ES
-			bool isES = QOpenGLContext::currentContext()->isOpenGLES();
+			bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
 			GLenum depthPcss = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT32F;
 			GLenum depthNormal = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT16;
 #else
