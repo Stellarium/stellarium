@@ -1716,6 +1716,8 @@ void Scenery3d::drawCoordinatesText()
 
 void Scenery3d::drawDebug()
 {
+	//frustum/box debug rendering only on desktop GL
+#ifndef QT_OPENGL_ES
 	//render debug boxes
 	QOpenGLShaderProgram* debugShader = shaderManager.getDebugShader();
 	if(debugShader)
@@ -1762,6 +1764,7 @@ void Scenery3d::drawDebug()
 	{
 		qWarning()<<"[Scenery3d] Cannot use debug shader, probably on OpenGL ES context";
 	}
+#endif
 
 
     StelPainter painter(altAzProjector);
@@ -1868,8 +1871,10 @@ void Scenery3d::init()
 	//enable seamless cubemapping if HW supports it
 	if(ctx->hasExtension("GL_ARB_seamless_cube_map"))
 	{
+#ifdef GL_TEXTURE_CUBE_MAP_SEAMLESS
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 		qDebug()<<"[Scenery3d] Seamless cubemap filtering enabled";
+#endif
 	}
 
 	//check if GS cubemapping is possible
@@ -1960,8 +1965,17 @@ bool Scenery3d::initCubemapping()
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
 
+#ifndef QT_OPENGL_ES
 	//if we are on an ES context, it may not be possible to specify texture bitdepth
 	bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
+	GLenum colorFormat = isEs ? GL_RGBA : GL_RGBA8;
+	GLenum depthFormat = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT24;
+	GLenum rbDepth = isEs ? GL_DEPTH_COMPONENT16 : GL_DEPTH_COMPONENT24;
+#else
+	GLenum colorFormat = GL_RGBA;
+	GLenum depthFormat = GL_DEPTH_COMPONENT;
+	GLenum rbDepth = GL_DEPTH_COMPONENT16;
+#endif
 
 	glActiveTexture(GL_TEXTURE0);
 
@@ -1972,14 +1986,13 @@ bool Scenery3d::initCubemapping()
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapCubeTex);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 		//create faces
 		for (int i=0;i<6;++i)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,isEs ? GL_RGBA : GL_RGBA8,
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,colorFormat,
 				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
 		}
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
@@ -1996,7 +2009,7 @@ bool Scenery3d::initCubemapping()
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-			glTexImage2D(GL_TEXTURE_2D,0,isEs ? GL_RGBA : GL_RGBA8,
+			glTexImage2D(GL_TEXTURE_2D,0,colorFormat,
 				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -2011,14 +2024,13 @@ bool Scenery3d::initCubemapping()
 		//this all has probably not much effect on depth processing because we don't intend to sample
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 		//create faces
 		for (int i=0;i<6;++i)
 		{
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT24,
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,depthFormat,
 				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,NULL);
 		}
 
@@ -2029,8 +2041,7 @@ bool Scenery3d::initCubemapping()
 		//gen renderbuffer for single-face depth, reused for all faces to save some memory
 		glGenRenderbuffers(1,&cubeRB);
 		glBindRenderbuffer(GL_RENDERBUFFER,cubeRB);
-		GLenum format = isEs ? GL_DEPTH_COMPONENT16 : GL_DEPTH_COMPONENT24;
-		glRenderbufferStorage(GL_RENDERBUFFER, format,cubemapSize,cubemapSize);
+		glRenderbufferStorage(GL_RENDERBUFFER, rbDepth, cubemapSize,cubemapSize);
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	}
 
@@ -2042,14 +2053,18 @@ bool Scenery3d::initCubemapping()
 		glGenFramebuffers(1,&cubeFBO);
 		glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
 
+#ifndef QT_OPENGL_ES
 		//attach cube tex + cube depth
 		//note that this function will be a NULL pointer if GS is not supported, so it is important to check support before using
 		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapCubeTex,0);
 		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cubeMapCubeDepth, 0);
+#endif
 
 		//check validity
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		{
 			qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, probably can't use cube map";
+		}
 		else
 			ret = true;
 	}
@@ -2256,6 +2271,11 @@ bool Scenery3d::initCubemapping()
 
 	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
 
+	if(!ret)
+	{
+		parent->showMessage("Cannot use cubemapping with current settings");
+		deleteCubemapping();
+	}
 	return ret;
 }
 
@@ -2334,35 +2354,51 @@ bool Scenery3d::initShadowmapping()
 			//Bind the depth map and setup parameters
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
+#ifndef QT_OPENGL_ES
 			bool isES = QOpenGLContext::currentContext()->isOpenGLES();
+			GLenum depthPcss = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT32F;
+			GLenum depthNormal = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT16;
+#else
+			GLenum depthPcss = GL_DEPTH_COMPONENT;
+			GLenum depthNormal = GL_DEPTH_COMPONENT;
+#endif
 			//pcss is only enabled if filtering is also enabled
 			bool pcssEnabled = shaderParameters.pcss && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW || shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH);
 
 			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
-			glTexImage2D(GL_TEXTURE_2D, 0, isES ? GL_DEPTH_COMPONENT : (pcssEnabled ? GL_DEPTH_COMPONENT32F : GL_DEPTH_COMPONENT16), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL,0);
+			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
 			GLint filter = (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH_HARDWARE) ? GL_LINEAR : GL_NEAREST;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
+#ifndef QT_OPENGL_ES
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL,0);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
+			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+#endif
 			//we use hardware-accelerated depth compare mode, unless pcss is used
 			if(!pcssEnabled)
 			{
+#ifndef QT_OPENGL_ES
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+#else
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_EXT, GL_COMPARE_REF_TO_TEXTURE_EXT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_EXT, GL_LEQUAL);
+#endif
 			}
 
-			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
-			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 			//Attach the depthmap to the Buffer
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+#ifndef QT_OPENGL_ES
 			glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
 			glReadBuffer(GL_NONE);
+#endif
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
