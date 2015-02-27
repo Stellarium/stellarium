@@ -1135,18 +1135,13 @@ void Scenery3d::calculateLighting()
 
 Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition, float &emissiveFactor)
 {
-    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-    Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(sunPosition); //: GZ: VERIFIED THE NECESSITY OF THIS. STOP: MAYBE ONLY FOR NON-ROTATED NORMALS.(20120219)
+    Vec3d sunPosition = sun->getAltAzPosAuto(core);
     sunPosition.normalize();
-    Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-    float moonPhaseAngle=ssystem->getMoon()->getPhase(core->getObserverHeliocentricEclipticPos());
-    //zRotateMatrix.transfo(moonPosition);
+    Vec3d moonPosition = moon->getAltAzPosAuto(core);
+    float moonPhaseAngle = moon->getPhase(core->getObserverHeliocentricEclipticPos());
     moonPosition.normalize();
-    PlanetP venus=ssystem->searchByEnglishName("Venus");
     Vec3d venusPosition = venus->getAltAzPosAuto(core);
-    float venusPhaseAngle=venus->getPhase(core->getObserverHeliocentricEclipticPos());
-    //zRotateMatrix.transfo(venusPosition);
+    float venusPhaseAngle = venus->getPhase(core->getObserverHeliocentricEclipticPos());
     venusPosition.normalize();
 
     // The light model here: ambient light consists of solar twilight and day ambient,
@@ -1220,8 +1215,8 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 
     if(sinSunAngle > -0.3f) // sun above -18 deg?
     {
-	ambientBrightness += qMin(0.3, sinSunAngle+0.3);
-	sunAmbientString=QString("%1").arg(qMin(0.3, sinSunAngle+0.3), 6, 'f', 4);
+	ambientBrightness += qMin(0.3f, sinSunAngle+0.3f);
+	sunAmbientString=QString("%1").arg(qMin(0.3f, sinSunAngle+0.3f), 6, 'f', 4);
     }
     else
 	sunAmbientString=QString("0.0");
@@ -1233,11 +1228,13 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     }
     else
 	moonAmbientString=QString("0.0");
-    // Now find shadow caster, if any:
-    if (sinSunAngle>0.0f)
+
+    // Now find shadow caster + directional light, if any:
+    if (sinSunAngle>-0.1f)
     {
-	directionalBrightness=qMin(0.7, sqrt(sinSunAngle+0.1)); // limit to 0.7 in order to keep total below 1.
-	lightPosition = sunPosition;
+	directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f)); // limit to 0.7 in order to keep total below 1.
+	//redundant
+	//lightPosition = sunPosition;
 	if (shaderParameters.shadows) shadowcaster = Sun;
 	directionalSourceString="Sun";
     }
@@ -1247,33 +1244,72 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sinSunAngle+0.3);
 	directionalSourceString="(Sun, below hor.)";
     }*/
-    else if (sinMoonAngle>0.0f)
+    if (sinMoonAngle>0.0f)
     {
-	directionalBrightness= sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1)/2) * LUNAR_BRIGHTNESS_FACTOR;
-	directionalBrightness -= (ambientBrightness-0.05)/2.0f;
-	directionalBrightness = qMax(0.0f, directionalBrightness);
-	if (directionalBrightness > 0)
-	{
-	    lightPosition = moonPosition;
-	    if (shaderParameters.shadows) shadowcaster = Moon;
-	    directionalSourceString="Moon";
-	} else directionalSourceString="Moon";
-	//Alternately, construct a term around lunar brightness, like
-	// directionalBrightness=(mag/-10)
+	    float moonBrightness = std::sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1.0f)/2.0f) * LUNAR_BRIGHTNESS_FACTOR;
+	    moonBrightness -= (ambientBrightness-0.05f)/2.0f;
+	    moonBrightness = qMax(0.0f,moonBrightness);
+	    if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
+	    {
+		    //interpolate directional brightness between sun and moon
+		    float t = sinSunAngle/-0.1f;
+		    directionalBrightness = (1.0f-t) * directionalBrightness + t*moonBrightness;
+		    /*
+		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
+		    //but that does not seem to have much of an effect
+		    if(moonBrightness>0)
+		    {
+			    lightPosition = (1.0-t) * sunPosition + (double)t * moonPosition;
+			    lightPosition.normalize();
+		    }
+		    */
+	    }
+	    else if (moonBrightness >0)
+	    {
+		    directionalBrightness = moonBrightness;
+		    lightPosition = moonPosition;
+		    if (shaderParameters.shadows) shadowcaster = Moon;
+		    directionalSourceString="Moon";
+	    } else directionalSourceString="Moon";
+	    //Alternately, construct a term around lunar brightness, like
+	    // directionalBrightness=(mag/-10)
     }
     else if (sinVenusAngle>0.0f)
     {
-	directionalBrightness=sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
-	directionalBrightness -= (ambientBrightness-0.05)/2.0f;
-	directionalBrightness = qMax(0.0f, directionalBrightness);
-	if (directionalBrightness > 0)
-	{
-	    lightPosition = venusPosition;
-	    if (shaderParameters.shadows) shadowcaster = Venus;
-	    directionalSourceString="Venus";
-	} else directionalSourceString="(Venus, flooded by ambient)";
-	//Alternately, construct a term around Venus brightness, like
-	// directionalBrightness=(mag/-100)
+	    float venusBrightness = std::sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
+	    venusBrightness -= (ambientBrightness-0.05)/2.0f;
+	    venusBrightness = qMax(0.0f, venusBrightness);
+
+	    if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
+	    {
+		    //interpolate directional brightness between sun and venus
+		    float t = sinSunAngle/-0.1f;
+		    directionalBrightness = (1.0f-t) * directionalBrightness + t*venusBrightness;
+		    /*
+		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
+		    //but that does not seem to have much of an effect
+		    if(venusBrightness>0)
+		    {
+			    lightPosition = (1.0-t) * sunPosition + (double)t * venusPosition;
+			    lightPosition.normalize();
+		    }
+		    */
+	    }
+	    else if (venusBrightness > 0)
+	    {
+		    directionalBrightness = venusBrightness;
+		    lightPosition = venusPosition;
+		    if (shaderParameters.shadows) shadowcaster = Venus;
+		    directionalSourceString="Venus";
+	    } else directionalSourceString="(Venus, flooded by ambient)";
+	    //Alternately, construct a term around Venus brightness, like
+	    // directionalBrightness=(mag/-100)
+    }
+    else if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
+    {
+	    //let sunlight fall off to zero
+	    float t = sinSunAngle/-0.1f;
+	    directionalBrightness = (1.0f - t) * directionalBrightness;
     }
 
     //convert to float
@@ -1286,6 +1322,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     {
 	    if(l)
 	    {
+		    //TODO the changes are currently rather harsh, find a better method (like angular distance of light source to horizon, or bitmap interpolation for the alpha values)
 		    landscapeOpacity = l->getOpacity(lightPosition);
 
 		    //lerp between the determined opacity and 1.0, depending on landscape fade (visibility)
@@ -1888,6 +1925,11 @@ void Scenery3d::init()
 
 	//finally, set core to enable update().
 	this->core=StelApp::getInstance().getCore();
+	//init planets
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	sun = ssystem->getSun();
+	moon = ssystem->getMoon();
+	venus = ssystem->searchByEnglishName("Venus");
 	landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	Q_ASSERT(landscapeMgr);
 }

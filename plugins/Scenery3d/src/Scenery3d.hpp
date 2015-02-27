@@ -25,6 +25,7 @@
 #include "StelModule.hpp"
 #include "StelPainter.hpp"
 #include "Landscape.hpp"
+#include "SolarSystem.hpp"
 
 #include "OBJ.hpp"
 #include "Heightmap.hpp"
@@ -148,6 +149,7 @@ private:
     Scenery3dMgr* parent;
     SceneInfo currentScene,loadingScene;
     ShaderMgr shaderManager;
+    PlanetP sun,moon,venus;
 
     float torchBrightness; // ^L toggle light brightness
     float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/
