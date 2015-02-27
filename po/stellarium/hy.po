@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-25 11:14+0600\n"
-"PO-Revision-Date: 2015-02-25 18:06+0000\n"
+"PO-Revision-Date: 2015-02-26 18:17+0000\n"
 "Last-Translator: Serj Safarian <serjsafarian@gmail.com>\n"
 "Language-Team: Armenian <hy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-26 05:11+0000\n"
+"X-Launchpad-Export-Date: 2015-02-27 05:11+0000\n"
 "X-Generator: Launchpad (build 17361)\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
@@ -101,7 +101,7 @@ msgstr "Հասարակած"
 
 #: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1322
 msgid "Horizon"
-msgstr ""
+msgstr "Հորիզոն"
 
 #: src/core/modules/GridLinesMgr.cpp:603
 msgid "Galactic Equator"
@@ -140,7 +140,7 @@ msgstr "Միջօրեականի գիծը"
 #: src/core/modules/GridLinesMgr.cpp:760
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Horizon line"
-msgstr ""
+msgstr "Հորիզոնի գիծը"
 
 #: src/core/modules/GridLinesMgr.cpp:761
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
@@ -220,7 +220,7 @@ msgstr "Տեսակ՝ <b>%1</b>"
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Աստղային մեծություն՝ <b>%1</b> (թուլացած է մինչեւ՝ <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:171
@@ -268,11 +268,11 @@ msgstr "Մոլորակային միգամածություն"
 
 #: src/core/modules/Nebula.cpp:401
 msgid "Dark nebula"
-msgstr ""
+msgstr "Մութ միգամածություն"
 
 #: src/core/modules/Nebula.cpp:404
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Անկանոն գալակտիկա"
 
 #: src/core/modules/Nebula.cpp:407
 msgid "Cluster associated with nebulosity"
@@ -288,7 +288,7 @@ msgstr "Չփաստագրված տեսակ"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Խոր տիեզերքի օբյեկտներ"
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:180
@@ -426,7 +426,7 @@ msgstr "Մոլորակներ"
 #: src/core/modules/SolarSystem.cpp:175
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
-msgstr ""
+msgstr "Մոլորակների անվանումները"
 
 #: src/core/modules/SolarSystem.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
@@ -442,7 +442,7 @@ msgstr "Մոլորակների հետքերը"
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:171
 #: src/translations.h:42
 msgid "star"
-msgstr ""
+msgstr "աստղ"
 
 #: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:199
 #: plugins/Quasars/src/Quasar.cpp:119
@@ -481,7 +481,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:176
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Տեսակ՝ <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:215
 #, qt-format
@@ -543,7 +543,7 @@ msgstr ""
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Կենդանակերպի լույսը"
 
 #: src/core/StelApp.cpp:478
 msgid "Night mode"
@@ -605,7 +605,7 @@ msgstr "Հանել 1 արեւային ժամ"
 
 #: src/core/StelCore.cpp:205
 msgid "Subtract 1 solar day"
-msgstr "Ավելացնել 1 արեւային օր"
+msgstr "Հանել 1 արեւային օր"
 
 #: src/core/StelCore.cpp:206
 msgid "Subtract 1 solar week"
@@ -621,19 +621,19 @@ msgstr "Ավելացնել 1 աստղային շաբաթ"
 
 #: src/core/StelCore.cpp:209
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Ավելացնել 1 աստղային ամիս"
 
 #: src/core/StelCore.cpp:210
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Ավելացնել 1 աստղային տարի"
 
 #: src/core/StelCore.cpp:211
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Ավելացնել 1 աստղային դար"
 
 #: src/core/StelCore.cpp:212
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Ավելացնել 1 լուսնային ամիս"
 
 #: src/core/StelCore.cpp:213
 msgid "Add 1 draconic month"
@@ -681,7 +681,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "Հանել 1 լուսնային ամիս"
 
 #: src/core/StelCore.cpp:225
 msgid "Subtract 1 draconic month"
@@ -713,7 +713,7 @@ msgstr "Կայել ընտրված մոլորակն որպես տնային"
 
 #: src/core/StelCore.cpp:233
 msgid "Go to home"
-msgstr ""
+msgstr "Դեպի  տուն"
 
 #: src/core/StelCore.cpp:234
 msgid "Flip scene horizontally"
@@ -1172,7 +1172,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:485
 msgid "Select screenshot directory"
-msgstr "Պանակ ընտրե՛ք ցուցադրիչի լուսանկարի համար"
+msgstr "Պանակ ընտրեք սքրինշոթի համար"
 
 #: src/gui/ConfigurationDialog.cpp:728
 #, qt-format
@@ -1251,7 +1251,7 @@ msgstr ""
 #: src/gui/ConfigurationDialog.cpp:992
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "%2֊ից՝ %1 գրացուցակի ընդունում"
+msgstr "Ներբեռնել  %1֊րդ աստղացանկը %2֊ից"
 
 #: src/gui/ConfigurationDialog.cpp:999
 #, qt-format
@@ -1498,7 +1498,7 @@ msgid ""
 "contributed landscapes and scripts here."
 msgstr ""
 "{Վիքի Stellarium}. ընդհանուր տեղեկատվություն։ Այստեղ նաեւ կարելի է գտնել "
-"օգտվողային բնապատկերներ եւ գրվածքներ։"
+"օգտվողային բնապատկերներ եւ սցենարներ։"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:226
@@ -1506,8 +1506,8 @@ msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr ""
-"{Աջակցության ծառայություն}. եթե Դուք օգնության կարիք ունեք, ապա գրե՛ք մեզ, "
-"եւ մենք կփորձենք օգնել։"
+"{Աջակցության ծառայություն}. եթե Դուք օգնության կարիք ունեք, ապա գրեք մեզ, եւ "
+"մենք կփորձենք օգնել։"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:231
@@ -1991,7 +1991,7 @@ msgstr ""
 
 #: src/StelMainView.cpp:442
 msgid "Save screenshot"
-msgstr "Պահել ցուցադրիչի լուսանկարը"
+msgstr "Պահել սքրինշոթը"
 
 #: src/StelMainView.cpp:443
 msgid "Full-screen mode"
@@ -2075,7 +2075,7 @@ msgstr ""
 #. TRANSLATORS: Type of object
 #: src/translations.h:50
 msgid "moon"
-msgstr ""
+msgstr "լուսին"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
@@ -4264,15 +4264,15 @@ msgstr "Կազմաձեւեր"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Language settings"
-msgstr ""
+msgstr "Լեզվային կայանքներ"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Program Language"
-msgstr ""
+msgstr "Ծրագրի լեզու"
 
 #: src/ui_configurationDialog.h:1021
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "Երկնային օբյեկտների անվանումների լեզու"
 
 #: src/ui_configurationDialog.h:1022
 msgid "Default options"
@@ -4294,7 +4294,7 @@ msgstr "Հիշել կայանքները"
 
 #: src/ui_configurationDialog.h:1028
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Վերականգնել հիմնօրինակային կայանքները"
+msgstr "Վերականգնել լռելյայն կայանքները"
 
 #: src/ui_configurationDialog.h:1030 plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
@@ -4309,7 +4309,7 @@ msgid ""
 "next startup."
 msgstr ""
 "Լռելյայն կայանքների վերականգնումը պահանջում է վերագործարկել Stellarium֊ը։ "
-"Բոլոր ընթացիկ ընտրանքների պահպանում, ներառյալ տեսադաշտը եւ դիտման "
+"Պահպանեք բոլոր ընթացիկ ընտրանքները, ներառյալ տեսադաշտը եւ դիտման "
 "ուղղությունը։"
 
 #: src/ui_configurationDialog.h:1033
@@ -4322,7 +4322,7 @@ msgstr "Հայացքի ուղղությունը՝ Stellarium֊ը գործարկ�
 
 #: src/ui_configurationDialog.h:1038 src/ui_configurationDialog.h:1209
 msgid "Selected object information"
-msgstr "Տեղեկություն ընտրված առարկայի մասին"
+msgstr "Տեղեկություն ընտրված օբյեկտի մասին"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Display all information available"
@@ -4330,7 +4330,7 @@ msgstr "Ցույց տալ ամբողջ տեղեկությունը"
 
 #: src/ui_configurationDialog.h:1042
 msgid "All available"
-msgstr "Բոլոր մատչելի"
+msgstr "Ամբողջ"
 
 #: src/ui_configurationDialog.h:1044
 msgid "Display no information"
@@ -4339,7 +4339,7 @@ msgstr "Ցուց չտալ տեղեկությունը"
 #: src/ui_configurationDialog.h:1046 plugins/Oculars/src/Oculars.cpp:1953
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
-msgstr "Ոչ մեկը"
+msgstr "Ոչ մի"
 
 #: src/ui_configurationDialog.h:1048
 msgid "Display less information"
@@ -4351,29 +4351,29 @@ msgstr "Կարճ"
 
 #: src/ui_configurationDialog.h:1052
 msgid "Display user settings information"
-msgstr ""
+msgstr "Ցուցադրել օգտվողի ընտրած տեղեկությունները"
 
 #: src/ui_configurationDialog.h:1054
 msgid "Customized"
-msgstr ""
+msgstr "Ընտրովի"
 
 #: src/ui_configurationDialog.h:1055
 msgid "Displayed fields"
-msgstr ""
+msgstr "Ցուցադրվող տվյալներ"
 
 #: src/ui_configurationDialog.h:1056
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:180
 msgid "Name"
-msgstr ""
+msgstr "Անվանում"
 
 #: src/ui_configurationDialog.h:1058
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Երկրակենտրոն հասարակածային կոորդինատներ, գիշերահավասարի օրեր"
 
 #: src/ui_configurationDialog.h:1060
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Ուղիղ ծագում/Թեքում (ամսաթվով)"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Catalog number(s)"
@@ -4405,7 +4405,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1072
 msgid "Size"
-msgstr ""
+msgstr "Չափը"
 
 #: src/ui_configurationDialog.h:1074
 msgid "The type of the object (star, planet, etc.)"
@@ -4620,11 +4620,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1170
 msgid "Screenshots"
-msgstr "Ցուցադրիչի նկարները"
+msgstr "Սքրինշոթներ"
 
 #: src/ui_configurationDialog.h:1171
 msgid "Screenshot Directory"
-msgstr "Ցուցադրիչի նկարների պանակը"
+msgstr "Սքրինշոթների պանակ՝"
 
 #: src/ui_configurationDialog.h:1173
 msgid "Invert colors"
@@ -4632,7 +4632,7 @@ msgstr "Հակադարձել գույները"
 
 #: src/ui_configurationDialog.h:1174
 msgid "Star catalog updates"
-msgstr "Աստղերի գրացուցակի թարմացում"
+msgstr "Աստղացանկի թարմացում"
 
 #: src/ui_configurationDialog.h:1176
 msgid "Click here to start downloading"
@@ -4640,7 +4640,7 @@ msgstr "Ներբեռնելու համար կտտացրեք այստեղ"
 
 #: src/ui_configurationDialog.h:1178
 msgid "Download this file to view even more stars"
-msgstr "Ներբեռնե՛ք այս նշոցը, որպեսզի տեսնել ավելի շատ աստղեր"
+msgstr "Ներբեռնեք այս նշոցը, որպեսզի տեսնել ավելի շատ աստղեր"
 
 #: src/ui_configurationDialog.h:1180
 msgid "Restart the download"
@@ -4693,7 +4693,7 @@ msgstr "Գործիքներ"
 #: src/ui_configurationDialog.h:1216
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:466
 msgid "Scripts"
-msgstr "Գրվածքներ"
+msgstr "Սցենարներ"
 
 #: src/ui_configurationDialog.h:1218
 msgid "Plugins"
@@ -6104,7 +6104,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
-msgstr ""
+msgstr "Թարմացումներ"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
@@ -10044,3 +10044,14 @@ msgstr ""
 
 #~ msgid "Form"
 #~ msgstr "Ձեւ"
+
+#~ msgid "Check updates"
+#~ msgstr "Ստուգել թարմացումները"
+
+#~ msgid ""
+#~ "Enable checking updates of Stellarium via Internet. Info for updates of "
+#~ "stable versions you can look on the tab \"About\" of \"Help\" window."
+#~ msgstr ""
+#~ "Միացնել Stellarium֊ի թարմացումների որոնումը համացանցի միջոցով։ Կայուն "
+#~ "տարբերակների թարմացումների մասին տեղեկությունները կարելի է տեսնել «Օգնության "
+#~ "պատուհանի» «Նկարագիր» ներդիրում։"
