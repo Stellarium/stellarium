@@ -575,6 +575,15 @@ namespace StelUtils
 	//! @return Delta-T in seconds
 	double getDeltaTByIslamSadiqQureshi(const double jDay);
 
+	//! Get Delta-T estimation for a given date.
+	//! Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+	//! Source: Delta T: Polynomial Approximation of Time Period 1620-2013
+	//! Journal of Astrophysics, Vol. 2014, Article ID 480964
+	//! http://dx.doi.org/10.1155/2014/480964
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByKhalidSultanaZaidi(const double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
 	//! For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
