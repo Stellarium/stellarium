@@ -48,6 +48,7 @@
 #include "StelFileMgr.hpp"
 #include "StelTextureMgr.hpp"
 
+#include <QElapsedTimer>
 #include <QOpenGLVertexArrayObject>
 
 #include <algorithm>
@@ -184,6 +185,9 @@ void OBJ::clean()
 
 bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebuildNormals)
 {
+	QElapsedTimer timer;
+	timer.start();
+
     QFile qtFile(filename);
     if(!qtFile.open(QIODevice::ReadOnly))
 	return false;
@@ -198,6 +202,8 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     importFirstPass(qtFile,materialCache);
     qtFile.close();
 
+    qint64 firstPassTime = timer.restart();
+
     //TODO make the second pass support Qt IO (unicode file handling, etc.)
     QByteArray ba = filename.toLocal8Bit();
     FILE* pFile = fopen(ba.constData(), "r");
@@ -206,9 +212,13 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     //Done parsing, close file
     fclose(pFile);
 
+    qint64 secondPassTime = timer.restart();
+
 
     //Find bounding extrema
     findBounds();
+
+    qint64 boundTime = timer.restart();
 
     //Create vertex normals if specified or required
     if(rebuildNormals)
@@ -224,16 +234,21 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     //Create tangents
     generateTangents();
 
+    qint64 normalTime = timer.elapsed();
+
     //Loaded
-    qDebug() << getTime() << "[Scenery3d] Loaded OBJ successfully: " << filename;
-    qDebug() << getTime() << "[Scenery3d] Triangles#: " << m_numberOfTriangles;
-    qDebug() << getTime() << "[Scenery3d] Vertices#: " << m_numberOfVertexCoords<<" unique / "<< m_vertexArray.size()<<" total";
-    qDebug() << getTime() << "[Scenery3d] Normals#: " << m_numberOfNormals;
-    qDebug() << getTime() << "[Scenery3d] StelModels#: " << m_numberOfStelModels;
-    qDebug() << getTime() << "[Scenery3d] Bounding Box";
-    qDebug() << getTime() << "[Scenery3d] X: [" << pBoundingBox.min[0] << ", " << pBoundingBox.max[0] << "] ";
-    qDebug() << getTime() << "[Scenery3d] Y: [" << pBoundingBox.min[1] << ", " << pBoundingBox.max[1] << "] ";
-    qDebug() << getTime() << "[Scenery3d] Z: [" << pBoundingBox.min[2] << ", " << pBoundingBox.max[2] << "] ";
+    qDebug() << "[Scenery3d] Loaded OBJ successfully: " << filename;
+    qDebug() << "[Scenery3d] Triangles#: " << m_numberOfTriangles;
+    qDebug() << "[Scenery3d] Vertices#: " << m_numberOfVertexCoords<<" unique / "<< m_vertexArray.size()<<" total";
+    qDebug() << "[Scenery3d] Normals#: " << m_numberOfNormals;
+    qDebug() << "[Scenery3d] StelModels#: " << m_numberOfStelModels;
+    qDebug() << "[Scenery3d] Bounding Box";
+    qDebug() << "[Scenery3d] X: [" << pBoundingBox.min[0] << ", " << pBoundingBox.max[0] << "] ";
+    qDebug() << "[Scenery3d] Y: [" << pBoundingBox.min[1] << ", " << pBoundingBox.max[1] << "] ";
+    qDebug() << "[Scenery3d] Z: [" << pBoundingBox.min[2] << ", " << pBoundingBox.max[2] << "] ";
+    qint64 total = firstPassTime + secondPassTime + normalTime + boundTime;
+    qDebug() << "[Scenery3d] Required Time: Total-"<<total<<"ms ("<< (total / 1000.0f) <<"s) FP-" << firstPassTime << "ms, SP-" << secondPassTime
+	     << "ms, BB-"<<boundTime<<"ms, N-"<<normalTime<<"ms";
 
     m_loaded = true;
     return true;
@@ -1361,7 +1376,7 @@ bool zSortFunction(const OBJ::StelModel& mLeft, const OBJ::StelModel& mRight)
 	return dist1>dist2;
 }
 
-void OBJ::transparencyDepthSort(const Vec3f position)
+void OBJ::transparencyDepthSort(const Vec3f &position)
 {
 	if(m_firstTransparentIndex>=0)
 	{
@@ -1397,7 +1412,7 @@ void OBJ::uploadTexturesGL()
 	    }
 	    else
 	    {
-		qWarning() << getTime() << "[Scenery3d] Failed to load Texture:" << pMaterial->textureName;
+		qWarning() << "[Scenery3d] Failed to load Texture:" << pMaterial->textureName;
 	    }
 	}
 
@@ -1410,7 +1425,7 @@ void OBJ::uploadTexturesGL()
 		}
 		else
 		{
-		    qWarning() << getTime() << "[Scenery3d] Failed to load emissive texture:" << pMaterial->emissiveMapName;
+		    qWarning() << "[Scenery3d] Failed to load emissive texture:" << pMaterial->emissiveMapName;
 		}
 	}
 
@@ -1424,7 +1439,7 @@ void OBJ::uploadTexturesGL()
 	    }
 	    else
 	    {
-		qWarning() << getTime() << "[Scenery3d] Failed to load Normal Map:" << pMaterial->bumpMapName;
+		qWarning() << "[Scenery3d] Failed to load Normal Map:" << pMaterial->bumpMapName;
 	    }
 	}
 
@@ -1438,7 +1453,7 @@ void OBJ::uploadTexturesGL()
 	    }
 	    else
 	    {
-		qWarning() << getTime() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName;
+		qWarning() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName;
 	    }
 	}
 

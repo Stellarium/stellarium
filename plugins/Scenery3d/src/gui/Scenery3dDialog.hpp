@@ -36,6 +36,7 @@ private slots:
 	void updateTorchRange(float val);
 	void updateLazyDrawingInterval(float val);
 	void updateShadowFilterQuality(S3DEnum::ShadowFilterQuality quality);
+	void updateShadowCheckbox();
 
 	void updateCurrentScene(const SceneInfo& sceneInfo);
 

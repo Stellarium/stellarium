@@ -110,7 +110,6 @@ public:
     //! Changes cubemapping mode and forces re-initialization on next draw call.
     //! Note that NO CHECKING is done if the chosen mode is supported on this hardware, you have to make sure before calling this.
     void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true; }
-    bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
 
     void setUseFullCubemapShadows(bool val) { fullCubemapShadows = val; invalidateCubemap();}
     bool getUseFullCubemapShadows() const { return fullCubemapShadows; }
@@ -145,11 +144,19 @@ public:
     //! Loads the model into GL and sets the loaded scene to be the current one
     void finalizeLoad();
 
+    bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
+    bool areShadowsSupported() { return supportsShadows; }
+    bool isShadowFilteringSupported() { return supportsShadowFiltering; }
+
 private:
     Scenery3dMgr* parent;
     SceneInfo currentScene,loadingScene;
     ShaderMgr shaderManager;
     PlanetP sun,moon,venus;
+
+    bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
+    bool supportsShadows; //if shadows are supported
+    bool supportsShadowFiltering; //if shadow filtering is supported
 
     float torchBrightness; // ^L toggle light brightness
     float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/
@@ -157,7 +164,6 @@ private:
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
     bool fixShadowData; //for debugging, fixes all shadow mapping related data (shadowmap contents, matrices, frustums, focus bodies...) at their current values
-    bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
     bool simpleShadows;
     bool fullCubemapShadows;
     S3DEnum::CubemappingMode cubemappingMode;
@@ -279,6 +285,8 @@ private:
     QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
 
     // --- initialization
+    //! Determines what features the current opengl context supports
+    void determineFeatureSupport();
     //! Initializes cubemapping to the currently set parameters (6tex/cubemap/GS approaches)
     bool initCubemapping();
     //! Cleans up cubemapping related objects

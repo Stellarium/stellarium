@@ -161,10 +161,21 @@ void Scenery3dMgr::init()
 
 	//Initialize Shadow Mapping
 	qWarning() << "init scenery3d object.";
-	scenery3d->init();
-	qWarning() << "init scenery3d object...done\n";
+	scenery3d->init(); //this also finds out what features are supported
+	qWarning() << "init scenery3d object...done";
+
+	//make sure shadows are off if unsupported
+	if(! scenery3d->areShadowsSupported())
+		setEnableShadows(false);
+	if(! scenery3d->isShadowFilteringSupported())
+	{
+		setShadowFilterQuality(S3DEnum::SFQ_OFF);
+		setEnablePCSS(false);
+	}
 
 	emit isGeometryShaderSupportedChanged(getIsGeometryShaderSupported());
+	emit areShadowsSupportedChanged(getAreShadowsSupported());
+	emit isShadowFilteringSupportedChanged(getIsShadowFilteringSupported());
 
 	// Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
 	try
@@ -795,6 +806,16 @@ void Scenery3dMgr::setShadowmapSize(const uint val)
 bool Scenery3dMgr::getIsGeometryShaderSupported() const
 {
 	return scenery3d->isGeometryShaderCubemapSupported();
+}
+
+bool Scenery3dMgr::getAreShadowsSupported() const
+{
+	return scenery3d->areShadowsSupported();
+}
+
+bool Scenery3dMgr::getIsShadowFilteringSupported() const
+{
+	return scenery3d->isShadowFilteringSupported();
 }
 
 void Scenery3dMgr::setView(const StoredView &view)
