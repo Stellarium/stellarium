@@ -69,9 +69,12 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(double lazyDrawingInterval READ getLazyDrawingInterval WRITE setLazyDrawingInterval NOTIFY lazyDrawingIntervalChanged)
 	Q_PROPERTY(bool onlyDominantFaceWhenMoving READ getOnlyDominantFaceWhenMoving WRITE setOnlyDominantFaceWhenMoving NOTIFY onlyDominantFaceWhenMovingChanged)
 	Q_PROPERTY(bool secondDominantFaceWhenMoving READ getSecondDominantFaceWhenMoving WRITE setSecondDominantFaceWhenMoving NOTIFY secondDominantFaceWhenMovingChanged)
-	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
 	Q_PROPERTY(uint cubemapSize READ getCubemapSize WRITE setCubemapSize NOTIFY cubemapSizeChanged)
 	Q_PROPERTY(uint shadowmapSize READ getShadowmapSize WRITE setShadowmapSize NOTIFY shadowmapSizeChanged)
+
+	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
+	Q_PROPERTY(bool areShadowsSupported READ getAreShadowsSupported NOTIFY areShadowsSupportedChanged)
+	Q_PROPERTY(bool isShadowFilteringSupported READ getIsShadowFilteringSupported NOTIFY isShadowFilteringSupportedChanged)
 
 public:
     Scenery3dMgr();
@@ -107,9 +110,12 @@ signals:
     void lazyDrawingIntervalChanged(const double val);
     void onlyDominantFaceWhenMovingChanged(const bool val);
     void secondDominantFaceWhenMovingChanged(const bool val);
-    void isGeometryShaderSupportedChanged(const bool val);
     void cubemapSizeChanged(const uint val);
     void shadowmapSizeChanged(const uint val);
+
+    void isGeometryShaderSupportedChanged(const bool val);
+    void areShadowsSupportedChanged(const bool val);
+    void isShadowFilteringSupportedChanged(const bool val);
 
     void currentSceneChanged(const SceneInfo& sceneInfo);
 
@@ -212,6 +218,8 @@ public slots:
     uint getShadowmapSize() const;
 
     bool getIsGeometryShaderSupported() const;
+    bool getAreShadowsSupported() const;
+    bool getIsShadowFilteringSupported() const;
 
     //! Gets the SceneInfo of the scene that is currently being displayed.
     //! Check SceneInfo::isValid to determine if a scene is displayed.

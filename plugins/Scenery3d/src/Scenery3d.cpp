@@ -93,7 +93,10 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	Q_ASSERT(cubeSideFBO[0]==0);
 
 	supportsGSCubemapping = false;
-	cubemappingMode = S3DEnum::CM_CUBEMAP;
+	supportsShadows = false;
+	supportsShadowFiltering = false;
+
+	cubemappingMode = S3DEnum::CM_TEXTURES; //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
 	reinitCubemapping = true;
 	cubemappingUsedLastFrame = false;
 
@@ -1892,6 +1895,52 @@ void Scenery3d::drawDebug()
     painter.drawText(screen_x, screen_y, str);
 }
 
+void Scenery3d::determineFeatureSupport()
+{
+	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+
+	//check if GS cubemapping is possible
+	if(QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry,ctx)) //this checks if version >= 3.2
+	{
+		this->supportsGSCubemapping = true;
+		qDebug()<<"[Scenery3d] Geometry shader supported";
+	}
+	else
+		qDebug()<<"[Scenery3d] Geometry shader not supported on this hardware";
+
+	if(shaderParameters.openglES)
+	{
+		//IMPORTANT: the shader would require a #extension GL_EXT_shadow_samplers definition, but adding this causes a compile error on ANGLE
+		//caused by the interaction of Qt with the ANGLE bug 837 (https://code.google.com/p/angleproject/issues/detail?id=837)
+		//for now, shadows are disabled for ALL ES2 versions, even though they could probably run on some modern non-ANGLE ES2 platforms!
+		supportsShadows = false;
+		qDebug()<<"[Scenery3d] Shadows are not supported on this hardware";
+
+		/*
+		//shadows in our implementation require 2 extensions
+		if(ctx->hasExtension("GL_OES_depth_texture") &&
+			ctx->hasExtension("GL_EXT_shadow_samplers"))
+		{
+			supportsShadows = true;
+			qDebug()<<"[Scenery3d] Shadows are supported";
+		}
+		else
+		{
+			supportsShadows = false;
+			qDebug()<<"[Scenery3d] Shadows are not supported on this hardware";
+		}
+		*/
+		//shadow filtering is completely disabled for now on ES
+		supportsShadowFiltering = false;
+	}
+	else
+	{
+		//assume everything is available on Desktop GL for now (should be ok on GL>2.0 as Stellarium base requires)
+		supportsShadows = true;
+		supportsShadowFiltering = true;
+	}
+}
+
 void Scenery3d::init()
 {
 	OBJ::setupGL();
@@ -1899,6 +1948,12 @@ void Scenery3d::init()
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
 	//initialize additional functions needed and not provided through StelOpenGL
 	glExtFuncs.init(ctx);
+
+	//save opengl ES state
+	shaderParameters.openglES = ctx->isOpenGLES();
+
+	//find out what features we can enable
+	determineFeatureSupport();
 
 	cubeVertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 	cubeVertexBuffer.create();
@@ -1914,12 +1969,6 @@ void Scenery3d::init()
 #endif
 	}
 
-	//check if GS cubemapping is possible
-	if(QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry,ctx)) //this checks if version >= 3.2
-	{
-		this->supportsGSCubemapping = true;
-		qDebug()<<"[Scenery3d] Geometry shader supported";
-	}
 
 	//shadow map init happens on first usage of shadows
 
@@ -2354,6 +2403,12 @@ bool Scenery3d::initShadowmapping()
 	{
 		//TODO support changing this option by the user and/or the scene?
 		shaderParameters.frustumSplits = 4;
+	}
+
+	if(!areShadowsSupported())
+	{
+		qWarning()<<"[Scenery3d] Tried to initialize shadows without shadow support!";
+		return false;
 	}
 
 	if(shadowmapSize>0)

@@ -181,7 +181,7 @@ public:
 
     //! Sorts the transparent StelModels according to their distance to the specified position.
     //! They are sorted so that they can be drawn back-to-front.
-    void transparencyDepthSort(const Vec3f position);
+    void transparencyDepthSort(const Vec3f& position);
 
     //! Getters for various datastructures
     int getNumberOfIndices() const;
