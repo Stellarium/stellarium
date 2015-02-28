@@ -100,6 +100,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["DEBUG"] = DEBUG;
 		featureFlagsStrings["PCSS"] = PCSS;
 		featureFlagsStrings["SINGLE_SHADOW_FRUSTUM"] = SINGLE_SHADOW_FRUSTUM;
+		featureFlagsStrings["OGL_ES2"] = OGL_ES2;
 	}
 }
 
@@ -241,7 +242,12 @@ QString ShaderMgr::getFShaderName(uint flags)
 		if (! (flags & PIXEL_LIGHTING ))
 			return "s3d_vertexlit.frag";
 		else
-			return "s3d_pixellit.frag";
+		{
+			if(flags & OGL_ES2)
+				return "s3d_pixellit_es.frag"; //for various reasons, ES version is separate
+			else
+				return "s3d_pixellit.frag";
+		}
 	}
 	else if (flags & CUBEMAP)
 	{

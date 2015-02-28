@@ -68,18 +68,6 @@ unsigned int parseInt(const string& str)
     return i;
 }
 
-void makeNormalMatrix(std::vector<float> &mat)
-{
-
-}
-
-const char* getTime()
-{
-    QByteArray byteArray = QDateTime::currentDateTime().toString(Qt::ISODate).toUtf8();
-    const char* cString = byteArray.constData();
-    return cString;
-}
-
 void parseTextureString(std::string in, std::string &out)
 {
     //Copy in into out

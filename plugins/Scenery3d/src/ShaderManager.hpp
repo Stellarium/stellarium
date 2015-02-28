@@ -31,6 +31,7 @@ class QOpenGLShaderProgram;
 //! A structure for global shader parameters
 struct GlobalShaderParameters
 {
+	bool openglES; //true if we work with an OGL ES2 context, may have to adapt shaders
 	bool shadowTransform;
 	bool pixelLighting;
 	bool bump;
@@ -196,6 +197,8 @@ private:
 		PCSS		= (1<<17),
 		//only a single shadow frustum is used
 		SINGLE_SHADOW_FRUSTUM  = (1<<18),
+		//set if opengl es2
+		OGL_ES2 = (1<<19),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
@@ -227,9 +230,10 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
 
 	uint flags = INVALID;
+	if(globals.openglES) flags|=OGL_ES2;
 	if(!globals.shadowTransform)
 	{
-		flags = SHADING;
+		flags |= SHADING;
 		if(globals.pixelLighting)            flags|= PIXEL_LIGHTING;
 		if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
 		if(globals.pixelLighting && globals.shadows && globals.shadowFilterQuality>S3DEnum::SFQ_HARDWARE) flags|= SHADOW_FILTER;
@@ -241,7 +245,7 @@ QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals
 	}
 	else
 	{
-		flags = TRANSFORM;
+		flags |= TRANSFORM;
 	}
 
 	if(mat)
