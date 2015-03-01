@@ -253,9 +253,11 @@ QString ShaderMgr::getFShaderName(uint flags)
 	{
 		return "s3d_cube.frag";
 	}
-	else if ((flags & (TRANSFORM | ALPHATEST)) == (TRANSFORM | ALPHATEST) )
+	else if (flags & TRANSFORM)
 	{
-		return "s3d_transform.frag";
+		//OGL ES2 always wants a fragment shader (at least on ANGLE)
+		if((flags & ALPHATEST) || (flags & OGL_ES2))
+			return "s3d_transform.frag";
 	}
 	else if (flags == MAT_DIFFUSETEX)
 	{
