@@ -22,14 +22,20 @@
 /*
 This fragment shader is only used if the material is alpha-tested to allow for better shadows.
 */
+
+#define ALPHATEST 1
  
+#if ALPHATEST
 uniform lowp float u_fAlphaThresh;
 uniform sampler2D u_texDiffuse;
+#endif
 
 varying mediump vec2 v_texcoord;
 
 void main(void)
 {
+#if ALPHATEST
 	if(texture2D(u_texDiffuse,v_texcoord).a < u_fAlphaThresh)
 		discard;
+#endif
 }

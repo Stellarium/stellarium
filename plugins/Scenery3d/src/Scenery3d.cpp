@@ -1912,16 +1912,9 @@ void Scenery3d::determineFeatureSupport()
 
 	if(shaderParameters.openglES)
 	{
-		//IMPORTANT: the shader would require a #extension GL_EXT_shadow_samplers definition, but adding this causes a compile error on ANGLE
-		//caused by the interaction of Qt with the ANGLE bug 837 (https://code.google.com/p/angleproject/issues/detail?id=837)
-		//for now, shadows are disabled for ALL ES2 versions, even though they could probably run on some modern non-ANGLE ES2 platforms!
-		supportsShadows = false;
-		qDebug()<<"[Scenery3d] Shadows are not supported on this hardware";
-
-		/*
-		//shadows in our implementation require 2 extensions
-		if(ctx->hasExtension("GL_OES_depth_texture") &&
-			ctx->hasExtension("GL_EXT_shadow_samplers"))
+		//shadows in our implementation require depth textures
+		if(ctx->hasExtension("GL_OES_depth_texture") ||
+			ctx->hasExtension("GL_ANGLE_depth_texture"))
 		{
 			supportsShadows = true;
 			qDebug()<<"[Scenery3d] Shadows are supported";
@@ -1931,7 +1924,6 @@ void Scenery3d::determineFeatureSupport()
 			supportsShadows = false;
 			qDebug()<<"[Scenery3d] Shadows are not supported on this hardware";
 		}
-		*/
 		//shadow filtering is completely disabled for now on ES
 		supportsShadowFiltering = false;
 	}
@@ -2132,18 +2124,23 @@ bool Scenery3d::initCubemapping()
 	else
 	{
 		//gen renderbuffer for single-face depth, reused for all faces to save some memory
+		int val = 0;
+		glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE,&val);
+		qDebug()<<"[Scenery3d] Max Renderbuffer size"<<val;
+
 		glGenRenderbuffers(1,&cubeRB);
 		glBindRenderbuffer(GL_RENDERBUFFER,cubeRB);
 		glRenderbufferStorage(GL_RENDERBUFFER, rbDepth, cubemapSize,cubemapSize);
 		GLenum err=glGetError();
+
 		switch(err){
 			case GL_NO_ERROR:
 					break;
 			case GL_INVALID_ENUM:
-					qWarning()<<"Scenery3D: RB: invalid rbDepth?";
+					qWarning()<<"Scenery3D: RB: invalid depth format?";
 					break;
 			case GL_INVALID_VALUE:
-					qWarning()<<"Scenery3D: RB: invalid value. Max renderbuffer size="<<GL_MAX_RENDERBUFFER_SIZE;
+					qWarning()<<"Scenery3D: RB: invalid renderbuffer size";
 					break;
 			case GL_OUT_OF_MEMORY:
 					qWarning()<<"Scenery3D: RB: out of memory. Cannot create renderbuffer.";
@@ -2481,8 +2478,8 @@ bool Scenery3d::initShadowmapping()
 			//pcss is only enabled if filtering is also enabled
 			bool pcssEnabled = shaderParameters.pcss && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW || shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH);
 
-			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
-			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+			//for OpenGL ES2, type has to be UNSIGNED_SHORT or UNSIGNED_INT for depth textures, desktop does probably not care
+			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, NULL);
 
 			GLint filter = (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HARDWARE
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW_HARDWARE
@@ -2498,19 +2495,22 @@ bool Scenery3d::initShadowmapping()
 			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 #endif
 			//we use hardware-accelerated depth compare mode, unless pcss is used
+			//NOTE: cant use depth compare mode on ES2
 			if(!pcssEnabled)
 			{
 #ifndef QT_OPENGL_ES
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
-#else
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_EXT, GL_COMPARE_REF_TO_TEXTURE_EXT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_EXT, GL_LEQUAL);
 #endif
 			}
 
 			//Attach the depthmap to the Buffer
 			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+
+			//NOTE: disabling the drawbuffer should be required
+			//but the respective functions are not available on GLES2?
+			//On ANGLE, it seems to work without this settings (framebuffer is complete, etc.)
+			//but I don't know if it will work on other ES platforms?
 #ifndef QT_OPENGL_ES
 			glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
 			glReadBuffer(GL_NONE);
@@ -2540,6 +2540,7 @@ bool Scenery3d::initShadowmapping()
 
 	if(!valid)
 	{
+		deleteShadowmapping();
 		parent->showMessage(N_("Shadow mapping can not be used on your hardware, check logs for details"));
 	}
 	return valid;
