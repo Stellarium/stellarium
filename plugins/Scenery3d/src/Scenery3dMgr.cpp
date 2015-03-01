@@ -190,8 +190,8 @@ void Scenery3dMgr::init()
 								   QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
 								   QPixmap(":/graphicGui/glow32x32.png"),
 								   "actionShow_Scenery3d_dialog");
-		StelButton* toolbarStoredViewButton = new StelButton(NULL, QPixmap(":/graphicGui/btNightView-on.png"),
-								   QPixmap(":/graphicGui/btNightView-off.png"),
+		StelButton* toolbarStoredViewButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
+								   QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
 								   QPixmap(":/graphicGui/glow32x32.png"),
 								   "actionShow_Scenery3d_storedViewDialog");
 
