@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-27 20:42+0600\n"
-"PO-Revision-Date: 2015-02-23 19:58+0000\n"
-"Last-Translator: FreewareTips <Unknown>\n"
+"PO-Revision-Date: 2015-02-28 07:49+0000\n"
+"Last-Translator: Marius Sollerud <marius.sollerud@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-28 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-03-01 05:09+0000\n"
 "X-Generator: Launchpad (build 17361)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -82,7 +82,7 @@ msgstr "Galaktisk ekvator"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1330
 msgid "O./C. longitude"
-msgstr ""
+msgstr "O./K. lengdegrad"
 
 #: src/core/modules/GridLinesMgr.cpp:755
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -135,7 +135,7 @@ msgstr "Galaktisk ekvator"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "Opposisjon/konjunksjon lengdegradslinje"
 
 #: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1253
 msgid "Atmosphere"
@@ -779,7 +779,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1558
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr ""
+msgstr "Denne algoritmen er brukt i PC-planetarieprogrammet Guide 7."
 
 #: src/core/StelCore.cpp:1561
 msgid ""
@@ -953,11 +953,12 @@ msgstr ""
 #: src/core/StelCore.cpp:1745 src/core/StelCore.cpp:1750
 #: src/core/StelCore.cpp:1755
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "med nullverdier utenfor denne rekkevidden"
 
 #: src/core/StelCore.cpp:1723
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"med en typisk 1 sekunds nøyaktighet og nullverdier utenfor denne rekkevidden"
 
 #: src/core/StelCore.cpp:1765
 #, qt-format
@@ -1407,7 +1408,7 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1254
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Khalid, Sultana og Zaidi (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1255
 #, qt-format
@@ -2471,7 +2472,7 @@ msgstr "Jord-hendelser sett fra Merkur"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:208
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Jordiske begivenheter fra en flytende by på Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:210
@@ -4850,7 +4851,7 @@ msgstr "lagre skript til fil"
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "Fjern"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"
@@ -5071,11 +5072,11 @@ msgstr "Vis med posisjonsvinkel "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Fest startpunkt til roterende himmel"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Fest endepunkt til roterende himmel"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
@@ -5473,7 +5474,7 @@ msgstr "Faktisk synsfelt gitt av denne okular/linse/teleskop-kombinasjonen"
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr ""
+msgstr "Reelt synsfelt"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
@@ -7865,7 +7866,7 @@ msgstr "Pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "has one registered glitch"
-msgstr ""
+msgstr "har en registrert"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:164
@@ -8097,17 +8098,17 @@ msgstr "Innstillingsvindu for eksoplaneter"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:851
 msgid "Hot"
-msgstr ""
+msgstr "Glovarm"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:853
 msgid "Warm"
-msgstr ""
+msgstr "Varm"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Cold"
-msgstr ""
+msgstr "Kald"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:858
@@ -8132,7 +8133,7 @@ msgstr ""
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:866
 msgid "Jovian"
-msgstr ""
+msgstr "Joviansk"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:868
@@ -8290,7 +8291,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Termisk likevekt"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid ""
@@ -8321,11 +8322,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Planetarisk termisk likevekt"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Planetary habitability"
-msgstr ""
+msgstr "Planetarisk beboelighet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Earth Similarity Index"
@@ -8349,7 +8350,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Navngi eksoplaneter (IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
@@ -8357,7 +8358,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "oppdatering: 16. april 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "The Exoplanet Data Explorer"
@@ -8377,15 +8378,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "NASA's program for utforskning av eksoplaneter"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Pulsarplaneter"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "NASA-arkivet for eksoplaneter"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
@@ -8409,7 +8410,7 @@ msgstr "Open Exoplanet Catalogue"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Beboelige eksoplaneter-katalogen"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Exoplanets is updated"
