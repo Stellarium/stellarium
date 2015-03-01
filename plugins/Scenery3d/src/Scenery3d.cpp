@@ -1190,7 +1190,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
     QString directionalSourceString;
 
-    //GZ: this should not matter here, just to make OpenGL happy.
+    //assume light=sun for a start.
     Vec3d lightPosition = sunPosition;
     directionalSourceString="(Sun, below horiz.)";
 
@@ -1216,6 +1216,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	    else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14)/(-0.05+0.14);
     }
 
+    // calculate ambient light
     if(sinSunAngle > -0.3f) // sun above -18 deg?
     {
 	ambientBrightness += qMin(0.3f, sinSunAngle+0.3f);
@@ -1224,7 +1225,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     else
 	sunAmbientString=QString("0.0");
 
-    if (sinMoonAngle>0.0f)
+    if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
     {
 	ambientBrightness += sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
 	moonAmbientString=QString("%1").arg(sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR);
@@ -1247,7 +1248,8 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 	lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sinSunAngle+0.3);
 	directionalSourceString="(Sun, below hor.)";
     }*/
-    if (sinMoonAngle>0.0f)
+    // "else" is required now, else we have lunar shadow with sun above horizon...
+    else if (sinMoonAngle>0.0f)
     {
 	    float moonBrightness = std::sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1.0f)/2.0f) * LUNAR_BRIGHTNESS_FACTOR;
 	    moonBrightness -= (ambientBrightness-0.05f)/2.0f;
@@ -1298,7 +1300,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 		    }
 		    */
 	    }
-	    else if (venusBrightness > 0)
+	    else if (venusBrightness > 0.0f)
 	    {
 		    directionalBrightness = venusBrightness;
 		    lightPosition = venusPosition;
