@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-27 20:42+0600\n"
-"PO-Revision-Date: 2015-01-27 18:13+0000\n"
-"Last-Translator: Mihai Roharik <roharik@free.fr>\n"
+"PO-Revision-Date: 2015-02-28 14:29+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-28 05:20+0000\n"
+"X-Launchpad-Export-Date: 2015-03-01 05:09+0000\n"
 "X-Generator: Launchpad (build 17361)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
@@ -509,7 +509,7 @@ msgstr "Timpul răsăritului: %1%"
 
 #: src/core/modules/MilkyWay.cpp:73
 msgid "Milky Way"
-msgstr ""
+msgstr "Calea Lactee"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
@@ -4168,7 +4168,7 @@ msgstr "Redimensionează Luna"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "Factor de scară"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
@@ -4309,15 +4309,15 @@ msgstr "Sfera cerească"
 
 #: src/ui_viewDialog.h:1301
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "Grila ecuatorială (după J2000)"
 
 #: src/ui_viewDialog.h:1302
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "Grila ecuatorială (după dată)"
 
 #: src/ui_viewDialog.h:1303
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "Grila ecliptică (după J2000)"
 
 #: src/ui_viewDialog.h:1308
 msgid "Show equator line"
@@ -4360,6 +4360,7 @@ msgstr "Folosește planeta și poziția asociate"
 #: src/ui_viewDialog.h:1335
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
+"Arată stratul de iluminare (ferestre luminoase, poluare luminoasă, etc.)"
 
 #: src/ui_viewDialog.h:1336
 msgid "Show ground"
@@ -4383,6 +4384,8 @@ msgstr "Strălucire minimă:"
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
+"Valori între 0 şi 1 (0 = peisajul este negru în timpul nopţii, 1 = peisajul "
+"este complet luminos)"
 
 #: src/ui_viewDialog.h:1346
 msgid "Use minimal brightness as may be specified in landscape.ini"
@@ -4411,7 +4414,7 @@ msgstr "Alegeţi dacă doriţi numele abreviate, pe cele de origine sau traduse"
 
 #: src/ui_viewDialog.h:1357
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "Folosiţi numele native ale planetelor din cultura aleasă"
 
 #: src/ui_viewDialog.h:1359
 msgid "Visible"
@@ -5042,7 +5045,7 @@ msgstr "Unghi de poziţie="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
-msgstr ""
+msgstr "Plug-in măsură unghi"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:525
@@ -5141,6 +5144,8 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"Dacă doriţi să solicitaţi o funcţionalitate, puteţi crea un raport de bug şi "
+"setaţi severitatea la \"wishlist\" (dorinţă)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
@@ -5171,7 +5176,7 @@ msgstr "Afişează cu unghiul de poziţie"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Arată în coordonate orizontale"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
@@ -5367,7 +5372,7 @@ msgstr "Alege ocularul precedent"
 #: plugins/Oculars/src/Oculars.cpp:1460
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr ""
+msgstr "Înălţarea dreaptă / Declinaţia (J2000.0) crucii"
 
 #: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
@@ -5399,17 +5404,17 @@ msgstr "Ocular aFOV: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "Lentila #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1629
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "Lentila #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1634
 msgid "Lens: none"
-msgstr ""
+msgstr "Lentila: nici una"
 
 #: plugins/Oculars/src/Oculars.cpp:1644 plugins/Oculars/src/Oculars.cpp:1701
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
@@ -5640,6 +5645,12 @@ msgid ""
 "image scaled, a good deal of the screen can be wasted.  Therefore I "
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
+"Puteţi alege să ajustaţi imaginea pe care o vedeţi pe ecran. Scopul este o "
+"mai bună comparaţie între diferite combinaţii ocular/telescop. Un acelaşi "
+"ocular instalat pe două telescoape de focale diferite va produce două "
+"cîmpuri vizuale diferite. Compromisul este acela că, cu o imagine ajustată, "
+"o bună porţiune a ecranului poate fi pierdută. Prin urmare recomand să nu o "
+"folosiţi decît dacă aveţi nevoie."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid ""
@@ -5683,11 +5694,11 @@ msgstr "[nici o tastă definită]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Basculează spre şi dinspre acoperirea ocularului."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Deschide meniul de navigare."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 msgid "Enable only if an object is selected"
@@ -5891,17 +5902,17 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1686
 msgid "visual"
-msgstr ""
+msgstr "vizuali"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1688
 msgid "scientific"
-msgstr ""
+msgstr "ştiinţifici"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1690
 msgid "communications"
-msgstr ""
+msgstr "de comunicaţii"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1692
@@ -5911,7 +5922,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1694
 msgid "amateur"
-msgstr ""
+msgstr "amatori"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1696
@@ -5921,12 +5932,12 @@ msgstr "meteorologici"
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1698
 msgid "geostationary"
-msgstr ""
+msgstr "geostaţionară"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1700
 msgid "non-operational"
-msgstr ""
+msgstr "non-operaţionali"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1702
@@ -5955,7 +5966,7 @@ msgstr "Catalog #"
 
 #: plugins/Satellites/src/Satellite.cpp:248
 msgid "International Designator"
-msgstr ""
+msgstr "Desemnare internaţională"
 
 #: plugins/Satellites/src/Satellite.cpp:255
 msgid "artificial satellite"
@@ -5964,7 +5975,7 @@ msgstr "satelit artificial"
 #: plugins/Satellites/src/Satellite.cpp:260
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
-msgstr ""
+msgstr "Magnitudine aprox: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:270
@@ -6052,6 +6063,9 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
+"Poziţiile prezise sînt bune numai pentru o perioadă scurtă de timp (de "
+"ordinul zilelor, săptămînilor sau poate o lună în trecut şi în viitor). "
+"Pentru date în afara acestui interval sînt de aşteptat valori ciudate."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:413
 msgid ""
@@ -6071,6 +6085,10 @@ msgid ""
 "the default %3 file.  The old file will be backed up as %4.  This can be "
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
+"Prin apăsarea butonului \"%1\" în fila \"%2\" a acestui dialog se revine la "
+"fişierul %3. Vechiul fişier va fi salvat ca %4. Poate fi regăsit în dosarul "
+"de date ale utilizatorului, în \"modules/Satellites/\" "
+"(\"module/Sateliţi/\")."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 msgid ""
@@ -6149,6 +6167,9 @@ msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"Codul de calcul al orbitelor a fost scris de Jose Luis Canales conform "
+"Raportului de pistare în spaţiu revăzut #3 (care include Raportul de pistare "
+"în spaţiu #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
@@ -6288,7 +6309,7 @@ msgstr "[toate]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
 msgid "New group..."
-msgstr ""
+msgstr "Nou grup..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
 msgid "Select TLE Update File"
@@ -6645,6 +6666,10 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"Nu este disponibilă nici o descriere de model de dispozitiv. Stellarium nu "
+"va putea să controleze singur telescopul, dar acest lucru va fi posibil cu "
+"ajutorul unui program exterior şi va fi posibilă conectarea la o gazdă "
+"distantă."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
@@ -6735,7 +6760,7 @@ msgstr "&Obiect curent"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Center of the screen"
-msgstr ""
+msgstr "Centrul ecranului"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Hours-minutes-seconds format"
@@ -6829,7 +6854,7 @@ msgstr "J2000 (implicit)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Echinocţiul datei"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
@@ -7895,7 +7920,7 @@ msgstr "quasar"
 #: plugins/Quasars/src/Quasar.cpp:129
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z (redshift, deplasare spre roşu): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:115
 msgid "Quasars Plug-in"
@@ -8529,7 +8554,7 @@ msgstr "Programul NASA de explorare a exoplanetelor"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Planete pulsar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
@@ -8545,7 +8570,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "Galeria zonelor habitabile"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "PlanetQuest - The Search for Another Earth"
@@ -8715,7 +8740,7 @@ msgstr "m"
 #. TRANSLATORS: Short for "seconds".
 #: plugins/Observability/src/Observability.cpp:188
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/Observability/src/Observability.cpp:189
 #, qt-format
@@ -9430,7 +9455,7 @@ msgstr "Leonis Minoride de decembrie"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Comae Berenicide"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
@@ -9480,7 +9505,7 @@ msgstr "ω-Cetide"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiide de sud"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
@@ -9851,7 +9876,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
 msgid "Population index"
-msgstr ""
+msgstr "Indice de populaţie"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 msgid ""
@@ -9874,6 +9899,7 @@ msgstr "Note"
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"Acest plugin a fost creat ca proiect la Vara ESA a codului în spaţiu 2013."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
 msgid "Info"
@@ -10016,7 +10042,7 @@ msgstr "Ascensie dreaptă / Declinaţie (J2000.0)"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "RA/Dec"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
 msgctxt "abbreviated in the plugin"
