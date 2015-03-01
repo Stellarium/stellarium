@@ -158,11 +158,11 @@ private:
     bool supportsShadows; //if shadows are supported
     bool supportsShadowFiltering; //if shadow filtering is supported
 
-    float torchBrightness; // ^L toggle light brightness
+    float torchBrightness; // toggle light brightness
     float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/
 
-    bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
-    bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
+    bool textEnabled;           // switchable value: display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
+    bool debugEnabled;          // switchable value: display debug graphics and debug texts on screen
     bool fixShadowData; //for debugging, fixes all shadow mapping related data (shadowmap contents, matrices, frustums, focus bodies...) at their current values
     bool simpleShadows;
     bool fullCubemapShadows;
