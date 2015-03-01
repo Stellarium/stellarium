@@ -48,19 +48,11 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLFramebufferObject>
 
-#include <limits>
-#include <sstream>
-
-#include <iostream>
-#include <fstream>
-
 #define GET_GLERROR()                                   \
 {                                                       \
     GLenum err = glGetError();                          \
     if (err != GL_NO_ERROR) {                           \
-    fprintf(stderr, "[line %d] GL Error: %d\n",         \
-    __LINE__, err);                     \
-    fflush(stderr);                                     \
+    qWarning("[line %d] GL Error: %d",__LINE__, err);   \
     }                                                   \
 }
 
@@ -2028,11 +2020,15 @@ void Scenery3d::deleteCubemapping()
 
 bool Scenery3d::initCubemapping()
 {
+	GET_GLERROR()
+
 	bool ret = false;
 	qDebug()<<"[Scenery3d] Initializing cubemap...";
 
 	//remove old cubemap objects if they exist
 	deleteCubemapping();
+
+	GET_GLERROR()
 
 	if(cubemapSize<=0)
 	{
@@ -2069,16 +2065,22 @@ bool Scenery3d::initCubemapping()
 		//gen cube tex
 		glGenTextures(1,&cubeMapCubeTex);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMapCubeTex);
+
+		GET_GLERROR()
+
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		GET_GLERROR()
 
 		//create faces
 		for (int i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,colorFormat,
 				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+			GET_GLERROR()
 		}
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 	}
@@ -2086,6 +2088,9 @@ bool Scenery3d::initCubemapping()
 	{
 		//create 6 textures
 		glGenTextures(6,cubeMapTex);
+
+		GET_GLERROR()
+
 		for(int i = 0;i<6;++i)
 		{
 			glBindTexture(GL_TEXTURE_2D, cubeMapTex[i]);
@@ -2094,8 +2099,12 @@ bool Scenery3d::initCubemapping()
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
+			GET_GLERROR()
+
 			glTexImage2D(GL_TEXTURE_2D,0,colorFormat,
 				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,NULL);
+
+			GET_GLERROR()
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -2112,11 +2121,15 @@ bool Scenery3d::initCubemapping()
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
+		GET_GLERROR()
+
 		//create faces
 		for (int i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,depthFormat,
 				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,NULL);
+
+			GET_GLERROR()
 		}
 
 		glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
@@ -2160,12 +2173,16 @@ bool Scenery3d::initCubemapping()
 		glGenFramebuffers(1,&cubeFBO);
 		glBindFramebuffer(GL_FRAMEBUFFER,cubeFBO);
 
+		GET_GLERROR()
+
 #ifndef QT_OPENGL_ES
 		//attach cube tex + cube depth
 		//note that this function will be a NULL pointer if GS is not supported, so it is important to check support before using
 		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapCubeTex,0);
 		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cubeMapCubeDepth, 0);
 #endif
+
+		GET_GLERROR()
 
 		//check validity
 		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -2180,6 +2197,8 @@ bool Scenery3d::initCubemapping()
 		//6 FBOs used
 		glGenFramebuffers(6,cubeSideFBO);
 
+		GET_GLERROR()
+
 		for(int i=0;i<6;++i)
 		{
 			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
@@ -2190,9 +2209,12 @@ bool Scenery3d::initCubemapping()
 			else
 				glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, cubeMapTex[i],0);
 
+			GET_GLERROR()
 
 			//attach shared depth buffer
 			glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT,GL_RENDERBUFFER, cubeRB);
+
+			GET_GLERROR()
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 			{
