@@ -2135,6 +2135,23 @@ bool Scenery3d::initCubemapping()
 		glGenRenderbuffers(1,&cubeRB);
 		glBindRenderbuffer(GL_RENDERBUFFER,cubeRB);
 		glRenderbufferStorage(GL_RENDERBUFFER, rbDepth, cubemapSize,cubemapSize);
+		GLenum err=glGetError();
+		switch(err){
+			case GL_NO_ERROR:
+					break;
+			case GL_INVALID_ENUM:
+					qWarning()<<"Scenery3D: RB: invalid rbDepth?";
+					break;
+			case GL_INVALID_VALUE:
+					qWarning()<<"Scenery3D: RB: invalid value. Max renderbuffer size="<<GL_MAX_RENDERBUFFER_SIZE;
+					break;
+			case GL_OUT_OF_MEMORY:
+					qWarning()<<"Scenery3D: RB: out of memory. Cannot create renderbuffer.";
+					break;
+				default:
+				qWarning()<<"Scenery3D: RB: unexpected OpenGL error:" << err;
+		}
+
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	}
 
