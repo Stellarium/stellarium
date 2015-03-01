@@ -253,6 +253,11 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	map.insert("sidereal-year", planet->getSiderealPeriod());
 	map.insert("sidereal-day", planet->getSiderealDay()*24.);
 	map.insert("solar-day", planet->getMeanSolarDay()*24.);
+	unsigned int h, m;
+	double s;
+	StelUtils::radToHms(core->getLocalSiderealTime(), h, m, s);
+	map.insert("local-sidereal-time", (double)h + (double)m/60 + s/3600);
+	map.insert("local-sidereal-time-hms", StelUtils::radToHmsStr(core->getLocalSiderealTime()));
 
 	return map;
 }
