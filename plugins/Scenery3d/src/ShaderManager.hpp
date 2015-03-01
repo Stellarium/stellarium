@@ -160,7 +160,7 @@ private:
 		INVALID		= 0,
 		//Transform-only shader (all flags off) (use for depth-only render), should be mutually exclusive with SHADING
 		TRANSFORM	= (1<<0),
-		//The shader has some sort of light-dependant color output,  should be mutually exclusive with TRANSFORM
+		//The shader has some sort of light-dependent color output, should be mutually exclusive with TRANSFORM
 		SHADING		= (1<<1),
 		//Per-pixel lighting
 		PIXEL_LIGHTING  = (1<<2),
@@ -198,7 +198,7 @@ private:
 		//only a single shadow frustum is used
 		SINGLE_SHADOW_FRUSTUM  = (1<<18),
 		//set if opengl es2
-		OGL_ES2 = (1<<19),
+		OGL_ES2		= (1<<19),
 	};
 
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;

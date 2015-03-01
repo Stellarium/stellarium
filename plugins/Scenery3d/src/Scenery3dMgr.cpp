@@ -160,9 +160,9 @@ void Scenery3dMgr::init()
 	reloadShaders();
 
 	//Initialize Shadow Mapping
-	qWarning() << "init scenery3d object.";
+	qDebug() << "init scenery3d object...";
 	scenery3d->init(); //this also finds out what features are supported
-	qWarning() << "init scenery3d object...done";
+	qDebug() << "init scenery3d object...done";
 
 	//make sure shadows are off if unsupported
 	if(! scenery3d->areShadowsSupported())
@@ -177,7 +177,7 @@ void Scenery3dMgr::init()
 	emit areShadowsSupportedChanged(getAreShadowsSupported());
 	emit isShadowFilteringSupportedChanged(getIsShadowFilteringSupported());
 
-	// Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
+	// Add 3 toolbar buttons (copy/paste widely from AngleMeasure): activate, settings, and viewpoints.
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -244,13 +244,13 @@ void Scenery3dMgr::loadConfig()
 	scenery3d->setPCSS(conf->value("flag_pcss").toBool());
 	scenery3d->setTorchBrightness(conf->value("torch_brightness", 0.5f).toFloat());
 	scenery3d->setTorchRange(conf->value("torch_range",5.0f).toFloat());
-	scenery3d->setBumpsEnabled(conf->value("flag_bumpmap").toBool());
-	scenery3d->setShadowsEnabled(conf->value("flag_shadow").toBool());
-	scenery3d->setUseSimpleShadows(conf->value("flag_shadow_simple").toBool());
-	scenery3d->setUseFullCubemapShadows(conf->value("flag_cubemap_fullshadows").toBool());
-	scenery3d->setLazyCubemapEnabled(conf->value("flag_lazy_cubemap").toBool());
+	scenery3d->setBumpsEnabled(conf->value("flag_bumpmap", false).toBool());
+	scenery3d->setShadowsEnabled(conf->value("flag_shadow", false).toBool());
+	scenery3d->setUseSimpleShadows(conf->value("flag_shadow_simple", false).toBool());
+	scenery3d->setUseFullCubemapShadows(conf->value("flag_cubemap_fullshadows", false).toBool());
+	scenery3d->setLazyCubemapEnabled(conf->value("flag_lazy_cubemap", true).toBool());
 	scenery3d->setLazyCubemapInterval(conf->value("cubemap_lazy_interval",1.0).toDouble());
-	scenery3d->setPixelLightingEnabled(conf->value("flag_pixel_lighting").toBool());
+	scenery3d->setPixelLightingEnabled(conf->value("flag_pixel_lighting", false).toBool());
 
 	bool v1 = conf->value("flag_lazy_dominantface",false).toBool();
 	bool v2 = conf->value("flag_lazy_seconddominantface",true).toBool();
@@ -266,14 +266,14 @@ void Scenery3dMgr::createActions()
 	QString groupName = N_("Scenery3d: 3D landscapes");
 
 	//enable action will be set checkable if a scene was loaded
-	addAction("actionShow_Scenery3d", groupName, N_("Toggle 3D landscape"),this,"enableScene","Ctrl+3");
-	addAction("actionShow_Scenery3d_dialog", groupName, N_("Show settings dialog"), scenery3dDialog, "visible", "Ctrl+Shift+3");
-	addAction("actionShow_Scenery3d_storedViewDialog", groupName, N_("Show viewpoint dialog"), storedViewDialog, "visible", "Ctrl+Shift+4");
-	addAction("actionShow_Scenery3d_shadows", groupName, N_("Toggle shadows"), this, "enableShadows","Ctrl+R, S");
-	addAction("actionShow_Scenery3d_debuginfo", groupName, N_("Toggle debug information"), this, "enableDebugInfo","Ctrl+R, D");
-	addAction("actionShow_Scenery3d_locationinfo", groupName, N_("Toggle location text"), this, "enableLocationInfo","Ctrl+R, T");
-	addAction("actionShow_Scenery3d_torchlight", groupName, N_("Toggle torchlight"), this, "enableTorchLight", "Ctrl+R, L");
-	addAction("actionReload_Scenery3d_shaders", groupName, N_("Reload shaders"), this, "reloadShaders()", "Ctrl+R, P");
+	addAction("actionShow_Scenery3d",                  groupName, N_("Toggle 3D landscape"),      this,          "enableScene",       "Ctrl+3");
+	addAction("actionShow_Scenery3d_dialog",           groupName, N_("Show settings dialog"),  scenery3dDialog,  "visible",           "Ctrl+Shift+3");
+	addAction("actionShow_Scenery3d_storedViewDialog", groupName, N_("Show viewpoint dialog"), storedViewDialog, "visible",           "Ctrl+Alt+3");
+	addAction("actionShow_Scenery3d_shadows",          groupName, N_("Toggle shadows"),           this,          "enableShadows",     "Ctrl+R, S");
+	addAction("actionShow_Scenery3d_debuginfo",        groupName, N_("Toggle debug information"), this,          "enableDebugInfo",   "Ctrl+R, D");
+	addAction("actionShow_Scenery3d_locationinfo",     groupName, N_("Toggle location text"),     this,          "enableLocationInfo","Ctrl+R, T");
+	addAction("actionShow_Scenery3d_torchlight",       groupName, N_("Toggle torchlight"),        this,          "enableTorchLight",  "Ctrl+R, L");
+	addAction("actionReload_Scenery3d_shaders",        groupName, N_("Reload shaders"),           this,          "reloadShaders()",   "Ctrl+R, P");
 }
 
 void Scenery3dMgr::reloadShaders()
@@ -363,7 +363,7 @@ void Scenery3dMgr::loadSceneCompleted()
 		return;
 	}
 	else
-		showMessage(N_("Scene successfully loaded"));
+		showMessage(N_("Scene successfully loaded."));
 
 	//do stuff that requires the main thread
 
@@ -515,7 +515,7 @@ void Scenery3dMgr::setEnablePixelLighting(const bool val)
 			setEnableBumps(false);
 			setEnableShadows(false);
 		}
-		showMessage(QString(N_("Per-Pixel shading %1")).arg(val? N_("on") : N_("off")));
+		showMessage(QString(N_("Per-Pixel shading %1.")).arg(val? N_("on") : N_("off")));
 
 		scenery3d->setPixelLightingEnabled(val);
 		conf->setValue(S3D_CONFIG_PREFIX + "/flag_pixel_lighting", val);
@@ -534,7 +534,7 @@ void Scenery3dMgr::setEnableShadows(const bool enableShadows)
 	{
 		if (scenery3d->getShadowmapSize() && getEnablePixelLighting())
 		{
-			showMessage(QString(N_("Shadows %1")).arg(enableShadows? N_("on") : N_("off")));
+			showMessage(QString(N_("Shadows %1.")).arg(enableShadows? N_("on") : N_("off")));
 			scenery3d->setShadowsEnabled(enableShadows);
 			emit enableShadowsChanged(enableShadows);
 		} else
@@ -570,7 +570,7 @@ void Scenery3dMgr::setEnableBumps(const bool enableBumps)
 {
 	if(enableBumps != getEnableBumps())
 	{
-		showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
+		showMessage(QString(N_("Surface bumps %1.")).arg(enableBumps? N_("on") : N_("off")));
 		scenery3d->setBumpsEnabled(enableBumps);
 
 		conf->setValue(S3D_CONFIG_PREFIX + "/flag_bumpmap", enableBumps);
@@ -893,7 +893,7 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
     info.id = "Scenery3dMgr"; // TBD: Find way to call it just Scenery3d? [cosmetic]
     info.version = SCENERY3D_PLUGIN_VERSION;
     info.displayedName = N_("3D Sceneries");
-    info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza";
+    info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch";
     info.contact = "Georg.Zotti@univie.ac.at";
     info.description = N_("3D foreground renderer. Walk around, find and avoid obstructions in your garden, find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.");
     return info;
