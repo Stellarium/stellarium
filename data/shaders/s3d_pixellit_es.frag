@@ -70,7 +70,8 @@ uniform mediump vec3 u_vMixEmissive;
 //shadow related uniforms
 uniform mediump vec4 u_vSplits; //the frustum splits
 
-#define SHADOWSAMPLER sampler2DShadow
+//Basic opengl ES2 does not have shadow samplers, so we compare ourselves
+#define SHADOWSAMPLER sampler2D
 
 //for some reason, Intel does absolutely not like it if the shadowmaps are passed as an array
 //nothing is drawn, but no error is shown ...
@@ -112,15 +113,16 @@ varying mediump vec4 v_shadowCoord3;
 
 lowp float sampleShadow(in mediump SHADOWSAMPLER tex, in mediump vec4 coord)
 {
+	mediump vec3 texC = coord.xyz / coord.w;
 	//no filtering performed, just return the sampled tex
-	return shadow2DProjEXT(tex,coord).x;
+	return (texture2D(tex,texC.xy).r > texC.z ? 1.0 : 0.0);
 }
 
-float getShadow()
+lowp float getShadow()
 {
 	//simplification of the smap.f.glsl shader
 	//IMPORTANT: use clip coords here, not distance to camera
-	float dist = gl_FragCoord.z;
+	mediump float dist = gl_FragCoord.z;
 		
 	//check in which split the fragment falls
 	//I tried using indices to simplify the code a bit, but this lead to very strange artifacts...
