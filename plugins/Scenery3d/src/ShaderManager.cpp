@@ -317,12 +317,17 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 			{
 				bool val = it.value() & flags;
 				write = "#define " + word + (val?" 1":" 0");
+#ifdef NDEBUG
+			}
+#else
+				//output matches for debugging
 				qDebug()<<"preprocess match: "<<line <<" --> "<<write;
 			}
 			else
 			{
 				qDebug()<<"unknown define, ignoring: "<<line;
 			}
+#endif
 		}
 
 		//write output
@@ -446,12 +451,16 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 			//this is uniform we recognize
 			//need to get the uniforms location (!= index)
 			m_uniformCache[&program][*it] = loc;
-
+#ifdef NDEBUG
+		}
+#else
+			//output mapping for debugging
 			qDebug()<<i<<loc<<str<<size<<type<<" mapped to "<<*it;
 		}
 		else
 		{
 			qWarning()<<i<<loc<<str<<size<<type<<" --- unknown ---";
 		}
+#endif
 	}
 }
