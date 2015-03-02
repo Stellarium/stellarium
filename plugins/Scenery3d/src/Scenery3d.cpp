@@ -22,13 +22,14 @@
 
 #include <QtGlobal>
 
+//this NEEDS to be included before StelOpenGL
+#include "GLFuncs.hpp"
 
 #include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
-#include "GLFuncs.hpp"
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -1752,33 +1753,34 @@ void Scenery3d::drawDebug()
 {
 	//frustum/box debug rendering only on desktop GL
 #ifndef QT_OPENGL_ES
-	//render debug boxes
-	QOpenGLShaderProgram* debugShader = shaderManager.getDebugShader();
-	if(debugShader)
+	if(!shaderParameters.openglES)
 	{
-		debugShader->bind();
-
-		//ensure that opengl matrix stack is empty
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-
-		//set mvp
-		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
-		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
-
-		sceneBoundingBox.render();
-
-		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.4f,0.4f,0.4f,1.0f));
-		//objModel->renderAABBs();
-
-		SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
-
-		if(fixShadowData)
+		QOpenGLShaderProgram* debugShader = shaderManager.getDebugShader();
+		if(debugShader)
 		{
-			camFrustShadow.drawFrustum();
-			/*
+			debugShader->bind();
+
+			//ensure that opengl matrix stack is empty
+			glExtFuncs.glBase.glMatrixMode(GL_MODELVIEW);
+			glExtFuncs.glBase.glLoadIdentity();
+			glExtFuncs.glBase.glMatrixMode(GL_PROJECTION);
+			glExtFuncs.glBase.glLoadIdentity();
+
+			//set mvp
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
+
+			sceneBoundingBox.render();
+
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.4f,0.4f,0.4f,1.0f));
+			//objModel->renderAABBs();
+
+			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,1.0f,1.0f,1.0f));
+
+			if(fixShadowData)
+			{
+				camFrustShadow.drawFrustum();
+				/*
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,1.0f,1.0f));
 			frustumArray.at(0).drawFrustum();
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(0.0f,1.0f,0.0f,1.0f));
@@ -1790,13 +1792,14 @@ void Scenery3d::drawDebug()
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_VEC_COLOR,QVector4D(1.0f,0.0f,1.0f,1.0f));
 			focusBodies.at(1).debugBox.render();
 			*/
-		}
+			}
 
-		debugShader->release();
-	}
-	else
-	{
-		qWarning()<<"[Scenery3d] Cannot use debug shader, probably on OpenGL ES context";
+			debugShader->release();
+		}
+		else
+		{
+			qWarning()<<"[Scenery3d] Cannot use debug shader, probably on OpenGL ES context";
+		}
 	}
 #endif
 
@@ -2509,16 +2512,19 @@ bool Scenery3d::initShadowmapping()
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
 #ifndef QT_OPENGL_ES
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL,0);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
-			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+			if(!isEs)
+			{
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL,0);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+				const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
+				glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+			}
 #endif
 			//we use hardware-accelerated depth compare mode, unless pcss is used
 			//NOTE: cant use depth compare mode on ES2
-			if(!pcssEnabled)
+			if(!pcssEnabled && !isEs)
 			{
 #ifndef QT_OPENGL_ES
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
@@ -2534,8 +2540,11 @@ bool Scenery3d::initShadowmapping()
 			//On ANGLE, it seems to work without this settings (framebuffer is complete, etc.)
 			//but I don't know if it will work on other ES platforms?
 #ifndef QT_OPENGL_ES
-			glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
-			glReadBuffer(GL_NONE);
+			if(!isEs)
+			{
+				glExtFuncs.glBase.glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
+				glExtFuncs.glBase.glReadBuffer(GL_NONE);
+			}
 #endif
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)

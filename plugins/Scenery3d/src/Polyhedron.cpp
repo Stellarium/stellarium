@@ -23,7 +23,7 @@
 
 #include "Polyhedron.hpp"
 #include "Util.hpp"
-#include "StelOpenGL.hpp"
+#include "GLFuncs.hpp"
 #include <limits>
 
 Polyhedron::Polyhedron()
@@ -257,36 +257,32 @@ const QVector<Vec3f> &Polyhedron::getVerts() const
 
 void Polyhedron::render() const
 {
-// Minimum to avoid trouble when building on pure OpenGL ES systems
-// Not sure about ANGLE!
-// TODO: If this is required for functionality, find some compatible workaround? (Or disable plugin in ES2 altogether...)
 #if !defined(QT_OPENGL_ES_2)
 
 	//render each polygon
-	glColor3f(0.4f,0.4f,0.4f);
+	glExtFuncs.glBase.glColor3f(0.4f,0.4f,0.4f);
 	for(int i = 0;i<polygons.size();++i)
 	{
-		glBegin(GL_LINE_LOOP);
+		glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
 		const SPolygon& poly = polygons.at(i);
 		for(int j = 0;j<poly.vertices.size();++j)
 		{
-			glVertex3fv(poly.vertices.at(j).v);
+			glExtFuncs.glBase.glVertex3fv(poly.vertices.at(j).v);
 		}
-		glEnd();
+		glExtFuncs.glBase.glEnd();
 	}
 
 
 	//also show the uniqueVerts
-	glPointSize(4.0f);
-	glColor3f(1.0f,1.0f,1.0f);
+	glExtFuncs.glBase.glPointSize(4.0f);
+	glExtFuncs.glBase.glColor3f(1.0f,1.0f,1.0f);
 
 
-	glBegin(GL_POINTS);
+	glExtFuncs.glBase.glBegin(GL_POINTS);
 	for(int i =0;i<uniqueVerts.size();++i)
 	{
-
-		glVertex3fv(uniqueVerts.at(i).v);
+		glExtFuncs.glBase.glVertex3fv(uniqueVerts.at(i).v);
 	}
-	glEnd();
+	glExtFuncs.glBase.glEnd();
 #endif
 }
