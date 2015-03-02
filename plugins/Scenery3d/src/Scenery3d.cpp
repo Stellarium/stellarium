@@ -1905,6 +1905,18 @@ void Scenery3d::determineFeatureSupport()
 	else
 		qDebug()<<"[Scenery3d] Geometry shader not supported on this hardware";
 
+	//Query how many texture units we have at disposal in a fragment shader
+	//we currently need 8 in the worst case: diffuse, emissive, bump, height + 4x shadowmap
+	GLint texUnits,combUnits;
+	glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texUnits);
+	qDebug() << "[Scenery3d] GL_MAX_TEXTURE_IMAGE_UNITS:" << texUnits;
+	glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &combUnits);
+	qDebug() << "[Scenery3d] GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS:" << combUnits;
+	if(texUnits < 8 || combUnits < 8)
+	{
+		qWarning()<<"Insufficient texture units available for all effects, should have at least 8!";
+	}
+
 	if(shaderParameters.openglES)
 	{
 		//shadows in our implementation require depth textures
@@ -2461,17 +2473,6 @@ bool Scenery3d::initShadowmapping()
 		shadowFrustumSize.resize(shaderParameters.frustumSplits);
 		frustumArray.resize(shaderParameters.frustumSplits);
 		focusBodies.resize(shaderParameters.frustumSplits);
-
-		//Query how many texture units we have at disposal in a fragment shader
-		//we currently need 8 in the worst case: diffuse, emissive, bump, height + 4x shadowmap
-		GLint texUnits;
-		glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &texUnits);
-
-		qDebug() << "Available texture units:" << texUnits;
-		if(texUnits < 8)
-		{
-			qWarning()<<"Insufficient texture units available for all effects";
-		}
 
 		//For shadowmapping, we use create 1 SM FBO for each frustum split - this seems to be the optimal solution on modern GPUs,
 		//see http://www.reddit.com/r/opengl/comments/1rsnhy/most_efficient_fbo_usage_in_multipass_pipeline/
