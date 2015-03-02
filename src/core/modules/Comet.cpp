@@ -90,6 +90,7 @@ Comet::Comet(const QString& englishName,
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
+	tailFactors[0]=-1.0f; tailFactors[1]=-1.0f; // mark "invalid"
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
@@ -239,7 +240,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 
 
-	if (flags&Size)
+	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
 		// GZ: Add estimates for coma diameter and tail length.
 		// xgettext:no-c-format
