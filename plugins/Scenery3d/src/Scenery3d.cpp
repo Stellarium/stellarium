@@ -2525,11 +2525,14 @@ bool Scenery3d::initShadowmapping()
 #endif
 			//we use hardware-accelerated depth compare mode, unless pcss is used
 			//NOTE: cant use depth compare mode on ES2
-			if(!pcssEnabled && !isEs)
+			if(!pcssEnabled)
 			{
 #ifndef QT_OPENGL_ES
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+				if(!isEs)
+				{
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+				}
 #endif
 			}
 
