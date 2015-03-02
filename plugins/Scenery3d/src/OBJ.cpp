@@ -1531,34 +1531,6 @@ void OBJ::unbindGL()
 	}
 }
 
-#ifndef QT_OPENGL_ES
-void OBJ::bindGLFixedFunction()
-{
-	m_vertexBuffer.bind();
-
-	const GLsizei stride = sizeof(Vertex);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, stride, reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(GL_FLOAT, stride, reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, stride, reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
-
-	m_vertexBuffer.release();
-
-	m_indexBuffer.bind();
-}
-
-void OBJ::unbindGLFixedFunction()
-{
-	m_indexBuffer.release();
-
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
-}
-#endif
-
 void OBJ::bindBuffersGL()
 {
 	m_vertexBuffer.bind();

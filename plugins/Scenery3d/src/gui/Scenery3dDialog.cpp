@@ -384,7 +384,7 @@ void Scenery3dDialog::updateShadowCheckbox()
 
 void Scenery3dDialog::updateShadowFilterQuality(S3DEnum::ShadowFilterQuality quality)
 {
-	ui->checkBoxPCSS->setEnabled(quality == S3DEnum::SFQ_HIGH || quality == S3DEnum::S3DEnum::SFQ_LOW);
+	ui->checkBoxPCSS->setEnabled(quality == S3DEnum::SFQ_HIGH || quality == S3DEnum::SFQ_LOW);
 	ui->comboBoxShadowFiltering->setCurrentIndex(quality);
 }
 

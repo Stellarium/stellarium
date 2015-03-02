@@ -224,10 +224,6 @@ public:
     //! Unbinds this object's GL objects
     void unbindGL();
 
-    //! Legacy fixed-function binding, will be removed when changing to shader-based render
-    void bindGLFixedFunction();
-    void unbindGLFixedFunction();
-
     //! Set up some stuff that requires a valid OpenGL context.
     static void setupGL();
 
