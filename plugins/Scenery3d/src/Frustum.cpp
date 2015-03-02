@@ -1,6 +1,6 @@
 #include "Frustum.hpp"
 #include "Util.hpp"
-#include "StelOpenGL.hpp"
+#include "GLFuncs.hpp"
 #include <limits>
 
 Frustum::Frustum() : bbox(Vec3f(0),Vec3f(0)),drawBbox(Vec3f(0),Vec3f(0))
@@ -169,94 +169,94 @@ void Frustum::drawFrustum() const
     Vec3f fbl = drawCorners[FBL];
     Vec3f fbr = drawCorners[FBR];
 
-    glColor3f(0.0f, 0.0f, 1.0f);
+    glExtFuncs.glBase.glColor3f(0.0f, 0.0f, 1.0f);
 
-    glBegin(GL_LINE_LOOP);
+    glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
         //near plane
-        glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-        glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-        glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-        glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-    glEnd();
+	glExtFuncs.glBase.glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
+	glExtFuncs.glBase.glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
+	glExtFuncs.glBase.glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
+	glExtFuncs.glBase.glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
+    glExtFuncs.glBase.glEnd();
 
-    glBegin(GL_LINE_LOOP);
+    glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
         //far plane
-        glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-        glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-        glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-        glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-    glEnd();
+	glExtFuncs.glBase.glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
+	glExtFuncs.glBase.glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
+	glExtFuncs.glBase.glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
+	glExtFuncs.glBase.glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
+    glExtFuncs.glBase.glEnd();
 
-    glBegin(GL_LINE_LOOP);
+    glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
         //bottom plane
-        glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-        glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-        glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-        glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-    glEnd();
+	glExtFuncs.glBase.glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
+	glExtFuncs.glBase.glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
+	glExtFuncs.glBase.glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
+	glExtFuncs.glBase.glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
+    glExtFuncs.glBase.glEnd();
 
-    glBegin(GL_LINE_LOOP);
+    glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
         //top plane
-        glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-        glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-        glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-        glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-    glEnd();
+	glExtFuncs.glBase.glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
+	glExtFuncs.glBase.glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
+	glExtFuncs.glBase.glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
+	glExtFuncs.glBase.glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
+    glExtFuncs.glBase.glEnd();
 
-    glBegin(GL_LINE_LOOP);
+    glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
         //left plane
-        glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
-        glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
-        glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
-        glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
-    glEnd();
+	glExtFuncs.glBase.glVertex3f(ntl.v[0],ntl.v[1],ntl.v[2]);
+	glExtFuncs.glBase.glVertex3f(nbl.v[0],nbl.v[1],nbl.v[2]);
+	glExtFuncs.glBase.glVertex3f(fbl.v[0],fbl.v[1],fbl.v[2]);
+	glExtFuncs.glBase.glVertex3f(ftl.v[0],ftl.v[1],ftl.v[2]);
+    glExtFuncs.glBase.glEnd();
 
-    glBegin(GL_LINE_LOOP);
+    glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
         // right plane
-        glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
-        glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
-        glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
-        glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
-    glEnd();
+	glExtFuncs.glBase.glVertex3f(nbr.v[0],nbr.v[1],nbr.v[2]);
+	glExtFuncs.glBase.glVertex3f(ntr.v[0],ntr.v[1],ntr.v[2]);
+	glExtFuncs.glBase.glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
+	glExtFuncs.glBase.glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
+    glExtFuncs.glBase.glEnd();
 
     Vec3f a,b;
-    glBegin(GL_LINES);
+    glExtFuncs.glBase.glBegin(GL_LINES);
         // near
         a = (ntr + ntl + nbr + nbl) * 0.25;
         b = a + planes[NEARP]->sNormal;
-        glVertex3f(a.v[0],a.v[1],a.v[2]);
-        glVertex3f(b.v[0],b.v[1],b.v[2]);
+	glExtFuncs.glBase.glVertex3f(a.v[0],a.v[1],a.v[2]);
+	glExtFuncs.glBase.glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // far
         a = (ftr + ftl + fbr + fbl) * 0.25;
         b = a + planes[FARP]->sNormal;
-        glVertex3f(a.v[0],a.v[1],a.v[2]);
-        glVertex3f(b.v[0],b.v[1],b.v[2]);
+	glExtFuncs.glBase.glVertex3f(a.v[0],a.v[1],a.v[2]);
+	glExtFuncs.glBase.glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // left
         a = (ftl + fbl + nbl + ntl) * 0.25;
         b = a + planes[LEFT]->sNormal;
-        glVertex3f(a.v[0],a.v[1],a.v[2]);
-        glVertex3f(b.v[0],b.v[1],b.v[2]);
+	glExtFuncs.glBase.glVertex3f(a.v[0],a.v[1],a.v[2]);
+	glExtFuncs.glBase.glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // right
         a = (ftr + nbr + fbr + ntr) * 0.25;
         b = a + planes[RIGHT]->sNormal;
-        glVertex3f(a.v[0],a.v[1],a.v[2]);
-        glVertex3f(b.v[0],b.v[1],b.v[2]);
+	glExtFuncs.glBase.glVertex3f(a.v[0],a.v[1],a.v[2]);
+	glExtFuncs.glBase.glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // top
         a = (ftr + ftl + ntr + ntl) * 0.25;
         b = a + planes[TOP]->sNormal;
-        glVertex3f(a.v[0],a.v[1],a.v[2]);
-        glVertex3f(b.v[0],b.v[1],b.v[2]);
+	glExtFuncs.glBase.glVertex3f(a.v[0],a.v[1],a.v[2]);
+	glExtFuncs.glBase.glVertex3f(b.v[0],b.v[1],b.v[2]);
 
         // bottom
         a = (fbr + fbl + nbr + nbl) * 0.25;
         b = a + planes[BOTTOM]->sNormal;
-        glVertex3f(a.v[0],a.v[1],a.v[2]);
-        glVertex3f(b.v[0],b.v[1],b.v[2]);
-    glEnd();
+	glExtFuncs.glBase.glVertex3f(a.v[0],a.v[1],a.v[2]);
+	glExtFuncs.glBase.glVertex3f(b.v[0],b.v[1],b.v[2]);
+    glExtFuncs.glBase.glEnd();
 
     drawBbox.render();
 #endif

@@ -22,21 +22,28 @@
 #define _GLFUNCS_HPP_
 
 #include <QOpenGLContext>
+#include <QOpenGLFunctions_1_0>
 
-//! Defines some OpenGL functions not resolved through StelOpenGL, needed for Geometry shader
+//! Defines some OpenGL functions not resolved through StelOpenGL (which only contains base OpenGL ES2 functions)
 //! Using the QOpenGLFunctions_*_* would solve this better, but it conflicts with the
 //! current StelOpenGL header dramatically.
 struct GLExtFuncs
 {
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 	//! Since 3.2
 	PFNGLFRAMEBUFFERTEXTUREPROC glFramebufferTexture;
+
+	//! Old fixed-function functionality that is not in ES2, but some debugging stuff needs it
+	QOpenGLFunctions_1_0 glBase;
 #endif
 
 	void init(QOpenGLContext* ctx)
 	{
-		#ifndef QT_OPENGL_ES
+		#ifndef QT_OPENGL_ES_2
 		glFramebufferTexture = (PFNGLFRAMEBUFFERTEXTUREPROC)ctx->getProcAddress("glFramebufferTexture");
+
+		if(!ctx->isOpenGLES())
+			glBase.initializeOpenGLFunctions();
 		#endif
 	}
 

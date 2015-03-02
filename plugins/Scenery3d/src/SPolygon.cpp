@@ -21,7 +21,7 @@
 #include "SPolygon.hpp"
 #include "Plane.hpp"
 #include "Util.hpp"
-#include "StelOpenGL.hpp"
+#include "GLFuncs.hpp"
 
 SPolygon::SPolygon() {}
 
@@ -121,13 +121,13 @@ void SPolygon::render()
 {
 #if !defined(QT_OPENGL_ES_2)
 	//render each polygon
-	glColor3f(0.4f,0.4f,0.4f);
+	glExtFuncs.glBase.glColor3f(0.4f,0.4f,0.4f);
 
-	glBegin(GL_LINE_LOOP);
+	glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
 	for(int j = 0;j<vertices.size();++j)
 	{
-		glVertex3fv(vertices.at(j).v);
+		glExtFuncs.glBase.glVertex3fv(vertices.at(j).v);
 	}
-	glEnd();
+	glExtFuncs.glBase.glEnd();
 #endif
 }
