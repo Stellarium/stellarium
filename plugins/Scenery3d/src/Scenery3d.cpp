@@ -63,8 +63,10 @@
 static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
 static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 
+#ifndef QT_OPENGL_ES_2
 //this is the place where this is initialized
-GLExtFuncs glExtFuncs;
+GLExtFuncs* glExtFuncs;
+#endif
 
 #ifdef _MSC_VER
 //disable a stupid warning about array value-initialization
@@ -138,6 +140,11 @@ Scenery3d::~Scenery3d()
 
 	deleteShadowmapping();
 	deleteCubemapping();
+
+#ifndef QT_OPENGL_ES_2
+	//delete extension functions
+	delete glExtFuncs;
+#endif
 }
 
 bool Scenery3d::loadScene(const SceneInfo &scene)
@@ -1755,7 +1762,7 @@ void Scenery3d::drawCoordinatesText()
 void Scenery3d::drawDebug()
 {
 	//frustum/box debug rendering only on desktop GL
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 	if(!shaderParameters.openglES)
 	{
 		QOpenGLShaderProgram* debugShader = shaderManager.getDebugShader();
@@ -1764,10 +1771,10 @@ void Scenery3d::drawDebug()
 			debugShader->bind();
 
 			//ensure that opengl matrix stack is empty
-			glExtFuncs.glBase.glMatrixMode(GL_MODELVIEW);
-			glExtFuncs.glBase.glLoadIdentity();
-			glExtFuncs.glBase.glMatrixMode(GL_PROJECTION);
-			glExtFuncs.glBase.glLoadIdentity();
+			glExtFuncs->glMatrixMode(GL_MODELVIEW);
+			glExtFuncs->glLoadIdentity();
+			glExtFuncs->glMatrixMode(GL_PROJECTION);
+			glExtFuncs->glLoadIdentity();
 
 			//set mvp
 			SET_UNIFORM(debugShader,ShaderMgr::UNIFORM_MAT_MVP,projectionMatrix * modelViewMatrix);
@@ -1950,8 +1957,12 @@ void Scenery3d::init()
 	OBJ::setupGL();
 
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+
+#ifndef QT_OPENGL_ES_2
 	//initialize additional functions needed and not provided through StelOpenGL
-	glExtFuncs.init(ctx);
+	glExtFuncs = new GLExtFuncs();
+	glExtFuncs->init(ctx);
+#endif
 
 	//save opengl ES state
 	shaderParameters.openglES = ctx->isOpenGLES();
@@ -2078,7 +2089,7 @@ bool Scenery3d::initCubemapping()
 	}
 
 
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 	//if we are on an ES context, it may not be possible to specify texture bitdepth
 	bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
 	GLenum colorFormat = isEs ? GL_RGBA : GL_RGBA8;
@@ -2207,11 +2218,11 @@ bool Scenery3d::initCubemapping()
 
 		GET_GLERROR()
 
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 		//attach cube tex + cube depth
 		//note that this function will be a NULL pointer if GS is not supported, so it is important to check support before using
-		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapCubeTex,0);
-		glExtFuncs.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cubeMapCubeDepth, 0);
+		glExtFuncs->glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,cubeMapCubeTex,0);
+		glExtFuncs->glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, cubeMapCubeDepth, 0);
 #endif
 
 		GET_GLERROR()
@@ -2510,7 +2521,7 @@ bool Scenery3d::initShadowmapping()
 			//Bind the depth map and setup parameters
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 			bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
 			GLenum depthPcss = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT32F;
 			GLenum depthNormal = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT16;
@@ -2529,7 +2540,7 @@ bool Scenery3d::initShadowmapping()
 					|| shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH_HARDWARE) ? GL_LINEAR : GL_NEAREST;
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 			if(!isEs)
 			{
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL,0);
@@ -2544,7 +2555,7 @@ bool Scenery3d::initShadowmapping()
 			//NOTE: cant use depth compare mode on ES2
 			if(!pcssEnabled)
 			{
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 				if(!isEs)
 				{
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
@@ -2560,11 +2571,11 @@ bool Scenery3d::initShadowmapping()
 			//but the respective functions are not available on GLES2?
 			//On ANGLE, it seems to work without this settings (framebuffer is complete, etc.)
 			//but I don't know if it will work on other ES platforms?
-#ifndef QT_OPENGL_ES
+#ifndef QT_OPENGL_ES_2
 			if(!isEs)
 			{
-				glExtFuncs.glBase.glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
-				glExtFuncs.glBase.glReadBuffer(GL_NONE);
+				glExtFuncs->glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
+				glExtFuncs->glReadBuffer(GL_NONE);
 			}
 #endif
 
