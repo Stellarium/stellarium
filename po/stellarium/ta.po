@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-02-27 20:42+0600\n"
-"PO-Revision-Date: 2014-08-20 20:37+0000\n"
-"Last-Translator: Balaji பாலாஜி <Unknown>\n"
+"PO-Revision-Date: 2015-03-02 05:37+0000\n"
+"Last-Translator: Sarrvesh <sarrfriend@gmail.com>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-28 05:22+0000\n"
+"X-Launchpad-Export-Date: 2015-03-03 05:25+0000\n"
 "X-Generator: Launchpad (build 17361)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -1804,7 +1804,7 @@ msgstr "தட்டில் அளவு: %1 மி.பை."
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr ""
+msgstr "ஸ்டெல்லேரியம் %1 ஐ எழுதவோ அள்ளது படிக்கவோ இயலவில்லை"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 msgid ""
@@ -1834,7 +1834,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "தேர்ந்தெடுத்த தொகுப்பு"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
@@ -3712,7 +3712,7 @@ msgstr "குத்து உயரத்தை மீட்டரில் உ
 
 #: src/ui_locationDialogGui.h:430
 msgid " m"
-msgstr ""
+msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
@@ -4588,7 +4588,7 @@ msgstr "நிறங்களை புரட்டு"
 
 #: src/ui_configurationDialog.h:1174
 msgid "Star catalog updates"
-msgstr ""
+msgstr "புதிய நட்சத்திர பட்டியல்"
 
 #: src/ui_configurationDialog.h:1176
 msgid "Click here to start downloading"
@@ -4774,11 +4774,11 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:388
 msgid "Output"
-msgstr ""
+msgstr "வெளியீடு"
 
 #: src/ui_scriptConsole.h:390
 msgid "Cursor position"
-msgstr ""
+msgstr "நிலைக்காட்டி இடம்"
 
 #: src/ui_scriptConsole.h:392
 msgid "Include dir:"
@@ -5757,7 +5757,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:312
 msgid "The satellite is visible."
-msgstr ""
+msgstr "சையர்கைக்கோள் தெரிகிறது"
 
 #: plugins/Satellites/src/Satellite.cpp:315
 msgid "The satellite is eclipsed."
@@ -5770,7 +5770,7 @@ msgstr "சையர்கைக்கோள் தென்படவில்�
 #: plugins/Satellites/src/Satellite.cpp:343
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
 msgid "Stellarium Satellites Plugin"
@@ -5790,6 +5790,8 @@ msgstr "பயனர்களுக்கான குறிப்புகள�
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"பார்க்கும் நபர் பூமியில் இருந்தால் மட்டுமே செயற்கைகோளும் அதன் "
+"சுற்றுப்பாதையும் தென்படும்"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
@@ -6040,7 +6042,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:238
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "எந்தத் தகவலும் பெற இயலவில்லை. சிறிது நேரம் கழித்து அணுகவும்"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:371
 #, qt-format
@@ -6279,7 +6281,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 msgid "Move a telescope to a given set of coordinates"
-msgstr ""
+msgstr "குறிப்பிடப்பட்டுள்ள இடத்திற்கு தொலைநோக்கியை நகர்த்தவும்"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:151
 msgid "Add New Telescope"
@@ -6426,7 +6428,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:297
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "தொலைநோக்கியை குறிப்பிட்ட இடத்திற்கு நகர்த்தவும்"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:298
 msgid "&Right Ascension (J2000):"
@@ -6462,7 +6464,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:311
 msgid "Decimal degrees"
-msgstr ""
+msgstr "பதின்ம பாகை"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:313
 msgid "D&ecimal"
@@ -6869,6 +6871,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
+"எல்லா மாற்றங்களையும் ஸ்டேள்ளறியும் அடுத்தமுறை துவங்கும்போழுது பார்க்கலாம்"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
@@ -7015,7 +7018,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:427
 msgid "Milky Way intensity:"
-msgstr ""
+msgstr "பால் வழி மண்டல வெளிச்சத்தின் அளவு"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Zodiacal light intensity:"
