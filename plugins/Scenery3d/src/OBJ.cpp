@@ -97,7 +97,6 @@ bool OBJ::vertexArraysSupported=false;
 //static function
 void OBJ::setupGL()
 {
-	/*
 	//disable VAOs on Intel because of serious bugs in their implemenation...
 	QString vendor(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	if(vendor.contains("Intel",Qt::CaseInsensitive))
@@ -113,8 +112,6 @@ void OBJ::setupGL()
 		OBJ::vertexArraysSupported = testObj.create();
 		testObj.destroy();
 	}
-	*/
-	OBJ::vertexArraysSupported = false;
 
 	if( OBJ::vertexArraysSupported )
 	{
