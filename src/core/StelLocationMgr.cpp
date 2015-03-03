@@ -353,7 +353,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 {
 	StelLocation location;
 	StelCore *core=StelApp::getInstance().getCore();
-	QNetworkReply* networkReply = static_cast<QNetworkReply*>(sender());
+	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
 	if (!networkReply)
 	    return;
 	if (networkReply->error() == QNetworkReply::NoError) {
