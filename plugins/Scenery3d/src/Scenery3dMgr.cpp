@@ -237,7 +237,7 @@ void Scenery3dMgr::loadConfig()
 	conf->beginGroup(S3D_CONFIG_PREFIX);
 
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
-	scenery3d->setCubemappingMode( static_cast<S3DEnum::CubemappingMode>(conf->value("cubemap_mode",1).toInt()) );
+	scenery3d->setCubemappingMode( static_cast<S3DEnum::CubemappingMode>(conf->value("cubemap_mode",0).toInt()) );
 	scenery3d->setCubemapSize(conf->value("cubemap_size",2048).toInt());
 	scenery3d->setShadowmapSize(conf->value("shadowmap_size", 1024).toInt());
 	scenery3d->setShadowFilterQuality( static_cast<S3DEnum::ShadowFilterQuality>(conf->value("shadow_filter_quality", 1).toInt()) );

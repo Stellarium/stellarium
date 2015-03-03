@@ -2057,9 +2057,23 @@ bool Scenery3d::initCubemapping()
 	//last compatibility check before possible crash
 	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
-		parent->showMessage(N_("Selected cubemapping mode is not supported. Falling back to '6 Textures' mode."));
+		parent->showMessage(N_("Geometry shader is not supported. Falling back to '6 Textures' mode."));
+		qWarning()<<"[Scenery3d] GS not supported, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
+
+	QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+
+	//TODO the ANGLE version included with Qt 5.4 includes a bug that prevents Cubemapping to be used
+	//Remove this if this is ever fixed
+	if(renderer.contains("ANGLE") && cubemappingMode >= S3DEnum::CM_CUBEMAP)
+	{
+		//Fall back to "6 Textures" mode
+		parent->showMessage(N_("Falling back to '6 Textures' because of ANGLE bug"));
+		qWarning()<<"[Scenery3d] On ANGLE, fallback to '6 Textures'";
+		cubemappingMode = S3DEnum::CM_TEXTURES;
+	}
+
 
 #ifndef QT_OPENGL_ES
 	//if we are on an ES context, it may not be possible to specify texture bitdepth
