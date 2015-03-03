@@ -260,29 +260,29 @@ void Polyhedron::render() const
 #if !defined(QT_OPENGL_ES_2)
 
 	//render each polygon
-	glExtFuncs.glBase.glColor3f(0.4f,0.4f,0.4f);
+	glExtFuncs->glColor3f(0.4f,0.4f,0.4f);
 	for(int i = 0;i<polygons.size();++i)
 	{
-		glExtFuncs.glBase.glBegin(GL_LINE_LOOP);
+		glExtFuncs->glBegin(GL_LINE_LOOP);
 		const SPolygon& poly = polygons.at(i);
 		for(int j = 0;j<poly.vertices.size();++j)
 		{
-			glExtFuncs.glBase.glVertex3fv(poly.vertices.at(j).v);
+			glExtFuncs->glVertex3fv(poly.vertices.at(j).v);
 		}
-		glExtFuncs.glBase.glEnd();
+		glExtFuncs->glEnd();
 	}
 
 
 	//also show the uniqueVerts
-	glExtFuncs.glBase.glPointSize(4.0f);
-	glExtFuncs.glBase.glColor3f(1.0f,1.0f,1.0f);
+	glExtFuncs->glPointSize(4.0f);
+	glExtFuncs->glColor3f(1.0f,1.0f,1.0f);
 
 
-	glExtFuncs.glBase.glBegin(GL_POINTS);
+	glExtFuncs->glBegin(GL_POINTS);
 	for(int i =0;i<uniqueVerts.size();++i)
 	{
-		glExtFuncs.glBase.glVertex3fv(uniqueVerts.at(i).v);
+		glExtFuncs->glVertex3fv(uniqueVerts.at(i).v);
 	}
-	glExtFuncs.glBase.glEnd();
+	glExtFuncs->glEnd();
 #endif
 }
