@@ -179,6 +179,10 @@ public:
     //! Returns a StelModel
     const StelModel& getStelModel(int i) const;
 
+    //! This should be called after textures are loaded, and will re-order the StelModels to be grouped by their material.
+    //! Furthermore, this is a prerequisite for transparencyDepthSort.
+    void finalizeForRendering();
+
     //! Sorts the transparent StelModels according to their distance to the specified position.
     //! They are sorted so that they can be drawn back-to-front.
     void transparencyDepthSort(const Vec3f& position);
