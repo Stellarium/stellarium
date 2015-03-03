@@ -88,10 +88,10 @@ void calcLighting(vec3 normal, vec3 viewPos, out vec3 texIll, out vec3 specIll)
 	
 	Idiff += att * u_vMixTorchDiffuse * max(0.0, dot(normal,eye));
 #endif
-
-#if MAT_SPECULAR
 	
 	specIll = vec3(0,0,0);
+	
+#if MAT_SPECULAR
 	if(NdotL>0.0)
 	{
 		//calculate phong reflection vector
