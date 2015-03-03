@@ -256,6 +256,9 @@ void Scenery3d::finalizeLoad()
 	//upload GL
 	objModel->uploadBuffersGL();
 	objModel->uploadTexturesGL();
+	//call this after texture load
+	objModel->finalizeForRendering();
+
 	//the ground model needs no opengl uploads, so we skip them
 
 	//delete old heightmap

@@ -97,6 +97,7 @@ bool OBJ::vertexArraysSupported=false;
 //static function
 void OBJ::setupGL()
 {
+	/*
 	//disable VAOs on Intel because of serious bugs in their implemenation...
 	QString vendor(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	if(vendor.contains("Intel",Qt::CaseInsensitive))
@@ -112,6 +113,8 @@ void OBJ::setupGL()
 		OBJ::vertexArraysSupported = testObj.create();
 		testObj.destroy();
 	}
+	*/
+	OBJ::vertexArraysSupported = false;
 
 	if( OBJ::vertexArraysSupported )
 	{
@@ -1456,28 +1459,35 @@ void OBJ::uploadTexturesGL()
 		qWarning() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName;
 	    }
 	}
-
-	//we have texture information, now finalize the material
-	pMaterial->finalize();
-    }
-
-    //optimize the StelModel order depending on their materials
-    //among other criteria, it is always ensured that the transparent objects are now together among the end of the list
-    std::sort(m_stelModels.begin(), m_stelModels.end(), StelModelCompFunc);
-
-    //find the first stelmodel that is transparent
-    //this is required for the depth sorting
-    m_firstTransparentIndex = -1;
-    for(int i=0;i<m_stelModels.size();++i)
-    {
-	    if(m_stelModels.at(i).pMaterial->hasTransparency)
-	    {
-		    m_firstTransparentIndex = i;
-		    break;
-	    }
     }
 
     qDebug()<<"[Scenery3d] Uploaded OBJ textures to GL";
+}
+
+void OBJ::finalizeForRendering()
+{
+	//finalize all materials
+	//we have texture information, now finalize the material
+	for(int i = 0;i<m_materials.size();++i)
+	{
+		m_materials[i].finalize();
+	}
+
+	//optimize the StelModel order depending on their materials
+	//among other criteria, it is always ensured that the transparent objects are now together among the end of the list
+	std::sort(m_stelModels.begin(), m_stelModels.end(), StelModelCompFunc);
+
+	//find the first stelmodel that is transparent
+	//this is required for the depth sorting
+	m_firstTransparentIndex = -1;
+	for(int i=0;i<m_stelModels.size();++i)
+	{
+		if(m_stelModels.at(i).pMaterial->hasTransparency)
+		{
+			m_firstTransparentIndex = i;
+			break;
+		}
+	}
 }
 
 void OBJ::uploadBuffersGL()
