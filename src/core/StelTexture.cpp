@@ -259,8 +259,19 @@ bool StelTexture::glLoad(const GLData& data)
 		reportError("Unknown error");
 		return false;
 	}
+
 	width = data.width;
 	height = data.height;
+
+	//check minimum texture size
+	GLint maxSize;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE,&maxSize);
+	if(maxSize < width || maxSize < height)
+	{
+		reportError(QString("Texture size (%1/%2) is larger than GL_MAX_TEXTURE_SIZE (%3)!").arg(width).arg(height).arg(maxSize));
+		return false;
+	}
+
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
