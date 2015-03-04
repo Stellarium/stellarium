@@ -818,7 +818,7 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
     unsigned int numTriangles = 0;
     int activeMaterial = 0;
     int activeObject = 0;
-    char buffer[256] = {0};
+    char buffer[1024] = {0};
     QString name;
     QMap<QString,int>::const_iterator iter;
 
@@ -1003,6 +1003,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT
 	    break;
 	case 'o':
 	case 'g':
+			//do this to make it skip the rest of the line, important!
+			fgets(buffer, sizeof(buffer), pFile);
 			//grouping separators, we consider treat o and g the same in that they may require splitting of objects
 			//we ignore the grouping name
 			++activeObject;
