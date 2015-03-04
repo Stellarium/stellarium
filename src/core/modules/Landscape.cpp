@@ -628,7 +628,12 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	if (alt_rad > (decorAltAngle+decorAngleShift)*M_PI/180.0f) return 0.0f; // above decor, i.e. certainly free sky.
 	if (!calibrated) // the result of this function has no real use here: just complain and return result for math. horizon.
 	{
-		qDebug() << "Dubious result: Landscape \"" << name << "\" not calibrated. Result for mathematical horizon only.";
+		static QString lastLandscapeName;
+		if (lastLandscapeName != name)
+		{
+			qWarning() << "Dubious result: Landscape \"" << name << "\" not calibrated. Opacity test represents mathematical horizon only.";
+			lastLandscapeName=name;
+		}
 		return (azalt[2] > 0 ? 0.0f : 1.0f);
 	}
 

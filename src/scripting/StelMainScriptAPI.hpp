@@ -309,6 +309,8 @@ public slots:
 	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
 	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
+	//! - local-sidereal-time : local sidereal time on the planet in hours (since 0.13.3)
+	//! - local-sidereal-time-hms : local sidereal time on the planet in hours in HMS format (since 0.13.3)
 	QVariantMap getObserverLocationInfo();
 
 	//! Save a screenshot.
