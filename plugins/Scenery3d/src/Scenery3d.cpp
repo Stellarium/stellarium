@@ -630,6 +630,8 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 {
 	QOpenGLShaderProgram* curShader = NULL;
 	QSet<QOpenGLShaderProgram*> initialized;
+	GLenum indexDataType = OBJ::getIndexBufferType();
+	size_t indexDataTypeSize = OBJ::getIndexBufferTypeSize();
 
 	//override some shader Params
 	GlobalShaderParameters pm = shaderParameters;
@@ -755,7 +757,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		}
 
 
-		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
+		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, indexDataType, reinterpret_cast<const void*>(pStelModel->startIndex * indexDataTypeSize));
 		drawnTriangles+=pStelModel->triangleCount;
 	}
 
