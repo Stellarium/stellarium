@@ -93,6 +93,8 @@ bool StelModelCompFunc(const OBJ::StelModel& lhs, const OBJ::StelModel& rhs)
 }
 
 bool OBJ::vertexArraysSupported=false;
+GLenum OBJ::indexBufferType=GL_UNSIGNED_SHORT;
+size_t OBJ::indexBufferTypeSize=0;
 
 //static function
 void OBJ::setupGL()
@@ -120,6 +122,33 @@ void OBJ::setupGL()
 	else
 	{
 		qWarning()<<"[Scenery3d] Vertex Array Objects are not supported on your hardware";
+	}
+
+	//check if we can enable int index buffers
+	QOpenGLContext* ctx = QOpenGLContext::currentContext();
+	if(ctx->isOpenGLES())
+	{
+		//query for extension
+		if(ctx->hasExtension("GL_OES_element_index_uint"))
+		{
+			OBJ::indexBufferType = GL_UNSIGNED_INT;
+		}
+	}
+	else
+	{
+		//we are on Desktop, so int is always supported
+		OBJ::indexBufferType = GL_UNSIGNED_INT;
+	}
+
+	if(OBJ::indexBufferType==GL_UNSIGNED_SHORT)
+	{
+		OBJ::indexBufferTypeSize = sizeof(unsigned short);
+		qWarning()<<"[Scenery3d] Your hardware does not support integer indices. Large models will not load.";
+	}
+	else
+	{
+		Q_ASSERT(OBJ::indexBufferType == GL_UNSIGNED_INT);
+		OBJ::indexBufferTypeSize = sizeof(unsigned int);
 	}
 }
 
@@ -211,6 +240,16 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
 
     //Done parsing, close file
     fclose(pFile);
+
+    //check if we support rendering the number of vertices loaded
+    if(indexBufferType == GL_UNSIGNED_SHORT)
+    {
+	    if((m_vertexArray.size() - 1) > std::numeric_limits<unsigned short>::max())
+	    {
+		    qCritical()<<"[Scenery3d] This scene is too complex to be rendered on your hardware. Vertices:"<<m_vertexArray.size()<<", hardware maximum:"<<std::numeric_limits<unsigned short>::max()+1;
+		    return false;
+	    }
+    }
 
     qint64 secondPassTime = timer.restart();
 
@@ -1497,18 +1536,67 @@ void OBJ::uploadBuffersGL()
 		m_vertexArrayObject->bind();
 	}
 
-	m_vertexBuffer.create();
-	m_vertexBuffer.bind();
-	m_vertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
-	//this is the upload
-	m_vertexBuffer.allocate(m_vertexArray.constData(), sizeof(Vertex) * m_vertexArray.size());
-	m_vertexBuffer.release();
+	if(m_vertexBuffer.create() && m_indexBuffer.create())
+	{
+		if(m_vertexBuffer.bind())
+		{
+			m_vertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+			//this is the upload
+			m_vertexBuffer.allocate(m_vertexArray.constData(), sizeof(Vertex) * m_vertexArray.size());
+			m_vertexBuffer.release();
+		}
+		else
+		{
+			qCritical()<<"[Scenery3d] Could not bind vertex buffer";
+			m_vertexBuffer.destroy();
+			m_indexBuffer.destroy();
+			return;
+		}
 
-	m_indexBuffer.create();
-	m_indexBuffer.bind();
-	m_indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
-	m_indexBuffer.allocate(m_indexArray.constData(), sizeof(unsigned int) * m_indexArray.size());
-	m_indexBuffer.release();
+		if(m_indexBuffer.bind())
+		{
+			m_indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+			if(OBJ::indexBufferType == GL_UNSIGNED_INT)
+			{
+				//we can directly upload the index array
+				m_indexBuffer.allocate(m_indexArray.constData(), sizeof(unsigned int) * m_indexArray.size());
+			}
+			else
+			{
+				Q_ASSERT(OBJ::indexBufferType == GL_UNSIGNED_SHORT);
+
+				//TODO: find a way to skip this conversion
+				//This is probably not so easy, because dynamic ANGLE/OGL builds may require a runtime selection between the 2 versions
+				//and m_indexArray is used in quite a lot of places including the Heightmap class.
+
+				//we have to convert to short
+				QVector<unsigned short> indices;
+				indices.resize(m_indexArray.size());
+				for(int i =0;i<m_indexArray.size();++i)
+				{
+					indices[i] = m_indexArray[i];
+				}
+
+				//now upload the new data
+				m_indexBuffer.allocate(indices.constData(), sizeof(unsigned short) * indices.size());
+			}
+			m_indexBuffer.release();
+		}
+		else
+		{
+			qCritical()<<"[Scenery3d] Could not bind index buffer";
+			m_vertexBuffer.destroy();
+			m_indexBuffer.destroy();
+			return;
+		}
+	}
+	else
+	{
+		qCritical()<<"[Scenery3d] Could not create OpenGL buffers!";
+		m_vertexBuffer.destroy();
+		m_indexBuffer.destroy();
+		return;
+	}
 
 	if(vertexArraysSupported)
 	{

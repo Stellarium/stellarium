@@ -230,6 +230,10 @@ public:
 
     //! Set up some stuff that requires a valid OpenGL context.
     static void setupGL();
+    //! Returns the OpenGL index buffer type supported on this hardware.
+    //! OpenGL ES may not support integer indices, so this is necessary.
+    static inline GLenum getIndexBufferType() { return indexBufferType; }
+    static inline size_t getIndexBufferTypeSize() { return indexBufferTypeSize; }
 
     //! Copy assignment operator. No deep copies are performed, but QVectors have copy-on-write semantics, so this is no problem. Does not copy GL objects.
     OBJ& operator=(const OBJ& other);
@@ -290,6 +294,10 @@ private:
     bool m_hasStelModels;
     static bool vertexArraysSupported;
 
+    //! The type of the index buffer, may be GL_UNSIGNED_INT or GL_UNSIGNED_SHORT (on ES where GL_OES_element_index_uint is unsupported)
+    static GLenum indexBufferType;
+    //! The sizeof() of the indexBufferType
+    static size_t indexBufferTypeSize;
     int m_firstTransparentIndex;
 
     //! Structure sizes
