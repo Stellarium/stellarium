@@ -138,31 +138,15 @@ void Scenery3dMgr::draw(StelCore* core)
 
 void Scenery3dMgr::init()
 {
-    qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
+	qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
 
-	//load config and create interface actions
-	loadConfig();
-	createActions();
+	//get the global configuration object
+	conf = StelApp::getInstance().getSettings();
 
-	// graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
-	// In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
-	if ( !QOpenGLContext::currentContext()->hasExtension("GL_EXT_framebuffer_object") && ! QOpenGLContext::currentContext()->isOpenGLES() ) {
-
-		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
-
-		qWarning() << "Scenery3d: Your hardware does not support EXT_framebuffer_object.";
-		qWarning() << "           Shadow mapping disabled, and display limited to perspective projection.";
-
-		scenery3d->setCubemapSize(0);
-		scenery3d->setShadowmapSize(0);
-	}
-
-	reloadShaders();
-
-	//Initialize Shadow Mapping
-	qDebug() << "init scenery3d object...";
-	scenery3d->init(); //this also finds out what features are supported
-	qDebug() << "init scenery3d object...done";
+	//Initialize the renderer - this also finds out what features are supported
+	qDebug() << "[Scenery3d] init scenery3d object...";
+	scenery3d->init();
+	qDebug() << "[Scenery3d] init scenery3d object...done";
 
 	//make sure shadows are off if unsupported
 	if(! scenery3d->areShadowsSupported())
@@ -173,43 +157,22 @@ void Scenery3dMgr::init()
 		setEnablePCSS(false);
 	}
 
-	emit isGeometryShaderSupportedChanged(getIsGeometryShaderSupported());
-	emit areShadowsSupportedChanged(getAreShadowsSupported());
-	emit isShadowFilteringSupportedChanged(getIsShadowFilteringSupported());
+	//we emit these so the GUI gets notified of the correct values
+	//emit isGeometryShaderSupportedChanged(getIsGeometryShaderSupported());
+	//emit areShadowsSupportedChanged(getAreShadowsSupported());
+	//emit isShadowFilteringSupportedChanged(getIsShadowFilteringSupported());
 
-	// Add 3 toolbar buttons (copy/paste widely from AngleMeasure): activate, settings, and viewpoints.
-	try
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	//load config and create interface actions
+	loadConfig();
+	createActions();
+	createToolbarButtons();
 
-		StelButton* toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
-								 QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
-								 QPixmap(":/graphicGui/glow32x32.png"),
-								 "actionShow_Scenery3d");
-		StelButton* toolbarSettingsButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
-								   QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
-								   QPixmap(":/graphicGui/glow32x32.png"),
-								   "actionShow_Scenery3d_dialog");
-		StelButton* toolbarStoredViewButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
-								   QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
-								   QPixmap(":/graphicGui/glow32x32.png"),
-								   "actionShow_Scenery3d_storedViewDialog");
-
-		gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
-		gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
-		gui->getButtonBar()->addButton(toolbarStoredViewButton, "065-pluginsGroup");
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
-	}
-
-	//finally, hook up the lightscape toggle event to cubemap redraw
+	//finally, hook up the lightscape toggle event (external to this plugin) to cubemap redraw
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_LandscapeIllumination");
 	Q_ASSERT(action);
 	connect(action, &StelAction::toggled, this, &Scenery3dMgr::forceCubemapRedraw);
 
-	showMessage("Scenery3d plugin loaded!");
+	showMessage(N_("Scenery3d plugin loaded!"));
 }
 
 void Scenery3dMgr::deinit()
@@ -232,8 +195,6 @@ void Scenery3dMgr::deinit()
 
 void Scenery3dMgr::loadConfig()
 {
-	conf = StelApp::getInstance().getSettings();
-
 	conf->beginGroup(S3D_CONFIG_PREFIX);
 
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
@@ -274,6 +235,36 @@ void Scenery3dMgr::createActions()
 	addAction("actionShow_Scenery3d_locationinfo",     groupName, N_("Toggle location text"),     this,          "enableLocationInfo","Ctrl+R, T");
 	addAction("actionShow_Scenery3d_torchlight",       groupName, N_("Toggle torchlight"),        this,          "enableTorchLight",  "Ctrl+R, L");
 	addAction("actionReload_Scenery3d_shaders",        groupName, N_("Reload shaders"),           this,          "reloadShaders()",   "Ctrl+R, P");
+}
+
+void Scenery3dMgr::createToolbarButtons() const
+{
+	// Add 3 toolbar buttons (copy/paste widely from AngleMeasure): activate, settings, and viewpoints.
+	try
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+
+		StelButton* toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
+								 QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
+								 QPixmap(":/graphicGui/glow32x32.png"),
+								 "actionShow_Scenery3d");
+		StelButton* toolbarSettingsButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
+								   QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
+								   QPixmap(":/graphicGui/glow32x32.png"),
+								   "actionShow_Scenery3d_dialog");
+		StelButton* toolbarStoredViewButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
+								   QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
+								   QPixmap(":/graphicGui/glow32x32.png"),
+								   "actionShow_Scenery3d_storedViewDialog");
+
+		gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
+		gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
+		gui->getButtonBar()->addButton(toolbarStoredViewButton, "065-pluginsGroup");
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
+	}
 }
 
 void Scenery3dMgr::reloadShaders()
@@ -615,9 +606,13 @@ S3DEnum::CubemappingMode Scenery3dMgr::getCubemappingMode() const
 void Scenery3dMgr::setCubemappingMode(const S3DEnum::CubemappingMode val)
 {
 	scenery3d->setCubemappingMode(val);
+	S3DEnum::CubemappingMode realVal = scenery3d->getCubemappingMode();
 
-	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_mode",val);
-	emit cubemappingModeChanged(val);
+	if(val!=realVal)
+		showMessage(N_("Selected cubemap mode not supported, falling back to '6 Textures'"));
+
+	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_mode",realVal);
+	emit cubemappingModeChanged(realVal);
 }
 
 bool Scenery3dMgr::getUseFullCubemapShadows() const
@@ -779,10 +774,16 @@ void Scenery3dMgr::setCubemapSize(const uint val)
 	if(val != getCubemapSize())
 	{
 		scenery3d->setCubemapSize(val);
-		showMessage(N_("Cubemap size changed"));
 
-		conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_size",val);
-		emit cubemapSizeChanged(val);
+		//hardware may not support the value, get real value set
+		int realVal = scenery3d->getCubemapSize();
+		if(realVal==val)
+			showMessage(N_("Cubemap size changed"));
+		else
+			showMessage(QString(N_("Cubemap size not supported, set to %1")).arg(realVal));
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_size",realVal);
+		emit cubemapSizeChanged(realVal);
 	}
 }
 
@@ -796,10 +797,16 @@ void Scenery3dMgr::setShadowmapSize(const uint val)
 	if(val != getShadowmapSize())
 	{
 		scenery3d->setShadowmapSize(val);
-		showMessage(N_("Shadowmap size changed"));
 
-		conf->setValue(S3D_CONFIG_PREFIX + "/shadowmap_size",val);
-		emit shadowmapSizeChanged(val);
+		//hardware may not support the value, get real value set
+		int realVal = scenery3d->getShadowmapSize();
+		if(realVal==val)
+			showMessage(N_("Shadowmap size changed"));
+		else
+			showMessage(QString(N_("Shadowmap size not supported, set to %1")).arg(realVal));
+
+		conf->setValue(S3D_CONFIG_PREFIX + "/shadowmap_size",realVal);
+		emit shadowmapSizeChanged(realVal);
 	}
 }
 
@@ -816,6 +823,16 @@ bool Scenery3dMgr::getAreShadowsSupported() const
 bool Scenery3dMgr::getIsShadowFilteringSupported() const
 {
 	return scenery3d->isShadowFilteringSupported();
+}
+
+bool Scenery3dMgr::getIsANGLE() const
+{
+	return scenery3d->isANGLEContext();
+}
+
+uint Scenery3dMgr::getMaximumFramebufferSize() const
+{
+	return scenery3d->getMaximumFramebufferSize();
 }
 
 void Scenery3dMgr::setView(const StoredView &view)

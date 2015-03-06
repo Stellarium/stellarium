@@ -2,30 +2,38 @@
 #define _SCENERY3DDIALOG_P_HPP_
 
 #include "S3DEnum.hpp"
+#include "Scenery3dMgr.hpp"
+
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
+
 #include <QAbstractListModel>
 
 class CubemapModeListModel : public QAbstractListModel
 {
 	Q_OBJECT
-
 private:
-	bool gsSupported;
-public slots:
-	void setGSSupported(bool supported)
-	{
-		gsSupported = supported;
-		QModelIndex idx = index(S3DEnum::CM_CUBEMAP_GSACCEL);
-		emit dataChanged(idx,idx);
-	}
+	Scenery3dMgr* mgr;
 public:
 
 
-	CubemapModeListModel(QObject* parent = NULL) : QAbstractListModel(parent),gsSupported(false)
-	{}
+	CubemapModeListModel(QObject* parent = NULL) : QAbstractListModel(parent)
+	{
+		mgr = GETSTELMODULE(Scenery3dMgr);
+		Q_ASSERT(mgr);
+	}
 
 	int rowCount(const QModelIndex &parent) const
 	{
+		if(mgr->getIsANGLE())
+		{
+			return 1;
+		}
+		if(!mgr->getIsGeometryShaderSupported())
+		{
+			return 2;
+		}
 		return 3;
 	}
 
@@ -44,27 +52,6 @@ public:
 			}
 		}
 		return QVariant();
-	}
-
-	Qt::ItemFlags flags(const QModelIndex &index) const
-	{
-		//disable the third item depending on geometry shader support flag
-		Qt::ItemFlags parFlags = QAbstractListModel::flags(index);
-
-		if(index.row() == S3DEnum::CM_CUBEMAP_GSACCEL)
-		{
-			if(gsSupported)
-			{
-				//set flag, may not be necessary
-				parFlags|= Qt::ItemIsEnabled;
-			}
-			else
-			{
-				//remove flag
-				parFlags&= ~Qt::ItemIsEnabled;
-			}
-		}
-		return parFlags;
 	}
 };
 

@@ -108,16 +108,31 @@ public:
 
     S3DEnum::CubemappingMode getCubemappingMode() const { return cubemappingMode; }
     //! Changes cubemapping mode and forces re-initialization on next draw call.
-    //! Note that NO CHECKING is done if the chosen mode is supported on this hardware, you have to make sure before calling this.
-    void setCubemappingMode(S3DEnum::CubemappingMode mode) { cubemappingMode = mode; reinitCubemapping = true; }
+    //! This may not set the actual mode to the parameter, call getCubemappingMode to find out what was set.
+    void setCubemappingMode(S3DEnum::CubemappingMode mode)
+    {
+	    if(mode == S3DEnum::CM_CUBEMAP_GSACCEL && !isGeometryShaderCubemapSupported())
+	    {
+		    //fallback to 6 Textures mode
+		    mode = S3DEnum::CM_TEXTURES;
+	    }
+	    if(mode == S3DEnum::CM_CUBEMAP && isANGLEContext())
+	    {
+		    //Cubemap mode disabled on ANGLE because of an implementation bug with Qt 5.4's version
+		    mode = S3DEnum::CM_TEXTURES;
+	    }
+	    cubemappingMode = mode; reinitCubemapping = true;
+    }
 
     void setUseFullCubemapShadows(bool val) { fullCubemapShadows = val; invalidateCubemap();}
     bool getUseFullCubemapShadows() const { return fullCubemapShadows; }
 
     uint getCubemapSize() const { return cubemapSize; }
-    void setCubemapSize(uint size) { cubemapSize = size; reinitCubemapping = true; }
+    //! Note: This may not set the size to the desired one because of hardware limits, call getCubemapSize to receive the value set after this call.
+    void setCubemapSize(uint size) { cubemapSize = (size > maximumFramebufferSize ? maximumFramebufferSize : size); reinitCubemapping = true; }
     uint getShadowmapSize() const { return shadowmapSize; }
-    void setShadowmapSize(uint size) { shadowmapSize = size; reinitShadowmapping = true; }
+    //! Note: This may not set the size to the desired one because of hardware limits, call getShadowmapSize to receive the value set after this call.
+    void setShadowmapSize(uint size) { shadowmapSize = (size > maximumFramebufferSize ? maximumFramebufferSize : size); reinitShadowmapping = true; }
     float getTorchBrightness() const { return torchBrightness; }
     void setTorchBrightness(float brightness) { torchBrightness = brightness; invalidateCubemap(); }
     float getTorchRange() const { return torchRange; }
@@ -144,9 +159,13 @@ public:
     //! Loads the model into GL and sets the loaded scene to be the current one
     void finalizeLoad();
 
+    //these are some properties that determine the features supported in the current GL context
+    //available after init() is called
     bool isGeometryShaderCubemapSupported() { return supportsGSCubemapping; }
     bool areShadowsSupported() { return supportsShadows; }
     bool isShadowFilteringSupported() { return supportsShadowFiltering; }
+    bool isANGLEContext() { return isANGLE; }
+    unsigned int getMaximumFramebufferSize() { return maximumFramebufferSize; }
 
 private:
     Scenery3dMgr* parent;
@@ -157,6 +176,8 @@ private:
     bool supportsGSCubemapping; //if the GL context supports geometry shader cubemapping
     bool supportsShadows; //if shadows are supported
     bool supportsShadowFiltering; //if shadow filtering is supported
+    bool isANGLE; //true if running on ANGLE
+    unsigned int maximumFramebufferSize;
 
     float torchBrightness; // toggle light brightness
     float torchRange; // used to calculate attenuation like in the second form at http://framebunker.com/blog/lighting-2-attenuation/

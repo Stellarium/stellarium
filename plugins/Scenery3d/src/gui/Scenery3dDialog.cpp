@@ -35,6 +35,13 @@ void Scenery3dDialog::retranslate()
 		if(!si.isValid)
 			si = mgr->getCurrentScene(); //the scene that is currently displayed
 		updateTextBrowser(si);
+
+		foreach(QAbstractButton* but, shortcutButtons)
+		{
+			//replace stored text with re-translated one
+			but->setProperty("stelOriginalText",but->text());
+		}
+
 		updateShortcutStrings();
 	}
 }
@@ -44,6 +51,8 @@ void Scenery3dDialog::createDialogContent()
 	//manager should be created at this point
 	mgr = GETSTELMODULE(Scenery3dMgr);
 	Q_ASSERT(mgr);
+
+	//additionally, Scenery3dMgr::init should have been called to make sure the correct values are set for hardware support
 
 	//load Ui from form file
 	ui->setupUi(dialog);
@@ -80,21 +89,22 @@ void Scenery3dDialog::createDialogContent()
 	if(ac)
 	{
 		ui->checkBoxTorchlight->setProperty("stelActionKey",ac->getId());
+		ui->checkBoxTorchlight->setProperty("stelOriginalText",ui->checkBoxTorchlight->text());
 		ui->checkBoxTorchlight->setChecked(ac->isChecked());
 		connect(ac,&StelAction::toggled,ui->checkBoxTorchlight, &QCheckBox::setChecked);
 		connect(ui->checkBoxTorchlight,&QCheckBox::toggled,ac, &StelAction::setChecked);
-		//reacting to key combo changes does not work yet
-		//connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
+		connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
 		shortcutButtons.append(ui->checkBoxTorchlight);
 	}
 	ac = acMgr->findAction("actionShow_Scenery3d_locationinfo");
 	if(ac)
 	{
 		ui->checkBoxShowGridCoordinates->setProperty("stelActionKey",ac->getId());
+		ui->checkBoxShowGridCoordinates->setProperty("stelOriginalText",ui->checkBoxShowGridCoordinates->text());
 		ui->checkBoxShowGridCoordinates->setChecked(ac->isChecked());
 		connect(ac,&StelAction::toggled,ui->checkBoxShowGridCoordinates, &QCheckBox::setChecked);
 		connect(ui->checkBoxShowGridCoordinates,&QCheckBox::toggled,ac, &StelAction::setChecked);
-		//connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
+		connect(ac,&StelAction::changed,this,&Scenery3dDialog::updateShortcutStrings);
 		shortcutButtons.append(ui->checkBoxShowGridCoordinates);
 	}
 
@@ -153,23 +163,18 @@ void Scenery3dDialog::createDialogContent()
 	initResolutionCombobox(ui->comboBoxCubemapSize);
 	initResolutionCombobox(ui->comboBoxShadowmapSize);
 
-	updateFromManager();
+	setToInitialValues();
 }
 
 void Scenery3dDialog::createUpdateConnections()
 {
 	//connect Scenery3d update events
 	connect(mgr, &Scenery3dMgr::enablePixelLightingChanged, ui->checkBoxEnablePixelLight, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::enablePixelLightingChanged, this, &Scenery3dDialog::updateShadowCheckbox);
+	connect(mgr, &Scenery3dMgr::enablePixelLightingChanged, ui->checkBoxEnableShadows, &QCheckBox::setEnabled);
 	connect(mgr, &Scenery3dMgr::enablePixelLightingChanged, ui->checkBoxEnableBump, &QCheckBox::setEnabled);
 	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxEnableShadows, &QCheckBox::setChecked);
 	connect(mgr, &Scenery3dMgr::enableBumpsChanged, ui->checkBoxEnableBump, &QCheckBox::setChecked);
 	connect(mgr, &Scenery3dMgr::enablePCSSChanged,ui->checkBoxPCSS,&QCheckBox::setChecked);
-
-	connect(mgr, &Scenery3dMgr::areShadowsSupportedChanged, this, &Scenery3dDialog::updateShadowCheckbox);
-	connect(mgr, &Scenery3dMgr::areShadowsSupportedChanged, ui->comboBoxShadowmapSize, &QComboBox::setEnabled);
-	connect(mgr, &Scenery3dMgr::areShadowsSupportedChanged, ui->labelShadowmapSize, &QLabel::setEnabled);
-	connect(mgr, &Scenery3dMgr::isShadowFilteringSupportedChanged, ui->labelFilterQuality, &QLabel::setEnabled);
 
 	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxSimpleShadows, &QCheckBox::setEnabled);
 	connect(mgr, &Scenery3dMgr::enableShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setEnabled);
@@ -177,22 +182,20 @@ void Scenery3dDialog::createUpdateConnections()
 	connect(mgr, &Scenery3dMgr::useFullCubemapShadowsChanged, ui->checkBoxCubemapShadows, &QCheckBox::setChecked);
 
 	connect(mgr, &Scenery3dMgr::cubemappingModeChanged, ui->comboBoxCubemapMode, &QComboBox::setCurrentIndex);
-	connect(mgr, &Scenery3dMgr::isGeometryShaderSupportedChanged, dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model()), &CubemapModeListModel::setGSSupported);
 	connect(mgr, &Scenery3dMgr::shadowFilterQualityChanged, this, &Scenery3dDialog::updateShadowFilterQuality);
-	connect(mgr, &Scenery3dMgr::isShadowFilteringSupportedChanged, ui->comboBoxShadowFiltering, &QComboBox::setEnabled);
 
 	connect(mgr, &Scenery3dMgr::torchStrengthChanged, this, &Scenery3dDialog::updateTorchStrength);
 	connect(mgr, &Scenery3dMgr::torchRangeChanged, this, &Scenery3dDialog::updateTorchRange);
 
 	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->checkBoxEnableLazyDrawing, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->labelLazyDrawingInterval, &QCheckBox::setVisible);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->spinLazyDrawingInterval, &QCheckBox::setVisible);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->checkBoxDominantFace, &QCheckBox::setVisible);
-	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->checkBoxSecondDominantFace, &QCheckBox::setVisible);
+	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->labelLazyDrawingInterval, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->spinLazyDrawingInterval, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, ui->checkBoxDominantFace, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3dMgr::enableLazyDrawingChanged, this, &Scenery3dDialog::updateSecondDominantFaceEnabled);
 
 	connect(mgr, &Scenery3dMgr::lazyDrawingIntervalChanged, this, &Scenery3dDialog::updateLazyDrawingInterval);
 	connect(mgr, &Scenery3dMgr::onlyDominantFaceWhenMovingChanged, ui->checkBoxDominantFace, &QCheckBox::setChecked);
-	connect(mgr, &Scenery3dMgr::onlyDominantFaceWhenMovingChanged, ui->checkBoxSecondDominantFace, &QCheckBox::setEnabled);
+	connect(mgr, &Scenery3dMgr::onlyDominantFaceWhenMovingChanged, this, &Scenery3dDialog::updateSecondDominantFaceEnabled);
 	connect(mgr, &Scenery3dMgr::secondDominantFaceWhenMovingChanged, ui->checkBoxSecondDominantFace, &QCheckBox::setChecked);
 
 	connect(mgr, &Scenery3dMgr::currentSceneChanged, this, &Scenery3dDialog::updateCurrentScene);
@@ -205,13 +208,15 @@ void Scenery3dDialog::updateShortcutStrings()
 	foreach(QAbstractButton* bt, shortcutButtons)
 	{
 		QVariant v = bt->property("stelActionKey");
-		if(v.isValid())
+		QVariant t = bt->property("stelOriginalText");
+		if(v.isValid() && t.isValid())
 		{
 			QString s = v.toString();
+			QString text = t.toString();
 			StelAction* ac = acMgr->findAction(s);
 			if(ac)
 			{
-				bt->setText(bt->text().arg(ac->getShortcut().toString(QKeySequence::NativeText)));
+				bt->setText(text.arg(ac->getShortcut().toString(QKeySequence::NativeText)));
 			}
 		}
 	}
@@ -220,10 +225,13 @@ void Scenery3dDialog::updateShortcutStrings()
 void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
 {
 	bool oldval = cb->blockSignals(true);
-	for(uint i = 256;i<=4096;i*=2)
+
+	uint maxResolution = mgr->getMaximumFramebufferSize();
+	for(uint i = 256;i<=qMin(4096u,maxResolution);i*=2)
 	{
 		cb->addItem(QString::number(i),i);
 	}
+
 	cb->blockSignals(oldval);
 }
 
@@ -377,11 +385,6 @@ void Scenery3dDialog::setResolutionCombobox(QComboBox *cb, uint val)
 	cb->blockSignals(false);
 }
 
-void Scenery3dDialog::updateShadowCheckbox()
-{
-	ui->checkBoxEnableShadows->setEnabled(mgr->getAreShadowsSupported() && mgr->getEnablePixelLighting());
-}
-
 void Scenery3dDialog::updateShadowFilterQuality(S3DEnum::ShadowFilterQuality quality)
 {
 	ui->checkBoxPCSS->setEnabled(quality == S3DEnum::SFQ_HIGH || quality == S3DEnum::SFQ_LOW);
@@ -409,8 +412,13 @@ void Scenery3dDialog::updateLazyDrawingInterval(float val)
 	ui->spinLazyDrawingInterval->blockSignals(false);
 }
 
+void Scenery3dDialog::updateSecondDominantFaceEnabled()
+{
+	ui->checkBoxSecondDominantFace->setEnabled(mgr->getOnlyDominantFaceWhenMoving() && mgr->getEnableLazyDrawing());
+}
+
 // Update the widget to make sure it is synchrone if a value was changed programmatically
-void Scenery3dDialog::updateFromManager()
+void Scenery3dDialog::setToInitialValues()
 {
 	bool pix = mgr->getEnablePixelLighting();
 	ui->checkBoxEnablePixelLight->setChecked(pix);
@@ -418,7 +426,7 @@ void Scenery3dDialog::updateFromManager()
 	ui->checkBoxEnableBump->setChecked(mgr->getEnableBumps());
 	ui->checkBoxEnableBump->setEnabled(pix);
 	ui->checkBoxEnableShadows->setChecked(mgr->getEnableShadows());
-	ui->checkBoxEnableShadows->setEnabled(pix && mgr->getAreShadowsSupported());
+	ui->checkBoxEnableShadows->setEnabled(pix);
 	ui->checkBoxPCSS->setChecked(mgr->getEnablePCSS());
 
 	ui->checkBoxSimpleShadows->setEnabled(mgr->getEnableShadows());
@@ -427,6 +435,7 @@ void Scenery3dDialog::updateFromManager()
 	ui->checkBoxCubemapShadows->setChecked(mgr->getUseFullCubemapShadows());
 
 	updateShadowFilterQuality(mgr->getShadowFilterQuality());
+
 	ui->comboBoxCubemapMode->setCurrentIndex(mgr->getCubemappingMode());
 
 	updateTorchStrength(mgr->getTorchStrength());
@@ -436,23 +445,32 @@ void Scenery3dDialog::updateFromManager()
 	ui->checkBoxEnableLazyDrawing->setChecked(val);
 
 	ui->checkBoxDominantFace->setChecked(mgr->getOnlyDominantFaceWhenMoving());
-	ui->checkBoxSecondDominantFace->setEnabled(mgr->getOnlyDominantFaceWhenMoving());
+	updateSecondDominantFaceEnabled();
 	ui->checkBoxSecondDominantFace->setChecked(mgr->getSecondDominantFaceWhenMoving());
 
-	ui->labelLazyDrawingInterval->setVisible(val);
-	ui->spinLazyDrawingInterval->setVisible(val);
-	ui->checkBoxDominantFace->setVisible(val);
-	ui->checkBoxSecondDominantFace->setVisible(val);
+	ui->labelLazyDrawingInterval->setEnabled(val);
+	ui->spinLazyDrawingInterval->setEnabled(val);
+	ui->checkBoxDominantFace->setEnabled(val);
 
 	updateLazyDrawingInterval(mgr->getLazyDrawingInterval());
 
 	setResolutionCombobox(ui->comboBoxCubemapSize,mgr->getCubemapSize());
 	setResolutionCombobox(ui->comboBoxShadowmapSize,mgr->getShadowmapSize());
-	ui->comboBoxShadowmapSize->setEnabled(mgr->getAreShadowsSupported());
-	ui->comboBoxShadowFiltering->setEnabled(mgr->getIsShadowFilteringSupported());
-	ui->labelShadowmapSize->setEnabled(mgr->getAreShadowsSupported());
-	ui->labelFilterQuality->setEnabled(mgr->getIsShadowFilteringSupported());
 
-	CubemapModeListModel* model = dynamic_cast<CubemapModeListModel*>(ui->comboBoxCubemapMode->model());
-	model->setGSSupported(mgr->getIsGeometryShaderSupported());
+	//hide some stuff depending on hardware support
+	if(!mgr->getIsShadowFilteringSupported())
+	{
+		ui->labelFilterQuality->setVisible(false);
+		ui->comboBoxShadowFiltering->setVisible(false);
+		ui->checkBoxPCSS->setVisible(false);
+	}
+
+	if(!mgr->getAreShadowsSupported())
+	{
+		ui->labelShadowmapSize->setVisible(false);
+		ui->comboBoxShadowmapSize->setVisible(false);
+		ui->checkBoxEnableShadows->setVisible(false);
+		ui->checkBoxCubemapShadows->setVisible(false);
+		ui->checkBoxSimpleShadows->setVisible(false);
+	}
 }

@@ -36,7 +36,7 @@ private slots:
 	void updateTorchRange(float val);
 	void updateLazyDrawingInterval(float val);
 	void updateShadowFilterQuality(S3DEnum::ShadowFilterQuality quality);
-	void updateShadowCheckbox();
+	void updateSecondDominantFaceEnabled();
 
 	void updateCurrentScene(const SceneInfo& sceneInfo);
 
@@ -49,7 +49,7 @@ private:
 	//! Connects the UI to update events from the Scenery3dMgr
 	void createUpdateConnections();
 	//! This updates the whole GUI to represent current Scenery3dMgr values
-	void updateFromManager();
+	void setToInitialValues();
 	void updateTextBrowser(const SceneInfo& si);
 
 	QVector<QAbstractButton*> shortcutButtons;
