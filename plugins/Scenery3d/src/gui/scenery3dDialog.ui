@@ -479,7 +479,7 @@ p, li { white-space: pre-wrap; }
                    <item row="0" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnablePixelLight">
                      <property name="toolTip">
-                      <string>Required for bump mapping and shadows!</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Provides more accurate lighting by calculating it per-pixel instead of per-vertex.&lt;/p&gt;&lt;p&gt;Required for bump mapping and shadows!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                      <property name="text">
                       <string>Per-Pixel lighting</string>
@@ -502,37 +502,24 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="4" column="0">
-                    <widget class="QLabel" name="labelShadowmapSize">
-                     <property name="text">
-                      <string>Shadowmap size:</string>
-                     </property>
-                     <property name="buddy">
-                      <cstring>comboBoxShadowmapSize</cstring>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="1">
-                    <widget class="QComboBox" name="comboBoxShadowmapSize">
-                     <property name="currentIndex">
-                      <number>-1</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="0">
-                    <widget class="QLabel" name="label_5">
-                     <property name="text">
-                      <string>Cubemap size:</string>
-                     </property>
-                     <property name="buddy">
-                      <cstring>comboBoxCubemapSize</cstring>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="1">
-                    <widget class="QComboBox" name="comboBoxCubemapSize"/>
-                   </item>
                    <item row="2" column="0" colspan="2">
+                    <layout class="QFormLayout" name="formLayout_6">
+                     <property name="leftMargin">
+                      <number>20</number>
+                     </property>
+                     <item row="0" column="0" colspan="2">
+                      <widget class="QCheckBox" name="checkBoxSimpleShadows">
+                       <property name="toolTip">
+                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uses only a single shadow cascade instead of up to four.&lt;/p&gt;&lt;p&gt;Provides a speedup in exchange for shadow quality, especially in large scenes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="text">
+                        <string>Simple shadows</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </item>
+                   <item row="3" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnableBump">
                      <property name="enabled">
                       <bool>true</bool>
@@ -548,7 +535,37 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
+                   <item row="4" column="0">
+                    <widget class="QLabel" name="label_5">
+                     <property name="text">
+                      <string>Cubemap size:</string>
+                     </property>
+                     <property name="buddy">
+                      <cstring>comboBoxCubemapSize</cstring>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="1">
+                    <widget class="QComboBox" name="comboBoxCubemapSize"/>
+                   </item>
                    <item row="5" column="0">
+                    <widget class="QLabel" name="labelShadowmapSize">
+                     <property name="text">
+                      <string>Shadowmap size:</string>
+                     </property>
+                     <property name="buddy">
+                      <cstring>comboBoxShadowmapSize</cstring>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="1">
+                    <widget class="QComboBox" name="comboBoxShadowmapSize">
+                     <property name="currentIndex">
+                      <number>-1</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="0">
                     <widget class="QLabel" name="labelFilterQuality">
                      <property name="text">
                       <string>Filtering Quality:</string>
@@ -558,7 +575,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="5" column="1">
+                   <item row="6" column="1">
                     <widget class="QComboBox" name="comboBoxShadowFiltering">
                      <property name="toolTip">
                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Determines how the shadows are filtered, in increasing quality from top to bottom.&lt;/p&gt;&lt;p&gt;PCSS requires the quality set to LOW or HIGH.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -595,7 +612,7 @@ p, li { white-space: pre-wrap; }
                      </item>
                     </widget>
                    </item>
-                   <item row="6" column="0" colspan="2">
+                   <item row="7" column="0" colspan="2">
                     <layout class="QFormLayout" name="formLayout_5">
                      <property name="leftMargin">
                       <number>20</number>
@@ -637,6 +654,16 @@ p, li { white-space: pre-wrap; }
                     </widget>
                    </item>
                    <item row="1" column="0" colspan="2">
+                    <widget class="QCheckBox" name="checkBoxCubemapShadows">
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculates shadows for each cubemap face separately.&lt;/p&gt;&lt;p&gt;If disabled, the shadowed area is calculated using a perspective projection, which may cause missing shadows with high FOV values, but is quite a bit faster!&lt;/p&gt;&lt;p&gt;This does not work when using the &lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; cubemapping mode!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="text">
+                      <string>Full cubemap shadows</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
                      <property name="toolTip">
                       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When checked, the cubemap is only recreated in specific time intervals, instead of each frame.&lt;br/&gt;Saves energy and may increase subjective application performance.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Note that the cubemap is always re-rendered when the view position changes.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -646,7 +673,7 @@ p, li { white-space: pre-wrap; }
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="0" colspan="2">
+                   <item row="3" column="0" colspan="2">
                     <layout class="QFormLayout" name="formLayout_3">
                      <property name="leftMargin">
                       <number>20</number>
@@ -701,26 +728,6 @@ p, li { white-space: pre-wrap; }
                       </widget>
                      </item>
                     </layout>
-                   </item>
-                   <item row="3" column="0" colspan="2">
-                    <widget class="QCheckBox" name="checkBoxSimpleShadows">
-                     <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uses only a single shadow cascade instead of up to four.&lt;/p&gt;&lt;p&gt;Provides a speedup in exchange for shadow quality, especially in large scenes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="text">
-                      <string>Simple shadows</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="0" colspan="2">
-                    <widget class="QCheckBox" name="checkBoxCubemapShadows">
-                     <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Calculates shadows for each cubemap face separately.&lt;/p&gt;&lt;p&gt;If disabled, the shadowed area is calculated using a perspective projection, which may cause missing shadows with high FOV values, but is quite a bit faster!&lt;/p&gt;&lt;p&gt;This does not work when using the &lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; cubemapping mode!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="text">
-                      <string>Full cubemap shadows</string>
-                     </property>
-                    </widget>
                    </item>
                   </layout>
                  </item>

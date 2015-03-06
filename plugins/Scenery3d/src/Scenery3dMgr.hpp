@@ -43,9 +43,8 @@ class StoredViewDialog;
 class QSettings;
 class StelButton;
 
-class QOpenGLShaderProgram;
-
-//! Main class of the module, inherits from StelModule
+//! Main class of the module, inherits from StelModule.
+//! Manages initialization, provides an interface to change Scenery3d properties and handles user input
 class Scenery3dMgr : public StelModule
 {
 	Q_OBJECT
@@ -72,9 +71,12 @@ class Scenery3dMgr : public StelModule
 	Q_PROPERTY(uint cubemapSize READ getCubemapSize WRITE setCubemapSize NOTIFY cubemapSizeChanged)
 	Q_PROPERTY(uint shadowmapSize READ getShadowmapSize WRITE setShadowmapSize NOTIFY shadowmapSizeChanged)
 
-	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported NOTIFY isGeometryShaderSupportedChanged)
-	Q_PROPERTY(bool areShadowsSupported READ getAreShadowsSupported NOTIFY areShadowsSupportedChanged)
-	Q_PROPERTY(bool isShadowFilteringSupported READ getIsShadowFilteringSupported NOTIFY isShadowFilteringSupportedChanged)
+	//these properties are only valid after init() has been called
+	Q_PROPERTY(bool isGeometryShaderSupported READ getIsGeometryShaderSupported)
+	Q_PROPERTY(bool areShadowsSupported READ getAreShadowsSupported)
+	Q_PROPERTY(bool isShadowFilteringSupported READ getIsShadowFilteringSupported)
+	Q_PROPERTY(bool isANGLE READ getIsANGLE)
+	Q_PROPERTY(uint maximumFramebufferSize READ getMaximumFramebufferSize)
 
 public:
     Scenery3dMgr();
@@ -112,10 +114,6 @@ signals:
     void secondDominantFaceWhenMovingChanged(const bool val);
     void cubemapSizeChanged(const uint val);
     void shadowmapSizeChanged(const uint val);
-
-    void isGeometryShaderSupportedChanged(const bool val);
-    void areShadowsSupportedChanged(const bool val);
-    void isShadowFilteringSupportedChanged(const bool val);
 
     void currentSceneChanged(const SceneInfo& sceneInfo);
 
@@ -217,9 +215,12 @@ public slots:
     void setShadowmapSize(const uint val);
     uint getShadowmapSize() const;
 
+    //these properties are only valid after init() has been called
     bool getIsGeometryShaderSupported() const;
     bool getAreShadowsSupported() const;
     bool getIsShadowFilteringSupported() const;
+    bool getIsANGLE() const;
+    uint getMaximumFramebufferSize() const;
 
     //! Gets the SceneInfo of the scene that is currently being displayed.
     //! Check SceneInfo::isValid to determine if a scene is displayed.
@@ -258,10 +259,13 @@ private:
     void loadConfig();
     //! Creates all actions required by the plugin
     void createActions();
+    //! Creates the toolbar buttons of the plugin
+    void createToolbarButtons() const;
 
-    //! This is run asynchronously in a background thread
+    //! This is run asynchronously in a background thread, performing the actual scene loading
     bool loadSceneBackground();
 
+    // the other "main" objects
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
     StoredViewDialog* storedViewDialog;

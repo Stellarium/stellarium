@@ -90,6 +90,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	supportsGSCubemapping = false;
 	supportsShadows = false;
 	supportsShadowFiltering = false;
+	maximumFramebufferSize = 0;
 
 	cubemappingMode = S3DEnum::CM_TEXTURES; //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
 	reinitCubemapping = true;
@@ -1908,6 +1909,37 @@ void Scenery3d::determineFeatureSupport()
 {
 	QOpenGLContext* ctx = QOpenGLContext::currentContext();
 
+	// graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
+	// In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
+	// OpenGL ES2 has framebuffers in the Spec
+	if ( !ctx->hasExtension("GL_EXT_framebuffer_object") && !ctx->isOpenGLES() ) {
+
+		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
+		qWarning() << "[Scenery3d] Your hardware does not support EXT_framebuffer_object.";
+		qWarning() << "[Scenery3d] Shadow mapping disabled, and display limited to perspective projection.";
+
+		setCubemapSize(0);
+		setShadowmapSize(0);
+	}
+	else
+	{
+		//determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
+		GLint texSize,viewportSize[2],rbSize;
+		glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
+		glGetIntegerv(GL_MAX_VIEWPORT_DIMS, viewportSize);
+		glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &rbSize);
+
+		qDebug()<<"[Scenery3d] Maximum texture size:"<<texSize;
+		qDebug()<<"[Scenery3d] Maximum viewport dims:"<<viewportSize[0]<<viewportSize[1];
+		qDebug()<<"[Scenery3d] Maximum renderbuffer size:"<<rbSize;
+
+		maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
+		qDebug()<<"[Scenery3d] Maximum framebuffer size:"<<maximumFramebufferSize;
+	}
+
+	QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	isANGLE = renderer.contains("ANGLE");
+
 	//check if GS cubemapping is possible
 	if(QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry,ctx)) //this checks if version >= 3.2
 	{
@@ -2063,9 +2095,9 @@ bool Scenery3d::initCubemapping()
 
 	if(cubemapSize<=0)
 	{
-		//TODO this will likely cause problems if this ever happens
-		//but since Framebuffers seem to be required in the Qt5 build anyway, this should probably not happen
 		qWarning()<<"[Scenery3d] Cubemapping not supported or disabled";
+		parent->showMessage(N_("Your hardware does not support cubemapping, please switch to 'Perspective' projection!"));
+		return false;
 	}
 
 	cubeMappingCreated = true;
@@ -2078,11 +2110,9 @@ bool Scenery3d::initCubemapping()
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
 
-	QString renderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-
 	//TODO the ANGLE version included with Qt 5.4 includes a bug that prevents Cubemapping to be used
 	//Remove this if this is ever fixed
-	if(renderer.contains("ANGLE") && cubemappingMode >= S3DEnum::CM_CUBEMAP)
+	if(isANGLEContext() && cubemappingMode >= S3DEnum::CM_CUBEMAP)
 	{
 		//Fall back to "6 Textures" mode
 		parent->showMessage(N_("Falling back to '6 Textures' because of ANGLE bug"));
@@ -2633,7 +2663,8 @@ void Scenery3d::draw(StelCore* core)
 		if(!cubeMappingCreated || reinitCubemapping)
 		{
 			//init cubemaps
-			initCubemapping();
+			if(!initCubemapping())
+				return;
 			reinitCubemapping = false;
 		}
 	}
