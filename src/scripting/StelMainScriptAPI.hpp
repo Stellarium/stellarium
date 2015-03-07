@@ -217,7 +217,8 @@ public slots:
 	//! - natural : azimuthal mount, atmosphere, landscape,
 	//!   no lines, labels or markers
 	//! - starchart : equatorial mount, constellation lines,
-	//!   no landscape, atmoshere etc.  labels & markers on.
+	//!   no landscape, atmosphere etc.  labels & markers on.
+	//! - deepspace : like starchart, but no planets, no eq.grid, no markers, no lines.
 	//! @param state the name of a preset state.
 	void clear(const QString& state="natural");
 
