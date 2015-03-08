@@ -122,8 +122,8 @@ void StelAddOnMgr::reloadCatalogues()
 bool StelAddOnMgr::loadAddonJson(AddOn::Source source)
 {
 	QString jsonPath = source == AddOn::OficialCatalog
-			? m_sUserAddonJsonPath
-			: m_sAddonJsonPath;
+			? m_sAddonJsonPath
+			: m_sUserAddonJsonPath;
 
 	QFile jsonFile(jsonPath);
 	if (!jsonFile.exists())
@@ -161,6 +161,7 @@ bool StelAddOnMgr::loadAddonJson(AddOn::Source source)
 void StelAddOnMgr::restoreDefaultAddonJsonFile()
 {
 	QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_" % m_sAddonJsonFilename);
+	QFile(m_sAddonJsonPath).remove(); // always overwrite
 	if (defaultJson.copy(m_sAddonJsonPath))
 	{
 		qDebug() << "Add-On Mgr: default_" % m_sAddonJsonFilename % " was copied to " % m_sAddonJsonPath;

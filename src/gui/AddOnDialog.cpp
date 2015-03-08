@@ -213,11 +213,7 @@ void AddOnDialog::downloadFinished()
 	if (m_pUpdateCatalogReply->error() == QNetworkReply::NoError && !result.isEmpty())
 	{
 		QFile jsonFile(StelApp::getInstance().getStelAddOnMgr().getAddonJsonPath());
-		if(jsonFile.exists())
-		{
-			jsonFile.remove();
-		}
-
+		jsonFile.remove(); // overwrite
 		if (jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
 		{
 			jsonFile.write(result);
