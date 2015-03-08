@@ -27,11 +27,11 @@
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 
-AddOn::AddOn(const QString addOnId, const QVariantMap& map)
+AddOn::AddOn(const QString addOnId, const QVariantMap& map, Source source)
 	: m_iAddOnId(addOnId)
 	, m_eType(INVALID)
 	, m_bIsValid(false)
-	, m_bAddedByUser(false)
+	, m_eSource(source)
 	, m_eStatus(NotInstalled)
 {
 	m_eType = fromStringToType(map.value("type").toString());

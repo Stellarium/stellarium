@@ -106,22 +106,22 @@ void StelAddOnMgr::insertInAddOnHashes(AddOn* addon)
 void StelAddOnMgr::reloadCatalogues()
 {
 	// load oficial catalog ~/.stellarium/addon_x.x.x.json
-	if (!loadAddonJson(false))
+	if (!loadAddonJson(AddOn::OficialCatalog))
 	{
 		restoreDefaultAddonJsonFile();
-		loadAddonJson(false); // load again
+		loadAddonJson(AddOn::OficialCatalog); // load again
 	}
 	// load user catalog ~/.stellarium/user_addon_x.x.x.json
-	loadAddonJson(true);
+	loadAddonJson(AddOn::UserCatalog);
 	// download thumbnails
 	refreshThumbnailQueue();
 	// refresh add-ons statuses (it checks which are installed or not)
 	refreshAddOnStatuses();
 }
 
-bool StelAddOnMgr::loadAddonJson(bool userCatalog)
+bool StelAddOnMgr::loadAddonJson(AddOn::Source source)
 {
-	QString jsonPath = userCatalog
+	QString jsonPath = source == AddOn::OficialCatalog
 			? m_sUserAddonJsonPath
 			: m_sAddonJsonPath;
 
@@ -152,7 +152,7 @@ bool StelAddOnMgr::loadAddonJson(bool userCatalog)
 	QVariantMap::iterator i;
 	for (i = map.begin(); i != map.end(); ++i)
 	{
-		insertInAddOnHashes(new AddOn(i.key(), i.value().toMap()));
+		insertInAddOnHashes(new AddOn(i.key(), i.value().toMap(), source));
 	}
 
 	return true;
@@ -443,9 +443,16 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 			QString addonid = json.keys().at(0);
 			QVariantMap attributes = json.value(addonid).toObject().toVariantMap();
 			QFile zipFile(filePath);
-			attributes.insert("checksum", calculateMd5(zipFile));
+			QString md5sum = calculateMd5(zipFile);
+			attributes.insert("checksum", md5sum);
 			attributes.insert("download-size", zipFile.size()/1024.0);
-			return new AddOn(addonid, attributes);
+
+			// finds source
+			AddOn* addonInHash = m_addonsByMd5.value(md5sum);
+			AddOn::Source source = addonInHash
+					? addonInHash->getSource()
+					: AddOn::UserCatalog;
+			return new AddOn(addonid, attributes, source);
 		}
 	}
 	return NULL;

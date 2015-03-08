@@ -27,7 +27,14 @@ class AddOn : public QObject
 {
 	Q_OBJECT
 public:
-	AddOn(const QString addOnId, const QVariantMap& map);
+	//! @enum Source
+	enum Source
+	{
+		OficialCatalog,
+		UserCatalog
+	};
+
+	AddOn(const QString addOnId, const QVariantMap& map, Source source);
 	virtual ~AddOn();
 
 	//! @enum Type
@@ -84,9 +91,7 @@ public:
 
 	bool isValid() { return m_bIsValid; }
 
-	bool getAddedByUser() { return m_bAddedByUser; }
-	void setAddedByuser(bool addedByUser) { m_bAddedByUser = addedByUser; }
-
+	Source getSource() { return m_eSource; }
 	QString getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
@@ -131,7 +136,7 @@ private:
 	QStringList m_InstalledFiles;
 
 	bool m_bIsValid;
-	bool m_bAddedByUser;
+	Source m_eSource;
 	Category m_eCategory;
 	Status m_eStatus;
 
