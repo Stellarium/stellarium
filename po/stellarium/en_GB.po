@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-27 20:42+0600\n"
-"PO-Revision-Date: 2015-02-16 10:10+0000\n"
+"PO-Revision-Date: 2015-03-05 13:52+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-28 05:24+0000\n"
-"X-Generator: Launchpad (build 17361)\n"
+"X-Launchpad-Export-Date: 2015-03-06 05:10+0000\n"
+"X-Generator: Launchpad (build 17374)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:355
@@ -79,7 +79,7 @@ msgstr "Galactic Equator"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1330
 msgid "O./C. longitude"
-msgstr ""
+msgstr "O./C. longitude"
 
 #: src/core/modules/GridLinesMgr.cpp:755
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -132,7 +132,7 @@ msgstr "Galactic equator"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "Opposition/conjunction longitude line"
 
 #: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1253
 msgid "Atmosphere"
@@ -993,6 +993,9 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
+"This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
+"Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
+"Approximation of Time Period 1620-2013</em> (%1)."
 
 #: src/core/StelCore.cpp:1612
 #, qt-format
@@ -1476,7 +1479,7 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1254
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Khalid, Sultana & Zaidi (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1255
 #, qt-format
@@ -4315,6 +4318,8 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Opposition/conjunction longitude line - the line of ecliptic longitude which "
+"passes through both ecliptic poles, the Sun and opposition point."
 
 #: src/ui_viewDialog.h:1331
 msgid "Projection"
