@@ -192,6 +192,7 @@ void AddOnDialog::populateTables()
 		AddOnTableView* view = m_tableViews.value(tab);
 		view->setModel(new AddOnTableModel(tab, StelApp::getInstance().getStelAddOnMgr().getAddOnHash()));
 	}
+	updateTabBarListWidgetWidth();
 }
 
 void AddOnDialog::updateCatalog()
