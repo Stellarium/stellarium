@@ -451,7 +451,7 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 			AddOn* addonInHash = m_addonsByMd5.value(md5sum);
 			AddOn::Source source = addonInHash
 					? addonInHash->getSource()
-					: AddOn::UserCatalog;
+					: AddOn::Uncatalogued;
 			return new AddOn(addonid, attributes, source);
 		}
 	}

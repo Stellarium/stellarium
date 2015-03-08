@@ -31,7 +31,8 @@ public:
 	enum Source
 	{
 		OficialCatalog,
-		UserCatalog
+		UserCatalog,
+		Uncatalogued
 	};
 
 	AddOn(const QString addOnId, const QVariantMap& map, Source source);
