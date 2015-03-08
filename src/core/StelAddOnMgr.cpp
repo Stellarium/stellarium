@@ -311,24 +311,25 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
 			   << " is corrupt, MD5 mismatch!";
 	}
-	// check if this addon is in the catalog
-	else if (!m_addonsByMd5.contains(addon->getChecksum()))
-	{
-		if (m_addonsById.contains(addon->getAddOnId()))
-		{
-			// TODO: asks the user if he wants to overwrite?
-			qWarning() << "AddOn Mgr : An addon ("
-				   << addon->getTypeString()
-				   << ") with the ID"
-				   << addon->getAddOnId()
-				   << "already exists. Aborting installation!";
-			return;
-		}
-		insertAddOnInUserJson(addon);
-	}
-	// installing files
 	else
 	{
+		if (addon->getSource() == AddOn::Uncatalogued)
+		{
+			// duplicated keys?
+			if (m_addonsById.contains(addon->getAddOnId()))
+			{
+				// TODO: asks the user if he wants to overwrite?
+				qWarning() << "AddOn Mgr : An addon ("
+					   << addon->getTypeString()
+					   << ") with the ID"
+					   << addon->getAddOnId()
+					   << "already exists. Aborting installation!";
+				return;
+			}
+			insertAddOnInUserJson(addon);
+		}
+
+		// installing files
 		addon->setStatus(AddOn::Installing);
 		emit (dataUpdated(addon));
 		unzip(*addon, selectedFiles);
@@ -756,6 +757,9 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 		jsonFile.resize(0);
 		jsonFile.write(QJsonDocument(json).toJson());
 		jsonFile.close();
+
+		// update source
+		addon->setSource(AddOn::UserCatalog);
 
 		// update hash
 		insertInAddOnHashes(addon);

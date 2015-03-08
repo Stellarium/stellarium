@@ -93,6 +93,8 @@ public:
 	bool isValid() { return m_bIsValid; }
 
 	Source getSource() { return m_eSource; }
+	void setSource(Source source) { m_eSource = source; }
+
 	QString getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
