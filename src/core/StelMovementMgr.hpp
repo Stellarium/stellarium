@@ -131,7 +131,7 @@ public slots:
 	//! Set whether keys can control zoom
 	void setFlagEnableZoomKeys(bool b) {flagEnableZoomKeys=b;}
 
-	//! Get whether keys can control move
+	//! Get whether keys can control movement
 	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
 	//! Set whether keys can control movement
 	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b;}

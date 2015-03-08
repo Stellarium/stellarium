@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-27 20:42+0600\n"
-"PO-Revision-Date: 2013-01-20 18:23+0000\n"
+"PO-Revision-Date: 2015-03-02 05:39+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Irish <ga@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-28 05:14+0000\n"
+"X-Launchpad-Export-Date: 2015-03-03 05:25+0000\n"
 "X-Generator: Launchpad (build 17361)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -923,7 +923,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1615 src/core/SimbadSearcher.cpp:133
 msgid "Error"
-msgstr ""
+msgstr "Earráid"
 
 #: src/core/StelCore.cpp:1665
 msgid "with meaningless values outside this range"
@@ -1110,7 +1110,7 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
-msgstr ""
+msgstr "Earráid líonra"
 
 #: src/core/SimbadSearcher.cpp:93 src/core/SimbadSearcher.cpp:105
 msgid "Error parsing position"
@@ -1118,15 +1118,15 @@ msgstr ""
 
 #: src/core/SimbadSearcher.cpp:131
 msgid "Querying"
-msgstr ""
+msgstr "Larratas á dhéanamh"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Not found"
-msgstr ""
+msgstr "Gan aimsiú"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Found"
-msgstr ""
+msgstr "Aimsithe"
 
 #: src/gui/ConfigurationDialog.cpp:485
 msgid "Select screenshot directory"
@@ -1748,7 +1748,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:128
 #: src/gui/AddRemoveLandscapesDialog.cpp:155
 msgid "Success"
-msgstr ""
+msgstr "D'éirigh leis"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:141
 #: src/gui/AddRemoveLandscapesDialog.cpp:211
@@ -1764,7 +1764,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:229
 #: src/gui/AddRemoveLandscapesDialog.cpp:239
 msgid "Error!"
-msgstr ""
+msgstr "Earráid!"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 #, qt-format
@@ -2250,12 +2250,12 @@ msgstr "Gealach"
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:140
 msgid "Hurricane"
-msgstr ""
+msgstr "Hairicín"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:142
 msgid "Ocean"
-msgstr ""
+msgstr "Aigéan"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:144
@@ -2320,7 +2320,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:172
 msgid "Screensaver"
-msgstr ""
+msgstr "Sábháilscáileán"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:174
@@ -2559,7 +2559,7 @@ msgstr ""
 
 #: src/translations.h:249
 msgid "Andorra"
-msgstr ""
+msgstr "Andóra"
 
 #: src/translations.h:250
 msgid "United Arab Emirates"
@@ -2575,11 +2575,11 @@ msgstr "Antigua agus Barbúda"
 
 #: src/translations.h:253
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #: src/translations.h:254
 msgid "Albania"
-msgstr ""
+msgstr "An Albáin"
 
 #: src/translations.h:255
 msgid "Armenia"
@@ -2603,7 +2603,7 @@ msgstr "An Airgintín"
 
 #: src/translations.h:260
 msgid "American Samoa"
-msgstr ""
+msgstr "Samó Meiriceánach"
 
 #: src/translations.h:261
 msgid "Austria"
@@ -2615,11 +2615,11 @@ msgstr "An Astráil"
 
 #: src/translations.h:263
 msgid "Aruba"
-msgstr ""
+msgstr "Arúba"
 
 #: src/translations.h:264
 msgid "Azerbaijan"
-msgstr ""
+msgstr "An Asarbaiseáin"
 
 #: src/translations.h:265
 msgid "Bosnia and Herzegowina"
@@ -2655,7 +2655,7 @@ msgstr "An Bhurúin"
 
 #: src/translations.h:273
 msgid "Benin"
-msgstr ""
+msgstr "An Bheinin"
 
 #: src/translations.h:274
 msgid "Bermuda"
@@ -2663,7 +2663,7 @@ msgstr "Beirmiúda"
 
 #: src/translations.h:275
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Brúiné Dárasalám"
 
 #: src/translations.h:276
 msgid "Bolivia"
@@ -2679,11 +2679,11 @@ msgstr "Na Bahámaí"
 
 #: src/translations.h:279
 msgid "Bhutan"
-msgstr ""
+msgstr "An Bhútáin"
 
 #: src/translations.h:280
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Oileán Bouvet"
 
 #: src/translations.h:281
 msgid "Botswana"
@@ -2691,7 +2691,7 @@ msgstr "An Bhotsuáin"
 
 #: src/translations.h:282
 msgid "Belarus"
-msgstr ""
+msgstr "An Bhílearúis"
 
 #: src/translations.h:283
 msgid "Belize"
@@ -2703,11 +2703,11 @@ msgstr "Ceanada"
 
 #: src/translations.h:285
 msgid "Cocos Islands"
-msgstr ""
+msgstr "Oileáin na gCócónna"
 
 #: src/translations.h:286
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "Poblacht Dhaonlathach an Chongó"
 
 #: src/translations.h:287
 msgid "Central African Republic"
@@ -2715,7 +2715,7 @@ msgstr "Poblacht na hAfraice Láir"
 
 #: src/translations.h:288
 msgid "Republic of the Congo"
-msgstr ""
+msgstr "Poblacht an Chongó"
 
 #: src/translations.h:289
 msgid "Switzerland"
@@ -2723,11 +2723,11 @@ msgstr "An Eilvéis"
 
 #: src/translations.h:290
 msgid "Cote d'Ivoire"
-msgstr ""
+msgstr "An Cósta Eabhair"
 
 #: src/translations.h:291
 msgid "Cook Islands"
-msgstr ""
+msgstr "Oileáin Cook"
 
 #: src/translations.h:292
 msgid "Chile"
@@ -2751,7 +2751,7 @@ msgstr "Cósta Ríce"
 
 #: src/translations.h:297
 msgid "Serbia and Montenegro"
-msgstr ""
+msgstr "An tSeirbia agus Montainéagró"
 
 #: src/translations.h:298
 msgid "Cuba"
@@ -2787,7 +2787,7 @@ msgstr "An Danmhairg"
 
 #: src/translations.h:306
 msgid "Dominica"
-msgstr ""
+msgstr "Dominice"
 
 #: src/translations.h:307
 msgid "Dominican Republic"
@@ -2811,7 +2811,7 @@ msgstr "An Éigipt"
 
 #: src/translations.h:312
 msgid "Western Sahara"
-msgstr ""
+msgstr "An Sahára Thiar"
 
 #: src/translations.h:313
 msgid "Eritrea"
@@ -2855,11 +2855,11 @@ msgstr "An Ghabúin"
 
 #: src/translations.h:323
 msgid "United Kingdom"
-msgstr ""
+msgstr "An Ríocht Aontaithe"
 
 #: src/translations.h:324
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #: src/translations.h:325
 msgid "Georgia"
@@ -2903,7 +2903,7 @@ msgstr "An Ghréig"
 
 #: src/translations.h:335
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "An tSeoirsia Theas agus Oileáin Sandwich Theas"
 
 #: src/translations.h:336
 msgid "Guatemala"
@@ -2915,7 +2915,7 @@ msgstr "Guam"
 
 #: src/translations.h:338
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Guine Bhissau"
 
 #: src/translations.h:339
 msgid "Guyana"
@@ -2927,7 +2927,7 @@ msgstr "Hong Cong"
 
 #: src/translations.h:341
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Oileán Heard agus Oileáin McDonald"
 
 #: src/translations.h:342
 msgid "Honduras"
@@ -2963,7 +2963,7 @@ msgstr "An India"
 
 #: src/translations.h:350
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Críoch Bhriotanach an Aigéin Indiaigh"
 
 #: src/translations.h:351
 msgid "Iraq"
@@ -2999,11 +2999,11 @@ msgstr "An Chéinia"
 
 #: src/translations.h:359
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "An Chirgeastáin"
 
 #: src/translations.h:360
 msgid "Cambodia"
-msgstr ""
+msgstr "An Chambóid"
 
 #: src/translations.h:361
 msgid "Kiribati"
@@ -3011,19 +3011,19 @@ msgstr "Cireabaití"
 
 #: src/translations.h:362
 msgid "Comoros"
-msgstr ""
+msgstr "Oileáin Chomóra"
 
 #: src/translations.h:363
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Saint Kitts agus Nevis"
 
 #: src/translations.h:364
 msgid "Democratic People's Republic of Korea"
-msgstr ""
+msgstr "Daonphoblacht Dhaonlathach na Cóiré"
 
 #: src/translations.h:365
 msgid "Republic of Korea"
-msgstr ""
+msgstr "Poblacht na Cóiré"
 
 #: src/translations.h:366
 msgid "Kuwait"
@@ -3039,7 +3039,7 @@ msgstr "An Chasacstáin"
 
 #: src/translations.h:369
 msgid "Lao"
-msgstr ""
+msgstr "Láóis"
 
 #: src/translations.h:370
 msgid "Lebanon"
@@ -3047,11 +3047,11 @@ msgstr "Lebanon"
 
 #: src/translations.h:371
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Saint Lucia"
 
 #: src/translations.h:372
 msgid "Liechtenstein"
-msgstr ""
+msgstr "An Lichtinstéin"
 
 #: src/translations.h:373
 msgid "Sri Lanka"
@@ -3079,7 +3079,7 @@ msgstr "An Laitvia"
 
 #: src/translations.h:379
 msgid "Libyan Arab Jamahiriya"
-msgstr ""
+msgstr "Poblacht Arabach na Libia"
 
 #: src/translations.h:380
 msgid "Morocco"
@@ -3091,7 +3091,7 @@ msgstr "Monacó"
 
 #: src/translations.h:382
 msgid "Moldova"
-msgstr ""
+msgstr "An Mholdóiv"
 
 #: src/translations.h:383
 msgid "Madagascar"
@@ -3115,15 +3115,15 @@ msgstr "Maenmar"
 
 #: src/translations.h:388
 msgid "Mongolia"
-msgstr ""
+msgstr "An Mhongóil"
 
 #: src/translations.h:389
 msgid "Macau"
-msgstr ""
+msgstr "Macao"
 
 #: src/translations.h:390
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Oileáin Mariana Thuaidh"
 
 #: src/translations.h:391
 msgid "Martinique"
@@ -3135,7 +3135,7 @@ msgstr "An Mháratáin"
 
 #: src/translations.h:393
 msgid "Montserrat"
-msgstr ""
+msgstr "Montsarat"
 
 #: src/translations.h:394
 msgid "Malta"
@@ -3179,7 +3179,7 @@ msgstr "An Nígir"
 
 #: src/translations.h:404
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Oileán Norfolc"
 
 #: src/translations.h:405
 msgid "Nigeria"
@@ -3203,11 +3203,11 @@ msgstr "Neipeal"
 
 #: src/translations.h:410
 msgid "Nauru"
-msgstr ""
+msgstr "Nárúis"
 
 #: src/translations.h:411
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #: src/translations.h:412
 msgid "New Zealand"
@@ -3215,7 +3215,7 @@ msgstr "An Nua-Shéalainn"
 
 #: src/translations.h:413
 msgid "Oman"
-msgstr ""
+msgstr "Oman"
 
 #: src/translations.h:414
 msgid "Panama"
@@ -3247,11 +3247,11 @@ msgstr "An Pholainn"
 
 #: src/translations.h:421
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "Saint Pierre agus Miquelon"
 
 #: src/translations.h:422
 msgid "Pitcairn"
-msgstr ""
+msgstr "Oileán Pitcairn"
 
 #: src/translations.h:423
 msgid "Puerto Rico"
