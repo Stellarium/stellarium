@@ -575,7 +575,6 @@ void StelAddOnMgr::downloadAddOnFinished()
 		finishCurrentDownload();
 	}
 
-	m_downloadQueue.remove(m_downloadingAddOn);
 	m_downloadingAddOn = NULL;
 	if (!m_downloadQueue.isEmpty())
 	{
@@ -604,6 +603,8 @@ void StelAddOnMgr::finishCurrentDownload()
 		StelApp::getInstance().removeProgressBar(m_progressBar);
 		m_progressBar = NULL;
 	}
+
+	m_downloadQueue.remove(m_downloadingAddOn);
 }
 
 void StelAddOnMgr::cancelAllDownloads()
