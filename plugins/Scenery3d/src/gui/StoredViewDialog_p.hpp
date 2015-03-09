@@ -128,11 +128,15 @@ public:
 
 			persistUserViews();
 		}
+		else
+		{
+			qWarning()<<"[StoredViewDialog] Cannot delete global view";
+		}
 	}
 
 	void persistUserViews()
 	{
-		qDebug()<<"Persisting user views...";
+		qDebug()<<"[StoredViewDialog] Persisting user views...";
 		StoredView::saveUserViews(currentScene,user);
 	}
 
@@ -148,8 +152,10 @@ public:
 public slots:
 	void setScene(const SceneInfo& scene)
 	{
+		qDebug()<<"[StoredViewDialog] Loading stored views for"<<scene.name;
 		this->currentScene = scene;
 		resetData(StoredView::getGlobalViewsForScene(currentScene),StoredView::getUserViewsForScene(currentScene));
+		qDebug()<<"[StoredViewDialog]"<<rowCount(QModelIndex())<<"entries loaded";
 	}
 
 private:
