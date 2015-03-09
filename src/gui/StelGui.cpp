@@ -203,7 +203,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
 	actionsMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
 
-	setVisible(conf->value("gui/flag_show_gui", true).toBool());
+	setGuiVisible(conf->value("gui/flag_show_gui", true).toBool());
 	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
 #ifndef DISABLE_SCRIPTING
@@ -520,7 +520,7 @@ void StelGui::update()
 	if (savedProgressBarSize!=skyGui->progressBarMgr->boundingRect().size())
 	{
 		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
-		skyGui->updateBarsPos();
+		forceRefreshGui();
 	}
 
 	dateTimeDialog->setDateTime(core->getJDay());
@@ -639,7 +639,7 @@ void StelGui::setFlagShowDecimalDegrees(bool b)
 
 void StelGui::setVisible(bool b)
 {
-	skyGui->setVisible(b);
+	skyGui->setVisible(b);	
 }
 
 bool StelGui::getVisible() const
