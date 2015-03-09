@@ -195,7 +195,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));	
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));		
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -206,7 +206,7 @@ void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
 
 void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 {
-	const int hh = geometry().height();
+	const int hh = getSkyGuiHeight();
 
 	double x = event->pos().x();
 	double y = event->pos().y();
