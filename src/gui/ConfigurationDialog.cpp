@@ -1181,13 +1181,22 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 		return;
 	}
 
+	// stackListWidget->font() does not work properly!
+	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
+	QFont font;
+	font.setPixelSize(14);
+	font.setWeight(75);
+	QFontMetrics fontMetrics(font);
+
+	int iconSize = ui->stackListWidget->iconSize().width();
+
 	int width = 0;
 	for (int row = 0; row < model->rowCount(); row++)
 	{
-		width += ui->stackListWidget->sizeHintForRow(row);
-		width += ui->stackListWidget->iconSize().width();
+		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
+		width += 24; // margin - 12px left and 12px right
 	}
-	width += 10;
 
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
