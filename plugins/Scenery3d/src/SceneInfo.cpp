@@ -375,14 +375,14 @@ StoredViewList StoredView::getGlobalViewsForScene(const SceneInfo &scene)
 
 	if(!globalfile.isFile())
 	{
-		qWarning()<<"[SceneInfo]"<<globalfile.absoluteFilePath()<<" is not a file";
+		qWarning()<<"[StoredView]"<<globalfile.absoluteFilePath()<<" is not a file";
 	}
 	else
 	{
 		QSettings ini(globalfile.absoluteFilePath(),StelIniFormat);
 		if (ini.status() != QSettings::NoError)
 		{
-			qWarning() << "[SceneInfo] Error reading global viewpoint file " << globalfile.absoluteFilePath();
+			qWarning() << "[StoredView] Error reading global viewpoint file " << globalfile.absoluteFilePath();
 		}
 		else
 		{
@@ -406,7 +406,7 @@ StoredViewList StoredView::getUserViewsForScene(const SceneInfo &scene)
 	QSettings* ini = getUserViews();
 	if (ini->status() != QSettings::NoError)
 	{
-		qWarning() << "[SceneInfo] Error reading user viewpoint file";
+		qWarning() << "[StoredView] Error reading user viewpoint file";
 	}
 	else
 	{
@@ -427,7 +427,7 @@ void StoredView::saveUserViews(const SceneInfo &scene, const StoredViewList &lis
 
 	if (ini->status() != QSettings::NoError)
 	{
-		qWarning() << "[SceneInfo] Error reading user viewpoint file";
+		qWarning() << "[StoredView] Error reading user viewpoint file";
 	}
 	else
 	{
