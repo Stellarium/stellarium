@@ -2,20 +2,20 @@
 # Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
-# Tanmoy Saha <t4saha@gmail.com>, 2012, 2013, 2014.
+# Tanmoy Saha <t4saha@gmail.com>, 2012, 2013, 2014, 2002, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-27 20:42+0600\n"
-"PO-Revision-Date: 2014-10-08 16:12+0000\n"
+"PO-Revision-Date: 2015-03-08 14:10+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-28 05:11+0000\n"
-"X-Generator: Launchpad (build 17361)\n"
+"X-Launchpad-Export-Date: 2015-03-09 05:12+0000\n"
+"X-Generator: Launchpad (build 17383)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -80,7 +80,7 @@ msgstr "ছায়াপথ নির্দেশক রেখা"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1330
 msgid "O./C. longitude"
-msgstr ""
+msgstr "প্রতিযোগ / সংযোগ দ্রাঘিমা"
 
 #: src/core/modules/GridLinesMgr.cpp:755
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -133,7 +133,7 @@ msgstr "ছায়াপথ নির্দেশক রেখা"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "প্রতিযোগ / সংযোগ দ্রাঘিমা"
 
 #: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1253
 msgid "Atmosphere"
@@ -154,15 +154,15 @@ msgstr "ভূমি"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "ঔজ্জ্বল্যতা"
 
 #: src/core/modules/LandscapeMgr.cpp:584
 msgid "Author: "
-msgstr "লেখক : "
+msgstr "প্রস্তুতকারক : "
 
 #: src/core/modules/LandscapeMgr.cpp:590
 msgid "Location: "
-msgstr "অবস্থান : "
+msgstr "ঠিকানা : "
 
 #: src/core/modules/LandscapeMgr.cpp:593
 #, qt-format
@@ -171,7 +171,7 @@ msgstr ", %1 মিটার"
 
 #: src/core/modules/LandscapeMgr.cpp:598
 msgid "Celestial body:"
-msgstr ""
+msgstr "স্থান :"
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
@@ -258,7 +258,7 @@ msgstr "অনথিভুক্ত"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr "অতিজাগতিক জ্যোতিষ্কসমূহ"
+msgstr "মহাজাগতিক জ্যোতিষ্কসমূহ"
 
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:180
@@ -312,7 +312,7 @@ msgstr "গড় সৌর দিন : %1"
 
 #: src/core/modules/Planet.cpp:289
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "আবর্তন কাল খুব অনিয়মিত"
 
 #: src/core/modules/Planet.cpp:295
 #, qt-format
@@ -332,7 +332,7 @@ msgstr "দৃশ্যমান অংশ বা কলা : %1 অংশ"
 #: src/core/modules/Planet.cpp:298
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr "দৃশ্যমান দীপ্তি : %1%"
+msgstr "দৃশ্যমান ঔজ্জ্বল্যতা : %1%"
 
 #: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
@@ -342,12 +342,12 @@ msgstr "প্রারম্ভিক অস্থায়ী নাম : %1"
 #: src/core/modules/Comet.cpp:156
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "পর্যায়ক্রমিক নয়"
 
 #: src/core/modules/Comet.cpp:160
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "পর্যায়ক্রমিক"
 
 #: src/core/modules/Comet.cpp:162 plugins/Novae/src/Nova.cpp:133
 #: plugins/Pulsars/src/Pulsar.cpp:166
@@ -370,7 +370,7 @@ msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতি�
 #: src/core/modules/Comet.cpp:230
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr ""
+msgstr "বার্ষিক গতি : %1 বছর"
 
 #: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
@@ -510,11 +510,11 @@ msgstr "উদয় : %1%"
 
 #: src/core/modules/MilkyWay.cpp:73
 msgid "Milky Way"
-msgstr ""
+msgstr "ছায়াপথ"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "সৌর আভা"
 
 #: src/core/StelApp.cpp:478
 msgid "Night mode"
@@ -604,15 +604,15 @@ msgstr "বার্ষিক গতি অনুসারে এক শতা�
 
 #: src/core/StelCore.cpp:212
 msgid "Add 1 synodic month"
-msgstr "চন্দ্রকলা ভিত্তিক এক মাস এগিয়ে যান"
+msgstr "চন্দ্রকলা অনুসারে এক মাস এগিয়ে যান"
 
 #: src/core/StelCore.cpp:213
 msgid "Add 1 draconic month"
-msgstr "চন্দ্রায়ণ ভিত্তিক এক মাস এগিয়ে যান"
+msgstr "চন্দ্রায়ণ অনুসারে এক মাস এগিয়ে যান"
 
 #: src/core/StelCore.cpp:214
 msgid "Add 1 draconic year"
-msgstr "চন্দ্রায়ণ ভিত্তিক এক বছর এগিয়ে যান"
+msgstr "চন্দ্রায়ণ অনুসারে এক বছর এগিয়ে যান"
 
 #: src/core/StelCore.cpp:215
 msgid "Add 1 anomalistic month"
@@ -620,15 +620,15 @@ msgstr "চাঁদের দূরত্ব নির্ভর এক মা�
 
 #: src/core/StelCore.cpp:216
 msgid "Add 1 mean tropical month"
-msgstr "এক (ক্রান্তিবৃত্তীও) মাস বৃদ্ধি"
+msgstr "সূর্যায়ণ অনুসারে এক মাস এগিয়ে যান"
 
 #: src/core/StelCore.cpp:217
 msgid "Add 1 mean tropical year"
-msgstr "এক (ক্রান্তিবৃত্তীও) বছর বৃদ্ধি"
+msgstr "সূর্যায়ণ অনুসারে এক বছর এগিয়ে যান"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 1 mean tropical century"
-msgstr "এক (ক্রান্তিবৃত্তীও) মাস বৃদ্ধি"
+msgstr "সূর্যায়ণ অনুসারে এক শতাব্দী এগিয়ে যান"
 
 #: src/core/StelCore.cpp:219
 msgid "Subtract 1 sidereal day"
@@ -652,15 +652,15 @@ msgstr "বার্ষিক গতি অনুসারে এক শতা�
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 1 synodic month"
-msgstr "চন্দ্রকলা ভিত্তিক এক মাস পিছিয়ে যান"
+msgstr "চন্দ্রকলা অনুসারে এক মাস পিছিয়ে যান"
 
 #: src/core/StelCore.cpp:225
 msgid "Subtract 1 draconic month"
-msgstr "চন্দ্রায়ণ ভিত্তিক এক মাস পিছিয়ে যান"
+msgstr "চন্দ্রায়ণ অনুসারে এক মাস পিছিয়ে যান"
 
 #: src/core/StelCore.cpp:226
 msgid "Subtract 1 draconic year"
-msgstr "চন্দ্রায়ণ ভিত্তিক এক বছর পিছিয়ে যান"
+msgstr "চন্দ্রায়ণ অনুসারে এক বছর পিছিয়ে যান"
 
 #: src/core/StelCore.cpp:227
 msgid "Subtract 1 anomalistic month"
@@ -668,15 +668,15 @@ msgstr "চাঁদের দূরত্ব নির্ভর এক মা�
 
 #: src/core/StelCore.cpp:228
 msgid "Subtract 1 mean tropical month"
-msgstr "এক (ক্রান্তিবৃত্তীও) মাস হ্রাস"
+msgstr "সূর্যায়ণ অনুসারে এক মাস পিছিয়ে যান"
 
 #: src/core/StelCore.cpp:229
 msgid "Subtract 1 mean tropical year"
-msgstr "এক (ক্রান্তিবৃত্তীও) বছর হ্রাস"
+msgstr "সূর্যায়ণ অনুসারে এক বছর পিছিয়ে যান"
 
 #: src/core/StelCore.cpp:230
 msgid "Subtract 1 mean tropical century"
-msgstr "এক (ক্রান্তিবৃত্তীও) শতাব্দী হ্রাস"
+msgstr "সূর্যায়ণ অনুসারে এক শতাব্দী পিছিয়ে যান"
 
 #: src/core/StelCore.cpp:232
 msgid "Set home planet to selected planet"
@@ -750,7 +750,7 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
-"Tuckerman (১৯৬২, ১৯৬৪) এর তৈরী ছকে ৬০১ খ্রীষ্টপূর্বাব্দ থেকে ১৬৪৯ "
+"Tuckerman (১৯৬২, ১৯৬৪) এর তৈরী এই ছকে ৬০১ খ্রীষ্টপূর্বাব্দ থেকে ১৬৪৯ "
 "খ্রীষ্টাব্দ পর্যন্ত প্রতি ৫-১০ দিন অন্তর সূর্য, গ্রহ ও চাঁদের অবস্থানের একটি "
 "তালিকা দেওয়া আছে । এই একই সম্পর্ক Goldstine (১৯৭৩) প্রবর্তিত syzygy ছকেও "
 "গৃহিত হয়েছে ।"
@@ -855,7 +855,7 @@ msgid ""
 msgstr ""
 "M. Chapront-Touze এবং J. Chapront রচিত <em>Lunar Tables and Programs from "
 "4000 B.C. to A.D. 8000</em> (১৯৯১) প্রবন্ধে চাঁদ সংক্রান্ত ELP 2000-85 "
-"উপপাদ্যের সংক্ষিপ্ত রূপটিতে এই সূত্রটি গৃহিত হয়েছে ।"
+"মতবাদের সংক্ষিপ্ত রূপটিতে এই সূত্রটি গৃহিত হয়েছে ।"
 
 #: src/core/StelCore.cpp:1573
 #, qt-format
@@ -1003,6 +1003,9 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
+"এই বহুপদী সমীকরনটি M. Khalid, Mariam Sultana এবং Faheem Zaidi তাঁদের রচিত "
+"<em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1) "
+"নামক প্রবন্ধে প্রকাশ করেন । এটিতেমাত্র ০.৬ সেকেন্ডের এদিক ওদিক হয় ।"
 
 #: src/core/StelCore.cpp:1612
 #, qt-format
@@ -1037,8 +1040,8 @@ msgstr "এই সীমার বাইরের মান সবসময় শ�
 #: src/core/StelCore.cpp:1723
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
-"সচরাচর মানে ১ সেকেন্ডেরও কম ত্রুটি থাকে এবং এই সীমার বাইরের মান সবসময় শূন্য "
-"হয়"
+"সচরাচর হিসাবে ১ সেকেন্ডেরও কম ত্রুটি থাকে এবং এই সীমার বাইরের মান সবসময় "
+"শূন্য হয়"
 
 #: src/core/StelCore.cpp:1765
 #, qt-format
@@ -1063,8 +1066,8 @@ msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"এই মানচিত্র পদ্ধতি দিগন্তকে একটি সরলরেখায় হিসাবে গণ্য করে । এর গাণিতিক নাম "
-"হল <i>gnomonic projection</i>."
+"এই মানচিত্র পদ্ধতিতে দিগন্তকে একটি সরলরেখায় হিসাবে গণ্য করা হয় । এর গাণিতিক "
+"নাম হল <i>gnomonic projection</i>."
 
 #: src/core/StelProjectorClasses.cpp:63
 msgid "Equal Area"
@@ -1075,12 +1078,12 @@ msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
-"এই মানচিত্র পদ্ধতির নাম হল, <i>Lambert azimuthal equal-area projection</i> । "
-"এই পদ্ধতিতে ক্ষেত্রফল ধ্রুবক থাকলেও কোণ ধ্রুবক থাকে না ।"
+"এই মানচিত্র পদ্ধতির প্রকৃত নাম হল, <i>Lambert azimuthal equal-area "
+"projection</i> । এই পদ্ধতিতে ক্ষেত্রফল ধ্রুবক থাকলেও কোণ ধ্রুবক থাকে না ।"
 
 #: src/core/StelProjectorClasses.cpp:108
 msgid "Stereographic"
-msgstr "নিরেট গোলীয় (Stereographic)"
+msgstr "গোলীয় (Stereographic)"
 
 #: src/core/StelProjectorClasses.cpp:113
 msgid ""
@@ -1088,7 +1091,7 @@ msgid ""
 "known as the planisphere projection. It preserves the angles at which curves "
 "cross each other but it does not preserve area."
 msgstr ""
-"এই মানচিত্র পদ্ধতি সুদূর অতীতেও জানা ছিল এবং এই পদ্ধতিকে planisphere "
+"এই মানচিত্র পদ্ধতিটি সুদূর অতীতেও জানা ছিল এবং এই পদ্ধতিকে planisphere "
 "মানচিত্র পদ্ধতি বলা হত । এই পদ্ধতিতে কোণ ধ্রুবক থাকলেও ক্ষেত্রফল ধ্রুবক থাকে "
 "না ।"
 
@@ -1161,12 +1164,12 @@ msgstr ""
 #: src/core/StelObject.cpp:113
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "তারিখ অনুযায়ী"
 
 #: src/core/StelObject.cpp:125 src/core/StelObject.cpp:127
 #: src/core/StelObject.cpp:135 src/core/StelObject.cpp:137
 msgid "RA/Dec"
-msgstr ""
+msgstr "বিষুবাংশ / বিষুবলম্ব"
 
 #: src/core/StelObject.cpp:149 src/core/StelObject.cpp:153
 #, qt-format
@@ -1187,7 +1190,7 @@ msgstr "দিগংশ/উন্নতি : %1/%2"
 #: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
 #: src/core/StelObject.cpp:201 src/core/StelObject.cpp:203
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ"
 
 #: src/core/StelObject.cpp:211 src/core/StelObject.cpp:213
 #, qt-format
@@ -1196,7 +1199,7 @@ msgstr "ছায়াপথ কেন্দিক স্থানাঙ্ক, �
 
 #: src/core/StelSkyLayerMgr.cpp:88
 msgid "Deep-sky objects background images"
-msgstr "অতিজাগতিক জ্যোতিষ্কগুলির ছবি"
+msgstr "মহাজাগতিক জ্যোতিষ্কগুলির ছবি"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:177
 #: src/StelMainView.cpp:442
@@ -1260,7 +1263,7 @@ msgstr "দৃশ্যপটের প্রারম্ভিক দিক - �
 #: src/gui/ConfigurationDialog.cpp:793
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
 msgid "Authors"
-msgstr "লেখকবৃন্দ"
+msgstr "প্রস্তুতকারক বৃন্দ"
 
 #: src/gui/ConfigurationDialog.cpp:794 src/gui/ViewDialog.cpp:492
 msgid "Contact"
@@ -1291,7 +1294,7 @@ msgstr "সংস্করণ"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Author"
-msgstr "লেখক"
+msgstr "প্রস্তুতকারক"
 
 #: src/gui/ConfigurationDialog.cpp:883
 msgid "License"
@@ -1365,8 +1368,8 @@ msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
-"%1 তালিকাটি সংগ্রহে ত্রুটি হয়েছে :\n"
-"কারন তারকাসূচিটি নষ্ট হয়ে গেছে ।"
+"%1 তালিকাটি সংগ্রহে ত্রুটি দেখা দিয়েছে :\n"
+"তারকা সূচিটি নষ্ট হয়ে গেছে ।"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1213
@@ -1483,11 +1486,11 @@ msgstr "Banjevic (২০০৬)"
 
 #: src/gui/ConfigurationDialog.cpp:1253
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr "Islam, Sadiq & Qureshi (২০০৮, ২০১৩)"
+msgstr "Islam, Sadiq এবং Qureshi (২০০৮, ২০১৩)"
 
 #: src/gui/ConfigurationDialog.cpp:1254
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Khalid, Sultana এবং Zaidi (২০১৪)"
 
 #: src/gui/ConfigurationDialog.cpp:1255
 #, qt-format
@@ -1808,15 +1811,15 @@ msgstr "খালি চোখে দৃশ্যমান নক্ষত্র
 
 #: src/gui/ViewDialog.cpp:415
 msgid "Abbreviated"
-msgstr ""
+msgstr "সংক্ষিপ্ত নাম"
 
 #: src/gui/ViewDialog.cpp:416
 msgid "Native"
-msgstr ""
+msgstr "আঞ্চলিক নাম"
 
 #: src/gui/ViewDialog.cpp:417
 msgid "Translated"
-msgstr ""
+msgstr "ভাষান্তরিত নাম"
 
 #: src/gui/ViewDialog.cpp:541
 msgid "No description"
@@ -1852,7 +1855,7 @@ msgstr "প্রবল উল্কা বৃষ্টির হার"
 
 #: src/gui/ViewDialog.cpp:655
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "ড্রাকো মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
 #: src/gui/ViewDialog.cpp:658
 msgid "Exceptional Leonid rate"
@@ -1860,11 +1863,11 @@ msgstr "সিংহরাশি থেকে বর্ষিত উল্কা
 
 #: src/gui/ViewDialog.cpp:661
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "অতি প্রবল উল্কা বৃষ্টির হার (১৯৬৬ সাল, সিংহরাশি থেকে)"
 
 #: src/gui/ViewDialog.cpp:664
 msgid "Highest rate ever (1833 Leonids)"
-msgstr "সর্বকালের সর্বোচ্চ হার (১৮৩৩ সিংহরাশি থেকে)"
+msgstr "সর্বকালের সর্বোচ্চ হার (১৮৩৩ সাল, সিংহরাশি থেকে)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -1929,13 +1932,13 @@ msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
-"এটি ZIP আর্কাইভ নয় বা এতে কোন Stellarium এর ব্যবহার যোগ্য ভূমিরূপ নেই ।"
+"এটি ZIP আর্কাইভ নয় বা এতে কোন Stellarium এ ব্যবহার যোগ্য ভূমিরূপ নেই ।"
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
 #: src/gui/AddRemoveLandscapesDialog.cpp:227
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr "এই একই নামের (%1) একটি ভূমিরূপ আগে থেকেই যোগ করা আছে ।"
+msgstr "%1 নামের একটি ভূমিরূপ আগে থেকেই আছে ।"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:238
@@ -1971,46 +1974,46 @@ msgstr "নক্ষত্রমন্ডলের নকশা"
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "ভূ-বিষুব স্থানাঙ্ক (J2000.0 অনুযায়ী)"
 
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "ভূ-বিষুব স্থানাঙ্ক"
 
 #: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক"
 
 #: src/gui/SearchDialog.cpp:235
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক"
 
 #: src/gui/SearchDialog.cpp:255
 msgid "Right ascension"
-msgstr ""
+msgstr "বিষুবাংশ"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Declination"
-msgstr ""
+msgstr "বিষুবলম্ব"
 
 #: src/gui/SearchDialog.cpp:266
 msgid "Azimuth"
-msgstr ""
+msgstr "দিগংশ"
 
 #: src/gui/SearchDialog.cpp:269
 msgid "Altitude"
-msgstr ""
+msgstr "উন্নতি কোণ"
 
 #: src/gui/SearchDialog.cpp:277
 msgid "Longitude"
-msgstr ""
+msgstr "দ্রাঘিমাংশ"
 
 #: src/gui/SearchDialog.cpp:280
 msgid "Latitude"
-msgstr ""
+msgstr "অক্ষাংশ"
 
 #: src/gui/SearchDialog.cpp:537
 msgid "Simbad Lookup Error"
@@ -2067,10 +2070,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"OpenGL 2 খুঁজে পাওয়া যায় নি । অনুগ্রহ করে হার্ডওয়্যার আপগ্রেড করুন কিংবা "
+"কোনো পুরোনো সংস্করণ বা MESA সংস্করণ ব্যবহার করুন ।"
 
 #: src/StelMainView.cpp:387
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "OpenGL সম্পর্কিত অত্যাবশ্যকীয় তথ্যগুলি পাওয়া যায় নি ।"
 
 #: src/StelMainView.cpp:442
 msgid "Save screenshot"
@@ -2085,14 +2090,14 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
-"অনুপযুক্ত OpenGL সংস্করণ । দয়া করে driver ও graphics hardware এর আধুনিকরণ "
+"অনুপযুক্ত OpenGL সংস্করণ । দয়া করে ড্রাইভার ও গ্রাফিক্স হার্ডওয়্যার আপডেট "
 "করুন অথবা MESA (বা ANGLE) সংস্করণ ব্যবহার করুন ।"
 
 #: src/StelMainView.cpp:562
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
-"অনুপযুক্ত OpenGL সংস্করণ । দয়া করে driver ও graphics hardware এর আধুনিকরণ "
+"অনুপযুক্ত OpenGL সংস্করণ । দয়া করে ড্রাইভার ও গ্রাফিক্স হার্ডওয়্যার আপডেট "
 "করুন ।"
 
 #: src/StelMainView.cpp:604
@@ -2167,27 +2172,27 @@ msgstr "উপগ্রহ"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr ""
+msgstr "প্লুটো সদ্শ"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
 msgid "dwarf planet"
-msgstr ""
+msgstr "বামন গ্রহ"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "কিউবিয়ানো বা কাইপার বেল্টে থাকা মূল বস্তু"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "scattered disc object"
-msgstr ""
+msgstr "কাইপার বেল্ট পরবর্তী বিক্ষিপ্ত বলয়ে থাকা বস্তু"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
 msgid "Oort cloud object"
-msgstr ""
+msgstr "উর্ট ক্লাউডে থাকা বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:64
@@ -2209,27 +2214,27 @@ msgstr "উপগ্রহ"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:70
 msgid "Plutinos"
-msgstr ""
+msgstr "প্লুটো সদৃশ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:72
 msgid "Dwarf planets"
-msgstr ""
+msgstr "বামন গ্রহ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "কিউবিয়ানো বা কাইপার বেল্টে থাকা মূল বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:76
 msgid "Scattered disc objects"
-msgstr ""
+msgstr "কাইপার বেল্ট পরবর্তী বিক্ষিপ্ত বলয়ে থাকা বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:78
 msgid "Oort cloud objects"
-msgstr ""
+msgstr "উর্ট ক্লাউডে থাকা বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
@@ -2274,12 +2279,12 @@ msgstr "নীহারিকা যুক্ত তারকা গুচ্ছ
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "Messier Catalogue"
-msgstr "মেসিয়ার এর তালিকা"
+msgstr "মেসিয়ার তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Caldwell Catalogue"
-msgstr "ক্যাডওয়েল এর তালিকা"
+msgstr "ক্যাডওয়েল তালিকা"
 
 #: src/translations.h:105
 msgid "Arabic"
@@ -2287,7 +2292,7 @@ msgstr "আরবীয়"
 
 #: src/translations.h:106
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "আরবীয় - চাঁদ সম্পর্কীত"
 
 #: src/translations.h:107
 msgid "Aztec"
@@ -2295,7 +2300,7 @@ msgstr "অ্যাজটেক"
 
 #: src/translations.h:108
 msgid "Boorong"
-msgstr ""
+msgstr "বোরং"
 
 #: src/translations.h:109
 msgid "Chinese"
@@ -2315,7 +2320,7 @@ msgstr "বৈদিক ভারতীয়"
 
 #: src/translations.h:113
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "জাপানী - চাঁদ সম্পর্কীত"
 
 #: src/translations.h:114
 msgid "Korean"
@@ -2356,7 +2361,7 @@ msgstr "সামী"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:124
 msgid "Siberian"
-msgstr ""
+msgstr "সাইবেরিয়ান"
 
 #: src/translations.h:125
 msgid "Tupi-Guarani"
@@ -2372,7 +2377,7 @@ msgstr "পশ্চিমী"
 
 #: src/translations.h:128
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "পশ্চিমী (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:134
@@ -2442,7 +2447,7 @@ msgstr "গ্রসমুগ"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:160
 msgid "Zero Horizon"
-msgstr ""
+msgstr "সোজাসাপটা"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:166
@@ -2487,12 +2492,12 @@ msgstr "বুধের আকাশে এক দিনে তিনটি স�
 #. TRANSLATORS: Name of script
 #: src/translations.h:182
 msgid "Double eclipse from Deimos in 2017"
-msgstr "ডিমোসের আকাশে দৃশ্যমান ২০১৭ এর দ্বৈত গ্রহন"
+msgstr "ডিমোসের আকাশে দৃশ্যমান ২০১৭ এর দ্বৈত গ্রহণ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
 msgid "Double eclipse from Deimos in 2031"
-msgstr "ডিমোসের আকাশে দৃশ্যমান ২০৩১ এর দ্বৈত গ্রহন"
+msgstr "ডিমোসের আকাশে দৃশ্যমান ২০৩১ এর দ্বৈত গ্রহণ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:186
@@ -2508,7 +2513,7 @@ msgstr "২০৪৮ সাল : পৃথিবী ও বৃহস্পতি
 #. TRANSLATORS: Name of script
 #: src/translations.h:190
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr "ডিমোসের আকাশে দৃশ্যমান ২০২৭ এর ২টি গ্রহন ও ৩টি সরণ"
+msgstr "ডিমোসের আকাশে দৃশ্যমান ২০২৭ এর ২টি গ্রহণ ও ৩টি সরণ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:192
@@ -2553,7 +2558,7 @@ msgstr "বুধের আকাশে পৃথিবীর কার্যক
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:208
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "শুক্রের আকাশে পৃথিবীর কার্যকলাপ"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:210
@@ -2568,7 +2573,7 @@ msgstr "মঙ্গলের আকাশে শুক্র ও পৃথি�
 #. TRANSLATORS: Name of script
 #: src/translations.h:214
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
-msgstr ""
+msgstr "ক্যালিস্টোর আকাশে মঙ্গল ও পৃথিবীর সর্বোচ্চ অবস্থান ও তাদের সরণ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
@@ -2595,7 +2600,7 @@ msgstr "পূর্ণগ্রাস চন্দ্রগ্রহণ দে�
 
 #: src/translations.h:227
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr "একটি অলস, অসীম মহাকাশ ভ্রমণ ।"
+msgstr "ধীরসুস্থে অসীম মহাকাশের পরিভ্রমণ ।"
 
 #: src/translations.h:228
 msgid ""
@@ -2615,15 +2620,15 @@ msgid ""
 "celestial sphere over the course of a year."
 msgstr ""
 "এই কার্যলিপিটি রাশিচক্রগুলি দেখায় মানে সেই সমস্ত নক্ষত্রমন্ডলগুলি, যারা "
-"বাত্সরিক সৌরপথে পড়ে ।"
+"সৌরপথের উপর পড়ে ।"
 
 #: src/translations.h:231
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
-"কক্ষপথ ও অক্ষের উপর আবর্তনের অদ্ভূত বিশিষ্টতার জন্য বুধের কোথাও কোথাও এক "
-"দিনে তিনবার সূর্যোদয় ও সূর্যাস্ত হয় ।"
+"বার্ষিক ও আহ্নিক গতির অদ্ভূত বিশিষ্টতার জন্য বুধের কোথাও কোথাও এক দিনে "
+"তিনবার সূর্যোদয় ও সূর্যাস্ত হয় ।"
 
 #: src/translations.h:232
 msgid ""
@@ -2644,8 +2649,8 @@ msgstr ""
 #: src/translations.h:234
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
-"১০ই জানুয়ারি, ২০৬৮ সালে মঙ্গলের অলিম্পাস পর্বত থেকে ফোবস দ্বারা সূর্যগ্রহন "
-"দেখা য়ায ।"
+"১০ই জানুয়ারি, ২০৬৮ সালে মঙ্গলের অলিম্পাস পর্বত থেকে ফোবস দ্বারা সূর্যের "
+"গ্রহণ দেখা য়ায ।"
 
 #: src/translations.h:235
 msgid ""
@@ -2681,7 +2686,7 @@ msgstr "এটি পশ্চিমী সংস্কৃতির তারা
 
 #: src/translations.h:239
 msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr "প্লুটো ও সৌরজগতের বড় গ্রহগুলি থেকে সূর্য দর্শণ ।"
+msgstr "প্লুটো ও সৌরজগতের বড় গ্রহগুলি থেকে সূর্যকে দেখা ।"
 
 #: src/translations.h:240
 msgid ""
@@ -2693,7 +2698,7 @@ msgstr ""
 #: src/translations.h:241
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
-"৬ই জুন, ২০১২ সালে অস্ট্রেলিয়ার সিডনি থেকে দৃশ্যমান সুক্রের সরণটি দেখায় ।"
+"৬ই জুন, ২০১২ সালে অস্ট্রেলিয়ার সিডনি থেকে দৃশ্যমান শুক্রের সরণটি দেখায় ।"
 
 #: src/translations.h:242
 msgid ""
@@ -2724,6 +2729,11 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"২০০০ ও ৩০০০ মধ্যবর্তী সময়ে ক্যালিস্টোর আকাশে মঙ্গল ও পৃথিবীর সর্বোচ্চ "
+"অবস্থান ও তাদের সরণ দেখার কার্যলিপি এটি । কিন্তু ক্যালিস্টো কেন ? কেননা "
+"গ্যালিলিও আবিষ্কৃত ৪টি চাঁদের মধ্যে কেবলমাত্র এটিই বৃহস্পতিকে ঘিরে থাকা "
+"বেষ্টনীর বাইরে অবস্থিত । তাই যদি কোনো দিন মানুষ বৃহস্পতির কাছে বসতি গড়ে তোলে "
+"তবে এটাই হবে সবচেয়ে আদর্শ স্থান ।"
 
 #: src/translations.h:249
 msgid "Andorra"
@@ -3691,15 +3701,15 @@ msgstr "জিম্বাবোয়ে"
 
 #: src/translations.h:493
 msgid "&Undo"
-msgstr "&পূর্বাবস্থায় ফিরুন"
+msgstr "পূর্বাবস্থায় ফির&ুন"
 
 #: src/translations.h:494
 msgid "&Redo"
-msgstr "&পুনরায় করুন"
+msgstr "পুন&রায় করুন"
 
 #: src/translations.h:495
 msgid "Cu&t"
-msgstr "&কেটে নিন"
+msgstr "কে&টে নিন"
 
 #: src/translations.h:496
 msgid "&Copy"
@@ -3707,7 +3717,7 @@ msgstr "&অনুকরন করুন"
 
 #: src/translations.h:497
 msgid "&Paste"
-msgstr "অনুলিপি &জুড়ুন"
+msgstr "অনুলি&পি জুড়ুন"
 
 #: src/translations.h:498 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1094
@@ -3735,7 +3745,7 @@ msgstr "ফোল্ডার"
 
 #: src/translations.h:503
 msgid "&Choose"
-msgstr "&বেছে নিন"
+msgstr "বে&ছে নিন"
 
 #: src/translations.h:504 src/ui_configurationDialog.h:1186
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3768,27 +3778,27 @@ msgstr "নথির &নাম :"
 
 #: src/translations.h:511
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "&সংযোগটির ঠিকানা অনুকরন করুন"
 
 #: src/translations.h:512
 msgid "Abort"
-msgstr ""
+msgstr "বাতিল করুন"
 
 #: src/translations.h:513
 msgid "Ignore"
-msgstr ""
+msgstr "উপেক্ষা করুন"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "গ্রেগোরিয়ান পঞ্জিকা অনুসারে সময় ও তারিখ"
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Date"
-msgstr ""
+msgstr "জুলিয়ান পঞ্জিকা অনুসারে তারিখ"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "সংশোধিত জুলিয়ান পঞ্জিকা অনুসারে তারিখ"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3801,7 +3811,7 @@ msgstr "বিবরণ"
 
 #: src/ui_helpDialogGui.h:287 src/ui_scriptConsole.h:387
 msgid "Log"
-msgstr "লগ"
+msgstr "কার্যবিবরণী"
 
 #: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1103
 msgid "Edit keyboard shortcuts..."
@@ -3809,7 +3819,7 @@ msgstr "চটজলদি ব্যবহারের উপায়গুলি 
 
 #: src/ui_helpDialogGui.h:291
 msgid "Refresh"
-msgstr "সতেজ করন"
+msgstr "টাটকা তথ্য"
 
 #: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
@@ -3820,14 +3830,15 @@ msgstr "অবস্থান"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
+"প্রদত্ত তালিকাটিতে শুধুমাত্র ইংরাজী নাম দেওয়া আছে (উচ্চারণবিধি অনুসারে নয়)"
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "তালিকায় থাকা সব নাম দেখাবে"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "শুরু থেকে খুঁজুন"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -3843,8 +3854,8 @@ msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"আপনি দশমিক ডিগ্রিতে মান লিখতে পারেন, অথবা dms ফরম্যাট ব্যবহার করতে পারেন, "
-"উদাহরণ:+1d 12m 8s"
+"আপনি দশমিকে মান লিখতে পারেন, অথবা dms (ডিগ্রি মিনিট সেকেন্ড) ফরম্যাট ব্যবহার "
+"করতে পারেন, উদাহরণ:+1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:150
@@ -3866,7 +3877,7 @@ msgstr " মিটার"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "স্বস্থানে ফিরে আসুন"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -3878,7 +3889,7 @@ msgstr "নাম / শহর :"
 
 #: src/ui_locationDialogGui.h:435
 msgid "New Location"
-msgstr "নতুন অবস্থান"
+msgstr "নতুন ঠিকানা"
 
 #: src/ui_locationDialogGui.h:436
 msgid "Country:"
@@ -3890,11 +3901,11 @@ msgstr "গ্রহ :"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "বর্তমান ঠিকানাটি বাড়ি হিসাবে ব্যবহৃত হবে"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "নেটওয়ার্কের তথ্য থেকে ঠিকানা ঠিক করা হবে"
 
 #: src/ui_searchDialogGui.h:614
 msgid "Find Object"
@@ -3902,7 +3913,7 @@ msgstr "অনুসন্ধান করুন"
 
 #: src/ui_searchDialogGui.h:615
 msgid "Find Object or Position"
-msgstr "জ্যোতিষ্ক বা তার অবস্থান অনুসন্ধান"
+msgstr "জ্যোতিষ্কের নাম বা তার অবস্থান অনুসন্ধান"
 
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
@@ -3911,67 +3922,67 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:627
 msgid "iota"
-msgstr "আয়োটা (iota)"
+msgstr "আয়োটা"
 
 #: src/ui_searchDialogGui.h:630
 msgid "alpha"
-msgstr "আলফা (α)"
+msgstr "আলফা"
 
 #: src/ui_searchDialogGui.h:633
 msgid "beta"
-msgstr "বিটা (β)"
+msgstr "বিটা"
 
 #: src/ui_searchDialogGui.h:636
 msgid "gamma"
-msgstr "গামা (γ)"
+msgstr "গামা"
 
 #: src/ui_searchDialogGui.h:639
 msgid "delta"
-msgstr "ডেল্টা (δ)"
+msgstr "ডেল্টা"
 
 #: src/ui_searchDialogGui.h:642
 msgid "epsilon"
-msgstr "এপসাইলন (δ)"
+msgstr "এপসাইলন"
 
 #: src/ui_searchDialogGui.h:645
 msgid "zeta"
-msgstr "জিটা (ζ)"
+msgstr "জিটা"
 
 #: src/ui_searchDialogGui.h:648
 msgid "eta"
-msgstr "ইটা (η)"
+msgstr "ইটা"
 
 #: src/ui_searchDialogGui.h:651
 msgid "theta"
-msgstr "থিটা (θ)"
+msgstr "থিটা"
 
 #: src/ui_searchDialogGui.h:654
 msgid "kappa"
-msgstr "কাপ্পা (κ)"
+msgstr "কাপ্পা"
 
 #: src/ui_searchDialogGui.h:657
 msgid "lambda"
-msgstr "ল্যাম্বডা (λ)"
+msgstr "ল্যাম্বডা"
 
 #: src/ui_searchDialogGui.h:660
 msgid "mu"
-msgstr "মিউ (μ)"
+msgstr "মিউ"
 
 #: src/ui_searchDialogGui.h:663
 msgid "nu"
-msgstr "নিউ (ν)"
+msgstr "নিউ"
 
 #: src/ui_searchDialogGui.h:666
 msgid "xi"
-msgstr "জাই (ξ)"
+msgstr "জাই"
 
 #: src/ui_searchDialogGui.h:669
 msgid "omicron"
-msgstr "ওমিক্রন (ο)"
+msgstr "ওমিক্রন"
 
 #: src/ui_searchDialogGui.h:672
 msgid "pi"
-msgstr "পাই (π)"
+msgstr "পাই"
 
 #: src/ui_searchDialogGui.h:675
 msgid "rho"
@@ -3979,31 +3990,31 @@ msgstr "রো (ρ)"
 
 #: src/ui_searchDialogGui.h:678
 msgid "sigma"
-msgstr "সিগমা (σ)"
+msgstr "সিগমা"
 
 #: src/ui_searchDialogGui.h:681
 msgid "tau"
-msgstr "টাও (τ)"
+msgstr "টাও"
 
 #: src/ui_searchDialogGui.h:684
 msgid "upsilon"
-msgstr "এপসাইলন (ς)"
+msgstr "এপসাইলন"
 
 #: src/ui_searchDialogGui.h:687
 msgid "phi"
-msgstr "ফাই (φ)"
+msgstr "ফাই"
 
 #: src/ui_searchDialogGui.h:690
 msgid "chi"
-msgstr "কাই (χ)"
+msgstr "কাই"
 
 #: src/ui_searchDialogGui.h:693
 msgid "psi"
-msgstr "শাই (ψ)"
+msgstr "শাই"
 
 #: src/ui_searchDialogGui.h:696
 msgid "omega"
-msgstr "ওমেগা (ω)"
+msgstr "ওমেগা"
 
 #: src/ui_searchDialogGui.h:698
 msgid "Greek letters for Bayer designations"
@@ -4022,6 +4033,7 @@ msgstr "স্থানাঙ্ক ব্যবস্থা :"
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"বিঃদ্রঃ - এই সরঞ্জামটি প্রতিসরণ জনিত অবস্থানের ত্রুটি সংশোধন করে না ।"
 
 #: src/ui_searchDialogGui.h:704
 msgid "Position"
@@ -4101,12 +4113,12 @@ msgstr "নাম এবং চিহ্ন"
 #: src/ui_viewDialog.h:1234
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr "অতিজাগতিক জ্যোতিষ্কসমূহ (তারকাগুচ্ছ, নক্ষত্রলোক এবং নীহারিকা)"
+msgstr "মহাজাগতিক জ্যোতিষ্কসমূহ (তারকাগুচ্ছ, নক্ষত্রলোক এবং নীহারিকা)"
 
 #: src/ui_viewDialog.h:1236 src/ui_viewDialog.h:1293
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr "অতিজাগতিক"
+msgstr "মহাজাগতিক জ্যোতিষ্ক সমূহ"
 
 #: src/ui_viewDialog.h:1237
 msgid "Planets and satellites"
@@ -4155,8 +4167,7 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
-"নিচের বিন্যাসগুলি ব্যবহৃত না হয়ে নির্বাচিত স্থান অনুযায়ী আলোক দূষনের পরিমান "
-"ঠিক হবে"
+"পছন্দসই বিন্যাস ব্যবহৃত না হয়ে স্থান অনুযায়ী আলোক দূষনের পরিমান ঠিক হবে"
 
 #: src/ui_viewDialog.h:1257
 msgid "Light pollution data from locations database"
@@ -4169,7 +4180,7 @@ msgstr "আলোক দূষন :"
 
 #: src/ui_viewDialog.h:1260
 msgid "pressure, temperature, extinction coefficient"
-msgstr "চাপ, তাপমাত্রা, বিলুপ্তির গুণাঙ্ক"
+msgstr "চাপ, তাপমাত্রা, বিলুপ্তি গুণাঙ্ক"
 
 #: src/ui_viewDialog.h:1262
 msgid "Refraction/Extinction settings..."
@@ -4191,7 +4202,7 @@ msgstr "ছায়াপথের ঔজ্জ্বলতা :"
 
 #: src/ui_viewDialog.h:1267
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "সৌর আভার ঔজ্জ্বলতা :"
 
 #: src/ui_viewDialog.h:1268
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
@@ -4201,7 +4212,8 @@ msgstr "তারার ঝিকমিক :"
 #: src/ui_viewDialog.h:1270
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
-"খুবই উজ্জ্বল জ্যোতিষ্কের সান্যিধ্যে কম উজ্জ্বল তারাগুলি আবছা হয়ে যাবে"
+"খুবই উজ্জ্বল জ্যোতিষ্কের সান্যিধ্যে কম উজ্জ্বল তারাগুলিকে আরও কম উজ্জ্বল "
+"দেখায়"
 
 #: src/ui_viewDialog.h:1272
 msgid "Dynamic eye adaptation"
@@ -4209,11 +4221,11 @@ msgstr "চক্ষু অভিযোজন"
 
 #: src/ui_viewDialog.h:1274
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "বিক্ষিপ্ত ভাবে ঘটা উল্কাপাতের রূপরেখা বিন্যাস"
 
 #: src/ui_viewDialog.h:1276
 msgid "Shooting Stars"
-msgstr "উল্কা"
+msgstr "উল্কাপাত"
 
 #: src/ui_viewDialog.h:1278
 msgid "Hourly zenith rate"
@@ -4226,21 +4238,21 @@ msgstr "হার :"
 
 #: src/ui_viewDialog.h:1283
 msgid "Limit Magnitudes (for unaided/binocular observers)"
-msgstr "ঔজ্জ্বলতার সীমা (বাইনাকুলার রা খালি চোখে দেখার জন্য)"
+msgstr ""
+"সর্বনিম্ন দৃশ্যমান ঔজ্জ্বল্যতা (বাইনাকুলার বা খালি চোখে দেখার ক্ষেত্রে)"
 
 #: src/ui_viewDialog.h:1285
 msgid "Limit Magnitudes"
-msgstr "ঔজ্জ্বলতা সীমা নির্ধারন"
+msgstr "সর্বনিম্ন দৃশ্যমান ঔজ্জ্বল্যতা"
 
 #: src/ui_viewDialog.h:1287
 msgid "Limit the magnitude of stars"
-msgstr "খালি চোখে দৃশ্যমান নক্ষত্র সমূহের সর্বনিম্ন ঔজ্জ্বল্যতার সীমা"
+msgstr "সর্বনিম্ন যে ঔজ্জ্বল্যতার নক্ষত্র খালি চোখে দেখা যাবে"
 
 #: src/ui_viewDialog.h:1291
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr ""
-"খালি চোখে দৃশ্যমান অতিজাগতিক জ্যোতিষ্ক সমূহের সর্বনিম্ন ঔজ্জ্বল্যতার সীমা"
+msgstr "সর্বনিম্ন যে ঔজ্জ্বল্যতার মহাজাগতিক জ্যোতিষ্ক খালি চোখে দেখা যাবে"
 
 #: src/ui_viewDialog.h:1294
 msgid "Constellations"
@@ -4266,7 +4278,7 @@ msgstr "কল্পচিত্র"
 #: src/ui_viewDialog.h:1299
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
-msgstr "কল্পচিত্রগুলির উজ্জ্বলতা :"
+msgstr "কল্পচিত্রগুলির ঔজ্জ্বলতা :"
 
 #: src/ui_viewDialog.h:1300
 msgid "Celestial Sphere"
@@ -4274,11 +4286,11 @@ msgstr "খগোলীয় বিষয়"
 
 #: src/ui_viewDialog.h:1301
 msgid "Equatorial grid (on J2000)"
-msgstr "নিরক্ষীয় ছক (J2000 অনুযায়ী)"
+msgstr "ভূ-বিষুব ছক (J2000 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:1302
 msgid "Equatorial grid (on date)"
-msgstr "নিরক্ষীয় ছক (তারিখ অনুযায়ী)"
+msgstr "ভূ-বিষুব ছক (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:1303
 msgid "Ecliptic grid (on J2000)"
@@ -4286,29 +4298,31 @@ msgstr "সৌরপথীয় ছক (J2000 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:1308
 msgid "Show equator line"
-msgstr "নিরক্ষরেখা প্রদর্শিত হবে"
+msgstr "নিরক্ষরেখা দেখা যাবে"
 
 #: src/ui_viewDialog.h:1312
 msgid "Show meridian line"
-msgstr "বিষুবরেখা প্রদর্শিত হবে"
+msgstr "বিষুবরেখা দেখা যাবে"
 
 #: src/ui_viewDialog.h:1316
 msgid "Show ecliptic line"
-msgstr "সূর্যের বার্ষিক পরিক্রমণ পথ প্রদর্শিত হবে"
+msgstr "সূর্যের বার্ষিক পরিক্রমণ পথ দেখা যাবে"
 
 #: src/ui_viewDialog.h:1320
 msgid "Show horizon line"
-msgstr "দিগন্তরেখা প্রদর্শিত হবে"
+msgstr "দিগন্তরেখা দেখা যাবে"
 
 #: src/ui_viewDialog.h:1324
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "ছায়াপথ নির্দেশক রেখা দেখা যাবে"
 
 #: src/ui_viewDialog.h:1328
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"প্রতিযোগ / সংযোগ দ্রাঘিমা - এটি সৌরপথীয় স্থানাঙ্কের দুটি মেরু, সূর্য ও "
+"প্রতিযোগ বিন্দু দিয়ে গঠিত একটি বৃত্ত"
 
 #: src/ui_viewDialog.h:1331
 msgid "Projection"
@@ -4320,11 +4334,11 @@ msgstr "কুয়াশার প্রভাব"
 
 #: src/ui_viewDialog.h:1334
 msgid "Use associated planet and position"
-msgstr "ভূমিরূপের সাথে সংযুক্ত গ্রহ এবং অবস্থান ব্যবহার"
+msgstr "ভূমিরূপ অনুযায়ী ঠিকানা ব্যবহার হবে"
 
 #: src/ui_viewDialog.h:1335
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "দীপন স্তরগুলি (আলোক দূষন, পরিবেশের ঔজ্জ্বল্যতা, ইত্যাদি) দেখান হবে"
 
 #: src/ui_viewDialog.h:1336
 msgid "Show ground"
@@ -4332,48 +4346,49 @@ msgstr "ভূমি"
 
 #: src/ui_viewDialog.h:1337
 msgid "Use this landscape as default"
-msgstr "প্রতিবার শুরুর সময় এই ভূমিরূপটির ব্যবহার"
+msgstr "প্রতিবার শুরুর সময় এই ভূমিরূপটি ব্যবহার করা হবে"
 
 #: src/ui_viewDialog.h:1339
 msgid "Use minimal brightness to leave landscape visible also in darkness"
-msgstr ""
+msgstr "পুরো অন্ধকারে আশেপাশে দেখার জন্য ব্যবহৃত সর্বনিম্ন ঔজ্জ্বল্যতা"
 
 #: src/ui_viewDialog.h:1341
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "সর্বনিম্ন ঔজ্জ্বল্যতা :"
 
 #: src/ui_viewDialog.h:1343
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr ""
+msgstr "মান ০..১ পর্যন্ত হতে পারে (পুরো অন্ধকার - একদম চকচকে)"
 
 #: src/ui_viewDialog.h:1346
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "ভূমিরূপ অনুযায়ী সর্বনিম্ন ঔজ্জ্বল্যতা ঠিক করা হবে"
 
 #: src/ui_viewDialog.h:1348
 msgid "from landscape, if given"
-msgstr ""
+msgstr "ভূমিরূপ অনুযায়ী, তথ্য উপলব্ধ থাকলে"
 
 #: src/ui_viewDialog.h:1349
 msgid "Add/remove landscapes..."
-msgstr "ভূমিরূপ যোগ/মুছে ফেলুন"
+msgstr "ভূমিরূপ জুড়ুন/মুছে ফেলুন"
 
 #: src/ui_viewDialog.h:1351
 msgid "Use this sky culture as default"
-msgstr "প্রতিবার শুরুর সময় এই মহাকাশ সংস্কৃতিটির ব্যবহার"
+msgstr "প্রতিবার শুরুর সময় এই মহাকাশ সংস্কৃতিটি ব্যবহার করা হবে"
 
 #: src/ui_viewDialog.h:1352
 msgid "Show names"
-msgstr ""
+msgstr "নামের ব্যবহার"
 
 #: src/ui_viewDialog.h:1354
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
+"সাংকেতিক নাম, আঞ্চলিক নাম কিংবা ভাষান্তরিত নাম পছন্দমত ব্যবহার করা যায়"
 
 #: src/ui_viewDialog.h:1357
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "গ্রহদের আঞ্চলিক নাম ব্যবহার করা হবে"
 
 #: src/ui_viewDialog.h:1359
 msgid "Visible"
@@ -4385,15 +4400,15 @@ msgstr "রূপরেখা বিন্যাস"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Language settings"
-msgstr ""
+msgstr "ব্যবহৃত ভাষা"
 
 #: src/ui_configurationDialog.h:1020
 msgid "Program Language"
-msgstr ""
+msgstr "পোগ্রামে ব্যবহৃত ভাষা"
 
 #: src/ui_configurationDialog.h:1021
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "মহাকাশ সংস্কৃতিতে ব্যবহৃত ভাষা"
 
 #: src/ui_configurationDialog.h:1022
 msgid "Default options"
@@ -4404,8 +4419,8 @@ msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
-"এই অধিবেশনে পরিবর্তিত বৈশিষ্ট্যগুলি সংরক্ষণ করলে আপনি পরবর্তী Stellarium "
-"শুরুর সময়ে তা ব্যবহার করতে পারবেন"
+"এই অধিবেশনে পরিবর্তিত বৈশিষ্ট্যগুলি সংরক্ষণ করলে আপনি তা পরবর্তী Stellarium "
+"শুরুর সময়ে ব্যবহার করতে পারবেন"
 
 #: src/ui_configurationDialog.h:1026
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -4557,7 +4572,7 @@ msgstr "ঘন্টা কোণ / বিষুবলম্ব"
 
 #: src/ui_configurationDialog.h:1086
 msgid "Horizontal coordinates"
-msgstr "আনুভূমিক স্থানাঙ্ক"
+msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক"
 
 #: src/ui_configurationDialog.h:1088
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
@@ -4570,7 +4585,7 @@ msgstr "দূরত্ব"
 
 #: src/ui_configurationDialog.h:1091
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, তারিখ ও J2000 অনুযায়ী (পৃথিবী সাপেক্ষে)"
 
 #: src/ui_configurationDialog.h:1093
 msgid "Ecliptic coordinates"
@@ -4582,7 +4597,7 @@ msgstr "নিয়ন্ত্রণ প্রনালী"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Allow keyboard to pan and zoom"
-msgstr "কীবোর্ডের সাহায্যে অভিমুখ পরিবর্তন বা কাছেদূরে করা যাবে"
+msgstr "কীবোর্ডের সাহায্যে অভিমুখ পরিবর্তন বা জুম করা যাবে"
 
 #: src/ui_configurationDialog.h:1098
 msgid "Enable keyboard navigation"
@@ -4590,8 +4605,7 @@ msgstr "কীবোর্ডের সাহায্যে নিয়ন্ত�
 
 #: src/ui_configurationDialog.h:1100
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr ""
-"মাউসের সাহায্যে অভিমুখ পরিবর্তন (drag) বা কাছেদূরে (mousewheel) করা যাবে"
+msgstr "মাউসের সাহায্যে অভিমুখ পরিবর্তন (drag) বা জুম (mousewheel) করা যাবে"
 
 #: src/ui_configurationDialog.h:1102
 msgid "Enable mouse navigation"
@@ -4727,11 +4741,11 @@ msgstr "নিজে থেকে দূরে গেলে প্রাথম�
 #: src/ui_configurationDialog.h:1163
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
-msgstr ""
+msgstr "গ্রহ অনুযায়ী বায়ুমন্ডল পরিবর্তন সক্রিয় করা থাকবে"
 
 #: src/ui_configurationDialog.h:1165
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "গ্রহ অনুযায়ী বায়ুমন্ডল পরিবর্তন"
 
 #: src/ui_configurationDialog.h:1167
 msgid "Use decimal degrees for coordinates"
@@ -8880,10 +8894,11 @@ msgid ""
 "object."
 msgstr ""
 "বলতে বোঝায় সূর্য ও বস্তুর মধ্যে কৌনিক দূরত্ব সর্বোচ্চ পর্যায়ে পৌঁছেচে । "
-"বেশিরভাগ ক্ষেত্রেই, বস্তু সূর্যের বিপরীতে থাকে ও তাদের অবস্থানের পার্থক্য "
-"১৮০ ডিগ্রি হয় । ফলে এই সময় জ্যোতিষ্কটি একদম মাঝরাতে মাঝ আকাশে পৌঁছায় ও "
-"আকাশের সবথেকে অন্ধকারোচ্ছন্ন অঞ্চলে অবস্থান করে । তাই কোন বস্তুর সর্বোচ্চ "
-"চ্যূতির রাতই একে পর্যবেক্ষনের সর্বোত্তম সময় ।"
+"বেশিরভাগ ক্ষেত্রেই, বস্তুটি প্রায় সূর্যের বিপরীতে থাকে । ফলে তাদের ভূ-বিষুব "
+"দ্রাঘিমার পার্থক্য ১৮০ ডিগ্রি হয়, অর্থাৎ বস্তুটি সূর্যের সাথে প্রতিযোগ "
+"অবস্থানে থাকে । এই সময় জ্যোতিষ্কটি একদম মাঝরাতে মাঝ আকাশে পৌঁছায় ও আকাশের "
+"সবথেকে অন্ধকারোচ্ছন্ন অঞ্চলে অবস্থান করে । তাই কোন বস্তুর সর্বোচ্চ চ্যূতির "
+"রাতই একে পর্যবেক্ষনের সর্বোত্তম সময় ।"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Nights with source above horizon:"
@@ -9932,11 +9947,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "বিষুবাংশ / বিষুবলম্ব (J2000.0 অনুসারে)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "বিষুবাংশ / বিষুবলম্ব"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
