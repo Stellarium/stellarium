@@ -71,18 +71,31 @@ void StoredViewDialog::updateCurrentView()
 
 void StoredViewDialog::updateViewSelection(const QModelIndex &idx)
 {
-	StoredView& view = viewModel->getViewAtIdx(idx.row());
+	if(idx.isValid())
+	{
+		StoredView& view = viewModel->getViewAtIdx(idx.row());
 
-	ui->lineEditTitle->setEnabled(true);
-	ui->textEditDescription->setEnabled(true);
-	ui->lineEditTitle->setReadOnly(view.isGlobal);
-	ui->textEditDescription->setReadOnly(view.isGlobal);
+		ui->lineEditTitle->setEnabled(true);
+		ui->textEditDescription->setEnabled(true);
+		ui->lineEditTitle->setReadOnly(view.isGlobal);
+		ui->textEditDescription->setReadOnly(view.isGlobal);
 
-	ui->lineEditTitle->setText(view.label);
-	ui->textEditDescription->setHtml(view.description);
+		ui->lineEditTitle->setText(view.label);
+		ui->textEditDescription->setHtml(view.description);
 
-	ui->pushButtonDeleteView->setEnabled(!view.isGlobal);
-	ui->pushButtonLoadView->setEnabled(true);
+		ui->pushButtonDeleteView->setEnabled(!view.isGlobal);
+		ui->pushButtonLoadView->setEnabled(true);
+	}
+	else
+	{
+		//for example deletion of last item in the list
+		ui->lineEditTitle->setEnabled(false);
+		ui->lineEditTitle->clear();
+		ui->textEditDescription->setEnabled(false);
+		ui->textEditDescription->clear();
+		ui->pushButtonLoadView->setEnabled(false);
+		ui->pushButtonDeleteView->setEnabled(false);
+	}
 }
 
 void StoredViewDialog::resetViewSelection()
