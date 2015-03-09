@@ -76,7 +76,7 @@ Scenery3dMgr::Scenery3dMgr() :
 
 Scenery3dMgr::~Scenery3dMgr()
 {
-	qDebug()<<"Scenery3dMgr destructor";
+	qDebug()<<"[Scenery3dMgr] Destructor called";
 
 	if(!cleanedUp)
 		deinit();
@@ -144,9 +144,9 @@ void Scenery3dMgr::init()
 	conf = StelApp::getInstance().getSettings();
 
 	//Initialize the renderer - this also finds out what features are supported
-	qDebug() << "[Scenery3d] init scenery3d object...";
+	qDebug() << "[Scenery3dMgr] Initializing Scenery3d object...";
 	scenery3d->init();
-	qDebug() << "[Scenery3d] init scenery3d object...done";
+	qDebug() << "[Scenery3dMgr] Initializing Scenery3d object...done";
 
 	//make sure shadows are off if unsupported
 	if(! scenery3d->areShadowsSupported())
@@ -156,11 +156,6 @@ void Scenery3dMgr::init()
 		setShadowFilterQuality(S3DEnum::SFQ_OFF);
 		setEnablePCSS(false);
 	}
-
-	//we emit these so the GUI gets notified of the correct values
-	//emit isGeometryShaderSupportedChanged(getIsGeometryShaderSupported());
-	//emit areShadowsSupportedChanged(getAreShadowsSupported());
-	//emit isShadowFilteringSupportedChanged(getIsShadowFilteringSupported());
 
 	//load config and create interface actions
 	loadConfig();
@@ -177,7 +172,7 @@ void Scenery3dMgr::init()
 
 void Scenery3dMgr::deinit()
 {
-	qDebug()<<"Scenery3dMgr deinit";
+	qDebug()<<"[Scenery3dMgr] deinit() called";
 
 	//wait until loading is finished
 	scenery3d->setLoadCancel(true);
@@ -263,15 +258,14 @@ void Scenery3dMgr::createToolbarButtons() const
 	}
 	catch (std::runtime_error& e)
 	{
-		qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
+		qWarning() << "[Scenery3dMgr] WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
 	}
 }
 
 void Scenery3dMgr::reloadShaders()
 {
 	showMessage(N_("Scenery3d shaders reloaded"));
-
-	qDebug()<<"(Re)loading Scenery3d shaders";
+	qDebug()<<"[Scenery3dMgr] Reloading Scenery3d shaders";
 
 	scenery3d->getShaderManager().clearCache();
 }
@@ -280,7 +274,7 @@ bool Scenery3dMgr::configureGui(bool show)
 {
 	if (show)
 		scenery3dDialog->setVisible(show);
-    return true;
+	return true;
 }
 
 void Scenery3dMgr::showStoredViewDialog()
@@ -372,14 +366,14 @@ void Scenery3dMgr::loadSceneCompleted()
 
 	if (currentLoadScene.hasLocation())
 	{
-		qDebug() << "Scenery3D: Setting location to given coordinates.";
+		qDebug() << "[Scenery3dMgr] Setting location to given coordinates";
 		StelApp::getInstance().getCore()->moveObserverTo(*(currentLoadScene.location.data()), 0., 0.);
 	}
-	else qDebug() << "Scenery3D: No coordinates given in scenery3d.";
+	else qDebug() << "[Scenery3dMgr] No coordinates given in scenery3d.ini";
 
 	if (currentLoadScene.hasLookAtFOV())
 	{
-		qDebug() << "Scenery3D: Setting orientation.";
+		qDebug() << "[Scenery3dMgr] Setting orientation";
 		StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
 		Vec3f lookat=currentLoadScene.lookAt_fov;
 		// This vector is (az_deg, alt_deg, fov_deg)
@@ -387,7 +381,7 @@ void Scenery3dMgr::loadSceneCompleted()
 		StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
 		mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
 		mm->zoomTo(lookat[2]);
-	} else qDebug() << "Scenery3D: Not setting orientation, no data.";
+	} else qDebug() << "[Scenery3dMgr] No orientation given in scenery3d.ini";
 
 
 	//perform GL upload + other calculations that require the location to be set
@@ -420,7 +414,8 @@ SceneInfo Scenery3dMgr::loadScenery3dByID(const QString& id)
 	catch (std::runtime_error& e)
 	{
 		//TODO do away with the exceptions if possible
-		qCritical() << "ERROR while loading 3D scenery with id " <<  id  << ", (" << e.what() << ")";
+		qCritical() << "[Scenery3dMgr] ERROR while loading 3D scenery with id " <<  id  << ", (" << e.what() << ")";
+		return SceneInfo();
 	}
 
 	loadScene(scene);
@@ -891,7 +886,6 @@ void Scenery3dMgr::showMessage(const QString& message)
 
 void Scenery3dMgr::clearMessage()
 {
-	qDebug() << "Scenery3dMgr::clearMessage";
 	messageFader = false;
 }
 

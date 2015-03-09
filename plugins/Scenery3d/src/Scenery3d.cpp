@@ -109,12 +109,12 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 
 	torchRange = 5.0f;
 
-    textEnabled = false;
-    debugEnabled = false;
-    sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
-    fixShadowData = false;
+	textEnabled = false;
+	debugEnabled = false;
+	sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
+	fixShadowData = false;
 
-    parallaxScale = 0.015f;
+	parallaxScale = 0.015f;
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
@@ -170,10 +170,10 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	//load model
 	objModelLoad.reset(new OBJ());
 	QString modelFile = StelFileMgr::findFile( loadingScene.fullPath+ "/" + loadingScene.modelScenery);
-	qDebug()<<"Loading "<<modelFile;
+	qDebug()<<"[Scenery3d] Loading scene from "<<modelFile;
 	if(!objModelLoad->load(modelFile, objVertexOrder, loadingScene.sceneryGenerateNormals))
 	{
-	    qCritical()<<"Failed to load OBJ file.";
+	    qCritical()<<"[Scenery3d] Failed to load OBJ file.";
 	    return false;
 	}
 
@@ -196,10 +196,10 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 
 		groundModelLoad.reset(new OBJ());
 		modelFile = StelFileMgr::findFile(loadingScene.fullPath + "/" + loadingScene.modelGround);
-		qDebug()<<"Loading "<<modelFile;
+		qDebug()<<"[Scenery3d] Loading ground from"<<modelFile;
 		if(!groundModelLoad->load(modelFile, objVertexOrder, loadingScene.groundGenerateNormals))
 		{
-			qCritical()<<"Failed to load OBJ file.";
+			qCritical()<<"[Scenery3d] Failed to load OBJ file.";
 			return false;
 		}
 
@@ -224,9 +224,9 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	if(scene.groundNullHeightFromModel)
 	{
 		loadingScene.groundNullHeight = ((!groundModelLoad.isNull() && groundModelLoad->isLoaded()) ? groundModelLoad->getBoundingBox().min[2] : objModelLoad->getBoundingBox().min[2]);
-		qDebug() << "Ground outside model is " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
+		qDebug() << "[Scenery3d] Ground outside model is " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
 	}
-	else qDebug() << "Ground outside model stays " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
+	else qDebug() << "[Scenery3d] Ground outside model stays " << loadingScene.groundNullHeight  << "m high (in model coordinates)";
 
 	//calculate heightmap
 	if(loadCancel)

@@ -111,7 +111,7 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::clearCache()
 {
-	qDebug()<<"[Scenery3d] Clearing"<<m_shaderContentCache.size()<<"shaders";
+	qDebug()<<"[ShaderMgr] Clearing"<<m_shaderContentCache.size()<<"shaders";
 
 	//iterate over the shaderContentCache - this contains the same amount of shaders as actually exist!
 	//the shaderCache could contain duplicate entries
@@ -124,7 +124,6 @@ void ShaderMgr::clearCache()
 	m_shaderCache.clear();
 	m_uniformCache.clear();
 	m_shaderContentCache.clear();
-	qDebug()<<"[Scenery3d] Shader cache cleared";
 }
 
 QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
@@ -140,7 +139,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	QString vShaderFile = getVShaderName(flags);
 	QString gShaderFile = getGShaderName(flags);
 	QString fShaderFile = getFShaderName(flags);
-	qDebug()<<"Loading Scenery3d shader: vs:"<<vShaderFile<<", gs:"<<gShaderFile<<", fs:"<<fShaderFile<<"";
+	qDebug()<<"[ShaderMgr] Loading Scenery3d shader: flags:"<<flags<<", vs:"<<vShaderFile<<", gs:"<<gShaderFile<<", fs:"<<fShaderFile<<"";
 
 	//load shader files & preprocess
 	QByteArray vShader,gShader,fShader;
@@ -162,7 +161,9 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 		QByteArray contentHash = hash.result();
 		if(m_shaderContentCache.contains(contentHash))
 		{
-			qDebug()<<"[Scenery3d] Using existing shader with content-hash"<<contentHash.toHex();
+#ifndef NDEBUG
+			qDebug()<<"[ShaderMgr] Using existing shader with content-hash"<<contentHash.toHex();
+#endif
 			prog = m_shaderContentCache[contentHash];
 		}
 		else
@@ -174,18 +175,20 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 			{
 				delete prog;
 				prog = NULL;
-				qCritical()<<"[Scenery3d] ERROR: Shader '"<<flags<<"' could not be compiled. Fix errors and reload shaders or restart program.";
+				qCritical()<<"[ShaderMgr] ERROR: Shader '"<<flags<<"' could not be compiled. Fix errors and reload shaders or restart program.";
 			}
+#ifndef NDEBUG
 			else
 			{
-				qDebug()<<"[Scenery3d] Shader '"<<flags<<"' created, content-hash"<<contentHash.toHex();
+				qDebug()<<"[ShaderMgr] Shader '"<<flags<<"' created, content-hash"<<contentHash.toHex();
 			}
+#endif
 			m_shaderContentCache[contentHash] = prog;
 		}
 	}
 	else
 	{
-		qCritical()<<"[Scenery3d] ERROR: Shader '"<<flags<<"' could not be loaded/preprocessed.";
+		qCritical()<<"[ShaderMgr] ERROR: Shader '"<<flags<<"' could not be loaded/preprocessed.";
 	}
 
 
@@ -283,7 +286,9 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 
 	//open and load file
 	QFile file(filePath);
+#ifndef NDEBUG
 	qDebug()<<"File path:"<<filePath;
+#endif
 	if(!file.open(QFile::ReadOnly))
 	{
 		qCritical()<<"Could not open file"<<filePath;
@@ -346,16 +351,18 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	{
 		if(!program.addShaderFromSourceCode(QOpenGLShader::Vertex,vShader))
 		{
-			qCritical() << "Scenery3d: unable to compile vertex shader";
+			qCritical() << "[ShaderMgr] Unable to compile vertex shader";
 			qCritical() << program.log();
 			return false;
 		}
 		else
 		{
+			//TODO Qt wrapper does not seem to provide warnings (regardless of what its doc says)!
+			//Raise a bug with them or handle shader loading ourselves?
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<"Vertex shader warnings:";
+				qWarning()<<"[ShaderMgr] Vertex shader warnings:";
 				qWarning()<<log;
 			}
 		}
@@ -365,16 +372,18 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	{
 		if(!program.addShaderFromSourceCode(QOpenGLShader::Geometry,gShader))
 		{
-			qCritical() << "Scenery3d: unable to compile geometry shader";
+			qCritical() << "[ShaderMgr] Unable to compile geometry shader";
 			qCritical() << program.log();
 			return false;
 		}
 		else
 		{
+			//TODO Qt wrapper does not seem to provide warnings (regardless of what its doc says)!
+			//Raise a bug with them or handle shader loading ourselves?
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<"Geometry shader warnings:";
+				qWarning()<<"[ShaderMgr] Geometry shader warnings:";
 				qWarning()<<log;
 			}
 		}
@@ -384,16 +393,18 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	{
 		if(!program.addShaderFromSourceCode(QOpenGLShader::Fragment,fShader))
 		{
-			qCritical() << "Scenery3d: unable to compile fragment shader";
+			qCritical() << "[ShaderMgr] Unable to compile fragment shader";
 			qCritical() << program.log();
 			return false;
 		}
 		else
 		{
+			//TODO Qt wrapper does not seem to provide warnings (regardless of what its doc says)!
+			//Raise a bug with them or handle shader loading ourselves?
 			QString log = program.log().trimmed();
 			if(!log.isEmpty())
 			{
-				qWarning()<<"Fragment shader warnings:";
+				qWarning()<<"[ShaderMgr] Fragment shader warnings:";
 				qWarning()<<log;
 			}
 		}
@@ -411,7 +422,7 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QByteArray& vSha
 	//link program
 	if(!program.link())
 	{
-		qCritical()<<"Scenery3d: unable to link shader";
+		qCritical()<<"[ShaderMgr] unable to link shader";
 		qCritical()<<program.log();
 		return false;
 	}
@@ -433,7 +444,9 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 	GLint size;
 	GLenum type;
 
-	qDebug()<<"Shader has"<<numUniforms<<"uniforms";
+#ifndef NDEBUG
+	qDebug()<<"[ShaderMgr] Shader has"<<numUniforms<<"uniforms";
+#endif
 	for(int i =0;i<numUniforms;++i)
 	{
 		glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data());

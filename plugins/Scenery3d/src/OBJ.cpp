@@ -104,7 +104,7 @@ void OBJ::setupGL()
 	if(vendor.contains("Intel",Qt::CaseInsensitive))
 	{
 		OBJ::vertexArraysSupported = false;
-		qWarning()<<"[Scenery3d] Disabling VAO usage because of Intel bugs";
+		qWarning()<<"[OBJ] Disabling VAO usage because of Intel bugs";
 	}
 	else
 	{
@@ -117,11 +117,11 @@ void OBJ::setupGL()
 
 	if( OBJ::vertexArraysSupported )
 	{
-		qDebug()<<"[Scenery3d] Vertex Array Objects are supported";
+		qDebug()<<"[OBJ] Vertex Array Objects are supported";
 	}
 	else
 	{
-		qWarning()<<"[Scenery3d] Vertex Array Objects are not supported on your hardware";
+		qWarning()<<"[OBJ] Vertex Array Objects are not supported on your hardware";
 	}
 
 	//check if we can enable int index buffers
@@ -143,7 +143,7 @@ void OBJ::setupGL()
 	if(OBJ::indexBufferType==GL_UNSIGNED_SHORT)
 	{
 		OBJ::indexBufferTypeSize = sizeof(unsigned short);
-		qWarning()<<"[Scenery3d] Your hardware does not support integer indices. Large models will not load.";
+		qWarning()<<"[OBJ] Your hardware does not support integer indices. Large models will not load.";
 	}
 	else
 	{
@@ -246,7 +246,7 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     {
 	    if((m_vertexArray.size() - 1) > std::numeric_limits<unsigned short>::max())
 	    {
-		    qCritical()<<"[Scenery3d] This scene is too complex to be rendered on your hardware. Vertices:"<<m_vertexArray.size()<<", hardware maximum:"<<std::numeric_limits<unsigned short>::max()+1;
+		    qCritical()<<"[OBJ] This scene is too complex to be rendered on your hardware. Vertices:"<<m_vertexArray.size()<<", hardware maximum:"<<std::numeric_limits<unsigned short>::max()+1;
 		    return false;
 	    }
     }
@@ -276,17 +276,17 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     qint64 normalTime = timer.elapsed();
 
     //Loaded
-    qDebug() << "[Scenery3d] Loaded OBJ successfully: " << filename;
-    qDebug() << "[Scenery3d] Triangles#: " << m_numberOfTriangles;
-    qDebug() << "[Scenery3d] Vertices#: " << m_numberOfVertexCoords<<" unique / "<< m_vertexArray.size()<<" total";
-    qDebug() << "[Scenery3d] Normals#: " << m_numberOfNormals;
-    qDebug() << "[Scenery3d] StelModels#: " << m_numberOfStelModels;
-    qDebug() << "[Scenery3d] Bounding Box";
-    qDebug() << "[Scenery3d] X: [" << pBoundingBox.min[0] << ", " << pBoundingBox.max[0] << "] ";
-    qDebug() << "[Scenery3d] Y: [" << pBoundingBox.min[1] << ", " << pBoundingBox.max[1] << "] ";
-    qDebug() << "[Scenery3d] Z: [" << pBoundingBox.min[2] << ", " << pBoundingBox.max[2] << "] ";
+    qDebug() << "[OBJ] Loaded OBJ successfully: " << filename;
+    qDebug() << "[OBJ] Triangles#: " << m_numberOfTriangles;
+    qDebug() << "[OBJ] Vertices#: " << m_numberOfVertexCoords<<" unique / "<< m_vertexArray.size()<<" total";
+    qDebug() << "[OBJ] Normals#: " << m_numberOfNormals;
+    qDebug() << "[OBJ] StelModels#: " << m_numberOfStelModels;
+    qDebug() << "[OBJ] Bounding Box";
+    qDebug() << "[OBJ] X: [" << pBoundingBox.min[0] << ", " << pBoundingBox.max[0] << "] ";
+    qDebug() << "[OBJ] Y: [" << pBoundingBox.min[1] << ", " << pBoundingBox.max[1] << "] ";
+    qDebug() << "[OBJ] Z: [" << pBoundingBox.min[2] << ", " << pBoundingBox.max[2] << "] ";
     qint64 total = firstPassTime + secondPassTime + normalTime + boundTime;
-    qDebug() << "[Scenery3d] Required Time: Total-"<<total<<"ms ("<< (total / 1000.0f) <<"s) FP-" << firstPassTime << "ms, SP-" << secondPassTime
+    qDebug() << "[OBJ] Required Time: Total-"<<total<<"ms ("<< (total / 1000.0f) <<"s) FP-" << firstPassTime << "ms, SP-" << secondPassTime
 	     << "ms, BB-"<<boundTime<<"ms, N-"<<normalTime<<"ms";
 
     m_loaded = true;
@@ -1234,7 +1234,7 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 
 	    if(iTmp>Material::I_SPECULAR && iTmp != Material::I_TRANSLUCENT)
 	    {
-		    qWarning()<<"[Scenery3d] Treating illum "<<iTmp<<"as TRANSLUCENT";
+		    qWarning()<<"[OBJ] Treating illum "<<iTmp<<"as TRANSLUCENT";
 		    iTmp = Material::I_TRANSLUCENT;
 	    }
 
@@ -1434,16 +1434,16 @@ void OBJ::uploadTexturesGL()
     {
 	Material* pMaterial = &getMaterial(i);
 
-//        qDebug() << getTime() << "[Scenery3d]" << pMaterial->name.c_str();
-//        qDebug() << getTime() << "[Scenery3d] Ka:" << pMaterial->ambient[0] << "," << pMaterial->ambient[1] << "," << pMaterial->ambient[2] << "," << pMaterial->ambient[3];
-//        qDebug() << getTime() << "[Scenery3d] Kd:" << pMaterial->diffuse[0] << "," << pMaterial->diffuse[1] << "," << pMaterial->diffuse[2] << "," << pMaterial->diffuse[3];
-//        qDebug() << getTime() << "[Scenery3d] Ks:" << pMaterial->specular[0] << "," << pMaterial->specular[1] << "," << pMaterial->specular[2] << "," << pMaterial->specular[3];
-//        qDebug() << getTime() << "[Scenery3d] Shininess:" << pMaterial->shininess;
-//        qDebug() << getTime() << "[Scenery3d] Alpha:" << pMaterial->alpha;
-//        qDebug() << getTime() << "[Scenery3d] Illum:" << pMaterial->illum;
+//        qDebug() << getTime() << "[OBJ]" << pMaterial->name.c_str();
+//        qDebug() << getTime() << "[OBJ] Ka:" << pMaterial->ambient[0] << "," << pMaterial->ambient[1] << "," << pMaterial->ambient[2] << "," << pMaterial->ambient[3];
+//        qDebug() << getTime() << "[OBJ] Kd:" << pMaterial->diffuse[0] << "," << pMaterial->diffuse[1] << "," << pMaterial->diffuse[2] << "," << pMaterial->diffuse[3];
+//        qDebug() << getTime() << "[OBJ] Ks:" << pMaterial->specular[0] << "," << pMaterial->specular[1] << "," << pMaterial->specular[2] << "," << pMaterial->specular[3];
+//        qDebug() << getTime() << "[OBJ] Shininess:" << pMaterial->shininess;
+//        qDebug() << getTime() << "[OBJ] Alpha:" << pMaterial->alpha;
+//        qDebug() << getTime() << "[OBJ] Illum:" << pMaterial->illum;
 
-//        qDebug() << getTime() << "[Scenery3d] Uploading textures for Material: " << pMaterial->name.c_str();
-//        qDebug() << getTime() << "[Scenery3d] Texture:" << pMaterial->textureName.c_str();
+//        qDebug() << getTime() << "[OBJ] Uploading textures for Material: " << pMaterial->name.c_str();
+//        qDebug() << getTime() << "[OBJ] Texture:" << pMaterial->textureName.c_str();
 	if(!pMaterial->textureName.isEmpty())
 	{
 	    StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->textureName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
@@ -1453,7 +1453,7 @@ void OBJ::uploadTexturesGL()
 	    }
 	    else
 	    {
-		qWarning() << "[Scenery3d] Failed to load Texture:" << pMaterial->textureName;
+		qWarning() << "[OBJ] Failed to load Texture:" << pMaterial->textureName;
 	    }
 	}
 
@@ -1466,11 +1466,11 @@ void OBJ::uploadTexturesGL()
 		}
 		else
 		{
-		    qWarning() << "[Scenery3d] Failed to load emissive texture:" << pMaterial->emissiveMapName;
+		    qWarning() << "[OBJ] Failed to load emissive texture:" << pMaterial->emissiveMapName;
 		}
 	}
 
-	//qDebug() << getTime() << "[Scenery3d] Normal Map:" << pMaterial->bumpMapName;
+	//qDebug() << getTime() << "[OBJ] Normal Map:" << pMaterial->bumpMapName;
 	if(!pMaterial->bumpMapName.isEmpty())
 	{
 	    StelTextureSP bumpTex = textureMgr.createTexture(absolutePath(pMaterial->bumpMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
@@ -1480,11 +1480,11 @@ void OBJ::uploadTexturesGL()
 	    }
 	    else
 	    {
-		qWarning() << "[Scenery3d] Failed to load Normal Map:" << pMaterial->bumpMapName;
+		qWarning() << "[OBJ] Failed to load Normal Map:" << pMaterial->bumpMapName;
 	    }
 	}
 
-	//qDebug() << getTime() << "[Scenery3d] Height Map:" << pMaterial->heightMapName;
+	//qDebug() << getTime() << "[OBJ] Height Map:" << pMaterial->heightMapName;
 	if(!pMaterial->heightMapName.isEmpty())
 	{
 	    StelTextureSP heightTex = textureMgr.createTexture(absolutePath(pMaterial->heightMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
@@ -1494,12 +1494,12 @@ void OBJ::uploadTexturesGL()
 	    }
 	    else
 	    {
-		qWarning() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName;
+		qWarning() << "[OBJ] Failed to load Height Map:" << pMaterial->heightMapName;
 	    }
 	}
     }
 
-    qDebug()<<"[Scenery3d] Uploaded OBJ textures to GL";
+    qDebug()<<"[OBJ] Uploaded OBJ textures to GL";
 }
 
 void OBJ::finalizeForRendering()
@@ -1547,7 +1547,7 @@ void OBJ::uploadBuffersGL()
 		}
 		else
 		{
-			qCritical()<<"[Scenery3d] Could not bind vertex buffer";
+			qCritical()<<"[OBJ] Could not bind vertex buffer";
 			m_vertexBuffer.destroy();
 			m_indexBuffer.destroy();
 			return;
@@ -1584,7 +1584,7 @@ void OBJ::uploadBuffersGL()
 		}
 		else
 		{
-			qCritical()<<"[Scenery3d] Could not bind index buffer";
+			qCritical()<<"[OBJ] Could not bind index buffer";
 			m_vertexBuffer.destroy();
 			m_indexBuffer.destroy();
 			return;
@@ -1592,7 +1592,7 @@ void OBJ::uploadBuffersGL()
 	}
 	else
 	{
-		qCritical()<<"[Scenery3d] Could not create OpenGL buffers!";
+		qCritical()<<"[OBJ] Could not create OpenGL buffers!";
 		m_vertexBuffer.destroy();
 		m_indexBuffer.destroy();
 		return;
@@ -1607,7 +1607,7 @@ void OBJ::uploadBuffersGL()
 	}
 	//TODO maybe release the client-side memory
 
-	qDebug()<<"[Scenery3d] Uploaded OBJ vertex and index data to GL";
+	qDebug()<<"[OBJ] Uploaded OBJ vertex and index data to GL";
 }
 
 void OBJ::bindGL()
