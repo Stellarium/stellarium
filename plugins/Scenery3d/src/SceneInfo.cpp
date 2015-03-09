@@ -50,7 +50,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	QString file = StelFileMgr::findFile(SCENES_PATH + id + "/scenery3d.ini", StelFileMgr::File);
 	if(file.isEmpty())
 	{
-		qCritical()<<"scenery3d.ini file with id "<<id<<" does not exist!";
+		qCritical()<<"[SceneInfo] scenery3d.ini file with id "<<id<<" does not exist!";
 		return false;
 	}
 	//get full directory path
@@ -59,7 +59,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	QSettings ini(file,StelIniFormat);
 	if (ini.status() != QSettings::NoError)
 	{
-	    qCritical() << "ERROR parsing scenery3d.ini file: " << file;
+	    qCritical() << "[SceneInfo] ERROR parsing scenery3d.ini file: " << file;
 	    return false;
 	}
 
@@ -114,10 +114,10 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 					);
 			for (int i=0; i<16; ++i)
 			{
-				if (!conversionOK[i]) qWarning() << "WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
+				if (!conversionOK[i]) qWarning() << "[SceneInfo] WARNING: scenery3d.ini: element " << i+1 << " of obj2grid_trafo invalid, set zo zero.";
 			}
 		}
-		else qWarning() << "obj2grid_trafo invalid: not 16 comma-separated elements";
+		else qWarning() << "[SceneInfo] obj2grid_trafo invalid: not 16 comma-separated elements";
 	}
 	ini.endGroup();
 
@@ -192,16 +192,16 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 				qDebug() << "With Longitude " << info.location->longitude
 					 << ", Latitude " << info.location->latitude << " and CM="
 					 << gridCentralMeridian << ", ";
-				qDebug() << "--> setting meridian convergence to " << rot_z*180./M_PI << "degrees";
+				qDebug() << "[SceneInfo] setting meridian convergence to " << rot_z*180./M_PI << "degrees";
 			}
 			else
 			{
-				qWarning() << "scenery3d.ini: Convergence angle \"from_grid\" requires location section!";
+				qWarning() << "[SceneInfo] scenery3d.ini: Convergence angle \"from_grid\" requires location section!";
 			}
 		}
 		else
 		{
-			qWarning() << "scenery3d.ini: Convergence angle \"from_grid\": cannot compute without grid_meridian!";
+			qWarning() << "[SceneInfo] scenery3d.ini: Convergence angle \"from_grid\": cannot compute without grid_meridian!";
 		}
 	}
 	else
@@ -247,14 +247,14 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 
 	if (ini.contains("start_az_alt_fov"))
 	{
-		qDebug() << "scenery3d.ini: setting initial dir/fov.";
+		qDebug() << "[SceneInfo] scenery3d.ini: setting initial dir/fov.";
 		info.lookAt_fov=StelUtils::strToVec3f(ini.value("start_az_alt_fov").toString());
 		//info.lookAt_fov[0]=180.0f-info.lookAt_fov[0];
 	}
 	else
 	{
 		info.lookAt_fov=Vec3f(0.f, 0.f, -1000.f);
-		qDebug() << "scenery3d.ini: No initial dir/fov given.";
+		qDebug() << "[SceneInfo] scenery3d.ini: No initial dir/fov given.";
 	}
 	ini.endGroup();
 
@@ -278,14 +278,14 @@ QString SceneInfo::getLocalizedHTMLDescription() const
 	if(descFile.isEmpty())
 	{
 		//fall back to english
-		qWarning()<<"[Scenery3d] No scene description found for language"<<lang<<", falling back to english";
+		qWarning()<<"[SceneInfo] No scene description found for language"<<lang<<", falling back to english";
 		descFile = StelFileMgr::findFile( fullPath + "/description.en.utf8");
 	}
 
 	if(descFile.isEmpty())
 	{
 		//fall back to stored description
-		qWarning()<<"[Scenery3d] No external scene description found";
+		qWarning()<<"[SceneInfo] No external scene description found";
 		return QString();
 	}
 
@@ -315,7 +315,7 @@ bool SceneInfo::loadByName(const QString &name, SceneInfo &info)
 		return loadByID(id,info);
 	else
 	{
-	    qWarning() << "Can't find a 3D scenery with name=" << name;
+	    qWarning() << "[SceneInfo] Can't find a 3D scenery with name=" << name;
 	    return false;
 	}
 }
@@ -375,14 +375,14 @@ StoredViewList StoredView::getGlobalViewsForScene(const SceneInfo &scene)
 
 	if(!globalfile.isFile())
 	{
-		qWarning()<<globalfile.absoluteFilePath()<<" is not a file";
+		qWarning()<<"[SceneInfo]"<<globalfile.absoluteFilePath()<<" is not a file";
 	}
 	else
 	{
 		QSettings ini(globalfile.absoluteFilePath(),StelIniFormat);
 		if (ini.status() != QSettings::NoError)
 		{
-			qWarning() << "Error reading global viewpoint file " << globalfile.absoluteFilePath();
+			qWarning() << "[SceneInfo] Error reading global viewpoint file " << globalfile.absoluteFilePath();
 		}
 		else
 		{
@@ -406,7 +406,7 @@ StoredViewList StoredView::getUserViewsForScene(const SceneInfo &scene)
 	QSettings* ini = getUserViews();
 	if (ini->status() != QSettings::NoError)
 	{
-		qWarning() << "Error reading user viewpoint file";
+		qWarning() << "[SceneInfo] Error reading user viewpoint file";
 	}
 	else
 	{
@@ -427,7 +427,7 @@ void StoredView::saveUserViews(const SceneInfo &scene, const StoredViewList &lis
 
 	if (ini->status() != QSettings::NoError)
 	{
-		qWarning() << "Error reading user viewpoint file";
+		qWarning() << "[SceneInfo] Error reading user viewpoint file";
 	}
 	else
 	{
