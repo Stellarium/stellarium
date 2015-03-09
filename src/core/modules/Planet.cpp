@@ -649,8 +649,8 @@ double Planet::getSiderealTime(double jd) const
 			cm2=cm2 - 360.0*(int)(cm2/360.);
 			// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
 			// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
-			// GRS longitude was at 7/9 2014 216d with a drift of 1.25d every month
-			double longitudeGRS=216+1.25*( jd - 2456543)/30;
+			// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
+			double longitudeGRS=216+1.25*( jd - 2456908)/30;
 			// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
 			return cm2 - longitudeGRS;
 			// To verify:
