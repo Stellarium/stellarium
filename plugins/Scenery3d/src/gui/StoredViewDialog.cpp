@@ -100,8 +100,6 @@ void StoredViewDialog::updateViewSelection(const QModelIndex &idx)
 
 void StoredViewDialog::resetViewSelection()
 {
-	qDebug()<<"model reset";
-
 	ui->pushButtonAddView->setEnabled(viewModel->getScene().isValid);
 
 	//disable all
