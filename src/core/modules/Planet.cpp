@@ -644,7 +644,8 @@ double Planet::getSiderealTime(double jd) const
 			double jup_mean = (jd - 2455636.938) * 360. / 4332.89709;
 			double eqn_center = 5.55 * sin( rad*jup_mean);
 			double angle = (jd - 2451870.628) * 360. / 398.884 - eqn_center;
-			double correction = 11 * sin( rad*angle) + 5 * cos( rad*angle) - 1.25 * cos( rad*jup_mean) - eqn_center;
+			//double correction = 11 * sin( rad*angle) + 5 * cos( rad*angle)- 1.25 * cos( rad*jup_mean) - eqn_center; // original correction
+			double correction = 25.8 + 11 * sin( rad*angle) - 2.5 * cos( rad*jup_mean) - eqn_center; // light speed correction not used because in stellarium the jd is manipulated for that
 			double cm2=181.62 + 870.1869147 * jd + correction;
 			cm2=cm2 - 360.0*(int)(cm2/360.);
 			// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
@@ -652,7 +653,7 @@ double Planet::getSiderealTime(double jd) const
 			// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
 			double longitudeGRS=216+1.25*( jd - 2456908)/30;
 			// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
-			return cm2 - longitudeGRS;
+			return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
 			// To verify:
 			// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg
 			//        2014-02-25 19:03 UT    http://www.damianpeach.com/jup1314/2014_02_25rgb0305.jpg
