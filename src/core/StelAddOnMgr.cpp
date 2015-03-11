@@ -524,7 +524,6 @@ void StelAddOnMgr::downloadNextAddOn()
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", m_userAgent);
 	m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
 	connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
 	connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
 
