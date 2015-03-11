@@ -519,6 +519,7 @@ void StelAddOnMgr::downloadNextAddOn()
 	}
 
 	QNetworkRequest req(m_downloadingAddOn->getDownloadURL());
+	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, false);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", m_userAgent);
