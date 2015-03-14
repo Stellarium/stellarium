@@ -18,10 +18,10 @@ compiler:
   - gcc
 
 before_install:
-  - "wget -q http://sourceforge.net/projects/cardinot/files/util/libarchive-3.1.2.tar.gz/download"
+  - "wget -q -O libarchive-3.1.2.tar.gz http://sourceforge.net/projects/cardinot/files/util/libarchive-3.1.2.tar.gz/download"
   - "tar -xzvf libarchive-3.1.2.tar.gz"
 
-  - "wget -q http://sourceforge.net/projects/cardinot/files/util/cmake-2.8.11.tar.gz/download"
+  - "wget -q -O cmake-2.8.11.tar.gz http://sourceforge.net/projects/cardinot/files/util/cmake-2.8.11.tar.gz/download"
   - "tar -xzvf cmake-2.8.11.tar.gz"
 
   - "mkdir qt5"
