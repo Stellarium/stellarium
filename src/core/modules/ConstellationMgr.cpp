@@ -60,7 +60,8 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
-	isolateSelected = false;	
+	isolateSelected = false;
+	constellationPickEnabled = false;
 }
 
 ConstellationMgr::~ConstellationMgr()
