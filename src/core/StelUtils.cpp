@@ -1275,7 +1275,7 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
 
-	double y = year+((month-1)*30.5+day/31*30.5)/366;
+	double y = year+((month-1)*30.5+day/31.*30.5)/366;
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
@@ -1455,7 +1455,7 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double yeardec=year+((month-1)*30.5+day/31.*30.5)/366;
 	double u = (yeardec-1800)/100;
 
 	if (-391 < year && year <= 948)
@@ -1481,7 +1481,7 @@ double getDeltaTByStephensonHoulden(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double yeardec=year+((month-1)*30.5+day/31.*30.5)/366;
 
 	if (year <= 948)
 	{
@@ -1605,7 +1605,7 @@ double getDeltaTByChaprontMeeus(const double jDay)
 	//        deltaT= (((((((( 58353.42*u19 -232424.66)*u19 +372919.88)*u19 - 303191.19)*u19 + 124906.15)*u19 - 18756.33)*u19 - 2637.80)*u19 + 815.20)*u19 + 87.24)*u19 - 2.44;
 	else if (year <2000)
 	{
-		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+		double yeardec=year+((month-1)*30.5+day/31.*30.5)/366;
 		int pos=(year-1620)/2; // this is a deliberate integer division! 2->1, 3->1, 4->2, 5->2 etc.
 		deltaT= MeeusDeltaTTable[pos]+ (yeardec-(2*pos+1620))*0.5  *(MeeusDeltaTTable[pos+1]-MeeusDeltaTTable[pos]);
 		deltaT /= 10.0;
@@ -1901,7 +1901,7 @@ double getMoonSecularAcceleration(const double jDay, const double nd)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366.0;
+	double yeardec=year+((month-1)*30.5+day/31.*30.5)/366.0;
 	double t = (yeardec-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
@@ -1913,7 +1913,6 @@ double getDeltaTStandardError(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	//double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
 	double sigma = -1.;
 
 	if (-1000 <= year && year <= 1600)
