@@ -43,6 +43,8 @@ bool Constellation::seasonalRuleEnabled = false;
 
 Constellation::Constellation()
 	: numberOfSegments(0)
+	, beginSeason(0)
+	, endSeason(0)
 	, asterism(NULL)
 {
 }

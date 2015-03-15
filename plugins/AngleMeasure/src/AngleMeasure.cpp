@@ -74,6 +74,7 @@ AngleMeasure::AngleMeasure()
 	, flagShowHorizontalPA(false)
 	, flagShowHorizontalStartSkylinked(false)
 	, flagShowHorizontalEndSkylinked(false)
+	, angleHor(0.)
 	, toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
