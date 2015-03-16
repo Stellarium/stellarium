@@ -1455,8 +1455,7 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31.*30.5)/366;
-	double u = (yeardec-1800)/100;
+	double u = (getDecYear(year, month, day)-1800)/100;
 
 	if (-391 < year && year <= 948)
 		deltaT = (44.3*u +320.0)*u +1360.0;
@@ -1481,7 +1480,7 @@ double getDeltaTByStephensonHoulden(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31.*30.5)/366;
+	double yeardec=getDecYear(year, month, day);
 
 	if (year <= 948)
 	{
@@ -1605,7 +1604,7 @@ double getDeltaTByChaprontMeeus(const double jDay)
 	//        deltaT= (((((((( 58353.42*u19 -232424.66)*u19 +372919.88)*u19 - 303191.19)*u19 + 124906.15)*u19 - 18756.33)*u19 - 2637.80)*u19 + 815.20)*u19 + 87.24)*u19 - 2.44;
 	else if (year <2000)
 	{
-		double yeardec=year+((month-1)*30.5+day/31.*30.5)/366;
+		double yeardec=getDecYear(year, month, day);
 		int pos=(year-1620)/2; // this is a deliberate integer division! 2->1, 3->1, 4->2, 5->2 etc.
 		deltaT= MeeusDeltaTTable[pos]+ (yeardec-(2*pos+1620))*0.5  *(MeeusDeltaTTable[pos+1]-MeeusDeltaTTable[pos]);
 		deltaT /= 10.0;
@@ -1901,8 +1900,7 @@ double getMoonSecularAcceleration(const double jDay, const double nd)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31.*30.5)/366.0;
-	double t = (yeardec-1955.5)/100.0;
+	double t = (getDecYear(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
 	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
@@ -2021,6 +2019,11 @@ float *ComputeCosSinRhoZone(const float dRho, const int segments, const float mi
 		cos_sin += 2;
 	}
 	return cos_sin_rho;
+}
+
+double getDecYear(const int year, const int month, const int day)
+{
+	return year+((month-1)*30.5+day/31.*30.5)/366;
 }
 
 //! Uncompress gzip or zlib compressed data.
