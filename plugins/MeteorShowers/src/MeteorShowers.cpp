@@ -95,6 +95,7 @@ MeteorShowers::MeteorShowers()
 	setObjectName("MeteorShowers");
 	configDialog = new MeteorShowerDialog();
 	conf = StelApp::getInstance().getSettings();
+	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
 /*
@@ -612,7 +613,7 @@ void MeteorShowers::update(double deltaTime)
 		for (int i=0; i<mpf; ++i)
 		{
 			// start new meteor based on ZHR time probability
-			double prob = ((double)rand())/RAND_MAX;
+			double prob = ((double)qrand())/RAND_MAX;
 			if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 			{
 				MeteorStream *m = new MeteorStream(core,
