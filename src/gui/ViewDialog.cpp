@@ -287,6 +287,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
 	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
 	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
+	ui->constellationLineThicknessSpinBox->setValue(cmgr->getConstellationLineThickness());
+	connect(ui->constellationLineThicknessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setConstellationLineThickness(double)));
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
