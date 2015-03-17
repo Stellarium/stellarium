@@ -294,11 +294,21 @@ void LandscapeMgr::update(double deltaTime)
 		landscape->setBrightness(1.f, 0.0f);
 	}
 	else
-	{   float lightscapeBrightness=0.0f;
+	{
+		float lightscapeBrightness=0.0f;
 		// light pollution layer is mixed in at -3...-8 degrees.
-		if (sunPos[2]<-0.14f) lightscapeBrightness=1.0f;
-		else if (sunPos[2]<-0.05f) lightscapeBrightness = 1.0f-(sunPos[2]+0.14)/(-0.05+0.14);
-		landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+		float sunAlt = sunPos[2];
+		if (sunAlt<-0.14f)
+			lightscapeBrightness=1.0f;
+		else
+		{
+			if (sunAlt<-0.05f)
+				lightscapeBrightness = 1.0f-(sunAlt+0.14)/(-0.05+0.14);
+		}
+		if (sunAlt<=0.f && !atmosphere->getFlagShow() && !getFlagLandscapeUseMinimalBrightness())
+			landscape->setBrightness(0.f, 0.f);
+		else
+			landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 	}
 }
 
