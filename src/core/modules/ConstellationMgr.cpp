@@ -56,7 +56,8 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  artDisplayed(0),
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
-	  namesDisplayed(0)
+	  namesDisplayed(0),
+	  constellationLineThickness(1.f)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -96,6 +97,7 @@ void ConstellationMgr::init()
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
+	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1.f).toFloat());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (starloreDisplayStyle=="translated")
@@ -361,6 +363,12 @@ ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDi
 	return constellationDisplayStyle;
 }
 
+void ConstellationMgr::setConstellationLineThickness(const double thickness)
+{
+	constellationLineThickness = thickness;
+	if (constellationLineThickness<=0.f) // The line can not be negative or zero thickness
+		constellationLineThickness = 1.f;
+}
 
 void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
 {
@@ -594,12 +602,27 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 	sPainter.enableTexture2d(false);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	if (constellationLineThickness>1.f)
+		glLineWidth(constellationLineThickness); // set line thickness
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
+
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
+	if (constellationLineThickness>1.f)
+		glLineWidth(1.f); // restore line thickness
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
 }
 
 // Draw the names of all the constellations
