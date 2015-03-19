@@ -620,6 +620,13 @@ namespace StelUtils
 	//! Uncompress gzip or zlib compressed data.
 	QByteArray uncompress(const QByteArray& data);
 
+	//! Uncompress (gzip/zlib) data from this QIODevice, which must be open and readable.
+	//! @param device The device to read from, must already be opened with an OpenMode supporting reading
+	//! @param maxBytes The max. amount of bytes to read from the device, or -1 to read until EOF.  Note that it
+	//! always stops when inflate() returns Z_STREAM_END. Positive values can be used for interleaving compressed data
+	//! with other data.
+	QByteArray uncompress(QIODevice &device, qint64 maxBytes=-1);
+
 #ifdef _MSC_BUILD
 	inline double trunc(double x)
 	{
