@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2015 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,7 +97,8 @@ private:
 
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);
-			
+	bool readBarnard(QString record);
+
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
 
@@ -104,27 +106,30 @@ private:
 	unsigned int NGC_nb;            // New General Catalog number
 	unsigned int IC_nb;             // Index Catalog number
 	unsigned int C_nb;              // Caldwell Catalog number
+	unsigned int B_nb;              // Barnard Catalog number (Dark Nebulae)
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
-	float mag;                      // Apparent magnitude
+	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here.
 	float angularSize;              // Angular size in degree
-	Vec3d XYZ;                      // Cartesian equatorial position
+	Vec3d XYZ;                      // Cartesian equatorial position (J2000.0)
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;
 
 	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
-	static StelTextureSP texGalaxy;
-	static StelTextureSP texOpenCluster;
-	static StelTextureSP texGlobularCluster;
-	static StelTextureSP texPlanetaryNebula;
-	static StelTextureSP texDiffuseNebula;
-	static StelTextureSP texOpenClusterWithNebulosity;
+	static StelTextureSP texGalaxy;	                   // Type 0
+	static StelTextureSP texOpenCluster;               // Type 1
+	static StelTextureSP texGlobularCluster;           // Type 2
+	static StelTextureSP texPlanetaryNebula;           // Type 3
+	static StelTextureSP texDiffuseNebula;             // Type 4
+	static StelTextureSP texDarkNebula;                // Type 5
+	static StelTextureSP texOpenClusterWithNebulosity; // Type 7
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;
 	static float circleScale;       // Define the scaling of the hints circle
+	static bool drawHintProportional; // scale hint with nebula size?
 };
 
 #endif // _NEBULA_HPP_
