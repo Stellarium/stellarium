@@ -47,9 +47,12 @@
 #include "ShaderManager.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelUtils.hpp"
 
+#include <QDir>
 #include <QElapsedTimer>
 #include <QOpenGLVertexArrayObject>
+#include <QTemporaryFile>
 
 #include <algorithm>
 #include <cstddef>
@@ -212,85 +215,126 @@ void OBJ::clean()
     m_indexArray.clear();
 }
 
+QFile* OBJ::getFile(const QString &filename)
+{
+	QFile* file = new QFile(filename);
+	if(!file->open(QIODevice::ReadOnly))
+	{
+		qWarning()<<"[OBJ] Could not open file "<<filename;
+		delete file;
+		return NULL;
+	}
+
+	//check if this is a compressed file
+	if(filename.endsWith(".gz"))
+	{
+		//TODO because the current loader depends on C IO, we have to save the decompressed data as a temporary file...
+		QTemporaryFile* tmpFile = new QTemporaryFile(QDir::tempPath() + "/scenery3d_XXXXXX.obj.tmp");
+		tmpFile->open();
+
+		qDebug()<<"[OBJ] Storing decompressed file in "<<tmpFile->fileName();
+
+		//perform decompression of original file
+		QByteArray data = StelUtils::uncompress(*file);
+		tmpFile->write(data);
+		tmpFile->flush();
+		tmpFile->close();
+		delete file;
+
+		file = tmpFile;
+
+		//reopen file read only
+		file->open(QIODevice::ReadOnly);
+	}
+
+	return file;
+}
+
 bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebuildNormals)
 {
 	QElapsedTimer timer;
 	timer.start();
 
-    QFile qtFile(filename);
-    if(!qtFile.open(QIODevice::ReadOnly))
-	return false;
+	QFile* qtFile = getFile(filename);
 
-    //Extract the base path, will be used to load the MTL file later on
-    m_basePath.clear();
-    m_basePath = StelFileMgr::dirName(filename) + "/";
+	qint64 decTime = timer.restart();
+	qDebug()<<"[OBJ] File opened/decompressed in "<<decTime<<"ms";
 
-    MatCacheT materialCache;
+	if(!qtFile)
+		return false;
 
-    //Parse the file
-    importFirstPass(qtFile,materialCache);
-    qtFile.close();
+	//Extract the base path, will be used to load the MTL file later on
+	m_basePath.clear();
+	m_basePath = StelFileMgr::dirName(filename) + "/";
 
-    qint64 firstPassTime = timer.restart();
+	MatCacheT materialCache;
 
-    //TODO make the second pass support Qt IO (unicode file handling, etc.)
-    QByteArray ba = filename.toLocal8Bit();
-    FILE* pFile = fopen(ba.constData(), "r");
-    importSecondPass(pFile, order, materialCache);
+	//Parse the file
+	importFirstPass(*qtFile,materialCache);
+	qtFile->close();
 
-    //Done parsing, close file
-    fclose(pFile);
+	qint64 firstPassTime = timer.restart();
 
-    //check if we support rendering the number of vertices loaded
-    if(indexBufferType == GL_UNSIGNED_SHORT)
-    {
-	    if((m_vertexArray.size() - 1) > std::numeric_limits<unsigned short>::max())
-	    {
-		    qCritical()<<"[OBJ] This scene is too complex to be rendered on your hardware. Vertices:"<<m_vertexArray.size()<<", hardware maximum:"<<std::numeric_limits<unsigned short>::max()+1;
-		    return false;
-	    }
-    }
+	//TODO make the second pass support Qt IO (unicode file handling, etc.)
+	QByteArray ba = qtFile->fileName().toLocal8Bit();
+	FILE* pFile = fopen(ba.constData(), "r");
+	importSecondPass(pFile, order, materialCache);
 
-    qint64 secondPassTime = timer.restart();
+	//Done parsing, close file
+	fclose(pFile);
 
+	//check if we support rendering the number of vertices loaded
+	if(indexBufferType == GL_UNSIGNED_SHORT)
+	{
+		if((m_vertexArray.size() - 1) > std::numeric_limits<unsigned short>::max())
+		{
+			qCritical()<<"[OBJ] This scene is too complex to be rendered on your hardware. Vertices:"<<m_vertexArray.size()<<", hardware maximum:"<<std::numeric_limits<unsigned short>::max()+1;
+			delete qtFile;
+			return false;
+		}
+	}
 
-    //Find bounding extrema
-    findBounds();
+	qint64 secondPassTime = timer.restart();
 
-    qint64 boundTime = timer.restart();
+	//Find bounding extrema
+	findBounds();
 
-    //Create vertex normals if specified or required
-    if(rebuildNormals)
-    {
-	generateNormals();
-    }
-    else
-    {
-	if(!hasNormals())
-	    generateNormals();
-    }
+	qint64 boundTime = timer.restart();
 
-    //Create tangents
-    generateTangents();
+	//Create vertex normals if specified or required
+	if(rebuildNormals)
+	{
+		generateNormals();
+	}
+	else
+	{
+		if(!hasNormals())
+			generateNormals();
+	}
 
-    qint64 normalTime = timer.elapsed();
+	//Create tangents
+	generateTangents();
 
-    //Loaded
-    qDebug() << "[OBJ] Loaded OBJ successfully: " << filename;
-    qDebug() << "[OBJ] Triangles#: " << m_numberOfTriangles;
-    qDebug() << "[OBJ] Vertices#: " << m_numberOfVertexCoords<<" unique / "<< m_vertexArray.size()<<" total";
-    qDebug() << "[OBJ] Normals#: " << m_numberOfNormals;
-    qDebug() << "[OBJ] StelModels#: " << m_numberOfStelModels;
-    qDebug() << "[OBJ] Bounding Box";
-    qDebug() << "[OBJ] X: [" << pBoundingBox.min[0] << ", " << pBoundingBox.max[0] << "] ";
-    qDebug() << "[OBJ] Y: [" << pBoundingBox.min[1] << ", " << pBoundingBox.max[1] << "] ";
-    qDebug() << "[OBJ] Z: [" << pBoundingBox.min[2] << ", " << pBoundingBox.max[2] << "] ";
-    qint64 total = firstPassTime + secondPassTime + normalTime + boundTime;
-    qDebug() << "[OBJ] Required Time: Total-"<<total<<"ms ("<< (total / 1000.0f) <<"s) FP-" << firstPassTime << "ms, SP-" << secondPassTime
-	     << "ms, BB-"<<boundTime<<"ms, N-"<<normalTime<<"ms";
+	qint64 normalTime = timer.elapsed();
 
-    m_loaded = true;
-    return true;
+	//Loaded
+	qDebug() << "[OBJ] Loaded OBJ successfully: " << qtFile->fileName();
+	qDebug() << "[OBJ] Triangles#: " << m_numberOfTriangles;
+	qDebug() << "[OBJ] Vertices#: " << m_numberOfVertexCoords<<" unique / "<< m_vertexArray.size()<<" total";
+	qDebug() << "[OBJ] Normals#: " << m_numberOfNormals;
+	qDebug() << "[OBJ] StelModels#: " << m_numberOfStelModels;
+	qDebug() << "[OBJ] Bounding Box";
+	qDebug() << "[OBJ] X: [" << pBoundingBox.min[0] << ", " << pBoundingBox.max[0] << "] ";
+	qDebug() << "[OBJ] Y: [" << pBoundingBox.min[1] << ", " << pBoundingBox.max[1] << "] ";
+	qDebug() << "[OBJ] Z: [" << pBoundingBox.min[2] << ", " << pBoundingBox.max[2] << "] ";
+	qint64 total = firstPassTime + secondPassTime + normalTime + boundTime;
+	qDebug() << "[OBJ] Required Time: Total-"<<total<<"ms ("<< (total / 1000.0f) <<"s) FP-" << firstPassTime << "ms, SP-" << secondPassTime
+		 << "ms, BB-"<<boundTime<<"ms, N-"<<normalTime<<"ms";
+
+	m_loaded = true;
+
+	delete qtFile; //this will also delete the temp file if one was used
+	return true;
 }
 
 void OBJ::addFaceAttrib(AttributeVector &attributeArray, uint index, int material, int object)
