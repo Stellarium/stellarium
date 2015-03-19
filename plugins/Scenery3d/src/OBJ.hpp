@@ -285,6 +285,9 @@ private:
     //! Releases vertex attribute bindings and buffers
     void unbindBuffersGL();
 
+    //! Returns the file for this filename, handling decompression if necessary
+    QFile* getFile(const QString& filename);
+
     //! Flags
     bool m_loaded;
     bool m_hasPositions;
