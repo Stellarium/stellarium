@@ -76,6 +76,7 @@
 #include <QDir>
 #include <QCoreApplication>
 #include <QScreen>
+#include <QDateTime>
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
@@ -167,18 +168,16 @@ Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
-QTime* StelApp::qtime = NULL;
+qint64 StelApp::startMSecs = 0;
 
 void StelApp::initStatic()
 {
-	StelApp::qtime = new QTime();
-	StelApp::qtime->start();
+	StelApp::startMSecs = QDateTime::currentMSecsSinceEpoch();
 }
 
 void StelApp::deinitStatic()
 {
-	delete StelApp::qtime;
-	StelApp::qtime = NULL;
+	StelApp::startMSecs = 0;
 }
 
 /*************************************************************************
@@ -756,7 +755,7 @@ void StelApp::updateSkyCulture()
 // Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime()
 {
-	return (double)(StelApp::qtime->elapsed())/1000.;
+	return (double)(QDateTime::currentMSecsSinceEpoch() - StelApp::startMSecs)/1000.;
 }
 
 
