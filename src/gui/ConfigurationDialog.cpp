@@ -586,6 +586,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
+	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
 	conf->setValue("stars/labels_amount", smgr->getLabelsAmount());

@@ -18,14 +18,14 @@ compiler:
   - gcc
 
 before_install:
-  - "wget -q http://cardinot.net/files/libarchive-3.1.2.tar.gz"
+  - "wget -q -O libarchive-3.1.2.tar.gz http://sourceforge.net/projects/cardinot/files/util/libarchive-3.1.2.tar.gz/download"
   - "tar -xzvf libarchive-3.1.2.tar.gz"
 
-  - "wget -q http://cardinot.net/files/cmake-2.8.11.tar.gz"
+  - "wget -q -O cmake-2.8.11.tar.gz http://sourceforge.net/projects/cardinot/files/util/cmake-2.8.11.tar.gz/download"
   - "tar -xzvf cmake-2.8.11.tar.gz"
 
   - "mkdir qt5"
-  - "wget -q -O qt5.zip http://cardinot.net/files/qt521.zip"
+  - "wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download"
   - "unzip -qq qt5.zip -d qt5"
   - "export PATH=`pwd`/qt5/bin:$PATH"
   - "export QT_PLUGIN_PATH=`pwd`/qt5/plugins"
@@ -44,8 +44,6 @@ install:
   - "cd .."
 
 before_script:
-  - "export PATH=`pwd`/qt5/bin:$PATH"
-  - "export QT_PLUGIN_PATH=`pwd`/qt5/plugins"
   - "mkdir build"
   - "cd build"
 
