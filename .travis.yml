@@ -9,7 +9,7 @@ addons:
       description: "A realistic, real-time 3D simulation of the night sky."
     notification_email: mcardinot@gmail.com
     build_command_prepend: cmake ../.
-    build_command: make -j 16
+    build_command: make -j 2
     branch_pattern: master
 
 language: cpp
@@ -33,13 +33,13 @@ before_install:
 install:
   - "cd libarchive-3.1.2"
   - "./configure --prefix=/usr --disable-static"
-  - "make -j 16"
+  - "make -j 2"
   - "sudo make install -j 16"
   - "cd .."
 
   - "cd cmake-2.8.11"
   - "./bootstrap --prefix=/usr --system-libs --mandir=/share/man"
-  - "make -j 16"
+  - "make -j 2"
   - "sudo make install -j 16"
   - "cd .."
 
@@ -49,7 +49,7 @@ before_script:
 
 script:
   - "cmake ../."
-  - "make -j 16"
+  - "make -j 2"
   - "sudo make install -j 16"
 
 notifications:
