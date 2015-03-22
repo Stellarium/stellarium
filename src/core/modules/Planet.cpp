@@ -152,6 +152,7 @@ void Planet::init()
 	vMagAlgorithmMap.insert(Planet::Planesas,	"planesas");
 	vMagAlgorithmMap.insert(Planet::Mueller,	"mueller");
 	vMagAlgorithmMap.insert(Planet::Harris,		"harris");
+	vMagAlgorithmMap.insert(Planet::Generic,	"generic"),
 	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
 }
 
