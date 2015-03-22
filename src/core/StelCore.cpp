@@ -1477,10 +1477,9 @@ double StelCore::getDeltaT(double jDay) const
 			ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
 			int year, month, day;
 			Vec3f coeff = getDeltaTCustomEquationCoefficients();
-			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
-			double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-			double u = (yeardec-getDeltaTCustomYear())/100;
-			DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
+			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);			
+			double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100;
+			DeltaT = coeff[0] + u*(coeff[1] + u*coeff[2]);
 			break;
 	}
 
