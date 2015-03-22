@@ -362,7 +362,7 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const Meteor
 	for (int i=0; i<segments; i++) {
 		float mag = mm.mag * i/(3* (segments-1));
 		if (i > mm.firstBrightSegment) {
-			mag *= 12/5;
+			mag *= 12./5.;
 		}
 
 		double height = mm.posTrain[2] + i*(mm.position[2] - mm.posTrain[2])/(segments-1);

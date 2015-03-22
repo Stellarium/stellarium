@@ -217,7 +217,7 @@ double EquationOfTime::getSolutionEquationOfTime(const double JDay) const
 	StelCore* core = StelApp::getInstance().getCore();
 
 	double tau = (JDay - 2451545.0)/365250.0;
-	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1/49931 - tau*(1/15300 - tau/2000000))));
+	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1./49931. - tau*(1./15300. - tau/2000000.))));
 
 	// reduce the angle
 	sunMeanLongitude = std::fmod(sunMeanLongitude, 360.);

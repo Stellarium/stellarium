@@ -981,6 +981,11 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
+			case Generic:
+			{
+				// Calculation visual magnitude from phase angle and albedo of the planet
+				break;
+			}
 		}
 	}
 
