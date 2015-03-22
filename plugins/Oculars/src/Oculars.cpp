@@ -1556,8 +1556,8 @@ void Oculars::paintText(const StelCore* core)
 	if(selectedCCDIndex != -1) {
 		ccd = ccds[selectedCCDIndex];
 	}
-	Ocular *ocular = oculars[selectedOcularIndex];
-	Telescope *telescope = telescopes[selectedTelescopeIndex];
+	Ocular *ocular = selectedOcularIndex >=0 ? oculars[selectedOcularIndex] : NULL;
+	Telescope *telescope = selectedTelescopeIndex >=0 ? telescopes[selectedTelescopeIndex] : NULL;
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	// set up the color and the GL state
