@@ -107,7 +107,6 @@ void ConfigurationDialog::retranslate()
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
-		ui->stackListWidget->setWrapping(false);
 		updateTabBarListWidgetWidth();
 		
 		//Initial FOV and direction on the "Main" page
@@ -585,6 +584,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
+	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
 	conf->setValue("stars/labels_amount", smgr->getLabelsAmount());
@@ -1171,38 +1171,36 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
 {
-	QAbstractItemModel* model = ui->stackListWidget->model();
-	if (!model)
-		return;
-	
+	ui->stackListWidget->setWrapping(false);
+
 	// Update list item sizes after translation
 	ui->stackListWidget->adjustSize();
-	
+
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+	{
+		return;
+	}
+
+	// stackListWidget->font() does not work properly!
+	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
+	QFont font;
+	font.setPixelSize(14);
+	font.setWeight(75);
+	QFontMetrics fontMetrics(font);
+
+	int iconSize = ui->stackListWidget->iconSize().width();
+
 	int width = 0;
 	for (int row = 0; row < model->rowCount(); row++)
 	{
-		QModelIndex index = model->index(row, 0);
-		width += ui->stackListWidget->sizeHintForIndex(index).width();
+		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
+		width += 24; // margin - 12px left and 12px right
 	}
-	
-	// TODO: Limit the width to the width of the screen *available to the window*
-	// FIXME: This works only sometimes...
-	/*if (width <= ui->stackListWidget->width())
-	{
-		//qDebug() << width << ui->stackListWidget->width();
-		return;
-	}*/
-	
+
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
-	
-	// FIXME: This works only sometimes...
-	/*
-	dialog->adjustSize();
-	dialog->update();
-	// ... and allow manual resize later.
-	ui->stackListWidget->setMinimumWidth(0);
-	*/
 }
 
 void ConfigurationDialog::populateDeltaTAlgorithmsList()
