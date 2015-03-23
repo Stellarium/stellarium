@@ -212,10 +212,12 @@ private:
 	NebulaP searchIC(unsigned int IC);
 	NebulaP searchC(unsigned int C);
 	NebulaP searchB(unsigned int B);
+	NebulaP searchSh2(unsigned int Sh2);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
 	bool loadBarnard(const QString& filename);
+	bool loadSharpless2(const QString& filename);
 
 	QVector<NebulaP> nebArray;		// The nebulas list
 	QHash<unsigned int, NebulaP> ngcIndex;

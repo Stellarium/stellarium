@@ -57,8 +57,12 @@ Nebula::Nebula()
 	, IC_nb(0)
 	, C_nb(0)
 	, B_nb(0)
+	, Sh2_nb(0)
 	, mag(99.)
 	, nType()
+	, formType(0)
+	, structureType(0)
+	, brightnessType(0)
 {
 	nameI18 = "";
 	angularSize = -1;
@@ -91,6 +95,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("M %1").arg(M_nb);
 		if ((B_nb > 0) && (B_nb <= 370))
 			catIds << QString("B %1").arg(B_nb);
+		if ((Sh2_nb > 0) && (Sh2_nb <= 313))
+			catIds << QString("Sh 2-%1").arg(Sh2_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
@@ -138,6 +144,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
 		}
 	}
+	if (nType==NebHII && flags&Extra)
+	{
+		oss << qc_("Form: %1","HII Region").arg(getFormTypeString(formType)) << "<br>";
+		oss << qc_("Structure: %1","HII Region").arg(getStructureTypeString(structureType)) << "<br>";
+		oss << qc_("Brightness: %1","HII Region").arg(getBrightnessTypeString(brightnessType)) << "<br>";
+	}
 	oss << getPositionInfoString(core, flags);
 
 	if (angularSize>0 && flags&Size)
@@ -164,7 +176,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
 	// make very easy to select if labeled
 	float lim=getVMagnitude(core);
-	if (nType==NebDn)
+	if (nType==NebDn || nType==NebHII)
 		lim=15.0f - mag - 2.0f*angularSize;
 	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
@@ -185,7 +197,7 @@ double Nebula::getCloseViewFov(const StelCore*) const
 
 float Nebula::getSurfaceBrightness(const StelCore* core) const
 {
-	if (getVMagnitude(core)<99 && angularSize>0 && nType!=NebDn)
+	if (getVMagnitude(core)<99 && angularSize>0 && nType!=NebDn && nType!=NebHII)
 		return getVMagnitude(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
 	else
 		return 99;
@@ -193,7 +205,7 @@ float Nebula::getSurfaceBrightness(const StelCore* core) const
 
 float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
 {
-	if (getVMagnitudeWithExtinction(core)<99 && angularSize>0 && nType!=NebDn)
+	if (getVMagnitudeWithExtinction(core)<99 && angularSize>0 && nType!=NebDn && nType!=NebHII)
 		return getVMagnitudeWithExtinction(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
 	else
 		return 99;
@@ -208,7 +220,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn)
+	if (nType==NebDn || nType==NebHII)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
@@ -248,9 +260,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		case NebPn:
 			Nebula::texPlanetaryNebula->bind();
 			break;
-		case NebDn:
+		case NebHII:
+		case NebDn:		
 			Nebula::texDarkNebula->bind();
-			break;
+			break;		
 		case NebCn:
 			Nebula::texOpenClusterWithNebulosity->bind();
 			break;
@@ -276,7 +289,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn)
+	if (nType==NebDn || nType==NebHII)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
@@ -309,6 +322,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("C %1").arg(C_nb);
 		else if (B_nb > 0)
 			str = QString("B %1").arg(B_nb);
+		else if (Sh2_nb > 0)
+			str = QString("Sh 2-%1").arg(Sh2_nb);
 		else if (NGC_nb > 0)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
@@ -483,6 +498,45 @@ bool Nebula::readBarnard(QString record)
 	return true;
 }
 
+bool Nebula::readSharpless2(QString record)
+{
+	float radeg;
+	float dedeg;
+
+	QStringList list=record.split("\t", QString::KeepEmptyParts);
+
+	//qDebug() << "RA:" << list.at(0) << " DE:" << list.at(1) << " Sh2:" << list.at(2) << " size:" << list.at(3) << " F:" << list.at(4) << " S:" << list.at(5) << " B:" << list.at(6);
+
+	radeg=list.at(0).toFloat();
+	dedeg=list.at(1).toFloat();
+	Sh2_nb=list.at(2).toInt();
+
+	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
+	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
+
+	// Calc the Cartesian coord with RA and DE
+	StelUtils::spheToRect(RaRad,DecRad,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+
+	mag=99;
+
+	// Calc the angular size in degrees
+	int size=list.at(3).toFloat();
+
+	angularSize = size/60.0f;
+	if (angularSize<0)
+		angularSize=0;
+
+	formType = list.at(4).toInt();
+	structureType = list.at(5).toInt();
+	brightnessType = list.at(6).toInt();
+
+	nType=NebHII;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+
+	return true;
+}
+
 QString Nebula::getTypeString(void) const
 {
 	QString wsType;
@@ -516,8 +570,77 @@ QString Nebula::getTypeString(void) const
 		case NebUnknown:
 			wsType = q_("Unknown");
 			break;
+		case NebHII:
+			wsType = q_("HII Region");
+			break;
 		default:
 			wsType = q_("Undocumented type");
+			break;
+	}
+	return wsType;
+}
+
+QString Nebula::getFormTypeString(const int code) const
+{
+	QString wsType;
+
+	switch(code)
+	{
+		case 1:
+			wsType = qc_("circular","form");
+			break;
+		case 2:
+			wsType = qc_("elliptical","form");
+			break;
+		case 3:
+			wsType = qc_("irregular","form");
+			break;
+		default:
+			wsType = qc_("undocumented form","form");
+			break;
+	}
+	return wsType;
+}
+
+QString Nebula::getStructureTypeString(const int code) const
+{
+	QString wsType;
+
+	switch(code)
+	{
+		case 1:
+			wsType = qc_("amorphous","structure");
+			break;
+		case 2:
+			wsType = qc_("conventional","structure");
+			break;
+		case 3:
+			wsType = qc_("filamentary","structure");
+			break;
+		default:
+			wsType = qc_("undocumented structure","structure");
+			break;
+	}
+	return wsType;
+}
+
+QString Nebula::getBrightnessTypeString(const int code) const
+{
+	QString wsType;
+
+	switch(code)
+	{
+		case 1:
+			wsType = qc_("faintest","brightness");
+			break;
+		case 2:
+			wsType = qc_("average","brightness");
+			break;
+		case 3:
+			wsType = qc_("brightest","brightness");
+			break;
+		default:
+			wsType = qc_("undocumented brightness","brightness");
 			break;
 	}
 	return wsType;
