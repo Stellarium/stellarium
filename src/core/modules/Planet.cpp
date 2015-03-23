@@ -630,7 +630,7 @@ double Planet::getSiderealTime(double jd) const
 
 	if (englishName=="Jupiter")
 	{
-		if( re.offset != 0.0 )
+		if( re.offset >= 0.0 )
 		{
 			// use semi-empirical coefficient for GRS drift
 			// qDebug() << "Jupiter: offset = " << re.offset << " --> rotation = " << (remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172));
