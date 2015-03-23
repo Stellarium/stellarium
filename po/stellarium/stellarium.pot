@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 01:15+0600\n"
+"POT-Creation-Date: 2015-03-23 23:40+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,9 @@ msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
-#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:478 src/core/StelCore.cpp:192
+#: src/core/StelApp.cpp:477 src/core/StelCore.cpp:192
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr ""
@@ -172,7 +172,7 @@ msgstr ""
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:210
+#: src/core/modules/Nebula.cpp:116 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:178 src/core/modules/StarWrapper.cpp:181
 #: plugins/Satellites/src/Satellite.cpp:255
@@ -182,7 +182,12 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:216
+#: src/core/modules/Nebula.cpp:122
+#, qt-format
+msgid "Opacity: <b>%1</b>"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:127 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -191,7 +196,7 @@ msgstr ""
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:219
+#: src/core/modules/Nebula.cpp:130 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -200,135 +205,217 @@ msgstr ""
 msgid "Magnitude: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:119
+#: src/core/modules/Nebula.cpp:138
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:125
+#: src/core/modules/Nebula.cpp:144
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:131
+#: src/core/modules/Nebula.cpp:149
+#, qt-format
+msgctxt "HII Region"
+msgid "Form: %1"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:150
+#, qt-format
+msgctxt "HII Region"
+msgid "Structure: %1"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:151
+#, qt-format
+msgctxt "HII Region"
+msgid "Brightness: %1"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:156
 #, qt-format
 msgid "Size: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:386
+#: src/core/modules/Nebula.cpp:547
 msgid "Galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:389
+#: src/core/modules/Nebula.cpp:550
 msgid "Open cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:392
+#: src/core/modules/Nebula.cpp:553
 msgid "Globular cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:395
+#: src/core/modules/Nebula.cpp:556
 msgid "Nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:398
+#: src/core/modules/Nebula.cpp:559
 msgid "Planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:401
+#: src/core/modules/Nebula.cpp:562
 msgid "Dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:404
+#: src/core/modules/Nebula.cpp:565
 msgid "Irregular galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:407
+#: src/core/modules/Nebula.cpp:568
 msgid "Cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:410
+#: src/core/modules/Nebula.cpp:571
 msgid "Unknown"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:413
+#: src/core/modules/Nebula.cpp:574
+msgid "HII Region"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:577
 msgid "Undocumented type"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:126
+#: src/core/modules/Nebula.cpp:590
+msgctxt "form"
+msgid "circular"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:593
+msgctxt "form"
+msgid "elliptical"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:596
+msgctxt "form"
+msgid "irregular"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:599
+msgctxt "form"
+msgid "undocumented form"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:612
+msgctxt "structure"
+msgid "amorphous"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:615
+msgctxt "structure"
+msgid "conventional"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:618
+msgctxt "structure"
+msgid "filamentary"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:621
+msgctxt "structure"
+msgid "undocumented structure"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:634
+msgctxt "brightness"
+msgid "faintest"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:637
+msgctxt "brightness"
+msgid "average"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:640
+msgctxt "brightness"
+msgid "brightest"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:643
+msgctxt "brightness"
+msgid "undocumented brightness"
+msgstr ""
+
+#: src/core/modules/NebulaMgr.cpp:131
 msgid "Deep-sky objects"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:227
+#: src/core/modules/Planet.cpp:223 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
 #: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:231
+#: src/core/modules/Planet.cpp:232
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:243 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Planet.cpp:244 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:250 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:251 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:228
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:263
+#: src/core/modules/Planet.cpp:264
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:269 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Planet.cpp:270 src/core/modules/MinorPlanet.cpp:260
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr ""
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:281 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:267
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:284
+#: src/core/modules/Planet.cpp:285
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:285
+#: src/core/modules/Planet.cpp:286
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:289
+#: src/core/modules/Planet.cpp:290
 msgid "The period of rotation is chaotic"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:295
-#, qt-format
-msgid "Phase Angle: %1"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:296
 #, qt-format
-msgid "Elongation: %1"
+msgid "Phase Angle: %1"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:297
 #, qt-format
-msgid "Phase: %1"
+msgid "Elongation: %1"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:298
+#, qt-format
+msgid "Phase: %1"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:299
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr ""
@@ -514,7 +601,7 @@ msgstr ""
 msgid "Zodiacal Light"
 msgstr ""
 
-#: src/core/StelApp.cpp:478
+#: src/core/StelApp.cpp:477
 msgid "Night mode"
 msgstr ""
 
@@ -692,11 +779,11 @@ msgstr ""
 msgid "Flip scene vertically"
 msgstr ""
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1521
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -704,14 +791,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1527
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1530
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -720,14 +807,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1535
+#: src/core/StelCore.cpp:1534
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1539
+#: src/core/StelCore.cpp:1538
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -735,7 +822,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1542
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -743,14 +830,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1545
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1548
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -759,14 +846,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1551
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1554
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -774,25 +861,25 @@ msgid ""
 "D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1557
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1560
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1563
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1566
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -801,14 +888,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1569
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1572
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -816,42 +903,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1575
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1578
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1581
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1584
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1587
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1590
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -859,7 +946,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1593
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -867,7 +954,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1596
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -876,7 +963,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1599
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -886,11 +973,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1599
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1602
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -898,7 +985,7 @@ msgid ""
 "em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1605
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -906,7 +993,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1608
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -914,43 +1001,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1611
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1615 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1614 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr ""
 
-#: src/core/StelCore.cpp:1665
+#: src/core/StelCore.cpp:1664
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1691
+#: src/core/StelCore.cpp:1690
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1713 src/core/StelCore.cpp:1718
-#: src/core/StelCore.cpp:1745 src/core/StelCore.cpp:1750
-#: src/core/StelCore.cpp:1755
+#: src/core/StelCore.cpp:1712 src/core/StelCore.cpp:1717
+#: src/core/StelCore.cpp:1744 src/core/StelCore.cpp:1749
+#: src/core/StelCore.cpp:1754
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1723
+#: src/core/StelCore.cpp:1722
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1765
+#: src/core/StelCore.cpp:1764
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1767
+#: src/core/StelCore.cpp:1766
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""

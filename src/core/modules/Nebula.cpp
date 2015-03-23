@@ -498,7 +498,7 @@ bool Nebula::readBarnard(QString record)
 	return true;
 }
 
-bool Nebula::readSharpless2(QString record)
+bool Nebula::readSharpless(QString record)
 {
 	float radeg;
 	float dedeg;
