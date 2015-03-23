@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2015 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,8 +43,10 @@ StelTextureSP Nebula::texOpenCluster;
 StelTextureSP Nebula::texGlobularCluster;
 StelTextureSP Nebula::texPlanetaryNebula;
 StelTextureSP Nebula::texDiffuseNebula;
+StelTextureSP Nebula::texDarkNebula;
 StelTextureSP Nebula::texOpenClusterWithNebulosity;
 float Nebula::circleScale = 1.f;
+bool  Nebula::drawHintProportional = false;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
@@ -53,6 +56,7 @@ Nebula::Nebula()
 	, NGC_nb(0)
 	, IC_nb(0)
 	, C_nb(0)
+	, B_nb(0)
 	, mag(99.)
 	, nType()
 {
@@ -85,6 +89,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		QStringList catIds;
 		if ((M_nb > 0) && (M_nb < 111))
 			catIds << QString("M %1").arg(M_nb);
+		if ((B_nb > 0) && (B_nb <= 370))
+			catIds << QString("B %1").arg(B_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
@@ -105,11 +111,18 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (mag < 50 && flags&Magnitude)
 	{
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-											QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+		if (nType == NebDn)
+		{
+			oss << q_("Opacity: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+		}
 		else
-			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+		{
+			if (core->getSkyDrawer()->getFlagHasAtmosphere())
+				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+			else
+				oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+		}
 	}
 	if (mag < 50 && flags&Extra)
 	{
@@ -150,7 +163,10 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	
 	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
 	// make very easy to select if labeled
-	if (std::min(15.f, getVMagnitude(core))<maxMagHint)
+	float lim=getVMagnitude(core);
+	if (nType==NebDn)
+		lim=15.0f - mag - 2.0f*angularSize;
+	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
 	else
 		return StelObject::getSelectPriority(core)-2.f;
@@ -169,7 +185,7 @@ double Nebula::getCloseViewFov(const StelCore*) const
 
 float Nebula::getSurfaceBrightness(const StelCore* core) const
 {
-	if (getVMagnitude(core)<99 && angularSize>0)
+	if (getVMagnitude(core)<99 && angularSize>0 && nType!=NebDn)
 		return getVMagnitude(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
 	else
 		return 99;
@@ -177,7 +193,7 @@ float Nebula::getSurfaceBrightness(const StelCore* core) const
 
 float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
 {
-	if (getVMagnitudeWithExtinction(core)<99 && angularSize>0)
+	if (getVMagnitudeWithExtinction(core)<99 && angularSize>0 && nType!=NebDn)
 		return getVMagnitudeWithExtinction(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
 	else
 		return 99;
@@ -191,7 +207,16 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
-
+	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
+	if (nType==NebDn)
+	{
+		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
+		// 9-(opac-5)-2*(angularSize-0.5)
+		if (angularSize>0 && mag<50)
+			lim = 15.0f - mag - 2.0f*angularSize;
+		else
+			lim = 9.0f;
+	}
 	if (lim>maxMagHints)
 		return;
 
@@ -223,6 +248,9 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		case NebPn:
 			Nebula::texPlanetaryNebula->bind();
 			break;
+		case NebDn:
+			Nebula::texDarkNebula->bind();
+			break;
 		case NebCn:
 			Nebula::texOpenClusterWithNebulosity->bind();
 			break;
@@ -230,7 +258,13 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			Nebula::texCircle->bind();
 	}
 
-	sPainter.drawSprite2dMode(XY[0], XY[1], 6);
+	if (drawHintProportional)
+	{
+		float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(6.0f,size));
+	}
+	else
+		sPainter.drawSprite2dMode(XY[0], XY[1], 6.0f);
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
@@ -241,7 +275,16 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
-
+	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
+	if (nType==NebDn)
+	{
+		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
+		// 9-(opac-5)-2*(angularSize-0.5)
+		if (angularSize>0 && mag<50)
+			lim = 15.0f - mag - 2.0f*angularSize;
+		else
+			lim = 9.0f;
+	}
 	if (lim>maxMagLabel)
 		return;
 
@@ -254,7 +297,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 
 	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 4.f + size/1.8f;
+	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
 	QString str;
 	if (!nameI18.isEmpty())
 		str = getNameI18n();
@@ -264,6 +307,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("M %1").arg(M_nb);
 		else if (C_nb > 0)
 			str = QString("C %1").arg(C_nb);
+		else if (B_nb > 0)
+			str = QString("B %1").arg(B_nb);
 		else if (NGC_nb > 0)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
@@ -292,13 +337,11 @@ void Nebula::readNGC(QDataStream& in)
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)type;
-	// GZ: Trace the undefined entries...
 	//if (type >= 5) {
 	//	qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
 	//}
-	if (type == 5) {
-		qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
-	}
+	// This confirms there are currently no dark nebulae in the NGC list.
+	Q_ASSERT(type!=5);
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
 
@@ -375,6 +418,70 @@ bool Nebula::readNGC(char *recordstr)
 	return true;
 }
 #endif
+
+bool Nebula::readBarnard(QString record)
+{
+	// Line Format: "<B>\t<RAh>\t<RAm>\t<RAs>\t[+-]DD MM\t<size>\t<obs>\t<comment>... ..."
+	int rahr;
+	float ramin;
+	int dedeg;
+	int demin;
+
+	QStringList list=record.split("\t", QString::KeepEmptyParts);
+
+	//qDebug() << "Barnard: " << list.at(0) << "RA " << list.at(1) << list.at(2) << list.at(3) <<
+	//	    "Dec" << list.at(4) << "opac" << list.at(6) << "size" << list.at(5);
+
+	B_nb=list.at(0).toInt();
+	rahr=list.at(1).toInt();
+	ramin=list.at(2).toInt() + list.at(3).toInt() / 60.0f;
+	float RaRad = (double)rahr+ramin/60;
+
+	QString degString=list.at(4);
+
+	dedeg=degString.mid(1,2).toInt();
+	demin=degString.mid(4,2).toInt();
+
+	float DecRad = (float)dedeg+(float)demin/60.0f;
+
+	if (degString.at(0) == '-') DecRad *= -1.f;
+
+	RaRad*=M_PI/12.f;     // Convert from hours to rad
+	DecRad*=M_PI/180.f;    // Convert from deg to rad
+
+	// Calc the Cartesian coord with RA and DE
+	StelUtils::spheToRect(RaRad,DecRad,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+
+	// "mag" will receive opacity for dark nebulae.
+	QString opacityStr=list.at(6);
+
+	if (opacityStr.contains('?')) mag=99;
+	else mag=opacityStr.toFloat();
+
+	// Calc the angular size in degrees
+	float size=list.at(5).toFloat();
+
+	angularSize = size/60.0f;
+	if (angularSize<0)
+		angularSize=0;
+
+	// Barnard are dark nebulae only, so at least type is easy:
+	nType=NebDn;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+
+//	// Dark nebulae. Not sure how to assess visibility from opacity and size? --GZ
+//	float lim;
+//	// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
+//	// 9-(opac-5)-2*(angularSize-0.5)
+//	if (angularSize>0 && mag<50)
+//		lim = 15.0f - mag - 2.0f*angularSize;
+//	else
+//		lim = 9.0f;
+//	qDebug() << "LIMIT:" << angularSize << "*" << mag << "=" << lim;
+
+	return true;
+}
 
 QString Nebula::getTypeString(void) const
 {
