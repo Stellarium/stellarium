@@ -1196,6 +1196,20 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					result << QString("C%1").arg(n->C_nb);
 			}
 			break;
+		case 12: // Barnard Catalogue?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->B_nb>0)
+					result << QString("B %1").arg(n->B_nb);
+			}
+			break;
+		case 13: // Sharpless Catalogue?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->Sh2_nb>0)
+					result << QString("Sh 2-%1").arg(n->Sh2_nb);
+			}
+			break;
 		default:
 			foreach(const NebulaP& n, nebArray)
 			{
