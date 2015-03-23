@@ -261,6 +261,14 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "C") return searchC(num);
 		if (cat == "B") return searchB(num);
 	}
+	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
+	if (dCatNumRx.exactMatch(uname))
+	{
+		QString dcat = dCatNumRx.capturedTexts().at(1);
+		int dnum = dCatNumRx.capturedTexts().at(2).toInt();
+
+		if (dcat == "SH") return searchSh2(dnum);
+	}
 	return NebulaP();
 }
 
@@ -268,6 +276,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString ngcPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat");
 	QString barnardPath = StelFileMgr::findFile("nebulae/" + setName + "/BarnardCat_tabbed.txt");
+	QString sharpless2Path = StelFileMgr::findFile("nebulae/" + setName + "/Sharpless2Cat_tabbed.txt");
 	QString ngcNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat");
 	if (ngcPath.isEmpty() || ngcNamesPath.isEmpty())
 	{
@@ -276,6 +285,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	}
 	loadNGC(ngcPath);
 	loadBarnard(barnardPath);
+	loadSharpless2(sharpless2Path);
 	loadNGCNames(ngcNamesPath);
 }
 
@@ -361,6 +371,15 @@ NebulaP NebulaMgr::searchB(unsigned int B)
 			return n;
 	return NebulaP();
 }
+
+NebulaP NebulaMgr::searchSh2(unsigned int Sh2)
+{
+	foreach (const NebulaP& n, nebArray)
+		if (n->Sh2_nb == Sh2)
+			return n;
+	return NebulaP();
+}
+
 
 #if 0
 // read from stream
@@ -476,6 +495,10 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 		else if (record[37] == 'B')
 		{
 			e = searchB(nb);
+		}
+		else if (record[37] == 'S')
+		{
+			e = searchSh2(nb);
 		}
 		else
 		{
@@ -596,6 +619,54 @@ bool NebulaMgr::loadBarnard(const QString& filename)
 	return true;
 }
 
+bool NebulaMgr::loadSharpless2(const QString& filename)
+{
+	QFile in(filename);
+	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
+		return false;
+
+	int totalRecords=0;
+	QString record;
+	while (!in.atEnd())
+	{
+		in.readLine();
+		++totalRecords;
+	}
+
+	// rewind the file to the start
+	in.seek(0);
+
+	int currentLineNumber = 0;	// what input line we are on
+	int currentRecordNumber = 0;	// what record number we are on
+	int readOk = 0;			// how many records were read without problems
+	while (!in.atEnd())
+	{
+		record = QString::fromUtf8(in.readLine());
+		++currentLineNumber;
+
+		// skip comments
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+		++currentRecordNumber;
+
+		// Create a new Nebula record
+		NebulaP e = NebulaP(new Nebula);
+		if (!e->readSharpless2(record)) // reading error
+		{
+			e.clear();
+		}
+		else
+		{
+			nebArray.append(e);
+			nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
+			++readOk;
+		}
+	}
+	in.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "Sharpless records";
+	return true;
+}
+
 void NebulaMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -668,6 +739,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
+	if (objw.mid(0, 2) == "SH")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("SH2-%1").arg(n->Sh2_nb) == objw || QString("SH 2-%1").arg(n->Sh2_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return StelObjectP();
 }
 
@@ -732,6 +813,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		foreach (const NebulaP& n, nebArray)
 		{
 			if (QString("B%1").arg(n->B_nb) == objw || QString("B %1").arg(n->B_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
+	if (objw.mid(0, 2) == "SH")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("SH2-%1").arg(n->Sh2_nb) == objw || QString("SH 2-%1").arg(n->Sh2_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -838,6 +929,26 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("B %1").arg(n->B_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
+	if (objw.size()>=1 && objw[0]=='S')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->Sh2_nb==0) continue;
+			QString constw = QString("SH2-%1").arg(n->Sh2_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("SH 2-%1").arg(n->Sh2_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
@@ -972,6 +1083,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("B %1").arg(n->B_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
+	if (objw.size()>=1 && objw[0]=='S')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->Sh2_nb==0) continue;
+			QString constw = QString("SH2-%1").arg(n->Sh2_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("SH 2-%1").arg(n->Sh2_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
