@@ -628,7 +628,6 @@ double Planet::getSiderealTime(double jd) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-// TODO: This block need rewrite
 	if (englishName=="Jupiter")
 	{
 		if( re.offset != 0.0 )
@@ -940,6 +939,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return -6.85 + d;
 				if (englishName=="Neptune")
 					return -7.05 + d;
+				// Original formulae doesn't have equeation for Pluto
 				if (englishName=="Pluto")
 					return -1.0 + d;
 
