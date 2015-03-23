@@ -92,6 +92,8 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	StelPainter painter(StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000));
 	draw(painter);
 
+	qsrand(QDateTime::currentMSecsSinceEpoch());
+
 	initialized = true;
 }
 
@@ -437,7 +439,7 @@ void MeteorShower::draw(StelPainter &painter)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	qreal r, g, b;
-	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
+	float alpha = 0.85f + ((double) qrand() / (RAND_MAX))/10;
 	switch(status)
 	{
 		case ACTIVE_REAL: //Active, real data

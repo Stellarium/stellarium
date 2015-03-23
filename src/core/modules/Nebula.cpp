@@ -297,7 +297,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 
 	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 4.f + size/1.8f;
+	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
 	QString str;
 	if (!nameI18.isEmpty())
 		str = getNameI18n();
@@ -337,13 +337,10 @@ void Nebula::readNGC(QDataStream& in)
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)type;
-	// GZ: Trace the undefined entries...
-	//if (angularSize <=0.0f)
-	//	qDebug() << "NGC"<< NGC_nb << "/IC" << IC_nb << "size:" << angularSize;
 	//if (type >= 5) {
 	//	qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
 	//}
-	// GZ: This confirms there are currently no dark nebulae in the NGC list.
+	// This confirms there are currently no dark nebulae in the NGC list.
 	Q_ASSERT(type!=5);
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
@@ -432,8 +429,8 @@ bool Nebula::readBarnard(QString record)
 
 	QStringList list=record.split("\t", QString::KeepEmptyParts);
 
-	qDebug() << "Barnard: " << list.at(0) << "RA " << list.at(1) << list.at(2) << list.at(3) <<
-		    "Dec" << list.at(4) << "opac" << list.at(6) << "size" << list.at(5);
+	//qDebug() << "Barnard: " << list.at(0) << "RA " << list.at(1) << list.at(2) << list.at(3) <<
+	//	    "Dec" << list.at(4) << "opac" << list.at(6) << "size" << list.at(5);
 
 	B_nb=list.at(0).toInt();
 	rahr=list.at(1).toInt();
@@ -473,15 +470,15 @@ bool Nebula::readBarnard(QString record)
 	nType=NebDn;
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 
-	// Dark nebulae. Not sure how to assess visibility from opacity and size? --GZ
-	float lim;
-	// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
-	// 9-(opac-5)-2*(angularSize-0.5)
-	if (angularSize>0 && mag<50)
-		lim = 15.0f - mag - 2.0f*angularSize;
-	else
-		lim = 9.0f;
-	qDebug() << "LIMIT:" << angularSize << "*" << mag << "=" << lim;
+//	// Dark nebulae. Not sure how to assess visibility from opacity and size? --GZ
+//	float lim;
+//	// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
+//	// 9-(opac-5)-2*(angularSize-0.5)
+//	if (angularSize>0 && mag<50)
+//		lim = 15.0f - mag - 2.0f*angularSize;
+//	else
+//		lim = 9.0f;
+//	qDebug() << "LIMIT:" << angularSize << "*" << mag << "=" << lim;
 
 	return true;
 }
