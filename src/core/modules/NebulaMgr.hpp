@@ -217,7 +217,7 @@ private:
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
 	bool loadBarnard(const QString& filename);
-	bool loadSharpless2(const QString& filename);
+	bool loadSharpless(const QString& filename);
 
 	QVector<NebulaP> nebArray;		// The nebulas list
 	QHash<unsigned int, NebulaP> ngcIndex;

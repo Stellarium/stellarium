@@ -276,7 +276,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString ngcPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat");
 	QString barnardPath = StelFileMgr::findFile("nebulae/" + setName + "/BarnardCat_tabbed.txt");
-	QString sharpless2Path = StelFileMgr::findFile("nebulae/" + setName + "/Sharpless2Cat_tabbed.txt");
+	QString sharplessPath = StelFileMgr::findFile("nebulae/" + setName + "/SharplessCat_tabbed.txt");
 	QString ngcNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat");
 	if (ngcPath.isEmpty() || ngcNamesPath.isEmpty())
 	{
@@ -285,7 +285,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	}
 	loadNGC(ngcPath);
 	loadBarnard(barnardPath);
-	loadSharpless2(sharpless2Path);
+	loadSharpless(sharplessPath);
 	loadNGCNames(ngcNamesPath);
 }
 
@@ -619,7 +619,7 @@ bool NebulaMgr::loadBarnard(const QString& filename)
 	return true;
 }
 
-bool NebulaMgr::loadSharpless2(const QString& filename)
+bool NebulaMgr::loadSharpless(const QString& filename)
 {
 	QFile in(filename);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -651,7 +651,7 @@ bool NebulaMgr::loadSharpless2(const QString& filename)
 
 		// Create a new Nebula record
 		NebulaP e = NebulaP(new Nebula);
-		if (!e->readSharpless2(record)) // reading error
+		if (!e->readSharpless(record)) // reading error
 		{
 			e.clear();
 		}
