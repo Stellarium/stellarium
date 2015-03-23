@@ -99,7 +99,7 @@ private:
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);
 	bool readBarnard(QString record);
-	bool readSharpless2(QString record);
+	bool readSharpless(QString record);
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
