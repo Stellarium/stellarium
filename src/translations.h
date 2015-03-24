@@ -97,6 +97,8 @@ class Translations
 		N_("Clusters associated with nebulosity");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("HII Regions");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Reflection nebulae");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -105,6 +107,8 @@ class Translations
 		N_("Barnard Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Sharpless Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Van den Bergh Catalogue");
 		
 		// =====================================================================
 		// Constellation cultures

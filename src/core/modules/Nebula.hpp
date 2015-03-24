@@ -90,7 +90,32 @@ private:
 		NebIg=6,     //!< ??? Irregular Galaxy? Does not exist in current catalog
 		NebCn=7,     //!< Cluster associated with nebulosity
 		NebUnknown=8,//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
-		NebHII=9     //!< HII Region
+		NebHII=9,    //!< HII Region
+		NebRn=10,    //!< Reflection nebula
+	};
+
+	//! @enum HIIFormType HII region form types
+	enum HIIFormType
+	{
+		FormCir=1,   //!< circular form
+		FormEll=2,   //!< elliptical form
+		FormIrr=3    //!< irregular form
+	};
+
+	//! @enum HIIStructureType HII region structure types
+	enum HIIStructureType
+	{
+		StructureAmo=1,   //!< amorphous structure
+		StructureCon=2,   //!< conventional structure
+		StructureFil=3    //!< filamentary structure
+	};
+
+	//! @enum HIIBrightnessType HII region brightness types
+	enum HIIBrightnessType
+	{
+		Faintest=1,
+		Moderate=2,
+		Brightest=3
 	};
 
 	//! Translate nebula name using the passed translator
@@ -100,24 +125,26 @@ private:
 	void readNGC(QDataStream& in);
 	bool readBarnard(QString record);
 	bool readSharpless(QString record);
+	bool readVandenBergh(QString record);
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
 
 
-	//! Get the printable HII region form type from code.
-	QString getFormTypeString(const int code) const;
-	//! Get the printable HII region structure type from code.
-	QString getStructureTypeString(const int code) const;
-	//! Get the printable HII region brightness type from code.
-	QString getBrightnessTypeString(const int code) const;
+	//! Get the printable HII region form type.
+	QString getHIIFormTypeString() const;
+	//! Get the printable HII region structure type.
+	QString getHIIStructureTypeString() const;
+	//! Get the printable HII region brightness type.
+	QString getHIIBrightnessTypeString() const;
 
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
 	unsigned int IC_nb;             // Index Catalog number
 	unsigned int C_nb;              // Caldwell Catalog number
 	unsigned int B_nb;              // Barnard Catalog number (Dark Nebulae)
-	unsigned int Sh2_nb;            // Sharpless Catalog number (Catalogue of HII Regions (Sharpless 1959); Dark Nebulae)
+	unsigned int Sh2_nb;            // Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
+	unsigned int VdB_nb;            // Van den Bergh Catalog number (Catalogue of Reflection Nebulae (Van den Bergh, 1966))
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here.
@@ -126,9 +153,9 @@ private:
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;
 
-	int formType;
-	int structureType;
-	int brightnessType;
+	HIIFormType formType;
+	HIIStructureType structureType;
+	HIIBrightnessType brightnessType;
 
 	SphericalRegionP pointRegion;
 
