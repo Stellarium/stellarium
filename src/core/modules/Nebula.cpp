@@ -58,11 +58,12 @@ Nebula::Nebula()
 	, C_nb(0)
 	, B_nb(0)
 	, Sh2_nb(0)
+	, VdB_nb(0)
 	, mag(99.)
 	, nType()
-	, formType(0)
-	, structureType(0)
-	, brightnessType(0)
+	, formType()
+	, structureType()
+	, brightnessType()
 {
 	nameI18 = "";
 	angularSize = -1;
@@ -97,6 +98,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("B %1").arg(B_nb);
 		if ((Sh2_nb > 0) && (Sh2_nb <= 313))
 			catIds << QString("Sh 2-%1").arg(Sh2_nb);
+		if ((VdB_nb > 0) && (VdB_nb <= 158))
+			catIds << QString("VdB %1").arg(VdB_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
@@ -144,11 +147,11 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
 		}
 	}
-	if (nType==NebHII && flags&Extra)
+	if (flags&Extra && nType==NebHII)
 	{
-		oss << qc_("Form: %1","HII Region").arg(getFormTypeString(formType)) << "<br>";
-		oss << qc_("Structure: %1","HII Region").arg(getStructureTypeString(structureType)) << "<br>";
-		oss << qc_("Brightness: %1","HII Region").arg(getBrightnessTypeString(brightnessType)) << "<br>";
+		oss << qc_("Form: %1","HII Region").arg(getHIIFormTypeString()) << "<br>";
+		oss << qc_("Structure: %1","HII Region").arg(getHIIStructureTypeString()) << "<br>";
+		oss << q_("Brightness: %1").arg(getHIIBrightnessTypeString()) << "<br>";
 	}
 	oss << getPositionInfoString(core, flags);
 
@@ -260,7 +263,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		case NebPn:
 			Nebula::texPlanetaryNebula->bind();
 			break;
-		case NebHII:
 		case NebDn:		
 			Nebula::texDarkNebula->bind();
 			break;		
@@ -324,6 +326,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("B %1").arg(B_nb);
 		else if (Sh2_nb > 0)
 			str = QString("Sh 2-%1").arg(Sh2_nb);
+		else if (VdB_nb > 0)
+			str = QString("VdB %1").arg(VdB_nb);
 		else if (NGC_nb > 0)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
@@ -527,11 +531,44 @@ bool Nebula::readSharpless(QString record)
 	if (angularSize<0)
 		angularSize=0;
 
-	formType = list.at(4).toInt();
-	structureType = list.at(5).toInt();
-	brightnessType = list.at(6).toInt();
+	formType = (Nebula::HIIFormType)list.at(4).toInt();
+	structureType = (Nebula::HIIStructureType)list.at(5).toInt();
+	brightnessType = (Nebula::HIIBrightnessType)list.at(6).toInt();
 
 	nType=NebHII;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+
+	return true;
+}
+
+bool Nebula::readVandenBergh(QString record)
+{
+	float radeg;
+	float dedeg;
+
+	QStringList list=record.split("\t", QString::KeepEmptyParts);
+
+	VdB_nb=list.at(0).toInt();
+	mag = list.at(1).toFloat();
+
+	// Calc the angular size in degrees
+	float size=list.at(2).toFloat();
+
+	angularSize = size/60.0f;
+	if (angularSize<0)
+		angularSize=0;
+
+	radeg=list.at(3).toFloat();
+	dedeg=list.at(4).toFloat();
+
+	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
+	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
+
+	// Calc the Cartesian coord with RA and DE
+	StelUtils::spheToRect(RaRad,DecRad,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+
+	nType=NebRn;
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 
 	return true;
@@ -573,6 +610,9 @@ QString Nebula::getTypeString(void) const
 		case NebHII:
 			wsType = q_("HII Region");
 			break;
+		case NebRn:
+			wsType = q_("Reflection nebula");
+			break;
 		default:
 			wsType = q_("Undocumented type");
 			break;
@@ -580,19 +620,19 @@ QString Nebula::getTypeString(void) const
 	return wsType;
 }
 
-QString Nebula::getFormTypeString(const int code) const
+QString Nebula::getHIIFormTypeString() const
 {
 	QString wsType;
 
-	switch(code)
+	switch(formType)
 	{
-		case 1:
+		case FormCir:
 			wsType = qc_("circular","form");
 			break;
-		case 2:
+		case FormEll:
 			wsType = qc_("elliptical","form");
 			break;
-		case 3:
+		case FormIrr:
 			wsType = qc_("irregular","form");
 			break;
 		default:
@@ -602,19 +642,19 @@ QString Nebula::getFormTypeString(const int code) const
 	return wsType;
 }
 
-QString Nebula::getStructureTypeString(const int code) const
+QString Nebula::getHIIStructureTypeString() const
 {
 	QString wsType;
 
-	switch(code)
+	switch(structureType)
 	{
-		case 1:
+		case StructureAmo:
 			wsType = qc_("amorphous","structure");
 			break;
-		case 2:
+		case StructureCon:
 			wsType = qc_("conventional","structure");
 			break;
-		case 3:
+		case StructureFil:
 			wsType = qc_("filamentary","structure");
 			break;
 		default:
@@ -624,23 +664,23 @@ QString Nebula::getStructureTypeString(const int code) const
 	return wsType;
 }
 
-QString Nebula::getBrightnessTypeString(const int code) const
+QString Nebula::getHIIBrightnessTypeString() const
 {
 	QString wsType;
 
-	switch(code)
+	switch(brightnessType)
 	{
-		case 1:
-			wsType = qc_("faintest","brightness");
+		case Faintest:
+			wsType = qc_("faintest", "HII region brightness");
 			break;
-		case 2:
-			wsType = qc_("average","brightness");
+		case Moderate:
+			wsType = qc_("moderate", "HII region brightness");
 			break;
-		case 3:
-			wsType = qc_("brightest","brightness");
+		case Brightest:
+			wsType = qc_("brightest", "HII region brightness");
 			break;
 		default:
-			wsType = qc_("undocumented brightness","brightness");
+			wsType = q_("undocumented brightness");
 			break;
 	}
 	return wsType;

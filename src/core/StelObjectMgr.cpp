@@ -353,10 +353,12 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:6"] = "Irregular galaxies";
 			result["NebulaMgr:7"] = "Clusters associated with nebulosity";
 			result["NebulaMgr:9"] = "HII Regions";
-			result["NebulaMgr:10"] = "Messier Catalogue";
-			result["NebulaMgr:11"] = "Caldwell Catalogue";
-			result["NebulaMgr:12"] = "Barnard Catalogue";
-			result["NebulaMgr:13"] = "Sharpless Catalogue";
+			result["NebulaMgr:10"] = "Reflection nebulae";
+			result["NebulaMgr:100"] = "Messier Catalogue";
+			result["NebulaMgr:101"] = "Caldwell Catalogue";
+			result["NebulaMgr:102"] = "Barnard Catalogue";
+			result["NebulaMgr:103"] = "Sharpless Catalogue";
+			result["NebulaMgr:104"] = "Van den Bergh Catalogue";
 		}
 	}
 	return result;

@@ -249,7 +249,7 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -260,6 +260,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "IC") return searchIC(num);
 		if (cat == "C") return searchC(num);
 		if (cat == "B") return searchB(num);
+		if (cat == "VDB") return searchVdB(num);
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
@@ -277,6 +278,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	QString ngcPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat");
 	QString barnardPath = StelFileMgr::findFile("nebulae/" + setName + "/BarnardCat_tabbed.txt");
 	QString sharplessPath = StelFileMgr::findFile("nebulae/" + setName + "/SharplessCat_tabbed.txt");
+	QString vandenBerghPath = StelFileMgr::findFile("nebulae/" + setName + "/VandenBerghCat_tabbed.txt");
 	QString ngcNamesPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000names.dat");
 	if (ngcPath.isEmpty() || ngcNamesPath.isEmpty())
 	{
@@ -286,6 +288,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	loadNGC(ngcPath);
 	loadBarnard(barnardPath);
 	loadSharpless(sharplessPath);
+	loadVandenBergh(vandenBerghPath);
 	loadNGCNames(ngcNamesPath);
 }
 
@@ -376,6 +379,14 @@ NebulaP NebulaMgr::searchSh2(unsigned int Sh2)
 {
 	foreach (const NebulaP& n, nebArray)
 		if (n->Sh2_nb == Sh2)
+			return n;
+	return NebulaP();
+}
+
+NebulaP NebulaMgr::searchVdB(unsigned int VdB)
+{
+	foreach (const NebulaP& n, nebArray)
+		if (n->VdB_nb == VdB)
 			return n;
 	return NebulaP();
 }
@@ -499,6 +510,10 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 		else if (record[37] == 'S')
 		{
 			e = searchSh2(nb);
+		}
+		else if (record[37] == 'V')
+		{
+			e = searchVdB(nb);
 		}
 		else
 		{
@@ -667,6 +682,54 @@ bool NebulaMgr::loadSharpless(const QString& filename)
 	return true;
 }
 
+bool NebulaMgr::loadVandenBergh(const QString& filename)
+{
+	QFile in(filename);
+	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
+		return false;
+
+	int totalRecords=0;
+	QString record;
+	while (!in.atEnd())
+	{
+		in.readLine();
+		++totalRecords;
+	}
+
+	// rewind the file to the start
+	in.seek(0);
+
+	int currentLineNumber = 0;	// what input line we are on
+	int currentRecordNumber = 0;	// what record number we are on
+	int readOk = 0;			// how many records were read without problems
+	while (!in.atEnd())
+	{
+		record = QString::fromUtf8(in.readLine());
+		++currentLineNumber;
+
+		// skip comments
+		if (record.startsWith("//") || record.startsWith("#") || record.isEmpty())
+			continue;
+		++currentRecordNumber;
+
+		// Create a new Nebula record
+		NebulaP e = NebulaP(new Nebula);
+		if (!e->readVandenBergh(record)) // reading error
+		{
+			e.clear();
+		}
+		else
+		{
+			nebArray.append(e);
+			nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
+			++readOk;
+		}
+	}
+	in.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "Van den Bergh records";
+	return true;
+}
+
 void NebulaMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
@@ -749,6 +812,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by Van den Bergh numbers (possible formats are "VdB31" or "VdB 31")
+	if (objw.mid(0, 3) == "VDB")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("VDB%1").arg(n->VdB_nb) == objw || QString("VDB %1").arg(n->VdB_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return StelObjectP();
 }
 
@@ -823,6 +896,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		foreach (const NebulaP& n, nebArray)
 		{
 			if (QString("SH2-%1").arg(n->Sh2_nb) == objw || QString("SH 2-%1").arg(n->Sh2_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by Van den Bergh numbers (possible formats are "VdB31" or "VdB 31")
+	if (objw.mid(0, 3) == "VDB")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("VDB%1").arg(n->VdB_nb) == objw || QString("VDB %1").arg(n->VdB_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -949,6 +1032,26 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("SH 2-%1").arg(n->Sh2_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by Van den Bergh objects number (possible formats are "VdB31" or "VdB 31")
+	if (objw.size()>=1 && objw[0]=='V')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->VdB_nb==0) continue;
+			QString constw = QString("VDB%1").arg(n->VdB_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("VDB %1").arg(n->VdB_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
@@ -1109,6 +1212,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
+	// Search by Van den Bergh objects number (possible formats are "VdB31" or "VdB 31")
+	if (objw.size()>=1 && objw[0]=='V')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->VdB_nb==0) continue;
+			QString constw = QString("VDB%1").arg(n->VdB_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("VDB %1").arg(n->VdB_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
 	QString dson;
 	bool find;
 	// Search by common names
@@ -1182,32 +1305,39 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 				}
 			}
 			break;
-		case 10: // Messier Catalogue?
+		case 100: // Messier Catalogue?
 			foreach(const NebulaP& n, nebArray)
 			{
 				if (n->M_nb>0)
 					result << QString("M%1").arg(n->M_nb);
 			}
 			break;
-		case 11: // Caldwell Catalogue?
+		case 101: // Caldwell Catalogue?
 			foreach(const NebulaP& n, nebArray)
 			{
 				if (n->C_nb>0)
 					result << QString("C%1").arg(n->C_nb);
 			}
 			break;
-		case 12: // Barnard Catalogue?
+		case 102: // Barnard Catalogue?
 			foreach(const NebulaP& n, nebArray)
 			{
 				if (n->B_nb>0)
 					result << QString("B %1").arg(n->B_nb);
 			}
 			break;
-		case 13: // Sharpless Catalogue?
+		case 103: // Sharpless Catalogue?
 			foreach(const NebulaP& n, nebArray)
 			{
 				if (n->Sh2_nb>0)
 					result << QString("Sh 2-%1").arg(n->Sh2_nb);
+			}
+			break;
+		case 104: // Van den Bergh Catalogue
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->VdB_nb>0)
+					result << QString("VdB %1").arg(n->VdB_nb);
 			}
 			break;
 		default:
