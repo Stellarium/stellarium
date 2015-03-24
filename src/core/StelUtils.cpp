@@ -739,7 +739,7 @@ QString julianDayToISO8601String(const double jd)
 }
 
 // Format the date per the fmt.
-QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt)
+QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt)
 {
 	/* we have to handle the year zero, and the years before qdatetime can represent. */
 	const QLatin1Char quote('\'');

@@ -189,8 +189,8 @@ bool StelSkyItem::event(QEvent * e)
 			setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
 		return true;
-	}
 		break;
+	}		
 
 	case QEvent::Gesture:
 		setAcceptedMouseButtons(0);
