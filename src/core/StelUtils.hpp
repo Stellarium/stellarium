@@ -233,7 +233,7 @@ namespace StelUtils
 	//! (see QDateTime::toString()). Uses the @b system locale, not
 	//! the one set in Stellarium.
 	//! @return QString representing the formatted date
-	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt);
+	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt);
 
 	//! Format the date and day-of-week per the @b system locale's
 	//! QLocale::ShortFormat.

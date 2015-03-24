@@ -79,7 +79,7 @@ public:
 	}
 	QString getDesignation(void) const;
 	void update(double deltaTime);
-	static float showLabels;
+	static bool showLabels;
 
 	//! Get current activity status of MS
 	//! @return 0:inactive 1:activeRealData 2:activeGenericData
