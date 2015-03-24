@@ -464,7 +464,6 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QString shortname;
 	QString texfile;
 	unsigned int x1, y1, x2, y2, x3, y3, hp1, hp2, hp3;
-	QString tmpstr;
 
 	currentLineNumber = 0;	// line in file
 	readOk = 0;		// count of records processed OK

@@ -27,7 +27,7 @@
 #include "StelUtils.hpp"
 
 StelTextureSP MeteorShower::radiantTexture;
-float MeteorShower::showLabels = true;
+bool MeteorShower::showLabels = true;
 bool MeteorShower::radiantMarkerEnabled = true;
 bool MeteorShower::showActiveRadiantsOnly = true;
 
