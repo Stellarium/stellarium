@@ -92,6 +92,7 @@ private:
 		NebUnknown=8,//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 		NebHII=9,    //!< HII Region
 		NebRn=10,    //!< Reflection nebula
+		NebHa=11     //!< H-α emission region
 	};
 
 	//! @enum HIIFormType HII region form types
@@ -118,6 +119,15 @@ private:
 		Brightest=3
 	};
 
+	//! @enum HaBrightnessType H-α emission region brightness types
+	enum HaBrightnessType
+	{
+		HaFaint=1,
+		HaMedium=2,
+		HaBright=3,
+		HaVeryBright=4
+	};
+
 	//! Translate nebula name using the passed translator
 	void translateName(const StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 
@@ -126,6 +136,7 @@ private:
 	bool readBarnard(QString record);
 	bool readSharpless(QString record);
 	bool readVandenBergh(QString record);
+	bool readRCW(QString record);
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
@@ -137,6 +148,8 @@ private:
 	QString getHIIStructureTypeString() const;
 	//! Get the printable HII region brightness type.
 	QString getHIIBrightnessTypeString() const;
+	//! Get the printable H-α emission region brightness type.
+	QString getHaBrightnessTypeString() const;
 
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
@@ -145,6 +158,7 @@ private:
 	unsigned int B_nb;              // Barnard Catalog number (Dark Nebulae)
 	unsigned int Sh2_nb;            // Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
 	unsigned int VdB_nb;            // Van den Bergh Catalog number (Catalogue of Reflection Nebulae (Van den Bergh, 1966))
+	unsigned int RCW_nb;            // RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here.
@@ -156,6 +170,7 @@ private:
 	HIIFormType formType;
 	HIIStructureType structureType;
 	HIIBrightnessType brightnessType;
+	HaBrightnessType rcwBrightnessType;
 
 	SphericalRegionP pointRegion;
 
