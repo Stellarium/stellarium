@@ -60,6 +60,8 @@ Nebula::Nebula()
 	, Sh2_nb(0)
 	, VdB_nb(0)
 	, RCW_nb(0)
+	, LDN_nb(0)
+	, LBN_nb(0)
 	, mag(99.)
 	, nType()
 	, formType()
@@ -69,6 +71,7 @@ Nebula::Nebula()
 {
 	nameI18 = "";
 	angularSize = -1;
+	brightnessClass = -1;
 }
 
 Nebula::~Nebula()
@@ -104,6 +107,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("VdB %1").arg(VdB_nb);
 		if ((RCW_nb > 0) && (RCW_nb <= 182))
 			catIds << QString("RCW %1").arg(RCW_nb);
+		if ((LDN_nb > 0) && (LDN_nb <= 1802))
+			catIds << QString("LDN %1").arg(LDN_nb);
+		if ((LBN_nb > 0) && (LBN_nb <= 1125))
+			catIds << QString("LBN %1").arg(LBN_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
@@ -155,9 +162,14 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		if (nType==NebHII)
 		{
-			oss << qc_("Form: %1","HII Region").arg(getHIIFormTypeString()) << "<br>";
-			oss << qc_("Structure: %1","HII Region").arg(getHIIStructureTypeString()) << "<br>";
-			oss << q_("Brightness: %1").arg(getHIIBrightnessTypeString()) << "<br>";
+			if (LBN_nb!=0)
+				oss << q_("Brightness: %1").arg(brightnessClass) << "<br>";
+			else
+			{
+				oss << qc_("Form: %1","HII Region").arg(getHIIFormTypeString()) << "<br>";
+				oss << qc_("Structure: %1","HII Region").arg(getHIIStructureTypeString()) << "<br>";
+				oss << q_("Brightness: %1").arg(getHIIBrightnessTypeString()) << "<br>";
+			}
 		}
 		if (nType==NebHa)
 		{
@@ -341,6 +353,10 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("VdB %1").arg(VdB_nb);
 		else if (RCW_nb > 0)
 			str = QString("RCW %1").arg(RCW_nb);
+		else if (LDN_nb > 0)
+			str = QString("LDN %1").arg(LDN_nb);
+		else if (LBN_nb > 0)
+			str = QString("LBN %1").arg(LBN_nb);
 		else if (NGC_nb > 0)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
@@ -614,6 +630,64 @@ bool Nebula::readRCW(QString record)
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 
 	nType=NebHa;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+
+	return true;
+}
+
+bool Nebula::readLDN(QString record)
+{
+	QStringList list=record.split("\t", QString::KeepEmptyParts);
+
+	float radeg=list.at(0).toFloat();
+	float dedeg=list.at(1).toFloat();
+
+	LDN_nb=list.at(2).toInt();
+
+	// Area in square degrees
+	angularSize = list.at(3).toFloat();
+	if (angularSize<0)
+		angularSize=0;
+
+	mag = list.at(4).toInt();
+
+	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
+	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
+
+	// Calc the Cartesian coord with RA and DE
+	StelUtils::spheToRect(RaRad,DecRad,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+
+	nType=NebDn;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+
+	return true;
+}
+
+bool Nebula::readLBN(QString record)
+{
+	QStringList list=record.split("\t", QString::KeepEmptyParts);
+
+	float radeg=list.at(0).toFloat();
+	float dedeg=list.at(1).toFloat();
+
+	LBN_nb=list.at(2).toInt();
+
+	// Area in square degrees
+	angularSize = list.at(3).toFloat()/60.f;
+	if (angularSize<0)
+		angularSize=0;
+
+	brightnessClass = list.at(4).toInt();
+
+	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
+	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
+
+	// Calc the Cartesian coord with RA and DE
+	StelUtils::spheToRect(RaRad,DecRad,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+
+	nType=NebHII;
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 
 	return true;
