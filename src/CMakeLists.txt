@@ -362,10 +362,7 @@ ENDIF()
 ################################ No GUI plugin compilation ##################################
 #############################################################################################
 IF (GUI_MODE STREQUAL "None")
-	SET(stellarium_gui_SRCS
-		noGui/StelNoGui.hpp
-		noGui/StelNoGui.cpp)
-	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS})
+    ADD_DEFINITIONS(-DNO_GUI)
 ENDIF()
 
 
