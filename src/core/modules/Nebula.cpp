@@ -59,11 +59,13 @@ Nebula::Nebula()
 	, B_nb(0)
 	, Sh2_nb(0)
 	, VdB_nb(0)
+	, RCW_nb(0)
 	, mag(99.)
 	, nType()
 	, formType()
 	, structureType()
 	, brightnessType()
+	, rcwBrightnessType()
 {
 	nameI18 = "";
 	angularSize = -1;
@@ -100,6 +102,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("Sh 2-%1").arg(Sh2_nb);
 		if ((VdB_nb > 0) && (VdB_nb <= 158))
 			catIds << QString("VdB %1").arg(VdB_nb);
+		if ((RCW_nb > 0) && (RCW_nb <= 182))
+			catIds << QString("RCW %1").arg(RCW_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
@@ -147,11 +151,18 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
 		}
 	}
-	if (flags&Extra && nType==NebHII)
+	if (flags&Extra)
 	{
-		oss << qc_("Form: %1","HII Region").arg(getHIIFormTypeString()) << "<br>";
-		oss << qc_("Structure: %1","HII Region").arg(getHIIStructureTypeString()) << "<br>";
-		oss << q_("Brightness: %1").arg(getHIIBrightnessTypeString()) << "<br>";
+		if (nType==NebHII)
+		{
+			oss << qc_("Form: %1","HII Region").arg(getHIIFormTypeString()) << "<br>";
+			oss << qc_("Structure: %1","HII Region").arg(getHIIStructureTypeString()) << "<br>";
+			oss << q_("Brightness: %1").arg(getHIIBrightnessTypeString()) << "<br>";
+		}
+		if (nType==NebHa)
+		{
+			oss << q_("Brightness: %1").arg(getHaBrightnessTypeString()) << "<br>";
+		}
 	}
 	oss << getPositionInfoString(core, flags);
 
@@ -223,7 +234,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn || nType==NebHII)
+	if (nType==NebDn || nType==NebHII || nType==NebHa)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
@@ -291,7 +302,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn || nType==NebHII)
+	if (nType==NebDn || nType==NebHII || nType==NebHa)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
@@ -328,6 +339,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("Sh 2-%1").arg(Sh2_nb);
 		else if (VdB_nb > 0)
 			str = QString("VdB %1").arg(VdB_nb);
+		else if (RCW_nb > 0)
+			str = QString("RCW %1").arg(RCW_nb);
 		else if (NGC_nb > 0)
 			str = QString("NGC %1").arg(NGC_nb);
 		else if (IC_nb > 0)
@@ -574,6 +587,38 @@ bool Nebula::readVandenBergh(QString record)
 	return true;
 }
 
+bool Nebula::readRCW(QString record)
+{
+	QStringList list=record.split("\t", QString::KeepEmptyParts);
+
+	float radeg=list.at(0).toFloat();
+	float dedeg=list.at(1).toFloat();
+
+	RCW_nb=list.at(2).toInt();
+	mag = 99.;
+
+	// Calc the angular size in degrees
+	float size=list.at(3).toFloat();
+
+	angularSize = size/60.0f;
+	if (angularSize<0)
+		angularSize=0;
+
+	rcwBrightnessType = (Nebula::HaBrightnessType)list.at(5).toInt();
+
+	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
+	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
+
+	// Calc the Cartesian coord with RA and DE
+	StelUtils::spheToRect(RaRad,DecRad,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+
+	nType=NebHa;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+
+	return true;
+}
+
 QString Nebula::getTypeString(void) const
 {
 	QString wsType;
@@ -608,10 +653,13 @@ QString Nebula::getTypeString(void) const
 			wsType = q_("Unknown");
 			break;
 		case NebHII:
-			wsType = q_("HII Region");
+			wsType = q_("HII region");
 			break;
 		case NebRn:
 			wsType = q_("Reflection nebula");
+			break;
+		case NebHa:
+			wsType = q_("H-α emission region");
 			break;
 		default:
 			wsType = q_("Undocumented type");
@@ -678,6 +726,31 @@ QString Nebula::getHIIBrightnessTypeString() const
 			break;
 		case Brightest:
 			wsType = qc_("brightest", "HII region brightness");
+			break;
+		default:
+			wsType = q_("undocumented brightness");
+			break;
+	}
+	return wsType;
+}
+
+QString Nebula::getHaBrightnessTypeString() const
+{
+	QString wsType;
+
+	switch(rcwBrightnessType)
+	{
+		case HaVeryBright:
+			wsType = qc_("very bright", "H-α emission region brightness");
+			break;
+		case HaBright:
+			wsType = qc_("bright", "H-α emission region brightness");
+			break;
+		case HaMedium:
+			wsType = qc_("medium", "H-α emission region brightness");
+			break;
+		case HaFaint:
+			wsType = qc_("faint", "H-α emission region brightness");
 			break;
 		default:
 			wsType = q_("undocumented brightness");
