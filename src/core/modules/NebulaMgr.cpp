@@ -1051,7 +1051,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	QString objw = name.toUpper();
 
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	if (objw.mid(0, 3) == "NGC")
+	if (objw.startsWith("NGC"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1069,7 +1069,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by IC numbers (possible formats are "IC466" or "IC 466")
-	if (objw.mid(0, 2) == "IC")
+	if (objw.startsWith("IC"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1079,7 +1079,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
-	if (objw.mid(0, 1) == "M")
+	if (objw.startsWith("M"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1089,7 +1089,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Caldwell numbers (possible formats are "C31" or "C 31")
-	if (objw.mid(0, 1) == "C")
+	if (objw.startsWith("C"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1099,7 +1099,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Barnard numbers (possible formats are "B31" or "B 31")
-	if (objw.mid(0, 1) == "B")
+	if (objw.startsWith("B"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1109,7 +1109,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.mid(0, 2) == "SH")
+	if (objw.startsWith("SH"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1119,7 +1119,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Van den Bergh numbers (possible formats are "VdB31" or "VdB 31")
-	if (objw.mid(0, 3) == "VDB")
+	if (objw.startsWith("VDB"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
