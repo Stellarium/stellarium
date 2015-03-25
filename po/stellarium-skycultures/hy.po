@@ -7,38 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-03 10:59+0600\n"
-"PO-Revision-Date: 2014-11-29 14:24+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2015-03-17 21:57+0600\n"
+"PO-Revision-Date: 2015-02-25 18:52+0000\n"
+"Last-Translator: Serj Safarian <serjsafarian@gmail.com>\n"
 "Language-Team: Armenian <hy@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-04 06:20+0000\n"
-"X-Generator: Launchpad (build 17331)\n"
+"X-Launchpad-Export-Date: 2015-03-18 05:34+0000\n"
+"X-Generator: Launchpad (build 17403)\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-
-#: skycultures/chinese/constellation_names.eng.fab:80
-msgid "Woman's Bed"
-msgstr "Կանացի անկողին"
-
-#: skycultures/chinese/constellation_names.eng.fab:81
-msgid "Western Door"
-msgstr "Արեւմտյան դուռ"
-
-#: skycultures/inuit/constellation_names.eng.fab:6
-msgid "Caribou"
-msgstr "Հյուսիսային եղջերու"
-
-#: skycultures/western/constellation_names.eng.fab:41
-#: skycultures/western_rey/constellation_names.eng.fab:43
-msgid "Hercules"
-msgstr "Վահագն"
-
-#: skycultures/western/constellation_names.eng.fab:42
-#: skycultures/western_rey/constellation_names.eng.fab:162
-msgid "Horologium"
-msgstr "Ժամացույց"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -310,7 +288,7 @@ msgstr ""
 #. TRANSLATORS: Moon of Pluto (III)
 #: skycultures/translations.fab:77
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "Հիդրա (լուսին)"
 
 #: skycultures/translations.fab:78
 msgid "Solar System Observer"
@@ -507,8 +485,8 @@ msgid "Beehive cluster"
 msgstr ""
 
 #: nebulae/default/ngc2000names.dat:224
-msgid "Black-eye galaxy"
-msgstr "Սեւ աչք գալակտիկա"
+msgid "Black Eye Galaxy"
+msgstr ""
 
 #: nebulae/default/ngc2000names.dat:225
 msgid "Blinking planetary"
@@ -799,7 +777,7 @@ msgstr ""
 
 #: nebulae/default/ngc2000names.dat:315
 msgid "Triangulum galaxy"
-msgstr ""
+msgstr "Եռանկյունու գալակտիկա"
 
 #: nebulae/default/ngc2000names.dat:316
 msgid "Trifid nebula"
@@ -1199,6 +1177,10 @@ msgstr ""
 
 #: nebulae/default/ngc2000names.dat:428
 msgid "Deer Lick Group"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:429
+msgid "Spider nebula"
 msgstr ""
 
 #: skycultures/arabic/constellation_names.eng.fab:1
@@ -3447,6 +3429,14 @@ msgstr "Թմբկափայտ"
 msgid "Bond"
 msgstr "Կապանքներ"
 
+#: skycultures/chinese/constellation_names.eng.fab:80
+msgid "Woman's Bed"
+msgstr "Կանացի անկողին"
+
+#: skycultures/chinese/constellation_names.eng.fab:81
+msgid "Western Door"
+msgstr "Արեւմտյան դուռ"
+
 #: skycultures/chinese/constellation_names.eng.fab:82
 msgid "Eastern Door"
 msgstr "Արեւելյան դուռ"
@@ -3792,6 +3782,10 @@ msgstr "Անրակներ"
 msgid "Lamp Stand"
 msgstr "Ձողաջահ"
 
+#: skycultures/inuit/constellation_names.eng.fab:6
+msgid "Caribou"
+msgstr "Հյուսիսային եղջերու"
+
 #: skycultures/inuit/constellation_names.eng.fab:7
 msgid "Two in Front"
 msgstr "Երկուսը միմյանց դիմաց"
@@ -4099,6 +4093,41 @@ msgstr ""
 
 #: skycultures/indian/star_names.fab:21
 msgid "Auggashta"
+msgstr ""
+
+#. TRANSLATORS: Native name of the Sun in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:2
+msgid "Surya Deva"
+msgstr ""
+
+#. TRANSLATORS: Native name of the Moon in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:4
+msgid "Chandra"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mercury in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:6
+msgid "Budha"
+msgstr ""
+
+#. TRANSLATORS: Native name of Venus in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:8
+msgid "Shukr"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mars in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:10
+msgid "Mangala"
+msgstr ""
+
+#. TRANSLATORS: Native name of Jupiter in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:12
+msgid "Guru"
+msgstr ""
+
+#. TRANSLATORS: Native name of Saturn in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:14
+msgid "Shani"
 msgstr ""
 
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:5
@@ -7562,6 +7591,16 @@ msgstr "Մեծ Արջ"
 msgid "Grus"
 msgstr "Կռունկ"
 
+#: skycultures/western/constellation_names.eng.fab:41
+#: skycultures/western_rey/constellation_names.eng.fab:43
+msgid "Hercules"
+msgstr "Վահագն"
+
+#: skycultures/western/constellation_names.eng.fab:42
+#: skycultures/western_rey/constellation_names.eng.fab:162
+msgid "Horologium"
+msgstr "Ժամացույց"
+
 #: skycultures/western/constellation_names.eng.fab:43
 #: skycultures/western_rey/constellation_names.eng.fab:82
 msgid "Hydra"
@@ -7772,22 +7811,22 @@ msgstr "Եռանկյունի"
 #: skycultures/western/constellation_names.eng.fab:85
 #: skycultures/western_rey/constellation_names.eng.fab:178
 msgid "Triangulum Australe"
-msgstr ""
+msgstr "Հարավային Եռանկյունի"
 
 #: skycultures/western/constellation_names.eng.fab:86
 #: skycultures/western_rey/constellation_names.eng.fab:128
 msgid "Aquarius"
-msgstr ""
+msgstr "Ջրհոս"
 
 #: skycultures/western/constellation_names.eng.fab:87
 #: skycultures/western_rey/constellation_names.eng.fab:88
 msgid "Virgo"
-msgstr ""
+msgstr "Կույս"
 
 #: skycultures/western/constellation_names.eng.fab:88
 #: skycultures/western_rey/constellation_names.eng.fab:144
 msgid "Vela"
-msgstr ""
+msgstr "Առագաստ"
 
 #: skycultures/western/star_names.fab:4
 msgid "Deneb Kaitos Shemali"
@@ -8511,3 +8550,6 @@ msgstr ""
 
 #~ msgid "Bear Paw galaxy"
 #~ msgstr "Արջի թաթ գալակտիկա"
+
+#~ msgid "Black-eye galaxy"
+#~ msgstr "Սեւ աչք գալակտիկա"

@@ -22,8 +22,6 @@
 
 #include "StelObject.hpp"
 
-#include <QtPlugin>
-
 class QGraphicsWidget;
 class QAction;
 
@@ -55,19 +53,5 @@ public:
 	//! This can then be used to optimize the rendering to increase reactivity.
 	virtual bool isCurrentlyUsed() const =0;
 };
-
-//! @class StelGuiPluginInterface
-//! Define the interface to implement when creating a GUI plugin.
-//! The interface is used by the <a href="http://doc.trolltech.com/4.5/qpluginloader.html">QPluginLoader</a> to load Stellarium plugins dynamically.
-class StelGuiPluginInterface
-{
-public:
-	virtual ~StelGuiPluginInterface() {}
-
-	//! Get the instance of StelGuiBase implmenting the GUI.
-	virtual class StelGuiBase* getStelGuiBase() const = 0;
-};
-Q_DECLARE_INTERFACE(StelGuiPluginInterface, "stellarium.StelGuiPluginInterface/1.0")
-
 
 #endif // _STELGUIBASE_HPP_
