@@ -24,7 +24,7 @@
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelGuiBase.hpp"
+#include "StelGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
@@ -189,8 +189,8 @@ bool StelSkyItem::event(QEvent * e)
 			setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
 		return true;
-	}
 		break;
+	}		
 
 	case QEvent::Gesture:
 		setAcceptedMouseButtons(0);
@@ -417,17 +417,7 @@ StelMainView::~StelMainView()
 
 void StelMainView::init(QSettings* conf)
 {
-	// Look for a static GUI plugins.
-	foreach (QObject *plugin, QPluginLoader::staticInstances())
-	{
-		StelGuiPluginInterface* pluginInterface = qobject_cast<StelGuiPluginInterface*>(plugin);
-		if (pluginInterface)
-		{
-			gui = pluginInterface->getStelGuiBase();
-		}
-		break;
-	}
-	Q_ASSERT(gui);
+	gui = new StelGui();
 
 #if STEL_USE_NEW_OPENGL_WIDGETS
 	//glWidget->initializeGL(); // protected...
@@ -480,12 +470,13 @@ void StelMainView::init(QSettings* conf)
 
 	if (fullscreen)
 	{
+		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
+		move(screenGeom.x()+1, screenGeom.y()+1);
 		// The fullscreen window appears on screen where is the majority of
-		// the normal window. So we first resize (shrink) the normal window
-		// to screen area.
+		// the normal window. Therefore we crop the normal window to the
+		// screen area to ensure that the majority is not on another screen.
+		setGeometry(geometry() & screenGeom);
 		setFullScreen(true);
-		move(screenGeom.x(), screenGeom.y());
-		resize(screenGeom.width(), screenGeom.height());
 	}
 	else
 	{
@@ -522,6 +513,10 @@ void StelMainView::init(QSettings* conf)
 	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const
 #endif
 {
+#ifdef Q_OS_MAC
+	Q_UNUSED(conf);
+#endif
+
 	QOpenGLContext* context=glWidget->context()->contextHandle();
 	QSurfaceFormat format=context->format();
 
@@ -543,8 +538,7 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "Driver version string:" << glDriver;
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-	qDebug() << "GL renderer is" << glRenderer;
-	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
+	qDebug() << "GL renderer is" << glRenderer;	
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
 	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting a #version line), but in case of using ANGLE we need hardware
@@ -554,6 +548,7 @@ void StelMainView::init(QSettings* conf)
 	// This test is apparently not applicable on MacOS X due to its behaving differently from all other known OSes.
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
 #ifndef Q_OS_MAC
+	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
 	if ( openGLerror ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!

@@ -193,8 +193,8 @@ QVariantMap Satellite::getMap(void)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
-		if (!c.modulation.isEmpty() && c.modulation != "") commMap["modulation"] = c.modulation;
-		if (!c.description.isEmpty() && c.description != "") commMap["description"] = c.description;
+		if (!c.modulation.isEmpty()) commMap["modulation"] = c.modulation;
+		if (!c.description.isEmpty()) commMap["description"] = c.description;
 		commList << commMap;
 	}
 	map["comms"] = commList;

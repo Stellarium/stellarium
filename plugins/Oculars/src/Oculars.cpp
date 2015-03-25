@@ -110,6 +110,7 @@ Oculars::Oculars():
 	flagEclipticLine(false),
 	flagEclipticJ2000Grid(false),
 	flagMeridianLine(false),
+	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
 	flagAdaptation(false),
@@ -1445,7 +1446,7 @@ void Oculars::paintCCDBounds()
 					double cx, cy;
 					QString cxt, cyt;
 					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
-					bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+					bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 					if (withDecimalDegree)
 					{
 						cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
@@ -1555,8 +1556,8 @@ void Oculars::paintText(const StelCore* core)
 	if(selectedCCDIndex != -1) {
 		ccd = ccds[selectedCCDIndex];
 	}
-	Ocular *ocular = oculars[selectedOcularIndex];
-	Telescope *telescope = telescopes[selectedTelescopeIndex];
+	Ocular *ocular = selectedOcularIndex >=0 ? oculars[selectedOcularIndex] : NULL;
+	Telescope *telescope = selectedTelescopeIndex >=0 ? telescopes[selectedTelescopeIndex] : NULL;
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	// set up the color and the GL state
@@ -1782,6 +1783,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEclipticLine(flagEclipticLine);
 	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
+	gridManager->setFlagLongitudeLine(flagLongitudeLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
@@ -1825,6 +1827,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
+			flagLongitudeLine = gridManager->getFlagLongitudeLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
 
@@ -1865,6 +1868,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
+	gridManager->setFlagLongitudeLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
