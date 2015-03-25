@@ -76,16 +76,7 @@
 #include <QDir>
 #include <QCoreApplication>
 #include <QScreen>
-
-Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
-
-#ifdef USE_STATIC_PLUGIN_VIRGO
-Q_IMPORT_PLUGIN(VirGOStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SVMT
-Q_IMPORT_PLUGIN(SVMTStelPluginInterface)
-#endif
+#include <QDateTime>
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
@@ -181,18 +172,16 @@ Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
-QTime* StelApp::qtime = NULL;
+qint64 StelApp::startMSecs = 0;
 
 void StelApp::initStatic()
 {
-	StelApp::qtime = new QTime();
-	StelApp::qtime->start();
+	StelApp::startMSecs = QDateTime::currentMSecsSinceEpoch();
 }
 
 void StelApp::deinitStatic()
 {
-	delete StelApp::qtime;
-	StelApp::qtime = NULL;
+	StelApp::startMSecs = 0;
 }
 
 /*************************************************************************
@@ -224,6 +213,7 @@ StelApp::StelApp(QObject* parent)
 	, baseFontSize(13)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
+	, flagShowDecimalDegrees(false)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -490,6 +480,8 @@ void StelApp::init(QSettings* conf)
 	// Init actions.
 	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
+	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
+	
 	initialized = true;
 }
 
@@ -743,6 +735,12 @@ void StelApp::setVisionModeNight(bool b)
 	}
 }
 
+
+void StelApp::setFlagShowDecimalDegrees(bool b)
+{
+	flagShowDecimalDegrees = b;
+}
+
 // Update translations and font for sky everywhere in the program
 void StelApp::updateI18n()
 {
@@ -761,7 +759,7 @@ void StelApp::updateSkyCulture()
 // Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime()
 {
-	return (double)(StelApp::qtime->elapsed())/1000.;
+	return (double)(QDateTime::currentMSecsSinceEpoch() - StelApp::startMSecs)/1000.;
 }
 
 

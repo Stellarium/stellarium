@@ -95,10 +95,24 @@ class Translations
 		N_("Irregular galaxies");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Clusters associated with nebulosity");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("HII regions");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Reflection nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("H-α emission regions");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Caldwell Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Barnard Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Sharpless Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Van den Bergh Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Rodgers, Cambell, and Whiteoak");
 		
 		// =====================================================================
 		// Constellation cultures

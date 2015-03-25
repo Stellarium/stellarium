@@ -80,7 +80,7 @@ private slots:
 	
 	//! Update the position of the button bars in the main window
 	void updateBarsPos();
-	
+
 private:
 	class StelBarsPath* buttonBarPath;
 	QTimeLine* animLeftBarTimeLine;
