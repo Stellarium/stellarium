@@ -98,7 +98,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		QStringList catIds;
 		if ((M_nb > 0) && (M_nb < 111))
-			catIds << QString("M %1").arg(M_nb);
+			catIds << QString("M %1").arg(M_nb);		
+		if (NGC_nb > 0)
+			catIds << QString("NGC %1").arg(NGC_nb);
+		if (IC_nb > 0)
+			catIds << QString("IC %1").arg(IC_nb);
+		if ((C_nb > 0) && (C_nb < 110))
+			catIds << QString("C %1").arg(C_nb);
 		if ((B_nb > 0) && (B_nb <= 370))
 			catIds << QString("B %1").arg(B_nb);
 		if ((Sh2_nb > 0) && (Sh2_nb <= 313))
@@ -111,12 +117,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("LDN %1").arg(LDN_nb);
 		if ((LBN_nb > 0) && (LBN_nb <= 1125))
 			catIds << QString("LBN %1").arg(LBN_nb);
-		if (NGC_nb > 0)
-			catIds << QString("NGC %1").arg(NGC_nb);
-		if (IC_nb > 0)
-			catIds << QString("IC %1").arg(IC_nb);
-		if ((C_nb > 0) && (C_nb < 110))
-			catIds << QString("C %1").arg(C_nb);
 		oss << catIds.join(" - ");
 
 		if (nameI18!="" && flags&Name)
@@ -144,7 +144,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 		}
 	}
-	if (mag < 50 && flags&Extra)
+	if (nType != NebDn && mag < 50 && flags&Extra)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
@@ -202,8 +202,11 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
 	// make very easy to select if labeled
 	float lim=getVMagnitude(core);
-	if (nType==NebDn || nType==NebHII)
-		lim=15.0f - mag - 2.0f*angularSize;
+	if (nType==NebDn)
+		lim=15.0f - mag - 2.0f*angularSize; // Note that "mag" field is used for opacity in this catalog!
+	else if (nType==NebHII)
+		lim=10.0f - 2.0f*angularSize; // Unfortunately, in Sh catalog, we always have mag=99=unknown!
+
 	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
 	else
@@ -246,7 +249,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn || nType==NebHII || nType==NebHa)
+	if (nType==NebDn)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
@@ -255,6 +258,11 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		else
 			lim = 9.0f;
 	}
+	else if (nType==NebHII || nType==NebHa)
+	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
+		lim=9.0f;
+	}
+
 	if (lim>maxMagHints)
 		return;
 
@@ -281,6 +289,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			Nebula::texGlobularCluster->bind();
 			break;
 		case NebN:
+		case NebHII:
+		case NebRn:
 			Nebula::texDiffuseNebula->bind();
 			break;
 		case NebPn:
@@ -314,7 +324,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	if (getEnglishName().contains("Pleiades"))
 		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn || nType==NebHII || nType==NebHa)
+	if (nType==NebDn)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
@@ -323,6 +333,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		else
 			lim = 9.0f;
 	}
+	else if (nType==NebHII || nType==NebHa)
+		lim=9.0f;
 	if (lim>maxMagLabel)
 		return;
 
@@ -341,12 +353,17 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		str = getNameI18n();
 	else
 	{
+		// On screen label: one only, priority as given here. NGC should win over Sharpless. (GZ)
 		if (M_nb > 0)
 			str = QString("M %1").arg(M_nb);
 		else if (C_nb > 0)
 			str = QString("C %1").arg(C_nb);
+		else if (NGC_nb > 0)
+			str = QString("NGC %1").arg(NGC_nb);
+		else if (IC_nb > 0)
+			str = QString("IC %1").arg(IC_nb);
 		else if (B_nb > 0)
-			str = QString("B %1").arg(B_nb);
+			str = QString("B %1").arg(B_nb);		
 		else if (Sh2_nb > 0)
 			str = QString("Sh 2-%1").arg(Sh2_nb);
 		else if (VdB_nb > 0)
@@ -356,11 +373,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		else if (LDN_nb > 0)
 			str = QString("LDN %1").arg(LDN_nb);
 		else if (LBN_nb > 0)
-			str = QString("LBN %1").arg(LBN_nb);
-		else if (NGC_nb > 0)
-			str = QString("NGC %1").arg(NGC_nb);
-		else if (IC_nb > 0)
-			str = QString("IC %1").arg(IC_nb);		
+			str = QString("LBN %1").arg(LBN_nb);		
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
@@ -509,10 +522,7 @@ bool Nebula::readBarnard(QString record)
 
 	// Calc the angular size in degrees
 	float size=list.at(5).toFloat();
-
 	angularSize = size/60.0f;
-	if (angularSize<0)
-		angularSize=0;
 
 	// Barnard are dark nebulae only, so at least type is easy:
 	nType=NebDn;
@@ -533,15 +543,12 @@ bool Nebula::readBarnard(QString record)
 
 bool Nebula::readSharpless(QString record)
 {
-	float radeg;
-	float dedeg;
-
 	QStringList list=record.split("\t", QString::KeepEmptyParts);
 
 	//qDebug() << "RA:" << list.at(0) << " DE:" << list.at(1) << " Sh2:" << list.at(2) << " size:" << list.at(3) << " F:" << list.at(4) << " S:" << list.at(5) << " B:" << list.at(6);
 
-	radeg=list.at(0).toFloat();
-	dedeg=list.at(1).toFloat();
+	float radeg=list.at(0).toFloat();
+	float dedeg=list.at(1).toFloat();
 	Sh2_nb=list.at(2).toInt();
 
 	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
@@ -551,14 +558,11 @@ bool Nebula::readSharpless(QString record)
 	StelUtils::spheToRect(RaRad,DecRad,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 
-	mag=99;
+	mag=99.0f;
 
 	// Calc the angular size in degrees
 	int size=list.at(3).toFloat();
-
 	angularSize = size/60.0f;
-	if (angularSize<0)
-		angularSize=0;
 
 	formType = (Nebula::HIIFormType)list.at(4).toInt();
 	structureType = (Nebula::HIIStructureType)list.at(5).toInt();
@@ -572,23 +576,19 @@ bool Nebula::readSharpless(QString record)
 
 bool Nebula::readVandenBergh(QString record)
 {
-	float radeg;
-	float dedeg;
-
 	QStringList list=record.split("\t", QString::KeepEmptyParts);
 
 	VdB_nb=list.at(0).toInt();
 	mag = list.at(1).toFloat();
+	if (mag==0.0f)
+		mag=99.0f;
 
 	// Calc the angular size in degrees
 	float size=list.at(2).toFloat();
-
 	angularSize = size/60.0f;
-	if (angularSize<0)
-		angularSize=0;
 
-	radeg=list.at(3).toFloat();
-	dedeg=list.at(4).toFloat();
+	float radeg=list.at(3).toFloat();
+	float dedeg=list.at(4).toFloat();
 
 	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
 	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
