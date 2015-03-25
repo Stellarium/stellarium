@@ -42,20 +42,30 @@
 #define COMET_TAIL_SLICES 16 // segments around the perimeter
 #define COMET_TAIL_STACKS 16 // cuts along the rotational axis
 
+// These are to avoid having index arrays for each comet when all are equal.
+bool Comet::createTailIndices=true;
+bool Comet::createTailTextureCoords=true;
+StelTextureSP Comet::comaTexture;
+StelTextureSP Comet::tailTexture;
+QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
+QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.
+
 Comet::Comet(const QString& englishName,
-		 int flagLighting,
-		 double radius,
-		 double oblateness,
-		 Vec3f color,
-		 float albedo,
-		 const QString& atexMapName,
-		 posFuncType coordFunc,
-		 void* auserDataPtr,
-		 OsculatingFunctType *osculatingFunc,
-		 bool acloseOrbit,
-		 bool hidden,
-		 const QString& pTypeStr,
-		 float dustTailWidthFact, float dustTailLengthFact, float dustTailBrightnessFact)
+	     int flagLighting,
+	     double radius,
+	     double oblateness,
+	     Vec3f color,
+	     float albedo,
+	     const QString& atexMapName,
+	     posFuncType coordFunc,
+	     void* auserDataPtr,
+	     OsculatingFunctType *osculatingFunc,
+	     bool acloseOrbit,
+	     bool hidden,
+	     const QString& pTypeStr,
+	     float dustTailWidthFact,
+	     float dustTailLengthFact,
+	     float dustTailBrightnessFact)
 	: Planet (englishName,
 		  flagLighting,
 		  radius,
@@ -90,6 +100,7 @@ Comet::Comet(const QString& englishName,
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
+	tailFactors[0]=-1.0f; tailFactors[1]=-1.0f; // mark "invalid"
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
@@ -239,7 +250,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 
 
-	if (flags&Size)
+	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
 		// GZ: Add estimates for coma diameter and tail length.
 		// xgettext:no-c-format
@@ -546,8 +557,7 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	}
 	glDisable(GL_BLEND);
 
-	if (sPainter)
-		delete sPainter;
+	delete sPainter;
 	sPainter=NULL;
 }
 
@@ -576,8 +586,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 
 	glDisable(GL_BLEND);
 
-	if (sPainter)
-		delete sPainter;
+	delete sPainter;
 	sPainter=NULL;
 }
 
@@ -671,12 +680,3 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	createTailIndices=false;
 	createTailTextureCoords=false;
 }
-
-
-// These are to avoid having index arrays for each comet when all are equal.
-bool Comet::createTailIndices=true;
-bool Comet::createTailTextureCoords=true;
-StelTextureSP Comet::comaTexture;
-StelTextureSP Comet::tailTexture;
-QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
-QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.
