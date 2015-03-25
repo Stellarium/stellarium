@@ -117,7 +117,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	Vec3f pos;
 	Vec3f xy;
 
-	float shift = sPainter.getFontMetrics().width(sNorth)/2;
+	float shift = sPainter.getFontMetrics().width(sNorth)/2.;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
 		shift = 0;
 
@@ -294,11 +294,21 @@ void LandscapeMgr::update(double deltaTime)
 		landscape->setBrightness(1.f, 0.0f);
 	}
 	else
-	{   float lightscapeBrightness=0.0f;
+	{
+		float lightscapeBrightness=0.0f;
 		// light pollution layer is mixed in at -3...-8 degrees.
-		if (sunPos[2]<-0.14f) lightscapeBrightness=1.0f;
-		else if (sunPos[2]<-0.05f) lightscapeBrightness = 1.0f-(sunPos[2]+0.14)/(-0.05+0.14);
-		landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+		float sunAlt = sunPos[2];
+		if (sunAlt<-0.14f)
+			lightscapeBrightness=1.0f;
+		else
+		{
+			if (sunAlt<-0.05f)
+				lightscapeBrightness = 1.0f-(sunAlt+0.14)/(-0.05+0.14);
+		}
+		if (sunAlt<=0.f && !atmosphere->getFlagShow() && !getFlagLandscapeUseMinimalBrightness())
+			landscape->setBrightness(0.f, 0.f);
+		else
+			landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 	}
 }
 
@@ -551,39 +561,22 @@ bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
  *********************************************************************/
 QStringList LandscapeMgr::getAllLandscapeNames() const
 {
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	QStringList result;
-
-	// We just look over the map of names to IDs and extract the keys
-	foreach (QString i, nameToDirMap.keys())
-	{
-		result += i;
-	}
-	return result;
+	return getNameToDirMap().keys();
 }
 
 QStringList LandscapeMgr::getAllLandscapeIDs() const
 {
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
-	QStringList result;
-
-	// We just look over the map of names to IDs and extract the keys
-	foreach (QString i, nameToDirMap.values())
-	{
-		result += i;
-	}
-	return result;
+	return getNameToDirMap().values();
 }
 
 QStringList LandscapeMgr::getUserLandscapeIDs() const
 {
-	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	QStringList result;
-	foreach (QString id, nameToDirMap.values())
+	foreach (QString id, getNameToDirMap().values())
 	{
 		if(!packagedLandscapeIDs.contains(id))
 		{
-			result += id;
+			result.append(id);
 		}
 	}
 	return result;

@@ -288,7 +288,7 @@ QVariant CLIProcessor::argsGetOptionWithArg(const QStringList& args, QString sho
 		QString argStr;
 
 		// form -n=arg
-		if ((shortOpt!="" && args.at(i).left(shortOpt.length()+1)==shortOpt+"="))
+		if ((!shortOpt.isEmpty() && args.at(i).left(shortOpt.length()+1)==shortOpt+"="))
 		{
 			match=true;
 			argStr=args.at(i).right(args.at(i).length() - shortOpt.length() - 1);
@@ -300,7 +300,7 @@ QVariant CLIProcessor::argsGetOptionWithArg(const QStringList& args, QString sho
 			argStr=args.at(i).right(args.at(i).length() - longOpt.length() - 1);
 		}
 		// forms -n arg and --number arg
-		else if ((shortOpt!="" && args.at(i)==shortOpt) || args.at(i)==longOpt)
+		else if ((!shortOpt.isEmpty() && args.at(i)==shortOpt) || args.at(i)==longOpt)
 		{
 			if (i+1>=lastOptIdx)
 			{

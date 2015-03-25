@@ -30,13 +30,14 @@ Meteor::Meteor(const StelCore* core, float v)
 	: m_distMultiplier(0.)
 	, m_segments(10)
 {
+	qsrand (QDateTime::currentMSecsSinceEpoch());
 	// determine meteor velocity
 	// abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
-	m_speed = 11+(float)rand()/((float)RAND_MAX+1)*(v-11);
+	m_speed = 11+(float)qrand()/((float)RAND_MAX+1)*(v-11);
 
 	// view matrix of sporadic meteors model
-	float alpha = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
-	float delta = M_PI_2 - (double)rand()/((double)RAND_MAX+1)*M_PI;
+	float alpha = (double)qrand()/((double)RAND_MAX+1)*2*M_PI;
+	float delta = M_PI_2 - (double)qrand()/((double)RAND_MAX+1)*M_PI;
 	m_viewMatrix = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
 
 	// building meteor model
@@ -65,8 +66,8 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	mm.obs.transfo4d(viewMatrix.transpose());
 
 	// select random trajectory using polar coordinates in XY plane, centered on observer
-	mm.xydistance = (double)rand() / ((double)RAND_MAX+1)*(VISIBLE_RADIUS);
-	float angle = (double)rand() / ((double)RAND_MAX+1)*2*M_PI;
+	mm.xydistance = (double)qrand() / ((double)RAND_MAX+1)*(VISIBLE_RADIUS);
+	float angle = (double)qrand() / ((double)RAND_MAX+1)*2*M_PI;
 
 	// set meteor start x,y
 	mm.position[0] = mm.posTrain[0] = mm.xydistance*cos(angle) + mm.obs[0];
@@ -102,8 +103,8 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	}
 
 	// determine intensity [-3; 4.5]
-	float Mag1 = (double)rand()/((double)RAND_MAX+1)*7.5f - 3;
-	float Mag2 = (double)rand()/((double)RAND_MAX+1)*7.5f - 3;
+	float Mag1 = (double)qrand()/((double)RAND_MAX+1)*7.5f - 3;
+	float Mag2 = (double)qrand()/((double)RAND_MAX+1)*7.5f - 3;
 	float Mag = (Mag1 + Mag2)/2.0f;
 
 	// compute RMag and CMag
@@ -123,7 +124,7 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 		mm.mag *= scale;
 	}
 
-	mm.firstBrightSegment = (double)rand()/((double)RAND_MAX+1)*segments;
+	mm.firstBrightSegment = (double)qrand()/((double)RAND_MAX+1)*segments;
 
 	// If everything is ok until here,
 	return true;  //the meteor is alive
@@ -162,7 +163,7 @@ Vec4f Meteor::getColorFromName(QString colorName) {
 
 QList<Meteor::colorPair> Meteor::getRandColor() {
 	QList<colorPair> colors;
-	float prob = (double)rand()/((double)RAND_MAX+1);
+	float prob = (double)qrand()/((double)RAND_MAX+1);
 	if (prob > 0.9) {
 		colors.push_back(Meteor::colorPair("white", 70));
 		colors.push_back(Meteor::colorPair("orangeYellow", 10));
@@ -188,7 +189,7 @@ void Meteor::buildColorArrays(const int segments,
 {
 	// building color arrays (line and prism)
 	int totalOfSegments = 0;
-	int currentSegment = 1+(double)rand()/((double)RAND_MAX+1)*(segments-1);
+	int currentSegment = 1+(double)qrand()/((double)RAND_MAX+1)*(segments-1);
 	for (int colorIndex=0; colorIndex<colors.size(); colorIndex++) {
 		colorPair currentColor = colors[colorIndex];
 
@@ -226,7 +227,7 @@ bool Meteor::updateMeteorModel(double deltaTime, double speed, MeteorModel &mm)
 	}
 
 	// *** would need time direction multiplier to allow reverse time replay
-	float dt = 820+(double)rand()/((double)RAND_MAX+1)*185; // range 820-1005
+	float dt = 820+(double)qrand()/((double)RAND_MAX+1)*185; // range 820-1005
 	mm.position[2] -= speed*deltaTime/dt;
 
 	// train doesn't extend beyond start of burn
@@ -361,7 +362,7 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const Meteor
 	for (int i=0; i<segments; i++) {
 		float mag = mm.mag * i/(3* (segments-1));
 		if (i > mm.firstBrightSegment) {
-			mag *= 12/5;
+			mag *= 12./5.;
 		}
 
 		double height = mm.posTrain[2] + i*(mm.position[2] - mm.posTrain[2])/(segments-1);

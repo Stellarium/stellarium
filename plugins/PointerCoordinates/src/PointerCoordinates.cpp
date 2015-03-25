@@ -119,8 +119,8 @@ void PointerCoordinates::draw(StelCore *core)
 
 	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 	Vec3d mousePosition;
-	float wh = prj->getViewportWidth()/2; // get half of width of the screen
-	float hh = prj->getViewportHeight()/2; // get half of height of the screen
+	float wh = prj->getViewportWidth()/2.; // get half of width of the screen
+	float hh = prj->getViewportHeight()/2.; // get half of height of the screen
 	float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
 	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
@@ -132,7 +132,7 @@ void PointerCoordinates::draw(StelCore *core)
 	   float dy = prj->getViewportPosY()+hh+1-my - win.v[1];
 	   prj->unProject(prj->getViewportPosX()+wh+mx+dx, prj->getViewportPosY()+hh+1-my+dy, mousePosition);
 	  }
-	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;

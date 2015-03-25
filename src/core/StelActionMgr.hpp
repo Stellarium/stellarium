@@ -40,8 +40,9 @@ public:
 		, target(NULL)
 		, property(NULL)
 	#ifndef USE_QUICKVIEW
-		, qAction(NULL) {}
+		, qAction(NULL)
 	#endif
+	{}
 
 	StelAction(const QString& actionId,
 	           const QString& groupId,

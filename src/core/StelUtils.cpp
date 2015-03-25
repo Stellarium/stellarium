@@ -739,7 +739,7 @@ QString julianDayToISO8601String(const double jd)
 }
 
 // Format the date per the fmt.
-QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt)
+QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt)
 {
 	/* we have to handle the year zero, and the years before qdatetime can represent. */
 	const QLatin1Char quote('\'');
@@ -1275,7 +1275,7 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
 
-	double y = year+((month-1)*30.5+day/31*30.5)/366;
+	double y = year+((month-1)*30.5+day/31.*30.5)/366;
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
@@ -1455,8 +1455,7 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-	double u = (yeardec-1800)/100;
+	double u = (getDecYear(year, month, day)-1800)/100;
 
 	if (-391 < year && year <= 948)
 		deltaT = (44.3*u +320.0)*u +1360.0;
@@ -1481,7 +1480,7 @@ double getDeltaTByStephensonHoulden(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double yeardec=getDecYear(year, month, day);
 
 	if (year <= 948)
 	{
@@ -1605,7 +1604,7 @@ double getDeltaTByChaprontMeeus(const double jDay)
 	//        deltaT= (((((((( 58353.42*u19 -232424.66)*u19 +372919.88)*u19 - 303191.19)*u19 + 124906.15)*u19 - 18756.33)*u19 - 2637.80)*u19 + 815.20)*u19 + 87.24)*u19 - 2.44;
 	else if (year <2000)
 	{
-		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+		double yeardec=getDecYear(year, month, day);
 		int pos=(year-1620)/2; // this is a deliberate integer division! 2->1, 3->1, 4->2, 5->2 etc.
 		deltaT= MeeusDeltaTTable[pos]+ (yeardec-(2*pos+1620))*0.5  *(MeeusDeltaTTable[pos+1]-MeeusDeltaTTable[pos]);
 		deltaT /= 10.0;
@@ -1844,13 +1843,64 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	return deltaT;
 }
 
+// Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+double getDeltaTByKhalidSultanaZaidi(const double jDay)
+{
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	double k, a0, a1, a2, a3, a4;
+	if (year>=1620 && year<=1672)
+	{
+		k = 3.670; a0 = 76.541; a1 = -253.532; a2 = 695.901; a3 = -1256.982; a4 = 627.152;
+	}
+	else if (year>=1673 && year<=1729)
+	{
+		k = 3.120; a0 = 10.872; a1 = -40.744; a2 = 236.890; a3 = -351.537; a4 = 36.612;
+	}
+	else if (year>=1730 && year<=1797)
+	{
+		k = 2.495; a0 = 13.480; a1 = 13.075; a2 = 8.635; a3 = -3.307; a4 = -128.294;
+	}
+	else if (year>=1798 && year<=1843)
+	{
+		k = 1.925; a0 = 12.584; a1 = 1.929; a2 = 60.896; a3 = -1432.216; a4 = 3129.071;
+	}
+	else if (year>=1844 && year<=1877)
+	{
+		k = 1.525; a0 = 6.364; a1 = 11.004; a2 = 407.776; a3 = -4168.394; a4 = 7561.686;
+	}
+	else if (year>=1878 && year<=1904)
+	{
+		k = 1.220; a0 = -5.058; a1 = -1.701; a2 = -46.403; a3 = -866.171; a4 = 5917.585;
+	}
+	else if (year>=1905 && year<=1945)
+	{
+		k = 0.880; a0 = 13.392; a1 = 128.592; a2 = -279.165; a3 = -1282.050; a4 = 4039.490;
+	}
+	else if (year>=1946 && year<=1989)
+	{
+		k = 0.455; a0 = 30.782; a1 = 34.348; a2 = 46.452; a3 = 1295.550; a4 = -3210.913;
+	}
+	else if (year>=1990 && year<=2013)
+	{
+		k = 0.115; a0 = 55.281; a1 = 91.248; a2 = 87.202; a3 = -3092.565; a4 = 8255.422;
+	}
+	else
+	{
+		k = 0.0; a0 = 0.0; a1 = 0.0; a2 = 0.0; a3 = 0.0; a4 = 0.0;
+	}
+
+	double u = k + (year - 2000)/100;
+
+	return (((a4*u + a3)*u + a2)*u + a1)*u + a0;
+}
+
 double getMoonSecularAcceleration(const double jDay, const double nd)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366.0;
-	double t = (yeardec-1955.5)/100.0;
+	double t = (getDecYear(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
 	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
@@ -1861,7 +1911,6 @@ double getDeltaTStandardError(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	//double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
 	double sigma = -1.;
 
 	if (-1000 <= year && year <= 1600)
@@ -1970,6 +2019,11 @@ float *ComputeCosSinRhoZone(const float dRho, const int segments, const float mi
 		cos_sin += 2;
 	}
 	return cos_sin_rho;
+}
+
+double getDecYear(const int year, const int month, const int day)
+{
+	return year+((month-1)*30.5+day/31.*30.5)/366;
 }
 
 //! Uncompress gzip or zlib compressed data.
