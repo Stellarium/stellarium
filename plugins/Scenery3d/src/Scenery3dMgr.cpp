@@ -771,7 +771,7 @@ void Scenery3dMgr::setCubemapSize(const uint val)
 		scenery3d->setCubemapSize(val);
 
 		//hardware may not support the value, get real value set
-		int realVal = scenery3d->getCubemapSize();
+		uint realVal = scenery3d->getCubemapSize();
 		if(realVal==val)
 			showMessage(N_("Cubemap size changed"));
 		else
@@ -794,7 +794,7 @@ void Scenery3dMgr::setShadowmapSize(const uint val)
 		scenery3d->setShadowmapSize(val);
 
 		//hardware may not support the value, get real value set
-		int realVal = scenery3d->getShadowmapSize();
+		uint realVal = scenery3d->getShadowmapSize();
 		if(realVal==val)
 			showMessage(N_("Shadowmap size changed"));
 		else
