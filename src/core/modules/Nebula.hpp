@@ -137,6 +137,8 @@ private:
 	bool readSharpless(QString record);
 	bool readVandenBergh(QString record);
 	bool readRCW(QString record);
+	bool readLDN(QString record);
+	bool readLBN(QString record);
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
@@ -159,6 +161,8 @@ private:
 	unsigned int Sh2_nb;            // Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
 	unsigned int VdB_nb;            // Van den Bergh Catalog number (Catalogue of Reflection Nebulae (Van den Bergh, 1966))
 	unsigned int RCW_nb;            // RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
+	unsigned int LDN_nb;            // LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
+	unsigned int LBN_nb;            // LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here.
@@ -171,6 +175,8 @@ private:
 	HIIStructureType structureType;
 	HIIBrightnessType brightnessType;
 	HaBrightnessType rcwBrightnessType;
+
+	int brightnessClass;
 
 	SphericalRegionP pointRegion;
 
