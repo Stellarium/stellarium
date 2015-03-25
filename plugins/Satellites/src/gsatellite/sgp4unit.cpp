@@ -1704,11 +1704,11 @@ bool sgp4
      )
 {
      double am   , axnl  , aynl , betal ,  cosim , cnod  ,
-         cos2u, coseo1, cosi , cosip ,  cosisq, cossu , cosu,
+	 cos2u, coseo1=0.0, cosi , cosip ,  cosisq, cossu , cosu,
          delm , delomg, em   , emsq  ,  ecose , el2   , eo1 ,
          ep   , esine , argpm, argpp ,  argpdf, pl,     mrt = 0.0,
          mvt  , rdotl , rl   , rvdot ,  rvdotl, sinim ,
-         sin2u, sineo1, sini , sinip ,  sinsu , sinu  ,
+	 sin2u, sineo1=0.0, sini , sinip ,  sinsu , sinu  ,
          snod , su    , t2   , t3    ,  t4    , tem5  , temp,
          temp1, temp2 , tempa, tempe ,  templ , u     , ux  ,
          uy   , uz    , vx   , vy    ,  vz    , inclm , mm  ,
