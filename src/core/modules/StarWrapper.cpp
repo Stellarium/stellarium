@@ -237,24 +237,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (vPeriod>0)
 			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
 
-		// FIXME: This calculations don't contains correction to Earth's rotation around the Sun.
-		// Details for Algol:
-		//	https://sourceforge.net/p/stellarium/discussion/278769/thread/05aae684/
-		//	http://calgary.rasc.ca/algol_minima.htm
 		if (vEpoch>0 && vPeriod>0)
 		{
-			/*
 			// Calculate next minimum or maximum light
 			double vsEpoch = 2400000+vEpoch;
-			double npDate = vsEpoch + ((::floor((core->getJDay()-vsEpoch)/vPeriod)+1.0)*vPeriod);
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJDay() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			if (ebsFlag)
 				oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
 			else
 				oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
 
-			*/
-		}		
+		}
 
 		if (vMm>0)
 		{

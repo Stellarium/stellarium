@@ -21,6 +21,7 @@
 
 #include "StelModule.hpp"
 #include "DummyDialog.hpp"
+#include "StelCore.hpp"
 
 #include <QObject>
 #include <QString>
@@ -81,6 +82,7 @@ private:
 	bool tuiObjInfo;
 	bool tuiGravityUi;
 	TuiNode* currentNode;
+	Vec3f color;
 
 	double getLatitude(void);
 	double getLongitude(void);
@@ -95,7 +97,7 @@ private:
 class TextUserInterfaceStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

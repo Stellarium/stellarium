@@ -1464,16 +1464,22 @@ double StelCore::getDeltaT(double jDay) const
 			// Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
 			DeltaT = StelUtils::getDeltaTByIslamSadiqQureshi(jDay);
+			dontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
+			break;
+		case KhalidSultanaZaidi:
+			// M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
+			ndot = -26.0; // n.dot = -26.0 "/cy/cy
+			DeltaT = StelUtils::getDeltaTByKhalidSultanaZaidi(jDay);
+			dontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			break;
 		case Custom:
 			// User defined coefficients for quadratic equation for DeltaT
 			ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
 			int year, month, day;
 			Vec3f coeff = getDeltaTCustomEquationCoefficients();
-			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
-			double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-			double u = (yeardec-getDeltaTCustomYear())/100;
-			DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
+			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);			
+			double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100;
+			DeltaT = coeff[0] + u*(coeff[1] + u*coeff[2]);
 			break;
 	}
 
@@ -1597,6 +1603,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			break;
 		case IslamSadiqQureshi:
 			description = q_("This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & Simons (2000), was published in article <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013.").arg("<a href='http://www.ias.ac.in/jaa/dec2008/JAA610.pdf'>2008</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			break;
+		case KhalidSultanaZaidi:
+			description = q_("This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1).").arg("<a href='http://dx.doi.org/10.1155/2014/480964'>2014</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
 			break;
 		case Custom:
 			description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
@@ -1737,6 +1746,11 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		case IslamSadiqQureshi:
 			start	= 1620;
 			finish	= 2007;
+			validRangeAppendix = q_("with zero values outside this range");
+			break;
+		case KhalidSultanaZaidi:
+			start	= 1620;
+			finish	= 2013;
 			validRangeAppendix = q_("with zero values outside this range");
 			break;
 		case Custom:

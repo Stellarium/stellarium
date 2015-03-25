@@ -985,6 +985,7 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2011", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2011/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2013", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2013/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2014", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2014/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2015", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2015/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");

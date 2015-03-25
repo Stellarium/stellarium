@@ -101,7 +101,8 @@ public:
 		Planesas,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
 		Mueller,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
 		Harris,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
-		UndefinedAlgorithm
+		UndefinedAlgorithm,
+		Generic		// Visual magnitude based on phase angle and albedo
 	};
 
 	Planet(const QString& englishName,
