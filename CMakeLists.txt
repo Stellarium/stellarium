@@ -3,13 +3,23 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0))
   CMAKE_POLICY(SET CMP0050 OLD)
+# silently ignore errors in add_dependency():
+  CMAKE_POLICY(SET CMP0046 OLD)
+ENDIF()
+
+IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" LESS 3.0.2))
+  CMAKE_POLICY(SET CMP0043 OLD)
+ENDIF()
+
+IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" LESS 3.1.3))
+  CMAKE_POLICY(SET CMP0054 OLD)
 ENDIF()
 
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
 SET(STELLARIUM_MINOR "13")
-SET(STELLARIUM_PATCH "2")
+SET(STELLARIUM_PATCH "3")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
@@ -77,17 +87,6 @@ IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  ENDIF()
 ENDIF()
 
-SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
-IF(OPTIMIZE_INTEL_ATOM)
- IF (MSVC)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2 ")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2 ")
- ELSE()
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
- ENDIF()
-ENDIF()
-
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
@@ -109,6 +108,13 @@ IF(APPLE)
  # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
+
+# This activates Link Time Optimization on recent GCC
+# Unfortunately, it also seems to break static plugins
+# It's providing a 20% size reduction, and probably a faster code when activated
+#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
+#SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
 
 ########### Others ###########
 # Activate translation
@@ -135,7 +141,7 @@ ELSE()
 ENDIF()
 
 
-SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
 
@@ -179,34 +185,12 @@ ADD_PLUGIN(Quasars 1)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
-ADD_PLUGIN(SVMT 0)
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 1)
 ADD_PLUGIN(TimeZoneConfiguration 1)
-ADD_PLUGIN(VirGO 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-IF(USE_PLUGIN_SVMT)
-    SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
-    SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-    SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-ENDIF()
-
-IF(USE_PLUGIN_VIRGO)
-    ## Library for loading FITS image files
-    FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-        /usr/include
-        /usr/local/include
-        DOC "Should point to the directory where the include files for libcfitsio are installed")
-    FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-        PATHS
-        /usr/lib/
-        /usr/local/lib
-        /opt/local/lib
-        DOC "cfitsio link options")
-    SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-ENDIF()
 
 IF(USE_PLUGIN_LOGBOOK)
     SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
@@ -288,19 +272,14 @@ IF(NOT RELEASE_BUILD)
     IF(BZR_REVISION)
         SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
-    ELSE()
-        FIND_PACKAGE(Subversion)
-        IF(Subversion_FOUND)
-            Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
-            SET(SVN_REVISION ${StelSvn_WC_REVISION})
-            ADD_DEFINITIONS(-DSVN_REVISION="${SVN_REVISION}")
-        ENDIF()
     ENDIF()
 ENDIF()
 
 IF(ENABLE_STRATOSCRIPT_COMPAT)
     ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
 
 ### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
@@ -383,6 +362,7 @@ IF(WIN32)
     # Deploy related stuff
     SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
     SET(ISS_ICO_PLUGIN "Source: \"${QT5_LIBS}/../plugins/imageformats/qico.dll\"; DestDir: \"{app}/imageformats/\";")
+    SET(ISS_JPEG_PLUGIN "Source: \"${QT5_LIBS}/../plugins/imageformats/qjpeg.dll\"; DestDir: \"{app}/imageformats/\";")
     IF(ENABLE_SOUND)
         SET(ISS_MULTIMEDIA_PLUGINS "Source: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
     ELSE()

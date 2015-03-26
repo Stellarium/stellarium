@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-skycultures-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-29 18:04+0600\n"
-"PO-Revision-Date: 2014-11-29 17:00+0000\n"
+"POT-Creation-Date: 2015-03-17 21:57+0600\n"
+"PO-Revision-Date: 2015-03-17 19:24+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-30 05:34+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2015-03-18 05:45+0000\n"
+"X-Generator: Launchpad (build 17403)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -299,153 +299,173 @@ msgstr "Гідра (місяць)"
 msgid "Solar System Observer"
 msgstr "Оглядач Сонячної системи"
 
+#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+#: skycultures/translations.fab:80
+msgid "SpaceShip"
+msgstr "Космічний корабель"
+
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
-#: skycultures/translations.fab:84
+#: skycultures/translations.fab:86
 msgid "Sedna"
 msgstr "Седна"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
-#: skycultures/translations.fab:86
+#: skycultures/translations.fab:88
 msgid "Quaoar"
 msgstr "Квавар"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
-#: skycultures/translations.fab:88
+#: skycultures/translations.fab:90
 msgid "Orcus"
 msgstr "Орк"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
-#: skycultures/translations.fab:90
+#: skycultures/translations.fab:92
 msgid "Haumea"
 msgstr "Хаумеа"
 
 #. TRANSLATORS: TNO/Asteroid (20000) Varuna
-#: skycultures/translations.fab:92
+#: skycultures/translations.fab:94
 msgid "Varuna"
 msgstr "Варуна"
 
 #. TRANSLATORS: TNO/Asteroid (136472) Makemake
-#: skycultures/translations.fab:94
+#: skycultures/translations.fab:96
 msgid "Makemake"
 msgstr "Макемаке"
 
-#. TRANSLATORS: Asteroid (5) Astraea
+#. TRANSLATORS: Cubewano (120347) Salacia
+#: skycultures/translations.fab:98
+msgid "Salacia"
+msgstr "Салація"
+
+#. TRANSLATORS: Plutino (38628) Huya
 #: skycultures/translations.fab:100
+msgid "Huya"
+msgstr "Гуйя"
+
+#. TRANSLATORS: Cubewano (174567) Varda
+#: skycultures/translations.fab:102
+msgid "Varda"
+msgstr "Варда"
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: skycultures/translations.fab:109
 msgid "Astraea"
 msgstr "Астрея"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: skycultures/translations.fab:102
+#: skycultures/translations.fab:111
 msgid "Hebe"
 msgstr "Геба"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: skycultures/translations.fab:104
+#: skycultures/translations.fab:113
 msgid "Iris"
 msgstr "Ірида"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: skycultures/translations.fab:106
+#: skycultures/translations.fab:115
 msgid "Flora"
 msgstr "Флора"
 
 #. TRANSLATORS: Asteroid (9) Metis and moon of Jupiter
-#: skycultures/translations.fab:108
+#: skycultures/translations.fab:117
 msgid "Metis"
 msgstr "Метида"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: skycultures/translations.fab:110
+#: skycultures/translations.fab:119
 msgid "Hygiea"
 msgstr "Гігіея"
 
 #. TRANSLATORS: Asteroid (41) Daphne
-#: skycultures/translations.fab:112
+#: skycultures/translations.fab:121
 msgid "Daphne"
 msgstr "Дафна"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: skycultures/translations.fab:114
+#: skycultures/translations.fab:123
 msgid "Amor"
 msgstr "Амур"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: skycultures/translations.fab:116
+#: skycultures/translations.fab:125
 msgid "Apophis"
 msgstr "Апофіс"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: skycultures/translations.fab:118
+#: skycultures/translations.fab:127
 msgid "Chiron"
 msgstr "Хірон"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: skycultures/translations.fab:120
+#: skycultures/translations.fab:129
 msgid "Eros"
 msgstr "Ерос"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: skycultures/translations.fab:122
+#: skycultures/translations.fab:131
 msgid "Hektor"
 msgstr "Гектор"
 
 #. TRANSLATORS: Asteroid (3200) Phaethon
-#: skycultures/translations.fab:124
+#: skycultures/translations.fab:133
 msgid "Phaethon"
 msgstr "Фаетон"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
-#: skycultures/translations.fab:126
+#: skycultures/translations.fab:135
 msgid "Sisyphus"
 msgstr "Сізіф"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
-#: skycultures/translations.fab:128
+#: skycultures/translations.fab:137
 msgid "Daedalus"
 msgstr "Дедал"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
-#: skycultures/translations.fab:130
+#: skycultures/translations.fab:139
 msgid "Icarus"
 msgstr "Ікар"
 
 #. TRANSLATORS: Asteroid (1809) Prometheus
-#: skycultures/translations.fab:132
+#: skycultures/translations.fab:141
 msgid "Prometheus"
 msgstr "Прометей"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
-#: skycultures/translations.fab:134
+#: skycultures/translations.fab:143
 msgid "Epimetheus"
 msgstr "Епіметей"
 
 #. TRANSLATORS: Asteroid (951) Gaspra
-#: skycultures/translations.fab:136
+#: skycultures/translations.fab:145
 msgid "Gaspra"
 msgstr "Ґаспра"
 
 #. TRANSLATORS: Asteroid (243) Ida
-#: skycultures/translations.fab:138
+#: skycultures/translations.fab:147
 msgid "Ida"
 msgstr "Іда"
 
 #. TRANSLATORS: Asteroid (218) Bianca
-#: skycultures/translations.fab:140
+#: skycultures/translations.fab:149
 msgid "Bianca"
 msgstr "Б’янка"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
-#: skycultures/translations.fab:146
+#: skycultures/translations.fab:154
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr "Велика комета 1680 року (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: skycultures/translations.fab:156
+#: skycultures/translations.fab:164
 msgid "Tycho's Supernova"
 msgstr "Наднова Тіхо"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: skycultures/translations.fab:158
+#: skycultures/translations.fab:166
 msgid "Kepler's Supernova"
 msgstr "Наднова Кеплера"
 
@@ -470,7 +490,7 @@ msgid "Beehive cluster"
 msgstr "Скупчення «Вулик»"
 
 #: nebulae/default/ngc2000names.dat:224
-msgid "Black-eye galaxy"
+msgid "Black Eye Galaxy"
 msgstr "Галактика «Чорне око»"
 
 #: nebulae/default/ngc2000names.dat:225
@@ -1146,6 +1166,27 @@ msgstr "Скупчення «Лисяча голова»"
 #: nebulae/default/ngc2000names.dat:421
 msgid "Summer Beehive cluster"
 msgstr "Скупчення «Літній рій бджіл»"
+
+#: nebulae/default/ngc2000names.dat:422
+msgid "Markarian's Chain"
+msgstr "Ланцюжок Маркаряна"
+
+#: nebulae/default/ngc2000names.dat:423
+msgid "Maffei Group"
+msgstr "Група Маффеї"
+
+#: nebulae/default/ngc2000names.dat:424 nebulae/default/ngc2000names.dat:425
+#: nebulae/default/ngc2000names.dat:426 nebulae/default/ngc2000names.dat:427
+msgid "Robert's Quartet"
+msgstr "Квартет Роберта"
+
+#: nebulae/default/ngc2000names.dat:428
+msgid "Deer Lick Group"
+msgstr "Група Оленя"
+
+#: nebulae/default/ngc2000names.dat:429
+msgid "Spider nebula"
+msgstr "Туманність «Павук»"
 
 #: skycultures/arabic/constellation_names.eng.fab:1
 msgid "The Shackled Woman"
@@ -2441,7 +2482,7 @@ msgid "The gazelles 3"
 msgstr "Газелі 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:24
-msgid "The Soulder side of Al-Jawza"
+msgid "The Shoulder side of Al-Jawza"
 msgstr "Бік плеча Аль-Джози"
 
 #: skycultures/arabic_moon_stations/star_names.fab:25
@@ -3066,6 +3107,7 @@ msgid "Coiled Thong"
 msgstr "Згорнутий батіг"
 
 #: skycultures/chinese/constellation_names.eng.fab:4
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:31
 msgid "Wings"
 msgstr "Крила"
 
@@ -3074,6 +3116,7 @@ msgid "Chariot"
 msgstr "Колісниця"
 
 #: skycultures/chinese/constellation_names.eng.fab:6
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:7
 msgid "Tail"
 msgstr "Хвіст"
 
@@ -3082,6 +3125,7 @@ msgid "Winnowing Basket"
 msgstr "Кошик для віяння"
 
 #: skycultures/chinese/constellation_names.eng.fab:8
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:10
 #: skycultures/lakota/constellation_names.eng.fab:4
 msgid "Dipper"
 msgstr "Ківш"
@@ -3100,10 +3144,12 @@ msgid "Imperial Guards"
 msgstr "Імперська гвардія"
 
 #: skycultures/chinese/constellation_names.eng.fab:12
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:2
 msgid "Horn"
 msgstr "Ріг"
 
 #: skycultures/chinese/constellation_names.eng.fab:13
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:28
 msgid "Willow"
 msgstr "Верба"
 
@@ -3120,6 +3166,7 @@ msgid "River Turtle"
 msgstr "Річкова черепаха"
 
 #: skycultures/chinese/constellation_names.eng.fab:17
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:20
 msgid "Stomach"
 msgstr "Шлунок"
 
@@ -3128,6 +3175,7 @@ msgid "Great General"
 msgstr "Великий генерал"
 
 #: skycultures/chinese/constellation_names.eng.fab:19
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:16
 msgid "Wall"
 msgstr "Стіна"
 
@@ -3136,6 +3184,7 @@ msgid "Legs"
 msgstr "Ноги"
 
 #: skycultures/chinese/constellation_names.eng.fab:21
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:4
 msgid "Root"
 msgstr "Корінь"
 
@@ -3174,6 +3223,7 @@ msgstr "Скручений язик"
 
 #: skycultures/chinese/constellation_names.eng.fab:30
 #: skycultures/egyptian/constellation_names.eng.fab:21
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:22
 msgid "Net"
 msgstr "Мережа"
 
@@ -3203,6 +3253,7 @@ msgid "Four Channels"
 msgstr "Чотири канали"
 
 #: skycultures/chinese/constellation_names.eng.fab:37
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:26
 msgid "Well"
 msgstr "Криниця"
 
@@ -3323,6 +3374,7 @@ msgid "Palace Gate"
 msgstr "Ворота палацу"
 
 #: skycultures/chinese/constellation_names.eng.fab:66
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:13
 msgid "Emptiness"
 msgstr "Пустота"
 
@@ -3339,10 +3391,12 @@ msgid "Ox"
 msgstr "Бик"
 
 #: skycultures/chinese/constellation_names.eng.fab:70
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:6
 msgid "Heart"
 msgstr "Серце"
 
 #: skycultures/chinese/constellation_names.eng.fab:71
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:15
 msgid "Room"
 msgstr "Кімната"
 
@@ -3413,6 +3467,7 @@ msgid "Tripod"
 msgstr "Тринога"
 
 #: skycultures/chinese/constellation_names.eng.fab:88
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:3
 msgid "Neck"
 msgstr "Шия"
 
@@ -4044,6 +4099,97 @@ msgstr "Джьєшта"
 #: skycultures/indian/star_names.fab:21
 msgid "Auggashta"
 msgstr "Ауггашта"
+
+#. TRANSLATORS: Native name of the Sun in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:2
+msgid "Surya Deva"
+msgstr "Сурья-Дева"
+
+#. TRANSLATORS: Native name of the Moon in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:4
+msgid "Chandra"
+msgstr "Чандра"
+
+#. TRANSLATORS: Native name of Mercury in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:6
+msgid "Budha"
+msgstr "Будха"
+
+#. TRANSLATORS: Native name of Venus in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:8
+msgid "Shukr"
+msgstr "Шукр"
+
+#. TRANSLATORS: Native name of Mars in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:10
+msgid "Mangala"
+msgstr "Мангала"
+
+#. TRANSLATORS: Native name of Jupiter in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:12
+msgid "Guru"
+msgstr "Гуру"
+
+#. TRANSLATORS: Native name of Saturn in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:14
+msgid "Shani"
+msgstr "Шані"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:5
+msgid "Chamber"
+msgstr "Кімната"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:8
+msgid "Basket"
+msgstr "Кошик"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:11
+msgid "Cow"
+msgstr "Корова"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:12
+msgid "Woman"
+msgstr "Жінка"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:14
+msgid "Roof Top"
+msgstr "Верхвка даху"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:18
+msgid "Stride"
+msgstr "Широкий крок"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:19
+msgid "Hill"
+msgstr "Пагорб"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:21
+msgid "Stopping Place"
+msgstr "Місце зупинки"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:23
+msgid "Turtle Snout"
+msgstr "Ніс черепахи"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:24
+msgid "Investigator"
+msgstr "Дослідник"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:27
+msgid "Ogre"
+msgstr "Людожер"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:29
+msgid "Stars"
+msgstr "Зірки"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:30
+msgid "Stretched Net"
+msgstr "Розтягнута сітка"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:32
+msgid "Chariot Cross-Board"
+msgstr "Перетинка колісниці"
 
 #: skycultures/korean/constellation_names.eng.fab:1
 msgid "Holy Kettle"
@@ -5293,6 +5439,7 @@ msgid "Animal"
 msgstr "Тварина"
 
 #: skycultures/lakota/constellation_names.eng.fab:7
+#: skycultures/siberian/constellation_names.eng.fab:1
 msgid "Elk"
 msgstr "Лось"
 
@@ -7113,6 +7260,23 @@ msgstr "Галла"
 msgid "The Ski Runners"
 msgstr "Бігуни на лижах"
 
+#: skycultures/siberian/constellation_names.eng.fab:2
+msgid "Threshers"
+msgstr "Молотарі"
+
+#: skycultures/siberian/constellation_names.eng.fab:3
+msgid "Duck Nest"
+msgstr "Шия Качки"
+
+#: skycultures/siberian/star_names.fab:1
+msgid "Golden stake"
+msgstr "Золотий стовп"
+
+#. TRANSLATORS: Native name of Venus in Siberian culture (in English words)
+#: skycultures/siberian/planet_names.fab:2
+msgid "Night Star"
+msgstr "Нічна зірка"
+
 #: skycultures/tongan/constellation_names.eng.fab:1
 msgid "Toloatonga"
 msgstr "Толоатонга"
@@ -8403,6 +8567,9 @@ msgstr "β Центавра"
 
 #~ msgid "Bear Paw galaxy"
 #~ msgstr "Галактика «Ведмежа лапа»"
+
+#~ msgid "Black-eye galaxy"
+#~ msgstr "Галактика «Чорне око»"
 
 #~ msgid "Great Nebula in Andromeda"
 #~ msgstr "Велика туманність у Андромеді"

@@ -42,6 +42,7 @@ class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
 class QMoveEvent;
+class QSettings;
 
 //! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
@@ -75,6 +76,8 @@ public:
 	//! Return the parent gui widget, this should be used as parent to all
 	//! the StelDialog instances.
 	QGraphicsWidget* getGuiWidget() const {return guiWidget;}
+	//! Return mouse position coordinates
+	QPoint getMousePos();
 public slots:
 
 	//!	Set whether fullscreen is activated or not
@@ -155,8 +158,15 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 	
-	//! provide extensive OpenGL dignostics in logfile.
+	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
+	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
+	//! to provide feedback to the user about bad OpenGL drivers.
+#if STEL_USE_NEW_OPENGL_WIDGETS
+	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
+#else
+	void processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const;
+#endif
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;

@@ -74,7 +74,9 @@ public:
 	//! @param checkInScreen whether source in screen should be checked to avoid unnecessary drawing.
 	//! @return true if the source was actually visible and drawn
 	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, unsigned int bV, bool checkInScreen=false)
-		{return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);}
+	{
+		return drawPointSource(sPainter, v, rcMag, colorTable[bV], checkInScreen);
+	}
 
 	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false);
 

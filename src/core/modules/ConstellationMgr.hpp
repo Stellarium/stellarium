@@ -70,7 +70,7 @@ class ConstellationMgr : public StelObjectModule
 	Q_PROPERTY(bool isolateSelected
 			   READ getFlagIsolateSelected
 			   WRITE setFlagIsolateSelected
-			   NOTIFY isolateSelectedChanged)
+			   NOTIFY isolateSelectedChanged)	
 	Q_PROPERTY(Vec3f linesColor
 			   READ getLinesColor
 			   WRITE setLinesColor
@@ -193,6 +193,11 @@ public slots:
 	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const;
 
+	//! Set whether only one selected constellation must be displayed
+	void setFlagConstellationPick(const bool mode);
+	//! Get whether only one selected constellation is displayed
+	bool getFlagConstellationPick(void) const;
+
 	//! Define line color
 	//! @param color The color of lines
 	//! @code
@@ -228,13 +233,20 @@ public slots:
 	//! Get the font size used for constellation names display
 	float getFontSize() const;
 
-	//! set the way how contellation names are displayed: abbbreviated/as-given/translated
+	//! Set the way how contellation names are displayed: abbbreviated/as-given/translated
 	//! @param style acceptable values 0=abbreviated, 1=untranslated, 2=translated.
 	//! @note Will be cast to enum'ed value, but usually receives value from a QComboBox in the GUI.
 	void setConstellationDisplayStyle(int style);
 	//! get the way how contellation names are displayed: abbbreviated/as-given/translated
 	ConstellationDisplayStyle getConstellationDisplayStyle();
 	QString getConstellationDisplayStyleString();
+
+	//! Set the thickness of lines of the constellations
+	//! @param thickness of line in pixels
+	void setConstellationLineThickness(const double thickness);
+	//! Get the thickness of lines of the constellations
+	double getConstellationLineThickness() const { return constellationLineThickness; }
+
 
 signals:
 	void artDisplayedChanged(const bool displayed) const;
@@ -243,7 +255,7 @@ signals:
 	void boundariesColorChanged(const Vec3f & color) const;
 	void boundariesDisplayedChanged(const bool displayed) const;
 	void fontSizeChanged(const float newSize) const;
-	void isolateSelectedChanged(const bool isolate) const;
+	void isolateSelectedChanged(const bool isolate) const;	
 	void linesColorChanged(const Vec3f & color) const;
 	void linesDisplayedChanged(const bool displayed) const;
 	void namesColorChanged(const Vec3f & color) const;
@@ -339,6 +351,7 @@ private:
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected;
+	bool constellationPickEnabled;
 	std::vector<std::vector<Vec3f> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
@@ -353,6 +366,9 @@ private:
 	bool boundariesDisplayed;
 	bool linesDisplayed;
 	bool namesDisplayed;
+
+	// Store the thickness of lines of the constellations
+	float constellationLineThickness;
 };
 
 #endif // _CONSTELLATIONMGR_HPP_

@@ -203,7 +203,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
@@ -255,8 +255,9 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << "<br>";
 	}
 
-	if (flags&Size)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true)) << "<br>";
+	float aSize = 2.*getAngularSize(core)*M_PI/180.;
+	if (flags&Size && aSize>1e-6)
+		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();

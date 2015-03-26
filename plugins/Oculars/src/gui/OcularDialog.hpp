@@ -88,6 +88,7 @@ private slots:
 	void initAboutText();
 	void requireSelectionStateChanged(int state);
 	void scaleImageCircleStateChanged(int state);
+	void setLabelsDescriptionText(bool state);
 
 private:
 	Oculars* plugin;

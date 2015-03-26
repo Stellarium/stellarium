@@ -31,6 +31,7 @@
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -59,7 +60,7 @@ void MilkyWay::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway_2048.png");
+	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
 
@@ -67,6 +68,9 @@ void MilkyWay::init()
 	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true)); // GZ orig: slices=stacks=20.
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
 }
 
 
@@ -94,9 +98,11 @@ void MilkyWay::draw(StelCore* core)
 	// since milky way is always seen white RGB value in the texture (1.0,1.0,1.0)
 	// Vec3f c = Vec3f(0.34165f, 0.429666f, 0.63586f);
 	// This is the same color, just brighter to have Blue=1.
-	Vec3f c = Vec3f(0.53730381f, .675724216f, 1.0f);
+	//Vec3f c = Vec3f(0.53730381f, .675724216f, 1.0f);
+	// The new texture (V0.13.1) is quite blue to start with. It is better to apply white color for it.
+	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
 
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(12.5f); // Source? How to calibrate the new texture?
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(11.5f); // Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
