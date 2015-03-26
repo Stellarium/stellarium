@@ -49,7 +49,15 @@ class Translations
 		// TRANSLATORS: Type of object
 		N_("moon");
 		// TRANSLATORS: Type of object
-		N_("plutoid");
+		N_("plutino");
+		// TRANSLATORS: Type of object
+		N_("dwarf planet");
+		// TRANSLATORS: Type of object
+		N_("cubewano");
+		// TRANSLATORS: Type of object
+		N_("scattered disc object");
+		// TRANSLATORS: Type of object
+		N_("Oort cloud object");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -59,7 +67,15 @@ class Translations
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Moons");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
-		N_("Plutoids");
+		N_("Plutinos");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Dwarf planets");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Cubewanos");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Scattered disc objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Oort cloud objects");
 
 		// =====================================================================
 		// List of deep-sky objects types
@@ -79,10 +95,24 @@ class Translations
 		N_("Irregular galaxies");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Clusters associated with nebulosity");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("HII regions");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Reflection nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("H-α emission regions");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Caldwell Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Barnard Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Sharpless Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Van den Bergh Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Rodgers, Cambell, and Whiteoak");
 		
 		// =====================================================================
 		// Constellation cultures
@@ -94,6 +124,7 @@ class Translations
 		N_("Egyptian");
 		N_("Inuit");
 		N_("Indian Vedic");
+		N_("Japanese Moon Stations");
 		N_("Korean");
 		N_("Lakota");
 		N_("Maori");
@@ -103,6 +134,8 @@ class Translations
 		N_("Polynesian");
 		N_("Romanian");
 		N_("Sami");
+		// TRANSLATORS: Name of the sky culture
+		N_("Siberian");
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
@@ -123,10 +156,16 @@ class Translations
 		N_("Ocean");
 		// TRANSLATORS: Landscape name: Garching bei Munchen
 		N_("Garching");
-		// TRANSLATORS: Name of landscape and planet
+		// TRANSLATORS: Name of landscape
 		N_("Mars");
-		// TRANSLATORS: Name of landscape and planet
+		// TRANSLATORS: Name of landscape
+		N_("Jupiter");
+		// TRANSLATORS: Name of landscape
 		N_("Saturn");
+		// TRANSLATORS: Name of landscape
+		N_("Uranus");
+		// TRANSLATORS: Name of landscape
+		N_("Neptune");
 		// TRANSLATORS: Name of landscape
 		N_("Geneva");
 		// TRANSLATORS: Name of landscape
@@ -484,5 +523,7 @@ class Translations
 		N_("&Open");
 		N_("File &name:");
 		N_("Copy &Link Location");
+		N_("Abort");
+		N_("Ignore");
 	}
 };

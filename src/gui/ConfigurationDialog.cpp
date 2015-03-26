@@ -42,6 +42,7 @@
 #include "StelLocation.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelSkyLayerMgr.hpp"
 #include "SolarSystem.hpp"
 #include "MeteorMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -65,6 +66,7 @@
 #include <QFileDialog>
 #include <QComboBox>
 #include <QDir>
+#include <QDesktopWidget>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	: StelDialog(parent)
@@ -105,7 +107,6 @@ void ConfigurationDialog::retranslate()
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
-		ui->stackListWidget->setWrapping(false);
 		updateTabBarListWidgetWidth();
 		
 		//Initial FOV and direction on the "Main" page
@@ -165,11 +166,6 @@ void ConfigurationDialog::createDialogContent()
 	updateCurrentSkyLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectSkyLanguage(const QString&)));
-
-
-
-	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
-	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
@@ -265,7 +261,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->showNebulaBgButtonCheckbox->setChecked(gui->getFlagShowNebulaBackgroundButton());
 	connect(ui->showNebulaBgButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowNebulaBackgroundButton(bool)));
 
-	ui->decimalDegreeCheckBox->setChecked(gui->getFlagShowDecimalDegrees());
+	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
 
 	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
@@ -314,11 +310,6 @@ void ConfigurationDialog::createDialogContent()
 
 	updateConfigLabels();
 	updateTabBarListWidgetWidth();
-}
-
-void ConfigurationDialog::setUpdatesFlag(bool b)
-{
-	StelApp::getInstance().getSettings()->setValue("main/check_updates_enabled", b);
 }
 
 void ConfigurationDialog::updateCurrentLanguage()
@@ -576,6 +567,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
 	conf->setValue("viewing/flag_ecliptic_J2000_grid", glmgr->getFlagEclipticJ2000Grid());
 	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
+	conf->setValue("viewing/flag_longitude_line", glmgr->getFlagLongitudeLine());
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
 	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
@@ -592,6 +584,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
+	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
 	conf->setValue("stars/labels_amount", smgr->getLabelsAmount());
@@ -599,6 +592,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
+	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
 	// view dialog / landscape tab settings
@@ -676,7 +670,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
-	conf->setValue("gui/flag_show_decimal_degrees", gui->getFlagShowDecimalDegrees());
+	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();
@@ -708,15 +702,19 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("main/screenshot_dir", StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors", StelMainView::getInstance().getFlagInvertScreenShotColors());
 
+	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
+	conf->setValue("video/screen_number", screenNum);
+
 	// full screen and window size
 	conf->setValue("video/fullscreen", StelMainView::getInstance().isFullScreen());
 	if (!StelMainView::getInstance().isFullScreen())
 	{
+		QRect screenGeom = QApplication::desktop()->screenGeometry(screenNum);
 		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
-		conf->setValue("video/screen_x", mainWindow.x());
-		conf->setValue("video/screen_y", mainWindow.y());
+		conf->setValue("video/screen_x", mainWindow.x() - screenGeom.x());
+		conf->setValue("video/screen_y", mainWindow.y() - screenGeom.y());
 	}
 
 	// clear the restore defaults flag if it is set.
@@ -1173,38 +1171,36 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
 {
-	QAbstractItemModel* model = ui->stackListWidget->model();
-	if (!model)
-		return;
-	
+	ui->stackListWidget->setWrapping(false);
+
 	// Update list item sizes after translation
 	ui->stackListWidget->adjustSize();
-	
+
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+	{
+		return;
+	}
+
+	// stackListWidget->font() does not work properly!
+	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
+	QFont font;
+	font.setPixelSize(14);
+	font.setWeight(75);
+	QFontMetrics fontMetrics(font);
+
+	int iconSize = ui->stackListWidget->iconSize().width();
+
 	int width = 0;
 	for (int row = 0; row < model->rowCount(); row++)
 	{
-		QModelIndex index = model->index(row, 0);
-		width += ui->stackListWidget->sizeHintForIndex(index).width();
+		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
+		width += 24; // margin - 12px left and 12px right
 	}
-	
-	// TODO: Limit the width to the width of the screen *available to the window*
-	// FIXME: This works only sometimes...
-	/*if (width <= ui->stackListWidget->width())
-	{
-		//qDebug() << width << ui->stackListWidget->width();
-		return;
-	}*/
-	
+
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
-	
-	// FIXME: This works only sometimes...
-	/*
-	dialog->adjustSize();
-	dialog->update();
-	// ... and allow manual resize later.
-	ui->stackListWidget->setMinimumWidth(0);
-	*/
 }
 
 void ConfigurationDialog::populateDeltaTAlgorithmsList()
@@ -1253,6 +1249,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
+	algorithms->addItem(q_("Khalid, Sultana & Zaidi (2014)"), "KhalidSultanaZaidi");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
 
 	//Restore the selection

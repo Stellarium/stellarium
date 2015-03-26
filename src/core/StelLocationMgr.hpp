@@ -26,7 +26,6 @@
 #include <QMap>
 
 class QStringListModel;
-class QNetworkReply;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -51,6 +50,9 @@ public:
 	//! Return the StelLocation for a given string
 	//! Can match location name, or coordinates
 	const StelLocation locationForString(const QString& s) const;
+
+	//! Return the StelLocation from a CLI
+	const StelLocation locationFromCLI() const;
 
 	//! Return a valid location when no valid one was found.
 	const StelLocation& getLastResortLocation() const {return lastResortLocation;}
@@ -105,10 +107,6 @@ private:
 	QMap<QString, StelLocation> pickedLocations;
 	
 	StelLocation lastResortLocation;
-
-	//! For IP-based location lookup
-	QNetworkReply *networkReply;
-
 };
 
 #endif // _STELLOCATIONMGR_HPP_

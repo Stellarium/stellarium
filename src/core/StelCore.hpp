@@ -123,6 +123,7 @@ public:
 		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
 		Banjevic,			//!< Banjevic (2006) algorithm for DeltaT
 		IslamSadiqQureshi,		//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
+		KhalidSultanaZaidi,		//!< M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
 		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 

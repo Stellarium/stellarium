@@ -234,6 +234,12 @@ private:
 	//! set items for list of struct from data map
 	void setEPMap(const QVariantMap& map);
 
+	//! A fake method for strings marked for translation.
+	//! Use it instead of translations.h for N_() strings, except perhaps for
+	//! keyboard action descriptions. (It's better for them to be in a single
+	//! place.)
+	static void translations();
+
 	QString jsonCatalogPath;
 
 	int PSCount;
@@ -282,7 +288,7 @@ private slots:
 class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

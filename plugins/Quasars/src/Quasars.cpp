@@ -404,6 +404,9 @@ QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 QStringList Quasars::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!flagShowQuasars)
+		return result;
+
 	if (inEnglish)
 	{
 		foreach (const QuasarP& quasar, QSO)

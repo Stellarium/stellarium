@@ -43,6 +43,8 @@ bool Constellation::seasonalRuleEnabled = false;
 
 Constellation::Constellation()
 	: numberOfSegments(0)
+	, beginSeason(0)
+	, endSeason(0)
 	, asterism(NULL)
 {
 }
@@ -119,8 +121,8 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 			star1=asterism[2*i]->getJ2000EquatorialPos(core);
 			star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
 			star1.normalize();
-			star2.normalize();
-			sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+			star2.normalize();			
+			sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);			
 		}
 	}
 }

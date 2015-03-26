@@ -74,6 +74,7 @@ AngleMeasure::AngleMeasure()
 	, flagShowHorizontalPA(false)
 	, flagShowHorizontalStartSkylinked(false)
 	, flagShowHorizontalEndSkylinked(false)
+	, angleHor(0.)
 	, toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
@@ -167,7 +168,7 @@ void AngleMeasure::update(double deltaTime)
 	lineVisible.update((int)(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
 
-	withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	// if altAz endpoint linked to the rotating sky, move respective point(s)
 	if (flagShowHorizontalStartSkylinked)
@@ -327,6 +328,13 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),startPoint);
+		{ // Nick Fedoseev patch: improve click match
+			Vec3d win;
+			prj->project(startPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, startPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),startPointHor);
 
@@ -357,6 +365,13 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),endPoint);
+		{ // Nick Fedoseev patch: improve click match
+			Vec3d win;
+			prj->project(endPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),endPointHor);
 		calculateEnds();
@@ -372,6 +387,13 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(x,y,endPoint);
+		{ // Nick Fedoseev patch: improve click match
+		   Vec3d win;
+		   prj->project(endPoint,win);
+		   float dx = x - win.v[0];
+		   float dy = y - win.v[1];
+		   prj->unProject(x+dx, y+dy, endPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();

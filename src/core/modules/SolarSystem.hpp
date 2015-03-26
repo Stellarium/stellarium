@@ -47,14 +47,17 @@ class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool labelsDisplayed
-			   READ getFlagLabels
-			   WRITE setFlagLabels)
+		   READ getFlagLabels
+		   WRITE setFlagLabels)
 	Q_PROPERTY(bool orbitsDisplayed
-			   READ getFlagOrbits
-			   WRITE setFlagOrbits)
+		   READ getFlagOrbits
+		   WRITE setFlagOrbits)
 	Q_PROPERTY(bool trailsDisplayed
-			   READ getFlagTrails
-			   WRITE setFlagTrails)
+		   READ getFlagTrails
+		   WRITE setFlagTrails)
+	Q_PROPERTY(bool planetsDisplayed
+		   READ getFlagPlanets
+		   WRITE setFlagPlanets)
 
 public:
 	SolarSystem();
@@ -279,11 +282,20 @@ public slots:
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
+	//! Set flag which enable use native names for planets or not.
 	void setFlagNativeNames(bool b);
+	//! Get the current value of the flag which enables showing native names for planets or not.
 	bool getFlagNativeNames(void) const;
 
+	//! Set flag which enable use translated names for planets or not.
 	void setFlagTranslatedNames(bool b);
+	//! Get the current value of the flag which enables showing translated names for planets or not.
 	bool getFlagTranslatedNames(void) const;
+
+	//! Set flag which enabled the showing of isolated trails for selected objects only or not
+	void setFlagIsolatedTrails(bool b);
+	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
+	bool getFlagIsolatedTrails(void) const;
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -410,6 +422,7 @@ private:
 	bool flagMarker;
 	bool flagNativeNames;
 	bool flagTranslatedNames;
+	bool flagIsolatedTrails;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;

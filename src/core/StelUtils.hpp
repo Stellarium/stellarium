@@ -154,7 +154,7 @@ namespace StelUtils
 	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng longitude in radian
 	//! @param lat latitude in radian
-	//! @param v the resulting 3D unti vector
+	//! @param v the resulting 3D unit vector
 	void spheToRect(const float lng, const float lat, Vec3f& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
@@ -176,7 +176,7 @@ namespace StelUtils
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
 	//! Coordinate Transformation from equatorial to ecliptical
-	void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
+	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.
@@ -233,7 +233,7 @@ namespace StelUtils
 	//! (see QDateTime::toString()). Uses the @b system locale, not
 	//! the one set in Stellarium.
 	//! @return QString representing the formatted date
-	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt);
+	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt);
 
 	//! Format the date and day-of-week per the @b system locale's
 	//! QLocale::ShortFormat.
@@ -575,6 +575,15 @@ namespace StelUtils
 	//! @return Delta-T in seconds
 	double getDeltaTByIslamSadiqQureshi(const double jDay);
 
+	//! Get Delta-T estimation for a given date.
+	//! Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+	//! Source: Delta T: Polynomial Approximation of Time Period 1620-2013
+	//! Journal of Astrophysics, Vol. 2014, Article ID 480964
+	//! http://dx.doi.org/10.1155/2014/480964
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByKhalidSultanaZaidi(const double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
 	//! For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
@@ -591,7 +600,8 @@ namespace StelUtils
 	double getDeltaTStandardError(const double jDay);
 
 	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
-	template <typename T> int sign(T val) {
+	template <typename T> int sign(T val)
+	{
 		return (T(0) < val) - (val < T(0));
 	}
 	
@@ -616,16 +626,23 @@ namespace StelUtils
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
 
+	//! Compute date in decimal year format
+	//! @param year
+	//! @param month
+	//! @param day
+	//! @return decimal year
+	double getDecYear(const int year, const int month, const int day);
+
 	//! Uncompress gzip or zlib compressed data.
 	QByteArray uncompress(const QByteArray& data);
 
 #ifdef _MSC_BUILD
-    inline double trunc(double x)
-    {
-        return (x < 0 ? std::ceil(x) : std::floor(x));
-    }
+	inline double trunc(double x)
+	{
+		return (x < 0 ? std::ceil(x) : std::floor(x));
+	}
 #else
-    inline double trunc(double x) { return trunc(x); }
+	inline double trunc(double x) { return ::trunc(x); }
 #endif
 }
 
