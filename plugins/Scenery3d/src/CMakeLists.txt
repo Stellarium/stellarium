@@ -45,7 +45,7 @@ SET(Scenery3d_SRCS
 )
 
 ################# compiles resources files ############
-SET(Scenery3d_RES ../Scenery3d.qrc)
+SET(Scenery3d_RES ../resources/Scenery3d.qrc)
 QT5_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
 
 ################# compiles .ui files ############
