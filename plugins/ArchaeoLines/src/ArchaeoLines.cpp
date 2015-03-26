@@ -138,7 +138,7 @@ bool ArchaeoLines::configureGui(bool show)
 double ArchaeoLines::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-	  return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)-10.; // negative: draw earlier than landscape!
+	  return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.; // same as lines from core (hint AW)
 	return 0;
 }
 
