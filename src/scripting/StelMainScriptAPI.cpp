@@ -133,18 +133,28 @@ double StelMainScriptAPI::getMJDay() const
 
 void StelMainScriptAPI::setDate(const QString& dt, const QString& spec, const bool &enableDeltaT)
 {
+	bool relativeTime = false;
+	if (dt.startsWith("+") || dt.startsWith("-") || (dt.startsWith("now") && (dt.startsWith("+") || dt.startsWith("-"))))
+		relativeTime = true;
 	double JD = jdFromDateString(dt, spec);
 	StelCore* core = StelApp::getInstance().getCore();
-	if (enableDeltaT)
+	if (relativeTime)
 	{
-		// add Delta-T correction for date
-		core->setJDay(JD + core->getDeltaT(JD)/86400);
+		core->setJDay(JD);
 	}
 	else
 	{
-		// set date without Delta-T correction
-		// compatible with 0.11
-		core->setJDay(JD);
+		if (enableDeltaT)
+		{
+			// add Delta-T correction for date
+			core->setJDay(JD + core->getDeltaT(JD)/86400);
+		}
+		else
+		{
+			// set date without Delta-T correction
+			// compatible with 0.11
+			core->setJDay(JD);
+		}
 	}
 }
 
@@ -211,7 +221,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	if (ssmgr->searchByName(planet))
 		loc.planetName = planet;
 	loc.name = name;
-	core->moveObserverTo(loc, duration);
+	core->moveObserverTo(loc, duration, duration);
 }
 
 void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
@@ -243,6 +253,11 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	map.insert("sidereal-year", planet->getSiderealPeriod());
 	map.insert("sidereal-day", planet->getSiderealDay()*24.);
 	map.insert("solar-day", planet->getMeanSolarDay()*24.);
+	unsigned int h, m;
+	double s;
+	StelUtils::radToHms(core->getLocalSiderealTime(), h, m, s);
+	map.insert("local-sidereal-time", (double)h + (double)m/60 + s/3600);
+	map.insert("local-sidereal-time-hms", StelUtils::radToHmsStr(core->getLocalSiderealTime()));
 
 	return map;
 }
@@ -938,6 +953,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
+	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 
 	if (state.toLower() == "natural")
 	{
@@ -956,6 +972,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
@@ -970,12 +987,13 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagLandscape(true);
 		lmgr->setFlagAtmosphere(true);
 		lmgr->setFlagFog(true);
+		zl->setFlagShow(true);
 	}
 	else if (state.toLower() == "starchart")
 	{
 		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);
+		skyd->setFlagLuminanceAdaptation(false);		
 		ssmgr->setFlagPlanets(true);
 		ssmgr->setFlagHints(false);
 		ssmgr->setFlagOrbits(false);
@@ -988,6 +1006,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
@@ -998,10 +1017,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setFlagArt(false);
 		smgr->setFlagLabels(true);
 		ssmgr->setFlagLabels(true);
-		nmgr->setFlagHints(true);
+		nmgr->setFlagHints(true);		
 		lmgr->setFlagLandscape(false);
 		lmgr->setFlagAtmosphere(false);
 		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
 	}
 	else if (state.toLower() == "deepspace")
 	{
@@ -1020,6 +1040,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
@@ -1034,6 +1055,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagLandscape(false);
 		lmgr->setFlagAtmosphere(false);
 		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
 	}
 	else
 	{

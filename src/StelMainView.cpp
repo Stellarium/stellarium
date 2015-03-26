@@ -24,7 +24,7 @@
 #include "StelProjector.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelGuiBase.hpp"
+#include "StelGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
@@ -38,6 +38,8 @@
 #else
 #include <QGLWidget>
 #endif
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QGuiApplication>
 #include <QFileInfo>
 #include <QIcon>
@@ -187,8 +189,8 @@ bool StelSkyItem::event(QEvent * e)
 			setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
 		return true;
-	}
 		break;
+	}		
 
 	case QEvent::Gesture:
 		setAcceptedMouseButtons(0);
@@ -374,6 +376,9 @@ StelMainView::StelMainView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
+	// Even if setting a version here, it is ignored in StelQGLWidget()!
+	// TBD: Maybe this must make a differentiation between OpenGL and OpenGL ES!
+	// glFormat.setVersion(2, 1);
 	QGLContext* context=new QGLContext(glFormat);
 
 	if (context->format() != glFormat)
@@ -383,6 +388,8 @@ StelMainView::StelMainView(QWidget* parent)
 		exit(1);
 	}
 	glWidget = new StelQGLWidget(context, this);
+	// This does not return the version number set previously!
+	// qDebug() << "glWidget.context.format.version, result:" << glWidget->context()->format().majorVersion() << "." << glWidget->context()->format().minorVersion();
 #endif
 
 	setViewport(glWidget);
@@ -410,17 +417,7 @@ StelMainView::~StelMainView()
 
 void StelMainView::init(QSettings* conf)
 {
-	// Look for a static GUI plugins.
-	foreach (QObject *plugin, QPluginLoader::staticInstances())
-	{
-		StelGuiPluginInterface* pluginInterface = qobject_cast<StelGuiPluginInterface*>(plugin);
-		if (pluginInterface)
-		{
-			gui = pluginInterface->getStelGuiBase();
-		}
-		break;
-	}
-	Q_ASSERT(gui);
+	gui = new StelGui();
 
 #if STEL_USE_NEW_OPENGL_WIDGETS
 	//glWidget->initializeGL(); // protected...
@@ -430,10 +427,101 @@ void StelMainView::init(QSettings* conf)
 	glWidget->makeCurrent();
 #endif
 
-	// Find out lots of debug info about supported version of OpenGL and vendor/renderer
-	QOpenGLContext* context=QOpenGLContext::currentContext();
+	// Should be check of requirements disabled?
+	if (conf->value("main/check_requirements", true).toBool())
+	{
+		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
+		processOpenGLdiagnosticsAndWarnings(conf, glWidget);
+	}
+
+
+	stelApp= new StelApp();
+	stelApp->setGui(gui);
+	stelApp->init(conf);
+	StelActionMgr *actionMgr = stelApp->getStelActionManager();
+	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
+	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
+	
+	StelPainter::initGLShaders();
+
+	setResizeMode(QDeclarativeView::SizeRootObjectToView);
+	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
+	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
+	rootContext()->setContextProperty("stelApp", stelApp);	
+	setSource(QUrl("qrc:/qml/main.qml"));
+	
+	QSize size = glWidget->windowHandle()->screen()->size();
+	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
+		     conf->value("video/screen_h", size.height()).toInt());
+
+	bool fullscreen = conf->value("video/fullscreen", true).toBool();
+
+	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
+	resize(size);
+
+	QDesktopWidget *desktop = QApplication::desktop();
+	int screen = conf->value("video/screen_number", 0).toInt();
+	if (screen < 0 || screen >= desktop->screenCount())
+	{
+		qWarning() << "WARNING: screen" << screen << "not found";
+		screen = 0;
+	}
+	QRect screenGeom = desktop->screenGeometry(screen);
+
+	if (fullscreen)
+	{
+		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
+		move(screenGeom.x()+1, screenGeom.y()+1);
+		// The fullscreen window appears on screen where is the majority of
+		// the normal window. Therefore we crop the normal window to the
+		// screen area to ensure that the majority is not on another screen.
+		setGeometry(geometry() & screenGeom);
+		setFullScreen(true);
+	}
+	else
+	{
+		setFullScreen(false);
+		int x = conf->value("video/screen_x", 0).toInt();
+		int y = conf->value("video/screen_y", 0).toInt();
+		move(x + screenGeom.x(), y + screenGeom.y());
+	}
+
+	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
+	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
+	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
+	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
+	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
+	flagMaxFpsUpdatePending = false;
+
+	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
+	// plugins, because the gui create the QActions needed by some plugins.
+	StelApp::getInstance().initPlugIns();
+
+	QThread::currentThread()->setPriority(QThread::HighestPriority);
+	startMainLoop();
+}
+
+// This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
+// Almost all can be traced to insufficient driver level.
+// No changes of OpenGL state is done here.
+// If problems are detected, warn the user one time, but continue. Warning panel will be suppressed on next start.
+// Work in progress, as long as we get reports about bad systems or until OpenGL startup is finalized and safe.
+// Several tests do not apply to MacOS X.
+#if STEL_USE_NEW_OPENGL_WIDGETS
+	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
+#else
+	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const
+#endif
+{
+#ifdef Q_OS_MAC
+	Q_UNUSED(conf);
+#endif
+
+	QOpenGLContext* context=glWidget->context()->contextHandle();
 	QSurfaceFormat format=context->format();
 
+	// These tests are not required on MacOS X
+#ifndef Q_OS_MAC
 	bool openGLerror=false;
 	if (format.renderableType()==QSurfaceFormat::OpenGL || format.renderableType()==QSurfaceFormat::OpenGLES)
 	{
@@ -444,19 +532,26 @@ void StelMainView::init(QSettings* conf)
 		openGLerror=true;
 		qDebug() << "Neither OpenGL nor OpenGL ES detected: Unsupported Format!";
 	}
+#endif
 
 	QString glDriver(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 	qDebug() << "Driver version string:" << glDriver;
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-	qDebug() << "GL renderer is" << glRenderer;
+	qDebug() << "GL renderer is" << glRenderer;	
 
 	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
-	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting version), but in case of using ANGLE we need ps_3 hardware.
+	// As of V0.13.0..1, we use GLSL 1.10/GLSL ES 1.00 (implicitly, by omitting a #version line), but in case of using ANGLE we need hardware
+	// detected as providing ps_3_0.
 	// This means, usually systems with OpenGL3 support reported in the driver will work, those with reported 2.1 only will almost certainly fail.
 	// If platform does not even support minimal OpenGL version for Qt5, then tell the user about troubles and quit from application.
+	// This test is apparently not applicable on MacOS X due to its behaving differently from all other known OSes.
+	// The correct way to handle driver issues on MacOS X remains however unclear for now.
+#ifndef Q_OS_MAC
+	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
 	if ( openGLerror ||
-	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1))) ||
+	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
+	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))  )
 	{
 		#ifdef Q_OS_WIN
@@ -468,6 +563,7 @@ void StelMainView::init(QSettings* conf)
 		#endif
 		exit(1);
 	}
+#endif
 	// This call requires OpenGL2+.
 	QString glslString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 	qDebug() << "GL Shading Language version is" << glslString;
@@ -529,18 +625,18 @@ void StelMainView::init(QSettings* conf)
 		}
 	}
 #endif
-
+#ifndef Q_OS_MAC
 	// Do a similar test for MESA: Ensure we have at least Mesa 10, Mesa 9 on FreeBSD (used for hardware-acceleration of AMD IGP) was reported to lose the stars.
-	if (glDriver.contains("Mesa", Qt::CaseInsensitive))
+	if (isMesa)
 	{
-		QRegExp mesaRegExp("Mesa (\\d+)\\.(\\d+)"); // we need only major version. Minor should always be here. Test?
+		QRegExp mesaRegExp("Mesa (\\d+\\.\\d+)"); // we need only major version. Minor should always be here. Test?
 		int mesaPos=mesaRegExp.indexIn(glDriver);
 
 		if (mesaPos >-1)
 		{
-			float mesaVersion=mesaRegExp.cap(1).toFloat() + 0.1*mesaRegExp.cap(2).toFloat();
+			float mesaVersion=mesaRegExp.cap(1).toFloat();
 			qDebug() << "MESA Version Number after parsing: " << mesaVersion;
-			if ((mesaVersion<10.0))
+			if ((mesaVersion<10.0f))
 			{
 				openGLerror=true;
 				qDebug() << "This is not enough: we need Mesa 10.0 or later.";
@@ -579,10 +675,14 @@ void StelMainView::init(QSettings* conf)
 			qDebug() << "Please send a bug report that includes this log file and states if Stellarium runs or has problems.";
 		}
 	}
+#endif
 
-
-	// If GLSL version is less than 1.30 or GLSL ES 1.00, Stellarium cannot run properly. Depending on whatever driver/implementation details,
-	// Stellarium may crash or show only minor graphical errors. We show a soft-crash panel that can be suppressed by a startup option.
+	// Although our shaders are only GLSL1.10, there are frequent problems with systems just at this level of programmable shaders.
+	// If GLSL version is less than 1.30 or GLSL ES 1.00, Stellarium usually does run properly on Windows or various Linux flavours.
+	// Depending on whatever driver/implementation details, Stellarium may crash or show only minor graphical errors.
+	// On these systems, we show a warning panel that can be suppressed by a config option which is automatically added on first run.
+	// Again, based on a sample size of one, Macs have been reported already to always work in this case.
+#ifndef Q_OS_MAC
 	QRegExp glslRegExp("^(\\d\\.\\d\\d)");
 	int pos=glslRegExp.indexIn(glslString);
 	QRegExp glslesRegExp("ES (\\d\\.\\d\\d)");
@@ -591,7 +691,7 @@ void StelMainView::init(QSettings* conf)
 	{
 		float glslVersion=glslRegExp.cap(1).toFloat();
 		qDebug() << "GLSL Version Number after parsing: " << glslVersion;
-		if (glslVersion<1.3)
+		if (glslVersion<1.3f)
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL1.30 or later.";
@@ -671,61 +771,12 @@ void StelMainView::init(QSettings* conf)
 		qDebug() << "Cannot parse GLSL (ES) version string. This may indicate future problems.";
 		qDebug() << "Please send a bug report that includes this log file and states if Stellarium works or has problems.";
 	}
-
-	stelApp= new StelApp();
-	stelApp->setGui(gui);
-	stelApp->init(conf);
-	StelActionMgr *actionMgr = stelApp->getStelActionManager();
-	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
-	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
-	
-	StelPainter::initGLShaders();
-
-	setResizeMode(QDeclarativeView::SizeRootObjectToView);
-	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
-	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
-	rootContext()->setContextProperty("stelApp", stelApp);	
-	setSource(QUrl("qrc:/qml/main.qml"));
-	
-	QSize size = glWidget->windowHandle()->screen()->size();
-	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
-		     conf->value("video/screen_h", size.height()).toInt());
-
-	bool fullscreen = conf->value("video/fullscreen", true).toBool();
-
-	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
-	resize(size);
-
-	if (fullscreen)
-	{
-		setFullScreen(true);
-	}
-	else
-	{
-		setFullScreen(false);
-		int x = conf->value("video/screen_x", 0).toInt();
-		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);	
-	}
-
-	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
-	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
-	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
-	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
-	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
-	flagMaxFpsUpdatePending = false;
-
-	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
-	// plugins, because the gui create the QActions needed by some plugins.
-	StelApp::getInstance().initPlugIns();
-
-	QThread::currentThread()->setPriority(QThread::HighestPriority);
-	startMainLoop();
+#endif
 }
 
+// Debug info about OpenGL capabilities.
 void StelMainView::dumpOpenGLdiagnostics() const
 {
-	// GZ: Debug info about OpenGL capabilities.
 	QOpenGLContext *context = QOpenGLContext::currentContext();
 	if (context)
 	{
@@ -733,7 +784,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		qDebug() << "initializeOpenGLFunctions()...";
 	}
 	else
-		qDebug() << "No OpenGL context";
+		qDebug() << "dumpOpenGLdiagnostics(): No OpenGL context";
 
 	QOpenGLFunctions::OpenGLFeatures oglFeatures=context->functions()->openGLFeatures();
 	qDebug() << "OpenGL Features:";
@@ -902,7 +953,10 @@ void StelMainView::minFpsChanged()
 
 void StelMainView::mouseMoveEvent(QMouseEvent* event)
 {
-	if (event->buttons())
+	// We notify the applicatio to increase the fps if a button has been
+	// clicked, but also if the cursor is currently hidden, so that it gets
+	// restored.
+	if (event->buttons() || QGuiApplication::overrideCursor()!=0)
 		thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseMoveEvent(event);
 }
@@ -1012,4 +1066,9 @@ void StelMainView::doScreenshot(void)
 	if (!im.save(shotPath.filePath())) {
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
+}
+
+QPoint StelMainView::getMousePos()
+{
+	return glWidget->mapFromGlobal(QCursor::pos());
 }

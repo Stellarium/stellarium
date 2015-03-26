@@ -28,6 +28,7 @@
 #include "StelTranslator.hpp"
 
 #include "StelObjectMgr.hpp"
+#include "StelGui.hpp"
 #include "StelUtils.hpp"
 
 #include <QDebug>
@@ -241,37 +242,62 @@ void SearchDialog::populateCoordinateSystemsList()
 
 void SearchDialog::populateCoordinateAxis()
 {
-	switch (getCurrentCoordinateSystem()) {
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool xnormal = true;
+
+	ui->AxisXSpinBox->setDecimals(2);
+	ui->AxisYSpinBox->setDecimals(2);
+
+	switch (getCurrentCoordinateSystem()) {		
 		case equatorialJ2000:
 		case equatorial:
 		{
 			ui->AxisXLabel->setText(q_("Right ascension"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
 			ui->AxisYLabel->setText(q_("Declination"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			xnormal = true;
 			break;
 		}
 		case horizontal:
 		{
 			ui->AxisXLabel->setText(q_("Azimuth"));
-			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			ui->AxisYLabel->setText(q_("Altitude"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			xnormal = false;
 			break;
 		}
 		case galactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
-			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbolsUnsigned);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			ui->AxisYLabel->setText(q_("Latitude"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			xnormal = false;
 			break;
 		}
+	}
+
+	if (withDecimalDegree)
+	{
+		ui->AxisXSpinBox->setDecimals(5);
+		ui->AxisYSpinBox->setDecimals(5);
+		ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
+		ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
+		ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+
+	}
+	else
+	{
+		if (xnormal)
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::Normal);
 	}
 }
 
@@ -366,6 +392,7 @@ void SearchDialog::createDialogContent()
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
 	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateListTab()));
 	updateListTab();
 
 	// Set the focus directly on the line edit
@@ -724,7 +751,8 @@ void SearchDialog::updateListTab()
 	{
 		ui->searchInEnglishCheckBox->show();
 	}
-	ui->objectTypeComboBox->clear();
+	ui->objectTypeComboBox->blockSignals(true);
+	ui->objectTypeComboBox->clear();	
 	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
 	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
 	{
@@ -733,7 +761,9 @@ void SearchDialog::updateListTab()
 			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ? it.value(): q_(it.value()));
 			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
 		}
-	}
+	}	
+	ui->objectTypeComboBox->model()->sort(0, Qt::AscendingOrder);
+	ui->objectTypeComboBox->blockSignals(false);
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
 }
 

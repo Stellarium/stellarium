@@ -27,7 +27,7 @@
 #include "StelUtils.hpp"
 
 StelTextureSP MeteorShower::radiantTexture;
-float MeteorShower::showLabels = true;
+bool MeteorShower::showLabels = true;
 bool MeteorShower::radiantMarkerEnabled = true;
 bool MeteorShower::showActiveRadiantsOnly = true;
 
@@ -92,6 +92,8 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	StelPainter painter(StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000));
 	draw(painter);
 
+	qsrand(QDateTime::currentMSecsSinceEpoch());
+
 	initialized = true;
 }
 
@@ -142,7 +144,7 @@ QVariantMap MeteorShower::getMap(void)
 
 float MeteorShower::getSelectPriority(const StelCore*) const
 {
-	return -2.0;
+	return -4.0;
 }
 
 QString MeteorShower::getDesignation() const
@@ -437,7 +439,7 @@ void MeteorShower::draw(StelPainter &painter)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	qreal r, g, b;
-	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
+	float alpha = 0.85f + ((double) qrand() / (RAND_MAX))/10;
 	switch(status)
 	{
 		case ACTIVE_REAL: //Active, real data

@@ -39,6 +39,7 @@ MeteorMgr::MeteorMgr(int zhr, int maxv )
 	, flagShow(true)
 {
 	setObjectName("MeteorMgr");
+	qsrand (QDateTime::currentMSecsSinceEpoch());
 }
 
 MeteorMgr::~MeteorMgr()
@@ -89,9 +90,6 @@ void MeteorMgr::setMaxVelocity(int maxv)
 
 void MeteorMgr::update(double deltaTime)
 {
-#ifdef _MSC_BUILD
-	return;
-#endif
 	if (!flagShow)
 	{
 		return;
@@ -114,13 +112,16 @@ void MeteorMgr::update(double deltaTime)
 
 	// step through and update all active meteors
 	std::vector<Meteor*>::iterator iter;
-	for (iter = active.begin(); iter != active.end(); ++iter)
+	for (iter = active.begin(); iter != active.end(); )
 	{
 		if (!(*iter)->update(deltaTime))
 		{
 			delete *iter;
 			iter = active.erase(iter);
-			iter--;  // important!
+		}
+		else
+		{
+			++iter;
 		}
 	}
 
@@ -142,7 +143,7 @@ void MeteorMgr::update(double deltaTime)
 	for (int i=0; i<mpf; ++i)
 	{
 		// start new meteor based on ZHR time probability
-		double prob = ((double)rand())/RAND_MAX;
+		double prob = ((double)qrand())/RAND_MAX;
 		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 		{
 			Meteor *m = new Meteor(core, maxVelocity);

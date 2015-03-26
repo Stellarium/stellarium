@@ -38,6 +38,7 @@
 #include "StelProjector.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 
 #include <QAction>
 #include <QDebug>
@@ -109,6 +110,7 @@ Oculars::Oculars():
 	flagEclipticLine(false),
 	flagEclipticJ2000Grid(false),
 	flagMeridianLine(false),
+	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
 	flagAdaptation(false),
@@ -1196,6 +1198,7 @@ void Oculars::toggleCCD(bool show)
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();	
 	if (show) {
+		initialFOV = movementManager->getCurrentFov();
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
 		if (flagShowOculars) {
@@ -1225,9 +1228,12 @@ void Oculars::toggleCCD(bool show)
 	} else {
 		flagShowCCD = false;
 
-		//Zoom out		
-		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
+		//Zoom out		
+		if (getFlagInitFovUsage())
+			movementManager->zoomTo(movementManager->getInitFov());
+		else
+			movementManager->zoomTo(initialFOV);
 
 		if (getFlagUseFlipForCCD())
 		{
@@ -1376,7 +1382,7 @@ void Oculars::paintCCDBounds()
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 
 			// flip are needed and allowed?
-			const float ratioLimit = 0.125f;
+			float ratioLimit = 0.125f;
 			if (getFlagUseFlipForCCD() && (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit))
 			{
 				core->setFlipHorz(telescope->isHFlipped());
@@ -1399,7 +1405,8 @@ void Oculars::paintCCDBounds()
 
 			if (width > 0.0 && height > 0.0) {
 				QPoint a, b;
-				QTransform transform = QTransform().translate(params.viewportCenter[0], params.viewportCenter[1]).rotate(-ccdRotationAngle);
+				QTransform transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
+						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-ccdRotationAngle);
 				// bottom line
 				a = transform.map(QPoint(-width/2.0, -height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
@@ -1416,6 +1423,44 @@ void Oculars::paintCCDBounds()
 				a = transform.map(QPoint(width/2.0, height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+
+				// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
+				// frame and equatorial coordinates for epoch J2000.0 of that center.
+				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
+
+				ratioLimit = 0.25f;
+				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
+				{
+					// draw cross at center
+					float cross = width>height ? height/50.f : width/50.f;
+					a = transform.map(QPoint(0.f, -cross));
+					b = transform.map(QPoint(0.f, cross));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					a = transform.map(QPoint(-cross, 0.f));
+					b = transform.map(QPoint(cross, 0.f));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// calculate coordinates of the center and show it
+					Vec3d centerPosition;
+					Vec2f center = projector->getViewportCenter();
+					projector->unProject(center[0], center[1], centerPosition);
+					double cx, cy;
+					QString cxt, cyt;
+					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
+					bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+					if (withDecimalDegree)
+					{
+						cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
+						cyt = StelUtils::radToDecDegStr(cy);
+					}
+					else
+					{
+						cxt = StelUtils::radToHmsStr(cx, true);
+						cyt = StelUtils::radToDmsStr(cy, true);
+					}
+					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
+					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
+					painter.drawText(a.x(), a.y(), coords, -ccdRotationAngle);
+				}
 			}
 		}
 	}
@@ -1511,8 +1556,8 @@ void Oculars::paintText(const StelCore* core)
 	if(selectedCCDIndex != -1) {
 		ccd = ccds[selectedCCDIndex];
 	}
-	Ocular *ocular = oculars[selectedOcularIndex];
-	Telescope *telescope = telescopes[selectedTelescopeIndex];
+	Ocular *ocular = selectedOcularIndex >=0 ? oculars[selectedOcularIndex] : NULL;
+	Telescope *telescope = selectedTelescopeIndex >=0 ? telescopes[selectedTelescopeIndex] : NULL;
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
 	// set up the color and the GL state
@@ -1738,6 +1783,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEclipticLine(flagEclipticLine);
 	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
+	gridManager->setFlagLongitudeLine(flagLongitudeLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
@@ -1781,6 +1827,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
+			flagLongitudeLine = gridManager->getFlagLongitudeLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
 
@@ -1821,6 +1868,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
+	gridManager->setFlagLongitudeLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);

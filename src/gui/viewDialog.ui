@@ -1370,15 +1370,8 @@
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout">
-               <item>
-                <widget class="QLabel" name="label_6">
-                 <property name="text">
-                  <string>Art brightness:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="0" column="1">
                 <widget class="QDoubleSpinBox" name="constellationArtBrightnessSpinBox">
                  <property name="maximum">
                   <double>1.000000000000000</double>
@@ -1388,17 +1381,50 @@
                  </property>
                 </widget>
                </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Art brightness:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Thickness of lines:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="constellationLineThicknessSpinBox">
+                 <property name="toolTip">
+                  <string>Value in pixels</string>
+                 </property>
+                 <property name="decimals">
+                  <number>0</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>5.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item>
-              <spacer name="verticalSpacer_3">
+              <spacer name="verticalSpacer">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
-                 <height>5</height>
+                 <height>40</height>
                 </size>
                </property>
               </spacer>
@@ -1466,6 +1492,13 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QCheckBox" name="showCardinalPointsCheckBox">
+                   <property name="text">
+                    <string>Cardinal points</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item>
@@ -1491,22 +1524,22 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showHorizonLineCheckBox">
-                   <property name="toolTip">
-                    <string>Show horizon line</string>
-                   </property>
-                   <property name="text">
-                    <string>Horizon</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
                   <widget class="QCheckBox" name="showEclipticLineCheckBox">
                    <property name="toolTip">
                     <string>Show ecliptic line</string>
                    </property>
                    <property name="text">
                     <string>Ecliptic</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showHorizonLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show horizon line</string>
+                   </property>
+                   <property name="text">
+                    <string>Horizon</string>
                    </property>
                   </widget>
                  </item>
@@ -1520,18 +1553,17 @@
                    </property>
                   </widget>
                  </item>
+                 <item>
+                  <widget class="QCheckBox" name="showLongitudeLineCheckBox">
+                   <property name="toolTip">
+                    <string>Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.</string>
+                   </property>
+                   <property name="text">
+                    <string>O./C. longitude</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="verticalLayout_16">
-               <item>
-                <widget class="QCheckBox" name="showCardinalPointsCheckBox">
-                 <property name="text">
-                  <string>Cardinal points</string>
-                 </property>
-                </widget>
                </item>
               </layout>
              </item>
@@ -2128,11 +2160,10 @@
   <tabstop>showEclipticGridJ2000CheckBox</tabstop>
   <tabstop>showAzimuthalGridCheckBox</tabstop>
   <tabstop>showGalacticGridCheckBox</tabstop>
-  <tabstop>showCardinalPointsCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
   <tabstop>showMeridianLineCheckBox</tabstop>
-  <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showGalacticEquatorLineCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>

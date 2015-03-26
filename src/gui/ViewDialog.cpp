@@ -79,6 +79,7 @@ void ViewDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateZhrDescription();
 		populateLists();
+		populateLightPollution();
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
@@ -268,6 +269,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEquatorLineCheckBox, "actionShow_Equator_Line");
 	connectCheckBox(ui->showEclipticLineCheckBox, "actionShow_Ecliptic_Line");
 	connectCheckBox(ui->showMeridianLineCheckBox, "actionShow_Meridian_Line");
+	connectCheckBox(ui->showLongitudeLineCheckBox, "actionShow_Longitude_Line");
 	connectCheckBox(ui->showHorizonLineCheckBox, "actionShow_Horizon_Line");
 	connectCheckBox(ui->showEquatorialGridCheckBox, "actionShow_Equatorial_Grid");
 	connectCheckBox(ui->showGalacticGridCheckBox, "actionShow_Galactic_Grid");
@@ -285,6 +287,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
 	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
 	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
+	ui->constellationLineThicknessSpinBox->setValue(cmgr->getConstellationLineThickness());
+	connect(ui->constellationLineThicknessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setConstellationLineThickness(double)));
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
@@ -385,9 +389,9 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 	nelm.append("4.0");
 
 	QString tooltip = QString("%1 (%2 %3)")
-			.arg(list.at(i).toLocal8Bit().constData())
+			.arg(list.at(i))
 			.arg(q_("The naked-eye limiting magnitude is"))
-			.arg(nelm.at(i).toLocal8Bit().constData());
+			.arg(nelm.at(i));
 
 	ui->lightPollutionSpinBox->setToolTip(tooltip);
 }

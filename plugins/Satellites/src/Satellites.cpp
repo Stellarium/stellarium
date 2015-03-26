@@ -464,6 +464,9 @@ QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbI
 QStringList Satellites::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
+		return result;
+
 	if (inEnglish)
 	{
 		foreach(const SatelliteP& sat, satellites)
@@ -513,11 +516,11 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("hint_color", "0.0,0.4,0.6");
 	conf->setValue("hint_font_size", 10);
 	conf->setValue("update_frequency_hours", 72);
-	conf->setValue("orbit_line_flag", true);
+	conf->setValue("orbit_line_flag", false);
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
-	conf->setValue("realistic_mode_enabled", false);
+	conf->setValue("realistic_mode_enabled", true);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -1416,6 +1419,14 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			else
 				qWarning() << "Satellites:" << sat->id << sat->name
 				           << "is missing in the update lists.";
+			missingCount++;
+		}
+		// All satellites, who has invalid orbit should be removed.
+		if (!sat->orbitValid)
+		{
+			toBeRemoved.append(sat->id);
+			qWarning() << "Satellite" << sat->id << sat->name
+				   << "has invalid orbit and will be removed.";
 			missingCount++;
 		}
 	}

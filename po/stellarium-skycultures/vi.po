@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-29 18:04+0600\n"
-"PO-Revision-Date: 2014-07-20 14:32+0000\n"
+"POT-Creation-Date: 2015-03-17 21:57+0600\n"
+"PO-Revision-Date: 2015-01-27 15:52+0000\n"
 "Last-Translator: thanbang <thanbang00@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-30 05:34+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2015-03-18 05:45+0000\n"
+"X-Generator: Launchpad (build 17403)\n"
 
 #: skycultures/western/star_names.fab:27
 msgid "Polaris"
@@ -28,32 +28,32 @@ msgstr ""
 
 #: skycultures/translations.fab:10
 msgid "Mercury"
-msgstr ""
+msgstr "Thuỷ tinh"
 
 #: skycultures/translations.fab:11
 msgid "Venus"
-msgstr ""
+msgstr "Kim tinh"
 
 #: skycultures/translations.fab:12
 msgid "Earth"
-msgstr ""
+msgstr "Trái đất"
 
 #: skycultures/translations.fab:13
 #: skycultures/korean/constellation_names.eng.fab:125
 msgid "Moon"
-msgstr ""
+msgstr "Mặt trăng"
 
 #: skycultures/translations.fab:14
 msgid "Mars"
-msgstr ""
+msgstr "Hỏa tinh"
 
 #: skycultures/translations.fab:15
 msgid "Deimos"
-msgstr ""
+msgstr "Deimos (1 vệ tinh của Hỏa tinh)"
 
 #: skycultures/translations.fab:16
 msgid "Phobos"
-msgstr ""
+msgstr "Phobos (1 vệ tinh của Hỏa tinh)"
 
 #: skycultures/translations.fab:17
 msgid "Ceres"
@@ -73,23 +73,23 @@ msgstr ""
 
 #: skycultures/translations.fab:21
 msgid "Jupiter"
-msgstr ""
+msgstr "Mộc tinh"
 
 #: skycultures/translations.fab:22
 msgid "Io"
-msgstr ""
+msgstr "Io (1 vệ tinh của Mộc tinh)"
 
 #: skycultures/translations.fab:23
 msgid "Europa"
-msgstr ""
+msgstr "Europa (1 vệ tinh của Mộc tinh)"
 
 #: skycultures/translations.fab:24
 msgid "Ganymede"
-msgstr ""
+msgstr "Ganymede (1 vệ tinh của Mộc tinh)"
 
 #: skycultures/translations.fab:25
 msgid "Callisto"
-msgstr ""
+msgstr "Callisto (vệ tinh lớn thứ 2 của Mộc tinh)"
 
 #: skycultures/translations.fab:26
 msgid "Amalthea"
@@ -137,51 +137,51 @@ msgstr ""
 
 #: skycultures/translations.fab:37
 msgid "Saturn"
-msgstr ""
+msgstr "Thổ tinh"
 
 #: skycultures/translations.fab:38
 msgid "Mimas"
-msgstr ""
+msgstr "Mimas (1 vệ tinh của Thổ tinh)"
 
 #: skycultures/translations.fab:39
 msgid "Enceladus"
-msgstr ""
+msgstr "Enceladus (1 vệ tinh của Thổ tinh)"
 
 #: skycultures/translations.fab:40
 msgid "Tethys"
-msgstr ""
+msgstr "Tethys (1 vệ tinh của Thổ tinh)"
 
 #: skycultures/translations.fab:41
 msgid "Dione"
-msgstr ""
+msgstr "Dione (1 vệ tinh của Thổ tinh)"
 
 #: skycultures/translations.fab:42
 msgid "Rhea"
-msgstr ""
+msgstr "Rhea (vệ tinh không có không khí lớn nhất của Thổ tinh)"
 
 #: skycultures/translations.fab:43
 msgid "Titan"
-msgstr ""
+msgstr "Titan (vệ tinh lớn nhất của Thổ tinh)"
 
 #: skycultures/translations.fab:44
 msgid "Hyperion"
-msgstr ""
+msgstr "Hyperion (1 vệ tinh của Thổ tinh)"
 
 #: skycultures/translations.fab:45
 msgid "Iapetus"
-msgstr ""
+msgstr "Iapetus (1 vệ tinh của Thổ tinh)"
 
 #: skycultures/translations.fab:46
 msgid "Phoebe"
-msgstr ""
+msgstr "Phoebe (1 vệ tinh của Thổ tinh)"
 
 #: skycultures/translations.fab:47
 msgid "Neptune"
-msgstr ""
+msgstr "Hải vương tinh"
 
 #: skycultures/translations.fab:48
 msgid "Uranus"
-msgstr ""
+msgstr "Thiên vương tinh"
 
 #: skycultures/translations.fab:49
 msgid "Miranda"
@@ -205,11 +205,11 @@ msgstr ""
 
 #: skycultures/translations.fab:54
 msgid "Pluto"
-msgstr ""
+msgstr "Diêm vương tinh"
 
 #: skycultures/translations.fab:55
 msgid "Charon"
-msgstr ""
+msgstr "Charon (vệ tinh của Diêm Vương Tinh)"
 
 #. TRANSLATORS: Moon of Pluto (II)
 #: skycultures/translations.fab:57
@@ -295,155 +295,175 @@ msgstr ""
 
 #: skycultures/translations.fab:78
 msgid "Solar System Observer"
+msgstr "Người quan sát hệ mặt trời"
+
+#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+#: skycultures/translations.fab:80
+msgid "SpaceShip"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
-#: skycultures/translations.fab:84
+#: skycultures/translations.fab:86
 msgid "Sedna"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
-#: skycultures/translations.fab:86
+#: skycultures/translations.fab:88
 msgid "Quaoar"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
-#: skycultures/translations.fab:88
+#: skycultures/translations.fab:90
 msgid "Orcus"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
-#: skycultures/translations.fab:90
+#: skycultures/translations.fab:92
 msgid "Haumea"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (20000) Varuna
-#: skycultures/translations.fab:92
+#: skycultures/translations.fab:94
 msgid "Varuna"
 msgstr ""
 
 #. TRANSLATORS: TNO/Asteroid (136472) Makemake
-#: skycultures/translations.fab:94
+#: skycultures/translations.fab:96
 msgid "Makemake"
 msgstr ""
 
-#. TRANSLATORS: Asteroid (5) Astraea
+#. TRANSLATORS: Cubewano (120347) Salacia
+#: skycultures/translations.fab:98
+msgid "Salacia"
+msgstr ""
+
+#. TRANSLATORS: Plutino (38628) Huya
 #: skycultures/translations.fab:100
+msgid "Huya"
+msgstr ""
+
+#. TRANSLATORS: Cubewano (174567) Varda
+#: skycultures/translations.fab:102
+msgid "Varda"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: skycultures/translations.fab:109
 msgid "Astraea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: skycultures/translations.fab:102
+#: skycultures/translations.fab:111
 msgid "Hebe"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: skycultures/translations.fab:104
+#: skycultures/translations.fab:113
 msgid "Iris"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: skycultures/translations.fab:106
+#: skycultures/translations.fab:115
 msgid "Flora"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (9) Metis and moon of Jupiter
-#: skycultures/translations.fab:108
+#: skycultures/translations.fab:117
 msgid "Metis"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: skycultures/translations.fab:110
+#: skycultures/translations.fab:119
 msgid "Hygiea"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (41) Daphne
-#: skycultures/translations.fab:112
+#: skycultures/translations.fab:121
 msgid "Daphne"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: skycultures/translations.fab:114
+#: skycultures/translations.fab:123
 msgid "Amor"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: skycultures/translations.fab:116
+#: skycultures/translations.fab:125
 msgid "Apophis"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: skycultures/translations.fab:118
+#: skycultures/translations.fab:127
 msgid "Chiron"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: skycultures/translations.fab:120
+#: skycultures/translations.fab:129
 msgid "Eros"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: skycultures/translations.fab:122
+#: skycultures/translations.fab:131
 msgid "Hektor"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (3200) Phaethon
-#: skycultures/translations.fab:124
+#: skycultures/translations.fab:133
 msgid "Phaethon"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
-#: skycultures/translations.fab:126
+#: skycultures/translations.fab:135
 msgid "Sisyphus"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
-#: skycultures/translations.fab:128
+#: skycultures/translations.fab:137
 msgid "Daedalus"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1566) Icarus
-#: skycultures/translations.fab:130
+#: skycultures/translations.fab:139
 msgid "Icarus"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1809) Prometheus
-#: skycultures/translations.fab:132
+#: skycultures/translations.fab:141
 msgid "Prometheus"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
-#: skycultures/translations.fab:134
+#: skycultures/translations.fab:143
 msgid "Epimetheus"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (951) Gaspra
-#: skycultures/translations.fab:136
+#: skycultures/translations.fab:145
 msgid "Gaspra"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (243) Ida
-#: skycultures/translations.fab:138
+#: skycultures/translations.fab:147
 msgid "Ida"
 msgstr ""
 
 #. TRANSLATORS: Asteroid (218) Bianca
-#: skycultures/translations.fab:140
+#: skycultures/translations.fab:149
 msgid "Bianca"
 msgstr ""
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
-#: skycultures/translations.fab:146
+#: skycultures/translations.fab:154
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: skycultures/translations.fab:156
+#: skycultures/translations.fab:164
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: skycultures/translations.fab:158
+#: skycultures/translations.fab:166
 msgid "Kepler's Supernova"
 msgstr ""
 
@@ -468,7 +488,7 @@ msgid "Beehive cluster"
 msgstr ""
 
 #: nebulae/default/ngc2000names.dat:224
-msgid "Black-eye galaxy"
+msgid "Black Eye Galaxy"
 msgstr ""
 
 #: nebulae/default/ngc2000names.dat:225
@@ -1143,6 +1163,27 @@ msgstr ""
 
 #: nebulae/default/ngc2000names.dat:421
 msgid "Summer Beehive cluster"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:422
+msgid "Markarian's Chain"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:423
+msgid "Maffei Group"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:424 nebulae/default/ngc2000names.dat:425
+#: nebulae/default/ngc2000names.dat:426 nebulae/default/ngc2000names.dat:427
+msgid "Robert's Quartet"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:428
+msgid "Deer Lick Group"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:429
+msgid "Spider nebula"
 msgstr ""
 
 #: skycultures/arabic/constellation_names.eng.fab:1
@@ -2439,7 +2480,7 @@ msgid "The gazelles 3"
 msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:24
-msgid "The Soulder side of Al-Jawza"
+msgid "The Shoulder side of Al-Jawza"
 msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:25
@@ -3064,6 +3105,7 @@ msgid "Coiled Thong"
 msgstr "Quán Tác"
 
 #: skycultures/chinese/constellation_names.eng.fab:4
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:31
 msgid "Wings"
 msgstr "Dực"
 
@@ -3072,6 +3114,7 @@ msgid "Chariot"
 msgstr "Chẩn"
 
 #: skycultures/chinese/constellation_names.eng.fab:6
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:7
 msgid "Tail"
 msgstr "Vĩ"
 
@@ -3080,13 +3123,14 @@ msgid "Winnowing Basket"
 msgstr "Cơ"
 
 #: skycultures/chinese/constellation_names.eng.fab:8
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:10
 #: skycultures/lakota/constellation_names.eng.fab:4
 msgid "Dipper"
 msgstr "Đẩu"
 
 #: skycultures/chinese/constellation_names.eng.fab:9
 msgid "Drum"
-msgstr ""
+msgstr "Hà Cổ"
 
 #: skycultures/chinese/constellation_names.eng.fab:10
 #: skycultures/korean/constellation_names.eng.fab:197
@@ -3095,13 +3139,15 @@ msgstr "Tam Đài"
 
 #: skycultures/chinese/constellation_names.eng.fab:11
 msgid "Imperial Guards"
-msgstr ""
+msgstr "Kị Cung"
 
 #: skycultures/chinese/constellation_names.eng.fab:12
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:2
 msgid "Horn"
 msgstr "Giác"
 
 #: skycultures/chinese/constellation_names.eng.fab:13
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:28
 msgid "Willow"
 msgstr "Liễu"
 
@@ -3118,14 +3164,16 @@ msgid "River Turtle"
 msgstr "Miết"
 
 #: skycultures/chinese/constellation_names.eng.fab:17
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:20
 msgid "Stomach"
 msgstr "Vị"
 
 #: skycultures/chinese/constellation_names.eng.fab:18
 msgid "Great General"
-msgstr ""
+msgstr "Thiên Đại Tướng Quân"
 
 #: skycultures/chinese/constellation_names.eng.fab:19
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:16
 msgid "Wall"
 msgstr "Bích"
 
@@ -3134,24 +3182,25 @@ msgid "Legs"
 msgstr "Khuê"
 
 #: skycultures/chinese/constellation_names.eng.fab:21
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:4
 msgid "Root"
 msgstr "Thị Túc"
 
 #: skycultures/chinese/constellation_names.eng.fab:22
 msgid "Ramparts"
-msgstr ""
+msgstr "Lũy Bịch Trận"
 
 #: skycultures/chinese/constellation_names.eng.fab:23
 msgid "Flying Corridor"
-msgstr ""
+msgstr "Các đạo"
 
 #: skycultures/chinese/constellation_names.eng.fab:24
 msgid "Outer Fence"
-msgstr ""
+msgstr "Ngoại Bình"
 
 #: skycultures/chinese/constellation_names.eng.fab:25
 msgid "Ford"
-msgstr ""
+msgstr "Thiên Tân"
 
 #: skycultures/chinese/constellation_names.eng.fab:26
 msgid "Seven Excellencies"
@@ -3168,21 +3217,22 @@ msgstr "Ngũ Xa"
 #: skycultures/chinese/constellation_names.eng.fab:29
 #: skycultures/korean/constellation_names.eng.fab:122
 msgid "Rolled Tongue"
-msgstr ""
+msgstr "Quyển Thiệt"
 
 #: skycultures/chinese/constellation_names.eng.fab:30
 #: skycultures/egyptian/constellation_names.eng.fab:21
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:22
 msgid "Net"
 msgstr "Tất"
 
 #: skycultures/chinese/constellation_names.eng.fab:31
 #: skycultures/korean/constellation_names.eng.fab:154
 msgid "Toilet"
-msgstr ""
+msgstr "Xí"
 
 #: skycultures/chinese/constellation_names.eng.fab:32
 msgid "Screen"
-msgstr ""
+msgstr "Bình"
 
 #: skycultures/chinese/constellation_names.eng.fab:33
 msgid "Soldiers Market"
@@ -3190,7 +3240,7 @@ msgstr "Quân Thị"
 
 #: skycultures/chinese/constellation_names.eng.fab:34
 msgid "Square Granary"
-msgstr ""
+msgstr "Thiên Thương"
 
 #: skycultures/chinese/constellation_names.eng.fab:35
 msgid "Three Stars"
@@ -3198,23 +3248,24 @@ msgstr "Sâm"
 
 #: skycultures/chinese/constellation_names.eng.fab:36
 msgid "Four Channels"
-msgstr ""
+msgstr "Tứ Độc"
 
 #: skycultures/chinese/constellation_names.eng.fab:37
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:26
 msgid "Well"
 msgstr "Tỉnh"
 
 #: skycultures/chinese/constellation_names.eng.fab:38
 msgid "South River"
-msgstr ""
+msgstr "Nam Hà"
 
 #: skycultures/chinese/constellation_names.eng.fab:39
 msgid "North River"
-msgstr ""
+msgstr "Bắc Hà"
 
 #: skycultures/chinese/constellation_names.eng.fab:40
 msgid "Five Feudal Kings "
-msgstr ""
+msgstr "Ngũ Chư Hầu "
 
 #: skycultures/chinese/constellation_names.eng.fab:41
 msgid "Orchard"
@@ -3238,7 +3289,7 @@ msgstr "Trương"
 
 #: skycultures/chinese/constellation_names.eng.fab:46
 msgid "Arsenal"
-msgstr ""
+msgstr "Khố Lâu"
 
 #: skycultures/chinese/constellation_names.eng.fab:47
 msgid "Hook"
@@ -3250,11 +3301,11 @@ msgstr "Thái Vi Viên"
 
 #: skycultures/chinese/constellation_names.eng.fab:49
 msgid "Jade Well"
-msgstr ""
+msgstr "Ngọc Tỉnh"
 
 #: skycultures/chinese/constellation_names.eng.fab:50
 msgid "Lance"
-msgstr ""
+msgstr "Cánh Hà"
 
 #: skycultures/chinese/constellation_names.eng.fab:51
 #: skycultures/egyptian/constellation_names.eng.fab:10
@@ -3273,20 +3324,20 @@ msgstr "Thiên Cẩu"
 
 #: skycultures/chinese/constellation_names.eng.fab:54
 msgid "Earth God's Temple "
-msgstr ""
+msgstr "Thiên Xã "
 
 #: skycultures/chinese/constellation_names.eng.fab:55
 msgid "Bow and Arrow "
-msgstr "Hồ & Tiễn "
+msgstr "Cô Thỉ "
 
 #: skycultures/chinese/constellation_names.eng.fab:56
 msgid "Pestle"
-msgstr ""
+msgstr "Chử"
 
 #: skycultures/chinese/constellation_names.eng.fab:57
 #: skycultures/korean/constellation_names.eng.fab:80
 msgid "Mortar"
-msgstr ""
+msgstr "Cữu"
 
 #: skycultures/chinese/constellation_names.eng.fab:58
 msgid "Rooftop"
@@ -3294,19 +3345,19 @@ msgstr "Nguy"
 
 #: skycultures/chinese/constellation_names.eng.fab:59
 msgid "Thunderbolt"
-msgstr ""
+msgstr "Phích Lịch"
 
 #: skycultures/chinese/constellation_names.eng.fab:60
 msgid "Chariot Yard"
-msgstr ""
+msgstr "Xa Phủ"
 
 #: skycultures/chinese/constellation_names.eng.fab:61
 msgid "Good Gourd"
-msgstr ""
+msgstr "Hồ Qua"
 
 #: skycultures/chinese/constellation_names.eng.fab:62
 msgid "Rotten gourd"
-msgstr ""
+msgstr "Bại Qua"
 
 #: skycultures/chinese/constellation_names.eng.fab:63
 msgid "Encampment"
@@ -3314,13 +3365,14 @@ msgstr "Thất"
 
 #: skycultures/chinese/constellation_names.eng.fab:64
 msgid "Thunder and Lightning "
-msgstr ""
+msgstr "Lôi Điện "
 
 #: skycultures/chinese/constellation_names.eng.fab:65
 msgid "Palace Gate"
-msgstr ""
+msgstr "Khuyết Khưu"
 
 #: skycultures/chinese/constellation_names.eng.fab:66
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:13
 msgid "Emptiness"
 msgstr "Hư"
 
@@ -3337,10 +3389,12 @@ msgid "Ox"
 msgstr "Ngưu"
 
 #: skycultures/chinese/constellation_names.eng.fab:70
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:6
 msgid "Heart"
 msgstr "Tâm"
 
 #: skycultures/chinese/constellation_names.eng.fab:71
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:15
 msgid "Room"
 msgstr "Phòng"
 
@@ -3354,7 +3408,7 @@ msgstr "Kiên"
 
 #: skycultures/chinese/constellation_names.eng.fab:74
 msgid "Flail"
-msgstr "Cái đập lúa"
+msgstr "Thiên Phầu"
 
 #: skycultures/chinese/constellation_names.eng.fab:75
 msgid "Spear"
@@ -3392,7 +3446,7 @@ msgstr "Cửa Đông"
 
 #: skycultures/chinese/constellation_names.eng.fab:83
 msgid "Farmland"
-msgstr ""
+msgstr "Thiên Điền"
 
 #: skycultures/chinese/constellation_names.eng.fab:84
 msgid "Star"
@@ -3408,15 +3462,16 @@ msgstr "Hiên Viên"
 
 #: skycultures/chinese/constellation_names.eng.fab:87
 msgid "Tripod"
-msgstr ""
+msgstr "Chu Đỉnh"
 
 #: skycultures/chinese/constellation_names.eng.fab:88
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:3
 msgid "Neck"
 msgstr "Cang"
 
 #: skycultures/chinese/constellation_names.eng.fab:89
 msgid "Zaofu"
-msgstr ""
+msgstr "Tạo Phủ"
 
 #: skycultures/chinese/constellation_names.eng.fab:90
 msgid "Market Officer"
@@ -4041,6 +4096,97 @@ msgstr ""
 
 #: skycultures/indian/star_names.fab:21
 msgid "Auggashta"
+msgstr ""
+
+#. TRANSLATORS: Native name of the Sun in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:2
+msgid "Surya Deva"
+msgstr ""
+
+#. TRANSLATORS: Native name of the Moon in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:4
+msgid "Chandra"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mercury in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:6
+msgid "Budha"
+msgstr ""
+
+#. TRANSLATORS: Native name of Venus in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:8
+msgid "Shukr"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mars in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:10
+msgid "Mangala"
+msgstr ""
+
+#. TRANSLATORS: Native name of Jupiter in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:12
+msgid "Guru"
+msgstr ""
+
+#. TRANSLATORS: Native name of Saturn in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:14
+msgid "Shani"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:5
+msgid "Chamber"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:8
+msgid "Basket"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:11
+msgid "Cow"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:12
+msgid "Woman"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:14
+msgid "Roof Top"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:18
+msgid "Stride"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:19
+msgid "Hill"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:21
+msgid "Stopping Place"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:23
+msgid "Turtle Snout"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:24
+msgid "Investigator"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:27
+msgid "Ogre"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:29
+msgid "Stars"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:30
+msgid "Stretched Net"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:32
+msgid "Chariot Cross-Board"
 msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:1
@@ -5291,6 +5437,7 @@ msgid "Animal"
 msgstr ""
 
 #: skycultures/lakota/constellation_names.eng.fab:7
+#: skycultures/siberian/constellation_names.eng.fab:1
 msgid "Elk"
 msgstr ""
 
@@ -7109,6 +7256,23 @@ msgstr ""
 
 #: skycultures/sami/constellation_names.eng.fab:10
 msgid "The Ski Runners"
+msgstr ""
+
+#: skycultures/siberian/constellation_names.eng.fab:2
+msgid "Threshers"
+msgstr ""
+
+#: skycultures/siberian/constellation_names.eng.fab:3
+msgid "Duck Nest"
+msgstr ""
+
+#: skycultures/siberian/star_names.fab:1
+msgid "Golden stake"
+msgstr ""
+
+#. TRANSLATORS: Native name of Venus in Siberian culture (in English words)
+#: skycultures/siberian/planet_names.fab:2
+msgid "Night Star"
 msgstr ""
 
 #: skycultures/tongan/constellation_names.eng.fab:1

@@ -36,7 +36,7 @@ inline bool intersectsBoundingCap(const Vec3d& n1, double d1, const Vec3d& n2, d
 inline bool containsBoundingCap(const Vec3d& n1, double d1, const Vec3d& n2, double d2)
 {
 	const double a = n1*n2-d1*d2;
-	return d1<=d1 && ( a>=1. || (a>=0. && a*a >= (1.-d1*d1)*(1.-d2*d2)));
+	return d1<=d2 && ( a>=1. || (a>=0. && a*a >= (1.-d1*d1)*(1.-d2*d2)));
 }
 
 static int getSide(const Vec3d& v, int onLine)

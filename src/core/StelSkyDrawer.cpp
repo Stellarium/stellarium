@@ -66,6 +66,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	oldLum(-1.f),
 	big3dModelHaloRadius(150.f)
 {
+	qsrand (QDateTime::currentMSecsSinceEpoch());
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
@@ -418,13 +419,13 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	if (rcMag.radius<=0.f)
 		return false;
 
-	Vec3f win;
-	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(v, win) : sPainter->getProjector()->project(v, win)))
+	Vec3d win;
+	if (!(checkInScreen ? sPainter->getProjector()->projectCheck(Vec3d(v[0],v[1],v[2]), win) : sPainter->getProjector()->project(Vec3d(v[0],v[1],v[2]), win)))
 		return false;
 
 	const float radius = rcMag.radius;
 	// Random coef for star twinkling
-	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleAmount*rand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
+	const float tw = (flagStarTwinkle && flagHasAtmosphere) ? (1.f-twinkleAmount*qrand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
 
 	// If the rmag is big, draw a big halo
 	if (radius>MAX_LINEAR_RADIUS+5.f)

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-29 18:04+0600\n"
-"PO-Revision-Date: 2014-11-27 09:33+0000\n"
+"POT-Creation-Date: 2015-03-17 21:57+0600\n"
+"PO-Revision-Date: 2015-03-06 06:12+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-30 05:20+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2015-03-18 05:34+0000\n"
+"X-Generator: Launchpad (build 17403)\n"
 "Language: be_BY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -272,7 +272,7 @@ msgstr "Нэса"
 
 #: skycultures/translations.fab:72
 msgid "Metis (moon)"
-msgstr ""
+msgstr "Мэтыс (месяц)"
 
 #: skycultures/translations.fab:73
 msgid "Prometheus (moon)"
@@ -295,153 +295,173 @@ msgstr "Гідра (месяц)"
 msgid "Solar System Observer"
 msgstr "Назіральнік сонечнай сыстэмы"
 
+#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+#: skycultures/translations.fab:80
+msgid "SpaceShip"
+msgstr "Касьмічны карабель"
+
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
-#: skycultures/translations.fab:84
+#: skycultures/translations.fab:86
 msgid "Sedna"
 msgstr "Сэдна"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
-#: skycultures/translations.fab:86
+#: skycultures/translations.fab:88
 msgid "Quaoar"
 msgstr "Квавар"
 
 #. TRANSLATORS: TNO/Asteroid (90482) Orcus
-#: skycultures/translations.fab:88
+#: skycultures/translations.fab:90
 msgid "Orcus"
 msgstr "Оркус"
 
 #. TRANSLATORS: TNO/Asteroid (136108) Haumea
-#: skycultures/translations.fab:90
+#: skycultures/translations.fab:92
 msgid "Haumea"
 msgstr "Гаўмэа"
 
 #. TRANSLATORS: TNO/Asteroid (20000) Varuna
-#: skycultures/translations.fab:92
+#: skycultures/translations.fab:94
 msgid "Varuna"
 msgstr "Варуна"
 
 #. TRANSLATORS: TNO/Asteroid (136472) Makemake
-#: skycultures/translations.fab:94
+#: skycultures/translations.fab:96
 msgid "Makemake"
 msgstr "Макемаке"
 
-#. TRANSLATORS: Asteroid (5) Astraea
+#. TRANSLATORS: Cubewano (120347) Salacia
+#: skycultures/translations.fab:98
+msgid "Salacia"
+msgstr "Салацыя"
+
+#. TRANSLATORS: Plutino (38628) Huya
 #: skycultures/translations.fab:100
+msgid "Huya"
+msgstr ""
+
+#. TRANSLATORS: Cubewano (174567) Varda
+#: skycultures/translations.fab:102
+msgid "Varda"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: skycultures/translations.fab:109
 msgid "Astraea"
 msgstr "Астарэя"
 
 #. TRANSLATORS: Asteroid (6) Hebe
-#: skycultures/translations.fab:102
+#: skycultures/translations.fab:111
 msgid "Hebe"
 msgstr "Геба"
 
 #. TRANSLATORS: Asteroid (7) Iris
-#: skycultures/translations.fab:104
+#: skycultures/translations.fab:113
 msgid "Iris"
 msgstr "Ірыс"
 
 #. TRANSLATORS: Asteroid (8) Flora
-#: skycultures/translations.fab:106
+#: skycultures/translations.fab:115
 msgid "Flora"
 msgstr "Флёра"
 
 #. TRANSLATORS: Asteroid (9) Metis and moon of Jupiter
-#: skycultures/translations.fab:108
+#: skycultures/translations.fab:117
 msgid "Metis"
 msgstr "Мэтыс"
 
 #. TRANSLATORS: Asteroid (10) Hygiea
-#: skycultures/translations.fab:110
+#: skycultures/translations.fab:119
 msgid "Hygiea"
 msgstr "Гіґея"
 
 #. TRANSLATORS: Asteroid (41) Daphne
-#: skycultures/translations.fab:112
+#: skycultures/translations.fab:121
 msgid "Daphne"
 msgstr "Дафна"
 
 #. TRANSLATORS: Asteroid (1221) Amor
-#: skycultures/translations.fab:114
+#: skycultures/translations.fab:123
 msgid "Amor"
 msgstr "Амор"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
-#: skycultures/translations.fab:116
+#: skycultures/translations.fab:125
 msgid "Apophis"
 msgstr "Апофіс"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
-#: skycultures/translations.fab:118
+#: skycultures/translations.fab:127
 msgid "Chiron"
 msgstr "Хірон"
 
 #. TRANSLATORS: Asteroid (433) Eros
-#: skycultures/translations.fab:120
+#: skycultures/translations.fab:129
 msgid "Eros"
 msgstr "Эрас"
 
 #. TRANSLATORS: Asteroid (624) Hektor
-#: skycultures/translations.fab:122
+#: skycultures/translations.fab:131
 msgid "Hektor"
 msgstr "Гектар"
 
 #. TRANSLATORS: Asteroid (3200) Phaethon
-#: skycultures/translations.fab:124
+#: skycultures/translations.fab:133
 msgid "Phaethon"
 msgstr "Фаэтон"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
-#: skycultures/translations.fab:126
+#: skycultures/translations.fab:135
 msgid "Sisyphus"
 msgstr "Сызызф"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
-#: skycultures/translations.fab:128
+#: skycultures/translations.fab:137
 msgid "Daedalus"
 msgstr "Дэдал"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
-#: skycultures/translations.fab:130
+#: skycultures/translations.fab:139
 msgid "Icarus"
 msgstr "Ікар"
 
 #. TRANSLATORS: Asteroid (1809) Prometheus
-#: skycultures/translations.fab:132
+#: skycultures/translations.fab:141
 msgid "Prometheus"
 msgstr "Прамэтэй"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
-#: skycultures/translations.fab:134
+#: skycultures/translations.fab:143
 msgid "Epimetheus"
 msgstr "Эпімэтэй"
 
 #. TRANSLATORS: Asteroid (951) Gaspra
-#: skycultures/translations.fab:136
+#: skycultures/translations.fab:145
 msgid "Gaspra"
 msgstr "Ґаспра"
 
 #. TRANSLATORS: Asteroid (243) Ida
-#: skycultures/translations.fab:138
+#: skycultures/translations.fab:147
 msgid "Ida"
 msgstr "Іда"
 
 #. TRANSLATORS: Asteroid (218) Bianca
-#: skycultures/translations.fab:140
+#: skycultures/translations.fab:149
 msgid "Bianca"
 msgstr "Б'янка"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
-#: skycultures/translations.fab:146
+#: skycultures/translations.fab:154
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr "Вялікая камэта 1680 (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A
-#: skycultures/translations.fab:156
+#: skycultures/translations.fab:164
 msgid "Tycho's Supernova"
 msgstr "Звышновая Тыха"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: skycultures/translations.fab:158
+#: skycultures/translations.fab:166
 msgid "Kepler's Supernova"
 msgstr "Звышновая Кеплера"
 
@@ -466,8 +486,8 @@ msgid "Beehive cluster"
 msgstr "Скопішча «Вулей»"
 
 #: nebulae/default/ngc2000names.dat:224
-msgid "Black-eye galaxy"
-msgstr "Ґаляктыка «Чорнае вока»"
+msgid "Black Eye Galaxy"
+msgstr "Галактыка Чорнае вока"
 
 #: nebulae/default/ngc2000names.dat:225
 msgid "Blinking planetary"
@@ -1125,22 +1145,43 @@ msgstr "Туманнасьць «Мэдуза»"
 
 #: nebulae/default/ngc2000names.dat:417
 msgid "The Wizard Nebula"
-msgstr ""
+msgstr "Туманнасьць «Чараўнік»"
 
 #: nebulae/default/ngc2000names.dat:418
 msgid "Ruprecht 147"
-msgstr ""
+msgstr "Рупрэхт 147"
 
 #: nebulae/default/ngc2000names.dat:419
 msgid "Prawn nebula"
-msgstr ""
+msgstr "Туманнасць «Крэветка»"
 
 #: nebulae/default/ngc2000names.dat:420
 msgid "The Foxhead cluster"
-msgstr ""
+msgstr "Скопішча «Галава лісы»"
 
 #: nebulae/default/ngc2000names.dat:421
 msgid "Summer Beehive cluster"
+msgstr "Скопішча «Летні вулей»"
+
+#: nebulae/default/ngc2000names.dat:422
+msgid "Markarian's Chain"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:423
+msgid "Maffei Group"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:424 nebulae/default/ngc2000names.dat:425
+#: nebulae/default/ngc2000names.dat:426 nebulae/default/ngc2000names.dat:427
+msgid "Robert's Quartet"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:428
+msgid "Deer Lick Group"
+msgstr ""
+
+#: nebulae/default/ngc2000names.dat:429
+msgid "Spider nebula"
 msgstr ""
 
 #: skycultures/arabic/constellation_names.eng.fab:1
@@ -1498,7 +1539,7 @@ msgstr "Белая пляма"
 
 #: skycultures/arabic/star_names.fab:39
 msgid "The string of pearls"
-msgstr "Шнурок з пэрлінамі"
+msgstr "Шнурок пацерак"
 
 #: skycultures/arabic/star_names.fab:40
 msgid "The dove"
@@ -2237,24 +2278,24 @@ msgstr "Трэцяя плакальшчыца"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:1
 msgid "The Two signs"
-msgstr ""
+msgstr "Два знакі"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:2
 msgid "The Little belly"
-msgstr ""
+msgstr "Страўнічак"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:3
 msgid "Al-Thurayya"
-msgstr ""
+msgstr "Аль-Турая"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:4
 #: skycultures/arabic_moon_stations/star_names.fab:14
 msgid "The Follower"
-msgstr ""
+msgstr "Пасьлядоўнік"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:5
 msgid "The Side Mark"
-msgstr ""
+msgstr "Бакавая пазнака"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:6
 msgid "The Neck bend"
@@ -2262,28 +2303,28 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:7
 msgid "The Arm"
-msgstr ""
+msgstr "Рука"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:8
 msgid "The Lion nose"
-msgstr ""
+msgstr "Нос ільва"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:9
 msgid "The Lion eyes"
-msgstr ""
+msgstr "Вочы льва"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:10
 msgid "The Lion Forehead"
-msgstr ""
+msgstr "Лоб ільва"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:11
 msgid "The Lion mane"
-msgstr ""
+msgstr "Грыва льва"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:12
 #: skycultures/arabic_moon_stations/star_names.fab:43
 msgid "The Star of weather change"
-msgstr ""
+msgstr "Зорка перамены надвор'я"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:13
 msgid "The Bend"
@@ -2299,33 +2340,33 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:16
 msgid "The Scorpion Claws"
-msgstr ""
+msgstr "Кіпцюры скарпіёна"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:17
 msgid "The ornamented headband"
-msgstr ""
+msgstr "Стужка на галаве з узорамі"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:18
 #: skycultures/arabic_moon_stations/star_names.fab:71
 msgid "The Heart"
-msgstr ""
+msgstr "Сэрца"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:19
 #: skycultures/arabic_moon_stations/star_names.fab:78
 msgid "The Scorpion sting"
-msgstr ""
+msgstr "Джала скарпіёна"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:20
 msgid "The Ostriches"
-msgstr ""
+msgstr "Страўсы"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:21
 msgid "The Empty place"
-msgstr ""
+msgstr "Пустое месца"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:22
 msgid "The Lucky stars of the slaughterer"
-msgstr ""
+msgstr "Шчасьлівыя зоркі мясьніка"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:23
 msgid "The Lucky stars of the swallower"
@@ -2333,11 +2374,11 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:24
 msgid "The Lucky stars of the Luckiest ones"
-msgstr ""
+msgstr "Шчасьлівыя зоркі Найшчасьлівейшага"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:25
 msgid "The Lucky stars of the tents"
-msgstr ""
+msgstr "Шчасьлівыя зоркі шатроў"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:26
 msgid "The Front mouth of the bucket"
@@ -2350,7 +2391,7 @@ msgstr ""
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:28
 #: skycultures/arabic_moon_stations/star_names.fab:4
 msgid "The Bucket cord"
-msgstr ""
+msgstr "Шнурок вядра"
 
 #: skycultures/arabic_moon_stations/star_names.fab:1
 msgid "The Hand dyed with Henna"
@@ -2358,27 +2399,27 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:2
 msgid "The First Frog"
-msgstr ""
+msgstr "Першая жаба"
 
 #: skycultures/arabic_moon_stations/star_names.fab:3
 msgid "The Second Frog"
-msgstr ""
+msgstr "Другая жаба"
 
 #: skycultures/arabic_moon_stations/star_names.fab:5
 msgid "The Oath star"
-msgstr ""
+msgstr "Зорка прысягі"
 
 #: skycultures/arabic_moon_stations/star_names.fab:6
 msgid "The Caracal"
-msgstr ""
+msgstr "Каракал"
 
 #: skycultures/arabic_moon_stations/star_names.fab:7
 msgid "The Two signs 1"
-msgstr ""
+msgstr "Два знакі 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:8
 msgid "The Two signs 2"
-msgstr ""
+msgstr "Два знакі 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:9
 msgid "The Two friendly ones 1"
@@ -2390,11 +2431,11 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:11
 msgid "The Kid"
-msgstr ""
+msgstr "Дзіця"
 
 #: skycultures/arabic_moon_stations/star_names.fab:12
 msgid "The Elbow"
-msgstr ""
+msgstr "Локаць"
 
 #: skycultures/arabic_moon_stations/star_names.fab:13
 msgid "The Shoulder side"
@@ -2402,7 +2443,7 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:15
 msgid "The Foot of Al-Jawza"
-msgstr ""
+msgstr "Нага Аль-Джаўза"
 
 #: skycultures/arabic_moon_stations/star_names.fab:16
 msgid "The Obstructor"
@@ -2410,39 +2451,39 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:17
 msgid "AlNajith"
-msgstr ""
+msgstr "Аль-Наджыт"
 
 #: skycultures/arabic_moon_stations/star_names.fab:18
 msgid "The String of beads 1"
-msgstr ""
+msgstr "Шнурок пацерак 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:19
 msgid "The String of beads 2"
-msgstr ""
+msgstr "Шнурок пацерак 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:20
 msgid "The String of beads 3"
-msgstr ""
+msgstr "Шнурок пацерак 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:21
 msgid "The gazelles 1"
-msgstr ""
+msgstr "Ґазэлі 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:22
 msgid "The gazelles 2"
-msgstr ""
+msgstr "Ґазэлі 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:23
 msgid "The gazelles 3"
-msgstr ""
+msgstr "Ґазэлі 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:24
-msgid "The Soulder side of Al-Jawza"
+msgid "The Shoulder side of Al-Jawza"
 msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:25
 msgid "The Precedent of Southern Shi'ra"
-msgstr ""
+msgstr "Папярэднік паўднёвага Шы'ра"
 
 #: skycultures/arabic_moon_stations/star_names.fab:27
 msgid "The Neck bend 1"
@@ -2454,43 +2495,43 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:29
 msgid "The Southern Shi'ra"
-msgstr ""
+msgstr "Паўднёвы Шы'ра"
 
 #: skycultures/arabic_moon_stations/star_names.fab:30
 msgid "The Precedent of the Northern Shi'ra"
-msgstr ""
+msgstr "Папярэднік паўночнага Шы'ра"
 
 #: skycultures/arabic_moon_stations/star_names.fab:31
 msgid "The Arm 1"
-msgstr ""
+msgstr "Рука 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:32
 msgid "The Arm 2"
-msgstr ""
+msgstr "Рука 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:33
 msgid "The Northern Shi'ra"
-msgstr ""
+msgstr "Паўночны Шы'ра"
 
 #: skycultures/arabic_moon_stations/star_names.fab:34
 msgid "The Lone one"
-msgstr ""
+msgstr "Самотнік"
 
 #: skycultures/arabic_moon_stations/star_names.fab:35
 msgid "The Forehead 1"
-msgstr ""
+msgstr "Лоб 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:36
 msgid "The Forehead 2"
-msgstr ""
+msgstr "Лоб 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:37
 msgid "The Forehead 3"
-msgstr ""
+msgstr "Лоб 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:38
 msgid "The Forehead 4"
-msgstr ""
+msgstr "Лоб 4"
 
 #: skycultures/arabic_moon_stations/star_names.fab:39
 msgid "The Two first ones 1"
@@ -2502,11 +2543,11 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:41
 msgid "The Mane 1"
-msgstr ""
+msgstr "Грыва 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:42
 msgid "The Mane 2"
-msgstr ""
+msgstr "Грыва 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:44
 msgid "The Bend 1"
@@ -2530,19 +2571,19 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:49
 msgid "The Obscure one"
-msgstr ""
+msgstr "Цьмяная"
 
 #: skycultures/arabic_moon_stations/star_names.fab:50
 msgid "The Wild donkey"
-msgstr ""
+msgstr "Дзікі асёл"
 
 #: skycultures/arabic_moon_stations/star_names.fab:51
 msgid "The Lion liver"
-msgstr ""
+msgstr "Пячонка льва"
 
 #: skycultures/arabic_moon_stations/star_names.fab:52
 msgid "The Young she-goat"
-msgstr ""
+msgstr "Маладая авечка"
 
 #: skycultures/arabic_moon_stations/star_names.fab:53
 msgid "The Unarmed high one"
@@ -2550,7 +2591,7 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:54
 msgid "The neglected one"
-msgstr ""
+msgstr "Занядбаная"
 
 #: skycultures/arabic_moon_stations/star_names.fab:55
 msgid "The Tail tuft 1"
@@ -2570,11 +2611,11 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:59
 msgid "The Leader"
-msgstr ""
+msgstr "Лідэр"
 
 #: skycultures/arabic_moon_stations/star_names.fab:60
 msgid "The Spear"
-msgstr ""
+msgstr "Дзіда"
 
 #: skycultures/arabic_moon_stations/star_names.fab:61
 msgid "The Armed High one"
@@ -2582,27 +2623,27 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:62
 msgid "The Brighter of the two calves"
-msgstr ""
+msgstr "Ярчэйшы з двух цялят"
 
 #: skycultures/arabic_moon_stations/star_names.fab:63
 msgid "The Scorpion claws 1"
-msgstr ""
+msgstr "Кіпцюры скарпіёна 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:64
 msgid "The Scorpion claws 2"
-msgstr ""
+msgstr "Кіпцюры скарпіёна 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:65
 msgid "The Dimmer of the two calves"
-msgstr ""
+msgstr "Цьмянейшы з двух цялят"
 
 #: skycultures/arabic_moon_stations/star_names.fab:66
 msgid "The Male Hyena"
-msgstr ""
+msgstr "Гіена-самец"
 
 #: skycultures/arabic_moon_stations/star_names.fab:67
 msgid "The headband 1"
-msgstr ""
+msgstr "Стужка на галаве 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:68
 msgid "The headband 2"
@@ -2614,15 +2655,15 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:70
 msgid "The Veins of the heart 1"
-msgstr ""
+msgstr "Вэны сэрца 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:72
 msgid "The Veins of the heart 2"
-msgstr ""
+msgstr "Вэны сэрца 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:73
 msgid "The Trotting Camel"
-msgstr ""
+msgstr "Вярблюд, які бяжыць трушком"
 
 #: skycultures/arabic_moon_stations/star_names.fab:74
 msgid "The Mother camels 1"
@@ -2642,131 +2683,131 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:79
 msgid "The Shepherd"
-msgstr ""
+msgstr "Пастух"
 
 #: skycultures/arabic_moon_stations/star_names.fab:80
 msgid "The dog of the shepherd"
-msgstr ""
+msgstr "Сабака пастуха"
 
 #: skycultures/arabic_moon_stations/star_names.fab:81
 msgid "The Baby camel"
-msgstr ""
+msgstr "Верблюдзяня"
 
 #: skycultures/arabic_moon_stations/star_names.fab:82
 msgid "The ostriches coming to the river 1"
-msgstr ""
+msgstr "Страўсы, якія ідуць да ракі 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:83
 msgid "The ostriches coming to the river 2"
-msgstr ""
+msgstr "Страўсы, якія ідуць да ракі 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:84
 msgid "The ostriches coming to the river 3"
-msgstr ""
+msgstr "Страўсы, якія ідуць да ракі 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:85
 msgid "The ostriches coming to the river 4"
-msgstr ""
+msgstr "Страўсы, якія ідуць да ракі 4"
 
 #: skycultures/arabic_moon_stations/star_names.fab:86
 msgid "The Shepherd of the Ostriches"
-msgstr ""
+msgstr "Пастух страўсаў"
 
 #: skycultures/arabic_moon_stations/star_names.fab:87
 msgid "The Swooping Eagle"
-msgstr ""
+msgstr "Арол, які нападае"
 
 #: skycultures/arabic_moon_stations/star_names.fab:88
 msgid "The ostriches leaving the river 1"
-msgstr ""
+msgstr "Страўсы, якія ідуць ад ракі 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:89
 msgid "The ostriches leaving the river 2"
-msgstr ""
+msgstr "Страўсы, якія ідуць ад ракі 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:90
 msgid "The ostriches leaving the river 3"
-msgstr ""
+msgstr "Страўсы, якія ідуць ад ракі 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:91
 msgid "The ostriches leaving the river 4"
-msgstr ""
+msgstr "Страўсы, якія ідуць ад ракі 4"
 
 #: skycultures/arabic_moon_stations/star_names.fab:92
 msgid "The Knights 1"
-msgstr ""
+msgstr "Рыцары 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:93
 msgid "The Knights 2"
-msgstr ""
+msgstr "Рыцары 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:94
 msgid "The Knights 3"
-msgstr ""
+msgstr "Рыцары 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:95
 msgid "The Knights 4"
-msgstr ""
+msgstr "Рыцары 4"
 
 #: skycultures/arabic_moon_stations/star_names.fab:96
 msgid "The Knights 5"
-msgstr ""
+msgstr "Рыцары 5"
 
 #: skycultures/arabic_moon_stations/star_names.fab:97
 msgid "The Flying eagle"
-msgstr ""
+msgstr "Арол, які ляціць"
 
 #: skycultures/arabic_moon_stations/star_names.fab:98
 msgid "The Rear knight"
-msgstr ""
+msgstr "Тылавы рыцар"
 
 #: skycultures/arabic_moon_stations/star_names.fab:99
 msgid "The Lucky star of Nashirah 1"
-msgstr ""
+msgstr "Шчасьлівая зорка Нашыра 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:100
 msgid "The Lucky star of Nashirah 2"
-msgstr ""
+msgstr "Шчасьлівая зорка Нашыра 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:101
 msgid "The Lucky star of the king 1"
-msgstr ""
+msgstr "Шчасьлівая зорка караля 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:102
 msgid "The Lucky star of the king 2"
-msgstr ""
+msgstr "Шчасьлівая зорка караля 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:103
 msgid "The Lucky star of the young sheep 1"
-msgstr ""
+msgstr "Шчасьлівая зорка ягняці 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:104
 msgid "The Lucky star of the young sheep 2"
-msgstr ""
+msgstr "Шчасьлівая зорка ягняці 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:105
 msgid "The Lucky star of the hero 1"
-msgstr ""
+msgstr "Шчасьлівая зорка героя 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:106
 msgid "The Lucky star of the hero 2"
-msgstr ""
+msgstr "Шчасьлівая зорка героя 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:107
 msgid "The Lucky star of the rain 1"
-msgstr ""
+msgstr "Шчасьлівая зорка дажджу 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:108
 msgid "The Lucky star of the rain 2"
-msgstr ""
+msgstr "Шчасьлівая зорка дажджу 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:109
 msgid "The Lucky star of the excellent 1"
-msgstr ""
+msgstr "Шчасьлівая зорка выдатнага чалавека 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:110
 msgid "The Lucky star of the excellent 2"
-msgstr ""
+msgstr "Шчасьлівая зорка выдатнага чалавека 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:111
 msgid "The Front mouth of the bucket 1"
@@ -2786,11 +2827,11 @@ msgstr ""
 
 #: skycultures/arabic_moon_stations/star_names.fab:115
 msgid "The Bucket knot 1"
-msgstr ""
+msgstr "Вузел вядра 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:116
 msgid "The Bucket knot 2"
-msgstr ""
+msgstr "Вузел вядра 2"
 
 #: skycultures/aztec/constellation_names.eng.fab:1
 msgid "Mamalhuaztli (The New fire)"
@@ -2814,7 +2855,7 @@ msgstr "Colotl Ixayac (Твар скарпіёна)"
 
 #: skycultures/boorong/constellation_names.eng.fab:1
 msgid "Long-necked tortoise"
-msgstr ""
+msgstr "Даўгашыяя чарапаха"
 
 #: skycultures/boorong/constellation_names.eng.fab:2
 msgid "Fan-tailed cockatoo"
@@ -2822,15 +2863,15 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:3
 msgid "Two teenage boys"
-msgstr ""
+msgstr "Два падлеткі"
 
 #: skycultures/boorong/constellation_names.eng.fab:4
 msgid "Girls"
-msgstr ""
+msgstr "Дзяўчаты"
 
 #: skycultures/boorong/constellation_names.eng.fab:5
 msgid "Red kangaroo"
-msgstr ""
+msgstr "Чырвоны кенґуру"
 
 #: skycultures/boorong/constellation_names.eng.fab:6
 msgid "Ring-tail possum"
@@ -2842,11 +2883,11 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:8
 msgid "Crow"
-msgstr ""
+msgstr "Варона"
 
 #: skycultures/boorong/constellation_names.eng.fab:9
 msgid "Female crow, wife of War"
-msgstr ""
+msgstr "Варона, жонка Ўара"
 
 #: skycultures/boorong/constellation_names.eng.fab:10
 msgid "Owlet nightjar"
@@ -2862,7 +2903,7 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:13
 msgid "Australian kestrel"
-msgstr ""
+msgstr "Аўстралійская пустальга"
 
 #: skycultures/boorong/constellation_names.eng.fab:14
 msgid "Mallee fowl"
@@ -2878,7 +2919,7 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:17
 msgid "Great fish"
-msgstr ""
+msgstr "Вялікая рыба"
 
 #: skycultures/boorong/constellation_names.eng.fab:18
 msgid "Wedge tailed eagle"
@@ -2886,11 +2927,11 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:19
 msgid "Female eagle, wife of Warepil"
-msgstr ""
+msgstr "Арліца, жонка Варэпіла"
 
 #: skycultures/boorong/constellation_names.eng.fab:20
 msgid "Emu"
-msgstr ""
+msgstr "Эму"
 
 #: skycultures/boorong/constellation_names.eng.fab:21
 msgid "Purple crowned lorikeet"
@@ -2898,11 +2939,11 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:22
 msgid "Meat ant"
-msgstr ""
+msgstr "Мясны мурашка"
 
 #: skycultures/boorong/constellation_names.eng.fab:23
 msgid "Galaxy"
-msgstr ""
+msgstr "Ґаляктыка"
 
 #: skycultures/boorong/constellation_names.eng.fab:24
 msgid "Singing bushlark"
@@ -2910,7 +2951,7 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:25
 msgid "Pink cockatoo"
-msgstr ""
+msgstr "Ружовы какаду"
 
 #: skycultures/boorong/constellation_names.eng.fab:26
 msgid "Species of ant"
@@ -2918,11 +2959,11 @@ msgstr ""
 
 #: skycultures/boorong/constellation_names.eng.fab:27
 msgid "Boomerang"
-msgstr ""
+msgstr "Бумэранґ"
 
 #: skycultures/boorong/constellation_names.eng.fab:28
 msgid "The maned snake"
-msgstr ""
+msgstr "Зьмяя з грывай"
 
 #: skycultures/boorong/star_names.fab:1
 msgid "Marpeankurrk"
@@ -2930,11 +2971,11 @@ msgstr ""
 
 #: skycultures/boorong/star_names.fab:2
 msgid "Djuit"
-msgstr ""
+msgstr "Джуіт"
 
 #: skycultures/boorong/star_names.fab:3
 msgid "Neilloan"
-msgstr ""
+msgstr "Нэйлоан"
 
 #: skycultures/boorong/star_names.fab:4
 msgid "Totyarguil"
@@ -2942,15 +2983,15 @@ msgstr ""
 
 #: skycultures/boorong/star_names.fab:5
 msgid "Karik Karik"
-msgstr ""
+msgstr "Карык карык"
 
 #: skycultures/boorong/star_names.fab:6 skycultures/boorong/star_names.fab:7
 msgid "Berm-berm-gle"
-msgstr ""
+msgstr "Бэрм-бэрм-ґле"
 
 #: skycultures/boorong/star_names.fab:8
 msgid "Bunya"
-msgstr ""
+msgstr "Бунья"
 
 #: skycultures/boorong/star_names.fab:9
 msgid "Tourchingboiongerra"
@@ -2962,15 +3003,15 @@ msgstr ""
 
 #: skycultures/boorong/star_names.fab:11
 msgid "Warring"
-msgstr ""
+msgstr "Уаррынґ"
 
 #: skycultures/boorong/star_names.fab:12
 msgid "Kulkanbulla"
-msgstr ""
+msgstr "Кулканбула"
 
 #: skycultures/boorong/star_names.fab:13
 msgid "Lamankurrk"
-msgstr ""
+msgstr "Ламанкурк"
 
 #: skycultures/boorong/star_names.fab:14
 msgid "Gellarlec"
@@ -2978,7 +3019,7 @@ msgstr ""
 
 #: skycultures/boorong/star_names.fab:15
 msgid "Warepil"
-msgstr ""
+msgstr "Варэпіл"
 
 #: skycultures/boorong/star_names.fab:16
 msgid "Colowgulloric Warepil"
@@ -2986,7 +3027,7 @@ msgstr ""
 
 #: skycultures/boorong/star_names.fab:17
 msgid "Won"
-msgstr ""
+msgstr "Уон"
 
 #: skycultures/boorong/star_names.fab:18
 msgid "Weetkurrk"
@@ -2994,7 +3035,7 @@ msgstr ""
 
 #: skycultures/boorong/star_names.fab:19
 msgid "War"
-msgstr ""
+msgstr "Уар"
 
 #: skycultures/boorong/star_names.fab:20
 msgid "Collowgulloric War"
@@ -3022,7 +3063,7 @@ msgstr ""
 
 #: skycultures/boorong/star_names.fab:26
 msgid "Purra"
-msgstr ""
+msgstr "Пурра"
 
 #: skycultures/boorong/star_names.fab:27
 msgid "Unurgunite"
@@ -3031,17 +3072,17 @@ msgstr ""
 #. TRANSLATORS: Native name of the Sun in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:2
 msgid "Day"
-msgstr ""
+msgstr "Дзень"
 
 #. TRANSLATORS: Native name of the Moon in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:4
 msgid "Quoll"
-msgstr ""
+msgstr "Куол"
 
 #. TRANSLATORS: Native name of Venus in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:6
 msgid "Elder sister"
-msgstr ""
+msgstr "Старэйшая сястра"
 
 #. TRANSLATORS: Native name of Jupiter in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:8
@@ -3062,6 +3103,7 @@ msgid "Coiled Thong"
 msgstr "Скручаны рэмень"
 
 #: skycultures/chinese/constellation_names.eng.fab:4
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:31
 msgid "Wings"
 msgstr "Крылы"
 
@@ -3070,6 +3112,7 @@ msgid "Chariot"
 msgstr "Калясьніца"
 
 #: skycultures/chinese/constellation_names.eng.fab:6
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:7
 msgid "Tail"
 msgstr "Хвост"
 
@@ -3078,6 +3121,7 @@ msgid "Winnowing Basket"
 msgstr "Кошык для веяньня"
 
 #: skycultures/chinese/constellation_names.eng.fab:8
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:10
 #: skycultures/lakota/constellation_names.eng.fab:4
 msgid "Dipper"
 msgstr "Конаўка"
@@ -3096,10 +3140,12 @@ msgid "Imperial Guards"
 msgstr "Ахова імпэратара"
 
 #: skycultures/chinese/constellation_names.eng.fab:12
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:2
 msgid "Horn"
 msgstr "Рог"
 
 #: skycultures/chinese/constellation_names.eng.fab:13
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:28
 msgid "Willow"
 msgstr "Вярба"
 
@@ -3116,6 +3162,7 @@ msgid "River Turtle"
 msgstr "Рачная чарапаха"
 
 #: skycultures/chinese/constellation_names.eng.fab:17
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:20
 msgid "Stomach"
 msgstr "Страўнік"
 
@@ -3124,6 +3171,7 @@ msgid "Great General"
 msgstr "Вялікі ґенэрал"
 
 #: skycultures/chinese/constellation_names.eng.fab:19
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:16
 msgid "Wall"
 msgstr "Сьцяна"
 
@@ -3132,6 +3180,7 @@ msgid "Legs"
 msgstr "Ногі"
 
 #: skycultures/chinese/constellation_names.eng.fab:21
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:4
 msgid "Root"
 msgstr "Корань"
 
@@ -3170,6 +3219,7 @@ msgstr "Скручаны язык"
 
 #: skycultures/chinese/constellation_names.eng.fab:30
 #: skycultures/egyptian/constellation_names.eng.fab:21
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:22
 msgid "Net"
 msgstr "Сетка"
 
@@ -3199,6 +3249,7 @@ msgid "Four Channels"
 msgstr "Чатыры каналы"
 
 #: skycultures/chinese/constellation_names.eng.fab:37
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:26
 msgid "Well"
 msgstr "Калодзеж"
 
@@ -3319,6 +3370,7 @@ msgid "Palace Gate"
 msgstr "Брама палаца"
 
 #: skycultures/chinese/constellation_names.eng.fab:66
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:13
 msgid "Emptiness"
 msgstr "Пустэча"
 
@@ -3335,10 +3387,12 @@ msgid "Ox"
 msgstr "Вол"
 
 #: skycultures/chinese/constellation_names.eng.fab:70
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:6
 msgid "Heart"
 msgstr "Сэрца"
 
 #: skycultures/chinese/constellation_names.eng.fab:71
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:15
 msgid "Room"
 msgstr "Пакой"
 
@@ -3409,6 +3463,7 @@ msgid "Tripod"
 msgstr "Трыножак"
 
 #: skycultures/chinese/constellation_names.eng.fab:88
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:3
 msgid "Neck"
 msgstr "Шыя"
 
@@ -4040,6 +4095,97 @@ msgstr "Дж'ешта"
 #: skycultures/indian/star_names.fab:21
 msgid "Auggashta"
 msgstr "Аўґашта"
+
+#. TRANSLATORS: Native name of the Sun in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:2
+msgid "Surya Deva"
+msgstr ""
+
+#. TRANSLATORS: Native name of the Moon in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:4
+msgid "Chandra"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mercury in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:6
+msgid "Budha"
+msgstr ""
+
+#. TRANSLATORS: Native name of Venus in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:8
+msgid "Shukr"
+msgstr ""
+
+#. TRANSLATORS: Native name of Mars in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:10
+msgid "Mangala"
+msgstr ""
+
+#. TRANSLATORS: Native name of Jupiter in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:12
+msgid "Guru"
+msgstr ""
+
+#. TRANSLATORS: Native name of Saturn in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:14
+msgid "Shani"
+msgstr ""
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:5
+msgid "Chamber"
+msgstr "Пакой"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:8
+msgid "Basket"
+msgstr "Кош"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:11
+msgid "Cow"
+msgstr "Карова"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:12
+msgid "Woman"
+msgstr "Жанчына"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:14
+msgid "Roof Top"
+msgstr "Вільчак"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:18
+msgid "Stride"
+msgstr "Сягень"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:19
+msgid "Hill"
+msgstr "Пагорак"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:21
+msgid "Stopping Place"
+msgstr "Прыпынак"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:23
+msgid "Turtle Snout"
+msgstr "Морда чарапахі"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:24
+msgid "Investigator"
+msgstr "Сьледчы"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:27
+msgid "Ogre"
+msgstr "Волат"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:29
+msgid "Stars"
+msgstr "Зоркі"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:30
+msgid "Stretched Net"
+msgstr "Расьцягнутая сетка"
+
+#: skycultures/japanese_moon_stations/constellation_names.eng.fab:32
+msgid "Chariot Cross-Board"
+msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:1
 msgid "Holy Kettle"
@@ -5289,6 +5435,7 @@ msgid "Animal"
 msgstr "Жывёла"
 
 #: skycultures/lakota/constellation_names.eng.fab:7
+#: skycultures/siberian/constellation_names.eng.fab:1
 msgid "Elk"
 msgstr "Лось"
 
@@ -5431,149 +5578,149 @@ msgstr "Ваіта"
 #. TRANSLATORS: Native name of the Sun in Maori culture
 #: skycultures/maori/planet_names.fab:2
 msgid "Te Ra"
-msgstr ""
+msgstr "Тэ Ра"
 
 #. TRANSLATORS: Native name of the Moon in Maori culture
 #: skycultures/maori/planet_names.fab:4
 msgid "Te Marama"
-msgstr ""
+msgstr "Тэ Марама"
 
 #. TRANSLATORS: Native name of Mercury in Maori culture
 #: skycultures/maori/planet_names.fab:6
 msgid "Takero"
-msgstr ""
+msgstr "Такера"
 
 #. TRANSLATORS: Native name of Venus in Maori culture
 #: skycultures/maori/planet_names.fab:8
 msgid "Tawera/Meremere"
-msgstr ""
+msgstr "Тавэра/Мэрэмэрэ"
 
 #. TRANSLATORS: Native name of Earth in Maori culture
 #: skycultures/maori/planet_names.fab:10
 msgid "Papa"
-msgstr ""
+msgstr "Папа"
 
 #. TRANSLATORS: Native name of Mars in Maori culture
 #: skycultures/maori/planet_names.fab:12
 msgid "Rangiwhenua"
-msgstr ""
+msgstr "Ранґіўхэнуа"
 
 #. TRANSLATORS: Native name of Jupiter in Maori culture
 #: skycultures/maori/planet_names.fab:14
 msgid "Perearau"
-msgstr ""
+msgstr "Пэрэараў"
 
 #. TRANSLATORS: Native name of Saturn in Maori culture
 #: skycultures/maori/planet_names.fab:16
 msgid "Perearau*"
-msgstr ""
+msgstr "Пэрэараў*"
 
 #: skycultures/mongolian/constellation_names.eng.fab:1
 msgid "Num Sum (The Bow and the Arrow)"
-msgstr ""
+msgstr "Нум сун (Лук і страла )"
 
 #: skycultures/mongolian/constellation_names.eng.fab:2
 msgid "Hun Tavan Od (The Five Stars Woman)"
-msgstr ""
+msgstr "Гун Таван Од (Жанчына пяці зорак)"
 
 #: skycultures/mongolian/constellation_names.eng.fab:3
 msgid "Doloon Burkhan (The Seven Buddhas)"
-msgstr ""
+msgstr "Далаон Буркхан (Сем Буддаў)"
 
 #: skycultures/mongolian/constellation_names.eng.fab:4
 msgid "Gurvan Maral Od (The Three Stags)"
-msgstr ""
+msgstr "Ґурван Марал Од (Тры жарабцы)"
 
 #: skycultures/mongolian/star_names.fab:1
 msgid "Altan Hadaas (Golden Stake)"
-msgstr ""
+msgstr "Альтан Гадаас (Залаты кол)"
 
 #: skycultures/mongolian/star_names.fab:2
 msgid "Recovery Star"
-msgstr ""
+msgstr "Зорка выздараўленьня"
 
 #: skycultures/mongolian/star_names.fab:5
 msgid "7.Horse"
-msgstr ""
+msgstr "7.Конь"
 
 #: skycultures/mongolian/star_names.fab:6
 msgid "6.Snake"
-msgstr ""
+msgstr "6.Зьмяя"
 
 #: skycultures/mongolian/star_names.fab:7
 msgid "5.Dragon / 12.Pig"
-msgstr ""
+msgstr "5.Драког / 12.Сьвіньня"
 
 #: skycultures/mongolian/star_names.fab:8
 msgid "4.Rabbit / 11.Dog"
-msgstr ""
+msgstr "4.Трус / 11.Сабака"
 
 #: skycultures/mongolian/star_names.fab:9
 msgid "3.Tiger / 10.Rooster"
-msgstr ""
+msgstr "3.Тыґр / 10.Певень"
 
 #: skycultures/mongolian/star_names.fab:10
 msgid "2.Ox / 9.Monkey"
-msgstr ""
+msgstr "2.Вол / 9.Малпа"
 
 #: skycultures/mongolian/star_names.fab:11
 msgid "1.Rat / 8.Sheep/Goat"
-msgstr ""
+msgstr "1.Пацук / 8.Авечка/Каза"
 
 #. TRANSLATORS: Native name of the Sun in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:2
 msgid "Nar"
-msgstr ""
+msgstr "Нар"
 
 #. TRANSLATORS: Native name of the Moon in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:4
 msgid "Sar"
-msgstr ""
+msgstr "Сар"
 
 #. TRANSLATORS: Native name of Mercury in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:6
 msgid "Bud"
-msgstr ""
+msgstr "Буд"
 
 #. TRANSLATORS: Native name of Venus in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:8
 msgid "Sugar"
-msgstr ""
+msgstr "Суґар"
 
 #. TRANSLATORS: Native name of Earth in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:10
 msgid "Delkhii"
-msgstr ""
+msgstr "Дэлкхіі"
 
 #. TRANSLATORS: Native name of Mars in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:12
 msgid "Angarag"
-msgstr ""
+msgstr "Анґараґ"
 
 #. TRANSLATORS: Native name of Jupiter in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:14
 msgid "Barhasbadi"
-msgstr ""
+msgstr "Баршасбадзі"
 
 #. TRANSLATORS: Native name of Saturn in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:16
 msgid "Sanchir"
-msgstr ""
+msgstr "Санчыр"
 
 #. TRANSLATORS: Native name of Uranus in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:18
 msgid "Tengeriin-van"
-msgstr ""
+msgstr "Тэнґэрыін-ван"
 
 #. TRANSLATORS: Native name of Neptune in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:20
 msgid "Dalai-van"
-msgstr ""
+msgstr "Далай-ван"
 
 #. TRANSLATORS: Native name of Pluto in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:22
 msgid "Dalkhii-van"
-msgstr ""
+msgstr "Далхіі-ван"
 
 #: skycultures/navajo/constellation_names.eng.fab:1
 msgid "Revolving Male"
@@ -6295,7 +6442,7 @@ msgstr "Бэрнэс 135"
 #: skycultures/romanian/star_names.fab:75
 #: skycultures/western/star_names.fab:109
 msgid "Wasat"
-msgstr "Васат*"
+msgstr "Уасат"
 
 #: skycultures/romanian/star_names.fab:76
 #: skycultures/western/star_names.fab:110
@@ -6344,7 +6491,7 @@ msgstr "Тэґмэн"
 #: skycultures/romanian/star_names.fab:85
 #: skycultures/western/star_names.fab:122
 msgid "Avior"
-msgstr "Авіёр*"
+msgstr "Авіёр"
 
 #: skycultures/romanian/star_names.fab:86
 #: skycultures/western/star_names.fab:124
@@ -7109,6 +7256,23 @@ msgstr "Ґалла"
 msgid "The Ski Runners"
 msgstr "Лыжнікі"
 
+#: skycultures/siberian/constellation_names.eng.fab:2
+msgid "Threshers"
+msgstr "Малацьбіты"
+
+#: skycultures/siberian/constellation_names.eng.fab:3
+msgid "Duck Nest"
+msgstr "Гняздо качкі"
+
+#: skycultures/siberian/star_names.fab:1
+msgid "Golden stake"
+msgstr "Залаты кол"
+
+#. TRANSLATORS: Native name of Venus in Siberian culture (in English words)
+#: skycultures/siberian/planet_names.fab:2
+msgid "Night Star"
+msgstr "Начная зорка"
+
 #: skycultures/tongan/constellation_names.eng.fab:1
 msgid "Toloatonga"
 msgstr "Толоатонґа"
@@ -7184,22 +7348,22 @@ msgstr "Мотулікі"
 #. TRANSLATORS: Native name of the Sun in Tongan culture
 #: skycultures/tongan/planet_names.fab:2
 msgid "La'a"
-msgstr ""
+msgstr "Ла'а"
 
 #. TRANSLATORS: Native name of the Moon in Tongan culture
 #: skycultures/tongan/planet_names.fab:4
 msgid "Mahina"
-msgstr ""
+msgstr "Магіна"
 
 #. TRANSLATORS: Native name of Venus in Tongan culture
 #: skycultures/tongan/planet_names.fab:6
 msgid "Tapukitea"
-msgstr ""
+msgstr "Тапукітэа"
 
 #. TRANSLATORS: Native name of Mars in Tongan culture
 #: skycultures/tongan/planet_names.fab:8
 msgid "Matamemea"
-msgstr ""
+msgstr "Матамэмэа"
 
 #: skycultures/tupi/constellation_names.eng.fab:1
 msgid "White Ostrich"
@@ -7695,11 +7859,11 @@ msgstr "Нэмбус"
 
 #: skycultures/western/star_names.fab:18
 msgid "Torcularis Septentrionalis"
-msgstr ""
+msgstr "Таркулярыс сэптэнтрыяналіс"
 
 #: skycultures/western/star_names.fab:23
 msgid "Alrischa"
-msgstr ""
+msgstr "Альрыша"
 
 #: skycultures/western/star_names.fab:27
 msgid "Polaris"
@@ -7719,7 +7883,7 @@ msgstr "Анджэтэнар"
 
 #: skycultures/western/star_names.fab:33
 msgid "Gorgonea Secunda"
-msgstr ""
+msgstr "Ґарґанэа Сэкунда"
 
 #: skycultures/western/star_names.fab:35
 msgid "Gorgonea Tertia"
@@ -7731,7 +7895,7 @@ msgstr "Місам"
 
 #: skycultures/western/star_names.fab:38
 msgid "Gorgonea Quarta"
-msgstr ""
+msgstr "Ґарґанэа Кварта"
 
 #: skycultures/western/star_names.fab:42
 msgid "Rana"
@@ -7760,15 +7924,15 @@ msgstr "Альдэбаран"
 
 #: skycultures/western/star_names.fab:63
 msgid "Sceptrum"
-msgstr ""
+msgstr "Сцэптрум"
 
 #: skycultures/western/star_names.fab:64
 msgid "Tabit"
-msgstr ""
+msgstr "Табіт"
 
 #: skycultures/western/star_names.fab:65
 msgid "Hassaleh"
-msgstr ""
+msgstr "Гасале"
 
 #: skycultures/western/star_names.fab:66
 msgid "Hind's Crimson Star"
@@ -7788,11 +7952,11 @@ msgstr "Гаэдус II"
 
 #: skycultures/western/star_names.fab:77
 msgid "Thabit"
-msgstr ""
+msgstr "Табіт"
 
 #: skycultures/western/star_names.fab:79
 msgid "Ruby Star"
-msgstr ""
+msgstr "Рубінавая зорка"
 
 #: skycultures/western/star_names.fab:82
 msgid "Hatsya"
@@ -7804,11 +7968,11 @@ msgstr "Аль Куруд"
 
 #: skycultures/western/star_names.fab:92
 msgid "Tejat Prior"
-msgstr ""
+msgstr "Тэят прыёр"
 
 #: skycultures/western/star_names.fab:96
 msgid "Tejat Posterior"
-msgstr ""
+msgstr "Тэят пастэрыёр"
 
 #: skycultures/western/star_names.fab:98
 msgid "Plaskett's star"
@@ -7834,7 +7998,7 @@ msgstr "Кастор"
 
 #: skycultures/western/star_names.fab:114
 msgid "Markeb"
-msgstr ""
+msgstr "Маркеб"
 
 #: skycultures/western/star_names.fab:116
 #: skycultures/western_rey/star_names.fab:30
@@ -7871,7 +8035,7 @@ msgstr "Цээн Ке"
 
 #: skycultures/western/star_names.fab:141
 msgid "Al'dzhabkhakh"
-msgstr ""
+msgstr "Альджабхах"
 
 #: skycultures/western/star_names.fab:146
 msgid "Praecipua"
@@ -7883,7 +8047,7 @@ msgstr "Зорка Іннэсы"
 
 #: skycultures/western/star_names.fab:155
 msgid "Labr"
-msgstr ""
+msgstr "Лабр"
 
 #: skycultures/western/star_names.fab:157
 msgid "Przybylski's Star"
@@ -7891,7 +8055,7 @@ msgstr "Зорка Пшыбыльскага"
 
 #: skycultures/western/star_names.fab:158
 msgid "Alkaphrah"
-msgstr ""
+msgstr "Алькафра"
 
 #: skycultures/western/star_names.fab:163
 msgid "Minkar"
@@ -7932,7 +8096,7 @@ msgstr "Асэлюс Сэкундус"
 
 #: skycultures/western/star_names.fab:193
 msgid "Kkhambaliya"
-msgstr ""
+msgstr "Кхамбалія"
 
 #: skycultures/western/star_names.fab:194
 msgid "Asellus Primus"
@@ -7949,23 +8113,23 @@ msgstr "Кахаб"
 
 #: skycultures/western/star_names.fab:204
 msgid "Zuben Elakribi"
-msgstr ""
+msgstr "Зубэн Элакрыбі"
 
 #: skycultures/western/star_names.fab:206
 msgid "Brachium"
-msgstr ""
+msgstr "Брахіюм"
 
 #: skycultures/western/star_names.fab:207
 msgid "Zuben Hakrabi"
-msgstr ""
+msgstr "Зубэн Гакрабі"
 
 #: skycultures/western/star_names.fab:208
 msgid "Printseps"
-msgstr ""
+msgstr "Прынцэпс"
 
 #: skycultures/western/star_names.fab:210
 msgid "Pherkad Minor"
-msgstr ""
+msgstr "Фэркад Мінор"
 
 #: skycultures/western/star_names.fab:213
 msgid "Inkalunis"
@@ -7977,15 +8141,15 @@ msgstr "Зубэн Эльфкраб"
 
 #: skycultures/western/star_names.fab:218
 msgid "Ceginus"
-msgstr ""
+msgstr "Цэґінус"
 
 #: skycultures/western/star_names.fab:221
 msgid "Graffias"
-msgstr ""
+msgstr "Ґрафіяс"
 
 #: skycultures/western/star_names.fab:223
 msgid "Marsik"
-msgstr ""
+msgstr "Марсік"
 
 #: skycultures/western/star_names.fab:224
 msgid "Jabbah"
@@ -7997,23 +8161,23 @@ msgstr "Альніят"
 
 #: skycultures/western/star_names.fab:233
 msgid "Han"
-msgstr ""
+msgstr "Ган"
 
 #: skycultures/western/star_names.fab:235
 msgid "Grafias"
-msgstr ""
+msgstr "Ґрафіяс"
 
 #: skycultures/western/star_names.fab:236
 msgid "Arrakis"
-msgstr ""
+msgstr "Аракіс"
 
 #: skycultures/western/star_names.fab:237
 msgid "Aldhibah"
-msgstr ""
+msgstr "Альдыба"
 
 #: skycultures/western/star_names.fab:240
 msgid "Sarin"
-msgstr ""
+msgstr "Сарын"
 
 #: skycultures/western/star_names.fab:244
 msgid "Kuma"
@@ -8021,19 +8185,19 @@ msgstr "Кума"
 
 #: skycultures/western/star_names.fab:249
 msgid "Dziban"
-msgstr ""
+msgstr "Дзібан"
 
 #: skycultures/western/star_names.fab:254
 msgid "Sinistra"
-msgstr ""
+msgstr "Сіністра"
 
 #: skycultures/western/star_names.fab:255
 msgid "Nash"
-msgstr ""
+msgstr "Наш"
 
 #: skycultures/western/star_names.fab:257
 msgid "Polis"
-msgstr ""
+msgstr "Поліс"
 
 #: skycultures/western/star_names.fab:260
 msgid "Alathfar"
@@ -8046,7 +8210,7 @@ msgstr "Вэга"
 
 #: skycultures/western/star_names.fab:268
 msgid "Manubrij"
-msgstr ""
+msgstr "Манубрый"
 
 #: skycultures/western/star_names.fab:269
 msgid "Deneb el Okab"
@@ -8066,7 +8230,7 @@ msgstr "Альбада"
 
 #: skycultures/western/star_names.fab:276
 msgid "Deneb Okab"
-msgstr ""
+msgstr "Дэнэб Акаб"
 
 #: skycultures/western/star_names.fab:277
 msgid "Lukida"
@@ -8118,7 +8282,7 @@ msgstr "Дэнэб Дульфім"
 
 #: skycultures/western/star_names.fab:304
 msgid "Arm"
-msgstr "Арм"
+msgstr "Рука"
 
 #: skycultures/western/star_names.fab:305
 msgid "Bessel's Star"
@@ -8154,25 +8318,25 @@ msgstr "Фум аль Самака"
 
 #: skycultures/western_rey/constellation_names.eng.fab:6
 msgid "Big Dipper"
-msgstr ""
+msgstr "Вялікая конаўка"
 
 #: skycultures/western_rey/constellation_names.eng.fab:7
 msgid "Pointers"
-msgstr ""
+msgstr "Стрэлкі"
 
 #: skycultures/western_rey/constellation_names.eng.fab:8
 msgid "Little Dipper"
-msgstr ""
+msgstr "Малая конаўка"
 
 #: skycultures/western_rey/constellation_names.eng.fab:9
 msgid "Guardians"
-msgstr ""
+msgstr "Ахоўнікі"
 
 #: skycultures/western_rey/constellation_names.eng.fab:11
 #: skycultures/western_rey/constellation_names.eng.fab:39
 #: skycultures/western_rey/constellation_names.eng.fab:90
 msgid "feet"
-msgstr ""
+msgstr "ногі"
 
 #: skycultures/western_rey/constellation_names.eng.fab:12
 #: skycultures/western_rey/constellation_names.eng.fab:20
@@ -8190,7 +8354,7 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:156
 #: skycultures/western_rey/constellation_names.eng.fab:169
 msgid "head"
-msgstr ""
+msgstr "галава"
 
 #: skycultures/western_rey/constellation_names.eng.fab:13
 #: skycultures/western_rey/constellation_names.eng.fab:25
@@ -8204,23 +8368,23 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:157
 #: skycultures/western_rey/constellation_names.eng.fab:166
 msgid "tail"
-msgstr ""
+msgstr "хвост"
 
 #: skycultures/western_rey/constellation_names.eng.fab:21
 #: skycultures/western_rey/constellation_names.eng.fab:22
 msgid "paws"
-msgstr ""
+msgstr "лапы"
 
 #: skycultures/western_rey/constellation_names.eng.fab:30
 #: skycultures/western_rey/constellation_names.eng.fab:101
 #: skycultures/western_rey/constellation_names.eng.fab:122
 #: skycultures/western_rey/constellation_names.eng.fab:172
 msgid "body"
-msgstr ""
+msgstr "цела"
 
 #: skycultures/western_rey/constellation_names.eng.fab:32
 msgid "pipe"
-msgstr ""
+msgstr "дудка"
 
 #: skycultures/western_rey/constellation_names.eng.fab:37
 #: skycultures/western_rey/constellation_names.eng.fab:38
@@ -8231,11 +8395,11 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:153
 #: skycultures/western_rey/constellation_names.eng.fab:158
 msgid "wing"
-msgstr ""
+msgstr "крыло"
 
 #: skycultures/western_rey/constellation_names.eng.fab:40
 msgid "outstretched neck"
-msgstr ""
+msgstr "выцягнутая шыя"
 
 #: skycultures/western_rey/constellation_names.eng.fab:44
 #: skycultures/western_rey/constellation_names.eng.fab:76
@@ -8244,54 +8408,54 @@ msgstr ""
 
 #: skycultures/western_rey/constellation_names.eng.fab:45
 msgid "Keystone"
-msgstr ""
+msgstr "Нарожны камень"
 
 #: skycultures/western_rey/constellation_names.eng.fab:50
 msgid "the chain"
-msgstr ""
+msgstr "ланцуг"
 
 #: skycultures/western_rey/constellation_names.eng.fab:51
 msgid "Great Square"
-msgstr ""
+msgstr "Вялікі квадрат"
 
 #: skycultures/western_rey/constellation_names.eng.fab:63
 #: skycultures/western_rey/constellation_names.eng.fab:64
 msgid "horn"
-msgstr ""
+msgstr "рог"
 
 #: skycultures/western_rey/constellation_names.eng.fab:75
 msgid "belt"
-msgstr ""
+msgstr "пас"
 
 #: skycultures/western_rey/constellation_names.eng.fab:77
 msgid "shield"
-msgstr ""
+msgstr "шчыт"
 
 #: skycultures/western_rey/constellation_names.eng.fab:83
 msgid "Hydra's head"
-msgstr ""
+msgstr "Галава гідры"
 
 #: skycultures/western_rey/constellation_names.eng.fab:87
 msgid "Hydra's tail"
-msgstr ""
+msgstr "Хвост гідры"
 
 #: skycultures/western_rey/constellation_names.eng.fab:93
 msgid "bill"
-msgstr ""
+msgstr "дзюба"
 
 #: skycultures/western_rey/constellation_names.eng.fab:94
 #: skycultures/western_rey/constellation_names.eng.fab:105
 #: skycultures/western_rey/constellation_names.eng.fab:106
 msgid "foot"
-msgstr ""
+msgstr "нага"
 
 #: skycultures/western_rey/constellation_names.eng.fab:97
 msgid "Serpens Cauda"
-msgstr ""
+msgstr "Сэрпэнс Каўда"
 
 #: skycultures/western_rey/constellation_names.eng.fab:98
 msgid "Serpens Caput"
-msgstr ""
+msgstr "Сэрпэнс Капут"
 
 #: skycultures/western_rey/constellation_names.eng.fab:103
 #: skycultures/western_rey/constellation_names.eng.fab:104
@@ -8299,39 +8463,39 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:170
 #: skycultures/western_rey/constellation_names.eng.fab:171
 msgid "arm"
-msgstr ""
+msgstr "рука"
 
 #: skycultures/western_rey/constellation_names.eng.fab:108
 msgid "claws"
-msgstr ""
+msgstr "кіпцюры"
 
 #: skycultures/western_rey/constellation_names.eng.fab:110
 msgid "cat's eyes"
-msgstr ""
+msgstr "вочы ката"
 
 #: skycultures/western_rey/constellation_names.eng.fab:123
 msgid "skirt"
-msgstr ""
+msgstr "спадніца"
 
 #: skycultures/western_rey/constellation_names.eng.fab:124
 msgid "the bow"
-msgstr ""
+msgstr "лук"
 
 #: skycultures/western_rey/constellation_names.eng.fab:131
 msgid "vessel"
-msgstr ""
+msgstr "карабель"
 
 #: skycultures/western_rey/constellation_names.eng.fab:138
 msgid "Northern Fish"
-msgstr ""
+msgstr "Паўночная рыба"
 
 #: skycultures/western_rey/constellation_names.eng.fab:139
 msgid "Circlet"
-msgstr ""
+msgstr "Бранзалет"
 
 #: skycultures/western_rey/constellation_names.eng.fab:146
 msgid "False Cross"
-msgstr ""
+msgstr "Фальшывы крыж"
 
 #: skycultures/western_rey/constellation_names.eng.fab:148
 msgid "figurehead"
@@ -8343,53 +8507,56 @@ msgstr ""
 
 #: skycultures/western_rey/constellation_names.eng.fab:167
 msgid "ears"
-msgstr ""
+msgstr "вушы"
 
 #: skycultures/western_rey/constellation_names.eng.fab:173
 msgid "front legs"
-msgstr ""
+msgstr "пярэднія ногі"
 
 #: skycultures/western_rey/constellation_names.eng.fab:174
 msgid "hind legs"
-msgstr ""
+msgstr "заднія ногі"
 
 #: skycultures/western_rey/constellation_names.eng.fab:180
 msgid "Fly"
-msgstr ""
+msgstr "Муха"
 
 #: skycultures/western_rey/constellation_names.eng.fab:183
 msgid "eyes"
-msgstr ""
+msgstr "вочы"
 
 #: skycultures/western_rey/star_names.fab:5
 msgid "Pole Star"
-msgstr ""
+msgstr "Палярная зорка"
 
 #: skycultures/western_rey/star_names.fab:17
 msgid "Gemma"
-msgstr ""
+msgstr "Нырка"
 
 #: skycultures/western_rey/star_names.fab:49
 msgid "Tau Ceti"
-msgstr ""
+msgstr "Таў Кіта"
 
 #: skycultures/western_rey/star_names.fab:50
 msgid "Knot"
-msgstr ""
+msgstr "Вочы"
 
 #: skycultures/western_rey/star_names.fab:56
 msgid "Alpha Centauri"
-msgstr ""
+msgstr "Альфа Цэнтаўра"
 
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
-msgstr ""
+msgstr "Бэта Цэнтаўра"
 
 #~ msgid "Office for Chariot"
 #~ msgstr "Адказны за калясьніцы"
 
 #~ msgid "Bear Paw galaxy"
 #~ msgstr "Ґаляктыка «Лапа мядзьведзя»"
+
+#~ msgid "Black-eye galaxy"
+#~ msgstr "Ґаляктыка «Чорнае вока»"
 
 #~ msgid "Great Nebula in Andromeda"
 #~ msgstr "Вялікая туманнасьць у Андрамэдзе"

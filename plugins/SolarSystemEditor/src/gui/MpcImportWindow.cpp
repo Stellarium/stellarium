@@ -125,6 +125,8 @@ void MpcImportWindow::createDialogContent()
 
 	connect(ui->pushButtonSendQuery, SIGNAL(clicked()),
 	        this, SLOT(sendQuery()));
+	connect(ui->lineEditQuery, SIGNAL(returnPressed()),
+		this, SLOT(sendQuery()));
 	connect(ui->pushButtonAbortQuery, SIGNAL(clicked()),
 	        this, SLOT(abortQuery()));
 	connect(ui->lineEditQuery, SIGNAL(textEdited(QString)),
@@ -202,7 +204,7 @@ void MpcImportWindow::resetDialog()
 void MpcImportWindow::populateBookmarksList()
 {
 	ui->comboBoxBookmarks->clear();
-        ui->comboBoxBookmarks->addItem("Select bookmark...");
+	ui->comboBoxBookmarks->addItem(q_("Select bookmark..."));
 	QStringList bookmarkTitles(bookmarks.value(importType).keys());
 	bookmarkTitles.sort();
 	ui->comboBoxBookmarks->addItems(bookmarkTitles);
@@ -329,7 +331,7 @@ void MpcImportWindow::selectFile()
 
 void MpcImportWindow::bookmarkSelected(QString bookmarkTitle)
 {
-	if (bookmarkTitle.isEmpty() || bookmarkTitle == "Select bookmark...")
+	if (bookmarkTitle.isEmpty() || bookmarks.value(importType).value(bookmarkTitle).isEmpty())
 	{
 		ui->lineEditURL->clear();
 		return;
@@ -717,9 +719,10 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 	QUrlQuery q(url);
 	q.addQueryItem("ty","e");//Type: ephemerides
 	q.addQueryItem("TextArea", query);//Object name query
-	//q.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	q.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	//Switch to MPC 1-line format --AW
 	//XEphem's format is used instead because it doesn't truncate object names.
-	q.addQueryItem("e", "3");//Elements format: XEphem
+	//q.addQueryItem("e", "3");//Elements format: XEphem
 	//Yes, all of the rest are necessary
 	q.addQueryItem("d","");
 	q.addQueryItem("l","");
@@ -839,8 +842,17 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 	QTemporaryFile file;
 	if (file.open())
 	{
-		file.write(reply->readAll());
+		file.write(reply->readAll());		
 		file.close();
+
+		QRegExp cometProvisionalDesignation("[PCDX]/");
+		QRegExp cometDesignation("(\\d)+[PCDX]/");
+		QString queryData = ui->lineEditQuery->text().trimmed();
+
+		if (cometDesignation.indexIn(queryData) == 0 || cometProvisionalDesignation.indexIn(queryData) == 0)
+			objects = readElementsFromFile(MpcComets, file.fileName());
+		else
+			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
 
 		/*
 		//Try to read it as a comet first?
@@ -848,7 +860,8 @@ void MpcImportWindow::readQueryReply(QNetworkReply * reply)
 		if (objects.isEmpty())
 			objects = readElementsFromFile(MpcMinorPlanets, file.fileName());
 		*/
-		objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
+		//XEphem given wrong data for comets --AW
+		//objects = ssoManager->readXEphemOneLineElementsFromFile(file.fileName());
 	}
 	else
 	{
@@ -972,6 +985,7 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2011", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2011/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2013", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2013/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2014", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2014/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2015", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2015/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");

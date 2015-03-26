@@ -8,4 +8,4 @@ INSTALL (FILES landscape.ini DESTINATION share/${PACKAGE}/landscapes/zero )
 INSTALL (DIRECTORY ./ DESTINATION share/${PACKAGE}/landscapes/zero 
 	FILES_MATCHING PATTERN "*.txt" 
 	PATTERN "description.*.utf8" 
-	PATTERN "CMakeFiles" EXCLUDE )
+	PATTERN "CMake*" EXCLUDE )

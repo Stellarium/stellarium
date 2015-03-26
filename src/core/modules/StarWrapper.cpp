@@ -103,21 +103,29 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
+		QStringList sciNames;
+		if (!sciName.isEmpty())
+			sciNames.append(sciName);
+		if (!addSciName.isEmpty())
+			sciNames.append(addSciName);
+		if (!varSciName.isEmpty() && varSciName!=addSciName && varSciName!=sciName)
+			sciNames.append(varSciName);
+		const QString sciNamesList = sciNames.join(" - ");
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
 		{
-			if (commonNameI18!="" || sciName!="" || addSciName!="" || varSciName!="")
+			if (!commonNameI18.isEmpty() || !sciNamesList.isEmpty())
 			{
-				oss << commonNameI18 << (commonNameI18 == "" ? "" : " ");
-				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
-					oss << "(";
-				oss << (sciName=="" ? "" : sciName);
-				oss << (addSciName=="" ? "" : QString(" - %1").arg(addSciName));
-				if (varSciName!="" && varSciName!=sciName)
-					oss << (sciName=="" ? "" : " - ") << varSciName;
-				if (commonNameI18!="" && (sciName!="" || varSciName!=""))
-					oss << ")";
+				if (!commonNameI18.isEmpty())
+					oss << commonNameI18;
+
+				if (!commonNameI18.isEmpty() && !sciNamesList.isEmpty())
+					oss << " (" << sciNamesList << ")";
+
+				if (commonNameI18.isEmpty() && !sciNamesList.isEmpty())
+					oss << sciNamesList;
+
 				nameWasEmpty=false;
 			}
 		}
@@ -226,15 +234,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (s->getPlx())
 			oss << q_("Parallax: %1\"").arg(0.00001*s->getPlx(), 0, 'f', 5) << "<br />";
 
-		if (vEpoch>0)
-		{
-			double vsEpoch = 2400000+vEpoch;
-			if (ebsFlag)
-				oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
-			else
-				oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
-		}
-
 		if (vPeriod>0)
 			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
 
@@ -242,13 +241,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		{
 			// Calculate next minimum or maximum light
 			double vsEpoch = 2400000+vEpoch;
-			int npDelta = (core->getJDay()-vsEpoch)/vPeriod;
-			double npDate = vsEpoch + ((npDelta+1)*vPeriod);
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJDay() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			if (ebsFlag)
 				oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
 			else
 				oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
+
 		}
 
 		if (vMm>0)
