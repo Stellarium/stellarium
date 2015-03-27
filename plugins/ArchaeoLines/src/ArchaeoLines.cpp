@@ -287,7 +287,7 @@ void ArchaeoLines::update(double deltaTime)
 	zenithPassageLine->update(deltaTime);
 	nadirPassageLine->update(deltaTime);
 
-	withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 }
 
 
