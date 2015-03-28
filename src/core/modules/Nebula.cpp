@@ -100,13 +100,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		QStringList catIds;
 		if ((M_nb > 0) && (M_nb < 111))
-			catIds << QString("M %1").arg(M_nb);		
+			catIds << QString("M %1").arg(M_nb);
+		if ((C_nb > 0) && (C_nb < 110))
+			catIds << QString("C %1").arg(C_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
-			catIds << QString("IC %1").arg(IC_nb);
-		if ((C_nb > 0) && (C_nb < 110))
-			catIds << QString("C %1").arg(C_nb);
+			catIds << QString("IC %1").arg(IC_nb);		
 		if ((B_nb > 0) && (B_nb <= 370))
 			catIds << QString("B %1").arg(B_nb);
 		if ((Sh2_nb > 0) && (Sh2_nb <= 313))
