@@ -158,6 +158,7 @@
 #define glFrontFace(...)            GLFUNC_(glFrontFace(__VA_ARGS__))
 #define glIsEnabled(...)            GLFUNC_(glIsEnabled(__VA_ARGS__))
 #define glIsTexture(...)            GLFUNC_(glIsTexture(__VA_ARGS__))
+#define glLineWidth(...)            GLFUNC_(glLineWidth(__VA_ARGS__))
 #define glPixelStorei(...)          GLFUNC_(glPixelStorei(__VA_ARGS__))
 #define glPolygonOffset(...)        GLFUNC_(glPolygonOffset(__VA_ARGS__))
 #define glStencilMask(...)          GLFUNC_(glStencilMask(__VA_ARGS__))
