@@ -574,7 +574,7 @@ void Oculars::init()
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 		
-		guiPanelEnabled = settings->value("enable_control_panel", false).toBool();
+		guiPanelEnabled = settings->value("enable_control_panel", true).toBool();
 		enableGuiPanel(guiPanelEnabled);
 
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
