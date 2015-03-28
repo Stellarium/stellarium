@@ -1897,6 +1897,20 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					result << QString("RCW %1").arg(n->VdB_nb);
 			}
 			break;
+		case 106: // Collinder Catalogue
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->Cr_nb>0)
+					result << QString("Cr %1").arg(n->Cr_nb);
+			}
+			break;
+		case 107: // Melotte Catalogue
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->Mel_nb>0)
+					result << QString("Mel %1").arg(n->Mel_nb);
+			}
+			break;
 		default:
 			foreach(const NebulaP& n, nebArray)
 			{
