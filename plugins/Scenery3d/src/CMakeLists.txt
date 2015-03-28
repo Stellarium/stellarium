@@ -38,8 +38,6 @@ SET(Scenery3d_SRCS
     ShaderManager.cpp
     OBJ.hpp
     OBJ.cpp
-    Util.hpp
-    Util.cpp
     Heightmap.hpp
     Heightmap.cpp
 )

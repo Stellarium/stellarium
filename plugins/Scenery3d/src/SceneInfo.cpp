@@ -19,7 +19,6 @@
  */
 
 #include "SceneInfo.hpp"
-#include "Util.hpp"
 #include "Scenery3dMgr.hpp"
 
 #include "StelApp.hpp"
@@ -454,7 +453,7 @@ void StoredView::readArray(QSettings &ini, StoredViewList &list, int size, bool 
 		sv.isGlobal = isGlobal;
 		sv.label = ini.value("label").toString();
 		sv.description = ini.value("description").toString();
-		sv.position = strToVec4d(ini.value("position").toString());
+		sv.position = StelUtils::strToVec4d(ini.value("position").toString());
 		sv.view_fov = StelUtils::strToVec3f(ini.value("view_fov").toString());
 
 		list.append(sv);
@@ -470,8 +469,8 @@ void StoredView::writeArray(QSettings &ini, const StoredViewList &list)
 
 		ini.setValue("label", view.label);
 		ini.setValue("description", view.description);
-		ini.setValue("position", vec4dToStr(view.position));
-		ini.setValue("view_fov", vec3fToStr(view.view_fov));
+		ini.setValue("position", StelUtils::vec4dToStr(view.position));
+		ini.setValue("view_fov", StelUtils::vec3fToStr(view.view_fov));
 	}
 }
 

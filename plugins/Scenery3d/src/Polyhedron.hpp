@@ -24,7 +24,6 @@
 #ifndef _POLYHEDRON_HPP_
 #define _POLYHEDRON_HPP_
 
-#include "VecMath.hpp"
 #include "Frustum.hpp"
 #include "Plane.hpp"
 #include "SPolygon.hpp"
