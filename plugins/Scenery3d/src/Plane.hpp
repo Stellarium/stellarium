@@ -21,10 +21,8 @@
 #ifndef _PLANE_HPP_
 #define _PLANE_HPP_
 
-#include "VecMath.hpp"
 #include "Line.hpp"
 #include "SPolygon.hpp"
-#include <limits>
 
 class Plane
 {

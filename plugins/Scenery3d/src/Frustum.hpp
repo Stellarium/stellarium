@@ -2,7 +2,6 @@
 #define _FRUSTUM_HPP_
 
 #include <vector>
-#include <math.h>
 #include "Plane.hpp"
 #include "AABB.hpp"
 

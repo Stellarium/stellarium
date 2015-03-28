@@ -19,7 +19,6 @@
  */
 
 #include "Plane.hpp"
-#include "Util.hpp"
 
 Plane::Plane()
 {

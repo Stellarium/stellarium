@@ -475,6 +475,36 @@ Vec3f strToVec3f(const QString& s)
 	return strToVec3f(s.split(","));
 }
 
+Vec4d strToVec4d(const QStringList &s)
+{
+	if(s.size()<4)
+		return Vec4d(0.0,0.0,0.0,0.0);
+
+	return Vec4d(s[0].toDouble(), s[1].toDouble(), s[2].toDouble(), s[3].toDouble());
+}
+
+Vec4d strToVec4d(const QString& str)
+{
+	return strToVec4d(str.split(","));
+}
+
+QString vec3fToStr(const Vec3f &v)
+{
+	return QString("%1,%2,%3")
+		.arg(v[0],0,'f',6)
+		.arg(v[1],0,'f',6)
+		.arg(v[2],0,'f',6);
+}
+
+QString vec4dToStr(const Vec4d &v)
+{
+	return QString("%1,%2,%3,%4")
+		.arg(v[0],0,'f',10)
+		.arg(v[1],0,'f',10)
+		.arg(v[2],0,'f',10)
+		.arg(v[3],0,'f',10);
+}
+
 // Converts a Vec3f to HTML color notation.
 QString vec3fToHtmlColor(const Vec3f& v)
 {

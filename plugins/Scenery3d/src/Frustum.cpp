@@ -1,5 +1,4 @@
 #include "Frustum.hpp"
-#include "Util.hpp"
 #include "GLFuncs.hpp"
 #include <limits>
 
@@ -72,14 +71,14 @@ void Frustum::calcFrustum(Vec3d p, Vec3d l, Vec3d u)
     Vec3d fbl = fc - Z * fh - X * fw;
     Vec3d fbr = fc - Z * fh + X * fw;
 
-    corners[NTL] = vecdToFloat(ntl);
-    corners[NTR] = vecdToFloat(ntr);
-    corners[NBL] = vecdToFloat(nbl);
-    corners[NBR] = vecdToFloat(nbr);
-    corners[FTL] = vecdToFloat(ftl);
-    corners[FTR] = vecdToFloat(ftr);
-    corners[FBL] = vecdToFloat(fbl);
-    corners[FBR] = vecdToFloat(fbr);
+    corners[NTL] = ntl.toVec3f();
+    corners[NTR] = ntr.toVec3f();
+    corners[NBL] = nbl.toVec3f();
+    corners[NBR] = nbr.toVec3f();
+    corners[FTL] = ftl.toVec3f();
+    corners[FTR] = ftr.toVec3f();
+    corners[FBL] = fbl.toVec3f();
+    corners[FBR] = fbr.toVec3f();
 
     planes[TOP]->setPoints(corners[NTR], corners[NTL], corners[FTL], SPolygon::CCW);
     planes[BOTTOM]->setPoints(corners[NBL], corners[NBR], corners[FBR], SPolygon::CCW);

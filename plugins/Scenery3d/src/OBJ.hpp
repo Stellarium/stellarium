@@ -288,6 +288,9 @@ private:
     //! Returns the file for this filename, handling decompression if necessary
     QFile* getFile(const QString& filename);
 
+    //! Used for parsing a texture string
+    QString parseTextureString(const char *buffer) const;
+
     //! Flags
     bool m_loaded;
     bool m_hasPositions;

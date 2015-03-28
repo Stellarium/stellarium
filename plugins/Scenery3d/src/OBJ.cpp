@@ -1296,37 +1296,28 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 		fgets(buffer, sizeof(buffer), pFile);
 		sscanf("%[^\n]", buffer);
 
-		//TODO convert to QString
-		std::string tex;
-		parseTextureString(buffer, tex);
-		pMaterial->textureName = QString::fromStdString(tex);
+		pMaterial->textureName = parseTextureString(buffer);
 	    }
 	    else if (strstr(buffer, "map_Ke") != 0)
 	    {
 		fgets(buffer, sizeof(buffer), pFile);
 		sscanf("%[^\n]", buffer);
 
-		std::string tex;
-		parseTextureString(buffer, tex);
-		pMaterial->emissiveMapName = QString::fromStdString(tex);
+		pMaterial->emissiveMapName = parseTextureString(buffer);
 	    }
 	    else if (strstr(buffer, "map_bump") != 0)
 	    {
 		fgets(buffer, sizeof(buffer), pFile);
 		sscanf(buffer, "%[^\n]", buffer);
 
-		std::string bump;
-		parseTextureString(buffer, bump);
-		pMaterial->bumpMapName = QString::fromStdString(bump);
+		pMaterial->bumpMapName =  parseTextureString(buffer);
 	    }
 	    else if (strstr(buffer, "map_height") != 0)
 	    {
 		fgets(buffer, sizeof(buffer), pFile);
 		sscanf(buffer, "%[^\n]", buffer);
 
-		std::string height;
-		parseTextureString(buffer, height);
-		pMaterial->heightMapName = QString::fromStdString(height);
+		pMaterial->heightMapName =  parseTextureString(buffer);
 	    }
 	    else
 	    {
@@ -1369,6 +1360,15 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
     fclose(pFile);
 
     return true;
+}
+
+QString OBJ::parseTextureString(const char *buffer) const
+{
+	QString str(buffer);
+	//trim whitespace
+	str = str.trimmed();
+	//replace backslashes with slashes
+	return str.replace('\\','/');
 }
 
 void OBJ::Material::finalize()

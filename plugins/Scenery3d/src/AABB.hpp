@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "VecMath.hpp"
-#include "Util.hpp"
 
 //! A simple "box" class with 8 arbitrary vertices
 class Box

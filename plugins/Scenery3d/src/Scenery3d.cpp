@@ -156,7 +156,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		return false;
 
 	//setup some state
-	QMatrix4x4 zRot2Grid = convertToQMatrix( loadingScene.zRotateMatrix*loadingScene.obj2gridMatrix );
+	QMatrix4x4 zRot2Grid = (loadingScene.zRotateMatrix*loadingScene.obj2gridMatrix).convertToQMatrix();
 
 	OBJ::vertexOrder objVertexOrder=OBJ::XYZ;
 	if (loadingScene.vertexOrder.compare("XZY") == 0) objVertexOrder=OBJ::XZY;
@@ -963,9 +963,9 @@ void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, co
     float maxZ = -std::numeric_limits<float>::max();
     float minZ = std::numeric_limits<float>::max();
 
-    Vec3f eye = vecdToFloat(viewPos);
+    Vec3f eye = viewPos.toVec3f();
 
-    Vec3f vDir = vecdToFloat(viewDir);
+    Vec3f vDir = viewDir.toVec3f();
     vDir.normalize();
 
     const QVector<Vec3f> &verts = p.getVerts();
@@ -1572,7 +1572,7 @@ void Scenery3d::drawFromCubeMap()
 	altAzProjector->project(cubeVertices.count(),cubeVertices.constData(),transformedCubeVertices.data());
 
 	//setup shader params
-	projectionMatrix = convertToQMatrix(altAzProjector->getProjectionMatrix());
+	projectionMatrix = altAzProjector->getProjectionMatrix().convertToQMatrix();
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_MAT_PROJECTION), projectionMatrix);
 	cubeShader->setUniformValue(shaderManager.uniformLocation(cubeShader,ShaderMgr::UNIFORM_TEX_DIFFUSE),0);
 	cubeVertexBuffer.bind();
@@ -1634,7 +1634,7 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
 
     //calc modelview transform
-    QMatrix4x4 mvMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
+    QMatrix4x4 mvMatrix = altAzProjector->getModelViewTransform()->getApproximateLinearTransfo().convertToQMatrix();
     mvMatrix.optimize(); //may make inversion faster?
 
     //recalculate lighting info
@@ -1842,10 +1842,11 @@ void Scenery3d::drawDebug()
 
 	if(shaderParameters.shadows)
 	{
+		QString cap("SM %1");
+
 		for(int i=0; i<shaderParameters.frustumSplits; i++)
 		{
-			std::string cap = "SM "+toString(i);
-			painter.drawText(screen_x+70, screen_y+130, QString(cap.c_str()));
+			painter.drawText(screen_x+70, screen_y+130, cap.arg(i));
 
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
 			painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
@@ -2656,7 +2657,7 @@ void Scenery3d::draw(StelCore* core)
 
 	//perform Z-sorting for correct transparency
 	//this uses the object's centroids for sorting, so the OBJ must be created correctly
-	objModel->transparencyDepthSort(-vecdToFloat(absolutePosition));
+	objModel->transparencyDepthSort(-absolutePosition.toVec3f());
 
 	if(requiresCubemap)
 	{
