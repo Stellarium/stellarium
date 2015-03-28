@@ -249,7 +249,7 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -264,6 +264,8 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "RCW") return searchRCW(num);
 		if (cat == "LDN") return searchLDN(num);
 		if (cat == "LBN") return searchLBN(num);
+		if (cat == "CR") return searchCr(num);
+		if (cat == "MEL") return searchMel(num);
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
 	if (dCatNumRx.exactMatch(uname))
@@ -424,6 +426,22 @@ NebulaP NebulaMgr::searchLBN(unsigned int LBN)
 	return NebulaP();
 }
 
+NebulaP NebulaMgr::searchCr(unsigned int Cr)
+{
+	foreach (const NebulaP& n, nebArray)
+		if (n->Cr_nb == Cr)
+			return n;
+	return NebulaP();
+}
+
+NebulaP NebulaMgr::searchMel(unsigned int Mel)
+{
+	foreach (const NebulaP& n, nebArray)
+		if (n->Mel_nb == Mel)
+			return n;
+	return NebulaP();
+}
+
 #if 0
 // read from stream
 bool NebulaMgr::loadNGCOld(const QString& catNGC)
@@ -571,7 +589,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 		{
 			// If the name is not a messier number perhaps one is already
 			// defined for this object
-			if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C "  && name.left(2) != "Cr")
+			if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr" && name.left(2) != "Me")
 			{
 				if (transRx.exactMatch(name)) {
 					e->englishName = transRx.capturedTexts().at(1).trimmed();
@@ -581,7 +599,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 					e->englishName = name;
 				}
 			}
-			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() == "C " && name.left(2) != "Cr")
+			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() == "C " && name.left(2) != "Cr" && name.left(2) != "Me")
 			{
 				// If it's a Caldwell number, we will call it a Caldwell if there is no better name
 				name = name.mid(2); // remove "C "
@@ -599,7 +617,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				e->C_nb=(unsigned int)(num);
 				e->englishName = QString("C%1").arg(num);
 			}
-			else if (name.left(2).toUpper() == "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr")
+			else if (name.left(2).toUpper() == "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr" && name.left(2) != "Me")
 			{
 				// If it's a Messier number, we will call it a Messier if there is no better name
 				name = name.mid(2); // remove "M "
@@ -617,7 +635,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				e->M_nb=(unsigned int)(num);
 				e->englishName = QString("M%1").arg(num);
 			}
-			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) == "Cr")
+			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) == "Cr" && name.left(2) != "Me")
 			{
 				// If it's a Collinder number, we will call it a Messier if there is no better name
 				name = name.mid(2); // remove "Cr"
@@ -633,6 +651,23 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				}
 
 				e->Cr_nb=(unsigned int)(num);
+			}
+			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr" && name.left(2) == "Me")
+			{
+				// If it's a Melotte number, we will call it a Messier if there is no better name
+				name = name.mid(2); // remove "Cr"
+
+				// read the Messier number
+				QTextStream istr(&name);
+				int num;
+				istr >> num;
+				if (istr.status()!=QTextStream::Ok)
+				{
+					qWarning() << "cannot read Melotte number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
+					continue;
+				}
+
+				e->Mel_nb=(unsigned int)(num);
 			}
 
 
@@ -978,7 +1013,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 
 
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
-	if (objw.mid(0, 1) == "M")
+	if (objw.mid(0, 1) == "M" && objw.mid(1, 1) != "E")
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1067,6 +1102,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by Melotte numbers (possible formats are "Mel31" or "Mel 31")
+	if (objw.mid(0, 3) == "MEL")
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("MEL%1").arg(n->Mel_nb) == objw || QString("MEL %1").arg(n->Mel_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return StelObjectP();
 }
 
@@ -1106,7 +1151,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
-	if (objw.startsWith("M"))
+	if (objw.startsWith("M") && !objw.startsWith("ME"))
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1195,6 +1240,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		}
 	}
 
+	// Search by Melotte numbers (possible formats are "Mel31" or "Mel 31")
+	if (objw.startsWith("MEL"))
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (QString("MEL%1").arg(n->Mel_nb) == objw || QString("MEL %1").arg(n->Mel_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return NULL;
 }
 
@@ -1207,7 +1262,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 
 	QString objw = objPrefix.toUpper();
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw[0]=='M')
+	if (objw.size()>=1 && objw[0]=='M' && objw[1]!='E')
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1220,6 +1275,26 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("M %1").arg(n->M_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by Melotte objects number (possible formats are "Mel31" or "Mel 31")
+	if (objw.size()>=1 && objw[0]=='M' && objw[1]=='E')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->Mel_nb==0) continue;
+			QString constw = QString("MEL%1").arg(n->Mel_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("MEL %1").arg(n->Mel_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
@@ -1461,7 +1536,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 
 	 QString objw = objPrefix.toUpper();
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
-	if (objw.size()>=1 && objw[0]=='M')
+	if (objw.size()>=1 && objw[0]=='M' && objw[1]!='E')
 	{
 		foreach (const NebulaP& n, nebArray)
 		{
@@ -1474,6 +1549,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("M %1").arg(n->M_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by Melotte objects number (possible formats are "Mel31" or "Mel 31")
+	if (objw.size()>=1 && objw[0]=='M' && objw[1]=='E')
+	{
+		foreach (const NebulaP& n, nebArray)
+		{
+			if (n->Mel_nb==0) continue;
+			QString constw = QString("MEL%1").arg(n->Mel_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("MEL %1").arg(n->Mel_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
