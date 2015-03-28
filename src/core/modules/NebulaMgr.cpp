@@ -651,6 +651,10 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				}
 
 				e->Cr_nb=(unsigned int)(num);
+				if (record[37] == 'I')
+					e->englishName = QString("IC %1").arg(nb);
+				else
+					e->englishName = QString("NGC %1").arg(nb);
 			}
 			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr" && name.left(2) == "Me")
 			{
@@ -668,6 +672,10 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				}
 
 				e->Mel_nb=(unsigned int)(num);
+				if (record[37] == 'I')
+					e->englishName = QString("IC %1").arg(nb);
+				else
+					e->englishName = QString("NGC %1").arg(nb);
 			}
 
 
