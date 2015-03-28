@@ -508,8 +508,8 @@ void Satellites::restoreDefaultSettings()
 	// delete all existing Satellite settings...
 	conf->remove("");
 
-	conf->setValue("show_satellite_hints", false);
-	conf->setValue("show_satellite_labels", true);
+	conf->setValue("show_satellite_hints", true);
+	conf->setValue("show_satellite_labels", false);
 	conf->setValue("updates_enabled", true);
 	conf->setValue("auto_add_enabled", true);
 	conf->setValue("auto_remove_enabled", true);
@@ -640,8 +640,8 @@ void Satellites::loadSettings()
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	// last update default is the first Towell Day.  <3 DA
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate);
-	setFlagHints(conf->value("show_satellite_hints", false).toBool());
-	Satellite::showLabels = conf->value("show_satellite_labels", true).toBool();
+	setFlagHints(conf->value("show_satellite_hints", true).toBool());
+	Satellite::showLabels = conf->value("show_satellite_labels", false).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
@@ -650,13 +650,13 @@ void Satellites::loadSettings()
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
 
 	// orbit drawing params
-	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", true).toBool();
+	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", false).toBool();
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
 
 	// realistic mode
-	setFlagRelisticMode(conf->value("realistic_mode_enabled", false).toBool());
+	setFlagRelisticMode(conf->value("realistic_mode_enabled", true).toBool());
 
 	conf->endGroup();
 }
