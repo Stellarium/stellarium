@@ -532,7 +532,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	}
 
 	// Read the names of the NGC objects
-	QString name, record;
+	QString name, record, ref;
 	int totalRecords=0;
 	int lineNumber=0;
 	int readOk=0;
@@ -552,34 +552,42 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 		if (record[37] == 'I')
 		{
 			e = searchIC(nb);
+			ref = "IC ";
 		}
 		else if (record[37] == 'B')
 		{
 			e = searchB(nb);
+			ref = "B";
 		}
 		else if (record[37] == 'S')
 		{
 			e = searchSh2(nb);
+			ref = "Sh 2-";
 		}
 		else if (record[37] == 'V')
 		{
 			e = searchVdB(nb);
+			ref = "VdB ";
 		}
 		else if (record[37] == 'R')
 		{
 			e = searchRCW(nb);
+			ref = "RCW ";
 		}
 		else if (record[37] == 'D')
 		{
 			e = searchLDN(nb);
+			ref = "LDN ";
 		}
 		else if (record[37] == 'L')
 		{
 			e = searchLBN(nb);
+			ref = "LBN ";
 		}
 		else
 		{
 			e = searchNGC(nb);
+			ref = "NGC ";
 		}
 
 		// get name, trimmed of whitespace
@@ -589,7 +597,7 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 		{
 			// If the name is not a messier number perhaps one is already
 			// defined for this object
-			if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr" && name.left(2) != "Me")
+			if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2).toUpper() != "CR" && name.left(2).toUpper() != "ME")
 			{
 				if (transRx.exactMatch(name)) {
 					e->englishName = transRx.capturedTexts().at(1).trimmed();
@@ -598,26 +606,8 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				{
 					e->englishName = name;
 				}
-			}
-			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() == "C " && name.left(2) != "Cr" && name.left(2) != "Me")
-			{
-				// If it's a Caldwell number, we will call it a Caldwell if there is no better name
-				name = name.mid(2); // remove "C "
-
-				// read the Caldwell number
-				QTextStream istr(&name);
-				int num;
-				istr >> num;
-				if (istr.status()!=QTextStream::Ok)
-				{
-					qWarning() << "cannot read Caldwell number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
-					continue;
-				}
-
-				e->C_nb=(unsigned int)(num);
-				e->englishName = QString("C%1").arg(num);
-			}
-			else if (name.left(2).toUpper() == "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr" && name.left(2) != "Me")
+			}			
+			else if (name.left(2).toUpper() == "M ")
 			{
 				// If it's a Messier number, we will call it a Messier if there is no better name
 				name = name.mid(2); // remove "M "
@@ -635,12 +625,30 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				e->M_nb=(unsigned int)(num);
 				e->englishName = QString("M%1").arg(num);
 			}
-			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) == "Cr" && name.left(2) != "Me")
+			else if (name.left(2).toUpper() == "C ")
+			{
+				// If it's a Caldwell number, we will call it a Caldwell if there is no better name
+				name = name.mid(2); // remove "C "
+
+				// read the Caldwell number
+				QTextStream istr(&name);
+				int num;
+				istr >> num;
+				if (istr.status()!=QTextStream::Ok)
+				{
+					qWarning() << "cannot read Caldwell number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
+					continue;
+				}
+
+				e->C_nb=(unsigned int)(num);
+				e->englishName = QString("C%1").arg(num);
+			}			
+			else if (name.left(2).toUpper() == "CR")
 			{
 				// If it's a Collinder number, we will call it a Messier if there is no better name
 				name = name.mid(2); // remove "Cr"
 
-				// read the Messier number
+				// read the Collinder number
 				QTextStream istr(&name);
 				int num;
 				istr >> num;
@@ -651,17 +659,15 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				}
 
 				e->Cr_nb=(unsigned int)(num);
-				if (record[37] == 'I')
-					e->englishName = QString("IC %1").arg(nb);
-				else
-					e->englishName = QString("NGC %1").arg(nb);
+				if (e->englishName.isEmpty())
+					e->englishName = QString("%1%2").arg(ref).arg(nb);
 			}
-			else if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2) != "Cr" && name.left(2) == "Me")
+			else if (name.left(2).toUpper() == "ME")
 			{
 				// If it's a Melotte number, we will call it a Messier if there is no better name
-				name = name.mid(2); // remove "Cr"
+				name = name.mid(2); // remove "Me"
 
-				// read the Messier number
+				// read the Melotte number
 				QTextStream istr(&name);
 				int num;
 				istr >> num;
@@ -672,14 +678,10 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 				}
 
 				e->Mel_nb=(unsigned int)(num);
-				if (record[37] == 'I')
-					e->englishName = QString("IC %1").arg(nb);
-				else
-					e->englishName = QString("NGC %1").arg(nb);
+				if (e->englishName.isEmpty())
+					e->englishName = QString("%1%2").arg(ref).arg(nb);
 			}
-
-
-			readOk++;
+			readOk++;			
 		}
 		else
 			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
