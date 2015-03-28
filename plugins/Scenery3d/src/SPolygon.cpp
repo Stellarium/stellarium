@@ -20,7 +20,6 @@
 
 #include "SPolygon.hpp"
 #include "Plane.hpp"
-#include "Util.hpp"
 #include "GLFuncs.hpp"
 
 SPolygon::SPolygon() {}
@@ -108,7 +107,7 @@ void SPolygon::addUniqueVert(const Vec3f &v)
 
     for(int i=0; i<vertices.size() && flag; i++)
     {
-        flag = !(CompareVerts(v, vertices[i]));
+	flag = ! v.fuzzyEquals(vertices[i]);
     }
 
     if(flag)

@@ -22,7 +22,6 @@
   * This implementation is based on Stingl's Robust Hard Shadows. */
 
 #include "Polyhedron.hpp"
-#include "Util.hpp"
 #include "GLFuncs.hpp"
 #include <limits>
 
@@ -239,7 +238,7 @@ void Polyhedron::addUniqueVert(const Vec3f &v)
 
     for(int i=0; i<uniqueVerts.size() && flag; i++)
     {
-        flag = !(CompareVerts(v, uniqueVerts[i]));
+	flag = ! v.fuzzyEquals(uniqueVerts[i]);
     }
 
     if(flag) uniqueVerts.push_back(v);

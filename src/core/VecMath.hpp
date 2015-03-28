@@ -25,7 +25,9 @@
 #define _VECMATH_H_
 
 #include <cmath>
+#include <limits>
 #include <QString>
+#include <QMatrix4x4>
 
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -139,6 +141,8 @@ public:
 
 	inline bool operator==(const Vector3<T>&) const;
 	inline bool operator!=(const Vector3<T>&) const;
+	//! allows for a fuzzy comparison using some epsilon value
+	inline bool fuzzyEquals(const Vector3<T>&, T epsilon = std::numeric_limits<T>::epsilon()) const;
 
 	inline T& operator[](int);
 	inline const T& operator[](int) const;
@@ -180,6 +184,11 @@ public:
 
 	inline void transfo4d(const Mat4d&);
 	inline void transfo4d(const Mat4f&);
+
+	//used for explicit conversion to other precision type
+	inline Vec3f toVec3f() const;
+	inline Vec3d toVec3d() const;
+
 	T v[3];		// The 3 values
 
 	QString toString() const {return QString("[%1, %2, %3]").arg(v[0]).arg(v[1]).arg(v[2]);}
@@ -319,6 +328,9 @@ template<class T> class Matrix4
 	inline Vector4<T> getRow(const int row) const;
 	inline Vector4<T> getColumn(const int column) const;
 
+	//Converts to QMatix4x4 (for use in OpenGL or other Qt classes)
+	inline QMatrix4x4 convertToQMatrix() const;
+
 	inline void print(void) const;
 
 	T r[16];
@@ -336,6 +348,14 @@ template<class T> QDataStream& operator>>(QDataStream& in, Vector3<T>& v) {in >>
 template<class T> QDataStream& operator>>(QDataStream& in, Vector4<T>& v) {in >> v[0] >> v[1] >> v[2] >> v[3]; return in;}
 template<class T> QDataStream& operator>>(QDataStream& in, Matrix4<T>& m) {in >> m[0] >> m[1] >> m[2] >> m[3] >> m[4] >> m[5] >> m[6] >> m[7] >> m[8] >> m[9] >> m[10] >> m[11] >> m[12] >> m[13] >> m[14] >> m[15]; return in;}
 template<class T> QDataStream& operator>>(QDataStream& in, Matrix3<T>& m) {in >> m[0] >> m[1] >> m[2] >> m[3] >> m[4] >> m[5] >> m[6] >> m[7] >> m[8]; return in;}
+
+//! Fuzzy comparison for two primitive variables
+template <class T> inline bool fuzzyEquals(T a, T b, T eps = std::numeric_limits<T>::epsilon())
+{
+	if(a == b) return true;
+	if(((a+eps) < b) || ((a-eps) > b)) return false;
+	return true;
+}
 
 ////////////////////////// Vector2 class methods ///////////////////////////////
 
@@ -532,6 +552,10 @@ template<class T> bool Vector3<T>::operator!=(const Vector3<T>& a) const
 	return (v[0] != a.v[0] || v[1] != a.v[1] || v[2] != a.v[2]);
 }
 
+template<class T> bool Vector3<T>::fuzzyEquals(const Vector3<T>& a, const T eps) const
+{
+	return ::fuzzyEquals(v[0], a.v[0], eps) && ::fuzzyEquals(v[1], a.v[1], eps) && ::fuzzyEquals(v[2], a.v[2], eps);
+}
 
 template<class T> T& Vector3<T>::operator[](int x)
 {
@@ -666,6 +690,16 @@ template<class T> void Vector3<T>::transfo4d(const Mat4f& m)
 	v[0]=m.r[0]*v0 + m.r[4]*v1 + m.r[8]*v[2] + m.r[12];
 	v[1]=m.r[1]*v0 + m.r[5]*v1 +  m.r[9]*v[2] + m.r[13];
 	v[2]=m.r[2]*v0 + m.r[6]*v1 + m.r[10]*v[2] + m.r[14];
+}
+
+template<class T> Vec3f Vector3<T>::toVec3f() const
+{
+	return Vec3f(v[0],v[1],v[2]);
+}
+
+template<class T> Vec3d Vector3<T>::toVec3d() const
+{
+	return Vec3d(v[0],v[1],v[2]);
 }
 
 // Return latitude in rad
@@ -1443,6 +1477,14 @@ template<class T> Vector4<T> Matrix4<T>::getColumn(const int column) const
 	return Vector4<T>(r[0 + column * 4], r[1 + column * 4], r[2 + column * 4], r[3 + column * 4]);
 }
 
+template<class T> QMatrix4x4 Matrix4<T>::convertToQMatrix() const
+{
+	return QMatrix4x4( r[0], r[4], r[8],r[12],
+			   r[1], r[5], r[9],r[13],
+			   r[2], r[6],r[10],r[14],
+			   r[3], r[7],r[11],r[15] );
+}
+
 template<class T> void Matrix4<T>::print(void) const
 {
 	printf("[%5.2lf %5.2lf %5.2lf %17.12le]\n"
@@ -1498,5 +1540,22 @@ Q_DECLARE_TYPEINFO(Mat4d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Mat4f, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Mat3d, Q_PRIMITIVE_TYPE);
 Q_DECLARE_TYPEINFO(Mat3f, Q_PRIMITIVE_TYPE);
+
+
+//! Provide Qt 3x3 matrix-vector multiplication, which does not exist for some reason
+inline QVector3D operator*(const QMatrix3x3& mat, const QVector3D& vec)
+{
+	float x,y,z;
+	x =	vec.x() * mat(0,0) +
+		vec.y() * mat(0,1) +
+		vec.z() * mat(0,2);
+	y =	vec.x() * mat(1,0) +
+		vec.y() * mat(1,1) +
+		vec.z() * mat(1,2);
+	z =	vec.x() * mat(2,0) +
+		vec.y() * mat(2,1) +
+		vec.z() * mat(2,2);
+	return QVector3D(x,y,z);
+}
 
 #endif // _VECMATH_H_
