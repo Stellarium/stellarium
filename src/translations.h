@@ -113,6 +113,10 @@ class Translations
 		N_("Van den Bergh Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("The Catalogue of Rodgers, Cambell, and Whiteoak");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Collinder Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Melotte Catalogue");
 		
 		// =====================================================================
 		// Constellation cultures
