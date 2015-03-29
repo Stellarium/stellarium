@@ -342,6 +342,20 @@
            </property>
           </widget>
          </item>
+         <item row="10" column="0">
+          <widget class="QCheckBox" name="selectedObjectCheckBox">
+           <property name="text">
+            <string>Selected Object</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
+          <widget class="QToolButton" name="selectedObjectColorToolButton">
+           <property name="text">
+            <string>SelectedObjectColor...</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>

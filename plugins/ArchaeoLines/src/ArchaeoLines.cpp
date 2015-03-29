@@ -24,6 +24,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelVertexArray.hpp"
@@ -74,6 +75,7 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowMinorStandstills(false)
 	, flagShowZenithPassage(false)
 	, flagShowNadirPassage(false)
+	, flagShowSelectedObject(false)
 	, flagShowCurrentSun(false)
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
@@ -83,6 +85,8 @@ ArchaeoLines::ArchaeoLines()
 	font.setPixelSize(16);
 	core=StelApp::getInstance().getCore();
 	Q_ASSERT(core);
+	objMgr=GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(objMgr);
 
 	// optimize readabiity so that each upper line of the lunistice doubles is labeled.
 	equinoxLine = new ArchaeoLine(ArchaeoLine::Equinox, 0.0);
@@ -102,15 +106,15 @@ ArchaeoLines::ArchaeoLines()
 	southernMajorStandstillLine6 = new ArchaeoLine(ArchaeoLine::MajorStandstill, -23.5-5.1);
 	southernMajorStandstillLine7 = new ArchaeoLine(ArchaeoLine::MajorStandstill, -23.5-5.1);
 	southernMajorStandstillLine6->setLabelVisible(false);
-	zenithPassageLine = new ArchaeoLine(ArchaeoLine::ZenithPassage, 48.0);
-	nadirPassageLine = new ArchaeoLine(ArchaeoLine::NadirPassage, 42.0);
-	currentSunLine = new ArchaeoLine(ArchaeoLine::CurrentSun, 0.0);
-	currentMoonLine = new ArchaeoLine(ArchaeoLine::CurrentMoon, 0.0);
-	currentPlanetLine = new ArchaeoLine(ArchaeoLine::CurrentPlanetNone, 0.0);
+	zenithPassageLine  = new ArchaeoLine(ArchaeoLine::ZenithPassage, 48.0);
+	nadirPassageLine   = new ArchaeoLine(ArchaeoLine::NadirPassage, 42.0);
+	selectedObjectLine = new ArchaeoLine(ArchaeoLine::SelectedObject, 0.0);
+	currentSunLine     = new ArchaeoLine(ArchaeoLine::CurrentSun, 0.0);
+	currentMoonLine    = new ArchaeoLine(ArchaeoLine::CurrentMoon, 0.0);
+	currentPlanetLine  = new ArchaeoLine(ArchaeoLine::CurrentPlanetNone, 0.0);
 
 	configDialog = new ArchaeoLinesDialog();
 	conf = StelApp::getInstance().getSettings();
-
 }
 
 ArchaeoLines::~ArchaeoLines()
@@ -128,11 +132,12 @@ ArchaeoLines::~ArchaeoLines()
 	delete southernMinorStandstillLine5; southernMinorStandstillLine5=NULL;
 	delete southernMajorStandstillLine6; southernMajorStandstillLine6=NULL;
 	delete southernMajorStandstillLine7; southernMajorStandstillLine7=NULL;
-	delete zenithPassageLine; zenithPassageLine=NULL;
-	delete nadirPassageLine;  nadirPassageLine=NULL;
-	delete currentSunLine;    currentSunLine=NULL;
-	delete currentMoonLine;   currentMoonLine=NULL;
-	delete currentPlanetLine; currentPlanetLine=NULL;
+	delete zenithPassageLine;  zenithPassageLine=NULL;
+	delete nadirPassageLine;   nadirPassageLine=NULL;
+	delete selectedObjectLine; selectedObjectLine=NULL;
+	delete currentSunLine;     currentSunLine=NULL;
+	delete currentMoonLine;    currentMoonLine=NULL;
+	delete currentPlanetLine;  currentPlanetLine=NULL;
 
 	delete configDialog; configDialog=NULL;
 }
@@ -169,6 +174,7 @@ void ArchaeoLines::init()
 	Q_ASSERT(southernMajorStandstillLine7);
 	Q_ASSERT(zenithPassageLine);
 	Q_ASSERT(nadirPassageLine);
+	Q_ASSERT(selectedObjectLine);
 	Q_ASSERT(currentSunLine);
 	Q_ASSERT(currentMoonLine);
 	Q_ASSERT(currentPlanetLine);
@@ -223,24 +229,18 @@ void ArchaeoLines::update(double deltaTime)
 	double dec_equ, ra_equ;
 	StelUtils::rectToSphe(&ra_equ,&dec_equ,planet->getEquinoxEquatorialPos(core));
 	currentSunLine->setDeclination(dec_equ * 180.0/M_PI);
-	qDebug() << "Current Sun Decl: " << dec_equ * 180.0/M_PI;
 	planet=ssystem->getMoon();
 	StelUtils::rectToSphe(&ra_equ,&dec_equ,planet->getEquinoxEquatorialPos(core));
 	currentMoonLine->setDeclination(dec_equ * 180.0/M_PI);
-	qDebug() << "Current Moon Decl: " << dec_equ * 180.0/M_PI;
 
 	if (enumShowCurrentPlanet>ArchaeoLine::CurrentPlanetNone)
 	{
 		const char *planetStrings[]={"", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"};
 		QString currentPlanet(planetStrings[enumShowCurrentPlanet - ArchaeoLine::CurrentPlanetNone]);
-		//qDebug() << "ArchaeoLines::update() Planet=" << currentPlanet;
-		//Planet *planet=static_cast<Planet*>(ssystem->searchByEnglishName(currentPlanet));
 		planet=ssystem->searchByEnglishName(currentPlanet);
 		Q_ASSERT(planet);
-		// TODO: find declination
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,planet->getEquinoxEquatorialPos(core));
 		currentPlanetLine->setDeclination(dec_equ * 180.0/M_PI);
-		qDebug() << "Current Planet:" << currentPlanet << " Decl: " << dec_equ * 180.0/M_PI;
 	}
 
 	double newJD=core->getJDay();
@@ -307,6 +307,16 @@ void ArchaeoLines::update(double deltaTime)
 	zenithPassageLine->setDeclination(loc.latitude);
 	nadirPassageLine->setDeclination(-loc.latitude);
 
+	// Selected object?
+	if (objMgr->getWasSelected())
+	{
+		StelObjectP obj=objMgr->getSelectedObject().first();
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,obj->getEquinoxEquatorialPos(core));
+		selectedObjectLine->setDeclination(dec_equ * 180.0/M_PI);
+		selectedObjectLine->setLabel(obj->getNameI18n());
+
+	}
+
 	// Updates for line brightness
 	lineFader.update((int)(deltaTime*1000));
 	equinoxLine->update(deltaTime);
@@ -324,6 +334,7 @@ void ArchaeoLines::update(double deltaTime)
 	southernMajorStandstillLine7->update(deltaTime);
 	zenithPassageLine->update(deltaTime);
 	nadirPassageLine->update(deltaTime);
+	selectedObjectLine->update(deltaTime);
 	currentSunLine->update(deltaTime);
 	currentMoonLine->update(deltaTime);
 	currentPlanetLine->update(deltaTime);
@@ -350,6 +361,8 @@ void ArchaeoLines::draw(StelCore* core)
 	southernMajorStandstillLine7->draw(core, lineFader.getInterstate());
 	zenithPassageLine->draw(core, lineFader.getInterstate());
 	nadirPassageLine->draw(core, lineFader.getInterstate());
+	if (objMgr->getWasSelected())
+		selectedObjectLine->draw(core, lineFader.getInterstate());
 	currentSunLine->draw(core, lineFader.getInterstate());
 	currentMoonLine->draw(core, lineFader.getInterstate());
 	if (enumShowCurrentPlanet>ArchaeoLine::CurrentPlanetNone)
@@ -364,11 +377,11 @@ void ArchaeoLines::enableArchaeoLines(bool b)
 }
 
 
-void ArchaeoLines::useDmsFormat(bool b)
-{
-	flagUseDmsFormat=b;
-	conf->setValue("ArchaeoLines/angle_format_dms",       isDmsFormat());
-}
+//void ArchaeoLines::useDmsFormat(bool b)
+//{
+//	flagUseDmsFormat=b;
+//	conf->setValue("ArchaeoLines/angle_format_dms",       isDmsFormat());
+//}
 
 void ArchaeoLines::restoreDefaultSettings()
 {
@@ -381,7 +394,7 @@ void ArchaeoLines::restoreDefaultSettings()
 
 void ArchaeoLines::loadSettings()
 {
-	useDmsFormat(conf->value("ArchaeoLines/angle_format_dms", false).toBool());
+	//useDmsFormat(conf->value("ArchaeoLines/angle_format_dms", false).toBool());
 
 	equinoxColor         = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",          "1.00,1.00,0.5").toString());
 	equinoxLine->setColor(equinoxColor);
@@ -405,6 +418,8 @@ void ArchaeoLines::loadSettings()
 	zenithPassageLine->setColor(zenithPassageColor);
 	nadirPassageColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_nadir_passage",    "1.00,0.75,0.75").toString());
 	nadirPassageLine->setColor(nadirPassageColor);
+	selectedObjectColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object",    "1.00,1.00,1.00").toString());
+	selectedObjectLine->setColor(selectedObjectColor);
 	currentSunColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_sun",    "1.00,1.00,0.75").toString());
 	currentSunLine->setColor(currentSunColor);
 	currentMoonColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_moon",    "0.50,1.00,0.50").toString());
@@ -422,12 +437,12 @@ void ArchaeoLines::loadSettings()
 	// esp. Mesoamerica
 	showZenithPassage(conf->value("ArchaeoLines/show_zenith_passage", true).toBool());
 	showNadirPassage(conf->value("ArchaeoLines/show_nadir_passage",  true).toBool());
+	// indicator for a line representing currently selected object
+	showSelectedObject(conf->value("ArchaeoLines/show_selected_object", false).toBool());
 	// indicators for current declinations (those move fast over days...)
 	showCurrentSun(conf->value("ArchaeoLines/show_current_sun", true).toBool());
 	showCurrentMoon(conf->value("ArchaeoLines/show_current_moon", true).toBool());
 	showCurrentPlanet(conf->value("ArchaeoLines/show_current_planet", "none").toString());
-
-//	qDebug() << "Loadsettings finished";
 }
 
 void ArchaeoLines::showEquinox(bool b)
@@ -480,6 +495,12 @@ void ArchaeoLines::showNadirPassage(bool b)
 	conf->setValue("ArchaeoLines/show_nadir_passage",       isNadirPassageDisplayed());
 	nadirPassageLine->setDisplayed(b);
 }
+void ArchaeoLines::showSelectedObject(bool b)
+{
+	flagShowSelectedObject=b;
+	conf->setValue("ArchaeoLines/show_selected_object",       isSelectedObjectDisplayed());
+	selectedObjectLine->setDisplayed(b);
+}
 void ArchaeoLines::showCurrentSun(bool b)
 {
 	flagShowCurrentSun=b;
@@ -501,7 +522,6 @@ void ArchaeoLines::showCurrentPlanet(ArchaeoLine::Line l)
 	conf->setValue("ArchaeoLines/show_current_planet", planetStrings[l-ArchaeoLine::CurrentPlanetNone]);
 	currentPlanetLine->setLineType(enumShowCurrentPlanet);
 	currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
-	qDebug() << "ArchaeoLines::showCurrentPlanet(int)" << enumShowCurrentPlanet;
 }
 
 void ArchaeoLines::showCurrentPlanet(QString planet)
@@ -526,15 +546,11 @@ void ArchaeoLines::showCurrentPlanet(QString planet)
 	conf->setValue("ArchaeoLines/show_current_planet", planet);
 	currentPlanetLine->setLineType(enumShowCurrentPlanet);
 	currentPlanetLine->setDisplayed(enumShowCurrentPlanet != ArchaeoLine::CurrentPlanetNone);
-	qDebug() << "ArchaeoLines::showCurrentPlanet(QString)" << planet;
-
 }
 
 // called by the dialog UI, converts QColor (0..255) to Stellarium's Vec3f float color.
 void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
 {
-	//qDebug() << "ArchaeoLines::setLineColor()";
-
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
 			equinoxColor.set(color.redF(), color.greenF(), color.blueF());
@@ -578,6 +594,11 @@ void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
 			nadirPassageColor.set(color.redF(), color.greenF(), color.blueF());
 			conf->setValue("ArchaeoLines/color_nadir_passage",      QString("%1,%2,%3").arg(nadirPassageColor.v[0]).arg(nadirPassageColor.v[1]).arg(nadirPassageColor.v[2]));
 			nadirPassageLine->setColor(nadirPassageColor);
+			break;
+		case ArchaeoLine::SelectedObject:
+			selectedObjectColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_selected_object",      QString("%1,%2,%3").arg(selectedObjectColor.v[0]).arg(selectedObjectColor.v[1]).arg(selectedObjectColor.v[2]));
+			selectedObjectLine->setColor(selectedObjectColor);
 			break;
 		case ArchaeoLine::CurrentSun:
 			currentSunColor.set(color.redF(), color.greenF(), color.blueF());
@@ -630,6 +651,9 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
 			break;
 		case ArchaeoLine::NadirPassage:
 			vColor=&nadirPassageColor;
+			break;
+		case ArchaeoLine::SelectedObject:
+			vColor=&selectedObjectColor;
 			break;
 		case ArchaeoLine::CurrentSun:
 			vColor=&currentSunColor;
@@ -734,6 +758,9 @@ void ArchaeoLine::updateLabel()
 		case ArchaeoLine::NadirPassage:
 			label = q_("Nadir Passage");
 			break;
+		case ArchaeoLine::SelectedObject:
+			label = q_("Selected Object");
+			break;
 		case ArchaeoLine::CurrentSun:
 			label = q_("Sun");
 			break;
@@ -766,7 +793,6 @@ void ArchaeoLine::updateLabel()
 
 void ArchaeoLine::draw(StelCore *core, float intensity) const
 {
-	//qDebug() << "ArchaeoLine::draw(): I am linetype " << lineType << ", declination " << declination << "intensity" << intensity << "fader" << fader.getInterstate();
 	// borrowed largely from GridLinesMgr.
 	if (intensity*fader.getInterstate() < 0.000001f)
 		return;

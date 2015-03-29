@@ -26,6 +26,7 @@
 #include "StelModule.hpp"
 #include "StelFader.hpp"
 #include "StelCore.hpp"
+#include "StelObjectMgr.hpp"
 
 class QTimer;
 class QPixmap;
@@ -51,6 +52,7 @@ public:
 		MinorStandstill,
 		ZenithPassage,
 		NadirPassage,
+		SelectedObject,
 		CurrentSun,
 		CurrentMoon,
 		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
@@ -64,7 +66,7 @@ public:
 	ArchaeoLine(ArchaeoLine::Line lineType, double declination);
 	virtual ~ArchaeoLine(){}
 	void draw(StelCore* core, float intensity=1.0f) const;
-	const Vec3f& getColor() {return color;}
+	const Vec3f& getColor() const {return color;}
 	bool isDisplayed(void) const {return fader;}
 
 public slots:
@@ -80,6 +82,8 @@ public slots:
 	void setDeclination(double decl){declination=decl;}
 	bool isLabelVisible() const{return flagLabel;}
 	void setLineType(ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
+	//! change label. Used only for selected-object line - the other labels should not be changed!
+	void setLabel(const QString newLabel){label=newLabel;}
 
 private:
 	ArchaeoLine::Line lineType;
@@ -101,9 +105,9 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
 		   WRITE enableArchaeoLines)
-	Q_PROPERTY(bool dmsFormat
-		   READ isDmsFormat
-		   WRITE useDmsFormat)
+//	Q_PROPERTY(bool dmsFormat
+//		   READ isDmsFormat
+//		   WRITE useDmsFormat)
 	Q_PROPERTY(bool flagShowEquinox
 				READ    isEquinoxDisplayed
 				WRITE showEquinox)
@@ -125,6 +129,9 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(bool flagShowNadirPassage
 				READ    isNadirPassageDisplayed
 				WRITE showNadirPassage)
+	Q_PROPERTY(bool flagShowSelectedObject
+				READ    isSelectedObjectDisplayed
+				WRITE showSelectedObject)
 	Q_PROPERTY(bool flagShowCurrentSun
 				READ    isCurrentSunDisplayed
 				WRITE showCurrentSun)
@@ -158,6 +165,7 @@ public:
 	bool isMinorStandstillsDisplayed() const {return flagShowMinorStandstills;}
 	bool isZenithPassageDisplayed() const {return flagShowZenithPassage;}
 	bool isNadirPassageDisplayed() const {return flagShowNadirPassage;}
+	bool isSelectedObjectDisplayed() const {return flagShowSelectedObject;}
 	bool isCurrentSunDisplayed() const {return flagShowCurrentSun;}
 	bool isCurrentMoonDisplayed() const {return flagShowCurrentMoon;}
 	ArchaeoLine::Line whichCurrentPlanetDisplayed() const {return enumShowCurrentPlanet;}
@@ -178,7 +186,7 @@ public:
 
 public slots:
 	void enableArchaeoLines(bool b);
-	void useDmsFormat(bool b);
+	//void useDmsFormat(bool b);
 
 	void showEquinox(bool b);
 	void showSolstices(bool b);
@@ -187,10 +195,11 @@ public slots:
 	void showMinorStandstills(bool b);
 	void showZenithPassage(bool b);
 	void showNadirPassage(bool b);
+	void showSelectedObject(bool b);
 	void showCurrentSun(bool b);
 	void showCurrentMoon(bool b);
-	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: PlanetNone...PlanetSaturn.
-	void showCurrentPlanet(QString planet); // Allowed values for l: PlanetNone...PlanetSaturn.
+	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: CurrentPlanetNone...CurrentPlanetSaturn.
+	void showCurrentPlanet(QString planet); // Allowed values for planet: "none", "Mercury", "Venus", "Mars", "Jupiter", "Saturn".
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
@@ -211,6 +220,7 @@ private:
 	Vec3f minorStandstillColor;
 	Vec3f zenithPassageColor;
 	Vec3f nadirPassageColor;
+	Vec3f selectedObjectColor;
 	Vec3f currentSunColor;
 	Vec3f currentMoonColor;
 	Vec3f currentPlanetColor;
@@ -224,6 +234,7 @@ private:
 	bool flagShowMinorStandstills;
 	bool flagShowZenithPassage;
 	bool flagShowNadirPassage;
+	bool flagShowSelectedObject;
 	bool flagShowCurrentSun;
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
@@ -245,6 +256,7 @@ private:
 	ArchaeoLine * southernMajorStandstillLine7;
 	ArchaeoLine * zenithPassageLine;
 	ArchaeoLine * nadirPassageLine;
+	ArchaeoLine * selectedObjectLine;
 	ArchaeoLine * currentSunLine;
 	ArchaeoLine * currentMoonLine;
 	ArchaeoLine * currentPlanetLine;
@@ -265,6 +277,7 @@ private:
 	// GUI
 	ArchaeoLinesDialog* configDialog;
 	StelCore* core; // used quite often, better keep a reference...
+	StelObjectMgr* objMgr;
 };
 
 
