@@ -61,8 +61,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	ui->useDmsFormatCheckBox->setChecked(al->isDmsFormat());
-	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), al, SLOT(useDmsFormat(bool)));
+	//ui->useDmsFormatCheckBox->setChecked(al->isDmsFormat());
+	//connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), al, SLOT(useDmsFormat(bool)));
 
 	ui->equinoxCheckBox->setChecked(al->isEquinoxDisplayed());
 	connect(ui->equinoxCheckBox, SIGNAL(toggled(bool)), al, SLOT(showEquinox(bool)));
@@ -78,14 +78,13 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->zenithPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showZenithPassage(bool)));
 	ui->nadirPassageCheckBox->setChecked(al->isNadirPassageDisplayed());
 	connect(ui->nadirPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showNadirPassage(bool)));
+	ui->selectedObjectCheckBox->setChecked(al->isSelectedObjectDisplayed());
+	connect(ui->selectedObjectCheckBox, SIGNAL(toggled(bool)), al, SLOT(showSelectedObject(bool)));
 	ui->currentSunCheckBox->setChecked(al->isCurrentSunDisplayed());
 	connect(ui->currentSunCheckBox, SIGNAL(toggled(bool)), al, SLOT(showCurrentSun(bool)));
 	ui->currentMoonCheckBox->setChecked(al->isCurrentMoonDisplayed());
 	connect(ui->currentMoonCheckBox, SIGNAL(toggled(bool)), al, SLOT(showCurrentMoon(bool)));
-	// TODO: Planet Combobox Handling!
-	//ui->currentPlanetComboBox->setChecked(al->isNadirPassageDisplayed());
-	//connect(ui->nadirPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showNadirPassage(bool)));
-
+	// Planet ComboBox requires special handling!
 	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
 	connect(ui->currentPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCurrentPlanetFromGUI(int)));
 
@@ -96,6 +95,7 @@ void ArchaeoLinesDialog::createDialogContent()
 	minorStandstillColor = al->getLineColor(ArchaeoLine::MinorStandstill);
 	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
 	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
+	selectedObjectColor  = al->getLineColor(ArchaeoLine::SelectedObject);
 	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
 	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
 	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
@@ -127,6 +127,10 @@ void ArchaeoLinesDialog::createDialogContent()
 	nadirPassageColorPixmap.fill(nadirPassageColor);
 	ui->nadirPassageColorToolButton->setIconSize(QSize(48, 12));
 	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
+	selectedObjectColorPixmap=QPixmap(48, 12);
+	selectedObjectColorPixmap.fill(selectedObjectColor);
+	ui->selectedObjectColorToolButton->setIconSize(QSize(48, 12));
+	ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
 	currentSunColorPixmap=QPixmap(48, 12);
 	currentSunColorPixmap.fill(currentSunColor);
 	ui->currentSunColorToolButton->setIconSize(QSize(48, 12));
@@ -140,7 +144,6 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->currentPlanetColorToolButton->setIconSize(QSize(48, 12));
 	ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
 
-
 	connect(ui->equinoxColorToolButton,         SIGNAL(released()), this, SLOT(askEquinoxColor()));
 	connect(ui->solsticesColorToolButton,       SIGNAL(released()), this, SLOT(askSolsticeColor()));
 	connect(ui->crossquarterColorToolButton,    SIGNAL(released()), this, SLOT(askCrossquarterColor()));
@@ -148,6 +151,7 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->minorStandstillColorToolButton, SIGNAL(released()), this, SLOT(askMinorStandstillColor()));
 	connect(ui->zenithPassageColorToolButton,   SIGNAL(released()), this, SLOT(askZenithPassageColor()));
 	connect(ui->nadirPassageColorToolButton,    SIGNAL(released()), this, SLOT(askNadirPassageColor()));
+	connect(ui->selectedObjectColorToolButton,  SIGNAL(released()), this, SLOT(askSelectedObjectColor()));
 	connect(ui->currentSunColorToolButton,      SIGNAL(released()), this, SLOT(askCurrentSunColor()));
 	connect(ui->currentMoonColorToolButton,     SIGNAL(released()), this, SLOT(askCurrentMoonColor()));
 	connect(ui->currentPlanetColorToolButton,   SIGNAL(released()), this, SLOT(askCurrentPlanetColor()));
@@ -174,17 +178,21 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	//html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td> List with br separators </td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("The ArchaeoLines plugin displays declination arcs most relevant to archaeoastronomical studies.") + "</p>";
+	html += "<p>" + q_("The ArchaeoLines plugin displays any combination of declination arcs most relevant to archaeo- or ethnoastronomical studies.") + "</p>";
 	html += "<ul><li>" + q_("Declinations of equinoxes (i.e. equator) and the solstices") + "</li>";
 	html += "<li>" + q_("Declinations of the crossquarter days (days right between solstices and equinoxes)") + "</li>";
 	html += "<li>" + q_("Declinations of the Major Lunar Standstills") + "</li>";
 	html += "<li>" + q_("Declinations of the Minor Lunar Standstills") + "</li>";
 	html += "<li>" + q_("Declination of the Zenith passage") + "</li>";
 	html += "<li>" + q_("Declination of the Nadir passage") + "</li>";
+	html += "<li>" + q_("Declination of the currently selected object") + "</li>";
 	html += "<li>" + q_("Current declination of the sun") + "</li>";
 	html += "<li>" + q_("Current declination of the moon") + "</li>";
 	html += "<li>" + q_("Current declination of a naked-eye planet") + "</li></ul>";
-	html += "<p>" + q_("The lunar lines include horizon parallax effects. There are two lines each drawn, for maximum and minimum distance of the moon.") + "</p>";
+	html += "<p>" + q_("The lunar lines include horizon parallax effects. "
+			   "There are two lines each drawn, for maximum and minimum distance of the moon. "
+			   "Note that declination of the moon at the major standstill can exceed the "
+			   "indicated limits if it is high in the sky due to parallax effects.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("ArchaeoLines plugin") + "</p>";
@@ -220,6 +228,10 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	minorStandstillColor = al->getLineColor(ArchaeoLine::MinorStandstill);
 	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
 	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
+	selectedObjectColor  = al->getLineColor(ArchaeoLine::SelectedObject);
+	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
+	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
+	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
 	equinoxColorPixmap.fill(equinoxColor);
 	ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
 	solsticeColorPixmap.fill(solsticeColor);
@@ -234,6 +246,8 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
 	nadirPassageColorPixmap.fill(nadirPassageColor);
 	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
+	selectedObjectColorPixmap.fill(selectedObjectColor);
+	ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
 	currentSunColorPixmap.fill(currentSunColor);
 	ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
 	currentMoonColorPixmap.fill(currentMoonColor);
@@ -248,6 +262,7 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->minorStandstillCheckBox->setChecked(al->isMinorStandstillsDisplayed());
 	ui->zenithPassageCheckBox->setChecked(al->isZenithPassageDisplayed());
 	ui->nadirPassageCheckBox->setChecked(al->isNadirPassageDisplayed());
+	ui->selectedObjectCheckBox->setChecked(al->isSelectedObjectDisplayed());
 	ui->currentSunCheckBox->setChecked(al->isCurrentSunDisplayed());
 	ui->currentMoonCheckBox->setChecked(al->isCurrentMoonDisplayed());
 	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
@@ -339,6 +354,18 @@ void ArchaeoLinesDialog::askNadirPassageColor()
 	}
 }
 
+void ArchaeoLinesDialog::askSelectedObjectColor()
+{
+	QColor c=QColorDialog::getColor(selectedObjectColor, NULL, q_("Select color for selected object line"));
+	if (c.isValid())
+	{
+		selectedObjectColor=c;
+		al->setLineColor(ArchaeoLine::SelectedObject, c);
+		selectedObjectColorPixmap.fill(c);
+		ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
+	}
+}
+
 void ArchaeoLinesDialog::askCurrentSunColor()
 {
 	QColor c=QColorDialog::getColor(currentSunColor, NULL, q_("Select color for current sun line"));
@@ -374,3 +401,4 @@ void ArchaeoLinesDialog::askCurrentPlanetColor()
 		ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
 	}
 }
+

@@ -54,6 +54,7 @@ public slots:
 	void setCurrentSunColor(QColor color){currentSunColor=color;}
 	void setCurrentMoonColor(QColor color){currentMoonColor=color;}
 	void setCurrentPlanetColor(QColor color){currentPlanetColor=color;}
+	void setSelectedObjectColor(QColor color){selectedObjectColor=color;}
 	void askEquinoxColor();
 	void askSolsticeColor();
 	void askCrossquarterColor();
@@ -64,6 +65,7 @@ public slots:
 	void askCurrentSunColor();
 	void askCurrentMoonColor();
 	void askCurrentPlanetColor();
+	void askSelectedObjectColor();
 
 protected:
 	void createDialogContent();
@@ -83,6 +85,7 @@ private:
 	QColor currentSunColor;
 	QColor currentMoonColor;
 	QColor currentPlanetColor;
+	QColor selectedObjectColor;
 	QPixmap equinoxColorPixmap;
 	QPixmap solsticeColorPixmap;
 	QPixmap crossquarterColorPixmap;
@@ -93,6 +96,7 @@ private:
 	QPixmap currentSunColorPixmap;
 	QPixmap currentMoonColorPixmap;
 	QPixmap currentPlanetColorPixmap;
+	QPixmap selectedObjectColorPixmap;
 	void setAboutHtml();
 
 private slots:
