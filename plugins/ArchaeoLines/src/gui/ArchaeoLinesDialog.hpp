@@ -97,6 +97,9 @@ private:
 
 private slots:
 	void resetArchaeoLinesSettings();
+	//! setting planet requires a small function to link Combobox indices to line IDs.
+	void setCurrentPlanetFromGUI(int index);
+
 };
 
 #endif /* _ARCHAEOLINESDIALOG_HPP_ */
