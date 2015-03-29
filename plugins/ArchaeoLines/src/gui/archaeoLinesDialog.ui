@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>409</height>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -154,6 +154,9 @@
        </item>
        <item>
         <layout class="QFormLayout" name="formLayout">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
          <item row="0" column="0">
           <widget class="QCheckBox" name="equinoxCheckBox">
            <property name="text">
@@ -206,17 +209,17 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="minorStandstillCheckBox">
-           <property name="text">
-            <string>Minor Lunar Standstill lines</string>
-           </property>
-          </widget>
-         </item>
          <item row="3" column="1">
           <widget class="QToolButton" name="majorStandstillColorToolButton">
            <property name="text">
             <string>majorLunarStandstillColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="minorStandstillCheckBox">
+           <property name="text">
+            <string>Minor Lunar Standstill lines</string>
            </property>
           </widget>
          </item>
@@ -234,13 +237,6 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="0">
-          <widget class="QCheckBox" name="nadirPassageCheckBox">
-           <property name="text">
-            <string>Declination of Nadir passage</string>
-           </property>
-          </widget>
-         </item>
          <item row="5" column="1">
           <widget class="QToolButton" name="zenithPassageColorToolButton">
            <property name="text">
@@ -248,10 +244,101 @@
            </property>
           </widget>
          </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="nadirPassageCheckBox">
+           <property name="text">
+            <string>Declination of Nadir passage</string>
+           </property>
+          </widget>
+         </item>
          <item row="6" column="1">
           <widget class="QToolButton" name="nadirPassageColorToolButton">
            <property name="text">
             <string>NadirPassageColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QCheckBox" name="currentSunCheckBox">
+           <property name="text">
+            <string>Current Sun</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="1">
+          <widget class="QToolButton" name="currentSunColorToolButton">
+           <property name="text">
+            <string>SunColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QCheckBox" name="currentMoonCheckBox">
+           <property name="text">
+            <string>Current Moon</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QToolButton" name="currentMoonColorToolButton">
+           <property name="text">
+            <string>MoonColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QComboBox" name="currentPlanetComboBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>Current Planet: None</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Current Planet: Mercury</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Current Planet: Venus</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Current Planet: Mars</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Current Planet: Jupiter</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Current Planet: Saturn</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QToolButton" name="currentPlanetColorToolButton">
+           <property name="text">
+            <string>PlanetColor...</string>
            </property>
           </widget>
          </item>

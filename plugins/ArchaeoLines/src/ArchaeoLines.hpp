@@ -50,8 +50,17 @@ public:
 		MajorStandstill,
 		MinorStandstill,
 		ZenithPassage,
-		NadirPassage
+		NadirPassage,
+		CurrentSun,
+		CurrentMoon,
+		CurrentPlanetNone, // actually a placeholder for counting/testing. By itself it makes no sense, i.e. deactivates the planet line
+		CurrentPlanetMercury,
+		CurrentPlanetVenus,
+		CurrentPlanetMars,
+		CurrentPlanetJupiter,
+		CurrentPlanetSaturn
 	};
+
 	ArchaeoLine(ArchaeoLine::Line lineType, double declination);
 	virtual ~ArchaeoLine(){}
 	void draw(StelCore* core, float intensity=1.0f) const;
@@ -70,10 +79,11 @@ public slots:
 	//! reset declination (degrees) of this small arc.
 	void setDeclination(double decl){declination=decl;}
 	bool isLabelVisible() const{return flagLabel;}
+	void setLineType(ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
 
 private:
 	ArchaeoLine::Line lineType;
-	double declination;
+	double declination; // degrees
 	Vec3f color;
 	StelCore::FrameType frameType;
 	bool flagLabel; //! show the label. (some should be permanently silent)
@@ -115,6 +125,15 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(bool flagShowNadirPassage
 				READ    isNadirPassageDisplayed
 				WRITE showNadirPassage)
+	Q_PROPERTY(bool flagShowCurrentSun
+				READ    isCurrentSunDisplayed
+				WRITE showCurrentSun)
+	Q_PROPERTY(bool flagShowCurrentMoon
+				READ    isCurrentMoonDisplayed
+				WRITE showCurrentMoon)
+	Q_PROPERTY(ArchaeoLine::Line enumShowCurrentPlanet
+				READ    whichCurrentPlanetDisplayed
+				WRITE showCurrentPlanet)
 
 public:
 	ArchaeoLines();
@@ -139,6 +158,9 @@ public:
 	bool isMinorStandstillsDisplayed() const {return flagShowMinorStandstills;}
 	bool isZenithPassageDisplayed() const {return flagShowZenithPassage;}
 	bool isNadirPassageDisplayed() const {return flagShowNadirPassage;}
+	bool isCurrentSunDisplayed() const {return flagShowCurrentSun;}
+	bool isCurrentMoonDisplayed() const {return flagShowCurrentMoon;}
+	ArchaeoLine::Line whichCurrentPlanetDisplayed() const {return enumShowCurrentPlanet;}
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -165,6 +187,10 @@ public slots:
 	void showMinorStandstills(bool b);
 	void showZenithPassage(bool b);
 	void showNadirPassage(bool b);
+	void showCurrentSun(bool b);
+	void showCurrentMoon(bool b);
+	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: PlanetNone...PlanetSaturn.
+	void showCurrentPlanet(QString planet); // Allowed values for l: PlanetNone...PlanetSaturn.
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
 	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
@@ -185,6 +211,9 @@ private:
 	Vec3f minorStandstillColor;
 	Vec3f zenithPassageColor;
 	Vec3f nadirPassageColor;
+	Vec3f currentSunColor;
+	Vec3f currentMoonColor;
+	Vec3f currentPlanetColor;
 
 
 
@@ -195,6 +224,9 @@ private:
 	bool flagShowMinorStandstills;
 	bool flagShowZenithPassage;
 	bool flagShowNadirPassage;
+	bool flagShowCurrentSun;
+	bool flagShowCurrentMoon;
+	ArchaeoLine::Line enumShowCurrentPlanet;
 	// These should go into ArchaeoLine single-line class!
 	double lastJD; // cache last-time-computed to 1/month or so?
 
@@ -213,6 +245,9 @@ private:
 	ArchaeoLine * southernMajorStandstillLine7;
 	ArchaeoLine * zenithPassageLine;
 	ArchaeoLine * nadirPassageLine;
+	ArchaeoLine * currentSunLine;
+	ArchaeoLine * currentMoonLine;
+	ArchaeoLine * currentPlanetLine;
 
 	StelButton* toolbarButton;
 
@@ -241,7 +276,7 @@ private:
 class ArchaeoLinesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;
