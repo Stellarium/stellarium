@@ -51,6 +51,9 @@ public slots:
 	void setMinorStandstillColor(QColor color){minorStandstillColor=color;}
 	void setZenithPassageColor(QColor color){zenithPassageColor=color;}
 	void setNadirPassageColor(QColor color){nadirPassageColor=color;}
+	void setCurrentSunColor(QColor color){currentSunColor=color;}
+	void setCurrentMoonColor(QColor color){currentMoonColor=color;}
+	void setCurrentPlanetColor(QColor color){currentPlanetColor=color;}
 	void askEquinoxColor();
 	void askSolsticeColor();
 	void askCrossquarterColor();
@@ -58,6 +61,9 @@ public slots:
 	void askMinorStandstillColor();
 	void askZenithPassageColor();
 	void askNadirPassageColor();
+	void askCurrentSunColor();
+	void askCurrentMoonColor();
+	void askCurrentPlanetColor();
 
 protected:
 	void createDialogContent();
@@ -74,6 +80,9 @@ private:
 	QColor minorStandstillColor;
 	QColor zenithPassageColor;
 	QColor nadirPassageColor;
+	QColor currentSunColor;
+	QColor currentMoonColor;
+	QColor currentPlanetColor;
 	QPixmap equinoxColorPixmap;
 	QPixmap solsticeColorPixmap;
 	QPixmap crossquarterColorPixmap;
@@ -81,6 +90,9 @@ private:
 	QPixmap minorStandstillColorPixmap;
 	QPixmap zenithPassageColorPixmap;
 	QPixmap nadirPassageColorPixmap;
+	QPixmap currentSunColorPixmap;
+	QPixmap currentMoonColorPixmap;
+	QPixmap currentPlanetColorPixmap;
 	void setAboutHtml();
 
 private slots:

@@ -78,6 +78,13 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->zenithPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showZenithPassage(bool)));
 	ui->nadirPassageCheckBox->setChecked(al->isNadirPassageDisplayed());
 	connect(ui->nadirPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showNadirPassage(bool)));
+	ui->currentSunCheckBox->setChecked(al->isCurrentSunDisplayed());
+	connect(ui->currentSunCheckBox, SIGNAL(toggled(bool)), al, SLOT(showCurrentSun(bool)));
+	ui->currentMoonCheckBox->setChecked(al->isCurrentMoonDisplayed());
+	connect(ui->currentMoonCheckBox, SIGNAL(toggled(bool)), al, SLOT(showCurrentMoon(bool)));
+	// TODO: Planet Combobox Handling!
+	//ui->currentPlanetComboBox->setChecked(al->isNadirPassageDisplayed());
+	//connect(ui->nadirPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showNadirPassage(bool)));
 
 
 	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
@@ -87,6 +94,9 @@ void ArchaeoLinesDialog::createDialogContent()
 	minorStandstillColor = al->getLineColor(ArchaeoLine::MinorStandstill);
 	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
 	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
+	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
+	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
+	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
 	equinoxColorPixmap=QPixmap(48, 12);
 	equinoxColorPixmap.fill(equinoxColor);
 	ui->equinoxColorToolButton->setIconSize(QSize(48, 12));
@@ -115,6 +125,18 @@ void ArchaeoLinesDialog::createDialogContent()
 	nadirPassageColorPixmap.fill(nadirPassageColor);
 	ui->nadirPassageColorToolButton->setIconSize(QSize(48, 12));
 	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
+	currentSunColorPixmap=QPixmap(48, 12);
+	currentSunColorPixmap.fill(currentSunColor);
+	ui->currentSunColorToolButton->setIconSize(QSize(48, 12));
+	ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
+	currentMoonColorPixmap=QPixmap(48, 12);
+	currentMoonColorPixmap.fill(currentMoonColor);
+	ui->currentMoonColorToolButton->setIconSize(QSize(48, 12));
+	ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
+	currentPlanetColorPixmap=QPixmap(48, 12);
+	currentPlanetColorPixmap.fill(currentPlanetColor);
+	ui->currentPlanetColorToolButton->setIconSize(QSize(48, 12));
+	ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
 
 
 	connect(ui->equinoxColorToolButton,         SIGNAL(released()), this, SLOT(askEquinoxColor()));
@@ -124,6 +146,9 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->minorStandstillColorToolButton, SIGNAL(released()), this, SLOT(askMinorStandstillColor()));
 	connect(ui->zenithPassageColorToolButton,   SIGNAL(released()), this, SLOT(askZenithPassageColor()));
 	connect(ui->nadirPassageColorToolButton,    SIGNAL(released()), this, SLOT(askNadirPassageColor()));
+	connect(ui->currentSunColorToolButton,      SIGNAL(released()), this, SLOT(askCurrentSunColor()));
+	connect(ui->currentMoonColorToolButton,     SIGNAL(released()), this, SLOT(askCurrentMoonColor()));
+	connect(ui->currentPlanetColorToolButton,   SIGNAL(released()), this, SLOT(askCurrentPlanetColor()));
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
@@ -146,7 +171,10 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	html += "<li>" + q_("Declinations of the Major Lunar Standstills") + "</li>";
 	html += "<li>" + q_("Declinations of the Minor Lunar Standstills") + "</li>";
 	html += "<li>" + q_("Declination of the Zenith passage") + "</li>";
-	html += "<li>" + q_("Declination of the Nadir passage") + "</li></ul>";
+	html += "<li>" + q_("Declination of the Nadir passage") + "</li>";
+	html += "<li>" + q_("Current declination of the sun") + "</li>";
+	html += "<li>" + q_("Current declination of the moon") + "</li>";
+	html += "<li>" + q_("Current declination of a naked-eye planet") + "</li></ul>";
 	html += "<p>" + q_("The lunar lines include horizon parallax effects. There are two lines each drawn, for maximum and minimum distance of the moon.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
@@ -197,6 +225,12 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
 	nadirPassageColorPixmap.fill(nadirPassageColor);
 	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
+	currentSunColorPixmap.fill(currentSunColor);
+	ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
+	currentMoonColorPixmap.fill(currentMoonColor);
+	ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
+	currentPlanetColorPixmap.fill(currentPlanetColor);
+	ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
 
 	ui->equinoxCheckBox->setChecked(al->isEquinoxDisplayed());
 	ui->solsticesCheckBox->setChecked(al->isSolsticesDisplayed());
@@ -205,8 +239,9 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->minorStandstillCheckBox->setChecked(al->isMinorStandstillsDisplayed());
 	ui->zenithPassageCheckBox->setChecked(al->isZenithPassageDisplayed());
 	ui->nadirPassageCheckBox->setChecked(al->isNadirPassageDisplayed());
-
-
+	ui->currentSunCheckBox->setChecked(al->isCurrentSunDisplayed());
+	ui->currentMoonCheckBox->setChecked(al->isCurrentMoonDisplayed());
+	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
 }
 
 // These are called by the respective buttons.
@@ -295,3 +330,38 @@ void ArchaeoLinesDialog::askNadirPassageColor()
 	}
 }
 
+void ArchaeoLinesDialog::askCurrentSunColor()
+{
+	QColor c=QColorDialog::getColor(currentSunColor, NULL, q_("Select color for current sun line"));
+	if (c.isValid())
+	{
+		currentSunColor=c;
+		al->setLineColor(ArchaeoLine::CurrentSun, c);
+		currentSunColorPixmap.fill(c);
+		ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askCurrentMoonColor()
+{
+	QColor c=QColorDialog::getColor(currentMoonColor, NULL, q_("Select color for current moon line"));
+	if (c.isValid())
+	{
+		currentMoonColor=c;
+		al->setLineColor(ArchaeoLine::CurrentMoon, c);
+		currentMoonColorPixmap.fill(c);
+		ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askCurrentPlanetColor()
+{
+	QColor c=QColorDialog::getColor(currentPlanetColor, NULL, q_("Select color for current planet line"));
+	if (c.isValid())
+	{
+		currentPlanetColor=c;
+		al->setLineColor(ArchaeoLine::CurrentPlanetNone, c);
+		currentPlanetColorPixmap.fill(c);
+		ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
+	}
+}
