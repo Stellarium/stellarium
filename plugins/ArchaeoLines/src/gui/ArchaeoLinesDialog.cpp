@@ -86,6 +86,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	//ui->currentPlanetComboBox->setChecked(al->isNadirPassageDisplayed());
 	//connect(ui->nadirPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showNadirPassage(bool)));
 
+	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
+	connect(ui->currentPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCurrentPlanetFromGUI(int)));
 
 	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
 	solsticeColor        = al->getLineColor(ArchaeoLine::Solstices);
@@ -155,6 +157,13 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->formatDisplayBox->hide();
 	setAboutHtml();
 }
+
+void ArchaeoLinesDialog::setCurrentPlanetFromGUI(int index)
+{
+	Q_ASSERT(al);
+	al->showCurrentPlanet((ArchaeoLine::Line) (ArchaeoLine::CurrentPlanetNone+index));
+}
+
 
 void ArchaeoLinesDialog::setAboutHtml(void)
 {
