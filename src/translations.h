@@ -112,7 +112,7 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Van den Bergh Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("The Catalogue of Rodgers, Cambell, and Whiteoak");
+		N_("The Catalogue of Rodgers, Campbell, and Whiteoak");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Collinder Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
