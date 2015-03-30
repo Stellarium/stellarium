@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-28 21:33+0600\n"
-"PO-Revision-Date: 2015-03-29 02:57+0000\n"
-"Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
+"PO-Revision-Date: 2015-03-29 17:11+0000\n"
+"Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-03-29 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-03-30 05:10+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -54,15 +54,15 @@ msgstr "Звезде"
 
 #: src/core/modules/StarMgr.cpp:355
 msgid "Stars labels"
-msgstr "звездана ознака"
+msgstr "Ознака звезде"
 
 #: src/core/modules/GridLinesMgr.cpp:587 src/ui_viewDialog.h:1334
 msgid "Meridian"
-msgstr "Meridijan"
+msgstr "Меридијан"
 
 #: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1338
 msgid "Ecliptic"
-msgstr "Ekliptika"
+msgstr "Еклиптика"
 
 #: src/core/modules/GridLinesMgr.cpp:595 src/ui_viewDialog.h:1330
 msgid "Equator"
@@ -70,11 +70,11 @@ msgstr "Ekvator"
 
 #: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1342
 msgid "Horizon"
-msgstr "Horizont"
+msgstr "Хоризонт"
 
 #: src/core/modules/GridLinesMgr.cpp:603
 msgid "Galactic Equator"
-msgstr "галактички екватор"
+msgstr "Галактички екватор"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1350
@@ -213,7 +213,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:164
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Површински сјај: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:172 src/core/modules/Nebula.cpp:177
 #: src/core/modules/Nebula.cpp:182
@@ -280,7 +280,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
-msgstr ""
+msgstr "Рефлектујућа маглина"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "H-α emission region"
@@ -328,7 +328,7 @@ msgstr "filamentaran"
 #: src/core/modules/Nebula.cpp:793
 msgctxt "structure"
 msgid "undocumented structure"
-msgstr ""
+msgstr "недкументована структура"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "HII region brightness"
@@ -455,7 +455,7 @@ msgstr "Privremena oznaka: %1"
 #: src/core/modules/Comet.cpp:167
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "не периодично"
 
 #: src/core/modules/Comet.cpp:171
 msgctxt "type of comet"
@@ -483,7 +483,7 @@ msgstr "Даљина од Сунца: %1АЈ (%2 Мио км)"
 #: src/core/modules/Comet.cpp:241
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr ""
+msgstr "Сидерички период: %1 a"
 
 #: src/core/modules/Comet.cpp:246
 #, no-c-format, qt-format
@@ -493,7 +493,7 @@ msgstr "Брзина: %1 км/с"
 #: src/core/modules/Comet.cpp:257
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Пречник коме (приближна вредност): %1 км"
 
 #: src/core/modules/Comet.cpp:261
 #, no-c-format, qt-format
@@ -569,12 +569,12 @@ msgstr "tip: <b>%1, %2</b>"
 #: src/core/modules/StarWrapper.cpp:215
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Опсег магнитуде: <b>%1</b>%2<b>%3</b> (Фотометрички систем: %4)"
 
 #: src/core/modules/StarWrapper.cpp:217
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Опсег магнитуде: <b>%1</b>%2<b>%3/%4</b> (Фотометрички систем: %5)"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:226
@@ -626,7 +626,7 @@ msgstr "Млечни пут"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Зодијачко светло"
 
 #: src/core/StelApp.cpp:477
 msgid "Night mode"
@@ -712,7 +712,7 @@ msgstr "Додај 1 звездану годину"
 
 #: src/core/StelCore.cpp:211
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Додај један сидерички век"
 
 #: src/core/StelCore.cpp:212
 msgid "Add 1 synodic month"
@@ -720,27 +720,27 @@ msgstr "Dodajte 1 sinodicki mesec"
 
 #: src/core/StelCore.cpp:213
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "Додај један драконистички месец"
 
 #: src/core/StelCore.cpp:214
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "Додај једну драконистичку годину"
 
 #: src/core/StelCore.cpp:215
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "Додај један аномалистички месец"
 
 #: src/core/StelCore.cpp:216
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "Додај један средњи тропски месец"
 
 #: src/core/StelCore.cpp:217
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "Додај средњу тропску годину"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Додај средњи тропски век"
 
 #: src/core/StelCore.cpp:219
 msgid "Subtract 1 sidereal day"
@@ -760,7 +760,7 @@ msgstr "Одузми 1 звездану годину"
 
 #: src/core/StelCore.cpp:223
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Одузми сидерички век"
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 1 synodic month"
@@ -768,27 +768,27 @@ msgstr "Oduzmite 1 sinodicki mesec"
 
 #: src/core/StelCore.cpp:225
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "Одузми драконистички месец"
 
 #: src/core/StelCore.cpp:226
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "Одузми драконистичку годину"
 
 #: src/core/StelCore.cpp:227
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "Одузми аномалистички месец"
 
 #: src/core/StelCore.cpp:228
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "Одузми средњи тропски месец"
 
 #: src/core/StelCore.cpp:229
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "Одузми средњу тропску годину"
 
 #: src/core/StelCore.cpp:230
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Одузми средњи тропски век"
 
 #: src/core/StelCore.cpp:232
 msgid "Set home planet to selected planet"
@@ -808,7 +808,7 @@ msgstr "Преокренути призор вертикално"
 
 #: src/core/StelCore.cpp:1521
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "Исправка је онемогућена. Користити само уколико знате шта радите!"
 
 #: src/core/StelCore.cpp:1524
 #, qt-format
