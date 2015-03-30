@@ -211,3 +211,8 @@ TODO: Find out how to build QtWayland on Raspberry Pi, then continue...
 
 
 
+Further Links: 
+http://qt-project.org/wiki/QtWayland
+http://www.ics.com/blog/building-qt-and-qtwayland-raspberry-pi
+http://blog.rburchell.com/2014/09/wayland-and-qt-54.html
+http://wayland.freedesktop.org/qt5.html
