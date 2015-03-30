@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-28 21:33+0600\n"
-"PO-Revision-Date: 2015-03-09 00:52+0000\n"
+"PO-Revision-Date: 2015-03-29 14:18+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-03-29 05:18+0000\n"
+"X-Launchpad-Export-Date: 2015-03-30 05:10+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -185,7 +185,7 @@ msgstr "Tipo: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Opacidade: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -219,19 +219,19 @@ msgstr "Brilho da superfície: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:182
 #, qt-format
 msgid "Brightness: %1"
-msgstr ""
+msgstr "Brilho: %1"
 
 #: src/core/modules/Nebula.cpp:175
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Forma: %1"
 
 #: src/core/modules/Nebula.cpp:176
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
-msgstr ""
+msgstr "Estrutura: %1"
 
 #: src/core/modules/Nebula.cpp:188
 #, qt-format
@@ -276,15 +276,15 @@ msgstr "Desconhecido"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr ""
+msgstr "Região HII"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
-msgstr ""
+msgstr "Nebulosa refletiva"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "H-α emission region"
-msgstr ""
+msgstr "Região de emissão H-α"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Undocumented type"
@@ -293,81 +293,81 @@ msgstr "Tipo não documentado"
 #: src/core/modules/Nebula.cpp:762
 msgctxt "form"
 msgid "circular"
-msgstr ""
+msgstr "circular"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "elíptica"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "form"
 msgid "irregular"
-msgstr ""
+msgstr "irregular"
 
 #: src/core/modules/Nebula.cpp:771
 msgctxt "form"
 msgid "undocumented form"
-msgstr ""
+msgstr "forma não documentada"
 
 #: src/core/modules/Nebula.cpp:784
 msgctxt "structure"
 msgid "amorphous"
-msgstr ""
+msgstr "amorfa"
 
 #: src/core/modules/Nebula.cpp:787
 msgctxt "structure"
 msgid "conventional"
-msgstr ""
+msgstr "convencional"
 
 #: src/core/modules/Nebula.cpp:790
 msgctxt "structure"
 msgid "filamentary"
-msgstr ""
+msgstr "filamentar"
 
 #: src/core/modules/Nebula.cpp:793
 msgctxt "structure"
 msgid "undocumented structure"
-msgstr ""
+msgstr "estrutura não documentada"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "menos luminosa"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "HII region brightness"
 msgid "moderate"
-msgstr ""
+msgstr "moderada"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "mais luminosa"
 
 #: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
 msgid "undocumented brightness"
-msgstr ""
+msgstr "luminosidade não documentada"
 
 #: src/core/modules/Nebula.cpp:828
 msgctxt "H-α emission region brightness"
 msgid "very bright"
-msgstr ""
+msgstr "muito luminosa"
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "H-α emission region brightness"
 msgid "bright"
-msgstr ""
+msgstr "luminosa"
 
 #: src/core/modules/Nebula.cpp:834
 msgctxt "H-α emission region brightness"
 msgid "medium"
-msgstr ""
+msgstr "média"
 
 #: src/core/modules/Nebula.cpp:837
 msgctxt "H-α emission region brightness"
 msgid "faint"
-msgstr ""
+msgstr "fraca"
 
 #: src/core/modules/NebulaMgr.cpp:131
 msgid "Deep-sky objects"
@@ -2413,17 +2413,17 @@ msgstr "Aglomerados associados a nebulosidade"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "HII regions"
-msgstr ""
+msgstr "Regiões HII"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Nebulosas refletivas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "H-α emission regions"
-msgstr ""
+msgstr "Regiões de emissão H-α"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:105
@@ -2438,32 +2438,32 @@ msgstr "Catálogo Caldwell"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Barnard Catalogue"
-msgstr ""
+msgstr "Catálogo Barnard"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "Catálogo Sharpless"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "Catálogo Van den Bergh"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "The Catalogue of Rodgers, Cambell, and Whiteoak"
-msgstr ""
+msgstr "O catálogo de Rodgers, Cambell e Whiteoak"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "Catálogo Collinder"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "Catálogo Melotte"
 
 #: src/translations.h:123
 msgid "Arabic"
@@ -4478,11 +4478,11 @@ msgstr "Brilho das imagens:"
 
 #: src/ui_viewDialog.h:1316
 msgid "Thickness of lines:"
-msgstr ""
+msgstr "Espessura das linhas:"
 
 #: src/ui_viewDialog.h:1318
 msgid "Value in pixels"
-msgstr ""
+msgstr "Valor em píxeis"
 
 #: src/ui_viewDialog.h:1320
 msgid "Celestial Sphere"
