@@ -138,201 +138,202 @@ public:
 		StelTextureSP emissive_texture;
 	};
 
-    //! A vertex struct holds the vertex itself (position), corresponding texture coordinates, normals, tangents and bitangents
-    struct Vertex
-    {
-        Vertex() : position(0.0f), texCoord(0.0f), normal(0.0f), tangent(0.0f), bitangent(0.0f) {}
-	Vec3f position;
-        Vec2f texCoord;
-        Vec3f normal;
-        Vec4f tangent;
-        Vec3f bitangent;
-    };
 
-    //! Structure for a Mesh, will be used with Stellarium to render
-    //! Holds the starting index, the number of triangles and a pointer to the MTL
-    struct StelModel
-    {
-        int startIndex, triangleCount;
-	//materials are managed by OBJ
-        const Material* pMaterial;
-	//AABB is managed by this
-	AABB bbox;
-	//The centroid location of all vertices of this model
-	Vec3f centroid;
-    };
+	//! A vertex struct holds the vertex itself (position), corresponding texture coordinates, normals, tangents and bitangents
+	struct Vertex
+	{
+		Vertex() : position(0.0f), texCoord(0.0f), normal(0.0f), tangent(0.0f), bitangent(0.0f) {}
+		Vec3f position;
+		Vec2f texCoord;
+		Vec3f normal;
+		Vec4f tangent;
+		Vec3f bitangent;
+	};
 
-    //! Initializes values
-    OBJ();
-    //! Destructor
-    ~OBJ();
+	//! Structure for a Mesh, will be used with Stellarium to render
+	//! Holds the starting index, the number of triangles and a pointer to the MTL
+	struct StelModel
+	{
+		int startIndex, triangleCount;
+		//materials are managed by OBJ
+		const Material* pMaterial;
+		//AABB is managed by this
+		AABB bbox;
+		//The centroid location of all vertices of this model
+		Vec3f centroid;
+	};
 
-    //! Cleanup, will be called inside the destructor
-    void clean();
-    //! Loads the given obj file and, if specified rebuilds normals
-    bool load(const QString& filename, const enum vertexOrder order, bool rebuildNormals = false);
-    //! Transform all the vertices through multiplication with a 4x4 matrix.
-    //! @param mat Matrix to multiply vertices with.
-    void transform(QMatrix4x4 mat);
-    //! Returns a Material
-    Material &getMaterial(int i);
-    //! Returns a StelModel
-    const StelModel& getStelModel(int i) const;
+	//! Initializes values
+	OBJ();
+	//! Destructor
+	~OBJ();
 
-    //! This should be called after textures are loaded, and will re-order the StelModels to be grouped by their material.
-    //! Furthermore, this is a prerequisite for transparencyDepthSort.
-    void finalizeForRendering();
+	//! Cleanup, will be called inside the destructor
+	void clean();
+	//! Loads the given obj file and, if specified rebuilds normals
+	bool load(const QString& filename, const enum vertexOrder order, bool rebuildNormals = false);
+	//! Transform all the vertices through multiplication with a 4x4 matrix.
+	//! @param mat Matrix to multiply vertices with.
+	void transform(QMatrix4x4 mat);
+	//! Returns a Material
+	Material &getMaterial(int i);
+	//! Returns a StelModel
+	const StelModel& getStelModel(int i) const;
 
-    //! Sorts the transparent StelModels according to their distance to the specified position.
-    //! They are sorted so that they can be drawn back-to-front.
-    void transparencyDepthSort(const Vec3f& position);
+	//! This should be called after textures are loaded, and will re-order the StelModels to be grouped by their material.
+	//! Furthermore, this is a prerequisite for transparencyDepthSort.
+	void finalizeForRendering();
 
-    //! Getters for various datastructures
-    int getNumberOfIndices() const;
-    int getNumberOfStelModels() const;
-    int getNumberOfTriangles() const;
-    int getNumberOfVertices() const;
-    int getNumberOfMaterials() const;
+	//! Sorts the transparent StelModels according to their distance to the specified position.
+	//! They are sorted so that they can be drawn back-to-front.
+	void transparencyDepthSort(const Vec3f& position);
 
-    //! Returns a vertex reference
-    const Vertex& getVertex(int i) const;
-    //! Returns the vertex array
-    const Vertex* getVertexArray() const;
-    //! Returns the vertex size
-    int getVertexSize() const;
+	//! Getters for various datastructures
+	int getNumberOfIndices() const;
+	int getNumberOfStelModels() const;
+	int getNumberOfTriangles() const;
+	int getNumberOfVertices() const;
+	int getNumberOfMaterials() const;
 
-    //! Returns flags
-    bool isLoaded() const;
-    bool hasPositions() const;
-    bool hasTextureCoords() const;
-    bool hasNormals() const;
-    bool hasTangents() const;
-    bool hasStelModels() const;
+	//! Returns a vertex reference
+	const Vertex& getVertex(int i) const;
+	//! Returns the vertex array
+	const Vertex* getVertexArray() const;
+	//! Returns the vertex size
+	int getVertexSize() const;
 
-    //! Returns the bounding box for this OBJ
-    //const BoundingBox* getBoundingBox() const;
-    const AABB& getBoundingBox();
+	//! Returns flags
+	bool isLoaded() const;
+	bool hasPositions() const;
+	bool hasTextureCoords() const;
+	bool hasNormals() const;
+	bool hasTangents() const;
+	bool hasStelModels() const;
 
-    void renderAABBs();
+	//! Returns the bounding box for this OBJ
+	//const BoundingBox* getBoundingBox() const;
+	const AABB& getBoundingBox();
 
-    //! Returns an estimate of the memory usage of this instance (not fully accurate, but good enough)
-    size_t memoryUsage();
+	void renderAABBs();
 
-    //! Uploads the textures to GL (requires valid context)
-    void uploadTexturesGL();
-    //! Uploads the vertex and index data to GL buffers (requires valid context)
-    void uploadBuffersGL();
+	//! Returns an estimate of the memory usage of this instance (not fully accurate, but good enough)
+	size_t memoryUsage();
 
-    //! Binds the necessary GL objects, making the OBJ ready for drawing. Uses a VAO if the platform supports it.
-    void bindGL();
-    //! Unbinds this object's GL objects
-    void unbindGL();
+	//! Uploads the textures to GL (requires valid context)
+	void uploadTexturesGL();
+	//! Uploads the vertex and index data to GL buffers (requires valid context)
+	void uploadBuffersGL();
 
-    //! Set up some stuff that requires a valid OpenGL context.
-    static void setupGL();
-    //! Returns the OpenGL index buffer type supported on this hardware.
-    //! OpenGL ES may not support integer indices, so this is necessary.
-    static inline GLenum getIndexBufferType() { return indexBufferType; }
-    static inline size_t getIndexBufferTypeSize() { return indexBufferTypeSize; }
+	//! Binds the necessary GL objects, making the OBJ ready for drawing. Uses a VAO if the platform supports it.
+	void bindGL();
+	//! Unbinds this object's GL objects
+	void unbindGL();
 
-    //! Copy assignment operator. No deep copies are performed, but QVectors have copy-on-write semantics, so this is no problem. Does not copy GL objects.
-    OBJ& operator=(const OBJ& other);
+	//! Set up some stuff that requires a valid OpenGL context.
+	static void setupGL();
+	//! Returns the OpenGL index buffer type supported on this hardware.
+	//! OpenGL ES may not support integer indices, so this is necessary.
+	static inline GLenum getIndexBufferType() { return indexBufferType; }
+	static inline size_t getIndexBufferTypeSize() { return indexBufferTypeSize; }
+
+	//! Copy assignment operator. No deep copies are performed, but QVectors have copy-on-write semantics, so this is no problem. Does not copy GL objects.
+	OBJ& operator=(const OBJ& other);
 private:
-    struct FaceAttributes
-    {
-	    int materialIndex;
-	    int objectIndex;
-    };
+	struct FaceAttributes
+	{
+		int materialIndex;
+		int objectIndex;
+	};
 
-    typedef QVector<FaceAttributes> AttributeVector;
-    typedef QVector<Vec3f> VF3Vector;
-    typedef QVector<Vec2f> VF2Vector;
-    typedef Vec3f VPos;
-    typedef QVector<Vec3f> PosVector;
-    typedef QMap<QString,int> MatCacheT;
-    typedef QMap<int, QVector<int> > VertCacheT;
+	typedef QVector<FaceAttributes> AttributeVector;
+	typedef QVector<Vec3f> VF3Vector;
+	typedef QVector<Vec2f> VF2Vector;
+	typedef Vec3f VPos;
+	typedef QVector<Vec3f> PosVector;
+	typedef QMap<QString,int> MatCacheT;
+	typedef QMap<int, QVector<int> > VertCacheT;
 
-    void addFaceAttrib(AttributeVector& attributeArray, uint index, int material, int object);
-    void addTrianglePos(const PosVector& vertexCoords, VertCacheT &vertexCache, unsigned int index, int v0, int v1, int v2);
-    void addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector& normals, VertCacheT &vertexCache, unsigned int index,
-			      int v0, int v1, int v2,
-			      int vn0, int vn1, int vn2);
-    void addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, VertCacheT &vertexCache, unsigned int index,
-				int v0, int v1, int v2,
-				int vt0, int vt1, int vt2);
-    void addTrianglePosTexCoordNormal(PosVector &vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, VertCacheT &vertexCache, unsigned int index,
-				      int v0, int v1, int v2,
-				      int vt0, int vt1, int vt2,
-				      int vn0, int vn1, int vn2);
-    int addVertex(VertCacheT &vertexCache, int hash, const Vertex* pVertex);
-    //! Builds the StelModels based on material
-    void buildStelModels(const AttributeVector &attributeArray);
-    //! Generates normals in case they aren't specified/need rebuild
-    void generateNormals();
-    //! Generates tangents (and bitangents/binormals) (useful for NormalMapping, Parallax Mapping, ...)
-    void generateTangents();
-    //! First pass - scans the file for memory allocation
-    void importFirstPass(QFile& pFile, MatCacheT &materialCache);
-    //! Second pass - actual parsing step
-    void importSecondPass(FILE *pFile, const enum vertexOrder order, const MatCacheT &materialCache);
-    //! Imports material file and fills the material datastructure
-    bool importMaterials(const QString& filename, MatCacheT& materialCache);
-    QString absolutePath(QString path);
-    //! Determine the bounding box extrema
-    void findBounds();
-    //! Binds the GL buffers to the vertex attributes
-    void bindBuffersGL();
-    //! Releases vertex attribute bindings and buffers
-    void unbindBuffersGL();
+	void addFaceAttrib(AttributeVector& attributeArray, uint index, int material, int object);
+	void addTrianglePos(const PosVector& vertexCoords, VertCacheT &vertexCache, unsigned int index, int v0, int v1, int v2);
+	void addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector& normals, VertCacheT &vertexCache, unsigned int index,
+				  int v0, int v1, int v2,
+				  int vn0, int vn1, int vn2);
+	void addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, VertCacheT &vertexCache, unsigned int index,
+				    int v0, int v1, int v2,
+				    int vt0, int vt1, int vt2);
+	void addTrianglePosTexCoordNormal(PosVector &vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, VertCacheT &vertexCache, unsigned int index,
+					  int v0, int v1, int v2,
+					  int vt0, int vt1, int vt2,
+					  int vn0, int vn1, int vn2);
+	int addVertex(VertCacheT &vertexCache, int hash, const Vertex* pVertex);
+	//! Builds the StelModels based on material
+	void buildStelModels(const AttributeVector &attributeArray);
+	//! Generates normals in case they aren't specified/need rebuild
+	void generateNormals();
+	//! Generates tangents (and bitangents/binormals) (useful for NormalMapping, Parallax Mapping, ...)
+	void generateTangents();
+	//! First pass - scans the file for memory allocation
+	void importFirstPass(QFile& pFile, MatCacheT &materialCache);
+	//! Second pass - actual parsing step
+	void importSecondPass(FILE *pFile, const enum vertexOrder order, const MatCacheT &materialCache);
+	//! Imports material file and fills the material datastructure
+	bool importMaterials(const QString& filename, MatCacheT& materialCache);
+	QString absolutePath(QString path);
+	//! Determine the bounding box extrema
+	void findBounds();
+	//! Binds the GL buffers to the vertex attributes
+	void bindBuffersGL();
+	//! Releases vertex attribute bindings and buffers
+	void unbindBuffersGL();
 
-    //! Returns the file for this filename, handling decompression if necessary
-    QFile* getFile(const QString& filename);
+	//! Returns the file for this filename, handling decompression if necessary
+	QFile* getFile(const QString& filename);
 
-    //! Used for parsing a texture string
-    QString parseTextureString(const char *buffer) const;
+	//! Used for parsing a texture string
+	QString parseTextureString(const char *buffer) const;
 
-    //! Flags
-    bool m_loaded;
-    bool m_hasPositions;
-    bool m_hasTextureCoords;
-    bool m_hasNormals;
-    bool m_hasTangents;
-    bool m_hasStelModels;
-    static bool vertexArraysSupported;
+	//! Flags
+	bool m_loaded;
+	bool m_hasPositions;
+	bool m_hasTextureCoords;
+	bool m_hasNormals;
+	bool m_hasTangents;
+	bool m_hasStelModels;
+	static bool vertexArraysSupported;
 
-    //! The type of the index buffer, may be GL_UNSIGNED_INT or GL_UNSIGNED_SHORT (on ES where GL_OES_element_index_uint is unsupported)
-    static GLenum indexBufferType;
-    //! The sizeof() of the indexBufferType
-    static size_t indexBufferTypeSize;
-    int m_firstTransparentIndex;
+	//! The type of the index buffer, may be GL_UNSIGNED_INT or GL_UNSIGNED_SHORT (on ES where GL_OES_element_index_uint is unsupported)
+	static GLenum indexBufferType;
+	//! The sizeof() of the indexBufferType
+	static size_t indexBufferTypeSize;
+	int m_firstTransparentIndex;
 
-    //! Structure sizes
-    unsigned int m_numberOfVertexCoords;
-    unsigned int m_numberOfTextureCoords;
-    unsigned int m_numberOfNormals;
-    unsigned int m_numberOfTriangles;
-    unsigned int m_numberOfMaterials;
-    unsigned int m_numberOfStelModels;
+	//! Structure sizes
+	unsigned int m_numberOfVertexCoords;
+	unsigned int m_numberOfTextureCoords;
+	unsigned int m_numberOfNormals;
+	unsigned int m_numberOfTriangles;
+	unsigned int m_numberOfMaterials;
+	unsigned int m_numberOfStelModels;
 
-    //! Bounding box for the entire scene
-    AABB pBoundingBox;
+	//! Bounding box for the entire scene
+	AABB pBoundingBox;
 
-    //! Base path to this file
-    QString m_basePath;
+	//! Base path to this file
+	QString m_basePath;
 
-    //! Datastructures
-    QVector<StelModel> m_stelModels;
-    QVector<Material> m_materials;
-    QVector<Vertex> m_vertexArray;
-    QVector<unsigned int> m_indexArray;
+	//! Datastructures
+	QVector<StelModel> m_stelModels;
+	QVector<Material> m_materials;
+	QVector<Vertex> m_vertexArray;
+	QVector<unsigned int> m_indexArray;
 
-    //! OpenGL objects
-    QOpenGLBuffer m_vertexBuffer;
-    QOpenGLBuffer m_indexBuffer;
-    QOpenGLVertexArrayObject* m_vertexArrayObject;
+	//! OpenGL objects
+	QOpenGLBuffer m_vertexBuffer;
+	QOpenGLBuffer m_indexBuffer;
+	QOpenGLVertexArrayObject* m_vertexArrayObject;
 
-    //! Heightmap
-    friend class Heightmap;
+	//! Heightmap
+	friend class Heightmap;
 };
 
 inline OBJ::Material& OBJ::getMaterial(int i) { return m_materials[i]; }

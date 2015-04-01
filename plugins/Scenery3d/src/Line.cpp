@@ -22,12 +22,12 @@
 
 Line::Line(const Vec3f &p, const Vec3f &dir)
 {
-    startPoint = p;
-    direction = dir;
-    endPoint = startPoint + direction;
+	startPoint = p;
+	direction = dir;
+	endPoint = startPoint + direction;
 }
 
 Vec3f Line::getPoint(float val)
 {
-    return startPoint + (val*direction);
+	return startPoint + (val*direction);
 }

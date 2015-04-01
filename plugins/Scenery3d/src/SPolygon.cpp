@@ -26,94 +26,94 @@ SPolygon::SPolygon() {}
 
 SPolygon::SPolygon(const Vec3f &c0, const Vec3f &c1, const Vec3f &c2, const Vec3f &c3)
 {
-    vertices.push_back(c0);
-    vertices.push_back(c1);
-    vertices.push_back(c2);
-    vertices.push_back(c3);
+	vertices.push_back(c0);
+	vertices.push_back(c1);
+	vertices.push_back(c2);
+	vertices.push_back(c3);
 }
 
 SPolygon::~SPolygon() {}
 
 void SPolygon::intersect(const Plane &p, QVector<Vec3f> &intersectionPoints)
 {
-    if(vertices.size() < 3) return;
+	if(vertices.size() < 3) return;
 
-    QVector<Vec3f> newVerts;
+	QVector<Vec3f> newVerts;
 
-    for(int i=0; i<vertices.size(); i++)
-    {
-        unsigned int next = (i+1) % vertices.size();
+	for(int i=0; i<vertices.size(); i++)
+	{
+		unsigned int next = (i+1) % vertices.size();
 
-        bool curOut = !p.isBehind(vertices[i]);
-        bool nextOut = !p.isBehind(vertices[next]);
+		bool curOut = !p.isBehind(vertices[i]);
+		bool nextOut = !p.isBehind(vertices[next]);
 
-        //Both are outside, skip to next iteration
-        if(curOut && nextOut) continue;
+		//Both are outside, skip to next iteration
+		if(curOut && nextOut) continue;
 
-        float val = 0.0f;
-        Line line(vertices[i], vertices[next]-vertices[i]);
+		float val = 0.0f;
+		Line line(vertices[i], vertices[next]-vertices[i]);
 
-        //outside -> inside intersection
-        if(curOut)
-        {
-            if(p.intersect(line, val))
-            {
-                Vec3f intersection = line.getPoint(val);
-		newVerts.append(intersection);
-		intersectionPoints.append(intersection);
-            }
+		//outside -> inside intersection
+		if(curOut)
+		{
+			if(p.intersect(line, val))
+			{
+				Vec3f intersection = line.getPoint(val);
+				newVerts.append(intersection);
+				intersectionPoints.append(intersection);
+			}
 
-	    newVerts.append(vertices[next]);
-            continue;
-        }
+			newVerts.append(vertices[next]);
+			continue;
+		}
 
-        //inside -> outside intersection
-        if(nextOut)
-        {
-            if(p.intersect(line, val))
-            {
-                Vec3f intersection = line.getPoint(val);
-		newVerts.append(intersection);
-		intersectionPoints.append(intersection);
-            }
+		//inside -> outside intersection
+		if(nextOut)
+		{
+			if(p.intersect(line, val))
+			{
+				Vec3f intersection = line.getPoint(val);
+				newVerts.append(intersection);
+				intersectionPoints.append(intersection);
+			}
 
-            continue;
-        }
+			continue;
+		}
 
-        //since both are inside, just add the next vertex
-	newVerts.append(vertices[next]);
-    }
+		//since both are inside, just add the next vertex
+		newVerts.append(vertices[next]);
+	}
 
-    vertices.clear();
+	vertices.clear();
 
-    //Polygon degenerated
-    if(newVerts.size() > 2)
-    {
-        vertices = newVerts;
-    }
+	//Polygon degenerated
+	if(newVerts.size() > 2)
+	{
+		vertices = newVerts;
+	}
 }
 
 void SPolygon::reverseOrder()
 {
-    if(vertices.size() > 2)
-    {
-        std::reverse(vertices.begin(), vertices.end());
-    }
+	if(vertices.size() > 2)
+	{
+		std::reverse(vertices.begin(), vertices.end());
+	}
 }
 
 void SPolygon::addUniqueVert(const Vec3f &v)
 {
-    bool flag = true;
+	bool flag = true;
 
-    for(int i=0; i<vertices.size() && flag; i++)
-    {
-	flag = ! v.fuzzyEquals(vertices[i]);
-    }
+	for(int i=0; i<vertices.size() && flag; i++)
+	{
+		flag = ! v.fuzzyEquals(vertices[i]);
+	}
 
-    if(flag)
-    {
-	vertices.append(v);
-    }
+	if(flag)
+	{
+		vertices.append(v);
+	}
 }
 
 void SPolygon::render()

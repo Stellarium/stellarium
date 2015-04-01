@@ -26,108 +26,108 @@ Plane::Plane()
 
 Plane::Plane(Vec3f &v1, Vec3f &v2, Vec3f &v3)
 {
-    Plane(v1, v2, v3, SPolygon::CCW);
+	Plane(v1, v2, v3, SPolygon::CCW);
 }
 
 Plane::Plane(const Vec4f &e)
 {
-    Vec3f n = Vec3f(e.v[0], e.v[1], e.v[2]);
-    n.normalize();
+	Vec3f n = Vec3f(e.v[0], e.v[1], e.v[2]);
+	n.normalize();
 
-    normal = n;
-    distance = e.v[3];
+	normal = n;
+	distance = e.v[3];
 }
 
 Plane::Plane(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o)
 {
-    Vec3f edge1 = v2-v1;
-    Vec3f edge2 = v3-v1;
+	Vec3f edge1 = v2-v1;
+	Vec3f edge2 = v3-v1;
 
-    switch(o)
-    {
-    case SPolygon::CCW:
-        normal = edge1^edge2;
-        break;
+	switch(o)
+	{
+		case SPolygon::CCW:
+			normal = edge1^edge2;
+			break;
 
-    case SPolygon::CW:
-        normal = edge2^edge1;
-        break;
-    }
+		case SPolygon::CW:
+			normal = edge2^edge1;
+			break;
+	}
 
-    normal.normalize();
-    distance = v1.dot(normal);
+	normal.normalize();
+	distance = v1.dot(normal);
 }
 
 Plane::~Plane() {}
 
 void Plane::setPoints(const Vec3f &v1,const Vec3f &v2,const Vec3f &v3, SPolygon::Order o)
 {
-    Vec3f edge1 = v2-v1;
-    Vec3f edge2 = v3-v1;
+	Vec3f edge1 = v2-v1;
+	Vec3f edge2 = v3-v1;
 
-    switch(o)
-    {
-    case SPolygon::CCW:
-        normal = edge1^edge2;
-        break;
+	switch(o)
+	{
+		case SPolygon::CCW:
+			normal = edge1^edge2;
+			break;
 
-    case SPolygon::CW:
-        normal = edge2^edge1;
-        break;
-    }
+		case SPolygon::CW:
+			normal = edge2^edge1;
+			break;
+	}
 
-    normal.normalize();
-    distance = v1.dot(normal);
+	normal.normalize();
+	distance = v1.dot(normal);
 }
 
 float Plane::calcDistance(const Vec3f p) const
 {
-    return p.dot(normal) - distance;
+	return p.dot(normal) - distance;
 }
 
 bool Plane::isBehind(const Vec3f &p) const
 {
-    bool result = false;
+	bool result = false;
 
-    if(calcDistance(p) < 0.0f)
-        result = true;
+	if(calcDistance(p) < 0.0f)
+		result = true;
 
-    return result;
+	return result;
 }
 
 void Plane::saveValues()
 {
-    sNormal = normal;
-    sP = p;
-    sDistance = distance;
+	sNormal = normal;
+	sP = p;
+	sDistance = distance;
 }
 
 void Plane::resetValues()
 {
-    sNormal = Vec3f(0.0f);
-    sP = Vec3f(0.0f);
-    sDistance = 0.0f;
+	sNormal = Vec3f(0.0f);
+	sP = Vec3f(0.0f);
+	sDistance = 0.0f;
 }
 
 bool Plane::intersect(const Line &l, float &val) const
 {
-    float dp = normal.dot(l.direction);
-    float eps = std::numeric_limits<float>::epsilon();
+	float dp = normal.dot(l.direction);
+	float eps = std::numeric_limits<float>::epsilon();
 
-    if(std::abs(dp) < eps)
-    {
-        val = 0.0f;
-        return false;
-    }
+	if(std::abs(dp) < eps)
+	{
+		val = 0.0f;
+		return false;
+	}
 
-    val = (distance - normal.dot(l.startPoint))/dp;
+	val = (distance - normal.dot(l.startPoint))/dp;
 
-    //Intersection outside
-    if(val < -eps || val > (1.0f + eps))
-    {
-        val = 0.0f;
-        return false;
-    }
+	//Intersection outside
+	if(val < -eps || val > (1.0f + eps))
+	{
+		val = 0.0f;
+		return false;
+	}
 
-    return true;
+	return true;
 }

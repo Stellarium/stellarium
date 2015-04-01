@@ -1,3 +1,23 @@
+/*
+ * Stellarium Scenery3d Plug-in
+ *
+ * Copyright (C) 2011-2015 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
 #include "StoredViewDialog.hpp"
 #include "StoredViewDialog_p.hpp"
 #include "Scenery3dMgr.hpp"
@@ -5,9 +25,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
-
-
-
+#include "StelTranslator.hpp"
 
 StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog(parent)
 {
@@ -136,7 +154,7 @@ void StoredViewDialog::addUserView()
 	sv.label = "New user view";
 
 	SceneInfo info = viewModel->getScene();
-	sv.description = QString("Grid coordinates (%1): %2m, %3m, %4m").arg(info.gridName)
+	sv.description = QString(q_("Grid coordinates (%1): %2m, %3m, %4m")).arg(info.gridName)
 			.arg(sv.position[0], 0, 'f', 2).arg(sv.position[1],0,'f',2).arg(sv.position[2],0,'f',2);
 
 	QModelIndex idx = viewModel->addUserView(sv);
