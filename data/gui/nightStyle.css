@@ -6,6 +6,10 @@ QLabel {
 	background: none;
 }
 
+QLabel:disabled {
+	color: rgb(100, 0, 0);
+}
+
 QLabel#stelWindowTitle {
 	margin-left: 24px;
 	font-size: 14px;
