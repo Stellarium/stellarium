@@ -360,7 +360,9 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:102"] = "Barnard Catalogue";
 			result["NebulaMgr:103"] = "Sharpless Catalogue";
 			result["NebulaMgr:104"] = "Van den Bergh Catalogue";
-			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Cambell, and Whiteoak";
+			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
+			result["NebulaMgr:106"] = "Collinder Catalogue";
+			result["NebulaMgr:107"] = "Melotte Catalogue";
 		}
 	}
 	return result;
