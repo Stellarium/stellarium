@@ -25,6 +25,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelMainView.hpp"
 
 ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: al(NULL)
@@ -271,6 +272,10 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 // These are called by the respective buttons.
 void ArchaeoLinesDialog::askEquinoxColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(equinoxColor, NULL, q_("Select color for equinox line"));
 	if (c.isValid())
 	{
@@ -279,10 +284,16 @@ void ArchaeoLinesDialog::askEquinoxColor()
 		equinoxColorPixmap.fill(c);
 		ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askSolsticeColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(solsticeColor, NULL, q_("Select color for solstice lines"));
 	if (c.isValid())
 	{
@@ -291,10 +302,16 @@ void ArchaeoLinesDialog::askSolsticeColor()
 		solsticeColorPixmap.fill(c);
 		ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askCrossquarterColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(crossquarterColor, NULL, q_("Select color for crossquarter lines"));
 	if (c.isValid())
 	{
@@ -303,10 +320,16 @@ void ArchaeoLinesDialog::askCrossquarterColor()
 		crossquarterColorPixmap.fill(c);
 		ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askMajorStandstillColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(majorStandstillColor, NULL, q_("Select color for major standstill lines"));
 	if (c.isValid())
 	{
@@ -315,10 +338,16 @@ void ArchaeoLinesDialog::askMajorStandstillColor()
 		majorStandstillColorPixmap.fill(c);
 		ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askMinorStandstillColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(minorStandstillColor, NULL, q_("Select color for minor standstill lines"));
 	if (c.isValid())
 	{
@@ -327,10 +356,16 @@ void ArchaeoLinesDialog::askMinorStandstillColor()
 		minorStandstillColorPixmap.fill(c);
 		ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askZenithPassageColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(zenithPassageColor, NULL, q_("Select color for zenith passage line"));
 	if (c.isValid())
 	{
@@ -338,12 +373,17 @@ void ArchaeoLinesDialog::askZenithPassageColor()
 		al->setLineColor(ArchaeoLine::ZenithPassage, c);
 		zenithPassageColorPixmap.fill(c);
 		ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
-
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askNadirPassageColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(nadirPassageColor, NULL, q_("Select color for nadir passage line"));
 	if (c.isValid())
 	{
@@ -352,10 +392,16 @@ void ArchaeoLinesDialog::askNadirPassageColor()
 		nadirPassageColorPixmap.fill(c);
 		ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askSelectedObjectColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(selectedObjectColor, NULL, q_("Select color for selected object line"));
 	if (c.isValid())
 	{
@@ -364,10 +410,16 @@ void ArchaeoLinesDialog::askSelectedObjectColor()
 		selectedObjectColorPixmap.fill(c);
 		ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askCurrentSunColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(currentSunColor, NULL, q_("Select color for current sun line"));
 	if (c.isValid())
 	{
@@ -376,10 +428,16 @@ void ArchaeoLinesDialog::askCurrentSunColor()
 		currentSunColorPixmap.fill(c);
 		ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askCurrentMoonColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(currentMoonColor, NULL, q_("Select color for current moon line"));
 	if (c.isValid())
 	{
@@ -388,10 +446,16 @@ void ArchaeoLinesDialog::askCurrentMoonColor()
 		currentMoonColorPixmap.fill(c);
 		ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
 void ArchaeoLinesDialog::askCurrentPlanetColor()
 {
+	// We must leave fullscreen to show the color panel :-(
+	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(false);
 	QColor c=QColorDialog::getColor(currentPlanetColor, NULL, q_("Select color for current planet line"));
 	if (c.isValid())
 	{
@@ -400,5 +464,7 @@ void ArchaeoLinesDialog::askCurrentPlanetColor()
 		currentPlanetColorPixmap.fill(c);
 		ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
 	}
+	if (isFullScreen)
+		StelMainView::getInstance().setFullScreen(true);
 }
 
