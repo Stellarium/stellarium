@@ -22,7 +22,7 @@
 
 #include <QtGlobal>
 
-//this NEEDS to be included before StelOpenGL
+#include "StelOpenGL.hpp"
 #include "GLFuncs.hpp"
 
 #include "Scenery3d.hpp"
