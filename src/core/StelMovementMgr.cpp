@@ -211,10 +211,11 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 }
 
 double StelMovementMgr::getCallOrder(StelModuleActionName actionName) const
-{   // GZ: allow a few plugins to intercept keys!
-    if (actionName == StelModule::ActionHandleKeys)
-        return 5;
-    return 0;
+{
+	// GZ: allow a few plugins to intercept keys!
+	if (actionName == StelModule::ActionHandleKeys)
+		return 5;
+	return 0;
 }
 
 
