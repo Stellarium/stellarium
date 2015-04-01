@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-17 21:57+0600\n"
-"PO-Revision-Date: 2015-03-17 16:14+0000\n"
+"POT-Creation-Date: 2015-03-25 21:34+0600\n"
+"PO-Revision-Date: 2015-03-25 16:41+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Koptev Oleg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-03-18 05:43+0000\n"
-"X-Generator: Launchpad (build 17403)\n"
+"X-Launchpad-Export-Date: 2015-03-26 05:00+0000\n"
+"X-Generator: Launchpad (build 17413)\n"
 "Language: ru\n"
 
 #: skycultures/translations.fab:9
@@ -629,7 +629,7 @@ msgstr "Туманность Улитка"
 msgid "Hind's variable nebula"
 msgstr "Туманность Лань"
 
-#: nebulae/default/ngc2000names.dat:270
+#: nebulae/default/ngc2000names.dat:270 nebulae/default/ngc2000names.dat:428
 msgid "Horsehead nebula"
 msgstr "Туманность Конская голова"
 
@@ -813,7 +813,11 @@ msgstr "Туманность γ Cas"
 msgid "κ Cru cluster"
 msgstr "Звёздное скопление κ Cru"
 
-#: nebulae/default/ngc2000names.dat:327 nebulae/default/ngc2000names.dat:328
+#: nebulae/default/ngc2000names.dat:327
+msgid "Running Chicken nebula"
+msgstr "Туманность Бегущая курица"
+
+#: nebulae/default/ngc2000names.dat:328
 msgid "λ Cen nebula"
 msgstr "Туманность λ Cen"
 
@@ -1176,13 +1180,127 @@ msgstr "Группа Маффей"
 msgid "Robert's Quartet"
 msgstr "Квартет Роберта"
 
-#: nebulae/default/ngc2000names.dat:428
+#: nebulae/default/ngc2000names.dat:429
+msgid "Ink Spot Nebula"
+msgstr "Туманность Чернильное пятно"
+
+#: nebulae/default/ngc2000names.dat:430
+#: skycultures/arabic/constellation_names.eng.fab:48
+msgid "The Snake"
+msgstr "Змея"
+
+#: nebulae/default/ngc2000names.dat:431 nebulae/default/ngc2000names.dat:432
+#: nebulae/default/ngc2000names.dat:433 nebulae/default/ngc2000names.dat:434
+msgid "Pipe (stem)"
+msgstr "Трубка (стебель)"
+
+#: nebulae/default/ngc2000names.dat:435
+msgid "Pipe (bowl)"
+msgstr "Трубка (чаша)"
+
+#: nebulae/default/ngc2000names.dat:436
+msgid "Parrot's Head"
+msgstr "Голова попугая"
+
+#: nebulae/default/ngc2000names.dat:437 nebulae/default/ngc2000names.dat:438
+msgid "E Nebula"
+msgstr "Туманность E"
+
+#: nebulae/default/ngc2000names.dat:439
 msgid "Deer Lick Group"
 msgstr "Солончаковая группа"
 
-#: nebulae/default/ngc2000names.dat:429
-msgid "Spider nebula"
+#: nebulae/default/ngc2000names.dat:440
+msgid "Spider Nebula"
 msgstr "Туманность Паук"
+
+#: nebulae/default/ngc2000names.dat:441
+msgid "Green Ring Nebula"
+msgstr "Туманность Зелёное кольцо"
+
+#: nebulae/default/ngc2000names.dat:442
+msgid "Bear Claw Nebula"
+msgstr "Туманность Медвежий коготь"
+
+#: nebulae/default/ngc2000names.dat:443
+msgid "Lobster Nebula"
+msgstr "Туманность Лобстер"
+
+#: nebulae/default/ngc2000names.dat:444
+msgid "The Spire"
+msgstr "Шпиль"
+
+#: nebulae/default/ngc2000names.dat:445
+msgid "Cygnus Star Cloud"
+msgstr "Звёздное облако Лебедя"
+
+#: nebulae/default/ngc2000names.dat:446
+msgid "Cygnus Loop"
+msgstr "Петля Лебедя"
+
+#: nebulae/default/ngc2000names.dat:447
+msgid "Sadr Region"
+msgstr "Область Садра"
+
+#: nebulae/default/ngc2000names.dat:448
+msgid "Cave Nebula"
+msgstr "Туманность Грот"
+
+#: nebulae/default/ngc2000names.dat:449
+msgid "Dreyer's Object"
+msgstr "Объект Дрейера"
+
+#: nebulae/default/ngc2000names.dat:450
+msgid "Pacman Nebula"
+msgstr "Туманность Пакман"
+
+#: nebulae/default/ngc2000names.dat:451
+msgid "Maffei 1"
+msgstr "Маффей 1"
+
+#: nebulae/default/ngc2000names.dat:452
+msgid "Maffei 2"
+msgstr "Маффей 2"
+
+#: nebulae/default/ngc2000names.dat:453
+msgid "Northern Trifid"
+msgstr "Северная трехраздельная"
+
+#: nebulae/default/ngc2000names.dat:454
+msgid "Spaghetti Nebula"
+msgstr "Туманность Спагетти"
+
+#: nebulae/default/ngc2000names.dat:455
+msgid "Angelfish Nebula"
+msgstr "Туманность Скалярия"
+
+#: nebulae/default/ngc2000names.dat:456
+msgid "Fox Fur Nebula"
+msgstr "Туманность Лисий мех"
+
+#: nebulae/default/ngc2000names.dat:457
+msgid "Medusa Nebula"
+msgstr "Туманность Медуза"
+
+#: nebulae/default/ngc2000names.dat:458
+msgid "Rosette Nebula"
+msgstr "Туманность Розетка"
+
+#: nebulae/default/ngc2000names.dat:459
+msgid "Barnard's Loop"
+msgstr "Петля Барнарда"
+
+#: nebulae/default/ngc2000names.dat:460
+msgid "Seagull Nebula"
+msgstr "Туманность Чайка"
+
+#: nebulae/default/ngc2000names.dat:461
+msgid "Ghost Nebula"
+msgstr "Туманность Привидение"
+
+#: nebulae/default/ngc2000names.dat:462
+msgid "Ghost Head Nebula"
+msgstr "Туманность Голова привидения"
 
 #: skycultures/arabic/constellation_names.eng.fab:1
 msgid "The Shackled Woman"
@@ -1380,10 +1498,6 @@ msgstr "Корабль"
 #: skycultures/arabic/constellation_names.eng.fab:47
 msgid "The Maiden"
 msgstr "Дева"
-
-#: skycultures/arabic/constellation_names.eng.fab:48
-msgid "The Snake"
-msgstr "Змея"
 
 #: skycultures/arabic/constellation_names.eng.fab:49
 msgid "The Beast of Prey"
