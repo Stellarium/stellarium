@@ -379,7 +379,7 @@ void LandscapeMgr::setStelStyle(const QString& section)
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value(section+"/cardinal_color", defaultColor).toString()));
 }
 
-bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
+bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
 {
 	if (id.isEmpty())
 		return false;
@@ -406,7 +406,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 
 	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
-		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation());
+		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
 		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
@@ -444,7 +444,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	return true;
 }
 
-bool LandscapeMgr::setCurrentLandscapeName(const QString& name)
+bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double changeLocationDuration)
 {
 	if (name.isEmpty())
 		return false;
@@ -452,7 +452,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name)
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
-		return setCurrentLandscapeID(nameToDirMap[name]);
+		return setCurrentLandscapeID(nameToDirMap[name], changeLocationDuration);
 	}
 	else
 	{

@@ -166,6 +166,10 @@ Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_SCENERY3D
+Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 qint64 StelApp::startMSecs = 0;
