@@ -20,7 +20,11 @@
 
 #include <QtGlobal>
 
+#if !defined(Q_OS_WIN)
+//exclude StelOpenGL here on windows because of conflicts with GLFuncs.hpp otherwise (uses QOpenGLFunctions_1_0 directly)
 #include "StelOpenGL.hpp"
+#endif
+//needs to be included before StelOpenGL on Windows
 #include "GLFuncs.hpp"
 
 #include "Scenery3d.hpp"

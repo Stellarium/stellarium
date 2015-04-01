@@ -42,6 +42,10 @@ SET(Scenery3d_SRCS
     Heightmap.cpp
 )
 
+# CMake < 3.0 does not AUTOMOC Q_GADGET which S3DEnum.hpp uses, so we have to manually add it
+# This does not seem to cause problems with CMake >= 3.0
+QT5_WRAP_CPP(Scenery3d_MOC_SRCS S3DEnum.hpp)
+
 ################# compiles resources files ############
 SET(Scenery3d_RES ../resources/Scenery3d.qrc)
 QT5_ADD_RESOURCES(Scenery3d_RES_CXX ${Scenery3d_RES})
@@ -56,7 +60,7 @@ QT5_WRAP_UI(Scenery3d_UIS_H ${Scenery3d_UIS})
 SET(extLinkerOption  ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES}  )
 
 ############### For building the static library ######################
-ADD_LIBRARY(Scenery3d-static STATIC ${Scenery3d_SRCS} ${Scenery3d_RES_CXX} ${Scenery3d_UIS_H} )
+ADD_LIBRARY(Scenery3d-static STATIC ${Scenery3d_SRCS} ${Scenery3d_RES_CXX} ${Scenery3d_UIS_H} ${Scenery3d_MOC_SRCS} )
 QT5_USE_MODULES(Scenery3d-static Core Concurrent Gui Widgets)
 SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES OUTPUT_NAME "Scenery3d")
 TARGET_LINK_LIBRARIES(Scenery3d-static ${extLinkerOption})
