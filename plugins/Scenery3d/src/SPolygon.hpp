@@ -31,28 +31,28 @@ class SPolygon
 {
 public:
 
-    SPolygon();
-    //! Construct a polygon from 4 corner vertices
-    SPolygon(const Vec3f &c0, const Vec3f &c1, const Vec3f &c2, const Vec3f &c3);
-    ~SPolygon();
+	SPolygon();
+	//! Construct a polygon from 4 corner vertices
+	SPolygon(const Vec3f &c0, const Vec3f &c1, const Vec3f &c2, const Vec3f &c3);
+	~SPolygon();
 
-    enum Order
-    {
-        CCW = 0, CW
-    };
+	enum Order
+	{
+		CCW = 0, CW
+	};
 
-    //! Holds all vertices of this polygon
-    QVector<Vec3f> vertices;
+	//! Holds all vertices of this polygon
+	QVector<Vec3f> vertices;
 
-    //! Intersect by specified plane and store the intersection points
-    void intersect(const Plane &p, QVector<Vec3f> &intersectionPoints);
+	//! Intersect by specified plane and store the intersection points
+	void intersect(const Plane &p, QVector<Vec3f> &intersectionPoints);
 
-    //! Reverse the vertices order
-    void reverseOrder();
-    //! Add the vertex v to vertices if it is not already present
-    void addUniqueVert(const Vec3f &v);
+	//! Reverse the vertices order
+	void reverseOrder();
+	//! Add the vertex v to vertices if it is not already present
+	void addUniqueVert(const Vec3f &v);
 
-    void render();
+	void render();
 
 private:
 

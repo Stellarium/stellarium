@@ -26,14 +26,14 @@
 class Line
 {
 public:
-    Line(const Vec3f &p, const Vec3f &dir);
+	Line(const Vec3f &p, const Vec3f &dir);
 
-    Vec3f startPoint;
-    Vec3f endPoint;
-    Vec3f direction;
+	Vec3f startPoint;
+	Vec3f endPoint;
+	Vec3f direction;
 
-    //Get the new point at val
-    Vec3f getPoint(float val);
+	//Get the new point at val
+	Vec3f getPoint(float val);
 
 private:
 

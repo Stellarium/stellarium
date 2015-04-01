@@ -1,7 +1,7 @@
 /*
  * Stellarium Scenery3d Plug-in
  *
- * Copyright (C) 2011-15 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
+ * Copyright (C) 2011-2015 Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza, Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
-
 
 #include <QtGlobal>
 
@@ -165,7 +163,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	else if (loadingScene.vertexOrder.compare("ZXY") == 0) objVertexOrder=OBJ::ZXY;
 	else if (loadingScene.vertexOrder.compare("ZYX") == 0) objVertexOrder=OBJ::ZYX;
 
-	parent->updateProgress(N_("Loading model..."),1,0,6);
+	parent->updateProgress(q_("Loading model..."),1,0,6);
 
 	//load model
 	objModelLoad.reset(new OBJ());
@@ -180,7 +178,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	if(loadCancel)
 		return false;
 
-	parent->updateProgress(N_("Transforming model..."),2,0,6);
+	parent->updateProgress(q_("Transforming model..."),2,0,6);
 
 	//transform the vertices of the model to match the grid
 	objModelLoad->transform( zRot2Grid );
@@ -192,7 +190,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 		groundModelLoad = objModelLoad;
 	else if (loadingScene.modelGround != "NULL")
 	{
-		parent->updateProgress(N_("Loading ground..."),3,0,6);
+		parent->updateProgress(q_("Loading ground..."),3,0,6);
 
 		groundModelLoad.reset(new OBJ());
 		modelFile = StelFileMgr::findFile(loadingScene.fullPath + "/" + loadingScene.modelGround);
@@ -203,7 +201,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 			return false;
 		}
 
-		parent->updateProgress(N_("Transforming ground..."),4,0,6);
+		parent->updateProgress(q_("Transforming ground..."),4,0,6);
 		if(loadCancel)
 			return false;
 
@@ -231,7 +229,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	//calculate heightmap
 	if(loadCancel)
 		return false;
-	parent->updateProgress(N_("Calculating collision map..."),5,0,6);
+	parent->updateProgress(q_("Calculating collision map..."),5,0,6);
 
 	if(heightmapLoad)
 	{
@@ -246,7 +244,7 @@ bool Scenery3d::loadScene(const SceneInfo &scene)
 	else
 		heightmapLoad = NULL;
 
-	parent->updateProgress(N_("Finalizing load..."),6,0,6);
+	parent->updateProgress(q_("Finalizing load..."),6,0,6);
 
 	return true;
 }
@@ -325,150 +323,150 @@ void Scenery3d::handleKeys(QKeyEvent* e)
 {
 	//TODO FS maybe move this to Mgr, so that input is separate from rendering and scene management?
 
-    if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & Qt::ControlModifier))
-    {
-	// Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
-	float speedup=((e->modifiers() & Qt::ShiftModifier)? 10.0f : 1.0f);
-	speedup *= ((e->modifiers() & Qt::AltModifier)? 5.0f : 1.0f);
-	switch (e->key())
+	if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & Qt::ControlModifier))
 	{
-	    case Qt::Key_PageUp:    movement[2] = -1.0f * speedup; e->accept(); break;
-	    case Qt::Key_PageDown:  movement[2] =  1.0f * speedup; e->accept(); break;
-	    case Qt::Key_Up:        movement[1] = -1.0f * speedup; e->accept(); break;
-	    case Qt::Key_Down:      movement[1] =  1.0f * speedup; e->accept(); break;
-	    case Qt::Key_Right:     movement[0] =  1.0f * speedup; e->accept(); break;
-	    case Qt::Key_Left:      movement[0] = -1.0f * speedup; e->accept(); break;
+		// Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
+		float speedup=((e->modifiers() & Qt::ShiftModifier)? 10.0f : 1.0f);
+		speedup *= ((e->modifiers() & Qt::AltModifier)? 5.0f : 1.0f);
+		switch (e->key())
+		{
+			case Qt::Key_PageUp:    movement[2] = -1.0f * speedup; e->accept(); break;
+			case Qt::Key_PageDown:  movement[2] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_Up:        movement[1] = -1.0f * speedup; e->accept(); break;
+			case Qt::Key_Down:      movement[1] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_Right:     movement[0] =  1.0f * speedup; e->accept(); break;
+			case Qt::Key_Left:      movement[0] = -1.0f * speedup; e->accept(); break;
 #ifdef QT_DEBUG
-	    //leave this out on non-debug builds to reduce conflict chance
-	    case Qt::Key_P:         saveFrusts(); e->accept(); break;
+				//leave this out on non-debug builds to reduce conflict chance
+			case Qt::Key_P:         saveFrusts(); e->accept(); break;
 #endif
+		}
 	}
-    }
-    else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
-    {
-	if (e->key() == Qt::Key_PageUp || e->key() == Qt::Key_PageDown ||
-	    e->key() == Qt::Key_Up     || e->key() == Qt::Key_Down     ||
-	    e->key() == Qt::Key_Left   || e->key() == Qt::Key_Right     )
-	    {
-		movement[0] = movement[1] = movement[2] = 0.0f;
-		e->accept();
-	    }
-    }
+	else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
+	{
+		if (e->key() == Qt::Key_PageUp || e->key() == Qt::Key_PageDown ||
+				e->key() == Qt::Key_Up     || e->key() == Qt::Key_Down     ||
+				e->key() == Qt::Key_Left   || e->key() == Qt::Key_Right     )
+		{
+			movement[0] = movement[1] = movement[2] = 0.0f;
+			e->accept();
+		}
+	}
 }
 
 void Scenery3d::saveFrusts()
 {
-    fixShadowData = !fixShadowData;
+	fixShadowData = !fixShadowData;
 
-    camFrustShadow.saveDrawingCorners();
+	camFrustShadow.saveDrawingCorners();
 
-    for(int i=0; i<shaderParameters.frustumSplits; i++)
-    {
-	if(fixShadowData) frustumArray[i].saveDrawingCorners();
-	else frustumArray[i].resetCorners();
-    }
+	for(int i=0; i<shaderParameters.frustumSplits; i++)
+	{
+		if(fixShadowData) frustumArray[i].saveDrawingCorners();
+		else frustumArray[i].resetCorners();
+	}
 }
 
 void Scenery3d::setSceneAABB(const AABB& bbox)
 {
-    sceneBoundingBox = bbox;
+	sceneBoundingBox = bbox;
 }
 
 void Scenery3d::update(double deltaTime)
 {
-    if (core != NULL)
-    {
-	StelMovementMgr *stelMovementMgr = GETSTELMODULE(StelMovementMgr);
-
-	Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
-	Vec3d viewDirectionAltAz=core->j2000ToAltAz(viewDirection);
-	double alt, az;
-	StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
-
-	//if we were moving in the last update
-	bool wasMoving = moveVector.lengthSquared()>0.0;
-
-	moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
-		   ( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
-		   movement[2]);
-
-	//get current time
-	double curTime = core->getJDay();
-
-	if(lazyDrawing)
+	if (core != NULL)
 	{
-		needsMovementUpdate = false;
+		StelMovementMgr *stelMovementMgr = GETSTELMODULE(StelMovementMgr);
 
-		//check if cubemap requires redraw
-		if(qAbs(curTime-lastCubemapUpdate) > lazyInterval * StelCore::JD_SECOND || reinitCubemapping)
+		Vec3d viewDirection = core->getMovementMgr()->getViewDirectionJ2000();
+		Vec3d viewDirectionAltAz=core->j2000ToAltAz(viewDirection);
+		double alt, az;
+		StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
+
+		//if we were moving in the last update
+		bool wasMoving = moveVector.lengthSquared()>0.0;
+
+		moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
+				( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
+				movement[2]);
+
+		//get current time
+		double curTime = core->getJDay();
+
+		if(lazyDrawing)
 		{
-			needsCubemapUpdate = true;
-			needsMovementEndUpdate = false;
-		}
-		else if (moveVector.lengthSquared() > 0.0 )
-		{
-			if(updateOnlyDominantOnMoving)
-			{
-				needsMovementUpdate = true;
-				needsMovementEndUpdate = true;
-				needsCubemapUpdate = false;
-			}
-			else
+			needsMovementUpdate = false;
+
+			//check if cubemap requires redraw
+			if(qAbs(curTime-lastCubemapUpdate) > lazyInterval * StelCore::JD_SECOND || reinitCubemapping)
 			{
 				needsCubemapUpdate = true;
 				needsMovementEndUpdate = false;
+			}
+			else if (moveVector.lengthSquared() > 0.0 )
+			{
+				if(updateOnlyDominantOnMoving)
+				{
+					needsMovementUpdate = true;
+					needsMovementEndUpdate = true;
+					needsCubemapUpdate = false;
+				}
+				else
+				{
+					needsCubemapUpdate = true;
+					needsMovementEndUpdate = false;
+				}
+			}
+			else
+			{
+				if(wasMoving)
+					lastMovementEndRealTime = QDateTime::currentMSecsSinceEpoch();
+
+				if(needsMovementEndUpdate && (QDateTime::currentMSecsSinceEpoch() - lastMovementEndRealTime)  > 700)
+				{
+					//if the last movement was some time ago, update the whole cubemap
+					needsCubemapUpdate = true;
+					needsMovementEndUpdate = false;
+				}
+				else
+					needsCubemapUpdate = false;
 			}
 		}
 		else
 		{
-			if(wasMoving)
-				lastMovementEndRealTime = QDateTime::currentMSecsSinceEpoch();
-
-			if(needsMovementEndUpdate && (QDateTime::currentMSecsSinceEpoch() - lastMovementEndRealTime)  > 700)
-			{
-				//if the last movement was some time ago, update the whole cubemap
-				needsCubemapUpdate = true;
-				needsMovementEndUpdate = false;
-			}
-			else
-				needsCubemapUpdate = false;
+			needsCubemapUpdate = true;
 		}
-	}
-	else
-	{
-		needsCubemapUpdate = true;
-	}
 
-	moveVector *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
+		moveVector *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
-	//Bring move into world-grid space
-	currentScene.zRotateMatrix.transfo(moveVector);
+		//Bring move into world-grid space
+		currentScene.zRotateMatrix.transfo(moveVector);
 
-	absolutePosition.v[0] += moveVector.v[0];
-	absolutePosition.v[1] += moveVector.v[1];
-	eye_height -= moveVector.v[2];
-	absolutePosition.v[2] = -groundHeight()-eye_height;
+		absolutePosition.v[0] += moveVector.v[0];
+		absolutePosition.v[1] += moveVector.v[1];
+		eye_height -= moveVector.v[2];
+		absolutePosition.v[2] = -groundHeight()-eye_height;
 
 
-	//View Up in our case always pointing positive up
-	mainViewUp.v[0] = 0;
-	mainViewUp.v[1] = 0;
-	mainViewUp.v[2] = 1;
+		//View Up in our case always pointing positive up
+		mainViewUp.v[0] = 0;
+		mainViewUp.v[1] = 0;
+		mainViewUp.v[2] = 1;
 
 
-	viewPos = -absolutePosition;
+		viewPos = -absolutePosition;
 
-	//View Direction
-	mainViewDir = core->getMovementMgr()->getViewDirectionJ2000();
-	mainViewDir = core->j2000ToAltAz(mainViewDir);
+		//View Direction
+		mainViewDir = core->getMovementMgr()->getViewDirectionJ2000();
+		mainViewDir = core->j2000ToAltAz(mainViewDir);
 
-	//find cubemap face this vector points at
-	//only consider horizontal plane (XY)
-	dominantFace = qAbs(mainViewDir.v[0])<qAbs(mainViewDir.v[1]);
-	secondDominantFace = !dominantFace;
+		//find cubemap face this vector points at
+		//only consider horizontal plane (XY)
+		dominantFace = qAbs(mainViewDir.v[0])<qAbs(mainViewDir.v[1]);
+		secondDominantFace = !dominantFace;
 
-	//uncomment this to also consider up/down faces
-	/*
+		//uncomment this to also consider up/down faces
+		/*
 	double max = qAbs(viewDir.v[dominantFace]);
 	if(qAbs(viewDir.v[2])>max)
 	{
@@ -481,19 +479,19 @@ void Scenery3d::update(double deltaTime)
 	}
 	*/
 
-	//check sign
-	dominantFace = dominantFace*2 + (mainViewDir.v[dominantFace]<0.0);
-	secondDominantFace = secondDominantFace*2 + (mainViewDir.v[secondDominantFace]<0.0);
-    }
+		//check sign
+		dominantFace = dominantFace*2 + (mainViewDir.v[dominantFace]<0.0);
+		secondDominantFace = secondDominantFace*2 + (mainViewDir.v[secondDominantFace]<0.0);
+	}
 }
 
 float Scenery3d::groundHeight()
 {
-    if (heightmap == NULL) {
-	return currentScene.groundNullHeight;
-    } else {
-	return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
-    }
+	if (heightmap == NULL) {
+		return currentScene.groundNullHeight;
+	} else {
+		return heightmap->getHeight(-absolutePosition.v[0],-absolutePosition.v[1]);
+	}
 }
 
 void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
@@ -534,12 +532,12 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 			//the distance needs to be in the final clip space, not in eye space (or it would be a clipping sphere instead of a plane!)
 			splitData.v[i] = 0.5f*(-zVal * projectionMatrix.constData()[10] + projectionMatrix.constData()[14])/zVal + 0.5f;
 
-		    //Bind current depth map texture
-		    glActiveTexture(GL_TEXTURE4+i);
-		    glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
+			//Bind current depth map texture
+			glActiveTexture(GL_TEXTURE4+i);
+			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
-		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 4+i);
-		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_MAT_SHADOW0+i), shadowCPM.at(i));
+			SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 4+i);
+			SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_MAT_SHADOW0+i), shadowCPM.at(i));
 		}
 
 		//Send squared splits to the shader
@@ -679,7 +677,7 @@ bool Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 			if(!newShader)
 			{
 				//shader invalid, can't draw
-				parent->showMessage(N_("Scenery3d shader error, can't draw. Check debug output for details."));
+				parent->showMessage(q_("Scenery3d shader error, can't draw. Check debug output for details."));
 				success = false;
 				break;
 			}
@@ -804,142 +802,142 @@ void Scenery3d::computeFrustumSplits(const Vec3d viewPos, const Vec3d viewDir, c
 
 void Scenery3d::computePolyhedron(Polyhedron& body,const Frustum& frustum,const Vec3f& shadowDir)
 {
-    //Building a convex body for directional lights according to Wimmer et al. 2006
+	//Building a convex body for directional lights according to Wimmer et al. 2006
 
 
-    //Add the Frustum to begin with
-    body.add(frustum);
-    //Intersect with the scene AABB
-    body.intersect(sceneBoundingBox);
-    //Extrude towards light direction
-    body.extrude(shadowDir, sceneBoundingBox);
+	//Add the Frustum to begin with
+	body.add(frustum);
+	//Intersect with the scene AABB
+	body.intersect(sceneBoundingBox);
+	//Extrude towards light direction
+	body.extrude(shadowDir, sceneBoundingBox);
 }
 
 void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,float& orthoNear,float& orthoFar)
 {
-    //Focus the light first on the entire scene
-    float maxZ = -std::numeric_limits<float>::max();
-    float minZ = std::numeric_limits<float>::max();
-    orthoExtent = 0.0f;
+	//Focus the light first on the entire scene
+	float maxZ = -std::numeric_limits<float>::max();
+	float minZ = std::numeric_limits<float>::max();
+	orthoExtent = 0.0f;
 
-    Vec3f eye = shadowDir;
-    Vec3f vDir = -eye;
-    vDir.normalize();
-    Vec3f up = Vec3f(0.0f, 0.0f, 1.0f);
-    Vec3f down = -up;
-    Vec3f left = vDir^up;
-    left.normalize();
-    Vec3f right = -left;
+	Vec3f eye = shadowDir;
+	Vec3f vDir = -eye;
+	vDir.normalize();
+	Vec3f up = Vec3f(0.0f, 0.0f, 1.0f);
+	Vec3f down = -up;
+	Vec3f left = vDir^up;
+	left.normalize();
+	Vec3f right = -left;
 
-    for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
-    {
-	Vec3f v = sceneBoundingBox.getCorner(static_cast<AABB::Corner>(i));
-	Vec3f toCam = v - eye;
+	for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
+	{
+		Vec3f v = sceneBoundingBox.getCorner(static_cast<AABB::Corner>(i));
+		Vec3f toCam = v - eye;
 
-	float dist = toCam.dot(vDir);
-	maxZ = std::max(dist, maxZ);
-	minZ = std::min(dist, minZ);
+		float dist = toCam.dot(vDir);
+		maxZ = std::max(dist, maxZ);
+		minZ = std::min(dist, minZ);
 
-	orthoExtent = std::max(std::abs(toCam.dot(left)), orthoExtent);
-	orthoExtent = std::max(std::abs(toCam.dot(right)), orthoExtent);
-	orthoExtent = std::max(std::abs(toCam.dot(up)), orthoExtent);
-	orthoExtent = std::max(std::abs(toCam.dot(down)), orthoExtent);
-    }
+		orthoExtent = std::max(std::abs(toCam.dot(left)), orthoExtent);
+		orthoExtent = std::max(std::abs(toCam.dot(right)), orthoExtent);
+		orthoExtent = std::max(std::abs(toCam.dot(up)), orthoExtent);
+		orthoExtent = std::max(std::abs(toCam.dot(down)), orthoExtent);
+	}
 
-    //Make sure planes arent too small
-    orthoNear = minZ;
-    orthoFar = maxZ;
-    //orthoNear = std::max(minZ, 0.01f);
-    //orthoFar = std::max(maxZ, orthoNear + 1.0f);
+	//Make sure planes arent too small
+	orthoNear = minZ;
+	orthoFar = maxZ;
+	//orthoNear = std::max(minZ, 0.01f);
+	//orthoFar = std::max(maxZ, orthoNear + 1.0f);
 }
 
 void Scenery3d::computeCropMatrix(QMatrix4x4& cropMatrix, QVector4D& orthoScale, Polyhedron& focusBody,const QMatrix4x4& lightProj, const QMatrix4x4& lightMVP)
 {
-    float maxX = -std::numeric_limits<float>::max();
-    float maxY = maxX;
-    float maxZ = maxX;
-    float minX = std::numeric_limits<float>::max();
-    float minY = minX;
-    float minZ = minX;
+	float maxX = -std::numeric_limits<float>::max();
+	float maxY = maxX;
+	float maxZ = maxX;
+	float minX = std::numeric_limits<float>::max();
+	float minY = minX;
+	float minZ = minX;
 
-    //Project the frustum into light space and find the boundaries
-    for(int i=0; i<focusBody.getVertCount(); i++)
-    {
-	const Vec3f tmp = focusBody.getVerts().at(i);
-	QVector4D transf4 = lightMVP*QVector4D(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
-	QVector3D transf = transf4.toVector3DAffine();
+	//Project the frustum into light space and find the boundaries
+	for(int i=0; i<focusBody.getVertCount(); i++)
+	{
+		const Vec3f tmp = focusBody.getVerts().at(i);
+		QVector4D transf4 = lightMVP*QVector4D(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+		QVector3D transf = transf4.toVector3DAffine();
 
-	if(transf.x() > maxX) maxX = transf.x();
-	if(transf.x() < minX) minX = transf.x();
-	if(transf.y() > maxY) maxY = transf.y();
-	if(transf.y() < minY) minY = transf.y();
-	if(transf.z() > maxZ) maxZ = transf.z();
-	if(transf.z() < minZ) minZ = transf.z();
-    }
+		if(transf.x() > maxX) maxX = transf.x();
+		if(transf.x() < minX) minX = transf.x();
+		if(transf.y() > maxY) maxY = transf.y();
+		if(transf.y() < minY) minY = transf.y();
+		if(transf.z() > maxZ) maxZ = transf.z();
+		if(transf.z() < minZ) minZ = transf.z();
+	}
 
-    //To avoid artifacts caused by far plane clipping, extend far plane by 5%
-    //or if cubemapping is used, set it to 1
-    if(!requiresCubemap  || fullCubemapShadows)
-    {
-	    float zRange = maxZ-minZ;
-	    maxZ = std::min(maxZ + zRange*0.05f, 1.0f);
-    }
-    else
-    {
-	    maxZ = 1.0f;
-    }
+	//To avoid artifacts caused by far plane clipping, extend far plane by 5%
+	//or if cubemapping is used, set it to 1
+	if(!requiresCubemap  || fullCubemapShadows)
+	{
+		float zRange = maxZ-minZ;
+		maxZ = std::min(maxZ + zRange*0.05f, 1.0f);
+	}
+	else
+	{
+		maxZ = 1.0f;
+	}
 
 
-    //minZ = std::max(minZ - zRange*0.05f, 0.0f);
+	//minZ = std::max(minZ - zRange*0.05f, 0.0f);
 
 #ifdef QT_DEBUG
-    AABB deb(Vec3f(minX,minY,minZ),Vec3f(maxX,maxY,maxZ));
-    focusBody.debugBox = deb.toBox();
-    focusBody.debugBox.transform(lightMVP.inverted());
+	AABB deb(Vec3f(minX,minY,minZ),Vec3f(maxX,maxY,maxZ));
+	focusBody.debugBox = deb.toBox();
+	focusBody.debugBox.transform(lightMVP.inverted());
 #endif
 
-    //Build the crop matrix and apply it to the light projection matrix
-    float scaleX = 2.0f/(maxX - minX);
-    float scaleY = 2.0f/(maxY - minY);
-    float scaleZ = 1.0f/(maxZ - minZ); //could also be 1, but this rescales the Z range to fit better
-    //float scaleZ = 1.0f;
+	//Build the crop matrix and apply it to the light projection matrix
+	float scaleX = 2.0f/(maxX - minX);
+	float scaleY = 2.0f/(maxY - minY);
+	float scaleZ = 1.0f/(maxZ - minZ); //could also be 1, but this rescales the Z range to fit better
+	//float scaleZ = 1.0f;
 
-    float offsetZ = -minZ * scaleZ;
-    //float offsetZ = 0.0f;
+	float offsetZ = -minZ * scaleZ;
+	//float offsetZ = 0.0f;
 
-    //Reducing swimming as specified in Practical cascaded shadow maps by Zhang et al.
-    const float quantizer = 64.0f;
-    scaleX = 1.0f/std::ceil(1.0f/scaleX*quantizer) * quantizer;
-    scaleY = 1.0f/std::ceil(1.0f/scaleY*quantizer) * quantizer;
+	//Reducing swimming as specified in Practical cascaded shadow maps by Zhang et al.
+	const float quantizer = 64.0f;
+	scaleX = 1.0f/std::ceil(1.0f/scaleX*quantizer) * quantizer;
+	scaleY = 1.0f/std::ceil(1.0f/scaleY*quantizer) * quantizer;
 
-    orthoScale = QVector4D(scaleX,scaleY,minZ,maxZ);
+	orthoScale = QVector4D(scaleX,scaleY,minZ,maxZ);
 
-    float offsetX = -0.5f*(maxX + minX)*scaleX;
-    float offsetY = -0.5f*(maxY + minY)*scaleY;
+	float offsetX = -0.5f*(maxX + minX)*scaleX;
+	float offsetY = -0.5f*(maxY + minY)*scaleY;
 
-    float halfTex = 0.5f*shadowmapSize;
-    offsetX = std::ceil(offsetX*halfTex)/halfTex;
-    offsetY = std::ceil(offsetY*halfTex)/halfTex;
+	float halfTex = 0.5f*shadowmapSize;
+	offsetX = std::ceil(offsetX*halfTex)/halfTex;
+	offsetY = std::ceil(offsetY*halfTex)/halfTex;
 
-    //Making the crop matrix
-    QMatrix4x4 crop(scaleX, 0.0f,   0.0f, offsetX,
-		    0.0f,   scaleY, 0.0f, offsetY,
-		    0.0f,   0.0f,   scaleZ, offsetZ,
-		    0.0f,   0.0f,   0.0f, 1.0f);
+	//Making the crop matrix
+	QMatrix4x4 crop(scaleX, 0.0f,   0.0f, offsetX,
+			0.0f,   scaleY, 0.0f, offsetY,
+			0.0f,   0.0f,   scaleZ, offsetZ,
+			0.0f,   0.0f,   0.0f, 1.0f);
 
-    //Crop the light projection matrix
-    projectionMatrix = crop * lightProj;
+	//Crop the light projection matrix
+	projectionMatrix = crop * lightProj;
 
-    //Calculate texture matrix for projection
-    //This matrix takes us from eye space to the light's clip space
-    //It is postmultiplied by the inverse of the current view matrix when specifying texgen
-    static const QMatrix4x4 biasMatrix(0.5f, 0.0f, 0.0f, 0.5f,
-				 0.0f, 0.5f, 0.0f, 0.5f,
-				 0.0f, 0.0f, 0.5f, 0.5f,
-				 0.0f, 0.0f, 0.0f, 1.0f);	//bias from [-1, 1] to [0, 1]
+	//Calculate texture matrix for projection
+	//This matrix takes us from eye space to the light's clip space
+	//It is postmultiplied by the inverse of the current view matrix when specifying texgen
+	static const QMatrix4x4 biasMatrix(0.5f, 0.0f, 0.0f, 0.5f,
+					   0.0f, 0.5f, 0.0f, 0.5f,
+					   0.0f, 0.0f, 0.5f, 0.5f,
+					   0.0f, 0.0f, 0.0f, 1.0f);	//bias from [-1, 1] to [0, 1]
 
-    //calc final matrix
-    cropMatrix = biasMatrix * projectionMatrix * modelViewMatrix;
+	//calc final matrix
+	cropMatrix = biasMatrix * projectionMatrix * modelViewMatrix;
 }
 
 void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, const Vec3d viewUp, const float fov, const float aspect)
@@ -953,49 +951,49 @@ void Scenery3d::adjustShadowFrustum(const Vec3d viewPos, const Vec3d viewDir, co
 	camFrustShadow.setCamInternals(fov,aspect,currentScene.camNearZ,currentScene.shadowFarZ);
 	camFrustShadow.calcFrustum(viewPos, viewDir, viewUp);
 
-    //Compute H = V intersect S according to Zhang et al.
-    Polyhedron p;
-    p.add(camFrustShadow);
-    p.intersect(sceneBoundingBox);
-    p.makeUniqueVerts();
+	//Compute H = V intersect S according to Zhang et al.
+	Polyhedron p;
+	p.add(camFrustShadow);
+	p.intersect(sceneBoundingBox);
+	p.makeUniqueVerts();
 
-    //Find the boundaries
-    float maxZ = -std::numeric_limits<float>::max();
-    float minZ = std::numeric_limits<float>::max();
+	//Find the boundaries
+	float maxZ = -std::numeric_limits<float>::max();
+	float minZ = std::numeric_limits<float>::max();
 
-    Vec3f eye = viewPos.toVec3f();
+	Vec3f eye = viewPos.toVec3f();
 
-    Vec3f vDir = viewDir.toVec3f();
-    vDir.normalize();
+	Vec3f vDir = viewDir.toVec3f();
+	vDir.normalize();
 
-    const QVector<Vec3f> &verts = p.getVerts();
-    for(int i=0; i<p.getVertCount(); i++)
-    {
-	//Find the distance to the camera
-	Vec3f v = verts[i];
-	Vec3f toCam = v - eye;
-	float dist = toCam.dot(vDir);
+	const QVector<Vec3f> &verts = p.getVerts();
+	for(int i=0; i<p.getVertCount(); i++)
+	{
+		//Find the distance to the camera
+		Vec3f v = verts[i];
+		Vec3f toCam = v - eye;
+		float dist = toCam.dot(vDir);
 
-	maxZ = std::max(dist, maxZ);
-	minZ = std::min(dist, minZ);
-    }
+		maxZ = std::max(dist, maxZ);
+		minZ = std::min(dist, minZ);
+	}
 
-    //Setup the newly found near and far planes but make sure they're not too small
-    //minZ = std::max(minZ, 0.01f);
-    //maxZ = std::max(maxZ, minZ+1.0f);
+	//Setup the newly found near and far planes but make sure they're not too small
+	//minZ = std::max(minZ, 0.01f);
+	//maxZ = std::max(maxZ, minZ+1.0f);
 
-    //save adjusted values and recalc combined frustum for debugging
-    camFrustShadow.setCamInternals(fov,aspect,minZ,maxZ);
-    camFrustShadow.calcFrustum(viewPos,viewDir,viewUp);
+	//save adjusted values and recalc combined frustum for debugging
+	camFrustShadow.setCamInternals(fov,aspect,minZ,maxZ);
+	camFrustShadow.calcFrustum(viewPos,viewDir,viewUp);
 
-    //Re-set the subfrusta
-    for(int i=0; i<shaderParameters.frustumSplits; i++)
-    {
-	frustumArray[i].setCamInternals(fov, aspect, minZ, maxZ);
-    }
+	//Re-set the subfrusta
+	for(int i=0; i<shaderParameters.frustumSplits; i++)
+	{
+		frustumArray[i].setCamInternals(fov, aspect, minZ, maxZ);
+	}
 
-    //Compute and set z-distances for each split
-    computeFrustumSplits(viewPos,viewDir,viewUp);
+	//Compute and set z-distances for each split
+	computeFrustumSplits(viewPos,viewDir,viewUp);
 }
 
 void Scenery3d::calculateShadowCaster()
@@ -1144,128 +1142,128 @@ void Scenery3d::calculateLighting()
 
 Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition, float &emissiveFactor)
 {
-    Vec3d sunPosition = sun->getAltAzPosAuto(core);
-    sunPosition.normalize();
-    Vec3d moonPosition = moon->getAltAzPosAuto(core);
-    float moonPhaseAngle = moon->getPhase(core->getObserverHeliocentricEclipticPos());
-    moonPosition.normalize();
-    Vec3d venusPosition = venus->getAltAzPosAuto(core);
-    float venusPhaseAngle = venus->getPhase(core->getObserverHeliocentricEclipticPos());
-    venusPosition.normalize();
+	Vec3d sunPosition = sun->getAltAzPosAuto(core);
+	sunPosition.normalize();
+	Vec3d moonPosition = moon->getAltAzPosAuto(core);
+	float moonPhaseAngle = moon->getPhase(core->getObserverHeliocentricEclipticPos());
+	moonPosition.normalize();
+	Vec3d venusPosition = venus->getAltAzPosAuto(core);
+	float venusPhaseAngle = venus->getPhase(core->getObserverHeliocentricEclipticPos());
+	venusPosition.normalize();
 
-    // The light model here: ambient light consists of solar twilight and day ambient,
-    // plus lunar ambient, plus a base constant AMBIENT_BRIGHTNESS_FACTOR[0.1?],
-    // plus an artificial "torch" that can be toggled via Ctrl-L[ight].
-    // We define the ambient solar brightness zero when the sun is 18 degrees below the horizon, and lift the sun by 18 deg.
-    // ambient brightness component of the sun is then  MIN(0.3, sin(sun)+0.3)
-    // With the sun above the horizon, we raise only the directional component.
-    // ambient brightness component of the moon is sqrt(sin(alt_moon)*(cos(moon.phase_angle)+1)/2)*LUNAR_BRIGHTNESS_FACTOR[0.2?]
-    // Directional brightness factor: sqrt(sin(alt_sun)) if sin(alt_sun)>0 --> NO: MIN(0.7, sin(sun)+0.1), i.e. sun 6 degrees higher.
-    //                                sqrt(sin(alt_moon)*(cos(moon.phase_angle)+1)/2)*LUNAR_BRIGHTNESS_FACTOR if sin(alt_moon)>0
-    //                                sqrt(sin(alt_venus)*(cos(venus.phase_angle)+1)/2)*VENUS_BRIGHTNESS_FACTOR[0.15?]
-    // Note the sqrt(sin(alt))-terms: they are to increase brightness sooner than with the Lambert law.
-    //float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
-    //float sinMoonAngleRad = moonPosition[2];
+	// The light model here: ambient light consists of solar twilight and day ambient,
+	// plus lunar ambient, plus a base constant AMBIENT_BRIGHTNESS_FACTOR[0.1?],
+	// plus an artificial "torch" that can be toggled via Ctrl-L[ight].
+	// We define the ambient solar brightness zero when the sun is 18 degrees below the horizon, and lift the sun by 18 deg.
+	// ambient brightness component of the sun is then  MIN(0.3, sin(sun)+0.3)
+	// With the sun above the horizon, we raise only the directional component.
+	// ambient brightness component of the moon is sqrt(sin(alt_moon)*(cos(moon.phase_angle)+1)/2)*LUNAR_BRIGHTNESS_FACTOR[0.2?]
+	// Directional brightness factor: sqrt(sin(alt_sun)) if sin(alt_sun)>0 --> NO: MIN(0.7, sin(sun)+0.1), i.e. sun 6 degrees higher.
+	//                                sqrt(sin(alt_moon)*(cos(moon.phase_angle)+1)/2)*LUNAR_BRIGHTNESS_FACTOR if sin(alt_moon)>0
+	//                                sqrt(sin(alt_venus)*(cos(venus.phase_angle)+1)/2)*VENUS_BRIGHTNESS_FACTOR[0.15?]
+	// Note the sqrt(sin(alt))-terms: they are to increase brightness sooner than with the Lambert law.
+	//float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
+	//float sinMoonAngleRad = moonPosition[2];
 
-    float sinSunAngle  = sunPosition[2];
-    float sinMoonAngle = moonPosition[2];
-    float sinVenusAngle = venusPosition[2];
+	float sinSunAngle  = sunPosition[2];
+	float sinMoonAngle = moonPosition[2];
+	float sinVenusAngle = venusPosition[2];
 
-    //set the minimum ambient brightness
-    //this uses the LandscapeMgr values
-    Landscape* l = landscapeMgr->getCurrentLandscape();
-    if (landscapeMgr->getFlagLandscapeUseMinimalBrightness())
-    {
-	    // Setting from landscape.ini has priority if enabled
-	    if (landscapeMgr->getFlagLandscapeSetsMinimalBrightness() && l && l->getLandscapeMinimalBrightness()>=0)
-		    ambientBrightness = l->getLandscapeMinimalBrightness();
-	    else
-		    ambientBrightness = landscapeMgr->getDefaultMinimalBrightness();
-    }
-    else
-    {
-	    ambientBrightness = 0.0f;
-    }
+	//set the minimum ambient brightness
+	//this uses the LandscapeMgr values
+	Landscape* l = landscapeMgr->getCurrentLandscape();
+	if (landscapeMgr->getFlagLandscapeUseMinimalBrightness())
+	{
+		// Setting from landscape.ini has priority if enabled
+		if (landscapeMgr->getFlagLandscapeSetsMinimalBrightness() && l && l->getLandscapeMinimalBrightness()>=0)
+			ambientBrightness = l->getLandscapeMinimalBrightness();
+		else
+			ambientBrightness = landscapeMgr->getDefaultMinimalBrightness();
+	}
+	else
+	{
+		ambientBrightness = 0.0f;
+	}
 
-    directionalBrightness=0.0f;
-    ShadowCaster shadowcaster = None;
-    // DEBUG AIDS: Helper strings to be displayed
-    //TODO move these string manipulations to drawDebug, it is a bit dumb to do this every frame, even if not needed
-    QString sunAmbientString;
-    QString moonAmbientString;
-    QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
-    QString directionalSourceString;
+	directionalBrightness=0.0f;
+	ShadowCaster shadowcaster = None;
+	// DEBUG AIDS: Helper strings to be displayed
+	//TODO move these string manipulations to drawDebug, it is a bit dumb to do this every frame, even if not needed
+	QString sunAmbientString;
+	QString moonAmbientString;
+	QString backgroundAmbientString=QString("%1").arg(ambientBrightness, 6, 'f', 4);
+	QString directionalSourceString;
 
-    //assume light=sun for a start.
-    Vec3d lightPosition = sunPosition;
-    directionalSourceString="(Sun, below horiz.)";
+	//assume light=sun for a start.
+	Vec3d lightPosition = sunPosition;
+	directionalSourceString="(Sun, below horiz.)";
 
-    //calculate emissive factor
-    if(l!=NULL)
-    {
-	    if(requiresCubemap && lazyDrawing)
-	    {
-		    emissiveFactor = l->getTargetLightscapeBrightness();
-	    }
-	    else
-	    {
-		    //use an interpolated value for smooth fade in/out
-		    emissiveFactor = l->getEffectiveLightscapeBrightness();
-	    }
-    }
-    else
-    {
-	    // I don't know if this can ever happen, but in this case,
-	    // directly use the same model as LandscapeMgr::update uses for the lightscapeBrightness
-	    emissiveFactor = 0.0f;
-	    if (sunPosition[2]<-0.14f) emissiveFactor=1.0f;
-	    else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14)/(-0.05+0.14);
-    }
+	//calculate emissive factor
+	if(l!=NULL)
+	{
+		if(requiresCubemap && lazyDrawing)
+		{
+			emissiveFactor = l->getTargetLightscapeBrightness();
+		}
+		else
+		{
+			//use an interpolated value for smooth fade in/out
+			emissiveFactor = l->getEffectiveLightscapeBrightness();
+		}
+	}
+	else
+	{
+		// I don't know if this can ever happen, but in this case,
+		// directly use the same model as LandscapeMgr::update uses for the lightscapeBrightness
+		emissiveFactor = 0.0f;
+		if (sunPosition[2]<-0.14f) emissiveFactor=1.0f;
+		else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14)/(-0.05+0.14);
+	}
 
-    // calculate ambient light
-    if(sinSunAngle > -0.3f) // sun above -18 deg?
-    {
-	ambientBrightness += qMin(0.3f, sinSunAngle+0.3f);
-	sunAmbientString=QString("%1").arg(qMin(0.3f, sinSunAngle+0.3f), 6, 'f', 4);
-    }
-    else
-	sunAmbientString=QString("0.0");
+	// calculate ambient light
+	if(sinSunAngle > -0.3f) // sun above -18 deg?
+	{
+		ambientBrightness += qMin(0.3f, sinSunAngle+0.3f);
+		sunAmbientString=QString("%1").arg(qMin(0.3f, sinSunAngle+0.3f), 6, 'f', 4);
+	}
+	else
+		sunAmbientString=QString("0.0");
 
-    if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
-    {
-	ambientBrightness += sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
-	moonAmbientString=QString("%1").arg(sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR);
-    }
-    else
-	moonAmbientString=QString("0.0");
+	if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
+	{
+		ambientBrightness += sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
+		moonAmbientString=QString("%1").arg(sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR);
+	}
+	else
+		moonAmbientString=QString("0.0");
 
-    // Now find shadow caster + directional light, if any:
-    if (sinSunAngle>-0.1f)
-    {
-	directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f)); // limit to 0.7 in order to keep total below 1.
-	//redundant
-	//lightPosition = sunPosition;
-	if (shaderParameters.shadows) shadowcaster = Sun;
-	directionalSourceString="Sun";
-    }
- /*   else if (sinSunAngle> -0.3f) // sun above -18: create shadowless directional pseudo-light from solar azimuth
+	// Now find shadow caster + directional light, if any:
+	if (sinSunAngle>-0.1f)
+	{
+		directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f)); // limit to 0.7 in order to keep total below 1.
+		//redundant
+		//lightPosition = sunPosition;
+		if (shaderParameters.shadows) shadowcaster = Sun;
+		directionalSourceString="Sun";
+	}
+	/*   else if (sinSunAngle> -0.3f) // sun above -18: create shadowless directional pseudo-light from solar azimuth
     {
 	directionalBrightness=qMin(0.7, sinSunAngle+0.3); // limit to 0.7 in order to keep total below 1.
 	lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sinSunAngle+0.3);
 	directionalSourceString="(Sun, below hor.)";
     }*/
-    // "else" is required now, else we have lunar shadow with sun above horizon...
-    else if (sinMoonAngle>0.0f)
-    {
-	    float moonBrightness = std::sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1.0f)/2.0f) * LUNAR_BRIGHTNESS_FACTOR;
-	    moonBrightness -= (ambientBrightness-0.05f)/2.0f;
-	    moonBrightness = qMax(0.0f,moonBrightness);
-	    if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-	    {
-		    //interpolate directional brightness between sun and moon
-		    float t = sinSunAngle/-0.1f;
-		    directionalBrightness = (1.0f-t) * directionalBrightness + t*moonBrightness;
-		    /*
+	// "else" is required now, else we have lunar shadow with sun above horizon...
+	else if (sinMoonAngle>0.0f)
+	{
+		float moonBrightness = std::sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1.0f)/2.0f) * LUNAR_BRIGHTNESS_FACTOR;
+		moonBrightness -= (ambientBrightness-0.05f)/2.0f;
+		moonBrightness = qMax(0.0f,moonBrightness);
+		if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
+		{
+			//interpolate directional brightness between sun and moon
+			float t = sinSunAngle/-0.1f;
+			directionalBrightness = (1.0f-t) * directionalBrightness + t*moonBrightness;
+			/*
 		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
 		    //but that does not seem to have much of an effect
 		    if(moonBrightness>0)
@@ -1274,29 +1272,29 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 			    lightPosition.normalize();
 		    }
 		    */
-	    }
-	    else if (moonBrightness >0)
-	    {
-		    directionalBrightness = moonBrightness;
-		    lightPosition = moonPosition;
-		    if (shaderParameters.shadows) shadowcaster = Moon;
-		    directionalSourceString="Moon";
-	    } else directionalSourceString="Moon";
-	    //Alternately, construct a term around lunar brightness, like
-	    // directionalBrightness=(mag/-10)
-    }
-    else if (sinVenusAngle>0.0f)
-    {
-	    float venusBrightness = std::sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
-	    venusBrightness -= (ambientBrightness-0.05)/2.0f;
-	    venusBrightness = qMax(0.0f, venusBrightness);
+		}
+		else if (moonBrightness >0)
+		{
+			directionalBrightness = moonBrightness;
+			lightPosition = moonPosition;
+			if (shaderParameters.shadows) shadowcaster = Moon;
+			directionalSourceString="Moon";
+		} else directionalSourceString="Moon";
+		//Alternately, construct a term around lunar brightness, like
+		// directionalBrightness=(mag/-10)
+	}
+	else if (sinVenusAngle>0.0f)
+	{
+		float venusBrightness = std::sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
+		venusBrightness -= (ambientBrightness-0.05)/2.0f;
+		venusBrightness = qMax(0.0f, venusBrightness);
 
-	    if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-	    {
-		    //interpolate directional brightness between sun and venus
-		    float t = sinSunAngle/-0.1f;
-		    directionalBrightness = (1.0f-t) * directionalBrightness + t*venusBrightness;
-		    /*
+		if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
+		{
+			//interpolate directional brightness between sun and venus
+			float t = sinSunAngle/-0.1f;
+			directionalBrightness = (1.0f-t) * directionalBrightness + t*venusBrightness;
+			/*
 		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
 		    //but that does not seem to have much of an effect
 		    if(venusBrightness>0)
@@ -1305,61 +1303,61 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 			    lightPosition.normalize();
 		    }
 		    */
-	    }
-	    else if (venusBrightness > 0.0f)
-	    {
-		    directionalBrightness = venusBrightness;
-		    lightPosition = venusPosition;
-		    if (shaderParameters.shadows) shadowcaster = Venus;
-		    directionalSourceString="Venus";
-	    } else directionalSourceString="(Venus, flooded by ambient)";
-	    //Alternately, construct a term around Venus brightness, like
-	    // directionalBrightness=(mag/-100)
-    }
-    else if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-    {
-	    //let sunlight fall off to zero
-	    float t = sinSunAngle/-0.1f;
-	    directionalBrightness = (1.0f - t) * directionalBrightness;
-    }
+		}
+		else if (venusBrightness > 0.0f)
+		{
+			directionalBrightness = venusBrightness;
+			lightPosition = venusPosition;
+			if (shaderParameters.shadows) shadowcaster = Venus;
+			directionalSourceString="Venus";
+		} else directionalSourceString="(Venus, flooded by ambient)";
+		//Alternately, construct a term around Venus brightness, like
+		// directionalBrightness=(mag/-100)
+	}
+	else if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
+	{
+		//let sunlight fall off to zero
+		float t = sinSunAngle/-0.1f;
+		directionalBrightness = (1.0f - t) * directionalBrightness;
+	}
 
-    //convert to float
-    lightsourcePosition.set(lightPosition.v[0], lightPosition.v[1], lightPosition.v[2]);
+	//convert to float
+	lightsourcePosition.set(lightPosition.v[0], lightPosition.v[1], lightPosition.v[2]);
 
-    float landscapeOpacity = 0.0f;
+	float landscapeOpacity = 0.0f;
 
-    //check landscape occlusion, modify directional if needed
-    if(directionalBrightness>0)
-    {
-	    if(l)
-	    {
-		    //TODO the changes are currently rather harsh, find a better method (like angular distance of light source to horizon, or bitmap interpolation for the alpha values)
-		    landscapeOpacity = l->getOpacity(lightPosition);
+	//check landscape occlusion, modify directional if needed
+	if(directionalBrightness>0)
+	{
+		if(l)
+		{
+			//TODO the changes are currently rather harsh, find a better method (like angular distance of light source to horizon, or bitmap interpolation for the alpha values)
+			landscapeOpacity = l->getOpacity(lightPosition);
 
-		    //lerp between the determined opacity and 1.0, depending on landscape fade (visibility)
-		    float fadeValue = 1.0f + l->getEffectiveLandFadeValue() * (-landscapeOpacity);
-		    directionalBrightness *= fadeValue;
-	    }
-    }
+			//lerp between the determined opacity and 1.0, depending on landscape fade (visibility)
+			float fadeValue = 1.0f + l->getEffectiveLandFadeValue() * (-landscapeOpacity);
+			directionalBrightness *= fadeValue;
+		}
+	}
 
-    //TODO remove the string stuff from this method...
-    // DEBUG: Prepare output message
-    QString shadowCasterName;
-    switch (shadowcaster) {
-	case None:  shadowCasterName="None";  break;
-	case Sun:   shadowCasterName="Sun";   break;
-	case Moon:  shadowCasterName="Moon";  break;
-	case Venus: shadowCasterName="Venus"; break;
-	default: shadowCasterName="Error!!!";
-    }
-    lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
-		 .arg(ambientBrightness, 6, 'f', 4).arg(directionalBrightness, 6, 'f', 4)
-		 .arg(shadowCasterName).arg(lightsourcePosition.v[0], 6, 'f', 4)
-		 .arg(lightsourcePosition.v[1], 6, 'f', 4).arg(lightsourcePosition.v[2], 6, 'f', 4);
-    lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(sunAmbientString).arg(moonAmbientString).arg(backgroundAmbientString);
-    lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString).arg(emissiveFactor).arg(landscapeOpacity);
+	//TODO remove the string stuff from this method...
+	// DEBUG: Prepare output message
+	QString shadowCasterName;
+	switch (shadowcaster) {
+		case None:  shadowCasterName="None";  break;
+		case Sun:   shadowCasterName="Sun";   break;
+		case Moon:  shadowCasterName="Moon";  break;
+		case Venus: shadowCasterName="Venus"; break;
+		default: shadowCasterName="Error!!!";
+	}
+	lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
+			.arg(ambientBrightness, 6, 'f', 4).arg(directionalBrightness, 6, 'f', 4)
+			.arg(shadowCasterName).arg(lightsourcePosition.v[0], 6, 'f', 4)
+			.arg(lightsourcePosition.v[1], 6, 'f', 4).arg(lightsourcePosition.v[2], 6, 'f', 4);
+	lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(sunAmbientString).arg(moonAmbientString).arg(backgroundAmbientString);
+	lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4").arg(directionalBrightness, 6, 'f', 4).arg(directionalSourceString).arg(emissiveFactor).arg(landscapeOpacity);
 
-    return shadowcaster;
+	return shadowcaster;
 }
 
 void Scenery3d::calcCubeMVP()
@@ -2097,7 +2095,7 @@ bool Scenery3d::initCubemapping()
 	if(cubemapSize<=0)
 	{
 		qWarning()<<"[Scenery3d] Cubemapping not supported or disabled";
-		parent->showMessage(N_("Your hardware does not support cubemapping, please switch to 'Perspective' projection!"));
+		parent->showMessage(q_("Your hardware does not support cubemapping, please switch to 'Perspective' projection!"));
 		return false;
 	}
 
@@ -2106,7 +2104,7 @@ bool Scenery3d::initCubemapping()
 	//last compatibility check before possible crash
 	if( !isGeometryShaderCubemapSupported() && cubemappingMode == S3DEnum::CM_CUBEMAP_GSACCEL)
 	{
-		parent->showMessage(N_("Geometry shader is not supported. Falling back to '6 Textures' mode."));
+		parent->showMessage(q_("Geometry shader is not supported. Falling back to '6 Textures' mode."));
 		qWarning()<<"[Scenery3d] GS not supported, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
@@ -2116,7 +2114,7 @@ bool Scenery3d::initCubemapping()
 	if(isANGLEContext() && cubemappingMode >= S3DEnum::CM_CUBEMAP)
 	{
 		//Fall back to "6 Textures" mode
-		parent->showMessage(N_("Falling back to '6 Textures' because of ANGLE bug"));
+		parent->showMessage(q_("Falling back to '6 Textures' because of ANGLE bug"));
 		qWarning()<<"[Scenery3d] On ANGLE, fallback to '6 Textures'";
 		cubemappingMode = S3DEnum::CM_TEXTURES;
 	}
@@ -2637,7 +2635,7 @@ bool Scenery3d::initShadowmapping()
 	if(!valid)
 	{
 		deleteShadowmapping();
-		parent->showMessage(N_("Shadow mapping can not be used on your hardware, check logs for details"));
+		parent->showMessage(q_("Shadow mapping can not be used on your hardware, check logs for details"));
 	}
 	return valid;
 }

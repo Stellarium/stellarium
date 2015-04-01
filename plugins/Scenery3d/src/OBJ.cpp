@@ -157,62 +157,62 @@ void OBJ::setupGL()
 
 OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLBuffer::IndexBuffer)
 {
-    //Iinitialize this OBJ
-    m_loaded = false;
-    m_hasPositions = false;
-    m_hasNormals = false;
-    m_hasTextureCoords = false;
-    m_hasTangents = false;
+	//Iinitialize this OBJ
+	m_loaded = false;
+	m_hasPositions = false;
+	m_hasNormals = false;
+	m_hasTextureCoords = false;
+	m_hasTangents = false;
 
-    m_numberOfVertexCoords = 0;
-    m_numberOfTextureCoords = 0;
-    m_numberOfNormals = 0;
-    m_numberOfTriangles = 0;
-    m_numberOfMaterials = 0;
-    m_numberOfStelModels = 0;
+	m_numberOfVertexCoords = 0;
+	m_numberOfTextureCoords = 0;
+	m_numberOfNormals = 0;
+	m_numberOfTriangles = 0;
+	m_numberOfMaterials = 0;
+	m_numberOfStelModels = 0;
 
-    m_firstTransparentIndex = -1;
+	m_firstTransparentIndex = -1;
 
-    pBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
-    //the constructor does no GL stuff, so it is always safe even if VAOs are not supported
-    m_vertexArrayObject = new QOpenGLVertexArrayObject();
+	pBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
+	//the constructor does no GL stuff, so it is always safe even if VAOs are not supported
+	m_vertexArrayObject = new QOpenGLVertexArrayObject();
 }
 
 OBJ::~OBJ()
 {
-    clean();
-    delete m_vertexArrayObject;
+	clean();
+	delete m_vertexArrayObject;
 }
 
 void OBJ::clean()
 {
-    m_loaded = false;
-    m_hasPositions = false;
-    m_hasNormals = false;
-    m_hasTextureCoords = false;
-    m_hasTangents = false;
+	m_loaded = false;
+	m_hasPositions = false;
+	m_hasNormals = false;
+	m_hasTextureCoords = false;
+	m_hasTangents = false;
 
-    m_numberOfVertexCoords = 0;
-    m_numberOfTextureCoords = 0;
-    m_numberOfNormals = 0;
-    m_numberOfTriangles = 0;
-    m_numberOfMaterials = 0;
-    m_numberOfStelModels = 0;
+	m_numberOfVertexCoords = 0;
+	m_numberOfTextureCoords = 0;
+	m_numberOfNormals = 0;
+	m_numberOfTriangles = 0;
+	m_numberOfMaterials = 0;
+	m_numberOfStelModels = 0;
 
-    pBoundingBox.min = Vec3f(0.0f);
-    pBoundingBox.max = Vec3f(0.0f);
+	pBoundingBox.min = Vec3f(0.0f);
+	pBoundingBox.max = Vec3f(0.0f);
 
-    //note that the wrappers still remain usable, the opengl objs are recreated automatically
-    m_vertexBuffer.destroy();
-    m_indexBuffer.destroy();
+	//note that the wrappers still remain usable, the opengl objs are recreated automatically
+	m_vertexBuffer.destroy();
+	m_indexBuffer.destroy();
 
-    if(vertexArraysSupported)
-	    m_vertexArrayObject->destroy();
+	if(vertexArraysSupported)
+		m_vertexArrayObject->destroy();
 
-    m_stelModels.clear();
-    m_materials.clear();
-    m_vertexArray.clear();
-    m_indexArray.clear();
+	m_stelModels.clear();
+	m_materials.clear();
+	m_vertexArray.clear();
+	m_indexArray.clear();
 }
 
 QFile* OBJ::getFile(const QString &filename)
@@ -345,127 +345,127 @@ void OBJ::addFaceAttrib(AttributeVector &attributeArray, uint index, int materia
 
 void OBJ::addTrianglePos(const PosVector &vertexCoords, VertCacheT& vertexCache, unsigned int index, int v0, int v1, int v2)
 {
-    Vertex vertex;
+	Vertex vertex;
 
-    //Add v0
-    vertex.position = vertexCoords[v0];
-    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
+	//Add v0
+	vertex.position = vertexCoords[v0];
+	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
-    //Add v1
-    vertex.position = vertexCoords[v1];
-    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
+	//Add v1
+	vertex.position = vertexCoords[v1];
+	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
-    //Add v2
-    vertex.position = vertexCoords[v2];
-    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
+	//Add v2
+	vertex.position = vertexCoords[v2];
+	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
 void OBJ::addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector &normals, VertCacheT& vertexCache,
 			       unsigned int index, int v0, int v1, int v2, int vn0, int vn1, int vn2)
 {
-    Vertex vertex;
+	Vertex vertex;
 
-    //Add v0//vn0
-    vertex.position = vertexCoords[v0];
-    vertex.normal = normals[vn0];
-    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
+	//Add v0//vn0
+	vertex.position = vertexCoords[v0];
+	vertex.normal = normals[vn0];
+	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
-    //Add v1//n1
-    vertex.position = vertexCoords[v1];
-    vertex.normal = normals[vn1];
-    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
+	//Add v1//n1
+	vertex.position = vertexCoords[v1];
+	vertex.normal = normals[vn1];
+	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
-    //Add v2//n2
-    vertex.position = vertexCoords[v2];
-    vertex.normal = normals[vn2];
-    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
+	//Add v2//n2
+	vertex.position = vertexCoords[v2];
+	vertex.normal = normals[vn2];
+	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
 void OBJ::addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, VertCacheT& vertexCache,
 				 unsigned int index, int v0, int v1, int v2, int vt0, int vt1, int vt2)
 {
-    Vertex vertex;
+	Vertex vertex;
 
-    //Add v0/vt0
-    vertex.position = vertexCoords[v0];
-    vertex.texCoord = textureCoords[vt0];
-    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
+	//Add v0/vt0
+	vertex.position = vertexCoords[v0];
+	vertex.texCoord = textureCoords[vt0];
+	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
-    //Add v1/vt1
-    vertex.position = vertexCoords[v1];
-    vertex.texCoord = textureCoords[vt1];
-    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
+	//Add v1/vt1
+	vertex.position = vertexCoords[v1];
+	vertex.texCoord = textureCoords[vt1];
+	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
-    //Add v2/vt2
-    vertex.position = vertexCoords[v2];
-    vertex.texCoord = textureCoords[vt2];
-    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
+	//Add v2/vt2
+	vertex.position = vertexCoords[v2];
+	vertex.texCoord = textureCoords[vt2];
+	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
 void OBJ::addTrianglePosTexCoordNormal(PosVector& vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, VertCacheT& vertexCache,
 				       unsigned int index, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
 {
-    Vertex vertex;
+	Vertex vertex;
 
-    //Add v0/vt0/vn0
-    vertex.position = vertexCoords[v0];
-    vertex.texCoord = textureCoords[vt0];
-    vertex.normal = normals[vn0];
-    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
+	//Add v0/vt0/vn0
+	vertex.position = vertexCoords[v0];
+	vertex.texCoord = textureCoords[vt0];
+	vertex.normal = normals[vn0];
+	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
-    //Add v1/vt1/vn1
-    vertex.position = vertexCoords[v1];
-    vertex.texCoord = textureCoords[vt1];
-    vertex.normal = normals[vn1];
-    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
+	//Add v1/vt1/vn1
+	vertex.position = vertexCoords[v1];
+	vertex.texCoord = textureCoords[vt1];
+	vertex.normal = normals[vn1];
+	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
-    //Add v2/vt2/vn2
-    vertex.position = vertexCoords[v2];
-    vertex.texCoord = textureCoords[vt2];
-    vertex.normal = normals[vn2];
-    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
+	//Add v2/vt2/vn2
+	vertex.position = vertexCoords[v2];
+	vertex.texCoord = textureCoords[vt2];
+	vertex.normal = normals[vn2];
+	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
 int OBJ::addVertex(VertCacheT& vertexCache, int hash, const Vertex *pVertex)
 {
-    unsigned int index = -1;
-    QMap<int,QVector<int> >::const_iterator iter = vertexCache.find(hash);
+	unsigned int index = -1;
+	QMap<int,QVector<int> >::const_iterator iter = vertexCache.find(hash);
 
-    if (iter == vertexCache.end())
-    {
-	// Vertex hash doesn't exist in the cache.
-	index = static_cast<int>(m_vertexArray.size());
-	m_vertexArray.push_back(*pVertex);
-	vertexCache.insert(hash, QVector<int>(1, index));
-    }
-    else
-    {
-	// One or more vertices have been hashed to this entry in the cache.
-	const QVector<int> &vertices = iter.value();
-	const Vertex *pCachedVertex = 0;
-	bool found = false;
-
-	for (QVector<int>::const_iterator i = vertices.begin(); i != vertices.end(); ++i)
+	if (iter == vertexCache.end())
 	{
-	    index = *i;
-	    pCachedVertex = &m_vertexArray.at(index);
+		// Vertex hash doesn't exist in the cache.
+		index = static_cast<int>(m_vertexArray.size());
+		m_vertexArray.push_back(*pVertex);
+		vertexCache.insert(hash, QVector<int>(1, index));
+	}
+	else
+	{
+		// One or more vertices have been hashed to this entry in the cache.
+		const QVector<int> &vertices = iter.value();
+		const Vertex *pCachedVertex = 0;
+		bool found = false;
 
-	    if (memcmp(pCachedVertex, pVertex, sizeof(Vertex)) == 0)
-	    {
-		found = true;
-		break;
-	    }
+		for (QVector<int>::const_iterator i = vertices.begin(); i != vertices.end(); ++i)
+		{
+			index = *i;
+			pCachedVertex = &m_vertexArray.at(index);
+
+			if (memcmp(pCachedVertex, pVertex, sizeof(Vertex)) == 0)
+			{
+				found = true;
+				break;
+			}
+		}
+
+		if (!found)
+		{
+			index = static_cast<int>(m_vertexArray.size());
+			m_vertexArray.push_back(*pVertex);
+			vertexCache[hash].push_back(index);
+		}
 	}
 
-	if (!found)
-	{
-	    index = static_cast<int>(m_vertexArray.size());
-	    m_vertexArray.push_back(*pVertex);
-	    vertexCache[hash].push_back(index);
-	}
-    }
-
-    return index;
+	return index;
 }
 
 void OBJ::buildStelModels(const AttributeVector &attributeArray)
@@ -476,890 +476,888 @@ void OBJ::buildStelModels(const AttributeVector &attributeArray)
 	//One could recombine them afterwards, or sort the vertices by their material before calling this
 	//This would reduce material switching during rendering.
 
-    //Group model's triangles based on material
-    StelModel* pStelModel = 0;
-    int materialId = -1;
-    int objId = -1;
-    int numStelModels = 0;
+	//Group model's triangles based on material
+	StelModel* pStelModel = 0;
+	int materialId = -1;
+	int objId = -1;
+	int numStelModels = 0;
 
-    // Count the number of meshes.
-    for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
-    {
-	if (attributeArray[i].materialIndex != materialId)
+	// Count the number of meshes.
+	for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
 	{
-		//a change of material always requires a new model
-		objId = attributeArray[i].objectIndex;
-	    materialId = attributeArray[i].materialIndex;
-	    ++numStelModels;
-	}
-	else if (attributeArray[i].objectIndex != objId)
-	{
-		if(materialId>=0 && m_materials.at(materialId).hasTransparency)
+		if (attributeArray[i].materialIndex != materialId)
 		{
-			//if the obj index changes, we need a new stel model if the material is potentially transparent, otherwise it is ignored
-			//note that the stelmodel may get flagged as non-transparent later when texture information is available, but this poses no real problem
+			//a change of material always requires a new model
+			objId = attributeArray[i].objectIndex;
+			materialId = attributeArray[i].materialIndex;
 			++numStelModels;
 		}
-		objId = attributeArray[i].objectIndex;
+		else if (attributeArray[i].objectIndex != objId)
+		{
+			if(materialId>=0 && m_materials.at(materialId).hasTransparency)
+			{
+				//if the obj index changes, we need a new stel model if the material is potentially transparent, otherwise it is ignored
+				//note that the stelmodel may get flagged as non-transparent later when texture information is available, but this poses no real problem
+				++numStelModels;
+			}
+			objId = attributeArray[i].objectIndex;
+		}
 	}
-    }
 
-    // Allocate memory for the StelModel and reset counters.
-    m_numberOfStelModels = numStelModels;
-    m_stelModels.resize(m_numberOfStelModels);
-    numStelModels = 0;
-    materialId = -1;
-    objId = -1;
+	// Allocate memory for the StelModel and reset counters.
+	m_numberOfStelModels = numStelModels;
+	m_stelModels.resize(m_numberOfStelModels);
+	numStelModels = 0;
+	materialId = -1;
+	objId = -1;
 
-    // Build the StelModel. One StelModel for each unique material.
-    for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
-    {
-	if (attributeArray[i].materialIndex != materialId || //if a new material is used
-	(attributeArray[i].objectIndex != objId && materialId>=0 && m_materials.at(materialId).hasTransparency)) //or a new object is used, material being transparent
+	// Build the StelModel. One StelModel for each unique material.
+	for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
 	{
-	    materialId = attributeArray[i].materialIndex;
-	    objId = attributeArray[i].objectIndex;
+		if (attributeArray[i].materialIndex != materialId || //if a new material is used
+		   (attributeArray[i].objectIndex != objId && materialId>=0 && m_materials.at(materialId).hasTransparency)) //or a new object is used, material being transparent
+		{
+			materialId = attributeArray[i].materialIndex;
+			objId = attributeArray[i].objectIndex;
 
-	    pStelModel = &m_stelModels[numStelModels++];
+			pStelModel = &m_stelModels[numStelModels++];
 			pStelModel->triangleCount = 0;
-	    pStelModel->pMaterial = &m_materials[materialId];
-	    pStelModel->startIndex = i*3;
-	    ++pStelModel->triangleCount;
+			pStelModel->pMaterial = &m_materials[materialId];
+			pStelModel->startIndex = i*3;
+			++pStelModel->triangleCount;
+		}
+		else
+		{
+			++pStelModel->triangleCount;
+		}
 	}
-	else
-	{
-	    ++pStelModel->triangleCount;
-	}
-    }
 }
 
 void OBJ::generateNormals()
 {
-    const unsigned int *pTriangle = 0;
-    Vertex *pVertex0 = 0;
-    Vertex *pVertex1 = 0;
-    Vertex *pVertex2 = 0;
-    float edge1[3] = {0.0f, 0.0f, 0.0f};
-    float edge2[3] = {0.0f, 0.0f, 0.0f};
-    float normal[3] = {0.0f, 0.0f, 0.0f};
-    float length = 0.0f;
-    int totalVertices = getNumberOfVertices();
-    int totalTriangles = getNumberOfTriangles();
+	const unsigned int *pTriangle = 0;
+	Vertex *pVertex0 = 0;
+	Vertex *pVertex1 = 0;
+	Vertex *pVertex2 = 0;
+	float edge1[3] = {0.0f, 0.0f, 0.0f};
+	float edge2[3] = {0.0f, 0.0f, 0.0f};
+	float normal[3] = {0.0f, 0.0f, 0.0f};
+	float length = 0.0f;
+	int totalVertices = getNumberOfVertices();
+	int totalTriangles = getNumberOfTriangles();
 
-    // Initialize all the vertex normals.
-    for (int i=0; i<totalVertices; ++i)
-    {
-	pVertex0 = &m_vertexArray[i];
-	pVertex0->normal[0] = 0.0f;
-	pVertex0->normal[1] = 0.0f;
-	pVertex0->normal[2] = 0.0f;
-    }
+	// Initialize all the vertex normals.
+	for (int i=0; i<totalVertices; ++i)
+	{
+		pVertex0 = &m_vertexArray[i];
+		pVertex0->normal[0] = 0.0f;
+		pVertex0->normal[1] = 0.0f;
+		pVertex0->normal[2] = 0.0f;
+	}
 
-    // Calculate the vertex normals.
-    for (int i=0; i<totalTriangles; ++i)
-    {
-	pTriangle = &m_indexArray[i*3];
+	// Calculate the vertex normals.
+	for (int i=0; i<totalTriangles; ++i)
+	{
+		pTriangle = &m_indexArray[i*3];
 
-	pVertex0 = &m_vertexArray[pTriangle[0]];
-	pVertex1 = &m_vertexArray[pTriangle[1]];
-	pVertex2 = &m_vertexArray[pTriangle[2]];
+		pVertex0 = &m_vertexArray[pTriangle[0]];
+		pVertex1 = &m_vertexArray[pTriangle[1]];
+		pVertex2 = &m_vertexArray[pTriangle[2]];
 
-	// Calculate triangle face normal.
-	edge1[0] = static_cast<float>(pVertex1->position[0] - pVertex0->position[0]);
-	edge1[1] = static_cast<float>(pVertex1->position[1] - pVertex0->position[1]);
-	edge1[2] = static_cast<float>(pVertex1->position[2] - pVertex0->position[2]);
+		// Calculate triangle face normal.
+		edge1[0] = static_cast<float>(pVertex1->position[0] - pVertex0->position[0]);
+		edge1[1] = static_cast<float>(pVertex1->position[1] - pVertex0->position[1]);
+		edge1[2] = static_cast<float>(pVertex1->position[2] - pVertex0->position[2]);
 
-	edge2[0] = static_cast<float>(pVertex2->position[0] - pVertex0->position[0]);
-	edge2[1] = static_cast<float>(pVertex2->position[1] - pVertex0->position[1]);
-	edge2[2] = static_cast<float>(pVertex2->position[2] - pVertex0->position[2]);
+		edge2[0] = static_cast<float>(pVertex2->position[0] - pVertex0->position[0]);
+		edge2[1] = static_cast<float>(pVertex2->position[1] - pVertex0->position[1]);
+		edge2[2] = static_cast<float>(pVertex2->position[2] - pVertex0->position[2]);
 
-	normal[0] = (edge1[1]*edge2[2]) - (edge1[2]*edge2[1]);
-	normal[1] = (edge1[2]*edge2[0]) - (edge1[0]*edge2[2]);
-	normal[2] = (edge1[0]*edge2[1]) - (edge1[1]*edge2[0]);
+		normal[0] = (edge1[1]*edge2[2]) - (edge1[2]*edge2[1]);
+		normal[1] = (edge1[2]*edge2[0]) - (edge1[0]*edge2[2]);
+		normal[2] = (edge1[0]*edge2[1]) - (edge1[1]*edge2[0]);
 
-	// Accumulate the normals.
+		// Accumulate the normals.
 
-	pVertex0->normal[0] += normal[0];
-	pVertex0->normal[1] += normal[1];
-	pVertex0->normal[2] += normal[2];
+		pVertex0->normal[0] += normal[0];
+		pVertex0->normal[1] += normal[1];
+		pVertex0->normal[2] += normal[2];
 
-	pVertex1->normal[0] += normal[0];
-	pVertex1->normal[1] += normal[1];
-	pVertex1->normal[2] += normal[2];
+		pVertex1->normal[0] += normal[0];
+		pVertex1->normal[1] += normal[1];
+		pVertex1->normal[2] += normal[2];
 
-	pVertex2->normal[0] += normal[0];
-	pVertex2->normal[1] += normal[1];
-	pVertex2->normal[2] += normal[2];
-    }
+		pVertex2->normal[0] += normal[0];
+		pVertex2->normal[1] += normal[1];
+		pVertex2->normal[2] += normal[2];
+	}
 
-    // Normalize the vertex normals.
-    for (int i=0; i<totalVertices; ++i)
-    {
-	pVertex0 = &m_vertexArray[i];
+	// Normalize the vertex normals.
+	for (int i=0; i<totalVertices; ++i)
+	{
+		pVertex0 = &m_vertexArray[i];
 
-	length = 1.0f / sqrtf(pVertex0->normal[0]*pVertex0->normal[0] +
-			      pVertex0->normal[1]*pVertex0->normal[1] +
-			      pVertex0->normal[2]*pVertex0->normal[2]);
+		length = 1.0f / sqrtf(pVertex0->normal[0]*pVertex0->normal[0] +
+				      pVertex0->normal[1]*pVertex0->normal[1] +
+				      pVertex0->normal[2]*pVertex0->normal[2]);
 
-	pVertex0->normal[0] *= length;
-	pVertex0->normal[1] *= length;
-	pVertex0->normal[2] *= length;
-    }
+		pVertex0->normal[0] *= length;
+		pVertex0->normal[1] *= length;
+		pVertex0->normal[2] *= length;
+	}
 
-    m_hasNormals = true;
+	m_hasNormals = true;
 }
 
 void OBJ::generateTangents()
 {
-    const unsigned int *pTriangle = 0;
-    Vertex *pVertex0 = 0;
-    Vertex *pVertex1 = 0;
-    Vertex *pVertex2 = 0;
-    float edge1[3] = {0.0f, 0.0f, 0.0f};
-    float edge2[3] = {0.0f, 0.0f, 0.0f};
-    float texEdge1[2] = {0.0f, 0.0f};
-    float texEdge2[2] = {0.0f, 0.0f};
-    float tangent[3] = {0.0f, 0.0f, 0.0f};
-    float bitangent[3] = {0.0f, 0.0f, 0.0f};
-    float det = 0.0f;
-    float nDotT = 0.0f;
-    float bDotB = 0.0f;
-    float length = 0.0f;
-    int totalVertices = getNumberOfVertices();
-    int totalTriangles = getNumberOfTriangles();
+	const unsigned int *pTriangle = 0;
+	Vertex *pVertex0 = 0;
+	Vertex *pVertex1 = 0;
+	Vertex *pVertex2 = 0;
+	float edge1[3] = {0.0f, 0.0f, 0.0f};
+	float edge2[3] = {0.0f, 0.0f, 0.0f};
+	float texEdge1[2] = {0.0f, 0.0f};
+	float texEdge2[2] = {0.0f, 0.0f};
+	float tangent[3] = {0.0f, 0.0f, 0.0f};
+	float bitangent[3] = {0.0f, 0.0f, 0.0f};
+	float det = 0.0f;
+	float nDotT = 0.0f;
+	float bDotB = 0.0f;
+	float length = 0.0f;
+	int totalVertices = getNumberOfVertices();
+	int totalTriangles = getNumberOfTriangles();
 
-    // Initialize all the vertex tangents and bitangents.
-    for (int i=0; i<totalVertices; ++i)
-    {
-	pVertex0 = &m_vertexArray[i];
-
-	pVertex0->tangent[0] = 0.0f;
-	pVertex0->tangent[1] = 0.0f;
-	pVertex0->tangent[2] = 0.0f;
-	pVertex0->tangent[3] = 0.0f;
-
-	pVertex0->bitangent[0] = 0.0f;
-	pVertex0->bitangent[1] = 0.0f;
-	pVertex0->bitangent[2] = 0.0f;
-    }
-
-    // Calculate the vertex tangents and bitangents.
-    for (int i=0; i<totalTriangles; ++i)
-    {
-	pTriangle = &m_indexArray[i*3];
-
-	pVertex0 = &m_vertexArray[pTriangle[0]];
-	pVertex1 = &m_vertexArray[pTriangle[1]];
-	pVertex2 = &m_vertexArray[pTriangle[2]];
-
-	// Calculate the triangle face tangent and bitangent.
-
-	edge1[0] = static_cast<float>(pVertex1->position[0] - pVertex0->position[0]);
-	edge1[1] = static_cast<float>(pVertex1->position[1] - pVertex0->position[1]);
-	edge1[2] = static_cast<float>(pVertex1->position[2] - pVertex0->position[2]);
-
-	edge2[0] = static_cast<float>(pVertex2->position[0] - pVertex0->position[0]);
-	edge2[1] = static_cast<float>(pVertex2->position[1] - pVertex0->position[1]);
-	edge2[2] = static_cast<float>(pVertex2->position[2] - pVertex0->position[2]);
-
-	texEdge1[0] = pVertex1->texCoord[0] - pVertex0->texCoord[0];
-	texEdge1[1] = pVertex1->texCoord[1] - pVertex0->texCoord[1];
-
-	texEdge2[0] = pVertex2->texCoord[0] - pVertex0->texCoord[0];
-	texEdge2[1] = pVertex2->texCoord[1] - pVertex0->texCoord[1];
-
-	det = texEdge1[0]*texEdge2[1] - texEdge2[0]*texEdge1[1];
-
-	if (fabs(det) < 1e-6f)
+	// Initialize all the vertex tangents and bitangents.
+	for (int i=0; i<totalVertices; ++i)
 	{
-	    tangent[0] = 1.0f;
-	    tangent[1] = 0.0f;
-	    tangent[2] = 0.0f;
+		pVertex0 = &m_vertexArray[i];
 
-	    bitangent[0] = 0.0f;
-	    bitangent[1] = 1.0f;
-	    bitangent[2] = 0.0f;
-	}
-	else
-	{
-	    det = 1.0f / det;
+		pVertex0->tangent[0] = 0.0f;
+		pVertex0->tangent[1] = 0.0f;
+		pVertex0->tangent[2] = 0.0f;
+		pVertex0->tangent[3] = 0.0f;
 
-	    tangent[0] = (texEdge2[1]*edge1[0] - texEdge1[1]*edge2[0])*det;
-	    tangent[1] = (texEdge2[1]*edge1[1] - texEdge1[1]*edge2[1])*det;
-	    tangent[2] = (texEdge2[1]*edge1[2] - texEdge1[1]*edge2[2])*det;
-
-	    bitangent[0] = (-texEdge2[0]*edge1[0] + texEdge1[0]*edge2[0])*det;
-	    bitangent[1] = (-texEdge2[0]*edge1[1] + texEdge1[0]*edge2[1])*det;
-	    bitangent[2] = (-texEdge2[0]*edge1[2] + texEdge1[0]*edge2[2])*det;
+		pVertex0->bitangent[0] = 0.0f;
+		pVertex0->bitangent[1] = 0.0f;
+		pVertex0->bitangent[2] = 0.0f;
 	}
 
-	// Accumulate the tangents and bitangents.
+	// Calculate the vertex tangents and bitangents.
+	for (int i=0; i<totalTriangles; ++i)
+	{
+		pTriangle = &m_indexArray[i*3];
 
-	pVertex0->tangent[0] += tangent[0];
-	pVertex0->tangent[1] += tangent[1];
-	pVertex0->tangent[2] += tangent[2];
-	pVertex0->bitangent[0] += bitangent[0];
-	pVertex0->bitangent[1] += bitangent[1];
-	pVertex0->bitangent[2] += bitangent[2];
+		pVertex0 = &m_vertexArray[pTriangle[0]];
+		pVertex1 = &m_vertexArray[pTriangle[1]];
+		pVertex2 = &m_vertexArray[pTriangle[2]];
 
-	pVertex1->tangent[0] += tangent[0];
-	pVertex1->tangent[1] += tangent[1];
-	pVertex1->tangent[2] += tangent[2];
-	pVertex1->bitangent[0] += bitangent[0];
-	pVertex1->bitangent[1] += bitangent[1];
-	pVertex1->bitangent[2] += bitangent[2];
+		// Calculate the triangle face tangent and bitangent.
 
-	pVertex2->tangent[0] += tangent[0];
-	pVertex2->tangent[1] += tangent[1];
-	pVertex2->tangent[2] += tangent[2];
-	pVertex2->bitangent[0] += bitangent[0];
-	pVertex2->bitangent[1] += bitangent[1];
-	pVertex2->bitangent[2] += bitangent[2];
-    }
+		edge1[0] = static_cast<float>(pVertex1->position[0] - pVertex0->position[0]);
+		edge1[1] = static_cast<float>(pVertex1->position[1] - pVertex0->position[1]);
+		edge1[2] = static_cast<float>(pVertex1->position[2] - pVertex0->position[2]);
 
-    // Orthogonalize and normalize the vertex tangents.
-    for (int i=0; i<totalVertices; ++i)
-    {
-	pVertex0 = &m_vertexArray[i];
+		edge2[0] = static_cast<float>(pVertex2->position[0] - pVertex0->position[0]);
+		edge2[1] = static_cast<float>(pVertex2->position[1] - pVertex0->position[1]);
+		edge2[2] = static_cast<float>(pVertex2->position[2] - pVertex0->position[2]);
 
-	// Gram-Schmidt orthogonalize tangent with normal.
+		texEdge1[0] = pVertex1->texCoord[0] - pVertex0->texCoord[0];
+		texEdge1[1] = pVertex1->texCoord[1] - pVertex0->texCoord[1];
 
-	nDotT = pVertex0->normal[0]*pVertex0->tangent[0] +
-		pVertex0->normal[1]*pVertex0->tangent[1] +
-		pVertex0->normal[2]*pVertex0->tangent[2];
+		texEdge2[0] = pVertex2->texCoord[0] - pVertex0->texCoord[0];
+		texEdge2[1] = pVertex2->texCoord[1] - pVertex0->texCoord[1];
 
-	pVertex0->tangent[0] -= pVertex0->normal[0]*nDotT;
-	pVertex0->tangent[1] -= pVertex0->normal[1]*nDotT;
-	pVertex0->tangent[2] -= pVertex0->normal[2]*nDotT;
+		det = texEdge1[0]*texEdge2[1] - texEdge2[0]*texEdge1[1];
 
-	// Normalize the tangent.
+		if (fabs(det) < 1e-6f)
+		{
+			tangent[0] = 1.0f;
+			tangent[1] = 0.0f;
+			tangent[2] = 0.0f;
 
-	length = 1.0f / sqrtf(pVertex0->tangent[0]*pVertex0->tangent[0] +
-			      pVertex0->tangent[1]*pVertex0->tangent[1] +
-			      pVertex0->tangent[2]*pVertex0->tangent[2]);
+			bitangent[0] = 0.0f;
+			bitangent[1] = 1.0f;
+			bitangent[2] = 0.0f;
+		}
+		else
+		{
+			det = 1.0f / det;
 
-	pVertex0->tangent[0] *= length;
-	pVertex0->tangent[1] *= length;
-	pVertex0->tangent[2] *= length;
+			tangent[0] = (texEdge2[1]*edge1[0] - texEdge1[1]*edge2[0])*det;
+			tangent[1] = (texEdge2[1]*edge1[1] - texEdge1[1]*edge2[1])*det;
+			tangent[2] = (texEdge2[1]*edge1[2] - texEdge1[1]*edge2[2])*det;
 
-	// Calculate the handedness of the local tangent space.
-	// The bitangent vector is the cross product between the triangle face
-	// normal vector and the calculated tangent vector. The resulting
-	// bitangent vector should be the same as the bitangent vector
-	// calculated from the set of linear equations above. If they point in
-	// different directions then we need to invert the cross product
-	// calculated bitangent vector. We store this scalar multiplier in the
-	// tangent vector's 'w' component so that the correct bitangent vector
-	// can be generated in the normal mapping shader's vertex shader.
-	//
-	// Normal maps have a left handed coordinate system with the origin
-	// located at the top left of the normal map texture. The x coordinates
-	// run horizontally from left to right. The y coordinates run
-	// vertically from top to bottom. The z coordinates run out of the
-	// normal map texture towards the viewer. Our handedness calculations
-	// must take this fact into account as well so that the normal mapping
-	// shader's vertex shader will generate the correct bitangent vectors.
-	// Some normal map authoring tools such as Crazybump
-	// (http://www.crazybump.com/) includes options to allow you to control
-	// the orientation of the normal map normal's y-axis.
+			bitangent[0] = (-texEdge2[0]*edge1[0] + texEdge1[0]*edge2[0])*det;
+			bitangent[1] = (-texEdge2[0]*edge1[1] + texEdge1[0]*edge2[1])*det;
+			bitangent[2] = (-texEdge2[0]*edge1[2] + texEdge1[0]*edge2[2])*det;
+		}
 
-	bitangent[0] = (pVertex0->normal[1]*pVertex0->tangent[2]) -
-		       (pVertex0->normal[2]*pVertex0->tangent[1]);
-	bitangent[1] = (pVertex0->normal[2]*pVertex0->tangent[0]) -
-		       (pVertex0->normal[0]*pVertex0->tangent[2]);
-	bitangent[2] = (pVertex0->normal[0]*pVertex0->tangent[1]) -
-		       (pVertex0->normal[1]*pVertex0->tangent[0]);
+		// Accumulate the tangents and bitangents.
 
-	bDotB = bitangent[0]*pVertex0->bitangent[0] +
-		bitangent[1]*pVertex0->bitangent[1] +
-		bitangent[2]*pVertex0->bitangent[2];
+		pVertex0->tangent[0] += tangent[0];
+		pVertex0->tangent[1] += tangent[1];
+		pVertex0->tangent[2] += tangent[2];
+		pVertex0->bitangent[0] += bitangent[0];
+		pVertex0->bitangent[1] += bitangent[1];
+		pVertex0->bitangent[2] += bitangent[2];
 
-	pVertex0->tangent[3] = (bDotB < 0.0f) ? 1.0f : -1.0f;
+		pVertex1->tangent[0] += tangent[0];
+		pVertex1->tangent[1] += tangent[1];
+		pVertex1->tangent[2] += tangent[2];
+		pVertex1->bitangent[0] += bitangent[0];
+		pVertex1->bitangent[1] += bitangent[1];
+		pVertex1->bitangent[2] += bitangent[2];
 
-	pVertex0->bitangent[0] = bitangent[0];
-	pVertex0->bitangent[1] = bitangent[1];
-	pVertex0->bitangent[2] = bitangent[2];
-    }
+		pVertex2->tangent[0] += tangent[0];
+		pVertex2->tangent[1] += tangent[1];
+		pVertex2->tangent[2] += tangent[2];
+		pVertex2->bitangent[0] += bitangent[0];
+		pVertex2->bitangent[1] += bitangent[1];
+		pVertex2->bitangent[2] += bitangent[2];
+	}
 
-    m_hasTangents = true;
+	// Orthogonalize and normalize the vertex tangents.
+	for (int i=0; i<totalVertices; ++i)
+	{
+		pVertex0 = &m_vertexArray[i];
+
+		// Gram-Schmidt orthogonalize tangent with normal.
+
+		nDotT = pVertex0->normal[0]*pVertex0->tangent[0] +
+			pVertex0->normal[1]*pVertex0->tangent[1] +
+			pVertex0->normal[2]*pVertex0->tangent[2];
+
+		pVertex0->tangent[0] -= pVertex0->normal[0]*nDotT;
+		pVertex0->tangent[1] -= pVertex0->normal[1]*nDotT;
+		pVertex0->tangent[2] -= pVertex0->normal[2]*nDotT;
+
+		// Normalize the tangent.
+
+		length = 1.0f / sqrtf(pVertex0->tangent[0]*pVertex0->tangent[0] +
+				      pVertex0->tangent[1]*pVertex0->tangent[1] +
+				      pVertex0->tangent[2]*pVertex0->tangent[2]);
+
+		pVertex0->tangent[0] *= length;
+		pVertex0->tangent[1] *= length;
+		pVertex0->tangent[2] *= length;
+
+		// Calculate the handedness of the local tangent space.
+		// The bitangent vector is the cross product between the triangle face
+		// normal vector and the calculated tangent vector. The resulting
+		// bitangent vector should be the same as the bitangent vector
+		// calculated from the set of linear equations above. If they point in
+		// different directions then we need to invert the cross product
+		// calculated bitangent vector. We store this scalar multiplier in the
+		// tangent vector's 'w' component so that the correct bitangent vector
+		// can be generated in the normal mapping shader's vertex shader.
+		//
+		// Normal maps have a left handed coordinate system with the origin
+		// located at the top left of the normal map texture. The x coordinates
+		// run horizontally from left to right. The y coordinates run
+		// vertically from top to bottom. The z coordinates run out of the
+		// normal map texture towards the viewer. Our handedness calculations
+		// must take this fact into account as well so that the normal mapping
+		// shader's vertex shader will generate the correct bitangent vectors.
+		// Some normal map authoring tools such as Crazybump
+		// (http://www.crazybump.com/) includes options to allow you to control
+		// the orientation of the normal map normal's y-axis.
+
+		bitangent[0] = (pVertex0->normal[1]*pVertex0->tangent[2]) -
+			       (pVertex0->normal[2]*pVertex0->tangent[1]);
+		bitangent[1] = (pVertex0->normal[2]*pVertex0->tangent[0]) -
+			       (pVertex0->normal[0]*pVertex0->tangent[2]);
+		bitangent[2] = (pVertex0->normal[0]*pVertex0->tangent[1]) -
+			       (pVertex0->normal[1]*pVertex0->tangent[0]);
+
+		bDotB = bitangent[0]*pVertex0->bitangent[0] +
+			bitangent[1]*pVertex0->bitangent[1] +
+			bitangent[2]*pVertex0->bitangent[2];
+
+		pVertex0->tangent[3] = (bDotB < 0.0f) ? 1.0f : -1.0f;
+
+		pVertex0->bitangent[0] = bitangent[0];
+		pVertex0->bitangent[1] = bitangent[1];
+		pVertex0->bitangent[2] = bitangent[2];
+	}
+
+	m_hasTangents = true;
 }
 
 //! The first pass finds out how many triangles and vertices the model has, and imports the materials.
 void OBJ::importFirstPass(QFile& pFile, MatCacheT& materialCache)
 {
 
-    m_hasTextureCoords = false;
-    m_hasNormals = false;
+	m_hasTextureCoords = false;
+	m_hasNormals = false;
 
-    m_numberOfVertexCoords = 0;
-    m_numberOfTextureCoords = 0;
-    m_numberOfNormals = 0;
-    m_numberOfTriangles = 0;
+	m_numberOfVertexCoords = 0;
+	m_numberOfTextureCoords = 0;
+	m_numberOfNormals = 0;
+	m_numberOfTriangles = 0;
 
-    QString line;
-    QString buffer;
-    QString name;
+	QString line;
+	QString buffer;
+	QString name;
 
-    QTextStream fileStream(&pFile),lineStream;
+	QTextStream fileStream(&pFile),lineStream;
 
-    //read a line while !EOF
-    while ( !(line = fileStream.readLine()).isNull() )
-    {
-	lineStream.setString(&line,QIODevice::ReadOnly);
+	//read a line while !EOF
+	while ( !(line = fileStream.readLine()).isNull() )
+	{
+		lineStream.setString(&line,QIODevice::ReadOnly);
 
-	//read the first word of the line
-	lineStream>>buffer;
+		//read the first word of the line
+		lineStream>>buffer;
 
 		//check if the line is empty
 		if (buffer.isEmpty())
 			continue;
 
-	//check the first char of the line
-	switch (buffer.at(0).toLatin1())
-	{
-	case 'f':   //! v, v//vn, v/vt or v/vt/vn.
-	    //hit a face definition
-	    //this can have a variable number of vertices
+		//check the first char of the line
+		switch (buffer.at(0).toLatin1())
+		{
+			case 'f':   //! v, v//vn, v/vt or v/vt/vn.
+				//hit a face definition
+				//this can have a variable number of vertices
 
-	    //TODO: make this more robust against invalid files
-	    //the old version was not better, really
+				//TODO: make this more robust against invalid files
+				//the old version was not better, really
 
-	    //read first triangle
-	    lineStream>>buffer;
-	    lineStream>>buffer;
-	    lineStream>>buffer;
-	    ++m_numberOfTriangles;
+				//read first triangle
+				lineStream>>buffer;
+				lineStream>>buffer;
+				lineStream>>buffer;
+				++m_numberOfTriangles;
 
-	    //each VTX added now is a new triangle
-	    while(!lineStream.atEnd())
-	    {
-		lineStream>>buffer;
-		if(!buffer.isEmpty())
-			++m_numberOfTriangles;
-	    }
-
-	    break;
-
-	case 'm':   //! mtllib
-	    //found material, load it
-	    lineStream>>buffer;
-	    name = m_basePath;
-	    name += buffer;
-	    importMaterials(name, materialCache);
-	    break;
-
-	case 'v':   //! v, vt, or vn
-	    //hit a vertex, texture or normal, add 1 to counter
-			if (buffer.size()==1)
-				++m_numberOfVertexCoords;
-			else
-			{
-				switch (buffer.at(1).toLatin1())
+				//each VTX added now is a new triangle
+				while(!lineStream.atEnd())
 				{
-				case 't':
-					++m_numberOfTextureCoords;
-					break;
-				case 'n':
-					++m_numberOfNormals;
-					break;
+					lineStream>>buffer;
+					if(!buffer.isEmpty())
+						++m_numberOfTriangles;
 				}
-			}
-	    break;
+				break;
 
-	default:
-	    //noop
-	    break;
+			case 'm':   //! mtllib
+				//found material, load it
+				lineStream>>buffer;
+				name = m_basePath;
+				name += buffer;
+				importMaterials(name, materialCache);
+				break;
+
+			case 'v':   //! v, vt, or vn
+				//hit a vertex, texture or normal, add 1 to counter
+				if (buffer.size()==1)
+					++m_numberOfVertexCoords;
+				else
+				{
+					switch (buffer.at(1).toLatin1())
+					{
+						case 't':
+							++m_numberOfTextureCoords;
+							break;
+						case 'n':
+							++m_numberOfNormals;
+							break;
+					}
+				}
+				break;
+
+			default:
+				//noop
+				break;
+		}
 	}
-    }
 
-    m_hasPositions = m_numberOfVertexCoords > 0;
-    m_hasNormals = m_numberOfNormals > 0;
-    m_hasTextureCoords = m_numberOfTextureCoords > 0;
+	m_hasPositions = m_numberOfVertexCoords > 0;
+	m_hasNormals = m_numberOfNormals > 0;
+	m_hasTextureCoords = m_numberOfTextureCoords > 0;
 
-    m_indexArray.resize(m_numberOfTriangles * 3);
+	m_indexArray.resize(m_numberOfTriangles * 3);
 
-    // Define a default material if no materials were loaded.
-    if (m_numberOfMaterials == 0)
-    {
-	Material defaultMaterial;
+	// Define a default material if no materials were loaded.
+	if (m_numberOfMaterials == 0)
+	{
+		Material defaultMaterial;
 
-	m_materials.push_back(defaultMaterial);
-	materialCache[defaultMaterial.name] = 0;
-    }
+		m_materials.push_back(defaultMaterial);
+		materialCache[defaultMaterial.name] = 0;
+	}
 }
 
 void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT& materialCache)
 {
-    //TODO convert to Qt IO functions (QFile)
+	//TODO convert to Qt IO functions (QFile)
 
-    int v[3] = {0};
-    int vt[3] = {0};
-    int vn[3] = {0};
-    unsigned int numVertices = 0;
-    unsigned int numTexCoords = 0;
-    unsigned int numNormals = 0;
-    unsigned int numTriangles = 0;
-    int activeMaterial = 0;
-    int activeObject = 0;
-    char buffer[1024] = {0};
-    QString name;
-    QMap<QString,int>::const_iterator iter;
+	int v[3] = {0};
+	int vt[3] = {0};
+	int vn[3] = {0};
+	unsigned int numVertices = 0;
+	unsigned int numTexCoords = 0;
+	unsigned int numNormals = 0;
+	unsigned int numTriangles = 0;
+	int activeMaterial = 0;
+	int activeObject = 0;
+	char buffer[1024] = {0};
+	QString name;
+	QMap<QString,int>::const_iterator iter;
 
-    //these were member variables before, but were only used during loading, so we just define them here to save some memory
-    AttributeVector attributeArray(m_numberOfTriangles);
-    PosVector vertexCoords(m_numberOfVertexCoords);
-    VF2Vector textureCoords(m_numberOfTextureCoords);
-    VF3Vector normals(m_numberOfNormals);
-    VertCacheT vertexCache;
+	//these were member variables before, but were only used during loading, so we just define them here to save some memory
+	AttributeVector attributeArray(m_numberOfTriangles);
+	PosVector vertexCoords(m_numberOfVertexCoords);
+	VF2Vector textureCoords(m_numberOfTextureCoords);
+	VF3Vector normals(m_numberOfNormals);
+	VertCacheT vertexCache;
 
-#define ADD_ATTRIB addFaceAttrib(attributeArray,numTriangles,activeMaterial,activeObject);
+	#define ADD_ATTRIB addFaceAttrib(attributeArray,numTriangles,activeMaterial,activeObject);
 
-    float fTmp[3] = {0.0f};
-    double dTmp[3] = {0.0};
+	float fTmp[3] = {0.0f};
+	double dTmp[3] = {0.0};
 
-    while (fscanf(pFile, "%s", buffer) != EOF)
-    {
-	switch (buffer[0])
+	while (fscanf(pFile, "%s", buffer) != EOF)
 	{
-	case 'f': //! v, v//vn, v/vt, or v/vt/vn.
-	    v[0]  = v[1]  = v[2]  = 0;
-	    vt[0] = vt[1] = vt[2] = 0;
-	    vn[0] = vn[1] = vn[2] = 0;
-
-	    fscanf(pFile, "%s", buffer);
-
-	    if (strstr(buffer, "//")) //! v//vn
-	    {
-		sscanf(buffer, "%d//%d", &v[0], &vn[0]);
-		fscanf(pFile, "%d//%d", &v[1], &vn[1]);
-		fscanf(pFile, "%d//%d", &v[2], &vn[2]);
-
-		v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
-		v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
-		v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-
-		vn[0] = (vn[0] < 0) ? vn[0]+numNormals-1 : vn[0]-1;
-		vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
-		vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
-
-
-		ADD_ATTRIB
-		addTrianglePosNormal(vertexCoords,normals,vertexCache,
-					numTriangles++,
-				     v[0], v[1], v[2],
-				     vn[0], vn[1], vn[2]);
-
-		v[1] = v[2];
-		vn[1] = vn[2];
-
-		while (fscanf(pFile, "%d//%d", &v[2], &vn[2]) > 0)
+		switch (buffer[0])
 		{
-		    v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-		    vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
+			case 'f': //! v, v//vn, v/vt, or v/vt/vn.
+				v[0]  = v[1]  = v[2]  = 0;
+				vt[0] = vt[1] = vt[2] = 0;
+				vn[0] = vn[1] = vn[2] = 0;
 
-		    ADD_ATTRIB
-		    addTrianglePosNormal(vertexCoords,normals,vertexCache,
-					    numTriangles++,
-					 v[0], v[1], v[2],
-					 vn[0], vn[1], vn[2]);
+				fscanf(pFile, "%s", buffer);
 
-		    v[1] = v[2];
-		    vn[1] = vn[2];
+				if (strstr(buffer, "//")) //! v//vn
+				{
+					sscanf(buffer, "%d//%d", &v[0], &vn[0]);
+					fscanf(pFile, "%d//%d", &v[1], &vn[1]);
+					fscanf(pFile, "%d//%d", &v[2], &vn[2]);
+
+					v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
+					v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
+					v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+
+					vn[0] = (vn[0] < 0) ? vn[0]+numNormals-1 : vn[0]-1;
+					vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
+					vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
+
+					ADD_ATTRIB
+					addTrianglePosNormal(vertexCoords,normals,vertexCache,
+							     numTriangles++,
+							     v[0], v[1], v[2],
+							vn[0], vn[1], vn[2]);
+
+					v[1] = v[2];
+					vn[1] = vn[2];
+
+					while (fscanf(pFile, "%d//%d", &v[2], &vn[2]) > 0)
+					{
+						v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+						vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
+
+						ADD_ATTRIB
+						addTrianglePosNormal(vertexCoords,normals,vertexCache,
+								     numTriangles++,
+								     v[0], v[1], v[2],
+								vn[0], vn[1], vn[2]);
+
+						v[1] = v[2];
+						vn[1] = vn[2];
+					}
+				}
+				else if (sscanf(buffer, "%d/%d/%d", &v[0], &vt[0], &vn[0]) == 3) //! v/vt/vn
+				{
+					fscanf(pFile, "%d/%d/%d", &v[1], &vt[1], &vn[1]);
+					fscanf(pFile, "%d/%d/%d", &v[2], &vt[2], &vn[2]);
+
+					v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
+					v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
+					v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+
+					vt[0] = (vt[0] < 0) ? vt[0]+numTexCoords-1 : vt[0]-1;
+					vt[1] = (vt[1] < 0) ? vt[1]+numTexCoords-1 : vt[1]-1;
+					vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
+
+					vn[0] = (vn[0] < 0) ? vn[0]+numNormals-1 : vn[0]-1;
+					vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
+					vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
+
+					ADD_ATTRIB
+					addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,vertexCache,
+								     numTriangles++,
+								     v[0], v[1], v[2],
+								     vt[0], vt[1], vt[2],
+								     vn[0], vn[1], vn[2]);
+
+					v[1] = v[2];
+					vt[1] = vt[2];
+					vn[1] = vn[2];
+
+					while (fscanf(pFile, "%d/%d/%d", &v[2], &vt[2], &vn[2]) > 0)
+					{
+						v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+						vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
+						vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
+
+						ADD_ATTRIB
+						addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,vertexCache,
+									     numTriangles++,
+									     v[0], v[1], v[2],
+									     vt[0], vt[1], vt[2],
+									     vn[0], vn[1], vn[2]);
+
+						v[1] = v[2];
+						vt[1] = vt[2];
+						vn[1] = vn[2];
+					}
+				}
+				else if (sscanf(buffer, "%d/%d", &v[0], &vt[0]) == 2) //! v/vt
+				{
+					fscanf(pFile, "%d/%d", &v[1], &vt[1]);
+					fscanf(pFile, "%d/%d", &v[2], &vt[2]);
+
+					v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
+					v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
+					v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+
+					vt[0] = (vt[0] < 0) ? vt[0]+numTexCoords-1 : vt[0]-1;
+					vt[1] = (vt[1] < 0) ? vt[1]+numTexCoords-1 : vt[1]-1;
+					vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
+
+					ADD_ATTRIB
+					addTrianglePosTexCoord(vertexCoords,textureCoords,vertexCache,
+							       numTriangles++,
+							       v[0], v[1], v[2],
+							       vt[0], vt[1], vt[2]);
+
+					v[1] = v[2];
+					vt[1] = vt[2];
+
+					while (fscanf(pFile, "%d/%d", &v[2], &vt[2]) > 0)
+					{
+						v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+						vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
+
+						ADD_ATTRIB
+						addTrianglePosTexCoord(vertexCoords,textureCoords,vertexCache,
+								       numTriangles++,
+								       v[0], v[1], v[2],
+								       vt[0], vt[1], vt[2]);
+
+						v[1] = v[2];
+						vt[1] = vt[2];
+					}
+				}
+				else //! v
+				{
+					sscanf(buffer, "%d", &v[0]);
+					fscanf(pFile, "%d", &v[1]);
+					fscanf(pFile, "%d", &v[2]);
+
+					v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
+					v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
+					v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+
+					ADD_ATTRIB
+					addTrianglePos(vertexCoords, vertexCache, numTriangles++, v[0], v[1], v[2]);
+
+					v[1] = v[2];
+
+					while (fscanf(pFile, "%d", &v[2]) > 0)
+					{
+						v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
+
+						ADD_ATTRIB
+						addTrianglePos(vertexCoords, vertexCache, numTriangles++, v[0], v[1], v[2]);
+
+						v[1] = v[2];
+					}
+				}
+				break;
+
+			case 'u': //! usemtl
+				fgets(buffer, sizeof(buffer), pFile);
+				sscanf(buffer, "%s %s", buffer, buffer);
+				name = buffer;
+				iter = materialCache.find(buffer);
+				activeMaterial = (iter == materialCache.end()) ? 0 : iter.value();
+				break;
+			case 'o':
+			case 'g':
+				//do this to make it skip the rest of the line, important!
+				fgets(buffer, sizeof(buffer), pFile);
+				//grouping separators, we consider treat o and g the same in that they may require splitting of objects
+				//we ignore the grouping name
+				++activeObject;
+				break;
+
+			case 'v': //! v, vn, or vt.
+				switch (buffer[1])
+				{
+					case '\0': //! v
+						fscanf(pFile, "%lf %lf %lf", &dTmp[0], &dTmp[1], &dTmp[2]);
+
+						switch(order)
+						{
+							case XZY:
+								vertexCoords[numVertices] = VPos(dTmp[0],-dTmp[2],dTmp[1]);
+								break;
+
+							default: //! XYZ
+								vertexCoords[numVertices] = VPos(dTmp[0],dTmp[1],dTmp[2]);
+								break;
+						}
+
+						++numVertices;
+						break;
+
+
+					case 'n': //! vn
+						fscanf(pFile, "%f %f %f", &fTmp[0], &fTmp[1], &fTmp[2]);
+
+						switch(order)
+						{
+							case XZY:
+								normals[numNormals] = Vec3f(fTmp[0], -fTmp[2], fTmp[1]);
+								break;
+
+							default: //! XYZ
+								normals[numNormals] = Vec3f(fTmp[0],fTmp[1],fTmp[2]);
+								break;
+						}
+
+						++numNormals;
+						break;
+
+					case 't': //! vt
+						fscanf(pFile, "%f %f", &fTmp[0], &fTmp[1]);
+						textureCoords[numTexCoords] = Vec2f(fTmp[0],fTmp[1]);
+						++numTexCoords;
+						break;
+
+					default:
+						//Everything else shall not be parsed
+						break;
+				}
+				break;
+
+			default:
+				fgets(buffer, sizeof(buffer), pFile);
+				break;
 		}
-	    }
-	    else if (sscanf(buffer, "%d/%d/%d", &v[0], &vt[0], &vn[0]) == 3) //! v/vt/vn
-	    {
-		fscanf(pFile, "%d/%d/%d", &v[1], &vt[1], &vn[1]);
-		fscanf(pFile, "%d/%d/%d", &v[2], &vt[2], &vn[2]);
-
-		v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
-		v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
-		v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-
-		vt[0] = (vt[0] < 0) ? vt[0]+numTexCoords-1 : vt[0]-1;
-		vt[1] = (vt[1] < 0) ? vt[1]+numTexCoords-1 : vt[1]-1;
-		vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
-
-		vn[0] = (vn[0] < 0) ? vn[0]+numNormals-1 : vn[0]-1;
-		vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
-		vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
-
-		ADD_ATTRIB
-		addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,vertexCache,
-					     numTriangles++,
-					     v[0], v[1], v[2],
-					     vt[0], vt[1], vt[2],
-					     vn[0], vn[1], vn[2]);
-
-		v[1] = v[2];
-		vt[1] = vt[2];
-		vn[1] = vn[2];
-
-		while (fscanf(pFile, "%d/%d/%d", &v[2], &vt[2], &vn[2]) > 0)
-		{
-		    v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-		    vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
-		    vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
-
-		    ADD_ATTRIB
-		    addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,vertexCache,
-						 numTriangles++,
-						 v[0], v[1], v[2],
-						 vt[0], vt[1], vt[2],
-						 vn[0], vn[1], vn[2]);
-
-		    v[1] = v[2];
-		    vt[1] = vt[2];
-		    vn[1] = vn[2];
-		}
-	    }
-	    else if (sscanf(buffer, "%d/%d", &v[0], &vt[0]) == 2) //! v/vt
-	    {
-		fscanf(pFile, "%d/%d", &v[1], &vt[1]);
-		fscanf(pFile, "%d/%d", &v[2], &vt[2]);
-
-		v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
-		v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
-		v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-
-		vt[0] = (vt[0] < 0) ? vt[0]+numTexCoords-1 : vt[0]-1;
-		vt[1] = (vt[1] < 0) ? vt[1]+numTexCoords-1 : vt[1]-1;
-		vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
-
-		ADD_ATTRIB
-		addTrianglePosTexCoord(vertexCoords,textureCoords,vertexCache,
-				       numTriangles++,
-				       v[0], v[1], v[2],
-				       vt[0], vt[1], vt[2]);
-
-		v[1] = v[2];
-		vt[1] = vt[2];
-
-		while (fscanf(pFile, "%d/%d", &v[2], &vt[2]) > 0)
-		{
-		    v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-		    vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
-
-		    ADD_ATTRIB
-		    addTrianglePosTexCoord(vertexCoords,textureCoords,vertexCache,
-					   numTriangles++,
-					   v[0], v[1], v[2],
-					   vt[0], vt[1], vt[2]);
-
-		    v[1] = v[2];
-		    vt[1] = vt[2];
-		}
-	    }
-	    else //! v
-	    {
-		sscanf(buffer, "%d", &v[0]);
-		fscanf(pFile, "%d", &v[1]);
-		fscanf(pFile, "%d", &v[2]);
-
-		v[0] = (v[0] < 0) ? v[0]+numVertices-1 : v[0]-1;
-		v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
-		v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-
-		ADD_ATTRIB
-		addTrianglePos(vertexCoords, vertexCache, numTriangles++, v[0], v[1], v[2]);
-
-		v[1] = v[2];
-
-		while (fscanf(pFile, "%d", &v[2]) > 0)
-		{
-		    v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
-
-		    ADD_ATTRIB
-		    addTrianglePos(vertexCoords, vertexCache, numTriangles++, v[0], v[1], v[2]);
-
-		    v[1] = v[2];
-		}
-	    }
-	    break;
-
-	case 'u': //! usemtl
-	    fgets(buffer, sizeof(buffer), pFile);
-	    sscanf(buffer, "%s %s", buffer, buffer);
-	    name = buffer;
-	    iter = materialCache.find(buffer);
-	    activeMaterial = (iter == materialCache.end()) ? 0 : iter.value();
-	    break;
-	case 'o':
-	case 'g':
-			//do this to make it skip the rest of the line, important!
-			fgets(buffer, sizeof(buffer), pFile);
-			//grouping separators, we consider treat o and g the same in that they may require splitting of objects
-			//we ignore the grouping name
-			++activeObject;
-			break;
-
-	case 'v': //! v, vn, or vt.
-	    switch (buffer[1])
-	    {
-	    case '\0': //! v
-		fscanf(pFile, "%lf %lf %lf", &dTmp[0], &dTmp[1], &dTmp[2]);
-
-		switch(order)
-		{
-		case XZY:
-			vertexCoords[numVertices] = VPos(dTmp[0],-dTmp[2],dTmp[1]);
-		    break;
-
-		default: //! XYZ
-			vertexCoords[numVertices] = VPos(dTmp[0],dTmp[1],dTmp[2]);
-		    break;
-		}
-
-		++numVertices;
-		break;
-
-	    case 'n': //! vn
-		fscanf(pFile, "%f %f %f", &fTmp[0], &fTmp[1], &fTmp[2]);
-
-		switch(order)
-		{
-		case XZY:
-			normals[numNormals] = Vec3f(fTmp[0], -fTmp[2], fTmp[1]);
-		    break;
-
-		default: //! XYZ
-			normals[numNormals] = Vec3f(fTmp[0],fTmp[1],fTmp[2]);
-		    break;
-		}
-
-		++numNormals;
-		break;
-
-	    case 't': //! vt
-		fscanf(pFile, "%f %f", &fTmp[0], &fTmp[1]);
-		textureCoords[numTexCoords] = Vec2f(fTmp[0],fTmp[1]);
-		++numTexCoords;
-		break;
-
-	    default:
-		//Everything else shall not be parsed
-		break;
-	    }
-	    break;
-
-	default:
-	    fgets(buffer, sizeof(buffer), pFile);
-	    break;
 	}
-    }
 
-    //some sanity assertions to notice loader errors as they happen
-    Q_ASSERT(numVertices == m_numberOfVertexCoords);
-    Q_ASSERT(numNormals == m_numberOfNormals);
-    Q_ASSERT(numTexCoords == m_numberOfTextureCoords);
-    Q_ASSERT(numTriangles == m_numberOfTriangles);
+	//some sanity assertions to notice loader errors as they happen
+	Q_ASSERT(numVertices == m_numberOfVertexCoords);
+	Q_ASSERT(numNormals == m_numberOfNormals);
+	Q_ASSERT(numTexCoords == m_numberOfTextureCoords);
+	Q_ASSERT(numTriangles == m_numberOfTriangles);
 
-    //Build the StelModels
-    buildStelModels(attributeArray);
-    m_hasStelModels = m_numberOfStelModels > 0;
+	//Build the StelModels
+	buildStelModels(attributeArray);
+	m_hasStelModels = m_numberOfStelModels > 0;
 }
 
 bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 {
-    //TODO convert to Qt IO functions (Unicode filenames, type safety, security...)
-    QByteArray ba = filename.toLatin1();
-    FILE* pFile = fopen(ba.constData(), "r");
+	//TODO convert to Qt IO functions (Unicode filenames, type safety, security...)
+	QByteArray ba = filename.toLatin1();
+	FILE* pFile = fopen(ba.constData(), "r");
 
-    if (!pFile)
-	return false;
+	if (!pFile)
+		return false;
 
-    Material* pMaterial = 0;
-    int iTmp = 0;
-    int numMaterials = 0;
-    char buffer[256] = {0};
+	Material* pMaterial = 0;
+	int iTmp = 0;
+	int numMaterials = 0;
+	char buffer[256] = {0};
 
-    // Count the number of materials in the MTL file.
-    while (fscanf(pFile, "%s", buffer) != EOF)
-    {
-	switch (buffer[0])
+	// Count the number of materials in the MTL file.
+	while (fscanf(pFile, "%s", buffer) != EOF)
 	{
-	case 'n': //! newmtl
-	    ++numMaterials;
-	    fgets(buffer, sizeof(buffer), pFile);
-	    sscanf(buffer, "%s %s", buffer, buffer);
-	    break;
+		switch (buffer[0])
+		{
+			case 'n': //! newmtl
+				++numMaterials;
+				fgets(buffer, sizeof(buffer), pFile);
+				sscanf(buffer, "%s %s", buffer, buffer);
+				break;
 
-	default:
-	    fgets(buffer, sizeof(buffer), pFile);
-	    break;
+			default:
+				fgets(buffer, sizeof(buffer), pFile);
+				break;
+		}
 	}
-    }
 
-    rewind(pFile);
+	rewind(pFile);
 
-    m_numberOfMaterials = numMaterials;
-    numMaterials = 0;
-    m_materials.resize(m_numberOfMaterials);
+	m_numberOfMaterials = numMaterials;
+	numMaterials = 0;
+	m_materials.resize(m_numberOfMaterials);
 
-    // Load the materials in the MTL file.
-    while (fscanf(pFile, "%s", buffer) != EOF)
-    {
-	switch (buffer[0])
+	// Load the materials in the MTL file.
+	while (fscanf(pFile, "%s", buffer) != EOF)
 	{
-	case 'N':
-	    switch (buffer[1])
-	    {
-	    case 's': //! Ns
-		fscanf(pFile, "%f", &pMaterial->shininess);
-		pMaterial->shininess = qMin(128.0f, pMaterial->shininess);
-		break;
-
-	    default:
-		break;
-	    }
-
-	    break;
-
-	case 'K': // Ka, Kd, or Ks
-	    switch (buffer[1])
-	    {
-	    case 'a': //! Ka
-		fscanf(pFile, "%f %f %f",
-		       &pMaterial->ambient[0],
-		       &pMaterial->ambient[1],
-		       &pMaterial->ambient[2]);
-		break;
-
-	    case 'd': //! Kd
-		fscanf(pFile, "%f %f %f",
-		       &pMaterial->diffuse[0],
-		       &pMaterial->diffuse[1],
-		       &pMaterial->diffuse[2]);
-		break;
-
-	    case 's': //! Ks
-		fscanf(pFile, "%f %f %f",
-		       &pMaterial->specular[0],
-		       &pMaterial->specular[1],
-		       &pMaterial->specular[2]);
-		break;
-
-	    case 'e': //! Ke
-		fscanf(pFile, "%f %f %f",
-		       &pMaterial->emission[0],
-		       &pMaterial->emission[1],
-		       &pMaterial->emission[2]);
-		break;
-
-	    default:
-		fgets(buffer, sizeof(buffer), pFile);
-		break;
-	    }
-	    break;
-
-	case 'T': //! Tr
-	    switch (buffer[1])
-	    {
-	    case 'r': //! Tr
-		fscanf(pFile, "%f", &pMaterial->alpha);
-		//preliminarily mark as transparent for building of StelModels
-		pMaterial->hasTransparency = true;
-		break;
-
-	    default:
-		fgets(buffer, sizeof(buffer), pFile);
-		break;
-	    }
-	    break;
-
-	case 'd':
-	    fscanf(pFile, "%f", &pMaterial->alpha);
-	    //preliminarily mark as transparent for building of StelModels
-	    pMaterial->hasTransparency = true;
-	    break;
-
-	case 'i': // illum
-	    fscanf(pFile, "%d", &iTmp);
-
-	    if(iTmp>Material::I_SPECULAR && iTmp != Material::I_TRANSLUCENT)
-	    {
-		    qWarning()<<"[OBJ] Treating illum "<<iTmp<<"as TRANSLUCENT";
-		    iTmp = Material::I_TRANSLUCENT;
-	    }
-
-	    pMaterial->illum = (Material::Illum) iTmp;
-	    if(pMaterial->illum == Material::I_TRANSLUCENT)
-	    {
-		    //preliminarily mark as transparent for building of StelModels
-		    pMaterial->hasTransparency = true;
-	    }
-	    break;
-
-	case 'm': //! map_Kd, map_bump
-	    if (strstr(buffer, "map_Kd") != 0)
-	    {
-		fgets(buffer, sizeof(buffer), pFile);
-		sscanf("%[^\n]", buffer);
-
-		pMaterial->textureName = parseTextureString(buffer);
-	    }
-	    else if (strstr(buffer, "map_Ke") != 0)
-	    {
-		fgets(buffer, sizeof(buffer), pFile);
-		sscanf("%[^\n]", buffer);
-
-		pMaterial->emissiveMapName = parseTextureString(buffer);
-	    }
-	    else if (strstr(buffer, "map_bump") != 0)
-	    {
-		fgets(buffer, sizeof(buffer), pFile);
-		sscanf(buffer, "%[^\n]", buffer);
-
-		pMaterial->bumpMapName =  parseTextureString(buffer);
-	    }
-	    else if (strstr(buffer, "map_height") != 0)
-	    {
-		fgets(buffer, sizeof(buffer), pFile);
-		sscanf(buffer, "%[^\n]", buffer);
-
-		pMaterial->heightMapName =  parseTextureString(buffer);
-	    }
-	    else
-	    {
-		fgets(buffer, sizeof(buffer), pFile);
-	    }
-	    break;
-
-	case 'n': //! newmtl
-	    fgets(buffer, sizeof(buffer), pFile);
-	    sscanf(buffer, "%s %s", buffer, buffer);
-
-	    //use default constructor here to prevent manual re-initialization, and make sure default values are honored
-	    m_materials[numMaterials] = Material();
-	    pMaterial = &m_materials[numMaterials];
-	    pMaterial->name = buffer;
-
-	    materialCache[pMaterial->name] = numMaterials;
-	    ++numMaterials;
-	    break;
-
-	case 'b': // bool flags alphatest or backfaceculling
-		if (strstr(buffer, "bAlphatest") != 0)
+		switch (buffer[0])
 		{
-			fscanf(pFile, "%d", &iTmp);
-			pMaterial->alphatest = iTmp;
-		}
-		else if (strstr(buffer, "bBackface") != 0)
-		{
-			fscanf(pFile, "%d", &iTmp);
-			pMaterial->backfacecull = !iTmp;
-		}
-		break;
+			case 'N':
+				switch (buffer[1])
+				{
+					case 's': //! Ns
+						fscanf(pFile, "%f", &pMaterial->shininess);
+						pMaterial->shininess = qMin(128.0f, pMaterial->shininess);
+						break;
 
-	default:
-	    fgets(buffer, sizeof(buffer), pFile);
-	    break;
+					default:
+						break;
+				}
+				break;
+
+			case 'K': // Ka, Kd, or Ks
+				switch (buffer[1])
+				{
+					case 'a': //! Ka
+						fscanf(pFile, "%f %f %f",
+						       &pMaterial->ambient[0],
+						       &pMaterial->ambient[1],
+						       &pMaterial->ambient[2]);
+						break;
+
+					case 'd': //! Kd
+						fscanf(pFile, "%f %f %f",
+						       &pMaterial->diffuse[0],
+						       &pMaterial->diffuse[1],
+						       &pMaterial->diffuse[2]);
+						break;
+
+					case 's': //! Ks
+						fscanf(pFile, "%f %f %f",
+						       &pMaterial->specular[0],
+						       &pMaterial->specular[1],
+						       &pMaterial->specular[2]);
+						break;
+
+					case 'e': //! Ke
+						fscanf(pFile, "%f %f %f",
+						       &pMaterial->emission[0],
+						       &pMaterial->emission[1],
+						       &pMaterial->emission[2]);
+						break;
+
+					default:
+						fgets(buffer, sizeof(buffer), pFile);
+						break;
+				}
+				break;
+
+			case 'T': //! Tr
+				switch (buffer[1])
+				{
+					case 'r': //! Tr
+						fscanf(pFile, "%f", &pMaterial->alpha);
+						//preliminarily mark as transparent for building of StelModels
+						pMaterial->hasTransparency = true;
+						break;
+
+					default:
+						fgets(buffer, sizeof(buffer), pFile);
+						break;
+				}
+				break;
+
+			case 'd':
+				fscanf(pFile, "%f", &pMaterial->alpha);
+				//preliminarily mark as transparent for building of StelModels
+				pMaterial->hasTransparency = true;
+				break;
+
+			case 'i': // illum
+				fscanf(pFile, "%d", &iTmp);
+
+				if(iTmp>Material::I_SPECULAR && iTmp != Material::I_TRANSLUCENT)
+				{
+					qWarning()<<"[OBJ] Treating illum "<<iTmp<<"as TRANSLUCENT";
+					iTmp = Material::I_TRANSLUCENT;
+				}
+
+				pMaterial->illum = (Material::Illum) iTmp;
+				if(pMaterial->illum == Material::I_TRANSLUCENT)
+				{
+					//preliminarily mark as transparent for building of StelModels
+					pMaterial->hasTransparency = true;
+				}
+				break;
+
+			case 'm': //! map_Kd, map_bump
+				if (strstr(buffer, "map_Kd") != 0)
+				{
+					fgets(buffer, sizeof(buffer), pFile);
+					sscanf("%[^\n]", buffer);
+
+					pMaterial->textureName = parseTextureString(buffer);
+				}
+				else if (strstr(buffer, "map_Ke") != 0)
+				{
+					fgets(buffer, sizeof(buffer), pFile);
+					sscanf("%[^\n]", buffer);
+
+					pMaterial->emissiveMapName = parseTextureString(buffer);
+				}
+				else if (strstr(buffer, "map_bump") != 0)
+				{
+					fgets(buffer, sizeof(buffer), pFile);
+					sscanf(buffer, "%[^\n]", buffer);
+
+					pMaterial->bumpMapName =  parseTextureString(buffer);
+				}
+				else if (strstr(buffer, "map_height") != 0)
+				{
+					fgets(buffer, sizeof(buffer), pFile);
+					sscanf(buffer, "%[^\n]", buffer);
+
+					pMaterial->heightMapName =  parseTextureString(buffer);
+				}
+				else
+				{
+					fgets(buffer, sizeof(buffer), pFile);
+				}
+				break;
+
+			case 'n': //! newmtl
+				fgets(buffer, sizeof(buffer), pFile);
+				sscanf(buffer, "%s %s", buffer, buffer);
+
+				//use default constructor here to prevent manual re-initialization, and make sure default values are honored
+				m_materials[numMaterials] = Material();
+				pMaterial = &m_materials[numMaterials];
+				pMaterial->name = buffer;
+
+				materialCache[pMaterial->name] = numMaterials;
+				++numMaterials;
+				break;
+
+			case 'b': // bool flags alphatest or backfaceculling
+				if (strstr(buffer, "bAlphatest") != 0)
+				{
+					fscanf(pFile, "%d", &iTmp);
+					pMaterial->alphatest = iTmp;
+				}
+				else if (strstr(buffer, "bBackface") != 0)
+				{
+					fscanf(pFile, "%d", &iTmp);
+					pMaterial->backfacecull = !iTmp;
+				}
+				break;
+
+			default:
+				fgets(buffer, sizeof(buffer), pFile);
+				break;
+		}
 	}
-    }
 
-    fclose(pFile);
+	fclose(pFile);
 
-    return true;
+	return true;
 }
 
 QString OBJ::parseTextureString(const char *buffer) const
@@ -1472,11 +1470,11 @@ void OBJ::transparencyDepthSort(const Vec3f &position)
 
 void OBJ::uploadTexturesGL()
 {
-    StelTextureMgr textureMgr;
+	StelTextureMgr textureMgr;
 
-    for(unsigned int i=0; i<m_numberOfMaterials; ++i)
-    {
-	Material* pMaterial = &getMaterial(i);
+	for(unsigned int i=0; i<m_numberOfMaterials; ++i)
+	{
+		Material* pMaterial = &getMaterial(i);
 
 //        qDebug() << getTime() << "[OBJ]" << pMaterial->name.c_str();
 //        qDebug() << getTime() << "[OBJ] Ka:" << pMaterial->ambient[0] << "," << pMaterial->ambient[1] << "," << pMaterial->ambient[2] << "," << pMaterial->ambient[3];
@@ -1488,62 +1486,62 @@ void OBJ::uploadTexturesGL()
 
 //        qDebug() << getTime() << "[OBJ] Uploading textures for Material: " << pMaterial->name.c_str();
 //        qDebug() << getTime() << "[OBJ] Texture:" << pMaterial->textureName.c_str();
-	if(!pMaterial->textureName.isEmpty())
-	{
-	    StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->textureName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
-	    if(!tex.isNull())
-	    {
-		pMaterial->texture = tex;
-	    }
-	    else
-	    {
-		qWarning() << "[OBJ] Failed to load Texture:" << pMaterial->textureName;
-	    }
-	}
-
-	if(!pMaterial->emissiveMapName.isEmpty())
-	{
-		StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->emissiveMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
-		if(!tex.isNull())
+		if(!pMaterial->textureName.isEmpty())
 		{
-		    pMaterial->emissive_texture = tex;
+			StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->textureName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
+			if(!tex.isNull())
+			{
+				pMaterial->texture = tex;
+			}
+			else
+			{
+				qWarning() << "[OBJ] Failed to load Texture:" << pMaterial->textureName;
+			}
 		}
-		else
+
+		if(!pMaterial->emissiveMapName.isEmpty())
 		{
-		    qWarning() << "[OBJ] Failed to load emissive texture:" << pMaterial->emissiveMapName;
+			StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->emissiveMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
+			if(!tex.isNull())
+			{
+				pMaterial->emissive_texture = tex;
+			}
+			else
+			{
+				qWarning() << "[OBJ] Failed to load emissive texture:" << pMaterial->emissiveMapName;
+			}
+		}
+
+		//qDebug() << getTime() << "[OBJ] Normal Map:" << pMaterial->bumpMapName;
+		if(!pMaterial->bumpMapName.isEmpty())
+		{
+			StelTextureSP bumpTex = textureMgr.createTexture(absolutePath(pMaterial->bumpMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
+			if(!bumpTex.isNull())
+			{
+				pMaterial->bump_texture = bumpTex;
+			}
+			else
+			{
+				qWarning() << "[OBJ] Failed to load Normal Map:" << pMaterial->bumpMapName;
+			}
+		}
+
+		//qDebug() << getTime() << "[OBJ] Height Map:" << pMaterial->heightMapName;
+		if(!pMaterial->heightMapName.isEmpty())
+		{
+			StelTextureSP heightTex = textureMgr.createTexture(absolutePath(pMaterial->heightMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
+			if(!heightTex.isNull())
+			{
+				pMaterial->height_texture = heightTex;
+			}
+			else
+			{
+				qWarning() << "[OBJ] Failed to load Height Map:" << pMaterial->heightMapName;
+			}
 		}
 	}
 
-	//qDebug() << getTime() << "[OBJ] Normal Map:" << pMaterial->bumpMapName;
-	if(!pMaterial->bumpMapName.isEmpty())
-	{
-	    StelTextureSP bumpTex = textureMgr.createTexture(absolutePath(pMaterial->bumpMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
-	    if(!bumpTex.isNull())
-	    {
-		pMaterial->bump_texture = bumpTex;
-	    }
-	    else
-	    {
-		qWarning() << "[OBJ] Failed to load Normal Map:" << pMaterial->bumpMapName;
-	    }
-	}
-
-	//qDebug() << getTime() << "[OBJ] Height Map:" << pMaterial->heightMapName;
-	if(!pMaterial->heightMapName.isEmpty())
-	{
-	    StelTextureSP heightTex = textureMgr.createTexture(absolutePath(pMaterial->heightMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
-	    if(!heightTex.isNull())
-	    {
-		pMaterial->height_texture = heightTex;
-	    }
-	    else
-	    {
-		qWarning() << "[OBJ] Failed to load Height Map:" << pMaterial->heightMapName;
-	    }
-	}
-    }
-
-    qDebug()<<"[OBJ] Uploaded OBJ textures to GL";
+	qDebug()<<"[OBJ] Uploaded OBJ textures to GL";
 }
 
 void OBJ::finalizeForRendering()
@@ -1717,69 +1715,69 @@ void OBJ::unbindBuffersGL()
 
 void OBJ::transform(QMatrix4x4 mat)
 {
-    QMatrix3x3 normalMat = mat.normalMatrix();
+	QMatrix3x3 normalMat = mat.normalMatrix();
 
-    //Transform all vertices and normals by mat
-    for(int i=0; i<getNumberOfVertices(); ++i)
-    {
-	Vertex *pVertex = &m_vertexArray[i];
+	//Transform all vertices and normals by mat
+	for(int i=0; i<getNumberOfVertices(); ++i)
+	{
+		Vertex *pVertex = &m_vertexArray[i];
 
-	QVector3D tf = mat * QVector3D(pVertex->position.v[0], pVertex->position.v[1], pVertex->position.v[2]);
-	pVertex->position.v[0] = tf.x();
-	pVertex->position.v[1] = tf.y();
-	pVertex->position.v[2] = tf.z();
+		QVector3D tf = mat * QVector3D(pVertex->position.v[0], pVertex->position.v[1], pVertex->position.v[2]);
+		pVertex->position.v[0] = tf.x();
+		pVertex->position.v[1] = tf.y();
+		pVertex->position.v[2] = tf.z();
 
-	tf = normalMat * QVector3D(pVertex->normal.v[0], pVertex->normal.v[1], pVertex->normal.v[2]);
-	pVertex->normal.v[0] = tf.x();
-	pVertex->normal.v[1] = tf.y();
-	pVertex->normal.v[2] = tf.z();
+		tf = normalMat * QVector3D(pVertex->normal.v[0], pVertex->normal.v[1], pVertex->normal.v[2]);
+		pVertex->normal.v[0] = tf.x();
+		pVertex->normal.v[1] = tf.y();
+		pVertex->normal.v[2] = tf.z();
 
-	tf = normalMat * QVector3D(pVertex->tangent.v[0], pVertex->tangent.v[1], pVertex->tangent.v[2]);
-	pVertex->tangent.v[0] = tf.x();
-	pVertex->tangent.v[1] = tf.y();
-	pVertex->tangent.v[2] = tf.z();
+		tf = normalMat * QVector3D(pVertex->tangent.v[0], pVertex->tangent.v[1], pVertex->tangent.v[2]);
+		pVertex->tangent.v[0] = tf.x();
+		pVertex->tangent.v[1] = tf.y();
+		pVertex->tangent.v[2] = tf.z();
 
-	tf = normalMat * QVector3D(pVertex->bitangent.v[0], pVertex->bitangent.v[1], pVertex->bitangent.v[2]);
-	pVertex->bitangent.v[0] = tf.x();
-	pVertex->bitangent.v[1] = tf.y();
-	pVertex->bitangent.v[2] = tf.z();
-    }
+		tf = normalMat * QVector3D(pVertex->bitangent.v[0], pVertex->bitangent.v[1], pVertex->bitangent.v[2]);
+		pVertex->bitangent.v[0] = tf.x();
+		pVertex->bitangent.v[1] = tf.y();
+		pVertex->bitangent.v[2] = tf.z();
+	}
 
-    //Update bounding box in case it changed
-    findBounds();
+	//Update bounding box in case it changed
+	findBounds();
 }
 
 void OBJ::findBounds()
 {
-    //Find Bounding Box for entire Scene
+	//Find Bounding Box for entire Scene
 	pBoundingBox.reset();
 
-    //Find AABB per Stel Model
-    for(unsigned int i=0; i<m_numberOfStelModels; ++i)
-    {
-	StelModel& pStelModel = m_stelModels[i];
-	pStelModel.bbox.reset();
-	pStelModel.centroid = Vec3f(0.0f);
-
-	for(int j=pStelModel.startIndex; j<(pStelModel.startIndex + pStelModel.triangleCount*3); ++j)
+	//Find AABB per Stel Model
+	for(unsigned int i=0; i<m_numberOfStelModels; ++i)
 	{
-	    const Vertex& pVertex = m_vertexArray.at(m_indexArray[j]);
+		StelModel& pStelModel = m_stelModels[i];
+		pStelModel.bbox.reset();
+		pStelModel.centroid = Vec3f(0.0f);
 
-	    pBoundingBox.expand(pVertex.position);
-	    pStelModel.bbox.expand(pVertex.position);
-	    pStelModel.centroid += pVertex.position;
+		for(int j=pStelModel.startIndex; j<(pStelModel.startIndex + pStelModel.triangleCount*3); ++j)
+		{
+			const Vertex& pVertex = m_vertexArray.at(m_indexArray[j]);
+
+			pBoundingBox.expand(pVertex.position);
+			pStelModel.bbox.expand(pVertex.position);
+			pStelModel.centroid += pVertex.position;
+		}
+
+		pStelModel.centroid /= (pStelModel.triangleCount*3);
 	}
-
-	pStelModel.centroid /= (pStelModel.triangleCount*3);
-    }
 }
 
 void OBJ::renderAABBs()
 {
-    for(unsigned int i=0; i<m_numberOfStelModels; ++i)
-    {
-	m_stelModels.at(i).bbox.render();
-    }
+	for(unsigned int i=0; i<m_numberOfStelModels; ++i)
+	{
+		m_stelModels.at(i).bbox.render();
+	}
 }
 
 size_t OBJ::memoryUsage()
