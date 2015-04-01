@@ -27,23 +27,23 @@
 class Plane
 {
 public:
-    Plane();
-    Plane(Vec3f &v1, Vec3f &v2, Vec3f &v3);
-    Plane(const Vec4f &e);
-    Plane(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o);
-    ~Plane();
+	Plane();
+	Plane(Vec3f &v1, Vec3f &v2, Vec3f &v3);
+	Plane(const Vec4f &e);
+	Plane(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o);
+	~Plane();
 
-    Vec3f normal, sNormal;
-    Vec3f p, sP;
-    float distance, sDistance;
+	Vec3f normal, sNormal;
+	Vec3f p, sP;
+	float distance, sDistance;
 
-    void setPoints(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o = SPolygon::CCW);
-    float calcDistance(const Vec3f p) const;
-    bool isBehind(const Vec3f& p) const;
-    void saveValues();
-    void resetValues();
+	void setPoints(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o = SPolygon::CCW);
+	float calcDistance(const Vec3f p) const;
+	bool isBehind(const Vec3f& p) const;
+	void saveValues();
+	void resetValues();
 
-    bool intersect(const Line &l, float &val) const;
+	bool intersect(const Line &l, float &val) const;
 };
 
 #endif

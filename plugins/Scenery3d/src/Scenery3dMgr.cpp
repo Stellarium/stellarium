@@ -49,29 +49,29 @@
 #define S3D_CONFIG_PREFIX QString("Scenery3d")
 
 Scenery3dMgr::Scenery3dMgr() :
-    scenery3d(NULL),
-    flagEnabled(false),
-    cleanedUp(false),
-    progressBar(NULL),
-    currentLoadScene(),
-    currentLoadFuture(this)
+	scenery3d(NULL),
+	flagEnabled(false),
+	cleanedUp(false),
+	progressBar(NULL),
+	currentLoadScene(),
+	currentLoadFuture(this)
 {
-    setObjectName("Scenery3dMgr");
-    scenery3dDialog = new Scenery3dDialog();
-    storedViewDialog = new StoredViewDialog();
+	setObjectName("Scenery3dMgr");
+	scenery3dDialog = new Scenery3dDialog();
+	storedViewDialog = new StoredViewDialog();
 
-    font.setPixelSize(16);
-    messageFader.setDuration(500);
-    messageTimer = new QTimer(this);
-    messageTimer->setInterval(2000);
-    messageTimer->setSingleShot(true);
-    connect(messageTimer, &QTimer::timeout, this, &Scenery3dMgr::clearMessage);
-    connect(&currentLoadFuture,&QFutureWatcherBase::finished, this, &Scenery3dMgr::loadSceneCompleted);
+	font.setPixelSize(16);
+	messageFader.setDuration(500);
+	messageTimer = new QTimer(this);
+	messageTimer->setInterval(2000);
+	messageTimer->setSingleShot(true);
+	connect(messageTimer, &QTimer::timeout, this, &Scenery3dMgr::clearMessage);
+	connect(&currentLoadFuture,&QFutureWatcherBase::finished, this, &Scenery3dMgr::loadSceneCompleted);
 
-    connect(this, &Scenery3dMgr::progressReport, this, &Scenery3dMgr::progressReceive, Qt::QueuedConnection);
+	connect(this, &Scenery3dMgr::progressReport, this, &Scenery3dMgr::progressReceive, Qt::QueuedConnection);
 
-    //create scenery3d object
-    scenery3d = new Scenery3d(this);
+	//create scenery3d object
+	scenery3d = new Scenery3d(this);
 }
 
 Scenery3dMgr::~Scenery3dMgr()
@@ -87,13 +87,13 @@ Scenery3dMgr::~Scenery3dMgr()
 
 double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
 {
-    if (actionName == StelModule::ActionDraw)
-	return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 5; // between Landscape and compass marks!
-    if (actionName == StelModule::ActionUpdate)
-        return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 10;
-    if (actionName == StelModule::ActionHandleKeys)
-        return 3; // GZ: low number means high precedence!
-    return 0;
+	if (actionName == StelModule::ActionDraw)
+		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 5; // between Landscape and compass marks!
+	if (actionName == StelModule::ActionUpdate)
+		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 10;
+	if (actionName == StelModule::ActionHandleKeys)
+		return 3; // GZ: low number means high precedence!
+	return 0;
 }
 
 void Scenery3dMgr::handleKeys(QKeyEvent* e)
@@ -167,7 +167,7 @@ void Scenery3dMgr::init()
 	Q_ASSERT(action);
 	connect(action, &StelAction::toggled, this, &Scenery3dMgr::forceCubemapRedraw);
 
-	showMessage(N_("Scenery3d plugin loaded!"));
+	showMessage(q_("Scenery3d plugin loaded!"));
 }
 
 void Scenery3dMgr::deinit()
@@ -264,7 +264,7 @@ void Scenery3dMgr::createToolbarButtons() const
 
 void Scenery3dMgr::reloadShaders()
 {
-	showMessage(N_("Scenery3d shaders reloaded"));
+	showMessage(q_("Scenery3d shaders reloaded"));
 	qDebug()<<"[Scenery3dMgr] Reloading Scenery3d shaders";
 
 	scenery3d->getShaderManager().clearCache();
@@ -319,9 +319,9 @@ void Scenery3dMgr::loadScene(const SceneInfo& scene)
 	currentLoadScene = scene;
 
 	// Loading may take a while...
-	showMessage(QString(N_("Loading scene. Please be patient!")));
+	showMessage(QString(q_("Loading scene. Please be patient!")));
 	progressBar = StelApp::getInstance().addProgressBar();
-	progressBar->setFormat(QString(N_("Loading scene '%1'")).arg(scene.name));
+	progressBar->setFormat(QString(q_("Loading scene '%1'")).arg(scene.name));
 	progressBar->setValue(0);
 
 	QFuture<bool> future = QtConcurrent::run(this,&Scenery3dMgr::loadSceneBackground);
@@ -344,11 +344,11 @@ void Scenery3dMgr::loadSceneCompleted()
 
 	if(!ok)
 	{
-		showMessage(N_("Could not load scene, please check log for error messages!"));
+		showMessage(q_("Could not load scene, please check log for error messages!"));
 		return;
 	}
 	else
-		showMessage(N_("Scene successfully loaded."));
+		showMessage(q_("Scene successfully loaded."));
 
 	//do stuff that requires the main thread
 
@@ -407,7 +407,7 @@ SceneInfo Scenery3dMgr::loadScenery3dByID(const QString& id)
 	{
 		if(!SceneInfo::loadByID(id,scene))
 		{
-			showMessage(N_("Could not load scene info, please check log for error messages!"));
+			showMessage(q_("Could not load scene info, please check log for error messages!"));
 			return SceneInfo();
 		}
 	}
@@ -431,7 +431,7 @@ SceneInfo Scenery3dMgr::loadScenery3dByName(const QString& name)
 
 	if(id.isEmpty())
 	{
-		showMessage(QString(N_("Could not find scene ID for %1")).arg(name));
+		showMessage(QString(q_("Could not find scene ID for %1")).arg(name));
 		return SceneInfo();
 	}
 	return loadScenery3dByID(id);
@@ -444,9 +444,9 @@ SceneInfo Scenery3dMgr::getCurrentScene() const
 
 void Scenery3dMgr::setDefaultScenery3dID(const QString& id)
 {
-    defaultScenery3dID = id;
+	defaultScenery3dID = id;
 
-    conf->setValue(S3D_CONFIG_PREFIX + "/default_location_id", id);
+	conf->setValue(S3D_CONFIG_PREFIX + "/default_location_id", id);
 }
 
 void Scenery3dMgr::setEnableScene(const bool enable)
@@ -501,7 +501,7 @@ void Scenery3dMgr::setEnablePixelLighting(const bool val)
 			setEnableBumps(false);
 			setEnableShadows(false);
 		}
-		showMessage(QString(N_("Per-Pixel shading %1.")).arg(val? N_("on") : N_("off")));
+		showMessage(QString(q_("Per-Pixel shading %1.")).arg(val? qc_("on","enable") : qc_("off","disable")));
 
 		scenery3d->setPixelLightingEnabled(val);
 		conf->setValue(S3D_CONFIG_PREFIX + "/flag_pixel_lighting", val);
@@ -520,12 +520,12 @@ void Scenery3dMgr::setEnableShadows(const bool enableShadows)
 	{
 		if (scenery3d->getShadowmapSize() && getEnablePixelLighting())
 		{
-			showMessage(QString(N_("Shadows %1.")).arg(enableShadows? N_("on") : N_("off")));
+			showMessage(QString(q_("Shadows %1.")).arg(enableShadows? qc_("on","enable") : qc_("off","disable")));
 			scenery3d->setShadowsEnabled(enableShadows);
 			emit enableShadowsChanged(enableShadows);
 		} else
 		{
-			showMessage(QString(N_("Shadows deactivated or not possible.")));
+			showMessage(QString(q_("Shadows deactivated or not possible.")));
 			scenery3d->setShadowsEnabled(false);
 			emit enableShadowsChanged(false);
 		}
@@ -556,7 +556,7 @@ void Scenery3dMgr::setEnableBumps(const bool enableBumps)
 {
 	if(enableBumps != getEnableBumps())
 	{
-		showMessage(QString(N_("Surface bumps %1.")).arg(enableBumps? N_("on") : N_("off")));
+		showMessage(QString(q_("Surface bumps %1.")).arg(enableBumps? qc_("on","enable") : qc_("off","disable")));
 		scenery3d->setBumpsEnabled(enableBumps);
 
 		conf->setValue(S3D_CONFIG_PREFIX + "/flag_bumpmap", enableBumps);
@@ -566,7 +566,7 @@ void Scenery3dMgr::setEnableBumps(const bool enableBumps)
 
 S3DEnum::ShadowFilterQuality Scenery3dMgr::getShadowFilterQuality() const
 {
-    return scenery3d->getShadowFilterQuality();
+	return scenery3d->getShadowFilterQuality();
 }
 
 void Scenery3dMgr::setShadowFilterQuality(const S3DEnum::ShadowFilterQuality val)
@@ -604,7 +604,7 @@ void Scenery3dMgr::setCubemappingMode(const S3DEnum::CubemappingMode val)
 	S3DEnum::CubemappingMode realVal = scenery3d->getCubemappingMode();
 
 	if(val!=realVal)
-		showMessage(N_("Selected cubemap mode not supported, falling back to '6 Textures'"));
+		showMessage(q_("Selected cubemap mode not supported, falling back to '6 Textures'"));
 
 	conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_mode",realVal);
 	emit cubemappingModeChanged(realVal);
@@ -700,7 +700,7 @@ bool Scenery3dMgr::getEnableLazyDrawing() const
 
 void Scenery3dMgr::setEnableLazyDrawing(const bool val)
 {
-	showMessage(QString(N_("Lazy cubemapping: %1")).arg(val?N_("enabled"):N_("disabled")));
+	showMessage(QString(q_("Lazy cubemapping: %1")).arg(val?q_("enabled"):q_("disabled")));
 	scenery3d->setLazyCubemapEnabled(val);
 
 	conf->setValue(S3D_CONFIG_PREFIX + "/flag_lazy_cubemap",val);
@@ -773,9 +773,9 @@ void Scenery3dMgr::setCubemapSize(const uint val)
 		//hardware may not support the value, get real value set
 		uint realVal = scenery3d->getCubemapSize();
 		if(realVal==val)
-			showMessage(N_("Cubemap size changed"));
+			showMessage(q_("Cubemap size changed"));
 		else
-			showMessage(QString(N_("Cubemap size not supported, set to %1")).arg(realVal));
+			showMessage(QString(q_("Cubemap size not supported, set to %1")).arg(realVal));
 
 		conf->setValue(S3D_CONFIG_PREFIX + "/cubemap_size",realVal);
 		emit cubemapSizeChanged(realVal);
@@ -796,9 +796,9 @@ void Scenery3dMgr::setShadowmapSize(const uint val)
 		//hardware may not support the value, get real value set
 		uint realVal = scenery3d->getShadowmapSize();
 		if(realVal==val)
-			showMessage(N_("Shadowmap size changed"));
+			showMessage(q_("Shadowmap size changed"));
 		else
-			showMessage(QString(N_("Shadowmap size not supported, set to %1")).arg(realVal));
+			showMessage(QString(q_("Shadowmap size not supported, set to %1")).arg(realVal));
 
 		conf->setValue(S3D_CONFIG_PREFIX + "/shadowmap_size",realVal);
 		emit shadowmapSizeChanged(realVal);
@@ -879,9 +879,9 @@ StoredView Scenery3dMgr::getCurrentView()
 
 void Scenery3dMgr::showMessage(const QString& message)
 {
-    currentMessage=message;
-    messageFader=true;
-    messageTimer->start();
+	currentMessage=message;
+	messageFader=true;
+	messageTimer->start();
 }
 
 void Scenery3dMgr::clearMessage()
@@ -897,17 +897,17 @@ StelModule* Scenery3dStelPluginInterface::getStelModule() const
 
 StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 {
-    // Allow to load the resources when used as a static plugin
-    Q_INIT_RESOURCE(Scenery3d);
+	// Allow to load the resources when used as a static plugin
+	Q_INIT_RESOURCE(Scenery3d);
 
-    StelPluginInfo info;
-    info.id = "Scenery3dMgr"; // TBD: Find way to call it just Scenery3d? [cosmetic]
-    info.version = SCENERY3D_PLUGIN_VERSION;
-    info.displayedName = N_("3D Sceneries");
-    info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch";
-    info.contact = "Georg.Zotti@univie.ac.at";
-    info.description = N_("3D foreground renderer. Walk around, find and avoid obstructions in your garden, find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.");
-    return info;
+	StelPluginInfo info;
+	info.id = "Scenery3dMgr"; // TBD: Find way to call it just Scenery3d? [cosmetic]
+	info.version = SCENERY3D_PLUGIN_VERSION;
+	info.displayedName = N_("3D Sceneries");
+	info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch";
+	info.contact = "Georg.Zotti@univie.ac.at";
+	info.description = N_("3D foreground renderer. Walk around, find and avoid obstructions in your garden, find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.");
+	return info;
 }
 /////////////////////////////////////////////////////////////////////
 
