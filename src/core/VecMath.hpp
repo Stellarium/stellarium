@@ -250,33 +250,33 @@ public:
 //! Use Mat3d or Mat3f typedef for matrices of doubles and floats respectively.
 template<class T> class Matrix3
 {
- public:
-    Matrix3();
-    Matrix3(T,T,T,T,T,T,T,T,T);
-    Matrix3(const T*);
-    Matrix3(const Vector3<T>&, const Vector3<T>&, const Vector3<T>&);
+public:
+	Matrix3();
+	Matrix3(T,T,T,T,T,T,T,T,T);
+	Matrix3(const T*);
+	Matrix3(const Vector3<T>&, const Vector3<T>&, const Vector3<T>&);
 
-    inline Matrix3& operator=(const T*);
-    inline void set(T,T,T,T,T,T,T,T,T);
+	inline Matrix3& operator=(const T*);
+	inline void set(T,T,T,T,T,T,T,T,T);
 
-    inline T& operator[](int);
-    inline operator T*();
-    inline operator const T*() const;
+	inline T& operator[](int);
+	inline operator T*();
+	inline operator const T*() const;
 
-    inline Matrix3 operator-(const Matrix3<T>&) const;
-    inline Matrix3 operator+(const Matrix3<T>&) const;
-    inline Matrix3 operator*(const Matrix3<T>&) const;
+	inline Matrix3 operator-(const Matrix3<T>&) const;
+	inline Matrix3 operator+(const Matrix3<T>&) const;
+	inline Matrix3 operator*(const Matrix3<T>&) const;
 
-    inline Vector3<T> operator*(const Vector3<T>&) const;
+	inline Vector3<T> operator*(const Vector3<T>&) const;
 
-    static Matrix3<T> identity();
+	static Matrix3<T> identity();
 
-    Matrix3<T> transpose() const;
-    Matrix3<T> inverse() const;
+	Matrix3<T> transpose() const;
+	Matrix3<T> inverse() const;
 
-    inline void print(void) const;
+	inline void print(void) const;
 
-    T r[9];
+	T r[9];
 };
 
 //! @class Matrix4
@@ -872,89 +872,89 @@ template<class T> Matrix3<T>::Matrix3() {}
 
 template<class T> Matrix3<T>::Matrix3(const T* m)
 {
-    memcpy(r,m,sizeof(T)*9);
+	memcpy(r,m,sizeof(T)*9);
 }
 
 template<class T> Matrix3<T>::Matrix3(const Vector3<T>& v0, const Vector3<T>& v1, const Vector3<T>& v2)
 {
-    r[0] = v0.v[0]; r[3] = v1.v[0]; r[6] = v2.v[0];
-    r[1] = v0.v[1]; r[4] = v1.v[1]; r[7] = v2.v[1];
-    r[2] = v0.v[2]; r[5] = v1.v[2]; r[8] = v2.v[2];
+	r[0] = v0.v[0]; r[3] = v1.v[0]; r[6] = v2.v[0];
+	r[1] = v0.v[1]; r[4] = v1.v[1]; r[7] = v2.v[1];
+	r[2] = v0.v[2]; r[5] = v1.v[2]; r[8] = v2.v[2];
 }
 
 template<class T> Matrix3<T>::Matrix3(T a, T b, T c, T d, T e, T f, T g, T h, T i)
 {
-    r[0] = a; r[3] = d; r[6] = g;
-    r[1] = b; r[4] = e; r[7] = h;
-    r[2] = c; r[5] = f; r[8] = i;
+	r[0] = a; r[3] = d; r[6] = g;
+	r[1] = b; r[4] = e; r[7] = h;
+	r[2] = c; r[5] = f; r[8] = i;
 }
 
 template<class T> void Matrix3<T>::set(T a, T b, T c, T d, T e, T f, T g, T h, T i)
 {
-    r[0] = a; r[3] = d; r[6] = g;
-    r[1] = b; r[4] = e; r[7] = h;
-    r[2] = c; r[5] = f; r[8] = i;
+	r[0] = a; r[3] = d; r[6] = g;
+	r[1] = b; r[4] = e; r[7] = h;
+	r[2] = c; r[5] = f; r[8] = i;
 }
 
 template<class T> T& Matrix3<T>::operator[](int n)
 {
-    return r[n];
+	return r[n];
 }
 
 template<class T> Matrix3<T>::operator T*()
 {
-    return r;
+	return r;
 }
 
 template<class T> Matrix3<T>::operator const T*() const
 {
-    return r;
+	return r;
 }
 
 template<class T> Matrix3<T> Matrix3<T>::identity()
 {
-    return Matrix3<T>(1, 0, 0,
-                      0, 1, 0,
-                      0, 0, 1);
+	return Matrix3<T>(1, 0, 0,
+			  0, 1, 0,
+			  0, 0, 1);
 }
 
 // multiply column vector by a 3x3 matrix
 template<class T> Vector3<T> Matrix3<T>::operator*(const Vector3<T>& a) const
 {
-    return Vector3<T>( r[0]*a.v[0] + r[3]*a.v[1] + r[6]*a.v[2],
-                       r[1]*a.v[0] + r[4]*a.v[1] + r[7]*a.v[2],
-                       r[2]*a.v[0] + r[5]*a.v[1] + r[8]*a.v[2]);
+	return Vector3<T>(r[0]*a.v[0] + r[3]*a.v[1] + r[6]*a.v[2],
+			  r[1]*a.v[0] + r[4]*a.v[1] + r[7]*a.v[2],
+			  r[2]*a.v[0] + r[5]*a.v[1] + r[8]*a.v[2]);
 }
 
 template<class T> Matrix3<T> Matrix3<T>::transpose() const
 {
-    return Matrix3<T>(r[0], r[3], r[6],
-                      r[1], r[4], r[7],
-                      r[2], r[5], r[8]);
+	return Matrix3<T>(r[0], r[3], r[6],
+			  r[1], r[4], r[7],
+			  r[2], r[5], r[8]);
 }
 
 template<class T> Matrix3<T> Matrix3<T>::operator*(const Matrix3<T>& a) const
 {
 #define MATMUL(R, C) (r[R] * a.r[C] + r[R+3] * a.r[C+1] + r[R+6] * a.r[C+2])
-    return Matrix3<T>(MATMUL(0,0), MATMUL(1,0), MATMUL(2,0),
-                      MATMUL(0,3), MATMUL(1,3), MATMUL(2,3),
-                      MATMUL(0,6), MATMUL(1,6), MATMUL(2,6));
+	return Matrix3<T>(MATMUL(0,0), MATMUL(1,0), MATMUL(2,0),
+			  MATMUL(0,3), MATMUL(1,3), MATMUL(2,3),
+			  MATMUL(0,6), MATMUL(1,6), MATMUL(2,6));
 #undef MATMUL
 }
 
 
 template<class T> Matrix3<T> Matrix3<T>::operator+(const Matrix3<T>& a) const
 {
-    return Matrix3<T>(r[0]+a.r[0], r[1]+a.r[1], r[2]+a.r[2],
-                      r[3]+a.r[3], r[4]+a.r[4], r[5]+a.r[5],
-                      r[6]+a.r[6], r[7]+a.r[7], r[8]+a.r[8]);
+	return Matrix3<T>(r[0]+a.r[0], r[1]+a.r[1], r[2]+a.r[2],
+			  r[3]+a.r[3], r[4]+a.r[4], r[5]+a.r[5],
+			  r[6]+a.r[6], r[7]+a.r[7], r[8]+a.r[8]);
 }
 
 template<class T> Matrix3<T> Matrix3<T>::operator-(const Matrix3<T>& a) const
 {
-    return Matrix3<T>(r[0]-a.r[0], r[1]-a.r[1], r[2]-a.r[2],
-                      r[3]-a.r[3], r[4]-a.r[4], r[5]-a.r[5],
-                      r[6]-a.r[6], r[7]-a.r[7], r[8]-a.r[8]);
+	return Matrix3<T>(r[0]-a.r[0], r[1]-a.r[1], r[2]-a.r[2],
+			  r[3]-a.r[3], r[4]-a.r[4], r[5]-a.r[5],
+			  r[6]-a.r[6], r[7]-a.r[7], r[8]-a.r[8]);
 }
 
 /*
@@ -963,104 +963,110 @@ template<class T> Matrix3<T> Matrix3<T>::operator-(const Matrix3<T>& a) const
  */
 template<class T> Matrix3<T> Matrix3<T>::inverse() const
 {
-    const T * m = r;
-    T out[9];
+	const T * m = r;
+	T out[9];
 
-/* NB. OpenGL Matrices are COLUMN major. */
-#define SWAP_ROWS(a, b) { T *_tmp = a; (a)=(b); (b)=_tmp; }
-#define MAT(m,r,c) (m)[(c)*3+(r)]
+	/* NB. OpenGL Matrices are COLUMN major. */
+	#define SWAP_ROWS(a, b) { T *_tmp = a; (a)=(b); (b)=_tmp; }
+	#define MAT(m,r,c) (m)[(c)*3+(r)]
 
-    T wtmp[3][6];
-    T m0, m1, m2, s;
-    T *r0, *r1, *r2;
+	T wtmp[3][6];
+	T m0, m1, m2, s;
+	T *r0, *r1, *r2;
 
-    r0 = wtmp[0], r1 = wtmp[1], r2 = wtmp[2];
+	r0 = wtmp[0], r1 = wtmp[1], r2 = wtmp[2];
 
-    r0[0] = MAT(m, 0, 0), r0[1] = MAT(m, 0, 1), r0[2] = MAT(m, 0, 2),
-    r0[3] = 1.0, r0[4] = r0[5] = 0.0,
-    r1[0] = MAT(m, 1, 0), r1[1] = MAT(m, 1, 1), r1[2] = MAT(m, 1, 2),
-    r1[4] = 1.0, r1[3] = r1[5] = 0.0,
-    r2[0] = MAT(m, 2, 0), r2[1] = MAT(m, 2, 1), r2[2] = MAT(m, 2, 2),
-    r2[5] = 1.0, r2[3] = r2[4] = 0.0;
+	r0[0] = MAT(m, 0, 0), r0[1] = MAT(m, 0, 1), r0[2] = MAT(m, 0, 2),
+	r0[3] = 1.0, r0[4] = r0[5] = 0.0,
+	r1[0] = MAT(m, 1, 0), r1[1] = MAT(m, 1, 1), r1[2] = MAT(m, 1, 2),
+	r1[4] = 1.0, r1[3] = r1[5] = 0.0,
+	r2[0] = MAT(m, 2, 0), r2[1] = MAT(m, 2, 1), r2[2] = MAT(m, 2, 2),
+	r2[5] = 1.0, r2[3] = r2[4] = 0.0;
 
-   /* choose pivot - or die */
-   if (fabs(r2[0]) > fabs(r1[0]))
-        SWAP_ROWS(r2, r1);
-   if (fabs(r1[0]) > fabs(r0[0]))
-        SWAP_ROWS(r1, r0);
-   if (0.0 == r0[0])
-        return Matrix3<T>();
+	/* choose pivot - or die */
+	if (fabs(r2[0]) > fabs(r1[0]))
+		SWAP_ROWS(r2, r1);
+	if (fabs(r1[0]) > fabs(r0[0]))
+		SWAP_ROWS(r1, r0);
+	if (0.0 == r0[0])
+		return Matrix3<T>();
 
-   /* eliminate first variable     */
-   m1 = r1[0] / r0[0];
-   m2 = r2[0] / r0[0];
-   s = r0[1];
-   r1[1] -= m1 * s;
-   r2[1] -= m2 * s;
-   s = r0[2];
-   r1[2] -= m1 * s;
-   r2[2] -= m2 * s;
-   s = r0[3];
-   if (s != 0.0) {
-          r1[3] -= m1 * s;
-          r2[3] -= m2 * s;
-   }
-   s = r0[4];
-   if (s != 0.0) {
-          r1[4] -= m1 * s;
-          r2[4] -= m2 * s;
-   }
-   s = r0[5];
-   if (s != 0.0) {
-          r1[5] -= m1 * s;
-          r2[5] -= m2 * s;
-   }
+	/* eliminate first variable     */
+	m1 = r1[0] / r0[0];
+	m2 = r2[0] / r0[0];
+	s = r0[1];
+	r1[1] -= m1 * s;
+	r2[1] -= m2 * s;
+	s = r0[2];
+	r1[2] -= m1 * s;
+	r2[2] -= m2 * s;
+	s = r0[3];
+	if (s != 0.0)
+	{
+		r1[3] -= m1 * s;
+		r2[3] -= m2 * s;
+	}
+	s = r0[4];
+	if (s != 0.0)
+	{
+		r1[4] -= m1 * s;
+		r2[4] -= m2 * s;
+	}
+	s = r0[5];
+	if (s != 0.0)
+	{
+		r1[5] -= m1 * s;
+		r2[5] -= m2 * s;
+	}
 
-   /* choose pivot - or die */
-   if (fabs(r2[1]) > fabs(r1[1]))
-       SWAP_ROWS(r2, r1);
-   if (0.0 == r1[1])
-       return Matrix3<T>();
+	/* choose pivot - or die */
+	if (fabs(r2[1]) > fabs(r1[1]))
+		SWAP_ROWS(r2, r1);
+	if (0.0 == r1[1])
+		return Matrix3<T>();
 
-   /* eliminate second variable */
-   m2 = r2[1] / r1[1];
-   r2[2] -= m2 * r1[2];
-   s = r1[3];
-   if (0.0 != s) {
-          r2[3] -= m2 * s;
-   }
-   s = r1[4];
-   if (0.0 != s) {
-          r2[4] -= m2 * s;
-   }
-   s = r1[5];
-   if (0.0 != s) {
-          r2[5] -= m2 * s;
-   }
+	/* eliminate second variable */
+	m2 = r2[1] / r1[1];
+	r2[2] -= m2 * r1[2];
+	s = r1[3];
+	if (0.0 != s)
+	{
+		r2[3] -= m2 * s;
+	}
+	s = r1[4];
+	if (0.0 != s)
+	{
+		r2[4] -= m2 * s;
+	}
+	s = r1[5];
+	if (0.0 != s)
+	{
+		r2[5] -= m2 * s;
+	}
 
-   s = 1.0 / r2[2];		/* now back substitute row 2 */
-   r2[3] *= s;
-   r2[4] *= s;
-   r2[5] *= s;
+	s = 1.0 / r2[2];		/* now back substitute row 2 */
+	r2[3] *= s;
+	r2[4] *= s;
+	r2[5] *= s;
 
-   m1 = r1[2];			/* now back substitute row 1 */
-   s = 1.0 / r1[1];
-   r1[3] = s * (r1[3] - r2[3] * m1), r1[4] = s * (r1[4] - r2[4] * m1), r1[5] = s * (r1[5] - r2[5] * m1);
-   m0 = r0[2];
-   r0[3] -= r2[3] * m0, r0[4] -= r2[4] * m0, r0[5] -= r2[5] * m0;
+	m1 = r1[2];			/* now back substitute row 1 */
+	s = 1.0 / r1[1];
+	r1[3] = s * (r1[3] - r2[3] * m1), r1[4] = s * (r1[4] - r2[4] * m1), r1[5] = s * (r1[5] - r2[5] * m1);
+	m0 = r0[2];
+	r0[3] -= r2[3] * m0, r0[4] -= r2[4] * m0, r0[5] -= r2[5] * m0;
 
-   m0 = r0[1];			/* now back substitute row 0 */
-   s = 1.0 / r0[0];
-   r0[3] = s * (r0[3] - r1[3] * m0), r0[4] = s * (r0[4] - r1[4] * m0), r0[5] = s * (r0[5] - r1[5] * m0);
+	m0 = r0[1];			/* now back substitute row 0 */
+	s = 1.0 / r0[0];
+	r0[3] = s * (r0[3] - r1[3] * m0), r0[4] = s * (r0[4] - r1[4] * m0), r0[5] = s * (r0[5] - r1[5] * m0);
 
-   MAT(out, 0, 0) = r0[3]; MAT(out, 0, 1) = r0[4]; MAT(out, 0, 2) = r0[5];
-   MAT(out, 1, 0) = r1[3]; MAT(out, 1, 1) = r1[4]; MAT(out, 1, 2) = r1[5];
-   MAT(out, 2, 0) = r2[3]; MAT(out, 2, 1) = r2[4]; MAT(out, 2, 2) = r2[5];
+	MAT(out, 0, 0) = r0[3]; MAT(out, 0, 1) = r0[4]; MAT(out, 0, 2) = r0[5];
+	MAT(out, 1, 0) = r1[3]; MAT(out, 1, 1) = r1[4]; MAT(out, 1, 2) = r1[5];
+	MAT(out, 2, 0) = r2[3]; MAT(out, 2, 1) = r2[4]; MAT(out, 2, 2) = r2[5];
 
-   return Matrix3<T>(out);
+	return Matrix3<T>(out);
 
-#undef MAT
-#undef SWAP_ROWS
+	#undef MAT
+	#undef SWAP_ROWS
 }
 
 template<class T> void Matrix3<T>::print(void) const
