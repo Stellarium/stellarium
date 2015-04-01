@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:07+0600\n"
+"POT-Creation-Date: 2015-04-01 23:18+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9945,11 +9945,11 @@ msgid ""
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css"
 "\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:10pt; "
-"font-weight:400; font-style:normal;\">\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:10pt; font-"
+"weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; "
-"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-"\"><br /></p></body></html>"
+"margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-"
+"family:'MS Shell Dlg 2';\"><br /></p></body></html>"
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
@@ -9984,9 +9984,8 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid ""
-"<html><head/><body><p>Provides more accurate lighting by calculating it per-"
-"pixel instead of per-vertex.</p><p>Required for bump mapping and shadows!</"
-"p></body></html>"
+"Provides more accurate lighting by calculating it per-pixel instead of per-"
+"vertex. Required for bump mapping and shadows!"
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
@@ -10046,19 +10045,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid ""
-"<html><head/><body><p>Determines how the shadows are filtered, in increasing "
-"quality from top to bottom.</p><p>PCSS requires the quality set to LOW or "
-"HIGH.</p></body></html>"
+"Determines how the shadows are filtered, in increasing quality from top to "
+"bottom. PCSS requires the quality set to LOW or HIGH."
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
 msgid ""
-"<html><head/><body><p>Approximate calculation of shadow penumbras (sharper "
-"shadows near contact points, blurred shadows further away).</p><p>Requires "
-"<span style=\" font-weight:600;\">LOW</span> or <span style=\" font-"
-"weight:600;\">HIGH</span> shadow filtering (without <span style=\" font-"
-"weight:600;\">Hardware</span>).</p><p>Causes a performance hit.</p></body></"
-"html>"
+"Approximate calculation of shadow penumbras (sharper shadows near contact "
+"points, blurred shadows further away). Requires LOW or HIGH shadow filtering "
+"(without Hardware). Causes a performance hit."
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
@@ -10087,62 +10082,60 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:514
 msgid ""
-"<html><head/><body><p>Calculates shadows for each cubemap face separately.</"
-"p><p>If disabled, the shadowed area is calculated using a perspective "
-"projection, which may cause missing shadows with high FOV values, but is "
-"quite a bit faster!</p><p>This does not work when using the <span style=\" "
-"font-weight:600;\">Geometry shader</span> cubemapping mode!</p></body></html>"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:516
-msgid "Full cubemap shadows"
+"Calculates shadows for each cubemap face separately.\n"
+"If disabled, the shadowed area is calculated using a perspective projection, "
+"which may cause missing shadows with high FOV values, but is quite a bit "
+"faster!\n"
+"This does not work when using the Geometry shader cubemapping mode!"
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:518
-msgid ""
-"<html><head/><body><p>When checked, the cubemap is only recreated in "
-"specific time intervals, instead of each frame.<br/>Saves energy and may "
-"increase subjective application performance.</p><p><span style=\" font-"
-"weight:600;\">Note that the cubemap is always re-rendered when the view "
-"position changes.</span></p></body></html>"
+msgid "Full cubemap shadows"
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:520
-msgid "Lazy cubemap re-rendering"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:521
-msgid "Interval:"
+msgid ""
+"When checked, the cubemap is only recreated in specific time intervals, "
+"instead of each frame.\n"
+"Saves energy and may increase subjective application performance. Note that "
+"the cubemap is always re-rendered when the view position changes."
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:523
-msgid "The interval (in timeline seconds) in which no redraw is performed"
+msgid "Lazy cubemap re-rendering"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:524
+msgid "Interval:"
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:526
-msgid ""
-"<html><head/><body><p>When checked, only the face that corresponds to your "
-"viewing direction is updated on movement.</p><p>This will speed up "
-"rendering, but the appearance will look &quot;broken&quot; until you stop "
-"moving.</p><p><span style=\" font-weight:600;\">This does NOT work with the "
-"&quot;Geometry-Shader&quot; cubemapping mode!</span></p></body></html>"
+msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:528
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:529
+msgid ""
+"When checked, only the face that corresponds to your viewing direction is "
+"updated on movement. This will speed up rendering, but the appearance will "
+"look \"broken\" until you stop moving. This does NOT work with the "
+"\"Geometry-Shader\" cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:531
 msgid "Only update dominant face when moving"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:530
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
 msgid ""
-"<html><head/><body><p>This updates a second face, so that the visual "
-"apperance seems less &quot;broken&quot;.</p></body></html>"
+"This updates a second face, so that the visual apperance seems less \"broken"
+"\"."
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:532
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:535
 msgid "Also update second-most dominant face"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:536
 msgid "Quality/Performance settings"
 msgstr ""
 
