@@ -1292,14 +1292,14 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 				if (strstr(buffer, "map_Kd") != 0)
 				{
 					fgets(buffer, sizeof(buffer), pFile);
-					sscanf("%[^\n]", buffer);
+					sscanf(buffer, "%[^\n]", buffer);
 
 					pMaterial->textureName = parseTextureString(buffer);
 				}
 				else if (strstr(buffer, "map_Ke") != 0)
 				{
 					fgets(buffer, sizeof(buffer), pFile);
-					sscanf("%[^\n]", buffer);
+					sscanf(buffer, "%[^\n]", buffer);
 
 					pMaterial->emissiveMapName = parseTextureString(buffer);
 				}
