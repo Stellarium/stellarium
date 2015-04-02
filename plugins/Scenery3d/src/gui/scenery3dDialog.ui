@@ -288,11 +288,11 @@
               <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>
              <property name="html">
-              <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="openExternalLinks">
               <bool>true</bool>
@@ -478,9 +478,6 @@ p, li { white-space: pre-wrap; }
                    </property>
                    <item row="0" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnablePixelLight">
-                     <property name="toolTip">
-                      <string>Provides more accurate lighting by calculating it per-pixel instead of per-vertex. Required for bump mapping and shadows!</string>
-                     </property>
                      <property name="text">
                       <string>Per-Pixel lighting</string>
                      </property>
@@ -509,9 +506,6 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <item row="0" column="0" colspan="2">
                       <widget class="QCheckBox" name="checkBoxSimpleShadows">
-                       <property name="toolTip">
-                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Uses only a single shadow cascade instead of up to four.&lt;/p&gt;&lt;p&gt;Provides a speedup in exchange for shadow quality, especially in large scenes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                       </property>
                        <property name="text">
                         <string>Simple shadows</string>
                        </property>
@@ -577,9 +571,6 @@ p, li { white-space: pre-wrap; }
                    </item>
                    <item row="6" column="1">
                     <widget class="QComboBox" name="comboBoxShadowFiltering">
-                     <property name="toolTip">
-                      <string>Determines how the shadows are filtered, in increasing quality from top to bottom. PCSS requires the quality set to LOW or HIGH.</string>
-                     </property>
                      <item>
                       <property name="text">
                        <string>Off</string>
@@ -619,9 +610,6 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <item row="0" column="0" colspan="2">
                       <widget class="QCheckBox" name="checkBoxPCSS">
-                       <property name="toolTip">
-                        <string>Approximate calculation of shadow penumbras (sharper shadows near contact points, blurred shadows further away). Requires LOW or HIGH shadow filtering (without Hardware). Causes a performance hit.</string>
-                       </property>
                        <property name="text">
                         <string>PCSS</string>
                        </property>
@@ -647,19 +635,10 @@ p, li { white-space: pre-wrap; }
                     </widget>
                    </item>
                    <item row="0" column="1">
-                    <widget class="QComboBox" name="comboBoxCubemapMode">
-                     <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This determines the way the scene is rendered when Stellarium uses a projection other than &amp;quot;Perspective&amp;quot;. The scene is always rendered onto a cube, and this cube is then warped according to the real projection. The cube is described using an image called &amp;quot;cubemap&amp;quot;.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;6 Textures&lt;/span&gt; uses 6 single textures, one for each cube side. This is the most compatible method, but may be slower than the others.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Cubemap&lt;/span&gt; uses a single GL_TEXTURE_CUBEMAP. Recommended for most users.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Geometry shader&lt;/span&gt; uses a modern GPU feature to render all 6 sides of the cube at once. It may be the fastest method depending on the scene and your GPU hardware. If not supported, this cannot be selected.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
+                    <widget class="QComboBox" name="comboBoxCubemapMode"/>
                    </item>
                    <item row="1" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxCubemapShadows">
-                     <property name="toolTip">
-                      <string>Calculates shadows for each cubemap face separately.
-If disabled, the shadowed area is calculated using a perspective projection, which may cause missing shadows with high FOV values, but is quite a bit faster!
-This does not work when using the Geometry shader cubemapping mode!</string>
-                     </property>
                      <property name="text">
                       <string>Full cubemap shadows</string>
                      </property>
@@ -667,10 +646,6 @@ This does not work when using the Geometry shader cubemapping mode!</string>
                    </item>
                    <item row="2" column="0" colspan="2">
                     <widget class="QCheckBox" name="checkBoxEnableLazyDrawing">
-                     <property name="toolTip">
-                      <string>When checked, the cubemap is only recreated in specific time intervals, instead of each frame.
-Saves energy and may increase subjective application performance. Note that the cubemap is always re-rendered when the view position changes.</string>
-                     </property>
                      <property name="text">
                       <string>Lazy cubemap re-rendering</string>
                      </property>
@@ -693,9 +668,6 @@ Saves energy and may increase subjective application performance. Note that the 
                      </item>
                      <item row="0" column="1">
                       <widget class="QDoubleSpinBox" name="spinLazyDrawingInterval">
-                       <property name="toolTip">
-                        <string>The interval (in timeline seconds) in which no redraw is performed</string>
-                       </property>
                        <property name="minimum">
                         <double>0.100000000000000</double>
                        </property>
@@ -709,9 +681,6 @@ Saves energy and may increase subjective application performance. Note that the 
                      </item>
                      <item row="1" column="0" colspan="2">
                       <widget class="QCheckBox" name="checkBoxDominantFace">
-                       <property name="toolTip">
-                        <string>When checked, only the face that corresponds to your viewing direction is updated on movement. This will speed up rendering, but the appearance will look &quot;broken&quot; until you stop moving. This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!</string>
-                       </property>
                        <property name="text">
                         <string>Only update dominant face when moving</string>
                        </property>
@@ -721,9 +690,6 @@ Saves energy and may increase subjective application performance. Note that the 
                       <widget class="QCheckBox" name="checkBoxSecondDominantFace">
                        <property name="enabled">
                         <bool>true</bool>
-                       </property>
-                       <property name="toolTip">
-                        <string>This updates a second face, so that the visual apperance seems less &quot;broken&quot;.</string>
                        </property>
                        <property name="text">
                         <string>Also update second-most dominant face</string>
