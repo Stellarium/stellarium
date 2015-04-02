@@ -318,6 +318,7 @@ void Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged(int index)
 
 void Scenery3dDialog::on_comboBoxShadowmapSize_currentIndexChanged(int index)
 {
+	Q_UNUSED(index)
 	bool ok;
 	uint val = ui->comboBoxShadowmapSize->currentData().toUInt(&ok);
 	if(ok)
