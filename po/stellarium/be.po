@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-30 13:39+0600\n"
+"POT-Creation-Date: 2015-04-01 23:25+0600\n"
 "PO-Revision-Date: 2015-02-22 08:01+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-03-31 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-04-02 05:11+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
 #: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:477 src/core/StelCore.cpp:192
+#: src/core/StelApp.cpp:481 src/core/StelCore.cpp:192
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr "Настройкі адлюстраваньня"
@@ -158,6 +158,7 @@ msgid "Illumination"
 msgstr "Асьвятленьне"
 
 #: src/core/modules/LandscapeMgr.cpp:594
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:380
 msgid "Author: "
 msgstr "Стваральнік: "
 
@@ -631,7 +632,7 @@ msgstr "Млечны шлях"
 msgid "Zodiacal Light"
 msgstr "Задыякальнае сьвятло"
 
-#: src/core/StelApp.cpp:477
+#: src/core/StelApp.cpp:481
 msgid "Night mode"
 msgstr "Начны рэжым"
 
@@ -641,7 +642,7 @@ msgstr "Начны рэжым"
 msgid "Date and Time"
 msgstr "Дата й час"
 
-#: src/core/StelCore.cpp:191 src/core/StelMovementMgr.cpp:129
+#: src/core/StelCore.cpp:191 src/core/StelMovementMgr.cpp:131
 msgid "Movement and Selection"
 msgstr "Рух і вылучэньне"
 
@@ -1308,28 +1309,28 @@ msgstr "Ґаляктычныя даўгата/шырата: %1/%2"
 msgid "Deep-sky objects background images"
 msgstr "Відарысы асноведзі аб'ектаў глыбокага космасу"
 
-#: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:177
+#: src/core/StelMovementMgr.cpp:132 src/gui/StelGui.cpp:177
 #: src/StelMainView.cpp:442
 msgid "Miscellaneous"
 msgstr "Рознае"
 
-#: src/core/StelMovementMgr.cpp:130
+#: src/core/StelMovementMgr.cpp:132
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Пераключыцца між экватарыяльным і азімутальным мацаваньнем"
 
-#: src/core/StelMovementMgr.cpp:131
+#: src/core/StelMovementMgr.cpp:133
 msgid "Center on selected object"
 msgstr "Перайсьці да вылучанага аб'екту"
 
-#: src/core/StelMovementMgr.cpp:132
+#: src/core/StelMovementMgr.cpp:134
 msgid "Zoom in on selected object"
 msgstr "Наблізіць вылучаны аб'ект"
 
-#: src/core/StelMovementMgr.cpp:133
+#: src/core/StelMovementMgr.cpp:135
 msgid "Zoom out"
 msgstr "Аддаліць"
 
-#: src/core/StelMovementMgr.cpp:134
+#: src/core/StelMovementMgr.cpp:136
 msgid "Track object"
 msgstr "Сачыць за аб'ектам"
 
@@ -6636,6 +6637,7 @@ msgid "Do not update"
 msgstr "Не абнаўляць"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Description:"
 msgstr "Апісаньне:"
 
@@ -7560,6 +7562,7 @@ msgid "On"
 msgstr "Укл"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
 msgid "Off"
 msgstr "Выкл"
 
@@ -10273,6 +10276,430 @@ msgstr "Каардыната X"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
 msgstr "Каардыната Y"
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:166
+msgid "Loading model..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:181
+msgid "Transforming model..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:193
+msgid "Loading ground..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:204
+msgid "Transforming ground..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:232
+msgid "Calculating collision map..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:247
+msgid "Finalizing load..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:680
+msgid "Scenery3d shader error, can't draw. Check debug output for details."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2098
+msgid ""
+"Your hardware does not support cubemapping, please switch to 'Perspective' "
+"projection!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2107
+msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2117
+msgid "Falling back to '6 Textures' because of ANGLE bug"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2638
+msgid ""
+"Shadow mapping can not be used on your hardware, check logs for details"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:170
+msgid "Scenery3d plugin loaded!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:222
+msgid "Scenery3d: 3D landscapes"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:225
+msgid "Toggle 3D landscape"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
+msgid "Show settings dialog"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:227
+msgid "Show viewpoint dialog"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:228
+msgid "Toggle shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
+msgid "Toggle debug information"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
+msgid "Toggle location text"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
+msgid "Toggle torchlight"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
+msgid "Reload shaders"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:267
+msgid "Scenery3d shaders reloaded"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:322
+msgid "Loading scene. Please be patient!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:324
+#, qt-format
+msgid "Loading scene '%1'"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:347
+msgid "Could not load scene, please check log for error messages!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
+msgid "Scene successfully loaded."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:410
+msgid "Could not load scene info, please check log for error messages!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:434
+#, qt-format
+msgid "Could not find scene ID for %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#, qt-format
+msgid "Per-Pixel shading %1."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+msgctxt "enable"
+msgid "on"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+msgctxt "disable"
+msgid "off"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#, qt-format
+msgid "Shadows %1."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:528
+msgid "Shadows deactivated or not possible."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#, qt-format
+msgid "Surface bumps %1."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:607
+msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#, qt-format
+msgid "Lazy cubemapping: %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+msgid "enabled"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+msgid "disabled"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:776
+msgid "Cubemap size changed"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:778
+#, qt-format
+msgid "Cubemap size not supported, set to %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:799
+msgid "Shadowmap size changed"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:801
+#, qt-format
+msgid "Shadowmap size not supported, set to %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:906
+msgid "3D Sceneries"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:909
+msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden, find and demonstrate possible astronomical alignments in temples, "
+"see shadows on sundials etc."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
+msgid "6 Textures"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
+msgid "Cubemap"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:71
+msgid "Geometry shader"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
+#, qt-format
+msgid "Grid coordinates (%1): %2m, %3m, %4m"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
+msgid "3D Scenery"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
+msgid "Set as default scene"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
+msgid "Load/save viewpoints"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
+msgid "Torch strength:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
+msgid "Torch range:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
+#, qt-format
+msgid "Torchlight (%1)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
+#, qt-format
+msgid "Show grid coordinates (%1)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
+msgid "Visual options"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
+msgid ""
+"Provides more accurate lighting by calculating it per-pixel instead of per-"
+"vertex. Required for bump mapping and shadows!"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+msgid "Per-Pixel lighting"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+msgid "Shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
+msgid ""
+"<html><head/><body><p>Uses only a single shadow cascade instead of up to "
+"four.</p><p>Provides a speedup in exchange for shadow quality, especially in "
+"large scenes.</p></body></html>"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
+msgid "Simple shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+msgid "Bump mapping"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+msgid "Cubemap size:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+msgid "Shadowmap size:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+msgid "Filtering Quality:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+msgid "Hardware"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+msgid "Low"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+msgid "Low + Hardware"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+msgid "High (slow)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+msgid "High + Hardware (slow)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
+msgid ""
+"Determines how the shadows are filtered, in increasing quality from top to "
+"bottom. PCSS requires the quality set to LOW or HIGH."
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
+msgid ""
+"Approximate calculation of shadow penumbras (sharper shadows near contact "
+"points, blurred shadows further away). Requires LOW or HIGH shadow filtering "
+"(without Hardware). Causes a performance hit."
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+msgid "PCSS"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+msgid "Cubemapping mode:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
+msgid ""
+"<html><head/><body><p>This determines the way the scene is rendered when "
+"Stellarium uses a projection other than &quot;Perspective&quot;. The scene "
+"is always rendered onto a cube, and this cube is then warped according to "
+"the real projection. The cube is described using an image called "
+"&quot;cubemap&quot;.</p><p><span style=\" font-weight:600;\">6 "
+"Textures</span> uses 6 single textures, one for each cube side. This is the "
+"most compatible method, but may be slower than the others.</p><p><span "
+"style=\" font-weight:600;\">Cubemap</span> uses a single GL_TEXTURE_CUBEMAP. "
+"Recommended for most users.</p><p><span style=\" font-weight:600;\">Geometry "
+"shader</span> uses a modern GPU feature to render all 6 sides of the cube at "
+"once. It may be the fastest method depending on the scene and your GPU "
+"hardware. If not supported, this cannot be selected.</p></body></html>"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:514
+msgid ""
+"Calculates shadows for each cubemap face separately.\n"
+"If disabled, the shadowed area is calculated using a perspective projection, "
+"which may cause missing shadows with high FOV values, but is quite a bit "
+"faster!\n"
+"This does not work when using the Geometry shader cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:518
+msgid "Full cubemap shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:520
+msgid ""
+"When checked, the cubemap is only recreated in specific time intervals, "
+"instead of each frame.\n"
+"Saves energy and may increase subjective application performance. Note that "
+"the cubemap is always re-rendered when the view position changes."
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:523
+msgid "Lazy cubemap re-rendering"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:524
+msgid "Interval:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:526
+msgid "The interval (in timeline seconds) in which no redraw is performed"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:529
+msgid ""
+"When checked, only the face that corresponds to your viewing direction is "
+"updated on movement. This will speed up rendering, but the appearance will "
+"look \"broken\" until you stop moving. This does NOT work with the "
+"\"Geometry-Shader\" cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:531
+msgid "Only update dominant face when moving"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
+msgid ""
+"This updates a second face, so that the visual apperance seems less "
+"\"broken\"."
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:535
+msgid "Also update second-most dominant face"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:536
+msgid "Quality/Performance settings"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:205
+msgid "Stored views"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:207
+msgid "Load view"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:208
+msgid "Delete view"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
+msgid "Add current view"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+msgid "Title:"
+msgstr ""
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Экватарыяльная сетка"
