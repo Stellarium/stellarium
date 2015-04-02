@@ -45,6 +45,8 @@ private slots:
 
 	void updateShortcutStrings();
 
+	void updateToolTipStrings();
+
 private:
 	//! Connects the UI to update events from the Scenery3dMgr
 	void createUpdateConnections();
