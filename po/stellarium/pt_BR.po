@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 23:25+0600\n"
-"PO-Revision-Date: 2015-04-02 03:30+0000\n"
+"POT-Creation-Date: 2015-04-02 19:51+0600\n"
+"PO-Revision-Date: 2015-04-02 18:59+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-02 05:24+0000\n"
+"X-Launchpad-Export-Date: 2015-04-03 05:25+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -156,7 +156,7 @@ msgid "Illumination"
 msgstr "Iluminação"
 
 #: src/core/modules/LandscapeMgr.cpp:594
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:380
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:431
 msgid "Author: "
 msgstr "Autor: "
 
@@ -7666,7 +7666,7 @@ msgid "On"
 msgstr "Ligado"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
 msgstr "Desligado"
 
@@ -10429,37 +10429,37 @@ msgstr "Coordenada X"
 msgid "Coordinate Y"
 msgstr "Coordenada Y"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:166
+#: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
 msgstr "Carregando o modelo…"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:181
+#: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
 msgstr "Transformando o modelo…"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:193
+#: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
 msgstr "Carregando o solo…"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:204
+#: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
 msgstr "Transformando o solo…"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:232
+#: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
 msgstr "Calculando o mapa de colisão…"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:247
+#: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
 msgstr "Finalizando o carregamento…"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:680
+#: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 "Erro do sombreador do Scenery3d: não é possível traçar. Verifique a saída de "
 "depuração para detalhes."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2098
+#: plugins/Scenery3d/src/Scenery3d.cpp:2102
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -10467,17 +10467,17 @@ msgstr ""
 "O seu equipamento não suporta o mapeamento cúbico. Por favor, mude para a "
 "projeção em 'Perspectiva'!"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2107
+#: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 "O sombreador de geometria não é suportado. Retornando ao modo de '6 "
 "texturas'."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2117
+#: plugins/Scenery3d/src/Scenery3d.cpp:2121
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr "Retornando às '6 texturas' devido a um erro no ANGLE"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2638
+#: plugins/Scenery3d/src/Scenery3d.cpp:2642
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
@@ -10642,6 +10642,181 @@ msgstr ""
 "obstruções em seu jardim, encontre e demonstre possíveis alinhamentos "
 "astronômicos em templos, veja sombras sobre relógios de sol, etc."
 
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
+msgid ""
+"Provides more accurate lighting by calculating it per-pixel instead of per-"
+"vertex."
+msgstr ""
+"Fornece iluminação mais precisa ao calculá-la por píxel em vez de por "
+"vértice."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:232
+msgid "Required for bump mapping and shadows!"
+msgstr "Necessário para mapeamento de colisão e para sombras!"
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:234
+msgid "Uses only a single shadow cascade instead of up to four."
+msgstr ""
+"Utiliza somente uma cascata de sombras única em vez de até quatro delas."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:235
+msgid ""
+"Provides a speedup in exchange for shadow quality, especially in large "
+"scenes."
+msgstr ""
+"Oferece um aumento de velocidade em troca da qualidade das sombras, "
+"especialmente em cenas grandes."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:237
+msgid ""
+"Determines how the shadows are filtered, in increasing quality from top to "
+"bottom."
+msgstr ""
+"Determina como as sombras são filtradas ao aumentar a qualidade de cima para "
+"baixo."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:238
+msgid "PCSS requires the quality set to LOW or HIGH."
+msgstr "Os PCSS exigem que a qualidade seja definida para BAIXA ou ALTA."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:240
+msgid ""
+"Approximate calculation of shadow penumbras (sharper shadows near contact "
+"points, blurred shadows further away)."
+msgstr ""
+"Cálculo aproximado de penumbras de sombra (sombras mais nítidas próximo a "
+"pontos de contato, sombras borradas em pontos mais distantes)."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:241
+msgid ""
+"Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
+"<b>Hardware</b>)."
+msgstr ""
+"Exige filtramento de sombra <b>BAIXO</b> ou <b>ALTO</b> (sem "
+"<b>equipamento</b>)."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:242
+msgid "Causes a performance hit."
+msgstr "Acarreta uma queda no desempenho."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
+msgid ""
+"This determines the way the scene is rendered when Stellarium uses a "
+"projection other than &quot;Perspective&quot;. The scene is always rendered "
+"onto a cube, and this cube is then warped according to the real projection. "
+"The cube is described using an image called &quot;cubemap&quot;."
+msgstr ""
+"Essa opção determina o modo como a cena é renderizada quando o Stellarium "
+"utiliza uma projeção diferente de &quot;Perspectiva&quot;. A cena é sempre "
+"renderizada sobre um cubo e esse cubo é, então, deformado de acordo com a "
+"projeção real. O cubo é descrito usando-se uma imagem denominada &quot;mapa "
+"cúbico&quot;."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
+msgid ""
+"<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
+"the most compatible method, but may be slower than the others."
+msgstr ""
+"<b>6 texturas</b> usa seis texturas individuais, uma para cada lado do cubo. "
+"Esse é o método mais compatível, mas pode ser mais lento do que os outros."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
+msgid ""
+"<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
+msgstr ""
+"<b>Mapa cúbico</b> emprega um único GL_TEXTURE_CUBEMAP. É recomendado para a "
+"maioria dos usuários."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
+msgid ""
+"<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of "
+"the cube at once. It may be the fastest method depending on the scene and "
+"your GPU hardware. If not supported, this cannot be selected."
+msgstr ""
+"<b>Sombreador de geometria</b> utiliza um moderno recurso da GPU para "
+"renderizar todos os seis lados do cubo de uma só vez. Esse pode ser o método "
+"mais rápido, dependendo da cena e do seu equipamento da GPU. Caso não seja "
+"suportado, ele não pode ser selecionado."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
+msgid "Calculates shadows for each cubemap face separately."
+msgstr "Calcula sombras para cada face do mapa cúbico separadamente."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
+msgid ""
+"If disabled, the shadowed area is calculated using a perspective projection, "
+"which may cause missing shadows with high FOV values, but is quite a bit "
+"faster!"
+msgstr ""
+"Se desativado, a área sombreada é calculada usando uma projeção em "
+"perspectiva, o que pode acarretar a ausência de sombras em valores de campo "
+"de visão altos, mas é um pouco mais rápido!"
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
+msgid ""
+"This does not work when using the <b>Geometry shader</b> cubemapping mode!"
+msgstr ""
+"Essa opção não funciona quando se utiliza o modo de mapeamento de cubo para "
+"o <b>sombreador de geometria</b>!"
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
+msgid ""
+"When checked, the cubemap is only recreated in specific time intervals, "
+"instead of each frame."
+msgstr ""
+"Quando selecionado, o mapa cúbico é apenas recriado em intervalos de tempo "
+"específicos, em vez de a cada quadro."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
+msgid "Saves energy and may increase subjective application performance."
+msgstr ""
+"Essa opção economiza energia e pode aumentar o desempenho subjetivo do "
+"aplicativo."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
+msgid ""
+"Note that the cubemap is always re-rendered when the view position changes."
+msgstr ""
+"Note-se que o mapa cúbico é rerrenderizado toda vez que a posição de "
+"visualização muda."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
+msgid ""
+"When checked, only the face that corresponds to your viewing direction is "
+"updated on movement."
+msgstr ""
+"Quando selecionado, apenas a face que corresponde à sua direção de "
+"visualização é atualizada com o movimento."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
+msgid ""
+"This will speed up rendering, but the appearance will look "
+"&quot;broken&quot; until you stop moving."
+msgstr ""
+"Isso acelerará a renderização, mas a aparência ficará &quot;quebrada&quot; "
+"até que você pare de se mover."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
+msgid ""
+"This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
+msgstr ""
+"Isso NÃO funciona com o modo de mapeamento de cubo para o &quot;Sombreador "
+"de geometria&quot;!"
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
+msgid ""
+"This updates a second face, so that the visual apperance seems less "
+"&quot;broken&quot;."
+msgstr ""
+"Essa opção atualiza uma segunda face, de modo que a aparência visual fique "
+"menos &quot;quebrada&quot;."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
+msgid "The interval (in timeline seconds) in which no redraw is performed"
+msgstr ""
+"O intervalo (numa linha do tempo em segundos) em que não é realizado nenhum "
+"retraçado"
+
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
 msgid "6 Textures"
 msgstr "6 texturas"
@@ -10693,203 +10868,83 @@ msgstr "Exibir as coordenadas da grelha (%1)"
 msgid "Visual options"
 msgstr "Opções visuais"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
-msgid ""
-"Provides more accurate lighting by calculating it per-pixel instead of per-"
-"vertex. Required for bump mapping and shadows!"
-msgstr ""
-"Fornece iluminação mais precisa ao calculá-la por píxel em vez de por "
-"vértice. Isso é requerido para mapeamento de colisão e para sombras!"
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
 msgstr "Iluminação por píxel"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
 msgstr "Sombras"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
-msgid ""
-"<html><head/><body><p>Uses only a single shadow cascade instead of up to "
-"four.</p><p>Provides a speedup in exchange for shadow quality, especially in "
-"large scenes.</p></body></html>"
-msgstr ""
-"<html><head/><body><p>Utiliza somente uma cascata de sombras única em vez de "
-"até quatro delas.</p><p>Oferece um aumento de velocidade em troca da "
-"qualidade das sombras, especialmente em cenas grandes.</p></body></html>"
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
 msgstr "Sombras simples"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
 msgstr "Mapeamento de colisão"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
 msgstr "Tamanho do mapa cúbico:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
 msgstr "Tamanho do mapa umbral:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
 msgstr "Qualidade do filtramento:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
 msgstr "Equipamento"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
 msgstr "Baixo"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
 msgstr "Baixo + equipamento"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
 msgstr "Alto (lento)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
 msgstr "Alto + equipamento (lento)"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
-msgid ""
-"Determines how the shadows are filtered, in increasing quality from top to "
-"bottom. PCSS requires the quality set to LOW or HIGH."
-msgstr ""
-"Determina como as sombras são filtradas ao aumentar a qualidade de cima para "
-"baixo. Os PCSS requerem que a qualidade seja definida para BAIXA ou ALTA."
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
-msgid ""
-"Approximate calculation of shadow penumbras (sharper shadows near contact "
-"points, blurred shadows further away). Requires LOW or HIGH shadow filtering "
-"(without Hardware). Causes a performance hit."
-msgstr ""
-"Cálculo aproximado de penumbras de sombra (sombras mais nítidas próximas a "
-"pontos de contato, sombras borradas mais distantes). Requer filtramento de "
-"sombras BAIXO ou ALTO (sem equipamento). Causa uma queda no desempenho."
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
 msgstr "PCSS"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
 msgstr "Modo de mapeamento cúbico:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
-msgid ""
-"<html><head/><body><p>This determines the way the scene is rendered when "
-"Stellarium uses a projection other than &quot;Perspective&quot;. The scene "
-"is always rendered onto a cube, and this cube is then warped according to "
-"the real projection. The cube is described using an image called "
-"&quot;cubemap&quot;.</p><p><span style=\" font-weight:600;\">6 "
-"Textures</span> uses 6 single textures, one for each cube side. This is the "
-"most compatible method, but may be slower than the others.</p><p><span "
-"style=\" font-weight:600;\">Cubemap</span> uses a single GL_TEXTURE_CUBEMAP. "
-"Recommended for most users.</p><p><span style=\" font-weight:600;\">Geometry "
-"shader</span> uses a modern GPU feature to render all 6 sides of the cube at "
-"once. It may be the fastest method depending on the scene and your GPU "
-"hardware. If not supported, this cannot be selected.</p></body></html>"
-msgstr ""
-"<html><head/><body><p>Essa opção determina o modo como a cena é renderizada "
-"quando o Stellarium utiliza uma projeção diferente de "
-"&quot;Perspectiva&quot;. A cena é sempre renderizada sobre um cubo e esse "
-"cubo é, então, deformado de acordo com a projeção real. O cubo é descrito "
-"usando-se uma imagem denominada &quot;mapa cúbico&quot;.</p><p><span "
-"style=\" font-weight:600;\">6 texturas</span> usa seis texturas individuais, "
-"uma para cada lado do cubo. Esse é o método mais compatível, mas pode ser "
-"mais lento do que os outros.</p><p><span style=\" font-weight:600;\">Mapa "
-"cúbico</span> emprega um único GL_TEXTURE_CUBEMAP. É recomendado para a "
-"maioria dos usuários.</p><p><span style=\" font-weight:600;\">Sombreador de "
-"geometria</span> utiliza um moderno recurso da GPU para renderizar todos os "
-"seis lados do cubo de uma só vez. Esse pode ser o método mais rápido, "
-"dependendo da cena e do seu equipamento da GPU. Caso não seja suportado, ele "
-"não pode ser selecionado.</p></body></html>"
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:514
-msgid ""
-"Calculates shadows for each cubemap face separately.\n"
-"If disabled, the shadowed area is calculated using a perspective projection, "
-"which may cause missing shadows with high FOV values, but is quite a bit "
-"faster!\n"
-"This does not work when using the Geometry shader cubemapping mode!"
-msgstr ""
-"Calcula sombras para cada face do mapa cúbico separadamente.\n"
-"Se desativado, a área sombreada é calculada usando uma projeção em "
-"perspectiva, o que pode acarretar a ausência de sombras em valores de campo "
-"de visão altos, mas é um pouco mais rápido!\n"
-"Essa opção não funciona quando se utiliza o modo de mapeamento de cubo para "
-"o sombreador de geometria!"
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:518
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
 msgstr "Sombras de mapa cúbico cheias"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:520
-msgid ""
-"When checked, the cubemap is only recreated in specific time intervals, "
-"instead of each frame.\n"
-"Saves energy and may increase subjective application performance. Note that "
-"the cubemap is always re-rendered when the view position changes."
-msgstr ""
-"Quando selecionado, o mapa cúbico é apenas recriado em intervalos de tempo "
-"específicos, em vez de a cada quadro.\n"
-"Essa opção economiza energia e pode aumentar o desempenho subjetivo do "
-"aplicativo. Note-se que o mapa cúbico é rerrenderizado toda vez que a "
-"posição de visualização muda."
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:523
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
 msgstr "Rerrenderização lenta de mapa cúbico"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:524
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
 msgstr "Intervalo:"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:526
-msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
-"O intervalo (numa linha do tempo em segundos) em que não é realizado nenhum "
-"retraçado"
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:529
-msgid ""
-"When checked, only the face that corresponds to your viewing direction is "
-"updated on movement. This will speed up rendering, but the appearance will "
-"look \"broken\" until you stop moving. This does NOT work with the "
-"\"Geometry-Shader\" cubemapping mode!"
-msgstr ""
-"Quando selecionado, apenas a face que corresponde à sua direção de "
-"visualização é atualizada com o movimento. Isso acelerará a renderização, "
-"mas a aparência ficará \"quebrada\" até que você pare de se mover. Isso NÃO "
-"funciona com o modo de mapeamento de cubo para o \"Sombreador de geometria\"!"
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:531
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
 msgstr "Atualizar somente a face dominante quando movendo-se"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
-msgid ""
-"This updates a second face, so that the visual apperance seems less "
-"\"broken\"."
-msgstr ""
-"Esta opção atualiza uma segunda face, de modo que a aparência visual pareça "
-"menos \"quebrada\"."
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:535
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
 msgstr "Também atualiza a segunda face mais dominante"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:536
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
 msgstr "Configurações de qualidade/desempenho"
 
