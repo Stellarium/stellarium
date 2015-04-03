@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 23:25+0600\n"
-"PO-Revision-Date: 2015-04-01 23:30+0000\n"
+"POT-Creation-Date: 2015-04-02 19:51+0600\n"
+"PO-Revision-Date: 2015-04-02 21:04+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-02 05:20+0000\n"
+"X-Launchpad-Export-Date: 2015-04-03 05:22+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -156,7 +156,7 @@ msgid "Illumination"
 msgstr "Osvetljenje"
 
 #: src/core/modules/LandscapeMgr.cpp:594
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:380
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:431
 msgid "Author: "
 msgstr "Аутор: "
 
@@ -277,7 +277,7 @@ msgstr "Непознато"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr ""
+msgstr "HII region"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
@@ -552,7 +552,7 @@ msgstr "kataklizmicna promenljiva zvezda"
 
 #: src/core/modules/StarWrapper.cpp:161
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "Eklipsno-dvojni sistem"
 
 #: src/core/modules/StarWrapper.cpp:165
 msgid "variable star"
@@ -825,6 +825,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Ову емпиријску једначину објавио је Г.М.Клеменс у чланку <em>На систему "
+"астрономских константи</em> (%1)."
 
 #: src/core/StelCore.cpp:1530
 #, qt-format
@@ -1040,6 +1042,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Ово је квадратна формула за рачунање %1Т са коефицијентима које је дефинисао "
+"корисник."
 
 #: src/core/StelCore.cpp:1614 src/core/SimbadSearcher.cpp:133
 msgid "Error"
@@ -1068,12 +1072,12 @@ msgstr ""
 #: src/core/StelCore.cpp:1764
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "Дозвољени опсег за употребу: између %1 и %2, %3 година."
 
 #: src/core/StelCore.cpp:1766
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "Дозвољени опсег за употребу: између %1 и %2 година."
 
 #: src/core/StelProjector.cpp:129
 msgid "Maximum FOV: "
@@ -1408,7 +1412,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1224
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Клеменс (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1225
 msgid "IAU (1952)"
@@ -1420,11 +1424,11 @@ msgstr "Астрономске ефемериде (1960)"
 
 #: src/gui/ConfigurationDialog.cpp:1227
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Тукерман (1962, 1964) и Голдштајн (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1228
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Милер и Стефенсон"
 
 #: src/gui/ConfigurationDialog.cpp:1229
 msgid "Stephenson (1978)"
@@ -1432,7 +1436,7 @@ msgstr "Стивенсон (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1230
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Шмадел и Зех (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1231
 msgid "Morrison & Stephenson (1982)"
@@ -1456,7 +1460,7 @@ msgstr "Borokovski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1236
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Шмадел и Зех"
 
 #: src/gui/ConfigurationDialog.cpp:1237
 msgid "Chapront-Touze & Chapront (1991)"
@@ -1488,7 +1492,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1245
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Рајнголд и Дершовиц (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1246
 msgid "Morrison & Stephenson (2004, 2005)"
@@ -1795,7 +1799,7 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:367
 msgid "Rural sky"
-msgstr ""
+msgstr "Сеоско небо"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:369
@@ -1805,17 +1809,17 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:371
 msgid "Suburban sky"
-msgstr ""
+msgstr "Приградско небо"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:373
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "Сјајно приградско небо"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:375
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Сеоско/приградско небо"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:377
@@ -1825,7 +1829,7 @@ msgstr "Небо у градовима"
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:379
 msgid "Inner-city sky"
-msgstr ""
+msgstr "Градско небо"
 
 #: src/gui/ViewDialog.cpp:393
 msgid "The naked-eye limiting magnitude is"
@@ -2195,12 +2199,12 @@ msgstr "планета патуљак"
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "Објекти из Кајперовог појаса"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "scattered disc object"
-msgstr ""
+msgstr "Расејани диск"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
@@ -2237,7 +2241,7 @@ msgstr "Планете патуљци"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "Објекти из Кајперовог појаса"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:76
@@ -2292,17 +2296,17 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "HII regions"
-msgstr ""
+msgstr "HII региони"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Рефлексионе маглине"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "H-α emission regions"
-msgstr ""
+msgstr "H-α емисиони региони"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:105
@@ -2312,7 +2316,7 @@ msgstr "Месиеов каталог"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:107
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Кардвелов каталог"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
@@ -2327,7 +2331,7 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "Ван Де Бергов каталог"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
@@ -2505,7 +2509,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:178
 msgid "Zero Horizon"
-msgstr ""
+msgstr "Нулти хоризонт"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:184
@@ -2560,7 +2564,7 @@ msgstr "Двоструко помрачење са Дејмоса 2031"
 #. TRANSLATORS: Name of script
 #: src/translations.h:204
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr ""
+msgstr "Помрачење са Олимпус Монса Јан 10 2068"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:206
@@ -2610,7 +2614,7 @@ msgstr "Преглед сазвежђа различитих култура"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:224
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Догађаји на Земљи са Меркура"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:226
@@ -2620,7 +2624,7 @@ msgstr ""
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:228
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Догађаји на Земљи са Марса"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:230
@@ -2691,12 +2695,16 @@ msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
+"Пре него Марс помрачи Сунце, Фобос се појављује иза и прво помрачује Сунце. "
+"Десиће се 26. априла 2017. , између Шкорпије и Стрелца."
 
 #: src/translations.h:251
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
+"Пре него Марс помрачи Сунце, Фобос се појављује иза и прво помрачује Сунце. "
+"Десиће се 23. јула 2031. , између Бика и Близанаца."
 
 #: src/translations.h:252
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
@@ -2736,6 +2744,8 @@ msgstr "Поглед на Сунце са великих планета и Пл�
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
+"Најбољи погледи на Земљу са осталих небеских тела из Сунчевог система у 21. "
+"веку."
 
 #: src/translations.h:259
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
@@ -2754,6 +2764,8 @@ msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Блесак супернове коју је посматрао Тихо Брахе 1572. Додатак Супернова мора "
+"бити доступан."
 
 #: src/translations.h:262
 msgid ""
@@ -3862,7 +3874,7 @@ msgstr "Место"
 #: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
-msgstr ""
+msgstr "Стандардна листа локација"
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
@@ -4417,7 +4429,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1377
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "Користи имена планета која сe koriste danas."
 
 #: src/ui_viewDialog.h:1379
 msgid "Visible"
@@ -4536,7 +4548,7 @@ msgstr "Назив"
 
 #: src/ui_configurationDialog.h:1058
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
+msgstr "Геоцентричне екваторске координате, датум равнодневнице"
 
 #: src/ui_configurationDialog.h:1060
 msgid "Right ascension/Declination (of date)"
@@ -4548,7 +4560,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1063
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr ""
+msgstr "Геоцентричне екваторске координате, равнодневница Ј2000.0"
 
 #: src/ui_configurationDialog.h:1065
 msgid "Right ascension/Declination (J2000)"
@@ -4781,11 +4793,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1167
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "Користи децималне степене за координате"
 
 #: src/ui_configurationDialog.h:1169
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "Користи децималне степене"
 
 #: src/ui_configurationDialog.h:1170
 msgid "Screenshots"
@@ -5058,6 +5070,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"Додатак за мерење угловног растојања је алат који може да се користи за "
+"мерење угловног растојања између две тачке на небу, као и рачунање "
+"позиционог угла између изабраних тачака."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 msgid ""
@@ -5153,7 +5168,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Кофигурација пулсара"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
@@ -5871,7 +5886,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1686
 msgid "visual"
-msgstr ""
+msgstr "визуелно"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1688
@@ -5891,7 +5906,7 @@ msgstr "навигациони"
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1694
 msgid "amateur"
-msgstr ""
+msgstr "аматер"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1696
@@ -7368,7 +7383,7 @@ msgid "On"
 msgstr "Укљ."
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
 msgstr "Искљ."
 
@@ -7624,15 +7639,16 @@ msgstr "Тип супернове: %1"
 #: plugins/Supernovae/src/Supernova.cpp:143 plugins/Novae/src/Nova.cpp:149
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "Максимални сјај: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Додатак за историјске супернове"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
+"Овај додатак Вам омогућава да видите неке сјајне историјске супернове. "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
@@ -7648,7 +7664,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid "Light curves"
-msgstr ""
+msgstr "Крива сјаја"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #, qt-format
@@ -7697,11 +7713,11 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Следеће ажурирање за: %1 дана"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:212
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Историјске супернове су ажуриране"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
@@ -7748,7 +7764,7 @@ msgstr ""
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "Додатак који показује неке сјајне нове у Млечном путу."
 
 #: plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae configuration window"
@@ -7756,7 +7772,7 @@ msgstr ""
 
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
-msgstr ""
+msgstr "нова"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid "Bright Novae Plug-in"
@@ -7770,7 +7786,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Овај додатак Вам омогућава да видите тренутне сјајне нове. "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
@@ -7833,7 +7849,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
-msgstr ""
+msgstr "Прикажи квазаре"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Quasars configuration window"
@@ -7850,7 +7866,7 @@ msgstr "Z (redshift): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:115
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Додатак квазари"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid ""
@@ -7875,6 +7891,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Уколико желите да прочитате потпуне информације о овом додатку, његовој "
+"историји и формату каталога, можете %1 погледати овде %2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
 msgid "Quasars is updated"
@@ -9908,49 +9926,49 @@ msgstr ""
 msgid "Coordinate Y"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:166
+#: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:181
+#: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:193
+#: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:204
+#: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:232
+#: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:247
+#: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:680
+#: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2098
+#: plugins/Scenery3d/src/Scenery3d.cpp:2102
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2107
+#: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2117
+#: plugins/Scenery3d/src/Scenery3d.cpp:2121
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2638
+#: plugins/Scenery3d/src/Scenery3d.cpp:2642
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
@@ -10104,6 +10122,136 @@ msgid ""
 "see shadows on sundials etc."
 msgstr ""
 
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
+msgid ""
+"Provides more accurate lighting by calculating it per-pixel instead of per-"
+"vertex."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:232
+msgid "Required for bump mapping and shadows!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:234
+msgid "Uses only a single shadow cascade instead of up to four."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:235
+msgid ""
+"Provides a speedup in exchange for shadow quality, especially in large "
+"scenes."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:237
+msgid ""
+"Determines how the shadows are filtered, in increasing quality from top to "
+"bottom."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:238
+msgid "PCSS requires the quality set to LOW or HIGH."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:240
+msgid ""
+"Approximate calculation of shadow penumbras (sharper shadows near contact "
+"points, blurred shadows further away)."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:241
+msgid ""
+"Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
+"<b>Hardware</b>)."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:242
+msgid "Causes a performance hit."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
+msgid ""
+"This determines the way the scene is rendered when Stellarium uses a "
+"projection other than &quot;Perspective&quot;. The scene is always rendered "
+"onto a cube, and this cube is then warped according to the real projection. "
+"The cube is described using an image called &quot;cubemap&quot;."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
+msgid ""
+"<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
+"the most compatible method, but may be slower than the others."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
+msgid ""
+"<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
+msgid ""
+"<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of "
+"the cube at once. It may be the fastest method depending on the scene and "
+"your GPU hardware. If not supported, this cannot be selected."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
+msgid "Calculates shadows for each cubemap face separately."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
+msgid ""
+"If disabled, the shadowed area is calculated using a perspective projection, "
+"which may cause missing shadows with high FOV values, but is quite a bit "
+"faster!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
+msgid ""
+"This does not work when using the <b>Geometry shader</b> cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
+msgid ""
+"When checked, the cubemap is only recreated in specific time intervals, "
+"instead of each frame."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
+msgid "Saves energy and may increase subjective application performance."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
+msgid ""
+"Note that the cubemap is always re-rendered when the view position changes."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
+msgid ""
+"When checked, only the face that corresponds to your viewing direction is "
+"updated on movement."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
+msgid ""
+"This will speed up rendering, but the appearance will look "
+"&quot;broken&quot; until you stop moving."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
+msgid ""
+"This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
+msgid ""
+"This updates a second face, so that the visual apperance seems less "
+"&quot;broken&quot;."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
+msgid "The interval (in timeline seconds) in which no redraw is performed"
+msgstr ""
+
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
 msgid "6 Textures"
 msgstr ""
@@ -10155,160 +10303,83 @@ msgstr ""
 msgid "Visual options"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
-msgid ""
-"Provides more accurate lighting by calculating it per-pixel instead of per-"
-"vertex. Required for bump mapping and shadows!"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
-msgid ""
-"<html><head/><body><p>Uses only a single shadow cascade instead of up to "
-"four.</p><p>Provides a speedup in exchange for shadow quality, especially in "
-"large scenes.</p></body></html>"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
-msgid ""
-"Determines how the shadows are filtered, in increasing quality from top to "
-"bottom. PCSS requires the quality set to LOW or HIGH."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
-msgid ""
-"Approximate calculation of shadow penumbras (sharper shadows near contact "
-"points, blurred shadows further away). Requires LOW or HIGH shadow filtering "
-"(without Hardware). Causes a performance hit."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
-msgid ""
-"<html><head/><body><p>This determines the way the scene is rendered when "
-"Stellarium uses a projection other than &quot;Perspective&quot;. The scene "
-"is always rendered onto a cube, and this cube is then warped according to "
-"the real projection. The cube is described using an image called "
-"&quot;cubemap&quot;.</p><p><span style=\" font-weight:600;\">6 "
-"Textures</span> uses 6 single textures, one for each cube side. This is the "
-"most compatible method, but may be slower than the others.</p><p><span "
-"style=\" font-weight:600;\">Cubemap</span> uses a single GL_TEXTURE_CUBEMAP. "
-"Recommended for most users.</p><p><span style=\" font-weight:600;\">Geometry "
-"shader</span> uses a modern GPU feature to render all 6 sides of the cube at "
-"once. It may be the fastest method depending on the scene and your GPU "
-"hardware. If not supported, this cannot be selected.</p></body></html>"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:514
-msgid ""
-"Calculates shadows for each cubemap face separately.\n"
-"If disabled, the shadowed area is calculated using a perspective projection, "
-"which may cause missing shadows with high FOV values, but is quite a bit "
-"faster!\n"
-"This does not work when using the Geometry shader cubemapping mode!"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:518
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:520
-msgid ""
-"When checked, the cubemap is only recreated in specific time intervals, "
-"instead of each frame.\n"
-"Saves energy and may increase subjective application performance. Note that "
-"the cubemap is always re-rendered when the view position changes."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:523
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:524
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:526
-msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:529
-msgid ""
-"When checked, only the face that corresponds to your viewing direction is "
-"updated on movement. This will speed up rendering, but the appearance will "
-"look \"broken\" until you stop moving. This does NOT work with the "
-"\"Geometry-Shader\" cubemapping mode!"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:531
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
-msgid ""
-"This updates a second face, so that the visual apperance seems less "
-"\"broken\"."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:535
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:536
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
 msgstr ""
 
