@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 23:25+0600\n"
-"PO-Revision-Date: 2015-03-22 17:29+0000\n"
+"POT-Creation-Date: 2015-04-02 19:51+0600\n"
+"PO-Revision-Date: 2015-04-02 15:54+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-02 05:15+0000\n"
+"X-Launchpad-Export-Date: 2015-04-03 05:17+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -158,7 +158,7 @@ msgid "Illumination"
 msgstr "Megvilágítás"
 
 #: src/core/modules/LandscapeMgr.cpp:594
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:380
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:431
 msgid "Author: "
 msgstr "Szerző: "
 
@@ -188,7 +188,7 @@ msgstr "Típus: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Átlátszatlanság: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -222,19 +222,19 @@ msgstr "Felszíni fényesség: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:182
 #, qt-format
 msgid "Brightness: %1"
-msgstr ""
+msgstr "Fényesség: %1"
 
 #: src/core/modules/Nebula.cpp:175
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Forma: %1"
 
 #: src/core/modules/Nebula.cpp:176
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
-msgstr ""
+msgstr "Struktúra: %1"
 
 #: src/core/modules/Nebula.cpp:188
 #, qt-format
@@ -279,15 +279,15 @@ msgstr "Ismeretlen"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr ""
+msgstr "Hill régió"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
-msgstr ""
+msgstr "Reflexiós köd"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "H-α emission region"
-msgstr ""
+msgstr "H-α emissziós régió"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Undocumented type"
@@ -296,81 +296,81 @@ msgstr "Nem dokumentált típus"
 #: src/core/modules/Nebula.cpp:762
 msgctxt "form"
 msgid "circular"
-msgstr ""
+msgstr "körkörös"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "elliptikus"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "form"
 msgid "irregular"
-msgstr ""
+msgstr "szabálytalan"
 
 #: src/core/modules/Nebula.cpp:771
 msgctxt "form"
 msgid "undocumented form"
-msgstr ""
+msgstr "nem dokumentált forma"
 
 #: src/core/modules/Nebula.cpp:784
 msgctxt "structure"
 msgid "amorphous"
-msgstr ""
+msgstr "alaktalan"
 
 #: src/core/modules/Nebula.cpp:787
 msgctxt "structure"
 msgid "conventional"
-msgstr ""
+msgstr "hagyományos"
 
 #: src/core/modules/Nebula.cpp:790
 msgctxt "structure"
 msgid "filamentary"
-msgstr ""
+msgstr "rostos"
 
 #: src/core/modules/Nebula.cpp:793
 msgctxt "structure"
 msgid "undocumented structure"
-msgstr ""
+msgstr "nem dokumentált struktúra"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "leghalványabb"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "HII region brightness"
 msgid "moderate"
-msgstr ""
+msgstr "közepes"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "legfényesebb"
 
 #: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
 msgid "undocumented brightness"
-msgstr ""
+msgstr "nem dokumentált fényesség"
 
 #: src/core/modules/Nebula.cpp:828
 msgctxt "H-α emission region brightness"
 msgid "very bright"
-msgstr ""
+msgstr "nagyon fényes"
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "H-α emission region brightness"
 msgid "bright"
-msgstr ""
+msgstr "fényes"
 
 #: src/core/modules/Nebula.cpp:834
 msgctxt "H-α emission region brightness"
 msgid "medium"
-msgstr ""
+msgstr "közepes"
 
 #: src/core/modules/Nebula.cpp:837
 msgctxt "H-α emission region brightness"
 msgid "faint"
-msgstr ""
+msgstr "halvány"
 
 #: src/core/modules/NebulaMgr.cpp:131
 msgid "Deep-sky objects"
@@ -2396,17 +2396,17 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "HII regions"
-msgstr ""
+msgstr "Hill régiók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Reflexiós köd"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "H-α emission regions"
-msgstr ""
+msgstr "H-α emissziós régiók"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:105
@@ -2421,32 +2421,32 @@ msgstr "Caldwell katalógus"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Barnard Catalogue"
-msgstr ""
+msgstr "Barnard katalógus"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "Sharpless katalógus"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "Van den Bergh katalógus"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
-msgstr ""
+msgstr "Rodgers, Campbell, Whiteoak katalógus"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "Collinder katalógus"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "Melotte katalógus"
 
 #: src/translations.h:123
 msgid "Arabic"
@@ -7507,7 +7507,7 @@ msgid "On"
 msgstr "Be"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:495
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
 msgstr "Ki"
 
@@ -9164,6 +9164,9 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"Ez a bővítmény lehetővé teszi a lépésenkénti zoom alkalmazását "
+"billentyűkombináció segítségével.  Ilyen beállítást használ a <em>Cartes du "
+"Ciel (=Sky Charts)</em> planetáriumprogram is."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
@@ -9182,6 +9185,11 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Alapértelmezés szerint a Stellarium folyamatos zoom-ot alkalmaz az egér "
+"görgője vagy billentyűkombináció segítségével. Ez megváltoztatható "
+"lépésenkénti zoom-ra, amikor fix értékekkel változik a zoom mértéke. Ilyen "
+"beállítást használ a Cartes du Ciel (Sky Charts) program is. Minden érték "
+"fokban értendő."
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
@@ -10154,49 +10162,53 @@ msgstr "X koordináta"
 msgid "Coordinate Y"
 msgstr "Y koordináta"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:166
+#: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
-msgstr ""
+msgstr "Modell betöltése..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:181
+#: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
-msgstr ""
+msgstr "Modell átalakítása..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:193
+#: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:204
+#: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:232
+#: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Ütközési térkép kiszámítása..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:247
+#: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Betöltés véglegesítése..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:680
+#: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"\"Scenery3d shader\" hiba, a rajzolás meghiúsult. Nézze meg a debug szöveget "
+"további információkért."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2098
+#: plugins/Scenery3d/src/Scenery3d.cpp:2102
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"Az Ön hardvere nem támogatja a \"cubemapping\" funkciót, kérjük kapcsoljon "
+"át \"Perspective\" módra."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2107
+#: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2117
+#: plugins/Scenery3d/src/Scenery3d.cpp:2121
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2638
+#: plugins/Scenery3d/src/Scenery3d.cpp:2642
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
@@ -10215,7 +10227,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Beállítások mutatása"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:227
 msgid "Show viewpoint dialog"
@@ -10223,11 +10235,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:228
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Árnyék ki/be"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Debug infó ki/be"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Toggle location text"
@@ -10281,14 +10293,14 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "be"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "ki"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
 #, qt-format
@@ -10315,11 +10327,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
 msgid "enabled"
-msgstr ""
+msgstr "be"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
 msgid "disabled"
-msgstr ""
+msgstr "ki"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:776
 msgid "Cubemap size changed"
@@ -10350,17 +10362,147 @@ msgid ""
 "see shadows on sundials etc."
 msgstr ""
 
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
+msgid ""
+"Provides more accurate lighting by calculating it per-pixel instead of per-"
+"vertex."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:232
+msgid "Required for bump mapping and shadows!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:234
+msgid "Uses only a single shadow cascade instead of up to four."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:235
+msgid ""
+"Provides a speedup in exchange for shadow quality, especially in large "
+"scenes."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:237
+msgid ""
+"Determines how the shadows are filtered, in increasing quality from top to "
+"bottom."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:238
+msgid "PCSS requires the quality set to LOW or HIGH."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:240
+msgid ""
+"Approximate calculation of shadow penumbras (sharper shadows near contact "
+"points, blurred shadows further away)."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:241
+msgid ""
+"Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
+"<b>Hardware</b>)."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:242
+msgid "Causes a performance hit."
+msgstr "Teljesítménycsökkenést okoz."
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
+msgid ""
+"This determines the way the scene is rendered when Stellarium uses a "
+"projection other than &quot;Perspective&quot;. The scene is always rendered "
+"onto a cube, and this cube is then warped according to the real projection. "
+"The cube is described using an image called &quot;cubemap&quot;."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
+msgid ""
+"<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
+"the most compatible method, but may be slower than the others."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
+msgid ""
+"<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
+msgid ""
+"<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of "
+"the cube at once. It may be the fastest method depending on the scene and "
+"your GPU hardware. If not supported, this cannot be selected."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
+msgid "Calculates shadows for each cubemap face separately."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
+msgid ""
+"If disabled, the shadowed area is calculated using a perspective projection, "
+"which may cause missing shadows with high FOV values, but is quite a bit "
+"faster!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
+msgid ""
+"This does not work when using the <b>Geometry shader</b> cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
+msgid ""
+"When checked, the cubemap is only recreated in specific time intervals, "
+"instead of each frame."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
+msgid "Saves energy and may increase subjective application performance."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
+msgid ""
+"Note that the cubemap is always re-rendered when the view position changes."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
+msgid ""
+"When checked, only the face that corresponds to your viewing direction is "
+"updated on movement."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
+msgid ""
+"This will speed up rendering, but the appearance will look "
+"&quot;broken&quot; until you stop moving."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
+msgid ""
+"This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
+msgid ""
+"This updates a second face, so that the visual apperance seems less "
+"&quot;broken&quot;."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
+msgid "The interval (in timeline seconds) in which no redraw is performed"
+msgstr ""
+
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
 msgid "6 Textures"
-msgstr ""
+msgstr "6 textúra"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
 msgid "Cubemap"
-msgstr ""
+msgstr "Cubemap"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:71
 msgid "Geometry shader"
-msgstr ""
+msgstr "Geometry shader"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
@@ -10401,182 +10543,105 @@ msgstr ""
 msgid "Visual options"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
-msgid ""
-"Provides more accurate lighting by calculating it per-pixel instead of per-"
-"vertex. Required for bump mapping and shadows!"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Árnyékok"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
-msgid ""
-"<html><head/><body><p>Uses only a single shadow cascade instead of up to "
-"four.</p><p>Provides a speedup in exchange for shadow quality, especially in "
-"large scenes.</p></body></html>"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:488
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Hardver"
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
-msgid ""
-"Determines how the shadows are filtered, in increasing quality from top to "
-"bottom. PCSS requires the quality set to LOW or HIGH."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:506
-msgid ""
-"Approximate calculation of shadow penumbras (sharper shadows near contact "
-"points, blurred shadows further away). Requires LOW or HIGH shadow filtering "
-"(without Hardware). Causes a performance hit."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:508
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:509
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:511
-msgid ""
-"<html><head/><body><p>This determines the way the scene is rendered when "
-"Stellarium uses a projection other than &quot;Perspective&quot;. The scene "
-"is always rendered onto a cube, and this cube is then warped according to "
-"the real projection. The cube is described using an image called "
-"&quot;cubemap&quot;.</p><p><span style=\" font-weight:600;\">6 "
-"Textures</span> uses 6 single textures, one for each cube side. This is the "
-"most compatible method, but may be slower than the others.</p><p><span "
-"style=\" font-weight:600;\">Cubemap</span> uses a single GL_TEXTURE_CUBEMAP. "
-"Recommended for most users.</p><p><span style=\" font-weight:600;\">Geometry "
-"shader</span> uses a modern GPU feature to render all 6 sides of the cube at "
-"once. It may be the fastest method depending on the scene and your GPU "
-"hardware. If not supported, this cannot be selected.</p></body></html>"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:514
-msgid ""
-"Calculates shadows for each cubemap face separately.\n"
-"If disabled, the shadowed area is calculated using a perspective projection, "
-"which may cause missing shadows with high FOV values, but is quite a bit "
-"faster!\n"
-"This does not work when using the Geometry shader cubemapping mode!"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:518
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:520
-msgid ""
-"When checked, the cubemap is only recreated in specific time intervals, "
-"instead of each frame.\n"
-"Saves energy and may increase subjective application performance. Note that "
-"the cubemap is always re-rendered when the view position changes."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:523
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:524
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:526
-msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:529
-msgid ""
-"When checked, only the face that corresponds to your viewing direction is "
-"updated on movement. This will speed up rendering, but the appearance will "
-"look \"broken\" until you stop moving. This does NOT work with the "
-"\"Geometry-Shader\" cubemapping mode!"
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:531
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:533
-msgid ""
-"This updates a second face, so that the visual apperance seems less "
-"\"broken\"."
-msgstr ""
-
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:535
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_scenery3dDialog.h:536
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
 msgstr ""
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
-msgstr ""
+msgstr "Tárolt nézetek"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:207
 msgid "Load view"
-msgstr ""
+msgstr "Nézet betöltése"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:208
 msgid "Delete view"
-msgstr ""
+msgstr "Nézet törlése"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Add current view"
-msgstr ""
+msgstr "Jelenlegi nézet hozzáadása"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
-msgstr ""
+msgstr "Cím:"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Egyenlítői rács"
