@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-02 19:51+0600\n"
+"POT-Creation-Date: 2015-04-03 23:26+0600\n"
 "PO-Revision-Date: 2015-01-08 04:06+0000\n"
 "Last-Translator: jdk <m8r-xld2xv@mailinator.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-03 05:26+0000\n"
+"X-Launchpad-Export-Date: 2015-04-04 05:24+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -156,7 +156,7 @@ msgid "Illumination"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:594
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:431
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:432
 msgid "Author: "
 msgstr "作者： "
 
@@ -1636,59 +1636,72 @@ msgstr "{Bug 报告及功能请求系统} - 如果出现某些功能异常、缺
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{讨论区} - 在此处和其他爱好者讨论Stellarium。"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:293
 msgid "Developers"
 msgstr "开发者"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:294
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "计划协调&开发经理: %1"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "说明文件撰写: %1"
 
-#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
-#: src/gui/HelpDialog.cpp:279 src/gui/HelpDialog.cpp:280
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
-#: src/gui/HelpDialog.cpp:283 src/gui/HelpDialog.cpp:284
-#: src/gui/HelpDialog.cpp:291 src/gui/HelpDialog.cpp:292
-#: src/gui/HelpDialog.cpp:293 src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:296 src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
 #, qt-format
 msgid "Developer: %1"
 msgstr "开发者: %1"
 
-#: src/gui/HelpDialog.cpp:285
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "连续积分：%1"
 
-#: src/gui/HelpDialog.cpp:286 src/gui/HelpDialog.cpp:287
+#: src/gui/HelpDialog.cpp:305
 #, qt-format
 msgid "Tester: %1"
 msgstr "测试者：%1"
 
-#: src/gui/HelpDialog.cpp:288
+#: src/gui/HelpDialog.cpp:306
 msgid "Past Developers"
 msgstr "以往开发者："
 
-#: src/gui/HelpDialog.cpp:289
+#: src/gui/HelpDialog.cpp:307
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr "有一些曾经作出杰出贡献的开发者已不再参与开发。他们的工作曾为这一项目带来巨大的进步："
 
-#: src/gui/HelpDialog.cpp:290
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "视觉与其他设计: %1"
 
-#: src/gui/HelpDialog.cpp:295 src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX开发: %1"
+
+#: src/gui/HelpDialog.cpp:315
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+msgid "Contributors"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid ""
+"Several people have made contributions to the project and their work has "
+"made Stellarium to better (sorting alphabetically): %1."
+msgstr ""
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -5025,11 +5038,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
-msgstr ""
-
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
-msgid "Contributors"
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94

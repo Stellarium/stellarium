@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-02 19:51+0600\n"
+"POT-Creation-Date: 2015-04-03 23:26+0600\n"
 "PO-Revision-Date: 2014-11-30 13:42+0000\n"
 "Last-Translator: Nadanomics <hb7701@naver.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-03 05:18+0000\n"
+"X-Launchpad-Export-Date: 2015-04-04 05:16+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 "Language: ko\n"
 
@@ -157,7 +157,7 @@ msgid "Illumination"
 msgstr "조명"
 
 #: src/core/modules/LandscapeMgr.cpp:594
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:431
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:432
 msgid "Author: "
 msgstr "저자: "
 
@@ -1665,59 +1665,72 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{포럼} - 다른 사용자와 스텔라리움에 대해 이야기하세요."
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:293
 msgid "Developers"
 msgstr "만든 사람들"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:294
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "프로젝트 책임자 & 핵심 개발자: %1"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "문서 저자/개발자: %1"
 
-#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
-#: src/gui/HelpDialog.cpp:279 src/gui/HelpDialog.cpp:280
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
-#: src/gui/HelpDialog.cpp:283 src/gui/HelpDialog.cpp:284
-#: src/gui/HelpDialog.cpp:291 src/gui/HelpDialog.cpp:292
-#: src/gui/HelpDialog.cpp:293 src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:296 src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
 #, qt-format
 msgid "Developer: %1"
 msgstr "개발자: %1"
 
-#: src/gui/HelpDialog.cpp:285
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "지속적인 통합: %1"
 
-#: src/gui/HelpDialog.cpp:286 src/gui/HelpDialog.cpp:287
+#: src/gui/HelpDialog.cpp:305
 #, qt-format
 msgid "Tester: %1"
 msgstr "테스터: %1"
 
-#: src/gui/HelpDialog.cpp:288
+#: src/gui/HelpDialog.cpp:306
 msgid "Past Developers"
 msgstr "과거 개발자들"
 
-#: src/gui/HelpDialog.cpp:289
+#: src/gui/HelpDialog.cpp:307
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr "여러 사람들이 상당한 기여를 했지만, 더 이상 참여하지 않습니다. 그들은 프로젝트에 큰 변화를 만들어냈습니다:"
 
-#: src/gui/HelpDialog.cpp:290
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "그래픽/기타 디자이너: %1"
 
-#: src/gui/HelpDialog.cpp:295 src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX 개발자: %1"
+
+#: src/gui/HelpDialog.cpp:315
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+msgid "Contributors"
+msgstr "도움을 주신 분"
+
+#: src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid ""
+"Several people have made contributions to the project and their work has "
+"made Stellarium to better (sorting alphabetically): %1."
+msgstr ""
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -5076,11 +5089,6 @@ msgstr "위치각="
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
 msgstr "각도 측정 플러그인"
-
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
-msgid "Contributors"
-msgstr "도움을 주신 분"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
