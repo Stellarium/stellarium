@@ -164,7 +164,7 @@ void MeteorShowers::init()
 		QString msGroup = N_("Meteor Showers");
 		addAction("actionShow_MeteorShower", msGroup, N_("Show meteor showers"), "msVisible", "Ctrl+Alt+M");
 		addAction("actionShow_radiant_Labels", msGroup, N_("Radiant labels"), "labelsVisible", "Shift+M");
-		addAction("actionShow_MeteorShower_ConfigDialog", msGroup, N_("Meteor Shower configuration window"), configDialog, "visible", "");
+		addAction("actionShow_MeteorShower_ConfigDialog", msGroup, N_("Meteor Shower configuration window"), configDialog, "visible", "Ctrl+Shift+M");
 
 		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/MeteorShowers/btMS-on.png");
