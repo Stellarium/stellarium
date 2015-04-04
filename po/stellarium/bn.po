@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-02 19:51+0600\n"
+"POT-Creation-Date: 2015-04-03 23:26+0600\n"
 "PO-Revision-Date: 2015-03-08 14:10+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-03 05:13+0000\n"
+"X-Launchpad-Export-Date: 2015-04-04 05:10+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 "Language: bn\n"
 
@@ -157,7 +157,7 @@ msgid "Illumination"
 msgstr "ঔজ্জ্বল্যতা"
 
 #: src/core/modules/LandscapeMgr.cpp:594
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:431
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:432
 msgid "Author: "
 msgstr "প্রস্তুতকারক : "
 
@@ -1722,45 +1722,45 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{বিভিন্ন দলসমূহ} - Stellarium সম্বন্ধে অন্যদের সাথে আলোচনা করুন ।"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:293
 msgid "Developers"
 msgstr "প্রস্তুতকারকবৃন্দ"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:294
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "প্রকল্প সমন্বয়কারী এবং মূখ্য প্রস্তুতকারক : %1"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "নথি লেখক/প্রস্তুতকারক : %1"
 
-#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
-#: src/gui/HelpDialog.cpp:279 src/gui/HelpDialog.cpp:280
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
-#: src/gui/HelpDialog.cpp:283 src/gui/HelpDialog.cpp:284
-#: src/gui/HelpDialog.cpp:291 src/gui/HelpDialog.cpp:292
-#: src/gui/HelpDialog.cpp:293 src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:296 src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
 #, qt-format
 msgid "Developer: %1"
 msgstr "প্রস্তুতকারক : %1"
 
-#: src/gui/HelpDialog.cpp:285
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "নিরবিচ্ছিন্ন একত্রীকরন: %1"
 
-#: src/gui/HelpDialog.cpp:286 src/gui/HelpDialog.cpp:287
+#: src/gui/HelpDialog.cpp:305
 #, qt-format
 msgid "Tester: %1"
 msgstr "পরীক্ষক : %1"
 
-#: src/gui/HelpDialog.cpp:288
+#: src/gui/HelpDialog.cpp:306
 msgid "Past Developers"
 msgstr "প্রাক্তন প্রস্তুতকারকবৃন্দ"
 
-#: src/gui/HelpDialog.cpp:289
+#: src/gui/HelpDialog.cpp:307
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1768,15 +1768,28 @@ msgstr ""
 "বিভিন্ন লোকেরা এখানে তাঁদের গুরুত্বপূর্ণ অবদান রেখেছেন যদিও বর্তমানে তাঁদের "
 "অনেকে আর সক্রিয় নন । তবে তাঁদের কাজ এই প্রকল্পে গুরুত্বপূর্ণ পরিবর্তন এনেছে ।"
 
-#: src/gui/HelpDialog.cpp:290
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "গ্রাফিক্স/অন্যান্য পরিকল্পক : %1"
 
-#: src/gui/HelpDialog.cpp:295 src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX প্রস্তুতকারক : %1"
+
+#: src/gui/HelpDialog.cpp:315
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+msgid "Contributors"
+msgstr "অবদানকারী"
+
+#: src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid ""
+"Several people have made contributions to the project and their work has "
+"made Stellarium to better (sorting alphabetically): %1."
+msgstr ""
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -5184,11 +5197,6 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
 msgstr "কৌণিক দূরত্ব নির্ণয় সরঞ্জাম"
-
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
-msgid "Contributors"
-msgstr "অবদানকারী"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
