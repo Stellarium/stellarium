@@ -258,7 +258,7 @@ void Scenery3dDialog::updateToolTipStrings()
 			.arg(q_("This will speed up rendering, but the appearance will look &quot;broken&quot; until you stop moving."))
 			.arg(q_("This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"));
 	QString toolTipSecondDominantFace = QString("<html><head/><body><p>%1</p></body></html>")
-			.arg(q_("This updates a second face, so that the visual apperance seems less &quot;broken&quot;."));
+			.arg(q_("This updates a second face, so that the visual appearance seems less &quot;broken&quot;."));
 
 	ui->checkBoxEnablePixelLight->setToolTip(toolTipEnablePixelLight);
 	ui->checkBoxSimpleShadows->setToolTip(toolTipSimpleShadows);
