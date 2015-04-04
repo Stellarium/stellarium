@@ -140,6 +140,7 @@ class Translations
 		N_("Sami");
 		// TRANSLATORS: Name of the sky culture
 		N_("Siberian");
+		N_("Tukano");
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
