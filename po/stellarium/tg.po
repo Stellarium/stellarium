@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-03-28 21:33+0600\n"
+"POT-Creation-Date: 2015-04-05 04:02+0600\n"
 "PO-Revision-Date: 2013-01-07 11:03+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Tajik <tg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-03-29 05:20+0000\n"
+"X-Launchpad-Export-Date: 2015-04-05 05:23+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
 #: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:477 src/core/StelCore.cpp:192
+#: src/core/StelApp.cpp:481 src/core/StelCore.cpp:192
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr ""
@@ -156,6 +156,7 @@ msgid "Illumination"
 msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:594
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:432
 msgid "Author: "
 msgstr "Муаллиф: "
 
@@ -628,7 +629,7 @@ msgstr ""
 msgid "Zodiacal Light"
 msgstr ""
 
-#: src/core/StelApp.cpp:477
+#: src/core/StelApp.cpp:481
 msgid "Night mode"
 msgstr ""
 
@@ -638,7 +639,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "Дата и время"
 
-#: src/core/StelCore.cpp:191 src/core/StelMovementMgr.cpp:129
+#: src/core/StelCore.cpp:191 src/core/StelMovementMgr.cpp:131
 msgid "Movement and Selection"
 msgstr ""
 
@@ -1197,28 +1198,28 @@ msgstr ""
 msgid "Deep-sky objects background images"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:177
+#: src/core/StelMovementMgr.cpp:132 src/gui/StelGui.cpp:177
 #: src/StelMainView.cpp:442
 msgid "Miscellaneous"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:130
+#: src/core/StelMovementMgr.cpp:132
 msgid "Switch between equatorial and azimuthal mount"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:131
+#: src/core/StelMovementMgr.cpp:133
 msgid "Center on selected object"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:132
+#: src/core/StelMovementMgr.cpp:134
 msgid "Zoom in on selected object"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:133
+#: src/core/StelMovementMgr.cpp:135
 msgid "Zoom out"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:134
+#: src/core/StelMovementMgr.cpp:136
 msgid "Track object"
 msgstr ""
 
@@ -1583,58 +1584,71 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:293
 msgid "Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:294
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:295
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
-#: src/gui/HelpDialog.cpp:279 src/gui/HelpDialog.cpp:280
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
-#: src/gui/HelpDialog.cpp:283 src/gui/HelpDialog.cpp:284
-#: src/gui/HelpDialog.cpp:291 src/gui/HelpDialog.cpp:292
-#: src/gui/HelpDialog.cpp:293 src/gui/HelpDialog.cpp:294
+#: src/gui/HelpDialog.cpp:296 src/gui/HelpDialog.cpp:297
+#: src/gui/HelpDialog.cpp:298 src/gui/HelpDialog.cpp:299
+#: src/gui/HelpDialog.cpp:300 src/gui/HelpDialog.cpp:301
+#: src/gui/HelpDialog.cpp:302 src/gui/HelpDialog.cpp:303
+#: src/gui/HelpDialog.cpp:309 src/gui/HelpDialog.cpp:310
+#: src/gui/HelpDialog.cpp:311 src/gui/HelpDialog.cpp:312
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:285
+#: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:286 src/gui/HelpDialog.cpp:287
+#: src/gui/HelpDialog.cpp:305
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:288
+#: src/gui/HelpDialog.cpp:306
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:289
+#: src/gui/HelpDialog.cpp:307
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:290
+#: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:295 src/gui/HelpDialog.cpp:296
+#: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "OSX Developer: %1"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:315
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+msgid "Contributors"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:316
+#, qt-format
+msgid ""
+"Several people have made contributions to the project and their work has "
+"made Stellarium better (sorted alphabetically): %1."
 msgstr ""
 
 #: src/gui/StelGui.cpp:176
@@ -2283,7 +2297,7 @@ msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
-msgid "The Catalogue of Rodgers, Cambell, and Whiteoak"
+msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -2374,290 +2388,294 @@ msgid "Siberian"
 msgstr ""
 
 #: src/translations.h:143
-msgid "Tupi-Guarani"
+msgid "Tukano"
 msgstr ""
 
 #: src/translations.h:144
-msgid "Tongan"
+msgid "Tupi-Guarani"
 msgstr ""
 
 #: src/translations.h:145
-msgid "Western"
+msgid "Tongan"
 msgstr ""
 
 #: src/translations.h:146
+msgid "Western"
+msgstr ""
+
+#: src/translations.h:147
 msgid "Western (H.A.Rey)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:152
+#: src/translations.h:153
 msgid "Guereins"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:154
+#: src/translations.h:155
 msgid "Trees"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:156
+#: src/translations.h:157
 msgid "Moon"
 msgstr "Моҳ"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:158
+#: src/translations.h:159
 msgid "Hurricane"
 msgstr "Тӯфон"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:160
+#: src/translations.h:161
 msgid "Ocean"
 msgstr ""
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:162
+#: src/translations.h:163
 msgid "Garching"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:164
+#: src/translations.h:165
 msgid "Mars"
 msgstr "Миррих"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:166
+#: src/translations.h:167
 msgid "Jupiter"
 msgstr "Муштарӣ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:168
+#: src/translations.h:169
 msgid "Saturn"
 msgstr "Зуҳал"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:170
+#: src/translations.h:171
 msgid "Uranus"
 msgstr "Уран"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:172
+#: src/translations.h:173
 msgid "Neptune"
 msgstr "Нептун"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:174
+#: src/translations.h:175
 msgid "Geneva"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:176
+#: src/translations.h:177
 msgid "Grossmugl"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:178
+#: src/translations.h:179
 msgid "Zero Horizon"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:184
+#: src/translations.h:185
 msgid "Landscape Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:186
+#: src/translations.h:187
 msgid "Partial Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:188
+#: src/translations.h:189
 msgid "Total Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:190
+#: src/translations.h:191
 msgid "Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:192
+#: src/translations.h:193
 msgid "Solar Eclipse 2009"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:194
+#: src/translations.h:195
 msgid "Startup Script"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:196
+#: src/translations.h:197
 msgid "Zodiac"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:198
+#: src/translations.h:199
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:200
+#: src/translations.h:201
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:202
+#: src/translations.h:203
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:204
+#: src/translations.h:205
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:206
+#: src/translations.h:207
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:208
+#: src/translations.h:209
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:210
+#: src/translations.h:211
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:212
+#: src/translations.h:213
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:214
+#: src/translations.h:215
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:216
+#: src/translations.h:217
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:218
+#: src/translations.h:219
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:220
+#: src/translations.h:221
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:222
+#: src/translations.h:223
 msgid "Sky Culture Tour"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:224
+#: src/translations.h:225
 msgid "Earth Events from Mercury"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:226
+#: src/translations.h:227
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:228
+#: src/translations.h:229
 msgid "Earth Events from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:230
+#: src/translations.h:231
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:232
+#: src/translations.h:233
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:234
+#: src/translations.h:235
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:240
+#: src/translations.h:241
 msgid "Look around each installed landscape."
 msgstr ""
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:242
+#: src/translations.h:243
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:243
+#: src/translations.h:244
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:244
+#: src/translations.h:245
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:245
+#: src/translations.h:246
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:246
+#: src/translations.h:247
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:247
+#: src/translations.h:248
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:248
+#: src/translations.h:249
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:249
+#: src/translations.h:250
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:250
+#: src/translations.h:251
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:251
+#: src/translations.h:252
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:252
+#: src/translations.h:253
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:253
+#: src/translations.h:254
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:254
+#: src/translations.h:255
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2667,46 +2685,46 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:255
+#: src/translations.h:256
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 
-#: src/translations.h:256
+#: src/translations.h:257
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:257
+#: src/translations.h:258
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:258
+#: src/translations.h:259
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:259
+#: src/translations.h:260
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:260
+#: src/translations.h:261
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 
-#: src/translations.h:261
+#: src/translations.h:262
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:262
+#: src/translations.h:263
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 
-#: src/translations.h:263
+#: src/translations.h:264
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -2714,991 +2732,991 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:267
+#: src/translations.h:268
 msgid "Andorra"
 msgstr ""
 
-#: src/translations.h:268
+#: src/translations.h:269
 msgid "United Arab Emirates"
 msgstr "Аморатҳои Муттаҳидаи Арабӣ"
 
-#: src/translations.h:269
+#: src/translations.h:270
 msgid "Afghanistan"
 msgstr ""
 
-#: src/translations.h:270
+#: src/translations.h:271
 msgid "Antigua and Barbuda"
 msgstr ""
 
-#: src/translations.h:271
+#: src/translations.h:272
 msgid "Anguilla"
 msgstr ""
 
-#: src/translations.h:272
+#: src/translations.h:273
 msgid "Albania"
 msgstr ""
 
-#: src/translations.h:273
+#: src/translations.h:274
 msgid "Armenia"
 msgstr ""
 
-#: src/translations.h:274
+#: src/translations.h:275
 msgid "Netherlands Antilles"
 msgstr ""
 
-#: src/translations.h:275
+#: src/translations.h:276
 msgid "Angola"
 msgstr ""
 
-#: src/translations.h:276
+#: src/translations.h:277
 msgid "Antarctica"
 msgstr "Антарктика"
 
-#: src/translations.h:277
+#: src/translations.h:278
 msgid "Argentina"
 msgstr ""
 
-#: src/translations.h:278
+#: src/translations.h:279
 msgid "American Samoa"
 msgstr ""
 
-#: src/translations.h:279
+#: src/translations.h:280
 msgid "Austria"
 msgstr ""
 
-#: src/translations.h:280
+#: src/translations.h:281
 msgid "Australia"
 msgstr ""
 
-#: src/translations.h:281
+#: src/translations.h:282
 msgid "Aruba"
 msgstr ""
 
-#: src/translations.h:282
+#: src/translations.h:283
 msgid "Azerbaijan"
 msgstr ""
 
-#: src/translations.h:283
+#: src/translations.h:284
 msgid "Bosnia and Herzegowina"
 msgstr ""
 
-#: src/translations.h:284
+#: src/translations.h:285
 msgid "Barbados"
 msgstr ""
 
-#: src/translations.h:285
+#: src/translations.h:286
 msgid "Bangladesh"
 msgstr ""
 
-#: src/translations.h:286
+#: src/translations.h:287
 msgid "Belgium"
 msgstr ""
 
-#: src/translations.h:287
+#: src/translations.h:288
 msgid "Burkina Faso"
 msgstr "Буркина-Фассо"
 
-#: src/translations.h:288
+#: src/translations.h:289
 msgid "Bulgaria"
 msgstr "Болғория"
 
-#: src/translations.h:289
+#: src/translations.h:290
 msgid "Bahrain"
 msgstr "Баҳраин"
 
-#: src/translations.h:290
+#: src/translations.h:291
 msgid "Burundi"
 msgstr "Бурундии"
 
-#: src/translations.h:291
+#: src/translations.h:292
 msgid "Benin"
 msgstr ""
 
-#: src/translations.h:292
+#: src/translations.h:293
 msgid "Bermuda"
 msgstr "Ҷазираҳои Бермуд"
 
-#: src/translations.h:293
+#: src/translations.h:294
 msgid "Brunei Darussalam"
 msgstr ""
 
-#: src/translations.h:294
+#: src/translations.h:295
 msgid "Bolivia"
 msgstr ""
 
-#: src/translations.h:295
+#: src/translations.h:296
 msgid "Brazil"
 msgstr ""
 
-#: src/translations.h:296
+#: src/translations.h:297
 msgid "Bahamas"
 msgstr ""
 
-#: src/translations.h:297
+#: src/translations.h:298
 msgid "Bhutan"
 msgstr "Бутан"
 
-#: src/translations.h:298
+#: src/translations.h:299
 msgid "Bouvet Island"
 msgstr "Ҷазираҳои Буве"
 
-#: src/translations.h:299
+#: src/translations.h:300
 msgid "Botswana"
 msgstr "Боствана"
 
-#: src/translations.h:300
+#: src/translations.h:301
 msgid "Belarus"
 msgstr ""
 
-#: src/translations.h:301
+#: src/translations.h:302
 msgid "Belize"
 msgstr ""
 
-#: src/translations.h:302
+#: src/translations.h:303
 msgid "Canada"
 msgstr ""
 
-#: src/translations.h:303
+#: src/translations.h:304
 msgid "Cocos Islands"
 msgstr ""
 
-#: src/translations.h:304
+#: src/translations.h:305
 msgid "Democratic Republic of the Congo"
 msgstr "Ҷумҳурии Демократии Конго"
 
-#: src/translations.h:305
+#: src/translations.h:306
 msgid "Central African Republic"
 msgstr "Ҷумҳурии Африкои Марказӣ"
 
-#: src/translations.h:306
+#: src/translations.h:307
 msgid "Republic of the Congo"
 msgstr "Ҷумҳурии Конго"
 
-#: src/translations.h:307
+#: src/translations.h:308
 msgid "Switzerland"
 msgstr "Швейцария"
 
-#: src/translations.h:308
+#: src/translations.h:309
 msgid "Cote d'Ivoire"
 msgstr ""
 
-#: src/translations.h:309
+#: src/translations.h:310
 msgid "Cook Islands"
 msgstr "Ҷазираҳои Кук"
 
-#: src/translations.h:310
+#: src/translations.h:311
 msgid "Chile"
 msgstr ""
 
-#: src/translations.h:311
+#: src/translations.h:312
 msgid "Cameroon"
 msgstr ""
 
-#: src/translations.h:312
+#: src/translations.h:313
 msgid "China"
 msgstr "Чин"
 
-#: src/translations.h:313
+#: src/translations.h:314
 msgid "Colombia"
 msgstr "Коломбия"
 
-#: src/translations.h:314
+#: src/translations.h:315
 msgid "Costa Rica"
 msgstr ""
 
-#: src/translations.h:315
+#: src/translations.h:316
 msgid "Serbia and Montenegro"
 msgstr "Сербия ва Монтенего"
 
-#: src/translations.h:316
+#: src/translations.h:317
 msgid "Cuba"
 msgstr ""
 
-#: src/translations.h:317
+#: src/translations.h:318
 msgid "Cape Verde"
 msgstr ""
 
-#: src/translations.h:318
+#: src/translations.h:319
 msgid "Christmas Island"
 msgstr "ҷ. Мавлуди Исо"
 
-#: src/translations.h:319
+#: src/translations.h:320
 msgid "Cyprus"
 msgstr ""
 
-#: src/translations.h:320
+#: src/translations.h:321
 msgid "Czech Republic"
 msgstr "Республикаи Чехӣ"
 
-#: src/translations.h:321
+#: src/translations.h:322
 msgid "Germany"
 msgstr ""
 
-#: src/translations.h:322
+#: src/translations.h:323
 msgid "Djibouti"
 msgstr "Джибути"
 
-#: src/translations.h:323
+#: src/translations.h:324
 msgid "Denmark"
 msgstr "Денмарк"
 
-#: src/translations.h:324
+#: src/translations.h:325
 msgid "Dominica"
 msgstr ""
 
-#: src/translations.h:325
+#: src/translations.h:326
 msgid "Dominican Republic"
 msgstr "Ҷумҳурии Доминикан"
 
-#: src/translations.h:326
+#: src/translations.h:327
 msgid "Algeria"
 msgstr ""
 
-#: src/translations.h:327
+#: src/translations.h:328
 msgid "Ecuador"
 msgstr ""
 
-#: src/translations.h:328
+#: src/translations.h:329
 msgid "Estonia"
 msgstr ""
 
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Egypt"
 msgstr ""
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "Western Sahara"
 msgstr "Саҳрои Шарқӣ"
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid "Eritrea"
 msgstr ""
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid "Spain"
 msgstr ""
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid "Ethiopia"
 msgstr ""
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid "Finland"
 msgstr ""
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid "Fiji"
 msgstr ""
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid "Falkland Islands"
 msgstr "Ҷазираҳои Фолкленд"
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid "Micronesia"
 msgstr "Микронезия"
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid "Faroe Islands"
 msgstr "Ҷазираи Фарер"
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid "France"
 msgstr "Франсия"
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid "Gabon"
 msgstr ""
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid "United Kingdom"
 msgstr ""
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid "Grenada"
 msgstr ""
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid "Georgia"
 msgstr "Ҷорҷия"
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid "French Guiana"
 msgstr "Гуанаи Франсузӣ"
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid "Ghana"
 msgstr ""
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid "Gibraltar"
 msgstr "Ҷабалуттарик"
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid "Greenland"
 msgstr ""
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid "Gambia"
 msgstr ""
 
-#: src/translations.h:349
+#: src/translations.h:350
 msgid "Guinea"
 msgstr ""
 
-#: src/translations.h:350
+#: src/translations.h:351
 msgid "Guadeloupe"
 msgstr ""
 
-#: src/translations.h:351
+#: src/translations.h:352
 msgid "Equatorial Guinea"
 msgstr "Гвинеяи Экваториалӣ"
 
-#: src/translations.h:352
+#: src/translations.h:353
 msgid "Greece"
 msgstr ""
 
-#: src/translations.h:353
+#: src/translations.h:354
 msgid "South Georgia and the South Sandwich Islands"
 msgstr ""
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "Guatemala"
 msgstr ""
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "Guam"
 msgstr ""
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Guinea-Bissau"
 msgstr ""
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "Guyana"
 msgstr "Гуана"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Hong Kong"
 msgstr "Гонконг"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Heard Island and McDonald Islands"
 msgstr ""
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Honduras"
 msgstr ""
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Croatia"
 msgstr ""
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Haiti"
 msgstr ""
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "Hungary"
 msgstr ""
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "Indonesia"
 msgstr ""
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "Ireland"
 msgstr ""
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Israel"
 msgstr ""
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "India"
 msgstr ""
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "British Indian Ocean Territory"
 msgstr "Территорияи Британия ин Уқьёнусии Хинд"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "Iraq"
 msgstr ""
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Iran"
 msgstr ""
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "Iceland"
 msgstr ""
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Italy"
 msgstr ""
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Jamaica"
 msgstr ""
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "Jordan"
 msgstr "Ӯрдон"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Japan"
 msgstr "Япония"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Kenya"
 msgstr ""
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Kyrgyzstan"
 msgstr "Кирғизстон"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Cambodia"
 msgstr "Комбоҷа"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Kiribati"
 msgstr "Кирибати"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Comoros"
 msgstr "Ҷазираҳои Камар"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Saint Kitts and Nevis"
 msgstr ""
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Democratic People's Republic of Korea"
 msgstr "Ҷумҳурии Халқии Демократии Корея"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "Republic of Korea"
 msgstr "Ҷумҳурии Корея"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Kuwait"
 msgstr "Кувайт"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Cayman Islands"
 msgstr ""
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Kazakhstan"
 msgstr ""
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Lao"
 msgstr "Лаосӣ"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Lebanon"
 msgstr "Ливан"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Saint Lucia"
 msgstr "Сент-Люсия"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Liechtenstein"
 msgstr ""
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Sri Lanka"
 msgstr ""
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Liberia"
 msgstr ""
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Lesotho"
 msgstr ""
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Lithuania"
 msgstr ""
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Luxembourg"
 msgstr ""
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Latvia"
 msgstr ""
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "Libyan Arab Jamahiriya"
 msgstr "Ҷумҳурияти Либияи Араб"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "Morocco"
 msgstr "Морокко"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "Monaco"
 msgstr ""
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Moldova"
 msgstr "Малдав"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Madagascar"
 msgstr ""
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Marshall Islands"
 msgstr "Ҷазираҳои Маршалл"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Macedonia"
 msgstr "Македония"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Mali"
 msgstr "Мали"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Myanmar"
 msgstr "Мьянма"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Mongolia"
 msgstr "Монголия"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Macau"
 msgstr "Макао"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Northern Mariana Islands"
 msgstr "Ҷазираҳои Шимолии Маршал"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Martinique"
 msgstr ""
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Mauritania"
 msgstr ""
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Montserrat"
 msgstr ""
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Malta"
 msgstr ""
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Mauritius"
 msgstr ""
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Maldives"
 msgstr "Ҷазираҳои  Малдив"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Malawi"
 msgstr "Малави"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Mexico"
 msgstr ""
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Malaysia"
 msgstr ""
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Mozambique"
 msgstr ""
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Namibia"
 msgstr ""
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "New Caledonia"
 msgstr ""
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Niger"
 msgstr ""
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Norfolk Island"
 msgstr ""
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Nigeria"
 msgstr ""
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "Nicaragua"
 msgstr ""
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Netherlands"
 msgstr ""
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "Norway"
 msgstr ""
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Nepal"
 msgstr ""
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "Nauru"
 msgstr "Наури"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Niue"
 msgstr ""
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "New Zealand"
 msgstr "Зеландия Нав"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "Oman"
 msgstr ""
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Panama"
 msgstr ""
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Peru"
 msgstr ""
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "French Polynesia"
 msgstr "Полинезияи Фрасиягӣ"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Papua New Guinea"
 msgstr "Папуа-Гвинеяи Нав"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Philippines"
 msgstr ""
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Pakistan"
 msgstr ""
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "Poland"
 msgstr ""
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Saint Pierre and Miquelon"
 msgstr ""
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "Pitcairn"
 msgstr ""
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Puerto Rico"
 msgstr "Пуэрто-Рико"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Palestinian Territories"
 msgstr ""
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Portugal"
 msgstr ""
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Palau"
 msgstr "Палау"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Paraguay"
 msgstr ""
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Qatar"
 msgstr ""
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Réunion"
 msgstr "Ренион"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Romania"
 msgstr "Румыния"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Serbia"
 msgstr ""
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "Russian Federation"
 msgstr "Федератсияи Русия"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Rwanda"
 msgstr ""
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Saudi Arabia"
 msgstr "Арабистони Суудӣ"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "Solomon Islands"
 msgstr ""
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Seychelles"
 msgstr "ҷ. Сейшели"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "Sudan"
 msgstr "Судан"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Sweden"
 msgstr "Швесия"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Singapore"
 msgstr ""
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Saint Helena"
 msgstr ""
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Slovenia"
 msgstr ""
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Svalbard and Jan Mayen"
 msgstr ""
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Slovakia"
 msgstr "Ссловакия"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Sierra Leone"
 msgstr "Серра Леона"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "San Marino"
 msgstr ""
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "Senegal"
 msgstr ""
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Somalia"
 msgstr "Сомали"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Suriname"
 msgstr ""
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Sao Tome and Principe"
 msgstr "Сан-Томе ва Принсипи"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "El Salvador"
 msgstr "Ал-Салвадор"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Syrian Arab Republic"
 msgstr "Ҷумҳурии Сурияи Араб"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Swaziland"
 msgstr "Свазиланд"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Turks and Caicos Islands"
 msgstr "Теркс ва Кайкос"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Chad"
 msgstr ""
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "French Southern Territories"
 msgstr ""
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Togo"
 msgstr ""
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Thailand"
 msgstr "Тайланд"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Tajikistan"
 msgstr ""
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Tokelau"
 msgstr ""
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "East Timor"
 msgstr "Шарқи Тимор"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Turkmenistan"
 msgstr "Туркменистон"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Tunisia"
 msgstr "Тунисия"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Tonga"
 msgstr "Тонгавӣ"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Turkey"
 msgstr ""
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Trinidad and Tobago"
 msgstr ""
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Tuvalu"
 msgstr ""
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Taiwan"
 msgstr ""
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Tanzania"
 msgstr "Танзания"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Ukraine"
 msgstr ""
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Uganda"
 msgstr ""
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "United States Minor Outlying Islands"
 msgstr ""
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "United States"
 msgstr "Штатҳои Муттаҳидаи Амрико"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Uruguay"
 msgstr ""
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Uzbekistan"
 msgstr ""
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "Vatican City State"
 msgstr ""
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Venezuela"
 msgstr ""
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "British Virgin Islands"
 msgstr "Ҷазираҳои Бритониёвӣ Виргинӣ"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "United States Virgin Islands"
 msgstr ""
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "Viet Nam"
 msgstr "Ветнам"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Vanuatu"
 msgstr ""
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Wallis and Futuna"
 msgstr ""
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Samoa"
 msgstr ""
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Yemen"
 msgstr "Йемен"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "Mayotte"
 msgstr "Майотта"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Yugoslavia"
 msgstr "Югославия"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "South Africa"
 msgstr "Африкои Ҷанубӣ"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Zambia"
 msgstr ""
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "Zimbabwe"
 msgstr ""
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "&Undo"
 msgstr ""
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Cu&t"
 msgstr ""
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "&Copy"
 msgstr ""
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:516 src/ui_locationDialogGui.h:432
+#: src/translations.h:517 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1094
 #: plugins/Oculars/src/ui_ocularDialog.h:1104
 #: plugins/Oculars/src/ui_ocularDialog.h:1111
@@ -3706,64 +3724,64 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "Select All"
 msgstr ""
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "Directory:"
 msgstr ""
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "Folder"
 msgstr ""
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:522 src/ui_configurationDialog.h:1186
+#: src/translations.h:523 src/ui_configurationDialog.h:1186
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr ""
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "Computer"
 msgstr ""
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "File &name:"
 msgstr ""
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Copy &Link Location"
 msgstr ""
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Ignore"
 msgstr ""
 
@@ -4969,11 +4987,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
-msgstr ""
-
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
-msgid "Contributors"
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
@@ -6330,6 +6343,7 @@ msgid "Do not update"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Description:"
 msgstr ""
 
@@ -7218,6 +7232,7 @@ msgid "On"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
 msgstr ""
 
@@ -9722,6 +9737,483 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:170
+msgid "Loading model..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:185
+msgid "Transforming model..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:197
+msgid "Loading ground..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:208
+msgid "Transforming ground..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:236
+msgid "Calculating collision map..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:251
+msgid "Finalizing load..."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:684
+msgid "Scenery3d shader error, can't draw. Check debug output for details."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2102
+msgid ""
+"Your hardware does not support cubemapping, please switch to 'Perspective' "
+"projection!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2111
+msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2121
+msgid "Falling back to '6 Textures' because of ANGLE bug"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3d.cpp:2642
+msgid ""
+"Shadow mapping can not be used on your hardware, check logs for details"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:170
+msgid "Scenery3d plugin loaded!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:222
+msgid "Scenery3d: 3D landscapes"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:225
+msgid "Toggle 3D landscape"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
+msgid "Show settings dialog"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:227
+msgid "Show viewpoint dialog"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:228
+msgid "Toggle shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
+msgid "Toggle debug information"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
+msgid "Toggle location text"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
+msgid "Toggle torchlight"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
+msgid "Reload shaders"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:267
+msgid "Scenery3d shaders reloaded"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:322
+msgid "Loading scene. Please be patient!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:324
+#, qt-format
+msgid "Loading scene '%1'"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:347
+msgid "Could not load scene, please check log for error messages!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
+msgid "Scene successfully loaded."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:410
+msgid "Could not load scene info, please check log for error messages!"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:434
+#, qt-format
+msgid "Could not find scene ID for %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#, qt-format
+msgid "Per-Pixel shading %1."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+msgctxt "enable"
+msgid "on"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+msgctxt "disable"
+msgid "off"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#, qt-format
+msgid "Shadows %1."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:528
+msgid "Shadows deactivated or not possible."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#, qt-format
+msgid "Surface bumps %1."
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:607
+msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#, qt-format
+msgid "Lazy cubemapping: %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+msgid "enabled"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+msgid "disabled"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:776
+msgid "Cubemap size changed"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:778
+#, qt-format
+msgid "Cubemap size not supported, set to %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:799
+msgid "Shadowmap size changed"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:801
+#, qt-format
+msgid "Shadowmap size not supported, set to %1"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:906
+msgid "3D Sceneries"
+msgstr ""
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:909
+msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden, find and demonstrate possible astronomical alignments in temples, "
+"see shadows on sundials etc."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
+msgid ""
+"Provides more accurate lighting by calculating it per-pixel instead of per-"
+"vertex."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:232
+msgid "Required for bump mapping and shadows!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:234
+msgid "Uses only a single shadow cascade instead of up to four."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:235
+msgid ""
+"Provides a speedup in exchange for shadow quality, especially in large "
+"scenes."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:237
+msgid ""
+"Determines how the shadows are filtered, in increasing quality from top to "
+"bottom."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:238
+msgid "PCSS requires the quality set to LOW or HIGH."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:240
+msgid ""
+"Approximate calculation of shadow penumbras (sharper shadows near contact "
+"points, blurred shadows further away)."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:241
+msgid ""
+"Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
+"<b>Hardware</b>)."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:242
+msgid "Causes a performance hit."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
+msgid ""
+"This determines the way the scene is rendered when Stellarium uses a "
+"projection other than &quot;Perspective&quot;. The scene is always rendered "
+"onto a cube, and this cube is then warped according to the real projection. "
+"The cube is described using an image called &quot;cubemap&quot;."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
+msgid ""
+"<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
+"the most compatible method, but may be slower than the others."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
+msgid ""
+"<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
+msgid ""
+"<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of "
+"the cube at once. It may be the fastest method depending on the scene and "
+"your GPU hardware. If not supported, this cannot be selected."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
+msgid "Calculates shadows for each cubemap face separately."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
+msgid ""
+"If disabled, the shadowed area is calculated using a perspective projection, "
+"which may cause missing shadows with high FOV values, but is quite a bit "
+"faster!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
+msgid ""
+"This does not work when using the <b>Geometry shader</b> cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
+msgid ""
+"When checked, the cubemap is only recreated in specific time intervals, "
+"instead of each frame."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
+msgid "Saves energy and may increase subjective application performance."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
+msgid ""
+"Note that the cubemap is always re-rendered when the view position changes."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
+msgid ""
+"When checked, only the face that corresponds to your viewing direction is "
+"updated on movement."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
+msgid ""
+"This will speed up rendering, but the appearance will look "
+"&quot;broken&quot; until you stop moving."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
+msgid ""
+"This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
+msgid ""
+"This updates a second face, so that the visual appearance seems less "
+"&quot;broken&quot;."
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
+msgid "The interval (in timeline seconds) in which no redraw is performed"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
+msgid "6 Textures"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
+msgid "Cubemap"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:71
+msgid "Geometry shader"
+msgstr ""
+
+#: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
+#, qt-format
+msgid "Grid coordinates (%1): %2m, %3m, %4m"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
+msgid "3D Scenery"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
+msgid "Set as default scene"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
+msgid "Load/save viewpoints"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
+msgid "Torch strength:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
+msgid "Torch range:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
+#, qt-format
+msgid "Torchlight (%1)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
+#, qt-format
+msgid "Show grid coordinates (%1)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
+msgid "Visual options"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
+msgid "Per-Pixel lighting"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
+msgid "Shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
+msgid "Simple shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
+msgid "Bump mapping"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
+msgid "Cubemap size:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
+msgid "Shadowmap size:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
+msgid "Filtering Quality:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
+msgid "Hardware"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
+msgid "Low"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
+msgid "Low + Hardware"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
+msgid "High (slow)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
+msgid "High + Hardware (slow)"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
+msgid "PCSS"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
+msgid "Cubemapping mode:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
+msgid "Full cubemap shadows"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
+msgid "Lazy cubemap re-rendering"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
+msgid "Interval:"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
+msgid "Only update dominant face when moving"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
+msgid "Also update second-most dominant face"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
+msgid "Quality/Performance settings"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:205
+msgid "Stored views"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:207
+msgid "Load view"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:208
+msgid "Delete view"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
+msgid "Add current view"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+msgid "Title:"
 msgstr ""
 
 #~ msgid "Venus"

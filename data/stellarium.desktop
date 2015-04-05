@@ -4,7 +4,7 @@ Type=Application
 Name=Stellarium
 Name[af]=Stellarium
 Name[an]=Stellarium
-Name[ar]=ستيلاريوم
+Name[ar]=ستيللاريوم
 Name[ast]=Stellarium
 Name[be]=Stellarium
 Name[bg]=Stellarium
@@ -91,7 +91,7 @@ Name[zh_HK]=Stellarium
 Name[zh_TW]=Stellarium
 GenericName=Desktop planetarium
 GenericName[af]=Werkskerm Planetarium
-GenericName[ar]=قبة سماوية
+GenericName[ar]=برنامج قبة سماوية للحاسب المكتبي
 GenericName[ast]=Planetariu pal escritoriu
 GenericName[be]=Настольны плянэтарый
 GenericName[bg]=Планетариум за работния плот
@@ -145,7 +145,7 @@ GenericName[ro]=Planetarium de birou
 GenericName[ru]=Настольный планетарий
 GenericName[sk]=Planetárium na vašej ploche
 GenericName[sl]=Namizni planetarij
-GenericName[sr]=Десктоп планетаријум
+GenericName[sr]=Планетаријум на радној површини
 GenericName[sv]=Skrivbordsplanetarium
 GenericName[tg]=Планетариуми Мизи Корӣ
 GenericName[th]=ท้องฟ้าจำลองบนเดสก์ท็อป
@@ -162,6 +162,7 @@ Terminal=false
 Categories=Astronomy;Education;Science;
 Comment=Planetarium
 Comment[af]=Planetarium
+Comment[ar]=قبة سماوية
 Comment[ast]=Planetariu
 Comment[be]=Плянэтарый
 Comment[bg]=Планетариум
@@ -229,6 +230,7 @@ Actions=Window;Fullscreen;Debugmode;
 
 [Desktop Action Window]
 Name=Open in window
+Name[ar]=افتح في نافذة
 Name[ast]=Abrir na ventana
 Name[be]=Адкрыць у вакне
 Name[bn]=উইন্ডো আকারে চালু
@@ -268,6 +270,7 @@ Exec=stellarium -f no
 
 [Desktop Action Fullscreen]
 Name=Open in fullscreen
+Name[ar]=افتح بشاشة كاملة
 Name[ast]=Abrir en pantalla completa
 Name[be]=Адкрыць на поўны экран
 Name[bs]=Otvori u punom ekranu
@@ -309,12 +312,14 @@ Exec=stellarium -f yes
 
 [Desktop Action Debugmode]
 Name=Open in debug mode
+Name[ar]=افتح في وضع التصحيح
 Name[be]=Адкрыць у рэжыме адладжваньня
 Name[ca]=Obrir en mode depuració
 Name[cs]=Otevřít v ladícím režimu
 Name[de]=Im Debug-Modus öffnen
 Name[en_GB]=Open in debug mode
 Name[eu]=Ireki arazketa moduan
+Name[fi]=Avaa vianetsintätilassa
 Name[fr]=Ouvrir en mode de débogage
 Name[gl]=Abrir en modo depuración
 Name[hu]=Megnyitás hibakeresés módban
