@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-05 04:02+0600\n"
-"PO-Revision-Date: 2015-02-28 23:27+0000\n"
+"PO-Revision-Date: 2015-04-05 13:40+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-05 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-04-06 05:09+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -189,7 +189,7 @@ msgstr "Tipus <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Opacitat: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -223,19 +223,19 @@ msgstr "Brillantor de la superfície: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:182
 #, qt-format
 msgid "Brightness: %1"
-msgstr ""
+msgstr "Brillantor: %1"
 
 #: src/core/modules/Nebula.cpp:175
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Forma: %1"
 
 #: src/core/modules/Nebula.cpp:176
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
-msgstr ""
+msgstr "Estructura: %1"
 
 #: src/core/modules/Nebula.cpp:188
 #, qt-format
@@ -280,15 +280,15 @@ msgstr "Desconegut"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr ""
+msgstr "Regió HII"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
-msgstr ""
+msgstr "Nebulosa de reflexió"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "H-α emission region"
-msgstr ""
+msgstr "Regió d'emissió H-α"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Undocumented type"
@@ -297,66 +297,66 @@ msgstr "Tipus no documentat"
 #: src/core/modules/Nebula.cpp:762
 msgctxt "form"
 msgid "circular"
-msgstr ""
+msgstr "circular"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "el·líptica"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "form"
 msgid "irregular"
-msgstr ""
+msgstr "irregular"
 
 #: src/core/modules/Nebula.cpp:771
 msgctxt "form"
 msgid "undocumented form"
-msgstr ""
+msgstr "forma no documentada"
 
 #: src/core/modules/Nebula.cpp:784
 msgctxt "structure"
 msgid "amorphous"
-msgstr ""
+msgstr "amorfa"
 
 #: src/core/modules/Nebula.cpp:787
 msgctxt "structure"
 msgid "conventional"
-msgstr ""
+msgstr "convencional"
 
 #: src/core/modules/Nebula.cpp:790
 msgctxt "structure"
 msgid "filamentary"
-msgstr ""
+msgstr "filamentosa"
 
 #: src/core/modules/Nebula.cpp:793
 msgctxt "structure"
 msgid "undocumented structure"
-msgstr ""
+msgstr "estructura no documentada"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "molt feble"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "HII region brightness"
 msgid "moderate"
-msgstr ""
+msgstr "moderada"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "brillant"
 
 #: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
 msgid "undocumented brightness"
-msgstr ""
+msgstr "brillantor no documentada"
 
 #: src/core/modules/Nebula.cpp:828
 msgctxt "H-α emission region brightness"
 msgid "very bright"
-msgstr ""
+msgstr "molt brillant"
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "H-α emission region brightness"
