@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-05 04:02+0600\n"
-"PO-Revision-Date: 2015-04-04 17:24+0000\n"
+"PO-Revision-Date: 2015-04-06 23:01+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-05 05:10+0000\n"
+"X-Launchpad-Export-Date: 2015-04-07 05:09+0000\n"
 "X-Generator: Launchpad (build 17413)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -1769,6 +1769,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"عدة أشخاص كانت لهم مساهمات في هذا المشروع، جعلت من ستيللاريوم برنامجاُ أفضل، "
+"الأسماء مرتبة أبجدياً: %1"
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2531,7 +2533,7 @@ msgstr "السيبيريّة"
 
 #: src/translations.h:143
 msgid "Tukano"
-msgstr ""
+msgstr "تيوكانو"
 
 #: src/translations.h:144
 msgid "Tupi-Guarani"
@@ -7476,7 +7478,7 @@ msgstr "سطوع درب التبانة:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "سطوع الضوء البروجي:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:439
 msgid "Nebula label frequency:"
@@ -7529,12 +7531,12 @@ msgstr "[لايوجد طرفية لواجهة المستخدم النصية]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr "نعم"
+msgstr "مفعّل"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
-msgstr "لا"
+msgstr "غير مفعّل"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -10238,192 +10240,198 @@ msgstr "الإحداثي الرأسي"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
-msgstr ""
+msgstr "تحميل النموذج..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
-msgstr ""
+msgstr "تحويل النموذج..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
-msgstr ""
+msgstr "تحميل الأرضية..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
-msgstr ""
+msgstr "تحويل الأرضية..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "حساب خريطة نقاط الاصطدام..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
-msgstr ""
+msgstr "إتمام التحميل..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"خطأ في إضافة المنظر ثلاثي الأبعاد، برمجية التظليل. انظر إلى مخرجات التصحيح "
+"للتفاصيل."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2102
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"الجهاز لديك لايدعم الرسم التكعيبي، الرجاء التحول إلى الإسقاط المجسامي!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "التظليل الهندسي غير مدعوم. رجوع إلى نسق \"الأنسجة الستة\""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2121
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Angle رجوع إلى نسق \"الأنسجة الستة\" بسبب خطأ في"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2642
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
-msgstr ""
+msgstr "رسم الظلال غير ممكن باستخدام جهازك، راجع سجّل العمليات للتفاصيل"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:170
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "تم تحميل إضافة المناظر ثلاثية الأبعاد"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:222
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "إضافة المناظر ثلاثية الأبعاد: مناظر رصد طبيعية ثلاثية الأبعاد"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:225
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "‏التبديل من أو إلى المنظر ثلاثي الأبعاد‏"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
 msgid "Show settings dialog"
-msgstr ""
+msgstr "‏إعرض نافذة الإعدادات‏"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:227
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "‏إعرض نافذة اختيارات جهة المنظر‏"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:228
 msgid "Toggle shadows"
-msgstr ""
+msgstr "إظهار وإخفاء الظلال"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Toggle debug information"
-msgstr ""
+msgstr "عرض معلومات الأخطاء"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Toggle location text"
-msgstr ""
+msgstr "عرض نص معلومات الموقع"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "عرض نور الكشّاف"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Reload shaders"
-msgstr ""
+msgstr "أعد تحميل برمجية التظليل"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:267
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "تمت إعادة تحميل برمجية التظليل"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:322
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "تحميل المنظر. الرجاء الانتظار"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:324
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "تحميل المنظر \"%1\""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:347
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
+"لم يتمكن البرنامج من تحميل المنظر، الرجاء مراجعة السجّل لفحص رسائل الأخطاء"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "تم تحميل المنظر بنجاح"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:410
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
+"لم يتمكن البرنامج من تحميل معلومات المنظر، الرجاء مراجعة السجّل لفحص رسائل "
+"الأخطاء"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:434
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "لم يتم العور على تعريف المنظر \"%1\""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "التظليل لكل بكسل %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "مفعّل"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "غير مفعّل"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "الظلال %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:528
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "الظلال غير مفعلة أو غير ممكنة"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "البروزات على السطح %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:607
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
-msgstr ""
+msgstr "انسق المختار للرسم التكعيبي غير مدعوم، رجوع إلى \"الأنسجة الستة\""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "الرسم التكعيبي الكسول: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
 msgid "enabled"
-msgstr ""
+msgstr "مفعّل"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
 msgid "disabled"
-msgstr ""
+msgstr "غير مفعّل"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:776
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "حجم الرسم التكعيبي تغيّر"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:778
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "حجم الرسم التكعيبي غير مدعوم، أعيد إلى %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:799
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "حجم رسم الظل تغيّر"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:801
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "حجم رسم الظل غير مدعوم، أعيد إلى %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:906
 msgid "3D Sceneries"
-msgstr ""
+msgstr "المناظر ثلاثية الأبعاد"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:909
 msgid ""
@@ -10431,52 +10439,61 @@ msgid ""
 "garden, find and demonstrate possible astronomical alignments in temples, "
 "see shadows on sundials etc."
 msgstr ""
+"<P DIR=RTL>راسم ثلاثي الأبعاد. تجول في محيطك وقابل وتحاشى العوائق في حديقتك، "
+"ابحث عن الموافقات الفلكية واعرضها في الأماكن التاريخية، وشاهد الظل في "
+"المزاول الشمسية إلخ"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"<P DIR=RTL>يضفي دقة أكبر لعرض الإضاءة بحسابها لكل بكسل بدلا من كل بروز"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:232
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "<P DIR=RTL>متطلب لرسم البروزات والظلال"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:234
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "<P DIR=RTL>يستخدم تتابع واحد للظل بدلاً من أربعة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:235
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"<P DIR=RTL>يعطي أداء أسرع على حساب جودة رسم الظل خاصة في المناظر الكبيرة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:237
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"<P DIR=RTL>يحدد كيف يتم ترشيح جودة الظلال، مرتبة من الأقل جودة إلى أفضل جودة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:238
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "<P DIR=RTL>PCSS يتطلب وضع الجودة على [منخفضة] أو [مرتفعة]"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:240
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"<P DIR=RTL>.حساب تقريب لشبه الظل حيث يعطي ظل حاد في نقاط الالتقاء وظل ناعم "
+"على البعد"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:241
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"<P DIR=RTL> يتطلب وضع جودة الترشيح على منخفضة أو مرتفعة من دون (حسب الجهاز)"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:242
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "<P DIR=RTL>يسبب مشكلة في الأداء"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -10485,17 +10502,24 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"<P DIR=RTL>هذا يحدد الطريقة التي يعرض بها المنظر عندما يستخدم ستيللاريوم "
+"إسقاطاً مختلفاً عن المجسامي. المنظر يرسم دا~ما بشكل مكعب ثم يحنى حسب الإسقاط "
+"الحقيقي. المكعب يتم توصيفه باستخدام صورة تسمى الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<P DIR=RTL>الأنسجة الستة: يستخدم ستة أنسجة، لكل وجه من المكعب نسيجه الخاص. "
+"هذه هي الطريقة الأكثر توافقاً، لكنها أبطأ من الطرق الأخرى."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<P DIR=RTL>الرسم التكعيبي: يستخدم رسماً تكعيبياً مفرداً وهي الطريقة التي "
+"ينصح بها أكثر المستخدمين"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid ""
@@ -10503,10 +10527,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<P DIR=RTL>رسم الظل الهندسي: يستخدم إمكانيات معالجات الرسوم الحديثة لرسم "
+"أوجه المكعب الستة في نفس الوقت. ربما تكون هي أسرع الطرق بحسب نوع المنظر "
+"والمعالج الرسومي الموجود في جهازك. في حالة عدم دعم الجهاز لهذه الميزة لايمكن "
+"اختيارها."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "<P DIR=RTL>يحسب الظل لكل وجه من الرسم التكعيبي على حدة."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
@@ -10514,204 +10542,214 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"<P DIR=RTL>إذا لم يكن مفعّلاً، المناطق الموجودة في الظل يتم حسابها باستخدام "
+"الإسقاط المنظوري، وربما تسبب ذلك بفقدان بعض الظل في قيم حقل الرؤية الواسعة، "
+"لكن يعتبر أسرع من غيره بشكل ملحوظ."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
-msgstr ""
+msgstr "<P DIR=RTL>هذا لا يعمل باستخدام نسق رسم الظل الهندسي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"<P DIR=RTL>عند تعليم هذا الخيار فإن الرسم التكعيبي يعاد في أوقات بينها فترات "
+"محددة عوضاً عن كل إطار."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid "Saves energy and may increase subjective application performance."
-msgstr ""
+msgstr "<P DIR=RTL>يوفر الطاقة وحسّن من الأداء"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"<P DIR=RTL>لاحظ أن الرسم التكعيبي يجدد رسمه عندما يتغير اتجاه الرؤية."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"<P DIR=RTL>عند تعليم هذا الخيار، يتم تحديث الوجه الذي يتفق مع اتجاه الرؤية "
+"فقط عند الحركة."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"<P DIR=RTL>هذا سوف يزيد من سرعة الرسم لكن سوف يبدو المنظر متكسراً حتى تتوقف "
+"عن الحركة."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
-msgstr ""
+msgstr "<P DIR=RTL>هذا لايعمل مع نسق رسم الظل الهندسي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
-msgstr ""
+msgstr "<P DIR=RTL>هذا يحدّث الوجه الثاني مما يجعل المنظر أقل تكسراً."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
+msgstr "<P DIR=RTL>الفترة بالثواني التي يتوقف فيها البرنامج عن تجديد الرسم"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
 msgid "6 Textures"
-msgstr ""
+msgstr "ستة أنسجة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
 msgid "Cubemap"
-msgstr ""
+msgstr "الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:71
 msgid "Geometry shader"
-msgstr ""
+msgstr "رسم الظل الهندسي"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr ""
+msgstr "‎إحداثيات الشبكة‎ (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "المنظر ثلاثي الأبعاد"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "اجعل هذا المشهد هو الافتراضي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "حمّل/احفظ اتجاه المشهد"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "قوة نور الكشاف"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "مدى نور الكشاف"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "نور الكشاف (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "إعرض إحداثيات الشبكة (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "الخيارات البصرية"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "إضاءة لكل بكسل"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "الظلال"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "ظلال بسيطة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "رسم البروزات"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "حجم الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "حجم رسم الظلال"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "جودة الترشيح"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "حسب الجهاز"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "منخفضة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "منخفضة + حسب الجهاز"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "(مرتفعة (أداء بطيء"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "(مرتفعة + حسب الجهاز (أداء بطيء"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "نسق الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "ظلال كاملة في الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "إنعاش كسول للرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "الفترة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "حدّث الوجه الغالب فقط عند الحركة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "حدّث أيضا الوجه الثاني الغالب"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "إعدادات الجودة والأداء"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
-msgstr ""
+msgstr "المناظر المخزنّة"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:207
 msgid "Load view"
-msgstr ""
+msgstr "حمّل المنظر"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:208
 msgid "Delete view"
-msgstr ""
+msgstr "اخذف المنظر"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Add current view"
-msgstr ""
+msgstr "أضف المنظر الحالي"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
-msgstr ""
+msgstr "الإسم"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "الشبكة الاستوائية"
