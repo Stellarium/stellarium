@@ -73,7 +73,7 @@ protected:
 private:
 	Ui_archaeoLinesDialog* ui;
 	ArchaeoLines* al;
-	QColorDialog colorDialog;
+	QColorDialog* colorDialog; // required instead of the static functions due to a bug in Qt5/windows7+: the modal standard panel does not show in front of Stellarium fullscreen window!
 	// These are colors to be settable with a QColorDialog.
 	QColor equinoxColor;
 	QColor solsticeColor;
