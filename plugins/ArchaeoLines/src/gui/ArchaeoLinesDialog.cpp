@@ -31,11 +31,13 @@ ArchaeoLinesDialog::ArchaeoLinesDialog()
 	: al(NULL)
 {
 	ui = new Ui_archaeoLinesDialog();
+	colorDialog = new QColorDialog(NULL);
 }
 
 ArchaeoLinesDialog::~ArchaeoLinesDialog()
 {
-	delete ui;
+	delete colorDialog; colorDialog=NULL;
+	delete ui;          ui=NULL;
 }
 
 void ArchaeoLinesDialog::retranslate()
@@ -160,6 +162,10 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
 	ui->formatDisplayBox->hide();
+	// We must apparently apply an ugly hack, but only on Windows. (QTBUG-35302)
+	#ifndef Q_OS_WIN
+	ui->switchToWindowedModeLabel->hide();
+	#endif
 	setAboutHtml();
 }
 
@@ -272,10 +278,12 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 // These are called by the respective buttons.
 void ArchaeoLinesDialog::askEquinoxColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(equinoxColor, NULL, q_("Select color for equinox line"));
 	if (c.isValid())
 	{
@@ -284,16 +292,20 @@ void ArchaeoLinesDialog::askEquinoxColor()
 		equinoxColorPixmap.fill(c);
 		ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askSolsticeColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(solsticeColor, NULL, q_("Select color for solstice lines"));
 	if (c.isValid())
 	{
@@ -302,16 +314,20 @@ void ArchaeoLinesDialog::askSolsticeColor()
 		solsticeColorPixmap.fill(c);
 		ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askCrossquarterColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(crossquarterColor, NULL, q_("Select color for crossquarter lines"));
 	if (c.isValid())
 	{
@@ -320,16 +336,20 @@ void ArchaeoLinesDialog::askCrossquarterColor()
 		crossquarterColorPixmap.fill(c);
 		ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askMajorStandstillColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(majorStandstillColor, NULL, q_("Select color for major standstill lines"));
 	if (c.isValid())
 	{
@@ -338,16 +358,20 @@ void ArchaeoLinesDialog::askMajorStandstillColor()
 		majorStandstillColorPixmap.fill(c);
 		ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askMinorStandstillColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(minorStandstillColor, NULL, q_("Select color for minor standstill lines"));
 	if (c.isValid())
 	{
@@ -356,16 +380,20 @@ void ArchaeoLinesDialog::askMinorStandstillColor()
 		minorStandstillColorPixmap.fill(c);
 		ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askZenithPassageColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(zenithPassageColor, NULL, q_("Select color for zenith passage line"));
 	if (c.isValid())
 	{
@@ -374,16 +402,20 @@ void ArchaeoLinesDialog::askZenithPassageColor()
 		zenithPassageColorPixmap.fill(c);
 		ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askNadirPassageColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(nadirPassageColor, NULL, q_("Select color for nadir passage line"));
 	if (c.isValid())
 	{
@@ -392,16 +424,20 @@ void ArchaeoLinesDialog::askNadirPassageColor()
 		nadirPassageColorPixmap.fill(c);
 		ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askSelectedObjectColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(selectedObjectColor, NULL, q_("Select color for selected object line"));
 	if (c.isValid())
 	{
@@ -410,16 +446,20 @@ void ArchaeoLinesDialog::askSelectedObjectColor()
 		selectedObjectColorPixmap.fill(c);
 		ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askCurrentSunColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(currentSunColor, NULL, q_("Select color for current sun line"));
 	if (c.isValid())
 	{
@@ -428,16 +468,20 @@ void ArchaeoLinesDialog::askCurrentSunColor()
 		currentSunColorPixmap.fill(c);
 		ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askCurrentMoonColor()
 {
+#ifdef Q_OS_WIN
 	// We must leave fullscreen to show the color panel :-(
 	bool isFullScreen=StelMainView::getInstance().isFullScreen();
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(false);
+#endif
 	QColor c=QColorDialog::getColor(currentMoonColor, NULL, q_("Select color for current moon line"));
 	if (c.isValid())
 	{
@@ -446,25 +490,58 @@ void ArchaeoLinesDialog::askCurrentMoonColor()
 		currentMoonColorPixmap.fill(c);
 		ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
 	}
+#ifdef Q_OS_WIN
 	if (isFullScreen)
 		StelMainView::getInstance().setFullScreen(true);
+#endif
 }
 
 void ArchaeoLinesDialog::askCurrentPlanetColor()
 {
 	// We must leave fullscreen to show the color panel :-(
-	bool isFullScreen=StelMainView::getInstance().isFullScreen();
-	if (isFullScreen)
-		StelMainView::getInstance().setFullScreen(false);
-	QColor c=QColorDialog::getColor(currentPlanetColor, NULL, q_("Select color for current planet line"));
-	if (c.isValid())
+//	bool isFullScreen=StelMainView::getInstance().isFullScreen();
+//	if (isFullScreen)
+//		StelMainView::getInstance().setFullScreen(false);
+
+	colorDialog->setOption(QColorDialog::DontUseNativeDialog, false);
+	colorDialog->setWindowTitle(q_("Select color for current planet line"));
+	colorDialog->setCurrentColor(currentPlanetColor);
+	//int colorExec=colorDialog->exec(); // 1: accepted, 0: rejected.
+	//if (colorDialog->exec())
+//	colorDialog->show();
+//	colorDialog->raise();
+	// TODO: We must find SOME valid parent QWidget for this QWidget! (fight QTBUG-35302)
+	// colorDialog->setParent(ui->settingsTab); // does not work: will not show color panel.
+	// colorDialog->setParent(ui->settingsTab->parentWidget()); // name=qt_tabbedwidget_stackedwidget; does not work: will not show color panel.
+	// colorDialog->setParent(ui->settingsTab->parentWidget()->parentWidget()); // name=tabs; does not work: will not show color panel.
+	// colorDialog->setParent(ui->settingsTab->parentWidget()->parentWidget()->parentWidget()); // name=QDialog:archaeoLinesDialog; does not work: will not show color panel.
+	// colorDialog->setParent(dialog); // this is finally the same. name=QDialog:archaeoLinesDialog; does not work: will not show color panel.
+	// colorDialog->setParent(ui->settingsTab->parentWidget()->parentWidget()->parentWidget()->parentWidget()); // name=QObject:0x0; same as no parent set: ColorPanel behind main window.
+	// colorDialog->setParent(StelMainView::getInstance().viewport()); // name=QGLWidget; does not work, panel immediately overpainted, but still modally stuck.
+	// colorDialog->setParent(StelMainView::getInstance().focusWidget()); // name=StelMainView:MainView; does not work, panel immediately overpainted, but still modally stuck.
+	//colorDialog->setParent( VALID_PARENT ); // <<<--- ANY MORE IDEAS ON THIS?
+	qDebug() << "QColorDialog parent is" << colorDialog->parentWidget();
+	if (colorDialog->exec())
+
 	{
-		currentPlanetColor=c;
-		al->setLineColor(ArchaeoLine::CurrentPlanetNone, c);
-		currentPlanetColorPixmap.fill(c);
-		ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
+		//QColor c=QColorDialog::getColor(currentPlanetColor, NULL, q_("Select color for current planet line"), QColorDialog::DontUseNativeDialog);
+		QColor c=colorDialog->selectedColor();
+		if (c.isValid())
+		{
+			currentPlanetColor=c;
+			al->setLineColor(ArchaeoLine::CurrentPlanetNone, c);
+			currentPlanetColorPixmap.fill(c);
+			ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
+		}
 	}
-	if (isFullScreen)
-		StelMainView::getInstance().setFullScreen(true);
+//	if (isFullScreen)
+//		StelMainView::getInstance().setFullScreen(true);
 }
 
+// The issues in mode switching seem to be related to QTBUG-35302, although it is reportedly fixed at least for X11.
+
+// Note on another bug in QColorDialog: If you choose one of the preconfigured colors (left half),
+// on next change of that color it will have toggled one high bit of one component.
+// On next change, it will be toggled again.
+// If you configure a color from the right color field, all is OK.
+// Observed by GZ in 2015-04 with Qt5.4.0 on Windows7SP1.
