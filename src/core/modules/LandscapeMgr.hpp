@@ -24,11 +24,11 @@
 
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
+#include "Landscape.hpp"
 
 #include <QMap>
 #include <QStringList>
 
-class Landscape;
 class Atmosphere;
 class Cardinals;
 class QSettings;
@@ -117,7 +117,7 @@ public:
 	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
 
 	// GZ: implement StelModule's method. For test purposes only, we implement a manual transparency sampler.
-	// TODO: comment this away for final builds
+	// TODO: comment this away for final builds. Please leave it in until this feature is finished.
 	// virtual void handleMouseClicks(class QMouseEvent*);
 
 public slots:
@@ -325,7 +325,9 @@ public slots:
 	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
 	void setFlagAtmosphereAutoEnable(bool b);
 
-
+	//! Forward opacity query to current landscape.
+	//! @param azalt direction of view line to sample in azaltimuth coordinates.
+	float getLandscapeOpacity(Vec3d azalt) const {return landscape->getOpacity(azalt);}
 
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
