@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"POT-Creation-Date: 2015-04-11 13:53+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9774,21 +9774,21 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2102
+#: plugins/Scenery3d/src/Scenery3d.cpp:2100
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2111
+#: plugins/Scenery3d/src/Scenery3d.cpp:2109
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2121
+#: plugins/Scenery3d/src/Scenery3d.cpp:2119
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2642
+#: plugins/Scenery3d/src/Scenery3d.cpp:2640
 msgid "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
 
@@ -9930,23 +9930,20 @@ msgstr ""
 msgid "Shadowmap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:910
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:912
 msgid "3D Sceneries"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:915
 msgid ""
 "3D foreground renderer. Walk around, find and avoid obstructions in your "
-"garden,find and demonstrate possible astronomical alignments in temples, see "
-"shadows on sundials etc.\n"
-"\n"
-"To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/"
-"PgDn. Movement speed is linked to field of view (i.e. zoom in for fine "
-"adjustments). You can even keep moving by releasing Ctrl before cursor key.\n"
-"\n"
-"Development of this plugin was in parts supported by the Austrian Science "
-"Fund (FWF) project ASTROSIM (P 21208-G19). More: http://astrosim.univie.ac."
-"at/"
+"garden, find and demonstrate possible astronomical alignments in temples, "
+"see shadows on sundials etc. To move around, press Ctrl+cursor keys. To lift "
+"eye height, use Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i."
+"e. zoom in for fine adjustments). You can even keep moving by releasing Ctrl "
+"before cursor key. Development of this plugin was in parts supported by the "
+"Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19). More: http://"
+"astrosim.univie.ac.at/"
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
