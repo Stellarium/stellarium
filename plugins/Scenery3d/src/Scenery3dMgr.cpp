@@ -912,12 +912,12 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("3D Sceneries");
 	info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza, Florian Schaukowitsch";
 	info.contact = "Georg.Zotti@univie.ac.at";
-	info.description = N_("3D foreground renderer. Walk around, find and avoid obstructions in your garden, "
-			      "find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.<p>"
-			      "To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn. "
+	info.description = N_("<p>3D foreground renderer. Walk around, find and avoid obstructions in your garden, "
+			      "find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.</p>"
+			      "<p>To move around, press Ctrl+cursor keys. To lift eye height, use Ctrl+PgUp/PgDn. "
 			      "Movement speed is linked to field of view (i.e. zoom in for fine adjustments). "
-			      "You can even keep moving by releasing Ctrl before cursor key.<p>"
-			      "Development of this plugin was in parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19). More: http://astrosim.univie.ac.at/");
+			      "You can even keep moving by releasing Ctrl before cursor key.</p>"
+			      "<p>Development of this plugin was in parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-G19). More: http://astrosim.univie.ac.at/</p>");
 
 	return info;
 }
