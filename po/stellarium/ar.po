@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-05 04:02+0600\n"
-"PO-Revision-Date: 2015-04-04 17:24+0000\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"PO-Revision-Date: 2015-04-06 23:01+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-05 05:10+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:11+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
 #: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:481 src/core/StelCore.cpp:192
+#: src/core/StelApp.cpp:485 src/core/StelCore.cpp:192
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr "اختيارات العرض"
@@ -629,7 +629,7 @@ msgstr "درب التبانة"
 msgid "Zodiacal Light"
 msgstr "الضوء البروجي"
 
-#: src/core/StelApp.cpp:481
+#: src/core/StelApp.cpp:485
 msgid "Night mode"
 msgstr "نَسَق الرؤية الليلية"
 
@@ -1372,6 +1372,7 @@ msgstr "<P DIR=RTL>للمراسلة"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:183
 msgid "Version"
 msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 
@@ -1385,6 +1386,7 @@ msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:184
 msgid "Author"
 msgstr "<P DIR=RTL><b>المؤلف</b>"
 
@@ -1769,6 +1771,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"عدة أشخاص كانت لهم مساهمات في هذا المشروع، جعلت من ستيللاريوم برنامجاُ أفضل، "
+"الأسماء مرتبة أبجدياً: %1"
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2531,7 +2535,7 @@ msgstr "السيبيريّة"
 
 #: src/translations.h:143
 msgid "Tukano"
-msgstr ""
+msgstr "تيوكانو"
 
 #: src/translations.h:144
 msgid "Tupi-Guarani"
@@ -2560,7 +2564,7 @@ msgid "Trees"
 msgstr "أشجار"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:157
+#: src/translations.h:157 plugins/ArchaeoLines/src/ArchaeoLines.cpp:768
 msgid "Moon"
 msgstr "القمر‎‏"
 
@@ -2580,17 +2584,17 @@ msgid "Garching"
 msgstr "جارشينج"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:165
+#: src/translations.h:165 plugins/ArchaeoLines/src/ArchaeoLines.cpp:780
 msgid "Mars"
 msgstr "المريخ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:167
+#: src/translations.h:167 plugins/ArchaeoLines/src/ArchaeoLines.cpp:783
 msgid "Jupiter"
 msgstr "المشتري"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:169
+#: src/translations.h:169 plugins/ArchaeoLines/src/ArchaeoLines.cpp:786
 msgid "Saturn"
 msgstr "زحل"
 
@@ -5223,6 +5227,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:295
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
 msgid "Links"
 msgstr "<P DIR=RTL>روابط"
 
@@ -5234,6 +5239,7 @@ msgstr "<P DIR=RTL>روابط"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:296
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5251,6 +5257,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:299
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول على جواب هنا%2"
@@ -5264,6 +5271,7 @@ msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول ع�
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:301
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج %1هنا%2."
@@ -5277,6 +5285,7 @@ msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -5332,10 +5341,12 @@ msgid "Attach end point to rotating sky"
 msgstr "أرفق نقطة نهاية لدوران السماء"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
 msgstr "نسق العرض"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
 msgstr "dms استخدم نسق الدرجات والدقائق والثواني"
 
@@ -5348,6 +5359,7 @@ msgstr "dms استخدم نسق الدرجات والدقائق والثواني
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:327
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
 msgid "Restore default settings"
 msgstr "استرجع الإعدادات الأصلية"
 
@@ -5379,6 +5391,7 @@ msgstr "احفظ الإعدادات الحالية كإفتراضية"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "عن"
@@ -7476,7 +7489,7 @@ msgstr "سطوع درب التبانة:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "سطوع الضوء البروجي:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:439
 msgid "Nebula label frequency:"
@@ -7529,12 +7542,12 @@ msgstr "[لايوجد طرفية لواجهة المستخدم النصية]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr "نعم"
+msgstr "مفعّل"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
-msgstr "لا"
+msgstr "غير مفعّل"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -8416,6 +8429,7 @@ msgstr "الكتلة"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:765
 msgid "Sun"
 msgstr "الشمس"
 
@@ -10238,198 +10252,213 @@ msgstr "الإحداثي الرأسي"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
-msgstr ""
+msgstr "تحميل النموذج..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
-msgstr ""
+msgstr "تحويل النموذج..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
-msgstr ""
+msgstr "تحميل الأرضية..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
-msgstr ""
+msgstr "تحويل الأرضية..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "حساب خريطة نقاط الاصطدام..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
-msgstr ""
+msgstr "إتمام التحميل..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"خطأ في إضافة المنظر ثلاثي الأبعاد، برمجية التظليل. انظر إلى مخرجات التصحيح "
+"للتفاصيل."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2102
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"الجهاز لديك لايدعم الرسم التكعيبي، الرجاء التحول إلى الإسقاط المجسامي!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "التظليل الهندسي غير مدعوم. رجوع إلى نسق \"الأنسجة الستة\""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2121
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Angle رجوع إلى نسق \"الأنسجة الستة\" بسبب خطأ في"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2642
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
-msgstr ""
+msgstr "رسم الظلال غير ممكن باستخدام جهازك، راجع سجّل العمليات للتفاصيل"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:170
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:171
 msgid "Scenery3d plugin loaded!"
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:222
-msgid "Scenery3d: 3D landscapes"
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:225
-msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "تم تحميل إضافة المناظر ثلاثية الأبعاد"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
-msgid "Show settings dialog"
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:227
-msgid "Show viewpoint dialog"
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:228
-msgid "Toggle shadows"
-msgstr ""
+msgid "Scenery3d: 3D landscapes"
+msgstr "إضافة المناظر ثلاثية الأبعاد: مناظر رصد طبيعية ثلاثية الأبعاد"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
-msgid "Toggle debug information"
-msgstr ""
+msgid "Toggle 3D landscape"
+msgstr "‏التبديل من أو إلى المنظر ثلاثي الأبعاد‏"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
-msgid "Toggle location text"
-msgstr ""
+msgid "Show settings dialog"
+msgstr "‏إعرض نافذة الإعدادات‏"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
-msgid "Toggle torchlight"
-msgstr ""
+msgid "Show viewpoint dialog"
+msgstr "‏إعرض نافذة اختيارات جهة المنظر‏"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
+msgid "Toggle shadows"
+msgstr "إظهار وإخفاء الظلال"
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
+msgid "Toggle debug information"
+msgstr "عرض معلومات الأخطاء"
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
+msgid "Toggle location text"
+msgstr "عرض نص معلومات الموقع"
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
+msgid "Toggle torchlight"
+msgstr "عرض نور الكشّاف"
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Reload shaders"
-msgstr ""
+msgstr "أعد تحميل برمجية التظليل"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:267
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:271
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "تمت إعادة تحميل برمجية التظليل"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:322
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:326
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "تحميل المنظر. الرجاء الانتظار"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:324
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:328
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:347
-msgid "Could not load scene, please check log for error messages!"
-msgstr ""
+msgstr "تحميل المنظر \"%1\""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
-msgid "Scene successfully loaded."
+msgid "Could not load scene, please check log for error messages!"
 msgstr ""
+"لم يتمكن البرنامج من تحميل المنظر، الرجاء مراجعة السجّل لفحص رسائل الأخطاء"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:410
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:355
+msgid "Scene successfully loaded."
+msgstr "تم تحميل المنظر بنجاح"
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:414
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
+"لم يتمكن البرنامج من تحميل معلومات المنظر، الرجاء مراجعة السجّل لفحص رسائل "
+"الأخطاء"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:434
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:438
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "لم يتم العور على تعريف المنظر \"%1\""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "التظليل لكل بكسل %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "مفعّل"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "غير مفعّل"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "الظلال %1."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:528
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:532
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "الظلال غير مفعلة أو غير ممكنة"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "البروزات على السطح %1."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:607
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:611
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
-msgstr ""
+msgstr "انسق المختار للرسم التكعيبي غير مدعوم، رجوع إلى \"الأنسجة الستة\""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "الرسم التكعيبي الكسول: %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "enabled"
-msgstr ""
+msgstr "مفعّل"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "disabled"
-msgstr ""
+msgstr "غير مفعّل"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:776
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:780
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "حجم الرسم التكعيبي تغيّر"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:778
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:782
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "حجم الرسم التكعيبي غير مدعوم، أعيد إلى %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:799
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:803
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "حجم رسم الظل تغيّر"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:801
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:805
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "حجم رسم الظل غير مدعوم، أعيد إلى %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:906
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:910
 msgid "3D Sceneries"
-msgstr ""
+msgstr "المناظر ثلاثية الأبعاد"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:909
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
 msgid ""
 "3D foreground renderer. Walk around, find and avoid obstructions in your "
-"garden, find and demonstrate possible astronomical alignments in temples, "
-"see shadows on sundials etc."
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
+"To move around, press Ctrl+cursor keys. To lift eye height, use "
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
@@ -10437,46 +10466,52 @@ msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"<P DIR=RTL>يضفي دقة أكبر لعرض الإضاءة بحسابها لكل بكسل بدلا من كل بروز"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:232
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "<P DIR=RTL>متطلب لرسم البروزات والظلال"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:234
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "<P DIR=RTL>يستخدم تتابع واحد للظل بدلاً من أربعة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:235
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"<P DIR=RTL>يعطي أداء أسرع على حساب جودة رسم الظل خاصة في المناظر الكبيرة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:237
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"<P DIR=RTL>يحدد كيف يتم ترشيح جودة الظلال، مرتبة من الأقل جودة إلى أفضل جودة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:238
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "<P DIR=RTL>PCSS يتطلب وضع الجودة على [منخفضة] أو [مرتفعة]"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:240
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"<P DIR=RTL>.حساب تقريب لشبه الظل حيث يعطي ظل حاد في نقاط الالتقاء وظل ناعم "
+"على البعد"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:241
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"<P DIR=RTL> يتطلب وضع جودة الترشيح على منخفضة أو مرتفعة من دون (حسب الجهاز)"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:242
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "<P DIR=RTL>يسبب مشكلة في الأداء"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -10485,17 +10520,24 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"<P DIR=RTL>هذا يحدد الطريقة التي يعرض بها المنظر عندما يستخدم ستيللاريوم "
+"إسقاطاً مختلفاً عن المجسامي. المنظر يرسم دا~ما بشكل مكعب ثم يحنى حسب الإسقاط "
+"الحقيقي. المكعب يتم توصيفه باستخدام صورة تسمى الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<P DIR=RTL>الأنسجة الستة: يستخدم ستة أنسجة، لكل وجه من المكعب نسيجه الخاص. "
+"هذه هي الطريقة الأكثر توافقاً، لكنها أبطأ من الطرق الأخرى."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:246
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<P DIR=RTL>الرسم التكعيبي: يستخدم رسماً تكعيبياً مفرداً وهي الطريقة التي "
+"ينصح بها أكثر المستخدمين"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid ""
@@ -10503,10 +10545,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<P DIR=RTL>رسم الظل الهندسي: يستخدم إمكانيات معالجات الرسوم الحديثة لرسم "
+"أوجه المكعب الستة في نفس الوقت. ربما تكون هي أسرع الطرق بحسب نوع المنظر "
+"والمعالج الرسومي الموجود في جهازك. في حالة عدم دعم الجهاز لهذه الميزة لايمكن "
+"اختيارها."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:249
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "<P DIR=RTL>يحسب الظل لكل وجه من الرسم التكعيبي على حدة."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
@@ -10514,203 +10560,448 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"<P DIR=RTL>إذا لم يكن مفعّلاً، المناطق الموجودة في الظل يتم حسابها باستخدام "
+"الإسقاط المنظوري، وربما تسبب ذلك بفقدان بعض الظل في قيم حقل الرؤية الواسعة، "
+"لكن يعتبر أسرع من غيره بشكل ملحوظ."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
-msgstr ""
+msgstr "<P DIR=RTL>هذا لا يعمل باستخدام نسق رسم الظل الهندسي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"<P DIR=RTL>عند تعليم هذا الخيار فإن الرسم التكعيبي يعاد في أوقات بينها فترات "
+"محددة عوضاً عن كل إطار."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid "Saves energy and may increase subjective application performance."
-msgstr ""
+msgstr "<P DIR=RTL>يوفر الطاقة وحسّن من الأداء"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"<P DIR=RTL>لاحظ أن الرسم التكعيبي يجدد رسمه عندما يتغير اتجاه الرؤية."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"<P DIR=RTL>عند تعليم هذا الخيار، يتم تحديث الوجه الذي يتفق مع اتجاه الرؤية "
+"فقط عند الحركة."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"<P DIR=RTL>هذا سوف يزيد من سرعة الرسم لكن سوف يبدو المنظر متكسراً حتى تتوقف "
+"عن الحركة."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
-msgstr ""
+msgstr "<P DIR=RTL>هذا لايعمل مع نسق رسم الظل الهندسي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:261
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
-msgstr ""
+msgstr "<P DIR=RTL>هذا يحدّث الوجه الثاني مما يجعل المنظر أقل تكسراً."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
+msgstr "<P DIR=RTL>الفترة بالثواني التي يتوقف فيها البرنامج عن تجديد الرسم"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
 msgid "6 Textures"
-msgstr ""
+msgstr "ستة أنسجة"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
 msgid "Cubemap"
-msgstr ""
+msgstr "الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:71
 msgid "Geometry shader"
-msgstr ""
+msgstr "رسم الظل الهندسي"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr ""
+msgstr "‎إحداثيات الشبكة‎ (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "المنظر ثلاثي الأبعاد"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "اجعل هذا المشهد هو الافتراضي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "حمّل/احفظ اتجاه المشهد"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "قوة نور الكشاف"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "مدى نور الكشاف"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "نور الكشاف (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "إعرض إحداثيات الشبكة (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "الخيارات البصرية"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "إضاءة لكل بكسل"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "الظلال"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "ظلال بسيطة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "رسم البروزات"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "حجم الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "حجم رسم الظلال"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "جودة الترشيح"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "حسب الجهاز"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "منخفضة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "منخفضة + حسب الجهاز"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "(مرتفعة (أداء بطيء"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "(مرتفعة + حسب الجهاز (أداء بطيء"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "نسق الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "ظلال كاملة في الرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "إنعاش كسول للرسم التكعيبي"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "الفترة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "حدّث الوجه الغالب فقط عند الحركة"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "حدّث أيضا الوجه الثاني الغالب"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "إعدادات الجودة والأداء"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
-msgstr ""
+msgstr "المناظر المخزنّة"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:207
 msgid "Load view"
-msgstr ""
+msgstr "حمّل المنظر"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:208
 msgid "Delete view"
-msgstr ""
+msgstr "اخذف المنظر"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Add current view"
-msgstr ""
+msgstr "أضف المنظر الحالي"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
+msgstr "الإسم"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:190
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
+msgid "ArchaeoLines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
+msgid "A tool for archaeo-/ethnoastronomical alignment studies"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:741
+msgid "Equinox"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:744
+msgid "Solstice"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:747
+msgid "Crossquarter"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:750
+msgid "Major Lunar Standstill"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:753
+msgid "Minor Lunar Standstill"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:756
+msgid "Zenith Passage"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:759
+msgid "Nadir Passage"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:762
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
+msgid "Selected Object"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:771
+msgid "error if you can read this"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:774
+msgid "Mercury"
+msgstr "عطارد"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:777
+msgid "Venus"
+msgstr "الزهرة"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
+msgid "ArchaeoLines Plug-in"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
+msgid ""
+"The ArchaeoLines plugin displays any combination of declination arcs most "
+"relevant to archaeo- or ethnoastronomical studies."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
+msgid "Declinations of equinoxes (i.e. equator) and the solstices"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
+msgid ""
+"Declinations of the crossquarter days (days right between solstices and "
+"equinoxes)"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
+msgid "Declinations of the Major Lunar Standstills"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
+msgid "Declinations of the Minor Lunar Standstills"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
+msgid "Declination of the Zenith passage"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
+msgid "Declination of the Nadir passage"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
+msgid "Declination of the currently selected object"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
+msgid "Current declination of the sun"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
+msgid "Current declination of the moon"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
+msgid "Current declination of a naked-eye planet"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
+msgid ""
+"The lunar lines include horizon parallax effects. There are two lines each "
+"drawn, for maximum and minimum distance of the moon. Note that declination "
+"of the moon at the major standstill can exceed the indicated limits if it is "
+"high in the sky due to parallax effects."
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
+msgid "Select color for equinox line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
+msgid "Select color for solstice lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
+msgid "Select color for crossquarter lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
+msgid "Select color for major standstill lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
+msgid "Select color for minor standstill lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
+msgid "Select color for zenith passage line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
+msgid "Select color for nadir passage line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
+msgid "Select color for selected object line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
+msgid "Select color for current sun line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
+msgid "Select color for current moon line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
+msgid "Select color for current planet line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
+msgid "ArchaeoLines Plug-in Configuration"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
+msgid "To change colors you may have to leave fullscreen mode!"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
+msgid "Equinox line (Equator)"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
+msgid "Solstice Lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
+msgid "Crossquarter Lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
+msgid "Change color"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
+msgid "Major Lunar Standstill lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
+msgid "Minor Lunar Standstill lines"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
+msgid "Declination of Zenith passage"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
+msgid "Declination of Nadir passage"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
+msgid "Current Sun"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
+msgid "Current Moon"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
+msgid "Current Planet: None"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
+msgid "Current Planet: Mercury"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
+msgid "Current Planet: Venus"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
+msgid "Current Planet: Mars"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
+msgid "Current Planet: Jupiter"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
+msgid "Current Planet: Saturn"
 msgstr ""
 
 #~ msgid "Equatorial Grid"
@@ -10754,12 +11045,6 @@ msgstr ""
 
 #~ msgid "Nebula Circles"
 #~ msgstr "دوائر السدم السماوية"
-
-#~ msgid "Mercury"
-#~ msgstr "عطارد"
-
-#~ msgid "Venus"
-#~ msgstr "الزهرة"
 
 #~ msgid "Earth"
 #~ msgstr "الأرض"
