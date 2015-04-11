@@ -53,6 +53,8 @@ void Box::render() const
 	Vec3f ftl = vertices[7];
 
 	glExtFuncs->glColor3f(1.0f,1.0f,1.0f);
+	float oldLineWidth;
+	glExtFuncs->glGetFloatv(GL_LINE_WIDTH, &oldLineWidth);
 	glExtFuncs->glLineWidth(5);
 	glExtFuncs->glBegin(GL_LINE_LOOP);
 		//near plane
@@ -101,6 +103,8 @@ void Box::render() const
 		glExtFuncs->glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
 		glExtFuncs->glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
 	glExtFuncs->glEnd();
+	glExtFuncs->glLineWidth(oldLineWidth);
+
 #endif
 }
 
@@ -248,6 +252,8 @@ void AABB::render() const
 	Vec3f ftl = getCorner(MinMaxMax);
 
 	glExtFuncs->glColor3f(1.0f, 1.0f, 1.0f);
+	float oldLineWidth;
+	glExtFuncs->glGetFloatv(GL_LINE_WIDTH, &oldLineWidth);
 	glExtFuncs->glLineWidth(5);
 	glExtFuncs->glBegin(GL_LINE_LOOP);
 		//near plane
@@ -296,6 +302,7 @@ void AABB::render() const
 		glExtFuncs->glVertex3f(ftr.v[0],ftr.v[1],ftr.v[2]);
 		glExtFuncs->glVertex3f(fbr.v[0],fbr.v[1],fbr.v[2]);
 	glExtFuncs->glEnd();
+	glExtFuncs->glLineWidth(oldLineWidth);
 #endif
 }
 
