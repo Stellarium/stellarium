@@ -37,7 +37,7 @@ install:
   - "sudo make install -j 16"
   - "cd .."
 
-  - "cd cmake-3.2.1.tar.gz"
+  - "cd cmake-3.2.1"
   - "./bootstrap --prefix=/usr --system-libs --mandir=/share/man"
   - "make -j 2"
   - "sudo make install -j 16"
