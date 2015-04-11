@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 00:39+0600\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
 "PO-Revision-Date: 2015-03-25 05:54+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-10 04:42+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:17+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -79,7 +79,7 @@ msgstr "Equatore Galattico"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1350
 msgid "O./C. longitude"
-msgstr ""
+msgstr "O./C. longitudine"
 
 #: src/core/modules/GridLinesMgr.cpp:755
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -132,7 +132,7 @@ msgstr "Equatore galattico"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "Opposizione/congiunzione linea di longitudine"
 
 #: src/core/modules/LandscapeMgr.cpp:366 src/ui_viewDialog.h:1269
 msgid "Atmosphere"
@@ -456,12 +456,12 @@ msgstr "Designazione provvisoria: %1"
 #: src/core/modules/Comet.cpp:167
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr ""
+msgstr "non-periodico"
 
 #: src/core/modules/Comet.cpp:171
 msgctxt "type of comet"
 msgid "periodic"
-msgstr ""
+msgstr "periodico"
 
 #: src/core/modules/Comet.cpp:173 plugins/Novae/src/Nova.cpp:133
 #: plugins/Pulsars/src/Pulsar.cpp:166
@@ -628,7 +628,7 @@ msgstr "Via Lattea"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "Luce zodiacale"
 
 #: src/core/StelApp.cpp:485
 msgid "Night mode"
@@ -2313,7 +2313,7 @@ msgstr "luna"
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutino"
-msgstr ""
+msgstr "plutino"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:54
@@ -2323,12 +2323,12 @@ msgstr "pianeta nano"
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
 msgid "cubewano"
-msgstr ""
+msgstr "cubewano"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:58
 msgid "scattered disc object"
-msgstr ""
+msgstr "oggetto disco diffuso"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:60
@@ -2355,7 +2355,7 @@ msgstr "Lune"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:70
 msgid "Plutinos"
-msgstr ""
+msgstr "Plutini"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:72
@@ -2365,7 +2365,7 @@ msgstr "Pianeti nani"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:74
 msgid "Cubewanos"
-msgstr ""
+msgstr "Cubewani"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:76
@@ -2478,7 +2478,7 @@ msgstr "Arabo"
 
 #: src/translations.h:124
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Stazioni lunari arabe"
 
 #: src/translations.h:125
 msgid "Aztec"
@@ -2506,7 +2506,7 @@ msgstr "Indiana (periodo vedico)"
 
 #: src/translations.h:131
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Stazioni lunari giapponesi"
 
 #: src/translations.h:132
 msgid "Korean"
@@ -2567,7 +2567,7 @@ msgstr "Occidentale"
 
 #: src/translations.h:147
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "Occidentale (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:153
@@ -5354,7 +5354,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "Pulsars Configuration"
 msgstr "Configurazione delle pulsar"
 
@@ -10519,30 +10518,19 @@ msgid "3D Sceneries"
 msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
-msgid "3D foreground renderer."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:914
 msgid ""
-"Walk around, find and avoid obstructions in your garden, find and "
-"demonstrate possible astronomical alignments in temples, see shadows on "
-"sundials etc."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:916
-msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
 "To move around, press Ctrl+cursor keys. To lift eye height, use "
-"Ctrl+PgUp/PgDn."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:917
-msgid ""
-"Movement speed is linked to field of view (i.e. zoom in for fine "
-"adjustments)."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:918
-msgid "You can even keep moving by releasing Ctrl before cursor key."
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
@@ -10983,6 +10971,10 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336

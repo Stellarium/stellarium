@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 00:39+0600\n"
-"PO-Revision-Date: 2015-04-09 14:10+0000\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"PO-Revision-Date: 2015-04-10 19:13+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-10 04:39+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:15+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -5371,7 +5371,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "Pulsars Configuration"
 msgstr "Pulsare-Konfiguration"
 
@@ -10541,41 +10540,33 @@ msgid "3D Sceneries"
 msgstr "3D-Szenerien"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
-msgid "3D foreground renderer."
-msgstr "3D-Vordergrunddarstellung."
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:914
 msgid ""
-"Walk around, find and avoid obstructions in your garden, find and "
-"demonstrate possible astronomical alignments in temples, see shadows on "
-"sundials etc."
-msgstr ""
-"Bewege Dich in einer virtuellen Landschaft, finde den besten Platz in Deinem "
-"Garten (vermeide Sichtbehinderungen durch das Nachbarhaus oder Bäume), finde "
-"mögliche astronomisch motivierte Architekturachsen an Tempeln und zeige sie "
-"auch anderen, beobachte Schatten an Sonnenuhren, ..."
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:916
-msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
 "To move around, press Ctrl+cursor keys. To lift eye height, use "
-"Ctrl+PgUp/PgDn."
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
-"Zum Bewegen in der Szene halte die Strg-Taste gedrückt und verwende die "
-"Cursortasten. Die Augpunkthöhe läßt sich mit BildAuf/BildAb bewegen."
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:917
-msgid ""
-"Movement speed is linked to field of view (i.e. zoom in for fine "
-"adjustments)."
-msgstr ""
-"Die Geschwindigkeit der Bewegung ist an den Bildwinkel gekoppelt (also "
-"reinzoomen für feine Justierungen)."
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:918
-msgid "You can even keep moving by releasing Ctrl before cursor key."
-msgstr ""
-"Die Bewegung läßt sich fortsetzen: einfach Strg-Taste vor der Cursortaste "
-"loslassen!"
+"3D-Vordergrundmodelle. Gehe herum, finde/vermeide Verdeckungen in deinem "
+"Garten, entdecke oder präsentiere mögliche astronomische Orientierungslinien "
+"an Gebäuden und Tempeln, beobachte Schatten an Sonnenuhren, ...\n"
+"\n"
+"Zum Bewegen, drücke Strg+Cursortasten. Die Augenhöhe läßt sich mit "
+"Strg+BildAuf/BildAb einstellen. Shift und Alt erhöhen die Geschwindigkeit. "
+"Die Geschwindigkeit der Bewegung ist an das Gesichtsfeld gekoppelt (d.h., "
+"reinzoomen für feine Justierung). Die Bewegung kann durch Loslassen der Strg-"
+"Taste beibehalten werden. \n"
+"\n"
+"Die Entwicklung des Plugins wurde teilweise vom Fonds zur Wissenschaftlichen "
+"Förderung (FWF) unterstützt, Projekt ASTROSIM (P 21208-G19). Mehr unter: "
+"http://astrosim.univie.ac.at/"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
 msgid ""
@@ -11055,6 +11046,10 @@ msgstr "Wähle Farbe für Linie des aktuellen Mondes"
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
 msgstr "Wähle Farbe für Linie des gewählten Planeten"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
+msgstr "ArchaeoLines Konfiguration"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"

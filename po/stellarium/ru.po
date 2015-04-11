@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 00:39+0600\n"
-"PO-Revision-Date: 2015-04-09 19:26+0000\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"PO-Revision-Date: 2015-04-11 04:10+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-10 04:46+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:21+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -5349,7 +5349,6 @@ msgstr "Получить полную информацию о плагине и 
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "Pulsars Configuration"
 msgstr "Настройка пульсаров"
 
@@ -10534,31 +10533,33 @@ msgid "3D Sceneries"
 msgstr "Трёхмерные ландшафты"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
-msgid "3D foreground renderer."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:914
 msgid ""
-"Walk around, find and avoid obstructions in your garden, find and "
-"demonstrate possible astronomical alignments in temples, see shadows on "
-"sundials etc."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:916
-msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
 "To move around, press Ctrl+cursor keys. To lift eye height, use "
-"Ctrl+PgUp/PgDn."
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:917
-msgid ""
-"Movement speed is linked to field of view (i.e. zoom in for fine "
-"adjustments)."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:918
-msgid "You can even keep moving by releasing Ctrl before cursor key."
-msgstr ""
+"Трёхмерный отрисовщик переднего плана. Прогуливаясь по вашему саду можно "
+"найти препятствие и обойти его, найти и продемонстрировать возможную "
+"астрономическую ориентацию в храмах, увидеть тени на солнечных часах и т. "
+"д.\n"
+"\n"
+"Для перемещения вокруг используйте Ctrl и клавиши курсора. Чтобы поднять "
+"высоту глаз, используйте Ctrl + PgUp / PgDn. Скорость передвижения связана с "
+"размером поля зрения (т.е. увеличение для точной настройки). Вы даже можете "
+"продолжать двигаться, отпустив клавишу Ctrl до клавиш курсора.\n"
+"\n"
+"Развитие этого плагина было частью поддержанного Австрийским научным фондом "
+"(FWF) проекта ASTROSIM (P 21208-G19). Подробнее: "
+"http://astrosim.univie.ac.at/"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
 msgid ""
@@ -11046,6 +11047,10 @@ msgstr "Выберите цвет для линии текущей луны"
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
 msgstr "Выберите цвет для линии текущей планеты"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
+msgstr "Настройка археолиний"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
