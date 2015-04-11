@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-05 04:02+0600\n"
-"PO-Revision-Date: 2015-04-04 08:30+0000\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"PO-Revision-Date: 2015-04-11 04:10+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-05 05:21+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:21+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
 #: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:481 src/core/StelCore.cpp:192
+#: src/core/StelApp.cpp:485 src/core/StelCore.cpp:192
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr "Параметры отображения"
@@ -632,7 +632,7 @@ msgstr "Млечный Путь"
 msgid "Zodiacal Light"
 msgstr "Зодиакальный свет"
 
-#: src/core/StelApp.cpp:481
+#: src/core/StelApp.cpp:485
 msgid "Night mode"
 msgstr "Ночной режим"
 
@@ -1393,6 +1393,7 @@ msgstr "Обратная связь"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:183
 msgid "Version"
 msgstr "Версия"
 
@@ -1406,6 +1407,7 @@ msgstr "Версия"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:184
 msgid "Author"
 msgstr "Автор"
 
@@ -1788,6 +1790,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Несколько человек внесли свой вклад в проект и их работа сделала Stellarium "
+"лучше (сортировано по алфавиту): %1."
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2576,7 +2580,7 @@ msgid "Trees"
 msgstr "Деревья"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:157
+#: src/translations.h:157 plugins/ArchaeoLines/src/ArchaeoLines.cpp:768
 msgid "Moon"
 msgstr "Луна"
 
@@ -2596,17 +2600,17 @@ msgid "Garching"
 msgstr "Гархинг"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:165
+#: src/translations.h:165 plugins/ArchaeoLines/src/ArchaeoLines.cpp:780
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:167
+#: src/translations.h:167 plugins/ArchaeoLines/src/ArchaeoLines.cpp:783
 msgid "Jupiter"
 msgstr "Юпитер"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:169
+#: src/translations.h:169 plugins/ArchaeoLines/src/ArchaeoLines.cpp:786
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -5269,6 +5273,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:295
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
 msgid "Links"
 msgstr "Ссылки"
 
@@ -5280,6 +5285,7 @@ msgstr "Ссылки"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:296
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5297,6 +5303,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:299
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Если у вас есть вопрос, то получить ответ можно %1здесь%2"
@@ -5310,6 +5317,7 @@ msgstr "Если у вас есть вопрос, то получить отве
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:301
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Сообщить об ошибке можно %1здесь%2."
@@ -5323,6 +5331,7 @@ msgstr "Сообщить об ошибке можно %1здесь%2."
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -5376,10 +5385,12 @@ msgid "Attach end point to rotating sky"
 msgstr "Прикрепить конечную точку к вращающемуся небу"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
 msgstr "Формат"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
 msgstr "Использовать формат dms для углов"
 
@@ -5392,6 +5403,7 @@ msgstr "Использовать формат dms для углов"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:327
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
 msgid "Restore default settings"
 msgstr "Первоначальные настройки"
 
@@ -5423,6 +5435,7 @@ msgstr "Сохранить настройки"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "О плагине"
@@ -8479,6 +8492,7 @@ msgstr "Масса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:765
 msgid "Sun"
 msgstr "Солнце"
 
@@ -10371,162 +10385,181 @@ msgstr ""
 "Теневые карты невозможно использовать на вашем оборудовании, подробности в "
 "журнале."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:170
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:171
 msgid "Scenery3d plugin loaded!"
 msgstr "Плагин Scenery3d загружен!"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:222
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
 msgid "Scenery3d: 3D landscapes"
 msgstr "Scenery3d: трёхмерные ландшафты"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:225
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Toggle 3D landscape"
 msgstr "Переключить 3D ландшафт"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Show settings dialog"
 msgstr "Показать диалог настройки"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:227
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
 msgid "Show viewpoint dialog"
 msgstr "Показать диалог точки зрения"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:228
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle shadows"
 msgstr "Переключение теней"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Toggle debug information"
 msgstr "Переключение отладочной информации"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Toggle location text"
 msgstr "Переключение расположения текста"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle torchlight"
 msgstr "Переключение света фонарей"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Reload shaders"
 msgstr "Перезагрузить шейдеры"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:267
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:271
 msgid "Scenery3d shaders reloaded"
 msgstr "Шейдеры Scenery3d перезагружены"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:322
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:326
 msgid "Loading scene. Please be patient!"
 msgstr "Сцена загружается. Пожалуйста, будьте терпеливы!"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:324
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:328
 #, qt-format
 msgid "Loading scene '%1'"
 msgstr "Загрузка сцены '%1'"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:347
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
 "Не удалось загрузить сцену, пожалуйста, проверьте сообщения об ошибках!"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:355
 msgid "Scene successfully loaded."
 msgstr "Сцена загружена успешно."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:410
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:414
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
 "Не удалось загрузить информацию о сцене, пожалуйста, проверьте сообщения об "
 "ошибках!"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:434
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:438
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr "Не найден идентификатор сцены для %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
 #, qt-format
 msgid "Per-Pixel shading %1."
 msgstr "Попиксельный шейдинг %1."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "enable"
 msgid "on"
 msgstr "вкл."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:504
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "disable"
 msgid "off"
 msgstr "выкл."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:523
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
 #, qt-format
 msgid "Shadows %1."
 msgstr "Тени %1."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:528
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:532
 msgid "Shadows deactivated or not possible."
 msgstr "Тени выключены или не возможны."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:559
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 #, qt-format
 msgid "Surface bumps %1."
 msgstr "Рельефность поверхности %1."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:607
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:611
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
 "Выбранный режим кубической карты не поддерживается, возвращаемся на '6 "
 "текстур'"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 #, qt-format
 msgid "Lazy cubemapping: %1"
 msgstr "Ленивое кубическое текстурирование: %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "enabled"
 msgstr "включён"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:703
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "disabled"
 msgstr "отключен"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:776
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:780
 msgid "Cubemap size changed"
 msgstr "Изменился размер кубической карты"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:778
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:782
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
 msgstr "Размер кубической карты не поддерживается, значение %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:799
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:803
 msgid "Shadowmap size changed"
 msgstr "Изменился размер карты теней"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:801
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:805
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
 msgstr "Размер карты теней не поддерживается, значение %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:906
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:910
 msgid "3D Sceneries"
 msgstr "Трёхмерные ландшафты"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:909
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
 msgid ""
 "3D foreground renderer. Walk around, find and avoid obstructions in your "
-"garden, find and demonstrate possible astronomical alignments in temples, "
-"see shadows on sundials etc."
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
+"To move around, press Ctrl+cursor keys. To lift eye height, use "
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
 "Трёхмерный отрисовщик переднего плана. Прогуливаясь по вашему саду можно "
 "найти препятствие и обойти его, найти и продемонстрировать возможную "
-"астрономическую ориентацию в храмах, увидеть тени на солнечных часах и т. д."
+"астрономическую ориентацию в храмах, увидеть тени на солнечных часах и т. "
+"д.\n"
+"\n"
+"Для перемещения вокруг используйте Ctrl и клавиши курсора. Чтобы поднять "
+"высоту глаз, используйте Ctrl + PgUp / PgDn. Скорость передвижения связана с "
+"размером поля зрения (т.е. увеличение для точной настройки). Вы даже можете "
+"продолжать двигаться, отпустив клавишу Ctrl до клавиш курсора.\n"
+"\n"
+"Развитие этого плагина было частью поддержанного Австрийским научным фондом "
+"(FWF) проекта ASTROSIM (P 21208-G19). Подробнее: "
+"http://astrosim.univie.ac.at/"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
 msgid ""
@@ -10689,6 +10722,8 @@ msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Включает обновление второстепенных сторон, из-за чего внешний вид визуально "
+"кажется менее &quot;поломанным&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid "The interval (in timeline seconds) in which no redraw is performed"
@@ -10845,6 +10880,250 @@ msgstr "Добавить текущий вид"
 msgid "Title:"
 msgstr "Название:"
 
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:190
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
+msgid "ArchaeoLines"
+msgstr "Археолинии"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
+msgid "A tool for archaeo-/ethnoastronomical alignment studies"
+msgstr "Инструмент для исследований архео-/этноастрономических ориентаций"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:741
+msgid "Equinox"
+msgstr "Равноденствие"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:744
+msgid "Solstice"
+msgstr "Солнцестояние"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:747
+msgid "Crossquarter"
+msgstr "Пересечение четверти"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:750
+msgid "Major Lunar Standstill"
+msgstr "Большая лунная остановка"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:753
+msgid "Minor Lunar Standstill"
+msgstr "Малая лунная остановка"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:756
+msgid "Zenith Passage"
+msgstr "Прохождение зенита"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:759
+msgid "Nadir Passage"
+msgstr "Прохождение надира"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:762
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
+msgid "Selected Object"
+msgstr "Выделенный объект"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:771
+msgid "error if you can read this"
+msgstr "ошибка, если вы можете прочитать это"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:774
+msgid "Mercury"
+msgstr "Меркурий"
+
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:777
+msgid "Venus"
+msgstr "Венера"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
+msgid "ArchaeoLines Plug-in"
+msgstr "Плагин \"Археолинии\""
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
+msgid ""
+"The ArchaeoLines plugin displays any combination of declination arcs most "
+"relevant to archaeo- or ethnoastronomical studies."
+msgstr ""
+"Плагин Археолинии отображает любую комбинацию наиболее актуальных дуг "
+"склонений для архео - или этноастрономических исследований."
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
+msgid "Declinations of equinoxes (i.e. equator) and the solstices"
+msgstr "Склонения равноденствий (т. е. экватора) и солнцестояний"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
+msgid ""
+"Declinations of the crossquarter days (days right between solstices and "
+"equinoxes)"
+msgstr ""
+"Склонение дней пересечение четверти (дней точно между солнцестояниями и "
+"равноденствиями)"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
+msgid "Declinations of the Major Lunar Standstills"
+msgstr "Склонения больших лунных остановок"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
+msgid "Declinations of the Minor Lunar Standstills"
+msgstr "Склонения малых лунных остановок"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
+msgid "Declination of the Zenith passage"
+msgstr "Склонение прохождения зенита"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
+msgid "Declination of the Nadir passage"
+msgstr "Склонение прохождения надира"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
+msgid "Declination of the currently selected object"
+msgstr "Склонение текущего выбранного объекта"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
+msgid "Current declination of the sun"
+msgstr "Текущее склонение Солнца"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
+msgid "Current declination of the moon"
+msgstr "Текущее склонение Луны"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
+msgid "Current declination of a naked-eye planet"
+msgstr "Текущее склонение видимой невооруженным глазом планеты"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
+msgid ""
+"The lunar lines include horizon parallax effects. There are two lines each "
+"drawn, for maximum and minimum distance of the moon. Note that declination "
+"of the moon at the major standstill can exceed the indicated limits if it is "
+"high in the sky due to parallax effects."
+msgstr ""
+"Лунные линии построены с учётом эффекта горизонтального параллакса. Для Луны "
+"прорисованы парные линии - для случая максимального и минимального "
+"расстояние до неё. Обратите внимание, что склонение Луны для большой "
+"остановки может превышать указанные пределы, если она находится высоко в "
+"небе из-за эффекта параллакса."
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
+msgid "Select color for equinox line"
+msgstr "Выберите цвет для линии равноденствия"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
+msgid "Select color for solstice lines"
+msgstr "Выберите цвет для линии солнцестояния"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
+msgid "Select color for crossquarter lines"
+msgstr "Выберите цвет линий для пересечения четверти"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
+msgid "Select color for major standstill lines"
+msgstr "Выберите цвет для линий больших лунных остановок"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
+msgid "Select color for minor standstill lines"
+msgstr "Выберите цвет для линий малых лунных остановок"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
+msgid "Select color for zenith passage line"
+msgstr "Выберите цвет для линии прохождения зенита"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
+msgid "Select color for nadir passage line"
+msgstr "Выберите цвет для линии прохождения надира"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
+msgid "Select color for selected object line"
+msgstr "Выберите цвет для линии выбранного объекта"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
+msgid "Select color for current sun line"
+msgstr "Выберите цвет для линии текущего солнца"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
+msgid "Select color for current moon line"
+msgstr "Выберите цвет для линии текущей луны"
+
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
+msgid "Select color for current planet line"
+msgstr "Выберите цвет для линии текущей планеты"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
+msgstr "Настройка археолиний"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
+msgid "ArchaeoLines Plug-in Configuration"
+msgstr "Настройка плагина Археолинии"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
+msgid "To change colors you may have to leave fullscreen mode!"
+msgstr "Для изменения цвета необходимо выйти из полноэкранного режима!"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
+msgid "Equinox line (Equator)"
+msgstr "Линия равноденствия (Экватор)"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
+msgid "Solstice Lines"
+msgstr "Линии солнцестояния"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
+msgid "Crossquarter Lines"
+msgstr "Линии пересечения четверти"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
+msgid "Change color"
+msgstr "Изменить цвет"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
+msgid "Major Lunar Standstill lines"
+msgstr "Линии больших лунных остановок"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
+msgid "Minor Lunar Standstill lines"
+msgstr "Линии малых лунных остановок"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
+msgid "Declination of Zenith passage"
+msgstr "Склонение прохождения зенита"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
+msgid "Declination of Nadir passage"
+msgstr "Склонение прохождения надира"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
+msgid "Current Sun"
+msgstr "Текущее Солнце"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
+msgid "Current Moon"
+msgstr "Текущая Луна"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
+msgid "Current Planet: None"
+msgstr "Текущая планета: отсутствует"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
+msgid "Current Planet: Mercury"
+msgstr "Текущая планета: Меркурий"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
+msgid "Current Planet: Venus"
+msgstr "Текущая планета: Венера"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
+msgid "Current Planet: Mars"
+msgstr "Текущая планета: Марс"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
+msgid "Current Planet: Jupiter"
+msgstr "Текущая планета: Юпитер"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
+msgid "Current Planet: Saturn"
+msgstr "Текущая планета: Сатурн"
+
 #~ msgid "Equator Line"
 #~ msgstr "Линия экватора"
 
@@ -10943,12 +11222,6 @@ msgstr "Название:"
 
 #~ msgid "Update me via Internet: "
 #~ msgstr "Обновить через Интернет: "
-
-#~ msgid "Mercury"
-#~ msgstr "Меркурий"
-
-#~ msgid "Venus"
-#~ msgstr "Венера"
 
 #~ msgid "Earth"
 #~ msgstr "Земля"
