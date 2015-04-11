@@ -208,7 +208,11 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		rot_z = convAngle.toDouble() * M_PI / 180.0;
 	}
 	// We must apply also a 90 degree rotation, plus convergence(rot_z)
-	info.zRotateMatrix = Mat4d::zrotation(M_PI/2.0 + rot_z);
+
+	// Meridian Convergence is negative in north-west quadrant.
+	// positive MC means True north is "left" of grid north, and model must be rotated clockwise. E.g. Sterngarten (east of UTM CM +15deg) has +0.93, we must rotate clockwise!
+	// A zRotate rotates counterclockwise, so we must reverse rot_z.
+	info.zRotateMatrix = Mat4d::zrotation(M_PI/2.0 - rot_z);
 
 	// At last, find start points.
 	if(ini.contains("start_E") && ini.contains("start_N"))
@@ -216,7 +220,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 		info.startPositionFromModel = false;
 		info.startWorldOffset[0] = ini.value("start_E").toDouble();
 		info.startWorldOffset[1] = ini.value("start_N").toDouble();
-		//this is not really used anymore, i think
+		//FS this is not really used anymore, i think
 		info.startWorldOffset[2] = ini.value("start_H",0.0).toDouble();
 	}
 	else
@@ -248,7 +252,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	{
 		qDebug() << "[SceneInfo] scenery3d.ini: setting initial dir/fov.";
 		info.lookAt_fov=StelUtils::strToVec3f(ini.value("start_az_alt_fov").toString());
-		//info.lookAt_fov[0]=180.0f-info.lookAt_fov[0];
+		info.lookAt_fov[0]=180.0f-info.lookAt_fov[0]; // fix azimuth
 	}
 	else
 	{
