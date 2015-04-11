@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 00:39+0600\n"
-"PO-Revision-Date: 2015-03-31 00:07+0000\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"PO-Revision-Date: 2015-04-11 04:27+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-10 04:49+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:24+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -2527,7 +2527,7 @@ msgstr "ไซบีเรีย"
 
 #: src/translations.h:143
 msgid "Tukano"
-msgstr ""
+msgstr "ทูคาโน"
 
 #: src/translations.h:144
 msgid "Tupi-Guarani"
@@ -5311,7 +5311,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "Pulsars Configuration"
 msgstr "การตั้งค่าพัลซาร์"
 
@@ -10228,19 +10227,19 @@ msgstr "พิกัดในแกน Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
-msgstr ""
+msgstr "กำลังโหลดแบบจำลอง..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
-msgstr ""
+msgstr "กำลังแปลงแบบจำลอง..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
-msgstr ""
+msgstr "กำลังโหลดพื้นดิน..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
-msgstr ""
+msgstr "กำลังแปลงพื้นดิน..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
@@ -10248,42 +10247,48 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
-msgstr ""
+msgstr "การโหลดใกล้เสร็จสิ้น..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"เกิดข้อผิดพลาดใน Scenery3d shader ไม่สามารถวาดได้ "
+"ตรวจสอบรายงานข้อผิดพลาดสำหรับรายละเอียด"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2102
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"ฮาร์ดแวร์ของคุณไม่รองรับ cubemapping กรุณาเปลี่ยนไปใช้การฉายภาพแบบ "
+"'ทัศนมิติ' !"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "ไม่รองรับ Geometry shader กำลังกลับไปใช้โหมด '6 Textures'"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2121
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "กลับไปใช้ '6 Textures' เนื่องจากข้อผิดพลาดใน ANGLE"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2642
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"ไม่สามารถใช้ Shadow mapping บนฮาร์ดแวร์ของคุณ "
+"ตรวจสอบบันทึกข้อผิดพลาดสำหรับรายละเอียด"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:171
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "โหลดส่วนเสริม Scenery3d แล้ว!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "Scenery3d: ภูมิทัศน์ 3 มิติ"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "สลับการใช้งานภูมิทัศน์ 3 มิติ"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Show settings dialog"
@@ -10353,19 +10358,19 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "เปิด"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "ปิด"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "เงา %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:532
 msgid "Shadows deactivated or not possible."
@@ -10387,11 +10392,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "enabled"
-msgstr ""
+msgstr "เปิดใช้งาน"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "disabled"
-msgstr ""
+msgstr "ปิดการใช้งาน"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:780
 msgid "Cubemap size changed"
@@ -10416,30 +10421,19 @@ msgid "3D Sceneries"
 msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
-msgid "3D foreground renderer."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:914
 msgid ""
-"Walk around, find and avoid obstructions in your garden, find and "
-"demonstrate possible astronomical alignments in temples, see shadows on "
-"sundials etc."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:916
-msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
 "To move around, press Ctrl+cursor keys. To lift eye height, use "
-"Ctrl+PgUp/PgDn."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:917
-msgid ""
-"Movement speed is linked to field of view (i.e. zoom in for fine "
-"adjustments)."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:918
-msgid "You can even keep moving by releasing Ctrl before cursor key."
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
@@ -10574,15 +10568,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
 msgid "6 Textures"
-msgstr ""
+msgstr "6 Textures"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
 msgid "Cubemap"
-msgstr ""
+msgstr "Cubemap"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:71
 msgid "Geometry shader"
-msgstr ""
+msgstr "Geometry shader"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
@@ -10653,11 +10647,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "ฮาร์ดแวร์"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "ต่ำ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
@@ -10665,7 +10659,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "สูง (ช้า)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
@@ -10735,11 +10729,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:741
 msgid "Equinox"
-msgstr ""
+msgstr "วิษุวัต"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:744
 msgid "Solstice"
-msgstr ""
+msgstr "อายัน"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:747
 msgid "Crossquarter"
@@ -10816,19 +10810,19 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "เดคลิเนชันของวัตถุที่เลือกในขณะนี้"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "เดคลิเนชันของดวงอาทิตย์ในขณะนี้"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "เดคลิเนชันของดวงจันทร์ในขณะนี้"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "เดคลิเนชันของดาวเคราะห์ที่เห็นได้ด้วยตาเปล่าในขณะนี้"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -10840,11 +10834,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "เลือกสีสำหรับเส้นวิษุวัต"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "เลือกสีสำหรับเส้นอายัน"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
@@ -10882,6 +10876,10 @@ msgstr ""
 msgid "Select color for current planet line"
 msgstr ""
 
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
+msgstr ""
+
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
 msgstr ""
@@ -10904,7 +10902,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "เปลี่ยนสี"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
@@ -10932,27 +10930,27 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "ดาวเคราะห์ขณะนี้: ไม่มี"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "ดาวเคราะห์ขณะนี้: ดาวพุธ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "ดาวเคราะห์ขณะนี้: ดาวศุกร์"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "ดาวเคราะห์ขณะนี้: ดาวอังคาร"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "ดาวเคราะห์ขณะนี้: ดาวพฤหัสบดี"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "ดาวเคราะห์ขณะนี้: ดาวเสาร์"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 00:39+0600\n"
-"PO-Revision-Date: 2015-04-09 16:34+0000\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"PO-Revision-Date: 2015-04-11 03:33+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-10 04:51+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:25+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -5402,7 +5402,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "Pulsars Configuration"
 msgstr "Configuração dos pulsares"
 
@@ -10660,38 +10659,32 @@ msgid "3D Sceneries"
 msgstr "Cenários 3D"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
-msgid "3D foreground renderer."
-msgstr "Renderizador tridimensional em primeiro plano"
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:914
 msgid ""
-"Walk around, find and avoid obstructions in your garden, find and "
-"demonstrate possible astronomical alignments in temples, see shadows on "
-"sundials etc."
-msgstr ""
-"Ande, ache e evite obstruções no seu jardim, encontre e demonstre possíveis "
-"alinhamentos astronômicos em templos, veja sombras em relógios de sol, etc."
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:916
-msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
 "To move around, press Ctrl+cursor keys. To lift eye height, use "
-"Ctrl+PgUp/PgDn."
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
-"Para se movimentar, pressione Ctrl+teclas de direção. Para elevar a altura "
-"do olho, use Ctrl+PageUp/PageDown."
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:917
-msgid ""
-"Movement speed is linked to field of view (i.e. zoom in for fine "
-"adjustments)."
-msgstr ""
-"A velocidade do movimento está atrelada ao campo de visão (ou seja, aproxime "
-"para ajustes finos)."
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:918
-msgid "You can even keep moving by releasing Ctrl before cursor key."
-msgstr ""
-"Você até pode continuar movendo-se ao soltar Ctrl antes da tecla de direção."
+"Renderizador tridimensional em primeiro plano. Ande, ache e evite obstruções "
+"no seu jardim, encontre e demonstre possível alinhamentos astronômicos em "
+"templos, veja sombras em relógios de sol, etc.\n"
+"\n"
+"A fim de se mover, pressione Ctrl+teclas direcionais. Para elevar a altura "
+"do olho, use Ctrl+PageUp/PageDown. A velocidade da movimentação está "
+"atrelada ao campo de visão (ou seja, aproxime para ajustes finos). Você pode "
+"até mesmo continuar movendo-se ao soltar Ctrl antes da tecla direcional.\n"
+"\n"
+"O desenvolvimento deste complemento foi, em parte, financiado pelo projeto "
+"ASTROSIM (P 21208-G19) do Fundo Austríaco para a Ciência (FAC). Mais "
+"informações podem ser obtidas em http://astrosim.univie.ac.at."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
 msgid ""
@@ -11188,6 +11181,10 @@ msgstr "Selecionar uma cor para a linha atual da lua"
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
 msgstr "Selecionar uma cor para a linha atual do planeta"
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
+msgstr "Configuração das arqueolinhas"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
