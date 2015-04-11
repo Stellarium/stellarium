@@ -189,16 +189,14 @@ void MeteorShowers::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if (!QFileInfo(showersJsonPath).exists())
 	{
-		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
-		{
-			displayMessage(q_("The old showers.json file is no longer compatible - using default file"), "#bb0000");
-			restoreDefaultJsonFile();
-		}
-		else
-		{
-			qDebug() << "MeteorShowers: showers.json does not exist - copying default file to" << QDir::toNativeSeparators(showersJsonPath);
-			restoreDefaultJsonFile();
-		}
+		qDebug() << "MeteorShowers: showers.json does not exist - copying default file to" << QDir::toNativeSeparators(showersJsonPath);
+		restoreDefaultJsonFile();
+	}
+	// Validate JSON format and data
+	if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
+	{
+		displayMessage(q_("The old showers.json file is no longer compatible - using default file"), "#bb0000");
+		restoreDefaultJsonFile();
 	}
 
 	qDebug() << "MeteorShowers: loading catalog file:" << QDir::toNativeSeparators(showersJsonPath);
