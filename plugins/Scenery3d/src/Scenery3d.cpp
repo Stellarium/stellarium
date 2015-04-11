@@ -1694,7 +1694,7 @@ void Scenery3d::drawWithCubeMap()
 Vec3d Scenery3d::getCurrentGridPosition() const
 {
 	// this is the observer position (camera eye position) in model-grid coordinates, relative to the origin
-	Vec3d pos=currentScene.zRotateMatrix* (- absolutePosition);
+	Vec3d pos=currentScene.zRotateMatrix.inverse()* (-absolutePosition);
 	// this is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
 	pos+= currentScene.modelWorldOffset;
 
@@ -1705,14 +1705,12 @@ Vec3d Scenery3d::getCurrentGridPosition() const
 
 void Scenery3d::setGridPosition(Vec3d pos)
 {
-	//this is basically the same as getCurrentGridPosition, but in reverse
+	//this is basically the same as getCurrentGridPosition(), but in reverse
 	pos[2]+=eye_height;
 	pos-=currentScene.modelWorldOffset;
 
-	//need the inverse rotation
-	Mat4d invRotate = currentScene.zRotateMatrix.inverse();
 	//calc opengl position
-	absolutePosition = - (invRotate * pos);
+	absolutePosition = - (currentScene.zRotateMatrix * pos);
 
 	//reset cube map time
 	invalidateCubemap();

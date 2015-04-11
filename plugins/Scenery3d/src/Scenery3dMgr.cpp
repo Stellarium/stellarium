@@ -847,7 +847,7 @@ void Scenery3dMgr::setView(const StoredView &view)
 
 	// This vector is (az_deg, alt_deg, fov_deg)
 	Vec3d v;
-	StelUtils::spheToRect(view.view_fov[0]*M_PI/180.0, view.view_fov[1]*M_PI/180.0, v);
+	StelUtils::spheToRect((180.0-view.view_fov[0])*M_PI/180.0, view.view_fov[1]*M_PI/180.0, v);
 	mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
 	mm->zoomTo(view.view_fov[2]);
 }
@@ -868,6 +868,8 @@ StoredView Scenery3dMgr::getCurrentView()
 	//convert to degrees
 	view.view_fov[0]*=180.0/M_PI;
 	view.view_fov[1]*=180.0/M_PI;
+	// we must patch azimuth
+	view.view_fov[1]=180.0-view.view_fov[1];
 	//3rd comp is fov
 	view.view_fov[2] = mm->getAimFov();
 
