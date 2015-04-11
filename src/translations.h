@@ -178,6 +178,12 @@ class Translations
 		// TRANSLATORS: Name of landscape
 		N_("Zero Horizon");
 
+		// =====================================================================
+		// 3D landscapes (scenes) names
+		// TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
+		N_("Vienna Sterngarten");
+		// TRANSLATORS: Name of 3D scene
+		N_("Testscene")
 		
 		// =====================================================================
 		// Script names
