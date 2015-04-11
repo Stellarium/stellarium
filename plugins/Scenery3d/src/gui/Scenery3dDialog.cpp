@@ -151,7 +151,16 @@ void Scenery3dDialog::createDialogContent()
 	// Fill the scenery list
 	QListWidget* l = ui->scenery3dListWidget;
 	l->blockSignals(true);
-	l->addItems( SceneInfo::getAllSceneNames() );
+	l->clear();
+	QStringList sceneList = SceneInfo::getAllSceneNames();
+	foreach (const QString sceneName, sceneList)
+	{
+		QString label = q_(sceneName);
+		QListWidgetItem* item = new QListWidgetItem(label);
+		item->setData(Qt::UserRole, sceneName);
+		l->addItem(item);
+	}
+	l->sortItems(); // they may have been translated!
 
 	SceneInfo current = mgr->getCurrentScene();
 
@@ -169,16 +178,20 @@ void Scenery3dDialog::createDialogContent()
 
 	if(current.isValid)
 	{
-		QList<QListWidgetItem*> currentItems = l->findItems(current.name, Qt::MatchExactly);
-		if (currentItems.size() > 0) {
-			l->setCurrentItem(currentItems.at(0));
-
-			ui->checkBoxDefaultScene->blockSignals(true);
-			ui->checkBoxDefaultScene->setChecked(current.id == mgr->getDefaultScenery3dID());
-			ui->checkBoxDefaultScene->blockSignals(false);
-			ui->checkBoxDefaultScene->setVisible(true);
-			ui->pushButtonOpenStoredViewDialog->setVisible(true);
+		for (int i = 0; i < l->count(); i++)
+		{
+			if (l->item(i)->data(Qt::UserRole).toString() == current.name)
+			{
+				l->setCurrentRow(i);
+				ui->checkBoxDefaultScene->blockSignals(true);
+				ui->checkBoxDefaultScene->setChecked(current.id == mgr->getDefaultScenery3dID());
+				ui->checkBoxDefaultScene->blockSignals(false);
+				ui->checkBoxDefaultScene->setVisible(true);
+				ui->pushButtonOpenStoredViewDialog->setVisible(true);
+				break;
+			}
 		}
+		l->blockSignals(false);
 		updateTextBrowser(current);
 	}
 	l->blockSignals(false);
@@ -389,7 +402,7 @@ void Scenery3dDialog::on_checkBoxDefaultScene_stateChanged(int value)
 
 void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 {
-	SceneInfo info = mgr->loadScenery3dByName(item->text());
+	SceneInfo info = mgr->loadScenery3dByName(item->data(Qt::UserRole).toString());
 
 	if(info.isValid) //this if makes sure the .ini has been loaded
 	{
