@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-10 00:39+0600\n"
-"PO-Revision-Date: 2015-04-03 00:53+0000\n"
+"POT-Creation-Date: 2015-04-10 23:11+0600\n"
+"PO-Revision-Date: 2015-04-11 01:41+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-10 04:46+0000\n"
-"X-Generator: Launchpad (build 17413)\n"
+"X-Launchpad-Export-Date: 2015-04-11 05:21+0000\n"
+"X-Generator: Launchpad (build 17423)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -190,7 +190,7 @@ msgstr "Typ: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Nieprzezroczystość: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -291,7 +291,7 @@ msgstr "Mgławica refleksyjna"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "H-α emission region"
-msgstr ""
+msgstr "Obszar emisyjny H-α"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Undocumented type"
@@ -1795,6 +1795,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Wiele osób wniosło swój wkład w rozwój projektu, a dzięki ich pracy "
+"Stellarium stało się lepsze (kolejność alfabetyczna): %1."
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -5347,7 +5349,6 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "Pulsars Configuration"
 msgstr "Konfiguracja Pulsarów"
 
@@ -8838,7 +8839,7 @@ msgstr "Strony WWW"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Analiza obserwowalności"
 
 #: plugins/Observability/src/Observability.cpp:70
 msgid ""
@@ -10263,27 +10264,27 @@ msgstr "Współrzędna Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
-msgstr ""
+msgstr "Ładowanie modelu..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
-msgstr ""
+msgstr "Transformacja modelu..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
-msgstr ""
+msgstr "Ładowanie podłoża..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
-msgstr ""
+msgstr "Transformacja podłoża..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Obliczanie mapy kolizji..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Kończenie ładowania..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
@@ -10322,27 +10323,27 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Pokaż okno ustawień"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Pokaż okno punktu widzenia"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Przełącz cienie"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Przełącz informacje debugowania"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Toggle location text"
-msgstr ""
+msgstr "Przełącz tekst lokalizacji"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "Przełącz światło latarki"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Reload shaders"
@@ -10354,29 +10355,33 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:326
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "Ładowanie sceny. Prosimy o cierpliwość!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:328
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "Ładowanie sceny '%1'"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
+"Nie udało się załadować sceny, zajrzyj do logu aby odnaleźć informacje o "
+"błędach!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:355
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "Scena została załadowana."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:414
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
+"Nie udało się załadować informacji o scenie, zajrzyj do logu aby odnaleźć "
+"informacje o błędach!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:438
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Nie udało się odnaleźć ID sceny %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
 #, qt-format
@@ -10388,14 +10393,14 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "włączone"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "wyłączone"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
 #, qt-format
@@ -10422,11 +10427,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "enabled"
-msgstr ""
+msgstr "włączone"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
 msgid "disabled"
-msgstr ""
+msgstr "wyłączone"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:780
 msgid "Cubemap size changed"
@@ -10448,33 +10453,22 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:910
 msgid "3D Sceneries"
-msgstr ""
+msgstr "Scenerie 3D"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:913
-msgid "3D foreground renderer."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:914
 msgid ""
-"Walk around, find and avoid obstructions in your garden, find and "
-"demonstrate possible astronomical alignments in temples, see shadows on "
-"sundials etc."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:916
-msgid ""
+"3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden,find and demonstrate possible astronomical alignments in temples, see "
+"shadows on sundials etc.\n"
+"\n"
 "To move around, press Ctrl+cursor keys. To lift eye height, use "
-"Ctrl+PgUp/PgDn."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:917
-msgid ""
-"Movement speed is linked to field of view (i.e. zoom in for fine "
-"adjustments)."
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:918
-msgid "You can even keep moving by releasing Ctrl before cursor key."
+"Ctrl+PgUp/PgDn. Movement speed is linked to field of view (i.e. zoom in for "
+"fine adjustments). You can even keep moving by releasing Ctrl before cursor "
+"key.\n"
+"\n"
+"Development of this plugin was in parts supported by the Austrian Science "
+"Fund (FWF) project ASTROSIM (P 21208-G19). More: "
+"http://astrosim.univie.ac.at/"
 msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:231
@@ -10482,6 +10476,8 @@ msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Zapewnia dokładniejsze oświetlenie dzięki obliczaniu go na każdy piksel "
+"zamiast na wierzchołek."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:232
 msgid "Required for bump mapping and shadows!"
@@ -10574,6 +10570,8 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid "Saves energy and may increase subjective application performance."
 msgstr ""
+"Oszczędza energię i może poprawić subiektywne odczucie szybkości działania "
+"aplikacji."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid ""
@@ -10591,6 +10589,8 @@ msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"To przyśpieszy wyświetlanie, ale obraz może się &quot;rwać&quot; dopóki się "
+"poruszasz."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
@@ -10626,85 +10626,85 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "Sceneria 3D"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Ustaw jako scenę domyślną"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Załaduj/zapisz punkty widzenia"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Siła latarki:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Zasięg latarki:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Światło latarki (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Pokaż współrzędne siatki (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Opcje wizualne"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "Oświetlenie obliczane na piksel"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Cienie"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Uproszczone cienie"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Mapowanie wypukłości"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Rozmiar mapy sześciennej:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Rozmiar mapy cieni:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Jakość filtrowania:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Sprzętowe"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Niska"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Niska + Sprzętowe"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Wysoka (powolne)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Wysoka + Sprzętowe (powolne)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
@@ -10736,7 +10736,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Ustawienia jakości/szybkości działania"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
@@ -10756,7 +10756,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
-msgstr ""
+msgstr "Tytuł:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:190
@@ -10915,6 +10915,10 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
+msgstr ""
+
+#: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
+msgid "ArchaeoLines Configuration"
 msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
