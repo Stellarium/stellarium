@@ -34,13 +34,13 @@ install:
   - "cd libarchive-3.1.2"
   - "./configure --prefix=/usr --disable-static"
   - "make -j 2"
-  - "sudo make install -j 16"
+  - "sudo make install -j 2"
   - "cd .."
 
   - "cd cmake-3.1.3"
-  - "./bootstrap --prefix=/usr --system-libs --mandir=/share/man"
+  - "./bootstrap"
   - "make -j 2"
-  - "sudo make install -j 16"
+  - "sudo make install -j 2"
   - "cd .."
 
 before_script:
@@ -50,7 +50,7 @@ before_script:
 script:
   - "cmake ../."
   - "make -j 2"
-  - "sudo make install -j 16"
+  - "sudo make install -j 2"
 
 notifications:
   recipients:
