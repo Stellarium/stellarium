@@ -95,6 +95,8 @@ public:
 			alphatest = false;
 			backfacecull = true;
 			illum = I_NONE;
+			hasSpecularity = false;
+			hasTransparency = false;
 		}
 
 		//! Needs to be called after everything is loaded
