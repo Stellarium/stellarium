@@ -20,16 +20,16 @@
 
 #include "Plane.hpp"
 
-Plane::Plane()
+Plane::Plane(): distance(0.0f), sDistance(0.0f)
 {
 }
 
-Plane::Plane(Vec3f &v1, Vec3f &v2, Vec3f &v3)
+Plane::Plane(Vec3f &v1, Vec3f &v2, Vec3f &v3): distance(0.0f), sDistance(0.0f)
 {
 	Plane(v1, v2, v3, SPolygon::CCW);
 }
 
-Plane::Plane(const Vec4f &e)
+Plane::Plane(const Vec4f &e): sDistance(0.0f)
 {
 	Vec3f n = Vec3f(e.v[0], e.v[1], e.v[2]);
 	n.normalize();
@@ -38,7 +38,7 @@ Plane::Plane(const Vec4f &e)
 	distance = e.v[3];
 }
 
-Plane::Plane(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o)
+Plane::Plane(const Vec3f &v1, const Vec3f &v2, const Vec3f &v3, SPolygon::Order o): sDistance(0.0f)
 {
 	Vec3f edge1 = v2-v1;
 	Vec3f edge2 = v3-v1;
