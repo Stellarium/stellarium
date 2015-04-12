@@ -498,12 +498,15 @@ QSettings* StoredView::getUserViews()
 		QFileInfo f(file);
 		QDir().mkpath(f.absolutePath());
 		QFile qfile(file);
-		qfile.open(QIODevice::WriteOnly);
+		if (!qfile.open(QIODevice::WriteOnly))
+		{
+			qWarning() << "[Scenery3D] StoredView: cannot create userviews file!";
+		}
 		qfile.close();
 	}
 
 	//QSettings gets deleted when plugin is shut down (also saves settings)
-	//TODO StelIniFormat has bugs with saving HTML! so we use the default Qt format here, no idead if this may cause some problems.
+	//TODO StelIniFormat has bugs with saving HTML! so we use the default Qt format here, no idea if this may cause some problems.
 	userviews = new QSettings(file,QSettings::IniFormat,GETSTELMODULE(Scenery3dMgr));
 	return userviews;
 }

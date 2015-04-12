@@ -179,10 +179,12 @@ void Scenery3dMgr::deinit()
 	qDebug()<<"[Scenery3dMgr] deinit() called";
 #endif
 
-	//wait until loading is finished
-	scenery3d->setLoadCancel(true);
-	currentLoadFuture.waitForFinished();
-
+	//wait until loading is finished. (If test added after hint from Coverity)
+	if(scenery3d)
+	{
+		scenery3d->setLoadCancel(true);
+		currentLoadFuture.waitForFinished();
+	}
 	//this is correct the place to delete all OpenGL related stuff, not the destructor
 	if(scenery3d != NULL)
 	{
