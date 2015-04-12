@@ -79,7 +79,7 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCurrentSun(false)
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
-	, lastJD(0)
+	, lastJD(0.0)
 	, toolbarButton(NULL)
 {
 	setObjectName("ArchaeoLines");
