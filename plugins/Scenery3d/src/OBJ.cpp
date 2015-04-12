@@ -245,7 +245,10 @@ QFile* OBJ::getFile(const QString &filename)
 		file = tmpFile;
 
 		//reopen file read only
-		file->open(QIODevice::ReadOnly);
+		if (!file->open(QIODevice::ReadOnly))
+		{
+			qWarning() << "[Scenery3d] OBJ::getFile(): Cannot open decompressed file! This comes unexpected.";
+		}
 	}
 
 	return file;

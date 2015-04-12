@@ -27,7 +27,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 
-StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog(parent)
+StoredViewDialog::StoredViewDialog(QObject *parent) : StelDialog(parent), mgr(NULL), viewModel(NULL)
 {
 	ui = new Ui_storedViewDialogForm;
 }
