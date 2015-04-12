@@ -238,7 +238,6 @@ private:
 	bool flagShowCurrentSun;
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
-	// These should go into ArchaeoLine single-line class!
 	double lastJD; // cache last-time-computed to 1/month or so?
 
 	ArchaeoLine * equinoxLine;
