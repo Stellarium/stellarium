@@ -76,12 +76,24 @@ GLExtFuncs* glExtFuncs;
 #endif
 
 Scenery3d::Scenery3d(Scenery3dMgr* parent)
-    : parent(parent), currentScene(), loadingScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
-      absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL),heightmapLoad(NULL),
+    : parent(parent), currentScene(), loadingScene(),
+      //sun(NULL), moon(NULL), venus(NULL),
+      supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
+      torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
+      simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
+      reinitCubemapping(true), reinitShadowmapping(true),
+      loadCancel(false),
+      cubemapSize(1024),shadowmapSize(1024),
+      absolutePosition(0.0, 0.0, 0.0), moveVector(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f), eye_height(0.0f),
+      core(NULL), landscapeMgr(NULL),  heightmap(NULL), heightmapLoad(NULL),
+      mainViewUp(0.0, 0.0, 1.0), mainViewDir(1.0, 0.0, 0.0), viewPos(0.0, 0.0, 0.0),
+      drawnTriangles(0), drawnModels(0), materialSwitches(0), shaderSwitches(0),
+      requiresCubemap(false), cubemappingUsedLastFrame(false),
       lazyDrawing(false), updateOnlyDominantOnMoving(true), updateSecondDominantOnMoving(true), needsMovementEndUpdate(false),
-      needsCubemapUpdate(true), needsMovementUpdate(false), lazyInterval(2.0), lastCubemapUpdate(0.0),
-      cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), cubeFBO(0), cubeSideFBO(), cubeMappingCreated(false),
-      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer)
+      needsCubemapUpdate(true), needsMovementUpdate(false), lazyInterval(2.0), lastCubemapUpdate(0.0), lastCubemapUpdateRealTime(0), lastMovementEndRealTime(0),
+      cubeMapCubeTex(0), cubeMapCubeDepth(0), cubeMapTex(), cubeRB(0), dominantFace(0), secondDominantFace(1), cubeFBO(0), cubeSideFBO(), cubeMappingCreated(false),
+      cubeVertexBuffer(QOpenGLBuffer::VertexBuffer), cubeIndexBuffer(QOpenGLBuffer::IndexBuffer), cubeIndexCount(0),
+      lightOrthoNear(0.1f), lightOrthoFar(1000.0f), parallaxScale(0.015f)
 {
 	qDebug()<<"Scenery3d constructor...";
 
@@ -89,34 +101,18 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
 	Q_ASSERT(cubeMapTex[0]==0);
 	Q_ASSERT(cubeSideFBO[0]==0);
 
-	supportsGSCubemapping = false;
-	supportsShadows = false;
-	supportsShadowFiltering = false;
-	maximumFramebufferSize = 0;
-
-	cubemappingMode = S3DEnum::CM_TEXTURES; //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
-	reinitCubemapping = true;
-	cubemappingUsedLastFrame = false;
-
+	shaderParameters.openglES = false;
 	shaderParameters.shadowTransform = false;
 	shaderParameters.pixelLighting = false;
-	shaderParameters.shadows = false;
 	shaderParameters.bump = false;
+	shaderParameters.shadows = false;
 	shaderParameters.shadowFilterQuality = S3DEnum::SFQ_LOW;
+	shaderParameters.pcss = false;
 	shaderParameters.geometryShader = false;
 	shaderParameters.torchLight = false;
+	shaderParameters.frustumSplits = 0;
 
-	simpleShadows = false;
-	fullCubemapShadows = false;
-
-	torchRange = 5.0f;
-
-	textEnabled = false;
-	debugEnabled = false;
 	sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
-	fixShadowData = false;
-
-	parallaxScale = 0.015f;
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
