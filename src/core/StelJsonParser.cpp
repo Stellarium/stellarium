@@ -205,7 +205,8 @@ QByteArray StelJsonParserInstance::readString()
 				return name;
 			case '\\':
 			{
-				getChar(&c);
+				bool gotChar=getChar(&c);
+				if (!gotChar) {qWarning() << "cannot read further, error?"; continue;}
 				if (c=='b') c='\b';
 				if (c=='f') c='\f';
 				if (c=='n') c='\n';
@@ -278,8 +279,8 @@ QVariant StelJsonParserInstance::parse()
 				if (!skipAndConsumeChar('\"'))
 				{
 					char cc=0;
-					getChar(&cc);
-					throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: '%1' (ASCII %2)").arg(cc).arg((int)(cc))));
+					if (getChar(&cc))
+						throw std::runtime_error(qPrintable(QString("Expected '\"' at beginning of string, found: '%1' (ASCII %2)").arg(cc).arg((int)(cc))));
 				}
 				const QByteArray& ar = readString();
 				const QString& key = QString::fromUtf8(ar.constData(), ar.size());
