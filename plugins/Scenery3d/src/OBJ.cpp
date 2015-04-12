@@ -163,6 +163,7 @@ OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLB
 	m_hasNormals = false;
 	m_hasTextureCoords = false;
 	m_hasTangents = false;
+	m_hasStelModels = false;
 
 	m_numberOfVertexCoords = 0;
 	m_numberOfTextureCoords = 0;

@@ -52,7 +52,8 @@ Scenery3dMgr::Scenery3dMgr() :
 	scenery3d(NULL),
 	flagEnabled(false),
 	cleanedUp(false),
-	progressBar(NULL),
+	oldProjectionType(StelCore::ProjectionPerspective),
+	progressBar(NULL),	
 	currentLoadScene(),
 	currentLoadFuture(this)
 {
@@ -69,6 +70,9 @@ Scenery3dMgr::Scenery3dMgr() :
 	connect(&currentLoadFuture,&QFutureWatcherBase::finished, this, &Scenery3dMgr::loadSceneCompleted);
 
 	connect(this, &Scenery3dMgr::progressReport, this, &Scenery3dMgr::progressReceive, Qt::QueuedConnection);
+
+	//get the global configuration object
+	conf = StelApp::getInstance().getSettings();
 
 	//create scenery3d object
 	scenery3d = new Scenery3d(this);
@@ -139,9 +143,6 @@ void Scenery3dMgr::draw(StelCore* core)
 void Scenery3dMgr::init()
 {
 	qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
-
-	//get the global configuration object
-	conf = StelApp::getInstance().getSettings();
 
 	//Initialize the renderer - this also finds out what features are supported
 	qDebug() << "[Scenery3dMgr] Initializing Scenery3d object...";
@@ -243,22 +244,28 @@ void Scenery3dMgr::createToolbarButtons() const
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
-		StelButton* toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
-								 QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
-								 QPixmap(":/graphicGui/glow32x32.png"),
-								 "actionShow_Scenery3d");
-		StelButton* toolbarSettingsButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
-								   QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
-								   QPixmap(":/graphicGui/glow32x32.png"),
-								   "actionShow_Scenery3d_dialog");
-		StelButton* toolbarStoredViewButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
-								   QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
-								   QPixmap(":/graphicGui/glow32x32.png"),
-								   "actionShow_Scenery3d_storedViewDialog");
+		if (gui!=NULL)
+		{
+			StelButton* toolbarEnableButton =	new StelButton(NULL,
+									       QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
+									       QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
+									       QPixmap(":/graphicGui/glow32x32.png"),
+									       "actionShow_Scenery3d");
+			StelButton* toolbarSettingsButton =	new StelButton(NULL,
+									       QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
+									       QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
+									       QPixmap(":/graphicGui/glow32x32.png"),
+									       "actionShow_Scenery3d_dialog");
+			StelButton* toolbarStoredViewButton =	new StelButton(NULL,
+									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_on.png"),
+									       QPixmap(":/Scenery3d/bt_scenery3d_eyepoint_off.png"),
+									       QPixmap(":/graphicGui/glow32x32.png"),
+									       "actionShow_Scenery3d_storedViewDialog");
 
-		gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
-		gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
-		gui->getButtonBar()->addButton(toolbarStoredViewButton, "065-pluginsGroup");
+			gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
+			gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
+			gui->getButtonBar()->addButton(toolbarStoredViewButton, "065-pluginsGroup");
+		}
 	}
 	catch (std::runtime_error& e)
 	{

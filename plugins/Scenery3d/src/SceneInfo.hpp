@@ -148,7 +148,7 @@ typedef QList<StoredView> StoredViewList;
 //! A structure which stores a specific view position, view direction and FOV, together with a textual description.
 struct StoredView
 {
-	StoredView() : position(0,0,0,0), view_fov(0,0,-1000)
+	StoredView() : position(0,0,0,0), view_fov(0,0,-1000), isGlobal(false)
 	{}
 
 	//! A descriptive label
