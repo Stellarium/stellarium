@@ -270,26 +270,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="preprocessSTSButton">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>28</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string>pre-process script using STS preprocessor</string>
-          </property>
-          <property name="text">
-           <string notr="true">STS</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../../data/gui/guiRes.qrc">
-            <normaloff>:/graphicGui/btFlipVertical-off.png</normaloff>:/graphicGui/btFlipVertical-off.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>

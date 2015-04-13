@@ -172,10 +172,6 @@ private:
 	//! The name of the action is of the form: "actionScript/<script-path>"
 	void initActions();
 
-#ifdef ENABLE_STRATOSCRIPT_COMPAT
-	bool preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir);
-#endif
-
 	//! This function is for use with getName, getAuthor and getLicense.
 	//! @param s the script id
 	//! @param id the command line id, e.g. "Name"
