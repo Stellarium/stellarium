@@ -167,11 +167,7 @@ QStringList StelScriptMgr::getScriptList()
 	QStringList scriptFiles;
 
 	QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
-#ifdef ENABLE_STRATOSCRIPT_COMPAT
-	QRegExp fileRE("^.*\\.(ssc|sts)$");
-#else // ENABLE_STRATOSCRIPT_COMPAT
 	QRegExp fileRE("^.*\\.ssc$");
-#endif // ENABLE_STRATOSCRIPT_COMPAT
 	foreach(const QString& f, files)
 	{
 		if (fileRE.exactMatch(f))
@@ -347,10 +343,6 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 	bool ok = false;
 	if (fileName.endsWith(".ssc"))
 		ok = preprocessScript(fic, preprocessedScript, scriptDir);
-#ifdef ENABLE_STRATOSCRIPT_COMPAT
-	else if (fileName.endsWith(".sts"))
-		ok = preprocessStratoScript(fic, preprocessedScript, scriptDir);
-#endif
 	if (!ok)
 	{
 		return false;
