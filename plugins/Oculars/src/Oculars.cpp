@@ -1556,9 +1556,18 @@ void Oculars::paintText(const StelCore* core)
 	if(selectedCCDIndex != -1) {
 		ccd = ccds[selectedCCDIndex];
 	}
-	Ocular *ocular = selectedOcularIndex >=0 ? oculars[selectedOcularIndex] : NULL;
-	Telescope *telescope = selectedTelescopeIndex >=0 ? telescopes[selectedTelescopeIndex] : NULL;
-	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
+	Ocular *ocular = NULL;
+	if(selectedOcularIndex !=-1) {
+		ocular = oculars[selectedOcularIndex];
+	}
+	Telescope *telescope = NULL;
+	if(selectedTelescopeIndex != -1) {
+		telescope = telescopes[selectedTelescopeIndex];
+	}
+	Lens *lens = NULL;
+	if(selectedLensIndex != -1) {
+		lens = lense[selectedLensIndex];
+	}
 
 	// set up the color and the GL state
 	painter.setColor(0.8, 0.48, 0.0, 1);
