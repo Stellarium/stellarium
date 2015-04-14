@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-11 21:38+0600\n"
-"PO-Revision-Date: 2015-04-01 12:55+0000\n"
+"PO-Revision-Date: 2015-04-13 09:18+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-12 05:25+0000\n"
+"X-Launchpad-Export-Date: 2015-04-14 05:10+0000\n"
 "X-Generator: Launchpad (build 17423)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -1783,6 +1783,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Several people have made contributions to the project and their work has "
+"made Stellarium better (sorted alphabetically): %1."
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2541,7 +2543,7 @@ msgstr "Siberian"
 
 #: src/translations.h:143
 msgid "Tukano"
-msgstr ""
+msgstr "Tukano"
 
 #: src/translations.h:144
 msgid "Tupi-Guarani"
@@ -2632,12 +2634,12 @@ msgstr "Zero Horizon"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:184
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:186
 msgid "Testscene"
-msgstr ""
+msgstr "Testscene"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:191
@@ -10290,70 +10292,73 @@ msgstr "Coordinate Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
-msgstr ""
+msgstr "Loading model..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
-msgstr ""
+msgstr "Transforming model..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
-msgstr ""
+msgstr "Loading ground..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
-msgstr ""
+msgstr "Transforming ground..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Calculating collision map..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Finalising load..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
-msgstr ""
+msgstr "Scenery3d shader error, can't draw. Check debug output for details."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2100
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"Your hardware does not support cubemapping, please switch to 'Perspective' "
+"projection!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2109
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "Geometry shader is not supported. Falling back to '6 Textures' mode."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2119
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Falling back to '6 Textures' because of ANGLE bug"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2640
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Shadow mapping can not be used on your hardware, check logs for details"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:171
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "Scenery3d plugin loaded!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "Scenery3d: 3D landscapes"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "Toggle 3D landscape"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Show settings dialogue"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Show viewpoint dialogue"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle shadows"
