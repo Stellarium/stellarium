@@ -27,13 +27,8 @@
 #define INF (std::numeric_limits<float>::max())
 #define NO_HEIGHT (-INF)
 
-Heightmap::Heightmap(OBJ* obj) : obj(obj), nullHeight(0)
+Heightmap::Heightmap(OBJ* obj) : obj(obj), xMin(INF), yMin(INF), xMax(-INF), yMax(-INF), nullHeight(0)
 {
-	this->xMin = INF;
-	this->xMax = -INF;
-	this->yMin = INF;
-	this->yMax = -INF;
-
 	xMin = std::min(obj->pBoundingBox.min[0], xMin);
 	yMin = std::min(obj->pBoundingBox.min[1], yMin);
 	xMax = std::max(obj->pBoundingBox.max[0], xMax);
@@ -206,10 +201,10 @@ float Heightmap::GridSpace::face_height_at(const OBJ& obj,const unsigned int* pT
 bool Heightmap::face_in_area(const OBJ& obj, const unsigned int* pTriangle, const float xmin, const float ymin, const float xmax, const float ymax) const
 {
 	// current implementation: use face's bounding box
-	double f_xmin = xmax;
-	double f_ymin = ymax;
-	double f_xmax = xmin;
-	double f_ymax = ymin;
+	float f_xmin = xmax;
+	float f_ymin = ymax;
+	float f_xmax = xmin;
+	float f_ymax = ymin;
 
 	for(int i=0; i<3; i++)
 	{
