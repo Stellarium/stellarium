@@ -878,7 +878,7 @@ StoredView Scenery3dMgr::getCurrentView()
 	view.view_fov[0]*=180.0/M_PI;
 	view.view_fov[1]*=180.0/M_PI;
 	// we must patch azimuth
-	view.view_fov[1]=180.0-view.view_fov[1];
+	view.view_fov[0]=180.0-view.view_fov[0];
 	//3rd comp is fov
 	view.view_fov[2] = mm->getAimFov();
 
