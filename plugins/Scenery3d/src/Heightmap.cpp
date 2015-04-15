@@ -151,20 +151,9 @@ float Heightmap::GridSpace::face_height_at(const OBJ& obj,const unsigned int* pT
 	const OBJ::Vertex& pV1 = obj.m_vertexArray.at(pTriangle[1]);
 	const OBJ::Vertex& pV2 = obj.m_vertexArray.at(pTriangle[2]);
 
-	float pVertex0[3];
-	pVertex0[0] = static_cast<float>(pV0.position[0]);
-	pVertex0[1] = static_cast<float>(pV0.position[1]);
-	pVertex0[2] = static_cast<float>(pV0.position[2]);
-
-	float pVertex1[3];
-	pVertex1[0] = static_cast<float>(pV1.position[0]);
-	pVertex1[1] = static_cast<float>(pV1.position[1]);
-	pVertex1[2] = static_cast<float>(pV1.position[2]);
-
-	float pVertex2[3];
-	pVertex2[0] = static_cast<float>(pV2.position[0]);
-	pVertex2[1] = static_cast<float>(pV2.position[1]);
-	pVertex2[2] = static_cast<float>(pV2.position[2]);
+	const float* pVertex0 = pV0.position;
+	const float* pVertex1 = pV1.position;
+	const float* pVertex2 = pV2.position;
 
 	// Weight of those vertices is used to calculate exact height at (x,y), using barycentric coordinates, see also
 	// http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)#Converting_to_barycentric_coordinates
