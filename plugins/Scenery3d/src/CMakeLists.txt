@@ -43,8 +43,11 @@ SET(Scenery3d_SRCS
 )
 
 # CMake < 3.0 does not AUTOMOC Q_GADGET which S3DEnum.hpp uses, so we have to manually add it
-# This does not seem to cause problems with CMake >= 3.0
-QT5_WRAP_CPP(Scenery3d_MOC_SRCS S3DEnum.hpp)
+# Wrap it in an IF to prevent some linker warnings about symbols defined twice (on MSVC13 at least)
+IF("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0)
+  QT5_WRAP_CPP(Scenery3d_MOC_SRCS S3DEnum.hpp)
+ENDIF()
+
 
 ################# compiles resources files ############
 SET(Scenery3d_RES ../resources/Scenery3d.qrc)

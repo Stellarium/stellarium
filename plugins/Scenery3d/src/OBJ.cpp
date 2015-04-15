@@ -347,86 +347,88 @@ void OBJ::addFaceAttrib(AttributeVector &attributeArray, uint index, int materia
 	attributeArray[index].objectIndex = object;
 }
 
+const OBJ::Vertex OBJ::Vertex::EmptyVertex = {};
+
 void OBJ::addTrianglePos(const PosVector &vertexCoords, VertCacheT& vertexCache, unsigned int index, int v0, int v1, int v2)
 {
-	Vertex vertex;
+	Vertex vertex = Vertex::EmptyVertex;
 
 	//Add v0
-	vertex.position = vertexCoords[v0];
+	std::copy(vertexCoords.at(v0).v, vertexCoords.at(v0).v + 3,vertex.position);
 	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
 	//Add v1
-	vertex.position = vertexCoords[v1];
+	std::copy(vertexCoords.at(v1).v, vertexCoords.at(v1).v + 3,vertex.position);
 	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
 	//Add v2
-	vertex.position = vertexCoords[v2];
+	std::copy(vertexCoords.at(v2).v, vertexCoords.at(v2).v + 3,vertex.position);
 	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
 void OBJ::addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector &normals, VertCacheT& vertexCache,
 			       unsigned int index, int v0, int v1, int v2, int vn0, int vn1, int vn2)
 {
-	Vertex vertex;
+	Vertex vertex = Vertex::EmptyVertex;
 
 	//Add v0//vn0
-	vertex.position = vertexCoords[v0];
-	vertex.normal = normals[vn0];
+	std::copy(vertexCoords.at(v0).v, vertexCoords.at(v0).v + 3,vertex.position);
+	std::copy(normals.at(vn0).v, normals.at(vn0).v + 3,vertex.normal);
 	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
 	//Add v1//n1
-	vertex.position = vertexCoords[v1];
-	vertex.normal = normals[vn1];
+	std::copy(vertexCoords.at(v1).v, vertexCoords.at(v1).v + 3,vertex.position);
+	std::copy(normals.at(vn1).v, normals.at(vn1).v + 3,vertex.normal);
 	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
 	//Add v2//n2
-	vertex.position = vertexCoords[v2];
-	vertex.normal = normals[vn2];
+	std::copy(vertexCoords.at(v2).v, vertexCoords.at(v2).v + 3,vertex.position);
+	std::copy(normals.at(vn2).v, normals.at(vn2).v + 3,vertex.normal);
 	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
 void OBJ::addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, VertCacheT& vertexCache,
 				 unsigned int index, int v0, int v1, int v2, int vt0, int vt1, int vt2)
 {
-	Vertex vertex;
+	Vertex vertex = Vertex::EmptyVertex;
 
 	//Add v0/vt0
-	vertex.position = vertexCoords[v0];
-	vertex.texCoord = textureCoords[vt0];
+	std::copy(vertexCoords.at(v0).v, vertexCoords.at(v0).v + 3,vertex.position);
+	std::copy(textureCoords.at(vt0).v, textureCoords.at(vt0).v + 2,vertex.texCoord);
 	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
 	//Add v1/vt1
-	vertex.position = vertexCoords[v1];
-	vertex.texCoord = textureCoords[vt1];
+	std::copy(vertexCoords.at(v1).v, vertexCoords.at(v1).v + 3,vertex.position);
+	std::copy(textureCoords.at(vt1).v, textureCoords.at(vt1).v + 2,vertex.texCoord);
 	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
 	//Add v2/vt2
-	vertex.position = vertexCoords[v2];
-	vertex.texCoord = textureCoords[vt2];
+	std::copy(vertexCoords.at(v2).v, vertexCoords.at(v2).v + 3,vertex.position);
+	std::copy(textureCoords.at(vt2).v, textureCoords.at(vt2).v + 2,vertex.texCoord);
 	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
 void OBJ::addTrianglePosTexCoordNormal(PosVector& vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, VertCacheT& vertexCache,
 				       unsigned int index, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
 {
-	Vertex vertex;
+	Vertex vertex = Vertex::EmptyVertex;
 
 	//Add v0/vt0/vn0
-	vertex.position = vertexCoords[v0];
-	vertex.texCoord = textureCoords[vt0];
-	vertex.normal = normals[vn0];
+	std::copy(vertexCoords.at(v0).v, vertexCoords.at(v0).v + 3,vertex.position);
+	std::copy(textureCoords.at(vt0).v, textureCoords.at(vt0).v + 2,vertex.texCoord);
+	std::copy(normals.at(vn0).v, normals.at(vn0).v + 3,vertex.normal);
 	m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
 	//Add v1/vt1/vn1
-	vertex.position = vertexCoords[v1];
-	vertex.texCoord = textureCoords[vt1];
-	vertex.normal = normals[vn1];
+	std::copy(vertexCoords.at(v1).v, vertexCoords.at(v1).v + 3,vertex.position);
+	std::copy(textureCoords.at(vt1).v, textureCoords.at(vt1).v + 2,vertex.texCoord);
+	std::copy(normals.at(vn1).v, normals.at(vn1).v + 3,vertex.normal);
 	m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
 	//Add v2/vt2/vn2
-	vertex.position = vertexCoords[v2];
-	vertex.texCoord = textureCoords[vt2];
-	vertex.normal = normals[vn2];
+	std::copy(vertexCoords.at(v2).v, vertexCoords.at(v2).v + 3,vertex.position);
+	std::copy(textureCoords.at(vt2).v, textureCoords.at(vt2).v + 2,vertex.texCoord);
+	std::copy(normals.at(vn2).v, normals.at(vn2).v + 3,vertex.normal);
 	m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
@@ -1693,7 +1695,7 @@ void OBJ::bindBuffersGL()
 
 	glVertexAttribPointer(ShaderMgr::ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
 	glVertexAttribPointer(ShaderMgr::ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
-	glVertexAttribPointer(ShaderMgr::ATTLOC_TEXCOORD,  2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
+	glVertexAttribPointer(ShaderMgr::ATTLOC_TEXCOORD, 2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
 	glVertexAttribPointer(ShaderMgr::ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
 	glVertexAttribPointer(ShaderMgr::ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
 
@@ -1726,25 +1728,25 @@ void OBJ::transform(QMatrix4x4 mat)
 	{
 		Vertex *pVertex = &m_vertexArray[i];
 
-		QVector3D tf = mat * QVector3D(pVertex->position.v[0], pVertex->position.v[1], pVertex->position.v[2]);
-		pVertex->position.v[0] = tf.x();
-		pVertex->position.v[1] = tf.y();
-		pVertex->position.v[2] = tf.z();
+		QVector3D tf = mat * QVector3D(pVertex->position[0], pVertex->position[1], pVertex->position[2]);
+		pVertex->position[0] = tf.x();
+		pVertex->position[1] = tf.y();
+		pVertex->position[2] = tf.z();
 
-		tf = normalMat * QVector3D(pVertex->normal.v[0], pVertex->normal.v[1], pVertex->normal.v[2]);
-		pVertex->normal.v[0] = tf.x();
-		pVertex->normal.v[1] = tf.y();
-		pVertex->normal.v[2] = tf.z();
+		tf = normalMat * QVector3D(pVertex->normal[0], pVertex->normal[1], pVertex->normal[2]);
+		pVertex->normal[0] = tf.x();
+		pVertex->normal[1] = tf.y();
+		pVertex->normal[2] = tf.z();
 
-		tf = normalMat * QVector3D(pVertex->tangent.v[0], pVertex->tangent.v[1], pVertex->tangent.v[2]);
-		pVertex->tangent.v[0] = tf.x();
-		pVertex->tangent.v[1] = tf.y();
-		pVertex->tangent.v[2] = tf.z();
+		tf = normalMat * QVector3D(pVertex->tangent[0], pVertex->tangent[1], pVertex->tangent[2]);
+		pVertex->tangent[0] = tf.x();
+		pVertex->tangent[1] = tf.y();
+		pVertex->tangent[2] = tf.z();
 
-		tf = normalMat * QVector3D(pVertex->bitangent.v[0], pVertex->bitangent.v[1], pVertex->bitangent.v[2]);
-		pVertex->bitangent.v[0] = tf.x();
-		pVertex->bitangent.v[1] = tf.y();
-		pVertex->bitangent.v[2] = tf.z();
+		tf = normalMat * QVector3D(pVertex->bitangent[0], pVertex->bitangent[1], pVertex->bitangent[2]);
+		pVertex->bitangent[0] = tf.x();
+		pVertex->bitangent[1] = tf.y();
+		pVertex->bitangent[2] = tf.z();
 	}
 
 	//Update bounding box in case it changed
@@ -1767,9 +1769,11 @@ void OBJ::findBounds()
 		{
 			const Vertex& pVertex = m_vertexArray.at(m_indexArray[j]);
 
-			pBoundingBox.expand(pVertex.position);
-			pStelModel.bbox.expand(pVertex.position);
-			pStelModel.centroid += pVertex.position;
+			Vec3f pos(pVertex.position[0],pVertex.position[1],pVertex.position[2]);
+
+			pBoundingBox.expand(pos);
+			pStelModel.bbox.expand(pos);
+			pStelModel.centroid += pos;
 		}
 
 		pStelModel.centroid /= (pStelModel.triangleCount*3);

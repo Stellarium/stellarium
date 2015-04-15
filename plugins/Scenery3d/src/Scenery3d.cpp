@@ -2370,7 +2370,7 @@ bool Scenery3d::initCubemapping()
 
 	//store the indices of the vertices
 	//this could easily be recalculated as needed but this makes it a bit more readable
-	unsigned short vertexIdx[sub+1][sub+1] = {0};
+	unsigned short vertexIdx[sub+1][sub+1];
 
 	//first, create the actual vertex positions, (20+1)^2 vertices
 	for (int y = 0; y <= sub; y++) {
