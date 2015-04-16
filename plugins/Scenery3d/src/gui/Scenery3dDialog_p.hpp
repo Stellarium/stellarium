@@ -46,6 +46,7 @@ public:
 
 	int rowCount(const QModelIndex &parent) const
 	{
+		Q_UNUSED(parent);
 		if(mgr->getIsANGLE())
 		{
 			return 1;
