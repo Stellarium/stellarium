@@ -347,7 +347,7 @@ void OBJ::addFaceAttrib(AttributeVector &attributeArray, uint index, int materia
 	attributeArray[index].objectIndex = object;
 }
 
-const OBJ::Vertex OBJ::Vertex::EmptyVertex = {};
+const OBJ::Vertex OBJ::Vertex::EmptyVertex = {0, 0, 0, 0, 0};
 
 void OBJ::addTrianglePos(const PosVector &vertexCoords, VertCacheT& vertexCache, unsigned int index, int v0, int v1, int v2)
 {
