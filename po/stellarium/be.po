@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-11 21:38+0600\n"
-"PO-Revision-Date: 2015-02-22 08:01+0000\n"
+"PO-Revision-Date: 2015-04-16 02:54+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-12 05:11+0000\n"
-"X-Generator: Launchpad (build 17423)\n"
+"X-Launchpad-Export-Date: 2015-04-16 05:10+0000\n"
+"X-Generator: Launchpad (build 17428)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -134,7 +134,7 @@ msgstr "Ґаляктычны экватар"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "Лінія даўгаты супрацьстаяньня/злучэньня"
 
 #: src/core/modules/LandscapeMgr.cpp:366 src/ui_viewDialog.h:1269
 msgid "Atmosphere"
@@ -188,7 +188,7 @@ msgstr "Тып: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "<bНепразрыстасьць: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -222,19 +222,19 @@ msgstr "Яркасьць паверхні: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:182
 #, qt-format
 msgid "Brightness: %1"
-msgstr ""
+msgstr "Яркасьць: %1"
 
 #: src/core/modules/Nebula.cpp:175
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Форма: %1"
 
 #: src/core/modules/Nebula.cpp:176
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
-msgstr ""
+msgstr "Структура: %1"
 
 #: src/core/modules/Nebula.cpp:188
 #, qt-format
@@ -279,15 +279,15 @@ msgstr "Невядомы"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr ""
+msgstr "Вобласьць HII"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
-msgstr ""
+msgstr "Адбівальная туманнасьць"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "H-α emission region"
-msgstr ""
+msgstr "Вобласьць выпраменьваньня H-α"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Undocumented type"
@@ -296,81 +296,81 @@ msgstr "Незадакумэнтаваны тып"
 #: src/core/modules/Nebula.cpp:762
 msgctxt "form"
 msgid "circular"
-msgstr ""
+msgstr "круглая"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "эліптычная"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "form"
 msgid "irregular"
-msgstr ""
+msgstr "няправільная"
 
 #: src/core/modules/Nebula.cpp:771
 msgctxt "form"
 msgid "undocumented form"
-msgstr ""
+msgstr "незадакумэнтаваная"
 
 #: src/core/modules/Nebula.cpp:784
 msgctxt "structure"
 msgid "amorphous"
-msgstr ""
+msgstr "аморфная"
 
 #: src/core/modules/Nebula.cpp:787
 msgctxt "structure"
 msgid "conventional"
-msgstr ""
+msgstr "звычайная"
 
 #: src/core/modules/Nebula.cpp:790
 msgctxt "structure"
 msgid "filamentary"
-msgstr ""
+msgstr "валакністая"
 
 #: src/core/modules/Nebula.cpp:793
 msgctxt "structure"
 msgid "undocumented structure"
-msgstr ""
+msgstr "незадакумэнтаваная структура"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "найслабейшая"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "HII region brightness"
 msgid "moderate"
-msgstr ""
+msgstr "сярэдняя"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "найярчэйшая"
 
 #: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
 msgid "undocumented brightness"
-msgstr ""
+msgstr "незадакумэнтаваная яркасьць"
 
 #: src/core/modules/Nebula.cpp:828
 msgctxt "H-α emission region brightness"
 msgid "very bright"
-msgstr ""
+msgstr "вельмі яркая"
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "H-α emission region brightness"
 msgid "bright"
-msgstr ""
+msgstr "яркая"
 
 #: src/core/modules/Nebula.cpp:834
 msgctxt "H-α emission region brightness"
 msgid "medium"
-msgstr ""
+msgstr "сярэдняя"
 
 #: src/core/modules/Nebula.cpp:837
 msgctxt "H-α emission region brightness"
 msgid "faint"
-msgstr ""
+msgstr "слабая"
 
 #: src/core/modules/NebulaMgr.cpp:131
 msgid "Deep-sky objects"
@@ -1600,7 +1600,7 @@ msgstr "Іслам, Садзік і Курэшы (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1252
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Халід, Султана й Зайдзі (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1253
 #, qt-format
@@ -2417,17 +2417,17 @@ msgstr "Скопішчы, зьвязаныя з туманнасьцю"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "HII regions"
-msgstr ""
+msgstr "Вобласьці HII"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Адбівальныя туманнасьці"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "H-α emission regions"
-msgstr ""
+msgstr "Вобласьці выпраменьваньня H-α"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:105
@@ -2442,32 +2442,32 @@ msgstr "Каталёґ Калдвэла"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Barnard Catalogue"
-msgstr ""
+msgstr "Каталёґ Барнарда"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "Каталёґ Шарплэса"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "Каталёґ Ван дэр Бэрга"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
-msgstr ""
+msgstr "Каталёґ Роджэрса, Кэмпбэла й Уайтоўка"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "Каталёґ Коліндэра"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "Каталёґ Мэлота"
 
 #: src/translations.h:123
 msgid "Arabic"
@@ -4479,11 +4479,11 @@ msgstr "Яркасьць выяваў:"
 
 #: src/ui_viewDialog.h:1316
 msgid "Thickness of lines:"
-msgstr ""
+msgstr "Таўшчыня ліній:"
 
 #: src/ui_viewDialog.h:1318
 msgid "Value in pixels"
-msgstr ""
+msgstr "Значэньне ў піксалях"
 
 #: src/ui_viewDialog.h:1320
 msgid "Celestial Sphere"
@@ -4526,6 +4526,8 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Лінія даўгаты супрацьстаяньня/злучэньня ­— лінія даўгаты экліптыкі, якая "
+"праходзіць праз абодва полюсы экліптыкі, Сонца й супрацьлеглы пункт."
 
 #: src/ui_viewDialog.h:1351
 msgid "Projection"
@@ -10313,19 +10315,19 @@ msgstr "Каардыната Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:170
 msgid "Loading model..."
-msgstr ""
+msgstr "Загрузка мадэлі…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:185
 msgid "Transforming model..."
-msgstr ""
+msgstr "Ператварэньне мадэлі…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:197
 msgid "Loading ground..."
-msgstr ""
+msgstr "Загрузка зямлі…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:208
 msgid "Transforming ground..."
-msgstr ""
+msgstr "Ператварэньне зямлі…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:236
 msgid "Calculating collision map..."
@@ -10333,7 +10335,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:251
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Сканчэньне загрузкі…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:684
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
@@ -10348,6 +10350,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:2109
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
+"Ґеамэтрычны шэйдэр не падтрымліваецца. Задзйнічаем рэжым «6 тэкстур»."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2119
 msgid "Falling back to '6 Textures' because of ANGLE bug"
@@ -10372,15 +10375,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Паказаць дыялёґ настроек"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Паказаць дыялёґ пункту агляду"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Укл./выкл. цені"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Toggle debug information"
@@ -10450,11 +10453,11 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "Цені %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:532
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Цені абязьдзейненыя або не падтрымліваюцца."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
 #, qt-format
@@ -10644,7 +10647,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
 msgid "6 Textures"
-msgstr ""
+msgstr "6 тэкстур"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
 msgid "Cubemap"
@@ -10657,7 +10660,7 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr ""
+msgstr "Каардынаты сеткі (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
@@ -10687,7 +10690,7 @@ msgstr ""
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Паказваць каардынаты сеткі (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
@@ -10699,11 +10702,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Цені"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Простыя цені"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
@@ -10719,7 +10722,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Якасьць фільтраваньня:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
@@ -10759,7 +10762,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Інтэрвал:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
@@ -10771,27 +10774,27 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Настройкі якасьці/прадукцыйнасцьці"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
-msgstr ""
+msgstr "Захаваныя віды"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:207
 msgid "Load view"
-msgstr ""
+msgstr "Загрузіць від"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:208
 msgid "Delete view"
-msgstr ""
+msgstr "Выдаліць від"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Add current view"
-msgstr ""
+msgstr "Дадаць бягучы від"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
-msgstr ""
+msgstr "Назва:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:190
