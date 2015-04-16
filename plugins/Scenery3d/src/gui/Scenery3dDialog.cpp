@@ -321,6 +321,7 @@ void Scenery3dDialog::initResolutionCombobox(QComboBox *cb)
 
 void Scenery3dDialog::on_comboBoxCubemapSize_currentIndexChanged(int index)
 {
+	Q_UNUSED(index);
 	bool ok;
 	uint val = ui->comboBoxCubemapSize->currentData().toUInt(&ok);
 	if(ok)
