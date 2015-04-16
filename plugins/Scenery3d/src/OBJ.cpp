@@ -348,7 +348,7 @@ void OBJ::addFaceAttrib(AttributeVector &attributeArray, uint index, int materia
 }
 
 // GCC g++ allows empty or one-zero initialisation. Other compilers in the buildbot require explicit initialisation.
-const OBJ::Vertex OBJ::Vertex::EmptyVertex = {0,0,0, 0,0, 0,0,0, 0,0,0,0, 0,0,0};
+const OBJ::Vertex OBJ::Vertex::EmptyVertex = {{0,0,0}, {0,0}, {0,0,0}, {0,0,0,0}, {0,0,0}};
 
 void OBJ::addTrianglePos(const PosVector &vertexCoords, VertCacheT& vertexCache, unsigned int index, int v0, int v1, int v2)
 {
