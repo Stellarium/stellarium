@@ -231,10 +231,16 @@ QFile* OBJ::getFile(const QString &filename)
 	{
 		//TODO because the current loader depends on C IO, we have to save the decompressed data as a temporary file...
 		QTemporaryFile* tmpFile = new QTemporaryFile(QDir::tempPath() + "/scenery3d_XXXXXX.obj.tmp");
-		tmpFile->open();
+		if (tmpFile->open())
+		{
+			qDebug()<<"[OBJ] Storing decompressed file in "<<tmpFile->fileName();
+		}
+		else
+		{
+			qDebug()<<"[OBJ] Cannot write temp file";
+			return NULL;
 
-		qDebug()<<"[OBJ] Storing decompressed file in "<<tmpFile->fileName();
-
+		}
 		//perform decompression of original file
 		QByteArray data = StelUtils::uncompress(*file);
 		tmpFile->write(data);
