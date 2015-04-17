@@ -44,7 +44,7 @@ class StelPainter;
 class StelTranslator;
 class QOpenGLShaderProgram;
 
-// Class used to store orbital elements
+// Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
 {
 public:
