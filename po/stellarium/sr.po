@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-11 21:38+0600\n"
-"PO-Revision-Date: 2015-04-08 14:07+0000\n"
+"PO-Revision-Date: 2015-04-17 21:02+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-12 05:21+0000\n"
-"X-Generator: Launchpad (build 17423)\n"
+"X-Launchpad-Export-Date: 2015-04-18 05:10+0000\n"
+"X-Generator: Launchpad (build 17430)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -922,6 +922,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"Ову формулу извео је К.М. Борковски (%1) из анализе 31 Сунчевих помрачења "
+"евидентираних између 2137 пре нове ере и 1715 године нове ере."
 
 #: src/core/StelCore.cpp:1566
 #, qt-format
@@ -2135,6 +2137,8 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"Није пронађен \"OpenGL 2\". Молимо вас ажурирајте ваш хардвер или покушајте "
+"са коришћењем старијих верзија \"MESA\" графичке библиотеке."
 
 #: src/StelMainView.cpp:387
 msgid "Cannot acquire necessary OpenGL resources."
@@ -6292,7 +6296,7 @@ msgstr "Грешка при ажурирању"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:504
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "Ажурирано %1/%2 сателита; %3 додато;  %4 обрисано"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:506
 #, qt-format
@@ -6546,6 +6550,8 @@ msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
+"Сателити са означених листи извора ће аутоматски бити додати приликом "
+"следећег ажурирања уколико се не налазе у колекцији."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:751
 msgid ""
@@ -7691,7 +7697,7 @@ msgstr "Додатак Вам омогућава да видите неке сј
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "Конфигурациони прозор историјских супернових"
 
 #: plugins/Supernovae/src/Supernova.cpp:127
 msgid "supernova"
@@ -7749,7 +7755,7 @@ msgstr "Признање"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
-msgstr ""
+msgstr "Захваљујемо се на доприносу и драгоценим коментарима"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Sergei Blinnikov"
@@ -8010,6 +8016,7 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Овај додатак приказује позиције многих пулсара са информацијама о објектима."
 
 #: plugins/Pulsars/src/Pulsars.cpp:167
 msgid "Show pulsars"
@@ -8529,7 +8536,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "НАСИН програм откривања екстрасоларних планета"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
@@ -8989,7 +8996,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
-msgstr ""
+msgstr "Боја и величина слова"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Red"
