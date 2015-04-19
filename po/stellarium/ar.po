@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-11 21:38+0600\n"
-"PO-Revision-Date: 2015-04-06 23:01+0000\n"
+"PO-Revision-Date: 2015-04-18 11:09+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-12 05:10+0000\n"
-"X-Generator: Launchpad (build 17423)\n"
+"X-Launchpad-Export-Date: 2015-04-19 05:10+0000\n"
+"X-Generator: Launchpad (build 17430)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -2626,12 +2626,12 @@ msgstr "الأفق الصفري"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:184
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "حديقة النجوم في فيينا"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:186
 msgid "Testscene"
-msgstr ""
+msgstr "منظر اختباري"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:191
@@ -10466,6 +10466,14 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<P DIR=RTL>راسم للمناظر ثلاثية الأبعاد. تجول وواجه العقبات في حديقتك "
+"وتحاشاها. مثل للموافقات الفلكية في الآثار القديمة وشاهد حركة الظل في المزاول "
+"الشمسية، إلخ.</p><P DIR=RTL>للتجول اضغط زر الكنترول مع أزارير الأسهم. للنظر "
+"إلى الأعلى أو الأسفل زر الكنترول مع أزارير الصفحات Ctrl+PgUp/PgDn. سرعة "
+"الحركة مرتبطة بحقل الرؤية، لذلك إذا أردت حركة ناعمة استخدم التقريب. تستطيع "
+"الاستمرار بالحركة أيضا بترك زر الكنترول قبل زر السهم. </p><P DIR=RTL>تطوير "
+"هذه الإضافة كان جزئيا بدعم من صندوق العلم النمساوي  (FWF) project ASTROSIM "
+"(P 21208-G19).  http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -10779,48 +10787,48 @@ msgstr "الإسم"
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:190
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "الخطوط الآثارية الفلكية"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "<P DIR=RTL>أداة للدراسات الآثارية والعرقية الفلكية"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:741
 msgid "Equinox"
-msgstr ""
+msgstr "الاعتدال"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:744
 msgid "Solstice"
-msgstr ""
+msgstr "الإنقلاب"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:747
 msgid "Crossquarter"
-msgstr ""
+msgstr "منتصف مابين الانقلاب والاعتدال"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:750
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "وقوف القمر الأكبر"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:753
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "وقوف القمر الأصغر"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:756
 msgid "Zenith Passage"
-msgstr ""
+msgstr "عبور السمت"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:759
 msgid "Nadir Passage"
-msgstr ""
+msgstr "عبور النظير"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:762
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "الجرم المختار"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:771
 msgid "error if you can read this"
-msgstr ""
+msgstr "يوجد خطأ إذا كنت تستطيع قراءة هذه الجملة"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:774
 msgid "Mercury"
@@ -10832,55 +10840,58 @@ msgstr "الزهرة"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "إضافة الخطوط الآثارية الفلكية"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"<P DIR=RTL>إضافة الخطوط الآثارية الفلكية تعرض مجموعة من أقواس الميل ذات "
+"العلاقة الشديدة بالدراسات الآثارية والعرقية الفلكية"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "<P DIR=RTL>ميل الاعتدالين (خط الاستواء) والانقلابين</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"<P DIR=RTL>ميولات الأيام الواقعة في المنتصف بين الاعتدال والانقلاب</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "<P DIR=RTL>ميولات وقوفات القمر الكبرى</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "<P DIR=RTL>ميولات وقوفات القمر الصغرى</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "<P DIR=RTL>ميل عبور السمت</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "<P DIR=RTL>ميل عبور النظير</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "<P DIR=RTL>ميل الجرم المختار الحالي</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "<P DIR=RTL>ميل الشمس الحالي</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "<P DIR=RTL>ميل القمر الحالي</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "<P DIR=RTL>ميل الكوكب المرئي بالعين المجردة الحالي</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -10889,126 +10900,129 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"<P DIR=RTL>خطوط القمر تتضمن تأثير أفق اختلاف المنظر. يوجد خطان مرسومان، "
+"لأبعد وأقرب مسافة للقمر. لاحظ أن ميل وقوف القمر الأكبر يمكن أن يتعدى الحدود "
+"المعينة إذا كان مرتفعاً في السماء بسبب تأثيرات اختلاف المنظر</p>"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "اختر لون خط الاعتدال"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "اختر لون خطوط الانقلاب"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "اختر لون خطوط منتصف الوقت بين الاعتدال والانقلاب"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "اختر لون خطوط الوقوف الكبرى"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "اختر لون خطوط الوقوف الصغرى"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "اختر لون خط عبور السمت"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "اختر لون خط عبور النظير"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "اختر لون خط الجرم المختار"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "اختر لون خط الشمس الحالي"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "اختر لون خط القمر الحالي"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "اختر لون خط الكوكب الحالي"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "إعدادات الخطوط الآثارية الفلكية"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "إعدادات إضافة الخطوط الآثارية الفلكية"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "لتغيير الخطوط ربما تحتاج إلى مغادرة وضع الشاشة الكاملة"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "(خط الاعتدال (الاستواء"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
-msgstr ""
+msgstr "خط الانقلاب"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "خطوط منتصف الوقت بين الاعتدال والانقلاب"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "غيّر اللون"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "خطوط الوقوف القمرية الكبرى"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "خطوط الوقوف القمرية الصغرى"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "ميل عبور السمت"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "ميل عبور النظير"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "الشمس الحالية"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "القمر الحالي"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "الكوكب الحالي: لايوجد اختيار"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "الكوكب الحالي: عطارد"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "الكوكب الحالي: الزهرة"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "الكوكب الحالي: المريخ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "الكوكب الحالي: المشتري"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "الكوكب الحالي: زحل"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "الشبكة الاستوائية"
