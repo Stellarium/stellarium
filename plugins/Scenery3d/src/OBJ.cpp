@@ -539,12 +539,8 @@ void OBJ::buildStelModels(const AttributeVector &attributeArray)
 			pStelModel->triangleCount = 0;
 			pStelModel->pMaterial = &m_materials[materialId];
 			pStelModel->startIndex = i*3;
-			++pStelModel->triangleCount;
 		}
-		else
-		{
-			++pStelModel->triangleCount;
-		}
+		++pStelModel->triangleCount;
 	}
 }
 
