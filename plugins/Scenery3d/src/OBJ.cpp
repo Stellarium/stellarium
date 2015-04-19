@@ -340,7 +340,9 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
 	qint64 total = firstPassTime + secondPassTime + normalTime + boundTime;
 	qDebug() << "[OBJ] Required Time: Total-"<<total<<"ms ("<< (total / 1000.0f) <<"s) FP-" << firstPassTime << "ms, SP-" << secondPassTime
 		 << "ms, BB-"<<boundTime<<"ms, N-"<<normalTime<<"ms";
-
+#ifndef NDEBUG
+	qDebug() << "[OBJ] memory usage: " << memoryUsage();
+#endif
 	m_loaded = true;
 
 	delete qtFile; //this will also delete the temp file if one was used
@@ -1797,12 +1799,11 @@ void OBJ::renderAABBs()
 
 size_t OBJ::memoryUsage()
 {
-	size_t sz = sizeof(this);
+	size_t sz = sizeof(*this);
 	sz+= m_stelModels.capacity() * (sizeof(StelModel) );
 	sz+= m_materials.capacity() * sizeof(Material);
 	sz+= m_vertexArray.capacity() * sizeof(Vertex);
 	sz+= m_indexArray.capacity() * sizeof(unsigned int);
-
 	return sz;
 }
 
