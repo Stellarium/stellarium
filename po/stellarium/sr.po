@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-11 21:38+0600\n"
-"PO-Revision-Date: 2015-04-17 21:02+0000\n"
+"PO-Revision-Date: 2015-04-18 19:14+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-18 05:10+0000\n"
+"X-Launchpad-Export-Date: 2015-04-19 05:10+0000\n"
 "X-Generator: Launchpad (build 17430)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -153,7 +153,7 @@ msgstr "Тло"
 
 #: src/core/modules/LandscapeMgr.cpp:370
 msgid "Illumination"
-msgstr "Osvetljenje"
+msgstr "осветљеност"
 
 #: src/core/modules/LandscapeMgr.cpp:594
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:445
@@ -186,7 +186,7 @@ msgstr "Тип: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr "neprozirnost: %1"
+msgstr "Непрозирност: %1"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -204,7 +204,7 @@ msgstr "Магнитуда: <b>%1</b> (неактивно до: <b>%2</b>)"
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr "Red veličine:  <b>%1</b>"
+msgstr "Магнитуде: <b> %1 </b>"
 
 #: src/core/modules/Nebula.cpp:158
 #, qt-format
@@ -220,7 +220,7 @@ msgstr "Површински сјај: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:182
 #, qt-format
 msgid "Brightness: %1"
-msgstr "sjajnost: %1"
+msgstr "Сјајност: %1"
 
 #: src/core/modules/Nebula.cpp:175
 #, qt-format
@@ -249,7 +249,7 @@ msgstr "Отворено јато"
 
 #: src/core/modules/Nebula.cpp:719
 msgid "Globular cluster"
-msgstr "Globularno jato"
+msgstr "Глобуларно јато"
 
 #: src/core/modules/Nebula.cpp:722
 msgid "Nebula"
@@ -261,7 +261,7 @@ msgstr "Планетарна маглина"
 
 #: src/core/modules/Nebula.cpp:728
 msgid "Dark nebula"
-msgstr "tamna maglina"
+msgstr "Тамна маглина"
 
 #: src/core/modules/Nebula.cpp:731
 msgid "Irregular galaxy"
@@ -269,7 +269,7 @@ msgstr "Неправилна галаксија"
 
 #: src/core/modules/Nebula.cpp:734
 msgid "Cluster associated with nebulosity"
-msgstr "Jato sa maglinom"
+msgstr "Магловито јато"
 
 #: src/core/modules/Nebula.cpp:737
 msgid "Unknown"
@@ -277,7 +277,7 @@ msgstr "Непознато"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr "HII region"
+msgstr "HII регион"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
@@ -289,7 +289,7 @@ msgstr "H-α емисиони регион"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Undocumented type"
-msgstr "Nedokumentovan tip"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:762
 msgctxt "form"
@@ -314,7 +314,7 @@ msgstr "недокументован облик"
 #: src/core/modules/Nebula.cpp:784
 msgctxt "structure"
 msgid "amorphous"
-msgstr "amorfan"
+msgstr "аморфан"
 
 #: src/core/modules/Nebula.cpp:787
 msgctxt "structure"
@@ -324,7 +324,7 @@ msgstr "konvencionalan"
 #: src/core/modules/Nebula.cpp:790
 msgctxt "structure"
 msgid "filamentary"
-msgstr "filamentaran"
+msgstr "филаментаран"
 
 #: src/core/modules/Nebula.cpp:793
 msgctxt "structure"
@@ -334,17 +334,17 @@ msgstr "недкументована структура"
 #: src/core/modules/Nebula.cpp:806
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr "najslabija"
+msgstr "најслабија"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "HII region brightness"
 msgid "moderate"
-msgstr "umerena"
+msgstr "умерена"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr "najsvetliji"
+msgstr "најсветлији"
 
 #: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
 msgid "undocumented brightness"
@@ -426,7 +426,7 @@ msgstr "Srednji sunčev dan: %1"
 
 #: src/core/modules/Planet.cpp:290
 msgid "The period of rotation is chaotic"
-msgstr "Period rotacije je haotican"
+msgstr "Период ротације је хаотичан"
 
 #: src/core/modules/Planet.cpp:296
 #, qt-format
@@ -456,7 +456,7 @@ msgstr "Privremena oznaka: %1"
 #: src/core/modules/Comet.cpp:167
 msgctxt "type of comet"
 msgid "non-periodic"
-msgstr "не периодично"
+msgstr "непериодично"
 
 #: src/core/modules/Comet.cpp:171
 msgctxt "type of comet"
@@ -536,23 +536,23 @@ msgstr "Индекс боје (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "eruptive variable star"
-msgstr "eruptivna promenljiva zvezda"
+msgstr "еруптивна променљива звезда"
 
 #: src/core/modules/StarWrapper.cpp:154
 msgid "pulsating variable star"
-msgstr "pulsirajuca promenljiva zvezda"
+msgstr "пулсирајућа променљива звезда"
 
 #: src/core/modules/StarWrapper.cpp:156
 msgid "rotating variable star"
-msgstr "rotirajuca promenljiva zvezda"
+msgstr "ротирајућа променљива звезда"
 
 #: src/core/modules/StarWrapper.cpp:158
 msgid "cataclysmic variable star"
-msgstr "kataklizmicna promenljiva zvezda"
+msgstr "катаклизмична променљива звезда"
 
 #: src/core/modules/StarWrapper.cpp:161
 msgid "eclipsing binary system"
-msgstr "Eklipsno-dvojni sistem"
+msgstr "еклипсно двојни систем"
 
 #: src/core/modules/StarWrapper.cpp:165
 msgid "variable star"
@@ -565,7 +565,7 @@ msgstr "двојна звезда"
 #: src/core/modules/StarWrapper.cpp:176
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr "tip: <b>%1, %2</b>"
+msgstr "тип: <b> %1, %2  </b>"
 
 #: src/core/modules/StarWrapper.cpp:215
 #, qt-format
@@ -717,7 +717,7 @@ msgstr "Додај један сидерички век"
 
 #: src/core/StelCore.cpp:212
 msgid "Add 1 synodic month"
-msgstr "Dodajte 1 sinodicki mesec"
+msgstr "Додајте 1 синодички месец"
 
 #: src/core/StelCore.cpp:213
 msgid "Add 1 draconic month"
@@ -765,7 +765,7 @@ msgstr "Одузми сидерички век"
 
 #: src/core/StelCore.cpp:224
 msgid "Subtract 1 synodic month"
-msgstr "Oduzmite 1 sinodicki mesec"
+msgstr "Одузмите 1 синодички месец"
 
 #: src/core/StelCore.cpp:225
 msgid "Subtract 1 draconic month"
@@ -889,6 +889,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Овај алгоритам усвојен је у раду П.Бретагнона и Л. Симоновог <em>Планетарни "
+"програми и табеле од -4000 до +2800</em> 1986. године и у рачунарском "
+"програму за планетаријум \"RedShift\"."
 
 #: src/core/StelCore.cpp:1554
 #, qt-format
@@ -5810,7 +5813,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
+msgstr "Користите степене и минуте за FOV CCD-a"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
@@ -6426,6 +6429,8 @@ msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Приликом ажурирања, уклони сателите који се више не налазе на листама за "
+"ажурирање"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
@@ -7726,7 +7731,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Укупан број звезда у листи: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #, qt-format
@@ -7799,7 +7804,7 @@ msgstr "Конфигурација историјских супернових"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "Конфигурација додатка историјских супернових"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
@@ -8264,7 +8269,7 @@ msgstr "Конфигурациони прозор за планете ван с�
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:851
 msgid "Hot"
-msgstr ""
+msgstr "Врућа"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:853
@@ -8400,6 +8405,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Овај додатак приказује позиције звезда са екстрасоларним планетама. Подаци о "
+"екстрасоларним планетама преузети су из \"%1Енциклопедије екстрасоларних "
+"планета%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:140
 #, qt-format
@@ -8751,7 +8759,7 @@ msgstr "Не излази."
 #: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "Кулминира %1 (у %2) у %3 степени."
 
 #: plugins/Observability/src/Observability.cpp:196
 #, qt-format
@@ -9012,7 +9020,7 @@ msgstr "Плава"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font Size"
-msgstr ""
+msgstr "Величина фонта"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Observing conditions"
@@ -9024,7 +9032,7 @@ msgstr "Прикажи могућности"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr ""
+msgstr "Ефемериде за данас (излаз, залаз, транзит)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
@@ -9040,7 +9048,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:356
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "Датуми претходног и следећег пуног Месеца"
 
 #: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
 #: plugins/FOV/src/ui_fovWindow.h:388 plugins/FOV/src/ui_fovWindow.h:390
@@ -9074,7 +9082,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Звезде за навигацију"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -9085,6 +9093,11 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"Овај додатак означава 58 звезда које се користе за навигацију. Северњачу и "
+"57 \"изабраних звезда\" које су наведене у <em>Наутичком алманаху</em> "
+"заједно су објавили његово величанство Канцеларија наутичког алманаха и УС "
+"Навал опсерваторија 1958; сходно томе ове звезде се такође користе и у "
+"навигационим помагалима као што су 2102Д проналазач и препознавач звезда."
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
@@ -9101,7 +9114,7 @@ msgstr "Временско изједначење"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Овај додатак приказује решење временског изједначења."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
 msgid "Show solution for Equation of Time"
@@ -9270,7 +9283,7 @@ msgstr "Персеиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Леониди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
@@ -9638,7 +9651,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:394
 msgid "Solar longitude is"
-msgstr ""
+msgstr "Лонгитуда Сунца је"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:403
 msgid "variable"
@@ -9863,7 +9876,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "дд/мм/гггг"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
@@ -10506,11 +10519,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:741
 msgid "Equinox"
-msgstr ""
+msgstr "Еквиноциј"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:744
 msgid "Solstice"
-msgstr ""
+msgstr "Солстициј"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:747
 msgid "Crossquarter"
@@ -10535,7 +10548,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:762
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "Изабери објекат"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:771
 msgid "error if you can read this"
@@ -10591,11 +10604,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Тренутна деклинација Сунца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Тренутна деклинација Месеца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
@@ -10679,7 +10692,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Промени боју"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
@@ -10699,35 +10712,35 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "Тренутно је изабрано Сунце"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "Тренутно је изабран Месец"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Тренутна планета: није изабрана ниједна планета"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Тренутна планета: Меркур"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Тренутна планета: Венера"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Тренутна планета: Марс"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Тренутна планета: Јупитер"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Тренутна планета: Сатурн"
 
 #~ msgid "Date & Time"
 #~ msgstr "Datum i vreme"
