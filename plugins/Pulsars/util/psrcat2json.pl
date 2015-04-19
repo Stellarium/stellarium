@@ -35,7 +35,7 @@ $PSRCAT	= "./psrcat.db";
 $JSON	= "./pulsars.json";
 
 $FORMAT = 2;
-$CATVER = 1.51;
+$CATVER = 1.52;
 
 open (PSRCAT, "<$PSRCAT");
 @catalog = <PSRCAT>;
