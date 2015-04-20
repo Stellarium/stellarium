@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-11 21:38+0600\n"
+"POT-Creation-Date: 2015-04-19 21:18+0600\n"
 "PO-Revision-Date: 2015-04-14 17:21+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-15 05:09+0000\n"
-"X-Generator: Launchpad (build 17428)\n"
+"X-Launchpad-Export-Date: 2015-04-20 05:16+0000\n"
+"X-Generator: Launchpad (build 17430)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -48,8 +48,8 @@ msgstr "Csillagképek nevei"
 msgid "Constellation boundaries"
 msgstr "Csillagképek határai"
 
-#: src/core/modules/StarMgr.cpp:354 src/ui_viewDialog.h:1247
-#: src/ui_viewDialog.h:1279 src/ui_viewDialog.h:1305
+#: src/core/modules/StarMgr.cpp:354 src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1277 src/ui_viewDialog.h:1303
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "Csillagok"
@@ -58,19 +58,19 @@ msgstr "Csillagok"
 msgid "Stars labels"
 msgstr "Csillagok neve"
 
-#: src/core/modules/GridLinesMgr.cpp:587 src/ui_viewDialog.h:1334
+#: src/core/modules/GridLinesMgr.cpp:587 src/ui_viewDialog.h:1332
 msgid "Meridian"
 msgstr "Meridián"
 
-#: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1338
+#: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1336
 msgid "Ecliptic"
 msgstr "Ekliptika"
 
-#: src/core/modules/GridLinesMgr.cpp:595 src/ui_viewDialog.h:1330
+#: src/core/modules/GridLinesMgr.cpp:595 src/ui_viewDialog.h:1328
 msgid "Equator"
 msgstr "Egyenlítő"
 
-#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1342
+#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1340
 msgid "Horizon"
 msgstr "Horizont"
 
@@ -79,7 +79,7 @@ msgid "Galactic Equator"
 msgstr "Galaktikus egyenlítő"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1350
+#: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1348
 msgid "O./C. longitude"
 msgstr "O./C. hosszúság"
 
@@ -88,7 +88,7 @@ msgstr "O./C. hosszúság"
 msgid "Equatorial grid"
 msgstr "Egyenlítői rács"
 
-#: src/core/modules/GridLinesMgr.cpp:756 src/ui_viewDialog.h:1324
+#: src/core/modules/GridLinesMgr.cpp:756 src/ui_viewDialog.h:1322
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "Azimut háló"
@@ -122,12 +122,12 @@ msgstr "Egyenlítői rács (J2000)"
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptikus rács J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1325
+#: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1323
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic grid"
 msgstr "Galaktikus hálózat"
 
-#: src/core/modules/GridLinesMgr.cpp:764 src/ui_viewDialog.h:1346
+#: src/core/modules/GridLinesMgr.cpp:764 src/ui_viewDialog.h:1344
 msgid "Galactic equator"
 msgstr "Galaktikus egyenlítő"
 
@@ -136,7 +136,7 @@ msgstr "Galaktikus egyenlítő"
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:366 src/ui_viewDialog.h:1269
+#: src/core/modules/LandscapeMgr.cpp:366 src/ui_viewDialog.h:1267
 msgid "Atmosphere"
 msgstr "Légkör"
 
@@ -144,7 +144,7 @@ msgstr "Légkör"
 msgid "Fog"
 msgstr "Köd"
 
-#: src/core/modules/LandscapeMgr.cpp:368 src/ui_viewDialog.h:1326
+#: src/core/modules/LandscapeMgr.cpp:368 src/ui_viewDialog.h:1324
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
 msgstr "Égtájak"
@@ -158,7 +158,7 @@ msgid "Illumination"
 msgstr "Megvilágítás"
 
 #: src/core/modules/LandscapeMgr.cpp:594
-#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:445
+#: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:446
 msgid "Author: "
 msgstr "Szerző: "
 
@@ -505,7 +505,7 @@ msgstr "A gázcsóva hossza  (becsült érték): %1 km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:174 src/translations.h:62
-#: src/ui_viewDialog.h:1248
+#: src/ui_viewDialog.h:1246
 msgid "Planets"
 msgstr "Bolygók"
 
@@ -2573,7 +2573,7 @@ msgid "Trees"
 msgstr "Fák"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:157 plugins/ArchaeoLines/src/ArchaeoLines.cpp:768
+#: src/translations.h:157 plugins/ArchaeoLines/src/ArchaeoLines.cpp:769
 msgid "Moon"
 msgstr "Hold"
 
@@ -2593,17 +2593,17 @@ msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:165 plugins/ArchaeoLines/src/ArchaeoLines.cpp:780
+#: src/translations.h:165 plugins/ArchaeoLines/src/ArchaeoLines.cpp:781
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:167 plugins/ArchaeoLines/src/ArchaeoLines.cpp:783
+#: src/translations.h:167 plugins/ArchaeoLines/src/ArchaeoLines.cpp:784
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:169 plugins/ArchaeoLines/src/ArchaeoLines.cpp:786
+#: src/translations.h:169 plugins/ArchaeoLines/src/ArchaeoLines.cpp:787
 msgid "Saturn"
 msgstr "Szaturnusz"
 
@@ -4001,7 +4001,7 @@ msgstr "Súgó"
 msgid "About"
 msgstr "Névjegy"
 
-#: src/ui_helpDialogGui.h:287 src/ui_scriptConsole.h:387
+#: src/ui_helpDialogGui.h:287 src/ui_scriptConsole.h:375
 msgid "Log"
 msgstr "Napló"
 
@@ -4269,92 +4269,92 @@ msgstr "Keresési opciók"
 msgid "Use autofill only from the beginning of words"
 msgstr "Automatikus kitöltés csak a szó elejétől"
 
-#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1352
-#: src/ui_viewDialog.h:1370 src/ui_viewDialog.h:1378
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1350
+#: src/ui_viewDialog.h:1368 src/ui_viewDialog.h:1376
 #: src/ui_configurationDialog.h:1187 src/ui_configurationDialog.h:1198
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Beállítások"
 
-#: src/ui_viewDialog.h:1231
+#: src/ui_viewDialog.h:1229
 msgid "View"
 msgstr "Nézet"
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1235
 msgid "Sky"
 msgstr "Ég"
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1237
 msgid "Markings"
 msgstr "Jelölések"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:413
 msgid "Landscape"
 msgstr "Tájkép"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1241
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "Csillaghagyomány"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1244
 msgid "Labels and Markers"
 msgstr "Címkék és jelölések"
 
-#: src/ui_viewDialog.h:1250
+#: src/ui_viewDialog.h:1248
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Feliratok és jelölések a mélyég-objektumokhoz (csillaghalmazok, galaxisok és "
 "ködök)"
 
-#: src/ui_viewDialog.h:1252 src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1250 src/ui_viewDialog.h:1307
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr "Mélyég objektumok"
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1251
 msgid "Planets and satellites"
 msgstr "Bolygók és holdak"
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1252
 msgid "Show planets"
 msgstr "Bolygók mutatása"
 
-#: src/ui_viewDialog.h:1255
+#: src/ui_viewDialog.h:1253
 msgid "Show planet markers"
 msgstr "Bolygók jelölése"
 
-#: src/ui_viewDialog.h:1256
+#: src/ui_viewDialog.h:1254
 msgid "Show planet orbits"
 msgstr "Bolygópályák mutatása"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1255
 msgid "Simulate light speed"
 msgstr "Fénysebesség szimulálása"
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1256
 msgid "Scale Moon"
 msgstr "Hold nagyítása"
 
-#: src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1258
 msgid "Scale factor"
 msgstr "Méretezési tényező"
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1261
 msgid "Automatic change of landscape when planet is changed"
 msgstr "A tájkép automatikus cseréje, ha a bolygó változik"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1263
 msgid "Auto select landscapes"
 msgstr "Tájkép automatikus kiválasztása"
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1265
 msgid "Show atmosphere"
 msgstr "Légkör mutatása"
 
-#: src/ui_viewDialog.h:1271
+#: src/ui_viewDialog.h:1269
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -4362,235 +4362,235 @@ msgstr ""
 "Fényszennyezési értékek használata adatbázisból, figyelmen kívül hagyva a "
 "lenti beállítást"
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1271
 msgid "Light pollution data from locations database"
 msgstr "Fényszennyezési értékek használata adatbázisból"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Light pollution:"
 msgstr "Fényszennyezés"
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1274
 msgid "pressure, temperature, extinction coefficient"
 msgstr "nyomás, hőmérséklet, kioltás együtthatója"
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1276
 msgid "Refraction/Extinction settings..."
 msgstr "Visszaverődési/kioltási beállítások"
 
-#: src/ui_viewDialog.h:1280
+#: src/ui_viewDialog.h:1278
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
 msgstr "Abszolút méret:"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1279
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
 msgstr "Relatív méret:"
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1280
 msgid "Milky Way brightness:"
 msgstr "A Tejút fényessége:"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1281
 msgid "Zodiacal Light brightness:"
 msgstr "Állatövi fény fényessége:"
 
-#: src/ui_viewDialog.h:1284
+#: src/ui_viewDialog.h:1282
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
 msgstr "Vibrálás:"
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1284
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "A halvány csillagok elhalványulnak egy nagyon fényes égitest mellett"
 
-#: src/ui_viewDialog.h:1288
+#: src/ui_viewDialog.h:1286
 msgid "Dynamic eye adaptation"
 msgstr "Dinamikus szem adaptálása"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1288
 msgid "Settings for sporadic meteors"
 msgstr "Sporadikus meteorok beállításai"
 
-#: src/ui_viewDialog.h:1292
+#: src/ui_viewDialog.h:1290
 msgid "Shooting Stars"
 msgstr "Hullócsillagok"
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1292
 msgid "Hourly zenith rate"
 msgstr "Óránkénti zenit változás"
 
-#: src/ui_viewDialog.h:1296
+#: src/ui_viewDialog.h:1294
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1297
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr "Magnitúdó korlátozása (szabad szemes/binokuláros megfigyelés)"
 
-#: src/ui_viewDialog.h:1301
+#: src/ui_viewDialog.h:1299
 msgid "Limit Magnitudes"
 msgstr "Határmagnitúdók"
 
-#: src/ui_viewDialog.h:1303
+#: src/ui_viewDialog.h:1301
 msgid "Limit the magnitude of stars"
 msgstr "Csillagok fényességének határa"
 
-#: src/ui_viewDialog.h:1307
+#: src/ui_viewDialog.h:1305
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Mélyég objektumok fényességének határa (csillaghalmaz, galaxis, csillagköd)"
 
-#: src/ui_viewDialog.h:1310
+#: src/ui_viewDialog.h:1308
 msgid "Constellations"
 msgstr "Csillagképek"
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1309
 msgid "Show lines"
 msgstr "Vonalak mutatása"
 
-#: src/ui_viewDialog.h:1312
+#: src/ui_viewDialog.h:1310
 msgid "Show labels"
 msgstr "Címkék mutatása"
 
-#: src/ui_viewDialog.h:1313
+#: src/ui_viewDialog.h:1311
 msgid "Show boundaries"
 msgstr "Határok mutatása"
 
-#: src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1312
 msgid "Show art"
 msgstr "Ábrák mutatása"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1315
+#: src/ui_viewDialog.h:1313
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
 msgstr "Rajzok fényessége"
 
-#: src/ui_viewDialog.h:1316
+#: src/ui_viewDialog.h:1314
 msgid "Thickness of lines:"
 msgstr "Vonalak vastagsága:"
 
-#: src/ui_viewDialog.h:1318
+#: src/ui_viewDialog.h:1316
 msgid "Value in pixels"
 msgstr "Érték pixelben:"
 
-#: src/ui_viewDialog.h:1320
+#: src/ui_viewDialog.h:1318
 msgid "Celestial Sphere"
 msgstr "Éggömb"
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1319
 msgid "Equatorial grid (on J2000)"
 msgstr "Egyenlítői háló (J2000)"
 
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1320
 msgid "Equatorial grid (on date)"
 msgstr "Egyenlítői háló (dátum szerint)"
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_viewDialog.h:1321
 msgid "Ecliptic grid (on J2000)"
 msgstr "Ekliptikus háló (J2000)"
 
-#: src/ui_viewDialog.h:1328
+#: src/ui_viewDialog.h:1326
 msgid "Show equator line"
 msgstr "Egyenlítő mutatása"
 
-#: src/ui_viewDialog.h:1332
+#: src/ui_viewDialog.h:1330
 msgid "Show meridian line"
 msgstr "Meridián mutatása"
 
-#: src/ui_viewDialog.h:1336
+#: src/ui_viewDialog.h:1334
 msgid "Show ecliptic line"
 msgstr "Ekliptika vonala"
 
-#: src/ui_viewDialog.h:1340
+#: src/ui_viewDialog.h:1338
 msgid "Show horizon line"
 msgstr "Horizont mutatása"
 
-#: src/ui_viewDialog.h:1344
+#: src/ui_viewDialog.h:1342
 msgid "Show Galactic equator line"
 msgstr "Galaktikus egyenlítő mutatása"
 
-#: src/ui_viewDialog.h:1348
+#: src/ui_viewDialog.h:1346
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
 
-#: src/ui_viewDialog.h:1351
+#: src/ui_viewDialog.h:1349
 msgid "Projection"
 msgstr "Vetület"
 
-#: src/ui_viewDialog.h:1353
+#: src/ui_viewDialog.h:1351
 msgid "Show fog"
 msgstr "Köd mutatása"
 
-#: src/ui_viewDialog.h:1354
+#: src/ui_viewDialog.h:1352
 msgid "Use associated planet and position"
 msgstr "Ugrás a tájképhez társított bolygóra és helyre"
 
-#: src/ui_viewDialog.h:1355
+#: src/ui_viewDialog.h:1353
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Megvilágítási réteg mutatása (fényesség ablak, fényszennyezés, stb)"
 
-#: src/ui_viewDialog.h:1356
+#: src/ui_viewDialog.h:1354
 msgid "Show ground"
 msgstr "Felszín mutatása"
 
-#: src/ui_viewDialog.h:1357
+#: src/ui_viewDialog.h:1355
 msgid "Use this landscape as default"
 msgstr "Tájkép beállítása alapértelmezettnek"
 
-#: src/ui_viewDialog.h:1359
+#: src/ui_viewDialog.h:1357
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 "Minimális fényesség alkalmazása, hogy a horizont látható legyen sötétben is"
 
-#: src/ui_viewDialog.h:1361
+#: src/ui_viewDialog.h:1359
 msgid "Minimal brightness:"
 msgstr "Minimális fényesség:"
 
-#: src/ui_viewDialog.h:1363
+#: src/ui_viewDialog.h:1361
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "Értéktartomány 0...1 (a táj teljesen sötét - jól megvilágított)"
 
-#: src/ui_viewDialog.h:1366
+#: src/ui_viewDialog.h:1364
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 "Minimális fényesség alkalmazása, a  landscape.ini fájlban megadottak szerint"
 
-#: src/ui_viewDialog.h:1368
+#: src/ui_viewDialog.h:1366
 msgid "from landscape, if given"
 msgstr ""
 
-#: src/ui_viewDialog.h:1369
+#: src/ui_viewDialog.h:1367
 msgid "Add/remove landscapes..."
 msgstr "Tájkép hozzáadása/törlése..."
 
-#: src/ui_viewDialog.h:1371
+#: src/ui_viewDialog.h:1369
 msgid "Use this sky culture as default"
 msgstr "Kultúrkör beállítása alapértelmezettnek"
 
-#: src/ui_viewDialog.h:1372
+#: src/ui_viewDialog.h:1370
 msgid "Show names"
 msgstr "A nevek megjelenítése"
 
-#: src/ui_viewDialog.h:1374
+#: src/ui_viewDialog.h:1372
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 "Válassza ki, hogy a neveket eredetiben, rövidítve vagy lefordítva akarja "
 "látni"
 
-#: src/ui_viewDialog.h:1377
+#: src/ui_viewDialog.h:1375
 msgid "Use native names for planets from current culture"
 msgstr "A bolygók eredeti nevei az adott kultúrában"
 
-#: src/ui_viewDialog.h:1379
+#: src/ui_viewDialog.h:1377
 msgid "Visible"
 msgstr "Látható"
 
@@ -4673,7 +4673,7 @@ msgstr "Minden elérhető"
 msgid "Display no information"
 msgstr "Információ elrejtése"
 
-#: src/ui_configurationDialog.h:1046 plugins/Oculars/src/Oculars.cpp:1953
+#: src/ui_configurationDialog.h:1046 plugins/Oculars/src/Oculars.cpp:1972
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Semmi"
@@ -5124,59 +5124,55 @@ msgid ""
 "for murky conditions."
 msgstr "Magas hegytetőn 0,12; tiszta vidéken 0,2; borongós időben 0,35."
 
-#: src/ui_scriptConsole.h:355
+#: src/ui_scriptConsole.h:346
 msgid "Script console"
 msgstr "Szkript konzol"
 
-#: src/ui_scriptConsole.h:358
+#: src/ui_scriptConsole.h:349
 msgid "load script from file"
 msgstr "szkript betöltése fájlból"
 
-#: src/ui_scriptConsole.h:362
+#: src/ui_scriptConsole.h:353
 msgid "save script to file"
 msgstr "szkript mentése fájlba"
 
-#: src/ui_scriptConsole.h:366
+#: src/ui_scriptConsole.h:357
 msgid "clear"
 msgstr "törlés"
 
-#: src/ui_scriptConsole.h:370
+#: src/ui_scriptConsole.h:361
 msgid "pre-process script using SSC preprocessor"
 msgstr "szkript előfeldolgozása SSC preprocesszorral"
 
-#: src/ui_scriptConsole.h:373
-msgid "pre-process script using STS preprocessor"
-msgstr "szkript előfeldolgozása STS preprocesszorral"
-
-#: src/ui_scriptConsole.h:376
+#: src/ui_scriptConsole.h:364
 msgid "quickly load and run a utility script"
 msgstr "felhasználói szkript betöltése és futtatása"
 
-#: src/ui_scriptConsole.h:379
+#: src/ui_scriptConsole.h:367
 msgid "run script"
 msgstr "szkript futtatása"
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:371
 msgid "stop script"
 msgstr "szkript megállítása"
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:374
 msgid "Script"
 msgstr "Szkript"
 
-#: src/ui_scriptConsole.h:388
+#: src/ui_scriptConsole.h:376
 msgid "Output"
 msgstr "Kimenet"
 
-#: src/ui_scriptConsole.h:390
+#: src/ui_scriptConsole.h:378
 msgid "Cursor position"
 msgstr "Kurzorpozíció"
 
-#: src/ui_scriptConsole.h:392
+#: src/ui_scriptConsole.h:380
 msgid "Include dir:"
 msgstr "keresési könyvtár:"
 
-#: src/ui_scriptConsole.h:393
+#: src/ui_scriptConsole.h:381
 msgid "..."
 msgstr "…"
 
@@ -5545,112 +5541,112 @@ msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1587
+#: plugins/Oculars/src/Oculars.cpp:1598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okulár #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1592
+#: plugins/Oculars/src/Oculars.cpp:1603
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okulár #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1606
+#: plugins/Oculars/src/Oculars.cpp:1617
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okulár FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1613
+#: plugins/Oculars/src/Oculars.cpp:1624
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okulár aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1625
+#: plugins/Oculars/src/Oculars.cpp:1636
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lencse #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1629
+#: plugins/Oculars/src/Oculars.cpp:1640
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lencse #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1634
+#: plugins/Oculars/src/Oculars.cpp:1645
 msgid "Lens: none"
 msgstr "Lencse: nincs"
 
-#: plugins/Oculars/src/Oculars.cpp:1644 plugins/Oculars/src/Oculars.cpp:1701
+#: plugins/Oculars/src/Oculars.cpp:1657 plugins/Oculars/src/Oculars.cpp:1720
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Távcső #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1649 plugins/Oculars/src/Oculars.cpp:1706
+#: plugins/Oculars/src/Oculars.cpp:1662 plugins/Oculars/src/Oculars.cpp:1725
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Távcső #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1660
+#: plugins/Oculars/src/Oculars.cpp:1673
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Nagyítás: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1668
+#: plugins/Oculars/src/Oculars.cpp:1681
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1678
+#: plugins/Oculars/src/Oculars.cpp:1698
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimenziók: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1683
+#: plugins/Oculars/src/Oculars.cpp:1702
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Szenzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1687
+#: plugins/Oculars/src/Oculars.cpp:1706
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Szenzor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1949
+#: plugins/Oculars/src/Oculars.cpp:1968
 msgid "&Lens"
 msgstr "&Lencsék"
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1969
 msgid "&Previous lens"
 msgstr "&Előző lencse"
 
-#: plugins/Oculars/src/Oculars.cpp:1951
+#: plugins/Oculars/src/Oculars.cpp:1970
 msgid "&Next lens"
 msgstr "&Következő lencse"
 
-#: plugins/Oculars/src/Oculars.cpp:1981
+#: plugins/Oculars/src/Oculars.cpp:2000
 msgid "&Telescope"
 msgstr "&Távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1982
+#: plugins/Oculars/src/Oculars.cpp:2001
 msgid "&Previous telescope"
 msgstr "&Előző távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1983
+#: plugins/Oculars/src/Oculars.cpp:2002
 msgid "&Next telescope"
 msgstr "&Következő távcső"
 
@@ -8408,7 +8404,7 @@ msgstr "Tömeg"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:765
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:766
 msgid "Sun"
 msgstr "Nap"
 
@@ -10198,37 +10194,37 @@ msgstr "X koordináta"
 msgid "Coordinate Y"
 msgstr "Y koordináta"
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:170
+#: plugins/Scenery3d/src/Scenery3d.cpp:166
 msgid "Loading model..."
 msgstr "Modell betöltése..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:185
+#: plugins/Scenery3d/src/Scenery3d.cpp:181
 msgid "Transforming model..."
 msgstr "Modell átalakítása..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:197
+#: plugins/Scenery3d/src/Scenery3d.cpp:193
 msgid "Loading ground..."
 msgstr "Felszín betöltése..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:208
+#: plugins/Scenery3d/src/Scenery3d.cpp:204
 msgid "Transforming ground..."
 msgstr "Felszín alakítása..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:236
+#: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
 msgstr "Ütközési térkép kiszámítása..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:251
+#: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
 msgstr "Betöltés véglegesítése..."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:684
+#: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 "\"Scenery3d shader\" hiba, a rajzolás meghiúsult. Nézze meg a debug szöveget "
 "további információkért."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2100
+#: plugins/Scenery3d/src/Scenery3d.cpp:2096
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
@@ -10236,162 +10232,162 @@ msgstr ""
 "Az Ön hardvere nem támogatja a \"cubemapping\" funkciót, kérjük kapcsoljon "
 "át \"Perspective\" módra."
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2109
+#: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2119
+#: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2640
+#: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:171
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
 msgstr "Scenery3d betöltve."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:226
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Scenery3d: 3D landscapes"
 msgstr "Scenery3d: 3D háttér"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle 3D landscape"
 msgstr "3D háttér ki/be"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:230
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Show settings dialog"
 msgstr "Beállítások mutatása"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:231
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show viewpoint dialog"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle shadows"
 msgstr "Árnyék ki/be"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
 msgstr "Debug infó ki/be"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle location text"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:271
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:326
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
 msgstr "Háttér betöltése."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:328
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:337
 #, qt-format
 msgid "Loading scene '%1'"
 msgstr "Háttér betöltése: %1"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:351
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:360
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:355
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:364
 msgid "Scene successfully loaded."
 msgstr "Háttér betöltve."
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:414
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:423
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:438
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "enable"
 msgid "on"
 msgstr "be"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:508
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "disable"
 msgid "off"
 msgstr "ki"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:527
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #, qt-format
 msgid "Shadows %1."
 msgstr "%1 árnyékok"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:532
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:563
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
 msgid "Surface bumps %1."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:611
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
 msgstr "be"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:707
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "disabled"
 msgstr "ki"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:780
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:782
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:803
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:805
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:912
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
 msgid "3D Sceneries"
 msgstr "3D hátterek"
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:915
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:924
 msgid ""
 "<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
 "garden, find and demonstrate possible astronomical alignments in temples, "
@@ -10533,15 +10529,15 @@ msgstr ""
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:67
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
 msgstr "6 textúra"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:69
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
 msgstr "Cubemap"
 
-#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:71
+#: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
 msgstr "Geometry shader"
 
@@ -10685,7 +10681,7 @@ msgid "Title:"
 msgstr "Cím:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:190
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
 msgstr "ArchaeoLines"
@@ -10694,48 +10690,48 @@ msgstr "ArchaeoLines"
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr "Régészeti vagy népi csillagászati együttállások"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:741
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:742
 msgid "Equinox"
 msgstr "Tavaszpont"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:744
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:745
 msgid "Solstice"
 msgstr "Napforduló"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:747
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:748
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:750
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:751
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:753
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:754
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:756
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
 msgid "Zenith Passage"
 msgstr "Áthaladás a zeniten"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:759
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:760
 msgid "Nadir Passage"
 msgstr "Áthaladás a nadiron"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:762
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:763
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
 msgstr "Objektum kiválasztása"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:771
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
 msgid "error if you can read this"
 msgstr "ha ezt olvassa, hiba történt"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:774
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
 msgid "Mercury"
 msgstr "Merkúr"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:777
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:778
 msgid "Venus"
 msgstr "Vénusz"
 
@@ -11685,6 +11681,9 @@ msgstr "Bolygó: Szaturnusz"
 
 #~ msgid "Show and zoom Moon"
 #~ msgstr "Hold mutatása, zoom"
+
+#~ msgid "pre-process script using STS preprocessor"
+#~ msgstr "szkript előfeldolgozása STS preprocesszorral"
 
 #~ msgid ""
 #~ "Reports an analysis of source observability (rise, set, and transit times), "
