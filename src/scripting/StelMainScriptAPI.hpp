@@ -756,9 +756,6 @@ signals:
 	void requestSetDiskViewport(bool b);
 	void requestExit();
 	void requestSetHomePosition();
-
-private:
-	int savedProjectionType;
 };
 
 #endif // _STELMAINSCRIPTAPI_HPP_

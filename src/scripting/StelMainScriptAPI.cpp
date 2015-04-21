@@ -97,8 +97,6 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
-
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 }
 
 StelMainScriptAPI::~StelMainScriptAPI()
@@ -378,13 +376,12 @@ void StelMainScriptAPI::setSphericMirror(bool b)
 	StelCore* core = StelApp::getInstance().getCore();
 	if (b)
 	{
-		savedProjectionType = core->getCurrentProjectionType();
 		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
 		StelApp::getInstance().setViewportEffect("sphericMirrorDistorter");
 	}
 	else
 	{
-		core->setCurrentProjectionType((StelCore::ProjectionType)savedProjectionType);
+		core->setCurrentProjectionTypeKey(core->getDefaultProjectionTypeKey());
 		StelApp::getInstance().setViewportEffect("none");
 	}
 }
