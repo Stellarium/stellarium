@@ -387,6 +387,10 @@ public slots:
 	//! @param b if true, sets the disk viewport on, else sets it off
 	void setDiskViewport(bool b);
 
+	//! Set the viewport distortion effect
+	//! @param b if true, sets the spherical mirror distortion effect for viewport on, else sets it off
+	void setSphericMirror(bool b);
+
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
 	QStringList getAllSkyCultureIDs();
@@ -752,6 +756,9 @@ signals:
 	void requestSetDiskViewport(bool b);
 	void requestExit();
 	void requestSetHomePosition();
+
+private:
+	int savedProjectionType;
 };
 
 #endif // _STELMAINSCRIPTAPI_HPP_
