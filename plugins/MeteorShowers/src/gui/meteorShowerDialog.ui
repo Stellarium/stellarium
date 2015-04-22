@@ -135,7 +135,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -334,13 +334,13 @@
        <bool>true</bool>
       </property>
       <attribute name="title">
-       <string>Radiants</string>
+       <string>Radiant</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Color of radiants markers</string>
+          <string>Radiant color</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
           <property name="leftMargin">
@@ -643,7 +643,7 @@
        <item>
         <widget class="QGroupBox" name="displayRadiant">
          <property name="title">
-          <string>Radiants for meteor showers</string>
+          <string>Show radiant marker</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -655,7 +655,7 @@
           <item row="1" column="0">
            <widget class="QCheckBox" name="radiantLabels">
             <property name="text">
-             <string>Show labels of radiants</string>
+             <string>Show radiant labels</string>
             </property>
            </widget>
           </item>
