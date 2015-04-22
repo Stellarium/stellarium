@@ -47,7 +47,7 @@ MeteorShowerDialog::MeteorShowerDialog()
 	, updateTimer(NULL)
 	, treeWidget(NULL)
 {
-    ui = new Ui_meteorShowerDialog;
+	ui = new Ui_meteorShowerDialog;
 }
 
 MeteorShowerDialog::~MeteorShowerDialog()
@@ -72,7 +72,8 @@ void MeteorShowerDialog::retranslate()
 
 		//Retranslate name and datatype strings
 		QTreeWidgetItemIterator it(treeWidget);
-		while (*it) {
+		while (*it)
+		{
 			//Name
 			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
 			//Data type
@@ -314,15 +315,25 @@ void MeteorShowerDialog::refreshUpdateValues(void)
 	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
 	int secondsToUpdate = plugin->getSecondsToUpdate();
 	if (!plugin->getUpdatesEnabled())
+	{
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
+	}
 	else if (plugin->getUpdateState() == MeteorShowers::Updating)
+	{
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
+	}
 	else if (secondsToUpdate <= 60)
+	{
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
+	}
 	else if (secondsToUpdate < 3600)
+	{
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
+	}
 	else
+	{
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
+	}
 }
 
 void MeteorShowerDialog::setUpdateValues(int hours)
@@ -344,7 +355,9 @@ void MeteorShowerDialog::updateStateReceiver(MeteorShowers::UpdateState state)
 {
 	//qDebug() << "MeteorShowerDialog::updateStateReceiver got a signal";
 	if (state==MeteorShowers::Updating)
+	{
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
+	}
 	else if (state==MeteorShowers::DownloadError || state==MeteorShowers::OtherError)
 	{
 		ui->nextUpdateLabel->setText(q_("Update error"));
