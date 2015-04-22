@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-19 21:18+0600\n"
+"POT-Creation-Date: 2015-04-22 09:47+0600\n"
 "PO-Revision-Date: 2015-04-11 18:47+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-20 05:24+0000\n"
+"X-Launchpad-Export-Date: 2015-04-22 05:25+0000\n"
 "X-Generator: Launchpad (build 17430)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
 #: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:485 src/core/StelCore.cpp:192
+#: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr "Параметри показу"
@@ -640,187 +640,187 @@ msgstr "Зодіакальне світло"
 msgid "Night mode"
 msgstr "Нічний режим"
 
-#: src/core/StelCore.cpp:190 src/gui/StelGui.cpp:175
+#: src/core/StelCore.cpp:189 src/gui/StelGui.cpp:175
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "Дата і час"
 
-#: src/core/StelCore.cpp:191 src/core/StelMovementMgr.cpp:131
+#: src/core/StelCore.cpp:190 src/core/StelMovementMgr.cpp:131
 msgid "Movement and Selection"
 msgstr "Пересування і вибір"
 
-#: src/core/StelCore.cpp:194
+#: src/core/StelCore.cpp:193
 msgid "Increase time speed"
 msgstr "Збільшити швидкість часу"
 
-#: src/core/StelCore.cpp:195
+#: src/core/StelCore.cpp:194
 msgid "Decrease time speed"
 msgstr "Зменшити швидкість часу"
 
-#: src/core/StelCore.cpp:196
+#: src/core/StelCore.cpp:195
 msgid "Increase time speed (a little)"
 msgstr "Пришвидшити плин часу (трошки)"
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:196
 msgid "Decrease time speed (a little)"
 msgstr "Сповільнити плин часу (трошки)"
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:197
 msgid "Set normal time rate"
 msgstr "Встановити нормальну швидкість часу"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:198
 msgid "Set time rate to zero"
 msgstr "Призупинення часу"
 
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:199
 msgid "Set time to now"
 msgstr "Встановити поточний час"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:200
 msgid "Add 1 solar hour"
 msgstr "Додати 1 сонячну годину"
 
-#: src/core/StelCore.cpp:202
+#: src/core/StelCore.cpp:201
 msgid "Add 1 solar day"
 msgstr "Додати 1 сонячний день"
 
-#: src/core/StelCore.cpp:203
+#: src/core/StelCore.cpp:202
 msgid "Add 1 solar week"
 msgstr "Додати 1 сонячний тиждень"
 
-#: src/core/StelCore.cpp:204
+#: src/core/StelCore.cpp:203
 msgid "Subtract 1 solar hour"
 msgstr "Відняти 1 сонячну годину"
 
-#: src/core/StelCore.cpp:205
+#: src/core/StelCore.cpp:204
 msgid "Subtract 1 solar day"
 msgstr "Відняти 1 сонячний день"
 
-#: src/core/StelCore.cpp:206
+#: src/core/StelCore.cpp:205
 msgid "Subtract 1 solar week"
 msgstr "Відняти 1 сонячний день"
 
-#: src/core/StelCore.cpp:207
+#: src/core/StelCore.cpp:206
 msgid "Add 1 sidereal day"
 msgstr "Додати 1 зірковий день"
 
-#: src/core/StelCore.cpp:208
+#: src/core/StelCore.cpp:207
 msgid "Add 1 sidereal week"
 msgstr "Додати 1 зірковий тиждень"
 
-#: src/core/StelCore.cpp:209
+#: src/core/StelCore.cpp:208
 msgid "Add 1 sidereal month"
 msgstr "Додати 1 сидеричний місяць"
 
-#: src/core/StelCore.cpp:210
+#: src/core/StelCore.cpp:209
 msgid "Add 1 sidereal year"
 msgstr "Додати 1 сидеричний рік"
 
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:210
 msgid "Add 1 sidereal century"
 msgstr "Додати одне сидеричне століття"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:211
 msgid "Add 1 synodic month"
 msgstr "Додати один синодичний місяць"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:212
 msgid "Add 1 draconic month"
 msgstr "Додати один драконічний місяць"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:213
 msgid "Add 1 draconic year"
 msgstr "Додати один драконічний рік"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:214
 msgid "Add 1 anomalistic month"
 msgstr "Додати один аномалістичний місяць"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:215
 msgid "Add 1 mean tropical month"
 msgstr "Додати один середній тропічний місяць"
 
-#: src/core/StelCore.cpp:217
+#: src/core/StelCore.cpp:216
 msgid "Add 1 mean tropical year"
 msgstr "Додати один середній тропічний рік"
 
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:217
 msgid "Add 1 mean tropical century"
 msgstr "Додати одне середнє тропічне століття"
 
-#: src/core/StelCore.cpp:219
+#: src/core/StelCore.cpp:218
 msgid "Subtract 1 sidereal day"
 msgstr "Відняти 1 зірковий день"
 
-#: src/core/StelCore.cpp:220
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 sidereal week"
 msgstr "Відняти 1 зірковий тиждень"
 
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 sidereal month"
 msgstr "Відняти 1 сидеричний місяць"
 
-#: src/core/StelCore.cpp:222
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 sidereal year"
 msgstr "Відняти 1 сидеричний рік"
 
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:222
 msgid "Subtract 1 sidereal century"
 msgstr "Відняти одне сидеричне століття"
 
-#: src/core/StelCore.cpp:224
+#: src/core/StelCore.cpp:223
 msgid "Subtract 1 synodic month"
 msgstr "Відняти один синодичний рік"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:224
 msgid "Subtract 1 draconic month"
 msgstr "Відняти один драконічний місяць"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:225
 msgid "Subtract 1 draconic year"
 msgstr "Відняти один драконічний рік"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:226
 msgid "Subtract 1 anomalistic month"
 msgstr "Відняти один аномалістичний місяць"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:227
 msgid "Subtract 1 mean tropical month"
 msgstr "Відняти один середній тропічний місяць"
 
-#: src/core/StelCore.cpp:229
+#: src/core/StelCore.cpp:228
 msgid "Subtract 1 mean tropical year"
 msgstr "Відняти один середній тропічний рік"
 
-#: src/core/StelCore.cpp:230
+#: src/core/StelCore.cpp:229
 msgid "Subtract 1 mean tropical century"
 msgstr "Відняти одне середнє тропічне століття"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:231
 msgid "Set home planet to selected planet"
 msgstr "Встановити позначену планету як домашню"
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:232
 msgid "Go to home"
 msgstr "Домівка"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:233
 msgid "Flip scene horizontally"
 msgstr "Повернути горизонтально"
 
-#: src/core/StelCore.cpp:235
+#: src/core/StelCore.cpp:234
 msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
-#: src/core/StelCore.cpp:1521
+#: src/core/StelCore.cpp:1525
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Виправлення вимкнено! Користуйтеся ним, лише якщо вам добре відомі наслідки "
 "ваших дій!"
 
-#: src/core/StelCore.cpp:1524
+#: src/core/StelCore.cpp:1528
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -833,7 +833,7 @@ msgstr ""
 "Айнштайна підтверджено на основі даних про сонячні затемнення, відомих з "
 "історії</em>). Докладніші відомості можна знайти %2тут%3."
 
-#: src/core/StelCore.cpp:1527
+#: src/core/StelCore.cpp:1531
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -843,7 +843,7 @@ msgstr ""
 "system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
 "сталих</em>)."
 
-#: src/core/StelCore.cpp:1530
+#: src/core/StelCore.cpp:1534
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -857,7 +857,7 @@ msgstr ""
 "(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
 "у комп’ютерній програмі SunTracker Pro."
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1538
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -868,7 +868,7 @@ msgstr ""
 "у книзі <em>Canon of Solar Eclipses</em> (<em>Закони сонячних "
 "затемнень</em>), авторами якої є Mucke та Meeus (1983)."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1542
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -880,7 +880,7 @@ msgstr ""
 "1649 р. н.е. Те саме співвідношення також неявно використано у таблицях "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1546
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -892,7 +892,7 @@ msgstr ""
 "observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх "
 "астрономічних спостережень</em>)."
 
-#: src/core/StelCore.cpp:1545
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -902,7 +902,7 @@ msgstr ""
 "Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи "
 "телескопів</em>)."
 
-#: src/core/StelCore.cpp:1548
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -916,7 +916,7 @@ msgstr ""
 "in the period 1800-1975</em> (%1) як апроксимацію даних, опублікованих "
 "Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1551
+#: src/core/StelCore.cpp:1555
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -926,7 +926,7 @@ msgstr ""
 "Programs and Tables from -4000 to +2800</em> (1986), а також у комп’ютерній "
 "програмі RedShift."
 
-#: src/core/StelCore.cpp:1554
+#: src/core/StelCore.cpp:1558
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -938,11 +938,11 @@ msgstr ""
 "1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
 "н.е. до 1980 р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:1557
+#: src/core/StelCore.cpp:1561
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Цей алгоритм використано у комп’ютерному планетарії Guide 7."
 
-#: src/core/StelCore.cpp:1560
+#: src/core/StelCore.cpp:1564
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -952,7 +952,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) і <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1563
+#: src/core/StelCore.cpp:1567
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -961,7 +961,7 @@ msgstr ""
 "Цю формулу було отримано K.M. Borkowski (%1) на основі аналізу записів щодо "
 "31 сонячного затемнення від 2137 р. до н.е. до 1715 р. н.е."
 
-#: src/core/StelCore.cpp:1566
+#: src/core/StelCore.cpp:1570
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -974,7 +974,7 @@ msgstr ""
 "1988</em> (%1) як апроксимацію за даними, наведеними Stephenson і Morrison "
 "(1984)."
 
-#: src/core/StelCore.cpp:1569
+#: src/core/StelCore.cpp:1573
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -984,7 +984,7 @@ msgstr ""
 "версії надточної теорії місячного руху у період 2000-85 у праці <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1572
+#: src/core/StelCore.cpp:1576
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -996,7 +996,7 @@ msgstr ""
 "(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1990 "
 "р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:1575
+#: src/core/StelCore.cpp:1579
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1006,7 +1006,7 @@ msgstr ""
 "Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
 "Землі</em>)."
 
-#: src/core/StelCore.cpp:1578
+#: src/core/StelCore.cpp:1582
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1016,7 +1016,7 @@ msgstr ""
 "Широко використовується. Таблиця для 1620–2000 років. Включено варіант "
 "Chapront, Chapront-Touze та Francou (1997) для дат поза діапазоном 1620–2000."
 
-#: src/core/StelCore.cpp:1581
+#: src/core/StelCore.cpp:1585
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1026,7 +1026,7 @@ msgstr ""
 "реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:1584
+#: src/core/StelCore.cpp:1588
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1035,7 +1035,7 @@ msgstr ""
 "Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1587
+#: src/core/StelCore.cpp:1591
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1046,7 +1046,7 @@ msgstr ""
 "комп’ютері</em>) наведено просте поліноміальне наближення 3-го порядку "
 "точності лише для нещодавніх дат у минулому."
 
-#: src/core/StelCore.cpp:1590
+#: src/core/StelCore.cpp:1594
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1058,7 +1058,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Її засновано на даних книги Jean "
 "Meeus <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:1593
+#: src/core/StelCore.cpp:1597
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1069,7 +1069,7 @@ msgstr ""
 "статті <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) з додатковими даними у (%3)."
 
-#: src/core/StelCore.cpp:1596
+#: src/core/StelCore.cpp:1600
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1083,7 +1083,7 @@ msgstr ""
 "можливій періодичності, описаній Stephenson (%2). Докладніші дані можна "
 "знайти %3тут%4."
 
-#: src/core/StelCore.cpp:1599
+#: src/core/StelCore.cpp:1603
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1099,11 +1099,11 @@ msgstr ""
 "Eclipses: -1900 to +3000</em> цих же авторів (2006). Також цю формулу "
 "використано у програмі для обчислення ефемерид Сонця, Місяця та планет SOLEX."
 
-#: src/core/StelCore.cpp:1599
+#: src/core/StelCore.cpp:1603
 msgid "Used by default."
 msgstr "Використовується типово."
 
-#: src/core/StelCore.cpp:1602
+#: src/core/StelCore.cpp:1606
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1115,7 +1115,7 @@ msgstr ""
 "eclipses and dating the fall of Babylon</em> (затемнення у давнину та "
 "датування падіння Вавилона) (%1)."
 
-#: src/core/StelCore.cpp:1605
+#: src/core/StelCore.cpp:1609
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1127,7 +1127,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), а потім уточнено Sana Islam у "
 "2013 році."
 
-#: src/core/StelCore.cpp:1608
+#: src/core/StelCore.cpp:1612
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1138,7 +1138,7 @@ msgstr ""
 "Khalid, Mariam Sultana та Faheem Zaidi у роботі <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1611
+#: src/core/StelCore.cpp:1615
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1147,15 +1147,15 @@ msgstr ""
 "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
 "користувачем."
 
-#: src/core/StelCore.cpp:1614 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1618 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Помилка"
 
-#: src/core/StelCore.cpp:1664
+#: src/core/StelCore.cpp:1668
 msgid "with meaningless values outside this range"
 msgstr "з помилковими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1690
+#: src/core/StelCore.cpp:1694
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1163,23 +1163,23 @@ msgstr ""
 "з середньою помилкою у менше ніж одну секунду, максимальна помилка — 1,9 с, "
 "помилкові значення поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1712 src/core/StelCore.cpp:1717
-#: src/core/StelCore.cpp:1744 src/core/StelCore.cpp:1749
-#: src/core/StelCore.cpp:1754
+#: src/core/StelCore.cpp:1716 src/core/StelCore.cpp:1721
+#: src/core/StelCore.cpp:1748 src/core/StelCore.cpp:1753
+#: src/core/StelCore.cpp:1758
 msgid "with zero values outside this range"
 msgstr "з нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1722
+#: src/core/StelCore.cpp:1726
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з типовою односекундною точністю та нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1764
+#: src/core/StelCore.cpp:1768
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Коректний діапазон використання: від %1 до %2 року, %3."
 
-#: src/core/StelCore.cpp:1766
+#: src/core/StelCore.cpp:1770
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Коректний діапазон використання: від %1 до %2 року."
@@ -1409,7 +1409,7 @@ msgstr "Контакти"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:183
 msgid "Version"
 msgstr "Версія"
@@ -1423,7 +1423,7 @@ msgstr "Версія"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:184
 msgid "Author"
 msgstr "Автор"
@@ -4744,7 +4744,7 @@ msgstr "Показані поля"
 
 #: src/ui_configurationDialog.h:1056
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:180
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
 msgid "Name"
 msgstr "Назва"
 
@@ -5306,7 +5306,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:295
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:296
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
 msgid "Links"
 msgstr "Посилання"
@@ -5318,7 +5318,7 @@ msgstr "Посилання"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:296
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:297
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
 #, qt-format
 msgid ""
@@ -5336,7 +5336,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:299
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:300
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -5350,7 +5350,7 @@ msgstr "Якщо у вас виникло питання, ви можете от
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:301
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -5364,7 +5364,7 @@ msgstr "Повідомити про помилки можна %1тут%2."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:304
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -5438,7 +5438,7 @@ msgstr "Формат градус-мінута-секунда для кутів"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:327
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:480
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
 msgid "Restore default settings"
 msgstr "Відновити параметри"
@@ -5451,7 +5451,7 @@ msgstr "Відновити параметри"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:328
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:527
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:481
 msgid "Save settings as default"
 msgstr "Зберегти параметри як типові"
 
@@ -5469,7 +5469,7 @@ msgstr "Зберегти параметри як типові"
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:410
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:511
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
@@ -6414,7 +6414,7 @@ msgstr "Докладніше про це можна дізнатися з %1до
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:317
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:319
 msgid "Internet updates disabled"
 msgstr "Оновлення за допомогою інтернету вимкнено"
 
@@ -6430,8 +6430,8 @@ msgstr "Оновлення за допомогою інтернету вимкн
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:319
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:347
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:359
 msgid "Updating now..."
 msgstr "Оновлення…"
 
@@ -6441,7 +6441,7 @@ msgstr "Оновлення…"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:321
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:327
 msgid "Next update: < 1 minute"
 msgstr "До наступного оновлення менше хвилини"
 
@@ -6451,7 +6451,7 @@ msgstr "До наступного оновлення менше хвилини"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:331
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Наступне оновлення за %1 хв."
@@ -6462,7 +6462,7 @@ msgstr "Наступне оновлення за %1 хв."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:325
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Наступне оновлення за %1 год."
@@ -6473,7 +6473,7 @@ msgstr "Наступне оновлення за %1 год."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:350
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:363
 msgid "Update error"
 msgstr "Помилка оновлення"
 
@@ -6503,8 +6503,8 @@ msgstr "[нове джерело]"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:338
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:349
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:473
 msgid "Update now"
 msgstr "Оновити зараз"
 
@@ -6597,7 +6597,7 @@ msgstr "Оновити дані щодо супутників з інтерне�
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:516
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:470
 msgid "Last update:"
 msgstr "Попереднє оновлення:"
 
@@ -6616,7 +6616,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:517
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:471
 msgid "Update frequency (hours):"
 msgstr "Частота оновлення (у годинах):"
 
@@ -6670,7 +6670,7 @@ msgstr "Реалістичний режим для штучних супутни
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:482
 msgid "Settings"
 msgstr "Параметри"
 
@@ -8031,7 +8031,7 @@ msgstr "Частота оновлення (у днях):"
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:518
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:472
 msgid "[next update info]"
 msgstr "[дані щодо наступного оновлення]"
 
@@ -8651,7 +8651,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:305
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:306
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -9505,7 +9505,7 @@ msgid "Meteor Showers"
 msgstr "Метеорні потоки"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
 msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
@@ -9995,51 +9995,53 @@ msgstr "Сонячна довгота"
 msgid "variable"
 msgstr "змінна"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:182
 msgid "ZHR"
 msgstr "ЗГЧ"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:182
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Data Type"
 msgstr "Тип даних"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
 msgid "Peak"
 msgstr "Пік"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:194
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:195
 msgid "Start date greater than end date!"
 msgstr "Початкова дата перевищує кінцеву!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:198
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:199
 msgid "Time interval must be less than one year!"
 msgstr "Слід вказувати інтервал часу, менший за рік!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:218
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:219
 msgid "Variable"
 msgstr "Змінна"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:221
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:222
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:501
 msgid "Real"
 msgstr "Дійсні"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:221
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:222
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:493
 msgid "Generic"
 msgstr "Загальні"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 msgid "Meteor Showers Plug-in"
 msgstr "Додаток метеорних потоків"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
 msgid "Terms"
 msgstr "Терміни"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 msgid "Meteor shower"
 msgstr "Метеорний потік"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -10059,11 +10061,12 @@ msgstr ""
 "Землі. У інтенсивних метеоритних потоках, які називають метеорними викидами "
 "або метеорними бурями, кількість метеорів може перевищувати 1000 на годину."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:502
 msgid "Radiant"
 msgstr "Радіант"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -10074,7 +10077,7 @@ msgstr ""
 "звідки (для спостерігача на поверхні планети) з’являються метеори. "
 "Наприклад, персеїди — це метеори, які з’являються з точки у сузір’ї Персея."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -10086,7 +10089,7 @@ msgstr ""
 "Метеори, які не з’являються з відомого радіанта певного потоку, називаються "
 "спорадичними і не вважаються частиною потоку."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
@@ -10096,11 +10099,11 @@ msgstr ""
 "дощу. Наприклад, точка радіанта дельта-акварид протягом ночі дрейфує на "
 "понад один градус небесною сферою."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr "Зенітне годинне число (ЗГЧ)"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -10114,11 +10117,11 @@ msgstr ""
 "6,5), якщо радіант потоку перебуває у зеніті. Видима кількість метеорів "
 "завжди є нижчою, вона зменшується, якщо радіант наближається до горизонту."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 msgid "Population index"
 msgstr "Індекс щільності"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -10130,129 +10133,123 @@ msgstr ""
 "метеори трапляються частіше за середній рівень, а величини, більші за 3,0, "
 "означають, що у потоці багато тьмяних метеорів."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 msgid "Notes"
 msgstr "Нотатки"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
 "Цей додаток створено у межах проекту ESA Summer of Code in Space 2013."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid "Info"
 msgstr "Інформація"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
 msgid "Info about meteor showers you can get here:"
 msgstr "Дані щодо метеорних потоків можна отримати тут:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:292
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr "%1Метеорний потік%2 — стаття у Вікіпедії"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:293
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:294
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr "%1Міжнародна метеорна організація%2"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:357
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:370
 msgid "Meteor showers is updated"
 msgstr "Дані метеорних потоків оновлено"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:466
 msgid "Meteor Showers Configuration"
 msgstr "Налаштування метеорних потоків"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:467
 msgid "Meteor Showers Plug-in Configuration"
 msgstr "Налаштування додатка метеорних потоків"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:469
 msgid "Update data from Internet"
 msgstr "Оновлення даних з інтернету"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:477
 msgid "Meteor showers"
 msgstr "Метеорні потоки"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:478
 msgid "Show meteor showers button on toolbar"
 msgstr "Показувати кнопку метеорних потоків на панелі інструментів"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:479
 msgid "Enable display of meteor showers at startup"
 msgstr "Увімкнути показ метеорних потоків після запуску"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
-msgid "Color of radiants markers"
-msgstr "Колір позначок радіантів"
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
+msgid "Show radiant marker"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
-msgid "Active Radiant - Generic Data"
-msgstr "Активний радіант — загальні дані"
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
+msgid "Show radiant labels"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
-msgid "Change Color"
-msgstr "Змінити колір"
-
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
-msgid "Inactive Radiant"
-msgstr "Неактивний радіант"
-
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
-msgid "Active Radiant - Real Data"
-msgstr "Активний радіант — справжні дані"
-
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
-msgid "Radiants for meteor showers"
-msgstr "Радіанти метеорних потоків"
-
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
-msgid "Show labels of radiants"
-msgstr "Показувати мітки радіантів"
-
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
 msgid "Show active radiants only"
 msgstr "Показувати лише активні радіанти"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:487
 msgid "Label font size (pixels)"
 msgstr "Розмір символів мітки (у пікселях)"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
-msgid "Radiants"
-msgstr "Радіанти"
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
+msgid "Set radiant color"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
+msgid "Active Radiant - Generic Data"
+msgstr "Активний радіант — загальні дані"
+
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:495
+msgid "Inactive Radiant"
+msgstr "Неактивний радіант"
+
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
+msgid "Inactive"
+msgstr ""
+
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
+msgid "Active Radiant - Real Data"
+msgstr "Активний радіант — справжні дані"
+
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:503
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:508
 msgid "Search"
 msgstr "Пошук"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:504
 msgid "From:"
 msgstr "Від:"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:505
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:507
 msgid "dd/MMM/yyyy"
 msgstr "dd-MMM-yyyy"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:506
 msgid "To:"
 msgstr "До:"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:509
 msgid "Results"
 msgstr "Результати"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:510
 msgid "Search Events"
 msgstr "Знайти подію"
 
@@ -12321,3 +12318,18 @@ msgstr "Поточна планета: Сатурн"
 
 #~ msgid "Check updates"
 #~ msgstr "Шукати оновлення"
+
+#~ msgid "Change Color"
+#~ msgstr "Змінити колір"
+
+#~ msgid "Color of radiants markers"
+#~ msgstr "Колір позначок радіантів"
+
+#~ msgid "Show labels of radiants"
+#~ msgstr "Показувати мітки радіантів"
+
+#~ msgid "Radiants for meteor showers"
+#~ msgstr "Радіанти метеорних потоків"
+
+#~ msgid "Radiants"
+#~ msgstr "Радіанти"
