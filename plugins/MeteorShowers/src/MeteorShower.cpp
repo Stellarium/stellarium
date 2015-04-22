@@ -458,7 +458,7 @@ void MeteorShower::draw(StelPainter &painter)
 	if (MeteorShower::radiantMarkerEnabled && painter.getProjector()->projectCheck(XYZ, win))
 	{
 		MeteorShower::radiantTexture->bind();
-		painter.drawSprite2dMode(XY[0], XY[1], 10);
+		painter.drawSprite2dMode(XY[0], XY[1], 45);
 
 		if (MeteorShower::showLabels)
 		{
