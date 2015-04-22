@@ -143,7 +143,7 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
 	// Markers tab
-	refreshColorMarkers();
+	refreshMarkersColor();
 	connect(ui->changeColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
 	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
@@ -386,7 +386,7 @@ void MeteorShowerDialog::restoreDefaults(void)
 void MeteorShowerDialog::updateGuiFromSettings(void)
 {	
 	refreshUpdateValues();
-	refreshColorMarkers();
+	refreshMarkersColor();
 }
 
 void MeteorShowerDialog::saveSettings(void)
@@ -402,18 +402,11 @@ void MeteorShowerDialog::updateJSON(void)
 	}
 }
 
-void MeteorShowerDialog::refreshColorMarkers(void)
+void MeteorShowerDialog::refreshMarkersColor(void)
 {
-	setTextureColor(ui->textureARG, plugin->getColorARG());
-	setTextureColor(ui->textureARR, plugin->getColorARR());
-	setTextureColor(ui->textureIR, plugin->getColorIR());
-}
-
-void MeteorShowerDialog::setTextureColor(QLabel *texture, QColor color)
-{
-	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(texture);
-	e->setColor(color);
-	texture->setGraphicsEffect(e);
+	ui->changeColorARG->setStyleSheet("background-color:" + plugin->getColorARG().name() + ";");
+	ui->changeColorARR->setStyleSheet("background-color:" + plugin->getColorARR().name() + ";");
+	ui->changeColorIR->setStyleSheet("background-color:" + plugin->getColorIR().name() + ";");
 }
 
 void MeteorShowerDialog::setColorARG()
@@ -421,7 +414,7 @@ void MeteorShowerDialog::setColorARG()
 	QColor color = QColorDialog::getColor(plugin->getColorARG());
 	if (color.isValid())
 	{
-		setTextureColor(ui->textureARG, color);
+		ui->changeColorARG->setStyleSheet("background-color:" + color.name() + ";");
 		plugin->setColorARG(color);
 	}
 }
@@ -431,7 +424,7 @@ void MeteorShowerDialog::setColorARR()
 	QColor color = QColorDialog::getColor(plugin->getColorARR());
 	if (color.isValid())
 	{
-		setTextureColor(ui->textureARR, color);
+		ui->changeColorARR->setStyleSheet("background-color:" + color.name() + ";");
 		plugin->setColorARR(color);
 	}
 }
@@ -441,7 +434,7 @@ void MeteorShowerDialog::setColorIR()
 	QColor color = QColorDialog::getColor(plugin->getColorIR());
 	if (color.isValid())
 	{
-		setTextureColor(ui->textureIR, color);
+		ui->changeColorIR->setStyleSheet("background-color:" + color.name() + ";");
 		plugin->setColorIR(color);
 	}
 }
