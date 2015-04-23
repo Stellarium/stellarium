@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-22 09:47+0600\n"
-"PO-Revision-Date: 2015-04-21 14:38+0000\n"
+"PO-Revision-Date: 2015-04-23 01:47+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-22 05:26+0000\n"
+"X-Launchpad-Export-Date: 2015-04-23 05:31+0000\n"
 "X-Generator: Launchpad (build 17430)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -10092,11 +10092,11 @@ msgstr "Enable display of meteor showers at startup"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Show radiant marker"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Show radiant labels"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
 msgid "Show active radiants only"
@@ -10108,7 +10108,7 @@ msgstr "Label font size (pixels)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
 msgid "Set radiant color"
-msgstr ""
+msgstr "Set radiant colour"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
 msgid "Active Radiant - Generic Data"
@@ -10120,7 +10120,7 @@ msgstr "Inactive Radiant"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
 msgid "Inactive"
-msgstr ""
+msgstr "Inactive"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
 msgid "Active Radiant - Real Data"
@@ -10371,7 +10371,7 @@ msgstr "Toggle torchlight"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr ""
+msgstr "Reload shaders"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
@@ -10396,17 +10396,17 @@ msgstr "Scene successfully loaded."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:423
 msgid "Could not load scene info, please check log for error messages!"
-msgstr ""
+msgstr "Could not load scene info, please check log for error messages!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Could not find scene ID for %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Per-Pixel shading %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
@@ -10420,60 +10420,60 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "off"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "Shadows %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Shadows deactivated or not possible."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "Surface bumps %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
-msgstr ""
+msgstr "Selected cubemap mode not supported, falling back to '6 Textures'"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "Lazy cubemapping: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
-msgstr ""
+msgstr "enabled"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "disabled"
-msgstr ""
+msgstr "disabled"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Cubemap size changed"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Cubemap size not supported, set to %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Shadowmap size changed"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Shadowmap size not supported, set to %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
 msgid "3D Sceneries"
-msgstr ""
+msgstr "3D Sceneries"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:924
 msgid ""
@@ -10486,52 +10486,70 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
+"garden, find and demonstrate possible astronomical alignments in temples, "
+"see shadows on sundials etc.</p><p>To move around, press Ctrl+cursor keys. "
+"To lift eye height, use Ctrl+PgUp/PgDn. Movement speed is linked to field of "
+"view (i.e. zoom in for fine adjustments). You can even keep moving by "
+"releasing Ctrl before cursor key.</p><p>Development of this plugin was in "
+"parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
+"G19). More: http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Provides more accurate lighting by calculating it per-pixel instead of per-"
+"vertex."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Required for bump mapping and shadows!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "Uses only a single shadow cascade instead of up to four."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"Provides a speedup in exchange for shadow quality, especially in large "
+"scenes."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"Determines how the shadows are filtered, in increasing quality from top to "
+"bottom."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS requires the quality set to LOW or HIGH."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Approximate calculation of shadow penumbras (sharper shadows near contact "
+"points, blurred shadows further away)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
+"<b>Hardware</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Causes a performance hit."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
@@ -10540,17 +10558,24 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"This determines the way the scene is rendered when Stellarium uses a "
+"projection other than &quot;Perspective&quot;. The scene is always rendered "
+"onto a cube, and this cube is then warped according to the real projection. "
+"The cube is described using an image called &quot;cubemap&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
+"the most compatible method, but may be slower than the others."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -10558,10 +10583,13 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Geometry shader</b> uses a modern GPU feature to render all 6 sides of "
+"the cube at once. It may be the fastest method depending on the scene and "
+"your GPU hardware. If not supported, this cannot be selected."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Calculates shadows for each cubemap face separately."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -10569,17 +10597,23 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"If disabled, the shadowed area is calculated using a perspective projection, "
+"which may cause missing shadows with high FOV values, but is quite a bit "
+"faster!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"When checked, the cubemap is only recreated in specific time intervals, "
+"instead of each frame."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
