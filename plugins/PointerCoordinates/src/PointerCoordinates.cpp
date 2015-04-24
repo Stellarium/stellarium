@@ -250,8 +250,20 @@ void PointerCoordinates::draw(StelCore *core)
 			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime()+((core->getDeltaT(core->getJDay())/240.)*M_PI/180.))*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
 			cx = 2.*M_PI-cx;
 			coordsSystem = qc_("HA/Dec", "abbreviated in the plugin");
-			cxt = StelUtils::radToHmsStr(cx);
-			cyt = StelUtils::radToDmsStr(cy);
+			if (withDecimalDegree)
+			{
+				double ha_sidereal = cx*12/M_PI;
+				if (ha_sidereal>24.)
+					ha_sidereal -= 24.;
+				cxt = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
+				cyt = StelUtils::radToDecDegStr(cy);
+
+			}
+			else
+			{
+				cxt = StelUtils::radToHmsStr(cx);
+				cyt = StelUtils::radToDmsStr(cy);
+			}
 			break;		
 		}
 	}
