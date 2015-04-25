@@ -83,7 +83,7 @@ void ViewDialog::retranslate()
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
-		ui->stackListWidget->setWrapping(false);
+		updateTabBarListWidgetWidth();
 	}
 }
 
@@ -269,6 +269,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEquatorLineCheckBox, "actionShow_Equator_Line");
 	connectCheckBox(ui->showEclipticLineCheckBox, "actionShow_Ecliptic_Line");
 	connectCheckBox(ui->showMeridianLineCheckBox, "actionShow_Meridian_Line");
+	connectCheckBox(ui->showLongitudeLineCheckBox, "actionShow_Longitude_Line");
 	connectCheckBox(ui->showHorizonLineCheckBox, "actionShow_Horizon_Line");
 	connectCheckBox(ui->showEquatorialGridCheckBox, "actionShow_Equatorial_Grid");
 	connectCheckBox(ui->showGalacticGridCheckBox, "actionShow_Galactic_Grid");
@@ -286,6 +287,8 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showConstellationArtCheckBox, "actionShow_Constellation_Art");
 	ui->constellationArtBrightnessSpinBox->setValue(cmgr->getArtIntensity());
 	connect(ui->constellationArtBrightnessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setArtIntensity(double)));
+	ui->constellationLineThicknessSpinBox->setValue(cmgr->getConstellationLineThickness());
+	connect(ui->constellationLineThicknessSpinBox, SIGNAL(valueChanged(double)), cmgr, SLOT(setConstellationLineThickness(double)));
 
 	// Starlore
 	connect(ui->useAsDefaultSkyCultureCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentCultureAsDefault()));
@@ -307,6 +310,42 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+
+	updateTabBarListWidgetWidth();
+}
+
+void ViewDialog::updateTabBarListWidgetWidth()
+{
+	ui->stackListWidget->setWrapping(false);
+
+	// Update list item sizes after translation
+	ui->stackListWidget->adjustSize();
+
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+	{
+		return;
+	}
+
+	// stackListWidget->font() does not work properly!
+	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
+	QFont font;
+	font.setPixelSize(14);
+	font.setWeight(75);
+	QFontMetrics fontMetrics(font);
+
+	int iconSize = ui->stackListWidget->iconSize().width();
+
+	int width = 0;
+	for (int row = 0; row < model->rowCount(); row++)
+	{
+		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
+		width += 24; // margin - 12px left and 12px right
+	}
+
+	// Hack to force the window to be resized...
+	ui->stackListWidget->setMinimumWidth(width);
 }
 
 void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)

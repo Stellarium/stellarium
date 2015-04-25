@@ -35,7 +35,6 @@ class QOpenGLFramebufferObject;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QTime;
 class QTimer;
 class StelLocationMgr;
 class StelSkyLayerMgr;
@@ -207,6 +206,11 @@ public slots:
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
 
+	//! Set flag for showing decimal degree in various places.
+	void setFlagShowDecimalDegrees(bool b);
+	//! Get flag for showing decimal degree in various places.
+	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
+	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
@@ -329,7 +333,7 @@ private:
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;
 
-	static QTime* qtime;
+	static qint64 startMSecs;
 
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized
@@ -354,6 +358,8 @@ private:
 	QOpenGLFramebufferObject* renderBuffer;
 
 	StelViewportEffect* viewportEffect;
+	
+	bool flagShowDecimalDegrees;
 };
 
 #endif // _STELAPP_HPP_

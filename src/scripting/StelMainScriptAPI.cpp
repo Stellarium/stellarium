@@ -221,7 +221,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	if (ssmgr->searchByName(planet))
 		loc.planetName = planet;
 	loc.name = name;
-	core->moveObserverTo(loc, duration);
+	core->moveObserverTo(loc, duration, duration);
 }
 
 void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
@@ -253,6 +253,11 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	map.insert("sidereal-year", planet->getSiderealPeriod());
 	map.insert("sidereal-day", planet->getSiderealDay()*24.);
 	map.insert("solar-day", planet->getMeanSolarDay()*24.);
+	unsigned int h, m;
+	double s;
+	StelUtils::radToHms(core->getLocalSiderealTime(), h, m, s);
+	map.insert("local-sidereal-time", (double)h + (double)m/60 + s/3600);
+	map.insert("local-sidereal-time-hms", StelUtils::radToHmsStr(core->getLocalSiderealTime()));
 
 	return map;
 }
@@ -364,6 +369,21 @@ void StelMainScriptAPI::setFlagGravityLabels(bool b)
 bool StelMainScriptAPI::getDiskViewport()
 {
 	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk;
+}
+
+void StelMainScriptAPI::setSphericMirror(bool b)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	if (b)
+	{
+		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
+		StelApp::getInstance().setViewportEffect("sphericMirrorDistorter");
+	}
+	else
+	{
+		core->setCurrentProjectionTypeKey(core->getDefaultProjectionTypeKey());
+		StelApp::getInstance().setViewportEffect("none");
+	}
 }
 
 void StelMainScriptAPI::setDiskViewport(bool b)
@@ -967,6 +987,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
@@ -1000,6 +1021,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);
@@ -1033,6 +1055,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		glmgr->setFlagEquatorLine(false);
 		glmgr->setFlagEclipticLine(false);
 		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
 		glmgr->setFlagHorizonLine(false);
 		glmgr->setFlagGalacticEquatorLine(false);
 		glmgr->setFlagEquatorJ2000Grid(false);

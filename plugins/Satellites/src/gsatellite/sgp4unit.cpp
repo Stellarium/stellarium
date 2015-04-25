@@ -47,6 +47,7 @@
 *       ----------------------------------------------------------------      */
 
 #include "sgp4unit.h"
+#include <cmath>
 
 FILE *dbgfile;
 
@@ -453,7 +454,7 @@ static void dscom
      cosim  = cos(inclp);
      emsq   = em * em;
      betasq = 1.0 - emsq;
-     rtemsq = sqrt(betasq);
+     rtemsq = std::sqrt(betasq);
 
      /* ----------------- initialize lunar solar terms --------------- */
      peo    = 0.0;
@@ -466,9 +467,9 @@ static void dscom
      stem   = sin(xnodce);
      ctem   = cos(xnodce);
      zcosil = 0.91375164 - 0.03568096 * ctem;
-     zsinil = sqrt(1.0 - zcosil * zcosil);
+     zsinil = std::sqrt(1.0 - zcosil * zcosil);
      zsinhl = 0.089683511 * stem / zsinil;
-     zcoshl = sqrt(1.0 - zsinhl * zsinhl);
+     zcoshl = std::sqrt(1.0 - zsinhl * zsinhl);
      gam    = 5.8351514 + 0.0019443680 * day;
      zx     = 0.39785416 * stem / zsinil;
      zy     = zcoshl * ctem + 0.91744867 * zsinhl * stem;
@@ -1210,7 +1211,7 @@ static void initl
      /* ------------- calculate auxillary epoch quantities ---------- */
      eccsq  = ecco * ecco;
      omeosq = 1.0 - eccsq;
-     rteosq = sqrt(omeosq);
+     rteosq = std::sqrt(omeosq);
      cosio  = cos(inclo);
      cosio2 = cosio * cosio;
 
@@ -1703,11 +1704,11 @@ bool sgp4
      )
 {
      double am   , axnl  , aynl , betal ,  cosim , cnod  ,
-         cos2u, coseo1, cosi , cosip ,  cosisq, cossu , cosu,
+	 cos2u, coseo1=0.0, cosi , cosip ,  cosisq, cossu , cosu,
          delm , delomg, em   , emsq  ,  ecose , el2   , eo1 ,
          ep   , esine , argpm, argpp ,  argpdf, pl,     mrt = 0.0,
          mvt  , rdotl , rl   , rvdot ,  rvdotl, sinim ,
-         sin2u, sineo1, sini , sinip ,  sinsu , sinu  ,
+	 sin2u, sineo1=0.0, sini , sinip ,  sinsu , sinu  ,
          snod , su    , t2   , t3    ,  t4    , tem5  , temp,
          temp1, temp2 , tempa, tempe ,  templ , u     , ux  ,
          uy   , uz    , vx   , vy    ,  vz    , inclm , mm  ,
@@ -1914,9 +1915,9 @@ bool sgp4
        else
        {
          rl     = am * (1.0 - ecose);
-         rdotl  = sqrt(am) * esine/rl;
-         rvdotl = sqrt(pl) / rl;
-         betal  = sqrt(1.0 - el2);
+	 rdotl  = std::sqrt(am) * esine/rl;
+	 rvdotl = std::sqrt(pl) / rl;
+	 betal  = std::sqrt(1.0 - el2);
          temp   = esine / (1.0 + betal);
          sinu   = am / rl * (sineo1 - aynl - axnl * temp);
          cosu   = am / rl * (coseo1 - axnl + aynl * temp);
@@ -2090,7 +2091,7 @@ void getgravconst
            case wgs72:
            mu     = 398600.8;            // in km3 / s2
            radiusearthkm = 6378.135;     // km
-           xke    = 60.0 / sqrt(radiusearthkm*radiusearthkm*radiusearthkm/mu);
+	   xke    = 60.0 / std::sqrt(radiusearthkm*radiusearthkm*radiusearthkm/mu);
            tumin  = 1.0 / xke;
            j2     =   0.001082616;
            j3     =  -0.00000253881;
@@ -2101,7 +2102,7 @@ void getgravconst
            // ------------ wgs-84 constants ------------
            mu     = 398600.5;            // in km3 / s2
            radiusearthkm = 6378.137;     // km
-           xke    = 60.0 / sqrt(radiusearthkm*radiusearthkm*radiusearthkm/mu);
+	   xke    = 60.0 / std::sqrt(radiusearthkm*radiusearthkm*radiusearthkm/mu);
            tumin  = 1.0 / xke;
            j2     =   0.00108262998905;
            j3     =  -0.00000253215306;

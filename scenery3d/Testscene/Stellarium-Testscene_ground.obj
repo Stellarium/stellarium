@@ -1,0 +1,66 @@
+mtllib Stellarium-Testscene_ground.mtl
+#######################################
+# Vertex List
+#######################################
+
+# Identifier=./Models/Bodenbelag_Schotter_Indisch
+# Label=Default Model
+# Name=Bodenbelag_Schotter_Indisch
+# Type=Model
+v 12.0000 12.0000 0.0000
+v -12.0000 -12.0000 0.0000
+v -12.0000 12.0000 0.0000
+v 12.0000 -12.0000 0.0000
+
+#######################################
+# End of Vertex List
+#######################################
+
+
+#######################################
+# Normal List
+#######################################
+
+# Identifier=./Models/Bodenbelag_Schotter_Indisch
+# Label=Default Model
+# Name=Bodenbelag_Schotter_Indisch
+# Type=Model
+vn 0.0000 0.0000 -1.0000
+vn 0.0000 0.0000 -1.0000
+vn 0.0000 0.0000 -1.0000
+vn 0.0000 0.0000 -1.0000
+
+#######################################
+# End of Normal List
+#######################################
+
+
+#######################################
+# UV List
+#######################################
+
+# Identifier=./Models/Bodenbelag_Schotter_Indisch
+# Label=Default Model
+# Name=Bodenbelag_Schotter_Indisch
+# Type=Model
+vt -13.1234 12.1234 
+vt 0 -1 
+vt 0 12.1234 
+vt -13.1234 -1 
+
+#######################################
+# End of UV List
+#######################################
+
+
+# Identifier=./Models/Bodenbelag_Schotter_Indisch
+# Label=Default Model
+# Name=Bodenbelag_Schotter_Indisch
+# Type=Model
+g Bodenbelag_Schotter_Indisch
+usemtl Bodenbelag_Schotter_Indisch
+# nbv = 1-4
+# nbvn = 1-4
+# nbvt = 1-4
+f 1/1/1 2/2/2 3/3/3 
+f 2/2/2 1/1/1 4/4/4 

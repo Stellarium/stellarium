@@ -217,7 +217,8 @@ public slots:
 	//! - natural : azimuthal mount, atmosphere, landscape,
 	//!   no lines, labels or markers
 	//! - starchart : equatorial mount, constellation lines,
-	//!   no landscape, atmoshere etc.  labels & markers on.
+	//!   no landscape, atmosphere etc.  labels & markers on.
+	//! - deepspace : like starchart, but no planets, no eq.grid, no markers, no lines.
 	//! @param state the name of a preset state.
 	void clear(const QString& state="natural");
 
@@ -309,6 +310,8 @@ public slots:
 	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
 	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
+	//! - local-sidereal-time : local sidereal time on the planet in hours (since 0.13.3)
+	//! - local-sidereal-time-hms : local sidereal time on the planet in hours in HMS format (since 0.13.3)
 	QVariantMap getObserverLocationInfo();
 
 	//! Save a screenshot.
@@ -383,6 +386,10 @@ public slots:
 	//! Set the disk viewport
 	//! @param b if true, sets the disk viewport on, else sets it off
 	void setDiskViewport(bool b);
+
+	//! Set the viewport distortion effect
+	//! @param b if true, sets the spherical mirror distortion effect for viewport on, else sets it off
+	void setSphericMirror(bool b);
 
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs

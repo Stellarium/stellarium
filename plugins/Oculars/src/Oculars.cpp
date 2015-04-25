@@ -110,6 +110,7 @@ Oculars::Oculars():
 	flagEclipticLine(false),
 	flagEclipticJ2000Grid(false),
 	flagMeridianLine(false),
+	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
 	flagAdaptation(false),
@@ -573,7 +574,7 @@ void Oculars::init()
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 		
-		guiPanelEnabled = settings->value("enable_control_panel", false).toBool();
+		guiPanelEnabled = settings->value("enable_control_panel", true).toBool();
 		enableGuiPanel(guiPanelEnabled);
 
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
@@ -1445,7 +1446,7 @@ void Oculars::paintCCDBounds()
 					double cx, cy;
 					QString cxt, cyt;
 					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
-					bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+					bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 					if (withDecimalDegree)
 					{
 						cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
@@ -1555,9 +1556,18 @@ void Oculars::paintText(const StelCore* core)
 	if(selectedCCDIndex != -1) {
 		ccd = ccds[selectedCCDIndex];
 	}
-	Ocular *ocular = oculars[selectedOcularIndex];
-	Telescope *telescope = telescopes[selectedTelescopeIndex];
-	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
+	Ocular *ocular = NULL;
+	if(selectedOcularIndex !=-1) {
+		ocular = oculars[selectedOcularIndex];
+	}
+	Telescope *telescope = NULL;
+	if(selectedTelescopeIndex != -1) {
+		telescope = telescopes[selectedTelescopeIndex];
+	}
+	Lens *lens = NULL;
+	if(selectedLensIndex != -1) {
+		lens = lense[selectedLensIndex];
+	}
 
 	// set up the color and the GL state
 	painter.setColor(0.8, 0.48, 0.0, 1);
@@ -1580,7 +1590,9 @@ void Oculars::paintText(const StelCore* core)
 	// The Ocular
 	if (flagShowOculars) {
 		QString ocularNumberLabel;
-		QString name = ocular->name();
+		QString name = "";
+		if (ocular!=NULL)
+			name = ocular->name();
 		if (name.isEmpty())
 		{
 			ocularNumberLabel = QString(q_("Ocular #%1"))
@@ -1637,7 +1649,9 @@ void Oculars::paintText(const StelCore* core)
 		
 			// The telescope
 			QString telescopeNumberLabel;
-			QString telescopeName = telescope->name();
+			QString telescopeName = "";
+			if (telescope!=NULL)
+				name = telescope->name();
 			if (telescopeName.isEmpty())
 			{
 				telescopeNumberLabel = QString(q_("Telescope #%1"))
@@ -1672,11 +1686,17 @@ void Oculars::paintText(const StelCore* core)
 	// The CCD
 	if (flagShowCCD) {
 		QString ccdSensorLabel, ccdInfoLabel;
-		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+		QString name = "";
+		double fovX = 0.0;
+		double fovY = 0.0;
+		if (ccd!=NULL)
+		{
+			fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+			fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+			name = ccd->name();
+		}
 		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
-		QString name = ccd->name();
 		if (name.isEmpty())
 		{
 			ccdSensorLabel = QString(q_("Sensor #%1")).arg(selectedCCDIndex);
@@ -1782,6 +1802,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEclipticLine(flagEclipticLine);
 	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
+	gridManager->setFlagLongitudeLine(flagLongitudeLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
@@ -1825,6 +1846,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
+			flagLongitudeLine = gridManager->getFlagLongitudeLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
 
@@ -1865,6 +1887,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
+	gridManager->setFlagLongitudeLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
