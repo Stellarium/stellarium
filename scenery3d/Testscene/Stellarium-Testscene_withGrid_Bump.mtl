@@ -1,0 +1,45 @@
+# Identifier=./Models/Stein_Mauerwerk_mehrfarbig
+# Label=Default Model
+# Name=Stein_Mauerwerk_mehrfarbig (Kacheln)
+# Type=Model
+newmtl Stein_Mauerwerk_mehrfarbig
+map_Kd TX_Stellarium-Testscene_withGrid\Stein_Mauerwerk_mehrfarbig.png
+Kd 0.9 0.9 0.9
+Ka 0.1 0.1 0.1
+Ks 0.8 0.8 0.2
+illum 2
+map_bump TX_Stellarium-Testscene_withGrid\Stein_Mauerwerk_mehrfarbig_bump.png
+map_height TX_Stellarium-Testscene_withGrid\Stein_Mauerwerk_mehrfarbig_height.png
+Ns 10
+Ni 3
+
+
+# Identifier=./Models/Square100m
+# Label=Default Model
+# Name=Square100m
+# Type=Model
+newmtl Square100m
+Kd 0.8 0.8 0.8
+#Ka 0.3 0.3 0.3
+#Ks 0.5 0.1 0.9
+map_Kd TX_Stellarium-Testscene_withGrid\Square100m.png
+#map_bump TX_Stellarium-Testscene_withGrid\Square100m_bump.png
+Ns 128
+Ni 3
+
+
+# Identifier=./Models/Stein_Platte_Quaderstein
+# Label=Default Model
+# Name=Stein_Platte_Quaderstein (Ziegelkugeln)
+# Type=Model
+newmtl Stein_Platte_Quaderstein
+Kd 0.2 0.9 0.5
+Ka 0.5 0.2 0.2
+Ks 0.7 0.0 0.0
+#d 0.85
+map_Kd TX_Stellarium-Testscene_withGrid\Stein_Platte_Quaderstein.png
+#map_bump TX_Stellarium-Testscene_withGrid\Stein_Platte_Quaderstein_bump.png
+Ns 34
+Ni 3
+
+

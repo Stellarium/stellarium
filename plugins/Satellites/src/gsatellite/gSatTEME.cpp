@@ -135,14 +135,14 @@ gVector gSatTEME::computeSubPoint(gTime ai_Time)
 	resultVector[ LONGITUDE] = fmod((theta - ai_Time.toThetaGMST()), K2PI);  //radians
 
 
-	r = sqrt(Sqr(m_Position[0]) + Sqr(m_Position[1]));
+	r = std::sqrt(Sqr(m_Position[0]) + Sqr(m_Position[1]));
 	e2 = __f*(2 - __f);
 	resultVector[ LATITUDE] = AcTan(m_Position[2],r); /*radians*/
 
 	do
 	{
 		phi = resultVector[ LATITUDE];
-		c = 1/sqrt(1 - e2*Sqr(sin(phi)));
+		c = 1/std::sqrt(1 - e2*Sqr(sin(phi)));
 		resultVector[ LATITUDE] = AcTan(m_Position[2] + KEARTHRADIUS*c*e2*sin(phi),r);
 	}
 	while(fabs(resultVector[ LATITUDE] - phi) >= 1E-10);

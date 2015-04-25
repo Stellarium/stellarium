@@ -104,6 +104,13 @@ SolarSystem::~SolarSystem()
 	{
 		p->satellites.clear();
 	}
+
+	//delete comet textures created in loadPlanets
+	Comet::comaTexture.clear();
+	Comet::tailTexture.clear();
+
+	//deinit of SolarSystem is NOT called at app end automatically
+	deinit();
 }
 
 /*************************************************************************
@@ -172,7 +179,8 @@ void SolarSystem::init()
 
 void SolarSystem::deinit()
 {
-	Planet::deinitShader();
+	if(Planet::planetShaderProgram)
+		Planet::deinitShader();
 }
 
 void SolarSystem::recreateTrails()
@@ -525,10 +533,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					meanMotion = (eccentricity == 1.0)
-								? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
+								? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)
 								: (semi_major_axis > 0.0)
-								? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-								: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+								? 0.01720209895 / (semi_major_axis*std::sqrt(semi_major_axis))
+								: 0.01720209895 / (-semi_major_axis*std::sqrt(-semi_major_axis));
 					period = 2.0*M_PI/meanMotion;
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -641,8 +649,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						//			? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
 						//			: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
 						meanMotion = (eccentricity == 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
-									: 0.01720209895 / (fabs(semi_major_axis)*sqrt(fabs(semi_major_axis)));
+									? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
+									: 0.01720209895 / (fabs(semi_major_axis)*std::sqrt(fabs(semi_major_axis)));
 					}
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -821,7 +829,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
-		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "sdo" || type == "oco") && !englishName.contains("Pluto"))
+		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/lighting").toBool(),
@@ -908,8 +916,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 
-			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
-
+			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
+			const double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
+			if (eccentricity<1 && pericenterDistance>0)
+			{
+				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
+			}
 		}
 		else
 		{
@@ -1001,11 +1013,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// special case: load earth shadow texture
 	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
 
-	// GZ: Also comets just have static textures.
+	// Also comets just have static textures.
 	Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
+	//tail textures. We use paraboloid tail bodies, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
 	Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: I think we need only one texture for the tails.
 
 	return true;
 }
@@ -1604,12 +1615,22 @@ void SolarSystem::reloadPlanets()
 	bool flagOrbits = getFlagOrbits();
 	bool flagNative = getFlagNativeNames();
 	bool flagTrans = getFlagTranslatedNames();
-	
+	bool hasSelection = false;
+
 	// Save observer location (fix for LP bug # 969211)
 	// TODO: This can probably be done better with a better understanding of StelObserver --BM
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = core->getCurrentLocation();
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
 
+	// Whether any planet are selected? Save the current selection...
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Planet");
+	if (!selectedObject.isEmpty())
+	{
+		// ... unselect current planet.
+		hasSelection = true;
+		objMgr->unSelect();
+	}
 	// Unload all Solar System objects
 	selected.clear();//Release the selected one
 	foreach (Orbit* orb, orbits)
@@ -1653,6 +1674,12 @@ void SolarSystem::reloadPlanets()
 	setFlagOrbits(flagOrbits);
 	setFlagNativeNames(flagNative);
 	setFlagTranslatedNames(flagTrans);
+
+	if (hasSelection)
+	{
+		// Restore selection...
+		objMgr->setSelectedObject(selectedObject);
+	}
 
 	// Restore translations
 	updateI18n();

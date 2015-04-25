@@ -95,10 +95,28 @@ class Translations
 		N_("Irregular galaxies");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Clusters associated with nebulosity");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("HII regions");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Reflection nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("H-α emission regions");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Caldwell Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Barnard Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Sharpless Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Van den Bergh Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Rodgers, Campbell, and Whiteoak");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Collinder Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Melotte Catalogue");
 		
 		// =====================================================================
 		// Constellation cultures
@@ -122,6 +140,7 @@ class Translations
 		N_("Sami");
 		// TRANSLATORS: Name of the sky culture
 		N_("Siberian");
+		N_("Tukano");
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
@@ -159,6 +178,12 @@ class Translations
 		// TRANSLATORS: Name of landscape
 		N_("Zero Horizon");
 
+		// =====================================================================
+		// 3D landscapes (scenes) names
+		// TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
+		N_("Vienna Sterngarten");
+		// TRANSLATORS: Name of 3D scene
+		N_("Testscene")
 		
 		// =====================================================================
 		// Script names

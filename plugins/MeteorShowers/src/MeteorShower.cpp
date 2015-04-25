@@ -27,7 +27,7 @@
 #include "StelUtils.hpp"
 
 StelTextureSP MeteorShower::radiantTexture;
-float MeteorShower::showLabels = true;
+bool MeteorShower::showLabels = true;
 bool MeteorShower::radiantMarkerEnabled = true;
 bool MeteorShower::showActiveRadiantsOnly = true;
 
@@ -91,6 +91,8 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	// that's to avoid crashes by trying select a nonexistent object
 	StelPainter painter(StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000));
 	draw(painter);
+
+	qsrand(QDateTime::currentMSecsSinceEpoch());
 
 	initialized = true;
 }
@@ -437,7 +439,7 @@ void MeteorShower::draw(StelPainter &painter)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	qreal r, g, b;
-	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
+	float alpha = 0.85f + ((double) qrand() / (RAND_MAX))/10;
 	switch(status)
 	{
 		case ACTIVE_REAL: //Active, real data
@@ -456,7 +458,7 @@ void MeteorShower::draw(StelPainter &painter)
 	if (MeteorShower::radiantMarkerEnabled && painter.getProjector()->projectCheck(XYZ, win))
 	{
 		MeteorShower::radiantTexture->bind();
-		painter.drawSprite2dMode(XY[0], XY[1], 10);
+		painter.drawSprite2dMode(XY[0], XY[1], 45);
 
 		if (MeteorShower::showLabels)
 		{

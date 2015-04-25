@@ -63,7 +63,7 @@ typedef enum
 typedef struct elsetrec
 {
   long int  satnum;
-  int       epochyr, epochtynumrev;
+  int       epochyr; //, epochtynumrev;
   int       error;
   char      operationmode;
   char      init, method;
@@ -86,7 +86,7 @@ typedef struct elsetrec
          xl4    , xlamo  , zmol   , zmos     , atime  , xli     , xni;
 
   double a      , altp   , alta   , epochdays, jdsatepoch       , nddot , ndot  ,
-         bstar  , rcse   , inclo  , nodeo    , ecco             , argpo , mo    ,
+	 bstar  , /*rcse   ,*/ inclo  , nodeo    , ecco             , argpo , mo    ,
          no;
 } elsetrec;
 

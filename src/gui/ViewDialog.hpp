@@ -82,6 +82,9 @@ private:
 	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
+	//! Make sure that no tabs icons are outside of the viewport.
+	//! @todo Limit the width to the width of the screen *available to the window*.
+	void updateTabBarListWidgetWidth();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
