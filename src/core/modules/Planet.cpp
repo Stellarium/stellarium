@@ -152,6 +152,7 @@ void Planet::init()
 	vMagAlgorithmMap.insert(Planet::Planesas,	"planesas");
 	vMagAlgorithmMap.insert(Planet::Mueller,	"mueller");
 	vMagAlgorithmMap.insert(Planet::Harris,		"harris");
+	vMagAlgorithmMap.insert(Planet::Generic,	"generic"),
 	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
 }
 
@@ -627,11 +628,40 @@ double Planet::getSiderealTime(double jd) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-// TODO: This block need rewrite
 	if (englishName=="Jupiter")
 	{
-		// use semi-empirical coefficient for GRS drift
-		return remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172);
+		if( re.offset >= 0.0 )
+		{
+			// use semi-empirical coefficient for GRS drift
+			// qDebug() << "Jupiter: offset = " << re.offset << " --> rotation = " << (remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172));
+			return remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172);
+		}
+		else
+		{
+			// http://www.projectpluto.com/grs_form.htm
+			// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
+			const double rad  = M_PI/180.;
+			double jup_mean = (jd - 2455636.938) * 360. / 4332.89709;
+			double eqn_center = 5.55 * sin( rad*jup_mean);
+			double angle = (jd - 2451870.628) * 360. / 398.884 - eqn_center;
+			//double correction = 11 * sin( rad*angle) + 5 * cos( rad*angle)- 1.25 * cos( rad*jup_mean) - eqn_center; // original correction
+			double correction = 25.8 + 11 * sin( rad*angle) - 2.5 * cos( rad*jup_mean) - eqn_center; // light speed correction not used because in stellarium the jd is manipulated for that
+			double cm2=181.62 + 870.1869147 * jd + correction;
+			cm2=cm2 - 360.0*(int)(cm2/360.);
+			// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
+			// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
+			// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
+			double longitudeGRS=216+1.25*( jd - 2456908)/30;
+			// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
+			return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
+			// To verify:
+			// GRS at 2015-02-26 23:07 UT on picture at https://maximusphotography.files.wordpress.com/2015/03/jupiter-febr-26-2015.jpg
+			//        2014-02-25 19:03 UT    http://www.damianpeach.com/jup1314/2014_02_25rgb0305.jpg
+			//	  2013-05-01 10:29 UT    http://astro.christone.net/jupiter/jupiter2012/jupiter20130501.jpg
+			//        2012-10-26 00:12 UT at http://www.lunar-captures.com//jupiter2012_files/121026_JupiterGRS_Tar.jpg
+			//	  2011-08-28 02:29 UT at http://www.damianpeach.com/jup1112/2011_08_28rgb.jpg
+			// stellarium 2h too early: 2010-09-21 23:37 UT http://www.digitalsky.org.uk/Jupiter/2010-09-21_23-37-30_R-G-B_800.jpg
+		}
 	}
 	else
 		return remainder * 360. + re.offset;
@@ -735,7 +765,7 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq)));
+	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq)));
 }
 
 // Get the planet phase for an observer at pos obsPos in heliocentric coordinates (in AU)
@@ -745,7 +775,7 @@ float Planet::getPhase(const Vec3d& obsPos) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
+	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
 	return 0.5f * qAbs(1.f + cos_chi);
 }
 
@@ -794,7 +824,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 			// Compute d = distance from satellite center to border of inner shadow.
 			// d>0 means inside the shadow cone.
-			double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
+			double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/std::sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
 			if (d>=radius)
 			{
 				// The satellite is totally inside the inner shadow.
@@ -822,7 +852,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
 		const double phaseDeg=phase*180./M_PI;
-		const double d = 5. * log10(sqrt(observerPlanetRq*planetRq));
+		const double d = 5. * log10(std::sqrt(observerPlanetRq*planetRq));
 
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are two solutions:
@@ -861,7 +891,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 					double rings = -2.6*sinx + 1.25*sinx*sinx;
 					return -8.88 + d + 0.044*phaseDeg + rings;
@@ -900,7 +930,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
 					return -8.68 + d + 0.044*phaseDeg + rings;
@@ -909,6 +939,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return -6.85 + d;
 				if (englishName=="Neptune")
 					return -7.05 + d;
+				// Original formulae doesn't have equeation for Pluto
 				if (englishName=="Pluto")
 					return -1.0 + d;
 
@@ -937,7 +968,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
 					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
 					return -8.88 + d + 0.044*phaseDeg + rings;
@@ -949,6 +980,11 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Pluto")
 					return -1.00f + d;
 
+				break;
+			}
+			case Generic:
+			{
+				// Calculation visual magnitude from phase angle and albedo of the planet
 				break;
 			}
 		}
@@ -986,7 +1022,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// Problematic: Early-out here of course disables the wanted hint circles for dim asteroids.
 	// The line makes hints for asteroids 5 magnitudes below sky limiting magnitude visible.
 	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
-	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
+	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType>=Planet::isAsteroid)
 	{
 		return;
 	}
@@ -1180,8 +1216,8 @@ void Planet::initShader()
 		"        {\n"
 		"            if (shadowCount>i)\n"
 		"            {\n"
-		"                highp vec3 satellitePosition = shadowData[0].xyz;\n"
-		"                highp float satelliteRadius = shadowData[0].w;\n"
+		"                highp vec3 satellitePosition = shadowData[i].xyz;\n"
+		"                highp float satelliteRadius = shadowData[i].w;\n"
 		"                highp float l = length(satellitePosition - P);\n"
 		"                highp float r = asin(satelliteRadius / l);\n"
 		"                highp float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));\n"
@@ -1227,26 +1263,29 @@ void Planet::initShader()
 		"    }\n"
 		"\n"
 		"#ifdef IS_MOON\n"
-		"    highp vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
+		"    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
 		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
 		"    // normal now contains the real surface normal taking normal map into account\n"
 		"    // Use an Oren-Nayar model for rough surfaces\n"
 		"    // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar\n"
-		"    highp float cosAngleLightNormal = dot(normal, lightDirection);\n"
-		"    highp float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
+		// GZ next 2 don't require highp IMHO
+		"    mediump float cosAngleLightNormal = dot(normal, lightDirection);\n"
+		"    mediump float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
 		"    mediump float angleLightNormal = acos(cosAngleLightNormal);\n"
 		"    mediump float angleEyeNormal = acos(cosAngleEyeNormal);\n"
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		"    mediump float roughness = 1.0;\n"
-		"    mediump float roughnessSquared = roughness * roughness;\n"
-		"    mediump float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
-		"    mediump float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
-		"    mediump float C = sin(alpha) * tan(beta);\n"
+		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0
+		"    lowp float roughness = 0.8;\n"
+		"    lowp float roughnessSquared = roughness * roughness;\n"
+		"    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
+		"    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
+		"    lowp float C = sin(alpha) * tan(beta);\n"
+		// GZ final number was 2, but this causes overly bright moon.
 		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
 		"#endif\n"
-		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 2.0);\n"
+		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
 		"    {\n"
@@ -1608,11 +1647,15 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
 	
-	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
-	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform()->forward(eyePos);
+	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();	
+	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
+	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
+	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(eyePos);
+	//qDebug() << "-->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
 	projector->getModelViewTransform()->backward(eyePos);
 	eyePos.normalize();
-	
+	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
+
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
 	GL(shader->setUniformValue(shaderVars->eyeDirection, eyePos[0], eyePos[1], eyePos[2]));

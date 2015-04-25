@@ -35,7 +35,6 @@
 #include <QSettings>
 
 StelLocationMgr::StelLocationMgr()
-	: networkReply(NULL)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
@@ -344,8 +343,8 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 // lookup location from IP address.
 void StelLocationMgr::locationFromIP()
 {
-	QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );
-	networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
+	QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );	
+	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
 }
 
@@ -354,6 +353,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 {
 	StelLocation location;
 	StelCore *core=StelApp::getInstance().getCore();
+	QNetworkReply* networkReply = qobject_cast<QNetworkReply*>(sender());
+	if (!networkReply)
+	    return;
 	if (networkReply->error() == QNetworkReply::NoError) {
 		//success
 		// Tested with and without working network connection.

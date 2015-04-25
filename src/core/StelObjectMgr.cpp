@@ -154,7 +154,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	foreach (const StelObjectP& obj, candidates)
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
-		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
+		float distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
 		float priority =  obj->getSelectPriority(core);
 		// qDebug() << (*iter).getShortInfoString(core) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
@@ -228,7 +228,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
 }
 
 /*************************************************************************
- Return the list objects of type "withType" which was recently selected by
+ Return the list objects of type "type" which was recently selected by
   the user
 *************************************************************************/
 QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
@@ -352,8 +352,17 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:5"] = "Dark nebulae";
 			result["NebulaMgr:6"] = "Irregular galaxies";
 			result["NebulaMgr:7"] = "Clusters associated with nebulosity";
-			result["NebulaMgr:10"] = "Messier Catalogue";
-			result["NebulaMgr:11"] = "Caldwell Catalogue";
+			result["NebulaMgr:9"] = "HII regions";
+			result["NebulaMgr:10"] = "Reflection nebulae";
+			result["NebulaMgr:11"] = "H-α emission regions";
+			result["NebulaMgr:100"] = "Messier Catalogue";
+			result["NebulaMgr:101"] = "Caldwell Catalogue";
+			result["NebulaMgr:102"] = "Barnard Catalogue";
+			result["NebulaMgr:103"] = "Sharpless Catalogue";
+			result["NebulaMgr:104"] = "Van den Bergh Catalogue";
+			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
+			result["NebulaMgr:106"] = "Collinder Catalogue";
+			result["NebulaMgr:107"] = "Melotte Catalogue";
 		}
 	}
 	return result;

@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2015 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -140,6 +141,11 @@ public slots:
 	//! Get flag for displaying Nebulae Hints.
 	bool getFlagHints(void) const {return hintsFader;}
 
+	//! Set whether hints (symbols) should be scaled according to nebula size.
+	void setHintsProportional(const bool proportional);
+	//! Get whether hints (symbols) are scaled according to nebula size.
+	bool getHintsProportional(void) const;
+
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
@@ -205,9 +211,23 @@ private:
 	NebulaP searchNGC(unsigned int NGC);
 	NebulaP searchIC(unsigned int IC);
 	NebulaP searchC(unsigned int C);
+	NebulaP searchB(unsigned int B);
+	NebulaP searchSh2(unsigned int Sh2);
+	NebulaP searchVdB(unsigned int VdB);
+	NebulaP searchRCW(unsigned int RCW);
+	NebulaP searchLDN(unsigned int LDN);
+	NebulaP searchLBN(unsigned int LBN);
+	NebulaP searchCr(unsigned int Cr);
+	NebulaP searchMel(unsigned int Mel);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
+	bool loadBarnard(const QString& filename);
+	bool loadSharpless(const QString& filename);
+	bool loadVandenBergh(const QString& filename);
+	bool loadRCW(const QString& filename);
+	bool loadLDN(const QString& filename);
+	bool loadLBN(const QString& filename);
 
 	QVector<NebulaP> nebArray;		// The nebulas list
 	QHash<unsigned int, NebulaP> ngcIndex;

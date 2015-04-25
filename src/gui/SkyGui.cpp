@@ -121,8 +121,11 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	// Construct the Windows buttons bar
 	winBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
-	buttonBar = new BottomStelBar(this, QPixmap(":/graphicGui/btbg-left.png"), QPixmap(":/graphicGui/btbg-right.png"),
-																QPixmap(":/graphicGui/btbg-middle.png"), QPixmap(":/graphicGui/btbg-single.png"));
+	buttonBar = new BottomStelBar(this,
+				      QPixmap(":/graphicGui/btbg-left.png"),
+				      QPixmap(":/graphicGui/btbg-right.png"),
+				      QPixmap(":/graphicGui/btbg-middle.png"),
+				      QPixmap(":/graphicGui/btbg-single.png"));
 	infoPanel = new InfoPanel(this);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
@@ -192,7 +195,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));		
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -203,7 +206,7 @@ void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
 
 void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 {
-	const int hh = geometry().height();
+	const int hh = getSkyGuiHeight();
 
 	double x = event->pos().x();
 	double y = event->pos().y();

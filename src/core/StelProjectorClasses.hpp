@@ -221,7 +221,7 @@ protected:
 		static const SphericalCap cap2(-1,0,0);
 		static const SphericalCap cap3(0,0,-1);
 		SphericalCap cap(capN, capD);
-		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap2);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
 	}
 };
 

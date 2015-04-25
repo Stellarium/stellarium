@@ -193,8 +193,8 @@ QVariantMap Satellite::getMap(void)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
-		if (!c.modulation.isEmpty() && c.modulation != "") commMap["modulation"] = c.modulation;
-		if (!c.description.isEmpty() && c.description != "") commMap["description"] = c.description;
+		if (!c.modulation.isEmpty()) commMap["modulation"] = c.modulation;
+		if (!c.description.isEmpty()) commMap["description"] = c.description;
 		commList << commMap;
 	}
 	map["comms"] = commList;
@@ -569,7 +569,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (mag <= sd->getLimitMagnitude())
 			{
 				sd->computeRCMag(mag, &rcMag);
-				sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, true);
+				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, true);
 				painter.setColor(color[0], color[1], color[2], 1);
 
 				if (Satellite::showLabels)

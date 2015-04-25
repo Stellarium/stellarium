@@ -135,7 +135,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -334,13 +334,49 @@
        <bool>true</bool>
       </property>
       <attribute name="title">
-       <string>Radiants</string>
+       <string>Radiant</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
+        <widget class="QGroupBox" name="displayRadiant">
+         <property name="title">
+          <string>Show radiant marker</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="radiantLabels">
+            <property name="text">
+             <string>Show radiant labels</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="activeRadiantsOnly">
+            <property name="text">
+             <string>Show active radiants only</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="fontSizeSpinBox">
+            <property name="toolTip">
+             <string>Label font size (pixels)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Color of radiants markers</string>
+          <string>Set radiant color</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
           <property name="leftMargin">
@@ -362,12 +398,15 @@
            <widget class="QGroupBox" name="activeGenericData">
             <property name="minimumSize">
              <size>
-              <width>86</width>
-              <height>0</height>
+              <width>130</width>
+              <height>100</height>
              </size>
             </property>
             <property name="toolTip">
              <string>Active Radiant - Generic Data</string>
+            </property>
+            <property name="title">
+             <string>Generic</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -388,64 +427,23 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="changeColorARG">
-               <property name="toolTip">
-                <string>Change Color</string>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
-              <widget class="QFrame" name="frame_4">
+              <widget class="QPushButton" name="changeColorARG">
                <property name="minimumSize">
                 <size>
-                 <width>64</width>
-                 <height>64</height>
+                 <width>0</width>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>64</width>
-                 <height>64</height>
+                 <width>100</width>
+                 <height>16777215</height>
                 </size>
                </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
+               <property name="text">
+                <string notr="true"/>
                </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <widget class="QLabel" name="textureARG">
-                <property name="geometry">
-                 <rect>
-                  <x>0</x>
-                  <y>0</y>
-                  <width>64</width>
-                  <height>64</height>
-                 </rect>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
               </widget>
              </item>
             </layout>
@@ -455,12 +453,15 @@
            <widget class="QGroupBox" name="inactive">
             <property name="minimumSize">
              <size>
-              <width>86</width>
-              <height>0</height>
+              <width>130</width>
+              <height>100</height>
              </size>
             </property>
             <property name="toolTip">
              <string>Inactive Radiant</string>
+            </property>
+            <property name="title">
+             <string>Inactive</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -481,64 +482,23 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="changeColorIR">
-               <property name="toolTip">
-                <string>Change Color</string>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
-              <widget class="QFrame" name="frame_5">
+              <widget class="QPushButton" name="changeColorIR">
                <property name="minimumSize">
                 <size>
-                 <width>64</width>
-                 <height>64</height>
+                 <width>0</width>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>64</width>
-                 <height>64</height>
+                 <width>100</width>
+                 <height>16777215</height>
                 </size>
                </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
+               <property name="text">
+                <string notr="true"/>
                </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <widget class="QLabel" name="textureIR">
-                <property name="geometry">
-                 <rect>
-                  <x>0</x>
-                  <y>0</y>
-                  <width>64</width>
-                  <height>64</height>
-                 </rect>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
               </widget>
              </item>
             </layout>
@@ -548,12 +508,15 @@
            <widget class="QGroupBox" name="activeRealData">
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>121</height>
+              <width>130</width>
+              <height>100</height>
              </size>
             </property>
             <property name="toolTip">
              <string>Active Radiant - Real Data</string>
+            </property>
+            <property name="title">
+             <string>Real</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -574,103 +537,26 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="changeColorARR">
-               <property name="toolTip">
-                <string>Change Color</string>
-               </property>
-               <property name="text">
-                <string notr="true">...</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
-              <widget class="QFrame" name="frame_6">
+              <widget class="QPushButton" name="changeColorARR">
                <property name="minimumSize">
                 <size>
-                 <width>64</width>
-                 <height>64</height>
+                 <width>0</width>
+                 <height>30</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>64</width>
-                 <height>64</height>
+                 <width>100</width>
+                 <height>16777215</height>
                 </size>
                </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
+               <property name="text">
+                <string notr="true"/>
                </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <widget class="QLabel" name="textureARR">
-                <property name="geometry">
-                 <rect>
-                  <x>0</x>
-                  <y>0</y>
-                  <width>64</width>
-                  <height>64</height>
-                 </rect>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>64</width>
-                  <height>64</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
               </widget>
              </item>
             </layout>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="displayRadiant">
-         <property name="title">
-          <string>Radiants for meteor showers</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_9">
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="radiantLabels">
-            <property name="text">
-             <string>Show labels of radiants</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="activeRadiantsOnly">
-            <property name="text">
-             <string>Show active radiants only</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="fontSizeSpinBox">
-            <property name="toolTip">
-             <string>Label font size (pixels)</string>
-            </property>
            </widget>
           </item>
          </layout>
