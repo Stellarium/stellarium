@@ -174,6 +174,10 @@ Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_REMOTECONTROL
+Q_IMPORT_PLUGIN(RemoteControlStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 qint64 StelApp::startMSecs = 0;

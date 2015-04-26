@@ -159,7 +159,7 @@ ENDIF()
 SET(STELLARIUM_PLUGINS) # Global list of all the plugins.
 MACRO(ADD_PLUGIN NAME DEFAULT)
   STRING(TOUPPER ${NAME} NAME_UP)
-  SET(USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define wheter the ${NAME} plugin should be created.")
+  SET(USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define whether the ${NAME} plugin should be created.")
   SET(STELLARIUM_PLUGINS ${STELLARIUM_PLUGINS} ${NAME})
 ENDMACRO()
 
@@ -182,6 +182,9 @@ ADD_PLUGIN(Oculars 1)
 ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
+# SOCIS 2015:
+ADD_PLUGIN(RemoteControl 1)
+#ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
