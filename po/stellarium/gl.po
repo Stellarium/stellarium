@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-25 23:45+0600\n"
-"PO-Revision-Date: 2015-03-29 15:27+0000\n"
+"PO-Revision-Date: 2015-04-26 19:43+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-26 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-04-27 05:07+0000\n"
 "X-Generator: Launchpad (build 17430)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -1787,6 +1787,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Moitas persoas fixeron contribucións ao proxecto e o seu traballo fixo "
+"Stellarium mellor (clasificados en orde alfabética): %1."
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2457,7 +2459,7 @@ msgstr "Catálogo Van den Bergh"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
-msgstr ""
+msgstr "O catálogo de Rodgers, Campbell, e Whiteoak"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
@@ -2548,7 +2550,7 @@ msgstr "Siberiano/a"
 
 #: src/translations.h:143
 msgid "Tukano"
-msgstr ""
+msgstr "Tucano"
 
 #: src/translations.h:144
 msgid "Tupi-Guarani"
@@ -2639,12 +2641,12 @@ msgstr "Horizonte Cero"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:184
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:186
 msgid "Testscene"
-msgstr ""
+msgstr "Testscene"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:191
@@ -6137,12 +6139,12 @@ msgstr "gps"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1729
 msgid "glonass"
-msgstr ""
+msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1731
 msgid "galileo"
-msgstr ""
+msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1733
@@ -6152,17 +6154,17 @@ msgstr "iridio"
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1735
 msgid "stations"
-msgstr ""
+msgstr "estacións"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1737
 msgid "education"
-msgstr ""
+msgstr "educación"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1739
 msgid "observatory"
-msgstr ""
+msgstr "observatorio"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1750
@@ -10386,29 +10388,33 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Calculando mapa de colisión..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Finalizando a carga..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"Erro no escenario 3D, non se pode debuxar. Comprobe a saída de depuración "
+"para máis información."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2096
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"O teu hardware non soporta cubemapping, cambia para proxección "
+"\"Perspectiva\"!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "Esta xeometría non está soportada. Volve ao modo '6 Texturas'."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Volve a '6 texturas' por mor dun erro non ÁNGULO"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
