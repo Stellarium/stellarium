@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-25 23:45+0600\n"
-"PO-Revision-Date: 2015-04-26 19:43+0000\n"
+"PO-Revision-Date: 2015-04-27 13:05+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-27 05:07+0000\n"
-"X-Generator: Launchpad (build 17430)\n"
+"X-Launchpad-Export-Date: 2015-04-28 05:09+0000\n"
+"X-Generator: Launchpad (build 17453)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -10435,15 +10435,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Mostrar diálogo de opcións"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Mostrar diálogo de punto e vista"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Sombras de alternancia"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
@@ -10477,52 +10477,56 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:360
 msgid "Could not load scene, please check log for error messages!"
 msgstr ""
+"Non se puido cargar a escena, comproba o arquivo log para ver as mensaxes de "
+"erro!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:364
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "Escena cargada con éxito."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:423
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
+"Non se puido cargar a información da escena, podes ver as mensaxes de erro "
+"no arquivo log."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Non se puido atopar a ID da escena para %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Per-Sombreado do píxel %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "activado"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "desactivado"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "Sombras %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Sombras desactivadas ou non posibles."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "Colisións de superficie %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
@@ -10535,11 +10539,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
-msgstr ""
+msgstr "activado"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "disabled"
-msgstr ""
+msgstr "desactivado"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
@@ -10561,7 +10565,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
 msgid "3D Sceneries"
-msgstr ""
+msgstr "Escenarios 3D"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:924
 msgid ""
@@ -10574,6 +10578,15 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p> Renderizador do primeiro plano 3D. Pasear, atopar e evitar obstáculos no "
+"seu xardín, atopar e demostrar posibles aliñacións astronómicas en templos, "
+"ver sombras sobre reloxos de sol etc </ p> <p> Para moverse, preme as teclas "
+"do cursor Ctrl +. Para elevar a altura dos ollos, usa Ctrl + RePáx / PgDn. A "
+"velocidade de movemento está conectada ao campo de visión (ou sexa, aumentar "
+"o zoom para axustes finos). Podes manter o movemento, liberando Ctrl antes "
+"da tecla do cursor. </ p> <p> O desenvolvemento deste plugin foi en parte "
+"apoiado polo Fondo de Ciencia Austríaco (FWF) ASTROSIM proxecto (P 21208-"
+"G19). Máis: http://astrosim.univie.ac.at/ </ p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -10587,39 +10600,45 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "Usa soamente unha única cascada de sombra no canto de catro."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"Ofrece un aumento de velocidade a cambio de menor calidade da sombra, "
+"especialmente en grandes escenas."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"Determina como se filtran as sombras, aumentando a calidade de arriba abaixo."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS require a calidade sexa BAIXA ou ALTA."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Cálculo aproximado das penumbras da sombra (sombras máis nítidas preto dos "
+"puntos de contacto, e borrosas máis lonxe)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Require sombra de filtrado <b>BAIXA</b> ou <b>ALTA</b> (sen <b>Hardware</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Causa o mellor rendemento"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
@@ -10628,17 +10647,25 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Isto determina o xeito no que a escena é procesada cando Stellarium usa unha "
+"proxección diferente de &quot; Perspectiva&quot;. A escena é sempre "
+"procesada nun cubo, e este cubo é logo deformado segundo a proxección real. "
+"O cubo aplicase ó usar unha imaxe chamada &quot; Cubemap&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 Texturas</b> usa 6 texturas individuais, unha para cada lado do cubo. "
+"Este é o método máis compatible, pero pode ser máis lento cós outros."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Cubemap</b> usa unha única GL_TEXTURE_CUBEMAP. Recommendada para a "
+"maioría de usuarios."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -10646,10 +10673,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Sombreador de xeometría</ b> emprega un recurso das GPU modernas para "
+"presentar os 6 lados do cubo dunha soa vez. Pode ser o método máis rápido, "
+"dependendo da escena e do hardware GPU. Se non está soportado, non se pode "
+"seleccionar."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Calcula as sombras para cada cara do cubo separadamente."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -10657,43 +10688,56 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Se se desactiva, a área sombreada é calculada usando unha proxección en "
+"perspectiva, o que pode facer desaparecer sombras con valores FOV altos, "
+"pero é un pouco máis rápido!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Isto non funciona cando se está a usar o modo de cubo <b>Sombreador de "
+"xeometría</b>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Cando se activa, o Cubemap só se refresca en intervalos de tempo "
+"específicos, en vez de en cada cadro!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
 msgstr ""
+"Aforra enerxía e pode aumentar o rendemento da aplicación subxectiva."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Nótese que o Cubemap sempre  se refresca cando cambia a posición da vista."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Cando se selecciona só a cara que corresponde á túa dirección de "
+"visualización é actualizada en movemento."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Isto acelera a renderización, mais a aparencia quedará &quot;bloqueada&quot; "
+"ata que se deixe de mover."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
-msgstr ""
+msgstr "Isto NON funciona co modo &quot;Sombreador de xeometría&quot;!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
@@ -10732,29 +10776,29 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Cargar/Gardar puntos de vista"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Forza do facho:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Rango do facho:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Luz do facho (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Mostrar grella de coordinadas (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Opcións visuais"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
@@ -10762,11 +10806,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Sombras"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Sombras simples"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
@@ -10774,47 +10818,47 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Tamaño do Cubemap:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Tamaño do Shadoumap:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Cualidade de filtrado:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Baixo"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Baixo + Hardware"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Alto (lento)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Alto + Hardware (lento)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Modo Cubemapping:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Sombras de todo o cubo"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
@@ -10822,57 +10866,58 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Intervalo:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Só actualizar a cara dominante cando se move"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Actualizar tamén a segunda cara máis dominante"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Configuración de cualidade/rendemento"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
-msgstr ""
+msgstr "Vistas gardadas"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:207
 msgid "Load view"
-msgstr ""
+msgstr "Cargar vista"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:208
 msgid "Delete view"
-msgstr ""
+msgstr "Borrar vista"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Add current view"
-msgstr ""
+msgstr "Engadir a vista actual"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
-msgstr ""
+msgstr "Título:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "ArqueoLiñas"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
+"Unha ferramenta para estudos de aliñamentos arqueo-/etnoastronómicos."
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:742
 msgid "Equinox"
-msgstr ""
+msgstr "Equinoccio"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:745
 msgid "Solstice"
-msgstr ""
+msgstr "Solsticio"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:748
 msgid "Crossquarter"
@@ -10888,20 +10933,20 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Paso polo Zénit"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:760
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Paso polo Nadir"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:763
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "Obxecto seleccionado"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
 msgid "error if you can read this"
-msgstr ""
+msgstr "erro se podes ler isto"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
 msgid "Mercury"
@@ -10913,17 +10958,19 @@ msgstr "Venus"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Plugin ArqueoLiñas"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"O plugin ArqueoLiñas mostra as combinacións de arcos de declinación máis "
+"relevantes dos estudos arqueo-/etnoastronómicos."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "Declinacións de equinoccios (ecuador) e de solsticios."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
