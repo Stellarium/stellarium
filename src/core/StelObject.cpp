@@ -110,6 +110,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 	double currentEpoch = core->getCurrentEpoch();
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app);
 	QString cepoch = qc_("on date", "coordinates for current epoch");
 	if (currentEpoch>0 && currentEpoch<9000.)
 	{
@@ -142,7 +145,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_sidereal, ra_sidereal;
 		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosGeometric(core));
 		ra_sidereal = 2.*M_PI-ra_sidereal;
-		if (withAtmosphere)
+		if (withAtmosphere && (alt_app>-3.0*M_PI/180.0)) // Don't show refracted values much below horizon where model is meaningless.
 		{
 			StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
 			ra_sidereal = 2.*M_PI-ra_sidereal;
@@ -162,16 +165,12 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 		if (az > M_PI*2)
 			az -= M_PI*2;
-		if (withAtmosphere)
+		if (withAtmosphere && (alt_app>-3.0*M_PI/180.0)) // Don't show refracted altitude much below horizon where model is meaningless.
 		{
-			StelUtils::rectToSphe(&az,&alt,getAltAzPosApparent(core));
-			az = 3.*M_PI - az;  // N is zero, E is 90 degrees
-			if (az > M_PI*2)
-				az -= M_PI*2;
 			if (withDecimalDegree)
-				res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDecDegStr(az), StelUtils::radToDecDegStr(alt)) + " " + q_("(apparent)") + "<br>";
+				res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDecDegStr(az), StelUtils::radToDecDegStr(alt_app)) + " " + q_("(apparent)") + "<br>";
 			else
-				res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az,true), StelUtils::radToDmsStr(alt,true)) + " " + q_("(apparent)") + "<br>";
+				res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az,true), StelUtils::radToDmsStr(alt_app,true)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
 		{
@@ -236,8 +235,8 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 		StelCore* core = StelApp::getInstance().getCore();
 		if (core->isDay() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
 		{
-			// Let's make info text is more readable when atmosphere enabled at daylight.
-			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_color", "0.0,0.0,0.0").toString());
+			// make info text more readable when atmosphere enabled at daylight.
+			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_text_color", "0.0,0.0,0.0").toString());
 		}
 		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(color)));
 		str.append(QString("</font>"));
