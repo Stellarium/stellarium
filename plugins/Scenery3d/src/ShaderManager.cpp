@@ -25,6 +25,7 @@
 #include <QDir>
 #include <QOpenGLShaderProgram>
 #include <QCryptographicHash>
+#include <QDebug>
 
 ShaderMgr::t_UniformStrings ShaderMgr::uniformStrings;
 ShaderMgr::t_FeatureFlagStrings ShaderMgr::featureFlagsStrings;
