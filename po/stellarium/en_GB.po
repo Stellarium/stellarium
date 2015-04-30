@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-25 23:45+0600\n"
-"PO-Revision-Date: 2015-04-28 20:38+0000\n"
+"PO-Revision-Date: 2015-04-29 11:11+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-29 05:09+0000\n"
+"X-Launchpad-Export-Date: 2015-04-30 05:09+0000\n"
 "X-Generator: Launchpad (build 17453)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -10735,7 +10735,7 @@ msgstr "Torchlight (%1)"
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Show grid coordinates (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
@@ -10747,7 +10747,7 @@ msgstr "Per-Pixel lighting"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Shadows"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
@@ -10815,7 +10815,7 @@ msgstr "Only update dominant face when moving"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Also update second-most dominant face"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
@@ -10839,54 +10839,54 @@ msgstr "Add current view"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
-msgstr ""
+msgstr "Title:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "A tool for archaeo-/ethnoastronomical alignment studies"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:742
 msgid "Equinox"
-msgstr ""
+msgstr "Equinox"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:745
 msgid "Solstice"
-msgstr ""
+msgstr "Solstice"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:748
 msgid "Crossquarter"
-msgstr ""
+msgstr "Crossquarter"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:751
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Major Lunar Standstill"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:754
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Minor Lunar Standstill"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Zenith Passage"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:760
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Nadir Passage"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:763
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "Selected Object"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
 msgid "error if you can read this"
-msgstr ""
+msgstr "error if you can read this"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
 msgid "Mercury"
@@ -10898,55 +10898,59 @@ msgstr "Venus"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "ArchaeoLines Plug-in"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"The ArchaeoLines plugin displays any combination of declination arcs most "
+"relevant to archaeo- or ethnoastronomical studies."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "Declinations of equinoxes (i.e. equator) and the solstices"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"Declinations of the crossquarter days (days right between solstices and "
+"equinoxes)"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Declinations of the Major Lunar Standstills"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Declinations of the Minor Lunar Standstills"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Declination of the Zenith passage"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Declination of the Nadir passage"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "Declination of the currently selected object"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Current declination of the Sun"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Current declination of the Moon"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Current declination of a naked-eye planet"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -10955,126 +10959,130 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"The lunar lines include horizon parallax effects. There are two lines each "
+"drawn, for maximum and minimum distance of the Moon. Note that declination "
+"of the moon at the major standstill can exceed the indicated limits if it is "
+"high in the sky due to parallax effects."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Select colour for equinox line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Select colour for solstice lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Select colour for crossquarter lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Select colour for major standstill lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Select colour for minor standstill lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Select colour for zenith passage line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Select colour for nadir passage line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Select colour for selected object line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Select colour for current Sun line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "Select colour for current Moon line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Select colour for current planet line"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "ArchaeoLines Configuration"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "ArchaeoLines Plug-in Configuration"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "To change colours you may have to leave fullscreen mode!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "Equinox line (Equator)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
-msgstr ""
+msgstr "Solstice Lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Crossquarter Lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Change colour"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Major Lunar Standstill lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Minor Lunar Standstill lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "Declination of Zenith passage"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Declination of Nadir passage"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "Current Sun"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "Current Moon"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Current Planet: None"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Current Planet: Mercury"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Current Planet: Venus"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Current Planet: Mars"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Current Planet: Jupiter"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Current Planet: Saturn"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Equatorial Grid"
