@@ -122,6 +122,8 @@ class Translations
 		// List of stars types
 		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
 		N_("Interesting double stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Interesting variable stars");
 		
 		// =====================================================================
 		// Constellation cultures
