@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-25 23:45+0600\n"
-"PO-Revision-Date: 2015-04-28 06:29+0000\n"
-"Last-Translator: Ivana <ivana.beslic07@gmail.com>\n"
+"PO-Revision-Date: 2015-05-01 11:43+0000\n"
+"Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-29 05:08+0000\n"
-"X-Generator: Launchpad (build 17453)\n"
+"X-Launchpad-Export-Date: 2015-05-02 05:09+0000\n"
+"X-Generator: Launchpad (build 17474)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -384,7 +384,7 @@ msgstr "Apsolutna magnituda: %1"
 #: src/core/modules/Planet.cpp:232
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Укошеност (за датум, за Змељу): %1"
 
 #: src/core/modules/Planet.cpp:244 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:221
@@ -499,7 +499,7 @@ msgstr "Пречник коме (приближна вредност): %1 км"
 #: src/core/modules/Comet.cpp:261
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Дужина гасног репа (процена): %1 милиона километара"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:174 src/translations.h:62
@@ -854,6 +854,9 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Табеле са Такермановим (1962, 1964) листама позиције Сунца, мЕсеца и планета "
+"у интервалима од 5 до 10 дана почевши од 601. пре нове ере и 1649. нове ере. "
+"Исти однос је такође узет у сизиги Голдстиновим табелама."
 
 #: src/core/StelCore.cpp:1546
 #, qt-format
@@ -882,6 +885,10 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Ову полиномијалну једначину 12ог реда ( застарела је и заменили су је Смадел "
+"и Зеч (1988) )  објавили су Л. Д. Смадел и Г. Зеч у чланку <em> "
+"Полиномијалне апроксимације за корекцију делта Т  Е. Т- У. Т. у периоду од "
+"1800- 1975. </em> (%1) као део података које је објавио Броувер (1952)."
 
 #: src/core/StelCore.cpp:1555
 msgid ""
@@ -947,6 +954,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"Формулу је прихватио М. Чапронт- Тузе и Ј. Чапронт у краћој верзији ЕЛП 200-"
+"85 лунарне теорије у њиховој <em>Лунарне Табеле и Програми од 4000. пре нове "
+"ере до 8000. </em>(1991)."
 
 #: src/core/StelCore.cpp:1576
 #, qt-format
@@ -974,6 +984,9 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"Од Ј. Меуса, <em>Астрономски  Алгоритми</em> (2. издање, 1988), је у широкој "
+"употреби.  Табеле за 1620,2000, укључујући и варијације Чапронта, Чапронт-"
+"Тузеа и Франкоа (1997) за датуме који су ван 1620,2000."
 
 #: src/core/StelCore.cpp:1585
 #, qt-format
@@ -997,6 +1010,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"Четврто издање О. Монтенбрука и Т. Флегера <em> Астрономија на личном "
+"рачунару </em> (2000) даје једноставан полиномијални податак 3. реда из "
+"блиске прошлости."
 
 #: src/core/StelCore.cpp:1594
 msgid ""
@@ -1005,6 +1021,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"Е. М. Реинголд и Н. Дершовиц дају овај полиномијални податак у <em> "
+"Календарски прорачуни </em> (3. издање 2007) и у њиховом  <em> Календарско "
+"табелирање </em> (2002). Засновано је на Ј. Меусовом <em> Астрономски "
+"алгоритми</em> (1991)."
 
 #: src/core/StelCore.cpp:1597
 #, qt-format
@@ -1025,6 +1045,10 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Из Дужине дана (ЛОД; као што су одредили Стефенсон и Морисон (%2) ), Виктор "
+"Рејс је извео %1Т формулу користећи симплексну оптимизацију преко косинуса и "
+"корене функције. Ово је засновано на могућем Стефенсоновом периодичном опису "
+"(%2). За више информација погледај %3овде%4"
 
 #: src/core/StelCore.cpp:1603
 #, qt-format
@@ -1057,6 +1081,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Решење С. Ислама, М, Садика и М. С. Курешиа, засновано на Меусовом и "
+"Сименсоновом (2000), је објављено у чланку <em>Грешка у минимизацији "
+"полиномијалне апроксимације делтаТ</em> (%1) и  поново разматрано 2013. од "
+"стране С. Ислама."
 
 #: src/core/StelCore.cpp:1612
 #, qt-format
@@ -1065,6 +1093,9 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
+"Ова полиномијална апроксимација са прецизношћу од 0.6 секунди су М. Калид, "
+"Мариам Султана и Фахем Заиди објавили у <em> Делта Т:Полиномијална "
+"апроксимација за временски период од 1620-2013</em>(%1)."
 
 #: src/core/StelCore.cpp:1615
 #, qt-format
@@ -1499,7 +1530,7 @@ msgstr "Шмадел и Зех"
 
 #: src/gui/ConfigurationDialog.cpp:1237
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Чапронт- Тузе и Чапронт (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1238
 msgid "Stephenson & Morrison (1995)"
@@ -1511,7 +1542,7 @@ msgstr "Стивенсон (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1241
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Меус (1998) (са Чапронтом, Чапронт- Тоузеом и Франком (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1242
 msgid "JPL Horizons"
@@ -1519,7 +1550,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1243
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Меус и Симонс (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1244
 msgid "Montenbruck & Pfleger (2000)"
@@ -1535,7 +1566,7 @@ msgstr "Морисон и Стивенсон (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1248
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Еспенк и Меус (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1249
 msgid "Reijs (2006)"
@@ -1547,11 +1578,11 @@ msgstr "Бањевић (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1251
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Ислам, Садик и Куреши (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1252
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Калид, Султана и Заиди (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1253
 #, qt-format
@@ -1616,6 +1647,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Доле су наведене само опције са додељеним тастерима.  Надаље опције могу "
+"бити приказане помоћу  %1 дугмета."
 
 #: src/gui/HelpDialog.cpp:211
 msgid ""
@@ -1695,7 +1728,7 @@ msgstr "Програмер: %1"
 #: src/gui/HelpDialog.cpp:304
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Непрекидна интеграција: %1"
 
 #: src/gui/HelpDialog.cpp:305
 #, qt-format
@@ -1854,7 +1887,7 @@ msgstr "Сеоско небо"
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:405
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "сеоски/ приградски прелаз"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:407
@@ -1891,7 +1924,7 @@ msgstr "Skraćeno"
 
 #: src/gui/ViewDialog.cpp:454
 msgid "Native"
-msgstr ""
+msgstr "Домородац"
 
 #: src/gui/ViewDialog.cpp:455
 msgid "Translated"
@@ -8621,15 +8654,15 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "Преузми ажуриране податке о екстрасоларним планетама са интернетеа"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Подешавања опција екстрасоларних планета"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "Прикажи све системе са екстрасоларним планетама без назива"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Enable display of distribution for exoplanets"
@@ -8637,7 +8670,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "Прикажи екстрасоларне планете од њиховог откриаћа"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgid "Enable timeline discovery of exoplanets"
@@ -8660,7 +8693,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Информације"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:331
 msgctxt "tab in plugin windows"
@@ -8797,7 +8830,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:197
 msgid "Source is not observable."
-msgstr ""
+msgstr "Није могуће посматрати небеско тело"
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "No Acronychal nor Cosmical rise/set."
@@ -8902,11 +8935,11 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "Објашњење неких параметара"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "Сунчева висина у тренутку сумрака:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid ""
@@ -9016,7 +9049,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:200
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Висина Сунца у тренутку сумрака: %1 степени"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
@@ -9147,7 +9180,7 @@ msgstr "Овај додатак приказује решење временск
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Прикажи решење временског изједначења"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:254
@@ -9232,7 +9265,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
 msgid "Lyrids"
-msgstr ""
+msgstr "Лиридти"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
@@ -9287,7 +9320,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
 msgid "Leonids"
-msgstr ""
+msgstr "Леониди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
@@ -9392,12 +9425,12 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
 msgid "Orionids"
-msgstr ""
+msgstr "Ориониди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
 msgid "Andromedids"
-msgstr ""
+msgstr "Андромедоиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
