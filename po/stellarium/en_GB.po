@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 09:47+0600\n"
-"PO-Revision-Date: 2015-04-23 01:47+0000\n"
+"POT-Creation-Date: 2015-04-25 23:45+0600\n"
+"PO-Revision-Date: 2015-04-29 11:11+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-24 05:10+0000\n"
-"X-Generator: Launchpad (build 17430)\n"
+"X-Launchpad-Export-Date: 2015-04-30 05:09+0000\n"
+"X-Generator: Launchpad (build 17453)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -1275,28 +1275,29 @@ msgstr "on date"
 msgid "RA/Dec"
 msgstr "RA/Dec"
 
-#: src/core/StelObject.cpp:149 src/core/StelObject.cpp:153
+#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
+#: src/core/StelObject.cpp:169 src/core/StelObject.cpp:172
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Hour angle/DE: %1/%2"
 
-#: src/core/StelObject.cpp:149 src/core/StelObject.cpp:172
-#: src/core/StelObject.cpp:174
+#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
+#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
 msgid "(apparent)"
 msgstr "(apparent)"
 
-#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:174
-#: src/core/StelObject.cpp:179 src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
+#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
-#: src/core/StelObject.cpp:201 src/core/StelObject.cpp:203
+#: src/core/StelObject.cpp:212 src/core/StelObject.cpp:214
+#: src/core/StelObject.cpp:220 src/core/StelObject.cpp:222
 msgid "Ecliptic longitude/latitude"
 msgstr "Ecliptic longitude/latitude"
 
-#: src/core/StelObject.cpp:211 src/core/StelObject.cpp:213
+#: src/core/StelObject.cpp:230 src/core/StelObject.cpp:232
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Galactic Longitude/Latitude: %1/%2"
@@ -6071,64 +6072,94 @@ msgstr ""
 "The old satellites.json file is no longer compatible - using default file"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1686
+#: plugins/Satellites/src/Satellites.cpp:1711
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1688
+#: plugins/Satellites/src/Satellites.cpp:1713
 msgid "scientific"
 msgstr "scientific"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1690
+#: plugins/Satellites/src/Satellites.cpp:1715
 msgid "communications"
 msgstr "communications"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1692
+#: plugins/Satellites/src/Satellites.cpp:1717
 msgid "navigation"
 msgstr "navigation"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1694
+#: plugins/Satellites/src/Satellites.cpp:1719
 msgid "amateur"
 msgstr "amateur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1696
+#: plugins/Satellites/src/Satellites.cpp:1721
 msgid "weather"
 msgstr "weather"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1698
+#: plugins/Satellites/src/Satellites.cpp:1723
 msgid "geostationary"
 msgstr "geostationary"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1700
+#: plugins/Satellites/src/Satellites.cpp:1725
 msgid "non-operational"
 msgstr "non-operational"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1702
+#: plugins/Satellites/src/Satellites.cpp:1727
 msgid "gps"
 msgstr "GPS"
 
+#. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
+#: plugins/Satellites/src/Satellites.cpp:1729
+msgid "glonass"
+msgstr "Glonass"
+
+#. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
+#: plugins/Satellites/src/Satellites.cpp:1731
+msgid "galileo"
+msgstr "Galileo"
+
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1704
+#: plugins/Satellites/src/Satellites.cpp:1733
 msgid "iridium"
 msgstr "Iridium"
 
+#. TRANSLATORS: Satellite group: Space stations
+#: plugins/Satellites/src/Satellites.cpp:1735
+msgid "stations"
+msgstr "stations"
+
+#. TRANSLATORS: Satellite group: Education satellites
+#: plugins/Satellites/src/Satellites.cpp:1737
+msgid "education"
+msgstr "education"
+
+#. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
+#: plugins/Satellites/src/Satellites.cpp:1739
+msgid "observatory"
+msgstr "observatory"
+
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1715
+#: plugins/Satellites/src/Satellites.cpp:1750
 msgid "The Hubble Space Telescope"
 msgstr "The Hubble Space Telescope"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1717
+#: plugins/Satellites/src/Satellites.cpp:1752
 msgid "The International Space Station"
 msgstr "The International Space Station"
+
+#. TRANSLATORS: Satellite description.
+#: plugins/Satellites/src/Satellites.cpp:1754
+msgid "China's first space station"
+msgstr "China's first space station"
 
 #: plugins/Satellites/src/Satellite.cpp:242
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -10413,7 +10444,7 @@ msgstr "Per-Pixel shading %1."
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "on"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
@@ -10617,237 +10648,245 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
-msgstr ""
+msgstr "Saves energy and may increase subjective application performance."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Note that the cubemap is always re-rendered when the view position changes."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"When checked, only the face that corresponds to your viewing direction is "
+"updated on movement."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"This will speed up rendering, but the appearance will look "
+"&quot;broken&quot; until you stop moving."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
+"This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"This updates a second face, so that the visual appearance seems less "
+"&quot;broken&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
+msgstr "The interval (in timeline seconds) in which no redraw is performed"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
-msgstr ""
+msgstr "6 Textures"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr ""
+msgstr "Cubemap"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Geometry shader"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr ""
+msgstr "Grid coordinates (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "3D Scenery"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Set as default scene"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Load/save viewpoints"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Torch strength:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Torch range:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Torchlight (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Show grid coordinates (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Visual options"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "Per-Pixel lighting"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Shadows"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Simple shadows"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Bump mapping"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Cubemap size:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Shadowmap size:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Filtering Quality:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Low"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Low + Hardware"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "High (slow)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "High + Hardware (slow)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Cubemapping mode:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Full cubemap shadows"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "Lazy cubemap re-rendering"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Interval:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Only update dominant face when moving"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Also update second-most dominant face"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Quality/Performance settings"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
-msgstr ""
+msgstr "Stored views"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:207
 msgid "Load view"
-msgstr ""
+msgstr "Load view"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:208
 msgid "Delete view"
-msgstr ""
+msgstr "Delete view"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Add current view"
-msgstr ""
+msgstr "Add current view"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
-msgstr ""
+msgstr "Title:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "A tool for archaeo-/ethnoastronomical alignment studies"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:742
 msgid "Equinox"
-msgstr ""
+msgstr "Equinox"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:745
 msgid "Solstice"
-msgstr ""
+msgstr "Solstice"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:748
 msgid "Crossquarter"
-msgstr ""
+msgstr "Crossquarter"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:751
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Major Lunar Standstill"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:754
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Minor Lunar Standstill"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Zenith Passage"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:760
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Nadir Passage"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:763
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "Selected Object"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
 msgid "error if you can read this"
-msgstr ""
+msgstr "error if you can read this"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
 msgid "Mercury"
@@ -10859,55 +10898,59 @@ msgstr "Venus"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "ArchaeoLines Plug-in"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"The ArchaeoLines plugin displays any combination of declination arcs most "
+"relevant to archaeo- or ethnoastronomical studies."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "Declinations of equinoxes (i.e. equator) and the solstices"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"Declinations of the crossquarter days (days right between solstices and "
+"equinoxes)"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Declinations of the Major Lunar Standstills"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Declinations of the Minor Lunar Standstills"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Declination of the Zenith passage"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Declination of the Nadir passage"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "Declination of the currently selected object"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Current declination of the Sun"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Current declination of the Moon"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Current declination of a naked-eye planet"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -10916,126 +10959,130 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"The lunar lines include horizon parallax effects. There are two lines each "
+"drawn, for maximum and minimum distance of the Moon. Note that declination "
+"of the moon at the major standstill can exceed the indicated limits if it is "
+"high in the sky due to parallax effects."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Select colour for equinox line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Select colour for solstice lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Select colour for crossquarter lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Select colour for major standstill lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Select colour for minor standstill lines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Select colour for zenith passage line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Select colour for nadir passage line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Select colour for selected object line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Select colour for current Sun line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "Select colour for current Moon line"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Select colour for current planet line"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "ArchaeoLines Configuration"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "ArchaeoLines Plug-in Configuration"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "To change colours you may have to leave fullscreen mode!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "Equinox line (Equator)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
-msgstr ""
+msgstr "Solstice Lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Crossquarter Lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Change colour"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Major Lunar Standstill lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Minor Lunar Standstill lines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "Declination of Zenith passage"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Declination of Nadir passage"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "Current Sun"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "Current Moon"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Current Planet: None"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Current Planet: Mercury"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Current Planet: Venus"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Current Planet: Mars"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Current Planet: Jupiter"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Current Planet: Saturn"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Equatorial Grid"
