@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 09:47+0600\n"
-"PO-Revision-Date: 2015-04-22 18:04+0000\n"
+"POT-Creation-Date: 2015-04-25 23:45+0600\n"
+"PO-Revision-Date: 2015-04-25 19:05+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-23 05:20+0000\n"
+"X-Launchpad-Export-Date: 2015-04-26 05:12+0000\n"
 "X-Generator: Launchpad (build 17430)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -1298,28 +1298,29 @@ msgstr "de la date"
 msgid "RA/Dec"
 msgstr "AD/Déc"
 
-#: src/core/StelObject.cpp:149 src/core/StelObject.cpp:153
+#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
+#: src/core/StelObject.cpp:169 src/core/StelObject.cpp:172
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Angle horaire/dec : %1/%2"
 
-#: src/core/StelObject.cpp:149 src/core/StelObject.cpp:172
-#: src/core/StelObject.cpp:174
+#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
+#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
 msgid "(apparent)"
 msgstr "(apparent)"
 
-#: src/core/StelObject.cpp:172 src/core/StelObject.cpp:174
-#: src/core/StelObject.cpp:179 src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
+#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Haut : %1/%2"
 
-#: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
-#: src/core/StelObject.cpp:201 src/core/StelObject.cpp:203
+#: src/core/StelObject.cpp:212 src/core/StelObject.cpp:214
+#: src/core/StelObject.cpp:220 src/core/StelObject.cpp:222
 msgid "Ecliptic longitude/latitude"
 msgstr "Longitude/latitude écliptique"
 
-#: src/core/StelObject.cpp:211 src/core/StelObject.cpp:213
+#: src/core/StelObject.cpp:230 src/core/StelObject.cpp:232
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Longitude/latitude galactique : %1/%2"
@@ -6140,64 +6141,94 @@ msgstr ""
 "défaut sera utilisé."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1686
+#: plugins/Satellites/src/Satellites.cpp:1711
 msgid "visual"
 msgstr "Visibles"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1688
+#: plugins/Satellites/src/Satellites.cpp:1713
 msgid "scientific"
 msgstr "Scientifiques"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1690
+#: plugins/Satellites/src/Satellites.cpp:1715
 msgid "communications"
 msgstr "Communications"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1692
+#: plugins/Satellites/src/Satellites.cpp:1717
 msgid "navigation"
 msgstr "Navigation"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1694
+#: plugins/Satellites/src/Satellites.cpp:1719
 msgid "amateur"
 msgstr "Radio-amateurs"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1696
+#: plugins/Satellites/src/Satellites.cpp:1721
 msgid "weather"
 msgstr "Météo"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1698
+#: plugins/Satellites/src/Satellites.cpp:1723
 msgid "geostationary"
 msgstr "Géostationnaires"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1700
+#: plugins/Satellites/src/Satellites.cpp:1725
 msgid "non-operational"
 msgstr "Non opérationnels"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1702
+#: plugins/Satellites/src/Satellites.cpp:1727
 msgid "gps"
 msgstr "GPS"
 
+#. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
+#: plugins/Satellites/src/Satellites.cpp:1729
+msgid "glonass"
+msgstr "GLONASS"
+
+#. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
+#: plugins/Satellites/src/Satellites.cpp:1731
+msgid "galileo"
+msgstr "Galileo"
+
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1704
+#: plugins/Satellites/src/Satellites.cpp:1733
 msgid "iridium"
 msgstr "Iridium"
 
+#. TRANSLATORS: Satellite group: Space stations
+#: plugins/Satellites/src/Satellites.cpp:1735
+msgid "stations"
+msgstr "Stations"
+
+#. TRANSLATORS: Satellite group: Education satellites
+#: plugins/Satellites/src/Satellites.cpp:1737
+msgid "education"
+msgstr "Éducation"
+
+#. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
+#: plugins/Satellites/src/Satellites.cpp:1739
+msgid "observatory"
+msgstr "Observatoire"
+
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1715
+#: plugins/Satellites/src/Satellites.cpp:1750
 msgid "The Hubble Space Telescope"
 msgstr "Le télescope spatial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1717
+#: plugins/Satellites/src/Satellites.cpp:1752
 msgid "The International Space Station"
 msgstr "La Station spatiale internationale"
+
+#. TRANSLATORS: Satellite description.
+#: plugins/Satellites/src/Satellites.cpp:1754
+msgid "China's first space station"
+msgstr "Première station spatiale de Chine"
 
 #: plugins/Satellites/src/Satellite.cpp:242
 #: plugins/Satellites/src/Satellite.cpp:246
@@ -6526,23 +6557,23 @@ msgstr "Mettre à jour à partir de fichiers"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
 msgid "[orbit calculation error]"
-msgstr "[erreur de calcul de l'orbite]"
+msgstr "[Erreur de calcul de l'orbite]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
 msgid "[all newly added]"
-msgstr "[satellites récemment ajoutés]"
+msgstr "[Satellites récemment ajoutés]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:666
 msgid "[all not displayed]"
-msgstr "[satellites non affichés]"
+msgstr "[Satellites non affichés]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:667
 msgid "[all displayed]"
-msgstr "[satellites affichés]"
+msgstr "[Satellites affichés]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
 msgid "[all]"
-msgstr "[tout]"
+msgstr "[Tous les satellites]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
