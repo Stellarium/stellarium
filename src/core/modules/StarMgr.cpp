@@ -1340,3 +1340,44 @@ QStringList StarMgr::listAllObjects(bool inEnglish) const
 	}
 	return result;
 }
+
+QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
+{
+	QStringList result;
+	int type = objType.toInt();
+	// Use SkyTranslator for translation star names
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	switch (type)
+	{
+		case 0: // Double stars
+		{
+			QStringList doublestars;
+			doublestars  << "Asterope" << "Atlas" << "77 Tau" << "δ1 Tau" << "V1016 Ori"
+				     << "42 Ori" << "ι Ori" << "ζ Crv" << "Mizar" << "Zubenelgenubi"
+				     << "ω1 Sco" << "λ Sco" << "μ1 Sco" << "ζ1 Sco" << "ε1 Lyr" << "δ1 Lyr"
+				     << "ν1 Sgr" << "ο1 Cyg" << "ο2 Cyg" << "Algedi" << "Albireo" << "Rigel"
+				     << "Almaak" << "ξ Boo" << "Rasalgethi" << "T Dra" << "Kuma" << "70 Oph"
+				     << "Castor" << "ζ Her" << "Keid" << "Mesarthim" << "Porrima" << "Algieba"
+				     << "β Mon" << "Izar" << "44 Boo" << "Acrab" << "Tegmine" << "φ2 Cnc"
+				     << "Regulus" << "Cor Caroli" << "ι Cas" << "ε Ari" << "Markeb" << "γ1 Del"
+				     << "Bessel's Star" << "55 Aqr" << "σ Cas" << "Achird" << "Polaris" << "36 Oph"
+				     << "65 UMa" << "σ2 UMa" << "55 Cnc" << "16 Cyg" << "HIP 28393" << "HIP 84709";
+			if (inEnglish)
+			{
+				result = doublestars;
+			}
+			else
+			{
+				foreach (QString star, doublestars) {
+					result << trans.qtranslate(star);
+				}
+			}
+		}
+		default:
+			// No stars yet?
+			break;
+	}
+
+	result.removeDuplicates();
+	return result;
+}
