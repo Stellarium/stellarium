@@ -477,7 +477,7 @@ void Scenery3dMgr::setEnableScene(const bool enable)
 		else
 		{
 			flagEnabled = false;
-			showMessage("Please load a scene first!");
+			showMessage(q_("Please load a scene first!"));
 			emit enableSceneChanged(false);
 		}
 	}
