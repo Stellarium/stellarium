@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-02 19:38+0600\n"
-"PO-Revision-Date: 2015-05-02 08:01+0000\n"
+"PO-Revision-Date: 2015-05-03 07:39+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-03 05:14+0000\n"
+"X-Launchpad-Export-Date: 2015-05-04 05:09+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -2469,12 +2469,12 @@ msgstr "Melotte katalógus"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Érdekes kettőscsillagok"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Érdekes változócsillagok"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -10383,7 +10383,7 @@ msgstr "%1 árnyékok"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Árnyék nincs vagy kikapcsolva"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
@@ -10559,6 +10559,7 @@ msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Gyorsítja a megjelenítést, de mozgatás közben a kép hibásnak látszik."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
@@ -10750,11 +10751,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:751
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Legnagyobb holdforduló"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:754
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Legkisebb holdforduló"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
 msgid "Zenith Passage"
@@ -10805,11 +10806,11 @@ msgstr "Napéjegyenlőségek és napfordulók közötti napok deklinációi"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr "Jelentősebb holdfázisok deklinációi"
+msgstr "Legnagyobb holdforduló deklinációja"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr "Kisebb holdfázisok deklinációi"
+msgstr "Legkisebb holdforduló deklinációja"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
@@ -10857,11 +10858,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Legnagyobb holdforduló vonalszíne"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Legkisebb holdforduló vonalszíne"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
@@ -10917,11 +10918,11 @@ msgstr "Szín megváltoztatása"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Legnagyobb holdforduló vonalai"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Legkisebb holdforduló vonalai"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
