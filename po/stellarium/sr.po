@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-02 19:38+0600\n"
-"PO-Revision-Date: 2015-05-02 13:58+0000\n"
+"PO-Revision-Date: 2015-05-03 14:49+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-03 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-05-04 05:09+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -1944,7 +1944,7 @@ msgstr "Нормалан темпо"
 
 #: src/gui/ViewDialog.cpp:678
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Стандардна учесталост Орионида"
 
 #: src/gui/ViewDialog.cpp:681
 msgid "Standard Perseids rate"
@@ -1952,7 +1952,7 @@ msgstr "Стандардан Перзидски темпо"
 
 #: src/gui/ViewDialog.cpp:684
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Стандардна учесталост Геминида"
 
 #: src/gui/ViewDialog.cpp:687
 msgid "Exceptional Perseid rate"
@@ -2201,6 +2201,8 @@ msgstr ""
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Немате одговарајућу верзију aOpenGl-a. Молимо вас ажурирајте драјвере или "
+"графички хардвер."
 
 #: src/StelMainView.cpp:604
 msgid ""
@@ -2411,7 +2413,7 @@ msgstr "Barnardov katalog"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "Шарплесов каталог"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
@@ -2426,22 +2428,22 @@ msgstr "Роџеров, Кампбелов и Вајтоаков каталог"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "Колиндеров каталог"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "Мелотов каталог"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Интересантне двојне звезде"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Интересантне непознате звезде"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -2449,7 +2451,7 @@ msgstr "арапски"
 
 #: src/translations.h:131
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "арапски Месец станице"
 
 #: src/translations.h:132
 msgid "Aztec"
@@ -2457,7 +2459,7 @@ msgstr "Астечки"
 
 #: src/translations.h:133
 msgid "Boorong"
-msgstr ""
+msgstr "Бурунг"
 
 #: src/translations.h:134
 msgid "Chinese"
@@ -2473,11 +2475,11 @@ msgstr "Инуитски"
 
 #: src/translations.h:137
 msgid "Indian Vedic"
-msgstr ""
+msgstr "индијски Веди"
 
 #: src/translations.h:138
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "јапански Месец станице"
 
 #: src/translations.h:139
 msgid "Korean"
@@ -2493,7 +2495,7 @@ msgstr "Маорски"
 
 #: src/translations.h:142
 msgid "Mongolian"
-msgstr ""
+msgstr "монголски"
 
 #: src/translations.h:143
 msgid "Navajo"
@@ -2522,7 +2524,7 @@ msgstr "Сибирски"
 
 #: src/translations.h:150
 msgid "Tukano"
-msgstr ""
+msgstr "Тукано"
 
 #: src/translations.h:151
 msgid "Tupi-Guarani"
@@ -2530,7 +2532,7 @@ msgstr "Тупи-Гуарани"
 
 #: src/translations.h:152
 msgid "Tongan"
-msgstr ""
+msgstr "Тонган"
 
 #: src/translations.h:153
 msgid "Western"
@@ -2538,7 +2540,7 @@ msgstr "Западњачки"
 
 #: src/translations.h:154
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "западни (Х.А.Реј)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:160
@@ -2618,7 +2620,7 @@ msgstr ""
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
 msgid "Testscene"
-msgstr ""
+msgstr "Пробна сцена"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
@@ -2835,6 +2837,12 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Фобос обилазећи око Марса с предње стране, врши транзит преко Сунчевог диска "
+"и враћа се ретроградно према Сунцу и поново врши деломични транзит ( видљив "
+"је једино са јужне хемисфере Деимоса ), тада Марс врши потпуно помрачење "
+"Сунца док Фобос у тами пролази између Марса и Деимоса.  Када се Фобос појави "
+"иза Марса, још увек траје помрачење и замагљен је у  Марсовој сенци, "
+"постајући све светлији."
 
 #: src/translations.h:269
 msgid ""
@@ -2889,6 +2897,10 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"Земљина највећа елонгација и транзит од Калиста 2000-3000. Зашто Калисто? Од "
+"4 Галилеова месеца Калисто је једини који се налази ван Јупитеровог "
+"радиационог појаса. Тако да, ако би се људи икада населили на неки Јупитеров "
+"месец, Калисто би био један од њих."
 
 #: src/translations.h:281
 msgid "Andorra"
@@ -4186,6 +4198,7 @@ msgstr "Координатни систем :"
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"Белешка: ова алатка не примењује исправну корекцију рефракције за координате."
 
 #: src/ui_searchDialogGui.h:704
 msgid "Position"
@@ -4194,6 +4207,7 @@ msgstr "Положај"
 #: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Неки објекти могу бити пронађени након активације одређених додатака."
 
 #: src/ui_searchDialogGui.h:708
 msgid "names in English"
@@ -4316,10 +4330,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"Користи податке о светлосном загађењу  локација из базе података и игнориши "
+"подешавања за светлосно загађење која се налазе испод."
 
 #: src/ui_viewDialog.h:1271
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Подаци о светлосном загађењу за локације из базе података"
 
 #: src/ui_viewDialog.h:1272
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
@@ -4367,7 +4383,7 @@ msgstr "Динамичко прилагођавање ока"
 
 #: src/ui_viewDialog.h:1288
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Подешавања за спорадичне метеоре"
 
 #: src/ui_viewDialog.h:1290
 msgid "Shooting Stars"
@@ -4375,12 +4391,12 @@ msgstr "Звезде падалице"
 
 #: src/ui_viewDialog.h:1292
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Часовна зенитна стопа"
 
 #: src/ui_viewDialog.h:1294
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "ЗЧС:"
 
 #: src/ui_viewDialog.h:1297
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4511,11 +4527,11 @@ msgstr "Минимално осветљење:"
 #: src/ui_viewDialog.h:1361
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr ""
+msgstr "Опсег 0-1 ( предео је црн ноћу - предео је потпуно осветљен)"
 
 #: src/ui_viewDialog.h:1364
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "Користи минимално осветљење које може бити назначено за предео."
 
 #: src/ui_viewDialog.h:1366
 msgid "from landscape, if given"
@@ -4535,7 +4551,7 @@ msgstr "Прикажи имена"
 
 #: src/ui_viewDialog.h:1372
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "Обележи ако желиш да имена буду скраћена, у оригиналу или преведена."
 
 #: src/ui_viewDialog.h:1375
 msgid "Use native names for planets from current culture"
@@ -4901,7 +4917,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1165
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Аутоматско омогућавање атмосфере."
 
 #: src/ui_configurationDialog.h:1167
 msgid "Use decimal degrees for coordinates"
@@ -5306,11 +5322,11 @@ msgstr "Прикажи са позиционим углом "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Одредите почетну тачку за ротацију неба"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Одредите крајњу тачку за ротацију неба"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
@@ -5798,11 +5814,11 @@ msgstr "[није изабран тастер]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Укључи / искључи преклапање окулара"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Отвори навигациони падајући мени"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 msgid "Enable only if an object is selected"
@@ -5844,14 +5860,16 @@ msgstr "Контролна табла на екрану"
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
+"Обележите ако желите да вредност поља прегледача буде иста као и при "
+"покретању Стеларијума."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Вратите поље прегледача на почетну вредност"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "Сензор погледа"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -6055,12 +6073,12 @@ msgstr "Галилео"
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1733
 msgid "iridium"
-msgstr ""
+msgstr "иридијум"
 
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1735
 msgid "stations"
-msgstr ""
+msgstr "станице"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1737
@@ -6070,7 +6088,7 @@ msgstr "образовање"
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1739
 msgid "observatory"
-msgstr ""
+msgstr "опсерваторијa"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1750
@@ -6376,7 +6394,7 @@ msgstr "Ажурирано %1/%2 сателита; %3 додато;  %4 обри
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:506
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Ажуриран/о  %1/%2 сателит(а); %3 додато; %4 нестало"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:568
 msgid "[new source]"
@@ -7808,7 +7826,7 @@ msgstr "Укупан број звезда у листи: %1"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
-msgstr ""
+msgstr "Све ове супернове су светлије %1 на врхунцу сјаја."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
@@ -7934,6 +7952,8 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"Можете наћи нову помоћу опције за претраживање тако што ћете унети ознаку "
+"нове или уобичајено име (пример: 'Нова Цигни 1975' или 'В1500 Циг')"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
@@ -7942,7 +7962,7 @@ msgstr "Овај додатак Вам омогућава да видите тр
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "Све ове нове су светлије од %1 на врхунцу свог сјаја."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 msgid ""
@@ -7972,6 +7992,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Уколико желите да прочитате потпуне информације о овом додатку, његовој "
+"историји и формату каталога, можете %1 погледати овде%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
 msgid "Novae is updated"
@@ -7979,7 +8001,7 @@ msgstr "Нове су ажуриране."
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Конфигурација светлих нових"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
@@ -8006,7 +8028,7 @@ msgstr "Прикажи квазаре"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "прозор за конфигурацију квазара"
 
 #: plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
@@ -8030,7 +8052,7 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Верон+ 2010"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 #, qt-format
@@ -8065,11 +8087,11 @@ msgstr "Подешавања квазара"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "Прикажи све квазаре без натписа"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Омогући приказ поделе за квазаре"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
@@ -8269,11 +8291,11 @@ msgstr "Признање"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Владимир Самодоуров"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Опсерваторија Пушино Радио Астрономија"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Maciej Serylak"
@@ -8281,7 +8303,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Нанси радиоастрономска опсерваторија"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "in France"
@@ -8305,7 +8327,7 @@ msgstr "Прикажи све пулсаре без ознака"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Омогући приказ поделе за пулсаре"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
@@ -8389,7 +8411,7 @@ msgstr "Планетарни систем"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Metallicity"
-msgstr ""
+msgstr "металичност"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
@@ -8460,7 +8482,7 @@ msgstr "Планетна класа"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "равнотежна температура"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
@@ -8488,6 +8510,8 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Листа потенцијалних  настањивих  егзопланета и подаци о њима су узети из %1 "
+"каталога Настањиве егзопланете%3 из %2лабораторије Планетарна настањивост."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:142
 #, qt-format
@@ -8496,6 +8520,8 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Тренутни каталог садржи информације о %1 планетарним системима, који све "
+"укупно има %2 егзопланета (укључујући %3 потенцијално настањивих егзопланета)"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
@@ -8510,7 +8536,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Потенцијално настањиве егзопланете"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid ""
@@ -8520,7 +8546,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Планетарна класа"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8531,7 +8557,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Равнотежна температура"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid ""
@@ -8540,10 +8566,14 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"Планетарна равнотежна температура је теоретски температура у (°C) коју би "
+"планета требала да има када би се посматрала  као црно тело које загрева "
+"само матична звезда (под претпоставком да је албедо 0.3). Као пример "
+"планетарне равнотежне температуре навешћемо за Земљу и износи -18°C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Индекс сличности са Земљом (ЗСИ)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid ""
@@ -8551,6 +8581,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Сличност са Земљом на скали од 0 до 1, са 1 почиње када је најсличније "
+"Земљи. ЗСИ зависи од радијуса планете, густине, брзине кретања и површинске "
+"температуре."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Additional info"
@@ -8558,15 +8591,15 @@ msgstr "Додатне информације"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Циркумстеларна настањива зона"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Планетарна равнотежна температура"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Planetary habitability"
-msgstr ""
+msgstr "Планетарна прикладност за настањивање"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Earth Similarity Index"
@@ -8586,7 +8619,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "Егзопланете у двојним и више система (Ричард Шварц)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "Naming exoplanets (IAU)"
@@ -8603,7 +8636,7 @@ msgstr "ажурирано: 16. априла 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "The Exoplanet Data Explorer"
-msgstr ""
+msgstr "Истраживач података екстрасоларних планета"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Anglo-Australian Planet Search"
@@ -8611,7 +8644,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "истраживачки Женевски  програм екстрасоларних планета"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
@@ -8623,11 +8656,11 @@ msgstr "НАСИН програм откривања екстрасоларни�
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Планете пулсари"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "НАСА Архива екстрасоларних планета"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
@@ -8639,7 +8672,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "галерија Настањивих зона"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "PlanetQuest - The Search for Another Earth"
@@ -8647,11 +8680,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Отвори каталог са екстрасоларним планетама"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "каталог настањивих екстрасоларних планета"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Exoplanets is updated"
@@ -8679,7 +8712,7 @@ msgstr "Прикажи све системе са екстрасоларним �
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "Омогући приказ поделе екстрасоларних планета"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 msgid "Display exoplanets since their discovery"
@@ -8687,21 +8720,23 @@ msgstr "Прикажи екстрасоларне планете од њихов
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "Омогћи приказ открића екстрасоларних планета на временској линији"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
 msgstr ""
+"Приказ планетарних система који садрже потенцијално настањиве екстрасоларне "
+"планете."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Омогући приказ само потенцијално настањивих екстрасоларних планета"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "Прикажи дугме за екстрасоларне планете на траци са алаткама"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
@@ -8806,7 +8841,7 @@ msgstr "s"
 #: plugins/Observability/src/Observability.cpp:189
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "Постави на %1 (у %2)"
 
 #: plugins/Observability/src/Observability.cpp:190
 #, qt-format
@@ -8821,7 +8856,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:192
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "Излаз у %1 (у %2)"
 
 #: plugins/Observability/src/Observability.cpp:193
 msgid "Circumpolar."
@@ -8839,7 +8874,7 @@ msgstr "Кулминира %1 (у %2) у %3 степени."
 #: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "Кулминира у %1 (%2 пре) у %3 степени"
 
 #: plugins/Observability/src/Observability.cpp:197
 msgid "Source is not observable."
@@ -8852,12 +8887,12 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:199
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Највећа елонгација: %1 (за %2 степена)"
 
 #: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "највеће удаљавање од Сунца: %1 (за %2 степена)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:203
@@ -8924,11 +8959,11 @@ msgstr "Следећи пун Месец: %1 %2 у %3:%4. "
 #: plugins/Observability/src/Observability.cpp:233
 #: plugins/Observability/src/Observability.cpp:237
 msgid "Observability"
-msgstr ""
+msgstr "Могућност посматрања"
 
 #: plugins/Observability/src/Observability.cpp:238
 msgid "Observability configuration window"
-msgstr ""
+msgstr "Конфигурациони прозор могућности посматрања"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:132
 msgid "Observability Plug-in"
