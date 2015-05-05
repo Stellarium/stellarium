@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 19:38+0600\n"
-"PO-Revision-Date: 2015-04-29 06:12+0000\n"
+"POT-Creation-Date: 2015-05-04 21:54+0600\n"
+"PO-Revision-Date: 2015-05-04 16:38+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-03 05:13+0000\n"
+"X-Launchpad-Export-Date: 2015-05-05 05:15+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -2474,12 +2474,12 @@ msgstr "Catálogo Melotte"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Estrelas dobres de interese"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Estrelas variables de interese"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -10506,6 +10506,10 @@ msgstr ""
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr "Non se puido atopar a ID da escena para %1"
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
+msgid "Please load a scene first!"
+msgstr "Antes tes que cargar unha escena!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
