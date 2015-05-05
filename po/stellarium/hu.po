@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 19:38+0600\n"
+"POT-Creation-Date: 2015-05-04 21:54+0600\n"
 "PO-Revision-Date: 2015-05-03 07:39+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-04 05:09+0000\n"
+"X-Launchpad-Export-Date: 2015-05-05 05:16+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -10356,6 +10356,10 @@ msgstr ""
 #, qt-format
 msgid "Could not find scene ID for %1"
 msgstr "Nem található tájkép ezzel az azonosítóval: %1"
+
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
+msgid "Please load a scene first!"
+msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format

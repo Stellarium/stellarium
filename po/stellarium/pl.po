@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 19:38+0600\n"
-"PO-Revision-Date: 2015-05-03 00:45+0000\n"
+"POT-Creation-Date: 2015-05-04 21:54+0600\n"
+"PO-Revision-Date: 2015-05-05 00:09+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-04 05:09+0000\n"
+"X-Launchpad-Export-Date: 2015-05-05 05:20+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -628,7 +628,7 @@ msgstr "Czas trwania zaćmienia: %1%"
 #: src/core/modules/StarWrapper.cpp:258
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Czas wschodu: %1%"
 
 #: src/core/modules/MilkyWay.cpp:73
 msgid "Milky Way"
@@ -2110,7 +2110,7 @@ msgstr "mapa nieba"
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr "Równikowa (J2000.0)"
+msgstr "Równikowy (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
@@ -2607,7 +2607,7 @@ msgstr "Księżyc"
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:166
 msgid "Hurricane"
-msgstr "Huragan"
+msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:168
@@ -10431,6 +10431,10 @@ msgstr ""
 msgid "Could not find scene ID for %1"
 msgstr "Nie udało się odnaleźć ID sceny %1"
 
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
+msgid "Please load a scene first!"
+msgstr "Najpierw załaduj scenę!"
+
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
@@ -10597,10 +10601,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Geometry shader</b> używa funkcji dostępnej w nowoczesnych kartach "
+"graficznych w celu jednorazowego wyrenderowania wszystkich ścian sześcianu. "
+"Może to być najszybsza metoda w zależności od sceny i od karty graficznej. "
+"Jeśli ta funkcja nie jest obsługiwana, opcja będzie niedostępna."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Wylicza cienie dla każdej ściany mapy wypukłości osobno."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -10608,17 +10616,24 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Jeśli opcja jest wyłączona, cieniowany obszar jest wyliczany przy użyciu "
+"rzutowania perspektywicznego, co może powodować brak cieni przy wysokich "
+"wartościach kąta widzenia (FOV), ale jest to trochę szybsze!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Ta opcja nie działa gdy używany jest tryb mapowania wypukłości <b>Geometry "
+"shader</b>!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Gdy ta opcja jest wybrana, mapa wypukłości jest odtwarzana tylko co pewien "
+"czas, zamiast w każdej klatce."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
@@ -10630,12 +10645,16 @@ msgstr ""
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Zauważ, że mapa wypukłości jest zawsze renderowana od nowa po zmianie punktu "
+"widzenia."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Gdy ta opcja jest zaznaczona, tylko strona odpowiadająca kierunkowi "
+"patrzenia jest aktualizowana przy poruszaniu się."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
@@ -10649,16 +10668,21 @@ msgstr ""
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
+"Ta opcja NIE działa w trybie mapowania wypukłości &quot;Geometry-"
+"Shader&quot;!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Ta opcja aktualizuje drugą stronę, dzięki czemu &quot;nieprawidłowości&quot; "
+"w wyglądzie zewnętrznym są mniej widoczne."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
+"Okres (w sekundach osi czasu), w którym nie jest wykonywane przerysowywanie."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
@@ -10670,7 +10694,7 @@ msgstr "Mapa wypukłości (cubemap)"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Geometry shader"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
@@ -10761,7 +10785,7 @@ msgstr "Wysoka + Sprzętowe (powolne)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
@@ -10777,15 +10801,15 @@ msgstr "Powolne powtórne renderowanie mapy wypukłości"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Okres:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Aktualizuj tylko główną stronę podczas poruszania się"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Aktualizuj również stronę drugą pod względem istotności"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
@@ -10793,19 +10817,19 @@ msgstr "Ustawienia jakości/szybkości działania"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
-msgstr ""
+msgstr "Zapamiętane widoki"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:207
 msgid "Load view"
-msgstr ""
+msgstr "Załaduj widok"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:208
 msgid "Delete view"
-msgstr ""
+msgstr "Usuń widok"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:209
 msgid "Add current view"
-msgstr ""
+msgstr "Dodaj bieżący widok"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:210
 msgid "Title:"
@@ -10981,6 +11005,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr ""
+"W celu zmiany kolorów może być konieczne opuszczenie trybu pełnoekranowego!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
@@ -10996,7 +11021,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Zmień kolor"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
@@ -11016,35 +11041,35 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "Bieżące Słońce"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "Bieżący Księżyc"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Bieżąca planeta: brak"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Bieżąca planeta: Merkury"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Bieżąca planeta: Wenus"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Bieżąca planeta: Mars"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Bieżąca planeta: Jowisz"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Bieżąca planeta: Saturn"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Ekliptyka"
