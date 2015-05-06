@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-04 21:54+0600\n"
-"PO-Revision-Date: 2015-05-03 14:49+0000\n"
+"PO-Revision-Date: 2015-05-05 08:50+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-05 05:21+0000\n"
+"X-Launchpad-Export-Date: 2015-05-06 05:08+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -2741,6 +2741,7 @@ msgstr "Догађаји на Земљи са Марса"
 #: src/translations.h:244
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
+"Земљина и Венерина највећа елонгација и осветљеност посматрано са Марса."
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:246
@@ -2889,6 +2890,8 @@ msgstr ""
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
+"Земљина и Венерина највећа елонгација и осветљеност посматрано са Марса 2000-"
+"3000."
 
 #: src/translations.h:277
 msgid ""
@@ -4506,7 +4509,7 @@ msgstr "Користите повезану планету и позицију"
 
 #: src/ui_viewDialog.h:1353
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "Прикажи слој осветљења (светли прозори,мало загађења и тд.)"
 
 #: src/ui_viewDialog.h:1354
 msgid "Show ground"
@@ -5933,6 +5936,9 @@ msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
+"Ако су  вредности многостуркости >1 ,повећајте жижну даљину (Барлова "
+"сочива). Ако су вредности многострукости <1 , смањите жижну даљину "
+"(Шејплијева сочива)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1109
 #: plugins/Oculars/src/ui_ocularDialog.h:1119
@@ -6053,7 +6059,7 @@ msgstr "геостационарни"
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1725
 msgid "non-operational"
-msgstr ""
+msgstr "неоперативни"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1727
@@ -7937,7 +7943,7 @@ msgstr "Додатак који показује неке сјајне нове 
 
 #: plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Конфигурациони прозор светлих нових"
 
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
@@ -8005,7 +8011,7 @@ msgstr "Конфигурација светлих нових"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Конфигурација додатка светлих нових"
 
 #: plugins/Quasars/src/Quasars.cpp:72 plugins/Quasars/src/Quasars.cpp:169
 #: plugins/Quasars/src/Quasars.cpp:170
@@ -8049,6 +8055,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Додатак квазара обезбеђује видљивост неких квазара који су светлији од "
+"шеснаесте видљиве магнитуде. Каталог квазара ј ес астављен од \"Квазари и "
+"активна галактичка језгра \" (13. издање)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 msgid "Veron+ 2010"
@@ -8543,6 +8552,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Овај додатак може приказати потенцијално настањиве екстрасоларне планете "
+"(наранџасти  маркер)и неке информације о тим планетама."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
@@ -8846,12 +8857,12 @@ msgstr "Постави на %1 (у %2)"
 #: plugins/Observability/src/Observability.cpp:190
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "Излаз у %1 (%2 пре)"
 
 #: plugins/Observability/src/Observability.cpp:191
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "Залаз у %1 (%2 пре)"
 
 #: plugins/Observability/src/Observability.cpp:192
 #, qt-format
@@ -8929,7 +8940,7 @@ msgstr "Могуће је посматрати током целе године.
 
 #: plugins/Observability/src/Observability.cpp:211
 msgid "Not observable at dark night."
-msgstr ""
+msgstr "Није могуће посматрати у тамној ноћи"
 
 #: plugins/Observability/src/Observability.cpp:212
 #, qt-format
@@ -9006,6 +9017,8 @@ msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
+"Минимална надморска  висина за могућност посматрања ( због планина, зграда "
+"или ограничених могућности телескопа)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Today ephemeris:"
@@ -9018,6 +9031,10 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
+"Да бисте си појаснили. Програм ће приказати  време излаза, залаза и "
+"кулминације (транизита). Тачна времена за ове ефемериде дата су на два "
+"начина: као временски размаци (из тренутног времена) и као часови (по "
+"локалном времену )"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
@@ -9046,7 +9063,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
-msgstr ""
+msgstr "Највећа раздвајања од Сунца:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid ""
@@ -9059,10 +9076,17 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
+"Дешава се када су угаона раздвајања између Сунца и небеског објекта "
+"максимална. У већини случајева, еквивалентно томе је рећи да се екваторска "
+"лонгитуда Сунца и објекта разликује за 180 степени, тако да је Сунце у "
+"опозицији према објекту. Када је објекат у  максимално могучћем угаоном "
+"одвајању од Сунца (небитно да ли је то планета или звезда) , отприлике "
+"кулминира  у поноћ и на најтамнијем делу неба за ту деклинацију. Дакле, то "
+"је  \"најбоља\" ноћ за посматрање одређеног објекта."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "Ноћи са извором изнад хоризонта:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid ""
@@ -9093,6 +9117,8 @@ msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
+"Када је Месец означен, програм може израчунати најближе датуме Месечеве "
+"опозиције са Сунцем."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:200
 #, qt-format
@@ -9102,15 +9128,15 @@ msgstr "Висина Сунца у тренутку сумрака: %1 степ�
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Хоризонтска висина: %1 степ."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
-msgstr ""
+msgstr "Конфигурације могућности приказа."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "Конфигурације додатка могућности приказа"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
@@ -9150,11 +9176,11 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
-msgstr ""
+msgstr "Датум највећег удаљавања од Сунца"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "Ноћи са извором изнад хоризонта"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:356
 msgid "Dates of previous and next Full Moon"
@@ -9274,7 +9300,7 @@ msgstr "Промени знак једначине"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:280
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
-msgstr ""
+msgstr "Величина слова:"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
@@ -9287,6 +9313,9 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Овај додатак приказује кишу метеора и обележивач за сваку активну и "
+"неактивну енергију зрачења, приказује праве информације о својим "
+"активностима."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Show meteor showers"
@@ -9318,17 +9347,17 @@ msgstr "Лиридти"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Кентауриди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Нормид"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Акварид"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
@@ -9343,27 +9372,27 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "јужни δ-Акварид"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Каприкорннид"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Ауригид"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "септембарске  ε-Персеиде"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
 msgid "Draconids"
-msgstr ""
+msgstr "Дракониди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
@@ -9383,7 +9412,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
 msgid "Ursids"
-msgstr ""
+msgstr "Урсиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
@@ -9403,7 +9432,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
 msgid "June Lyrids"
-msgstr ""
+msgstr "Јунски Лириди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
@@ -9428,7 +9457,7 @@ msgstr "ε-Геминиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Јужни Тауриди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
@@ -9448,12 +9477,12 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Хидриди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
 msgid "Geminids"
-msgstr ""
+msgstr "Геминиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
@@ -9483,12 +9512,12 @@ msgstr "Андромедоиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Лириди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Скорпиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
@@ -9503,27 +9532,27 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "к-Серпентиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Кентауриди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Кетоиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "јужни ω-Скорпиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "северни ω-Скорпиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
@@ -9533,7 +9562,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Кетоиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
@@ -9543,7 +9572,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Херкулиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
@@ -9553,12 +9582,12 @@ msgstr "ρ-Геминиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
 msgid "η-Carinids"
-msgstr ""
+msgstr "η- Кариниди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Кратериди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
@@ -9613,7 +9642,7 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Комета 1П/Халеј"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
