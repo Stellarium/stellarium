@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-04 21:54+0600\n"
-"PO-Revision-Date: 2015-05-05 08:50+0000\n"
+"PO-Revision-Date: 2015-05-06 13:07+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-06 05:08+0000\n"
+"X-Launchpad-Export-Date: 2015-05-07 05:09+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -226,7 +226,7 @@ msgstr "Сјајност: %1"
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Образац: %1Ш"
 
 #: src/core/modules/Nebula.cpp:176
 #, qt-format
@@ -1956,7 +1956,7 @@ msgstr "Стандардна учесталост Геминида"
 
 #: src/gui/ViewDialog.cpp:687
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Нетипична учесталост Персеида"
 
 #: src/gui/ViewDialog.cpp:690
 msgid "Meteor storm rate"
@@ -1964,7 +1964,7 @@ msgstr "Учесталост метеорске кише"
 
 #: src/gui/ViewDialog.cpp:693
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Нетипична учесталост Драконида"
 
 #: src/gui/ViewDialog.cpp:696
 msgid "Exceptional Leonid rate"
@@ -2181,7 +2181,7 @@ msgstr ""
 
 #: src/StelMainView.cpp:387
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Није могуће набавити неопходне \"OpenGl\" ресурсе."
 
 #: src/StelMainView.cpp:442
 msgid "Save screenshot"
@@ -2196,6 +2196,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Недовољна верзија \"OpenGl\"-a. Молимо вас ажурирајте драјвере, графички "
+"хардвер или користите MESA (или ANGLE) верзију."
 
 #: src/StelMainView.cpp:562
 msgid ""
@@ -2730,7 +2732,7 @@ msgstr "Догађаји на Земљи са Меркура"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:240
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Догађаји на Земљи посматрани са плутајућег града на Венери"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:242
@@ -7951,7 +7953,7 @@ msgstr "нова"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Додатак светлих нових"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid ""
@@ -10821,7 +10823,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "Линија еквиноција (екватор)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
