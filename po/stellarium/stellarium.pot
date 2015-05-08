@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 02:14+0600\n"
+"POT-Creation-Date: 2015-05-09 02:28+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5929,11 +5929,6 @@ msgstr ""
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:276
-#, qt-format
-msgid "%1"
-msgstr ""
-
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:287
 #, qt-format
@@ -5972,33 +5967,28 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:323
 #, qt-format
-msgid "Sun reflection angle: %1°"
+msgid "Sun reflection angle: %1%2"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:332
+#: plugins/Satellites/src/Satellite.cpp:334
 msgid "The satellite and the observer are in sunlight."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:335
+#: plugins/Satellites/src/Satellite.cpp:337
 msgid "The satellite is visible."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:338
+#: plugins/Satellites/src/Satellite.cpp:340
 msgid "The satellite is eclipsed."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:341
+#: plugins/Satellites/src/Satellite.cpp:343
 msgid "The satellite is not visible"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:366
+#: plugins/Satellites/src/Satellite.cpp:368
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
-
-#: plugins/Satellites/src/Satellite.cpp:533
-#, qt-format
-msgid "Angle = %1 <br>"
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
