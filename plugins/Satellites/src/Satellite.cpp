@@ -273,7 +273,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br/>";
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
-		oss << q_("%1").arg(myText) << "<br/>";
+		oss << myText << "<br/>";
 #endif
 	}
 
@@ -320,7 +320,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		if (sunReflAngle>0)
 		{  // Iridium
-			oss << QString(q_("Sun reflection angle: %1°")).arg(sunReflAngle,0,'f',1);
+			oss << QString(q_("Sun reflection angle: %1%2"))
+			       .arg(sunReflAngle,0,'f',1)
+			       .arg(QChar(0x00B0)); // Degree sign
 			oss << "<br/>";
 		}
 		
@@ -515,22 +517,22 @@ float Satellite::getVMagnitude(const StelCore* core) const
 
 					//top_s
 					topoRSunPos[0] = (sin(radLatitude) * cos(theta)*slantRange[0]
-									 + sin(radLatitude)* sin(theta)*slantRange[1]
-										 - cos(radLatitude)* slantRange[2]);
+							+ sin(radLatitude)* sin(theta)*slantRange[1]
+							- cos(radLatitude)* slantRange[2]);
 					//top_e
 					topoRSunPos[1] = ((-1.0)* sin(theta)*slantRange[0]
-										 + cos(theta)*slantRange[1]);
+							+ cos(theta)*slantRange[1]);
 
 					//top_z
 					topoRSunPos[2] = (cos(radLatitude) * cos(theta)*slantRange[0]
-									 + cos(radLatitude) * sin(theta)*slantRange[1]
-										 + sin(radLatitude) *slantRange[2]);
+							+ cos(radLatitude) * sin(theta)*slantRange[1]
+							+ sin(radLatitude) *slantRange[2]);
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 					myText += "SunRefl = " + topoRSunPos.toString() + " (" + topoRSunPos.toStringLonLat() + ")<br>\n";
 #endif
 					sunReflAngle = qMin(elAzPosition.angle(topoRSunPos) * KRAD2DEG, sunReflAngle) ;
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
-					myText += q_("Angle = %1 <br>").arg(QString::number(sunReflAngle, 'f', 1));
+					myText += QString("Angle = %1").arg(QString::number(sunReflAngle, 'f', 1)) + "<br>";
 #endif
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
