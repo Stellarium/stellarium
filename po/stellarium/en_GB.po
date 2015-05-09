@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-04 21:54+0600\n"
+"POT-Creation-Date: 2015-05-09 02:28+0600\n"
 "PO-Revision-Date: 2015-05-07 08:47+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-08 05:08+0000\n"
+"X-Launchpad-Export-Date: 2015-05-09 05:26+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -176,7 +176,7 @@ msgstr "Celestial body:"
 #: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:178 src/core/modules/StarWrapper.cpp:181
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:269
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
@@ -6171,77 +6171,82 @@ msgstr "The International Space Station"
 msgid "China's first space station"
 msgstr "China's first space station"
 
-#: plugins/Satellites/src/Satellite.cpp:242
-#: plugins/Satellites/src/Satellite.cpp:246
+#: plugins/Satellites/src/Satellite.cpp:256
+#: plugins/Satellites/src/Satellite.cpp:260
 msgid "Catalog #"
 msgstr "Catalog #"
 
-#: plugins/Satellites/src/Satellite.cpp:248
+#: plugins/Satellites/src/Satellite.cpp:262
 msgid "International Designator"
 msgstr "International Designator"
 
-#: plugins/Satellites/src/Satellite.cpp:255
+#: plugins/Satellites/src/Satellite.cpp:269
 msgid "artificial satellite"
 msgstr "artificial satellite"
 
-#: plugins/Satellites/src/Satellite.cpp:260
+#: plugins/Satellites/src/Satellite.cpp:274
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Approx. magnitude: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Satellites/src/Satellite.cpp:287
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Range (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:273
+#: plugins/Satellites/src/Satellite.cpp:290
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Range rate (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:293
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Altitude (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:279
+#: plugins/Satellites/src/Satellite.cpp:296
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "SubPoint (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:293
+#: plugins/Satellites/src/Satellite.cpp:310
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "TEME coordinates (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:301
+#: plugins/Satellites/src/Satellite.cpp:318
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "TEME velocity (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:309
+#: plugins/Satellites/src/Satellite.cpp:323
+#, qt-format
+msgid "Sun reflection angle: %1%2"
+msgstr ""
+
+#: plugins/Satellites/src/Satellite.cpp:334
 msgid "The satellite and the observer are in sunlight."
 msgstr "The satellite and the observer are in sunlight."
 
-#: plugins/Satellites/src/Satellite.cpp:312
+#: plugins/Satellites/src/Satellite.cpp:337
 msgid "The satellite is visible."
 msgstr "The satellite is visible."
 
-#: plugins/Satellites/src/Satellite.cpp:315
+#: plugins/Satellites/src/Satellite.cpp:340
 msgid "The satellite is eclipsed."
 msgstr "The satellite is eclipsed."
 
-#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:343
 msgid "The satellite is not visible"
 msgstr "The satellite is not visible"
 
-#: plugins/Satellites/src/Satellite.cpp:343
+#: plugins/Satellites/src/Satellite.cpp:368
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
