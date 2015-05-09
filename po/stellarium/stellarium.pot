@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 02:28+0600\n"
+"POT-Creation-Date: 2015-05-09 16:13+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1959,67 +1959,77 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:232
+#: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:233
+#: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:234
+#: src/gui/SearchDialog.cpp:235
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:235
+#: src/gui/SearchDialog.cpp:236
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:255
-msgid "Right ascension"
+#: src/gui/SearchDialog.cpp:237
+msgctxt "coordinate system"
+msgid "Ecliptic"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:238
+msgctxt "coordinate system"
+msgid "Ecliptic (J2000,0)"
 msgstr ""
 
 #: src/gui/SearchDialog.cpp:258
+msgid "Right ascension"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:261
 msgid "Declination"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:266
+#: src/gui/SearchDialog.cpp:269
 msgid "Azimuth"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:269
+#: src/gui/SearchDialog.cpp:272
 msgid "Altitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:277
+#: src/gui/SearchDialog.cpp:282
 msgid "Longitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:280
+#: src/gui/SearchDialog.cpp:285
 msgid "Latitude"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:537
+#: src/gui/SearchDialog.cpp:557
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:545
+#: src/gui/SearchDialog.cpp:565
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:713
+#: src/gui/SearchDialog.cpp:733
 msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:714
+#: src/gui/SearchDialog.cpp:734
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:774
+#: src/gui/SearchDialog.cpp:794
 msgid "Paste and Search"
 msgstr ""
 

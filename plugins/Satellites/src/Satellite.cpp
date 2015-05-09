@@ -516,17 +516,17 @@ float Satellite::getVMagnitude(const StelCore* core) const
 					Vec3d slantRange = rSun - observerECIPos;
 
 					//top_s
-					topoRSunPos[0] = (sin(radLatitude) * cos(theta)*slantRange[0]
-							+ sin(radLatitude)* sin(theta)*slantRange[1]
-							- cos(radLatitude)* slantRange[2]);
+					topoRSunPos[0] = (sin(radLatitude) * cos(theta) * slantRange[0]
+							+ sin(radLatitude) * sin(theta) * slantRange[1]
+							- cos(radLatitude) * slantRange[2]);
 					//top_e
-					topoRSunPos[1] = ((-1.0)* sin(theta)*slantRange[0]
-							+ cos(theta)*slantRange[1]);
+					topoRSunPos[1] = ((-1.0) * sin(theta) * slantRange[0]
+							+ cos(theta) * slantRange[1]);
 
 					//top_z
-					topoRSunPos[2] = (cos(radLatitude) * cos(theta)*slantRange[0]
-							+ cos(radLatitude) * sin(theta)*slantRange[1]
-							+ sin(radLatitude) *slantRange[2]);
+					topoRSunPos[2] = (cos(radLatitude) * cos(theta) * slantRange[0]
+							+ cos(radLatitude) * sin(theta) * slantRange[1]
+							+ sin(radLatitude) * slantRange[2]);
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 					myText += "SunRefl = " + topoRSunPos.toString() + " (" + topoRSunPos.toStringLonLat() + ")<br>\n";
 #endif
