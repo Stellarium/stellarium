@@ -44,18 +44,18 @@ class StelPainter;
 class StelTranslator;
 class QOpenGLShaderProgram;
 
-// Class used to store orbital elements
+// Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
 {
 public:
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.), siderealPeriod(0.) {}
-	float period;          // rotation period
-	float offset;          // rotation at epoch
-	double epoch;
-	float obliquity;       // tilt of rotation axis w.r.t. ecliptic
-	float ascendingNode;   // long. of ascending node of equator on the ecliptic
-	float precessionRate;  // rate of precession of rotation axis in rads/day
-	double siderealPeriod; // sidereal period (Planet year in earth days)
+	float period;          // (sidereal) rotation period [earth days]
+	float offset;          // rotation at epoch  [degrees]
+	double epoch;          // JD (TD) of epoch for these elements
+	float obliquity;       // tilt of rotation axis w.r.t. ecliptic [radians]
+	float ascendingNode;   // long. of ascending node of equator on the ecliptic [radians]
+	float precessionRate;  // rate of precession of rotation axis in [rads/JulianCentury(36525d)]
+	double siderealPeriod; // sidereal period (Planet year in earth days) [earth days]
 };
 
 // Class to manage rings for planets like saturn

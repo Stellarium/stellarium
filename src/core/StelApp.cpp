@@ -90,6 +90,10 @@ Q_IMPORT_PLUGIN(SimpleDrawLineStelPluginInterface)
 Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_ARCHAEOLINES
+Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_COMPASSMARKS
 Q_IMPORT_PLUGIN(CompassMarksStelPluginInterface)
 #endif
@@ -164,6 +168,10 @@ Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_SCENERY3D
+Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
 #endif
 
 // Initialize static variables

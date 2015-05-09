@@ -24,11 +24,11 @@
 
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
+#include "Landscape.hpp"
 
 #include <QMap>
 #include <QStringList>
 
-class Landscape;
 class Atmosphere;
 class Cardinals;
 class QSettings;
@@ -117,7 +117,7 @@ public:
 	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
 
 	// GZ: implement StelModule's method. For test purposes only, we implement a manual transparency sampler.
-	// TODO: comment this away for final builds
+	// TODO: comment this away for final builds. Please leave it in until this feature is finished.
 	// virtual void handleMouseClicks(class QMouseEvent*);
 
 public slots:
@@ -142,14 +142,19 @@ public slots:
 	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
 	//! @param id the ID of the new landscape
+	//! @param changeLocationDuration the duration of the transition animation
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found).
-	bool setCurrentLandscapeID(const QString& id);
+	bool setCurrentLandscapeID(const QString& id, const double changeLocationDuration = 1.0);
 	
 	//! Get the current landscape name.
 	QString getCurrentLandscapeName() const;
 	//! Change the current landscape to the landscape with the name specified.
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
-	bool setCurrentLandscapeName(const QString& name);
+	//! @param changeLocationDuration the duration of the transition animation
+	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
+
+	//! Get the current landscape object.
+	Landscape* getCurrentLandscape() const { return landscape; }
 
 	//! Get the default landscape ID.
 	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}
@@ -320,7 +325,9 @@ public slots:
 	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
 	void setFlagAtmosphereAutoEnable(bool b);
 
-
+	//! Forward opacity query to current landscape.
+	//! @param azalt direction of view line to sample in azaltimuth coordinates.
+	float getLandscapeOpacity(Vec3d azalt) const {return landscape->getOpacity(azalt);}
 
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);

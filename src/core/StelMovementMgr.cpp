@@ -103,6 +103,8 @@ void StelMovementMgr::init()
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
 
 	minFov = 0.001389; // minimal FOV = 5"
+	// GZ: This value should be configurable! Zooming in too much is useless for archaeoastronomy.
+	minFov = conf->value("navigation/min_fov",minFov).toDouble();
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
@@ -208,10 +210,19 @@ bool StelMovementMgr::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	return false;
 }
 
+double StelMovementMgr::getCallOrder(StelModuleActionName actionName) const
+{
+	// GZ: allow a few plugins to intercept keys!
+	if (actionName == StelModule::ActionHandleKeys)
+		return 5;
+	return 0;
+}
+
+
 
 void StelMovementMgr::handleKeys(QKeyEvent* event)
 {
-	if (event->type() == QEvent::KeyPress)
+        if (event->type() == QEvent::KeyPress)
 	{
 		// Direction and zoom deplacements
 		switch (event->key())

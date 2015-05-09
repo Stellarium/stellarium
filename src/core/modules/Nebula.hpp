@@ -163,6 +163,8 @@ private:
 	unsigned int RCW_nb;            // RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
 	unsigned int LDN_nb;            // LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
 	unsigned int LBN_nb;            // LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
+	unsigned int Cr_nb;             // Collinder Catalog number
+	unsigned int Mel_nb;            // Melotte Catalog number
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here.

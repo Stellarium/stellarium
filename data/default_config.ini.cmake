@@ -3,10 +3,14 @@ version                             = @PACKAGE_VERSION@
 invert_screenshots_colors           = false
 
 [plugins_load_at_startup]
-Oculars                             = false
+Oculars                             = true
 Satellites                          = true
-SolarSystemEditor                   = false
+SolarSystemEditor                   = true
 TimeZoneConfiguration               = true
+Exoplanets                          = true
+MeteorShowers                       = true
+Novae                               = true
+FOV                                 = true
 
 [video]
 fullscreen                          = true

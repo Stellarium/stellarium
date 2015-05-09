@@ -262,7 +262,6 @@ IF(ENABLE_SCRIPTING)
 		scripting/StelScriptOutput.hpp
 		scripting/StelScriptOutput.cpp
 		scripting/StelScriptMgr.cpp
-		scripting/StratoscriptPreprocessor.cpp
 		scripting/StelScriptMgr.hpp
 		scripting/ScreenImageMgr.hpp
 		scripting/ScreenImageMgr.cpp

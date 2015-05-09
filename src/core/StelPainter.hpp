@@ -106,6 +106,7 @@ public:
 	//! The algorithm ensures that the line will look smooth, even for non linear distortion.
 	//! Each time the small circle crosses the edge of the viewport, the viewportEdgeIntersectCallback is called with the
 	//! screen 2d position, direction of the currently drawn arc toward the inside of the viewport.
+	//! Example: A latitude circle has 0/0/sin(latitude) as rotCenter.
 	//! If rotCenter is equal to 0,0,0, the method draws a great circle.
 	void drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, const Vec3d& rotCenter, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
 
