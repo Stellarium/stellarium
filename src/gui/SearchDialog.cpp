@@ -235,7 +235,7 @@ void SearchDialog::populateCoordinateSystemsList()
 	csys->addItem(qc_("Horizontal", "coordinate system"), "horizontal");
 	csys->addItem(qc_("Galactic", "coordinate system"), "galactic");
 	csys->addItem(qc_("Ecliptic", "coordinate system"), "ecliptic");
-	csys->addItem(qc_("Ecliptic (J2000,0)", "coordinate system"), "eclipticJ2000");
+	csys->addItem(qc_("Ecliptic (J2000.0)", "coordinate system"), "eclipticJ2000");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);
