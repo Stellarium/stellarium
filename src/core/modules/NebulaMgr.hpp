@@ -217,6 +217,8 @@ private:
 	NebulaP searchRCW(unsigned int RCW);
 	NebulaP searchLDN(unsigned int LDN);
 	NebulaP searchLBN(unsigned int LBN);
+	NebulaP searchCr(unsigned int Cr);
+	NebulaP searchMel(unsigned int Mel);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);

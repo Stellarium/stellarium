@@ -235,8 +235,14 @@ private:
 	Vec3d	velocity;
 	Vec3d	latLongSubPointPosition;
 	Vec3d	elAzPosition;
+
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+	static QString myText;
+#endif
+
 	int	visibility;
 	double	phaseAngle; // phase angle for the satellite
+	static double sunReflAngle; // for Iridium satellites
 
 	//Satellite Orbit Draw
 	QFont     font;

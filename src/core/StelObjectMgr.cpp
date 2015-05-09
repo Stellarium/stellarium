@@ -228,7 +228,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
 }
 
 /*************************************************************************
- Return the list objects of type "withType" which was recently selected by
+ Return the list objects of type "type" which was recently selected by
   the user
 *************************************************************************/
 QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
@@ -341,7 +341,7 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["SolarSystem:scattered disc object"] = "Scattered disc objects";
 			result["SolarSystem:Oort cloud object"] = "Oort cloud objects";
 		}
-		// Deep-sky objects by type + couple amateur catalogue
+		// Deep-sky objects by type + amateur catalogues
 		if (m->objectName()=="NebulaMgr")
 		{
 			result["NebulaMgr:0"] = "Bright galaxies";
@@ -360,7 +360,15 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:102"] = "Barnard Catalogue";
 			result["NebulaMgr:103"] = "Sharpless Catalogue";
 			result["NebulaMgr:104"] = "Van den Bergh Catalogue";
-			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Cambell, and Whiteoak";
+			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
+			result["NebulaMgr:106"] = "Collinder Catalogue";
+			result["NebulaMgr:107"] = "Melotte Catalogue";
+		}
+		// Interesting stars
+		if (m->objectName()=="StarMgr")
+		{
+			result["StarMgr:0"] = "Interesting double stars";
+			result["StarMgr:1"] = "Interesting variable stars";
 		}
 	}
 	return result;

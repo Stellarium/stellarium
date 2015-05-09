@@ -37,7 +37,7 @@
 
 #include <cstdlib>
 
-StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), id(0), avgLuminance(-1.f)
+StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), alphaChannel(false), id(0), avgLuminance(-1.f)
 {
 	width = -1;
 	height = -1;
@@ -259,20 +259,62 @@ bool StelTexture::glLoad(const GLData& data)
 		reportError("Unknown error");
 		return false;
 	}
+
 	width = data.width;
 	height = data.height;
+
+	//check minimum texture size
+	GLint maxSize;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE,&maxSize);
+	if(maxSize < width || maxSize < height)
+	{
+		reportError(QString("Texture size (%1/%2) is larger than GL_MAX_TEXTURE_SIZE (%3)!").arg(width).arg(height).arg(maxSize));
+		return false;
+	}
+
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
+
+	//the conversion from QImage may result in tightly packed scanlines that are no longer 4-byte aligned!
+	//--> we have to set the GL_UNPACK_ALIGNMENT accordingly
+
+	//remember current alignment
+	GLint oldalignment;
+	glGetIntegerv(GL_UNPACK_ALIGNMENT,&oldalignment);
+
+	switch(data.format)
+	{
+		case GL_RGBA:
+			//RGBA pixels are always in 4 byte aligned rows
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+			alphaChannel = true;
+			break;
+		case GL_LUMINANCE_ALPHA:
+			//these ones are at least always in 2 byte aligned rows, but may also be 4 aligned
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
+			alphaChannel = true;
+			break;
+		default:
+			//for the other cases, they may be on any alignment (depending on image width)
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+			alphaChannel = false;
+	}
+
+	//do pixel transfer
 	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
 				 data.type, data.data.constData());
+
+	//restore old value
+	glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
 	if (loadParams.generateMipmaps)
 	{
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filterMipmaps ? GL_LINEAR_MIPMAP_LINEAR : GL_LINEAR_MIPMAP_NEAREST);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	// Report success of texture loading

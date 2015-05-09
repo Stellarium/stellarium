@@ -53,7 +53,10 @@ StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const Stel
 	if (tex->glLoad(image))
 		return tex;
 	else
+	{
+		qWarning()<<tex->getErrorMessage();
 		return StelTextureSP();
+	}
 }
 
 

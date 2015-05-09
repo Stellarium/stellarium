@@ -112,7 +112,18 @@ class Translations
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Van den Bergh Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-		N_("The Catalogue of Rodgers, Cambell, and Whiteoak");
+		N_("The Catalogue of Rodgers, Campbell, and Whiteoak");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Collinder Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Melotte Catalogue");
+		
+		// =====================================================================
+		// List of stars types
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Interesting double stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Interesting variable stars");
 		
 		// =====================================================================
 		// Constellation cultures
@@ -136,6 +147,7 @@ class Translations
 		N_("Sami");
 		// TRANSLATORS: Name of the sky culture
 		N_("Siberian");
+		N_("Tukano");
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
@@ -173,6 +185,12 @@ class Translations
 		// TRANSLATORS: Name of landscape
 		N_("Zero Horizon");
 
+		// =====================================================================
+		// 3D landscapes (scenes) names
+		// TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
+		N_("Vienna Sterngarten");
+		// TRANSLATORS: Name of 3D scene
+		N_("Testscene")
 		
 		// =====================================================================
 		// Script names

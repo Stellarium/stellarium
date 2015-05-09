@@ -62,6 +62,8 @@ Nebula::Nebula()
 	, RCW_nb(0)
 	, LDN_nb(0)
 	, LBN_nb(0)
+	, Cr_nb(0)
+	, Mel_nb(0)
 	, mag(99.)
 	, nType()
 	, formType()
@@ -98,13 +100,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		QStringList catIds;
 		if ((M_nb > 0) && (M_nb < 111))
-			catIds << QString("M %1").arg(M_nb);		
+			catIds << QString("M %1").arg(M_nb);
+		if ((C_nb > 0) && (C_nb < 110))
+			catIds << QString("C %1").arg(C_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
-			catIds << QString("IC %1").arg(IC_nb);
-		if ((C_nb > 0) && (C_nb < 110))
-			catIds << QString("C %1").arg(C_nb);
+			catIds << QString("IC %1").arg(IC_nb);		
 		if ((B_nb > 0) && (B_nb <= 370))
 			catIds << QString("B %1").arg(B_nb);
 		if ((Sh2_nb > 0) && (Sh2_nb <= 313))
@@ -117,6 +119,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("LDN %1").arg(LDN_nb);
 		if ((LBN_nb > 0) && (LBN_nb <= 1125))
 			catIds << QString("LBN %1").arg(LBN_nb);
+		if ((Cr_nb > 0) && (Cr_nb <= 471))
+			catIds << QString("Cr %1").arg(Cr_nb);
+		if ((Mel_nb > 0) && (Mel_nb <= 245))
+			catIds << QString("Mel %1").arg(Mel_nb);
 		oss << catIds.join(" - ");
 
 		if (nameI18!="" && flags&Name)
@@ -373,7 +379,11 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		else if (LDN_nb > 0)
 			str = QString("LDN %1").arg(LDN_nb);
 		else if (LBN_nb > 0)
-			str = QString("LBN %1").arg(LBN_nb);		
+			str = QString("LBN %1").arg(LBN_nb);
+		else if (Cr_nb > 0)
+			str = QString("Cr %1").arg(Cr_nb);
+		else if (Mel_nb > 0)
+			str = QString("Mel %1").arg(Mel_nb);
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
