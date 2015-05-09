@@ -1276,13 +1276,14 @@ void Planet::initShader()
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		// GZ next 5 can be lowp instead of mediump
-		"    lowp float roughness = 1.0;\n"
+		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0
+		"    lowp float roughness = 0.8;\n"
 		"    lowp float roughnessSquared = roughness * roughness;\n"
 		"    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
 		"    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
 		"    lowp float C = sin(alpha) * tan(beta);\n"
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 2.0;\n"
+		// GZ final number was 2, but this causes overly bright moon.
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
 		"#endif\n"
 		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"

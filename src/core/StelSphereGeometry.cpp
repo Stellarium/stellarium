@@ -404,7 +404,8 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d v = v1^v2;
 			v.normalize();
 			Vec3d vv;
-			SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv);
+			if (!SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv))
+				return false;
 			const float cosDist = v1*v2;
 			v2 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
 			return true;
@@ -418,7 +419,8 @@ bool SphericalCap::clipGreatCircle(Vec3d& v1, Vec3d& v2) const
 			Vec3d v = v1^v2;
 			v.normalize();
 			Vec3d vv;
-			SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv);
+			if (!SphericalCap::intersectionPoints(*this, SphericalCap(v, 0), v, vv))
+				return false;
 			const float cosDist = v1*v2;
 			v1 = (v1*v >= cosDist && v2*v >= cosDist) ? v : vv;
 			return true;

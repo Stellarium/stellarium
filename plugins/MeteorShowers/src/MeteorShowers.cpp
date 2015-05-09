@@ -164,7 +164,7 @@ void MeteorShowers::init()
 		QString msGroup = N_("Meteor Showers");
 		addAction("actionShow_MeteorShower", msGroup, N_("Show meteor showers"), "msVisible", "Ctrl+Alt+M");
 		addAction("actionShow_radiant_Labels", msGroup, N_("Radiant labels"), "labelsVisible", "Shift+M");
-		addAction("actionShow_MeteorShower_ConfigDialog", msGroup, N_("Meteor Shower configuration window"), configDialog, "visible", "Alt+M");
+		addAction("actionShow_MeteorShower_ConfigDialog", msGroup, N_("Meteor Shower configuration window"), configDialog, "visible", "Ctrl+Shift+M");
 
 		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/MeteorShowers/btMS-on.png");
@@ -189,16 +189,14 @@ void MeteorShowers::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if (!QFileInfo(showersJsonPath).exists())
 	{
-		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
-		{
-			displayMessage(q_("The old showers.json file is no longer compatible - using default file"), "#bb0000");
-			restoreDefaultJsonFile();
-		}
-		else
-		{
-			qDebug() << "MeteorShowers: showers.json does not exist - copying default file to" << QDir::toNativeSeparators(showersJsonPath);
-			restoreDefaultJsonFile();
-		}
+		qDebug() << "MeteorShowers: showers.json does not exist - copying default file to" << QDir::toNativeSeparators(showersJsonPath);
+		restoreDefaultJsonFile();
+	}
+	// Validate JSON format and data
+	if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
+	{
+		displayMessage(q_("The old showers.json file is no longer compatible - using default file"), "#bb0000");
+		restoreDefaultJsonFile();
 	}
 
 	qDebug() << "MeteorShowers: loading catalog file:" << QDir::toNativeSeparators(showersJsonPath);
@@ -924,13 +922,13 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	// delete all existing MeteorShower settings...
 	conf->remove("");
 
-	conf->setValue("enable_at_startup", false);
+	conf->setValue("enable_at_startup", true);
 	conf->setValue("updates_enabled", true);
 	conf->setValue("url", "http://stellarium.org/json/showers.json");
 	conf->setValue("update_frequency_hours", 100);
 	conf->setValue("flag_show_ms_button", true);
 	conf->setValue("flag_show_radiants", true);
-	conf->setValue("flag_active_radiants", false);
+	conf->setValue("flag_active_radiants", true);
 
 	conf->setValue("colorARG", "0, 255, 240");
 	conf->setValue("colorARR", "255, 240, 0");
@@ -1058,10 +1056,10 @@ void MeteorShowers::readSettingsFromConfig(void)
 	updateFrequencyHours = conf->value("update_frequency_hours", 720).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2013-12-10T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	enableAtStartup = conf->value("enable_at_startup", false).toBool();
+	enableAtStartup = conf->value("enable_at_startup", true).toBool();
 	flagShowMSButton = conf->value("flag_show_ms_button", true).toBool();
 	setFlagRadiant(conf->value("flag_show_radiants", true).toBool());
-	setFlagActiveRadiant(conf->value("flag_active_radiants", false).toBool());
+	setFlagActiveRadiant(conf->value("flag_active_radiants", true).toBool());
 
 	Vec3f color;
 	color = StelUtils::strToVec3f(conf->value("colorARG", "0, 255, 240").toString());

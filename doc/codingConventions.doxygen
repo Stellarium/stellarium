@@ -167,11 +167,15 @@ double cosLat = std::cos(lat); // Good
 
 Translatable strings are translated using the StelTranslator class, which is
 a C++ wrapper around <a href="http://www.gnu.org/software/gettext/">gettext</a>.
-A string literal can be marked for translation in with two different macros,
-@c q_() or @c N_() , and you need to pick one for the appropriate purpose:
+A string literal can be marked for translation in with three different macros,
+@c q_(), @c qc_() or @c N_() , and you need to pick one for the appropriate purpose:
  - The @c q_() macro takes a string in English and returns the translation as
  a QString using the current global language. This also allows calling @c q_()
  with a QString parameter to return a translation.
+ - The @c qc_() macro is similar previous - he takes a two parameters - string in English 
+ and context of the string, and returns the translation as a QString using the current 
+ global language. This also allows calling qc_() with a two QString parameters to return 
+ a translation.
  - When a string literal needs to be marked for translation without returning
  a translation, use the @c N_() macro. It returns the original string.
 

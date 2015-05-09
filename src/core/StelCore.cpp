@@ -183,8 +183,7 @@ void StelCore::init()
 	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 
-	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
-	setCurrentProjectionTypeKey(tmpstr);
+	setCurrentProjectionTypeKey(getDefaultProjectionTypeKey());
 
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");
@@ -236,6 +235,11 @@ void StelCore::init()
 	
 }
 
+QString StelCore::getDefaultProjectionTypeKey() const
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	return conf->value("projection/type", "ProjectionStereographic").toString();
+}
 
 // Get the shared instance of StelGeodesicGrid.
 // The returned instance is garanteed to allow for at least maxLevel levels

@@ -134,7 +134,17 @@ namespace StelUtils
 	//! @return The corresponding vector
 	//! @deprecated Use the >> operator from Vec3f class
 	Vec3f strToVec3f(const QStringList& s);
+	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
 	Vec3f strToVec3f(const QString& s);
+	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
+	Vec4d strToVec4d(const QStringList& s);
+	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
+	Vec4d strToVec4d(const QString& s);
+
+	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
+	QString vec3fToStr(const Vec3f& v);
+	//! Converts a Vec4d to a string in the same format that can be read by strToVec4d
+	QString vec4dToStr(const Vec4d& v);
 
 	//! Converts a Vec3f to HTML color notation.
 	//! @param v The vector
@@ -635,6 +645,13 @@ namespace StelUtils
 
 	//! Uncompress gzip or zlib compressed data.
 	QByteArray uncompress(const QByteArray& data);
+
+	//! Uncompress (gzip/zlib) data from this QIODevice, which must be open and readable.
+	//! @param device The device to read from, must already be opened with an OpenMode supporting reading
+	//! @param maxBytes The max. amount of bytes to read from the device, or -1 to read until EOF.  Note that it
+	//! always stops when inflate() returns Z_STREAM_END. Positive values can be used for interleaving compressed data
+	//! with other data.
+	QByteArray uncompress(QIODevice &device, qint64 maxBytes=-1);
 
 #ifdef _MSC_BUILD
 	inline double trunc(double x)

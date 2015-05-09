@@ -265,7 +265,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// GZ Hey, they are not used altogether! Resolution is constant, below!
 	//rows = landscapeIni.value("landscape/tesselate_rows", 8).toInt();
 	//cols = landscapeIni.value("landscape/tesselate_cols", 16).toInt();
-
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "old_style")
 	{
@@ -274,6 +273,18 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		validLandscape = 0;
 		return;
 	}
+
+	nbDecorRepeat      = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
+	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toFloat();
+	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toFloat();
+	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toFloat();
+	decorAngleShift    = landscapeIni.value("landscape/decor_angle_shift", 0.).toFloat();
+	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toFloat()  * M_PI/180.f;
+	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toFloat()   * M_PI/180.f;
+	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toFloat() * M_PI/180.f;
+	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
+	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
+	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
 
 	// Load sides textures
 	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
@@ -284,7 +295,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		QString textureName = landscapeIni.value(textureKey).toString();
 		const QString texturePath = getTexturePath(textureName, landscapeId);
 		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
-		// GZ: To query the textures, also fill an array of QImage*, but only
+		// GZ: To query the textures, also keep an array of QImage*, but only
 		// if that query is not going to be prevented by the polygon that already has been loaded at that point...
 		if ( (!horizonPolygon) && calibrated ) { // for uncalibrated landscapes the texture is currently never queried, so no need to store.
 			QImage *image = new QImage(texturePath);
@@ -362,18 +373,6 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 //	fogTexCoord.texCoords[2] = parameters.at(3).toFloat();
 //	fogTexCoord.texCoords[3] = parameters.at(4).toFloat();
 
-	nbDecorRepeat      = landscapeIni.value("landscape/nb_decor_repeat", 1).toInt();
-	fogAltAngle        = landscapeIni.value("landscape/fog_alt_angle", 0.).toFloat();
-	fogAngleShift      = landscapeIni.value("landscape/fog_angle_shift", 0.).toFloat();
-	decorAltAngle      = landscapeIni.value("landscape/decor_alt_angle", 0.).toFloat();
-	decorAngleShift    = landscapeIni.value("landscape/decor_angle_shift", 0.).toFloat();
-	angleRotateZ       = landscapeIni.value("landscape/decor_angle_rotatez", 0.).toFloat()  * M_PI/180.f;
-	groundAngleShift   = landscapeIni.value("landscape/ground_angle_shift", 0.).toFloat()   * M_PI/180.f;
-	groundAngleRotateZ = landscapeIni.value("landscape/ground_angle_rotatez", 0.).toFloat() * M_PI/180.f;
-	drawGroundFirst    = landscapeIni.value("landscape/draw_ground_first", 0).toInt();
-	tanMode            = landscapeIni.value("landscape/tan_mode", false).toBool();
-	calibrated         = landscapeIni.value("landscape/calibrated", false).toBool();
-
 	// Precompute the vertex arrays for ground display
 	// Make slices_per_side=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
 	//const int slices_per_side = 3*64/(nbDecorRepeat*nbSide);
@@ -397,8 +396,9 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	// Precompute the vertex arrays for side display. The geometry of the sides is always a cylinder.
 	// The texture is split into regular quads.
 
-	// GZ: the old code for vertical placement makes unfortunately no sense. There are many approximately-fitted landscapes, though.
-	// I added a switch "calibrated" for the ini file. If true, it works as this landscape apparently was originally intended.
+	// GZ: the original code for vertical placement makes unfortunately no sense. There are many approximately-fitted landscapes, though.
+	// I added a switch "calibrated" for the ini file. If true, it works as this landscape apparently was originally intended,
+	// if false (or missing) it uses the original code.
 	// So I corrected the texture coordinates so that decorAltAngle is the total vertical angle, decorAngleShift the lower angle,
 	// and the texture in between is correctly stretched.
 	// I located an undocumented switch tan_mode, maybe tan_mode=true means cylindrical panorama projection.
@@ -606,7 +606,14 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	sPainter.setProjector(core->getProjection(transfo));
 	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 
-	groundTex->bind();
+	if(groundTex.isNull())
+	{
+		qWarning()<<"LandscapeOldStyle groundTex is invalid!";
+	}
+	else
+	{
+		groundTex->bind();
+	}
 	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
 	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
 }
@@ -622,7 +629,6 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
 	}
 	// Else, sample the images...
-
 	const float alt_rad = std::asin(azalt[2]);  // sampled altitude, radians
 	if (alt_rad < decorAngleShift*M_PI/180.0f) return 1.0f; // below decor, i.e. certainly opaque ground.
 	if (alt_rad > (decorAltAngle+decorAngleShift)*M_PI/180.0f) return 0.0f; // above decor, i.e. certainly free sky.
@@ -636,20 +642,20 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		}
 		return (azalt[2] > 0 ? 0.0f : 1.0f);
 	}
-
 	float az=atan2(azalt[0], azalt[1]) / M_PI + 0.5f;  // -0.5..+1.5
 	if (az<0) az+=2.0f;                                //  0..2 = N.E.S.W.N
-
 	// we go to 0..1 domain, it's easier to think.
 	const float xShift=angleRotateZ /(2.0f*M_PI); // shift value in -1..1
+	Q_ASSERT(xShift >= -1.0f);
+	Q_ASSERT(xShift <=  1.0f);
 	float az_phot=az*0.5f - 0.25f - xShift;      // The 0.25 is caused by regular pano left edge being East. The xShift compensates any configured angleRotateZ
 	az_phot=fmodf(az_phot, 1.0f);
 	if (az_phot<0) az_phot+=1.0f;                                //  0..1 = image-X for a non-repeating pano photo
-
 	float az_panel =  nbSide*nbDecorRepeat * az_phot; // azimuth in "panel space". Ex for nbS=4, nbDR=3: [0..[12, say 11.4
 	float x_in_panel=fmodf(az_panel, 1.0f);
-	int currentSide = (int) floor(fmodf(az_panel, nbSide)); // must become 3
-	Q_ASSERT(currentSide<=nbSideTexs);
+	int currentSide = (int) floor(fmodf(az_panel, nbSide));
+	Q_ASSERT(currentSide>=0);
+	Q_ASSERT(currentSide<nbSideTexs);
 	int x= (sides[currentSide].texCoords[0] + x_in_panel*(sides[currentSide].texCoords[2]-sides[currentSide].texCoords[0]))
 			* sidesImages[currentSide]->width(); // pixel X from left.
 
@@ -674,18 +680,18 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 
 		y_img_1=(alt_pm1-img_bot_pm1)/(img_top_pm1-img_bot_pm1); // the sampled altitude in 0..1 visible image height from bottom
 	}
-
 	// x0/y0 is lower left, x1/y1 upper right corner.
 	float y_baseImg_1 = sides[currentSide].texCoords[1]+ y_img_1*(sides[currentSide].texCoords[3]-sides[currentSide].texCoords[1]);
 	int y=(1.0-y_baseImg_1)*sidesImages[currentSide]->height();           // pixel Y from top.
-
 	QRgb pixVal=sidesImages[currentSide]->pixel(x, y);
+#ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Oldstyle Landscape sampling: az=" << az*180.0 << "° alt=" << alt_rad*180.0f/M_PI
 			 << "°, xShift[-1..+1]=" << xShift << " az_phot[0..1]=" << az_phot
 			 << " --> current side panel " << currentSide
 			 << ", w=" << sidesImages[currentSide]->width() << " h=" << sidesImages[currentSide]->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
+#endif
 	return qAlpha(pixVal)/255.0f;
 }
 
@@ -892,10 +898,12 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 	int y= mapImage->height()/2*(1 + radius*std::cos(az));
 
 	QRgb pixVal=mapImage->pixel(x, y);
+#ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
 			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
+#endif
 	return qAlpha(pixVal)/255.0f;
 
 
@@ -1077,11 +1085,13 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	int x=(az_phot/2.0f) * mapImage->width(); // pixel X from left.
 
 	QRgb pixVal=mapImage->pixel(x, y);
+#ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << az*180.0 << "° alt=" << alt_pm1*90.0f
 			 << "°, xShift[-2..+2]=" << xShift << " az_phot[0..2]=" << az_phot
 			 << ", w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
+#endif
 	return qAlpha(pixVal)/255.0f;
 
 }

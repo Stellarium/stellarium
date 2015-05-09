@@ -296,6 +296,9 @@ public:
 	//! Get value of the current Julian epoch
 	double getCurrentEpoch() const;
 
+	//! Get the default Mapping used by the Projection
+	QString getDefaultProjectionTypeKey(void) const;
+
 public slots:
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);

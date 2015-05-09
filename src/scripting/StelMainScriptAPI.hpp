@@ -387,6 +387,10 @@ public slots:
 	//! @param b if true, sets the disk viewport on, else sets it off
 	void setDiskViewport(bool b);
 
+	//! Set the viewport distortion effect
+	//! @param b if true, sets the spherical mirror distortion effect for viewport on, else sets it off
+	void setSphericMirror(bool b);
+
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
 	QStringList getAllSkyCultureIDs();
@@ -697,8 +701,8 @@ public slots:
 	// Methods wait() and waitFor() was added for documentation.
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
 
-	//! Pauses the script for \e t milliseconds
-	//! @param t the number of milliseconds to wait
+	//! Pauses the script for \e t seconds
+	//! @param t the number of seconds to wait
 	//! @note This method is pure JavaScript implementation.
 	void wait(double t) { Q_UNUSED(t) }
 
