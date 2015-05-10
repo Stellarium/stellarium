@@ -100,3 +100,70 @@ void TestDeltaT::testDeltaTByEspenakMeeus()
 	}
 }
 
+void TestDeltaT::testDeltaTByChaprontMeeus()
+{
+	// test data from Astronomical Algorithms, 2ed., p. 79.
+	QVariantList data;
+	data << 1620 << 121.0;
+	data << 1630 <<  82.0;
+	data << 1640 <<  60.0;
+	data << 1650 <<  46.0;
+	data << 1660 <<  35.0;
+	data << 1670 <<  24.0;
+	data << 1680 <<  14.0;
+	data << 1690 <<   8.0;
+	data << 1700 <<   7.0;
+	data << 1710 <<   9.0;
+	data << 1720 <<  10.0;
+	data << 1730 <<  10.0;
+	data << 1740 <<  11.0;
+	data << 1750 <<  12.0;
+	data << 1760 <<  14.0;
+	data << 1770 <<  15.0;
+	data << 1780 <<  16.0;
+	data << 1790 <<  16.0;
+	data << 1800 <<  13.1;
+	data << 1810 <<  12.0;
+	data << 1820 <<  11.6;
+	data << 1830 <<   7.1;
+	data << 1840 <<   5.4;
+	data << 1850 <<   6.8;
+	data << 1860 <<   7.7;
+	data << 1870 <<   1.4;
+	data << 1880 <<  -5.5;
+	data << 1890 <<  -6.0;
+	data << 1900 <<  -2.8;
+	data << 1910 <<  10.4;
+	data << 1920 <<  21.1;
+	data << 1930 <<  24.4;
+	data << 1940 <<  24.3;
+	data << 1950 <<  29.1;
+	data << 1960 <<  33.1;
+	data << 1970 <<  40.2;
+	data << 1980 <<  50.5;
+	data << 1990 <<  56.9;
+	data << 1998 <<  63.0;
+
+	// accuracy 0.9 seconds for years range 1800-1997
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 0.9; // 0.9 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByChaprontMeeus(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
