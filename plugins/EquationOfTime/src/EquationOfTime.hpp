@@ -30,6 +30,29 @@ class QPixmap;
 class StelButton;
 class EquationOfTimeWindow;
 
+/*! @mainpage notitle
+@section overview Plugin Overview
+
+The %Equation of Time plugin shows the solution of the equation of time.
+
+The equation of time describes the discrepancy between two kinds of solar
+time. These are apparent solar time, which directly tracks the motion of
+the sun, and mean solar time, which tracks a fictitious "mean" sun with
+noons 24 hours apart. There is no universally accepted definition of the
+sign of the equation of time. Some publications show it as positive when
+a sundial is ahead of a clock; others when the clock is ahead of the sundial.
+In the English-speaking world, the former usage is the more common, but is
+not always followed. Anyone who makes use of a published table or graph
+should first check its sign usage.
+
+@section config Configuration
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [EquationOfTime]).
+*/
+
+//! @class EquationOfTime
+//! Main class of the %Equation of Time plugin.
+//! @author Alexander Wolf
 class EquationOfTime : public StelModule
 {
 	Q_OBJECT
