@@ -46,7 +46,8 @@ typedef QSharedPointer<Pulsar> PulsarP;
 @section overview Plugin Overview
 
 The %Pulsars plugin plots the position of various pulsars, with object information
-about each one. Pulsar data is derived from Catalog of Pulsars ([Taylor+ 1995](http://cdsads.u-strasbg.fr/cgi-bin/nph-bib_query?1993ApJS...88..529T&db_key=AST&nosetcookie=1))
+about each one. Pulsar data is derived from Catalog of Pulsars
+([Taylor+ 1995](http://cdsads.u-strasbg.fr/cgi-bin/nph-bib_query?1993ApJS...88..529T&db_key=AST&nosetcookie=1))
 for 0.1.x series and derived from The ATNF Pulsar Catalogue (Manchester, R. N.,
 Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005)
 ([astro-ph/0412641](http://arxiv.org/abs/astro-ph/0412641))) for series 0.2.x.
