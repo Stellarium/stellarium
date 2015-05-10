@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 02:28+0600\n"
-"PO-Revision-Date: 2015-05-04 17:29+0000\n"
+"POT-Creation-Date: 2015-05-09 16:26+0600\n"
+"PO-Revision-Date: 2015-05-09 23:54+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-09 05:26+0000\n"
+"X-Launchpad-Export-Date: 2015-05-10 05:22+0000\n"
 "X-Generator: Launchpad (build 17474)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -2118,67 +2118,77 @@ msgstr "natural"
 msgid "starchart"
 msgstr "carta celeste"
 
-#: src/gui/SearchDialog.cpp:232
+#: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Equatorial (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:233
+#: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Equatorial"
 
-#: src/gui/SearchDialog.cpp:234
+#: src/gui/SearchDialog.cpp:235
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: src/gui/SearchDialog.cpp:235
+#: src/gui/SearchDialog.cpp:236
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galáctico"
 
-#: src/gui/SearchDialog.cpp:255
+#: src/gui/SearchDialog.cpp:237
+msgctxt "coordinate system"
+msgid "Ecliptic"
+msgstr "Eclíptica"
+
+#: src/gui/SearchDialog.cpp:238
+msgctxt "coordinate system"
+msgid "Ecliptic (J2000.0)"
+msgstr "Eclíptica (J2000.0)"
+
+#: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
 msgstr "Ascensão reta"
 
-#: src/gui/SearchDialog.cpp:258
+#: src/gui/SearchDialog.cpp:261
 msgid "Declination"
 msgstr "Declinação"
 
-#: src/gui/SearchDialog.cpp:266
+#: src/gui/SearchDialog.cpp:269
 msgid "Azimuth"
 msgstr "Azimute"
 
-#: src/gui/SearchDialog.cpp:269
+#: src/gui/SearchDialog.cpp:272
 msgid "Altitude"
 msgstr "Altura"
 
-#: src/gui/SearchDialog.cpp:277
+#: src/gui/SearchDialog.cpp:282
 msgid "Longitude"
 msgstr "Longitude"
 
-#: src/gui/SearchDialog.cpp:280
+#: src/gui/SearchDialog.cpp:285
 msgid "Latitude"
 msgstr "Latitude"
 
-#: src/gui/SearchDialog.cpp:537
+#: src/gui/SearchDialog.cpp:557
 msgid "Simbad Lookup Error"
 msgstr "Erro de pesquisa no Simbad"
 
-#: src/gui/SearchDialog.cpp:545
+#: src/gui/SearchDialog.cpp:565
 msgid "Simbad Lookup"
 msgstr "Pesquisa no Simbad"
 
-#: src/gui/SearchDialog.cpp:713
+#: src/gui/SearchDialog.cpp:733
 msgid "University of Strasbourg (France)"
 msgstr "Universidade de Estrasburgo (França)"
 
-#: src/gui/SearchDialog.cpp:714
+#: src/gui/SearchDialog.cpp:734
 msgid "Harvard University (USA)"
 msgstr "Universidade de Harvard (EUA)"
 
-#: src/gui/SearchDialog.cpp:774
+#: src/gui/SearchDialog.cpp:794
 msgid "Paste and Search"
 msgstr "Colar e pesquisar"
 
@@ -6322,7 +6332,7 @@ msgstr "Velocidade TEME (km/s): %1"
 #: plugins/Satellites/src/Satellite.cpp:323
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "Ângulo de reflexão do Sol: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:334
 msgid "The satellite and the observer are in sunlight."
