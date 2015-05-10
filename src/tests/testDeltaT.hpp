@@ -31,6 +31,7 @@ Q_OBJECT
 private slots:
 	void initTestCase();
 	void testDeltaTByEspenakMeeus();
+	void testDeltaTByChaprontMeeus();
 
 };
 
