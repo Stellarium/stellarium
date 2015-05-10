@@ -55,7 +55,7 @@ plug-in at compile time. A working copy is kept in the user data directory.
 
 @section config Configuration
 The plug-ins' configuration data is stored in Stellarium's main configuration
-file.
+file (section [Novae]).
 */
 
 //! @class Novae

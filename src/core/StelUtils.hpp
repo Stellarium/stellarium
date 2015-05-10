@@ -329,6 +329,7 @@ namespace StelUtils
 	//! Calculate and getting sidereal period in days from semi-major axis (in AU)
 	double calculateSiderealPeriod(const double SemiMajorAxis);
 
+	//! Convert decimal hours to hours, minutes, seconds
 	QString hoursToHmsStr(const double hours);
 
 	//! Get the number of seconds since program start.

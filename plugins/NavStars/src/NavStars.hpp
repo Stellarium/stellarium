@@ -43,10 +43,13 @@ are not objects!
 
 The plugin is also an example of a custom plugin that just marks existing stars.
 
+@section config Configuration
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [NavigationalStars]).
 */
 
 //! @class NavStars
-//! Main class of the Navigational Stars plugin.
+//! Main class of the %Navigational Stars plugin.
 //! @author Alexander Wolf
 class NavStars : public StelModule
 {
