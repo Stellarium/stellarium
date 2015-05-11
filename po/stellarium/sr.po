@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 16:26+0600\n"
-"PO-Revision-Date: 2015-05-09 18:02+0000\n"
+"POT-Creation-Date: 2015-05-10 14:59+0600\n"
+"PO-Revision-Date: 2015-05-10 15:29+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-10 05:18+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-11 05:20+0000\n"
+"X-Generator: Launchpad (build 17487)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -1736,8 +1736,8 @@ msgid "Tester: %1"
 msgstr "Испитивач: %1"
 
 #: src/gui/HelpDialog.cpp:306
-msgid "Past Developers"
-msgstr "Последњи програмери"
+msgid "Former Developers"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -8811,6 +8811,12 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Приказује анализу могућности посматрања изабраног објекта (време излаза, "
+"залаза и транзита) за тренутни датум, као и када јемогуће посматрати у току "
+"године. Претпоставља се да се објекат може посматрати ако се налази изнаг "
+"изнад хоризонта у току ноћи. Такође су укључени и датуми излаза и залаза "
+"највећег удаљавања од Сунца,  објеката који се јављају у сумрак и косичких "
+"података."
 
 #: plugins/Observability/src/Observability.cpp:170
 msgctxt "short month name"
@@ -8931,7 +8937,7 @@ msgstr "Није могуће посматрати небеско тело"
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "Нема космичког излаза/зачаза, нити излаза/залаза у сумрак."
 
 #: plugins/Observability/src/Observability.cpp:199
 #, qt-format
@@ -11393,6 +11399,9 @@ msgstr "Тренутна планета: Сатурн"
 #, qt-format
 #~ msgid "Obliquity (of date): %1"
 #~ msgstr "Закошење (од датума): %1"
+
+#~ msgid "Past Developers"
+#~ msgstr "Последњи програмери"
 
 #~ msgid "Galactic plane"
 #~ msgstr "Галактичка раван"
