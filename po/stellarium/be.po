@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 16:26+0600\n"
-"PO-Revision-Date: 2015-04-16 02:54+0000\n"
+"POT-Creation-Date: 2015-05-10 14:59+0600\n"
+"PO-Revision-Date: 2015-05-10 21:22+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-10 05:09+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-11 05:10+0000\n"
+"X-Generator: Launchpad (build 17487)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -81,7 +81,7 @@ msgstr "Ґаляктычны экватар"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1348
 msgid "O./C. longitude"
-msgstr ""
+msgstr "Даўгата С/З"
 
 #: src/core/modules/GridLinesMgr.cpp:755
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -1756,8 +1756,8 @@ msgid "Tester: %1"
 msgstr "Тэставальнік: %1"
 
 #: src/gui/HelpDialog.cpp:306
-msgid "Past Developers"
-msgstr "Ранейшыя распрацоўнікі"
+msgid "Former Developers"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -1789,6 +1789,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Пэўныя людзі зрабілі ўнёсак у праект і іхняя праца зрабіла Stellarium лепшым "
+"(упарадкаваныяы паводле альфабэту): %1"
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2569,7 +2571,7 @@ msgstr "Сыбірскія"
 
 #: src/translations.h:150
 msgid "Tukano"
-msgstr ""
+msgstr "Тукана"
 
 #: src/translations.h:151
 msgid "Tupi-Guarani"
@@ -2660,12 +2662,12 @@ msgstr "Нулявы гарызонт"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:191
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Венскі Штэрнґартэн"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
 msgid "Testscene"
-msgstr ""
+msgstr "Тэставы"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
@@ -6154,12 +6156,12 @@ msgstr "GPS"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1729
 msgid "glonass"
-msgstr ""
+msgstr "ґлянас"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1731
 msgid "galileo"
-msgstr ""
+msgstr "ґалілеа"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1733
@@ -6169,17 +6171,17 @@ msgstr "Iridium"
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1735
 msgid "stations"
-msgstr ""
+msgstr "станцыі"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1737
 msgid "education"
-msgstr ""
+msgstr "адукацыйныя"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1739
 msgid "observatory"
-msgstr ""
+msgstr "абсэрваторыі"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1750
@@ -6194,7 +6196,7 @@ msgstr "Міжнародная касьмічная станцыя"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1754
 msgid "China's first space station"
-msgstr ""
+msgstr "Першая кітайская касьмічная станцыя"
 
 #: plugins/Satellites/src/Satellite.cpp:256
 #: plugins/Satellites/src/Satellite.cpp:260
@@ -10171,11 +10173,11 @@ msgstr "Паказваць мэтэорныя ліўні на пачатку п�
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
 msgid "Show radiant marker"
-msgstr ""
+msgstr "паказваць пазнакі радыянтаў"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Паказваць подпісы радыянтаў"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
 msgid "Show active radiants only"
@@ -10187,7 +10189,7 @@ msgstr "Кеґль подпісаў (у піксэлях)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
 msgid "Set radiant color"
-msgstr ""
+msgstr "Паказваць колер радыянтаў"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
 msgid "Active Radiant - Generic Data"
@@ -10199,7 +10201,7 @@ msgstr "Неактыўны радыянт"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
 msgid "Inactive"
-msgstr ""
+msgstr "Неактыўныя"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
 msgid "Active Radiant - Real Data"
@@ -10380,7 +10382,7 @@ msgstr "Ператварэньне зямлі…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Разьлік мапы сутыкненьняў…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
@@ -10412,15 +10414,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "Загружаны дадатак Scenery3d!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "Scenery3d: трохмерныя краявіды"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "Укл./выкл. трохмерны краявід"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Show settings dialog"
@@ -10436,7 +10438,7 @@ msgstr "Укл./выкл. цені"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Укл./выкл. адладачную інфармацыю"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle location text"
@@ -10448,7 +10450,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr ""
+msgstr "Перазагрузіць шэйдэры"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
@@ -10456,12 +10458,12 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "Загрузка сцэны. Калі ласка, пачакай!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:337
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "Загрузка сцэны «%1»"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:360
 msgid "Could not load scene, please check log for error messages!"
@@ -10494,14 +10496,14 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "укл"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "выкл"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #, qt-format
@@ -10524,37 +10526,37 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "лянівая кубічная мапа: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
-msgstr ""
+msgstr "задзейнічаная"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "disabled"
-msgstr ""
+msgstr "абязьдзейненая"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Памер кубічнай мапы зьмяніўся"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Памер кубічнай мапы не падтрымліваецца, зададзены як %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Памер мапы ценяў зьмяніўся"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Памер мапы ценяў не падтрымліваецца, зададзены як %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
 msgid "3D Sceneries"
-msgstr ""
+msgstr "Трохмерныя краявіды"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:924
 msgid ""
@@ -10576,7 +10578,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Патрэбна для мапаў паверхні й ценяў!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
@@ -10612,7 +10614,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Зьмяншае прадукцыйнасьць."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
@@ -10704,11 +10706,11 @@ msgstr "6 тэкстур"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr ""
+msgstr "Кубічная мапа"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Ґеамэтрычны шэйдэр"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
@@ -10717,15 +10719,15 @@ msgstr "Каардынаты сеткі (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "Трохмерны краявід"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Зрабіць прадвызначаным"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Загрузіць/захаваць пункты агляду"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
@@ -10751,7 +10753,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "Папіксальнае асьвятленьне"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
@@ -10763,15 +10765,15 @@ msgstr "Простыя цені"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Мапа паверхні"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Памер кубічная мапы:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Памер мапы ценяў:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
@@ -10779,23 +10781,23 @@ msgstr "Якасьць фільтраваньня:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Абсталяваньне"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Нізкі"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Нізкі + Абсталяваньне"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Вялікі (павольна)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Высокі + Абсталяваньне (павольна)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
@@ -10803,11 +10805,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Рэжым кубічнай мапы:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Поўныя цені кубічнай мапы"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
@@ -10827,7 +10829,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr "Настройкі якасьці/прадукцыйнасцьці"
+msgstr "Настройкі якасьці/прадукцыйнасьці"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:205
 msgid "Stored views"
@@ -10853,48 +10855,48 @@ msgstr "Назва:"
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "Археалініі"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "Прылада штудый з археа- й этнаастранамічных раўнаваньняў"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:742
 msgid "Equinox"
-msgstr ""
+msgstr "Раўнадзенства"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:745
 msgid "Solstice"
-msgstr ""
+msgstr "Сонцастаяньне"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:748
 msgid "Crossquarter"
-msgstr ""
+msgstr "Перасячэньне чвэрці"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:751
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Вялікае спыненьне Месяца"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:754
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Малое спыненьне Месяца"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Праходжаньне зэніту"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:760
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Праходжаньне надыру"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:763
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "Выбраны аб'ект"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
 msgid "error if you can read this"
-msgstr ""
+msgstr "памылка, раз ты гэта бачыш"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
 msgid "Mercury"
@@ -10906,51 +10908,55 @@ msgstr "Вэнэра"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Дадатак «Археалініі»"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"Дадатак «Археалініі» паказвае любыя спалучэньні дуг схіленьняў, якія маюць "
+"дачыненьне да археа- й этнаастранамічных штудый."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "Схіленьне раўнадзенстваў (г.зн. экватара) і сонцастаяньняў"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"Схіленьні дзён перасячэньня чвэрці (дзён між сонцастаяньнямі й "
+"раўнадзенствамі)"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Схіленьні вялікіх спыненьняў Месяца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Схіленьні малых спыненьняў Месяца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Схіленьне праходжаньня зэніту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Схіленьне праходжаньня надыру"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "Схіленьне бягучага вылачанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Бягучае схіленьне сонца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Бягучае схіленьне месяца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
@@ -10966,55 +10972,55 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Выберы колер лініі раўнадзенства"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Выберы колер ліній сонцастаяньня"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Выберы колер ліній перасячэньня чвэрці"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Выберы колер ліній вялікіх спыненьняў"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Выберы колер ліній малых спыненьняў"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Выберы колер лініі праходжаньня зэніту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Выберы колер лініі праходжаньня надыру"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Выберы колер лініі вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Выберы колер лініі бягучага сонца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "Выберы колер лініі бягучага месяца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Выберы колер лініі бягучай плянэты"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "Настаўленьні археаліній"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку «Археалініі»"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
@@ -11022,67 +11028,67 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "Лінія раўнадзенства (экватар)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
-msgstr ""
+msgstr "Лініі сонцастаяньня"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Лініі перасячэньня чвэрці"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Зьмяніць колер"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Лініі вялікіх спыненьняў Месяца"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Лініі малых спыненьняў Месяца"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "Схіленьне праходжаньня зэніту"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Схіленьне праходжаньня надыру"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "Бягучае Сонца"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "Бягучы Месяц"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Бягучая плянэта: адсутнічае"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Бягучая плянэта: Мэркуры"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Бягучая плянэта: Вэнэра"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Бягучая плянэта: Марс"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Бягучая плянэта: Юпітэр"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Бягучая плянэта: Сатурн"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Экватарыяльная сетка"
@@ -11749,6 +11755,9 @@ msgstr ""
 
 #~ msgid "clear script"
 #~ msgstr "ачысьціць сцэнар"
+
+#~ msgid "Past Developers"
+#~ msgstr "Ранейшыя распрацоўнікі"
 
 #~ msgid "Display  info about an absolute magnitude"
 #~ msgstr "Паказаць зьвесткі пра абсалютную велічыню"
