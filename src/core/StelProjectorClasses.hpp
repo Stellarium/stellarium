@@ -43,12 +43,12 @@ public:
 		if (v[2] > 0) {
 			v[0] /= v[2];
 			v[1] /= v[2];
-			v[2] = r;
+			v[2] = -std::numeric_limits<float>::max();
 			return false;
 		}
 		v[0] = std::numeric_limits<float>::max();
 		v[1] = std::numeric_limits<float>::max();
-		v[2] = r;
+		v[2] = -std::numeric_limits<float>::max();
 		return false;
 	}
 	bool backward(Vec3d &v) const;
