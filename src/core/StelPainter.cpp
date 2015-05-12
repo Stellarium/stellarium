@@ -604,6 +604,7 @@ inline void fIter(const StelProjectorP& prj, const Vec3d& p1, const Vec3d& p2, V
 
 // Used by the method below
 QVector<Vec2f> StelPainter::smallCircleVertexArray;
+QVector<Vec4f> StelPainter::smallCircleColorArray;
 
 void StelPainter::drawSmallCircleVertexArray()
 {
@@ -612,11 +613,14 @@ void StelPainter::drawSmallCircleVertexArray()
 
 	Q_ASSERT(smallCircleVertexArray.size()>1);
 
-	enableClientStates(true);
+	enableClientStates(true, false, !smallCircleColorArray.isEmpty());
 	setVertexPointer(2, GL_FLOAT, smallCircleVertexArray.constData());
+	if (!smallCircleColorArray.isEmpty())
+		setColorPointer(4, GL_FLOAT, smallCircleColorArray.constData());
 	drawFromArray(LineStrip, smallCircleVertexArray.size(), 0, false);
 	enableClientStates(false);
 	smallCircleVertexArray.resize(0);
+	smallCircleColorArray.resize(0);
 }
 
 static Vec3d pt1, pt2;
@@ -698,6 +702,47 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 		}
 	}
 	Q_ASSERT(smallCircleVertexArray.isEmpty());
+}
+
+void StelPainter::drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors)
+{
+	// Because the path may intersect a viewport discontinuity, we cannot render
+	// it in one OpenGL drawing call.
+	Q_ASSERT(smallCircleVertexArray.isEmpty());
+	Q_ASSERT(smallCircleColorArray.isEmpty());
+	Q_ASSERT(points.size() == colors.size());
+	Vec3d win;
+	for (int i = 0; i+1 != points.size(); i++)
+	{
+		const Vec3d p1 = points[i];
+		const Vec3d p2 = points[i + 1];
+		if (!prj->intersectViewportDiscontinuity(p1, p2))
+		{
+			prj->project(p1, win);
+			smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+			smallCircleColorArray.append(colors[i]);
+			if (i+2==points.size())
+			{
+				prj->project(p2, win);
+				smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+				smallCircleColorArray.append(colors[i + 1]);
+				drawSmallCircleVertexArray();
+			}
+		}
+		else
+		{
+			// Break the line, draw the stored vertex and flush the list
+			if (!smallCircleVertexArray.isEmpty())
+			{
+				prj->project(p1, win);
+				smallCircleVertexArray.append(Vec2f(win[0], win[1]));
+				smallCircleColorArray.append(colors[i]);
+			}
+			drawSmallCircleVertexArray();
+		}
+	}
+	Q_ASSERT(smallCircleVertexArray.isEmpty());
+	Q_ASSERT(smallCircleColorArray.isEmpty());
 }
 
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
