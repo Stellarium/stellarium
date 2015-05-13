@@ -1373,6 +1373,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 					result << trans.qtranslate(star);
 				}
 			}
+			break;
 		}
 		case 1: // Variable stars
 		{
@@ -1398,10 +1399,13 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 					result << trans.qtranslate(star);
 				}
 			}
+			break;
 		}
 		default:
+		{
 			// No stars yet?
 			break;
+		}
 	}
 
 	result.removeDuplicates();
