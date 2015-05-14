@@ -59,11 +59,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 			colorArray[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
 			vertexArray[i]=posHistory.at(i);
 		}
-		sPainter->setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
-		sPainter->setColorPointer(4, GL_FLOAT, colorArray.constData());
-		sPainter->enableClientStates(true, false, true);
-		sPainter->drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
-		sPainter->enableClientStates(false);
+		sPainter->drawPath(vertexArray, colorArray);
 	}
 }
 

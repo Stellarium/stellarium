@@ -3,10 +3,14 @@ version                             = @PACKAGE_VERSION@
 invert_screenshots_colors           = false
 
 [plugins_load_at_startup]
-Oculars                             = false
+Oculars                             = true
 Satellites                          = true
-SolarSystemEditor                   = false
+SolarSystemEditor                   = true
 TimeZoneConfiguration               = true
+Exoplanets                          = true
+MeteorShowers                       = true
+Novae                               = true
+FOV                                 = true
 
 [video]
 fullscreen                          = true
@@ -132,8 +136,8 @@ ecliptic_J2000_color                = 0.3,0.3,0.1
 meridian_color                      = 0.2,0.6,0.2
 longitude_color                     = 0.2,0.4,0.4
 horizon_color                       = 0.2,0.6,0.2
-const_lines_color                   = 0.1,0.1,0.3
-const_names_color                   = 0.2,0.4,0.7
+const_lines_color                   = 0.2,0.2,0.6
+const_names_color                   = 0.4,0.6,0.9
 const_boundary_color                = 0.3,0.1,0.1
 nebula_label_color                  = 0.2,0.6,0.7
 nebula_circle_color                 = 1.0,0.7,0.2
@@ -228,15 +232,14 @@ flag_light_travel_time              = true
 flag_object_trails                  = false
 flag_nebula                         = true
 flag_nebula_name                    = false
-flag_nebula_long_name               = false
 flag_nebula_display_no_texture      = false
 extinction_mode_below_horizon       = mirror
 max_mag_nebula_name                 = 8
 nebula_scale                        = 1
+flag_nebula_hints_proportional      = false
 flag_milky_way                      = true
 milky_way_intensity                 = 1
 flag_bright_nebulae                 = false
-flag_nebula_ngc                     = false
 meteor_rate                         = 10
 labels_amount                       = 3.0
 nebula_hints_amount                 = 3.0

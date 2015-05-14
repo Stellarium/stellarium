@@ -152,6 +152,7 @@ void Planet::init()
 	vMagAlgorithmMap.insert(Planet::Planesas,	"planesas");
 	vMagAlgorithmMap.insert(Planet::Mueller,	"mueller");
 	vMagAlgorithmMap.insert(Planet::Harris,		"harris");
+	vMagAlgorithmMap.insert(Planet::Generic,	"generic"),
 	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
 }
 
@@ -210,15 +211,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
 
-	if (flags&Magnitude)
+	if (flags&Magnitude && getVMagnitude(core)!=INFINITY)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		    oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-										    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+											QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 		else
-		    oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
-	if (flags&AbsoluteMagnitude)
+	if (flags&AbsoluteMagnitude && getVMagnitude(core)!=INFINITY)
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);
@@ -627,10 +628,9 @@ double Planet::getSiderealTime(double jd) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-// TODO: This block need rewrite
 	if (englishName=="Jupiter")
 	{
-		if( re.offset != 0.0 )
+		if( re.offset >= 0.0 )
 		{
 			// use semi-empirical coefficient for GRS drift
 			// qDebug() << "Jupiter: offset = " << re.offset << " --> rotation = " << (remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172));
@@ -939,6 +939,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 					return -6.85 + d;
 				if (englishName=="Neptune")
 					return -7.05 + d;
+				// Original formulae doesn't have equeation for Pluto
 				if (englishName=="Pluto")
 					return -1.0 + d;
 
@@ -979,6 +980,11 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Pluto")
 					return -1.00f + d;
 
+				break;
+			}
+			case Generic:
+			{
+				// Calculation visual magnitude from phase angle and albedo of the planet
 				break;
 			}
 		}
@@ -1270,13 +1276,14 @@ void Planet::initShader()
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		// GZ next 5 can be lowp instead of mediump
-		"    lowp float roughness = 1.0;\n"
+		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0
+		"    lowp float roughness = 0.8;\n"
 		"    lowp float roughnessSquared = roughness * roughness;\n"
 		"    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
 		"    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
 		"    lowp float C = sin(alpha) * tan(beta);\n"
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 2.0;\n"
+		// GZ final number was 2, but this causes overly bright moon.
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
 		"#endif\n"
 		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"

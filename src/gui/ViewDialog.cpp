@@ -84,7 +84,7 @@ void ViewDialog::retranslate()
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
-		ui->stackListWidget->setWrapping(false);
+		updateTabBarListWidgetWidth();
 	}
 }
 
@@ -313,6 +313,42 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+
+	updateTabBarListWidgetWidth();
+}
+
+void ViewDialog::updateTabBarListWidgetWidth()
+{
+	ui->stackListWidget->setWrapping(false);
+
+	// Update list item sizes after translation
+	ui->stackListWidget->adjustSize();
+
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+	{
+		return;
+	}
+
+	// stackListWidget->font() does not work properly!
+	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
+	QFont font;
+	font.setPixelSize(14);
+	font.setWeight(75);
+	QFontMetrics fontMetrics(font);
+
+	int iconSize = ui->stackListWidget->iconSize().width();
+
+	int width = 0;
+	for (int row = 0; row < model->rowCount(); row++)
+	{
+		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
+		width += 24; // margin - 12px left and 12px right
+	}
+
+	// Hack to force the window to be resized...
+	ui->stackListWidget->setMinimumWidth(width);
 }
 
 void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)

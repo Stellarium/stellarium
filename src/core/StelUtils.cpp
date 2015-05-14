@@ -23,6 +23,7 @@
 
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
+#include <QBuffer>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
@@ -474,6 +475,36 @@ Vec3f strToVec3f(const QString& s)
 	return strToVec3f(s.split(","));
 }
 
+Vec4d strToVec4d(const QStringList &s)
+{
+	if(s.size()<4)
+		return Vec4d(0.0,0.0,0.0,0.0);
+
+	return Vec4d(s[0].toDouble(), s[1].toDouble(), s[2].toDouble(), s[3].toDouble());
+}
+
+Vec4d strToVec4d(const QString& str)
+{
+	return strToVec4d(str.split(","));
+}
+
+QString vec3fToStr(const Vec3f &v)
+{
+	return QString("%1,%2,%3")
+		.arg(v[0],0,'f',6)
+		.arg(v[1],0,'f',6)
+		.arg(v[2],0,'f',6);
+}
+
+QString vec4dToStr(const Vec4d &v)
+{
+	return QString("%1,%2,%3,%4")
+		.arg(v[0],0,'f',10)
+		.arg(v[1],0,'f',10)
+		.arg(v[2],0,'f',10)
+		.arg(v[3],0,'f',10);
+}
+
 // Converts a Vec3f to HTML color notation.
 QString vec3fToHtmlColor(const Vec3f& v)
 {
@@ -550,6 +581,12 @@ void equToEcl(const double raRad, const double decRad, const double eclRad, doub
 {
 	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
 	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
+}
+
+void eclToEqu(const double lambdaRad, const double betaRad, const double eclRad, double *raRad, double *decRad)
+{
+	*raRad = std::atan2(std::sin(lambdaRad)*std::cos(eclRad)-std::tan(betaRad)*std::sin(eclRad), std::cos(lambdaRad));
+	*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
 }
 
 double getDecAngle(const QString& str)
@@ -739,7 +776,7 @@ QString julianDayToISO8601String(const double jd)
 }
 
 // Format the date per the fmt.
-QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt)
+QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt)
 {
 	/* we have to handle the year zero, and the years before qdatetime can represent. */
 	const QLatin1Char quote('\'');
@@ -2031,36 +2068,116 @@ QByteArray uncompress(const QByteArray& data)
 {
 	if (data.size() <= 4)
 		return QByteArray();
-	static const int CHUNK = 1024;
-	QByteArray buffer(CHUNK, 0);
+
+	//needed for const-correctness, no deep copy performed
+	QByteArray dataNonConst(data);
+	QBuffer buf(&dataNonConst);
+	buf.open(QIODevice::ReadOnly);
+
+	return uncompress(buf);
+}
+
+//! Uncompress (gzip/zlib) data from this QIODevice, which must be open and readable.
+//! @param device The device to read from, must already be opened with an OpenMode supporting reading
+//! @param maxBytes The max. amount of bytes to read from the device, or -1 to read until EOF.  Note that it
+//! always stops when inflate() returns Z_STREAM_END. Positive values can be used for interleaving compressed data
+//! with other data.
+QByteArray uncompress(QIODevice& device, qint64 maxBytes)
+{
+	// this is a basic zlib decompression routine, similar to:
+	// http://zlib.net/zlib_how.html
+
+	// buffer size 256k, zlib recommended size
+	static const int CHUNK = 262144;
+	QByteArray readBuffer(CHUNK, 0);
+	QByteArray inflateBuffer(CHUNK, 0);
 	QByteArray out;
+
+	// zlib stream
 	z_stream strm;
 	strm.zalloc = Z_NULL;
 	strm.zfree = Z_NULL;
 	strm.opaque = Z_NULL;
-	strm.avail_in = data.size();
-	strm.next_in = (Bytef*)(data.data());
+	strm.avail_in = Z_NULL;
+	strm.next_in = Z_NULL;
 
+	// the amount of bytes already read from the device
+	qint64 bytesRead = 0;
+
+	// initialize zlib
 	// 15 + 32 for gzip automatic header detection.
 	int ret = inflateInit2(&strm, 15 +  32);
-	if (ret != Z_OK) return QByteArray();
+	if (ret != Z_OK)
+	{
+		qWarning()<<"zlib init error ("<<ret<<"), can't uncompress";
+		if(strm.msg)
+			qWarning()<<"zlib message: "<<QString(strm.msg);
+		return QByteArray();
+	}
 
+	//zlib double loop - one for reading from file, one for inflating
 	do
 	{
-		strm.avail_out = CHUNK;
-		strm.next_out = (Bytef*)(buffer.data());
-		ret = inflate(&strm, Z_NO_FLUSH);
-		Q_ASSERT(ret != Z_STREAM_ERROR);
-		if (ret < 0)
+		qint64 bytesToRead = CHUNK;
+		if(maxBytes>=0)
 		{
-			out.clear();
-			break;
+			//check if we reach the desired limit with the next read
+			bytesToRead = qMin((qint64)CHUNK,maxBytes-bytesRead);
 		}
-		out.append(buffer.data(), CHUNK - strm.avail_out);
-	}
-	while (strm.avail_out == 0);
 
-    inflateEnd(&strm);
+		if(bytesToRead==0)
+			break;
+
+		//perform read from device
+		qint64 read = device.read(readBuffer.data(), bytesToRead);
+		if (read<0)
+		{
+			qWarning()<<"Error while reading from device";
+			inflateEnd(&strm);
+			return QByteArray();
+		}
+
+		bytesRead += read;
+		strm.next_in = reinterpret_cast<Bytef*>(readBuffer.data());
+		strm.avail_in = read;
+
+		if(read==0)
+			break;
+
+		//inflate loop
+		do
+		{
+			strm.avail_out = CHUNK;
+			strm.next_out = reinterpret_cast<Bytef*>(inflateBuffer.data());
+			ret = inflate(&strm,Z_NO_FLUSH);
+			Q_ASSERT(ret != Z_STREAM_ERROR); // must never happen, indicates a programming error
+
+			if(ret < 0 || ret == Z_NEED_DICT)
+			{
+				qWarning()<<"zlib inflate error ("<<ret<<"), can't uncompress";
+				if(strm.msg)
+					qWarning()<<"zlib message: "<<QString(strm.msg);
+				inflateEnd(&strm);
+				return QByteArray();
+			}
+
+			out.append(inflateBuffer.constData(), CHUNK - strm.avail_out);
+
+		}while(strm.avail_out == 0); //if zlib has more data for us, repeat
+
+	}while(ret!=Z_STREAM_END);
+
+	// close zlib
+	inflateEnd(&strm);
+
+	if(ret!=Z_STREAM_END)
+	{
+		qWarning()<<"Premature end of compressed stream";
+		if(strm.msg)
+			qWarning()<<"zlib message: "<<QString(strm.msg);
+		return QByteArray();
+	}
+
 	return out;
 }
 

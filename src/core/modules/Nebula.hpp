@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2015 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -88,7 +89,43 @@ private:
 		NebDn=5,     //!< ??? Dark Nebula?      Does not exist in current catalog
 		NebIg=6,     //!< ??? Irregular Galaxy? Does not exist in current catalog
 		NebCn=7,     //!< Cluster associated with nebulosity
-		NebUnknown=8 //!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebUnknown=8,//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebHII=9,    //!< HII Region
+		NebRn=10,    //!< Reflection nebula
+		NebHa=11     //!< H-α emission region
+	};
+
+	//! @enum HIIFormType HII region form types
+	enum HIIFormType
+	{
+		FormCir=1,   //!< circular form
+		FormEll=2,   //!< elliptical form
+		FormIrr=3    //!< irregular form
+	};
+
+	//! @enum HIIStructureType HII region structure types
+	enum HIIStructureType
+	{
+		StructureAmo=1,   //!< amorphous structure
+		StructureCon=2,   //!< conventional structure
+		StructureFil=3    //!< filamentary structure
+	};
+
+	//! @enum HIIBrightnessType HII region brightness types
+	enum HIIBrightnessType
+	{
+		Faintest=1,
+		Moderate=2,
+		Brightest=3
+	};
+
+	//! @enum HaBrightnessType H-α emission region brightness types
+	enum HaBrightnessType
+	{
+		HaFaint=1,
+		HaMedium=2,
+		HaBright=3,
+		HaVeryBright=4
 	};
 
 	//! Translate nebula name using the passed translator
@@ -96,35 +133,68 @@ private:
 
 	bool readNGC(char *record);
 	void readNGC(QDataStream& in);
-			
+	bool readBarnard(QString record);
+	bool readSharpless(QString record);
+	bool readVandenBergh(QString record);
+	bool readRCW(QString record);
+	bool readLDN(QString record);
+	bool readLBN(QString record);
+
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
+
+
+	//! Get the printable HII region form type.
+	QString getHIIFormTypeString() const;
+	//! Get the printable HII region structure type.
+	QString getHIIStructureTypeString() const;
+	//! Get the printable HII region brightness type.
+	QString getHIIBrightnessTypeString() const;
+	//! Get the printable H-α emission region brightness type.
+	QString getHaBrightnessTypeString() const;
 
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
 	unsigned int IC_nb;             // Index Catalog number
 	unsigned int C_nb;              // Caldwell Catalog number
+	unsigned int B_nb;              // Barnard Catalog number (Dark Nebulae)
+	unsigned int Sh2_nb;            // Sharpless Catalog number (Catalogue of HII Regions (Sharpless, 1959))
+	unsigned int VdB_nb;            // Van den Bergh Catalog number (Catalogue of Reflection Nebulae (Van den Bergh, 1966))
+	unsigned int RCW_nb;            // RCW Catalog number (H-α emission regions in Southern Milky Way (Rodgers+, 1960))
+	unsigned int LDN_nb;            // LDN Catalog number (Lynds' Catalogue of Dark Nebulae (Lynds, 1962))
+	unsigned int LBN_nb;            // LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
+	unsigned int Cr_nb;             // Collinder Catalog number
+	unsigned int Mel_nb;            // Melotte Catalog number
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
-	float mag;                      // Apparent magnitude
+	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here.
 	float angularSize;              // Angular size in degree
-	Vec3d XYZ;                      // Cartesian equatorial position
+	Vec3d XYZ;                      // Cartesian equatorial position (J2000.0)
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;
+
+	HIIFormType formType;
+	HIIStructureType structureType;
+	HIIBrightnessType brightnessType;
+	HaBrightnessType rcwBrightnessType;
+
+	int brightnessClass;
 
 	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;   // The symbolic circle texture
-	static StelTextureSP texGalaxy;
-	static StelTextureSP texOpenCluster;
-	static StelTextureSP texGlobularCluster;
-	static StelTextureSP texPlanetaryNebula;
-	static StelTextureSP texDiffuseNebula;
-	static StelTextureSP texOpenClusterWithNebulosity;
+	static StelTextureSP texGalaxy;	                   // Type 0
+	static StelTextureSP texOpenCluster;               // Type 1
+	static StelTextureSP texGlobularCluster;           // Type 2
+	static StelTextureSP texPlanetaryNebula;           // Type 3
+	static StelTextureSP texDiffuseNebula;             // Type 4
+	static StelTextureSP texDarkNebula;                // Type 5
+	static StelTextureSP texOpenClusterWithNebulosity; // Type 7
 	static float hintsBrightness;
 
 	static Vec3f labelColor, circleColor;
 	static float circleScale;       // Define the scaling of the hints circle
+	static bool drawHintProportional; // scale hint with nebula size?
 };
 
 #endif // _NEBULA_HPP_

@@ -139,18 +139,37 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 	if (flags&HourAngle)
 	{
-		double dec_sidereal, ra_sidereal;
+		double dec_sidereal, ra_sidereal, ha_sidereal;
+		QString hadec;
 		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosGeometric(core));
 		ra_sidereal = 2.*M_PI-ra_sidereal;
 		if (withAtmosphere)
 		{
 			StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
 			ra_sidereal = 2.*M_PI-ra_sidereal;
-			res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal,true), StelUtils::radToDmsStr(dec_sidereal,true)) + " " + q_("(apparent)") + "<br>";
+			if (withDecimalDegree)
+			{
+				ha_sidereal = ra_sidereal*12/M_PI;
+				if (ha_sidereal>24.)
+					ha_sidereal -= 24.;
+				hadec = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
+				res += q_("Hour angle/DE: %1/%2").arg(hadec, StelUtils::radToDecDegStr(dec_sidereal)) + " " + q_("(apparent)") + "<br>";
+			}
+			else
+				res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal,true), StelUtils::radToDmsStr(dec_sidereal,true)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
 		{
-			res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal,true), StelUtils::radToDmsStr(dec_sidereal,true)) + " " + "<br>";
+			if (withDecimalDegree)
+			{
+				ha_sidereal = ra_sidereal*12/M_PI;
+				if (ha_sidereal>24.)
+					ha_sidereal -= 24.;
+				hadec = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
+				res += q_("Hour angle/DE: %1/%2").arg(hadec, StelUtils::radToDecDegStr(dec_sidereal)) + " " + "<br>";
+			}
+			else
+				res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal,true), StelUtils::radToDmsStr(dec_sidereal,true)) + " " + "<br>";
 		}
 	}
 

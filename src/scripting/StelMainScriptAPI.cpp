@@ -371,6 +371,21 @@ bool StelMainScriptAPI::getDiskViewport()
 	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk;
 }
 
+void StelMainScriptAPI::setSphericMirror(bool b)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	if (b)
+	{
+		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
+		StelApp::getInstance().setViewportEffect("sphericMirrorDistorter");
+	}
+	else
+	{
+		core->setCurrentProjectionTypeKey(core->getDefaultProjectionTypeKey());
+		StelApp::getInstance().setViewportEffect("none");
+	}
+}
+
 void StelMainScriptAPI::setDiskViewport(bool b)
 {
 	emit(requestSetDiskViewport(b));

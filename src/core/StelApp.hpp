@@ -36,7 +36,6 @@ class QOpenGLFramebufferObject;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QTime;
 class QTimer;
 class StelLocationMgr;
 class StelSkyLayerMgr;
@@ -339,7 +338,7 @@ private:
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;
 
-	static QTime* qtime;
+	static qint64 startMSecs;
 
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized

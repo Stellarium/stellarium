@@ -77,6 +77,7 @@
 #include <QDir>
 #include <QCoreApplication>
 #include <QScreen>
+#include <QDateTime>
 
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
@@ -88,6 +89,10 @@ Q_IMPORT_PLUGIN(SimpleDrawLineStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_ANGLEMEASURE
 Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_ARCHAEOLINES
+Q_IMPORT_PLUGIN(ArchaeoLinesStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_COMPASSMARKS
@@ -166,20 +171,22 @@ Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_SCENERY3D
+Q_IMPORT_PLUGIN(Scenery3dStelPluginInterface)
+#endif
+
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
-QTime* StelApp::qtime = NULL;
+qint64 StelApp::startMSecs = 0;
 
 void StelApp::initStatic()
 {
-	StelApp::qtime = new QTime();
-	StelApp::qtime->start();
+	StelApp::startMSecs = QDateTime::currentMSecsSinceEpoch();
 }
 
 void StelApp::deinitStatic()
 {
-	delete StelApp::qtime;
-	StelApp::qtime = NULL;
+	StelApp::startMSecs = 0;
 }
 
 /*************************************************************************
@@ -762,7 +769,7 @@ void StelApp::updateSkyCulture()
 // Return the time since when stellarium is running in second.
 double StelApp::getTotalRunTime()
 {
-	return (double)(StelApp::qtime->elapsed())/1000.;
+	return (double)(QDateTime::currentMSecsSinceEpoch() - StelApp::startMSecs)/1000.;
 }
 
 

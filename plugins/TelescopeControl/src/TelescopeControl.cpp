@@ -421,7 +421,7 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 	bool find;
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
-		QString tn = telescope->getEnglishName();
+		tn = telescope->getEnglishName();
 		find = false;
 		if (useStartOfWords)
 		{

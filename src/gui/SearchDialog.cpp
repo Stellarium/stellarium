@@ -26,6 +26,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
+#include "Planet.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelGui.hpp"
@@ -233,6 +234,8 @@ void SearchDialog::populateCoordinateSystemsList()
 	csys->addItem(qc_("Equatorial", "coordinate system"), "equatorial");
 	csys->addItem(qc_("Horizontal", "coordinate system"), "horizontal");
 	csys->addItem(qc_("Galactic", "coordinate system"), "galactic");
+	csys->addItem(qc_("Ecliptic", "coordinate system"), "ecliptic");
+	csys->addItem(qc_("Ecliptic (J2000.0)", "coordinate system"), "eclipticJ2000");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -272,6 +275,8 @@ void SearchDialog::populateCoordinateAxis()
 			xnormal = false;
 			break;
 		}
+		case ecliptic:
+		case eclipticJ2000:
 		case galactic:
 		{
 			ui->AxisXLabel->setText(q_("Longitude"));
@@ -461,6 +466,21 @@ void SearchDialog::manualPositionChanged()
 		{
 			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
 			pos = core->galacticToJ2000(pos);
+			break;
+		}
+		case eclipticJ2000:
+		{
+			double ra, dec;
+			StelUtils::eclToEqu(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), core->getCurrentPlanet()->getRotObliquity(2451545.0), &ra, &dec);
+			StelUtils::spheToRect(ra, dec, pos);
+			break;
+		}
+		case ecliptic:
+		{
+			double ra, dec;
+			StelUtils::eclToEqu(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), core->getCurrentPlanet()->getRotObliquity(core->getJDay()), &ra, &dec);
+			StelUtils::spheToRect(ra, dec, pos);
+			pos = core->equinoxEquToJ2000(pos);
 			break;
 		}
 	}

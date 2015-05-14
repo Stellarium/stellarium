@@ -319,7 +319,7 @@ void SkyGrid::draw(const StelCore* core) const
 		southPoleInViewport = true;
 	// Get the longitude and latitude resolution at the center of the viewport
 	Vec3d centerV;
-	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2, prj->getViewportPosY()+prj->getViewportHeight()/2+1, centerV);
+	prj->unProject(prj->getViewportPosX()+prj->getViewportWidth()/2., prj->getViewportPosY()+prj->getViewportHeight()/2.+1., centerV);
 	double lon2, lat2;
 	StelUtils::rectToSphe(&lon2, &lat2, centerV);
 
@@ -329,8 +329,8 @@ void SkyGrid::draw(const StelCore* core) const
 		gridStepMeridianRad = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? M_PI/180.* 10. : M_PI/180.* 15.;
 	else
 	{
-		const double closetResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
-		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closetResLon);
+		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
+		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closestResLon);
 	}
 
 	// Get the bounding halfspace

@@ -39,6 +39,7 @@ MeteorMgr::MeteorMgr(int zhr, int maxv )
 	, flagShow(true)
 {
 	setObjectName("MeteorMgr");
+	qsrand (QDateTime::currentMSecsSinceEpoch());
 }
 
 MeteorMgr::~MeteorMgr()
@@ -142,7 +143,7 @@ void MeteorMgr::update(double deltaTime)
 	for (int i=0; i<mpf; ++i)
 	{
 		// start new meteor based on ZHR time probability
-		double prob = ((double)rand())/RAND_MAX;
+		double prob = ((double)qrand())/RAND_MAX;
 		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 		{
 			Meteor *m = new Meteor(core, maxVelocity);

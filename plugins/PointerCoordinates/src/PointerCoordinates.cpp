@@ -119,8 +119,8 @@ void PointerCoordinates::draw(StelCore *core)
 
 	QPoint p = StelMainView::getInstance().getMousePos(); // get screen coordinates of mouse cursor
 	Vec3d mousePosition;
-	float wh = prj->getViewportWidth()/2; // get half of width of the screen
-	float hh = prj->getViewportHeight()/2; // get half of height of the screen
+	float wh = prj->getViewportWidth()/2.; // get half of width of the screen
+	float hh = prj->getViewportHeight()/2.; // get half of height of the screen
 	float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
 	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
@@ -250,8 +250,20 @@ void PointerCoordinates::draw(StelCore *core)
 			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime()+((core->getDeltaT(core->getJDay())/240.)*M_PI/180.))*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
 			cx = 2.*M_PI-cx;
 			coordsSystem = qc_("HA/Dec", "abbreviated in the plugin");
-			cxt = StelUtils::radToHmsStr(cx);
-			cyt = StelUtils::radToDmsStr(cy);
+			if (withDecimalDegree)
+			{
+				double ha_sidereal = cx*12/M_PI;
+				if (ha_sidereal>24.)
+					ha_sidereal -= 24.;
+				cxt = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
+				cyt = StelUtils::radToDecDegStr(cy);
+
+			}
+			else
+			{
+				cxt = StelUtils::radToHmsStr(cx);
+				cyt = StelUtils::radToDmsStr(cy);
+			}
 			break;		
 		}
 	}

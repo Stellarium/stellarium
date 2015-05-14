@@ -43,12 +43,12 @@ public:
 		if (v[2] > 0) {
 			v[0] /= v[2];
 			v[1] /= v[2];
-			v[2] = r;
+			v[2] = -std::numeric_limits<float>::max();
 			return false;
 		}
 		v[0] = std::numeric_limits<float>::max();
 		v[1] = std::numeric_limits<float>::max();
-		v[2] = r;
+		v[2] = -std::numeric_limits<float>::max();
 		return false;
 	}
 	bool backward(Vec3d &v) const;
@@ -221,7 +221,7 @@ protected:
 		static const SphericalCap cap2(-1,0,0);
 		static const SphericalCap cap3(0,0,-1);
 		SphericalCap cap(capN, capD);
-		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap2);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
 	}
 };
 

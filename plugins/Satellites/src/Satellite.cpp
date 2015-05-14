@@ -17,6 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+//#define IRIDIUM_SAT_TEXT_DEBUG
+
+
 #include "Satellite.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
@@ -35,9 +38,15 @@
 #include <QSettings>
 #include <QByteArray>
 
+#include <QVector3D>
+#include <QMatrix4x4>
+
 #include "gsatellite/gTime.hpp"
+#include "gsatellite/stdsat.h"
 
 #include <cmath>
+
+#define sqr(a) ((a)*(a))
 
 // static data members - will be initialised in the Satallites class (the StelObjectMgr)
 StelTextureSP Satellite::hintTexture;
@@ -50,6 +59,11 @@ int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
+
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+QString Satellite::myText = "";
+#endif
+double Satellite::sunReflAngle = 180.;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
@@ -193,8 +207,8 @@ QVariantMap Satellite::getMap(void)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
-		if (!c.modulation.isEmpty() && c.modulation != "") commMap["modulation"] = c.modulation;
-		if (!c.description.isEmpty() && c.description != "") commMap["description"] = c.description;
+		if (!c.modulation.isEmpty()) commMap["modulation"] = c.modulation;
+		if (!c.description.isEmpty()) commMap["description"] = c.description;
 		commList << commMap;
 	}
 	map["comms"] = commList;
@@ -258,6 +272,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	if ((flags & Magnitude) && (stdMag!=99.f))
 	{
 		oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br/>";
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+		oss << myText << "<br/>";
+#endif
 	}
 
 	// Ra/Dec etc.
@@ -300,6 +317,14 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 		oss << QString(q_("TEME velocity (km/s): %1")).arg(temeVel);
 		oss << "<br/>";
+
+		if (sunReflAngle>0)
+		{  // Iridium
+			oss << QString(q_("Sun reflection angle: %1%2"))
+			       .arg(sunReflAngle,0,'f',1)
+			       .arg(QChar(0x00B0)); // Degree sign
+			oss << "<br/>";
+		}
 		
 		//Visibility: Full text
 		//TODO: Move to a more prominent place.
@@ -372,6 +397,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 
 	if (stdMag!=99.f)
 	{
+		sunReflAngle = -1.;
 		// OK, artificial satellite has value for standard magnitude
 		if (visibility==VISIBLE)
 		{
@@ -380,7 +406,166 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			double fracil = calculateIlluminatedFraction();
 			if (fracil==0)
 				fracil = 0.000001;
-			vmag = stdMag - 15.75 + 2.5 * std::log10(range * range / fracil);
+			if (pSatWrapper && name.startsWith("IRIDIUM"))
+			{
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+				myText = "";
+#endif
+				Vec3d Sun3d = pSatWrapper->getSunECIPos();
+				QVector3D sun(Sun3d.data()[0],Sun3d.data()[1],Sun3d.data()[2]);
+				QVector3D sunN = sun; sunN.normalize();
+
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+				myText += "Sun3d = " + QString("[%1 %2 %3]")
+						.arg(sunN.x())
+						.arg(sunN.y())
+						.arg(sunN.z())
+						+ "<br>\n";
+#endif
+				//static double sin1 = sin(40*M_PI/180);
+				//static double cos1 = cos(40*M_PI/180);
+				//static double sin2 = sin(120*M_PI/180);
+				//static double cos2 = cos(120*M_PI/180);
+				// position, velocity are known
+				QVector3D Vx(velocity.data()[0],velocity.data()[1],velocity.data()[2]); Vx.normalize();
+
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+				myText += "Vx = " + QString("[%1 %2 %3]")
+						.arg(Vx.x())
+						.arg(Vx.y())
+						.arg(Vx.z())
+						+ "<br>\n";
+#endif
+				QVector3D SatPos(position.data()[0],position.data()[1],position.data()[2]);
+				Vec3d vy = (position^velocity);
+				QVector3D Vy(vy.data()[0],vy.data()[1],vy.data()[2]); Vy.normalize();
+
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+				myText += "Vy = " + QString("[%1 %2 %3]")
+						.arg(Vy.x())
+						.arg(Vy.y())
+						.arg(Vy.z())
+						+ "<br>\n";
+#endif
+				QVector3D Vz = QVector3D::crossProduct(Vx,Vy); Vz.normalize();
+
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+				myText += "Vz = " + QString("[%1 %2 %3]")
+						.arg(Vz.x())
+						.arg(Vz.y())
+						.arg(Vz.z())
+						+ "<br>\n";
+#endif
+
+				// move this to constructor for optimizing
+				QMatrix4x4 m0;
+				m0.rotate(40, Vy);
+				QVector3D Vx0 = m0.mapVector(Vx);
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+				myText += "mirror0 = " + QString("[%1 %2 %3]")
+						.arg(Vx0.x())
+						.arg(Vx0.y())
+						.arg(Vx0.z())
+						+ "<br>\n";
+#endif
+
+				QMatrix4x4 m[3];
+				//m[2] = m[1] = m[0];
+				m[0].rotate(0, Vz);
+				m[1].rotate(120, Vz);
+				m[2].rotate(-120, Vz);
+
+				QVector3D mirror;
+				sunReflAngle = 180.;
+
+				for (int i = 0; i<3; i++)
+				{
+					mirror = m[i].mapVector(Vx0);
+					mirror.normalize();
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+					myText += "mirror = " + QString("[%1 %2 %3]")
+							.arg(mirror.x())
+							.arg(mirror.y())
+							.arg(mirror.z())
+							+ "<br>\n";
+#endif
+					// reflection R = 2*(V dot N)*N - V
+					QVector3D rsun =  2*QVector3D::dotProduct(sun,mirror)*mirror - sun;
+					rsun = -rsun;
+					Vec3d rSun(rsun.x(),rsun.y(),rsun.z());
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+					myText += "rSun = " + rSun.toString() + "<br>\n";
+#endif
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+					StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
+					Vec3d topoRSunPos;
+					Vec3d observerECIPos;
+					Vec3d observerECIVel;
+
+					double  radLatitude    = loc.latitude * KDEG2RAD;
+					double  theta          = pSatWrapper->getEpoch().toThetaLMST(loc.longitude * KDEG2RAD);
+
+					pSatWrapper->calcObserverECIPosition(observerECIPos, observerECIVel);
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+					myText += "ObsPos = " + observerECIPos.toString() + " (" + observerECIPos.toStringLonLat() + ")<br>\n";
+					myText += "ObsVel = " + observerECIVel.toString() + " (" + observerECIVel.toStringLonLat() + ")<br>\n";
+#endif
+
+					//Vec3d satECIPos  = getTEMEPos();
+					Vec3d slantRange = rSun - observerECIPos;
+
+					//top_s
+					topoRSunPos[0] = (sin(radLatitude) * cos(theta) * slantRange[0]
+							+ sin(radLatitude) * sin(theta) * slantRange[1]
+							- cos(radLatitude) * slantRange[2]);
+					//top_e
+					topoRSunPos[1] = ((-1.0) * sin(theta) * slantRange[0]
+							+ cos(theta) * slantRange[1]);
+
+					//top_z
+					topoRSunPos[2] = (cos(radLatitude) * cos(theta) * slantRange[0]
+							+ cos(radLatitude) * sin(theta) * slantRange[1]
+							+ sin(radLatitude) * slantRange[2]);
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+					myText += "SunRefl = " + topoRSunPos.toString() + " (" + topoRSunPos.toStringLonLat() + ")<br>\n";
+#endif
+					sunReflAngle = qMin(elAzPosition.angle(topoRSunPos) * KRAD2DEG, sunReflAngle) ;
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+					myText += QString("Angle = %1").arg(QString::number(sunReflAngle, 'f', 1)) + "<br>";
+#endif
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+				}
+
+				// very simple flare model
+				double iridiumFlare = 100;
+				if (sunReflAngle<0.5)
+				{
+					iridiumFlare = -8.92 + sunReflAngle*6;
+				}
+				else
+				if (sunReflAngle<0.7)
+				{
+					iridiumFlare = -5.92 + (sunReflAngle-0.5)*10;
+				}
+					else
+				{
+					iridiumFlare = -3.92 + (sunReflAngle-0.7)*5;
+				}
+
+
+				 vmag = qMin(stdMag, iridiumFlare);
+			}
+			else // not Iridium
+			{
+				sunReflAngle = -1;
+				vmag = stdMag;
+			}
+
+			vmag = vmag - 15.75 + 2.5 * std::log10(range * range / fracil);
+
 		}
 		else
 			vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
@@ -559,6 +744,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 		if (realisticModeFlag)
 		{
 			double mag = getVMagnitude(core);
+
 			RCMag rcMag;
 			Vec3f color = Vec3f(1.f,1.f,1.f);
 

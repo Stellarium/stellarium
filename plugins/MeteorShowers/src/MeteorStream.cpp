@@ -29,10 +29,11 @@ MeteorStream::MeteorStream(const StelCore* core,
 	: m_speed(speed)
 	, m_segments(10)
 {
+	qsrand (QDateTime::currentMSecsSinceEpoch());
 	// if speed is zero, use a random value
 	if (!speed)
 	{
-		m_speed = 11+(double)rand()/((double)RAND_MAX+1)*61;  // abs range 11-72 km/s
+		m_speed = 11+(double)qrand()/((double)RAND_MAX+1)*61;  // abs range 11-72 km/s
 	}
 
 	// view matrix of meteor model
@@ -49,7 +50,7 @@ MeteorStream::MeteorStream(const StelCore* core,
 	float oneMag = -0.2; // negative, working in different scale ( 0 to 1 - where 1 is brighter)
 	if (pidx) // is not zero
 	{
-		if (rand()%100 < 100.f/pidx) // probability
+		if (qrand()%100 < 100.f/pidx) // probability
 		{
 			meteor.mag += oneMag;  // (m+1)
 		}
