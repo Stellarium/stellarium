@@ -154,7 +154,7 @@ bool ArchaeoLines::configureGui(bool show)
 double ArchaeoLines::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-	  return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.; // same as lines from core (hint AW)
+	  return StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr")->getCallOrder(actionName)+1.; // one after GridlineMgr: else its equator covers our equinox line!
 	return 0;
 }
 
