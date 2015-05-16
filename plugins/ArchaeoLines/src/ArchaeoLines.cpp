@@ -671,6 +671,7 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
 			vColor=&currentPlanetColor;
 			break;
 		default:
+			vColor=&selectedObjectColor; // this is only to silence compiler warning about uninitialized variable vColor.
 			Q_ASSERT(0);
 	}
 	color.setRgbF(vColor->v[0], vColor->v[1], vColor->v[2]);
