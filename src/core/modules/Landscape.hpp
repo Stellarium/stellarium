@@ -56,7 +56,7 @@ class StelPainter;
 //!
 //! We discern:
 //!   @param LandscapeId: The directory name of the landscape.
-//!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, UTF8, ...)
+//!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, translatable, UTF8, ...)
 class Landscape
 {
 public:

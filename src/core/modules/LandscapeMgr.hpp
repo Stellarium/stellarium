@@ -228,7 +228,7 @@ public slots:
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(const float f);
 
-	//! Set the light pollution following the Bortle Scale
+	//! Set the light pollution following the Bortle Scale. Emits lightPollutionChanged().
 	void setAtmosphereBortleLightPollution(const int bIndex);
 	//! Get the light pollution following the Bortle Scale
 	int getAtmosphereBortleLightPollution() const;
@@ -342,6 +342,7 @@ signals:
 	//! the Sky and viewing options window (the ViewDialog class)
 	void landscapesChanged();
 
+	//! emitted by setAtmosphereBortleLightPollution().
 	void lightPollutionChanged();
 
 	//! Emitted when installLandscapeFromArchive() can't read from, write to or
@@ -395,6 +396,7 @@ private:
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinalsPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
+	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
 
 	// Define whether the observer location is to be updated when the landscape is updated.
 	bool flagLandscapeSetsLocation;
