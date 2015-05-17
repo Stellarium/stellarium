@@ -154,6 +154,7 @@ LandscapeMgr::LandscapeMgr()
 	: atmosphere(NULL)
 	, cardinalsPoints(NULL)
 	, landscape(NULL)
+	, oldLandscape(NULL)
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
@@ -179,6 +180,11 @@ LandscapeMgr::~LandscapeMgr()
 {
 	delete atmosphere;
 	delete cardinalsPoints;
+	if (oldLandscape)
+	{
+		delete oldLandscape;
+		oldLandscape=NULL;
+	}
 	delete landscape;
 	landscape = NULL;
 }
@@ -201,6 +207,21 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 void LandscapeMgr::update(double deltaTime)
 {
 	atmosphere->update(deltaTime);
+	if (oldLandscape)
+	{
+		// This is only when transitioning to newly loaded landscape. We must draw the old one until the new one is faded in completely.
+		oldLandscape->update(deltaTime);
+		if (getIsLandscapeFullyVisible())
+		{
+			oldLandscape->setFlagShow(false);
+
+			if (oldLandscape->getEffectiveLandFadeValue()< 0.01f)
+			{
+				delete oldLandscape;
+				oldLandscape=NULL;
+			}
+		}
+	}
 	landscape->update(deltaTime);
 	cardinalsPoints->update(deltaTime);
 
@@ -318,6 +339,8 @@ void LandscapeMgr::draw(StelCore* core)
 	atmosphere->draw(core);
 
 	// Draw the landscape
+	if (oldLandscape)
+		oldLandscape->draw(core);
 	landscape->draw(core);
 
 	// Draw the cardinal points
@@ -393,13 +416,18 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		return false;
 	}
 
+	// Keep current landscape for a while, while new landscape fades in!
+	// This prevents subhorizon sun or grid becoming briefly visible.
 	if (landscape)
 	{
 		// Copy display parameters from previous landscape to new one
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
-		delete landscape;
+		//in case we already fade out one old landscape (if switching too rapidly): the old one has to go immediately.
+		if (oldLandscape)
+			delete oldLandscape;
+		oldLandscape = landscape; // keep old while transitioning!
 		landscape = newLandscape;
 	}
 	currentLandscapeID = id;
@@ -480,6 +508,8 @@ void LandscapeMgr::updateI18n()
 
 void LandscapeMgr::setFlagLandscape(const bool displayed)
 {
+	if (oldLandscape && !displayed)
+		oldLandscape->setFlagShow(false);
 	if(landscape->getFlagShow() != displayed) {
 		landscape->setFlagShow(displayed);
 		emit landscapeDisplayedChanged(displayed);
