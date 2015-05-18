@@ -61,6 +61,10 @@ class LandscapeMgr : public StelModule
 			   READ getFlagIllumination
 			   WRITE setFlagIllumination
 			   NOTIFY illuminationDisplayedChanged)
+	Q_PROPERTY(bool labelsDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels
+			   NOTIFY labelsDisplayedChanged)
 	Q_PROPERTY(bool databaseUsage
 			READ getFlagUseLightPollutionFromDatabase
 			WRITE setFlagUseLightPollutionFromDatabase
@@ -185,6 +189,10 @@ public slots:
 	bool getFlagIllumination() const;
 	//! Set flag for displaying illumination layer
 	void setFlagIllumination(const bool on);
+	//! Get flag for displaying landscape labels
+	bool getFlagLabels() const;
+	//! Set flag for displaying landscape labels
+	void setFlagLabels(const bool on);
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -335,6 +343,7 @@ signals:
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
+	void labelsDisplayedChanged(const bool displayed);
 	void lightPollutionUsageChanged(const bool usage);
 
 	//! Emitted when a landscape has been installed or un-installed.
