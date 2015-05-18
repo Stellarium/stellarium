@@ -424,6 +424,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
+		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
 		//in case we already fade out one old landscape (if switching too rapidly): the old one has to go immediately.
 		if (oldLandscape)
 			delete oldLandscape;
@@ -504,6 +505,7 @@ void LandscapeMgr::updateI18n()
 {
 	// Translate all labels with the new language
 	if (cardinalsPoints) cardinalsPoints->updateI18n();
+	landscape->loadLabels(getCurrentLandscapeID());
 }
 
 void LandscapeMgr::setFlagLandscape(const bool displayed)
@@ -564,6 +566,19 @@ void LandscapeMgr::setFlagIllumination(const bool displayed)
 bool LandscapeMgr::getFlagIllumination() const
 {
 	return landscape->getFlagShowIllumination();
+}
+
+void LandscapeMgr::setFlagLabels(const bool displayed)
+{
+	if (landscape->getFlagShowLabels() != displayed) {
+		landscape->setFlagShowLabels(displayed);
+		emit labelsDisplayedChanged(displayed);
+	}
+}
+
+bool LandscapeMgr::getFlagLabels() const
+{
+	return landscape->getFlagShowLabels();
 }
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
@@ -780,6 +795,8 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	}
 
 	ldscp->load(landscapeIni, landscapeId);
+	QSettings *conf=StelApp::getInstance().getSettings();
+	ldscp->setLabelFontSize(conf->value("landscape/label_font_size", 15).toInt());
 	return ldscp;
 }
 
