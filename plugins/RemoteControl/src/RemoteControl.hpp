@@ -1,4 +1,5 @@
 /*
+ * Stellarium Remote Control plugin
  * Copyright (C) 2015 Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
@@ -31,6 +32,8 @@ class QTimer;
 class QPixmap;
 class StelButton;
 class RemoteControlDialog;
+class HttpListener;
+class RequestHandler;
 
 //! Main class of the RemoteControl plug-in.
 //! Provides a remote control using a webserver interface, usable for single or even synchronized cluster of clients (via the RemoteSync plugin).
@@ -56,6 +59,8 @@ public:
 	//virtual void handleMouseClicks(class QMouseEvent* event);
 	//virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
 	virtual bool configureGui(bool show=true);
+	///////////////////////////////////////////////////////////////////////////
+	// Property getters
 	bool isEnabled() const {return enabled;}
 
 
@@ -77,6 +82,7 @@ public:
 	void saveSettings();
 
 public slots:
+	//property setters
 	void enableRemoteControl(bool b);
 
 private slots:
@@ -84,6 +90,16 @@ private slots:
 	void clearMessage();
 
 private:
+	//! Starts the HTTP server and begins handling request
+	void startServer();
+	//! Stops the HTTP server
+	void stopServer();
+
+	//the http server
+	HttpListener* httpListener;
+	//the main request handler
+	RequestHandler* requestHandler;
+
 	bool enabled;
 	QFont font;
 	LinearFader messageFader;
@@ -108,7 +124,7 @@ private:
 class RemoteControlStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;
