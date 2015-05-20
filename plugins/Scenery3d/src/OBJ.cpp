@@ -53,6 +53,7 @@
 #include <QElapsedTimer>
 #include <QOpenGLVertexArrayObject>
 #include <QTemporaryFile>
+#include <QDebug>
 
 #include <algorithm>
 #include <cstddef>

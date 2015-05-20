@@ -701,8 +701,8 @@ public slots:
 	// Methods wait() and waitFor() was added for documentation.
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
 
-	//! Pauses the script for \e t milliseconds
-	//! @param t the number of milliseconds to wait
+	//! Pauses the script for \e t seconds
+	//! @param t the number of seconds to wait
 	//! @note This method is pure JavaScript implementation.
 	void wait(double t) { Q_UNUSED(t) }
 
