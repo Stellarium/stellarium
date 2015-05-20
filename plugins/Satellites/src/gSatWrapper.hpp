@@ -116,9 +116,10 @@ public:
         int getVisibilityPredict();
 
 	double getPhaseAngle();
+	gTime	getEpoch() { return epoch; }
 
 
-private:
+//private:
         // Operation calcObserverECIPosition
         //! @brief This operation compute the observer ECI coordinates in Geocentric
         //! Ecuatorial Coordinate System (IJK) for the ai_epoch time.
