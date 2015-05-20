@@ -1,9 +1,36 @@
-INCLUDE_DIRECTORIES(. gui)
+INCLUDE_DIRECTORIES(. gui qtwebapp)
 LINK_DIRECTORIES(${BUILD_DIR}/src)
+
+SET(QtWebApp_SRCS
+  qtwebapp/httpserver/httpconnectionhandler.cpp
+  qtwebapp/httpserver/httpconnectionhandler.h
+  qtwebapp/httpserver/httpconnectionhandlerpool.cpp
+  qtwebapp/httpserver/httpconnectionhandlerpool.h
+  qtwebapp/httpserver/httpcookie.cpp
+  qtwebapp/httpserver/httpcookie.h
+  qtwebapp/httpserver/httpglobal.cpp
+  qtwebapp/httpserver/httpglobal.h
+  qtwebapp/httpserver/httplistener.cpp
+  qtwebapp/httpserver/httplistener.h
+  qtwebapp/httpserver/httprequest.cpp
+  qtwebapp/httpserver/httprequest.h
+  qtwebapp/httpserver/httprequesthandler.cpp
+  qtwebapp/httpserver/httprequesthandler.h
+  qtwebapp/httpserver/httpresponse.cpp
+  qtwebapp/httpserver/httpresponse.h
+  qtwebapp/httpserver/httpsession.cpp
+  qtwebapp/httpserver/httpsession.h
+  qtwebapp/httpserver/httpsessionstore.cpp
+  qtwebapp/httpserver/httpsessionstore.h
+  qtwebapp/httpserver/staticfilecontroller.cpp
+  qtwebapp/httpserver/staticfilecontroller.h
+)
 
 SET(RemoteControl_SRCS
   RemoteControl.hpp
   RemoteControl.cpp
+  RequestHandler.hpp
+  RequestHandler.cpp
   gui/RemoteControlDialog.hpp
   gui/RemoteControlDialog.cpp
 )
@@ -20,7 +47,7 @@ QT5_ADD_RESOURCES(RemoteControl_RES_CXX ${RemoteControl_RES})
 
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
-ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H})
+ADD_LIBRARY(RemoteControl-static STATIC ${RemoteControl_SRCS} ${RemoteControl_RES_CXX} ${RemoteControl_UIS_H} ${QtWebApp_SRCS})
 QT5_USE_MODULES(RemoteControl-static Core Network Widgets)
 # The library target "RemoteControl-static" has a default OUTPUT_NAME of "RemoteControl-static", so change it.
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES OUTPUT_NAME "RemoteControl")

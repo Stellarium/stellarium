@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2009 Matthew Gates
- * Copyright (C) 2014 Georg Zotti
+ * Stellarium Remote Control plugin
+ * Copyright (C) 2015 Florian Schaukowitsch
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
+#include "StelIniParser.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
@@ -30,6 +31,9 @@
 #include "StelVertexArray.hpp"
 #include "RemoteControl.hpp"
 #include "RemoteControlDialog.hpp"
+#include "RequestHandler.hpp"
+
+#include "httpserver/httplistener.h"
 
 #include <QDebug>
 #include <QTimer>
@@ -63,7 +67,7 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 
 RemoteControl::RemoteControl()
 	: enabled(false)
-	, toolbarButton(NULL)
+	, toolbarButton(NULL), httpListener(NULL), requestHandler(NULL)
 {
 	setObjectName("RemoteControl");
 	font.setPixelSize(16);
@@ -81,6 +85,12 @@ RemoteControl::RemoteControl()
 RemoteControl::~RemoteControl()
 {
 	delete configDialog;
+	if(httpListener)
+	{
+		delete httpListener;
+	}
+	if(requestHandler)
+		requestHandler->deleteLater();
 }
 
 bool RemoteControl::configureGui(bool show)
@@ -105,6 +115,11 @@ void RemoteControl::init()
 		restoreDefaultSettings();
 
 	loadSettings();
+
+	QSettings* staticSettings = new QSettings(conf->fileName(),StelIniFormat,this);
+	staticSettings->beginGroup("RemoteControl");
+	staticSettings->beginGroup("staticfiles");
+	requestHandler = new RequestHandler(staticSettings);
 
 	StelApp& app = StelApp::getInstance();
 
@@ -158,6 +173,27 @@ void RemoteControl::enableRemoteControl(bool b)
 	{
 		qDebug() << "RemoteControl enabled";
 		messageTimer->start();
+		startServer();
+	}
+	else
+		stopServer();
+}
+
+void RemoteControl::startServer()
+{
+	//use the Stellarium config file, but a separate conf object
+	QSettings* settings = new QSettings(conf->fileName(),StelIniFormat,this);
+	settings->beginGroup("RemoteControl");
+	settings->beginGroup("listener");
+	httpListener = new HttpListener(settings,requestHandler);
+}
+
+void RemoteControl::stopServer()
+{
+	if(httpListener)
+	{
+		delete httpListener;
+		httpListener = NULL;
 	}
 }
 
@@ -183,12 +219,32 @@ void RemoteControl::restoreDefaultSettings()
 	loadSettings();
 	// ...and then save them.
 	saveSettings();
+
+	//save the QtWebApp settings
+	conf->beginGroup("RemoteControl");
+	conf->beginGroup("listener");
+	conf->setValue("port",8080);
+	conf->setValue("minThreads",1);
+	conf->setValue("maxThreads",10);
+	conf->setValue("cleanupInterval",1000);
+	conf->setValue("readTimeout", 60000);
+	conf->setValue("maxRequestSize",16000);
+	conf->setValue("maxMultiPartSize",10000000);
+	conf->endGroup();
+	conf->beginGroup("staticfiles");
+	conf->setValue("encoding","UTF-8");
+	conf->setValue("maxAge",60000);
+	conf->setValue("cacheTime",60000);
+	conf->setValue("cacheSize",1000000);
+	conf->setValue("maxCachedFileSize",65536);
+	conf->endGroup();
+	conf->endGroup();
 }
 
 void RemoteControl::loadSettings()
 {
 	conf->beginGroup("RemoteControl");
-	// TODO whatever has to be retrieved here. Don't forget to define default values!
+
 	conf->endGroup();
 }
 
