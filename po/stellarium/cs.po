@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-10 14:59+0600\n"
-"PO-Revision-Date: 2015-05-12 09:25+0000\n"
+"PO-Revision-Date: 2015-05-20 07:46+0000\n"
 "Last-Translator: Memento <j.pot64@hotmail.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-13 05:08+0000\n"
-"X-Generator: Launchpad (build 17493)\n"
+"X-Launchpad-Export-Date: 2015-05-21 05:10+0000\n"
+"X-Generator: Launchpad (build 17508)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -74,7 +74,7 @@ msgstr "Horizont"
 
 #: src/core/modules/GridLinesMgr.cpp:603
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Galaktický Rovník"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1348
@@ -127,7 +127,7 @@ msgstr "Galaktické souřadnice"
 
 #: src/core/modules/GridLinesMgr.cpp:764 src/ui_viewDialog.h:1344
 msgid "Galactic equator"
-msgstr ""
+msgstr "Galaktický rovník"
 
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
@@ -153,7 +153,7 @@ msgstr "Horizont"
 
 #: src/core/modules/LandscapeMgr.cpp:370
 msgid "Illumination"
-msgstr ""
+msgstr "Osvětlení"
 
 #: src/core/modules/LandscapeMgr.cpp:594
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:446
@@ -171,7 +171,7 @@ msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:608
 msgid "Celestial body:"
-msgstr ""
+msgstr "Nebeské tělo"
 
 #: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
@@ -186,7 +186,7 @@ msgstr "Typ: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Průhlednost: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -209,30 +209,30 @@ msgstr "Magnituda: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:158
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Jas povrchu <b>%1</b> (zaniká na: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:164
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Jas povrchu <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:172 src/core/modules/Nebula.cpp:177
 #: src/core/modules/Nebula.cpp:182
 #, qt-format
 msgid "Brightness: %1"
-msgstr ""
+msgstr "Jas: %1"
 
 #: src/core/modules/Nebula.cpp:175
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Forma: %1"
 
 #: src/core/modules/Nebula.cpp:176
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
-msgstr ""
+msgstr "Struktura: %1"
 
 #: src/core/modules/Nebula.cpp:188
 #, qt-format
@@ -265,7 +265,7 @@ msgstr "Tmavá mlhovina"
 
 #: src/core/modules/Nebula.cpp:731
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Nepravidelná galaxie"
 
 #: src/core/modules/Nebula.cpp:734
 msgid "Cluster associated with nebulosity"
@@ -277,7 +277,7 @@ msgstr "Není známo"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr ""
+msgstr "Oblast Hll"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
@@ -294,12 +294,12 @@ msgstr "Nedokumentovaný typ"
 #: src/core/modules/Nebula.cpp:762
 msgctxt "form"
 msgid "circular"
-msgstr ""
+msgstr "kruhová"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "eliptická"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "form"
@@ -309,7 +309,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:771
 msgctxt "form"
 msgid "undocumented form"
-msgstr ""
+msgstr "nezdokumentovaná forma"
 
 #: src/core/modules/Nebula.cpp:784
 msgctxt "structure"
