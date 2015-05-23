@@ -4,16 +4,12 @@
 # Fields must be separated by vertical line, label must not have such a vertical line.
 # Comments have this hash mark in first column. 
 # coordinates in degrees from true North. 
-# line towards top draws a single line strictly upward.
+# line towards zenith draws a single line strictly upward.
 # label is centered on line endpoint. 
-# Azimuth | Altitude | line-towards-top | azimuth shift | label
-113.66 | 7.5  | 4   | 2 | Leeberg
-113.66 | 10.1 | 2   |-1 | Kreuzspitze
-75     | 1.5  | 2.5 | 0 | Kirche (beleuchtet)
+# Azimuth | Altitude | degrees-towards-zenith | azimuth shift | label
+113.66 | 5.5  | 4   |-6 | Leeberg
 35     | 1.5  | 2.5 | 0 | Großmugl
 335    | 2    | 2   | 0 | Steinabrunn
 305    | 2    | 1   | 0 | Ringendorf
-230    | 2    | 0   | 0 | Geitzendorf 
 180    | 2    | 2   | 0 | Wien (30km)
-115    | 2    | 5   | 5 | Roseldorf
 135    | 2    | 0.5 | 0 | Windpark Straßhof
