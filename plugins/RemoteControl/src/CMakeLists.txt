@@ -27,10 +27,14 @@ SET(QtWebApp_SRCS
 )
 
 SET(RemoteControl_SRCS
+  APIController.hpp
+  APIController.cpp
   RemoteControl.hpp
   RemoteControl.cpp
   RequestHandler.hpp
   RequestHandler.cpp
+  ScriptService.hpp
+  ScriptService.cpp
   gui/RemoteControlDialog.hpp
   gui/RemoteControlDialog.cpp
 )

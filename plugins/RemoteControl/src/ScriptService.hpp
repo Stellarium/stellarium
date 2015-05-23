@@ -17,26 +17,26 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef REQUESTHANDLER_HPP_
-#define REQUESTHANDLER_HPP_
+#ifndef SCRIPTSERVICE_HPP_
+#define SCRIPTSERVICE_HPP_
 
-#include "httpserver/httprequesthandler.h"
+#include "APIController.hpp"
 
-class APIController;
-class StaticFileController;
+class StelScriptMgr;
 
-class RequestHandler : public HttpRequestHandler
+class ScriptService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	RequestHandler(QSettings* settings, QObject* parent = 0);
-	virtual ~RequestHandler();
+	ScriptService(const QByteArray& serviceName, QObject* parent = 0);
 
-	virtual void service(HttpRequest& request, HttpResponse& response);
+	virtual ~ScriptService() {}
 
+	virtual void get(const QList<QByteArray>& args,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response);
 private:
-	APIController* apiController;
-	StaticFileController* staticFiles;
+	StelScriptMgr* scriptMgr;
 };
+
+
 
 #endif

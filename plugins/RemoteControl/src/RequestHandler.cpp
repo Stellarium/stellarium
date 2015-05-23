@@ -20,12 +20,21 @@
 #include "RequestHandler.hpp"
 #include "httpserver/staticfilecontroller.h"
 
+#include "APIController.hpp"
+#include "ScriptService.hpp"
+
+#include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
 
 #include <QDir>
 
 RequestHandler::RequestHandler(QSettings *settings, QObject* parent) : HttpRequestHandler(parent)
 {
+	apiController = new APIController(QByteArray("/api/").size(),this);
+
+	//register the services
+	apiController->registerService(new ScriptService("scripts",apiController));
+
 	//retrieve actual webroot through StelFileMgr
 	QString path = StelFileMgr::findFile("data/webroot",StelFileMgr::Directory);
 	//make sure its absolute, otherwise QtWebApp will look relative to config dir
@@ -42,5 +51,18 @@ RequestHandler::~RequestHandler()
 
 void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 {
-	staticFiles->service(request,response);
+
+#define SERVER_HEADER "Stellarium RemoteControl " REMOTECONTROL_VERSION
+	response.setHeader("Server",SERVER_HEADER);
+
+	//try to support keep-alive connections
+	if(QString::compare(request.getHeader("Connection"),"keep-alive",Qt::CaseInsensitive)==0)
+		response.setHeader("Connection","keep-alive");
+	else
+		response.setHeader("Connection","close");
+
+	if(request.getPath().startsWith("/api/"))
+		apiController->service(request,response);
+	else
+		staticFiles->service(request,response);
 }
