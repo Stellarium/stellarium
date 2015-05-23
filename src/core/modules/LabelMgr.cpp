@@ -83,12 +83,13 @@ public:
 	//! Constructor of a SkyLabel which is attached to an existing object
 	//! @param text the text which will be displayed
 	//! @param bindObject a pointer to an existing object to which the label will be attached
-	//! @param font a pointer the font to use for this label
+	//! @param font a pointer to the font to use for this label
 	//! @param color choose a color for the label
 	//! @param side which side of the object to draw the label, values N, S, E, W, NE, NW, SE, SW, C (C is centred on the object)
 	//! @param distance the distance from the object to draw the label.  If < 0.0, placement is automatic.
 	//! @param style determines how the label is drawn
 	//! @param enclosureSize determines the size of the enclosure for styles Box and Circle
+	// TBD: Apparently styles Box and Circle have been removed?
 	SkyLabel(const QString& text, StelObjectP bindObject, const QFont& font, Vec3f color,
 			 QString side="NE", double distance=-1.0, SkyLabel::Style style=TextOnly, 
 	double enclosureSize=0.0);
@@ -116,7 +117,7 @@ private:
 class ScreenLabel : public StelLabel
 {
 public:
-	//! Constructor of a SkyLabel which is to be displayed at a fixed position on the screen.
+	//! Constructor of a ScreenLabel which is to be displayed at a fixed position on the screen.
 	//! @param text the text for the label
 	//! @param x the x-position on the screen (pixels from the left side)
 	//! @param y the y-position on the screen (pixels from the top side)
@@ -125,7 +126,7 @@ public:
 	ScreenLabel(const QString& text, int x, int y, const QFont& font, const Vec3f& color);
 	virtual ~ScreenLabel();
 
-	//! draw the label on the sky
+	//! draw the label on the screen
 	//! @param core the StelCore object
 	//! @param sPainter the StelPainter to use for drawing operations
 	virtual bool draw(StelCore* core, StelPainter& sPainter);
