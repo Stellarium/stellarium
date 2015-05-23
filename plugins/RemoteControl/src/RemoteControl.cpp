@@ -233,8 +233,8 @@ void RemoteControl::restoreDefaultSettings()
 	conf->endGroup();
 	conf->beginGroup("staticfiles");
 	conf->setValue("encoding","UTF-8");
-	conf->setValue("maxAge",60000);
-	conf->setValue("cacheTime",60000);
+	conf->setValue("maxAge",120000);
+	conf->setValue("cacheTime",120000);
 	conf->setValue("cacheSize",1000000);
 	conf->setValue("maxCachedFileSize",65536);
 	conf->endGroup();
