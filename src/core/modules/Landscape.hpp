@@ -117,7 +117,7 @@ public:
 	//! Get whether labels are displayed
 	bool getFlagShowLabels() const {return (bool)labelFader;}
 	//! change font and fontsize for landscape labels
-	void setLabelFontSize(const int size){font.setPixelSize(size);}
+	void setLabelFontSize(const int size){fontSize=size;}
 
 	//! Get landscape name
 	QString getName() const {return name;}
@@ -228,7 +228,7 @@ protected:
 					   //! specified in landscape.ini[landscape]horizon_line_color. Negative red (default) indicated "don't draw".
 	// Optional element: labels for landscape features.
 	QList<LandscapeLabel> landscapeLabels;
-	QFont font;       //! Used for landscape labels (optionally indicating landscape features)
+	int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
 	Vec3f labelColor; //! Color for the landscape labels.
 };
 

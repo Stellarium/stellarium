@@ -126,8 +126,12 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
 					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString());
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
-		horizonPolygonLineColor=StelUtils::strToVec3f( landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
+		horizonPolygonLineColor=StelUtils::strToVec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
 	}
+	// we must get label color, this is global. (No sense to make that per-landscape!)
+	QSettings *config = StelApp::getInstance().getSettings();
+	labelColor=StelUtils::strToVec3f(config->value("landscape/label_color", "0.2,0.8,0.2").toString());
+	fontSize=config->value("landscape/label_font_size", 18).toInt();
 	loadLabels(landscapeId);
 }
 
@@ -225,7 +229,7 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	return path;
 }
 
-// GZ New function: find file and fill landscapeLabels list.
+// find optional file and fill landscapeLabels list.
 void Landscape::loadLabels(const QString& landscapeId)
 {
 	// in case we have labels and this is called for a retranslation, clean list first.
@@ -277,7 +281,7 @@ void Landscape::loadLabels(const QString& landscapeId)
 			StelUtils::spheToRect((180.0f-parts.at(0).toFloat()) *M_PI/180.0, parts.at(1).toFloat()*M_PI/180.0, newLabel.featurePoint);
 			StelUtils::spheToRect((180.0f-parts.at(0).toFloat() - parts.at(3).toFloat())*M_PI/180.0, (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI/180.0, newLabel.labelPoint);
 			landscapeLabels.append(newLabel);
-			qDebug() << "Added landscape label " << newLabel.name;
+			//qDebug() << "Added landscape label " << newLabel.name;
 		}
 		file.close();
 	}
@@ -287,41 +291,38 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 {
 	if (landscapeLabels.length()==0) // no labels
 		return;
-	//if (labelFader.getInterstate() < 0.001f) // switched off
-	//	return;
-	// TODO: Draw labels with font size selection, reprojection etc.
+	if (labelFader.getInterstate() < 0.0001f) // switched off
+		return;
 
 	// We must reset painter to pure altaz coordinates without pano-based rotation
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	painter->setProjector(prj);
-	//StelPainter painter(prj);
+	QFont font;
+	font.setPixelSize(fontSize);
 	painter->setFont(font);
+	QFontMetrics fm(font);
 	painter->setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate()*landFader.getInterstate());
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
 
 	for (int i = 0; i < landscapeLabels.size(); ++i)
 	{
-		Vec3d xy;
-		if (prj->project(landscapeLabels.at(i).labelPoint,xy))
-		{
-			QFontMetrics fm(font);
-			int textWidth=fm.width(landscapeLabels.at(i).name);
-			painter->drawText(xy[0], xy[1], landscapeLabels.at(i).name, 0, -textWidth/2, 2, false);
-		}
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glEnable(GL_LINE_SMOOTH);
-		#endif
+		int textWidth=fm.width(landscapeLabels.at(i).name);
+		painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, false);
 		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, NULL);
-		#ifdef GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glDisable(GL_LINE_SMOOTH);
-		#endif
 	}
+
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
 	glDisable(GL_BLEND);
 }
 
