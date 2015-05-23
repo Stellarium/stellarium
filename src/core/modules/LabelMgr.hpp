@@ -38,6 +38,7 @@ class StelPainter;
 //! Because this class is intended for use in scripting (although
 //! other uses are also fine), all label types and so on are specified 
 //! by QString descriptions.
+//! The labels are painted very late, i.e. also sky object labels will be written over the landscape.
 //! TODO: when QT4.5 is out, change implementation to use QGraphicsTextItem.
 //! (QT4.5 should allow for opacity changes for fades, but it is not currently
 //! implemented.
