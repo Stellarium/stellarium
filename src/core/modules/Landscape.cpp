@@ -314,8 +314,16 @@ void Landscape::drawLabels(StelCore* core, StelPainter *painter)
 
 	for (int i = 0; i < landscapeLabels.size(); ++i)
 	{
-		int textWidth=fm.width(landscapeLabels.at(i).name);
-		painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, false);
+		// in case of gravityLabels, we cannot shift-adjust centered placename, sorry!
+		if (prj->getFlagGravityLabels())
+		{
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, 0, 0, false);
+		}
+		else
+		{
+			int textWidth=fm.width(landscapeLabels.at(i).name);
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
+		}
 		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, NULL);
 	}
 
