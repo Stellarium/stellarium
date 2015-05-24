@@ -1,7 +1,8 @@
 /*
  * Stellarium
  * This file Copyright (C) 2008 Matthew Gates
- * 
+ * Horizon system labels (c) 2015 Georg Zotti
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -111,6 +112,29 @@ private:
 	SkyLabel::Style labelStyle;
 	double labelEnclosureSize;
 };
+
+//! @class HorizonLabel
+//! Used to create user labels which are bound to azimuthal coordinates.
+class HorizonLabel : public StelLabel
+{
+public:
+	//! Constructor of a HorizonLabel which is to be displayed on an alt-azimuthal position.
+	//! @param text the text for the label
+	//! @param az  the azimuth, degrees
+	//! @param alt the altitude, degrees
+	//! @param font the font to use
+	//! @param color the color for the label
+	HorizonLabel(const QString& text, const float az, const float alt, const QFont& font, const Vec3f& color);
+	virtual ~HorizonLabel();
+
+	//! draw the label on the screen
+	//! @param core the StelCore object
+	//! @param sPainter the StelPainter to use for drawing operations
+	virtual bool draw(StelCore* core, StelPainter& sPainter);
+private:
+	Vec3d altaz; // the vector to the coordinates
+};
+
 
 //! @class ScreenLabel
 //! Used to create user labels which are bound to a fixed point on the screen.
@@ -300,6 +324,33 @@ bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 	return true;
 }
 
+///////////////////////
+// HorizonLabel class //
+///////////////////////
+HorizonLabel::HorizonLabel(const QString& text, const float az, const float alt, const QFont& font, const Vec3f& color)
+	: StelLabel(text, font, color)
+{
+	StelUtils::spheToRect((180.0f-az)*M_PI/180.0, alt*M_PI/180.0, altaz);
+}
+
+HorizonLabel::~HorizonLabel()
+{
+}
+
+bool HorizonLabel::draw(StelCore *core, StelPainter& sPainter)
+{
+	if (labelFader.getInterstate() <= 0.0)
+		return false;
+
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setFont(labelFont);
+	StelProjectorP keepProj=sPainter.getProjector(); // we must reset after painting!
+	StelProjectorP altazProjector=core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	sPainter.setProjector(altazProjector);
+	sPainter.drawText(altaz, labelText, 0, 0, 0, false);
+	sPainter.setProjector(keepProj);
+	return true;
+}
 
 ///////////////////////
 // ScreenLabel class //
@@ -370,6 +421,26 @@ int LabelMgr::labelObject(const QString& text,
 	}
 	
 	StelLabel* l = new SkyLabel(text, obj, font, StelUtils::htmlColorToVec3f(fontColor), side, labelDistance, SkyLabel::stringToStyle(style));
+	if (l==NULL)
+		return -1;
+
+	if (visible)
+		l->setFlagShow(true);
+
+	allLabels.append(l);
+	return allLabels.size()-1;
+}
+
+int LabelMgr::labelHorizon(const QString& text,
+		float az,
+		float alt,
+		bool visible,
+		float fontSize,
+		const QString& fontColor)
+{
+	QFont font;
+	font.setPixelSize(fontSize);
+	HorizonLabel* l = new HorizonLabel(text, az, alt, font, StelUtils::htmlColorToVec3f(fontColor));
 	if (l==NULL)
 		return -1;
 
