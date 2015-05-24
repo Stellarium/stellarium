@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 16:26+0600\n"
-"PO-Revision-Date: 2015-05-09 16:32+0000\n"
+"POT-Creation-Date: 2015-05-10 14:59+0600\n"
+"PO-Revision-Date: 2015-05-10 16:48+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-10 05:11+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-11 05:13+0000\n"
+"X-Generator: Launchpad (build 17487)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -1776,7 +1776,7 @@ msgid "Tester: %1"
 msgstr "Testeur : %1"
 
 #: src/gui/HelpDialog.cpp:306
-msgid "Past Developers"
+msgid "Former Developers"
 msgstr "Anciens développeurs"
 
 #: src/gui/HelpDialog.cpp:307
@@ -2791,7 +2791,7 @@ msgstr "Analemme"
 #. TRANSLATORS: Name of script
 #: src/translations.h:236
 msgid "Sky Culture Tour"
-msgstr "Tour des traditions célestes"
+msgstr "Tour des cultures célestes"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:238
@@ -2833,7 +2833,7 @@ msgstr "Faire le tour des paysages installés"
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:256
 msgid "Look at each installed sky culture."
-msgstr "Une visite de chaque tradition céleste installée"
+msgstr "Une visite de chaque culture céleste installée"
 
 #: src/translations.h:257
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -4358,7 +4358,7 @@ msgstr "Paysage"
 #: src/ui_viewDialog.h:1241
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
-msgstr "Mythologie"
+msgstr "Culture céleste"
 
 #: src/ui_viewDialog.h:1244
 msgid "Labels and Markers"
@@ -4646,7 +4646,7 @@ msgstr "Ajouter/supprimer des paysages…"
 
 #: src/ui_viewDialog.h:1369
 msgid "Use this sky culture as default"
-msgstr "Utiliser cette mythologie par défaut"
+msgstr "Utiliser cette culture céleste par défaut"
 
 #: src/ui_viewDialog.h:1370
 msgid "Show names"
@@ -4658,7 +4658,8 @@ msgstr "Indiquez sous quelle forme vous désirez l'affichage des noms"
 
 #: src/ui_viewDialog.h:1375
 msgid "Use native names for planets from current culture"
-msgstr "Utiliser les noms natifs de la mythologie actuelle pour les planètes"
+msgstr ""
+"Utiliser les noms natifs de la culture céleste actuelle pour les planètes"
 
 #: src/ui_viewDialog.h:1377
 msgid "Visible"
@@ -4678,7 +4679,7 @@ msgstr "Langue par défaut"
 
 #: src/ui_configurationDialog.h:1021
 msgid "Sky Culture Language"
-msgstr "Langue de la mythologie"
+msgstr "Langue de la culture céleste"
 
 #: src/ui_configurationDialog.h:1022
 msgid "Default options"
@@ -8843,7 +8844,7 @@ msgstr "mise à jour : 16 avril 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "The Exoplanet Data Explorer"
-msgstr "L'Explorateur de données des exoplanètes"
+msgstr "L'explorateur de données des exoplanètes"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Anglo-Australian Planet Search"
@@ -11718,6 +11719,9 @@ msgstr "Planète actuelle : Saturne"
 
 #~ msgid "Crosshairs"
 #~ msgstr "Réticule"
+
+#~ msgid "Past Developers"
+#~ msgstr "Anciens développeurs"
 
 #, qt-format
 #~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
