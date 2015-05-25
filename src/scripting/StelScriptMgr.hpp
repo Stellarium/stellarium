@@ -111,15 +111,29 @@ public slots:
 	//! @return false if the given script could not be run, true otherwise
 	bool runPreprocessedScript(const QString& preprocessedScript);
 
-	//! Run the script located at the given location
+	//! Run the script located at the given location. In essence, this calls prepareScript and runPreprocessedScript.
+	//! This is a blocking call! The event queue is held up by calls of QCoreApplication::processEvents().
 	//! @param fileName the location of the file containing the script.
 	//! @param includePath the directory to use when searching for include files
 	//! in the SSC preprocessor.  Usually this will be the same as the 
 	//! script file itself, but if you're running a generated script from 
 	//! a temp directory, but want to include a file from elsewhere, it 
 	//! can be usetul to set it to something else (e.g. in ScriptConsole).
-	//! @return false if the named script could not be run, true otherwise
+	//! @return false if the named script could not be prepared or run, true otherwise
 	bool runScript(const QString& fileName, const QString& includePath="");
+
+	//! Does all preparatory steps except for actually executing the script in the engine.
+	//! Use runPreprocessedScript to execute the script.
+	//! It should be safe to call this method from another thread.
+	//! @param script returns the preprocessed script text
+	//! @param fileName the location of the file containing the script.
+	//! @param includePath the directory to use when searching for include files
+	//! in the SSC preprocessor.  Usually this will be the same as the
+	//! script file itself, but if you're running a generated script from
+	//! a temp directory, but want to include a file from elsewhere, it
+	//! can be usetul to set it to something else (e.g. in ScriptConsole).
+	//! @return false if the named script could not be prepared, true otherwise
+	bool prepareScript(QString& script, const QString& fileName, const QString& includePath="");
 
 	//! Stops any running script.
 	//! @return false if no script was running, true otherwise.
@@ -188,7 +202,7 @@ private:
 	
 	//Script engine agent
 	StelScriptEngineAgent *agent;
-	
+
 };
 
 class StelScriptEngineAgent : public QScriptEngineAgent

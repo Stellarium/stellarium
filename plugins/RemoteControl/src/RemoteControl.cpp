@@ -116,7 +116,7 @@ void RemoteControl::init()
 
 	loadSettings();
 
-	QSettings* staticSettings = new QSettings(conf->fileName(),StelIniFormat,this);
+	QSettings* staticSettings = new QSettings(conf->fileName(),StelIniFormat,QCoreApplication::instance());
 	staticSettings->beginGroup("RemoteControl");
 	staticSettings->beginGroup("staticfiles");
 	requestHandler = new RequestHandler(staticSettings);
@@ -185,7 +185,7 @@ void RemoteControl::enableRemoteControl(bool b)
 void RemoteControl::startServer()
 {
 	//use the Stellarium config file, but a separate conf object
-	QSettings* settings = new QSettings(conf->fileName(),StelIniFormat,this);
+	QSettings* settings = new QSettings(conf->fileName(),StelIniFormat,QCoreApplication::instance());
 	settings->beginGroup("RemoteControl");
 	settings->beginGroup("listener");
 	httpListener = new HttpListener(settings,requestHandler);
@@ -237,7 +237,7 @@ void RemoteControl::restoreDefaultSettings()
 	conf->beginGroup("staticfiles");
 	conf->setValue("encoding","UTF-8");
 	conf->setValue("maxAge",120000);
-	conf->setValue("cacheTime",120000);
+	conf->setValue("cacheTime",1); //very short for easier development
 	conf->setValue("cacheSize",1000000);
 	conf->setValue("maxCachedFileSize",65536);
 	conf->endGroup();
