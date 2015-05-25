@@ -48,7 +48,8 @@
 #include <QtCore/qfile.h>
 #include <QtCore/qstring.h>
 
-QT_BEGIN_NAMESPACE
+// QT_BEGIN_NAMESPACE
+namespace Stel {
 
 class QZipReaderPrivate;
 
@@ -107,6 +108,7 @@ private:
     Q_DISABLE_COPY(QZipReader)
 };
 
-QT_END_NAMESPACE
+// QT_END_NAMESPACE
+}
 
 #endif // QZIPREADER_H
