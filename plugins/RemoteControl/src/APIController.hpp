@@ -35,8 +35,8 @@ public:
 
 	QByteArray serviceName() { return m_serviceName; }
 
-	virtual void get(const QList<QByteArray>& args, const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response);
-	virtual void post(const QList<QByteArray>& args, const QMultiMap<QByteArray,QByteArray>& parameters, const QByteArray& data, HttpResponse& response);
+	virtual void get(const QByteArray& operation, const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response);
+	virtual void post(const QByteArray& operation, const QMultiMap<QByteArray,QByteArray>& parameters, const QByteArray& data, HttpResponse& response);
 protected:
 	static void writeRequestError(const QByteArray& message, HttpResponse &response);
 	static void writeJSON(const QJsonDocument& doc, HttpResponse& response);

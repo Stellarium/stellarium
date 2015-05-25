@@ -290,6 +290,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 		qWarning() << msg;
 		return false;
 	}
+
 	// Seed the PRNG so that script random numbers aren't always the same sequence
 	qsrand(QDateTime::currentDateTime().toTime_t());
 
@@ -310,6 +311,13 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 // Run the script located at the given location
 bool StelScriptMgr::runScript(const QString& fileName, const QString& includePath)
 {
+	QString preprocessedScript;
+	prepareScript(preprocessedScript,fileName,includePath);
+	return runPreprocessedScript(preprocessedScript);
+}
+
+bool StelScriptMgr::prepareScript(QString &script, const QString &fileName, const QString &includePath)
+{
 	QString absPath;
 
 	if (QFileInfo(fileName).isAbsolute())
@@ -324,9 +332,9 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		qWarning() << msg;
 		return false;
 	}
-	
+
 	QString scriptDir = QFileInfo(absPath).dir().path();
-	
+
 	QFile fic(absPath);
 	if (!fic.open(QIODevice::ReadOnly))
 	{
@@ -336,18 +344,18 @@ bool StelScriptMgr::runScript(const QString& fileName, const QString& includePat
 		return false;
 	}
 
-	scriptFileName = fileName;
 	if (!includePath.isEmpty())
 		scriptDir = includePath;
-	QString preprocessedScript;
+
 	bool ok = false;
 	if (fileName.endsWith(".ssc"))
-		ok = preprocessScript(fic, preprocessedScript, scriptDir);
+		ok = preprocessScript(fic, script, scriptDir);
 	if (!ok)
 	{
 		return false;
 	}
-	return runPreprocessedScript(preprocessedScript);
+	scriptFileName = fileName;
+	return true;
 }
 
 void StelScriptMgr::stopScript()

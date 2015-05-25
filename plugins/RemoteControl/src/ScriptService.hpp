@@ -32,7 +32,8 @@ public:
 
 	virtual ~ScriptService() {}
 
-	virtual void get(const QList<QByteArray>& args,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response);
+	virtual void get(const QByteArray& operation,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response) Q_DECL_OVERRIDE;
+	virtual void post(const QByteArray &operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelScriptMgr* scriptMgr;
 };
