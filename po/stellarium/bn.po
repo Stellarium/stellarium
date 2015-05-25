@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 14:59+0600\n"
+"POT-Creation-Date: 2015-05-24 19:51+0600\n"
 "PO-Revision-Date: 2015-03-08 14:10+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Bengali\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-11 05:10+0000\n"
-"X-Generator: Launchpad (build 17487)\n"
+"X-Launchpad-Export-Date: 2015-05-25 05:13+0000\n"
+"X-Generator: Launchpad (build 17514)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -2590,7 +2590,7 @@ msgid "Trees"
 msgstr "জঙ্গল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:164 plugins/ArchaeoLines/src/ArchaeoLines.cpp:769
+#: src/translations.h:164 plugins/ArchaeoLines/src/ArchaeoLines.cpp:770
 msgid "Moon"
 msgstr "চন্দ্র"
 
@@ -2610,17 +2610,17 @@ msgid "Garching"
 msgstr "গারচিং"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:172 plugins/ArchaeoLines/src/ArchaeoLines.cpp:781
+#: src/translations.h:172 plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
 msgid "Mars"
 msgstr "মঙ্গল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:174 plugins/ArchaeoLines/src/ArchaeoLines.cpp:784
+#: src/translations.h:174 plugins/ArchaeoLines/src/ArchaeoLines.cpp:785
 msgid "Jupiter"
 msgstr "বৃহস্পতি"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:176 plugins/ArchaeoLines/src/ArchaeoLines.cpp:787
+#: src/translations.h:176 plugins/ArchaeoLines/src/ArchaeoLines.cpp:788
 msgid "Saturn"
 msgstr "শনি"
 
@@ -5206,24 +5206,24 @@ msgid "Angle measure"
 msgstr "কৌণিক দূরত্ব পরিমাপ"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:510
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:511
 msgid "The Angle Measure is enabled:"
 msgstr "কৌণিক দূরত্ব পরিমাপ সক্রিয় :"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:512
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:513
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "পরিমাপের জন্য left button চেপে এক স্থান থেকে অন্য স্থানে যান ও তা মুছে ফেলতে "
 "left-click করুন ।"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:514
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:515
 msgid "Right-clicking changes the end point only."
 msgstr "Right-click শুধুমাত্র শেষের প্রান্তবিন্দুটির অবস্থান পরিবর্তন করে ।"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:516
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:517
 msgid "PA="
 msgstr ""
 
@@ -8493,7 +8493,7 @@ msgstr "ভর"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:766
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:767
 msgid "Sun"
 msgstr "সূর্য"
 
@@ -10754,48 +10754,48 @@ msgstr ""
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:742
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:743
 msgid "Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:745
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:746
 msgid "Solstice"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:748
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:749
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:751
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:754
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:760
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:763
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:773
 msgid "error if you can read this"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
 msgid "Mercury"
 msgstr "বুধ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:778
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:779
 msgid "Venus"
 msgstr "শুক্র"
 
