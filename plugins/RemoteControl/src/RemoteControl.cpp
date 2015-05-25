@@ -66,7 +66,7 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 }
 
 RemoteControl::RemoteControl()
-	: enabled(false)
+	: enabled(true)
 	, toolbarButton(NULL), httpListener(NULL), requestHandler(NULL)
 {
 	setObjectName("RemoteControl");
@@ -149,6 +149,9 @@ void RemoteControl::init()
 	{
 		qWarning() << "WARNING: unable create toolbar button for RemoteControl plugin: " << e.what();
 	}
+
+	if(enabled)
+		startServer();
 }
 
 void RemoteControl::update(double deltaTime)
