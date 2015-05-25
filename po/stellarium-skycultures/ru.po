@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 17:01+0600\n"
-"PO-Revision-Date: 2015-05-02 13:39+0000\n"
+"POT-Creation-Date: 2015-05-25 10:53+0600\n"
+"PO-Revision-Date: 2015-05-24 14:24+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Koptev Oleg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-03 05:33+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-25 05:38+0000\n"
+"X-Generator: Launchpad (build 17514)\n"
 "Language: ru\n"
 
 #: skycultures/translations.fab:9
@@ -3877,6 +3877,54 @@ msgstr "Овца"
 msgid "Stars of Water"
 msgstr "Звезды из воды"
 
+#: skycultures/egyptian/star_names.fab:1
+#: skycultures/romanian/star_names.fab:80
+#: skycultures/western/star_names.fab:116
+#: skycultures/western_rey/star_names.fab:32
+msgid "Procyon"
+msgstr "Процион"
+
+#: skycultures/egyptian/star_names.fab:2
+#: skycultures/western/star_names.fab:102
+#: skycultures/western_rey/star_names.fab:36
+msgid "Sirius"
+msgstr "Сириус"
+
+#. TRANSLATORS: Native name of the Sun in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:2
+msgid "God of Sun"
+msgstr "Бог Солнца"
+
+#. TRANSLATORS: Native name of the Moon in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:4
+msgid "Khonsu, the Traveler"
+msgstr "Хонсу, Путешественник"
+
+#. TRANSLATORS: Native name of Mercury in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:6
+msgid "Unknown"
+msgstr ""
+
+#. TRANSLATORS: Native name of Venus in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:8
+msgid "Star that Crosses / The God of the Morning"
+msgstr "Звезда, которая пересекает / Бог утра"
+
+#. TRANSLATORS: Native name of Mars in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:10
+msgid "Red Horus"
+msgstr "Красный Хорус"
+
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:12
+msgid "Horus Who Binds the Two Lands"
+msgstr "Хорус, который связывает две страны"
+
+#. TRANSLATORS: Native name of Saturn in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:14
+msgid "Horus, the Bull of Heaven"
+msgstr "Хорус, небесный бык"
+
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
 msgstr "Два солнечных луча"
@@ -6577,12 +6625,6 @@ msgstr "Звезда Лейтена"
 msgid "Romulus"
 msgstr "Ромул"
 
-#: skycultures/romanian/star_names.fab:80
-#: skycultures/western/star_names.fab:116
-#: skycultures/western_rey/star_names.fab:32
-msgid "Procyon"
-msgstr "Процион"
-
 #: skycultures/romanian/star_names.fab:81
 msgid "Remus"
 msgstr "Рем"
@@ -8140,11 +8182,6 @@ msgstr "Тейят Постериор"
 msgid "Plaskett's star"
 msgstr "Звезда Пласкетта"
 
-#: skycultures/western/star_names.fab:102
-#: skycultures/western_rey/star_names.fab:36
-msgid "Sirius"
-msgstr "Сириус"
-
 #: skycultures/western/star_names.fab:103
 msgid "Alzirr"
 msgstr "Альзирр"
@@ -8738,3 +8775,6 @@ msgstr "Бета Центавра"
 
 #~ msgid "Hubble's variable neb"
 #~ msgstr "Туманность Кочка"
+
+#~ msgid "Sebeg"
+#~ msgstr "Себег"
