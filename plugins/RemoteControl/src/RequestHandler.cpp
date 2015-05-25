@@ -55,6 +55,10 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 #define SERVER_HEADER "Stellarium RemoteControl " REMOTECONTROL_VERSION
 	response.setHeader("Server",SERVER_HEADER);
 
+	QByteArray rawPath = request.getRawPath();
+	QByteArray path = request.getPath();
+	qDebug()<<"Request path:"<<rawPath<<" decoded:"<<path;
+
 	//try to support keep-alive connections
 	if(QString::compare(request.getHeader("Connection"),"keep-alive",Qt::CaseInsensitive)==0)
 		response.setHeader("Connection","keep-alive");

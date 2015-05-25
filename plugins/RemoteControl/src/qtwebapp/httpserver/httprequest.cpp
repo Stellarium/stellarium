@@ -182,6 +182,10 @@ void HttpRequest::decodeRequestParams() {
         rawParameters=path.mid(questionMark+1);
         path=path.left(questionMark);
     }
+
+    //store the decoded path
+    decodedPath = urlDecode(path);
+
     // Get request body parameters
     QByteArray contentType=headers.value("Content-Type");
     if (!bodyData.isEmpty() && (contentType.isEmpty() || contentType.startsWith("application/x-www-form-urlencoded"))) {
@@ -269,9 +273,13 @@ QByteArray HttpRequest::getMethod() const {
     return method;
 }
 
+QByteArray HttpRequest::getRawPath() const
+{
+    return path;
+}
 
 QByteArray HttpRequest::getPath() const {
-    return urlDecode(path);
+    return decodedPath;
 }
 
 
