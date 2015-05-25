@@ -68,6 +68,9 @@ public:
     /** Get the method of the HTTP request  (e.g. "GET") */
     QByteArray getMethod() const;
 
+    /** Returns the raw path data, without percent decoding */
+    QByteArray getRawPath() const;
+
     /** Get the decoded path of the HTPP request (e.g. "/index.html") */
     QByteArray getPath() const;
 
@@ -160,6 +163,9 @@ private:
 
     /** Request path (in raw encoded format) */
     QByteArray path;
+
+    /** Request path (in decoded format). This is valid after decodeRequestParams is called. */
+    QByteArray decodedPath;
 
     /** Request protocol version */
     QByteArray version;

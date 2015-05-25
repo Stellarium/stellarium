@@ -46,24 +46,6 @@ void ScriptService::get(const QList<QByteArray>& args, const QMultiMap<QByteArra
 	{
 		//retrieve detail about a single script
 		QString scriptId = QString::fromUtf8(args[0]);
-		bool ok;
-		int idx = scriptId.toInt(&ok);
-
-		if(ok)
-		{
-			QStringList allScripts = scriptMgr->getScriptList();
-
-			if(idx<0 || idx>=allScripts.length())
-				ok = false;
-			else
-				scriptId = allScripts[idx];
-		}
-
-		if(!ok)
-		{
-			writeRequestError("invalid script index",response);
-			return;
-		}
 
 		QJsonObject obj;
 		//if the script name is wrong, this will return empty strings

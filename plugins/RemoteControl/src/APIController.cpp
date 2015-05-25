@@ -72,7 +72,8 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	//disable caching by default for services
 	response.setHeader("Cache-Control","no-cache");
 
-	QByteArray path = request.getPath();
+	//use the raw path here to enable encoded slashes
+	QByteArray path = request.getRawPath();
 	QByteArray pathWithoutPrefix = path.right(path.size()-m_prefixLength);
 
 	QList<QByteArray> splitPath = pathWithoutPrefix.split('/');
@@ -84,9 +85,14 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 		AbstractAPIService* sv = *it;
 
 		QList<QByteArray> args;
+		args.reserve(splitPath.size()-1);
 		if(splitPath.size()>1)
 		{
-			args = splitPath.mid(1);
+			foreach(QByteArray arg, splitPath.mid(1))
+			{
+				//decode arguments seperately
+				args.append(HttpRequest::urlDecode(arg));
+			}
 		}
 
 		if(request.getMethod()=="GET")
