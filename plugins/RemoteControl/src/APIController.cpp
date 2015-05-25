@@ -20,18 +20,18 @@
 #include "APIController.hpp"
 #include <QJsonDocument>
 
-void AbstractAPIService::get(const QList<QByteArray> &args, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
+void AbstractAPIService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
 {
-	Q_UNUSED(args);
+	Q_UNUSED(operation);
 	Q_UNUSED(parameters);
 	response.setStatus(405,"Method Not allowed");
 	QString str(QStringLiteral("Method GET not allowed for service %2"));
 	response.write(str.arg(QString::fromLatin1(serviceName())).toLatin1(),true);
 }
 
-void AbstractAPIService::post(const QList<QByteArray>& args, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
+void AbstractAPIService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
 {
-	Q_UNUSED(args);
+	Q_UNUSED(operation);
 	Q_UNUSED(parameters);
 	response.setStatus(405,"Method Not allowed");
 	QString str(QStringLiteral("Method POST not allowed for service %2"));
@@ -72,36 +72,33 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	//disable caching by default for services
 	response.setHeader("Cache-Control","no-cache");
 
-	//use the raw path here to enable encoded slashes
+	//use the raw path here
 	QByteArray path = request.getRawPath();
 	QByteArray pathWithoutPrefix = path.right(path.size()-m_prefixLength);
 
-	QList<QByteArray> splitPath = pathWithoutPrefix.split('/');
+	int slashIdx = pathWithoutPrefix.indexOf('/');
+
+	QByteArray serviceString = pathWithoutPrefix;
+	QByteArray operation;
+	if(slashIdx>=0)
+	{
+		serviceString = pathWithoutPrefix.mid(0,slashIdx);
+		operation = pathWithoutPrefix.mid(slashIdx+1);
+	}
 
 	//try to find service
-	QMap<QByteArray,AbstractAPIService*>::iterator it = m_serviceMap.find(splitPath[0]);
+	QMap<QByteArray,AbstractAPIService*>::iterator it = m_serviceMap.find(serviceString);
 	if(it!=m_serviceMap.end())
 	{
 		AbstractAPIService* sv = *it;
 
-		QList<QByteArray> args;
-		args.reserve(splitPath.size()-1);
-		if(splitPath.size()>1)
-		{
-			foreach(QByteArray arg, splitPath.mid(1))
-			{
-				//decode arguments seperately
-				args.append(HttpRequest::urlDecode(arg));
-			}
-		}
-
 		if(request.getMethod()=="GET")
 		{
-			sv->get(args, request.getParameterMap(),response);
+			sv->get(operation, request.getParameterMap(),response);
 		}
 		else if (request.getMethod()=="POST")
 		{
-			sv->post(args, request.getParameterMap(),request.getBody(),response);
+			sv->post(operation, request.getParameterMap(),request.getBody(),response);
 		}
 		else
 		{

@@ -31,40 +31,105 @@ ScriptService::ScriptService(const QByteArray &serviceName, QObject *parent) : A
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
 }
 
-void ScriptService::get(const QList<QByteArray>& args, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
+void ScriptService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
 {
 	//this is run in an HTTP worker thread
 
-	if(args.isEmpty())
+	if(operation=="list")
 	{
 		//list all scripts, this should be thread safe
 		QStringList allScripts = scriptMgr->getScriptList();
 
 		writeJSON(QJsonDocument(QJsonArray::fromStringList(allScripts)),response);
 	}
-	else if (args.size() == 1)
+	else if (operation == "info")
 	{
-		//retrieve detail about a single script
-		QString scriptId = QString::fromUtf8(args[0]);
+		if(parameters.contains("id"))
+		{
+			//retrieve detail about a single script
+			QString scriptId = QString::fromUtf8(parameters.value("id"));
 
+			QJsonObject obj;
+			//if the script name is wrong, this will return empty strings
+			obj.insert("id",scriptId);
+			QString d = scriptMgr->getName(scriptId).trimmed();
+			obj.insert("name",d);
+			obj.insert("name_localized", StelTranslator::globalTranslator->qtranslate(d));
+			d = scriptMgr->getDescription(scriptId).trimmed();
+			obj.insert("description",d);
+			obj.insert("description_localized", StelTranslator::globalTranslator->qtranslate(d));
+			obj.insert("author",scriptMgr->getAuthor(scriptId).trimmed());
+			obj.insert("license",scriptMgr->getLicense(scriptId).trimmed());
+			//shortcut often causes a large delay because the whole file gets searched, and it is usually missing, so we ignore it
+			//obj.insert("shortcut",scriptMgr->getShortcut(scriptId));
+
+			writeJSON(QJsonDocument(obj),response);
+		}
+		else
+		{
+			writeRequestError("need parameter: id",response);
+		}
+	}
+	else if(operation == "status")
+	{
+		//generic script status
 		QJsonObject obj;
-		//if the script name is wrong, this will return empty strings
-		obj.insert("id",scriptId);
-		QString d = scriptMgr->getName(scriptId).trimmed();
-		obj.insert("name",d);
-		obj.insert("name_localized", StelTranslator::globalTranslator->qtranslate(d));
-		d = scriptMgr->getDescription(scriptId).trimmed();
-		obj.insert("description",d);
-		obj.insert("description_localized", StelTranslator::globalTranslator->qtranslate(d));
-		obj.insert("author",scriptMgr->getAuthor(scriptId).trimmed());
-		obj.insert("license",scriptMgr->getLicense(scriptId).trimmed());
-		//shortcut often causes a large delay because the whole file gets searched, and it is usually missing, so we ignore it
-		//obj.insert("shortcut",scriptMgr->getShortcut(scriptId));
+		obj.insert("scriptIsRunning",scriptMgr->scriptIsRunning());
+		obj.insert("runningScriptId",scriptMgr->runningScriptId());
 
 		writeJSON(QJsonDocument(obj),response);
 	}
 	else
 	{
-		writeRequestError("invalid number of arguments",response);
+		//TODO some sort of service description?
+		writeRequestError("unsupported operation. GET: list,info,status POST: run,stop",response);
+	}
+}
+
+void ScriptService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
+{
+	//this is run in an HTTP worker thread
+
+	if(operation=="run")
+	{
+		//retrieve detail about a single script
+		QString scriptId = QString::fromUtf8(parameters.value("id"));
+
+		if(scriptMgr->scriptIsRunning())
+		{
+			response.write("error: a script is already running",true);
+			return;
+		}
+
+		QString script;
+		//Prepare the script. Through a refactor, this is separate from actually running the script,
+		//and can be done in the HTTP thread. It can also notify the caller of an invalid script ID.
+		bool ret = scriptMgr->prepareScript(script,scriptId);
+
+		if(!ret)
+		{
+			response.write("error: could not prepare script, wrong id?",true);
+			return;
+		}
+
+		//ret = scriptMgr->runScript(scriptId);
+		//we are in another thread! for the actual execution of the script, we need to invoke the event queue
+		//we can not use blocking connection here because runPreprocessedScript is blocking!
+		//there is also no way to check if the script was actually started except for polling some time later
+		QMetaObject::invokeMethod(scriptMgr,"runPreprocessedScript",Qt::QueuedConnection,Q_ARG(QString,script));
+		response.write("ok",true);
+	}
+	else if(operation=="stop")
+	{
+		//scriptMgr->stopScript();
+		//here a blocking connection should cause no problems
+		QMetaObject::invokeMethod(scriptMgr,"stopScript",Qt::BlockingQueuedConnection);
+
+		response.write("ok",true);
+	}
+	else
+	{
+		//TODO some sort of service description?
+		writeRequestError("unsupported operation. GET: list,info,status POST: run,stop",response);
 	}
 }
