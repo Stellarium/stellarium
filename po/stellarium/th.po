@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-05-24 19:51+0600\n"
-"PO-Revision-Date: 2015-04-11 04:27+0000\n"
+"PO-Revision-Date: 2015-05-26 00:28+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-25 05:25+0000\n"
+"X-Launchpad-Export-Date: 2015-05-26 05:14+0000\n"
 "X-Generator: Launchpad (build 17514)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -1742,7 +1742,7 @@ msgstr "ผู้ทดสอบ: %1"
 
 #: src/gui/HelpDialog.cpp:306
 msgid "Former Developers"
-msgstr ""
+msgstr "นักพัฒนาเดิม"
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -1774,6 +1774,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"หลายคนมีส่วนร่วมในโครงการ และผลงานของพวกเขาก็ช่วยให้ Stellarium ดีขึ้น "
+"(เรียงตามตัวอักษร): %1"
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2104,12 +2106,12 @@ msgstr "ดาราจักร"
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "สุริยวิถี"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "สุริยวิถี (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -2462,12 +2464,12 @@ msgstr "บัญชีเมลอตต์"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "ดาวคู่ที่น่าสนใจ"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "ดาวแปรแสงที่น่าสนใจ"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -2644,7 +2646,7 @@ msgstr ""
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
 msgid "Testscene"
-msgstr ""
+msgstr "ฉากทดสอบ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
@@ -6120,7 +6122,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1731
 msgid "galileo"
-msgstr ""
+msgstr "กาลิเลโอ"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1733
@@ -6130,17 +6132,17 @@ msgstr "อิริเดียม"
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1735
 msgid "stations"
-msgstr ""
+msgstr "สถานีอวกาศ"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1737
 msgid "education"
-msgstr ""
+msgstr "การศึกษา"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1739
 msgid "observatory"
-msgstr ""
+msgstr "หอสังเกตการณ์"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1750
@@ -6155,7 +6157,7 @@ msgstr "สถานีอวกาศนานาชาติ"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1754
 msgid "China's first space station"
-msgstr ""
+msgstr "สถานีอวกาศแรกของจีน"
 
 #: plugins/Satellites/src/Satellite.cpp:256
 #: plugins/Satellites/src/Satellite.cpp:260
@@ -6214,7 +6216,7 @@ msgstr "ความเร็ว TEME (กม./วินาที): %1"
 #: plugins/Satellites/src/Satellite.cpp:323
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "มุมตกกระทบของแสงอาทิตย์: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:334
 msgid "The satellite and the observer are in sunlight."
@@ -10093,11 +10095,11 @@ msgstr "เปิดการใช้งานฝนดาวตกเมื่
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
 msgid "Show radiant marker"
-msgstr ""
+msgstr "แสดงตำแหน่งจุดกระจาย"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
 msgid "Show radiant labels"
-msgstr ""
+msgstr "แสดงป้ายชื่อจุดกระจาย"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
 msgid "Show active radiants only"
@@ -10109,7 +10111,7 @@ msgstr "ขนาดอักษรของชื่อ (จุดภาพ)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
 msgid "Set radiant color"
-msgstr ""
+msgstr "ตั้งค่าสีของจุดกระจาย"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
 msgid "Active Radiant - Generic Data"
@@ -10121,7 +10123,7 @@ msgstr "จุดกระจายของฝนดาวตกที่ไม
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
 msgid "Inactive"
-msgstr ""
+msgstr "ไม่ได้กำลังเกิดอยู่"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
 msgid "Active Radiant - Real Data"
