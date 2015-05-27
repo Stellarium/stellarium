@@ -243,13 +243,14 @@ SET(stellarium_lib_SRCS
 )
 
 # On Windows, QZipReader is already included in the lib
-IF(NOT WIN32)
+# since r7669 we must add our private version also in Windows.
+# IF(NOT WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		core/external/qtcompress/qzip.cpp
 		core/external/qtcompress/qzipreader.h
 		core/external/qtcompress/qzipwriter.h
 	)
-ENDIF()
+# ENDIF()
 
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
