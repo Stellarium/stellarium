@@ -45,7 +45,8 @@
 #include <QtCore/qstring.h>
 #include <QtCore/qfile.h>
 
-QT_BEGIN_NAMESPACE
+// QT_BEGIN_NAMESPACE
+namespace Stel {
 
 class QZipWriterPrivate;
 
@@ -98,6 +99,7 @@ private:
     Q_DISABLE_COPY(QZipWriter)
 };
 
-QT_END_NAMESPACE
+// QT_END_NAMESPACE
+}
 
 #endif // QZIPWRITER_H

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 16:26+0600\n"
-"PO-Revision-Date: 2015-05-09 18:02+0000\n"
+"POT-Creation-Date: 2015-05-10 14:59+0600\n"
+"PO-Revision-Date: 2015-05-17 16:08+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-10 05:18+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-18 05:08+0000\n"
+"X-Generator: Launchpad (build 17493)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -1736,8 +1736,8 @@ msgid "Tester: %1"
 msgstr "Испитивач: %1"
 
 #: src/gui/HelpDialog.cpp:306
-msgid "Past Developers"
-msgstr "Последњи програмери"
+msgid "Former Developers"
+msgstr ""
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -1872,7 +1872,7 @@ msgstr "Фрејмова у секунди"
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:399
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Потпуно тамо небо"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:401
@@ -8811,6 +8811,12 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Приказује анализу могућности посматрања изабраног објекта (време излаза, "
+"залаза и транзита) за тренутни датум, као и када јемогуће посматрати у току "
+"године. Претпоставља се да се објекат може посматрати ако се налази изнаг "
+"изнад хоризонта у току ноћи. Такође су укључени и датуми излаза и залаза "
+"највећег удаљавања од Сунца,  објеката који се јављају у сумрак и косичких "
+"података."
 
 #: plugins/Observability/src/Observability.cpp:170
 msgctxt "short month name"
@@ -8931,7 +8937,7 @@ msgstr "Није могуће посматрати небеско тело"
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "Нема космичког излаза/зачаза, нити излаза/залаза у сумрак."
 
 #: plugins/Observability/src/Observability.cpp:199
 #, qt-format
@@ -9806,12 +9812,12 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:367
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Индекс популације: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:372
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "Родитељско тело: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:378
 msgid "Active"
@@ -9824,7 +9830,7 @@ msgstr "Активност"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:391
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Највише: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:394
 msgid "Solar longitude is"
@@ -9844,15 +9850,15 @@ msgstr "Врста података"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
 msgid "Peak"
-msgstr ""
+msgstr "Врх"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:195
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Почетни датум је  после крајњег датума!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:199
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Временски интервал мора бити мањи од годину дана!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:219
 msgid "Variable"
@@ -9935,7 +9941,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 msgid "Population index"
-msgstr ""
+msgstr "Индекс популације"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 msgid ""
@@ -9972,7 +9978,7 @@ msgstr "%1Кише метеора%2 - чланак на Википедији"
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:294
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1Интернационална метеорска организација%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:370
 msgid "Meteor showers is updated"
@@ -9984,7 +9990,7 @@ msgstr "Конфигурација кише метеора"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:467
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Конфигурациони додатак  за метеорске кише"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:469
 msgid "Update data from Internet"
@@ -10217,7 +10223,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Крајње учитавање"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
@@ -10264,7 +10270,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Прикажи / сакриј сенке"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
@@ -10346,7 +10352,7 @@ msgstr "Сенке %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Сенке су деактивиране или нису  могуће."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
@@ -11393,6 +11399,9 @@ msgstr "Тренутна планета: Сатурн"
 #, qt-format
 #~ msgid "Obliquity (of date): %1"
 #~ msgstr "Закошење (од датума): %1"
+
+#~ msgid "Past Developers"
+#~ msgstr "Последњи програмери"
 
 #~ msgid "Galactic plane"
 #~ msgstr "Галактичка раван"

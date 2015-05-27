@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 16:26+0600\n"
-"PO-Revision-Date: 2015-05-03 12:43+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2015-05-10 14:59+0600\n"
+"PO-Revision-Date: 2015-05-16 10:03+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-10 05:11+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-17 05:07+0000\n"
+"X-Generator: Launchpad (build 17493)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
@@ -1764,7 +1764,7 @@ msgid "Tester: %1"
 msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:306
-msgid "Past Developers"
+msgid "Former Developers"
 msgstr "Frühere Entwickler"
 
 #: src/gui/HelpDialog.cpp:307
@@ -2136,12 +2136,12 @@ msgstr "Galaktisch"
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Ekliptikal"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Ekliptikal (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -2498,12 +2498,12 @@ msgstr "Melotte-Katalog"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Interessante Doppelsterne"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Interessante veränderliche Sterne"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -6200,17 +6200,17 @@ msgstr "Iridium"
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1735
 msgid "stations"
-msgstr ""
+msgstr "Raumstationen"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1737
 msgid "education"
-msgstr ""
+msgstr "Bildung"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1739
 msgid "observatory"
-msgstr ""
+msgstr "Beobachtungssatellit"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1750
@@ -6225,7 +6225,7 @@ msgstr "International Space Station"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1754
 msgid "China's first space station"
-msgstr ""
+msgstr "Chinas erste Raumstation"
 
 #: plugins/Satellites/src/Satellite.cpp:256
 #: plugins/Satellites/src/Satellite.cpp:260
@@ -6284,7 +6284,7 @@ msgstr "TEME-Geschwindigkeit (km/s): %1"
 #: plugins/Satellites/src/Satellite.cpp:323
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "Reflexionswinkel zur Sonne: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:334
 msgid "The satellite and the observer are in sunlight."
@@ -10528,7 +10528,7 @@ msgstr "Konnte scene ID für %1 nicht finden."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Bitte eine Szenerie laden!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
@@ -11836,6 +11836,9 @@ msgstr "Aktueller Planet: Saturn"
 
 #~ msgid "extragalactic (in MC) pulsar"
 #~ msgstr "Extragalaktischer Pulsar (in Magell. Wolken)"
+
+#~ msgid "Past Developers"
+#~ msgstr "Frühere Entwickler"
 
 #~ msgid "Show Galactic plane line"
 #~ msgstr "Galaktischen Äquator anzeigen"

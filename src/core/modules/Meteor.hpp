@@ -46,15 +46,15 @@ class Meteor
 public:
 	struct MeteorModel
 	{
-		Vec3d obs;         //! observer position
-		Vec3d position;    //! equatorial coordinate position
-		Vec3d posTrain;    //! end of train
-		float xydistance; //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-		float minDist;    //! Nearest point to observer along path
-		float startH;     //! Start height above center of earth
-		float endH;       //! End height
-		float mag;	   //! Apparent magnitude at head, 0-1
-		int firstBrightSegment; //! First bright segment of the train
+		Vec3d obs;		//! observer position
+		Vec3d position;		//! equatorial coordinate position
+		Vec3d posTrain;		//! end of train
+		float xydistance;	//! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+		float minDist;		//! Nearest point to observer along path
+		float startH;		//! Start height above center of earth
+		float endH;		//! End height
+		float mag;		//! Apparent magnitude at head, 0-1
+		int firstBrightSegment;	//! First bright segment of the train
 	};
 
 	//! Create a Meteor object.
@@ -107,16 +107,16 @@ private:
 	static Vec4f getColorFromName(QString colorName);
 	QList<colorPair> getRandColor();
 
-	bool m_alive;        //! Indicate if the meteor it still visible
+	bool m_alive;	//! Indicate if the meteor it still visible
 
-	float m_speed;      //! Velocity of meteor in km/s
-	Mat4d m_viewMatrix;  //! tranformation matrix to align radiant with earth direction of travel
-	MeteorModel meteor;  //! Parameters of meteor model
-	double m_distMultiplier;  //! Scale magnitude due to changes in distance
+	float m_speed;			//! Velocity of meteor in km/s
+	Mat4d m_viewMatrix;		//! tranformation matrix to align radiant with earth direction of travel
+	MeteorModel meteor;		//! Parameters of meteor model
+	double m_distMultiplier;	//! Scale magnitude due to changes in distance
 
 	QList<Vec4f> m_trainColorArray;
 	QList<Vec4f> m_lineColorArray;
-	const int m_segments;     //! Number of segments along the train (useful to curve along projection distortions)
+	const int m_segments;	//! Number of segments along the train (useful to curve along projection distortions)
 };
 
 

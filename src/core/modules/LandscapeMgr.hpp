@@ -425,9 +425,6 @@ private:
 
 	//! List of the IDs of the landscapes packaged by default with Stellarium.
 	//! (So that they can't be removed.)
-	//! It is populated in LandscapeMgr() and has to be updated
-	//! manually on changes.
-	//! @todo Find a way to update it automatically.
 	QStringList packagedLandscapeIDs;
 
 };

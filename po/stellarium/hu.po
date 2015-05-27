@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-09 16:26+0600\n"
-"PO-Revision-Date: 2015-05-09 06:32+0000\n"
+"POT-Creation-Date: 2015-05-10 14:59+0600\n"
+"PO-Revision-Date: 2015-05-12 17:36+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-10 05:13+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-05-13 05:08+0000\n"
+"X-Generator: Launchpad (build 17493)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -134,7 +134,7 @@ msgstr "Galaktikus egyenlítő"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:376
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "Oppozíció/együttállás hosszúsági vonala"
 
 #: src/core/modules/LandscapeMgr.cpp:366 src/ui_viewDialog.h:1267
 msgid "Atmosphere"
@@ -1755,7 +1755,7 @@ msgid "Tester: %1"
 msgstr "Tesztelő: %1"
 
 #: src/gui/HelpDialog.cpp:306
-msgid "Past Developers"
+msgid "Former Developers"
 msgstr "Korábbi fejlesztők"
 
 #: src/gui/HelpDialog.cpp:307
@@ -2120,12 +2120,12 @@ msgstr "Galaktikus"
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Ekliptikus"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Ekliptikus (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -2419,7 +2419,7 @@ msgstr "Szabálytalan galaxisok"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Clusters associated with nebulosity"
-msgstr ""
+msgstr "Csillagcsoportosulás ködfolttal"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -3430,7 +3430,7 @@ msgstr "Kazahsztán"
 
 #: src/translations.h:401
 msgid "Lao"
-msgstr ""
+msgstr "Laosz"
 
 #: src/translations.h:402
 msgid "Lebanon"
@@ -3918,7 +3918,7 @@ msgstr "&Visszavonás"
 
 #: src/translations.h:526
 msgid "&Redo"
-msgstr ""
+msgstr "&Újra"
 
 #: src/translations.h:527
 msgid "Cu&t"
@@ -3958,7 +3958,7 @@ msgstr "Mappa"
 
 #: src/translations.h:535
 msgid "&Choose"
-msgstr ""
+msgstr "&Választ"
 
 #: src/translations.h:536 src/ui_configurationDialog.h:1186
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3983,7 +3983,7 @@ msgstr "Számítógép"
 
 #: src/translations.h:541
 msgid "&Open"
-msgstr ""
+msgstr "&Megnyit"
 
 #: src/translations.h:542
 msgid "File &name:"
@@ -3991,7 +3991,7 @@ msgstr "Fájl&név:"
 
 #: src/translations.h:543
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "&Link másolása"
 
 #: src/translations.h:544
 msgid "Abort"
@@ -4541,6 +4541,9 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Oppozíció/együttállás hosszúsági vonala - az ekliptikai hosszúságnak az a "
+"vonala, ami átmegy mindkét ekliptikai póluson, a Napon és az ellenkező "
+"ponton is."
 
 #: src/ui_viewDialog.h:1349
 msgid "Projection"
@@ -5332,8 +5335,8 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
-"If you would like to make a feature request, you can create a bug report, "
-"and set the severity to \"wishlist\"."
+"Funkció kérése úgy történik, hogy hibajelentést kell küldeni, a \"severity\"-"
+"t  \"wishlist\"-re állítva."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
@@ -5750,7 +5753,7 @@ msgstr "Lencse: nincs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Többszörözés: nincs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 msgid "Focal length of eyepiece"
@@ -5939,7 +5942,7 @@ msgstr "Fok és perc használata a FOV és a CCD számára"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "CCD megfordítása"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
@@ -5995,6 +5998,8 @@ msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
+"Egynél nagyobb szorzóérték megnöveli a fókusztávolságot (Barlow lencsék), "
+"egynél kisebb érték pedig csökkenti (Shapley lencsék)."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1109
 #: plugins/Oculars/src/ui_ocularDialog.h:1119
@@ -6122,7 +6127,7 @@ msgstr "GPS"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1729
 msgid "glonass"
-msgstr "Glonassz"
+msgstr "Glonaszsz"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1731
@@ -6221,7 +6226,7 @@ msgstr "TEME sebesség (km/s): %1"
 #: plugins/Satellites/src/Satellite.cpp:323
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "A Nap visszaverődési szöge: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:334
 msgid "The satellite and the observer are in sunlight."
@@ -6494,7 +6499,7 @@ msgstr "[minden új]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:666
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[nem kijelzett tételek]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:667
 msgid "[all displayed]"
@@ -8020,6 +8025,8 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"A modell időben %1 magnitúdós csökkenést feltételez a maximum értékről, ahol "
+"%1 az 2, 3, 6 és 9 lehet."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid ""
@@ -9903,7 +9910,7 @@ msgstr "Meteorraj bővítmény"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
 msgid "Terms"
-msgstr ""
+msgstr "Jelölések"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 msgid "Meteor shower"
@@ -10234,7 +10241,7 @@ msgstr "Koordináták:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "A mutatóeszköz koordinátáit mutató szöveg helyzete"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
@@ -10289,10 +10296,11 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
+"A geometria árnyalása nincs támogatva. Visszaállás \"6 textúra\" módba."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Visszaállás \"6 textúra\" módba az ANGLE bug miatt"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
@@ -10339,11 +10347,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr ""
+msgstr "Árnyalás újratöltése"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "3d tájkép árnyalása újratöltve"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
@@ -10376,12 +10384,12 @@ msgstr "Nem található tájkép ezzel az azonosítóval: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Előbb egy tájképet kell betölteni!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Pixelenkénti árnyalás %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
@@ -10492,7 +10500,7 @@ msgstr "Az árnyékok minőségének meghatározása (fentről lefelé egyre job
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS-hez a minőséget alacsonyra vagy magasra kell állítani."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
@@ -10507,6 +10515,8 @@ msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"<b>Alacsony/b> vagy <b>magas/b> árnyékszűrést igényel  (<b>hardver "
+"nélkül</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
@@ -10525,6 +10535,9 @@ msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"A <b>6 textúra mód</b> hat egyszerű textúrát használ, a kocka mindegyik "
+"oldalához egyet. Ez a leginkább kompatibilis módszer, de ugyanakkor lassabb "
+"lehet, mint a többi."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
@@ -10537,6 +10550,10 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"A <b>Geometria árnyékoló</b> módszer kihasználja a grafikus kártyáknak azt a "
+"tulajdonságát, hogy képesek a kocka mind a hat oldalát egyszerre renderelni. "
+"Ez lehet a leggyorsabb módszer a tájképtől és a grafikus kártya hardverétől "
+"függően. Ha a hardver nem támogatja, nem lehet kiválasztani."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
@@ -10573,7 +10590,7 @@ msgstr ""
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
-msgstr ""
+msgstr "Kiválasztva csak a látható felület frissül a mozgatás alatt."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
@@ -10591,11 +10608,11 @@ msgstr ""
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
-msgstr ""
+msgstr "Ez egy másik felületet is frissít, így a látvány kevésbé töredezett."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
+msgstr "Ciklusidő másodpercben, amin belül nem történik újrarajzolás."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
@@ -10646,11 +10663,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Láthatósági opciók"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "Pixelenkénti megvilágítás"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
@@ -10686,19 +10703,19 @@ msgstr "Alacsony"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Alacsony + hardver"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Magas (lassú)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Magas + hardver (lassú)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
@@ -10718,11 +10735,11 @@ msgstr "Intervallum:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Csak a legfontosabb felület frissítése mozgatás alatt"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "A második fontos felület frissítése is"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
@@ -11620,6 +11637,9 @@ msgstr "Bolygó: Szaturnusz"
 
 #~ msgid "Additional information 2"
 #~ msgstr "További információk 2"
+
+#~ msgid "Past Developers"
+#~ msgstr "Korábbi fejlesztők"
 
 #~ msgid "Angle Measure Plugin"
 #~ msgstr "Szögmérő plug-in"

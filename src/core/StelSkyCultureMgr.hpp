@@ -20,6 +20,7 @@
 #ifndef _STELSKYCULTUREMGR_HPP_
 #define _STELSKYCULTUREMGR_HPP_
 
+#include <QObject>
 #include <QMap>
 #include <QString>
 #include <QStringList>
