@@ -53,7 +53,7 @@ namespace Stel {
 
 class QZipReaderPrivate;
 
-class Q_GUI_EXPORT QZipReader
+class /* Q_GUI_EXPORT */ QZipReader
 {
 public:
     explicit QZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly );
@@ -66,7 +66,7 @@ public:
     bool isReadable() const;
     bool exists() const;
 
-    struct Q_GUI_EXPORT FileInfo
+    struct /* Q_GUI_EXPORT */ FileInfo
     {
         FileInfo();
         FileInfo(const FileInfo &other);
