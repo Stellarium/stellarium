@@ -426,15 +426,15 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, QStringList selectedFiles)
 
 AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 {
-	QZipReader reader(filePath);
-	if (reader.status() != QZipReader::NoError)
+	Stel::QZipReader reader(filePath);
+	if (reader.status() != Stel::QZipReader::NoError)
 	{
 		qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(filePath);
 		return NULL;
 	}
 
-	foreach(QZipReader::FileInfo info, reader.fileInfoList())
+	foreach(Stel::QZipReader::FileInfo info, reader.fileInfoList())
 	{
 		if (!info.isFile || !info.filePath.endsWith("info.json"))
 		{
@@ -624,8 +624,8 @@ void StelAddOnMgr::cancelAllDownloads()
 
 void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 {
-	QZipReader reader(addon.getDownloadFilepath());
-	if (reader.status() != QZipReader::NoError)
+	Stel::QZipReader reader(addon.getDownloadFilepath());
+	if (reader.status() != Stel::QZipReader::NoError)
 	{
 		qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(addon.getDownloadFilepath());
@@ -634,7 +634,7 @@ void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 
 	QStringList installedFiles = addon.getInstalledFiles();
 	addon.setStatus(AddOn::FullyInstalled);
-	foreach(QZipReader::FileInfo info, reader.fileInfoList())
+	foreach(Stel::QZipReader::FileInfo info, reader.fileInfoList())
 	{
 		if (!info.isFile || info.filePath.contains("info.json"))
 		{
