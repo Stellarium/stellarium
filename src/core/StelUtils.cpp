@@ -745,21 +745,26 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 }
 
-void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second)
+void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second, int *millis)
 {
 	double frac = julianDay - (floor(julianDay));
-	int s = (int)floor((frac * 24.0 * 60.0 * 60.0) + 0.0001);  // add constant to fix floating-point truncation error
+	double secs = frac * 24.0 * 60.0 * 60.0 + 0.0001; // add constant to fix floating-point truncation error
+	int s = (int)floor(secs);
 
 	*hour = ((s / (60 * 60))+12)%24;
 	*minute = (s/(60))%60;
 	*second = s % 60;
+	if(millis)
+	{
+		*millis = (int)floor((secs - floor(secs)) * 1000.0);
+	}
 }
 
-QString julianDayToISO8601String(const double jd)
+QString julianDayToISO8601String(const double jd, bool addMS)
 {
-	int year, month, day, hour, minute, second;
+	int year, month, day, hour, minute, second,millis;
 	getDateFromJulianDay(jd, &year, &month, &day);
-	getTimeFromJulianDay(jd, &hour, &minute, &second);
+	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : NULL );
 
 	QString res = QString("%1-%2-%3T%4:%5:%6")
 				 .arg((year >= 0 ? year : -1* year),4,10,QLatin1Char('0'))
@@ -768,6 +773,11 @@ QString julianDayToISO8601String(const double jd)
 				 .arg(hour,2,10,QLatin1Char('0'))
 				 .arg(minute,2,10,QLatin1Char('0'))
 				 .arg(second,2,10,QLatin1Char('0'));
+
+	if(addMS)
+	{
+		res = res.append(".%1").arg(millis,3,10,QLatin1Char('0'));
+	}
 	if (year < 0)
 	{
 		res.prepend("-");

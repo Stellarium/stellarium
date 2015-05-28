@@ -32,7 +32,7 @@ HttpListener::HttpListener(QSettings* settings, HttpRequestHandler* requestHandl
 HttpListener::~HttpListener() {
     close();
     qDebug("HttpListener: closed");
-    pool->deleteLater();
+    delete pool;
     qDebug("HttpListener: destroyed");
 }
 
