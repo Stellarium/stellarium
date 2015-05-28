@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Stellarium remote control plugin</title>
-    <script src="jquery-1.11.3.js" type="text/javascript"></script>
-    <script src="remotecontrol.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="style.css" type="text/css" />
-  </head>
-  <body>
-    <h1>Script status</h1>
+<head>
+  <meta charset="UTF-8" />
+  <title>Stellarium remote control plugin</title>
+  <script src="jquery-1.11.3.js" type="text/javascript"></script>
+  <script src="remotecontrol.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+  <header>
+    <img src="stellarium.png"/>
+    <h1>Stellarium remote control</h1>
+  </header>
+  <div id="main" class="block">
+    <h2>Main stuff</h2>
+    <p>Current Time</p>
+    <p id="date" class="timedisplay">Please wait,</p>
+    <p id="time" class="timedisplay">updating...</p>
+  </div>
+  <div id="scripts" class="block">
+    <h2>Script status</h2>
     <select id="scriptlist" size="10">
-	</select>
-	<div>Active script: <span id="activescript">-none-</span></div>
-	<div><button id="bt_runscript" disabled>Run selected script</button><button id="bt_stopscript" disabled>Stop current script</button></div>
-  </body>
+    </select>
+    <div>Active script: <span id="activescript">-none-</span></div>
+    <div><button id="bt_runscript" disabled>Run selected script</button><button id="bt_stopscript" disabled>Stop current script</button></div>
+  </div>
+</body>
 </html>

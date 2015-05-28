@@ -29,6 +29,8 @@ SET(QtWebApp_SRCS
 SET(RemoteControl_SRCS
   APIController.hpp
   APIController.cpp
+  MainService.hpp
+  MainService.cpp
   RemoteControl.hpp
   RemoteControl.cpp
   RequestHandler.hpp
