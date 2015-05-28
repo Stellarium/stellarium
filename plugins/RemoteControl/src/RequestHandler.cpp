@@ -21,6 +21,7 @@
 #include "httpserver/staticfilecontroller.h"
 
 #include "APIController.hpp"
+#include "MainService.hpp"
 #include "ScriptService.hpp"
 
 #include "StelUtils.hpp"
@@ -33,6 +34,7 @@ RequestHandler::RequestHandler(QSettings *settings, QObject* parent) : HttpReque
 	apiController = new APIController(QByteArray("/api/").size(),this);
 
 	//register the services
+	apiController->registerService(new MainService("main",apiController));
 	apiController->registerService(new ScriptService("scripts",apiController));
 
 	//retrieve actual webroot through StelFileMgr

@@ -89,11 +89,12 @@ private slots:
 	void updateMessageText();
 	void clearMessage();
 
-private:
 	//! Starts the HTTP server and begins handling request
 	void startServer();
 	//! Stops the HTTP server
 	void stopServer();
+
+private:
 
 	//the http server
 	HttpListener* httpListener;

@@ -75,6 +75,9 @@ RemoteControl::RemoteControl()
 	configDialog = new RemoteControlDialog();
 	conf = StelApp::getInstance().getSettings();
 
+	//needed to ensure clean shutdown of server before threading errors can occur
+	connect(&StelApp::getInstance(), &StelApp::aboutToQuit, this, &RemoteControl::stopServer, Qt::DirectConnection);
+
 	messageTimer = new QTimer(this);
 	messageTimer->setInterval(7000);
 	messageTimer->setSingleShot(true);
@@ -226,7 +229,7 @@ void RemoteControl::restoreDefaultSettings()
 	//save the QtWebApp settings
 	conf->beginGroup("RemoteControl");
 	conf->beginGroup("listener");
-	conf->setValue("port",8080);
+	conf->setValue("port",8090);
 	conf->setValue("minThreads",1);
 	conf->setValue("maxThreads",10);
 	conf->setValue("cleanupInterval",1000);
