@@ -3,27 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <title>Stellarium remote control plugin</title>
+  <link type="text/css" rel="stylesheet" href="style.css" />
   <script src="jquery-1.11.3.js" type="text/javascript"></script>
   <script src="remotecontrol.js" type="text/javascript"></script>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <script type="text/javascript">
+  //<![CDATA[
+    //here the buttons get hooked up
+    $(function(){
+      $("#bt_runscript").click(function(){
+        var selection = $("#scriptlist").children("option").filter(":selected").text();
+        if(selection)
+        {
+         //post a run request
+          postCmd("/api/scripts/run", {id: selection});
+        }
+      });
+      $("#bt_stopscript").click(function(){
+        //post a stop request
+        postCmd("/api/scripts/stop");
+      });
+      $("#bt_timerewind").click(decreaseTimeRate);
+      $("#bt_timeforward").click(increaseTimeRate);
+      $("#bt_timeplaypause").click(function(){
+        if(isRealTimeSpeed()){
+          setTimeRate(0);
+        }
+        else{
+          setTimeRate(JD_SECOND);
+        }
+      });
+      $("#bt_timenow").click(setDateNow);
+
+      var $loading = $("#loadindicator").hide(), timer;
+      $(document).ajaxStart(function(){
+        timer && clearTimeout(timer);
+        timer = setTimeout(function(){
+          $loading.show();
+        },100)        
+      });
+      $(document).ajaxStop(function(){
+        clearTimeout(timer);
+        $loading.hide();
+      });
+    });
+  //]]>
+  </script>
 </head>
 <body>
-  <header>
-    <img src="stellarium.png"/>
-    <h1>Stellarium remote control</h1>
-  </header>
-  <div id="main" class="block">
-    <h2>Main stuff</h2>
-    <p>Current Time</p>
-    <p id="date" class="timedisplay">Please wait,</p>
-    <p id="time" class="timedisplay">updating...</p>
+  <div id="wrapper">
+    <header>
+      <img src="stellarium.png" alt="Stellarium logo"/>
+      <h1>Stellarium remote control</h1>
+    </header>
+    <div id="main" class="block">
+      <h2>Main stuff</h2>
+      <p id="date" class="timedisplay">Please wait,</p>
+      <p id="time" class="timedisplay">updating...</p>
+      <ul id="timecontrols">
+        <!-- TODO move all buttons into single image -->
+        <li id="bt_timerewind" class="button32" title="Decrease time speed"></li><li id="bt_timeplaypause" class="button32" title="Pause"></li><li id="bt_timenow" class="button32" title="Set time to now"></li><li id="bt_timeforward" class="button32" title="Increase time speed"></li>
+      </ul>
+    </div>
+    <div id="scripts" class="block">
+      <h2>Scripts</h2>
+      <select id="scriptlist" size="10">
+      </select>
+      <div>Active script: <span id="activescript">-none-</span></div>
+      <div><button id="bt_runscript" disabled>Run selected script</button><button id="bt_stopscript" disabled>Stop current script</button></div>
+    </div>
   </div>
-  <div id="scripts" class="block">
-    <h2>Script status</h2>
-    <select id="scriptlist" size="10">
-    </select>
-    <div>Active script: <span id="activescript">-none-</span></div>
-    <div><button id="bt_runscript" disabled>Run selected script</button><button id="bt_stopscript" disabled>Stop current script</button></div>
+  <div id="footer">
+    <div id="loadindicator"></div><div id="noresponse">No response from server since <span id="noresponsetime">0</span> seconds. Is Stellarium still running?</div>
   </div>
 </body>
 </html>

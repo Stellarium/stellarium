@@ -1,29 +1,53 @@
 html {
 	background: #fff;
+	font-family: Helvetica, Arial, sans-serif;
 }
 
-body {
+#wrapper {
 	border: 1px solid #595959;
-	border-radius: 25px;
+	border-radius: 16px;
 	background: #dddddd;
-	font-family: Helvetica, Arial, sans-serif;
 	margin: 1em 1%;
 	padding: 1em;
 }
 
-h1 {
-	display: inline;
+#footer {
+	margin: 0 1%;
+	position: relative;
 }
 
-button {
-    width: 150px;
+#noresponse {
+	vertical-align: middle;
+	color: #f00;
+	font-weight: bold;
+	margin-left: 40px;
+	display: inline-block;
+}
+
+#loadindicator {
+	position: absolute;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 16px;
+	width: 16px;
+	height: 16px;
+	background-image: url("ajax-loader.gif");
+}
+
+header h1 {
+	margin-left: 1em;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 header img {
 	vertical-align: middle;
+	height: 64px;
+	width: 64px;
 }
 
 .block {
+	text-align: center;
 	vertical-align: top;
 	width: 280px;
 	display: inline-block;
@@ -36,8 +60,100 @@ header img {
 	font-size: 1.5em;
 }
 
-#scriptlist {
-	width: 300px;
+#timecontrols {
+	display: inline-block;
+	list-style: none;
+	text-align: center;
+	margin: 0;
+	padding: 6px;
+	border-radius: 6px;
+	background-color: #aaa;
+}
+
+#timecontrols li {
+	vertical-align: middle;
+}
+
+.button32 {
+	cursor: pointer;
+	height: 32px;
+	width: 32px;
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+/* The following is a bit ugly, maybe find a way to simplify? */
+
+#bt_timerewind {
+	background-image: url("btTimeRewind-off.png");
+}
+
+#bt_timerewind.active {
+	background-image: url("btTimeRewind-on.png");
+}
+
+#bt_timerewind:hover {
+	background-image: url("glow32x32.png"), url("btTimeRewind-off.png");
+}
+
+#bt_timerewind.active:hover {
+	background-image: url("glow32x32.png"),url("btTimeRewind-on.png");
+}
+
+#bt_timeplaypause {
+	background-image: url("btTimeRealtime-off.png");
+}
+
+#bt_timeplaypause.active {
+	background-image: url("btTimeRealtime-on.png");
+}
+
+#bt_timeplaypause.paused {
+	background-image: url("btTimePause-on.png");
+}
+
+#bt_timeplaypause:hover {
+	background-image: url("glow32x32.png"), url("btTimeRealtime-off.png");
+}
+
+#bt_timeplaypause.active:hover {
+	background-image: url("glow32x32.png"), url("btTimeRealtime-on.png");
+}
+
+#bt_timeplaypause.paused:hover {
+	background-image: url("glow32x32.png"), url("btTimePause-on.png");
+}
+
+#bt_timenow {
+	background-image: url("btTimeNow-off.png");
+}
+
+#bt_timenow.active {
+	background-image: url("btTimeNow-on.png");
+}
+
+#bt_timenow:hover {
+	background-image: url("glow32x32.png"), url("btTimeNow-off.png");
+}
+
+#bt_timenow.active:hover {
+	background-image: url("glow32x32.png"), url("btTimeNow-on.png");
+}
+
+#bt_timeforward {
+	background-image: url("btTimeForward-off.png");
+}
+
+#bt_timeforward.active {
+	background-image: url("btTimeForward-on.png");
+}
+
+#bt_timeforward:hover {
+	background-image: url("glow32x32.png"), url("btTimeForward-off.png");
+}
+
+#bt_timeforward.active:hover {
+	background-image: url("glow32x32.png"), url("btTimeForward-on.png");
 }
 
 #activescript {

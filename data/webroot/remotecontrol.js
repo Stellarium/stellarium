@@ -1,6 +1,7 @@
 //update every second
 var updateInterval = 1000;
 var updatePoll = true;
+var connectionLost = false;
 
 var animationSupported;
 
@@ -8,19 +9,23 @@ var animationSupported;
 var lastData;
 //the time when the last data was received
 var lastDataTime;
+//the time when the time was last synced
+var lastTimeSync;
 
-//main update function
+//main update function, which is executed each second
 function update(requeue){
 	$.ajax({
 		url: "/api/main/status",
 		dataType: "json",
 		success: function(data){
 			lastData = data;
-			lastDataTime = $.now();
+			lastDataTime = lastTimeSync = $.now();
 
 			//update time NOW
 			if(!animationSupported)
 				updateTime();
+
+			updateTimeButtonState();
 
 			var textelem = $("#activescript");
 			if(data.script.scriptIsRunning)
@@ -31,10 +36,13 @@ function update(requeue){
 			{
 				textelem.text("-none-");
 			}
-
 			$("#bt_stopscript").prop({	disabled: !data.script.scriptIsRunning	});
+			$("#noresponse").hide();
+			connectionLost = false;
 		},
 		error: function(xhr, status,errorThrown){
+			$("#noresponse").show();
+			connectionLost = true;
 			console.log("Error fetching updates");
 			console.log("Error: " + errorThrown );
 	        console.log("Status: " + status );
@@ -50,12 +58,73 @@ function update(requeue){
 	});
 }
 
+function postCmd(url,data){
+	$.ajax({
+		url: url,
+		method: "POST",
+		data: data,
+		dataType: "text",
+		timeout: 3000,
+		success: function(data){
+			console.log("server replied: " + data);
+			if(data !== "ok")
+			{
+				alert(data);
+			}
+			update();
+		},
+		error: function(xhr,status,errorThrown){
+			console.log("Error posting command " + url);
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			alert("Could not call server")
+		}
+	});
+}
+
 var ONE_OVER_JD_MILLISECOND = 24*60*60*1000;
 var JD_SECOND = 0.000011574074074074074074;
+
+function isRealTimeSpeed() {
+	return Math.abs(lastData.time.timerate-JD_SECOND)<0.0000001;
+}
+
+function updateTimeButtonState() {
+	//updates the state of the time buttons
+	//replicates functionality from StelGui.cpp update() function
+	if(lastData.time.timerate<-0.99*JD_SECOND)	{
+		$("#bt_timerewind").addClass("active");
+	}
+	else {
+		$("#bt_timerewind").removeClass("active");
+	}
+	if(lastData.time.timerate>1.01*JD_SECOND)	{
+		$("#bt_timeforward").addClass("active");
+	}
+	else {
+		$("#bt_timeforward").removeClass("active");
+	}
+	if(lastData.time.timerate===0) {
+		$("#bt_timeplaypause").removeClass("active").addClass("paused");
+	}
+	else if(isRealTimeSpeed())	{
+		$("#bt_timeplaypause").removeClass("paused").addClass("active");
+	}
+	else	{
+		$("#bt_timeplaypause").removeClass("paused").removeClass("active");
+	}
+	if(lastData.time.isTimeNow)	{
+		$("#bt_timenow").addClass("active");
+	}
+	else	{
+		$("#bt_timenow").removeClass("active");
+	}
+}
+
+
 //this replicates time functions from Stellarium core (getPrintableDate)
 //because the date range of Stellarium is quite a bit larger than JavaScript Date() can handle, it needs some custom support
-function jdayToDate(jd)
-{
+function jdayToDate(jd) {
 	//This conversion is from http://blog.bahrenburgs.com/2011/01/javascript-julian-day-conversions.html
 	//In particular, it misses the pre-Gregorian calendar correction, and has probably some less accuracy than Stellariums algorithm
 	//The algorithm used by Stellarium itself can't be used without some modifications because it relies heavily on C datatypes
@@ -100,6 +169,13 @@ function jdayToTime(jd)
 	return obj;
 }
 
+//converts a javascript date to a JD
+function dateToJd(date)
+{
+	//divide msec by 24*60*60*1000 and add unix time epoch (1.1.1970)
+	return date.getTime() / 86400000 + 2440587.5;
+}
+
 function getDateString(jday)
 {
 	var date = jdayToDate(jday);
@@ -123,23 +199,26 @@ function getTimeString(jday)
 	return  (hh[1]?hh:"0"+hh[0]) + ":" + (mm[1]?mm:"0"+mm[0]) + ":" + (ss[1]?ss:"0"+ss[0]);
 }
 
+function getCurrentTime()
+{
+	//progress the time depending on the elapsed time between last update and now, and the set time rate
+	if(isRealTimeSpeed()){
+		//the timerate is 1:1 with real time
+		//console.log("realtime");
+		return lastData.time.jday + ($.now() - lastTimeSync) / ONE_OVER_JD_MILLISECOND;
+	}
+	else {
+		//console.log("unrealtime");
+		return lastData.time.jday + (($.now() - lastTimeSync) / 1000.0) * lastData.time.timerate;
+	}
+}
+
 function updateTime()
 {
 	if(lastData)
 	{
-		var currentJday;
-
-		//progress the time depending on the elapsed time between last update and now, and the set time rate
-		if(Math.abs(lastData.time.timerate-JD_SECOND)<0.0000001){
-			//the timerate is 1:1 with real time
-			//console.log("realtime");
-			currentJday = lastData.time.jday + ($.now() - lastDataTime) / ONE_OVER_JD_MILLISECOND;
-		}
-		else
-		{
-			//console.log("unrealtime");
-			currentJday = lastData.time.jday + (($.now() - lastDataTime) / 1000.0) * lastData.time.timerate;
-		}
+		var currentJday = getCurrentTime();
+		
 		var correctedTime = currentJday - lastData.time.deltaT;
 		//apply timezone
 		var localTime = correctedTime + lastData.time.gmtShift;
@@ -148,6 +227,65 @@ function updateTime()
 		document.getElementById("date").innerHTML = getDateString(localTime);
 		document.getElementById("time").innerHTML = getTimeString(localTime);
 	}
+	if(connectionLost)
+	{
+		var obj = $("#noresponsetime");
+		var elapsed = ($.now() - lastDataTime) / 1000;
+		var text = Math.floor(elapsed).toString();
+		obj.text(text);
+	}
+}
+
+function resyncTime()
+{
+	lastData.time.jday = getCurrentTime();
+	lastTimeSync = $.now();
+}
+
+function setDateNow(){
+	//for now,, this is only calculated here in JS
+	//depending on latency, etc, this may not be the same result as pressing the NOW button in the GUI
+	var jd = dateToJd(new Date());
+
+	//we have to apply deltaT
+	lastData.time.jday = jd + lastData.time.deltaT;
+	resyncTime();
+
+	postCmd("/api/main/time",{time:lastData.time.jday});
+}
+
+function setTimeRate(timerate)
+{
+	//we have to re-sync the time for correctness
+	resyncTime();
+
+	//the last data rate gets set to the new rate NOW to provide a responsive GUI
+	lastData.time.timerate = timerate;
+
+	//update time button now
+	updateTimeButtonState();
+
+	//we also update the time we have to reduce the effect of network latency
+	postCmd("/api/main/time",{timerate: timerate, time: getCurrentTime()});
+}
+
+//these functions are modeled after StelCore
+function increaseTimeRate(){
+	var s = lastData.time.timerate;
+	if(s>=JD_SECOND) s*=10;
+	else if (s<-JD_SECOND) s/=10;
+	else if (s>=0 && s<JD_SECOND) s=JD_SECOND;
+	else if (s>=-JD_SECOND && s<0.) s=0;
+	setTimeRate(s);
+}
+
+function decreaseTimeRate(){
+	var s = lastData.time.timerate;
+	if (s>JD_SECOND) s/=10.;
+	else if (s<=-JD_SECOND) s*=10.;
+	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
+	else if (s>0. && s<=JD_SECOND) s=0.;
+	setTimeRate(s);
 }
 
 function fillScriptList(){
@@ -181,58 +319,6 @@ function animate() {
 }
 
 $(document).ready(function () {
-
-	$("#bt_runscript").click(function(){
-    	var selection = $("#scriptlist").children("option").filter(":selected").text();
-
-    	if(selection)
-    	{
-    		//post a run request
-    		$.ajax({
-    			url: "/api/scripts/run",
-    			method: "POST",
-    			dataType: "text",
-    			data: {
-    				id: selection
-    			},
-    			timeout: 3000,
-    			success: function(data){
-    				console.log("server replied: " + data);
-    				if(data !== "ok")
-    				{
-    					alert(data);
-    				}
-    				update();
-    			},
-    			error: function(xhr,status,errorThrown){
-    				console.log("Error updating script list");
-    				console.log( "Error: " + errorThrown );
-    				console.log( "Status: " + status );
-    				alert("Could not call server")
-    			}
-    		});
-    	}
-	});
-
-	$("#bt_stopscript").click(function(){
-		//post a stop request
-    		$.ajax({
-    			url: "/api/scripts/stop",
-    			method: "POST",
-    			dataType: "text",
-    			timeout: 3000,
-    			success: function(data){
-    				console.log("server replied: " + data);
-    				update();
-    			},
-    			error: function(xhr,status,errorThrown){
-    				console.log("Error updating script list");
-    				console.log( "Error: " + errorThrown );
-    				console.log( "Status: " + status );
-    				alert("Could not call server")
-    			}
-    		});
-	});
 
     $("#scriptlist").change(function(){
     	var selection = $("#scriptlist").children("option").filter(":selected").text();
