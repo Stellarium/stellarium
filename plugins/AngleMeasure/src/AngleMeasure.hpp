@@ -31,12 +31,39 @@ class QPixmap;
 class StelButton;
 class AngleMeasureDialog;
 
+/*! @defgroup angleMeasure Angle Measure plug-in
+@{
+The Angle Measure plugin is a small tool which is used to measure
+the angular distance between two points on the sky. *goes misty eyed*
+I recall measuring the size of the Cassini Division when I was a student.
+It was not the high academic glamor one might expect... It was cloudy...
+It was rainy... The observatory lab had some old scopes set up at one end,
+pointing at a photograph of Saturn at the other end of the lab. We measured.
+We calculated. We wished we were in Hawaii.
+
+@note Georg Zotti extended in 2014-09, enough to call it V4.0
+
+@section modes Modes
+Equatorial Mode (original): mark start,end: distance/position angle in the
+sky, line rotates with sky, spherical angles influenced by refraction
+(numbers given on celestial sphere).
+
+Horizontal Mode: mark start,end: distance/position angle in alt/azimuthal
+coordinates, line stays fixed in alt-az system. Angle may be different near
+to horizon because of refraction!
+
+It is possible to link start and/or end to the sky. Distance/position angle
+still always in alt/azimuthal coordinates.
+
+@}
+*/
+
+//! @class AngleMeasure
+//! @ingroup angleMeasure
 //! Main class of the Angle Measure plug-in.
-//! Provides an on-screen angle measuring tool.
-//! GZ extended in 2014-09, enough to call it V4.0
-//! Equatorial Mode (original): mark start,end: distance/position angle in the sky, line rotates with sky, spherical angles influenced by refraction (numbers given on celestial sphere).
-//! Horizontal Mode: mark start,end: distance/position angle in alt/azimuthal coordinates, line stays fixed in alt-az system. Angle may be different near to horizon because of refraction!
-//! It is possible to link start and/or end to the sky. Distance/position angle still always in alt/azimuthal coordinates.
+//! @author Matthew Gates
+//! @author Alexander Wolf
+//! @anchor Georg Zotti
 class AngleMeasure : public StelModule
 {
 	Q_OBJECT
