@@ -33,6 +33,7 @@
 #include <vector> //libreria stl de vectores
 #include <iostream> // for operator<<(), see below
 
+//! @ingroup satellites
 namespace br_stl
 {
 

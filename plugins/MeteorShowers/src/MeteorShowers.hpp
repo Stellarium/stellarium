@@ -34,7 +34,21 @@ class StelButton;
 
 typedef QSharedPointer<MeteorShower> MeteorShowerP;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+/*! @defgroup meteorShowers Meteor Showers Plug-in
+@{
+The %Meteor Showers plugin displays meteor showers and a marker for each
+active and inactive radiant, showing real information about its activity.
+
+@section config Configuration
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [MeteorShowers]).
+@}
+*/
+
+//! @class MeteorShowers
+//! Main class of the %Meteor Showers plugin.
+//! @author Marcos Cardinot
+//! @ingroup meteorShowers
 class MeteorShowers : public StelObjectModule
 {
 	Q_OBJECT

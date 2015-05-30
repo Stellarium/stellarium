@@ -30,19 +30,26 @@ class QPixmap;
 class StelButton;
 class ObservabilityDialog;
 
+/*! @defgroup observability Observability Analysis Plug-in
+@{
+It provides an observability report for the currently selected object, or for
+the point in the center of the screen if no object is selected.
+
+The output is drawn directly onto the viewport. The color and font size can be
+selected by the user from the plug-in's configuration window.
+
+@see ObservabilityDialog
+@todo Find a way to (optionally) put the report in the upper left corner infobox.
+@todo Decide whether to use flags or separate getters/setters to communicate with
+the configuration window; if using flags, implement them properly w Qt.
+@todo Handle re-loading of the Solar System at runtime.
+@todo For each suspicious member variable, check if it can't be actually a local variable.
+@}
+*/
+
 //! Main class of the %Observability Analysis plug-in.
-//! It provides an observability report for the currently selected object,
-//! or for the point in the center of the screen if no object is selected.
-//! The output is drawn directly onto the viewport. The color and font size can
-//! be selected by the user from the plug-in's configuration window.
-//! @see ObservabilityDialog
-//! @todo Find a way to (optionally) put the report in the upper left corner
-//! infobox.
-//! @todo Decide whether to use flags or separate getters/setters to communicate
-//! with the configuration window; if using flags, implement them properly w Qt.
-//! @todo Handle re-loading of the Solar System at runtime.
-//! @todo For each suspicious member variable, check if it can't be actually
-//! a local variable.
+//! @ingroup observability
+//! @class Observability
 class Observability : public StelModule
 {
 	Q_OBJECT

@@ -30,13 +30,14 @@
 
 #include "gVectorTempl.hpp"
 
-//## Class: gVector
-//	This class implement the needed code to make vector calculations.
-//	The gVector class inherit from gVectorTempl class that is created
-//	from the vector STL class giving all the STL vector funcionality.
-//
-//	This class has not overlapped the = operator and the copy constructor
-//	because this methods are given by the vector STL class.
+//! @class: gVector
+//!	This class implement the needed code to make vector calculations.
+//!	The gVector class inherit from gVectorTempl class that is created
+//!	from the vector STL class giving all the STL vector funcionality.
+//!
+//!	This class has not overlapped the = operator and the copy constructor
+//!	because this methods are given by the vector STL class.
+//! @ingroup satellites
 class gVector : public br_stl::gVectorTempl<double>
 {
 

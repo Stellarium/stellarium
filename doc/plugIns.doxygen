@@ -47,15 +47,36 @@ Dynamic plugin libriaries need to be installed in a proper place in Stellarium's
 
 See the implementation of StelModuleMgr::getPluginsList() for more details.
 
+@section listPlugins List of Static Plugins
+A some details for static plugins you can find in each item of list of plugins:
+ - @subpage angleMeasure
+ - @subpage compassMarks
+ - @subpage oculars 
+ - @subpage satellites
+ - @subpage historicalSupernovae
+ - @subpage quasars
+ - @subpage pulsars 
+ - @subpage exoplanets
+ - @subpage observability
+ - @subpage brightNovae
+ - @subpage equationOfTime 
+ - @subpage fieldOfView
+ - @subpage navigationalStars 
+ - @subpage meteorShowers
+ - @subpage pointerCoordinates
+ - @subpage archaeoLines
+
+You can find some untechnical details on our wiki [Plugins](http://www.stellarium.org/wiki/index.php/Plugins) page.
+
 @section code Coding
 A plugin should contain a main class deriving from the StelModule class as well as an instance of the StelPluginInterface which allows Stellarium to load it. At startup, the StelModuleMgr will load the library, and an instance of the StelModule it contains will be instantiated and added to the list of other "normal" StelModules.
 
 A plugin can interact with the users in many ways, not limited to:
  - painting directly on the viewport like other StelModules (see the examples below);
- - defining <a href="http://qt-project.org/doc/qt-4.8/qaction.html">QActions</a> triggered with keyboard shortcut combinations with StelGui::addGuiActions();
+ - defining [QActions](http://doc.qt.io/qt-5/qaction.html) triggered with keyboard shortcut combinations with StelGui::addGuiActions();
  - buttons (StelButton) added to the bottom button bar (BottomStelBar; see the examples below);
  - windows (subclasses of StelDialog) that can be designed with %Qt's UI editor (see the examples and the configuration windows of the official plugins);
- - custom controls displayed anywhere on the screen based on any of the classes that inherit <a href="http://qt-project.org/doc/qt-4.8/qgraphicsitem.html">QGraphicsItem</a> (see <a href="http://qt-project.org/doc/qt-4.8/graphicsview.html">the documentation of Qt's Graphics View Framework</a>). To get a base widget to work on, use StelGui::getSkyGui().
+ - custom controls displayed anywhere on the screen based on any of the classes that inherit [QGraphicsItem](http://doc.qt.io/qt-5/qgraphicsitem.html) (see [the documentation of Qt's Graphics View Framework](http://doc.qt.io/qt-5/qgraphicsview.html)). To get a base widget to work on, use StelGui::getSkyGui().
 
 <em>Plugin developers - please note that classes used in plugins must inherit code from the core which is published under the GNU GPL. <strong>If you distribute a binary plugin, you must do so under the terms of the same GNU General Public License that Stellarium uses</strong> (as of August 2011, this is GNU GPL "version 2 or any later version"). No sneaky closed-source shenanigans now.</em>
 

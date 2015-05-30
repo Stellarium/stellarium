@@ -50,6 +50,7 @@
 //! Class to abstract all the SGP4 complexity.
 //! It implementation wrap whit an object oriented class the revised David. A. Vallado
 //! code for SGP4 Calculation. (Spacetrack report #6 revised AIAA-2006-6753-rev1)
+//! @ingroup satellites
 class gSatTEME
 {
 public:

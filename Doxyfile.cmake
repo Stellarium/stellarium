@@ -754,6 +754,7 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = @PROJECT_SOURCE_DIR@/src/ \
+                         @PROJECT_SOURCE_DIR@/plugins/ \
                          @PROJECT_SOURCE_DIR@/doc/
 
 # This tag can be used to specify the character encoding of the source files

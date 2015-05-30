@@ -31,9 +31,8 @@ class StelButton;
 class StelPainter;
 class StarMgr;
 
-/*! @mainpage notitle
-@section overview Plugin Overview
-
+/*! @defgroup navigationalStars Navigational Stars Plug-in
+@{
 The Navigational Stars plugin marks the 58 navigational stars of the
 Nautical Almanach and the 2102-D Rude Star Finder on the sky.
 
@@ -46,11 +45,13 @@ The plugin is also an example of a custom plugin that just marks existing stars.
 @section config Configuration
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [NavigationalStars]).
+@}
 */
 
 //! @class NavStars
 //! Main class of the %Navigational Stars plugin.
 //! @author Alexander Wolf
+//! @ingroup navigationalStars
 class NavStars : public StelModule
 {
 	Q_OBJECT
