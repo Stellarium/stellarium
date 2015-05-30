@@ -77,12 +77,17 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 			QString utcIso = StelUtils::julianDayToISO8601String(correctedTime,true).append('Z');
 			QString localIso = StelUtils::julianDayToISO8601String(correctedTime+gmtShift,true);
 
+			//time zone string
+			QString timeZone = localeMgr->getPrintableTimeZoneLocal(correctedTime);
+
 			QJsonObject obj2;
 			obj2.insert("jday",jday);
 			obj2.insert("deltaT",deltaT);
 			obj2.insert("gmtShift",gmtShift);
+			obj2.insert("timeZone",timeZone);
 			obj2.insert("utc",utcIso);
 			obj2.insert("local",localIso);
+			obj2.insert("isTimeNow",core->getIsTimeNow());
 			obj2.insert("timerate",core->getTimeRate());
 			obj.insert("time",obj2);
 		}
@@ -107,5 +112,46 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
 {
 	//this is run in an HTTP worker thread
+	if(operation == "time")
+	{
+		bool doneSomething = false;
+		bool ok;
 
+		//set the time + timerate
+		{
+			const QByteArray& raw = parameters.value("time");
+			if(!raw.isEmpty())
+			{
+				//parse time and set it
+				double jday = QString(raw).toDouble(&ok);
+				if(ok)
+				{
+					doneSomething = true;
+					//set new time
+					QMetaObject::invokeMethod(core,"setJDay", Qt::BlockingQueuedConnection,
+								  Q_ARG(double,jday));
+				}
+			}
+		}
+		{
+			const QByteArray& raw = parameters.value("timerate");
+			if(!raw.isEmpty())
+			{
+				//parse timerate and set it
+				double rate = QString(raw).toDouble(&ok);
+				if(ok)
+				{
+					doneSomething = true;
+					//set new time rate
+					QMetaObject::invokeMethod(core,"setTimeRate", Qt::BlockingQueuedConnection,
+								  Q_ARG(double,rate));
+				}
+			}
+		}
+
+		if(doneSomething)
+			response.write("ok",true);
+		else
+			response.write("error: invalid parameters, use time/timerate as double values");
+	}
 }
