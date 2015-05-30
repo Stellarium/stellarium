@@ -26,9 +26,20 @@
 
 class StelButton;
 
+/*! @defgroup compassMarks Compass Marks Plug-in
+@{
+Stellarium helps the user get their bearings using the cardinal point
+feature - the North, South, East and West markers on the horizon.
+CompassMarks takes this idea and extends it to add markings every few
+degrees along the horizon, and includes compass bearing values in degrees.
+@}
+*/
+
 //! Main class of the Compass Marks plug-in.
 //! Provides a ring of marks indicating azimuth on the horizon,
 //! like a compass dial.
+//! @author Matthew Gates
+//! @ingroup compassMarks
 class CompassMarks : public StelModule
 {
 	Q_OBJECT

@@ -41,10 +41,9 @@ class StelPainter;
 
 typedef QSharedPointer<Supernova> SupernovaP;
 
-/*! @mainpage notitle
-@section overview Plugin Overview
-
-The %Supernovae plugin displays the positions some historical
+/*! @defgroup historicalSupernovae Historical Supernovae Plug-in
+@{
+The %Historical Supernovae plugin displays the positions some historical
 supernovae brighter than 10 visual magnitude.
 
 @section sncat Supernovae Catalog
@@ -55,11 +54,13 @@ plug-in at compile time. A working copy is kept in the user data directory.
 @section config Configuration
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file.
+@}
 */
 
 //! @class Supernovae
 //! Main class of the %Historical Supernovae plugin.
 //! @author Alexander Wolf
+//! @ingroup historicalSupernovae
 class Supernovae : public StelObjectModule
 {
 	Q_OBJECT

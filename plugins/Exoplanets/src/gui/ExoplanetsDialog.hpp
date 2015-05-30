@@ -29,6 +29,8 @@ class Ui_exoplanetsDialog;
 class QTimer;
 class Exoplanets;
 
+//! @ingroup exoplanets
+//! Main window of the %Exoplanets plugin.
 class ExoplanetsDialog : public StelDialog
 {
 	Q_OBJECT

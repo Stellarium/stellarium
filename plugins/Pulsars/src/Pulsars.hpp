@@ -42,9 +42,8 @@ class StelPainter;
 
 typedef QSharedPointer<Pulsar> PulsarP;
 
-/*! @mainpage notitle
-@section overview Plugin Overview
-
+/*! @defgroup pulsars Pulsars Plug-in
+@{
 The %Pulsars plugin plots the position of various pulsars, with object information
 about each one. Pulsar data is derived from Catalog of Pulsars
 ([Taylor+ 1995](http://cdsads.u-strasbg.fr/cgi-bin/nph-bib_query?1993ApJS...88..529T&db_key=AST&nosetcookie=1))
@@ -60,11 +59,13 @@ plug-in at compile time. A working copy is kept in the user data directory.
 @section config Configuration
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [Pulsars]).
+@}
 */
 
 //! @class Pulsars
 //! Main class of the %Pulsars plugin.
 //! @author Alexander Wolf
+//! @ingroup pulsars
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT

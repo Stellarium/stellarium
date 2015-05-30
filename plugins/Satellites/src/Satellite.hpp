@@ -38,6 +38,7 @@ class StelPainter;
 class StelLocation;
 
 //! Radio communication channel properties.
+//! @ingroup satellites
 typedef struct
 {
 	double frequency; //!< Channel frequency in MHz.
@@ -46,6 +47,7 @@ typedef struct
 } CommLink;
 
 //! Description of the data roles used in SatellitesListModel.
+//! @ingroup satellites
 enum SatelliteDataRole {
 	SatIdRole = Qt::UserRole,
 	SatDescriptionRole,
@@ -56,9 +58,11 @@ enum SatelliteDataRole {
 };
 
 //! Type for sets of satellite group IDs.
+//! @ingroup satellites
 typedef QSet<QString> GroupSet;
 
 //! Flag type reflecting internal flags of Satellite.
+//! @ingroup satellites
 enum SatFlag
 {
 	SatNoFlags = 0x0,
@@ -83,6 +87,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! 
 //! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
+//! @ingroup satellites
 class Satellite : public StelObject
 {
 	friend class Satellites;

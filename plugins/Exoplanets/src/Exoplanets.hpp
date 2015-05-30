@@ -40,13 +40,12 @@ class StelButton;
 
 typedef QSharedPointer<Exoplanet> ExoplanetP;
 
-/*! @mainpage notitle
-@section overview Plugin Overview
-
+/*! @defgroup exoplanets Exoplanets Plug-in
+@{
 The %Exoplanets plugin plots the position of stars with exoplanets. Exoplanets
-data is derived from "[The Extrasolar Planets Encyclopaedia](http://exoplanet.eu/)".
+data is derived from [The Extrasolar Planets Encyclopaedia](http://exoplanet.eu/).
 List of potential habitable exoplanets and data about them were taken from
-"[The Habitable Exoplanets Catalog](http://phl.upr.edu/projects/habitable-exoplanets-catalog)"
+[The Habitable Exoplanets Catalog](http://phl.upr.edu/projects/habitable-exoplanets-catalog)
 by [Planetary Habitability Laboratory](http://phl.upr.edu/home).
 
 @section exocat Exoplanets Catalog
@@ -57,11 +56,13 @@ plug-in at compile time. A working copy is kept in the user data directory.
 @section config Configuration
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [Exoplanets]).
+@}
 */
 
 //! @class Exoplanets
 //! Main class of the %Exoplanets plugin.
 //! @author Alexander Wolf
+//! @ingroup exoplanets
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
