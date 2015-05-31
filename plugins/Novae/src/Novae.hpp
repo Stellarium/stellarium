@@ -39,9 +39,6 @@ class QTimer;
 class NovaeDialog;
 class StelPainter;
 
-
-typedef QSharedPointer<Nova> NovaP;
-
 /*! @defgroup brightNovae Bright Novae Plug-in
 @{
 The %Bright Novae plugin displays the positions some bright
@@ -60,6 +57,9 @@ file (section [Novae]).
 
 @}
 */
+
+//! @ingroup brightNovae
+typedef QSharedPointer<Nova> NovaP;
 
 //! @class Novae
 //! Main class of the %Bright Novae plugin.

@@ -42,41 +42,6 @@ class QTimer;
 class SatellitesDialog;
 class SatellitesListModel;
 
-//! Data structure containing unvalidated TLE set as read from a TLE list file.
-//! @ingroup satellites
-struct TleData
-{
-	//! NORAD catalog number, as extracted from the TLE set.
-	QString id;
-	//! Human readable name, as extracted from the TLE title line.
-	QString name;
-	QString first;
-	QString second;
-	//! Flag indicating whether this satellite should be added.
-	//! See Satellites::autoAddEnabled.
-	bool addThis;
-};
-
-//! @ingroup satellites
-typedef QList<TleData> TleDataList;
-typedef QHash<QString, TleData> TleDataHash ;
-
-//! TLE update source, used only internally for now.
-//! @ingroup satellites
-struct TleSource
-{
-	//! URL from where the source list should be downloaded.
-	QUrl url;
-	//! The downloaded file, location set after finishing download.
-	//! In the future may be a QTemporaryFile object.
-	QFile* file;
-	//! Flag indicating whether new satellites in this list should be added.
-	//! See Satellites::autoAddEnabled.
-	bool addNew;
-};
-
-typedef QList<TleSource> TleSourceList;
-
 /*! @defgroup satellites Satellites Plug-in
 @{
 The %Satellites plugin displays the positions of artifical satellites in Earth
@@ -121,6 +86,42 @@ file.
 @}
 */
 
+//! Data structure containing unvalidated TLE set as read from a TLE list file.
+//! @ingroup satellites
+struct TleData
+{
+	//! NORAD catalog number, as extracted from the TLE set.
+	QString id;
+	//! Human readable name, as extracted from the TLE title line.
+	QString name;
+	QString first;
+	QString second;
+	//! Flag indicating whether this satellite should be added.
+	//! See Satellites::autoAddEnabled.
+	bool addThis;
+};
+
+//! @ingroup satellites
+typedef QList<TleData> TleDataList;
+//! @ingroup satellites
+typedef QHash<QString, TleData> TleDataHash ;
+
+//! TLE update source, used only internally for now.
+//! @ingroup satellites
+struct TleSource
+{
+	//! URL from where the source list should be downloaded.
+	QUrl url;
+	//! The downloaded file, location set after finishing download.
+	//! In the future may be a QTemporaryFile object.
+	QFile* file;
+	//! Flag indicating whether new satellites in this list should be added.
+	//! See Satellites::autoAddEnabled.
+	bool addNew;
+};
+
+//! @ingroup satellites
+typedef QList<TleSource> TleSourceList;
 
 //! @class Satellites
 //! Main class of the %Satellites plugin.

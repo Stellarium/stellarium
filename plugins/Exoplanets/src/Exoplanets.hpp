@@ -38,8 +38,6 @@ class ExoplanetsDialog;
 class StelPainter;
 class StelButton;
 
-typedef QSharedPointer<Exoplanet> ExoplanetP;
-
 /*! @defgroup exoplanets Exoplanets Plug-in
 @{
 The %Exoplanets plugin plots the position of stars with exoplanets. Exoplanets
@@ -61,6 +59,9 @@ file (section [Exoplanets]).
 
 @}
 */
+
+//! @ingroup exoplanets
+typedef QSharedPointer<Exoplanet> ExoplanetP;
 
 //! @class Exoplanets
 //! Main class of the %Exoplanets plugin.

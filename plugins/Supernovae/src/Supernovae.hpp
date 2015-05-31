@@ -39,8 +39,6 @@ class SupernovaeDialog;
 
 class StelPainter;
 
-typedef QSharedPointer<Supernova> SupernovaP;
-
 /*! @defgroup historicalSupernovae Historical Supernovae Plug-in
 @{
 The %Historical Supernovae plugin displays the positions some historical
@@ -59,6 +57,9 @@ file.
 
 @}
 */
+
+//! @ingroup historicalSupernovae
+typedef QSharedPointer<Supernova> SupernovaP;
 
 //! @class Supernovae
 //! Main class of the %Historical Supernovae plugin.
