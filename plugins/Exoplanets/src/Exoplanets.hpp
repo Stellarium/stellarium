@@ -48,14 +48,17 @@ List of potential habitable exoplanets and data about them were taken from
 [The Habitable Exoplanets Catalog](http://phl.upr.edu/projects/habitable-exoplanets-catalog)
 by [Planetary Habitability Laboratory](http://phl.upr.edu/home).
 
-@section exocat Exoplanets Catalog
+<b>Exoplanets Catalog</b>
+
 The exoplanets catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "exoplanets.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [Exoplanets]).
+
 @}
 */
 

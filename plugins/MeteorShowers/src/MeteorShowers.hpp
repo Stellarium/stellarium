@@ -39,9 +39,11 @@ typedef QSharedPointer<MeteorShower> MeteorShowerP;
 The %Meteor Showers plugin displays meteor showers and a marker for each
 active and inactive radiant, showing real information about its activity.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [MeteorShowers]).
+
 @}
 */
 

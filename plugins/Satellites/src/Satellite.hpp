@@ -83,7 +83,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! @class Satellite
 //! A representation of a satellite in Earth orbit.
 //! Details about the satellite are passed with a JSON-representation structure
-//! that contains a @ref satcat "satellite catalog" entry.
+//! that contains a <b>Satellite Catalog</b> entry.
 //! 
 //! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.

@@ -44,9 +44,11 @@ In the English-speaking world, the former usage is the more common, but is
 not always followed. Anyone who makes use of a published table or graph
 should first check its sign usage.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [EquationOfTime]).
+
 @}
 */
 
