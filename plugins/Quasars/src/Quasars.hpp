@@ -39,8 +39,6 @@ class QPixmap;
 class StelButton;
 class QuasarsDialog;
 
-typedef QSharedPointer<Quasar> QuasarP;
-
 /*! @defgroup quasars Quasars Plug-in
 @{
 The %Quasars plugin provides visualization of some quasars brighter than 16
@@ -60,6 +58,9 @@ file (section [Quasars]).
 
 @}
 */
+
+//! @ingroup quasars
+typedef QSharedPointer<Quasar> QuasarP;
 
 //! @class Quasars
 //! Main class of the %Quasars plugin.
