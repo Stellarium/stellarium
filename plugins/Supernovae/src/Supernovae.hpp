@@ -46,14 +46,17 @@ typedef QSharedPointer<Supernova> SupernovaP;
 The %Historical Supernovae plugin displays the positions some historical
 supernovae brighter than 10 visual magnitude.
 
-@section sncat Supernovae Catalog
+<b>Supernovae Catalog</b>
+
 The supernovae catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "supernovae.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file.
+
 @}
 */
 

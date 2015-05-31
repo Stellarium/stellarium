@@ -42,9 +42,11 @@ are not objects!
 
 The plugin is also an example of a custom plugin that just marks existing stars.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [NavigationalStars]).
+
 @}
 */
 
