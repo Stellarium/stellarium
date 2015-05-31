@@ -40,8 +40,6 @@ class PulsarsDialog;
 
 class StelPainter;
 
-typedef QSharedPointer<Pulsar> PulsarP;
-
 /*! @defgroup pulsars Pulsars Plug-in
 @{
 The %Pulsars plugin plots the position of various pulsars, with object information
@@ -64,6 +62,9 @@ file (section [Pulsars]).
 
 @}
 */
+
+//! @ingroup pulsars
+typedef QSharedPointer<Pulsar> PulsarP;
 
 //! @class Pulsars
 //! Main class of the %Pulsars plugin.
