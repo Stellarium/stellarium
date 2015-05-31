@@ -47,14 +47,17 @@ typedef QSharedPointer<Nova> NovaP;
 The %Bright Novae plugin displays the positions some bright
 novae in the Milky Way galaxy.
 
-@section ncat Bright Novae Catalog
+<b>Bright Novae Catalog</b>
+
 The novae catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "novae.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [Novae]).
+
 @}
 */
 

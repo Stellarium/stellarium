@@ -43,7 +43,8 @@ We calculated. We wished we were in Hawaii.
 
 @note Georg Zotti extended in 2014-09, enough to call it V4.0
 
-@section modes Modes
+<b>Modes</b>
+
 Equatorial Mode (original): mark start,end: distance/position angle in the
 sky, line rotates with sky, spherical angles influenced by refraction
 (numbers given on celestial sphere).

@@ -90,29 +90,34 @@ a list of update file URLs.
 To calculate satellite positions, the plugin uses an implementation of
 the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
 
-@section satprop Satellite Properties
+<b>Satellite Properties</b>
 
-@subsection ident Name and identifiers
+<i>Name and identifiers</i>
+
 Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
 for presentation purposes.
 
-In the @ref satcat satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
+In the <b>Satellite Catalog</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
 
-@subsection groups Grouping
+<i>Grouping</i>
+
 A satellite can belong to one or more groups such as "amateur", "geostationary" or "navigation". They have no other function but to help the user organize the satellite collection.
 
-Group names are arbitrary strings defined in the @ref satcat for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
+Group names are arbitrary strings defined in the <b>Satellite Catalog</b> for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
 
 By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
 
-@section satcat Satellite Catalog
+<b>Satellite Catalog</b>
+
 The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "satellites.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file.
+
 @}
 */
 

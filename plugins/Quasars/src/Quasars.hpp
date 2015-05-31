@@ -47,14 +47,17 @@ The %Quasars plugin provides visualization of some quasars brighter than 16
 visual magnitude. A catalogue of quasars compiled from "Quasars and Active
 Galactic Nuclei" (13th Ed.) (Veron+ 2010).
 
-@section quasarscat Quasars Catalog
+<b>Quasars Catalog</b>
+
 The quasars catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "quasars.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [Quasars]).
+
 @}
 */
 

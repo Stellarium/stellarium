@@ -35,9 +35,11 @@ class PointerCoordinatesWindow;
 @{
 The %Pointer Coordinates plugin shows the coordinates of the mouse pointer.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [PointerCoordinates]).
+
 @}
 */
 

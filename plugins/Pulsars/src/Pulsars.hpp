@@ -51,14 +51,17 @@ for 0.1.x series and derived from The ATNF Pulsar Catalogue (Manchester, R. N.,
 Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005)
 ([astro-ph/0412641](http://arxiv.org/abs/astro-ph/0412641))) for series 0.2.x.
 
-@section pulsarscat Pulsars Catalog
+<b>Pulsars Catalog</b>
+
 The pulsars catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "pulsars.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [Pulsars]).
+
 @}
 */
 
