@@ -1,3 +1,5 @@
+ "use strict";
+
 //update every second
 var updateInterval = 1000;
 var updatePoll = true;
@@ -82,6 +84,38 @@ function postCmd(url,data){
 	});
 }
 
+function postAction(actionName) {
+    $.ajax({
+        url: "api/stelaction/do",
+        method: "POST",
+        async: false,
+        dataType: "text",
+        data: {
+            id: actionName
+        },
+        success: function(resp){
+            if(resp === "ok") {
+                //non-checkable action, cant change text
+            }
+            else if(resp === "true") {
+                $("#actionlist").trigger("action:"+actionName,true);
+            }
+            else if (resp === "false") {
+                $("#actionlist").trigger("action:"+actionName,false);
+            }
+            else {
+                alert(resp);
+            }
+        },
+        error: function(xhr,status,errorThrown){
+			console.log("Error posting action " + actionName);
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			alert("Could not call server")
+		}
+    });
+}
+
 var ONE_OVER_JD_MILLISECOND = 24*60*60*1000;
 var JD_SECOND = 0.000011574074074074074074;
 
@@ -92,18 +126,10 @@ function isRealTimeSpeed() {
 function updateTimeButtonState() {
 	//updates the state of the time buttons
 	//replicates functionality from StelGui.cpp update() function
-	if(lastData.time.timerate<-0.99*JD_SECOND)	{
-		$("#bt_timerewind").addClass("active");
-	}
-	else {
-		$("#bt_timerewind").removeClass("active");
-	}
-	if(lastData.time.timerate>1.01*JD_SECOND)	{
-		$("#bt_timeforward").addClass("active");
-	}
-	else {
-		$("#bt_timeforward").removeClass("active");
-	}
+    $("#bt_timerewind").toggleClass("active",lastData.time.timerate<-0.99*JD_SECOND);
+    $("#bt_timeforward").toggleClass("active", lastData.time.timerate>1.01*JD_SECOND);
+    $("#bt_timenow").toggleClass("active",lastData.time.isTimeNow);
+    
 	if(lastData.time.timerate===0) {
 		$("#bt_timeplaypause").removeClass("active").addClass("paused");
 	}
@@ -112,12 +138,6 @@ function updateTimeButtonState() {
 	}
 	else	{
 		$("#bt_timeplaypause").removeClass("paused").removeClass("active");
-	}
-	if(lastData.time.isTimeNow)	{
-		$("#bt_timenow").addClass("active");
-	}
-	else	{
-		$("#bt_timenow").removeClass("active");
 	}
 }
 
@@ -309,6 +329,47 @@ function fillScriptList(){
 	});
 }
 
+function fillActionList(){
+	$.ajax({
+		url: "/api/stelaction/list",
+		success: function(data){
+			var list = $("#actionlist");
+			list.empty();
+
+			$.each(data, function(key,val) {
+                //the key is an optgroup
+                var group = $("<optgroup/>").attr("label", key);
+                //the val is an array of StelAction objects
+                $.each(val, function(idx,v2) {
+                    var option = $("<option/>");
+                    option.data(v2); //store the data
+                    if(v2.isCheckable) {
+                        option.addClass("checkableaction");
+                        option.text(v2.text + " (" + v2.isChecked + ")");
+                        
+                        list.on("action:"+v2.id,{elem: option},function(event,newValue){
+                            var el = event.data.elem;
+                            el.data("isChecked",newValue);
+                            el.text(el.data("text") + " (" + newValue + ")");
+                        });
+                    }
+                    else{
+                        option.text(v2.text);
+                    }
+                    option.appendTo(group);
+                });
+                group.appendTo(list);
+			});
+		},
+		error: function(xhr,status,errorThrown){
+			console.log("Error updating script list");
+			console.log( "Error: " + errorThrown );
+	        console.log( "Status: " + status );
+			alert("Could not retrieve script list")
+		}
+	});
+}
+
 function animate() {
 	updateTime();
 
@@ -328,11 +389,16 @@ $(document).ready(function () {
 				});
     	console.log("selected: " + selection);
     });
+    
+    $("#actionlist").change(function(){
+        $("#bt_doaction").prop("disabled",false);
+    });
 
     animationSupported = (window.requestAnimationFrame !== undefined);
 
 	//initial update
 	fillScriptList();
+    fillActionList();
 	update(true);
 	//update the time even when no server updates arrive
 
