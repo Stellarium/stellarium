@@ -33,6 +33,7 @@ class QTimer;
 class Ui_meteorShowerDialog;
 class MeteorShowers;
 
+//! @ingroup meteorShowers
 class MeteorShowerDialog : public StelDialog
 {
 	Q_OBJECT
