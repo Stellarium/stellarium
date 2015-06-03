@@ -3,6 +3,11 @@ html {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+select {
+	padding: 1px 0px;
+	font-size: small;
+}
+
 #wrapper {
 	border: 1px solid #595959;
 	border-radius: 16px;
@@ -49,7 +54,7 @@ header img {
 .block {
 	text-align: center;
 	vertical-align: top;
-	width: 280px;
+	min-width: 280px;
 	display: inline-block;
 }
 
@@ -159,3 +164,15 @@ header img {
 #activescript {
 	font-weight: bold;
 }
+
+.scrollselect {
+	padding: 1px 0px;
+	height: 12em;
+}
+
+.checkableaction {
+	font-style: italic;
+}
+
+
+
