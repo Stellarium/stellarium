@@ -3,8 +3,23 @@
 INSTALL(FILES stellarium.ico ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini updates.json DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
 
 # install Scenery3d shaders
+IF(USE_PLUGIN_SCENERY3D)
 INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCHING 
-	PATTERN "s3d_*.vert" PATTERN "s3d_*.geom" PATTERN "s3d_*.frag")
+	PATTERN "s3d_*.vert" 
+	PATTERN "s3d_*.geom" 
+	PATTERN "s3d_*.frag")
+ENDIF()
+	
+# install RemoteControl plugin stuff
+IF(USE_PLUGIN_REMOTECONTROL)
+	INSTALL(DIRECTORY webroot/ DESTINATION share/${PACKAGE}/data/webroot FILES_MATCHING
+	PATTERN "*.png" 
+	PATTERN "*.gif"
+	PATTERN "*.html"
+	PATTERN "*.js"
+	PATTERN "*.css"
+	PATTERN "*.ico")
+ENDIF()
 
 IF (BUILD_FOR_MAEMO)
   INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)
