@@ -20,6 +20,8 @@
 #include "StelProjectorClasses.hpp"
 #include "StelTranslator.hpp"
 
+#include <limits>
+
 QString StelProjectorPerspective::getNameI18() const
 {
 	return q_("Perspective");
@@ -28,6 +30,27 @@ QString StelProjectorPerspective::getNameI18() const
 QString StelProjectorPerspective::getDescriptionI18() const
 {
 	return q_("Perspective projection keeps the horizon a straight line. The mathematical name for this projection method is <i>gnomonic projection</i>.");
+}
+
+bool StelProjectorPerspective::forward(Vec3f &v) const
+{
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	if (v[2] < 0) {
+		v[0] /= (-v[2]);
+		v[1] /= (-v[2]);
+		v[2] = r;
+		return true;
+	}
+	if (v[2] > 0) {
+		v[0] /= v[2];
+		v[1] /= v[2];
+		v[2] = -std::numeric_limits<float>::max();
+		return false;
+	}
+	v[0] = std::numeric_limits<float>::max();
+	v[1] = std::numeric_limits<float>::max();
+	v[2] = -std::numeric_limits<float>::max();
+	return false;
 }
 
 bool StelProjectorPerspective::backward(Vec3d &v) const
@@ -66,6 +89,16 @@ QString StelProjectorEqualArea::getNameI18() const
 QString StelProjectorEqualArea::getDescriptionI18() const
 {
 	return q_("The full name of this projection method is, <i>Lambert azimuthal equal-area projection</i>. It preserves the area but not the angle.");
+}
+
+bool StelProjectorEqualArea::forward(Vec3f &v) const
+{
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const float f = std::sqrt(2.f/(r*(r-v[2])));
+	v[0] *= f;
+	v[1] *= f;
+	v[2] = r;
+	return true;
 }
 
 bool StelProjectorEqualArea::backward(Vec3d &v) const
@@ -113,6 +146,23 @@ QString StelProjectorStereographic::getDescriptionI18() const
 	return q_("Stereographic projection is known since the antiquity and was originally known as the planisphere projection. It preserves the angles at which curves cross each other but it does not preserve area.");
 }
 
+bool StelProjectorStereographic::forward(Vec3f &v) const
+{
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const float h = 0.5f*(r-v[2]);
+	if (h <= 0.f) {
+		v[0] = std::numeric_limits<float>::max();
+		v[1] = std::numeric_limits<float>::max();
+		v[2] = -std::numeric_limits<float>::min();
+		return false;
+	}
+	const float f = 1.f / h;
+	v[0] *= f;
+	v[1] *= f;
+	v[2] = r;
+	return true;
+}
+
 bool StelProjectorStereographic::backward(Vec3d &v) const
 {
   const double lqq = 0.25*(v[0]*v[0] + v[1]*v[1]);
@@ -150,6 +200,29 @@ QString StelProjectorFisheye::getDescriptionI18() const
 	return q_("In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight lines become curves when they appear a large angular distance from the centre of the field of view (like the distortions seen with very wide angle camera lenses).");
 }
 
+bool StelProjectorFisheye::forward(Vec3f &v) const
+{
+	const float rq1 = v[0]*v[0] + v[1]*v[1];
+	if (rq1 > 0.f) {
+		const float h = std::sqrt(rq1);
+		const float f = std::atan2(h,-v[2]) / h;
+		v[0] *= f;
+		v[1] *= f;
+		v[2] = std::sqrt(rq1 + v[2]*v[2]);
+		return true;
+	}
+	if (v[2] < 0.f) {
+		v[0] = 0.f;
+		v[1] = 0.f;
+		v[2] = 1.f;
+		return true;
+	}
+	v[0] = std::numeric_limits<float>::max();
+	v[1] = std::numeric_limits<float>::max();
+	v[2] = std::numeric_limits<float>::min();
+	return false;
+}
+
 bool StelProjectorFisheye::backward(Vec3d &v) const
 {
 	const double a = std::sqrt(v[0]*v[0]+v[1]*v[1]);
@@ -185,6 +258,19 @@ QString StelProjectorHammer::getNameI18() const
 QString StelProjectorHammer::getDescriptionI18() const
 {
 	return q_("The Hammer projection is an equal-area map projection, described by Ernst Hammer in 1892 and directly inspired by the Aitoff projection.");
+}
+
+bool StelProjectorHammer::forward(Vec3f &v) const
+{
+	// Hammer Aitoff
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const float alpha = std::atan2(v[0],-v[2]);
+	const float cosDelta = std::sqrt(1.f-v[1]*v[1]/(r*r));
+	float z = std::sqrt(1.+cosDelta*std::cos(alpha/2.f));
+	v[0] = 2.f*M_SQRT2*cosDelta*std::sin(alpha/2.f)/z;
+	v[1] = M_SQRT2*v[1]/r/z;
+	v[2] = r;
+	return true;
 }
 
 bool StelProjectorHammer::backward(Vec3d &v) const

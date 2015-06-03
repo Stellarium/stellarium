@@ -36,6 +36,7 @@ class StelPainter;
 //! A Nova object represents one nova on the sky.
 //! Details about the novae are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup brightNovae
 
 class Nova : public StelObject
 {
