@@ -58,7 +58,7 @@ PROJECT_LOGO           = @PROJECT_SOURCE_DIR@/doc/images/stellarium-logo.png
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = doc
+OUTPUT_DIRECTORY       = doc-plugins
 
 # If the CREATE_SUBDIRS tag is set to YES, then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -671,7 +671,7 @@ FILE_VERSION_FILTER    =
 # DoxygenLayout.xml, doxygen will parse it automatically even if the LAYOUT_FILE
 # tag is left empty.
 
-LAYOUT_FILE            = @PROJECT_SOURCE_DIR@/doc/DoxygenLayout.xml
+LAYOUT_FILE            = @PROJECT_SOURCE_DIR@/doc/DoxygenPluginsLayout.xml
 
 # The CITE_BIB_FILES tag can be used to specify one or more bib files containing
 # the reference definitions. This must be a list of .bib files. The .bib
@@ -753,8 +753,8 @@ WARN_LOGFILE           =
 # spaces.
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = @PROJECT_SOURCE_DIR@/src/ \
-                         @PROJECT_SOURCE_DIR@/doc/
+INPUT                  = @PROJECT_SOURCE_DIR@/plugins/ \
+                         @PROJECT_SOURCE_DIR@/doc/mainpage-plugins.doxygen
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -791,8 +791,7 @@ RECURSIVE              = YES
 # Note that relative paths are relative to the directory from which doxygen is
 # run.
 
-EXCLUDE                = @PROJECT_SOURCE_DIR@/src/core/external \
-                         @PROJECT_SOURCE_DIR@/doc/mainpage-plugins.doxygen
+EXCLUDE                = @PROJECT_SOURCE_DIR@/src/core/external
 
 # The EXCLUDE_SYMLINKS tag can be used to select whether or not files or
 # directories that are symbolic links (a Unix file system feature) are excluded
@@ -1173,7 +1172,7 @@ GENERATE_DOCSET        = NO
 # The default value is: Doxygen generated docs.
 # This tag requires that the tag GENERATE_DOCSET is set to YES.
 
-DOCSET_FEEDNAME        = "Stellarium Developers Documentation"
+DOCSET_FEEDNAME        = "Stellarium Plugins Developers Documentation"
 
 # This tag specifies a string that should uniquely identify the documentation
 # set bundle. This should be a reverse domain-name style string, e.g.
@@ -1288,7 +1287,7 @@ QHP_NAMESPACE          = org.stellarium
 # The default value is: doc.
 # This tag requires that the tag GENERATE_QHP is set to YES.
 
-QHP_VIRTUAL_FOLDER     = doc
+QHP_VIRTUAL_FOLDER     = doc-plugins
 
 # If the QHP_CUST_FILTER_NAME tag is set, it specifies the name of a custom
 # filter to add. For more information please see Qt Help Project / Custom
@@ -1987,7 +1986,7 @@ SKIP_FUNCTION_MACROS   = NO
 # the path). If a tag file is not located in the directory in which doxygen is
 # run, you must also specify the path to the tagfile here.
 
-TAGFILES               = stellarium.tag=../../doc/@VERSION@ \ 
+TAGFILES               = stellarium.tag=../../doc/@VERSION@ \
                          stellariumPlugins.tag=../../doc-plugins/@VERSION@ \
                          qt.tag=http://doc.qt.io/qt-5/
 
@@ -1995,7 +1994,7 @@ TAGFILES               = stellarium.tag=../../doc/@VERSION@ \
 # tag file that is based on the input files it reads. See section "Linking to
 # external documentation" for more information about the usage of tag files.
 
-GENERATE_TAGFILE       = stellarium.tag
+GENERATE_TAGFILE       = stellariumPlugins.tag
 
 # If the ALLEXTERNALS tag is set to YES all external class will be listed in the
 # class index. If set to NO only the inherited external classes will be listed.

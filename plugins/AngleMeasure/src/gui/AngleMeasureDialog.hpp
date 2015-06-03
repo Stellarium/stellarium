@@ -30,6 +30,7 @@ class Ui_angleMeasureDialog;
 class AngleMeasure;
 
 //! Main window of the Angle Measure plug-in.
+//! @ingroup angleMeasure
 class AngleMeasureDialog : public StelDialog
 {
 	Q_OBJECT

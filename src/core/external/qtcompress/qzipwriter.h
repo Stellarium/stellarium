@@ -50,7 +50,7 @@ namespace Stel {
 
 class QZipWriterPrivate;
 
-class Q_GUI_EXPORT QZipWriter
+class /* Q_GUI_EXPORT */ QZipWriter
 {
 public:
     explicit QZipWriter(const QString &fileName, QIODevice::OpenMode mode = (QIODevice::WriteOnly | QIODevice::Truncate) );
