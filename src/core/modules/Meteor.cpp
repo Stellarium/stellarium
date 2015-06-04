@@ -62,16 +62,16 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	float low_range = EARTH_RADIUS + LOW_ALTITUDE;
 
 	// find observer position in meteor coordinate system
-	mm.obs = core->altAzToJ2000(Vec3d(0,0,EARTH_RADIUS));
+	mm.obs = core->altAzToJ2000(Vec3d(0, 0, EARTH_RADIUS));
 	mm.obs.transfo4d(viewMatrix.transpose());
 
 	// select random trajectory using polar coordinates in XY plane, centered on observer
-	mm.xydistance = (double)qrand() / ((double)RAND_MAX+1)*(VISIBLE_RADIUS);
-	float angle = (double)qrand() / ((double)RAND_MAX+1)*2*M_PI;
+	mm.xydistance = VISIBLE_RADIUS * ((double) qrand() / ((double) RAND_MAX + 1));
+	float angle = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1));
 
 	// set meteor start x,y
-	mm.position[0] = mm.posTrain[0] = mm.xydistance*cos(angle) + mm.obs[0];
-	mm.position[1] = mm.posTrain[1] = mm.xydistance*sin(angle) + mm.obs[1];
+	mm.position[0] = mm.xydistance * cos(angle) + mm.obs[0];
+	mm.position[1] = mm.xydistance * sin(angle) + mm.obs[1];
 
 	// D is distance from center of earth
 	float D = std::sqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);
@@ -81,7 +81,8 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 		return false;
 	}
 
-	mm.posTrain[2] = mm.position[2] = mm.startH = std::sqrt(high_range*high_range - D*D);
+	mm.position[2] = mm.startH = std::sqrt(high_range*high_range - D*D);
+	mm.posTrain = mm.position;
 
 	// determine end of burn point, and nearest point to observer for distance mag calculation
 	// mag should be max at nearest point still burning
