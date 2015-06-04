@@ -85,7 +85,7 @@ void StelActionService::post(const QByteArray& operation, const QMultiMap<QByteA
 
 			bool isClosing = (id=="actionQuit_Global" || id == "actionShow_Remote_Control");
 			Qt::ConnectionType type = Qt::BlockingQueuedConnection;
-			if(isClosing);
+			if(isClosing)
 				type = Qt::QueuedConnection;
 
 			QMetaObject::invokeMethod(action,"trigger",type);
