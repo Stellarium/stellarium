@@ -1,6 +1,92 @@
+@font-face {
+	font-family: DejaVuSans;
+	src: url("DejaVuSans.ttf");
+}
+
+@font-face {
+	font-family: DejaVuSansMono;
+	src: url("DejaVuSansMono.ttf");
+}
+
+/*Stellarium-style jQuery UI Theme for some objects*/
+.ui-widget {
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
+}
+
+.ui-widget-content {
+	border: none;
+    color: rgb(3,3,3);
+    background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
+}
+
+.ui-widget-content ::selection {
+    background: rgb(253, 216, 134);
+}
+
+.ui-widget-content ::-moz-selection {
+    background: rgb(253, 216, 134);
+}
+
+.ui-tabs {
+    padding: 0px;
+    background: rgb(31,31,31);
+    border-width: 0px;
+}
+
+.ui-tabs .ui-widget-header { 
+    background: transparent; 
+    border: none; 
+    border-radius: 0px; 
+}
+
+.ui-tabs .ui-widget-header .ui-state-default a {
+    font-weight: bold;
+    font-size: 14px;
+    color: rgb(170, 173, 164);
+}
+
+.ui-tabs .ui-widget-header .ui-state-active a {
+    color: rgb(220, 223, 214);
+}
+
+.ui-tabs.ui-corner-all {
+    border-radius: 0px;
+}
+
+.ui-tabs .ui-tabs-nav {
+    padding-left: 0px;
+    background: transparent;
+    border-width: 0px 0px 1px 0px;
+    border-radius: 0px;
+}
+
+.ui-tabs .ui-tabs-nav .ui-corner-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ui-tabs .ui-tabs-nav .ui-state-default { 
+    background: transparent; 
+    border: none; 
+}
+
+.ui-tabs .ui-tabs-nav .ui-state-active { 
+    background: linear-gradient(rgb(68, 69, 72),rgb(86, 87, 90)); 
+    border: none; 
+}
+
+.ui-tabs .ui-tabs-panel {
+    color: rgb(3,3,3);
+    background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
+    border-width: 0px;
+	border-radius: 0px;
+}
+/* End jQuery UI override */
+
 html {
-	background: #fff;
-	font-family: Helvetica, Arial, sans-serif;
+	background: #fff url("stars.png");
+	font-size: 13px;
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
 }
 
 select {
@@ -10,8 +96,6 @@ select {
 
 #wrapper {
 	border: 1px solid #595959;
-	border-radius: 16px;
-	background: #dddddd;
 	margin: 1em 1%;
 	padding: 1em;
 }
@@ -21,12 +105,45 @@ select {
 	position: relative;
 }
 
+.block {
+	position: relative;
+	padding: 15px;
+	padding-top: 35px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: rgba(149, 150, 152, 0.2);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-style: inset;
+	border-radius: 10px;
+	text-align: center;
+	vertical-align: top;
+	min-width: 280px;
+	min-height: 250px;
+	display: inline-block;
+}
+
+.block header {
+	display: block;
+	text-align: left;
+	position: absolute;
+	left: 17px;
+	top: 10px;
+	color: rgb(0,0,0);
+}
+
+.block header h2 {
+	font-size: 14px;
+	margin: 0px;
+	display: inline-block;
+}
+
 #noresponse {
 	vertical-align: middle;
-	color: #f00;
 	font-weight: bold;
-	margin-left: 40px;
-	display: inline-block;
+	margin-left: 60px;
+	display: block;
 }
 
 #loadindicator {
@@ -34,8 +151,8 @@ select {
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 16px;
-	width: 16px;
-	height: 16px;
+	width: 32px;
+	height: 32px;
 	background-image: url("ajax-loader.gif");
 }
 
@@ -51,28 +168,23 @@ header img {
 	width: 64px;
 }
 
-.block {
-	text-align: center;
-	vertical-align: top;
-	min-width: 280px;
-	display: inline-block;
+#timewidget {
+	font-size: 10px;
 }
 
 .timedisplay {
-	font-family: monospace;
+	font-family: DejaVuSansMono,Courier New,monospace;
 	text-align: center;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 20px;
 }
 
 #timecontrols {
 	display: inline-block;
 	list-style: none;
 	text-align: center;
-	margin: 0;
+	margin-top: 10px;
 	padding: 6px;
-	border-radius: 6px;
-	background-color: #aaa;
 }
 
 #timecontrols li {
@@ -173,6 +285,7 @@ header img {
 .checkableaction {
 	font-style: italic;
 }
+
 
 
 
