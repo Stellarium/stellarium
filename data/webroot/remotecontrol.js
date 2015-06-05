@@ -14,6 +14,10 @@ var lastDataTime;
 //the time when the time was last synced
 var lastTimeSync;
 
+//stores some jQuery selection results for faster re-use
+var elemCache = {
+}
+
 //main update function, which is executed each second
 function update(requeue){
 	$.ajax({
@@ -237,22 +241,28 @@ function updateTime()
 {
 	if(lastData)
 	{
-		var currentJday = getCurrentTime();
-		
-		var correctedTime = currentJday - lastData.time.deltaT;
-		//apply timezone
-		var localTime = correctedTime + lastData.time.gmtShift;
-
-		//this seems to work MUCH smoother in animation than using jquery for that
-		document.getElementById("date").innerHTML = getDateString(localTime);
-		document.getElementById("time").innerHTML = getTimeString(localTime);
+        var currentJday = getCurrentTime();
+        var correctedTime = currentJday - lastData.time.deltaT;
+        
+        //what we have to animate depends on which tab is shown
+        if(elemCache.timewidget.tabs('option', 'active') === 0) {
+            //apply timezone
+            var localTime = correctedTime + lastData.time.gmtShift;
+            
+            //this seems to work MUCH smoother in animation than using jquery for that
+            elemCache.date.innerHTML = getDateString(localTime);
+            elemCache.time.innerHTML = getTimeString(localTime);
+        }
+        else {
+            elemCache.jday.innerHTML = correctedTime.toFixed(5);
+            elemCache.mjday.innerHTML = (correctedTime-2400000.5).toFixed(5);
+        }
 	}
 	if(connectionLost)
 	{
-		var obj = $("#noresponsetime");
 		var elapsed = ($.now() - lastDataTime) / 1000;
 		var text = Math.floor(elapsed).toString();
-		obj.text(text);
+        elemCache.noresponsetime.innerHTML = text;
 	}
 }
 
@@ -401,8 +411,15 @@ $(document).ready(function () {
     fillActionList();
 	update(true);
 	//update the time even when no server updates arrive
-
-
+    
+    elemCache.date = document.getElementById("date");
+    elemCache.time = document.getElementById("time");
+    elemCache.jday = document.getElementById("jday");
+    elemCache.mjday = document.getElementById("mjday");
+    elemCache.noresponsetime = document.getElementById("noresponsetime");
+    //this needs a jquery wrapper
+    elemCache.timewidget = $("#timewidget");
+    
 	if(!animationSupported)
 	{
 		console.log("animation frame not supported")
