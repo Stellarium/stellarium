@@ -19,6 +19,7 @@
  */
 
 #include <QDir>
+#include <QtMath>
 #include <QNetworkReply>
 #include <QSettings>
 #include <QTimer>
@@ -350,7 +351,7 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		size += 20.f + 10.f * qSin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 10.f, 90);
 		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 10.f, 0);
