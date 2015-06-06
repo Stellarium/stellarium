@@ -45,11 +45,11 @@ MeteorMgr::MeteorMgr(int zhr, int maxv )
 MeteorMgr::~MeteorMgr()
 {
 	std::vector<Meteor*>::iterator iter;
-	for(iter = active.begin(); iter != active.end(); ++iter)
+	for(iter = activeMeteors.begin(); iter != activeMeteors.end(); ++iter)
 	{
 		delete *iter;
 	}
-	active.clear();
+	activeMeteors.clear();
 	Meteor::bolideTexture.clear();
 }
 
@@ -113,12 +113,12 @@ void MeteorMgr::update(double deltaTime)
 
 	// step through and update all active meteors
 	std::vector<Meteor*>::iterator iter;
-	for (iter = active.begin(); iter != active.end(); )
+	for (iter = activeMeteors.begin(); iter != activeMeteors.end(); )
 	{
 		if (!(*iter)->update(deltaTime))
 		{
 			delete *iter;
-			iter = active.erase(iter);
+			iter = activeMeteors.erase(iter);
 		}
 		else
 		{
@@ -148,7 +148,7 @@ void MeteorMgr::update(double deltaTime)
 		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 		{
 			Meteor *m = new Meteor(core, maxVelocity);
-			active.push_back(m);
+			activeMeteors.push_back(m);
 		}
 	}
 }
@@ -170,7 +170,7 @@ void MeteorMgr::draw(StelCore* core)
 	// step through and draw all active meteors
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
 	std::vector<Meteor*>::iterator iter;
-	for (iter = active.begin(); iter != active.end(); ++iter)
+	for (iter = activeMeteors.begin(); iter != activeMeteors.end(); ++iter)
 	{
 		(*iter)->draw(core, sPainter);
 	}
