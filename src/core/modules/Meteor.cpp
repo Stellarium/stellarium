@@ -72,8 +72,8 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	float angle = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1));
 
 	// set meteor start x,y
-	mm.position[0] = mm.xydistance * cos(angle) + mm.obs[0];
-	mm.position[1] = mm.xydistance * sin(angle) + mm.obs[1];
+	mm.position[0] = mm.xydistance * qCos(angle) + mm.obs[0];
+	mm.position[1] = mm.xydistance * qSin(angle) + mm.obs[1];
 
 	// D is distance from center of earth
 	float D = qSqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);

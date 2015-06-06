@@ -436,7 +436,7 @@ int MeteorShowers::calculateZHR(int zhr, QString variable, QDateTime start, QDat
 	else
 		sd = (finishJD - peakJD)/2;
 
-	double gaussian = highZHR * std::exp( - std::pow(currentJD - peakJD, 2) / (sd*sd) ) + lowZHR;
+	double gaussian = highZHR * qExp( - qPow(currentJD - peakJD, 2) / (sd*sd) ) + lowZHR;
 
 	return (int) ((int) ((gaussian - (int) gaussian) * 10) >= 5 ? gaussian+1 : gaussian);
 }
