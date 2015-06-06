@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-10 14:59+0600\n"
-"PO-Revision-Date: 2015-03-08 14:10+0000\n"
+"POT-Creation-Date: 2015-05-24 19:51+0600\n"
+"PO-Revision-Date: 2015-05-25 17:54+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
-"Language-Team: Bengali\n"
+"Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-11 05:10+0000\n"
-"X-Generator: Launchpad (build 17487)\n"
+"X-Launchpad-Export-Date: 2015-05-26 05:14+0000\n"
+"X-Generator: Launchpad (build 17514)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
@@ -90,7 +90,7 @@ msgstr "ভূ-বিষুব স্থানাঙ্ক ব্যবস্থ
 #: src/core/modules/GridLinesMgr.cpp:756 src/ui_viewDialog.h:1322
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
-msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক ব্যবস্থা"
+msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক পদ্ধতি"
 
 #: src/core/modules/GridLinesMgr.cpp:757
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
@@ -115,16 +115,16 @@ msgstr "দিগন্ত নির্দেশক রেখা"
 #: src/core/modules/GridLinesMgr.cpp:761
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equatorial J2000 grid"
-msgstr "J2000 অনুযায়ী ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা"
+msgstr "J2000 অনুযায়ী ভূ-বিষুব স্থানাঙ্ক পদ্ধতি"
 
 #: src/core/modules/GridLinesMgr.cpp:762
 msgid "Ecliptic J2000 grid"
-msgstr "J2000 অনুযায়ী সৌরপথ ভিত্তিক স্থানাঙ্ক ব্যবস্থা"
+msgstr "J2000 অনুযায়ী সৌরপথ ভিত্তিক স্থানাঙ্ক পদ্ধতি"
 
 #: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1323
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic grid"
-msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক ব্যবস্থা"
+msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক পদ্ধতি"
 
 #: src/core/modules/GridLinesMgr.cpp:764 src/ui_viewDialog.h:1344
 msgid "Galactic equator"
@@ -187,7 +187,7 @@ msgstr "ধরন : <b>%1</b>"
 #: src/core/modules/Nebula.cpp:142
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "স্বচ্ছতা : <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -221,24 +221,24 @@ msgstr "পৃষ্ঠতলের ঔজ্জ্বল্যতা : <b>%1</b
 #: src/core/modules/Nebula.cpp:182
 #, qt-format
 msgid "Brightness: %1"
-msgstr ""
+msgstr "ঔজ্জ্বল্যতা : %1"
 
 #: src/core/modules/Nebula.cpp:175
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "দৃশ্যমান আকার : %1"
 
 #: src/core/modules/Nebula.cpp:176
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
-msgstr ""
+msgstr "গ্যাসের গঠন : %1"
 
 #: src/core/modules/Nebula.cpp:188
 #, qt-format
 msgid "Size: %1"
-msgstr "আকার : %1"
+msgstr "বিস্তার : %1"
 
 #: src/core/modules/Nebula.cpp:713
 msgid "Galaxy"
@@ -278,15 +278,15 @@ msgstr "অজানা"
 
 #: src/core/modules/Nebula.cpp:740
 msgid "HII region"
-msgstr ""
+msgstr "HII এলাকা"
 
 #: src/core/modules/Nebula.cpp:743
 msgid "Reflection nebula"
-msgstr ""
+msgstr "প্রতিফলিত নিহারীকা"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "H-α emission region"
-msgstr ""
+msgstr "H-α নির্গমন স্থান"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Undocumented type"
@@ -295,85 +295,85 @@ msgstr "অনথিভুক্ত"
 #: src/core/modules/Nebula.cpp:762
 msgctxt "form"
 msgid "circular"
-msgstr ""
+msgstr "গোলাকার"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "উপবৃত্তাকার"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "form"
 msgid "irregular"
-msgstr ""
+msgstr "অনিয়তকার"
 
 #: src/core/modules/Nebula.cpp:771
 msgctxt "form"
 msgid "undocumented form"
-msgstr ""
+msgstr "অনথিভুক্ত"
 
 #: src/core/modules/Nebula.cpp:784
 msgctxt "structure"
 msgid "amorphous"
-msgstr ""
+msgstr "অনিয়তাকার"
 
 #: src/core/modules/Nebula.cpp:787
 msgctxt "structure"
 msgid "conventional"
-msgstr ""
+msgstr "গতানুগতিক"
 
 #: src/core/modules/Nebula.cpp:790
 msgctxt "structure"
 msgid "filamentary"
-msgstr ""
+msgstr "সূত্রাকার"
 
 #: src/core/modules/Nebula.cpp:793
 msgctxt "structure"
 msgid "undocumented structure"
-msgstr ""
+msgstr "অনথিভুক্ত"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "ম্লান"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "HII region brightness"
 msgid "moderate"
-msgstr ""
+msgstr "মাঝারি"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "উজ্জ্বল"
 
 #: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
 msgid "undocumented brightness"
-msgstr ""
+msgstr "অনথিভুক্ত"
 
 #: src/core/modules/Nebula.cpp:828
 msgctxt "H-α emission region brightness"
 msgid "very bright"
-msgstr ""
+msgstr "অতি উজ্জ্বল"
 
 #: src/core/modules/Nebula.cpp:831
 msgctxt "H-α emission region brightness"
 msgid "bright"
-msgstr ""
+msgstr "উজ্জ্বল"
 
 #: src/core/modules/Nebula.cpp:834
 msgctxt "H-α emission region brightness"
 msgid "medium"
-msgstr ""
+msgstr "মাঝারি"
 
 #: src/core/modules/Nebula.cpp:837
 msgctxt "H-α emission region brightness"
 msgid "faint"
-msgstr ""
+msgstr "ম্লান"
 
 #: src/core/modules/NebulaMgr.cpp:131
 msgid "Deep-sky objects"
-msgstr "মহাজাগতিক জ্যোতিষ্কসমূহ"
+msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
 #: src/core/modules/Planet.cpp:223 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
@@ -1332,11 +1332,11 @@ msgstr "জ্যোতিষ্কটিকে দৃশ্যপটের ম�
 
 #: src/core/StelMovementMgr.cpp:134
 msgid "Zoom in on selected object"
-msgstr "জুম ইন করুন"
+msgstr "আরও কাছে থেকে দেখুন"
 
 #: src/core/StelMovementMgr.cpp:135
 msgid "Zoom out"
-msgstr "জুম আউট করুন"
+msgstr "আরও দূর থেকে দেখুন"
 
 #: src/core/StelMovementMgr.cpp:136
 msgid "Track object"
@@ -1768,8 +1768,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
-"বিভিন্ন লোকেরা এখানে তাঁদের গুরুত্বপূর্ণ অবদান রেখেছেন যদিও বর্তমানে তাঁদের "
-"অনেকে আর সক্রিয় নন । তবে তাঁদের কাজ এই প্রকল্পে গুরুত্বপূর্ণ পরিবর্তন এনেছে ।"
+"বিভিন্ন ব্যক্তিরা এখানে তাঁদের গুরুত্বপূর্ণ অবদান রেখেছেন যদিও বর্তমানে "
+"তাঁদের অনেকে আর সক্রিয় নন । তবে তাঁদের কাজ এই প্রকল্পে আমূল পরিবর্তন এনেছে ।"
 
 #: src/gui/HelpDialog.cpp:308
 #, qt-format
@@ -1793,6 +1793,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"বিভিন্ন ব্যক্তিরা এই পোগ্রামে তাঁদের গুরুত্বপূর্ণ অবদান রেখেছেন, যা "
+"স্টিলারিয়ামকে আরও সমৃদ্ধ করেছে । তাঁরা হলেন : %1."
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -1836,7 +1838,7 @@ msgstr "সাহায্য ও ব্যবহার পদ্ধতি"
 
 #: src/gui/StelGui.cpp:191
 msgid "Configuration window"
-msgstr "রূপরেখা বিন্যাস"
+msgstr "ব্যবহার পদ্ধতি"
 
 #: src/gui/StelGui.cpp:192
 msgid "Search window"
@@ -2247,6 +2249,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"আপনার DirectX/OpenGL ES প্রনালীতে ত্রুটি আছে । বিশদে জানতে কার্যবিবরনী দেখুন "
+"।\n"
+"এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
+"চান ?"
 
 #: src/StelMainView.cpp:655
 msgid ""
@@ -2254,6 +2260,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"আপনার OpenGL/Mesa প্রনালীতে ত্রুটি আছে । বিশদে জানতে কার্যবিবরনী দেখুন ।\n"
+"এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
+"চান ?"
 
 #: src/StelMainView.cpp:710
 msgid ""
@@ -2261,6 +2270,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"আপনার OpenGL প্রনালীতে ত্রুটি আছে । বিশদে জানতে কার্যবিবরনী দেখুন ।\n"
+"এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
+"চান ?"
 
 #: src/StelMainView.cpp:747
 msgid ""
@@ -2268,11 +2280,14 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"আপনার OpenGL ES প্রনালীতে ত্রুটি আছে । বিশদে জানতে কার্যবিবরনী দেখুন ।\n"
+"এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
+"চান ?"
 
 #: src/StelMainView.cpp:856
 #, qt-format
 msgid "Stellarium %1"
-msgstr "Stellarium %1"
+msgstr "স্টেলারিয়াম %1"
 
 #: src/translations.h:34
 msgid "N"
@@ -2420,17 +2435,17 @@ msgstr "নীহারিকা যুক্ত তারকা গুচ্ছ
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "HII regions"
-msgstr ""
+msgstr "HII এলাকা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "প্রতিফলিত নিহারীকা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "H-α emission regions"
-msgstr ""
+msgstr "H-α নির্গমন স্থান"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:105
@@ -2445,42 +2460,42 @@ msgstr "ক্যাডওয়েল তালিকা"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Barnard Catalogue"
-msgstr ""
+msgstr "বার্নাড তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "শার্পলেস তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "ভ্যান ডীন বার্গ তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
-msgstr ""
+msgstr "রজার, ক্যাম্পবেল ও হোয়াইটওক তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "কলিন্ডার তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "মেলোটি তালিকা"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "কৌতূহলোদ্দীপক দ্বৈত তারা"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "কৌতূহলোদ্দীপক অসম ঔজ্জ্বল্যের তারা"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -2561,7 +2576,7 @@ msgstr "সাইবেরিয়ান"
 
 #: src/translations.h:150
 msgid "Tukano"
-msgstr ""
+msgstr "টুকানো"
 
 #: src/translations.h:151
 msgid "Tupi-Guarani"
@@ -2590,7 +2605,7 @@ msgid "Trees"
 msgstr "জঙ্গল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:164 plugins/ArchaeoLines/src/ArchaeoLines.cpp:769
+#: src/translations.h:164 plugins/ArchaeoLines/src/ArchaeoLines.cpp:770
 msgid "Moon"
 msgstr "চন্দ্র"
 
@@ -2610,17 +2625,17 @@ msgid "Garching"
 msgstr "গারচিং"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:172 plugins/ArchaeoLines/src/ArchaeoLines.cpp:781
+#: src/translations.h:172 plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
 msgid "Mars"
 msgstr "মঙ্গল"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:174 plugins/ArchaeoLines/src/ArchaeoLines.cpp:784
+#: src/translations.h:174 plugins/ArchaeoLines/src/ArchaeoLines.cpp:785
 msgid "Jupiter"
 msgstr "বৃহস্পতি"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:176 plugins/ArchaeoLines/src/ArchaeoLines.cpp:787
+#: src/translations.h:176 plugins/ArchaeoLines/src/ArchaeoLines.cpp:788
 msgid "Saturn"
 msgstr "শনি"
 
@@ -2652,12 +2667,12 @@ msgstr "সোজাসাপটা"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:191
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "ভিয়েনা স্টার্নগার্টেন"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
 msgid "Testscene"
-msgstr ""
+msgstr "পরীক্ষামূলক"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
@@ -4052,7 +4067,7 @@ msgstr "শুরু থেকে খুঁজুন"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
-msgstr "বর্তমান অবস্থান সম্পর্কে তথ্য"
+msgstr "বর্তমান জায়গাটির ঠিকানা"
 
 #: src/ui_locationDialogGui.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
@@ -4111,11 +4126,11 @@ msgstr "গ্রহ :"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr "বর্তমান ঠিকানাটি বাড়ি হিসাবে ব্যবহৃত হবে"
+msgstr "জায়গাটি বাড়ি হিসাবে ব্যবহার করা হবে"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr "নেটওয়ার্কের তথ্য থেকে ঠিকানা ঠিক করা হবে"
+msgstr "নেটওয়ার্কের সাহায্যে ঠিকানা ঠিক করা হবে"
 
 #: src/ui_searchDialogGui.h:614
 msgid "Find Object"
@@ -4232,12 +4247,12 @@ msgstr "Bayer পদ্ধতির নামের জন্য প্রয়ো
 
 #: src/ui_searchDialogGui.h:699
 msgid "Object"
-msgstr "লক্ষ্যবস্তু"
+msgstr "নাম"
 
 #: src/ui_searchDialogGui.h:701
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Coordinate system:"
-msgstr "স্থানাঙ্ক ব্যবস্থা :"
+msgstr "স্থানাঙ্ক পদ্ধতি :"
 
 #: src/ui_searchDialogGui.h:703
 msgid ""
@@ -4281,11 +4296,11 @@ msgstr "সার্ভার :"
 
 #: src/ui_searchDialogGui.h:714
 msgid "Search options"
-msgstr "সন্ধান সংক্রান্ত বিকল্পগুলি"
+msgstr "অনুসন্ধান পদ্ধতি"
 
 #: src/ui_searchDialogGui.h:715
 msgid "Use autofill only from the beginning of words"
-msgstr "শুধুমাত্র আদ্যমিল থাকা নামগুলির অনুসন্ধান"
+msgstr "শুধুমাত্র আদ্যমিল থাকা নামগুলি দেখানো হবে"
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1350
 #: src/ui_viewDialog.h:1368 src/ui_viewDialog.h:1376
@@ -4296,7 +4311,7 @@ msgstr "বিকল্পসমূহ"
 
 #: src/ui_viewDialog.h:1229
 msgid "View"
-msgstr "দর্শন বিকল্প"
+msgstr "দৃশ্যপট"
 
 #: src/ui_viewDialog.h:1235
 msgid "Sky"
@@ -4323,12 +4338,12 @@ msgstr "নাম এবং চিহ্ন"
 #: src/ui_viewDialog.h:1248
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr "মহাজাগতিক জ্যোতিষ্কসমূহ (তারকাগুচ্ছ, নক্ষত্রলোক এবং নীহারিকা)"
+msgstr "মহাজাগতিক জ্যোতিষ্ক (তারকাগুচ্ছ, নক্ষত্রলোক এবং নীহারিকা)"
 
 #: src/ui_viewDialog.h:1250 src/ui_viewDialog.h:1307
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr "মহাজাগতিক জ্যোতিষ্ক সমূহ"
+msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
 #: src/ui_viewDialog.h:1251
 msgid "Planets and satellites"
@@ -4492,11 +4507,11 @@ msgstr "কল্পচিত্রগুলির ঔজ্জ্বলতা :
 
 #: src/ui_viewDialog.h:1314
 msgid "Thickness of lines:"
-msgstr ""
+msgstr "রেখার বেধ :"
 
 #: src/ui_viewDialog.h:1316
 msgid "Value in pixels"
-msgstr ""
+msgstr "পিক্সেলে ব্যবহৃত মান"
 
 #: src/ui_viewDialog.h:1318
 msgid "Celestial Sphere"
@@ -4637,7 +4652,7 @@ msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
-"এই অধিবেশনে পরিবর্তিত বৈশিষ্ট্যগুলি সংরক্ষণ করলে আপনি তা পরবর্তী Stellarium "
+"এই অধিবেশনে পরিবর্তিত বৈশিষ্ট্যগুলি সংরক্ষণ করলে আপনি তা পরবর্তী স্টেলারিয়াম "
 "শুরুর সময়ে ব্যবহার করতে পারবেন"
 
 #: src/ui_configurationDialog.h:1026
@@ -4650,7 +4665,7 @@ msgstr "পরিবর্তিত বৈশিষ্ট্যাবলী স�
 
 #: src/ui_configurationDialog.h:1028
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Stellarium প্রদত্ত স্বাভাবিক বৈশিষ্ট্যগুলি ফিরে আসে"
+msgstr "স্টেলারিয়াম প্রদত্ত স্বাভাবিক বৈশিষ্ট্যগুলি ফিরে আসে"
 
 #: src/ui_configurationDialog.h:1030 plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
@@ -4664,16 +4679,16 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"স্বাভাবিক বৈশিষ্ট্যগুলি ফিরিয়ে আনতে Stellarium নতুন করে চালু করার প্রয়োজন । "
+"স্বাভাবিক বৈশিষ্ট্যগুলি ফিরিয়ে আনতে স্টেলারিয়াম নতুন করে চালু করার প্রয়োজন । "
 "পরবর্তী শুরুর জন্য দৃষ্টিসীমা ও দিক সংক্রান্ত বিকল্পগুলি সংরক্ষন করা হবে ।"
 
 #: src/ui_configurationDialog.h:1033
 msgid "The width of your view when Stellarium starts"
-msgstr "Stellarium শুরুর সময় আপনার দৃষ্টিক্ষেত্রের সীমা"
+msgstr "স্টেলারিয়াম শুরুর সময় আপনার দৃষ্টিক্ষেত্রের সীমা"
 
 #: src/ui_configurationDialog.h:1036
 msgid "The direction you're looking when Stellarium starts"
-msgstr "Stellarium শুরুর সময় আপনার দৃষ্টিক্ষেত্রের অভিমুখ"
+msgstr "স্টেলারিয়াম শুরুর সময় আপনার দৃষ্টিক্ষেত্রের অভিমুখ"
 
 #: src/ui_configurationDialog.h:1038 src/ui_configurationDialog.h:1209
 msgid "Selected object information"
@@ -4848,7 +4863,8 @@ msgstr "আরম্ভকালীন তারিখ এবং সময়"
 
 #: src/ui_configurationDialog.h:1113
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Stellarium চালু হওয়ার সময় ব্যবহৃত তারিখ এবং সময়ের পছন্দসই নির্বাচন"
+msgstr ""
+"স্টেলারিয়াম চালু হওয়ার সময় ব্যবহৃত তারিখ এবং সময়ের পছন্দসই নির্বাচন"
 
 #: src/ui_configurationDialog.h:1115
 msgid "Other:"
@@ -4864,7 +4880,7 @@ msgstr "সাম্প্রতিক সময়"
 
 #: src/ui_configurationDialog.h:1121
 msgid "Starts Stellarium at system clock date and time"
-msgstr "Stellarium চালু হওয়ার সময় সিস্টেমের তারিখ এবং সময় ব্যবহার করা হবে"
+msgstr "স্টেলারিয়াম চালু হওয়ার সময় সিস্টেমের তারিখ এবং সময় ব্যবহার করা হবে"
 
 #: src/ui_configurationDialog.h:1123
 msgid "System date and time"
@@ -4875,7 +4891,7 @@ msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
-"পছন্দসই এই সময়টি পরের বার Stellarium চালু হওয়ার সময় আরম্ভকালীন সময় হিসাবে "
+"পছন্দসই এই সময়টি পরের বার স্টেলারিয়াম চালু হওয়ার সময় আরম্ভকালীন সময় হিসাবে "
 "ব্যবহৃত হবে"
 
 #: src/ui_configurationDialog.h:1127
@@ -4967,11 +4983,11 @@ msgstr "গ্রহ অনুযায়ী বায়ুমন্ডল পরি
 
 #: src/ui_configurationDialog.h:1167
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "স্থানাঙ্কের মানের জন্য দশমিকে প্রকাশিত ডিগ্রি ব্যবহৃত হবে"
 
 #: src/ui_configurationDialog.h:1169
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "দশমিকে প্রকাশিত ডিগ্রি ব্যবহার"
 
 #: src/ui_configurationDialog.h:1170
 msgid "Screenshots"
@@ -5028,7 +5044,7 @@ msgstr "শুরুর সময় চালু করা হবে"
 
 #: src/ui_configurationDialog.h:1200
 msgid "configure"
-msgstr "রূপরেখা বিন্যাস"
+msgstr "ব্যবহার পদ্ধতি"
 
 #: src/ui_configurationDialog.h:1205
 msgid "Main"
@@ -5107,7 +5123,7 @@ msgstr "বায়ুমণ্ডলের বিশদ বিবরণ"
 
 #: src/ui_AtmosphereDialog.h:177
 msgid "Refraction Settings"
-msgstr "প্রতিসরণ সংক্রান্ত বৈশিষ্ট্যাবলীর বিন্যাস"
+msgstr "প্রতিসরণ সংক্রান্ত বৈশিষ্ট্যাবলী"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Pressure (mbar):"
@@ -5206,26 +5222,26 @@ msgid "Angle measure"
 msgstr "কৌণিক দূরত্ব পরিমাপ"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:510
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:511
 msgid "The Angle Measure is enabled:"
-msgstr "কৌণিক দূরত্ব পরিমাপ সক্রিয় :"
+msgstr "কৌণিক দূরত্ব পরিমাপ করুন :"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:512
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:513
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
-"পরিমাপের জন্য left button চেপে এক স্থান থেকে অন্য স্থানে যান ও তা মুছে ফেলতে "
-"left-click করুন ।"
+"পরিমাপের জন্য left button চেপে এক স্থান থেকে অন্য স্থানে যান ও নতুন করে "
+"মাপার জন্য left-click করুন ।"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:514
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:515
 msgid "Right-clicking changes the end point only."
 msgstr "Right-click শুধুমাত্র শেষের প্রান্তবিন্দুটির অবস্থান পরিবর্তন করে ।"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:516
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:517
 msgid "PA="
-msgstr ""
+msgstr "PA="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
@@ -5237,6 +5253,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"এই সরঞ্জামটির সাহায্যে আকাশের যে কোনো দুটি বিন্দুর মধ্যেকার কৌণিক দূরত্ব "
+"মাপা যায় (এমনকি আপেক্ষিক কৌণিক অবস্থান বা দ্রাঘিমা রেখা থেকে বিন্দু দুটির "
+"সংযোজক রেখা যে কোণ তৈরী করে তাও মাপা যায়) ।"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 msgid ""
@@ -5244,6 +5263,8 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"দিগন্ত ভিত্তিক স্থানাঙ্ক অনুযায়ী পরিমাপের ক্ষেত্রে শুরু কিংবা শেষ অথবা দুটো "
+"বিন্দুই সময়ের সাথে ঘুরতে থাকা আকাশের সাথে সামঞ্জস্য রেখে ঘুরতে পারে ।"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -5343,19 +5364,19 @@ msgstr "পালসারের বৈশিষ্ট্য বিন্যা�
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "কৌণিক দূররত্ব পরিমাপ সরঞ্জামের রূপরেখা"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "ভূ-বিষুব স্থানাঙ্ক অনুযায়ী পরিমাপ"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "আপেক্ষিক কৌণিক অবস্থান দেখানো হবে"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক অনুযায়ী পরিমাপ"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
@@ -5363,25 +5384,25 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "আপেক্ষিক কৌণিক অবস্থান দেখানো হবে "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "শুরুর বিন্দুটি আকাশের সাথে সামঞ্জস্য রেখে ঘুরবে"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "শেষের বিন্দুটি আকাশের সাথে সামঞ্জস্য রেখে ঘুরবে"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
-msgstr ""
+msgstr "রীতি"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "কোণ পরিমাপে দশমিকে প্রকাশিত ডিগ্রি ব্যবহার"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5553,7 +5574,7 @@ msgstr "পূর্ববর্তী লেন্স"
 #: plugins/Oculars/src/Oculars.cpp:1460
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr ""
+msgstr "নিশানা ক্রসের বিষুবাংশ / বিষুবলম্ব (J2000.0 অনুযায়ী)"
 
 #: plugins/Oculars/src/Oculars.cpp:1598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
@@ -5774,12 +5795,12 @@ msgstr "এই দূরবীন, লেন্স বা অভিনেত্�
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr ""
+msgstr "প্রকৃত দৃষ্টিক্ষেত্র :"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "Magnification factor:"
-msgstr ""
+msgstr "বিবর্ধণ গুণাঙ্ক :"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
@@ -5921,10 +5942,11 @@ msgstr "দৃশ্যপটে এটি ব্যবহারের সরঞ
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
+"ব্যবহার শেষে স্টেলারিয়াম শুরুর সময়কার দৃষ্টিক্ষেত্রে ফিরতে হলে টিক মারুন ।"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "ব্যবহার শেষে প্রাথমিক দৃষ্টিক্ষেত্রে ফিরে আসবে"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
@@ -5976,7 +5998,7 @@ msgstr "দূরবীনগুলি"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "সবসময় নিশানা ক্রসটি দেখাবে"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -6124,12 +6146,12 @@ msgstr "জিপিএস"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1729
 msgid "glonass"
-msgstr ""
+msgstr "গ্লোনাস"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1731
 msgid "galileo"
-msgstr ""
+msgstr "গ্যালিলিও"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1733
@@ -6139,7 +6161,7 @@ msgstr "ইরিডিয়াম"
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1735
 msgid "stations"
-msgstr ""
+msgstr "মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1737
@@ -6164,7 +6186,7 @@ msgstr "আন্তর্জাতিক মহাকাশ কেন্দ্�
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1754
 msgid "China's first space station"
-msgstr ""
+msgstr "চীনের প্রথম মহাকাশ কেন্দ্র"
 
 #: plugins/Satellites/src/Satellite.cpp:256
 #: plugins/Satellites/src/Satellite.cpp:260
@@ -6773,7 +6795,7 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"এই সরঞ্জামটি Stellarium কে একটি কম্পিউটার নিয়ন্ত্রিত (\"GoTo telescope\") "
+"এই সরঞ্জামটি স্টেলারিয়াম কে একটি কম্পিউটার নিয়ন্ত্রিত (\"GoTo telescope\") "
 "দূরবীনকে \"ঘোরার আদেশ\" দেওয়ার সক্ষমতা প্রদান করে ।"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
@@ -6866,7 +6888,7 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
-"দূরবীন সম্পর্কে কেন তথ্য উপলব্ধ নয । তাই Stellarium নিজে থেকে কোন দূরবীন "
+"দূরবীন সম্পর্কে কেন তথ্য উপলব্ধ নয । তাই স্টেলারিয়াম নিজে থেকে কোন দূরবীন "
 "নিয়ন্ত্রণ করতে পরবে না । যদিও বাহ্যিক কোন অ্যাপ্লিকেশনের সাহায্যে অথবা একটি "
 "রিমোট হোস্ট সাথে সংযোগ স্থাপন করে দূরবীনটি নিয়ন্ত্রণ করা যেতে পারে ।"
 
@@ -6959,7 +6981,7 @@ msgstr "&নির্বাচিত জ্যোতিষ্কের স্থ
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:301
 msgid "Center of the screen"
-msgstr ""
+msgstr "একদম মাঝখানে আনুন"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:303
 msgid "Hours-minutes-seconds format"
@@ -7007,11 +7029,11 @@ msgid ""
 "directly by Stellarium."
 msgstr ""
 "একটি দূরবীন একটি সিরিয়াল পোর্টের মাধ্যমে এই কম্পিউটারের সাথে সংযুক্ত যা "
-"Stellarium দ্বারা প্রত্যক্ষ ভাবে নিয়ন্ত্রন করা হবে ।"
+"স্টেলারিয়াম দ্বারা প্রত্যক্ষ ভাবে নিয়ন্ত্রন করা হবে ।"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
-msgstr "Stellarium, সরাসরি একটি সিরিয়াল পোর্টের দ্বারা"
+msgstr "স্টেলারিয়াম, সরাসরি একটি সিরিয়াল পোর্টের দ্বারা"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid ""
@@ -7043,7 +7065,7 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
-"দূরবীন প্রদত্ত সংকেত Stellarium-এ পৌঁছানোর মোটামুটি সময় ।\n"
+"দূরবীন প্রদত্ত সংকেত স্টেলারিয়াম-এ পৌঁছানোর মোটামুটি সময় ।\n"
 "যদি লক্ষবৃত্তটি উপেক্ষিত হতে থাকে তবে এর মান বাড়াতে হবে ।"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
@@ -7059,7 +7081,7 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
-"Stellarium চালু হওয়ার সময় স্বয়ংক্রিয় ভাবে দূরবীনটিকে সক্রিয় করা বা তার সাথে "
+"স্টেলারিয়াম চালু হওয়ার সময় স্বয়ংক্রিয় ভাবে দূরবীনটিকে সক্রিয় করা বা তার সাথে "
 "সংযোগ স্থাপন করার চেষ্টা করা হবে ।"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
@@ -7183,7 +7205,7 @@ msgid ""
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
 msgstr ""
-"Stellarium এর বিন্যাসের জটিল কিছু বিকল্প সম্পাদনার কাজে এটি একটি সুবিধাজনক "
+"স্টেলারিয়াম এর বিন্যাসের জটিল কিছু বিকল্প সম্পাদনার কাজে এটি একটি সুবিধাজনক "
 "হাতিয়ার, যা সময় ও তারিখের প্রদর্শিত হওয়ার ধরণ নির্ধারণ এবং প্রাদেশিক সময় "
 "অঞ্চলের পরিবর্তনে সাহায্য করে ।"
 
@@ -7377,7 +7399,7 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
-"স্বাভাবিক ভাবে সিস্টেমে ব্যবহৃত সময় অঞ্চলের সময়টিকেই Stellarium এ ব্যবহার "
+"স্বাভাবিক ভাবে সিস্টেমে ব্যবহৃত সময় অঞ্চলের সময়টিকেই স্টেলারিয়াম এ ব্যবহার "
 "করা হয়ে থাকে, বেছে নেওয়া স্থানের সময় অঞ্চল হিসাবে তা নেওয়া হয় না । নিচের "
 "বিকল্পগুলি থেকে এটি আপনি পাল্টাতে পারেন ।"
 
@@ -7400,7 +7422,7 @@ msgstr "পছন্দসই :"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
-"সমস্ত রকম পরিবর্তন নতুন করে Stellarium চালু করার সময় কার্যকর করা হবে ।"
+"সমস্ত রকম পরিবর্তন নতুন করে স্টেলারিয়াম চালু করার সময় কার্যকর করা হবে ।"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
@@ -7533,7 +7555,7 @@ msgstr "নীহারিকার অবস্থান"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Galactic equator line"
-msgstr ""
+msgstr "ছায়াপথ নির্দেশক রেখা"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Effects"
@@ -7553,7 +7575,7 @@ msgstr "ছায়াপথের তীব্রতা :"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "সৌর আভার তীব্রতা :"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:439
 msgid "Nebula label frequency:"
@@ -7633,7 +7655,7 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"Stellarium-এ উল্কা এবং ধূমকেতু যোগ করার এটি একটি সহজ উপায় । এটির মাধ্যমে "
+"স্টেলারিয়াম-এ উল্কা এবং ধূমকেতু যোগ করার এটি একটি সহজ উপায় । এটির মাধ্যমে "
 "আপনি কোনো উল্কা বা ধূমকেতুর বিষয়ে Minor Planet Center এর ওয়েবসাইটে অনুসন্ধান "
 "করতে পারেন বা সেখান থেকে তথ্যও সংগ্রহ করতে পারেন । এখনও বিশদ কাজ চলছে ।"
 
@@ -7758,8 +7780,8 @@ msgid ""
 "may cause Stellarium to run slowly."
 msgstr ""
 "আপনি যে সব জ্যোতিষ্ক আমদানি করতে চইছেন তাদের চিহ্নিত করুন । বাঁকা হরফের নাম "
-"গুলি আগের তালিকায় এবং গাড় হরফের নাম গুলি Stellarium এর স্বাভাবিক তালিকায় "
-"আছে ।<br/>বি:দ্র: প্রচুর সংখ্যক জ্যোতিষ্ক যোগ করলে Stellarium খুব ধীরে চলতে "
+"গুলি আগের তালিকায় এবং গাড় হরফের নাম গুলি স্টেলারিয়াম এর স্বাভাবিক তালিকায় "
+"আছে ।<br/>বি:দ্র: প্রচুর সংখ্যক জ্যোতিষ্ক যোগ করলে স্টেলারিয়াম খুব ধীরে চলতে "
 "পারে ।"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
@@ -7794,7 +7816,7 @@ msgid ""
 "manually that file from:"
 msgstr ""
 "এই সরঞ্জামটি আপনার পছন্দসই সৌরজগতের তথ্য সমৃদ্ধ একটি নথি ব্যবহার করে । যদি "
-"কিছু গোলমাল দেখা যায় এবং Stellarium বিপর্যস্ত হয়ে পড়ে বা আরম্ভ না হয়, তখন "
+"কিছু গোলমাল দেখা যায় এবং স্টেলারিয়াম বিপর্যস্ত হয়ে পড়ে বা আরম্ভ না হয়, তখন "
 "আপনি এখান থেকে নিজে হাতে ঐ নথিটি মুছে ফেলতে পারেন :"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
@@ -8436,17 +8458,17 @@ msgstr "বহির গ্রহগুলির বৈশিষ্ট্য ব
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:851
 msgid "Hot"
-msgstr ""
+msgstr "গরম"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:853
 msgid "Warm"
-msgstr ""
+msgstr "মনোরম"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Cold"
-msgstr ""
+msgstr "ঠান্ডা"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:858
@@ -8493,7 +8515,7 @@ msgstr "ভর"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:766
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:767
 msgid "Sun"
 msgstr "সূর্য"
 
@@ -9308,8 +9330,8 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
-"Stellarium এ কিবোর্ড বা মাউস ব্যবহার করে খুব সহজে মসৃনভাবে জুম ইন বা আউট করা "
-"যায় । তবে কিছু ব্যবহারকারী নিজেদের পছন্দসই মানের দৃষ্টিক্ষেত্র অনুসারে "
+"স্টেলারিয়াম এ কিবোর্ড বা মাউস ব্যবহার করে খুব সহজে মসৃনভাবে জুম ইন বা আউট "
+"করা যায় । তবে কিছু ব্যবহারকারী নিজেদের পছন্দসই মানের দৃষ্টিক্ষেত্র অনুসারে "
 "ধাপেধাপে জুম ইন বা আউট করতে পছন্দ করেন । এই সরঞ্জামটি তাদের এই সুবিধাটি "
 "প্রদান করে । আপনি এর বিভিন্ন মানগুলি পাল্টাতে পারেন ও সহজেই কিবোর্ড ব্যবহার "
 "করে আাপনার পছন্দসই দৃষ্টিক্ষেত্র অনুসারে ধাপেধাপে জুম ইন বা আউট করতে পারেন "
@@ -10650,7 +10672,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "ছায়া"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
@@ -10754,48 +10776,48 @@ msgstr ""
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:742
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:743
 msgid "Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:745
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:746
 msgid "Solstice"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:748
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:749
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:751
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:754
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:757
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:760
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:763
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:772
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:773
 msgid "error if you can read this"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:775
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
 msgid "Mercury"
 msgstr "বুধ"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:778
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:779
 msgid "Venus"
 msgstr "শুক্র"
 
