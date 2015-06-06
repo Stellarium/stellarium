@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-02 17:01+0600\n"
-"PO-Revision-Date: 2015-04-12 12:08+0000\n"
+"POT-Creation-Date: 2015-06-04 21:57+0600\n"
+"PO-Revision-Date: 2015-05-24 21:13+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-03 05:28+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-06-05 05:18+0000\n"
+"X-Generator: Launchpad (build 17540)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -1011,9 +1011,12 @@ msgid "Kidney Bean galaxy"
 msgstr "Bohnengalaxie"
 
 #: nebulae/default/ngc2000names.dat:949 nebulae/default/ngc2000names.dat:950
-#: nebulae/default/ngc2000names.dat:951
 msgid "Leo Triplet"
 msgstr "Leo Triplett"
+
+#: nebulae/default/ngc2000names.dat:951
+msgid "Hamburger Galaxy (Leo Triplet)"
+msgstr ""
 
 #: nebulae/default/ngc2000names.dat:952
 msgid "McLeish's Object"
@@ -3877,6 +3880,54 @@ msgstr "Schaf"
 msgid "Stars of Water"
 msgstr "Sterne des Wassers"
 
+#: skycultures/egyptian/star_names.fab:1
+#: skycultures/romanian/star_names.fab:80
+#: skycultures/western/star_names.fab:116
+#: skycultures/western_rey/star_names.fab:32
+msgid "Procyon"
+msgstr "Prokyon"
+
+#: skycultures/egyptian/star_names.fab:2
+#: skycultures/western/star_names.fab:102
+#: skycultures/western_rey/star_names.fab:36
+msgid "Sirius"
+msgstr "Sirius"
+
+#. TRANSLATORS: Native name of the Sun in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:2
+msgid "God of Sun"
+msgstr "Sonnengott"
+
+#. TRANSLATORS: Native name of the Moon in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:4
+msgid "Khonsu, the Traveler"
+msgstr "Khonsu, der Reisende (Mond)"
+
+#. TRANSLATORS: Native name of Mercury in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:6
+msgid "Unknown"
+msgstr ""
+
+#. TRANSLATORS: Native name of Venus in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:8
+msgid "Star that Crosses / The God of the Morning"
+msgstr "Stern, der überquert/Morgengott (Venus)"
+
+#. TRANSLATORS: Native name of Mars in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:10
+msgid "Red Horus"
+msgstr "Roter Horus (Mars)"
+
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:12
+msgid "Horus Who Binds the Two Lands"
+msgstr "Horus, der die beiden Länder eint (Jupiter)"
+
+#. TRANSLATORS: Native name of Saturn in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:14
+msgid "Horus, the Bull of Heaven"
+msgstr "Horus, der Himmelsstier (Saturn)"
+
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
 msgstr "Zwei Sonnenstrahlen"
@@ -5577,6 +5628,14 @@ msgstr "Donnervogel"
 msgid "Bear's Lodge"
 msgstr "Bärenhütte"
 
+#: skycultures/lakota/star_names.fab:1
+msgid "Wichapi Owanjila"
+msgstr ""
+
+#: skycultures/lakota/star_names.fab:2
+msgid "Oglechkutepi"
+msgstr ""
+
 #: skycultures/maori/constellation_names.eng.fab:1
 msgid "Taki-o-Autahi"
 msgstr "Taki-o-Autahi"
@@ -6576,12 +6635,6 @@ msgstr "Luytens Stern"
 #: skycultures/romanian/star_names.fab:79
 msgid "Romulus"
 msgstr "Romulus"
-
-#: skycultures/romanian/star_names.fab:80
-#: skycultures/western/star_names.fab:116
-#: skycultures/western_rey/star_names.fab:32
-msgid "Procyon"
-msgstr "Prokyon"
 
 #: skycultures/romanian/star_names.fab:81
 msgid "Remus"
@@ -8140,11 +8193,6 @@ msgstr "Tejat Posterior"
 msgid "Plaskett's star"
 msgstr "Plasketts Stern"
 
-#: skycultures/western/star_names.fab:102
-#: skycultures/western_rey/star_names.fab:36
-msgid "Sirius"
-msgstr "Sirius"
-
 #: skycultures/western/star_names.fab:103
 msgid "Alzirr"
 msgstr "Alzirr"
@@ -8472,7 +8520,7 @@ msgstr "Al Dhanab"
 
 #: skycultures/western/star_names.fab:328
 msgid "Sadaltager"
-msgstr ""
+msgstr "Sadaltager"
 
 #: skycultures/western/star_names.fab:329
 msgid "Al Kalb al Rai"
