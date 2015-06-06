@@ -13,12 +13,13 @@ ENDIF()
 # install RemoteControl plugin stuff
 IF(USE_PLUGIN_REMOTECONTROL)
 	INSTALL(DIRECTORY webroot/ DESTINATION share/${PACKAGE}/data/webroot FILES_MATCHING
-	PATTERN "*.png" 
-	PATTERN "*.gif"
-	PATTERN "*.html"
-	PATTERN "*.js"
-	PATTERN "*.css"
-	PATTERN "*.ico")
+		PATTERN "*.png" 
+		PATTERN "*.gif"
+		PATTERN "*.html"
+		PATTERN "*.js"
+		PATTERN "*.css"
+		PATTERN "*.ico")
+	INSTALL(FILES DejaVuSans.ttf DejaVuSansMono.ttf DESTINATION share/${PACKAGE}/data/webroot)
 ENDIF()
 
 IF (BUILD_FOR_MAEMO)
