@@ -84,7 +84,7 @@ signals:
 	void zhrChanged(int);
 	
 private:
-	std::vector<Meteor*> activeMeteors;
+	QList<Meteor*> activeMeteors;
 	int ZHR;
 	int maxVelocity;
 	bool flagShow;

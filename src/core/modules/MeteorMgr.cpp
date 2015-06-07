@@ -7,12 +7,12 @@
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -39,16 +39,12 @@ MeteorMgr::MeteorMgr(int zhr, int maxv )
 	, flagShow(true)
 {
 	setObjectName("MeteorMgr");
-	qsrand (QDateTime::currentMSecsSinceEpoch());
+	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
 MeteorMgr::~MeteorMgr()
 {
-	std::vector<Meteor*>::iterator iter;
-	for(iter = activeMeteors.begin(); iter != activeMeteors.end(); ++iter)
-	{
-		delete *iter;
-	}
+	qDeleteAll(activeMeteors);
 	activeMeteors.clear();
 	Meteor::bolideTexture.clear();
 }
@@ -112,17 +108,11 @@ void MeteorMgr::update(double deltaTime)
 	}
 
 	// step through and update all active meteors
-	std::vector<Meteor*>::iterator iter;
-	for (iter = activeMeteors.begin(); iter != activeMeteors.end(); )
+	foreach (Meteor* m, activeMeteors)
 	{
-		if (!(*iter)->update(deltaTime))
+		if (!m->update(deltaTime))
 		{
-			delete *iter;
-			iter = activeMeteors.erase(iter);
-		}
-		else
-		{
-			++iter;
+			activeMeteors.removeOne(m);
 		}
 	}
 
@@ -148,7 +138,7 @@ void MeteorMgr::update(double deltaTime)
 		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 		{
 			Meteor *m = new Meteor(core, maxVelocity);
-			activeMeteors.push_back(m);
+			activeMeteors.append(m);
 		}
 	}
 }
@@ -169,9 +159,8 @@ void MeteorMgr::draw(StelCore* core)
 
 	// step through and draw all active meteors
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	std::vector<Meteor*>::iterator iter;
-	for (iter = activeMeteors.begin(); iter != activeMeteors.end(); ++iter)
+	foreach (Meteor* m, activeMeteors)
 	{
-		(*iter)->draw(core, sPainter);
+		m->draw(core, sPainter);
 	}
 }
