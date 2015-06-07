@@ -39,8 +39,8 @@ Meteor::Meteor(const StelCore* core, float v)
 	//
 
 	// meteor velocity
-	// (see line 427 in StelApp.cpp)
-	m_speed = 11 + (v - 11) * ((float) qrand() / ((float) RAND_MAX + 1)); // [11, 72]
+	// (see line 460 in StelApp.cpp)
+	m_speed = 11 + (v - 11) * ((float) qrand() / ((float) RAND_MAX + 1)); // [11, v]
 
 	// rotation matrix
 	float alpha = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 360]
