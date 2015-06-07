@@ -109,7 +109,7 @@ StelSkyDrawer.setCustomNebulaMagnitudeLimit(10.5);
 core.wait(3);
 
 var dsname = LabelMgr.labelScreen("Binocular Highlights", 20, 20, false, 40, color);
-var dsnote = LabelMgr.labelScreen("Look throught Meade 10x50 TravelView Binocular", 20, 75, false, 20, color);
+var dsnote = LabelMgr.labelScreen("Look through the Meade 10x50 TravelView Binocular", 20, 75, false, 20, color);
 
 LabelMgr.setLabelShow(dsname, true);
 LabelMgr.setLabelShow(dsnote, true);
