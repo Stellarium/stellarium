@@ -5,6 +5,9 @@ var updateInterval = 1000;
 var updatePoll = true;
 var connectionLost = false;
 
+var timeEditMode = false;
+var timeEditDelay = 500; //the delay in ms after which time edits are sent to server
+
 var animationSupported;
 
 //the last received update data
@@ -16,6 +19,10 @@ var lastTimeSync;
 
 //stores some jQuery selection results for faster re-use
 var elemCache = {
+}
+
+//stores last displayed time to avoid potentially slow jquery update
+var currentDisplayTime = {
 }
 
 //main update function, which is executed each second
@@ -64,7 +71,7 @@ function update(requeue){
 	});
 }
 
-function postCmd(url,data){
+function postCmd(url,data,completeFunc){
 	$.ajax({
 		url: url,
 		method: "POST",
@@ -84,7 +91,8 @@ function postCmd(url,data){
 			console.log( "Error: " + errorThrown );
 			console.log( "Status: " + status );
 			alert("Could not call server")
-		}
+		},
+        complete: completeFunc
 	});
 }
 
@@ -120,13 +128,6 @@ function postAction(actionName) {
     });
 }
 
-var ONE_OVER_JD_MILLISECOND = 24*60*60*1000;
-var JD_SECOND = 0.000011574074074074074074;
-
-function isRealTimeSpeed() {
-	return Math.abs(lastData.time.timerate-JD_SECOND)<0.0000001;
-}
-
 function updateTimeButtonState() {
 	//updates the state of the time buttons
 	//replicates functionality from StelGui.cpp update() function
@@ -145,101 +146,19 @@ function updateTimeButtonState() {
 	}
 }
 
-
-//this replicates time functions from Stellarium core (getPrintableDate)
-//because the date range of Stellarium is quite a bit larger than JavaScript Date() can handle, it needs some custom support
-function jdayToDate(jd) {
-	//This conversion is from http://blog.bahrenburgs.com/2011/01/javascript-julian-day-conversions.html
-	//In particular, it misses the pre-Gregorian calendar correction, and has probably some less accuracy than Stellariums algorithm
-	//The algorithm used by Stellarium itself can't be used without some modifications because it relies heavily on C datatypes
-
-	var X = jd + 0.5;
-	var Z = Math.floor(X); //Get day without time
-    var F = X - Z; //Get time
-    var Y = Math.floor((Z-1867216.25)/36524.25);
-    var A = Z+1+Y-Math.floor(Y/4);
-    var B = A+1524;
-    var C = Math.floor((B-122.1)/365.25);
-    var D = Math.floor(365.25*C);
-    var G = Math.floor((B-D)/30.6001);
-
-    //must get number less than or equal to 12)
-	var month = (G<13.5) ? (G-1) : (G-13);
-    //if Month is January or February, or the rest of year
-    var year = (month<2.5) ? (C-4715) : (C-4716);
-    var UT = B-D-Math.floor(30.6001*G)+F;
-    var day = Math.floor(UT);
-
-    var obj = {
-    	month : month,
-    	year : year,
-    	day : day
-    }
-
-    return obj;
-}
-
-function jdayToTime(jd)
-{
-	//this should be less complicated than the date
-	var frac = jd % 1;
-	var s = Math.floor(frac * 24 * 60 * 60 + 0.0001);
-
-	var obj = {
-		hour : (Math.floor(s / (60*60))+12)%24,
-		minute : Math.floor(s/60)%60,
-		second : s % 60
-	}
-	return obj;
-}
-
-//converts a javascript date to a JD
-function dateToJd(date)
-{
-	//divide msec by 24*60*60*1000 and add unix time epoch (1.1.1970)
-	return date.getTime() / 86400000 + 2440587.5;
-}
-
-function getDateString(jday)
-{
-	var date = jdayToDate(jday);
-
-	var yyyy = date.year.toString();
-	var mm = date.month.toString();
-	var dd = date.day.toString();
-
-	//no fancy formatting for now
-	return yyyy + "-" + (mm[1]?mm:"0"+mm[0]) + "-" + (dd[1]?dd:"0"+dd[0]);
-}
-
-function getTimeString(jday)
-{
-	var time = jdayToTime(jday);
-
-	var hh = time.hour.toString();
-	var mm = time.minute.toString();
-	var ss = time.second.toString();
-
-	return  (hh[1]?hh:"0"+hh[0]) + ":" + (mm[1]?mm:"0"+mm[0]) + ":" + (ss[1]?ss:"0"+ss[0]);
-}
-
-function getCurrentTime()
-{
-	//progress the time depending on the elapsed time between last update and now, and the set time rate
-	if(isRealTimeSpeed()){
-		//the timerate is 1:1 with real time
-		//console.log("realtime");
-		return lastData.time.jday + ($.now() - lastTimeSync) / ONE_OVER_JD_MILLISECOND;
-	}
-	else {
-		//console.log("unrealtime");
-		return lastData.time.jday + (($.now() - lastTimeSync) / 1000.0) * lastData.time.timerate;
-	}
+function forceSpinnerUpdate(){
+    elemCache.date_year.spinner("value",currentDisplayTime.date.year);
+    elemCache.date_month.spinner("value",currentDisplayTime.date.month);
+    elemCache.date_day.spinner("value",currentDisplayTime.date.day);
+    
+    elemCache.time_hour.spinner("value",currentDisplayTime.time.hour);
+    elemCache.time_minute.spinner("value",currentDisplayTime.time.minute);
+    elemCache.time_second.spinner("value",currentDisplayTime.time.second);
 }
 
 function updateTime()
 {
-	if(lastData)
+	if(lastData && !timeEditMode)
 	{
         var currentJday = getCurrentTime();
         var correctedTime = currentJday - lastData.time.deltaT;
@@ -250,8 +169,29 @@ function updateTime()
             var localTime = correctedTime + lastData.time.gmtShift;
             
             //this seems to work MUCH smoother in animation than using jquery for that
-            elemCache.date.innerHTML = getDateString(localTime);
-            elemCache.time.innerHTML = getTimeString(localTime);
+            var date = jdayToDate(localTime);
+            if(currentDisplayTime.date.year !== date.year) {
+                elemCache.date_year.spinner("value",date.year);
+            }
+            if(currentDisplayTime.date.month !== date.month) {
+                elemCache.date_month.spinner("value",date.month);
+            }
+            if(currentDisplayTime.date.day !== date.day) {
+                elemCache.date_day.spinner("value",date.day);
+            }
+            currentDisplayTime.date = date;
+            
+            var time = jdayToTime(localTime);
+            if(currentDisplayTime.time.hour !== time.hour) {
+                elemCache.time_hour.spinner("value",time.hour);
+            }
+            if(currentDisplayTime.time.minute !== time.minute) {
+                elemCache.time_minute.spinner("value",time.minute);
+            }
+            if(currentDisplayTime.time.second !== time.second) {
+                elemCache.time_second.spinner("value",time.second);
+            }
+            currentDisplayTime.time = time;
         }
         else {
             elemCache.jday.innerHTML = correctedTime.toFixed(5);
@@ -264,58 +204,6 @@ function updateTime()
 		var text = Math.floor(elapsed).toString();
         elemCache.noresponsetime.innerHTML = text;
 	}
-}
-
-function resyncTime()
-{
-	lastData.time.jday = getCurrentTime();
-	lastTimeSync = $.now();
-}
-
-function setDateNow(){
-	//for now,, this is only calculated here in JS
-	//depending on latency, etc, this may not be the same result as pressing the NOW button in the GUI
-	var jd = dateToJd(new Date());
-
-	//we have to apply deltaT
-	lastData.time.jday = jd + lastData.time.deltaT;
-	resyncTime();
-
-	postCmd("/api/main/time",{time:lastData.time.jday});
-}
-
-function setTimeRate(timerate)
-{
-	//we have to re-sync the time for correctness
-	resyncTime();
-
-	//the last data rate gets set to the new rate NOW to provide a responsive GUI
-	lastData.time.timerate = timerate;
-
-	//update time button now
-	updateTimeButtonState();
-
-	//we also update the time we have to reduce the effect of network latency
-	postCmd("/api/main/time",{timerate: timerate, time: getCurrentTime()});
-}
-
-//these functions are modeled after StelCore
-function increaseTimeRate(){
-	var s = lastData.time.timerate;
-	if(s>=JD_SECOND) s*=10;
-	else if (s<-JD_SECOND) s/=10;
-	else if (s>=0 && s<JD_SECOND) s=JD_SECOND;
-	else if (s>=-JD_SECOND && s<0.) s=0;
-	setTimeRate(s);
-}
-
-function decreaseTimeRate(){
-	var s = lastData.time.timerate;
-	if (s>JD_SECOND) s/=10.;
-	else if (s<=-JD_SECOND) s*=10.;
-	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-	else if (s>0. && s<=JD_SECOND) s=0.;
-	setTimeRate(s);
 }
 
 function fillScriptList(){
@@ -372,10 +260,10 @@ function fillActionList(){
 			});
 		},
 		error: function(xhr,status,errorThrown){
-			console.log("Error updating script list");
+			console.log("Error updating action list");
 			console.log( "Error: " + errorThrown );
 	        console.log( "Status: " + status );
-			alert("Could not retrieve script list")
+			alert("Could not retrieve action list")
 		}
 	});
 }
@@ -412,13 +300,20 @@ $(document).ready(function () {
 	update(true);
 	//update the time even when no server updates arrive
     
-    elemCache.date = document.getElementById("date");
-    elemCache.time = document.getElementById("time");
+    elemCache.date_year = $("#date_year");
+    elemCache.date_month = $("#date_month");
+    elemCache.date_day = $("#date_day");
+    elemCache.time_hour = $("#time_hour");
+    elemCache.time_minute = $("#time_minute");
+    elemCache.time_second = $("#time_second");
     elemCache.jday = document.getElementById("jday");
     elemCache.mjday = document.getElementById("mjday");
     elemCache.noresponsetime = document.getElementById("noresponsetime");
     //this needs a jquery wrapper
     elemCache.timewidget = $("#timewidget");
+    
+    //init display time
+    resetCurrentDisplayTime();
     
 	if(!animationSupported)
 	{
