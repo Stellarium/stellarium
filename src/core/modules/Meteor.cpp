@@ -1,18 +1,18 @@
 /*
  * Stellarium
  * Copyright (C) 2004 Robert Spearman
- * Copyright (C) 2014 Marcos Cardinot
- * 
+ * Copyright (C) 2014-2015 Marcos Cardinot
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -32,14 +32,19 @@ Meteor::Meteor(const StelCore* core, float v)
 	: m_distMultiplier(0.)
 	, m_segments(10)
 {
-	qsrand (QDateTime::currentMSecsSinceEpoch());
-	// determine meteor velocity
-	// abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
-	m_speed = 11+(float)qrand()/((float)RAND_MAX+1)*(v-11);
+	qsrand(QDateTime::currentMSecsSinceEpoch());
 
-	// view matrix of sporadic meteors model
-	float alpha = (double)qrand()/((double)RAND_MAX+1)*2*M_PI;
-	float delta = M_PI_2 - (double)qrand()/((double)RAND_MAX+1)*M_PI;
+	//
+	// Sporadic Meteors Model
+	//
+
+	// meteor velocity
+	// (see line 427 in StelApp.cpp)
+	m_speed = 11 + (v - 11) * ((float) qrand() / ((float) RAND_MAX + 1)); // [11, 72]
+
+	// rotation matrix
+	float alpha = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 360]
+	float delta = M_PI_2 - M_PI * ((float) qrand() / ((double) RAND_MAX + 1));  // [-90, 90]
 	m_viewMatrix = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
 
 	// building meteor model
