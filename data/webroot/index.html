@@ -7,6 +7,7 @@
   <link type="text/css" rel="stylesheet" href="style.css" />
   <script src="jquery-1.11.3.js" type="text/javascript"></script>
   <script src="jquery-ui.js" type="text/javascript"></script>
+  <script src="time.js" type="text/javascript"></script>
   <script src="remotecontrol.js" type="text/javascript"></script>
   <script type="text/javascript">
   //<![CDATA[
@@ -54,6 +55,58 @@
       //jQuery UI initialization
       $("#timewidget").tabs();
       $( document ).tooltip();
+      $("#spinner").spinner();
+      
+      $("#date_year").spinner({ 
+        min: -100000,
+        max: 100000
+      }).data({type: "date", field: "year"});
+      $("#date_month").spinner({ 
+        min: 0,
+        max: 13
+      }).data({type: "date", field: "month"});
+      $("#date_day").spinner({ 
+        min: 0,
+        max: 32
+      }).data({type: "date", field: "day"});
+      $("#time_hour").spinner({
+        min: -1,
+        max: 24
+      }).data({type: "time", field: "hour"});
+      $("#time_minute").spinner({
+        min: -1,
+        max: 60
+      }).data({type: "time", field: "minute"});
+      $("#time_second").spinner({
+        min: -1,
+        max: 60
+      }).data({type: "time", field: "second"});
+      
+      $(".timedisplay input").focusin(function(evt){
+        console.log("block update");
+        timeEditMode = true;
+      }).focusout(function(evt){
+        if(editTimeout === undefined) {
+          console.log("resume update");
+          timeEditMode = false;
+        }
+        else console.log("cant resume");
+      }).on('input', function () {
+        if($(this).data('onInputPrevented')) return;
+        var val = this.value,
+        $this = $(this),
+        max = $this.spinner('option', 'max'),
+        min = $this.spinner('option', 'min');
+        if (!val.match(/^\d+$/)) val = $this.data('prevData'); //we want only number, no alpha
+        this.value = val > max ? max : val < min ? min : val;
+        if(val !== $this.data('prevData')) setDateTimeField($(this).data("type"),$(this).data("field"),this.value);
+      }).on('keydown', function (e) { // to allow 'Backspace' key behaviour
+        $(this).data('onInputPrevented', e.which === 8 ? true : false);
+        $(this).data('prevData',this.value);
+      }).on("spin", function(evt,ui) {
+        setDateTimeField($(this).data("type"),$(this).data("field"),ui.value);
+        return false;
+      });
 
       var $loading = $("#loadindicator").hide(), timer;
       $(document).ajaxStart(function(){
@@ -83,11 +136,23 @@
       <li><a href="#time_local">Local Time</a></li>
       <li><a href="#time_jday">Julian Date</a></li>
     </ul>
-    <div id="time_local">
-      <p id="date" class="timedisplay" title="Date">Please wait,</p>
-      <p id="time" class="timedisplay" title="Time">updating...</p>
+    <div id="time_local" class="timetab">
+      <p class="timedisplay">
+        <input id="date_year" />
+        /
+        <input id="date_month" />
+        /
+        <input id="date_day" />
+      </p>
+      <p class="timedisplay">
+        <input id="time_hour" />
+        :
+        <input id="time_minute" />
+        :
+        <input id="time_second" />
+      </p>
     </div>
-    <div id="time_jday">
+    <div id="time_jday" class="timetab">
       <p id="jday" class="timedisplay" title="Julian day">Please wait,</p>
       <p id="mjday" class="timedisplay" title="Modified Julian day">updating...</p>
     </div>
