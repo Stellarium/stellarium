@@ -37,6 +37,10 @@ function update(requeue){
 			//update time NOW
 			if(!animationSupported)
 				updateTime();
+            
+            //update deltaT display
+            var deltaTinSec =  data.time.deltaT * (60 * 60 * 24);
+            elemCache.deltat.innerHTML = deltaTinSec.toFixed(2)+"s";
 
 			updateTimeButtonState();
 
@@ -154,6 +158,9 @@ function forceSpinnerUpdate(){
     elemCache.time_hour.spinner("value",currentDisplayTime.time.hour);
     elemCache.time_minute.spinner("value",currentDisplayTime.time.minute);
     elemCache.time_second.spinner("value",currentDisplayTime.time.second);
+    
+    elemCache.input_jd.spinner("value",currentDisplayTime.jd);
+    elemCache.input_mjd.spinner("value",currentDisplayTime.jd-2400000.5);
 }
 
 function updateTime()
@@ -194,8 +201,17 @@ function updateTime()
             currentDisplayTime.time = time;
         }
         else {
-            elemCache.jday.innerHTML = correctedTime.toFixed(5);
-            elemCache.mjday.innerHTML = (correctedTime-2400000.5).toFixed(5);
+            var jd = correctedTime.toFixed(5);
+            
+            if(currentDisplayTime.jd.toFixed(5) !== jd) {
+                if(!elemCache.input_jd.is(":focus"))
+                    elemCache.input_jd.spinner("value", correctedTime);
+                //MJD directly depends on JD
+                var mjd = (correctedTime-2400000.5);
+                if(!elemCache.input_mjd.is(":focus"))
+                    elemCache.input_mjd.spinner("value",mjd);
+            }
+            currentDisplayTime.jd = correctedTime;
         }
 	}
 	if(connectionLost)
@@ -300,14 +316,17 @@ $(document).ready(function () {
 	update(true);
 	//update the time even when no server updates arrive
     
+    //Cache some elements in a variable.
+    //This seems to make access faster if used in an animation.
     elemCache.date_year = $("#date_year");
     elemCache.date_month = $("#date_month");
     elemCache.date_day = $("#date_day");
     elemCache.time_hour = $("#time_hour");
     elemCache.time_minute = $("#time_minute");
     elemCache.time_second = $("#time_second");
-    elemCache.jday = document.getElementById("jday");
-    elemCache.mjday = document.getElementById("mjday");
+    elemCache.input_jd = $("#input_jd");
+    elemCache.input_mjd = $("#input_mjd");
+    elemCache.deltat = document.getElementById("deltat");
     elemCache.noresponsetime = document.getElementById("noresponsetime");
     //this needs a jquery wrapper
     elemCache.timewidget = $("#timewidget");
