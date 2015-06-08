@@ -177,8 +177,8 @@ select {
 	border-radius: 10px;
 	text-align: center;
 	vertical-align: top;
-	min-width: 280px;
-	min-height: 250px;
+	min-width: 18em;
+	min-height: 22em;
 	display: inline-block;
 }
 
@@ -228,6 +228,7 @@ header img {
 
 #timewidget {
 	font-size: 14px;
+	min-width: 295px;	
 }
 
 .ui-tabs-panel.timetab {
@@ -241,6 +242,14 @@ header img {
 	font-size: 20px;
 }
 
+#time_jday .timedisplay {
+	text-align: right;
+}
+
+#time_jday > div {
+	display: inline-block;
+}
+
 #date_year {
 	width: 4em;
 }
@@ -249,9 +258,13 @@ header img {
 #date_day,
 #time_hour,
 #time_minute,
-#time_second
-{
+#time_second {
 	width: 2em;
+}
+
+#input_jd,
+#input_mjd{
+	width: 8em;
 }
 
 #timecontrols {
