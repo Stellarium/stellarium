@@ -1785,8 +1785,5 @@ bool StelCore::isDay() const
 
 double StelCore::getCurrentEpoch() const
 {
-	int year, month, day;
-	StelUtils::getDateFromJulianDay(getJDay(), &year, &month, &day);
-	QDate date = QDate::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
-	return double(year) + double(date.dayOfYear())/double(date.daysInYear());
+	return 2000.0 + (getJDay() - 2451545.0)/365.25;
 }
