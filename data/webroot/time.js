@@ -274,9 +274,16 @@ function resyncTime()
 function resetCurrentDisplayTime() {
     currentDisplayTime.date = { year: undefined, month: undefined, day: undefined };
     currentDisplayTime.time = { hour: undefined, minute: undefined, second: undefined };
+    currentDisplayTime.jd = 0;
 }
 
 var editTimeout;
+
+function onTimeUpdate(){
+    timeEditMode = false;
+    editTimeout = undefined;
+    update();
+}
 
 function setTimeFromCurrentDisplayTime(){
     //we have to change an eventual rollover
@@ -302,36 +309,31 @@ function setTimeFromCurrentDisplayTime(){
     editTimeout && clearTimeout(editTimeout);
     editTimeout = setTimeout(function() {
         //post an update
-        postCmd("/api/main/time", { time: newJD  }, function() { timeEditMode = false; } );
-        editTimeout = undefined;
+        postCmd("/api/main/time", { time: newJD  }, onTimeUpdate );
     },500);
 }
 
-function setYear(val){
-    if(currentDisplayTime.date.year !== val){
-        currentDisplayTime.date.year = val;
-        setTimeFromCurrentDisplayTime();
+function setJDay(val) {
+    if(isNaN(val)) {
+        console.log("Prevented NaN value");
+        return;
     }
-}
-
-function setMonth(val){
-    if(currentDisplayTime.date.month !== val){
-        currentDisplayTime.date.month = val;
-        setTimeFromCurrentDisplayTime();
-    }
-}
-
-function setDay(val){
-    if(currentDisplayTime.date.day !== val){
-        currentDisplayTime.date.day = val;
-        setTimeFromCurrentDisplayTime();
-    }
-}
-
-function setTimeField(field, val) {
-    if(currentDisplayTime.time[field] !== val) {
-        currentDisplayTime.time[field] = val;
-        setTimeFromCurrentDisplayTime();
+    if(currentDisplayTime.jday !== val) {
+        console.log('setJDay: ' + val);
+        
+        currentDisplayTime.jday = val;
+        
+        //remove deltaT
+        
+        resyncTime();
+        val = val + lastData.time.deltaT;
+        lastData.time.jday = val;
+        
+        editTimeout && clearTimeout(editTimeout);
+        editTimeout = setTimeout(function() {
+            //post an update
+            postCmd("/api/main/time", { time: val  },onTimeUpdate );
+        },500);
     }
 }
 
@@ -363,7 +365,8 @@ function decreaseTimeRate(){
 
 function setDateNow(){
 	//for now,, this is only calculated here in JS
-	//depending on latency, etc, this may not be the same result as pressing the NOW button in the GUI
+	//this may not be the same result as pressing the NOW button in the GUI
+    //because of varying deltaT which may be quite different from the current time + latency issues
 	var jd = dateToJd(new Date());
 
 	//we have to apply reverse deltaT
