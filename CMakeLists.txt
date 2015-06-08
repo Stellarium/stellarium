@@ -80,7 +80,9 @@ ELSE()
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
 ENDIF()
 
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+# CMake 3.0.0 the CMAKE_<LANG>_COMPILER_ID value for Apple-provided Clang is now AppleClang
+IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+ # using regular Clang or AppleClang
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized -Wno-tautological-constant-out-of-range-compare")
  # The cosmetic fix for Clang 3.4
  IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
@@ -101,7 +103,8 @@ ENDIF()
 # best way to get to APPLE?
 IF(APPLE)
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra")
- IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+ # using regular Clang or AppleClang
+ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field -Wno-unknown-warning-option -Wno-unused-const-variable -Wno-unused-result")
  ENDIF()
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
