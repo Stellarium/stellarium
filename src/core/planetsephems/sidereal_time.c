@@ -44,7 +44,7 @@ double range_radians (double r)
 #define LN_NUTATION_EPOCH_THRESHOLD 0.1
 
 
-/* Nutation is a period oscillation of the Earths rotational axis around it's mean position.*/
+/* Nutation is a period oscillation of the Earth's rotational axis around its mean position.*/
 
 /*
  Contains Nutation in longitude, obliquity and ecliptic obliquity.
@@ -52,9 +52,9 @@ double range_radians (double r)
 */
 struct ln_nutation
 {
-	double longitude;	/*!< Nutation in longitude */
-	double obliquity;	/*!< Nutation in obliquity */
-	double ecliptic;	/*!< Obliquity of the ecliptic */
+	double longitude;	/*!< DeltaPsi, Nutation in longitude */
+	double obliquity;	/*!< DeltaEps, Nutation in obliquity */
+	double ecliptic;	/*!< epsilon, Obliquity of the ecliptic */
 };
 
 struct nutation_arguments
@@ -245,7 +245,7 @@ void get_nutation (double JD, struct ln_nutation * nutation)
 		F = 93.2719100 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.0;
 		O = 125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.0;
 
-		/ * GZotti: Laskar's formula, only valid for J2000+/-10000 years! */
+		/ * GZotti: Laskar's formula (1986), only valid for J2000+/-10000 years! */
 		if (fabs(T)<100) 
 		  {
 		    double U=T/100.0;	
