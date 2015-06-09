@@ -32,8 +32,8 @@ class StelPainter;
 
 // all in km - altitudes make up meteor range
 #define EARTH_RADIUS 6369.f
-#define HIGH_ALTITUDE 115.f
-#define LOW_ALTITUDE 70.f
+#define MAX_ALTITUDE 115.f
+#define MIN_ALTITUDE 70.f
 #define VISIBLE_RADIUS 457.8f
 
 //! @class Meteor 
@@ -90,8 +90,7 @@ public:
 
 	//! Builds Meteor Model
 	//! @return true if alive, else false.
-	static bool initMeteorModel(const StelCore *core, const int segments,
-				    const Mat4d viewMatrix, MeteorModel &mm);
+	static bool initMeteorModel(const StelCore *core, const int segments, MeteorModel &mm);
 
 	//! Determine color arrays of line and prism used to draw meteor train.
 	static void buildColorArrays(const int segments,

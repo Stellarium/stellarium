@@ -1,6 +1,5 @@
 /*
  * Stellarium
- * Copyright (C) 2004 Robert Spearman
  * Copyright (C) 2014-2015 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
@@ -43,12 +42,12 @@ Meteor::Meteor(const StelCore* core, float v)
 	m_speed = 11 + (v - 11) * ((float) qrand() / ((float) RAND_MAX + 1)); // [11, v]
 
 	// rotation matrix
-	float alpha = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 360]
-	float delta = M_PI_2 - M_PI * ((float) qrand() / ((double) RAND_MAX + 1));  // [-90, 90]
+	float alpha = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 2pi]
+	float delta = M_PI_2 - M_PI * ((float) qrand() / ((double) RAND_MAX + 1));  // [-pi/2, pi/2]
 	m_viewMatrix = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
 
 	// building meteor model
-	m_alive = initMeteorModel(core, m_segments, m_viewMatrix, meteor);
+	m_alive = initMeteorModel(core, m_segments, meteor);
 	if (!m_alive)
 	{
 		return;
@@ -63,45 +62,37 @@ Meteor::~Meteor()
 }
 
 // returns true if alive
-bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat4d viewMatrix, MeteorModel &mm)
+bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorModel &mm)
 {
-	float high_range = EARTH_RADIUS + HIGH_ALTITUDE;
-	float low_range = EARTH_RADIUS + LOW_ALTITUDE;
+	// meteor height above the earth surface (initial)
+	mm.startH = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
 
-	// find observer position in meteor coordinate system
-	mm.obs = core->altAzToJ2000(Vec3d(0, 0, EARTH_RADIUS));
-	mm.obs.transfo4d(viewMatrix.transpose());
+	// meteor zenith angle
+	float zenithAngle = M_PI_2 * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, pi/2]
 
-	// select random trajectory using polar coordinates in XY plane, centered on observer
-	mm.xydistance = VISIBLE_RADIUS * ((double) qrand() / ((double) RAND_MAX + 1));
-	float angle = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1));
+	// distance between the observer and the meteor (first order approximation)
+	float distance = mm.startH / qCos(zenithAngle);
 
-	// set meteor start x,y
-	mm.position[0] = mm.xydistance * qCos(angle) + mm.obs[0];
-	mm.position[1] = mm.xydistance * qSin(angle) + mm.obs[1];
+	// meteor trajectory
+	mm.xydistance = distance * qSin(zenithAngle);
+	float angle = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, 2pi]
 
-	// D is distance from center of earth
-	float D = qSqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);
-
-	if (D > high_range)     // won't be visible, meteor still dead
-	{
-		return false;
-	}
-
-	mm.position[2] = mm.startH = qSqrt(high_range*high_range - D*D);
+	// initial meteor coordinates
+	mm.position[0] = mm.xydistance * qCos(angle);
+	mm.position[1] = mm.xydistance * qSin(angle);
+	mm.position[2] = mm.startH;
 	mm.posTrain = mm.position;
 
-	// determine end of burn point, and nearest point to observer for distance mag calculation
-	// mag should be max at nearest point still burning
-	if (D > low_range)
+	// defining the end height
+	if (mm.xydistance > MIN_ALTITUDE)
 	{
 		mm.endH = -mm.startH;  // earth grazing
 		mm.minDist = mm.xydistance;
 	}
 	else
 	{
-		mm.endH = qSqrt(low_range*low_range - D*D);
-		mm.minDist = qSqrt(mm.xydistance*mm.xydistance + pow(mm.endH - mm.obs[2], 2));
+		mm.endH = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - mm.xydistance*mm.xydistance);
+		mm.minDist = qSqrt(mm.xydistance*mm.xydistance + mm.endH*mm.endH);
 	}
 
 	if (mm.minDist > VISIBLE_RADIUS)
@@ -302,7 +293,6 @@ void Meteor::insertVertex(const StelCore* core, const Mat4d& viewMatrix, QVector
 {
 	vertex.transfo4d(viewMatrix);
 	vertex = core->j2000ToAltAz(vertex);
-	vertex[2] -= EARTH_RADIUS;
 	vertex/=1216; // 1216 is to scale down under 1 for desktop version
 	vertexArray.push_back(vertex);
 }
