@@ -115,7 +115,8 @@ base_font_size                      = 13
 #base_font_name                      = DejaVu Sans
 mouse_cursor_timeout                = 10
 flag_mouse_cursor_timeout           = false
-day_key_mode                        = calendar
+#GZ detected unused key. 2015-04.
+#day_key_mode                        = calendar
 selected_object_info                = all
 auto_hide_horizontal_toolbar        = true
 auto_hide_vertical_toolbar          = true
@@ -126,6 +127,7 @@ default_color                       = 0.5,0.5,0.7
 gui_base_color                      = 0.5,0.5,0.7
 gui_text_color                      = 0.8,0.9,0.9
 azimuthal_color                     = 0.3,0.2,0.1
+daylight_text_color                 = 0.0,0.0,0.0
 equatorial_color                    = 0.1,0.2,0.3
 equatorial_J2000_color              = 0.1,0.3,0.4
 galactic_color                      = 0.0,0.3,0.2
