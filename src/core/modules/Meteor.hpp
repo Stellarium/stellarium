@@ -30,11 +30,11 @@
 class StelCore;
 class StelPainter;
 
-// all in km
-#define EARTH_RADIUS 6378.f
-#define MAX_ALTITUDE 120.f
-#define MIN_ALTITUDE 80.f
-#define VISIBLE_RADIUS 457.8f
+#define EARTH_RADIUS 6378.f          //! earth_radius in km
+#define EARTH_RADIUS2 40678884.f     //! earth_radius^2 in km
+#define MAX_ALTITUDE 120.f           //! max meteor altitude in km
+#define MIN_ALTITUDE 80.f            //! min meteor altitude in km
+#define VISIBLE_RADIUS 457.8f        //! max visible distance in km
 
 //! @class Meteor 
 //! Models a single meteor.
