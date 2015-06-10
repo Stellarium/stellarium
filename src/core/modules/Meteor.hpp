@@ -30,10 +30,10 @@
 class StelCore;
 class StelPainter;
 
-// all in km - altitudes make up meteor range
-#define EARTH_RADIUS 6369.f
-#define MAX_ALTITUDE 115.f
-#define MIN_ALTITUDE 70.f
+// all in km
+#define EARTH_RADIUS 6378.f
+#define MAX_ALTITUDE 120.f
+#define MIN_ALTITUDE 80.f
 #define VISIBLE_RADIUS 457.8f
 
 //! @class Meteor 
