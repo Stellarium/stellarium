@@ -70,8 +70,20 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 	// meteor zenith angle
 	float zenithAngle = M_PI_2 * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, pi/2]
 
-	// distance between the observer and the meteor (first order approximation)
-	float distance = mm.startH / qCos(zenithAngle);
+	// distance between the observer and the meteor
+	float distance;
+	if (zenithAngle > 1.134f) // > 65 degrees?
+	{
+		distance = qSqrt(EARTH_RADIUS2 * qPow(zenithAngle, 2)
+				 + 2 * EARTH_RADIUS * mm.startH
+				 + qPow(mm.startH, 2));
+		distance -= EARTH_RADIUS * qCos(zenithAngle);
+	}
+	else
+	{
+		// (first order approximation)
+		distance = mm.startH / qCos(zenithAngle);
+	}
 
 	// meteor trajectory
 	mm.xydistance = distance * qSin(zenithAngle);
