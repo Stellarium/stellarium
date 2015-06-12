@@ -109,13 +109,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 {
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
-	double currentEpoch = core->getCurrentEpoch();
 	QString cepoch = qc_("on date", "coordinates for current epoch");
-	if (currentEpoch>0 && currentEpoch<9000.)
-	{
-		// OK, we can show epoch in format YYYY.F
-		cepoch = QString("J%1").arg(QString::number(currentEpoch, 'f', 1));
-	}
 	QString res;
 	if (flags&RaDecJ2000)
 	{
