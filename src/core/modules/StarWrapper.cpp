@@ -134,12 +134,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << " - ";
 
 		if (flags&CatalogNumber || (nameWasEmpty && (flags&Name)))
+		{
 			oss << "HIP " << s->getHip();
-		if (s->getComponentIds())
-			oss << " " << StarMgr::convertToComponentIds(s->getComponentIds());
+			if (s->getComponentIds())
+				oss << " " << StarMgr::convertToComponentIds(s->getComponentIds());
 
-		if (!crossIndexData.isEmpty())
-			oss << " (" << crossIndexData << ")";
+			if (!crossIndexData.isEmpty())
+				oss << " (" << crossIndexData << ")";
+		}
 
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
