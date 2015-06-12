@@ -455,6 +455,7 @@ float StelProjectorOrthographic::deltaZoom(float fov) const
 }
 
 
+
 QString StelProjector2d::getNameI18() const
 {
 	return "2d";
