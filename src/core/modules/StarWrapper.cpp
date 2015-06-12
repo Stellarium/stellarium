@@ -103,6 +103,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
+		const QString crossIndexData = StarMgr::getCrossIndexDesignations(s->getHip());
 		QStringList sciNames;
 		if (!sciName.isEmpty())
 			sciNames.append(sciName);
@@ -136,6 +137,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << "HIP " << s->getHip();
 		if (s->getComponentIds())
 			oss << " " << StarMgr::convertToComponentIds(s->getComponentIds());
+
+		if (!crossIndexData.isEmpty())
+			oss << " (" << crossIndexData << ")";
 
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
