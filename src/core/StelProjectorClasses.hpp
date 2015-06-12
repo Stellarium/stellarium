@@ -222,6 +222,7 @@ protected:
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
 
+
 class StelProjector2d : public StelProjector
 {
 public:
