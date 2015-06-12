@@ -64,8 +64,8 @@ Meteor::~Meteor()
 // returns true if alive
 bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorModel &mm)
 {
-	// meteor height above the earth surface (initial)
-	mm.startH = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
+	// initial meteor altitude above the earth surface
+	mm.initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
 
 	// meteor zenith angle
 	float zenithAngle = M_PI_2 * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, pi/2]
@@ -75,14 +75,14 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 	if (zenithAngle > 1.134f) // > 65 degrees?
 	{
 		distance = qSqrt(EARTH_RADIUS2 * qPow(zenithAngle, 2)
-				 + 2 * EARTH_RADIUS * mm.startH
-				 + qPow(mm.startH, 2));
+				 + 2 * EARTH_RADIUS * mm.initialAlt
+				 + qPow(mm.initialAlt, 2));
 		distance -= EARTH_RADIUS * qCos(zenithAngle);
 	}
 	else
 	{
 		// (first order approximation)
-		distance = mm.startH / qCos(zenithAngle);
+		distance = mm.initialAlt / qCos(zenithAngle);
 	}
 
 	// meteor trajectory
@@ -92,19 +92,19 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 	// initial meteor coordinates
 	mm.position[0] = mm.xydistance * qCos(angle);
 	mm.position[1] = mm.xydistance * qSin(angle);
-	mm.position[2] = mm.startH;
+	mm.position[2] = mm.initialAlt;
 	mm.posTrain = mm.position;
 
 	// defining the end height
 	if (mm.xydistance > MIN_ALTITUDE)
 	{
-		mm.endH = -mm.startH;  // earth grazing
+		mm.finalAlt = -mm.initialAlt;  // earth grazing
 		mm.minDist = mm.xydistance;
 	}
 	else
 	{
-		mm.endH = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - mm.xydistance*mm.xydistance);
-		mm.minDist = qSqrt(mm.xydistance*mm.xydistance + mm.endH*mm.endH);
+		mm.finalAlt = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - mm.xydistance*mm.xydistance);
+		mm.minDist = qSqrt(mm.xydistance*mm.xydistance + mm.finalAlt*mm.finalAlt);
 	}
 
 	if (mm.minDist > VISIBLE_RADIUS)
@@ -252,7 +252,7 @@ void Meteor::buildColorArrays(const int segments,
 
 bool Meteor::updateMeteorModel(double deltaTime, double speed, MeteorModel &mm)
 {
-	if (mm.position[2] < mm.endH)
+	if (mm.position[2] < mm.finalAlt)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
@@ -268,9 +268,9 @@ bool Meteor::updateMeteorModel(double deltaTime, double speed, MeteorModel &mm)
 	mm.position[2] -= speed*deltaTime/dt;
 
 	// train doesn't extend beyond start of burn
-	if (mm.position[2] + speed*0.5f > mm.startH)
+	if (mm.position[2] + speed*0.5f > mm.initialAlt)
 	{
-		mm.posTrain[2] = mm.startH;
+		mm.posTrain[2] = mm.initialAlt;
 	}
 	else
 	{

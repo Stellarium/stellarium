@@ -46,15 +46,15 @@ class Meteor
 public:
 	struct MeteorModel
 	{
-		Vec3d obs;		//! observer position
-		Vec3d position;		//! equatorial coordinate position
-		Vec3d posTrain;		//! end of train
-		float xydistance;	//! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-		float minDist;		//! Nearest point to observer along path
-		float startH;		//! Start height above center of earth
-		float endH;		//! End height
-		float mag;		//! Apparent magnitude at head, 0-1
-		int firstBrightSegment;	//! First bright segment of the train
+		Vec3d obs;              //! observer position
+		Vec3d position;         //! equatorial coordinate position
+		Vec3d posTrain;         //! end of train
+		float xydistance;       //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+		float minDist;          //! Nearest point to observer along path
+		float initialAlt;       //! Initial meteor altitude above the Earth surface.
+		float finalAlt;         //! Final meteor altitude (end of burn point).
+		float mag;              //! Apparent magnitude at head, 0-1
+		int firstBrightSegment; //! First bright segment of the train
 	};
 
 	//! Create a Meteor object.
