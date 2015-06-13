@@ -24,6 +24,7 @@
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "planetsephems/precession.h"
 
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
@@ -224,6 +225,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
+	// GZ This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
+	if (flags&EclipticCoordXYZ)
+		oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
 	if (flags&Extra)
 	{
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -575,15 +579,37 @@ void Planet::computePosition(const double dateJD)
 }
 
 // Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
+// TODO: Verify for the other planets if theirs is relative to J2000 ecliptic or relative to (precessed) ecliptic of date?
 void Planet::computeTransMatrix(double jd)
 {
+	// TODO: correct this for earth with the new model.
 	axisRotation = getSiderealTime(jd);
 
 	// Special case - heliocentric coordinates are on ecliptic,
 	// not solar equator...
+
+	// TODO: BETTER FORMULA FOR EARTH, or prepare/modify re.* elsewhere!
+	// GZ It seems for correct handling we must inject proper precession matrix in this stage.
+	// Papers for understanding: Capitaine 2003 but esp. Vondrak etal 2011 for a long-time model (200.000 years!!)
 	if (parent)
 	{
-		rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
+		//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
+		// GZ: This seems to be a formulation of Capitaine's (2003) P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o) with the first two matrices omitted.
+		// GZ: in case of Earth, this makes a huge difference!
+		if (englishName=="Earth")
+		  {
+			// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
+			// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
+			double chi_A, omega_A, psi_A;
+			getPrecessionAnglesVondrak(jd, &chi_A, &omega_A, &psi_A); // GZ: Implement this in planetsephems/precession!
+			// Next expression is wrong. We need obliquity w.r.t. J2000, and nodal motion (some psi).
+			//rotLocalToParent=Mat4d::zrotation(chi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(-psi_A) * Mat4d::xrotation(re.obliquity);
+			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) ;
+
+
+		  }
+		else
+			rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
 	}
 }
 
@@ -614,7 +640,8 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 double Planet::getSiderealTime(double jd) const
 {
 	if (englishName=="Earth")
-	{
+	{	// GZ I want to be sure that nutation is just those ignorable few arcseconds.
+		qDebug() << "Difference apparent-mean sidereal times: " << get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd);
 		return get_apparent_sidereal_time(jd);
 	}
 

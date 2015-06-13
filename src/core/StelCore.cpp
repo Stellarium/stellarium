@@ -644,12 +644,15 @@ Vec3d StelCore::heliocentricEclipticToEquinoxEqu(const Vec3d& v) const
 	return matHeliocentricEclipticToEquinoxEqu*v;
 }
 
+/*
 //! Transform vector from heliocentric coordinate to false equatorial : equatorial
-//! coordinate but centered on the observer position (usefull for objects close to earth)
+//! coordinate but centered on the observer position (useful for objects close to earth)
+//! Unused as of V0.13
 Vec3d StelCore::heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const
 {
 	return matAltAzToEquinoxEqu*matHeliocentricEclipticToAltAz*v;
 }
+*/
 
 StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTransform(RefractionMode refMode) const
 {
@@ -662,7 +665,7 @@ StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTran
 	return StelProjector::ModelViewTranformP(refr);
 }
 
-//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
+//! Get the modelview matrix for observer-centric ecliptic (Vsop87A) drawing
 StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
@@ -673,6 +676,7 @@ StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticModelViewT
 	refr->setPostTransfoMat(matAltAzModelView);
 	return StelProjector::ModelViewTranformP(refr);
 }
+
 
 //! Get the modelview matrix for observer-centric equatorial at equinox drawing
 StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(RefractionMode refMode) const
@@ -725,11 +729,18 @@ StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(Refrac
 	return StelProjector::ModelViewTranformP(refr);
 }
 
+// GZ: One of the most important functions, totally void of doc. :-(
+// called in update() (for every frame)
 void StelCore::updateTransformMatrices()
 {
 	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(JDay);
 	matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
 
+	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
+	// in effect, this matrix transforms from VSOP87 ecliptical J2000 to planet-based equatorial coordinates.
+	// For earth, this moves the equator relative to J2000 (precession of the equator).
+	// TODO: fix Planet::getRotEquatorialToVsop87() so that matEquinoxEquToJ2000 performs Precession of the Equator properly.
+	// TODO: rename matEquinoxEquToJ2000 to matEquinoxEquDateToJ2000
 	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
 	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
 	matJ2000ToAltAz = matEquinoxEquToAltAz*matJ2000ToEquinoxEqu;
@@ -737,8 +748,11 @@ void StelCore::updateTransformMatrices()
 	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
 	// These two next have to take into account the position of the observer on the earth
+	// GZ tmp could be called matAltAzToVsop87
 	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
 
+	// TODO: rename to matAltAzToHeliocentricEcliptic2000
+	// TODO: getDistanceFromCenter assumes spherical planets. Use rectangular coordinates for observer!
 	matAltAzToHeliocentricEcliptic =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 						  Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
@@ -1776,7 +1790,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 bool StelCore::isDay() const
 {
 	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
-	return sunPos[2] > -0.12; // Nautical twilight
+	return sunPos[2] > -0.12; // Nautical twilight (0.12 > sin (6 deg),
 }
 
 double StelCore::getCurrentEpoch() const

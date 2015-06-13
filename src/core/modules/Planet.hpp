@@ -322,7 +322,7 @@ protected:
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
 	Mat4d rotLocalToParent;
-	float axisRotation;              // Rotation angle of the Planet on it's axis
+	float axisRotation;              // Rotation angle of the Planet on its axis
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
@@ -333,7 +333,7 @@ protected:
 	double lastJD;                   // caches JD of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
-	void* userDataPtr;
+	void* userDataPtr;               // this is always used with an Orbit object.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth
