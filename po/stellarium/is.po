@@ -11,18 +11,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-24 19:51+0600\n"
+"POT-Creation-Date: 2015-06-13 00:45+0600\n"
 "PO-Revision-Date: 2015-04-23 02:45+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-25 05:18+0000\n"
-"X-Generator: Launchpad (build 17514)\n"
+"X-Launchpad-Export-Date: 2015-06-13 05:18+0000\n"
+"X-Generator: Launchpad (build 17557)\n"
 "Language: is\n"
 
-#: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
+#: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
 #: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
@@ -51,13 +51,13 @@ msgstr "Merkingar stjörnumerkja"
 msgid "Constellation boundaries"
 msgstr "Mörk stjörnumerkja"
 
-#: src/core/modules/StarMgr.cpp:354 src/ui_viewDialog.h:1245
+#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1245
 #: src/ui_viewDialog.h:1277 src/ui_viewDialog.h:1303
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "Stjörnur"
 
-#: src/core/modules/StarMgr.cpp:355
+#: src/core/modules/StarMgr.cpp:377
 msgid "Stars labels"
 msgstr "Stjörnumerkingar"
 
@@ -180,7 +180,7 @@ msgstr "Himinhnöttur:"
 
 #: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:178 src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:269
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -195,7 +195,7 @@ msgstr "Ógegnsæi: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
-#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
+#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
@@ -204,7 +204,7 @@ msgstr "Birtustig: <b>%1</b> (fallandi í: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:150 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
@@ -381,7 +381,7 @@ msgstr "Djúpfyrirbæri"
 
 #: src/core/modules/Planet.cpp:223 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
-#: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:201 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Reyndarbirtustig: %1"
@@ -528,100 +528,100 @@ msgid "Planet trails"
 msgstr "Ferlar reikistjarna"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:171
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:177
 #: src/translations.h:42
 msgid "star"
 msgstr "stjarna"
 
-#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:199
+#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:205
 #: plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Skráningarlitur (B-V): <b>%1</b>"
 
-#: src/core/modules/StarWrapper.cpp:152
+#: src/core/modules/StarWrapper.cpp:158
 msgid "eruptive variable star"
 msgstr "gosstjarna"
 
-#: src/core/modules/StarWrapper.cpp:154
+#: src/core/modules/StarWrapper.cpp:160
 msgid "pulsating variable star"
 msgstr "sveiflustjarna"
 
-#: src/core/modules/StarWrapper.cpp:156
+#: src/core/modules/StarWrapper.cpp:162
 msgid "rotating variable star"
 msgstr "snúningsbreytistjarna"
 
-#: src/core/modules/StarWrapper.cpp:158
+#: src/core/modules/StarWrapper.cpp:164
 msgid "cataclysmic variable star"
 msgstr "hamfarastjarna"
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:167
 msgid "eclipsing binary system"
 msgstr "myrkvatvístirni"
 
-#: src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:171
 msgid "variable star"
 msgstr "breytistjarna"
 
-#: src/core/modules/StarWrapper.cpp:169
+#: src/core/modules/StarWrapper.cpp:175
 msgid "double star"
 msgstr "tvístirni"
 
-#: src/core/modules/StarWrapper.cpp:176
+#: src/core/modules/StarWrapper.cpp:182
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "Gerð: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:215
+#: src/core/modules/StarWrapper.cpp:221
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:217
+#: src/core/modules/StarWrapper.cpp:223
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/StarWrapper.cpp:226
+#: src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr "Fjarlægð: %1 ly"
 
-#: src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/StarWrapper.cpp:238
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Litrófsflokkur: %1"
 
-#: src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Hliðrun: %1\""
 
-#: src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/StarWrapper.cpp:244
 #, qt-format
 msgid "Period: %1 days"
 msgstr "Umferðartími: %1 dagar"
 
-#: src/core/modules/StarWrapper.cpp:247
+#: src/core/modules/StarWrapper.cpp:253
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:249
+#: src/core/modules/StarWrapper.cpp:255
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:256
+#: src/core/modules/StarWrapper.cpp:262
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Tímalengd myrkva: %1%"
 
-#: src/core/modules/StarWrapper.cpp:258
+#: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Ristími: %1%"
@@ -1104,21 +1104,21 @@ msgstr "Gilt svið til notkunar: milli áranna %1 og %2."
 msgid "Maximum FOV: "
 msgstr "Mesta sjónsvið (FOV): "
 
-#: src/core/StelProjectorClasses.cpp:25
+#: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
 msgstr "Fjarvídd"
 
-#: src/core/StelProjectorClasses.cpp:30
+#: src/core/StelProjectorClasses.cpp:32
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr "Í fjarvíddarvörpun er sjóndeildarhringurinn beinn."
 
-#: src/core/StelProjectorClasses.cpp:63
+#: src/core/StelProjectorClasses.cpp:86
 msgid "Equal Area"
 msgstr "Flatarrétt"
 
-#: src/core/StelProjectorClasses.cpp:68
+#: src/core/StelProjectorClasses.cpp:91
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
@@ -1126,11 +1126,11 @@ msgstr ""
 "Fullt nafn á þessari vörpun er, <i>Lambert azimuthal flatarrétt vörpun</i>. "
 "Hún varðveitir svæði en ekki horn."
 
-#: src/core/StelProjectorClasses.cpp:108
+#: src/core/StelProjectorClasses.cpp:141
 msgid "Stereographic"
 msgstr "Himinflött"
 
-#: src/core/StelProjectorClasses.cpp:113
+#: src/core/StelProjectorClasses.cpp:146
 msgid ""
 "Stereographic projection is known since the antiquity and was originally "
 "known as the planisphere projection. It preserves the angles at which curves "
@@ -1139,11 +1139,11 @@ msgstr ""
 "Himinflött vörpun varðveitir hornin þar sem bogalínur skerast en varðveitir "
 "ekki svæði."
 
-#: src/core/StelProjectorClasses.cpp:145
+#: src/core/StelProjectorClasses.cpp:195
 msgid "Fish-eye"
 msgstr "Kýrauga"
 
-#: src/core/StelProjectorClasses.cpp:150
+#: src/core/StelProjectorClasses.cpp:200
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
 "lines become curves when they appear a large angular distance from the "
@@ -1154,11 +1154,11 @@ msgstr ""
 "langt frá miðju sjónsviðsins (líkt og bjögunin sem sést í víðum gleiðlinsum "
 "í myndavélum)."
 
-#: src/core/StelProjectorClasses.cpp:182
+#: src/core/StelProjectorClasses.cpp:255
 msgid "Hammer-Aitoff"
 msgstr "Hammer-Aitoff"
 
-#: src/core/StelProjectorClasses.cpp:187
+#: src/core/StelProjectorClasses.cpp:260
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
@@ -1166,21 +1166,21 @@ msgstr ""
 "Hammer vörpunin er flatarmálsleiðrétt (equal-area) kortavörpun, lýst af "
 "Ernst Hammer árið 1892 og er byggð á Aitoff vörpuninni."
 
-#: src/core/StelProjectorClasses.cpp:223
+#: src/core/StelProjectorClasses.cpp:309
 msgid "Cylinder"
 msgstr "Sívalningur"
 
-#: src/core/StelProjectorClasses.cpp:228
+#: src/core/StelProjectorClasses.cpp:314
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr "Í þessari vörpun er jafnt bil á milli allra samsíða lína."
 
-#: src/core/StelProjectorClasses.cpp:270
+#: src/core/StelProjectorClasses.cpp:356
 msgid "Mercator"
 msgstr "Mercator"
 
-#: src/core/StelProjectorClasses.cpp:275
+#: src/core/StelProjectorClasses.cpp:361
 msgid ""
 "The mercator projection is one of the most used world map projection. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
@@ -1189,11 +1189,11 @@ msgstr ""
 "Mercator vörpun er mikið notuð á heimskortum. Hún varðveitir áttir og lögun "
 "en bjagar stærðir og vex bjögunin eftir því sem lengra er farið frá miðbaug."
 
-#: src/core/StelProjectorClasses.cpp:322
+#: src/core/StelProjectorClasses.cpp:408
 msgid "Orthographic"
 msgstr "Hornrétt"
 
-#: src/core/StelProjectorClasses.cpp:327
+#: src/core/StelProjectorClasses.cpp:413
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -1201,39 +1201,39 @@ msgstr ""
 "Hornrétt vörðun er skyld fjarvíddarvörpun en viðmiðunarpunkturinn er í "
 "óendanlegri fjarlægð."
 
-#: src/core/StelObject.cpp:113
+#: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "þann"
 
-#: src/core/StelObject.cpp:125 src/core/StelObject.cpp:127
-#: src/core/StelObject.cpp:135 src/core/StelObject.cpp:137
+#: src/core/StelObject.cpp:119 src/core/StelObject.cpp:121
+#: src/core/StelObject.cpp:129 src/core/StelObject.cpp:131
 msgid "RA/Dec"
 msgstr "Stj.ln/Stj.br"
 
-#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
-#: src/core/StelObject.cpp:169 src/core/StelObject.cpp:172
+#: src/core/StelObject.cpp:150 src/core/StelObject.cpp:153
+#: src/core/StelObject.cpp:163 src/core/StelObject.cpp:166
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Tímahorn/Stjörnubreidd: %1/%2"
 
-#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
-#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
+#: src/core/StelObject.cpp:150 src/core/StelObject.cpp:153
+#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:187
 msgid "(apparent)"
 msgstr "(á himninum)"
 
-#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
-#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
+#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:187
+#: src/core/StelObject.cpp:192 src/core/StelObject.cpp:194
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Áttarhorn/Stjörnuhæð: %1/%2"
 
-#: src/core/StelObject.cpp:212 src/core/StelObject.cpp:214
-#: src/core/StelObject.cpp:220 src/core/StelObject.cpp:222
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
+#: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 msgid "Ecliptic longitude/latitude"
 msgstr "Sólbaugslengd/breidd"
 
-#: src/core/StelObject.cpp:230 src/core/StelObject.cpp:232
+#: src/core/StelObject.cpp:224 src/core/StelObject.cpp:226
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Vetrarbaugslengd/breidd: %1/%2"
@@ -4606,7 +4606,7 @@ msgstr "Allt tiltækt"
 msgid "Display no information"
 msgstr "Ekki sýna neinar upplýsingar"
 
-#: src/ui_configurationDialog.h:1046 plugins/Oculars/src/Oculars.cpp:1972
+#: src/ui_configurationDialog.h:1046 plugins/Oculars/src/Oculars.cpp:1980
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Engar"
@@ -5353,222 +5353,222 @@ msgstr "Birtir áttavitastrik á sjóndeildarhringnum"
 msgid "Compass marks"
 msgstr "Áttavitastrik"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1303
+#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1305
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Oculars"
 msgstr "Augngler"
 
-#: plugins/Oculars/src/Oculars.cpp:83
+#: plugins/Oculars/src/Oculars.cpp:84
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:842
+#: plugins/Oculars/src/Oculars.cpp:844
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:936
+#: plugins/Oculars/src/Oculars.cpp:938
 msgid "&Previous ocular"
 msgstr "&Fyrra augngler"
 
-#: plugins/Oculars/src/Oculars.cpp:937
+#: plugins/Oculars/src/Oculars.cpp:939
 msgid "&Next ocular"
 msgstr "&Næsta augngler"
 
-#: plugins/Oculars/src/Oculars.cpp:938
+#: plugins/Oculars/src/Oculars.cpp:940
 msgid "Select &ocular"
 msgstr "&Velja augngler"
 
-#: plugins/Oculars/src/Oculars.cpp:979
+#: plugins/Oculars/src/Oculars.cpp:981
 msgid "Toggle &crosshair"
 msgstr "Víxla krossmiði af/á"
 
-#: plugins/Oculars/src/Oculars.cpp:987
+#: plugins/Oculars/src/Oculars.cpp:989
 msgid "Configure &Oculars"
 msgstr "Stilla &Oculars"
 
-#: plugins/Oculars/src/Oculars.cpp:995
+#: plugins/Oculars/src/Oculars.cpp:997
 msgid "Toggle &CCD"
 msgstr "Víxla &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1002
+#: plugins/Oculars/src/Oculars.cpp:1004
 msgid "Toggle &Telrad"
 msgstr "Víxla &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1010
+#: plugins/Oculars/src/Oculars.cpp:1012
 msgid "&Previous CCD"
 msgstr "&Fyrri CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1011
+#: plugins/Oculars/src/Oculars.cpp:1013
 msgid "&Next CCD"
 msgstr "&Næsta CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1012
+#: plugins/Oculars/src/Oculars.cpp:1014
 msgid "&Select CCD"
 msgstr "&Velja CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1029
+#: plugins/Oculars/src/Oculars.cpp:1031
 msgid "&Rotate CCD"
 msgstr "&Snúa CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1051
+#: plugins/Oculars/src/Oculars.cpp:1053
 msgid "&Reset rotation"
 msgstr "&Núllstilla snúning"
 
-#: plugins/Oculars/src/Oculars.cpp:1304
+#: plugins/Oculars/src/Oculars.cpp:1306
 #: plugins/Oculars/src/ui_ocularDialog.h:1071
 msgid "Ocular view"
 msgstr "Augnglersskoðun"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Oculars popup menu"
 msgstr "Valmynd fyrir augngler"
 
-#: plugins/Oculars/src/Oculars.cpp:1322
+#: plugins/Oculars/src/Oculars.cpp:1324
 msgid "Show crosshairs"
 msgstr "Sýna krossmið"
 
-#: plugins/Oculars/src/Oculars.cpp:1323
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Image sensor frame"
 msgstr "Rammi myndflögu"
 
-#: plugins/Oculars/src/Oculars.cpp:1324
+#: plugins/Oculars/src/Oculars.cpp:1326
 msgid "Telrad sight"
 msgstr "Telrad mið"
 
-#: plugins/Oculars/src/Oculars.cpp:1325
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Oculars plugin configuration"
 msgstr "Stillingar Oculars viðbótar"
 
-#: plugins/Oculars/src/Oculars.cpp:1327
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1329
+#: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1331
+#: plugins/Oculars/src/Oculars.cpp:1333
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1333
+#: plugins/Oculars/src/Oculars.cpp:1335
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1460
+#: plugins/Oculars/src/Oculars.cpp:1462
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "Stj.ln/Stj.br (J2000.0) af krossi"
 
-#: plugins/Oculars/src/Oculars.cpp:1598
+#: plugins/Oculars/src/Oculars.cpp:1600
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Augngler #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1603
+#: plugins/Oculars/src/Oculars.cpp:1605
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Augngler #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1617
+#: plugins/Oculars/src/Oculars.cpp:1619
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Augnglers FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/Oculars.cpp:1626
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Augnglers aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1636
+#: plugins/Oculars/src/Oculars.cpp:1638
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Linsa #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Linsa #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1645
+#: plugins/Oculars/src/Oculars.cpp:1647
 msgid "Lens: none"
 msgstr "Linsa: engin"
 
-#: plugins/Oculars/src/Oculars.cpp:1657 plugins/Oculars/src/Oculars.cpp:1720
+#: plugins/Oculars/src/Oculars.cpp:1659 plugins/Oculars/src/Oculars.cpp:1722
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Sjónauki #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1662 plugins/Oculars/src/Oculars.cpp:1725
+#: plugins/Oculars/src/Oculars.cpp:1664 plugins/Oculars/src/Oculars.cpp:1727
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Sjónauki #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1673
+#: plugins/Oculars/src/Oculars.cpp:1675
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Stækkun: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1681
+#: plugins/Oculars/src/Oculars.cpp:1683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1698
+#: plugins/Oculars/src/Oculars.cpp:1700
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Málsetning: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1702
+#: plugins/Oculars/src/Oculars.cpp:1704
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Myndflaga #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1706
+#: plugins/Oculars/src/Oculars.cpp:1708
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Myndflaga #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1968
+#: plugins/Oculars/src/Oculars.cpp:1976
 msgid "&Lens"
 msgstr "&Linsa"
 
-#: plugins/Oculars/src/Oculars.cpp:1969
+#: plugins/Oculars/src/Oculars.cpp:1977
 msgid "&Previous lens"
 msgstr "&Fyrri linsa"
 
-#: plugins/Oculars/src/Oculars.cpp:1970
+#: plugins/Oculars/src/Oculars.cpp:1978
 msgid "&Next lens"
 msgstr "&Næsta linsa"
 
-#: plugins/Oculars/src/Oculars.cpp:2000
+#: plugins/Oculars/src/Oculars.cpp:2008
 msgid "&Telescope"
 msgstr "&Sjónauki"
 
-#: plugins/Oculars/src/Oculars.cpp:2001
+#: plugins/Oculars/src/Oculars.cpp:2009
 msgid "&Previous telescope"
 msgstr "&Fyrri sjónauki"
 
-#: plugins/Oculars/src/Oculars.cpp:2002
+#: plugins/Oculars/src/Oculars.cpp:2010
 msgid "&Next telescope"
 msgstr "&Næsti sjónauki"
 

@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-05-24 19:51+0600\n"
+"POT-Creation-Date: 2015-06-13 00:45+0600\n"
 "PO-Revision-Date: 2014-10-06 12:59+0000\n"
 "Last-Translator: Sameer Aryal <sameer_aryal52@yahoo.com>\n"
 "Language-Team: Nepali <ne@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-25 05:22+0000\n"
-"X-Generator: Launchpad (build 17514)\n"
+"X-Launchpad-Export-Date: 2015-06-13 05:21+0000\n"
+"X-Generator: Launchpad (build 17557)\n"
 "Language: ne\n"
 
-#: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:353
+#: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
 #: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
@@ -47,13 +47,13 @@ msgstr "तारामण्डल नामपत्र"
 msgid "Constellation boundaries"
 msgstr "तारामण्डल सीमा"
 
-#: src/core/modules/StarMgr.cpp:354 src/ui_viewDialog.h:1245
+#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1245
 #: src/ui_viewDialog.h:1277 src/ui_viewDialog.h:1303
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "ताराहरू"
 
-#: src/core/modules/StarMgr.cpp:355
+#: src/core/modules/StarMgr.cpp:377
 msgid "Stars labels"
 msgstr "ताराहरुकाे नामपत्र"
 
@@ -176,7 +176,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
-#: src/core/modules/StarWrapper.cpp:178 src/core/modules/StarWrapper.cpp:181
+#: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:269
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -191,7 +191,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
-#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:188
+#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
@@ -200,7 +200,7 @@ msgstr "उज्यालाेपनाः <b>%1</b>  (extincted to: <b>%2</b>
 
 #: src/core/modules/Nebula.cpp:150 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:191
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
@@ -377,7 +377,7 @@ msgstr "भित्रि अकाशिय वस्तुहरु"
 
 #: src/core/modules/Planet.cpp:223 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
-#: src/core/modules/StarWrapper.cpp:195 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:201 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "निरपेक्ष उज्यालाेपना: %1"
@@ -524,100 +524,100 @@ msgid "Planet trails"
 msgstr "ग्रहकाे निशान"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:171
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:177
 #: src/translations.h:42
 msgid "star"
 msgstr "तारा"
 
-#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:199
+#: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:205
 #: plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "रंग सूची (B-V): <b>%1</b>"
 
-#: src/core/modules/StarWrapper.cpp:152
+#: src/core/modules/StarWrapper.cpp:158
 msgid "eruptive variable star"
 msgstr "ज्वालामुखी चर तारा"
 
-#: src/core/modules/StarWrapper.cpp:154
+#: src/core/modules/StarWrapper.cpp:160
 msgid "pulsating variable star"
 msgstr "पल्सेटिङ चर तारा"
 
-#: src/core/modules/StarWrapper.cpp:156
+#: src/core/modules/StarWrapper.cpp:162
 msgid "rotating variable star"
 msgstr "फन्किने चर तारा"
 
-#: src/core/modules/StarWrapper.cpp:158
+#: src/core/modules/StarWrapper.cpp:164
 msgid "cataclysmic variable star"
 msgstr "विपत्तिजनक चर तारा"
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:167
 msgid "eclipsing binary system"
 msgstr "ग्रहणीय चर तारा"
 
-#: src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:171
 msgid "variable star"
 msgstr "चर तारा"
 
-#: src/core/modules/StarWrapper.cpp:169
+#: src/core/modules/StarWrapper.cpp:175
 msgid "double star"
 msgstr "जुम्ल्याहा तारा"
 
-#: src/core/modules/StarWrapper.cpp:176
+#: src/core/modules/StarWrapper.cpp:182
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "प्रकार: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:215
+#: src/core/modules/StarWrapper.cpp:221
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "परिमाण सिमा: <b>%1</b>%2<b>%3</b> (फोटोमेट्रिक प्रणाली: %4)"
 
-#: src/core/modules/StarWrapper.cpp:217
+#: src/core/modules/StarWrapper.cpp:223
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "परिमाण सिमा: <b>%1</b>%2<b>%3/%4</b> (फोटोमेट्रिक प्रणाली: %5)"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/StarWrapper.cpp:226
+#: src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr "दुरी: %1 प्रकाशवर्ष"
 
-#: src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/StarWrapper.cpp:238
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "स्पेक्ट्रा प्रकार: %1"
 
-#: src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "प्याराल्याक्स: %1\""
 
-#: src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/StarWrapper.cpp:244
 #, qt-format
 msgid "Period: %1 days"
 msgstr "अवधि: %1 दिन"
 
-#: src/core/modules/StarWrapper.cpp:247
+#: src/core/modules/StarWrapper.cpp:253
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "अर्को न्यूनतम प्रकाश: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:249
+#: src/core/modules/StarWrapper.cpp:255
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "अर्को अधिकतम ज्योति: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:256
+#: src/core/modules/StarWrapper.cpp:262
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "ग्रहणको अवधि: %1%"
 
-#: src/core/modules/StarWrapper.cpp:258
+#: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "उदाउने समय: %1%"
@@ -1079,11 +1079,11 @@ msgstr "उपयोगको मान्य सीमा: वर्ष बि�
 msgid "Maximum FOV: "
 msgstr "अधिकतम FOV "
 
-#: src/core/StelProjectorClasses.cpp:25
+#: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
 msgstr "परिप्रेक्ष्य"
 
-#: src/core/StelProjectorClasses.cpp:30
+#: src/core/StelProjectorClasses.cpp:32
 msgid ""
 "Perspective projection keeps the horizon a straight line. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
@@ -1091,11 +1091,11 @@ msgstr ""
 "परिप्रेक्ष्य प्रक्षेपणले क्षितिजलार्इ सिधा रेखामा राख्दछ । यसकाे गणितिय नाम "
 "चाँहि  <i>gnomonic projection</i> हाे ।"
 
-#: src/core/StelProjectorClasses.cpp:63
+#: src/core/StelProjectorClasses.cpp:86
 msgid "Equal Area"
 msgstr "समान क्षेत्र"
 
-#: src/core/StelProjectorClasses.cpp:68
+#: src/core/StelProjectorClasses.cpp:91
 msgid ""
 "The full name of this projection method is, <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
@@ -1103,11 +1103,11 @@ msgstr ""
 "याे प्रक्षेपणकाे पुरा नाम, <i>Lambert azimuthal equal-area projection</i> "
 "हाे । यसले क्षेत्रलार्इ संरक्षण गरे पनि काेणलार्इ भने गर्दैन ।"
 
-#: src/core/StelProjectorClasses.cpp:108
+#: src/core/StelProjectorClasses.cpp:141
 msgid "Stereographic"
 msgstr "स्टेरोग्राफिक"
 
-#: src/core/StelProjectorClasses.cpp:113
+#: src/core/StelProjectorClasses.cpp:146
 msgid ""
 "Stereographic projection is known since the antiquity and was originally "
 "known as the planisphere projection. It preserves the angles at which curves "
@@ -1118,11 +1118,11 @@ msgstr ""
 "गाेलाकाे कुनै भागले  \r\n"
 "समतललार्इ गरेकाे हाे र यसकाे प्राचिन  मान्यता पनि छ ।"
 
-#: src/core/StelProjectorClasses.cpp:145
+#: src/core/StelProjectorClasses.cpp:195
 msgid "Fish-eye"
 msgstr "माछीआँखे"
 
-#: src/core/StelProjectorClasses.cpp:150
+#: src/core/StelProjectorClasses.cpp:200
 msgid ""
 "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight "
 "lines become curves when they appear a large angular distance from the "
@@ -1133,11 +1133,11 @@ msgstr ""
 "रेखाहरू वाङ्रगाे हुन्छन् जब तिनिहरू ठुलाे काेणिय दुरि वसेकाे स्थानकाे बिच "
 "वाट हेरिन्छन् ।"
 
-#: src/core/StelProjectorClasses.cpp:182
+#: src/core/StelProjectorClasses.cpp:255
 msgid "Hammer-Aitoff"
 msgstr "ह्याम्मर-एइटाेफ"
 
-#: src/core/StelProjectorClasses.cpp:187
+#: src/core/StelProjectorClasses.cpp:260
 msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
@@ -1145,11 +1145,11 @@ msgstr ""
 "ह्याम्मर-एइटाेफ प्रक्षेपण समान क्षेत्र प्रक्षेपण हाे , अर्नेस्ट ह्याम्मरले "
 "1892 मा वयान गरेका र एइटाेफ प्रक्षेपणवाट प्रत्यक्ष प्रेरित हाे ।"
 
-#: src/core/StelProjectorClasses.cpp:223
+#: src/core/StelProjectorClasses.cpp:309
 msgid "Cylinder"
 msgstr "बेलना"
 
-#: src/core/StelProjectorClasses.cpp:228
+#: src/core/StelProjectorClasses.cpp:314
 msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
@@ -1157,11 +1157,11 @@ msgstr ""
 "याे प्रक्षेपणकाे पुरा नाम  <i>cylindrical equidistant projection</i> हाे ।यस "
 "प्रक्षेपणवाट सबै समानता समान रूपले विभाजित छन् ।"
 
-#: src/core/StelProjectorClasses.cpp:270
+#: src/core/StelProjectorClasses.cpp:356
 msgid "Mercator"
 msgstr "मर्केटर"
 
-#: src/core/StelProjectorClasses.cpp:275
+#: src/core/StelProjectorClasses.cpp:361
 msgid ""
 "The mercator projection is one of the most used world map projection. It "
 "preserves direction and shapes but distorts size, in an increasing degree "
@@ -1171,11 +1171,11 @@ msgstr ""
 "अाकारलार्इ संरक्षण गरे पनि परिमाण विकृत गर्दछ , भूमध्यरेखावाट काेण वढ्दाे "
 "क्रममा जान्छ ।"
 
-#: src/core/StelProjectorClasses.cpp:322
+#: src/core/StelProjectorClasses.cpp:408
 msgid "Orthographic"
 msgstr "अर्थोग्राफिक"
 
-#: src/core/StelProjectorClasses.cpp:327
+#: src/core/StelProjectorClasses.cpp:413
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
@@ -1183,39 +1183,39 @@ msgstr ""
 "अर्थोग्राफिक प्रक्षेपण परिप्रेक्ष्य प्रक्षेपण सँग सम्बन्धित छ । तर "
 "परिप्रेक्ष्य बिंदु भने असिमित दुरिमा केन्द्रित हुन्छ ।"
 
-#: src/core/StelObject.cpp:113
+#: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr ""
 
-#: src/core/StelObject.cpp:125 src/core/StelObject.cpp:127
-#: src/core/StelObject.cpp:135 src/core/StelObject.cpp:137
+#: src/core/StelObject.cpp:119 src/core/StelObject.cpp:121
+#: src/core/StelObject.cpp:129 src/core/StelObject.cpp:131
 msgid "RA/Dec"
 msgstr ""
 
-#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
-#: src/core/StelObject.cpp:169 src/core/StelObject.cpp:172
+#: src/core/StelObject.cpp:150 src/core/StelObject.cpp:153
+#: src/core/StelObject.cpp:163 src/core/StelObject.cpp:166
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "घण्टाकोण / डे:%1 /%2"
 
-#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
-#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
+#: src/core/StelObject.cpp:150 src/core/StelObject.cpp:153
+#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:187
 msgid "(apparent)"
 msgstr "(प्रत्यक्ष)"
 
-#: src/core/StelObject.cpp:191 src/core/StelObject.cpp:193
-#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
+#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:187
+#: src/core/StelObject.cpp:192 src/core/StelObject.cpp:194
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "दिगंश/उँचाइ: %1/%2"
 
-#: src/core/StelObject.cpp:212 src/core/StelObject.cpp:214
-#: src/core/StelObject.cpp:220 src/core/StelObject.cpp:222
+#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
+#: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 msgid "Ecliptic longitude/latitude"
 msgstr "क्रांतिमण्डल देशान्तर / अक्षांश"
 
-#: src/core/StelObject.cpp:230 src/core/StelObject.cpp:232
+#: src/core/StelObject.cpp:224 src/core/StelObject.cpp:226
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "तारापुञ्जिय देशान्तर / अक्षांश: %1/%2"
@@ -4557,7 +4557,7 @@ msgstr "सबै उपलब्ध"
 msgid "Display no information"
 msgstr "कुनै जानकारी प्रदर्शन नगर्ने"
 
-#: src/ui_configurationDialog.h:1046 plugins/Oculars/src/Oculars.cpp:1972
+#: src/ui_configurationDialog.h:1046 plugins/Oculars/src/Oculars.cpp:1980
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "कुनै पनि होइन"
@@ -5297,222 +5297,222 @@ msgstr "क्षितिजको साथ कम्पास वहन न�
 msgid "Compass marks"
 msgstr "कम्पास मार्क्स"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1303
+#: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1305
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Oculars"
 msgstr "ओकुलर्स्"
 
-#: plugins/Oculars/src/Oculars.cpp:83
+#: plugins/Oculars/src/Oculars.cpp:84
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:842
+#: plugins/Oculars/src/Oculars.cpp:844
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:936
+#: plugins/Oculars/src/Oculars.cpp:938
 msgid "&Previous ocular"
 msgstr "र अघिल्लो ओकुलर्स्"
 
-#: plugins/Oculars/src/Oculars.cpp:937
+#: plugins/Oculars/src/Oculars.cpp:939
 msgid "&Next ocular"
 msgstr "र अर्को ओकुलर्स्"
 
-#: plugins/Oculars/src/Oculars.cpp:938
+#: plugins/Oculars/src/Oculars.cpp:940
 msgid "Select &ocular"
 msgstr "चयन र ओकुलर्स्"
 
-#: plugins/Oculars/src/Oculars.cpp:979
+#: plugins/Oculars/src/Oculars.cpp:981
 msgid "Toggle &crosshair"
 msgstr "टगल र क्रसहेयर"
 
-#: plugins/Oculars/src/Oculars.cpp:987
+#: plugins/Oculars/src/Oculars.cpp:989
 msgid "Configure &Oculars"
 msgstr "कन्फिगर र ओकुलर्स्"
 
-#: plugins/Oculars/src/Oculars.cpp:995
+#: plugins/Oculars/src/Oculars.cpp:997
 msgid "Toggle &CCD"
 msgstr "टगल र सीसीडी"
 
-#: plugins/Oculars/src/Oculars.cpp:1002
+#: plugins/Oculars/src/Oculars.cpp:1004
 msgid "Toggle &Telrad"
 msgstr "Toggle &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1010
+#: plugins/Oculars/src/Oculars.cpp:1012
 msgid "&Previous CCD"
 msgstr "र अघिल्लो सीसीडी"
 
-#: plugins/Oculars/src/Oculars.cpp:1011
+#: plugins/Oculars/src/Oculars.cpp:1013
 msgid "&Next CCD"
 msgstr "र अर्को सीसीडी"
 
-#: plugins/Oculars/src/Oculars.cpp:1012
+#: plugins/Oculars/src/Oculars.cpp:1014
 msgid "&Select CCD"
 msgstr "र सीसीडी चयन गर्नुहाेस्"
 
-#: plugins/Oculars/src/Oculars.cpp:1029
+#: plugins/Oculars/src/Oculars.cpp:1031
 msgid "&Rotate CCD"
 msgstr "र सीसीडी  घुमाउनुहोस्"
 
-#: plugins/Oculars/src/Oculars.cpp:1051
+#: plugins/Oculars/src/Oculars.cpp:1053
 msgid "&Reset rotation"
 msgstr "र रोटेशन रिसेट गर्नुहाेस्"
 
-#: plugins/Oculars/src/Oculars.cpp:1304
+#: plugins/Oculars/src/Oculars.cpp:1306
 #: plugins/Oculars/src/ui_ocularDialog.h:1071
 msgid "Ocular view"
 msgstr "ओकुलर्स् दृश्य"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Oculars popup menu"
 msgstr "ओकुलर्स् पपअप मेनु"
 
-#: plugins/Oculars/src/Oculars.cpp:1322
+#: plugins/Oculars/src/Oculars.cpp:1324
 msgid "Show crosshairs"
 msgstr "क्रसहेयर देखाउनुहोस्"
 
-#: plugins/Oculars/src/Oculars.cpp:1323
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Image sensor frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1324
+#: plugins/Oculars/src/Oculars.cpp:1326
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1325
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1327
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1329
+#: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1331
+#: plugins/Oculars/src/Oculars.cpp:1333
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1333
+#: plugins/Oculars/src/Oculars.cpp:1335
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1460
+#: plugins/Oculars/src/Oculars.cpp:1462
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1598
+#: plugins/Oculars/src/Oculars.cpp:1600
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1603
+#: plugins/Oculars/src/Oculars.cpp:1605
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1617
+#: plugins/Oculars/src/Oculars.cpp:1619
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/Oculars.cpp:1626
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1636
+#: plugins/Oculars/src/Oculars.cpp:1638
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1645
+#: plugins/Oculars/src/Oculars.cpp:1647
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1657 plugins/Oculars/src/Oculars.cpp:1720
+#: plugins/Oculars/src/Oculars.cpp:1659 plugins/Oculars/src/Oculars.cpp:1722
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1662 plugins/Oculars/src/Oculars.cpp:1725
+#: plugins/Oculars/src/Oculars.cpp:1664 plugins/Oculars/src/Oculars.cpp:1727
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1673
+#: plugins/Oculars/src/Oculars.cpp:1675
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1681
+#: plugins/Oculars/src/Oculars.cpp:1683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1698
+#: plugins/Oculars/src/Oculars.cpp:1700
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1702
+#: plugins/Oculars/src/Oculars.cpp:1704
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1706
+#: plugins/Oculars/src/Oculars.cpp:1708
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1968
+#: plugins/Oculars/src/Oculars.cpp:1976
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1969
+#: plugins/Oculars/src/Oculars.cpp:1977
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1970
+#: plugins/Oculars/src/Oculars.cpp:1978
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2000
+#: plugins/Oculars/src/Oculars.cpp:2008
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2001
+#: plugins/Oculars/src/Oculars.cpp:2009
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2002
+#: plugins/Oculars/src/Oculars.cpp:2010
 msgid "&Next telescope"
 msgstr ""
 
