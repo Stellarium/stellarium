@@ -50,6 +50,10 @@ bool  Nebula::drawHintProportional = false;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
+Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
+Vec3f Nebula::brightNebulaColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
+Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
 
 Nebula::Nebula()
 	: M_nb(0)
@@ -280,37 +284,45 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
-	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 
-	sPainter.setColor(col[0], col[1], col[2], 1);
+	Vec3f color=circleColor;
 	switch (nType)
 	{
 		case NebGx:
 			Nebula::texGalaxy->bind();
+			color=galaxyColor;
 			break;
 		case NebOc:
 			Nebula::texOpenCluster->bind();
+			color=clusterColor;
 			break;
 		case NebGc:
 			Nebula::texGlobularCluster->bind();
+			color=clusterColor;
 			break;
 		case NebN:
 		case NebHII:
 		case NebRn:
 			Nebula::texDiffuseNebula->bind();
+			color=brightNebulaColor;
 			break;
 		case NebPn:
 			Nebula::texPlanetaryNebula->bind();
+			color=brightNebulaColor;
 			break;
 		case NebDn:		
 			Nebula::texDarkNebula->bind();
-			break;		
+			color=darkNebulaColor;
+			break;
 		case NebCn:
 			Nebula::texOpenClusterWithNebulosity->bind();
+			color=clusterColor;
 			break;
 		default:
 			Nebula::texCircle->bind();
 	}
+	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
+	sPainter.setColor(col[0], col[1], col[2], 1);
 
 	if (drawHintProportional)
 	{
