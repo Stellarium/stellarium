@@ -42,11 +42,11 @@
 #ifndef QZIPREADER_H
 #define QZIPREADER_H
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 
-#include <QtCore/qdatetime.h>
-#include <QtCore/qfile.h>
-#include <QtCore/qstring.h>
+#include <QDateTime>
+#include <QFile>
+#include <QString>
 
 // QT_BEGIN_NAMESPACE
 namespace Stel {
