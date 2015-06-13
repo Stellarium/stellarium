@@ -39,7 +39,7 @@
 **
 ****************************************************************************/
 
-#include <qglobal.h>
+#include <QtGlobal>
 
 #ifndef QT_NO_TEXTODFWRITER
 
