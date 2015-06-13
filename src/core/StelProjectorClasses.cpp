@@ -481,6 +481,12 @@ bool StelProjectorSinusoidal::backward(Vec3d &v) const
 	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
 	const double cd = std::cos(v[1]);
 	const double pcd = v[0]/cd;
+	if (v[0]<-M_PI*cd || v[0]>M_PI*cd)
+	{
+		v[0] = -cd;
+		v[1] = 1.0;
+		return false;
+	}
 	v[2] = -cd * std::cos(pcd);
 	v[0] = cd * std::sin(pcd);
 	v[1] = std::sin(v[1]);
