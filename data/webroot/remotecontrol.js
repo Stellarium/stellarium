@@ -1,347 +1,289 @@
- "use strict";
+"use strict";
 
-//update every second
-var updateInterval = 1000;
-var updatePoll = true;
-var connectionLost = false;
+var UISettings = (new function($) {
 
-var timeEditMode = false;
-var timeEditDelay = 500; //the delay in ms after which time edits are sent to server
+    // Automatically poll the server for updates? Otherwise, only updated after commands are sent.
+    this.updatePoll = true;
+    //the interval for automatic polling
+    this.updateInterval = 1000;
+    //use the Browser's requestAnimationFrame for animation instead of setTimeout
+    this.useAnimationFrame = true;
+    //If animation frame is not used, this is the delay between 2 animation steps
+    this.animationDelay = 500;
+    //If no user changes happen after this time, the changes are sent to the Server
+    this.editUpdateDelay = 500;
 
-var animationSupported;
 
-//the last received update data
-var lastData;
-//the time when the last data was received
-var lastDataTime;
-//the time when the time was last synced
-var lastTimeSync;
+}(jQuery));
 
-//stores some jQuery selection results for faster re-use
-var elemCache = {
-}
+//DOM-ready hook, starting the GUI
+$(document).ready(function() {
+    Main.init();
+});
 
-//stores last displayed time to avoid potentially slow jquery update
-var currentDisplayTime = {
-}
+// The main functionality including communication with the server
+var Main = (new function($) {
+    //Private variables
+    var connectionLost = false;
+    var animationSupported;
+    var lastData;
+    var lastDataTime;
 
-//main update function, which is executed each second
-function update(requeue){
-	$.ajax({
-		url: "/api/main/status",
-		dataType: "json",
-		success: function(data){
-			lastData = data;
-			lastDataTime = lastTimeSync = $.now();
+    //controls
+    var $noresponse;
+    var $noresponsetime;
 
-			//update time NOW
-			if(!animationSupported)
-				updateTime();
-            
-            //update deltaT display
-            var deltaTinSec =  data.time.deltaT * (60 * 60 * 24);
-            elemCache.deltat.innerHTML = deltaTinSec.toFixed(2)+"s";
+    function animate() {
 
-			updateTimeButtonState();
+        Time.updateAnimation();
 
-			var textelem = $("#activescript");
-			if(data.script.scriptIsRunning)
-			{
-				textelem.text(data.script.runningScriptId);
-			}
-			else
-			{
-				textelem.text("-none-");
-			}
-			$("#bt_stopscript").prop({	disabled: !data.script.scriptIsRunning	});
-			$("#noresponse").hide();
-			connectionLost = false;
-		},
-		error: function(xhr, status,errorThrown){
-			$("#noresponse").show();
-			connectionLost = true;
-			console.log("Error fetching updates");
-			console.log("Error: " + errorThrown );
-	        console.log("Status: " + status );
-		},
-		complete: function(){
-			if(requeue && updatePoll)
-			{
-				setTimeout(function(){
-					update(true);
-				},updateInterval);
-			}
-		}
-	});
-}
-
-function postCmd(url,data,completeFunc){
-	$.ajax({
-		url: url,
-		method: "POST",
-		data: data,
-		dataType: "text",
-		timeout: 3000,
-		success: function(data){
-			console.log("server replied: " + data);
-			if(data !== "ok")
-			{
-				alert(data);
-			}
-			update();
-		},
-		error: function(xhr,status,errorThrown){
-			console.log("Error posting command " + url);
-			console.log( "Error: " + errorThrown );
-			console.log( "Status: " + status );
-			alert("Could not call server")
-		},
-        complete: completeFunc
-	});
-}
-
-function postAction(actionName) {
-    $.ajax({
-        url: "api/stelaction/do",
-        method: "POST",
-        async: false,
-        dataType: "text",
-        data: {
-            id: actionName
-        },
-        success: function(resp){
-            if(resp === "ok") {
-                //non-checkable action, cant change text
-            }
-            else if(resp === "true") {
-                $("#actionlist").trigger("action:"+actionName,true);
-            }
-            else if (resp === "false") {
-                $("#actionlist").trigger("action:"+actionName,false);
-            }
-            else {
-                alert(resp);
-            }
-        },
-        error: function(xhr,status,errorThrown){
-			console.log("Error posting action " + actionName);
-			console.log( "Error: " + errorThrown );
-			console.log( "Status: " + status );
-			alert("Could not call server")
-		}
-    });
-}
-
-function updateTimeButtonState() {
-	//updates the state of the time buttons
-	//replicates functionality from StelGui.cpp update() function
-    $("#bt_timerewind").toggleClass("active",lastData.time.timerate<-0.99*JD_SECOND);
-    $("#bt_timeforward").toggleClass("active", lastData.time.timerate>1.01*JD_SECOND);
-    $("#bt_timenow").toggleClass("active",lastData.time.isTimeNow);
-    
-	if(lastData.time.timerate===0) {
-		$("#bt_timeplaypause").removeClass("active").addClass("paused");
-	}
-	else if(isRealTimeSpeed())	{
-		$("#bt_timeplaypause").removeClass("paused").addClass("active");
-	}
-	else	{
-		$("#bt_timeplaypause").removeClass("paused").removeClass("active");
-	}
-}
-
-function forceSpinnerUpdate(){
-    elemCache.date_year.spinner("value",currentDisplayTime.date.year);
-    elemCache.date_month.spinner("value",currentDisplayTime.date.month);
-    elemCache.date_day.spinner("value",currentDisplayTime.date.day);
-    
-    elemCache.time_hour.spinner("value",currentDisplayTime.time.hour);
-    elemCache.time_minute.spinner("value",currentDisplayTime.time.minute);
-    elemCache.time_second.spinner("value",currentDisplayTime.time.second);
-    
-    elemCache.input_jd.spinner("value",currentDisplayTime.jd);
-    elemCache.input_mjd.spinner("value",currentDisplayTime.jd-2400000.5);
-}
-
-function updateTime()
-{
-	if(lastData && !timeEditMode)
-	{
-        var currentJday = getCurrentTime();
-        var correctedTime = currentJday - lastData.time.deltaT;
-        
-        //what we have to animate depends on which tab is shown
-        if(elemCache.timewidget.tabs('option', 'active') === 0) {
-            //apply timezone
-            var localTime = correctedTime + lastData.time.gmtShift;
-            
-            //this seems to work MUCH smoother in animation than using jquery for that
-            var date = jdayToDate(localTime);
-            if(currentDisplayTime.date.year !== date.year) {
-                elemCache.date_year.spinner("value",date.year);
-            }
-            if(currentDisplayTime.date.month !== date.month) {
-                elemCache.date_month.spinner("value",date.month);
-            }
-            if(currentDisplayTime.date.day !== date.day) {
-                elemCache.date_day.spinner("value",date.day);
-            }
-            currentDisplayTime.date = date;
-            
-            var time = jdayToTime(localTime);
-            if(currentDisplayTime.time.hour !== time.hour) {
-                elemCache.time_hour.spinner("value",time.hour);
-            }
-            if(currentDisplayTime.time.minute !== time.minute) {
-                elemCache.time_minute.spinner("value",time.minute);
-            }
-            if(currentDisplayTime.time.second !== time.second) {
-                elemCache.time_second.spinner("value",time.second);
-            }
-            currentDisplayTime.time = time;
+        if (connectionLost) {
+            var elapsed = ($.now() - lastDataTime) / 1000;
+            var text = Math.floor(elapsed).toString();
+            $noresponsetime.html(text);
         }
-        else {
-            var jd = correctedTime.toFixed(5);
-            
-            if(currentDisplayTime.jd.toFixed(5) !== jd) {
-                if(!elemCache.input_jd.is(":focus"))
-                    elemCache.input_jd.spinner("value", correctedTime);
-                //MJD directly depends on JD
-                var mjd = (correctedTime-2400000.5);
-                if(!elemCache.input_mjd.is(":focus"))
-                    elemCache.input_mjd.spinner("value",mjd);
-            }
-            currentDisplayTime.jd = correctedTime;
+
+        if (UISettings.useAnimationFrame && animationSupported) {
+            window.requestAnimationFrame(animate);
+        } else {
+            setTimeout(animate, UISettings.animationDelay);
         }
-	}
-	if(connectionLost)
-	{
-		var elapsed = ($.now() - lastDataTime) / 1000;
-		var text = Math.floor(elapsed).toString();
-        elemCache.noresponsetime.innerHTML = text;
-	}
-}
+    }
 
-function fillScriptList(){
-	$.ajax({
-		url: "/api/scripts/list",
-		success: function(data){
-			var list = $("#scriptlist");
-			list.empty();
+    //main update function, which is executed each second
+    function update(requeue) {
+        $.ajax({
+            url: "/api/main/status",
+            dataType: "json",
+            success: function(data) {
+                //data is stored here mainly for debugging
+                lastData = data;
+                lastDataTime = $.now();
 
-			//sort it and insert
-			$.each(data.sort(), function(idx,elem) {
-				$("<option/>").text(elem).appendTo(list);
-			});
-		},
-		error: function(xhr,status,errorThrown){
-			console.log("Error updating script list");
-			console.log( "Error: " + errorThrown );
-	        console.log( "Status: " + status );
-			alert("Could not retrieve script list")
-		}
-	});
-}
+                //update modules with data
+                Time.updateFromServer(data.time);
+                Scripts.updateFromServer(data.script);
 
-function fillActionList(){
-	$.ajax({
-		url: "/api/stelaction/list",
-		success: function(data){
-			var list = $("#actionlist");
-			list.empty();
+                $noresponse.hide();
+                connectionLost = false;
+            },
+            error: function(xhr, status, errorThrown) {
+                $noresponse.show();
+                connectionLost = true;
+                console.log("Error fetching updates");
+                console.log("Error: " + errorThrown);
+                console.log("Status: " + status);
+            },
+            complete: function() {
+                if (requeue && UISettings.updatePoll) {
+                    setTimeout(function() {
+                        update(true);
+                    }, UISettings.updateInterval);
+                }
+            }
+        });
+    }
 
-			$.each(data, function(key,val) {
-                //the key is an optgroup
-                var group = $("<optgroup/>").attr("label", key);
-                //the val is an array of StelAction objects
-                $.each(val, function(idx,v2) {
-                    var option = $("<option/>");
-                    option.data(v2); //store the data
-                    if(v2.isCheckable) {
-                        option.addClass("checkableaction");
-                        option.text(v2.text + " (" + v2.isChecked + ")");
-                        
-                        list.on("action:"+v2.id,{elem: option},function(event,newValue){
-                            var el = event.data.elem;
-                            el.data("isChecked",newValue);
-                            el.text(el.data("text") + " (" + newValue + ")");
+    //Public stuff
+    return {
+        init: function() {
+
+            Actions.init();
+            Scripts.init();
+            Time.init();
+
+            animationSupported = (window.requestAnimationFrame !== undefined);
+
+            if (!animationSupported) {
+                console.log("animation frame not supported")
+            } else {
+                console.log("animation frame supported")
+            }
+            //kick off animation
+            animate();
+
+            //find some controls
+            $noresponse = $("#noresponse");
+            $noresponsetime = $("#noresponsetime");
+
+            //start the update loop
+            update(true);
+        },
+
+        //POST a command to the server
+        postCmd: function(url, data, completeFunc) {
+            $.ajax({
+                url: url,
+                method: "POST",
+                data: data,
+                dataType: "text",
+                timeout: 3000,
+                success: function(data) {
+                    console.log("server replied: " + data);
+                    if (data !== "ok") {
+                        alert(data);
+                    }
+                    update();
+                },
+                error: function(xhr, status, errorThrown) {
+                    console.log("Error posting command " + url);
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    alert("Could not call server")
+                },
+                complete: completeFunc
+            });
+        },
+
+        forceUpdate: function() {
+            update();
+        }
+    }
+
+
+}(jQuery));
+
+var Actions = (new function($) {
+    //Private variables
+    var $actionlist;
+
+    //Public stuff
+    return {
+        init: function() {
+
+            $actionlist = $("#actionlist");
+
+            $actionlist.change(function() {
+                $("#bt_doaction").prop("disabled", false);
+            });
+
+            //fill the action list
+            $.ajax({
+                url: "/api/stelaction/list",
+                success: function(data) {
+                    $actionlist.empty();
+
+                    $.each(data, function(key, val) {
+                        //the key is an optgroup
+                        var group = $("<optgroup/>").attr("label", key);
+                        //the val is an array of StelAction objects
+                        $.each(val, function(idx, v2) {
+                            var option = $("<option/>");
+                            option.data(v2); //store the data
+                            if (v2.isCheckable) {
+                                option.addClass("checkableaction");
+                                option.text(v2.text + " (" + v2.isChecked + ")");
+
+                                $actionlist.on("action:" + v2.id, {
+                                    elem: option
+                                }, function(event, newValue) {
+                                    var el = event.data.elem;
+                                    el.data("isChecked", newValue);
+                                    el.text(el.data("text") + " (" + newValue + ")");
+                                });
+                            } else {
+                                option.text(v2.text);
+                            }
+                            option.appendTo(group);
                         });
+                        group.appendTo($actionlist);
+                    });
+                },
+                error: function(xhr, status, errorThrown) {
+                    console.log("Error updating action list");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    alert("Could not retrieve action list")
+                }
+            });
+        },
+
+        //Trigger an StelAction on the Server
+        execute: function(actionName) {
+            $.ajax({
+                url: "/api/stelaction/do",
+                method: "POST",
+                async: false,
+                dataType: "text",
+                data: {
+                    id: actionName
+                },
+                success: function(resp) {
+                    if (resp === "ok") {
+                        //non-checkable action, cant change text
+                    } else if (resp === "true") {
+                        $actionlist.trigger("action:" + actionName, true);
+                    } else if (resp === "false") {
+                        $actionlist.trigger("action:" + actionName, false);
+                    } else {
+                        alert(resp);
                     }
-                    else{
-                        option.text(v2.text);
-                    }
-                    option.appendTo(group);
+                },
+                error: function(xhr, status, errorThrown) {
+                    console.log("Error posting action " + actionName);
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    alert("Could not call server")
+                }
+            });
+        }
+    }
+}(jQuery));
+
+var Scripts = (new function($) {
+    //Private variables
+    var $activescript;
+    var $bt_runscript;
+    var $bt_stopscript;
+    var $scriptlist;
+
+    //Public stuff
+    return {
+        init: function() {
+
+            $scriptlist = $("#scriptlist");
+            $bt_runscript = $("#bt_runscript");
+            $bt_stopscript = $("#bt_stopscript");
+            $activescript = $("#activescript");
+
+            $scriptlist.change(function() {
+                var selection = $scriptlist.children("option").filter(":selected").text();
+
+                $("#bt_runscript").prop({
+                    disabled: false
                 });
-                group.appendTo(list);
-			});
-		},
-		error: function(xhr,status,errorThrown){
-			console.log("Error updating action list");
-			console.log( "Error: " + errorThrown );
-	        console.log( "Status: " + status );
-			alert("Could not retrieve action list")
-		}
-	});
-}
+                console.log("selected: " + selection);
+            });
 
-function animate() {
-	updateTime();
+            //init script list
+            $.ajax({
+                url: "/api/scripts/list",
+                success: function(data) {
+                    $scriptlist.empty();
 
-	if(animationSupported)
-	{
-		window.requestAnimationFrame(animate);
-	}
-}
+                    //sort it and insert
+                    $.each(data.sort(), function(idx, elem) {
+                        $("<option/>").text(elem).appendTo($scriptlist);
+                    });
+                },
+                error: function(xhr, status, errorThrown) {
+                    console.log("Error updating script list");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    alert("Could not retrieve script list")
+                }
+            });
+        },
 
-$(document).ready(function () {
-
-    $("#scriptlist").change(function(){
-    	var selection = $("#scriptlist").children("option").filter(":selected").text();
-
-    	$("#bt_runscript").prop({
-					disabled: false
-				});
-    	console.log("selected: " + selection);
-    });
-    
-    $("#actionlist").change(function(){
-        $("#bt_doaction").prop("disabled",false);
-    });
-
-    animationSupported = (window.requestAnimationFrame !== undefined);
-
-	//initial update
-	fillScriptList();
-    fillActionList();
-	update(true);
-	//update the time even when no server updates arrive
-    
-    //Cache some elements in a variable.
-    //This seems to make access faster if used in an animation.
-    elemCache.date_year = $("#date_year");
-    elemCache.date_month = $("#date_month");
-    elemCache.date_day = $("#date_day");
-    elemCache.time_hour = $("#time_hour");
-    elemCache.time_minute = $("#time_minute");
-    elemCache.time_second = $("#time_second");
-    elemCache.input_jd = $("#input_jd");
-    elemCache.input_mjd = $("#input_mjd");
-    elemCache.deltat = document.getElementById("deltat");
-    elemCache.noresponsetime = document.getElementById("noresponsetime");
-    //this needs a jquery wrapper
-    elemCache.timewidget = $("#timewidget");
-    
-    //init display time
-    resetCurrentDisplayTime();
-    
-	if(!animationSupported)
-	{
-		console.log("animation frame not supported")
-		setInterval(animate,500);
-	}
-	else
-	{
-		console.log("animation frame supported")
-		window.requestAnimationFrame(animate);
-	}
-})
+        updateFromServer: function(script) {
+            if (script.scriptIsRunning) {
+                $activescript.text(script.runningScriptId);
+            } else {
+                $activescript.text("-none-");
+            }
+            $bt_stopscript.prop({
+                disabled: !script.scriptIsRunning
+            });
+        }
+    }
+}(jQuery));
