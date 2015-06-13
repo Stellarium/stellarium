@@ -310,7 +310,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			Nebula::texPlanetaryNebula->bind();
 			color=brightNebulaColor;
 			break;
-		case NebDn:		
+		case NebDn:
 			Nebula::texDarkNebula->bind();
 			color=darkNebulaColor;
 			break;
