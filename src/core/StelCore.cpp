@@ -296,6 +296,9 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 		case ProjectionOrthographic:
 			prj = StelProjectorP(new StelProjectorOrthographic(modelViewTransform));
 			break;
+		case ProjectionSinusoidal:
+			prj = StelProjectorP(new StelProjectorSinusoidal(modelViewTransform));
+			break;
 		default:
 			qWarning() << "Unknown projection type: " << (int)(projType) << "using ProjectionStereographic instead";
 			prj = StelProjectorP(new StelProjectorStereographic(modelViewTransform));
