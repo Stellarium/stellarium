@@ -60,7 +60,7 @@ private:
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects; 
 #endif
-#ifdef ENABLE_VIDEO
+#ifdef ENABLE_MEDIA
 	typedef struct {
 		//QVideoWidget *widget; // would be easiest, but only with QtQuick2...
 		QGraphicsVideoItem *videoItem;
