@@ -191,6 +191,7 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 	return getHomePlanet()->getHeliocentricEclipticPos();
 }
 
+// GZ: TODO: apply corrections for ellipsoid planets!
 double StelObserver::getDistanceFromCenter(void) const
 {
 	return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
@@ -199,9 +200,12 @@ double StelObserver::getDistanceFromCenter(void) const
 Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 {
 	double lat = currentLocation.latitude;
-	// TODO: Figure out how to keep continuity in sky as reach poles
+	// TODO: Figure out how to keep continuity in sky as we reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
+	// GZ: Actually, why would that be? Lat should be clamped elsewhere. Added tests.
+	Q_ASSERT(lat <=  90.0);
+	Q_ASSERT(lat >= -90.0);
 	if( lat > 90.0 )  lat = 90.0;
 	if( lat < -90.0 ) lat = -90.0;
 	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
