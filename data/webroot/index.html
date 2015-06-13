@@ -19,7 +19,7 @@
         if(selection)
         {
           //post a run requests
-          postCmd("/api/scripts/run", {id: selection});
+          Main.postCmd("/api/scripts/run", {id: selection});
         }
       };
       
@@ -30,7 +30,7 @@
         var $selection = $("#actionlist").find("option").filter(":selected");
         var id = $selection.data("id");
         
-        postAction(id);
+        Actions.execute(id);
       }
       
       $("#actionlist").dblclick(runactionfn);
@@ -38,19 +38,12 @@
       
       $("#bt_stopscript").click(function(){
         //post a stop request
-        postCmd("/api/scripts/stop");
+        Main.postCmd("/api/scripts/stop");
       });
-      $("#bt_timerewind").click(decreaseTimeRate);
-      $("#bt_timeforward").click(increaseTimeRate);
-      $("#bt_timeplaypause").click(function(){
-        if(isRealTimeSpeed()){
-          setTimeRate(0);
-        }
-        else{
-          setTimeRate(JD_SECOND);
-        }
-      });
-      $("#bt_timenow").click(setDateNow);
+      $("#bt_timerewind").click(Time.decreaseTimeRate);
+      $("#bt_timeforward").click(Time.increaseTimeRate);
+      $("#bt_timeplaypause").click(Time.togglePlayPause);
+      $("#bt_timenow").click(Time.setDateNow);
     
       //jQuery UI initialization
       $("#timewidget").tabs();
@@ -97,14 +90,9 @@
       //use delegated event style here to reduce number of unique events
       var scope =".timedisplay input";
       $("#timewidget").on("focusin", scope, function(evt){
-        console.log("block update");
-        timeEditMode = true;
+        Time.enterTimeEditMode();
       }).on("focusout", scope, function(evt){
-        if(editTimeout === undefined) {
-          console.log("resume update");
-          timeEditMode = false;
-        }
-        else console.log("cant resume");
+        Time.leaveTimeEditMode();
       });
       
       $("#time_local").on('input',scope, function () {
@@ -115,12 +103,12 @@
         val = parseFloat(val);
         this.value = val > max ? max : val < min ? min : val;
         //for some obscure reason, this.value may be a string instead of a float, so use val directly!
-        if(val !== $this.data('prevData')) setDateTimeField($(this).data("type"),$(this).data("field"),val);
+        if(val !== $this.data('prevData')) Time.setDateTimeField($(this).data("type"),$(this).data("field"),val);
       }).on('keydown',scope, function (e) { // to allow 'Backspace' key behaviour
         $(this).data('onInputPrevented', e.which === 8 ? true : false);
         $(this).data('prevData',this.value);
       }).on("spin",scope, function(evt,ui) {
-        setDateTimeField($(this).data("type"),$(this).data("field"),ui.value);
+        Time.setDateTimeField($(this).data("type"),$(this).data("field"),ui.value);
         return false;
       });
       
@@ -132,12 +120,12 @@
         var val2 = parseFloat(val);
         this.value = val2 > max ? max : val2 < min ? min : val2;
         //for some obscure reason, this.value may be a string instead of a float, so use val directly!
-        if(val !== $this.data('prevData')) setJDay(val2);
+        if(val !== $this.data('prevData')) Time.setJDay(val2);
       }).on('keydown', function (e) { // to allow 'Backspace' key behaviour
         $(this).data('onInputPrevented', e.which === 8 ? true : false);
         $(this).data('prevData',this.value);
       }).on("spin", function(evt,ui) {
-        setJDay(ui.value);
+        Time.setJDay(ui.value);
       });
       
       $("#input_mjd").on('input', function () {
@@ -148,12 +136,12 @@
         var val2 = parseFloat(val);
         this.value = val2 > max ? max : val2 < min ? min : val2;
         //for some obscure reason, this.value may be a string instead of a float, so use val directly!
-        if(val !== $this.data('prevData')) setJDay(val2 + 2400000.5);
+        if(val !== $this.data('prevData')) Time.setJDay(val2 + 2400000.5);
       }).on('keydown', function (e) { // to allow 'Backspace' key behaviour
         $(this).data('onInputPrevented', e.which === 8 ? true : false);
         $(this).data('prevData',this.value);
       }).on("spin", function(evt,ui) {
-        setJDay(ui.value + 2400000.5);
+        Time.setJDay(ui.value + 2400000.5);
       });
 
       var $loading = $("#loadindicator").hide(), timer;
