@@ -29,7 +29,7 @@ StelVideoMgr::StelVideoMgr()
 {
 }
 
-#ifdef ENABLE_VIDEO
+#ifdef ENABLE_MEDIA
 StelVideoMgr::~StelVideoMgr()
 {
 	foreach(QString id, videoObjects.keys())
@@ -213,6 +213,6 @@ void StelVideoMgr::setVideoXY(const QString&, float, float) {;}
 void StelVideoMgr::setVideoAlpha(const QString&, float) {;}
 void StelVideoMgr::resizeVideo(const QString&, float, float) {;}
 void StelVideoMgr::showVideo(const QString&, bool) {;}
-#endif // ENABLE_VIDEO
+#endif // ENABLE_MEDIA
 
 
