@@ -454,7 +454,38 @@ float StelProjectorOrthographic::deltaZoom(float fov) const
 	return fov;
 }
 
+QString StelProjectorSinusoidal::getNameI18() const
+{
+	return q_("Sinusoidal");
+}
 
+QString StelProjectorSinusoidal::getDescriptionI18() const
+{
+	return q_("The sinusoidal projection is a <i>pseudocylindrical equal-area map projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-area projection.");
+}
+
+bool StelProjectorSinusoidal::forward(Vec3f &v) const
+{
+	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+	const bool rval = (-r < v[1] && v[1] < r);
+	const float alpha = std::atan2(v[0],-v[2]);
+	const float delta = std::asin(v[1]/r);
+	v[0] = alpha*std::cos(delta);
+	v[1] = delta;
+	v[2] = r;
+	return rval;
+}
+
+bool StelProjectorSinusoidal::backward(Vec3d &v) const
+{
+	const bool rval = v[1]<M_PI_2 && v[1]>-M_PI_2 && v[0]>-M_PI && v[0]<M_PI;
+	const double cd = std::cos(v[1]);
+	const double pcd = v[0]/cd;
+	v[2] = -cd * std::cos(pcd);
+	v[0] = cd * std::sin(pcd);
+	v[1] = std::sin(v[1]);
+	return rval;
+}
 
 QString StelProjector2d::getNameI18() const
 {
