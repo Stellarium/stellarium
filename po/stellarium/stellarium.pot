@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 17:31+0600\n"
+"POT-Creation-Date: 2015-06-13 23:00+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
-#: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -107,7 +107,7 @@ msgid "Meridian line"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:760
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgid "Ecliptic J2000 grid"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1323
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr ""
 
@@ -130,7 +130,7 @@ msgid "Galactic equator"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:765
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:376
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr ""
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -183,12 +183,12 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:142
+#: src/core/modules/Nebula.cpp:146
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:150 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -206,171 +206,171 @@ msgstr ""
 msgid "Magnitude: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:158
+#: src/core/modules/Nebula.cpp:162
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:164
+#: src/core/modules/Nebula.cpp:168
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:172 src/core/modules/Nebula.cpp:177
-#: src/core/modules/Nebula.cpp:182
+#: src/core/modules/Nebula.cpp:176 src/core/modules/Nebula.cpp:181
+#: src/core/modules/Nebula.cpp:186
 #, qt-format
 msgid "Brightness: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:175
+#: src/core/modules/Nebula.cpp:179
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:176
+#: src/core/modules/Nebula.cpp:180
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:188
+#: src/core/modules/Nebula.cpp:192
 #, qt-format
 msgid "Size: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:713
+#: src/core/modules/Nebula.cpp:725
 msgid "Galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:716
+#: src/core/modules/Nebula.cpp:728
 msgid "Open cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:719
+#: src/core/modules/Nebula.cpp:731
 msgid "Globular cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:722
+#: src/core/modules/Nebula.cpp:734
 msgid "Nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:737
 msgid "Planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:740
 msgid "Dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:743
 msgid "Irregular galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:746
 msgid "Cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:749
 msgid "Unknown"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:752
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:755
 msgid "Reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:758
 msgid "H-α emission region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:761
 msgid "Undocumented type"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:762
+#: src/core/modules/Nebula.cpp:774
 msgctxt "form"
 msgid "circular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:765
+#: src/core/modules/Nebula.cpp:777
 msgctxt "form"
 msgid "elliptical"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:768
+#: src/core/modules/Nebula.cpp:780
 msgctxt "form"
 msgid "irregular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:771
+#: src/core/modules/Nebula.cpp:783
 msgctxt "form"
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:784
+#: src/core/modules/Nebula.cpp:796
 msgctxt "structure"
 msgid "amorphous"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:787
+#: src/core/modules/Nebula.cpp:799
 msgctxt "structure"
 msgid "conventional"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:790
+#: src/core/modules/Nebula.cpp:802
 msgctxt "structure"
 msgid "filamentary"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:793
+#: src/core/modules/Nebula.cpp:805
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:806
+#: src/core/modules/Nebula.cpp:818
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:809
+#: src/core/modules/Nebula.cpp:821
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:812
+#: src/core/modules/Nebula.cpp:824
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:828
+#: src/core/modules/Nebula.cpp:840
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:831
+#: src/core/modules/Nebula.cpp:843
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:834
+#: src/core/modules/Nebula.cpp:846
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:837
+#: src/core/modules/Nebula.cpp:849
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:131
+#: src/core/modules/NebulaMgr.cpp:139
 msgid "Deep-sky objects"
 msgstr ""
 
@@ -4127,7 +4127,7 @@ msgid "Markings"
 msgstr ""
 
 #: src/ui_viewDialog.h:1239
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr ""
 
@@ -4201,7 +4201,7 @@ msgid "Light pollution data from locations database"
 msgstr ""
 
 #: src/ui_viewDialog.h:1272
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:408
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr ""
 
@@ -4849,7 +4849,7 @@ msgid "Tools"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1216
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr ""
 
@@ -7232,76 +7232,92 @@ msgstr ""
 msgid "Nebula hints"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+msgid "Galaxies hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+msgid "Bright nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+msgid "Dark nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+msgid "Clusters hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Effects"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Manual zoom"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Magnitude scaling multiplier"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:427
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Milky Way intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "Zodiacal light intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Zoom duration:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
 msgid "Cursor timeout:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
 msgid "Setting landscape sets location"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
 msgid "Run local script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Stop running script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "CD/DVD script"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:490
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
 msgid "Administration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
 msgid "Load default configuration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:496
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
 msgid "Save current configuration"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:499
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
 msgid "Shut down"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:575
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
 msgstr ""
 

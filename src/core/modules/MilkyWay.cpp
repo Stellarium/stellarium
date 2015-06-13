@@ -70,7 +70,7 @@ void MilkyWay::init()
 	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
 
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
+	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "Alt+M");
 }
 
 
