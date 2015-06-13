@@ -20,13 +20,16 @@
 #include "StelMainView.hpp"
 #include <QDebug>
 #include <QDir>
+//#include <QVideoWidget> // Adapt to that when we finally switch to QtQuick2!
+#include <QGraphicsVideoItem>
+#include <QMediaPlayer>
 
 
 StelVideoMgr::StelVideoMgr()
 {
 }
 
-#if 0
+#ifdef ENABLE_VIDEO
 StelVideoMgr::~StelVideoMgr()
 {
 	foreach(QString id, videoObjects.keys())
@@ -35,7 +38,7 @@ StelVideoMgr::~StelVideoMgr()
 	}
 }
 
-void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
+void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha)
 {
 	if (videoObjects.contains(id))
 	{
@@ -44,17 +47,17 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x
 	}
 
 	videoObjects[id] = new VideoPlayer;
-	videoObjects[id]->widget = new QWidget();
-	videoObjects[id]->player = new Phonon::VideoPlayer(Phonon::VideoCategory, videoObjects[id]->widget);
+	videoObjects[id]->player = new QMediaPlayer();
 
-	videoObjects[id]->player->load(Phonon::MediaSource(filename));
-	videoObjects[id]->pWidget =
-		StelMainView::getInstance().scene()->addWidget(videoObjects[id]->widget, Qt::FramelessWindowHint);
+	QMediaContent content(QUrl::fromLocalFile(filename));
+	videoObjects[id]->player->setMedia(content);
+	StelMainView::getInstance().scene()->addItem(videoObjects[id]->videoItem);
+	// TODO: See whether we also must remove the videoItem later?
 
-	videoObjects[id]->pWidget->setPos(x, y);
-	videoObjects[id]->pWidget->setOpacity(alpha);
-	videoObjects[id]->pWidget->setVisible(show);
-	videoObjects[id]->player->show();
+	videoObjects[id]->videoItem->setPos(x, y);
+	videoObjects[id]->videoItem->setOpacity(alpha);
+	videoObjects[id]->videoItem->setVisible(show);
+	//videoObjects[id]->player->show(); // ??
 
 }
 
@@ -65,12 +68,12 @@ void StelVideoMgr::playVideo(const QString& id)
 		if (videoObjects[id]->player!=NULL)
 		{
 			// if already playing, stop and play from the start
-			if (videoObjects[id]->player->isPlaying() == true)
+			if (videoObjects[id]->player->state() == QMediaPlayer::PlayingState)
 			{
 				videoObjects[id]->player->stop();
 			}
 
-			// otherwise just play it
+			// otherwise just play it, or resume playing paused video.
 			videoObjects[id]->player->play();
 		}
 	}
@@ -98,15 +101,15 @@ void StelVideoMgr::stopVideo(const QString& id)
 	}
 }
 
-void StelVideoMgr::seekVideo(const QString& id, qint64 ms)
+void StelVideoMgr::seekVideo(const QString& id, const qint64 ms)
 {
 	if (videoObjects.contains(id))
 	{
 		if (videoObjects[id]->player!=NULL) 
 		{
-			if (videoObjects[id]->player->mediaObject()->isSeekable())
+			if (videoObjects[id]->player->isSeekable())
 			{
-				videoObjects[id]->player->seek(ms);
+				videoObjects[id]->player->setPosition(ms);
 				// Seek capability depends on the backend used.
 			}
 			else
@@ -125,32 +128,32 @@ void StelVideoMgr::dropVideo(const QString& id)
 	{
 		videoObjects[id]->player->stop();
 		delete videoObjects[id]->player;
-		delete videoObjects[id]->pWidget;
+		delete videoObjects[id]->videoItem;
 		delete videoObjects[id];
 
 		videoObjects.remove(id); 
 	}
 }
 
-void StelVideoMgr::setVideoXY(const QString& id, float x, float y)
+void StelVideoMgr::setVideoXY(const QString& id, const float x, const float y)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->pWidget!=NULL)
+		if (videoObjects[id]->videoItem!=NULL)
 		{
-			videoObjects[id]->pWidget->setPos(x, y);
+			videoObjects[id]->videoItem->setPos(x, y);
 		}
 	}
 
 }
 
-void StelVideoMgr::setVideoAlpha(const QString& id, float alpha)
+void StelVideoMgr::setVideoAlpha(const QString& id, const float alpha)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->pWidget!=NULL)
+		if (videoObjects[id]->videoItem!=NULL)
 		{
-			videoObjects[id]->pWidget->setOpacity(alpha);
+			videoObjects[id]->videoItem->setOpacity(alpha);
 		}
 	}
 }
@@ -159,21 +162,38 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->pWidget!=NULL)
+		if (videoObjects[id]->videoItem!=NULL)
 		{
-			videoObjects[id]->pWidget->resize(w, h);
-			videoObjects[id]->player->resize(w, h);
+			QSize videoSize=videoObjects[id]->player->currentMedia().resources()[1].resolution();
+			float aspectRatio=videoSize.width()/videoSize.height();
+			// TODO: Repair next lines, linker does not find function.
+//			if (w!=-1.0f && h!=-1.0f)
+//				videoObjects[id]->videoItem->setAspectRatioMode(Qt::IgnoreAspectRatio);
+//			else
+//			{
+//				videoObjects[id]->videoItem->setAspectRatioMode(Qt::KeepAspectRatio);
+//				if (w==-1.0f && h==-1.0f)
+//				{
+//					h=videoSize.height();
+//					w=videoSize.width();
+//				}
+//				else if (h==-1.0f)
+//					h=w/aspectRatio;
+//				else if (w==-1.0f)
+//					w=h*aspectRatio;
+//			}
+//			videoObjects[id]->videoItem->setSize(QSizeF(w, h));
 		}
 	}
 }
 
-void StelVideoMgr::showVideo(const QString& id, bool show) 
+void StelVideoMgr::showVideo(const QString& id, const bool show)
 {
 	if (videoObjects.contains(id))
 	{
-		if (videoObjects[id]->pWidget!=NULL)
+		if (videoObjects[id]->videoItem!=NULL)
 		{
-			videoObjects[id]->pWidget->setVisible(show);
+			videoObjects[id]->videoItem->setVisible(show);
 		}
 	}
 }
@@ -193,6 +213,6 @@ void StelVideoMgr::setVideoXY(const QString&, float, float) {;}
 void StelVideoMgr::setVideoAlpha(const QString&, float) {;}
 void StelVideoMgr::resizeVideo(const QString&, float, float) {;}
 void StelVideoMgr::showVideo(const QString&, bool) {;}
-#endif // HAVE_QT_PHONON
+#endif // ENABLE_VIDEO
 
 

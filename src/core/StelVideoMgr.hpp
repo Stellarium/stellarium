@@ -22,6 +22,8 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
+class QMediaPlayer;
+class QGraphicsVideoItem;
 
 class StelVideoMgr : public QObject
 {
@@ -32,19 +34,25 @@ public:
 	~StelVideoMgr();
 
 public slots:
-	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
+	void loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha);
 	void playVideo(const QString& id);
 	void pauseVideo(const QString& id);
 	void stopVideo(const QString& id);
 	void dropVideo(const QString& id);
-	void seekVideo(const QString& id, qint64 ms);
-	void setVideoXY(const QString& id, float x, float y);
-	void setVideoAlpha(const QString& id, float alpha);
-	void resizeVideo(const QString& id, float w, float h);
-	void showVideo(const QString& id, bool show);
+	void seekVideo(const QString& id, const qint64 ms);
+	//! move lower left corner of video @name id to @name x, @name y.
+	void setVideoXY(const QString& id, const float x, const float y);
+	//! sets opacity
+	//! @param alpha opacity for the video.
+	void setVideoAlpha(const QString& id, const float alpha);
+	//! set video size to width @name w and height @name h.
+	//! Use w=-1 or h=-1 for autoscale from the other dimension, or use w=h=-1 for native size of video.
+	void resizeVideo(const QString& id, float w, float h = -1.0f);
+	void showVideo(const QString& id, const bool show);
 
 private:
 #if 0
+	// Traces of old Qt4/Phonon:
 	typedef struct {
 		QWidget *widget;
 		Phonon::VideoPlayer *player;
@@ -52,7 +60,15 @@ private:
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects; 
 #endif
-
+#ifdef ENABLE_VIDEO
+	typedef struct {
+		//QVideoWidget *widget; // would be easiest, but only with QtQuick2...
+		QGraphicsVideoItem *videoItem;
+		QMediaPlayer *player;
+		//QGraphicsProxyWidget *pWidget; // No longer required?
+	} VideoPlayer;
+	QMap<QString, VideoPlayer*> videoObjects;
+#endif
 };
 
 #endif // _STELVIDEOMGR_HPP_

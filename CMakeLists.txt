@@ -127,7 +127,10 @@ ENDIF()
 SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
 
 # Activate sound support
-SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated.")
+SET(ENABLE_SOUND 1 CACHE BOOL "Define whether sound support should be activated.")
+
+# Activate video support
+SET(ENABLE_VIDEO 1 CACHE BOOL "Define whether video support should be activated.")
 
 SET(ENABLE_SCRIPTING 1 CACHE BOOL "Define whether scripting features should be activated.")
 IF(ENABLE_SCRIPTING)
@@ -236,6 +239,13 @@ IF(ENABLE_SOUND)
     FIND_PACKAGE(Qt5Multimedia REQUIRED)
     FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
     INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
+ENDIF()
+IF(ENABLE_VIDEO)
+    ADD_DEFINITIONS(-DENABLE_VIDEO)
+    FIND_PACKAGE(Qt5Multimedia REQUIRED)
+    FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
+    INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
+    INCLUDE_DIRECTORIES(${Qt5MultimediaWidgets_INCLUDE_DIRS})
 ENDIF()
 
 # I add this test because on Windows with angle we should not link
