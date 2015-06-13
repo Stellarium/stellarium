@@ -39,17 +39,16 @@
 **
 ****************************************************************************/
 
-#include <qglobal.h>
+#include <QtGlobal>
 
 #ifndef QT_NO_TEXTODFWRITER
 
 #include "qzipreader.h"
 #include "qzipwriter.h"
-#include <qdatetime.h>
-#include <qplatformdefs.h>
-#include <qendian.h>
-#include <qdebug.h>
-#include <qdir.h>
+#include <sys/stat.h>
+#include <QDateTime>
+#include <QDebug>
+#include <QDir>
 
 #include <zlib.h>
 
@@ -101,7 +100,8 @@
 #define ZDEBUG if (0) qDebug
 #endif
 
-QT_BEGIN_NAMESPACE
+// QT_BEGIN_NAMESPACE
+namespace Stel {
 
 static inline uint readUInt(const uchar *data)
 {
@@ -1390,6 +1390,7 @@ void QZipWriter::close()
     d->device->close();
 }
 
-QT_END_NAMESPACE
+// QT_END_NAMESPACE
+}
 
 #endif // QT_NO_TEXTODFWRITER

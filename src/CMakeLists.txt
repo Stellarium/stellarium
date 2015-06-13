@@ -242,14 +242,11 @@ SET(stellarium_lib_SRCS
 	translations.h
 )
 
-# On windows, QZipReader is already included in the lib
-IF(!WIN32)
-	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-		core/external/qtcompress/qzip.cpp
-		core/external/qtcompress/qzipreader.h
-		core/external/qtcompress/qzipwriter.h
-	)
-ENDIF()
+SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+	core/external/qtcompress/qzip.cpp
+	core/external/qtcompress/qzipreader.h
+	core/external/qtcompress/qzipwriter.h
+)
 
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
