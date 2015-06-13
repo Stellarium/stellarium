@@ -95,22 +95,14 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 	mm.position[2] = mm.initialAlt;
 	mm.posTrain = mm.position;
 
-	// defining the end height
+	// final meteor altitude (end of burn point)
 	if (mm.xydistance > MIN_ALTITUDE)
 	{
 		mm.finalAlt = -mm.initialAlt;  // earth grazing
-		mm.minDist = mm.xydistance;
 	}
 	else
 	{
 		mm.finalAlt = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - mm.xydistance*mm.xydistance);
-		mm.minDist = qSqrt(mm.xydistance*mm.xydistance + mm.finalAlt*mm.finalAlt);
-	}
-
-	if (mm.minDist > VISIBLE_RADIUS)
-	{
-		// on average, not visible (although if were zoomed ...)
-		return false; //meteor still dead
 	}
 
 	// determine intensity [-3; 4.5]
@@ -123,19 +115,18 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 	core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
 	mm.mag = rcMag.luminance;
 
-	// most visible meteors are under about 180km distant
+	// most visible meteors are under about 184km distant
 	// scale max mag down if outside this range
-	float scale = 1;
-	if (mm.minDist)
+	if (mm.xydistance)
 	{
-		scale = 180*180 / (mm.minDist*mm.minDist);
-	}
-	if (scale < 1)
-	{
-		mm.mag *= scale;
+		float scale = qPow(184, 2) / qPow(mm.xydistance, 2);
+		if (scale < 1.0f)
+		{
+			mm.mag *= scale;
+		}
 	}
 
-	mm.firstBrightSegment = (double)qrand()/((double)RAND_MAX+1)*segments;
+	mm.firstBrightSegment = segments * ((float) qrand() / ((float) RAND_MAX + 1));
 
 	// If everything is ok until here,
 	return true;  //the meteor is alive
