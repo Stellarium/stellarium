@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2012 Sibi Antony
+ * Copyright (C) 2012 Sibi Antony (Phonon/QT4)
+ * Copyright (C) 2015 Georg Zotti (Reactivate for QT5)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,8 +48,17 @@ public slots:
 	void setVideoAlpha(const QString& id, const float alpha);
 	//! set video size to width @name w and height @name h.
 	//! Use w=-1 or h=-1 for autoscale from the other dimension, or use w=h=-1 for native size of video.
-	void resizeVideo(const QString& id, float w, float h = -1.0f);
+	void resizeVideo(const QString& id, float w = -1.0f, float h = -1.0f);
 	void showVideo(const QString& id, const bool show);
+	// TODO: New functions:
+//	//! returns duration (in seconds) of loaded video (maybe change to qint64/ms?)
+//	int getDuration(const QString& id);
+//	//! returns resolution (in pixels) of loaded video
+//	QSize getResolution(const QString& id);
+//	//! returns width (in pixels) of loaded video
+//	int getWidth(const QString& id);
+//	//! returns height (in pixels) of loaded video
+//	int getHeight(const QString& id);
 
 private:
 #if 0
