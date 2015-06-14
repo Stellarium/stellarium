@@ -354,7 +354,7 @@ IF(GUI_MODE STREQUAL "Standard")
 	SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
 	QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
 
-	SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
+	SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})        
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
 ENDIF()
 
@@ -398,6 +398,10 @@ ENDIF()
 #############################################################################################
 
 SET(extLinkerOption ${extLinkerOption} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
+IF(ENABLE_MEDIA)
+    # Forced linkage to Qt5MultimediaWidgets library when media support is enabled
+    SET(extLinkerOption ${extLinkerOption} ${Qt5MultimediaWidgets_LIBRARIES})
+ENDIF()
 IF(WIN32 AND NOT MSVC)
 # TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
 # Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
@@ -422,7 +426,7 @@ IF(GENERATE_STELMAINLIB)
     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
     QT5_USE_MODULES(stelMain Core Concurrent Declarative Gui Network OpenGL Script Widgets)
     IF(ENABLE_MEDIA)
-        QT5_USE_MODULES(stelMain Multimedia)
+        QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
     ENDIF()
     INSTALL(TARGETS stelMain DESTINATION lib)
     ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
@@ -436,7 +440,7 @@ ELSE()
 
     QT5_USE_MODULES(stellarium Core Concurrent Declarative Gui Network OpenGL Script Widgets)
     IF(ENABLE_MEDIA)
-        QT5_USE_MODULES(stellarium Multimedia)
+        QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
     ENDIF()
 
     IF(APPLE)
