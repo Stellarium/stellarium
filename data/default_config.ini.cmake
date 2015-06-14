@@ -196,6 +196,9 @@ flag_minimal_brightness             = false
 # This allows use of a minimum value even given in the respective landscape.ini
 flag_landscape_sets_minimal_brightness = true
 flag_enable_illumination_layer      = true
+flag_enable_labels                  = true
+label_font_size                     = 18
+label_color                         = 0.2,0.8,0.2
 
 [viewing]
 flag_constellation_drawing          = false
