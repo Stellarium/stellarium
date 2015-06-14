@@ -1,0 +1,15 @@
+# demo gazetteer for Großmugl landscape.
+# Can be used to better describe the landscape,
+# i.e. show labels on landscape features.
+# Fields must be separated by vertical line, label must not have such a vertical line.
+# Comments have this hash mark in first column.
+# coordinates in degrees from true North.
+# line towards zenith draws a single line strictly upward.
+# label is centered on line endpoint.
+# Azimuth | Altitude | degrees-towards-zenith | azimuth shift | label
+113.66 | 5.5  | 4   |-6 | Leeberg
+35     | 1.5  | 2.5 | 0 | Grossmugl
+335    | 2    | 2   | 0 | Steinabrunn
+305    | 2    | 1   | 0 | Ringendorf
+180    | 2    | 2   | 0 | Vienne (30 km)
+135    | 2    | 0.5 | 0 | Usine éolienne de Strasshof
