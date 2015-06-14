@@ -86,23 +86,23 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 	}
 
 	// meteor trajectory
-	mm.xydistance = distance * qSin(zenithAngle);
+	mm.xyDist = distance * qSin(zenithAngle);
 	float angle = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, 2pi]
 
 	// initial meteor coordinates
-	mm.position[0] = mm.xydistance * qCos(angle);
-	mm.position[1] = mm.xydistance * qSin(angle);
+	mm.position[0] = mm.xyDist * qCos(angle);
+	mm.position[1] = mm.xyDist * qSin(angle);
 	mm.position[2] = mm.initialAlt;
 	mm.posTrain = mm.position;
 
 	// final meteor altitude (end of burn point)
-	if (mm.xydistance > MIN_ALTITUDE)
+	if (mm.xyDist > MIN_ALTITUDE)
 	{
 		mm.finalAlt = -mm.initialAlt;  // earth grazing
 	}
 	else
 	{
-		mm.finalAlt = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - mm.xydistance*mm.xydistance);
+		mm.finalAlt = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - mm.xyDist*mm.xyDist);
 	}
 
 	// determine intensity [-3; 4.5]
@@ -117,9 +117,9 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 
 	// most visible meteors are under about 184km distant
 	// scale max mag down if outside this range
-	if (mm.xydistance)
+	if (mm.xyDist)
 	{
-		float scale = qPow(184, 2) / qPow(mm.xydistance, 2);
+		float scale = qPow(184, 2) / qPow(mm.xyDist, 2);
 		if (scale < 1.0f)
 		{
 			mm.mag *= scale;
@@ -282,7 +282,7 @@ bool Meteor::update(double deltaTime)
 	m_alive = updateMeteorModel(deltaTime, m_speed, meteor);
 
 	// determine visual magnitude based on distance to observer
-	double dist = qSqrt(meteor.xydistance*meteor.xydistance + pow(meteor.position[2]-meteor.obs[2], 2));
+	double dist = qSqrt(meteor.xyDist*meteor.xyDist + pow(meteor.position[2]-meteor.obs[2], 2));
 	if (dist == 0)
 	{
 		dist = .01;    // just to be cautious (meteor hits observer!)

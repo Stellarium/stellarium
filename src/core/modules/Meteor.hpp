@@ -49,7 +49,7 @@ public:
 		Vec3d obs;              //! observer position
 		Vec3d position;         //! equatorial coordinate position
 		Vec3d posTrain;         //! end of train
-		float xydistance;       //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+		float xyDist;           //! Distance in XY plane (orthogonal to radiant) from observer to meteor
 		float minDist;          //! Nearest point to observer along path
 		float initialAlt;       //! Initial meteor altitude above the Earth surface.
 		float finalAlt;         //! Final meteor altitude (end of burn point).
