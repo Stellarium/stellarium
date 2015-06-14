@@ -31,6 +31,8 @@
 
 #include <QMap>
 #include <QImage>
+#include <QList>
+#include <QFont>
 
 class QSettings;
 class StelLocation;
@@ -56,10 +58,17 @@ class StelPainter;
 //!
 //! We discern:
 //!   @param LandscapeId: The directory name of the landscape.
-//!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, UTF8, ...)
+//!   @param name: The landscape name as specified in the LandscapeIni (may contain spaces, translatable, UTF8, ...)
 class Landscape
 {
 public:
+	typedef struct
+	{
+		QString name;
+		Vec3d featurePoint; // start of the line: mountain peak, building, ...
+		Vec3d labelPoint;   // end of the line, where the centered label best fits.
+	} LandscapeLabel;
+
 	Landscape(float _radius = 2.f);
 	virtual ~Landscape();
 	//! Load landscape.
@@ -72,6 +81,7 @@ public:
 		landFader.update((int)(deltaTime*1000));
 		fogFader.update((int)(deltaTime*1000));
 		illumFader.update((int)(deltaTime*1000));
+		labelFader.update((int)(deltaTime*1000));
 	}
 
 	//! Set the brightness of the landscape plus brightness of optional add-on night lightscape.
@@ -101,6 +111,14 @@ public:
 	void setFlagShowIllumination(const bool b) {illumFader=b;}
 	//! Get whether illumination is displayed
 	bool getFlagShowIllumination() const {return (bool)illumFader;}
+	// GZ 2 new
+	//! Set whether labels are displayed
+	void setFlagShowLabels(const bool b) {labelFader=b;}
+	//! Get whether labels are displayed
+	bool getFlagShowLabels() const {return (bool)labelFader;}
+	//! change font and fontsize for landscape labels
+	void setLabelFontSize(const int size){fontSize=size;}
+
 	//! Get landscape name
 	QString getName() const {return name;}
 	//! Get landscape author name
@@ -152,11 +170,19 @@ public:
 		azGrad_zdGrad  = 5  //! azimuth[new_degrees] zenithDistance[new_degrees] (may be found on theodolites)
 	};
 	
+	//! Load descriptive labels from optional file gazetteer.LANG.utf8.
+	void loadLabels(const QString& landscapeId);
+
 protected:
 	//! Load attributes common to all landscapes
 	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
 	void loadCommon(const QSettings& landscapeIni, const QString& landscapeId);
+
+	//! Draw optional labels on the landscape
+	void drawLabels(StelCore *core, StelPainter *painter);
+
+
 	//! Create a StelSphericalPolygon that describes a measured horizon line. If present, this can be used to draw a horizon line
 	//! or simplify the functionality to discern if an object is below the horizon.
 	//! @param _lineFileName A text file with lines that are either empty or comment lines starting with # or azimuth altitude [degrees]
@@ -180,6 +206,7 @@ protected:
 	LinearFader landFader; //! Used to slowly fade in/out landscape painting.
 	LinearFader fogFader;  //! Used to slowly fade in/out fog painting.
 	LinearFader illumFader;//! Used to slowly fade in/out illumination painting.
+	LinearFader labelFader;//! Used to slowly fade in/out landscape feature labels.
 	int rows; //! horizontal rows.  May be given in landscape.ini:[landscape]tesselate_rows. More indicates higher accuracy, but is slower.
 	int cols; //! vertical columns. May be given in landscape.ini:[landscape]tesselate_cols. More indicates higher accuracy, but is slower.
 	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]angle_rotatez (or decor_angle_rotatez for old_style landscapes)
@@ -197,8 +224,12 @@ protected:
 	SphericalRegionP horizonPolygon;   //! Optional element describing the horizon line.
 					   //! Data shall be read from the file given as landscape.ini[landscape]polygonal_horizon_list
 					   //! For LandscapePolygonal, this is the only horizon data item.
-	Vec3f horizonPolygonLineColor ;    //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
+	Vec3f horizonPolygonLineColor;     //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
 					   //! specified in landscape.ini[landscape]horizon_line_color. Negative red (default) indicated "don't draw".
+	// Optional element: labels for landscape features.
+	QList<LandscapeLabel> landscapeLabels;
+	int fontSize;     //! Used for landscape labels (optionally indicating landscape features)
+	Vec3f labelColor; //! Color for the landscape labels.
 };
 
 //! @class LandscapeOldStyle
