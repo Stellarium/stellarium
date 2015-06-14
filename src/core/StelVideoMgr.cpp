@@ -21,9 +21,11 @@
 #include "StelMainView.hpp"
 #include <QDebug>
 #include <QDir>
-//#include <QVideoWidget> // Adapt to that when we finally switch to QtQuick2!
-#include <QGraphicsVideoItem>
-#include <QMediaPlayer>
+#ifdef ENABLE_MEDIA
+	//#include <QVideoWidget> // Adapt to that when we finally switch to QtQuick2!
+	#include <QGraphicsVideoItem>
+	#include <QMediaPlayer>
+#endif
 
 
 StelVideoMgr::StelVideoMgr()
