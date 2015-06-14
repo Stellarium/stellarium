@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 00:45+0600\n"
+"POT-Creation-Date: 2015-06-13 23:00+0600\n"
 "PO-Revision-Date: 2015-05-31 11:20+0000\n"
 "Last-Translator: Yao Chengyun <skystaryy@163.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-13 05:27+0000\n"
+"X-Launchpad-Export-Date: 2015-06-14 05:25+0000\n"
 "X-Generator: Launchpad (build 17557)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
-#: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -107,7 +107,7 @@ msgid "Meridian line"
 msgstr "子午线"
 
 #: src/core/modules/GridLinesMgr.cpp:760
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "地平线"
 
@@ -121,7 +121,7 @@ msgid "Ecliptic J2000 grid"
 msgstr "黄道坐标（J2000）"
 
 #: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1323
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "银道坐标网格"
 
@@ -130,7 +130,7 @@ msgid "Galactic equator"
 msgstr "Galactic equator"
 
 #: src/core/modules/GridLinesMgr.cpp:765
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:376
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr ", %1 米"
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -183,12 +183,12 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr "类型：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:142
+#: src/core/modules/Nebula.cpp:146
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
 
-#: src/core/modules/Nebula.cpp:150 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -206,171 +206,171 @@ msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
 msgid "Magnitude: <b>%1</b>"
 msgstr "星等：<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:158
+#: src/core/modules/Nebula.cpp:162
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:164
+#: src/core/modules/Nebula.cpp:168
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "表面亮度: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:172 src/core/modules/Nebula.cpp:177
-#: src/core/modules/Nebula.cpp:182
+#: src/core/modules/Nebula.cpp:176 src/core/modules/Nebula.cpp:181
+#: src/core/modules/Nebula.cpp:186
 #, qt-format
 msgid "Brightness: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:175
+#: src/core/modules/Nebula.cpp:179
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:176
+#: src/core/modules/Nebula.cpp:180
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:188
+#: src/core/modules/Nebula.cpp:192
 #, qt-format
 msgid "Size: %1"
 msgstr "大小: %1"
 
-#: src/core/modules/Nebula.cpp:713
+#: src/core/modules/Nebula.cpp:725
 msgid "Galaxy"
 msgstr "星系"
 
-#: src/core/modules/Nebula.cpp:716
+#: src/core/modules/Nebula.cpp:728
 msgid "Open cluster"
 msgstr "疏散星团"
 
-#: src/core/modules/Nebula.cpp:719
+#: src/core/modules/Nebula.cpp:731
 msgid "Globular cluster"
 msgstr "球状星团"
 
-#: src/core/modules/Nebula.cpp:722
+#: src/core/modules/Nebula.cpp:734
 msgid "Nebula"
 msgstr "星云"
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:737
 msgid "Planetary nebula"
 msgstr "行星状星云"
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:740
 msgid "Dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:743
 msgid "Irregular galaxy"
 msgstr "不规则星系"
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:746
 msgid "Cluster associated with nebulosity"
 msgstr "带有星云状物质的星团"
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:749
 msgid "Unknown"
 msgstr "未知"
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:752
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:755
 msgid "Reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:758
 msgid "H-α emission region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:761
 msgid "Undocumented type"
 msgstr "未收录类型"
 
-#: src/core/modules/Nebula.cpp:762
+#: src/core/modules/Nebula.cpp:774
 msgctxt "form"
 msgid "circular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:765
+#: src/core/modules/Nebula.cpp:777
 msgctxt "form"
 msgid "elliptical"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:768
+#: src/core/modules/Nebula.cpp:780
 msgctxt "form"
 msgid "irregular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:771
+#: src/core/modules/Nebula.cpp:783
 msgctxt "form"
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:784
+#: src/core/modules/Nebula.cpp:796
 msgctxt "structure"
 msgid "amorphous"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:787
+#: src/core/modules/Nebula.cpp:799
 msgctxt "structure"
 msgid "conventional"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:790
+#: src/core/modules/Nebula.cpp:802
 msgctxt "structure"
 msgid "filamentary"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:793
+#: src/core/modules/Nebula.cpp:805
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:806
+#: src/core/modules/Nebula.cpp:818
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:809
+#: src/core/modules/Nebula.cpp:821
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:812
+#: src/core/modules/Nebula.cpp:824
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:828
+#: src/core/modules/Nebula.cpp:840
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:831
+#: src/core/modules/Nebula.cpp:843
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:834
+#: src/core/modules/Nebula.cpp:846
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:837
+#: src/core/modules/Nebula.cpp:849
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:131
+#: src/core/modules/NebulaMgr.cpp:139
 msgid "Deep-sky objects"
 msgstr "深空天体"
 
@@ -807,11 +807,11 @@ msgstr "水平翻转"
 msgid "Flip scene vertically"
 msgstr "垂直翻转"
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1528
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "目前禁止修正。如果您不了解您正在做什么，请不要使用此功能！"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1531
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -822,7 +822,7 @@ msgstr ""
 "在他的文章《古代的日食证明了爱因斯坦的相对论》[<em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em>]（%1）。要了解更多信息，请点击%2这里%3。"
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1534
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -831,7 +831,7 @@ msgstr ""
 "这个经验公式由 G. M. Clemence 在文章《关于天文常数系统》[<em>On the system of astronomical "
 "constants</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1537
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -843,7 +843,7 @@ msgstr ""
 "在他的《用于计算器的天文学公式》[<em>Astronomical Formulae for Calculators</em>] 中使用。计算机程序 "
 "SunTracker Pro 也使用了这一公式。"
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1541
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -853,7 +853,7 @@ msgstr ""
 "Ephemeris</em>]和《日食的法规》[<em>Canon of Solar Eclipses</em>]中使用的 IAU (1952) "
 "公式稍加修改之后的版本。"
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1545
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -863,7 +863,7 @@ msgstr ""
 "塔克曼[Tuckerman]的表格（1962年，1964年）以5天和10天的间隔列出了太阳、月球和行星从公元前601年到公元1649年的位置。戈德斯坦[G"
 "oldstine]的表格（1973年）也含蓄地采用了相同的关系。"
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -874,7 +874,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em>] （%1）中公布。"
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -883,7 +883,7 @@ msgstr ""
 "此公式由 F. R. Stephenson 在文章《望远镜前的天文学观测》[<em>Pre-Telescopic Astronomical "
 "Observations</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1555
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -896,7 +896,7 @@ msgstr ""
 "the correction delta T E.T.-U.T. in the period 1800-1975</em>]（%1）中公布。它与 "
 "Brouwer 于1952年公布的数据相吻合。"
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1558
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -905,7 +905,7 @@ msgstr ""
 "此算法于1986年被 P. Bretagnon 和 L. Simon 在《从 -4000 到 +2800 的行星程序和表格》[<em>Planetary "
 "Programs and Tables from -4000 to +2800</em> ]中，以及计算机程序 RedShift 中被采用。"
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1561
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -915,11 +915,11 @@ msgstr ""
 "这一公式由 F. R. Stephenson 和 L. V. Morrison 在题为《地球自转的长周期变化 - 700 B.C. 到 A.D. "
 "1980》(%1)的论文中发表。"
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1564
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "天文馆程序 Guide 7 中使用了此算法。"
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1567
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -929,14 +929,14 @@ msgstr ""
 "Eclipses: 1986-2035</em> ]（1987年）以及《五十年的日食法规：1986-2035》[<em>Fifty Year Canon "
 "of Solar Eclipses: 1986-2035</em> ]（1989年） 中给出。"
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1570
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "这一公式由 K.M. Borkowski (%1) 在分析了 2137 BCE 到 1715 CE 之间的31次日食数据过后得出。"
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1573
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -948,14 +948,14 @@ msgstr ""
 "from U.T. to E.T. for the Period 1800-1988</em> (%1) 中发布，方程用 Stephenson & "
 "Morrison (1984) 给出的数据拟合而成。"
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1576
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr "该公式是"
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1579
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -965,7 +965,7 @@ msgstr ""
 "这方程由 F. R. Stephenson 及 L. V. Morrison 在论文 <em>Long-Term Fluctuations in the "
 "Earth's Rotation: 700 BC to AD 1990</em> (%1) 中发表。"
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1582
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -974,21 +974,21 @@ msgstr ""
 "F. R. Stephenson 在他的书 <em>Historical Eclipses and Earth's Rotation</em> (%1) "
 "中发表了这个公式。"
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1585
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1588
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1591
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -997,14 +997,14 @@ msgstr ""
 "此多项式由 J. Meeus 和 L. Simons 在文章《公元1620年-2000年ΔT 的多项式近似》[<em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1594
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1597
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1015,7 +1015,7 @@ msgstr ""
 "2007）及 <em>Calendrical Tabulations</em> （2002）中发表了多项式数据拟合结果。方法基于 Jean Meeus "
 "的 <em>Astronomical Algorithms</em> （1991）。"
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1600
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1023,7 +1023,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1603
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1032,7 +1032,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1042,11 +1042,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 msgid "Used by default."
 msgstr "默认使用。"
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1609
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1054,7 +1054,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1612
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1062,7 +1062,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1615
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1070,43 +1070,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1618
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "这是一个用于计算 %1T 的二次方程，系数由用户定义。"
 
-#: src/core/StelCore.cpp:1618 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1621 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "错误"
 
-#: src/core/StelCore.cpp:1668
+#: src/core/StelCore.cpp:1671
 msgid "with meaningless values outside this range"
 msgstr "超出范围的无意义数值"
 
-#: src/core/StelCore.cpp:1694
+#: src/core/StelCore.cpp:1697
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr "平均误差小于1秒，最大误差1.9秒，其余都是超出范围的无意义数值"
 
-#: src/core/StelCore.cpp:1716 src/core/StelCore.cpp:1721
-#: src/core/StelCore.cpp:1748 src/core/StelCore.cpp:1753
-#: src/core/StelCore.cpp:1758
+#: src/core/StelCore.cpp:1719 src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1751 src/core/StelCore.cpp:1756
+#: src/core/StelCore.cpp:1761
 msgid "with zero values outside this range"
 msgstr "此范围之外的值为零"
 
-#: src/core/StelCore.cpp:1726
+#: src/core/StelCore.cpp:1729
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "精确度一般在一秒内，超出该范围的数据无价值"
 
-#: src/core/StelCore.cpp:1768
+#: src/core/StelCore.cpp:1771
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "在 %1 年和 %2，%3 年之间有效"
 
-#: src/core/StelCore.cpp:1770
+#: src/core/StelCore.cpp:1773
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "在 %1 年和 %2 年之间有效"
@@ -1198,6 +1198,17 @@ msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr "正射投影类似透视投影，但是投影点位在无限远的距离。"
+
+#: src/core/StelProjectorClasses.cpp:459
+msgid "Sinusoidal"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:464
+msgid ""
+"The sinusoidal projection is a <i>pseudocylindrical equal-area map "
+"projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
+"area projection."
+msgstr ""
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -1750,7 +1761,7 @@ msgstr "说明"
 msgid "Configuration window"
 msgstr "设定"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:192 src/ui_searchDialogGui.h:615
 msgid "Search window"
 msgstr "搜索"
 
@@ -3991,10 +4002,6 @@ msgstr ""
 msgid "Find Object"
 msgstr "寻找天体"
 
-#: src/ui_searchDialogGui.h:615
-msgid "Find Object or Position"
-msgstr "查找物体或位置"
-
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
 msgstr "使用 tab 键选择项目"
@@ -4174,7 +4181,7 @@ msgid "Markings"
 msgstr "标示"
 
 #: src/ui_viewDialog.h:1239
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "地景"
 
@@ -4248,7 +4255,7 @@ msgid "Light pollution data from locations database"
 msgstr ""
 
 #: src/ui_viewDialog.h:1272
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:408
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "光污染："
 
@@ -4896,7 +4903,7 @@ msgid "Tools"
 msgstr "工具"
 
 #: src/ui_configurationDialog.h:1216
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "脚本"
 
@@ -7297,76 +7304,92 @@ msgstr "星云名称"
 msgid "Nebula hints"
 msgstr "星云标记"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+msgid "Galaxies hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+msgid "Bright nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+msgid "Dark nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+msgid "Clusters hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Effects"
 msgstr "效果"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Manual zoom"
 msgstr "手动缩放"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Magnitude scaling multiplier"
 msgstr "放大倍数"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:427
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Milky Way intensity:"
 msgstr "银河亮度："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "Zodiacal light intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
 msgstr "星云标记数量："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Zoom duration:"
 msgstr "缩放持续时间："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
 msgid "Cursor timeout:"
 msgstr "鼠标指针自动隐藏延时："
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
 msgid "Setting landscape sets location"
 msgstr "设置地景时转到与之关联的位置"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
 msgid "Run local script"
 msgstr "运行本地脚本"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Stop running script"
 msgstr "停止运行脚本"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "CD/DVD script"
 msgstr "CD/DVD 脚本"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:490
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
 msgid "Administration"
 msgstr "系统管理"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
 msgid "Load default configuration"
 msgstr "载入默认设置"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:496
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
 msgid "Save current configuration"
 msgstr "保存当前设置"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:499
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
 msgid "Shut down"
 msgstr "退出程序"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:575
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
 msgstr "[无 TUI 节点]"
 
@@ -11111,6 +11134,9 @@ msgstr ""
 
 #~ msgid "Kepler's Supernova"
 #~ msgstr "SN 1604A"
+
+#~ msgid "Find Object or Position"
+#~ msgstr "查找物体或位置"
 
 #~ msgid "(geometric)"
 #~ msgstr "(几何)"
