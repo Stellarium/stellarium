@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 00:45+0600\n"
+"POT-Creation-Date: 2015-06-13 23:00+0600\n"
 "PO-Revision-Date: 2014-11-30 13:42+0000\n"
 "Last-Translator: Nadanomics <hb7701@naver.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-13 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-06-14 05:18+0000\n"
 "X-Generator: Launchpad (build 17557)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
-#: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -108,7 +108,7 @@ msgid "Meridian line"
 msgstr "자오선"
 
 #: src/core/modules/GridLinesMgr.cpp:760
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "지평선"
 
@@ -122,7 +122,7 @@ msgid "Ecliptic J2000 grid"
 msgstr "황도좌표계 격자(J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1323
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "은하좌표계 격자"
 
@@ -131,7 +131,7 @@ msgid "Galactic equator"
 msgstr "은하적도"
 
 #: src/core/modules/GridLinesMgr.cpp:765
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:376
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -184,12 +184,12 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr "분류: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:142
+#: src/core/modules/Nebula.cpp:146
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -198,7 +198,7 @@ msgstr ""
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "등급: <b>%1</b> (소광 후:  <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:150 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -207,171 +207,171 @@ msgstr "등급: <b>%1</b> (소광 후:  <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "등급: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:158
+#: src/core/modules/Nebula.cpp:162
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "표면 밝기: <b>%1</b> (소광 후: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:164
+#: src/core/modules/Nebula.cpp:168
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "표면 밝기: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:172 src/core/modules/Nebula.cpp:177
-#: src/core/modules/Nebula.cpp:182
+#: src/core/modules/Nebula.cpp:176 src/core/modules/Nebula.cpp:181
+#: src/core/modules/Nebula.cpp:186
 #, qt-format
 msgid "Brightness: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:175
+#: src/core/modules/Nebula.cpp:179
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:176
+#: src/core/modules/Nebula.cpp:180
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:188
+#: src/core/modules/Nebula.cpp:192
 #, qt-format
 msgid "Size: %1"
 msgstr "크기: %1"
 
-#: src/core/modules/Nebula.cpp:713
+#: src/core/modules/Nebula.cpp:725
 msgid "Galaxy"
 msgstr "은하"
 
-#: src/core/modules/Nebula.cpp:716
+#: src/core/modules/Nebula.cpp:728
 msgid "Open cluster"
 msgstr "산개성단"
 
-#: src/core/modules/Nebula.cpp:719
+#: src/core/modules/Nebula.cpp:731
 msgid "Globular cluster"
 msgstr "구상성단"
 
-#: src/core/modules/Nebula.cpp:722
+#: src/core/modules/Nebula.cpp:734
 msgid "Nebula"
 msgstr "성운"
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:737
 msgid "Planetary nebula"
 msgstr "행성상성운"
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:740
 msgid "Dark nebula"
 msgstr "암흑성운"
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:743
 msgid "Irregular galaxy"
 msgstr "불규칙은하"
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:746
 msgid "Cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:749
 msgid "Unknown"
 msgstr "알려지지 않음"
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:752
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:755
 msgid "Reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:758
 msgid "H-α emission region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:761
 msgid "Undocumented type"
 msgstr "기록되지 않은 유형"
 
-#: src/core/modules/Nebula.cpp:762
+#: src/core/modules/Nebula.cpp:774
 msgctxt "form"
 msgid "circular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:765
+#: src/core/modules/Nebula.cpp:777
 msgctxt "form"
 msgid "elliptical"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:768
+#: src/core/modules/Nebula.cpp:780
 msgctxt "form"
 msgid "irregular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:771
+#: src/core/modules/Nebula.cpp:783
 msgctxt "form"
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:784
+#: src/core/modules/Nebula.cpp:796
 msgctxt "structure"
 msgid "amorphous"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:787
+#: src/core/modules/Nebula.cpp:799
 msgctxt "structure"
 msgid "conventional"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:790
+#: src/core/modules/Nebula.cpp:802
 msgctxt "structure"
 msgid "filamentary"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:793
+#: src/core/modules/Nebula.cpp:805
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:806
+#: src/core/modules/Nebula.cpp:818
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:809
+#: src/core/modules/Nebula.cpp:821
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:812
+#: src/core/modules/Nebula.cpp:824
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:828
+#: src/core/modules/Nebula.cpp:840
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:831
+#: src/core/modules/Nebula.cpp:843
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:834
+#: src/core/modules/Nebula.cpp:846
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:837
+#: src/core/modules/Nebula.cpp:849
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:131
+#: src/core/modules/NebulaMgr.cpp:139
 msgid "Deep-sky objects"
 msgstr "딥스카이 천체"
 
@@ -808,11 +808,11 @@ msgstr "좌우 반전"
 msgid "Flip scene vertically"
 msgstr "상하 반전"
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1528
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "보정이 비활성화됩니다. 당신이 무엇을 하는지 알고 있는 경우에만 사용하십시오!"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1531
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -823,7 +823,7 @@ msgstr ""
 "of Relativity Confirmed by Ancient Solar Eclipses</em> (%1)에 사용되었습니다. 더 많은 "
 "정보는 %2여기%3를 참고하십시오."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1534
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -832,7 +832,7 @@ msgstr ""
 "이 실험식은 G. M. Clemence의 논문 <em>On the system of astronomical constants</em> "
 "(%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1537
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -844,7 +844,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em>에 사용되었습니다. 또한 이 공식은 컴퓨터 프로그램 "
 "SunTracker Pro에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1541
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -853,7 +853,7 @@ msgstr ""
 "이 공식은 IAU (1952)를 약간 보정한 버전으로 Mucke & Meeus (1983)의 <em>Astronomical "
 "Ephemeris</em> 와 <em>Canon of Solar Eclipses</em> 에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1545
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -863,7 +863,7 @@ msgstr ""
 "Tuckerman 표 (1962, 1964)는 기원전 601년부터 서기 1649년까지 5일 간격과 10일 간격으로 태양, 달, 행성의 "
 "위치를 담고 있습니다. 이 관계는 Goldstine (1973)의 삭망 표에도 내재되었습니다."
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -873,7 +873,7 @@ msgstr ""
 "이 공식은 P. M. Muller와 F. R. Stephenson의 논문 <em>The accelerations of the earth "
 "and moon from early astronomical observations</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -882,7 +882,7 @@ msgstr ""
 "이 공식은  F. R. Stephenson의 논문 <em>Pre-Telescopic Astronomical "
 "Observations</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1555
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -894,7 +894,7 @@ msgstr ""
 "L. D. Schmadel와 G. Zech의 논문 <em>Polynomial approximations for the correction "
 "delta T E.T.-U.T. in the period 1800-1975</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1558
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -903,7 +903,7 @@ msgstr ""
 "이 알고리즘은 P. Bretagnon와 L. Simon's의 <em>Planetary Programs and Tables from -"
 "4000 to +2800</em> (1986)와 컴퓨터 플라네타리움 프로그램 ResShift에 적용되었습니다."
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1561
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -913,11 +913,11 @@ msgstr ""
 "이 공식은 F. R. Stephenson와 L. V. Morrison의 논문 <em>Long-term changes in the "
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1564
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "이 알고리즘은 컴퓨터 플라네타리움 프로그램 Guide 7에 사용되었습니다."
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1567
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -926,7 +926,7 @@ msgstr ""
 "이 알고리즘은 F. Espenak의 <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> "
 "(1987)와 <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em>(1989)에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1570
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -934,7 +934,7 @@ msgid ""
 msgstr ""
 "이 공식은 K.M. Borkowski (%1)의 기원전 2137년부터 서기 1713년 사이의 31개 일식기록 데이터 분석에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1573
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -946,7 +946,7 @@ msgstr ""
 "Zech의 논문 <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1576
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -955,7 +955,7 @@ msgstr ""
 "이 공식은 M. Chapront-Touze와 J. Chapront의 <em>Lunar Tables and Programs from "
 "4000 B.C. to A.D. 8000</em> (1991)의 ELP 2000-85 lunar theory의 요약버젼에서 나왔습니다."
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1579
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -965,7 +965,7 @@ msgstr ""
 "이 방정식은 F. R. Stephenson와 L. V. Morrison의 논문 <em>Long-Term Fluctuations in "
 "the Earth's Rotation: 700 BC to AD 1990</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1582
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -974,7 +974,7 @@ msgstr ""
 "이 공식은 F. R. Stephenson의 책 <em>Historical Eclipses and Earth's Rotation</em> "
 "(%1)에서 발표되였습니다."
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1585
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -984,7 +984,7 @@ msgstr ""
 "1620년부터 2000년을 표로 제공하고, 그 이외의 시간대은 Chapront, Chapront-Touze & Francou "
 "(1997)의 변형을 포함하고 있습니다."
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1588
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -992,7 +992,7 @@ msgid ""
 msgstr ""
 "NASA 제트 추진 연구소의 JPL 태양계 역학 그룹이 자신들의 웹 사이트인 %1JPL Horizons%2에서 이 공식을 사용합니다."
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1591
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1001,7 +1001,7 @@ msgstr ""
 "이 다항식은 J. Meeus와 L. Simons의 논문 <em>Polynomial approximations to Delta T, "
 "1620-2000 AD</em> (%1)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1594
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1010,7 +1010,7 @@ msgstr ""
 "O. Montenbruck와 T. Pfleger의 <em>Astronomy on the Personal Computer</em> "
 "(2000) 4판은 최근 자료를 근사하는 3차 다항식을 제공합니다."
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1597
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1021,7 +1021,7 @@ msgstr ""
 "Calculations</em> (3판, 2007)와 <em>Calendrical Tabulations</em> (2002)에서 "
 "선보였습니다. 이 식은 Jean Meeus의 <em>Astronomical Algorithms</em> (1991)을 기반으로 합니다."
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1600
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1032,7 +1032,7 @@ msgstr ""
 "Earth's clock error %1T and the calculation of eclipses</em> (%2)와 그 "
 "부록(%3)에서 발표되었습니다."
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1603
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1044,7 +1044,7 @@ msgstr ""
 "쓰는 단체 최적화된 %1T 공식을 만들었습니다. 이 식은 Stephenson (%2)이 서술한 가능한 주기를 기반으로 하고 있습니다. 더 "
 "많은 정보는 %3여기%4를 참고하십시오."
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1058,11 +1058,11 @@ msgstr ""
 "of Solar Eclipses: -1900 to +3000</em> (2006)에 쓰였습니다. 이 공식은 또한 태양, 달, 행성의 "
 "천문력 프로그램 SOLEX에도 쓰였습니다."
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 msgid "Used by default."
 msgstr "기본 설정"
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1609
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1072,7 +1072,7 @@ msgstr ""
 "이 공식은 Stephenson & Morrison (1984)을 기반으로 B. Banjevic의 논문 <em>Ancient "
 "eclipses and dating the fall of Babylon</em> (%1)에 발표되었습니다."
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1612
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1083,7 +1083,7 @@ msgstr ""
 "논문 <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1)에 "
 "발표되었고 2013년에 Sana Islam이 재논의하였습니다."
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1615
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1091,43 +1091,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1618
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "이 공식은 사용자 정의 상수를 써서 계산하는 %1T의 2차 방정식입니다."
 
-#: src/core/StelCore.cpp:1618 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1621 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "오류"
 
-#: src/core/StelCore.cpp:1668
+#: src/core/StelCore.cpp:1671
 msgid "with meaningless values outside this range"
 msgstr "범위 밖에서는 의미없는 값을 가짐"
 
-#: src/core/StelCore.cpp:1694
+#: src/core/StelCore.cpp:1697
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr "평균 오차 1초 미만, 최대 오차 1.9초, 범위 밖에서는 의미없은 값을 가짐"
 
-#: src/core/StelCore.cpp:1716 src/core/StelCore.cpp:1721
-#: src/core/StelCore.cpp:1748 src/core/StelCore.cpp:1753
-#: src/core/StelCore.cpp:1758
+#: src/core/StelCore.cpp:1719 src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1751 src/core/StelCore.cpp:1756
+#: src/core/StelCore.cpp:1761
 msgid "with zero values outside this range"
 msgstr "범위 밖에서는 값이 0임"
 
-#: src/core/StelCore.cpp:1726
+#: src/core/StelCore.cpp:1729
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "범위 밖에서는 평균적으로 1초 정도의 정확성과 0의 값을 가짐"
 
-#: src/core/StelCore.cpp:1768
+#: src/core/StelCore.cpp:1771
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "유효 시간범위: %1년에서 %2년까지, %3"
 
-#: src/core/StelCore.cpp:1770
+#: src/core/StelCore.cpp:1773
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "유효 시간범위: %1년에서 %2까지"
@@ -1225,6 +1225,17 @@ msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr "정사도법은 투시도법과 비슷하나, 원근점을 무한한 거리에 놓습니다."
+
+#: src/core/StelProjectorClasses.cpp:459
+msgid "Sinusoidal"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:464
+msgid ""
+"The sinusoidal projection is a <i>pseudocylindrical equal-area map "
+"projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
+"area projection."
+msgstr ""
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -1779,7 +1790,7 @@ msgstr "도움말 창"
 msgid "Configuration window"
 msgstr "설정 창"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:192 src/ui_searchDialogGui.h:615
 msgid "Search window"
 msgstr "검색 창"
 
@@ -4041,10 +4052,6 @@ msgstr "네트워크에서 위치 받아오기"
 msgid "Find Object"
 msgstr "천체 찾기"
 
-#: src/ui_searchDialogGui.h:615
-msgid "Find Object or Position"
-msgstr "천체 또는 위치 찾기"
-
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
 msgstr "Tab 키로 천체를 선택하세요"
@@ -4224,7 +4231,7 @@ msgid "Markings"
 msgstr "표시"
 
 #: src/ui_viewDialog.h:1239
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "풍경"
 
@@ -4298,7 +4305,7 @@ msgid "Light pollution data from locations database"
 msgstr "위치 정보에 따른 광공해"
 
 #: src/ui_viewDialog.h:1272
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:408
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "광공해:"
 
@@ -4946,7 +4953,7 @@ msgid "Tools"
 msgstr "도구"
 
 #: src/ui_configurationDialog.h:1216
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "스크립트"
 
@@ -7375,76 +7382,92 @@ msgstr "성운 이름"
 msgid "Nebula hints"
 msgstr "성운 힌트"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+msgid "Galaxies hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+msgid "Bright nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+msgid "Dark nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+msgid "Clusters hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
 msgstr "은하적도"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Effects"
 msgstr "효과"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Manual zoom"
 msgstr "수동 확대/축소"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Magnitude scaling multiplier"
 msgstr "등급 조정 배율"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:427
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Milky Way intensity:"
 msgstr "은하수 밝기:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "Zodiacal light intensity:"
 msgstr ""
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
 msgstr "성운 라벨 주기:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Zoom duration:"
 msgstr "줌 시간:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
 msgid "Cursor timeout:"
 msgstr "커서 제한시간:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
 msgid "Setting landscape sets location"
 msgstr "풍경 설정 위치를 설정"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
 msgid "Run local script"
 msgstr "로컬 스크립트 실행"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Stop running script"
 msgstr "실행 중인 스크립트 정지"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "CD/DVD script"
 msgstr "CD/DVD 스크립트"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:490
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
 msgid "Administration"
 msgstr "관리"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
 msgid "Load default configuration"
 msgstr "기본 설정 로드"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:496
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
 msgid "Save current configuration"
 msgstr "현재 설정 저장"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:499
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
 msgid "Shut down"
 msgstr "컴퓨터 끄기"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:575
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
 msgstr "[TUI 노드 없음]"
 
@@ -11252,6 +11275,9 @@ msgstr ""
 
 #~ msgid "Run landscapes script from file"
 #~ msgstr "화일로부터 풍경 스크립트 실행하기"
+
+#~ msgid "Find Object or Position"
+#~ msgstr "천체 또는 위치 찾기"
 
 #~ msgid "1000"
 #~ msgstr "1000"

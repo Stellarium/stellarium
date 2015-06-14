@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 00:45+0600\n"
+"POT-Creation-Date: 2015-06-13 23:00+0600\n"
 "PO-Revision-Date: 2015-05-26 00:28+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-13 05:25+0000\n"
+"X-Launchpad-Export-Date: 2015-06-14 05:23+0000\n"
 "X-Generator: Launchpad (build 17557)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
-#: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -109,7 +109,7 @@ msgid "Meridian line"
 msgstr "เส้นเมริเดียน"
 
 #: src/core/modules/GridLinesMgr.cpp:760
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "เส้นขอบฟ้า"
 
@@ -123,7 +123,7 @@ msgid "Ecliptic J2000 grid"
 msgstr "กริดพิกัดสุริยวิถี J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1323
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "กริดพิกัดดาราจักร"
 
@@ -132,7 +132,7 @@ msgid "Galactic equator"
 msgstr "ศูนย์สูตรดาราจักร"
 
 #: src/core/modules/GridLinesMgr.cpp:765
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:376
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr "เส้นการอยู่ตรงข้าม/ร่วมทิศ ตามแนวลองจิจูดฟ้า"
 
@@ -175,7 +175,7 @@ msgstr ", %1 ม."
 msgid "Celestial body:"
 msgstr "วัตถุท้องฟ้า:"
 
-#: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -185,12 +185,12 @@ msgstr "วัตถุท้องฟ้า:"
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:142
+#: src/core/modules/Nebula.cpp:146
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "ความทึบแสง: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -199,7 +199,7 @@ msgstr "ความทึบแสง: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:150 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -208,171 +208,171 @@ msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>
 msgid "Magnitude: <b>%1</b>"
 msgstr "โชติมาตร: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:158
+#: src/core/modules/Nebula.cpp:162
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "ความสว่างพื้นผิว: <b>%1</b> (ลดลงไปที่: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:164
+#: src/core/modules/Nebula.cpp:168
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "ความสว่างพื้นผิว: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:172 src/core/modules/Nebula.cpp:177
-#: src/core/modules/Nebula.cpp:182
+#: src/core/modules/Nebula.cpp:176 src/core/modules/Nebula.cpp:181
+#: src/core/modules/Nebula.cpp:186
 #, qt-format
 msgid "Brightness: %1"
 msgstr "ความส่องสว่าง: %1"
 
-#: src/core/modules/Nebula.cpp:175
+#: src/core/modules/Nebula.cpp:179
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
 msgstr "รูปแบบ: %1"
 
-#: src/core/modules/Nebula.cpp:176
+#: src/core/modules/Nebula.cpp:180
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
 msgstr "โครงสร้าง: %1"
 
-#: src/core/modules/Nebula.cpp:188
+#: src/core/modules/Nebula.cpp:192
 #, qt-format
 msgid "Size: %1"
 msgstr "ขนาด: %1"
 
-#: src/core/modules/Nebula.cpp:713
+#: src/core/modules/Nebula.cpp:725
 msgid "Galaxy"
 msgstr "ดาราจักร"
 
-#: src/core/modules/Nebula.cpp:716
+#: src/core/modules/Nebula.cpp:728
 msgid "Open cluster"
 msgstr "กระจุกดาวเปิด"
 
-#: src/core/modules/Nebula.cpp:719
+#: src/core/modules/Nebula.cpp:731
 msgid "Globular cluster"
 msgstr "กระจุกดาวทรงกลม"
 
-#: src/core/modules/Nebula.cpp:722
+#: src/core/modules/Nebula.cpp:734
 msgid "Nebula"
 msgstr "เนบิวลา"
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:737
 msgid "Planetary nebula"
 msgstr "เนบิวลาดาวเคราะห์"
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:740
 msgid "Dark nebula"
 msgstr "เนบิวลามืด"
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:743
 msgid "Irregular galaxy"
 msgstr "ดาราจักรไร้รูปแบบ"
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:746
 msgid "Cluster associated with nebulosity"
 msgstr "กระจุกดาวที่เกี่ยวข้องกับเนบิวลา"
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:749
 msgid "Unknown"
 msgstr "ไม่มีข้อมูล"
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:752
 msgid "HII region"
 msgstr "บริเวณเอช 2"
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:755
 msgid "Reflection nebula"
 msgstr "เนบิวลาสะท้อนแสง"
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:758
 msgid "H-α emission region"
 msgstr "บริเวณเปล่งแสง H-α"
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:761
 msgid "Undocumented type"
 msgstr "ยังไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:762
+#: src/core/modules/Nebula.cpp:774
 msgctxt "form"
 msgid "circular"
 msgstr "ทรงกลม"
 
-#: src/core/modules/Nebula.cpp:765
+#: src/core/modules/Nebula.cpp:777
 msgctxt "form"
 msgid "elliptical"
 msgstr "ทรงรี"
 
-#: src/core/modules/Nebula.cpp:768
+#: src/core/modules/Nebula.cpp:780
 msgctxt "form"
 msgid "irregular"
 msgstr "ไม่สม่ำเสมอ"
 
-#: src/core/modules/Nebula.cpp:771
+#: src/core/modules/Nebula.cpp:783
 msgctxt "form"
 msgid "undocumented form"
 msgstr "รูปแบบที่ไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:784
+#: src/core/modules/Nebula.cpp:796
 msgctxt "structure"
 msgid "amorphous"
 msgstr "อสัณฐาน"
 
-#: src/core/modules/Nebula.cpp:787
+#: src/core/modules/Nebula.cpp:799
 msgctxt "structure"
 msgid "conventional"
 msgstr "สามัญ"
 
-#: src/core/modules/Nebula.cpp:790
+#: src/core/modules/Nebula.cpp:802
 msgctxt "structure"
 msgid "filamentary"
 msgstr "เส้นใย"
 
-#: src/core/modules/Nebula.cpp:793
+#: src/core/modules/Nebula.cpp:805
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr "โครงสร้างที่ไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:806
+#: src/core/modules/Nebula.cpp:818
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "จางที่สุด"
 
-#: src/core/modules/Nebula.cpp:809
+#: src/core/modules/Nebula.cpp:821
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr "ปานกลาง"
 
-#: src/core/modules/Nebula.cpp:812
+#: src/core/modules/Nebula.cpp:824
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "สว่างที่สุด"
 
-#: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
 msgid "undocumented brightness"
 msgstr "ไม่ได้ระบุในเอกสาร"
 
-#: src/core/modules/Nebula.cpp:828
+#: src/core/modules/Nebula.cpp:840
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr "สว่างมาก"
 
-#: src/core/modules/Nebula.cpp:831
+#: src/core/modules/Nebula.cpp:843
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr "สว่าง"
 
-#: src/core/modules/Nebula.cpp:834
+#: src/core/modules/Nebula.cpp:846
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr "ปานกลาง"
 
-#: src/core/modules/Nebula.cpp:837
+#: src/core/modules/Nebula.cpp:849
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr "จาง"
 
-#: src/core/modules/NebulaMgr.cpp:131
+#: src/core/modules/NebulaMgr.cpp:139
 msgid "Deep-sky objects"
 msgstr "วัตถุท้องฟ้าห้วงลึก"
 
@@ -809,13 +809,13 @@ msgstr "กลับภาพในแนวนอน"
 msgid "Flip scene vertically"
 msgstr "กลับภาพในแนวตั้ง"
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1528
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "การตรวจแก้ถูกปิดการใช้งาน "
 "ใช้ตัวเลือกนี้ก็ต่อเมื่อคุณทราบดีว่ากำลังทำอะไรอยู่!"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1531
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -826,7 +826,7 @@ msgstr ""
 "<em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> "
 "(%1) สำหรับข้อมูลเพิ่มเติม ให้ดู %2ที่นี่%3"
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1534
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -835,7 +835,7 @@ msgstr ""
 "สมการเอมพิริคัลนี้เผยแพร่โดย G. M. Clemence ในบทความ <em>On the system of "
 "astronomical constants</em> (%1)"
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1537
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -848,7 +848,7 @@ msgstr ""
 "Formulae for Calculators</em> และถูกนำมาใช้ในโปรแกรมคอมพิวเตอร์ SunTracker "
 "Pro"
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1541
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -858,7 +858,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> และ <em>Canon of Solar Eclipses</em> โดย "
 "Mucke & Meeus (ค.ศ. 1983)"
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1545
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -870,7 +870,7 @@ msgstr ""
 "ความสัมพันธ์เดียวกันยังนำไปดัดแปลงใช้ในตารางการร่วมแนว (syzygy) ของ "
 "Goldstine (ค.ศ. 1973)"
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -881,7 +881,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)"
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -890,7 +890,7 @@ msgstr ""
 "สมการนี้แผยแพร่โดย F. R. Stephenson ในบทความ <em>Pre-Telescopic Astronomical "
 "Observations</em> (%1)"
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1555
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -903,7 +903,7 @@ msgstr ""
 "for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1) "
 "จากข้อมูลของ Brouwer (1952)"
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1558
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -912,7 +912,7 @@ msgstr ""
 "สูตรนี้ใช้ใน <em>Planetary Programs and Tables from -4000 to +2800</em> "
 "(ค.ศ. 1986) โดย P. Bretagnon & L. Simon และในโปรแกรม RedShift"
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1561
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -922,11 +922,11 @@ msgstr ""
 "สูตรนี้เผยแพร่โดย F. R. Stephenson และ L. V. Morrison ในบทความ <em>Long-term "
 "changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1)"
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1564
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "สูตรนี้ใช้ในโปรแกรม Guide 7"
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1567
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -936,7 +936,7 @@ msgstr ""
 "2035</em> (ค.ศ. 1987) และ <em>Fifty Year Canon of Lunar Eclipses: 1986-"
 "2035</em> (ค.ศ. 1989)"
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1570
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -945,7 +945,7 @@ msgstr ""
 "สูตรนี้ใช้โดย K.M. Borkowski (%1) จากการวิเคราะห์บันทึกสุริยุปราคา 31 ครั้ง "
 "ระหว่าง 2137 ปี ก่อนคริสต์ศักราช ถึง ค.ศ. 1715"
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1573
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -957,7 +957,7 @@ msgstr ""
 "<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1) จากข้อมูลของ Stephenson & Morrison (1984)"
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1576
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -967,7 +967,7 @@ msgstr ""
 "ในทฤษฎีการเคลื่อนที่ของดวงจันทร์ ELP 2000-85 รุ่นย่อ และใน <em>Lunar Tables "
 "and Programs from 4000 B.C. to A.D. 8000</em> (ค.ศ. 1991)"
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1579
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -977,7 +977,7 @@ msgstr ""
 "สูตรนี้เผยแพร่โดย F. R. Stephenson และ L. V. Morrison ในบทความ <em>Long-Term "
 "Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1)"
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1582
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -986,14 +986,14 @@ msgstr ""
 "F. R. Stephenson เผยแพร่สูตรนี้ในหนังสือ <em>Historical Eclipses and Earth's "
 "Rotation</em> (%1)"
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1585
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1588
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1002,7 +1002,7 @@ msgstr ""
 "JPL Solar System Dynamics Group ของ NASA Jet Propulsion Laboratory "
 "ใช้สูตรนี้บนเว็บไซต์ %1JPL Horizons%2"
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1591
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1011,7 +1011,7 @@ msgstr ""
 "สมการพหุนามที่เผยแพร่โดย J. Meeus และ L. Simons ในบทความ <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)"
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1594
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1021,7 +1021,7 @@ msgstr ""
 "4 ของ O. Montenbruck และ T. Pfleger ใช้สมการพหุนามกำลัง 3 "
 "ที่ทำให้เข้ากับข้อมูลในอดีตเมื่อไม่นานมานี้"
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1597
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1032,7 +1032,7 @@ msgstr ""
 "Calculations</em> (3rd ed. 2007) และ <em>Calendrical Tabulations</em> (2002) "
 "มีรากฐานจาก <em>Astronomical Algorithms</em> (1991) ของ Jean Meeus"
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1600
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1043,7 +1043,7 @@ msgstr ""
 "<em>Historical values of the Earth's clock error %1T and the calculation of "
 "eclipses</em> (%2) และบทเพิ่มเติมใน (%3)"
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1603
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1052,7 +1052,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1067,11 +1067,11 @@ msgstr ""
 "Eclipses: -1900 to +3000</em> (ค.ศ. 2006) สูตรนี้ยังนำไปใช้ในโปรแกรม SOLEX "
 "ซึ่งเป็นโปรแกรมคำนวณอิเฟเมอริสของดวงอาทิตย์ ดวงจันทร์ และดาวเคราะห์ด้วย"
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 msgid "Used by default."
 msgstr "ถูกใช้โดยปริยาย"
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1609
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1082,7 +1082,7 @@ msgstr ""
 "1984) เผยแพร่ในบทความ <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)"
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1612
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1093,7 +1093,7 @@ msgstr ""
 "และ Simons (ค.ศ. 2000) เผยแพร่ในบทความ <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) และปรับปรุงโดย Sana Islam ใน ค.ศ. 2013"
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1615
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1104,7 +1104,7 @@ msgstr ""
 "Sultana และ Faheem Zaidi ตีพิมพ์ใน <em>Delta T: Polynomial Approximation of "
 "Time Period 1620-2013</em> (%1)"
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1618
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1112,15 +1112,15 @@ msgid ""
 msgstr ""
 "นี่คือสูตรกำลังสองสำหรับการคำนวณ %1T โดยมีสัมประสิทธ์ตามที่ผู้ใช้กำหนด"
 
-#: src/core/StelCore.cpp:1618 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1621 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "เกิดข้อผิดพลาด"
 
-#: src/core/StelCore.cpp:1668
+#: src/core/StelCore.cpp:1671
 msgid "with meaningless values outside this range"
 msgstr "ไม่มีความหมายเมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:1694
+#: src/core/StelCore.cpp:1697
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1128,23 +1128,23 @@ msgstr ""
 "ด้วยค่าผิดพลาดเฉลี่ยน้อยกว่า 1 วินาที, ค่าผิดพลาดสูงสุด 1.9 วินาที, "
 "และไม่มีความหมายเมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:1716 src/core/StelCore.cpp:1721
-#: src/core/StelCore.cpp:1748 src/core/StelCore.cpp:1753
-#: src/core/StelCore.cpp:1758
+#: src/core/StelCore.cpp:1719 src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1751 src/core/StelCore.cpp:1756
+#: src/core/StelCore.cpp:1761
 msgid "with zero values outside this range"
 msgstr "มีค่าเป็นศูนย์เมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:1726
+#: src/core/StelCore.cpp:1729
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "ด้วยความแม่นยำปรกติที่ 1 วินาที และมีค่าเป็นศูนย์เมื่ออยู่นอกช่วงเวลานี้"
 
-#: src/core/StelCore.cpp:1768
+#: src/core/StelCore.cpp:1771
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2, %3"
 
-#: src/core/StelCore.cpp:1770
+#: src/core/StelCore.cpp:1773
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ช่วงที่ใช้งานได้: ระหว่าง ค.ศ. %1 ถึง %2"
@@ -1254,6 +1254,17 @@ msgid ""
 "of perspective is set to an infinite distance."
 msgstr ""
 "การฉายแบบออร์โทกราฟิกเกี่ยวข้องกับทัศนมิติ แต่จุดรวมสายตาอยู่ที่ระยะอนันต์"
+
+#: src/core/StelProjectorClasses.cpp:459
+msgid "Sinusoidal"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:464
+msgid ""
+"The sinusoidal projection is a <i>pseudocylindrical equal-area map "
+"projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
+"area projection."
+msgstr ""
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -1821,7 +1832,7 @@ msgstr "หน้าต่างวิธีใช้"
 msgid "Configuration window"
 msgstr "หน้าต่างการปรับแต่ง"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:192 src/ui_searchDialogGui.h:615
 msgid "Search window"
 msgstr "หน้าต่างการค้นหา"
 
@@ -4121,10 +4132,6 @@ msgstr "รับที่ตั้งจากเครือข่าย"
 msgid "Find Object"
 msgstr "ค้นหาวัตถุท้องฟ้า"
 
-#: src/ui_searchDialogGui.h:615
-msgid "Find Object or Position"
-msgstr "ค้นหาวัตถุหรือตำแหน่ง"
-
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
 msgstr "ใช้ปุ่มแท็บเลือกรายการที่พบ"
@@ -4304,7 +4311,7 @@ msgid "Markings"
 msgstr "เครื่องหมาย"
 
 #: src/ui_viewDialog.h:1239
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "ภูมิทัศน์"
 
@@ -4381,7 +4388,7 @@ msgid "Light pollution data from locations database"
 msgstr "ข้อมูลมลพิษทางแสงจากฐานข้อมูลสถานที่"
 
 #: src/ui_viewDialog.h:1272
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:408
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "มลพิษทางแสง:"
 
@@ -5043,7 +5050,7 @@ msgid "Tools"
 msgstr "เครื่องมือ"
 
 #: src/ui_configurationDialog.h:1216
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "สคริปต์"
 
@@ -7521,76 +7528,92 @@ msgstr "ชื่อเนบิวลา"
 msgid "Nebula hints"
 msgstr "เนบิวลา"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+msgid "Galaxies hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+msgid "Bright nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+msgid "Dark nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+msgid "Clusters hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
 msgstr "เส้นศูนย์สูตรดาราจักร"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Effects"
 msgstr "เอฟเฟกต์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Manual zoom"
 msgstr "ซูมด้วยมือ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Magnitude scaling multiplier"
 msgstr "ตัวคูณการปรับตามโชติมาตร"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:427
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Milky Way intensity:"
 msgstr "ความสว่างของทางช้างเผือก:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "Zodiacal light intensity:"
 msgstr "ความเข้มของแสงจักรราศี:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
 msgstr "ความถี่ของการแสดงชื่อเนบิวลา:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Zoom duration:"
 msgstr "ช่วงเวลาซูม:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
 msgid "Cursor timeout:"
 msgstr "เวลาแสดงเคอร์เซอร์:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
 msgid "Setting landscape sets location"
 msgstr "ตั้งค่าที่อยู่ของภูมิทัศน์"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
 msgid "Run local script"
 msgstr "เปิดใช้งานสคริปต์ภายใน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Stop running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงาน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "CD/DVD script"
 msgstr "สคริปต์จาก CD/DVD"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:490
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
 msgid "Administration"
 msgstr "ดูแลระบบ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
 msgid "Load default configuration"
 msgstr "โหลดการตั้งค่าปริยาย"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:496
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
 msgid "Save current configuration"
 msgstr "บันทึกการตั้งค่าปัจจุบัน"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:499
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
 msgid "Shut down"
 msgstr "ปิดโปรแกรม"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:575
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
 msgstr "[ไม่มีโหนด TUI]"
 
@@ -11471,6 +11494,9 @@ msgstr "ดาวเคราะห์ขณะนี้: ดาวเสาร�
 
 #~ msgid "Neso"
 #~ msgstr "นีโซ"
+
+#~ msgid "Find Object or Position"
+#~ msgstr "ค้นหาวัตถุหรือตำแหน่ง"
 
 #, qt-format
 #~ msgid "Ecliptic Geocentric (of date): %1/%2"

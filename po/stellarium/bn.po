@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 00:45+0600\n"
+"POT-Creation-Date: 2015-06-13 23:00+0600\n"
 "PO-Revision-Date: 2015-06-09 02:43+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-13 05:13+0000\n"
+"X-Launchpad-Export-Date: 2015-06-14 05:12+0000\n"
 "X-Generator: Launchpad (build 17557)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:365
-#: src/core/modules/NebulaMgr.cpp:131 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -108,7 +108,7 @@ msgid "Meridian line"
 msgstr "মূল মধ্যরেখা"
 
 #: src/core/modules/GridLinesMgr.cpp:760
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "দিগন্ত নির্দেশক রেখা"
 
@@ -122,7 +122,7 @@ msgid "Ecliptic J2000 grid"
 msgstr "J2000 অনুযায়ী সৌরপথ ভিত্তিক স্থানাঙ্ক পদ্ধতি"
 
 #: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1323
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক পদ্ধতি"
 
@@ -131,7 +131,7 @@ msgid "Galactic equator"
 msgstr "ছায়াপথ নির্দেশক রেখা"
 
 #: src/core/modules/GridLinesMgr.cpp:765
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:376
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr "প্রতিযোগ / সংযোগ দ্রাঘিমা"
 
@@ -174,7 +174,7 @@ msgstr ", %1 মিটার"
 msgid "Celestial body:"
 msgstr "স্থান :"
 
-#: src/core/modules/Nebula.cpp:136 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:269
@@ -184,12 +184,12 @@ msgstr "স্থান :"
 msgid "Type: <b>%1</b>"
 msgstr "ধরন : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:142
+#: src/core/modules/Nebula.cpp:146
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "স্বচ্ছতা : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:147 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -198,7 +198,7 @@ msgstr "স্বচ্ছতা : <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়ে : <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:150 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -207,171 +207,171 @@ msgstr "ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়
 msgid "Magnitude: <b>%1</b>"
 msgstr "ঔজ্জ্বল্যতা : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:158
+#: src/core/modules/Nebula.cpp:162
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "পৃষ্ঠতলের ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়ে : <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:164
+#: src/core/modules/Nebula.cpp:168
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "পৃষ্ঠতলের ঔজ্জ্বল্যতা : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:172 src/core/modules/Nebula.cpp:177
-#: src/core/modules/Nebula.cpp:182
+#: src/core/modules/Nebula.cpp:176 src/core/modules/Nebula.cpp:181
+#: src/core/modules/Nebula.cpp:186
 #, qt-format
 msgid "Brightness: %1"
 msgstr "ঔজ্জ্বল্যতা : %1"
 
-#: src/core/modules/Nebula.cpp:175
+#: src/core/modules/Nebula.cpp:179
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
 msgstr "দৃশ্যমান আকার : %1"
 
-#: src/core/modules/Nebula.cpp:176
+#: src/core/modules/Nebula.cpp:180
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
 msgstr "গ্যাসের গঠন : %1"
 
-#: src/core/modules/Nebula.cpp:188
+#: src/core/modules/Nebula.cpp:192
 #, qt-format
 msgid "Size: %1"
 msgstr "বিস্তার : %1"
 
-#: src/core/modules/Nebula.cpp:713
+#: src/core/modules/Nebula.cpp:725
 msgid "Galaxy"
 msgstr "নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:716
+#: src/core/modules/Nebula.cpp:728
 msgid "Open cluster"
 msgstr "অনিয়তাকার তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:719
+#: src/core/modules/Nebula.cpp:731
 msgid "Globular cluster"
 msgstr "গোলকাকার তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:722
+#: src/core/modules/Nebula.cpp:734
 msgid "Nebula"
 msgstr "নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:737
 msgid "Planetary nebula"
 msgstr "গ্রহরূপী নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:740
 msgid "Dark nebula"
 msgstr "কৃষ্ণবর্ণ নিহারীকা"
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:743
 msgid "Irregular galaxy"
 msgstr "অনিয়তাকার নক্ষত্রলোক"
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:746
 msgid "Cluster associated with nebulosity"
 msgstr "নীহারিকা যুক্ত তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:749
 msgid "Unknown"
 msgstr "অজানা"
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:752
 msgid "HII region"
 msgstr "HII এলাকা"
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:755
 msgid "Reflection nebula"
 msgstr "প্রতিফলিত নিহারীকা"
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:758
 msgid "H-α emission region"
 msgstr "H-α নির্গমন স্থান"
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:761
 msgid "Undocumented type"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:762
+#: src/core/modules/Nebula.cpp:774
 msgctxt "form"
 msgid "circular"
 msgstr "গোলাকার"
 
-#: src/core/modules/Nebula.cpp:765
+#: src/core/modules/Nebula.cpp:777
 msgctxt "form"
 msgid "elliptical"
 msgstr "উপবৃত্তাকার"
 
-#: src/core/modules/Nebula.cpp:768
+#: src/core/modules/Nebula.cpp:780
 msgctxt "form"
 msgid "irregular"
 msgstr "অনিয়তকার"
 
-#: src/core/modules/Nebula.cpp:771
+#: src/core/modules/Nebula.cpp:783
 msgctxt "form"
 msgid "undocumented form"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:784
+#: src/core/modules/Nebula.cpp:796
 msgctxt "structure"
 msgid "amorphous"
 msgstr "অনিয়তাকার"
 
-#: src/core/modules/Nebula.cpp:787
+#: src/core/modules/Nebula.cpp:799
 msgctxt "structure"
 msgid "conventional"
 msgstr "গতানুগতিক"
 
-#: src/core/modules/Nebula.cpp:790
+#: src/core/modules/Nebula.cpp:802
 msgctxt "structure"
 msgid "filamentary"
 msgstr "সূত্রাকার"
 
-#: src/core/modules/Nebula.cpp:793
+#: src/core/modules/Nebula.cpp:805
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:806
+#: src/core/modules/Nebula.cpp:818
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "ম্লান"
 
-#: src/core/modules/Nebula.cpp:809
+#: src/core/modules/Nebula.cpp:821
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr "মাঝারি"
 
-#: src/core/modules/Nebula.cpp:812
+#: src/core/modules/Nebula.cpp:824
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:815 src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
 msgid "undocumented brightness"
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/Nebula.cpp:828
+#: src/core/modules/Nebula.cpp:840
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr "অতি উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:831
+#: src/core/modules/Nebula.cpp:843
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr "উজ্জ্বল"
 
-#: src/core/modules/Nebula.cpp:834
+#: src/core/modules/Nebula.cpp:846
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr "মাঝারি"
 
-#: src/core/modules/Nebula.cpp:837
+#: src/core/modules/Nebula.cpp:849
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr "ম্লান"
 
-#: src/core/modules/NebulaMgr.cpp:131
+#: src/core/modules/NebulaMgr.cpp:139
 msgid "Deep-sky objects"
 msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
@@ -809,12 +809,12 @@ msgstr "আড়াআড়ি ভাবে দৃশ্যপট ঘোরান"
 msgid "Flip scene vertically"
 msgstr "লম্বালম্বিভাবে দৃশ্যপট ঘোরান"
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1528
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "সংশোধন প্রনালি নিস্ক্রিয় করা আছে । সম্যক ধারণা থাকলে তবেই সক্রিয় করুন ।"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1531
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -826,7 +826,7 @@ msgstr ""
 "(%1) নামক প্রবন্ধে এটি ব্যবহার করেছেন । বিস্তারিত তথ্য জানতে %2এখানে%3 দেখুন "
 "।"
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1534
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -835,7 +835,7 @@ msgstr ""
 "এই বিখ্যাত সূত্রটি G. M. Clemence তাঁর  <em>On the system of astronomical "
 "constants</em> (%1) নামক প্রবন্ধে প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1537
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -848,7 +848,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em> নামক প্রবন্ধে এটি ব্যবহার "
 "করেছেন ।"
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1541
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -858,7 +858,7 @@ msgstr ""
 "প্রবর্তিত <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> ও <em>Canon of Solar "
 "Eclipses</em> নামক প্রবন্ধে গৃহীত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1545
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -870,7 +870,7 @@ msgstr ""
 "তালিকা দেওয়া আছে । এই একই সম্পর্ক Goldstine (১৯৭৩) প্রবর্তিত syzygy ছকেও "
 "গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -881,7 +881,7 @@ msgstr ""
 "observations</em> (%1) নামক প্রবন্ধে P. M. Muller এবং F. R. Stephenson এই "
 "সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -890,7 +890,7 @@ msgstr ""
 "<em>Pre-Telescopic Astronomical Observations</em> (%1) নামক প্রবন্ধে P. M. "
 "Muller এবং F. R. Stephenson এই সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1555
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -904,7 +904,7 @@ msgstr ""
 "period 1800-1975</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ "
 "করেন ।"
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1558
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -914,7 +914,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (১৯৮৬) ও RedShift নামক কম্পিউটার "
 "প্রোগ্রামে গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1561
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -925,13 +925,13 @@ msgstr ""
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) নামক প্রবন্ধে এই "
 "সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1564
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Guide নামক কম্পিউটার প্রোগ্রামের ৭ম সংস্করণে এই কার্যপ্রনালীটি ব্যবহৃত হয়েছে "
 "।"
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1567
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -941,7 +941,7 @@ msgstr ""
 "Year Canon of Lunar Eclipses: 1986-2035</em> (১৯৮৯) নামক প্রবন্ধে F. Espenak "
 "এই কার্যপ্রনালীটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1570
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -950,7 +950,7 @@ msgstr ""
 "২১৩৭ খ্রীষ্টপূর্বাব্দ থেকে ১৭১৫ খ্রীষ্টাব্দ পর্যন্ত ঘটা সূর্যগ্রহণগুলির "
 "মধ্যের ৩১টির সংগৃহিত তথ্য থেকে K.M. Borkowski (%1) এই সূত্রটি তৈরী করেছেন ।"
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1573
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -962,7 +962,7 @@ msgstr ""
 "সমীকরনটি <em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
 "1988</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1576
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -972,7 +972,7 @@ msgstr ""
 "4000 B.C. to A.D. 8000</em> (১৯৯১) প্রবন্ধে চাঁদ সংক্রান্ত ELP 2000-85 "
 "মতবাদের সংক্ষিপ্ত রূপটিতে এই সূত্রটি গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1579
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -983,7 +983,7 @@ msgstr ""
 "Earth's Rotation: 700 BC to AD 1990</em> (%1) নামক প্রবন্ধে এই সূত্রটি "
 "প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1582
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -992,7 +992,7 @@ msgstr ""
 "F. R. Stephenson তাঁর রচিত<em>Historical Eclipses and Earth's Rotation</em> "
 "(%1) বইয়ে এই সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1585
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1003,7 +1003,7 @@ msgstr ""
 "তালিকা ও তার বাইরের দিনগুলির জন্য Chapront, Chapront-Touze এবং Francou "
 "(১৯৯৭) প্রবর্তিত অপেক্ষক যোগ করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1588
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1012,7 +1012,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "তার ওয়েবসাইট %1JPL Horizons%2 এ এই সূত্র ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1591
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1021,7 +1021,7 @@ msgstr ""
 "J. Meeus এবং L. Simons তাঁদের প্রবন্ধ <em>Polynomial approximations to Delta "
 "T, 1620-2000 AD</em> (%1) তে এই বহুপদী সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1594
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1031,7 +1031,7 @@ msgstr ""
 "রচিত <em>Astronomy on the Personal Computer</em> (২০০০) এর ৪র্থ সংস্করণে "
 "পাওয়া যায় ।"
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1597
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1043,7 +1043,7 @@ msgstr ""
 "Tabulations</em> (২০০২) এ প্রকাশ করেন । যদিও এটির ভিত্তি Jean Meeus এর "
 "<em>Astronomical Algorithms</em> (১৯৯১) ।"
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1600
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1054,7 +1054,7 @@ msgstr ""
 "the Earth's clock error %1T and the calculation of eclipses</em> (%2) এর "
 "একটি সংযোজনে (%3) এই গুরুত্বপূর্ণ সমাধানটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1603
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1068,7 +1068,7 @@ msgstr ""
 "পর্যায়বৃত্তির উপর ভিত্তি করে নির্ণয় করা হয়েছে । আরও তথ্যের জন্য %3এখানে%4 "
 "দেখুন ।"
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1084,11 +1084,11 @@ msgstr ""
 "গ্রহ উপগ্রহ ইত্যাদির পঞ্জিকা নির্ণয়ের জন্য ব্যবহৃত SOLEX নামক একটি "
 "প্রোগ্রামে এটি ব্যবহার করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1606
 msgid "Used by default."
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করা হয়ে থাকে ।"
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1609
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1099,7 +1099,7 @@ msgstr ""
 "<em>Ancient eclipses and dating the fall of Babylon</em> (%1) প্রবন্ধে "
 "প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1612
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1111,7 +1111,7 @@ msgstr ""
 "DeltaT</em> (%1) প্রবন্ধে প্রকাশিত হয় যা ২০১৩ সালে Sana Islam পুনরুত্থাপন "
 "করেন ।"
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1615
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1122,7 +1122,7 @@ msgstr ""
 "<em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1) "
 "নামক প্রবন্ধে প্রকাশ করেন । এটিতেমাত্র ০.৬ সেকেন্ডের এদিক ওদিক হয় ।"
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1618
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1130,15 +1130,15 @@ msgid ""
 msgstr ""
 "এটি %1T নির্ণয় করার জন্য ব্যবহারকারী প্রদত্ত সহগ যুক্ত দ্বিঘাত সমীকরন ।"
 
-#: src/core/StelCore.cpp:1618 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1621 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: src/core/StelCore.cpp:1668
+#: src/core/StelCore.cpp:1671
 msgid "with meaningless values outside this range"
 msgstr "এই সীমার বাইরের মানগুলি অর্থহীন যা কোন কাজের নয়"
 
-#: src/core/StelCore.cpp:1694
+#: src/core/StelCore.cpp:1697
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1146,24 +1146,24 @@ msgstr ""
 "গড়ে সর্বনিম্ন ১ সেকেন্ড ও সর্বোচ্চ ১.৯ সেকেন্ড ত্রুটি থাকতে পারে এবং এই "
 "সীমার বাইরের মানগুলি অর্থহীন যা কোন কাজের নয়"
 
-#: src/core/StelCore.cpp:1716 src/core/StelCore.cpp:1721
-#: src/core/StelCore.cpp:1748 src/core/StelCore.cpp:1753
-#: src/core/StelCore.cpp:1758
+#: src/core/StelCore.cpp:1719 src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1751 src/core/StelCore.cpp:1756
+#: src/core/StelCore.cpp:1761
 msgid "with zero values outside this range"
 msgstr "এই সীমার বাইরের মান সবসময় শূন্য হয়"
 
-#: src/core/StelCore.cpp:1726
+#: src/core/StelCore.cpp:1729
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "সচরাচর হিসাবে ১ সেকেন্ডেরও কম ত্রুটি থাকে এবং এই সীমার বাইরের মান সবসময় "
 "শূন্য হয়"
 
-#: src/core/StelCore.cpp:1768
+#: src/core/StelCore.cpp:1771
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে , %3 ।"
 
-#: src/core/StelCore.cpp:1770
+#: src/core/StelCore.cpp:1773
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"
@@ -1275,6 +1275,17 @@ msgid ""
 msgstr ""
 "এই মানচিত্র পদ্ধতি দর্শনানুপাত মানচিত্র পদ্ধতির মতই তবে এখানে পর্যবেক্ষককে "
 "অসীমে নেওয়া হয়ে থাকে ।"
+
+#: src/core/StelProjectorClasses.cpp:459
+msgid "Sinusoidal"
+msgstr ""
+
+#: src/core/StelProjectorClasses.cpp:464
+msgid ""
+"The sinusoidal projection is a <i>pseudocylindrical equal-area map "
+"projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
+"area projection."
+msgstr ""
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -1840,7 +1851,7 @@ msgstr "সাহায্য ও ব্যবহার পদ্ধতি"
 msgid "Configuration window"
 msgstr "ব্যবহার পদ্ধতি"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:192 src/ui_searchDialogGui.h:615
 msgid "Search window"
 msgstr "অনুসন্ধান"
 
@@ -4136,10 +4147,6 @@ msgstr "নেটওয়ার্কের সাহায্যে ঠিকা�
 msgid "Find Object"
 msgstr "অনুসন্ধান করুন"
 
-#: src/ui_searchDialogGui.h:615
-msgid "Find Object or Position"
-msgstr "জ্যোতিষ্কের নাম বা তার অবস্থান অনুসন্ধান"
-
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
 msgstr ""
@@ -4322,7 +4329,7 @@ msgid "Markings"
 msgstr "চিহ্ন"
 
 #: src/ui_viewDialog.h:1239
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "ভূমিরূপ"
 
@@ -4399,7 +4406,7 @@ msgid "Light pollution data from locations database"
 msgstr "অবস্থান অনুযায়ী আলোক দূষন"
 
 #: src/ui_viewDialog.h:1272
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:408
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "আলোক দূষন :"
 
@@ -5063,7 +5070,7 @@ msgid "Tools"
 msgstr "যন্ত্রাদি"
 
 #: src/ui_configurationDialog.h:1216
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "কার্যলিপিসমূহ"
 
@@ -7553,76 +7560,92 @@ msgstr "নীহারিকার নাম"
 msgid "Nebula hints"
 msgstr "নীহারিকার অবস্থান"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
+msgid "Galaxies hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+msgid "Bright nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:369
+msgid "Dark nebulae hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:373
+msgid "Clusters hints"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
 msgstr "ছায়াপথ নির্দেশক রেখা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
 msgid "Effects"
 msgstr "আরোপিত প্রভাব"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Manual zoom"
 msgstr "নিজে হাতে কাছে দূরে করা"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:425
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Magnitude scaling multiplier"
 msgstr "ঔজ্জ্বল্যতার মাত্রার গুণক"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:427
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Milky Way intensity:"
 msgstr "ছায়াপথের তীব্রতা :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "Zodiacal light intensity:"
 msgstr "সৌর আভার তীব্রতা :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:439
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
 msgstr "নীহারিকার নাম প্রদর্শণের ঘনত্ব  :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Zoom duration:"
 msgstr "কাছেদূরে হওয়ার অবকাশ :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:446
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:466
 msgid "Cursor timeout:"
 msgstr "কার্সারের অদৃশ্য হওয়ার অবকাশ :"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:447
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
 msgid "Setting landscape sets location"
 msgstr "ভূমিরূপের সাথে স্থান পরিবর্তন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
 msgid "Run local script"
 msgstr "কার্যলিপি চালান"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:475
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
 msgid "Stop running script"
 msgstr "চলমান কার্যলিপিটি থামান"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:478
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "CD/DVD script"
 msgstr "CD/DVD প্রয়োগ কার্যলিপি"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:490
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:510
 msgid "Administration"
 msgstr "বিশেষ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:495
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:515
 msgid "Load default configuration"
 msgstr "স্বাভাবিক বৈশিষ্টাবলী আমদানি করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:496
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:516
 msgid "Save current configuration"
 msgstr "বর্তমান রূপরেখা সংরক্ষণ করুন"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:499
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:519
 msgid "Shut down"
 msgstr "কাজ বন্ধ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:575
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
 msgstr "[কোন TUI নোড নেই]"
 
@@ -11926,3 +11949,6 @@ msgstr ""
 #~ "এরও বেশি) । জটিল জীবজগতে্র জন্য মেসোপ্ল্যানেট হল একদম আদর্শ জায়গা, যদিও O বা "
 #~ "E বিভাগের গ্রহগুলিতে প্রত্যন্ত জীবন থাকলেও থাকতে পারে । বসবাস যোগ্য নয় এমন "
 #~ "গ্রহগুলিকে X (বা NH) বিভাগে রাখা হয় ।"
+
+#~ msgid "Find Object or Position"
+#~ msgstr "জ্যোতিষ্কের নাম বা তার অবস্থান অনুসন্ধান"
