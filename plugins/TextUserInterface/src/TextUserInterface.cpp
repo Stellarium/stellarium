@@ -358,7 +358,7 @@ void TextUserInterface::init()
 	                                  nebulaMgr, SLOT(setCirclesColor(Vec3f)),
 	                                  nebulaMgr->getCirclesColor(), 
 					  m5, m5_16);
-	TuiNode* m5_18 = new TuiNodeColor(N_("Galaxies hints"),
+	TuiNode* m5_18 = new TuiNodeColor(N_("Galaxy hints"),
 					  nebulaMgr, SLOT(setGalaxyColor(Vec3f)),
 					  nebulaMgr->getGalaxyColor(),
 					  m5, m5_17);
