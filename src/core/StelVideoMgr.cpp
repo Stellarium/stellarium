@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2012 Sibi Antony
+ * Copyright (C) 2012 Sibi Antony (Phonon/QT4)
+ * Copyright (C) 2015 Georg Zotti (Reactivate for QT5)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,16 +49,53 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 
 	videoObjects[id] = new VideoPlayer;
 	videoObjects[id]->player = new QMediaPlayer();
+	videoObjects[id]->videoItem= new QGraphicsVideoItem();
 
-	QMediaContent content(QUrl::fromLocalFile(filename));
+	// It seems we need an absolute pathname here.
+	qDebug() << "Trying to load" << filename;
+	QMediaContent content(QUrl::fromLocalFile(QFileInfo(filename).absoluteFilePath()));
+	qDebug() << "Loaded " << content.canonicalUrl();
+	// On Windows, this reveals we have nothing loaded!
+	qDebug() << "Media Resources:";
+	qDebug() << "\tData size:     " << content.canonicalResource().dataSize();
+	qDebug() << "\tMIME Type:     " << content.canonicalResource().mimeType();
+	qDebug() << "\tVideo codec:   " << content.canonicalResource().videoCodec();
+	qDebug() << "\tResolution:    " << content.canonicalResource().resolution();
+	qDebug() << "\tVideo bitrate: " << content.canonicalResource().videoBitRate();
+	qDebug() << "\tAudio codec:   " << content.canonicalResource().audioCodec();
+	qDebug() << "\tChannel Count: " << content.canonicalResource().channelCount();
+	qDebug() << "\tAudio bitrate: " << content.canonicalResource().audioBitRate();
+	qDebug() << "\tSample rate:   " << content.canonicalResource().sampleRate();
+	qDebug() << "\tlanguage:      " << content.canonicalResource().language();
 	videoObjects[id]->player->setMedia(content);
+	videoObjects[id]->player->setVideoOutput(videoObjects[id]->videoItem);
+	// Maybe ask only player?
+	qDebug() << "Media Resources from player:";
+	qDebug() << "\tSTATUS:        " << videoObjects[id]->player->mediaStatus();
+	qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
+	qDebug() << "\tData size:     " << videoObjects[id]->player->currentMedia().canonicalResource().dataSize();
+	qDebug() << "\tMIME Type:     " << videoObjects[id]->player->currentMedia().canonicalResource().mimeType();
+	qDebug() << "\tVideo codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().videoCodec();
+	qDebug() << "\tResolution:    " << videoObjects[id]->player->currentMedia().canonicalResource().resolution();
+	qDebug() << "\tVideo bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().videoBitRate();
+	qDebug() << "\tAudio codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().audioCodec();
+	qDebug() << "\tChannel Count: " << videoObjects[id]->player->currentMedia().canonicalResource().channelCount();
+	qDebug() << "\tAudio bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().audioBitRate();
+	qDebug() << "\tSample rate:   " << videoObjects[id]->player->currentMedia().canonicalResource().sampleRate();
+	qDebug() << "\tlanguage:      " << videoObjects[id]->player->currentMedia().canonicalResource().language();
+
 	StelMainView::getInstance().scene()->addItem(videoObjects[id]->videoItem);
-	// TODO: See whether we also must remove the videoItem later?
+	// TODO: Apparently we must wait until status=loaded. (?)
 
 	videoObjects[id]->videoItem->setPos(x, y);
+	//videoObjects[id]->videoItem->setSize(videoObjects[id]->player->media().resources()[0].resolution());
+	videoObjects[id]->videoItem->setSize(content.resources().at(0).resolution());
+	// DEBUG show a box. I had vieo playing in a tiny box already, once..!
+	videoObjects[id]->videoItem->setSize(QSizeF(150, 150));
+
 	videoObjects[id]->videoItem->setOpacity(alpha);
 	videoObjects[id]->videoItem->setVisible(show);
-	//videoObjects[id]->player->show(); // ??
+	qDebug() << "Loaded video" << id << "for pos " << x << "/" << y << "Size" << videoObjects[id]->videoItem->size();
 
 }
 
@@ -74,6 +112,7 @@ void StelVideoMgr::playVideo(const QString& id)
 			}
 
 			// otherwise just play it, or resume playing paused video.
+			qDebug() << "StelVideoMgr::playVideo: " << id;
 			videoObjects[id]->player->play();
 		}
 	}
@@ -127,6 +166,7 @@ void StelVideoMgr::dropVideo(const QString& id)
 	if (videoObjects[id]->player!=NULL)
 	{
 		videoObjects[id]->player->stop();
+		StelMainView::getInstance().scene()->removeItem(videoObjects[id]->videoItem);
 		delete videoObjects[id]->player;
 		delete videoObjects[id]->videoItem;
 		delete videoObjects[id];
@@ -167,22 +207,22 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 			QSize videoSize=videoObjects[id]->player->currentMedia().resources()[1].resolution();
 			float aspectRatio=videoSize.width()/videoSize.height();
 			// TODO: Repair next lines, linker does not find function.
-//			if (w!=-1.0f && h!=-1.0f)
-//				videoObjects[id]->videoItem->setAspectRatioMode(Qt::IgnoreAspectRatio);
-//			else
-//			{
-//				videoObjects[id]->videoItem->setAspectRatioMode(Qt::KeepAspectRatio);
-//				if (w==-1.0f && h==-1.0f)
-//				{
-//					h=videoSize.height();
-//					w=videoSize.width();
-//				}
-//				else if (h==-1.0f)
-//					h=w/aspectRatio;
-//				else if (w==-1.0f)
-//					w=h*aspectRatio;
-//			}
-//			videoObjects[id]->videoItem->setSize(QSizeF(w, h));
+			if (w!=-1.0f && h!=-1.0f)
+				videoObjects[id]->videoItem->setAspectRatioMode(Qt::IgnoreAspectRatio);
+			else
+			{
+				videoObjects[id]->videoItem->setAspectRatioMode(Qt::KeepAspectRatio);
+				if (w==-1.0f && h==-1.0f)
+				{
+					h=videoSize.height();
+					w=videoSize.width();
+				}
+				else if (h==-1.0f)
+					h=w/aspectRatio;
+				else if (w==-1.0f)
+					w=h*aspectRatio;
+			}
+			videoObjects[id]->videoItem->setSize(QSizeF(w, h));
 		}
 	}
 }
