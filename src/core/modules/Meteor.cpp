@@ -28,8 +28,7 @@
 StelTextureSP Meteor::bolideTexture;
 
 Meteor::Meteor(const StelCore* core, float v)
-	: m_distMultiplier(0.)
-	, m_segments(10)
+	: m_segments(10)
 {
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 
@@ -280,14 +279,6 @@ bool Meteor::update(double deltaTime)
 	}
 
 	m_alive = updateMeteorModel(deltaTime, m_speed, meteor);
-
-	// determine visual magnitude based on distance to observer
-	double dist = qSqrt(meteor.xyDist*meteor.xyDist + pow(meteor.position[2]-meteor.obs[2], 2));
-	if (dist == 0)
-	{
-		dist = .01;    // just to be cautious (meteor hits observer!)
-	}
-	m_distMultiplier = meteor.minDist*meteor.minDist / (dist*dist);
 
 	return m_alive;
 }
