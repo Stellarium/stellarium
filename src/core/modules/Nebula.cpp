@@ -170,7 +170,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	}
 	if (flags&Extra)
 	{
-		if (nType==NebHII)
+        if (nType==NebHII) // Sharpless and LBN
 		{
 			if (LBN_nb!=0)
 				oss << q_("Brightness: %1").arg(brightnessClass) << "<br>";
@@ -213,9 +213,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	// make very easy to select if labeled
 	float lim=getVMagnitude(core);
 	if (nType==NebDn)
-		lim=15.0f - mag - 2.0f*angularSize; // Note that "mag" field is used for opacity in this catalog!
-	else if (nType==NebHII)
-		lim=10.0f - 2.0f*angularSize; // Unfortunately, in Sh catalog, we always have mag=99=unknown!
+        lim=15.0f - mag - 2.0f*qMin(1.5f, angularSize); // Note that "mag" field is used for opacity in this catalog!
+    else if (nType==NebHII) // Sharpless and LBN
+        lim=10.0f - 2.0f*qMin(1.5f, angularSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
 	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
@@ -272,7 +272,14 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		else
 			lim= 12.0f; // GZ I assume LDN objects are rather elusive.
 	}
-	else if (nType==NebHII || nType==NebHa)
+    else if (LBN_nb>0) // attempt to balance LBN brightness classes
+    {
+        if (brightnessClass==0)
+            lim=10.0f;
+        else
+            lim=brightnessClass+7.0f;
+    }
+    else if (nType==NebHII || nType==NebHa) // NebHII={Sharpless, LBN}, NebHa={RCW}
 	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 		lim=9.0f;
 	}
