@@ -111,7 +111,6 @@ private:
 	float m_speed;			//! Velocity of meteor in km/s
 	Mat4d m_viewMatrix;		//! tranformation matrix to align radiant with earth direction of travel
 	MeteorModel meteor;		//! Parameters of meteor model
-	double m_distMultiplier;	//! Scale magnitude due to changes in distance
 
 	QList<Vec4f> m_trainColorArray;
 	QList<Vec4f> m_lineColorArray;
