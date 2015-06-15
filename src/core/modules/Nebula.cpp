@@ -263,10 +263,14 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
+		// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
+		// The qMin() maximized the visibility gain for large objects.
 		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*angularSize;
-		else
+			lim = 15.0f - mag - 2.0f*qMin(angularSize, 1.5f);
+		else if (B_nb>0)
 			lim = 9.0f;
+		else
+			lim= 12.0f; // GZ I assume LDN objects are rather elusive.
 	}
 	else if (nType==NebHII || nType==NebHa)
 	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
@@ -303,6 +307,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		case NebN:
 		case NebHII:
 		case NebRn:
+		case NebHa:
 			Nebula::texDiffuseNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -347,12 +352,15 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
 		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*angularSize;
-		else
+			lim = 15.0f - mag - 2.0f*qMin(angularSize, 2.5f);
+		else if (B_nb>0)
 			lim = 9.0f;
+		else
+			lim= 12.0f; // GZ I assume some LDN objects are rather elusive.
 	}
 	else if (nType==NebHII || nType==NebHa)
 		lim=9.0f;
+
 	if (lim>maxMagLabel)
 		return;
 
