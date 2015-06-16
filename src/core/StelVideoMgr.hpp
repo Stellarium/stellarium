@@ -23,7 +23,9 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
-class QMediaPlayer;
+#include <QMediaContent>
+#include <QMediaPlayer>
+
 class QGraphicsVideoItem;
 
 class StelVideoMgr : public QObject
@@ -45,6 +47,7 @@ public slots:
 	void setVideoXY(const QString& id, const float x, const float y);
 	//! sets opacity
 	//! @param alpha opacity for the video.
+	//! @note This seems not to work on Linux (GStreamer0.10 backend) and Windows.
 	void setVideoAlpha(const QString& id, const float alpha);
 	//! set video size to width @name w and height @name h.
 	//! Use w=-1 or h=-1 for autoscale from the other dimension, or use w=h=-1 for native size of video.
@@ -59,6 +62,44 @@ public slots:
 //	int getWidth(const QString& id);
 //	//! returns height (in pixels) of loaded video
 //	int getHeight(const QString& id);
+	//! set mute state of video player
+	//! @param mute true to silence the video, false to hear audio.
+	void mute(const QString& id, bool mute=true);
+	//! set volume for video
+	void setVolume(const QString& id, int newVolume);
+	//! return currently set volume of media player, or -1 in case of some error.
+	int getVolume(const QString& id);
+	//! return whether video is currently playing
+	bool isPlaying(const QString& id);
+
+
+	// Slots to handle QMediaPlayer change signals:
+	// These might hopefully be useful to understand media handling and how to get to crucial information like native resolution during loading of media.
+	// We start by simple debug output...
+	void handleAudioAvailableChanged(bool available);
+	void handleBufferStatusChanged(int percentFilled);
+	void handleCurrentMediaChanged(const QMediaContent & media);
+	void handleDurationChanged(qint64 duration);
+	void handleError(QMediaPlayer::Error error);
+	void handleMediaChanged(const QMediaContent & media);
+	void handleMediaStatusChanged(QMediaPlayer::MediaStatus status); // debug-log messages
+	void handleMutedChanged(bool muted);
+	//void handleNetworkConfigurationChanged(const QNetworkConfiguration & configuration);
+	void handlePlaybackRateChanged(qreal rate);
+	void handlePositionChanged(qint64 position);
+	void handleSeekableChanged(bool seekable);
+	void handleStateChanged(QMediaPlayer::State state);
+	void handleVideoAvailableChanged(bool videoAvailable);
+	void handleVolumeChanged(int volume);
+	// Slots to handle QMediaPlayer change signals inherited from QMediaObject
+	void handleAvailabilityChanged(bool available);
+	void handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability);
+	void handleMetaDataAvailableChanged(bool available);
+	void handleMetaDataChanged();
+	void handleMetaDataChanged(const QString & key, const QVariant & value);
+	void handleNotifyIntervalChanged(int milliseconds);
+
+
 
 private:
 #if 0
