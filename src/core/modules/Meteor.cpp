@@ -250,18 +250,16 @@ bool Meteor::updateMeteorModel(double deltaTime, double speed, MeteorModel &mm)
 		}
 	}
 
-	// *** would need time direction multiplier to allow reverse time replay
-	float dt = 820+(double)qrand()/((double)RAND_MAX+1)*185; // range 820-1005
-	mm.position[2] -= speed*deltaTime/dt;
+	mm.position[2] -= speed * deltaTime / 1000.0f;
 
 	// train doesn't extend beyond start of burn
-	if (mm.position[2] + speed*0.5f > mm.initialAlt)
+	if (mm.position[2] + speed * 0.5f > mm.initialAlt)
 	{
 		mm.posTrain[2] = mm.initialAlt;
 	}
 	else
 	{
-		mm.posTrain[2] -= speed*deltaTime/dt;
+		mm.posTrain[2] -= speed * deltaTime / 1000.0f;
 	}
 
 	return true;
