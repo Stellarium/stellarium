@@ -40,7 +40,7 @@ MeteorStream::MeteorStream(const StelCore* core,
 	m_viewMatrix = Mat4d::zrotation(radiantAlpha) * Mat4d::yrotation(M_PI_2 - radiantDelta);
 
 	// building meteor model
-	m_alive = Meteor::initMeteorModel(core, m_segments, meteor);
+	m_alive = Meteor::initMeteorModel(core, m_segments, m_viewMatrix, meteor);
 	if (!m_alive)
 	{
 		return;
