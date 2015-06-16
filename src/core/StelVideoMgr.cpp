@@ -85,35 +85,41 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	// We need an absolute pathname here.
 	QMediaContent content(QUrl::fromLocalFile(QFileInfo(filename).absoluteFilePath()));
 	qDebug() << "Loaded " << content.canonicalUrl();
-	// On Windows, this reveals we have nothing loaded! No, it just does nothing.
-//	qDebug() << "MediaContent canonical resources:";
-//	qDebug() << "\tData size:     " << content.canonicalResource().dataSize();
-//	qDebug() << "\tMIME Type:     " << content.canonicalResource().mimeType();
-//	qDebug() << "\tVideo codec:   " << content.canonicalResource().videoCodec();
-//	qDebug() << "\tResolution:    " << content.canonicalResource().resolution();
-//	qDebug() << "\tVideo bitrate: " << content.canonicalResource().videoBitRate();
-//	qDebug() << "\tAudio codec:   " << content.canonicalResource().audioCodec();
-//	qDebug() << "\tChannel Count: " << content.canonicalResource().channelCount();
-//	qDebug() << "\tAudio bitrate: " << content.canonicalResource().audioBitRate();
-//	qDebug() << "\tSample rate:   " << content.canonicalResource().sampleRate();
-//	qDebug() << "\tlanguage:      " << content.canonicalResource().language();
-	videoObjects[id]->player->setMedia(content);
+/*
+    // On Windows, this reveals we have nothing loaded! No, it just does nothing.
+    qDebug() << "MediaContent canonical resources:";
+    qDebug() << "\tData size:     " << content.canonicalResource().dataSize();
+    qDebug() << "\tMIME Type:     " << content.canonicalResource().mimeType();
+    qDebug() << "\tVideo codec:   " << content.canonicalResource().videoCodec();
+    qDebug() << "\tResolution:    " << content.canonicalResource().resolution();
+    qDebug() << "\tVideo bitrate: " << content.canonicalResource().videoBitRate();
+    qDebug() << "\tAudio codec:   " << content.canonicalResource().audioCodec();
+    qDebug() << "\tChannel Count: " << content.canonicalResource().channelCount();
+    qDebug() << "\tAudio bitrate: " << content.canonicalResource().audioBitRate();
+    qDebug() << "\tSample rate:   " << content.canonicalResource().sampleRate();
+    qDebug() << "\tlanguage:      " << content.canonicalResource().language();
+*/
+    videoObjects[id]->player->setMedia(content);
 	videoObjects[id]->player->setVideoOutput(videoObjects[id]->videoItem);
 	// Maybe ask only player?
 	qDebug() << "Media Resources queried from player:";
 	qDebug() << "\tSTATUS:        " << videoObjects[id]->player->mediaStatus();
+	//while (videoObjects[id]->player->mediaStatus() == QMediaPlayer::LoadingMedia) {}
+	
+	qDebug() << "\tSTATUS finally:        " << videoObjects[id]->player->mediaStatus();
 	qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
-//	qDebug() << "\tData size:     " << videoObjects[id]->player->currentMedia().canonicalResource().dataSize();
-//	qDebug() << "\tMIME Type:     " << videoObjects[id]->player->currentMedia().canonicalResource().mimeType();
-//	qDebug() << "\tVideo codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().videoCodec();
-//	qDebug() << "\tResolution:    " << videoObjects[id]->player->currentMedia().canonicalResource().resolution();
-//	qDebug() << "\tVideo bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().videoBitRate();
-//	qDebug() << "\tAudio codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().audioCodec();
-//	qDebug() << "\tChannel Count: " << videoObjects[id]->player->currentMedia().canonicalResource().channelCount();
-//	qDebug() << "\tAudio bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().audioBitRate();
-//	qDebug() << "\tSample rate:   " << videoObjects[id]->player->currentMedia().canonicalResource().sampleRate();
-//	qDebug() << "\tlanguage:      " << videoObjects[id]->player->currentMedia().canonicalResource().language();
-
+/*
+    qDebug() << "\tData size:     " << videoObjects[id]->player->currentMedia().canonicalResource().dataSize();
+    qDebug() << "\tMIME Type:     " << videoObjects[id]->player->currentMedia().canonicalResource().mimeType();
+    qDebug() << "\tVideo codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().videoCodec();
+    qDebug() << "\tResolution:    " << videoObjects[id]->player->currentMedia().canonicalResource().resolution();
+    qDebug() << "\tVideo bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().videoBitRate();
+    qDebug() << "\tAudio codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().audioCodec();
+    qDebug() << "\tChannel Count: " << videoObjects[id]->player->currentMedia().canonicalResource().channelCount();
+    qDebug() << "\tAudio bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().audioBitRate();
+    qDebug() << "\tSample rate:   " << videoObjects[id]->player->currentMedia().canonicalResource().sampleRate();
+    qDebug() << "\tlanguage:      " << videoObjects[id]->player->currentMedia().canonicalResource().language();
+*/
 	StelMainView::getInstance().scene()->addItem(videoObjects[id]->videoItem);
 	// TODO: Apparently we must wait until status=loaded. (?)
 
@@ -121,12 +127,15 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	//videoObjects[id]->videoItem->setSize(videoObjects[id]->player->media().resources()[0].resolution());
 	videoObjects[id]->videoItem->setSize(content.resources().at(0).resolution());
 	// DEBUG show a box. I had video playing in a tiny box already, once..!
-	//videoObjects[id]->videoItem->setSize(QSizeF(350, 350));
+	videoObjects[id]->videoItem->setSize(QSizeF(650, 650));
 
 	videoObjects[id]->videoItem->setOpacity(alpha);
 	videoObjects[id]->videoItem->setVisible(show);
 	qDebug() << "Loaded video" << id << "for pos " << x << "/" << y << "Size" << videoObjects[id]->videoItem->size();
+	videoObjects[id]->player->setPosition(0); // This should force trigering a resolution setting (?)
 	videoObjects[id]->player->pause();
+	videoObjects[id]->videoItem->setSize(videoObjects[id]->resolution);
+
 }
 
 void StelVideoMgr::playVideo(const QString& id, bool keepLastFrame)
@@ -145,6 +154,19 @@ void StelVideoMgr::playVideo(const QString& id, bool keepLastFrame)
 			// otherwise just play it, or resume playing paused video.
 			qDebug() << "StelVideoMgr::playVideo(): playing " << id;
 			videoObjects[id]->player->play();
+            qDebug() << "\tSTATUS media/player: " << videoObjects[id]->player->mediaStatus() << " - " << videoObjects[id]->player->state();
+			qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
+			qDebug() << "\tData size:     " << videoObjects[id]->player->currentMedia().canonicalResource().dataSize();
+			qDebug() << "\tMIME Type:     " << videoObjects[id]->player->currentMedia().canonicalResource().mimeType();
+			qDebug() << "\tVideo codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().videoCodec();
+			qDebug() << "\tResolution:    " << videoObjects[id]->player->currentMedia().canonicalResource().resolution();
+			qDebug() << "\tVideo bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().videoBitRate();
+			qDebug() << "\tAudio codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().audioCodec();
+			qDebug() << "\tChannel Count: " << videoObjects[id]->player->currentMedia().canonicalResource().channelCount();
+			qDebug() << "\tAudio bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().audioBitRate();
+			qDebug() << "\tSample rate:   " << videoObjects[id]->player->currentMedia().canonicalResource().sampleRate();
+			qDebug() << "\tlanguage:      " << videoObjects[id]->player->currentMedia().canonicalResource().language();
+			qDebug() << "See if this message comes during play! .. return int:duration if yes!";
 		}
 	}
 	else qDebug() << "StelVideoMgr::playVideo()" << id << ": no such video";
@@ -202,6 +224,20 @@ void StelVideoMgr::dropVideo(const QString& id)
 		return;
 	if (videoObjects[id]->player!=NULL)
 	{
+	  qDebug() << "About to drop (unload) video.";
+       	qDebug() << "\tSTATUS finally:        " << videoObjects[id]->player->mediaStatus();
+	qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
+//	qDebug() << "\tData size:     " << videoObjects[id]->player->currentMedia().canonicalResource().dataSize();
+//	qDebug() << "\tMIME Type:     " << videoObjects[id]->player->currentMedia().canonicalResource().mimeType();
+//	qDebug() << "\tVideo codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().videoCodec();
+//	qDebug() << "\tResolution:    " << videoObjects[id]->player->currentMedia().canonicalResource().resolution();
+//	qDebug() << "\tVideo bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().videoBitRate();
+//	qDebug() << "\tAudio codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().audioCodec();
+//	qDebug() << "\tChannel Count: " << videoObjects[id]->player->currentMedia().canonicalResource().channelCount();
+//	qDebug() << "\tAudio bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().audioBitRate();
+//	qDebug() << "\tSample rate:   " << videoObjects[id]->player->currentMedia().canonicalResource().sampleRate();
+//	qDebug() << "\tlanguage:      " << videoObjects[id]->player->currentMedia().canonicalResource().language();
+
 		videoObjects[id]->player->stop();
 		StelMainView::getInstance().scene()->removeItem(videoObjects[id]->videoItem);
 		delete videoObjects[id]->player;
@@ -235,15 +271,19 @@ void StelVideoMgr::setVideoAlpha(const QString& id, const float alpha)
 	else qDebug() << "StelVideoMgr::setVideoAlpha()" << id << ": no such video";
 }
 
-void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
+void StelVideoMgr::resizeVideo(const QString& id, int w, int h)
 {
 	if (videoObjects.contains(id))
 	{
 		if (videoObjects[id]->videoItem!=NULL)
 		{
-			QSize videoSize=videoObjects[id]->player->currentMedia().resources()[1].resolution();
+            QSize videoSize=videoObjects[id]->resolution;
+            if (!VideoSize.isValid() && (w==-1 || h==-1))
+            {
+                qDebug() << "StelVideoMgr::resizeVideo()" << id << ": size not yet determined, cannot resize with -1";
+                return;
+            }
 			float aspectRatio=videoSize.width()/videoSize.height();
-			// TODO: Repair next lines, linker does not find function.
 			if (w!=-1.0f && h!=-1.0f)
 				videoObjects[id]->videoItem->setAspectRatioMode(Qt::IgnoreAspectRatio);
 			else
@@ -277,61 +317,107 @@ void StelVideoMgr::showVideo(const QString& id, const bool show)
 	else qDebug() << "StelVideoMgr::showVideo()" << id << ": no such video";
 }
 
+qint64 StelVideoMgr::getDuration(const QString& id)
+{
+    if (videoObjects.contains(id))
+    {
+            return videoObjects[id]->duration;
+    }
+    else qDebug() << "StelVideoMgr::getDuration()" << id << ": no such video";
+}
+
+//! returns resolution (in pixels) of loaded video. Returned value may be invalid before video is playing.
+QSize StelVideoMgr::getResolution(const QString& id)
+{
+    if (videoObjects.contains(id))
+    {
+        return videoObjects[id]->resolution;
+    }
+    else qDebug() << "StelVideoMgr::getResolution()" << id << ": no such video";
+    return QSize();
+}
+
+int StelVideoMgr::getWidth(const QString& id)
+{
+    if (videoObjects.contains(id))
+    {
+        if (videoObjects[id]->resolution.isValid())
+            return videoObjects[id]->resolution.width();
+        else
+            return -1;
+    }
+    else qDebug() << "StelVideoMgr::getWidth()" << id << ": no such video";
+    return -1;
+}
+
+int StelVideoMgr::getHeight(const QString& id)
+{
+    if (videoObjects.contains(id))
+    {
+        if (videoObjects[id]->resolution.isValid())
+            return videoObjects[id]->resolution.height();
+        else
+            return -1;
+    }
+    else qDebug() << "StelVideoMgr::getHeight()" << id << ": no such video";
+    return -1;
+}
+
 
 void StelVideoMgr::mute(const QString& id, bool mute)
 {
-	if (videoObjects.contains(id))
-	{
-		if (videoObjects[id]->player!=NULL)
-		{
-			videoObjects[id]->player->setMuted(mute);
-		}
-	}
-	else qDebug() << "StelVideoMgr::mute()" << id << ": no such video";
+    if (videoObjects.contains(id))
+    {
+        if (videoObjects[id]->player!=NULL)
+        {
+            videoObjects[id]->player->setMuted(mute);
+        }
+    }
+    else qDebug() << "StelVideoMgr::mute()" << id << ": no such video";
 }
 
 void StelVideoMgr::setVolume(const QString& id, int newVolume)
 {
-	if (videoObjects.contains(id))
-	{
-		if (videoObjects[id]->player!=NULL)
-		{
-			videoObjects[id]->player->setVolume(newVolume);
-		}
-	}
-	else qDebug() << "StelVideoMgr::setVolume()" << id << ": no such video";
+    if (videoObjects.contains(id))
+    {
+        if (videoObjects[id]->player!=NULL)
+        {
+            videoObjects[id]->player->setVolume(newVolume);
+        }
+    }
+    else qDebug() << "StelVideoMgr::setVolume()" << id << ": no such video";
 }
 
 int StelVideoMgr::getVolume(const QString& id)
 {
-	int volume=-1;
-	if (videoObjects.contains(id))
-	{
-		if (videoObjects[id]->player!=NULL)
-		{
-			volume=videoObjects[id]->player->volume();
-		}
-	}
-	else qDebug() << "StelVideoMgr::getVolume()" << id << ": no such video";
-	return volume;
+    int volume=-1;
+    if (videoObjects.contains(id))
+    {
+        if (videoObjects[id]->player!=NULL)
+        {
+            volume=videoObjects[id]->player->volume();
+        }
+    }
+    else qDebug() << "StelVideoMgr::getVolume()" << id << ": no such video";
+    return volume;
 }
 
 bool StelVideoMgr::isPlaying(const QString& id)
 {
-	int playing=false;
-	if (videoObjects.contains(id))
-	{
-		if (videoObjects[id]->player!=NULL)
-		{
-			playing= (videoObjects[id]->player->state() == QMediaPlayer::PlayingState );
-		}
-	}
-	else qDebug() << "StelVideoMgr::isPlaying()" << id << ": no such video";
-	return playing;
+    bool playing=false;
+    if (videoObjects.contains(id))
+    {
+        if (videoObjects[id]->player!=NULL)
+        {
+            playing= (videoObjects[id]->player->state() == QMediaPlayer::PlayingState );
+        }
+    }
+    else qDebug() << "StelVideoMgr::isPlaying()" << id << ": no such video";
+    return playing;
 }
 
 
-/*
+/* *************************************************
  * Signal handlers for all signals of QMediaPlayer. Usually for now this only writes a message to logfile.
  */
 void StelVideoMgr::handleAudioAvailableChanged(bool available)
@@ -364,10 +450,20 @@ void StelVideoMgr::handleMediaChanged(const QMediaContent & media)
 {
 	qDebug() << "QMediaPlayer: " << QObject::sender()->property("Stel_id").toString() << ": Media changed:" << media.canonicalUrl();
 }
+
+// This triggers the pause-at-end!
+// TODO: It seems that this is too slow! Is there something that can be done?
 void StelVideoMgr::handleMediaStatusChanged(QMediaPlayer::MediaStatus status) // debug-log messages
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  status changed:" << status;
+    QString id=QObject::sender()->property("Stel_id").toString();
+    qDebug() << "QMediaplayer: " << id << ":  status changed:" << status;
+    if ((status==QMediaPlayer::EndOfMedia) && videoObjects[id]->keepVisible)
+    {
+        videoObjects[id]->player->setPosition(videoObjects[id]->duration - 1);
+        videoObjects[id]->player->pause();
+    }
 }
+
 void StelVideoMgr::handleMutedChanged(bool muted)
 {
 	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  mute changed:" << muted;
@@ -408,55 +504,59 @@ void StelVideoMgr::handleStateChanged(QMediaPlayer::State state)
 //	qDebug() << "\tAudio bitrate: " << videoObjects[senderId]->player->currentMedia().canonicalResource().audioBitRate();
 //	qDebug() << "\tSample rate:   " << videoObjects[senderId]->player->currentMedia().canonicalResource().sampleRate();
 //	qDebug() << "\tlanguage:      " << videoObjects[senderId]->player->currentMedia().canonicalResource().language();
-
 }
 
 void StelVideoMgr::handleVideoAvailableChanged(bool videoAvailable)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Video available:" << videoAvailable;
+    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Video available:" << videoAvailable;
 }
 
 void StelVideoMgr::handleVolumeChanged(int volume)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  volume changed to:" << volume;
+    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  volume changed to:" << volume;
 }
 
 void StelVideoMgr::handleAvailabilityChanged(bool available)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  available:" << available;
+    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  available:" << available;
 }
 
-void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability){
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  availability:" << availability;
+void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability)
+{
+    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  availability:" << availability;
 }
 
-void StelVideoMgr::handleMetaDataAvailableChanged(bool available){
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Metadata available:" << available;
+void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
+{
+    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Metadata available:" << available;
 }
 
-void StelVideoMgr::handleMetaDataChanged(){
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Metadata changed.";
+void StelVideoMgr::handleMetaDataChanged()
+{
+    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Metadata changed.";
 }
 
-void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & value){
-	QString id=QObject::sender()->property("Stel_id").toString();
-	qDebug() << "QMediaplayer: " << id << ":  Metadata change:" << key << "=>" << value;
-	if (key=="Resolution")
-	{
-	if (videoObjects.contains(id))
-	{
-			videoObjects[id]->resolution=value;
-	}
-	else qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
+void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & value)
+{
+    QString id=QObject::sender()->property("Stel_id").toString();
+    qDebug() << "QMediaplayer: " << id << ":  Metadata change:" << key << "=>" << value;
+    if (key=="Resolution")
+    {
+        if (videoObjects.contains(id))
+        {
+            videoObjects[id]->resolution=value.toSize();
+            videoObjects[id]->videoItem->setSize(videoObjects[id]->resolution);
+        }
+        else qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
 
-	}
+    }
 
 
 }
 
 void StelVideoMgr::handleNotifyIntervalChanged(int milliseconds)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Notify interval changed to:" << milliseconds;
+    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Notify interval changed to:" << milliseconds;
 }
 
 

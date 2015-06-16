@@ -23,6 +23,7 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
+#include <QSize>
 #include <QMediaContent>
 #include <QMediaPlayer>
 
@@ -57,17 +58,17 @@ public slots:
 	void setVideoAlpha(const QString& id, const float alpha);
 	//! set video size to width @name w and height @name h.
 	//! Use w=-1 or h=-1 for autoscale from the other dimension, or use w=h=-1 for native size of video.
-	void resizeVideo(const QString& id, float w = -1.0f, float h = -1.0f);
+    void resizeVideo(const QString& id, int w = -1, int h = -1);
 	void showVideo(const QString& id, const bool show);
 	// TODO: New functions:
-//	//! returns duration (in seconds) of loaded video (maybe change to qint64/ms?)
-//	int getDuration(const QString& id);
-//	//! returns resolution (in pixels) of loaded video
-//	QSize getResolution(const QString& id);
-//	//! returns width (in pixels) of loaded video
-//	int getWidth(const QString& id);
-//	//! returns height (in pixels) of loaded video
-//	int getHeight(const QString& id);
+    //! returns duration (in milliseconds) of loaded video
+    qint64 getDuration(const QString& id);
+    //! returns resolution (in pixels) of loaded video. Returned value may be invalid before video is playing.
+    QSize getResolution(const QString& id);
+    //! returns native width (in pixels) of loaded video, or -1 in case of trouble.
+    int getWidth(const QString& id);
+    //! returns native height (in pixels) of loaded video, or -1 in case of trouble.
+    int getHeight(const QString& id);
 	//! set mute state of video player
 	//! @param mute true to silence the video, false to hear audio.
 	void mute(const QString& id, bool mute=true);
@@ -123,7 +124,9 @@ private:
 		QGraphicsVideoItem *videoItem;
 		QMediaPlayer *player;
 		qint64 duration;  //!< duration of video. This becomes available only after loading or at begin of playing! (?)
-		QSize resolution; //!< stores resolution of video. This becomes available only after loading or at begin of playing!
+        QSize resolution; //!< stores resolution of video. This becomes available only after loading or at begin of playing, so we must apply a trick with signals and slots to set it.
+        bool playNativeResolution; //!< store whether you want to play the video in native resolution. (Needed to set size after detection of resolution.)
+        bool keepVisible; //!< true if you want to show the last frame after video has played. (Due to delays in signal/slot handling, this does not work properly.)
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects;
 #endif
