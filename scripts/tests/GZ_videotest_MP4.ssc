@@ -9,11 +9,31 @@
 //
 
 // core.loadVideo("tests/videotest.flv", "flv", 100, 70, true, 0.5);
-core.loadVideo("tests/StellariumSunsetGlaubendorf2_2052013_1758_40.mp4", "mp4", 100, 70, true, 0.5);
+core.loadVideo("tests/StellariumSunsetGlaubendorf2_2052013_1758_40.mp4", "mp4", 100, 70, true, 0.15);
 
 lab = LabelMgr.labelScreen("Playing MP4 video file...", 100, 20, true, 20, "#ff0000");
+
+core.seekVideo("mp4", 500);
+core.pauseVideo("mp4");
+core.wait(12);
+
+core.seekVideo("mp4", 2500);
+core.pauseVideo("mp4");
+core.wait(5);
+core.seekVideo("mp4", 4500);
+core.pauseVideo("mp4");
+core.wait(5);
+core.seekVideo("mp4", 1500);
+core.pauseVideo("mp4");
+core.wait(5);
+core.seekVideo("mp4", 500);
+core.pauseVideo("mp4");
+core.wait(5);
+
+
+
 core.playVideo("mp4");
-core.wait(182);
+core.wait(28);
 LabelMgr.deleteLabel(lab);
 core.wait(0.4);
 
