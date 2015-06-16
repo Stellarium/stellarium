@@ -90,7 +90,7 @@ public:
 
 	//! Builds Meteor Model
 	//! @return true if alive, else false.
-	static bool initMeteorModel(const StelCore *core, const int segments, MeteorModel &mm);
+	static bool initMeteorModel(const StelCore *core, const int segments, const Mat4d viewMatrix, MeteorModel &mm);
 
 	//! Determine color arrays of line and prism used to draw meteor train.
 	static void buildColorArrays(const int segments,
