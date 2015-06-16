@@ -46,7 +46,7 @@ Meteor::Meteor(const StelCore* core, float v)
 	m_viewMatrix = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
 
 	// building meteor model
-	m_alive = initMeteorModel(core, m_segments, meteor);
+	m_alive = initMeteorModel(core, m_segments, m_viewMatrix, meteor);
 	if (!m_alive)
 	{
 		return;
@@ -61,12 +61,12 @@ Meteor::~Meteor()
 }
 
 // returns true if alive
-bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorModel &mm)
+bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat4d viewMatrix, MeteorModel &mm)
 {
 	// initial meteor altitude above the earth surface
 	mm.initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
 
-	// meteor zenith angle
+	// meteor zenith angle (angle from radiant to meteor)
 	float zenithAngle = M_PI_2 * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, pi/2]
 
 	// distance between the observer and the meteor
@@ -93,6 +93,19 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 	mm.position[1] = mm.xyDist * qSin(angle);
 	mm.position[2] = mm.initialAlt;
 	mm.posTrain = mm.position;
+
+	// find meteor position in horizontal coordinate system
+	Vec3d positionAltAz = mm.position;
+	positionAltAz.transfo4d(viewMatrix);
+	positionAltAz = core->j2000ToAltAz(positionAltAz);
+	positionAltAz/=1216;
+	float meteorLat = qAsin(positionAltAz[2] / positionAltAz.length());
+
+	// below the horizon
+	if (meteorLat < 0.0f)
+	{
+		return false;
+	}
 
 	// final meteor altitude (end of burn point)
 	if (mm.xyDist > MIN_ALTITUDE)
