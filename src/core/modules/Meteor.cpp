@@ -116,13 +116,10 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, MeteorMod
 
 	// most visible meteors are under about 184km distant
 	// scale max mag down if outside this range
-	if (mm.xyDist)
+	float scale = qPow(184, 2) / qPow(distance, 2);
+	if (scale < 1.0f)
 	{
-		float scale = qPow(184, 2) / qPow(mm.xyDist, 2);
-		if (scale < 1.0f)
-		{
-			mm.mag *= scale;
-		}
+		mm.mag *= scale;
 	}
 
 	mm.firstBrightSegment = segments * ((float) qrand() / ((float) RAND_MAX + 1));
