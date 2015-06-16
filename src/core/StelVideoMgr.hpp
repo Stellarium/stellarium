@@ -37,17 +37,23 @@ public:
 	~StelVideoMgr();
 
 public slots:
+	//! load a video from @name filename, assign an @name id for it for later reference.
+	//! Prepare replay at upper-left corner @name x/@name y in natural resolution,
+	//! decide whether to @name show the box already (paused at Frame 1), and set opacity @name alpha.
+	//! If you want non-native resolution, load with @name show set to false, and use @name resizeVideo() and @name showVideo().
 	void loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha);
-	void playVideo(const QString& id);
+	//! play video from current position. If @param keepLastFrame is true, video pauses at last frame.
+	void playVideo(const QString& id, bool keepLastFrame=false);
 	void pauseVideo(const QString& id);
+	//! Stop playing, resets video and hides video output window
 	void stopVideo(const QString& id);
 	void dropVideo(const QString& id);
-	void seekVideo(const QString& id, const qint64 ms);
+	void seekVideo(const QString& id, const qint64 ms, bool pause=true);
 	//! move lower left corner of video @name id to @name x, @name y.
 	void setVideoXY(const QString& id, const float x, const float y);
 	//! sets opacity
 	//! @param alpha opacity for the video.
-	//! @note This seems not to work on Linux (GStreamer0.10 backend) and Windows.
+	//! @note This seems not to work on Linux (GStreamer0.10 backend) and Windows (DirectShow backend).
 	void setVideoAlpha(const QString& id, const float alpha);
 	//! set video size to width @name w and height @name h.
 	//! Use w=-1 or h=-1 for autoscale from the other dimension, or use w=h=-1 for native size of video.
@@ -116,7 +122,8 @@ private:
 		//QVideoWidget *widget; // would be easiest, but only with QtQuick2...
 		QGraphicsVideoItem *videoItem;
 		QMediaPlayer *player;
-		//QGraphicsProxyWidget *pWidget; // No longer required?
+		qint64 duration;  //!< duration of video. This becomes available only after loading or at begin of playing! (?)
+		QSize resolution; //!< stores resolution of video. This becomes available only after loading or at begin of playing!
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects;
 #endif
