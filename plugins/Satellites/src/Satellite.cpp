@@ -59,6 +59,7 @@ int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
+Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2,0.2,0.2);
 
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 QString Satellite::myText = "";
@@ -78,7 +79,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
       height(0.),
       range(0.),
       rangeRate(0.),
-      hintColor(0.0,0.0,0.0),            
+      hintColor(0.0,0.0,0.0),
       lastUpdated(),
       pSatWrapper(NULL),
       visibility(0),
@@ -731,7 +732,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 	XYZ = getJ2000EquatorialPos(core);
 	StelSkyDrawer* sd = core->getSkyDrawer();
-	Vec3f drawColor(0.2f,0.2f,0.2f);
+	Vec3f drawColor = invisibleSatelliteColor;
 	if (visibility != RADAR_NIGHT)
 		drawColor = hintColor;
 	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
@@ -756,7 +757,12 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			{
 				sd->computeRCMag(mag, &rcMag);
 				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, true);
-				painter.setColor(color[0], color[1], color[2], 1);
+
+				if (visibility != RADAR_NIGHT)
+					painter.setColor(color[0], color[1], color[2], 1);
+				else
+					painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1);
+
 
 				if (Satellite::showLabels)
 					painter.drawText(XYZ, name, 0, 10, 10, false);
@@ -772,8 +778,11 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (Satellite::showLabels)
 				painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
 
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_ONE, GL_ONE);
+
 			Satellite::hintTexture->bind();
-			painter.drawSprite2dMode(xy[0], xy[1], 11);
+			painter.drawSprite2dMode(xy[0], xy[1], 11);			
 		}
 	}
 	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid) drawOrbit(painter);
