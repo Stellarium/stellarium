@@ -101,6 +101,9 @@ public:
 	static StelTextureSP bolideTexture;
 
 private:
+	//! find meteor position in horizontal coordinate system
+	static Vec3d meteorToAltAz(const StelCore *core, const Mat4d &viewMatrix, Vec3d position);
+
 	static void insertVertex(const StelCore* core, const Mat4d& viewMatrix,
 				 QVector<Vec3d> &vertexArray, Vec3d vertex);
 	static Vec4f getColorFromName(QString colorName);
