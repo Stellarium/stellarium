@@ -95,10 +95,7 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	mm.posTrain = mm.position;
 
 	// find meteor position in horizontal coordinate system
-	Vec3d positionAltAz = mm.position;
-	positionAltAz.transfo4d(viewMatrix);
-	positionAltAz = core->j2000ToAltAz(positionAltAz);
-	positionAltAz/=1216;
+	Vec3d positionAltAz = meteorToAltAz(core, viewMatrix, mm.position);
 	float meteorLat = qAsin(positionAltAz[2] / positionAltAz.length());
 
 	// below the horizon
@@ -291,12 +288,17 @@ bool Meteor::update(double deltaTime)
 	return m_alive;
 }
 
+Vec3d Meteor::meteorToAltAz(const StelCore* core, const Mat4d& viewMatrix, Vec3d position)
+{
+	position.transfo4d(viewMatrix);
+	position = core->j2000ToAltAz(position);
+	position/=1216; // 1216 is to scale down under 1 for desktop version
+	return position;
+}
+
 void Meteor::insertVertex(const StelCore* core, const Mat4d& viewMatrix, QVector<Vec3d> &vertexArray, Vec3d vertex)
 {
-	vertex.transfo4d(viewMatrix);
-	vertex = core->j2000ToAltAz(vertex);
-	vertex/=1216; // 1216 is to scale down under 1 for desktop version
-	vertexArray.push_back(vertex);
+	vertexArray.push_back(meteorToAltAz(core, viewMatrix, vertex));
 }
 
 void Meteor::calculateThickness(const StelCore* core, float& thickness, float& bolideSize)
