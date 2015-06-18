@@ -31,6 +31,8 @@ SET(RemoteControl_SRCS
   APIController.cpp
   MainService.hpp
   MainService.cpp
+  LocationService.hpp
+  LocationService.cpp
   RemoteControl.hpp
   RemoteControl.cpp
   RequestHandler.hpp

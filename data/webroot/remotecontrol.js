@@ -63,6 +63,7 @@ var Main = (new function($) {
                 //update modules with data
                 Time.updateFromServer(data.time);
                 Scripts.updateFromServer(data.script);
+                Locations.updateFromServer(data.location);
 
                 $noresponse.hide();
                 connectionLost = false;
@@ -84,6 +85,80 @@ var Main = (new function($) {
         });
     }
 
+    function fixJQueryUI() {
+        //fix for jQuery UI autocomplete to respect the size of the "of" positional parameter
+        //http://bugs.jqueryui.com/ticket/9056
+        var proto = $.ui.autocomplete.prototype;
+        $.extend(proto, {
+            _resizeMenu: function() {
+                var ul = this.menu.element;
+                ul.outerWidth(Math.max(
+                    // Firefox wraps long text (possibly a rounding bug)
+                    // so we add 1px to avoid the wrapping (#7513)
+                    ul.width("").outerWidth() + 1,
+                    this.options.position.of == null ? this.element.outerWidth() : this.options.position.of.outerWidth()
+                ));
+            }
+        });
+
+        //disable forced spinner rounding
+        //http://stackoverflow.com/questions/19063956/ui-spinner-bug-when-changing-value-using-mouse-up-and-down
+
+        /* //disabled for now until globalize.js works
+        proto = $.ui.spinner.prototype;
+        $.extend(proto, {
+            _adjustValue: function(value) {
+                var base, aboveMin,
+                    options = this.options;
+
+                // fix precision from bad JS floating point math
+                //value = parseFloat(value.toFixed(this._precision()));
+
+                // clamp the value
+                if (options.max !== null && value > options.max) {
+                    return options.max;
+                }
+                if (options.min !== null && value < options.min) {
+                    return options.min;
+                }
+
+                return value;
+            }
+        });
+*/
+    }
+
+    //an simple Update queue class that updates the server after a specified interval if the user does nothing else inbetween
+    function UpdateQueue(url, finishedCallback) {
+        if (!(this instanceof UpdateQueue))
+            return new UpdateQueue(url);
+
+        this.url = url;
+        this.isQueued = false;
+        this.timer = undefined;
+        this.finishedCallback = finishedCallback;
+    }
+
+    UpdateQueue.prototype.enqueue = function(data) {
+        //what to do when enqueuing while sending?
+        this.isQueued = true;
+
+        this.timer && clearTimeout(this.timer);
+        this.timer = setTimeout($.proxy(function() {
+            this.isTransmitting = true;
+            //post an update
+            Main.postCmd(this.url, data, $.proxy(function() {
+                Main.forceUpdate();
+                this.isQueued = false;
+                if(this.finishedCallback)
+                {
+                    this.finishedCallback();
+                }
+            }, this));
+        }, this), UISettings.editUpdateDelay);
+
+    };
+
     //Public stuff
     return {
         init: function() {
@@ -91,6 +166,9 @@ var Main = (new function($) {
             Actions.init();
             Scripts.init();
             Time.init();
+            Locations.init();
+
+            fixJQueryUI();
 
             animationSupported = (window.requestAnimationFrame !== undefined);
 
@@ -137,153 +215,161 @@ var Main = (new function($) {
 
         forceUpdate: function() {
             update();
-        }
-    }
-
-
-}(jQuery));
-
-var Actions = (new function($) {
-    //Private variables
-    var $actionlist;
-
-    //Public stuff
-    return {
-        init: function() {
-
-            $actionlist = $("#actionlist");
-
-            $actionlist.change(function() {
-                $("#bt_doaction").prop("disabled", false);
-            });
-
-            //fill the action list
-            $.ajax({
-                url: "/api/stelaction/list",
-                success: function(data) {
-                    $actionlist.empty();
-
-                    $.each(data, function(key, val) {
-                        //the key is an optgroup
-                        var group = $("<optgroup/>").attr("label", key);
-                        //the val is an array of StelAction objects
-                        $.each(val, function(idx, v2) {
-                            var option = $("<option/>");
-                            option.data(v2); //store the data
-                            if (v2.isCheckable) {
-                                option.addClass("checkableaction");
-                                option.text(v2.text + " (" + v2.isChecked + ")");
-
-                                $actionlist.on("action:" + v2.id, {
-                                    elem: option
-                                }, function(event, newValue) {
-                                    var el = event.data.elem;
-                                    el.data("isChecked", newValue);
-                                    el.text(el.data("text") + " (" + newValue + ")");
-                                });
-                            } else {
-                                option.text(v2.text);
-                            }
-                            option.appendTo(group);
-                        });
-                        group.appendTo($actionlist);
-                    });
-                },
-                error: function(xhr, status, errorThrown) {
-                    console.log("Error updating action list");
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    alert("Could not retrieve action list")
-                }
-            });
         },
 
-        //Trigger an StelAction on the Server
-        execute: function(actionName) {
-            $.ajax({
-                url: "/api/stelaction/do",
-                method: "POST",
-                async: false,
-                dataType: "text",
-                data: {
-                    id: actionName
-                },
-                success: function(resp) {
-                    if (resp === "ok") {
-                        //non-checkable action, cant change text
-                    } else if (resp === "true") {
-                        $actionlist.trigger("action:" + actionName, true);
-                    } else if (resp === "false") {
-                        $actionlist.trigger("action:" + actionName, false);
-                    } else {
-                        alert(resp);
+        UpdateQueue: UpdateQueue
+
+    }
+}(jQuery));
+
+
+//some custom controls
+(function($) {
+    $.widget("custom.combobox", {
+        _create: function() {
+            this.wrapper = $("<span>")
+                .addClass("custom-combobox ui-widget ui-widget-content")
+                .insertAfter(this.element);
+
+            this.element.hide();
+            this._createAutocomplete();
+            this._createShowAllButton();
+        },
+
+        _createAutocomplete: function() {
+            var selected = this.element.children(":selected"),
+                value = selected.val() ? selected.text() : "";
+
+            this.input = $("<input>")
+                .appendTo(this.wrapper)
+                .val(value)
+                .attr("title", "")
+                .addClass("custom-combobox-input")
+                .autocomplete({
+                    delay: 0,
+                    minLength: 0,
+                    source: $.proxy(this, "_source"),
+                    position: {
+                        my: "left top",
+                        at: "left bottom",
+                        of: this.wrapper,
+                        collision: "flipfit"
                     }
-                },
-                error: function(xhr, status, errorThrown) {
-                    console.log("Error posting action " + actionName);
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    alert("Could not call server")
-                }
-            });
-        }
-    }
-}(jQuery));
-
-var Scripts = (new function($) {
-    //Private variables
-    var $activescript;
-    var $bt_runscript;
-    var $bt_stopscript;
-    var $scriptlist;
-
-    //Public stuff
-    return {
-        init: function() {
-
-            $scriptlist = $("#scriptlist");
-            $bt_runscript = $("#bt_runscript");
-            $bt_stopscript = $("#bt_stopscript");
-            $activescript = $("#activescript");
-
-            $scriptlist.change(function() {
-                var selection = $scriptlist.children("option").filter(":selected").text();
-
-                $("#bt_runscript").prop({
-                    disabled: false
+                })
+                .tooltip({
+                    tooltipClass: "ui-state-highlight"
                 });
-                console.log("selected: " + selection);
-            });
 
-            //init script list
-            $.ajax({
-                url: "/api/scripts/list",
-                success: function(data) {
-                    $scriptlist.empty();
-
-                    //sort it and insert
-                    $.each(data.sort(), function(idx, elem) {
-                        $("<option/>").text(elem).appendTo($scriptlist);
+            this._on(this.input, {
+                autocompleteselect: function(event, ui) {
+                    ui.item.option.selected = true;
+                    this.input.blur();
+                    this._trigger("select", event, {
+                        item: ui.item.option
                     });
                 },
-                error: function(xhr, status, errorThrown) {
-                    console.log("Error updating script list");
-                    console.log("Error: " + errorThrown);
-                    console.log("Status: " + status);
-                    alert("Could not retrieve script list")
-                }
+
+                autocompletechange: "_removeIfInvalid"
             });
         },
 
-        updateFromServer: function(script) {
-            if (script.scriptIsRunning) {
-                $activescript.text(script.runningScriptId);
-            } else {
-                $activescript.text("-none-");
+        _createShowAllButton: function() {
+            var input = this.input,
+                wasOpen = false;
+
+            $("<a>")
+                .attr("tabIndex", -1)
+                .attr("title", "Show All Items")
+                .tooltip()
+                .appendTo(this.wrapper)
+                .button({
+                    icons: {
+                        primary: "ui-icon-triangle-1-s"
+                    },
+                    text: false
+                })
+                .removeClass("ui-corner-all")
+                .addClass("custom-combobox-toggle")
+                .mousedown(function() {
+                    wasOpen = input.autocomplete("widget").is(":visible");
+                })
+                .click(function() {
+                    input.focus();
+
+                    // Close if already visible
+                    if (wasOpen) {
+                        return;
+                    }
+
+                    // Pass empty string as value to search for, displaying all results
+                    input.autocomplete("search", "");
+                });
+        },
+
+        _source: function(request, response) {
+            var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+            response(this.element.children("option").map(function() {
+                var text = $(this).text();
+                if (this.value && (!request.term || matcher.test(text)))
+                    return {
+                        label: text,
+                        value: text,
+                        option: this
+                    };
+            }));
+        },
+
+        _removeIfInvalid: function(event, ui) {
+
+            // Selected an item, nothing to do
+            if (ui.item) {
+                return;
             }
-            $bt_stopscript.prop({
-                disabled: !script.scriptIsRunning
+
+            // Search for a match (case-insensitive)
+            var value = this.input.val(),
+                valueLowerCase = value.toLowerCase(),
+                valid = false;
+            this.element.children("option").each(function() {
+                if ($(this).text().toLowerCase() === valueLowerCase) {
+                    this.selected = valid = true;
+                    return false;
+                }
             });
+
+            // Found a match, nothing to do
+            if (valid) {
+                return;
+            }
+
+            // Remove invalid value
+            this.input
+                .val("")
+                .attr("title", value + " didn't match any item")
+                .tooltip("open");
+            this.element.val("");
+            this._delay(function() {
+                this.input.tooltip("close").attr("title", "");
+            }, 2500);
+            this.input.autocomplete("instance").term = "";
+        },
+
+        _destroy: function() {
+            this.wrapper.remove();
+            this.element.show();
+        },
+
+        autocomplete: function(value) {
+            this.element.val(value);
+            var e = this.element[0];
+            if(e.selectedIndex>=0)
+            {
+                this.input.val(e.options[e.selectedIndex].text);
+            }
+            else
+            {
+                this.input.val(value);
+            }            
         }
-    }
-}(jQuery));
+    });
+})(jQuery);

@@ -54,7 +54,7 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 			obj2.insert("role",QString(loc.role));
 			obj2.insert("planet",loc.planetName);
 			obj2.insert("latitude",loc.latitude);
-			obj2.insert("longitude",loc.latitude);
+			obj2.insert("longitude",loc.longitude);
 			obj2.insert("altitude",loc.altitude);
 			obj2.insert("country",loc.country);
 			obj2.insert("state",loc.state);

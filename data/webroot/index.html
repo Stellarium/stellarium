@@ -7,12 +7,18 @@
   <link type="text/css" rel="stylesheet" href="style.css" />
   <script src="/external/jquery-1.11.3.js" type="text/javascript"></script>
   <script src="/external/jquery-ui.js" type="text/javascript"></script>
+  <!-- Stellarium functionality is distributed over several .js files-->
   <script src="time.js" type="text/javascript"></script>
+  <script src="actions.js" type="text/javascript"></script>
+  <script src="scripts.js" type="text/javascript"></script>
+  <script src="location.js" type="text/javascript"></script>
   <script src="remotecontrol.js" type="text/javascript"></script>
   <script type="text/javascript">
   //<![CDATA[
     "use strict";
     //here the buttons get hooked up
+
+    //TODO move all this stuff to the .js files of their component
     $(function(){
       var runscriptfn = function(){
         var selection = $("#scriptlist").children("option").filter(":selected").text();
@@ -48,7 +54,6 @@
       //jQuery UI initialization
       $("#timewidget").tabs();
       $( document ).tooltip();
-      $("#spinner").spinner();
       
       $("#date_year").spinner({ 
         min: -100000,
@@ -190,8 +195,8 @@
     </div>
     <div id="time_jday" class="timetab">
       <div>
-        <p class="timedisplay">JD: <input id="input_jd"/></p>
-        <p class="timedisplay">MJD: <input id="input_mjd"/></p>
+        <p class="timedisplay"><label for="input_jd">JD: </label><input id="input_jd"/></p>
+        <p class="timedisplay"><label for="input_mjd">MJD: </label><input id="input_mjd"/></p>
       </div>
     </div>
     </div>
@@ -214,6 +219,30 @@
       </select>
       <div>
         <button id="bt_doaction" disabled>Run/toggle action</button>
+      </div>
+    </section>
+    <section id="location" class="block">
+      <header><h2>Location</h2></header>
+      <div>
+        <div id="loc_map">
+          <img id="loc_mapimg" src="world.png"/>
+          <img id="loc_mappointer" src="map-pointeur.png"/>
+        </div><div id="loc_searchlist" >
+          <select id="loc_list" size="10"></select>
+          <input id="loc_search" />
+        </div>
+      </div>
+      <div id="loc_inputs">
+        <div>
+          <p><label>Latitude:</label><input id="loc_latitude"/></p>
+          <p><label>Longitude:</label><input id="loc_longitude"/></p>
+          <p><label>Altitude:</label><input id="loc_altitude"/></p>
+        </div>
+        <div>
+          <p><label>Name/City:</label><input id="loc_name" type="text"/></p>
+          <p><label>Country:</label><select id="loc_country"></select></p>
+          <p><label>Planet:</label><select id="loc_planet"></select></p>
+        </div>
       </div>
     </section>
   </div>
