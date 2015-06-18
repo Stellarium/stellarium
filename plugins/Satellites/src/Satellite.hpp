@@ -256,6 +256,7 @@ private:
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
+	QList<int> visibilityPoints; //orbit visibility points
 };
 
 typedef QSharedPointer<Satellite> SatelliteP;
