@@ -602,6 +602,16 @@ void StelMainScriptAPI::showVideo(const QString& id, bool show)
 	emit(requestShowVideo(id, show));
 }
 
+qint64 StelMainScriptAPI::getVideoDuration(const QString& id)
+{
+    return StelApp::getInstance().getStelVideoMgr()->getVideoDuration(id);
+}
+
+qint64 StelMainScriptAPI::getVideoPosition(const QString& id)
+{
+    return StelApp::getInstance().getStelVideoMgr()->getVideoPosition(id);
+}
+
 int StelMainScriptAPI::getScreenWidth()
 {
 	return StelMainView::getInstance().size().width();
