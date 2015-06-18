@@ -19,8 +19,9 @@ screen_w                            = 1024
 screen_h                            = 768
 screen_x                            = 0
 screen_y                            = 0
-horizontal_offset                   = 0
-vertical_offset                     = 0
+# GZ: 2 dead entries identified 2015-06-18
+#horizontal_offset                   = 0
+#vertical_offset                     = 0
 minimum_fps                         = 18
 maximum_fps                         = 10000
 #viewport_effect                     = sphericMirrorDistorter
