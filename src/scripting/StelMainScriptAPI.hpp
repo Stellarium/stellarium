@@ -612,7 +612,15 @@ public slots:
 	//! @param show the new visible state of the video.
         void showVideo(const QString& id, bool show);
 
-	//! Get the screen width in pixels.
+    //! Get the duration of a loaded video, or -1
+    //! @param id the identifier used when loadVideo was called
+        qint64 getVideoDuration(const QString& id);
+
+    //! Get the current position of a loaded video, or -1
+    //! @param id the identifier used when loadVideo was called
+    qint64 getVideoPosition(const QString& id);
+
+    //! Get the screen width in pixels.
 	//! @return The screen width in pixels
 	int getScreenWidth();
 	//! Get the screen height in pixels.

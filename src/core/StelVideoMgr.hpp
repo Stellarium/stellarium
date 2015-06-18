@@ -29,6 +29,28 @@
 
 class QGraphicsVideoItem;
 
+//! @class StelVideoMgr
+//! A scriptable way to show videos embedded in the screen.
+//! After experimental support with Qt4/Phonon library, this feature is back, and better than before.
+//! Videos can be scaled, paused, placed and relocated (shifted) on screen.
+//! Setting opacity seems not to do much unless setting it to zero, the video is then simply invisible.
+//! Therefore smooth fading in/out does not work, but still there is an intro/end animation available:
+//! growing from a pixel position to the player position, and returning to that spot close to end of video playback.
+//! TODO: Implement this animation ;-)
+//!
+//! However, support for multimedia content depends on the operating system and multimedia system support,
+//! some features may not work for you. The listed functions have been tested and work on Ubuntu 15.04 with Qt5.4.
+//! You need to install GStreamer plugins. Most critical seems to be gstreamer0.10-ffmpeg from
+//! https://launchpad.net/~mc3man/+archive/ubuntu/gstffmpeg-keep,
+//! then it plays MP4 (h264), Apple MOV(Sorenson) and WMV. Some type of AVI failed.
+//! Note on Windows version:
+//! According to https://wiki.qt.io/Qt_Multimedia, MinGW is limited to the decaying DirectShow platform plugin.
+//! The WMF platform plugin requires Visual Studio.
+//! There is partial success with MP4 files, but also these are rendered badly. Often just shows an error on Windows/MinGW:
+//! DirectShowPlayerService::doRender: Unresolved error code 80040154
+//! (number may differ, also seen: 80040228. Where is a list?)
+//! And after one such error, you may even have to reboot to get it running with the MP4 again (??)
+
 class StelVideoMgr : public QObject
 {
 	Q_OBJECT
@@ -38,49 +60,67 @@ public:
 	~StelVideoMgr();
 
 public slots:
-	//! load a video from @name filename, assign an @name id for it for later reference.
-	//! Prepare replay at upper-left corner @name x/@name y in natural resolution,
-	//! decide whether to @name show the box already (paused at Frame 1), and set opacity @name alpha.
-	//! If you want non-native resolution, load with @name show set to false, and use @name resizeVideo() and @name showVideo().
+    //! load a video from @param filename, assign an @param id for it for later reference.
+    //! If @param id is already in use, replace it.
+    //! Prepare replay at upper-left corner @param x/@param y in natural resolution,
+    //! decide whether to @param show the box already (paused at Frame 1), and set opacity @name alpha.
+    //! If you want non-native resolution, load with @param show set to false, and use @name resizeVideo() and @name showVideo().
 	void loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha);
 	//! play video from current position. If @param keepLastFrame is true, video pauses at last frame.
 	void playVideo(const QString& id, bool keepLastFrame=false);
 	void pauseVideo(const QString& id);
 	//! Stop playing, resets video and hides video output window
 	void stopVideo(const QString& id);
+    //! Unload video from memory.
 	void dropVideo(const QString& id);
 	void seekVideo(const QString& id, const qint64 ms, bool pause=true);
-	//! move lower left corner of video @name id to @name x, @name y.
-	void setVideoXY(const QString& id, const float x, const float y);
+    //! move upper left corner of video @name id to @name x, @name y.
+    //! If x or y are <1, this is relative to screen size!
+    void setVideoXY(const QString& id, const float x, const float y, const bool relative=false);
 	//! sets opacity
-	//! @param alpha opacity for the video.
-	//! @note This seems not to work on Linux (GStreamer0.10 backend) and Windows (DirectShow backend).
+    //! @param alpha opacity for the video (0=transparent, 1=fully visible).
+    //! @note if alpha is 0, also @name showVideo(id, true) cannot show the video.
+    //! @note This seems not to work on Linux (GStreamer0.10 backend) and Windows (DirectShow backend).
+    //!       The only visible effect is visibility=(alpha>0)
+    //! @todo Find a way to fade/mix video with its background, i.e. make this work.
 	void setVideoAlpha(const QString& id, const float alpha);
 	//! set video size to width @name w and height @name h.
-	//! Use w=-1 or h=-1 for autoscale from the other dimension, or use w=h=-1 for native size of video.
-    void resizeVideo(const QString& id, int w = -1, int h = -1);
-	void showVideo(const QString& id, const bool show);
-	// TODO: New functions:
-    //! returns duration (in milliseconds) of loaded video
-    qint64 getDuration(const QString& id);
+    //! Use @value w=-1 or @value h=-1 for autoscale from the other dimension,
+    //! or use @value w=h=-1 for native size of video.
+    //! if @value w or @value h are <=1, the size is relative to screen dimensions.
+    //! This should be the preferred use, because it allows the development of device-independent scripts.
+    void resizeVideo(const QString& id, float w = -1.0f, float h = -1.0f);
+    //! show or hide video player
+    //! @param id name given during loadVideo()
+    //! @param show @value true to show, @value false to hide
+    void showVideo(const QString& id, const bool show);
+    //! returns duration (in milliseconds) of loaded video. This may return valid result only after @name playVideo() or @name pauseVideo() have been called.
+    //! Returns -1 if video has not been analyzed yet. (loaded, but not started).
+    qint64 getVideoDuration(const QString& id);
+    //! returns current position (in milliseconds) of loaded video. This may return valid result only after @name playVideo() or @name pauseVideo() have been called.
+    //! Returns -1 if video has not been analyzed yet. (loaded, but not started).
+    qint64 getVideoPosition(const QString& id);
+
     //! returns resolution (in pixels) of loaded video. Returned value may be invalid before video is playing.
-    QSize getResolution(const QString& id);
+    QSize getVideoResolution(const QString& id);
     //! returns native width (in pixels) of loaded video, or -1 in case of trouble.
-    int getWidth(const QString& id);
+    int getVideoWidth(const QString& id);
     //! returns native height (in pixels) of loaded video, or -1 in case of trouble.
-    int getHeight(const QString& id);
+    int getVideoHeight(const QString& id);
 	//! set mute state of video player
 	//! @param mute true to silence the video, false to hear audio.
-	void mute(const QString& id, bool mute=true);
+    void muteVideo(const QString& id, bool muteVideo=true);
 	//! set volume for video
-	void setVolume(const QString& id, int newVolume);
+    void setVideoVolume(const QString& id, int newVolume);
 	//! return currently set volume of media player, or -1 in case of some error.
-	int getVolume(const QString& id);
-	//! return whether video is currently playing
-	bool isPlaying(const QString& id);
+    int getVideoVolume(const QString& id);
+    //! returns whether video is currently playing.
+    //! @param id name assigned during loadVideo().
+    //! @note If video is not found, also returns @value false.
+    bool isVideoPlaying(const QString& id);
 
 
-	// Slots to handle QMediaPlayer change signals:
+    // Slots to handle QMediaPlayer signals. Never call them yourelf!
 	// These might hopefully be useful to understand media handling and how to get to crucial information like native resolution during loading of media.
 	// We start by simple debug output...
 	void handleAudioAvailableChanged(bool available);
@@ -88,11 +128,12 @@ public slots:
 	void handleCurrentMediaChanged(const QMediaContent & media);
 	void handleDurationChanged(qint64 duration);
 	void handleError(QMediaPlayer::Error error);
+    // This should never be called in practice!
 	void handleMediaChanged(const QMediaContent & media);
 	void handleMediaStatusChanged(QMediaPlayer::MediaStatus status); // debug-log messages
 	void handleMutedChanged(bool muted);
 	//void handleNetworkConfigurationChanged(const QNetworkConfiguration & configuration);
-	void handlePlaybackRateChanged(qreal rate);
+    //void handlePlaybackRateChanged(qreal rate);
 	void handlePositionChanged(qint64 position);
 	void handleSeekableChanged(bool seekable);
 	void handleStateChanged(QMediaPlayer::State state);
