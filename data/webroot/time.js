@@ -18,8 +18,7 @@ var Time = (new function($) {
     var timeData; //the current time data
     var lastTimeSync; //The real time which timeData.jday corresponds to
     var timeEditMode; //If the user currently focuses a time-edit control
-    var timePushTimeout;
-    var pendingTimePush = false; //If a time push to the server is pending
+    var updateQueue; //The UpdateQueue object for time updates
     var currentDisplayTime = {}; //the time shown in the controls, not automatically synced with timeData
 
     //controls
@@ -402,13 +401,6 @@ var Time = (new function($) {
         $input_mjd.spinner("value", currentDisplayTime.jd - 2400000.5);
     }
 
-    function onTimeUpdateFinished() {
-        pendingTimePush = false;
-
-        //force an update
-        Main.forceUpdate();
-    }
-
     //Uses the currently set display time to queue an update of the server
     function setTimeFromCurrentDisplayTime() {
         //we have to change an eventual rollover
@@ -426,25 +418,14 @@ var Time = (new function($) {
         timeData.jday = newJD;
 
         forceSpinnerUpdate();
-        queueTimeUpdate(newJD);
-    }
-
-    function queueTimeUpdate(jd) {
-        pendingTimePush = true;
-
-        timePushTimeout && clearTimeout(timePushTimeout);
-        timePushTimeout = setTimeout(function() {
-            //post an update
-            Main.postCmd("/api/main/time", {
-                time: jd
-            }, onTimeUpdateFinished);
-        }, UISettings.editUpdateDelay);
+        updateQueue.enqueue({time: newJD});
     }
 
     //Public stuff
     return {
         init: function() {
             initControls();
+            updateQueue = new Main.UpdateQueue("/api/main/time");
 
             resetCurrentDisplayTime();
         },
@@ -459,7 +440,7 @@ var Time = (new function($) {
 
             updateTimeButtonState();
 
-            if (!(timeEditMode || pendingTimePush)) {
+            if (!(timeEditMode || updateQueue.isQueued)) {
                 //if user is focusing the edit controls, or we have a pending time push, don't do this
                 //force an update
                 animate();
@@ -524,7 +505,7 @@ var Time = (new function($) {
                 resyncTime();
                 timeData.jday = val;
 
-                queueTimeUpdate(val);
+                updateQueue.enqueue({time: val});
             }
         },
 

@@ -249,13 +249,6 @@ public:
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
 	SphericalCap getVisibleSkyArea() const;
-	
-	//! Smoothly move the observer to the given location
-	//! @param target the target location
-	//! @param duration direction of view move duration in s
-	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
-	//! This is used only if the destination planet is different from the starting one.
-	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
 
 	// Conversion in standar Julian time format
 	static const double JD_SECOND;
@@ -300,6 +293,13 @@ public:
 	QString getDefaultProjectionTypeKey(void) const;
 
 public slots:
+	//! Smoothly move the observer to the given location
+	//! @param target the target location
+	//! @param duration direction of view move duration in s
+	//! @param durationIfPlanetChange direction of view + planet travel move duration in s.
+	//! This is used only if the destination planet is different from the starting one.
+	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
+
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);
 	ProjectionType getCurrentProjectionType() const;

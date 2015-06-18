@@ -21,6 +21,7 @@
 #include "httpserver/staticfilecontroller.h"
 
 #include "APIController.hpp"
+#include "LocationService.hpp"
 #include "MainService.hpp"
 #include "ScriptService.hpp"
 #include "StelActionService.hpp"
@@ -38,6 +39,7 @@ RequestHandler::RequestHandler(QSettings *settings, QObject* parent) : HttpReque
 	apiController->registerService(new MainService("main",apiController));
 	apiController->registerService(new ScriptService("scripts",apiController));
 	apiController->registerService(new StelActionService("stelaction",apiController));
+	apiController->registerService(new LocationService("location",apiController));
 
 	//retrieve actual webroot through StelFileMgr
 	QString path = StelFileMgr::findFile("data/webroot",StelFileMgr::Directory);
