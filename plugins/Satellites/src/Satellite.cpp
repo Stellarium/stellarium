@@ -601,6 +601,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
+	visibilityPoints.clear();
 	
 	parseInternationalDesignator(tle1);
 }
@@ -655,6 +656,7 @@ double Satellite::getDoppler(double freq) const
 void Satellite::recalculateOrbitLines(void)
 {
 	orbitPoints.clear();
+	visibilityPoints.clear();
 }
 
 SatFlags Satellite::getFlags()
@@ -791,43 +793,37 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 void Satellite::drawOrbit(StelPainter& painter)
 {
-	Vec3d position,previousPosition;
+	Vec3d position;
+	Vec3f drawColor;
+	int size = orbitPoints.size();
 
 	glDisable(GL_TEXTURE_2D);
 
 	QList<Vec3d>::iterator it= orbitPoints.begin();
-
-	//First point projection calculation
-	previousPosition.set(it->operator [](0), it->operator [](1), it->operator [](2));
-
 	it++;
-	StelVertexArray vertexArray;
-	vertexArray.primitiveType=StelVertexArray::Lines;
+
+	QVector<Vec3d> vertexArray;
+	QVector<Vec4f> colorArray;
+
+	vertexArray.resize(size);
+	colorArray.resize(size);
 
 	//Rest of points
-	for (int i=1; i<orbitPoints.size(); i++)
+	for (int i=1; i<size; i++)
 	{
 		position.set(it->operator [](0), it->operator [](1), it->operator [](2));
 		it++;
 		position.normalize();
-		previousPosition.normalize();
-		
-		// Draw end (fading) parts of orbit lines one segment at a time.
-		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
-		{
-			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
-		}
-		else
-		{
-			vertexArray.vertex << previousPosition << position;
-		}
-		previousPosition = position;
+
+		vertexArray[i] = position;
+		drawColor = invisibleSatelliteColor;
+		if (visibilityPoints[i] == VISIBLE)
+			drawColor = orbitColor;
+		colorArray[i] = Vec4f(drawColor[0], drawColor[1], drawColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
 	}
 
-	// Draw center section of orbit in one go
-	painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness);
-	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
+
+	painter.drawPath(vertexArray, colorArray);
 
 	glEnable(GL_TEXTURE_2D);
 }
@@ -867,6 +863,7 @@ void Satellite::computeOrbitPoints()
 			pSatWrapper->setEpoch(epochTm.getGmtTm());
 			elAzVector  = pSatWrapper->getAltAz();
 			orbitPoints.append(elAzVector);
+			visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 			epochTm    += computeInterval;
 		}
 		lastEpochCompForOrbit = epochTime;
@@ -893,9 +890,11 @@ void Satellite::computeOrbitPoints()
 			{
 				//remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
+				visibilityPoints.removeFirst();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
 				elAzVector  = pSatWrapper->getAltAz();
 				orbitPoints.append(elAzVector);
+				visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 				epochTm    += computeInterval;
 			}
 
@@ -921,9 +920,11 @@ void Satellite::computeOrbitPoints()
 			for (int i=0; i<diffSlots; i++)
 			{ //remove points at end of list and add points at beginning.
 				orbitPoints.removeLast();
+				visibilityPoints.removeLast();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
 				elAzVector  = pSatWrapper->getAltAz();
 				orbitPoints.push_front(elAzVector);
+				visibilityPoints.push_front(pSatWrapper->getVisibilityPredict());
 				epochTm -= computeInterval;
 
 			}
