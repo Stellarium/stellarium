@@ -47,10 +47,6 @@ public:
 	//! Return the list of all loaded locations
 	QList<StelLocation> getAll() const {return locations.values();}
 
-	//! Return the StelLocation for a given string
-	//! Can match location name, or coordinates
-	const StelLocation locationForString(const QString& s) const;
-
 	//! Return the StelLocation from a CLI
 	const StelLocation locationFromCLI() const;
 
@@ -86,6 +82,10 @@ public:
 	void pickLocationsInCountry(const QString country);
 
 public slots:
+	//! Return the StelLocation for a given string
+	//! Can match location name, or coordinates
+	const StelLocation locationForString(const QString& s) const;
+
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
 

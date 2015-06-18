@@ -71,6 +71,8 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 {
 	//disable caching by default for services
 	response.setHeader("Cache-Control","no-cache");
+	//default content type is text
+	response.setHeader("Content-Type","text/plain");
 
 	//use the raw path here
 	QByteArray path = request.getRawPath();
