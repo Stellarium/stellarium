@@ -39,6 +39,8 @@ SET(RemoteControl_SRCS
   RequestHandler.cpp
   ScriptService.hpp
   ScriptService.cpp
+  SearchService.hpp
+  SearchService.cpp
   StelActionService.hpp
   StelActionService.cpp
   gui/RemoteControlDialog.hpp

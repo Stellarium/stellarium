@@ -150,8 +150,7 @@ var Main = (new function($) {
             Main.postCmd(this.url, data, $.proxy(function() {
                 Main.forceUpdate();
                 this.isQueued = false;
-                if(this.finishedCallback)
-                {
+                if (this.finishedCallback) {
                     this.finishedCallback();
                 }
             }, this));
@@ -165,6 +164,7 @@ var Main = (new function($) {
 
             Actions.init();
             Scripts.init();
+            Search.init();
             Time.init();
             Locations.init();
 
@@ -189,7 +189,7 @@ var Main = (new function($) {
         },
 
         //POST a command to the server
-        postCmd: function(url, data, completeFunc) {
+        postCmd: function(url, data, completeFunc, successFunc) {
             $.ajax({
                 url: url,
                 method: "POST",
@@ -197,9 +197,13 @@ var Main = (new function($) {
                 dataType: "text",
                 timeout: 3000,
                 success: function(data) {
-                    console.log("server replied: " + data);
-                    if (data !== "ok") {
-                        alert(data);
+                    if (successFunc) {
+                        successFunc(data);
+                    } else {
+                        console.log("server replied: " + data);
+                        if (data !== "ok") {
+                            alert(data);
+                        }
                     }
                     update();
                 },
@@ -362,14 +366,11 @@ var Main = (new function($) {
         autocomplete: function(value) {
             this.element.val(value);
             var e = this.element[0];
-            if(e.selectedIndex>=0)
-            {
+            if (e.selectedIndex >= 0) {
                 this.input.val(e.options[e.selectedIndex].text);
-            }
-            else
-            {
+            } else {
                 this.input.val(value);
-            }            
+            }
         }
     });
 })(jQuery);
