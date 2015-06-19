@@ -26,7 +26,6 @@
 
 #include "LabelMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "MeteorMgr.hpp"
 #include "MeteorShowerDialog.hpp"
 #include "MeteorShowers.hpp"
 #include "Planet.hpp"
@@ -40,10 +39,9 @@
 #include "StelObjectMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelTextureMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
-
-const double MeteorShowers::zhrToWsr = MeteorMgr::zhrToWsr;
 
 /*
  This method is the one called automatically by the StelModuleMgr just
@@ -132,7 +130,7 @@ double MeteorShowers::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName == StelModule::ActionDraw)
 	{
-		return GETSTELMODULE(MeteorMgr)->getCallOrder(actionName)+10.;
+		return GETSTELMODULE(SporadicMeteorMgr)->getCallOrder(actionName)+10.;
 	}
 
 	return 0;
@@ -603,8 +601,8 @@ void MeteorShowers::update(double deltaTime)
 				       current.peak);
 
 		// determine average meteors per frame needing to be created
-		int mpf = (int)((double)ZHR*zhrToWsr*deltaTime/1000.0 + 0.5);
-		if (mpf<1)
+		int mpf = (int) ((double) ZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
+		if (mpf < 1)
 		{
 			mpf = 1;
 		}
@@ -613,14 +611,15 @@ void MeteorShowers::update(double deltaTime)
 		{
 			// start new meteor based on ZHR time probability
 			double prob = ((double)qrand())/RAND_MAX;
-			if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
+			if (ZHR>0 && prob<((double)ZHR*ZHR_TO_WSR*deltaTime/1000.0/(double)mpf))
 			{
 				MeteorStream *m = new MeteorStream(core,
 								   current.speed,
 								   current.radiantAlpha,
 								   current.radiantDelta,
 								   current.pidx,
-								   current.colors);
+								   current.colors,
+								   m_bolideTexture);
 				active[index].push_back(m);
 			}
 		}

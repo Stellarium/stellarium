@@ -364,7 +364,8 @@ private:
 
 	//MS
 	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
-	static const double zhrToWsr;  // factor to convert from zhr to whole earth per second rate
+
+	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 
 	bool flagShowARG;  //! Show marker of active radiant based on generic data
 	bool flagShowARR;  //! Show marker of active radiant based on generic data

@@ -35,10 +35,10 @@
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
-#include "MeteorMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
 #include "ConstellationMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
@@ -202,7 +202,7 @@ void ViewDialog::createDialogContent()
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
 
 	// Shooting stars section
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	Q_ASSERT(mmgr);
 
 	ui->zhrSpinBox->setValue(mmgr->getZHR());
@@ -639,7 +639,7 @@ void ViewDialog::showAtmosphereDialog()
 
 void ViewDialog::setZhrFromControls(int zhr)
 {
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);	
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	if (zhr==0)
 	{
 		mmgr->setFlagShow(false);

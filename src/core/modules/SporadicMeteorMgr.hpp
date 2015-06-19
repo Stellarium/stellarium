@@ -1,7 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2004 Robert Spearman
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2015 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,77 +17,69 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _METEORMGR_HPP_
-#define _METEORMGR_HPP_
+#ifndef _SPORADICMETEORMGR_HPP_
+#define _SPORADICMETEORMGR_HPP_
 
 #include "StelModule.hpp"
-#include <vector>
 
-class Meteor;
+class SporadicMeteor;
 
-//! @class MeteorMgr
-//! Simulates a meteor shower.
-class MeteorMgr : public StelModule
+// Factor to convert from zhr to whole earth per second rate (1.6667f / 3600.f)
+#define ZHR_TO_WSR 0.00046297222
+
+//! @class SporadicMeteorMgr
+//! Simulates a sporadic meteor shower, with a random color and a random radiant.
+//! @author Marcos Cardinot <mcardinot@gmail.com>
+class SporadicMeteorMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(int ZHR
-		   READ getZHR
-		   WRITE setZHR
-		   NOTIFY zhrChanged)
+	Q_PROPERTY(int ZHR READ getZHR WRITE setZHR NOTIFY zhrChanged)
 
 public:
-	//! Construct a MeteorMgr object.
+	//! Construct a SporadicMeteorMgr object.
 	//! @param zhr the base zenith hourly rate - i.e. the rate when there is no
 	//!            meteor shower in progress.
 	//! @param maxv the initial value of the maximum meteor velocity.
-	MeteorMgr(int zhr, int maxv); 
-	virtual ~MeteorMgr();
- 
-	///////////////////////////////////////////////////////////////////////////
+	SporadicMeteorMgr(int zhr, int maxv);
+	virtual ~SporadicMeteorMgr();
+
 	// Methods defined in the StelModule class
 	//! Initialize the MeteorMgr object.
 	virtual void init();
-	
 	//! Draw meteors.
 	virtual void draw(StelCore* core);
-	
 	//! Update time-dependent parts of the module.
 	//! This function adds new meteors to the list of currently visiable
 	//! ones based on the current rate, and removes those which have run their 
 	//! course.
 	virtual void update(double deltaTime);
-	
 	//! Defines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
-	//! Factor to convert from zhr to whole earth per second rate
-	static const double zhrToWsr;
-	
 public slots:
-	///////////////////////////////////////////////////////////////////////////
-	// Method callable from script and GUI
+	// Methods callable from script and GUI
 	//! Get the current zenith hourly rate.
 	int getZHR(void);
 	//! Set the zenith hourly rate.
 	void setZHR(int zhr);
-	
+
 	//! Set flag used to turn on and off meteor rendering.
-	void setFlagShow(bool b) { flagShow = b; }
+	inline void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off meteor rendering.
-	bool getFlagShow(void) const { return flagShow; }
-	
+	inline bool getFlagShow(void) const { return flagShow; }
+
 	//! Set the maximum velocity in km/s
 	void setMaxVelocity(int maxv);
-	
+
 signals:
 	void zhrChanged(int);
-	
+
 private:
-	QList<Meteor*> activeMeteors;
+	QList<SporadicMeteor*> activeMeteors;
+	StelTextureSP m_bolideTexture;
 	int ZHR;
 	int maxVelocity;
 	bool flagShow;
 };
 
-
-#endif // _METEORMGR_HPP_
+#endif // _SPORADICMETEORMGR_HPP_
