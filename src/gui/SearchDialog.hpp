@@ -94,6 +94,13 @@ public:
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
 
+
+	//! Replaces all occurences of substrings describing Greek letters (i.e. "alpha", "beta", ...)
+	//! with the actual Greek unicode characters.
+	static QString substituteGreek(const QString& keyString);
+	//! Returns the Greek unicode character for the specified letter string (i.e. "alpha", "beta", ...)
+	static QString getGreekLetterByName(const QString& potentialGreekLetterName);
+
 public slots:
 	void retranslate();
 	//! This style only displays the text search field and the search button
@@ -163,15 +170,52 @@ private slots:
 	void pasteAndGo();
 
 private:
+	class SearchDialogStaticData
+	{
+	public:
+		//! Greek letters and strings
+		QHash<QString, QString> greekLetters;
+
+		SearchDialogStaticData()
+		{
+			greekLetters.insert("alpha", QString(QChar(0x03B1)));
+			greekLetters.insert("beta", QString(QChar(0x03B2)));
+			greekLetters.insert("gamma", QString(QChar(0x03B3)));
+			greekLetters.insert("delta", QString(QChar(0x03B4)));
+			greekLetters.insert("epsilon", QString(QChar(0x03B5)));
+
+			greekLetters.insert("zeta", QString(QChar(0x03B6)));
+			greekLetters.insert("eta", QString(QChar(0x03B7)));
+			greekLetters.insert("theta", QString(QChar(0x03B8)));
+			greekLetters.insert("iota", QString(QChar(0x03B9)));
+			greekLetters.insert("kappa", QString(QChar(0x03BA)));
+
+			greekLetters.insert("lambda", QString(QChar(0x03BB)));
+			greekLetters.insert("mu", QString(QChar(0x03BC)));
+			greekLetters.insert("nu", QString(QChar(0x03BD)));
+			greekLetters.insert("xi", QString(QChar(0x03BE)));
+			greekLetters.insert("omicron", QString(QChar(0x03BF)));
+
+			greekLetters.insert("pi", QString(QChar(0x03C0)));
+			greekLetters.insert("rho", QString(QChar(0x03C1)));
+			greekLetters.insert("sigma", QString(QChar(0x03C3))); // second lower-case sigma shouldn't affect anything
+			greekLetters.insert("tau", QString(QChar(0x03C4)));
+			greekLetters.insert("upsilon", QString(QChar(0x03C5)));
+
+			greekLetters.insert("phi", QString(QChar(0x03C6)));
+			greekLetters.insert("chi", QString(QChar(0x03C7)));
+			greekLetters.insert("psi", QString(QChar(0x03C8)));
+			greekLetters.insert("omega", QString(QChar(0x03C9)));
+		}
+	};
+	static SearchDialogStaticData staticData;
+
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
 	QMap<QString, Vec3d> simbadResults;
 	class StelObjectMgr* objectMgr;
 	class QSettings* conf;
-	
-	QString substituteGreek(const QString& keyString);
-	QString getGreekLetterByName(const QString& potentialGreekLetterName);
-	QHash<QString, QString> greekLetters;
+
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
 
@@ -180,6 +224,7 @@ private:
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;
 	void populateSimbadServerList();
+
 	//! URL of the default SIMBAD server (Strasbourg).
 	static const char* DEF_SIMBAD_URL;
 

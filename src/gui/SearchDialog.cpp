@@ -125,6 +125,7 @@ void CompletionLabel::updateText()
 // Start of members for class SearchDialog
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
+SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 
 SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
@@ -134,35 +135,6 @@ SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NU
 	Q_ASSERT(objectMgr);
 
 	flagHasSelectedText = false;
-
-	greekLetters.insert("alpha", QString(QChar(0x03B1)));
-	greekLetters.insert("beta", QString(QChar(0x03B2)));
-	greekLetters.insert("gamma", QString(QChar(0x03B3)));
-	greekLetters.insert("delta", QString(QChar(0x03B4)));
-	greekLetters.insert("epsilon", QString(QChar(0x03B5)));
-    
-	greekLetters.insert("zeta", QString(QChar(0x03B6)));
-	greekLetters.insert("eta", QString(QChar(0x03B7)));
-	greekLetters.insert("theta", QString(QChar(0x03B8)));
-	greekLetters.insert("iota", QString(QChar(0x03B9)));
-	greekLetters.insert("kappa", QString(QChar(0x03BA)));
-	
-	greekLetters.insert("lambda", QString(QChar(0x03BB)));
-	greekLetters.insert("mu", QString(QChar(0x03BC)));
-	greekLetters.insert("nu", QString(QChar(0x03BD)));
-	greekLetters.insert("xi", QString(QChar(0x03BE)));
-	greekLetters.insert("omicron", QString(QChar(0x03BF)));
-	
-	greekLetters.insert("pi", QString(QChar(0x03C0)));
-	greekLetters.insert("rho", QString(QChar(0x03C1)));
-	greekLetters.insert("sigma", QString(QChar(0x03C3))); // second lower-case sigma shouldn't affect anything
-	greekLetters.insert("tau", QString(QChar(0x03C4)));
-	greekLetters.insert("upsilon", QString(QChar(0x03C5)));
-	
-	greekLetters.insert("phi", QString(QChar(0x03C6)));
-	greekLetters.insert("chi", QString(QChar(0x03C7)));
-	greekLetters.insert("psi", QString(QChar(0x03C8)));
-	greekLetters.insert("omega", QString(QChar(0x03C9)));
 
 	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
@@ -702,8 +674,8 @@ QString SearchDialog::substituteGreek(const QString& keyString)
 
 QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterName)
 {
-	if(greekLetters.contains(potentialGreekLetterName))
-		return greekLetters[potentialGreekLetterName.toLower()];
+	if(staticData.greekLetters.contains(potentialGreekLetterName))
+		return staticData.greekLetters[potentialGreekLetterName.toLower()];
 
 	// There can be indices (e.g. "α1 Cen" instead of "α Cen A"), so strip
 	// any trailing digit.
@@ -712,8 +684,8 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 	{
 		QChar digit = potentialGreekLetterName.at(lastCharacterIndex);
 		QString name = potentialGreekLetterName.left(lastCharacterIndex);
-		if(greekLetters.contains(name))
-			return greekLetters[name.toLower()] + digit;
+		if(staticData.greekLetters.contains(name))
+			return staticData.greekLetters[name.toLower()] + digit;
 	}
 
 	return potentialGreekLetterName;

@@ -173,7 +173,7 @@ select {
 
 #wrapper {
 	border: 1px solid #595959;
-	margin: 1em 1%;
+	margin: 1em;
 	padding: 1em;
 }
 
@@ -214,6 +214,18 @@ select {
 	font-size: 14px;
 	margin: 0px;
 	display: inline-block;
+}
+
+.flex {
+	display: flex;
+}
+
+.inline-flex {
+	display: inline-flex;
+}
+
+.flex-column {
+	flex-direction: column;
 }
 
 #noresponse {
@@ -413,8 +425,6 @@ header img {
 }
 
 #loc_searchlist{
-	display: inline-flex;
-	flex-flow: column;
 	vertical-align: top;
 	height: 240px;
 	width: 150px;
@@ -491,3 +501,41 @@ header img {
 	border: none;
 }
 
+#srch_input {
+	flex-grow: 1;
+}
+
+#srch_results {
+	text-align: left;
+	width: 400px;
+	min-height: 90px;
+	font-size: 14px;
+	padding-left: 10px;
+	padding-right: 5px;
+	background: none;
+	margin: 5px 0px;
+	border: 1px solid black;
+}
+
+#srch_results span {
+	padding: 1em;
+}
+
+#srch_results span.state-selected {
+	font-weight: bold;
+}
+
+#srch_greek div {
+	display: flex;
+}
+
+#srch_greek button {
+	width: 32px;
+	margin: 0px;
+	padding: 0px;
+	flex-grow: 1;
+}
+
+#srch_greek button .ui-button-text {
+	padding: 0px;
+}
