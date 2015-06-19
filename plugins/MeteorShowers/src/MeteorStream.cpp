@@ -25,35 +25,15 @@ MeteorStream::MeteorStream(const StelCore* core,
 			   float radiantAlpha,
 			   float radiantDelta,
 			   float pidx,
-			   QList<MeteorShower::colorPair> colors)
-	: m_speed(speed)
-	, m_segments(10)
+			   QList<MeteorShower::colorPair> colors,
+			   StelTextureSP bolideTexture)
 {
 	qsrand (QDateTime::currentMSecsSinceEpoch());
+
 	// if speed is zero, use a random value
 	if (!speed)
 	{
-		m_speed = 11+(double)qrand()/((double)RAND_MAX+1)*61;  // abs range 11-72 km/s
-	}
-
-	// view matrix of meteor model
-	m_viewMatrix = Mat4d::zrotation(radiantAlpha) * Mat4d::yrotation(M_PI_2 - radiantDelta);
-
-	// building meteor model
-	m_alive = Meteor::initMeteorModel(core, m_segments, m_viewMatrix, meteor);
-	if (!m_alive)
-	{
-		return;
-	}
-
-	// implements the population index
-	float oneMag = -0.2; // negative, working in different scale ( 0 to 1 - where 1 is brighter)
-	if (pidx) // is not zero
-	{
-		if (qrand()%100 < 100.f/pidx) // probability
-		{
-			meteor.mag += oneMag;  // (m+1)
-		}
+		speed = 11 + (double)qrand() / ((double)RAND_MAX + 1) * 61;  // abs range 11-72 km/s
 	}
 
 	// determine the meteor color
@@ -72,7 +52,7 @@ MeteorStream::MeteorStream(const StelCore* core,
 
 		int increaseWhite = 0;
 		if (totalIntensity > 100) {
-			qDebug() << "MeteorShowers plugin (showers.json): Total intensity must be less than 100";
+			qWarning() << "MeteorShowers plugin (showers.json): Total intensity must be less than 100";
 			colors.clear();
 			colors.push_back(MeteorShower::colorPair("white", 100));
 		} else {
@@ -88,41 +68,34 @@ MeteorStream::MeteorStream(const StelCore* core,
 		}
 	}
 
-	// building lineColorArray and trainColorArray
-	Meteor::buildColorArrays(m_segments, colors, m_lineColorArray, m_trainColorArray);
+	// building meteor model
+	m_meteor = new Meteor(core, radiantAlpha, radiantDelta, speed, colors, bolideTexture);
+	if (!m_meteor->isAlive())
+	{
+		return;
+	}
+
+	// implements the population index
+	float oneMag = -0.2; // negative, working in different scale ( 0 to 1 - where 1 is brighter)
+	if (pidx) // is not zero
+	{
+		if (qrand()%100 < 100.f/pidx) // probability
+		{
+			m_meteor->setMag(m_meteor->mag() + oneMag);  // (m+1)
+		}
+	}
 }
 
 MeteorStream::~MeteorStream()
 {
 }
 
-// returns true if alive
 bool MeteorStream::update(double deltaTime)
 {
-	if (!m_alive)
-	{
-		return false;
-	}
-
-	m_alive = Meteor::updateMeteorModel(deltaTime, m_speed, meteor);
-
-	return m_alive;
+	return m_meteor->update(deltaTime);
 }
 
-// returns true if visible
-// Assumes that we are in local frame
 void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 {
-	if (!m_alive)
-	{
-		return;
-	}
-
-	float thickness, bolideSize;
-	Meteor::calculateThickness(core, thickness, bolideSize);
-
-	Meteor::drawTrain(core, sPainter, meteor, m_viewMatrix, thickness,
-			  m_segments, m_lineColorArray, m_trainColorArray);
-
-	Meteor::drawBolide(core, sPainter, meteor, m_viewMatrix, bolideSize);
+	m_meteor->draw(core, sPainter);
 }

@@ -31,6 +31,7 @@ class StelPainter;
 //! Control of the meteor rate is performed in the MeteorShowers class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
 //! "dies", after which, the update() member returns false.
+//! @author Marcos Cardinot <mcardinot@gmail.com>
 //! @ingroup meteorShowers
 class MeteorStream
 {
@@ -45,7 +46,8 @@ public:
 		     float radiantAlpha,
 		     float radiantDelta,
 		     float pidx,
-		     QList<MeteorShower::colorPair> colors);
+		     QList<MeteorShower::colorPair> colors,
+		     StelTextureSP bolideTexture);
 
 	virtual ~MeteorStream();
 
@@ -57,15 +59,7 @@ public:
 	void draw(const StelCore* core, StelPainter& sPainter);
 
 private:
-	bool m_alive;             //! Indicate if the meteor it still visible
-
-	float m_speed;              //! Velocity of meteor in km/s
-	Mat4d m_viewMatrix;         //! View Matrix
-	Meteor::MeteorModel meteor; //! Parameters of meteor model
-
-	QList<Vec4f> m_trainColorArray;
-	QList<Vec4f> m_lineColorArray;
-	int m_segments;                 //! Number of segments along the train
+	Meteor* m_meteor;
 };
 
 #endif // _METEORSTREAM_HPP_

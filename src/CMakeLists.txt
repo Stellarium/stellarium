@@ -199,8 +199,10 @@ SET(stellarium_lib_SRCS
 	core/modules/LandscapeMgr.hpp
 	core/modules/Meteor.cpp
 	core/modules/Meteor.hpp
-	core/modules/MeteorMgr.cpp
-	core/modules/MeteorMgr.hpp
+	core/modules/SporadicMeteor.cpp
+	core/modules/SporadicMeteor.hpp
+	core/modules/SporadicMeteorMgr.cpp
+	core/modules/SporadicMeteorMgr.hpp
 	core/modules/MilkyWay.cpp
 	core/modules/MilkyWay.hpp
 	core/modules/Nebula.cpp
@@ -633,4 +635,3 @@ FOREACH(NAME ${STELLARIUM_TESTS})
 	ENDIF()
 ENDFOREACH()
 ADD_DEPENDENCIES(tests buildTests)
-
