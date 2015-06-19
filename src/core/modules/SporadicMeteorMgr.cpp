@@ -1,7 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2004 Robert Spearman
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2015 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +19,8 @@
 
 #include "LandscapeMgr.hpp"
 #include "Meteor.hpp"
-#include "MeteorMgr.hpp"
 #include "SolarSystem.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -31,27 +30,26 @@
 
 #include <QSettings>
 
-const double MeteorMgr::zhrToWsr = 1.6667f / 3600.f;
-
-MeteorMgr::MeteorMgr(int zhr, int maxv )
+SporadicMeteorMgr::SporadicMeteorMgr(int zhr, int maxv )
 	: ZHR(zhr)
 	, maxVelocity(maxv)
 	, flagShow(true)
 {
-	setObjectName("MeteorMgr");
+	setObjectName("SporadicMeteorMgr");
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
-MeteorMgr::~MeteorMgr()
+SporadicMeteorMgr::~SporadicMeteorMgr()
 {
 	qDeleteAll(activeMeteors);
 	activeMeteors.clear();
-	Meteor::bolideTexture.clear();
 }
 
-void MeteorMgr::init()
+void SporadicMeteorMgr::init()
 {
-	Meteor::bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	m_bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(
+				StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
+				StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_rate", 10).toInt());
 }
@@ -59,7 +57,7 @@ void MeteorMgr::init()
 /*************************************************************************
  Reimplementation of the getCallOrder method
 *************************************************************************/
-double MeteorMgr::getCallOrder(StelModuleActionName actionName) const
+double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 	{
@@ -68,23 +66,23 @@ double MeteorMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void MeteorMgr::setZHR(int zhr)
+void SporadicMeteorMgr::setZHR(int zhr)
 {
 	ZHR = zhr;
 	emit zhrChanged(zhr);
 }
 
-int MeteorMgr::getZHR()
+int SporadicMeteorMgr::getZHR()
 {
 	return ZHR;
 }
 
-void MeteorMgr::setMaxVelocity(int maxv)
+void SporadicMeteorMgr::setMaxVelocity(int maxv)
 {
 	maxVelocity = maxv;
 }
 
-void MeteorMgr::update(double deltaTime)
+void SporadicMeteorMgr::update(double deltaTime)
 {
 	if (!flagShow)
 	{
@@ -108,12 +106,12 @@ void MeteorMgr::update(double deltaTime)
 	}
 
 	// step through and update all active meteors
-	foreach (Meteor* m, activeMeteors)
+	foreach (SporadicMeteor* m, activeMeteors)
 	{
-		if (!m->update(deltaTime))
-		{
-			activeMeteors.removeOne(m);
-		}
+		//if (!m->update(deltaTime))
+		//{
+			//activeMeteors.removeOne(m);
+		//}
 	}
 
 	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
@@ -125,7 +123,7 @@ void MeteorMgr::update(double deltaTime)
 	}
 
 	// determine average meteors per frame needing to be created
-	int mpf = (int)((double)ZHR*zhrToWsr*deltaTime/1000.0 + 0.5);
+	int mpf = (int)((double)ZHR*ZHR_TO_WSR*deltaTime/1000.0 + 0.5);
 	if (mpf<1)
 	{
 		mpf = 1;
@@ -135,16 +133,16 @@ void MeteorMgr::update(double deltaTime)
 	{
 		// start new meteor based on ZHR time probability
 		double prob = ((double)qrand())/RAND_MAX;
-		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
+		if (ZHR>0 && prob<((double)ZHR*ZHR_TO_WSR*deltaTime/1000.0/(double)mpf))
 		{
-			Meteor *m = new Meteor(core, maxVelocity);
-			activeMeteors.append(m);
+			//Meteor *m = new Meteor(core, maxVelocity);
+			//activeMeteors.append(m);
 		}
 	}
 }
 
 
-void MeteorMgr::draw(StelCore* core)
+void SporadicMeteorMgr::draw(StelCore* core)
 {
 	if (!flagShow || !core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
@@ -159,8 +157,8 @@ void MeteorMgr::draw(StelCore* core)
 
 	// step through and draw all active meteors
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	foreach (Meteor* m, activeMeteors)
+	foreach (SporadicMeteor* m, activeMeteors)
 	{
-		m->draw(core, sPainter);
+		//m->draw(core, sPainter);
 	}
 }
