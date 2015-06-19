@@ -600,8 +600,8 @@ void Planet::computeTransMatrix(double jd)
 		  {
 			// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
 			// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
-			double chi_A, omega_A, psi_A;
-			getPrecessionAnglesVondrak(jd, &chi_A, &omega_A, &psi_A); // GZ: Implement this in planetsephems/precession!
+			double eps_A, chi_A, omega_A, psi_A;
+			getPrecessionAnglesVondrak(jd, &eps_A, &chi_A, &omega_A, &psi_A); // GZ: Implement this in planetsephems/precession!
 			// Next expression is wrong. We need obliquity w.r.t. J2000, and nodal motion (some psi).
 			//rotLocalToParent=Mat4d::zrotation(chi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(-psi_A) * Mat4d::xrotation(re.obliquity);
 			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) ;
@@ -641,7 +641,7 @@ double Planet::getSiderealTime(double jd) const
 {
 	if (englishName=="Earth")
 	{	// GZ I want to be sure that nutation is just those ignorable few arcseconds.
-		qDebug() << "Difference apparent-mean sidereal times: " << get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd);
+		qDebug() << "Difference apparent-mean sidereal times (s): " << (get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd))*86400.0;
 		return get_apparent_sidereal_time(jd);
 	}
 
@@ -1827,7 +1827,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if (!re.siderealPeriod)
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
 
 	StelPainter sPainter(prj);
 
@@ -1838,7 +1838,7 @@ void Planet::drawOrbit(const StelCore* core)
 	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
-	// on it's orbit all the time (since segmented rather than smooth curve)
+	// on its orbit all the time (since segmented rather than smooth curve)
 	Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
 	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos();
 	orbit[ORBIT_SEGMENTS]=orbit[0];

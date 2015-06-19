@@ -1454,21 +1454,28 @@
                  <item>
                   <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
                    <property name="text">
-                    <string>Equatorial grid (on J2000)</string>
+                    <string>Equatorial grid (J2000)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEquatorialGridCheckBox">
                    <property name="text">
-                    <string>Equatorial grid (on date)</string>
+                    <string>Equatorial grid (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEclipticGridJ2000CheckBox">
                    <property name="text">
-                    <string>Ecliptic grid (on J2000)</string>
+                    <string>Ecliptic grid (J2000)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showEclipticGridOfDateCheckBox">
+                   <property name="text">
+                    <string>Ecliptic grid (of date)</string>
                    </property>
                   </widget>
                  </item>
@@ -1498,32 +1505,36 @@
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_15">
                  <item>
+                  <widget class="QCheckBox" name="showEquatorJ2000LineCheckBox">
+                   <property name="text">
+                    <string>Equator (J2000)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QCheckBox" name="showEquatorLineCheckBox">
                    <property name="toolTip">
                     <string>Show equator line</string>
                    </property>
                    <property name="text">
-                    <string>Equator</string>
+                    <string>Equator (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showMeridianLineCheckBox">
-                   <property name="toolTip">
-                    <string>Show meridian line</string>
-                   </property>
+                  <widget class="QCheckBox" name="showEclipticLineJ2000CheckBox">
                    <property name="text">
-                    <string>Meridian</string>
+                    <string>Ecliptic (J2000)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showEclipticLineCheckBox">
+                  <widget class="QCheckBox" name="showEclipticLineOfDateCheckBox">
                    <property name="toolTip">
                     <string>Show ecliptic line</string>
                    </property>
                    <property name="text">
-                    <string>Ecliptic</string>
+                    <string>Ecliptic (of date)</string>
                    </property>
                   </widget>
                  </item>
@@ -1544,6 +1555,16 @@
                    </property>
                    <property name="text">
                     <string>Galactic equator</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showMeridianLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show meridian line</string>
+                   </property>
+                   <property name="text">
+                    <string>Meridian</string>
                    </property>
                   </widget>
                  </item>
@@ -2155,8 +2176,7 @@
   <tabstop>showAzimuthalGridCheckBox</tabstop>
   <tabstop>showGalacticGridCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
-  <tabstop>showMeridianLineCheckBox</tabstop>
-  <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showEclipticLineOfDateCheckBox</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showGalacticEquatorLineCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
