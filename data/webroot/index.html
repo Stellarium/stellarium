@@ -10,6 +10,7 @@
   <!-- Stellarium functionality is distributed over several .js files-->
   <script src="time.js" type="text/javascript"></script>
   <script src="actions.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
   <script src="scripts.js" type="text/javascript"></script>
   <script src="location.js" type="text/javascript"></script>
   <script src="remotecontrol.js" type="text/javascript"></script>
@@ -170,8 +171,8 @@
       <img src="stellarium.png" alt="Stellarium logo"/>
       <h1>Stellarium remote control</h1>
     </header>
-    <section id="main" class="block">
-      <header><h2>Main stuff</h2></header>
+    <section id="time" class="block">
+      <header><h2>Time control</h2></header>
     <div id="timewidget">
     <ul>
       <li><a href="#time_local">Local Time</a></li>
@@ -225,23 +226,41 @@
       <header><h2>Location</h2></header>
       <div>
         <div id="loc_map">
-          <img id="loc_mapimg" src="world.png"/>
-          <img id="loc_mappointer" src="map-pointeur.png"/>
-        </div><div id="loc_searchlist" >
+          <img id="loc_mapimg" src="world.png" alt="Planet map"/>
+          <img id="loc_mappointer" src="map-pointeur.png" alt="Planet map pointer"/>
+        </div><div id="loc_searchlist" class="inline-flex flex-column" >
           <select id="loc_list" size="10"></select>
           <input id="loc_search" />
         </div>
       </div>
       <div id="loc_inputs">
         <div>
-          <p><label>Latitude:</label><input id="loc_latitude"/></p>
-          <p><label>Longitude:</label><input id="loc_longitude"/></p>
-          <p><label>Altitude:</label><input id="loc_altitude"/></p>
+          <p><label for="loc_latitude">Latitude:</label><input id="loc_latitude"/></p>
+          <p><label for="loc_longitude">Longitude:</label><input id="loc_longitude"/></p>
+          <p><label for="loc_altitude">Altitude:</label><input id="loc_altitude"/></p>
         </div>
         <div>
-          <p><label>Name/City:</label><input id="loc_name" type="text"/></p>
-          <p><label>Country:</label><select id="loc_country"></select></p>
-          <p><label>Planet:</label><select id="loc_planet"></select></p>
+          <p><label for="loc_name">Name/City:</label><input id="loc_name" type="text"/></p>
+          <p><label for="loc_country">Country:</label><select id="loc_country"></select></p>
+          <p><label for="loc_planet">Planet:</label><select id="loc_planet"></select></p>
+        </div>
+      </div>
+    </section>
+    <section id="search" class="block">
+      <header><h2>Search</h2></header>
+      <form class="flex">
+        <input id="srch_input" type="text" placeholder="Enter search term" autocomplete="off"/>
+        <button id="srch_button" type="submit">Search</button>
+      </form>
+      <div>
+        <div id="srch_results" class="ui-widget ui-widget-content"></div>
+      </div>
+      <div id="srch_greek">
+        <div>
+          <button>&alpha;</button><button>&beta;</button><button>&gamma;</button><button>&delta;</button><button>&epsilon;</button><button>&zeta;</button><button>&eta;</button><button>&theta;</button><button>&iota;</button><button>&kappa;</button><button>&lambda;</button><button>&mu;</button>
+        </div>
+        <div>
+          <button>&nu;</button><button>&xi;</button><button>&omicron;</button><button>&pi;</button><button>&rho;</button><button>&sigma;</button><button>&tau;</button><button>&upsilon;</button><button>&phi;</button><button>&chi;</button><button>&psi;</button><button>&omega;</button>
         </div>
       </div>
     </section>

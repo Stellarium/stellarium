@@ -22,6 +22,9 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
@@ -33,7 +36,11 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent) : Abstr
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
+	objMgr = &StelApp::getInstance().getStelObjectMgr();
+	mvmgr = GETSTELMODULE(StelMovementMgr);
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
+
+	Q_ASSERT(this->thread()==objMgr->thread());
 }
 
 void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
@@ -105,7 +112,7 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: list,info,status POST: run,stop",response);
+		writeRequestError("unsupported operation. GET: status",response);
 	}
 }
 
@@ -154,4 +161,50 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 		else
 			response.write("error: invalid parameters, use time/timerate as double values");
 	}
+	else if(operation == "focus")
+	{
+		QString target = QString::fromUtf8(parameters.value("target"));
+
+		if(target.isEmpty())
+		{
+			writeRequestError("missing target parameter",response);
+			return;
+		}
+
+		bool result;
+		QMetaObject::invokeMethod(this,"focusObject",Qt::BlockingQueuedConnection,
+					  Q_RETURN_ARG(bool,result),
+					  Q_ARG(QString,target));
+
+		response.write(result ? "true" : "false", true);
+	}
+	else
+	{
+		//TODO some sort of service description?
+		writeRequestError("unsupported operation. POST: time,focus",response);
+	}
+}
+
+bool MainService::focusObject(const QString &name)
+{
+	bool result = false;
+	if (objMgr->findAndSelectI18n(name) || objMgr->findAndSelect(name))
+	{
+		const QList<StelObjectP> newSelected = objMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			// Can't point to home planet
+			if (newSelected[0]->getEnglishName()!=core->getCurrentLocation().planetName)
+			{
+				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+				mvmgr->setFlagTracking(true);
+				result = true;
+			}
+			else
+			{
+				objMgr->unSelect();
+			}
+		}
+	}
+	return result;
 }

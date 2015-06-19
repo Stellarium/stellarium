@@ -17,39 +17,31 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef MAINSERVICE_HPP_
-#define MAINSERVICE_HPP_
+#ifndef SEARCHSERVICE_HPP_
+#define SEARCHSERVICE_HPP_
 
 #include "APIController.hpp"
 
-class StelCore;
-class StelLocaleMgr;
-class StelMovementMgr;
-class StelObjectMgr;
-class StelScriptMgr;
+#include <QStringList>
 
-class MainService : public AbstractAPIService
+class StelObjectMgr;
+
+class SearchService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	MainService(const QByteArray& serviceName, QObject* parent = 0);
+	SearchService(const QByteArray& serviceName, QObject* parent = 0);
 
-	virtual ~MainService() {}
+	virtual ~SearchService() {}
 
 	virtual void get(const QByteArray& operation,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response) Q_DECL_OVERRIDE;
-	virtual void post(const QByteArray &operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response) Q_DECL_OVERRIDE;
-
+	//virtual void post(const QByteArray &operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response) Q_DECL_OVERRIDE;
 private slots:
-	//! Like StelDialog::gotoObject
-	bool focusObject(const QString& name);
-
+	//! Executed in Stellarium main thread to avoid multiple QMetaObject::invoke calls
+	QStringList performSearch(const QString& text);
 private:
-	StelCore* core;
-	StelLocaleMgr* localeMgr;
-	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;
-	StelScriptMgr* scriptMgr;
-
+	bool useStartOfWords;
 };
 
 
