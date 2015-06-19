@@ -37,6 +37,7 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "precession.h"
 
 #include <QSettings>
 #include <QDebug>
@@ -308,10 +309,12 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 	{
 		case FrameAltAz:
 			return getProjection(getAltAzModelViewTransform(refractionMode));
-		case FrameHeliocentricEcliptic:
+		case FrameHeliocentricEclipticJ2000:
 			return getProjection(getHeliocentricEclipticModelViewTransform(refractionMode));
-		case FrameObservercentricEcliptic:
-			return getProjection(getObservercentricEclipticModelViewTransform(refractionMode));
+		case FrameObservercentricEclipticJ2000:
+			return getProjection(getObservercentricEclipticJ2000ModelViewTransform(refractionMode));
+		case FrameObservercentricEclipticOfDate:
+			return getProjection(getObservercentricEclipticOfDateModelViewTransform(refractionMode));
 		case FrameEquinoxEqu:
 			return getProjection(getEquinoxEquModelViewTransform(refractionMode));
 		case FrameJ2000:
@@ -666,7 +669,7 @@ StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTran
 }
 
 //! Get the modelview matrix for observer-centric ecliptic (Vsop87A) drawing
-StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticModelViewTransform(RefractionMode refMode) const
+StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticJ2000ModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000));
@@ -677,6 +680,18 @@ StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticModelViewT
 	return StelProjector::ModelViewTranformP(refr);
 }
 
+//! Get the modelview matrix for observer-centric ecliptic of date drawing
+StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticOfDateModelViewTransform(RefractionMode refMode) const
+{
+	// GZ TODO: Apply precession of the ecliptic here!!!!
+	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87));
+	Refraction* refr = new Refraction(skyDrawer->getRefraction());
+	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
+	refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87);
+	refr->setPostTransfoMat(matAltAzModelView);
+	return StelProjector::ModelViewTranformP(refr);
+}
 
 //! Get the modelview matrix for observer-centric equatorial at equinox drawing
 StelProjector::ModelViewTranformP StelCore::getEquinoxEquModelViewTransform(RefractionMode refMode) const
@@ -758,6 +773,12 @@ void StelCore::updateTransformMatrices()
 
 	matHeliocentricEclipticToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 						  Mat4d::translation(-position->getCenterVsop87Pos());
+
+	// GZ Finally, new: rotation of the ecliptic of date.
+	double epsilon_A, chi_A, omega_A, psi_A;
+	getPrecessionAnglesVondrak(JDay, &epsilon_A, &chi_A, &omega_A, &psi_A);
+	matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
+	matEclOfDateToVsop87=matVsop87ToEclOfDate.transpose();
 }
 
 // Return the observer heliocentric position
