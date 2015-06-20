@@ -9,7 +9,7 @@
 //
 
 // core.loadVideo("tests/videotest.flv", "flv", 100, 70, true, 0.5);
-core.loadVideo("tests/Karnak_WinterSunriseM2637_dup800-dblSpeed_4ppt.wmv", "wmv", 100, 70, true, 0.5);
+core.loadVideo("media/karnak.wmv", "wmv", 100, 70, true, 0.5);
 
 lab = LabelMgr.labelScreen("Playing WMV video file...", 100, 20, true, 20, "#ff0000");
 core.playVideo("wmv");
