@@ -13,7 +13,7 @@ lab = LabelMgr.labelScreen("Playing MP4 video file...", 100, 40, true, 18, "#ff0
 
 // OK, let's see what we can achieve:
 // loadVideo(filename, id, x, y, show, opacity)
-core.loadVideo("tests/StellariumSunsetGlaubendorf2_2052013_1758_40.mp4", "mp4", 100, 70, false, 0.15);
+core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, false, 0.15);
 
 core.wait(4);
 LabelMgr.setLabelText(lab, "If you don't see the video, the show argument works.")
