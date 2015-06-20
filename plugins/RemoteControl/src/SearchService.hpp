@@ -39,9 +39,12 @@ public:
 private slots:
 	//! Executed in Stellarium main thread to avoid multiple QMetaObject::invoke calls
 	QStringList performSearch(const QString& text);
+	//! Wrapper around SearchDialog::substituteGreek
+	QString substituteGreek(const QString& text);
 private:
 	StelObjectMgr* objMgr;
 	bool useStartOfWords;
+	QString simbadServerUrl;
 };
 
 

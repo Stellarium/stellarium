@@ -100,7 +100,8 @@ public:
 	static QString substituteGreek(const QString& keyString);
 	//! Returns the Greek unicode character for the specified letter string (i.e. "alpha", "beta", ...)
 	static QString getGreekLetterByName(const QString& potentialGreekLetterName);
-
+	//! URL of the default SIMBAD server (Strasbourg).
+	static const char* DEF_SIMBAD_URL;
 public slots:
 	void retranslate();
 	//! This style only displays the text search field and the search button
@@ -224,9 +225,6 @@ private:
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;
 	void populateSimbadServerList();
-
-	//! URL of the default SIMBAD server (Strasbourg).
-	static const char* DEF_SIMBAD_URL;
 
 	// The current coordinate system
 	CoordinateSystem currentCoordinateSystem;

@@ -165,10 +165,36 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 	{
 		QString target = QString::fromUtf8(parameters.value("target"));
 
+		//check target string first
 		if(target.isEmpty())
 		{
-			writeRequestError("missing target parameter",response);
-			return;
+			if(parameters.value("position").isEmpty())
+			{
+				writeRequestError("requires 'target' or 'position' parameter",response);
+				return;
+			}
+			else
+			{
+				//parse position
+				QJsonDocument doc = QJsonDocument::fromJson(parameters.value("position"));
+				QJsonArray arr = doc.array();
+				if(arr.size() == 3)
+				{
+					Vec3d pos;
+					pos[0] = arr.at(0).toDouble();
+					pos[1] = arr.at(1).toDouble();
+					pos[2] = arr.at(2).toDouble();
+
+					//deselect and move
+					QMetaObject::invokeMethod(this,"focusPosition", Qt::BlockingQueuedConnection,
+								  Q_ARG(Vec3d,pos));
+					response.write("ok",true);
+					return;
+				}
+
+				writeRequestError("invalid position format",response);
+				return;
+			}
 		}
 
 		bool result;
@@ -207,4 +233,10 @@ bool MainService::focusObject(const QString &name)
 		}
 	}
 	return result;
+}
+
+void MainService::focusPosition(const Vec3d &pos)
+{
+	objMgr->unSelect();
+	mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
 }
