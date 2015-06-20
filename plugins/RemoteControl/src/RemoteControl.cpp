@@ -66,8 +66,7 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 }
 
 RemoteControl::RemoteControl()
-	: enabled(true)
-	, toolbarButton(NULL), httpListener(NULL), requestHandler(NULL)
+	: httpListener(NULL), requestHandler(NULL), enabled(true), toolbarButton(NULL)
 {
 	setObjectName("RemoteControl");
 	font.setPixelSize(16);
