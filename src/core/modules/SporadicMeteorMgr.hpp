@@ -20,9 +20,8 @@
 #ifndef _SPORADICMETEORMGR_HPP_
 #define _SPORADICMETEORMGR_HPP_
 
+#include "SporadicMeteor.hpp"
 #include "StelModule.hpp"
-
-class SporadicMeteor;
 
 // Factor to convert from zhr to whole earth per second rate (1.6667f / 3600.f)
 #define ZHR_TO_WSR 0.00046297222

@@ -69,7 +69,8 @@ MeteorStream::MeteorStream(const StelCore* core,
 	}
 
 	// building meteor model
-	m_meteor = new Meteor(core, radiantAlpha, radiantDelta, speed, colors, bolideTexture);
+	m_meteor = new Meteor(core);
+	m_meteor->init(radiantAlpha, radiantDelta, speed, colors, bolideTexture);
 	if (!m_meteor->isAlive())
 	{
 		return;

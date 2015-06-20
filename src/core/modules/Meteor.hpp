@@ -47,17 +47,19 @@ public:
 	typedef QPair<QString, int> colorPair;
 
 	//! Create a Meteor object.
-	//! @param v the velocity of the meteor in km/s.
-	Meteor(const StelCore* core, const float& radiantAlpha, const float& radiantDelta,
-	       const float& speed, const QList<colorPair> colors, const StelTextureSP& bolideTexture);
+	Meteor(const StelCore* core);
 	virtual ~Meteor();
-	
+
+	//! Initialize meteor
+	void init(const float& radiantAlpha, const float& radiantDelta, const float& speed,
+		  const QList<colorPair> colors, const StelTextureSP& bolideTexture);
+
 	//! Updates the position of the meteor, and expires it if necessary.
 	//! @return true of the meteor is still alive, else false.
-	bool update(double deltaTime);
+	virtual bool update(double deltaTime);
 	
 	//! Draws the meteor.
-	void draw(const StelCore* core, StelPainter& sPainter);
+	virtual void draw(const StelCore* core, StelPainter& sPainter);
 
 	//! Indicate if the meteor it still visible.
 	inline bool isAlive() { return m_alive; }
