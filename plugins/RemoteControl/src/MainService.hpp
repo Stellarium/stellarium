@@ -22,6 +22,8 @@
 
 #include "APIController.hpp"
 
+#include "VecMath.hpp"
+
 class StelCore;
 class StelLocaleMgr;
 class StelMovementMgr;
@@ -42,6 +44,7 @@ public:
 private slots:
 	//! Like StelDialog::gotoObject
 	bool focusObject(const QString& name);
+	void focusPosition(const Vec3d& pos);
 
 private:
 	StelCore* core;
