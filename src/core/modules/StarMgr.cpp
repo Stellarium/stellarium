@@ -807,7 +807,7 @@ void StarMgr::loadCrossIndex(const QString& crossIndexFile)
 	saoStarsMap.clear();
 	saoStarsIndex.clear();
 	hdStarsMap.clear();
-	hdStarsMap.clear();
+	hdStarsIndex.clear();
 
 	qDebug() << "Loading cross-index data from" << QDir::toNativeSeparators(crossIndexFile);
 	QFile ciFile(crossIndexFile);
