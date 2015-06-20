@@ -30,7 +30,7 @@
 
 #include <QSettings>
 
-SporadicMeteorMgr::SporadicMeteorMgr(int zhr, int maxv )
+SporadicMeteorMgr::SporadicMeteorMgr(int zhr, int maxv)
 	: ZHR(zhr)
 	, maxVelocity(maxv)
 	, flagShow(true)
@@ -43,6 +43,7 @@ SporadicMeteorMgr::~SporadicMeteorMgr()
 {
 	qDeleteAll(activeMeteors);
 	activeMeteors.clear();
+	m_bolideTexture.clear();
 }
 
 void SporadicMeteorMgr::init()
@@ -61,7 +62,7 @@ double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 	{
-		return GETSTELMODULE(SolarSystem)->getCallOrder(actionName)+10.;
+		return GETSTELMODULE(SolarSystem)->getCallOrder(actionName) + 10.;
 	}
 	return 0;
 }
@@ -91,7 +92,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 
 	StelCore* core = StelApp::getInstance().getCore();
 
-	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
+	double tspeed = core->getTimeRate() * 86400;  // sky seconds per actual second
 	if (!tspeed)
 	{ // is paused?
 		return; // freeze meteors at the current position
@@ -108,10 +109,10 @@ void SporadicMeteorMgr::update(double deltaTime)
 	// step through and update all active meteors
 	foreach (SporadicMeteor* m, activeMeteors)
 	{
-		//if (!m->update(deltaTime))
-		//{
-			//activeMeteors.removeOne(m);
-		//}
+		if (!m->update(deltaTime))
+		{
+			activeMeteors.removeOne(m);
+		}
 	}
 
 	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
@@ -123,24 +124,23 @@ void SporadicMeteorMgr::update(double deltaTime)
 	}
 
 	// determine average meteors per frame needing to be created
-	int mpf = (int)((double)ZHR*ZHR_TO_WSR*deltaTime/1000.0 + 0.5);
-	if (mpf<1)
+	int mpf = (int) ((double) ZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
+	if (mpf < 1)
 	{
 		mpf = 1;
 	}
 
-	for (int i=0; i<mpf; ++i)
+	for (int i = 0; i < mpf; ++i)
 	{
 		// start new meteor based on ZHR time probability
-		double prob = ((double)qrand())/RAND_MAX;
-		if (ZHR>0 && prob<((double)ZHR*ZHR_TO_WSR*deltaTime/1000.0/(double)mpf))
+		double prob = ((double) qrand()) / RAND_MAX;
+		if (ZHR > 0 && prob < ((double) ZHR * ZHR_TO_WSR * deltaTime / 1000.0 / (double) mpf))
 		{
-			//Meteor *m = new Meteor(core, maxVelocity);
-			//activeMeteors.append(m);
+			SporadicMeteor* m = new SporadicMeteor(core, maxVelocity, m_bolideTexture);
+			activeMeteors.append(m);
 		}
 	}
 }
-
 
 void SporadicMeteorMgr::draw(StelCore* core)
 {
@@ -159,6 +159,6 @@ void SporadicMeteorMgr::draw(StelCore* core)
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
 	foreach (SporadicMeteor* m, activeMeteors)
 	{
-		//m->draw(core, sPainter);
+		m->draw(core, sPainter);
 	}
 }

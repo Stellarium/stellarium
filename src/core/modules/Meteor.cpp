@@ -17,23 +17,34 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QtMath>
-
 #include "Meteor.hpp"
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelTexture.hpp"
 
-Meteor::Meteor(const StelCore* core, const float& radiantAlpha, const float& radiantDelta,
-	       const float& speed, const QList<colorPair> colors, const StelTextureSP& bolideTexture)
+#include <QtMath>
+
+Meteor::Meteor(const StelCore* core)
 	: m_core(core),
 	  m_alive(false),
-	  m_speed(speed),
-	  m_bolideTexture(bolideTexture),
 	  m_segments(10)
 {
 	qsrand(QDateTime::currentMSecsSinceEpoch());
+}
+
+Meteor::~Meteor()
+{
+}
+
+void Meteor::init(const float& radiantAlpha, const float& radiantDelta, const float& speed,
+		  const QList<colorPair> colors, const StelTextureSP& bolideTexture)
+{
+	// bolide texture
+	m_bolideTexture = bolideTexture;
+
+	// meteor velocity in km/s
+	m_speed = speed;
 
 	// initial meteor altitude above the earth surface
 	m_initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
@@ -70,7 +81,7 @@ Meteor::Meteor(const StelCore* core, const float& radiantAlpha, const float& rad
 	m_rotationMatrix = Mat4d::zrotation(radiantAlpha) * Mat4d::yrotation(M_PI_2 - radiantDelta);
 
 	// find meteor position in horizontal coordinate system
-	Vec3d positionAltAz = meteorToAltAz(core, m_rotationMatrix, m_position);
+	Vec3d positionAltAz = meteorToAltAz(m_core, m_rotationMatrix, m_position);
 	float meteorLat = qAsin(positionAltAz[2] / positionAltAz.length());
 
 	// below the horizon
@@ -96,7 +107,7 @@ Meteor::Meteor(const StelCore* core, const float& radiantAlpha, const float& rad
 
 	// compute RMag and CMag
 	RCMag rcMag;
-	core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
+	m_core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
 	m_mag = rcMag.luminance;
 
 	// most visible meteors are under about 184km distant
@@ -112,14 +123,10 @@ Meteor::Meteor(const StelCore* core, const float& radiantAlpha, const float& rad
 	// build the color arrays
 	buildColorArrays(colors);
 
-	// calculates tickness and bolide size
-	calculateThickness(core, m_thickness, m_bolideSize);
+	// calculates thickness and bolide size
+	calculateThickness(m_core, m_thickness, m_bolideSize);
 
 	m_alive = true;
-}
-
-Meteor::~Meteor()
-{
 }
 
 bool Meteor::update(double deltaTime)
