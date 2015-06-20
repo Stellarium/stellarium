@@ -20,19 +20,75 @@
 #include "SearchService.hpp"
 
 #include "SearchDialog.hpp"
+#include "SimbadSearcher.hpp"
 #include "StelApp.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 
+#include <QEventLoop>
+#include <QtConcurrentRun>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+
+//! This is used to make the Simbad lookups blocking.
+class SimbadLookupTask
+{
+public:
+	SimbadLookupTask(const QString& url, const QString& searchTerm)
+		: url(url), searchTerm(searchTerm)
+	{
+	}
+
+	void run()
+	{
+		//we use a local event loop to simulate synchronous behaviour
+		//If we did this in the HTTP thread, this could cause all sorts of problems,
+		//(for example: a timeout could disconnect the connection while the handler thread is still working...)
+		//but as far as I know thread-pool threads don't have their own loops, so it should be alright
+		QEventLoop loop;
+
+		//this MUST be created here for correct thread affinity
+		SimbadSearcher* searcher = new SimbadSearcher();
+		SimbadLookupReply* reply = searcher->lookup(url,searchTerm,3,0); //last parameter is zero to start lookup immediately
+		//statusChanged is only called at the very end of the lookup as far as I can tell
+		//so we use it to exit the event queue
+		QObject::connect(reply,SIGNAL(statusChanged()),&loop,SLOT(quit()));
+
+		loop.exec();
+		//at this point, the reply is finished
+		//and we can extract information using getReply
+		status = reply->getCurrentStatus();
+		statusString = reply->getCurrentStatusString();
+		errorString = reply->getErrorString();
+		results = reply->getResults();
+
+		//this must be done explicitly here, otherwise the internal QNetworkReply will never be deleted
+		reply->deleteNetworkReply();
+
+		delete reply;
+		delete searcher; //is deleted while still in the owning thread
+	}
+
+	SimbadLookupReply::SimbadLookupStatus getStatus() { return status; }
+	QString getStatusString() { return statusString; }
+	QString getErrorString() { return errorString; }
+	QMap<QString,Vec3d> getResults() { return results; }
+private:
+	QString url;
+	QString searchTerm;
+	SimbadLookupReply::SimbadLookupStatus status;
+	QString statusString;
+	QString errorString;
+	QMap<QString,Vec3d> results;
+};
 
 SearchService::SearchService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
 {
 	//this is run in the main thread
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	useStartOfWords = StelApp::getInstance().getSettings()->value("search/flag_start_words", false).toBool();
+	simbadServerUrl = StelApp::getInstance().getSettings()->value("search/simbad_server_url", SearchDialog::DEF_SIMBAD_URL).toString();
 
 	//make sure this object "lives" in the same thread as objMgr
 	Q_ASSERT(this->thread() == objMgr->thread());
@@ -41,8 +97,7 @@ SearchService::SearchService(const QByteArray &serviceName, QObject *parent) : A
 QStringList SearchService::performSearch(const QString &text)
 {
 	//perform substitution greek text --> symbol
-	//use the searchdialog static method for that
-	QString greekText = SearchDialog::substituteGreek(text);
+	QString greekText = substituteGreek(text);
 
 	QStringList matches;
 	if(greekText != text) {
@@ -56,6 +111,12 @@ QStringList SearchService::performSearch(const QString &text)
 	}
 
 	return matches;
+}
+
+QString SearchService::substituteGreek(const QString &text)
+{
+	//use the searchdialog static method for that
+	return SearchDialog::substituteGreek(text);
 }
 
 void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
@@ -97,10 +158,75 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 		//return as json
 		writeJSON(QJsonDocument(QJsonArray::fromStringList(results)),response);
 	}
+	else if (operation == "simbad")
+	{
+		//simbad search - this is a bit tricky because we have to block this thread until results are available
+		//but QNetworkManager does not provide a synchronous API
+
+		//this may contain greek or other unicode letters
+		QString str = QString::fromUtf8(parameters.value("str"));
+		str = str.trimmed().toLower();
+
+		if(str.isEmpty())
+		{
+			writeRequestError("empty search string",response);
+			return;
+		}
+
+		//use qtconcurrent for a blocking lookup
+		SimbadLookupTask task(simbadServerUrl,str);
+		QFuture<void> future = QtConcurrent::run(&task,&SimbadLookupTask::run);
+		future.waitForFinished();
+
+		QJsonObject obj;
+		QString status;
+		switch (task.getStatus()) {
+			case SimbadLookupReply::SimbadLookupErrorOccured:
+				status = QStringLiteral("error");
+				obj.insert("errorString",task.getErrorString());
+				break;
+			case SimbadLookupReply::SimbadLookupFinished:
+				if(task.getResults().isEmpty())
+					status = QStringLiteral("empty");
+				else
+					status = QStringLiteral("found");
+				break;
+			default:
+				status = QStringLiteral("unknown");
+				break;
+		}
+		obj.insert("status",status);
+		obj.insert("status_i18n",task.getStatusString());
+
+		QJsonArray names;
+		QJsonArray positions;
+
+		QMap<QString, Vec3d> res = task.getResults();
+		QMapIterator<QString, Vec3d> it(res);
+		while(it.hasNext())
+		{
+			it.next();
+			names.append(it.key());
+
+			const Vec3d& pos = it.value();
+			QJsonArray position;
+			position.append(pos[0]);
+			position.append(pos[1]);
+			position.append(pos[2]);
+			positions.append(position);
+		}
+
+		QJsonObject results;
+		results.insert("names",names);
+		results.insert("positions",positions);
+
+		obj.insert("results",results);
+
+		writeJSON(QJsonDocument(obj),response);
+	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: search",response);
+		writeRequestError("unsupported operation. GET: find,simbad",response);
 	}
 }
-
