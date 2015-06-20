@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-14 16:13+0600\n"
-"PO-Revision-Date: 2015-02-15 16:19+0000\n"
+"PO-Revision-Date: 2015-06-19 17:15+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-15 04:39+0000\n"
-"X-Generator: Launchpad (build 17557)\n"
+"X-Launchpad-Export-Date: 2015-06-20 05:13+0000\n"
+"X-Generator: Launchpad (build 17572)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
@@ -79,7 +79,7 @@ msgstr "Galaktinen Ekvaattori"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1354
 msgid "O./C. longitude"
-msgstr ""
+msgstr "O./K. pituuspiiri"
 
 #: src/core/modules/GridLinesMgr.cpp:755
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -132,7 +132,7 @@ msgstr "Galaktinen ekvaattori"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "Opposition/konjunktion pituuspiiri"
 
 #: src/core/modules/LandscapeMgr.cpp:390 src/ui_viewDialog.h:1273
 msgid "Atmosphere"
@@ -191,7 +191,7 @@ msgstr "Tyyppi: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:146
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "Läpinäkyvyys: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
@@ -225,19 +225,19 @@ msgstr "Pintakirkkaus: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:186
 #, qt-format
 msgid "Brightness: %1"
-msgstr ""
+msgstr "Kirkkaus: %1"
 
 #: src/core/modules/Nebula.cpp:179
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Muoto: %1"
 
 #: src/core/modules/Nebula.cpp:180
 #, qt-format
 msgctxt "HII Region"
 msgid "Structure: %1"
-msgstr ""
+msgstr "Rakenne: %1"
 
 #: src/core/modules/Nebula.cpp:192
 #, qt-format
@@ -282,15 +282,15 @@ msgstr "Tuntematon"
 
 #: src/core/modules/Nebula.cpp:752
 msgid "HII region"
-msgstr ""
+msgstr "HII-alue"
 
 #: src/core/modules/Nebula.cpp:755
 msgid "Reflection nebula"
-msgstr ""
+msgstr "Heijastussumu"
 
 #: src/core/modules/Nebula.cpp:758
 msgid "H-α emission region"
-msgstr ""
+msgstr "H-α-emissioalue"
 
 #: src/core/modules/Nebula.cpp:761
 msgid "Undocumented type"
@@ -299,81 +299,81 @@ msgstr "Dokumentoimaton tyyppi"
 #: src/core/modules/Nebula.cpp:774
 msgctxt "form"
 msgid "circular"
-msgstr ""
+msgstr "pyöreä"
 
 #: src/core/modules/Nebula.cpp:777
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "elliptinen"
 
 #: src/core/modules/Nebula.cpp:780
 msgctxt "form"
 msgid "irregular"
-msgstr ""
+msgstr "epäsäännöllinen"
 
 #: src/core/modules/Nebula.cpp:783
 msgctxt "form"
 msgid "undocumented form"
-msgstr ""
+msgstr "dokumentoimaton muoto"
 
 #: src/core/modules/Nebula.cpp:796
 msgctxt "structure"
 msgid "amorphous"
-msgstr ""
+msgstr "amorfinen"
 
 #: src/core/modules/Nebula.cpp:799
 msgctxt "structure"
 msgid "conventional"
-msgstr ""
+msgstr "tavanomainen"
 
 #: src/core/modules/Nebula.cpp:802
 msgctxt "structure"
 msgid "filamentary"
-msgstr ""
+msgstr "säikeinen"
 
 #: src/core/modules/Nebula.cpp:805
 msgctxt "structure"
 msgid "undocumented structure"
-msgstr ""
+msgstr "dokumentoimaton rakenne"
 
 #: src/core/modules/Nebula.cpp:818
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr ""
+msgstr "himmein"
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "HII region brightness"
 msgid "moderate"
-msgstr ""
+msgstr "kohtalainen"
 
 #: src/core/modules/Nebula.cpp:824
 msgctxt "HII region brightness"
 msgid "brightest"
-msgstr ""
+msgstr "kirkkain"
 
 #: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
 msgid "undocumented brightness"
-msgstr ""
+msgstr "dokumentoimaton kirkkaus"
 
 #: src/core/modules/Nebula.cpp:840
 msgctxt "H-α emission region brightness"
 msgid "very bright"
-msgstr ""
+msgstr "hyvin kirkas"
 
 #: src/core/modules/Nebula.cpp:843
 msgctxt "H-α emission region brightness"
 msgid "bright"
-msgstr ""
+msgstr "kirkas"
 
 #: src/core/modules/Nebula.cpp:846
 msgctxt "H-α emission region brightness"
 msgid "medium"
-msgstr ""
+msgstr "kohtalainen"
 
 #: src/core/modules/Nebula.cpp:849
 msgctxt "H-α emission region brightness"
 msgid "faint"
-msgstr ""
+msgstr "himmeä"
 
 #: src/core/modules/NebulaMgr.cpp:139
 msgid "Deep-sky objects"
@@ -1112,6 +1112,9 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
+"Tämän polynomiaalisen likiarvoistuksen tarkkuus on 0,6 sekuntia, ja sen "
+"julkaisivat M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: "
+"Polynomial Approximation of Time Period 1620-2013</em> (%1)."
 
 #: src/core/StelCore.cpp:1618
 #, qt-format
@@ -1271,7 +1274,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:459
 msgid "Sinusoidal"
-msgstr ""
+msgstr "Sinusoidaalinen"
 
 #: src/core/StelProjectorClasses.cpp:464
 msgid ""
@@ -1279,6 +1282,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"SInusoidaalinen projektio on <i>oikeapintainen pseudolieriöprojektio</i>, "
+"jota kutsutaan myös Sanson-Flamsteedin tai Mercatorin oikeapintaiseksi "
+"projektioksi."
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -1612,7 +1618,7 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1253
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Khalid, Sultana & Zaidi (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1254
 #, qt-format
@@ -1766,7 +1772,7 @@ msgstr "Testaaja: %1"
 
 #: src/gui/HelpDialog.cpp:306
 msgid "Former Developers"
-msgstr ""
+msgstr "Aiemmat kehittäjät"
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -1798,6 +1804,9 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Useat henkilöt ovat osallistuneet projektin kehittämiseen, ja heidän työnsä "
+"on auttanut tekemään Stellariumista paremman (aakkosjärjestyksessä "
+"lueteltuna): %1."
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2130,12 +2139,12 @@ msgstr "Galaktinen"
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Ekliptinen"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Ekliptinen (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -2438,17 +2447,17 @@ msgstr "Sumumaiset tähtijoukot"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "HII regions"
-msgstr ""
+msgstr "HII-alueet"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Heijastussumut"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "H-α emission regions"
-msgstr ""
+msgstr "H-α-emissioalueet"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:105
@@ -2463,42 +2472,42 @@ msgstr "Caldwellin luettelo"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Barnard Catalogue"
-msgstr ""
+msgstr "Barnardin luettelo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "Sharpless-luettelo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "Van den Berghin luettelo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
-msgstr ""
+msgstr "Rodgersin, Campbellin ja Whiteoakin luettelo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "Collinderin luettelo"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "Melotten luettelo"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Kiinnostavat kaksoistähdet"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Kiinnostavat muuttuvat tähdet"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -2579,7 +2588,7 @@ msgstr "Siperialainen"
 
 #: src/translations.h:150
 msgid "Tukano"
-msgstr ""
+msgstr "Tukano"
 
 #: src/translations.h:151
 msgid "Tupi-Guarani"
@@ -2670,12 +2679,12 @@ msgstr "Nollahorisontti"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:191
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Wienin Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
 msgid "Testscene"
-msgstr ""
+msgstr "Testinäkymä"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
@@ -4504,11 +4513,11 @@ msgstr "Tähdistökuvien kirkkaus:"
 
 #: src/ui_viewDialog.h:1320
 msgid "Thickness of lines:"
-msgstr ""
+msgstr "Viivojen paksuus:"
 
 #: src/ui_viewDialog.h:1322
 msgid "Value in pixels"
-msgstr ""
+msgstr "Arvo kuvapisteinä"
 
 #: src/ui_viewDialog.h:1324
 msgid "Celestial Sphere"
