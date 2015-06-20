@@ -82,15 +82,8 @@ public:
 	static const int DEFAULT_BORTLE_SCALE_INDEX;
 private:
 	//Register with Qt
-	class StelLocationInit
-	{
-	public:
-		StelLocationInit()
-		{
-			qRegisterMetaType<StelLocation>();
-		}
-	};
-	static StelLocationInit stelLocationInit;
+	static int metaTypeId;
+	static int initMetaType();
 };
 
 Q_DECLARE_METATYPE(StelLocation)

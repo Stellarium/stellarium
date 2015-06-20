@@ -23,6 +23,12 @@
 
 const int StelLocation::DEFAULT_BORTLE_SCALE_INDEX = 2;
 
+int StelLocation::metaTypeId = initMetaType();
+int StelLocation::initMetaType()
+{
+	return qRegisterMetaType<StelLocation>();
+}
+
 // Output the location as a string ready to be stored in the user_location file
 QString StelLocation::serializeToLine() const
 {
