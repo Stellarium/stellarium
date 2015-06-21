@@ -381,9 +381,9 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter)
 		insertVertex(core, m_rotationMatrix, vertexArrayR, posi);
 		insertVertex(core, m_rotationMatrix, vertexArrayTop, posi);
 
-		m_lineColorArray[i][3] = m_mag;
-		m_trainColorArray[i*2][3] = m_mag;
-		m_trainColorArray[i*2+1][3] = m_mag;
+		m_lineColorArray[i][3] = mag;
+		m_trainColorArray[i*2][3] = mag;
+		m_trainColorArray[i*2+1][3] = mag;
 	}
 
 	glEnable(GL_BLEND);
