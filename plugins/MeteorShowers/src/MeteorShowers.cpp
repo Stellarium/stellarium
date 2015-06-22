@@ -156,8 +156,16 @@ void MeteorShowers::init()
 
 		showersJsonPath = StelFileMgr::findFile("modules/MeteorShowers", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/showers.json";
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
-		MeteorShower::radiantTexture = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiant.png");
+		// textures
+		m_bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(
+					StelFileMgr::getInstallationDir() + "/textures/cometComa.png",
+					StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(
+					StelFileMgr::getInstallationDir() + "/textures/pointeur5.png");
+
+		MeteorShower::radiantTexture = StelApp::getInstance().getTextureManager().createTexture(
+					":/MeteorShowers/radiant.png");
 
 		// key bindings and other actions
 		QString msGroup = N_("Meteor Showers");
@@ -223,6 +231,7 @@ void MeteorShowers::deinit()
 {
 	MeteorShower::radiantTexture.clear();
 	texPointer.clear();
+	m_bolideTexture.clear();
 }
 
 void MeteorShowers::upgradeConfigIni(void)
