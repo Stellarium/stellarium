@@ -729,7 +729,9 @@ void SearchDialog::updateListWidget(int index)
 	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
 	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
 	ui->objectsListWidget->sortItems(Qt::AscendingOrder);
-	connect(ui->objectsListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+	connect(ui->objectsListWidget, SIGNAL(itemClicked(QListWidgetItem*)),
+		this, SLOT(gotoObject(QListWidgetItem*)),
+		Qt::UniqueConnection); //bugfix: prevent multiple connections, which seems to have happened before
 }
 
 void SearchDialog::updateListTab()
