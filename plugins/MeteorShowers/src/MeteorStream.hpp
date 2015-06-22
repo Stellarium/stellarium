@@ -47,7 +47,7 @@ public:
 		     float radiantDelta,
 		     float pidx,
 		     QList<MeteorShower::colorPair> colors,
-		     StelTextureSP bolideTexture);
+		     const StelTextureSP& bolideTexture);
 
 	virtual ~MeteorStream();
 
