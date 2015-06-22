@@ -6,21 +6,54 @@ var Search = (new function($) {
     var $srch_results;
     var $srch_button;
     var $srch_simbad;
+    var $srch_tabs;
+    var $srch_list_objecttype;
+    var $srch_list_objectlist;
+    var $srch_list_english;
 
     var simbadDelay = 500;
 
     var lastXHR;
     var simbadXHR;
+    var listXHR;
     var simbadTimeout;
 
     var searchFinished = false;
 
     var $selectedElem;
 
+    var objectTypes;
+
     function initControls() {
         $srch_input = $("#srch_input");
         $srch_results = $("#srch_results");
         $srch_simbad = $("#srch_simbad");
+        $srch_tabs = $("#srch_tabs");
+        $srch_list_objecttype = $("#srch_list_objecttype");
+        $srch_list_objectlist = $("#srch_list_objectlist");
+        $srch_list_english = $("#srch_list_english");
+
+        $srch_list_english.change(function(evt) {
+            reloadObjectTypes();
+            $srch_list_objectlist.empty();
+        });
+
+        $srch_list_objectlist.dblclick(function(evt) {
+            var e = $srch_list_objectlist[0];
+            if (e.selectedIndex >= 0) {
+                var loc = e.options[e.selectedIndex].text;
+                selectObjectByName(loc);
+            }
+            
+        });
+
+        $srch_tabs.tabs();
+
+        $srch_list_objecttype.combobox({
+            select: function(evt, data) {
+                loadObjectList(data.item.value);
+            }
+        });
 
         $srch_input.on("input", function() {
             performSearch(this.value);
@@ -61,19 +94,23 @@ var Search = (new function($) {
 
         if (pos) {
             var posStr = JSON.stringify(pos);
-            Main.postCmd("/api/main/focus",{
+            Main.postCmd("/api/main/focus", {
                 position: posStr
             });
         } else {
             //post by name
-            Main.postCmd("/api/main/focus", {
-                target: $selectedElem.data("value")
-            }, undefined, function(data) {
-                console.log("focus change ok: " + data);
-            });
+            selectObjectByName($selectedElem.data("value"));
         }
         $srch_input[0].value = "";
         performSearch("");
+    }
+
+    function selectObjectByName(str) {
+        Main.postCmd("/api/main/focus", {
+            target: str
+        }, undefined, function(data) {
+            console.log("focus change ok: " + data);
+        });
     }
 
     function selectNextResult() {
@@ -149,7 +186,7 @@ var Search = (new function($) {
                     $srch_results[0].appendChild(li);
                 });
 
-                if(lastResult.length === 0)
+                if (lastResult.length === 0)
                     selectIndex(0);
             }
         }
@@ -205,12 +242,12 @@ var Search = (new function($) {
 
     function performSimbadSearch(str) {
         //check if the normal search has finished, otherwise we wait longer
-        if(!searchFinished){
-                console.log("defer Simbad search because normal search is not finished");
-                simbadTimeout = setTimeout(function(){
-                    performSimbadSearch(str);
-                }, simbadDelay);
-                return;
+        if (!searchFinished) {
+            console.log("defer Simbad search because normal search is not finished");
+            simbadTimeout = setTimeout(function() {
+                performSimbadSearch(str);
+            }, simbadDelay);
+            return;
         }
 
         $srch_simbad.text("querying");
@@ -245,12 +282,124 @@ var Search = (new function($) {
         simbadTimeout && clearTimeout(simbadTimeout);
     }
 
+    function reloadObjectTypes() {
+
+        if (!objectTypes) //no data yet, cant load
+            return;
+
+        $srch_list_objecttype.combobox("autocomplete", "");
+
+        var useEnglish = $srch_list_english[0].checked;
+
+        //detach for performance
+        var parent = $srch_list_objecttype.parent();
+        $srch_list_objecttype.detach();
+        $srch_list_objecttype.empty();
+
+        //sort by name or localized name
+        if (useEnglish) {
+            objectTypes.sort(function(a, b) {
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+            });
+
+        } else {
+            objectTypes.sort(function(a, b) {
+                if (a.name_i18n > b.name_i18n) {
+                    return 1;
+                }
+                if (a.name_i18n < b.name_i18n) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+            });
+        }
+
+        objectTypes.forEach(function(element) {
+            var op = document.createElement("option");
+            op.innerHTML = useEnglish ? element.name : element.name_i18n;
+            op.value = element.key;
+            $srch_list_objecttype[0].appendChild(op);
+        });
+
+        parent.prepend($srch_list_objecttype);
+    }
+
+    function loadObjectTypes() {
+        $.ajax({
+            url: "/api/search/listobjecttypes",
+            dataType: "JSON",
+            success: function(data) {
+
+                objectTypes = data;
+                reloadObjectTypes();
+
+            },
+            error: function(xhr, status, errorThrown) {
+                if (status !== "abort") {
+                    console.log("Error performing simbad lookup");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    alert("Error performing Simbad lookup");
+                }
+            }
+        });
+    }
+
+    function loadObjectList(key) {
+        if (listXHR) {
+            listXHR.abort();
+            listXHR = undefined;
+        }
+
+        $srch_list_objectlist.empty();
+
+        var useEnglish = $srch_list_english[0].checked;
+
+        listXHR = $.ajax({
+            url: "/api/search/listobjectsbytype",
+            dataType: "JSON",
+            data: {
+                type: key,
+                english: (useEnglish ? 1 : 0)
+            },
+            success: function(data) {
+
+                var parent = $srch_list_objectlist.parent();
+                $srch_list_objectlist.detach();
+
+                data.forEach(function(elem) {
+                    var op = document.createElement("option");
+                    op.innerHTML = elem;
+                    $srch_list_objectlist[0].appendChild(op);
+                });
+
+                $srch_list_objectlist.appendTo(parent);
+            },
+            error: function(xhr, status, errorThrown) {
+                if (status !== "abort") {
+                    console.log("Error getting object list");
+                    console.log("Error: " + errorThrown);
+                    console.log("Status: " + status);
+                    alert("Error getting object list");
+                }
+            }
+        });
+    }
+
     //Public stuff
     return {
         init: function() {
 
             initControls();
-
+            loadObjectTypes();
         }
     }
 }(jQuery));
