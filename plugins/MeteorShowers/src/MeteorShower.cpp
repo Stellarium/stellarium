@@ -47,17 +47,22 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 {
 	// return initialized if the mandatory fields are not present
 	if(!map.contains("showerID"))
+	{
 		return;
+	}
 
 	showerID = map.value("showerID").toString();
 	designation  = map.value("designation").toString();
 	speed = map.value("speed").toInt();
-	rAlphaPeak = radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
-	rDeltaPeak = radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
+	radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
+	radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
 	driftAlpha = StelUtils::getDecAngle(map.value("driftAlpha").toString());
 	driftDelta = StelUtils::getDecAngle(map.value("driftDelta").toString());
 	parentObj = map.value("parentObj").toString();
 	pidx = map.value("pidx").toFloat();
+
+	rAlphaPeak = radiantAlpha;
+	rDeltaPeak = radiantDelta;
 
 	if(map.contains("activity"))
 	{
@@ -99,10 +104,9 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 
 MeteorShower::~MeteorShower()
 {
-	//
 }
 
-QVariantMap MeteorShower::getMap(void)
+QVariantMap MeteorShower::getMap()
 {
 	QVariantMap map;
 	map["showerID"] = showerID;
@@ -222,9 +226,13 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	zhr = activity[index].zhr == 0 ? activity[0].zhr : activity[index].zhr;
 
 	if (zhr == -1)
+	{
 		variable = activity[index].variable.isEmpty() ? activity[0].variable : activity[index].variable;
+	}
 	else
+	{
 		variable = "";
+	}
 
 	/***************************
 	 *Dates - start/finish/peak
@@ -300,7 +308,9 @@ int MeteorShower::searchRealData(QString yyyy) const
 	{
 		index++;
 		if(p.year == yyyy)
+		{
 			return index;
+		}
 	}
 
 	return 0;

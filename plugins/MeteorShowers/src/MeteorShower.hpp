@@ -52,7 +52,7 @@ public:
 
 	//! Get a QVariantMap which describes the meteor shower. Could be used to
 	//! create a duplicate.
-	QVariantMap getMap(void);
+	QVariantMap getMap();
 
 	virtual QString getType(void) const
 	{
