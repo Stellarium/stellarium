@@ -161,7 +161,8 @@ var Main = (new function($) {
     //Public stuff
     return {
         init: function() {
-
+            window.console.profile();
+            
             Actions.init();
             Scripts.init();
             Search.init();

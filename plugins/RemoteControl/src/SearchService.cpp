@@ -224,6 +224,56 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 
 		writeJSON(QJsonDocument(obj),response);
 	}
+	else if (operation == "listobjecttypes")
+	{
+		//lists the available types of objects
+
+		QMap<QString,QString> map = objMgr->objectModulesMap();
+		QMapIterator<QString,QString> it(map);
+
+		StelTranslator& trans = *StelTranslator::globalTranslator;
+		QJsonArray arr;
+		while(it.hasNext())
+		{
+			it.next();
+
+			//check if this object type has any items first
+			if(!objMgr->listAllModuleObjects(it.key(), true).isEmpty())
+			{
+				QJsonObject obj;
+				obj.insert("key",it.key());
+				obj.insert("name",it.value());
+				obj.insert("name_i18n", trans.qtranslate(it.value()));
+				arr.append(obj);
+			}
+		}
+
+		//we dont sort the results here because it depends on the interface language, which we dont know
+		writeJSON(QJsonDocument(arr),response);
+	}
+	else if(operation == "listobjectsbytype")
+	{
+		QString type = QString::fromUtf8(parameters.value("type"));
+		QString engString = QString::fromUtf8(parameters.value("english"));
+
+		bool ok;
+		bool eng = engString.toInt(&ok);
+		if(!ok)
+			eng = false;
+
+		if(!type.isEmpty())
+		{
+			QStringList list = objMgr->listAllModuleObjects(type,eng);
+
+			//sort
+			list.sort();
+			writeJSON(QJsonDocument(QJsonArray::fromStringList(list)),response);
+		}
+		else
+		{
+			writeRequestError("missing type parameter",response);
+		}
+	}
 	else
 	{
 		//TODO some sort of service description?
