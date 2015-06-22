@@ -123,9 +123,6 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta, const fl
 	// build the color arrays
 	buildColorArrays(colors);
 
-	// calculates thickness and bolide size
-	calculateThickness(m_core, m_thickness, m_bolideSize);
-
 	m_alive = true;
 }
 
@@ -170,9 +167,13 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	drawTrain(core, sPainter);
+	float thickness;
+	float bolideSize;
+	calculateThickness(core, thickness, bolideSize);
 
-	drawBolide(core, sPainter);
+	drawTrain(core, sPainter, thickness);
+
+	drawBolide(core, sPainter, bolideSize);
 }
 
 Vec4f Meteor::getColorFromName(QString colorName)
@@ -278,12 +279,13 @@ void Meteor::calculateThickness(const StelCore* core, float& thickness, float& b
 	{
 		thickness = 0; // remove prism
 	}
+
 	bolideSize = thickness*3;
 }
 
-void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter)
+void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float& bolideSize)
 {
-	if (!m_bolideSize)
+	if (!bolideSize || !m_bolideTexture)
 	{
 		return;
 	}
@@ -295,22 +297,22 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter)
 	Vec4f bolideColor = Vec4f(1,1,1,m_mag);
 
 	Vec3d topLeft = m_position;
-	topLeft[1] -= m_bolideSize;
+	topLeft[1] -= bolideSize;
 	insertVertex(core, m_rotationMatrix, vertexArrayBolide, topLeft);
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d topRight = m_position;
-	topRight[0] -= m_bolideSize;
+	topRight[0] -= bolideSize;
 	insertVertex(core, m_rotationMatrix, vertexArrayBolide, topRight);
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomRight = m_position;
-	bottomRight[1] += m_bolideSize;
+	bottomRight[1] += bolideSize;
 	insertVertex(core, m_rotationMatrix, vertexArrayBolide, bottomRight);
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomLeft = m_position;
-	bottomLeft[0] += m_bolideSize;
+	bottomLeft[0] += bolideSize;
 	insertVertex(core, m_rotationMatrix, vertexArrayBolide, bottomLeft);
 	colorArrayBolide.push_back(bolideColor);
 
@@ -328,7 +330,7 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter)
 	sPainter.enableClientStates(false);
 }
 
-void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter)
+void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float& thickness)
 {
 	if (m_segments != m_lineColorArray.size() || 2*m_segments != m_trainColorArray.size())
 	{
@@ -344,12 +346,12 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter)
 	QVector<Vec3d> vertexArrayTop;
 
 	Vec3d posTrainB = m_posTrain;
-	posTrainB[0] += m_thickness*0.7;
-	posTrainB[1] += m_thickness*0.7;
+	posTrainB[0] += thickness*0.7;
+	posTrainB[1] += thickness*0.7;
 	Vec3d posTrainL = m_posTrain;
-	posTrainL[1] -= m_thickness;
+	posTrainL[1] -= thickness;
 	Vec3d posTrainR = m_posTrain;
-	posTrainR[0] -= m_thickness;
+	posTrainR[0] -= thickness;
 
 	for (int i=0; i<m_segments; i++)
 	{
@@ -389,7 +391,7 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
-	if (m_thickness)
+	if (thickness)
 	{
 		sPainter.setColorPointer(4, GL_FLOAT, m_trainColorArray.toVector().constData());
 

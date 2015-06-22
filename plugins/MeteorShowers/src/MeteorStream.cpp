@@ -26,7 +26,7 @@ MeteorStream::MeteorStream(const StelCore* core,
 			   float radiantDelta,
 			   float pidx,
 			   QList<MeteorShower::colorPair> colors,
-			   StelTextureSP bolideTexture)
+			   const StelTextureSP& bolideTexture)
 {
 	qsrand (QDateTime::currentMSecsSinceEpoch());
 

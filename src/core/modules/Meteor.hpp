@@ -79,10 +79,10 @@ private:
 	void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
 
 	//! Draws the meteor bolide.
-	void drawBolide(const StelCore* core, StelPainter &sPainter);
+	void drawBolide(const StelCore* core, StelPainter &sPainter, const float &bolideSize);
 
 	//! Draws the meteor train.
-	void drawTrain(const StelCore* core, StelPainter& sPainter);
+	void drawTrain(const StelCore* core, StelPainter& sPainter, const float &thickness);
 
 	//! find meteor position in horizontal coordinate system
 	Vec3d meteorToAltAz(const StelCore *core, const Mat4d &rotationMatrix, Vec3d position);
@@ -105,8 +105,6 @@ private:
 
 	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 	const int m_segments;           //! Number of segments along the train (useful to curve along projection distortions)
-	float m_thickness;
-	float m_bolideSize;
 	QList<Vec4f> m_trainColorArray;
 	QList<Vec4f> m_lineColorArray;
 };
