@@ -26,7 +26,6 @@ var Main = (new function($) {
     //Private variables
     var connectionLost = false;
     var animationSupported;
-    var lastData;
     var lastDataTime;
 
     //controls
@@ -56,9 +55,9 @@ var Main = (new function($) {
             url: "/api/main/status",
             dataType: "json",
             success: function(data) {
-                //data is stored here mainly for debugging
-                lastData = data;
                 lastDataTime = $.now();
+
+                document.getElementById("sel_infostring").innerHTML = data.selectioninfo;
 
                 //update modules with data
                 Time.updateFromServer(data.time);
@@ -162,12 +161,13 @@ var Main = (new function($) {
     return {
         init: function() {
             window.console.profile();
-            
+
             Actions.init();
             Scripts.init();
             Search.init();
             Time.init();
             Locations.init();
+            ViewControl.init();
 
             fixJQueryUI();
 

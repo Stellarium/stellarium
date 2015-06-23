@@ -33,6 +33,8 @@
 #include <QDebug>
 #include <QSettings>
 
+int StelObject::stelObjectPMetaTypeID = qRegisterMetaType<StelObjectP>();
+
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
 	return core->j2000ToEquinoxEqu(getJ2000EquatorialPos(core));
@@ -251,15 +253,18 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	}
 	else
 	{
-		Vec3f color = getInfoColor();
-		StelCore* core = StelApp::getInstance().getCore();
-		if (core->isDay() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
+		if(!(flags&NoFont))
 		{
-			// Let's make info text is more readable when atmosphere enabled at daylight.
-			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_color", "0.0,0.0,0.0").toString());
+			Vec3f color = getInfoColor();
+			StelCore* core = StelApp::getInstance().getCore();
+			if (core->isDay() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
+			{
+				// Let's make info text is more readable when atmosphere enabled at daylight.
+				color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_color", "0.0,0.0,0.0").toString());
+			}
+			str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(color)));
+			str.append(QString("</font>"));
 		}
-		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(color)));
-		str.append(QString("</font>"));
 	}
 }
 

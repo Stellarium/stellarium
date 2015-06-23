@@ -566,3 +566,48 @@ header img {
 #srch_tab_list input.custom-combobox-input {
 	width: 90%;
 }
+
+#sel_infostring {
+	text-align: left;
+	white-space: nowrap;
+	overflow: auto;
+	width: 20em;
+	height: 22em;
+}
+
+#view_controls {
+	display: inline-flex;
+	flex-wrap: wrap;
+	width: 96px;
+	height: 96px;
+}
+
+.joybutton {
+	background: url("joystick.png") no-repeat;
+	cursor: pointer;
+	width: 32px;
+	height: 32px;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#view_up {
+	background-position: -32px 0px;
+}
+
+#view_left {
+	background-position: 0px -32px;
+}
+
+#view_center {
+	background-position: -32px -32px;
+}
+
+#view_right {
+	background-position:  -64px -32px;
+}
+
+#view_down {
+	background-position:  -32px -64px;
+}
