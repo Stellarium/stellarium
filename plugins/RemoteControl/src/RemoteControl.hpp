@@ -86,9 +86,6 @@ public slots:
 	void enableRemoteControl(bool b);
 
 private slots:
-	void updateMessageText();
-	void clearMessage();
-
 	//! Starts the HTTP server and begins handling request
 	void startServer();
 	//! Stops the HTTP server
@@ -102,13 +99,8 @@ private:
 	RequestHandler* requestHandler;
 
 	bool enabled;
-	QFont font;
-	LinearFader messageFader;
-	QTimer* messageTimer;
-	QString messageEnabled;
 
 	StelButton* toolbarButton;
-
 
 	QSettings* conf;
 

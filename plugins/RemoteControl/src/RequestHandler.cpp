@@ -59,6 +59,11 @@ RequestHandler::~RequestHandler()
 
 }
 
+void RequestHandler::update(double deltaTime)
+{
+	apiController->update(deltaTime);
+}
+
 void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 {
 

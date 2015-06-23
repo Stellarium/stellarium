@@ -22,6 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -31,7 +32,7 @@
 
 #include <QJsonDocument>
 
-MainService::MainService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
+MainService::MainService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent), moveX(0),moveY(0),lastMoveUpdateTime(0)
 {
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
@@ -41,6 +42,68 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent) : Abstr
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
 
 	Q_ASSERT(this->thread()==objMgr->thread());
+}
+
+void MainService::update(double deltaTime)
+{
+	//prevent sudden disconnects from moving endlessly
+	if((QDateTime::currentMSecsSinceEpoch() - lastMoveUpdateTime) > 1000)
+	{
+		if(moveX != 0 || moveY != 0)
+			qDebug()<<"timeout";
+		moveX = moveY = 0;
+	}
+
+	//Similar to StelMovementMgr::updateMotion
+
+	if(moveX!=0 || moveY !=0)
+	{
+		//qDebug()<<"move"<<moveX<<moveY;
+
+		double currentFov = mvmgr->getCurrentFov();
+		// the more it is zoomed, the lower the moving speed is (in angle)
+		double depl=0.00025*deltaTime*1000*currentFov;
+
+		float deltaAz = moveX;
+		float deltaAlt = moveY;
+
+		if (deltaAz<0)
+		{
+			deltaAz = -depl/30;
+			if (deltaAz<-0.2)
+				deltaAz = -0.2;
+		}
+		else
+		{
+			if (deltaAz>0)
+			{
+				deltaAz = (depl/30);
+				if (deltaAz>0.2)
+					deltaAz = 0.2;
+			}
+		}
+
+		if (deltaAlt<0)
+		{
+			deltaAlt = -depl/30;
+			if (deltaAlt<-0.2)
+				deltaAlt = -0.2;
+		}
+		else
+		{
+			if (deltaAlt>0)
+			{
+				deltaAlt = depl/30;
+				if (deltaAlt>0.2)
+					deltaAlt = 0.2;
+			}
+		}
+
+		mvmgr->panView(deltaAz,deltaAlt);
+
+		//this is required to enable maximal fps for smoothness
+		StelMainView::getInstance().thereWasAnEvent();
+	}
 }
 
 void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
@@ -105,6 +168,14 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 			obj2.insert("scriptIsRunning",scriptMgr->scriptIsRunning());
 			obj2.insert("runningScriptId",scriptMgr->runningScriptId());
 			obj.insert("script",obj2);
+		}
+
+		//// Info about selected object (only primary)
+		{
+			QString infoStr;
+			QMetaObject::invokeMethod(this,"getInfoString",Qt::BlockingQueuedConnection,
+						  Q_RETURN_ARG(QString,infoStr));
+			obj.insert("selectioninfo",infoStr);
 		}
 
 		writeJSON(QJsonDocument(obj),response);
@@ -204,15 +275,55 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 
 		response.write(result ? "true" : "false", true);
 	}
+	else if(operation == "move")
+	{
+		QString xs = QString::fromUtf8(parameters.value("x"));
+		QString ys = QString::fromUtf8(parameters.value("y"));
+
+		bool xOk,yOk;
+		int x = xs.toInt(&xOk);
+		int y = ys.toInt(&yOk);
+
+		if(xOk || yOk)
+		{
+			QMetaObject::invokeMethod(this,"updateMovement", Qt::BlockingQueuedConnection,
+						  Q_ARG(int,x),
+						  Q_ARG(int,y),
+						  Q_ARG(bool,xOk),
+						  Q_ARG(bool,yOk));
+
+			response.write("ok",true);
+		}
+		else
+			writeRequestError("requires x or y parameter",response);
+	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. POST: time,focus",response);
+		writeRequestError("unsupported operation. POST: time,focus,move",response);
 	}
+}
+
+StelObjectP MainService::getSelectedObject()
+{
+	const QList<StelObjectP>& list = objMgr->getSelectedObject();
+	if(list.isEmpty())
+		return StelObjectP();
+	return list.first();
+}
+
+QString MainService::getInfoString()
+{
+	StelObjectP selectedObject = getSelectedObject();
+	if(selectedObject.isNull())
+		return QString();
+	return selectedObject->getInfoString(core,StelObject::AllInfo | StelObject::NoFont);
 }
 
 bool MainService::focusObject(const QString &name)
 {
+	//StelDialog::gotoObject
+
 	bool result = false;
 	if (objMgr->findAndSelectI18n(name) || objMgr->findAndSelect(name))
 	{
@@ -240,3 +351,19 @@ void MainService::focusPosition(const Vec3d &pos)
 	objMgr->unSelect();
 	mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
 }
+
+void MainService::updateMovement(int x, int y, bool xUpdated, bool yUpdated)
+{
+	if(xUpdated)
+	{
+		this->moveX = x;
+	}
+	if(yUpdated)
+	{
+		this->moveY = y;
+	}
+	qint64 curTime = QDateTime::currentMSecsSinceEpoch();
+	//qDebug()<<"updateMove"<<x<<y<<(curTime-lastMoveUpdateTime);
+	lastMoveUpdateTime = curTime;
+}
+

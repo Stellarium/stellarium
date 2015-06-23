@@ -22,6 +22,7 @@
 
 #include "APIController.hpp"
 
+#include "StelObjectType.hpp"
 #include "VecMath.hpp"
 
 class StelCore;
@@ -38,13 +39,22 @@ public:
 
 	virtual ~MainService() {}
 
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
+
 	virtual void get(const QByteArray& operation,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response) Q_DECL_OVERRIDE;
 	virtual void post(const QByteArray &operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response) Q_DECL_OVERRIDE;
 
 private slots:
+	StelObjectP getSelectedObject();
+
+	//! Returns the info string of the currently selected object
+	QString getInfoString();
+
 	//! Like StelDialog::gotoObject
 	bool focusObject(const QString& name);
 	void focusPosition(const Vec3d& pos);
+
+	void updateMovement(int x, int y, bool xUpdated, bool yUpdated);
 
 private:
 	StelCore* core;
@@ -52,6 +62,9 @@ private:
 	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;
 	StelScriptMgr* scriptMgr;
+
+	int moveX,moveY;
+	qint64 lastMoveUpdateTime;
 
 };
 

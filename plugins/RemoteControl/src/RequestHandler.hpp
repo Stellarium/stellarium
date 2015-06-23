@@ -32,6 +32,9 @@ public:
 	RequestHandler(QSettings* settings, QObject* parent = 0);
 	virtual ~RequestHandler();
 
+	//! Called in the main thread each frame
+	void update(double deltaTime);
+
 	virtual void service(HttpRequest& request, HttpResponse& response);
 
 private:

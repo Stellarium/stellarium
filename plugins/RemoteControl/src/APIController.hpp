@@ -35,6 +35,9 @@ public:
 
 	QByteArray serviceName() { return m_serviceName; }
 
+	//! Called in the main thread each frame
+	virtual void update(double deltaTime);
+
 	virtual void get(const QByteArray& operation, const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response);
 	virtual void post(const QByteArray& operation, const QMultiMap<QByteArray,QByteArray>& parameters, const QByteArray& data, HttpResponse& response);
 protected:
@@ -50,6 +53,9 @@ class APIController : public HttpRequestHandler
 public:
 	APIController(int prefixLength, QObject* parent = 0);
 	virtual ~APIController();
+
+	//! Called in the main thread each frame
+	void update(double deltaTime);
 
 	virtual void service(HttpRequest& request, HttpResponse& response);
 

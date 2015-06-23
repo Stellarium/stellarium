@@ -22,6 +22,7 @@
 #include "SearchDialog.hpp"
 #include "SimbadSearcher.hpp"
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelTranslator.hpp"
 
@@ -86,6 +87,7 @@ private:
 SearchService::SearchService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
 {
 	//this is run in the main thread
+	core = StelApp::getInstance().getCore();
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	useStartOfWords = StelApp::getInstance().getSettings()->value("search/flag_start_words", false).toBool();
 	simbadServerUrl = StelApp::getInstance().getSettings()->value("search/simbad_server_url", SearchDialog::DEF_SIMBAD_URL).toString();
@@ -157,6 +159,47 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 
 		//return as json
 		writeJSON(QJsonDocument(QJsonArray::fromStringList(results)),response);
+	}
+	else if (operation == "info")
+	{
+		//retrieve HTML info string about a specific object
+		//if no parameter is given, uses the currently selected object
+
+		QString name = QString::fromUtf8(parameters.value("name"));
+
+		StelObjectP obj;
+		if(!name.isEmpty())
+		{
+			QMetaObject::invokeMethod(this,"findObject",Qt::BlockingQueuedConnection,
+						  Q_RETURN_ARG(StelObjectP,obj),
+						  Q_ARG(QString,name));
+
+			if(!obj)
+			{
+				response.setStatus(404,"not found");
+				response.write("object name not found",true);
+				return;
+			}
+		}
+		else
+		{
+			//use first selcted object
+			const QList<StelObjectP> selection = objMgr->getSelectedObject();
+			if(selection.isEmpty())
+			{
+				response.setStatus(404,"not found");
+				response.write("no current selection, and no name parameter given",true);
+				return;
+			}
+			obj = selection[0];
+		}
+
+		QString infoStr;
+		QMetaObject::invokeMethod(this,"getInfoString",Qt::BlockingQueuedConnection,
+					  Q_RETURN_ARG(QString,infoStr),
+					  Q_ARG(StelObjectP,obj));
+
+		response.write(infoStr.toUtf8(),true);
 	}
 	else if (operation == "simbad")
 	{
@@ -279,4 +322,17 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 		//TODO some sort of service description?
 		writeRequestError("unsupported operation. GET: find,simbad",response);
 	}
+}
+
+StelObjectP SearchService::findObject(const QString &name)
+{
+	StelObjectP obj = objMgr->searchByNameI18n(name);
+	if(!obj)
+		obj = objMgr->searchByName(name);
+	return obj;
+}
+
+QString SearchService::getInfoString(const StelObjectP obj)
+{
+	return obj->getInfoString(core);
 }

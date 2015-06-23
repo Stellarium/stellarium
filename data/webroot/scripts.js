@@ -1,3 +1,5 @@
+"use strict";
+
 var Scripts = (new function($) {
     //Private variables
     var $activescript;
