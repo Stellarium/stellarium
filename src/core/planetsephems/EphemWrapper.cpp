@@ -1,5 +1,6 @@
 /*
 Copyright (C) 2003 Fabien Chereau
+Copyright (c) 2015 Holger Niessner
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -133,4 +134,3 @@ void get_titania_parent_coordsv(double jd,double xyz[3], void* unused)
   {GetGust86Coor(jd,GUST86_TITANIA,xyz);}
 void get_oberon_parent_coordsv(double jd,double xyz[3], void* unused)
   {GetGust86Coor(jd,GUST86_OBERON,xyz);}
-
