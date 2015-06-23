@@ -234,7 +234,7 @@ void MeteorShowers::deinit()
 	m_bolideTexture.clear();
 }
 
-void MeteorShowers::upgradeConfigIni(void)
+void MeteorShowers::upgradeConfigIni()
 {
 	// Upgrade settings for MeteorShower plugin
 	if (conf->contains("MeteorShowers/flag_show_ms"))
@@ -301,7 +301,7 @@ void MeteorShowers::draw(StelCore* core)
 	}
 
 	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
-	drawMarker(core, painter);
+	drawRadiant(core, painter);
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 	{
@@ -312,7 +312,7 @@ void MeteorShowers::draw(StelCore* core)
 	drawStream(core, painter);
 }
 
-void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
+void MeteorShowers::drawRadiant(StelCore* core, StelPainter& painter)
 {
 	Q_UNUSED(core);
 	painter.setFont(labelFont);
@@ -916,7 +916,7 @@ void MeteorShowers::setShowersMap(const QVariantMap& map)
 	}
 }
 
-void MeteorShowers::restoreDefaults(void)
+void MeteorShowers::restoreDefaults()
 {
 	restoreDefaultConfigIni();
 	restoreDefaultJsonFile();
@@ -924,7 +924,7 @@ void MeteorShowers::restoreDefaults(void)
 	readSettingsFromConfig();
 }
 
-void MeteorShowers::restoreDefaultConfigIni(void)
+void MeteorShowers::restoreDefaultConfigIni()
 {
 	conf->beginGroup("MeteorShowers");
 
@@ -1057,7 +1057,7 @@ bool MeteorShowers::checkJsonFileFormat()
 	return true;
 }
 
-void MeteorShowers::readSettingsFromConfig(void)
+void MeteorShowers::readSettingsFromConfig()
 {
 	conf->beginGroup("MeteorShowers");
 
@@ -1084,7 +1084,7 @@ void MeteorShowers::readSettingsFromConfig(void)
 	conf->endGroup();
 }
 
-void MeteorShowers::saveSettingsToConfig(void)
+void MeteorShowers::saveSettingsToConfig()
 {
 	conf->beginGroup("MeteorShowers");
 
@@ -1110,7 +1110,7 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->endGroup();
 }
 
-int MeteorShowers::getSecondsToUpdate(void)
+int MeteorShowers::getSecondsToUpdate()
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyHours * 3600);
 	return QDateTime::currentDateTime().secsTo(nextUpdate);
