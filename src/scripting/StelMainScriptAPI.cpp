@@ -82,11 +82,11 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 
 	connect(this, SIGNAL(requestLoadVideo(const QString&, const QString&, float, float, bool, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(loadVideo(const QString&, const QString&, float, float, bool, float)));
 	connect(this, SIGNAL(requestPlayVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideo(const QString&)));
-    connect(this, SIGNAL(requestPlayVideoPopout(QString,float,float,float,float,float,float,float,bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideoPopout(QString,float,float,float,float,float,float,float,bool)));
-    connect(this, SIGNAL(requestPauseVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(pauseVideo(const QString&)));
+	connect(this, SIGNAL(requestPlayVideoPopout(QString,float,float,float,float,float,float,float,bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(playVideoPopout(QString,float,float,float,float,float,float,float,bool)));
+	connect(this, SIGNAL(requestPauseVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(pauseVideo(const QString&)));
 	connect(this, SIGNAL(requestStopVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(stopVideo(const QString&)));
 	connect(this, SIGNAL(requestDropVideo(const QString&)), StelApp::getInstance().getStelVideoMgr(), SLOT(dropVideo(const QString&)));
-    connect(this, SIGNAL(requestSeekVideo(const QString&, qint64, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64, bool)));
+	connect(this, SIGNAL(requestSeekVideo(const QString&, qint64, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(seekVideo(const QString&, qint64, bool)));
 	connect(this, SIGNAL(requestSetVideoXY(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoXY(const QString&, float, float)));
 	connect(this, SIGNAL(requestSetVideoAlpha(const QString&, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(setVideoAlpha(const QString&, float)));
 	connect(this, SIGNAL(requestResizeVideo(const QString&, float, float)), StelApp::getInstance().getStelVideoMgr(), SLOT(resizeVideo(const QString&, float, float)));
@@ -565,7 +565,7 @@ void StelMainScriptAPI::playVideo(const QString& id)
 
 void StelMainScriptAPI::playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)
 {
-    emit(requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition));
+	emit(requestPlayVideoPopout(id, fromX, fromY, atCenterX, atCenterY, finalSizeX, finalSizeY, popupDuration, frozenInTransition));
 }
 
 void StelMainScriptAPI::pauseVideo(const QString& id)
@@ -585,7 +585,7 @@ void StelMainScriptAPI::dropVideo(const QString& id)
 
 void StelMainScriptAPI::seekVideo(const QString& id, qint64 ms, bool pause)
 {
-    emit(requestSeekVideo(id, ms, pause));
+	emit(requestSeekVideo(id, ms, pause));
 }
 
 void StelMainScriptAPI::setVideoXY(const QString& id, float x, float y)
@@ -610,12 +610,12 @@ void StelMainScriptAPI::showVideo(const QString& id, bool show)
 
 qint64 StelMainScriptAPI::getVideoDuration(const QString& id)
 {
-    return StelApp::getInstance().getStelVideoMgr()->getVideoDuration(id);
+	return StelApp::getInstance().getStelVideoMgr()->getVideoDuration(id);
 }
 
 qint64 StelMainScriptAPI::getVideoPosition(const QString& id)
 {
-    return StelApp::getInstance().getStelVideoMgr()->getVideoPosition(id);
+	return StelApp::getInstance().getStelVideoMgr()->getVideoPosition(id);
 }
 
 int StelMainScriptAPI::getScreenWidth()
