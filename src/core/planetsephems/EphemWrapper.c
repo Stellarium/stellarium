@@ -1,5 +1,4 @@
 /*
-Copyright (C) 2003 Fabien Chereau
 Copyright (c) 2015 Holger Niessner
 
 This program is free software; you can redistribute it and/or modify
@@ -16,7 +15,11 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+#include "EphemWrapper.h"
 #include "vsop87.h"
 #include "elp82b.h"
 #include "marssat.h"
@@ -43,7 +46,7 @@ void get_mercury_helio_coordsv(double jd,double xyz[3], void* unused)
 void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
   {GetVsop87Coor(jd,VSOP87_VENUS,xyz);}
 
-void get_earth_helio_coordsv(const double jd,double xyz[3]) {
+void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) {
   double moon[3];
   GetVsop87Coor(jd,VSOP87_EMB,xyz);
   GetElp82bCoor(jd,moon);
@@ -134,3 +137,8 @@ void get_titania_parent_coordsv(double jd,double xyz[3], void* unused)
   {GetGust86Coor(jd,GUST86_TITANIA,xyz);}
 void get_oberon_parent_coordsv(double jd,double xyz[3], void* unused)
   {GetGust86Coor(jd,GUST86_OBERON,xyz);}
+
+#ifdef __cplusplus
+}
+#endif
+
