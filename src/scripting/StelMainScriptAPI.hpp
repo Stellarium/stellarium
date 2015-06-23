@@ -616,7 +616,7 @@ public slots:
 	//! @param id the identifier used when loadVideo was called
 	//! @param alpha the new alpha value to set.
     //! @bug With Qt5/V0.13+, @param alpha does not work properly, only @param alpha=0 makes it invisible.
-        void setVideoAlpha(const QString& id, float alpha);
+	void setVideoAlpha(const QString& id, float alpha);
 
 	//! Resize the video widget to the specified width, height. 
 	//! @param id the identifier used when loadVideo was called
@@ -766,11 +766,11 @@ signals:
 	void requestDropSound(const QString& id);
 	void requestLoadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
 	void requestPlayVideo(const QString& id);
-    void requestPlayVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
+	void requestPlayVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
 	void requestPauseVideo(const QString& id);
 	void requestStopVideo(const QString& id);
 	void requestDropVideo(const QString& id);
-    void requestSeekVideo(const QString& id, qint64 ms, bool pause=false);
+	void requestSeekVideo(const QString& id, qint64 ms, bool pause=false);
 	void requestSetVideoXY(const QString& id, float x, float y);
 	void requestSetVideoAlpha(const QString& id, float alpha);
 	void requestResizeVideo(const QString& id, float w, float h);
