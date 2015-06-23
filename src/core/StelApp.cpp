@@ -441,8 +441,8 @@ void StelApp::init(QSettings* conf)
 
 	// Init video manager
 	videoMgr = new StelVideoMgr();
-    videoMgr->init();
-    getModuleMgr().registerModule((videoMgr));
+	videoMgr->init();
+	getModuleMgr().registerModule((videoMgr));
 
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);
