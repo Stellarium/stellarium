@@ -1,0 +1,30 @@
+// Name: Video Test with popout
+// Author: Georg Zotti
+// License: Public Domain
+// Description: This script plays several formats of video file.
+//              Note that video support is a build-time option and
+//              may not be supported for the version of Stellarium
+//              which you have.  Also, different playforms may
+//              support different video formats.
+//
+
+// core.loadVideo("tests/videotest.flv", "flv", 100, 70, true, 0.5);
+//core.loadVideo("media/karnak.wmv", "wmv", 100, 70, false, 0.5);
+core.loadVideo("media/stellarium.mp4", "wmv", 100, 70, false, 0.5);
+
+lab = LabelMgr.labelScreen("Playing WMV video file with special effect...", 100, 20, true, 20, "#ff0000");
+//    void playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
+lab2 = LabelMgr.labelScreen("spawning from 0.4/0.9 towards 0.6/0.4 (sized 0.5/0.5) within transition time of 2 seconds", 100, 45, true, 15, "#ff0000");
+core.playVideoPopout("wmv", 0.4, 0.9, 0.6, 0.4, 0.5, 0.5, 2, false);
+core.showVideo("wmv", true);
+// Unfortunately, duration is not known here. we wait 5 secs in any case and try then to find duration.
+core.wait(5); 
+duration=core.getVideoDuration("wmv");
+lab3 = LabelMgr.labelScreen("Video duration:"+duration, 100, 735, true, 15, "#ff0000");
+core.wait(duration/1000 - 5);
+LabelMgr.deleteLabel(lab2);
+LabelMgr.deleteLabel(lab3);
+core.wait(1);
+LabelMgr.deleteLabel(lab);
+core.wait(0.4);
+core.dropVideo("wmv");
