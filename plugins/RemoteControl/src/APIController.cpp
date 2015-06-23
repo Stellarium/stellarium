@@ -29,6 +29,11 @@ void AbstractAPIService::get(const QByteArray& operation, const QMultiMap<QByteA
 	response.write(str.arg(QString::fromLatin1(serviceName())).toLatin1(),true);
 }
 
+void AbstractAPIService::update(double deltaTime)
+{
+	Q_UNUSED(deltaTime);
+}
+
 void AbstractAPIService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
 {
 	Q_UNUSED(operation);
@@ -60,6 +65,14 @@ APIController::APIController(int prefixLength, QObject* parent) : HttpRequestHan
 APIController::~APIController()
 {
 
+}
+
+void APIController::update(double deltaTime)
+{
+	foreach(AbstractAPIService* service, m_serviceMap)
+	{
+		service->update(deltaTime);
+	}
 }
 
 void APIController::registerService(AbstractAPIService *service)

@@ -21,9 +21,11 @@
 #define SEARCHSERVICE_HPP_
 
 #include "APIController.hpp"
+#include "StelObjectType.hpp"
 
 #include <QStringList>
 
+class StelCore;
 class StelObjectMgr;
 
 class SearchService : public AbstractAPIService
@@ -41,7 +43,14 @@ private slots:
 	QStringList performSearch(const QString& text);
 	//! Wrapper around SearchDialog::substituteGreek
 	QString substituteGreek(const QString& text);
+
+	//! Wrapper around StelObjectMgr::find...
+	StelObjectP findObject(const QString& name);
+
+	//! Wrapper around obj->getInfoString
+	QString getInfoString(const StelObjectP obj);
 private:
+	StelCore* core;
 	StelObjectMgr* objMgr;
 	bool useStartOfWords;
 	QString simbadServerUrl;

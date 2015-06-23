@@ -57,7 +57,8 @@ public:
 		GalacticCoord		= 0x00000800, //!< The galactic position
 		ObjectType		= 0x00001000, //!< The type of the object (star, planet, etc.)
 		EclipticCoord		= 0x00002000, //!< The ecliptic position
-		PlainText		= 0x00004000  //!< Strip HTML tags from output
+		PlainText		= 0x00004000, //!< Strip HTML tags from output
+		NoFont			= 0x00008000  //!< Avoid adding a font tag
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
@@ -163,6 +164,8 @@ protected:
 
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
+private:
+	static int stelObjectPMetaTypeID;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(StelObject::InfoStringGroup)

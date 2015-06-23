@@ -69,19 +69,12 @@ RemoteControl::RemoteControl()
 	: httpListener(NULL), requestHandler(NULL), enabled(true), toolbarButton(NULL)
 {
 	setObjectName("RemoteControl");
-	font.setPixelSize(16);
 
 	configDialog = new RemoteControlDialog();
 	conf = StelApp::getInstance().getSettings();
 
 	//needed to ensure clean shutdown of server before threading errors can occur
 	connect(&StelApp::getInstance(), &StelApp::aboutToQuit, this, &RemoteControl::stopServer, Qt::DirectConnection);
-
-	messageTimer = new QTimer(this);
-	messageTimer->setInterval(7000);
-	messageTimer->setSingleShot(true);
-
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
 }
 
 RemoteControl::~RemoteControl()
@@ -128,11 +121,6 @@ void RemoteControl::init()
 	// Create action for enable/disable & hook up signals	
 	addAction("actionShow_Remote_Control", N_("Remote Control"), N_("Remote control"), "enabled", "Ctrl+N");
 
-	// Initialize the message strings and make sure they are translated when
-	// the language changes.
-	updateMessageText();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
-
 	// Add a toolbar button. TODO:  decide whether a button is necessary at all. Maye the button should not only enable, but call the GUI dialog directly?
 	try
 	{
@@ -158,26 +146,22 @@ void RemoteControl::init()
 
 void RemoteControl::update(double deltaTime)
 {
-	messageFader.update((int)(deltaTime*1000));
-	// TODO: GZ I think most processing will be triggered here...
+	requestHandler->update(deltaTime);
 }
 
 
 //! Draw any parts on the screen which are for our module
 void RemoteControl::draw(StelCore* core)
 {
-	// TODO: Likely nothing.
 	Q_UNUSED(core);
 }
 
 void RemoteControl::enableRemoteControl(bool b)
 {
 	enabled = b;
-	messageFader = b;
 	if (b)
 	{
 		qDebug() << "RemoteControl enabled";
-		messageTimer->start();
 		startServer();
 	}
 	else
@@ -200,19 +184,6 @@ void RemoteControl::stopServer()
 		delete httpListener;
 		httpListener = NULL;
 	}
-}
-
-
-void RemoteControl::updateMessageText()
-{
-	// TRANSLATORS: instructions for using the RemoteControl plugin.
-	messageEnabled = q_("Remote Control enabled.");
-}
-
-void RemoteControl::clearMessage()
-{
-	//qDebug() << "RemoteControl::clearMessage";
-	messageFader = false;
 }
 
 void RemoteControl::restoreDefaultSettings()
