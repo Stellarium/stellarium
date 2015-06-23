@@ -49,7 +49,7 @@ file (section [MeteorShowers]).
 
 //! @class MeteorShowers
 //! Main class of the %Meteor Showers plugin.
-//! @author Marcos Cardinot
+//! @author Marcos Cardinot <mcardinot@gmail.com>
 //! @ingroup meteorShowers
 class MeteorShowers : public StelObjectModule
 {
@@ -71,21 +71,86 @@ public:
 	MeteorShowers();
 	virtual ~MeteorShowers();
 
-	///////////////////////////////////////////////////////////////////////////
+	//! Set up the plugin with default values.  This means clearing out the MeteorShower section in the
+	//! main config.ini (if one already exists), and populating it with default values.  It also
+	//! creates the default showers.json file from the resource embedded in the plugin lib/dll file.
+	void restoreDefaults();
+
+	//! Read (or re-read) settings from the main config file.  This will be called from init and also
+	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
+	void readSettingsFromConfig();
+
+	//! Save the settings to the main configuration file.
+	void saveSettingsToConfig();
+
+	//! Determine if the plugin will try to update the catalog from the internet
+	//! @return true if updates are set to be done, false otherwise
+	bool getUpdatesEnabled() { return updatesEnabled; }
+
+	//! Determine if the plugin will try to update the catalog from the internet
+	//! @param b if true, updates will be enabled, else they will be disabled
+	void setUpdatesEnabled(bool b) { updatesEnabled = b; }
+
+	//! Get the datetime of last update
+	//! @return QDateTime
+	QDateTime getLastUpdate() { return lastUpdate; }
+
+	//! Get the update frequency in hours
+	int getUpdateFrequencyHours() { return updateFrequencyHours; }
+	void setUpdateFrequencyHours(int hours) { updateFrequencyHours = hours; }
+
+	//! Get the number of seconds till the next update
+	int getSecondsToUpdate();
+
+	//! Get the current updateState
+	UpdateState getUpdateState() { return updateState; }
+
+	//! Get current color of active radiant based  in generic data
+	QColor getColorARG() { return colorARG; }
+	void setColorARG(QColor color) { colorARG = color; }
+
+	//! Get current color of active radiant based  in real data
+	QColor getColorARR() { return colorARR; }
+	void setColorARR(QColor color) { colorARR = color; }
+
+	//! Get current inactive radiant color
+	QColor getColorIR() { return colorIR; }
+	void setColorIR(QColor color) { colorIR = color; }
+
+	//! Get the label font size.
+	//! @return the pixel size of the font
+	int getLabelFontSize() { return labelFont.pixelSize(); }
+
+	//! Get status of labels
+	//! @return false: hidden
+	bool getFlagLabels();
+
+	//! Get current sky date.
+	//! @return current sky date
+	QDateTime getSkyDate() { return skyDate; }
+
+	//! Find all meteor_shower events in a given date interval
+	//! @param dateFrom
+	//! @param dateTo
+	//! @return meteor_shower list
+	QList<MeteorShowerP> searchEvents(QDate dateFrom, QDate dateTo) const;
+
+	//
 	// Methods defined in the StelModule class
+	//
+
 	virtual void init();
-	//! called before the plug-in is un-loaded.
-	//! Useful for stopping processes, unloading textures, etc.
 	virtual void deinit();
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
-	virtual void drawMarker(StelCore* core, StelPainter& painter);
-	virtual void drawPointer(StelCore* core, StelPainter& painter);
-	virtual void drawStream(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
+	//! Implment this to tell the main Stellarium GUI that there is a GUI element to configure this plugin.
+	virtual bool configureGui(bool show=true);
 
-	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	//
+	// Methods defined in StelObjectModule class
+	//
+
 	//! Used to get a list of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for nebulae.
 	//! @param limitFov the field of view around the position v in which to search for satellites.
@@ -109,121 +174,7 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
-	virtual QString getName() const
-	{
-		return "Meteor Showers";
-	}
-
-	//! get a ms object by identifier
-	MeteorShowerP getByID(const QString& id);
-
-	//! Implment this to tell the main Stellarium GUI that there is a GUI element to configure this
-	//! plugin.
-	virtual bool configureGui(bool show=true);
-
-	//! Set up the plugin with default values.  This means clearing out the MeteorShower section in the
-	//! main config.ini (if one already exists), and populating it with default values.  It also
-	//! creates the default showers.json file from the resource embedded in the plugin lib/dll file.
-	void restoreDefaults(void);
-
-	//! Read (or re-read) settings from the main config file.  This will be called from init and also
-	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
-
-	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
-
-	//! get whether or not the plugin will try to update TLE data from the internet
-	//! @return true if updates are set to be done, false otherwise
-	bool getUpdatesEnabled(void)
-	{
-		return updatesEnabled;
-	}
-	//! set whether or not the plugin will try to update TLE data from the internet
-	//! @param b if true, updates will be enabled, else they will be disabled
-	void setUpdatesEnabled(bool b)
-	{
-		updatesEnabled=b;
-	}
-
-	//! get the date and time the TLE elements were updated
-	QDateTime getLastUpdate(void)
-	{
-		return lastUpdate;
-	}
-
-	//! get the update frequency in hours
-	int getUpdateFrequencyHours(void)
-	{
-		return updateFrequencyHours;
-	}
-	void setUpdateFrequencyHours(int hours)
-	{
-		updateFrequencyHours = hours;
-	}
-
-	//! get the number of seconds till the next update
-	int getSecondsToUpdate(void);
-
-	//! Get the current updateState
-	UpdateState getUpdateState(void)
-	{
-		return updateState;
-	}
-
-	//! Get current color of active radiant based  in generic data
-	QColor getColorARG()
-	{
-		return colorARG;
-	}
-	void setColorARG(QColor color)
-	{
-		colorARG = color;
-	}
-
-	//! Get current color of active radiant based  in real data
-	QColor getColorARR()
-	{
-		return colorARR;
-	}
-	void setColorARR(QColor color)
-	{
-		colorARR = color;
-	}
-
-	//! Get current inactive radiant color
-	QColor getColorIR()
-	{
-		return colorIR;
-	}
-	void setColorIR(QColor color)
-	{
-		colorIR = color;
-	}
-
-	//! get the label font size.
-	//! @return the pixel size of the font
-	int getLabelFontSize()
-	{
-		return labelFont.pixelSize();
-	}
-
-	//! Get status of labels
-	//! @return false: hidden
-	bool getFlagLabels();
-
-	//! Get current sky date.
-	//! @return current sky date
-	QDateTime getSkyDate()
-	{
-		return skyDate;
-	}
-
-	//! Find all meteor_shower events in a given date interval
-	//! @param dateFrom
-	//! @param dateTo
-	//! @return meteor_shower list
-	QList<MeteorShowerP> searchEvents(QDate dateFrom, QDate dateTo) const;
+	virtual QString getName() const { return "Meteor Showers"; }
 
 signals:
 	//! @param state the new update state.
@@ -272,8 +223,17 @@ public slots:
 	void setFlagRadiant(bool b) { MeteorShower::radiantMarkerEnabled=b; }
 
 private:
-	// Upgrade config.ini: rename old key settings to new
-	void upgradeConfigIni(void);
+	//! Draw all radiant
+	void drawRadiant(StelCore* core, StelPainter& painter);
+
+	//! Draw pointer
+	void drawPointer(StelCore* core, StelPainter& painter);
+
+	//! Draw meteor stream
+	void drawStream(StelCore* core, StelPainter& painter);
+
+	//! Upgrade config.ini: rename old key settings to new
+	void upgradeConfigIni();
 
 	//! Check if the sky date was changed
 	//! @param core
@@ -293,7 +253,7 @@ private:
 	void updateActiveInfo(void);
 
 	//! Set up the plugin with default values.
-	void restoreDefaultConfigIni(void);
+	void restoreDefaultConfigIni();
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -399,8 +359,6 @@ private slots:
 	void updateDownloadComplete(QNetworkReply* reply);
 };
 
-
-//#include "fixx11h.h"
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
