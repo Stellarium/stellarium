@@ -32,6 +32,7 @@
 
 StelVideoMgr::StelVideoMgr()
 {
+    setObjectName("StelVideoMgr");
 }
 
 #ifdef ENABLE_MEDIA
