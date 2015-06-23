@@ -1,5 +1,4 @@
 /*
-Copyright (C) 2003 Fabien Chereau
 Copyright (c) 2015 Holger Niessner
 
 This program is free software; you can redistribute it and/or modify
@@ -30,6 +29,10 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #ifndef _EPHEMWRAPPER_HPP_
 #define _EPHEMWRAPPER_HPP_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 void get_sun_helio_coordsv(double jd,double xyz[3], void*);
 void get_mercury_helio_coordsv(double jd,double xyz[3], void*);
@@ -76,6 +79,10 @@ void get_ariel_parent_coordsv(double jd,double xyz[3], void*);
 void get_umbriel_parent_coordsv(double jd,double xyz[3], void*);
 void get_titania_parent_coordsv(double jd,double xyz[3], void*);
 void get_oberon_parent_coordsv(double jd,double xyz[3], void*);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _EPHEMWRAPPER_HPP_
 

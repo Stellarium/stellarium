@@ -176,8 +176,8 @@ SET(stellarium_lib_SRCS
 	core/planetsephems/pluto.h
 	core/planetsephems/sidereal_time.c
 	core/planetsephems/sidereal_time.h
-	core/planetsephems/stellplanet.c
-	core/planetsephems/stellplanet.h
+	core/planetsephems/EphemWrapper.c
+	core/planetsephems/EphemWrapper.h
 	core/planetsephems/tass17.c
 	core/planetsephems/tass17.h
 	core/planetsephems/vsop87.c
