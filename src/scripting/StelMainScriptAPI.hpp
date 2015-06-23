@@ -562,14 +562,30 @@ public slots:
 	//! @param x  the x-coordinate for the video widget.
 	//! @param y  the y-coordinate for the video widget.
 	//! @param show  the visibility state for the video.
-	//! @param alpha the initial alpha value of the video.
+    //! @param alpha the initial alpha value of the video.
+    //! @bug With Qt5/V0.13+, @param alpha does not work properly, only @param alpha=0 makes it invisible.
 	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
 
 	//! Play a video which has previously been loaded with loadVideo
 	//! @param id the identifier used when loadVideo was called
 	void playVideo(const QString& id);
 
-	//! Pause a video which is playing.  Subsequent playVideo calls will
+    //! Play a video which has previously been loaded with loadVideo with a complex effect.
+    //! The video appears out of @param fromX/ @param fromY,
+    //! grows within @param popupDuration to size @param finalSizeX/@param finalSizeY, and
+    //! shrinks back towards @param fromX/@param fromY at the end during @param popdownDuration.
+    //! @param id the identifier used when loadVideo was called
+    //! @param fromX X position of starting point, counted from left of window. May be absolute (if >1) or relative (0<X<1)
+    //! @param fromY Y position of starting point, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
+    //! @param atCenterX X position of center of final video frame, counted from left of window. May be absolute (if >1) or relative (0<X<1)
+    //! @param atCenterY Y position of center of final video frame, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
+    //! @param finalSizeX X size of final video frame. May be absolute (if >1) or relative to window size (0<X<1). If -1, scale proportional from @param finalSizeY.
+    //! @param finalSizeY Y size of final video frame. May be absolute (if >1) or relative to window size (0<Y<1). If -1, scale proportional from @param finalSizeX.
+    //! @param popupDuration duration of growing start transition (seconds)
+    //! @param frozenInTransition true if video should be paused during growing/shrinking transition.
+    void playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
+
+    //! Pause a video which is playing.  Subsequent playVideo calls will
 	//! resume playing from the position in the file when it was paused.
 	//! @param id the identifier used when loadVideo was called
 	void pauseVideo(const QString& id);
@@ -588,7 +604,7 @@ public slots:
 	//! Seeks a video to the requested time.
 	//! @param id the identifier used when loadVideo was called
 	//! @param ms the time in milliseconds from the start of the media.
-        void seekVideo(const QString& id, qint64 ms);                                   
+        void seekVideo(const QString& id, qint64 ms, bool pause=false);
 
 	//! Sets the position of the video widget.
 	//! @param id the identifier used when loadVideo was called
@@ -599,7 +615,8 @@ public slots:
 	//! Set the alpha value of a video when visible.
 	//! @param id the identifier used when loadVideo was called
 	//! @param alpha the new alpha value to set.
-        void setVideoAlpha(const QString& id, float alpha);                             
+    //! @bug With Qt5/V0.13+, @param alpha does not work properly, only @param alpha=0 makes it invisible.
+        void setVideoAlpha(const QString& id, float alpha);
 
 	//! Resize the video widget to the specified width, height. 
 	//! @param id the identifier used when loadVideo was called
@@ -749,10 +766,11 @@ signals:
 	void requestDropSound(const QString& id);
 	void requestLoadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
 	void requestPlayVideo(const QString& id);
+    void requestPlayVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
 	void requestPauseVideo(const QString& id);
 	void requestStopVideo(const QString& id);
 	void requestDropVideo(const QString& id);
-	void requestSeekVideo(const QString& id, qint64 ms);
+    void requestSeekVideo(const QString& id, qint64 ms, bool pause=false);
 	void requestSetVideoXY(const QString& id, float x, float y);
 	void requestSetVideoAlpha(const QString& id, float alpha);
 	void requestResizeVideo(const QString& id, float w, float h);
