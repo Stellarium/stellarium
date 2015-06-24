@@ -74,6 +74,14 @@ private:
 
 	QString userAgent;
 
+    //! True if a ephemData download is in progress.
+    bool isDownloadingEphemData;
+    //! True if any download is in progress
+    bool isDownloading;
+    //! True when at least one ephemData-pack has been downloaded successfully this session
+    bool hasDownloadedEphemData;
+    QNetworkReply* ephemDataDownloadReply;
+
 private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
@@ -145,6 +153,9 @@ private slots:
 	void populateScriptsList();
 	#endif
 	void setFixedDateTimeToCurrent();
+
+    //! downloads DE430/DE431 ephemData from SourceForge
+    void downloadEphemData();
 
 private:
 	StelGui* gui;

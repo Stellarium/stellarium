@@ -81,6 +81,10 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
+
+    hasDownloadedEphemData = false;
+    isDownloadingEphemData = false;
+
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 	// Get info about operating system
 	QString platform = StelUtils::getOperatingSystemInfo();
@@ -1074,12 +1078,29 @@ void ConfigurationDialog::downloadStars()
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
+bool ConfigurationDialog::de430DataIsAvailable()
+{
+    //TODO: check file availability
+    return false;
+}
+
+bool ConfigurationDialog::de431DataIsAvailable()
+{
+    //TODO: check file availability
+    return false;
+}
+
+void ConfigurationDialog::downloadEphemData()
+{
+
+}
+
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 {
 	Q_ASSERT(currentDownloadFile);
 	Q_ASSERT(starCatalogDownloadReply);
 
-	isDownloadingStarCatalog = false;
+    isDownloadingStarCatalog = false;
 	qWarning() << "Error downloading file" << starCatalogDownloadReply->url() << ": " << starCatalogDownloadReply->errorString();
 	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
 	ui->downloadCancelButton->setVisible(false);
