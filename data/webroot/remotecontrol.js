@@ -73,6 +73,7 @@ var Main = (new function($) {
                 Time.updateFromServer(data.time);
                 Scripts.updateFromServer(data.script);
                 Locations.updateFromServer(data.location);
+                ViewControl.updateFromServer(data.view);
 
                 $noresponse.hide();
                 connectionLost = false;
@@ -208,7 +209,6 @@ var Main = (new function($) {
                 method: "POST",
                 data: data,
                 dataType: "text",
-                timeout: 3000,
                 success: function(data) {
                     if (successFunc) {
                         successFunc(data);
@@ -224,7 +224,7 @@ var Main = (new function($) {
                     console.log("Error posting command " + url);
                     console.log("Error: " + errorThrown);
                     console.log("Status: " + status);
-                    alert("Could not call server")
+                    alert("Could not update the server!")
                 },
                 complete: completeFunc
             });

@@ -152,7 +152,6 @@ void HttpConnectionHandler::setBusy() {
 
 void HttpConnectionHandler::readTimeout() {
 	Q_ASSERT(QThread::currentThread() == this);
-	Q_ASSERT(this->thread() == this);
 
     qDebug("HttpConnectionHandler (%p): read timeout occured",this);
 
@@ -167,7 +166,6 @@ void HttpConnectionHandler::readTimeout() {
 
 void HttpConnectionHandler::disconnected() {
 	Q_ASSERT(QThread::currentThread() == this);
-	Q_ASSERT(this->thread() == this);
 
     qDebug("HttpConnectionHandler (%p): disconnected", this);
     socket->close();
@@ -177,7 +175,6 @@ void HttpConnectionHandler::disconnected() {
 
 void HttpConnectionHandler::read() {
 	Q_ASSERT(QThread::currentThread() == this);
-	Q_ASSERT(this->thread() == this);
 
     // The loop adds support for HTTP pipelinig
     while (socket->bytesAvailable()) {

@@ -178,6 +178,25 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 			obj.insert("selectioninfo",infoStr);
 		}
 
+		//// Info about current view
+		{
+			QJsonObject obj2;
+
+			// the aim fov may lie outside the min/max bounds, so constrain it
+			double fov = mvmgr->getAimFov();
+			if(fov < mvmgr->getMinFov())
+				fov = mvmgr->getMinFov();
+			else if (fov>mvmgr->getMaxFov())
+				fov = mvmgr->getMaxFov();
+
+			QString str = core->getCurrentProjectionTypeKey();
+
+			obj2.insert("fov",fov);
+			obj2.insert("projectionStr",core->projectionTypeKeyToNameI18n(str));
+
+			obj.insert("view",obj2);
+		}
+
 		writeJSON(QJsonDocument(obj),response);
 	}
 	else
@@ -297,6 +316,23 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 		else
 			writeRequestError("requires x or y parameter",response);
 	}
+	else if (operation == "fov")
+	{
+		QString fov = QString::fromUtf8(parameters.value("fov"));
+		bool ok;
+		double dFov = fov.toDouble(&ok);
+
+		if(fov.isEmpty() || !ok)
+		{
+			writeRequestError("requires fov parameter",response);
+			return;
+		}
+
+		QMetaObject::invokeMethod(this,"setFov",Qt::BlockingQueuedConnection,
+					  Q_ARG(double,dFov));
+
+		response.write("ok",true);
+	}
 	else
 	{
 		//TODO some sort of service description?
@@ -365,5 +401,11 @@ void MainService::updateMovement(int x, int y, bool xUpdated, bool yUpdated)
 	qint64 curTime = QDateTime::currentMSecsSinceEpoch();
 	//qDebug()<<"updateMove"<<x<<y<<(curTime-lastMoveUpdateTime);
 	lastMoveUpdateTime = curTime;
+}
+
+void MainService::setFov(double fov)
+{
+	//TODO calculate a better move duration here
+	mvmgr->zoomTo(fov,0.25f);
 }
 
