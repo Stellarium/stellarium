@@ -21,3 +21,13 @@ THE SOFTWARE.
 */
 
 #include "de430.h"
+
+void GetDe430Coor(double jd, int planet_id, double * xyz)
+{
+
+}
+
+void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
+{
+	
+}
