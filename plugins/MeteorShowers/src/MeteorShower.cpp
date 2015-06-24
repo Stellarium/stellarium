@@ -87,7 +87,7 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 			QVariantMap colorMap = ms.toMap();
 			QString color = colorMap.value("color").toString();
 			int intensity = colorMap.value("intensity").toInt();
-			colors.append(colorPair(color, intensity));
+			colors.append(Meteor::colorPair(color, intensity));
 		}
 	}
 
@@ -134,7 +134,7 @@ QVariantMap MeteorShower::getMap()
 	map["activity"] = activityList;
 
 	QVariantList colorList;
-	foreach(const colorPair &c, colors)
+	foreach(const Meteor::colorPair &c, colors)
 	{
 		QVariantMap colorMap;
 		colorMap["color"] = c.first;
