@@ -51,15 +51,6 @@ so that for given T the functions cos and sin have only to be called 12 times.
 extern "C" {
 #endif
 
-#define VSOP87_MERCURY  0
-#define VSOP87_VENUS    1
-#define VSOP87_EMB      2
-#define VSOP87_MARS     3
-#define VSOP87_JUPITER  4
-#define VSOP87_SATURN   5
-#define VSOP87_URANUS   6
-#define VSOP87_NEPTUNE  7
-
 void GetVsop87Coor(double jd,int body,double *xyz);
   /* Return the rectangular coordinates of the given planet
      and the given julian date jd expressed in dynamical time (TAI+32.184s).
