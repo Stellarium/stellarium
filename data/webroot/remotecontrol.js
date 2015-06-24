@@ -32,6 +32,8 @@ var Main = (new function($) {
     var $noresponse;
     var $noresponsetime;
 
+    var sel_infostring;
+
     function animate() {
 
         Time.updateAnimation();
@@ -57,7 +59,15 @@ var Main = (new function($) {
             success: function(data) {
                 lastDataTime = $.now();
 
-                document.getElementById("sel_infostring").innerHTML = data.selectioninfo;
+                if(data.selectioninfo) {
+                    sel_infostring.innerHTML = data.selectioninfo;
+                    sel_infostring.className = "";
+                }
+                else {
+                    sel_infostring.innerHTML = "No current selection";
+                    sel_infostring.className = "bold";
+                }
+
 
                 //update modules with data
                 Time.updateFromServer(data.time);
@@ -161,6 +171,8 @@ var Main = (new function($) {
     return {
         init: function() {
             window.console.profile();
+
+            sel_infostring = document.getElementById("sel_infostring");
 
             Actions.init();
             Scripts.init();
