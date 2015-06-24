@@ -27,22 +27,30 @@
 #include "StelTranslator.hpp"
 
 #include <QEventLoop>
-#include <QtConcurrentRun>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMutex>
+#include <QThreadPool>
+#include <QRunnable>
+#include <QWaitCondition>
 
 //! This is used to make the Simbad lookups blocking.
-class SimbadLookupTask
+class SimbadLookupTask :public QRunnable
 {
 public:
 	SimbadLookupTask(const QString& url, const QString& searchTerm)
 		: url(url), searchTerm(searchTerm)
 	{
+		parentThread = QThread::currentThread();
+		setAutoDelete(false);
 	}
 
-	void run()
+	void run() Q_DECL_OVERRIDE
 	{
+		//make sure this is really a separate thread (QtConcurrent does NOT guarantee that)
+		Q_ASSERT(parentThread!=QThread::currentThread());
+
 		//we use a local event loop to simulate synchronous behaviour
 		//If we did this in the HTTP thread, this could cause all sorts of problems,
 		//(for example: a timeout could disconnect the connection while the handler thread is still working...)
@@ -69,19 +77,28 @@ public:
 
 		delete reply;
 		delete searcher; //is deleted while still in the owning thread
+
+		mutex.lock();
+		finishedCondition.wakeAll();
+		mutex.unlock();
 	}
 
 	SimbadLookupReply::SimbadLookupStatus getStatus() { return status; }
 	QString getStatusString() { return statusString; }
 	QString getErrorString() { return errorString; }
 	QMap<QString,Vec3d> getResults() { return results; }
+	QMutex* getMutex() { return &mutex; }
+	QWaitCondition* getFinishedCondition() { return &finishedCondition; }
 private:
+	QMutex mutex;
+	QWaitCondition finishedCondition;
 	QString url;
 	QString searchTerm;
 	SimbadLookupReply::SimbadLookupStatus status;
 	QString statusString;
 	QString errorString;
 	QMap<QString,Vec3d> results;
+	QThread* parentThread;
 };
 
 SearchService::SearchService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
@@ -216,10 +233,19 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 			return;
 		}
 
-		//use qtconcurrent for a blocking lookup
+		//Using QtConcurrent is actually bad here!
+		//calling waitForFinished may cause the task to be executed in the current thread
+		//instead of a separate one, which CAN cause problems with the local event loop leading to crashes
+		//See qfutureinterface.cpp line 316 and https://bugreports.qt.io/browse/QTBUG-44296
+
+		//So we have to roll our own solution, using a mutex and a WaitCondition
+
 		SimbadLookupTask task(simbadServerUrl,str);
-		QFuture<void> future = QtConcurrent::run(&task,&SimbadLookupTask::run);
-		future.waitForFinished();
+		task.getMutex()->lock();
+
+		QThreadPool::globalInstance()->start(&task);
+		task.getFinishedCondition()->wait(task.getMutex());
+		task.getMutex()->unlock();
 
 		QJsonObject obj;
 		QString status;

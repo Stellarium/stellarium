@@ -189,6 +189,16 @@ select {
 	position: relative;
 }
 
+.center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.bold {
+	font-weight: bold;
+}
+
 .block {
 	position: relative;
 	padding: 15px;
@@ -565,6 +575,10 @@ header img {
 
 #srch_tab_list input.custom-combobox-input {
 	width: 90%;
+}
+
+#selection {
+	position: relative;
 }
 
 #sel_infostring {
