@@ -109,6 +109,9 @@ void HttpConnectionHandler::run() {
 
 
 void HttpConnectionHandler::handleConnection(tSocketDescriptor socketDescriptor) {
+	Q_ASSERT(QThread::currentThread() == this);
+	Q_ASSERT(this->thread() == this);
+
     qDebug("HttpConnectionHandler (%p): handle new connection", this);
     busy = true;
     Q_ASSERT(socket->isOpen()==false); // if not, then the handler is already busy
@@ -148,6 +151,9 @@ void HttpConnectionHandler::setBusy() {
 
 
 void HttpConnectionHandler::readTimeout() {
+	Q_ASSERT(QThread::currentThread() == this);
+	Q_ASSERT(this->thread() == this);
+
     qDebug("HttpConnectionHandler (%p): read timeout occured",this);
 
     //Commented out because QWebView cannot handle this.
@@ -160,6 +166,9 @@ void HttpConnectionHandler::readTimeout() {
 
 
 void HttpConnectionHandler::disconnected() {
+	Q_ASSERT(QThread::currentThread() == this);
+	Q_ASSERT(this->thread() == this);
+
     qDebug("HttpConnectionHandler (%p): disconnected", this);
     socket->close();
     readTimer.stop();
@@ -167,6 +176,9 @@ void HttpConnectionHandler::disconnected() {
 }
 
 void HttpConnectionHandler::read() {
+	Q_ASSERT(QThread::currentThread() == this);
+	Q_ASSERT(this->thread() == this);
+
     // The loop adds support for HTTP pipelinig
     while (socket->bytesAvailable()) {
         #ifdef SUPERVERBOSE
