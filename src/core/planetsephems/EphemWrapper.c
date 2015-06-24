@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2015 Holger Niessner
+Copyright (C) 2003 Fabien Chereau
+Copyright (C) 2015 Holger Niessner
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -26,6 +27,49 @@ extern "C" {
 #include "l1.h"
 #include "tass17.h"
 #include "gust86.h"
+#include "de431.h"
+#include "de430.h"
+
+void set_de430_status(int status)
+{
+	DE430_ACTIVE = status;
+}
+void set_de431_status(int status)
+{
+	DE431_ACTIVE = status;
+}
+
+void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
+{
+  	if(DE430_ACTIVE)
+  	{
+  		GetDe430Coor(jd, planet_id, xyz);
+  	}
+  	else if(DE431_ACTIVE)
+  	{
+  		GetDe431Coor(jd, planet_id, xyz);
+  	}
+	else //VSOP87 is fallback method
+	{
+  		GetVsop87Coor(jd, planet_id, xyz);
+  	}
+}
+
+void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], int planet_id)
+{
+  	if(DE430_ACTIVE)
+  	{
+  		GetDe430OsculatingCoor(jd0, jd, planet_id, xyz);
+  	}
+  	else if(DE431_ACTIVE)
+  	{
+  		GetDe431OsculatingCoor(jd0, jd, planet_id, xyz);
+  	}
+	else //VSOP87 is fallback method
+	{
+  		GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz);
+  	}
+}
 
 /* Chapter 31 Pg 206-207 Equ 31.1 31.2 , 31.3 using VSOP 87
  * Calculate planets rectangular heliocentric ecliptical coordinates
@@ -34,57 +78,109 @@ extern "C" {
 void get_pluto_helio_coords(double jd, double * X, double * Y, double * Z);
 
 void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
-  {get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);}
+	{get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);}
 
-
-/* Return 0 of course... */
+/* Return 0 for the sun */
 void get_sun_helio_coordsv(double jd,double xyz[3], void* unused)
-  {xyz[0]=0.; xyz[1]=0.; xyz[2]=0.;}
+	{xyz[0]=0.; xyz[1]=0.; xyz[2]=0.;}
 
 void get_mercury_helio_coordsv(double jd,double xyz[3], void* unused)
-  {GetVsop87Coor(jd,VSOP87_MERCURY,xyz);}
+{
+	get_planet_helio_coordsv(jd, xyz, EPHEM_MERCURY_ID);
+}
 void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
-  {GetVsop87Coor(jd,VSOP87_VENUS,xyz);}
+{
+	get_planet_helio_coordsv(jd, xyz, EPHEM_VENUS_ID);
+}
 
-void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) {
-  double moon[3];
-  GetVsop87Coor(jd,VSOP87_EMB,xyz);
-  GetElp82bCoor(jd,moon);
-    /* Earth != EMB:
-       0.0121505677733761 = mu_m/(1+mu_m),
-       mu_m = mass(moon)/mass(earth) = 0.01230002 */
-  xyz[0] -= 0.0121505677733761 * moon[0];
-  xyz[1] -= 0.0121505677733761 * moon[1];
-  xyz[2] -= 0.0121505677733761 * moon[2];
+void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) 
+  {
+  	if(DE430_ACTIVE)
+  	{
+  		GetDe430Coor(jd, EPHEM_EMB_ID, xyz);
+  	}
+  	else if(DE431_ACTIVE)
+  	{
+  		GetDe431Coor(jd, EPHEM_EMB_ID, xyz);
+  	}
+	else //VSOP87 is fallback method
+	{
+		double moon[3];
+		GetVsop87Coor(jd,EPHEM_EMB_ID,xyz);
+		GetElp82bCoor(jd,moon);
+		/* Earth != EMB:
+		0.0121505677733761 = mu_m/(1+mu_m),
+		mu_m = mass(moon)/mass(earth) = 0.01230002 */
+		xyz[0] -= 0.0121505677733761 * moon[0];
+		xyz[1] -= 0.0121505677733761 * moon[1];
+		xyz[2] -= 0.0121505677733761 * moon[2];
+	}
 }
 
 void get_mars_helio_coordsv(double jd,double xyz[3], void* unused)
-  {GetVsop87Coor(jd,VSOP87_MARS,xyz);}
+{
+	get_planet_helio_coordsv(jd, xyz, EPHEM_MARS_ID);
+}
+
 void get_jupiter_helio_coordsv(double jd,double xyz[3], void* unused)
-  {GetVsop87Coor(jd,VSOP87_JUPITER,xyz);}
+{
+	get_planet_helio_coordsv(jd, xyz, EPHEM_JUPITER_ID);
+}
+
 void get_saturn_helio_coordsv(double jd,double xyz[3], void* unused)
-  {GetVsop87Coor(jd,VSOP87_SATURN,xyz);}
+{
+	get_planet_helio_coordsv(jd, xyz, EPHEM_SATURN_ID);
+}
+
 void get_uranus_helio_coordsv(double jd,double xyz[3], void* unused)
-  {GetVsop87Coor(jd,VSOP87_URANUS,xyz);}
+{
+	get_planet_helio_coordsv(jd, xyz, EPHEM_URANUS_ID);
+}
+
 void get_neptune_helio_coordsv(double jd,double xyz[3], void* unused)
-  {GetVsop87Coor(jd,VSOP87_NEPTUNE,xyz);}
+{
+	get_planet_helio_coordsv(jd, xyz, EPHEM_NEPTUNE_ID);
+}
 
 void get_mercury_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_MERCURY,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MERCURY_ID);
+}
+
 void get_venus_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_VENUS,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_VENUS_ID);
+}
+
 void get_earth_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_EMB,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_EMB_ID);
+}
+
 void get_mars_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_MARS,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_MARS_ID);
+}
+
 void get_jupiter_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_JUPITER,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_JUPITER_ID);
+}
+
 void get_saturn_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_SATURN,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_SATURN_ID);
+}
+
 void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_URANUS,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_URANUS_ID);
+}
+
 void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
-  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_NEPTUNE,xyz);}
+{
+	get_planet_helio_osculating_coordsv(jd0, jd, xyz, EPHEM_NEPTUNE_ID);
+}
 
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
  * ecliptic and equinox of J2000.

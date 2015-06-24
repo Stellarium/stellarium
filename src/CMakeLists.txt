@@ -182,6 +182,11 @@ SET(stellarium_lib_SRCS
 	core/planetsephems/tass17.h
 	core/planetsephems/vsop87.c
 	core/planetsephems/vsop87.h
+	core/planetsephems/de430.c
+	core/planetsephems/de430.h
+	core/planetsephems/de431.c
+	core/planetsephems/de431.h
+
 
 	core/modules/Atmosphere.cpp
 	core/modules/Atmosphere.hpp

@@ -1,5 +1,6 @@
 /*
-Copyright (c) 2015 Holger Niessner
+Copyright (C) 2003 Fabien Chereau
+Copyright (C) 2015 Holger Niessner
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -33,6 +34,18 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define EPHEM_MERCURY_ID	0
+#define EPHEM_VENUS_ID		1
+#define EPHEM_EMB_ID		2
+#define EPHEM_MARS_ID		3
+#define EPHEM_JUPITER_ID	4
+#define EPHEM_SATURN_ID		5
+#define EPHEM_URANUS_ID		6
+#define EPHEM_NEPTUNE_ID	7
+
+static int DE430_ACTIVE = 0;
+static int DE431_ACTIVE = 0;
 
 void get_sun_helio_coordsv(double jd,double xyz[3], void*);
 void get_mercury_helio_coordsv(double jd,double xyz[3], void*);
