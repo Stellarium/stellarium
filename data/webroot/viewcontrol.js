@@ -6,6 +6,22 @@ var ViewControl = (new function($) {
     var updateTimeout;
     var isMoving;
 
+    var $view_fov;
+    var userSliding = false;
+    var minFov = 0.001389;
+    //TODO make this depend on current projection
+    var maxFov = 360;
+    var fovSteps = 1000;
+    var fovTimeout;
+    var fovXHR;
+
+    var lastServerFov;
+    var queuedFov;
+
+    var view_fov_text;
+    var view_projection;
+
+
     function move(x, y) {
 
         updateTimeout && clearTimeout(updateTimeout);
@@ -38,6 +54,67 @@ var ViewControl = (new function($) {
     function stopMovement() {
         if (isMoving)
             move(0, 0);
+    }
+
+    //sets the FOV slider from a given fov
+    function setFovSlider(fov) {
+        //inverse of handleFovSlide
+        var val = Math.pow(((fov - minFov) / (maxFov - minFov)), 1 / 4);
+
+        var slVal = Math.round(val * fovSteps);
+        console.log(slVal);
+        $view_fov.slider("value", slVal);
+    }
+
+    function setFovText(fov) {
+        view_fov_text.textContent = fov.toPrecision(3);
+    }
+
+    function handleFovSlide(val) {
+
+        var s = val / fovSteps;
+        var fov = minFov + Math.pow(s, 4) * (maxFov - minFov);
+
+        console.log(val + " / " + fov);
+
+        setFovText(fov);
+
+        queueFovUpdate(fov);
+    }
+
+    function queueFovUpdate(fov) {
+        queuedFov = fov;
+
+        if (!fovXHR)
+            fovServerUpdate();
+    }
+
+    function fovServerUpdate(noqueue) {
+        var fov = queuedFov;
+        fovXHR = $.ajax({
+            url: "/api/main/fov",
+            method: "POST",
+            data: {
+                fov: fov
+            },
+            success: function(data) {
+                lastServerFov = fov;
+                if (!noqueue) {
+                    fovTimeout = setTimeout(fovServerUpdate, 250);
+                }
+            }
+        });
+    }
+
+    function stopFovUpdate() {
+        fovTimeout && clearTimeout(fovTimeout);
+        if (fovXHR) {
+            fovXHR.abort();
+            fovXHR = undefined;
+        }
+        if(queuedFov !== lastServerFov) {
+            fovServerUpdate(true);
+        }
     }
 
     function initControls() {
@@ -74,12 +151,49 @@ var ViewControl = (new function($) {
         });
 
         $("#view_controls div").on("mouseup mouseleave", stopMovement);
+
+
+        $view_fov = $("#view_fov");
+        $view_fov.slider({
+            min: 0,
+            max: fovSteps,
+
+            slide: function(evt, ui) {
+                handleFovSlide(ui.value);
+            },
+            start: function(evt, ui) {
+                fovXHR = undefined;
+                lastServerFov = 0;
+                userSliding = true;
+                console.log("slide start");
+            },
+            stop: function(evt, ui) {
+                stopFovUpdate();
+                userSliding = false;
+                console.log("slide stop");
+            }
+        });
+
+        $("#view_center").click(function(evt) {
+            Actions.execute("actionGoto_Selected_Object");
+        });
+
+        view_fov_text = document.getElementById("view_fov_text");
+        view_projection = document.getElementById("view_projection");
     }
 
     //Public stuff
     return {
         init: function() {
             initControls();
+        },
+
+        updateFromServer(data) {
+            if (!userSliding) {
+                setFovText(data.fov);
+                setFovSlider(data.fov);
+            }
+            view_projection.textContent = data.projectionStr;
         }
     }
 }(jQuery));

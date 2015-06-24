@@ -34,15 +34,7 @@
       $("#scriptlist").dblclick(runscriptfn);
       $("#bt_runscript").click(runscriptfn);
       
-      var runactionfn = function() {
-        var $selection = $("#actionlist").find("option").filter(":selected");
-        var id = $selection.data("id");
-        
-        Actions.execute(id);
-      }
       
-      $("#actionlist").dblclick(runactionfn);
-      $("#bt_doaction").click(runactionfn);
       
       $("#bt_stopscript").click(function(){
         //post a stop request
@@ -215,7 +207,12 @@
     <section id="view" class="block">
       <header><h2>View</h2></header>
       <div id="view_controls" class="ui-corner-all ui-widget-content">
-        <div id="view_upleft" class="joybutton"/>Up/Left</div><div id="view_up" class="joybutton">Up</div><div id="view_upright" class="joybutton">Up/Right</div><div id="view_left" class="joybutton">Left</div><div id="view_center" class="joybutton">Focus on selection</div><div id="view_right" class="joybutton">Right</div><div id="view_downleft" class="joybutton">Down/Left</div><div id="view_down" class="joybutton">Down</div><div id="view_downright" class="joybutton">Down/Right</div>
+        <div id="view_upleft" class="joybutton"/>Up/Left</div><div id="view_up" class="joybutton">Up</div><div id="view_upright" class="joybutton">Up/Right</div><div id="view_left" class="joybutton">Left</div><div id="view_center" class="joybutton" title="Focus on selected object">Focus on selection</div><div id="view_right" class="joybutton">Right</div><div id="view_downleft" class="joybutton">Down/Left</div><div id="view_down" class="joybutton">Down</div><div id="view_downright" class="joybutton">Down/Right</div>
+      </div>
+      <div id="view_wrapper">
+        <div id="view_fov"></div>
+        <p>FOV: <span id="view_fov_text"></span></p>
+        <p>Projection: <span id="view_projection"></span></p>
       </div>
     </section>
     <section id="scripts" class="block">

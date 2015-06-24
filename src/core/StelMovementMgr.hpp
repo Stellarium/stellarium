@@ -182,6 +182,9 @@ public slots:
 	//! Get the maximum field of View in degrees.
 	double getMaxFov(void) const {return maxFov;}
 
+	//! Get the minimum field of View in degrees.
+	double getMinFov(void) const {return minFov;}
+
 	//! Go and zoom to the selected object. A later call to autoZoomOut will come back to the previous zoom level.
 	void autoZoomIn(float moveDuration = 1.f, bool allowManualZoom = 1);
 	//! Unzoom to the previous position.

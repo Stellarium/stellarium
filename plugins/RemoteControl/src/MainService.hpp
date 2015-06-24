@@ -56,6 +56,8 @@ private slots:
 
 	void updateMovement(int x, int y, bool xUpdated, bool yUpdated);
 
+	void setFov(double fov);
+
 private:
 	StelCore* core;
 	StelLocaleMgr* localeMgr;
