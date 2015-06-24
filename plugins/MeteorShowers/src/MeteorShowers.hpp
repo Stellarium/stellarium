@@ -23,8 +23,8 @@
 
 #include <QColor>
 
+#include "MeteorObj.hpp"
 #include "MeteorShower.hpp"
-#include "MeteorStream.hpp"
 #include "StelObjectModule.hpp"
 
 class MeteorShowerDialog;
@@ -323,7 +323,7 @@ private:
 	QSettings* conf;
 
 	//MS
-	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
+	std::vector<std::vector<MeteorObj*> > active;		// Matrix containing all active meteors
 
 	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 
@@ -344,7 +344,7 @@ private:
 		float radiantAlpha;		//! R.A. for radiant of meteor shower
 		float radiantDelta;		//! Dec. for radiant of meteor shower
 		float pidx;			//! Population index
-		QList<MeteorShower::colorPair> colors;	//! Population index
+		QList<Meteor::colorPair> colors; //! Meteor colors
 	} activeData;
 
 	QList<activeData> activeInfo;	//! List of active meteors

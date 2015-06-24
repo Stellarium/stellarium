@@ -388,7 +388,7 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 		{
 			Q_UNUSED(a);
 			// step through and draw all active meteors
-			std::vector<MeteorStream*>::iterator iter;
+			std::vector<MeteorObj*>::iterator iter;
 			for (iter = active[index].begin(); iter != active[index].end(); ++iter)
 			{
 				(*iter)->draw(core, painter);
@@ -562,8 +562,8 @@ void MeteorShowers::update(double deltaTime)
 		}
 	}
 
-	std::vector<std::vector<MeteorStream*> >::iterator iterOut;
-	std::vector<MeteorStream*>::iterator iterIn;
+	std::vector<std::vector<MeteorObj*> >::iterator iterOut;
+	std::vector<MeteorObj*>::iterator iterIn;
 	index = 0;
 	if (active.size() > 0)
 	{
@@ -592,7 +592,7 @@ void MeteorShowers::update(double deltaTime)
 	index = 0;
 	foreach (const activeData &current, activeInfo)
 	{
-		std::vector<MeteorStream*> aux;
+		std::vector<MeteorObj*> aux;
 		if (active.empty() || active.size() < (unsigned) activeInfo.size())
 		{
 			if(tspeed<0 || fabs(tspeed)>1.)
@@ -622,13 +622,8 @@ void MeteorShowers::update(double deltaTime)
 			double prob = ((double)qrand())/RAND_MAX;
 			if (ZHR>0 && prob<((double)ZHR*ZHR_TO_WSR*deltaTime/1000.0/(double)mpf))
 			{
-				MeteorStream *m = new MeteorStream(core,
-								   current.speed,
-								   current.radiantAlpha,
-								   current.radiantDelta,
-								   current.pidx,
-								   current.colors,
-								   m_bolideTexture);
+				MeteorObj *m = new MeteorObj(core, current.speed, current.radiantAlpha, current.radiantDelta,
+							     current.pidx, current.colors, m_bolideTexture);
 				active[index].push_back(m);
 			}
 		}
