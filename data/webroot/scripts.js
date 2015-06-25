@@ -7,23 +7,44 @@ var Scripts = (new function($) {
     var $bt_stopscript;
     var $scriptlist;
 
+    function initControls() {
+        $scriptlist = $("#scriptlist");
+        $bt_runscript = $("#bt_runscript");
+        $bt_stopscript = $("#bt_stopscript");
+        $activescript = $("#activescript");
+
+        var runscriptfn = function() {
+            var selection = $scriptlist.children("option").filter(":selected").text();
+            if (selection) {
+                //post a run requests
+                Main.postCmd("/api/scripts/run", {
+                    id: selection
+                });
+            }
+        };
+
+        $scriptlist.change(function() {
+            var selection = $scriptlist.children("option").filter(":selected").text();
+
+            $bt_runscript.prop({
+                disabled: false
+            });
+            console.log("selected: " + selection);
+        }).dblclick(runscriptfn);
+
+        $bt_runscript.dblclick(runscriptfn);
+
+        $bt_stopscript.click(function() {
+            //post a stop request
+            Main.postCmd("/api/scripts/stop");
+        });
+    }
+
     //Public stuff
     return {
         init: function() {
 
-            $scriptlist = $("#scriptlist");
-            $bt_runscript = $("#bt_runscript");
-            $bt_stopscript = $("#bt_stopscript");
-            $activescript = $("#activescript");
-
-            $scriptlist.change(function() {
-                var selection = $scriptlist.children("option").filter(":selected").text();
-
-                $("#bt_runscript").prop({
-                    disabled: false
-                });
-                console.log("selected: " + selection);
-            });
+            initControls();
 
             //init script list
             $.ajax({

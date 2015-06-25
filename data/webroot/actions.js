@@ -4,22 +4,33 @@ var Actions = (new function($) {
     //Private variables
     var $actionlist;
 
+    var actionData = {};
+
     function initControls() {
         $actionlist = $("#actionlist");
 
-        $actionlist.change(function() {
-            $("#bt_doaction").prop("disabled", false);
-        });
-
         var runactionfn = function() {
-            var $selection = $("#actionlist").find("option").filter(":selected");
-            var id = $selection.data("id");
+            var e = $actionlist[0];
+            var id = e.options[e.selectedIndex].value;
 
             Actions.execute(id);
         }
 
-        $("#actionlist").dblclick(runactionfn);
+        $actionlist.change(function() {
+            $("#bt_doaction").prop("disabled", false);
+        }).dblclick(runactionfn);
+
         $("#bt_doaction").click(runactionfn);
+    }
+
+    function fireActionChanged(actionId) {
+        console.log("stelActionChanged: " + actionId);
+        $(document).trigger("stelActionChanged", { id: actionId, isChecked: actionData[actionId].isChecked });
+    }
+
+    function handleActionChanged(evt,data) {
+        var action = actionData[data.id];
+        action.option.textContent = action.text + " (" + data.isChecked + ")";
     }
 
     function fillActionList() {
@@ -28,32 +39,39 @@ var Actions = (new function($) {
             url: "/api/stelaction/list",
             success: function(data) {
                 $actionlist.empty();
+                actionData = {};
 
                 $.each(data, function(key, val) {
                     //the key is an optgroup
                     var group = $("<optgroup/>").attr("label", key);
                     //the val is an array of StelAction objects
                     $.each(val, function(idx, v2) {
-                        var option = $("<option/>");
-                        option.data(v2); //store the data
-                        if (v2.isCheckable) {
-                            option.addClass("checkableaction");
-                            option.text(v2.text + " (" + v2.isChecked + ")");
 
-                            $actionlist.on("action:" + v2.id, {
-                                elem: option
-                            }, function(event, newValue) {
-                                var el = event.data.elem;
-                                el.data("isChecked", newValue);
-                                el.text(el.data("text") + " (" + newValue + ")");
-                            });
+                        var option = document.createElement("option");
+
+                        actionData[v2.id] = {
+                            isCheckable: v2.isCheckable,
+                            isChecked: v2.isChecked,
+                            text: v2.text,
+                            option: option
+                        };
+            
+                        option.value = v2.id;
+
+                        if (v2.isCheckable) {
+                            option.className = "checkableaction";
+                            option.textContent = v2.text + " (" + v2.isChecked + ")";
+
+                            fireActionChanged(v2.id);
                         } else {
-                            option.text(v2.text);
+                            option.textContent = v2.text;
                         }
-                        option.appendTo(group);
+
+                        group.append(option);
                     });
                     group.appendTo($actionlist);
                 });
+                console.log("initial action load completed");
             },
             error: function(xhr, status, errorThrown) {
                 console.log("Error updating action list");
@@ -69,8 +87,26 @@ var Actions = (new function($) {
         init: function() {
 
             initControls();
-            fillActionList();
 
+            fillActionList();
+            //attach handler after filling to prevent unnessecary calls
+            $(document).on("stelActionChanged",handleActionChanged);
+
+        },
+
+        updateFromServer: function(changes) {
+            var error = false;
+            for (var name in changes) {
+                if (name in actionData) {
+                    if (changes[name] !== actionData[name].isChecked) {
+                        actionData[name].isChecked = changes[name];
+                        fireActionChanged(name);
+                    }
+                }
+                else error = true;
+            }
+
+            return error;
         },
 
         //Trigger an StelAction on the Server
@@ -78,18 +114,23 @@ var Actions = (new function($) {
             $.ajax({
                 url: "/api/stelaction/do",
                 method: "POST",
-                async: false,
                 dataType: "text",
                 data: {
                     id: actionName
                 },
                 success: function(resp) {
                     if (resp === "ok") {
-                        //non-checkable action, cant change text
+                        //non-checkable action, dont fire an event
                     } else if (resp === "true") {
-                        $actionlist.trigger("action:" + actionName, true);
+                        if (!actionData[actionName].isChecked) {
+                            actionData[actionName].isChecked = true;
+                            fireActionChanged(actionName);
+                        }
                     } else if (resp === "false") {
-                        $actionlist.trigger("action:" + actionName, false);
+                        if (actionData[actionName].isChecked) {
+                            actionData[actionName].isChecked = false;
+                            fireActionChanged(actionName);
+                        }
                     } else {
                         alert(resp);
                     }

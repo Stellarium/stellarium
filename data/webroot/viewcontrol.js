@@ -62,7 +62,6 @@ var ViewControl = (new function($) {
         var val = Math.pow(((fov - minFov) / (maxFov - minFov)), 1 / 4);
 
         var slVal = Math.round(val * fovSteps);
-        console.log(slVal);
         $view_fov.slider("value", slVal);
     }
 

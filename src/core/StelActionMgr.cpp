@@ -196,6 +196,7 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
 {
 	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
 	action->connectToObject(target, slot);
+	connect(action,SIGNAL(toggled(bool)),this,SLOT(onStelActionToggled(bool)));
 	return action;
 }
 
@@ -253,6 +254,11 @@ QList<StelAction*> StelActionMgr::getActionList(const QString& group) const
 	return ret;
 }
 
+QList<StelAction*> StelActionMgr::getActionList() const
+{
+	return findChildren<StelAction*>();
+}
+
 void StelActionMgr::saveShortcuts()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -280,4 +286,10 @@ void StelActionMgr::restoreDefaultShortcuts()
 		emit action->changed();
 	}
 	saveShortcuts();
+}
+
+void StelActionMgr::onStelActionToggled(bool val)
+{
+	StelAction* action = qobject_cast<StelAction*>(sender());
+	emit actionToggled(action->getId(),val);
 }

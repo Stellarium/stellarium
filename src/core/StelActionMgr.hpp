@@ -131,19 +131,31 @@ public:
 	StelAction* findAction(const QString& id);
 	bool pushKey(int key, bool global=false);
 
+	//! Returns a list of all current StelAction groups
 	QStringList getGroupList() const;
+	//! Returns all StelActions in the specified group
 	QList<StelAction*> getActionList(const QString& group) const;
+	//! Returns all registered StelActions
+	QList<StelAction*> getActionList() const;
 
 	//! Save current shortcuts to file.
 	void saveShortcuts();
 	//! Restore the default shortcuts combinations
 	void restoreDefaultShortcuts();
 
+signals:
+	//! Emitted when any action is toggled
+	void actionToggled(const QString& id, bool value);
+
 public slots:
 	//! Enable/disable all actions of application.
 	//! need for editing shortcuts without trigging any actions
 	//! @todo find out if this is really necessary and why.
 	void setAllActionsEnabled(bool value) {actionsEnabled = value;}
+
+private slots:
+	void onStelActionToggled(bool val);
+
 private:
 	bool actionsEnabled;
 	QList<int> keySequence;

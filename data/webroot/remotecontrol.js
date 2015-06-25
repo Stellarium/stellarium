@@ -28,6 +28,9 @@ var Main = (new function($) {
     var animationSupported;
     var lastDataTime;
 
+    //keeps track of StelAction updates from server
+    var lastActionId = -2;
+
     //controls
     var $noresponse;
     var $noresponsetime;
@@ -55,15 +58,17 @@ var Main = (new function($) {
     function update(requeue) {
         $.ajax({
             url: "/api/main/status",
+            data: {
+                actionId: lastActionId
+            },
             dataType: "json",
             success: function(data) {
                 lastDataTime = $.now();
 
-                if(data.selectioninfo) {
+                if (data.selectioninfo) {
                     sel_infostring.innerHTML = data.selectioninfo;
                     sel_infostring.className = "";
-                }
-                else {
+                } else {
                     sel_infostring.innerHTML = "No current selection";
                     sel_infostring.className = "bold";
                 }
@@ -75,12 +80,23 @@ var Main = (new function($) {
                 Locations.updateFromServer(data.location);
                 ViewControl.updateFromServer(data.view);
 
+                if (data.actionChanges.id !== lastActionId) {
+                    var error = Actions.updateFromServer(data.actionChanges.changes);
+                    if (error) {
+                        //this is required to make sure the actions are loaded first
+                        console.log("action change error, resending same id");
+                    } else {
+                        lastActionId = data.actionChanges.id;
+                    }
+                }
+
                 $noresponse.hide();
                 connectionLost = false;
             },
             error: function(xhr, status, errorThrown) {
                 $noresponse.show();
                 connectionLost = true;
+                lastActionId = -2;
                 console.log("Error fetching updates");
                 console.log("Error: " + errorThrown);
                 console.log("Status: " + status);
@@ -138,6 +154,27 @@ var Main = (new function($) {
 */
     }
 
+    function initControls() {
+        //find some controls
+        $noresponse = $("#noresponse");
+        $noresponsetime = $("#noresponsetime");
+
+        sel_infostring = document.getElementById("sel_infostring");
+
+        var $loading = $("#loadindicator").hide(),
+            timer;
+        $(document).ajaxStart(function() {
+            timer && clearTimeout(timer);
+            timer = setTimeout(function() {
+                $loading.show();
+            }, 100)
+        });
+        $(document).ajaxStop(function() {
+            clearTimeout(timer);
+            $loading.hide();
+        });
+    }
+
     //an simple Update queue class that updates the server after a specified interval if the user does nothing else inbetween
     function UpdateQueue(url, finishedCallback) {
         if (!(this instanceof UpdateQueue))
@@ -171,9 +208,7 @@ var Main = (new function($) {
     //Public stuff
     return {
         init: function() {
-            window.console.profile();
-
-            sel_infostring = document.getElementById("sel_infostring");
+            initControls();
 
             Actions.init();
             Scripts.init();
@@ -193,10 +228,6 @@ var Main = (new function($) {
             }
             //kick off animation
             animate();
-
-            //find some controls
-            $noresponse = $("#noresponse");
-            $noresponsetime = $("#noresponsetime");
 
             //start the update loop
             update(true);

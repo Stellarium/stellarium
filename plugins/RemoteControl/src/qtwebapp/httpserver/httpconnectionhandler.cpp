@@ -112,7 +112,7 @@ void HttpConnectionHandler::handleConnection(tSocketDescriptor socketDescriptor)
 	Q_ASSERT(QThread::currentThread() == this);
 	Q_ASSERT(this->thread() == this);
 
-    qDebug("HttpConnectionHandler (%p): handle new connection", this);
+    qDebug("HttpConnectionHandler (%p): handle new connection (%d)", this, socketDescriptor);
     busy = true;
     Q_ASSERT(socket->isOpen()==false); // if not, then the handler is already busy
 
