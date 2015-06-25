@@ -25,7 +25,12 @@
 #include "StelObjectType.hpp"
 #include "VecMath.hpp"
 
+#include <QContiguousCache>
+#include <QJsonObject>
+#include <QMutex>
+
 class StelCore;
+class StelActionMgr;
 class StelLocaleMgr;
 class StelMovementMgr;
 class StelObjectMgr;
@@ -55,11 +60,13 @@ private slots:
 	void focusPosition(const Vec3d& pos);
 
 	void updateMovement(int x, int y, bool xUpdated, bool yUpdated);
-
 	void setFov(double fov);
+
+	void actionToggled(const QString& id, bool val);
 
 private:
 	StelCore* core;
+	StelActionMgr* actionMgr;
 	StelLocaleMgr* localeMgr;
 	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;
@@ -67,6 +74,19 @@ private:
 
 	int moveX,moveY;
 	qint64 lastMoveUpdateTime;
+
+	struct ActionCacheEntry
+	{
+		ActionCacheEntry(const QString& str,bool val) : action(str),val(val) {}
+		QString action;
+		bool val;
+	};
+
+	//lists the recently toggled actions - this is a pseudo-circular buffer
+	QContiguousCache<ActionCacheEntry> actionCache;
+	QMutex actionMutex;
+
+	QJsonObject getActionChangesSinceID(int changeId);
 
 };
 
