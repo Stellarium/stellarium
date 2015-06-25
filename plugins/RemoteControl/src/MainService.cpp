@@ -20,6 +20,7 @@
 #include "MainService.hpp"
 
 #include "StelApp.hpp"
+#include "StelActionMgr.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainView.hpp"
@@ -32,14 +33,24 @@
 
 #include <QJsonDocument>
 
-MainService::MainService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent), moveX(0),moveY(0),lastMoveUpdateTime(0)
+
+MainService::MainService(const QByteArray &serviceName, QObject *parent)
+	: AbstractAPIService(serviceName,parent),
+	  moveX(0),moveY(0),lastMoveUpdateTime(0)
 {
+	//100 should be more than enough
+	//this only has to emcompass events that occur between 2 status updates
+	actionCache.setCapacity(100);
+
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
+	actionMgr =  StelApp::getInstance().getStelActionManager();
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
+
+	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
 
 	Q_ASSERT(this->thread()==objMgr->thread());
 }
@@ -113,6 +124,10 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 	if(operation=="status")
 	{
 		//a listing of the most common stuff that can change often
+
+		QString sActionId = QString::fromUtf8(parameters.value("actionId"));
+		bool actionOk;
+		int actionId = sActionId.toInt(&actionOk);
 
 		QJsonObject obj;
 
@@ -195,6 +210,12 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 			obj2.insert("projectionStr",core->projectionTypeKeyToNameI18n(str));
 
 			obj.insert("view",obj2);
+		}
+
+		//// Info about changed actions (if requested)
+		{
+			if(actionOk)
+				obj.insert("actionChanges",getActionChangesSinceID(actionId));
 		}
 
 		writeJSON(QJsonDocument(obj),response);
@@ -409,3 +430,80 @@ void MainService::setFov(double fov)
 	mvmgr->zoomTo(fov,0.25f);
 }
 
+void MainService::actionToggled(const QString &id, bool val)
+{
+	actionMutex.lock();
+	actionCache.append(ActionCacheEntry(id,val));
+	if(!actionCache.areIndexesValid())
+	{
+		//in theory, this can happen, but practically not so much
+		qWarning()<<"Action cache indices invalid, clearing whole cache";
+		actionCache.clear();
+	}
+	actionMutex.unlock();
+}
+
+QJsonObject MainService::getActionChangesSinceID(int changeId)
+{
+	//changeId is the last id the interface is available
+	//or -2 if the interface just started
+	// -1 means the initial state was set
+
+	QJsonObject obj;
+	QJsonObject changes;
+	int newId = changeId;
+
+
+	actionMutex.lock();
+	if(actionCache.isEmpty())
+	{
+		if(changeId!=-1)
+		{
+			//this is either the initial state (-2) or
+			//something is "broken", probably from an existing web interface that reconnected after restart
+			//force a full reload
+
+			foreach(StelAction* ac, actionMgr->getActionList())
+			{
+				if(ac->isCheckable())
+				{
+					changes.insert(ac->getId(),ac->isChecked());
+				}
+			}
+			newId = -1;
+		}
+	}
+	else
+	{
+		if(changeId > actionCache.lastIndex() || changeId < (actionCache.firstIndex()-1))
+		{
+			//this is either the initial state (-2) or
+			//"broken" state again, force full reload
+			foreach(StelAction* ac, actionMgr->getActionList())
+			{
+				if(ac->isCheckable())
+				{
+					changes.insert(ac->getId(),ac->isChecked());
+				}
+			}
+			newId = actionCache.lastIndex();
+		}
+		else if(changeId < actionCache.lastIndex())
+		{
+			//create a "diff" between changeId to lastIndex
+			for(int i = changeId+1;i<=actionCache.lastIndex();++i)
+			{
+				const ActionCacheEntry& e = actionCache.at(i);
+				changes.insert(e.action,e.val);
+			}
+			newId = actionCache.lastIndex();
+		}
+		//else no changes happened, interface is at current state!
+	}
+	actionMutex.unlock();
+
+	obj.insert("changes",changes);
+	obj.insert("id",newId);
+
+	return obj;
+}

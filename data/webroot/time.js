@@ -54,6 +54,136 @@ var Time = (new function($) {
 
         $input_jd = $("#input_jd");
         $input_mjd = $("#input_mjd");
+
+
+        $("#bt_timerewind").click(Time.decreaseTimeRate);
+        $("#bt_timeforward").click(Time.increaseTimeRate);
+        $("#bt_timeplaypause").click(Time.togglePlayPause);
+        $("#bt_timenow").click(Time.setDateNow);
+
+        //jQuery UI initialization
+        $("#timewidget").tabs();
+
+        $("#date_year").spinner({
+            min: -100000,
+            max: 100000
+        }).data({
+            type: "date",
+            field: "year"
+        });
+        $("#date_month").spinner({
+            min: 0,
+            max: 13
+        }).data({
+            type: "date",
+            field: "month"
+        });
+        $("#date_day").spinner({
+            min: 0,
+            max: 32
+        }).data({
+            type: "date",
+            field: "day"
+        });
+        $("#time_hour").spinner({
+            min: -1,
+            max: 24
+        }).data({
+            type: "time",
+            field: "hour"
+        });
+        $("#time_minute").spinner({
+            min: -1,
+            max: 60
+        }).data({
+            type: "time",
+            field: "minute"
+        });
+        $("#time_second").spinner({
+            min: -1,
+            max: 60
+        }).data({
+            type: "time",
+            field: "second"
+        });
+        $("#input_jd").spinner({
+            min: -100000000,
+            max: 100000000,
+            numberFormat: "d5",
+            step: 0.00001
+        });
+        $("#input_mjd").spinner({
+            min: -100000000,
+            max: 100000000,
+            numberFormat: "d5",
+            step: 0.00001
+        });
+
+        //use delegated event style here to reduce number of unique events
+        var scope = ".timedisplay input";
+        $("#timewidget").on("focusin", scope, function(evt) {
+            Time.enterTimeEditMode();
+        }).on("focusout", scope, function(evt) {
+            Time.leaveTimeEditMode();
+        });
+
+        $("#time_local").on('input', scope, function() {
+            if ($(this).data('onInputPrevented')) return;
+            var val = this.value,
+                $this = $(this),
+                max = $this.spinner('option', 'max'),
+                min = $this.spinner('option', 'min');
+            console.log("val: " + val);
+            if (!val.match(/^\d+$/)) val = $this.data('prevData'); //we want only number, no alpha
+            val = parseFloat(val);
+            this.value = val > max ? max : val < min ? min : val;
+            //for some obscure reason, this.value may be a string instead of a float, so use val directly!
+            if (val !== $this.data('prevData')) Time.setDateTimeField($(this).data("type"), $(this).data("field"), val);
+        }).on('keydown', scope, function(e) { // to allow 'Backspace' key behaviour
+            $(this).data('onInputPrevented', e.which === 8 ? true : false);
+            $(this).data('prevData', this.value);
+        }).on("spin", scope, function(evt, ui) {
+            Time.setDateTimeField($(this).data("type"), $(this).data("field"), ui.value);
+            return false;
+        });
+
+        $("#input_jd").on('input', function() {
+            if ($(this).data('onInputPrevented')) return;
+            var val = this.value,
+                $this = $(this),
+                max = $this.spinner('option', 'max'),
+                min = $this.spinner('option', 'min');
+            console.log("val: " + val);
+            if (!val.match(/^\d+\.?\d*$/)) val = $this.data('prevData'); //we want only number, no alpha
+            var val2 = parseFloat(val);
+            this.value = val2 > max ? max : val2 < min ? min : val2;
+            //for some obscure reason, this.value may be a string instead of a float, so use val directly!
+            if (val !== $this.data('prevData')) Time.setJDay(val2);
+        }).on('keydown', function(e) { // to allow 'Backspace' key behaviour
+            $(this).data('onInputPrevented', e.which === 8 ? true : false);
+            $(this).data('prevData', this.value);
+        }).on("spin", function(evt, ui) {
+            Time.setJDay(ui.value);
+        });
+
+        $("#input_mjd").on('input', function() {
+            if ($(this).data('onInputPrevented')) return;
+            var val = this.value,
+                $this = $(this),
+                max = $this.spinner('option', 'max'),
+                min = $this.spinner('option', 'min');
+            console.log("val: " + val);
+            if (!val.match(/^\d+\.?\d*$/)) val = $this.data('prevData'); //we want only number, no alpha
+            var val2 = parseFloat(val);
+            this.value = val2 > max ? max : val2 < min ? min : val2;
+            //for some obscure reason, this.value may be a string instead of a float, so use val directly!
+            if (val !== $this.data('prevData')) Time.setJDay(val2 + 2400000.5);
+        }).on('keydown', function(e) { // to allow 'Backspace' key behaviour
+            $(this).data('onInputPrevented', e.which === 8 ? true : false);
+            $(this).data('prevData', this.value);
+        }).on("spin", function(evt, ui) {
+            Time.setJDay(ui.value + 2400000.5);
+        });
     }
 
     function animate() {
@@ -418,7 +548,9 @@ var Time = (new function($) {
         timeData.jday = newJD;
 
         forceSpinnerUpdate();
-        updateQueue.enqueue({time: newJD});
+        updateQueue.enqueue({
+            time: newJD
+        });
     }
 
     //Public stuff
@@ -505,7 +637,9 @@ var Time = (new function($) {
                 resyncTime();
                 timeData.jday = val;
 
-                updateQueue.enqueue({time: val});
+                updateQueue.enqueue({
+                    time: val
+                });
             }
         },
 
