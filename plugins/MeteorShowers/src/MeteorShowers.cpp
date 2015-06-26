@@ -119,7 +119,6 @@ MeteorShowers::~MeteorShowers()
 		delete OffIcon;
 	}
 
-	active.clear();
 	activeInfo.clear();
 }
 
