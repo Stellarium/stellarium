@@ -117,9 +117,13 @@ public:
 	QColor getColorIR() { return colorIR; }
 	void setColorIR(QColor color) { colorIR = color; }
 
-	//! Get the label font size.
-	//! @return the pixel size of the font
-	int getLabelFontSize() { return labelFont.pixelSize(); }
+	//! Get the label font
+	//! @return QFont
+	QFont getLabelFont() { return labelFont; }
+
+	//! Get bolide texture
+	//! @return texture
+	StelTextureSP getBolideTexture() { return m_bolideTexture; }
 
 	//! Get status of labels
 	//! @return false: hidden
@@ -227,7 +231,7 @@ private:
 	void drawRadiant(StelCore* core, StelPainter& painter);
 
 	//! Draw pointer
-	void drawPointer(StelCore* core, StelPainter& painter);
+	void drawPointer(StelCore* core);
 
 	//! Draw meteor stream
 	void drawStream(StelCore* core, StelPainter& painter);
@@ -239,14 +243,6 @@ private:
 	//! @param core
 	//! @return if changed, return true
 	bool changedSkyDate(StelCore* core);
-
-	//! Calculate value of ZHR using normal distribution
-	//! @param zhr
-	//! @param variable
-	//! @param start
-	//! @param finish
-	//! @param peak
-	int calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak);
 
 	//! Update the list with information about active meteors
 	//! @param core
@@ -286,11 +282,11 @@ private:
 	//! place.)
 	static void translations();
 
-	//! Font used for displaying our text
 	QFont labelFont;
 
 	QString showersJsonPath;
 
+	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 	StelTextureSP texPointer;
 	QList<MeteorShowerP> mShowers;
 
@@ -322,10 +318,8 @@ private:
 
 	QSettings* conf;
 
-	//MS
-	std::vector<std::vector<MeteorObj*> > active;		// Matrix containing all active meteors
 
-	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
+	std::vector<std::vector<MeteorObj*> > active;		// Matrix containing all active meteors
 
 	bool flagShowARG;  //! Show marker of active radiant based on generic data
 	bool flagShowARR;  //! Show marker of active radiant based on generic data

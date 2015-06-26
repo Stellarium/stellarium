@@ -25,7 +25,6 @@
 #include <QTimer>
 
 #include "LabelMgr.hpp"
-#include "LandscapeMgr.hpp"
 #include "MeteorShowerDialog.hpp"
 #include "MeteorShowers.hpp"
 #include "Planet.hpp"
@@ -39,6 +38,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelUtils.hpp"
 #include "SporadicMeteorMgr.hpp"
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
@@ -300,43 +300,24 @@ void MeteorShowers::draw(StelCore* core)
 		return;
 	}
 
-	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
-	drawRadiant(core, painter);
+	foreach (const MeteorShowerP& ms, mShowers)
+	{
+		if (ms && ms->initialized && ms->active)
+		{
+			ms->draw(core);
+		}
+	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 	{
-		drawPointer(core, painter);
+		drawPointer(core);
 	}
-
-	painter.setProjector(core->getProjection(StelCore::FrameAltAz));
-	drawStream(core, painter);
 }
 
-void MeteorShowers::drawRadiant(StelCore* core, StelPainter& painter)
-{
-	Q_UNUSED(core);
-	painter.setFont(labelFont);
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	glEnable(GL_TEXTURE_2D);
-
-	foreach (const MeteorShowerP& ms, mShowers)
-	{
-		ms->updateCurrentData(skyDate);
-
-		if (ms && ms->initialized && ms->active)
-		{
-			ms->draw(painter);
-		}
-	}
-	glDisable(GL_TEXTURE_2D);
-}
-
-void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
+void MeteorShowers::drawPointer(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
+	StelPainter painter(prj);
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("MeteorShower");
 	if (!newSelected.empty())
 	{
@@ -366,86 +347,6 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10.f, -180);
 		painter.setColor(1,1,1,0);
 	}
-}
-
-void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
-{
-	if (!core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-		return;
-	}
-
-	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
-	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
-	{
-		return;
-	}
-
-	int index = 0;
-	if (active.size() > 0)
-	{
-		foreach (const activeData &a, activeInfo)
-		{
-			Q_UNUSED(a);
-			// step through and draw all active meteors
-			std::vector<MeteorObj*>::iterator iter;
-			for (iter = active[index].begin(); iter != active[index].end(); ++iter)
-			{
-				(*iter)->draw(core, painter);
-			}
-			index++;
-		}
-	}
-}
-
-int MeteorShowers::calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak)
-{
-	/***************************************
-	 * Get ZHR ranges
-	 ***************************************/
-	int highZHR;
-	int lowZHR;
-	//bool multPeak = false; //multiple peaks
-	if (zhr != -1)  //isn't variable
-	{
-		highZHR = zhr;
-		lowZHR = 0;
-	}
-	else
-	{
-		QStringList varZHR = variable.split("-");
-		lowZHR = varZHR.at(0).toInt();
-		if (varZHR.at(1).contains("*"))
-		{
-			//multPeak = true;
-			highZHR = varZHR[1].replace("*", "").toInt();
-		}
-		else
-		{
-			highZHR = varZHR.at(1).toInt();
-		}
-	}
-
-	/***************************************
-	 * Convert time intervals
-	 ***************************************/
-	double startJD = StelUtils::qDateTimeToJd(start);
-	double finishJD = StelUtils::qDateTimeToJd(finish);
-	double peakJD = StelUtils::qDateTimeToJd(peak);
-	double currentJD = StelUtils::qDateTimeToJd(skyDate);
-
-	/***************************************
-	 * Gaussian distribution
-	 ***************************************/
-	double sd; //standard deviation
-	if (currentJD >= startJD && currentJD < peakJD) //left side of gaussian
-		sd = (peakJD - startJD)/2;
-	else
-		sd = (finishJD - peakJD)/2;
-
-	double gaussian = highZHR * qExp( - qPow(currentJD - peakJD, 2) / (sd*sd) ) + lowZHR;
-
-	return (int) ((int) ((gaussian - (int) gaussian) * 10) >= 5 ? gaussian+1 : gaussian);
 }
 
 void MeteorShowers::updateActiveInfo(void)
@@ -508,126 +409,39 @@ void MeteorShowers::update(double deltaTime)
 
 	StelCore* core = StelApp::getInstance().getCore();
 
-	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
+	double tspeed = core->getTimeRate() * 86400.0;  // sky seconds per actual second
 	if (!tspeed) { // is paused?
 		return; // freeze meteors at the current position
 	}
 
-	deltaTime*=1000;
+	deltaTime *= 1000.0;
+
 	// if stellarium has been suspended, don't create huge number of meteors to
 	// make up for lost time!
-	if (deltaTime > 500)
+	if (deltaTime > 500.0)
 	{
-		deltaTime = 500;
+		deltaTime = 500.0;
 	}
-
-	QList<activeData> old_activeInfo;
 
 	//check if the sky date changed
 	if (changedSkyDate(core))
 	{
-		// clear data of all MS active
-		old_activeInfo = activeInfo;
-		activeInfo.clear();
-
 		// Is GUI visible and the year changed? refresh ranges
 		if (configDialog->visible() && lastSkyDate.toString("yyyy") != skyDate.toString("yyyy"))
+		{
 			configDialog->refreshRangeDates();
-	}
-
-	// fill `activeInfo` with all current active meteor showers
-	updateActiveInfo();
-	// counting index of `active`
-	int index = 0;
-	// something changed? check if we have some MS to remove from `active`
-	if (!old_activeInfo.isEmpty())
-	{
-		for (int i=0; i<old_activeInfo.size(); i++)
-		{
-			bool found = false;
-			for (int j=0; j<activeInfo.size(); j++)
-			{
-				if (old_activeInfo[i].showerID == activeInfo[j].showerID)
-				{
-					found = true;
-					break;
-				}
-			}
-			if (!found)
-			{
-				active.erase(active.begin().operator +(index));
-				index--;
-			}
-			index++;
 		}
 	}
 
-	std::vector<std::vector<MeteorObj*> >::iterator iterOut;
-	std::vector<MeteorObj*>::iterator iterIn;
-	index = 0;
-	if (active.size() > 0)
+	lastSkyDate = skyDate;
+
+	// step through and update all meteor showers
+	foreach (const MeteorShowerP& ms, mShowers)
 	{
-		// step through and update all active meteors
-		for (iterOut = active.begin(); iterOut != active.end(); ++iterOut)
+		if (ms && ms->initialized)
 		{
-			for (iterIn = active[index].begin(); iterIn != active[index].end(); ++iterIn)
-			{
-				if (!(*iterIn)->update(deltaTime))
-				{
-					delete *iterIn;
-					iterIn = active[index].erase(iterIn);
-					iterIn--;
-				}
-			}
-			if (active[index].empty())
-			{
-				iterOut = active.erase(iterOut);
-				iterOut--;
-				index--;
-			}
-			index++;
+			ms->update(deltaTime);
 		}
-	}
-
-	index = 0;
-	foreach (const activeData &current, activeInfo)
-	{
-		std::vector<MeteorObj*> aux;
-		if (active.empty() || active.size() < (unsigned) activeInfo.size())
-		{
-			if(tspeed<0 || fabs(tspeed)>1.)
-			{
-				activeInfo.removeAt(index);
-				continue; // don't create new meteors
-			}
-			active.push_back(aux);
-		}
-
-		int ZHR = calculateZHR(current.zhr,
-				       current.variable,
-				       current.start,
-				       current.finish,
-				       current.peak);
-
-		// determine average meteors per frame needing to be created
-		int mpf = (int) ((double) ZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
-		if (mpf < 1)
-		{
-			mpf = 1;
-		}
-
-		for (int i=0; i<mpf; ++i)
-		{
-			// start new meteor based on ZHR time probability
-			double prob = ((double)qrand())/RAND_MAX;
-			if (ZHR>0 && prob<((double)ZHR*ZHR_TO_WSR*deltaTime/1000.0/(double)mpf))
-			{
-				MeteorObj *m = new MeteorObj(core, current.speed, current.radiantAlpha, current.radiantDelta,
-							     current.pidx, current.colors, m_bolideTexture);
-				active[index].push_back(m);
-			}
-		}
-		index++;
 	}
 }
 

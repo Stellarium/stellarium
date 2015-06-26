@@ -23,7 +23,7 @@
 
 #include <QDateTime>
 
-#include "Meteor.hpp"
+#include "MeteorObj.hpp"
 #include "StelFader.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
@@ -85,10 +85,7 @@ public:
 
 	//! Get current activity status of MS
 	//! @return 0:inactive 1:activeRealData 2:activeGenericData
-	int getStatus()
-	{
-		return status;
-	}
+	int getStatus() { return status; }
 
 	//! Get peak
 	//! @return peak
@@ -112,8 +109,6 @@ private:
 	static bool radiantMarkerEnabled;
 	static bool showActiveRadiantsOnly;
 
-	LinearFader labelsFader;
-
 	typedef struct
 	{
 		QString year;		   //! Value of year for actual data
@@ -126,6 +121,9 @@ private:
 
 	bool initialized;
 	bool active;
+
+	QList<MeteorObj*> activeMeteors; //! List of active meteors
+
 	QString showerID;		//! The ID of the meteor shower
 	QString designation;            //! The designation of the meteor shower
 	QList<activityData> activity;	//! List of activity
@@ -150,7 +148,15 @@ private:
 	int status;		        //! Check if the radiant is active for the current sky date
 					//! 0=inactive; 1=realData 2=genericData
 
-	void draw(StelPainter &painter);
+	void draw(StelCore *core);
+
+	//! Calculate value of ZHR using normal distribution
+	//! @param zhr
+	//! @param variable
+	//! @param start
+	//! @param finish
+	//! @param peak
+	int calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak);
 
 	//! Get a date string from JSON file and parse it for display in info corner
 	//! @param jsondate A string from JSON file

@@ -20,11 +20,14 @@
 
 #include "MeteorShower.hpp"
 #include "MeteorShowers.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
+
+#include <QtMath>
 
 StelTextureSP MeteorShower::radiantTexture;
 bool MeteorShower::showLabels = true;
@@ -94,8 +97,7 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	updateCurrentData(getSkyQDateTime());
 	// ensures that all objects will be drawn once
 	// that's to avoid crashes by trying select a nonexistent object
-	StelPainter painter(StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000));
-	draw(painter);
+	draw(StelApp::getInstance().getCore());
 
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 
@@ -436,15 +438,55 @@ double MeteorShower::getAngularSize(const StelCore*) const
 
 void MeteorShower::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
 	updateCurrentData(getSkyQDateTime());
+
+	// step through and update all active meteors
+	foreach (MeteorObj* m, activeMeteors)
+	{
+		if (!m->update(deltaTime))
+		{
+			activeMeteors.removeOne(m);
+		}
+	}
+
+	StelCore* core = StelApp::getInstance().getCore();
+	double tspeed = core->getTimeRate() * 86400;  // sky seconds per actual second
+	if(tspeed<0 || fabs(tspeed)>1.)
+	{
+		return; // don't create new meteors
+	}
+
+	int currentZHR = calculateZHR(zhr, variable, start, finish, peak);
+
+	// determine average meteors per frame needing to be created
+	int mpf = (int) ((double) currentZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
+	if (mpf < 1)
+	{
+		mpf = 1;
+	}
+
+	for (int i = 0; i < mpf; ++i)
+	{
+		// start new meteor based on ZHR time probability
+		double prob = ((double) qrand()) / RAND_MAX;
+		double aux = (double) currentZHR * ZHR_TO_WSR * deltaTime / 1000.0 / (double) mpf;
+		if (currentZHR > 0 && prob < aux)
+		{
+			MeteorObj *m = new MeteorObj(core, speed, radiantAlpha, radiantDelta, pidx,
+					colors, GETSTELMODULE(MeteorShowers)->getBolideTexture());
+			activeMeteors.append(m);
+		}
+	}
 }
 
-void MeteorShower::draw(StelPainter &painter)
+void MeteorShower::draw(StelCore* core)
 {
+	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
+	painter.setFont(GETSTELMODULE(MeteorShowers)->getLabelFont());
 
+	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -477,4 +519,61 @@ void MeteorShower::draw(StelPainter &painter)
 			painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
 		}
 	}
+
+	// step through and draw all active meteors
+	painter.setProjector(core->getProjection(StelCore::FrameAltAz));
+	foreach (MeteorObj* m, activeMeteors)
+	{
+		m->draw(core, painter);
+	}
+}
+
+int MeteorShower::calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak)
+{
+	/***************************************
+	 * Get ZHR ranges
+	 ***************************************/
+	int highZHR;
+	int lowZHR;
+	//bool multPeak = false; //multiple peaks
+	if (zhr != -1)  //isn't variable
+	{
+		highZHR = zhr;
+		lowZHR = 0;
+	}
+	else
+	{
+		QStringList varZHR = variable.split("-");
+		lowZHR = varZHR.at(0).toInt();
+		if (varZHR.at(1).contains("*"))
+		{
+			//multPeak = true;
+			highZHR = varZHR[1].replace("*", "").toInt();
+		}
+		else
+		{
+			highZHR = varZHR.at(1).toInt();
+		}
+	}
+
+	/***************************************
+	 * Convert time intervals
+	 ***************************************/
+	double startJD = StelUtils::qDateTimeToJd(start);
+	double finishJD = StelUtils::qDateTimeToJd(finish);
+	double peakJD = StelUtils::qDateTimeToJd(peak);
+	double currentJD = StelUtils::qDateTimeToJd(GETSTELMODULE(MeteorShowers)->getSkyDate());
+
+	/***************************************
+	 * Gaussian distribution
+	 ***************************************/
+	double sd; //standard deviation
+	if (currentJD >= startJD && currentJD < peakJD) //left side of gaussian
+		sd = (peakJD - startJD)/2;
+	else
+		sd = (finishJD - peakJD)/2;
+
+	double gaussian = highZHR * qExp( - qPow(currentJD - peakJD, 2) / (sd*sd) ) + lowZHR;
+
+	return (int) ((int) ((gaussian - (int) gaussian) * 10) >= 5 ? gaussian+1 : gaussian);
 }
