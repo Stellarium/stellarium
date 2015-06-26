@@ -33,6 +33,8 @@ SET(RemoteControl_SRCS
   APIController.cpp
   MainService.hpp
   MainService.cpp
+  ObjectService.hpp
+  ObjectService.cpp
   LocationService.hpp
   LocationService.cpp
   RemoteControl.hpp
@@ -41,8 +43,8 @@ SET(RemoteControl_SRCS
   RequestHandler.cpp
   ScriptService.hpp
   ScriptService.cpp
-  SearchService.hpp
-  SearchService.cpp
+  SimbadService.hpp
+  SimbadService.cpp
   StelActionService.hpp
   StelActionService.cpp
   ViewService.hpp
