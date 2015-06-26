@@ -23,8 +23,9 @@
 #include "APIController.hpp"
 #include "LocationService.hpp"
 #include "MainService.hpp"
+#include "ObjectService.hpp"
 #include "ScriptService.hpp"
-#include "SearchService.hpp"
+#include "SimbadService.hpp"
 #include "StelActionService.hpp"
 #include "ViewService.hpp"
 
@@ -41,8 +42,9 @@ RequestHandler::RequestHandler(QSettings *settings, QObject* parent) : HttpReque
 	//they "live" in the main thread in the QObject sense, but their service methods are actually
 	//executed in the HTTP handler threads
 	apiController->registerService(new MainService("main",apiController));
+	apiController->registerService(new ObjectService("objects",apiController));
 	apiController->registerService(new ScriptService("scripts",apiController));
-	apiController->registerService(new SearchService("search",apiController));
+	apiController->registerService(new SimbadService("simbad",apiController));
 	apiController->registerService(new StelActionService("stelaction",apiController));
 	apiController->registerService(new LocationService("location",apiController));
 	apiController->registerService(new ViewService("view",apiController));
