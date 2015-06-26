@@ -98,12 +98,12 @@ void SporadicMeteorMgr::update(double deltaTime)
 		return; // freeze meteors at the current position
 	}
 
-	deltaTime*=1000;
+	deltaTime *= 1000.0;
 	// if stellarium has been suspended, don't create
 	// huge number of meteors to make up for lost time!
-	if (deltaTime > 500)
+	if (deltaTime > 500.0)
 	{
-		deltaTime = 500;
+		deltaTime = 500.0;
 	}
 
 	// step through and update all active meteors

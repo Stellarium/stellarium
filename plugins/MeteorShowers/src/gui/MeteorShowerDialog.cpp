@@ -126,7 +126,7 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->activeRadiantsOnly, SIGNAL(clicked(bool)), plugin, SLOT(setFlagActiveRadiant(bool)));
 	ui->radiantLabels->setChecked(plugin->getFlagLabels());
 	connect(ui->radiantLabels, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLabels(bool)));
-	ui->fontSizeSpinBox->setValue(plugin->getLabelFontSize());
+	ui->fontSizeSpinBox->setValue(plugin->getLabelFont().pixelSize());
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setLabelFontSize(int)));
 
 	// Settings tab / meteor showers group
