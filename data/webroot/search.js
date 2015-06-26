@@ -212,7 +212,7 @@ var Search = (new function($) {
             //got search string, perform ajax
 
             lastXHR = $.ajax({
-                url: "/api/search/find",
+                url: "/api/objects/find",
                 data: {
                     str: str
                 },
@@ -252,7 +252,7 @@ var Search = (new function($) {
 
         $srch_simbad.text("querying");
         simbadXHR = $.ajax({
-            url: "/api/search/simbad",
+            url: "/api/simbad/lookup",
             data: {
                 str: str
             },
@@ -334,7 +334,7 @@ var Search = (new function($) {
 
     function loadObjectTypes() {
         $.ajax({
-            url: "/api/search/listobjecttypes",
+            url: "/api/objects/listobjecttypes",
             dataType: "JSON",
             success: function(data) {
 
@@ -347,7 +347,7 @@ var Search = (new function($) {
                     console.log("Error performing simbad lookup");
                     console.log("Error: " + errorThrown);
                     console.log("Status: " + status);
-                    alert("Error performing Simbad lookup");
+                    alert("Error loading object types");
                 }
             }
         });
@@ -364,7 +364,7 @@ var Search = (new function($) {
         var useEnglish = $srch_list_english[0].checked;
 
         listXHR = $.ajax({
-            url: "/api/search/listobjectsbytype",
+            url: "/api/objects/listobjectsbytype",
             dataType: "JSON",
             data: {
                 type: key,

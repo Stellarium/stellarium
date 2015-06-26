@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SEARCHSERVICE_HPP_
-#define SEARCHSERVICE_HPP_
+#ifndef OBJECTSERVICE_HPP_
+#define OBJECTSERVICE_HPP_
 
 #include "AbstractAPIService.hpp"
 #include "StelObjectType.hpp"
@@ -28,13 +28,13 @@
 class StelCore;
 class StelObjectMgr;
 
-class SearchService : public AbstractAPIService
+class ObjectService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	SearchService(const QByteArray& serviceName, QObject* parent = 0);
+	ObjectService(const QByteArray& serviceName, QObject* parent = 0);
 
-	virtual ~SearchService() {}
+	virtual ~ObjectService() {}
 
 protected:
 	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
@@ -54,7 +54,6 @@ private:
 	StelCore* core;
 	StelObjectMgr* objMgr;
 	bool useStartOfWords;
-	QString simbadServerUrl;
 };
 
 
