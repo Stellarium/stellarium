@@ -117,10 +117,8 @@ void MainService::update(double deltaTime)
 	}
 }
 
-void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
+void MainService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
-
 	if(operation=="status")
 	{
 		//a listing of the most common stuff that can change often
@@ -188,7 +186,7 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 		//// Info about selected object (only primary)
 		{
 			QString infoStr;
-			QMetaObject::invokeMethod(this,"getInfoString",Qt::BlockingQueuedConnection,
+			QMetaObject::invokeMethod(this,"getInfoString",SERVICE_DEFAULT_INVOKETYPE,
 						  Q_RETURN_ARG(QString,infoStr));
 			obj.insert("selectioninfo",infoStr);
 		}
@@ -218,18 +216,17 @@ void MainService::get(const QByteArray& operation, const QMultiMap<QByteArray, Q
 				obj.insert("actionChanges",getActionChangesSinceID(actionId));
 		}
 
-		writeJSON(QJsonDocument(obj),response);
+		response.writeJSON(QJsonDocument(obj));
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: status",response);
+		response.writeRequestError("unsupported operation. GET: status");
 	}
 }
 
-void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
+void MainService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
 	if(operation == "time")
 	{
 		bool doneSomething = false;
@@ -246,7 +243,7 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 				{
 					doneSomething = true;
 					//set new time
-					QMetaObject::invokeMethod(core,"setJDay", Qt::BlockingQueuedConnection,
+					QMetaObject::invokeMethod(core,"setJDay", SERVICE_DEFAULT_INVOKETYPE,
 								  Q_ARG(double,jday));
 				}
 			}
@@ -261,16 +258,16 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 				{
 					doneSomething = true;
 					//set new time rate
-					QMetaObject::invokeMethod(core,"setTimeRate", Qt::BlockingQueuedConnection,
+					QMetaObject::invokeMethod(core,"setTimeRate", SERVICE_DEFAULT_INVOKETYPE,
 								  Q_ARG(double,rate));
 				}
 			}
 		}
 
 		if(doneSomething)
-			response.write("ok",true);
+			response.setData("ok");
 		else
-			response.write("error: invalid parameters, use time/timerate as double values");
+			response.setData("error: invalid parameters, use time/timerate as double values");
 	}
 	else if(operation == "focus")
 	{
@@ -281,7 +278,7 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 		{
 			if(parameters.value("position").isEmpty())
 			{
-				writeRequestError("requires 'target' or 'position' parameter",response);
+				response.writeRequestError("requires 'target' or 'position' parameter");
 				return;
 			}
 			else
@@ -297,23 +294,23 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 					pos[2] = arr.at(2).toDouble();
 
 					//deselect and move
-					QMetaObject::invokeMethod(this,"focusPosition", Qt::BlockingQueuedConnection,
+					QMetaObject::invokeMethod(this,"focusPosition", SERVICE_DEFAULT_INVOKETYPE,
 								  Q_ARG(Vec3d,pos));
-					response.write("ok",true);
+					response.setData("ok");
 					return;
 				}
 
-				writeRequestError("invalid position format",response);
+				response.writeRequestError("invalid position format");
 				return;
 			}
 		}
 
 		bool result;
-		QMetaObject::invokeMethod(this,"focusObject",Qt::BlockingQueuedConnection,
+		QMetaObject::invokeMethod(this,"focusObject",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_RETURN_ARG(bool,result),
 					  Q_ARG(QString,target));
 
-		response.write(result ? "true" : "false", true);
+		response.setData(result ? "true" : "false");
 	}
 	else if(operation == "move")
 	{
@@ -326,16 +323,16 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 
 		if(xOk || yOk)
 		{
-			QMetaObject::invokeMethod(this,"updateMovement", Qt::BlockingQueuedConnection,
+			QMetaObject::invokeMethod(this,"updateMovement", SERVICE_DEFAULT_INVOKETYPE,
 						  Q_ARG(int,x),
 						  Q_ARG(int,y),
 						  Q_ARG(bool,xOk),
 						  Q_ARG(bool,yOk));
 
-			response.write("ok",true);
+			response.setData("ok");
 		}
 		else
-			writeRequestError("requires x or y parameter",response);
+			response.writeRequestError("requires x or y parameter");
 	}
 	else if (operation == "fov")
 	{
@@ -345,19 +342,19 @@ void MainService::post(const QByteArray& operation, const QMultiMap<QByteArray, 
 
 		if(fov.isEmpty() || !ok)
 		{
-			writeRequestError("requires fov parameter",response);
+			response.writeRequestError("requires fov parameter");
 			return;
 		}
 
-		QMetaObject::invokeMethod(this,"setFov",Qt::BlockingQueuedConnection,
+		QMetaObject::invokeMethod(this,"setFov",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_ARG(double,dFov));
 
-		response.write("ok",true);
+		response.setData("ok");
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. POST: time,focus,move",response);
+		response.writeRequestError("unsupported operation. POST: time,focus,move");
 	}
 }
 

@@ -20,7 +20,7 @@
 #ifndef MAINSERVICE_HPP_
 #define MAINSERVICE_HPP_
 
-#include "APIController.hpp"
+#include "AbstractAPIService.hpp"
 
 #include "StelObjectType.hpp"
 #include "VecMath.hpp"
@@ -46,8 +46,10 @@ public:
 
 	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
-	virtual void get(const QByteArray& operation,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response) Q_DECL_OVERRIDE;
-	virtual void post(const QByteArray &operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response) Q_DECL_OVERRIDE;
+protected:
+
+	virtual void getImpl(const QByteArray& operation,const APIParameters &parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 
 private slots:
 	StelObjectP getSelectedObject();

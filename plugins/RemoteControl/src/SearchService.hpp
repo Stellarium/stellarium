@@ -20,7 +20,7 @@
 #ifndef SEARCHSERVICE_HPP_
 #define SEARCHSERVICE_HPP_
 
-#include "APIController.hpp"
+#include "AbstractAPIService.hpp"
 #include "StelObjectType.hpp"
 
 #include <QStringList>
@@ -36,8 +36,9 @@ public:
 
 	virtual ~SearchService() {}
 
-	virtual void get(const QByteArray& operation,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response) Q_DECL_OVERRIDE;
-	//virtual void post(const QByteArray &operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response) Q_DECL_OVERRIDE;
+protected:
+	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+
 private slots:
 	//! Executed in Stellarium main thread to avoid multiple QMetaObject::invoke calls
 	QStringList performSearch(const QString& text);

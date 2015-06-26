@@ -20,7 +20,7 @@
 #ifndef STELACTIONSERVICE_HPP_
 #define STELACTIONSERVICE_HPP_
 
-#include "APIController.hpp"
+#include "AbstractAPIService.hpp"
 
 class StelActionMgr;
 
@@ -32,8 +32,9 @@ public:
 
 	virtual ~StelActionService() {}
 
-	virtual void get(const QByteArray& operation,const QMultiMap<QByteArray,QByteArray>& parameters, HttpResponse& response) Q_DECL_OVERRIDE;
-	virtual void post(const QByteArray &operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response) Q_DECL_OVERRIDE;
+protected:
+	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
+	virtual void postImpl(const QByteArray &operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response) Q_DECL_OVERRIDE;
 private:
 	StelActionMgr* actionMgr;
 };
