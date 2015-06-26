@@ -30,6 +30,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QSettings>
 #include <QMutex>
 #include <QThreadPool>
 #include <QRunnable>
@@ -138,12 +139,10 @@ QString SearchService::substituteGreek(const QString &text)
 	return SearchDialog::substituteGreek(text);
 }
 
-void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
+void SearchService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
-
-	//make sure the object still "lives" in the main Stel thread, even though we are currently in the
-	//HTTP thread
+	//make sure the object still "lives" in the main Stel thread, even though
+	//we may currently be in the HTTP thread
 	Q_ASSERT(this->thread() == objMgr->thread());
 
 	if(operation=="find")
@@ -154,14 +153,14 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 
 		if(str.isEmpty())
 		{
-			writeRequestError("empty search string",response);
+			response.writeRequestError("empty search string");
 			return;
 		}
 
 		qDebug()<<"Search string"<<str;
 
 		QStringList results;
-		QMetaObject::invokeMethod(this,"performSearch",Qt::BlockingQueuedConnection,
+		QMetaObject::invokeMethod(this,"performSearch",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_RETURN_ARG(QStringList,results),
 					  Q_ARG(QString,str));
 
@@ -175,7 +174,7 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 		std::sort(results.begin(), results.end(), comparator);
 
 		//return as json
-		writeJSON(QJsonDocument(QJsonArray::fromStringList(results)),response);
+		response.writeJSON(QJsonDocument(QJsonArray::fromStringList(results)));
 	}
 	else if (operation == "info")
 	{
@@ -187,36 +186,36 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 		StelObjectP obj;
 		if(!name.isEmpty())
 		{
-			QMetaObject::invokeMethod(this,"findObject",Qt::BlockingQueuedConnection,
+			QMetaObject::invokeMethod(this,"findObject",SERVICE_DEFAULT_INVOKETYPE,
 						  Q_RETURN_ARG(StelObjectP,obj),
 						  Q_ARG(QString,name));
 
 			if(!obj)
 			{
 				response.setStatus(404,"not found");
-				response.write("object name not found",true);
+				response.setData("object name not found");
 				return;
 			}
 		}
 		else
 		{
-			//use first selcted object
+			//use first selected object
 			const QList<StelObjectP> selection = objMgr->getSelectedObject();
 			if(selection.isEmpty())
 			{
 				response.setStatus(404,"not found");
-				response.write("no current selection, and no name parameter given",true);
+				response.setData("no current selection, and no name parameter given");
 				return;
 			}
 			obj = selection[0];
 		}
 
 		QString infoStr;
-		QMetaObject::invokeMethod(this,"getInfoString",Qt::BlockingQueuedConnection,
+		QMetaObject::invokeMethod(this,"getInfoString",SERVICE_DEFAULT_INVOKETYPE,
 					  Q_RETURN_ARG(QString,infoStr),
 					  Q_ARG(StelObjectP,obj));
 
-		response.write(infoStr.toUtf8(),true);
+		response.setData(infoStr.toUtf8());
 	}
 	else if (operation == "simbad")
 	{
@@ -229,7 +228,7 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 
 		if(str.isEmpty())
 		{
-			writeRequestError("empty search string",response);
+			response.writeRequestError("empty search string");
 			return;
 		}
 
@@ -291,7 +290,7 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 
 		obj.insert("results",results);
 
-		writeJSON(QJsonDocument(obj),response);
+		response.writeJSON(QJsonDocument(obj));
 	}
 	else if (operation == "listobjecttypes")
 	{
@@ -317,8 +316,7 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 			}
 		}
 
-		//we dont sort the results here because it depends on the interface language, which we dont know
-		writeJSON(QJsonDocument(arr),response);
+		response.writeJSON(QJsonDocument(arr));
 	}
 	else if(operation == "listobjectsbytype")
 	{
@@ -336,17 +334,17 @@ void SearchService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 
 			//sort
 			list.sort();
-			writeJSON(QJsonDocument(QJsonArray::fromStringList(list)),response);
+			response.writeJSON(QJsonDocument(QJsonArray::fromStringList(list)));
 		}
 		else
 		{
-			writeRequestError("missing type parameter",response);
+			response.writeRequestError("missing type parameter");
 		}
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: find,simbad",response);
+		response.writeRequestError("unsupported operation. GET: find,simbad");
 	}
 }
 

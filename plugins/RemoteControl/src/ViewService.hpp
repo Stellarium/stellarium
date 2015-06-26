@@ -17,31 +17,30 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef APIHANDLER_HPP_
-#define APIHANDLER_HPP_
+#ifndef VIEWSERVICE_HPP_
+#define VIEWSERVICE_HPP_
 
-#include "httpserver/httprequesthandler.h"
 #include "AbstractAPIService.hpp"
 
-#include <QMutex>
+class StelCore;
+class LandscapeMgr;
+class StelSkyCultureMgr;
 
-class APIController : public HttpRequestHandler
+class ViewService : public AbstractAPIService
 {
 	Q_OBJECT
 public:
-	APIController(int prefixLength, QObject* parent = 0);
-	virtual ~APIController();
+	ViewService(const QByteArray& serviceName, QObject* parent = 0);
 
-	//! Called in the main thread each frame
-	void update(double deltaTime);
+	virtual ~ViewService() {}
 
-	virtual void service(HttpRequest& request, HttpResponse& response);
+protected:
 
-	void registerService(AbstractAPIService* service);
+	virtual void getImpl(const QByteArray& operation,const APIParameters& parameters, APIServiceResponse& response) Q_DECL_OVERRIDE;
 private:
-	int m_prefixLength;
-	QMap<QByteArray,AbstractAPIService*> m_serviceMap;
-	QMutex mutex;
+	StelCore* core;
+	LandscapeMgr* lsMgr;
+	StelSkyCultureMgr* skyCulMgr;
 };
 
 #endif

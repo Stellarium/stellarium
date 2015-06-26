@@ -26,6 +26,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QStringList>
 
 StelActionService::StelActionService(const QByteArray &serviceName, QObject *parent) : AbstractAPIService(serviceName,parent)
 {
@@ -33,10 +34,8 @@ StelActionService::StelActionService(const QByteArray &serviceName, QObject *par
 	actionMgr = StelApp::getInstance().getStelActionManager();
 }
 
-void StelActionService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
+void StelActionService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
-
 	if(operation=="list")
 	{
 		//list all registered StelActions, this should be thread safe
@@ -57,18 +56,17 @@ void StelActionService::get(const QByteArray& operation, const QMultiMap<QByteAr
 			groupObject.insert(StelTranslator::globalTranslator->qtranslate(group),itemArray);
 		}
 
-		writeJSON(QJsonDocument(groupObject),response);
+		response.writeJSON(QJsonDocument(groupObject));
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: list POST: do",response);
+		response.writeRequestError("unsupported operation. GET: list POST: do");
 	}
 }
 
-void StelActionService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
+void StelActionService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
 	if(operation == "do")
 	{
 		QString id = QString::fromUtf8(parameters.value("id"));
@@ -76,7 +74,7 @@ void StelActionService::post(const QByteArray& operation, const QMultiMap<QByteA
 		StelAction* action = actionMgr->findAction(id);
 		if(!action)
 		{
-			writeRequestError("error: invalid id parameter",response);
+			response.setData("error: invalid id parameter");
 		}
 		else
 		{
@@ -84,30 +82,30 @@ void StelActionService::post(const QByteArray& operation, const QMultiMap<QByteA
 			//some special handling for quit and stop server event (async to prevent deadlock)
 
 			bool isClosing = (id=="actionQuit_Global" || id == "actionShow_Remote_Control");
-			Qt::ConnectionType type = Qt::BlockingQueuedConnection;
-			if(isClosing)
+			Qt::ConnectionType type = SERVICE_DEFAULT_INVOKETYPE;
+			if(isClosing && SERVICE_DEFAULT_INVOKETYPE == Qt::BlockingQueuedConnection)
 				type = Qt::QueuedConnection;
 
 			QMetaObject::invokeMethod(action,"trigger",type);
 
 			if(isClosing)
 			{
-				response.write("error: Stellarium or remote control closing!",true);
+				response.setData("error: Stellarium or remote control closing!");
 				return;
 			}
 
 			if(action->isCheckable())
 			{
 				//return the new state of the action
-				response.write(action->isChecked() ? "true" : "false", true);
+				response.setData(action->isChecked() ? "true" : "false");
 			}
 			else
-				response.write("ok",true);
+				response.setData("ok");
 		}
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: list POST: do",response);
+		response.writeRequestError("unsupported operation. GET: list POST: do");
 	}
 }

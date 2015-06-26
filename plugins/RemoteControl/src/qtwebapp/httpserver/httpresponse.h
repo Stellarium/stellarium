@@ -49,14 +49,14 @@ public:
       @param name name of the header
       @param value value of the header
     */
-    void setHeader(QByteArray name, QByteArray value);
+    void setHeader(const QByteArray name, const QByteArray value);
 
     /**
       Set a HTTP response header
       @param name name of the header
       @param value value of the header
     */
-    void setHeader(QByteArray name, int value);
+    void setHeader(const QByteArray name, const int value);
 
     /** Get the map of HTTP response headers */
     QMap<QByteArray,QByteArray>& getHeaders();
