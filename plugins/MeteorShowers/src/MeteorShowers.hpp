@@ -233,9 +233,6 @@ private:
 	//! Draw pointer
 	void drawPointer(StelCore* core);
 
-	//! Draw meteor stream
-	void drawStream(StelCore* core, StelPainter& painter);
-
 	//! Upgrade config.ini: rename old key settings to new
 	void upgradeConfigIni();
 
@@ -317,9 +314,6 @@ private:
 	bool enableAtStartup;
 
 	QSettings* conf;
-
-
-	std::vector<std::vector<MeteorObj*> > active;		// Matrix containing all active meteors
 
 	bool flagShowARG;  //! Show marker of active radiant based on generic data
 	bool flagShowARR;  //! Show marker of active radiant based on generic data
