@@ -755,8 +755,9 @@ void StelVideoMgr::handleMetaDataChanged()
 
 void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & value)
 {
-    qDebug() << "!!! StelVideoMgr::handleMetadataChanged(.,.): Is this called on Windows? ";
-
+    qDebug() << "!!! StelVideoMgr::handleMetadataChanged(.,.): Is this called on Windows when built with MSVC? ";  // NOT WITH MinGW and Qt5.4!!!
+    qDebug() << "THIS IS TO ENSURE YOU SEE A CRASH ! CURRENTLY THE SIGNAL IS NOT SENT ON WINDOWS WHEN BUILT WITH minGW Qt5.4. Maybe with MSVC?";
+    Q_ASSERT(0); // Remove the ASSERT and write a comment that it works on (which) windows!
     QString id=QObject::sender()->property("Stel_id").toString();
     qDebug() << "QMediaplayer: " << id << ":  Metadata change:" << key << "=>" << value;
     if (key=="Resolution")
