@@ -164,7 +164,7 @@ public slots:
 	void handleMutedChanged(bool muted);
 	//void handleNetworkConfigurationChanged(const QNetworkConfiguration & configuration);
 	//void handlePlaybackRateChanged(qreal rate);
-	void handlePositionChanged(qint64 position);
+	//void handlePositionChanged(qint64 position); // periodically notify where in the video we are. Could be used to update scale bars, not needed.
 	void handleSeekableChanged(bool seekable);
 	void handleStateChanged(QMediaPlayer::State state);
 	void handleVideoAvailableChanged(bool videoAvailable);
@@ -175,7 +175,7 @@ public slots:
 	void handleMetaDataAvailableChanged(bool available);
 	void handleMetaDataChanged();
 	void handleMetaDataChanged(const QString & key, const QVariant & value);
-	void handleNotifyIntervalChanged(int milliseconds);
+	//void handleNotifyIntervalChanged(int milliseconds); // interval for positionchange messages. Not needed.
 
 
 
