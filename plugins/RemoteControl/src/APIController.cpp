@@ -20,42 +20,6 @@
 #include "APIController.hpp"
 #include <QJsonDocument>
 
-void AbstractAPIService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
-{
-	Q_UNUSED(operation);
-	Q_UNUSED(parameters);
-	response.setStatus(405,"Method Not allowed");
-	QString str(QStringLiteral("Method GET not allowed for service %2"));
-	response.write(str.arg(QString::fromLatin1(serviceName())).toLatin1(),true);
-}
-
-void AbstractAPIService::update(double deltaTime)
-{
-	Q_UNUSED(deltaTime);
-}
-
-void AbstractAPIService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
-{
-	Q_UNUSED(operation);
-	Q_UNUSED(parameters);
-	response.setStatus(405,"Method Not allowed");
-	QString str(QStringLiteral("Method POST not allowed for service %2"));
-	response.write(str.arg(QString::fromLatin1(serviceName())).toLatin1(),true);
-}
-
-void AbstractAPIService::writeRequestError(const QByteArray &message, HttpResponse& response)
-{
-	response.setStatus(400,"Bad Request");
-	response.write(message,true);
-}
-
-void AbstractAPIService::writeJSON(const QJsonDocument &doc, HttpResponse &response)
-{
-	QByteArray data = doc.toJson();
-	response.setHeader("Content-Length",data.size());
-	response.setHeader("Content-Type","application/json; charset=utf-8");
-	response.write(data,true);
-}
 
 APIController::APIController(int prefixLength, QObject* parent) : HttpRequestHandler(parent), m_prefixLength(prefixLength)
 {
@@ -69,10 +33,12 @@ APIController::~APIController()
 
 void APIController::update(double deltaTime)
 {
+	mutex.lock();
 	foreach(AbstractAPIService* service, m_serviceMap)
 	{
 		service->update(deltaTime);
 	}
+	mutex.unlock();
 }
 
 void APIController::registerService(AbstractAPIService *service)
@@ -102,18 +68,56 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	}
 
 	//try to find service
+	//the mutex here is to prevent a very strange crash I had, in which sv is an invalid pointer (but m_serviceMap is ok)
+	//probably caused by the foreach loop in update in the main thread?
+	mutex.lock();
 	QMap<QByteArray,AbstractAPIService*>::iterator it = m_serviceMap.find(serviceString);
 	if(it!=m_serviceMap.end())
 	{
 		AbstractAPIService* sv = *it;
+		mutex.unlock();
 
+		//create the response object
+		APIServiceResponse apiresponse;
 		if(request.getMethod()=="GET")
 		{
-			sv->get(operation, request.getParameterMap(),response);
+#ifdef FORCE_THREADED_SERVICES
+			apiresponse = sv->get(operation, request.getParameterMap());
+#else
+			if(sv->supportsThreadedOperation())
+			{
+				apiresponse = sv->get(operation, request.getParameterMap());
+			}
+			else
+			{
+				//invoke it in the main thread!
+				QMetaObject::invokeMethod(sv,"get",Qt::BlockingQueuedConnection,
+							  Q_RETURN_ARG(APIServiceResponse, apiresponse),
+							  Q_ARG(QByteArray, operation),
+							  Q_ARG(APIParameters, request.getParameterMap()));
+			}
+#endif
+			apiresponse.applyResponse(&response);
 		}
 		else if (request.getMethod()=="POST")
 		{
-			sv->post(operation, request.getParameterMap(),request.getBody(),response);
+#ifdef FORCE_THREADED_SERVICES
+			apiresponse = sv->post(operation, request.getParameterMap(), request.getBody());
+#else
+			if(sv->supportsThreadedOperation())
+			{
+				apiresponse = sv->post(operation, request.getParameterMap(), request.getBody());
+			}
+			else
+			{
+				QMetaObject::invokeMethod(sv,"post",Qt::BlockingQueuedConnection,
+							  Q_RETURN_ARG(APIServiceResponse, apiresponse),
+							  Q_ARG(QByteArray, operation),
+							  Q_ARG(APIParameters, request.getParameterMap()),
+							  Q_ARG(QByteArray, request.getBody()));
+			}
+#endif
+			apiresponse.applyResponse(&response);
 		}
 		else
 		{
@@ -124,6 +128,7 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	}
 	else
 	{
+		mutex.unlock();
 		response.setStatus(400,"Bad Request");
 		QString str(QStringLiteral("Unknown service: %1"));
 		response.write(str.arg(QString::fromUtf8(pathWithoutPrefix)).toUtf8(),true);

@@ -43,10 +43,8 @@ LocationService::LocationService(const QByteArray &serviceName, QObject *parent)
 	ssys = GETSTELMODULE(SolarSystem);
 }
 
-void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
+void LocationService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
-
 	if(operation=="list")
 	{
 		//for now, this does not return location objects (which would require a much larger data transfer), but only the location strings
@@ -56,7 +54,7 @@ void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArra
 		QStringListModel* mdl = locMgr->getModelAll();
 		QJsonArray list = QJsonArray::fromStringList(mdl->stringList());
 
-		writeJSON(QJsonDocument(list),response);
+		response.writeJSON(QJsonDocument(list));
 	}
 	else if(operation == "countrylist")
 	{
@@ -72,7 +70,7 @@ void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArra
 			list.append(obj);
 		}
 
-		writeJSON(QJsonDocument(list),response);
+		response.writeJSON(QJsonDocument(list));
 	}
 	else if(operation == "planetlist")
 	{
@@ -88,7 +86,7 @@ void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArra
 			list.append(obj);
 		}
 
-		writeJSON(QJsonDocument(list),response);
+		response.writeJSON(QJsonDocument(list));
 	}
 	else if(operation=="planetimage")
 	{
@@ -99,7 +97,7 @@ void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArra
 
 		if(planet.isEmpty())
 		{
-			writeRequestError("requires 'planet' parameter",response);
+			response.writeRequestError("requires 'planet' parameter");
 			return;
 		}
 
@@ -113,7 +111,7 @@ void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArra
 			if (path.isEmpty() || !file.exists())
 			{
 				response.setStatus(404,"not found");
-				response.write("planet image not available",true);
+				response.setData("planet image not available");
 				qWarning() << "ERROR - could not find planet map for " << planet;
 				return;
 			}
@@ -124,25 +122,25 @@ void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArra
 			{
 				//allow the image to be cached by browser (1 hour)
 				response.setHeader("Cache-Control","max-age="+QByteArray::number(60*60));
-				response.setHeader("Content-Length",static_cast<int>(file.size()));
+				//response.setHeader("Content-Length",static_cast<int>(file.size()));
 				if(!mime.isDefault())
 				{
 					response.setHeader("Content-Type", mime.name().toLatin1());
 				}
 
 				//load and write data
-				response.write(file.readAll(),true);
+				response.setData(file.readAll());
 			}
 			else
 			{
 				response.setStatus(500,"internal server error");
-				response.write("could not open image file",true);
+				response.setData("could not open image file");
 			}
 		}
 		else
 		{
 			response.setStatus(404,"not found");
-			response.write("planet id not found",true);
+			response.setData("planet id not found");
 			qWarning() << "ERROR - could not find planet " << planet;
 			return;
 		}
@@ -150,13 +148,12 @@ void LocationService::get(const QByteArray& operation, const QMultiMap<QByteArra
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: list, countrylist, planetlist, planetimage",response);
+		response.writeRequestError("unsupported operation. GET: list, countrylist, planetlist, planetimage");
 	}
 }
 
-void LocationService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
+void LocationService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
 	if (operation == "setlocationfields")
 	{
 		QString id = QString::fromUtf8(parameters.value("id"));
@@ -166,23 +163,23 @@ void LocationService::post(const QByteArray& operation, const QMultiMap<QByteArr
 		{
 			//if an id is set, ignore everything else
 			//use an invoke here for reasons
-			QMetaObject::invokeMethod(locMgr,"locationForString",Qt::BlockingQueuedConnection,
+			QMetaObject::invokeMethod(locMgr,"locationForString",SERVICE_DEFAULT_INVOKETYPE,
 						  Q_RETURN_ARG(StelLocation, loc),
 						  Q_ARG(QString,id));
 
 			if(loc.isValid())
 			{
 				//set location
-				QMetaObject::invokeMethod(core, "moveObserverTo", Qt::BlockingQueuedConnection,
+				QMetaObject::invokeMethod(core, "moveObserverTo", SERVICE_DEFAULT_INVOKETYPE,
 							  Q_ARG(StelLocation, loc),
 							  Q_ARG(double,0.0) );
 
-				response.write("ok",true);
+				response.setData("ok");
 				return;
 			}
 			else
 			{
-				writeRequestError("invalid location id", response);
+				response.writeRequestError("invalid location id");
 				return;
 			}
 		}
@@ -244,17 +241,17 @@ void LocationService::post(const QByteArray& operation, const QMultiMap<QByteArr
 		if(doneSomething)
 		{
 			//update the core
-			QMetaObject::invokeMethod(core,"moveObserverTo", Qt::BlockingQueuedConnection,
+			QMetaObject::invokeMethod(core,"moveObserverTo", SERVICE_DEFAULT_INVOKETYPE,
 						  Q_ARG(StelLocation, loc),
 						  Q_ARG(double, 0.0),
 						  Q_ARG(double, 0.0));
 		}
 
-		response.write("ok",true);
+		response.setData("ok");
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. POST: setlocation, setlocationfields",response);
+		response.writeRequestError("unsupported operation. POST: setlocation, setlocationfields");
 	}
 }

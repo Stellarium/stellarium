@@ -123,6 +123,10 @@ public:
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
+
+	//! Return a map of landscape name to landscape ID (directory name).
+	QMap<QString,QString> getNameToDirMap() const;
+
 	//! Retrieve a list of the names of all the available landscapes in
 	//! the file search path sub-directories of the landscape area
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
@@ -382,9 +386,6 @@ private:
 	//! This takes a name of the landscape, as described in the landscape:name item in the
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
 	QString nameToID(const QString& name) const;
-
-	//! Return a map of landscape name to landscape ID (directory name).
-	QMap<QString,QString> getNameToDirMap() const;
 
 	//! Returns the path to an installed landscape's directory.
 	//! It uses StelFileMgr to look for it in the possible directories.

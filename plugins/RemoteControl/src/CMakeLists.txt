@@ -27,6 +27,8 @@ SET(QtWebApp_SRCS
 )
 
 SET(RemoteControl_SRCS
+  AbstractAPIService.hpp
+  AbstractAPIService.cpp
   APIController.hpp
   APIController.cpp
   MainService.hpp
@@ -43,6 +45,8 @@ SET(RemoteControl_SRCS
   SearchService.cpp
   StelActionService.hpp
   StelActionService.cpp
+  ViewService.hpp
+  ViewService.cpp
   gui/RemoteControlDialog.hpp
   gui/RemoteControlDialog.cpp
 )

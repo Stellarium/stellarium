@@ -31,16 +31,14 @@ ScriptService::ScriptService(const QByteArray &serviceName, QObject *parent) : A
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
 }
 
-void ScriptService::get(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, HttpResponse &response)
+void ScriptService::getImpl(const QByteArray& operation, const APIParameters &parameters, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
-
 	if(operation=="list")
 	{
 		//list all scripts, this should be thread safe
 		QStringList allScripts = scriptMgr->getScriptList();
 
-		writeJSON(QJsonDocument(QJsonArray::fromStringList(allScripts)),response);
+		response.writeJSON(QJsonDocument(QJsonArray::fromStringList(allScripts)));
 	}
 	else if (operation == "info")
 	{
@@ -63,11 +61,11 @@ void ScriptService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 			//shortcut often causes a large delay because the whole file gets searched, and it is usually missing, so we ignore it
 			//obj.insert("shortcut",scriptMgr->getShortcut(scriptId));
 
-			writeJSON(QJsonDocument(obj),response);
+			response.writeJSON(QJsonDocument(obj));
 		}
 		else
 		{
-			writeRequestError("need parameter: id",response);
+			response.writeRequestError("need parameter: id");
 		}
 	}
 	else if(operation == "status")
@@ -77,19 +75,17 @@ void ScriptService::get(const QByteArray& operation, const QMultiMap<QByteArray,
 		obj.insert("scriptIsRunning",scriptMgr->scriptIsRunning());
 		obj.insert("runningScriptId",scriptMgr->runningScriptId());
 
-		writeJSON(QJsonDocument(obj),response);
+		response.writeJSON(QJsonDocument(obj));
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: list,info,status POST: run,stop",response);
+		response.writeRequestError("unsupported operation. GET: list,info,status POST: run,stop");
 	}
 }
 
-void ScriptService::post(const QByteArray& operation, const QMultiMap<QByteArray, QByteArray> &parameters, const QByteArray &data, HttpResponse &response)
+void ScriptService::postImpl(const QByteArray& operation, const APIParameters &parameters, const QByteArray &data, APIServiceResponse &response)
 {
-	//this is run in an HTTP worker thread
-
 	if(operation=="run")
 	{
 		//retrieve detail about a single script
@@ -97,7 +93,7 @@ void ScriptService::post(const QByteArray& operation, const QMultiMap<QByteArray
 
 		if(scriptMgr->scriptIsRunning())
 		{
-			response.write("error: a script is already running",true);
+			response.setData("error: a script is already running");
 			return;
 		}
 
@@ -108,28 +104,28 @@ void ScriptService::post(const QByteArray& operation, const QMultiMap<QByteArray
 
 		if(!ret)
 		{
-			response.write("error: could not prepare script, wrong id?",true);
+			response.setData("error: could not prepare script, wrong id?");
 			return;
 		}
 
 		//ret = scriptMgr->runScript(scriptId);
-		//we are in another thread! for the actual execution of the script, we need to invoke the event queue
+		//we may be in another thread! for the actual execution of the script, we need to invoke the event queue
 		//we can not use blocking connection here because runPreprocessedScript is blocking!
 		//there is also no way to check if the script was actually started except for polling some time later
-		QMetaObject::invokeMethod(scriptMgr,"runPreprocessedScript",Qt::QueuedConnection,Q_ARG(QString,script));
-		response.write("ok",true);
+		QMetaObject::invokeMethod(scriptMgr,"runPreprocessedScript",
+					  Qt::QueuedConnection,Q_ARG(QString,script));
+		response.setData("ok");
 	}
 	else if(operation=="stop")
 	{
 		//scriptMgr->stopScript();
-		//here a blocking connection should cause no problems
-		QMetaObject::invokeMethod(scriptMgr,"stopScript",Qt::BlockingQueuedConnection);
+		QMetaObject::invokeMethod(scriptMgr,"stopScript",SERVICE_DEFAULT_INVOKETYPE);
 
-		response.write("ok",true);
+		response.setData("ok");
 	}
 	else
 	{
 		//TODO some sort of service description?
-		writeRequestError("unsupported operation. GET: list,info,status POST: run,stop",response);
+		response.writeRequestError("unsupported operation. GET: list,info,status POST: run,stop");
 	}
 }

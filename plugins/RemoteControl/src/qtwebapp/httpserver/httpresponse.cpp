@@ -13,12 +13,12 @@ HttpResponse::HttpResponse(QTcpSocket* socket) {
     sentLastPart=false;
 }
 
-void HttpResponse::setHeader(QByteArray name, QByteArray value) {
+void HttpResponse::setHeader(const QByteArray name, const QByteArray value) {
     Q_ASSERT(sentHeaders==false);
     headers.insert(name,value);
 }
 
-void HttpResponse::setHeader(QByteArray name, int value) {
+void HttpResponse::setHeader(const QByteArray name, const int value) {
     Q_ASSERT(sentHeaders==false);
     headers.insert(name,QByteArray::number(value));
 }
@@ -27,7 +27,7 @@ QMap<QByteArray,QByteArray>& HttpResponse::getHeaders() {
     return headers;
 }
 
-void HttpResponse::setStatus(int statusCode, QByteArray description) {
+void HttpResponse::setStatus(const int statusCode, const QByteArray description) {
     this->statusCode=statusCode;
     statusText=description;
 }
@@ -40,7 +40,7 @@ void HttpResponse::writeHeaders() {
     buffer.append(' ');
     buffer.append(statusText);
     buffer.append("\r\n");
-    foreach(QByteArray name, headers.keys()) {
+    foreach(QByteArray name, headers.uniqueKeys()) {
         buffer.append(name);
         buffer.append(": ");
         buffer.append(headers.value(name));
@@ -72,7 +72,7 @@ bool HttpResponse::writeToSocket(QByteArray data) {
     return true;
 }
 
-void HttpResponse::write(QByteArray data, bool lastPart) {
+void HttpResponse::write(const QByteArray data, bool lastPart) {
     Q_ASSERT(sentLastPart==false);
     if (sentHeaders==false) {
         QByteArray connectionMode=headers.value("Connection");
