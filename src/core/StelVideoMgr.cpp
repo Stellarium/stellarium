@@ -69,7 +69,7 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	connect(videoObjects[id]->player, SIGNAL(mutedChanged(bool)), this, SLOT(handleMutedChanged(bool)));
 	//connect(videoObjects[id]->player, SIGNAL(networkConfigurationChanged(QNetworkConfiguration)), this, SLOT(handleNetworkConfigurationChanged(QNetworkConfiguration)));
 	//connect(videoObjects[id]->player, SIGNAL(playbackRateChanged(qreal)), this, SLOT(handlePlaybackRateChanged(qreal)));
-	connect(videoObjects[id]->player, SIGNAL(positionChanged(qint64)), this, SLOT(handlePositionChanged(qint64)));
+	//connect(videoObjects[id]->player, SIGNAL(positionChanged(qint64)), this, SLOT(handlePositionChanged(qint64)));
 	// we test isSeekable() anyway.
 	//connect(videoObjects[id]->player, SIGNAL(seekableChanged(bool)), this, SLOT(handleSeekableChanged(bool)));
 	connect(videoObjects[id]->player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
@@ -643,6 +643,7 @@ void StelVideoMgr::handlePlaybackRateChanged(qreal rate)
 }
 */
 
+/* // USELESS. This is called not often enough, and update() is better suited to check for video-at-end.
 void StelVideoMgr::handlePositionChanged(qint64 position)
 {
     QString senderId=QObject::sender()->property("Stel_id").toString();
@@ -655,28 +656,22 @@ void StelVideoMgr::handlePositionChanged(qint64 position)
         qDebug() << " ---> paused at end as requested" ;
     }
 }
+*/
+
+// USELESS?
 void StelVideoMgr::handleSeekableChanged(bool seekable)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  seekable changed to:" << seekable;
+	qDebug() << "QMediaplayer: handleSeekableChanged()" << QObject::sender()->property("Stel_id").toString() << ":  seekable changed to:" << seekable;
 }
 void StelVideoMgr::handleStateChanged(QMediaPlayer::State state)
 {
+#ifndef NDEBUG
 	QString senderId=QObject::sender()->property("Stel_id").toString();
 	qDebug() << "QMediaplayer: " << senderId << ":  state changed to:" << state;
 	qDebug() << "Media Resources from player:";
 	qDebug() << "\tMedia Status:  " << videoObjects[senderId]->player->mediaStatus();
 	qDebug() << "\tFile:          " << videoObjects[senderId]->player->currentMedia().canonicalUrl();
-	// THIS IS ALL RUBBISH!
-//	qDebug() << "\tData size:     " << videoObjects[senderId]->player->currentMedia().canonicalResource().dataSize();
-//	qDebug() << "\tMIME Type:     " << videoObjects[senderId]->player->currentMedia().canonicalResource().mimeType();
-//	qDebug() << "\tVideo codec:   " << videoObjects[senderId]->player->currentMedia().canonicalResource().videoCodec();
-//	qDebug() << "\tResolution:    " << videoObjects[senderId]->player->currentMedia().canonicalResource().resolution();
-//	qDebug() << "\tVideo bitrate: " << videoObjects[senderId]->player->currentMedia().canonicalResource().videoBitRate();
-//	qDebug() << "\tAudio codec:   " << videoObjects[senderId]->player->currentMedia().canonicalResource().audioCodec();
-//	qDebug() << "\tChannel Count: " << videoObjects[senderId]->player->currentMedia().canonicalResource().channelCount();
-//	qDebug() << "\tAudio bitrate: " << videoObjects[senderId]->player->currentMedia().canonicalResource().audioBitRate();
-//	qDebug() << "\tSample rate:   " << videoObjects[senderId]->player->currentMedia().canonicalResource().sampleRate();
-//	qDebug() << "\tlanguage:      " << videoObjects[senderId]->player->currentMedia().canonicalResource().language();
+#endif
 }
 
 void StelVideoMgr::handleVideoAvailableChanged(bool videoAvailable)
@@ -701,7 +696,7 @@ void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus ava
 
 void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
 {
-    qDebug() << "handleMetaDataAvailableChanged():" << available << " -- Is this called on Windows?";
+    qDebug() << "handleMetaDataAvailableChanged():" << available << " -- Is this called on Windows?"; // --> YES!
 
     QString id=QObject::sender()->property("Stel_id").toString();
     qDebug() << "QMediaplayer: " << id << ":  Metadata available:" << available;
@@ -714,18 +709,27 @@ void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
 	    QString key=(*metadataIterator).toLocal8Bit().constData();
 	    qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key).toString();
 	}
-
     }
     else if (!available)
 	qDebug() << "Metadata availability ceased.";
     else
 	qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
-
 }
+
+// The signal sequence on Windows (MinGW) seems to be:
+// metadatachanged() as soon as video has been loaded. But Result: no metadata.
+// After media has started playing and frame is already growing,
+// audioAvailable() (but no audio in this movie...)
+// videoAvailable() (true)
+// durationChanged() --> only now duration becomes known!
+// status changed: QMediaPlayer::BufferedMedia
+// metadataAvailablechanged(true): Duration, PixelAspectRatio(unknown!), Resolution(unknown!), Videobitrate, VideoFramerate
+// metadataChanged() now true, and finally here also PixelAspectRatio and Resolution are known.
+// Then periodically, positionChanged(). We can skip that because in update() we can control position().
 
 void StelVideoMgr::handleMetaDataChanged()
 {
-    qDebug() << "!!! StelVideoMgr::handleMetadataChanged(): Is this called on Windows? ";
+    qDebug() << "!!! StelVideoMgr::handleMetadataChanged(): Is this called on Windows? "; // --> YES
 
     QString id=QObject::sender()->property("Stel_id").toString();
     qDebug() << "QMediaplayer: " << id << ":  Metadata changed (global notification).";
@@ -769,12 +773,12 @@ void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & v
 
 
 }
-
+/* // USELESS
 void StelVideoMgr::handleNotifyIntervalChanged(int milliseconds)
 {
     qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Notify interval changed to:" << milliseconds;
 }
-
+*/
 
 
 // update() has only to deal with the faders in all videos, and set positions and sizes of video windows.
