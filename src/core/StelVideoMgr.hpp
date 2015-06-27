@@ -172,9 +172,11 @@ public slots:
 	// Slots to handle QMediaPlayer change signals inherited from QMediaObject
 	void handleAvailabilityChanged(bool available);
 	void handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability);
-	void handleMetaDataAvailableChanged(bool available);
+    // This seems not necessary.
+    //void handleMetaDataAvailableChanged(bool available);
 	void handleMetaDataChanged();
-	void handleMetaDataChanged(const QString & key, const QVariant & value);
+    // This signal is not triggered on Windows, we must work around using handleMetaDataChanged()
+    //void handleMetaDataChanged(const QString & key, const QVariant & value);
 	//void handleNotifyIntervalChanged(int milliseconds); // interval for positionchange messages. Not needed.
 
 

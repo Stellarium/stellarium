@@ -59,30 +59,32 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	videoObjects[id]->resolution=QSize();
 
 	// N.B. A few connections are not needed, they are signals we don't use.
-	connect(videoObjects[id]->player, SIGNAL(audioAvailableChanged(bool)), this, SLOT(handleAudioAvailableChanged(bool)));
 	connect(videoObjects[id]->player, SIGNAL(bufferStatusChanged(int)), this, SLOT(handleBufferStatusChanged(int)));
 	//connect(videoObjects[id]->player, SIGNAL(currentMediaChanged(QMediaContent)), this, SLOT(handleCurrentMediaChanged(QMediaContent)));
 	connect(videoObjects[id]->player, SIGNAL(durationChanged(qint64)), this, SLOT(handleDurationChanged(qint64)));
 	connect(videoObjects[id]->player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(handleError(QMediaPlayer::Error)));
 	//connect(videoObjects[id]->player, SIGNAL(mediaChanged(QMediaContent)), this, SLOT(handleMediaChanged(QMediaContent)));
 	connect(videoObjects[id]->player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(handleMediaStatusChanged(QMediaPlayer::MediaStatus))); // debug-log messages
-	connect(videoObjects[id]->player, SIGNAL(mutedChanged(bool)), this, SLOT(handleMutedChanged(bool)));
 	//connect(videoObjects[id]->player, SIGNAL(networkConfigurationChanged(QNetworkConfiguration)), this, SLOT(handleNetworkConfigurationChanged(QNetworkConfiguration)));
 	//connect(videoObjects[id]->player, SIGNAL(playbackRateChanged(qreal)), this, SLOT(handlePlaybackRateChanged(qreal)));
 	//connect(videoObjects[id]->player, SIGNAL(positionChanged(qint64)), this, SLOT(handlePositionChanged(qint64)));
-	// we test isSeekable() anyway.
+    // we test isSeekable() anyway where needed.
 	//connect(videoObjects[id]->player, SIGNAL(seekableChanged(bool)), this, SLOT(handleSeekableChanged(bool)));
 	connect(videoObjects[id]->player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
 	connect(videoObjects[id]->player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(handleVideoAvailableChanged(bool)));
-	connect(videoObjects[id]->player, SIGNAL(volumeChanged(int)), this, SLOT(handleVolumeChanged(int)));
+    connect(videoObjects[id]->player, SIGNAL(audioAvailableChanged(bool)), this, SLOT(handleAudioAvailableChanged(bool)));
+    connect(videoObjects[id]->player, SIGNAL(mutedChanged(bool)), this, SLOT(handleMutedChanged(bool)));
+    connect(videoObjects[id]->player, SIGNAL(volumeChanged(int)), this, SLOT(handleVolumeChanged(int)));
 
 	connect(videoObjects[id]->player, SIGNAL(availabilityChanged(bool)), this, SLOT(handleAvailabilityChanged(bool)));
 	connect(videoObjects[id]->player, SIGNAL(availabilityChanged(QMultimedia::AvailabilityStatus)), this, SLOT(handleAvailabilityChanged(QMultimedia::AvailabilityStatus)));
-	// Only this lets us read duration etc.
-	connect(videoObjects[id]->player, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(handleMetaDataAvailableChanged(bool)));
-	// I reconnect this for now: I see this is triggered, but no details delivered on Windows by the next signal? Needs further Windows test which one to keep.
-	connect(videoObjects[id]->player, SIGNAL(metaDataChanged()), this, SLOT(handleMetaDataChanged()));
-	connect(videoObjects[id]->player, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(handleMetaDataChanged(QString,QVariant)));
+    //connect(videoObjects[id]->player, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(handleMetaDataAvailableChanged(bool)));
+
+    // I reconnect this for now: I see this is triggered also on Windows.
+    // Only this lets us read duration etc.
+    connect(videoObjects[id]->player, SIGNAL(metaDataChanged()), this, SLOT(handleMetaDataChanged()));
+    // That signal is not sent under Windows and apparently also not on MacOS X. (QTBUG-42034.)
+    // connect(videoObjects[id]->player, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(handleMetaDataChanged(QString,QVariant)));
 
 	// Not needed because nothing from outside sets the interval.
 	//connect(videoObjects[id]->player, SIGNAL(notifyIntervalChanged(int)), this, SLOT(handleNotifyIntervalChanged(int)));
@@ -116,18 +118,6 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	
 	qDebug() << "\tSTATUS finally:        " << videoObjects[id]->player->mediaStatus();
 	qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
-/*
-	qDebug() << "\tData size:     " << videoObjects[id]->player->currentMedia().canonicalResource().dataSize();
-	qDebug() << "\tMIME Type:     " << videoObjects[id]->player->currentMedia().canonicalResource().mimeType();
-	qDebug() << "\tVideo codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().videoCodec();
-	qDebug() << "\tResolution:    " << videoObjects[id]->player->currentMedia().canonicalResource().resolution();
-	qDebug() << "\tVideo bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().videoBitRate();
-	qDebug() << "\tAudio codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().audioCodec();
-	qDebug() << "\tChannel Count: " << videoObjects[id]->player->currentMedia().canonicalResource().channelCount();
-	qDebug() << "\tAudio bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().audioBitRate();
-	qDebug() << "\tSample rate:   " << videoObjects[id]->player->currentMedia().canonicalResource().sampleRate();
-	qDebug() << "\tlanguage:      " << videoObjects[id]->player->currentMedia().canonicalResource().language();
-*/
 	StelMainView::getInstance().scene()->addItem(videoObjects[id]->videoItem);
 	// TODO: Apparently we must wait until status=loaded. (?)
 
@@ -335,16 +325,6 @@ void StelVideoMgr::dropVideo(const QString& id)
 		qDebug() << "About to drop (unload) video.";
 		qDebug() << "\tSTATUS finally:        " << videoObjects[id]->player->mediaStatus();
 		qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
-		//	qDebug() << "\tData size:     " << videoObjects[id]->player->currentMedia().canonicalResource().dataSize();
-		//	qDebug() << "\tMIME Type:     " << videoObjects[id]->player->currentMedia().canonicalResource().mimeType();
-		//	qDebug() << "\tVideo codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().videoCodec();
-		//	qDebug() << "\tResolution:    " << videoObjects[id]->player->currentMedia().canonicalResource().resolution();
-		//	qDebug() << "\tVideo bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().videoBitRate();
-		//	qDebug() << "\tAudio codec:   " << videoObjects[id]->player->currentMedia().canonicalResource().audioCodec();
-		//	qDebug() << "\tChannel Count: " << videoObjects[id]->player->currentMedia().canonicalResource().channelCount();
-		//	qDebug() << "\tAudio bitrate: " << videoObjects[id]->player->currentMedia().canonicalResource().audioBitRate();
-		//	qDebug() << "\tSample rate:   " << videoObjects[id]->player->currentMedia().canonicalResource().sampleRate();
-		//	qDebug() << "\tlanguage:      " << videoObjects[id]->player->currentMedia().canonicalResource().language();
 
 		videoObjects[id]->player->stop();
 		StelMainView::getInstance().scene()->removeItem(videoObjects[id]->videoItem);
@@ -618,6 +598,8 @@ void StelVideoMgr::handleMediaStatusChanged(QMediaPlayer::MediaStatus status) //
     qDebug() << "QMediaplayer: " << id << ":  status changed:" << status;
     if ((status==QMediaPlayer::EndOfMedia) && videoObjects[id]->keepVisible)
     {
+        // TODO: keepVisible must be handled as flag for update(). status change notification comes too late to pause the movie.
+        // So also this signal seems unnecessary.
         //videoObjects[id]->player->setPosition(videoObjects[id]->duration - 1);
         //videoObjects[id]->player->pause();
         qDebug() << "handleMediaStatusChanged() no longer interacts here.";
@@ -694,6 +676,8 @@ void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus ava
     qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  availability:" << availability;
 }
 
+/*
+// This function seems unnecessary. metadataChanged() is called also on Windows and is enough.
 void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
 {
     qDebug() << "handleMetaDataAvailableChanged():" << available << " -- Is this called on Windows?"; // --> YES!
@@ -715,6 +699,7 @@ void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
     else
 	qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
 }
+*/
 
 // The signal sequence on Windows (MinGW) seems to be:
 // metadatachanged() as soon as video has been loaded. But Result: no metadata.
@@ -726,7 +711,8 @@ void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
 // metadataAvailablechanged(true): Duration, PixelAspectRatio(unknown!), Resolution(unknown!), Videobitrate, VideoFramerate
 // metadataChanged() now true, and finally here also PixelAspectRatio and Resolution are known.
 // Then periodically, positionChanged(). We can skip that because in update() we can control position().
-
+// Sequence is the same on Win/MSVC and Qt5.3.2, so metadataChanged(.,.) is NOT called on Windows.
+// This is also already observed on MacOSX and listed as QTBUG-42034.
 void StelVideoMgr::handleMetaDataChanged()
 {
     qDebug() << "!!! StelVideoMgr::handleMetadataChanged(): Is this called on Windows? "; // --> YES
@@ -753,10 +739,14 @@ void StelVideoMgr::handleMetaDataChanged()
 
 }
 
+
+/*
+// OK, either this signal or metadataChanged() must be evaluated. On Linux, both are fired, on Windows only the (void) version.
+// I cannot say which may work on MacOSX,but will disable this for now.
 void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & value)
 {
     qDebug() << "!!! StelVideoMgr::handleMetadataChanged(.,.): Is this called on Windows when built with MSVC? ";  // NOT WITH MinGW and Qt5.4!!!
-    qDebug() << "THIS IS TO ENSURE YOU SEE A CRASH ! CURRENTLY THE SIGNAL IS NOT SENT ON WINDOWS WHEN BUILT WITH minGW Qt5.4. Maybe with MSVC?";
+    qDebug() << "THIS IS TO ENSURE YOU SEE A CRASH ! CURRENTLY THE SIGNAL IS NOT SENT ON WINDOWS WHEN BUILT WITH minGW Qt5.4 and not with MSVC on Qt5.3.2";
     Q_ASSERT(0); // Remove the ASSERT and write a comment that it works on (which) windows!
     QString id=QObject::sender()->property("Stel_id").toString();
     qDebug() << "QMediaplayer: " << id << ":  Metadata change:" << key << "=>" << value;
@@ -769,11 +759,10 @@ void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & v
             videoObjects[id]->videoItem->setSize(videoObjects[id]->resolution);
         }
 	else qDebug() << "StelVideoMgr::handleMetaDataChanged(.,.)" << id << ": no such video - this is absurd.";
-
     }
-
-
 }
+*/
+
 /* // USELESS
 void StelVideoMgr::handleNotifyIntervalChanged(int milliseconds)
 {
