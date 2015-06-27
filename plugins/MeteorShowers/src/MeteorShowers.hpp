@@ -335,7 +335,6 @@ private:
 		QList<Meteor::colorPair> colors; //! Meteor colors
 	} activeData;
 
-	QList<activeData> activeInfo;	//! List of active meteors
 	QDateTime skyDate;              //! Current sky date
 	QDateTime lastSkyDate;          //! Last sky date
 
