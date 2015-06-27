@@ -118,8 +118,6 @@ MeteorShowers::~MeteorShowers()
 	{
 		delete OffIcon;
 	}
-
-	activeInfo.clear();
 }
 
 /*
@@ -346,57 +344,6 @@ void MeteorShowers::drawPointer(StelCore* core)
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10.f, -180);
 		painter.setColor(1,1,1,0);
 	}
-}
-
-void MeteorShowers::updateActiveInfo(void)
-{
-	foreach (const MeteorShowerP& ms, mShowers)
-	{
-		if (ms && ms->initialized)
-		{
-			//if the meteor shower is active, get data
-			if (ms->getStatus())
-			{
-				//First, check if there is already data about the constellation in "activeInfo"
-				//The var "index" will be updated to show the correct place do put the new information
-				int index = 0;
-				foreach(const activeData &a, activeInfo)
-				{
-					if (a.showerID == ms->showerID)  //exists
-						break;
-					index++;
-				}
-
-				if (activeInfo.size() < index + 1) //new?, put in the end
-				{
-					activeData newData;
-					newData.showerID = ms->showerID;
-					newData.speed = ms->speed;
-					newData.radiantAlpha = ms->radiantAlpha;
-					newData.radiantDelta = ms->radiantDelta;
-					newData.pidx = ms->pidx;
-					newData.zhr = ms->zhr;
-					newData.variable = ms->variable;
-					newData.start = ms->start;
-					newData.finish = ms->finish;
-					newData.peak = ms->peak;
-					newData.status = ms->status;
-					newData.colors = ms->colors;
-					activeInfo.append(newData);
-				}
-				else //just overwrites
-				{
-					activeInfo[index].zhr = ms->zhr;
-					activeInfo[index].variable = ms->variable;
-					activeInfo[index].start = ms->start;
-					activeInfo[index].finish = ms->finish;
-					activeInfo[index].peak = ms->peak;
-					activeInfo[index].status = ms->status;
-				}
-			}
-		}
-	}
-	lastSkyDate = skyDate;
 }
 
 void MeteorShowers::update(double deltaTime)
