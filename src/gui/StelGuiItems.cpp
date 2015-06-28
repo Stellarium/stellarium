@@ -75,7 +75,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 		Q_ASSERT(!pixNoChange.isNull());
 	}
 
-	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);	
 	setAcceptHoverEvents(true);
 	timeLine = new QTimeLine(250, this);
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
@@ -188,7 +188,7 @@ void StelButton::updateIcon()
 	painter.setOpacity(opacity);
 	if (!pixBackground.isNull() && noBckground==false)
 		painter.drawPixmap(0, 0, pixBackground);
-	painter.drawPixmap(0, 0,
+		painter.drawPixmap(0, 0,
 		(isTristate_ && checked == ButtonStateNoChange) ? (pixNoChange) :
 		(checked == ButtonStateOn) ? (pixOn) :
 		/* (checked == ButtonStateOff) ? */ (pixOff));
@@ -241,7 +241,7 @@ void LeftStelBar::addButton(StelButton* button)
 	}
 	button->setParentItem(this);
 	button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
-    button->setPos(0., qRound(posY+10.5));
+	button->setPos(0., qRound(posY+10.5));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
@@ -290,7 +290,7 @@ void LeftStelBar::buttonHoverChanged(bool b)
 				tip += "  [" + shortcut + "]";
 			}
 			helpLabel->setText(tip);
-            helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->pixmap().size().height()/2-8));
+			helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->pixmap().size().height()/2-8));
 		}
 	}
 	else
