@@ -257,7 +257,7 @@ Vec3d Meteor::meteorToAltAz(const StelCore* core, const Mat4d& rotationMatrix, V
 {
 	position.transfo4d(rotationMatrix);
 	position = core->j2000ToAltAz(position);
-	position/=1216; // 1216 is to scale down under 1 for desktop version
+	position /= 10000.0; // 10000 is to scale down under 1
 	return position;
 }
 
