@@ -81,7 +81,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta, const fl
 	m_rotationMatrix = Mat4d::zrotation(radiantAlpha) * Mat4d::yrotation(M_PI_2 - radiantDelta);
 
 	// find meteor position in horizontal coordinate system
-	Vec3d positionAltAz = meteorToAltAz(m_core, m_rotationMatrix, m_position);
+	Vec3d positionAltAz = meteorToAltAz(m_position);
 	float meteorLat = qAsin(positionAltAz[2] / positionAltAz.length());
 
 	// below the horizon
@@ -253,17 +253,12 @@ void Meteor::buildColorArrays(const QList<colorPair> colors)
 	}
 }
 
-Vec3d Meteor::meteorToAltAz(const StelCore* core, const Mat4d& rotationMatrix, Vec3d position)
+Vec3d Meteor::meteorToAltAz(Vec3d position)
 {
-	position.transfo4d(rotationMatrix);
-	position = core->j2000ToAltAz(position);
+	position.transfo4d(m_rotationMatrix);
+	position = m_core->j2000ToAltAz(position);
 	position /= 10000.0; // 10000 is to scale down under 1
 	return position;
-}
-
-void Meteor::insertVertex(const StelCore* core, const Mat4d& rotationMatrix, QVector<Vec3d> &vertexArray, Vec3d vertex)
-{
-	vertexArray.push_back(meteorToAltAz(core, rotationMatrix, vertex));
 }
 
 void Meteor::calculateThickness(const StelCore* core, float& thickness, float& bolideSize)
@@ -298,22 +293,22 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float
 
 	Vec3d topLeft = m_position;
 	topLeft[1] -= bolideSize;
-	insertVertex(core, m_rotationMatrix, vertexArrayBolide, topLeft);
+	vertexArrayBolide.push_back(meteorToAltAz(topLeft));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d topRight = m_position;
 	topRight[0] -= bolideSize;
-	insertVertex(core, m_rotationMatrix, vertexArrayBolide, topRight);
+	vertexArrayBolide.push_back(meteorToAltAz(topRight));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomRight = m_position;
 	bottomRight[1] += bolideSize;
-	insertVertex(core, m_rotationMatrix, vertexArrayBolide, bottomRight);
+	vertexArrayBolide.push_back(meteorToAltAz(bottomRight));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomLeft = m_position;
 	bottomLeft[0] += bolideSize;
-	insertVertex(core, m_rotationMatrix, vertexArrayBolide, bottomLeft);
+	vertexArrayBolide.push_back(meteorToAltAz(bottomLeft));
 	colorArrayBolide.push_back(bolideColor);
 
 	glEnable(GL_BLEND);
@@ -366,22 +361,22 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 
 		posi = m_posTrain;
 		posi[2] = height;
-		insertVertex(core, m_rotationMatrix, vertexArrayLine, posi);
+		vertexArrayLine.push_back(meteorToAltAz(posi));
 
 		posi = posTrainB;
 		posi[2] = height;
-		insertVertex(core, m_rotationMatrix, vertexArrayL, posi);
-		insertVertex(core, m_rotationMatrix, vertexArrayR, posi);
+		vertexArrayL.push_back(meteorToAltAz(posi));
+		vertexArrayR.push_back(meteorToAltAz(posi));
 
 		posi = posTrainL;
 		posi[2] = height;
-		insertVertex(core, m_rotationMatrix, vertexArrayL, posi);
-		insertVertex(core, m_rotationMatrix, vertexArrayTop, posi);
+		vertexArrayL.push_back(meteorToAltAz(posi));
+		vertexArrayTop.push_back(meteorToAltAz(posi));
 
 		posi = posTrainR;
 		posi[2] = height;
-		insertVertex(core, m_rotationMatrix, vertexArrayR, posi);
-		insertVertex(core, m_rotationMatrix, vertexArrayTop, posi);
+		vertexArrayR.push_back(meteorToAltAz(posi));
+		vertexArrayTop.push_back(meteorToAltAz(posi));
 
 		m_lineColorArray[i][3] = mag;
 		m_trainColorArray[i*2][3] = mag;

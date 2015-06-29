@@ -85,10 +85,7 @@ private:
 	void drawTrain(const StelCore* core, StelPainter& sPainter, const float &thickness);
 
 	//! find meteor position in horizontal coordinate system
-	Vec3d meteorToAltAz(const StelCore *core, const Mat4d &rotationMatrix, Vec3d position);
-
-	void insertVertex(const StelCore* core, const Mat4d& rotationMatrix,
-				 QVector<Vec3d> &vertexArray, Vec3d vertex);
+	Vec3d meteorToAltAz(Vec3d position);
 
 	const StelCore* m_core;         //! The associated StelCore instance.
 
