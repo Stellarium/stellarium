@@ -22,12 +22,14 @@
 #include "StelApp.hpp"
 #include "StelActionMgr.hpp"
 #include "StelCore.hpp"
+#include "LandscapeMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelScriptMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 
@@ -45,10 +47,12 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	//this is run in the main thread
 	core = StelApp::getInstance().getCore();
 	actionMgr =  StelApp::getInstance().getStelActionManager();
+	lsMgr = GETSTELMODULE(LandscapeMgr);
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
 	scriptMgr = &StelApp::getInstance().getScriptMgr();
+	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 
 	connect(actionMgr,SIGNAL(actionToggled(QString,bool)),this,SLOT(actionToggled(QString,bool)));
 
@@ -205,7 +209,10 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 			QString str = core->getCurrentProjectionTypeKey();
 
 			obj2.insert("fov",fov);
+			obj2.insert("projection",str);
 			obj2.insert("projectionStr",core->projectionTypeKeyToNameI18n(str));
+			obj2.insert("landscape",lsMgr->getCurrentLandscapeID());
+			obj2.insert("skyculture",skyCulMgr->getCurrentSkyCultureID());
 
 			obj.insert("view",obj2);
 		}

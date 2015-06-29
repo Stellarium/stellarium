@@ -1,0 +1,39 @@
+@font-face {
+	font-family: DejaVuSans;
+	src: url("DejaVuSans.ttf");
+}
+
+@font-face {
+	font-family: DejaVuSansMono;
+	src: url("DejaVuSansMono.ttf");
+}
+
+html {
+	font-size: 13px;
+	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
+}
+
+::selection {
+    background: rgb(253, 216, 134);
+}
+
+::-moz-selection {
+    background: rgb(253, 216, 134);
+}
+
+/* from normalHtml.css */
+a {
+	color: rgb(162, 140, 66);
+}
+
+/* style for tables with nomenclature (first usage in Tongan starlore) */
+table.nomenclature {
+        margin: 3px auto;
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+}
+
+table.nomenclature tr td, table.nomenclature tr th {
+        padding: 3px;
+}

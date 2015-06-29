@@ -52,6 +52,12 @@ void APIServiceResponse::applyResponse(HttpResponse *response) const
 	response->getHeaders().unite(headers);
 
 	//send response data, if any
+	if(responseData.isEmpty())
+	{
+		response->getHeaders().clear();
+		response->setStatus(500,"Internal Server Error");
+		response->write("Service provided no response",true);
+	}
 	response->write(responseData,true);
 }
 

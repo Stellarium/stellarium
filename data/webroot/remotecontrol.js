@@ -79,6 +79,7 @@ var Main = (new function($) {
                 Scripts.updateFromServer(data.script);
                 Locations.updateFromServer(data.location);
                 ViewControl.updateFromServer(data.view);
+                ViewOptions.updateFromServer(data.view);
 
                 if (data.actionChanges.id !== lastActionId) {
                     var error = Actions.updateFromServer(data.actionChanges.changes);
@@ -216,6 +217,7 @@ var Main = (new function($) {
             Time.init();
             Locations.init();
             ViewControl.init();
+            ViewOptions.init();
 
             fixJQueryUI();
 
