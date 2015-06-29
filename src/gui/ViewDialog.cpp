@@ -184,19 +184,15 @@ void ViewDialog::createDialogContent()
 
 	// Planets section
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	ui->showPlanetCheckBox->setChecked(ssmgr->getFlagPlanets());
-	connect(ui->showPlanetCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagPlanets(bool)));
-
-	ui->planetMarkerCheckBox->setChecked(ssmgr->getFlagHints());
-	connect(ui->planetMarkerCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagHints(bool)));
+	connectCheckBox(ui->showPlanetCheckBox, "actionShow_Planets");
+	connectCheckBox(ui->planetMarkerCheckBox, "actionShow_Planets_Hints");
 
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
 	ui->moonScaleFactor->setValue(ssmgr->getMoonScale());
 	connect(ui->moonScaleFactor, SIGNAL(valueChanged(double)), ssmgr, SLOT(setMoonScale(double)));
 
-	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
-	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
+	connectCheckBox(ui->planetOrbitCheckBox, "actionShow_Planets_Orbits");
 
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
@@ -295,8 +291,9 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
-	connect(ui->nativeNameCheckBox, SIGNAL(clicked(bool)), ssmgr, SLOT(setFlagNativeNames(bool)));
-	ui->nativeNameCheckBox->setChecked(ssmgr->getFlagNativeNames());
+
+	connectCheckBox(ui->nativeNameCheckBox,"actionShow_Skyculture_Nativenames");
+
 	// GZ NEW allow to display short names and inhibit translation.
 	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
@@ -553,18 +550,7 @@ void ViewDialog::updateSkyCultureText()
 {
 	StelApp& app = StelApp::getInstance();
 	QString skyCultureId = app.getSkyCultureMgr().getCurrentSkyCultureID();
-	QString lang = app.getLocaleMgr().getAppLanguage();
-	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
-	{
-		lang = lang.split("_").at(0);
-	}
-	QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
-	if (descPath.isEmpty())
-	{
-		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
-		if (descPath.isEmpty())
-			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
-	}
+	QString html = app.getSkyCultureMgr().getCurrentSkyCultureHtmlDescription();
 
 	QStringList searchPaths;
 	searchPaths << StelFileMgr::findFile("skycultures/" + skyCultureId);
@@ -573,22 +559,7 @@ void ViewDialog::updateSkyCultureText()
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
 	ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-
-	if (descPath.isEmpty())
-	{
-		ui->skyCultureTextBrowser->setHtml(q_("No description"));
-	}
-	else
-	{
-		QFile f(descPath);
-		QString htmlFile;
-		if(f.open(QIODevice::ReadOnly))
-		{
-			htmlFile = QString::fromUtf8(f.readAll());
-			f.close();
-		}
-		ui->skyCultureTextBrowser->setHtml(htmlFile);
-	}
+	ui->skyCultureTextBrowser->setHtml(html);
 }
 
 void ViewDialog::projectionChanged(const QString& projectionNameI18n)

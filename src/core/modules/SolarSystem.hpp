@@ -58,6 +58,15 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool planetsDisplayed
 		   READ getFlagPlanets
 		   WRITE setFlagPlanets)
+	Q_PROPERTY(bool hintsDisplayed
+		   READ getFlagHints
+		   WRITE setFlagHints)
+	Q_PROPERTY(bool markersDisplayed
+		   READ getFlagMarkers
+		   WRITE setFlagMarkers)
+	Q_PROPERTY(bool nativeNamesDisplayed
+		   READ getFlagNativeNames
+		   WRITE setFlagNativeNames)
 
 public:
 	SolarSystem();

@@ -175,6 +175,11 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "Alt+P");
 	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
+	//there is a small discrepancy in the GUI: "Show planet markers" actually means show planet hints
+	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "hintsDisplayed", "Ctrl+Alt+P");
+	//addAction("actionShow_Planets_Markers", displayGroup, N_("Planet selection marker"), "markersDisplayed", "Ctrl+Shift+P");
+	addAction("actionShow_Skyculture_Nativenames", displayGroup, N_("Native planet names (from starlore)"), "nativeNamesDisplayed", "Ctrl+Shift+N");
+
 }
 
 void SolarSystem::deinit()

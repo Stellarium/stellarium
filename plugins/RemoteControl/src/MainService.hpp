@@ -31,10 +31,12 @@
 
 class StelCore;
 class StelActionMgr;
+class LandscapeMgr;
 class StelLocaleMgr;
 class StelMovementMgr;
 class StelObjectMgr;
 class StelScriptMgr;
+class StelSkyCultureMgr;
 
 class MainService : public AbstractAPIService
 {
@@ -69,10 +71,12 @@ private slots:
 private:
 	StelCore* core;
 	StelActionMgr* actionMgr;
+	LandscapeMgr* lsMgr;
 	StelLocaleMgr* localeMgr;
 	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;
 	StelScriptMgr* scriptMgr;
+	StelSkyCultureMgr* skyCulMgr;
 
 	int moveX,moveY;
 	qint64 lastMoveUpdateTime;
