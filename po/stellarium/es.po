@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-14 16:13+0600\n"
-"PO-Revision-Date: 2015-06-24 14:32+0000\n"
-"Last-Translator: Aiguanachein <Unknown>\n"
+"PO-Revision-Date: 2015-06-29 03:09+0000\n"
+"Last-Translator: vulpecula <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-25 05:16+0000\n"
+"X-Launchpad-Export-Date: 2015-06-29 05:12+0000\n"
 "X-Generator: Launchpad (build 17578)\n"
 "Language: es_ES\n"
 
@@ -234,7 +234,7 @@ msgstr "Brillo: %1"
 #, qt-format
 msgctxt "HII Region"
 msgid "Form: %1"
-msgstr ""
+msgstr "Forma %1"
 
 #: src/core/modules/Nebula.cpp:180
 #, qt-format
@@ -307,7 +307,7 @@ msgstr "circular"
 #: src/core/modules/Nebula.cpp:777
 msgctxt "form"
 msgid "elliptical"
-msgstr ""
+msgstr "elíptica"
 
 #: src/core/modules/Nebula.cpp:780
 msgctxt "form"
@@ -322,7 +322,7 @@ msgstr "forma no documentada"
 #: src/core/modules/Nebula.cpp:796
 msgctxt "structure"
 msgid "amorphous"
-msgstr ""
+msgstr "amorfa"
 
 #: src/core/modules/Nebula.cpp:799
 msgctxt "structure"
@@ -1780,7 +1780,7 @@ msgstr "Comprobador: %1"
 
 #: src/gui/HelpDialog.cpp:306
 msgid "Former Developers"
-msgstr ""
+msgstr "antiguo desarrollador"
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -2145,12 +2145,12 @@ msgstr "Galáctico"
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Eclíptica"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Eclíptica (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -2513,12 +2513,12 @@ msgstr "Catálogo Melotte"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Estrellas dobles interesantes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Estrellas variables interesantes"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -4628,7 +4628,7 @@ msgstr "desde paisaje, si se proporciona"
 
 #: src/ui_viewDialog.h:1372
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Indica rotulación de paisaje"
 
 #: src/ui_viewDialog.h:1373
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -5846,12 +5846,12 @@ msgstr ""
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr ""
+msgstr "Campo real de vista"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "Magnification factor:"
-msgstr ""
+msgstr "Factor de aumentos"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
@@ -6226,7 +6226,7 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1739
 msgid "observatory"
-msgstr ""
+msgstr "observatorio"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1750
@@ -6241,7 +6241,7 @@ msgstr "La Estación Espacial Internacional"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1754
 msgid "China's first space station"
-msgstr ""
+msgstr "Primera estación espacial de China"
 
 #: plugins/Satellites/src/Satellite.cpp:256
 #: plugins/Satellites/src/Satellite.cpp:260
@@ -6300,7 +6300,7 @@ msgstr "Velocidad TEME (km/s): %1"
 #: plugins/Satellites/src/Satellite.cpp:323
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "Ángulo de reflexión solar: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:334
 msgid "The satellite and the observer are in sunlight."
@@ -7627,19 +7627,19 @@ msgstr "Indicadores de nebulosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galaxies hints"
-msgstr ""
+msgstr "Sugerencia de galaxias"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Sugerencia de  nebulosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Sugerencia de nebulosas oscuras"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Clusters hints"
-msgstr ""
+msgstr "Sugerencia de cúmulos"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
@@ -7663,7 +7663,7 @@ msgstr "Intensidad de la vía lactea"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "Intensidad del luz zodiacal"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
@@ -10265,11 +10265,11 @@ msgstr "Habilitar la muestra de lluvia de meteoros al inicio"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Indica marcador del radiante"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Indica etiqueta del radiante"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
 msgid "Show active radiants only"
@@ -10281,7 +10281,7 @@ msgstr "Tamaño de fuente de etiqueta (píxeles)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
 msgid "Set radiant color"
-msgstr ""
+msgstr "Ajusta color del radiante"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
 msgid "Active Radiant - Generic Data"
@@ -10293,7 +10293,7 @@ msgstr "Radiante inactivo"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
 msgid "Inactive"
-msgstr ""
+msgstr "Inactivo"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
 msgid "Active Radiant - Real Data"
@@ -10458,27 +10458,27 @@ msgstr "Coordenada Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:166
 msgid "Loading model..."
-msgstr ""
+msgstr "Cargando modelo..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:181
 msgid "Transforming model..."
-msgstr ""
+msgstr "Transformando modelo..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:193
 msgid "Loading ground..."
-msgstr ""
+msgstr "Cargando superficie..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:204
 msgid "Transforming ground..."
-msgstr ""
+msgstr "Transformando superficie..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Calculando mapa de colisión..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Finalizando la carga..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
@@ -10529,19 +10529,19 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Alterna informatiòn de debug"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle location text"
-msgstr ""
+msgstr "Alterna texto de localización"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "Alterna antorcha"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr ""
+msgstr "Recargar shaders"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
@@ -10599,7 +10599,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "Sombras %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
@@ -10621,11 +10621,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
-msgstr ""
+msgstr "habilitado"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "disabled"
-msgstr ""
+msgstr "deshabilitado"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
