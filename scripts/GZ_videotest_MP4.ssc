@@ -18,7 +18,7 @@ core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, false, 0.15);
 core.wait(4);
 LabelMgr.setLabelText(lab, "If you don't see the video, the show=false argument works.")
 core.wait(5);
-
+core.resizeVideo("mp4", -1, 0.5);
 LabelMgr.setLabelText(lab, "Waiting 3 seconds, then switch on and pause video at start frame.")
 core.wait(3);
 core.showVideo("mp4", true);
@@ -160,7 +160,7 @@ core.setVideoXY("mp4", 200, 90, false);
 core.wait(1);
 LabelMgr.setLabelText(lab, "... let's resize and move a bit: +30/-20 to 230/70");
 core.setVideoXY("mp4", 30, -20, true);
-core.wait(1);
+core.wait(5);
 LabelMgr.setLabelText(lab, "... let's resize and move a bit: -100/+50 to 130/120");
 core.setVideoXY("mp4", -100, 50, true);
 core.wait(7);
@@ -207,17 +207,19 @@ LabelMgr.setLabelText(lab, "Now try to play with opacity: 1.0 (may not work :-("
 core.setVideoAlpha("mp4", 1.0);
 core.wait(1);
 
-LabelMgr.setLabelText(lab, "OK, enjoy! I (the label) want to vanish 1 second after the video stops!");
+LabelMgr.setLabelText(lab, "OK, enjoy! The label should vanish and script should end 1 second after the video had paused at end for 5 seconds!");
 
 // TODO: find a mechanism to query how long the video will take and only wait that long.
 dur=core.getVideoDuration("mp4");
 pos=core.getVideoPosition("mp4");
 // play and try to keep open on last frame
 core.playVideo("mp4", true);
-core.wait((dur-pos)/1000 + 1);
-LabelMgr.deleteLabel(lab);
+core.wait((dur-pos)/1000 + 5);
+
 
 core.dropVideo("mp4");
-core.wait(0.4);
+core.wait(1);
+LabelMgr.deleteLabel(lab);
+
 
 
