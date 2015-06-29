@@ -20,6 +20,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelIniParser.hpp"
 
@@ -129,6 +130,39 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 QStringList StelSkyCultureMgr::getSkyCultureListIDs(void)
 {
 	return dirToNameEnglish.keys();
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
+{
+	QString skyCultureId = getCurrentSkyCultureID();
+	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+	{
+		lang = lang.split("_").at(0);
+	}
+	QString descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description."+lang+".utf8");
+	if (descPath.isEmpty())
+	{
+		descPath = StelFileMgr::findFile("skycultures/" + skyCultureId + "/description.en.utf8");
+		if (descPath.isEmpty())
+			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
+	}
+
+	if (descPath.isEmpty())
+	{
+		return q_("No description");
+	}
+	else
+	{
+		QFile f(descPath);
+		QString htmlFile;
+		if(f.open(QIODevice::ReadOnly))
+		{
+			htmlFile = QString::fromUtf8(f.readAll());
+			f.close();
+		}
+		return htmlFile;
+	}
 }
 
 QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)

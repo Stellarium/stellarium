@@ -70,11 +70,15 @@ public slots:
 	bool setCurrentSkyCultureNameI18(const QString& cultureName) {return setCurrentSkyCultureID(skyCultureI18ToDirectory(cultureName));}
 	
 	//! Get the current sky culture ID.
-	QString getCurrentSkyCultureID() {return currentSkyCultureDir;}
+	QString getCurrentSkyCultureID() const {return currentSkyCultureDir;}
 	//! Set the current sky culture from the ID.
 	//! @param id the sky culture ID.
 	//! @return true on success; else false.
 	bool setCurrentSkyCultureID(const QString& id);
+
+	//! Returns a localized HTML description for the current sky culture.
+	//! @return a HTML description of the current sky culture, suitable for display
+	QString getCurrentSkyCultureHtmlDescription() const;
 	
 	//! Get the default sky culture ID
 	QString getDefaultSkyCultureID() {return defaultSkyCultureID;}
@@ -93,6 +97,9 @@ public slots:
 
 	//! Get a list of sky culture IDs
 	QStringList getSkyCultureListIDs(void);
+
+	//! Returns a map from sky culture IDs/folders to sky culture names.
+	QMap<QString, StelSkyCulture> getDirToNameMap() const { return dirToNameEnglish; }
 	
 private:
 	//! Get the culture name in English associated with a specified directory.
