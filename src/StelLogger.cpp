@@ -29,6 +29,7 @@
 // Init statics variables.
 QFile StelLogger::logFile;
 QString StelLogger::log;
+QMutex StelLogger::fileMutex;
 
 void StelLogger::init(const QString& logFilePath)
 {
@@ -261,9 +262,11 @@ void StelLogger::debugLogHandler(QtMsgType, const QMessageLogContext&, const QSt
 
 void StelLogger::writeLog(QString msg)
 {
+	fileMutex.lock();
 	msg += "\n";
 	logFile.write(qPrintable(msg), msg.size());
 	log += msg;
+	fileMutex.unlock();
 }
 
 QString StelLogger::getMsvcVersionString(int ver)

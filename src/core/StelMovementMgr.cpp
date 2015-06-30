@@ -789,12 +789,20 @@ void StelMovementMgr::setFlagTracking(bool b)
 {
 	if (!b || !objectMgr->getWasSelected())
 	{
-		flagTracking=false;
+		if(b!=flagTracking)
+		{
+			flagTracking=false;
+			emit flagTrackingChanged(b);
+		}
 	}
 	else
 	{
 		moveToObject(objectMgr->getSelectedObject()[0], getAutoMoveDuration());
-		flagTracking=true;
+		if(b!=flagTracking)
+		{
+			flagTracking=true;
+			emit flagTrackingChanged(b);
+		}
 	}
 }
 

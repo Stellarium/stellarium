@@ -34,7 +34,8 @@ class StelMovementMgr : public StelModule
 			   WRITE setEquatorialMount)
 	Q_PROPERTY(bool tracking
 			   READ getFlagTracking
-			   WRITE setFlagTracking)
+			   WRITE setFlagTracking
+			   NOTIFY flagTrackingChanged)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
@@ -210,6 +211,10 @@ public slots:
 
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
+
+signals:
+	//! Emitted when the tracking property changes
+	void flagTrackingChanged(bool b);
 
 private slots:
 	//! Called when the selected object changes.
