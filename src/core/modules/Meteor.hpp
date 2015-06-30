@@ -33,6 +33,7 @@ class StelPainter;
 #define EARTH_RADIUS2 40678884.f     //! earth_radius^2 in km
 #define MAX_ALTITUDE 120.f           //! max meteor altitude in km
 #define MIN_ALTITUDE 80.f            //! min meteor altitude in km
+#define BURN_ALTITUDE 45.f           //! meteors usually disintegrate at altitudes greater than 45km
 #define VISIBLE_RADIUS 457.8f        //! max visible distance in km
 
 //! @class Meteor 
