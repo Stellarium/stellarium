@@ -368,9 +368,10 @@ SphericalCap StelCore::getVisibleSkyArea() const
 	Vec3d up(0, 0, 1);
 	up = altAzToJ2000(up, RefractionOff);
 	
+	// Limit star drawing to above landscape's minimal altitude (was const=-0.035, Bug lp:1469407)
 	if (landscapeMgr->getIsLandscapeFullyVisible())
 	{
-		return SphericalCap(up, -0.035f);
+		return SphericalCap(up, landscapeMgr->getLandscapeSinMinAltitudeLimit());
 	}
 	return SphericalCap(up, -1.f);
 }
