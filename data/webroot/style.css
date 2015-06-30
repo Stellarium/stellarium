@@ -209,7 +209,11 @@ select {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background: rgba(149, 150, 152, 0.2);
-	border: 1px solid rgba(0, 0, 0, 0.1);
+	border: 1px 
+	
+	solid 
+	
+	rgba(0, 0, 0, 0.1);
 	border-style: inset;
 	border-radius: 10px;
 	text-align: center;
@@ -346,99 +350,77 @@ header img {
 	width: 8em;
 }
 
-#timecontrols {
-	display: inline-block;
+#mainbuttons ul {
+	display: block;
 	list-style: none;
 	text-align: center;
 	margin-top: 10px;
 	padding: 6px;
 }
 
-#timecontrols li {
+#mainbuttons ul li {
 	vertical-align: middle;
 }
 
+.button32wrapper {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+}
+
+.button32wrapper:hover {
+	background: url("icons.png") no-repeat top left;
+	background-position: -851px 0;
+}
+
+button.button32 {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
 .button32 {
+	background: url("icons.png") no-repeat top left;
 	cursor: pointer;
 	height: 32px;
 	width: 32px;
 	display: inline-block;
-	background-repeat: no-repeat;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-ms-user-select: none;
 }
 
-/* The following is a bit ugly, maybe find a way to simplify? */
-
-#bt_timerewind {
-	background-image: url("btTimeRewind-off.png");
+.button32.active {
+	background-image: url("icons-active.png");
 }
 
-#bt_timerewind.active {
-	background-image: url("btTimeRewind-on.png");
-}
-
-#bt_timerewind:hover {
-	background-image: url("glow32x32.png"), url("btTimeRewind-off.png");
-}
-
-#bt_timerewind.active:hover {
-	background-image: url("glow32x32.png"),url("btTimeRewind-on.png");
-}
-
-#bt_timeplaypause {
-	background-image: url("btTimeRealtime-off.png");
-}
-
-#bt_timeplaypause.active {
-	background-image: url("btTimeRealtime-on.png");
-}
-
-#bt_timeplaypause.paused {
-	background-image: url("btTimePause-on.png");
-}
-
-#bt_timeplaypause:hover {
-	background-image: url("glow32x32.png"), url("btTimeRealtime-off.png");
-}
-
-#bt_timeplaypause.active:hover {
-	background-image: url("glow32x32.png"), url("btTimeRealtime-on.png");
-}
-
-#bt_timeplaypause.paused:hover {
-	background-image: url("glow32x32.png"), url("btTimePause-on.png");
-}
-
-#bt_timenow {
-	background-image: url("btTimeNow-off.png");
-}
-
-#bt_timenow.active {
-	background-image: url("btTimeNow-on.png");
-}
-
-#bt_timenow:hover {
-	background-image: url("glow32x32.png"), url("btTimeNow-off.png");
-}
-
-#bt_timenow.active:hover {
-	background-image: url("glow32x32.png"), url("btTimeNow-on.png");
-}
-
-#bt_timeforward {
-	background-image: url("btTimeForward-off.png");
-}
-
-#bt_timeforward.active {
-	background-image: url("btTimeForward-on.png");
-}
-
-#bt_timeforward:hover {
-	background-image: url("glow32x32.png"), url("btTimeForward-off.png");
-}
-
-#bt_timeforward.active:hover {
-	background-image: url("glow32x32.png"), url("btTimeForward-on.png");
-}
+.button32.btAtmosphere { background-position: 0 0; } 
+.button32.btAzimuthalGrid { background-position: -37px 0; } 
+.button32.btCardinalPoints { background-position: -74px 0; } 
+.button32.btConstellationArt { background-position: -111px 0; } 
+.button32.btConstellationLabels { background-position: -148px 0; } 
+.button32.btConstellationLines { background-position: -185px 0; } 
+.button32.btDSS { background-position: -222px 0; } 
+.button32.btFlipHorizontal { background-position: -259px 0; } 
+.button32.btEquatorialGrid { background-position: -296px 0; } 
+.button32.btEquatorialMount { background-position: -333px 0; } 
+.button32.btFlipVertical { background-position: -370px 0; } 
+.button32.btFullScreen { background-position: -407px 0; } 
+.button32.btGotoSelectedObject { background-position: -444px 0; } 
+.button32.btGround { background-position: -481px 0; } 
+.button32.btNebula { background-position: -518px 0; } 
+.button32.btNightView { background-position: -555px 0; } 
+.button32.btPlanets { background-position: -592px 0; } 
+.button32.btScriptRun { background-position: -629px 0; } 
+.button32.btTimeForward { background-position: -666px 0; } 
+.button32.btScriptStop { background-position: -703px 0; } 
+.button32.btTimeNow { background-position: -740px 0; } 
+.button32.btTimeRealtime { background-position: -777px 0; } 
+.button32.btTimeRewind { background-position: -814px 0; } 
+.button32.glow32x32 { background-position: -851px 0; } 
+.button32wrapper.paused .btTimeRealtime { background-image: url("icons-active.png"); background-position: -851px 0; } 
 
 #activescript {
 	font-weight: bold;

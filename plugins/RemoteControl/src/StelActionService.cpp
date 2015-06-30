@@ -80,10 +80,10 @@ void StelActionService::postImpl(const QByteArray& operation, const APIParameter
 		{
 			//queue a trigger event
 			//some special handling for quit and stop server event (async to prevent deadlock)
-
+			//also, script events are called queued to avoid blocking the request
 			bool isClosing = (id=="actionQuit_Global" || id == "actionShow_Remote_Control");
 			Qt::ConnectionType type = SERVICE_DEFAULT_INVOKETYPE;
-			if(isClosing && SERVICE_DEFAULT_INVOKETYPE == Qt::BlockingQueuedConnection)
+			if(isClosing || id.startsWith("actionScript"))
 				type = Qt::QueuedConnection;
 
 			QMetaObject::invokeMethod(action,"trigger",type);

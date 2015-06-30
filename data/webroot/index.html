@@ -54,10 +54,13 @@
         </div>
       </div>
       <p>&Delta;T = <span id="deltat"></span></p>
-      <ul id="timecontrols" class="ui-corner-all ui-widget-content">
-        <!-- TODO move all buttons into single image -->
-        <li id="bt_timerewind" class="button32" title="Decrease time speed"></li><li id="bt_timeplaypause" class="button32" title="Pause"></li><li id="bt_timenow" class="button32" title="Set time to now"></li><li id="bt_timeforward" class="button32" title="Increase time speed"></li>
-      </ul>
+      <div id="mainbuttons">
+        <ul id="timecontrols" class="ui-corner-all ui-widget-content">
+          <li class="button32wrapper" title="Decrease time speed"><button id="bt_timerewind" class="button32 btTimeRewind"/></li><li class="button32wrapper" title="Pause"><button id="bt_timeplaypause" class="button32 btTimeRealtime"/></li><li class="button32wrapper" title="Set time to now"><button id="bt_timenow" class="button32 btTimeNow"/></li><li class="button32wrapper" title="Increase time speed"><button id="bt_timeforward" class="button32 btTimeForward"/></li>
+        </ul>
+        <ul id="autobuttons" class="ui-corner-all ui-widget-content">
+        </ul>
+      </div>
     </section>
     <section id="selection" class="block">
       <header><h2>Selection</h2></header>
