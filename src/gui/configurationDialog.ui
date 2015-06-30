@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>497</width>
-    <height>495</height>
+    <height>520</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1256,6 +1256,29 @@
                </property>
                <property name="description">
                 <string>Download this file to view even more stars</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCommandLinkButton" name="getEphemDataButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>Click here to start downloading</string>
+               </property>
+               <property name="text">
+                <string>Get DE430</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
+               </property>
+               <property name="description">
+                <string/>
                </property>
               </widget>
              </item>

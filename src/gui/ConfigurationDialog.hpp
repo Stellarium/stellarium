@@ -60,27 +60,28 @@ private:
 	//! Re-translate the contents of the "Star calalogs" box.
 	//! Update the strings according to the state.
 	void updateStarCatalogControlsText();
-	//! True if a star catalog download is in progress.
-	bool isDownloadingStarCatalog;
 	//! Value set by resetStarCatalogControls().
 	int nextStarCatalogToDownloadIndex;
 	//! Value set by resetStarCatalogControls().
 	int starCatalogsCount;
 	//! True when at least one star catalog has been downloaded successfully this session
 	bool hasDownloadedStarCatalog;
-	QNetworkReply* starCatalogDownloadReply;
+	QNetworkReply* downloadReply;
 	QFile* currentDownloadFile;
 	class StelProgressController* progressBar;
 
 	QString userAgent;
 
+	//! True if a star catalog download is in progress.
+	bool isDownloadingStarCatalog;
     //! True if a ephemData download is in progress.
     bool isDownloadingEphemData;
     //! True if any download is in progress
     bool isDownloading;
     //! True when at least one ephemData-pack has been downloaded successfully this session
     bool hasDownloadedEphemData;
-    QNetworkReply* ephemDataDownloadReply;
+
+    int ephemDataCount;
 
 private slots:
 	void setNoSelectedInfo();
@@ -104,9 +105,11 @@ private slots:
 	void cursorTimeOutChanged(double) {cursorTimeOutChanged();}
 
 	void newStarCatalogData();
+	void newEphemData();
 	void downloadStars();
 	void cancelDownload();
-	void downloadFinished();
+	void starsDownloadFinished();
+	void ephemDataDownloadFinished();
 	void downloadError(QNetworkReply::NetworkError);
 
 	//! Update the labels displaying the current default state
@@ -156,6 +159,9 @@ private slots:
 
     //! downloads DE430/DE431 ephemData from SourceForge
     void downloadEphemData();
+
+	bool de430DataIsAvailable();
+	bool de431DataIsAvailable();
 
 private:
 	StelGui* gui;
