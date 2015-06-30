@@ -85,19 +85,25 @@ private:
 	//! Draws the meteor train.
 	void drawTrain(const StelCore* core, StelPainter& sPainter, const float &thickness);
 
+	//! Calculating meteor distance as a function of meteor zenith angle
+	float meteorDistance(float zenithAngle, float altitude);
+
 	//! find meteor position in horizontal coordinate system
-	Vec3d meteorToAltAz(Vec3d position);
+	Vec3d radiantToAltAz(Vec3d position);
+
+	//! find meteor position in radiant coordinate system
+	Vec3d altAzToRadiant(Vec3d position);
 
 	const StelCore* m_core;         //! The associated StelCore instance.
 
 	bool m_alive;                   //! Indicate if the meteor it still visible.
 	float m_speed;                  //! Velocity of meteor in km/s.
-	Mat4d m_rotationMatrix;         //! Rotation matrix to align earth's north polar axis with radiant.
-	Vec3d m_position;               //! meteor position in meteor coordinate system
-	Vec3d m_posTrain;               //! end of train in meteor coordinate system
+	Mat4d m_matAltAzToRadiant;      //! Rotation matrix to convert from horizontal to radiant coordinate system.
+	Vec3d m_position;               //! Meteor position in radiant coordinate system.
+	Vec3d m_posTrain;               //! End of train in radiant coordinate system.
 	float m_xyDist;                 //! Distance in XY plane (orthogonal to radiant) from observer to meteor
-	float m_initialAlt;             //! Initial meteor altitude above the Earth surface.
-	float m_finalAlt;               //! Final meteor altitude (end of burn point).
+	float m_initialDist;            //! Initial distance from observer to meteor.
+	float m_finalDist;              //! Final distance from observer to meteor.
 	float m_mag;                    //! Apparent magnitude at head, 0-1
 	int m_firstBrightSegment;       //! First bright segment of the train
 
