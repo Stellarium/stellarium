@@ -22,6 +22,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelTexture.hpp"
+#include "StelUtils.hpp"
 
 #include <QtMath>
 
@@ -46,56 +47,67 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta, const fl
 	// meteor velocity in km/s
 	m_speed = speed;
 
-	// initial meteor altitude above the earth surface
-	m_initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
-
-	// angle from radiant to meteor
-	float radiantAngle = M_PI_2 * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, pi/2]
-
-	// distance between the observer and the meteor
-	float distance;
-	if (radiantAngle > 1.134f) // > 65 degrees?
+	// find the radiant in horizontal coordinates
+	Vec3d radiantAltAz;
+	StelUtils::spheToRect(radiantAlpha, radiantDelta, radiantAltAz);
+	radiantAltAz = m_core->j2000ToAltAz(radiantAltAz);
+	float radiantAlt, radiantAz;
+	StelUtils::rectToSphe(&radiantAz, &radiantAlt, radiantAltAz);
+	// N is zero, E is 90 degrees
+	radiantAz = 3. * M_PI - radiantAz;
+	if (radiantAz > M_PI*2)
 	{
-		distance = qSqrt(EARTH_RADIUS2 * qPow(radiantAngle, 2)
-				 + 2 * EARTH_RADIUS * m_initialAlt
-				 + qPow(m_initialAlt, 2));
-		distance -= EARTH_RADIUS * qCos(radiantAngle);
+		radiantAz -= M_PI*2;
 	}
-	else
+
+	// meteors won't be visible if radiant is below -5degrees
+	if (radiantAlt < -0.0872664626f)
 	{
-		// (first order approximation)
-		distance = m_initialAlt / qCos(radiantAngle);
+		return;
 	}
+
+	// determine the rotation matrix to align z axis with radiant
+	m_matAltAzToRadiant = Mat4d::yrotation(M_PI_2 - radiantAlt) * Mat4d::zrotation(radiantAz);
+
+	// select a random initial meteor altitude [MIN_ALTITUDE, MAX_ALTITUDE]
+	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
+
+	// determine the initial distance from observer to radiant
+	m_initialDist = meteorDistance(M_PI_2 - radiantAlt, initialAlt);
 
 	// meteor trajectory
-	m_xyDist = distance * qSin(radiantAngle);
+	m_xyDist = VISIBLE_RADIUS * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, visibleRadius]
 	float angle = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, 2pi]
 
 	// initial meteor coordinates
 	m_position[0] = m_xyDist * qCos(angle);
 	m_position[1] = m_xyDist * qSin(angle);
-	m_position[2] = m_initialAlt;
+	m_position[2] = m_initialDist;
 	m_posTrain = m_position;
 
-	// determine rotation matrix based on radiant
-	m_rotationMatrix = Mat4d::zrotation(radiantAlpha) * Mat4d::yrotation(M_PI_2 - radiantDelta);
-
-	// find meteor position in horizontal coordinate system
-	Vec3d positionAltAz = meteorToAltAz(m_position);
+	// find the angle from horizon to meteor
+	Vec3d positionAltAz = radiantToAltAz(m_position);
 	float meteorLat = qAsin(positionAltAz[2] / positionAltAz.length());
 
-	// below the horizon
-	if (meteorLat < 0.0f)
+	// below the horizon ?
+	if (meteorLat < 0.f)
 	{
 		return;
 	}
 
-	// final meteor altitude (end of burn point)
-	m_finalAlt = BURN_ALTITUDE;
-	if (m_xyDist < MIN_ALTITUDE)
+	// determine the final distance from observer to meteor
+	if (radiantAlt < 0.0174532925f) // (<1 degrees) earth grazing meteor ?
 	{
-		float burn = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - m_xyDist*m_xyDist);
-		m_finalAlt = burn < BURN_ALTITUDE ? BURN_ALTITUDE : burn;
+		m_finalDist = -m_initialDist;
+		// a meteor cannot hit the observer
+		if (m_xyDist < BURN_ALTITUDE)
+		{
+			return;
+		}
+	}
+	else
+	{
+		m_finalDist = meteorDistance(M_PI_2 - meteorLat, MIN_ALTITUDE);
 	}
 
 	// determine intensity [-3; 4.5]
@@ -110,7 +122,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta, const fl
 
 	// most visible meteors are under about 184km distant
 	// scale max mag down if outside this range
-	float scale = qPow(184, 2) / qPow(distance, 2);
+	float scale = qPow(184, 2) / qPow(m_initialDist, 2);
 	if (scale < 1.0f)
 	{
 		m_mag *= scale;
@@ -131,7 +143,7 @@ bool Meteor::update(double deltaTime)
 		return false;
 	}
 
-	if (m_position[2] < m_finalAlt)
+	if (m_position[2] < m_finalDist)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
@@ -146,9 +158,9 @@ bool Meteor::update(double deltaTime)
 	m_position[2] -= m_speed * deltaTime / 1000.0f;
 
 	// train doesn't extend beyond start of burn
-	if (m_position[2] + m_speed * 0.5f > m_initialAlt)
+	if (m_position[2] + m_speed * 0.5f > m_initialDist)
 	{
-		m_posTrain[2] = m_initialAlt;
+		m_posTrain[2] = m_initialDist;
 	}
 	else
 	{
@@ -251,11 +263,36 @@ void Meteor::buildColorArrays(const QList<colorPair> colors)
 	}
 }
 
-Vec3d Meteor::meteorToAltAz(Vec3d position)
+float Meteor::meteorDistance(float zenithAngle, float altitude)
 {
-	position.transfo4d(m_rotationMatrix);
-	position = m_core->j2000ToAltAz(position);
-	position /= 10000.0; // 10000 is to scale down under 1
+	float distance;
+
+	if (zenithAngle > 1.13446401f) // > 65 degrees?
+	{
+		float zcos = qCos(zenithAngle);
+		distance = qSqrt(EARTH_RADIUS2 * qPow(zcos, 2)
+				 + 2 * EARTH_RADIUS * altitude
+				 + qPow(altitude, 2));
+		distance -= EARTH_RADIUS * zcos;
+	}
+	else
+	{
+		// (first order approximation)
+		distance = altitude / qCos(zenithAngle);
+	}
+
+	return distance;
+}
+
+Vec3d Meteor::altAzToRadiant(Vec3d position)
+{
+	position.transfo4d(m_matAltAzToRadiant);
+	return position;
+}
+
+Vec3d Meteor::radiantToAltAz(Vec3d position)
+{
+	position.transfo4d(m_matAltAzToRadiant.transpose());
 	return position;
 }
 
@@ -291,22 +328,22 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float
 
 	Vec3d topLeft = m_position;
 	topLeft[1] -= bolideSize;
-	vertexArrayBolide.push_back(meteorToAltAz(topLeft));
+	vertexArrayBolide.push_back(radiantToAltAz(topLeft));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d topRight = m_position;
 	topRight[0] -= bolideSize;
-	vertexArrayBolide.push_back(meteorToAltAz(topRight));
+	vertexArrayBolide.push_back(radiantToAltAz(topRight));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomRight = m_position;
 	bottomRight[1] += bolideSize;
-	vertexArrayBolide.push_back(meteorToAltAz(bottomRight));
+	vertexArrayBolide.push_back(radiantToAltAz(bottomRight));
 	colorArrayBolide.push_back(bolideColor);
 
 	Vec3d bottomLeft = m_position;
 	bottomLeft[0] += bolideSize;
-	vertexArrayBolide.push_back(meteorToAltAz(bottomLeft));
+	vertexArrayBolide.push_back(radiantToAltAz(bottomLeft));
 	colorArrayBolide.push_back(bolideColor);
 
 	glEnable(GL_BLEND);
@@ -359,22 +396,22 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 
 		posi = m_posTrain;
 		posi[2] = height;
-		vertexArrayLine.push_back(meteorToAltAz(posi));
+		vertexArrayLine.push_back(radiantToAltAz(posi));
 
 		posi = posTrainB;
 		posi[2] = height;
-		vertexArrayL.push_back(meteorToAltAz(posi));
-		vertexArrayR.push_back(meteorToAltAz(posi));
+		vertexArrayL.push_back(radiantToAltAz(posi));
+		vertexArrayR.push_back(radiantToAltAz(posi));
 
 		posi = posTrainL;
 		posi[2] = height;
-		vertexArrayL.push_back(meteorToAltAz(posi));
-		vertexArrayTop.push_back(meteorToAltAz(posi));
+		vertexArrayL.push_back(radiantToAltAz(posi));
+		vertexArrayTop.push_back(radiantToAltAz(posi));
 
 		posi = posTrainR;
 		posi[2] = height;
-		vertexArrayR.push_back(meteorToAltAz(posi));
-		vertexArrayTop.push_back(meteorToAltAz(posi));
+		vertexArrayR.push_back(radiantToAltAz(posi));
+		vertexArrayTop.push_back(radiantToAltAz(posi));
 
 		m_lineColorArray[i][3] = mag;
 		m_trainColorArray[i*2][3] = mag;
