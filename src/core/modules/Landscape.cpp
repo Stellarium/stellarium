@@ -116,6 +116,10 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	// Set minimal brightness for landscape
 	minBrightness = landscapeIni.value("landscape/minimal_brightness", -1.0).toDouble();
 
+	// set a minimal altitude which the landscape covers. (new in 0.14)
+	// This is to allow landscapes with "holes" in the ground (space station?) (Bug lp:1469407)
+	sinMinAltitudeLimit = (float) std::sin(M_PI/180.0 * landscapeIni.value("landscape/minimal_altitude", -2.0).toDouble());
+
 	// This is now optional for all classes, for mixing with a photo horizon:
 	// they may have different offsets, like a south-centered pano and a geographically-oriented polygon.
 	// In case they are aligned, we can use one value angle_rotatez, or define the polygon rotation individually.

@@ -178,8 +178,10 @@ public slots:
 	//! Set flag for displaying Landscape.
 	void setFlagLandscape(const bool displayed);
 
-	//! Get whether the landscape is currently visible. If true, object below landscape must be rendered.
+	//! Get whether the landscape is currently visible. If true, objects below landscape's limiting altitude limit can be omitted.
 	bool getIsLandscapeFullyVisible() const;
+	//! Get the sine of current landscape's minimal altitude. Useful to construct bounding caps.
+	float getLandscapeSinMinAltitudeLimit() const;
 	
 	//! Get flag for displaying Fog.
 	bool getFlagFog() const;

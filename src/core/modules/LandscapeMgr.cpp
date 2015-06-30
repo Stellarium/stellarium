@@ -530,6 +530,11 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 	return landscape->getIsFullyVisible();
 }
 
+float LandscapeMgr::getLandscapeSinMinAltitudeLimit() const
+{
+	return landscape->getSinMinAltitudeLimit();
+}
+
 bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
 {
 	return flagLightPollutionFromDatabase;
