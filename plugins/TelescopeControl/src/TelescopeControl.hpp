@@ -55,6 +55,7 @@ class TelescopeClient;
 class TelescopeDialog;
 class SlewDialog;
 
+
 using namespace TelescopeControlGlobals;
 
 typedef QSharedPointer<TelescopeClient> TelescopeClientP;
