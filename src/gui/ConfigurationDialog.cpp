@@ -72,7 +72,7 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	: StelDialog(parent)
 	, nextStarCatalogToDownloadIndex(0)
 	, starCatalogsCount(0)
-	, starCatalogDownloadReply(NULL)
+	, downloadReply(NULL)
 	, currentDownloadFile(NULL)
 	, progressBar(NULL)
 	, gui(agui)
@@ -174,6 +174,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
+	
+	connect(ui->getEphemDataButton, SIGNAL(clicked()), this, SLOT(downloadEphemData()));
 	resetStarCatalogControls();
 
 #ifdef Q_OS_WIN
@@ -1020,27 +1022,27 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 void ConfigurationDialog::cancelDownload(void)
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 	qWarning() << "Aborting download";
-	starCatalogDownloadReply->abort();
+	downloadReply->abort();
 }
 
 void ConfigurationDialog::newStarCatalogData()
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 	Q_ASSERT(progressBar);
 
-	int size = starCatalogDownloadReply->bytesAvailable();
+	int size = downloadReply->bytesAvailable();
 	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
-	currentDownloadFile->write(starCatalogDownloadReply->read(size));
+	currentDownloadFile->write(downloadReply->read(size));
 }
 
 void ConfigurationDialog::downloadStars()
 {
 	Q_ASSERT(!nextStarCatalogToDownload.isEmpty());
 	Q_ASSERT(!isDownloadingStarCatalog);
-	Q_ASSERT(starCatalogDownloadReply==NULL);
+	Q_ASSERT(downloadReply==NULL);
 	Q_ASSERT(currentDownloadFile==NULL);
 	Q_ASSERT(progressBar==NULL);
 
@@ -1055,7 +1057,7 @@ void ConfigurationDialog::downloadStars()
 		ui->downloadRetryButton->setVisible(true);
 		return;
 	}
-
+	isDownloading = true;
 	isDownloadingStarCatalog = true;
 	updateStarCatalogControlsText();
 	ui->downloadCancelButton->setVisible(true);
@@ -1067,10 +1069,10 @@ void ConfigurationDialog::downloadStars()
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", userAgent.toLatin1());
-	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
-	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+	downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	downloadReply->setReadBufferSize(1024*1024*2);	
+	connect(downloadReply, SIGNAL(finished()), this, SLOT(starsDownloadFinished()));
+	connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
 	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
@@ -1090,35 +1092,97 @@ bool ConfigurationDialog::de431DataIsAvailable()
     return false;
 }
 
+void ConfigurationDialog::newEphemData()
+{
+	Q_ASSERT(currentDownloadFile);
+	Q_ASSERT(downloadReply);
+	Q_ASSERT(progressBar);
+
+	int size = downloadReply->bytesAvailable();
+	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
+	currentDownloadFile->write(downloadReply->read(size));
+}
+
 void ConfigurationDialog::downloadEphemData()
 {
+	Q_ASSERT(downloadReply == NULL);
+	Q_ASSERT(currentDownloadFile == NULL);
+	Q_ASSERT(progressBar == NULL);
 
+
+	QString path = StelFileMgr::getUserDir()+QString("/stars/default/test.txt");
+	currentDownloadFile = new QFile(path);
+	if (!currentDownloadFile->open(QIODevice::WriteOnly))
+	{
+		qWarning() << "Can't open a writable file for storing new ephem data: " << QDir::toNativeSeparators(path);
+		currentDownloadFile->deleteLater();
+		currentDownloadFile = NULL;
+		ui->downloadLabel->setText(q_("Error downloading, Can't open a writable file for storing new ephem data: %1").arg(path));
+		ui->downloadRetryButton->setVisible(true);
+		return;
+	}
+
+	isDownloading = true;
+	isDownloadingEphemData = true;
+	updateStarCatalogControlsText();
+	ui->downloadCancelButton->setVisible(true);
+	ui->downloadRetryButton->setVisible(false);
+	ui->getEphemDataButton->setVisible(true);
+	ui->getEphemDataButton->setEnabled(false);
+
+	//debug server URL http://dss.astro.altspu.ru/de
+	//tst url: http://dss.astro.altspu.ru/de/aa_summaries.txt
+
+	QNetworkRequest req(QString("http://dss.astro.altspu.ru/de/aa_summaries.txt"));
+	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
+	req.setRawHeader("User-Agent", userAgent.toLatin1());
+	downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	downloadReply->setReadBufferSize(1024*1024*2);	
+	connect(downloadReply, SIGNAL(finished()), this, SLOT(ephemDataDownloadFinished()));
+	connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+
+	progressBar = StelApp::getInstance().addProgressBar();
+	progressBar->setValue(0);
+	progressBar->setRange(0, 6745); //DEBUG
+	//progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 
-    isDownloadingStarCatalog = false;
-	qWarning() << "Error downloading file" << starCatalogDownloadReply->url() << ": " << starCatalogDownloadReply->errorString();
-	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(starCatalogDownloadReply->errorString()));
+	isDownloading = false;
+    if(isDownloadingStarCatalog)
+    {
+    	isDownloadingStarCatalog = false;
+    	ui->getStarsButton->setVisible(false);
+		ui->getStarsButton->setEnabled(true);
+    } else 
+    {
+    	isDownloadingEphemData = false;
+    	ui->getEphemDataButton->setVisible(true);
+		ui->getEphemDataButton->setEnabled(true);
+    }
+
+	qWarning() << "Error downloading file" << downloadReply->url() << ": " << downloadReply->errorString();
+	ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(downloadReply->errorString()));
 	ui->downloadCancelButton->setVisible(false);
 	ui->downloadRetryButton->setVisible(true);
-	ui->getStarsButton->setVisible(false);
-	ui->getStarsButton->setEnabled(true);
+	
 }
 
-void ConfigurationDialog::downloadFinished()
+void ConfigurationDialog::ephemDataDownloadFinished()
 {
 	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(starCatalogDownloadReply);
+	Q_ASSERT(downloadReply);
 	Q_ASSERT(progressBar);
 
-	if (starCatalogDownloadReply->error()!=QNetworkReply::NoError)
+	if (downloadReply->error()!=QNetworkReply::NoError)
 	{
-		starCatalogDownloadReply->deleteLater();
-		starCatalogDownloadReply = NULL;
+		downloadReply->deleteLater();
+		downloadReply = NULL;
 		currentDownloadFile->close();
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
@@ -1127,31 +1191,83 @@ void ConfigurationDialog::downloadFinished()
 		return;
 	}
 
-	Q_ASSERT(starCatalogDownloadReply->bytesAvailable()==0);
+	Q_ASSERT(downloadReply->bytesAvailable()==0);
 
-	const QVariant& redirect = starCatalogDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+	const QVariant& redirect = downloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 	if (!redirect.isNull())
 	{
 		// We got a redirection, we need to follow
-		starCatalogDownloadReply->deleteLater();
+		downloadReply->deleteLater();
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 		req.setRawHeader("User-Agent", userAgent.toLatin1());
-		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
-		connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
-		connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-		connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+		downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		downloadReply->setReadBufferSize(1024*1024*2);
+		connect(downloadReply, SIGNAL(readyRead()), this, SLOT(newEphemData()));
+		connect(downloadReply, SIGNAL(finished()), this, SLOT(ephemDataDownloadFinished()));
+		connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
+		return;
+	}
+
+	isDownloadingEphemData = false;
+	isDownloading = false;
+	currentDownloadFile->close();
+	currentDownloadFile->deleteLater();
+	currentDownloadFile = NULL;
+	downloadReply->deleteLater();
+	downloadReply = NULL;
+	StelApp::getInstance().removeProgressBar(progressBar);
+	progressBar=NULL;
+
+	hasDownloadedEphemData = true;
+
+}
+
+void ConfigurationDialog::starsDownloadFinished()
+{
+	Q_ASSERT(currentDownloadFile);
+	Q_ASSERT(downloadReply);
+	Q_ASSERT(progressBar);
+
+	if (downloadReply->error()!=QNetworkReply::NoError)
+	{
+		downloadReply->deleteLater();
+		downloadReply = NULL;
+		currentDownloadFile->close();
+		currentDownloadFile->deleteLater();
+		currentDownloadFile = NULL;
+		StelApp::getInstance().removeProgressBar(progressBar);
+		progressBar=NULL;
+		return;
+	}
+
+	Q_ASSERT(downloadReply->bytesAvailable()==0);
+
+	const QVariant& redirect = downloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+	if (!redirect.isNull())
+	{
+		// We got a redirection, we need to follow
+		downloadReply->deleteLater();
+		QNetworkRequest req(redirect.toUrl());
+		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
+		req.setRawHeader("User-Agent", userAgent.toLatin1());
+		downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		downloadReply->setReadBufferSize(1024*1024*2);
+		connect(downloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
+		connect(downloadReply, SIGNAL(finished()), this, SLOT(starsDownloadFinished()));
+		connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 		return;
 	}
 
 	isDownloadingStarCatalog = false;
+	isDownloading = false;
 	currentDownloadFile->close();
 	currentDownloadFile->deleteLater();
 	currentDownloadFile = NULL;
-	starCatalogDownloadReply->deleteLater();
-	starCatalogDownloadReply = NULL;
+	downloadReply->deleteLater();
+	downloadReply = NULL;
 	StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar=NULL;
 
