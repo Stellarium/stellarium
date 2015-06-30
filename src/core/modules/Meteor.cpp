@@ -91,13 +91,11 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta, const fl
 	}
 
 	// final meteor altitude (end of burn point)
-	if (m_xyDist > MIN_ALTITUDE)
+	m_finalAlt = BURN_ALTITUDE;
+	if (m_xyDist < MIN_ALTITUDE)
 	{
-		m_finalAlt = -m_initialAlt;  // earth grazing
-	}
-	else
-	{
-		m_finalAlt = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - m_xyDist*m_xyDist);
+		float burn = qSqrt(MIN_ALTITUDE*MIN_ALTITUDE - m_xyDist*m_xyDist);
+		m_finalAlt = burn < BURN_ALTITUDE ? BURN_ALTITUDE : burn;
 	}
 
 	// determine intensity [-3; 4.5]
