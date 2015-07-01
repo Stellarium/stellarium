@@ -216,7 +216,7 @@ private:
 		QMediaPlayer *player;
 		qint64 duration;           //!< duration of video. This becomes available only after loading or at begin of playing! (?)
 		QSize resolution;          //!< stores resolution of video. This becomes available only after loading or at begin of playing, so we must apply a trick with signals and slots to set it.
-		bool playNativeResolution; //!< store whether you want to play the video in native resolution. (Needed to set size after detection of resolution.)
+		//bool playNativeResolution; //!< store whether you want to play the video in native resolution. (Needed to set size after detection of resolution.)
 		bool keepVisible;          //!< true if you want to show the last frame after video has played. (Due to delays in signal/slot handling of mediaplayer status changes, we use update() to stop a few frames before end.)
 		bool needResize;           //!< becomes true if resize is called before resolution becomes available.
 		bool simplePlay;           //!< only play in static size. true for playVideo(), false during popupPlay().
@@ -224,6 +224,7 @@ private:
 		QSizeF  targetFrameSize;   //!< Video frame size, used during @name playVideo(), and final frame size during @name playVideoPopout().
 		QPointF popupOrigin;       //!< Screen point where video appears to come out during @name playVideoPopout()
 		QPointF popupTargetCenter; //!< Target frame position (center of target frame) used during @name playVideoPopout()
+		int lastPos;               //!< This should not be required: We must track a bug in QtMultimedia where the QMediaPlayer is in playing state but does not progress the video position. In update() we try to let it run again.
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects;
 #endif

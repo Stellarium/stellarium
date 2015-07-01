@@ -56,23 +56,23 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	videoObjects[id]->videoItem= new QGraphicsVideoItem();
 	videoObjects[id]->player = new QMediaPlayer();
 	videoObjects[id]->duration=-1; // -1 to signal "unknown".
-	videoObjects[id]->resolution=QSize();
-	videoObjects[id]->playNativeResolution=false; // DO WE STILL NEED THIS?
+	videoObjects[id]->resolution=QSize(); // initialize with "invalid" resolution, we must detect this when player is starting!
+	//videoObjects[id]->playNativeResolution=false; // DO WE STILL NEED THIS?
 	videoObjects[id]->keepVisible=false;
-	videoObjects[id]->simplePlay=true;
 	videoObjects[id]->needResize=true; // resolution and target frame not yet known.
+	videoObjects[id]->simplePlay=true;
 	videoObjects[id]->targetFrameSize=QSizeF(); // start with invalid, depends on parameters given in playVideo(), playPopoutVideo() and resolution detected only after playing started.
 	videoObjects[id]->popupOrigin=QPointF();
 	videoObjects[id]->popupTargetCenter=QPointF();
-	videoObjects[id]->player->setProperty("Stel_id", id); // allow better tracking of log messages and access their videoItems.
+	videoObjects[id]->player->setProperty("Stel_id", id); // allow tracking of log messages and access of members.
 	videoObjects[id]->player->setVideoOutput(videoObjects[id]->videoItem);
 	videoObjects[id]->videoItem->setOpacity(alpha);
 	videoObjects[id]->videoItem->setVisible(show); // Interesting: WMV file on Linux is displayed with default resolution 320x240. We must set this invisible to avoid a brief flash of visibility.
-
+	videoObjects[id]->lastPos=-1;
 
 	// A few connections are not really needed, they are signals we don't use.
 	connect(videoObjects[id]->player, SIGNAL(bufferStatusChanged(int)), this, SLOT(handleBufferStatusChanged(int)));
-	connect(videoObjects[id]->player, SIGNAL(durationChanged(qint64)), this, SLOT(handleDurationChanged(qint64)));
+	connect(videoObjects[id]->player, SIGNAL(durationChanged(qint64)), this, SLOT(handleDurationChanged(qint64))); // (CRITICALLY IMPORTANT!)
 	connect(videoObjects[id]->player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(handleError(QMediaPlayer::Error)));
 	connect(videoObjects[id]->player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(handleMediaStatusChanged(QMediaPlayer::MediaStatus))); // debug-log messages
 	//connect(videoObjects[id]->player, SIGNAL(currentMediaChanged(QMediaContent)), this, SLOT(handleCurrentMediaChanged(QMediaContent)));
@@ -91,9 +91,9 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	connect(videoObjects[id]->player, SIGNAL(availabilityChanged(QMultimedia::AvailabilityStatus)), this, SLOT(handleAvailabilityChanged(QMultimedia::AvailabilityStatus)));
 	//connect(videoObjects[id]->player, SIGNAL(metaDataAvailableChanged(bool)), this, SLOT(handleMetaDataAvailableChanged(bool)));
 
-	// Only this is triggered also on Windows. Lets us read resolution etc. (VERY IMPORTANT!)
+	// Only this is triggered also on Windows. Lets us read resolution etc. (CRITICALLY IMPORTANT!)
 	connect(videoObjects[id]->player, SIGNAL(metaDataChanged()), this, SLOT(handleMetaDataChanged()));
-	// That signal would require less overhead, but is not sent under Windows and apparently also not on MacOS X. (QTBUG-42034.)
+	// That signal would require less overhead, but is not triggered under Windows and apparently also not on MacOS X. (QTBUG-42034.)
 	// connect(videoObjects[id]->player, SIGNAL(metaDataChanged(QString,QVariant)), this, SLOT(handleMetaDataChanged(QString,QVariant)));
 
 	// Not needed because nothing from outside sets the interval.
@@ -110,12 +110,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
 	StelMainView::getInstance().scene()->addItem(videoObjects[id]->videoItem);
 
-	// TODO: Position in scaled display coordinates (<1)
 	videoObjects[id]->videoItem->setPos(x, y);
-	//videoObjects[id]->videoItem->setSize(videoObjects[id]->player->media().resources()[0].resolution());
-	// videoObjects[id]->videoItem->setSize(content.resources().at(0).resolution()); // NO GO, resolution not known at this time!
-	// DEFAULT SIZE: show a tiny frame. This gets updated to native resolution as soon as resolution becomes known.
-	// If we don't set size, there is...
+	// DEFAULT SIZE: show a tiny frame. This gets updated to native resolution as soon as resolution becomes known. Needed?
 	//videoObjects[id]->videoItem->setSize(QSizeF(160, 160));
 
 	qDebug() << "Loaded video" << id << "for pos " << x << "/" << y << "Size" << videoObjects[id]->videoItem->size();
@@ -164,97 +160,97 @@ void StelVideoMgr::playVideo(const QString& id, const bool keepVisibleAtEnd)
 void StelVideoMgr::playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY,
 		     float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition)
 {
-    qDebug() << "\n\n====playVideoPopout(): " << id;
-    if (videoObjects.contains(id))
-    {
-	videoObjects[id]->keepVisible=frozenInTransition;
-	if (videoObjects[id]->player!=NULL)
+	qDebug() << "\n\n====playVideoPopout(): " << id;
+	if (videoObjects.contains(id))
 	{
-	    // if already playing, stop and play from the start
-	    if (videoObjects[id]->player->state() == QMediaPlayer::PlayingState)
-	    {
-		qDebug() << "playVideoPopout(): stop the playing video";
-		videoObjects[id]->player->stop();
-	    }
-
-	    // prepare (1) target frame size, (2) XY start position, and (3) end position:
-	    // (1) Target frame size.
-	    // if finalSizeX or finalSizeY <= 1 we scale proportional to mainview!
-	    // Note that finalSizeX or finalSizeY thus cannot be set to 1.0, i.e. single-pixel rows/columns!
-	    // This is likely not tragic, else set to 1.0001
-	    int viewportWidth=StelMainView::getInstance().size().width();
-	    int viewportHeight=StelMainView::getInstance().size().height();
-
-	    if (finalSizeX>0 && finalSizeX<=1)
-		finalSizeX*=viewportWidth;
-	    if (finalSizeY>0 && finalSizeY<=1)
-		finalSizeY*=viewportHeight;
-
-	    qDebug() << "playVideoPopout() finalSize: "<< finalSizeX << "x" << finalSizeY;
-	    QSize videoSize=videoObjects[id]->resolution;
-	    qDebug() << "playVideoPopout(): video resolution detected=" << videoSize;
-
-	    if (!videoSize.isValid() && (finalSizeX==-1 || finalSizeY==-1))
-	    {
-		qDebug() << "StelVideoMgr::playVideoPopout()" << id << ": size (resolution) not yet determined, cannot resize with -1 argument. Sorry, command stops here...";
-		return;
-	    }
-	    float aspectRatio=(float)videoSize.width()/(float)videoSize.height();
-	    qDebug() << "StelVideoMgr::playVideoPopout(): computed aspect ratio:" << aspectRatio;
-	    if (finalSizeX!=-1.0f && finalSizeY!=-1.0f)
-		videoObjects[id]->videoItem->setAspectRatioMode(Qt::IgnoreAspectRatio);
-	    else
-	    {
-		videoObjects[id]->videoItem->setAspectRatioMode(Qt::KeepAspectRatio);
-		if (finalSizeX==-1.0f && finalSizeY==-1.0f)
+		videoObjects[id]->keepVisible=frozenInTransition;
+		if (videoObjects[id]->player!=NULL)
 		{
-		    finalSizeX=videoSize.height();
-		    finalSizeY=videoSize.width();
+			// if already playing, stop and play from the start
+			if (videoObjects[id]->player->state() == QMediaPlayer::PlayingState)
+			{
+				qDebug() << "playVideoPopout(): stop the playing video";
+				videoObjects[id]->player->stop();
+			}
+
+			// prepare (1) target frame size, (2) XY start position, and (3) end position:
+			// (1) Target frame size.
+			// if finalSizeX or finalSizeY <= 1 we scale proportional to mainview!
+			// Note that finalSizeX or finalSizeY thus cannot be set to 1.0, i.e. single-pixel rows/columns!
+			// This is likely not tragic, else set to 1.0001
+			int viewportWidth=StelMainView::getInstance().size().width();
+			int viewportHeight=StelMainView::getInstance().size().height();
+
+			if (finalSizeX>0 && finalSizeX<=1)
+				finalSizeX*=viewportWidth;
+			if (finalSizeY>0 && finalSizeY<=1)
+				finalSizeY*=viewportHeight;
+
+			qDebug() << "playVideoPopout() finalSize: "<< finalSizeX << "x" << finalSizeY;
+			QSize videoSize=videoObjects[id]->resolution;
+			qDebug() << "playVideoPopout(): video resolution detected=" << videoSize;
+
+			if (!videoSize.isValid() && (finalSizeX==-1 || finalSizeY==-1))
+			{
+				qDebug() << "StelVideoMgr::playVideoPopout()" << id << ": size (resolution) not yet determined, cannot resize with -1 argument. Sorry, command stops here...";
+				return;
+			}
+			float aspectRatio=(float)videoSize.width()/(float)videoSize.height();
+			qDebug() << "StelVideoMgr::playVideoPopout(): computed aspect ratio:" << aspectRatio;
+			if (finalSizeX!=-1.0f && finalSizeY!=-1.0f)
+				videoObjects[id]->videoItem->setAspectRatioMode(Qt::IgnoreAspectRatio);
+			else
+			{
+				videoObjects[id]->videoItem->setAspectRatioMode(Qt::KeepAspectRatio);
+				if (finalSizeX==-1.0f && finalSizeY==-1.0f)
+				{
+					finalSizeX=videoSize.height();
+					finalSizeY=videoSize.width();
+				}
+				else if (finalSizeY==-1.0f)
+					finalSizeY=finalSizeX/aspectRatio;
+				else if (finalSizeX==-1.0f)
+					finalSizeX=finalSizeY*aspectRatio;
+			}
+			qDebug() << "StelVideoMgr::playVideoPopout(): Resetting target frame size to :" << finalSizeX << "x" << finalSizeY;
+			// TODO: Do something else in update(ms) to set frame size and position.
+			//videoObjects[id]->videoItem->setSize(QSizeF(w, h));
+			videoObjects[id]->targetFrameSize= QSizeF(finalSizeX, finalSizeY); // size in Pixels
+
+			// (2) start position:
+			if (fromX>0 && fromX<1)
+				fromX *= viewportWidth;
+			if (fromY>0 && fromY<1)
+				fromY *= viewportHeight;
+			videoObjects[id]->popupOrigin= QPointF(fromX, fromY); // Pixel coordinates of popout point.
+			qDebug() << "StelVideoMgr::playVideoPopout(): Resetting start position to :" << fromX << "/" << fromY;
+
+
+			// (3) center of target frame
+			if (atCenterX>0 && atCenterX<1)
+				atCenterX *= viewportWidth;
+			if (atCenterY>0 && atCenterY<1)
+				atCenterY *= viewportHeight;
+			videoObjects[id]->popupTargetCenter= QPointF(atCenterX, atCenterY); // Pixel coordinates of frame center
+			qDebug() << "StelVideoMgr::playVideoPopout(): Resetting target position to :" << atCenterX << "/" << atCenterY;
+
+			// (4) configure fader
+			videoObjects[id]->fader.setDuration(1000.0f*popupDuration);
+			videoObjects[id]->fader.setMinValue(0.0f);
+			videoObjects[id]->fader.setMaxValue(1.0f);
+
+			// (5) TRIGGER!
+			videoObjects[id]->simplePlay=false;
+			videoObjects[id]->fader=true;
+			videoObjects[id]->videoItem->setVisible(true);
+			videoObjects[id]->player->setPosition(0);
+			videoObjects[id]->player->play();
+
+			qDebug() << "StelVideoMgr::playVideoPopout(): fader triggered.";
+
 		}
-		else if (finalSizeY==-1.0f)
-		    finalSizeY=finalSizeX/aspectRatio;
-		else if (finalSizeX==-1.0f)
-		    finalSizeX=finalSizeY*aspectRatio;
-	    }
-	    qDebug() << "StelVideoMgr::playVideoPopout(): Resetting target frame size to :" << finalSizeX << "x" << finalSizeY;
-	    // TODO: Do something else in update(ms) to set frame size and position.
-	    //videoObjects[id]->videoItem->setSize(QSizeF(w, h));
-	    videoObjects[id]->targetFrameSize= QSizeF(finalSizeX, finalSizeY); // size in Pixels
-
-	    // (2) start position:
-	    if (fromX>0 && fromX<1)
-		fromX *= viewportWidth;
-	    if (fromY>0 && fromY<1)
-		fromY *= viewportHeight;
-	    videoObjects[id]->popupOrigin= QPointF(fromX, fromY); // Pixel coordinates of popout point.
-	    qDebug() << "StelVideoMgr::playVideoPopout(): Resetting start position to :" << fromX << "/" << fromY;
-
-
-	    // (3) center of target frame
-	    if (atCenterX>0 && atCenterX<1)
-		atCenterX *= viewportWidth;
-	    if (atCenterY>0 && atCenterY<1)
-		atCenterY *= viewportHeight;
-	    videoObjects[id]->popupTargetCenter= QPointF(atCenterX, atCenterY); // Pixel coordinates of frame center
-	    qDebug() << "StelVideoMgr::playVideoPopout(): Resetting target position to :" << atCenterX << "/" << atCenterY;
-
-	    // (4) configure fader
-	    videoObjects[id]->fader.setDuration(1000.0f*popupDuration);
-	    videoObjects[id]->fader.setMinValue(0.0f);
-	    videoObjects[id]->fader.setMaxValue(1.0f);
-
-	    // (5) TRIGGER!
-	    videoObjects[id]->simplePlay=false;
-	    videoObjects[id]->fader=true;
-	    videoObjects[id]->videoItem->setVisible(true);
-	    videoObjects[id]->player->setPosition(0);
-	    videoObjects[id]->player->play();
-
-	    qDebug() << "StelVideoMgr::playVideoPopout(): fader triggered.";
-
 	}
-    }
-    else qDebug() << "StelVideoMgr::playVideoPopout(" << id << "): no such video";
+	else qDebug() << "StelVideoMgr::playVideoPopout(" << id << "): no such video";
 }
 
 
@@ -284,7 +280,7 @@ void StelVideoMgr::stopVideo(const QString& id)
 
 void StelVideoMgr::seekVideo(const QString& id, const qint64 ms, bool pause)
 {
-	qDebug() << "seekVideo: " << id << "to: " << ms << "pause?" <<pause;
+	qDebug() << "StelVideoMgr::seekVideo: " << id << " to:" << ms <<  (pause ? " (pausing)" : " (playing)");
 	if (videoObjects.contains(id))
 	{
 		if (videoObjects[id]->player!=NULL)
@@ -311,10 +307,10 @@ void StelVideoMgr::dropVideo(const QString& id)
 		return;
 	if (videoObjects[id]->player!=NULL)
 	{
-		qDebug() << "About to drop (unload) video.";
+		qDebug() << "About to drop (unload) video " << id;
 		qDebug() << "\tSTATUS finally:        " << videoObjects[id]->player->mediaStatus();
-		qDebug() << "\tFile:                  " << videoObjects[id]->player->currentMedia().canonicalUrl();
-		qDebug() << "\tFader value (may be a problem?): " << videoObjects[id]->fader.getInterstate();
+		//qDebug() << "\tFile:                  " << videoObjects[id]->player->currentMedia().canonicalUrl();
+		//qDebug() << "\tFader value (may be a problem?): " << videoObjects[id]->fader.getInterstate();
 
 		videoObjects[id]->player->stop();
 		StelMainView::getInstance().scene()->removeItem(videoObjects[id]->videoItem);
@@ -553,17 +549,17 @@ bool StelVideoMgr::isVideoPlaying(const QString& id)
  */
 void StelVideoMgr::handleAudioAvailableChanged(bool available)
 {
-	qDebug() << "QMediaplayer: " << this->sender()->property("Stel_id").toString() << ": Audio is now available:" << available;
+	qDebug() << "StelVideoMgr: " << this->sender()->property("Stel_id").toString() << ": Audio is now available:" << available;
 }
 void StelVideoMgr::handleBufferStatusChanged(int percentFilled)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ": Buffer filled (%):" << percentFilled;
+	qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ": Buffer filled (%):" << percentFilled;
 }
 
 void StelVideoMgr::handleDurationChanged(qint64 duration)
 {
 	QString id=QObject::sender()->property("Stel_id").toString();
-	qDebug() << "QMediaplayer: " << id << ": Duration changed to:" << duration;
+	qDebug() << "StelVideoMgr: " << id << ": Duration changed to:" << duration;
 	if (videoObjects.contains(id))
 	{
 		videoObjects[id]->duration=duration;
@@ -571,7 +567,7 @@ void StelVideoMgr::handleDurationChanged(qint64 duration)
 }
 void StelVideoMgr::handleError(QMediaPlayer::Error error)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  error:" << error;
+	qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ":  error:" << error;
 }
 
 /*
@@ -594,7 +590,7 @@ void StelVideoMgr::handleMediaChanged(const QMediaContent & media)
 void StelVideoMgr::handleMediaStatusChanged(QMediaPlayer::MediaStatus status) // debug-log messages
 {
     QString id=QObject::sender()->property("Stel_id").toString();
-    qDebug() << "QMediaplayer: " << id << ":  status changed:" << status;
+    qDebug() << "StelVideoMgr: " << id << ":  status changed:" << status;
     if ((status==QMediaPlayer::EndOfMedia) && videoObjects[id]->keepVisible)
     {
         // TODO: keepVisible must be handled as flag for update(). status change notification comes too late to pause the movie.
@@ -607,20 +603,20 @@ void StelVideoMgr::handleMediaStatusChanged(QMediaPlayer::MediaStatus status) //
 
 void StelVideoMgr::handleMutedChanged(bool muted)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  mute changed:" << muted;
+	qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ":  mute changed:" << muted;
 }
 
 /* // USELESS
 void StelVideoMgr::handleNetworkConfigurationChanged(const QNetworkConfiguration & configuration)
 {
-    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  network configuration changed:" << configuration;
+    qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ":  network configuration changed:" << configuration;
 }
 */
 
 /* // USELESS
 void StelVideoMgr::handlePlaybackRateChanged(qreal rate)
 {
-	qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ": playback rate changed to:" << rate;
+	qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ": playback rate changed to:" << rate;
 }
 */
 
@@ -628,7 +624,7 @@ void StelVideoMgr::handlePlaybackRateChanged(qreal rate)
 void StelVideoMgr::handlePositionChanged(qint64 position)
 {
     QString senderId=QObject::sender()->property("Stel_id").toString();
-    qDebug() << "QMediaplayer: " << senderId << ":  position changed to (ms):" << position;
+    qDebug() << "StelVideoMgr: " << senderId << ":  position changed to (ms):" << position;
     // We could deal with the keep-visible here, however this is not called often enough by default, and we have update anyways
     if ((position==videoObjects[senderId]->duration) && (videoObjects[senderId]->keepVisible))
     {
@@ -642,47 +638,49 @@ void StelVideoMgr::handlePositionChanged(qint64 position)
 // USELESS?
 void StelVideoMgr::handleSeekableChanged(bool seekable)
 {
-	qDebug() << "QMediaplayer: handleSeekableChanged()" << QObject::sender()->property("Stel_id").toString() << ":  seekable changed to:" << seekable;
+	qDebug() << "StelVideoMgr: handleSeekableChanged()" << QObject::sender()->property("Stel_id").toString() << ":  seekable changed to:" << seekable;
 }
 void StelVideoMgr::handleStateChanged(QMediaPlayer::State state)
 {
 #ifndef NDEBUG
 	QString senderId=QObject::sender()->property("Stel_id").toString();
-	qDebug() << "QMediaplayer: " << senderId << ":  state changed to:" << state;
-	qDebug() << "Media Resources from player:";
+	qDebug() << "StelVideoMgr: " << senderId << ":  state changed to:" << state;
+	//qDebug() << "Media Resources from player:";
 	qDebug() << "\tMedia Status:  " << videoObjects[senderId]->player->mediaStatus();
 	//qDebug() << "\tFile:          " << videoObjects[senderId]->player->currentMedia().canonicalUrl();
 #endif
+//	if (state==QMediaPlayer::StoppedState)
+//		videoObjects[senderId]->simplePlay=false;
 }
 
 void StelVideoMgr::handleVideoAvailableChanged(bool videoAvailable)
 {
-    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Video available:" << videoAvailable;
+    qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ":  Video available:" << videoAvailable;
 }
 
 void StelVideoMgr::handleVolumeChanged(int volume)
 {
-    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  volume changed to:" << volume;
+    qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ":  volume changed to:" << volume;
 }
 
 void StelVideoMgr::handleAvailabilityChanged(bool available)
 {
-    qDebug() << "QMediaplayer::availabilityChanged(bool) " << QObject::sender()->property("Stel_id").toString() << ":  available:" << available;
+    qDebug() << "StelVideoMgr::availabilityChanged(bool) " << QObject::sender()->property("Stel_id").toString() << ":  available:" << available;
 }
 
 void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability)
 {
-    qDebug() << "QMediaplayer::availabilityChanged(QMultimedia::AvailabilityStatus) " << QObject::sender()->property("Stel_id").toString() << ":  availability:" << availability;
+    qDebug() << "StelVideoMgr::availabilityChanged(QMultimedia::AvailabilityStatus) " << QObject::sender()->property("Stel_id").toString() << ":  availability:" << availability;
 }
 
 /*
 // This function seems unnecessary. metadataChanged() is called also on Windows and is enough.
 void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
 {
-    qDebug() << "handleMetaDataAvailableChanged():" << available << " -- Is this called on Windows?"; // --> YES!
+    qDebug() << "StelVideoMgr::handleMetaDataAvailableChanged():" << available << " -- Is this called on Windows?"; // --> YES!
 
     QString id=QObject::sender()->property("Stel_id").toString();
-    qDebug() << "QMediaplayer: " << id << ":  Metadata available:" << available;
+    qDebug() << "StelVideoMgr: " << id << ":  Metadata available:" << available;
     if (videoObjects.contains(id) && available)
     {
 	QStringList metadataList=videoObjects[id]->player->availableMetaData();
@@ -709,38 +707,36 @@ void StelVideoMgr::handleMetaDataAvailableChanged(bool available)
 // status changed: QMediaPlayer::BufferedMedia
 // metadataAvailablechanged(true): Duration, PixelAspectRatio(unknown!), Resolution(unknown!), Videobitrate, VideoFramerate
 // metadataChanged() now true, and finally here also PixelAspectRatio and Resolution are known.
-// Then periodically, positionChanged(). We can skip that because in update() we can control position().
+// Then periodically, positionChanged(). We can skip that because in update() we can check position() if required.
 // Sequence is the same on Win/MSVC and Qt5.3.2, so metadataChanged(.,.) is NOT called on Windows.
 // This is also already observed on MacOSX and listed as QTBUG-42034.
+// This signal is sent several times during replay because min/max rates often change, and we must go through the metadata list each time. We avoid setting resolution more than once.
 void StelVideoMgr::handleMetaDataChanged()
 {
-	qDebug() << "!!! StelVideoMgr::handleMetadataChanged()"; // : Is this called on Windows? "; // --> YES
+	//qDebug() << "!!! StelVideoMgr::handleMetadataChanged()"; // : Is this called on Windows? "; // --> YES
 
 	QString id=QObject::sender()->property("Stel_id").toString();
-	qDebug() << "QMediaplayer: " << id << ":  Metadata changed (global notification).";
+	//qDebug() << "StelVideoMgr: " << id << ":  Metadata changed (global notification).";
 
 	if (videoObjects.contains(id) && videoObjects[id]->player->isMetaDataAvailable())
 	{
-		qDebug() << "QMediaplayer: " << id << ":  Following metadata are available:";
+		//qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
 		QStringList metadataList=videoObjects[id]->player->availableMetaData();
 		QStringList::const_iterator mdIter;
 		for (mdIter=metadataList.constBegin(); mdIter!=metadataList.constEnd(); ++mdIter)
 		{
 			QString key=(*mdIter).toLocal8Bit().constData();
-			qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key);
+			//qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key);
 
-			if (key=="Resolution")
+			if ((key=="Resolution") && !(videoObjects[id]->resolution.isValid()))
 			{
-				qDebug() << "\t\t ==> hah, resolution becomes available!";
+				qDebug() << "StelVideoMgr: Resolution becomes available: " << videoObjects[id]->player->metaData(key).toSize();
 				videoObjects[id]->resolution=videoObjects[id]->player->metaData(key).toSize();
-				// The next is now handled in update().
-				//if (videoObjects[id]->needResize)
-				//	videoObjects[id]->videoItem->setSize(videoObjects[id]->resolution);
 			}
 		}
 	}
-	else if (videoObjects.contains(id) && !(videoObjects[id]->player->isMetaDataAvailable()))
-		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no metadata now.";
+//	else if (videoObjects.contains(id) && !(videoObjects[id]->player->isMetaDataAvailable()))
+//		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no metadata now.";
 	else
 		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
 
@@ -757,7 +753,7 @@ void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & v
     qDebug() << "THIS IS TO ENSURE YOU SEE A CRASH ! CURRENTLY THE SIGNAL IS NOT SENT ON WINDOWS WHEN BUILT WITH minGW Qt5.4 and not with MSVC on Qt5.3.2";
     Q_ASSERT(0); // Remove the ASSERT and write a comment that it works on (which) windows!
     QString id=QObject::sender()->property("Stel_id").toString();
-    qDebug() << "QMediaplayer: " << id << ":  Metadata change:" << key << "=>" << value;
+    qDebug() << "StelVideoMgr: " << id << ":  Metadata change:" << key << "=>" << value;
     if (key=="Resolution")
     {
         qDebug() << "hah, resolution becomes available!";
@@ -775,7 +771,7 @@ void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & v
 /* // USELESS
 void StelVideoMgr::handleNotifyIntervalChanged(int milliseconds)
 {
-    qDebug() << "QMediaplayer: " << QObject::sender()->property("Stel_id").toString() << ":  Notify interval changed to:" << milliseconds;
+    qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ":  Notify interval changed to:" << milliseconds;
 }
 */
 
@@ -787,12 +783,14 @@ void StelVideoMgr::update(double deltaTime)
 	QMap<QString, VideoPlayer*>::const_iterator voIter;
 	for (voIter=videoObjects.constBegin(); voIter!=videoObjects.constEnd(); ++voIter)
 	{
+		(*voIter)->fader.update((int)(deltaTime*1000)); // This must be done, even for simplePlay mode, else fader may be in some bad state.
+
 		// First fix targetFrameSize if needed and possible.
 		if ((*voIter)->needResize && ((*voIter)->resolution.isValid()))
 		{
-			// we have buffered our final size (which may be relative to screen size) in targetScreensize.So, simply
-			qDebug() << "StelVideoMgr::update() resizing target " << voIter.key()
-				 << " to " << (*voIter)->targetFrameSize.width() << "x" << (*voIter)->targetFrameSize.height();
+			// we have buffered our final size (which may be relative to screen size) in targetFrameSize. So, simply
+			//qDebug() << "StelVideoMgr::update() resizing target " << voIter.key()
+			//	 << " to " << (*voIter)->targetFrameSize.width() << "x" << (*voIter)->targetFrameSize.height();
 			// TODO: If this flickers, we must add a flag to resizeVideo to only update targetFrameSize, not actual player size!
 			resizeVideo(voIter.key(), (*voIter)->targetFrameSize.width(), (*voIter)->targetFrameSize.height());
 		}
@@ -807,54 +805,84 @@ void StelVideoMgr::update(double deltaTime)
 
 		// the rest of the loop is only needed if we are in popup playing mode.
 
-		(*voIter)->fader.update((int)(deltaTime*1000));
-		QSizeF currentFrameSize= /* QSizeF(1.0f, 1.0f) + */ (*voIter)->fader.getInterstate() * (*voIter)->targetFrameSize;
+		if ((*voIter)->player->state()==QMediaPlayer::StoppedState)
+			continue;
+
+		QSizeF currentFrameSize= (*voIter)->fader.getInterstate() * (*voIter)->targetFrameSize;
 		QPointF frameCenter=  (*voIter)->popupOrigin +  ( (*voIter)->popupTargetCenter - (*voIter)->popupOrigin ) *  (*voIter)->fader.getInterstate();
 		QPointF frameXY=frameCenter - 0.5*QPointF(currentFrameSize.width(), currentFrameSize.height());
 		(*voIter)->videoItem->setPos(frameXY);
 		(*voIter)->videoItem->setSize(currentFrameSize);
-		qDebug() << "StelVideoMgr::update(): Video at" << (*voIter)->player->position();
-		qDebug() << "StelVideoMgr::update(): fader at " << (*voIter)->fader.getInterstate()  << "; update frame size " << currentFrameSize << "to XY" << frameXY;
+		//qDebug() << "StelVideoMgr::update(): player status" << (*voIter)->player->state();
+		//qDebug() << "StelVideoMgr::update(): Video at" << (*voIter)->player->position();
+		int newPos=(*voIter)->player->position();
+		if ((newPos==(*voIter)->lastPos) && ((*voIter)->player->state()==QMediaPlayer::PlayingState))
+		{
+			// I (GZ) have no idea how this can happen, but it does, every couple of runs.
+			// I see this happen only in the grow-while-play phase, but I see no logical error.
+			// TODO: check with every version of Qt whether this can still happen.
+			qDebug() << "StelVideoMgr::update(): player state" << (*voIter)->player->state();
+			qDebug() << "This should not be: video should play but time does not increase? Bumping video.";
+			(*voIter)->player->stop();
+			(*voIter)->player->play();
+			(*voIter)->player->setPosition(newPos);
+			qDebug() << "We had an issue with a stuck mediaplayer, should play again!";
+		}
+		(*voIter)->lastPos=newPos;
+
+		//qDebug() << "StelVideoMgr::update(): fader at " << (*voIter)->fader.getInterstate()  << "; update frame size " << currentFrameSize << "to XY" << frameXY;
 
 		// if we want still videos during transition, we must grow/shrink paused, and run only when reached full size.
-		// TODO: We must detect a frame close to end, pause there, and trigger the fader back to 0.
+		// We must detect a frame close to end, pause there, and trigger the fader back to 0.
 		if ((*voIter)->keepVisible)
 		{
-			if ((*voIter)->fader.getInterstate()<1.0f)
+			if ((*voIter)->fader.getInterstate()==0.0f)
+			{ // interstate is >0 on startup, so 0 is reached only at end of loop. we can send stop here.
+				(*voIter)->player->stop();
+				(*voIter)->simplePlay=true;
+				(*voIter)->keepVisible=false;
+			}
+			else if ((*voIter)->fader.getInterstate()<1.0f)
 			{
-				qDebug() << "StelVideoMgr::update(): not fully grown: pause at start or end!";
+				//qDebug() << "StelVideoMgr::update(): not fully grown: pause at start or end!";
 				(*voIter)->player->pause();
 			}
-			else if ((*voIter)->player->position() >= ((*voIter)->duration - 100)) // allow stop 250ms before end. 100ms was too short!
+			else if (((*voIter)->duration > 0) && ((*voIter)->player->position() >= ((*voIter)->duration - 100))) // allow stop 250ms before end. 100ms was too short!
 			{
-				qDebug() << "StelVideoMgr::update(): position " << (*voIter)->player->position() << "close to end of duration " << (*voIter)->duration << "--> pause and shutdown with fader ";
+				//qDebug() << "StelVideoMgr::update(): position " << (*voIter)->player->position() << "close to end of duration " << (*voIter)->duration << "--> pause and shutdown with fader ";
 				(*voIter)->player->pause();
-				// TBD: If we set here, it takes a very long while to seek!
+				// TBD: If we set some very last frame position here, it takes a very long while to seek (may disturb/flicker!)
 				// (*voIter)->player->setPosition((*voIter)->duration-10);
-				(*voIter)->fader=false; // trigger shutdown
+				(*voIter)->fader=false; // trigger shutdown (sending again does not disturb)
 			}
 			else if (((*voIter)->player->state() != QMediaPlayer::PlayingState))
 			{
-				qDebug() << "StelVideoMgr::update(): fully grown: play!";
+				//qDebug() << "StelVideoMgr::update(): fully grown: play!";
 				(*voIter)->player->play();
 			}
-
 		}
 		// If the videos come with their own fade-in/-out, this can be played during transitions. (keepVisible configured to false)
 		// In this case we must trigger shrinking *before* end of video!
-		else if ((*voIter)->fader.getInterstate()>0.0f)
+		else
 		{
-			if (((*voIter)->player->state() != QMediaPlayer::PlayingState))
-				(*voIter)->player->play();
-			if (( ((*voIter)->duration > 0) &&  ((*voIter)->player->position() >= ((*voIter)->duration - (*voIter)->fader.getDuration()))))
+			if ((*voIter)->fader.getInterstate()>0.0f)
 			{
-				qDebug() << "StelVideoMgr::update(): position " << (*voIter)->player->position() << "close to end of duration " << (*voIter)->duration <<
-					    "minus fader duration " << (*voIter)->fader.getDuration() << "--> shutdown with fader ";
-				(*voIter)->fader=false; // trigger shutdown
+				if (((*voIter)->player->state() != QMediaPlayer::PlayingState))
+					(*voIter)->player->play();
+				if (( ((*voIter)->duration > 0) &&  ((*voIter)->player->position() >= ((*voIter)->duration - (*voIter)->fader.getDuration() - 100))))
+				{
+					//qDebug() << "StelVideoMgr::update(): position " << (*voIter)->player->position() << "close to end of duration " << (*voIter)->duration <<
+					//	    "minus fader duration " << (*voIter)->fader.getDuration() << "--> shutdown with fader ";
+					(*voIter)->fader=false; // trigger shutdown (sending again does not disturb)
+				}
+			}
+			else // interstate==0: end of everything.
+			{
+				//qDebug() << "StelVideoMgr::update(): Interstate " << (*voIter)->fader.getInterstate();
+				(*voIter)->player->stop();
+				(*voIter)->simplePlay=true;
 			}
 		}
-		else
-			qDebug() << "StelVideoMgr::update(): Interstate " << (*voIter)->fader.getInterstate();
 	}
 }
 
