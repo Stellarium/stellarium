@@ -25,7 +25,7 @@ core.showVideo("grow", true);
 core.wait(5); 
 duration=core.getVideoDuration("grow");
 lab3 = LabelMgr.labelScreen("Video duration:"+duration, 100, 735, true, 15, "#ff0000");
-core.wait(duration/1000 - 5);
+core.wait(duration/1000 - 5 +3);
 
 LabelMgr.setLabelText(lab2, "Now we play it again, this time it should be smack center, distorted and paused during 3 sec of growing and shrinking.");
 core.playVideoPopout("grow", 0.9, 0.9, 0.5, 0.5, 0.25, 0.5, 3, true);
