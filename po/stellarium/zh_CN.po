@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-14 16:13+0600\n"
+"POT-Creation-Date: 2015-07-01 00:51+0600\n"
 "PO-Revision-Date: 2015-05-31 11:20+0000\n"
 "Last-Translator: Yao Chengyun <skystaryy@163.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-15 04:51+0000\n"
-"X-Generator: Launchpad (build 17557)\n"
+"X-Launchpad-Export-Date: 2015-07-01 05:28+0000\n"
+"X-Generator: Launchpad (build 17578)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
 #: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
-#: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
+#: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
@@ -160,28 +160,28 @@ msgstr ""
 msgid "Labels"
 msgstr "标签"
 
-#: src/core/modules/LandscapeMgr.cpp:641
+#: src/core/modules/LandscapeMgr.cpp:646
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:446
 msgid "Author: "
 msgstr "作者： "
 
-#: src/core/modules/LandscapeMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:652
 msgid "Location: "
 msgstr "位置： "
 
-#: src/core/modules/LandscapeMgr.cpp:650
+#: src/core/modules/LandscapeMgr.cpp:655
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 米"
 
-#: src/core/modules/LandscapeMgr.cpp:655
+#: src/core/modules/LandscapeMgr.cpp:660
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:212
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
@@ -193,7 +193,7 @@ msgstr "类型：<b>%1</b>"
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:218
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -202,7 +202,7 @@ msgstr ""
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
 
-#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:221
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -244,133 +244,133 @@ msgstr ""
 msgid "Size: %1"
 msgstr "大小: %1"
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:740
 msgid "Galaxy"
 msgstr "星系"
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:743
 msgid "Open cluster"
 msgstr "疏散星团"
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:746
 msgid "Globular cluster"
 msgstr "球状星团"
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:749
 msgid "Nebula"
 msgstr "星云"
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:752
 msgid "Planetary nebula"
 msgstr "行星状星云"
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:755
 msgid "Dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:758
 msgid "Irregular galaxy"
 msgstr "不规则星系"
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:761
 msgid "Cluster associated with nebulosity"
 msgstr "带有星云状物质的星团"
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:764
 msgid "Unknown"
 msgstr "未知"
 
-#: src/core/modules/Nebula.cpp:752
+#: src/core/modules/Nebula.cpp:767
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:755
+#: src/core/modules/Nebula.cpp:770
 msgid "Reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:758
+#: src/core/modules/Nebula.cpp:773
 msgid "H-α emission region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:761
+#: src/core/modules/Nebula.cpp:776
 msgid "Undocumented type"
 msgstr "未收录类型"
 
-#: src/core/modules/Nebula.cpp:774
+#: src/core/modules/Nebula.cpp:789
 msgctxt "form"
 msgid "circular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:777
+#: src/core/modules/Nebula.cpp:792
 msgctxt "form"
 msgid "elliptical"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:780
+#: src/core/modules/Nebula.cpp:795
 msgctxt "form"
 msgid "irregular"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:783
+#: src/core/modules/Nebula.cpp:798
 msgctxt "form"
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:796
+#: src/core/modules/Nebula.cpp:811
 msgctxt "structure"
 msgid "amorphous"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:799
+#: src/core/modules/Nebula.cpp:814
 msgctxt "structure"
 msgid "conventional"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:802
+#: src/core/modules/Nebula.cpp:817
 msgctxt "structure"
 msgid "filamentary"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:805
+#: src/core/modules/Nebula.cpp:820
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:818
+#: src/core/modules/Nebula.cpp:833
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:821
+#: src/core/modules/Nebula.cpp:836
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:824
+#: src/core/modules/Nebula.cpp:839
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
+#: src/core/modules/Nebula.cpp:842 src/core/modules/Nebula.cpp:867
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:855
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:843
+#: src/core/modules/Nebula.cpp:858
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:846
+#: src/core/modules/Nebula.cpp:861
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:849
+#: src/core/modules/Nebula.cpp:864
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr ""
@@ -379,76 +379,76 @@ msgstr ""
 msgid "Deep-sky objects"
 msgstr "深空天体"
 
-#: src/core/modules/Planet.cpp:223 src/core/modules/MinorPlanet.cpp:227
+#: src/core/modules/Planet.cpp:224 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
 #: src/core/modules/StarWrapper.cpp:201 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "绝对星等: %1"
 
-#: src/core/modules/Planet.cpp:232
+#: src/core/modules/Planet.cpp:233
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "自转轴倾角(当前日期，相对于地球轨道面): %1"
 
-#: src/core/modules/Planet.cpp:244 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Planet.cpp:245 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "距离: %1 天文单位(%2 千米)"
 
-#: src/core/modules/Planet.cpp:251 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:252 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:228
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "距离: %1AU (%2百万km)"
 
-#: src/core/modules/Planet.cpp:264
+#: src/core/modules/Planet.cpp:265
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "视直径: %1, 包括环: %2"
 
-#: src/core/modules/Planet.cpp:270 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Planet.cpp:271 src/core/modules/MinorPlanet.cpp:260
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "视直径: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Planet.cpp:283 src/core/modules/MinorPlanet.cpp:267
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "公转轨道周期：%1天 (%2儒略年)"
 
-#: src/core/modules/Planet.cpp:285
+#: src/core/modules/Planet.cpp:286
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "恒星日: %1"
 
-#: src/core/modules/Planet.cpp:286
+#: src/core/modules/Planet.cpp:287
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "平太阳日: %1"
 
-#: src/core/modules/Planet.cpp:290
+#: src/core/modules/Planet.cpp:291
 msgid "The period of rotation is chaotic"
 msgstr "自转周期不规则"
 
-#: src/core/modules/Planet.cpp:296
+#: src/core/modules/Planet.cpp:297
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "位相角: %1"
 
-#: src/core/modules/Planet.cpp:297
+#: src/core/modules/Planet.cpp:298
 #, qt-format
 msgid "Elongation: %1"
 msgstr "距角: %1"
 
-#: src/core/modules/Planet.cpp:298
+#: src/core/modules/Planet.cpp:299
 #, qt-format
 msgid "Phase: %1"
 msgstr "相: %1"
 
-#: src/core/modules/Planet.cpp:299
+#: src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "被照亮的部分: %1%"
@@ -626,7 +626,7 @@ msgstr "掩食时间：%1%"
 msgid "Rising time: %1%"
 msgstr "升起时间: %1%"
 
-#: src/core/modules/MilkyWay.cpp:73
+#: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
 msgstr ""
 
@@ -812,11 +812,11 @@ msgstr "水平翻转"
 msgid "Flip scene vertically"
 msgstr "垂直翻转"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1529
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "目前禁止修正。如果您不了解您正在做什么，请不要使用此功能！"
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1532
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -827,7 +827,7 @@ msgstr ""
 "在他的文章《古代的日食证明了爱因斯坦的相对论》[<em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em>]（%1）。要了解更多信息，请点击%2这里%3。"
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1535
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -836,7 +836,7 @@ msgstr ""
 "这个经验公式由 G. M. Clemence 在文章《关于天文常数系统》[<em>On the system of astronomical "
 "constants</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1538
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -848,7 +848,7 @@ msgstr ""
 "在他的《用于计算器的天文学公式》[<em>Astronomical Formulae for Calculators</em>] 中使用。计算机程序 "
 "SunTracker Pro 也使用了这一公式。"
 
-#: src/core/StelCore.cpp:1541
+#: src/core/StelCore.cpp:1542
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -858,7 +858,7 @@ msgstr ""
 "Ephemeris</em>]和《日食的法规》[<em>Canon of Solar Eclipses</em>]中使用的 IAU (1952) "
 "公式稍加修改之后的版本。"
 
-#: src/core/StelCore.cpp:1545
+#: src/core/StelCore.cpp:1546
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -868,7 +868,7 @@ msgstr ""
 "塔克曼[Tuckerman]的表格（1962年，1964年）以5天和10天的间隔列出了太阳、月球和行星从公元前601年到公元1649年的位置。戈德斯坦[G"
 "oldstine]的表格（1973年）也含蓄地采用了相同的关系。"
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1550
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -879,7 +879,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em>] （%1）中公布。"
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1553
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -888,7 +888,7 @@ msgstr ""
 "此公式由 F. R. Stephenson 在文章《望远镜前的天文学观测》[<em>Pre-Telescopic Astronomical "
 "Observations</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1556
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -901,7 +901,7 @@ msgstr ""
 "the correction delta T E.T.-U.T. in the period 1800-1975</em>]（%1）中公布。它与 "
 "Brouwer 于1952年公布的数据相吻合。"
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1559
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -910,7 +910,7 @@ msgstr ""
 "此算法于1986年被 P. Bretagnon 和 L. Simon 在《从 -4000 到 +2800 的行星程序和表格》[<em>Planetary "
 "Programs and Tables from -4000 to +2800</em> ]中，以及计算机程序 RedShift 中被采用。"
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1562
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -920,11 +920,11 @@ msgstr ""
 "这一公式由 F. R. Stephenson 和 L. V. Morrison 在题为《地球自转的长周期变化 - 700 B.C. 到 A.D. "
 "1980》(%1)的论文中发表。"
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1565
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "天文馆程序 Guide 7 中使用了此算法。"
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1568
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -934,14 +934,14 @@ msgstr ""
 "Eclipses: 1986-2035</em> ]（1987年）以及《五十年的日食法规：1986-2035》[<em>Fifty Year Canon "
 "of Solar Eclipses: 1986-2035</em> ]（1989年） 中给出。"
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1571
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "这一公式由 K.M. Borkowski (%1) 在分析了 2137 BCE 到 1715 CE 之间的31次日食数据过后得出。"
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1574
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -953,14 +953,14 @@ msgstr ""
 "from U.T. to E.T. for the Period 1800-1988</em> (%1) 中发布，方程用 Stephenson & "
 "Morrison (1984) 给出的数据拟合而成。"
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1577
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr "该公式是"
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1580
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -970,7 +970,7 @@ msgstr ""
 "这方程由 F. R. Stephenson 及 L. V. Morrison 在论文 <em>Long-Term Fluctuations in the "
 "Earth's Rotation: 700 BC to AD 1990</em> (%1) 中发表。"
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1583
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -979,21 +979,21 @@ msgstr ""
 "F. R. Stephenson 在他的书 <em>Historical Eclipses and Earth's Rotation</em> (%1) "
 "中发表了这个公式。"
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1586
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1589
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1592
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1002,14 +1002,14 @@ msgstr ""
 "此多项式由 J. Meeus 和 L. Simons 在文章《公元1620年-2000年ΔT 的多项式近似》[<em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1595
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1598
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1020,7 +1020,7 @@ msgstr ""
 "2007）及 <em>Calendrical Tabulations</em> （2002）中发表了多项式数据拟合结果。方法基于 Jean Meeus "
 "的 <em>Astronomical Algorithms</em> （1991）。"
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1601
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1028,7 +1028,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1604
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1037,7 +1037,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1607
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1047,11 +1047,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1607
 msgid "Used by default."
 msgstr "默认使用。"
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1610
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1059,7 +1059,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1613
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1067,7 +1067,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1616
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1075,43 +1075,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1618
+#: src/core/StelCore.cpp:1619
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "这是一个用于计算 %1T 的二次方程，系数由用户定义。"
 
-#: src/core/StelCore.cpp:1621 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1622 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "错误"
 
-#: src/core/StelCore.cpp:1671
+#: src/core/StelCore.cpp:1672
 msgid "with meaningless values outside this range"
 msgstr "超出范围的无意义数值"
 
-#: src/core/StelCore.cpp:1697
+#: src/core/StelCore.cpp:1698
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr "平均误差小于1秒，最大误差1.9秒，其余都是超出范围的无意义数值"
 
-#: src/core/StelCore.cpp:1719 src/core/StelCore.cpp:1724
-#: src/core/StelCore.cpp:1751 src/core/StelCore.cpp:1756
-#: src/core/StelCore.cpp:1761
+#: src/core/StelCore.cpp:1720 src/core/StelCore.cpp:1725
+#: src/core/StelCore.cpp:1752 src/core/StelCore.cpp:1757
+#: src/core/StelCore.cpp:1762
 msgid "with zero values outside this range"
 msgstr "此范围之外的值为零"
 
-#: src/core/StelCore.cpp:1729
+#: src/core/StelCore.cpp:1730
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "精确度一般在一秒内，超出该范围的数据无价值"
 
-#: src/core/StelCore.cpp:1771
+#: src/core/StelCore.cpp:1772
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "在 %1 年和 %2，%3 年之间有效"
 
-#: src/core/StelCore.cpp:1773
+#: src/core/StelCore.cpp:1774
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "在 %1 年和 %2 年之间有效"
@@ -4588,6 +4588,7 @@ msgstr "显示区域"
 
 #: src/ui_configurationDialog.h:1056
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
 msgid "Name"
 msgstr "名称"
@@ -5047,7 +5048,7 @@ msgstr "光标位置"
 msgid "Include dir:"
 msgstr "包含目录："
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "..."
 
@@ -5801,6 +5802,7 @@ msgstr "添加"
 #: plugins/Oculars/src/ui_ocularDialog.h:1123
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
 msgstr "名称："
 
@@ -5909,171 +5911,171 @@ msgid ""
 msgstr "旧版本的 satellites.json 文件已不再适用，将使用默认文件。"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1711
+#: plugins/Satellites/src/Satellites.cpp:1714
 msgid "visual"
 msgstr "目视可见"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1713
+#: plugins/Satellites/src/Satellites.cpp:1716
 msgid "scientific"
 msgstr "科研"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1715
+#: plugins/Satellites/src/Satellites.cpp:1718
 msgid "communications"
 msgstr "通讯"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1717
+#: plugins/Satellites/src/Satellites.cpp:1720
 msgid "navigation"
 msgstr "导航"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1719
+#: plugins/Satellites/src/Satellites.cpp:1722
 msgid "amateur"
 msgstr "业余无线电"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1721
+#: plugins/Satellites/src/Satellites.cpp:1724
 msgid "weather"
 msgstr "气象"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1723
+#: plugins/Satellites/src/Satellites.cpp:1726
 msgid "geostationary"
 msgstr "同步卫星"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1725
+#: plugins/Satellites/src/Satellites.cpp:1728
 msgid "non-operational"
 msgstr "不再工作"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1727
+#: plugins/Satellites/src/Satellites.cpp:1730
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1729
+#: plugins/Satellites/src/Satellites.cpp:1732
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1731
+#: plugins/Satellites/src/Satellites.cpp:1734
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1733
+#: plugins/Satellites/src/Satellites.cpp:1736
 msgid "iridium"
 msgstr "铱星"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1735
+#: plugins/Satellites/src/Satellites.cpp:1738
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1737
+#: plugins/Satellites/src/Satellites.cpp:1740
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1739
+#: plugins/Satellites/src/Satellites.cpp:1742
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1750
+#: plugins/Satellites/src/Satellites.cpp:1753
 msgid "The Hubble Space Telescope"
 msgstr "哈勃太空望远镜"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1752
+#: plugins/Satellites/src/Satellites.cpp:1755
 msgid "The International Space Station"
 msgstr "国际空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1754
+#: plugins/Satellites/src/Satellites.cpp:1757
 msgid "China's first space station"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:256
-#: plugins/Satellites/src/Satellite.cpp:260
+#: plugins/Satellites/src/Satellite.cpp:257
+#: plugins/Satellites/src/Satellite.cpp:261
 msgid "Catalog #"
 msgstr "类别 #"
 
-#: plugins/Satellites/src/Satellite.cpp:262
+#: plugins/Satellites/src/Satellite.cpp:263
 msgid "International Designator"
 msgstr "国际标准化命名"
 
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 msgid "artificial satellite"
 msgstr "人造卫星"
 
-#: plugins/Satellites/src/Satellite.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:275
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:287
+#: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "Range (km): %1"
 msgstr "倾斜范围（千米）：%1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:290
+#: plugins/Satellites/src/Satellite.cpp:291
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "距离变率：%1 千米/秒"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:293
+#: plugins/Satellites/src/Satellite.cpp:294
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "高度: %1 千米"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:296
+#: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "投影点纬度：%1%2，经度：%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:310
+#: plugins/Satellites/src/Satellite.cpp:311
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "地心惯性坐标：%1 千米"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:319
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "地心惯性速度：%1 千米/秒"
 
-#: plugins/Satellites/src/Satellite.cpp:323
+#: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:334
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
 msgstr "此卫星与观测者均位于阳光下。"
 
-#: plugins/Satellites/src/Satellite.cpp:337
+#: plugins/Satellites/src/Satellite.cpp:338
 msgid "The satellite is visible."
 msgstr "此卫星是可见的。"
 
-#: plugins/Satellites/src/Satellite.cpp:340
+#: plugins/Satellites/src/Satellite.cpp:341
 msgid "The satellite is eclipsed."
 msgstr "此卫星被遮挡。"
 
-#: plugins/Satellites/src/Satellite.cpp:343
+#: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite is not visible"
 msgstr "此卫星不可见。"
 
-#: plugins/Satellites/src/Satellite.cpp:368
+#: plugins/Satellites/src/Satellite.cpp:369
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 兆赫兹(%2%3 千赫兹)"
@@ -6638,6 +6640,7 @@ msgstr "版本 %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:92
 msgid "#"
 msgstr "#"
 
@@ -6726,63 +6729,75 @@ msgstr "断开选中的望远镜"
 msgid "Select a directory"
 msgstr "选择目录"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:294
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
+msgid "Right Ascension (J2000)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
+msgid "Declination (J2000)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "把望远镜指向"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:296
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "没有活动设备。"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:297
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "把望远镜指向坐标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:235
 msgid "&Right Ascension (J2000):"
 msgstr "赤经 (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:299
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:236
 msgid "De&clination (J2000):"
 msgstr "赤纬 (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:232
 msgid "&Current object"
 msgstr "&当前目标"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:301
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:233
 msgid "Center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:303
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "时分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:305
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "度分秒格式"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:309
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:311
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "十进制度"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:313
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "十进制 (&e)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:314
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "指向 (&S)"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:315
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "配置望远镜 (%T)"
 
@@ -6957,6 +6972,18 @@ msgstr "使用望远镜服务器的可执行文件（用以覆盖内置驱动）
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
 msgstr "可执行文件目录:"
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:230
+msgid "Points"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:237
+msgid "Add point"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:238
+msgid "Remove selected"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -7310,7 +7337,7 @@ msgid "Nebula hints"
 msgstr "星云标记"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
-msgid "Galaxies hints"
+msgid "Galaxy hints"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
