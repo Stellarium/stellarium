@@ -20,7 +20,7 @@
 #include "SporadicMeteor.hpp"
 
 SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture)
-	: Meteor(core)
+	: Meteor(core, bolideTexture)
 {
 	// meteor velocity
 	// (see line 460 in StelApp.cpp)
@@ -30,7 +30,7 @@ SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const 
 	float rAlpha = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 2pi]
 	float rDelta = M_PI_2 - M_PI * ((float) qrand() / ((double) RAND_MAX + 1));  // [-pi/2, pi/2]
 
-	init(rAlpha, rDelta, speed, getRandColor(), bolideTexture);
+	init(rAlpha, rDelta, speed, getRandColor());
 }
 
 SporadicMeteor::~SporadicMeteor()

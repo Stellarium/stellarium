@@ -26,9 +26,10 @@
 
 #include <QtMath>
 
-Meteor::Meteor(const StelCore* core)
+Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 	: m_core(core),
 	  m_alive(false),
+	  m_bolideTexture(bolideTexture),
 	  m_segments(10)
 {
 	qsrand(QDateTime::currentMSecsSinceEpoch());
@@ -36,14 +37,12 @@ Meteor::Meteor(const StelCore* core)
 
 Meteor::~Meteor()
 {
+	m_bolideTexture.clear();
 }
 
-void Meteor::init(const float& radiantAlpha, const float& radiantDelta, const float& speed,
-		  const QList<colorPair> colors, const StelTextureSP& bolideTexture)
+void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
+		  const float& speed, const QList<colorPair> colors)
 {
-	// bolide texture
-	m_bolideTexture = bolideTexture;
-
 	// meteor velocity in km/s
 	m_speed = speed;
 
