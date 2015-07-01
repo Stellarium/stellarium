@@ -48,12 +48,12 @@ public:
 	typedef QPair<QString, int> colorPair;
 
 	//! Create a Meteor object.
-	Meteor(const StelCore* core);
+	Meteor(const StelCore* core, const StelTextureSP &bolideTexture);
 	virtual ~Meteor();
 
 	//! Initialize meteor
-	void init(const float& radiantAlpha, const float& radiantDelta, const float& speed,
-		  const QList<colorPair> colors, const StelTextureSP& bolideTexture);
+	void init(const float& radiantAlpha, const float& radiantDelta,
+		  const float& speed, const QList<colorPair> colors);
 
 	//! Updates the position of the meteor, and expires it if necessary.
 	//! @return true of the meteor is still alive, else false.

@@ -24,7 +24,7 @@
 
 MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha, const float& radiantDelta,
 		     const float& pidx, QList<Meteor::colorPair> colors, const StelTextureSP& bolideTexture)
-	: Meteor(core)
+	: Meteor(core, bolideTexture)
 {
 	// if speed is zero, use a random value
 	if (!speed)
@@ -65,7 +65,7 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 	}
 
 	// building meteor model
-	init(radiantAlpha, radiantDelta, speed, colors, bolideTexture);
+	init(radiantAlpha, radiantDelta, speed, colors);
 
 	if (!isAlive())
 	{
