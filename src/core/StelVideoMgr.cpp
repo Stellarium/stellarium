@@ -691,17 +691,20 @@ void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus ava
 void StelVideoMgr::handleMetaDataChanged()
 {
 	QString id=QObject::sender()->property("Stel_id").toString();
-	//qDebug() << "StelVideoMgr: " << id << ":  Metadata changed (global notification).";
+    if (verbose)
+        qDebug() << "StelVideoMgr: " << id << ":  Metadata changed (global notification).";
 
 	if (videoObjects.contains(id) && videoObjects[id]->player->isMetaDataAvailable())
 	{
-		//qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
+        if (verbose)
+            qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
 		QStringList metadataList=videoObjects[id]->player->availableMetaData();
 		QStringList::const_iterator mdIter;
 		for (mdIter=metadataList.constBegin(); mdIter!=metadataList.constEnd(); ++mdIter)
 		{
 			QString key=(*mdIter).toLocal8Bit().constData();
-			//qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key);
+            if (verbose)
+                qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key);
 
 			if ((key=="Resolution") && !(videoObjects[id]->resolution.isValid()))
 			{
@@ -711,10 +714,10 @@ void StelVideoMgr::handleMetaDataChanged()
 			}
 		}
 	}
-//	else if (videoObjects.contains(id) && !(videoObjects[id]->player->isMetaDataAvailable()))
-//		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no metadata now.";
-//	else
-//		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
+    else if (videoObjects.contains(id) && !(videoObjects[id]->player->isMetaDataAvailable()) &&verbose)
+        qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no metadata now.";
+    else
+        qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
 }
 
 
