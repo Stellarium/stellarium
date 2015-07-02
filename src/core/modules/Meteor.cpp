@@ -286,11 +286,13 @@ float Meteor::meteorDistance(float zenithAngle, float altitude)
 Vec3d Meteor::altAzToRadiant(Vec3d position)
 {
 	position.transfo4d(m_matAltAzToRadiant);
+	position *= 1242;
 	return position;
 }
 
 Vec3d Meteor::radiantToAltAz(Vec3d position)
 {
+	position /= 1242; // 1242 to scale down under 1
 	position.transfo4d(m_matAltAzToRadiant.transpose());
 	return position;
 }
