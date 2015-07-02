@@ -57,6 +57,8 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  //<< "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile\n"
 			  << "                          Try this is you have graphics problems\n"
+			  << "--verbose               : Even more diagnostic output in logfile \n"
+			  << "                          (esp. multimedia handling)\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 		          << "                          the full screen setting in the config file\n"
 		          << "--screenshot-dir        : Specify directory to save screenshots\n"
@@ -84,6 +86,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		qApp->setProperty("onetime_safe_mode", true);
 	}
 	*/
+	if (argsGetOption(argList, "", "--verbose"))
+	{
+		qApp->setProperty("verbose", true);
+	}
 
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
