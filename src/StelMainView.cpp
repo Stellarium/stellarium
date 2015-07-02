@@ -497,6 +497,9 @@ void StelMainView::init(QSettings* conf)
 	// plugins, because the gui create the QActions needed by some plugins.
 	StelApp::getInstance().initPlugIns();
 
+	// The script manager can only be fully initialized after the plugins have loaded.
+	StelApp::getInstance().initScriptMgr();
+
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
 }
