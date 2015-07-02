@@ -56,11 +56,12 @@ class QGraphicsVideoItem;
 //! There is partial success with MP4 files on MinGW, but also these are rendered badly. Often just shows an error on Windows/MinGW:
 //! DirectShowPlayerService::doRender: Unresolved error code 80040154
 //! (number may differ, also seen: 80040228. Where is a list?)
-//! And after one such error, you may even have to reboot to get it running with the MP4 again (??)
 //!
 //! QtMultimedia is a bit tricky to use: There seems bo be no way to load a media file to analyze resolution or duration before starting its replay.
 //! This means, configuring player frames either require absolute frame coordinates, or triggering necessary configuration steps only after replay has started.
 //! We opted for the latter solution because it allows scaled but undistorted video frames which may also take current screen resolution into account.
+//!
+//! To help in debugging scripts, this module can be quite verbose if Stellarium is called with the command-line argument "--verbose".
 
 class StelVideoMgr : public StelModule
 {
@@ -155,6 +156,7 @@ public slots:
 	int getVideoWidth(const QString& id);
 	//! returns native height (in pixels) of loaded video, or -1 in case of trouble.
 	int getVideoHeight(const QString& id);
+
 	//! set mute state of video player
 	//! @param mute true to silence the video, false to hear audio.
 	void muteVideo(const QString& id, bool muteVideo=true);
@@ -162,6 +164,7 @@ public slots:
 	void setVideoVolume(const QString& id, int newVolume);
 	//! return currently set volume of media player, or -1 in case of some error.
 	int getVideoVolume(const QString& id);
+
 	//! returns whether video is currently playing.
 	//! @param id name assigned during loadVideo().
 	//! @note If video is not found, also returns @value false.
@@ -169,18 +172,14 @@ public slots:
 
 
 	// Slots to handle QMediaPlayer signals. Never call them yourself!
-	// These might hopefully be useful to understand media handling and how to get to crucial information like native resolution and duration during loading of media.
-	// We start by simple debug output...
+	// Some of them are useful to understand media handling and to get to crucial information like native resolution and duration during loading of media.
+	// Most only give simple debug output...
 	void handleAudioAvailableChanged(bool available);
 	void handleBufferStatusChanged(int percentFilled);
 	void handleDurationChanged(qint64 duration);
 	void handleError(QMediaPlayer::Error error);
-	//void handleCurrentMediaChanged(const QMediaContent & media);
-	//void handleMediaChanged(const QMediaContent & media);
-	void handleMediaStatusChanged(QMediaPlayer::MediaStatus status); // debug-log messages
+	void handleMediaStatusChanged(QMediaPlayer::MediaStatus status);
 	void handleMutedChanged(bool muted);
-	//void handleNetworkConfigurationChanged(const QNetworkConfiguration & configuration);
-	//void handlePlaybackRateChanged(qreal rate);
 	//void handlePositionChanged(qint64 position); // periodically notify where in the video we are. Could be used to update scale bars, not needed.
 	void handleSeekableChanged(bool seekable);
 	void handleStateChanged(QMediaPlayer::State state);
@@ -189,13 +188,10 @@ public slots:
 	// Slots to handle QMediaPlayer change signals inherited from QMediaObject
 	void handleAvailabilityChanged(bool available);
 	void handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability);
-	// This seems not necessary.
-	//void handleMetaDataAvailableChanged(bool available);
-	//! @note This one works instead of handleMetaDataChanged(key, value) (QTBUG-42034)
+	//! @note This one works, while handleMetaDataChanged(key, value) is not called on Windows (QTBUG-42034)
 	void handleMetaDataChanged();
 	// This signal is not triggered on Windows, we must work around using handleMetaDataChanged()
 	//void handleMetaDataChanged(const QString & key, const QVariant & value);
-	//void handleNotifyIntervalChanged(int milliseconds); // interval for positionchange messages. Not needed.
 
 
 
@@ -216,10 +212,9 @@ private:
 		QMediaPlayer *player;
 		qint64 duration;           //!< duration of video. This becomes available only after loading or at begin of playing! (?)
 		QSize resolution;          //!< stores resolution of video. This becomes available only after loading or at begin of playing, so we must apply a trick with signals and slots to set it.
-		//bool playNativeResolution; //!< store whether you want to play the video in native resolution. (Needed to set size after detection of resolution.)
 		bool keepVisible;          //!< true if you want to show the last frame after video has played. (Due to delays in signal/slot handling of mediaplayer status changes, we use update() to stop a few frames before end.)
 		bool needResize;           //!< becomes true if resize is called before resolution becomes available.
-		bool simplePlay;           //!< only play in static size. true for playVideo(), false during popupPlay().
+		bool simplePlay;           //!< only play in static size. true for playVideo(), false during playVideoPopout().
 		LinearFader fader;         //!< Used during @name playVideoPopout() for nice transition effects.
 		QSizeF  targetFrameSize;   //!< Video frame size, used during @name playVideo(), and final frame size during @name playVideoPopout().
 		QPointF popupOrigin;       //!< Screen point where video appears to come out during @name playVideoPopout()
@@ -227,6 +222,7 @@ private:
 		int lastPos;               //!< This should not be required: We must track a bug in QtMultimedia where the QMediaPlayer is in playing state but does not progress the video position. In update() we try to let it run again.
 	} VideoPlayer;
 	QMap<QString, VideoPlayer*> videoObjects;
+	bool verbose;                      //!< true to write many more log entries (useful for script debugging) Activate with command-line option "--verbose"
 #endif
 };
 
