@@ -59,8 +59,8 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		radiantAz -= M_PI*2;
 	}
 
-	// meteors won't be visible if radiant is below -5degrees
-	if (radiantAlt < -0.0872664626f)
+	// meteors won't be visible if radiant is below 0degrees
+	if (radiantAlt < 0.f)
 	{
 		return;
 	}
