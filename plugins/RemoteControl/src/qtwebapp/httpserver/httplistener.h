@@ -7,12 +7,23 @@
 #define LISTENER_H
 
 #include <QTcpServer>
-#include <QSettings>
-#include <QBasicTimer>
 #include "httpglobal.h"
 #include "httpconnectionhandler.h"
 #include "httpconnectionhandlerpool.h"
 #include "httprequesthandler.h"
+
+/** Contains all settings for HttpListener and supporting classes. */
+struct HttpListenerSettings : public HttpConnectionHandlerPoolSettings
+{
+	HttpListenerSettings()
+		:host(8080)
+	{}
+
+	/** The local IP address to bind to. Default empty (listen on all interfaces). */
+	QString host;
+	/** The HTTP port to use. Default 8080. */
+	int port;
+};
 
 /**
   Listens for incoming TCP connections and and passes all incoming HTTP requests to your implementation of HttpRequestHandler,
@@ -46,11 +57,11 @@ public:
 
     /**
       Constructor.
-      @param settings Configuration settings for the HTTP server. Must not be 0.
+      @param settings Configuration settings for the HTTP server.
       @param requestHandler Processes each received HTTP request, usually by dispatching to controller classes.
       @param parent Parent object.
     */
-    HttpListener(QSettings* settings, HttpRequestHandler* requestHandler, QObject* parent = 0);
+    HttpListener(const HttpListenerSettings& settings, HttpRequestHandler* requestHandler, QObject* parent = 0);
 
     /** Destructor */
     virtual ~HttpListener();
@@ -63,7 +74,7 @@ protected:
 private:
 
     /** Configuration settings for the HTTP server */
-    QSettings* settings;
+   HttpListenerSettings settings;
 
     /** Pool of connection handlers */
     HttpConnectionHandlerPool* pool;

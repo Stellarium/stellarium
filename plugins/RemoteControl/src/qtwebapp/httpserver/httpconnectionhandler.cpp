@@ -9,10 +9,9 @@
 #include "httpconnectionhandler.h"
 #include "httpresponse.h"
 
-HttpConnectionHandler::HttpConnectionHandler(QSettings* settings, HttpRequestHandler* requestHandler)
+HttpConnectionHandler::HttpConnectionHandler(const HttpConnectionHandlerSettings &settings, HttpRequestHandler* requestHandler)
     : QThread()
 {
-    Q_ASSERT(settings!=0);
     Q_ASSERT(requestHandler!=0);
     this->settings=settings;
     this->requestHandler=requestHandler;
@@ -47,26 +46,18 @@ HttpConnectionHandler::~HttpConnectionHandler() {
 
 
 void HttpConnectionHandler::loadSslConfig() {
-    QString sslKeyFileName=settings->value("sslKeyFile","").toString();
-    QString sslCertFileName=settings->value("sslCertFile","").toString();
+    QString sslKeyFileName=settings.sslKeyFile;
+    QString sslCertFileName=settings.sslCertFile;
     if (!sslKeyFileName.isEmpty() && !sslCertFileName.isEmpty()) {
-        // Convert relative fileNames to absolute, based on the directory of the config file.
-        QFileInfo configFile(settings->fileName());
-        #ifdef Q_OS_WIN32
-            if (QDir::isRelativePath(sslKeyFileName) && settings->format()!=QSettings::NativeFormat)
-        #else
-            if (QDir::isRelativePath(sslKeyFileName))
-        #endif
+	// Convert relative fileNames to absolute, based on the current working directory
+	if (QDir::isRelativePath(sslKeyFileName))
         {
-            sslKeyFileName=QFileInfo(configFile.absolutePath(),sslKeyFileName).absoluteFilePath();
+	    sslKeyFileName=QDir(sslKeyFileName).absolutePath();
         }
-        #ifdef Q_OS_WIN32
-            if (QDir::isRelativePath(sslCertFileName) && settings->format()!=QSettings::NativeFormat)
-        #else
-            if (QDir::isRelativePath(sslCertFileName))
-        #endif
+
+	if (QDir::isRelativePath(sslCertFileName))
         {
-            sslCertFileName=QFileInfo(configFile.absolutePath(),sslCertFileName).absoluteFilePath();
+	    sslCertFileName=QDir(sslCertFileName).absolutePath();
         }
         // Load the two files
         QFile certFile(sslCertFileName);
@@ -133,7 +124,7 @@ void HttpConnectionHandler::handleConnection(tSocketDescriptor socketDescriptor)
     }
 
     // Start timer for read timeout
-    int readTimeout=settings->value("readTimeout",10000).toInt();
+    int readTimeout=settings.readTimeout;
     readTimer.start(readTimeout);
     // delete previous request
     delete currentRequest;
@@ -184,7 +175,7 @@ void HttpConnectionHandler::read() {
 
         // Create new HttpRequest object if necessary
         if (!currentRequest) {
-            currentRequest=new HttpRequest(settings);
+	    currentRequest=new HttpRequest(settings.maxRequestSize,settings.maxMultipartSize);
         }
 
         // Collect data for the request object
@@ -193,7 +184,7 @@ void HttpConnectionHandler::read() {
             if (currentRequest->getStatus()==HttpRequest::waitForBody) {
                 // Restart timer for read timeout, otherwise it would
                 // expire during large file uploads.
-                int readTimeout=settings->value("readTimeout",10000).toInt();
+		int readTimeout=settings.readTimeout;
                 readTimer.start(readTimeout);
             }
         }
@@ -229,7 +220,7 @@ void HttpConnectionHandler::read() {
             }
             else {
                 // Start timer for next request
-                int readTimeout=settings->value("readTimeout",10000).toInt();
+		int readTimeout=settings.readTimeout;
                 readTimer.start(readTimeout);
             }
             // Prepare for next request

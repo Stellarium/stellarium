@@ -22,10 +22,13 @@
 #include "StelMainView.hpp"
 #include "StelGui.hpp"
 #include "StelApp.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QDebug>
+#include <QAbstractButton>
 #include <QDialog>
 #include <QGraphicsProxyWidget>
+#include <QMetaProperty>
 #include <QStyleOptionGraphicsItem>
 #include <QSettings>
 #ifdef Q_OS_WIN
@@ -158,6 +161,21 @@ void StelDialog::setVisible(bool v)
 		StelMainView::getInstance().focusSky();
 	}
 }
+
+void StelDialog::connectCheckbox(QAbstractButton *checkBox, const QString &actionName)
+{
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction(actionName);
+	connectCheckbox(checkBox,action);
+}
+
+void StelDialog::connectCheckbox(QAbstractButton *checkBox, StelAction *action)
+{
+	Q_ASSERT(action);
+	checkBox->setChecked(action->isChecked());
+	connect(action, SIGNAL(toggled(bool)), checkBox, SLOT(setChecked(bool)));
+	connect(checkBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+}
+
 
 #ifdef Q_OS_WIN
 void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)

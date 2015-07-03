@@ -15,6 +15,24 @@
 #include "httpresponse.h"
 #include "httprequest.h"
 
+struct HttpSessionStoreSettings
+{
+	HttpSessionStoreSettings()
+		: expirationTime(3600000),cookieName("sessionid")
+	{}
+
+	/** The time in msec after which sessions expire. Default 3600000 (1 min). */
+	int expirationTime;
+	/** The name for the cookie that stores the session id. Default "sessionid" */
+	QByteArray cookieName;
+	/** A comment string for the cookie. Default empty. */
+	QByteArray cookieComment;
+	/** The path where the cookie is valid. Default empty (valid for whole domain). */
+	QByteArray cookiePath;
+	/** The domain where the cookie is valid. Default empty (valid for current domain). */
+	QByteArray cookieDomain;
+};
+
 /**
   Stores HTTP sessions and deletes them when they have expired.
   The following configuration settings are required in the config file:
@@ -36,7 +54,7 @@ class DECLSPEC HttpSessionStore : public QObject {
 public:
 
     /** Constructor. */
-    HttpSessionStore(QSettings* settings, QObject* parent);
+    HttpSessionStore(const HttpSessionStoreSettings& settings, QObject* parent);
 
     /** Destructor */
     virtual ~HttpSessionStore();
@@ -79,19 +97,13 @@ public:
 private:
 
     /** Configuration settings */
-    QSettings* settings;
+    HttpSessionStoreSettings settings;
 
     /** Storage for the sessions */
     QMap<QByteArray,HttpSession> sessions;
 
     /** Timer to remove expired sessions */
     QTimer cleanupTimer;
-
-    /** Name of the session cookie */
-    QByteArray cookieName;
-
-    /** Time when sessions expire (in ms)*/
-    int expirationTime;
 
     /** Used to synchronize threads */
     QMutex mutex;

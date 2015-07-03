@@ -1,12 +1,11 @@
 #include "httpconnectionhandlerpool.h"
 
-HttpConnectionHandlerPool::HttpConnectionHandlerPool(QSettings* settings, HttpRequestHandler* requestHandler)
+HttpConnectionHandlerPool::HttpConnectionHandlerPool(const HttpConnectionHandlerPoolSettings &settings, HttpRequestHandler* requestHandler)
     : QObject()
 {
-    Q_ASSERT(settings!=0);
     this->settings=settings;
     this->requestHandler=requestHandler;
-    cleanupTimer.start(settings->value("cleanupInterval",1000).toInt());
+    cleanupTimer.start(settings.cleanupInterval);
     connect(&cleanupTimer, SIGNAL(timeout()), SLOT(cleanup()));
 }
 
@@ -33,7 +32,7 @@ HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler() {
     }
     // create a new handler, if necessary
     if (!freeHandler) {
-        int maxConnectionHandlers=settings->value("maxThreads",100).toInt();
+	int maxConnectionHandlers=settings.maxThreads;
         if (pool.count()<maxConnectionHandlers) {
             freeHandler=new HttpConnectionHandler(settings,requestHandler);
             freeHandler->setBusy();
@@ -47,7 +46,7 @@ HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler() {
 
 
 void HttpConnectionHandlerPool::cleanup() {
-    int maxIdleHandlers=settings->value("minThreads",1).toInt();
+    int maxIdleHandlers=settings.minThreads;
     int idleCounter=0;
     mutex.lock();
     foreach(HttpConnectionHandler* handler, pool) {
