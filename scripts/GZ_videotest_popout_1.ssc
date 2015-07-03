@@ -1,0 +1,42 @@
+// Name: Video Test with popout
+// Author: Georg Zotti
+// License: Public Domain
+// Description: This script plays several formats of video file.
+//              Note that video support is a build-time option and
+//              may not be supported for the version of Stellarium
+//              which you have.  Also, different playforms may
+//              support different video formats.
+//
+//              Problem: It seems that it works once, but not on next call?
+
+
+// API for loadVideo:("filename", "id", ULposX, ULposY, visible, alpha);
+//core.loadVideo("media/stellarium.mp4", "grow", 100, 70, false, 0.5);
+core.loadVideo("media/stellarium.mp4", "grow", 100, 70, true, 0.5); // test with box visible before messages?
+
+lab = LabelMgr.labelScreen("Playing video file with special effect...", 100, 20, true, 20, "#ff0000");
+lab2 = LabelMgr.labelScreen("spawning from 0.4/0.9 towards 0.6/0.4 (sized -1/0.6) within transition time of 2 seconds", 100, 45, true, 15, "#ff0000");
+
+core.wait(4);
+
+// API is:
+//    void playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
+core.playVideoPopout("grow", 0.4, 0.9, 0.6, 0.4, -1, 0.6, 2, false);
+core.showVideo("grow", true);
+// Unfortunately, duration is not known here. we wait 5 secs in any case and try then to find duration.
+core.wait(5); 
+duration=core.getVideoDuration("grow");
+lab3 = LabelMgr.labelScreen("Video duration:"+duration, 100, 735, true, 15, "#ff0000");
+core.wait(duration/1000 - 5 +3);
+
+LabelMgr.setLabelText(lab2, "Now we play it again, this time it should be smack center, distorted and paused during 3 sec of growing and shrinking.");
+//core.playVideoPopout("grow", 0.9, 0.9, 0.5, 0.5, 0.25, 0.5, 3, true);
+//core.wait(duration/1000 + 7);
+LabelMgr.setLabelText(lab2, "If this was OK, we should now make sure there are no unwanted messages in the logfile.");
+core.wait(5);
+LabelMgr.deleteLabel(lab3);
+LabelMgr.deleteLabel(lab2);
+core.wait(1);
+LabelMgr.deleteLabel(lab);
+core.wait(0.4);
+core.dropVideo("grow");

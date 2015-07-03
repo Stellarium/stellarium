@@ -25,6 +25,7 @@
 	//#include <QVideoWidget> // Adapt to that when we finally switch to QtQuick2!
 	#include <QGraphicsVideoItem>
 	#include <QMediaPlayer>
+	#include <QTimer>
 	#include "StelApp.hpp"
 	#include "StelFader.hpp"
 #endif
@@ -79,8 +80,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	connect(videoObjects[id]->player, SIGNAL(error(QMediaPlayer::Error)), this, SLOT(handleError(QMediaPlayer::Error)));
 	connect(videoObjects[id]->player, SIGNAL(mediaStatusChanged(QMediaPlayer::MediaStatus)), this, SLOT(handleMediaStatusChanged(QMediaPlayer::MediaStatus)));
 	//connect(videoObjects[id]->player, SIGNAL(positionChanged(qint64)), this, SLOT(handlePositionChanged(qint64)));
-	// we test isSeekable() anyway where needed.
-	//connect(videoObjects[id]->player, SIGNAL(seekableChanged(bool)), this, SLOT(handleSeekableChanged(bool)));
+	// we test isSeekable() where needed, so only debug log entry. --> And we may use the signal however now during blocking load below!
+	connect(videoObjects[id]->player, SIGNAL(seekableChanged(bool)), this, SLOT(handleSeekableChanged(bool)));
 	connect(videoObjects[id]->player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(handleStateChanged(QMediaPlayer::State)));
 	connect(videoObjects[id]->player, SIGNAL(videoAvailableChanged(bool)), this, SLOT(handleVideoAvailableChanged(bool)));
 	connect(videoObjects[id]->player, SIGNAL(audioAvailableChanged(bool)), this, SLOT(handleAudioAvailableChanged(bool)));
@@ -111,10 +112,27 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	// DEFAULT SIZE: show a tiny frame. This gets updated to native resolution as soon as resolution becomes known. Needed?
 	//videoObjects[id]->videoItem->setSize(QSizeF(160, 160));
 
+	// after many troubles with incompletely loaded files we attempt a blocking load from https://wiki.qt.io/Seek_in_Sound_File
+	if (! videoObjects[id]->player->isSeekable())
+	{
+		if (verbose)
+			qDebug() << "Blocking load ...";
+		QEventLoop loop;
+		QTimer timer;
+		timer.setSingleShot(true);
+		timer.setInterval(5000); // 5 seconds, may be too long?
+		loop.connect(&timer, SIGNAL (timeout()), &loop, SLOT (quit()) );
+		loop.connect(videoObjects[id]->player, SIGNAL (seekableChanged(bool)), &loop, SLOT (quit()));
+		loop.exec();
+		if (verbose)
+			qDebug() << "Blocking load finished, should be seekable now or 5s are over.";
+	}
+
 	if (verbose)
 		qDebug() << "Loaded video" << id << "for pos " << x << "/" << y << "Size" << videoObjects[id]->videoItem->size();
 	videoObjects[id]->player->setPosition(0); // This should force triggering a metadataAvailable() with resolution update.
 	videoObjects[id]->player->pause();
+
 }
 
 void StelVideoMgr::playVideo(const QString& id, const bool keepVisibleAtEnd)
@@ -291,7 +309,8 @@ void StelVideoMgr::stopVideo(const QString& id)
 
 void StelVideoMgr::seekVideo(const QString& id, const qint64 ms, bool pause)
 {
-	qDebug() << "StelVideoMgr::seekVideo: " << id << " to:" << ms <<  (pause ? " (pausing)" : " (playing)");
+	if (verbose)
+		qDebug() << "StelVideoMgr::seekVideo: " << id << " to:" << ms <<  (pause ? " (pausing)" : " (playing)");
 	if (videoObjects.contains(id))
 	{
 		if (videoObjects[id]->player!=NULL)
@@ -466,7 +485,7 @@ qint64 StelVideoMgr::getVideoPosition(const QString& id)
 	return -1;
 }
 
-//! returns resolution (in pixels) of loaded video. Returned value may be invalid before video is playing.
+//! returns resolution (in pixels) of loaded video. Returned value may be invalid before video has been fully loaded.
 QSize StelVideoMgr::getVideoResolution(const QString& id)
 {
 	if (videoObjects.contains(id))
@@ -825,7 +844,7 @@ void StelVideoMgr::update(double deltaTime)
 			}
 			(*voIter)->player->stop();
 			(*voIter)->player->play();
-			(*voIter)->player->setPosition(newPos);
+			(*voIter)->player->setPosition(newPos+1);
 			qDebug() << "We had an issue with a stuck mediaplayer, should play again!";
 		}
 		(*voIter)->lastPos=newPos;

@@ -4,16 +4,15 @@
 // Description: This script plays several formats of video file.
 //              Note that video support is a build-time option and
 //              may not be supported for the version of Stellarium
-//              which you have.  Also, different playforms may
+//              which you have.  Also, different platforms may
 //              support different video formats.
 //
 
 lab = LabelMgr.labelScreen("Playing WMV video file...", 100, 20, true, 20, "#ff0000");
 
 core.loadVideo("media/karnak.wmv", "wmv", 100, 70, false, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
-//core.loadVideo("media/stellarium.mp4", "wmv", 100, 70, false, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
 
-core.pauseVideo("wmv");
+//core.pauseVideo("wmv");
 
 core.wait(2);
 
@@ -22,10 +21,10 @@ core.showVideo("wmv");
 core.playVideo("wmv");
 
 
-// Appretly, te following block does not work with WMV movies. (?)
-//core.wait(3);
-//LabelMgr.setLabelText(lab, "Jump back to 500ms, continue.");
-//core.seekVideo("wmv", 500);
+// Apparently, the following block does not work with WMV movies. :-(
+core.wait(3);
+LabelMgr.setLabelText(lab, "Jump back to 500ms, continue.");
+core.seekVideo("wmv", 500);
 
 core.wait(2);
 dur=core.getVideoDuration("wmv");
