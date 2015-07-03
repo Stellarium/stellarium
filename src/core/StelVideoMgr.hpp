@@ -61,6 +61,12 @@ class QGraphicsVideoItem;
 //! This means, configuring player frames either require absolute frame coordinates, or triggering necessary configuration steps only after replay has started.
 //! We opted for the latter solution because it allows scaled but undistorted video frames which may also take current screen resolution into account.
 //!
+//! Under unclear circumstances we also have a pair of messages:
+//! @code Failed to start video surface due to main thread blocked.
+//! @code Failed to start video surface
+//! and non-appearing video frame, this seems to be https://bugreports.qt.io/browse/QTBUG-39567.
+//! This occurred on an Intel NUC5i3 with SSD, so loading the file should not be much of an issue.
+//!
 //! To help in debugging scripts, this module can be quite verbose if Stellarium is called with the command-line argument "--verbose".
 
 class StelVideoMgr : public StelModule
@@ -116,6 +122,7 @@ public slots:
 	void dropVideo(const QString& id);
 
 	//! Seek a position in video @param id. Pause the video playing if @param pause=true.
+	//! This may not work if video has not beem fully loaded. Better wait a second before proceeding after loadVideo()
 	void seekVideo(const QString& id, const qint64 ms, bool pause=false);
 
 	//! move upper left corner of video @name id to @name x, @name y.
@@ -150,7 +157,7 @@ public slots:
 	//! Returns -1 if video has not been analyzed yet. (loaded, but not started).
 	qint64 getVideoPosition(const QString& id);
 
-	//! returns resolution (in pixels) of loaded video. Returned value may be invalid before video is playing.
+	//! returns resolution (in pixels) of loaded video. Returned value may be invalid before video has been fully loaded.
 	QSize getVideoResolution(const QString& id);
 	//! returns native width (in pixels) of loaded video, or -1 in case of trouble.
 	int getVideoWidth(const QString& id);
