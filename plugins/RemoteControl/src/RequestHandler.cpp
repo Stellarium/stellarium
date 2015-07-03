@@ -34,7 +34,7 @@
 
 #include <QDir>
 
-RequestHandler::RequestHandler(QSettings *settings, QObject* parent) : HttpRequestHandler(parent)
+RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent)
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
 
@@ -48,12 +48,6 @@ RequestHandler::RequestHandler(QSettings *settings, QObject* parent) : HttpReque
 	apiController->registerService(new StelActionService("stelaction",apiController));
 	apiController->registerService(new LocationService("location",apiController));
 	apiController->registerService(new ViewService("view",apiController));
-
-	//retrieve actual webroot through StelFileMgr
-	QString path = StelFileMgr::findFile("data/webroot",StelFileMgr::Directory);
-	//make sure its absolute, otherwise QtWebApp will look relative to config dir
-	QDir dir(path);
-	settings->setValue("path",dir.absolutePath());
 
 	staticFiles = new StaticFileController(settings,this);
 }

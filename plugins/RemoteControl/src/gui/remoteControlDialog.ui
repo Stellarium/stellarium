@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>409</height>
+    <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -144,32 +144,18 @@
       <attribute name="title">
        <string>Remote Control</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <item>
-        <widget class="QCheckBox" name="activateOnStartCheckBox">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Activate on start</string>
-         </property>
-        </widget>
-       </item>
-       <item>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="6" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Port Number:</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QKeySequenceEdit" name="portNumberKeySequenceEdit">
-         <property name="toolTip">
-          <string>Enter port number to access internal web server.</string>
+         <property name="buddy">
+          <cstring>portNumberSpinBox</cstring>
          </property>
         </widget>
        </item>
-       <item>
+       <item row="13" column="0">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -182,7 +168,7 @@
          </property>
         </spacer>
        </item>
-       <item>
+       <item row="14" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <widget class="QPushButton" name="restoreDefaultsButton">
@@ -211,6 +197,85 @@
           </widget>
          </item>
         </layout>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <widget class="QCheckBox" name="passwordCheckBox">
+         <property name="text">
+          <string>Access requires authentication</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Password</string>
+         </property>
+         <property name="buddy">
+          <cstring>passwordEdit</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QLineEdit" name="passwordEdit"/>
+       </item>
+       <item row="9" column="0" colspan="2">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text">
+          <string>Note: The user name can be anything.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QSpinBox" name="portNumberSpinBox">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>65535</number>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0" colspan="2">
+        <widget class="QWidget" name="restartPanel" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Your changes require a restart of the server.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="resetButton">
+            <property name="text">
+             <string>Restart server</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="enabledCheckbox">
+         <property name="text">
+          <string>Server enabled</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QCheckBox" name="activateOnStartCheckBox">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Enable automatically on startup</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

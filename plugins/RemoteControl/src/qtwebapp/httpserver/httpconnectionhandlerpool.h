@@ -9,6 +9,24 @@
 #include "httpconnectionhandler.h"
 
 /**
+ * Contains all settings for the connection handler pool and the child connection handlers.
+ */
+struct HttpConnectionHandlerPoolSettings : public HttpConnectionHandlerSettings
+{
+	HttpConnectionHandlerPoolSettings()
+		: minThreads(1), maxThreads(100), cleanupInterval(1000)
+	{}
+
+	/** The minimal number of threads kept in the pool at all times. Default 1. */
+	int minThreads;
+	/** The maximal number of threads. If a new connection arrives when this amount of threads is already busy,
+	 * the new connection will be dropped. Default 100. */
+	int maxThreads;
+	/** The time after which inactive threads are stopped in msec. Default 1000.  */
+	int cleanupInterval;
+};
+
+/**
   Pool of http connection handlers. Connection handlers are created on demand and idle handlers are
   cleaned up in regular time intervals.
   <p>
@@ -42,7 +60,7 @@ public:
       @param requestHandler The handler that will process each received HTTP request.
       @warning The requestMapper gets deleted by the destructor of this pool
     */
-    HttpConnectionHandlerPool(QSettings* settings, HttpRequestHandler* requestHandler);
+    HttpConnectionHandlerPool(const HttpConnectionHandlerPoolSettings& settings, HttpRequestHandler* requestHandler);
 
     /** Destructor */
     virtual ~HttpConnectionHandlerPool();
@@ -53,7 +71,7 @@ public:
 private:
 
     /** Settings for this pool */
-    QSettings* settings;
+    HttpConnectionHandlerPoolSettings settings;
 
     /** Will be assigned to each Connectionhandler during their creation */
     HttpRequestHandler* requestHandler;

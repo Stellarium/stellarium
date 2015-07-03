@@ -10,7 +10,6 @@
 #include <QTcpSocket>
 #include <QMap>
 #include <QMultiMap>
-#include <QSettings>
 #include <QTemporaryFile>
 #include <QUuid>
 #include "httpglobal.h"
@@ -45,7 +44,7 @@ public:
       Constructor.
       @param settings Configuration settings
     */
-    HttpRequest(QSettings* settings);
+    HttpRequest(const int maxRequestSize, const int maxMultiPartSize);
 
     /**
       Destructor.

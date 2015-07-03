@@ -21,6 +21,7 @@
 #define REQUESTHANDLER_HPP_
 
 #include "httpserver/httprequesthandler.h"
+#include "httpserver/staticfilecontroller.h"
 
 class APIController;
 class StaticFileController;
@@ -29,7 +30,7 @@ class RequestHandler : public HttpRequestHandler
 {
 	Q_OBJECT
 public:
-	RequestHandler(QSettings* settings, QObject* parent = 0);
+	RequestHandler(const StaticFileControllerSettings& settings, QObject* parent = 0);
 	virtual ~RequestHandler();
 
 	//! Called in the main thread each frame
