@@ -1,225 +1,32 @@
 // Name: Video Test
-// Author: Alexander Wolf/Georg Zotti
+// Author: Georg Zotti (based on A. Wolf's videoplayer command test)
 // License: Public Domain
 // Description: This script plays several formats of video file.
 //              Note that video support is a build-time option and
 //              may not be supported for the version of Stellarium
-//              which you have.  Also, different playforms may
+//              which you have.  Also, different platforms may
 //              support different video formats.
 //
 
-// core.loadVideo("tests/videotest.flv", "flv", 100, 70, true, 0.5);
-lab = LabelMgr.labelScreen("Playing MP4 video file...", 100, 40, true, 18, "#ff0000");
+lab = LabelMgr.labelScreen("Playing MP4 video file...", 100, 20, true, 20, "#ff0000");
 
-// OK, let's see what we can achieve:
-// loadVideo(filename, id, x, y, show, opacity)
-core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, false, 0.15);
+core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, false, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
 
-core.wait(4);
-LabelMgr.setLabelText(lab, "If you don't see the video, the show=false argument works.")
-core.wait(5);
+// It is wise to pause about 2s so that resolution can be detected by the system, else some default frame size will be used.
+core.pauseVideo("mp4");
+core.wait(2);
+
 core.resizeVideo("mp4", -1, 0.5);
-LabelMgr.setLabelText(lab, "Waiting 3 seconds, then switch on and pause video at start frame.")
-core.wait(3);
-core.showVideo("mp4", true);
-// seekVideo has an optional parameter, default false, to pause the video. Put it to false to jump while video is playing. 
-core.seekVideo("mp4", 0, true);
-// This should not be necessary!
-//core.pauseVideo("mp4");
-
-LabelMgr.setLabelText(lab, "Waiting 5 seconds, then switch to some freezed frames in the video with 1sec-pauses.")
-core.wait(5);
-core.seekVideo("mp4", 500, true);
-//core.pauseVideo("mp4");
-core.wait(1);
-core.seekVideo("mp4", 4500, true);
-//core.pauseVideo("mp4");
-core.wait(1);
-core.seekVideo("mp4", 12500, true);
-//core.pauseVideo("mp4");
-core.wait(1);
-core.seekVideo("mp4", 2500, true);
-core.pauseVideo("mp4");
-
-LabelMgr.setLabelText(lab, "Waiting 8 seconds, then play video.")
-core.wait(8);
-LabelMgr.setLabelText(lab, "Playing, with a jump back to near-beginning after 7 seconds...")
+core.showVideo("mp4"); 
 core.playVideo("mp4");
-core.wait(7);
-// seekVideo has an optional parameter, default true, to pause the video. Put it to false to jump while video is playing. 
-core.seekVideo("mp4", 1500, false);
-LabelMgr.setLabelText(lab, "... and 4 more seconds of playing.")
 
-core.wait(4);
-core.pauseVideo("mp4");
-// we are at 5500ms
+core.wait(3);
+LabelMgr.setLabelText(lab, "Jump back to 500ms, continue.");
+core.seekVideo("mp4", 500);
 
-LabelMgr.setLabelText(lab, "Now we change size of video frame: width=200/400/600, height=auto");
-core.resizeVideo("mp4", 200, -1);
-core.wait(3);
-core.resizeVideo("mp4", 400, -1);
-core.wait(3);
-core.resizeVideo("mp4", 600, -1);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now we change size of video frame: width=auto, height=100/250/600");
-core.resizeVideo("mp4", -1, 100);
-core.wait(3);
-core.resizeVideo("mp4", -1, 250);
-core.wait(3);
-core.resizeVideo("mp4", -1, 600);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now a few distorted settings while we play");
-core.resizeVideo("mp4", 200, 200);
-// we are still at 5500ms
-core.playVideo("mp4");
-core.wait(1);
-// we are at 6500ms
-core.resizeVideo("mp4", 200, 300);
-core.wait(1);
-// we are at 7500ms
-core.resizeVideo("mp4", 300, 300);
-core.wait(1);
-// we are at 8500ms
-core.resizeVideo("mp4", 300, 350);
-core.wait(1);
-// we are at 9500ms
-core.resizeVideo("mp4", 300, 400);
-core.wait(1);
-// we are at 105000ms
-core.resizeVideo("mp4", 300, 500);
-core.wait(1);
-// we are at 11500ms
-core.resizeVideo("mp4", 400, 500);
-core.wait(1);
-// we are at 12500ms
-core.resizeVideo("mp4", 500, 500);
-core.wait(1);
-// we are at 13500ms
-core.resizeVideo("mp4", 600, 500);
-core.wait(1);
-// we are at 14500ms
-core.resizeVideo("mp4", 700, 500);
-core.wait(1);
-// we are at 15500ms, close to end!
-core.resizeVideo("mp4", 800, 500);
-core.pauseVideo("mp4");
-LabelMgr.setLabelText(lab, "we should be paused close to end!");
-
-core.wait(4);
-
-LabelMgr.setLabelText(lab, "Rewind to an earlier frame:");
-core.seekVideo("mp4", 3500, true);
-core.wait(4);
-
-LabelMgr.setLabelText(lab, "Now we scale relative to window size: w=0.1");
-core.resizeVideo("mp4", 0.1, -1);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now we scale relative to window size: w=0.25");
-core.resizeVideo("mp4", 0.25, -1);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now we scale relative to window size: w=0.8");
-core.resizeVideo("mp4", 0.8, -1);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now we scale relative to window size: h=0.8");
-core.resizeVideo("mp4", -1, 0.8);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now we scale relative to window size: h=0.5");
-core.resizeVideo("mp4", -1, 0.5);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now we scale relative to window size: h=0.25");
-core.resizeVideo("mp4", -1, 0.25);
-core.wait(3);
-
-LabelMgr.setLabelText(lab, "And now: mixed! w=0.5/h=400");
-core.resizeVideo("mp4", 0.5, 400);
-core.wait(5);
-LabelMgr.setLabelText(lab, "And now: mixed! w=500/h=0.3");
-core.resizeVideo("mp4", 500, 0.3);
-core.wait(5);
-
-LabelMgr.setLabelText(lab, "If this all worked...");
-core.wait(3);
-
-LabelMgr.setLabelText(lab, "... let's resize and move a bit");
-core.resizeVideo("mp4", 500, -1);
-core.wait(3);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: 20/80");
-core.setVideoXY("mp4", 20, 80);
-core.wait(1);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: 40/80");
-core.setVideoXY("mp4", 40, 80, false);
-core.wait(1);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: 60/80");
-core.setVideoXY("mp4", 60, 80);
-core.wait(1);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: 80/80");
-core.setVideoXY("mp4", 80, 80, false);
-core.wait(1);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: 200/90");
-core.setVideoXY("mp4", 200, 90, false);
-core.wait(1);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: +30/-20 to 230/70");
-core.setVideoXY("mp4", 30, -20, true);
-core.wait(5);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: -100/+50 to 130/120");
-core.setVideoXY("mp4", -100, 50, true);
-core.wait(7);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: 0.25/0.25 ");
-core.setVideoXY("mp4", 0.25, .25, false);
-core.wait(8);
-LabelMgr.setLabelText(lab, "... let's resize and move a bit: -0.125/+0.125 to 0.125/0.375");
-core.setVideoXY("mp4", -0.125, .125, true);
-core.wait(8);
-
-
-LabelMgr.setLabelText(lab, "... OK, back to 200/150");
-core.setVideoXY("mp4", 200, 150);
-core.wait(3);
-
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.8 (may not work :-(");
-core.setVideoAlpha("mp4", 0.8);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.6 (may not work :-(");
-core.setVideoAlpha("mp4", 0.6);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.4 (may not work :-(");
-core.setVideoAlpha("mp4", 0.4);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.2 (may not work :-(");
-core.setVideoAlpha("mp4", 0.2);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.1 (may not work :-(");
-core.setVideoAlpha("mp4", 0.1);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.05 (may not work :-(");
-core.setVideoAlpha("mp4", 0.05);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.00 (at least this should be hidden)");
-core.setVideoAlpha("mp4", 0.00);
-core.wait(3);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.25 (may not work :-(");
-core.setVideoAlpha("mp4", 0.25);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 0.75 (may not work :-(");
-core.setVideoAlpha("mp4", 0.75);
-core.wait(1);
-LabelMgr.setLabelText(lab, "Now try to play with opacity: 1.0 (may not work :-(");
-core.setVideoAlpha("mp4", 1.0);
-core.wait(1);
-
-LabelMgr.setLabelText(lab, "OK, enjoy! The label should vanish and script should end 1 second after the video had paused at end for 5 seconds!");
-
-// TODO: find a mechanism to query how long the video will take and only wait that long.
+core.wait(2);
 dur=core.getVideoDuration("mp4");
-pos=core.getVideoPosition("mp4");
-// play and try to keep open on last frame
-core.playVideo("mp4", true);
-core.wait((dur-pos)/1000 + 5);
-
-
+LabelMgr.setLabelText(lab, "This message should disappear 2.5 seconds after playing.");
+core.wait(dur/1000);
 core.dropVideo("mp4");
-core.wait(1);
 LabelMgr.deleteLabel(lab);
-
-
-
