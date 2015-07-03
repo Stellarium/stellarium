@@ -64,10 +64,10 @@ public:
 
 	//! Indicate if the meteor it still visible.
 	inline bool isAlive() { return m_alive; }
-	//! Set meteor apparent magnitude.
-	inline void setMag(float mag) { m_mag = mag; }
-	//! Get meteor apparent magnitude.
-	inline float mag() { return m_mag; }
+	//! Set meteor absolute magnitude.
+	inline void setAbsMag(float mag) { m_absMag = mag; }
+	//! Get meteor absolute magnitude.
+	inline float absMag() { return m_absMag; }
 
 private:
 	//! Determine color arrays of line and prism used to draw meteor train.
@@ -104,7 +104,8 @@ private:
 	float m_xyDist;                 //! Distance in XY plane (orthogonal to radiant) from observer to meteor
 	float m_initialDist;            //! Initial distance from observer to meteor.
 	float m_finalDist;              //! Final distance from observer to meteor.
-	float m_mag;                    //! Apparent magnitude at head, 0-1
+	float m_absMag;                 //! Absolute magnitude [0, 1]
+	float m_aptMag;                 //! Apparent magnitude [0, 1]
 	int m_firstBrightSegment;       //! First bright segment of the train
 
 	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
