@@ -42,8 +42,17 @@ class RemoteControl : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled
-		   READ isEnabled
-		   WRITE enableRemoteControl)
+		   READ getFlagEnabled
+		   WRITE setFlagEnabled
+		   NOTIFY flagEnabledChanged)
+	Q_PROPERTY(bool autoStart
+		   READ getFlagAutoStart
+		   WRITE setFlagAutoStart
+		   NOTIFY flagAutoStartChanged)
+	Q_PROPERTY(bool usePassword
+		   READ getFlagUsePassword
+		   WRITE setFlagUsePassword
+		   NOTIFY flagUsePasswordChanged)
 public:
 	RemoteControl();
 	virtual ~RemoteControl();
@@ -61,14 +70,21 @@ public:
 	virtual bool configureGui(bool show=true);
 	///////////////////////////////////////////////////////////////////////////
 	// Property getters
-	bool isEnabled() const {return enabled;}
+	bool getFlagEnabled() const {return enabled;}
+	bool getFlagAutoStart() const { return autoStart; }
+	bool getFlagUsePassword() const { return usePassword; }
 
+	QString getPassword() const { return password; }
+	int getPort() const {return port; }
 
-	//! Restore the plug-in's settings to the default state.
-	//! Replace the plug-in's settings in Stellarium's configuration file
-	//! with the default values and re-load them.
-	//! Uses internally loadSettings() and saveSettings().
-	void restoreDefaultSettings();
+public slots:
+	//property setters
+	void setFlagEnabled(bool b);
+	void setFlagAutoStart(bool b);
+	void setFlagUsePassword(bool b);
+
+	void setPassword(const QString& password);
+	void setPort(const int port);
 
 	//! Load the plug-in's settings from the configuration file.
 	//! Settings are kept in the "RemoteControl" section in Stellarium's
@@ -81,15 +97,26 @@ public:
 	//! @see loadSettings(), restoreSettings()
 	void saveSettings();
 
-public slots:
-	//property setters
-	void enableRemoteControl(bool b);
+	//! Restore the plug-in's settings to the default state.
+	//! Replace the plug-in's settings in Stellarium's configuration file
+	//! with the default values and re-load them.
+	//! Uses internally loadSettings() and saveSettings().
+	void restoreDefaultSettings();
 
-private slots:
 	//! Starts the HTTP server and begins handling request
 	void startServer();
 	//! Stops the HTTP server
 	void stopServer();
+
+signals:
+	//property notifiers
+	void flagEnabledChanged(bool val);
+	void flagAutoStartChanged(bool val);
+	void flagUsePasswordChanged(bool val);
+
+	void portChanged(int val);
+	void passwordChanged(const QString& val);
+
 
 private:
 
@@ -99,6 +126,13 @@ private:
 	RequestHandler* requestHandler;
 
 	bool enabled;
+	bool autoStart;
+	bool usePassword;
+	QString password;
+
+	int port;
+	int minThreads;
+	int maxThreads;
 
 	StelButton* toolbarButton;
 

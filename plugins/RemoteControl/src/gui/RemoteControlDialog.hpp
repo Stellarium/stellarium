@@ -51,8 +51,9 @@ private:
 	void setAboutHtml();
 
 private slots:
-	void saveRemoteControlSettings();
-	void resetRemoteControlSettings();
+	void requiresRestart();
+	void restart();
+
 };
 
 

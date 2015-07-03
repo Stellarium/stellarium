@@ -34,13 +34,13 @@
 #include "RequestHandler.hpp"
 
 #include "httpserver/httplistener.h"
+#include "httpserver/staticfilecontroller.h"
 
 #include <QDebug>
 #include <QTimer>
 #include <QPixmap>
 #include <QtNetwork>
 #include <QSettings>
-#include <cmath>
 
 //! This method is the one called automatically by the StelModuleMgr just after loading the dynamic library
 StelModule* RemoteControlStelPluginInterface::getStelModule() const
@@ -66,7 +66,7 @@ StelPluginInfo RemoteControlStelPluginInterface::getPluginInfo() const
 }
 
 RemoteControl::RemoteControl()
-	: httpListener(NULL), requestHandler(NULL), enabled(true), toolbarButton(NULL)
+	: httpListener(NULL), requestHandler(NULL), enabled(false), autoStart(false), toolbarButton(NULL)
 {
 	setObjectName("RemoteControl");
 
@@ -111,10 +111,17 @@ void RemoteControl::init()
 
 	loadSettings();
 
-	QSettings* staticSettings = new QSettings(conf->fileName(),StelIniFormat,QCoreApplication::instance());
-	staticSettings->beginGroup("RemoteControl");
-	staticSettings->beginGroup("staticfiles");
-	requestHandler = new RequestHandler(staticSettings);
+	StaticFileControllerSettings settings;
+	//retrieve actual webroot through StelFileMgr
+	QString path = StelFileMgr::findFile("data/webroot",StelFileMgr::Directory);
+	//make sure its absolute, otherwise QtWebApp will look relative to working dir
+	settings.path = QDir(path).absolutePath();
+#ifndef QT_NO_DEBUG
+	//"disable" cache for development
+	settings.cacheTime = 1;
+	settings.maxAge = 1;
+#endif
+	requestHandler = new RequestHandler(settings);
 
 	StelApp& app = StelApp::getInstance();
 
@@ -140,8 +147,8 @@ void RemoteControl::init()
 		qWarning() << "WARNING: unable create toolbar button for RemoteControl plugin: " << e.what();
 	}
 
-	if(enabled)
-		startServer();
+	if(autoStart)
+		setFlagEnabled(true);
 }
 
 void RemoteControl::update(double deltaTime)
@@ -156,24 +163,65 @@ void RemoteControl::draw(StelCore* core)
 	Q_UNUSED(core);
 }
 
-void RemoteControl::enableRemoteControl(bool b)
+void RemoteControl::setFlagEnabled(bool b)
 {
-	enabled = b;
-	if (b)
+	if(b!=enabled)
 	{
-		qDebug() << "RemoteControl enabled";
-		startServer();
+		enabled = b;
+		if (b)
+		{
+			qDebug() << "RemoteControl enabled";
+			startServer();
+		}
+		else
+			stopServer();
+
+		emit flagEnabledChanged(b);
 	}
-	else
-		stopServer();
+}
+
+void RemoteControl::setFlagAutoStart(bool b)
+{
+	if(b!=autoStart)
+	{
+		autoStart = b;
+		emit flagAutoStartChanged(b);
+	}
+}
+
+void RemoteControl::setFlagUsePassword(bool b)
+{
+	if(b!=usePassword)
+	{
+		usePassword = b;
+		emit flagUsePasswordChanged(b);
+	}
+}
+
+void RemoteControl::setPassword(const QString &password)
+{
+	if(password != this->password)
+	{
+		this->password = password;
+		emit passwordChanged(password);
+	}
+}
+
+void RemoteControl::setPort(const int port)
+{
+	if(port!=this->port)
+	{
+		this->port = port;
+		emit portChanged(port);
+	}
 }
 
 void RemoteControl::startServer()
 {
-	//use the Stellarium config file, but a separate conf object
-	QSettings* settings = new QSettings(conf->fileName(),StelIniFormat,QCoreApplication::instance());
-	settings->beginGroup("RemoteControl");
-	settings->beginGroup("listener");
+	HttpListenerSettings settings;
+	settings.port = port;
+	settings.minThreads = minThreads;
+	settings.maxThreads = maxThreads;
 	httpListener = new HttpListener(settings,requestHandler);
 }
 
@@ -195,38 +243,30 @@ void RemoteControl::restoreDefaultSettings()
 	loadSettings();
 	// ...and then save them.
 	saveSettings();
-
-	//save the QtWebApp settings
-	conf->beginGroup("RemoteControl");
-	conf->beginGroup("listener");
-	conf->setValue("port",8090);
-	conf->setValue("minThreads",1);
-	conf->setValue("maxThreads",10);
-	conf->setValue("cleanupInterval",1000);
-	conf->setValue("readTimeout", 60000);
-	conf->setValue("maxRequestSize",16000);
-	conf->setValue("maxMultiPartSize",10000000);
-	conf->endGroup();
-	conf->beginGroup("staticfiles");
-	conf->setValue("encoding","UTF-8");
-	conf->setValue("maxAge",120000);
-	conf->setValue("cacheTime",1); //very short for easier development
-	conf->setValue("cacheSize",1000000);
-	conf->setValue("maxCachedFileSize",65536);
-	conf->endGroup();
-	conf->endGroup();
 }
 
 void RemoteControl::loadSettings()
 {
 	conf->beginGroup("RemoteControl");
-
+	enabled = conf->value("enabled",true).toBool();
+	autoStart = conf->value("autoStart",true).toBool();
+	usePassword = conf->value("usePassword",false).toBool();
+	password = conf->value("password","").toString();
+	port = conf->value("port",8090).toInt();
+	minThreads = conf->value("minThreads",1).toInt();
+	maxThreads = conf->value("maxThreads",30).toInt();
 	conf->endGroup();
 }
 
 void RemoteControl::saveSettings()
 {
 	conf->beginGroup("RemoteControl");
-	// TODO whatever has to be stored here
+	conf->setValue("enabled",enabled);
+	conf->setValue("autoStart",autoStart);
+	conf->setValue("usePassword",usePassword);
+	conf->setValue("password",password);
+	conf->setValue("port",port);
+	conf->setValue("minThreads",minThreads);
+	conf->setValue("maxThreads",maxThreads);
 	conf->endGroup();
 }

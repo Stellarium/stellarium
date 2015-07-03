@@ -22,6 +22,9 @@
 
 #include <QObject>
 
+class QAbstractButton;
+class StelAction;
+
 //! @class StelDialog
 //! Base class for all the GUI windows in Stellarium.
 //! 
@@ -73,6 +76,11 @@ signals:
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent()=0;
+
+	//! Helper function to connect a checkbox to the StelAction with the specified name
+	static void connectCheckbox(QAbstractButton* checkBox,const QString& actionName);
+	//! Helper function to connect a checkbox to the given StelAction
+	static void connectCheckbox(QAbstractButton *checkBox, StelAction* action);
 
 	//! The main dialog
 	QWidget* dialog;

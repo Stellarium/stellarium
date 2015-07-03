@@ -63,8 +63,36 @@ void RemoteControlDialog::createDialogContent()
 
 	// TODO Fill other buttons
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveRemoteControlSettings()));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetRemoteControlSettings()));
+	connectCheckbox(ui->enabledCheckbox,"actionShow_Remote_Control");
+
+	ui->activateOnStartCheckBox->setChecked(rc->getFlagAutoStart());
+	connect(ui->activateOnStartCheckBox, SIGNAL(toggled(bool)), rc, SLOT(setFlagAutoStart(bool)));
+	connect(rc, SIGNAL(flagAutoStartChanged(bool)), ui->activateOnStartCheckBox, SLOT(setChecked(bool)));
+
+	ui->passwordCheckBox->setChecked(rc->getFlagUsePassword());
+	connect(ui->passwordCheckBox, SIGNAL(toggled(bool)), rc, SLOT(setFlagUsePassword(bool)));
+	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), ui->passwordCheckBox, SLOT(setChecked(bool)));
+
+	ui->passwordEdit->setEnabled(rc->getFlagUsePassword());
+	ui->passwordEdit->setText(rc->getPassword());
+
+	connect(rc,SIGNAL(flagUsePasswordChanged(bool)),ui->passwordEdit,SLOT(setEnabled(bool)));
+	connect(ui->passwordEdit, SIGNAL(textChanged(QString)), rc, SLOT(setPassword(QString)));
+
+	ui->portNumberSpinBox->setValue(rc->getPort());
+	connect(ui->portNumberSpinBox, SIGNAL(valueChanged(int)), rc, SLOT(setPort(int)));
+
+	ui->restartPanel->setVisible(false);
+	connect(rc, SIGNAL(flagAutoStartChanged(bool)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(flagEnabledChanged(bool)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(passwordChanged(QString)), this, SLOT(requiresRestart()));
+	connect(rc, SIGNAL(portChanged(int)), this, SLOT(requiresRestart()));
+
+	connect(ui->resetButton, SIGNAL(clicked(bool)),this,SLOT(restart()));
+
+	connect(ui->saveSettingsButton, SIGNAL(clicked()), rc, SLOT(saveSettings()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rc, SLOT(restoreDefaultSettings()));
 
 	setAboutHtml();
 }
@@ -103,12 +131,14 @@ void RemoteControlDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-void RemoteControlDialog::saveRemoteControlSettings()
+void RemoteControlDialog::requiresRestart()
 {
-	rc->saveSettings();
+	ui->restartPanel->setVisible(rc->getFlagEnabled());
 }
 
-void RemoteControlDialog::resetRemoteControlSettings()
+void RemoteControlDialog::restart()
 {
-	rc->restoreDefaultSettings();
+	rc->stopServer();
+	rc->startServer();
+	ui->restartPanel->setVisible(false);
 }

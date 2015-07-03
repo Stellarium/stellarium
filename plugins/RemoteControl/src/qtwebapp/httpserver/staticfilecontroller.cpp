@@ -8,26 +8,22 @@
 #include <QDir>
 #include <QDateTime>
 
-StaticFileController::StaticFileController(QSettings* settings, QObject* parent)
+StaticFileController::StaticFileController(const StaticFileControllerSettings &settings, QObject* parent)
     :HttpRequestHandler(parent)
 {
-    maxAge=settings->value("maxAge","60000").toInt();
-    encoding=settings->value("encoding","UTF-8").toString();
-    docroot=settings->value("path",".").toString();
-    // Convert relative path to absolute, based on the directory of the config file.
-#ifdef Q_OS_WIN32
-    if (QDir::isRelativePath(docroot) && settings->format()!=QSettings::NativeFormat)
-#else
+    maxAge=settings.maxAge;
+    encoding=settings.encoding;
+    docroot=settings.path;
+    // Convert relative path to absolute, based on the current working directory
     if (QDir::isRelativePath(docroot))
-#endif
     {
-        QFileInfo configFile(settings->fileName());
-        docroot=QFileInfo(configFile.absolutePath(),docroot).absoluteFilePath();
+	QDir relPath(docroot);
+	docroot=relPath.absolutePath();
     }
     qDebug("StaticFileController: docroot=%s, encoding=%s, maxAge=%i",qPrintable(docroot),qPrintable(encoding),maxAge);
-    maxCachedFileSize=settings->value("maxCachedFileSize","65536").toInt();
-    cache.setMaxCost(settings->value("cacheSize","1000000").toInt());
-    cacheTimeout=settings->value("cacheTime","60000").toInt();
+    maxCachedFileSize=settings.maxCachedFileSize;
+    cache.setMaxCost(settings.cacheSize);
+    cacheTimeout=settings.cacheTime;
     qDebug("StaticFileController: cache timeout=%i, size=%i",cacheTimeout,cache.maxCost());
 }
 
@@ -44,7 +40,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
         mutex.unlock();
         qDebug("StaticFileController: Cache hit for %s",path.data());
         setContentType(filename,response);
-        response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge/1000));
+	response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge));
         response.write(document);
     }
     else {
@@ -67,7 +63,7 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
         qDebug("StaticFileController: Open file %s",qPrintable(file.fileName()));
         if (file.open(QIODevice::ReadOnly)) {
             setContentType(path,response);
-            response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge/1000));
+	    response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge));
             if (file.size()<=maxCachedFileSize) {
                 // Return the file content and store it also in the cache
                 entry=new CacheEntry();

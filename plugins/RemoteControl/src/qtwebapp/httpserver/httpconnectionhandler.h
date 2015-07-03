@@ -7,7 +7,6 @@
 #define HTTPCONNECTIONHANDLER_H
 
 #include <QTcpSocket>
-#include <QSettings>
 #include <QTimer>
 #include <QThread>
 #include <QSslConfiguration>
@@ -21,6 +20,26 @@
 #else
     typedef int tSocketDescriptor;
 #endif
+
+/**
+  Contains all settings for the connection handler
+ */
+struct HttpConnectionHandlerSettings {
+	HttpConnectionHandlerSettings()
+		: readTimeout(10000),maxRequestSize(16384),maxMultipartSize(1048576)
+	{}
+
+	/** Defines the maximum time to wait for a complete HTTP request in msec. Default 10000. */
+	int readTimeout;
+	/** The file path to the SSL key file. Default empty. */
+	QString sslKeyFile;
+	/** The file path to the SSL cert file. Default empty. */
+	QString sslCertFile;
+	/** Maximum size of a request in bytes. Default 16384. */
+	int maxRequestSize;
+	/** Maximum size of a multipart request in bytes. Default 1048576 (1MB) */
+	int maxMultipartSize;
+};
 
 /**
   The connection handler accepts incoming connections and dispatches incoming requests to to a
@@ -60,7 +79,7 @@ public:
       @param settings Configuration settings of the HTTP webserver
       @param requestHandler handler that will process each incomin HTTP request
     */
-    HttpConnectionHandler(QSettings* settings, HttpRequestHandler* requestHandler);
+    HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler);
 
     /** Destructor */
     virtual ~HttpConnectionHandler();
@@ -74,7 +93,7 @@ public:
 private:
 
     /** Configuration settings */
-    QSettings* settings;
+    HttpConnectionHandlerSettings settings;
 
     /** TCP socket of the current connection (used for both HTTP and HTTPS) */
     QSslSocket* socket;
