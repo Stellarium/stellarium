@@ -30,6 +30,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelFader.hpp"
 
+//! @ingroup exoplanets
 typedef struct
 {
 	QString planetName;	//! Exoplanet name
@@ -52,6 +53,7 @@ class StelPainter;
 //! A exoplanet object represents one pulsar on the sky.
 //! Details about the exoplanets are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup exoplanets
 
 class Exoplanet : public StelObject
 {

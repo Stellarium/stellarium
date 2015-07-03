@@ -23,6 +23,7 @@
 #include <QString>
 #include <QSettings>
 
+//! @ingroup oculars
 class Telescope : public QObject
 {
 	Q_OBJECT

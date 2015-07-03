@@ -39,17 +39,16 @@
 **
 ****************************************************************************/
 
-#include <qglobal.h>
+#include <QtGlobal>
 
 #ifndef QT_NO_TEXTODFWRITER
 
 #include "qzipreader.h"
 #include "qzipwriter.h"
-#include <qdatetime.h>
-#include <qplatformdefs.h>
-#include <qendian.h>
-#include <qdebug.h>
-#include <qdir.h>
+#include <sys/stat.h>
+#include <QDateTime>
+#include <QDebug>
+#include <QDir>
 
 #include <zlib.h>
 

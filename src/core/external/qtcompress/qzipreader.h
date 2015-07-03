@@ -42,18 +42,18 @@
 #ifndef QZIPREADER_H
 #define QZIPREADER_H
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 
-#include <QtCore/qdatetime.h>
-#include <QtCore/qfile.h>
-#include <QtCore/qstring.h>
+#include <QDateTime>
+#include <QFile>
+#include <QString>
 
 // QT_BEGIN_NAMESPACE
 namespace Stel {
 
 class QZipReaderPrivate;
 
-class Q_GUI_EXPORT QZipReader
+class /* Q_GUI_EXPORT */ QZipReader
 {
 public:
     explicit QZipReader(const QString &fileName, QIODevice::OpenMode mode = QIODevice::ReadOnly );
@@ -66,7 +66,7 @@ public:
     bool isReadable() const;
     bool exists() const;
 
-    struct Q_GUI_EXPORT FileInfo
+    struct /* Q_GUI_EXPORT */ FileInfo
     {
         FileInfo();
         FileInfo(const FileInfo &other);

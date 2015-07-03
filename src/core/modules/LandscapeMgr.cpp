@@ -153,6 +153,7 @@ LandscapeMgr::LandscapeMgr()
 	: atmosphere(NULL)
 	, cardinalsPoints(NULL)
 	, landscape(NULL)
+	, oldLandscape(NULL)
 	, flagLandscapeSetsLocation(false)
 	, flagLandscapeAutoSelection(false)
 	, flagLightPollutionFromDatabase(false)
@@ -178,6 +179,11 @@ LandscapeMgr::~LandscapeMgr()
 {
 	delete atmosphere;
 	delete cardinalsPoints;
+	if (oldLandscape)
+	{
+		delete oldLandscape;
+		oldLandscape=NULL;
+	}
 	delete landscape;
 	landscape = NULL;
 }
@@ -200,6 +206,21 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 void LandscapeMgr::update(double deltaTime)
 {
 	atmosphere->update(deltaTime);
+	if (oldLandscape)
+	{
+		// This is only when transitioning to newly loaded landscape. We must draw the old one until the new one is faded in completely.
+		oldLandscape->update(deltaTime);
+		if (getIsLandscapeFullyVisible())
+		{
+			oldLandscape->setFlagShow(false);
+
+			if (oldLandscape->getEffectiveLandFadeValue()< 0.01f)
+			{
+				delete oldLandscape;
+				oldLandscape=NULL;
+			}
+		}
+	}
 	landscape->update(deltaTime);
 	cardinalsPoints->update(deltaTime);
 
@@ -317,6 +338,8 @@ void LandscapeMgr::draw(StelCore* core)
 	atmosphere->draw(core);
 
 	// Draw the landscape
+	if (oldLandscape)
+		oldLandscape->draw(core);
 	landscape->draw(core);
 
 	// Draw the cardinal points
@@ -348,6 +371,7 @@ void LandscapeMgr::init()
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
 	setFlagAtmosphereAutoEnable(conf->value("viewing/flag_atmosphere_auto_enable",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
+	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -367,6 +391,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
+	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -392,13 +417,19 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 		return false;
 	}
 
+	// Keep current landscape for a while, while new landscape fades in!
+	// This prevents subhorizon sun or grid becoming briefly visible.
 	if (landscape)
 	{
 		// Copy display parameters from previous landscape to new one
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
 		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
-		delete landscape;
+		newLandscape->setFlagShowLabels(landscape->getFlagShowLabels());
+		//in case we already fade out one old landscape (if switching too rapidly): the old one has to go immediately.
+		if (oldLandscape)
+			delete oldLandscape;
+		oldLandscape = landscape; // keep old while transitioning!
 		landscape = newLandscape;
 	}
 	currentLandscapeID = id;
@@ -475,10 +506,13 @@ void LandscapeMgr::updateI18n()
 {
 	// Translate all labels with the new language
 	if (cardinalsPoints) cardinalsPoints->updateI18n();
+	landscape->loadLabels(getCurrentLandscapeID());
 }
 
 void LandscapeMgr::setFlagLandscape(const bool displayed)
 {
+	if (oldLandscape && !displayed)
+		oldLandscape->setFlagShow(false);
 	if(landscape->getFlagShow() != displayed) {
 		landscape->setFlagShow(displayed);
 		emit landscapeDisplayedChanged(displayed);
@@ -493,6 +527,11 @@ bool LandscapeMgr::getFlagLandscape() const
 bool LandscapeMgr::getIsLandscapeFullyVisible() const
 {
 	return landscape->getIsFullyVisible();
+}
+
+float LandscapeMgr::getLandscapeSinMinAltitudeLimit() const
+{
+	return landscape->getSinMinAltitudeLimit();
 }
 
 bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
@@ -533,6 +572,19 @@ void LandscapeMgr::setFlagIllumination(const bool displayed)
 bool LandscapeMgr::getFlagIllumination() const
 {
 	return landscape->getFlagShowIllumination();
+}
+
+void LandscapeMgr::setFlagLabels(const bool displayed)
+{
+	if (landscape->getFlagShowLabels() != displayed) {
+		landscape->setFlagShowLabels(displayed);
+		emit labelsDisplayedChanged(displayed);
+	}
+}
+
+bool LandscapeMgr::getFlagLabels() const
+{
+	return landscape->getFlagShowLabels();
 }
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
@@ -749,6 +801,8 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 	}
 
 	ldscp->load(landscapeIni, landscapeId);
+	QSettings *conf=StelApp::getInstance().getSettings();
+	ldscp->setLabelFontSize(conf->value("landscape/label_font_size", 15).toInt());
 	return ldscp;
 }
 

@@ -53,6 +53,14 @@ void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c;}
 const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circleColor;}
+void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::galaxyColor = c;}
+const Vec3f &NebulaMgr::getGalaxyColor(void) const {return Nebula::galaxyColor;}
+void NebulaMgr::setBrightNebulaColor(const Vec3f& c) {Nebula::brightNebulaColor = c;}
+const Vec3f &NebulaMgr::getBrightNebulaColor(void) const {return Nebula::brightNebulaColor;}
+void NebulaMgr::setDarkNebulaColor(const Vec3f& c) {Nebula::darkNebulaColor= c;}
+const Vec3f &NebulaMgr::getDarkNebulaColor(void) const {return Nebula::darkNebulaColor;}
+void NebulaMgr::setClusterColor(const Vec3f& c) {Nebula::clusterColor= c;}
+const Vec3f &NebulaMgr::getClusterColor(void) const {return Nebula::clusterColor;}
 void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 void NebulaMgr::setHintsProportional(const bool proportional) {Nebula::drawHintProportional=proportional;}
@@ -236,6 +244,10 @@ void NebulaMgr::setStelStyle(const QString& section)
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/nebula_label_color", defaultColor).toString()));
 	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/nebula_circle_color", defaultColor).toString()));
+	setGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_galaxy_color", "1.0,0.2,0.2").toString()));
+	setBrightNebulaColor(StelUtils::strToVec3f(conf->value(section+"/nebula_brightneb_color", "0.1,1.0,0.1").toString()));
+	setDarkNebulaColor(StelUtils::strToVec3f(conf->value(section+"/nebula_darkneb_color", "0.3,0.3,0.3").toString()));
+	setClusterColor(StelUtils::strToVec3f(conf->value(section+"/nebula_cluster_color", "1.0,1.0,0.1").toString()));
 }
 
 // Search by name

@@ -37,6 +37,7 @@
 #include "StelOpenGL.hpp"
 
 #include <iomanip>
+#include <limits>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
@@ -211,7 +212,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
 
-	if (flags&Magnitude && getVMagnitude(core)!=INFINITY)
+	if (flags&Magnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
@@ -219,7 +220,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		else
 			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 	}
-	if (flags&AbsoluteMagnitude && getVMagnitude(core)!=INFINITY)
+	if (flags&AbsoluteMagnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)-5.*(std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 
 	oss << getPositionInfoString(core, flags);

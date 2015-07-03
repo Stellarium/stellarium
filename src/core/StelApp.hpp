@@ -85,6 +85,9 @@ public:
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
 
+	//! Registers all loaded StelModules with the ScriptMgr, and queues starting of the startup script.
+	void initScriptMgr();
+
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {Q_ASSERT(singleton); return *singleton;}
@@ -254,8 +257,6 @@ private:
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
 	void handlePinch(qreal scale, bool started);
-
-	void initScriptMgr(QSettings* conf);
 
 	void prepareRenderBuffer();
 	void applyRenderBuffer();

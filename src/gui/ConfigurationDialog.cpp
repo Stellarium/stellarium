@@ -605,6 +605,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("landscape/flag_enable_illumination_layer", lmgr->getFlagIllumination());
+	conf->setValue("landscape/flag_enable_labels", lmgr->getFlagLabels());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScaleIndex());
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());

@@ -232,6 +232,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
 	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
 	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
+	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));

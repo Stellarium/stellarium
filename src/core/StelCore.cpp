@@ -296,6 +296,9 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 		case ProjectionOrthographic:
 			prj = StelProjectorP(new StelProjectorOrthographic(modelViewTransform));
 			break;
+		case ProjectionSinusoidal:
+			prj = StelProjectorP(new StelProjectorSinusoidal(modelViewTransform));
+			break;
 		default:
 			qWarning() << "Unknown projection type: " << (int)(projType) << "using ProjectionStereographic instead";
 			prj = StelProjectorP(new StelProjectorStereographic(modelViewTransform));
@@ -365,9 +368,10 @@ SphericalCap StelCore::getVisibleSkyArea() const
 	Vec3d up(0, 0, 1);
 	up = altAzToJ2000(up, RefractionOff);
 	
+	// Limit star drawing to above landscape's minimal altitude (was const=-0.035, Bug lp:1469407)
 	if (landscapeMgr->getIsLandscapeFullyVisible())
 	{
-		return SphericalCap(up, -0.035f);
+		return SphericalCap(up, landscapeMgr->getLandscapeSinMinAltitudeLimit());
 	}
 	return SphericalCap(up, -1.f);
 }
@@ -1785,8 +1789,5 @@ bool StelCore::isDay() const
 
 double StelCore::getCurrentEpoch() const
 {
-	int year, month, day;
-	StelUtils::getDateFromJulianDay(getJDay(), &year, &month, &day);
-	QDate date = QDate::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
-	return double(year) + double(date.dayOfYear())/double(date.daysInYear());
+	return 2000.0 + (getJDay() - 2451545.0)/365.25;
 }
