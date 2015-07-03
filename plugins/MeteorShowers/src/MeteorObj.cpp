@@ -78,7 +78,7 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 	{
 		if (qrand()%100 < 100.f/pidx) // probability
 		{
-			setMag(mag() + oneMag);  // (m+1)
+			setAbsMag(absMag() + oneMag);  // (m+1)
 		}
 	}
 }
