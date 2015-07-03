@@ -117,14 +117,14 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	// compute RMag and CMag
 	RCMag rcMag;
 	m_core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
-	m_mag = rcMag.luminance;
+	m_absMag = rcMag.luminance;
 
 	// most visible meteors are under about 184km distant
 	// scale max mag down if outside this range
 	float scale = qPow(184, 2) / qPow(m_initialDist, 2);
 	if (scale < 1.0f)
 	{
-		m_mag *= scale;
+		m_absMag *= scale;
 	}
 
 	m_firstBrightSegment = m_segments * ((float) qrand() / ((float) RAND_MAX + 1));
@@ -146,11 +146,26 @@ bool Meteor::update(double deltaTime)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
-		m_mag -= deltaTime/500.0f;
-		if(m_mag < 0)
+		m_absMag -= deltaTime/250.0f;
+		m_aptMag = m_absMag;
+		if(m_absMag < 0)
 		{
 			m_alive = false;
 			return false;    // no longer visible
+		}
+	}
+	else
+	{
+		// update apparent magnitude based on distance to observer
+		m_aptMag = m_absMag * 0.5f;
+		if (m_finalDist == -m_initialDist) // earth-grazer?
+		{
+			float mult = qPow(m_xyDist, 2) / qPow(m_position[2], 2);
+			m_aptMag += 0.5f * mult > 1.f? 1.f : mult;
+		}
+		else
+		{
+			m_aptMag += 0.5f * (qPow(m_finalDist, 2) / qPow(m_position[2], 2));
 		}
 	}
 
@@ -325,7 +340,7 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float
 	//
 	QVector<Vec3d> vertexArrayBolide;
 	QVector<Vec4f> colorArrayBolide;
-	Vec4f bolideColor = Vec4f(1,1,1,m_mag);
+	Vec4f bolideColor = Vec4f(1,1,1,m_aptMag);
 
 	Vec3d topLeft = m_position;
 	topLeft[1] -= bolideSize;
@@ -386,7 +401,7 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 
 	for (int i=0; i<m_segments; i++)
 	{
-		float mag = m_mag * i/(3* (m_segments-1));
+		float mag = m_aptMag * i/(3* (m_segments-1));
 		if (i > m_firstBrightSegment)
 		{
 			mag *= 12./5.;
