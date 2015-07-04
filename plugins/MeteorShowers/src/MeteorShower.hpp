@@ -180,7 +180,7 @@ private:
 
 	//! Get the current sky QDateTime
 	//! @return Current QDateTime of sky
-	QDateTime getSkyQDateTime() const;
+	QDateTime getSkyQDateTime(StelCore *core) const;
 
 	//! Update value of current information(zhr, variable, stat, finish and peak)
 	//! @param current sky QDateTime

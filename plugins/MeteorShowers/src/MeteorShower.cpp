@@ -94,10 +94,11 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		}
 	}
 
-	updateCurrentData(getSkyQDateTime());
+	StelCore* core = StelApp::getInstance().getCore();
+	updateCurrentData(getSkyQDateTime(core));
 	// ensures that all objects will be drawn once
 	// that's to avoid crashes by trying select a nonexistent object
-	draw(StelApp::getInstance().getCore());
+	draw(core);
 
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 
@@ -209,9 +210,8 @@ QString MeteorShower::getMonthName(int number) const
 	return q_(monthList.at(number-1));
 }
 
-QDateTime MeteorShower::getSkyQDateTime() const
+QDateTime MeteorShower::getSkyQDateTime(StelCore* core) const
 {
-	StelCore* core = StelApp::getInstance().getCore();
 	//get the current sky date
 	double JD = core->getJDay();
 	return StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
@@ -438,7 +438,9 @@ double MeteorShower::getAngularSize(const StelCore*) const
 
 void MeteorShower::update(double deltaTime)
 {
-	updateCurrentData(getSkyQDateTime());
+	StelCore* core = StelApp::getInstance().getCore();
+
+	updateCurrentData(getSkyQDateTime(core));
 
 	// step through and update all active meteors
 	foreach (MeteorObj* m, activeMeteors)
@@ -449,7 +451,6 @@ void MeteorShower::update(double deltaTime)
 		}
 	}
 
-	StelCore* core = StelApp::getInstance().getCore();
 	double tspeed = core->getTimeRate() * 86400;  // sky seconds per actual second
 	if(tspeed<0 || fabs(tspeed)>1.)
 	{
