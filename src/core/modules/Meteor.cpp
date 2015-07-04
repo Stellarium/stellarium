@@ -331,7 +331,7 @@ void Meteor::calculateThickness(const StelCore* core, float& thickness, float& b
 
 void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float& bolideSize)
 {
-	if (!bolideSize || !m_bolideTexture)
+	if (!bolideSize || !m_bolideTexture || m_position[2] > VISIBLE_RADIUS)
 	{
 		return;
 	}
@@ -340,7 +340,7 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float
 	//
 	QVector<Vec3d> vertexArrayBolide;
 	QVector<Vec4f> colorArrayBolide;
-	Vec4f bolideColor = Vec4f(1,1,1,m_aptMag);
+	Vec4f bolideColor = Vec4f(1, 1, 1, m_aptMag);
 
 	Vec3d topLeft = m_position;
 	topLeft[1] -= bolideSize;
