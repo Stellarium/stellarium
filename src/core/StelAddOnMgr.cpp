@@ -132,18 +132,16 @@ bool StelAddOnMgr::loadAddonJson(AddOn::Source source)
 			: m_sUserAddonJsonPath;
 
 	QFile jsonFile(jsonPath);
-	if (!jsonFile.exists())
+	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
-		return false;
-	}
-	else if (!jsonFile.open(QIODevice::ReadOnly))
-	{
-		qWarning() << "Add-On Mgr: Couldn't open the catalog!"
+		qWarning() << "Add-On Mgr: Cannot open the catalog!"
 			   << QDir::toNativeSeparators(jsonPath);
 		return false;
 	}
 
 	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
+	jsonFile.close();
+
 	if (json["name"].toString() != "Add-Ons Catalog" ||
 		json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
 	{
