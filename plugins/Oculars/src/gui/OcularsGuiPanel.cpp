@@ -512,7 +512,7 @@ void OcularsGuiPanel::updateOcularControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldOcularName->boundingRect().height() - prevOcularButton->boundingRect().height()) / 2.;
-    prevOcularButton->setPos(posX, qRound(posY + heightAdjustment));
+	prevOcularButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevOcularButton->boundingRect().width();
 	widgetWidth += prevOcularButton->boundingRect().width();
 

@@ -222,6 +222,17 @@ protected:
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
 
+class StelProjectorSinusoidal : public StelProjectorCylinder
+{
+public:
+	StelProjectorSinusoidal(ModelViewTranformP func) : StelProjectorCylinder(func) {;}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
+	bool forward(Vec3f &win) const;
+	bool backward(Vec3d &v) const;
+};
+
+
 class StelProjector2d : public StelProjector
 {
 public:

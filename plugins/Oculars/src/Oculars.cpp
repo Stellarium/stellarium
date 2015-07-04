@@ -38,6 +38,7 @@
 #include "StelProjector.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
+#include "SolarSystem.hpp"
 #include "StelUtils.hpp"
 
 #include <QAction>
@@ -118,6 +119,7 @@ Oculars::Oculars():
 	magLimitStars(0.0),
 	flagLimitDSOs(false),
 	magLimitDSOs(0.0),
+	flagMoonScale(false),
 	ccdRotationAngle(0.0),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
@@ -1814,6 +1816,8 @@ void Oculars::unzoomOcular()
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
 
+	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScale);
+
 	// Set the screen display
 	core->setMaskType(StelProjector::MaskNone);
 	core->setFlipHorz(false);
@@ -1858,6 +1862,8 @@ void Oculars::zoom(bool zoomedIn)
 			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
 			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
 
+			flagMoonScale = GETSTELMODULE(SolarSystem)->getFlagMoonScale();
+
 			StelMovementMgr *movementManager = core->getMovementMgr();
 			initialFOV = movementManager->getCurrentFov();
 		}
@@ -1891,6 +1897,8 @@ void Oculars::zoomOcular()
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
+
+	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);
