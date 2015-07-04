@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-14 16:13+0600\n"
+"POT-Creation-Date: 2015-07-01 00:51+0600\n"
 "PO-Revision-Date: 2015-05-17 16:08+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-15 04:47+0000\n"
-"X-Generator: Launchpad (build 17557)\n"
+"X-Launchpad-Export-Date: 2015-07-01 05:23+0000\n"
+"X-Generator: Launchpad (build 17578)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
 #: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
-#: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
+#: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
@@ -160,28 +160,28 @@ msgstr "осветљеност"
 msgid "Labels"
 msgstr "Ознаке"
 
-#: src/core/modules/LandscapeMgr.cpp:641
+#: src/core/modules/LandscapeMgr.cpp:646
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:446
 msgid "Author: "
 msgstr "Аутор: "
 
-#: src/core/modules/LandscapeMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:652
 msgid "Location: "
 msgstr "Место: "
 
-#: src/core/modules/LandscapeMgr.cpp:650
+#: src/core/modules/LandscapeMgr.cpp:655
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:655
+#: src/core/modules/LandscapeMgr.cpp:660
 msgid "Celestial body:"
 msgstr "Небеско тело"
 
-#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:212
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
@@ -193,7 +193,7 @@ msgstr "Тип: <b>%1</b>"
 msgid "Opacity: <b>%1</b>"
 msgstr "Непрозирност: %1"
 
-#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:218
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -202,7 +202,7 @@ msgstr "Непрозирност: %1"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Магнитуда: <b>%1</b> (неактивно до: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:221
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -244,133 +244,133 @@ msgstr "Структура: %1"
 msgid "Size: %1"
 msgstr "Величина: %1"
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:740
 msgid "Galaxy"
 msgstr "Галаксија"
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:743
 msgid "Open cluster"
 msgstr "Отворено јато"
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:746
 msgid "Globular cluster"
 msgstr "Глобуларно јато"
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:749
 msgid "Nebula"
 msgstr "Маглина"
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:752
 msgid "Planetary nebula"
 msgstr "Планетарна маглина"
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:755
 msgid "Dark nebula"
 msgstr "Тамна маглина"
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:758
 msgid "Irregular galaxy"
 msgstr "Неправилна галаксија"
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:761
 msgid "Cluster associated with nebulosity"
 msgstr "Магловито јато"
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:764
 msgid "Unknown"
 msgstr "Непознато"
 
-#: src/core/modules/Nebula.cpp:752
+#: src/core/modules/Nebula.cpp:767
 msgid "HII region"
 msgstr "HII регион"
 
-#: src/core/modules/Nebula.cpp:755
+#: src/core/modules/Nebula.cpp:770
 msgid "Reflection nebula"
 msgstr "Рефлектујућа маглина"
 
-#: src/core/modules/Nebula.cpp:758
+#: src/core/modules/Nebula.cpp:773
 msgid "H-α emission region"
 msgstr "H-α емисиони регион"
 
-#: src/core/modules/Nebula.cpp:761
+#: src/core/modules/Nebula.cpp:776
 msgid "Undocumented type"
 msgstr "Недокументовани тип"
 
-#: src/core/modules/Nebula.cpp:774
+#: src/core/modules/Nebula.cpp:789
 msgctxt "form"
 msgid "circular"
 msgstr "кружни"
 
-#: src/core/modules/Nebula.cpp:777
+#: src/core/modules/Nebula.cpp:792
 msgctxt "form"
 msgid "elliptical"
 msgstr "еклиптички"
 
-#: src/core/modules/Nebula.cpp:780
+#: src/core/modules/Nebula.cpp:795
 msgctxt "form"
 msgid "irregular"
 msgstr "неправилан"
 
-#: src/core/modules/Nebula.cpp:783
+#: src/core/modules/Nebula.cpp:798
 msgctxt "form"
 msgid "undocumented form"
 msgstr "недокументован облик"
 
-#: src/core/modules/Nebula.cpp:796
+#: src/core/modules/Nebula.cpp:811
 msgctxt "structure"
 msgid "amorphous"
 msgstr "аморфан"
 
-#: src/core/modules/Nebula.cpp:799
+#: src/core/modules/Nebula.cpp:814
 msgctxt "structure"
 msgid "conventional"
 msgstr "konvencionalan"
 
-#: src/core/modules/Nebula.cpp:802
+#: src/core/modules/Nebula.cpp:817
 msgctxt "structure"
 msgid "filamentary"
 msgstr "филаментаран"
 
-#: src/core/modules/Nebula.cpp:805
+#: src/core/modules/Nebula.cpp:820
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr "недкументована структура"
 
-#: src/core/modules/Nebula.cpp:818
+#: src/core/modules/Nebula.cpp:833
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "најслабија"
 
-#: src/core/modules/Nebula.cpp:821
+#: src/core/modules/Nebula.cpp:836
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr "умерена"
 
-#: src/core/modules/Nebula.cpp:824
+#: src/core/modules/Nebula.cpp:839
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "најсветлији"
 
-#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
+#: src/core/modules/Nebula.cpp:842 src/core/modules/Nebula.cpp:867
 msgid "undocumented brightness"
 msgstr "недокументован сјај"
 
-#: src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:855
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr "веома светао"
 
-#: src/core/modules/Nebula.cpp:843
+#: src/core/modules/Nebula.cpp:858
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr "светао"
 
-#: src/core/modules/Nebula.cpp:846
+#: src/core/modules/Nebula.cpp:861
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr "средње"
 
-#: src/core/modules/Nebula.cpp:849
+#: src/core/modules/Nebula.cpp:864
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr "bled"
@@ -379,76 +379,76 @@ msgstr "bled"
 msgid "Deep-sky objects"
 msgstr "објекти дубоког неба"
 
-#: src/core/modules/Planet.cpp:223 src/core/modules/MinorPlanet.cpp:227
+#: src/core/modules/Planet.cpp:224 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
 #: src/core/modules/StarWrapper.cpp:201 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Apsolutna magnituda: %1"
 
-#: src/core/modules/Planet.cpp:232
+#: src/core/modules/Planet.cpp:233
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "Укошеност (за датум, за Змељу): %1"
 
-#: src/core/modules/Planet.cpp:244 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Planet.cpp:245 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Rastojanje: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:251 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:252 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:228
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Даљина: %1АЈ  (%2 милиона километара)"
 
-#: src/core/modules/Planet.cpp:264
+#: src/core/modules/Planet.cpp:265
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Prividni prečnik: %1, sa prstenovima: %2"
 
-#: src/core/modules/Planet.cpp:270 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Planet.cpp:271 src/core/modules/MinorPlanet.cpp:260
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Prividni prečnik: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Planet.cpp:283 src/core/modules/MinorPlanet.cpp:267
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Siderički period: %1 dana (%2 a)"
 
-#: src/core/modules/Planet.cpp:285
+#: src/core/modules/Planet.cpp:286
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Siderički dan: %1"
 
-#: src/core/modules/Planet.cpp:286
+#: src/core/modules/Planet.cpp:287
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Srednji sunčev dan: %1"
 
-#: src/core/modules/Planet.cpp:290
+#: src/core/modules/Planet.cpp:291
 msgid "The period of rotation is chaotic"
 msgstr "Период ротације је хаотичан"
 
-#: src/core/modules/Planet.cpp:296
+#: src/core/modules/Planet.cpp:297
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Fazni ugao: %1"
 
-#: src/core/modules/Planet.cpp:297
+#: src/core/modules/Planet.cpp:298
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongacija: %1"
 
-#: src/core/modules/Planet.cpp:298
+#: src/core/modules/Planet.cpp:299
 #, qt-format
 msgid "Phase: %1"
 msgstr "Faza: %1"
 
-#: src/core/modules/Planet.cpp:299
+#: src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Osvetljen: %1%"
@@ -626,7 +626,7 @@ msgstr "Трајање помрачења: %1%"
 msgid "Rising time: %1%"
 msgstr "Време излаза: %1%"
 
-#: src/core/modules/MilkyWay.cpp:73
+#: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
 msgstr "Млечни пут"
 
@@ -812,11 +812,11 @@ msgstr "Преокренути призор хоризонтално"
 msgid "Flip scene vertically"
 msgstr "Преокренути призор вертикално"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1529
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Исправка је онемогућена. Користити само уколико знате шта радите!"
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1532
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -827,7 +827,7 @@ msgstr ""
 "у свом чланку <em>Ајнштајнова теорија релативитета потврђена древним "
 "помрачењима Сунца</em> (%1). За више информација, погледајте %2овде%3."
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1535
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -836,7 +836,7 @@ msgstr ""
 "Ову емпиријску једначину објавио је Г.М.Клеменс у чланку <em>На систему "
 "астрономских константи</em> (%1)."
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1538
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -845,14 +845,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1541
+#: src/core/StelCore.cpp:1542
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1545
+#: src/core/StelCore.cpp:1546
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -863,7 +863,7 @@ msgstr ""
 "у интервалима од 5 до 10 дана почевши од 601. пре нове ере и 1649. нове ере. "
 "Исти однос је такође узет у сизиги Голдстиновим табелама."
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1550
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -873,7 +873,7 @@ msgstr ""
 "Ову једначину објавили су П. М. Мулер и Ф. Р. Стивенсон у чланку <em>Убрзање "
 "Земље и месеца из раних астрономских посматрања</em> (%1)."
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1553
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -882,7 +882,7 @@ msgstr ""
 "Ову једначину објавио је Ф. Р. Стивенсон у чланку <em>Пре телескопска "
 "астрономска посматрања</em> (%1)."
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1556
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -895,7 +895,7 @@ msgstr ""
 "Полиномијалне апроксимације за корекцију делта Т  Е. Т- У. Т. у периоду од "
 "1800- 1975. </em> (%1) као део података које је објавио Броувер (1952)."
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1559
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -905,7 +905,7 @@ msgstr ""
 "програми и табеле од -4000 до +2800</em> 1986. године и у рачунарском "
 "програму за планетаријум \"RedShift\"."
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1562
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -916,12 +916,12 @@ msgstr ""
 "<em>Дугопериодичне промене у Земљиној ротацији од 700. године пре нове ере "
 "до 1980. године нове ере</em> (%1)."
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1565
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Овај алгоритам се користи у рачунарском програму за планетаријум Водич 7."
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1568
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -931,7 +931,7 @@ msgstr ""
 "канон помрачења Сунца: 1986-2035</em> (1987) и у делу <em>Педесетогодишњи "
 "канон помрачења Месеца: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1571
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -940,7 +940,7 @@ msgstr ""
 "Ову формулу извео је К.М. Борковски (%1) из анализе 31 Сунчевих помрачења "
 "евидентираних између 2137 пре нове ере и 1715 године нове ере."
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1574
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -953,7 +953,7 @@ msgstr ""
 "1988</em> (%1) подаци се поклапају са вредностима које су дали Стивенсон и "
 "Морисон (1984)."
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1577
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -963,7 +963,7 @@ msgstr ""
 "85 лунарне теорије у њиховој <em>Лунарне Табеле и Програми од 4000. пре нове "
 "ере до 8000. </em>(1991)."
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1580
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -974,7 +974,7 @@ msgstr ""
 "<em>Дугопериодичне флуктуације у Земљиној ротацији: од 700. године пре нове "
 "ере до 1990. године нове ере</em> (%1)."
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1583
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -983,7 +983,7 @@ msgstr ""
 "Ф. Р. Стивенсон објавио је ову формулу у својој књизи <em>Историјска "
 "помрачења и Земљина ротација</em> (%1)."
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1586
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -993,14 +993,14 @@ msgstr ""
 "употреби.  Табеле за 1620,2000, укључујући и варијације Чапронта, Чапронт-"
 "Тузеа и Франкоа (1997) за датуме који су ван 1620,2000."
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1589
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1592
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1009,7 +1009,7 @@ msgstr ""
 "Овај полином је објављен у чланку Ј. Меуса и Л. Симонса  <em>Полиномне "
 "апроксимације за Делта Т, 1600-2000 АД</em> (%1)."
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1595
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1019,7 +1019,7 @@ msgstr ""
 "рачунару </em> (2000) даје једноставан полиномијални податак 3. реда из "
 "блиске прошлости."
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1598
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1031,7 +1031,7 @@ msgstr ""
 "табелирање </em> (2002). Засновано је на Ј. Меусовом <em> Астрономски "
 "алгоритми</em> (1991)."
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1601
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1042,7 +1042,7 @@ msgstr ""
 "<em>Историјске вредности грешака часовника на Земљи %1Т и рачунање "
 "помрачења</em> (%2) са додатком у (%3)."
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1604
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1055,7 +1055,7 @@ msgstr ""
 "корене функције. Ово је засновано на могућем Стефенсоновом периодичном опису "
 "(%2). За више информација погледај %3овде%4"
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1607
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1065,11 +1065,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1607
 msgid "Used by default."
 msgstr "Користи као подразумевано."
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1610
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1079,7 +1079,7 @@ msgstr ""
 "Ово решење Б. Бањевића, базира се на раду Стивенсона и Морисона (1984), "
 "објављено у чланку <em>Античка помрачења и датум пада Вавилона</em> (%1)."
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1613
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1091,7 +1091,7 @@ msgstr ""
 "полиномијалне апроксимације делтаТ</em> (%1) и  поново разматрано 2013. од "
 "стране С. Ислама."
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1616
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1102,7 +1102,7 @@ msgstr ""
 "Мариам Султана и Фахем Заиди објавили у <em> Делта Т:Полиномијална "
 "апроксимација за временски период од 1620-2013</em>(%1)."
 
-#: src/core/StelCore.cpp:1618
+#: src/core/StelCore.cpp:1619
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1111,15 +1111,15 @@ msgstr ""
 "Ово је квадратна формула за рачунање %1Т са коефицијентима које је дефинисао "
 "корисник."
 
-#: src/core/StelCore.cpp:1621 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1622 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Greška"
 
-#: src/core/StelCore.cpp:1671
+#: src/core/StelCore.cpp:1672
 msgid "with meaningless values outside this range"
 msgstr "са безначајним вредностима ван опсега"
 
-#: src/core/StelCore.cpp:1697
+#: src/core/StelCore.cpp:1698
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1127,22 +1127,22 @@ msgstr ""
 "са средњом грешком мањом од једне секунде, максимална грешка 1.9s и "
 "безначајне вредности ван опсега"
 
-#: src/core/StelCore.cpp:1719 src/core/StelCore.cpp:1724
-#: src/core/StelCore.cpp:1751 src/core/StelCore.cpp:1756
-#: src/core/StelCore.cpp:1761
+#: src/core/StelCore.cpp:1720 src/core/StelCore.cpp:1725
+#: src/core/StelCore.cpp:1752 src/core/StelCore.cpp:1757
+#: src/core/StelCore.cpp:1762
 msgid "with zero values outside this range"
 msgstr "са нултим вредностима ван опсега"
 
-#: src/core/StelCore.cpp:1729
+#: src/core/StelCore.cpp:1730
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "са типичном 1-секундном тачношћу и нултом вредношћу ван опсега"
 
-#: src/core/StelCore.cpp:1771
+#: src/core/StelCore.cpp:1772
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Дозвољени опсег за употребу: између %1 и %2, %3 година."
 
-#: src/core/StelCore.cpp:1773
+#: src/core/StelCore.cpp:1774
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Дозвољени опсег за употребу: између %1 и %2 година."
@@ -4701,6 +4701,7 @@ msgstr "Приказана поља"
 
 #: src/ui_configurationDialog.h:1056
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
 msgid "Name"
 msgstr "Назив"
@@ -5173,7 +5174,7 @@ msgstr "Положај показивача"
 msgid "Include dir:"
 msgstr "Укључи фасциклу:"
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "..."
 
@@ -5953,6 +5954,7 @@ msgstr "Додај"
 #: plugins/Oculars/src/ui_ocularDialog.h:1123
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
 msgstr "Назив:"
 
@@ -6068,171 +6070,171 @@ msgstr ""
 "подразумевану датотеку."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1711
+#: plugins/Satellites/src/Satellites.cpp:1714
 msgid "visual"
 msgstr "визуелно"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1713
+#: plugins/Satellites/src/Satellites.cpp:1716
 msgid "scientific"
 msgstr "научни"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1715
+#: plugins/Satellites/src/Satellites.cpp:1718
 msgid "communications"
 msgstr "комуникациони"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1717
+#: plugins/Satellites/src/Satellites.cpp:1720
 msgid "navigation"
 msgstr "навигациони"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1719
+#: plugins/Satellites/src/Satellites.cpp:1722
 msgid "amateur"
 msgstr "аматер"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1721
+#: plugins/Satellites/src/Satellites.cpp:1724
 msgid "weather"
 msgstr "временски услови"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1723
+#: plugins/Satellites/src/Satellites.cpp:1726
 msgid "geostationary"
 msgstr "геостационарни"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1725
+#: plugins/Satellites/src/Satellites.cpp:1728
 msgid "non-operational"
 msgstr "неоперативни"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1727
+#: plugins/Satellites/src/Satellites.cpp:1730
 msgid "gps"
 msgstr "гпс"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1729
+#: plugins/Satellites/src/Satellites.cpp:1732
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1731
+#: plugins/Satellites/src/Satellites.cpp:1734
 msgid "galileo"
 msgstr "Галилео"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1733
+#: plugins/Satellites/src/Satellites.cpp:1736
 msgid "iridium"
 msgstr "иридијум"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1735
+#: plugins/Satellites/src/Satellites.cpp:1738
 msgid "stations"
 msgstr "станице"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1737
+#: plugins/Satellites/src/Satellites.cpp:1740
 msgid "education"
 msgstr "образовање"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1739
+#: plugins/Satellites/src/Satellites.cpp:1742
 msgid "observatory"
 msgstr "опсерваторијa"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1750
+#: plugins/Satellites/src/Satellites.cpp:1753
 msgid "The Hubble Space Telescope"
 msgstr "Хабл свемирски телескоп"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1752
+#: plugins/Satellites/src/Satellites.cpp:1755
 msgid "The International Space Station"
 msgstr "Међународна свемирска станица"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1754
+#: plugins/Satellites/src/Satellites.cpp:1757
 msgid "China's first space station"
 msgstr "Прва кинеска свемирска станица"
 
-#: plugins/Satellites/src/Satellite.cpp:256
-#: plugins/Satellites/src/Satellite.cpp:260
+#: plugins/Satellites/src/Satellite.cpp:257
+#: plugins/Satellites/src/Satellite.cpp:261
 msgid "Catalog #"
 msgstr "Списак #"
 
-#: plugins/Satellites/src/Satellite.cpp:262
+#: plugins/Satellites/src/Satellite.cpp:263
 msgid "International Designator"
 msgstr "Међународна ознака"
 
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 msgid "artificial satellite"
 msgstr "вештачки сателит"
 
-#: plugins/Satellites/src/Satellite.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:275
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Приближна магнитуда: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:287
+#: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Домет (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:290
+#: plugins/Satellites/src/Satellite.cpp:291
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Брзина домета (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:293
+#: plugins/Satellites/src/Satellite.cpp:294
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Висина (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:296
+#: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Подтачка (Шир./Дуж.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:310
+#: plugins/Satellites/src/Satellite.cpp:311
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Координате ТЕМЕ (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:319
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Брзина ТЕМЕ (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:323
+#: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "Угао Сунчеве рефлексије : %1 %2"
 
-#: plugins/Satellites/src/Satellite.cpp:334
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
 msgstr "Сателит и посматрач су изложени сунчевој светлости."
 
-#: plugins/Satellites/src/Satellite.cpp:337
+#: plugins/Satellites/src/Satellite.cpp:338
 msgid "The satellite is visible."
 msgstr "Сателит је видљив"
 
-#: plugins/Satellites/src/Satellite.cpp:340
+#: plugins/Satellites/src/Satellite.cpp:341
 msgid "The satellite is eclipsed."
 msgstr "Сателит је замрачен"
 
-#: plugins/Satellites/src/Satellite.cpp:343
+#: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite is not visible"
 msgstr "Сателит није видљив"
 
-#: plugins/Satellites/src/Satellite.cpp:368
+#: plugins/Satellites/src/Satellite.cpp:369
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
@@ -6832,6 +6834,7 @@ msgstr "Издање %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:92
 msgid "#"
 msgstr "#"
 
@@ -6926,63 +6929,75 @@ msgstr "Прекини везе са изабраног телескопа"
 msgid "Select a directory"
 msgstr "Изаберите фасциклу"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:294
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
+msgid "Right Ascension (J2000)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
+msgid "Declination (J2000)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "Окрени телескоп на"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:296
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "Нема активних уређаја"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:297
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "Окрени телескоп на координате"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:235
 msgid "&Right Ascension (J2000):"
 msgstr "&Десно успињање (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:299
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:236
 msgid "De&clination (J2000):"
 msgstr "Од&ступање (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:232
 msgid "&Current object"
 msgstr "&Тренутни објекат"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:301
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:233
 msgid "Center of the screen"
 msgstr "Средина екрана"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:303
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "Формат: сати-минутi-секунде"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:305
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "&ЧМС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "Формат: степени-минути-секунде"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:309
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "&СМС"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:311
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "Децимални степени"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:313
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "Д&ецималан"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:314
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "&Заокрет"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:315
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "Подеси &телескопе..."
 
@@ -7163,6 +7178,18 @@ msgstr "Користи  телескопске извршне сервере (з
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
 msgstr "Извршни директоријум :"
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:230
+msgid "Points"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:237
+msgid "Add point"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:238
+msgid "Remove selected"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -7526,7 +7553,7 @@ msgid "Nebula hints"
 msgstr "Савети о маглини"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
-msgid "Galaxies hints"
+msgid "Galaxy hints"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
