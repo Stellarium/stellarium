@@ -1740,10 +1740,10 @@
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayout_7">
-             <item row="1" column="0" colspan="2">
-              <widget class="QCheckBox" name="showFogCheckBox">
+             <item row="3" column="0" rowspan="2" colspan="2">
+              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
                <property name="text">
-                <string>Show fog</string>
+                <string>Use this landscape as default</string>
                </property>
               </widget>
              </item>
@@ -1754,13 +1754,10 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0" colspan="2">
-              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+             <item row="1" column="0" colspan="2">
+              <widget class="QCheckBox" name="showFogCheckBox">
                <property name="text">
-                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
+                <string>Show fog</string>
                </property>
               </widget>
              </item>
@@ -1768,13 +1765,6 @@
               <widget class="QCheckBox" name="showGroundCheckBox">
                <property name="text">
                 <string>Show ground</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0" rowspan="2" colspan="2">
-              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
-               <property name="text">
-                <string>Use this landscape as default</string>
                </property>
               </widget>
              </item>
@@ -1820,6 +1810,23 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="landscapeLabelsCheckBox">
+               <property name="text">
+                <string>Show landscape labels</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+               <property name="text">
+                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
