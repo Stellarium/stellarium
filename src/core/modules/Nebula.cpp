@@ -50,6 +50,10 @@ bool  Nebula::drawHintProportional = false;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
+Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
+Vec3f Nebula::brightNebulaColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
+Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
 
 Nebula::Nebula()
 	: M_nb(0)
@@ -166,7 +170,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	}
 	if (flags&Extra)
 	{
-		if (nType==NebHII)
+        if (nType==NebHII) // Sharpless and LBN
 		{
 			if (LBN_nb!=0)
 				oss << q_("Brightness: %1").arg(brightnessClass) << "<br>";
@@ -209,9 +213,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	// make very easy to select if labeled
 	float lim=getVMagnitude(core);
 	if (nType==NebDn)
-		lim=15.0f - mag - 2.0f*angularSize; // Note that "mag" field is used for opacity in this catalog!
-	else if (nType==NebHII)
-		lim=10.0f - 2.0f*angularSize; // Unfortunately, in Sh catalog, we always have mag=99=unknown!
+        lim=15.0f - mag - 2.0f*qMin(1.5f, angularSize); // Note that "mag" field is used for opacity in this catalog!
+    else if (nType==NebHII) // Sharpless and LBN
+        lim=10.0f - 2.0f*qMin(1.5f, angularSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
 	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
@@ -259,12 +263,23 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
+		// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
+		// The qMin() maximized the visibility gain for large objects.
 		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*angularSize;
-		else
+			lim = 15.0f - mag - 2.0f*qMin(angularSize, 1.5f);
+		else if (B_nb>0)
 			lim = 9.0f;
+		else
+			lim= 12.0f; // GZ I assume LDN objects are rather elusive.
 	}
-	else if (nType==NebHII || nType==NebHa)
+    else if (LBN_nb>0) // attempt to balance LBN brightness classes
+    {
+        if (brightnessClass==0)
+            lim=10.0f;
+        else
+            lim=brightnessClass+7.0f;
+    }
+    else if (nType==NebHII || nType==NebHa) // NebHII={Sharpless, LBN}, NebHa={RCW}
 	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 		lim=9.0f;
 	}
@@ -280,37 +295,46 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
-	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 
-	sPainter.setColor(col[0], col[1], col[2], 1);
+	Vec3f color=circleColor;
 	switch (nType)
 	{
 		case NebGx:
 			Nebula::texGalaxy->bind();
+			color=galaxyColor;
 			break;
 		case NebOc:
 			Nebula::texOpenCluster->bind();
+			color=clusterColor;
 			break;
 		case NebGc:
 			Nebula::texGlobularCluster->bind();
+			color=clusterColor;
 			break;
 		case NebN:
 		case NebHII:
 		case NebRn:
+		case NebHa:
 			Nebula::texDiffuseNebula->bind();
+			color=brightNebulaColor;
 			break;
 		case NebPn:
 			Nebula::texPlanetaryNebula->bind();
+			color=brightNebulaColor;
 			break;
-		case NebDn:		
+		case NebDn:
 			Nebula::texDarkNebula->bind();
-			break;		
+			color=darkNebulaColor;
+			break;
 		case NebCn:
 			Nebula::texOpenClusterWithNebulosity->bind();
+			color=clusterColor;
 			break;
 		default:
 			Nebula::texCircle->bind();
 	}
+	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
+	sPainter.setColor(col[0], col[1], col[2], 1);
 
 	if (drawHintProportional)
 	{
@@ -335,12 +359,15 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
 		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*angularSize;
-		else
+			lim = 15.0f - mag - 2.0f*qMin(angularSize, 2.5f);
+		else if (B_nb>0)
 			lim = 9.0f;
+		else
+			lim= 12.0f; // GZ I assume some LDN objects are rather elusive.
 	}
 	else if (nType==NebHII || nType==NebHa)
 		lim=9.0f;
+
 	if (lim>maxMagLabel)
 		return;
 

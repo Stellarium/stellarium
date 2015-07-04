@@ -117,15 +117,53 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	//! Set the color used to draw the nebula symbols (circles, boxes. etc).
+	//! Set the default color used to draw the nebula symbols (default circles, etc).
 	//! @param c The color of the nebula symbols
 	//! @code
 	//! // example of usage in scripts
-	//! NebulaMgr.setCirclesColor(Vec3f(1.0,0.0,0.0));
+	//! NebulaMgr.setCirclesColor(Vec3f(0.6,0.8,0.0));
 	//! @endcode
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
+
+	//! Set the color used to draw the galaxy symbols (ellipses).
+	//! @param c The color of the galaxy symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setGalaxyColor(const Vec3f& c);
+	//! Get current value of the galaxy symbol color.
+	const Vec3f& getGalaxyColor(void) const;
+	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
+	//! @param c The color of the nebula symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setBrightNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setBrightNebulaColor(const Vec3f& c);
+	//! Get current value of the nebula circle color.
+	const Vec3f& getBrightNebulaColor(void) const;
+	//! Set the color used to draw the dark nebula symbols (gray boxes).
+	//! @param c The color of the dark nebula symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setDarkNebulaColor(Vec3f(0.2,0.2,0.2));
+	//! @endcode
+	void setDarkNebulaColor(const Vec3f& c);
+	//! Get current value of the dark nebula color.
+	const Vec3f& getDarkNebulaColor(void) const;
+	//! Set the color used to draw the star cluster symbols (Open/Globular).
+	//! @param c The color of the cluster symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setClusterColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setClusterColor(const Vec3f& c);
+	//! Get current value of the nebula circle color.
+	const Vec3f& getClusterColor(void) const;
+
 
 	//! Set Nebulae Hints circle scale.
 	void setCircleScale(float scale);

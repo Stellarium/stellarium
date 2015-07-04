@@ -214,7 +214,7 @@ private:
 	QPair< QByteArray, QByteArray > tleElements;
 	double height, range, rangeRate;
 	QList<CommLink> comms;
-	Vec3f hintColor;
+	Vec3f hintColor;	
 	//! Identifiers of the groups to which the satellite belongs.
 	//! See @ref groups.
 	GroupSet groups;
@@ -231,6 +231,7 @@ private:
 	static bool  realisticModeFlag;
 	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
+	static Vec3f invisibleSatelliteColor;
 
 	void draw(StelCore *core, StelPainter& painter, float maxMagHints);
 
@@ -255,6 +256,7 @@ private:
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
+	QList<int> visibilityPoints; //orbit visibility points
 };
 
 typedef QSharedPointer<Satellite> SatelliteP;
