@@ -146,7 +146,7 @@ bool Meteor::update(double deltaTime)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
-		m_absMag -= deltaTime/250.0f;
+		m_absMag -= deltaTime/500.0f;
 		m_aptMag = m_absMag;
 		if(m_absMag < 0)
 		{
