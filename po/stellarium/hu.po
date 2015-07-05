@@ -8,21 +8,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-14 16:13+0600\n"
+"POT-Creation-Date: 2015-07-01 00:51+0600\n"
 "PO-Revision-Date: 2015-06-19 17:46+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-06-20 05:13+0000\n"
-"X-Generator: Launchpad (build 17572)\n"
+"X-Launchpad-Export-Date: 2015-07-01 05:18+0000\n"
+"X-Generator: Launchpad (build 17578)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
 #: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
-#: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
+#: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
@@ -162,28 +162,28 @@ msgstr "Megvilágítás"
 msgid "Labels"
 msgstr "Címkék"
 
-#: src/core/modules/LandscapeMgr.cpp:641
+#: src/core/modules/LandscapeMgr.cpp:646
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:446
 msgid "Author: "
 msgstr "Szerző: "
 
-#: src/core/modules/LandscapeMgr.cpp:647
+#: src/core/modules/LandscapeMgr.cpp:652
 msgid "Location: "
 msgstr "Hely: "
 
-#: src/core/modules/LandscapeMgr.cpp:650
+#: src/core/modules/LandscapeMgr.cpp:655
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:655
+#: src/core/modules/LandscapeMgr.cpp:660
 msgid "Celestial body:"
 msgstr "Égi objektum:"
 
-#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:211
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:212
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
@@ -195,7 +195,7 @@ msgstr "Típus: <b>%1</b>"
 msgid "Opacity: <b>%1</b>"
 msgstr "Átlátszatlanság: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:218
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -204,7 +204,7 @@ msgstr "Átlátszatlanság: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitúdó: <b>%1</b> (ennyire elhalványulva: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:220
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:221
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -246,133 +246,133 @@ msgstr "Struktúra: %1"
 msgid "Size: %1"
 msgstr "Méret: %1"
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:740
 msgid "Galaxy"
 msgstr "Galaxis"
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:743
 msgid "Open cluster"
 msgstr "Nyílthalmaz"
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:746
 msgid "Globular cluster"
 msgstr "Gömbhalmaz"
 
-#: src/core/modules/Nebula.cpp:734
+#: src/core/modules/Nebula.cpp:749
 msgid "Nebula"
 msgstr "Csillagköd"
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:752
 msgid "Planetary nebula"
 msgstr "Planetáris köd"
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:755
 msgid "Dark nebula"
 msgstr "Sötétköd"
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:758
 msgid "Irregular galaxy"
 msgstr "Szabálytalan galaxis"
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:761
 msgid "Cluster associated with nebulosity"
 msgstr "Köd csillaghalmazzal"
 
-#: src/core/modules/Nebula.cpp:749
+#: src/core/modules/Nebula.cpp:764
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: src/core/modules/Nebula.cpp:752
+#: src/core/modules/Nebula.cpp:767
 msgid "HII region"
 msgstr "Hill régió"
 
-#: src/core/modules/Nebula.cpp:755
+#: src/core/modules/Nebula.cpp:770
 msgid "Reflection nebula"
 msgstr "Reflexiós köd"
 
-#: src/core/modules/Nebula.cpp:758
+#: src/core/modules/Nebula.cpp:773
 msgid "H-α emission region"
 msgstr "H-α emissziós régió"
 
-#: src/core/modules/Nebula.cpp:761
+#: src/core/modules/Nebula.cpp:776
 msgid "Undocumented type"
 msgstr "Nem dokumentált típus"
 
-#: src/core/modules/Nebula.cpp:774
+#: src/core/modules/Nebula.cpp:789
 msgctxt "form"
 msgid "circular"
 msgstr "körkörös"
 
-#: src/core/modules/Nebula.cpp:777
+#: src/core/modules/Nebula.cpp:792
 msgctxt "form"
 msgid "elliptical"
 msgstr "elliptikus"
 
-#: src/core/modules/Nebula.cpp:780
+#: src/core/modules/Nebula.cpp:795
 msgctxt "form"
 msgid "irregular"
 msgstr "szabálytalan"
 
-#: src/core/modules/Nebula.cpp:783
+#: src/core/modules/Nebula.cpp:798
 msgctxt "form"
 msgid "undocumented form"
 msgstr "nem dokumentált forma"
 
-#: src/core/modules/Nebula.cpp:796
+#: src/core/modules/Nebula.cpp:811
 msgctxt "structure"
 msgid "amorphous"
 msgstr "alaktalan"
 
-#: src/core/modules/Nebula.cpp:799
+#: src/core/modules/Nebula.cpp:814
 msgctxt "structure"
 msgid "conventional"
 msgstr "hagyományos"
 
-#: src/core/modules/Nebula.cpp:802
+#: src/core/modules/Nebula.cpp:817
 msgctxt "structure"
 msgid "filamentary"
 msgstr "rostos"
 
-#: src/core/modules/Nebula.cpp:805
+#: src/core/modules/Nebula.cpp:820
 msgctxt "structure"
 msgid "undocumented structure"
 msgstr "nem dokumentált struktúra"
 
-#: src/core/modules/Nebula.cpp:818
+#: src/core/modules/Nebula.cpp:833
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "leghalványabb"
 
-#: src/core/modules/Nebula.cpp:821
+#: src/core/modules/Nebula.cpp:836
 msgctxt "HII region brightness"
 msgid "moderate"
 msgstr "közepes"
 
-#: src/core/modules/Nebula.cpp:824
+#: src/core/modules/Nebula.cpp:839
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "legfényesebb"
 
-#: src/core/modules/Nebula.cpp:827 src/core/modules/Nebula.cpp:852
+#: src/core/modules/Nebula.cpp:842 src/core/modules/Nebula.cpp:867
 msgid "undocumented brightness"
 msgstr "nem dokumentált fényesség"
 
-#: src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:855
 msgctxt "H-α emission region brightness"
 msgid "very bright"
 msgstr "nagyon fényes"
 
-#: src/core/modules/Nebula.cpp:843
+#: src/core/modules/Nebula.cpp:858
 msgctxt "H-α emission region brightness"
 msgid "bright"
 msgstr "fényes"
 
-#: src/core/modules/Nebula.cpp:846
+#: src/core/modules/Nebula.cpp:861
 msgctxt "H-α emission region brightness"
 msgid "medium"
 msgstr "közepes"
 
-#: src/core/modules/Nebula.cpp:849
+#: src/core/modules/Nebula.cpp:864
 msgctxt "H-α emission region brightness"
 msgid "faint"
 msgstr "halvány"
@@ -381,76 +381,76 @@ msgstr "halvány"
 msgid "Deep-sky objects"
 msgstr "Mélyég-objektumok"
 
-#: src/core/modules/Planet.cpp:223 src/core/modules/MinorPlanet.cpp:227
+#: src/core/modules/Planet.cpp:224 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
 #: src/core/modules/StarWrapper.cpp:201 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Abszolút fényesség: %1"
 
-#: src/core/modules/Planet.cpp:232
+#: src/core/modules/Planet.cpp:233
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "Ferdeség (aktuális, Föld): %1"
 
-#: src/core/modules/Planet.cpp:244 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Planet.cpp:245 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Távolság: %1 CSE (%2 km)"
 
-#: src/core/modules/Planet.cpp:251 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:252 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:228
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Távolság: %1CsE (%2 millió km)"
 
-#: src/core/modules/Planet.cpp:264
+#: src/core/modules/Planet.cpp:265
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Látszó átmérő: %1, gyűrűkkel: %2"
 
-#: src/core/modules/Planet.cpp:270 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Planet.cpp:271 src/core/modules/MinorPlanet.cpp:260
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Látszó átmérő: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:282 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Planet.cpp:283 src/core/modules/MinorPlanet.cpp:267
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Sziderikus periódus: %1 nap (%2 év)"
 
-#: src/core/modules/Planet.cpp:285
+#: src/core/modules/Planet.cpp:286
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Sziderikus nap: %1"
 
-#: src/core/modules/Planet.cpp:286
+#: src/core/modules/Planet.cpp:287
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Középnap: %1"
 
-#: src/core/modules/Planet.cpp:290
+#: src/core/modules/Planet.cpp:291
 msgid "The period of rotation is chaotic"
 msgstr "A forgási periódus kaotikus"
 
-#: src/core/modules/Planet.cpp:296
+#: src/core/modules/Planet.cpp:297
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Fázisszög: %1"
 
-#: src/core/modules/Planet.cpp:297
+#: src/core/modules/Planet.cpp:298
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongáció: %1"
 
-#: src/core/modules/Planet.cpp:298
+#: src/core/modules/Planet.cpp:299
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fázis: %1"
 
-#: src/core/modules/Planet.cpp:299
+#: src/core/modules/Planet.cpp:300
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Megvilágítva: %1%"
@@ -630,7 +630,7 @@ msgstr "Fogyatkozás hossza: %1%"
 msgid "Rising time: %1%"
 msgstr "Kelési idő: %1%"
 
-#: src/core/modules/MilkyWay.cpp:73
+#: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
 msgstr "Tejút"
 
@@ -816,11 +816,11 @@ msgstr "Kép tükrözése vízszintesen"
 msgid "Flip scene vertically"
 msgstr "Kép tükrözése függőlegesen"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1529
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korrekció kikapcsolva. Csak akkor alkalmazd, ha tudod mit csinálsz."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1532
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -831,7 +831,7 @@ msgstr ""
 "az  <em>Einstein's Theory of Relativity Confirmed by Ancient Solar "
 "Eclipses</em> (%1) című cikkében. További információk %2itt%3."
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1535
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -840,7 +840,7 @@ msgstr ""
 "Ezt a gyakorlati képletet  G. M. Clemence adta meg <em>On the system of "
 "astronomical constants</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1538
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -853,7 +853,7 @@ msgstr ""
 "Formulae for Calculators</em> című munkájában. Az eljárást a PC-re írt "
 "SunTracker Pro program is használja."
 
-#: src/core/StelCore.cpp:1541
+#: src/core/StelCore.cpp:1542
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -863,7 +863,7 @@ msgstr ""
 "az 1983  <em>Astronomical Ephemeris</em> és a <em>Canon of Solar "
 "Eclipses</em> című munkáikban felhasználtak."
 
-#: src/core/StelCore.cpp:1545
+#: src/core/StelCore.cpp:1546
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -875,7 +875,7 @@ msgstr ""
 "ig. Ugyanezt az összefüggést alkalmazta   Goldstine a szembeállásokat megadó "
 "táblázatában (1973)."
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1550
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -886,7 +886,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1553
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -895,7 +895,7 @@ msgstr ""
 "Ezt a képletet F. R. Stephenson publikálta  a <em>Pre-Telescopic "
 "Astronomical Observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1556
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -908,7 +908,7 @@ msgstr ""
 "1975</em> (%1) című cikkében.   Korszerűbb és pontosabb változatát Schmadel "
 "& Zech közölte 1988-ban."
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1559
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -918,7 +918,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (1986) című cikkében és a RedShift nevű "
 "PC-s planetáriumprogram is ezt használja."
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1562
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -929,12 +929,12 @@ msgstr ""
 "changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) című "
 "cikkében."
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1565
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Ezt az algoritmust használja a Guide 7 nevű PC-s planetárium-program."
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1568
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -944,7 +944,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) című, és a <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989) című cikkében."
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1571
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -953,7 +953,7 @@ msgstr ""
 "Ezt a képletet K.M. Borkowski (%1) adta meg 31 napfogyatkozás adatainak "
 "elemzése után  (i.e. 2137 és i.e. 1715 között)."
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1574
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -966,7 +966,7 @@ msgstr ""
 "cikkében, ezek az adatok illeszkedtek legjobban a Stephenson és Morrison "
 "(1984) által megadott értékekhez."
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1577
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -976,7 +976,7 @@ msgstr ""
 "rövidített változata alapján. Cikkük <em>Lunar Tables and Programs from 4000 "
 "B.C. to A.D. 8000</em> (1991) címmel jelent meg."
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1580
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -987,7 +987,7 @@ msgstr ""
 "Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1) című "
 "cikkben közölték."
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1583
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -996,7 +996,7 @@ msgstr ""
 "F. R. Stephenson publikálta ezt a képletet  a <em>Historical Eclipses and "
 "Earth's Rotation</em> (%1) című könyvében."
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1586
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1007,7 +1007,7 @@ msgstr ""
 "Chapront, Chapront-Touze és Francou (1997) kiegészítésével az  ezen kívüli "
 "időszakokra."
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1589
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1016,7 +1016,7 @@ msgstr ""
 "A JPL Solar System Dynamics Group (NASA), és a Jet Propulsion Laboratory "
 "használja ezt a képletet interaktív weboldalukon: %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1592
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1025,7 +1025,7 @@ msgstr ""
 "Ezt a polinomot J. Meeus és L. Simons közli  a <em>Polynomial approximations "
 "to Delta T, 1620-2000 AD</em> (%1) című cikkében."
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1595
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1036,7 +1036,7 @@ msgstr ""
 "fokú képletet  is megadnak, ami jól illeszkedik a legutóbbi időszak "
 "adataihoz."
 
-#: src/core/StelCore.cpp:1597
+#: src/core/StelCore.cpp:1598
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1048,7 +1048,7 @@ msgstr ""
 "(2002) című könyvükben. A képlet Jean Meeus <em>Astronomical Algorithms</em> "
 "(1991) című munkáján alapszik."
 
-#: src/core/StelCore.cpp:1600
+#: src/core/StelCore.cpp:1601
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1059,7 +1059,7 @@ msgstr ""
 "values of the Earth's clock error %1T and the calculation of eclipses</em> "
 "(%2)  című cikkében jelent meg. Kiegészítés:  (%3)."
 
-#: src/core/StelCore.cpp:1603
+#: src/core/StelCore.cpp:1604
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1072,7 +1072,7 @@ msgstr ""
 "használva. Ez egy lehetséges periodicitáson alapszik, amit Stephenson (%2) "
 "írt le. További infó %3itt%4."
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1607
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1088,11 +1088,11 @@ msgstr ""
 "alkalmazza a Nap, a Hold és a bolygók efemeriszét számító SOLEX "
 "csillagászati program is."
 
-#: src/core/StelCore.cpp:1606
+#: src/core/StelCore.cpp:1607
 msgid "Used by default."
 msgstr "Alapértelmezés."
 
-#: src/core/StelCore.cpp:1609
+#: src/core/StelCore.cpp:1610
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1103,7 +1103,7 @@ msgstr ""
 "megjelent az <em>Ancient eclipses and dating the fall of Babylon</em> "
 "cikkben  (%1)."
 
-#: src/core/StelCore.cpp:1612
+#: src/core/StelCore.cpp:1613
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1114,7 +1114,7 @@ msgstr ""
 "munkáján alapul, ez <em>Error Minimization of Polynomial Approximation of "
 "DeltaT</em> (%1) címmel jelent meg, átdolgozva Sana Islam által 2013-ban."
 
-#: src/core/StelCore.cpp:1615
+#: src/core/StelCore.cpp:1616
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1126,7 +1126,7 @@ msgstr ""
 "ízben itt jelent meg: <em>Delta T: Polynomial Approximation of Time Period "
 "1620-2013</em> (%1)"
 
-#: src/core/StelCore.cpp:1618
+#: src/core/StelCore.cpp:1619
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1135,15 +1135,15 @@ msgstr ""
 "A  %1T képlet kvadratikus kiszámítása, ahol a paramétereket a felhasználó "
 "adja meg."
 
-#: src/core/StelCore.cpp:1621 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1622 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Hiba"
 
-#: src/core/StelCore.cpp:1671
+#: src/core/StelCore.cpp:1672
 msgid "with meaningless values outside this range"
 msgstr "a tartományon kívül az értékek nincsenek értelmezve"
 
-#: src/core/StelCore.cpp:1697
+#: src/core/StelCore.cpp:1698
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1151,23 +1151,23 @@ msgstr ""
 "a közepes hiba kisebb, mint 1 másodperc, a legnagyobb hiba 1,9s, a "
 "tartományon kívül az értékek nincsenek értelmezve"
 
-#: src/core/StelCore.cpp:1719 src/core/StelCore.cpp:1724
-#: src/core/StelCore.cpp:1751 src/core/StelCore.cpp:1756
-#: src/core/StelCore.cpp:1761
+#: src/core/StelCore.cpp:1720 src/core/StelCore.cpp:1725
+#: src/core/StelCore.cpp:1752 src/core/StelCore.cpp:1757
+#: src/core/StelCore.cpp:1762
 msgid "with zero values outside this range"
 msgstr "a tartományon kívül az értékek nullák"
 
-#: src/core/StelCore.cpp:1729
+#: src/core/StelCore.cpp:1730
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "tipikus 1 másodperces pontosság,  a tartományon kívül az értékek nullák"
 
-#: src/core/StelCore.cpp:1771
+#: src/core/StelCore.cpp:1772
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Érvényes időtartomány %1 és %2, %3"
 
-#: src/core/StelCore.cpp:1773
+#: src/core/StelCore.cpp:1774
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Érvényességi időszak: %1 és %2 év között"
@@ -4740,6 +4740,7 @@ msgstr "Mutatott mezők"
 
 #: src/ui_configurationDialog.h:1056
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
 msgid "Name"
 msgstr "Név"
@@ -5212,7 +5213,7 @@ msgstr "Kurzorpozíció"
 msgid "Include dir:"
 msgstr "keresési könyvtár:"
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
 msgstr "…"
 
@@ -5985,6 +5986,7 @@ msgstr "Hozzáad"
 #: plugins/Oculars/src/ui_ocularDialog.h:1123
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
 msgstr "Név:"
 
@@ -6096,171 +6098,171 @@ msgstr ""
 "A régi satellites.json fájl nem kompatibilis - alapértelmezés használva."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1711
+#: plugins/Satellites/src/Satellites.cpp:1714
 msgid "visual"
 msgstr "vizuális"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1713
+#: plugins/Satellites/src/Satellites.cpp:1716
 msgid "scientific"
 msgstr "tudományos"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1715
+#: plugins/Satellites/src/Satellites.cpp:1718
 msgid "communications"
 msgstr "hírközlési"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1717
+#: plugins/Satellites/src/Satellites.cpp:1720
 msgid "navigation"
 msgstr "navigációs"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1719
+#: plugins/Satellites/src/Satellites.cpp:1722
 msgid "amateur"
 msgstr "amatőr"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1721
+#: plugins/Satellites/src/Satellites.cpp:1724
 msgid "weather"
 msgstr "időjárási"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1723
+#: plugins/Satellites/src/Satellites.cpp:1726
 msgid "geostationary"
 msgstr "geostacionárius"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1725
+#: plugins/Satellites/src/Satellites.cpp:1728
 msgid "non-operational"
 msgstr "üzemen kívül"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1727
+#: plugins/Satellites/src/Satellites.cpp:1730
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1729
+#: plugins/Satellites/src/Satellites.cpp:1732
 msgid "glonass"
 msgstr "Glonaszsz"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1731
+#: plugins/Satellites/src/Satellites.cpp:1734
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1733
+#: plugins/Satellites/src/Satellites.cpp:1736
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1735
+#: plugins/Satellites/src/Satellites.cpp:1738
 msgid "stations"
 msgstr "űrállomások"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1737
+#: plugins/Satellites/src/Satellites.cpp:1740
 msgid "education"
 msgstr "oktatás"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1739
+#: plugins/Satellites/src/Satellites.cpp:1742
 msgid "observatory"
 msgstr "csillagászati"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1750
+#: plugins/Satellites/src/Satellites.cpp:1753
 msgid "The Hubble Space Telescope"
 msgstr "Hubble űrteleszkóp"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1752
+#: plugins/Satellites/src/Satellites.cpp:1755
 msgid "The International Space Station"
 msgstr "Nemzetközi Űrállomás"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1754
+#: plugins/Satellites/src/Satellites.cpp:1757
 msgid "China's first space station"
 msgstr "Kína első űrállomása"
 
-#: plugins/Satellites/src/Satellite.cpp:256
-#: plugins/Satellites/src/Satellite.cpp:260
+#: plugins/Satellites/src/Satellite.cpp:257
+#: plugins/Satellites/src/Satellite.cpp:261
 msgid "Catalog #"
 msgstr "Katalógusszám"
 
-#: plugins/Satellites/src/Satellite.cpp:262
+#: plugins/Satellites/src/Satellite.cpp:263
 msgid "International Designator"
 msgstr "Nemzetközi jelölés"
 
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:270
 msgid "artificial satellite"
 msgstr "műhold"
 
-#: plugins/Satellites/src/Satellite.cpp:274
+#: plugins/Satellites/src/Satellite.cpp:275
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Körülbelüli fényesség:  <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:287
+#: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Távolság (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:290
+#: plugins/Satellites/src/Satellite.cpp:291
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Távolság változása (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:293
+#: plugins/Satellites/src/Satellite.cpp:294
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Magasság (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:296
+#: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Döféspont  (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:310
+#: plugins/Satellites/src/Satellite.cpp:311
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "TEME koordináták (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:318
+#: plugins/Satellites/src/Satellite.cpp:319
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "TEME sebesség (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:323
+#: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "Sun reflection angle: %1%2"
 msgstr "A Nap visszaverődési szöge: %1%2"
 
-#: plugins/Satellites/src/Satellite.cpp:334
+#: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
 msgstr "A műhold és a megfigyelő napfényben van."
 
-#: plugins/Satellites/src/Satellite.cpp:337
+#: plugins/Satellites/src/Satellite.cpp:338
 msgid "The satellite is visible."
 msgstr "A műhold látható."
 
-#: plugins/Satellites/src/Satellite.cpp:340
+#: plugins/Satellites/src/Satellite.cpp:341
 msgid "The satellite is eclipsed."
 msgstr "A műhold fedésben van."
 
-#: plugins/Satellites/src/Satellite.cpp:343
+#: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite is not visible"
 msgstr "A műhold nem látható."
 
-#: plugins/Satellites/src/Satellite.cpp:368
+#: plugins/Satellites/src/Satellite.cpp:369
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
@@ -6849,6 +6851,7 @@ msgstr "Verzió: %1"
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:92
 msgid "#"
 msgstr "#"
 
@@ -6942,63 +6945,75 @@ msgstr "A kiválasztott távcsőről való leválás"
 msgid "Select a directory"
 msgstr "Válasszon ki egy könyvtárat"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:294
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
+msgid "Right Ascension (J2000)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
+msgid "Declination (J2000)"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
 msgstr "Távcső forgatása"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:296
+#: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
 msgstr "Nincs aktív eszköz."
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:297
+#: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
 msgstr "Távcső forgatása koordinátára"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:298
+#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:235
 msgid "&Right Ascension (J2000):"
 msgstr "&RA (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:299
+#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:236
 msgid "De&clination (J2000):"
 msgstr "&Deklináció (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:300
+#: plugins/TelescopeControl/src/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:232
 msgid "&Current object"
 msgstr "&Kiválasztott objektum"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:301
+#: plugins/TelescopeControl/src/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:233
 msgid "Center of the screen"
 msgstr "A képernyő közepe"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:303
+#: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
 msgstr "Óra, perc, másodperc formátum"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:305
+#: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
 msgstr "&HMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:307
+#: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
 msgstr "Fok, perc, másodperc formátum"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:309
+#: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
 msgstr "&DMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:311
+#: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
 msgstr "Decimális fokok"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:313
+#: plugins/TelescopeControl/src/ui_slewDialog.h:339
 msgid "D&ecimal"
 msgstr "D&ecimális"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:314
+#: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
 msgstr "Forgatá&s"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:315
+#: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
 msgstr "&Távcsövek beállításai"
 
@@ -7177,6 +7192,18 @@ msgstr "Távcsővezérlő program"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
 msgstr "A program mappája:"
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:230
+msgid "Points"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:237
+msgid "Add point"
+msgstr ""
+
+#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:238
+msgid "Remove selected"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -7535,7 +7562,7 @@ msgid "Nebula hints"
 msgstr "Tippek ködökhöz"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
-msgid "Galaxies hints"
+msgid "Galaxy hints"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
