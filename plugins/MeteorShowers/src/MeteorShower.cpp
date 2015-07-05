@@ -452,7 +452,7 @@ void MeteorShower::update(double deltaTime)
 	}
 
 	double tspeed = core->getTimeRate() * 86400;  // sky seconds per actual second
-	if(tspeed<0 || fabs(tspeed)>1.)
+	if(tspeed < 0. || fabs(tspeed) > 1.)
 	{
 		return; // don't create new meteors
 	}
