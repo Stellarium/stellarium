@@ -23,6 +23,10 @@ void HttpResponse::setHeader(const QByteArray name, const int value) {
     headers.insert(name,QByteArray::number(value));
 }
 
+bool HttpResponse::hasHeader(const QByteArray name) const {
+	return headers.contains(name);
+}
+
 QMap<QByteArray,QByteArray>& HttpResponse::getHeaders() {
     return headers;
 }

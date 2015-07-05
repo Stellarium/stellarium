@@ -180,14 +180,21 @@ select {
 }
 
 #wrapper {
-	border: 1px solid #595959;
+	border: 1px 
+	
+	solid #595959;
 	margin: 1em;
 	padding: 1em;
 }
 
-#footer {
-	margin: 0 1%;
-	position: relative;
+.fixed-dialog{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.fixed-dialog .ui-dialog-titlebar-close{
+  visibility: hidden;
 }
 
 .center {
@@ -280,20 +287,12 @@ select {
 	flex-direction: column;
 }
 
-#noresponse {
-	vertical-align: middle;
-	font-weight: bold;
-	margin-left: 60px;
-	display: block;
-}
-
 #loadindicator {
-	position: absolute;
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 16px;
+	position: fixed;
 	width: 32px;
 	height: 32px;
+	bottom: 12px;
+	right: 21px;
 	background-image: url("ajax-loader.gif");
 }
 
