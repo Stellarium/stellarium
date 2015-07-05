@@ -315,10 +315,6 @@ private:
 
 	QSettings* conf;
 
-	bool flagShowARG;  //! Show marker of active radiant based on generic data
-	bool flagShowARR;  //! Show marker of active radiant based on generic data
-	bool flagShowIR;   //! Show marker of inactive radiant
-
 	QDateTime skyDate;              //! Current sky date
 	QDateTime lastSkyDate;          //! Last sky date
 
