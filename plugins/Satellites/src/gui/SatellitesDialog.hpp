@@ -38,6 +38,7 @@ class SatellitesListFilterModel;
 
 //! Main configuration window of the %Satellites plugin.
 //! @todo Save sources list on check/uncheck.
+//! @ingroup satellites
 class SatellitesDialog : public StelDialog
 {
 	Q_OBJECT

@@ -188,6 +188,9 @@ namespace StelUtils
 	//! Coordinate Transformation from equatorial to ecliptical
 	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
 
+	//! Coordinate Transformation from ecliptical to equatorial
+	void eclToEqu(const double lambdaRad, const double betaRad, const double eclRad, double *raRad, double *decRad);
+
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.
 	//! @param str the angle in format something like these:
@@ -326,6 +329,7 @@ namespace StelUtils
 	//! Calculate and getting sidereal period in days from semi-major axis (in AU)
 	double calculateSiderealPeriod(const double SemiMajorAxis);
 
+	//! Convert decimal hours to hours, minutes, seconds
 	QString hoursToHmsStr(const double hours);
 
 	//! Get the number of seconds since program start.

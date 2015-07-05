@@ -83,7 +83,9 @@ public:
 		equatorialJ2000,
 		equatorial,
 		horizontal,
-		galactic
+		galactic,
+		ecliptic,
+		eclipticJ2000
 	};
 
 	SearchDialog(QObject* parent);

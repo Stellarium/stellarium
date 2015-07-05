@@ -358,26 +358,42 @@ void TextUserInterface::init()
 	                                  nebulaMgr, SLOT(setCirclesColor(Vec3f)),
 	                                  nebulaMgr->getCirclesColor(), 
 					  m5, m5_16);
-	TuiNode* m5_18 = new TuiNodeColor(N_("Horizon line"),
+	TuiNode* m5_18 = new TuiNodeColor(N_("Galaxy hints"),
+					  nebulaMgr, SLOT(setGalaxyColor(Vec3f)),
+					  nebulaMgr->getGalaxyColor(),
+					  m5, m5_17);
+	TuiNode* m5_19 = new TuiNodeColor(N_("Bright nebulae hints"),
+					  nebulaMgr, SLOT(setBrightNebulaColor(Vec3f)),
+					  nebulaMgr->getBrightNebulaColor(),
+					  m5, m5_18);
+	TuiNode* m5_20 = new TuiNodeColor(N_("Dark nebulae hints"),
+					  nebulaMgr, SLOT(setDarkNebulaColor(Vec3f)),
+					  nebulaMgr->getDarkNebulaColor(),
+					  m5, m5_19);
+	TuiNode* m5_21 = new TuiNodeColor(N_("Clusters hints"),
+					  nebulaMgr, SLOT(setClusterColor(Vec3f)),
+					  nebulaMgr->getClusterColor(),
+					  m5, m5_20);
+	TuiNode* m5_22 = new TuiNodeColor(N_("Horizon line"),
 					 gridLinesMgr,
 					 SLOT(setColorHorizonLine(Vec3f)),
 					 gridLinesMgr->getColorHorizonLine(),
-					 m5, m5_17);
-	TuiNode* m5_19 = new TuiNodeColor(N_("Galactic grid"),
+					 m5, m5_21);
+	TuiNode* m5_23 = new TuiNodeColor(N_("Galactic grid"),
 					 gridLinesMgr,
 					 SLOT(setColorGalacticGrid(Vec3f)),
 					 gridLinesMgr->getColorGalacticGrid(),
-					 m5, m5_18);
-	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic equator line"),
+					 m5, m5_22);
+	TuiNode* m5_24 = new TuiNodeColor(N_("Galactic equator line"),
 					 gridLinesMgr,
 					 SLOT(setColorGalacticEquatorLine(Vec3f)),
 					 gridLinesMgr->getColorGalacticEquatorLine(),
-					 m5, m5_19);
-	TuiNode* m5_21 = new TuiNodeColor(N_("Opposition/conjunction longitude line"),
+					 m5, m5_23);
+	TuiNode* m5_25 = new TuiNodeColor(N_("Opposition/conjunction longitude line"),
 					 gridLinesMgr,
 					 SLOT(setColorLongitudeLine(Vec3f)),
 					 gridLinesMgr->getColorLongitudeLine(),
-					 m5, m5_20);
+					 m5, m5_24);
 
 	m5_1->setNextNode(m5_2);
 	m5_2->setNextNode(m5_3);
@@ -399,7 +415,11 @@ void TextUserInterface::init()
 	m5_18->setNextNode(m5_19);
 	m5_19->setNextNode(m5_20);
 	m5_20->setNextNode(m5_21);
-	m5_21->setNextNode(m5_1);
+	m5_21->setNextNode(m5_22);
+	m5_22->setNextNode(m5_23);
+	m5_23->setNextNode(m5_24);
+	m5_24->setNextNode(m5_25);
+	m5_25->setNextNode(m5_1);
 	m5_1->loopToTheLast();
 	m5->setChildNode(m5_1);
 

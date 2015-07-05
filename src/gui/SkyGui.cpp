@@ -239,6 +239,18 @@ void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 	}
 }
 
+// Used to recompute the bars position when we toggle the gui off and on.
+// This was not necessary with Qt < 5.4.  So it might be a bug.
+QVariant SkyGui::itemChange(GraphicsItemChange change, const QVariant & value)
+{
+#if QT_VERSION > QT_VERSION_CHECK(5, 5, 0)
+	#warning Please test if this code is still needed.
+#endif
+	if (change == QGraphicsItem::ItemVisibleHasChanged && value.toBool())
+		updateBarsPos();
+	return QGraphicsItem::itemChange(change, value);
+}
+
 int SkyGui::getSkyGuiWidth() const
 {
 	return geometry().width();

@@ -32,6 +32,7 @@ class Ui_archaeoLinesDialog;
 class ArchaeoLines;
 
 //! Main window of the ArchaeoLines plug-in.
+//! @ingroup archaeoLines
 class ArchaeoLinesDialog : public StelDialog
 {
 	Q_OBJECT

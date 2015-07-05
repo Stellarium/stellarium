@@ -78,7 +78,8 @@ public:
 		ProjectionHammer,		//!< Hammer-Aitoff projection
 		ProjectionCylinder,		//!< Cylinder projection
 		ProjectionMercator,		//!< Mercator projection
-		ProjectionOrthographic		//!< Orthographic projection
+		ProjectionOrthographic,		//!< Orthographic projection
+		ProjectionSinusoidal		//!< Sinusoidal projection
 	};
 
 	//! @enum RefractionMode

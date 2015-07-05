@@ -154,7 +154,7 @@ bool ArchaeoLines::configureGui(bool show)
 double ArchaeoLines::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-	  return StelApp::getInstance().getModuleMgr().getModule("NebulaMgr")->getCallOrder(actionName)+10.; // same as lines from core (hint AW)
+	  return StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr")->getCallOrder(actionName)+1.; // one after GridlineMgr: else its equator covers our equinox line!
 	return 0;
 }
 
@@ -671,6 +671,7 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
 			vColor=&currentPlanetColor;
 			break;
 		default:
+			vColor=&selectedObjectColor; // this is only to silence compiler warning about uninitialized variable vColor.
 			Q_ASSERT(0);
 	}
 	color.setRgbF(vColor->v[0], vColor->v[1], vColor->v[2]);
