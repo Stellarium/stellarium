@@ -79,6 +79,10 @@ QHash<int,QString> StarMgr::sciAdditionalNamesMapI18n;
 QMap<QString,int> StarMgr::sciAdditionalNamesIndexI18n;
 QHash<int, varstar> StarMgr::varStarsMapI18n;
 QMap<QString, int> StarMgr::varStarsIndexI18n;
+QHash<int, int> StarMgr::saoStarsMap;
+QMap<int, int> StarMgr::saoStarsIndex;
+QHash<int, int> StarMgr::hdStarsMap;
+QMap<int, int> StarMgr::hdStarsIndex;
 
 QStringList initStringListFromFile(const QString& file_name)
 {
@@ -199,6 +203,24 @@ QString StarMgr::getSciAdditionalName(int hip)
 	return QString();
 }
 
+QString StarMgr::getCrossIndexDesignations(int hip)
+{
+	QString designations;
+	QHash<int,int>::const_iterator it(saoStarsMap.find(hip));
+	if (it!=saoStarsMap.end())
+		designations = QString("SAO %1").arg(it.value());
+
+	QHash<int,int>::const_iterator it2(hdStarsMap.find(hip));
+	if (it2!=hdStarsMap.end())
+	{
+		if (designations.isEmpty())
+			designations = QString("HD %1").arg(it2.value());
+		else
+			designations += QString(" - HD %1").arg(it2.value());
+	}
+
+	return designations;
+}
 
 QString StarMgr::getGcvsName(int hip)
 {
@@ -779,6 +801,77 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "variable stars";
 }
 
+// Load cross-index data from file
+void StarMgr::loadCrossIndex(const QString& crossIndexFile)
+{
+	saoStarsMap.clear();
+	saoStarsIndex.clear();
+	hdStarsMap.clear();
+	hdStarsIndex.clear();
+
+	qDebug() << "Loading cross-index data from" << QDir::toNativeSeparators(crossIndexFile);
+	QFile ciFile(crossIndexFile);
+	if (!ciFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "WARNING - could not open" << QDir::toNativeSeparators(crossIndexFile);
+		return;
+	}
+	const QStringList& allRecords = QString::fromUtf8(ciFile.readAll()).split('\n');
+	ciFile.close();
+
+	int readOk=0;
+	int totalRecords=0;
+	int lineNumber=0;
+	// record structure is delimited with a 'tab' character. Example record strings:
+	// "1	128522	224700"
+	// "2	165988	224690"
+	foreach(const QString& record, allRecords)
+	{
+		++lineNumber;
+		if (record.isEmpty())
+			continue;
+
+		++totalRecords;
+		const QStringList& fields = record.split('\t');
+		if (fields.size()!=3)
+		{
+			qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIndexFile)
+				   << " - record does not match record pattern";
+			continue;
+		}
+		else
+		{
+			// The record is the right format.  Extract the fields
+			bool ok;
+			unsigned int hip = fields.at(0).toUInt(&ok);
+			if (!ok)
+			{
+				qWarning() << "WARNING - parse error at line" << lineNumber << "in" << QDir::toNativeSeparators(crossIndexFile)
+					   << " - failed to convert " << fields.at(0) << "to a number";
+				continue;
+			}
+
+			unsigned int sao = fields.at(1).toUInt(&ok);
+			unsigned int hd = fields.at(2).toUInt(&ok);
+
+			if (sao>0)
+			{
+				saoStarsMap[hip] = sao;
+				saoStarsIndex[sao] = hip;
+			}
+
+			if (hd>0)
+			{
+				hdStarsMap[hip] = hd;
+				hdStarsIndex[hd] = hip;
+			}
+
+			++readOk;
+		}
+	}
+
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "cross-index data records";
+}
 
 int StarMgr::getMaxSearchLevel() const
 {
@@ -994,6 +1087,28 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
 
+	// Search by SAO number if it's an SAO formated number
+	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx2.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
+		if (sao!=saoStarsIndex.end())
+		{
+			return searchHP(sao.value());
+		}
+	}
+
+	// Search by HD number if it's an HD formated number
+	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx3.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
+		if (hd!=hdStarsIndex.end())
+		{
+			return searchHP(hd.value());
+		}
+	}
+
 	// Search by I18n common name
 	QMap<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
 	if (it!=commonNamesIndexI18n.end())
@@ -1036,6 +1151,28 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	if (rx.exactMatch(objw))
 	{
 		return searchHP(rx.capturedTexts().at(2).toInt());
+	}
+
+	// Search by SAO number if it's an SAO formated number
+	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx2.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
+		if (sao!=saoStarsIndex.end())
+		{
+			return searchHP(sao.value());
+		}
+	}
+
+	// Search by HD number if it's an HD formated number
+	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
+	if (rx3.exactMatch(objw))
+	{
+		QMap<int,int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
+		if (hd!=hdStarsIndex.end())
+		{
+			return searchHP(hd.value());
+		}
 	}
 
 	// Search by I18n common name
@@ -1168,6 +1305,44 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 		}
 	}
 
+	// Add exact SAO catalogue numbers
+	QRegExp saoRx("^(SAO)\\s*(\\d+)\\s*$");
+	saoRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (saoRx.exactMatch(objw))
+	{
+		bool ok;
+		int saoNum = saoRx.capturedTexts().at(2).toInt(&ok);
+		QMap<int,int>::const_iterator sao(saoStarsIndex.find(saoNum));
+		if (sao!=saoStarsIndex.end())
+		{
+			StelObjectP s = searchHP(sao.value());
+			if (s && maxNbItem>0)
+			{
+				result << QString("SAO%1").arg(saoNum);
+				maxNbItem--;
+			}
+		}
+	}
+
+	// Add exact HD catalogue numbers
+	QRegExp hdRx("^(HD)\\s*(\\d+)\\s*$");
+	hdRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (hdRx.exactMatch(objw))
+	{
+		bool ok;
+		int hdNum = hdRx.capturedTexts().at(2).toInt(&ok);
+		QMap<int,int>::const_iterator hd(hdStarsIndex.find(hdNum));
+		if (hd!=hdStarsIndex.end())
+		{
+			StelObjectP s = searchHP(hd.value());
+			if (s && maxNbItem>0)
+			{
+				result << QString("HD%1").arg(hdNum);
+				maxNbItem--;
+			}
+		}
+	}
+
 	result.sort();
 	return result;
 }
@@ -1280,6 +1455,44 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 	}
 
+	// Add exact SAO catalogue numbers
+	QRegExp saoRx("^(SAO)\\s*(\\d+)\\s*$");
+	saoRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (saoRx.exactMatch(objw))
+	{
+		bool ok;
+		int saoNum = saoRx.capturedTexts().at(2).toInt(&ok);
+		QMap<int,int>::const_iterator sao(saoStarsIndex.find(saoNum));
+		if (sao!=saoStarsIndex.end())
+		{
+			StelObjectP s = searchHP(sao.value());
+			if (s && maxNbItem>0)
+			{
+				result << QString("SAO%1").arg(saoNum);
+				maxNbItem--;
+			}
+		}
+	}
+
+	// Add exact HD catalogue numbers
+	QRegExp hdRx("^(HD)\\s*(\\d+)\\s*$");
+	hdRx.setCaseSensitivity(Qt::CaseInsensitive);
+	if (hdRx.exactMatch(objw))
+	{
+		bool ok;
+		int hdNum = hdRx.capturedTexts().at(2).toInt(&ok);
+		QMap<int,int>::const_iterator hd(hdStarsIndex.find(hdNum));
+		if (hd!=hdStarsIndex.end())
+		{
+			StelObjectP s = searchHP(hd.value());
+			if (s && maxNbItem>0)
+			{
+				result << QString("HD%1").arg(hdNum);
+				maxNbItem--;
+			}
+		}
+	}
+
 	result.sort();
 	return result;
 }
@@ -1311,6 +1524,12 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
 	else
 		loadGcvs(fic);
+
+	fic = StelFileMgr::findFile("stars/default/cross-index.dat");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load cross-index data file: stars/default/cross-index.dat";
+	else
+		loadCrossIndex(fic);
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));
@@ -1373,6 +1592,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 					result << trans.qtranslate(star);
 				}
 			}
+			break;
 		}
 		case 1: // Variable stars
 		{
@@ -1398,10 +1618,13 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 					result << trans.qtranslate(star);
 				}
 			}
+			break;
 		}
 		default:
+		{
 			// No stars yet?
 			break;
+		}
 	}
 
 	result.removeDuplicates();

@@ -43,6 +43,7 @@
 #define  NOT_VISIBLE 4
 
 //! Wrapper allowing compatibility between gsat and Stellarium/Qt.
+//! @ingroup satellites
 class gSatWrapper
 {
 

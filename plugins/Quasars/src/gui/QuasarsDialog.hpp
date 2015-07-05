@@ -29,6 +29,7 @@ class Ui_quasarsDialog;
 class QTimer;
 class Quasars;
 
+//! @ingroup quasars
 class QuasarsDialog : public StelDialog
 {
 	Q_OBJECT
