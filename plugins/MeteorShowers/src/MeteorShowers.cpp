@@ -87,9 +87,6 @@ MeteorShowers::MeteorShowers()
 	, updatesEnabled(false)
 	, updateFrequencyHours(0)
 	, enableAtStartup(false)
-	, flagShowARG(true)
-	, flagShowARR(true)
-	, flagShowIR(true)
 {
 	setObjectName("MeteorShowers");
 	configDialog = new MeteorShowerDialog();
