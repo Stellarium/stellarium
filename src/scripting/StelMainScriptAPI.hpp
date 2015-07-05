@@ -24,7 +24,7 @@
 #include <QVariant>
 #include <QStringList>
 
-class QJSEngine;
+class QScriptEngine;
 
 //! Provide script API for Stellarium global functions.  Public slots in this class
 //! may be used in Stellarium scripts, and are accessed as member function to the
