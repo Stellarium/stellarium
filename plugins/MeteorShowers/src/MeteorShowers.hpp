@@ -319,22 +319,6 @@ private:
 	bool flagShowARR;  //! Show marker of active radiant based on generic data
 	bool flagShowIR;   //! Show marker of inactive radiant
 
-	typedef struct
-	{
-		QString showerID;		//! The ID of the meteor shower
-		QDateTime start;		//! First day for activity
-		QDateTime finish;		//! Latest day for activity
-		QDateTime peak;			//! Day with maximum for activity
-		int status;			//! 0:inactive 1:activeRealData 2:activeGenericData
-		int zhr;			//! ZHR of shower
-		QString variable;		//! value of variable for ZHR
-		int speed;			//! Speed of meteors
-		float radiantAlpha;		//! R.A. for radiant of meteor shower
-		float radiantDelta;		//! Dec. for radiant of meteor shower
-		float pidx;			//! Population index
-		QList<Meteor::colorPair> colors; //! Meteor colors
-	} activeData;
-
 	QDateTime skyDate;              //! Current sky date
 	QDateTime lastSkyDate;          //! Last sky date
 
