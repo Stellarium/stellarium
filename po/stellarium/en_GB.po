@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 00:51+0600\n"
+"POT-Creation-Date: 2015-07-04 20:43+0600\n"
 "PO-Revision-Date: 2015-07-01 21:59+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-02 05:14+0000\n"
-"X-Generator: Launchpad (build 17590)\n"
+"X-Launchpad-Export-Date: 2015-07-05 05:32+0000\n"
+"X-Generator: Launchpad (build 17597)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
 #: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:485 src/core/StelCore.cpp:191
+#: src/core/StelApp.cpp:488 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr "Display Options"
@@ -634,7 +634,7 @@ msgstr "Milky Way"
 msgid "Zodiacal Light"
 msgstr "Zodiacal Light"
 
-#: src/core/StelApp.cpp:485
+#: src/core/StelApp.cpp:488
 msgid "Night mode"
 msgstr "Night mode"
 
@@ -2237,21 +2237,21 @@ msgstr "Save screenshot"
 msgid "Full-screen mode"
 msgstr "Full-screen mode"
 
-#: src/StelMainView.cpp:559
-msgid ""
-"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-"use MESA (or ANGLE) version."
-msgstr ""
-"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-"use MESA (or ANGLE) version."
-
 #: src/StelMainView.cpp:562
 msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+
+#: src/StelMainView.cpp:565
+msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 
-#: src/StelMainView.cpp:604
+#: src/StelMainView.cpp:607
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2261,7 +2261,7 @@ msgstr ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 
-#: src/StelMainView.cpp:655
+#: src/StelMainView.cpp:658
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2271,7 +2271,7 @@ msgstr ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 
-#: src/StelMainView.cpp:710
+#: src/StelMainView.cpp:713
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2281,7 +2281,7 @@ msgstr ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 
-#: src/StelMainView.cpp:747
+#: src/StelMainView.cpp:750
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2291,7 +2291,7 @@ msgstr ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 
-#: src/StelMainView.cpp:856
+#: src/StelMainView.cpp:859
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -6978,6 +6978,11 @@ msgstr "Right Ascension (J2000)"
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
 msgstr "Declination (J2000)"
+
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:257
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:398
+msgid "Select one"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
