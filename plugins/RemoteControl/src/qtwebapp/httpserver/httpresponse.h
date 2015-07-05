@@ -58,6 +58,9 @@ public:
     */
     void setHeader(const QByteArray name, const int value);
 
+    /** Returns wether this header has already been set */
+    bool hasHeader(const QByteArray name) const;
+
     /** Get the map of HTTP response headers */
     QMap<QByteArray,QByteArray>& getHeaders();
 

@@ -40,7 +40,8 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
         mutex.unlock();
         qDebug("StaticFileController: Cache hit for %s",path.data());
         setContentType(filename,response);
-	response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge));
+	if(!response.hasHeader("Cache-Control"))
+		response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge));
         response.write(document);
     }
     else {
@@ -63,7 +64,8 @@ void StaticFileController::service(HttpRequest& request, HttpResponse& response)
         qDebug("StaticFileController: Open file %s",qPrintable(file.fileName()));
         if (file.open(QIODevice::ReadOnly)) {
             setContentType(path,response);
-	    response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge));
+	    if(!response.hasHeader("Cache-Control"))
+		response.setHeader("Cache-Control","max-age="+QByteArray::number(maxAge));
             if (file.size()<=maxCachedFileSize) {
                 // Return the file content and store it also in the cache
                 entry=new CacheEntry();

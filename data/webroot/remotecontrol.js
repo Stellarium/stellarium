@@ -12,6 +12,8 @@ var UISettings = (new function($) {
     this.animationDelay = 500;
     //If no user changes happen after this time, the changes are sent to the Server
     this.editUpdateDelay = 500;
+    //This is the delay after which the AJAX request spinner is shown.
+    this.spinnerDelay = 100;
 
 
 }(jQuery));
@@ -19,6 +21,20 @@ var UISettings = (new function($) {
 //DOM-ready hook, starting the GUI
 $(document).ready(function() {
     Main.init();
+});
+
+$(window).load(function() {
+    //preload the error images, otherwise they may be loaded when the connection is lost, which of course wont work
+
+    var preLoadImages = [
+    "/external/images/ui-icons_fbc856_256x240.png",
+    "/external/images/ui-bg_flat_0_eeeeee_40x100.png",
+    "/external/images/ui-bg_glass_35_dddddd_1x400.png"
+    ];
+
+    preLoadImages.forEach(function(val){
+        (new Image()).src = val;
+    });
 });
 
 // The main functionality including communication with the server
@@ -44,7 +60,7 @@ var Main = (new function($) {
         if (connectionLost) {
             var elapsed = ($.now() - lastDataTime) / 1000;
             var text = Math.floor(elapsed).toString();
-            $noresponsetime.html(text);
+            $noresponsetime[0].textContent = text;
         }
 
         if (UISettings.useAnimationFrame && animationSupported) {
@@ -91,11 +107,16 @@ var Main = (new function($) {
                     }
                 }
 
-                $noresponse.hide();
+                if (connectionLost) {
+                    $noresponse.dialog("close");
+                }
+
                 connectionLost = false;
             },
             error: function(xhr, status, errorThrown) {
-                $noresponse.show();
+                if (!connectionLost) {
+                    $noresponse.dialog("open");
+                }
                 connectionLost = true;
                 lastActionId = -2;
                 console.log("Error fetching updates");
@@ -160,6 +181,22 @@ var Main = (new function($) {
         $noresponse = $("#noresponse");
         $noresponsetime = $("#noresponsetime");
 
+        $noresponse.dialog({
+            autoOpen: false,
+            modal: true,
+            draggable: false,
+            resizable: false,
+            dialogClass: "fixed-dialog ui-state-error"
+        });
+
+        $(window).resize(function() {
+            $noresponse.dialog("option", "position", {
+                my: "center",
+                at: "center",
+                of: window
+            });
+        });
+
         sel_infostring = document.getElementById("sel_infostring");
 
         var $loading = $("#loadindicator").hide(),
@@ -168,7 +205,7 @@ var Main = (new function($) {
             timer && clearTimeout(timer);
             timer = setTimeout(function() {
                 $loading.show();
-            }, 100)
+            }, UISettings.spinnerDelay);
         });
         $(document).ajaxStop(function() {
             clearTimeout(timer);

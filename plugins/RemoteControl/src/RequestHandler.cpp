@@ -107,8 +107,18 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 	QByteArray path = request.getPath();
 	qDebug()<<"Request path:"<<rawPath<<" decoded:"<<path;
 
-	if(request.getPath().startsWith("/api/"))
+	if(path.startsWith("/api/"))
 		apiController->service(request,response);
 	else
+	{
+#ifndef QT_NO_DEBUG
+		if(path.startsWith("/external/"))
+		{
+			//let browser cache external stuff even if in development
+			response.setHeader("Cache-Control","max-age=86400");
+		}
+#endif
+
 		staticFiles->service(request,response);
+	}
 }
