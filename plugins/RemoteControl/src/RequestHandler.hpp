@@ -38,9 +38,20 @@ public:
 
 	virtual void service(HttpRequest& request, HttpResponse& response);
 
+public slots:
+	//Make sure to only call these when the server is offline because they are not synchronized
+	void setUsePassword(bool v);
+	bool getUsePassword() { return usePassword; }
+	void setPassword(const QString& pw);
+
 private:
+	bool usePassword;
+	QString password;
+	QByteArray passwordReply;
 	APIController* apiController;
 	StaticFileController* staticFiles;
+
+	static const QByteArray AUTH_REALM;
 };
 
 #endif

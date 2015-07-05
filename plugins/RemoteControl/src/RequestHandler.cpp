@@ -34,7 +34,9 @@
 
 #include <QDir>
 
-RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent)
+const QByteArray RequestHandler::AUTH_REALM = "Basic realm=\"Stellarium remote control\"";
+
+RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false)
 {
 	apiController = new APIController(QByteArray("/api/").size(),this);
 
@@ -62,21 +64,48 @@ void RequestHandler::update(double deltaTime)
 	apiController->update(deltaTime);
 }
 
+void RequestHandler::setUsePassword(bool v)
+{
+	usePassword = v;
+}
+
+void RequestHandler::setPassword(const QString &pw)
+{
+	password = pw;
+
+	//pre-create the expected response string
+	QByteArray arr = password.toUtf8();
+	arr.prepend(':');
+	passwordReply = "Basic " + arr.toBase64();
+}
+
 void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 {
 
 #define SERVER_HEADER "Stellarium RemoteControl " REMOTECONTROL_VERSION
 	response.setHeader("Server",SERVER_HEADER);
 
-	QByteArray rawPath = request.getRawPath();
-	QByteArray path = request.getPath();
-	qDebug()<<"Request path:"<<rawPath<<" decoded:"<<path;
-
 	//try to support keep-alive connections
 	if(QString::compare(request.getHeader("Connection"),"keep-alive",Qt::CaseInsensitive)==0)
 		response.setHeader("Connection","keep-alive");
 	else
 		response.setHeader("Connection","close");
+
+	if(usePassword)
+	{
+		//Check if the browser provided correct password, else reject request
+		if(request.getHeader("Authorization") != passwordReply)
+		{
+			response.setStatus(401,"Not Authorized");
+			response.setHeader("WWW-Authenticate",AUTH_REALM);
+			response.write("HTTP 401 Not Authorized",true);
+			return;
+		}
+	}
+
+	QByteArray rawPath = request.getRawPath();
+	QByteArray path = request.getPath();
+	qDebug()<<"Request path:"<<rawPath<<" decoded:"<<path;
 
 	if(request.getPath().startsWith("/api/"))
 		apiController->service(request,response);

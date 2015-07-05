@@ -218,6 +218,11 @@ void RemoteControl::setPort(const int port)
 
 void RemoteControl::startServer()
 {
+	Q_ASSERT(httpListener == NULL);
+
+	//set request handler password settings
+	requestHandler->setPassword(password);
+	requestHandler->setUsePassword(usePassword);
 	HttpListenerSettings settings;
 	settings.port = port;
 	settings.minThreads = minThreads;
@@ -248,11 +253,10 @@ void RemoteControl::restoreDefaultSettings()
 void RemoteControl::loadSettings()
 {
 	conf->beginGroup("RemoteControl");
-	enabled = conf->value("enabled",true).toBool();
-	autoStart = conf->value("autoStart",true).toBool();
-	usePassword = conf->value("usePassword",false).toBool();
-	password = conf->value("password","").toString();
-	port = conf->value("port",8090).toInt();
+	setFlagAutoStart(conf->value("autoStart",true).toBool());
+	setFlagUsePassword(conf->value("usePassword",false).toBool());
+	setPassword(conf->value("password","").toString());
+	setPort(conf->value("port",8090).toInt());
 	minThreads = conf->value("minThreads",1).toInt();
 	maxThreads = conf->value("maxThreads",30).toInt();
 	conf->endGroup();
@@ -261,7 +265,6 @@ void RemoteControl::loadSettings()
 void RemoteControl::saveSettings()
 {
 	conf->beginGroup("RemoteControl");
-	conf->setValue("enabled",enabled);
 	conf->setValue("autoStart",autoStart);
 	conf->setValue("usePassword",usePassword);
 	conf->setValue("password",password);

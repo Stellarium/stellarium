@@ -83,8 +83,6 @@ void RemoteControlDialog::createDialogContent()
 	connect(ui->portNumberSpinBox, SIGNAL(valueChanged(int)), rc, SLOT(setPort(int)));
 
 	ui->restartPanel->setVisible(false);
-	connect(rc, SIGNAL(flagAutoStartChanged(bool)), this, SLOT(requiresRestart()));
-	connect(rc, SIGNAL(flagEnabledChanged(bool)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(flagUsePasswordChanged(bool)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(passwordChanged(QString)), this, SLOT(requiresRestart()));
 	connect(rc, SIGNAL(portChanged(int)), this, SLOT(requiresRestart()));
