@@ -128,9 +128,10 @@ void ZodiacalLight::draw(StelCore* core)
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.
 	if (core->getCurrentLocation().planetName != "Earth") return;
 
-	int bortle=core->getSkyDrawer()->getBortleScaleIndex();
-	// Test for light pollution, return if too bad. (So fps stays high for really bad places.)
-	if ( (core->getSkyDrawer()->getFlagHasAtmosphere()) && (bortle > 5) ) return;
+	StelSkyDrawer *drawer=core->getSkyDrawer();
+	int bortle=drawer->getBortleScaleIndex();
+	// Test for light pollution, return if too bad.
+	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
 
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 
@@ -143,8 +144,7 @@ void ZodiacalLight::draw(StelCore* core)
 	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f + 0.5f*bortle); // (8.0f + 0.5*bortle);
-
+	float lum = drawer->surfacebrightnessToLuminance(13.5f + 0.5f*bortle); // (8.0f + 0.5*bortle);
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -158,7 +158,7 @@ void ZodiacalLight::draw(StelCore* core)
 
 //	// In brighter twilight we should tune brightness down. So for sun above -18 degrees, we must tweak here:
 //	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(core);
-//	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+//	if (drawer->getFlagHasAtmosphere())
 //	{
 //		if (sunPos[2] > -0.1) return; // Make ZL invisible during civil twilight and daylight.
 //		if (sunPos[2] > -0.3)
@@ -170,27 +170,29 @@ void ZodiacalLight::draw(StelCore* core)
 
 	// Better: adapt brightness by atmospheric brightness
 	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
-	if (atmLum>0.5f) return; // 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
+	if (atmLum>0.05f) return; // 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
 	//qDebug() << "AtmLum: " << atmLum;
-	float atmFactor=2.0f*(0.5f-atmLum);
+	float atmFactor=20.0f*(0.05f-atmLum);
+	Q_ASSERT(atmFactor<=1.0f);
+	Q_ASSERT(atmFactor>=0.0f);
 	c*=atmFactor*atmFactor;
 
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
 	if (c[2]<0) c[2]=0;
 
-	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
+	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
 
 	if (withExtinction)
 	{
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
-		Extinction extinction=core->getSkyDrawer()->getExtinction();
+		const Extinction& extinction=drawer->getExtinction();
 		vertexArray->colors.clear();
 
 		for (int i=0; i<vertexArray->vertex.size(); ++i)
 		{
 			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
-			Q_ASSERT(vertAltAz.lengthSquared()-1.0 < 0.001f);
+			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001f);
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);

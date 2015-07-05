@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-22 09:47+0600\n"
-"PO-Revision-Date: 2015-05-01 11:34+0000\n"
+"POT-Creation-Date: 2015-06-04 21:57+0600\n"
+"PO-Revision-Date: 2015-06-07 23:01+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-05-02 05:09+0000\n"
-"X-Generator: Launchpad (build 17474)\n"
+"X-Launchpad-Export-Date: 2015-06-08 05:10+0000\n"
+"X-Generator: Launchpad (build 17540)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -1009,9 +1009,12 @@ msgid "Kidney Bean galaxy"
 msgstr "Kidney Bean galaxy"
 
 #: nebulae/default/ngc2000names.dat:949 nebulae/default/ngc2000names.dat:950
-#: nebulae/default/ngc2000names.dat:951
 msgid "Leo Triplet"
 msgstr "Leo Triplet"
+
+#: nebulae/default/ngc2000names.dat:951
+msgid "Hamburger Galaxy (Leo Triplet)"
+msgstr "Hamburger Galaxy (Leo Triplet)"
 
 #: nebulae/default/ngc2000names.dat:952
 msgid "McLeish's Object"
@@ -2807,7 +2810,7 @@ msgstr "The Baby camel"
 
 #: skycultures/arabic_moon_stations/star_names.fab:82
 msgid "The ostriches coming to the river 1"
-msgstr ""
+msgstr "The ostriches coming to the river 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:83
 msgid "The ostriches coming to the river 2"
@@ -2883,7 +2886,7 @@ msgstr "The Lucky star of Nashirah 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:101
 msgid "The Lucky star of the king 1"
-msgstr ""
+msgstr "The Lucky star of the king 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:102
 msgid "The Lucky star of the king 2"
@@ -2927,7 +2930,7 @@ msgstr "The Front mouth of the bucket 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:112
 msgid "The Front mouth of the bucket 2"
-msgstr ""
+msgstr "The Front mouth of the bucket 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:113
 msgid "The Rear mouth of the bucket 1"
@@ -3875,6 +3878,54 @@ msgstr "Sheep"
 msgid "Stars of Water"
 msgstr "Stars of Water"
 
+#: skycultures/egyptian/star_names.fab:1
+#: skycultures/romanian/star_names.fab:80
+#: skycultures/western/star_names.fab:116
+#: skycultures/western_rey/star_names.fab:32
+msgid "Procyon"
+msgstr "Procyon"
+
+#: skycultures/egyptian/star_names.fab:2
+#: skycultures/western/star_names.fab:102
+#: skycultures/western_rey/star_names.fab:36
+msgid "Sirius"
+msgstr "Sirius"
+
+#. TRANSLATORS: Native name of the Sun in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:2
+msgid "God of Sun"
+msgstr "God of Sun"
+
+#. TRANSLATORS: Native name of the Moon in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:4
+msgid "Khonsu, the Traveler"
+msgstr "Khonsu, the Traveler"
+
+#. TRANSLATORS: Native name of Mercury in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:6
+msgid "Unknown"
+msgstr "Unknown"
+
+#. TRANSLATORS: Native name of Venus in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:8
+msgid "Star that Crosses / The God of the Morning"
+msgstr "Star that Crosses / The God of the Morning"
+
+#. TRANSLATORS: Native name of Mars in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:10
+msgid "Red Horus"
+msgstr "Red Horus"
+
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:12
+msgid "Horus Who Binds the Two Lands"
+msgstr "Horus Who Binds the Two Lands"
+
+#. TRANSLATORS: Native name of Saturn in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:14
+msgid "Horus, the Bull of Heaven"
+msgstr "Horus, the Bull of Heaven"
+
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
 msgstr "Two Sunbeams"
@@ -4285,19 +4336,19 @@ msgstr "Investigator"
 
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:27
 msgid "Ogre"
-msgstr ""
+msgstr "Ogre"
 
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:29
 msgid "Stars"
-msgstr ""
+msgstr "Stars"
 
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:30
 msgid "Stretched Net"
-msgstr ""
+msgstr "Stretched Net"
 
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:32
 msgid "Chariot Cross-Board"
-msgstr ""
+msgstr "Chariot Cross-Board"
 
 #: skycultures/korean/constellation_names.eng.fab:1
 msgid "Holy Kettle"
@@ -5575,6 +5626,14 @@ msgstr "Thunderbird"
 msgid "Bear's Lodge"
 msgstr "Bear's Lodge"
 
+#: skycultures/lakota/star_names.fab:1
+msgid "Wichapi Owanjila"
+msgstr "Wichapi Owanjila"
+
+#: skycultures/lakota/star_names.fab:2
+msgid "Oglechkutepi"
+msgstr "Oglechkutepi"
+
 #: skycultures/maori/constellation_names.eng.fab:1
 msgid "Taki-o-Autahi"
 msgstr "Taki-o-Autahi"
@@ -5690,42 +5749,42 @@ msgstr "Waita"
 #. TRANSLATORS: Native name of the Sun in Maori culture
 #: skycultures/maori/planet_names.fab:2
 msgid "Te Ra"
-msgstr ""
+msgstr "Te Ra"
 
 #. TRANSLATORS: Native name of the Moon in Maori culture
 #: skycultures/maori/planet_names.fab:4
 msgid "Te Marama"
-msgstr ""
+msgstr "Te Marama"
 
 #. TRANSLATORS: Native name of Mercury in Maori culture
 #: skycultures/maori/planet_names.fab:6
 msgid "Takero"
-msgstr ""
+msgstr "Takero"
 
 #. TRANSLATORS: Native name of Venus in Maori culture
 #: skycultures/maori/planet_names.fab:8
 msgid "Tawera/Meremere"
-msgstr ""
+msgstr "Tawera/Meremere"
 
 #. TRANSLATORS: Native name of Earth in Maori culture
 #: skycultures/maori/planet_names.fab:10
 msgid "Papa"
-msgstr ""
+msgstr "Papa"
 
 #. TRANSLATORS: Native name of Mars in Maori culture
 #: skycultures/maori/planet_names.fab:12
 msgid "Rangiwhenua"
-msgstr ""
+msgstr "Rangiwhenua"
 
 #. TRANSLATORS: Native name of Jupiter in Maori culture
 #: skycultures/maori/planet_names.fab:14
 msgid "Perearau"
-msgstr ""
+msgstr "Perearau"
 
 #. TRANSLATORS: Native name of Saturn in Maori culture
 #: skycultures/maori/planet_names.fab:16
 msgid "Perearau*"
-msgstr ""
+msgstr "Perearau*"
 
 #: skycultures/mongolian/constellation_names.eng.fab:1
 msgid "Num Sum (The Bow and the Arrow)"
@@ -5782,57 +5841,57 @@ msgstr "1.Rat / 8.Sheep/Goat"
 #. TRANSLATORS: Native name of the Sun in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:2
 msgid "Nar"
-msgstr ""
+msgstr "Nar"
 
 #. TRANSLATORS: Native name of the Moon in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:4
 msgid "Sar"
-msgstr ""
+msgstr "Sar"
 
 #. TRANSLATORS: Native name of Mercury in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:6
 msgid "Bud"
-msgstr ""
+msgstr "Bud"
 
 #. TRANSLATORS: Native name of Venus in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:8
 msgid "Sugar"
-msgstr ""
+msgstr "Sugar"
 
 #. TRANSLATORS: Native name of Earth in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:10
 msgid "Delkhii"
-msgstr ""
+msgstr "Delkhii"
 
 #. TRANSLATORS: Native name of Mars in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:12
 msgid "Angarag"
-msgstr ""
+msgstr "Angarag"
 
 #. TRANSLATORS: Native name of Jupiter in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:14
 msgid "Barhasbadi"
-msgstr ""
+msgstr "Barhasbadi"
 
 #. TRANSLATORS: Native name of Saturn in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:16
 msgid "Sanchir"
-msgstr ""
+msgstr "Sanchir"
 
 #. TRANSLATORS: Native name of Uranus in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:18
 msgid "Tengeriin-van"
-msgstr ""
+msgstr "Tengeriin-van"
 
 #. TRANSLATORS: Native name of Neptune in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:20
 msgid "Dalai-van"
-msgstr ""
+msgstr "Dalai-van"
 
 #. TRANSLATORS: Native name of Pluto in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:22
 msgid "Dalkhii-van"
-msgstr ""
+msgstr "Dalkhii-van"
 
 #: skycultures/navajo/constellation_names.eng.fab:1
 msgid "Revolving Male"
@@ -6575,12 +6634,6 @@ msgstr "Luyten's Star"
 msgid "Romulus"
 msgstr "Romulus"
 
-#: skycultures/romanian/star_names.fab:80
-#: skycultures/western/star_names.fab:116
-#: skycultures/western_rey/star_names.fab:32
-msgid "Procyon"
-msgstr "Procyon"
-
 #: skycultures/romanian/star_names.fab:81
 msgid "Remus"
 msgstr "Remus"
@@ -7282,53 +7335,53 @@ msgid "Kruger 60"
 msgstr "Krüger 60"
 
 #: skycultures/romanian/star_names.fab:221
-#: skycultures/western/star_names.fab:329
+#: skycultures/western/star_names.fab:330
 msgid "Situla"
 msgstr "Situla"
 
 #: skycultures/romanian/star_names.fab:222
-#: skycultures/western/star_names.fab:330
+#: skycultures/western/star_names.fab:331
 msgid "Homan"
 msgstr "Homan"
 
 #: skycultures/romanian/star_names.fab:223
-#: skycultures/western/star_names.fab:331
+#: skycultures/western/star_names.fab:332
 msgid "Matar"
 msgstr "Matar"
 
 #: skycultures/romanian/star_names.fab:224
-#: skycultures/western/star_names.fab:332
+#: skycultures/western/star_names.fab:333
 msgid "Babcock's Star"
 msgstr "Babcock's Star"
 
 #: skycultures/romanian/star_names.fab:225
-#: skycultures/western/star_names.fab:333
+#: skycultures/western/star_names.fab:334
 msgid "Sadalbari"
 msgstr "Sadalbari"
 
 #: skycultures/romanian/star_names.fab:226
-#: skycultures/western/star_names.fab:334
+#: skycultures/western/star_names.fab:335
 msgid "Skat"
 msgstr "Skat"
 
 #: skycultures/romanian/star_names.fab:227
-#: skycultures/western/star_names.fab:335
+#: skycultures/western/star_names.fab:336
 #: skycultures/western_rey/star_names.fab:46
 msgid "Fomalhaut"
 msgstr "Fomalhaut"
 
 #: skycultures/romanian/star_names.fab:228
-#: skycultures/western/star_names.fab:336
+#: skycultures/western/star_names.fab:337
 msgid "Scheat"
 msgstr "Scheat"
 
 #: skycultures/romanian/star_names.fab:229
-#: skycultures/western/star_names.fab:338
+#: skycultures/western/star_names.fab:339
 msgid "Markab"
 msgstr "Markab"
 
 #: skycultures/romanian/star_names.fab:230
-#: skycultures/western/star_names.fab:339
+#: skycultures/western/star_names.fab:340
 msgid "Errai"
 msgstr "Errai"
 
@@ -7370,20 +7423,20 @@ msgstr "The Ski Runners"
 
 #: skycultures/siberian/constellation_names.eng.fab:2
 msgid "Threshers"
-msgstr ""
+msgstr "Threshers"
 
 #: skycultures/siberian/constellation_names.eng.fab:3
 msgid "Duck Nest"
-msgstr ""
+msgstr "Duck Nest"
 
 #: skycultures/siberian/star_names.fab:1
 msgid "Golden stake"
-msgstr ""
+msgstr "Golden stake"
 
 #. TRANSLATORS: Native name of Venus in Siberian culture (in English words)
 #: skycultures/siberian/planet_names.fab:2
 msgid "Night Star"
-msgstr ""
+msgstr "Night Star"
 
 #: skycultures/tongan/constellation_names.eng.fab:1
 msgid "Toloatonga"
@@ -7460,66 +7513,66 @@ msgstr "Motuliki"
 #. TRANSLATORS: Native name of the Sun in Tongan culture
 #: skycultures/tongan/planet_names.fab:2
 msgid "La'a"
-msgstr ""
+msgstr "La'a"
 
 #. TRANSLATORS: Native name of the Moon in Tongan culture
 #: skycultures/tongan/planet_names.fab:4
 msgid "Mahina"
-msgstr ""
+msgstr "Mahina"
 
 #. TRANSLATORS: Native name of Venus in Tongan culture
 #: skycultures/tongan/planet_names.fab:6
 msgid "Tapukitea"
-msgstr ""
+msgstr "Tapukitea"
 
 #. TRANSLATORS: Native name of Mars in Tongan culture
 #: skycultures/tongan/planet_names.fab:8
 msgid "Matamemea"
-msgstr ""
+msgstr "Matamemea"
 
 #: skycultures/tukano/constellation_names.eng.fab:1
 msgid "Fer-de-lance (snake)"
-msgstr ""
+msgstr "Fer-de-lance (snake)"
 
 #: skycultures/tukano/constellation_names.eng.fab:2
 msgid "Armadillo"
-msgstr ""
+msgstr "Armadillo"
 
 #: skycultures/tukano/constellation_names.eng.fab:3
 msgid "Caridean Shrimp"
-msgstr ""
+msgstr "Caridean Shrimp"
 
 #: skycultures/tukano/constellation_names.eng.fab:4
 msgid "A kind of fish"
-msgstr ""
+msgstr "A kind of fish"
 
 #: skycultures/tukano/constellation_names.eng.fab:5
 msgid "Puma or Jaguar"
-msgstr ""
+msgstr "Puma or Jaguar"
 
 #: skycultures/tukano/constellation_names.eng.fab:6
 msgid "Group of Stars"
-msgstr ""
+msgstr "Group of Stars"
 
 #: skycultures/tukano/constellation_names.eng.fab:7
 msgid "A kind of grill to cook fish"
-msgstr ""
+msgstr "A kind of grill to cook fish"
 
 #: skycultures/tukano/constellation_names.eng.fab:8
 msgid "Adze Handle"
-msgstr ""
+msgstr "Adze Handle"
 
 #: skycultures/tukano/constellation_names.eng.fab:9
 msgid "Egret"
-msgstr ""
+msgstr "Egret"
 
 #: skycultures/tukano/constellation_names.eng.fab:10
 msgid "Tortoise"
-msgstr ""
+msgstr "Tortoise"
 
 #: skycultures/tukano/constellation_names.eng.fab:11
 msgid "Snake Large Anus"
-msgstr ""
+msgstr "Snake Large Anus"
 
 #: skycultures/tupi/constellation_names.eng.fab:1
 msgid "White Ostrich"
@@ -7991,7 +8044,7 @@ msgstr "Deneb Kaitos Shemali"
 
 #: skycultures/western/star_names.fab:8
 msgid "Achird"
-msgstr ""
+msgstr "Achird"
 
 #: skycultures/western/star_names.fab:9
 msgid "van Maanen 2"
@@ -8116,7 +8169,7 @@ msgstr "Thabit"
 
 #: skycultures/western/star_names.fab:80
 msgid "Ruby Star"
-msgstr ""
+msgstr "Ruby Star"
 
 #: skycultures/western/star_names.fab:83
 msgid "Hatsya"
@@ -8137,11 +8190,6 @@ msgstr "Tejat Posterior"
 #: skycultures/western/star_names.fab:99
 msgid "Plaskett's star"
 msgstr "Plaskett's star"
-
-#: skycultures/western/star_names.fab:102
-#: skycultures/western_rey/star_names.fab:36
-msgid "Sirius"
-msgstr "Sirius"
 
 #: skycultures/western/star_names.fab:103
 msgid "Alzirr"
@@ -8321,7 +8369,7 @@ msgstr "Alniyat"
 
 #: skycultures/western/star_names.fab:234
 msgid "Han"
-msgstr ""
+msgstr "Han"
 
 #: skycultures/western/star_names.fab:236
 msgid "Grafias"
@@ -8469,34 +8517,38 @@ msgid "Al Dhanab"
 msgstr "Al Dhanab"
 
 #: skycultures/western/star_names.fab:328
+msgid "Sadaltager"
+msgstr "Sadaltager"
+
+#: skycultures/western/star_names.fab:329
 msgid "Al Kalb al Rai"
 msgstr "Al Kalb al Rai"
 
-#: skycultures/western/star_names.fab:337
+#: skycultures/western/star_names.fab:338
 msgid "Fum al Samakah"
 msgstr "Fum al Samakah"
 
 #: skycultures/western_rey/constellation_names.eng.fab:6
 msgid "Big Dipper"
-msgstr ""
+msgstr "Big Dipper"
 
 #: skycultures/western_rey/constellation_names.eng.fab:7
 msgid "Pointers"
-msgstr ""
+msgstr "Pointers"
 
 #: skycultures/western_rey/constellation_names.eng.fab:8
 msgid "Little Dipper"
-msgstr ""
+msgstr "Little Dipper"
 
 #: skycultures/western_rey/constellation_names.eng.fab:9
 msgid "Guardians"
-msgstr ""
+msgstr "Guardians"
 
 #: skycultures/western_rey/constellation_names.eng.fab:11
 #: skycultures/western_rey/constellation_names.eng.fab:39
 #: skycultures/western_rey/constellation_names.eng.fab:90
 msgid "feet"
-msgstr ""
+msgstr "feet"
 
 #: skycultures/western_rey/constellation_names.eng.fab:12
 #: skycultures/western_rey/constellation_names.eng.fab:20
@@ -8514,7 +8566,7 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:156
 #: skycultures/western_rey/constellation_names.eng.fab:169
 msgid "head"
-msgstr ""
+msgstr "head"
 
 #: skycultures/western_rey/constellation_names.eng.fab:13
 #: skycultures/western_rey/constellation_names.eng.fab:25
@@ -8528,23 +8580,23 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:157
 #: skycultures/western_rey/constellation_names.eng.fab:166
 msgid "tail"
-msgstr ""
+msgstr "tail"
 
 #: skycultures/western_rey/constellation_names.eng.fab:21
 #: skycultures/western_rey/constellation_names.eng.fab:22
 msgid "paws"
-msgstr ""
+msgstr "paws"
 
 #: skycultures/western_rey/constellation_names.eng.fab:30
 #: skycultures/western_rey/constellation_names.eng.fab:101
 #: skycultures/western_rey/constellation_names.eng.fab:122
 #: skycultures/western_rey/constellation_names.eng.fab:172
 msgid "body"
-msgstr ""
+msgstr "body"
 
 #: skycultures/western_rey/constellation_names.eng.fab:32
 msgid "pipe"
-msgstr ""
+msgstr "pipe"
 
 #: skycultures/western_rey/constellation_names.eng.fab:37
 #: skycultures/western_rey/constellation_names.eng.fab:38
@@ -8555,67 +8607,67 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:153
 #: skycultures/western_rey/constellation_names.eng.fab:158
 msgid "wing"
-msgstr ""
+msgstr "wing"
 
 #: skycultures/western_rey/constellation_names.eng.fab:40
 msgid "outstretched neck"
-msgstr ""
+msgstr "outstretched neck"
 
 #: skycultures/western_rey/constellation_names.eng.fab:44
 #: skycultures/western_rey/constellation_names.eng.fab:76
 msgid "club"
-msgstr ""
+msgstr "club"
 
 #: skycultures/western_rey/constellation_names.eng.fab:45
 msgid "Keystone"
-msgstr ""
+msgstr "Keystone"
 
 #: skycultures/western_rey/constellation_names.eng.fab:50
 msgid "the chain"
-msgstr ""
+msgstr "the chain"
 
 #: skycultures/western_rey/constellation_names.eng.fab:51
 msgid "Great Square"
-msgstr ""
+msgstr "Great Square"
 
 #: skycultures/western_rey/constellation_names.eng.fab:63
 #: skycultures/western_rey/constellation_names.eng.fab:64
 msgid "horn"
-msgstr ""
+msgstr "horn"
 
 #: skycultures/western_rey/constellation_names.eng.fab:75
 msgid "belt"
-msgstr ""
+msgstr "belt"
 
 #: skycultures/western_rey/constellation_names.eng.fab:77
 msgid "shield"
-msgstr ""
+msgstr "shield"
 
 #: skycultures/western_rey/constellation_names.eng.fab:83
 msgid "Hydra's head"
-msgstr ""
+msgstr "Hydra's head"
 
 #: skycultures/western_rey/constellation_names.eng.fab:87
 msgid "Hydra's tail"
-msgstr ""
+msgstr "Hydra's tail"
 
 #: skycultures/western_rey/constellation_names.eng.fab:93
 msgid "bill"
-msgstr ""
+msgstr "bill"
 
 #: skycultures/western_rey/constellation_names.eng.fab:94
 #: skycultures/western_rey/constellation_names.eng.fab:105
 #: skycultures/western_rey/constellation_names.eng.fab:106
 msgid "foot"
-msgstr ""
+msgstr "foot"
 
 #: skycultures/western_rey/constellation_names.eng.fab:97
 msgid "Serpens Cauda"
-msgstr ""
+msgstr "Serpens Cauda"
 
 #: skycultures/western_rey/constellation_names.eng.fab:98
 msgid "Serpens Caput"
-msgstr ""
+msgstr "Serpens Caput"
 
 #: skycultures/western_rey/constellation_names.eng.fab:103
 #: skycultures/western_rey/constellation_names.eng.fab:104
@@ -8623,91 +8675,91 @@ msgstr ""
 #: skycultures/western_rey/constellation_names.eng.fab:170
 #: skycultures/western_rey/constellation_names.eng.fab:171
 msgid "arm"
-msgstr ""
+msgstr "arm"
 
 #: skycultures/western_rey/constellation_names.eng.fab:108
 msgid "claws"
-msgstr ""
+msgstr "claws"
 
 #: skycultures/western_rey/constellation_names.eng.fab:110
 msgid "cat's eyes"
-msgstr ""
+msgstr "cat's eyes"
 
 #: skycultures/western_rey/constellation_names.eng.fab:123
 msgid "skirt"
-msgstr ""
+msgstr "skirt"
 
 #: skycultures/western_rey/constellation_names.eng.fab:124
 msgid "the bow"
-msgstr ""
+msgstr "the bow"
 
 #: skycultures/western_rey/constellation_names.eng.fab:131
 msgid "vessel"
-msgstr ""
+msgstr "vessel"
 
 #: skycultures/western_rey/constellation_names.eng.fab:138
 msgid "Northern Fish"
-msgstr ""
+msgstr "Northern Fish"
 
 #: skycultures/western_rey/constellation_names.eng.fab:139
 msgid "Circlet"
-msgstr ""
+msgstr "Circlet"
 
 #: skycultures/western_rey/constellation_names.eng.fab:146
 msgid "False Cross"
-msgstr ""
+msgstr "False Cross"
 
 #: skycultures/western_rey/constellation_names.eng.fab:148
 msgid "figurehead"
-msgstr ""
+msgstr "figurehead"
 
 #: skycultures/western_rey/constellation_names.eng.fab:150
 msgid "transom"
-msgstr ""
+msgstr "transom"
 
 #: skycultures/western_rey/constellation_names.eng.fab:167
 msgid "ears"
-msgstr ""
+msgstr "ears"
 
 #: skycultures/western_rey/constellation_names.eng.fab:173
 msgid "front legs"
-msgstr ""
+msgstr "front legs"
 
 #: skycultures/western_rey/constellation_names.eng.fab:174
 msgid "hind legs"
-msgstr ""
+msgstr "hind legs"
 
 #: skycultures/western_rey/constellation_names.eng.fab:180
 msgid "Fly"
-msgstr ""
+msgstr "Fly"
 
 #: skycultures/western_rey/constellation_names.eng.fab:183
 msgid "eyes"
-msgstr ""
+msgstr "eyes"
 
 #: skycultures/western_rey/star_names.fab:5
 msgid "Pole Star"
-msgstr ""
+msgstr "Pole Star"
 
 #: skycultures/western_rey/star_names.fab:17
 msgid "Gemma"
-msgstr ""
+msgstr "Gemma"
 
 #: skycultures/western_rey/star_names.fab:49
 msgid "Tau Ceti"
-msgstr ""
+msgstr "Tau Ceti"
 
 #: skycultures/western_rey/star_names.fab:50
 msgid "Knot"
-msgstr ""
+msgstr "Knot"
 
 #: skycultures/western_rey/star_names.fab:56
 msgid "Alpha Centauri"
-msgstr ""
+msgstr "Alpha Centauri"
 
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
-msgstr ""
+msgstr "Beta Centauri"
 
 #~ msgid "Schrine of Sky"
 #~ msgstr "Schrine of Sky"
