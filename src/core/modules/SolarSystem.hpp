@@ -297,6 +297,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
 	bool getFlagIsolatedTrails(void) const;
 
+	//! Set flag which enabled the showing of isolated orbits for selected objects only or not
+	void setFlagIsolatedOrbits(bool b);
+	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
+	bool getFlagIsolatedOrbits(void) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -423,6 +428,7 @@ private:
 	bool flagNativeNames;
 	bool flagTranslatedNames;
 	bool flagIsolatedTrails;
+	bool flagIsolatedOrbits;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
