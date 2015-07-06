@@ -269,20 +269,6 @@ void MeteorShowers::setFlagShowMSButton(bool b)
 	}
 }
 
-bool MeteorShowers::changedSkyDate(StelCore* core)
-{
-	double JD = core->getJDay();
-	skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
-	if (skyDate.toString("MM.dd.yyyy") != lastSkyDate.toString("MM.dd.yyyy"))  //if the sky date changed
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 void MeteorShowers::draw(StelCore* core)
 {
 	if (!getFlagShowMS())
@@ -363,17 +349,11 @@ void MeteorShowers::update(double deltaTime)
 		deltaTime = 500.0;
 	}
 
-	//check if the sky date changed
-	if (changedSkyDate(core))
+	// is GUI visible? refresh dates
+	if (configDialog->visible())
 	{
-		// Is GUI visible and the year changed? refresh ranges
-		if (configDialog->visible() && lastSkyDate.toString("yyyy") != skyDate.toString("yyyy"))
-		{
-			configDialog->refreshRangeDates();
-		}
+		configDialog->refreshRangeDates(core);
 	}
-
-	lastSkyDate = skyDate;
 
 	// step through and update all meteor showers
 	foreach (const MeteorShowerP& ms, mShowers)

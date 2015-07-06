@@ -50,7 +50,7 @@ public slots:
 	void retranslate();
 	void refreshUpdateValues(void); //! Refresh details about the last update
 	void refreshMarkersColor(void); //! Refresh the color of all markers
-	void refreshRangeDates(void);   //! Refresh dates range when year in main app change
+	void refreshRangeDates(StelCore *core);   //! Refresh dates range when year in main app change
 
 private slots:
 	void setUpdateValues(int hours);

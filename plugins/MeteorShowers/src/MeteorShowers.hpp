@@ -236,11 +236,6 @@ private:
 	//! Upgrade config.ini: rename old key settings to new
 	void upgradeConfigIni();
 
-	//! Check if the sky date was changed
-	//! @param core
-	//! @return if changed, return true
-	bool changedSkyDate(StelCore* core);
-
 	//! Update the list with information about active meteors
 	//! @param core
 	void updateActiveInfo(void);
