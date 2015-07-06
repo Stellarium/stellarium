@@ -117,19 +117,6 @@ MeteorShowers::~MeteorShowers()
 	}
 }
 
-/*
- Reimplementation of the getCallOrder method
-*/
-double MeteorShowers::getCallOrder(StelModuleActionName actionName) const
-{
-	if (actionName == StelModule::ActionDraw)
-	{
-		return GETSTELMODULE(SporadicMeteorMgr)->getCallOrder(actionName)+10.;
-	}
-
-	return 0;
-}
-
 void MeteorShowers::init()
 {
 	upgradeConfigIni();
@@ -228,6 +215,15 @@ void MeteorShowers::deinit()
 	m_bolideTexture.clear();
 }
 
+double MeteorShowers::getCallOrder(StelModuleActionName actionName) const
+{
+	if (actionName == StelModule::ActionDraw)
+	{
+		return GETSTELMODULE(SporadicMeteorMgr)->getCallOrder(actionName) + 10.;
+	}
+	return 0;
+}
+
 void MeteorShowers::upgradeConfigIni()
 {
 	// Upgrade settings for MeteorShower plugin
@@ -310,37 +306,38 @@ void MeteorShowers::draw(StelCore* core)
 
 void MeteorShowers::drawPointer(StelCore* core)
 {
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	StelPainter painter(prj);
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("MeteorShower");
-	if (!newSelected.empty())
+	if (newSelected.empty())
 	{
-		const StelObjectP obj = newSelected[0];
-		Vec3d pos=obj->getJ2000EquatorialPos(core);
-
-		Vec3d screenpos;
-		// Compute 2D pos and return if outside screen
-		if (!painter.getProjector()->project(pos, screenpos))
-		{
-			return;
-		}
-
-		const Vec3f& c(obj->getInfoColor());
-		painter.setColor(c[0],c[1],c[2]);
-		texPointer->bind();
-		painter.enableTexture2d(true);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
-		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-		size += 20.f + 10.f * qSin(2.f * StelApp::getInstance().getTotalRunTime());
-
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 10.f, 90);
-		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 10.f, 0);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 10.f, -90);
-		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10.f, -180);
-		painter.setColor(1,1,1,0);
+		return;
 	}
+
+	const StelObjectP obj = newSelected[0];
+	Vec3d pos = obj->getJ2000EquatorialPos(core);
+
+	// Compute 2D pos and return if outside screen
+	Vec3d screenpos;
+	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
+	if (!painter.getProjector()->project(pos, screenpos))
+	{
+		return;
+	}
+
+	const Vec3f& c(obj->getInfoColor());
+	painter.setColor(c[0],c[1],c[2]);
+	texPointer->bind();
+	painter.enableTexture2d(true);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+
+	float size = obj->getAngularSize(core) * M_PI / 180. * painter.getProjector()->getPixelPerRadAtCenter();
+	size += 20.f + 10.f * qSin(2.f * StelApp::getInstance().getTotalRunTime());
+
+	painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 10.f, 90);
+	painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 10.f, 0);
+	painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 10.f, -90);
+	painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10.f, -180);
+	painter.setColor(1, 1, 1, 0);
 }
 
 void MeteorShowers::update(double deltaTime)
