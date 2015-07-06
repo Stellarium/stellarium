@@ -112,7 +112,7 @@ void MeteorShowerDialog::createDialogContent()
 
 	// Settings tab / event group
 	connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
-	refreshRangeDates();
+	refreshRangeDates(StelApp::getInstance().getCore());
 
 	treeWidget = ui->listEvents;
 	initListEvents();
@@ -256,9 +256,11 @@ void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 	}
 }
 
-void MeteorShowerDialog::refreshRangeDates(void)
+void MeteorShowerDialog::refreshRangeDates(StelCore* core)
 {
-	int year = plugin->getSkyDate().toString("yyyy").toInt();
+	double JD = core->getJDay();
+	QDateTime skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
+	int year = skyDate.toString("yyyy").toInt();
 	ui->dateFrom->setDate(QDate(year, 1, 1)); // first date in the range - first day of the year
 	ui->dateTo->setDate(QDate(year, 12, 31)); // second date in the range - last day of the year
 }
