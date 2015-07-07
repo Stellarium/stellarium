@@ -59,6 +59,7 @@
 #include "SkyGui.hpp"
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -175,8 +176,24 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	
-	connect(ui->getEphemDataButton, SIGNAL(clicked()), this, SLOT(downloadEphemData()));
 	resetStarCatalogControls();
+
+	ui->downloadLabel->setText(q_("VSOP87 is available"));
+
+	if(EphemWrapper::de430_is_available())
+	{
+		ui->downloadLabel->setText(q_("DE430 is available"));
+		ui->getEphemDataButton->setEnabled(false);
+	}
+
+	if(EphemWrapper::de431_is_available())
+	{
+		ui->downloadLabel->setText(q_("DE431 is available"));
+		ui->getEphemDataButton->setEnabled(false);
+	}
+
+	connect(ui->getEphemDataButton, SIGNAL(clicked()), this, SLOT(downloadEphemData()));
+
 
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
@@ -1080,72 +1097,14 @@ void ConfigurationDialog::downloadStars()
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
-bool ConfigurationDialog::de430DataIsAvailable()
-{
-    //TODO: check file availability
-    return false;
-}
-
-bool ConfigurationDialog::de431DataIsAvailable()
-{
-    //TODO: check file availability
-    return false;
-}
-
 void ConfigurationDialog::newEphemData()
 {
-	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(downloadReply);
-	Q_ASSERT(progressBar);
 
-	int size = downloadReply->bytesAvailable();
-	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
-	currentDownloadFile->write(downloadReply->read(size));
 }
 
 void ConfigurationDialog::downloadEphemData()
 {
-	Q_ASSERT(downloadReply == NULL);
-	Q_ASSERT(currentDownloadFile == NULL);
-	Q_ASSERT(progressBar == NULL);
 
-
-	QString path = StelFileMgr::getUserDir()+QString("/stars/default/test.txt");
-	currentDownloadFile = new QFile(path);
-	if (!currentDownloadFile->open(QIODevice::WriteOnly))
-	{
-		qWarning() << "Can't open a writable file for storing new ephem data: " << QDir::toNativeSeparators(path);
-		currentDownloadFile->deleteLater();
-		currentDownloadFile = NULL;
-		ui->downloadLabel->setText(q_("Error downloading, Can't open a writable file for storing new ephem data: %1").arg(path));
-		ui->downloadRetryButton->setVisible(true);
-		return;
-	}
-
-	isDownloading = true;
-	isDownloadingEphemData = true;
-	updateStarCatalogControlsText();
-	ui->downloadCancelButton->setVisible(true);
-	ui->downloadRetryButton->setVisible(false);
-	ui->getEphemDataButton->setVisible(true);
-	ui->getEphemDataButton->setEnabled(false);
-
-	//debug server URL http://dss.astro.altspu.ru/de
-	//tst url: http://dss.astro.altspu.ru/de/aa_summaries.txt
-
-	QNetworkRequest req(QString("http://dss.astro.altspu.ru/de/aa_summaries.txt"));
-	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", userAgent.toLatin1());
-	downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	downloadReply->setReadBufferSize(1024*1024*2);	
-	connect(downloadReply, SIGNAL(finished()), this, SLOT(ephemDataDownloadFinished()));
-	connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
-
-	progressBar = StelApp::getInstance().addProgressBar();
-	progressBar->setValue(0);
-	progressBar->setRange(0, 6745); //DEBUG
-	//progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
@@ -1175,52 +1134,6 @@ void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
 
 void ConfigurationDialog::ephemDataDownloadFinished()
 {
-	Q_ASSERT(currentDownloadFile);
-	Q_ASSERT(downloadReply);
-	Q_ASSERT(progressBar);
-
-	if (downloadReply->error()!=QNetworkReply::NoError)
-	{
-		downloadReply->deleteLater();
-		downloadReply = NULL;
-		currentDownloadFile->close();
-		currentDownloadFile->deleteLater();
-		currentDownloadFile = NULL;
-		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar=NULL;
-		return;
-	}
-
-	Q_ASSERT(downloadReply->bytesAvailable()==0);
-
-	const QVariant& redirect = downloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-	if (!redirect.isNull())
-	{
-		// We got a redirection, we need to follow
-		downloadReply->deleteLater();
-		QNetworkRequest req(redirect.toUrl());
-		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-		req.setRawHeader("User-Agent", userAgent.toLatin1());
-		downloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		downloadReply->setReadBufferSize(1024*1024*2);
-		connect(downloadReply, SIGNAL(readyRead()), this, SLOT(newEphemData()));
-		connect(downloadReply, SIGNAL(finished()), this, SLOT(ephemDataDownloadFinished()));
-		connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
-		return;
-	}
-
-	isDownloadingEphemData = false;
-	isDownloading = false;
-	currentDownloadFile->close();
-	currentDownloadFile->deleteLater();
-	currentDownloadFile = NULL;
-	downloadReply->deleteLater();
-	downloadReply = NULL;
-	StelApp::getInstance().removeProgressBar(progressBar);
-	progressBar=NULL;
-
-	hasDownloadedEphemData = true;
 
 }
 

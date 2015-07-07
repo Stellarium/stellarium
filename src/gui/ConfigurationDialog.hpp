@@ -80,7 +80,7 @@ private:
     bool isDownloading;
     //! True when at least one ephemData-pack has been downloaded successfully this session
     bool hasDownloadedEphemData;
-
+    //! 
     int ephemDataCount;
 
 private slots:
@@ -159,9 +159,6 @@ private slots:
 
     //! downloads DE430/DE431 ephemData from SourceForge
     void downloadEphemData();
-
-	bool de430DataIsAvailable();
-	bool de431DataIsAvailable();
 
 private:
 	StelGui* gui;
