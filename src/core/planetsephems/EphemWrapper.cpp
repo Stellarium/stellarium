@@ -16,27 +16,58 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
-#include "EphemWrapper.h"
+#include "EphemWrapper.hpp"
 #include "vsop87.h"
 #include "elp82b.h"
 #include "marssat.h"
 #include "l1.h"
 #include "tass17.h"
 #include "gust86.h"
-#include "de431.h"
-#include "de430.h"
+#include "de431.hpp"
+#include "de430.hpp"
 
-void set_de430_status(int status)
+#define EPHEM_MERCURY_ID  0
+#define EPHEM_VENUS_ID    1
+#define EPHEM_EMB_ID    2
+#define EPHEM_MARS_ID   3
+#define EPHEM_JUPITER_ID  4
+#define EPHEM_SATURN_ID   5
+#define EPHEM_URANUS_ID   6
+#define EPHEM_NEPTUNE_ID  7
+#define EPHEM_PLUTO_ID    8
+
+static bool DE430_ACTIVE = false;
+static bool DE431_ACTIVE = false;
+
+void EphemWrapper::set_de430_status(bool status)
 {
 	DE430_ACTIVE = status;
 }
-void set_de431_status(int status)
+
+void EphemWrapper::set_de431_status(bool status)
 {
 	DE431_ACTIVE = status;
+}
+
+bool EphemWrapper::de430_is_available()
+{
+  return DE430_ACTIVE;
+}
+
+bool EphemWrapper::de431_is_available()
+{
+  return DE431_ACTIVE;
+}
+
+void EphemWrapper::init_de430(const char* filepath)
+{
+  InitDE430(filepath);
+}
+
+void EphemWrapper::init_de431(const char* filepath)
+{
+
 }
 
 void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
@@ -49,7 +80,7 @@ void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
   	{
   		GetDe431Coor(jd, planet_id, xyz);
   	}
-	else //VSOP87 is fallback method
+	else //VSOP87 is the fallback method
 	{
   		GetVsop87Coor(jd, planet_id, xyz);
   	}
@@ -75,7 +106,10 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
  * Calculate planets rectangular heliocentric ecliptical coordinates
  * for given julian day. Values are in AU.
  * params : Julian day, rect coords */
-void get_pluto_helio_coords(double jd, double * X, double * Y, double * Z);
+void get_pluto_helio_coords(double jd, double * X, double * Y, double * Z)
+{
+  
+}
 
 void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 	{get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);}
@@ -233,8 +267,3 @@ void get_titania_parent_coordsv(double jd,double xyz[3], void* unused)
   {GetGust86Coor(jd,GUST86_TITANIA,xyz);}
 void get_oberon_parent_coordsv(double jd,double xyz[3], void* unused)
   {GetGust86Coor(jd,GUST86_OBERON,xyz);}
-
-#ifdef __cplusplus
-}
-#endif
-

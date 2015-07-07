@@ -20,14 +20,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "de431.h"
+#ifndef _DE430_HPP_
+#define _DE430_HPP_
 
-void GetDe431Coor(double jd, int planet_id, double * xyz)
-{
+#ifdef __cplusplus
+  extern "C" {
+#endif
 
-}
+void InitDE430(const char* filepath);
+void GetDe430Coor(double jd, int planet_id, double * xyz);
+void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz);
 
-void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
-{
-	
-}
+#ifdef __cplusplus
+    }
+#endif
+
+#endif

@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 /*
  * This class provides a wrapper to multiple methods to calculate ephemerides.
  * Depending on availability of extra files, the class uses:
- * - VSOP97
+ * - VSOP87
  * - DE430
  * - DE431
  *
@@ -31,21 +31,17 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifndef _EPHEMWRAPPER_HPP_
 #define _EPHEMWRAPPER_HPP_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+class EphemWrapper{
+public:
+    static void set_de430_status(bool status);
+    static void set_de431_status(bool status);
 
-#define EPHEM_MERCURY_ID	0
-#define EPHEM_VENUS_ID		1
-#define EPHEM_EMB_ID		2
-#define EPHEM_MARS_ID		3
-#define EPHEM_JUPITER_ID	4
-#define EPHEM_SATURN_ID		5
-#define EPHEM_URANUS_ID		6
-#define EPHEM_NEPTUNE_ID	7
+    static bool de430_is_available();
+    static bool de431_is_available();
 
-static int DE430_ACTIVE = 0;
-static int DE431_ACTIVE = 0;
+    static void init_de430(const char* filepath);
+    static void init_de431(const char* filepath);
+};
 
 void get_sun_helio_coordsv(double jd,double xyz[3], void*);
 void get_mercury_helio_coordsv(double jd,double xyz[3], void*);
@@ -92,10 +88,6 @@ void get_ariel_parent_coordsv(double jd,double xyz[3], void*);
 void get_umbriel_parent_coordsv(double jd,double xyz[3], void*);
 void get_titania_parent_coordsv(double jd,double xyz[3], void*);
 void get_oberon_parent_coordsv(double jd,double xyz[3], void*);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif // _EPHEMWRAPPER_HPP_
 
