@@ -523,6 +523,9 @@ public slots:
 	//! Get coefficients for custom equation for calculation of Delta-T
 	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
+	//! initialize ephemerides calculation functions
+	void initEphemeridesFunctions();
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);

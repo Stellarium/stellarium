@@ -37,6 +37,8 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "StelFileMgr.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -1789,4 +1791,35 @@ bool StelCore::isDay() const
 double StelCore::getCurrentEpoch() const
 {
 	return 2000.0 + (getJDay() - 2451545.0)/365.25;
+}
+
+void StelCore::initEphemeridesFunctions()
+{
+	//check for files in /ephem/..
+	//TODO: check for correct filesize
+	//../de430
+	QString jsonFilePath = StelFileMgr::findFile("ephem/de430/", 
+		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de430.bsp";
+  	
+  	EphemWrapper::set_de430_status(!jsonFilePath.isEmpty());
+  	
+  	if(EphemWrapper::de430_is_available())
+  	{
+  		EphemWrapper::init_de430(jsonFilePath.toStdString().c_str());
+  	}
+
+  	//../de431
+  	jsonFilePath = StelFileMgr::findFile("ephem/de431/", 
+		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-1.bsp";
+  	
+  	QString jsonFilePath2 = StelFileMgr::findFile("ephem/de431/", 
+		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-2.bsp";
+
+  	EphemWrapper::set_de431_status(!(jsonFilePath.isEmpty() || jsonFilePath2.isEmpty()));
+
+	if(EphemWrapper::de431_is_available())
+  	{
+  		//EphemWrapper::init_de431(jsonFilePath + 2?!!!!);
+  	}
+  	
 }

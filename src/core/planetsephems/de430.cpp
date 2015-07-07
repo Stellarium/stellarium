@@ -20,18 +20,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef _DE430_H_
-#define _DE430_H_
+#include "de430.hpp"
+#include "jpleph.h"
 
 #ifdef __cplusplus
-extern "C" {
+  extern "C" {
 #endif
 
-void GetDe430Coor(double jd, int planet_id, double * xyz);
-void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz);
+#define JPL_MAX_N_CONSTANTS 1018
+#define CALC_VELOCITY		0
 
-#ifdef __cplusplus
+void * ephem;
+char nams[JPL_MAX_N_CONSTANTS][6], buff[102];
+double vals[JPL_MAX_N_CONSTANTS];
+	
+
+void InitDE430(const char* filepath)
+{
+	ephem = jpl_init_ephemeris(filepath, nams, vals);
 }
-#endif
 
+void GetDe430Coor(double jd, int planet_id, double * xyz)
+{
+
+}
+
+void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
+{
+	
+}
+
+#ifdef __cplusplus
+  }
 #endif

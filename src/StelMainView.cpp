@@ -497,6 +497,8 @@ void StelMainView::init(QSettings* conf)
 	// plugins, because the gui create the QActions needed by some plugins.
 	StelApp::getInstance().initPlugIns();
 
+	StelApp::getInstance().getCore()->initEphemeridesFunctions();
+
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
 }

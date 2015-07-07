@@ -20,14 +20,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include "de430.h"
+#include "de431.hpp"
 
-void GetDe430Coor(double jd, int planet_id, double * xyz)
+void GetDe431Coor(double jd, int planet_id, double * xyz)
 {
 
 }
 
-void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
+void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
 {
 	
 }

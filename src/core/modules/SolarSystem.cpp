@@ -21,7 +21,7 @@
 
 #include "SolarSystem.hpp"
 #include "StelTexture.hpp"
-#include "EphemWrapper.h"
+#include "EphemWrapper.hpp"
 #include "Orbit.hpp"
 
 #include "StelProjector.hpp"
