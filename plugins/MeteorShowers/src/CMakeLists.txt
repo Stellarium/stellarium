@@ -12,6 +12,8 @@ SET(MeteorShowers_SRCS
     MeteorShower.cpp
     MeteorShowers.hpp
     MeteorShowers.cpp
+    MeteorShowersMgr.hpp
+    MeteorShowersMgr.cpp
     MeteorObj.hpp
     MeteorObj.cpp
     gui/MeteorShowerDialog.hpp
