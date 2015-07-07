@@ -72,6 +72,7 @@ public:
     /** Generates the response */
     void service(HttpRequest& request, HttpResponse& response);
 
+    QString getDocRoot() const { return docroot; }
 private:
 
     /** Encoding of text files */

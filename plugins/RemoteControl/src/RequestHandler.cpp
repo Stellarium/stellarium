@@ -19,6 +19,7 @@
 
 #include "RequestHandler.hpp"
 #include "httpserver/staticfilecontroller.h"
+#include "templateengine/template.h"
 
 #include "APIController.hpp"
 #include "LocationService.hpp"
@@ -29,12 +30,25 @@
 #include "StelActionService.hpp"
 #include "ViewService.hpp"
 
+#include "StelApp.hpp"
 #include "StelUtils.hpp"
+#include "StelTranslator.hpp"
 #include "StelFileMgr.hpp"
 
 #include <QDir>
+#include <QFile>
 
 const QByteArray RequestHandler::AUTH_REALM = "Basic realm=\"Stellarium remote control\"";
+
+class StelTemplateTranslationProvider : public ITemplateTranslationProvider
+{
+public:
+	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
+	{
+		return StelTranslator::globalTranslator->qtranslate(key);
+	}
+};
+
 
 RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QObject* parent) : HttpRequestHandler(parent), usePassword(false)
 {
@@ -51,7 +65,13 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	apiController->registerService(new LocationService("location",apiController));
 	apiController->registerService(new ViewService("view",apiController));
 
+	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshHtmlTemplate()));
+
 	staticFiles = new StaticFileController(settings,this);
+	indexFilePath = staticFiles->getDocRoot() + "/index.html";
+	qDebug()<<"Index file located at "<<indexFilePath;
+
+	refreshHtmlTemplate();
 }
 
 RequestHandler::~RequestHandler()
@@ -62,21 +82,6 @@ RequestHandler::~RequestHandler()
 void RequestHandler::update(double deltaTime)
 {
 	apiController->update(deltaTime);
-}
-
-void RequestHandler::setUsePassword(bool v)
-{
-	usePassword = v;
-}
-
-void RequestHandler::setPassword(const QString &pw)
-{
-	password = pw;
-
-	//pre-create the expected response string
-	QByteArray arr = password.toUtf8();
-	arr.prepend(':');
-	passwordReply = "Basic " + arr.toBase64();
 }
 
 void RequestHandler::service(HttpRequest &request, HttpResponse &response)
@@ -119,6 +124,41 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 		}
 #endif
 
-		staticFiles->service(request,response);
+		if(path.isEmpty() || path == "/" || path == "/index.html")
+		{
+			//special handling for indexFile
+			response.setHeader("Content-Type", qPrintable("text/html; charset=UTF-8"));
+#ifndef QT_NO_DEBUG
+			//force fresh loading for each request
+			refreshHtmlTemplate();
+#endif
+			response.write(indexFile.toUtf8(),true);
+		}
+		else
+			staticFiles->service(request,response);
 	}
+}
+
+void RequestHandler::setUsePassword(bool v)
+{
+	usePassword = v;
+}
+
+void RequestHandler::setPassword(const QString &pw)
+{
+	password = pw;
+
+	//pre-create the expected response string
+	QByteArray arr = password.toUtf8();
+	arr.prepend(':');
+	passwordReply = "Basic " + arr.toBase64();
+}
+
+void RequestHandler::refreshHtmlTemplate()
+{
+	StelTemplateTranslationProvider transProv;
+	QFile file(indexFilePath);
+	Template tmp(file);
+	tmp.translate(transProv);
+	indexFile = tmp;
 }

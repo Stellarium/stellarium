@@ -44,7 +44,13 @@ public slots:
 	bool getUsePassword() { return usePassword; }
 	void setPassword(const QString& pw);
 
+private slots:
+	void refreshHtmlTemplate();
+
 private:
+	//Contains the translated index.html
+	QString indexFile;
+	QString indexFilePath;
 	bool usePassword;
 	QString password;
 	QByteArray passwordReply;
