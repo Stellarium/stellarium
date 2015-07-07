@@ -86,6 +86,10 @@ StelCore::StelCore()
 	const float viewportCenterX = conf->value("projection/viewport_center_x",0.5f*viewport_width).toFloat();
 	const float viewportCenterY = conf->value("projection/viewport_center_y",0.5f*viewport_height).toFloat();
 	currentProjectorParams.viewportCenter.set(viewportCenterX, viewportCenterY);
+	const float viewportCenterOffsetX = conf->value("projection/viewport_center_offset_x",0.f).toFloat();
+	const float viewportCenterOffsetY = conf->value("projection/viewport_center_offset_y",0.f).toFloat();
+	currentProjectorParams.viewportCenterOffset.set(viewportCenterOffsetX, viewportCenterOffsetY);
+
 	currentProjectorParams.viewportFovDiameter = conf->value("projection/viewport_fov_diameter", qMin(viewport_width,viewport_height)).toFloat();
 	currentProjectorParams.flipHorz = conf->value("projection/flip_horz",false).toBool();
 	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
@@ -392,7 +396,7 @@ void StelCore::windowHasBeenResized(float x, float y, float width, float height)
 {
 	// Maximize display when resized since it invalidates previous options anyway
 	currentProjectorParams.viewportXywh.set(x, y, width, height);
-	currentProjectorParams.viewportCenter.set(x+0.5*width, y+0.5*height);
+	currentProjectorParams.viewportCenter.set(x+(0.5+currentProjectorParams.viewportCenterOffset.v[0])*width, y+(0.5+currentProjectorParams.viewportCenterOffset.v[1])*height);
 	currentProjectorParams.viewportFovDiameter = qMin(width,height);
 }
 

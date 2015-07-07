@@ -50,6 +50,7 @@ private slots:
 	void populateLists();
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
+	void viewportVerticalShiftChanged(const double shift);
 	void landscapeChanged(QListWidgetItem* item);
 	void setZhrFromControls(int zhr);
 	void updateZhrDescription();

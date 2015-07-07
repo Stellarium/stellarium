@@ -134,8 +134,11 @@ void ViewDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	populateLists();
+	ui->viewportOffsetSpinBox->setValue(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1]);
+
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+	connect(ui->viewportOffsetSpinBox, SIGNAL(valueChanged(double)), this, SLOT(viewportVerticalShiftChanged(double)));
 	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
 
 	// Connect and initialize checkboxes and other widgets
@@ -600,6 +603,27 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 	Q_ASSERT(gui);
 	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
+}
+
+void ViewDialog::viewportVerticalShiftChanged(const double shift)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
+	float safeShift=qMax(-0.5, qMin(shift, 0.5)); // Sanity check
+	params.viewportCenterOffset.set(0.0f, safeShift);
+
+	// Maximize display when resized since it invalidates previous options anyway
+	//currentProjectorParams.viewportXywh.set(x, y, width, height);
+	//currentProjectorParams.viewportCenter.set(x+0.5*width, y+0.5*height);
+	// GZ it seems we can set the skewed layout here.
+	params.viewportCenter.set(params.viewportXywh[0]+(0.5+params.viewportCenterOffset.v[0])*params.viewportXywh[2],
+				  params.viewportXywh[1]+(0.5+params.viewportCenterOffset.v[1])*params.viewportXywh[3]);
+
+
+
+
+	core->setCurrentStelProjectorParams(params);
+	qDebug() << "ViewDialog::viewportVerticalShift:" << safeShift;
 }
 
 void ViewDialog::landscapeChanged(QListWidgetItem* item)

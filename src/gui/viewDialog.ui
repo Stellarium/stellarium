@@ -1636,11 +1636,39 @@
               </widget>
              </item>
              <item>
-              <widget class="QTextBrowser" name="projectionTextBrowser">
-               <property name="openExternalLinks">
-                <bool>true</bool>
-               </property>
-              </widget>
+              <layout class="QVBoxLayout" name="projectionDetailsVerticalLayout">
+               <item>
+                <widget class="QTextBrowser" name="projectionTextBrowser">
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="viewportOffsetHorizontalLayout">
+                 <item>
+                  <widget class="QLabel" name="viewportOffsetLabel">
+                   <property name="text">
+                    <string>Vertical viewport offset</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="viewportOffsetSpinBox">
+                   <property name="minimum">
+                    <double>-0.500000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>0.500000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.010000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -2171,7 +2199,6 @@
   <tabstop>showConstellationBoundariesCheckBox</tabstop>
   <tabstop>showConstellationArtCheckBox</tabstop>
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
-  <tabstop>projectionTextBrowser</tabstop>
   <tabstop>landscapeTextBrowser</tabstop>
   <tabstop>showGroundCheckBox</tabstop>
   <tabstop>showFogCheckBox</tabstop>
