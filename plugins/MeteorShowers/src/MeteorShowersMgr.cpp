@@ -110,7 +110,10 @@ void MeteorShowersMgr::init()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
 	updateTimer->start();
 
-	setEnableMeteorShowers(getEnableAtStartup());
+	// enable at startup?
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* action = actionMgr->findAction("actionShow_MeteorShowers");
+	action->setChecked(getEnableAtStartup());
 }
 
 void MeteorShowersMgr::deinit()
@@ -466,15 +469,6 @@ void MeteorShowersMgr::setUrl(const QString& url)
 {
 	m_url = url;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/url", url);
-}
-
-void MeteorShowersMgr::setEnableMeteorShowers(const bool& b)
-{
-	//if (m_toolbarEnableButton)
-	//{
-//		m_toolbarEnableButton->setChecked(b);
-	//}
-	m_enableMeteorShowers = b;
 }
 
 void MeteorShowersMgr::setLastUpdate(const QDateTime &datetime)
