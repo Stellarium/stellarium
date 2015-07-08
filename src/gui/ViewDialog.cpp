@@ -609,21 +609,12 @@ void ViewDialog::viewportVerticalShiftChanged(const double shift)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
-	float safeShift=qMax(-0.5, qMin(shift, 0.5)); // Sanity check
-	params.viewportCenterOffset.set(0.0f, safeShift);
+	params.viewportCenterOffset[1]=qMax(-0.5, qMin(shift, 0.5)); // Sanity check
 
-	// Maximize display when resized since it invalidates previous options anyway
-	//currentProjectorParams.viewportXywh.set(x, y, width, height);
-	//currentProjectorParams.viewportCenter.set(x+0.5*width, y+0.5*height);
-	// GZ it seems we can set the skewed layout here.
 	params.viewportCenter.set(params.viewportXywh[0]+(0.5+params.viewportCenterOffset.v[0])*params.viewportXywh[2],
 				  params.viewportXywh[1]+(0.5+params.viewportCenterOffset.v[1])*params.viewportXywh[3]);
 
-
-
-
 	core->setCurrentStelProjectorParams(params);
-	qDebug() << "ViewDialog::viewportVerticalShift:" << safeShift;
 }
 
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
@@ -636,8 +627,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
-	//StelSkyDrawer *drawer=StelApp::getInstance().getSkyDrawer();
-	// GZ: Reset values that might have changed.
+	// Reset values that might have changed.
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 }
@@ -654,9 +644,6 @@ void ViewDialog::showAtmosphereDialog()
 {
 	if(atmosphereDialog == NULL)
 		atmosphereDialog = new AtmosphereDialog();
-	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
 
 	atmosphereDialog->setVisible(true);
 }
