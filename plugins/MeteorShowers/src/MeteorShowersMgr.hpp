@@ -81,8 +81,8 @@ public:
 	//! @return texture
 	StelTextureSP getRadiantTexture() { return m_radiantTexture; }
 
-	//! Enable/disable the Meteor Showers plugin.
-	void setEnableMeteorShowers(const bool& b);
+	//! Returns the plugin status.
+	//! @return true if the Meteor Showers plugin is enabled.
 	bool getEnableMeteorShowers() { return m_enableMeteorShowers; }
 
 	//! True if user wants to see the active radiants only.
@@ -224,6 +224,10 @@ private:
 	void loadConfig();
 	void loadTextures();
 	bool loadCatalog(const QString& jsonPath);
+
+	//! Enable/disable the Meteor Showers plugin.
+	//! It'll be triggered by a StelAction! So, it should NOT be called directly!
+	void setEnableMeteorShowers(const bool& b) { m_enableMeteorShowers = b; }
 
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
