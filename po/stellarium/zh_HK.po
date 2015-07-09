@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-04 20:43+0600\n"
+"POT-Creation-Date: 2015-07-08 16:34+0600\n"
 "PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-05 05:31+0000\n"
-"X-Generator: Launchpad (build 17597)\n"
+"X-Launchpad-Export-Date: 2015-07-09 05:28+0000\n"
+"X-Generator: Launchpad (build 17608)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
-#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:174
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:488 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -507,22 +507,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:174 src/translations.h:62
+#: src/core/modules/SolarSystem.cpp:175 src/translations.h:62
 #: src/ui_viewDialog.h:1252
 msgid "Planets"
 msgstr "行星"
 
-#: src/core/modules/SolarSystem.cpp:175
+#: src/core/modules/SolarSystem.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "行星標籤"
 
-#: src/core/modules/SolarSystem.cpp:176
+#: src/core/modules/SolarSystem.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "行星軌道"
 
-#: src/core/modules/SolarSystem.cpp:177
+#: src/core/modules/SolarSystem.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "行星路徑"
@@ -685,8 +685,8 @@ msgid "Add 1 solar day"
 msgstr "增加1太陽日"
 
 #: src/core/StelCore.cpp:202
-msgid "Add 1 solar week"
-msgstr "增加1太陽週"
+msgid "Add 7 solar days"
+msgstr ""
 
 #: src/core/StelCore.cpp:203
 msgid "Subtract 1 solar hour"
@@ -697,126 +697,94 @@ msgid "Subtract 1 solar day"
 msgstr "減少1太陽日"
 
 #: src/core/StelCore.cpp:205
-msgid "Subtract 1 solar week"
-msgstr "減少1太陽週"
+msgid "Subtract 7 solar days"
+msgstr ""
 
 #: src/core/StelCore.cpp:206
 msgid "Add 1 sidereal day"
 msgstr "增加1恆星日"
 
 #: src/core/StelCore.cpp:207
-msgid "Add 1 sidereal week"
-msgstr "增加 1 恒星周"
-
-#: src/core/StelCore.cpp:208
-msgid "Add 1 sidereal month"
-msgstr "加1個恆星月"
-
-#: src/core/StelCore.cpp:209
 msgid "Add 1 sidereal year"
 msgstr "加1個恆星年"
 
-#: src/core/StelCore.cpp:210
-msgid "Add 1 sidereal century"
-msgstr "加1個恆星世紀"
-
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:208
 msgid "Add 1 synodic month"
 msgstr "加1個朔望月"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:209
 msgid "Add 1 draconic month"
 msgstr "加1個交點月"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:210
 msgid "Add 1 draconic year"
 msgstr "加1個交點年"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:211
 msgid "Add 1 anomalistic month"
 msgstr "加1個近點月"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:212
 msgid "Add 1 mean tropical month"
 msgstr "加1個回歸月"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:213
 msgid "Add 1 mean tropical year"
 msgstr "加1個回歸年"
 
-#: src/core/StelCore.cpp:217
-msgid "Add 1 mean tropical century"
-msgstr "加1個回歸世紀"
-
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:214
 msgid "Subtract 1 sidereal day"
 msgstr "減少1恆星日"
 
-#: src/core/StelCore.cpp:219
-msgid "Subtract 1 sidereal week"
-msgstr "減少1恆星週"
-
-#: src/core/StelCore.cpp:220
-msgid "Subtract 1 sidereal month"
-msgstr "減1個恆星月"
-
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:215
 msgid "Subtract 1 sidereal year"
 msgstr "減1個恆星年"
 
-#: src/core/StelCore.cpp:222
-msgid "Subtract 1 sidereal century"
-msgstr "減1個恆星世紀"
-
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:216
 msgid "Subtract 1 synodic month"
 msgstr "減1個朔望月"
 
-#: src/core/StelCore.cpp:224
+#: src/core/StelCore.cpp:217
 msgid "Subtract 1 draconic month"
 msgstr "減1個交點月"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:218
 msgid "Subtract 1 draconic year"
 msgstr "減1個交點年"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 anomalistic month"
 msgstr "減1個近點月"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 mean tropical month"
 msgstr "減1個回歸月"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 mean tropical year"
 msgstr "減1個回歸年"
 
-#: src/core/StelCore.cpp:229
-msgid "Subtract 1 mean tropical century"
-msgstr "減1個回歸世紀"
-
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:223
 msgid "Set home planet to selected planet"
 msgstr "將選擇的行星設為預設位置"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:224
 msgid "Go to home"
 msgstr "返回首頁"
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:225
 msgid "Flip scene horizontally"
 msgstr "水平翻轉"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:226
 msgid "Flip scene vertically"
 msgstr "垂直翻轉"
 
-#: src/core/StelCore.cpp:1529
+#: src/core/StelCore.cpp:1461
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "修正已被禁用, 只有當你知道你在做什麼才禁用！"
 
-#: src/core/StelCore.cpp:1532
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -827,7 +795,7 @@ msgstr ""
 "在他的文章《古代的日食證明了愛因斯坦的相對論》[<em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em>](%1). 要了解更多信息，請點擊%2這裡%3."
 
-#: src/core/StelCore.cpp:1535
+#: src/core/StelCore.cpp:1467
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -836,7 +804,7 @@ msgstr ""
 "這個經驗公式由GM Clemence 在文章《關於天文常數係統》[<em>On the system of astronomical "
 "constants</em>] (%1)中公佈."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1470
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -848,7 +816,7 @@ msgstr ""
 "在他的《用於計算器的天文學公式》[<em>Astronomical Formulae for Calculators</em> ] "
 "中使用。計算機程序SunTracker Pro 也使用了這一公式."
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1474
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -858,7 +826,7 @@ msgstr ""
 "Ephemeris</em>]和《日食的法規》[<em>Canon of Solar Eclipses</em>]中使用的IAU (1952) "
 "公式稍加修改之後的版本."
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1478
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -866,7 +834,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1550
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -875,14 +843,14 @@ msgid ""
 msgstr ""
 "此方程由P. M. Muller及F. R. Stephenson在<em>從早期天文觀測地球和月球的加速現象</em>中發佈 (%1)."
 
-#: src/core/StelCore.cpp:1553
+#: src/core/StelCore.cpp:1485
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr "此方程由F. R. Stephenson在<em>前期望遠鏡時代天文觀察</em>中發佈 (%1)."
 
-#: src/core/StelCore.cpp:1556
+#: src/core/StelCore.cpp:1488
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -894,7 +862,7 @@ msgstr ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) 以符合由Brouwer (1952)發表之數據"
 
-#: src/core/StelCore.cpp:1559
+#: src/core/StelCore.cpp:1491
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -903,7 +871,7 @@ msgstr ""
 "此演算法被應用在 P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -"
 "4000 to +2800</em> (1986) 及PC星象軟件 RedShift."
 
-#: src/core/StelCore.cpp:1562
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -913,11 +881,11 @@ msgstr ""
 "此方程由F. R. Stephenson及L. V. Morrison<em>公元前700年到公元1980 - 地球自轉的長期變化</em>中發佈 "
 "(%1)"
 
-#: src/core/StelCore.cpp:1565
+#: src/core/StelCore.cpp:1497
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "此演算法被應用在PC星象軟件 Guide 7."
 
-#: src/core/StelCore.cpp:1568
+#: src/core/StelCore.cpp:1500
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -926,14 +894,14 @@ msgstr ""
 "此修正由F. Espenak提供, 並在<em>五十年日食大典: 1986-2035</em>和<em>五十年月食大典: 1986-"
 "2035</em>中提及 (1989)."
 
-#: src/core/StelCore.cpp:1571
+#: src/core/StelCore.cpp:1503
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "此修正由K.M. Borkowski (%1)在硏究由公元前2137至公元1715有紀錄的31次日食所得出."
 
-#: src/core/StelCore.cpp:1574
+#: src/core/StelCore.cpp:1506
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -942,7 +910,7 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1577
+#: src/core/StelCore.cpp:1509
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -951,7 +919,7 @@ msgstr ""
 "此修正由M. Chapront-Touze及J. Chapront在<em>公元前4000至公元月球方程和數據</em> ELP 2000-"
 "85簡化月球理論中所用."
 
-#: src/core/StelCore.cpp:1580
+#: src/core/StelCore.cpp:1512
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -959,42 +927,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1583
+#: src/core/StelCore.cpp:1515
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1518
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1589
+#: src/core/StelCore.cpp:1521
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr "NASA噴射推進實驗室之太陽系動態小組在他們互動網站 %1JPL Horizons%2 使用此方程式."
 
-#: src/core/StelCore.cpp:1592
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1595
+#: src/core/StelCore.cpp:1527
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1598
+#: src/core/StelCore.cpp:1530
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1002,7 +970,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1601
+#: src/core/StelCore.cpp:1533
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1010,7 +978,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1604
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1019,7 +987,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1032,11 +1000,11 @@ msgstr ""
 "並通過由1600至2000年列表值多項式擬合, 用作%1NASA日月蝕信息網站%2 及他們的 <em>五千年日食寶典: -1900 到 "
 "+3000</em> (2006). 此方程式亦用在太陽, 月球及行星星歷軟件SOLEX"
 
-#: src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1539
 msgid "Used by default."
 msgstr "預設值"
 
-#: src/core/StelCore.cpp:1610
+#: src/core/StelCore.cpp:1542
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1046,7 +1014,7 @@ msgstr ""
 "此修正由B. Banjevic提供, 基於Stephenson & Morrison (1984), 並發表在<em>Ancient eclipses "
 "and dating the fall of Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:1613
+#: src/core/StelCore.cpp:1545
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1057,7 +1025,7 @@ msgstr ""
 "並發表在<em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) "
 "及由 Sana Islam 在2013年審視."
 
-#: src/core/StelCore.cpp:1616
+#: src/core/StelCore.cpp:1548
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1065,43 +1033,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1619
+#: src/core/StelCore.cpp:1551
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "這是一個計算%1T由用戶定義的係數的的二次方程式."
 
-#: src/core/StelCore.cpp:1622 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1554 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "錯誤"
 
-#: src/core/StelCore.cpp:1672
+#: src/core/StelCore.cpp:1604
 msgid "with meaningless values outside this range"
 msgstr "超出此範圍之無意義值"
 
-#: src/core/StelCore.cpp:1698
+#: src/core/StelCore.cpp:1630
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1720 src/core/StelCore.cpp:1725
-#: src/core/StelCore.cpp:1752 src/core/StelCore.cpp:1757
-#: src/core/StelCore.cpp:1762
+#: src/core/StelCore.cpp:1652 src/core/StelCore.cpp:1657
+#: src/core/StelCore.cpp:1684 src/core/StelCore.cpp:1689
+#: src/core/StelCore.cpp:1694
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1730
+#: src/core/StelCore.cpp:1662
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "典型1秒準確度和沒有值超出範圍"
 
-#: src/core/StelCore.cpp:1772
+#: src/core/StelCore.cpp:1704
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "有效使日期用範: 在%1 及 %2, %3之間."
 
-#: src/core/StelCore.cpp:1774
+#: src/core/StelCore.cpp:1706
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "有效使日期用範: 在%1 及 %2之間."
@@ -10895,6 +10863,9 @@ msgstr ""
 #~ msgid "Day keys: "
 #~ msgstr "时间定义: "
 
+#~ msgid "Add 1 sidereal week"
+#~ msgstr "增加 1 恒星周"
+
 #~ msgid "Highest rate ever (1966 Leonids)"
 #~ msgstr "至今最高频率 (1966 獅子座流星雨)"
 
@@ -10997,6 +10968,15 @@ msgstr ""
 
 #~ msgid "Nebulas background images"
 #~ msgstr "星雲背景影像"
+
+#~ msgid "Add 1 solar week"
+#~ msgstr "增加1太陽週"
+
+#~ msgid "Subtract 1 solar week"
+#~ msgstr "減少1太陽週"
+
+#~ msgid "Subtract 1 sidereal week"
+#~ msgstr "減少1恆星週"
 
 #~ msgid "Ceres"
 #~ msgstr "穀神星"
@@ -11106,6 +11086,12 @@ msgstr ""
 #~ msgid "Galactic plane"
 #~ msgstr "銀河盤狀平面"
 
+#~ msgid "Add 1 sidereal month"
+#~ msgstr "加1個恆星月"
+
+#~ msgid "Add 1 sidereal century"
+#~ msgstr "加1個恆星世紀"
+
 #, qt-format
 #~ msgid "Epoch for minimum light: %1 JD"
 #~ msgstr "跨時代的最小光度: %1 儒略日"
@@ -11113,6 +11099,18 @@ msgstr ""
 #, qt-format
 #~ msgid "Epoch for maximum light: %1 JD"
 #~ msgstr "跨時代的最大光度: %1 儒略日"
+
+#~ msgid "Subtract 1 sidereal century"
+#~ msgstr "減1個恆星世紀"
+
+#~ msgid "Subtract 1 sidereal month"
+#~ msgstr "減1個恆星月"
+
+#~ msgid "Add 1 mean tropical century"
+#~ msgstr "加1個回歸世紀"
+
+#~ msgid "Subtract 1 mean tropical century"
+#~ msgstr "減1個回歸世紀"
 
 #, qt-format
 #~ msgid "This version of Stellarium is outdated! Latest version is %1."

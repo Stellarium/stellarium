@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-04 20:43+0600\n"
-"PO-Revision-Date: 2015-05-17 16:08+0000\n"
+"POT-Creation-Date: 2015-07-08 16:34+0600\n"
+"PO-Revision-Date: 2015-07-08 14:50+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-05 05:27+0000\n"
-"X-Generator: Launchpad (build 17597)\n"
+"X-Launchpad-Export-Date: 2015-07-09 05:25+0000\n"
+"X-Generator: Launchpad (build 17608)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
-#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:174
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:488 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -507,22 +507,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Дужина гасног репа (процена): %1 милиона километара"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:174 src/translations.h:62
+#: src/core/modules/SolarSystem.cpp:175 src/translations.h:62
 #: src/ui_viewDialog.h:1252
 msgid "Planets"
 msgstr "Планете"
 
-#: src/core/modules/SolarSystem.cpp:175
+#: src/core/modules/SolarSystem.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "Ознаке планета"
 
-#: src/core/modules/SolarSystem.cpp:176
+#: src/core/modules/SolarSystem.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "Орбите планета"
 
-#: src/core/modules/SolarSystem.cpp:177
+#: src/core/modules/SolarSystem.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "Руте планета"
@@ -685,8 +685,8 @@ msgid "Add 1 solar day"
 msgstr "Додајте 1 соларни дан"
 
 #: src/core/StelCore.cpp:202
-msgid "Add 1 solar week"
-msgstr "Додајте 1 соларну недељу"
+msgid "Add 7 solar days"
+msgstr "Dodaj 7 solarnih dana"
 
 #: src/core/StelCore.cpp:203
 msgid "Subtract 1 solar hour"
@@ -697,126 +697,94 @@ msgid "Subtract 1 solar day"
 msgstr "Одузмите 1 соларни дан"
 
 #: src/core/StelCore.cpp:205
-msgid "Subtract 1 solar week"
-msgstr "Одузмите 1 соларну недељу"
+msgid "Subtract 7 solar days"
+msgstr "Oduzmi 7 solarnih dana"
 
 #: src/core/StelCore.cpp:206
 msgid "Add 1 sidereal day"
 msgstr "Додајте 1 звездани дан"
 
 #: src/core/StelCore.cpp:207
-msgid "Add 1 sidereal week"
-msgstr "Додајте 1 звездану недељу"
-
-#: src/core/StelCore.cpp:208
-msgid "Add 1 sidereal month"
-msgstr "Додај 1 звездани месец"
-
-#: src/core/StelCore.cpp:209
 msgid "Add 1 sidereal year"
 msgstr "Додај 1 звездану годину"
 
-#: src/core/StelCore.cpp:210
-msgid "Add 1 sidereal century"
-msgstr "Додај један сидерички век"
-
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:208
 msgid "Add 1 synodic month"
 msgstr "Додајте 1 синодички месец"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:209
 msgid "Add 1 draconic month"
 msgstr "Додај један драконистички месец"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:210
 msgid "Add 1 draconic year"
 msgstr "Додај једну драконистичку годину"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:211
 msgid "Add 1 anomalistic month"
 msgstr "Додај један аномалистички месец"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:212
 msgid "Add 1 mean tropical month"
 msgstr "Додај један средњи тропски месец"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:213
 msgid "Add 1 mean tropical year"
 msgstr "Додај средњу тропску годину"
 
-#: src/core/StelCore.cpp:217
-msgid "Add 1 mean tropical century"
-msgstr "Додај средњи тропски век"
-
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:214
 msgid "Subtract 1 sidereal day"
 msgstr "Одузмите 1 звездани дан"
 
-#: src/core/StelCore.cpp:219
-msgid "Subtract 1 sidereal week"
-msgstr "Одузмите 1 звездану недељу"
-
-#: src/core/StelCore.cpp:220
-msgid "Subtract 1 sidereal month"
-msgstr "Одузми 1 звездани месец"
-
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:215
 msgid "Subtract 1 sidereal year"
 msgstr "Одузми 1 звездану годину"
 
-#: src/core/StelCore.cpp:222
-msgid "Subtract 1 sidereal century"
-msgstr "Одузми сидерички век"
-
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:216
 msgid "Subtract 1 synodic month"
 msgstr "Одузмите 1 синодички месец"
 
-#: src/core/StelCore.cpp:224
+#: src/core/StelCore.cpp:217
 msgid "Subtract 1 draconic month"
 msgstr "Одузми драконистички месец"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:218
 msgid "Subtract 1 draconic year"
 msgstr "Одузми драконистичку годину"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 anomalistic month"
 msgstr "Одузми аномалистички месец"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 mean tropical month"
 msgstr "Одузми средњи тропски месец"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 mean tropical year"
 msgstr "Одузми средњу тропску годину"
 
-#: src/core/StelCore.cpp:229
-msgid "Subtract 1 mean tropical century"
-msgstr "Одузми средњи тропски век"
-
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:223
 msgid "Set home planet to selected planet"
 msgstr "Поставите изабрану планету као матичну"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:224
 msgid "Go to home"
 msgstr "Иди на почетак"
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:225
 msgid "Flip scene horizontally"
 msgstr "Преокренути призор хоризонтално"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:226
 msgid "Flip scene vertically"
 msgstr "Преокренути призор вертикално"
 
-#: src/core/StelCore.cpp:1529
+#: src/core/StelCore.cpp:1461
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Исправка је онемогућена. Користити само уколико знате шта радите!"
 
-#: src/core/StelCore.cpp:1532
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -827,7 +795,7 @@ msgstr ""
 "у свом чланку <em>Ајнштајнова теорија релативитета потврђена древним "
 "помрачењима Сунца</em> (%1). За више информација, погледајте %2овде%3."
 
-#: src/core/StelCore.cpp:1535
+#: src/core/StelCore.cpp:1467
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -836,7 +804,7 @@ msgstr ""
 "Ову емпиријску једначину објавио је Г.М.Клеменс у чланку <em>На систему "
 "астрономских константи</em> (%1)."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1470
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -845,14 +813,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1474
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1478
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -863,7 +831,7 @@ msgstr ""
 "у интервалима од 5 до 10 дана почевши од 601. пре нове ере и 1649. нове ере. "
 "Исти однос је такође узет у сизиги Голдстиновим табелама."
 
-#: src/core/StelCore.cpp:1550
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -873,7 +841,7 @@ msgstr ""
 "Ову једначину објавили су П. М. Мулер и Ф. Р. Стивенсон у чланку <em>Убрзање "
 "Земље и месеца из раних астрономских посматрања</em> (%1)."
 
-#: src/core/StelCore.cpp:1553
+#: src/core/StelCore.cpp:1485
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -882,7 +850,7 @@ msgstr ""
 "Ову једначину објавио је Ф. Р. Стивенсон у чланку <em>Пре телескопска "
 "астрономска посматрања</em> (%1)."
 
-#: src/core/StelCore.cpp:1556
+#: src/core/StelCore.cpp:1488
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -895,7 +863,7 @@ msgstr ""
 "Полиномијалне апроксимације за корекцију делта Т  Е. Т- У. Т. у периоду од "
 "1800- 1975. </em> (%1) као део података које је објавио Броувер (1952)."
 
-#: src/core/StelCore.cpp:1559
+#: src/core/StelCore.cpp:1491
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -905,7 +873,7 @@ msgstr ""
 "програми и табеле од -4000 до +2800</em> 1986. године и у рачунарском "
 "програму за планетаријум \"RedShift\"."
 
-#: src/core/StelCore.cpp:1562
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -916,12 +884,12 @@ msgstr ""
 "<em>Дугопериодичне промене у Земљиној ротацији од 700. године пре нове ере "
 "до 1980. године нове ере</em> (%1)."
 
-#: src/core/StelCore.cpp:1565
+#: src/core/StelCore.cpp:1497
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Овај алгоритам се користи у рачунарском програму за планетаријум Водич 7."
 
-#: src/core/StelCore.cpp:1568
+#: src/core/StelCore.cpp:1500
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -931,7 +899,7 @@ msgstr ""
 "канон помрачења Сунца: 1986-2035</em> (1987) и у делу <em>Педесетогодишњи "
 "канон помрачења Месеца: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1571
+#: src/core/StelCore.cpp:1503
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -940,7 +908,7 @@ msgstr ""
 "Ову формулу извео је К.М. Борковски (%1) из анализе 31 Сунчевих помрачења "
 "евидентираних између 2137 пре нове ере и 1715 године нове ере."
 
-#: src/core/StelCore.cpp:1574
+#: src/core/StelCore.cpp:1506
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -953,7 +921,7 @@ msgstr ""
 "1988</em> (%1) подаци се поклапају са вредностима које су дали Стивенсон и "
 "Морисон (1984)."
 
-#: src/core/StelCore.cpp:1577
+#: src/core/StelCore.cpp:1509
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -963,7 +931,7 @@ msgstr ""
 "85 лунарне теорије у њиховој <em>Лунарне Табеле и Програми од 4000. пре нове "
 "ере до 8000. </em>(1991)."
 
-#: src/core/StelCore.cpp:1580
+#: src/core/StelCore.cpp:1512
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -974,7 +942,7 @@ msgstr ""
 "<em>Дугопериодичне флуктуације у Земљиној ротацији: од 700. године пре нове "
 "ере до 1990. године нове ере</em> (%1)."
 
-#: src/core/StelCore.cpp:1583
+#: src/core/StelCore.cpp:1515
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -983,7 +951,7 @@ msgstr ""
 "Ф. Р. Стивенсон објавио је ову формулу у својој књизи <em>Историјска "
 "помрачења и Земљина ротација</em> (%1)."
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1518
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -993,14 +961,14 @@ msgstr ""
 "употреби.  Табеле за 1620,2000, укључујући и варијације Чапронта, Чапронт-"
 "Тузеа и Франкоа (1997) за датуме који су ван 1620,2000."
 
-#: src/core/StelCore.cpp:1589
+#: src/core/StelCore.cpp:1521
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1592
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1009,7 +977,7 @@ msgstr ""
 "Овај полином је објављен у чланку Ј. Меуса и Л. Симонса  <em>Полиномне "
 "апроксимације за Делта Т, 1600-2000 АД</em> (%1)."
 
-#: src/core/StelCore.cpp:1595
+#: src/core/StelCore.cpp:1527
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1019,7 +987,7 @@ msgstr ""
 "рачунару </em> (2000) даје једноставан полиномијални податак 3. реда из "
 "блиске прошлости."
 
-#: src/core/StelCore.cpp:1598
+#: src/core/StelCore.cpp:1530
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1031,7 +999,7 @@ msgstr ""
 "табелирање </em> (2002). Засновано је на Ј. Меусовом <em> Астрономски "
 "алгоритми</em> (1991)."
 
-#: src/core/StelCore.cpp:1601
+#: src/core/StelCore.cpp:1533
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1042,7 +1010,7 @@ msgstr ""
 "<em>Историјске вредности грешака часовника на Земљи %1Т и рачунање "
 "помрачења</em> (%2) са додатком у (%3)."
 
-#: src/core/StelCore.cpp:1604
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1055,7 +1023,7 @@ msgstr ""
 "корене функције. Ово је засновано на могућем Стефенсоновом периодичном опису "
 "(%2). За више информација погледај %3овде%4"
 
-#: src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1065,11 +1033,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1539
 msgid "Used by default."
 msgstr "Користи као подразумевано."
 
-#: src/core/StelCore.cpp:1610
+#: src/core/StelCore.cpp:1542
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1079,7 +1047,7 @@ msgstr ""
 "Ово решење Б. Бањевића, базира се на раду Стивенсона и Морисона (1984), "
 "објављено у чланку <em>Античка помрачења и датум пада Вавилона</em> (%1)."
 
-#: src/core/StelCore.cpp:1613
+#: src/core/StelCore.cpp:1545
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1091,7 +1059,7 @@ msgstr ""
 "полиномијалне апроксимације делтаТ</em> (%1) и  поново разматрано 2013. од "
 "стране С. Ислама."
 
-#: src/core/StelCore.cpp:1616
+#: src/core/StelCore.cpp:1548
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1102,7 +1070,7 @@ msgstr ""
 "Мариам Султана и Фахем Заиди објавили у <em> Делта Т:Полиномијална "
 "апроксимација за временски период од 1620-2013</em>(%1)."
 
-#: src/core/StelCore.cpp:1619
+#: src/core/StelCore.cpp:1551
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1111,15 +1079,15 @@ msgstr ""
 "Ово је квадратна формула за рачунање %1Т са коефицијентима које је дефинисао "
 "корисник."
 
-#: src/core/StelCore.cpp:1622 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1554 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Greška"
 
-#: src/core/StelCore.cpp:1672
+#: src/core/StelCore.cpp:1604
 msgid "with meaningless values outside this range"
 msgstr "са безначајним вредностима ван опсега"
 
-#: src/core/StelCore.cpp:1698
+#: src/core/StelCore.cpp:1630
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1127,22 +1095,22 @@ msgstr ""
 "са средњом грешком мањом од једне секунде, максимална грешка 1.9s и "
 "безначајне вредности ван опсега"
 
-#: src/core/StelCore.cpp:1720 src/core/StelCore.cpp:1725
-#: src/core/StelCore.cpp:1752 src/core/StelCore.cpp:1757
-#: src/core/StelCore.cpp:1762
+#: src/core/StelCore.cpp:1652 src/core/StelCore.cpp:1657
+#: src/core/StelCore.cpp:1684 src/core/StelCore.cpp:1689
+#: src/core/StelCore.cpp:1694
 msgid "with zero values outside this range"
 msgstr "са нултим вредностима ван опсега"
 
-#: src/core/StelCore.cpp:1730
+#: src/core/StelCore.cpp:1662
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "са типичном 1-секундном тачношћу и нултом вредношћу ван опсега"
 
-#: src/core/StelCore.cpp:1772
+#: src/core/StelCore.cpp:1704
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Дозвољени опсег за употребу: између %1 и %2, %3 година."
 
-#: src/core/StelCore.cpp:1774
+#: src/core/StelCore.cpp:1706
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Дозвољени опсег за употребу: између %1 и %2 година."
@@ -1257,7 +1225,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:459
 msgid "Sinusoidal"
-msgstr ""
+msgstr "Sinusoidni"
 
 #: src/core/StelProjectorClasses.cpp:464
 msgid ""
@@ -1490,7 +1458,7 @@ msgstr "Без исправке"
 
 #: src/gui/ConfigurationDialog.cpp:1224
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Скоч (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1225
 msgid "Clemence (1948)"
@@ -2633,7 +2601,7 @@ msgstr "Женева"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:184
 msgid "Grossmugl"
-msgstr ""
+msgstr "Гросмуг"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:186
@@ -3907,7 +3875,7 @@ msgstr "&Понови"
 
 #: src/translations.h:527
 msgid "Cu&t"
-msgstr ""
+msgstr "Исеци"
 
 #: src/translations.h:528
 msgid "&Copy"
@@ -5373,7 +5341,7 @@ msgstr "Формат"
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Користите компресоване архиве за углове"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5545,7 +5513,7 @@ msgstr "Изабери претходни окулар"
 #: plugins/Oculars/src/Oculars.cpp:1462
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr ""
+msgstr "Ректасцензија/деклинација (Ј2000.0) крстића"
 
 #: plugins/Oculars/src/Oculars.cpp:1600
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
@@ -5766,7 +5734,7 @@ msgstr "Тренутно видно поље зависно од окулара/
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr ""
+msgstr "Право видно поље:"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
@@ -6931,16 +6899,16 @@ msgstr "Изаберите фасциклу"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Ректасцензија (Ј2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Деклинација (Ј2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:257
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:398
 msgid "Select one"
-msgstr ""
+msgstr "Изаберите један"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
@@ -7186,15 +7154,15 @@ msgstr "Извршни директоријум :"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:230
 msgid "Points"
-msgstr ""
+msgstr "Тачке"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:237
 msgid "Add point"
-msgstr ""
+msgstr "Додај тачку"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:238
 msgid "Remove selected"
-msgstr ""
+msgstr "Уклони изабрано"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -11227,6 +11195,18 @@ msgstr "Тренутна планета: Сатурн"
 #~ msgid "Planets labels"
 #~ msgstr "Ознаке планета"
 
+#~ msgid "Add 1 solar week"
+#~ msgstr "Додајте 1 соларну недељу"
+
+#~ msgid "Subtract 1 solar week"
+#~ msgstr "Одузмите 1 соларну недељу"
+
+#~ msgid "Add 1 sidereal week"
+#~ msgstr "Додајте 1 звездану недељу"
+
+#~ msgid "Subtract 1 sidereal week"
+#~ msgstr "Одузмите 1 звездану недељу"
+
 #~ msgid "Highest rate ever (1966 Leonids)"
 #~ msgstr "Највиши темпо икада (1966 Лиениди)"
 
@@ -11460,6 +11440,9 @@ msgstr "Тренутна планета: Сатурн"
 #~ msgid "Obliquity (of date): %1"
 #~ msgstr "Закошење (од датума): %1"
 
+#~ msgid "Add 1 sidereal month"
+#~ msgstr "Додај 1 звездани месец"
+
 #~ msgid "Past Developers"
 #~ msgstr "Последњи програмери"
 
@@ -11489,6 +11472,9 @@ msgstr "Тренутна планета: Сатурн"
 
 #~ msgid "Psamathe"
 #~ msgstr "Псамафа"
+
+#~ msgid "Subtract 1 sidereal month"
+#~ msgstr "Одузми 1 звездани месец"
 
 #~ msgid "Orcus"
 #~ msgstr "Орк"
@@ -11715,6 +11701,18 @@ msgstr "Тренутна планета: Сатурн"
 
 #~ msgid "(geometric)"
 #~ msgstr "geometrijski"
+
+#~ msgid "Add 1 sidereal century"
+#~ msgstr "Додај један сидерички век"
+
+#~ msgid "Add 1 mean tropical century"
+#~ msgstr "Додај средњи тропски век"
+
+#~ msgid "Subtract 1 mean tropical century"
+#~ msgstr "Одузми средњи тропски век"
+
+#~ msgid "Subtract 1 sidereal century"
+#~ msgstr "Одузми сидерички век"
 
 #~ msgid "Change Color"
 #~ msgstr "Промени боју"

@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-04 20:43+0600\n"
-"PO-Revision-Date: 2015-07-04 18:49+0000\n"
+"POT-Creation-Date: 2015-07-08 16:34+0600\n"
+"PO-Revision-Date: 2015-07-08 16:21+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-05 05:30+0000\n"
-"X-Generator: Launchpad (build 17597)\n"
+"X-Launchpad-Export-Date: 2015-07-09 05:27+0000\n"
+"X-Generator: Launchpad (build 17608)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
-#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:174
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:488 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -513,22 +513,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Довжина газового хвоста (приблизна): %1 млн. км"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:174 src/translations.h:62
+#: src/core/modules/SolarSystem.cpp:175 src/translations.h:62
 #: src/ui_viewDialog.h:1252
 msgid "Planets"
 msgstr "Планети"
 
-#: src/core/modules/SolarSystem.cpp:175
+#: src/core/modules/SolarSystem.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "Мітки планет"
 
-#: src/core/modules/SolarSystem.cpp:176
+#: src/core/modules/SolarSystem.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "Орбіти планет"
 
-#: src/core/modules/SolarSystem.cpp:177
+#: src/core/modules/SolarSystem.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "Траєкторії планет"
@@ -692,8 +692,8 @@ msgid "Add 1 solar day"
 msgstr "Додати 1 сонячний день"
 
 #: src/core/StelCore.cpp:202
-msgid "Add 1 solar week"
-msgstr "Додати 1 сонячний тиждень"
+msgid "Add 7 solar days"
+msgstr "Додати 7 солярних днів"
 
 #: src/core/StelCore.cpp:203
 msgid "Subtract 1 solar hour"
@@ -704,128 +704,96 @@ msgid "Subtract 1 solar day"
 msgstr "Відняти 1 сонячний день"
 
 #: src/core/StelCore.cpp:205
-msgid "Subtract 1 solar week"
-msgstr "Відняти 1 сонячний день"
+msgid "Subtract 7 solar days"
+msgstr "Відняти 7 солярних днів"
 
 #: src/core/StelCore.cpp:206
 msgid "Add 1 sidereal day"
 msgstr "Додати 1 зірковий день"
 
 #: src/core/StelCore.cpp:207
-msgid "Add 1 sidereal week"
-msgstr "Додати 1 зірковий тиждень"
-
-#: src/core/StelCore.cpp:208
-msgid "Add 1 sidereal month"
-msgstr "Додати 1 сидеричний місяць"
-
-#: src/core/StelCore.cpp:209
 msgid "Add 1 sidereal year"
 msgstr "Додати 1 сидеричний рік"
 
-#: src/core/StelCore.cpp:210
-msgid "Add 1 sidereal century"
-msgstr "Додати одне сидеричне століття"
-
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:208
 msgid "Add 1 synodic month"
 msgstr "Додати один синодичний місяць"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:209
 msgid "Add 1 draconic month"
 msgstr "Додати один драконічний місяць"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:210
 msgid "Add 1 draconic year"
 msgstr "Додати один драконічний рік"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:211
 msgid "Add 1 anomalistic month"
 msgstr "Додати один аномалістичний місяць"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:212
 msgid "Add 1 mean tropical month"
 msgstr "Додати один середній тропічний місяць"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:213
 msgid "Add 1 mean tropical year"
 msgstr "Додати один середній тропічний рік"
 
-#: src/core/StelCore.cpp:217
-msgid "Add 1 mean tropical century"
-msgstr "Додати одне середнє тропічне століття"
-
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:214
 msgid "Subtract 1 sidereal day"
 msgstr "Відняти 1 зірковий день"
 
-#: src/core/StelCore.cpp:219
-msgid "Subtract 1 sidereal week"
-msgstr "Відняти 1 зірковий тиждень"
-
-#: src/core/StelCore.cpp:220
-msgid "Subtract 1 sidereal month"
-msgstr "Відняти 1 сидеричний місяць"
-
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:215
 msgid "Subtract 1 sidereal year"
 msgstr "Відняти 1 сидеричний рік"
 
-#: src/core/StelCore.cpp:222
-msgid "Subtract 1 sidereal century"
-msgstr "Відняти одне сидеричне століття"
-
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:216
 msgid "Subtract 1 synodic month"
 msgstr "Відняти один синодичний рік"
 
-#: src/core/StelCore.cpp:224
+#: src/core/StelCore.cpp:217
 msgid "Subtract 1 draconic month"
 msgstr "Відняти один драконічний місяць"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:218
 msgid "Subtract 1 draconic year"
 msgstr "Відняти один драконічний рік"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 anomalistic month"
 msgstr "Відняти один аномалістичний місяць"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 mean tropical month"
 msgstr "Відняти один середній тропічний місяць"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 mean tropical year"
 msgstr "Відняти один середній тропічний рік"
 
-#: src/core/StelCore.cpp:229
-msgid "Subtract 1 mean tropical century"
-msgstr "Відняти одне середнє тропічне століття"
-
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:223
 msgid "Set home planet to selected planet"
 msgstr "Встановити позначену планету як домашню"
 
-#: src/core/StelCore.cpp:232
+#: src/core/StelCore.cpp:224
 msgid "Go to home"
 msgstr "Домівка"
 
-#: src/core/StelCore.cpp:233
+#: src/core/StelCore.cpp:225
 msgid "Flip scene horizontally"
 msgstr "Повернути горизонтально"
 
-#: src/core/StelCore.cpp:234
+#: src/core/StelCore.cpp:226
 msgid "Flip scene vertically"
 msgstr "Повернути вертикально"
 
-#: src/core/StelCore.cpp:1529
+#: src/core/StelCore.cpp:1461
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Виправлення вимкнено! Користуйтеся ним, лише якщо вам добре відомі наслідки "
 "ваших дій!"
 
-#: src/core/StelCore.cpp:1532
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -838,7 +806,7 @@ msgstr ""
 "Айнштайна підтверджено на основі даних про сонячні затемнення, відомих з "
 "історії</em>). Докладніші відомості можна знайти %2тут%3."
 
-#: src/core/StelCore.cpp:1535
+#: src/core/StelCore.cpp:1467
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -848,7 +816,7 @@ msgstr ""
 "system of astronomical constants</em> (%1) (<em>Про систему астрономічних "
 "сталих</em>)."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1470
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -862,7 +830,7 @@ msgstr ""
 "(<em>Астрономічні формули для обчислень</em>). Також цю формулу реалізовано "
 "у комп’ютерній програмі SunTracker Pro."
 
-#: src/core/StelCore.cpp:1542
+#: src/core/StelCore.cpp:1474
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -873,7 +841,7 @@ msgstr ""
 "у книзі <em>Canon of Solar Eclipses</em> (<em>Закони сонячних "
 "затемнень</em>), авторами якої є Mucke та Meeus (1983)."
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1478
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -885,7 +853,7 @@ msgstr ""
 "1649 р. н.е. Те саме співвідношення також неявно використано у таблицях "
 "Goldstine (1973)."
 
-#: src/core/StelCore.cpp:1550
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -897,7 +865,7 @@ msgstr ""
 "observations</em> (%1) (<em>Прискорення Землі та Місяця на основі нещодавніх "
 "астрономічних спостережень</em>)."
 
-#: src/core/StelCore.cpp:1553
+#: src/core/StelCore.cpp:1485
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -907,7 +875,7 @@ msgstr ""
 "Astronomical Observations</em> (%1) (<em>Астрономічні спостереження до появи "
 "телескопів</em>)."
 
-#: src/core/StelCore.cpp:1556
+#: src/core/StelCore.cpp:1488
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -921,7 +889,7 @@ msgstr ""
 "in the period 1800-1975</em> (%1) як апроксимацію даних, опублікованих "
 "Brouwer (1952)."
 
-#: src/core/StelCore.cpp:1559
+#: src/core/StelCore.cpp:1491
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -931,7 +899,7 @@ msgstr ""
 "Programs and Tables from -4000 to +2800</em> (1986), а також у комп’ютерній "
 "програмі RedShift."
 
-#: src/core/StelCore.cpp:1562
+#: src/core/StelCore.cpp:1494
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -943,11 +911,11 @@ msgstr ""
 "1980</em> (%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до "
 "н.е. до 1980 р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:1565
+#: src/core/StelCore.cpp:1497
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Цей алгоритм використано у комп’ютерному планетарії Guide 7."
 
-#: src/core/StelCore.cpp:1568
+#: src/core/StelCore.cpp:1500
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -957,7 +925,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) і <em>Fifty Year Canon of Lunar Eclipses: "
 "1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1571
+#: src/core/StelCore.cpp:1503
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -966,7 +934,7 @@ msgstr ""
 "Цю формулу було отримано K.M. Borkowski (%1) на основі аналізу записів щодо "
 "31 сонячного затемнення від 2137 р. до н.е. до 1715 р. н.е."
 
-#: src/core/StelCore.cpp:1574
+#: src/core/StelCore.cpp:1506
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -979,7 +947,7 @@ msgstr ""
 "1988</em> (%1) як апроксимацію за даними, наведеними Stephenson і Morrison "
 "(1984)."
 
-#: src/core/StelCore.cpp:1577
+#: src/core/StelCore.cpp:1509
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -989,7 +957,7 @@ msgstr ""
 "версії надточної теорії місячного руху у період 2000-85 у праці <em>Lunar "
 "Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:1580
+#: src/core/StelCore.cpp:1512
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -1001,7 +969,7 @@ msgstr ""
 "(%1) (<em>Довготривалі зміни у обертанні Землі — від 700 р. до н.е. до 1990 "
 "р. н.е.</em>)."
 
-#: src/core/StelCore.cpp:1583
+#: src/core/StelCore.cpp:1515
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -1011,7 +979,7 @@ msgstr ""
 "Earth's Rotation</em> (%1) (<em>Історичні затемнення та обертання "
 "Землі</em>)."
 
-#: src/core/StelCore.cpp:1586
+#: src/core/StelCore.cpp:1518
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -1021,7 +989,7 @@ msgstr ""
 "Широко використовується. Таблиця для 1620–2000 років. Включено варіант "
 "Chapront, Chapront-Touze та Francou (1997) для дат поза діапазоном 1620–2000."
 
-#: src/core/StelCore.cpp:1589
+#: src/core/StelCore.cpp:1521
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -1031,7 +999,7 @@ msgstr ""
 "реактивного руху NASA для показу даних на інтерактивному сайті %1JPL "
 "Horizons%2."
 
-#: src/core/StelCore.cpp:1592
+#: src/core/StelCore.cpp:1524
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -1040,7 +1008,7 @@ msgstr ""
 "Цей поліному було опубліковано J. Meeus і L. Simons у статті <em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:1595
+#: src/core/StelCore.cpp:1527
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -1051,7 +1019,7 @@ msgstr ""
 "комп’ютері</em>) наведено просте поліноміальне наближення 3-го порядку "
 "точності лише для нещодавніх дат у минулому."
 
-#: src/core/StelCore.cpp:1598
+#: src/core/StelCore.cpp:1530
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -1063,7 +1031,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Її засновано на даних книги Jean "
 "Meeus <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:1601
+#: src/core/StelCore.cpp:1533
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1074,7 +1042,7 @@ msgstr ""
 "статті <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) з додатковими даними у (%3)."
 
-#: src/core/StelCore.cpp:1604
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1088,7 +1056,7 @@ msgstr ""
 "можливій періодичності, описаній Stephenson (%2). Докладніші дані можна "
 "знайти %3тут%4."
 
-#: src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1104,11 +1072,11 @@ msgstr ""
 "Eclipses: -1900 to +3000</em> цих же авторів (2006). Також цю формулу "
 "використано у програмі для обчислення ефемерид Сонця, Місяця та планет SOLEX."
 
-#: src/core/StelCore.cpp:1607
+#: src/core/StelCore.cpp:1539
 msgid "Used by default."
 msgstr "Використовується типово."
 
-#: src/core/StelCore.cpp:1610
+#: src/core/StelCore.cpp:1542
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1120,7 +1088,7 @@ msgstr ""
 "eclipses and dating the fall of Babylon</em> (затемнення у давнину та "
 "датування падіння Вавилона) (%1)."
 
-#: src/core/StelCore.cpp:1613
+#: src/core/StelCore.cpp:1545
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1132,7 +1100,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), а потім уточнено Sana Islam у "
 "2013 році."
 
-#: src/core/StelCore.cpp:1616
+#: src/core/StelCore.cpp:1548
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1143,7 +1111,7 @@ msgstr ""
 "Khalid, Mariam Sultana та Faheem Zaidi у роботі <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:1619
+#: src/core/StelCore.cpp:1551
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -1152,15 +1120,15 @@ msgstr ""
 "Це квадратична формула для обчислення %1T з коефіцієнтами, визначеними "
 "користувачем."
 
-#: src/core/StelCore.cpp:1622 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1554 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Помилка"
 
-#: src/core/StelCore.cpp:1672
+#: src/core/StelCore.cpp:1604
 msgid "with meaningless values outside this range"
 msgstr "з помилковими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1698
+#: src/core/StelCore.cpp:1630
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -1168,23 +1136,23 @@ msgstr ""
 "з середньою помилкою у менше ніж одну секунду, максимальна помилка — 1,9 с, "
 "помилкові значення поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1720 src/core/StelCore.cpp:1725
-#: src/core/StelCore.cpp:1752 src/core/StelCore.cpp:1757
-#: src/core/StelCore.cpp:1762
+#: src/core/StelCore.cpp:1652 src/core/StelCore.cpp:1657
+#: src/core/StelCore.cpp:1684 src/core/StelCore.cpp:1689
+#: src/core/StelCore.cpp:1694
 msgid "with zero values outside this range"
 msgstr "з нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1730
+#: src/core/StelCore.cpp:1662
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "з типовою односекундною точністю та нульовими значеннями поза цим діапазоном"
 
-#: src/core/StelCore.cpp:1772
+#: src/core/StelCore.cpp:1704
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Коректний діапазон використання: від %1 до %2 року, %3."
 
-#: src/core/StelCore.cpp:1774
+#: src/core/StelCore.cpp:1706
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Коректний діапазон використання: від %1 до %2 року."
@@ -11481,6 +11449,18 @@ msgstr "Поточна планета: Сатурн"
 #~ msgid "Nebulas"
 #~ msgstr "Туманності"
 
+#~ msgid "Add 1 solar week"
+#~ msgstr "Додати 1 сонячний тиждень"
+
+#~ msgid "Subtract 1 solar week"
+#~ msgstr "Відняти 1 сонячний день"
+
+#~ msgid "Add 1 sidereal week"
+#~ msgstr "Додати 1 зірковий тиждень"
+
+#~ msgid "Subtract 1 sidereal week"
+#~ msgstr "Відняти 1 зірковий тиждень"
+
 #~ msgid "This system does not support OpenGL."
 #~ msgstr "Система не підтримує OpenGL."
 
@@ -12035,6 +12015,12 @@ msgstr "Поточна планета: Сатурн"
 #~ msgid "Additional info (Extra 3)"
 #~ msgstr "Додаткові дані (поле 3)"
 
+#~ msgid "Subtract 1 sidereal month"
+#~ msgstr "Відняти 1 сидеричний місяць"
+
+#~ msgid "Add 1 sidereal month"
+#~ msgstr "Додати 1 сидеричний місяць"
+
 #~ msgid "Show Galactic plane line"
 #~ msgstr "Показувати лінію галактичної площини"
 
@@ -12299,6 +12285,18 @@ msgstr "Поточна планета: Сатурн"
 #, qt-format
 #~ msgid "Ecliptic Topocentric (of date): %1/%2"
 #~ msgstr "Екліптичні топоцентричні (на дату): %1/%2"
+
+#~ msgid "Subtract 1 mean tropical century"
+#~ msgstr "Відняти одне середнє тропічне століття"
+
+#~ msgid "Subtract 1 sidereal century"
+#~ msgstr "Відняти одне сидеричне століття"
+
+#~ msgid "Add 1 mean tropical century"
+#~ msgstr "Додати одне середнє тропічне століття"
+
+#~ msgid "Add 1 sidereal century"
+#~ msgstr "Додати одне сидеричне століття"
 
 #~ msgid "plutoid"
 #~ msgstr "плутоїд"
