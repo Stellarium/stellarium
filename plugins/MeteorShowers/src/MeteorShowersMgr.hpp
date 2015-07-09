@@ -53,8 +53,8 @@ file (section [MeteorShowers]).
 class MeteorShowersMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enableMeteorShowers READ getEnableMeteorShowers WRITE setEnableMeteorShowers)
-	Q_PROPERTY(bool enableLabels        READ getEnableLabels        WRITE setEnableLabels)
+	Q_PROPERTY(bool enablePlugin READ getEnablePlugin WRITE setEnablePlugin)
+	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels)
 
 public:
 	//! Constructor.
@@ -83,7 +83,7 @@ public:
 
 	//! Returns the plugin status.
 	//! @return true if the Meteor Showers plugin is enabled.
-	bool getEnableMeteorShowers() { return m_enableMeteorShowers; }
+	bool getEnablePlugin() { return m_enablePlugin; }
 
 	//! True if user wants to see the active radiants only.
 	void setActiveRadiantOnly(const bool& b);
@@ -193,12 +193,12 @@ private:
 	QSettings* m_conf;
 	QString m_catalogPath;
 
+	bool m_enablePlugin;
 	bool m_activeRadiantOnly;
 	bool m_enableAtStartup;
 	bool m_enableButtons;
 	bool m_enableLabels;
 	bool m_enableMarker;
-	bool m_enableMeteorShowers;
 
 	Vec3f m_colorARR;        //! color of active radiant based on real data
 	Vec3f m_colorARG;        //! color of active radiant based on generic data
@@ -227,7 +227,7 @@ private:
 
 	//! Enable/disable the Meteor Showers plugin.
 	//! It'll be triggered by a StelAction! So, it should NOT be called directly!
-	void setEnableMeteorShowers(const bool& b) { m_enableMeteorShowers = b; }
+	void setEnablePlugin(const bool& b) { m_enablePlugin = b; }
 
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
