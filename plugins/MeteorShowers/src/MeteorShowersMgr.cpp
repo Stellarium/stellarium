@@ -47,12 +47,12 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_configDialog(NULL)
 	, m_toolbarEnableButton(NULL)
 	, m_conf(StelApp::getInstance().getSettings())
+	, m_enablePlugin(false)
 	, m_activeRadiantOnly(false)
 	, m_enableAtStartup(true)
 	, m_enableButtons(true)
 	, m_enableLabels(true)
 	, m_enableMarker(true)
-	, m_enableMeteorShowers(false)
 	, m_messageTimer(NULL)
 	, m_isUpdating(false)
 	, m_enableUpdates(true)
@@ -144,9 +144,9 @@ bool MeteorShowersMgr::configureGui(bool show)
 void MeteorShowersMgr::createActions()
 {
 	QString msGroup = N_("Meteor Showers");
-	addAction("actionShow_MeteorShowers",               msGroup, N_("Toogle Meteor Showers"), this,           "enableMeteorShowers", "Ctrl+Alt+M");
-	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Radiant Labels"),        this,           "enableLabels",        "Shift+M");
-	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show Settings Dialog"),  m_configDialog, "visible",             "Ctrl+Shift+M");
+	addAction("actionShow_MeteorShowers",               msGroup, N_("Toogle Meteor Showers"), this,           "enablePlugin", "Ctrl+Alt+M");
+	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Radiant Labels"),        this,           "enableLabels", "Shift+M");
+	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show Settings Dialog"),  m_configDialog, "visible",      "Ctrl+Shift+M");
 }
 
 void MeteorShowersMgr::createToolbarButtons()
@@ -274,7 +274,7 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 
 void MeteorShowersMgr::update(double deltaTime)
 {
-	if (!m_enableMeteorShowers)
+	if (!m_enablePlugin)
 	{
 		return;
 	}
@@ -306,7 +306,7 @@ void MeteorShowersMgr::update(double deltaTime)
 
 void MeteorShowersMgr::draw(StelCore* core)
 {
-	if (m_enableMeteorShowers)
+	if (m_enablePlugin)
 	{
 		m_meteorShowers->draw(core);
 	}
