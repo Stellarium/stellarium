@@ -20,8 +20,9 @@
 #ifndef METEORSHOWERSMGR_HPP_
 #define METEORSHOWERSMGR_HPP_
 
-#include "MeteorObj.hpp"
-#include "MeteorShowers.hpp"
+#include <QNetworkReply>
+
+#include "StelGuiItems.hpp"
 #include "StelObjectModule.hpp"
 
 #define MS_CATALOG_VERSION 1
@@ -29,9 +30,6 @@
 
 class MeteorShowers;
 class MeteorShowerDialog;
-class QNetworkAccessManager;
-class QNetworkReply;
-class StelButton;
 
 /*! @defgroup meteorShowers Meteor Showers Plug-in
 @{
