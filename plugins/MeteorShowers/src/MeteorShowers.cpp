@@ -17,25 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDir>
 #include <QtMath>
-#include <QNetworkReply>
-#include <QSettings>
-#include <QTimer>
 
-#include "LabelMgr.hpp"
-#include "MeteorShowerDialog.hpp"
 #include "MeteorShowers.hpp"
-#include "Planet.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelFileMgr.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelProgressController.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 
