@@ -618,9 +618,10 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		if (!move.targetObject.isNull())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			//move.aim = core->altAzToJ2000(move.targetObject->getAltAzPosAuto(core), StelCore::RefractionOff);
 			Vec3d targetPosAltAz=move.targetObject->getAltAzPosAuto(core);
 			// In case we have offset center, we want object still visible in center.
+			// Note that if we do not center on an object, we set view direction of the potentially offset screen center!
+			// This is by design, to allow accurate setting of display coordinates.
 			double alt, az;
 			StelUtils::rectToSphe(&az, &alt, targetPosAltAz);
 			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*core->getCurrentStelProjectorParams().fov*M_PI/180.0f;
