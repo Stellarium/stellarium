@@ -19,24 +19,17 @@
 
 #include <QDir>
 #include <QJsonDocument>
-#include <QNetworkReply>
 #include <QSettings>
 #include <QTimer>
-#include <QtMath>
 
 #include "LabelMgr.hpp"
 #include "MeteorShowerDialog.hpp"
 #include "MeteorShowersMgr.hpp"
-#include "Planet.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
