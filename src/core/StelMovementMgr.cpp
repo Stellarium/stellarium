@@ -618,7 +618,15 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		if (!move.targetObject.isNull())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = core->altAzToJ2000(move.targetObject->getAltAzPosAuto(core), StelCore::RefractionOff);
+			//move.aim = core->altAzToJ2000(move.targetObject->getAltAzPosAuto(core), StelCore::RefractionOff);
+			Vec3d targetPosAltAz=move.targetObject->getAltAzPosAuto(core);
+			// In case we have offset center, we want object still visible in center.
+			double alt, az;
+			StelUtils::rectToSphe(&az, &alt, targetPosAltAz);
+			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*core->getCurrentStelProjectorParams().fov*M_PI/180.0f;
+			alt+=altOffset;
+			StelUtils::spheToRect(az, alt, targetPosAltAz);
+			move.aim=core->altAzToJ2000(targetPosAltAz, StelCore::RefractionOff);
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -687,6 +695,14 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
 			Vec3d v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+
+			// In case we have offset center, we want object still visible in center.
+			double alt, az;
+			StelUtils::rectToSphe(&az, &alt, v);
+			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*core->getCurrentStelProjectorParams().fov*M_PI/180.0f;
+			alt+=altOffset;
+			StelUtils::spheToRect(az, alt, v);
+
 			setViewDirectionJ2000(core->altAzToJ2000(v, StelCore::RefractionOff));
 		}
 		else
