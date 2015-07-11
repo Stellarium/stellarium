@@ -1,7 +1,6 @@
 /*
  * Stellarium: Meteor Showers Plug-in
- * Copyright (C) 2013 Marcos Cardinot
- * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2013-2015 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,117 +37,104 @@
 
 class MeteorShower : public StelObject
 {
-	friend class MeteorShowers;
-
 public:
-	enum RadiantStatus {
-		INACTIVE,        // inactive radiant.
-		ACTIVE_REAL,     // active radiant - real data.
-		ACTIVE_GENERIC   // active radiant - generic data.
+	//! @enum Meteor Shower status.
+	enum Status {
+		INVALID,         // not initialized properly
+		INACTIVE,        // inactive radiant
+		ACTIVE_REAL,     // active radiant - real data
+		ACTIVE_GENERIC   // active radiant - generic data
 	};
 
-	//! @param id The official ID designation for a meteor shower, e.g. "LYR"
+	//! Constructor
+	//! @param map QVariantMap containing all the data about a Meteor Shower.
 	MeteorShower(const QVariantMap& map);
+
+	//! Destructor
 	~MeteorShower();
 
-	//! Get a QVariantMap which describes the meteor shower. Could be used to
-	//! create a duplicate.
+	//! Update
+	void update(double deltaTime);
+
+	//! Draw
+	void draw(StelCore *core);
+
+	//! Update value of current information(zhr, variable, stat, finish and peak)
+	//! @param current sky QDateTime
+	void updateCurrentData(QDateTime skyDate);
+
+	bool enabled() { return m_enabled; }
+
+	//! Gets a QVariantMap which describes the meteor shower.
+	//! Could be used to create a duplicate.
 	QVariantMap getMap();
 
-	virtual QString getType(void) const
-	{
-		return "MeteorShower";
-	}
-	virtual float getSelectPriority(const StelCore* core) const;
+	//! Gets the meteor shower id
+	//! //! @return designation
+	QString getDesignation() const;
 
-	//! Get an HTML string to describe the object
-	//! @param core A pointer to the core
-	//! @flags a set of flags with information types to include.
-	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
-	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
-	{
-		return XYZ;
-	}
-	virtual double getAngularSize(const StelCore* core) const;
-	virtual QString getNameI18n(void) const
-	{
-		return q_(designation.trimmed());
-	}
-	virtual QString getEnglishName(void) const
-	{
-		return designation.trimmed();
-	}
-	QString getDesignation(void) const;
-	void update(double deltaTime);
-	static bool showLabels;
+	//! Gets the current meteor shower status
+	//! @return status
+	Status getStatus() { return m_status; }
 
-	//! Get current activity status of MS
-	//! @return 0:inactive 1:activeRealData 2:activeGenericData
-	int getStatus() { return status; }
-
-	//! Get peak
+	//! Gets the peak
 	//! @return peak
-	QDateTime getPeak()
-	{
-		return peak;
-	}
+	QDateTime getPeak() { return m_peak; }
 
-	//! Get zhr
+	//! Gets the current ZHR
 	//! @return ZHR
-	int getZHR()
-	{
-		return zhr;
-	}
+	int getZHR() { return m_zhr; }
+
+	//
+	// Methods defined in StelObject class
+	//
+	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
+	virtual QString getType(void) const { return "MeteorShower"; }
+	virtual QString getEnglishName(void) const { return m_designation.trimmed(); }
+	virtual QString getNameI18n(void) const	{ return q_(m_designation.trimmed()); }
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const { return m_position; }
+	virtual float getSelectPriority(const StelCore* core) const { return -4.0; }
+	virtual Vec3f getInfoColor(void) const;
+	virtual double getAngularSize(const StelCore* core) const { return 0.001; }
 
 private:
-	Vec3d XYZ;                      //! Cartesian equatorial position
-	Vec3d XY;                       //! Store temporary 2D position
-
-	static StelTextureSP radiantTexture;
-	static bool radiantMarkerEnabled;
-	static bool showActiveRadiantsOnly;
-
 	typedef struct
 	{
-		QString year;		   //! Value of year for actual data
-		int zhr;		   //! ZHR of shower
-		QString variable;	   //! value of variable for ZHR
-		QString start;		   //! First day for activity
-		QString finish;		   //! Latest day for activity
-		QString peak;		   //! Day with maximum for activity
+		QString year;              //! Value of year for actual data
+		int zhr;                   //! The ZHR on peak
+		QString variable;          //! The ZHR range when it's variable
+		QString start;             //! First day for activity
+		QString finish;            //! Latest day for activity
+		QString peak;              //! Day with maximum for activity
 	} activityData;
 
-	bool initialized;
-	bool active;
+	Status m_status;                 //! Meteor shower status
+	bool m_enabled;                    //! True if the meteor shower is being displayed
 
-	QList<MeteorObj*> activeMeteors; //! List of active meteors
-
-	QString showerID;		//! The ID of the meteor shower
-	QString designation;            //! The designation of the meteor shower
-	QList<activityData> activity;	//! List of activity
-	int speed;                      //! Speed of meteors
-	float rAlphaPeak;               //! R.A. for radiant of meteor shower on the peak day
-	float rDeltaPeak;               //! Dec. for radiant of meteor shower on the peak day
-	float driftAlpha;		//! Drift of R.A.
-	float driftDelta;		//! Drift of Dec.
-	QString parentObj;		//! Parent object for meteor shower
-	float pidx;			//! The population index
-	QList<Meteor::colorPair> colors;//! <colorName, 0-100>
+	// data from catalog
+	QString m_showerID;                //! The ID of the meteor shower
+	QString m_designation;             //! The designation of the meteor shower
+	QList<activityData> m_activity;    //! Activity list
+	int m_speed;                       //! Speed of meteors
+	float m_rAlphaPeak;                //! R.A. for radiant of meteor shower on the peak day
+	float m_rDeltaPeak;                //! Dec. for radiant of meteor shower on the peak day
+	float m_driftAlpha;                //! Drift of R.A.
+	float m_driftDelta;                //! Drift of Dec.
+	QString m_parentObj;               //! Parent object for meteor shower
+	float m_pidx;                      //! The population index
+	QList<Meteor::colorPair> m_colors; //! <colorName, 0-100>
 
 	//current information
-	double radiantAlpha;            //! Current R.A. for radiant of meteor shower
-	double radiantDelta;            //! Current Dec. for radiant of meteor shower
-	int zhr;			//! ZHR of shower
-	QString variable;		//! value of variable for ZHR
-	QDateTime start;		//! First day for activity
-	QDateTime finish;		//! Latest day for activity
-	QDateTime peak;			//! Day with maximum for activity
+	Vec3d m_position;                  //! Cartesian equatorial position
+	double m_radiantAlpha;             //! Current R.A. for radiant of meteor shower
+	double m_radiantDelta;             //! Current Dec. for radiant of meteor shower
+	int m_zhr;                         //! ZHR of shower
+	QString m_variable;                //! value of variable for ZHR
+	QDateTime m_start;                 //! First day for activity
+	QDateTime m_finish;                //! Latest day for activity
+	QDateTime m_peak;                  //! Day with maximum for activity
 
-	int status;		        //! Check if the radiant is active for the current sky date
-					//! 0=inactive; 1=realData 2=genericData
-
-	void draw(StelCore *core);
+	QList<MeteorObj*> m_activeMeteors; //! List with all the active meteors
 
 	//! Calculate value of ZHR using normal distribution
 	//! @param zhr
@@ -181,10 +167,6 @@ private:
 	//! Get the current sky QDateTime
 	//! @return Current QDateTime of sky
 	QDateTime getSkyQDateTime(StelCore *core) const;
-
-	//! Update value of current information(zhr, variable, stat, finish and peak)
-	//! @param current sky QDateTime
-	void updateCurrentData(QDateTime skyDate);
 
 	//! Check if the JSON file has real data to a given year
 	//! @param yyyy year to check
