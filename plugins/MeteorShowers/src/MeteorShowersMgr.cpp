@@ -168,19 +168,19 @@ void MeteorShowersMgr::loadConfig()
 {
 	m_conf->beginGroup(MS_CONFIG_PREFIX);
 
-	setActiveRadiantOnly(m_conf->value("flag_active_radiant_only", true).toBool());
-	setButtonsEnabled(m_conf->value("flag_buttons", true).toBool());
-	setColorARG(StelUtils::strToVec3f(m_conf->value("colorARG", "0,255,240").toString()));
-	setColorARR(StelUtils::strToVec3f(m_conf->value("colorARR", "255,240,0").toString()));
-	setColorIR(StelUtils::strToVec3f(m_conf->value("colorIR", "255,255,255").toString()));
-	setEnableAtStartup(m_conf->value("enable_at_startup", true).toBool());
-	setFontSize(m_conf->value("font_size", 13).toInt());
-	setEnableLabels(m_conf->value("flag_radiant_labels", true).toBool());
-	setEnableMarker(m_conf->value("flag_radiant_marker", true).toBool());
-	setUpdateFrequencyHours(m_conf->value("update_frequency_hours", 720).toInt());
-	setEnableUpdates(m_conf->value("updates_enabled", true).toBool());
-	setUrl(m_conf->value("url", "http://stellarium.org/json/showers.json").toString());
-	setLastUpdate(m_conf->value("last_update", "2015-07-01T00:00:00").toDateTime());
+	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
+	setButtonsEnabled(m_conf->value(MS_CONFIG_PREFIX + "/flag_buttons", true).toBool());
+	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0,255,240").toString()));
+	setColorARR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARR", "255,240,0").toString()));
+	setColorIR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "255,255,255").toString()));
+	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());
+	setFontSize(m_conf->value(MS_CONFIG_PREFIX + "/font_size", 13).toInt());
+	setEnableLabels(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_labels", true).toBool());
+	setEnableMarker(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_marker", true).toBool());
+	setUpdateFrequencyHours(m_conf->value(MS_CONFIG_PREFIX + "/update_frequency_hours", 720).toInt());
+	setEnableUpdates(m_conf->value(MS_CONFIG_PREFIX + "/updates_enabled", true).toBool());
+	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "http://stellarium.org/json/showers.json").toString());
+	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
 
 	m_conf->endGroup();
 }
