@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QtMath>
+
 #include "MeteorShower.hpp"
 #include "MeteorShowers.hpp"
 #include "SporadicMeteorMgr.hpp"
@@ -25,8 +27,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
-
-#include <QtMath>
 
 MeteorShower::MeteorShower(const QVariantMap& map)
 	: m_status(INVALID)
@@ -95,49 +95,6 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 
 MeteorShower::~MeteorShower()
 {
-}
-
-QString MeteorShower::getDateFromJSON(QString jsondate) const
-{
-	QStringList parsedDate = jsondate.split(".");
-	return QString("%1 %2").arg(parsedDate.at(1).toInt()).arg(getMonthName(parsedDate.at(0).toInt()));
-}
-
-QString MeteorShower::getDayFromJSON(QString jsondate) const
-{
-	QStringList parsedDate = jsondate.split(".");
-	return QString("%1").arg(parsedDate.at(1).toInt());
-}
-
-int MeteorShower::getMonthFromJSON(QString jsondate) const
-{
-	QStringList parsedDate = jsondate.split(".");
-	return parsedDate.at(0).toInt();
-}
-
-QString MeteorShower::getMonthNameFromJSON(QString jsondate) const
-{
-	QStringList parsedDate = jsondate.split(".");
-	return QString("%1").arg(getMonthName(parsedDate.at(0).toInt()));
-}
-
-QString MeteorShower::getMonthName(int number) const
-{
-	QStringList monthList;
-	monthList.append(N_("January"));
-	monthList.append(N_("February"));
-	monthList.append(N_("March"));
-	monthList.append(N_("April"));
-	monthList.append(N_("May"));
-	monthList.append(N_("June"));
-	monthList.append(N_("July"));
-	monthList.append(N_("August"));
-	monthList.append(N_("September"));
-	monthList.append(N_("October"));
-	monthList.append(N_("November"));
-	monthList.append(N_("December"));
-
-	return q_(monthList.at(number-1));
 }
 
 void MeteorShower::update(double deltaTime)
@@ -217,8 +174,8 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	QString yearBase = m_activity[index].year == "generic" ? skyDate.toString("yyyy") : m_activity[index].year;
 	QString yearS, yearF;
 
-	int monthStart = getMonthFromJSON(dateStart);
-	int monthFinish = getMonthFromJSON(dateFinish);
+	int monthStart = dateStart.split(".").at(0).toInt();
+	int monthFinish = dateFinish.split(".").at(0).toInt();
 
 	if(monthStart > monthFinish)
 	{
