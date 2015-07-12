@@ -106,7 +106,7 @@ private:
 		QString start;             //! First day for activity
 		QString finish;            //! Latest day for activity
 		QString peak;              //! Day with maximum for activity
-	} activityData;
+	} Activity;
 
 	Status m_status;                 //! Meteor shower status
 	bool m_enabled;                    //! True if the meteor shower is being displayed
@@ -114,7 +114,7 @@ private:
 	// data from catalog
 	QString m_showerID;                //! The ID of the meteor shower
 	QString m_designation;             //! The designation of the meteor shower
-	QList<activityData> m_activity;    //! Activity list
+	QList<Activity> m_activity;    //! Activity list
 	int m_speed;                       //! Speed of meteors
 	float m_rAlphaPeak;                //! R.A. for radiant of meteor shower on the peak day
 	float m_rDeltaPeak;                //! Dec. for radiant of meteor shower on the peak day

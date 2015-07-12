@@ -65,7 +65,7 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		foreach(const QVariant &ms, map.value("activity").toList())
 		{
 			QVariantMap activityMap = ms.toMap();
-			activityData d;
+			Activity d;
 			d.year = activityMap.value("year").toString();
 			d.zhr = activityMap.value("zhr").toInt();
 			d.variable = activityMap.value("variable").toString();
@@ -342,7 +342,7 @@ int MeteorShower::calculateZHR(int zhr, QString variable, QDateTime start, QDate
 int MeteorShower::searchRealData(QString yyyy) const
 {
 	int index = -1;
-	foreach(const activityData &p, m_activity)
+	foreach(const Activity &p, m_activity)
 	{
 		index++;
 		if(p.year == yyyy)
@@ -388,7 +388,7 @@ QVariantMap MeteorShower::getMap()
 	map["pidx"] = m_pidx;
 
 	QVariantList activityList;
-	foreach(const activityData &p, m_activity)
+	foreach(const Activity &p, m_activity)
 	{
 		QVariantMap activityMap;
 		activityMap["year"] = p.year;
