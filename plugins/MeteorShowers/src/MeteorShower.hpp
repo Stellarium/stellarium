@@ -144,26 +144,6 @@ private:
 	//! @param peak
 	int calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak);
 
-	//! Get a date string from JSON file and parse it for display in info corner
-	//! @param jsondate A string from JSON file
-	QString getDateFromJSON(QString jsondate) const;
-
-	//! Get a day from JSON file and parse it for display in info corner
-	//! @param jsondate A string from JSON file
-	QString getDayFromJSON(QString jsondate) const;
-
-	//! Get a month string from JSON file and parse it for display in info corner
-	//! @param jsondate A string from JSON file
-	int getMonthFromJSON(QString jsondate) const;
-
-	//! Get a month string from JSON file and parse it for display in info corner
-	//! @param jsondate A string from JSON file
-	QString getMonthNameFromJSON(QString jsondate) const;
-
-	//! Get a month name from month number
-	//! @param jsondate A string from JSON file
-	QString getMonthName(int number) const;
-
 	//! Get the current sky QDateTime
 	//! @return Current QDateTime of sky
 	QDateTime getSkyQDateTime(StelCore *core) const;
