@@ -211,7 +211,7 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 	}
 
 	QString sn;
-	bool find = false;
+	bool found = false;
 	foreach(const MeteorShowerP& ms, m_meteorShowers)
 	{
 		if (ms->enabled())
@@ -219,14 +219,14 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 			sn = ms->getNameI18n();
 			if (useStartOfWords)
 			{
-				find = sn.toUpper().left(objPrefix.length()) == objPrefix.toUpper();
+				found = sn.toUpper().left(objPrefix.length()) == objPrefix.toUpper();
 			}
 			else
 			{
-				find = sn.contains(objPrefix, Qt::CaseInsensitive);
+				found = sn.contains(objPrefix, Qt::CaseInsensitive);
 			}
 
-			if (find)
+			if (found)
 			{
 				result.append(sn);
 			}
@@ -251,7 +251,7 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 	}
 
 	QString sn;
-	bool find = false;
+	bool found = false;
 	foreach(const MeteorShowerP& ms, m_meteorShowers)
 	{
 		if (ms->enabled())
@@ -259,13 +259,13 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 			sn = ms->getEnglishName();
 			if (useStartOfWords)
 			{
-				find = objPrefix.toUpper()==sn.toUpper().left(objPrefix.length());
+				found = objPrefix.toUpper()==sn.toUpper().left(objPrefix.length());
 			}
 			else
 			{
-				find = sn.contains(objPrefix, Qt::CaseInsensitive);
+				found = sn.contains(objPrefix, Qt::CaseInsensitive);
 			}
-			if (find)
+			if (found)
 			{
 				result.append(sn);
 			}
@@ -273,13 +273,13 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 			sn = ms->getDesignation();
 			if (useStartOfWords)
 			{
-				find = objPrefix.toUpper()==sn.toUpper().left(objPrefix.length());
+				found = objPrefix.toUpper()==sn.toUpper().left(objPrefix.length());
 			}
 			else
 			{
-				find = sn.contains(objPrefix, Qt::CaseInsensitive);
+				found = sn.contains(objPrefix, Qt::CaseInsensitive);
 			}
-			if (find)
+			if (found)
 			{
 				result.append(sn);
 			}
