@@ -51,6 +51,8 @@ private:
 	//Contains the translated index.html
 	QString indexFile;
 	QString indexFilePath;
+	QString transData;
+	QString transDataPath;
 	bool usePassword;
 	QString password;
 	QByteArray passwordReply;

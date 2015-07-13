@@ -1,6 +1,8 @@
-"use strict";
+/* jshint expr: true */
 
-var ViewControl = (new function($) {
+var ViewControl = (function($) {
+    "use strict";
+
     //Private variables
     var lastXHR;
     var updateTimeout;
@@ -23,7 +25,6 @@ var ViewControl = (new function($) {
 
 
     function move(x, y) {
-
         updateTimeout && clearTimeout(updateTimeout);
 
         if (x !== 0 || y !== 0)
@@ -187,12 +188,12 @@ var ViewControl = (new function($) {
             initControls();
         },
 
-        updateFromServer(data) {
+        updateFromServer: function(data) {
             if (!userSliding) {
                 setFovText(data.fov);
                 setFovSlider(data.fov);
             }
             view_projection.textContent = data.projectionStr;
         }
-    }
-}(jQuery));
+    };
+})(jQuery);

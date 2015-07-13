@@ -1,22 +1,25 @@
-"use strict";
+/* jshint expr: true */
 
-var UISettings = (new function($) {
+var UISettings = (function() {
+    "use strict";
+
+    var data = {};
 
     // Automatically poll the server for updates? Otherwise, only updated after commands are sent.
-    this.updatePoll = true;
+    data.updatePoll = true;
     //the interval for automatic polling
-    this.updateInterval = 1000;
+    data.updateInterval = 1000;
     //use the Browser's requestAnimationFrame for animation instead of setTimeout
-    this.useAnimationFrame = true;
+    data.useAnimationFrame = true;
     //If animation frame is not used, this is the delay between 2 animation steps
-    this.animationDelay = 500;
+    data.animationDelay = 500;
     //If no user changes happen after this time, the changes are sent to the Server
-    this.editUpdateDelay = 500;
+    data.editUpdateDelay = 500;
     //This is the delay after which the AJAX request spinner is shown.
-    this.spinnerDelay = 100;
+    data.spinnerDelay = 100;
 
-
-}(jQuery));
+    return data;
+})();
 
 //DOM-ready hook, starting the GUI
 $(document).ready(function() {
@@ -38,7 +41,9 @@ $(window).load(function() {
 });
 
 // The main functionality including communication with the server
-var Main = (new function($) {
+var Main = (function($) {
+    "use strict";
+
     //Private variables
     var connectionLost = false;
     var animationSupported;
@@ -52,6 +57,15 @@ var Main = (new function($) {
     var $noresponsetime;
 
     var sel_infostring;
+
+    /* Translates a string using Stellariums current locale. String must be present in translationdata.js */
+    function tr(str) {
+        if(str in TranslationData) {
+            return TranslationData[str];
+        }
+        console.log("Error: string '" +str + "' not present in translation data");
+        return str;
+    }
 
     function animate() {
 
@@ -85,7 +99,7 @@ var Main = (new function($) {
                     sel_infostring.innerHTML = data.selectioninfo;
                     sel_infostring.className = "";
                 } else {
-                    sel_infostring.innerHTML = "No current selection";
+                    sel_infostring.innerHTML = tr("No current selection");
                     sel_infostring.className = "bold";
                 }
 
@@ -144,7 +158,7 @@ var Main = (new function($) {
                     // Firefox wraps long text (possibly a rounding bug)
                     // so we add 1px to avoid the wrapping (#7513)
                     ul.width("").outerWidth() + 1,
-                    this.options.position.of == null ? this.element.outerWidth() : this.options.position.of.outerWidth()
+                    this.options.position.of === null ? this.element.outerWidth() : this.options.position.of.outerWidth()
                 ));
             }
         });
@@ -240,11 +254,11 @@ var Main = (new function($) {
                 }
             }, this));
         }, this), UISettings.editUpdateDelay);
-
     };
 
     //Public stuff
     return {
+        tr: tr,
         init: function() {
             initControls();
 
@@ -261,9 +275,9 @@ var Main = (new function($) {
             animationSupported = (window.requestAnimationFrame !== undefined);
 
             if (!animationSupported) {
-                console.log("animation frame not supported")
+                console.log("animation frame not supported");
             } else {
-                console.log("animation frame supported")
+                console.log("animation frame supported");
             }
             //kick off animation
             animate();
@@ -294,7 +308,7 @@ var Main = (new function($) {
                     console.log("Error posting command " + url);
                     console.log("Error: " + errorThrown);
                     console.log("Status: " + status);
-                    alert("Could not update the server!")
+                    alert(tr("Error sending command to server: ") + errorThrown.message);
                 },
                 complete: completeFunc
             });
@@ -303,15 +317,15 @@ var Main = (new function($) {
         forceUpdate: function() {
             update();
         },
-
         UpdateQueue: UpdateQueue
-
-    }
-}(jQuery));
+    };
+})(jQuery);
 
 
 //some custom controls
 (function($) {
+    "use strict";
+
     $.widget("custom.combobox", {
         _create: function() {
             this.wrapper = $("<span>")
@@ -366,7 +380,7 @@ var Main = (new function($) {
 
             $("<a>")
                 .attr("tabIndex", -1)
-                .attr("title", "Show All Items")
+                .attr("title", Main.tr("Show All Items"))
                 .tooltip()
                 .appendTo(this.wrapper)
                 .button({
@@ -432,7 +446,7 @@ var Main = (new function($) {
             // Remove invalid value
             this.input
                 .val("")
-                .attr("title", value + " didn't match any item")
+                .attr("title", Main.tr("Input did not match any item"))
                 .tooltip("open");
             this.element.val("");
             this._delay(function() {

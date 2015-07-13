@@ -75,6 +75,11 @@ QString StelTranslator::qtranslate(const QString& s, const QString& c) const
 		return s;
 	return res;
 }
+
+QString StelTranslator::tryQtranslate(const QString &s, const QString &c) const
+{
+	return translator->translate("", s.toUtf8().constData(),c.toUtf8().constData());
+}
 	
 //! Initialize Translation
 //! @param fileName file containing the list of language codes
