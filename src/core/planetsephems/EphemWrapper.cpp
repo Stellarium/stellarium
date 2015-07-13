@@ -18,6 +18,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #include "EphemWrapper.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "vsop87.h"
 #include "elp82b.h"
 #include "marssat.h"
@@ -37,28 +39,17 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define EPHEM_NEPTUNE_ID  7
 #define EPHEM_PLUTO_ID    8
 
-static bool DE430_ACTIVE = false;
-static bool DE431_ACTIVE = false;
+#define EPHEM_JPL_EARTH_ID 4
 
-void EphemWrapper::set_de430_status(bool status)
-{
-	DE430_ACTIVE = status;
-}
-
-void EphemWrapper::set_de431_status(bool status)
-{
-	DE431_ACTIVE = status;
-}
-
-bool EphemWrapper::de430_is_available()
-{
-  return DE430_ACTIVE;
-}
-
-bool EphemWrapper::de431_is_available()
-{
-  return DE431_ACTIVE;
-}
+/**   JPL PlANET ID LIST
+**            1 = mercury           8 = neptune                             **
+**            2 = venus             9 = pluto                               **
+**            3 = earth            10 = moon                                **
+**            4 = mars             11 = sun                                 **
+**            5 = jupiter          12 = solar-system barycenter             **
+**            6 = saturn           13 = earth-moon barycenter               **
+**            7 = uranus 
+**/
 
 void EphemWrapper::init_de430(const char* filepath)
 {
@@ -67,39 +58,39 @@ void EphemWrapper::init_de430(const char* filepath)
 
 void EphemWrapper::init_de431(const char* filepath)
 {
-
+  InitDE431(filepath);
 }
 
 void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 {
-  	if(DE430_ACTIVE)
+  	if(StelApp::getInstance().getCore()->de430IsActive())
   	{
-  		GetDe430Coor(jd, planet_id, xyz);
+  		GetDe430Coor(jd, planet_id + 1, xyz);
   	}
-  	else if(DE431_ACTIVE)
+  	else if(StelApp::getInstance().getCore()->de431IsActive())
   	{
-  		GetDe431Coor(jd, planet_id, xyz);
+  		GetDe431Coor(jd, planet_id + 1, xyz);
   	}
-	else //VSOP87 is the fallback method
-	{
-  		GetVsop87Coor(jd, planet_id, xyz);
-  	}
+  	else //VSOP87 is the fallback method
+  	{
+    		GetVsop87Coor(jd, planet_id, xyz);
+    }
 }
 
 void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], int planet_id)
 {
-  	if(DE430_ACTIVE)
+  	if(StelApp::getInstance().getCore()->de430IsActive())
   	{
-  		GetDe430OsculatingCoor(jd0, jd, planet_id, xyz);
+  		GetDe430OsculatingCoor(jd0, jd, planet_id + 1, xyz);
   	}
-  	else if(DE431_ACTIVE)
+  	else if(StelApp::getInstance().getCore()->de431IsActive())
   	{
-  		GetDe431OsculatingCoor(jd0, jd, planet_id, xyz);
+  		GetDe431OsculatingCoor(jd0, jd, planet_id + 1, xyz);
   	}
-	else //VSOP87 is fallback method
-	{
-  		GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz);
-  	}
+  	else //VSOP87 is fallback method
+  	{
+    		GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz);
+    }
 }
 
 /* Chapter 31 Pg 206-207 Equ 31.1 31.2 , 31.3 using VSOP 87
@@ -129,26 +120,26 @@ void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
 
 void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) 
   {
-  	if(DE430_ACTIVE)
+  	if(StelApp::getInstance().getCore()->de430IsActive())
   	{
-  		GetDe430Coor(jd, EPHEM_EMB_ID, xyz);
+  		GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
   	}
-  	else if(DE431_ACTIVE)
+  	else if(StelApp::getInstance().getCore()->de431IsActive())
   	{
-  		GetDe431Coor(jd, EPHEM_EMB_ID, xyz);
+  		GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
   	}
-	else //VSOP87 is fallback method
-	{
-		double moon[3];
-		GetVsop87Coor(jd,EPHEM_EMB_ID,xyz);
-		GetElp82bCoor(jd,moon);
-		/* Earth != EMB:
-		0.0121505677733761 = mu_m/(1+mu_m),
-		mu_m = mass(moon)/mass(earth) = 0.01230002 */
-		xyz[0] -= 0.0121505677733761 * moon[0];
-		xyz[1] -= 0.0121505677733761 * moon[1];
-		xyz[2] -= 0.0121505677733761 * moon[2];
-	}
+  	else //VSOP87 is fallback method
+  	{
+  		double moon[3];
+  		GetVsop87Coor(jd,EPHEM_EMB_ID,xyz);
+  		GetElp82bCoor(jd,moon);
+  		/* Earth != EMB:
+  		0.0121505677733761 = mu_m/(1+mu_m),
+  		mu_m = mass(moon)/mass(earth) = 0.01230002 */
+  		xyz[0] -= 0.0121505677733761 * moon[0];
+  		xyz[1] -= 0.0121505677733761 * moon[1];
+  		xyz[2] -= 0.0121505677733761 * moon[2];
+  	}
 }
 
 void get_mars_helio_coordsv(double jd,double xyz[3], void* unused)

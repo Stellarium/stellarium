@@ -526,6 +526,11 @@ public slots:
 	//! initialize ephemerides calculation functions
 	void initEphemeridesFunctions();
 
+	bool de430IsActive();
+	bool de431IsActive();
+	void setDe430Status(bool status);
+	void setDe431Status(bool status);
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
@@ -584,6 +589,10 @@ private:
 	Vec3f deltaTCustomEquationCoeff;
 	float deltaTCustomNDot;
 	float deltaTCustomYear;
+
+	// Variables for DE430/431 ephem calculation
+	bool de430Active;
+	bool de431Active;
 
 };
 
