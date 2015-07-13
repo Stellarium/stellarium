@@ -30,7 +30,6 @@
 
 MeteorShower::MeteorShower(const QVariantMap& map)
 	: m_status(INVALID)
-	, m_enabled(false)
 	, m_speed(0)
 	, m_rAlphaPeak(0)
 	, m_rDeltaPeak(0)
@@ -132,7 +131,7 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		}
 	}
 
-	m_status = INACTIVE;
+	m_status = UNDEFINED;
 
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
@@ -141,12 +140,29 @@ MeteorShower::~MeteorShower()
 {
 }
 
+bool MeteorShower::enabled()
+{
+	if (m_status == INVALID)
+	{
+		return false;
+	}
+	else if (m_status == UNDEFINED)
+	{
+		return true;
+	}
+	else if (GETSTELMODULE(MeteorShowers)->getActiveRadiantOnly())
+	{
+		return m_status == ACTIVE_GENERIC || m_status == ACTIVE_REAL;
+	}
+	else
+	{
+		return true;
+	}
+}
+
 void MeteorShower::update(double deltaTime)
 {
-	// TODO: fix it
-	// m_enabled = (m_status != INACTIVE) || !showActiveRadiantsOnly;
-
-	if (!m_enabled)
+	if (!enabled())
 	{
 		return;
 	}
@@ -225,7 +241,7 @@ void MeteorShower::update(double deltaTime)
 
 void MeteorShower::draw(StelCore* core)
 {
-	if (!m_enabled)
+	if (!enabled())
 	{
 		return;
 	}
