@@ -46,6 +46,17 @@ public:
 		ACTIVE_GENERIC   // active radiant - generic data
 	};
 
+	//! @struct Activity
+	typedef struct
+	{
+		QString year;              //! The catalog year
+		int zhr;                   //! The ZHR on peak
+		QString variable;          //! The ZHR range when it's variable
+		QDate start;               //! Initial date of activity
+		QDate finish;              //! Last date of activity
+		QDate peak;                //! Peak activity
+	} Activity;
+
 	//! Constructor
 	//! @param map QVariantMap containing all the data about a Meteor Shower.
 	MeteorShower(const QVariantMap& map);
@@ -59,9 +70,15 @@ public:
 	//! Draw
 	void draw(StelCore *core);
 
-	//! Update value of current information(zhr, variable, stat, finish and peak)
-	//! @param current sky QDateTime
-	void updateCurrentData(QDateTime skyDate);
+	//! Checks if we have generic data for a given date
+	//! @param date QDate
+	//! @return Activity
+	Activity hasGenericShower(QDate date, bool &found) const;
+
+	//! Checks if we have real data for a given date
+	//! @param date QDate
+	//! @return Activity
+	Activity hasRealShower(QDate date, bool &found) const;
 
 	bool enabled() { return m_enabled; }
 
@@ -98,23 +115,13 @@ public:
 	virtual double getAngularSize(const StelCore* core) const { return 0.001; }
 
 private:
-	typedef struct
-	{
-		QString year;              //! Value of year for actual data
-		int zhr;                   //! The ZHR on peak
-		QString variable;          //! The ZHR range when it's variable
-		QString start;             //! First day for activity
-		QString finish;            //! Latest day for activity
-		QString peak;              //! Day with maximum for activity
-	} Activity;
-
-	Status m_status;                 //! Meteor shower status
+	Status m_status;                   //! Meteor shower status
 	bool m_enabled;                    //! True if the meteor shower is being displayed
 
 	// data from catalog
 	QString m_showerID;                //! The ID of the meteor shower
 	QString m_designation;             //! The designation of the meteor shower
-	QList<Activity> m_activity;    //! Activity list
+	QList<Activity> m_activities;      //! Activity list
 	int m_speed;                       //! Speed of meteors
 	float m_rAlphaPeak;                //! R.A. for radiant of meteor shower on the peak day
 	float m_rDeltaPeak;                //! Dec. for radiant of meteor shower on the peak day
@@ -128,6 +135,8 @@ private:
 	Vec3d m_position;                  //! Cartesian equatorial position
 	double m_radiantAlpha;             //! Current R.A. for radiant of meteor shower
 	double m_radiantDelta;             //! Current Dec. for radiant of meteor shower
+	Activity m_activity;               //! Current activity
+
 	int m_zhr;                         //! ZHR of shower
 	QString m_variable;                //! value of variable for ZHR
 	QDateTime m_start;                 //! First day for activity
@@ -142,7 +151,7 @@ private:
 	//! @param start
 	//! @param finish
 	//! @param peak
-	int calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak);
+	int calculateZHR(int zhr, QString variable, QDate start, QDate finish, QDate peak);
 
 	//! Get the current sky QDateTime
 	//! @return Current QDateTime of sky
