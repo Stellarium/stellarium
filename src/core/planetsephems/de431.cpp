@@ -21,7 +21,19 @@ THE SOFTWARE.
 */
 
 #include "de431.hpp"
+#include "jpleph.h"
 
+#define JPL_MAX_N_CONSTANTS 1018
+#define CALC_VELOCITY       0
+
+static void * ephem;
+static char nams[JPL_MAX_N_CONSTANTS][6], buff[102];
+static double vals[JPL_MAX_N_CONSTANTS];
+    
+void InitDE431(const char* filepath)
+{
+    ephem = jpl_init_ephemeris(filepath, nams, vals);
+}
 void GetDe431Coor(double jd, int planet_id, double * xyz)
 {
 

@@ -33,12 +33,6 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 class EphemWrapper{
 public:
-    static void set_de430_status(bool status);
-    static void set_de431_status(bool status);
-
-    static bool de430_is_available();
-    static bool de431_is_available();
-
     static void init_de430(const char* filepath);
     static void init_de431(const char* filepath);
 };

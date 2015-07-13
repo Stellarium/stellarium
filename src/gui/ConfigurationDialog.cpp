@@ -83,9 +83,6 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
 
-    hasDownloadedEphemData = false;
-    isDownloadingEphemData = false;
-
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 	// Get info about operating system
 	QString platform = StelUtils::getOperatingSystemInfo();
@@ -176,23 +173,11 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	
+	connect(ui->de430Button, SIGNAL(clicked()), this, SLOT(de430ButtonClicked()));
+	connect(ui->de431Button, SIGNAL(clicked()), this, SLOT(de431ButtonClicked()));
+	
 	resetStarCatalogControls();
-
-	ui->downloadLabel->setText(q_("VSOP87 is available"));
-
-	if(EphemWrapper::de430_is_available())
-	{
-		ui->downloadLabel->setText(q_("DE430 is available"));
-		ui->getEphemDataButton->setEnabled(false);
-	}
-
-	if(EphemWrapper::de431_is_available())
-	{
-		ui->downloadLabel->setText(q_("DE431 is available"));
-		ui->getEphemDataButton->setEnabled(false);
-	}
-
-	connect(ui->getEphemDataButton, SIGNAL(clicked()), this, SLOT(downloadEphemData()));
+	resetEphemControls();
 
 
 #ifdef Q_OS_WIN
@@ -1097,14 +1082,42 @@ void ConfigurationDialog::downloadStars()
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
-void ConfigurationDialog::newEphemData()
+void ConfigurationDialog::de430ButtonClicked()
 {
+	StelApp::getInstance().getCore()->
+		setDe430Status(StelApp::getInstance().getCore()->de430IsActive());
 
+}
+
+void ConfigurationDialog::de431ButtonClicked()
+{
+	StelApp::getInstance().getCore()->
+		setDe431Status(StelApp::getInstance().getCore()->de431IsActive());
+}
+
+
+void ConfigurationDialog::resetEphemControls()
+{
+	StelApp::getInstance().getCore()->initEphemeridesFunctions();
+
+	ui->downloadLabel->setText(q_("VSOP87 is available"));
+	ui->de430Button->setText(q_("DE430: NO"));
+	ui->de431Button->setText(q_("DE431: NO"));
+
+	if(StelApp::getInstance().getCore()->de430IsActive())
+	{
+		ui->de430Button->setText(q_("DE430: YES"));
+	}
+
+	if(StelApp::getInstance().getCore()->de431IsActive())
+	{
+		ui->de431Button->setText(q_("DE431: YES"));
+	}
 }
 
 void ConfigurationDialog::downloadEphemData()
 {
-
+	resetEphemControls();
 }
 
 void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
@@ -1118,11 +1131,6 @@ void ConfigurationDialog::downloadError(QNetworkReply::NetworkError)
     	isDownloadingStarCatalog = false;
     	ui->getStarsButton->setVisible(false);
 		ui->getStarsButton->setEnabled(true);
-    } else 
-    {
-    	isDownloadingEphemData = false;
-    	ui->getEphemDataButton->setVisible(true);
-		ui->getEphemDataButton->setEnabled(true);
     }
 
 	qWarning() << "Error downloading file" << downloadReply->url() << ": " << downloadReply->errorString();
