@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-05-16 10:26+0000\n"
+"PO-Revision-Date: 2015-07-12 22:50+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-09 05:24+0000\n"
-"X-Generator: Launchpad (build 17608)\n"
+"X-Launchpad-Export-Date: 2015-07-13 05:15+0000\n"
+"X-Generator: Launchpad (build 17620)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
@@ -687,7 +687,7 @@ msgstr "Adicionar 1 dia solar"
 
 #: src/core/StelCore.cpp:202
 msgid "Add 7 solar days"
-msgstr ""
+msgstr "Acrescentar 7 dias solares"
 
 #: src/core/StelCore.cpp:203
 msgid "Subtract 1 solar hour"
@@ -699,7 +699,7 @@ msgstr "Retirar 1 dia solar"
 
 #: src/core/StelCore.cpp:205
 msgid "Subtract 7 solar days"
-msgstr ""
+msgstr "Subtrair 7 dias solares"
 
 #: src/core/StelCore.cpp:206
 msgid "Add 1 sidereal day"
@@ -1254,7 +1254,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:459
 msgid "Sinusoidal"
-msgstr ""
+msgstr "Sinusoidal"
 
 #: src/core/StelProjectorClasses.cpp:464
 msgid ""
@@ -1262,6 +1262,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"<p align=\"justify\">A projeção sinusoidal é uma <i>projeção cartográfica "
+"pseudocilíndrica de área igual</i>, por vezes denominada Sanson-Flamsteed ou "
+"projeção de área igual de Mercator."
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -4608,7 +4611,7 @@ msgstr "da paisagem, se fornecido"
 
 #: src/ui_viewDialog.h:1372
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Mostrar rótulos das paisagens"
 
 #: src/ui_viewDialog.h:1373
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -7014,16 +7017,16 @@ msgstr "Seleccionar um directório"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Ascensão reta (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Declinação (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:257
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:398
 msgid "Select one"
-msgstr ""
+msgstr "Selecione um"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
@@ -7275,15 +7278,15 @@ msgstr "Diretório de executáveis:"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:230
 msgid "Points"
-msgstr ""
+msgstr "Pontos"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:237
 msgid "Add point"
-msgstr ""
+msgstr "Adicionar ponto"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:238
 msgid "Remove selected"
-msgstr ""
+msgstr "Remover selecionado"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -7649,19 +7652,19 @@ msgstr "Indicações de nebulosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Indicações de galáxias"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Indicações de nebulosas luminosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Indicações de nebulosas escuras"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Clusters hints"
-msgstr ""
+msgstr "Indicações de aglomerados"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
@@ -10697,6 +10700,16 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p align=\"justify\">Renderizador 3D de primeiro plano. Ande, encontre e "
+"evite obstruções no seu jardim, encontre e demonstre possível alinhamentos "
+"astronómicos em templos, veja sombras em relógios de sol, etc.</p><p>Para se "
+"mover, pressione Ctrl+teclas direccionais. Para elevar a altura do olho, use "
+"Ctrl+PageUp/PageDown. A velocidade da movimentação está relacionada com  o "
+"campo de visão (ou seja, aproxime para ajustes finos). Pode até continuar a "
+"mover-se ao soltar Ctrl antes da tecla direccional.</p><p> O desenvolvimento "
+"deste complemento foi, em parte, financiado pelo projeto ASTROSIM (P 21208-"
+"G19) do Fundo Austríaco para a Ciência (FAC). Mais informações podem ser "
+"obtidas em http://astrosim.univie.ac.at.</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
