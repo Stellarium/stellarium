@@ -1793,33 +1793,58 @@ double StelCore::getCurrentEpoch() const
 	return 2000.0 + (getJDay() - 2451545.0)/365.25;
 }
 
+bool StelCore::de430IsActive()
+{
+	return de430Active;
+}
+
+bool StelCore::de431IsActive()
+{
+	return de431Active;
+}
+
+void StelCore::setDe430Status(bool status)
+{
+	de430Active = status;
+}
+
+void StelCore::setDe431Status(bool status)
+{
+	de431Active = status;
+}
+
 void StelCore::initEphemeridesFunctions()
 {
-	//check for files in /ephem/..
-	//TODO: check for correct filesize
-	//../de430
-	QString jsonFilePath = StelFileMgr::findFile("ephem/de430/", 
-		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de430.bsp";
-  	
-  	EphemWrapper::set_de430_status(!jsonFilePath.isEmpty());
-  	
-  	if(EphemWrapper::de430_is_available())
-  	{
-  		EphemWrapper::init_de430(jsonFilePath.toStdString().c_str());
-  	}
+	//check ephem/ folder
+	QString ephemFilePath = StelFileMgr::findFile("ephem/", 
+		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+	
+	if(!ephemFilePath.isEmpty())
+	{
 
-  	//../de431
-  	jsonFilePath = StelFileMgr::findFile("ephem/de431/", 
-		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-1.bsp";
-  	
-  	QString jsonFilePath2 = StelFileMgr::findFile("ephem/de431/", 
-		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-2.bsp";
+		//TODO: check for correct filesize
+		//../de430
+		QString de430FilePath = StelFileMgr::findFile("ephem/", 
+			StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de430.bsp";
+	  	
+		setDe430Status(!de430FilePath.isEmpty());
 
-  	EphemWrapper::set_de431_status(!(jsonFilePath.isEmpty() || jsonFilePath2.isEmpty()));
+  		if(de430Active)
+  		{
+  			EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
+  		}
 
-	if(EphemWrapper::de431_is_available())
-  	{
-  		//EphemWrapper::init_de431(jsonFilePath + 2?!!!!);
-  	}
-  	
+	 	QString de431FilePathP1 = StelFileMgr::findFile("ephem/", 
+	 		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-1.bsp";
+	  	
+	 	QString de431FilePathP2 = StelFileMgr::findFile("ephem/", 
+			StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-2.bsp";
+
+	 	setDe431Status(!(de431FilePathP1.isEmpty() && de431FilePathP2.isEmpty()));
+	 	
+	 	if(de431Active)
+		{
+			EphemWrapper::init_de431(de431FilePathP1.toStdString().c_str());
+  		}
+  	} 
 }

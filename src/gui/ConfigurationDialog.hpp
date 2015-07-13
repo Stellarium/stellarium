@@ -78,10 +78,7 @@ private:
     bool isDownloadingEphemData;
     //! True if any download is in progress
     bool isDownloading;
-    //! True when at least one ephemData-pack has been downloaded successfully this session
-    bool hasDownloadedEphemData;
-    //! 
-    int ephemDataCount;
+    
 
 private slots:
 	void setNoSelectedInfo();
@@ -105,11 +102,11 @@ private slots:
 	void cursorTimeOutChanged(double) {cursorTimeOutChanged();}
 
 	void newStarCatalogData();
-	void newEphemData();
 	void downloadStars();
 	void cancelDownload();
 	void starsDownloadFinished();
 	void ephemDataDownloadFinished();
+	void resetEphemControls();
 	void downloadError(QNetworkReply::NetworkError);
 
 	//! Update the labels displaying the current default state
@@ -159,6 +156,9 @@ private slots:
 
     //! downloads DE430/DE431 ephemData from SourceForge
     void downloadEphemData();
+
+    void de430ButtonClicked();
+	void de431ButtonClicked();
 
 private:
 	StelGui* gui;

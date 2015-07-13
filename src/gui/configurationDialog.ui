@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
+    <width>682</width>
     <height>520</height>
    </rect>
   </property>
@@ -1260,25 +1260,16 @@
               </widget>
              </item>
              <item>
-              <widget class="QCommandLinkButton" name="getEphemDataButton">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="toolTip">
-                <string>Click here to start downloading</string>
-               </property>
+              <widget class="QPushButton" name="de430Button">
                <property name="text">
-                <string>Get DE430</string>
+                <string>DE430</string>
                </property>
-               <property name="icon">
-                <iconset resource="../../data/gui/guiRes.qrc">
-                 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
-               </property>
-               <property name="description">
-                <string/>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="de431Button">
+               <property name="text">
+                <string>DE431</string>
                </property>
               </widget>
              </item>

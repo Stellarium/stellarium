@@ -30,9 +30,9 @@ THE SOFTWARE.
 #define JPL_MAX_N_CONSTANTS 1018
 #define CALC_VELOCITY		0
 
-void * ephem;
-char nams[JPL_MAX_N_CONSTANTS][6], buff[102];
-double vals[JPL_MAX_N_CONSTANTS];
+static void * ephem;
+static char nams[JPL_MAX_N_CONSTANTS][6], buff[102];
+static double vals[JPL_MAX_N_CONSTANTS];
 	
 
 void InitDE430(const char* filepath)
@@ -42,12 +42,12 @@ void InitDE430(const char* filepath)
 
 void GetDe430Coor(double jd, int planet_id, double * xyz)
 {
-
+    jpl_pleph(ephem, jd, planet_id, 11, xyz, 0);
 }
 
 void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
 {
-	
+	jpl_pleph(ephem, jd, planet_id, 11, xyz, 0);
 }
 
 #ifdef __cplusplus
