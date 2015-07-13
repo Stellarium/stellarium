@@ -42,8 +42,9 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	, m_zhr(0)
 {
 	// return initialized if the mandatory fields are not present
-	if(!map.contains("showerID"))
+	if(!map.contains("showerID") || !map.contains("activity"))
 	{
+		//TODO: check which are the mandatory fields and validate it here!
 		return;
 	}
 
@@ -60,20 +61,64 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	m_rAlphaPeak = m_radiantAlpha;
 	m_rDeltaPeak = m_radiantDelta;
 
-	if(map.contains("activity"))
+	// build the activity list
+	QList<QVariant> activities = map.value("activity").toList();
+	foreach(const QVariant &ms, activities)
 	{
-		foreach(const QVariant &ms, map.value("activity").toList())
+		QVariantMap activityMap = ms.toMap();
+		Activity d;
+		d.year = activityMap.value("year").toString();
+		d.zhr = activityMap.value("zhr").toInt();
+		d.variable = activityMap.value("variable").toString();
+
+		// if it's generic, doesn't matter the year
+		QString year = d.year.toInt() > 0 ? d.year : "2000";
+
+		QString start = activityMap.value("start").toString();
+		start = start.isEmpty() ? "" : start + " " + year;
+		d.start = QDate::fromString(start, "MM.dd yyyy");
+
+		QString finish = activityMap.value("finish").toString();
+		finish = finish.isEmpty() ? "" : finish + " " + year;
+		d.finish = QDate::fromString(finish, "MM.dd yyyy");
+
+		QString peak = activityMap.value("peak").toString() + " " + year;
+		peak = peak.isEmpty() ? "" : peak + " " + year;
+		d.peak = QDate::fromString(peak, "MM.dd yyyy");
+
+		if (d.start.isValid() && d.finish.isValid() && d.peak.isValid())
 		{
-			QVariantMap activityMap = ms.toMap();
-			Activity d;
-			d.year = activityMap.value("year").toString();
-			d.zhr = activityMap.value("zhr").toInt();
-			d.variable = activityMap.value("variable").toString();
-			d.peak = activityMap.value("peak").toString();
-			d.start = activityMap.value("start").toString();
-			d.finish = activityMap.value("finish").toString();
-			m_activity.append(d);
+			// Fix the 'finish' year! Handling cases when the shower starts on
+			// the current year and ends on the next year!
+			if(d.start.operator >(d.finish))
+			{
+				d.finish = d.finish.addYears(1);
+			}
+			// Fix the 'peak' year
+			if(d.start.operator >(d.peak))
+			{
+				d.peak = d.peak.addYears(1);
+			}
 		}
+
+		m_activities.append(d);
+	}
+
+	// filling null values of the activity list with generic data
+	const Activity& g = m_activities.at(0);
+	const int activitiesSize = m_activities.size();
+	for (int i = 1; i < activitiesSize; ++i)
+	{
+		Activity a = m_activities.at(i);
+		if (a.zhr == 0)
+		{
+			a.zhr = g.zhr;
+			a.variable = g.variable;
+		}
+		a.start = a.start.isValid() ? a.start : g.start;
+		a.finish = a.finish.isValid() ? a.finish : g.finish;
+		a.peak = a.peak.isValid() ? a.peak : g.peak;
+		m_activities.replace(i, a);
 	}
 
 	if(map.contains("colors"))
@@ -87,8 +132,7 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		}
 	}
 
-	StelCore* core = StelApp::getInstance().getCore();
-	updateCurrentData(getSkyQDateTime(core));
+	m_status = INACTIVE;
 
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
@@ -99,6 +143,9 @@ MeteorShower::~MeteorShower()
 
 void MeteorShower::update(double deltaTime)
 {
+	// TODO: fix it
+	// m_enabled = (m_status != INACTIVE) || !showActiveRadiantsOnly;
+
 	if (!m_enabled)
 	{
 		return;
@@ -106,7 +153,36 @@ void MeteorShower::update(double deltaTime)
 
 	StelCore* core = StelApp::getInstance().getCore();
 
-	updateCurrentData(getSkyQDateTime(core));
+	// gets the current UTC date
+	double currentJD = core->getJDay();
+	QDate currentDate = StelUtils::jdToQDateTime(currentJD).date();
+
+	// updating status and activity
+	bool found = false;
+	m_status = INACTIVE;
+	m_activity = hasRealShower(currentDate, found);
+	if (found)
+	{
+		m_status = ACTIVE_REAL;
+	}
+	else
+	{
+		m_activity = hasGenericShower(currentDate, found);
+		if (found)
+		{
+			m_status = ACTIVE_GENERIC;
+		}
+	}
+
+	// compute radiant position considering drift
+	m_radiantAlpha = m_rAlphaPeak;
+	m_radiantDelta = m_rDeltaPeak;
+	if (m_status != INACTIVE)
+	{
+		double time = (currentJD - m_activity.peak.toJulianDay()) * 24;
+		m_radiantAlpha += (m_driftAlpha/120.f) * time;
+		m_radiantDelta += (m_driftDelta/120.f) * time;
+	}
 
 	// step through and update all active meteors
 	foreach (MeteorObj* m, m_activeMeteors)
@@ -123,7 +199,8 @@ void MeteorShower::update(double deltaTime)
 		return; // don't create new meteors
 	}
 
-	int currentZHR = calculateZHR(m_zhr, m_variable, m_start, m_finish, m_peak);
+	int currentZHR = calculateZHR(m_activity.zhr, m_activity.variable, m_activity.start,
+				      m_activity.finish, m_activity.peak);
 
 	// determine average meteors per frame needing to be created
 	int mpf = (int) ((double) currentZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
@@ -143,92 +220,6 @@ void MeteorShower::update(double deltaTime)
 					m_colors, GETSTELMODULE(MeteorShowers)->getBolideTexture());
 			m_activeMeteors.append(m);
 		}
-	}
-}
-
-void MeteorShower::updateCurrentData(QDateTime skyDate)
-{
-	//Check if we have real data for the current sky year
-	int index = searchRealData(skyDate.toString("yyyy"));
-
-	/**************************
-	 *ZHR info
-	 **************************/
-	m_zhr = m_activity[index].zhr == 0 ? m_activity[0].zhr : m_activity[index].zhr;
-
-	if (m_zhr == -1)
-	{
-		m_variable = m_activity[index].variable.isEmpty() ? m_activity[0].variable : m_activity[index].variable;
-	}
-	else
-	{
-		m_variable = "";
-	}
-
-	/***************************
-	 *Dates - start/finish/peak
-	 ***************************/
-	QString dateStart = m_activity[index].start.isEmpty() ? m_activity[0].start : m_activity[index].start;
-	QString dateFinish = m_activity[index].finish.isEmpty() ? m_activity[0].finish : m_activity[index].finish;
-	QString datePeak = m_activity[index].peak.isEmpty() ? m_activity[0].peak : m_activity[index].peak;
-	QString yearBase = m_activity[index].year == "generic" ? skyDate.toString("yyyy") : m_activity[index].year;
-	QString yearS, yearF;
-
-	int monthStart = dateStart.split(".").at(0).toInt();
-	int monthFinish = dateFinish.split(".").at(0).toInt();
-
-	if(monthStart > monthFinish)
-	{
-		if(monthStart == skyDate.toString("MM").toInt())
-		{
-			yearS = yearBase;
-			yearF = QString("%1").arg(yearBase.toInt() + 1);
-		}
-		else
-		{
-			yearS = QString("%1").arg(yearBase.toInt() - 1);
-			yearF = yearBase;
-		}
-	}
-	else
-	{
-		yearS = yearF = yearBase;
-	}
-
-	m_start = QDateTime::fromString(dateStart + " " + yearS, "MM.dd yyyy");
-	m_finish = QDateTime::fromString(dateFinish + " " + yearF, "MM.dd yyyy");
-	m_peak = QDateTime::fromString(datePeak + " " + yearS, "MM.dd yyyy");
-
-	if (m_peak.operator <(m_start) || m_peak.operator >(m_finish))
-		m_peak = QDateTime::fromString(datePeak + " " + yearF, "MM.dd yyyy");
-
-	/***************************
-	 *Activity - is active?
-	 ***************************/
-	if(skyDate.operator >=(m_start) && skyDate.operator <=(m_finish))
-	{
-		if(index)
-			m_status = ACTIVE_REAL; // real data
-		else
-			m_status = ACTIVE_GENERIC; // generic data
-	}
-	else
-	{
-		m_status = INACTIVE; // isn't active
-	}
-	// TODO: m_enabled = (m_status != INACTIVE) || !showActiveRadiantsOnly;
-
-	/**************************
-	 *Radiant drift
-	 *************************/
-	m_radiantAlpha = m_rAlphaPeak;
-	m_radiantDelta = m_rDeltaPeak;
-
-	if (m_status != INACTIVE)
-	{
-		double time = (StelUtils::qDateTimeToJd(skyDate) - StelUtils::qDateTimeToJd(m_peak))*24;
-		m_radiantAlpha += (m_driftAlpha/120)*time;
-		m_radiantDelta += (m_driftDelta/120)*time;
 	}
 }
 
@@ -289,7 +280,64 @@ void MeteorShower::draw(StelCore* core)
 	}
 }
 
-int MeteorShower::calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak)
+MeteorShower::Activity MeteorShower::hasGenericShower(QDate date, bool &found) const
+{
+	int year = date.year();
+	Activity g = m_activities.at(0);
+	bool peakOnStart = g.peak.year() == g.start.year(); // 'peak' and 'start' on the same year ?
+
+	//Fix the 'generic years'!
+	// Handling cases when the shower starts on the current year and
+	// ends on the next year; or when it started on the last year...
+	if (g.start.year() != g.finish.year()) // edge case?
+	{
+		// trying the current year with the next year
+		g.start.setDate(year, g.start.month(), g.start.day());
+		g.finish.setDate(year + 1, g.finish.month(), g.finish.day());
+		found = date.operator >=(g.start) && date.operator <=(g.finish);
+
+		if (!found)
+		{
+			// trying the last year with the current year
+			g.start.setDate(year - 1, g.start.month(), g.start.day());
+			g.finish.setDate(year, g.finish.month(), g.finish.day());
+			found = date.operator >=(g.start) && date.operator <=(g.finish);
+		}
+	}
+	else
+	{
+		g.start.setDate(year, g.start.month(), g.start.day());
+		g.finish.setDate(year, g.finish.month(), g.finish.day());
+		found = date.operator >=(g.start) && date.operator <=(g.finish);
+	}
+
+	if (found)
+	{
+		g.year = g.start.year();
+		g.peak.setDate(peakOnStart ? g.start.year() : g.finish.year(),
+			       g.peak.month(),
+			       g.peak.day());
+		return g;
+	}
+	return Activity();
+}
+
+MeteorShower::Activity MeteorShower::hasRealShower(QDate date, bool& found) const
+{
+	const int activitiesSize = m_activities.size();
+	for (int i = 1; i < activitiesSize; ++i)
+	{
+		const Activity& a = m_activities.at(i);
+		if (date.operator >=(a.start) && date.operator <=(a.finish))
+		{
+			found = true;
+			return a;
+		}
+	}
+	return Activity();
+}
+
+int MeteorShower::calculateZHR(int zhr, QString variable, QDate start, QDate finish, QDate peak)
 {
 	/***************************************
 	 * Get ZHR ranges
@@ -320,9 +368,9 @@ int MeteorShower::calculateZHR(int zhr, QString variable, QDateTime start, QDate
 	/***************************************
 	 * Convert time intervals
 	 ***************************************/
-	double startJD = StelUtils::qDateTimeToJd(start);
-	double finishJD = StelUtils::qDateTimeToJd(finish);
-	double peakJD = StelUtils::qDateTimeToJd(peak);
+	double startJD = start.toJulianDay();
+	double finishJD = finish.toJulianDay();
+	double peakJD = peak.toJulianDay();
 	double currentJD = StelApp::getInstance().getCore()->getJDay();
 
 	/***************************************
@@ -337,21 +385,6 @@ int MeteorShower::calculateZHR(int zhr, QString variable, QDateTime start, QDate
 	double gaussian = highZHR * qExp( - qPow(currentJD - peakJD, 2) / (sd*sd) ) + lowZHR;
 
 	return (int) ((int) ((gaussian - (int) gaussian) * 10) >= 5 ? gaussian+1 : gaussian);
-}
-
-int MeteorShower::searchRealData(QString yyyy) const
-{
-	int index = -1;
-	foreach(const Activity &p, m_activity)
-	{
-		index++;
-		if(p.year == yyyy)
-		{
-			return index;
-		}
-	}
-
-	return 0;
 }
 
 QDateTime MeteorShower::getSkyQDateTime(StelCore* core) const
@@ -388,7 +421,7 @@ QVariantMap MeteorShower::getMap()
 	map["pidx"] = m_pidx;
 
 	QVariantList activityList;
-	foreach(const Activity &p, m_activity)
+	foreach(const Activity &p, m_activities)
 	{
 		QVariantMap activityMap;
 		activityMap["year"] = p.year;
@@ -462,8 +495,8 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	{
 		oss << QString("%1: %2/%3")
 			.arg(q_("Radiant drift (per day)"))
-			.arg(StelUtils::radToHmsStr(m_driftAlpha/5))
-			.arg(StelUtils::radToDmsStr(m_driftDelta/5));
+			.arg(StelUtils::radToHmsStr(m_driftAlpha / 5.f))
+			.arg(StelUtils::radToDmsStr(m_driftDelta / 5.f));
 		oss << "<br />";
 
 		if (m_speed > 0)
