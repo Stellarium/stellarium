@@ -165,7 +165,9 @@ public:
     void enableWarnings(bool enable=true);
 
     /**
-      Translates all {trans "<key>"} tags using the given translation provider.
+      Translates all translation tags using the given translation provider.
+      The translation tags have a PHP-like format to be able to be parsed using gettext/xgettext.
+      Examples: <?= tr("this is an example") ?>, <?= tr("You have %1 new messages", "20") ?>
     */
     void translate(ITemplateTranslationProvider& provider);
 

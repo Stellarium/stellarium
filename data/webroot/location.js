@@ -1,6 +1,6 @@
-"use strict";
+var Locations = (function($) {
+    "use strict";
 
-var Locations = (new function($) {
     //Private variables
     var $loc_mapimg;
     var $loc_mappointer;
@@ -73,7 +73,7 @@ var Locations = (new function($) {
             editMode = false;
         });
 
-        scope = "input.ui-spinner-input"
+        scope = "input.ui-spinner-input";
         $("#loc_inputs").on("spin", scope, function(evt, ui) {
             var field = $(this).data("field");
             queueData(field,ui.value);
@@ -149,7 +149,7 @@ var Locations = (new function($) {
                     var op = document.createElement("option");
                     op.innerHTML = data[i];
                     $loc_list[0].appendChild(op);
-                };
+                }
 
                 parent.prepend($loc_list);
 
@@ -158,9 +158,9 @@ var Locations = (new function($) {
             },
             error: function(xhr, status, errorThrown) {
                 console.log("Error updating location list");
-                console.log("Error: " + errorThrown);
+                console.log("Error: " + errorThrown.message);
                 console.log("Status: " + status);
-                alert("Could not retrieve location list");
+                alert(Main.tr("Could not retrieve location list"));
             }
         });
     }
@@ -193,15 +193,15 @@ var Locations = (new function($) {
                     op.innerHTML = data[i].name_i18n; //translated
                     op.value = data[i].name;
                     $loc_country[0].appendChild(op);
-                };
+                }
 
                 parent.append($loc_country);
             },
             error: function(xhr, status, errorThrown) {
                 console.log("Error updating country list");
-                console.log("Error: " + errorThrown);
+                console.log("Error: " + errorThrown.message);
                 console.log("Status: " + status);
-                alert("Could not retrieve country list");
+                alert(Main.tr("Could not retrieve country list"));
             }
         });
     }
@@ -223,7 +223,7 @@ var Locations = (new function($) {
                     op.innerHTML = data[i].name_i18n; //translated
                     op.value = data[i].name;
                     $loc_planet[0].appendChild(op);
-                };
+                }
 
                 parent.append($loc_planet);
             },
@@ -231,7 +231,7 @@ var Locations = (new function($) {
                 console.log("Error updating planet list");
                 console.log("Error: " + errorThrown);
                 console.log("Status: " + status);
-                alert("Could not retrieve planet list");
+                alert(Main.tr("Could not retrieve planet list"));
             }
         });
     }
@@ -296,5 +296,5 @@ var Locations = (new function($) {
                 movePointer(loc.latitude, loc.longitude);
             }
         }
-    }
-}(jQuery));
+    };
+})(jQuery);

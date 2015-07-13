@@ -195,7 +195,12 @@ void Template::enableWarnings(bool enable) {
 
 void Template::translate(ITemplateTranslationProvider &provider)
 {
-	const QRegularExpression regexp = QRegularExpression("{trans \"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"}");
+	//This regex captures expressions of the form
+	//<?= tr("This is a test") ?> and <?= tr("optional %1 parameters %2","bla","blu") ?>
+	//The first capture group is the key (untranslated string), the second the optional list of parameters
+	const QRegularExpression regexp = QRegularExpression("<\\?=\\s*tr\\(\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"((?:,\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\")*)\\s*\\)\\?>");
+	//This one is used to extract the parameters using global matching
+	const QRegularExpression paramExp = QRegularExpression(",\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"");
 
 	int offset = 0;
 	QRegularExpressionMatch match;
@@ -209,8 +214,32 @@ void Template::translate(ITemplateTranslationProvider &provider)
 			int len = match.capturedLength(0);
 			QString key = match.captured(1);
 
-			this->replace(start,len,provider.getTranslation(key));
-			offset = start+len;
+			//replace escaped quotes
+			key.replace("\\\"","\"");
+
+			QString translation = provider.getTranslation(key);
+
+			//find out if we have optional parameters
+			if(match.capturedLength(2)>0)
+			{
+				QString params = match.captured(2);
+				//extract each optional parameter
+				QRegularExpressionMatchIterator it = paramExp.globalMatch(params);
+				while(it.hasNext())
+				{
+					QRegularExpressionMatch paramMatch = it.next();
+					QString param = paramMatch.captured(1);
+
+					//replace escaped quotes
+					param.replace("\\\"","\"");
+
+					//apply the param
+					translation = translation.arg(param);
+				}
+			}
+
+			this->replace(start,len,translation);
+			offset = start+translation.length();
 		}
 	}while(match.hasMatch());
 }

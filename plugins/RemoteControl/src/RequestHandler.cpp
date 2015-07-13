@@ -43,10 +43,27 @@ const QByteArray RequestHandler::AUTH_REALM = "Basic realm=\"Stellarium remote c
 class StelTemplateTranslationProvider : public ITemplateTranslationProvider
 {
 public:
+	StelTemplateTranslationProvider()
+	{
+		//create a translator for remote control specific stuff
+		rcTranslator = new StelTranslator("stellarium-remotecontrol",StelTranslator::globalTranslator->getTrueLocaleName());
+	}
+
+	~StelTemplateTranslationProvider()
+	{
+		delete rcTranslator;
+	}
+
 	QString getTranslation(const QString &key) Q_DECL_OVERRIDE
 	{
-		return StelTranslator::globalTranslator->qtranslate(key);
+		//try to get a RemoteControl specific translation first
+		QString trans = rcTranslator->tryQtranslate(key);
+		if(trans.isNull())
+			return StelTranslator::globalTranslator->qtranslate(key);
+		return trans;
 	}
+private:
+	StelTranslator* rcTranslator;
 };
 
 
@@ -69,6 +86,7 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 
 	staticFiles = new StaticFileController(settings,this);
 	indexFilePath = staticFiles->getDocRoot() + "/index.html";
+	transDataPath = staticFiles->getDocRoot() + "/translationdata.js";
 	qDebug()<<"Index file located at "<<indexFilePath;
 
 	refreshHtmlTemplate();
@@ -134,6 +152,17 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 #endif
 			response.write(indexFile.toUtf8(),true);
 		}
+		else if (path == "/translationdata.js")
+		{
+			response.setHeader("Content-Type", qPrintable("text/javascript; charset=UTF-8"));
+
+#ifndef QT_NO_DEBUG
+			//force fresh loading for each request
+			refreshHtmlTemplate();
+#endif
+
+			response.write(transData.toUtf8(),true);
+		}
 		else
 			staticFiles->service(request,response);
 	}
@@ -161,4 +190,10 @@ void RequestHandler::refreshHtmlTemplate()
 	Template tmp(file);
 	tmp.translate(transProv);
 	indexFile = tmp;
+
+	file.close();
+	file.setFileName(transDataPath);
+	Template tmp2(file);
+	tmp2.translate(transProv);
+	transData = tmp2;
 }

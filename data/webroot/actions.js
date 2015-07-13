@@ -1,6 +1,8 @@
-"use strict";
 
-var Actions = (new function ($) {
+
+var Actions = (function ($) {
+    "use strict";
+
     //Private variables
     var $actionlist;
     var actionsInitialized = false;
@@ -63,7 +65,7 @@ var Actions = (new function ($) {
             var id = e.options[e.selectedIndex].value;
 
             Actions.execute(id);
-        }
+        };
 
         $actionlist.change(function () {
             $("#bt_doaction").prop("disabled", false);
@@ -170,9 +172,9 @@ var Actions = (new function ($) {
             },
             error: function (xhr, status, errorThrown) {
                 console.log("Error updating action list");
-                console.log("Error: " + errorThrown);
+                console.log("Error: " + errorThrown.message);
                 console.log("Status: " + status);
-                alert("Could not retrieve action list")
+                alert(Main.tr("Could not retrieve action list"));
             }
         });
     }
@@ -205,9 +207,9 @@ var Actions = (new function ($) {
             },
             error: function (xhr, status, errorThrown) {
                 console.log("Error posting action " + actionName);
-                console.log("Error: " + errorThrown);
+                console.log("Error: " + errorThrown.message);
                 console.log("Status: " + status);
-                alert("Could not call server")
+                alert(Main.tr("Error sending action to server: ") + errorThrown.message);
             }
         });
     }
@@ -292,5 +294,5 @@ var Actions = (new function ($) {
 
         //Connects all checkbox input elements below this container to the StelAction that corresponds to its value
         connectActionContainer: connectActionContainer
-    }
-}(jQuery));
+    };
+})(jQuery);

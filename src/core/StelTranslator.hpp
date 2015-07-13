@@ -62,10 +62,18 @@ public:
 	~StelTranslator();
 	
 	//! Translate input message and return it as a QString.
+	//! If the string is not translated in the current locale, the input string is returned unchanged.
 	//! @param s input string in english.
 	//! @param c disambiguation string (gettext "context" string).
 	//! @return The translated QString
 	QString qtranslate(const QString& s, const QString& c = QString()) const;
+
+	//! Try to translate input message and return it as a QString. If no translation
+	//! exist for the current StelTranslator language, a null string is returned.
+	//! @param s input string in english.
+	//! @param c disambiguation string (gettext "context" string).
+	//! @return The translated QString
+	QString tryQtranslate(const QString& s, const QString& c = QString()) const;
 	
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"

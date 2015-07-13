@@ -1,6 +1,6 @@
-"use strict";
+var Scripts = (function($) {
+    "use strict";
 
-var Scripts = (new function($) {
     //Private variables
     var $activescript;
     var $bt_runscript;
@@ -61,7 +61,7 @@ var Scripts = (new function($) {
                     console.log("Error updating script list");
                     console.log("Error: " + errorThrown);
                     console.log("Status: " + status);
-                    alert("Could not retrieve script list")
+                    alert(Main.tr("Could not retrieve script list"));
                 }
             });
         },
@@ -70,11 +70,11 @@ var Scripts = (new function($) {
             if (script.scriptIsRunning) {
                 $activescript.text(script.runningScriptId);
             } else {
-                $activescript.text("-none-");
+                $activescript.text(Main.tr("-none-"));
             }
             $bt_stopscript.prop({
                 disabled: !script.scriptIsRunning
             });
         }
-    }
-}(jQuery));
+    };
+})(jQuery);

@@ -1,13 +1,14 @@
-"use strict";
 
 // This file contains time-related functions and conversion helpers
 
 //ensure that the browser has a trunc function
 Math.trunc = Math.trunc || function(x) {
     return x < 0 ? Math.ceil(x) : Math.floor(x);
-}
+};
 
-var Time = (new function($) {
+var Time = ( function($) {
+    "use strict";
+
     //Constants
     var ONE_OVER_JD_MILLISECOND = 24 * 60 * 60 * 1000;
     var JD_SECOND = 0.000011574074074074074074;
@@ -234,8 +235,6 @@ var Time = (new function($) {
                 currentDisplayTime.jd = correctedTime;
             }
         }
-
-
     }
 
     //Finds out if the time flows in 1:1 relation to real time
@@ -295,7 +294,7 @@ var Time = (new function($) {
             hour: (Math.floor(s / (60 * 60)) + 12) % 24,
             minute: Math.floor(s / 60) % 60,
             second: s % 60
-        }
+        };
         return obj;
     }
 
@@ -387,14 +386,11 @@ var Time = (new function($) {
             case 10:
             case 12:
                 return 31;
-                break;
             case 4:
             case 6:
             case 9:
             case 11:
                 return 30;
-                break;
-
             case 2:
                 if (year > 1582) {
                     if (year % 4 === 0) {
@@ -420,10 +416,8 @@ var Time = (new function($) {
                 break;
             case 0:
                 return numberOfDaysInMonthInYear(12, year - 1);
-                break;
             case 13:
                 return numberOfDaysInMonthInYear(1, year + 1);
-                break;
             default:
                 break;
         }
@@ -586,16 +580,16 @@ var Time = (new function($) {
             if (s >= JD_SECOND) s *= 10;
             else if (s < -JD_SECOND) s /= 10;
             else if (s >= 0 && s < JD_SECOND) s = JD_SECOND;
-            else if (s >= -JD_SECOND && s < 0.) s = 0;
+            else if (s >= -JD_SECOND && s < 0) s = 0;
             setTimeRate(s);
         },
 
         decreaseTimeRate: function() {
             var s = timeData.timerate;
-            if (s > JD_SECOND) s /= 10.;
-            else if (s <= -JD_SECOND) s *= 10.;
-            else if (s > -JD_SECOND && s <= 0.) s = -JD_SECOND;
-            else if (s > 0. && s <= JD_SECOND) s = 0.;
+            if (s > JD_SECOND) s /= 10;
+            else if (s <= -JD_SECOND) s *= 10;
+            else if (s > -JD_SECOND && s <= 0) s = -JD_SECOND;
+            else if (s > 0 && s <= JD_SECOND) s = 0;
             setTimeRate(s);
         },
 
@@ -660,5 +654,5 @@ var Time = (new function($) {
             console.log("Leaving time edit mode...");
             timeEditMode = false;
         }
-    }
-}(jQuery));
+    };
+})(jQuery);

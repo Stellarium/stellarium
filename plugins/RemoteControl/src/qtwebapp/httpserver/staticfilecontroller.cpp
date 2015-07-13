@@ -125,7 +125,7 @@ void StaticFileController::setContentType(QString fileName, HttpResponse& respon
         response.setHeader("Content-Type", "text/css");
     }
     else if (fileName.endsWith(".js")) {
-        response.setHeader("Content-Type", "text/javascript");
+	response.setHeader("Content-Type", qPrintable("text/javascript; charset="+encoding));
     }
     // Todo: add all of your content types
 }
