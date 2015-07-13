@@ -41,6 +41,7 @@ public:
 	//! @enum Meteor Shower status.
 	enum Status {
 		INVALID,         // not initialized properly
+		UNDEFINED,       // it's loaded but with 'activity' undefined
 		INACTIVE,        // inactive radiant
 		ACTIVE_REAL,     // active radiant - real data
 		ACTIVE_GENERIC   // active radiant - generic data
@@ -80,7 +81,9 @@ public:
 	//! @return Activity
 	Activity hasRealShower(QDate date, bool &found) const;
 
-	bool enabled() { return m_enabled; }
+	//! Checks if this meteor shower is being displayed or not
+	//! @return true if it's being displayed
+	bool enabled();
 
 	//! Gets a QVariantMap which describes the meteor shower.
 	//! Could be used to create a duplicate.
@@ -116,7 +119,6 @@ public:
 
 private:
 	Status m_status;                   //! Meteor shower status
-	bool m_enabled;                    //! True if the meteor shower is being displayed
 
 	// data from catalog
 	QString m_showerID;                //! The ID of the meteor shower
