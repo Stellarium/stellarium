@@ -1,6 +1,8 @@
-"use strict";
+/* jshint expr: true */
 
-var Search = (new function($) {
+var Search = (function($) {
+    "use strict";
+
     //Private variables
     var $srch_input;
     var $srch_results;
@@ -44,7 +46,6 @@ var Search = (new function($) {
                 var loc = e.options[e.selectedIndex].text;
                 selectObjectByName(loc);
             }
-            
         });
 
         $srch_tabs.tabs();
@@ -162,9 +163,9 @@ var Search = (new function($) {
         searchFinished = true;
     }
 
-    function handeSimbadResults(data) {
+    function handleSimbadResults(data) {
         if (data.status === "error") {
-            $srch_simbad.text("Error (" + data.errorString + ")");
+            $srch_simbad.text(Main.tr("Error (%1)",data.errorString));
         } else {
             $srch_simbad.text(data.status_i18n);
 
@@ -207,7 +208,7 @@ var Search = (new function($) {
         if (!str) {
             //empty search string, clear results
             clearSearchResults();
-            $srch_simbad.text("idle");
+            $srch_simbad.text(Main.tr("idle"));
         } else {
             //got search string, perform ajax
 
@@ -220,12 +221,13 @@ var Search = (new function($) {
                 error: function(xhr, status, errorThrown) {
                     if (status !== "abort") {
                         console.log("Error performing search");
-                        console.log("Error: " + errorThrown);
+                        console.log("Error: " + errorThrown.message);
                         console.log("Status: " + status);
-                        alert("Error performing search");
-
+                        
                         //cancel a pending simbad search
                         cancelSearch();
+
+                        alert(Main.tr("Error performing search"));
                     }
                 }
             });
@@ -235,7 +237,7 @@ var Search = (new function($) {
                 performSimbadSearch(str);
             }, simbadDelay);
 
-            $srch_simbad.text("waiting");
+            $srch_simbad.text(Main.tr("waiting"));
         }
 
     }
@@ -250,19 +252,19 @@ var Search = (new function($) {
             return;
         }
 
-        $srch_simbad.text("querying");
+        $srch_simbad.text(Main.tr("querying"));
         simbadXHR = $.ajax({
             url: "/api/simbad/lookup",
             data: {
                 str: str
             },
-            success: handeSimbadResults,
+            success: handleSimbadResults,
             error: function(xhr, status, errorThrown) {
                 if (status !== "abort") {
                     console.log("Error performing simbad lookup");
-                    console.log("Error: " + errorThrown);
+                    console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
-                    alert("Error performing Simbad lookup");
+                    alert(Main.tr("Error performing Simbad lookup"));
                 }
             }
         });
@@ -344,10 +346,10 @@ var Search = (new function($) {
             },
             error: function(xhr, status, errorThrown) {
                 if (status !== "abort") {
-                    console.log("Error performing simbad lookup");
-                    console.log("Error: " + errorThrown);
+                    console.log("Error loading object types");
+                    console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
-                    alert("Error loading object types");
+                    alert(Main.tr("Error loading object types"));
                 }
             }
         });
@@ -386,9 +388,9 @@ var Search = (new function($) {
             error: function(xhr, status, errorThrown) {
                 if (status !== "abort") {
                     console.log("Error getting object list");
-                    console.log("Error: " + errorThrown);
+                    console.log("Error: " + errorThrown.message);
                     console.log("Status: " + status);
-                    alert("Error getting object list");
+                    alert(Main.tr("Error getting object list"));
                 }
             }
         });
@@ -401,5 +403,5 @@ var Search = (new function($) {
             initControls();
             loadObjectTypes();
         }
-    }
-}(jQuery));
+    };
+})(jQuery);

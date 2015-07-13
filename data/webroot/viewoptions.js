@@ -1,6 +1,6 @@
-"use strict";
+var ViewOptions = (function ($) {
+    "use strict";
 
-var ViewOptions = (new function ($) {
     //Private variables
     var $selectedoption;
     var $vo_landscapelist;
@@ -56,7 +56,7 @@ var ViewOptions = (new function ($) {
                     option.value = val;
                     option.textContent = data[val];
                     $projectionlist.append(option);
-                };
+                }
 
                 $projectionlist.appendTo(parent);
 
@@ -65,7 +65,7 @@ var ViewOptions = (new function ($) {
                 console.log("Error updating projection list");
                 console.log("Error: " + errorThrown);
                 console.log("Status: " + status);
-                alert("Could not retrieve projection list")
+                alert(Main.tr("Could not retrieve projection list"));
             }
         });
     }
@@ -101,7 +101,7 @@ var ViewOptions = (new function ($) {
                 console.log("Error updating landscape list");
                 console.log("Error: " + errorThrown);
                 console.log("Status: " + status);
-                alert("Could not retrieve landscape list")
+                alert(Main.tr("Could not retrieve landscape list"));
             }
         });
     }
@@ -135,9 +135,9 @@ var ViewOptions = (new function ($) {
             },
             error: function (xhr, status, errorThrown) {
                 console.log("Error updating landscape list");
-                console.log("Error: " + errorThrown);
+                console.log("Error: " + errorThrown.message);
                 console.log("Status: " + status);
-                alert("Could not retrieve landscape list")
+                alert(Main.tr("Could not retrieve landscape list"));
             }
         });
     }
@@ -172,7 +172,7 @@ var ViewOptions = (new function ($) {
 
                 $("#vo_landscapelist").combobox("autocomplete",view.landscape);
             }
-            if(currentSkyculture !== view.skyculture) {       
+            if(currentSkyculture !== view.skyculture) {
                 //this forces a reload of the iframe
                 $("#vo_skycultureinfo").attr('src', function (i, val) {
                     return val;
@@ -182,5 +182,5 @@ var ViewOptions = (new function ($) {
                 $("#vo_skyculturelist").combobox("autocomplete",view.skyculture);
             }
         }
-    }
-}(jQuery));
+    };
+})(jQuery);

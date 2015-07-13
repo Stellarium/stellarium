@@ -92,7 +92,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
             DEPENDS ${_absFile}
         )
 
-        IF(${GETTEXT_MSGMERGE_EXECUTABLE})
+        IF(GETTEXT_MSGMERGE_EXECUTABLE)
 			# Update the PO file unconditionally when building the
 			# "update-po-<DOMAIN>" target. Note that to see the file being
 			# processed, we have to run "cmake -E echo", because the
@@ -102,7 +102,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
 				POST_BUILD
 				COMMAND ${CMAKE_COMMAND} -E echo "** Updating ${_relFile}"
 				COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE}
-					--quiet --update -m --backup=none -s
+					--quiet --update -m --backup=none
 					${_absFile} ${_absPotFile}
 				VERBATIM
 			)
@@ -123,3 +123,6 @@ ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 
 ADD_SUBDIRECTORY(stellarium) 
 ADD_SUBDIRECTORY(stellarium-skycultures) 
+IF(USE_PLUGIN_REMOTECONTROL)
+    ADD_SUBDIRECTORY(stellarium-remotecontrol)
+ENDIF()
