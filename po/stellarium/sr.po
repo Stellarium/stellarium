@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-07-08 14:50+0000\n"
+"PO-Revision-Date: 2015-07-13 22:50+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-09 05:25+0000\n"
-"X-Generator: Launchpad (build 17608)\n"
+"X-Launchpad-Export-Date: 2015-07-14 05:15+0000\n"
+"X-Generator: Launchpad (build 17628)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
@@ -812,6 +812,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Ова формула је заснована на Спенсер Џонсовом (%1) проучавању посматрања "
+"Сунца, Месеца и планета после 1650. и Џеан Меус ју је користио у свом "
+"<em>Астрономске формуле за рачунања</em> . Она је такође коришћена у ПС "
+"програму SunTracker Pro."
 
 #: src/core/StelCore.cpp:1474
 msgid ""
@@ -819,6 +823,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Ово је незнатно измењена верзија IAU (1952) формуле која је присвојена у "
+"<em>Астрономске ефемериде</em> и у <em>Канону помрачења Сунца</em> Мика и "
+"Меуса (1983.) ."
 
 #: src/core/StelCore.cpp:1478
 msgid ""
@@ -1032,6 +1039,11 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Ово решење Ф. Еспенка и Ј. Меуса, засновано на Морисоновом и Стефенсоновом "
+"(2004) и полиному који је одговарајућ утабличеним вредностима за 1600-2000, "
+"користи %1веб сајт помрачења НАСА%2 као и њихов <em>Пет миленијума помрачења "
+"Сунца: -1900 до +3000 </em> (2006). Ова формула се такође користи у "
+"соларном, лунарном и планетраном ефемеридском програму SOLEX."
 
 #: src/core/StelCore.cpp:1539
 msgid "Used by default."
@@ -1530,7 +1542,7 @@ msgstr "Меус (1998) (са Чапронтом, Чапронт- Тоузеом
 
 #: src/gui/ConfigurationDialog.cpp:1243
 msgid "JPL Horizons"
-msgstr ""
+msgstr "ЛМП Хоризонт"
 
 #: src/gui/ConfigurationDialog.cpp:1244
 msgid "Meeus & Simons (2000)"
@@ -2206,6 +2218,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Имате проблема са DirectX/OpenGL ES подсистемом. Погледајте дневник (log) за "
+"више детаља.\n"
+"Желите ли да занемарите ово обавештење у будућности и покушате да наставите "
+"у деградираном режиму?"
 
 #: src/StelMainView.cpp:658
 msgid ""
@@ -2213,6 +2229,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Имате проблема са OpenGL/Mesa  подсистемом. Погледајте дневник (log) за више "
+"детаља.\n"
+"Желите ли да занемарите ово обавештење у будућности и покушате да наставите "
+"у деградираном режиму?"
 
 #: src/StelMainView.cpp:713
 msgid ""
@@ -2220,6 +2240,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Имате проблема са OpenGL подсистемом. Погледајте дневник (log) за више "
+"детаља.\n"
+"Желите ли да занемарите ово обавештење у будућности и покушате да наставите "
+"у деградираном режиму?"
 
 #: src/StelMainView.cpp:750
 msgid ""
@@ -2227,6 +2251,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Ваш OpenGL ES подсистем има проблем. Погледај log за више детаља.\n"
+"Занемари и склони ову поруку у будуће и покушај наставиш у деградираном моду?"
 
 #: src/StelMainView.cpp:859
 #, qt-format
@@ -2374,7 +2400,7 @@ msgstr "Неправилне галаксије"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Clusters associated with nebulosity"
-msgstr ""
+msgstr "Јата у вези са маглинама."
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -2611,7 +2637,7 @@ msgstr "Нулти хоризонт"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:191
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
@@ -2797,6 +2823,8 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
+"Услед специфичности у Меркуровој орбити и ротације у одређеним тачкама, "
+"Сунце ће излазити и залазити 3 пута у различито време у једном дану Меркура."
 
 #: src/translations.h:264
 msgid ""
@@ -2824,6 +2852,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Окултације Фобоса и Земље су честе, као и окултације Јупитера. Али "
+"Окултације оба објекта у истом дану су ретка. Ево једна која ће се десити "
+"1/23/2048. У реалној брзини."
 
 #: src/translations.h:268
 msgid ""
@@ -4395,7 +4426,7 @@ msgstr "ЗЧС:"
 
 #: src/ui_viewDialog.h:1303
 msgid "Limit Magnitudes (for unaided/binocular observers)"
-msgstr ""
+msgstr "Граниичне магнитуде ()"
 
 #: src/ui_viewDialog.h:1305
 msgid "Limit Magnitudes"
@@ -4532,7 +4563,7 @@ msgstr "са пејзажа, ако је задата"
 
 #: src/ui_viewDialog.h:1372
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Прикажи пејзажне маркере."
 
 #: src/ui_viewDialog.h:1373
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -5213,6 +5244,12 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
+"*goes misty eyed* Мерио сам величину Касинијеве пукотине кад сам био "
+"студент. Није био свечан призор,како би можда неко очекивао ... Било је "
+"облачно ... Било је кишовито ... Опсерваторија је ималанеку стару опрему где "
+"је један крај оптике био окренут ка <em>фотографији</em> Сатурна која се "
+"налазила на другом крају опсерваторије. Мерили смо. Прорацунали смо. Желели "
+"смо да смо на Хавајима."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:440
@@ -5240,6 +5277,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Подршка је омогућена преко Launchpad сајта. Обрати пажњу да подесиш \"%1\" у "
+"субјекту кад постујеш."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
@@ -5811,6 +5850,10 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"Можете укључити Телрад тражилац; то може бити учињено једино кад окуларна "
+"пројекција није укључена. Ова функција исцртава три концентрична круга од "
+"0.5%1, 2.0%1 и 4.0%1, помажући вам да видите шта би сте видели голим оком "
+"кроз Телрад (или сличан) тражилац."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -5819,11 +5862,11 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
-msgstr ""
+msgstr "Врући тастери"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr ""
+msgstr "Типковне пречице додатка се могу изменити у Општим опцијама."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:553
 #: plugins/Oculars/src/gui/OcularDialog.cpp:558
@@ -5895,7 +5938,7 @@ msgstr "Користите степене и минуте за FOV CCD-a"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "Користи прекидач за CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
@@ -5936,7 +5979,7 @@ msgstr "Двогледи"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "Има сталан нитни крст."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -6085,7 +6128,7 @@ msgstr "гпс"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1732
 msgid "glonass"
-msgstr ""
+msgstr "glonass (Глобални навигациони сателитски систем)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1734
@@ -6661,7 +6704,7 @@ msgstr "Групе:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "TLE set:"
-msgstr ""
+msgstr "ТЛЕ сет"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid ""
@@ -7527,19 +7570,19 @@ msgstr "Савети о маглини"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Галактичке ознаке"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Светле небуле ознаке"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Тамне небуле ознаке"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Clusters hints"
-msgstr ""
+msgstr "Јата ознаке"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
@@ -7910,6 +7953,9 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"Овај додатак имплементира једноставне моделе светлосних кривих за супернове. "
+"Типични поглед кривих за типове I и II супернова може да се види %1овде%2 "
+"(права скала у данима), и овај модел се користи у додатку."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 msgid "Acknowledgments"
@@ -8047,12 +8093,16 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"Овај модел је базиран на време где магнитуда опада за %1,од макисмалне "
+"вредности где %1 је 2, 3, 6 и 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Ако нова нема вредности за опадање магнитуде онда ће овај додатак користити "
+"уопштене вредности за њу."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
@@ -8203,17 +8253,17 @@ msgstr "пулсар"
 
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "has one registered glitch"
-msgstr ""
+msgstr "Има једну регистровану грешку."
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:164
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "Има %1  регистрованих аномалија."
 
 #: plugins/Pulsars/src/Pulsar.cpp:166
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "Пулсар са аномалијом"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:178
@@ -8358,7 +8408,7 @@ msgstr "Белешка"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "Индетификатор пулсара има префикс 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 msgid "Acknowledgment"
@@ -8374,7 +8424,7 @@ msgstr "Опсерваторија Пушино Радио Астрономиј�
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Мациеј Серлак"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 msgid "Nancay Radioastronomical Observatory"
@@ -8410,7 +8460,7 @@ msgstr "Прикажи тастер за пулсаре на траци са а�
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Користи различите боје за пулсаре са грешкама."
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
@@ -8453,32 +8503,32 @@ msgstr "Хладно"
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:858
 msgid "Miniterran"
-msgstr ""
+msgstr "Величина планете"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:860
 msgid "Subterran"
-msgstr ""
+msgstr "Под планета"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:862
 msgid "Terran"
-msgstr ""
+msgstr "Планета"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:864
 msgid "Superterran"
-msgstr ""
+msgstr "Суперпланета"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:866
 msgid "Jovian"
-msgstr ""
+msgstr "Јовијанске планете"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:868
 msgid "Neptunian"
-msgstr ""
+msgstr "Нептунолики"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "planetary system"
@@ -8524,7 +8574,7 @@ msgstr "дана"
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
 #: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Jup"
-msgstr ""
+msgstr "Јуп"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Semi-Major Axis"
@@ -8562,7 +8612,7 @@ msgstr "равнотежна температура"
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "ESI"
-msgstr ""
+msgstr "Индекс сличности Земљи"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
 msgid "Exoplanets Plug-in"
@@ -8631,6 +8681,10 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Класификација планета на основу спектралне класе матичне звезде (Ф, Г, К, "
+"М), насељиве зоне (врућа, топла, хладна) и величине (минипланета, "
+"субпланета, планета, суперпланета, Јовијанска планета, нептунолике планете) "
+"(Земља = Г-топла планета)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Equilibrium Temperature"
@@ -8688,11 +8742,11 @@ msgstr "Професионалне веб стране са информациј
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Вансоларне планете: интерактивна верзија XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "ХЕК (лов на пратиоце вансоларних планета са Кеплером)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
@@ -8717,7 +8771,7 @@ msgstr "Истраживач података екстрасоларних пл�
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Anglo-Australian Planet Search"
-msgstr ""
+msgstr "Англо-Аустралијски трагач планета"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Geneva Extrasolar Planet Search Programmes"
@@ -8725,7 +8779,7 @@ msgstr "истраживачки Женевски  програм екстрас
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Оптичка интерферометрија великог пречника Вести)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
@@ -8741,11 +8795,11 @@ msgstr "НАСА Архива екстрасоларних планета"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "МАУ комисија 53: екстрасоларне планете"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "ExoMol"
-msgstr ""
+msgstr "ЕхоМол"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "The Habitable Zone Gallery"
@@ -8753,7 +8807,7 @@ msgstr "галерија Настањивих зона"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr ""
+msgstr "Трагање за планетама - Потрага за другимпланетама"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Open Exoplanet Catalogue"
@@ -8827,7 +8881,7 @@ msgstr "Веб странице"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Анализирање посматрања"
 
 #: plugins/Observability/src/Observability.cpp:70
 msgid ""
@@ -8981,21 +9035,21 @@ msgstr "највеће удаљавање од Сунца: %1 (за %2 степ�
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "Излазак током заласка Сунца и залазак током изласка Сунца: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr ""
+msgstr "Звездани излазак и залазак:  %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Heliacal rise/set. "
-msgstr ""
+msgstr "Нема звезданог изласка или заласка. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No Acronycal rise/set. "
-msgstr ""
+msgstr "Нема изласка током заласка Сунца и заласка током изласка Сунца "
 
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
@@ -9079,6 +9133,10 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"Било који небески објекат ће се сматрати видљивим када је Сунце испод ове "
+"надморске висине.  Висина за астрономски сумрак се обично креће између -12 и "
+" -18 степени. Овај параметар се користи само за процену распона епоха у "
+"којима је могуће посматрање (види испод)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Horizon altitude:"
@@ -9110,7 +9168,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "Ахроничан/Космолошки/Сунчани излазак/залазак"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -9244,7 +9302,7 @@ msgstr "Ефемериде за данас (излаз, залаз, транзи
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "Датуми ахроничног/Космолошког/Сунчаног изласка/заласка"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
@@ -9269,11 +9327,13 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"Овај додатак омогућава постепено ѕумирање помоћу пречице на тастатури као у "
+"<em>Cartes du Ciel</em> планетаријумском програму."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "Подеси виднопоље на %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
@@ -9287,6 +9347,12 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Стандардно подешен Стеларијум зумира клизећи помоћу скрола на мишу или се "
+"зумирање може обавити путем пречица на тастатури. Поједини корисници "
+"практикују степенасто зумирање по фиксним вредностима видног поља као у "
+"Cartes du Ciel планетаријумском програму, и тај додатак омогућава ову "
+"опцију. Могуће је мењати вредности и користити тастатуру за брза подешавања "
+"фидног поља. Све вредности су у степенима."
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
@@ -9395,7 +9461,7 @@ msgstr "Прикажи кишу метеора"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Radiant labels"
-msgstr ""
+msgstr "Ознаке на радијанту"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:167
 msgid "Meteor Shower configuration window"
@@ -9405,11 +9471,12 @@ msgstr "Конфигурациони прозор кише метеора"
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"Стари пљускови.јсон фајл није више компатибилан - користи основни фајл"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
 msgid "Quadrantids"
-msgstr ""
+msgstr "Квадрантиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
@@ -9434,12 +9501,12 @@ msgstr "η-Акварид"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
 msgid "June Bootids"
-msgstr ""
+msgstr "ЈУне Боотидс"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Писцис Аустринидс"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
@@ -9474,12 +9541,12 @@ msgstr "Леониди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
 msgid "Phoenicids"
-msgstr ""
+msgstr "Фенициди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Пупид-Велдс"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
@@ -9499,7 +9566,7 @@ msgstr "δ-Леониди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
 msgid "π-Puppids"
-msgstr ""
+msgstr "п-Пупидс"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
@@ -9509,7 +9576,7 @@ msgstr "Јунски Лириди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "к-Цајгниди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
@@ -9519,7 +9586,7 @@ msgstr "ε-Лириди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Ауригиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
@@ -9539,12 +9606,12 @@ msgstr "Северни Тауриди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
 msgid "Monocerotids"
-msgstr ""
+msgstr "Моноцеротиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α- Моноцеротиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
@@ -9559,17 +9626,17 @@ msgstr "Геминиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Леонис Минориди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Децембарски Леонис Минориди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Коме беренициди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
@@ -9594,12 +9661,12 @@ msgstr "α-Скорпиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Змијоносци"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "тета-Змијоносци"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
@@ -9629,7 +9696,7 @@ msgstr "северни ω-Скорпиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
 msgid "Arietids"
-msgstr ""
+msgstr "Ариетиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
@@ -9639,7 +9706,7 @@ msgstr "π-Кетоиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "делта-Канцериди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
@@ -9664,42 +9731,42 @@ msgstr "η-Кратериди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
 msgid "π-Virginids"
-msgstr ""
+msgstr "п-Виргиниди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
 msgid "θ-Virginids"
-msgstr ""
+msgstr "тета-виргиниди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
 msgid "May Librids"
-msgstr ""
+msgstr "Мајски Либриди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
 msgid "June Scutids"
-msgstr ""
+msgstr "Јунски Скутиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "алфа-Писцес Аустралиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "јужни јота- Аквариди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "Северни јота-Аквариди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "гама-Аквариди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1362
@@ -9709,7 +9776,7 @@ msgstr "Јесењи Ариетиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
 msgid "χ-Orionids"
-msgstr ""
+msgstr "чи-Ориониди"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
@@ -9719,102 +9786,102 @@ msgstr "Комета 1П/Халеј"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Комета 7П/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Комета 55П/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Комета 96П/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Комета 109п/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "КОмета Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Комета 26П/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Комета 21П/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "КОмета 169П/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Комета 289П/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "КОмета 8П/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "КОмета 3Д/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "КОмета Ц/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Комета С/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Комета Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Споредна планета 2003ЕХ1 и комета С/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Споредна планета (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1402
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Споредна планета  2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1404
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "КОмета 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1406
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Споредна планета 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1408
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "МИнор Планет  (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:327
 msgid "generic data"
@@ -9830,12 +9897,12 @@ msgstr "киша метеора"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:355
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Радијан померај (по дану)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:362
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Геоцентрична метеорска брзина: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:367
 #, qt-format
@@ -9849,7 +9916,7 @@ msgstr "Родитељско тело: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:378
 msgid "Active"
-msgstr ""
+msgstr "Активан"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:386
 msgid "Activity"
@@ -9870,7 +9937,7 @@ msgstr "променљива"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:182
 msgid "ZHR"
-msgstr ""
+msgstr "ЗХР"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Data Type"
@@ -9929,7 +9996,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:502
 msgid "Radiant"
-msgstr ""
+msgstr "Радијант"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
 msgid ""
@@ -9938,6 +10005,9 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Радијант или привидни радијант метеорских ројева је тачка на небу, са које "
+"(посматрачу) се чини да метеори долазе. На пример Персеиди су метеори за "
+"које се чини да долазе из тачке која се налазе у сазвежђу Персеја."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid ""
@@ -9946,6 +10016,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Посматрач може видети такав метеор било где на небу али правац метеора, кад "
+"га пратимо уназад увек ће нам показати у радијант. Метеор ћији траг не иде "
+"ка радијанту за дотични метеорски рој назива се спорадик и не сматра се као "
+"део метеорске кише."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 msgid ""
@@ -9953,10 +10027,13 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Многи метеорски ројеви имају радијант тачку која менја положај током времена "
+"у односу на почетни положај кад је рој почео да се појављује. На пример "
+"тачка радијанта за Делта Ауригиде се помера вше од степена за ноћ."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Зенитски часовни однос"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
 msgid ""
@@ -9966,6 +10043,11 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"У астрономији, зенитски часовни однос метеорских ројева је број метеора које "
+"је посматрач уочио у једном сату под ведрим и мрачним небом (гранична "
+"привидна мгнитуда је 6,5) ако би радијант метеорског роја био у зениту. "
+"Однос који може ефективно да буде виђен је готово увек мањи и опада како се "
+"радијант приблжава хоризонту."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 msgid "Population index"
@@ -9978,6 +10060,10 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"Популациони индекс нам говори магнитудску дистрибуцију метеорског роја. "
+"Вредности испод 2,5 одговарају расподели где су сјајни метеори учесталији "
+"него они осредњи, док вредности изнад 3,0 указују да удео бледих метеора је "
+"већи него иначе."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 msgid "Notes"
@@ -9987,6 +10073,7 @@ msgstr "Белешке"
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"Овај додатак је креиран као пројекат ESA Summer of Code in Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid "Info"
@@ -10038,48 +10125,48 @@ msgstr "Омогући приказ кише метеора приликом п�
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Прикажи радијант маркер"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Прикажи радијант ознаке"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Прикажи само активан радијант"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:487
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Величина слова (у пикселима)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
 msgid "Set radiant color"
-msgstr ""
+msgstr "Подеси боју радијанта"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Активан радијант - Генерички податци"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:495
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Неактиван радијант"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
 msgid "Inactive"
-msgstr ""
+msgstr "Неактиван"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Активан радијант - Стварни податци"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:503
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:508
 msgid "Search"
-msgstr ""
+msgstr "Претрага"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:504
 msgid "From:"
-msgstr ""
+msgstr "Од:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:505
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:507
@@ -10096,7 +10183,7 @@ msgstr "Резултати"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:510
 msgid "Search Events"
-msgstr ""
+msgstr "Тражи догађаје"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
@@ -10147,7 +10234,7 @@ msgstr "Еклиптичка лонгитуда/латитуда (Ј2000.0)"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:252
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "HA/Dec"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
@@ -10155,7 +10242,7 @@ msgstr "Додатак за координате показивача"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
-msgstr ""
+msgstr "Горњи центар екрана"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
@@ -10215,11 +10302,11 @@ msgstr "Координате:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "Положај текста са кооринатама поинтера"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
-msgstr ""
+msgstr "Позиција текста:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
@@ -10239,7 +10326,7 @@ msgstr "Трансформисање модела..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:193
 msgid "Loading ground..."
-msgstr ""
+msgstr "Учитавање подлоге..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:204
 msgid "Transforming ground..."
@@ -10247,7 +10334,7 @@ msgstr "Трансформисање земље..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Израчунаванје мапе судара ..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
@@ -10256,45 +10343,51 @@ msgstr "Крајње учитавање"
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"Scenery3d shader грешка, цртање није могуће. Провери дебаг излаз за више "
+"детаља."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2096
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"Ваш хардвер не подржава коцка мапирање (\"cubemapping\"), молимо вас пређите "
+"на пројекцију перспективе (Perspective projection)!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "Geometry shader није подржан. Враћање уназад на '6 Textures' мод."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Враћање уназад на '6 Textures' због угаоне грешке."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Shadow mapping не може бити кориштен на хардверу рачунара који се тренутно "
+"користи, провери логове за детаље."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "Scenery3d додатак учитан"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "Scenery3d: 3D пејзаж"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "Укључи 3D пејзаж"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Прикажи подешавања"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Прикажи viewpoint"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle shadows"
@@ -10302,11 +10395,11 @@ msgstr "Прикажи / сакриј сенке"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Сакријте/прикажите неисправну информацију"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle location text"
-msgstr ""
+msgstr "Сакријте/прикажите локациони текст"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
@@ -10348,11 +10441,11 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Није могуће проначи сцену ИД за %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Молимо Вас да прво убаците сцену!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
@@ -10385,11 +10478,12 @@ msgstr "Сенке су деактивиране или нису  могуће."
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "Површина судара %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
+"Селектовани начин мапе коцке није подржан, вратите се на '6 Текстуру'"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
@@ -10406,25 +10500,25 @@ msgstr "искључен"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Промена величине мапе коцке"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Величина мапе коцке није подржана, поставите на %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Промена величине мапирања сенке"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Величина мапирања сенке није подржана, поставите на %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
 msgid "3D Sceneries"
-msgstr ""
+msgstr "3Д пејзажи"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:924
 msgid ""
@@ -10446,7 +10540,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Обавезно за мапирање судара и сенки!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
@@ -10456,13 +10550,14 @@ msgstr ""
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
-msgstr ""
+msgstr "Пружа убрзање у замену за квалитет сенке, поготово за велике сцене."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"Одређује како се сенке филтрирају, по растућем квалитету од врха ка дну."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
@@ -10479,6 +10574,8 @@ msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Захтева  <b>НИСКО</b> или  <b>ВИСОКО</b> филтрирање сенке (без "
+"<b>Хардвера</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
@@ -10587,7 +10684,7 @@ msgstr "Координате мреже (%1): %2м, %3м, %4м"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "3Д пејзаж"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
@@ -10613,7 +10710,7 @@ msgstr "Светлост бакље (%1)"
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "Прикажите координатну мрежу (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
@@ -10633,7 +10730,7 @@ msgstr "Једноставне сенке"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Мапирање судара"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
@@ -10641,7 +10738,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Величина мапирања сенки:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
@@ -10755,7 +10852,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Надир пролаз"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
@@ -10764,7 +10861,7 @@ msgstr "Изабери објекат"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:773
 msgid "error if you can read this"
-msgstr ""
+msgstr "погрешно је  уколико можете прочитати ово"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
 msgid "Mercury"
@@ -10804,15 +10901,15 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Деклинација Зенитног пролаза"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Деклинација Надир пролаза"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "Деклинација тренутног обележеног објекта"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
@@ -10824,7 +10921,7 @@ msgstr "Тренутна деклинација Месеца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Тренутна деклинација планете видљиве голим оком"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -10836,11 +10933,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Обележите боју линије равнодневице"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Обележите боју линије краткодневице"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
@@ -10856,15 +10953,15 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Обележите боју линије зенутног пролаза"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Обележите боју линије надир пролаза"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Обележите боју линије за обележени објекат"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for current sun line"
@@ -10917,11 +11014,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "Деклинација Зенитног  пролаза"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Деклинација Надир пролаза"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
