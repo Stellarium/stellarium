@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-07-12 09:19+0000\n"
-"Last-Translator: francheu <francheu@caramail.com>\n"
+"PO-Revision-Date: 2015-07-13 09:29+0000\n"
+"Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-13 05:15+0000\n"
-"X-Generator: Launchpad (build 17620)\n"
+"X-Launchpad-Export-Date: 2015-07-14 05:15+0000\n"
+"X-Generator: Launchpad (build 17628)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
@@ -5176,7 +5176,7 @@ msgid ""
 msgstr ""
 "L'extinction est la perte de luminosité de l'étoile causée par l'atmosphère "
 "de la Terre. Elle est donnée en mag/masse d'air, où la masse d'air est le "
-"nombre d'atmosphères que la lumière doit traverser (zénith: 1 ; horizon : "
+"nombre d'atmosphères que la lumière doit traverser (zénith : 1 ; horizon : "
 "environ 40)."
 
 #: src/ui_AtmosphereDialog.h:186
@@ -5977,7 +5977,7 @@ msgstr "Afficher/cacher la vue oculaire :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Open pop-up navigation menu:"
-msgstr "Ouvrir un menu pop-up de navigation :"
+msgstr "Ouvrir un menu pop-up de navigation :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1082
 msgid "Interface"
@@ -7790,7 +7790,7 @@ msgstr "Importation des paramètres orbitaux en format MPC..."
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:155
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr "Interroger le MPC %1 :"
+msgstr "Interroger le MPC %1 :"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:158
 msgid "Only one result will be returned if the query is successful."
@@ -8063,7 +8063,7 @@ msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
 "Nous remercions les personnes suivantes pour leur contribution et leurs "
-"précieux commentaires :"
+"précieux commentaires :"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Sergei Blinnikov"
@@ -8095,7 +8095,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
 #, qt-format
 msgid "Next update: %1 days"
-msgstr "Mise à jour suivante : %1 jours"
+msgstr "Mise à jour suivante : %1 jours"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:212
 msgid "Historical supernovae is updated"
@@ -8370,16 +8370,16 @@ msgstr "pulsar avec glitches"
 #: plugins/Pulsars/src/Pulsar.cpp:178
 #, qt-format
 msgid "Barycentric period: %1 s"
-msgstr "Période barycentrique : %1 s"
+msgstr "Période barycentrique : %1 s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:182
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
-msgstr "Dérivée temporelle de la période barycentrique : %1"
+msgstr "Dérivée temporelle de la période barycentrique : %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "Dispersion measure:"
-msgstr "Mesure de la dispersion :"
+msgstr "Mesure de la dispersion :"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:190
@@ -8394,34 +8394,34 @@ msgstr "pc"
 #: plugins/Pulsars/src/Pulsar.cpp:199
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr "Taux de perte d'énergie rotationnelle : %1 erg/s"
+msgstr "Taux de perte d'énergie rotationnelle : %1 erg/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr "Période binaire du pulsar : %1 jours"
+msgstr "Période binaire du pulsar : %1 jours"
 
 #: plugins/Pulsars/src/Pulsar.cpp:207
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr "Excentricité : %1"
+msgstr "Excentricité : %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:212
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr "Parallaxe annuelle : %1 mas"
+msgstr "Parallaxe annuelle : %1 mas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:216
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
-"Distance basée sur le modèle de la densité d'électrons : %1 kpc (%2 a.l.)"
+"Distance basée sur le modèle de la densité d'électrons : %1 kpc (%2 a.l.)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:220
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr "Largeur du profil à mi-hauteur : %1 ms"
+msgstr "Largeur du profil à mi-hauteur : %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:226 plugins/Pulsars/src/Pulsar.cpp:238
@@ -8444,7 +8444,7 @@ msgstr "mJy"
 #: plugins/Pulsars/src/Pulsar.cpp:260
 #, qt-format
 msgid "Notes: %1"
-msgstr "Notes : %1"
+msgstr "Notes : %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:327
 msgid ""
@@ -8660,7 +8660,7 @@ msgstr "Rayon"
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr "Température effective : %1 K"
+msgstr "Température effective : %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
@@ -9185,22 +9185,22 @@ msgstr "Nuits au-dessus de l'horizon : %1"
 
 #: plugins/Observability/src/Observability.cpp:213
 msgid "TODAY:"
-msgstr "Aujourd'hui :"
+msgstr "Aujourd'hui :"
 
 #: plugins/Observability/src/Observability.cpp:214
 msgid "THIS YEAR:"
-msgstr "Cette année :"
+msgstr "Cette année :"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:216
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "Pleine lune précédente : %1 %2 à %3h%4. "
+msgstr "Pleine lune précédente : %1 %2 à %3h%4. "
 
 #: plugins/Observability/src/Observability.cpp:217
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "Prochaine pleine lune : %1 %2 à %3h%4. "
+msgstr "Prochaine pleine lune : %1 %2 à %3h%4. "
 
 #: plugins/Observability/src/Observability.cpp:232
 #: plugins/Observability/src/Observability.cpp:233
@@ -9271,7 +9271,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Today ephemeris:"
-msgstr "Éphéméride du jour :"
+msgstr "Éphéméride du jour :"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid ""
@@ -9354,7 +9354,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Nights with source above horizon:"
-msgstr "Nuits avec la source au-dessus de l'horizon :"
+msgstr "Nuits avec la source au-dessus de l'horizon :"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid ""
@@ -10584,15 +10584,15 @@ msgstr "Afficher/cacher la position du texte"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "Allumer/éteindre la lampe torche"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr ""
+msgstr "Recharger les nuanceurs"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "Nuanceurs Scenery3d relancés"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
@@ -10710,6 +10710,16 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Moteur de rendu 3D de l'avant-plan. Déplacez-vous, trouvez et évitez les "
+"obstacles de votre jardin, trouvez et démontrez de possibles alignements "
+"astronomiques dans des temples, observez les ombres sur les cadrans "
+"solaires, etc.</p><p>Pressez Ctrl+flèches pour vous déplacer. Utilisez "
+"Ctrl+PgUp/PgDn pour ajuster la hauteur des yeux. La vitesse du mouvement est "
+"liée au champ de vision (c'est-à-dire qu'il faut zoomer pour un ajustement "
+"fin). Vous pouvez continuer le déplacement en relâchant la touche Ctrl avant "
+"la touche flèche.</p><p>Le développement de ce plugin a été en partie "
+"supporté par le projet ASTROSIM (P 21208-G19) du Fond Autrichien pour la "
+"Science (FWF). Plus d'informations : http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -10764,6 +10774,10 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Ce réglage détermine le rendu de la scène lorsque Stellarium utilise une "
+"projection autre que « Perspective ». La scène est toujours rendue sur un "
+"cube, qui est à son tour déformé selon la projection réelle. Le cube est "
+"décrit à l'aide d'une image appelée « cubemap »."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
@@ -10775,6 +10789,8 @@ msgstr ""
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Cubemap</b> utilise une seule GL_TEXTURE_CUBEMAP. Recommandé pour la "
+"plupart des utilisateurs."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -10785,7 +10801,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Calcule les ombres séparément pour chaque face du cubemap."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -10864,24 +10880,24 @@ msgstr "Scène 3D"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Définir comme scène par défaut"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Charger/enregistrer les points de vue"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Puissance de la lampe-torche"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Portée de la lampe-torche :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Lampe-torche (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
@@ -10910,7 +10926,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Taille du cubemap :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
@@ -10918,7 +10934,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Qualité de filtrage :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
@@ -10962,11 +10978,11 @@ msgstr "Intervalle :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Mettre à jour uniquement la face dominante lors du déplacement"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Mettre aussi à jour la deuxième face la plus dominante"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
