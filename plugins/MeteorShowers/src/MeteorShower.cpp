@@ -399,13 +399,6 @@ int MeteorShower::calculateZHR(const double& currentJD)
 	return qRound(gaussian);
 }
 
-QDateTime MeteorShower::getSkyQDateTime(StelCore* core) const
-{
-	//get the current sky date
-	double JD = core->getJDay();
-	return StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
-}
-
 float MeteorShower::getSolarLongitude(QDateTime QDT) const
 {
 	//The number of days (positive or negative) since Greenwich noon,

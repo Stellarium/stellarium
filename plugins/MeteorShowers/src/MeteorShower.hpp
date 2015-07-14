@@ -151,16 +151,7 @@ private:
 	//! @param current julian day
 	int calculateZHR(const double& currentJD);
 
-	//! Get the current sky QDateTime
-	//! @return Current QDateTime of sky
-	QDateTime getSkyQDateTime(StelCore *core) const;
-
-	//! Check if the JSON file has real data to a given year
-	//! @param yyyy year to check
-	//! @return index of the year or 0 to generic data
-	int searchRealData(QString yyyy) const;
-
-	//! Get the solar longitude for a specified date
+	//! Gets the solar longitude for a specified date
 	//! @param QDT QDateTime
 	//! @return solar longitude in degree
 	float getSolarLongitude(QDateTime QDT) const;
