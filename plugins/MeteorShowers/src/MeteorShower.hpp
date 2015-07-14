@@ -52,7 +52,7 @@ public:
 	{
 		QString year;              //! The catalog year
 		int zhr;                   //! The ZHR on peak
-		QString variable;          //! The ZHR range when it's variable
+		QList<int> variable;       //! The ZHR range when it's variable
 		QDate start;               //! Initial date of activity
 		QDate finish;              //! Last date of activity
 		QDate peak;                //! Peak activity
@@ -138,8 +138,8 @@ private:
 	double m_radiantAlpha;             //! Current R.A. for radiant of meteor shower
 	double m_radiantDelta;             //! Current Dec. for radiant of meteor shower
 	Activity m_activity;               //! Current activity
+	int m_zhr;                         //! Current ZHR
 
-	int m_zhr;                         //! ZHR of shower
 	QString m_variable;                //! value of variable for ZHR
 	QDateTime m_start;                 //! First day for activity
 	QDateTime m_finish;                //! Latest day for activity
@@ -147,13 +147,9 @@ private:
 
 	QList<MeteorObj*> m_activeMeteors; //! List with all the active meteors
 
-	//! Calculate value of ZHR using normal distribution
-	//! @param zhr
-	//! @param variable
-	//! @param start
-	//! @param finish
-	//! @param peak
-	int calculateZHR(int zhr, QString variable, QDate start, QDate finish, QDate peak);
+	//! Calculates the ZHR using normal distribution
+	//! @param current julian day
+	int calculateZHR(const double& currentJD);
 
 	//! Get the current sky QDateTime
 	//! @return Current QDateTime of sky

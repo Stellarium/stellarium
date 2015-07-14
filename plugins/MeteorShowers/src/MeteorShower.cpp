@@ -68,8 +68,30 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		Activity d;
 		d.year = activityMap.value("year").toString();
 		d.zhr = activityMap.value("zhr").toInt();
-		d.variable = activityMap.value("variable").toString();
 
+		//
+		// 'variable'field
+		//
+		QStringList variable = activityMap.value("variable").toString().split("-");
+		if (d.zhr == -1) // is variable
+		{
+			bool ok = variable.size() == 2;
+			for (int i=0; i < 2 && ok; i++)
+			{
+				d.variable.append(variable.at(i).toInt(&ok));
+			}
+
+			if (!ok)
+			{
+				qWarning() << "MeteorShower: INVALID data for " << m_showerID;
+				qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+				return;
+			}
+		}
+
+		//
+		// 'start', 'finish' and 'peak' fields
+		//
 		// if it's generic, doesn't matter the year
 		QString year = d.year.toInt() > 0 ? d.year : "2000";
 
@@ -215,8 +237,8 @@ void MeteorShower::update(double deltaTime)
 		return; // don't create new meteors
 	}
 
-	int currentZHR = calculateZHR(m_activity.zhr, m_activity.variable, m_activity.start,
-				      m_activity.finish, m_activity.peak);
+	// calculates a ZHR for the current date
+	int currentZHR = calculateZHR(currentJD);
 
 	// determine average meteors per frame needing to be created
 	int mpf = (int) ((double) currentZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
@@ -353,54 +375,28 @@ MeteorShower::Activity MeteorShower::hasRealShower(QDate date, bool& found) cons
 	return Activity();
 }
 
-int MeteorShower::calculateZHR(int zhr, QString variable, QDate start, QDate finish, QDate peak)
+int MeteorShower::calculateZHR(const double& currentJD)
 {
-	/***************************************
-	 * Get ZHR ranges
-	 ***************************************/
-	int highZHR;
-	int lowZHR;
-	//bool multPeak = false; //multiple peaks
-	if (zhr != -1)  //isn't variable
-	{
-		highZHR = zhr;
-		lowZHR = 0;
-	}
-	else
-	{
-		QStringList varZHR = variable.split("-");
-		lowZHR = varZHR.at(0).toInt();
-		if (varZHR.at(1).contains("*"))
-		{
-			//multPeak = true;
-			highZHR = varZHR[1].replace("*", "").toInt();
-		}
-		else
-		{
-			highZHR = varZHR.at(1).toInt();
-		}
-	}
+	double startJD = m_activity.start.toJulianDay();
+	double finishJD = m_activity.finish.toJulianDay();
+	double peakJD = m_activity.peak.toJulianDay();
 
-	/***************************************
-	 * Convert time intervals
-	 ***************************************/
-	double startJD = start.toJulianDay();
-	double finishJD = finish.toJulianDay();
-	double peakJD = peak.toJulianDay();
-	double currentJD = StelApp::getInstance().getCore()->getJDay();
-
-	/***************************************
-	 * Gaussian distribution
-	 ***************************************/
-	double sd; //standard deviation
+	float sd; //standard deviation
 	if (currentJD >= startJD && currentJD < peakJD) //left side of gaussian
-		sd = (peakJD - startJD)/2;
+	{
+		sd = (peakJD - startJD) / 2.f;
+	}
 	else
-		sd = (finishJD - peakJD)/2;
+	{
+		sd = (finishJD - peakJD) / 2.f;
+	}
 
-	double gaussian = highZHR * qExp( - qPow(currentJD - peakJD, 2) / (sd*sd) ) + lowZHR;
+	float maxZHR = m_activity.zhr == -1 ? m_activity.variable.at(1) : m_activity.zhr;
+	float minZHR = m_activity.zhr == -1 ? m_activity.variable.at(0) : 0;
 
-	return (int) ((int) ((gaussian - (int) gaussian) * 10) >= 5 ? gaussian+1 : gaussian);
+	float gaussian = maxZHR * qExp( - qPow(currentJD - peakJD, 2) / (sd * sd) ) + minZHR;
+
+	return qRound(gaussian);
 }
 
 QDateTime MeteorShower::getSkyQDateTime(StelCore* core) const
@@ -442,7 +438,7 @@ QVariantMap MeteorShower::getMap()
 		QVariantMap activityMap;
 		activityMap["year"] = p.year;
 		activityMap["zhr"] = p.zhr;
-		activityMap["variable"] = p.variable;
+		// TODO: activityMap["variable"] = p.variable;
 		activityMap["start"] = p.start;
 		activityMap["finish"] = p.finish;
 		activityMap["peak"] = p.peak;
