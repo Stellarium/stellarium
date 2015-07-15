@@ -411,46 +411,6 @@ float MeteorShower::getSolarLongitude(QDate date) const
 	return slong;
 }
 
-QVariantMap MeteorShower::getMap()
-{
-	QVariantMap map;
-	map["showerID"] = m_showerID;
-	map["designation"] = m_designation;
-	map["speed"] = m_speed;
-	map["radiantAlpha"] = m_rAlphaPeak;
-	map["radiantDelta"] = m_rDeltaPeak;
-	map["driftAlpha"] = m_driftAlpha;
-	map["driftDelta"] = m_driftDelta;
-	map["parentObj"] = m_parentObj;
-	map["pidx"] = m_pidx;
-
-	QVariantList activityList;
-	foreach(const Activity &p, m_activities)
-	{
-		QVariantMap activityMap;
-		activityMap["year"] = p.year;
-		activityMap["zhr"] = p.zhr;
-		// TODO: activityMap["variable"] = p.variable;
-		activityMap["start"] = p.start;
-		activityMap["finish"] = p.finish;
-		activityMap["peak"] = p.peak;
-		activityList << activityMap;
-	}
-	map["activity"] = activityList;
-
-	QVariantList colorList;
-	foreach(const Meteor::colorPair &c, m_colors)
-	{
-		QVariantMap colorMap;
-		colorMap["color"] = c.first;
-		colorMap["intensity"] = c.second;
-		colorList << colorMap;
-	}
-	map["colors"] = colorList;
-
-	return map;
-}
-
 QString MeteorShower::getDesignation() const
 {
 	if (m_showerID.toInt()) // if showerID is a number
