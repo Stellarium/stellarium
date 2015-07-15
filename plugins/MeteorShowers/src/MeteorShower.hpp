@@ -85,10 +85,6 @@ public:
 	//! @return true if it's being displayed
 	bool enabled();
 
-	//! Gets a QVariantMap which describes the meteor shower.
-	//! Could be used to create a duplicate.
-	QVariantMap getMap();
-
 	//! Gets the meteor shower id
 	//! //! @return designation
 	QString getDesignation() const;
