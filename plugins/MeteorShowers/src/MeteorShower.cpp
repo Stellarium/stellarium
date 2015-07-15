@@ -399,11 +399,11 @@ int MeteorShower::calculateZHR(const double& currentJD)
 	return qRound(gaussian);
 }
 
-float MeteorShower::getSolarLongitude(QDateTime QDT) const
+float MeteorShower::getSolarLongitude(QDate date) const
 {
 	//The number of days (positive or negative) since Greenwich noon,
 	//Terrestrial Time, on 1 January 2000 (J2000.0)
-	double n = StelUtils::qDateTimeToJd(QDT) - 2451545.0;
+	double n = date.toJulianDay() - 2451545.0;
 
 	//The mean longitude of the Sun, corrected for the aberration of light
 	float slong = (280.460 + 0.9856474*n) / 360;
@@ -519,38 +519,39 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << q_("Parent body: %1").arg(q_(m_parentObj)) << "<br />";
 		}
 
-		if(m_start.toString("M") == m_finish.toString("M"))
+		if(m_activity.start.month() == m_activity.finish.month())
 		{
 			oss << QString("%1: %2 - %3 %4")
 			       .arg(q_("Active"))
-			       .arg(m_start.toString("d"))
-			       .arg(m_finish.toString("d"))
-			       .arg(m_start.toString("MMMM"));
+			       .arg(m_activity.start.day())
+			       .arg(m_activity.finish.day())
+			       .arg(m_activity.start.toString("MMMM"));
 		}
 		else
 		{
 			oss << QString("%1: %2 - %3")
 			       .arg(q_("Activity"))
-			       .arg(m_start.toString("d MMMM"))
-			       .arg(m_finish.toString("d MMMM"));
+			       .arg(m_activity.start.toString("d MMMM"))
+			       .arg(m_activity.finish.toString("d MMMM"));
 		}
 		oss << "<br />";
-		oss << q_("Maximum: %1").arg(m_peak.toString("d MMMM"));
+		oss << q_("Maximum: %1").arg(m_activity.peak.toString("d MMMM"));
 
-		QString slong = QString::number(MeteorShower::getSolarLongitude(m_peak), 'f', 2);
-		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude is")).arg(slong);
+		QString slong = QString::number(MeteorShower::getSolarLongitude(m_activity.peak), 'f', 2);
+		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude")).arg(slong);
 		oss << "<br />";
 
-		if(m_zhr > 0)
+		if(m_activity.zhr > 0)
 		{
-			oss << QString("ZHR<sub>max</sub>: %1").arg(m_zhr) << "<br />";
+			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
 		}
 		else
 		{
 			oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
-			if(!m_variable.isEmpty())
+			if(m_activity.variable.size() == 2)
 			{
-				oss << "; " << m_variable;
+				oss << QString("; %1-%2").arg(m_activity.variable.at(0))
+							 .arg(m_activity.variable.at(1));
 			}
 			oss << "<br />";
 		}

@@ -99,7 +99,7 @@ public:
 
 	//! Gets the peak
 	//! @return peak
-	QDateTime getPeak() { return m_peak; }
+	QDate getPeak() { return m_activity.peak; }
 
 	//! Gets the current ZHR
 	//! @return ZHR
@@ -152,9 +152,9 @@ private:
 	int calculateZHR(const double& currentJD);
 
 	//! Gets the solar longitude for a specified date
-	//! @param QDT QDateTime
+	//! @param date QDate
 	//! @return solar longitude in degree
-	float getSolarLongitude(QDateTime QDT) const;
+	float getSolarLongitude(QDate date) const;
 };
 
 #endif /*_METEORSHOWER_HPP_*/
