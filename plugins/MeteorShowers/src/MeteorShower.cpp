@@ -103,7 +103,7 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		finish = finish.isEmpty() ? "" : finish + " " + year;
 		d.finish = QDate::fromString(finish, "MM.dd yyyy");
 
-		QString peak = activityMap.value("peak").toString() + " " + year;
+		QString peak = activityMap.value("peak").toString();
 		peak = peak.isEmpty() ? "" : peak + " " + year;
 		d.peak = QDate::fromString(peak, "MM.dd yyyy");
 
