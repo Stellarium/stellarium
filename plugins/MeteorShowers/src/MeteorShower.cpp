@@ -38,7 +38,6 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	, m_pidx(0)
 	, m_radiantAlpha(0)
 	, m_radiantDelta(0)
-	, m_zhr(0)
 {
 	// return initialized if the mandatory fields are not present
 	if(!map.contains("showerID") || !map.contains("activity"))
