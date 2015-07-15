@@ -103,7 +103,7 @@ public:
 
 	//! Gets the current ZHR
 	//! @return ZHR
-	int getZHR() { return m_zhr; }
+	int getZHR() { return m_activity.zhr; }
 
 	//
 	// Methods defined in StelObject class
@@ -138,12 +138,6 @@ private:
 	double m_radiantAlpha;             //! Current R.A. for radiant of meteor shower
 	double m_radiantDelta;             //! Current Dec. for radiant of meteor shower
 	Activity m_activity;               //! Current activity
-	int m_zhr;                         //! Current ZHR
-
-	QString m_variable;                //! value of variable for ZHR
-	QDateTime m_start;                 //! First day for activity
-	QDateTime m_finish;                //! Latest day for activity
-	QDateTime m_peak;                  //! Day with maximum for activity
 
 	QList<MeteorObj*> m_activeMeteors; //! List with all the active meteors
 
