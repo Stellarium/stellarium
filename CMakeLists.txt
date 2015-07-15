@@ -184,7 +184,7 @@ ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
 # SOCIS 2015:
 ADD_PLUGIN(RemoteControl 1)
-#ADD_PLUGIN(RemoteSync 1)
+ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)

@@ -1,0 +1,12 @@
+# This is the cmake config file for the RemoteSync plugin
+SET(REMOTESYNC_VERSION "0.0.1")
+ADD_DEFINITIONS(-DREMOTESYNC_VERSION="${REMOTESYNC_VERSION}")
+
+ADD_SUBDIRECTORY( src )
+
+IF(APPLE)
+    SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)
+ElSE(APPLE)
+    SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/.stellarium)
+ENDIF(APPLE)
+INSTALL(FILES DESTINATION "modules/RemoteSync")
