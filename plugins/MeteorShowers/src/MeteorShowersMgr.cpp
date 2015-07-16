@@ -406,19 +406,22 @@ void MeteorShowersMgr::setButtonsEnabled(const bool& b)
 void MeteorShowersMgr::setColorARG(const Vec3f& rgb)
 {
 	m_colorARG = rgb;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", rgb.toString());
+	QString rgbStr = QString("%1,%2,%3").arg(rgb[0]).arg(rgb[1]).arg(rgb[2]);
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", rgbStr);
 }
 
 void MeteorShowersMgr::setColorARR(const Vec3f& rgb)
 {
 	m_colorARR = rgb;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARR", rgb.toString());
+	QString rgbStr = QString("%1,%2,%3").arg(rgb[0]).arg(rgb[1]).arg(rgb[2]);
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARR", rgbStr);
 }
 
 void MeteorShowersMgr::setColorIR(const Vec3f& rgb)
 {
 	m_colorIR = rgb;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", rgb.toString());
+	QString rgbStr = QString("%1,%2,%3").arg(rgb[0]).arg(rgb[1]).arg(rgb[2]);
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorIR", rgbStr);
 }
 
 void MeteorShowersMgr::setEnableAtStartup(const bool& b)
