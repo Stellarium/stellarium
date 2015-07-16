@@ -83,7 +83,7 @@ public:
 
 	//! Checks if this meteor shower is being displayed or not
 	//! @return true if it's being displayed
-	bool enabled();
+	bool enabled() const;
 
 	//! Gets the meteor shower id
 	//! //! @return designation
