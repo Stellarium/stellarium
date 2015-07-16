@@ -52,10 +52,12 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	m_speed = map.value("speed").toInt();
 	m_radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
 	m_radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
-	m_driftAlpha = StelUtils::getDecAngle(map.value("driftAlpha").toString());
-	m_driftDelta = StelUtils::getDecAngle(map.value("driftDelta").toString());
 	m_parentObj = map.value("parentObj").toString();
 	m_pidx = map.value("pidx").toFloat();
+
+	// the catalog (IMO) will give us the drift for a five-day interval from peak
+	m_driftAlpha = StelUtils::getDecAngle(map.value("driftAlpha").toString()) / 5.f;
+	m_driftDelta = StelUtils::getDecAngle(map.value("driftDelta").toString()) / 5.f;
 
 	m_rAlphaPeak = m_radiantAlpha;
 	m_rDeltaPeak = m_radiantDelta;
@@ -216,14 +218,15 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		return;
 	}
 
+	// fix the radiant position
 	// compute radiant position considering drift
 	m_radiantAlpha = m_rAlphaPeak;
 	m_radiantDelta = m_rDeltaPeak;
 	if (m_status != INACTIVE)
 	{
-		double time = (currentJD - m_activity.peak.toJulianDay()) * 24;
-		m_radiantAlpha += (m_driftAlpha/120.f) * time;
-		m_radiantDelta += (m_driftDelta/120.f) * time;
+		double daysToPeak = currentJD - m_activity.peak.toJulianDay();
+		m_radiantAlpha += m_driftAlpha * daysToPeak;
+		m_radiantDelta += m_driftDelta * daysToPeak;
 	}
 
 	// step through and update all active meteors
@@ -483,8 +486,8 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	{
 		oss << QString("%1: %2/%3")
 			.arg(q_("Radiant drift (per day)"))
-			.arg(StelUtils::radToHmsStr(m_driftAlpha / 5.f))
-			.arg(StelUtils::radToDmsStr(m_driftDelta / 5.f));
+			.arg(StelUtils::radToHmsStr(m_driftAlpha))
+			.arg(StelUtils::radToDmsStr(m_driftDelta));
 		oss << "<br />";
 
 		if (m_speed > 0)
