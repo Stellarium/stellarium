@@ -144,7 +144,7 @@ private:
 	//! Gets the solar longitude for a specified date
 	//! @param date QDate
 	//! @return solar longitude in degree
-	float getSolarLongitude(QDate date) const;
+	QString getSolarLongitude(QDate date) const;
 };
 
 #endif /*_METEORSHOWER_HPP_*/
