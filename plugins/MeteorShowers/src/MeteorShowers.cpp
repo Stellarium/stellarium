@@ -37,11 +37,11 @@ MeteorShowers::~MeteorShowers()
 	m_meteorShowers.clear();
 }
 
-void MeteorShowers::update(double deltaTime)
+void MeteorShowers::update(StelCore* core, double deltaTime)
 {
 	foreach (const MeteorShowerP& ms, m_meteorShowers)
 	{
-		ms->update(deltaTime);
+		ms->update(core, deltaTime);
 	}
 }
 
