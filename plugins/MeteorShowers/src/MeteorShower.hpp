@@ -123,8 +123,8 @@ private:
 	int m_speed;                       //! Speed of meteors
 	float m_rAlphaPeak;                //! R.A. for radiant of meteor shower on the peak day
 	float m_rDeltaPeak;                //! Dec. for radiant of meteor shower on the peak day
-	float m_driftAlpha;                //! Drift of R.A.
-	float m_driftDelta;                //! Drift of Dec.
+	float m_driftAlpha;                //! Drift of R.A. for each day from peak
+	float m_driftDelta;                //! Drift of Dec. for each day from peak
 	QString m_parentObj;               //! Parent object for meteor shower
 	float m_pidx;                      //! The population index
 	QList<Meteor::colorPair> m_colors; //! <colorName, 0-100>
