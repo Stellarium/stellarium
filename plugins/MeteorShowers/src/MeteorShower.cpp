@@ -183,7 +183,7 @@ bool MeteorShower::enabled()
 
 void MeteorShower::update(double deltaTime)
 {
-	if (!enabled())
+	if (m_status == INVALID)
 	{
 		return;
 	}
@@ -209,6 +209,12 @@ void MeteorShower::update(double deltaTime)
 		{
 			m_status = ACTIVE_GENERIC;
 		}
+	}
+
+	// will be displayed?
+	if (enabled())
+	{
+		return;
 	}
 
 	// compute radiant position considering drift
@@ -405,8 +411,8 @@ float MeteorShower::getSolarLongitude(QDate date) const
 	double n = date.toJulianDay() - 2451545.0;
 
 	//The mean longitude of the Sun, corrected for the aberration of light
-	float slong = (280.460 + 0.9856474*n) / 360;
-	slong = (slong - (int) slong) * 360 - 1;
+	float slong = (280.460 + 0.9856474 * n) / 360.f;
+	slong = (slong - (int) slong) * 360.f - 1.f;
 
 	return slong;
 }
