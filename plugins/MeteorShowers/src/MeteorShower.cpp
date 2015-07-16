@@ -25,6 +25,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 
@@ -161,7 +162,7 @@ MeteorShower::~MeteorShower()
 {
 }
 
-bool MeteorShower::enabled()
+bool MeteorShower::enabled() const
 {
 	if (m_status == INVALID)
 	{
@@ -436,12 +437,28 @@ Vec3f MeteorShower::getInfoColor(void) const
 
 QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
+	if (!enabled())
+	{
+		GETSTELMODULE(StelObjectMgr)->unSelect();
+		return "";
+	}
+
 	QString str;
 	QTextStream oss(&str);
 
-	QString mstdata = q_("generic data");
-	if(m_status == ACTIVE_REAL)
+	QString mstdata;
+	if (m_status == ACTIVE_GENERIC)
+	{
+		mstdata = q_("generic data");
+	}
+	else if (m_status == ACTIVE_REAL)
+	{
 		mstdata = q_("real data");
+	}
+	else if (m_status == INACTIVE)
+	{
+		mstdata = q_("inactive");
+	}
 
 	if(flags&Name)
 	{
@@ -487,41 +504,45 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << q_("Parent body: %1").arg(q_(m_parentObj)) << "<br />";
 		}
 
-		if(m_activity.start.month() == m_activity.finish.month())
+		// activity info
+		if (m_status != INACTIVE)
 		{
-			oss << QString("%1: %2 - %3 %4")
-			       .arg(q_("Active"))
-			       .arg(m_activity.start.day())
-			       .arg(m_activity.finish.day())
-			       .arg(m_activity.start.toString("MMMM"));
-		}
-		else
-		{
-			oss << QString("%1: %2 - %3")
-			       .arg(q_("Activity"))
-			       .arg(m_activity.start.toString("d MMMM"))
-			       .arg(m_activity.finish.toString("d MMMM"));
-		}
-		oss << "<br />";
-		oss << q_("Maximum: %1").arg(m_activity.peak.toString("d MMMM"));
-
-		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude"))
-					       .arg(getSolarLongitude(m_activity.peak));
-		oss << "<br />";
-
-		if(m_activity.zhr > 0)
-		{
-			oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
-		}
-		else
-		{
-			oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
-			if(m_activity.variable.size() == 2)
+			if(m_activity.start.month() == m_activity.finish.month())
 			{
-				oss << QString("; %1-%2").arg(m_activity.variable.at(0))
-							 .arg(m_activity.variable.at(1));
+				oss << QString("%1: %2 - %3 %4")
+				       .arg(q_("Active"))
+				       .arg(m_activity.start.day())
+				       .arg(m_activity.finish.day())
+				       .arg(m_activity.start.toString("MMMM"));
+			}
+			else
+			{
+				oss << QString("%1: %2 - %3")
+				       .arg(q_("Activity"))
+				       .arg(m_activity.start.toString("d MMMM"))
+				       .arg(m_activity.finish.toString("d MMMM"));
 			}
 			oss << "<br />";
+			oss << q_("Maximum: %1").arg(m_activity.peak.toString("d MMMM"));
+
+			oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude"))
+			       .arg(getSolarLongitude(m_activity.peak));
+			oss << "<br />";
+
+			if(m_activity.zhr > 0)
+			{
+				oss << QString("ZHR<sub>max</sub>: %1").arg(m_activity.zhr) << "<br />";
+			}
+			else
+			{
+				oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
+				if(m_activity.variable.size() == 2)
+				{
+					oss << QString("; %1-%2").arg(m_activity.variable.at(0))
+					       .arg(m_activity.variable.at(1));
+				}
+				oss << "<br />";
+			}
 		}
 	}
 
