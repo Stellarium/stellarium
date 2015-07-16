@@ -404,17 +404,20 @@ int MeteorShower::calculateZHR(const double& currentJD)
 	return qRound(gaussian);
 }
 
-float MeteorShower::getSolarLongitude(QDate date) const
+QString MeteorShower::getSolarLongitude(QDate date) const
 {
 	//The number of days (positive or negative) since Greenwich noon,
 	//Terrestrial Time, on 1 January 2000 (J2000.0)
 	double n = date.toJulianDay() - 2451545.0;
 
 	//The mean longitude of the Sun, corrected for the aberration of light
-	float slong = (280.460 + 0.9856474 * n) / 360.f;
-	slong = (slong - (int) slong) * 360.f - 1.f;
+	float l = 280.460 + 0.9856474 * n;
 
-	return slong;
+	// put it in the range 0 to 360 degrees
+	l /= 360.f;
+	l = (l - (int) l) * 360.f - 1.f;
+
+	return QString::number(l, 'f', 2);
 }
 
 QString MeteorShower::getDesignation() const
@@ -502,8 +505,8 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		oss << "<br />";
 		oss << q_("Maximum: %1").arg(m_activity.peak.toString("d MMMM"));
 
-		QString slong = QString::number(MeteorShower::getSolarLongitude(m_activity.peak), 'f', 2);
-		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude")).arg(slong);
+		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude"))
+					       .arg(getSolarLongitude(m_activity.peak));
 		oss << "<br />";
 
 		if(m_activity.zhr > 0)
