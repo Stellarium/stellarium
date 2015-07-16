@@ -119,9 +119,15 @@ QList<MeteorShowerP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) c
 		date = dateFrom;
 		while(date.operator <=(dateTo))
 		{
-			ms->updateCurrentData((QDateTime) date);
-			if (ms->getStatus() == MeteorShower::ACTIVE_GENERIC
-				|| ms->getStatus() == MeteorShower::ACTIVE_REAL)
+			bool found = false;
+			ms->hasRealShower(date, found);
+			if (found)
+			{
+				result.append(ms);
+				break;
+			}
+			ms->hasGenericShower(date, found);
+			if (found)
 			{
 				result.append(ms);
 				break;
