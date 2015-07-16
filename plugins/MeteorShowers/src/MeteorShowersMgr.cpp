@@ -294,7 +294,7 @@ void MeteorShowersMgr::update(double deltaTime)
 		m_configDialog->refreshRangeDates(core);
 	}
 
-	m_meteorShowers->update(deltaTime);
+	m_meteorShowers->update(core, deltaTime);
 }
 
 void MeteorShowersMgr::draw(StelCore* core)

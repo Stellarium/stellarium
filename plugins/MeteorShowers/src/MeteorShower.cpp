@@ -182,14 +182,12 @@ bool MeteorShower::enabled() const
 	}
 }
 
-void MeteorShower::update(double deltaTime)
+void MeteorShower::update(StelCore* core, double deltaTime)
 {
 	if (m_status == INVALID)
 	{
 		return;
 	}
-
-	StelCore* core = StelApp::getInstance().getCore();
 
 	// gets the current UTC date
 	double currentJD = core->getJDay();

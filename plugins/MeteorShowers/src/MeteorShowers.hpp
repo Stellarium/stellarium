@@ -42,7 +42,7 @@ public:
 	virtual ~MeteorShowers();
 
 	//! Update
-	void update(double deltaTime);
+	void update(StelCore *core, double deltaTime);
 
 	//! Draw
 	void draw(StelCore* core);
