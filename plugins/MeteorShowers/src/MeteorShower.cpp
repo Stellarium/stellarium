@@ -213,7 +213,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// will be displayed?
-	if (enabled())
+	if (!enabled())
 	{
 		return;
 	}
