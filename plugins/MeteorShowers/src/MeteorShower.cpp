@@ -193,7 +193,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 
 	// gets the current UTC date
 	double currentJD = core->getJDay();
-	QDate currentDate = StelUtils::jdToQDateTime(currentJD).date();
+	QDate currentDate = QDate::fromJulianDay(currentJD);
 
 	// updating status and activity
 	bool found = false;
