@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-07-13 22:50+0000\n"
+"PO-Revision-Date: 2015-07-14 12:47+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-14 05:15+0000\n"
+"X-Launchpad-Export-Date: 2015-07-16 05:15+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -24,7 +24,7 @@ msgstr ""
 #: src/core/StelApp.cpp:488 src/core/StelCore.cpp:191
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
-msgstr "Могућности приказа"
+msgstr "Подешавања приказа"
 
 #: src/core/modules/ConstellationMgr.cpp:136
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:280
@@ -39,7 +39,7 @@ msgstr "Уметнички приказ сазвежђа"
 #: src/core/modules/ConstellationMgr.cpp:138
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation labels"
-msgstr "Ознаке сазвежђа"
+msgstr "Називи сазвежђа"
 
 #: src/core/modules/ConstellationMgr.cpp:139
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
@@ -54,7 +54,7 @@ msgstr "Звезде"
 
 #: src/core/modules/StarMgr.cpp:377
 msgid "Stars labels"
-msgstr "Ознаке звезда"
+msgstr "Називи звезда"
 
 #: src/core/modules/GridLinesMgr.cpp:587 src/ui_viewDialog.h:1338
 msgid "Meridian"
@@ -132,7 +132,7 @@ msgstr "Galaktički ekvator"
 #: src/core/modules/GridLinesMgr.cpp:765
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
-msgstr "Опозиција / конјункција линија дужине"
+msgstr "Опозиција / конјункција линија лонгитуде"
 
 #: src/core/modules/LandscapeMgr.cpp:390 src/ui_viewDialog.h:1273
 msgid "Atmosphere"
@@ -145,7 +145,7 @@ msgstr "Магла"
 #: src/core/modules/LandscapeMgr.cpp:392 src/ui_viewDialog.h:1330
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
-msgstr "Кључне тачке"
+msgstr "Главне тачке"
 
 #: src/core/modules/LandscapeMgr.cpp:393
 msgid "Ground"
@@ -167,7 +167,7 @@ msgstr "Аутор: "
 
 #: src/core/modules/LandscapeMgr.cpp:652
 msgid "Location: "
-msgstr "Место: "
+msgstr "Локација: "
 
 #: src/core/modules/LandscapeMgr.cpp:655
 #, qt-format
@@ -200,7 +200,7 @@ msgstr "Непрозирност: %1"
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Магнитуда: <b>%1</b> (неактивно до: <b>%2</b>)"
+msgstr "Магнитуда: <b>%1</b> (екстинкција до: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:221
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
@@ -214,7 +214,7 @@ msgstr "Магнитуде: <b> %1 </b>"
 #: src/core/modules/Nebula.cpp:162
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Површински сјај:  <b>%1</b>  (неактиван: <b>%2</b>)"
+msgstr "Површински сјај:  <b>%1</b>  (екстинкција: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:168
 #, qt-format
@@ -254,7 +254,7 @@ msgstr "Отворено јато"
 
 #: src/core/modules/Nebula.cpp:746
 msgid "Globular cluster"
-msgstr "Глобуларно јато"
+msgstr "Збијено јато"
 
 #: src/core/modules/Nebula.cpp:749
 msgid "Nebula"
@@ -274,7 +274,7 @@ msgstr "Неправилна галаксија"
 
 #: src/core/modules/Nebula.cpp:761
 msgid "Cluster associated with nebulosity"
-msgstr "Магловито јато"
+msgstr "Јато са маглином"
 
 #: src/core/modules/Nebula.cpp:764
 msgid "Unknown"
@@ -286,7 +286,7 @@ msgstr "HII регион"
 
 #: src/core/modules/Nebula.cpp:770
 msgid "Reflection nebula"
-msgstr "Рефлектујућа маглина"
+msgstr "Рефлексиона маглина"
 
 #: src/core/modules/Nebula.cpp:773
 msgid "H-α emission region"
@@ -304,12 +304,12 @@ msgstr "кружни"
 #: src/core/modules/Nebula.cpp:792
 msgctxt "form"
 msgid "elliptical"
-msgstr "еклиптички"
+msgstr "елиптичне"
 
 #: src/core/modules/Nebula.cpp:795
 msgctxt "form"
 msgid "irregular"
-msgstr "неправилан"
+msgstr "неправилне"
 
 #: src/core/modules/Nebula.cpp:798
 msgctxt "form"
@@ -329,7 +329,7 @@ msgstr "konvencionalan"
 #: src/core/modules/Nebula.cpp:817
 msgctxt "structure"
 msgid "filamentary"
-msgstr "филаментаран"
+msgstr "филаментарна"
 
 #: src/core/modules/Nebula.cpp:820
 msgctxt "structure"
@@ -339,7 +339,7 @@ msgstr "недкументована структура"
 #: src/core/modules/Nebula.cpp:833
 msgctxt "HII region brightness"
 msgid "faintest"
-msgstr "најслабија"
+msgstr "најблеђи"
 
 #: src/core/modules/Nebula.cpp:836
 msgctxt "HII region brightness"
@@ -358,7 +358,7 @@ msgstr "недокументован сјај"
 #: src/core/modules/Nebula.cpp:855
 msgctxt "H-α emission region brightness"
 msgid "very bright"
-msgstr "веома светао"
+msgstr "веома сјајан"
 
 #: src/core/modules/Nebula.cpp:858
 msgctxt "H-α emission region brightness"
@@ -389,7 +389,7 @@ msgstr "Apsolutna magnituda: %1"
 #: src/core/modules/Planet.cpp:233
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr "Укошеност (за датум, за Змељу): %1"
+msgstr "Нагиб еклиптике (за датум, за Змељу): %1"
 
 #: src/core/modules/Planet.cpp:245 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:221
@@ -515,7 +515,7 @@ msgstr "Планете"
 #: src/core/modules/SolarSystem.cpp:176
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
-msgstr "Ознаке планета"
+msgstr "Називи планета"
 
 #: src/core/modules/SolarSystem.cpp:177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
@@ -525,7 +525,7 @@ msgstr "Орбите планета"
 #: src/core/modules/SolarSystem.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
-msgstr "Руте планета"
+msgstr "Путање планета"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:177
@@ -537,7 +537,7 @@ msgstr "звезда"
 #: plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr "Индекс боје (B-V): <b>%1</b>"
+msgstr "Боја (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:158
 msgid "eruptive variable star"
@@ -624,7 +624,7 @@ msgstr "Трајање помрачења: %1%"
 #: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Rising time: %1%"
-msgstr "Време излаза: %1%"
+msgstr "Време изласка: %1%"
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
@@ -974,6 +974,8 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"Насина ЏПЛ група за динамику сунчевог система користи ову формулу на "
+"интерактивној веб страници %1JPL Horizons%2."
 
 #: src/core/StelCore.cpp:1524
 #, qt-format
@@ -1245,6 +1247,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"Синусоидална пројекција је  <i>псеудоцилиндрична картографска пројекција са "
+"једнаком површином</i>, понекад називана Сенсон-Флемстед или Меркаторова "
+"пројекција са једнаком површином."
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -1733,7 +1738,7 @@ msgstr "Испитивач: %1"
 
 #: src/gui/HelpDialog.cpp:306
 msgid "Former Developers"
-msgstr ""
+msgstr "Бивши учесници пројекта"
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -9117,6 +9122,14 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
+"Додатак који анализира посматраност изабраног извора (или центра екрана, ако "
+"није изабран извор). Додатак може приказати времена изласка, транзита, "
+"заласка, као инајбољу епоху године (на пример, највећа угловна раздвојеност "
+"од Сунца), распон датума када је извор изнад хоризонта за време мрачне ноћи, "
+"и датуме акроничког и космичког изласка кроз заласке. <br>Евемериде објеката "
+"сунчевог система и ефекти паралаксе су узети у обзир.<br><br> Аутор се "
+"захваљује Александру Фулфу и Георгу Зотију на њиховим саветима.<br><br>Иван "
+"Марти-Видал (Онсала свемирска опсерваторија)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Explanation of some parameters"
@@ -9190,6 +9203,21 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"Дани Космичког изласка/заласка објекта се процењују као дани када објекат "
+"излази (или залази) заједно са изласком/заласком Сунца. Тачни датуми ових "
+"ефемерида зависе од локације посматрача. Насупрот тога, Акронички излазак "
+"(или залазак) се дешава када звезда излази/залази са заласком/изласком Сунца "
+"(на пример, супротно од Сунца). Са једне стране, очигледно је да је извор "
+"тешко приметан (или уопште неприметан) у датумима између Космичког заласка и "
+"Космичког изласка. Са друге стране, датуми око Акроничког заласка и изласка "
+"су они датуми када је висина небеског објекта велика када је Сунце далеко "
+"испод хоризонта (стога се објекат може лако посматрати). Датум Хелијакалног "
+"изласка је први дан године када звезда постане видљива. Догоди се када је "
+"звезда близу источног хоризонта отприлике пре краја астрономске ноћи (на "
+"пример, у астрономски сумрак). У наредним ноћима, звезда је видљива током "
+"све дужих периода, док не достигне свој Хелијакални залазак (на пример, "
+"последња ноћ у години када је звезда још увек видљива). За време "
+"Хелијакалног заласка, звезда залази отприлике после почетка астрономске ноћи."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -9237,6 +9265,20 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
+"Програм рачуна сет података када је небески објект изнад хоризонта током "
+"ноћи. Под појмом ноћ програм подразумева време кад је Сунчева висина на небу "
+"испод сумрака (може бити подешено од стране корисника). Када је објект "
+"фиксиран на небу, опсег посматраних епоха за тренутну годину може имати две "
+"форме: или распон од једног датума до другог (на пример 20 Јан до 15 Септ) "
+"или у два корака (од 1 Јан до датог датума и од неког другог датума до 31 "
+"Дец). У првом случају, први датум  (20 Јан у нашем примеру) био би близу "
+"такозваном Хелијакалном изласку звезде а други датум (15 Септ у нашем "
+"примеру) био би близу Хелијакалног заласка. У другомслучају (на пример, у "
+"распону од 1 Јан до 20 Маја и 21 Септ до 31 Дец), први датум (20 Мај) био би "
+"близу Хелијакалног заласка, а други датум (21 Септ) био би близу "
+"Хелијакалног изласка. Егзактније једначине за одређивање Хелијакалног "
+"заласка и изласка звезда и планета биће доступне у будућим верзијама "
+"додатака."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Full Moon:"
@@ -9422,6 +9464,10 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"Једначина времена описује одступање између две врсте соларног времена. Ово "
+"је привидно соларно време, које директно описује кретање Сунца, док среднје "
+"соларно време описује фиктивно Сунце у 24 сатном опсегу. Не постоји "
+"универзално прихваћена дефиниција и једначина времена."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 msgid "Show plug-ins button on toolbar"
@@ -9992,6 +10038,14 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Метеорски ројеви су небеске појаве у којима велики број метеора може да буде "
+"уочен како долазе из једне тачке на небу. Ови метеори су настали као узрок "
+"улетања метеорида у Земљину атмосферу при јако великим брзинама (у питању су "
+"паралелне трајекторије). Вћина метеора је мања од зрна песка, тако да већина "
+"тих метеора изгори у Земљиној атмосфери и никад не стигне да падне на тло. "
+"Интензивни или необични метеорски ројеви су познати као метеорски пљускови "
+"или метеорске олује, што може да има за последицу и преко 1000 метеора по "
+"сату."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:502
@@ -10403,15 +10457,15 @@ msgstr "Сакријте/прикажите локациони текст"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "Прекидач за лампу"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr ""
+msgstr "Поново учитај шејдере"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "#д шејдери за пејзаж поново учитани"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
@@ -10531,12 +10585,22 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>3D рендеровање приказаног садржаја. Шетај около, нађи и избегавај "
+"препреке у својој башти, пронађи и демонстрирај могуће астрономска "
+"поравнања, види сенке током сунчаних дана итд.</p><p>Да би се окретао около, "
+"притисни Цтрл+дугме на курсору. Да подигнеш поглед , користи Цтрл+ПгУп/ПгДн. "
+"Брзина покрета је у спрези са видним пољем (зумирај за фино подешавање). "
+"Могуће се кретати и ако се не држи Цтрл дугме али ако се пусти пре дугмета "
+"на курсору.</p><p> Развитак овог додатка је делимично био подржан од стране "
+"Austrian Science Fund (FWF) пројекта АСТРОСИМ (P 21208-G19). За висе "
+"информација посетити http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Омогућује прецизније осветљење рачунајући га по пикселу уместо по вертексу."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
@@ -10544,7 +10608,7 @@ msgstr "Обавезно за мапирање судара и сенки!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "Користи само једну сенку каскадно уместо све четири."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
@@ -10561,13 +10625,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS захтева квалитет подешен на слабо или јако."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Одприлике прорачунате сенке пенумбри (оштре ивице близу додирних тачака, "
+"замућене сенке су даље)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
@@ -10579,7 +10645,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Има негативан утицај на перформансе."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
@@ -10588,17 +10654,25 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Ово одређује начинк на који се сцена рендерује кад Стеларијум користи неку "
+"другу пројкецију уместо &quot;Perspective&quot;. Сцена се увек рендерује на "
+"коцку, и та коцка је онда обликована у зависности на праву пројекцију. Коцка "
+"је описана користећи слику звану &quot;cubemap&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 Текстуре</b> користи 6 појединачних текстура, по једну за сваку страну "
+"коцке. Ово је најпрактичнији метод, али може бити спорији од других."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Cubemap</b> користи појединачни GL_TEXTURE_CUBEMAP. Препоручљиво за "
+"већину корисника."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -10606,10 +10680,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Geometry shader</b> користи погодности савремених графичких картица да би "
+"рендеровао свих 6 страница коцке симултано. Може да буде најбржи метод у "
+"зависности од сцене и твоје графичке карте. Ако графичка карта не подрђава "
+"ову опцију, она не може бити изабрана."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Рачуна сенке за сваку страницу коцке посебно."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -10617,17 +10695,23 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Ако је деактивиран, осенчени делови су прорачунати користећи перспективну "
+"пројекцију, што може проузроковати недостатак сенки са великим ФОВ "
+"вредностима, али овај метод је мало бржи."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Ово не ради кад се користи <b>Geometry shader</b>  мод за мапирање коцке."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Кад је чекирано, мапа је креирана у специфичним временским интервалима, "
+"уместо у сваком фрејму."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
@@ -10636,34 +10720,39 @@ msgstr "Штеди енергију и може да повећа субјект
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
-msgstr ""
+msgstr "Мапа је стално ре-рендерована кад се перспектива промени."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Кад је чекирано, само у правцу посматрача перспектива се мења током покрета."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Ово ће убрзати рендеровање, али ће приказ изгледати &quot;broken&quot; све "
+"док не престане са померањем."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
-msgstr ""
+msgstr "Ово не ради са &quot;Geometry-Shader&quot; мапинг моду."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Ово ажурира другу страницу, тако да визуелна појава изгледа мања "
+"&quot;broken&quot;"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
+msgstr "Интервал (у секундама)  у коме исписивање није одрађено."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
@@ -10671,11 +10760,11 @@ msgstr "6 текстура"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr ""
+msgstr "Пројекција на коцку"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Геометријски шејдер"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
@@ -10734,7 +10823,7 @@ msgstr "Мапирање судара"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "величина пројекције на коцку"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
@@ -10766,19 +10855,19 @@ msgstr "Висок + хардвер (спор)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "ПЦСС"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Мод пројекција на коцку"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Комплетне мапе на пројекцији на коцку"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "Лењо ре-рендеровање на пројекцју на коцку"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
@@ -10786,11 +10875,11 @@ msgstr "Интервал:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Само ажуририрај стране које се користе током покретања."
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Такође ажурирај мање кориштене странице."
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
@@ -10820,11 +10909,11 @@ msgstr "Наслов:"
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "Линије путања"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "Алатка за линије путања"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:743
 msgid "Equinox"
@@ -10836,19 +10925,19 @@ msgstr "Солстициј"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:749
 msgid "Crossquarter"
-msgstr ""
+msgstr "Квартал"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Главн Лунарни застој"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Споредни Лунарни застој"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Пролазак зенита"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Nadir Passage"
@@ -10873,31 +10962,33 @@ msgstr "Венера"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Додатак за путање планета"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"Додатак за путанје планета приказује комбинацију деклинације која је "
+"најрелевантнија за archaeo- or ethnoastronomical студије."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "Деклинација еквинокса (или екватора) и солстиција."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
-msgstr ""
+msgstr "Деклинација дана између солстиција и еквинокса."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Деклинација главног Лунарног застоја"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Деклинација споредног Лунарног застоја"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
@@ -10930,6 +11021,10 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"Лунарне линије укључују хоризонтске паралактичке ефекте.  Постоје две лније "
+"током сваког исцртавања, за максималне или минималне удаљености Месеца. "
+"Деклинација Месеца током главног застоја може прекорачити назначене лимите "
+"ако је високо на небу, због паралактичких ефеката."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
@@ -10941,15 +11036,15 @@ msgstr "Обележите боју линије краткодневице"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Изабери боју линија"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Изабери боју линије за главни застој."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Изабери боју линије за споредни застој."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
@@ -10977,11 +11072,11 @@ msgstr "Изаберите боју за тренутну линију план�
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "Конфигурисање линије путања планета"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "Конфигурисање додатака линије путања планета"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
@@ -10998,7 +11093,7 @@ msgstr "Линије солстицијта"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Кварталне линије"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
@@ -11006,11 +11101,11 @@ msgstr "Промени боју"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Линије главног Лунарног застоја"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Споредне Лунарне застојне линије"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
