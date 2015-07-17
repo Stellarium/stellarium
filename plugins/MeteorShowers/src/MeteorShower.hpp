@@ -20,9 +20,8 @@
 #ifndef _METEORSHOWER_HPP_
 #define _METEORSHOWER_HPP_
 
-#include <QDateTime>
-
 #include "MeteorObj.hpp"
+#include "MeteorShowersMgr.hpp"
 #include "StelFader.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
@@ -60,7 +59,7 @@ public:
 
 	//! Constructor
 	//! @param map QVariantMap containing all the data about a Meteor Shower.
-	MeteorShower(const QVariantMap& map);
+	MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map);
 
 	//! Destructor
 	~MeteorShower();
@@ -114,6 +113,7 @@ public:
 	virtual double getAngularSize(const StelCore* core) const { return 0.001; }
 
 private:
+	MeteorShowersMgr* m_mgr;           //! MeteorShowersMgr instance
 	Status m_status;                   //! Meteor shower status
 
 	// data from catalog
