@@ -29,8 +29,9 @@
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 
-MeteorShower::MeteorShower(const QVariantMap& map)
-	: m_status(INVALID)
+MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
+	: m_mgr(mgr)
+	, m_status(INVALID)
 	, m_speed(0)
 	, m_rAlphaPeak(0)
 	, m_rDeltaPeak(0)
@@ -174,7 +175,7 @@ bool MeteorShower::enabled() const
 	{
 		return true;
 	}
-	else if (GETSTELMODULE(MeteorShowers)->getActiveRadiantOnly())
+	else if (m_mgr->getActiveRadiantOnly())
 	{
 		return m_status == ACTIVE_GENERIC || m_status == ACTIVE_REAL;
 	}
@@ -218,8 +219,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		return;
 	}
 
-	// fix the radiant position
-	// compute radiant position considering drift
+	// fix the radiant position (considering drift)
 	m_radiantAlpha = m_rAlphaPeak;
 	m_radiantDelta = m_rDeltaPeak;
 	if (m_status != INACTIVE)
@@ -262,7 +262,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		if (currentZHR > 0 && prob < aux)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta, m_pidx,
-					m_colors, GETSTELMODULE(MeteorShowers)->getBolideTexture());
+					m_colors, m_mgr->getBolideTexture());
 			m_activeMeteors.append(m);
 		}
 	}
@@ -275,7 +275,6 @@ void MeteorShower::draw(StelCore* core)
 		return;
 	}
 
-	MeteorShowersMgr* mgr = GETSTELMODULE(MeteorShowers);
 	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
 
 	Vec3d XY;
@@ -291,26 +290,26 @@ void MeteorShower::draw(StelCore* core)
 	switch(m_status)
 	{
 		case ACTIVE_REAL: //Active, real data
-			rgb = mgr->getColorARR();
+			rgb = m_mgr->getColorARR();
 			break;
 		case ACTIVE_GENERIC: //Active, generic data
-			rgb = mgr->getColorARG();
+			rgb = m_mgr->getColorARG();
 			break;
 		default: //Inactive
-			rgb = mgr->getColorIR();
+			rgb = m_mgr->getColorIR();
 	}
 	rgb /= 255.f;
 	painter.setColor(rgb[0], rgb[1], rgb[2], alpha);
 
 	Vec3d win;
-	if (mgr->getEnableMarker() && painter.getProjector()->projectCheck(m_position, win))
+	if (m_mgr->getEnableMarker() && painter.getProjector()->projectCheck(m_position, win))
 	{
-		mgr->getRadiantTexture()->bind();
+		m_mgr->getRadiantTexture()->bind();
 		painter.drawSprite2dMode(XY[0], XY[1], 45);
 
-		if (mgr->getEnableLabels())
+		if (m_mgr->getEnableLabels())
 		{
-			painter.setFont(mgr->getFont());
+			painter.setFont(m_mgr->getFont());
 			float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			float shift = 8.f + size/1.8f;
 			painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);

@@ -102,7 +102,7 @@ void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 		QVariantMap msData = map.value(msKey).toMap();
 		msData["showerID"] = msKey;
 
-		MeteorShowerP ms(new MeteorShower(msData));
+		MeteorShowerP ms(new MeteorShower(m_mgr, msData));
 		if (ms->getStatus() != MeteorShower::INVALID)
 		{
 			m_meteorShowers.append(ms);
