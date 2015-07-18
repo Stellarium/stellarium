@@ -22,6 +22,7 @@
 
 #include <QDebug>
 #include <QSettings>
+#include <QtMath>
 
 #include <math.h>
 
@@ -150,15 +151,15 @@ void CCD::setPixelHeight(double height)
 double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
 	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
-	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / (telescope->focalLength() * lens_multipler);
-	return FOVx;
+	double fovX = RADIAN_TO_DEGREES * 2 * qAtan(this->chipHeight() /(2.0 * telescope->focalLength() * lens_multipler));
+	return fovX;
 }
 
 double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 {
 	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
-	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / (telescope->focalLength() * lens_multipler);
-	return FOVy;
+	double fovY = RADIAN_TO_DEGREES * 2 * qAtan(this->chipWidth() /(2.0 * telescope->focalLength() * lens_multipler));
+	return fovY;
 }
 
 void CCD::writeToSettings(QSettings * settings, const int index)
