@@ -28,7 +28,6 @@
 #include "MeteorShowers.hpp"
 #include "StelDialog.hpp"
 
-class QTimer;
 class Ui_MSConfigDialog;
 class MeteorShowers;
 
@@ -48,69 +47,45 @@ public:
 	~MSConfigDialog();
 
 protected:
-	//! Initialize the dialog widgets and connect the signals/slots
+	//! Initialize the dialog and connect the signals/slots
 	void createDialogContent();
 
 public slots:
 	void retranslate();
-	void refreshUpdateValues(void); //! Refresh details about the last update
-	void refreshMarkersColor(void); //! Refresh the color of all markers
-	void refreshRangeDates(StelCore *core);   //! Refresh dates range when year in main app change
+
+	//! Refresh details about the last update
+	void refreshLabels();
+
+	//! Refresh the color of all markers
+	void refreshMarkersColor();
 
 private slots:
 	void setUpdateValues(int hours);
-	void setUpdatesEnabled(bool checkState);
-	//void updateStateReceiver(MeteorShowers::UpdateState state);
+
+	void setEnableUpdates(bool b);
+
         void updateCompleteReceiver();
-	void restoreDefaults(void);
-	void saveSettings(void);
-	void updateJSON(void);
-	void setColorARR(void);  //! Set color of active radiant based on real data.
-	void setColorARG(void);  //! Set color of active radiant based on generic data.
-	void setColorIR(void);   //! Set color of inactive radiant.
-	void checkDates(void);   //! Checks if the inputed dates are valid for use.
-	void searchEvents(void); //! Search events and fill the list.
-	void selectEvent(const QModelIndex &modelIndex); //! If an event is selected by user, the current date change and the object is selected.
-	void repaintTreeWidget(void);
+
+	void restoreDefaults();
+
+	void updateCatalog();
+
+	//! Sets the color of the active radiant based on real data.
+	void setColorARR();
+
+	//! Sets the color of the active radiant based on generic data.
+	void setColorARG();
+
+	//! Sets the color of the inactive radiant.
+	void setColorIR();
 
 private:
+	MeteorShowersMgr* m_mgr;
 	Ui_MSConfigDialog* m_ui;
-	QTimer* m_updateTimer;
-	QTreeWidget* treeWidget;   //! list of events
 
-	void setAboutHtml(void);
-	void updateGuiFromSettings(void);
-	void initListEvents(void); //! Init header and list of events
-	void setHeaderNames(void); //! Update header names
+	void setAboutHtml();
 
-	//! Defines the number and the order of the columns in the table that lists active meteor showers
-	//! @enum ModelColumns
-	enum ModelColumns {
-		ColumnName,		//! name column
-		ColumnZHR,		//! zhr column
-		ColumnDataType,		//! data type column
-		ColumnPeak,		//! peak date column
-		ColumnCount		//! total number of columns
-	};
-
-	// Reimplementation of QTreeWidgetItem class to fix the sorting bug
-	class TreeWidgetItem : public QTreeWidgetItem
-	{
-	public:
-		TreeWidgetItem(QTreeWidget* parent):QTreeWidgetItem(parent){}
-
-	private:
-		bool operator<(const QTreeWidgetItem &other)const {
-			int column = treeWidget()->sortColumn();
-
-			if (column == ColumnPeak)
-				return QDateTime::fromString(text(column),"dd/MMM/yyyy").operator <(QDateTime::fromString(other.text(column),"dd/MMM/yyyy"));
-			else if (column == ColumnZHR)
-				return text(column).toInt() < other.text(column).toInt();
-			else //ColumnName or ColumnDataType
-				return text(column).toLower() < other.text(column).toLower();
-		}
-	};
+	void updateGuiFromSettings();
 };
 
 #endif // _MSCONFIGDIALOG_HPP_

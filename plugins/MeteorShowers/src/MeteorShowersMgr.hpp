@@ -84,11 +84,9 @@ public:
 	bool getEnablePlugin() { return m_enablePlugin; }
 
 	//! True if user wants to see the active radiants only.
-	void setActiveRadiantOnly(const bool& b);
 	bool getActiveRadiantOnly() { return m_activeRadiantOnly; }
 
 	//! Enable/disable the meteor showers buttons on the toolbar.
-	void setButtonsEnabled(const bool& b);
 	bool getEnableButtons() { return m_enableButtons; }
 
 	//! Set the color of the active radiant based on generic data.
@@ -103,27 +101,22 @@ public:
 	void setColorIR(const Vec3f& rgb);
 	Vec3f getColorIR() { return m_colorIR; }
 
-	//! Enable the meteor showers plugin at Stellarium startup.
-	void setEnableAtStartup(const bool& b);
+	//! True if the plugin is enabled at Stellarium startup.
 	bool getEnableAtStartup() { return m_enableAtStartup; }
 
 	//! Set the font size (used on radiant labels).
-	void setFontSize(int pixelSize);
 	int getFontSize() { return m_font.pixelSize(); }
 
 	//! Get the font.
 	QFont getFont() { return m_font; }
 
 	//! Enable/disable radiant labels
-	void setEnableLabels(const bool& b);
 	bool getEnableLabels() { return m_enableLabels; }
 
 	//! Enable/disable radiant marker.
-	void setEnableMarker(const bool& b);
 	bool getEnableMarker() { return m_enableMarker; }
 
-	//! Set the update frequency in hours.
-	void setUpdateFrequencyHours(const int& hours);
+	//! Gets the update frequency in hours.
 	int getUpdateFrequencyHours() { return m_updateFrequencyHours; }
 
 	//! Enable/disable catalog updates from the internet.
@@ -138,8 +131,8 @@ public:
 	void setLastUpdate(const QDateTime& datetime);
 	QDateTime getLastUpdate() { return m_lastUpdate; }
 
-	//! Get the seconds till the next update.
-	int getSecondsToNextUpdate();
+	//! Gets the date of the next update.
+	QDateTime getNextUpdate();
 
 	//!
 	bool isUpdating() { return m_isUpdating; }
@@ -171,6 +164,27 @@ signals:
 	void failedToUpdate();
 
 public slots:
+	//! Enable the meteor showers plugin at Stellarium startup.
+	void setEnableAtStartup(const bool& b);
+
+	//! Enable/disable the meteor showers buttons on the toolbar.
+	void setEnableButtons(const bool& b);
+
+	//! Enable/disable radiant marker.
+	void setEnableMarker(const bool& b);
+
+	//! True if user wants to see the active radiants only.
+	void setActiveRadiantOnly(const bool& b);
+
+	//! Enable/disable radiant labels
+	void setEnableLabels(const bool& b);
+
+	//! Set the font size (used on radiant labels).
+	void setFontSize(int pixelSize);
+
+	//! Set the update frequency in hours.
+	void setUpdateFrequencyHours(const int& hours);
+
 	//! Download the Meteor Showers catalog from the Internet.
 	void updateCatalog();
 
@@ -198,8 +212,8 @@ private:
 	bool m_enableLabels;
 	bool m_enableMarker;
 
-	Vec3f m_colorARR;        //! color of active radiant based on real data
 	Vec3f m_colorARG;        //! color of active radiant based on generic data
+	Vec3f m_colorARR;        //! color of active radiant based on real data
 	Vec3f m_colorIR;         //! color of inactive radiant
 
 	QTimer* m_messageTimer;
