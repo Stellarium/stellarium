@@ -220,6 +220,41 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << q_("Size: %1").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br>";
 	}
 
+	if (flags&Extra)
+	{
+		if (radialVelocity>-99.f)
+		{
+			QString rv;
+			if (radialVelocityErr>-99.f)
+				rv = QString("%1%2%3").arg(radialVelocity).arg(QChar(0x00B1)).arg(radialVelocityErr);
+			else
+				rv = QString("%1").arg(radialVelocity);
+
+			oss << q_("Radial velocity: %1 km/s").arg(rv) << "<br>";
+		}
+		if (redshift>-99.f)
+		{
+			QString z;
+			if (redshiftErr>-99.f)
+				z = QString("%1%2%3").arg(QString::number(redshift, 'f', 6)).arg(QChar(0x00B1)).arg(QString::number(redshiftErr, 'f', 6));
+			else
+				z = QString("%1").arg(QString::number(redshift, 'f', 6));
+
+			oss << q_("Redshift: %1").arg(z) << "<br>";
+		}
+		if (parallax>-99.f)
+		{
+			QString px;
+			if (parallaxErr>-99.f)
+				px = QString("%1%2%3").arg(QString::number(parallax, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr, 'f', 3));
+			else
+				px = QString("%1").arg(QString::number(parallax, 'f', 3));
+
+			oss << q_("Parallax: %1 mas").arg(px) << "<br>";
+			oss << q_("Distance: %1 ly").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (qAbs(parallax*0.001/3600)*(M_PI/180)), 0, 'f', 2) << "<br>";
+		}
+	}
+
 	postProcessInfoString(str, flags);
 
 	return str;
@@ -230,13 +265,6 @@ float Nebula::getVMagnitude(const StelCore* core) const
 	Q_UNUSED(core);
 	return vMag;
 }
-
-float Nebula::getBMagnitude(const StelCore* core) const
-{
-	Q_UNUSED(core);
-	return bMag;
-}
-
 
 float Nebula::getSelectPriority(const StelCore* core) const
 {
@@ -335,10 +363,13 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	switch (nType)
 	{
 		case NebGx:
+		case NebSy2:
 			Nebula::texGalaxy->bind();
 			color=galaxyColor;
 			break;
 		case NebOc:
+		case NebSA:
+		case NebSC:
 			Nebula::texOpenCluster->bind();
 			color=clusterColor;
 			break;
@@ -351,6 +382,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		case NebRn:
 		case NebHa:
 		case NebSNR:
+		case NebBn:
+		case NebEn:
 			Nebula::texDiffuseNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -721,7 +754,7 @@ QString Nebula::getMorphologicalTypeString(void) const
 {
 	QString wsType;
 
-	if (nType == NebGx)
+	if (nType == NebGx || nType == NebSy2)
 		wsType = mTypeString;
 
 	return wsType;
@@ -734,43 +767,58 @@ QString Nebula::getTypeString(void) const
 	switch(nType)
 	{
 		case NebGx:
-			wsType = q_("Galaxy");
+			wsType = q_("galaxy");
+			break;
+		case NebSy2:
+			wsType = q_("Seyfert 2 galaxy");
 			break;
 		case NebOc:
-			wsType = q_("Open cluster");
+			wsType = q_("open cluster");
 			break;
 		case NebGc:
-			wsType = q_("Globular cluster");
+			wsType = q_("globular cluster");
 			break;
 		case NebN:
-			wsType = q_("Nebula");
+			wsType = q_("nebula");
 			break;
 		case NebPn:
-			wsType = q_("Planetary nebula");
+			wsType = q_("planetary nebula");
 			break;
 		case NebDn:
-			wsType = q_("Dark nebula");
+			wsType = q_("dark nebula");
 			break;
 		case NebCn:
-			wsType = q_("Cluster associated with nebulosity");
+			wsType = q_("cluster associated with nebulosity");
 			break;
-		case NebUnknown:
-			wsType = q_("Unknown");
+		case NebBn:
+			wsType = q_("bipolar nebula");
+			break;
+		case NebEn:
+			wsType = q_("emission nebula");
 			break;
 		case NebHII:
 			wsType = q_("HII region");
 			break;
 		case NebRn:
-			wsType = q_("Reflection nebula");
+			wsType = q_("reflection nebula");
 			break;
 		case NebHa:
 			wsType = q_("H-α emission region");
 			break;
 		case NebSNR:
-			wsType = q_("Supernova remnant");
+			wsType = q_("supernova remnant");
+			break;
+		case NebSA:
+			wsType = q_("stellar association");
+			break;
+		case NebSC:
+			wsType = q_("star cloud");
+			break;
+		case NebUnknown:
+			wsType = q_("unknown");
 			break;
 		default:
-			wsType = q_("Undocumented type");
+			wsType = q_("undocumented type");
 			break;
 	}
 	return wsType;
