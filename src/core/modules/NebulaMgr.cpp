@@ -291,7 +291,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (dcat == "SH") return searchSh2(dnum);
 	}
-	static QRegExp sCatNumRx("^(PK)\\s*([\\d\\+\\-]+)$");
+	static QRegExp sCatNumRx("^(PK)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -604,8 +604,17 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 			Ced			= list.at(30).toInt();	 // Ced number
 			PK			= list.at(31).trimmed(); // PK number
 
-			QStringList raLst = ra.split(":");
-			QStringList decLst = dec.split(":");
+			QStringList raLst;
+			if (ra.contains(":"))
+				raLst	= ra.split(":");
+			else
+				raLst	= ra.split(" ");
+
+			QStringList decLst;
+			if (dec.contains(":"))
+				decLst = dec.split(":");
+			else
+				decLst = dec.split(" ");
 
 			raRad	= raLst.at(0).toFloat() + raLst.at(1).toFloat()/60.f + raLst.at(2).toFloat()/3600.f;
 			decRad	= qAbs(decLst.at(0).toFloat()) + decLst.at(1).toFloat()/60.f + decLst.at(2).toFloat()/3600.f;
@@ -621,7 +630,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 			if (vMag < 1.f) vMag = 99.f;
 
 			QStringList oTypes;
-			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N" << "HA" << "HII" << "SNR";
+			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
+			       << "HA" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "SY2";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -658,6 +668,21 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 					break;
 				case 11:
 					nType = (unsigned int)Nebula::NebSNR;
+					break;
+				case 12:
+					nType = (unsigned int)Nebula::NebBn;
+					break;
+				case 13:
+					nType = (unsigned int)Nebula::NebEn;
+					break;
+				case 14:
+					nType = (unsigned int)Nebula::NebSA;
+					break;
+				case 15:
+					nType = (unsigned int)Nebula::NebSC;
+					break;
+				case 16:
+					nType = (unsigned int)Nebula::NebSy2;
 					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
@@ -1360,6 +1385,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by Perek-Kohoutek numbers (possible formats are "PK120+09 01" or "PK 120+09 01")
+	if (objw.left(2) == "PK")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("PK%1").arg(n->PK_nb) == objw || QString("PK %1").arg(n->PK_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return StelObjectP();
 }
 
@@ -1514,6 +1549,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("CED%1").arg(n->Ced_nb) == objw || QString("CED %1").arg(n->Ced_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by Perek-Kohoutek numbers (possible formats are "PK120+09 01" or "PK 120+09 01")
+	if (objw.startsWith("PK"))
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("PK%1").arg(n->PK_nb) == objw || QString("PK %1").arg(n->PK_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1800,6 +1845,26 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("LBN %1").arg(n->LBN_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by PK objects number (possible formats are "PK120+09 01" or "PK 120+09 01")
+	if (objw.size()>=1 && objw.left(2)=="PK")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->PK_nb.isEmpty()) continue;
+			QString constw = QString("PK%1").arg(n->PK_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("PK %1").arg(n->PK_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
@@ -2114,6 +2179,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("LBN %1").arg(n->LBN_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by PK objects number (possible formats are "PK120+09 01" or "PK 120+09 01")
+	if (objw.size()>=1 && objw.left(2)=="PK")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->PK_nb.isEmpty()) continue;
+			QString constw = QString("PK%1").arg(n->PK_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("PK %1").arg(n->PK_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;

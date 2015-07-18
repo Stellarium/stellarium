@@ -79,8 +79,6 @@ public:
 	float getSurfaceBrightness(const StelCore* core) const;
 	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
 
-	float getBMagnitude(const StelCore* core) const;
-
 private:
 	friend struct DrawNebulaFuncObject;
 	
@@ -88,17 +86,22 @@ private:
 	enum NebulaType
 	{
 		NebGx		= 0,	//!< Galaxy
-		NebOc		= 1,	//!< Open star cluster
-		NebGc		= 2,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebN		= 3,	//!< A nebula
-		NebPn		= 4,	//!< Planetary nebula
-		NebDn		= 5,	//!< Dark Nebula
-		NebRn		= 6,	//!< Reflection nebula
-		NebCn		= 7,	//!< Cluster associated with nebulosity
-		NebHII		= 8,	//!< HII Region
-		NebHa		= 9,	//!< H-α emission region
-		NebSNR		= 10,	//!< Supernova remnant
-		NebUnknown	= 11	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebSy2		= 1,	//!< Seyfert 2 Galaxy
+		NebOc		= 2,	//!< Open star cluster
+		NebGc		= 3,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebN		= 4,	//!< A nebula
+		NebPn		= 5,	//!< Planetary nebula
+		NebDn		= 6,	//!< Dark Nebula
+		NebRn		= 7,	//!< Reflection nebula
+		NebBn		= 8,	//!< Bipolar nebula
+		NebEn		= 9,	//!< Emission nebula
+		NebCn		= 10,	//!< Cluster associated with nebulosity
+		NebHII		= 11,	//!< HII Region
+		NebHa		= 12,	//!< H-α emission region
+		NebSNR		= 13,	//!< Supernova remnant
+		NebSA		= 14,	//!< Stellar association
+		NebSC		= 15,	//!< Star cloud
+		NebUnknown	= 16	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! @enum HIIFormType HII region form types
