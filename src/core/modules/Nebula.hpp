@@ -72,8 +72,14 @@ public:
 	//! @return the nebula type code.
 	QString getTypeString() const;
 
+	//! Get the printable morphological nebula Type.
+	//! @return the nebula morphological type string.
+	QString getMorphologicalTypeString() const;
+
 	float getSurfaceBrightness(const StelCore* core) const;
 	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
+
+	float getBMagnitude(const StelCore* core) const;
 
 private:
 	friend struct DrawNebulaFuncObject;
@@ -81,18 +87,18 @@ private:
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx=0,     //!< Galaxy
-		NebOc=1,     //!< Open star cluster
-		NebGc=2,     //!< Globular star cluster, usually in the Milky Way Galaxy
-		NebN=3,      //!< Bright emission or reflection nebula
-		NebPn=4,     //!< Planetary nebula
-		NebDn=5,     //!< ??? Dark Nebula?      Does not exist in current catalog
-		NebIg=6,     //!< ??? Irregular Galaxy? Does not exist in current catalog
-		NebCn=7,     //!< Cluster associated with nebulosity
-		NebUnknown=8,//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
-		NebHII=9,    //!< HII Region
-		NebRn=10,    //!< Reflection nebula
-		NebHa=11     //!< H-α emission region
+		NebGx		= 0,	//!< Galaxy
+		NebOc		= 1,	//!< Open star cluster
+		NebGc		= 2,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebN		= 3,	//!< A nebula
+		NebPn		= 4,	//!< Planetary nebula
+		NebDn		= 5,	//!< Dark Nebula
+		NebRn		= 6,	//!< Reflection nebula
+		NebCn		= 7,	//!< Cluster associated with nebulosity
+		NebHII		= 8,	//!< HII Region
+		NebHa		= 9,	//!< H-α emission region
+		NebSNR		= 10,	//!< Supernova remnant
+		NebUnknown	= 11	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! @enum HIIFormType HII region form types
@@ -140,6 +146,10 @@ private:
 	bool readLDN(QString record);
 	bool readLBN(QString record);
 
+	// ----------------------------------------------
+	void readDSO(QDataStream& in);
+	// ----------------------------------------------
+
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
 
@@ -153,6 +163,7 @@ private:
 	//! Get the printable H-α emission region brightness type.
 	QString getHaBrightnessTypeString() const;
 
+	unsigned int DSO_nb;
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
 	unsigned int IC_nb;             // Index Catalog number
@@ -165,10 +176,26 @@ private:
 	unsigned int LBN_nb;            // LBN Catalog number (Lynds' Catalogue of Bright Nebulae (Lynds, 1965))
 	unsigned int Cr_nb;             // Collinder Catalog number
 	unsigned int Mel_nb;            // Melotte Catalog number
+	unsigned int PGC_nb;            // PGC number (Catalog of galaxies)
+	unsigned int Ced_nb;		// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
+	QString PK_nb;			// PK number (Catalogue of galactic planetary nebulae (Perek-Kohoutek))
+	QString since;			// JD of the nebula formation
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
-	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here.
-	float angularSize;              // Angular size in degree
+	QString mTypeString;		// Morphological type of object (as string)
+	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here. -- OUTDATED!
+	float bMag;                     // B magnitude
+	float vMag;                     // V magnitude. For Dark Nebulae, opacity is stored here.
+	float angularSize;              // Angular size in degree -- OUTDATED!
+	float majorAxisSize;		// Major axis size in arcmin
+	float minorAxisSize;		// Minor axis size in arcmin
+	int orientationAngle;		// Orientation angle in degrees
+	float radialVelocity;		// Radial velocity in km/s
+	float radialVelocityErr;	// Error of radial velocity in km/s
+	float redshift;			// Redshift
+	float redshiftErr;		// Error of redshift
+	float parallax;			// Parallax in mas
+	float parallaxErr;		// Error of parallax in mas
 	Vec3d XYZ;                      // Cartesian equatorial position (J2000.0)
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;

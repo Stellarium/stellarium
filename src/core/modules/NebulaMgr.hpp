@@ -267,6 +267,18 @@ private:
 	bool loadLDN(const QString& filename);
 	bool loadLBN(const QString& filename);
 
+	// ---------------------------------------------------
+	// AW: new generation of the DSO
+	// Load catalog of DSO
+	bool loadDSOCatalog(const QString& filename);
+	void convertDSOCatalog(const QString& in, const QString& out);
+	// Load proper names for DSO
+	bool loadDSONames(const QString& filename);
+
+	QVector<NebulaP> dsoArray;		// The DSO list
+	QHash<unsigned int, NebulaP> dsoIndex;
+	// ---------------------------------------------------
+
 	QVector<NebulaP> nebArray;		// The nebulas list
 	QHash<unsigned int, NebulaP> ngcIndex;
 	LinearFader hintsFader;
@@ -284,6 +296,8 @@ private:
 	StelTextureSP texPointer;
 	
 	QFont nebulaFont;      // Font used for names printing
+
+	bool flagConverter;
 };
 
 #endif // _NEBULAMGR_HPP_
