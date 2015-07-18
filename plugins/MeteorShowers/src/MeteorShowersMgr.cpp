@@ -23,7 +23,7 @@
 #include <QTimer>
 
 #include "LabelMgr.hpp"
-#include "MeteorShowerDialog.hpp"
+#include "MSConfigDialog.hpp"
 #include "MeteorShowersMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
@@ -68,7 +68,7 @@ void MeteorShowersMgr::init()
 	loadTextures();
 
 	m_meteorShowers = new MeteorShowers(this);
-	m_configDialog = new MeteorShowerDialog();
+	m_configDialog = new MSConfigDialog(this);
 
 	createActions();
 	createToolbarButtons();

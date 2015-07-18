@@ -1,7 +1,6 @@
 /*
  * Stellarium: Meteor Showers Plug-in
- * Copyright (C) 2013 Marcos Cardinot
- * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2013-2015 Marcos Cardinot
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _METEORSHOWERDIALOG_HPP_
-#define _METEORSHOWERDIALOG_HPP_
+#ifndef _MSCONFIGDIALOG_HPP_
+#define _MSCONFIGDIALOG_HPP_
 
 #include <QColor>
 #include <QLabel>
@@ -30,17 +29,23 @@
 #include "StelDialog.hpp"
 
 class QTimer;
-class Ui_meteorShowerDialog;
+class Ui_MSConfigDialog;
 class MeteorShowers;
 
+//! @class MSConfigDialog
+//! Configuration window.
+//! @author Marcos Cardinot <mcardinot@gmail.com>
 //! @ingroup meteorShowers
-class MeteorShowerDialog : public StelDialog
+class MSConfigDialog : public StelDialog
 {
 	Q_OBJECT
 
 public:
-	MeteorShowerDialog();
-	~MeteorShowerDialog();
+	//! Constructor
+	MSConfigDialog(MeteorShowersMgr *mgr);
+
+	//! Destructor
+	~MSConfigDialog();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -55,7 +60,7 @@ public slots:
 private slots:
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(bool checkState);
-	void updateStateReceiver(MeteorShowers::UpdateState state);
+	//void updateStateReceiver(MeteorShowers::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
 	void saveSettings(void);
@@ -69,11 +74,14 @@ private slots:
 	void repaintTreeWidget(void);
 
 private:
-        Ui_meteorShowerDialog* ui;
-	MeteorShowers* plugin;
+	Ui_MSConfigDialog* m_ui;
+	QTimer* m_updateTimer;
+	QTreeWidget* treeWidget;   //! list of events
+
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
-	QTimer* updateTimer;
+	void initListEvents(void); //! Init header and list of events
+	void setHeaderNames(void); //! Update header names
 
 	//! Defines the number and the order of the columns in the table that lists active meteor showers
 	//! @enum ModelColumns
@@ -84,9 +92,6 @@ private:
 		ColumnPeak,		//! peak date column
 		ColumnCount		//! total number of columns
 	};
-	QTreeWidget* treeWidget;   //! list of events
-	void initListEvents(void); //! Init header and list of events
-	void setHeaderNames(void); //! Update header names
 
 	// Reimplementation of QTreeWidgetItem class to fix the sorting bug
 	class TreeWidgetItem : public QTreeWidgetItem
@@ -108,4 +113,4 @@ private:
 	};
 };
 
-#endif // _METEORSHOWERDIALOG_HPP_
+#endif // _MSCONFIGDIALOG_HPP_

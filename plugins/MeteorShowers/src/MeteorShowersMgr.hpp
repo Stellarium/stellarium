@@ -29,7 +29,7 @@
 #define MS_CONFIG_PREFIX QString("MeteorShowers")
 
 class MeteorShowers;
-class MeteorShowerDialog;
+class MSConfigDialog;
 
 /*! @defgroup meteorShowers Meteor Showers Plug-in
 @{
@@ -184,7 +184,7 @@ private slots:
 
 private:
 	MeteorShowers* m_meteorShowers;
-	MeteorShowerDialog* m_configDialog;
+	MSConfigDialog* m_configDialog;
 
 	StelButton* m_toolbarEnableButton;
 	QFont m_font;
