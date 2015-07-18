@@ -169,7 +169,7 @@ void MeteorShowersMgr::loadConfig()
 	m_conf->beginGroup(MS_CONFIG_PREFIX);
 
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
-	setButtonsEnabled(m_conf->value(MS_CONFIG_PREFIX + "/flag_buttons", true).toBool());
+	setEnableButtons(m_conf->value(MS_CONFIG_PREFIX + "/flag_buttons", true).toBool());
 	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0,255,240").toString()));
 	setColorARR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARR", "255,240,0").toString()));
 	setColorIR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "255,255,255").toString()));
@@ -288,12 +288,13 @@ void MeteorShowersMgr::update(double deltaTime)
 		deltaTime = 500.0;
 	}
 
+/* TODO
 	// is GUI visible? refresh dates
 	if (m_configDialog->visible())
 	{
 		m_configDialog->refreshRangeDates(core);
 	}
-
+*/
 	m_meteorShowers->update(core, deltaTime);
 }
 
@@ -390,7 +391,7 @@ void MeteorShowersMgr::setActiveRadiantOnly(const bool& b)
 	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_active_radiant_only", b);
 }
 
-void MeteorShowersMgr::setButtonsEnabled(const bool& b)
+void MeteorShowersMgr::setEnableButtons(const bool& b)
 {
 	if (b)
 	{
@@ -474,10 +475,9 @@ void MeteorShowersMgr::setLastUpdate(const QDateTime &datetime)
 			 m_lastUpdate.toString(Qt::ISODate));
 }
 
-int MeteorShowersMgr::getSecondsToNextUpdate()
+QDateTime MeteorShowersMgr::getNextUpdate()
 {
-	QDateTime nextUpdate = m_lastUpdate.addSecs(m_updateFrequencyHours * 3600);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return m_lastUpdate.addSecs(m_updateFrequencyHours * 3600);
 }
 
 void MeteorShowersMgr::displayMessage(const QString& message, const QString hexColor)
