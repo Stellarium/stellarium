@@ -56,7 +56,8 @@ Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
 Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
 
 Nebula::Nebula()
-	: M_nb(0)
+	: DSO_nb(0)
+	, M_nb(0)
 	, NGC_nb(0)
 	, IC_nb(0)
 	, C_nb(0)
@@ -68,6 +69,9 @@ Nebula::Nebula()
 	, LBN_nb(0)
 	, Cr_nb(0)
 	, Mel_nb(0)
+	, PGC_nb(0)
+	, Ced_nb(0)
+	, PK_nb()
 	, mag(99.)
 	, nType()
 	, formType()
@@ -103,30 +107,36 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << " (";
 
 		QStringList catIds;
-		if ((M_nb > 0) && (M_nb < 111))
+		if (M_nb > 0)
 			catIds << QString("M %1").arg(M_nb);
-		if ((C_nb > 0) && (C_nb < 110))
+		if (C_nb > 0)
 			catIds << QString("C %1").arg(C_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
 			catIds << QString("IC %1").arg(IC_nb);		
-		if ((B_nb > 0) && (B_nb <= 370))
+		if (B_nb > 0)
 			catIds << QString("B %1").arg(B_nb);
-		if ((Sh2_nb > 0) && (Sh2_nb <= 313))
+		if (Sh2_nb > 0)
 			catIds << QString("Sh 2-%1").arg(Sh2_nb);
-		if ((VdB_nb > 0) && (VdB_nb <= 158))
+		if (VdB_nb > 0)
 			catIds << QString("VdB %1").arg(VdB_nb);
-		if ((RCW_nb > 0) && (RCW_nb <= 182))
+		if (RCW_nb > 0)
 			catIds << QString("RCW %1").arg(RCW_nb);
-		if ((LDN_nb > 0) && (LDN_nb <= 1802))
+		if (LDN_nb > 0)
 			catIds << QString("LDN %1").arg(LDN_nb);
-		if ((LBN_nb > 0) && (LBN_nb <= 1125))
+		if (LBN_nb > 0)
 			catIds << QString("LBN %1").arg(LBN_nb);
-		if ((Cr_nb > 0) && (Cr_nb <= 471))
+		if (Cr_nb > 0)
 			catIds << QString("Cr %1").arg(Cr_nb);
-		if ((Mel_nb > 0) && (Mel_nb <= 245))
+		if (Mel_nb > 0)
 			catIds << QString("Mel %1").arg(Mel_nb);
+		if (PGC_nb > 0)
+			catIds << QString("PGC %1").arg(PGC_nb);
+		if (Ced_nb > 0)
+			catIds << QString("Ced %1").arg(Ced_nb);
+		if (!PK_nb.isEmpty())
+			catIds << QString("PK %1").arg(PK_nb);
 		oss << catIds.join(" - ");
 
 		if (nameI18!="" && flags&Name)
@@ -137,9 +147,15 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		oss << "</h2>";
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
+	{
+		QString mt = getMorphologicalTypeString();
+		if (mt.isEmpty())
+			oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
+		else
+			oss << q_("Type: <b>%1</b> (%2)").arg(getTypeString()).arg(mt) << "<br>";
+	}
 
-	if (mag < 50 && flags&Magnitude)
+	if (vMag < 50 && flags&Magnitude)
 	{
 		if (nType == NebDn)
 		{
@@ -154,7 +170,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 		}
 	}
-	if (nType != NebDn && mag < 50 && flags&Extra)
+	if (flags&Extra)
+	{
+		if (vMag < 50 && bMag < 50)
+			oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(bMag-vMag, 'f', 2)) << "<br>";
+	}
+	if (nType != NebDn && vMag < 50 && flags&Extra)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
@@ -189,7 +210,15 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	oss << getPositionInfoString(core, flags);
 
 	if (angularSize>0 && flags&Size)
-		oss << q_("Size: %1").arg(StelUtils::radToDmsStr(angularSize*M_PI/180.)) << "<br>";
+	{
+		if (majorAxisSize!=minorAxisSize)
+		{
+			oss << q_("Size: %1 x %2").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)).arg(StelUtils::radToDmsStr(minorAxisSize*M_PI/180.)) << "<br>";
+			oss << q_("Orientation angle: %1%2").arg(orientationAngle).arg(QChar(0x00B0)) << "<br>";
+		}
+		else
+			oss << q_("Size: %1").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br>";
+	}
 
 	postProcessInfoString(str, flags);
 
@@ -199,7 +228,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 float Nebula::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
-	return mag;
+	return vMag;
+}
+
+float Nebula::getBMagnitude(const StelCore* core) const
+{
+	Q_UNUSED(core);
+	return bMag;
 }
 
 
@@ -213,9 +248,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	// make very easy to select if labeled
 	float lim=getVMagnitude(core);
 	if (nType==NebDn)
-        lim=15.0f - mag - 2.0f*qMin(1.5f, angularSize); // Note that "mag" field is used for opacity in this catalog!
-    else if (nType==NebHII) // Sharpless and LBN
-        lim=10.0f - 2.0f*qMin(1.5f, angularSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
+		lim=15.0f - vMag - 2.0f*qMin(1.5f, angularSize); // Note that "mag" field is used for opacity in this catalog!
+	else if (nType==NebHII) // Sharpless and LBN
+		lim=10.0f - 2.0f*qMin(1.5f, angularSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
 	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
@@ -252,7 +287,7 @@ float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
-	float lim = mag;
+	float lim = vMag;
 	if (lim > 50) lim = 15.f;
 
 	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
@@ -265,21 +300,21 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		// 9-(opac-5)-2*(angularSize-0.5)
 		// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
 		// The qMin() maximized the visibility gain for large objects.
-		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*qMin(angularSize, 1.5f);
+		if (angularSize>0 && vMag<50)
+			lim = 15.0f - vMag - 2.0f*qMin(angularSize, 1.5f);
 		else if (B_nb>0)
 			lim = 9.0f;
 		else
 			lim= 12.0f; // GZ I assume LDN objects are rather elusive.
 	}
-    else if (LBN_nb>0) // attempt to balance LBN brightness classes
-    {
-        if (brightnessClass==0)
-            lim=10.0f;
-        else
-            lim=brightnessClass+7.0f;
-    }
-    else if (nType==NebHII || nType==NebHa) // NebHII={Sharpless, LBN}, NebHa={RCW}
+	else if (LBN_nb>0) // attempt to balance LBN brightness classes
+	{
+		if (brightnessClass==0)
+			lim=10.0f;
+		else
+			lim=brightnessClass+7.0f;
+	}
+	else if (nType==NebHII || nType==NebHa) // NebHII={Sharpless, LBN}, NebHa={RCW}
 	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 		lim=9.0f;
 	}
@@ -315,6 +350,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		case NebHII:
 		case NebRn:
 		case NebHa:
+		case NebSNR:
 			Nebula::texDiffuseNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -347,7 +383,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
-	float lim = mag;
+	float lim = vMag;
 	if (lim > 50) lim = 15.f;
 
 	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
@@ -358,8 +394,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
-		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*qMin(angularSize, 2.5f);
+		if (angularSize>0 && vMag<50)
+			lim = 15.0f - vMag - 2.0f*qMin(angularSize, 2.5f);
 		else if (B_nb>0)
 			lim = 9.0f;
 		else
@@ -386,7 +422,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		str = getNameI18n();
 	else
 	{
-		// On screen label: one only, priority as given here. NGC should win over Sharpless. (GZ)
+		// On screen label: one only, priority as given here.
 		if (M_nb > 0)
 			str = QString("M %1").arg(M_nb);
 		else if (C_nb > 0)
@@ -411,11 +447,36 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("Cr %1").arg(Cr_nb);
 		else if (Mel_nb > 0)
 			str = QString("Mel %1").arg(Mel_nb);
+		else if (PGC_nb > 0)
+			str = QString("PGC %1").arg(PGC_nb);
+		else if (Ced_nb > 0)
+			str = QString("Ced %1").arg(Ced_nb);
+		else if (!PK_nb.isEmpty())
+			str = QString("PK %1").arg(PK_nb);
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
+// ----------------------------------------------
+void Nebula::readDSO(QDataStream &in)
+{
+	float	ra, dec;
+	unsigned int oType;
+
+	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
+		>> orientationAngle >> radialVelocity >> radialVelocityErr >> redshift >> redshiftErr
+		>> parallax >> parallaxErr >> since >> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb
+		>> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb >> Mel_nb >> PGC_nb >> Ced_nb >> PK_nb;
+
+	angularSize = qMax(majorAxisSize,minorAxisSize); // use max angular size in degrees
+
+	StelUtils::spheToRect(ra,dec,XYZ);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+	nType = (Nebula::NebulaType)oType;
+	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+}
+// ----------------------------------------------
 
 void Nebula::readNGC(QDataStream& in)
 {
@@ -442,80 +503,6 @@ void Nebula::readNGC(QDataStream& in)
 	Q_ASSERT(type!=5);
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
-
-#if 0
-QFile filess("filess.dat");
-QDataStream out;
-out.setVersion(QDataStream::Qt_4_5);
-bool Nebula::readNGC(char *recordstr)
-{
-	int rahr;
-	float ramin;
-	int dedeg;
-	float demin;
-	int nb;
-
-	sscanf(&recordstr[1],"%d",&nb);
-
-	if (recordstr[0] == 'I')
-	{
-		IC_nb = nb;
-	}
-	else
-	{
-		NGC_nb = nb;
-	}
-
-	sscanf(&recordstr[12],"%d %f",&rahr, &ramin);
-	sscanf(&recordstr[22],"%d %f",&dedeg, &demin);
-	float RaRad = (double)rahr+ramin/60;
-	float DecRad = (float)dedeg+demin/60;
-	if (recordstr[21] == '-') DecRad *= -1.;
-
-	RaRad*=M_PI/12.;     // Convert from hours to rad
-	DecRad*=M_PI/180.;    // Convert from deg to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-
-	sscanf(&recordstr[47],"%f",&mag);
-	if (mag < 1) mag = 99;
-
-	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
-	float size;
-	sscanf(&recordstr[40],"%f",&size);
-
-	angularSize = size/60;
-	if (angularSize<0)
-		angularSize=0;
-
-	// this is a huge performance drag if called every frame, so cache here
-	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NebGx;}
-	else if (!strncmp(&recordstr[8],"OC",2)) { nType = NebOc;}
-	else if (!strncmp(&recordstr[8],"Gb",2)) { nType = NebGc;}
-	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NebN;}
-	else if (!strncmp(&recordstr[8],"Pl",2)) { nType = NebPn;}
-	else if (!strncmp(&recordstr[8],"  ",2)) { return false;}
-	else if (!strncmp(&recordstr[8]," -",2)) { return false;}
-	else if (!strncmp(&recordstr[8]," *",2)) { return false;}
-	else if (!strncmp(&recordstr[8],"D*",2)) { return false;}
-	else if (!strncmp(&recordstr[7],"***",3)) { return false;}
-	else if (!strncmp(&recordstr[7],"C+N",3)) { nType = NebCn;}
-	else if (!strncmp(&recordstr[8]," ?",2)) { nType = NebUnknown;}
-	else { nType = NebUnknown;}
-
-	if (!filess.isOpen())
-	{
-		filess.open(QIODevice::WriteOnly);
-		out.setDevice(&filess);
-	}
-	out << ((bool)(recordstr[0] == 'I')) << nb << RaRad << DecRad << mag << angularSize << ((unsigned int)nType);
-	if (nb==5369 && recordstr[0] == 'I')
-		filess.close();
-
-	return true;
-}
-#endif
 
 bool Nebula::readBarnard(QString record)
 {
@@ -730,6 +717,16 @@ bool Nebula::readLBN(QString record)
 	return true;
 }
 
+QString Nebula::getMorphologicalTypeString(void) const
+{
+	QString wsType;
+
+	if (nType == NebGx)
+		wsType = mTypeString;
+
+	return wsType;
+}
+
 QString Nebula::getTypeString(void) const
 {
 	QString wsType;
@@ -754,9 +751,6 @@ QString Nebula::getTypeString(void) const
 		case NebDn:
 			wsType = q_("Dark nebula");
 			break;
-		case NebIg:
-			wsType = q_("Irregular galaxy");
-			break;
 		case NebCn:
 			wsType = q_("Cluster associated with nebulosity");
 			break;
@@ -771,6 +765,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebHa:
 			wsType = q_("H-α emission region");
+			break;
+		case NebSNR:
+			wsType = q_("Supernova remnant");
 			break;
 		default:
 			wsType = q_("Undocumented type");
