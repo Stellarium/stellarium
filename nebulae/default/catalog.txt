@@ -1,0 +1,42 @@
+# Stellarium DSO catalog
+# Generic columns:
+# 1 - (int)	- DSO id
+# 2 - (string)	- RA (HH:MM:SS.SS)
+# 3 - (string)	- Dec (DD:MM:SS.S)
+# 4 - (float)	- B magnitude
+# 5 - (float)	- V magnitude
+# 6 - (string)	- Object type (G, GX, GC, OC, NB, PN, DN, RN, C+N, HA, HII, SNR or empty)
+# 7 - (string)	- Morphological type of object
+# 8 - (float)	- Major axis size (arcmin, radius)
+# 9 - (float)	- Minor axis size (arcmin, radius)
+# 10 - (int)	- Orientation angle (degrees)
+# 11 - (float)	- Radial velocity (km/s)
+# 12 - (float)	- Error of radial velocity (km/s)
+# 13 - (float)	- Redshift
+# 14 - (float)	- Error of redshift
+# 15 - (float)	- Parallax (mas)
+# 16 - (float)	- Error of parallax (mas)
+# 17 - (string) - JD as string (JD of nebula formation, can be empty)
+# Cross-index columns:
+# 18 - (int)	- NGC number (New General Catalogue)
+# 19 - (int)	- IC number (Index Catalogue)
+# 20 - (int)	- M number (Messier Catalog)
+# 21 - (int)	- C number (Caldwell Catalogue)
+# 22 - (int)	- B number (Barnard Catalogue)
+# 23 - (int)	- Sh2 number (Sharpless Catalogue)
+# 24 - (int)	- VdB number (Van den Bergh Catalogue of reflection nebulae)
+# 25 - (int)	- RCW number (A catalogue of Hα-emission regions in the southern Milky Way)
+# 26 - (int)	- LDN number (Lynds' Catalogue of Dark Nebulae)
+# 27 - (int)	- LBN number (Lynds' Catalogue of Bright Nebulae)
+# 28 - (int)	- Cr number (Collinder Catalogue)
+# 29 - (int)	- Mel number (Melotte Catalogue of Deep Sky Objects)
+# 30 - (int)	- PGC number (HYPERLEDA. I. Catalog of galaxies)
+# 31 - (int)	- Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
+# 32 - (int)	- PK number (Catalogue of galactic planetary nebulae (Perek-Kohoutek))
+#            2              3            4        5     6       7         8      9      10      11      12      13              14              15      16     17       18      19      20      21      22      23      24      25      26      27      28      29      30      31      32
+1	00:07:15.825	+27:42:29.13	13.4	12.7	Gx	Sb	0.813	0.634	110	4550	1	0.015147	0.000150	-9	-9		1												564		
+2	00:07:17.104	+27:40:42.13	14.8	14.0	Gx	Sab	0.877	0.544	110	7547	2	0.025174	0.000007	-9	-9		2												567		
+3	00:07:16.804	+08:18:05.84	14.6	13.5	Gx	S0?	0.897	0.484	105	3900	49	0.013009	0.000163	-9	-9		3												565		
+4	00:08:18.905	+08:07:15.79	16.9	15.9	Gx							-1	-1	-9	-9		4														
+5	00:07:48.898	+35:21:44.46	14.6	13.4	Gx	E:	0.643	0.515	115	5111	41	0.016792	0.000227	-9	-9		5												595		
+6	00:08:20.36	-29:55:01.2	14.1	13.1	Gx	SB(s)c?	2.454	0.524	29	1495	2	0.004987	0.000007	-9	-9		7												627		

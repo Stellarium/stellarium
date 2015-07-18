@@ -129,6 +129,8 @@ void NebulaMgr::init()
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 
+	flagConverter = conf->value("astro/flag_convert_dso_catalog", false).toBool();
+
 	updateI18n();
 	
 	StelApp *app = &StelApp::getInstance();
@@ -150,9 +152,9 @@ struct DrawNebulaFuncObject
 		Nebula* n = static_cast<Nebula*>(obj);
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)
-		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->mag > drawer->getCustomNebulaMagnitudeLimit())) return;
+		if ((drawer->getFlagNebulaMagnitudeLimit()) && (n->vMag > drawer->getCustomNebulaMagnitudeLimit())) return;
 
-		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->mag <= maxMagHints))
+		if (n->angularSize>angularSizeLimit || (checkMaxMagHints && n->vMag <= maxMagHints))
 		{
 			float refmag_add=0; // value to adjust hints visibility threshold.
 			sPainter->getProjector()->project(n->XYZ,n->XY);
@@ -254,7 +256,7 @@ NebulaP NebulaMgr::search(const QString& name)
 {
 	QString uname = name.toUpper();
 
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		QString testName = n->getEnglishName().toUpper();
 		if (testName==uname) return n;
@@ -292,6 +294,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
+	/*
 	QString ngcPath = StelFileMgr::findFile("nebulae/" + setName + "/ngc2000.dat");
 	QString barnardPath = StelFileMgr::findFile("nebulae/" + setName + "/BarnardCat_tabbed.txt");
 	QString sharplessPath = StelFileMgr::findFile("nebulae/" + setName + "/SharplessCat_tabbed.txt");
@@ -313,6 +316,25 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	loadLDN(ldnPath);
 	loadLBN(lbnPath);
 	loadNGCNames(ngcNamesPath);
+	*/
+
+	// ---------------------------------------------------
+	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
+	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");	
+	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
+
+	if (flagConverter)
+		convertDSOCatalog(srcCatalogPath, dsoCatalogPath);
+
+	if (dsoCatalogPath.isEmpty() || dsoNamesPath.isEmpty())
+	{
+		qWarning() << "ERROR while loading deep-sky data set " << setName;
+		return;
+	}
+
+	loadDSOCatalog(dsoCatalogPath);	
+	loadDSONames(dsoNamesPath);
+	// ---------------------------------------------------
 }
 
 // Look for a nebulae by XYZ coords
@@ -322,7 +344,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 	pos.normalize();
 	NebulaP plusProche;
 	float anglePlusProche=0.0f;
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		if (n->XYZ*pos>anglePlusProche)
 		{
@@ -348,7 +370,7 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		equPos = n->XYZ;
 		equPos.normalize();
@@ -362,7 +384,7 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 
 NebulaP NebulaMgr::searchM(unsigned int M)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->M_nb == M)
 			return n;
 	return NebulaP();
@@ -370,21 +392,23 @@ NebulaP NebulaMgr::searchM(unsigned int M)
 
 NebulaP NebulaMgr::searchNGC(unsigned int NGC)
 {
-	if (ngcIndex.contains(NGC))
-		return ngcIndex[NGC];
+	foreach (const NebulaP& n, dsoArray)
+		if (n->NGC_nb == NGC)
+			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchIC(unsigned int IC)
 {
-	foreach (const NebulaP& n, nebArray)
-		if (n->IC_nb == IC) return n;
+	foreach (const NebulaP& n, dsoArray)
+		if (n->IC_nb == IC)
+			return n;
 	return NebulaP();
 }
 
 NebulaP NebulaMgr::searchC(unsigned int C)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->C_nb == C)
 			return n;
 	return NebulaP();
@@ -392,7 +416,7 @@ NebulaP NebulaMgr::searchC(unsigned int C)
 
 NebulaP NebulaMgr::searchB(unsigned int B)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->B_nb == B)
 			return n;
 	return NebulaP();
@@ -400,7 +424,7 @@ NebulaP NebulaMgr::searchB(unsigned int B)
 
 NebulaP NebulaMgr::searchSh2(unsigned int Sh2)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->Sh2_nb == Sh2)
 			return n;
 	return NebulaP();
@@ -408,7 +432,7 @@ NebulaP NebulaMgr::searchSh2(unsigned int Sh2)
 
 NebulaP NebulaMgr::searchVdB(unsigned int VdB)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->VdB_nb == VdB)
 			return n;
 	return NebulaP();
@@ -416,7 +440,7 @@ NebulaP NebulaMgr::searchVdB(unsigned int VdB)
 
 NebulaP NebulaMgr::searchRCW(unsigned int RCW)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->RCW_nb == RCW)
 			return n;
 	return NebulaP();
@@ -424,7 +448,7 @@ NebulaP NebulaMgr::searchRCW(unsigned int RCW)
 
 NebulaP NebulaMgr::searchLDN(unsigned int LDN)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->LDN_nb == LDN)
 			return n;
 	return NebulaP();
@@ -432,7 +456,7 @@ NebulaP NebulaMgr::searchLDN(unsigned int LDN)
 
 NebulaP NebulaMgr::searchLBN(unsigned int LBN)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->LBN_nb == LBN)
 			return n;
 	return NebulaP();
@@ -440,7 +464,7 @@ NebulaP NebulaMgr::searchLBN(unsigned int LBN)
 
 NebulaP NebulaMgr::searchCr(unsigned int Cr)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->Cr_nb == Cr)
 			return n;
 	return NebulaP();
@@ -448,37 +472,49 @@ NebulaP NebulaMgr::searchCr(unsigned int Cr)
 
 NebulaP NebulaMgr::searchMel(unsigned int Mel)
 {
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 		if (n->Mel_nb == Mel)
 			return n;
 	return NebulaP();
 }
 
-#if 0
-// read from stream
-bool NebulaMgr::loadNGCOld(const QString& catNGC)
+// ---------------------------------------------------
+void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 {
-	QFile in(catNGC);
-	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
-		return false;
+	QFile dsoIn(in);
+	if (!dsoIn.open(QIODevice::ReadOnly | QIODevice::Text))
+		return;
+
+	QFile dsoOut(out);
+	if (!dsoOut.open(QIODevice::WriteOnly))
+		return;
 
 	int totalRecords=0;
 	QString record;
-	while (!in.atEnd())
+	while (!dsoIn.atEnd())
 	{
-		in.readLine();
+		dsoIn.readLine();
 		++totalRecords;
 	}
 
 	// rewind the file to the start
-	in.seek(0);
+	dsoIn.seek(0);
+
+	QDataStream dsoOutStream(&dsoOut);
+	dsoOutStream.setVersion(QDataStream::Qt_5_2);
+
+	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, Ced;
+	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, radialVelocity, radialVelocityErr, redshift,
+		redshiftErr, parallax, parallaxErr;
+	QString oType, mType, since, PK, ra, dec;
+	unsigned int nType;
 
 	int currentLineNumber = 0;	// what input line we are on
 	int currentRecordNumber = 0;	// what record number we are on
 	int readOk = 0;			// how many records weree rad without problems
-	while (!in.atEnd())
+	while (!dsoIn.atEnd())
 	{
-		record = QString::fromUtf8(in.readLine());
+		record = QString::fromUtf8(dsoIn.readLine());
 		++currentLineNumber;
 
 		// skip comments
@@ -486,26 +522,154 @@ bool NebulaMgr::loadNGCOld(const QString& catNGC)
 			continue;
 		++currentRecordNumber;
 
-		// Create a new Nebula record
-		NebulaP e = NebulaP(new Nebula);
-		if (!e->readNGC((char*)record.toLocal8Bit().data())) // reading error
+		if (!record.isEmpty())
 		{
-			e.clear();
-		}
-		else
-		{
-			nebArray.append(e);
-			nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
-			if (e->NGC_nb!=0)
-				ngcIndex.insert(e->NGC_nb, e);
+			QStringList list=record.split("\t", QString::KeepEmptyParts);
+
+			id			= list.at(0).toInt();	 // ID (inner identification number)
+			ra			= list.at(1).trimmed();
+			dec			= list.at(2).trimmed();
+			bMag			= list.at(3).toFloat();  // B magnitude
+			vMag			= list.at(4).toFloat();	 // V magnitude
+			oType			= list.at(5).trimmed();  // Object type
+			mType			= list.at(6).trimmed();  // Morphological type of object
+			majorAxisSize		= list.at(7).toFloat();  // major axis size (arcmin)
+			minorAxisSize		= list.at(8).toFloat();	 // minor axis size (arcmin)
+			orientationAngle	= list.at(9).toInt();	 // orientation angle (degrees)
+			radialVelocity		= list.at(10).toFloat(); // radial velocity (km/s)
+			radialVelocityErr	= list.at(11).toFloat(); // error of radial velocity (km/s)
+			redshift		= list.at(12).toFloat();
+			redshiftErr		= list.at(13).toFloat();
+			parallax		= list.at(14).toFloat(); // parallax (mas)
+			parallaxErr		= list.at(15).toFloat(); // error of parallax (mas)
+			since			= list.at(16).trimmed(); // JD as string
+			// -----------------------------------------------
+			// cross-index data
+			// -----------------------------------------------
+			NGC			= list.at(17).toInt();	 // NGC number
+			IC			= list.at(18).toInt();	 // IC number
+			M			= list.at(19).toInt();	 // M number
+			C			= list.at(20).toInt();	 // C number
+			B			= list.at(21).toInt();	 // B number
+			Sh2			= list.at(22).toInt();	 // Sh2 number
+			VdB			= list.at(23).toInt();	 // VdB number
+			RCW			= list.at(24).toInt();	 // RCW number
+			LDN			= list.at(25).toInt();	 // LDN number
+			LBN			= list.at(26).toInt();	 // LBN number
+			Cr			= list.at(27).toInt();	 // Cr number
+			Mel			= list.at(28).toInt();	 // Mel number
+			PGC			= list.at(29).toInt();	 // PGC number (subset)
+			Ced			= list.at(30).toInt();	 // Ced number
+			PK			= list.at(31).trimmed(); // PK number
+
+			QStringList raLst = ra.split(":");
+			QStringList decLst = dec.split(":");
+
+			raRad	= raLst.at(0).toFloat() + raLst.at(1).toFloat()/60.f + raLst.at(2).toFloat()/3600.f;
+			decRad	= qAbs(decLst.at(0).toFloat()) + decLst.at(1).toFloat()/60.f + decLst.at(2).toFloat()/3600.f;
+			if (dec.startsWith("-")) decRad *= -1.f;
+
+			raRad  *= M_PI/12.;	// Convert from hours to rad
+			decRad *= M_PI/180.;    // Convert from deg to rad
+
+			majorAxisSize /= 60.f;	// Convert from arcmin to degrees
+			minorAxisSize /= 60.f;	// Convert from arcmin to degrees
+
+			if (bMag < 1.f) bMag = 99.f;
+			if (vMag < 1.f) vMag = 99.f;
+
+			QStringList oTypes;
+			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N" << "HA" << "HII" << "SNR";
+
+			switch (oTypes.indexOf(oType.toUpper()))
+			{
+				case 0:
+				case 1:
+					nType = (unsigned int)Nebula::NebGx;
+					break;
+				case 2:
+					nType = (unsigned int)Nebula::NebGc;
+					break;
+				case 3:
+					nType = (unsigned int)Nebula::NebOc;
+					break;
+				case 4:
+					nType = (unsigned int)Nebula::NebN;
+					break;
+				case 5:
+					nType = (unsigned int)Nebula::NebPn;
+					break;
+				case 6:
+					nType = (unsigned int)Nebula::NebDn;
+					break;
+				case 7:
+					nType = (unsigned int)Nebula::NebRn;
+					break;
+				case 8:
+					nType = (unsigned int)Nebula::NebCn;
+					break;
+				case 9:
+					nType = (unsigned int)Nebula::NebHa;
+					break;
+				case 10:
+					nType = (unsigned int)Nebula::NebHII;
+					break;
+				case 11:
+					nType = (unsigned int)Nebula::NebSNR;
+					break;
+				default:
+					nType = (unsigned int)Nebula::NebUnknown;
+					break;
+			}
+
 			++readOk;
+
+			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
+				     << orientationAngle << radialVelocity << radialVelocityErr << redshift << redshiftErr
+				     << parallax << parallaxErr << since << NGC << IC << M << C << B << Sh2 << VdB << RCW
+				     << LDN << LBN << Cr << Mel << PGC << Ced << PK;
 		}
 	}
+	dsoIn.close();
+	dsoOut.flush();
+	dsoOut.close();
+	qDebug() << "Converted" << readOk << "/" << totalRecords << "DSO records";
+}
+
+bool NebulaMgr::loadDSOCatalog(const QString &filename)
+{
+	QFile in(filename);
+	if (!in.open(QIODevice::ReadOnly))
+		return false;
+
+	QDataStream ins(&in);
+	ins.setVersion(QDataStream::Qt_5_2);
+
+	int totalRecords=0;
+	while (!ins.atEnd())
+	{
+		// Create a new Nebula record
+		NebulaP e = NebulaP(new Nebula);
+		e->readDSO(ins);
+
+		dsoArray.append(e);
+		nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
+		if (e->DSO_nb!=0)
+			dsoIndex.insert(e->DSO_nb, e);
+		++totalRecords;
+	}
 	in.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "NGC records";
+	qDebug() << "Loaded" << totalRecords << "DSO records";
 	return true;
 }
-#endif
+
+bool NebulaMgr::loadDSONames(const QString &filename)
+{
+	//qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO names";
+	return true;
+}
+
+// ---------------------------------------------------
 
 bool NebulaMgr::loadNGC(const QString& catNGC)
 {
@@ -995,7 +1159,7 @@ bool NebulaMgr::loadLBN(const QString& filename)
 void NebulaMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	foreach (NebulaP n, nebArray)
+	foreach (NebulaP n, dsoArray)
 		n->translateName(trans);
 }
 
@@ -1008,7 +1172,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
 	if (objw.mid(0, 3) == "NGC")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("NGC%1").arg(n->NGC_nb) == objw || QString("NGC %1").arg(n->NGC_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1016,7 +1180,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by common names
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		QString objwcap = n->nameI18.toUpper();
 		if (objwcap==objw)
@@ -1026,7 +1190,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by IC numbers (possible formats are "IC466" or "IC 466")
 	if (objw.mid(0, 2) == "IC")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("IC%1").arg(n->IC_nb) == objw || QString("IC %1").arg(n->IC_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1037,7 +1201,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.mid(0, 1) == "M" && objw.mid(1, 1) != "E")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("M%1").arg(n->M_nb) == objw || QString("M %1").arg(n->M_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1047,7 +1211,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Caldwell numbers (possible formats are "C31" or "C 31")
 	if (objw.mid(0, 1) == "C" && objw.mid(1, 2) != "R")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("C%1").arg(n->C_nb) == objw || QString("C %1").arg(n->C_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1057,7 +1221,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Barnard numbers (possible formats are "B31" or "B 31")
 	if (objw.mid(0, 1) == "B")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("B%1").arg(n->B_nb) == objw || QString("B %1").arg(n->B_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1067,7 +1231,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
 	if (objw.mid(0, 2) == "SH")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("SH2-%1").arg(n->Sh2_nb) == objw || QString("SH 2-%1").arg(n->Sh2_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1077,7 +1241,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Van den Bergh numbers (possible formats are "VdB31" or "VdB 31")
 	if (objw.mid(0, 3) == "VDB")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("VDB%1").arg(n->VdB_nb) == objw || QString("VDB %1").arg(n->VdB_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1087,7 +1251,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by RCW numbers (possible formats are "RCW31" or "RCW 31")
 	if (objw.mid(0, 3) == "RCW")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("RCW%1").arg(n->RCW_nb) == objw || QString("RCW %1").arg(n->RCW_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1097,7 +1261,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by LDN numbers (possible formats are "LDN31" or "LDN 31")
 	if (objw.mid(0, 3) == "LDN")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("LDN%1").arg(n->LDN_nb) == objw || QString("LDN %1").arg(n->LDN_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1107,7 +1271,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by LBN numbers (possible formats are "LBN31" or "LBN 31")
 	if (objw.mid(0, 3) == "LBN")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("LBN%1").arg(n->LBN_nb) == objw || QString("LBN %1").arg(n->LBN_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1117,7 +1281,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Collinder numbers (possible formats are "Cr31" or "Cr 31")
 	if (objw.mid(0, 2) == "CR")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("CR%1").arg(n->Cr_nb) == objw || QString("CR %1").arg(n->Cr_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1127,7 +1291,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	// Search by Melotte numbers (possible formats are "Mel31" or "Mel 31")
 	if (objw.mid(0, 3) == "MEL")
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("MEL%1").arg(n->Mel_nb) == objw || QString("MEL %1").arg(n->Mel_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1147,7 +1311,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
 	if (objw.startsWith("NGC"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("NGC%1").arg(n->NGC_nb) == objw || QString("NGC %1").arg(n->NGC_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1155,7 +1319,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by common names
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		QString objwcap = n->englishName.toUpper();
 		if (objwcap==objw)
@@ -1165,7 +1329,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by IC numbers (possible formats are "IC466" or "IC 466")
 	if (objw.startsWith("IC"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("IC%1").arg(n->IC_nb) == objw || QString("IC %1").arg(n->IC_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1175,7 +1339,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Messier numbers (possible formats are "M31" or "M 31")
 	if (objw.startsWith("M") && !objw.startsWith("ME"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("M%1").arg(n->M_nb) == objw || QString("M %1").arg(n->M_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1185,7 +1349,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Caldwell numbers (possible formats are "C31" or "C 31")
 	if (objw.startsWith("C") && !objw.startsWith("CR"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("C%1").arg(n->C_nb) == objw || QString("C %1").arg(n->C_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1195,7 +1359,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Barnard numbers (possible formats are "B31" or "B 31")
 	if (objw.startsWith("B"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("B%1").arg(n->B_nb) == objw || QString("B %1").arg(n->B_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1205,7 +1369,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
 	if (objw.startsWith("SH"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("SH2-%1").arg(n->Sh2_nb) == objw || QString("SH 2-%1").arg(n->Sh2_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1215,7 +1379,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Van den Bergh numbers (possible formats are "VdB31" or "VdB 31")
 	if (objw.startsWith("VDB"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("VDB%1").arg(n->VdB_nb) == objw || QString("VDB %1").arg(n->VdB_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1225,7 +1389,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by RCW numbers (possible formats are "RCW31" or "RCW 31")
 	if (objw.startsWith("RCW"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("RCW%1").arg(n->RCW_nb) == objw || QString("RCW %1").arg(n->RCW_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1235,7 +1399,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by LDN numbers (possible formats are "LDN31" or "LDN 31")
 	if (objw.startsWith("LDN"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("LDN%1").arg(n->LDN_nb) == objw || QString("LDN %1").arg(n->LDN_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1245,7 +1409,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by LBN numbers (possible formats are "LBN31" or "LBN 31")
 	if (objw.startsWith("LBN"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("LBN%1").arg(n->LBN_nb) == objw || QString("LBN %1").arg(n->LBN_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1255,7 +1419,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Collinder numbers (possible formats are "Cr31" or "Cr 31")
 	if (objw.startsWith("CR"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("CR%1").arg(n->Cr_nb) == objw || QString("CR %1").arg(n->Cr_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1265,7 +1429,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	// Search by Melotte numbers (possible formats are "Mel31" or "Mel 31")
 	if (objw.startsWith("MEL"))
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("MEL%1").arg(n->Mel_nb) == objw || QString("MEL %1").arg(n->Mel_nb) == objw)
 				return qSharedPointerCast<StelObject>(n);
@@ -1286,7 +1450,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw[0]=='M' && objw[1]!='E')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->M_nb==0) continue;
 			QString constw = QString("M%1").arg(n->M_nb);
@@ -1306,7 +1470,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by Melotte objects number (possible formats are "Mel31" or "Mel 31")
 	if (objw.size()>=1 && objw[0]=='M' && objw[1]=='E')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Mel_nb==0) continue;
 			QString constw = QString("MEL%1").arg(n->Mel_nb);
@@ -1326,7 +1490,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by IC objects number (possible formats are "IC466" or "IC 466")
 	if (objw.size()>=1 && objw[0]=='I')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->IC_nb==0) continue;
 			QString constw = QString("IC%1").arg(n->IC_nb);
@@ -1344,7 +1508,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		if (n->NGC_nb==0) continue;
 		QString constw = QString("NGC%1").arg(n->NGC_nb);
@@ -1363,7 +1527,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
 	if (objw.size()>=1 && objw[0]=='C' && objw[1]!='R')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->C_nb==0) continue;
 			QString constw = QString("C%1").arg(n->C_nb);
@@ -1383,7 +1547,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by Collinder objects number (possible formats are "Cr31" or "Cr 31")
 	if (objw.size()>=1 && objw[0]=='C' && objw[1]=='R')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Cr_nb==0) continue;
 			QString constw = QString("CR%1").arg(n->Cr_nb);
@@ -1403,7 +1567,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by Barnard objects number (possible formats are "B31" or "B 31")
 	if (objw.size()>=1 && objw[0]=='B')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->B_nb==0) continue;
 			QString constw = QString("B%1").arg(n->B_nb);
@@ -1423,7 +1587,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
 	if (objw.size()>=1 && objw[0]=='S')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Sh2_nb==0) continue;
 			QString constw = QString("SH2-%1").arg(n->Sh2_nb);
@@ -1443,7 +1607,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by Van den Bergh objects number (possible formats are "VdB31" or "VdB 31")
 	if (objw.size()>=1 && objw[0]=='V')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->VdB_nb==0) continue;
 			QString constw = QString("VDB%1").arg(n->VdB_nb);
@@ -1463,7 +1627,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by RCW objects number (possible formats are "RCW31" or "RCW 31")
 	if (objw.size()>=1 && objw[0]=='R')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->RCW_nb==0) continue;
 			QString constw = QString("RCW%1").arg(n->RCW_nb);
@@ -1483,7 +1647,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by LDN objects number (possible formats are "LDN31" or "LDN 31")
 	if (objw.size()>=1 && objw[0]=='L' && objw[1]=='D')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->LDN_nb==0) continue;
 			QString constw = QString("LDN%1").arg(n->LDN_nb);
@@ -1503,7 +1667,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	// Search by LBN objects number (possible formats are "LBN31" or "LBN 31")
 	if (objw.size()>=1 && objw[0]=='L' && objw[1]=='B')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->LBN_nb==0) continue;
 			QString constw = QString("LBN%1").arg(n->LBN_nb);
@@ -1523,7 +1687,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	QString dson;
 	bool find;
 	// Search by common names
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		dson = n->nameI18;
 		find = false;
@@ -1560,7 +1724,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by Messier objects number (possible formats are "M31" or "M 31")
 	if (objw.size()>=1 && objw[0]=='M' && objw[1]!='E')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->M_nb==0) continue;
 			QString constw = QString("M%1").arg(n->M_nb);
@@ -1580,7 +1744,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by Melotte objects number (possible formats are "Mel31" or "Mel 31")
 	if (objw.size()>=1 && objw[0]=='M' && objw[1]=='E')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Mel_nb==0) continue;
 			QString constw = QString("MEL%1").arg(n->Mel_nb);
@@ -1600,7 +1764,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by IC objects number (possible formats are "IC466" or "IC 466")
 	if (objw.size()>=1 && objw[0]=='I')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->IC_nb==0) continue;
 			QString constw = QString("IC%1").arg(n->IC_nb);
@@ -1618,7 +1782,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		if (n->NGC_nb==0) continue;
 		QString constw = QString("NGC%1").arg(n->NGC_nb);
@@ -1637,7 +1801,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
 	if (objw.size()>=1 && objw[0]=='C' && objw[1]!='R')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->C_nb==0) continue;
 			QString constw = QString("C%1").arg(n->C_nb);
@@ -1657,7 +1821,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by Collinder objects number (possible formats are "Cr31" or "Cr 31")
 	if (objw.size()>=1 && objw[0]=='C' && objw[1]=='R')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Cr_nb==0) continue;
 			QString constw = QString("CR%1").arg(n->Cr_nb);
@@ -1677,7 +1841,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by Barnard objects number (possible formats are "B31" or "B 31")
 	if (objw.size()>=1 && objw[0]=='B')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->B_nb==0) continue;
 			QString constw = QString("B%1").arg(n->B_nb);
@@ -1697,7 +1861,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
 	if (objw.size()>=1 && objw[0]=='S')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Sh2_nb==0) continue;
 			QString constw = QString("SH2-%1").arg(n->Sh2_nb);
@@ -1717,7 +1881,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by Van den Bergh objects number (possible formats are "VdB31" or "VdB 31")
 	if (objw.size()>=1 && objw[0]=='V')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->VdB_nb==0) continue;
 			QString constw = QString("VDB%1").arg(n->VdB_nb);
@@ -1737,7 +1901,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by RCW objects number (possible formats are "RCW31" or "RCW 31")
 	if (objw.size()>=1 && objw[0]=='R')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->RCW_nb==0) continue;
 			QString constw = QString("RCW%1").arg(n->RCW_nb);
@@ -1757,7 +1921,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by LDN objects number (possible formats are "LDN31" or "LDN 31")
 	if (objw.size()>=1 && objw[0]=='L' && objw[1]=='D')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->LDN_nb==0) continue;
 			QString constw = QString("LDN%1").arg(n->LDN_nb);
@@ -1777,7 +1941,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	// Search by LBN objects number (possible formats are "LBN31" or "LBN 31")
 	if (objw.size()>=1 && objw[0]=='L' && objw[1]=='B')
 	{
-		foreach (const NebulaP& n, nebArray)
+		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->LBN_nb==0) continue;
 			QString constw = QString("LBN%1").arg(n->LBN_nb);
@@ -1797,7 +1961,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	QString dson;
 	bool find;
 	// Search by common names
-	foreach (const NebulaP& n, nebArray)
+	foreach (const NebulaP& n, dsoArray)
 	{
 		dson = n->englishName;
 		find = false;
@@ -1828,7 +1992,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 QStringList NebulaMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	foreach(const NebulaP& n, nebArray)
+	foreach(const NebulaP& n, dsoArray)
 	{		
 		if (!n->getEnglishName().isEmpty())
 		{
@@ -1848,7 +2012,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 	switch (type)
 	{
 		case 0: // Bright galaxies?
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->nType==type && n->mag<=10.)
 				{
@@ -1868,63 +2032,63 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			}
 			break;
 		case 100: // Messier Catalogue?
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->M_nb>0)
 					result << QString("M%1").arg(n->M_nb);
 			}
 			break;
 		case 101: // Caldwell Catalogue?
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->C_nb>0)
 					result << QString("C%1").arg(n->C_nb);
 			}
 			break;
 		case 102: // Barnard Catalogue?
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->B_nb>0)
 					result << QString("B %1").arg(n->B_nb);
 			}
 			break;
 		case 103: // Sharpless Catalogue?
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->Sh2_nb>0)
 					result << QString("Sh 2-%1").arg(n->Sh2_nb);
 			}
 			break;
 		case 104: // Van den Bergh Catalogue
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->VdB_nb>0)
 					result << QString("VdB %1").arg(n->VdB_nb);
 			}
 			break;
 		case 105: // RCW Catalogue
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->RCW_nb>0)
 					result << QString("RCW %1").arg(n->VdB_nb);
 			}
 			break;
 		case 106: // Collinder Catalogue
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->Cr_nb>0)
 					result << QString("Cr %1").arg(n->Cr_nb);
 			}
 			break;
 		case 107: // Melotte Catalogue
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->Mel_nb>0)
 					result << QString("Mel %1").arg(n->Mel_nb);
 			}
 			break;
 		default:
-			foreach(const NebulaP& n, nebArray)
+			foreach(const NebulaP& n, dsoArray)
 			{
 				if (n->nType==type)
 				{
