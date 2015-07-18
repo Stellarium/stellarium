@@ -1,7 +1,6 @@
 /*
  * Stellarium: Meteor Showers Plug-in
- * Copyright (C) 2013 Marcos Cardinot
- * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2013-2015 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +26,7 @@
 #include <QTimer>
 #include <QUrl>
 
-#include "MeteorShowerDialog.hpp"
+#include "MSConfigDialog.hpp"
 #include "MeteorShowers.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -40,32 +39,31 @@
 #include "StelStyle.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
-#include "ui_meteorShowerDialog.h"
+#include "ui_MSConfigDialog.h"
 
-MeteorShowerDialog::MeteorShowerDialog()
-	: plugin(NULL)
-	, updateTimer(NULL)
+MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
+	: m_ui(new Ui_MSConfigDialog)
+	, m_updateTimer(NULL)
 	, treeWidget(NULL)
 {
-	ui = new Ui_meteorShowerDialog;
 }
 
-MeteorShowerDialog::~MeteorShowerDialog()
+MSConfigDialog::~MSConfigDialog()
 {
-	if (updateTimer)
+	if (m_updateTimer)
 	{
-		updateTimer->stop();
-		delete updateTimer;
-		updateTimer = NULL;
+		m_updateTimer->stop();
+		delete m_updateTimer;
+		m_updateTimer = NULL;
 	}
-	delete ui;
+	delete m_ui;
 }
 
-void MeteorShowerDialog::retranslate()
+void MSConfigDialog::retranslate()
 {
 	if (dialog)
 	{
-		ui->retranslateUi(dialog);
+		m_ui->retranslateUi(dialog);
 		refreshUpdateValues();
 		setAboutHtml();
 		setHeaderNames();
@@ -83,90 +81,88 @@ void MeteorShowerDialog::retranslate()
 	}
 }
 
-// Initialize the dialog widgets and connect the signals/slots
-void MeteorShowerDialog::createDialogContent()
+void MSConfigDialog::createDialogContent()
 {
-	ui->setupUi(dialog);
-	ui->tabs->setCurrentIndex(0);
+	m_ui->setupUi(dialog);
+	m_ui->tabs->setCurrentIndex(0);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	plugin = GETSTELMODULE(MeteorShowers);
 
 #ifdef Q_OS_WIN
-	//Kinetic scrolling for tablet pc and pc
+	// Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
-	addscroll << ui->listEvents << ui->aboutTextBrowser;
+	addscroll << m_ui->listEvents << m_ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
 #endif
 
 	// Settings tab / updates group	
-	connect(ui->internetUpdates, SIGNAL(clicked(bool)), this, SLOT(setUpdatesEnabled(bool)));
-	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(plugin, SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
-	connect(plugin, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
-	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
+	connect(m_ui->internetUpdates, SIGNAL(clicked(bool)), this, SLOT(setUpdatesEnabled(bool)));
+	connect(m_ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
+	//connect(m_mgr, SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
+	//connect(m_mgr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(m_ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 
-	updateTimer = new QTimer(this);
-	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-	updateTimer->start(7000);
+	m_updateTimer = new QTimer(this);
+	connect(m_updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
+	m_updateTimer->start(7000);
 
 	// Settings tab / event group
-	connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
+	connect(m_ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
 	refreshRangeDates(StelApp::getInstance().getCore());
 
-	treeWidget = ui->listEvents;
+	treeWidget = m_ui->listEvents;
 	initListEvents();
 	connect(treeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
 	connect(treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(repaintTreeWidget()));
-
+/*
 	// Settings tab / radiant group
-	ui->displayRadiant->setChecked(plugin->getFlagRadiant());
-	connect(ui->displayRadiant, SIGNAL(clicked(bool)), plugin, SLOT(setFlagRadiant(bool)));
-	ui->activeRadiantsOnly->setChecked(plugin->getFlagActiveRadiant());
-	connect(ui->activeRadiantsOnly, SIGNAL(clicked(bool)), plugin, SLOT(setFlagActiveRadiant(bool)));
-	ui->radiantLabels->setChecked(plugin->getFlagLabels());
-	connect(ui->radiantLabels, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLabels(bool)));
-	ui->fontSizeSpinBox->setValue(plugin->getLabelFont().pixelSize());
-	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setLabelFontSize(int)));
+	m_ui->displayRadiant->setChecked(m_mgr->getFlagRadiant());
+	connect(m_ui->displayRadiant, SIGNAL(clicked(bool)), m_mgr, SLOT(setFlagRadiant(bool)));
+	m_ui->activeRadiantsOnly->setChecked(m_mgr->getFlagActiveRadiant());
+	connect(m_ui->activeRadiantsOnly, SIGNAL(clicked(bool)), m_mgr, SLOT(setFlagActiveRadiant(bool)));
+	m_ui->radiantLabels->setChecked(m_mgr->getFlagLabels());
+	connect(m_ui->radiantLabels, SIGNAL(clicked(bool)), m_mgr, SLOT(setFlagLabels(bool)));
+	m_ui->fontSizeSpinBox->setValue(m_mgr->getLabelFont().pixelSize());
+	connect(m_ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), m_mgr, SLOT(setLabelFontSize(int)));
 
 	// Settings tab / meteor showers group
-	ui->displayMeteorShower->setChecked(plugin->getEnableAtStartup());
-	connect(ui->displayMeteorShower, SIGNAL(clicked(bool)), plugin, SLOT(setEnableAtStartup(bool)));
-	ui->displayShowMeteorShowerButton->setChecked(plugin->getFlagShowMSButton());
-	connect(ui->displayShowMeteorShowerButton, SIGNAL(clicked(bool)), plugin, SLOT(setFlagShowMSButton(bool)));
-
+	m_ui->displayMeteorShower->setChecked(m_mgr->getEnableAtStartup());
+	connect(m_ui->displayMeteorShower, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAtStartup(bool)));
+	m_ui->displayShowMeteorShowerButton->setChecked(m_mgr->getFlagShowMSButton());
+	connect(m_ui->displayShowMeteorShowerButton, SIGNAL(clicked(bool)), m_mgr, SLOT(setFlagShowMSButton(bool)));
+*/
 	// /////////////////////////////////////////
 
-	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(m_ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(m_ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
 	// Markers tab
 	refreshMarkersColor();
-	connect(ui->changeColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
-	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
-	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
+	connect(m_ui->changeColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
+	connect(m_ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
+	connect(m_ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui != NULL)
 	{
-		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		m_ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
 
 	updateGuiFromSettings();
 }
 
-void MeteorShowerDialog::repaintTreeWidget()
+void MSConfigDialog::repaintTreeWidget()
 {
 	// Enable force repaint listEvents to avoiding artifacts
 	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
 	treeWidget->repaint();
 }
 
-void MeteorShowerDialog::initListEvents(void)
+void MSConfigDialog::initListEvents(void)
 {
 	treeWidget->clear();
 	treeWidget->setColumnCount(ColumnCount);
@@ -175,7 +171,7 @@ void MeteorShowerDialog::initListEvents(void)
 	treeWidget->header()->setStretchLastSection(true);
 }
 
-void MeteorShowerDialog::setHeaderNames(void)
+void MSConfigDialog::setHeaderNames(void)
 {
 	QStringList headerStrings;
 	headerStrings << q_("Name");
@@ -185,10 +181,10 @@ void MeteorShowerDialog::setHeaderNames(void)
 	treeWidget->setHeaderLabels(headerStrings);
 }
 
-void MeteorShowerDialog::checkDates(void)
+void MSConfigDialog::checkDates(void)
 {
-	double jdFrom = StelUtils::qDateTimeToJd((QDateTime) ui->dateFrom->date());
-	double jdTo = StelUtils::qDateTimeToJd((QDateTime) ui->dateTo->date());
+	double jdFrom = StelUtils::qDateTimeToJd((QDateTime) m_ui->dateFrom->date());
+	double jdTo = StelUtils::qDateTimeToJd((QDateTime) m_ui->dateTo->date());
 
 	if (jdFrom > jdTo)
 	{
@@ -204,9 +200,9 @@ void MeteorShowerDialog::checkDates(void)
 	}
 }
 
-void MeteorShowerDialog::searchEvents(void)
+void MSConfigDialog::searchEvents(void)
 {
-	QList<MeteorShowerP> searchResult = plugin->searchEvents(ui->dateFrom->date(), ui->dateTo->date());
+	QList<MeteorShowerP> searchResult = GETSTELMODULE(MeteorShowers)->searchEvents(m_ui->dateFrom->date(), m_ui->dateTo->date());
 
 	//Fill list of events
 	initListEvents();
@@ -227,16 +223,16 @@ void MeteorShowerDialog::searchEvents(void)
 	}
 }
 
-void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
+void MSConfigDialog::selectEvent(const QModelIndex &modelIndex)
 {
 	Q_UNUSED(modelIndex);
 	StelCore *core = StelApp::getInstance().getCore();
 
-	// if user select an event but the plugin is disabled,
-	// plugin is enabled automatically
-	if (!plugin->getFlagShowMS())
+	// if user select an event but the m_mgr is disabled,
+	// 'MeteorShowers' is enabled automatically
+	if (!GETSTELMODULE(MeteorShowers)->getEnablePlugin())
 	{
-		plugin->setFlagShowMS(true);
+		//GETSTELMODULE(MeteorShowers)->setEnableMeteorShowers(true);
 	}
 
 	//Change date
@@ -256,16 +252,16 @@ void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 	}
 }
 
-void MeteorShowerDialog::refreshRangeDates(StelCore* core)
+void MSConfigDialog::refreshRangeDates(StelCore* core)
 {
 	double JD = core->getJDay();
 	QDateTime skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
 	int year = skyDate.toString("yyyy").toInt();
-	ui->dateFrom->setDate(QDate(year, 1, 1)); // first date in the range - first day of the year
-	ui->dateTo->setDate(QDate(year, 12, 31)); // second date in the range - last day of the year
+	m_ui->dateFrom->setDate(QDate(year, 1, 1)); // first date in the range - first day of the year
+	m_ui->dateTo->setDate(QDate(year, 12, 31)); // second date in the range - last day of the year
 }
 
-void MeteorShowerDialog::setAboutHtml(void)
+void MSConfigDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Meteor Showers Plug-in") + "</h2><table width=\"90%\">";
@@ -273,7 +269,7 @@ void MeteorShowerDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("This plugin displays meteor showers and a marker for each active and inactive radiant, showing real information about its activity.") + "</p>";
+	html += "<p>" + q_("This m_mgr displays meteor showers and a marker for each active and inactive radiant, showing real information about its activity.") + "</p>";
 	html += "<h3>" + q_("Terms") + "</h3>";
 	html += "<p><b>" + q_("Meteor shower") + "</b>";
 	html += "<br />" + q_("A meteor shower is a celestial event in which a number of meteors are observed to radiate, or originate, from one point in the night sky. These meteors are caused by streams of cosmic debris called meteoroids entering Earth's atmosphere at extremely high speeds on parallel trajectories. Most meteors are smaller than a grain of sand, so almost all of them disintegrate and never hit the Earth's surface. Intense or unusual meteor showers are known as meteor outbursts and meteor storms, which may produce greater than 1,000 meteors an hour.") + "</p>";
@@ -286,7 +282,7 @@ void MeteorShowerDialog::setAboutHtml(void)
 	html += "<p><b>" + q_("Population index") + "</b>";
 	html += "<br />" + q_("The population index indicates the magnitude distribution of the meteor showers. The values below 2.5 correspond to distributions where bright meteors are more frequent than average, while values above 3.0 mean that the share of faint meteors is larger than usual.") + "</p>";
 	html += "<h3>" + q_("Notes") + "</h3>";
-	html += "<p>" + q_("This plugin was created as project of ESA Summer of Code in Space 2013.") + "</p>";
+	html += "<p>" + q_("This m_mgr was created as project of ESA Summer of Code in Space 2013.") + "</p>";
 	html += "<h3>" + q_("Info") + "</h3>";
 	html += "<p>" + q_("Info about meteor showers you can get here:") + "</p>";
 	html += "<ul>";
@@ -296,7 +292,7 @@ void MeteorShowerDialog::setAboutHtml(void)
 	html += "<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>";
 	html += "</ul>";
 	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers Plugin") + "</p>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers m_mgr") + "</p>";
 	html += "<ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
@@ -305,138 +301,149 @@ void MeteorShowerDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want to read full information about the plugin, its history and format of the catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Meteor_Showers_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want to read full information about the m_mgr, its history and format of the catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Meteor_Showers_m_mgr\">").arg("</a>") + "</li>";
 	html += "</ul></body></html>";
 
-	ui->aboutTextBrowser->setHtml(html);
+	m_ui->aboutTextBrowser->setHtml(html);
 }
 
-void MeteorShowerDialog::refreshUpdateValues(void)
+void MSConfigDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
-	int secondsToUpdate = plugin->getSecondsToUpdate();
-	if (!plugin->getUpdatesEnabled())
+	m_ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(MeteorShowers)->getLastUpdate());
+	m_ui->updateFrequencySpinBox->setValue(GETSTELMODULE(MeteorShowers)->getUpdateFrequencyHours());
+	int secondsToUpdate = GETSTELMODULE(MeteorShowers)->getSecondsToNextUpdate();
+	if (!GETSTELMODULE(MeteorShowers)->getEnableUpdates())
 	{
-		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
+		m_ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
 	}
-	else if (plugin->getUpdateState() == MeteorShowers::Updating)
+	else if (GETSTELMODULE(MeteorShowers)->isUpdating())
 	{
-		ui->nextUpdateLabel->setText(q_("Updating now..."));
+		m_ui->nextUpdateLabel->setText(q_("Updating now..."));
 	}
 	else if (secondsToUpdate <= 60)
 	{
-		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
+		m_ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
 	}
 	else if (secondsToUpdate < 3600)
 	{
-		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
+		m_ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
 	}
 	else
 	{
-		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
+		m_ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
 	}
 }
 
-void MeteorShowerDialog::setUpdateValues(int hours)
+void MSConfigDialog::setUpdateValues(int hours)
 {
-	plugin->setUpdateFrequencyHours(hours);
+	GETSTELMODULE(MeteorShowers)->setUpdateFrequencyHours(hours);
 	refreshUpdateValues();
 }
 
-void MeteorShowerDialog::setUpdatesEnabled(bool checkState)
+void MSConfigDialog::setUpdatesEnabled(bool checkState)
 {
-	plugin->setUpdatesEnabled(checkState);
-	ui->updateFrequencySpinBox->setEnabled(checkState);
-	ui->updateButton->setText(q_("Update now"));
+	GETSTELMODULE(MeteorShowers)->setEnableUpdates(checkState);
+	m_ui->updateFrequencySpinBox->setEnabled(checkState);
+	m_ui->updateButton->setText(q_("Update now"));
 	refreshUpdateValues();
 }
 
-
-void MeteorShowerDialog::updateStateReceiver(MeteorShowers::UpdateState state)
+/*
+void MSConfigDialog::updateStateReceiver(MeteorShowers::UpdateState state)
 {
-	//qDebug() << "MeteorShowerDialog::updateStateReceiver got a signal";
+	//qDebug() << "MSConfigDialog::updateStateReceiver got a signal";
 	if (state==MeteorShowers::Updating)
 	{
-		ui->nextUpdateLabel->setText(q_("Updating now..."));
+		m_ui->nextUpdateLabel->setText(q_("Updating now..."));
 	}
 	else if (state==MeteorShowers::DownloadError || state==MeteorShowers::OtherError)
 	{
-		ui->nextUpdateLabel->setText(q_("Update error"));
-		updateTimer->start();  // make sure message is displayed for a while...
+		m_ui->nextUpdateLabel->setText(q_("Update error"));
+		m_updateTimer->start();  // make sure message is displayed for a while...
 	}
 }
-
-void MeteorShowerDialog::updateCompleteReceiver(void)
+*/
+void MSConfigDialog::updateCompleteReceiver(void)
 {
-        ui->nextUpdateLabel->setText(QString(q_("Meteor showers is updated")));
+	m_ui->nextUpdateLabel->setText(QString(q_("Meteor showers is updated")));
 	// display the status for another full interval before refreshing status
-	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(MeteorShowers)->getLastUpdate());
+	m_updateTimer->start();
+	m_ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(MeteorShowers)->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
 
-void MeteorShowerDialog::restoreDefaults(void)
+void MSConfigDialog::restoreDefaults(void)
 {
 	qDebug() << "MeteorShowers::restoreDefaults";
-	plugin->restoreDefaults();
-	plugin->readSettingsFromConfig();
+	GETSTELMODULE(MeteorShowers)->restoreDefaultSettings();
 	updateGuiFromSettings();
 }
 
-void MeteorShowerDialog::updateGuiFromSettings(void)
+void MSConfigDialog::updateGuiFromSettings(void)
 {	
 	refreshUpdateValues();
 	refreshMarkersColor();
 }
 
-void MeteorShowerDialog::saveSettings(void)
+void MSConfigDialog::saveSettings(void)
 {
-	plugin->saveSettingsToConfig();
+	//GETSTELMODULE(MeteorShowers)->saveSettingsToConfig();
 }
 
-void MeteorShowerDialog::updateJSON(void)
+void MSConfigDialog::updateJSON(void)
 {
-	if (plugin->getUpdatesEnabled())
-	{
-		plugin->updateJSON();
-	}
+	//if (GETSTELMODULE(MeteorShowers)->getUpdatesEnabled())
+	//{
+//		GETSTELMODULE(MeteorShowers)->updateJSON();
+	//}
 }
 
-void MeteorShowerDialog::refreshMarkersColor(void)
+void MSConfigDialog::refreshMarkersColor(void)
 {
-	ui->changeColorARG->setStyleSheet("background-color:" + plugin->getColorARG().name() + ";");
-	ui->changeColorARR->setStyleSheet("background-color:" + plugin->getColorARR().name() + ";");
-	ui->changeColorIR->setStyleSheet("background-color:" + plugin->getColorIR().name() + ";");
+	// TODO
+	/*
+	m_ui->changeColorARG->setStyleSheet("background-color:" + GETSTELMODULE(MeteorShowers)->getColorARG().name() + ";");
+	m_ui->changeColorARR->setStyleSheet("background-color:" + GETSTELMODULE(MeteorShowers)->getColorARR().name() + ";");
+	m_ui->changeColorIR->setStyleSheet("background-color:" + GETSTELMODULE(MeteorShowers)->getColorIR().name() + ";");
+	*/
 }
 
-void MeteorShowerDialog::setColorARG()
+void MSConfigDialog::setColorARG()
 {
-	QColor color = QColorDialog::getColor(plugin->getColorARG());
+	// TODO
+	/*
+	QColor color = QColorDialog::getColor(GETSTELMODULE(MeteorShowers)->getColorARG());
 	if (color.isValid())
 	{
-		ui->changeColorARG->setStyleSheet("background-color:" + color.name() + ";");
-		plugin->setColorARG(color);
+		m_ui->changeColorARG->setStyleSheet("background-color:" + color.name() + ";");
+		GETSTELMODULE(MeteorShowers)->setColorARG(color);
 	}
+	*/
 }
 
-void MeteorShowerDialog::setColorARR()
+void MSConfigDialog::setColorARR()
 {
-	QColor color = QColorDialog::getColor(plugin->getColorARR());
+	// TODO
+	/*
+	QColor color = QColorDialog::getColor(GETSTELMODULE(MeteorShowers)->getColorARR());
 	if (color.isValid())
 	{
-		ui->changeColorARR->setStyleSheet("background-color:" + color.name() + ";");
-		plugin->setColorARR(color);
+		m_ui->changeColorARR->setStyleSheet("background-color:" + color.name() + ";");
+		GETSTELMODULE(MeteorShowers)->setColorARR(color);
 	}
+	*/
 }
 
-void MeteorShowerDialog::setColorIR()
+void MSConfigDialog::setColorIR()
 {
-	QColor color = QColorDialog::getColor(plugin->getColorIR());
+	// TODO
+	/*
+	QColor color = QColorDialog::getColor(GETSTELMODULE(MeteorShowers)->getColorIR());
 	if (color.isValid())
 	{
-		ui->changeColorIR->setStyleSheet("background-color:" + color.name() + ";");
-		plugin->setColorIR(color);
+		m_ui->changeColorIR->setStyleSheet("background-color:" + color.name() + ";");
+		GETSTELMODULE(MeteorShowers)->setColorIR(color);
 	}
+	*/
 }
