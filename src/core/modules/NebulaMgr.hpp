@@ -245,6 +245,7 @@ private:
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const StelCore* core, StelPainter& sPainter);
 
+	NebulaP searchDSO(unsigned int DSO);
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);
 	NebulaP searchIC(unsigned int IC);
@@ -257,6 +258,9 @@ private:
 	NebulaP searchLBN(unsigned int LBN);
 	NebulaP searchCr(unsigned int Cr);
 	NebulaP searchMel(unsigned int Mel);
+	NebulaP searchPGC(unsigned int PGC);
+	NebulaP searchCed(unsigned int Ced);
+	NebulaP searchPK(QString PK);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
