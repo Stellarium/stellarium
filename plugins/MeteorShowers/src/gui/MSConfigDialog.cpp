@@ -77,7 +77,7 @@ void MSConfigDialog::createDialogContent()
 
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	connect(m_ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
+	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), m_mgr, SLOT(restoreDefaultSettings()));
 
 	// General tab
 	m_ui->enableAtStartUp->setChecked(m_mgr->getEnableAtStartup());
@@ -129,14 +129,6 @@ void MSConfigDialog::createDialogContent()
 
 
 
-
-
-
-void MSConfigDialog::restoreDefaults()
-{
-	qDebug() << "MeteorShowers::restoreDefaults";
-	m_mgr->restoreDefaultSettings();
-}
 
 /*
 void MSConfigDialog::updateStateReceiver(MeteorShowers::UpdateState state)

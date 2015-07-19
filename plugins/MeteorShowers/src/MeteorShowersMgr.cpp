@@ -228,6 +228,7 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 
 void MeteorShowersMgr::restoreDefaultSettings()
 {
+	qDebug() << "MeteorShowersMgr: Restoring default settings";
 	m_conf->beginGroup(MS_CONFIG_PREFIX);
 	m_conf->remove("");
 	m_conf->endGroup();
