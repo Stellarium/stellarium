@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-07-13 09:29+0000\n"
+"PO-Revision-Date: 2015-07-18 16:50+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-14 05:15+0000\n"
+"X-Launchpad-Export-Date: 2015-07-19 04:45+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -10540,10 +10540,11 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
+"Le nuanceur géométrique n'est pas supporté. Retour au mode « 6 Textures »"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Retour au mode « 6 Textures » en raison d'un bogue ANGLE"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
@@ -10630,7 +10631,7 @@ msgstr "Veuillez d'abord charger une scène."
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Ombrage par pixel %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
@@ -10658,11 +10659,12 @@ msgstr "Ombres désactivées ou impossibles."
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "Reliefs %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
+"Le mode cubemap choisi n'est pas supporté. Retour au mode « 6 Textures »"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
@@ -10679,12 +10681,12 @@ msgstr "Désactivé"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Taille du cubemap modifiée"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Taille du cubemap non supportée. Fixée à %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
@@ -10726,42 +10728,50 @@ msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Fournit une illumination plus précise en la calculant par pixel, plutôt que "
+"par sommet."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Requis pour le placage de relief et les ombres"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "N'utilise qu'une cascade d'ombre, au lieu de quatre au maximum."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"Améliore la vitesse en contrepartie d'une baisse de qualité des ombres, en "
+"particulier pour les scènes de grande taille."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"Détermine comment les ombres sont filtrées, triées par qualité croissante du "
+"haut vers le bas."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS requiert une qualité de filtrage réduite ou élevée."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Calcul approximatif des pénombres (ombres plus nettes près des points de "
+"contact, plus floues loin de ces points)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
-msgstr ""
+msgstr "Requiert une qualité de filtrage réduite ou élevée (sans matériel)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
@@ -10784,6 +10794,9 @@ msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 Textures</b> utilises 6 textures simples, une pour chaque face du cube. "
+"C'est la méthode la plus compatible, mais elle est parfois plus lente que "
+"les autres."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
@@ -10798,6 +10811,10 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"Le <b>nuanceur géométrique</b> utilise une fonctionnalité GPU moderne pour "
+"effectuer le rendu des 6 faces du cube simultanément. C'est la méthode la "
+"plus rapide, selon la scène et votre matériel (GPU). Si votre matériel ne "
+"permet pas ce mode, il est désactivé."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
@@ -10809,6 +10826,10 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Si ce réglage est désactivé, la zone d'ombre est calculée en utilisant en "
+"projection en perspective, ce qui peut avoir pour résultat des ombres "
+"manquantes, lorsqu'un champ de vision élevé est utilisé. Mais c'est vraiment "
+"plus rapide."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
@@ -10824,6 +10845,8 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
 msgstr ""
+"Économise de l'énergie et augmente la perception subjective de performance "
+"de l'application."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid ""
@@ -10841,6 +10864,8 @@ msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Accélère le rendu, mais l'apparence paraîtra bizarre jusqu'à l'arrêt du "
+"déplacement."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
@@ -10852,14 +10877,16 @@ msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Effectue le rendu de la deuxième face, de sorte à rendre l'apparence moins "
+"bizarre."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
+msgstr "La durée (en secondes) durant laquelle aucun rendu n'est effectué"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
-msgstr ""
+msgstr "6 textures"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
@@ -10867,7 +10894,7 @@ msgstr "Cubemap"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Nuanceur géométrique"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
@@ -10922,7 +10949,7 @@ msgstr "Ombres simples"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Placage de relief"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
@@ -10942,19 +10969,19 @@ msgstr "Matériel"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr "Réduit"
+msgstr "Réduite"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr "Réduit + matériel"
+msgstr "Réduite + matériel"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr "Élevé (lent)"
+msgstr "Élevée (lent)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr "Élevé + matériel (lent)"
+msgstr "Élevée + matériel (lent)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
