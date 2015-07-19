@@ -105,54 +105,10 @@ private:
 		NebUnknown	= 17	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
-	//! @enum HIIFormType HII region form types
-	enum HIIFormType
-	{
-		FormCir=1,   //!< circular form
-		FormEll=2,   //!< elliptical form
-		FormIrr=3    //!< irregular form
-	};
-
-	//! @enum HIIStructureType HII region structure types
-	enum HIIStructureType
-	{
-		StructureAmo=1,   //!< amorphous structure
-		StructureCon=2,   //!< conventional structure
-		StructureFil=3    //!< filamentary structure
-	};
-
-	//! @enum HIIBrightnessType HII region brightness types
-	enum HIIBrightnessType
-	{
-		Faintest=1,
-		Moderate=2,
-		Brightest=3
-	};
-
-	//! @enum HaBrightnessType H-α emission region brightness types
-	enum HaBrightnessType
-	{
-		HaFaint=1,
-		HaMedium=2,
-		HaBright=3,
-		HaVeryBright=4
-	};
-
 	//! Translate nebula name using the passed translator
 	void translateName(const StelTranslator& trans) {nameI18 = trans.qtranslate(englishName);}
 
-	bool readNGC(char *record);
-	void readNGC(QDataStream& in);
-	bool readBarnard(QString record);
-	bool readSharpless(QString record);
-	bool readVandenBergh(QString record);
-	bool readRCW(QString record);
-	bool readLDN(QString record);
-	bool readLBN(QString record);
-
-	// ----------------------------------------------
 	void readDSO(QDataStream& in);
-	// ----------------------------------------------
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
@@ -203,13 +159,6 @@ private:
 	Vec3d XYZ;                      // Cartesian equatorial position (J2000.0)
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;
-
-	HIIFormType formType;
-	HIIStructureType structureType;
-	HIIBrightnessType brightnessType;
-	HaBrightnessType rcwBrightnessType;
-
-	int brightnessClass;
 
 	SphericalRegionP pointRegion;
 
