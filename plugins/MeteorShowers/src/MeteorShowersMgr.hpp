@@ -61,9 +61,6 @@ public:
 	//! Destructor.
 	virtual ~MeteorShowersMgr();
 
-	//! Restore default settings.
-	void restoreDefaultSettings();
-
 	//! Restore default catalog.
 	bool restoreDefaultCatalog(const QString& destination);
 
@@ -189,6 +186,9 @@ public slots:
 
 	//! Download the Meteor Showers catalog from the Internet.
 	void updateCatalog();
+
+	//! Restore default settings.
+	void restoreDefaultSettings();
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
