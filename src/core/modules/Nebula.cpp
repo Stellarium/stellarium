@@ -225,7 +225,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (radialVelocity>-99.f)
 		{
 			QString rv;
-			if (radialVelocityErr>-99.f)
+			if (radialVelocityErr>0.f)
 				rv = QString("%1%2%3").arg(radialVelocity).arg(QChar(0x00B1)).arg(radialVelocityErr);
 			else
 				rv = QString("%1").arg(radialVelocity);
@@ -235,7 +235,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (redshift>-99.f)
 		{
 			QString z;
-			if (redshiftErr>-99.f)
+			if (redshiftErr>0.f)
 				z = QString("%1%2%3").arg(QString::number(redshift, 'f', 6)).arg(QChar(0x00B1)).arg(QString::number(redshiftErr, 'f', 6));
 			else
 				z = QString("%1").arg(QString::number(redshift, 'f', 6));
@@ -245,7 +245,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (parallax>-99.f)
 		{
 			QString px;
-			if (parallaxErr>-99.f)
+			if (parallaxErr>0.f)
 				px = QString("%1%2%3").arg(QString::number(parallax, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr, 'f', 3));
 			else
 				px = QString("%1").arg(QString::number(parallax, 'f', 3));
@@ -364,6 +364,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	{
 		case NebGx:
 		case NebSy2:
+		case NebAGN:
 			Nebula::texGalaxy->bind();
 			color=galaxyColor;
 			break;
@@ -752,12 +753,7 @@ bool Nebula::readLBN(QString record)
 
 QString Nebula::getMorphologicalTypeString(void) const
 {
-	QString wsType;
-
-	if (nType == NebGx || nType == NebSy2)
-		wsType = mTypeString;
-
-	return wsType;
+	return mTypeString;
 }
 
 QString Nebula::getTypeString(void) const

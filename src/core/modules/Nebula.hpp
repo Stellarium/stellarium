@@ -87,21 +87,22 @@ private:
 	{
 		NebGx		= 0,	//!< Galaxy
 		NebSy2		= 1,	//!< Seyfert 2 Galaxy
-		NebOc		= 2,	//!< Open star cluster
-		NebGc		= 3,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebN		= 4,	//!< A nebula
-		NebPn		= 5,	//!< Planetary nebula
-		NebDn		= 6,	//!< Dark Nebula
-		NebRn		= 7,	//!< Reflection nebula
-		NebBn		= 8,	//!< Bipolar nebula
-		NebEn		= 9,	//!< Emission nebula
-		NebCn		= 10,	//!< Cluster associated with nebulosity
-		NebHII		= 11,	//!< HII Region
-		NebHa		= 12,	//!< H-α emission region
-		NebSNR		= 13,	//!< Supernova remnant
-		NebSA		= 14,	//!< Stellar association
-		NebSC		= 15,	//!< Star cloud
-		NebUnknown	= 16	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebAGN		= 2,	//!< Active Galaxy Nucleus
+		NebOc		= 3,	//!< Open star cluster
+		NebGc		= 4,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebN		= 5,	//!< A nebula
+		NebPn		= 6,	//!< Planetary nebula
+		NebDn		= 7,	//!< Dark Nebula
+		NebRn		= 8,	//!< Reflection nebula
+		NebBn		= 9,	//!< Bipolar nebula
+		NebEn		= 10,	//!< Emission nebula
+		NebCn		= 11,	//!< Cluster associated with nebulosity
+		NebHII		= 12,	//!< HII Region
+		NebHa		= 13,	//!< H-α emission region
+		NebSNR		= 14,	//!< Supernova remnant
+		NebSA		= 15,	//!< Stellar association
+		NebSC		= 16,	//!< Star cloud
+		NebUnknown	= 17	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! @enum HIIFormType HII region form types
