@@ -261,18 +261,8 @@ private:
 	NebulaP searchPGC(unsigned int PGC);
 	NebulaP searchCed(unsigned int Ced);
 	NebulaP searchPK(QString PK);
-	bool loadNGC(const QString& fileName);
-	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);
-	bool loadBarnard(const QString& filename);
-	bool loadSharpless(const QString& filename);
-	bool loadVandenBergh(const QString& filename);
-	bool loadRCW(const QString& filename);
-	bool loadLDN(const QString& filename);
-	bool loadLBN(const QString& filename);
 
-	// ---------------------------------------------------
-	// AW: new generation of the DSO
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
 	void convertDSOCatalog(const QString& in, const QString& out);
@@ -281,10 +271,7 @@ private:
 
 	QVector<NebulaP> dsoArray;		// The DSO list
 	QHash<unsigned int, NebulaP> dsoIndex;
-	// ---------------------------------------------------
 
-	QVector<NebulaP> nebArray;		// The nebulas list
-	QHash<unsigned int, NebulaP> ngcIndex;
 	LinearFader hintsFader;
 	LinearFader flagShow;
 

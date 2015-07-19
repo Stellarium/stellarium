@@ -73,15 +73,10 @@ Nebula::Nebula()
 	, Ced_nb(0)
 	, PK_nb()
 	, mag(99.)
-	, nType()
-	, formType()
-	, structureType()
-	, brightnessType()
-	, rcwBrightnessType()
+	, nType()	
 {
 	nameI18 = "";
-	angularSize = -1;
-	brightnessClass = -1;
+	angularSize = -1;	
 }
 
 Nebula::~Nebula()
@@ -189,24 +184,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
 		}
 	}
-	if (flags&Extra)
-	{
-        if (nType==NebHII) // Sharpless and LBN
-		{
-			if (LBN_nb!=0)
-				oss << q_("Brightness: %1").arg(brightnessClass) << "<br>";
-			else
-			{
-				oss << qc_("Form: %1","HII Region").arg(getHIIFormTypeString()) << "<br>";
-				oss << qc_("Structure: %1","HII Region").arg(getHIIStructureTypeString()) << "<br>";
-				oss << q_("Brightness: %1").arg(getHIIBrightnessTypeString()) << "<br>";
-			}
-		}
-		if (nType==NebHa)
-		{
-			oss << q_("Brightness: %1").arg(getHaBrightnessTypeString()) << "<br>";
-		}
-	}
+
 	oss << getPositionInfoString(core, flags);
 
 	if (angularSize>0 && flags&Size)
@@ -337,10 +315,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	}
 	else if (LBN_nb>0) // attempt to balance LBN brightness classes
 	{
+		/* FIXME: Temporary disabled
 		if (brightnessClass==0)
 			lim=10.0f;
 		else
 			lim=brightnessClass+7.0f;
+		*/
 	}
 	else if (nType==NebHII || nType==NebHa) // NebHII={Sharpless, LBN}, NebHa={RCW}
 	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
@@ -492,7 +472,6 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
-// ----------------------------------------------
 void Nebula::readDSO(QDataStream &in)
 {
 	float	ra, dec;
@@ -509,246 +488,6 @@ void Nebula::readDSO(QDataStream &in)
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)oType;
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-}
-// ----------------------------------------------
-
-void Nebula::readNGC(QDataStream& in)
-{
-	bool isIc;
-	int nb;
-	float ra, dec;
-	unsigned int type;
-	in >> isIc >> nb >> ra >> dec >> mag >> angularSize >> type;
-	if (isIc)
-	{
-		IC_nb = nb;
-	}
-	else
-	{
-		NGC_nb = nb;
-	}
-	StelUtils::spheToRect(ra,dec,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-	nType = (Nebula::NebulaType)type;
-	//if (type >= 5) {
-	//	qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
-	//}
-	// This confirms there are currently no dark nebulae in the NGC list.
-	Q_ASSERT(type!=5);
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-}
-
-bool Nebula::readBarnard(QString record)
-{
-	// Line Format: "<B>\t<RAh>\t<RAm>\t<RAs>\t[+-]DD MM\t<size>\t<obs>\t<comment>... ..."
-	int rahr;
-	float ramin;
-	int dedeg;
-	int demin;
-
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	//qDebug() << "Barnard: " << list.at(0) << "RA " << list.at(1) << list.at(2) << list.at(3) <<
-	//	    "Dec" << list.at(4) << "opac" << list.at(6) << "size" << list.at(5);
-
-	B_nb=list.at(0).toInt();
-	rahr=list.at(1).toInt();
-	ramin=list.at(2).toInt() + list.at(3).toInt() / 60.0f;
-	float RaRad = (double)rahr+ramin/60;
-
-	QString degString=list.at(4);
-
-	dedeg=degString.mid(1,2).toInt();
-	demin=degString.mid(4,2).toInt();
-
-	float DecRad = (float)dedeg+(float)demin/60.0f;
-
-	if (degString.at(0) == '-') DecRad *= -1.f;
-
-	RaRad*=M_PI/12.f;     // Convert from hours to rad
-	DecRad*=M_PI/180.f;    // Convert from deg to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	// "mag" will receive opacity for dark nebulae.
-	QString opacityStr=list.at(6);
-
-	if (opacityStr.contains('?')) mag=99;
-	else mag=opacityStr.toFloat();
-
-	// Calc the angular size in degrees
-	float size=list.at(5).toFloat();
-	angularSize = size/60.0f;
-
-	// Barnard are dark nebulae only, so at least type is easy:
-	nType=NebDn;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-//	// Dark nebulae. Not sure how to assess visibility from opacity and size? --GZ
-//	float lim;
-//	// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
-//	// 9-(opac-5)-2*(angularSize-0.5)
-//	if (angularSize>0 && mag<50)
-//		lim = 15.0f - mag - 2.0f*angularSize;
-//	else
-//		lim = 9.0f;
-//	qDebug() << "LIMIT:" << angularSize << "*" << mag << "=" << lim;
-
-	return true;
-}
-
-bool Nebula::readSharpless(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	//qDebug() << "RA:" << list.at(0) << " DE:" << list.at(1) << " Sh2:" << list.at(2) << " size:" << list.at(3) << " F:" << list.at(4) << " S:" << list.at(5) << " B:" << list.at(6);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-	Sh2_nb=list.at(2).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	mag=99.0f;
-
-	// Calc the angular size in degrees
-	int size=list.at(3).toFloat();
-	angularSize = size/60.0f;
-
-	formType = (Nebula::HIIFormType)list.at(4).toInt();
-	structureType = (Nebula::HIIStructureType)list.at(5).toInt();
-	brightnessType = (Nebula::HIIBrightnessType)list.at(6).toInt();
-
-	nType=NebHII;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readVandenBergh(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	VdB_nb=list.at(0).toInt();
-	mag = list.at(1).toFloat();
-	if (mag==0.0f)
-		mag=99.0f;
-
-	// Calc the angular size in degrees
-	float size=list.at(2).toFloat();
-	angularSize = size/60.0f;
-
-	float radeg=list.at(3).toFloat();
-	float dedeg=list.at(4).toFloat();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebRn;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readRCW(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-
-	RCW_nb=list.at(2).toInt();
-	mag = 99.;
-
-	// Calc the angular size in degrees
-	float size=list.at(3).toFloat();
-
-	angularSize = size/60.0f;
-	if (angularSize<0)
-		angularSize=0;
-
-	rcwBrightnessType = (Nebula::HaBrightnessType)list.at(5).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebHa;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readLDN(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-
-	LDN_nb=list.at(2).toInt();
-
-	// Area in square degrees
-	angularSize = list.at(3).toFloat();
-	if (angularSize<0)
-		angularSize=0;
-
-	mag = list.at(4).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebDn;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readLBN(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-
-	LBN_nb=list.at(2).toInt();
-
-	// Area in square degrees
-	angularSize = list.at(3).toFloat()/60.f;
-	if (angularSize<0)
-		angularSize=0;
-
-	brightnessClass = list.at(4).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebHII;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
 }
 
 QString Nebula::getMorphologicalTypeString(void) const
@@ -767,6 +506,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebSy2:
 			wsType = q_("Seyfert 2 galaxy");
+			break;
+		case NebAGN:
+			wsType = q_("galaxy with active nucleus");
 			break;
 		case NebOc:
 			wsType = q_("open cluster");
@@ -815,97 +557,6 @@ QString Nebula::getTypeString(void) const
 			break;
 		default:
 			wsType = q_("undocumented type");
-			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHIIFormTypeString() const
-{
-	QString wsType;
-
-	switch(formType)
-	{
-		case FormCir:
-			wsType = qc_("circular","form");
-			break;
-		case FormEll:
-			wsType = qc_("elliptical","form");
-			break;
-		case FormIrr:
-			wsType = qc_("irregular","form");
-			break;
-		default:
-			wsType = qc_("undocumented form","form");
-			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHIIStructureTypeString() const
-{
-	QString wsType;
-
-	switch(structureType)
-	{
-		case StructureAmo:
-			wsType = qc_("amorphous","structure");
-			break;
-		case StructureCon:
-			wsType = qc_("conventional","structure");
-			break;
-		case StructureFil:
-			wsType = qc_("filamentary","structure");
-			break;
-		default:
-			wsType = qc_("undocumented structure","structure");
-			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHIIBrightnessTypeString() const
-{
-	QString wsType;
-
-	switch(brightnessType)
-	{
-		case Faintest:
-			wsType = qc_("faintest", "HII region brightness");
-			break;
-		case Moderate:
-			wsType = qc_("moderate", "HII region brightness");
-			break;
-		case Brightest:
-			wsType = qc_("brightest", "HII region brightness");
-			break;
-		default:
-			wsType = q_("undocumented brightness");
-			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHaBrightnessTypeString() const
-{
-	QString wsType;
-
-	switch(rcwBrightnessType)
-	{
-		case HaVeryBright:
-			wsType = qc_("very bright", "H-α emission region brightness");
-			break;
-		case HaBright:
-			wsType = qc_("bright", "H-α emission region brightness");
-			break;
-		case HaMedium:
-			wsType = qc_("medium", "H-α emission region brightness");
-			break;
-		case HaFaint:
-			wsType = qc_("faint", "H-α emission region brightness");
-			break;
-		default:
-			wsType = q_("undocumented brightness");
 			break;
 	}
 	return wsType;
