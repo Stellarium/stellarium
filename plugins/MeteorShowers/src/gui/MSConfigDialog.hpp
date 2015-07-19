@@ -56,8 +56,6 @@ public slots:
 private slots:
         void updateCompleteReceiver();
 
-	void restoreDefaults();
-
 	//! Refresh the color of all markers
 	void refreshMarkersColor();
 
