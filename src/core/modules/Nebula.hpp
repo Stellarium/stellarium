@@ -88,21 +88,22 @@ private:
 		NebGx		= 0,	//!< Galaxy
 		NebSy2		= 1,	//!< Seyfert 2 Galaxy
 		NebAGN		= 2,	//!< Active Galaxy Nucleus
-		NebOc		= 3,	//!< Open star cluster
-		NebGc		= 4,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebN		= 5,	//!< A nebula
-		NebPn		= 6,	//!< Planetary nebula
-		NebDn		= 7,	//!< Dark Nebula
-		NebRn		= 8,	//!< Reflection nebula
-		NebBn		= 9,	//!< Bipolar nebula
-		NebEn		= 10,	//!< Emission nebula
-		NebCn		= 11,	//!< Cluster associated with nebulosity
-		NebHII		= 12,	//!< HII Region
-		NebHa		= 13,	//!< H-α emission region
-		NebSNR		= 14,	//!< Supernova remnant
-		NebSA		= 15,	//!< Stellar association
-		NebSC		= 16,	//!< Star cloud
-		NebUnknown	= 17	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebCl		= 3,	//!< Star cluster
+		NebOc		= 4,	//!< Open star cluster
+		NebGc		= 5,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA		= 6,	//!< Stellar association
+		NebSC		= 7,	//!< Star cloud
+		NebN		= 8,	//!< A nebula
+		NebPn		= 9,	//!< Planetary nebula
+		NebDn		= 10,	//!< Dark Nebula
+		NebRn		= 11,	//!< Reflection nebula
+		NebBn		= 12,	//!< Bipolar nebula
+		NebEn		= 13,	//!< Emission nebula
+		NebCn		= 14,	//!< Cluster associated with nebulosity
+		NebHII		= 15,	//!< HII Region
+		NebHa		= 16,	//!< H-α emission region
+		NebSNR		= 17,	//!< Supernova remnant
+		NebUnknown	= 18	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator

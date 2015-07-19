@@ -189,13 +189,14 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (angularSize>0 && flags&Size)
 	{
-		if (majorAxisSize!=minorAxisSize)
+		if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
+			oss << q_("Size: %1").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br>";
+		else
 		{
 			oss << q_("Size: %1 x %2").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)).arg(StelUtils::radToDmsStr(minorAxisSize*M_PI/180.)) << "<br>";
-			oss << q_("Orientation angle: %1%2").arg(orientationAngle).arg(QChar(0x00B0)) << "<br>";
+			if (orientationAngle>0.f)
+				oss << q_("Orientation angle: %1%2").arg(orientationAngle).arg(QChar(0x00B0)) << "<br>";
 		}
-		else
-			oss << q_("Size: %1").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br>";
 	}
 
 	if (flags&Extra)
@@ -222,14 +223,26 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		if (parallax>-99.f)
 		{
-			QString px;
-			if (parallaxErr>0.f)
-				px = QString("%1%2%3").arg(QString::number(parallax, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr, 'f', 3));
-			else
-				px = QString("%1").arg(QString::number(parallax, 'f', 3));
+			QString px, dx;
+			// distance in light years from parallax
+			float distance = 3.162e-5/(qAbs(parallax)*4.848e-9);
+			float distanceErr = 0.f;
 
-			oss << q_("Parallax: %1 mas").arg(px) << "<br>";
-			oss << q_("Distance: %1 ly").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (qAbs(parallax*0.001/3600)*(M_PI/180)), 0, 'f', 2) << "<br>";
+			if (parallaxErr>0.f)
+			{
+				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
+				distanceErr = 3.162e-5/(qAbs(parallaxErr)*4.848e-9);
+			}
+			else
+				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
+
+			if (distanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 2));
+			else
+				dx = QString("%1").arg(QString::number(distance, 'f', 2));
+
+			oss << q_("Parallax: %1\"").arg(px) << "<br>";
+			oss << q_("Distance: %1 ly").arg(dx) << "<br>";
 		}
 	}
 
@@ -482,7 +495,10 @@ void Nebula::readDSO(QDataStream &in)
 		>> parallax >> parallaxErr >> since >> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb
 		>> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb >> Mel_nb >> PGC_nb >> Ced_nb >> PK_nb;
 
-	angularSize = qMax(majorAxisSize,minorAxisSize); // use max angular size in degrees
+	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
+		angularSize = majorAxisSize*minorAxisSize;
+	else
+		angularSize = majorAxisSize;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
@@ -510,8 +526,11 @@ QString Nebula::getTypeString(void) const
 		case NebAGN:
 			wsType = q_("galaxy with active nucleus");
 			break;
+		case NebCl:
+			wsType = q_("star star cluster");
+			break;
 		case NebOc:
-			wsType = q_("open cluster");
+			wsType = q_("open star cluster");
 			break;
 		case NebGc:
 			wsType = q_("globular cluster");
