@@ -53,22 +53,16 @@ protected:
 public slots:
 	void retranslate();
 
-	//! Refresh details about the last update
-	void refreshLabels();
-
-	//! Refresh the color of all markers
-	void refreshMarkersColor();
-
 private slots:
-	void setUpdateValues(int hours);
-
-	void setEnableUpdates(bool b);
-
         void updateCompleteReceiver();
 
 	void restoreDefaults();
 
-	void updateCatalog();
+	//! Refresh the color of all markers
+	void refreshMarkersColor();
+
+	//! Refresh details about the last update
+	void refreshUpdateLabels();
 
 	//! Sets the color of the active radiant based on real data.
 	void setColorARR();
@@ -84,8 +78,6 @@ private:
 	Ui_MSConfigDialog* m_ui;
 
 	void setAboutHtml();
-
-	void updateGuiFromSettings();
 };
 
 #endif // _MSCONFIGDIALOG_HPP_

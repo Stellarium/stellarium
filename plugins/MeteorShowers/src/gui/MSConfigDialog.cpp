@@ -57,7 +57,6 @@ void MSConfigDialog::retranslate()
 	if (dialog)
 	{
 		m_ui->retranslateUi(dialog);
-		refreshLabels();
 		setAboutHtml();
 	}
 }
@@ -100,20 +99,21 @@ void MSConfigDialog::createDialogContent()
 	m_ui->fontSize->setValue(m_mgr->getFontSize());
 	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
 
-	refreshMarkersColor();
 	connect(m_ui->setColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
 	connect(m_ui->setColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(m_ui->setColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
+	refreshMarkersColor();
 
 	// Update tab
 	m_ui->enableUpdates->setChecked(m_mgr->getEnableUpdates());
-	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), this, SLOT(setEnableUpdates(bool)));
+	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableUpdates(bool)));
 
+	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
 	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), m_mgr, SLOT(setUpdateFrequencyHours(int)));
 
-	connect(m_ui->bUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
+	connect(m_ui->bUpdate, SIGNAL(clicked()), m_mgr, SLOT(updateCatalog()));
 
-	refreshLabels();
+	refreshUpdateLabels();
 
 	//connect(m_mgr, SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
 	//connect(m_mgr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
@@ -125,42 +125,17 @@ void MSConfigDialog::createDialogContent()
 	{
 		m_ui->about->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
-
-	updateGuiFromSettings();
 }
 
-void MSConfigDialog::refreshLabels()
+
+
+
+
+
+void MSConfigDialog::restoreDefaults()
 {
-	m_ui->lastUpdate->setDateTime(m_mgr->getLastUpdate());
-
-	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
-
-	QString msg;
-	if (!m_mgr->getEnableUpdates())
-	{
-		msg = q_("Disabled");
-	}
-	else if (m_mgr->isUpdating())
-	{
-		msg = q_("Updating...");
-	}
-	else
-	{
-		msg = QString(q_("Next update: %1")).arg(m_mgr->getNextUpdate().toString());
-	}
-	m_ui->lNextUpdate->setText(msg);
-}
-
-void MSConfigDialog::setEnableUpdates(bool b)
-{
-	m_mgr->setEnableUpdates(b);
-	refreshLabels();
-}
-
-void MSConfigDialog::setUpdateValues(int hours)
-{
-	m_mgr->setUpdateFrequencyHours(hours);
-	refreshLabels();
+	qDebug() << "MeteorShowers::restoreDefaults";
+	m_mgr->restoreDefaultSettings();
 }
 
 /*
@@ -188,25 +163,29 @@ void MSConfigDialog::updateCompleteReceiver()
 	//connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
 
-void MSConfigDialog::restoreDefaults()
-{
-	qDebug() << "MeteorShowers::restoreDefaults";
-	m_mgr->restoreDefaultSettings();
-	updateGuiFromSettings();
-}
 
-void MSConfigDialog::updateGuiFromSettings()
-{	
-	refreshLabels();
-	refreshMarkersColor();
-}
 
-void MSConfigDialog::updateCatalog()
+
+
+
+
+void MSConfigDialog::refreshUpdateLabels()
 {
-	//if (m_mgr->getUpdatesEnabled())
-	//{
-//		m_mgr->updateJSON();
-	//}
+	m_ui->lastUpdate->setDateTime(m_mgr->getLastUpdate());
+	QString msg;
+	if (!m_mgr->getEnableUpdates())
+	{
+		msg = q_("Disabled");
+	}
+	else if (m_mgr->isUpdating())
+	{
+		msg = q_("Updating...");
+	}
+	else
+	{
+		msg = QString(q_("Next update: %1")).arg(m_mgr->getNextUpdate().toString());
+	}
+	m_ui->lNextUpdate->setText(msg);
 }
 
 void MSConfigDialog::refreshMarkersColor()

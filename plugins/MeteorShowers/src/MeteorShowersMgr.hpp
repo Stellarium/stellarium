@@ -120,7 +120,6 @@ public:
 	int getUpdateFrequencyHours() { return m_updateFrequencyHours; }
 
 	//! Enable/disable catalog updates from the internet.
-	void setEnableUpdates(const bool& b);
 	bool getEnableUpdates() { return m_enableUpdates; }
 
 	//! Set the URL for downloading the meteor showers catalog.
@@ -184,6 +183,9 @@ public slots:
 
 	//! Set the update frequency in hours.
 	void setUpdateFrequencyHours(const int& hours);
+
+	//! Enable/disable catalog updates from the internet.
+	void setEnableUpdates(const bool& b);
 
 	//! Download the Meteor Showers catalog from the Internet.
 	void updateCatalog();
