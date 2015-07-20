@@ -226,7 +226,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	oss << getPositionInfoString(core, flags);
 
 	// GZ This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
-	if (flags&EclipticCoordXYZ)
+	// TODO: maybe separate this out into:
+	//if (flags&EclipticCoordXYZ)
+	// For now: add to EclipticCoord
+	if (flags&EclipticCoord)
 		oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
 	if (flags&Extra)
 	{
@@ -394,6 +397,10 @@ void Planet::computePositionWithoutOrbits(const double dateJD)
 	}
 }
 
+// return value in radians!
+// TODO: For earth, decide whether this should be Capitaine's omega_A (angle eclipticPoleJ2000//axis) or epsilon_A (angle axis//current ecliptic pole)
+// For now, it is epsilon_A, the angle between earth's rotational axis and mean ecliptic of date.
+// Details: e.g. Hilton etal, Report on Precession and the Ecliptic, Cel.Mech.Dyn.Astr.94:351-67 (2006), Fig1.
 double Planet::getRotObliquity(double JDay) const
 {
 	// JDay=2451545.0 for J2000.0
@@ -590,7 +597,7 @@ void Planet::computeTransMatrix(double jd)
 
 	// TODO: BETTER FORMULA FOR EARTH, or prepare/modify re.* elsewhere!
 	// GZ It seems for correct handling we must inject proper precession matrix in this stage.
-	// Papers for understanding: Capitaine 2003 but esp. Vondrak etal 2011 for a long-time model (200.000 years!!)
+	// Papers for understanding: Capitaine 2003, Capitaine 2006 (A&A450,855), but esp. Vondrak etal 2011 for a long-time model (200.000 years!!)
 	if (parent)
 	{
 		//rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
@@ -603,9 +610,13 @@ void Planet::computeTransMatrix(double jd)
 			double eps_A, chi_A, omega_A, psi_A;
 			getPrecessionAnglesVondrak(jd, &eps_A, &chi_A, &omega_A, &psi_A); // GZ: Implement this in planetsephems/precession!
 			// Next expression is wrong. We need obliquity w.r.t. J2000, and nodal motion (some psi).
-			//rotLocalToParent=Mat4d::zrotation(chi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(-psi_A) * Mat4d::xrotation(re.obliquity);
-			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) ;
-
+			//rotLocalToParent= Mat4d::xrotation(eps_A)* Mat4d::zrotation(chi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(-psi_A) * Mat4d::xrotation(re.obliquity);
+			// GZ I think this is the right combination for precession of the equator: Nodal rotation psi_A,
+			// then rotation by omega_A, the angle between EclPoleJ2000 and EarthPoleOfDate,
+			// and then prepare the rotation of the ecliptic pole by rotating the equinox (zero degree) by chi_A.
+			// To achieve ecliptical coords of date, you just have now to add a rotX by epsilon_A.
+			// See e.g. Hilton etal, Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006).
+			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A) ;
 
 		  }
 		else
@@ -640,9 +651,12 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 double Planet::getSiderealTime(double jd) const
 {
 	if (englishName=="Earth")
-	{	// GZ I want to be sure that nutation is just those ignorable few arcseconds.
-		qDebug() << "Difference apparent-mean sidereal times (s): " << (get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd))*86400.0;
-		return get_apparent_sidereal_time(jd);
+	{	// GZ I wanted to be sure that nutation is just those ignorable few arcseconds.
+		// WOW! At the moment this is fully rubbish, it goes into minutes. We ignore nutation for now.
+		// TODO: Reactivate Notation (but following IAU-2000A)
+		//qDebug() << "Difference apparent-mean sidereal times (s): " << (get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd))*86400.0;
+		//return get_apparent_sidereal_time(jd);
+		return get_mean_sidereal_time(jd);
 	}
 
 	double t = jd - re.epoch;
