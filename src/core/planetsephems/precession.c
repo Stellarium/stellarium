@@ -22,9 +22,22 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * New precession expressions, valid for long time intervals
  * Astronomy&Astrophysics 534, A22 (2011)
  * DOI: 10.1051/0004-6361/201117274
+ * The data are only applicable for a time range of 200.000 years around J2000.
+ * This is by far enough for Stellarium as of 2015, but just to make sure I added a few asserts.
  */
 
 #include <math.h>
+#include <assert.h>
+
+/* Interval threshold (days) for re-computing these values. with 1, compute only 1/day:  */
+#define PRECESSION_EPOCH_THRESHOLD 1.0
+
+/* cache results for retrieval if recomputation is not required */
+
+static double c_psi_A=0.0, c_omega_A=0.0, c_chi_A=0.0, /*c_p_A=0.0, */ c_epsilon_A=0.0,
+		c_Y_A=0.0, c_X_A=0.0, c_Q_A=0.0, c_P_A=0.0,
+		c_lastJDE=-1e100;
+
 
 static double PQvals[8][5]=
 { //  1/Pn         P_A:Cn       Q_A:Cn        P_A:Sn        Q_A:Sn
@@ -78,7 +91,7 @@ static double precVals[18][7]=
   { 1.0/490.00,       0.0     ,     0.0     ,    110.512834,        0.0     ,     0.0     ,    142.525186 }};
 
 static double p_epsVals[20][5]=
-{ // 1/Pn     p_A:Cn     eps_A:Cn        p_A:Sn      eps_A:Sn
+{ //  1/Pn         p_A:Cn     eps_A:Cn        p_A:Sn      eps_A:Sn
   { 1.0/ 409.90, -6908.287473,  753.872780, -2845.175469, -1704.720302},
   { 1.0/ 396.15, -3198.706291, -247.805823,   449.844989,  -862.308358},
   { 1.0/ 537.22,  1453.674527,  379.471484, -1255.915323,   447.832178},
@@ -91,129 +104,158 @@ static double p_epsVals[20][5]=
   { 1.0/ 203.00,    11.891524,   38.911307,  -170.964086,     3.014055}};
 
 // compute angles for the series we are in fact using.
-// TODO: Decide whether we buffer the time with some static vars including lastJD...
-// jd: date JD_TT  
+// jde: date JD_TT
 // 
-void getPrecessionAnglesVondrak(const double jd, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A)
+void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A)
 {
-	double T=(jd-2451545.0)* (1.0/36525.0);
-	double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
-	// these are actually small greek letters in the papers.
-	double Psi_A=0.0;
-	double Omega_A=0.0;
-	double Chi_A=0.0;
-	double Epsilon_A=0.0;
-	//double p_A=0.0; // currently unused. The data don't disturb.
-	int i;
-	for (i=0; i<18; ++i)
- 	{
-		double invP=precVals[i][0];
-		double sin2piT_P, cos2piT_P;
-#ifdef _GNU_SOURCE
-		sincos(T2pi/P, &sin2piT_P, &cos2piT_P);
-#else
-		double phase=T2pi*invP;
-		sin2piT_P= sin(phase);
-		cos2piT_P= cos(phase);
-#endif
-		Psi_A   += precVals[i][1]*cos2piT_P + precVals[i][4]*sin2piT_P;
-		Omega_A += precVals[i][2]*cos2piT_P + precVals[i][5]*sin2piT_P;
-		Chi_A   += precVals[i][3]*cos2piT_P + precVals[i][6]*sin2piT_P;
-	}
-
-	for (i=0; i<20; ++i)
+	if (fabs(jde-c_lastJDE) > PRECESSION_EPOCH_THRESHOLD)
 	{
-		double invP=p_epsVals[i][0];
-		double sin2piT_P, cos2piT_P;
+		const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
+		double T=(jde-2451545.0)* (1.0/36525.0); // Julian centuries from J2000.0
+		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
+		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
+		// these are actually small greek letters in the papers.
+		double Psi_A=0.0;
+		double Omega_A=0.0;
+		double Chi_A=0.0;
+		double Epsilon_A=0.0;
+		//double p_A=0.0; // currently unused. The data don't disturb.
+		int i;
+		for (i=0; i<18; ++i)
+		{
+			double invP=precVals[i][0];
+			double sin2piT_P, cos2piT_P;
 #ifdef _GNU_SOURCE
-		sincos(T2pi/P, &sin2piT_P, &cos2piT_P);
+			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
 #else
-		double phase=T2pi*invP;
-		sin2piT_P= sin(phase);
-		cos2piT_P= cos(phase);
+			double phase=T2pi*invP;
+			sin2piT_P= sin(phase);
+			cos2piT_P= cos(phase);
 #endif
-		//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
-		Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
-	}
+			Psi_A   += precVals[i][1]*cos2piT_P + precVals[i][4]*sin2piT_P;
+			Omega_A += precVals[i][2]*cos2piT_P + precVals[i][5]*sin2piT_P;
+			Chi_A   += precVals[i][3]*cos2piT_P + precVals[i][6]*sin2piT_P;
+		}
 
-	Psi_A     += ((289.e-9*T - 0.00740913)*T + 5042.7980307)*T +  8473.343527;
-	Omega_A   += ((151.e-9*T + 0.00000146)*T -    0.4436568)*T + 84283.175915;
-	Chi_A     += ((-61.e-9*T + 0.00001472)*T +    0.0790159)*T -    19.657270;
-	//p_A       += ((271.e-9*T - 0.00710733)*T + 5043.0520035)*T +  8134.017132;
-	Epsilon_A += ((110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
-	const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
-	*psi_A     = arcSec2Rad*Psi_A;
-	*omega_A   = arcSec2Rad*Omega_A;
-	*chi_A     = arcSec2Rad*Chi_A;
-	*epsilon_A = arcSec2Rad*Epsilon_A;
+		for (i=0; i<20; ++i)
+		{
+			double invP=p_epsVals[i][0];
+			double sin2piT_P, cos2piT_P;
+#ifdef _GNU_SOURCE
+			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
+#else
+			double phase=T2pi*invP;
+			sin2piT_P= sin(phase);
+			cos2piT_P= cos(phase);
+#endif
+			//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
+			Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
+		}
+
+		Psi_A     += ((289.e-9*T - 0.00740913)*T + 5042.7980307)*T +  8473.343527;
+		Omega_A   += ((151.e-9*T + 0.00000146)*T -    0.4436568)*T + 84283.175915;
+		Chi_A     += ((-61.e-9*T + 0.00001472)*T +    0.0790159)*T -    19.657270;
+		//p_A       += ((271.e-9*T - 0.00710733)*T + 5043.0520035)*T +  8134.017132;
+		Epsilon_A += ((110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
+		c_psi_A     = arcSec2Rad*Psi_A;
+		c_omega_A   = arcSec2Rad*Omega_A;
+		c_chi_A     = arcSec2Rad*Chi_A;
+		// c_p_A     = arcSec2Rad*p_A;
+		c_epsilon_A = arcSec2Rad*Epsilon_A;
+	}
+	*psi_A     = c_psi_A;
+	*omega_A   = c_omega_A;
+	*chi_A     = c_chi_A;
+	*epsilon_A = c_epsilon_A;
 }
 
-void getPrecessionAnglesVondrakPQXYe(const double jd, double *vP_A, double *vQ_A, double *vX_A, double *vY_A, double *vepsilon_A)
+void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_A, double *vX_A, double *vY_A, double *vepsilon_A)
 {
-	double T=(jd-2451545.0)* (1.0/36525.0);
-	double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
-	// these are actually small greek letters in the papers.
-	double P_A=0.0;
-	double Q_A=0.0;
-	double X_A=0.0;
-	double Y_A=0.0;
-	double Epsilon_A=0.0;
-	int i;
-	for (i=0; i<8; ++i)
+	if (fabs(jde-c_lastJDE) > PRECESSION_EPOCH_THRESHOLD)
 	{
-		double invP=PQvals[i][0];
-		double sin2piT_P, cos2piT_P;
+		const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
+		double T=(jde-2451545.0)* (1.0/36525.0);
+		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
+		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
+		// these are actually small greek letters in the papers.
+		double P_A=0.0;
+		double Q_A=0.0;
+		double X_A=0.0;
+		double Y_A=0.0;
+		double Epsilon_A=0.0;
+		int i;
+		for (i=0; i<8; ++i)
+		{
+			double invP=PQvals[i][0];
+			double sin2piT_P, cos2piT_P;
 #ifdef _GNU_SOURCE
-		sincos(T2pi/P, &sin2piT_P, &cos2piT_P);
+			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
 #else
-		double phase=T2pi*invP;
-		sin2piT_P= sin(phase);
-		cos2piT_P= cos(phase);
+			double phase=T2pi*invP;
+			sin2piT_P= sin(phase);
+			cos2piT_P= cos(phase);
 #endif
-		P_A += PQvals[i][1]*cos2piT_P + PQvals[i][3]*sin2piT_P;
-		Q_A += PQvals[i][2]*cos2piT_P + PQvals[i][4]*sin2piT_P;
-	}
-	for (i=0; i<14; ++i)
-	{
-		double invP=XYvals[i][0];
-		double sin2piT_P, cos2piT_P;
+			P_A += PQvals[i][1]*cos2piT_P + PQvals[i][3]*sin2piT_P;
+			Q_A += PQvals[i][2]*cos2piT_P + PQvals[i][4]*sin2piT_P;
+		}
+		for (i=0; i<14; ++i)
+		{
+			double invP=XYvals[i][0];
+			double sin2piT_P, cos2piT_P;
 #ifdef _GNU_SOURCE
-		sincos(T2pi/P, &sin2piT_P, &cos2piT_P);
+			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
 #else
-		double phase=T2pi*invP;
-		sin2piT_P= sin(phase);
-		cos2piT_P= cos(phase);
+			double phase=T2pi*invP;
+			sin2piT_P= sin(phase);
+			cos2piT_P= cos(phase);
 #endif
-		X_A += XYvals[i][1]*cos2piT_P + XYvals[i][3]*sin2piT_P;
-		Y_A += XYvals[i][2]*cos2piT_P + XYvals[i][4]*sin2piT_P;
-	}
-	for (i=0; i<20; ++i)
-	{
-		double invP=p_epsVals[i][0];
-		double sin2piT_P, cos2piT_P;
+			X_A += XYvals[i][1]*cos2piT_P + XYvals[i][3]*sin2piT_P;
+			Y_A += XYvals[i][2]*cos2piT_P + XYvals[i][4]*sin2piT_P;
+		}
+		for (i=0; i<20; ++i)
+		{
+			double invP=p_epsVals[i][0];
+			double sin2piT_P, cos2piT_P;
 #ifdef _GNU_SOURCE
-		sincos(T2pi/P, &sin2piT_P, &cos2piT_P);
+			sincos(T2pi*invP, &sin2piT_P, &cos2piT_P);
 #else
-		double phase=T2pi*invP;
-		sin2piT_P= sin(phase);
-		cos2piT_P= cos(phase);
+			double phase=T2pi*invP;
+			sin2piT_P= sin(phase);
+			cos2piT_P= cos(phase);
 #endif
-		//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
-		Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
-	}
+			//p_A       += p_epsVals[i][1]*cos2piT_P + p_epsVals[i][3]*sin2piT_P;
+			Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
+		}
 
-	// Now the polynomial terms in T. Horner's scheme is best again.
-	P_A       += (( 110.e-9*T - 0.00028913)*T -    0.1189000)*T +  5851.607687;
-	Q_A       += ((-437.e-9*T - 0.00000020)*T -    1.1689818)*T -  1600.886300;
-	X_A       += ((-152.e-9*T - 0.00037173)*T +    0.4252841)*T +  5453.282155;
-	Y_A       += ((+231.e-9*T - 0.00018725)*T -    0.7675452)*T - 73750.930350;
-	Epsilon_A += (( 110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
-	const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
-	*vP_A       = arcSec2Rad*P_A;
-	*vQ_A       = arcSec2Rad*Q_A;
-	*vX_A       = arcSec2Rad*X_A;
-	*vY_A       = arcSec2Rad*Y_A;
-	*vepsilon_A = arcSec2Rad*Epsilon_A;
+		// Now the polynomial terms in T. Horner's scheme is best again.
+		P_A       += (( 110.e-9*T - 0.00028913)*T -    0.1189000)*T +  5851.607687;
+		Q_A       += ((-437.e-9*T - 0.00000020)*T -    1.1689818)*T -  1600.886300;
+		X_A       += ((-152.e-9*T - 0.00037173)*T +    0.4252841)*T +  5453.282155;
+		Y_A       += ((+231.e-9*T - 0.00018725)*T -    0.7675452)*T - 73750.930350;
+		Epsilon_A += (( 110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
+		c_P_A       = arcSec2Rad*P_A;
+		c_Q_A       = arcSec2Rad*Q_A;
+		c_X_A       = arcSec2Rad*X_A;
+		c_Y_A       = arcSec2Rad*Y_A;
+		c_epsilon_A = arcSec2Rad*Epsilon_A;
+	}
+	*vP_A       = c_P_A;
+	*vQ_A       = c_Q_A;
+	*vX_A       = c_X_A;
+	*vY_A       = c_Y_A;
+	*vepsilon_A = c_epsilon_A;
 
 }
 
+//! Just return (presumably precomputed) ecliptic obliquity.
+double getPrecessionAngleVondrakEpsilon(const double jde)
+{
+	double epsilon_A, dummy_chi_A, dummy_omega_A, dummy_psi_A;
+	getPrecessionAnglesVondrak(jde, &epsilon_A, &dummy_chi_A, &dummy_omega_A, &dummy_psi_A);
+	return epsilon_A;
+}
+//! Just return (presumably precomputed) ecliptic obliquity.
+double getPrecessionAngleVondrakCurrentEpsilonA(void)
+{
+	return c_epsilon_A;
+}
