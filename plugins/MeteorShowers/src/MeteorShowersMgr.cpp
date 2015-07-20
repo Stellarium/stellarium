@@ -166,8 +166,6 @@ void MeteorShowersMgr::createToolbarButtons()
 
 void MeteorShowersMgr::loadConfig()
 {
-	m_conf->beginGroup(MS_CONFIG_PREFIX);
-
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
 	setEnableButtons(m_conf->value(MS_CONFIG_PREFIX + "/flag_buttons", true).toBool());
 	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0,255,240").toString()));
@@ -181,8 +179,6 @@ void MeteorShowersMgr::loadConfig()
 	setEnableUpdates(m_conf->value(MS_CONFIG_PREFIX + "/updates_enabled", true).toBool());
 	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "http://stellarium.org/json/showers.json").toString());
 	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
-
-	m_conf->endGroup();
 }
 
 void MeteorShowersMgr::loadTextures()
