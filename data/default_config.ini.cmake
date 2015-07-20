@@ -128,13 +128,24 @@ gui_base_color                      = 0.5,0.5,0.7
 gui_text_color                      = 0.8,0.9,0.9
 azimuthal_color                     = 0.3,0.2,0.1
 daylight_text_color                 = 0.0,0.0,0.0
-equatorial_color                    = 0.1,0.2,0.3
-equatorial_J2000_color              = 0.1,0.3,0.4
+# 
+#equatorial_color                    = 0.1,0.2,0.3
+#equatorial_J2000_color              = 0.1,0.3,0.4
+#equator_color                       = 0.2,0.2,0.6
+#ecliptic_color                      = 0.6,0.2,0.2
+#ecliptic_J2000_color                = 0.3,0.3,0.1
+# GZ instead: Note -al colors go to the grids.
+ecliptic_J2000_color                   = 0.7,0.2,0.2
+ecliptic_color                         = 0.9,0.6,0.2
+ecliptical_J2000_color                 = 0.4,0.1,0.1
+ecliptical_color                       = 0.6,0.3,0.1
+equator_J2000_color                    = 0.2,0.2,0.6
+equator_color                          = 0.3,0.5,1.0
+equatorial_J2000_color                 = 0.1,0.1,0.5
+equatorial_color                       = 0.2,0.3,0.8
+#
 galactic_color                      = 0.0,0.3,0.2
 galactic_equator_color              = 0.5,0.3,0.1
-equator_color                       = 0.2,0.2,0.6
-ecliptic_color                      = 0.6,0.2,0.2
-ecliptic_J2000_color                = 0.3,0.3,0.1
 meridian_color                      = 0.2,0.6,0.2
 longitude_color                     = 0.2,0.4,0.4
 horizon_color                       = 0.2,0.6,0.2
