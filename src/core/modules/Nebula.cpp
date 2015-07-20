@@ -70,7 +70,7 @@ Nebula::Nebula()
 	, Cr_nb(0)
 	, Mel_nb(0)
 	, PGC_nb(0)
-	, Ced_nb(0)
+	, Ced_nb()
 	, PK_nb()
 	, mag(99.)
 	, nType()	
@@ -128,7 +128,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("Mel %1").arg(Mel_nb);
 		if (PGC_nb > 0)
 			catIds << QString("PGC %1").arg(PGC_nb);
-		if (Ced_nb > 0)
+		if (!Ced_nb.isEmpty())
 			catIds << QString("Ced %1").arg(Ced_nb);
 		if (!PK_nb.isEmpty())
 			catIds << QString("PK %1").arg(PK_nb);
@@ -358,6 +358,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		case NebGx:
 		case NebSy2:
 		case NebAGN:
+		case NebIG:
 			Nebula::texGalaxy->bind();
 			color=galaxyColor;
 			break;
@@ -476,7 +477,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("Mel %1").arg(Mel_nb);
 		else if (PGC_nb > 0)
 			str = QString("PGC %1").arg(PGC_nb);
-		else if (Ced_nb > 0)
+		else if (!Ced_nb.isEmpty())
 			str = QString("Ced %1").arg(Ced_nb);
 		else if (!PK_nb.isEmpty())
 			str = QString("PK %1").arg(PK_nb);
@@ -525,6 +526,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebAGN:
 			wsType = q_("galaxy with active nucleus");
+			break;
+		case NebIG:
+			wsType = q_("interacting galaxy");
 			break;
 		case NebCl:
 			wsType = q_("star star cluster");
