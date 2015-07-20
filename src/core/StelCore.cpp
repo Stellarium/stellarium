@@ -668,7 +668,7 @@ StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTran
 	return StelProjector::ModelViewTranformP(refr);
 }
 
-//! Get the modelview matrix for observer-centric ecliptic (Vsop87A) drawing
+//! Get the modelview matrix for observer-centric ecliptic J2000 (Vsop87A) drawing
 StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticJ2000ModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
@@ -683,12 +683,15 @@ StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticJ2000Model
 //! Get the modelview matrix for observer-centric ecliptic of date drawing
 StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticOfDateModelViewTransform(RefractionMode refMode) const
 {
-	// GZ TODO: Apply precession of the ecliptic here!!!!
+	double eps_A=getPrecessionAngleVondrakCurrentEpsilonA();
+	// GZ TODO: Apply precession of the ecliptic here!!!! ==> REPLACE matVsop87ToJ2000*matEclOfDateToVsop87 by something that works!
 	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87));
+//		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz* Mat4d::xrotation(eps_A)));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-	refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87);
+	//refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87);
+	refr->setPreTransfoMat(matEquinoxEquToAltAz* Mat4d::xrotation(eps_A));
 	refr->setPostTransfoMat(matAltAzModelView);
 	return StelProjector::ModelViewTranformP(refr);
 }
@@ -774,11 +777,14 @@ void StelCore::updateTransformMatrices()
 	matHeliocentricEclipticToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 						  Mat4d::translation(-position->getCenterVsop87Pos());
 
-	// GZ Finally, new: rotation of the ecliptic of date.
+	// GZ Finally, new: rotation of the ecliptic of date. Not sure which direction, though...
 	double epsilon_A, chi_A, omega_A, psi_A;
 	getPrecessionAnglesVondrak(JDay, &epsilon_A, &chi_A, &omega_A, &psi_A);
-	matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
+	//matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
+	matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-23.4392803055555555556*(M_PI/180));
 	matEclOfDateToVsop87=matVsop87ToEclOfDate.transpose();
+	//matEclOfDateToVsop87= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
+	//matVsop87ToEclOfDate=matVsop87ToEclOfDate.transpose();
 }
 
 // Return the observer heliocentric position
@@ -1808,6 +1814,8 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 	return QString(" %1").arg(validRange);
 }
 
+// return if sky plus atmosphere is bright enough from sunlight so that e.g. screen labels should be rendered dark.
+// Could be renamed to isBrightDaylight()
 bool StelCore::isDay() const
 {
 	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
