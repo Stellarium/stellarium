@@ -29,8 +29,8 @@ class SkyLine;
 
 //! @class GridLinesMgr
 //! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical anf Galactic Grids,
-//! as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of date only)
-//! and a special line marking conjunction or opposition in ecliptical longitude.
+//! as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of J2000.0 and date)
+//! and a special line marking conjunction or opposition in ecliptical longitude (of date).
 class GridLinesMgr : public StelModule
 {
 	Q_OBJECT
@@ -116,7 +116,7 @@ class GridLinesMgr : public StelModule
 			   WRITE setColorEclipticLine
 			   NOTIFY eclipticLineColorChanged)
 
-	// new, but replaces old ecliptic.
+	// new name, but replaces old ecliptic.
 	Q_PROPERTY(bool eclipticJ2000LineDisplayed
 			   READ getFlagEclipticJ2000Line
 			   WRITE setFlagEclipticJ2000Line

@@ -617,6 +617,8 @@ void SkyLine::updateLabel()
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
 			label = q_("O./C. longitude");
 			break;
+		default:
+			Q_ASSERT(0);
 	}
 }
 
