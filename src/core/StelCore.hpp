@@ -556,12 +556,12 @@ private:
 	void resetSync();
 
 	// Matrices used for every coordinate transfo
-	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic Cartesian (VSOP87A) to observer-centric altazimuthal coordinate
-	Mat4d matAltAzToHeliocentricEcliptic;	   // Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
-	Mat4d matAltAzToEquinoxEqu;                // Transform from observer-centric altazimuthal coordinate to Earth Equatorial
-	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to observer-centric altazimuthal coordinate
+	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic Cartesian (VSOP87A) to topocentric (StelObserver) altazimuthal coordinate
+	Mat4d matAltAzToHeliocentricEcliptic;	   // Transform from topocentric (StelObserver) altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
+	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
+	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
-	Mat4d matEquinoxEquToJ2000;
+	Mat4d matEquinoxEquToJ2000;                // GZ For Earth, this should be inverse precession matrix. Yes, =Rz(VSOPoffset)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // GZ: Should be precession matrix?
 	Mat4d matEclOfDateToVsop87;                // GZ NEW: precession of the ecliptic
 	Mat4d matVsop87ToEclOfDate;                // GZ NEW: precession of the ecliptic
