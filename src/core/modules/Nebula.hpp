@@ -86,24 +86,25 @@ private:
 	enum NebulaType
 	{
 		NebGx		= 0,	//!< Galaxy
-		NebSy2		= 1,	//!< Seyfert 2 Galaxy
-		NebAGN		= 2,	//!< Active Galaxy Nucleus
-		NebCl		= 3,	//!< Star cluster
-		NebOc		= 4,	//!< Open star cluster
-		NebGc		= 5,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA		= 6,	//!< Stellar association
-		NebSC		= 7,	//!< Star cloud
-		NebN		= 8,	//!< A nebula
-		NebPn		= 9,	//!< Planetary nebula
-		NebDn		= 10,	//!< Dark Nebula
-		NebRn		= 11,	//!< Reflection nebula
-		NebBn		= 12,	//!< Bipolar nebula
-		NebEn		= 13,	//!< Emission nebula
-		NebCn		= 14,	//!< Cluster associated with nebulosity
-		NebHII		= 15,	//!< HII Region
-		NebHa		= 16,	//!< H-α emission region
-		NebSNR		= 17,	//!< Supernova remnant
-		NebUnknown	= 18	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebSy2		= 1,	//!< Seyfert 2 galaxy
+		NebAGN		= 2,	//!< Active galaxy nucleus
+		NebIG		= 3,	//!< Interacting galaxy
+		NebCl		= 4,	//!< Star cluster
+		NebOc		= 5,	//!< Open star cluster
+		NebGc		= 6,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA		= 7,	//!< Stellar association
+		NebSC		= 8,	//!< Star cloud
+		NebN		= 9,	//!< A nebula
+		NebPn		= 10,	//!< Planetary nebula
+		NebDn		= 11,	//!< Dark Nebula
+		NebRn		= 12,	//!< Reflection nebula
+		NebBn		= 13,	//!< Bipolar nebula
+		NebEn		= 14,	//!< Emission nebula
+		NebCn		= 15,	//!< Cluster associated with nebulosity
+		NebHII		= 16,	//!< HII Region
+		NebHa		= 17,	//!< H-α emission region
+		NebSNR		= 18,	//!< Supernova remnant
+		NebUnknown	= 19	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
@@ -138,7 +139,7 @@ private:
 	unsigned int Cr_nb;             // Collinder Catalog number
 	unsigned int Mel_nb;            // Melotte Catalog number
 	unsigned int PGC_nb;            // PGC number (Catalog of galaxies)
-	unsigned int Ced_nb;		// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
+	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
 	QString PK_nb;			// PK number (Catalogue of galactic planetary nebulae (Perek-Kohoutek))
 	QString since;			// JD of the nebula formation
 	QString englishName;            // English name
