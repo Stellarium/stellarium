@@ -21,6 +21,7 @@
 #define CLIPROCESSOR_HPP
 
 #include <QStringList>
+#include <QVariant>
 
 class QSettings;
 
