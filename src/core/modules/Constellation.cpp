@@ -222,8 +222,8 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 
 	sPainter.setColor(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundaryFader.getInterstate());
 
-    unsigned int i, j;
-    size_t size;
+	unsigned int i, j;
+	size_t size;
 	Vec3f pt1, pt2;
 	Vec3d ptd1, ptd2;
 	std::vector<Vec3f> *points;
