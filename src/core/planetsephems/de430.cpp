@@ -21,7 +21,11 @@ THE SOFTWARE.
 */
 
 #include "de430.hpp"
+#include "StelUtils.hpp"
+#include "StelCore.hpp"
 #include "jpleph.h"
+#include <iostream>
+#include <fstream>
 
 #ifdef __cplusplus
   extern "C" {
@@ -33,21 +37,33 @@ THE SOFTWARE.
 static void * ephem;
 static char nams[JPL_MAX_N_CONSTANTS][6], buff[102];
 static double vals[JPL_MAX_N_CONSTANTS];
-	
+
+Vec3d tempECL = Vec3d(0,0,0);
+Vec3d tempICRF = Vec3d(0,0,0);
+
+static double tempXYZ[6];
 
 void InitDE430(const char* filepath)
 {
-	ephem = jpl_init_ephemeris(filepath, nams, vals);
-}
+    ephem = jpl_init_ephemeris(filepath, nams, vals);
+ }
 
 void GetDe430Coor(double jd, int planet_id, double * xyz)
 {
-    jpl_pleph(ephem, jd, planet_id, 11, xyz, 0);
+    jpl_pleph(ephem, jd, planet_id, 12, tempXYZ, 0);
+
+    tempICRF = Vec3d(tempXYZ[0], tempXYZ[0], tempXYZ[0]);
+    tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
+
+    xyz[0] = tempECL[0];
+    xyz[1] = tempECL[1];
+    xyz[2] = tempECL[2];
+
 }
 
 void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
 {
-	jpl_pleph(ephem, jd, planet_id, 11, xyz, 0);
+	
 }
 
 #ifdef __cplusplus
