@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-07-18 16:50+0000\n"
+"PO-Revision-Date: 2015-07-19 13:59+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-19 04:45+0000\n"
+"X-Launchpad-Export-Date: 2015-07-20 04:33+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1245,9 +1245,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"La projection de Mercator est une des plus utilisées pour les cartes de la "
-"Terre. Elle préserve les directions et les formes mais déforme les tailles, "
-"surtout loin de l'équateur."
+"La projection de Mercator est une des projections cartographiques les plus "
+"utilisées. Elle préserve les directions et les formes mais déforme les "
+"tailles, surtout loin de l'équateur."
 
 #: src/core/StelProjectorClasses.cpp:408
 msgid "Orthographic"
@@ -10733,7 +10733,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr "Requis pour le placage de relief et les ombres"
+msgstr "Requis pour les ombres et le placage de relief"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
