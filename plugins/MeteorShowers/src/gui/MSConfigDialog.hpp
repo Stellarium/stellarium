@@ -57,13 +57,11 @@ public slots:
 	void retranslate();
 
 private slots:
-        void updateCompleteReceiver();
+	//! Refresh details about the last update
+	void refreshUpdateTab();
 
 	//! Refresh the color of all markers
 	void refreshMarkersColor();
-
-	//! Refresh details about the last update
-	void refreshUpdateLabels();
 
 	//! Sets the color of the active radiant based on real data.
 	void setColorARR();
