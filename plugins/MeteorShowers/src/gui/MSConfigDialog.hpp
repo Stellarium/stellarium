@@ -46,8 +46,11 @@ public:
 	//! Destructor
 	~MSConfigDialog();
 
+	//! Initializes the components based on the current settings
+	void init();
+
 protected:
-	//! Initialize the dialog and connect the signals/slots
+	//! Initializes the dialog and connect the signals/slots
 	void createDialogContent();
 
 public slots:

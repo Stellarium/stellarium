@@ -229,6 +229,7 @@ void MeteorShowersMgr::restoreDefaultSettings()
 	m_conf->remove("");
 	m_conf->endGroup();
 	loadConfig();
+	m_configDialog->init();
 }
 
 bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
