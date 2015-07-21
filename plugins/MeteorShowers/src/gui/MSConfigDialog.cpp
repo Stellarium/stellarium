@@ -74,46 +74,27 @@ void MSConfigDialog::createDialogContent()
 #endif
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-
 	connect(m_ui->bRestoreDefaults, SIGNAL(clicked()), m_mgr, SLOT(restoreDefaultSettings()));
 
 	// General tab
-	m_ui->enableAtStartUp->setChecked(m_mgr->getEnableAtStartup());
 	connect(m_ui->enableAtStartUp, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAtStartup(bool)));
-
-	m_ui->enableButtons->setChecked(m_mgr->getEnableButtons());
 	connect(m_ui->enableButtons, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableButtons(bool)));
 
 	// Radiant tab
-	m_ui->enableMarker->setChecked(m_mgr->getEnableMarker());
 	connect(m_ui->enableMarker, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableMarker(bool)));
-
-	m_ui->activeRadiantsOnly->setChecked(m_mgr->getActiveRadiantOnly());
 	connect(m_ui->activeRadiantsOnly, SIGNAL(clicked(bool)), m_mgr, SLOT(setActiveRadiantOnly(bool)));
-
-	m_ui->enableLabels->setChecked(m_mgr->getEnableLabels());
 	connect(m_ui->enableLabels, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableLabels(bool)));
-
-	m_ui->fontSize->setValue(m_mgr->getFontSize());
 	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
 
 	connect(m_ui->setColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
 	connect(m_ui->setColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(m_ui->setColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
-	refreshMarkersColor();
 
 	// Update tab
-	m_ui->enableUpdates->setChecked(m_mgr->getEnableUpdates());
 	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableUpdates(bool)));
-
-	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
 	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), m_mgr, SLOT(setUpdateFrequencyHours(int)));
-
 	connect(m_ui->bUpdate, SIGNAL(clicked()), m_mgr, SLOT(updateCatalog()));
-
-	refreshUpdateLabels();
 
 	//connect(m_mgr, SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
 	//connect(m_mgr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
@@ -125,6 +106,8 @@ void MSConfigDialog::createDialogContent()
 	{
 		m_ui->about->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
+
+	init();
 }
 
 
@@ -159,7 +142,24 @@ void MSConfigDialog::updateCompleteReceiver()
 
 
 
+void MSConfigDialog::init()
+{
+	// General tab
+	m_ui->enableAtStartUp->setChecked(m_mgr->getEnableAtStartup());
+	m_ui->enableButtons->setChecked(m_mgr->getEnableButtons());
 
+	// Radiant tab
+	m_ui->enableMarker->setChecked(m_mgr->getEnableMarker());
+	m_ui->activeRadiantsOnly->setChecked(m_mgr->getActiveRadiantOnly());
+	m_ui->enableLabels->setChecked(m_mgr->getEnableLabels());
+	m_ui->fontSize->setValue(m_mgr->getFontSize());
+	refreshMarkersColor();
+
+	// Update tab
+	m_ui->enableUpdates->setChecked(m_mgr->getEnableUpdates());
+	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
+	refreshUpdateLabels();
+}
 
 void MSConfigDialog::refreshUpdateLabels()
 {
