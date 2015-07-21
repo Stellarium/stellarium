@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2015 Georg Zotti (offset view adaptations)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -618,16 +619,31 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		if (!move.targetObject.isNull())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			Vec3d targetPosAltAz=move.targetObject->getAltAzPosAuto(core);
 			// In case we have offset center, we want object still visible in center.
 			// Note that if we do not center on an object, we set view direction of the potentially offset screen center!
 			// This is by design, to allow accurate setting of display coordinates.
-			double alt, az;
-			StelUtils::rectToSphe(&az, &alt, targetPosAltAz);
+			Vec3d v;
+			switch (mountMode)
+			{
+				case MountAltAzimuthal:
+					v = move.targetObject->getAltAzPosAuto(core);
+					break;
+				case MountEquinoxEquatorial:
+					v = move.targetObject->getEquinoxEquatorialPos(core);
+					break;
+				case MountGalactic:
+					v = move.targetObject->getGalacticPos(core);
+					break;
+				default:
+					qDebug() << "StelMovementMgr: unexpected mountMode" << mountMode;
+					Q_ASSERT(0);
+			}
+			double lat, lon;
+			StelUtils::rectToSphe(&lon, &lat, v);
 			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*core->getCurrentStelProjectorParams().fov*M_PI/180.0f;
-			alt+=altOffset;
-			StelUtils::spheToRect(az, alt, targetPosAltAz);
-			move.aim=core->altAzToJ2000(targetPosAltAz, StelCore::RefractionOff);
+			lat+=altOffset;
+			StelUtils::spheToRect(lon, lat, v);
+			move.aim=mountFrameToJ2000(v);
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -695,16 +711,30 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			Vec3d v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+			Vec3d v;
+			switch (mountMode)
+			{
+				case MountAltAzimuthal:
+					v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+					break;
+				case MountEquinoxEquatorial:
+					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core);
+					break;
+				case MountGalactic:
+					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);
+					break;
+				default:
+					qDebug() << "StelMovementMgr: unexpected mountMode" << mountMode;
+					Q_ASSERT(0);
+			}
 
-			// In case we have offset center, we want object still visible in center.
-			double alt, az;
-			StelUtils::rectToSphe(&az, &alt, v);
+			double lat, lon; // general: longitudinal, latitudinal
+			StelUtils::rectToSphe(&lon, &lat, v);
 			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*core->getCurrentStelProjectorParams().fov*M_PI/180.0f;
-			alt+=altOffset;
-			StelUtils::spheToRect(az, alt, v);
+			lat+=altOffset;
+			StelUtils::spheToRect(lon, lat, v);
 
-			setViewDirectionJ2000(core->altAzToJ2000(v, StelCore::RefractionOff));
+			setViewDirectionJ2000(mountFrameToJ2000(v));
 		}
 		else
 		{
@@ -952,23 +982,55 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 		// Use a smooth function
 		double c;
 
-		if( zoomMove.start > zoomMove.aim )
+		if( zoomMove.startFov > zoomMove.aimFov )
 		{
-			// slow down as approach final view
+			// slow down as we approach final view
 			c = 1 - (1-zoomMove.coef)*(1-zoomMove.coef)*(1-zoomMove.coef);
 		}
 		else
 		{
-			// speed up as leave zoom target
+			// speed up as we leave zoom target
 			c = (zoomMove.coef)*(zoomMove.coef)*(zoomMove.coef);
 		}
 
-		setFov(zoomMove.start + (zoomMove.aim - zoomMove.start) * c);
+		double newFov=zoomMove.startFov + (zoomMove.aimFov - zoomMove.startFov) * c;
+
 		zoomMove.coef+=zoomMove.speed*deltaTime*1000;
 		if (zoomMove.coef>=1.)
 		{
 			flagAutoZoom = 0;
-			setFov(zoomMove.aim);
+			newFov=zoomMove.aimFov;
+		}
+
+		setFov(newFov);
+
+		// In case we have offset center, we want object still visible in center.
+		if (flagTracking && objectMgr->getWasSelected()) // vision vector locked on selected object
+		{
+			Vec3d v;
+			switch (mountMode)
+			{
+				case MountAltAzimuthal:
+					v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+					break;
+				case MountEquinoxEquatorial:
+					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core);
+					break;
+				case MountGalactic:
+					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);
+					break;
+				default:
+					qDebug() << "StelMovementMgr: unexpected mountMode" << mountMode;
+					Q_ASSERT(0);
+			}
+
+			double lat, lon; // general: longitudinal, latitudinal
+			StelUtils::rectToSphe(&lon, &lat, v);
+			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*newFov*M_PI/180.0f;
+			lat+=altOffset;
+			StelUtils::spheToRect(lon, lat, v);
+
+			setViewDirectionJ2000(mountFrameToJ2000(v));
 		}
 	}
 }
@@ -978,8 +1040,8 @@ void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
 	moveDuration /= movementsSpeedFactor;
 
-	zoomMove.aim=aim_fov;
-	zoomMove.start=currentFov;
+	zoomMove.aimFov=aim_fov;
+	zoomMove.startFov=currentFov;
 	zoomMove.speed=1.f/(moveDuration*1000);
 	zoomMove.coef=0.;
 	flagAutoZoom = true;
@@ -1008,7 +1070,7 @@ void StelMovementMgr::changeConstellationArtIntensity()
 
 double StelMovementMgr::getAimFov(void) const
 {
-	return (flagAutoZoom ? zoomMove.aim : currentFov);
+	return (flagAutoZoom ? zoomMove.aimFov : currentFov);
 }
 
 void StelMovementMgr::setMaxFov(double max)

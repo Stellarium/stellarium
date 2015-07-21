@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2015 Georg Zotti (offset view adaptations)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +39,8 @@ class StelMovementMgr : public StelModule
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
+	//! MountGalactic is currently only available via scripting API: core.clear("galactic")
+	// TODO: add others like MountEcliptical
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic};
 
 	StelMovementMgr(StelCore* core);
@@ -157,7 +160,7 @@ public slots:
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
-	//! @param moveDuration The time that the operation should take to complete.
+	//! @param moveDuration The time that the operation should take to complete. [seconds]
 	void zoomTo(double aimFov, float moveDuration = 1.);
 	//! Get the current Field Of View in degrees
 	double getCurrentFov() const {return currentFov;}
@@ -221,10 +224,10 @@ private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
 
-	double currentFov; // The current FOV in degree
+	double currentFov; // The current FOV in degrees
 	double initFov;    // The FOV at startup
-	double minFov;     // Minimum FOV in degree
-	double maxFov;     // Maximum FOV in degree
+	double minFov;     // Minimum FOV in degrees
+	double maxFov;     // Maximum FOV in degrees
 	double initConstellationIntensity;   // The initial constellation art intensity (level at startup)
 
 	void setFov(double f)
@@ -311,10 +314,15 @@ private:
 
 	//! @internal
 	//! Store data for auto-zoom.
+	// Components:
+	// startFov: field of view at start
+	// aimFov: intended field of view at end of zoom move
+	// speed: rate of change. UNITS?
+	// coef: set to 0 at begin of zoom, will increase to 1 during autozoom motion.
 	struct AutoZoom
 	{
-		double start;
-		double aim;
+		double startFov;
+		double aimFov;
 		float speed;
 		float coef;
 	};
