@@ -96,8 +96,9 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), m_mgr, SLOT(setUpdateFrequencyHours(int)));
 	connect(m_ui->bUpdate, SIGNAL(clicked()), m_mgr, SLOT(updateCatalog()));
 
-	//connect(m_mgr, SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
-	//connect(m_mgr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(m_ui->enableUpdates, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
+	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), this, SLOT(refreshUpdateTab()));
+	connect(m_ui->bUpdate, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
 
 	// About tab
 	setAboutHtml();
@@ -109,38 +110,6 @@ void MSConfigDialog::createDialogContent()
 
 	init();
 }
-
-
-
-
-/*
-void MSConfigDialog::updateStateReceiver(MeteorShowers::UpdateState state)
-{
-	//qDebug() << "MSConfigDialog::updateStateReceiver got a signal";
-	if (state==MeteorShowers::Updating)
-	{
-		m_ui->nextUpdateLabel->setText(q_("Updating now..."));
-	}
-	else if (state==MeteorShowers::DownloadError || state==MeteorShowers::OtherError)
-	{
-		m_ui->nextUpdateLabel->setText(q_("Update error"));
-		m_updateTimer->start();  // make sure message is displayed for a while...
-	}
-}
-*/
-void MSConfigDialog::updateCompleteReceiver()
-{
-	//m_ui->nextUpdateLabel->setText(QString(q_("Meteor showers is updated")));
-	// display the status for another full interval before refreshing status
-	//m_updateTimer->start();
-	//m_ui->lastUpdateDateTimeEdit->setDateTime(m_mgr->getLastUpdate());
-	//QTimer *timer = new QTimer(this);
-	//connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
-}
-
-
-
-
 
 void MSConfigDialog::init()
 {
@@ -156,14 +125,16 @@ void MSConfigDialog::init()
 	refreshMarkersColor();
 
 	// Update tab
-	m_ui->enableUpdates->setChecked(m_mgr->getEnableUpdates());
-	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
-	refreshUpdateLabels();
+	refreshUpdateTab();
 }
 
-void MSConfigDialog::refreshUpdateLabels()
+void MSConfigDialog::refreshUpdateTab()
 {
 	m_ui->lastUpdate->setDateTime(m_mgr->getLastUpdate());
+	m_ui->enableUpdates->setChecked(m_mgr->getEnableUpdates());
+	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
+	m_ui->bUpdate->setEnabled(!m_mgr->isUpdating());
+
 	QString msg;
 	if (!m_mgr->getEnableUpdates())
 	{
