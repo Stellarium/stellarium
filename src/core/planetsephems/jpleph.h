@@ -108,3 +108,7 @@ int DLL_FUNC jpl_init_error_code( void);
 #define JPL_INIT_NOT_CALLED              -9
 
 #define jpl_get_pvsun( ephem) ((double *)((char *)ephem + 248))
+
+/* addition for use in stellarium */
+#define JPL_MAX_N_CONSTANTS 1018
+#define CALC_VELOCITY       0

@@ -31,7 +31,6 @@ void InitDE431(const char* filepath);
 void GetDe431Coor(double jd, int planet_id, double * xyz);
 void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz);
 
-
 #ifdef __cplusplus
     }
 #endif
