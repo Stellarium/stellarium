@@ -472,7 +472,10 @@ void MeteorShowersMgr::setLastUpdate(const QDateTime &datetime)
 void MeteorShowersMgr::setStatusOfLastUpdate(const int &downloadStatus)
 {
 	m_statusOfLastUpdate = (DownloadStatus) downloadStatus;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/last_update_status", downloadStatus);
+	if (m_statusOfLastUpdate != UPDATING)
+	{
+		m_conf->setValue(MS_CONFIG_PREFIX + "/last_update_status", downloadStatus);
+	}
 	emit(downloadStatusChanged(m_statusOfLastUpdate));
 }
 
