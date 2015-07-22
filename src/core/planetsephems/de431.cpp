@@ -22,21 +22,31 @@ THE SOFTWARE.
 
 #include "de431.hpp"
 #include "jpleph.h"
-
-#define JPL_MAX_N_CONSTANTS 1018
-#define CALC_VELOCITY       0
+#include "StelUtils.hpp"
+#include "StelCore.hpp"
 
 static void * ephem;
-static char nams[JPL_MAX_N_CONSTANTS][6], buff[102];
+   
+static Vec3d tempECL = Vec3d(0,0,0);
+static Vec3d tempICRF = Vec3d(0,0,0);
+static char nams[JPL_MAX_N_CONSTANTS][6];
 static double vals[JPL_MAX_N_CONSTANTS];
-    
+static double tempXYZ[6];
+
 void InitDE431(const char* filepath)
 {
     ephem = jpl_init_ephemeris(filepath, nams, vals);
 }
 void GetDe431Coor(double jd, int planet_id, double * xyz)
 {
+    jpl_pleph(ephem, jd, planet_id, 3, tempXYZ, 0);
 
+    tempICRF = Vec3d(tempXYZ[0], tempXYZ[0], tempXYZ[0]);
+    tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
+
+    xyz[0] = tempECL[0];
+    xyz[1] = tempECL[1];
+    xyz[2] = tempECL[2];
 }
 
 void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)

@@ -21,24 +21,20 @@ THE SOFTWARE.
 */
 
 #include "de430.hpp"
+#include "jpleph.h"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
-#include "jpleph.h"
 
 #ifdef __cplusplus
   extern "C" {
 #endif
 
-#define JPL_MAX_N_CONSTANTS 1018
-#define CALC_VELOCITY		0
-
 static void * ephem;
-static char nams[JPL_MAX_N_CONSTANTS][6], buff[102];
+
+static Vec3d tempECL = Vec3d(0,0,0);
+static Vec3d tempICRF = Vec3d(0,0,0);
+static char nams[JPL_MAX_N_CONSTANTS][6];
 static double vals[JPL_MAX_N_CONSTANTS];
-
-Vec3d tempECL = Vec3d(0,0,0);
-Vec3d tempICRF = Vec3d(0,0,0);
-
 static double tempXYZ[6];
 
 void InitDE430(const char* filepath)
