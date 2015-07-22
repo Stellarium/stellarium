@@ -99,6 +99,7 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->enableUpdates, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
 	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), this, SLOT(refreshUpdateTab()));
 	connect(m_ui->bUpdate, SIGNAL(clicked()), this, SLOT(refreshUpdateTab()));
+	connect(m_mgr, SIGNAL(downloadStatusChanged(DownloadStatus)), this, SLOT(refreshUpdateTab()));
 
 	// About tab
 	setAboutHtml();
