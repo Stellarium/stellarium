@@ -92,7 +92,7 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->setColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
 	// Update tab
-	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableUpdates(bool)));
+	connect(m_ui->enableUpdates, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAutoUpdates(bool)));
 	connect(m_ui->updateFrequency, SIGNAL(valueChanged(int)), m_mgr, SLOT(setUpdateFrequencyHours(int)));
 	connect(m_ui->bUpdate, SIGNAL(clicked()), m_mgr, SLOT(updateCatalog()));
 
@@ -131,7 +131,7 @@ void MSConfigDialog::init()
 
 void MSConfigDialog::refreshUpdateTab()
 {
-	m_ui->enableUpdates->setChecked(m_mgr->getEnableUpdates());
+	m_ui->enableUpdates->setChecked(m_mgr->getEnableAutoUpdates());
 	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
 	m_ui->nextUpdate->setDateTime(m_mgr->getNextUpdate());
 

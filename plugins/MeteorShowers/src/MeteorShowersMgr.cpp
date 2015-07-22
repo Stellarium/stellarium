@@ -47,7 +47,7 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableLabels(true)
 	, m_enableMarker(true)
 	, m_messageTimer(NULL)
-	, m_enableUpdates(true)
+	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
 	, m_statusOfLastUpdate(OUTDATED)
 	, m_downloadMgr(NULL)
@@ -176,7 +176,7 @@ void MeteorShowersMgr::loadConfig()
 	setEnableLabels(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_labels", true).toBool());
 	setEnableMarker(m_conf->value(MS_CONFIG_PREFIX + "/flag_radiant_marker", true).toBool());
 	setUpdateFrequencyHours(m_conf->value(MS_CONFIG_PREFIX + "/update_frequency_hours", 720).toInt());
-	setEnableUpdates(m_conf->value(MS_CONFIG_PREFIX + "/updates_enabled", true).toBool());
+	setEnableAutoUpdates(m_conf->value(MS_CONFIG_PREFIX + "/automatic_updates_enabled", true).toBool());
 	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "http://stellarium.org/json/showers.json").toString());
 	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
 	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());
@@ -307,7 +307,7 @@ void MeteorShowersMgr::draw(StelCore* core)
 
 void MeteorShowersMgr::checkForUpdates()
 {
-	if (m_enableUpdates && m_lastUpdate.addSecs(m_updateFrequencyHours * 3600.) <= QDateTime::currentDateTime())
+	if (m_enableAutoUpdates && m_lastUpdate.addSecs(m_updateFrequencyHours * 3600.) <= QDateTime::currentDateTime())
 	{
 		updateCatalog();
 	}
@@ -451,10 +451,10 @@ void MeteorShowersMgr::setUpdateFrequencyHours(const int& hours)
 	m_conf->setValue(MS_CONFIG_PREFIX + "/update_frequency_hours", hours);
 }
 
-void MeteorShowersMgr::setEnableUpdates(const bool& b)
+void MeteorShowersMgr::setEnableAutoUpdates(const bool& b)
 {
-	m_enableUpdates = b;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/updates_enabled", b);
+	m_enableAutoUpdates = b;
+	m_conf->setValue(MS_CONFIG_PREFIX + "/automatic_updates_enabled", b);
 }
 
 void MeteorShowersMgr::setUrl(const QString& url)
