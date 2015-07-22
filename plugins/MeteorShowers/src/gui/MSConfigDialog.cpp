@@ -130,25 +130,33 @@ void MSConfigDialog::init()
 
 void MSConfigDialog::refreshUpdateTab()
 {
-	m_ui->lastUpdate->setDateTime(m_mgr->getLastUpdate());
 	m_ui->enableUpdates->setChecked(m_mgr->getEnableUpdates());
 	m_ui->updateFrequency->setValue(m_mgr->getUpdateFrequencyHours());
-	m_ui->bUpdate->setEnabled(!m_mgr->isUpdating());
+	m_ui->nextUpdate->setDateTime(m_mgr->getNextUpdate());
+
+	m_ui->lastUpdate->setDateTime(m_mgr->getLastUpdate());
+	m_ui->bUpdate->setEnabled(true);
 
 	QString msg;
-	if (!m_mgr->getEnableUpdates())
-	{
-		msg = q_("Disabled");
-	}
-	else if (m_mgr->isUpdating())
+	MeteorShowersMgr::DownloadStatus s = m_mgr->getStatusOfLastUpdate();
+	if (s == MeteorShowersMgr::UPDATING)
 	{
 		msg = q_("Updating...");
+		m_ui->bUpdate->setEnabled(false);
+	}
+	else if (s == MeteorShowersMgr::UPDATED)
+	{
+		msg = q_("Successfully updated!");
+	}
+	else if (s == MeteorShowersMgr::ERROR)
+	{
+		msg = q_("Failed!");
 	}
 	else
 	{
-		msg = QString(q_("Next update: %1")).arg(m_mgr->getNextUpdate().toString());
+		msg = q_("Outdated!");
 	}
-	m_ui->lNextUpdate->setText(msg);
+	m_ui->status->setText(msg);
 }
 
 void MSConfigDialog::refreshMarkersColor()
