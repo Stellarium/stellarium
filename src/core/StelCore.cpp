@@ -44,6 +44,9 @@
 #include <QDebug>
 #include <QMetaEnum>
 
+#include <iostream>
+#include <fstream>
+
 // Init statics transfo matrices
 // See vsop87.doc:
 const Mat4d StelCore::matJ2000ToVsop87(Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) * Mat4d::zrotation(0.0000275*(M_PI/180)));
@@ -1824,8 +1827,8 @@ void StelCore::initEphemeridesFunctions()
 
 		//TODO: check for correct filesize
 		//../de430
-		QString de430FilePath = StelFileMgr::findFile("ephem/", 
-			StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de430.bsp";
+		QString de430FilePath = StelFileMgr::findFile("ephem/de430.bsp", 
+			StelFileMgr::Flags(StelFileMgr::File));
 	  	
 		setDe430Status(!de430FilePath.isEmpty());
 
@@ -1834,11 +1837,11 @@ void StelCore::initEphemeridesFunctions()
   			EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
   		}
 
-	 	QString de431FilePathP1 = StelFileMgr::findFile("ephem/", 
-	 		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-1.bsp";
+	 	QString de431FilePathP1 = StelFileMgr::findFile("ephem/de431_part-1.bsp", 
+	 		StelFileMgr::Flags(StelFileMgr::File));
 	  	
-	 	QString de431FilePathP2 = StelFileMgr::findFile("ephem/", 
-			StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/de431_part-2.bsp";
+	 	QString de431FilePathP2 = StelFileMgr::findFile("ephem/de431_part-2.bsp", 
+			StelFileMgr::Flags(StelFileMgr::File));
 
 	 	setDe431Status(!(de431FilePathP1.isEmpty() && de431FilePathP2.isEmpty()));
 	 	
@@ -1846,5 +1849,13 @@ void StelCore::initEphemeridesFunctions()
 		{
 			EphemWrapper::init_de431(de431FilePathP1.toStdString().c_str());
   		}
-  	} 
+  		
+  		std::ofstream outfile;
+		outfile.open("/Users/holger/Desktop/log.txt", std::ios_base::app);
+		outfile << "DE430: " << de430IsActive() << "(" << (!de430FilePath.isEmpty())<< ")\n";
+		outfile << "DE43P1: " << de431IsActive() << "(" << (!de431FilePathP1.isEmpty())<< ")\n";
+		outfile << "DE43P2: " << de431IsActive() << "(" << (!de431FilePathP2.isEmpty())<< ")\n";
+
+		outfile.close();
+  	}
 }
