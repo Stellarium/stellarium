@@ -125,7 +125,7 @@ public:
 	int getUpdateFrequencyHours() { return m_updateFrequencyHours; }
 
 	//! Enable/disable catalog updates from the internet.
-	bool getEnableUpdates() { return m_enableUpdates; }
+	bool getEnableAutoUpdates() { return m_enableAutoUpdates; }
 
 	//! Set the URL for downloading the meteor showers catalog.
 	void setUrl(const QString& url);
@@ -189,8 +189,8 @@ public slots:
 	//! Set the update frequency in hours.
 	void setUpdateFrequencyHours(const int& hours);
 
-	//! Enable/disable catalog updates from the internet.
-	void setEnableUpdates(const bool& b);
+	//! Enable/disable automatic catalog updates from the internet.
+	void setEnableAutoUpdates(const bool& b);
 
 	//! Download the Meteor Showers catalog from the Internet.
 	void updateCatalog();
@@ -234,7 +234,7 @@ private:
 	StelTextureSP m_radiantTexture; //! Radiant texture
 
 	bool m_isUpdating;
-	bool m_enableUpdates;
+	bool m_enableAutoUpdates;
 	int m_updateFrequencyHours;
 	QString m_url;
 	QDateTime m_lastUpdate;
