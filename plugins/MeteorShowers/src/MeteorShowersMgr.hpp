@@ -55,6 +55,14 @@ class MeteorShowersMgr : public StelObjectModule
 	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels)
 
 public:
+	//! @enum DownloadStatus
+	enum DownloadStatus {
+		OUTDATED,
+		UPDATING,
+		UPDATED,
+		ERROR
+	};
+
 	//! Constructor.
 	MeteorShowersMgr();
 
@@ -127,11 +135,12 @@ public:
 	void setLastUpdate(const QDateTime& datetime);
 	QDateTime getLastUpdate() { return m_lastUpdate; }
 
+	//! Set the status of the last update
+	void setStatusOfLastUpdate(const int &downloadStatus);
+	DownloadStatus getStatusOfLastUpdate() { return m_statusOfLastUpdate; }
+
 	//! Gets the date of the next update.
 	QDateTime getNextUpdate();
-
-	//!
-	bool isUpdating() { return m_isUpdating; }
 
 	//
 	// Methods defined in the StelModule class
@@ -156,8 +165,7 @@ public:
 	virtual QString getName() const { return QString();}
 
 signals:
-	void updated();
-	void failedToUpdate();
+	void downloadStatusChanged(DownloadStatus);
 
 public slots:
 	//! Enable the meteor showers plugin at Stellarium startup.
@@ -230,6 +238,7 @@ private:
 	int m_updateFrequencyHours;
 	QString m_url;
 	QDateTime m_lastUpdate;
+	DownloadStatus m_statusOfLastUpdate;
 	QNetworkAccessManager* m_downloadMgr;
 	class StelProgressController* m_progressBar;
 
