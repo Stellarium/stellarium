@@ -47,9 +47,9 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableLabels(true)
 	, m_enableMarker(true)
 	, m_messageTimer(NULL)
-	, m_isUpdating(false)
 	, m_enableUpdates(true)
 	, m_updateFrequencyHours(0)
+	, m_statusOfLastUpdate(OUTDATED)
 	, m_downloadMgr(NULL)
 	, m_progressBar(NULL)
 {
@@ -179,6 +179,7 @@ void MeteorShowersMgr::loadConfig()
 	setEnableUpdates(m_conf->value(MS_CONFIG_PREFIX + "/updates_enabled", true).toBool());
 	setUrl(m_conf->value(MS_CONFIG_PREFIX + "/url", "http://stellarium.org/json/showers.json").toString());
 	setLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update", "2015-07-01T00:00:00").toDateTime());
+	setStatusOfLastUpdate(m_conf->value(MS_CONFIG_PREFIX + "/last_update_status", 0).toInt());
 }
 
 void MeteorShowersMgr::loadTextures()
@@ -314,14 +315,14 @@ void MeteorShowersMgr::checkForUpdates()
 
 void MeteorShowersMgr::updateCatalog()
 {
-	if (m_isUpdating)
+	if (m_statusOfLastUpdate == UPDATING)
 	{
 		qWarning() << "MeteorShowersMgr: The catalog is being updated already!";
 		return;
 	}
 
 	qDebug() << "MeteorShowersMgr: Starting to update the catalog...";
-	m_isUpdating = true;
+	setStatusOfLastUpdate(UPDATING);
 
 	setLastUpdate(QDateTime::currentDateTime());
 
@@ -349,8 +350,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 	{
 		qWarning() << "MeteorShowersMgr: Failed to download!" << reply->url();
 		qWarning() << "MeteorShowersMgr: Error " << reply->errorString();
-		emit(failedToUpdate());
-		m_isUpdating = false;
+		setStatusOfLastUpdate(ERROR);
 		return;
 	}
 
@@ -360,8 +360,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 	if (!newCatalog.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
 		qWarning() << "MeteorShowersMgr: Cannot write the downloaded catalog!";
-		emit(failedToUpdate());
-		m_isUpdating = false;
+		setStatusOfLastUpdate(ERROR);
 		return;
 	}
 
@@ -370,8 +369,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 
 	if (!loadCatalog(tempPath))
 	{
-		emit(failedToUpdate());
-		m_isUpdating = false;
+		setStatusOfLastUpdate(ERROR);
 		return;
 	}
 
@@ -379,8 +377,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 	newCatalog.rename(tempPath.remove("_new.json"));
 
 	qDebug() << "MeteorShowersMgr: The catalog was updated!";
-	m_isUpdating = false;
-	emit(updated());
+	setStatusOfLastUpdate(UPDATED);
 }
 
 void MeteorShowersMgr::setActiveRadiantOnly(const bool& b)
@@ -469,8 +466,14 @@ void MeteorShowersMgr::setUrl(const QString& url)
 void MeteorShowersMgr::setLastUpdate(const QDateTime &datetime)
 {
 	m_lastUpdate = datetime;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/last_update",
-			 m_lastUpdate.toString(Qt::ISODate));
+	m_conf->setValue(MS_CONFIG_PREFIX + "/last_update", m_lastUpdate.toString(Qt::ISODate));
+}
+
+void MeteorShowersMgr::setStatusOfLastUpdate(const int &downloadStatus)
+{
+	m_statusOfLastUpdate = (DownloadStatus) downloadStatus;
+	m_conf->setValue(MS_CONFIG_PREFIX + "/last_update_status", downloadStatus);
+	emit(downloadStatusChanged(m_statusOfLastUpdate));
 }
 
 QDateTime MeteorShowersMgr::getNextUpdate()
