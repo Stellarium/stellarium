@@ -68,14 +68,14 @@ details of the implementation encapsulated.
 #define TRUE 1
 #define FALSE 0
 
-double DLL_FUNC jpl_get_double( const void *ephem, const int value)
+double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 {
-   return( *(double *)( (char *)ephem + value));
+   return(*(double *)( (char *)ephem + value));
 }
 
-long DLL_FUNC jpl_get_long( const void *ephem, const int value)
+long DLL_FUNC jpl_get_long(const void *ephem, const int value)
 {
-   return( *(int32_t *)( (char *)ephem + value));
+   return(*(int32_t *)( (char *)ephem + value));
 }
 
 
@@ -131,29 +131,29 @@ long DLL_FUNC jpl_get_long( const void *ephem, const int value)
 int DLL_FUNC jpl_pleph( void *ephem, const double et, const int ntarg,
                       const int ncent, double rrd[], const int calc_velocity)
 {
-  struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-  double pv[13][6];/* pv is the position/velocity array
+    struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+    double pv[13][6];/* pv is the position/velocity array
                              NUMBERED FROM ZERO: 0=Mercury,1=Venus,...
                              8=Pluto,9=Moon,10=Sun,11=SSBary,12=EMBary
                              First 10 elements (0-9) are affected by
                              jpl_state(), all are adjusted here.         */
 
 
-  int rval = 0;
-  const int list_val = (calc_velocity ? 2 : 1);
-  unsigned i;
-  int list[14];    /* list is a vector denoting, for which "body"
+    int rval = 0;
+    const int list_val = (calc_velocity ? 2 : 1);
+    unsigned i;
+    int list[14];    /* list is a vector denoting, for which "body"
                             ephemeris values should be calculated by
                             jpl_state():  0=Mercury,1=Venus,2=EMBary,...,
                             8=Pluto,  9=geocentric Moon, 10=nutations in
                             long. & obliq.  11= lunar librations;
                             12 = TT-TDB, 13=lunar mantle omegas */
 
-   for( i = 0; i < 6; ++i) rrd[i] = 0.0;
+    for(i = 0; i < 6; ++i) rrd[i] = 0.0;
 
-   if( ntarg == ncent) return( 0);
+    if(ntarg == ncent) return( 0);
 
-   for( i = 0; i < sizeof( list) / sizeof( list[0]); i++)
+    for(i = 0; i < sizeof( list) / sizeof( list[0]); i++)
       list[i] = 0;
 
          /* Because of the whacko indexing in JPL ephemerides,  we need */
@@ -164,66 +164,67 @@ int DLL_FUNC jpl_pleph( void *ephem, const double et, const int ntarg,
          /*  16          13          12      Lunar mantle angular vel */
          /*  17          14          13      TT - TDB */
 
-   for( i = 0; i < 4; i++)
+    for( i = 0; i < 4; i++)
       if( ntarg == (int)i + 14)
-         {
-         if( eph->ipt[i + 11][1] > 0) /* quantity is in ephemeris */
-            {
-            list[i + 10] = list_val;
-            rval = jpl_state( ephem, et, list, pv, rrd, 0);
-            }
-         else          /*  quantity doesn't exist in the ephemeris file  */
-            rval = JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS;
-         return( rval);
-         }
+      {
+        if(eph->ipt[i + 11][1] > 0) /* quantity is in ephemeris */
+        {
+          list[i + 10] = list_val;
+          rval = jpl_state( ephem, et, list, pv, rrd, 0);
+        }
+        else          /*  quantity doesn't exist in the ephemeris file  */
+          rval = JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS;
+      
+        return( rval);
+      }
 
-   if( ntarg > 13 || ncent > 13 || ntarg < 1 || ncent < 1)
+    if( ntarg > 13 || ncent > 13 || ntarg < 1 || ncent < 1)
       return( JPL_EPH_INVALID_INDEX);
 
 /*  force barycentric output by 'state'     */
 
 /*  set up proper entries in 'list' array for state call     */
 
-   for( i = 0; i < 2; i++) /* list[] IS NUMBERED FROM ZERO ! */
-      {
+    for( i = 0; i < 2; i++) /* list[] IS NUMBERED FROM ZERO ! */
+    {
       const unsigned k = (i ? ncent : ntarg) - 1;
 
       if( k <= 9) list[k] = list_val;   /* Major planets */
       if( k == 9) list[2] = list_val;   /* for moon,  earth state is needed */
       if( k == 2) list[9] = list_val;   /* for earth,  moon state is needed */
       if( k == 12) list[2] = list_val;  /* EMBary state additionally */
-      }
+    }
 
 /*   make call to state   */
 
-   rval = jpl_state( eph, et, list, pv, rrd, 1);
-   /* Solar System barycentric Sun state goes to pv[10][] */
-   if( ntarg == 11 || ncent == 11)
+    rval = jpl_state( eph, et, list, pv, rrd, 1);
+    /* Solar System barycentric Sun state goes to pv[10][] */
+    if(ntarg == 11 || ncent == 11)
       for( i = 0; i < 6; i++)
-         pv[10][i] = eph->pvsun[i];
+        pv[10][i] = eph->pvsun[i];
 
-   /* Solar System Barycenter coordinates & velocities equal to zero */
-   if( ntarg == 12 || ncent == 12)
+    /* Solar System Barycenter coordinates & velocities equal to zero */
+    if(ntarg == 12 || ncent == 12)
       for( i = 0; i < 6; i++)
-         pv[11][i] = 0.0;
+        pv[11][i] = 0.0;
 
-   /* Solar System barycentric EMBary state:  */
-   if( ntarg == 13 || ncent == 13)
+    /* Solar System barycentric EMBary state:  */
+    if(ntarg == 13 || ncent == 13)
       for( i = 0; i < 6; i++)
-         pv[12][i] = pv[2][i];
+        pv[12][i] = pv[2][i];
 
    /* if moon from earth or earth from moon ..... */
-   if( (ntarg*ncent) == 30 && (ntarg+ncent) == 13)
+    if((ntarg*ncent) == 30 && (ntarg+ncent) == 13)
       for( i = 0; i < 6; ++i) pv[2][i]=0.0;
-   else
-      {
-      if( list[2])           /* calculate earth state from EMBary */
-         for( i = 0; i < list[2] * 3u; ++i)
-            pv[2][i] -= pv[9][i]/(1.0+eph->emrat);
+    else
+    {
+      if(list[2])           /* calculate earth state from EMBary */
+        for( i = 0; i < list[2] * 3u; ++i)
+          pv[2][i] -= pv[9][i]/(1.0+eph->emrat);
 
       if(list[9]) /* calculate Solar System barycentric moon state */
-         for( i = 0; i < list[9] * 3u; ++i)
-            pv[9][i] += pv[2][i];
+        for( i = 0; i < list[9] * 3u; ++i)
+          pv[9][i] += pv[2][i];
       }
 
    for( i = 0; i < list_val * 3u; ++i)
@@ -312,34 +313,34 @@ static void interp( struct interpolation_info *iinfo,
         const double coef[], const double t[2], const unsigned ncf, const unsigned ncm,
         const unsigned na, const int velocity_flag, double posvel[])
 {
-   const double dna = (double)na;
-   const double temp = dna * t[0];
-   unsigned l = (unsigned)temp;
-   double vfac, unused_temp1;
-   double tc = 2.0 * modf( temp, &unused_temp1) - 1.0;
-   unsigned i, j;
+    const double dna = (double)na;
+    const double temp = dna * t[0];
+    unsigned l = (unsigned)temp;
+    double vfac, unused_temp1;
+    double tc = 2.0 * modf( temp, &unused_temp1) - 1.0;
+    unsigned i, j;
 
-   assert( ncf < MAX_CHEBY);
-   if( l == na)
+    assert( ncf < MAX_CHEBY);
+    if(l == na)
       {
       l--;
       tc = 1.;
       }
-   assert( tc >= -1.);
-   assert( tc <=  1.);
+    assert( tc >= -1.);
+    assert( tc <=  1.);
 
 /*  check to see whether chebyshev time has changed,  and compute new
     polynomial values if it has.
     (the element iinfo->posn_coeff[1] is the value of t1[tc] and hence
     contains the value of tc on the previous call.)     */
 
-   if( tc != iinfo->posn_coeff[1])
-      {
+    if(tc != iinfo->posn_coeff[1])
+    {
       iinfo->n_posn_avail = 2;
       iinfo->n_vel_avail = 2;
       iinfo->posn_coeff[1] = tc;
       iinfo->twot = tc+tc;
-      }
+    }
 
 /*  be sure that at least 'ncf' polynomials have been evaluated and are
     stored in the array 'iinfo->posn_coeff'.  Note that we start out with
@@ -348,19 +349,19 @@ static void interp( struct interpolation_info *iinfo,
     because you need the first two coeffs of those series to start the
     Chebyshev recurrence;  see the comments above this function.   */
 
-   if( iinfo->n_posn_avail < ncf)
-      {
+    if(iinfo->n_posn_avail < ncf)
+    {
       double *pc_ptr = iinfo->posn_coeff + iinfo->n_posn_avail;
 
       for( i=ncf - iinfo->n_posn_avail; i; i--, pc_ptr++)
          *pc_ptr = iinfo->twot * pc_ptr[-1] - pc_ptr[-2];
       iinfo->n_posn_avail=ncf;
-      }
+    }
 
 /*  interpolate to get position for each component  */
 
-   for( i = 0; i < ncm; ++i)        /* ncm is a number of coordinates */
-      {
+    for(i = 0; i < ncm; ++i)        /* ncm is a number of coordinates */
+    {
       const double *coeff_ptr = coef + ncf * (i + l * ncm + 1);
       const double *pc_ptr = iinfo->posn_coeff + ncf;
 
@@ -368,64 +369,64 @@ static void interp( struct interpolation_info *iinfo,
       for( j = ncf; j; j--)
          *posvel += (*--pc_ptr) * (*--coeff_ptr);
       posvel++;
-      }
+    }
 
-   if( velocity_flag <= 1) return;
+   if(velocity_flag <= 1) return;
 
 /*  if velocity interpolation is wanted, be sure enough
     derivative polynomials have been generated and stored.    */
 
-   if( iinfo->n_vel_avail < ncf)
-      {
+    if(iinfo->n_vel_avail < ncf)
+    {
       double *vc_ptr = iinfo->vel_coeff + iinfo->n_vel_avail;
       const double *pc_ptr = iinfo->posn_coeff + iinfo->n_vel_avail - 1;
 
       for( i = ncf - iinfo->n_vel_avail; i; i--, vc_ptr++, pc_ptr++)
          *vc_ptr = iinfo->twot * vc_ptr[-1] + *pc_ptr + *pc_ptr - vc_ptr[-2];
       iinfo->n_vel_avail = ncf;
-      }
+    }
 
 /*  interpolate to get velocity for each component    */
 
-   vfac = (dna + dna) / t[1];
-   for( i = 0; i < ncm; ++i)
-      {
+    vfac = (dna + dna) / t[1];
+    for( i = 0; i < ncm; ++i)
+    {
       double tval = 0.;
       const double *coeff_ptr = coef + ncf * (i + l * ncm + 1);
       const double *vc_ptr = iinfo->vel_coeff + ncf;
 
       for( j = ncf - 1; j; j--)
-         tval += (*--vc_ptr) * (*--coeff_ptr);
+        tval += (*--vc_ptr) * (*--coeff_ptr);
       *posvel++ = tval * vfac;
-      }
+    }
 
             /* Accelerations are rarely computed -- at present,  only */
             /* for pvsun -- so we don't get so tricky in optimizing.  */
             /* The accel_coeffs (the second derivative of the Chebyshev */
             /* polynomials) are not stored for repeated use,  for example. */
-   if( velocity_flag == 3)
-      {
+    if(velocity_flag == 3)
+    {
       double accel_coeffs[MAX_CHEBY];
 
       accel_coeffs[0] = accel_coeffs[1] = 0.;
-      for( i = 2; i < ncf; i++)              /* recurrence for T"(x) */
-         accel_coeffs[i] = 4. * iinfo->vel_coeff[i - 1]
+      for(i = 2; i < ncf; i++)              /* recurrence for T"(x) */
+        accel_coeffs[i] = 4. * iinfo->vel_coeff[i - 1]
                         + iinfo->twot * accel_coeffs[i - 1]
                         - accel_coeffs[i - 2];
 
-      for( i = 0; i < ncm; ++i)        /* ncm is a number of coordinates */
-         {
-         double tval = 0.;
-         const double *coeff_ptr = coef + ncf * (i + l * ncm + 1);
-         const double *ac_ptr = accel_coeffs + ncf;
+      for(i = 0; i < ncm; ++i)        /* ncm is a number of coordinates */
+      {
+        double tval = 0.;
+        const double *coeff_ptr = coef + ncf * (i + l * ncm + 1);
+        const double *ac_ptr = accel_coeffs + ncf;
 
-         for( j = ncf; j; j--)
-            tval += (*--ac_ptr) * (*--coeff_ptr);
-         *posvel++ = tval * vfac * vfac;
-         }
+        for( j = ncf; j; j--)
+          tval += (*--ac_ptr) * (*--coeff_ptr);
+        *posvel++ = tval * vfac * vfac;
       }
+    }
 
-   return;
+    return;
 }
 
 /* swap_32_bit_val() and swap_64_bit_val() are used when reading a binary
@@ -438,24 +439,24 @@ value read from the ephemeris must be byte-swapped by these two functions. */
 
 static void swap_32_bit_val( void *ptr)
 {
-   char *tptr = (char *)ptr, tchar;
+    char *tptr = (char *)ptr, tchar;
 
-   SWAP_MACRO( tptr[0], tptr[3], tchar);
-   SWAP_MACRO( tptr[1], tptr[2], tchar);
+    SWAP_MACRO( tptr[0], tptr[3], tchar);
+    SWAP_MACRO( tptr[1], tptr[2], tchar);
 }
 
 static void swap_64_bit_val( void *ptr, long count)
 {
-   char *tptr = (char *)ptr, tchar;
+    char *tptr = (char *)ptr, tchar;
 
-   while( count--)
-      {
+    while( count--)
+    {
       SWAP_MACRO( tptr[0], tptr[7], tchar);
       SWAP_MACRO( tptr[1], tptr[6], tchar);
       SWAP_MACRO( tptr[2], tptr[5], tchar);
       SWAP_MACRO( tptr[3], tptr[4], tchar);
       tptr += 8;
-      }
+    }
 }
 
 /* Most ephemeris quantities have a dimension of three.  Planet positions
@@ -465,15 +466,15 @@ two angles.   */
 
 static int dimension( const int idx)
 {
-   int rval;
+    int rval;
 
-   if( idx == 11)             /* Nutations */
+    if( idx == 11)             /* Nutations */
       rval = 2;
-   else if( idx == 14)        /* TDT - TT */
+    else if( idx == 14)        /* TDT - TT */
       rval = 1;
-   else                       /* planets, lunar mantle angles, librations */
+    else                       /* planets, lunar mantle angles, librations */
       rval = 3;
-   return( rval);
+    return( rval);
 }
 
 /*****************************************************************************
@@ -560,51 +561,52 @@ static int dimension( const int idx)
 int DLL_FUNC jpl_state( void *ephem, const double et, const int list[14],
                           double pv[][6], double nut[4], const int bary)
 {
-   struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-   unsigned i, j, n_intervals;
-   uint32_t nr;
-   double *buf = eph->cache;
-   double t[2];
-   const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
-   bool recompute_pvsun;
-   const double aufac = 1.0 / eph->au;
+    struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+    unsigned i, j, n_intervals;
+    uint32_t nr;
+    double *buf = eph->cache;
+    double t[2];
+    const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
+    bool recompute_pvsun;
+    const double aufac = 1.0 / eph->au;
 
 /*   error return for epoch out of range  */
-   if( et < eph->ephem_start || et > eph->ephem_end)
+    if( et < eph->ephem_start || et > eph->ephem_end)
       return( JPL_EPH_OUTSIDE_RANGE);
 
 /*   calculate record # and relative time in interval   */
 
-   nr = (uint32_t)block_loc;
-   t[0] = block_loc - (double)nr;
-   if( !t[0] && nr)
-      {
+    nr = (uint32_t)block_loc;
+    t[0] = block_loc - (double)nr;
+    if(!t[0] && nr)
+    {
       t[0] = 1.;
       nr--;
-      }
+    }
 
 /*   read correct record if not in core (static vector buf[])   */
 
-   if( nr != eph->curr_cache_loc)
-      {
+    if(nr != eph->curr_cache_loc)
+    {
       eph->curr_cache_loc = nr;
                   /* Read two blocks ahead to account for header: */
-      if( fseek( eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
-         return( JPL_EPH_FSEEK_ERROR);
-      if( fread( buf, sizeof( double), (size_t)eph->ncoeff, eph->ifile)
+      if(fseek( eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
+        return( JPL_EPH_FSEEK_ERROR);
+      if(fread( buf, sizeof( double), (size_t)eph->ncoeff, eph->ifile)
                                != (size_t)eph->ncoeff)
-         return( JPL_EPH_READ_ERROR);
-      if( eph->swap_bytes)
-         swap_64_bit_val( buf, eph->ncoeff);
-      }
-   t[1] = eph->ephem_step;
+        return( JPL_EPH_READ_ERROR);
+      if(eph->swap_bytes)
+        swap_64_bit_val( buf, eph->ncoeff);
+    }
 
-   if( eph->pvsun_t != et)   /* If several calls are made for the same et, */
-      {                      /* don't recompute pvsun each time... only on */
+    t[1] = eph->ephem_step;
+
+    if(eph->pvsun_t != et)   /* If several calls are made for the same et, */
+    {                      /* don't recompute pvsun each time... only on */
       recompute_pvsun = true;   /* the first run through.                     */
       eph->pvsun_t = et;
-      }
-   else
+    }
+    else
       recompute_pvsun = false;
 
           /* Here, i loops through the "traditional" 14 listed items -- 10
@@ -614,32 +616,32 @@ int DLL_FUNC jpl_state( void *ephem, const double et, const int list[14],
           from list[];  the output goes to pvsun rather than the pv array;
           and three quantities (position,  velocity,  acceleration) are
           computed (nobody else gets accelerations at present.)  */
-   for( n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
+    for(n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
       for( i = 0; i < 15; i++)
-         {
-         unsigned quantities;
-         uint32_t *iptr = &eph->ipt[i + 1][0];
+      {
+          unsigned quantities;
+          uint32_t *iptr = &eph->ipt[i + 1][0];
 
-         if( i == 14)
-            {
+          if( i == 14)
+          {
             quantities = (recompute_pvsun ? 3 : 0);
             iptr = &eph->ipt[10][0];
-            }
-         else
-            {
+          }
+          else
+          {
             quantities = list[i];
             iptr = &eph->ipt[i < 10 ? i : i + 1][0];
-            }
-         if( n_intervals == iptr[2] && quantities)
-            {
+          }
+          if(n_intervals == iptr[2] && quantities)
+          {
             double *dest = ((i == 10) ? eph->pvsun : pv[i]);
 
             if( i < 10)
-               dest = pv[i];
+              dest = pv[i];
             else if( i == 14)
-               dest = eph->pvsun;
+              dest = eph->pvsun;
             else
-               dest = nut;
+              dest = nut;
             interp( &eph->iinfo, &buf[iptr[0]-1], t, (int)iptr[1],
                                     dimension( i + 1),
                                     n_intervals, quantities, dest);
@@ -648,13 +650,13 @@ int DLL_FUNC jpl_state( void *ephem, const double et, const int list[14],
                for( j = 0; j < quantities * 3; j++)
                   dest[j] *= aufac;
             }
-         }
-   if( !bary)                             /* gotta correct everybody for */
+        }
+    if(!bary)                             /* gotta correct everybody for */
       for( i = 0; i < 9; i++)            /* the solar system barycenter */
-         for( j = 0; j < (unsigned)list[i] * 3; j++)
-            pv[i][j] -= eph->pvsun[j];
+        for( j = 0; j < (unsigned)list[i] * 3; j++)
+          pv[i][j] -= eph->pvsun[j];
 
-   return( 0);
+    return(0);
 }
 
 static int init_err_code = JPL_INIT_NOT_CALLED;
@@ -694,30 +696,30 @@ int DLL_FUNC jpl_init_error_code( void)
 void * DLL_FUNC jpl_init_ephemeris( const char *ephemeris_filename,
                           char nam[][6], double *val)
 {
-   unsigned i, j;
-   long de_version;
-   char title[84];
-   FILE *ifile = fopen( ephemeris_filename, "rb");
-   struct jpl_eph_data *rval;
-   struct jpl_eph_data temp_data;
+    unsigned i, j;
+    long de_version;
+    char title[84];
+    FILE *ifile = fopen( ephemeris_filename, "rb");
+    struct jpl_eph_data *rval;
+    struct jpl_eph_data temp_data;
 
-   init_err_code = 0;
-   temp_data.ifile = ifile;
-   if( !ifile)
+    init_err_code = 0;
+    temp_data.ifile = ifile;
+    if( !ifile)
       init_err_code = JPL_INIT_FILE_NOT_FOUND;
-   else if( fread( title, 84, 1, ifile) != 1)
+    else if( fread( title, 84, 1, ifile) != 1)
       init_err_code = JPL_INIT_FREAD_FAILED;
-   else if( fseek( ifile, 2652L, SEEK_SET))
+    else if( fseek( ifile, 2652L, SEEK_SET))
       init_err_code = JPL_INIT_FSEEK_FAILED;
-   else if( fread( &temp_data, JPL_HEADER_SIZE, 1, ifile) != 1)
+    else if( fread( &temp_data, JPL_HEADER_SIZE, 1, ifile) != 1)
       init_err_code = JPL_INIT_FREAD2_FAILED;
 
-   if( init_err_code)
-      {
+    if( init_err_code)
+    {
       if( ifile)
          fclose( ifile);
       return( NULL);
-      }
+    }
 
    de_version = atoi( title + 26);
 
