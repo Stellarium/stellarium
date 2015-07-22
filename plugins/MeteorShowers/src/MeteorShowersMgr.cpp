@@ -102,6 +102,7 @@ void MeteorShowersMgr::init()
 	updateTimer->setInterval(300000);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
 	updateTimer->start();
+	checkForUpdates();
 
 	// enable at startup?
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
