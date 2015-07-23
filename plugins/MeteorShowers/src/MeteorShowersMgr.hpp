@@ -205,6 +205,7 @@ public slots:
 private slots:
 	void checkForUpdates();
 	void updateFinished(QNetworkReply* reply);
+	void locationChanged(StelLocation location);
 
 private:
 	MeteorShowers* m_meteorShowers;
@@ -215,6 +216,7 @@ private:
 	QSettings* m_conf;
 	QString m_catalogPath;
 
+	bool m_onEarth;
 	bool m_enablePlugin;
 	bool m_activeRadiantOnly;
 	bool m_enableAtStartup;
