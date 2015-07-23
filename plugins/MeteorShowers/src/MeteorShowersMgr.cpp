@@ -40,6 +40,7 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_configDialog(NULL)
 	, m_toolbarEnableButton(NULL)
 	, m_conf(StelApp::getInstance().getSettings())
+	, m_onEarth(false)
 	, m_enablePlugin(false)
 	, m_activeRadiantOnly(false)
 	, m_enableAtStartup(true)
@@ -103,6 +104,12 @@ void MeteorShowersMgr::init()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdates()));
 	updateTimer->start();
 	checkForUpdates();
+
+	// always check if we are on Earth
+	StelCore* core = StelApp::getInstance().getCore();
+	m_onEarth = core->getCurrentPlanet().data()->getEnglishName() == "Earth";
+	connect(core, SIGNAL(locationChanged(StelLocation)),
+		this, SLOT(locationChanged(StelLocation)));
 
 	// enable at startup?
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
@@ -267,7 +274,7 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 
 void MeteorShowersMgr::update(double deltaTime)
 {
-	if (!m_enablePlugin)
+	if (!m_enablePlugin || !m_onEarth)
 	{
 		return;
 	}
@@ -300,7 +307,7 @@ void MeteorShowersMgr::update(double deltaTime)
 
 void MeteorShowersMgr::draw(StelCore* core)
 {
-	if (m_enablePlugin)
+	if (m_enablePlugin && m_onEarth)
 	{
 		m_meteorShowers->draw(core);
 	}
@@ -497,6 +504,11 @@ void MeteorShowersMgr::messageTimeout()
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
+}
+
+void MeteorShowersMgr::locationChanged(StelLocation location)
+{
+	m_onEarth = location.planetName == "Earth";
 }
 
 void MeteorShowersMgr::translations()
