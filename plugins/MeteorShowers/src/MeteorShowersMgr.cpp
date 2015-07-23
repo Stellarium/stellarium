@@ -210,6 +210,11 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 		 << QDir::toNativeSeparators(jsonPath);
 
 	QFile jsonFile(jsonPath);
+	if (!jsonFile.exists())
+	{
+		restoreDefaultCatalog(jsonPath);
+	}
+
 	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "MeteorShowersMgr: Cannot to open the catalog file!";
@@ -247,7 +252,8 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 	qDebug() << "MeteorShowersMgr: Trying to restore the default catalog to"
 		 << QDir::toNativeSeparators(destination);
 
-	if (!QFile(destination).remove())
+	QFile d(destination);
+	if (d.exists() && !d.remove())
 	{
 		qWarning() << "MeteorShowersMgr: Cannot remove the current catalog file!";
 		return false;
