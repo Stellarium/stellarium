@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-04-05 13:40+0000\n"
+"PO-Revision-Date: 2015-07-22 22:07+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-09 05:16+0000\n"
-"X-Generator: Launchpad (build 17608)\n"
+"X-Launchpad-Export-Date: 2015-07-23 05:20+0000\n"
+"X-Generator: Launchpad (build 17628)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:389
@@ -366,17 +366,17 @@ msgstr "molt brillant"
 #: src/core/modules/Nebula.cpp:858
 msgctxt "H-α emission region brightness"
 msgid "bright"
-msgstr ""
+msgstr "brillantor"
 
 #: src/core/modules/Nebula.cpp:861
 msgctxt "H-α emission region brightness"
 msgid "medium"
-msgstr ""
+msgstr "mitjana"
 
 #: src/core/modules/Nebula.cpp:864
 msgctxt "H-α emission region brightness"
 msgid "faint"
-msgstr ""
+msgstr "feble"
 
 #: src/core/modules/NebulaMgr.cpp:139
 msgid "Deep-sky objects"
@@ -689,7 +689,7 @@ msgstr "Afegeix 1 dia solar"
 
 #: src/core/StelCore.cpp:202
 msgid "Add 7 solar days"
-msgstr ""
+msgstr "Afegeix 7 dies solars"
 
 #: src/core/StelCore.cpp:203
 msgid "Subtract 1 solar hour"
@@ -701,7 +701,7 @@ msgstr "Resta 1 dia solar"
 
 #: src/core/StelCore.cpp:205
 msgid "Subtract 7 solar days"
-msgstr ""
+msgstr "Resta 7 dies solars"
 
 #: src/core/StelCore.cpp:206
 msgid "Add 1 sidereal day"
@@ -1254,7 +1254,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:459
 msgid "Sinusoidal"
-msgstr ""
+msgstr "Sinusoïdal"
 
 #: src/core/StelProjectorClasses.cpp:464
 msgid ""
@@ -1262,6 +1262,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"La projecció sinusoïdal és un <i>projecció cartogràfica pseudocilíndrica "
+"d'igual àrea </i>, de vegades anomenada de Sanson-Flamsteed o  projecció "
+"d'igual àrea de Mercator."
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -1750,7 +1753,7 @@ msgstr "Comprobador: %1"
 
 #: src/gui/HelpDialog.cpp:306
 msgid "Former Developers"
-msgstr ""
+msgstr "Primers Desenvolupadors"
 
 #: src/gui/HelpDialog.cpp:307
 msgid ""
@@ -1782,6 +1785,8 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Diverses persones han fet contribucions al projecte i el seu treball ha fet "
+"millor Stellarium (ordenat alfabèticament): %1."
 
 #: src/gui/StelGui.cpp:176
 msgid "Windows"
@@ -2112,12 +2117,12 @@ msgstr "Galàctiques"
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Eclíptica"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Eclíptic (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -2423,17 +2428,17 @@ msgstr "Clústers associat amb nebulositat"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "HII regions"
-msgstr ""
+msgstr "Regions HII"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "Nebuloses de reflexió"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "H-α emission regions"
-msgstr ""
+msgstr "Regions d'emissions de H-α"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:105
@@ -2448,42 +2453,42 @@ msgstr "Catàleg Caldwell"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Barnard Catalogue"
-msgstr ""
+msgstr "Catàleg Barnard"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Sharpless Catalogue"
-msgstr ""
+msgstr "Catàleg Sharpless"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Van den Bergh Catalogue"
-msgstr ""
+msgstr "Catàleg Van den Bergh"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
-msgstr ""
+msgstr "El catàleg de Rodgers, Campbell i Whiteoak"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Collinder Catalogue"
-msgstr ""
+msgstr "Catàleg Collinder"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Melotte Catalogue"
-msgstr ""
+msgstr "Catàleg Melotte"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:124
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Estels dobles interessants"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:126
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Estels variables interessants"
 
 #: src/translations.h:130
 msgid "Arabic"
@@ -2564,7 +2569,7 @@ msgstr "Siberià"
 
 #: src/translations.h:150
 msgid "Tukano"
-msgstr ""
+msgstr "Tukano"
 
 #: src/translations.h:151
 msgid "Tupi-Guarani"
@@ -2655,12 +2660,12 @@ msgstr "Horitzó zero"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:191
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Viena Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
 msgid "Testscene"
-msgstr ""
+msgstr "Testscene"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:198
@@ -4497,11 +4502,11 @@ msgstr "Brillantor dels dibuixos de les constel·lacions"
 
 #: src/ui_viewDialog.h:1320
 msgid "Thickness of lines:"
-msgstr ""
+msgstr "Gruix de les línies:"
 
 #: src/ui_viewDialog.h:1322
 msgid "Value in pixels"
-msgstr ""
+msgstr "Valor en píxels"
 
 #: src/ui_viewDialog.h:1324
 msgid "Celestial Sphere"
@@ -4594,7 +4599,7 @@ msgstr "del paisatge, si s'especifica"
 
 #: src/ui_viewDialog.h:1372
 msgid "Show landscape labels"
-msgstr ""
+msgstr "Mostra etiquetes de paisatges"
 
 #: src/ui_viewDialog.h:1373
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -6166,12 +6171,12 @@ msgstr "gps"
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
 #: plugins/Satellites/src/Satellites.cpp:1732
 msgid "glonass"
-msgstr ""
+msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
 #: plugins/Satellites/src/Satellites.cpp:1734
 msgid "galileo"
-msgstr ""
+msgstr "galileu"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1736
@@ -6181,17 +6186,17 @@ msgstr "iridium"
 #. TRANSLATORS: Satellite group: Space stations
 #: plugins/Satellites/src/Satellites.cpp:1738
 msgid "stations"
-msgstr ""
+msgstr "estacions"
 
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1740
 msgid "education"
-msgstr ""
+msgstr "educació"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1742
 msgid "observatory"
-msgstr ""
+msgstr "observatoris"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1753
@@ -6206,7 +6211,7 @@ msgstr "La Estació Espacial Internacional"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1757
 msgid "China's first space station"
-msgstr ""
+msgstr "Primera estació espacial de la Xina"
 
 #: plugins/Satellites/src/Satellite.cpp:257
 #: plugins/Satellites/src/Satellite.cpp:261
@@ -6265,7 +6270,7 @@ msgstr "Velocitat TEME (km/s): %1"
 #: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "Angle de reflexió solar: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
@@ -6987,16 +6992,16 @@ msgstr "Seleccioneu un directori"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Ascensió Recta (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Declinació (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:257
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:398
 msgid "Select one"
-msgstr ""
+msgstr "Selecciona un"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
@@ -7246,15 +7251,15 @@ msgstr "Directori dels executables:"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:230
 msgid "Points"
-msgstr ""
+msgstr "Punts"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:237
 msgid "Add point"
-msgstr ""
+msgstr "Afegeix punt"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:238
 msgid "Remove selected"
-msgstr ""
+msgstr "Elimina seleccionades"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -7619,19 +7624,19 @@ msgstr "Consells de nebulosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Consells de galaxies"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Consells de  nebuloses brillants"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Consells de  nebuloses fosques"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Clusters hints"
-msgstr ""
+msgstr "Consells de cúmuls"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
@@ -10258,11 +10263,11 @@ msgstr "Activeu la visualització de les Pluges de Meteors en l'arrencada"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Show radiant marker"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Mostra marcador de radiant"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
 msgid "Show active radiants only"
@@ -10274,7 +10279,7 @@ msgstr "Mida de la font de les etiquetes (en píxels)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
 msgid "Set radiant color"
-msgstr ""
+msgstr "Establir color de radiant"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
 msgid "Active Radiant - Generic Data"
@@ -10286,7 +10291,7 @@ msgstr "Radiant Inactiu"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
 msgid "Inactive"
-msgstr ""
+msgstr "Inactiu"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
 msgid "Active Radiant - Real Data"
@@ -10451,50 +10456,57 @@ msgstr "Coordenada Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:166
 msgid "Loading model..."
-msgstr ""
+msgstr "Carregant model..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:181
 msgid "Transforming model..."
-msgstr ""
+msgstr "Model de transformació..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:193
 msgid "Loading ground..."
-msgstr ""
+msgstr "Caregant terra..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:204
 msgid "Transforming ground..."
-msgstr ""
+msgstr "Transformant terra..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Càlcul mapa de col·lisió..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Finalitzant la càrrega..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"Error de sombrejat Scenery3d, no es pot dibuixar. Comproveu la sortida de "
+"depuració per obtenir més informació."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2096
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"El seu maquinari no suporta cubemapping, si us plau, canvieu a la projecció "
+"'Perspectiva'!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
+"L'ombrejador de geometria no es compatible. Tornant a mode '6 textures'."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Tornant a  les  '6 Textures' a causa d'un error d'ANGLE"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Mapeig d'ombra no pot ser usat amb el seu maquinari. Comprovi  els fitxers "
+"de registres per detalls."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
