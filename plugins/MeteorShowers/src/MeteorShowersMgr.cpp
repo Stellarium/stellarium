@@ -244,6 +244,7 @@ void MeteorShowersMgr::restoreDefaultSettings()
 	m_conf->remove("");
 	m_conf->endGroup();
 	loadConfig();
+	restoreDefaultCatalog(m_catalogPath);
 	m_configDialog->init();
 }
 
