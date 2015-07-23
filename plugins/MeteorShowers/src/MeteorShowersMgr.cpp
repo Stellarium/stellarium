@@ -25,6 +25,7 @@
 #include "LabelMgr.hpp"
 #include "MSConfigDialog.hpp"
 #include "MeteorShowersMgr.hpp"
+#include "Planet.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
