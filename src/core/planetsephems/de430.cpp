@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include "de430.hpp"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
+#include "StelApp.hpp"
 #include "jpleph.h"
 
 #ifdef __cplusplus
@@ -44,6 +45,14 @@ static double tempXYZ[6];
 void InitDE430(const char* filepath)
 {
   ephem = jpl_init_ephemeris(filepath, nams, vals);
+  
+  if(jpl_init_error_code() != 0)
+  {
+    StelApp::getInstance().getCore()->setDe430Status(false);
+    qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
+  }
+
+  qDebug() << "Path: " << filepath;
 }
 
 void GetDe430Coor(double jd, int planet_id, double * xyz)

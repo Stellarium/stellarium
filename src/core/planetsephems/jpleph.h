@@ -108,3 +108,5 @@ int DLL_FUNC jpl_init_error_code( void);
 #define JPL_INIT_NOT_CALLED              -9
 
 #define jpl_get_pvsun( ephem) ((double *)((char *)ephem + 248))
+
+const char * jpl_init_error_message(void);

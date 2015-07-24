@@ -1822,6 +1822,8 @@ void StelCore::initEphemeridesFunctions()
 	QString ephemFilePath = StelFileMgr::findFile("ephem", 
 		StelFileMgr::Directory);
 	
+	qDebug() << "ephem Folder: " << !ephemFilePath.isEmpty();
+
 	if(!ephemFilePath.isEmpty())
 	{
 
@@ -1831,6 +1833,8 @@ void StelCore::initEphemeridesFunctions()
 	  	
 		setDe430Status(!de430FilePath.isEmpty());
 
+		qDebug() << "DE430: " << !de430FilePath.isEmpty();
+  		
   		if(de430Active)
   		{
   			EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
@@ -1843,6 +1847,9 @@ void StelCore::initEphemeridesFunctions()
 			StelFileMgr::File);
 
 	 	setDe431Status(!(de431FilePathP1.isEmpty() && de431FilePathP2.isEmpty()));
+
+	 	qDebug() << "DE431: " << !de431FilePathP1.isEmpty() << "+" 
+	 		<< !de431FilePathP2.isEmpty();
 	 	
 	 	if(de431Active)
 		{
