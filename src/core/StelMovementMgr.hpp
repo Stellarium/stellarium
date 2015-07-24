@@ -290,7 +290,7 @@ private:
 	double deltaFov,deltaAlt,deltaAz; // View movement
 
 	bool flagManualZoom;     // Define whether auto zoom can go further
-	float autoMoveDuration; // Duration of movement for the auto move to a selected objectin seconds
+	float autoMoveDuration; // Duration of movement for the auto move to a selected object in seconds
 
 	// Mouse control options
 	bool isDragging, hasDragged;
