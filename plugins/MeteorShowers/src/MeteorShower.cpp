@@ -140,11 +140,20 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 			a.zhr = g.zhr;
 			a.variable = g.variable;
 		}
+
 		int aux = a.year - genericYear;
 		a.start = a.start.isValid() ? a.start : g.start.addYears(aux);
 		a.finish = a.finish.isValid() ? a.finish : g.finish.addYears(aux);
 		a.peak = a.peak.isValid() ? a.peak : g.peak.addYears(aux);
 		m_activities.replace(i, a);
+
+		if (!a.start.isValid() || !a.finish.isValid() || !a.peak.isValid())
+		{
+			qWarning() << "MeteorShower: INVALID data for "
+				   << m_showerID << "Unable to read some dates!";
+			qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+			return;
+		}
 	}
 
 	if(map.contains("colors"))
