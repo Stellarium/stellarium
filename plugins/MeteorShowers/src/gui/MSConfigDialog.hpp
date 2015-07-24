@@ -20,16 +20,10 @@
 #ifndef _MSCONFIGDIALOG_HPP_
 #define _MSCONFIGDIALOG_HPP_
 
-#include <QColor>
-#include <QLabel>
-#include <QObject>
-#include <QTreeWidget>
-
 #include "MeteorShowers.hpp"
 #include "StelDialog.hpp"
 
 class Ui_MSConfigDialog;
-class MeteorShowers;
 
 //! @class MSConfigDialog
 //! Configuration window.

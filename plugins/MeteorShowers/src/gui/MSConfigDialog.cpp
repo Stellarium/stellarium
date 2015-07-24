@@ -18,27 +18,10 @@
 */
 
 #include <QColorDialog>
-#include <QDateTime>
-#include <QDebug>
-#include <QFileDialog>
-#include <QGraphicsColorizeEffect>
-#include <QMessageBox>
-#include <QTimer>
-#include <QUrl>
 
-#include "MeteorShowers.hpp"
 #include "MSConfigDialog.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelFileMgr.hpp"
 #include "StelGui.hpp"
-#include "StelMainView.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelStyle.hpp"
-#include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "ui_MSConfigDialog.h"
 
 MSConfigDialog::MSConfigDialog(MeteorShowersMgr* mgr)
