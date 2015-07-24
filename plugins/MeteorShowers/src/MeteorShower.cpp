@@ -42,9 +42,11 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	, m_radiantDelta(0)
 {
 	// return initialized if the mandatory fields are not present
-	if(!map.contains("showerID") || !map.contains("activity"))
+	if(!map.contains("showerID") || !map.contains("activity") || !map.contains("speed")
+		|| !map.contains("radiantAlpha") || !map.contains("radiantDelta"))
 	{
-		//TODO: check which are the mandatory fields and validate it here!
+		qWarning() << "MeteorShower: INVALID meteor shower!" << map.value("showerID").toString();
+		qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
 		return;
 	}
 
