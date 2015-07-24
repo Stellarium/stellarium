@@ -139,6 +139,8 @@ ecliptic_J2000_color                   = 0.7,0.2,0.2
 ecliptic_color                         = 0.9,0.6,0.2
 ecliptical_J2000_color                 = 0.4,0.1,0.1
 ecliptical_color                       = 0.6,0.3,0.1
+# default: same as ecliptic_color
+precession_circle_color                = 0.9,0.6,0.2
 equator_J2000_color                    = 0.2,0.2,0.6
 equator_color                          = 0.3,0.5,1.0
 equatorial_J2000_color                 = 0.1,0.1,0.5

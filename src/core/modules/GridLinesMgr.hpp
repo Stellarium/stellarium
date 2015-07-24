@@ -126,6 +126,15 @@ class GridLinesMgr : public StelModule
 			   WRITE setColorEclipticJ2000Line
 			   NOTIFY eclipticJ2000LineColorChanged)
 
+	Q_PROPERTY(bool precessionCirclesDisplayed
+			   READ getFlagPrecessionCircles
+			   WRITE setFlagPrecessionCircles
+			   NOTIFY precessionCirclesDisplayedChanged)
+	Q_PROPERTY(Vec3f precessionCirclesColor
+			   READ getColorPrecessionCircles
+			   WRITE setColorPrecessionCircles
+			   NOTIFY precessionCirclesColorChanged)
+
 	Q_PROPERTY(bool meridianLineDisplayed
 			   READ getFlagMeridianLine
 			   WRITE setFlagMeridianLine
@@ -333,6 +342,20 @@ public slots:
 	//! @endcode
 	void setColorEclipticLine(const Vec3f& newColor);
 
+	//! Setter for displaying precession circles.
+	void setFlagPrecessionCircles(const bool displayed);
+	//! Accessor for displaying precession circles.
+	bool getFlagPrecessionCircles(void) const;
+	//! Get the current color of the precession circles.
+	Vec3f getColorPrecessionCircles(void) const;
+	//! Set the color of the precession circles.
+	//! @param newColor The color of precession circles
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorPrecessionCircles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorPrecessionCircles(const Vec3f& newColor);
+
 	//! Setter for displaying Meridian Line.
 	void setFlagMeridianLine(const bool displayed);
 	//! Accessor for displaying Meridian Line.
@@ -415,6 +438,8 @@ signals:
 	void eclipticLineColorChanged(const Vec3f & newColor) const;
 	void eclipticJ2000LineDisplayedChanged(const bool displayed) const;
 	void eclipticJ2000LineColorChanged(const Vec3f & newColor) const;
+	void precessionCirclesDisplayedChanged(const bool displayed) const;
+	void precessionCirclesColorChanged(const Vec3f & newColor) const;
 	void meridianLineDisplayedChanged(const bool displayed) const;
 	void meridianLineColorChanged(const Vec3f & newColor) const;
 	void longitudeLineDisplayedChanged(const bool displayed) const;
@@ -444,6 +469,8 @@ private:
 	SkyLine * equatorJ2000Line;	// Celestial Equator of J2000 line
 	SkyLine * eclipticLine;		// Ecliptic line
 	SkyLine * eclipticJ2000Line;	// Ecliptic line of J2000
+	SkyLine * precessionCircleN;	// Northern precession circle
+	SkyLine * precessionCircleS;	// Southern precession circle
 	SkyLine * meridianLine;		// Meridian line
 	SkyLine * longitudeLine; 	// Opposition/conjunction longitude line
 	SkyLine * horizonLine;		// Horizon line

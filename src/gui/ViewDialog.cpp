@@ -281,6 +281,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox, "actionShow_Ecliptic_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridOfDateCheckBox, "actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox, "actionShow_Cardinal_Points");
+	connectCheckBox(ui->showPrecessionCirclesCheckBox, "actionShow_Precession_Circles");
 
 	// Constellations
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
