@@ -49,7 +49,7 @@ public:
 	//! @struct Activity
 	typedef struct
 	{
-		QString year;              //! The catalog year
+		int year;                  //! The catalog year (0 for generic)
 		int zhr;                   //! The ZHR on peak
 		QList<int> variable;       //! The ZHR range when it's variable
 		QDate start;               //! Initial date of activity

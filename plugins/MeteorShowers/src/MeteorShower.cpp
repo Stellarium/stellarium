@@ -63,13 +63,14 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_rAlphaPeak = m_radiantAlpha;
 	m_rDeltaPeak = m_radiantDelta;
 
+	int genericYear = 1000;
+
 	// build the activity list
 	QList<QVariant> activities = map.value("activity").toList();
 	foreach(const QVariant &ms, activities)
 	{
 		QVariantMap activityMap = ms.toMap();
 		Activity d;
-		d.year = activityMap.value("year").toString();
 		d.zhr = activityMap.value("zhr").toInt();
 
 		//
@@ -95,8 +96,8 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 		//
 		// 'start', 'finish' and 'peak' fields
 		//
-		// if it's generic, doesn't matter the year
-		QString year = d.year.toInt() > 0 ? d.year : "2000";
+		d.year = activityMap.value("year").toInt();
+		QString year = QString::number(d.year == 0 ? genericYear : d.year);
 
 		QString start = activityMap.value("start").toString();
 		start = start.isEmpty() ? "" : start + " " + year;
@@ -139,9 +140,10 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 			a.zhr = g.zhr;
 			a.variable = g.variable;
 		}
-		a.start = a.start.isValid() ? a.start : g.start;
-		a.finish = a.finish.isValid() ? a.finish : g.finish;
-		a.peak = a.peak.isValid() ? a.peak : g.peak;
+		int aux = a.year - genericYear;
+		a.start = a.start.isValid() ? a.start : g.start.addYears(aux);
+		a.finish = a.finish.isValid() ? a.finish : g.finish.addYears(aux);
+		a.peak = a.peak.isValid() ? a.peak : g.peak.addYears(aux);
 		m_activities.replace(i, a);
 	}
 
