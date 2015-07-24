@@ -29,6 +29,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "precession.h"
 
 #include <set>
 #include <QSettings>
@@ -70,6 +71,8 @@ public:
 		EQUATOR_OF_DATE,
 		ECLIPTIC_J2000,
 		ECLIPTIC_OF_DATE,
+		PRECESSIONCIRCLE_N,
+		PRECESSIONCIRCLE_S,
 		MERIDIAN,
 		HORIZON,
 		GALACTICEQUATOR,
@@ -604,6 +607,11 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameEquinoxEqu;
 			label = q_("Equator");
 			break;
+		case PRECESSIONCIRCLE_N:
+		case PRECESSIONCIRCLE_S:
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			label = q_("Precession Circle");
+			break;
 		case HORIZON:
 			frameType = StelCore::FrameAltAz;
 			label = q_("Horizon");
@@ -637,7 +645,10 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
 	Vec4f textColor(color[0], color[1], color[2], 0);		
 	textColor[3]=fader.getInterstate();
 
@@ -647,6 +658,79 @@ void SkyLine::draw(StelCore *core) const
 	userData.text = label;
 	/////////////////////////////////////////////////
 	// Draw the line
+
+	// Precession circles are Small Circles, all others are Great Circles.
+	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
+	{
+		const double lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI/2.0-getPrecessionAngleVondrakCurrentEpsilonA());
+		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
+		const Vec3d rotCenter(0,0,declinationCap.d);
+
+		Vec3d p1, p2;
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
+		{
+			if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
+				|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+			{
+				// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				Vec3d pt1;
+				Vec3d pt2;
+				Vec3d pt3;
+				const double lon1=0.0;
+				const double lon2=120.0*M_PI/180.0;
+				const double lon3=240.0*M_PI/180.0;
+				StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
+				StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
+				StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
+
+				sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
+				#ifdef GL_LINE_SMOOTH
+				if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+					glDisable(GL_LINE_SMOOTH);
+				#endif
+				glDisable(GL_BLEND);
+				return;
+			}
+			else
+			{
+				#ifdef GL_LINE_SMOOTH
+				if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+					glDisable(GL_LINE_SMOOTH);
+				#endif
+				glDisable(GL_BLEND);
+				return;
+			}
+		}
+		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+		Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+		middlePoint.normalize();
+		middlePoint*=(p1-rotCenter).length();
+		middlePoint+=rotCenter;
+		if (!viewPortSphericalCap.contains(middlePoint))
+		{
+			middlePoint-=rotCenter;
+			middlePoint*=-1.;
+			middlePoint+=rotCenter;
+		}
+
+		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glDisable(GL_LINE_SMOOTH);
+		#endif
+
+		glDisable(GL_BLEND);
+
+
+		return;
+	}
+
+	// All the other "lines" are Great Circles
 	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
 	Vec3d fpt(1,0,0);
 	if (line_type==MERIDIAN)
@@ -695,6 +779,14 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
 	sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
 
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
+
+	glDisable(GL_BLEND);
+
 // 	// Johannes: use a big radius as a dirty workaround for the bug that the
 // 	// ecliptic line is not drawn around the observer, but around the sun:
 // 	const Vec3d vv(1000000,0,0);
@@ -714,6 +806,8 @@ GridLinesMgr::GridLinesMgr()
 	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
 	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000); // previous eclipticLine
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE); // GZ NEW
+	precessionCircleN = new SkyLine(SkyLine::PRECESSIONCIRCLE_N);
+	precessionCircleS = new SkyLine(SkyLine::PRECESSIONCIRCLE_S);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 	horizonLine = new SkyLine(SkyLine::HORIZON);
 	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
@@ -732,6 +826,8 @@ GridLinesMgr::~GridLinesMgr()
 	delete equatorJ2000Line;
 	delete eclipticLine;
 	delete eclipticJ2000Line;
+	delete precessionCircleN;
+	delete precessionCircleS;
 	delete meridianLine;
 	delete horizonLine;
 	delete galacticEquatorLine;
@@ -763,6 +859,7 @@ void GridLinesMgr::init()
 	setFlagEquatorJ2000Line(conf->value("viewing/flag_equator_J2000_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagEclipticJ2000Line(conf->value("viewing/flag_ecliptic_J2000_line").toBool());
+	setFlagPrecessionCircles(conf->value("viewing/flag_precession_circles").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
@@ -787,6 +884,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
 	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
+	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -802,6 +900,8 @@ void GridLinesMgr::update(double deltaTime)
 	equatorJ2000Line->update(deltaTime);
 	eclipticLine->update(deltaTime);
 	eclipticJ2000Line->update(deltaTime);
+	precessionCircleN->update(deltaTime);
+	precessionCircleS->update(deltaTime);
 	meridianLine->update(deltaTime);
 	horizonLine->update(deltaTime);
 	galacticEquatorLine->update(deltaTime);
@@ -822,6 +922,8 @@ void GridLinesMgr::draw(StelCore* core)
 	eclipticLine->draw(core);
 	longitudeLine->draw(core);
 	equatorJ2000Line->draw(core);
+	precessionCircleN->draw(core);
+	precessionCircleS->draw(core);
 	equatorLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
@@ -842,6 +944,7 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value(section+"/equator_color", defaultColor).toString()));
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
 	setColorEclipticJ2000Line(StelUtils::strToVec3f(conf->value(section+"/ecliptic_J2000_color", defaultColor).toString()));
+	setColorPrecessionCircles(StelUtils::strToVec3f(conf->value(section+"/precession_circles_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
 	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value(section+"/galactic_equator_color", defaultColor).toString()));
@@ -854,6 +957,8 @@ void GridLinesMgr::updateLineLabels()
 	equatorLine->updateLabel();
 	eclipticLine->updateLabel();
 	eclipticJ2000Line->updateLabel();
+	precessionCircleN->updateLabel();
+	precessionCircleS->updateLabel();
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
 	galacticEquatorLine->updateLabel();
@@ -1110,6 +1215,33 @@ void GridLinesMgr::setColorEclipticJ2000Line(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying Precession Circles
+void GridLinesMgr::setFlagPrecessionCircles(const bool displayed)
+{
+	if(displayed != precessionCircleN->isDisplayed()) {
+		precessionCircleN->setDisplayed(displayed);
+		precessionCircleS->setDisplayed(displayed);
+		emit precessionCirclesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Precession Circles
+bool GridLinesMgr::getFlagPrecessionCircles(void) const
+{
+	// precessionCircleS is always synchronous, no separate queries.
+	return precessionCircleN->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorPrecessionCircles(void) const
+{
+	return precessionCircleN->getColor();
+}
+void GridLinesMgr::setColorPrecessionCircles(const Vec3f& newColor)
+{
+	if(newColor != precessionCircleN->getColor()) {
+		precessionCircleN->setColor(newColor);
+		precessionCircleS->setColor(newColor);
+		emit precessionCirclesColorChanged(newColor);
+	}
+}
 
 //! Set flag for displaying Meridian Line
 void GridLinesMgr::setFlagMeridianLine(const bool displayed)
