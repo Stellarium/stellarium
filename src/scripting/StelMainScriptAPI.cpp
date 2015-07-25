@@ -1072,6 +1072,40 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagFog(false);
 		zl->setFlagShow(false);
 	}
+	else if (state.toLower() == "galactic")
+	{
+		movmgr->setMountMode(StelMovementMgr::MountGalactic);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
+	}
 	else
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";
