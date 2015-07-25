@@ -22,6 +22,8 @@
 
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -385,7 +387,9 @@ bool StelProjector::unProject(const Vec3d& win, Vec3d& v) const
 void StelProjector::computeBoundingCap()
 {
 	bool ok = unProject(viewportXywh[0]+0.5f*viewportXywh[2], viewportXywh[1]+0.5f*viewportXywh[3], boundingCap.n);
-	Q_ASSERT(ok);	// The central point should be at a valid position by definition
+	// The central point should be at a valid position by definition.
+	// When center is offset, this assumption may not hold however.
+	Q_ASSERT(ok || (StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset.lengthSquared()>0.0) );
 	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.00000001;
 
 	// Now need to determine the aperture
