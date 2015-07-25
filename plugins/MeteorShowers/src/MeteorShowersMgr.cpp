@@ -24,6 +24,7 @@
 
 #include "LabelMgr.hpp"
 #include "MSConfigDialog.hpp"
+#include "MSSearchDialog.hpp"
 #include "MeteorShowersMgr.hpp"
 #include "Planet.hpp"
 #include "StelActionMgr.hpp"
@@ -39,6 +40,7 @@
 MeteorShowersMgr::MeteorShowersMgr()
 	: m_meteorShowers(NULL)
 	, m_configDialog(NULL)
+	, m_searchDialog(NULL)
 	, m_toolbarEnableButton(NULL)
 	, m_conf(StelApp::getInstance().getSettings())
 	, m_onEarth(false)
@@ -62,6 +64,7 @@ MeteorShowersMgr::MeteorShowersMgr()
 MeteorShowersMgr::~MeteorShowersMgr()
 {
 	delete m_configDialog;
+	delete m_searchDialog;
 	delete m_downloadMgr;
 }
 
@@ -71,6 +74,7 @@ void MeteorShowersMgr::init()
 
 	m_meteorShowers = new MeteorShowers(this);
 	m_configDialog = new MSConfigDialog(this);
+	m_searchDialog = new MSSearchDialog(this);
 
 	createActions();
 	createToolbarButtons();
@@ -139,6 +143,7 @@ bool MeteorShowersMgr::configureGui(bool show)
 	if (show)
 	{
 		m_configDialog->setVisible(show);
+		m_searchDialog->setVisible(show);
 	}
 	return true;
 }
@@ -149,6 +154,7 @@ void MeteorShowersMgr::createActions()
 	addAction("actionShow_MeteorShowers",               msGroup, N_("Toogle Meteor Showers"), this,           "enablePlugin", "Ctrl+Alt+M");
 	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Radiant Labels"),        this,           "enableLabels", "Shift+M");
 	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show Settings Dialog"),  m_configDialog, "visible",      "Ctrl+Shift+M");
+	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show Search Dialog"),    m_searchDialog, "visible",      "Ctrl+Shift+S");
 }
 
 void MeteorShowersMgr::createToolbarButtons()
