@@ -30,6 +30,7 @@
 
 class MeteorShowers;
 class MSConfigDialog;
+class MSSearchDialog;
 
 /*! @defgroup meteorShowers Meteor Showers Plug-in
 @{
@@ -83,6 +84,10 @@ public:
 	//! Gets the radiant texture
 	//! @return texture
 	StelTextureSP getRadiantTexture() { return m_radiantTexture; }
+
+	//! Gets the MeteorShowers instance
+	//! @return MeteorShowers instance
+	MeteorShowers* getMeteorShowers() { return m_meteorShowers; }
 
 	//! Returns the plugin status.
 	//! @return true if the Meteor Showers plugin is enabled.
@@ -210,6 +215,7 @@ private slots:
 private:
 	MeteorShowers* m_meteorShowers;
 	MSConfigDialog* m_configDialog;
+	MSSearchDialog* m_searchDialog;
 
 	StelButton* m_toolbarEnableButton;
 	QFont m_font;

@@ -18,10 +18,13 @@ SET(MeteorShowers_SRCS
     MeteorObj.cpp
     gui/MSConfigDialog.hpp
     gui/MSConfigDialog.cpp
+    gui/MSSearchDialog.hpp
+    gui/MSSearchDialog.cpp
 )
 
 SET(MeteorShowersDialog_UIS
     gui/MSConfigDialog.ui
+    gui/MSSearchDialog.ui
 )
 
 QT5_WRAP_UI(MeteorShowersDialog_UIS_H ${MeteorShowersDialog_UIS})
