@@ -110,26 +110,34 @@ void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 	}
 }
 
-QList<MeteorShowerP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) const
+QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) const
 {
-	QList<MeteorShowerP> result;
+	QList<SearchResult> result;
+	bool found;
 	QDate date;
+	MeteorShower::Activity a;
+	SearchResult r;
 	foreach(const MeteorShowerP& ms, m_meteorShowers)
 	{
 		date = dateFrom;
 		while(date.operator <=(dateTo))
 		{
-			bool found = false;
-			ms->hasRealShower(date, found);
-			if (found)
+			found = false;
+			a = ms->hasRealShower(date, found);
+			if (!found)
 			{
-				result.append(ms);
-				break;
+				a = ms->hasGenericShower(date, found);
 			}
-			ms->hasGenericShower(date, found);
+
 			if (found)
 			{
-				result.append(ms);
+				r.name = ms->getNameI18n();
+				r.peak = a.peak;
+				r.type = a.year > 0 ? q_("Real") : q_("Generic");
+				r.zhr = a.zhr == -1
+				      ? QString("%1-%2").arg(a.variable.at(0)).arg(a.variable.at(1))
+				      : QString::number(a.zhr);
+				result.append(r);
 				break;
 			}
 			date = date.addDays(1);

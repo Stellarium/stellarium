@@ -35,6 +35,15 @@ class MeteorShowers : public MeteorShowersMgr
 {
 	Q_OBJECT
 public:
+	//! @struct SearchResult
+	typedef struct
+	{
+		QString name;
+		QString zhr;
+		QString type;
+		QDate peak;
+	} SearchResult;
+
 	//! Constructor
 	MeteorShowers(MeteorShowersMgr *mgr);
 
@@ -54,8 +63,8 @@ public:
 	//! Find all meteor_shower events in a given date interval
 	//! @param dateFrom
 	//! @param dateTo
-	//! @return meteor_shower list
-	QList<MeteorShowerP> searchEvents(QDate dateFrom, QDate dateTo) const;
+	//! @return list
+	QList<SearchResult> searchEvents(QDate dateFrom, QDate dateTo) const;
 
 	//
 	// Methods defined in StelObjectModule class
