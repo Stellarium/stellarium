@@ -340,7 +340,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1636,11 +1636,68 @@
               </widget>
              </item>
              <item>
-              <widget class="QTextBrowser" name="projectionTextBrowser">
-               <property name="openExternalLinks">
-                <bool>true</bool>
-               </property>
-              </widget>
+              <layout class="QVBoxLayout" name="projectionDetailsVerticalLayout">
+               <item>
+                <widget class="QTextBrowser" name="projectionTextBrowser">
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="viewportOffsetHorizontalLayout">
+                 <item>
+                  <widget class="QLabel" name="viewportOffsetLabel">
+                   <property name="text">
+                    <string>Vertical viewport offset</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="viewportOffsetSpinBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimum">
+                    <number>-50</number>
+                   </property>
+                   <property name="maximum">
+                    <number>50</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="percentLabel">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>%</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -2171,7 +2228,6 @@
   <tabstop>showConstellationBoundariesCheckBox</tabstop>
   <tabstop>showConstellationArtCheckBox</tabstop>
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
-  <tabstop>projectionTextBrowser</tabstop>
   <tabstop>landscapeTextBrowser</tabstop>
   <tabstop>showGroundCheckBox</tabstop>
   <tabstop>showFogCheckBox</tabstop>
