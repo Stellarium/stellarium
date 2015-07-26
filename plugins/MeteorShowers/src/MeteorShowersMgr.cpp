@@ -117,9 +117,7 @@ void MeteorShowersMgr::init()
 		this, SLOT(locationChanged(StelLocation)));
 
 	// enable at startup?
-	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
-	StelAction* action = actionMgr->findAction("actionShow_MeteorShowers");
-	action->setChecked(getEnableAtStartup());
+	setEnablePlugin(getEnableAtStartup());
 }
 
 void MeteorShowersMgr::deinit()
@@ -406,6 +404,15 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 
 	qDebug() << "MeteorShowersMgr: The catalog was updated!";
 	setStatusOfLastUpdate(UPDATED);
+}
+
+void MeteorShowersMgr::setEnablePlugin(const bool& b)
+{
+	// we should never change the 'm_enablePlugin' member directly!
+	// as it's a button on the toolbar, it must be sync with its StelAction
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* action = actionMgr->findAction("actionShow_MeteorShowers");
+	action->setChecked(b);
 }
 
 void MeteorShowersMgr::setActiveRadiantOnly(const bool& b)

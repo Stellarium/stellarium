@@ -52,7 +52,7 @@ file (section [MeteorShowers]).
 class MeteorShowersMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enablePlugin READ getEnablePlugin WRITE setEnablePlugin)
+	Q_PROPERTY(bool enablePlugin READ getEnablePlugin WRITE actionEnablePlugin)
 	Q_PROPERTY(bool enableLabels READ getEnableLabels WRITE setEnableLabels)
 
 public:
@@ -89,8 +89,8 @@ public:
 	//! @return MeteorShowers instance
 	MeteorShowers* getMeteorShowers() { return m_meteorShowers; }
 
-	//! Returns the plugin status.
-	//! @return true if the Meteor Showers plugin is enabled.
+	//! Enable/disable the meteor showers plugin.
+	void setEnablePlugin(const bool& b);
 	bool getEnablePlugin() { return m_enablePlugin; }
 
 	//! True if user wants to see the active radiants only.
@@ -261,7 +261,7 @@ private:
 
 	//! Enable/disable the Meteor Showers plugin.
 	//! It'll be triggered by a StelAction! So, it should NOT be called directly!
-	void setEnablePlugin(const bool& b) { m_enablePlugin = b; }
+	void actionEnablePlugin(const bool& b) { m_enablePlugin = b; }
 
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
