@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-08 16:34+0600\n"
-"PO-Revision-Date: 2015-07-16 18:48+0000\n"
+"PO-Revision-Date: 2015-07-25 20:48+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-17 05:13+0000\n"
+"X-Launchpad-Export-Date: 2015-07-26 05:13+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1086,6 +1086,9 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
+"Гэтая палімінальная апраксымацыя з дакладнасьцю 0,6 сэкундаў, распрацаваная "
+"М. Халідам, Марыям Султана й Фахімам Зайдзі было апублікаванае ў <em>Дэльта "
+"T: палімінальнае апраксымацыя часавага пэрыяду 1620-2013</em> (%1)."
 
 #: src/core/StelCore.cpp:1551
 #, qt-format
@@ -1244,7 +1247,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:459
 msgid "Sinusoidal"
-msgstr "Сінусная"
+msgstr "Сінусаідальная"
 
 #: src/core/StelProjectorClasses.cpp:464
 msgid ""
@@ -1252,6 +1255,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"Сінусаідальная праекцыя — гэта <i>псэўдацыліндрычная раўнаплошўчавая "
+"праекцыя</i>, якую часам называюць праекцыяй Сансона-Флэмстыда або "
+"раўнаплошчавай Мэкатара."
 
 #: src/core/StelObject.cpp:112
 msgctxt "coordinates for current epoch"
@@ -10419,26 +10425,32 @@ msgstr "Сканчэньне загрузкі…"
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"Памылка шэйдара Scenery3d, не магчыма рысаваць. Глядзі падрабязнасьці ў "
+"часопісе адладкі."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2096
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"Тваё абсталяваньне не падтрымлівае кубічнае ператварэньне, пераключыся на "
+"пэрспэктыўную праекцыю, калі ласка!"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
-"Ґеамэтрычны шэйдэр не падтрымліваецца. Задзйнічаем рэжым «6 тэкстур»."
+"Ґеамэтрычны шэйдар не падтрымліваецца. Задзейнічаем рэжым «6 тэкстур»."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Вяртаемся да «6 тэкстур» праз хібу ANGLE"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Ператварэньне ценяў ня можа выкарыстоўвацца на тваім абсталяваньні, "
+"падрабязнасьці глядзі ў часопісе"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
@@ -10470,7 +10482,7 @@ msgstr "Укл./выкл. адладачную інфармацыю"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle location text"
-msgstr ""
+msgstr "Схаваць ці паказаць тэкст месца"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
@@ -10478,11 +10490,11 @@ msgstr "Укл./выкл. ліхтары"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr "Перазагрузіць шэйдэры"
+msgstr "Перазагрузіць шэйдары"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
-msgstr "Шэйдэры Scenery3d перазагружаныя"
+msgstr "Шэйдары Scenery3d перазагружаныя"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
@@ -10516,12 +10528,12 @@ msgstr "Немагчыма адшукаць ID сцэны для %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Загрузі спачатку сцэну, калі ласка!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Папіксальная пабудова ценяў %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
@@ -10549,11 +10561,13 @@ msgstr "Цені абязьдзейненыя або не падтрымліва
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "Выпукласьці паверхні %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
+"Выбраны рэжым кубнага ператварэньня не падтрымліваецца, задзйнічаем «6 "
+"тэкстур»"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
@@ -10601,12 +10615,23 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Трохмерны пярэдні плян. Гуляй сваім садам, абыходзь знойдзеныя перашкоды, "
+"шукай сувязі з астранамічнымі зьявамі ў храмах, разглядай цені на сонечных "
+"гадзіньніках і г.д.</p><p>Каб перамяшчацца націскай Ctrl+стрэлкі. Каб "
+"узьняць вочы ўгору карыстайся Ctrl+PgUp/PgDn. Хуткасьць перамяшчэньня "
+"зьвязаная з полем зроку, г.зн. чым большае павелічэньне, тым дакладнейшы "
+"рух). Можна працягваць рух¸ адпусьціўшы Ctrl, але не "
+"стрэлкі.</p><p>Распрацоўка гэтага дадатку была часткова падтрыманая праектам "
+"ASTROSIM (P 21208-G19) Аўстралійскага навуковага фонду (FWF). Болей: "
+"http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Дае больш акуратнае асьветленьне разьлічваючы яго папіксальна, а не "
+"павяршынева."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
@@ -10614,35 +10639,39 @@ msgstr "Патрэбна для мапаў паверхні й ценяў!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "Выкарыстоўвае толькі адзін каскад ценяў, а не болей (да 4-х)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
-msgstr ""
+msgstr "Дае паскарэньне коштам якасьці ценяў, асабліва на вялікіх сцэнах."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
-msgstr ""
+msgstr "Вызначае фільтрацыю ценяў, якасьць павялічваецца зьверху ўніз."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "ПБМЦ патрабуе НІЗКАЙ або ВЫСОКАЙ якасьці."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Прыблізны разьлік паўценяў (больш рэзкія цені ля пунктаў дотыку, размытыя — "
+"далей)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Патрэбная <b>ВЫСОКАЯ</b> або <b>НІЗКАЯ</b> фільтрацыя ценяў (без "
+"<b>абсталяваньня</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
@@ -10655,17 +10684,25 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Вызначае як будзе рысавацца сцэна, калі Stellarium выкарыстоўвае праекцыю, "
+"адрозную ад «Пэрспэктыўнай». Сцэна заўжды рысуецца на куб, а потым гэты куб "
+"скрыўляецца ў адпаведнасьці з сапраўднай праекцыяй. Куб апісваецца "
+"відарысам, які называецца «ператварэньне кубу»."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 тэкстур</b> выкарыстоўвае 6 асобных тэкстур, па адной на бок куба. Гэты "
+"мэтад найшэрэй падтрымліваецца, але ён павольнейшы за іншыя."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Кубічнае ператварэньне</b> выкарыстоўвае асобную GL_TEXTURE_CUBEMAP. "
+"Рэкамэндаваны для большасьці карыстальнікаў."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -10673,10 +10710,13 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Ґеамэтрычны шэйдар</b> выкарыстоўвае функцыі сучасных ґрафічных картак па "
+"пабудове 6 граняў куба адначасова. У залежнасьці ад сцэны й ґрафічнай карткі "
+"можа быць самым хуткім. Калі не падтрымліваецца, то яго немагчыма выбраць."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Разьлічвае цені кожнай паверхні кубічнага ператварэньня паасобна."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -10684,53 +10724,66 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Калі абязьдзейнена, зацененая вобласьць разьлічваецца з выкарыстаньнем "
+"пэрспэктыўнай праекцыі, таму на вялікіх значэньнях ПЗ цені могуць "
+"адсутнічаць, але працуе крыху хутчэй."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Не працуе калі выкарыстоўваецца рэжым кубічнага ператварэньня <b>ґеамэтрычны "
+"шэйдар</b>!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Калі задзейнічана, кубічнае ператварэньне перабудоўваецца праз пэўныя "
+"інтэрвалы часу, а не для кожнага кадра."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
 msgstr ""
+"Захоўвае энэрґію й можа павялічыць суб'ектыўную прадукцыйнасьць праґрамы."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Заўважым, што кубічнае ператварэньне заўжды перабудоўваецца калі мяняецца "
+"становішча прагляду."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Калі задзейнічана, толькі паверхня, адпаведная напрамку прагляду, будзе "
+"абнаўляцца пры руху."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Паскарае пабудову, але выява будзе выглядаць «паламанай» падчас руху."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
-msgstr ""
+msgstr "Не працуе ў рэжыме кубічнага ператварэньня «Ґеамэтрычны шэйдар»!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
-msgstr ""
+msgstr "Абнаўляе другую паверхню, таму візуальна выява не такая «ламаная»."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
-msgstr ""
+msgstr "Інтэрвал (у сэкудах часавай лініі), калі не робіцца перарысоўка"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
@@ -10742,7 +10795,7 @@ msgstr "Кубічная мапа"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr "Ґеамэтрычны шэйдэр"
+msgstr "Ґеамэтрычны шэйдар"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
 #, qt-format
@@ -10831,9 +10884,10 @@ msgstr "Вялікі (павольна)"
 msgid "High + Hardware (slow)"
 msgstr "Высокі + Абсталяваньне (павольна)"
 
+# Percentage-Closer Soft Shadow
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "ПБМЦ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
@@ -10845,7 +10899,7 @@ msgstr "Поўныя цені кубічнай мапы"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "Лянівая перабудова кубічнага ператварэньня"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
@@ -10853,11 +10907,11 @@ msgstr "Інтэрвал:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Пры перасоўваньні абнаўляць толькі галоўную паверхню"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Таксама абнаўляць другую па важнасьці паверхню"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
@@ -10992,7 +11046,7 @@ msgstr "Бягучае схіленьне месяца"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Бягучае схіленьне плянэты"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -11001,6 +11055,10 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"Лініі Месяца пабудаваныя з улікам эфэкту гарызантальнага параляксу. Рысуюцца "
+"дзьве лініі для выпадку найбольшай і найменшай адлегласьці да Месяца. "
+"Зьвярні ўвагу, што схіленьне Месяцу ў галоўных спыненьнях можа перавышаць "
+"паказаныя ліміты, калі ён высока ў небе праз эфэкт параляксу."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
@@ -11056,7 +11114,7 @@ msgstr "Настаўленьні дадатку «Археалініі»"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "Каб зьмяніць колер трэба выйсьці з поўнаэкраннага рэжыму!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
