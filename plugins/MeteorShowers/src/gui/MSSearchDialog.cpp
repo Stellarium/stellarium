@@ -137,10 +137,7 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 	// Change date
 	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
 	StelApp::getInstance().getCore()->setJDay(QDate::fromString(peak, "dd/MMM/yyyy").toJulianDay());
-
-	// TODO: implement a repaint on the mgr class
-	m_mgr->update(1.0);
-	m_mgr->draw(StelApp::getInstance().getCore());
+	m_mgr->repaint();
 
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
