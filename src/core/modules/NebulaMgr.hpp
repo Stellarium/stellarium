@@ -259,6 +259,7 @@ private:
 	NebulaP searchCr(unsigned int Cr);
 	NebulaP searchMel(unsigned int Mel);
 	NebulaP searchPGC(unsigned int PGC);
+	NebulaP searchUGC(unsigned int UGC);
 	NebulaP searchCed(QString Ced);
 	NebulaP searchPK(QString PK);
 	bool loadNGCNames(const QString& fileName);

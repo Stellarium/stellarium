@@ -86,25 +86,27 @@ private:
 	enum NebulaType
 	{
 		NebGx		= 0,	//!< Galaxy
-		NebSy2		= 1,	//!< Seyfert 2 galaxy
-		NebAGN		= 2,	//!< Active galaxy nucleus
-		NebIG		= 3,	//!< Interacting galaxy
-		NebCl		= 4,	//!< Star cluster
-		NebOc		= 5,	//!< Open star cluster
-		NebGc		= 6,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA		= 7,	//!< Stellar association
-		NebSC		= 8,	//!< Star cloud
-		NebN		= 9,	//!< A nebula
-		NebPn		= 10,	//!< Planetary nebula
-		NebDn		= 11,	//!< Dark Nebula
-		NebRn		= 12,	//!< Reflection nebula
-		NebBn		= 13,	//!< Bipolar nebula
-		NebEn		= 14,	//!< Emission nebula
-		NebCn		= 15,	//!< Cluster associated with nebulosity
-		NebHII		= 16,	//!< HII Region
-		NebHa		= 17,	//!< H-α emission region
-		NebSNR		= 18,	//!< Supernova remnant
-		NebUnknown	= 19	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebSyG		= 1,	//!< Seyfert galaxy
+		NebSy2		= 2,	//!< Seyfert 2 galaxy
+		NebLIN		= 3,	//!< LINER-type Active Galaxy Nucleus
+		NebAGN		= 4,	//!< Active galaxy nucleus
+		NebIG		= 5,	//!< Interacting galaxy
+		NebCl		= 6,	//!< Star cluster
+		NebOc		= 7,	//!< Open star cluster
+		NebGc		= 8,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA		= 9,	//!< Stellar association
+		NebSC		= 10,	//!< Star cloud
+		NebN		= 11,	//!< A nebula
+		NebPn		= 12,	//!< Planetary nebula
+		NebDn		= 13,	//!< Dark Nebula
+		NebRn		= 14,	//!< Reflection nebula
+		NebBn		= 15,	//!< Bipolar nebula
+		NebEn		= 16,	//!< Emission nebula
+		NebCn		= 17,	//!< Cluster associated with nebulosity
+		NebHII		= 18,	//!< HII Region
+		NebHa		= 19,	//!< H-α emission region
+		NebSNR		= 20,	//!< Supernova remnant
+		NebUnknown	= 21	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
@@ -114,16 +116,6 @@ private:
 
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
-
-
-	//! Get the printable HII region form type.
-	QString getHIIFormTypeString() const;
-	//! Get the printable HII region structure type.
-	QString getHIIStructureTypeString() const;
-	//! Get the printable HII region brightness type.
-	QString getHIIBrightnessTypeString() const;
-	//! Get the printable H-α emission region brightness type.
-	QString getHaBrightnessTypeString() const;
 
 	unsigned int DSO_nb;
 	unsigned int M_nb;              // Messier Catalog number
@@ -139,6 +131,7 @@ private:
 	unsigned int Cr_nb;             // Collinder Catalog number
 	unsigned int Mel_nb;            // Melotte Catalog number
 	unsigned int PGC_nb;            // PGC number (Catalog of galaxies)
+	unsigned int UGC_nb;            // UGC number (The Uppsala General Catalogue of Galaxies)
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)
 	QString PK_nb;			// PK number (Catalogue of galactic planetary nebulae (Perek-Kohoutek))
 	QString since;			// JD of the nebula formation
@@ -151,13 +144,9 @@ private:
 	float angularSize;              // Angular size in degree -- OUTDATED!
 	float majorAxisSize;		// Major axis size in arcmin
 	float minorAxisSize;		// Minor axis size in arcmin
-	int orientationAngle;		// Orientation angle in degrees
-	float radialVelocity;		// Radial velocity in km/s
-	float radialVelocityErr;	// Error of radial velocity in km/s
-	float redshift;			// Redshift
-	float redshiftErr;		// Error of redshift
-	float parallax;			// Parallax in mas
-	float parallaxErr;		// Error of parallax in mas
+	int orientationAngle;		// Orientation angle in degrees	
+	float oDistance;		// distance (Mpc for galaxies, kpc for other objects)
+	float oDistanceErr;		// Error of distance (Mpc for galaxies, kpc for other objects)
 	Vec3d XYZ;                      // Cartesian equatorial position (J2000.0)
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;

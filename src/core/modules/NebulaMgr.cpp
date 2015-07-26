@@ -263,7 +263,7 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -281,6 +281,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "CR") return searchCr(num);
 		if (cat == "MEL") return searchMel(num);
 		if (cat == "PGC") return searchPGC(num);
+		if (cat == "UGC") return searchUGC(num);
 
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
@@ -479,6 +480,14 @@ NebulaP NebulaMgr::searchPGC(unsigned int PGC)
 	return NebulaP();
 }
 
+NebulaP NebulaMgr::searchUGC(unsigned int UGC)
+{
+	foreach (const NebulaP& n, dsoArray)
+		if (n->UGC_nb == UGC)
+			return n;
+	return NebulaP();
+}
+
 NebulaP NebulaMgr::searchCed(QString Ced)
 {
 	foreach (const NebulaP& n, dsoArray)
@@ -519,10 +528,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 	QDataStream dsoOutStream(&dsoOut);
 	dsoOutStream.setVersion(QDataStream::Qt_5_2);
 
-	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC;
-	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, radialVelocity, radialVelocityErr, redshift,
-		redshiftErr, parallax, parallaxErr;
-	QString oType, mType, since, PK, Ced, ra, dec;
+	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC;
+	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr;
+	QString oType, mType, PK, Ced, ra, dec;
 	unsigned int nType;
 
 	int currentLineNumber = 0;	// what input line we are on
@@ -552,31 +560,27 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 			majorAxisSize		= list.at(7).toFloat();  // major axis size (arcmin)
 			minorAxisSize		= list.at(8).toFloat();	 // minor axis size (arcmin)
 			orientationAngle	= list.at(9).toInt();	 // orientation angle (degrees)
-			radialVelocity		= list.at(10).toFloat(); // radial velocity (km/s)
-			radialVelocityErr	= list.at(11).toFloat(); // error of radial velocity (km/s)
-			redshift		= list.at(12).toFloat();
-			redshiftErr		= list.at(13).toFloat();
-			parallax		= list.at(14).toFloat(); // parallax (mas)
-			parallaxErr		= list.at(15).toFloat(); // error of parallax (mas)
-			since			= list.at(16).trimmed(); // JD as string
+			dist			= list.at(10).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
+			distErr			= list.at(11).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
 			// cross-index data
 			// -----------------------------------------------
-			NGC			= list.at(17).toInt();	 // NGC number
-			IC			= list.at(18).toInt();	 // IC number
-			M			= list.at(19).toInt();	 // M number
-			C			= list.at(20).toInt();	 // C number
-			B			= list.at(21).toInt();	 // B number
-			Sh2			= list.at(22).toInt();	 // Sh2 number
-			VdB			= list.at(23).toInt();	 // VdB number
-			RCW			= list.at(24).toInt();	 // RCW number
-			LDN			= list.at(25).toInt();	 // LDN number
-			LBN			= list.at(26).toInt();	 // LBN number
-			Cr			= list.at(27).toInt();	 // Cr number
-			Mel			= list.at(28).toInt();	 // Mel number
-			PGC			= list.at(29).toInt();	 // PGC number (subset)
-			Ced			= list.at(30).trimmed(); // Ced number
-			PK			= list.at(31).trimmed(); // PK number
+			NGC			= list.at(12).toInt();	 // NGC number
+			IC			= list.at(13).toInt();	 // IC number
+			M			= list.at(14).toInt();	 // M number
+			C			= list.at(15).toInt();	 // C number
+			B			= list.at(16).toInt();	 // B number
+			Sh2			= list.at(17).toInt();	 // Sh2 number
+			VdB			= list.at(18).toInt();	 // VdB number
+			RCW			= list.at(19).toInt();	 // RCW number
+			LDN			= list.at(20).toInt();	 // LDN number
+			LBN			= list.at(21).toInt();	 // LBN number
+			Cr			= list.at(22).toInt();	 // Cr number
+			Mel			= list.at(23).toInt();	 // Mel number
+			PGC			= list.at(24).toInt();	 // PGC number (subset)
+			UGC			= list.at(25).toInt();	 // UGC number (subset)
+			Ced			= list.at(26).trimmed(); // Ced number
+			PK			= list.at(27).trimmed(); // PK number
 
 			QStringList raLst;
 			if (ra.contains(":"))
@@ -606,7 +610,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 			QStringList oTypes;
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
 			       << "HA" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "SY2"
-			       << "AGN" << "CL" << "IG";
+			       << "AGN" << "CL" << "IG" << "SyG" << "LIN";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -668,6 +672,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 				case 19:
 					nType = (unsigned int)Nebula::NebIG;
 					break;
+				case 20:
+					nType = (unsigned int)Nebula::NebSyG;
+					break;
+				case 21:
+					nType = (unsigned int)Nebula::NebLIN;
+					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
 					break;
@@ -676,9 +686,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 			++readOk;
 
 			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
-				     << orientationAngle << radialVelocity << radialVelocityErr << redshift << redshiftErr
-				     << parallax << parallaxErr << since << NGC << IC << M << C << B << Sh2 << VdB << RCW
-				     << LDN << LBN << Cr << Mel << PGC << Ced << PK;
+				     << orientationAngle << dist  << distErr << NGC << IC << M << C << B << Sh2 << VdB << RCW
+				     << LDN << LBN << Cr << Mel << PGC << UGC << Ced << PK;
 		}
 	}
 	dsoIn.close();
@@ -1043,6 +1052,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by UGC numbers (possible formats are "UGC31" or "UGC 31")
+	if (objw.left(3) == "UGC")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("UGC%1").arg(n->UGC_nb) == objw || QString("UGC %1").arg(n->UGC_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	// Search by Cederblad numbers (possible formats are "Ced31" or "Ced 31")
 	if (objw.left(3) == "CED")
 	{
@@ -1211,6 +1230,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		}
 	}
 
+	// Search by UGC numbers (possible formats are "UGC31" or "UGC 31")
+	if (objw.startsWith("UGC"))
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("UGC%1").arg(n->UGC_nb) == objw || QString("UGC %1").arg(n->UGC_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	// Search by Cederblad numbers (possible formats are "Ced31" or "Ced 31")
 	if (objw.startsWith("CED"))
 	{
@@ -1333,6 +1362,26 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("PGC %1").arg(n->PGC_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by UGC objects number (possible formats are "UGC31" or "UGC 31")
+	if (objw.size()>=1 && objw.left(3)=="UGC")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->UGC_nb==0) continue;
+			QString constw = QString("UGC%1").arg(n->UGC_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("UGC %1").arg(n->UGC_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
@@ -1667,6 +1716,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				continue;
 			}
 			constw = QString("PGC %1").arg(n->PGC_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by UGC numbers (possible formats are "UGC31" or "UGC 31")
+	if (objw.size()>=1 && objw.left(3)=="UGC")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->UGC_nb==0) continue;
+			QString constw = QString("UGC%1").arg(n->UGC_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;
+			}
+			constw = QString("UGC %1").arg(n->UGC_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
