@@ -122,6 +122,12 @@ void MSSearchDialog::searchEvents()
 		treeItem->setText(ColumnDataType, r.type);
 		treeItem->setText(ColumnPeak, r.peak.toString("dd/MMM/yyyy"));
 	}
+
+	// adjust the column width
+	for(int i = 0; i < ColumnCount; ++i)
+	{
+	    m_ui->listEvents->resizeColumnToContents(i);
+	}
 }
 
 void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
@@ -168,5 +174,10 @@ void MSSearchDialog::setHeaderNames()
 	headerStrings << q_("Data Type");
 	headerStrings << q_("Peak");
 	m_ui->listEvents->setHeaderLabels(headerStrings);
-	// TODO: fix the width
+
+	// adjust the column width
+	for(int i = 0; i < ColumnCount; ++i)
+	{
+	    m_ui->listEvents->resizeColumnToContents(i);
+	}
 }
