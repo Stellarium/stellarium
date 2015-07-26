@@ -17,41 +17,24 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include <QColorDialog>
-#include <QDateTime>
-#include <QDebug>
-#include <QFileDialog>
-#include <QGraphicsColorizeEffect>
 #include <QMessageBox>
-#include <QTimer>
-#include <QUrl>
 
 #include "MSSearchDialog.hpp"
-#include "MeteorShowers.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelFileMgr.hpp"
-#include "StelGui.hpp"
-#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelStyle.hpp"
-#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "ui_MSSearchDialog.h"
 
 MSSearchDialog::MSSearchDialog(MeteorShowersMgr* mgr)
 	: m_mgr(mgr)
 	, m_ui(new Ui_MSSearchDialog)
-	, m_treeWidget(NULL)
 {
 }
 
 MSSearchDialog::~MSSearchDialog()
 {
 	delete m_ui;
-	delete m_treeWidget;
 }
 
 void MSSearchDialog::retranslate()
@@ -62,7 +45,7 @@ void MSSearchDialog::retranslate()
 		setHeaderNames();
 
 		//Retranslate name and datatype strings
-		QTreeWidgetItemIterator it(m_treeWidget);
+		QTreeWidgetItemIterator it(m_ui->listEvents);
 		while (*it)
 		{
 			//Name
@@ -79,47 +62,36 @@ void MSSearchDialog::createDialogContent()
 	m_ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	connect(m_ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
-	refreshRangeDates(StelApp::getInstance().getCore());
 
-	m_treeWidget = m_ui->listEvents;
-	connect(m_treeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
-	connect(m_treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(repaintTreeWidget()));
+	connect(m_ui->listEvents, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
+
+	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
+	connect(m_ui->listEvents, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+		m_ui->listEvents, SLOT(repaint()));
+
+	int year = QDate::fromJulianDay(StelApp::getInstance().getCore()->getJDay()).year();
+	refreshRangeDates(year);
+
 	initListEvents();
-}
-
-void MSSearchDialog::repaintTreeWidget()
-{
-	// Enable force repaint listEvents to avoiding artifacts
-	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
-	m_treeWidget->repaint();
 }
 
 void MSSearchDialog::initListEvents()
 {
-	m_treeWidget->clear();
-	m_treeWidget->setColumnCount(ColumnCount);
+	m_ui->listEvents->clear();
+	m_ui->listEvents->setColumnCount(ColumnCount);
 	setHeaderNames();
-	m_treeWidget->header()->setSectionsMovable(false);
-	m_treeWidget->header()->setStretchLastSection(true);
-}
-
-void MSSearchDialog::setHeaderNames()
-{
-	QStringList headerStrings;
-	headerStrings << q_("Name");
-	headerStrings << q_("ZHR");
-	headerStrings << q_("Data Type");
-	headerStrings << q_("Peak");
-	m_treeWidget->setHeaderLabels(headerStrings);
+	m_ui->listEvents->header()->setSectionsMovable(false);
+	m_ui->listEvents->header()->setStretchLastSection(true);
 }
 
 void MSSearchDialog::checkDates()
 {
-	double jdFrom = StelUtils::qDateTimeToJd((QDateTime) m_ui->dateFrom->date());
-	double jdTo = StelUtils::qDateTimeToJd((QDateTime) m_ui->dateTo->date());
+	double jdFrom = m_ui->dateFrom->date().toJulianDay();
+	double jdTo = m_ui->dateTo->date().toJulianDay();
 
 	if (jdFrom > jdTo)
 	{
@@ -144,7 +116,7 @@ void MSSearchDialog::searchEvents()
 	initListEvents();
 	foreach (const MeteorShowers::SearchResult& r, searchResult)
 	{
-		TreeWidgetItem *treeItem = new TreeWidgetItem(m_treeWidget);
+		TreeWidgetItem *treeItem = new TreeWidgetItem(m_ui->listEvents);
 		treeItem->setText(ColumnName, r.name);
 		treeItem->setText(ColumnZHR, r.zhr);
 		treeItem->setText(ColumnDataType, r.type);
@@ -154,38 +126,52 @@ void MSSearchDialog::searchEvents()
 
 void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 {
-	Q_UNUSED(modelIndex);
-	StelCore *core = StelApp::getInstance().getCore();
-
-	// if user select an event but the m_mgr is disabled,
-	// 'MeteorShowers' is enabled automatically
+	/* TODO
+	// plugin is disabled ? enable it automatically
 	if (!m_mgr->getEnablePlugin())
 	{
-		//m_mgr->setEnableMeteorShowers(true);
+		m_mgr->setEnablePlugin(true);
+	}
+	*/
+
+	// Change date
+	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
+	StelApp::getInstance().getCore()->setJDay(QDate::fromString(peak, "dd/MMM/yyyy").toJulianDay());
+
+	// TODO: implement a repaint on the mgr class
+	m_mgr->update(1.0);
+	m_mgr->draw(StelApp::getInstance().getCore());
+
+	// Find the object
+	QString nameI18n = modelIndex.sibling(modelIndex.row(), ColumnName).data().toString();
+	StelObjectP obj = m_mgr->getMeteorShowers()->searchByNameI18n(nameI18n);
+	if (!obj)
+	{
+		obj = m_mgr->getMeteorShowers()->searchByName(nameI18n);
 	}
 
-	//Change date
-	QString dateString = m_treeWidget->currentItem()->text(ColumnPeak);
-	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
-	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
-
-	//Select object
-	QString namel18n = m_treeWidget->currentItem()->text(ColumnName);
-	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
-	if (objectMgr->findAndSelectI18n(namel18n) || objectMgr->findAndSelect(namel18n))
+	//Move to object
+	if (obj)
 	{
-		//Move to object
 		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-		mvmgr->moveToObject(objectMgr->getSelectedObject()[0], mvmgr->getAutoMoveDuration());
+		mvmgr->moveToObject(obj, mvmgr->getAutoMoveDuration());
 		mvmgr->setFlagTracking(true);
 	}
 }
 
-void MSSearchDialog::refreshRangeDates(StelCore* core)
+void MSSearchDialog::refreshRangeDates(const int& year)
 {
-	double JD = core->getJDay();
-	QDateTime skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
-	int year = skyDate.toString("yyyy").toInt();
-	m_ui->dateFrom->setDate(QDate(year, 1, 1)); // first date in the range - first day of the year
-	m_ui->dateTo->setDate(QDate(year, 12, 31)); // second date in the range - last day of the year
+	m_ui->dateFrom->setDate(QDate(year, 1, 1));
+	m_ui->dateTo->setDate(QDate(year, 12, 31));
+}
+
+void MSSearchDialog::setHeaderNames()
+{
+	QStringList headerStrings;
+	headerStrings << q_("Name");
+	headerStrings << q_("ZHR");
+	headerStrings << q_("Data Type");
+	headerStrings << q_("Peak");
+	m_ui->listEvents->setHeaderLabels(headerStrings);
+	// TODO: fix the width
 }
