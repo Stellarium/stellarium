@@ -70,9 +70,11 @@ Nebula::Nebula()
 	, Cr_nb(0)
 	, Mel_nb(0)
 	, PGC_nb(0)
+	, UGC_nb(0)
 	, Ced_nb()
 	, PK_nb()
-	, mag(99.)
+	, bMag(99.)
+	, vMag(99.)
 	, nType()	
 {
 	nameI18 = "";
@@ -128,6 +130,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("Mel %1").arg(Mel_nb);
 		if (PGC_nb > 0)
 			catIds << QString("PGC %1").arg(PGC_nb);
+		if (UGC_nb > 0)
+			catIds << QString("UGC %1").arg(UGC_nb);
 		if (!Ced_nb.isEmpty())
 			catIds << QString("Ced %1").arg(Ced_nb);
 		if (!PK_nb.isEmpty())
@@ -201,48 +205,20 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Extra)
 	{
-		if (radialVelocity>-99.f)
+		if (oDistance>0.f)
 		{
-			QString rv;
-			if (radialVelocityErr>0.f)
-				rv = QString("%1%2%3").arg(radialVelocity).arg(QChar(0x00B1)).arg(radialVelocityErr);
+			QString dx, du;
+			if (oDistanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 2));
 			else
-				rv = QString("%1").arg(radialVelocity);
+				dx = QString("%1").arg(QString::number(oDistance, 'f', 2));
 
-			oss << q_("Radial velocity: %1 km/s").arg(rv) << "<br>";
-		}
-		if (redshift>-99.f)
-		{
-			QString z;
-			if (redshiftErr>0.f)
-				z = QString("%1%2%3").arg(QString::number(redshift, 'f', 6)).arg(QChar(0x00B1)).arg(QString::number(redshiftErr, 'f', 6));
+			if (nType==NebAGN || nType==NebGx || nType==NebSy2 || nType==NebSyG || nType==NebIG || nType==NebLIN)
+				du = q_("Mpc");
 			else
-				z = QString("%1").arg(QString::number(redshift, 'f', 6));
+				du = q_("kpc");
 
-			oss << q_("Redshift: %1").arg(z) << "<br>";
-		}
-		if (parallax>-99.f)
-		{
-			QString px, dx;
-			// distance in light years from parallax
-			float distance = 3.162e-5/(qAbs(parallax)*4.848e-9);
-			float distanceErr = 0.f;
-
-			if (parallaxErr>0.f)
-			{
-				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
-				distanceErr = 3.162e-5/(qAbs(parallaxErr)*4.848e-9);
-			}
-			else
-				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
-
-			if (distanceErr>0.f)
-				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 2));
-			else
-				dx = QString("%1").arg(QString::number(distance, 'f', 2));
-
-			oss << q_("Parallax: %1\"").arg(px) << "<br>";
-			oss << q_("Distance: %1 ly").arg(dx) << "<br>";
+			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
 		}
 	}
 
@@ -357,6 +333,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	{
 		case NebGx:
 		case NebSy2:
+		case NebSyG:
+		case NebLIN:
 		case NebAGN:
 		case NebIG:
 			Nebula::texGalaxy->bind();
@@ -477,6 +455,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("Mel %1").arg(Mel_nb);
 		else if (PGC_nb > 0)
 			str = QString("PGC %1").arg(PGC_nb);
+		else if (UGC_nb > 0)
+			str = QString("UGC %1").arg(UGC_nb);
 		else if (!Ced_nb.isEmpty())
 			str = QString("Ced %1").arg(Ced_nb);
 		else if (!PK_nb.isEmpty())
@@ -492,9 +472,8 @@ void Nebula::readDSO(QDataStream &in)
 	unsigned int oType;
 
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
-		>> orientationAngle >> radialVelocity >> radialVelocityErr >> redshift >> redshiftErr
-		>> parallax >> parallaxErr >> since >> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb
-		>> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb >> Mel_nb >> PGC_nb >> Ced_nb >> PK_nb;
+		>> orientationAngle >> oDistance >> oDistanceErr >> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb
+		>> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb >> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> PK_nb;
 
 	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
 		angularSize = majorAxisSize*minorAxisSize;
@@ -524,8 +503,14 @@ QString Nebula::getTypeString(void) const
 		case NebSy2:
 			wsType = q_("Seyfert 2 galaxy");
 			break;
+		case NebSyG:
+			wsType = q_("Seyfert galaxy");
+			break;
 		case NebAGN:
 			wsType = q_("galaxy with active nucleus");
+			break;
+		case NebLIN:
+			wsType = q_("galaxy with active nucleus (LINER-type)");
 			break;
 		case NebIG:
 			wsType = q_("interacting galaxy");
