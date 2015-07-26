@@ -327,6 +327,12 @@ void MeteorShowersMgr::draw(StelCore* core)
 	}
 }
 
+void MeteorShowersMgr::repaint()
+{
+	update(1.0);
+	draw(StelApp::getInstance().getCore());
+}
+
 void MeteorShowersMgr::checkForUpdates()
 {
 	if (m_enableAutoUpdates && m_lastUpdate.addSecs(m_updateFrequencyHours * 3600.) <= QDateTime::currentDateTime())
