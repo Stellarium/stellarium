@@ -309,13 +309,13 @@ void MeteorShowersMgr::update(double deltaTime)
 		deltaTime = 500.0;
 	}
 
-/* TODO
 	// is GUI visible? refresh dates
-	if (m_configDialog->visible())
+	if (m_searchDialog->visible())
 	{
-		m_configDialog->refreshRangeDates(core);
+		int year = QDate::fromJulianDay(core->getJDay()).year();
+		m_searchDialog->refreshRangeDates(year);
 	}
-*/
+
 	m_meteorShowers->update(core, deltaTime);
 }
 
