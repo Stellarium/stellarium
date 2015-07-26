@@ -126,13 +126,11 @@ void MSSearchDialog::searchEvents()
 
 void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 {
-	/* TODO
 	// plugin is disabled ? enable it automatically
 	if (!m_mgr->getEnablePlugin())
 	{
 		m_mgr->setEnablePlugin(true);
 	}
-	*/
 
 	// Change date
 	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
