@@ -20,16 +20,12 @@
 #ifndef _MSSEARCHDIALOG_HPP_
 #define _MSSEARCHDIALOG_HPP_
 
-#include <QColor>
-#include <QLabel>
-#include <QObject>
 #include <QTreeWidget>
 
 #include "MeteorShowers.hpp"
 #include "StelDialog.hpp"
 
 class Ui_MSSearchDialog;
-class MeteorShowers;
 
 //! @class MSSearchDialog
 //! @author Marcos Cardinot <mcardinot@gmail.com>
@@ -55,45 +51,65 @@ public:
 	//! Destructor
 	~MSSearchDialog();
 
+	//! Refresh dates
+	void refreshRangeDates(const int& year);
+
 protected:
 	//! Initialize the dialog and connect the signals/slots
 	void createDialogContent();
 
 public slots:
 	void retranslate();
-	void refreshRangeDates(StelCore *core);   //! Refresh dates range when year in main app change
 
 private slots:
-	void checkDates(void);   //! Checks if the inputed dates are valid for use.
-	void searchEvents(void); //! Search events and fill the list.
-	void selectEvent(const QModelIndex &modelIndex); //! If an event is selected by user, the current date change and the object is selected.
-	void repaintTreeWidget();
+	//! Checks if the inputed dates are valid for use.
+	void checkDates();
+
+	//! Search events and fill the list.
+	void searchEvents();
+
+	//! If an event is selected by user, the current date change and the object is selected.
+	void selectEvent(const QModelIndex &modelIndex);
 
 private:
 	MeteorShowersMgr* m_mgr;
 	Ui_MSSearchDialog* m_ui;
-	QTreeWidget* m_treeWidget;     //! list of events
 
-	void initListEvents(); //! Init header and list of events
-	void setHeaderNames(); //! Update header names
+	//! Init header and list of events
+	void initListEvents();
+
+	//! Update header names
+	void setHeaderNames();
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
 class TreeWidgetItem : public QTreeWidgetItem
 {
 public:
-	TreeWidgetItem(QTreeWidget* parent):QTreeWidgetItem(parent){}
+	TreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
 
 private:
-	bool operator<(const QTreeWidgetItem &other)const {
+	bool operator < (const QTreeWidgetItem &other) const
+	{
 		int column = treeWidget()->sortColumn();
 
 		if (column == MSSearchDialog::ColumnPeak)
-			return QDateTime::fromString(text(column),"dd/MMM/yyyy").operator <(QDateTime::fromString(other.text(column),"dd/MMM/yyyy"));
+		{
+			QDateTime a = QDateTime::fromString(text(column),"dd/MMM/yyyy");
+			QDateTime b = QDateTime::fromString(other.text(column),"dd/MMM/yyyy");
+			return a.operator < (b);
+		}
 		else if (column == MSSearchDialog::ColumnZHR)
+		{
 			return text(column).toInt() < other.text(column).toInt();
+		}
 		else //ColumnName or ColumnDataType
+		{
 			return text(column).toLower() < other.text(column).toLower();
+		}
 	}
 };
 
