@@ -756,8 +756,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     }
 
     de_version = atoi(title + 26);
-    qDebug() << "DE_Version: " << de_version;
-
+    
     /* A small piece of trickery:  in the binary file,  data is stored */
     /* for ipt[0...11],  then the ephemeris version,  then the         */
     /* remaining ipt[12] data.  A little switching is required to get  */
@@ -767,11 +766,14 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     temp_data.ipt[12][2] = temp_data.ipt[13][0];
     temp_data.ephemeris_version = de_version;
 
+    qDebug() << "DE_Version: " << de_version;
+
 
     temp_data.swap_bytes = (temp_data.ncon > 65536L);
     if(temp_data.swap_bytes)     /* byte order is wrong for current platform */
     {
       qDebug() << "Byte order is wrong for current platform";
+      
       swap_64_bit_val(&temp_data.ephem_start, 1);
       swap_64_bit_val(&temp_data.ephem_end, 1);
       swap_64_bit_val(&temp_data.ephem_step, 1);
@@ -877,6 +879,8 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
                /* see how many constants there _really_ are.  Older readers */
                /* will just see 400 names and won't know about the others.  */
                /* But on the upside, they won't crash.                      */
+    qDebug() << "CacheSize: " << sizeof(rval->cache);
+    
     if(rval->ncon == 400)
     {
       char buff[7];
