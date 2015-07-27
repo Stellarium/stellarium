@@ -265,7 +265,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				break;
 			}
 			default:			
-			{ qDebug() << "ViewportIntersectCallback: no frame defined! ";
+			{ // qDebug() << "ViewportIntersectCallback: no frame defined! "; GZ that is OK...
 				if (std::fabs(2.*M_PI-lon)<0.001)
 				{
 					// We are at meridian 0
@@ -912,18 +912,25 @@ void GridLinesMgr::draw(StelCore* core)
 {
 	galacticGrid->draw(core);
 	eclJ2000Grid->draw(core);
-	eclGrid->draw(core);
+	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
+	// ecliptic of date is related to Earth and does not make much sense for the other planets.
+	// Of course, orbital plane of respective planet would be better, but is not implemented.
+	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+		eclGrid->draw(core);
 	equJ2000Grid->draw(core);
 	equGrid->draw(core);
 	aziGrid->draw(core);
 	// Lines after grids, to be able to e.g. draw equators in different color!
 	galacticEquatorLine->draw(core);
 	eclipticJ2000Line->draw(core);
-	eclipticLine->draw(core);
+	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+	{
+		eclipticLine->draw(core);
+		precessionCircleN->draw(core);
+		precessionCircleS->draw(core);
+	}
 	longitudeLine->draw(core);
 	equatorJ2000Line->draw(core);
-	precessionCircleN->draw(core);
-	precessionCircleS->draw(core);
 	equatorLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
