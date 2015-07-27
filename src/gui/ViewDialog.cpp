@@ -134,8 +134,11 @@ void ViewDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	populateLists();
+	ui->viewportOffsetSpinBox->setValue((int) round(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1] * 100.0f));
+
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+	connect(ui->viewportOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(viewportVerticalShiftChanged(int)));
 	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
 
 	// Connect and initialize checkboxes and other widgets
@@ -231,6 +234,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
 	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
 	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
+	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
@@ -605,6 +609,18 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 }
 
+void ViewDialog::viewportVerticalShiftChanged(const int shift)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
+	params.viewportCenterOffset[1]=qMax(-0.5f, qMin(shift/100.0f, 0.5f)); // Sanity check
+
+	params.viewportCenter.set(params.viewportXywh[0]+(0.5f+params.viewportCenterOffset.v[0])*params.viewportXywh[2],
+				  params.viewportXywh[1]+(0.5f+params.viewportCenterOffset.v[1])*params.viewportXywh[3]);
+
+	core->setCurrentStelProjectorParams(params);
+}
+
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -615,8 +631,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
-	//StelSkyDrawer *drawer=StelApp::getInstance().getSkyDrawer();
-	// GZ: Reset values that might have changed.
+	// Reset values that might have changed.
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 }
@@ -633,9 +648,6 @@ void ViewDialog::showAtmosphereDialog()
 {
 	if(atmosphereDialog == NULL)
 		atmosphereDialog = new AtmosphereDialog();
-	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
 
 	atmosphereDialog->setVisible(true);
 }

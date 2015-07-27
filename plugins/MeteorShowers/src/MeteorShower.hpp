@@ -33,6 +33,7 @@
 //! A MeteorShower object represents one meteor shower on the sky.
 //! Details about the meteor showers are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup meteorShowers
 
 class MeteorShower : public StelObject
 {

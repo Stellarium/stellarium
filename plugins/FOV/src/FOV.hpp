@@ -27,6 +27,23 @@
 
 class FOVWindow;
 
+/*! @defgroup fieldOfView Field of View Plug-in
+@{
+The %Field of View plugin allows stepwise zooming via keyboard shortcuts like
+in the Cartes du Ciel planetarium program.
+
+<b>Configuration</b>
+
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [FOV]).
+
+@}
+*/
+
+//! @class FOV
+//! Main class of the %Field of View plugin.
+//! @author Alexander Wolf
+//! @ingroup fieldOfView
 class FOV : public StelModule
 {
 	Q_OBJECT

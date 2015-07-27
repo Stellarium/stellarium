@@ -98,7 +98,8 @@ void MeteorMgr::update(double deltaTime)
 	StelCore* core = StelApp::getInstance().getCore();
 
 	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
-	if (!tspeed) { // is paused?
+	if (!tspeed)
+	{ // is paused?
 		return; // freeze meteors at the current position
 	}
 

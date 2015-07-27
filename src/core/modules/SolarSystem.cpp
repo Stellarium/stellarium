@@ -152,6 +152,7 @@ void SolarSystem::init()
 	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
+	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 
 	recreateTrails();
 
@@ -1343,12 +1344,23 @@ void SolarSystem::setFlagOrbits(bool b)
 		foreach (PlanetP p, systemPlanets)
 			p->setFlagOrbits(b);
 	}
-	else
+	else if (getFlagIsolatedOrbits())
 	{
 		// If a Planet is selected and orbits are on, fade out non-selected ones
 		foreach (PlanetP p, systemPlanets)
 		{
 			if (selected == p)
+				p->setFlagOrbits(b);
+			else
+				p->setFlagOrbits(false);
+		}
+	}
+	else
+	{
+		// A planet is selected and orbits are on - draw orbits for the planet and their moons
+		foreach (PlanetP p, systemPlanets)
+		{
+			if (selected == p || selected == p->parent)
 				p->setFlagOrbits(b);
 			else
 				p->setFlagOrbits(false);
@@ -1522,7 +1534,10 @@ void SolarSystem::setFlagPlanets(bool b)
 	flagShow=b;
 }
 
-bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
+bool SolarSystem::getFlagPlanets(void) const
+{
+	return flagShow;
+}
 
 void SolarSystem::setFlagNativeNames(bool b)
 {
@@ -1535,7 +1550,10 @@ void SolarSystem::setFlagNativeNames(bool b)
 	updateI18n();
 }
 
-bool SolarSystem::getFlagNativeNames() const {return flagNativeNames; }
+bool SolarSystem::getFlagNativeNames() const
+{
+	return flagNativeNames;
+}
 
 void SolarSystem::setFlagTranslatedNames(bool b)
 {
@@ -1548,14 +1566,31 @@ void SolarSystem::setFlagTranslatedNames(bool b)
 	updateI18n();
 }
 
-bool SolarSystem::getFlagTranslatedNames() const {return flagTranslatedNames; }
+bool SolarSystem::getFlagTranslatedNames() const
+{
+	return flagTranslatedNames;
+}
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
 {
 	flagIsolatedTrails = b;
 }
 
-bool SolarSystem::getFlagIsolatedTrails() const { return flagIsolatedTrails; }
+bool SolarSystem::getFlagIsolatedTrails() const
+{
+	return flagIsolatedTrails;
+}
+
+void SolarSystem::setFlagIsolatedOrbits(bool b)
+{
+	flagIsolatedOrbits = b;
+}
+
+bool SolarSystem::getFlagIsolatedOrbits() const
+{
+	return flagIsolatedOrbits;
+}
+
 
 // Set/Get planets names color
 void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}

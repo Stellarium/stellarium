@@ -142,7 +142,7 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	//! @note Loading stars with the common names only.
 	virtual QStringList listAllObjects(bool inEnglish) const;	
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Stars"; }
 
 public slots:
@@ -221,6 +221,12 @@ public:
 	//! @param hip The Hipparcos number of star
 	//! @return common name of star (from skyculture @file star_names.fab)
 	static QString getCommonEnglishName(int hip);
+
+	//! Get the cross-index designations for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return cross-index data
+	static QString getCrossIndexDesignations(int hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
@@ -316,6 +322,10 @@ private:
 	//! @param the path to a file containing the GCVS.
 	void loadGcvs(const QString& GcvsFile);
 
+	//! Loads cross-index data from a file.
+	//! @param the path to a file containing the cross-index data.
+	void loadCrossIndex(const QString& crossIndexFile);
+
 	//! Gets the maximum search level.
 	// TODO: add a non-lame description - what is the purpose of the max search level?
 	int getMaxSearchLevel() const;
@@ -367,6 +377,11 @@ private:
 
 	static QHash<int, varstar> varStarsMapI18n;
 	static QMap<QString, int> varStarsIndexI18n;
+
+	static QHash<int, int> saoStarsMap;
+	static QMap<int, int> saoStarsIndex;
+	static QHash<int, int> hdStarsMap;
+	static QMap<int, int> hdStarsIndex;
 
 	QFont starFont;
 	static bool flagSciNames;

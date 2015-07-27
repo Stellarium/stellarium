@@ -130,29 +130,41 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	return true;  //the meteor is alive
 }
 
-Vec4f Meteor::getColorFromName(QString colorName) {
+Vec4f Meteor::getColorFromName(QString colorName)
+{
 	int R, G, B; // 0-255
-	if (colorName == "violet") { // Calcium
+	if (colorName == "violet")
+	{ // Calcium
 		R = 176;
 		G = 67;
 		B = 172;
-	} else if (colorName == "blueGreen") { // Magnesium
+	}
+	else if (colorName == "blueGreen")
+	{ // Magnesium
 		R = 0;
 		G = 255;
 		B = 152;
-	} else if (colorName == "yellow") { // Iron
+	}
+	else if (colorName == "yellow")
+	{ // Iron
 		R = 255;
 		G = 255;
 		B = 0;
-	} else if (colorName == "orangeYellow") { // Sodium
+	}
+	else if (colorName == "orangeYellow")
+	{ // Sodium
 		R = 255;
 		G = 160;
 		B = 0;
-	} else if (colorName == "red") { // atmospheric nitrogen and oxygen
+	}
+	else if (colorName == "red")
+	{ // atmospheric nitrogen and oxygen
 		R = 255;
 		G = 30;
 		B = 0;
-	} else { // white
+	}
+	else
+	{ // white
 		R = 255;
 		G = 255;
 		B = 255;
@@ -161,21 +173,29 @@ Vec4f Meteor::getColorFromName(QString colorName) {
 	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
 }
 
-QList<Meteor::colorPair> Meteor::getRandColor() {
+QList<Meteor::colorPair> Meteor::getRandColor()
+{
 	QList<colorPair> colors;
 	float prob = (double)qrand()/((double)RAND_MAX+1);
-	if (prob > 0.9) {
+	if (prob > 0.9)
+	{
 		colors.push_back(Meteor::colorPair("white", 70));
 		colors.push_back(Meteor::colorPair("orangeYellow", 10));
 		colors.push_back(Meteor::colorPair("yellow", 10));
 		colors.push_back(Meteor::colorPair("blueGreen", 10));
-	} else if (prob > 0.85)  {
+	}
+	else if (prob > 0.85)
+	{
 		colors.push_back(Meteor::colorPair("white", 80));
 		colors.push_back(Meteor::colorPair("violet", 20));
-	} else if (prob > 0.80)  {
+	}
+	else if (prob > 0.80)
+	{
 		colors.push_back(Meteor::colorPair("white", 80));
 		colors.push_back(Meteor::colorPair("orangeYellow", 20));
-	} else {
+	}
+	else
+	{
 		colors.push_back(Meteor::colorPair("white", 100));
 	}
 
@@ -190,22 +210,28 @@ void Meteor::buildColorArrays(const int segments,
 	// building color arrays (line and prism)
 	int totalOfSegments = 0;
 	int currentSegment = 1+(double)qrand()/((double)RAND_MAX+1)*(segments-1);
-	for (int colorIndex=0; colorIndex<colors.size(); colorIndex++) {
+	for (int colorIndex=0; colorIndex<colors.size(); colorIndex++)
+	{
 		colorPair currentColor = colors[colorIndex];
 
 		// segments which we'll paint with the current color
 		int numOfSegments = segments*(currentColor.second / 100.f) + 0.4f; // +0.4 affect approximation
-		if (colorIndex == colors.size()-1) {
+		if (colorIndex == colors.size()-1)
+		{
 			numOfSegments = segments - totalOfSegments;
 		}
 
 		totalOfSegments += numOfSegments;
-		for (int i=0; i<numOfSegments; i++) {
+		for (int i=0; i<numOfSegments; i++)
+		{
 			lineColorArray.insert(currentSegment, getColorFromName(currentColor.first));
 			trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
-			if (currentSegment >= segments-1) {
+			if (currentSegment >= segments-1)
+			{
 				currentSegment = 0;
-			} else {
+			}
+			else
+			{
 				currentSegment++;
 			}
 			trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
@@ -281,7 +307,9 @@ void Meteor::calculateThickness(const StelCore* core, float& thickness, float& b
 	if (FOV <= 0.5)
 	{
 		thickness = 0.013 * FOV; // decreasing faster
-	} else if (FOV > 100.0) {
+	}
+	else if (FOV > 100.0)
+	{
 		thickness = 0; // remove prism
 	}
 	bolideSize = thickness*3;
@@ -290,7 +318,8 @@ void Meteor::calculateThickness(const StelCore* core, float& thickness, float& b
 void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const MeteorModel& mm,
 			const Mat4d& viewMatrix, const float bolideSize)
 {
-	if (!bolideSize) {
+	if (!bolideSize)
+	{
 		return;
 	}
 
@@ -359,9 +388,11 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const Meteor
 	Vec3d posTrainR = mm.posTrain;
 	posTrainR[0] -= thickness;
 
-	for (int i=0; i<segments; i++) {
+	for (int i=0; i<segments; i++)
+	{
 		float mag = mm.mag * i/(3* (segments-1));
-		if (i > mm.firstBrightSegment) {
+		if (i > mm.firstBrightSegment)
+		{
 			mag *= 12./5.;
 		}
 
@@ -395,7 +426,8 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const Meteor
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
-	if (thickness) {
+	if (thickness)
+	{
 		sPainter.setColorPointer(4, GL_FLOAT, trainColorArray.toVector().constData());
 
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());

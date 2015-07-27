@@ -36,6 +36,7 @@ class StelPainter;
 //! A Quasar object represents one Quasar on the sky.
 //! Details about the Quasars are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup quasars
 
 class Quasar : public StelObject
 {

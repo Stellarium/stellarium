@@ -19,8 +19,6 @@ screen_w                            = 1024
 screen_h                            = 768
 screen_x                            = 0
 screen_y                            = 0
-horizontal_offset                   = 0
-vertical_offset                     = 0
 minimum_fps                         = 18
 maximum_fps                         = 10000
 #viewport_effect                     = sphericMirrorDistorter
@@ -151,11 +149,15 @@ galactic_equator_color              = 0.5,0.3,0.1
 meridian_color                      = 0.2,0.6,0.2
 longitude_color                     = 0.2,0.4,0.4
 horizon_color                       = 0.2,0.6,0.2
-const_lines_color                   = 0.1,0.1,0.3
-const_names_color                   = 0.2,0.4,0.7
+const_lines_color                   = 0.2,0.2,0.6
+const_names_color                   = 0.4,0.6,0.9
 const_boundary_color                = 0.3,0.1,0.1
 nebula_label_color                  = 0.2,0.6,0.7
 nebula_circle_color                 = 1.0,0.7,0.2
+nebula_galaxy_color                 = 1.0,0.2,0.2
+nebula_brightneb_color              = 0.1,1.0,0.1
+nebula_darkneb_color                = 0.3,0.3,0.3
+nebula_cluster_color                = 1.0,1.0,0.1
 star_label_color                    = 0.4,0.3,0.5
 cardinal_color                      = 0.8,0.2,0.1
 planet_names_color                  = 0.5,0.5,0.7
@@ -207,6 +209,9 @@ flag_minimal_brightness             = false
 # This allows use of a minimum value even given in the respective landscape.ini
 flag_landscape_sets_minimal_brightness = true
 flag_enable_illumination_layer      = true
+flag_enable_labels                  = true
+label_font_size                     = 18
+label_color                         = 0.2,0.8,0.2
 
 [viewing]
 flag_constellation_drawing          = false
@@ -234,7 +239,8 @@ flag_moon_scaled                    = false
 moon_scale                          = 4
 constellation_art_intensity         = 0.45
 constellation_art_fade_duration     = 1.5
-flag_chart                          = false
+# GZ I found this unused, 2015-04.
+#flag_chart                          = false
 flag_night                          = false
 light_pollution_luminance           = 0.0
 use_luminance_adaptation            = true

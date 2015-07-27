@@ -64,6 +64,8 @@ private slots:
 	void toggleTypeVirtual(bool);
 	
 	void deviceModelSelected(const QString&);
+    //
+    bool validateHost(QString hostName);
 
 signals:
 	void changesSaved(QString name, ConnectionType type);
