@@ -47,7 +47,7 @@ MeteorShowerDialog::MeteorShowerDialog()
 	, updateTimer(NULL)
 	, treeWidget(NULL)
 {
-    ui = new Ui_meteorShowerDialog;
+	ui = new Ui_meteorShowerDialog;
 }
 
 MeteorShowerDialog::~MeteorShowerDialog()
@@ -72,7 +72,8 @@ void MeteorShowerDialog::retranslate()
 
 		//Retranslate name and datatype strings
 		QTreeWidgetItemIterator it(treeWidget);
-		while (*it) {
+		while (*it)
+		{
 			//Name
 			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
 			//Data type
@@ -142,7 +143,7 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
 	// Markers tab
-	refreshColorMarkers();
+	refreshMarkersColor();
 	connect(ui->changeColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
 	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
@@ -314,15 +315,25 @@ void MeteorShowerDialog::refreshUpdateValues(void)
 	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
 	int secondsToUpdate = plugin->getSecondsToUpdate();
 	if (!plugin->getUpdatesEnabled())
+	{
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
+	}
 	else if (plugin->getUpdateState() == MeteorShowers::Updating)
+	{
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
+	}
 	else if (secondsToUpdate <= 60)
+	{
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
+	}
 	else if (secondsToUpdate < 3600)
+	{
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 minutes")).arg((secondsToUpdate/60)+1));
+	}
 	else
+	{
 		ui->nextUpdateLabel->setText(QString(q_("Next update: %1 hours")).arg((secondsToUpdate/3600)+1));
+	}
 }
 
 void MeteorShowerDialog::setUpdateValues(int hours)
@@ -344,7 +355,9 @@ void MeteorShowerDialog::updateStateReceiver(MeteorShowers::UpdateState state)
 {
 	//qDebug() << "MeteorShowerDialog::updateStateReceiver got a signal";
 	if (state==MeteorShowers::Updating)
+	{
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
+	}
 	else if (state==MeteorShowers::DownloadError || state==MeteorShowers::OtherError)
 	{
 		ui->nextUpdateLabel->setText(q_("Update error"));
@@ -373,7 +386,7 @@ void MeteorShowerDialog::restoreDefaults(void)
 void MeteorShowerDialog::updateGuiFromSettings(void)
 {	
 	refreshUpdateValues();
-	refreshColorMarkers();
+	refreshMarkersColor();
 }
 
 void MeteorShowerDialog::saveSettings(void)
@@ -389,18 +402,11 @@ void MeteorShowerDialog::updateJSON(void)
 	}
 }
 
-void MeteorShowerDialog::refreshColorMarkers(void)
+void MeteorShowerDialog::refreshMarkersColor(void)
 {
-	setTextureColor(ui->textureARG, plugin->getColorARG());
-	setTextureColor(ui->textureARR, plugin->getColorARR());
-	setTextureColor(ui->textureIR, plugin->getColorIR());
-}
-
-void MeteorShowerDialog::setTextureColor(QLabel *texture, QColor color)
-{
-	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(texture);
-	e->setColor(color);
-	texture->setGraphicsEffect(e);
+	ui->changeColorARG->setStyleSheet("background-color:" + plugin->getColorARG().name() + ";");
+	ui->changeColorARR->setStyleSheet("background-color:" + plugin->getColorARR().name() + ";");
+	ui->changeColorIR->setStyleSheet("background-color:" + plugin->getColorIR().name() + ";");
 }
 
 void MeteorShowerDialog::setColorARG()
@@ -408,7 +414,7 @@ void MeteorShowerDialog::setColorARG()
 	QColor color = QColorDialog::getColor(plugin->getColorARG());
 	if (color.isValid())
 	{
-		setTextureColor(ui->textureARG, color);
+		ui->changeColorARG->setStyleSheet("background-color:" + color.name() + ";");
 		plugin->setColorARG(color);
 	}
 }
@@ -418,7 +424,7 @@ void MeteorShowerDialog::setColorARR()
 	QColor color = QColorDialog::getColor(plugin->getColorARR());
 	if (color.isValid())
 	{
-		setTextureColor(ui->textureARR, color);
+		ui->changeColorARR->setStyleSheet("background-color:" + color.name() + ";");
 		plugin->setColorARR(color);
 	}
 }
@@ -428,7 +434,7 @@ void MeteorShowerDialog::setColorIR()
 	QColor color = QColorDialog::getColor(plugin->getColorIR());
 	if (color.isValid())
 	{
-		setTextureColor(ui->textureIR, color);
+		ui->changeColorIR->setStyleSheet("background-color:" + color.name() + ";");
 		plugin->setColorIR(color);
 	}
 }

@@ -31,6 +31,7 @@ class StelPainter;
 //! Control of the meteor rate is performed in the MeteorShowers class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
 //! "dies", after which, the update() member returns false.
+//! @ingroup meteorShowers
 class MeteorStream
 {
 public:

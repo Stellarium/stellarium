@@ -119,6 +119,13 @@ class Translations
 		N_("Melotte Catalogue");
 		
 		// =====================================================================
+		// List of stars types
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Interesting double stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Interesting variable stars");
+		
+		// =====================================================================
 		// Constellation cultures
 		N_("Arabic");
 		N_("Arabic Moon Stations");

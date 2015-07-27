@@ -33,6 +33,7 @@ class QTimer;
 class Ui_meteorShowerDialog;
 class MeteorShowers;
 
+//! @ingroup meteorShowers
 class MeteorShowerDialog : public StelDialog
 {
 	Q_OBJECT
@@ -48,7 +49,7 @@ protected:
 public slots:
 	void retranslate();
 	void refreshUpdateValues(void); //! Refresh details about the last update
-	void refreshColorMarkers(void); //! Refresh the color of all markers
+	void refreshMarkersColor(void); //! Refresh the color of all markers
 	void refreshRangeDates(void);   //! Refresh dates range when year in main app change
 
 private slots:
@@ -73,7 +74,6 @@ private:
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
-	void setTextureColor(QLabel* texture, QColor color);
 
 	//! Defines the number and the order of the columns in the table that lists active meteor showers
 	//! @enum ModelColumns

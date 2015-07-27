@@ -118,6 +118,11 @@ public:
 	//! @param clippingCap if not set to NULL, tells the painter to try to clip part of the region outside the cap.
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=NULL, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
 
+	//! Draw a curve defined by a list of points.
+	//! The points should be already tesselated to ensure that the path will look smooth.
+	//! The algorithm take care of cutting the path if it crosses a viewport discontinutiy.
+	void drawPath(const QVector<Vec3d> &points, const QVector<Vec4f> &colors);
+
 	//! Draw a simple circle, 2d viewport coordinates in pixel
 	void drawCircle(float x, float y, float r);
 
@@ -329,6 +334,7 @@ private:
 
 	// Used by the method below
 	static QVector<Vec2f> smallCircleVertexArray;
+	static QVector<Vec4f> smallCircleColorArray;
 	void drawSmallCircleVertexArray();
 
 	//! The associated instance of projector

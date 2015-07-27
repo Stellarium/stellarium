@@ -479,12 +479,12 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.468,
-				"radius": 1.03,
+				"mass": 0.46,
+				"radius": 1.9,
 				"period": 4.2308,
 				"semiAxis": 0.052,
 				"eccentricity": 0.0069,
-				"inclination": 80.9,
+				"inclination": 80.0,
 				"angleDistance": 0.003537,
 				"discovered": 1995,
 				"planetName": "b"
@@ -1444,6 +1444,32 @@
 			"RA": "6h44m12.5s",
 			"DE": "0d17m56.8s"
 		},
+		"CoRoT-22":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.0383853003178,
+				"radius": 0.435365216104,
+				"period": 9.75598,
+				"semiAxis": 0.092,
+				"eccentricity": 0.077,
+				"inclination": 89.749,
+				"angleDistance": 0.000149,
+				"discovered": 2011,
+				"planetName": "b"
+			}
+			],
+			"distance": 592.0,
+			"stype": "G0IV",
+			"smass": 1.099,
+			"smetal": 0.17,
+			"Vmag": 11.93,
+			"sradius": 1.136,
+			"effectiveTemp": 5939.0,
+			"RA": "18h42m40s",
+			"DE": "6d13m30s"
+		},
 		"CoRoT-23":
 		{
 			"exoplanets":
@@ -1469,6 +1495,42 @@
 			"effectiveTemp": 5900.0,
 			"RA": "18h39m7.8s",
 			"DE": "4d21m28s"
+		},
+		"CoRoT-24":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.018,
+				"radius": 0.33,
+				"period": 5.1134,
+				"semiAxis": 0.056,
+				"eccentricity": 0.0,
+				"inclination": 86.5,
+				"angleDistance": 9.3e-05,
+				"discovered": 2011,
+				"planetName": "b"
+			},
+			{
+				"mass": 0.088,
+				"radius": 0.44,
+				"period": 11.759,
+				"semiAxis": 0.098,
+				"eccentricity": 0.0,
+				"inclination": 89.0,
+				"angleDistance": 0.000163,
+				"discovered": 2011,
+				"planetName": "c"
+			}
+			],
+			"distance": 600.0,
+			"stype": "K1V",
+			"smass": 0.91,
+			"smetal": 0.3,
+			"sradius": 0.86,
+			"effectiveTemp": 4950.0,
+			"RA": "6h47m42s",
+			"DE": "-3d43m10s"
 		},
 		"CoRoT-25":
 		{
@@ -2656,6 +2718,7 @@
 			[
 			{
 				"mass": 11.0,
+				"radius": 1.35,
 				"semiAxis": 2000.0,
 				"discovered": 2014,
 				"planetName": "b"
@@ -27749,7 +27812,8 @@
 			"exoplanets":
 			[
 			{
-				"mass": 10.0,
+				"mass": 9.0,
+				"radius": 2.5,
 				"semiAxis": 140.0,
 				"discovered": 2013,
 				"planetName": "b"
@@ -27787,16 +27851,18 @@
 			"exoplanets":
 			[
 			{
-				"mass": 8.5,
+				"mass": 11.3,
+				"radius": 1.07,
 				"semiAxis": 1168.0,
 				"angleDistance": 10.245614,
 				"discovered": 2010,
 				"planetName": "c"
 			}
 			],
-			"distance": 114.0,
-			"stype": "M2V",
+			"distance": 11.7,
+			"stype": "M0.5",
 			"smass": 0.6,
+			"smetal": 0.0,
 			"Vmag": 9.76,
 			"RA": "13h0m46.9s",
 			"DE": "12d22m32.9s"
@@ -29843,6 +29909,31 @@
 			"RA": "21h19m48s",
 			"DE": "-57d51m3.9s"
 		},
+		"WASP-74":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.95,
+				"radius": 1.56,
+				"period": 2.13775,
+				"semiAxis": 0.037,
+				"eccentricity": 0.0,
+				"inclination": 79.81,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 120.0,
+			"stype": "F9",
+			"smass": 1.48,
+			"smetal": 0.39,
+			"Vmag": 9.7,
+			"sradius": 1.64,
+			"effectiveTemp": 5970.0,
+			"RA": "20h18m10s",
+			"DE": "-1d4m33s"
+		},
 		"WASP-75":
 		{
 			"exoplanets":
@@ -30043,6 +30134,31 @@
 			"RA": "4h50m38.9s",
 			"DE": "1d53m38s"
 		},
+		"WASP-83":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.3,
+				"radius": 1.04,
+				"period": 4.071252,
+				"semiAxis": 0.059,
+				"eccentricity": 0.0,
+				"inclination": 88.9,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 300.0,
+			"stype": "G8",
+			"smass": 1.11,
+			"smetal": 0.29,
+			"Vmag": 12.9,
+			"sradius": 1.05,
+			"effectiveTemp": 5480.0,
+			"RA": "12h40m37s",
+			"DE": "-19d17m3s"
+		},
 		"WASP-84":
 		{
 			"exoplanets":
@@ -30135,6 +30251,30 @@
 			"effectiveTemp": 6431.0,
 			"RA": "20h38m3s",
 			"DE": "-47d32m16.9s"
+		},
+		"WASP-89":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 5.9,
+				"radius": 1.04,
+				"period": 3.3564227,
+				"semiAxis": 0.0427,
+				"eccentricity": 0.193,
+				"inclination": 89.4,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"stype": "K3",
+			"smass": 0.92,
+			"smetal": 0.15,
+			"Vmag": 13.1,
+			"sradius": 0.88,
+			"effectiveTemp": 4955.0,
+			"RA": "20h55m36s",
+			"DE": "-18d58m16s"
 		},
 		"WASP-90":
 		{

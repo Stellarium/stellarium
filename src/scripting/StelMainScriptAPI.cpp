@@ -371,6 +371,21 @@ bool StelMainScriptAPI::getDiskViewport()
 	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk;
 }
 
+void StelMainScriptAPI::setSphericMirror(bool b)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	if (b)
+	{
+		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
+		StelApp::getInstance().setViewportEffect("sphericMirrorDistorter");
+	}
+	else
+	{
+		core->setCurrentProjectionTypeKey(core->getDefaultProjectionTypeKey());
+		StelApp::getInstance().setViewportEffect("none");
+	}
+}
+
 void StelMainScriptAPI::setDiskViewport(bool b)
 {
 	emit(requestSetDiskViewport(b));
@@ -1026,6 +1041,40 @@ void StelMainScriptAPI::clear(const QString& state)
 	else if (state.toLower() == "deepspace")
 	{
 		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
+	}
+	else if (state.toLower() == "galactic")
+	{
+		movmgr->setMountMode(StelMovementMgr::MountGalactic);
 		skyd->setFlagTwinkle(false);
 		skyd->setFlagLuminanceAdaptation(false);
 		ssmgr->setFlagPlanets(false);

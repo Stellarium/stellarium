@@ -38,6 +38,7 @@ class StelPainter;
 class StelLocation;
 
 //! Radio communication channel properties.
+//! @ingroup satellites
 typedef struct
 {
 	double frequency; //!< Channel frequency in MHz.
@@ -46,6 +47,7 @@ typedef struct
 } CommLink;
 
 //! Description of the data roles used in SatellitesListModel.
+//! @ingroup satellites
 enum SatelliteDataRole {
 	SatIdRole = Qt::UserRole,
 	SatDescriptionRole,
@@ -56,9 +58,11 @@ enum SatelliteDataRole {
 };
 
 //! Type for sets of satellite group IDs.
+//! @ingroup satellites
 typedef QSet<QString> GroupSet;
 
 //! Flag type reflecting internal flags of Satellite.
+//! @ingroup satellites
 enum SatFlag
 {
 	SatNoFlags = 0x0,
@@ -79,10 +83,11 @@ Q_DECLARE_METATYPE(SatFlags)
 //! @class Satellite
 //! A representation of a satellite in Earth orbit.
 //! Details about the satellite are passed with a JSON-representation structure
-//! that contains a @ref satcat "satellite catalog" entry.
+//! that contains a <b>Satellite Catalog</b> entry.
 //! 
 //! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
+//! @ingroup satellites
 class Satellite : public StelObject
 {
 	friend class Satellites;
@@ -209,7 +214,7 @@ private:
 	QPair< QByteArray, QByteArray > tleElements;
 	double height, range, rangeRate;
 	QList<CommLink> comms;
-	Vec3f hintColor;
+	Vec3f hintColor;	
 	//! Identifiers of the groups to which the satellite belongs.
 	//! See @ref groups.
 	GroupSet groups;
@@ -226,6 +231,7 @@ private:
 	static bool  realisticModeFlag;
 	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
+	static Vec3f invisibleSatelliteColor;
 
 	void draw(StelCore *core, StelPainter& painter, float maxMagHints);
 
@@ -235,8 +241,14 @@ private:
 	Vec3d	velocity;
 	Vec3d	latLongSubPointPosition;
 	Vec3d	elAzPosition;
+
+#ifdef IRIDIUM_SAT_TEXT_DEBUG
+	static QString myText;
+#endif
+
 	int	visibility;
 	double	phaseAngle; // phase angle for the satellite
+	static double sunReflAngle; // for Iridium satellites
 
 	//Satellite Orbit Draw
 	QFont     font;
@@ -244,6 +256,7 @@ private:
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
+	QList<int> visibilityPoints; //orbit visibility points
 };
 
 typedef QSharedPointer<Satellite> SatelliteP;

@@ -73,6 +73,7 @@ public:
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* event);
+	virtual QVariant itemChange(GraphicsItemChange change, const QVariant & value) Q_DECL_OVERRIDE;
 
 private slots:
 	//! Load color scheme from the given ini file and section name
