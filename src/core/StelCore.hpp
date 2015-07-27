@@ -255,6 +255,10 @@ public:
 
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
+	//! Unfortunately we also need this.
+	const StelObserver* getCurrentObserver() const;
+
+
 	SphericalCap getVisibleSkyArea() const;
 	
 	//! Smoothly move the observer to the given location
@@ -480,6 +484,8 @@ public slots:
 	void addTropicalYear();
 	//! Add one mean tropical century to the simulation time.
 	void addTropicalCentury();
+	//! Add one Julian century to the simulation time.
+	void addJulianCentury();
 
 	//! Subtract one synodic month to the simulation time.
 	void subtractSynodicMonth();
@@ -498,6 +504,8 @@ public slots:
 	void subtractTropicalYear();
 	//! Subtract one mean tropical century to the simulation time.
 	void subtractTropicalCentury();
+	//! Subtract one Julian century to the simulation time.
+	void subtractJulianCentury();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)
@@ -556,15 +564,15 @@ private:
 	void resetSync();
 
 	// Matrices used for every coordinate transfo
-	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic Cartesian (VSOP87A) to topocentric (StelObserver) altazimuthal coordinate
-	Mat4d matAltAzToHeliocentricEcliptic;	   // Transform from topocentric (StelObserver) altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
+	Mat4d matHeliocentricEclipticJ2000ToAltAz; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to topocentric (StelObserver) altazimuthal coordinate
+	Mat4d matAltAzToHeliocentricEclipticJ2000; // Transform from topocentric (StelObserver) altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
 	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
 	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
 	Mat4d matEquinoxEquToJ2000;                // GZ For Earth, this should be inverse precession matrix. Yes, =Rz(VSOPoffset)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
 	Mat4d matJ2000ToEquinoxEqu;                // GZ: Should be precession matrix?
-	Mat4d matEclOfDateToVsop87;                // GZ NEW: precession of the ecliptic
-	Mat4d matVsop87ToEclOfDate;                // GZ NEW: precession of the ecliptic
+//	Mat4d matEclOfDateToVsop87;                // GZ NEW: precession of the ecliptic
+//	Mat4d matVsop87ToEclOfDate;                // GZ NEW: precession of the ecliptic
 
 
 	Mat4d matJ2000ToAltAz;
