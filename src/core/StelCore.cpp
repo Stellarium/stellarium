@@ -634,9 +634,9 @@ Vec3d StelCore::j2000ToGalactic(const Vec3d& v) const
 Vec3d StelCore::heliocentricEclipticToAltAz(const Vec3d& v, RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return matHeliocentricEclipticToAltAz*v;
+		return matHeliocentricEclipticJ2000ToAltAz*v;
 	Vec3d r(v);
-	r.transfo4d(matHeliocentricEclipticToAltAz);
+	r.transfo4d(matHeliocentricEclipticJ2000ToAltAz);
 	skyDrawer->getRefraction().forward(r);
 	return r;
 }
@@ -660,10 +660,10 @@ Vec3d StelCore::heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const
 StelProjector::ModelViewTranformP StelCore::getHeliocentricEclipticModelViewTransform(RefractionMode refMode) const
 {
 	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticToAltAz));
+		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matHeliocentricEclipticJ2000ToAltAz));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-	refr->setPreTransfoMat(matHeliocentricEclipticToAltAz);
+	refr->setPreTransfoMat(matHeliocentricEclipticJ2000ToAltAz);
 	refr->setPostTransfoMat(matAltAzModelView);
 	return StelProjector::ModelViewTranformP(refr);
 }
@@ -680,17 +680,14 @@ StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticJ2000Model
 	return StelProjector::ModelViewTranformP(refr);
 }
 
-//! Get the modelview matrix for observer-centric ecliptic of date drawing
+//! Get the modelview matrix for observer-centric ecliptic-of-date drawing
 StelProjector::ModelViewTranformP StelCore::getObservercentricEclipticOfDateModelViewTransform(RefractionMode refMode) const
 {
 	double eps_A=getPrecessionAngleVondrakCurrentEpsilonA();
-	// GZ TODO: Apply precession of the ecliptic here!!!! ==> REPLACE matVsop87ToJ2000*matEclOfDateToVsop87 by something that works!
 	if (refMode==RefractionOff || skyDrawer==NULL || (refMode==RefractionAuto && skyDrawer->getFlagHasAtmosphere()==false))
-//		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87));
 		return StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(matAltAzModelView*matEquinoxEquToAltAz* Mat4d::xrotation(eps_A)));
 	Refraction* refr = new Refraction(skyDrawer->getRefraction());
 	// The pretransform matrix will convert from input coordinates to AltAz needed by the refraction function.
-	//refr->setPreTransfoMat(matJ2000ToAltAz*matVsop87ToJ2000*matEclOfDateToVsop87);
 	refr->setPreTransfoMat(matEquinoxEquToAltAz* Mat4d::xrotation(eps_A));
 	refr->setPostTransfoMat(matAltAzModelView);
 	return StelProjector::ModelViewTranformP(refr);
@@ -756,8 +753,7 @@ void StelCore::updateTransformMatrices()
 
 	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
 	// in effect, this matrix transforms from VSOP87 ecliptical J2000 to planet-based equatorial coordinates.
-	// For earth, this moves the equator relative to J2000 (precession of the equator).
-	// TODO: fix Planet::getRotEquatorialToVsop87() so that matEquinoxEquToJ2000 performs Precession of the Equator properly.
+	// For earth, matJ2000ToEquinoxEqu is the precession matrix.
 	// TODO: rename matEquinoxEquToJ2000 to matEquinoxEquDateToJ2000
 	matEquinoxEquToJ2000 = matVsop87ToJ2000 * position->getRotEquatorialToVsop87();
 	matJ2000ToEquinoxEqu = matEquinoxEquToJ2000.transpose();
@@ -765,32 +761,35 @@ void StelCore::updateTransformMatrices()
 
 	matHeliocentricEclipticToEquinoxEqu = matJ2000ToEquinoxEqu * matVsop87ToJ2000 * Mat4d::translation(-position->getCenterVsop87Pos());
 
-	// These two next have to take into account the position of the observer on the earth
+	// These two next have to take into account the position of the observer on the earth/planet of observation.
 	// GZ tmp could be called matAltAzToVsop87
 	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
 
-	// TODO: rename to matAltAzToHeliocentricEcliptic2000
 	// TODO: getDistanceFromCenter assumes spherical planets. Use rectangular coordinates for observer!
-	matAltAzToHeliocentricEcliptic =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+	matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 						  Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
-	matHeliocentricEclipticToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
+	matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 						  Mat4d::translation(-position->getCenterVsop87Pos());
 
-	// GZ Finally, new: rotation of the ecliptic of date. Not sure which direction, though...
-	double epsilon_A, chi_A, omega_A, psi_A;
-	getPrecessionAnglesVondrak(JDay, &epsilon_A, &chi_A, &omega_A, &psi_A);
-	//matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
-	matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-23.4392803055555555556*(M_PI/180));
-	matEclOfDateToVsop87=matVsop87ToEclOfDate.transpose();
-	//matEclOfDateToVsop87= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
-	//matVsop87ToEclOfDate=matVsop87ToEclOfDate.transpose();
+
+//	Given that ecliptic of date is apparently not used any longer as reference plane for astronomical computations, it is enough to display it.
+//	This half-finished block of comments can the likely go away for V0.14. Else, do we have use for carrying the extra matrices with us? Then complete this:
+//	// GZ Finally, new: rotation of the ecliptic of date. Not sure which direction, though...
+//	double epsilon_A, chi_A, omega_A, psi_A;
+//	// MAKE SURE JDay IS TT!!!
+//	getPrecessionAnglesVondrak(JDay, &epsilon_A, &chi_A, &omega_A, &psi_A);
+//	//matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
+//	matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-23.4392803055555555556*(M_PI/180));
+//	matEclOfDateToVsop87=matVsop87ToEclOfDate.transpose();
+//	//matEclOfDateToVsop87= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
+//	//matVsop87ToEclOfDate=matVsop87ToEclOfDate.transpose();
 }
 
 // Return the observer heliocentric position
 Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 {
-	return Vec3d(matAltAzToHeliocentricEcliptic[12], matAltAzToHeliocentricEcliptic[13], matAltAzToHeliocentricEcliptic[14]);
+	return Vec3d(matAltAzToHeliocentricEclipticJ2000[12], matAltAzToHeliocentricEclipticJ2000[13], matAltAzToHeliocentricEclipticJ2000[14]);
 }
 
 // Set the location to use by default at startup
@@ -940,6 +939,11 @@ const StelLocation& StelCore::getCurrentLocation() const
 const QSharedPointer<Planet> StelCore::getCurrentPlanet() const
 {
 	return position->getHomePlanet();
+}
+
+const StelObserver *StelCore::getCurrentObserver() const
+{
+	return position;
 }
 
 // Smoothly move the observer to the given location
@@ -1112,6 +1116,11 @@ void StelCore::addTropicalCentury()
 	addSolarDays(36524.21897);
 }
 
+void StelCore::addJulianCentury()
+{
+	addSolarDays(36525.0);
+}
+
 void StelCore::subtractHour()
 {
 	addSolarDays(-JD_HOUR);
@@ -1200,6 +1209,11 @@ void StelCore::subtractTropicalYear()
 void StelCore::subtractTropicalCentury()
 {
 	addSolarDays(-36524.21897);
+}
+
+void StelCore::subtractJulianCentury()
+{
+	addSolarDays(-36525.0);
 }
 
 void StelCore::addSolarDays(double d)
