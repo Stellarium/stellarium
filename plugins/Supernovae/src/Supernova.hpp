@@ -36,6 +36,7 @@ class StelPainter;
 //! A Supernova object represents one supernova on the sky.
 //! Details about the supernovas are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup historicalSupernovae
 
 class Supernova : public StelObject
 {

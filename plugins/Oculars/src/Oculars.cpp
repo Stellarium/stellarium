@@ -38,6 +38,7 @@
 #include "StelProjector.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
+#include "SolarSystem.hpp"
 #include "StelUtils.hpp"
 
 #include <QAction>
@@ -118,6 +119,7 @@ Oculars::Oculars():
 	magLimitStars(0.0),
 	flagLimitDSOs(false),
 	magLimitDSOs(0.0),
+	flagMoonScale(false),
 	ccdRotationAngle(0.0),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
@@ -1590,7 +1592,9 @@ void Oculars::paintText(const StelCore* core)
 	// The Ocular
 	if (flagShowOculars) {
 		QString ocularNumberLabel;
-		QString name = ocular->name();
+		QString name = "";
+		if (ocular!=NULL)
+			name = ocular->name();
 		if (name.isEmpty())
 		{
 			ocularNumberLabel = QString(q_("Ocular #%1"))
@@ -1647,7 +1651,9 @@ void Oculars::paintText(const StelCore* core)
 		
 			// The telescope
 			QString telescopeNumberLabel;
-			QString telescopeName = telescope->name();
+			QString telescopeName = "";
+			if (telescope!=NULL)
+				name = telescope->name();
 			if (telescopeName.isEmpty())
 			{
 				telescopeNumberLabel = QString(q_("Telescope #%1"))
@@ -1682,11 +1688,17 @@ void Oculars::paintText(const StelCore* core)
 	// The CCD
 	if (flagShowCCD) {
 		QString ccdSensorLabel, ccdInfoLabel;
-		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+		QString name = "";
+		double fovX = 0.0;
+		double fovY = 0.0;
+		if (ccd!=NULL)
+		{
+			fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+			fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+			name = ccd->name();
+		}
 		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
-		QString name = ccd->name();
 		if (name.isEmpty())
 		{
 			ccdSensorLabel = QString(q_("Sensor #%1")).arg(selectedCCDIndex);
@@ -1804,6 +1816,8 @@ void Oculars::unzoomOcular()
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
 
+	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScale);
+
 	// Set the screen display
 	core->setMaskType(StelProjector::MaskNone);
 	core->setFlipHorz(false);
@@ -1848,6 +1862,8 @@ void Oculars::zoom(bool zoomedIn)
 			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
 			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
 
+			flagMoonScale = GETSTELMODULE(SolarSystem)->getFlagMoonScale();
+
 			StelMovementMgr *movementManager = core->getMovementMgr();
 			initialFOV = movementManager->getCurrentFov();
 		}
@@ -1881,6 +1897,8 @@ void Oculars::zoomOcular()
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
+
+	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);

@@ -32,6 +32,7 @@
 //!
 //! @author Timothy Reaves <treaves@silverfieldstech.com>
 //! @ref http://doc.qt.nokia.com/latest/properties.html
+//! @ingroup oculars
 class PropertyBasedTableModel : public QAbstractTableModel
 {
 	Q_OBJECT

@@ -102,6 +102,7 @@ public:
 			, zNear(0.f)
 			, zFar(0.f)
 			, viewportCenter(128.f, 128.f)
+			, viewportCenterOffset(0.f, 0.f)
 			, viewportFovDiameter(0.f)
 			, flipHorz(false)
 			, flipVert(false)
@@ -114,6 +115,8 @@ public:
 		StelProjectorMaskType maskType; //! The current projector mask
 		float zNear, zFar;              //! Near and far clipping planes
 		Vec2f viewportCenter;           //! Viewport center in screen pixel
+		Vec2f viewportCenterOffset;     //! Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
+						//! Currently only Y shift is fully implemented, X shift likely not too meaningful.
 		float viewportFovDiameter;      //! diameter of the FOV disk in pixel
 		bool flipHorz, flipVert;        //! Whether to flip in horizontal or vertical directions
 		float devicePixelsPerPixel;     //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
@@ -315,6 +318,8 @@ protected:
 	float zNear, oneOverZNearMinusZFar; // Near and far clipping planes
 	Vec4i viewportXywh;                 // Viewport parameters
 	Vec2f viewportCenter;               // Viewport center in screen pixel
+	Vec2f viewportCenterOffset;         // Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
+					    // Currently only Y shift is fully implemented, X shift likely not too meaningful.
 	float viewportFovDiameter;          // diameter of the FOV disk in pixel
 	bool gravityLabels;                 // should label text align with the horizon?
 	float defaultAngleForGravityText;   // a rotation angle to apply to gravity text (only if gravityLabels is set to false)

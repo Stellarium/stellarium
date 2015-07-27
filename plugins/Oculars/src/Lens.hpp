@@ -27,6 +27,7 @@
 
 class QSettings;
 
+//! @ingroup oculars
 class Lens : public QObject
 {
     Q_OBJECT
