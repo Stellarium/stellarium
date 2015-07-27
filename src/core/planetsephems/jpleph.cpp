@@ -562,28 +562,28 @@ static int dimension(const int idx)
 int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
                           double pv[][6], double nut[4], const int bary)
 {
-   struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-   unsigned i, j, n_intervals;
-   uint32_t nr;
-   double *buf = eph->cache;
-   double t[2];
-   const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
-   bool recompute_pvsun;
-   const double aufac = 1.0 / eph->au;
+  struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+  unsigned i, j, n_intervals;
+  uint32_t nr;
+  double *buf = eph->cache;
+  double t[2];
+  const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
+  bool recompute_pvsun;
+  const double aufac = 1.0 / eph->au;
 
 /*   error return for epoch out of range  */
-    if(et < eph->ephem_start || et > eph->ephem_end)
-      return(JPL_EPH_OUTSIDE_RANGE);
+  if(et < eph->ephem_start || et > eph->ephem_end)
+    return(JPL_EPH_OUTSIDE_RANGE);
 
 /*   calculate record # and relative time in interval   */
 
-    nr = (uint32_t)block_loc;
-    t[0] = block_loc - (double)nr;
-    if(!t[0] && nr)
-    {
-      t[0] = 1.;
-      nr--;
-    }
+  nr = (uint32_t)block_loc;
+  t[0] = block_loc - (double)nr;
+  if(!t[0] && nr)
+  {
+    t[0] = 1.;
+    nr--;
+  }
 
 /*   read correct record if not in core (static vector buf[])   */
     if(nr != eph->curr_cache_loc)
@@ -616,9 +616,9 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
           from list[];  the output goes to pvsun rather than the pv array;
           and three quantities (position,  velocity,  acceleration) are
           computed (nobody else gets accelerations at present.)  */
-   for(n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
-      for(i = 0; i < 15; i++)
-      {
+  for(n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
+    for(i = 0; i < 15; i++)
+    {
         unsigned quantities;
         uint32_t *iptr = &eph->ipt[i + 1][0];
 
@@ -737,13 +737,10 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     init_err_code = 0;
     temp_data.ifile = ifile;
     if(!ifile)
-
       init_err_code = JPL_INIT_FILE_NOT_FOUND;
     else if(fread(title, 84, 1, ifile) != 1)
-
       init_err_code = JPL_INIT_FREAD_FAILED;
     else if(fseek(ifile, 2652L, SEEK_SET))
-
       init_err_code = JPL_INIT_FSEEK_FAILED;
     else if(fread(&temp_data, JPL_HEADER_SIZE, 1, ifile) != 1)
       init_err_code = JPL_INIT_FREAD2_FAILED;
@@ -804,9 +801,15 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
       temp_data.ipt[13][0] = (uint32_t)-1;
 
     if(temp_data.swap_bytes)     /* byte order is wrong for current platform */
-      for(j = 0; j < 3; j++)
-         for(i = 0; i < 15; i++)
-            swap_32_bit_val(&temp_data.ipt[i][j]);
+    {  
+        for(j = 0; j < 3; j++)
+        {
+            for(i = 0; i < 15; i++)
+            { 
+                swap_32_bit_val(&temp_data.ipt[i][j]);
+            }
+        }
+    }
 
     if(temp_data.ipt[13][0] !=       /* if these don't add up correctly, */
           temp_data.ipt[12][0] + temp_data.ipt[12][1] * temp_data.ipt[12][2] * 3
@@ -822,10 +825,10 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
          /* Those are the low and high ranges.  We'll allow some slop in   */
          /* case the earth/moon mass ratio changes:                        */
     if(temp_data.emrat > 81.3008 || temp_data.emrat < 81.30055)
-    { 
-      qDebug() << "tempData: " << temp_data.emrat;  
+    {   
       init_err_code = JPL_INIT_FILE_CORRUPT;
     }
+    qDebug() << "tempData: " << temp_data.emrat << "=~81";
 
     if(init_err_code)
     {
@@ -869,7 +872,8 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
     rval->iinfo.vel_coeff[0] = 0.0;
     rval->iinfo.vel_coeff[1] = 1.0;
     rval->curr_cache_loc = (uint32_t)-1;
-          /* The 'cache' data is right after the 'jpl_eph_data' struct: */
+    
+              /* The 'cache' data is right after the 'jpl_eph_data' struct: */
     rval->cache = (double *)(rval + 1);
                /* If there are more than 400 constants,  the names of       */
                /* the extra constants are stored in what would normally     */
@@ -888,7 +892,9 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
       buff[6] = '\0';
       fseek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
       while(fread(buff, 6, 1, ifile) && strlen(buff) == 6)
+      {
          rval->ncon++;
+      }
     }
 
     if(val)
@@ -905,14 +911,14 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
       {
       fseek(ifile, 84L * 3L, SEEK_SET);   /* just after the 3 'title' lines */
       for(i = 0; i < rval->ncon && !init_err_code; i++)
-         {
-         if(i == 400)
-            fseek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
-         if(fread(nam[i], 6, 1, ifile) != 1)
-            init_err_code = JPL_INIT_FREAD4_FAILED;
-         }
+      {
+        if(i == 400)
+          fseek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
+        if(fread(nam[i], 6, 1, ifile) != 1)
+          init_err_code = JPL_INIT_FREAD4_FAILED;
+        }
       }
-   return(rval);
+  return(rval);
 }
 
 /****************************************************************************
