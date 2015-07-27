@@ -183,6 +183,7 @@ StelObserver::~StelObserver()
 
 const QSharedPointer<Planet> StelObserver::getHomePlanet(void) const
 {
+	Q_ASSERT(planet);
 	return planet;
 }
 
@@ -195,18 +196,19 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 // Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
 double StelObserver::getDistanceFromCenter(void) const
 {
-	//return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
+	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet od SpaceShipObserver has this
+		return currentLocation.altitude/(1000*AU);
 
 	double a=getHomePlanet()->getRadius();
-	double b=getHomePlanet()->getOneMinusOblateness()*a;
-	double bByA = b/a;
+	double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
 	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
-		return bByA*a;
+		return a * bByA;
 
 	double latRad=currentLocation.latitude*(M_PI/180.0);
-	//double tanLatPrime=tan(latRad) * bByA*bByA;
 	double u = atan( bByA * tan(latRad));
+	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	Q_ASSERT(fabs(u)<= fabs(latRad));
 	double altFix=(currentLocation.altitude/(1000.0*AU)) / a;
 
 	double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
