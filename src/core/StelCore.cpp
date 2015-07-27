@@ -1819,43 +1819,48 @@ void StelCore::setDe431Status(bool status)
 void StelCore::initEphemeridesFunctions()
 {
 	//check ephem/ folder
-	QString ephemFilePath = StelFileMgr::findFile("ephem/", 
-		StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+	QString ephemFilePath = StelFileMgr::findFile("ephem", 
+		StelFileMgr::Directory);
 	
+	qDebug() << "ephem Folder: " << !ephemFilePath.isEmpty();
+
 	if(!ephemFilePath.isEmpty())
 	{
 
 		//TODO: check for correct filesize
-		//../de430
 		QString de430FilePath = StelFileMgr::findFile("ephem/de430.bsp", 
-			StelFileMgr::Flags(StelFileMgr::File));
+			StelFileMgr::File);
 	  	
 		setDe430Status(!de430FilePath.isEmpty());
 
+		qDebug() << "DE430: " << !de430FilePath.isEmpty();
+  		
   		if(de430Active)
   		{
   			EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
   		}
 
 	 	QString de431FilePathP1 = StelFileMgr::findFile("ephem/de431_part-1.bsp", 
-	 		StelFileMgr::Flags(StelFileMgr::File));
+	 		StelFileMgr::File);
 	  	
 	 	QString de431FilePathP2 = StelFileMgr::findFile("ephem/de431_part-2.bsp", 
-			StelFileMgr::Flags(StelFileMgr::File));
+			StelFileMgr::File);
 
 	 	setDe431Status(!(de431FilePathP1.isEmpty() && de431FilePathP2.isEmpty()));
+
+	 	qDebug() << "DE431: " << !de431FilePathP1.isEmpty() << "+" 
+	 		<< !de431FilePathP2.isEmpty();
 	 	
 	 	if(de431Active)
 		{
 			EphemWrapper::init_de431(de431FilePathP1.toStdString().c_str());
   		}
   		
-  		std::ofstream outfile;
-		outfile.open("/Users/holger/Desktop/log.txt", std::ios_base::app);
-		outfile << "DE430: " << de430IsActive() << "(" << (!de430FilePath.isEmpty())<< ")\n";
-		outfile << "DE43P1: " << de431IsActive() << "(" << (!de431FilePathP1.isEmpty())<< ")\n";
-		outfile << "DE43P2: " << de431IsActive() << "(" << (!de431FilePathP2.isEmpty())<< ")\n";
-
-		outfile.close();
+  		//std::ofstream outfile;
+		//outfile.open("/Users/holger/Desktop/log.txt", std::ios_base::app);
+		//outfile << "DE430: " << de430IsActive() << "(" << (!de430FilePath.isEmpty())<< ")\n";
+		//outfile << "DE43P1: " << de431IsActive() << "(" << (!de431FilePathP1.isEmpty())<< ")\n";
+		//outfile << "DE43P2: " << de431IsActive() << "(" << (!de431FilePathP2.isEmpty())<< ")\n";
+		//outfile.close();
   	}
 }
