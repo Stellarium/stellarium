@@ -31,22 +31,26 @@ extern "C" {
 //! + 1994AJ____108__711W J.G.Williams: Contributions to the Earth's Obliquity Rate, Precession and Nutation (Angles of eq. (35))
 //! + A&A 459, 981–985 (2006) DOI: 10.1051/0004-6361:20065897: Wallace&Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions
 //!
-//! The angles computed therein are used to rotate the planet Earth, and also to rotate an "Ecliptic of Date", i.e. the current orbital plane of Earth.
+//! The angles computed therein are used to rotate the planet Earth's axis, and also to rotate an "Ecliptic of Date", i.e. the current orbital plane of Earth.
 //! Currently this is without Nutation.
 //! Return values are in radians
-//! TODO: Find IAU2000 Nutation and how this fits in here.
 void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi_A, double *omega_A, double *psi_A);
 
-//! It seems the easiest solution is in fact the one also implemented in the paper,
+//! Alternative solution, the one also implemented in the paper,
 //! combining matrix P from P_A, Q_A, X_A, Y_A and, for the ecliptic of date, rotate back by epsilon_A.
-//! Return values are in radians
+//! Return values are in radians.
+//! This solution is currently unused, it seems easier to use the Capitaine sequence above.
 void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_A, double *vX_A, double *vY_A, double *vepsilon_A);
 
-//! Just return (presumably precomputed) ecliptic obliquity. [radians]
+//! Return ecliptic obliquity. [radians]
 double getPrecessionAngleVondrakEpsilon(const double jde);
 
 //! Just return (previously computed) ecliptic obliquity. [radians]
 double getPrecessionAngleVondrakCurrentEpsilonA(void);
+
+//! TODO: To complete the task of correct&accurate precession-nutation handling, find IAU-2000A Nutation and how this fits in here.
+//! E.g. A&A 459, 981–985 (2006) P. T. Wallace and N. Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions. DOI: 10.1051/0004-6361:20065897
+
 
 #ifdef __cplusplus
 }
