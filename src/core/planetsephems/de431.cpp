@@ -41,7 +41,7 @@ void GetDe431Coor(double jd, int planet_id, double * xyz)
 {
     jpl_pleph(ephem, jd, planet_id, 3, tempXYZ, 0);
 
-    tempICRF = Vec3d(tempXYZ[0], tempXYZ[0], tempXYZ[0]);
+    tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
     tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
 
     xyz[0] = tempECL[0];
