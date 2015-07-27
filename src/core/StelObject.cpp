@@ -42,6 +42,7 @@ Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
 {
 	// Hour Angle corrected to Delta-T value
+	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
 	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
 	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)* getEquinoxEquatorialPos(core);
 }
@@ -52,6 +53,7 @@ Vec3d StelObject::getSiderealPosApparent(const StelCore* core) const
 	Vec3d v=getAltAzPosApparent(core);
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
 	// Hour Angle corrected to Delta-T value
+	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
 	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
 	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)*v;
 }
@@ -194,8 +196,6 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 
 		ecl = core->getCurrentPlanet()->getRotObliquity(core->getJDay());
-		// GZ Only for now: display epsilon_A, angle between Axis and ecl. of date.
-		res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
 
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
@@ -204,6 +204,8 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
 		else
 			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+		// GZ Only for now: display epsilon_A, angle between Axis and ecl. of date.
+		res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
 	}
 
 	if (flags&GalacticCoord)
