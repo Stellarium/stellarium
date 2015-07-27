@@ -73,7 +73,7 @@ void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
   	}
   	else //VSOP87 is the fallback method
   	{
-        GetVsop87Coor(jd, planet_id, xyz);
+      GetVsop87Coor(jd, planet_id, xyz);
     }
 }
 
