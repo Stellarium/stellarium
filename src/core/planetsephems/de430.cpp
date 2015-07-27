@@ -24,6 +24,8 @@ THE SOFTWARE.
 #include "jpleph.h"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
+#include "StelApp.hpp"
+#include "jpleph.h"
 
 #ifdef __cplusplus
   extern "C" {
@@ -40,13 +42,23 @@ static double tempXYZ[6];
 void InitDE430(const char* filepath)
 {
   ephem = jpl_init_ephemeris(filepath, nams, vals);
+  
+  if(jpl_init_error_code() != 0)
+  {
+    StelApp::getInstance().getCore()->setDe430Status(false);
+    qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
+  }
+
+  qDebug() << "Path: " << filepath;
 }
 
 void GetDe430Coor(double jd, int planet_id, double * xyz)
 {
-    jpl_pleph(ephem, jd, planet_id, 3, tempXYZ, 0);
+    qDebug() << "jd:" << jd << "ephem" << ephem;
 
-    tempICRF = Vec3d(tempXYZ[0], tempXYZ[0], tempXYZ[0]);
+    jpl_pleph(ephem, jd, planet_id, 3, tempXYZ, 0);
+    qDebug() << "tempXYZ:" << tempXYZ[0] << "|" << tempXYZ[1]<< "|"<<tempXYZ[2]; 
+    tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
     tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
 
     xyz[0] = tempECL[0];

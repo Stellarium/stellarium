@@ -43,10 +43,10 @@ current platform,  and swaps bytes on-the-fly if needed.  (Yes,  this
 can result in a slowdown... sometimes as much as 1%.  The function is
 so mathematically intensive that the byte-swapping is the least of our
 troubles.)  You can also use DE-200, 403, 404, 405,  or 406 without
-recompiling (the constan( ) function now determines which ephemeris is
+recompiling (the constan() function now determines which ephemeris is
 in use and its byte order).
 
-Also,  I did some minor optimization of the interp( ) (Chebyshev
+Also,  I did some minor optimization of the interp() (Chebyshev
 interpolation) function,  resulting in a bit of a speedup.
 
 The code has been modified to be a separately linkable component,  with
@@ -60,6 +60,7 @@ details of the implementation encapsulated.
 #include <stdlib.h>
 #include <stdint.h>
 
+#include "StelUtils.hpp"
 /**** include variable and type definitions, specific for this C version */
 
 #include "jpleph.h"
@@ -70,17 +71,17 @@ details of the implementation encapsulated.
 
 double DLL_FUNC jpl_get_double(const void *ephem, const int value)
 {
-   return(*(double *)( (char *)ephem + value));
+   return(*(double *)((char *)ephem + value));
 }
 
 long DLL_FUNC jpl_get_long(const void *ephem, const int value)
 {
-   return(*(int32_t *)( (char *)ephem + value));
+   return(*(int32_t *)((char *)ephem + value));
 }
 
 
 /*****************************************************************************
-**           jpl_pleph( ephem,et,ntar,ncent,rrd,calc_velocity)              **
+**           jpl_pleph(ephem,et,ntar,ncent,rrd,calc_velocity)              **
 ******************************************************************************
 **                                                                          **
 **    This subroutine reads the jpl planetary ephemeris                     **
@@ -128,7 +129,7 @@ long DLL_FUNC jpl_get_long(const void *ephem, const int value)
 **           computed,  otherwise not.                                      **
 **                                                                          **
 *****************************************************************************/
-int DLL_FUNC jpl_pleph( void *ephem, const double et, const int ntarg,
+int DLL_FUNC jpl_pleph(void *ephem, const double et, const int ntarg,
                       const int ncent, double rrd[], const int calc_velocity)
 {
     struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
@@ -151,9 +152,9 @@ int DLL_FUNC jpl_pleph( void *ephem, const double et, const int ntarg,
 
     for(i = 0; i < 6; ++i) rrd[i] = 0.0;
 
-    if(ntarg == ncent) return( 0);
+    if(ntarg == ncent) return(0);
 
-    for(i = 0; i < sizeof( list) / sizeof( list[0]); i++)
+    for(i = 0; i < sizeof(list) / sizeof(list[0]); i++)
       list[i] = 0;
 
          /* Because of the whacko indexing in JPL ephemerides,  we need */
@@ -164,73 +165,70 @@ int DLL_FUNC jpl_pleph( void *ephem, const double et, const int ntarg,
          /*  16          13          12      Lunar mantle angular vel */
          /*  17          14          13      TT - TDB */
 
-    for( i = 0; i < 4; i++)
-      if( ntarg == (int)i + 14)
+    for(i = 0; i < 4; i++)
+      if(ntarg == (int)i + 14)
       {
         if(eph->ipt[i + 11][1] > 0) /* quantity is in ephemeris */
         {
           list[i + 10] = list_val;
-          rval = jpl_state( ephem, et, list, pv, rrd, 0);
+          rval = jpl_state(ephem, et, list, pv, rrd, 0);
         }
         else          /*  quantity doesn't exist in the ephemeris file  */
           rval = JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS;
-      
-        return( rval);
+        return(rval);
       }
-
-    if( ntarg > 13 || ncent > 13 || ntarg < 1 || ncent < 1)
-      return( JPL_EPH_INVALID_INDEX);
+    if(ntarg > 13 || ncent > 13 || ntarg < 1 || ncent < 1)
+      return(JPL_EPH_INVALID_INDEX);
 
 /*  force barycentric output by 'state'     */
 
 /*  set up proper entries in 'list' array for state call     */
 
-    for( i = 0; i < 2; i++) /* list[] IS NUMBERED FROM ZERO ! */
+    for(i = 0; i < 2; i++) /* list[] IS NUMBERED FROM ZERO ! */
     {
       const unsigned k = (i ? ncent : ntarg) - 1;
 
-      if( k <= 9) list[k] = list_val;   /* Major planets */
-      if( k == 9) list[2] = list_val;   /* for moon,  earth state is needed */
-      if( k == 2) list[9] = list_val;   /* for earth,  moon state is needed */
-      if( k == 12) list[2] = list_val;  /* EMBary state additionally */
+      if(k <= 9) list[k] = list_val;   /* Major planets */
+      if(k == 9) list[2] = list_val;   /* for moon,  earth state is needed */
+      if(k == 2) list[9] = list_val;   /* for earth,  moon state is needed */
+      if(k == 12) list[2] = list_val;  /* EMBary state additionally */
     }
 
-/*   make call to state   */
+  /*   make call to state   */
+   rval = jpl_state(eph, et, list, pv, rrd, 1);
+   /* Solar System barycentric Sun state goes to pv[10][] */
+   if(ntarg == 11 || ncent == 11)
+      for(i = 0; i < 6; i++)
+         pv[10][i] = eph->pvsun[i];
 
-    rval = jpl_state( eph, et, list, pv, rrd, 1);
-    /* Solar System barycentric Sun state goes to pv[10][] */
-    if(ntarg == 11 || ncent == 11)
-      for( i = 0; i < 6; i++)
-        pv[10][i] = eph->pvsun[i];
+   /* Solar System Barycenter coordinates & velocities equal to zero */
+   if(ntarg == 12 || ncent == 12)
+      for(i = 0; i < 6; i++)
+         pv[11][i] = 0.0;
 
-    /* Solar System Barycenter coordinates & velocities equal to zero */
-    if(ntarg == 12 || ncent == 12)
-      for( i = 0; i < 6; i++)
-        pv[11][i] = 0.0;
-
-    /* Solar System barycentric EMBary state:  */
-    if(ntarg == 13 || ncent == 13)
-      for( i = 0; i < 6; i++)
-        pv[12][i] = pv[2][i];
+   /* Solar System barycentric EMBary state:  */
+   if(ntarg == 13 || ncent == 13)
+      for(i = 0; i < 6; i++)
+         pv[12][i] = pv[2][i];
 
    /* if moon from earth or earth from moon ..... */
-    if((ntarg*ncent) == 30 && (ntarg+ncent) == 13)
-      for( i = 0; i < 6; ++i) pv[2][i]=0.0;
-    else
-    {
+   if((ntarg*ncent) == 30 && (ntarg+ncent) == 13)
+      for(i = 0; i < 6; ++i) pv[2][i]=0.0;
+   else
+      {
       if(list[2])           /* calculate earth state from EMBary */
-        for( i = 0; i < list[2] * 3u; ++i)
-          pv[2][i] -= pv[9][i]/(1.0+eph->emrat);
+         for(i = 0; i < list[2] * 3u; ++i)
+            pv[2][i] -= pv[9][i]/(1.0+eph->emrat);
 
       if(list[9]) /* calculate Solar System barycentric moon state */
-        for( i = 0; i < list[9] * 3u; ++i)
-          pv[9][i] += pv[2][i];
+         for(i = 0; i < list[9] * 3u; ++i)
+            pv[9][i] += pv[2][i];
       }
 
-   for( i = 0; i < list_val * 3u; ++i)
+   for(i = 0; i < list_val * 3u; ++i)
       rrd[i] = pv[ntarg-1][i] - pv[ncent-1][i];
 
-   return( rval);
+   return(rval);
 }
 
 /* Some notes about the information stored in 'iinfo':  the posn_coeff[]
@@ -309,7 +307,7 @@ Chebyshev polynomials beyond T  ,  those arrays may need to be expanded.
 **              expected is posvel[ncm*ifl], double precision.              **
 **                                                                          **
 *****************************************************************************/
-static void interp( struct interpolation_info *iinfo,
+static void interp(struct interpolation_info *iinfo,
         const double coef[], const double t[2], const unsigned ncf, const unsigned ncm,
         const unsigned na, const int velocity_flag, double posvel[])
 {
@@ -317,22 +315,23 @@ static void interp( struct interpolation_info *iinfo,
     const double temp = dna * t[0];
     unsigned l = (unsigned)temp;
     double vfac, unused_temp1;
-    double tc = 2.0 * modf( temp, &unused_temp1) - 1.0;
+    double tc = 2.0 * modf(temp, &unused_temp1) - 1.0;
     unsigned i, j;
 
-    assert( ncf < MAX_CHEBY);
+    assert(ncf < MAX_CHEBY);
     if(l == na)
-      {
+    {
       l--;
       tc = 1.;
-      }
-    assert( tc >= -1.);
-    assert( tc <=  1.);
+    }
+    assert(tc >= -1.);
+    assert(tc <=  1.);
 
 /*  check to see whether chebyshev time has changed,  and compute new
     polynomial values if it has.
     (the element iinfo->posn_coeff[1] is the value of t1[tc] and hence
     contains the value of tc on the previous call.)     */
+
 
     if(tc != iinfo->posn_coeff[1])
     {
@@ -353,7 +352,7 @@ static void interp( struct interpolation_info *iinfo,
     {
       double *pc_ptr = iinfo->posn_coeff + iinfo->n_posn_avail;
 
-      for( i=ncf - iinfo->n_posn_avail; i; i--, pc_ptr++)
+      for(i=ncf - iinfo->n_posn_avail; i; i--, pc_ptr++)
          *pc_ptr = iinfo->twot * pc_ptr[-1] - pc_ptr[-2];
       iinfo->n_posn_avail=ncf;
     }
@@ -366,12 +365,12 @@ static void interp( struct interpolation_info *iinfo,
       const double *pc_ptr = iinfo->posn_coeff + ncf;
 
       *posvel = 0.0;
-      for( j = ncf; j; j--)
+      for(j = ncf; j; j--)
          *posvel += (*--pc_ptr) * (*--coeff_ptr);
       posvel++;
     }
 
-   if(velocity_flag <= 1) return;
+    if(velocity_flag <= 1) return;
 
 /*  if velocity interpolation is wanted, be sure enough
     derivative polynomials have been generated and stored.    */
@@ -381,7 +380,7 @@ static void interp( struct interpolation_info *iinfo,
       double *vc_ptr = iinfo->vel_coeff + iinfo->n_vel_avail;
       const double *pc_ptr = iinfo->posn_coeff + iinfo->n_vel_avail - 1;
 
-      for( i = ncf - iinfo->n_vel_avail; i; i--, vc_ptr++, pc_ptr++)
+      for(i = ncf - iinfo->n_vel_avail; i; i--, vc_ptr++, pc_ptr++)
          *vc_ptr = iinfo->twot * vc_ptr[-1] + *pc_ptr + *pc_ptr - vc_ptr[-2];
       iinfo->n_vel_avail = ncf;
     }
@@ -389,14 +388,14 @@ static void interp( struct interpolation_info *iinfo,
 /*  interpolate to get velocity for each component    */
 
     vfac = (dna + dna) / t[1];
-    for( i = 0; i < ncm; ++i)
+    for(i = 0; i < ncm; ++i)
     {
       double tval = 0.;
       const double *coeff_ptr = coef + ncf * (i + l * ncm + 1);
       const double *vc_ptr = iinfo->vel_coeff + ncf;
 
-      for( j = ncf - 1; j; j--)
-        tval += (*--vc_ptr) * (*--coeff_ptr);
+      for(j = ncf - 1; j; j--)
+         tval += (*--vc_ptr) * (*--coeff_ptr);
       *posvel++ = tval * vfac;
     }
 
@@ -406,26 +405,27 @@ static void interp( struct interpolation_info *iinfo,
             /* polynomials) are not stored for repeated use,  for example. */
     if(velocity_flag == 3)
     {
+
       double accel_coeffs[MAX_CHEBY];
 
       accel_coeffs[0] = accel_coeffs[1] = 0.;
       for(i = 2; i < ncf; i++)              /* recurrence for T"(x) */
-        accel_coeffs[i] = 4. * iinfo->vel_coeff[i - 1]
+         accel_coeffs[i] = 4. * iinfo->vel_coeff[i - 1]
                         + iinfo->twot * accel_coeffs[i - 1]
                         - accel_coeffs[i - 2];
 
       for(i = 0; i < ncm; ++i)        /* ncm is a number of coordinates */
       {
-        double tval = 0.;
-        const double *coeff_ptr = coef + ncf * (i + l * ncm + 1);
-        const double *ac_ptr = accel_coeffs + ncf;
+         double tval = 0.;
+         const double *coeff_ptr = coef + ncf * (i + l * ncm + 1);
+         const double *ac_ptr = accel_coeffs + ncf;
 
-        for( j = ncf; j; j--)
-          tval += (*--ac_ptr) * (*--coeff_ptr);
-        *posvel++ = tval * vfac * vfac;
+         for(j = ncf; j; j--)
+            tval += (*--ac_ptr) * (*--coeff_ptr);
+         *posvel++ = tval * vfac * vfac;
       }
     }
-
+    
     return;
 }
 
@@ -435,26 +435,27 @@ the currently-used machine (signalled by the 'swap_bytes' flag in the
 jpl_eph_data structure).  In such cases,  every double and integer
 value read from the ephemeris must be byte-swapped by these two functions. */
 
-#define SWAP_MACRO( A, B, TEMP)   { TEMP = A;  A = B;  B = TEMP; }
+#define SWAP_MACRO(A, B, TEMP)   { TEMP = A;  A = B;  B = TEMP; }
 
-static void swap_32_bit_val( void *ptr)
+static void swap_32_bit_val(void *ptr)
 {
     char *tptr = (char *)ptr, tchar;
 
-    SWAP_MACRO( tptr[0], tptr[3], tchar);
-    SWAP_MACRO( tptr[1], tptr[2], tchar);
+   SWAP_MACRO(tptr[0], tptr[3], tchar);
+   SWAP_MACRO(tptr[1], tptr[2], tchar);
 }
 
-static void swap_64_bit_val( void *ptr, long count)
+static void swap_64_bit_val(void *ptr, long count)
 {
     char *tptr = (char *)ptr, tchar;
-
-    while( count--)
+    
+    while(count--)
     {
-      SWAP_MACRO( tptr[0], tptr[7], tchar);
-      SWAP_MACRO( tptr[1], tptr[6], tchar);
-      SWAP_MACRO( tptr[2], tptr[5], tchar);
-      SWAP_MACRO( tptr[3], tptr[4], tchar);
+      SWAP_MACRO(tptr[0], tptr[7], tchar);
+      SWAP_MACRO(tptr[1], tptr[6], tchar);
+      SWAP_MACRO(tptr[2], tptr[5], tchar);
+      SWAP_MACRO(tptr[3], tptr[4], tchar);
+
       tptr += 8;
     }
 }
@@ -464,17 +465,17 @@ have an x, y, and z;  librations and lunar mantle angles have three Euler
 angles.  But TDT-TT is a single quantity,  and nutation is expressed as
 two angles.   */
 
-static int dimension( const int idx)
+static int dimension(const int idx)
 {
     int rval;
 
-    if( idx == 11)             /* Nutations */
+    if(idx == 11)             /* Nutations */
       rval = 2;
-    else if( idx == 14)        /* TDT - TT */
+    else if(idx == 14)        /* TDT - TT */
       rval = 1;
     else                       /* planets, lunar mantle angles, librations */
       rval = 3;
-    return( rval);
+    return(rval);
 }
 
 /*****************************************************************************
@@ -558,21 +559,21 @@ static int dimension( const int idx)
 **                       d epsilon dot                                      **
 **                                                                          **
 *****************************************************************************/
-int DLL_FUNC jpl_state( void *ephem, const double et, const int list[14],
+int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
                           double pv[][6], double nut[4], const int bary)
 {
-    struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
-    unsigned i, j, n_intervals;
-    uint32_t nr;
-    double *buf = eph->cache;
-    double t[2];
-    const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
-    bool recompute_pvsun;
-    const double aufac = 1.0 / eph->au;
+   struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
+   unsigned i, j, n_intervals;
+   uint32_t nr;
+   double *buf = eph->cache;
+   double t[2];
+   const double block_loc = (et - eph->ephem_start) / eph->ephem_step;
+   bool recompute_pvsun;
+   const double aufac = 1.0 / eph->au;
 
 /*   error return for epoch out of range  */
-    if( et < eph->ephem_start || et > eph->ephem_end)
-      return( JPL_EPH_OUTSIDE_RANGE);
+    if(et < eph->ephem_start || et > eph->ephem_end)
+      return(JPL_EPH_OUTSIDE_RANGE);
 
 /*   calculate record # and relative time in interval   */
 
@@ -585,20 +586,19 @@ int DLL_FUNC jpl_state( void *ephem, const double et, const int list[14],
     }
 
 /*   read correct record if not in core (static vector buf[])   */
-
     if(nr != eph->curr_cache_loc)
     {
       eph->curr_cache_loc = nr;
                   /* Read two blocks ahead to account for header: */
-      if(fseek( eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
-        return( JPL_EPH_FSEEK_ERROR);
-      if(fread( buf, sizeof( double), (size_t)eph->ncoeff, eph->ifile)
+      if(fseek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
+         return(JPL_EPH_FSEEK_ERROR);
+      if(fread(buf, sizeof(double), (size_t)eph->ncoeff, eph->ifile)
                                != (size_t)eph->ncoeff)
-        return( JPL_EPH_READ_ERROR);
-      if(eph->swap_bytes)
-        swap_64_bit_val( buf, eph->ncoeff);
-    }
+        return(JPL_EPH_READ_ERROR);
 
+      if(eph->swap_bytes)
+         swap_64_bit_val(buf, eph->ncoeff);
+      }
     t[1] = eph->ephem_step;
 
     if(eph->pvsun_t != et)   /* If several calls are made for the same et, */
@@ -616,14 +616,14 @@ int DLL_FUNC jpl_state( void *ephem, const double et, const int list[14],
           from list[];  the output goes to pvsun rather than the pv array;
           and three quantities (position,  velocity,  acceleration) are
           computed (nobody else gets accelerations at present.)  */
-    for(n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
-      for( i = 0; i < 15; i++)
+   for(n_intervals = 1; n_intervals <= 8; n_intervals *= 2)
+      for(i = 0; i < 15; i++)
       {
-          unsigned quantities;
-          uint32_t *iptr = &eph->ipt[i + 1][0];
+        unsigned quantities;
+        uint32_t *iptr = &eph->ipt[i + 1][0];
 
-          if( i == 14)
-          {
+        if(i == 14)
+        {
             quantities = (recompute_pvsun ? 3 : 0);
             iptr = &eph->ipt[10][0];
           }
@@ -636,47 +636,77 @@ int DLL_FUNC jpl_state( void *ephem, const double et, const int list[14],
           {
             double *dest = ((i == 10) ? eph->pvsun : pv[i]);
 
-            if( i < 10)
-              dest = pv[i];
-            else if( i == 14)
-              dest = eph->pvsun;
+            if(i < 10)
+               dest = pv[i];
+            else if(i == 14)
+               dest = eph->pvsun;
             else
-              dest = nut;
-            interp( &eph->iinfo, &buf[iptr[0]-1], t, (int)iptr[1],
-                                    dimension( i + 1),
+               dest = nut;
+            interp(&eph->iinfo, &buf[iptr[0]-1], t, (int)iptr[1],
+                                    dimension(i + 1),
                                     n_intervals, quantities, dest);
 
-            if( i < 10 || i == 14)        /*  convert km to AU */
-               for( j = 0; j < quantities * 3; j++)
+            if(i < 10 || i == 14)        /*  convert km to AU */
+               for(j = 0; j < quantities * 3; j++)
                   dest[j] *= aufac;
             }
-        }
+         }
     if(!bary)                             /* gotta correct everybody for */
-      for( i = 0; i < 9; i++)            /* the solar system barycenter */
-        for( j = 0; j < (unsigned)list[i] * 3; j++)
-          pv[i][j] -= eph->pvsun[j];
-
+      for(i = 0; i < 9; i++)            /* the solar system barycenter */
+         for(j = 0; j < (unsigned)list[i] * 3; j++)
+            pv[i][j] -= eph->pvsun[j];
     return(0);
 }
 
 static int init_err_code = JPL_INIT_NOT_CALLED;
 
-int DLL_FUNC jpl_init_error_code( void)
+int DLL_FUNC jpl_init_error_code(void)
 {
-   return( init_err_code);
+   return(init_err_code);
+}
+
+const char * jpl_init_error_message(void)
+{
+  switch(init_err_code)
+  {
+    case 0:
+      return (const char *)("JPL_INIT_NO_ERROR");
+    case -1:
+      return (const char *)("JPL_INIT_FILE_NOT_FOUND");
+    case -2:
+      return (const char *)("JPL_INIT_FSEEK_FAILED");    
+    case -3:
+      return (const char *)("JPL_INIT_FREAD_FAILED");
+    case -4:
+      return (const char *)("JPL_INIT_FREAD2_FAILED");
+    case -5:
+      return (const char *)("JPL_INIT_FILE_CORRUPT");
+    case -6:
+      return (const char *)("JPL_INIT_MEMORY_FAILURE");
+    case -7:
+      return (const char *)("JPL_INIT_FREAD3_FAILED");
+    case -8:
+      return (const char *)("JPL_INIT_FREAD4_FAILED");
+    case -9:
+      return (const char *)("JPL_INIT_NOT_CALLED");
+    case -10:
+      return (const char *)("JPL_INIT_FREAD5_FAILED");
+    default:
+      return (const char *)("ERROR_NOT_RECOGNIZED");
+  }
 }
 
    /* DE-430 has 572 constants.  That's more than the 400 constants */
    /* originally expected.  The remaining 172 are stored after the  */
    /* other header data :                                           */
 
-#define START_400TH_CONSTANT_NAME   (84 * 3 + 400 * 6 + 5 * sizeof( double) \
-                                                    + 41 * sizeof( int32_t))
+#define START_400TH_CONSTANT_NAME   (84 * 3 + 400 * 6 + 5 * sizeof(double) \
+                                                    + 41 * sizeof(int32_t))
 
    /* ...which comes out to 2856.  See comments in 'jpl_int.h'.   */
 
 /****************************************************************************
-**    jpl_init_ephemeris( ephemeris_filename, nam, val, n_constants)       **
+**    jpl_init_ephemeris(ephemeris_filename, nam, val, n_constants)       **
 *****************************************************************************
 **                                                                         **
 **    this function does the initial prep work for use of binary JPL       **
@@ -690,59 +720,65 @@ int DLL_FUNC jpl_init_error_code( void)
 **          You can pass val=NULL if you don't care about the constants    **
 **      Return value is a pointer to the jpl_eph_data structure            **
 **      NULL is returned if the file isn't opened or memory isn't alloced  **
-**      Errors can be determined with the above jpl_init_error_code( )     **
+**      Errors can be determined with the above jpl_init_error_code()     **
 ****************************************************************************/
 
-void * DLL_FUNC jpl_init_ephemeris( const char *ephemeris_filename,
+void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
                           char nam[][6], double *val)
 {
     unsigned i, j;
     long de_version;
     char title[84];
-    FILE *ifile = fopen( ephemeris_filename, "rb");
+    FILE *ifile = fopen(ephemeris_filename, "rb");
+
     struct jpl_eph_data *rval;
     struct jpl_eph_data temp_data;
 
     init_err_code = 0;
     temp_data.ifile = ifile;
-    if( !ifile)
+    if(!ifile)
+
       init_err_code = JPL_INIT_FILE_NOT_FOUND;
-    else if( fread( title, 84, 1, ifile) != 1)
+    else if(fread(title, 84, 1, ifile) != 1)
+
       init_err_code = JPL_INIT_FREAD_FAILED;
-    else if( fseek( ifile, 2652L, SEEK_SET))
+    else if(fseek(ifile, 2652L, SEEK_SET))
+
       init_err_code = JPL_INIT_FSEEK_FAILED;
-    else if( fread( &temp_data, JPL_HEADER_SIZE, 1, ifile) != 1)
+    else if(fread(&temp_data, JPL_HEADER_SIZE, 1, ifile) != 1)
       init_err_code = JPL_INIT_FREAD2_FAILED;
 
-    if( init_err_code)
+    if(init_err_code)
     {
-      if( ifile)
-         fclose( ifile);
-      return( NULL);
+      if(ifile)
+        fclose(ifile);
+      return(NULL);
     }
 
-   de_version = atoi( title + 26);
+    de_version = atoi(title + 26);
+    qDebug() << "DE_Version: " << de_version;
 
-          /* A small piece of trickery:  in the binary file,  data is stored */
-          /* for ipt[0...11],  then the ephemeris version,  then the         */
-          /* remaining ipt[12] data.  A little switching is required to get  */
-          /* the correct order. */
-   temp_data.ipt[12][0] = temp_data.ipt[12][1];
-   temp_data.ipt[12][1] = temp_data.ipt[12][2];
-   temp_data.ipt[12][2] = temp_data.ipt[13][0];
-   temp_data.ephemeris_version = de_version;
+    /* A small piece of trickery:  in the binary file,  data is stored */
+    /* for ipt[0...11],  then the ephemeris version,  then the         */
+    /* remaining ipt[12] data.  A little switching is required to get  */
+    /* the correct order. */
+    temp_data.ipt[12][0] = temp_data.ipt[12][1];
+    temp_data.ipt[12][1] = temp_data.ipt[12][2];
+    temp_data.ipt[12][2] = temp_data.ipt[13][0];
+    temp_data.ephemeris_version = de_version;
 
 
-   temp_data.swap_bytes = (temp_data.ncon > 65536L);
-   if( temp_data.swap_bytes)     /* byte order is wrong for current platform */
-      {
-      swap_64_bit_val( &temp_data.ephem_start, 1);
-      swap_64_bit_val( &temp_data.ephem_end, 1);
-      swap_64_bit_val( &temp_data.ephem_step, 1);
-      swap_32_bit_val( &temp_data.ncon);
-      swap_64_bit_val( &temp_data.au, 1);
-      swap_64_bit_val( &temp_data.emrat, 1);
-      }
+    temp_data.swap_bytes = (temp_data.ncon > 65536L);
+    if(temp_data.swap_bytes)     /* byte order is wrong for current platform */
+    {
+      qDebug() << "Byte order is wrong for current platform";
+      swap_64_bit_val(&temp_data.ephem_start, 1);
+      swap_64_bit_val(&temp_data.ephem_end, 1);
+      swap_64_bit_val(&temp_data.ephem_step, 1);
+      swap_32_bit_val(&temp_data.ncon);
+      swap_64_bit_val(&temp_data.au, 1);
+      swap_64_bit_val(&temp_data.emrat, 1);
+    }
 
             /* It's a little tricky to tell if an ephemeris really has  */
             /* TT-TDB data (with offsets in ipt[13][] and ipt[14][]).   */
@@ -751,85 +787,88 @@ void * DLL_FUNC jpl_init_ephemeris( const char *ephemeris_filename,
             /*    Also:  certain ephems I've generated with ncon capped */
             /* at 400 have no TT-TDB data.  So if ncon == 400,  don't   */
             /* try to read such data;  you may get garbage.             */
-   if( de_version >= 430 && temp_data.ncon != 400)
-      {
+    if(de_version >= 430 && temp_data.ncon != 400)
+    {
          /* If there are 400 or fewer constants,  data for ipt[13][0...2] */
          /* immediately follows that for ipt[12][0..2];  i.e.,  we don't  */
          /* need to fseek().  Otherwise,  we gotta skip 6*(n_constants-400) */
          /* bytes. */
-      if( temp_data.ncon > 400)
-         fseek( ifile, (size_t)( temp_data.ncon - 400) * 6, SEEK_CUR);
-      if( fread( &temp_data.ipt[13][0], sizeof( int32_t), 6, ifile) != 6)
+      if(temp_data.ncon > 400)
+         fseek(ifile, (size_t)(temp_data.ncon - 400) * 6, SEEK_CUR);
+      if(fread(&temp_data.ipt[13][0], sizeof(int32_t), 6, ifile) != 6)
          init_err_code = JPL_INIT_FREAD5_FAILED;
-      }
-   else                 /* mark header data as invalid */
+    }
+    else                 /* mark header data as invalid */
       temp_data.ipt[13][0] = (uint32_t)-1;
 
-   if( temp_data.swap_bytes)     /* byte order is wrong for current platform */
-      for( j = 0; j < 3; j++)
-         for( i = 0; i < 15; i++)
-            swap_32_bit_val( &temp_data.ipt[i][j]);
+    if(temp_data.swap_bytes)     /* byte order is wrong for current platform */
+      for(j = 0; j < 3; j++)
+         for(i = 0; i < 15; i++)
+            swap_32_bit_val(&temp_data.ipt[i][j]);
 
-   if( temp_data.ipt[13][0] !=       /* if these don't add up correctly, */
+    if(temp_data.ipt[13][0] !=       /* if these don't add up correctly, */
           temp_data.ipt[12][0] + temp_data.ipt[12][1] * temp_data.ipt[12][2] * 3
     || temp_data.ipt[14][0] !=       /* zero them out (they've garbage data) */
           temp_data.ipt[13][0] + temp_data.ipt[13][1] * temp_data.ipt[13][2] * 3)
-      {     /* not valid pointers to TT-TDB data */
-      memset( &temp_data.ipt[13][0], 0, 6 * sizeof( int32_t));
-      }
+    {     /* not valid pointers to TT-TDB data */
+      memset(&temp_data.ipt[13][0], 0, 6 * sizeof(int32_t));
+    }
 
          /* A sanity check:  if the earth-moon ratio is outside reasonable */
          /* bounds,  we must be looking at a wrong or corrupted file.      */
          /* In DE-102,  emrat = 81.3007;  in DE-405/406, emrat = 81.30056. */
          /* Those are the low and high ranges.  We'll allow some slop in   */
          /* case the earth/moon mass ratio changes:                        */
-   if( temp_data.emrat > 81.3008 || temp_data.emrat < 81.30055)
+    if(temp_data.emrat > 81.3008 || temp_data.emrat < 81.30055)
+    { 
+      qDebug() << "tempData: " << temp_data.emrat;  
       init_err_code = JPL_INIT_FILE_CORRUPT;
+    }
 
-   if( init_err_code)
-      {
-      fclose( ifile);
-      return( NULL);
-      }
+    if(init_err_code)
+    {
+      fclose(ifile);
+      return(NULL);
+    }
 
          /* Once upon a time,  the kernel size was determined from the */
          /* DE version.  This was not a terrible idea,  except that it */
          /* meant that when the code faced a new version,  it broke.   */
          /* Now we use some logic to compute the kernel size.          */
-   temp_data.kernel_size = 4;
-   for( i = 0; i < 15; i++)
+    temp_data.kernel_size = 4;
+    for(i = 0; i < 15; i++)
       temp_data.kernel_size +=
-             2 * temp_data.ipt[i][1] * temp_data.ipt[i][2] * dimension( i);
-// for( i = 0; i < 13; i++)
+             2 * temp_data.ipt[i][1] * temp_data.ipt[i][2] * dimension(i);
+// for(i = 0; i < 13; i++)
 //    temp_data.kernel_size +=
 //                     temp_data.ipt[i][1] * temp_data.ipt[i][2] * ((i == 11) ? 4 : 6);
 //       /* ...and then add in space required for the TT-TDB data : */
 // temp_data.kernel_size += temp_data.ipt[14][1] * temp_data.ipt[14][2] * 2;
-   temp_data.recsize = temp_data.kernel_size * 4L;
-   temp_data.ncoeff = temp_data.kernel_size / 2L;
+    temp_data.recsize = temp_data.kernel_size * 4L;
+    temp_data.ncoeff = temp_data.kernel_size / 2L;
 
                /* Rather than do two separate allocations,  everything     */
                /* we need is allocated in _one_ chunk,  then parceled out. */
                /* This looks a little weird,  but it simplifies error      */
                /* handling and cleanup.                                    */
-   rval = (struct jpl_eph_data *)calloc( sizeof( struct jpl_eph_data)
+    rval = (struct jpl_eph_data *)calloc(sizeof(struct jpl_eph_data)
                         + temp_data.recsize, 1);
-   if( !rval)
-      {
+    if(!rval)
+    {
       init_err_code = JPL_INIT_MEMORY_FAILURE;
-      fclose( ifile);
-      return( NULL);
-      }
-   memcpy( rval, &temp_data, sizeof( struct jpl_eph_data));
-   rval->iinfo.posn_coeff[0] = 1.0;
+      fclose(ifile);
+      return(NULL);
+    }
+    memcpy(rval, &temp_data, sizeof(struct jpl_eph_data));
+    rval->iinfo.posn_coeff[0] = 1.0;
             /* Seed a bogus value here.  The first and subsequent calls to */
             /* 'interp' will correct it to a value between -1 and +1.      */
-   rval->iinfo.posn_coeff[1] = -2.0;
-   rval->iinfo.vel_coeff[0] = 0.0;
-   rval->iinfo.vel_coeff[1] = 1.0;
-   rval->curr_cache_loc = (uint32_t)-1;
+    rval->iinfo.posn_coeff[1] = -2.0;
+    rval->iinfo.vel_coeff[0] = 0.0;
+    rval->iinfo.vel_coeff[1] = 1.0;
+    rval->curr_cache_loc = (uint32_t)-1;
           /* The 'cache' data is right after the 'jpl_eph_data' struct: */
-   rval->cache = (double *)( rval + 1);
+    rval->cache = (double *)(rval + 1);
                /* If there are more than 400 constants,  the names of       */
                /* the extra constants are stored in what would normally     */
                /* be zero-padding after the header record.  However,        */
@@ -837,80 +876,80 @@ void * DLL_FUNC jpl_init_ephemeris( const char *ephemeris_filename,
                /* So we store ncon=400,  then actually check the names to   */
                /* see how many constants there _really_ are.  Older readers */
                /* will just see 400 names and won't know about the others.  */
-               /* But on the upside,  they won't crash.                     */
-   if( rval->ncon == 400)
-      {
+               /* But on the upside, they won't crash.                      */
+    if(rval->ncon == 400)
+    {
       char buff[7];
 
       buff[6] = '\0';
-      fseek( ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
-      while( fread( buff, 6, 1, ifile) && strlen( buff) == 6)
+      fseek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
+      while(fread(buff, 6, 1, ifile) && strlen(buff) == 6)
          rval->ncon++;
-      }
+    }
 
-   if( val)
-      {
-      fseek( ifile, rval->recsize, SEEK_SET);
-      if( fread( val, sizeof( double), (size_t)rval->ncon, ifile)
+    if(val)
+    {
+      fseek(ifile, rval->recsize, SEEK_SET);
+      if(fread(val, sizeof(double), (size_t)rval->ncon, ifile)
                         != (size_t)rval->ncon)
          init_err_code = JPL_INIT_FREAD3_FAILED;
-      else if( rval->swap_bytes)     /* gotta swap the constants,  too */
-         swap_64_bit_val( val, rval->ncon);
+      else if(rval->swap_bytes)     /* gotta swap the constants,  too */
+         swap_64_bit_val(val, rval->ncon);
       }
 
-   if( !init_err_code && nam)
+   if(!init_err_code && nam)
       {
-      fseek( ifile, 84L * 3L, SEEK_SET);   /* just after the 3 'title' lines */
-      for( i = 0; i < rval->ncon && !init_err_code; i++)
+      fseek(ifile, 84L * 3L, SEEK_SET);   /* just after the 3 'title' lines */
+      for(i = 0; i < rval->ncon && !init_err_code; i++)
          {
-         if( i == 400)
-            fseek( ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
-         if( fread( nam[i], 6, 1, ifile) != 1)
+         if(i == 400)
+            fseek(ifile, START_400TH_CONSTANT_NAME, SEEK_SET);
+         if(fread(nam[i], 6, 1, ifile) != 1)
             init_err_code = JPL_INIT_FREAD4_FAILED;
          }
       }
-   return( rval);
+   return(rval);
 }
 
 /****************************************************************************
-**    jpl_close_ephemeris( ephem)                                          **
+**    jpl_close_ephemeris(ephem)                                          **
 *****************************************************************************
 **                                                                         **
 **    this function closes files and frees up memory allocated by the      **
-**    jpl_init_ephemeris( ) function.                                      **
+**    jpl_init_ephemeris() function.                                      **
 ****************************************************************************/
-void DLL_FUNC jpl_close_ephemeris( void *ephem)
+void DLL_FUNC jpl_close_ephemeris(void *ephem)
 {
    struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
 
-   fclose( eph->ifile);
-   free( ephem);
+   fclose(eph->ifile);
+   free(ephem);
 }
 
 /* Added 2011 Jan 18:  random access to any desired JPL constant */
 
 
-double DLL_FUNC jpl_get_constant( const int idx, void *ephem, char *constant_name)
+double DLL_FUNC jpl_get_constant(const int idx, void *ephem, char *constant_name)
 {
    struct jpl_eph_data *eph = (struct jpl_eph_data *)ephem;
    double rval = 0.;
 
    *constant_name = '\0';
-   if( idx >= 0 && idx < (int)eph->ncon)
+   if(idx >= 0 && idx < (int)eph->ncon)
       {
       const long seek_loc = (idx < 400 ? 84L * 3L + (long)idx * 6 :
                       START_400TH_CONSTANT_NAME + (idx - 400) * 6);
 
-      fseek( eph->ifile, seek_loc, SEEK_SET);
-      if( fread( constant_name, 1, 6, eph->ifile))
+      fseek(eph->ifile, seek_loc, SEEK_SET);
+      if(fread(constant_name, 1, 6, eph->ifile))
          {
          constant_name[6] = '\0';
-         fseek( eph->ifile, eph->recsize + (long)idx * sizeof( double), SEEK_SET);
-         if( fread( &rval, 1, sizeof( double), eph->ifile))
-            if( eph->swap_bytes)     /* gotta swap the constants,  too */
-               swap_64_bit_val( &rval, 1);
+         fseek(eph->ifile, eph->recsize + (long)idx * sizeof(double), SEEK_SET);
+         if(fread(&rval, 1, sizeof(double), eph->ifile))
+            if(eph->swap_bytes)     /* gotta swap the constants,  too */
+               swap_64_bit_val(&rval, 1);
          }
       }
-   return( rval);
+   return(rval);
 }
 /*************************** THE END ***************************************/
