@@ -25,7 +25,7 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "planetsephems/precession.h"
-
+#include "StelObserver.hpp"
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
 #include "StelTextureMgr.hpp"
@@ -283,6 +283,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	double siderealDay = getSiderealDay();
 	if (flags&Extra)
 	{
+		oss << q_("Planetocentric distance &rho;: %1 (km)").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU) <<"<br>";
 		if (siderealPeriod>0)
 		{
 			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)

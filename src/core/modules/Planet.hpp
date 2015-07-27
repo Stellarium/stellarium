@@ -172,6 +172,8 @@ public:
 	//! Get the radius of the planet in AU.
 	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
+	//! Get the value (1-f) for oblateness f.
+	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
