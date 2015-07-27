@@ -113,8 +113,6 @@ base_font_size                      = 13
 #base_font_name                      = DejaVu Sans
 mouse_cursor_timeout                = 10
 flag_mouse_cursor_timeout           = false
-#GZ detected unused key. 2015-04.
-#day_key_mode                        = calendar
 selected_object_info                = all
 auto_hide_horizontal_toolbar        = true
 auto_hide_vertical_toolbar          = true

@@ -207,6 +207,10 @@ for more details on the location of the user data directory for your OS.
 		[19] "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4nd ed., 2000)
 		[20] "Calendrical Calculations" by E. M. Reingold & N. Dershowitz (2nd ed., 2001)
 		[21] DeltaT webpage by V. Reijs: http://www.iol.ie/~geniet/eng/DeltaTeval.htm
+	1.5 An accurate long-time precession model compatible with P03:
+		J. Vondrak, N. Capitaine, P. Wallace: New precession expressions, valid for long time intervals.
+		Astronomy&Astrophysics 534, A22 (2011); DOI: 10.1051/0004-6361/201117274
+
 
 2. Included source code
 	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
@@ -252,7 +256,7 @@ for more details on the location of the user data directory for your OS.
 		-) compute nr_of_measurements = the number of valid b,v,r values
 		-) throw away or keep stars (depending on magnitude,
 		   nr_of_measurements, combination of flags, tycho2 number)
-		-) add all stars from hiparcos (incl. component solutions), and
+		-) add all stars from Hipparcos (incl. component solutions), and
 		   tycho2+1st supplement
 		-) reorganize the stars in several brigthness levels and
 		   triangular zones according to position and magnitude
