@@ -49,7 +49,12 @@ void InitDE430(const char* filepath)
     qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
   }
 
-  qDebug() << "Path: " << filepath;
+  qDebug() << "Path: " << filepath << "sizeof(double):" << sizeof(double);
+}
+
+void TerminateDE430()
+{
+  jpl_close_ephemeris(ephem);
 }
 
 void GetDe430Coor(double jd, int planet_id, double * xyz)
