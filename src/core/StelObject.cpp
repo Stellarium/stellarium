@@ -218,7 +218,11 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		else
 			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 		// GZ Only for now: display epsilon_A, angle between Axis and ecl. of date.
-		res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
+		if (withDecimalDegree)
+			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
+		else
+			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl)) + "<br>";
+
 	}
 
 	if (flags&GalacticCoord)
