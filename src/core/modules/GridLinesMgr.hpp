@@ -28,9 +28,9 @@ class SkyGrid;
 class SkyLine;
 
 //! @class GridLinesMgr
-//! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical anf Galactic Grids,
-//! as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of J2000.0 and date)
-//! and a special line marking conjunction or opposition in ecliptical longitude (of date).
+//! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical and Galactic Grids,
+//! as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of J2000.0 and date),
+//! Precession Circles, and a special line marking conjunction or opposition in ecliptical longitude (of date).
 class GridLinesMgr : public StelModule
 {
 	Q_OBJECT
@@ -188,8 +188,8 @@ public:
 
 	//! Draw the grids and great circle lines.
 	//! Draws the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line, Equator Line,
-	//! Ecliptic Lines and Conjunction-Opposition Line according to the various flags which control their
-	//! visibility.
+	//! Ecliptic Lines, Precession Circles, and Conjunction-Opposition Line according to the
+	//! various flags which control their visibility.
 	virtual void draw(StelCore* core);
 
 	//! Update time-dependent features.
