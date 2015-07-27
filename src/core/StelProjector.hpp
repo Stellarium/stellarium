@@ -318,6 +318,8 @@ protected:
 	float zNear, oneOverZNearMinusZFar; // Near and far clipping planes
 	Vec4i viewportXywh;                 // Viewport parameters
 	Vec2f viewportCenter;               // Viewport center in screen pixel
+	Vec2f viewportCenterOffset;         // Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
+					    // Currently only Y shift is fully implemented, X shift likely not too meaningful.
 	float viewportFovDiameter;          // diameter of the FOV disk in pixel
 	bool gravityLabels;                 // should label text align with the horizon?
 	float defaultAngleForGravityText;   // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
