@@ -333,18 +333,25 @@ void get_nutation (double JD, struct ln_nutation * nutation)
 
 /* Calculate the mean sidereal time at the meridian of Greenwich (GMST) of a given date.
  * returns mean sidereal time (degrees).
- * Formula 11.1, 11.4 pg 83 */
+ * Formula 11.1, 11.4 pg 83
+ * MAKE SURE argument JD is UT, not TT!
+ */
 double get_mean_sidereal_time (double JD)
 {
 	double sidereal;
-	double T;
+	double T, T1;
     
-	T = (JD - 2451545.0) / 36525.0;
+
+	T1 = (JD - 2451545.0);
+	T= T1 * (1.0/ 36525.0);
         
 	/* calc mean angle */
-	sidereal = 280.46061837 + (360.98564736629 * (JD - 2451545.0)) + (0.000387933 * T * T) - (T * T * T / 38710000.0);
+	//sidereal = 280.46061837 + (360.98564736629 * (JD - 2451545.0)) + (0.000387933 * T * T) - (T * T * T / 38710000.0);
     
-	/* add a convenient multiple of 360 degrees */
+	sidereal = range_degrees(T1*360.98564736629); // Number gets large, better bring that to interval soon.
+	sidereal += (-1.0/38710000.0 * T + 0.000387933)*T*T+280.46061837;
+
+	/* add again a convenient multiple of 360 degrees */
 	sidereal = range_degrees (sidereal);
 
 	return sidereal;
@@ -360,7 +367,7 @@ double get_apparent_sidereal_time (double JD)
 	struct ln_nutation nutation;
    
 	// GZ For now this is forbidden!
-	assert(0);
+	//assert(0);
 	/* get the mean sidereal time */
 	sidereal = get_mean_sidereal_time (JD);
         
