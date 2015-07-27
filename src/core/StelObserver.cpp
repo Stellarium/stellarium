@@ -191,10 +191,29 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 	return getHomePlanet()->getHeliocentricEclipticPos();
 }
 
-// GZ: TODO: apply corrections for ellipsoid planets!
+// Used to approximate solution with assuming a spherical planet.
+// Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
 double StelObserver::getDistanceFromCenter(void) const
 {
-	return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
+	//return getHomePlanet()->getRadius() + (currentLocation.altitude/(1000*AU));
+
+	double a=getHomePlanet()->getRadius();
+	double b=getHomePlanet()->getOneMinusOblateness()*a;
+	double bByA = b/a;
+
+	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
+		return bByA*a;
+
+	double latRad=currentLocation.latitude*(M_PI/180.0);
+	//double tanLatPrime=tan(latRad) * bByA*bByA;
+	double u = atan( bByA * tan(latRad));
+	double altFix=(currentLocation.altitude/(1000.0*AU)) / a;
+
+	double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
+	double rhoCosPhiPrime= cos(u) + altFix*cos(latRad);
+
+	double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
+	return rho*a;
 }
 
 Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
@@ -211,6 +230,7 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
 	// 360 degrees = 24hrs; 15 degrees = 1hr = 3600s; 1 degree = 240s
 	// Apply DeltaT correction only for Earth
+	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
 	double deltaT = 0.;
 	if (getHomePlanet()->getEnglishName()=="Earth")
 		deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/240.;
