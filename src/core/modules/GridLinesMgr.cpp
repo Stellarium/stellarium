@@ -265,7 +265,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				break;
 			}
 			default:			
-			{ // qDebug() << "ViewportIntersectCallback: no frame defined! "; GZ that is OK...
+			{
 				if (std::fabs(2.*M_PI-lon)<0.001)
 				{
 					// We are at meridian 0
