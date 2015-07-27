@@ -180,7 +180,7 @@ public slots:
 	void setEnableAtStartup(const bool& b);
 
 	//! Enable/disable the meteor showers buttons on the toolbar.
-	void setEnableButtons(const bool& b);
+	void setEnableButtons(const bool& show);
 
 	//! Enable/disable radiant marker.
 	void setEnableMarker(const bool& b);
@@ -220,7 +220,6 @@ private:
 	MSConfigDialog* m_configDialog;
 	MSSearchDialog* m_searchDialog;
 
-	StelButton* m_toolbarEnableButton;
 	QFont m_font;
 	QSettings* m_conf;
 	QString m_catalogPath;
@@ -254,7 +253,6 @@ private:
 	class StelProgressController* m_progressBar;
 
 	void createActions();
-	void createToolbarButtons();
 	void loadConfig();
 	void loadTextures();
 	bool loadCatalog(const QString& jsonPath);
