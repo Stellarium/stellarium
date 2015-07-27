@@ -41,7 +41,6 @@ MeteorShowersMgr::MeteorShowersMgr()
 	: m_meteorShowers(NULL)
 	, m_configDialog(NULL)
 	, m_searchDialog(NULL)
-	, m_toolbarEnableButton(NULL)
 	, m_conf(StelApp::getInstance().getSettings())
 	, m_onEarth(false)
 	, m_enablePlugin(false)
@@ -77,7 +76,6 @@ void MeteorShowersMgr::init()
 	m_searchDialog = new MSSearchDialog(this);
 
 	createActions();
-	createToolbarButtons();
 	loadConfig();
 
 	// timer to hide the alert messages
@@ -149,32 +147,10 @@ bool MeteorShowersMgr::configureGui(bool show)
 void MeteorShowersMgr::createActions()
 {
 	QString msGroup = N_("Meteor Showers");
-	addAction("actionShow_MeteorShowers",               msGroup, N_("Toogle Meteor Showers"), this,           "enablePlugin", "Ctrl+Alt+M");
-	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Radiant Labels"),        this,           "enableLabels", "Shift+M");
-	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show Settings Dialog"),  m_configDialog, "visible",      "Ctrl+Shift+M");
-	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show Search Dialog"),    m_searchDialog, "visible",      "Ctrl+Shift+S");
-}
-
-void MeteorShowersMgr::createToolbarButtons()
-{
-	try
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		if (gui)
-		{
-			m_toolbarEnableButton = new StelButton(NULL,
-							       QPixmap(":/MeteorShowers/btMS-on.png"),
-							       QPixmap(":/MeteorShowers/btMS-off.png"),
-							       QPixmap(":/graphicGui/glow32x32.png"),
-							       "actionShow_MeteorShowers");
-			gui->getButtonBar()->addButton(m_toolbarEnableButton, "065-pluginsGroup");
-		}
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "MeteorShowersMgr : unable to create toolbar buttons for MeteorShowers plugin!"
-			   << e.what();
-	}
+	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Alt+M");
+	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Toggle radiant labels"), this,           "enableLabels", "Shift+M");
+	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Shift+M");
+	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show search dialog"),    m_searchDialog, "visible",      "Ctrl+Shift+S");
 }
 
 void MeteorShowersMgr::loadConfig()
@@ -421,17 +397,46 @@ void MeteorShowersMgr::setActiveRadiantOnly(const bool& b)
 	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_active_radiant_only", b);
 }
 
-void MeteorShowersMgr::setEnableButtons(const bool& b)
+void MeteorShowersMgr::setEnableButtons(const bool& show)
 {
-	if (b)
+	try
 	{
-		m_toolbarEnableButton->show();
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (!gui)
+		{
+			return;
+		}
+
+		if (show)
+		{
+			StelButton* enablePlugin = new StelButton(NULL,
+								  QPixmap(":/MeteorShowers/btMS-on.png"),
+								  QPixmap(":/MeteorShowers/btMS-off.png"),
+								  QPixmap(":/graphicGui/glow32x32.png"),
+								  "actionShow_MeteorShowers");
+
+			StelButton* searchMS = new StelButton(NULL,
+							      QPixmap(":/MeteorShowers/btMS-search-on.png"),
+							      QPixmap(":/MeteorShowers/btMS-search-off.png"),
+							      QPixmap(":/graphicGui/glow32x32.png"),
+							      "actionShow_MeteorShowers_search_dialog");
+
+			gui->getButtonBar()->addButton(enablePlugin, "065-pluginsGroup");
+			gui->getButtonBar()->addButton(searchMS, "065-pluginsGroup");
+		}
+		else
+		{
+			gui->getButtonBar()->hideButton("actionShow_MeteorShowers");
+			gui->getButtonBar()->hideButton("actionShow_MeteorShowers_search_dialog");
+		}
 	}
-	else
+	catch (std::runtime_error& e)
 	{
-		m_toolbarEnableButton->hide();
+		qWarning() << "MeteorShowersMgr : unable to create toolbar buttons for MeteorShowers plugin!"
+			   << e.what();
 	}
-	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_buttons", b);
+
+	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_buttons", show);
 }
 
 void MeteorShowersMgr::setColorARG(const Vec3f& rgb)
