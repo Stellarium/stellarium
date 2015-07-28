@@ -51,6 +51,7 @@ public:
 	virtual ~MeteorShowers();
 
 	//! Update
+	//! @param deltaTime the time increment in seconds since the last call.
 	void update(StelCore *core, double deltaTime);
 
 	//! Draw

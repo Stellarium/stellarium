@@ -146,7 +146,7 @@ bool Meteor::update(double deltaTime)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
-		m_absMag -= deltaTime/500.0f;
+		m_absMag -= deltaTime * 2.f;
 		m_aptMag = m_absMag;
 		if(m_absMag < 0)
 		{
@@ -169,7 +169,7 @@ bool Meteor::update(double deltaTime)
 		}
 	}
 
-	m_position[2] -= m_speed * deltaTime / 1000.0f;
+	m_position[2] -= m_speed * deltaTime;
 
 	// train doesn't extend beyond start of burn
 	if (m_position[2] + m_speed * 0.5f > m_initialDist)
@@ -178,7 +178,7 @@ bool Meteor::update(double deltaTime)
 	}
 	else
 	{
-		m_posTrain[2] -= m_speed * deltaTime / 1000.0f;
+		m_posTrain[2] -= m_speed * deltaTime;
 	}
 
 	return true;
