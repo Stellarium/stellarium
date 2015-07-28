@@ -274,6 +274,10 @@ public:
 
 	Matrix3<T> transpose() const;
 	Matrix3<T> inverse() const;
+	//! return trace (sum of diagonal elements).
+	inline T trace() const {return r[0]+r[4]+r[8];}
+	//! return rotational angle
+	inline T angle() const {return acos(0.5*(this->trace()-1.0));}
 
 	inline void print(void) const;
 	QString toString(int fieldWidth=0, char format='g', int precision=-1) const {return QString("[[%1, %2, %3], [%4, %5, %6], [%7, %8, %9]]")
