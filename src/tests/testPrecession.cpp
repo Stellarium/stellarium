@@ -65,23 +65,48 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	VEC3=-Q_A*S +Z*C;
 	VEQ3=(W<1.0 ? sqrt(1.0-W) : 0.0);
 
-	QVERIFY2(fabs(P_A -0.00041724785764001342)<=0.001, QString("JD %1: Pecl,x: %2 Difference: %3").arg(JulianDay).arg(P_A ).arg(P_A -0.00041724785764001342));
-	QVERIFY2(fabs(VEC2+0.40495491104576162693)<=0.001, QString("JD %1: Pecl,y: %2 Difference: %3").arg(JulianDay).arg(VEC2).arg(VEC2+0.40495491104576162693));
-	QVERIFY2(fabs(VEC3-0.91433656053126552350)<=0.001, QString("JD %1: Pecl,z: %2 Difference: %3").arg(JulianDay).arg(VEC3).arg(VEC3-0.91433656053126552350));
-	QVERIFY2(fabs(X_A +0.29437643797369031532)<=0.001, QString("JD %1: Pequ,x: %2 Difference: %3").arg(JulianDay).arg(X_A ).arg(X_A +0.29437643797369031532));
-	QVERIFY2(fabs(Y_A +0.11719098023370257855)<=0.001, QString("JD %1: Pequ,y: %2 Difference: %3").arg(JulianDay).arg(Y_A ).arg(Y_A +0.11719098023370257855));
-	QVERIFY2(fabs(VEQ3-0.94847708824082091796)<=0.001, QString("JD %1: Pequ,z: %2 Difference: %3").arg(JulianDay).arg(VEQ3).arg(VEQ3-0.94847708824082091796));
+	QVERIFY2(fabs(P_A -0.00041724785764001342)<=0.000001, QString("JD %1: Pecl,x: %2 Difference: %3").arg(JulianDay).arg(P_A ).arg(P_A -0.00041724785764001342).toUtf8());
+	QVERIFY2(fabs(VEC2+0.40495491104576162693)<=0.000001, QString("JD %1: Pecl,y: %2 Difference: %3").arg(JulianDay).arg(VEC2).arg(VEC2+0.40495491104576162693).toUtf8());
+	QVERIFY2(fabs(VEC3-0.91433656053126552350)<=0.000001, QString("JD %1: Pecl,z: %2 Difference: %3").arg(JulianDay).arg(VEC3).arg(VEC3-0.91433656053126552350).toUtf8());
+	QVERIFY2(fabs(X_A +0.29437643797369031532)<=0.000001, QString("JD %1: Pequ,x: %2 Difference: %3").arg(JulianDay).arg(X_A ).arg(X_A +0.29437643797369031532).toUtf8());
+	QVERIFY2(fabs(Y_A +0.11719098023370257855)<=0.000001, QString("JD %1: Pequ,y: %2 Difference: %3").arg(JulianDay).arg(Y_A ).arg(Y_A +0.11719098023370257855).toUtf8());
+	QVERIFY2(fabs(VEQ3-0.94847708824082091796)<=0.000001, QString("JD %1: Pequ,z: %2 Difference: %3").arg(JulianDay).arg(VEQ3).arg(VEQ3-0.94847708824082091796).toUtf8());
+	// the same, to be seen ...
+//	qDebug() << QString("JD %1: Pecl,x: %2 Difference: %3").arg(JulianDay, 8, 'f', 5).arg(P_A , 15, 'f', 12).arg(P_A -0.00041724785764001342, 15, 'f', 12);
+//	qDebug() << QString("JD %1: Pecl,y: %2 Difference: %3").arg(JulianDay, 8, 'f', 5).arg(VEC2, 15, 'f', 12).arg(VEC2+0.40495491104576162693, 15, 'f', 12);
+//	qDebug() << QString("JD %1: Pecl,z: %2 Difference: %3").arg(JulianDay, 8, 'f', 5).arg(VEC3, 15, 'f', 12).arg(VEC3-0.91433656053126552350, 15, 'f', 12);
+//	qDebug() << QString("JD %1: Pequ,x: %2 Difference: %3").arg(JulianDay, 8, 'f', 5).arg(X_A , 15, 'f', 12).arg(X_A +0.29437643797369031532, 15, 'f', 12);
+//	qDebug() << QString("JD %1: Pequ,y: %2 Difference: %3").arg(JulianDay, 8, 'f', 5).arg(Y_A , 15, 'f', 12).arg(Y_A +0.11719098023370257855, 15, 'f', 12);
+//	qDebug() << QString("JD %1: Pequ,z: %2 Difference: %3").arg(JulianDay, 8, 'f', 5).arg(VEQ3, 15, 'f', 12).arg(VEQ3-0.94847708824082091796, 15, 'f', 12);
+
 
 	Vec3d PECL(P_A, VEC2, VEC3);
-	Vec3d PEQR(X_A, Y_A, VEQ);
+	Vec3d PEQR(X_A, Y_A, VEQ3);
 	Vec3d EQX=PEQR^PECL;
 	EQX.normalize();
 	Vec3d V=PEQR^EQX;
 	Mat3d RP(EQX[0], EQX[1], EQX[2], V[0], V[1], V[2], PEQR[0], PEQR[1], PEQR[2]); // result from paper, section A.3
 	// Now we create the (hopefully) same rotation matrix from the Capitaine angles.
-	Mat4d Rrot=Mat4d::zrotation(chi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(-psi_A) * Mat4d::xrotation(eps0);
-	Mat3d Rcap=Rrot.upper3x3();
+	// Mat4d Rrot=Mat4d::zrotation(chi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(-psi_A) * Mat4d::xrotation(eps0);
 
-	qDebug() << "RP: " << RP.print();
-	qDebug() << "Rcap: " << Rcap.print();
+	// Uh-oh - it seems the A&A paper has the matrix operations in the other direction.
+	// So the matrix to be compared must be composed in reverse.
+	Mat4d RRot=Mat4d::xrotation(eps0)*Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A);
+
+	//qDebug() << "RP     : " << RP.toString(15, 'f', 12);
+	//qDebug() << "RcapTr : " << RRot.upper3x3().toString(15, 'f', 12);
+
+	Mat4d RP4(EQX[0], EQX[1], EQX[2], 0, V[0], V[1], V[2], 0, PEQR[0], PEQR[1], PEQR[2], 0, 0, 0, 0, 1);
+	//QMatrix4x4 matDiff=((RRot-RP4)).convertToQMatrix();
+	//qDebug() << matDiff;
+	Mat3d matDiff3x3=(RRot-RP4).upper3x3();
+	double max=0.0;
+	for (int i=0; i<9; ++i)
+	{
+		if (fabs(matDiff3x3[i]) > max)
+			max=fabs(matDiff3x3[i]);
+	}
+	//qDebug() << "largest value in difference of matrices:" << max;
+	QVERIFY2(max<2e-5, QString("Some values in the precession matrices differ by too much.").toUtf8());
+
 }
