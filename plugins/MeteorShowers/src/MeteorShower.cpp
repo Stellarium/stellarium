@@ -251,10 +251,11 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		}
 	}
 
-	double tspeed = core->getTimeRate() * 86400;  // sky seconds per actual second
-	if(tspeed < 0. || fabs(tspeed) > 1.)
+	// going forward or backward ?
+	// don't create new meteors
+	if(!core->getRealTimeSpeed())
 	{
-		return; // don't create new meteors
+		return;
 	}
 
 	// calculates a ZHR for the current date
