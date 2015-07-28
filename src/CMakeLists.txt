@@ -622,6 +622,23 @@ TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testRefraction)
 ADD_TEST(testRefraction)
 
+SET(tests_testPrecession_SRCS
+        tests/testPrecession.hpp
+        tests/testPrecession.cpp
+        core/planetsephems/precession.h
+        core/planetsephems/precession.c
+        core/StelUtils.hpp
+        core/StelUtils.cpp)
+IF(WIN32)
+        # StelUtils required zlib sources
+        SET(tests_testPrecession_SRCS ${tests_testPrecession_SRCS} ${zlib_SRCS})
+ENDIF()
+ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
+QT5_USE_MODULES(testPrecession Core Gui Widgets Script Declarative Test)
+TARGET_LINK_LIBRARIES(testPrecession ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testPrecession)
+ADD_TEST(testPrecession)
+
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 FOREACH(NAME ${STELLARIUM_TESTS})
 	IF(MSVC)
