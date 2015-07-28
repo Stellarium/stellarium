@@ -260,23 +260,26 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 
 	// calculates a ZHR for the current date
 	int currentZHR = calculateZHR(currentJD);
-
-	// determine average meteors per frame needing to be created
-	int mpf = (int) ((double) currentZHR * ZHR_TO_WSR * deltaTime + 0.5);
-	if (mpf < 1)
+	if (currentZHR < 1)
 	{
-		mpf = 1;
+		return;
 	}
 
-	for (int i = 0; i < mpf; ++i)
+	// average meteors per frame
+	float mpf = currentZHR * deltaTime / 3600.f;
+
+	// maximum amount of meteors for the current frame
+	int maxMpf = qRound(mpf);
+	maxMpf = maxMpf < 1 ? 1 : maxMpf;
+
+	float rate = mpf / (float) maxMpf;
+	for (int i = 0; i < maxMpf; ++i)
 	{
-		// start new meteor based on ZHR time probability
-		double prob = ((double) qrand()) / RAND_MAX;
-		double aux = (double) currentZHR * ZHR_TO_WSR * deltaTime / (double) mpf;
-		if (currentZHR > 0 && prob < aux)
+		float prob = (float) qrand() / (float) RAND_MAX;
+		if (prob < rate)
 		{
-			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta, m_pidx,
-					m_colors, m_mgr->getBolideTexture());
+			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta,
+						     m_pidx, m_colors, m_mgr->getBolideTexture());
 			m_activeMeteors.append(m);
 		}
 	}
@@ -300,7 +303,7 @@ void MeteorShower::draw(StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
 	Vec3f rgb;
-	float alpha = 0.85f + ((double) qrand() / (RAND_MAX))/10;
+	float alpha = 0.85f + ((float) qrand() / (float) RAND_MAX) / 10.f;
 	switch(m_status)
 	{
 		case ACTIVE_REAL: //Active, real data
