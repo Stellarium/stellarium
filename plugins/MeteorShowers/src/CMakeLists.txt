@@ -20,6 +20,7 @@ SET(MeteorShowers_SRCS
     gui/MSConfigDialog.cpp
     gui/MSSearchDialog.hpp
     gui/MSSearchDialog.cpp
+    translations.h
 )
 
 SET(MeteorShowersDialog_UIS
