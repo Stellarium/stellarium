@@ -803,6 +803,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	float y_baseImg_1 = sides[currentSide].texCoords[1]+ y_img_1*(sides[currentSide].texCoords[3]-sides[currentSide].texCoords[1]);
 	int y=(1.0-y_baseImg_1)*sidesImages[currentSide]->height();           // pixel Y from top.
 	QRgb pixVal=sidesImages[currentSide]->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Oldstyle Landscape sampling: az=" << az*180.0 << "° alt=" << alt_rad*180.0f/M_PI
@@ -811,6 +812,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 			 << ", w=" << sidesImages[currentSide]->width() << " h=" << sidesImages[currentSide]->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 }
 
@@ -1022,12 +1024,14 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 	int y= mapImage->height()/2*(1 + radius*std::cos(az));
 
 	QRgb pixVal=mapImage->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
 			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 
 
@@ -1210,6 +1214,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	int x=(az_phot/2.0f) * mapImage->width(); // pixel X from left.
 
 	QRgb pixVal=mapImage->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << az*180.0 << "° alt=" << alt_pm1*90.0f
@@ -1217,6 +1222,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 			 << ", w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 
 }
