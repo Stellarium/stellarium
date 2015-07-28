@@ -38,8 +38,9 @@ static double c_psi_A=0.0, c_omega_A=0.0, c_chi_A=0.0, /*c_p_A=0.0, */ c_epsilon
 		c_Y_A=0.0, c_X_A=0.0, c_Q_A=0.0, c_P_A=0.0,
 		c_lastJDE=-1e100;
 
+static const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
 
-static double PQvals[8][5]=
+static const double PQvals[8][5]=
 { //  1/Pn         P_A:Cn       Q_A:Cn        P_A:Sn        Q_A:Sn
   { 1.0/ 708.15, -5486.751211, -684.661560,   667.666730, -5523.863691 },
   { 1.0/2309.00,   -17.127623, 2446.283880, -2354.886252,  -549.747450 },
@@ -50,7 +51,7 @@ static double PQvals[8][5]=
   { 1.0/ 882.00,   -87.676083,  198.296071,  -185.138669,   -34.744450 },
   { 1.0/ 547.00,    46.140315,  101.135679,  -120.972830,    22.885731 }};
 
-static double XYvals[14][5]=
+static const double XYvals[14][5]=
 { //  1/Pn          Xa:Cn          Ya:Cn         Xa:Sn         Ya:Sn
   { 1.0/ 256.75,  -819.940624,  75004.344875, 81491.287984,  1558.515853 },
   { 1.0/ 708.15, -8444.676815,    624.033993,   787.163481,  7774.939698 },
@@ -68,7 +69,7 @@ static double XYvals[14][5]=
   { 1.0/1200.00,    -9.814756,      9.344131,   -44.919798,   -22.899655 }};
 
 
-static double precVals[18][7]=
+static const double precVals[18][7]=
 { // 1/Pn         psi_A:Cn       om_A:Cn       chi_A:Cn         psi_A:Sn       om_A:Sn       chi_A:Sn
 
   { 1.0/402.90,  -22206.325946,  1267.727824, -13765.924050,    -3243.236469, -8571.476251,  -2206.967126 },
@@ -90,7 +91,7 @@ static double precVals[18][7]=
   { 1.0/136.32,       0.0     ,     0.0     ,    585.492621,        0.0     ,     0.0     ,     41.348740 },
   { 1.0/490.00,       0.0     ,     0.0     ,    110.512834,        0.0     ,     0.0     ,    142.525186 }};
 
-static double p_epsVals[20][5]=
+static const double p_epsVals[20][5]=
 { //  1/Pn         p_A:Cn     eps_A:Cn        p_A:Sn      eps_A:Sn
   { 1.0/ 409.90, -6908.287473,  753.872780, -2845.175469, -1704.720302},
   { 1.0/ 396.15, -3198.706291, -247.805823,   449.844989,  -862.308358},
@@ -110,7 +111,6 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 {
 	if (fabs(jde-c_lastJDE) > PRECESSION_EPOCH_THRESHOLD)
 	{
-		const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
 		double T=(jde-2451545.0)* (1.0/36525.0); // Julian centuries from J2000.0
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
@@ -173,7 +173,6 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 {
 	if (fabs(jde-c_lastJDE) > PRECESSION_EPOCH_THRESHOLD)
 	{
-		const double arcSec2Rad=M_PI*2.0/(360.0*3600.0);
 		double T=(jde-2451545.0)* (1.0/36525.0);
 		assert(fabs(T)<=2000); // MAKES SURE YOU NEVER OVERSTRETCH THIS!
 		double T2pi= T*(2.0*M_PI); // Julian centuries from J2000.0, premultiplied by 2Pi
