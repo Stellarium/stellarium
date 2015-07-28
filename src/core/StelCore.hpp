@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003 Fabien Chereau
  * Copyright (C) 2012 Matthew Gates
+ * Copyright (C) 2015 Georg Zotti (Precession fixes)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,11 +39,11 @@ class StelObserver;
 //! Main class for Stellarium core processing.
 //! This class provides services like management of sky projections,
 //! tone conversion, or reference frame conversion. It is used by the
-//! various StelModules to update and display themself.
+//! various StelModules to update and display themselves.
 //! There is currently only one StelCore instance in Stellarium, but
 //! in the future they may be more, allowing for example to display
 //! several independent views of the sky at the same time.
-//! @author Fabien Chereau
+//! @author Fabien Chereau, Matthew Gates, Georg Zotti
 class StelCore : public QObject
 {
 	Q_OBJECT
@@ -56,15 +57,17 @@ public:
 	//! Supported reference frame types
 	enum FrameType
 	{
-		FrameUninitialized,		//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
-		FrameAltAz,			//!< Altazimuthal reference frame centered on observer.
-		FrameHeliocentricEcliptic,	//!< Ecliptic reference frame centered on the Sun
-		FrameObservercentricEcliptic,	//!< Ecliptic reference frame centered on the Observer
-		FrameEquinoxEqu,		//!< Equatorial reference frame at the current equinox centered on the observer.
-						//! The north pole follows the precession of the planet on which the observer is located.
-		FrameJ2000,			//!< Equatorial reference frame at the J2000 equinox centered on the observer.
-						//! This is also the ICRS reference frame.
-		FrameGalactic			//! Galactic reference frame centered on observer.
+		FrameUninitialized,			//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
+		FrameAltAz,				//!< Altazimuthal reference frame centered on observer.
+		FrameHeliocentricEclipticJ2000,		//!< Fixed-ecliptic reference frame centered on the Sun. GZ: This is J2000 ecliptical / almost VSOP87.
+		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. GZ: was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
+		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. GZ new for V0.14: Ecliptic of date, i.e. includes the precession of the ecliptic.
+		FrameEquinoxEqu,			//!< Equatorial reference frame at the current equinox centered on the observer.
+							//!< The north pole follows the precession of the planet on which the observer is located.
+							//!< TBD: To be Corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model)
+		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer.
+							//!< This is also the ICRS reference frame.
+		FrameGalactic				//!< Galactic reference frame centered on observer.
 	};
 
 	//! @enum ProjectionType
@@ -150,11 +153,11 @@ public:
 	//! only for 2d painting
 	StelProjectorP getProjection2d() const;
 
-	//! Get a new instance of projector using a modelview transformation corresponding to the the given frame.
+	//! Get a new instance of projector using a modelview transformation corresponding to the given frame.
 	//! If not specified the refraction effect is included if atmosphere is on.
 	StelProjectorP getProjection(FrameType frameType, RefractionMode refractionMode=RefractionAuto) const;
 
-	//! Get a new instance of projector using the given modelview transformatione.
+	//! Get a new instance of projector using the given modelview transformation.
 	//! If not specified the projection used is the one currently used as default.
 	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
 
@@ -210,31 +213,35 @@ public:
 
 	//! Transform from heliocentric coordinate to equatorial at current equinox (for the planet where the observer stands)
 	Vec3d heliocentricEclipticToEquinoxEqu(const Vec3d& v) const;
-	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
-	//! coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const;
+//	//! Transform vector from heliocentric coordinate to false equatorial : equatorial
+//	//! coordinate but centered on the observer position (useful for objects close to earth)
+//	//! Unused as of V0.13
+//	Vec3d heliocentricEclipticToEarthPosEquinoxEqu(const Vec3d& v) const;
 
-	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing
+	//! Get the modelview matrix for heliocentric ecliptic (Vsop87) drawing.
 	StelProjector::ModelViewTranformP getHeliocentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
-	//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing
-	StelProjector::ModelViewTranformP getObservercentricEclipticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
+	//! Get the modelview matrix for observer-centric ecliptic (Vsop87) drawing.
+	StelProjector::ModelViewTranformP getObservercentricEclipticJ2000ModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
-	//! Get the modelview matrix for observer-centric equatorial at equinox drawing
+	//! Get the modelview matrix for observer-centric ecliptic of Date drawing.
+	StelProjector::ModelViewTranformP getObservercentricEclipticOfDateModelViewTransform(RefractionMode refMode=RefractionAuto) const;
+
+	//! Get the modelview matrix for observer-centric equatorial at equinox drawing.
 	StelProjector::ModelViewTranformP getEquinoxEquModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
-	//! Get the modelview matrix for observer-centric altazimuthal drawing
+	//! Get the modelview matrix for observer-centric altazimuthal drawing.
 	StelProjector::ModelViewTranformP getAltAzModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
-	//! Get the modelview matrix for observer-centric J2000 equatorial drawing
+	//! Get the modelview matrix for observer-centric J2000 equatorial drawing.
 	StelProjector::ModelViewTranformP getJ2000ModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
-	//! Get the modelview matrix for observer-centric Galactic equatorial drawing
+	//! Get the modelview matrix for observer-centric Galactic equatorial drawing.
 	StelProjector::ModelViewTranformP getGalacticModelViewTransform(RefractionMode refMode=RefractionAuto) const;
 
-	//! Rotation matrix from equatorial J2000 to ecliptic (Vsop87)
+	//! Rotation matrix from equatorial J2000 to ecliptic (VSOP87A).
 	static const Mat4d matJ2000ToVsop87;
-	//! Rotation matrix from ecliptic (Vsop87) to equatorial J2000
+	//! Rotation matrix from ecliptic (VSOP87A) to equatorial J2000.
 	static const Mat4d matVsop87ToJ2000;
 	//! Rotation matrix from J2000 to Galactic reference frame, using FITS convention.
 	static const Mat4d matJ2000ToGalactic;
@@ -248,6 +255,10 @@ public:
 	const StelLocation& getCurrentLocation() const;
 
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
+
+	//! Unfortunately we also need this.
+	const StelObserver* getCurrentObserver() const;
+
 
 	SphericalCap getVisibleSkyArea() const;
 	
@@ -291,10 +302,12 @@ public:
 	//! @return valid range
 	QString getCurrentDeltaTAlgorithmValidRange(double jDay, QString* marker) const;
 
-	//! Checks for current time of day - it's night or day?
+	//! Checks for altitude of sun - is it night or day?
+	//! @return true if sun higher than about -6 degrees, i.e. "day" includes civil twilight.
+	//! @note Useful mostly for brightness-controlled GUI decisions like font colors.
 	bool isDay() const;
 
-	//! Get value of the current Julian epoch
+	//! Get value of the current Julian epoch (i.e. current year with decimal fraction, e.g. 2012.34567)
 	double getCurrentEpoch() const;
 
 	//! Get the default Mapping used by the Projection
@@ -451,6 +464,10 @@ public slots:
 	void addTropicalMonth();
 	//! Add one mean tropical year to the simulation time.
 	void addTropicalYear();
+	//! Add one mean tropical century to the simulation time.
+	void addTropicalCentury();
+	//! Add one Julian century to the simulation time.
+	void addJulianCentury();
 
 	//! Subtract one synodic month to the simulation time.
 	void subtractSynodicMonth();
@@ -466,7 +483,11 @@ public slots:
 	//! Subtract one mean tropical month to the simulation time.
 	void subtractTropicalMonth();
 	//! Subtract one mean tropical year to the simulation time.
-	void subtractTropicalYear();	
+	void subtractTropicalYear();
+	//! Subtract one mean tropical century to the simulation time.
+	void subtractTropicalCentury();
+	//! Subtract one Julian century to the simulation time.
+	void subtractJulianCentury();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)
@@ -525,13 +546,17 @@ private:
 	void resetSync();
 
 	// Matrices used for every coordinate transfo
-	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
-	Mat4d matAltAzToHeliocentricEcliptic;	   // Transform from observer-centric altazimuthal coordinate to heliocentric ecliptic (Vsop87)
-	Mat4d matAltAzToEquinoxEqu;                // Transform from observer-centric altazimuthal coordinate to Earth Equatorial
-	Mat4d matEquinoxEquToAltAz;                // Transform from observer-centric altazimuthal coordinate to Earth Equatorial
-	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic (Vsop87) to earth equatorial coordinate
-	Mat4d matEquinoxEquToJ2000;
-	Mat4d matJ2000ToEquinoxEqu;
+	Mat4d matHeliocentricEclipticJ2000ToAltAz; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to topocentric (StelObserver) altazimuthal coordinate
+	Mat4d matAltAzToHeliocentricEclipticJ2000; // Transform from topocentric (StelObserver) altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
+	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
+	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
+	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
+	Mat4d matEquinoxEquToJ2000;                // GZ For Earth, this should be inverse precession matrix. Yes, =Rz(VSOPoffset)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
+	Mat4d matJ2000ToEquinoxEqu;                // GZ: Should be precession matrix?
+//	Mat4d matEclOfDateToVsop87;                // GZ NEW: precession of the ecliptic
+//	Mat4d matVsop87ToEclOfDate;                // GZ NEW: precession of the ecliptic
+
+
 	Mat4d matJ2000ToAltAz;
 
 	Mat4d matAltAzModelView;           // Modelview matrix for observer-centric altazimuthal drawing

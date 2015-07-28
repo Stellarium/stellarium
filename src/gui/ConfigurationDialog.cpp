@@ -563,13 +563,16 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
 	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
+	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
+	conf->setValue("viewing/flag_equator_J2000_line", glmgr->getFlagEquatorJ2000Line());
 	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
+	conf->setValue("viewing/flag_ecliptic_J2000_line", glmgr->getFlagEclipticJ2000Line());
+	conf->setValue("viewing/flag_ecliptic_grid", glmgr->getFlagEclipticGrid());
 	conf->setValue("viewing/flag_ecliptic_J2000_grid", glmgr->getFlagEclipticJ2000Grid());
 	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
 	conf->setValue("viewing/flag_longitude_line", glmgr->getFlagLongitudeLine());
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
-	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
 	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
