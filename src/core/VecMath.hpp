@@ -241,6 +241,7 @@ public:
 	inline void normalize();
 
 	inline void transfo4d(const Mat4d&);
+	QString toString() const {return QString("[%1, %2, %3, %4]").arg(v[0]).arg(v[1]).arg(v[2]).arg(v[3]);}
 
 	T v[4];		// The 4 values
 };
@@ -275,6 +276,16 @@ public:
 	Matrix3<T> inverse() const;
 
 	inline void print(void) const;
+	QString toString(int fieldWidth=0, char format='g', int precision=-1) const {return QString("[[%1, %2, %3], [%4, %5, %6], [%7, %8, %9]]")
+				.arg(r[0], fieldWidth, format, precision)
+				.arg(r[1], fieldWidth, format, precision)
+				.arg(r[2], fieldWidth, format, precision)
+				.arg(r[3], fieldWidth, format, precision)
+				.arg(r[4], fieldWidth, format, precision)
+				.arg(r[5], fieldWidth, format, precision)
+				.arg(r[6], fieldWidth, format, precision)
+				.arg(r[7], fieldWidth, format, precision)
+				.arg(r[8], fieldWidth, format, precision);}
 
 	T r[9];
 };
@@ -322,8 +333,9 @@ public:
 	Matrix4<T> transpose() const;
 	Matrix4<T> inverse() const;
 
-    //Returns the upper 3x3 Matrix of the current 4x4 Matrix
-    Matrix3<T> upper3x3() const;
+	//Returns the upper 3x3 Matrix of the current 4x4 Matrix
+	Matrix3<T> upper3x3() const;
+	Matrix3<T> upper3x3Transposed() const;
 
 	inline Vector4<T> getRow(const int row) const;
 	inline Vector4<T> getColumn(const int column) const;
@@ -332,6 +344,23 @@ public:
 	inline QMatrix4x4 convertToQMatrix() const;
 
 	inline void print(void) const;
+	QString toString(int fieldWidth=0, char format='g', int precision=-1) const {return QString("[[%1, %2, %3, %4], [%5, %6, %7, %8], [%9, %10, %11, %12], [%13, %14, %15, %16]]")
+				.arg(r[0], fieldWidth, format, precision)
+				.arg(r[1], fieldWidth, format, precision)
+				.arg(r[2], fieldWidth, format, precision)
+				.arg(r[3], fieldWidth, format, precision)
+				.arg(r[4], fieldWidth, format, precision)
+				.arg(r[5], fieldWidth, format, precision)
+				.arg(r[6], fieldWidth, format, precision)
+				.arg(r[7], fieldWidth, format, precision)
+				.arg(r[8], fieldWidth, format, precision)
+				.arg(r[9], fieldWidth, format, precision)
+				.arg(r[10], fieldWidth, format, precision)
+				.arg(r[11], fieldWidth, format, precision)
+				.arg(r[12], fieldWidth, format, precision)
+				.arg(r[13], fieldWidth, format, precision)
+				.arg(r[14], fieldWidth, format, precision)
+				.arg(r[15], fieldWidth, format, precision);}
 
 	T r[16];
 };
@@ -1467,7 +1496,14 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 	#undef SWAP_ROWS
 }
 
+
 template<class T> Matrix3<T> Matrix4<T>::upper3x3() const
+{
+    return Matrix3<T>(r[0], r[1], r[2],
+		      r[4], r[5], r[6],
+		      r[8], r[9], r[10]);
+}
+template<class T> Matrix3<T> Matrix4<T>::upper3x3Transposed() const
 {
     return Matrix3<T>(r[0], r[4], r[8],
                       r[1], r[5], r[9],
