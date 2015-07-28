@@ -139,7 +139,6 @@ bool MeteorShowersMgr::configureGui(bool show)
 	if (show)
 	{
 		m_configDialog->setVisible(show);
-		m_searchDialog->setVisible(show);
 	}
 	return true;
 }
