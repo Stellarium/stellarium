@@ -274,13 +274,9 @@ void MeteorShowersMgr::update(double deltaTime)
 		return;
 	}
 
-	deltaTime *= 1000.0;
 	// if stellarium has been suspended, don't create
 	// huge number of meteors to make up for lost time!
-	if (deltaTime > 500.0)
-	{
-		deltaTime = 500.0;
-	}
+	deltaTime = deltaTime > 0.05 ? 0.05 : deltaTime;
 
 	// is GUI visible? refresh dates
 	if (m_searchDialog->visible())

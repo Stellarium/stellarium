@@ -95,13 +95,9 @@ void SporadicMeteorMgr::update(double deltaTime)
 		return; // freeze meteors at the current position
 	}
 
-	deltaTime *= 1000.0;
 	// if stellarium has been suspended, don't create
 	// huge number of meteors to make up for lost time!
-	if (deltaTime > 500.0)
-	{
-		deltaTime = 500.0;
-	}
+	deltaTime = deltaTime > 0.05 ? 0.05 : deltaTime;
 
 	// step through and update all active meteors
 	foreach (SporadicMeteor* m, activeMeteors)
@@ -121,7 +117,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 	}
 
 	// determine average meteors per frame needing to be created
-	int mpf = (int) ((double) ZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
+	int mpf = (int) ((double) ZHR * ZHR_TO_WSR * deltaTime + 0.5);
 	if (mpf < 1)
 	{
 		mpf = 1;
@@ -131,7 +127,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 	{
 		// start new meteor based on ZHR time probability
 		double prob = ((double) qrand()) / RAND_MAX;
-		if (ZHR > 0 && prob < ((double) ZHR * ZHR_TO_WSR * deltaTime / 1000.0 / (double) mpf))
+		if (ZHR > 0 && prob < ((double) ZHR * ZHR_TO_WSR * deltaTime / (double) mpf))
 		{
 			SporadicMeteor* m = new SporadicMeteor(core, maxVelocity, m_bolideTexture);
 			activeMeteors.append(m);
