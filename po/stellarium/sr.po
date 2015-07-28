@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-26 17:01+0600\n"
-"PO-Revision-Date: 2015-07-22 15:25+0000\n"
+"PO-Revision-Date: 2015-07-27 18:47+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-27 05:23+0000\n"
+"X-Launchpad-Export-Date: 2015-07-28 05:14+0000\n"
 "X-Generator: Launchpad (build 17628)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -814,7 +814,7 @@ msgid ""
 msgstr ""
 "Ова формула је заснована на Спенсер Џонсовом (%1) проучавању посматрања "
 "Сунца, Месеца и планета после 1650. и Џ.  Меус ју је користио у свом "
-"<em>Астрономске формуле за рачунања</em> . Она је такође коришћена у  "
+"<em>Астрономске формуле за рачунање</em> . Она је такође коришћена у  "
 "програму \"SunTracker Pro\"."
 
 #: src/core/StelCore.cpp:1478
@@ -2405,7 +2405,7 @@ msgstr "Неправилне галаксије"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
 msgid "Clusters associated with nebulosity"
-msgstr "Јата у вези са маглинама."
+msgstr "Јата прожета маглинама"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
@@ -2435,7 +2435,7 @@ msgstr "Кардвелов каталог"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Barnard Catalogue"
-msgstr "Barnardov katalog"
+msgstr "Бернардов каталог"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:111
@@ -2478,11 +2478,11 @@ msgstr "арапски"
 
 #: src/translations.h:131
 msgid "Arabic Moon Stations"
-msgstr "арапски Месец станице"
+msgstr "станице арапски Месец"
 
 #: src/translations.h:132
 msgid "Aztec"
-msgstr "Астечки"
+msgstr "астечки"
 
 #: src/translations.h:133
 msgid "Boorong"
@@ -2490,15 +2490,15 @@ msgstr "Бурунг"
 
 #: src/translations.h:134
 msgid "Chinese"
-msgstr "Кинески"
+msgstr "кинески"
 
 #: src/translations.h:135
 msgid "Egyptian"
-msgstr "Египатски"
+msgstr "египатски"
 
 #: src/translations.h:136
 msgid "Inuit"
-msgstr "Инуитски"
+msgstr "инуитски"
 
 #: src/translations.h:137
 msgid "Indian Vedic"
@@ -2506,11 +2506,11 @@ msgstr "индијски Веди"
 
 #: src/translations.h:138
 msgid "Japanese Moon Stations"
-msgstr "јапански Месец станице"
+msgstr "станице јапански Месец"
 
 #: src/translations.h:139
 msgid "Korean"
-msgstr "Корејски"
+msgstr "корејски"
 
 #: src/translations.h:140
 msgid "Lakota"
@@ -2518,7 +2518,7 @@ msgstr "Лакота"
 
 #: src/translations.h:141
 msgid "Maori"
-msgstr "Маорски"
+msgstr "маорски"
 
 #: src/translations.h:142
 msgid "Mongolian"
@@ -2534,20 +2534,20 @@ msgstr "Норс (старо-нордијски)"
 
 #: src/translations.h:145
 msgid "Polynesian"
-msgstr "Полинезијски"
+msgstr "полинезијски"
 
 #: src/translations.h:146
 msgid "Romanian"
-msgstr "Румунски"
+msgstr "румунски"
 
 #: src/translations.h:147
 msgid "Sami"
-msgstr "Самски"
+msgstr "самски"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:149
 msgid "Siberian"
-msgstr "Сибирски"
+msgstr "сибирски"
 
 #: src/translations.h:150
 msgid "Tukano"
@@ -2563,7 +2563,7 @@ msgstr "Тонган"
 
 #: src/translations.h:153
 msgid "Western"
-msgstr "Западњачки"
+msgstr "западњачки"
 
 #: src/translations.h:154
 msgid "Western (H.A.Rey)"
@@ -2642,7 +2642,7 @@ msgstr "Нулти хоризонт"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:191
 msgid "Vienna Sterngarten"
-msgstr "Vienna Sterngarten"
+msgstr ""
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
@@ -2783,7 +2783,7 @@ msgstr "Тичова супернова"
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:254
 msgid "Look around each installed landscape."
-msgstr "Осврните се око сваког инсталираног пејзажа."
+msgstr "Осврни се око сваког инсталираног пејзажа."
 
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:256
@@ -2820,8 +2820,8 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
-"Ова скрипта приказује сазвежђа на Зодијака. То су сазвежђа која леже дуж "
-"линије коју прави Сунце на небеском своду током целе године."
+"Ова скрипта приказује сазвежђа Зодијака. То су сазвежђа која леже дуж линије "
+"коју прави Сунце на небеском своду током целе године."
 
 #: src/translations.h:263
 msgid ""
@@ -2837,7 +2837,7 @@ msgid ""
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 "Пре него Марс помрачи Сунце, Фобос се појављује иза и прво помрачује Сунце. "
-"Десиће се 26. априла 2017. , између Шкорпије и Стрелца."
+"Десиће се 26. априла 2017, између Шкорпије и Стрелца."
 
 #: src/translations.h:265
 msgid ""
@@ -2845,7 +2845,7 @@ msgid ""
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 "Пре него Марс помрачи Сунце, Фобос се појављује иза и прво помрачује Сунце. "
-"Десиће се 23. јула 2031. , између Бика и Близанаца."
+"Десиће се 23. јула 2031 , између Бика и Близанаца."
 
 #: src/translations.h:266
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
@@ -2857,7 +2857,7 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
-"Окултације Фобоса и Земље су честе, као и окултације Јупитера. Али "
+"Окултације Фобоса и Земље су честе  као и окултације Јупитера. Али "
 "Окултације оба објекта у истом дану су ретка. Ево једна која ће се десити "
 "1/23/2048. У реалној брзини."
 
@@ -2872,8 +2872,8 @@ msgid ""
 msgstr ""
 "Фобос обилазећи око Марса с предње стране, врши транзит преко Сунчевог диска "
 "и враћа се ретроградно према Сунцу и поново врши деломични транзит ( видљив "
-"је једино са јужне хемисфере Деимоса ), тада Марс врши потпуно помрачење "
-"Сунца док Фобос у тами пролази између Марса и Деимоса.  Када се Фобос појави "
+"је једино са јужне хемисфере Дејмоса ), тада Марс врши потпуно помрачење "
+"Сунца док Фобос у тами пролази између Марса и Дејмоса.  Када се Фобос појави "
 "иза Марса, још увек траје помрачење и замагљен је у  Марсовој сенци, "
 "постајући све светлији."
 
@@ -2915,7 +2915,7 @@ msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
-"Блесак супернове коју је посматрао Тихо Брахе 1572. Додатак Супернова мора "
+"Блесак супернове коју је посматрао Тихо Брахе 1572. Додатак супернова мора "
 "бити доступан."
 
 #: src/translations.h:276
@@ -3343,7 +3343,7 @@ msgstr "Индија"
 
 #: src/translations.h:382
 msgid "British Indian Ocean Territory"
-msgstr "Британско територија у Индијском океану"
+msgstr "Британска територија у Индијском океану"
 
 #: src/translations.h:383
 msgid "Iraq"
@@ -3431,7 +3431,7 @@ msgstr "Света Луција"
 
 #: src/translations.h:404
 msgid "Liechtenstein"
-msgstr "Лихенштајн"
+msgstr "Лихтенштајн"
 
 #: src/translations.h:405
 msgid "Sri Lanka"
@@ -3819,7 +3819,7 @@ msgstr "Танзанија"
 
 #: src/translations.h:501
 msgid "Ukraine"
-msgstr "Украина"
+msgstr "Украјина"
 
 #: src/translations.h:502
 msgid "Uganda"
@@ -3859,7 +3859,7 @@ msgstr "Британска Девичанска острва"
 
 #: src/translations.h:511
 msgid "United States Virgin Islands"
-msgstr "Сједињене Државе Девичанска Острва"
+msgstr "Сједињене Државе Девичанских Острва"
 
 #: src/translations.h:512
 msgid "Viet Nam"
@@ -3891,7 +3891,7 @@ msgstr "Југославија"
 
 #: src/translations.h:519
 msgid "South Africa"
-msgstr "Јужноафричка република"
+msgstr "Јужноафричка Република"
 
 #: src/translations.h:520
 msgid "Zambia"
@@ -3992,15 +3992,15 @@ msgstr "Занемари"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
-msgstr "Датум и Време по Грегоријанском календару"
+msgstr "Датум и време по Грегоријанском календару"
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Date"
-msgstr "Јулијански Датум"
+msgstr "Јулијански датум"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Date"
-msgstr "Измењени Јулијански Датум"
+msgstr "Измењени јулијански датум"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -4114,7 +4114,7 @@ msgstr "Нађи објекат"
 
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
-msgstr "Притисните Tab да бисте одабрали пронађене појмове"
+msgstr "Притисни \"Tab\" да бисте одабрали пронађене појмове"
 
 #: src/ui_searchDialogGui.h:627
 msgid "iota"
@@ -4242,7 +4242,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:708
 msgid "names in English"
-msgstr "имена на Енглеском"
+msgstr "имена на енглеском"
 
 #: src/ui_searchDialogGui.h:709
 msgid "Search in list..."
@@ -4255,11 +4255,11 @@ msgstr "Спискови"
 
 #: src/ui_searchDialogGui.h:711
 msgid "On-line astronomical database SIMBAD"
-msgstr "Астрономска база података SIMBAD на мрежи"
+msgstr "Астрономска база података \"SIMBAD\" на мрежи"
 
 #: src/ui_searchDialogGui.h:712
 msgid "Extend search with SIMBAD"
-msgstr "Прошири претрагу помоћу SIMBAD-а"
+msgstr "Прошири претрагу помоћу \"SIMBAD\"-а"
 
 #: src/ui_searchDialogGui.h:713
 msgid "Server:"
@@ -4375,7 +4375,7 @@ msgstr "Светлосна загађеност:"
 
 #: src/ui_viewDialog.h:1320
 msgid "pressure, temperature, extinction coefficient"
-msgstr "притисак, температура, коефицијент изумирања"
+msgstr "притисак, температура, коефицијент пригушавања"
 
 #: src/ui_viewDialog.h:1322
 msgid "Refraction/Extinction settings..."
@@ -4499,7 +4499,7 @@ msgstr "Еклиптичка мрежа (за Ј2000)"
 
 #: src/ui_viewDialog.h:1372
 msgid "Show equator line"
-msgstr "Прикажи линију Екватора"
+msgstr "Прикажи линију екватора"
 
 #: src/ui_viewDialog.h:1376
 msgid "Show meridian line"
@@ -4539,11 +4539,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1399
 msgid "Use this landscape as default"
-msgstr "Користите овај пејзаж као почетни"
+msgstr "Користи овај пејзаж као почетни"
 
 #: src/ui_viewDialog.h:1400
 msgid "Use associated planet and position"
-msgstr "Користите повезану планету и позицију"
+msgstr "Користи повезану планету и позицију"
 
 #: src/ui_viewDialog.h:1401
 msgid "Show fog"
@@ -4600,7 +4600,7 @@ msgstr "Обележи ако желиш да имена буду скраћен
 
 #: src/ui_viewDialog.h:1424
 msgid "Use native names for planets from current culture"
-msgstr "Користи имена планета која сe koriste danas."
+msgstr "Користи имена планета која ће се користити данас."
 
 #: src/ui_viewDialog.h:1426
 msgid "Visible"
@@ -4631,7 +4631,7 @@ msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr ""
-"Снимите подешавања која сте изменили приликом ове сесије да буду иста када "
+"Сними подешавања која сте изменили приликом ове сесије да буду иста када "
 "следећи пут покренете Стеларијум"
 
 #: src/ui_configurationDialog.h:1026
@@ -4664,11 +4664,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1033
 msgid "The width of your view when Stellarium starts"
-msgstr "Ширина вашег погледа када покренете Стеларијум"
+msgstr "Ширина твог погледа када покренеш Стеларијум"
 
 #: src/ui_configurationDialog.h:1036
 msgid "The direction you're looking when Stellarium starts"
-msgstr "Правац гледања када покренете Стеларијум"
+msgstr "Правац гледања када покренеш Стеларијум"
 
 #: src/ui_configurationDialog.h:1038 src/ui_configurationDialog.h:1209
 msgid "Selected object information"
@@ -4724,7 +4724,7 @@ msgstr "Геоцентричне екваторске координате, да
 
 #: src/ui_configurationDialog.h:1060
 msgid "Right ascension/Declination (of date)"
-msgstr "Ректасцензија / деклиназија (за датум)"
+msgstr "Ректасцензија / деклинација (за датум)"
 
 #: src/ui_configurationDialog.h:1061
 msgid "Catalog number(s)"
@@ -4782,7 +4782,7 @@ msgstr "Топоцентричне екваторске координате"
 #: src/ui_configurationDialog.h:1084
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
-msgstr "Часовни угао / Деклинација"
+msgstr "Часовни угао / деклинација"
 
 #: src/ui_configurationDialog.h:1086
 msgid "Horizontal coordinates"
@@ -4791,7 +4791,7 @@ msgstr "Хоризонтске координате"
 #: src/ui_configurationDialog.h:1088
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Altitude/Azimuth"
-msgstr "Висина / Азимут"
+msgstr "Висина / азимут"
 
 #: src/ui_configurationDialog.h:1089
 msgid "Distance"
@@ -4959,7 +4959,7 @@ msgstr "Самоумањивање враћа на почетни смер по�
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
-"Аутоматски омогући атмосферу за објекте са атмосфером у прозору Локације"
+"Аутоматски омогући атмосферу за објекте са атмосфером у прозору локације"
 
 #: src/ui_configurationDialog.h:1165
 msgid "Auto-enabling for the atmosphere"
@@ -4983,7 +4983,7 @@ msgstr "Директоријум снимака екрана"
 
 #: src/ui_configurationDialog.h:1173
 msgid "Invert colors"
-msgstr "Изврни боје"
+msgstr "Замени боје"
 
 #: src/ui_configurationDialog.h:1174
 msgid "Star catalog updates"
@@ -4991,7 +4991,7 @@ msgstr "Ажурирање каталога звезда"
 
 #: src/ui_configurationDialog.h:1176
 msgid "Click here to start downloading"
-msgstr "Кликните овде да почнете преузимање"
+msgstr "Кликни овде да почнете преузимање"
 
 #: src/ui_configurationDialog.h:1178
 msgid "Download this file to view even more stars"
@@ -4999,15 +4999,15 @@ msgstr "Преузми ову датотеку како би видео још �
 
 #: src/ui_configurationDialog.h:1180
 msgid "Restart the download"
-msgstr "Поново покрените преузимање"
+msgstr "Поново покрени преузимање"
 
 #: src/ui_configurationDialog.h:1182
 msgid "Retry"
-msgstr "Покушајте опет"
+msgstr "Покушај опет"
 
 #: src/ui_configurationDialog.h:1184
 msgid "Stop the download. You can always restart it later"
-msgstr "Зауставите преузимање. Можете касније да поново покренете преузимање"
+msgstr "Заустави преузимање. Можеш касније  поново да покренеш преузимање"
 
 #: src/ui_configurationDialog.h:1189
 msgid "Close window when script runs"
@@ -5035,7 +5035,7 @@ msgstr "Главно"
 
 #: src/ui_configurationDialog.h:1207
 msgid "Information"
-msgstr "Informacije"
+msgstr "Информације"
 
 #: src/ui_configurationDialog.h:1212
 msgid "Navigation"
@@ -5064,7 +5064,7 @@ msgstr "Додај нови пејзаж"
 
 #: src/ui_addRemoveLandscapesDialog.h:268
 msgid "Install a new landscape from a ZIP archive..."
-msgstr "Инсталирај нови пејзаж из ZIP архиве..."
+msgstr "Инсталирај нови пејзаж из архиве компресованих података..."
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Switch to the new landscape after installation"
@@ -5110,11 +5110,11 @@ msgstr "Поставке преламања"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Pressure (mbar):"
-msgstr "Притисак (mbar):"
+msgstr ""
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Temperature (C):"
-msgstr "Температура (C):"
+msgstr ""
 
 #: src/ui_AtmosphereDialog.h:184
 msgid ""
@@ -5160,7 +5160,7 @@ msgstr "процесирај скрипту користећи SSC препро�
 
 #: src/ui_scriptConsole.h:364
 msgid "quickly load and run a utility script"
-msgstr "брзо ичитај и покрени скрипту за помоћ"
+msgstr "брзо учитај и покрени скрипту за помоћ"
 
 #: src/ui_scriptConsole.h:367
 msgid "run script"
@@ -5213,7 +5213,7 @@ msgstr "Мера угла је омогућена:"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:513
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
-"Померите са левим дугметом миша да измерите, лево дугме миша да обришете."
+"Помери са левим дугметом миша да измериш, лево дугме миша да обришеш."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:515
