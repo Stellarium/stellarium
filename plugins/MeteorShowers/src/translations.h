@@ -27,7 +27,7 @@ class MSTranslations
 	{
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
-/*
+
 		// Meteor showers
 		// TRANSLATORS: Name of meteor shower
 		N_("Quadrantids");
@@ -195,6 +195,5 @@ class MSTranslations
 		N_("Minor planet 2004 TG10");
 		// TRANSLATORS: Name of parent object for meteor shower
 		N_("Minor planet (3200) Phaethon");
-		*/
 	}
 };
