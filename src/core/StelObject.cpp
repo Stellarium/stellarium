@@ -28,6 +28,7 @@
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
 #include "SolarSystem.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QRegExp>
 #include <QDebug>
@@ -198,7 +199,15 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 	if (flags&EclipticCoord)
 	{
-		double ecl = core->getCurrentPlanet()->getRotObliquity(2451545.0);
+		// N.B. Ecliptical coordinates are particularly earth-bound.
+		// It may be OK to have terrestrial ecliptical coordinates of J2000.0 (standard epoch) because those are in practice linked with VSOP XY plane,
+		// and because the ecliptical grid of J2000 is also shown for observers on other planets.
+		// The formulation here has never computed the true position of any observer planet's orbital plane except for Earth,
+		// or ever displayed the coordinates in the observer planet's equivalent to Earth's ecliptical coordinates.
+		// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0.
+
+		//double ecl = core->getCurrentPlanet()->getRotObliquity(2451545.0);
+		double ecl=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
@@ -208,21 +217,23 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		else
 			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 
-		ecl = core->getCurrentPlanet()->getRotObliquity(core->getJDay());
+		if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+		{
+			ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		if (withDecimalDegree)
-			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
-		else
-			res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
-		// GZ Only for now: display epsilon_A, angle between Axis and ecl. of date.
-		if (withDecimalDegree)
-			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
-		else
-			res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl)) + "<br>";
-
+			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+			StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
+			if (lambda<0) lambda+=2.0*M_PI;
+			if (withDecimalDegree)
+				res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
+			else
+				res += q_("Ecliptic longitude/latitude") + QString(" (%1): %2/%3").arg(cepoch, StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+			// GZ Only for now: display epsilon_A, angle between Earth's Axis and ecl. of date.
+			if (withDecimalDegree)
+				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDecDegStr(ecl)) + "<br>";
+			else
+				res += q_("Ecliptic obliquity") + QString(" (%1): %2").arg(cepoch, StelUtils::radToDmsStr(ecl)) + "<br>";
+		}
 	}
 
 	if (flags&GalacticCoord)
