@@ -230,8 +230,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// TODO: maybe separate this out into:
 	//if (flags&EclipticCoordXYZ)
 	// For now: add to EclipticCoord
-	if (flags&EclipticCoord)
-		oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
+	//if (flags&EclipticCoord)
+	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
 //	if (flags&Extra)
 //	{
 //		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -284,7 +284,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	double siderealDay = getSiderealDay();
 	if (flags&Extra)
 	{
-		oss << q_("Planetocentric distance &rho;: %1 (km)").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU) <<"<br>";
+		// This is a string you can activate for debugging. It shows the distance between observer and center of the body you are standing on.
+		// May be helpful for debugging critical parallax corrections for eclipses.
+		// For general use, find a better location first.
+		// oss << q_("Planetocentric distance &rho;: %1 (km)").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU) <<"<br>";
 		if (siderealPeriod>0)
 		{
 			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
