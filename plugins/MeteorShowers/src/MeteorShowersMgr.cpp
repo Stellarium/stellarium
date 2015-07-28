@@ -268,15 +268,15 @@ void MeteorShowersMgr::update(double deltaTime)
 
 	StelCore* core = StelApp::getInstance().getCore();
 
-	double tspeed = core->getTimeRate() * 86400.0;  // sky seconds per actual second
-	if (!tspeed) { // is paused?
-		return; // freeze meteors at the current position
+	// is paused?
+	// freeze meteors at the current position
+	if (!core->getTimeRate()) {
+		return;
 	}
 
 	deltaTime *= 1000.0;
-
-	// if stellarium has been suspended, don't create huge number of meteors to
-	// make up for lost time!
+	// if stellarium has been suspended, don't create
+	// huge number of meteors to make up for lost time!
 	if (deltaTime > 500.0)
 	{
 		deltaTime = 500.0;

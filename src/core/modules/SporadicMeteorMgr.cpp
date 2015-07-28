@@ -55,9 +55,6 @@ void SporadicMeteorMgr::init()
 	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_rate", 10).toInt());
 }
 
-/*************************************************************************
- Reimplementation of the getCallOrder method
-*************************************************************************/
 double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
