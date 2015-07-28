@@ -91,7 +91,7 @@ static const double precVals[18][7]=
   { 1.0/136.32,       0.0     ,     0.0     ,    585.492621,        0.0     ,     0.0     ,     41.348740 },
   { 1.0/490.00,       0.0     ,     0.0     ,    110.512834,        0.0     ,     0.0     ,    142.525186 }};
 
-static const double p_epsVals[20][5]=
+static const double p_epsVals[10][5]=
 { //  1/Pn         p_A:Cn     eps_A:Cn        p_A:Sn      eps_A:Sn
   { 1.0/ 409.90, -6908.287473,  753.872780, -2845.175469, -1704.720302},
   { 1.0/ 396.15, -3198.706291, -247.805823,   449.844989,  -862.308358},
@@ -137,7 +137,7 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 			Chi_A   += precVals[i][3]*cos2piT_P + precVals[i][6]*sin2piT_P;
 		}
 
-		for (i=0; i<20; ++i)
+		for (i=0; i<10; ++i)
 		{
 			double invP=p_epsVals[i][0];
 			double sin2piT_P, cos2piT_P;
@@ -152,11 +152,11 @@ void getPrecessionAnglesVondrak(const double jde, double *epsilon_A, double *chi
 			Epsilon_A += p_epsVals[i][2]*cos2piT_P + p_epsVals[i][4]*sin2piT_P;
 		}
 
-		Psi_A     += ((289.e-9*T - 0.00740913)*T + 5042.7980307)*T +  8473.343527;
-		Omega_A   += ((151.e-9*T + 0.00000146)*T -    0.4436568)*T + 84283.175915;
-		Chi_A     += ((-61.e-9*T + 0.00001472)*T +    0.0790159)*T -    19.657270;
+		Psi_A     += (( 289.e-9*T - 0.00740913)*T + 5042.7980307)*T +  8473.343527;
+		Omega_A   += (( 151.e-9*T + 0.00000146)*T -    0.4436568)*T + 84283.175915;
+		Chi_A     += (( -61.e-9*T + 0.00001472)*T +    0.0790159)*T -    19.657270;
 		//p_A       += ((271.e-9*T - 0.00710733)*T + 5043.0520035)*T +  8134.017132;
-		Epsilon_A += ((110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
+		Epsilon_A += ((-110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
 		c_psi_A     = arcSec2Rad*Psi_A;
 		c_omega_A   = arcSec2Rad*Omega_A;
 		c_chi_A     = arcSec2Rad*Chi_A;
@@ -211,7 +211,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 			X_A += XYvals[i][1]*cos2piT_P + XYvals[i][3]*sin2piT_P;
 			Y_A += XYvals[i][2]*cos2piT_P + XYvals[i][4]*sin2piT_P;
 		}
-		for (i=0; i<20; ++i)
+		for (i=0; i<10; ++i)
 		{
 			double invP=p_epsVals[i][0];
 			double sin2piT_P, cos2piT_P;
@@ -228,7 +228,7 @@ void getPrecessionAnglesVondrakPQXYe(const double jde, double *vP_A, double *vQ_
 
 		// Now the polynomial terms in T. Horner's scheme is best again.
 		P_A       += (( 110.e-9*T - 0.00028913)*T -    0.1189000)*T +  5851.607687;
-		Q_A       += ((-437.e-9*T - 0.00000020)*T -    1.1689818)*T -  1600.886300;
+		Q_A       += ((-437.e-9*T - 0.00000020)*T +    1.1689818)*T -  1600.886300;
 		X_A       += ((-152.e-9*T - 0.00037173)*T +    0.4252841)*T +  5453.282155;
 		Y_A       += ((+231.e-9*T - 0.00018725)*T -    0.7675452)*T - 73750.930350;
 		Epsilon_A += (( 110.e-9*T - 0.00004039)*T +    0.3624445)*T + 84028.206305;
