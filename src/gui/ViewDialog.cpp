@@ -271,7 +271,9 @@ void ViewDialog::createDialogContent()
 
 	// Grid and lines
 	connectCheckBox(ui->showEquatorLineCheckBox, "actionShow_Equator_Line");
-	connectCheckBox(ui->showEclipticLineCheckBox, "actionShow_Ecliptic_Line");
+	connectCheckBox(ui->showEquatorJ2000LineCheckBox, "actionShow_Equator_J2000_Line");
+	connectCheckBox(ui->showEclipticLineJ2000CheckBox, "actionShow_Ecliptic_J2000_Line");
+	connectCheckBox(ui->showEclipticLineOfDateCheckBox, "actionShow_Ecliptic_Line");
 	connectCheckBox(ui->showMeridianLineCheckBox, "actionShow_Meridian_Line");
 	connectCheckBox(ui->showLongitudeLineCheckBox, "actionShow_Longitude_Line");
 	connectCheckBox(ui->showHorizonLineCheckBox, "actionShow_Horizon_Line");
@@ -281,7 +283,9 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showAzimuthalGridCheckBox, "actionShow_Azimuthal_Grid");
 	connectCheckBox(ui->showEquatorialJ2000GridCheckBox, "actionShow_Equatorial_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox, "actionShow_Ecliptic_J2000_Grid");
+	connectCheckBox(ui->showEclipticGridOfDateCheckBox, "actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox, "actionShow_Cardinal_Points");
+	connectCheckBox(ui->showPrecessionCirclesCheckBox, "actionShow_Precession_Circles");
 
 	// Constellations
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
