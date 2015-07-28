@@ -260,12 +260,6 @@ private:
 	//! Enable/disable the Meteor Showers plugin.
 	//! It'll be triggered by a StelAction! So, it should NOT be called directly!
 	void actionEnablePlugin(const bool& b) { m_enablePlugin = b; }
-
-	//! A fake method for strings marked for translation.
-	//! Use it instead of translations.h for N_() strings, except perhaps for
-	//! keyboard action descriptions. (It's better for them to be in a single
-	//! place.)
-	static void translations();
 };
 
 #include <QObject>
