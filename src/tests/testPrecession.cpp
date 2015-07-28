@@ -41,8 +41,8 @@ void TestPrecession::initTestCase()
 //      = ( P_A                     -Q_A*C-Z*S              -Q_A*S+Z*C              )
 // pequ = ( -0.29437643797369031532 -0.11719098023370257855 +0.94847708824082091796 )
 //      = ( X                        Y                       sqrt(1-x^2-y^2) || 0   )
-// This provides only the axes formulation. But the final Precession matrix should then be
-// comparable to the matrix that can be reached via Capitaine parametrisation.
+// This provides only the axes formulation. But the final Precession matrix should then be used as reference
+// comparable to the matrix that can be reached via the Capitaine parametrisation that we are using.
 
 void TestPrecession::testPrecessionAnglesVondrak()
 {
@@ -56,7 +56,7 @@ void TestPrecession::testPrecessionAnglesVondrak()
 
 	// get angles for Capitaine parameterisation
 	getPrecessionAnglesVondrak(JulianDay, &epsilon_A, &chi_A, &omega_A, &psi_A);
-	// we have to call this twice with different dates to avoid returning the cached (zero) angles.
+	// Get reference angles. We have to call this twice with different dates to avoid returning the cached (zero) angles.
 	getPrecessionAnglesVondrakPQXYe(-1234.567, &P_A, &Q_A, &X_A, &Y_A, &epsilon_A);
 	getPrecessionAnglesVondrakPQXYe(JulianDay, &P_A, &Q_A, &X_A, &Y_A, &epsilon_A);
 	Z=sqrt(qMax(1.0-P_A*P_A-Q_A*Q_A, 0.0));
@@ -109,4 +109,13 @@ void TestPrecession::testPrecessionAnglesVondrak()
 	//qDebug() << "largest value in difference of matrices:" << max;
 	QVERIFY2(max<2e-5, QString("Some values in the precession matrices differ by too much.").toUtf8());
 
+	double angleRef=RP.angle()*180.0/M_PI;
+	double angleCap=RRot.upper3x3().angle()*180.0/M_PI;
+	//qDebug() << "Rotation angle of reference matrix:" << angleRef;
+	//qDebug() << "Rotation angle of Capitaine matrix:" << angleCap;
+	//qDebug() << "Difference (arcseconds):" << (angleCap-angleRef)*3600.0;
+	// according to Fig12 in the paper, a few arcseconds of difference between PQXY and Capitaine parametrisation are allowed.
+	QVERIFY2((angleCap-angleRef)*3600.0<6.0, QString("Angle between rotation matrices too different!").toUtf8());
+
+	//TODO: Add more dates and verify this angle difference is limited to what we can see in Fig.12
 }
