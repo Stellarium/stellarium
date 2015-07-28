@@ -56,6 +56,7 @@ public:
 		  const float& speed, const QList<colorPair> colors);
 
 	//! Updates the position of the meteor, and expires it if necessary.
+	//! @param deltaTime the time increment in seconds since the last call.
 	//! @return true of the meteor is still alive, else false.
 	virtual bool update(double deltaTime);
 	

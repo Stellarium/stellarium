@@ -262,7 +262,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	int currentZHR = calculateZHR(currentJD);
 
 	// determine average meteors per frame needing to be created
-	int mpf = (int) ((double) currentZHR * ZHR_TO_WSR * deltaTime / 1000.0 + 0.5);
+	int mpf = (int) ((double) currentZHR * ZHR_TO_WSR * deltaTime + 0.5);
 	if (mpf < 1)
 	{
 		mpf = 1;
@@ -272,7 +272,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	{
 		// start new meteor based on ZHR time probability
 		double prob = ((double) qrand()) / RAND_MAX;
-		double aux = (double) currentZHR * ZHR_TO_WSR * deltaTime / 1000.0 / (double) mpf;
+		double aux = (double) currentZHR * ZHR_TO_WSR * deltaTime / (double) mpf;
 		if (currentZHR > 0 && prob < aux)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta, m_pidx,
