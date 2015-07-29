@@ -66,7 +66,6 @@ private slots:
 	void checkDates(void);   //! Checks if the inputed dates are valid for use.
 	void searchEvents(void); //! Search events and fill the list.
 	void selectEvent(const QModelIndex &modelIndex); //! If an event is selected by user, the current date change and the object is selected.
-	void repaintTreeWidget(void);
 
 private:
         Ui_meteorShowerDialog* ui;
