@@ -176,6 +176,8 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 
 MeteorShower::~MeteorShower()
 {
+	qDeleteAll(m_activeMeteors);
+	m_activeMeteors.clear();
 }
 
 bool MeteorShower::enabled() const
