@@ -86,27 +86,28 @@ private:
 	enum NebulaType
 	{
 		NebGx		= 0,	//!< Galaxy
-		NebSyG		= 1,	//!< Seyfert galaxy
-		NebSy2		= 2,	//!< Seyfert 2 galaxy
-		NebLIN		= 3,	//!< LINER-type Active Galaxy Nucleus
-		NebAGN		= 4,	//!< Active galaxy nucleus
-		NebIG		= 5,	//!< Interacting galaxy
-		NebCl		= 6,	//!< Star cluster
-		NebOc		= 7,	//!< Open star cluster
-		NebGc		= 8,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA		= 9,	//!< Stellar association
-		NebSC		= 10,	//!< Star cloud
-		NebN		= 11,	//!< A nebula
-		NebPn		= 12,	//!< Planetary nebula
-		NebDn		= 13,	//!< Dark Nebula
-		NebRn		= 14,	//!< Reflection nebula
-		NebBn		= 15,	//!< Bipolar nebula
-		NebEn		= 16,	//!< Emission nebula
-		NebCn		= 17,	//!< Cluster associated with nebulosity
-		NebHII		= 18,	//!< HII Region
-		NebHa		= 19,	//!< H-α emission region
-		NebSNR		= 20,	//!< Supernova remnant
-		NebUnknown	= 21	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebAGx		= 1,	//!< Active galaxy
+		NebRGx		= 2,	//!< Radio galaxy
+		NebIGx		= 3,	//!< Interacting galaxy
+		NebQSO		= 4,	//!< Quasar
+		NebCl		= 5,	//!< Star cluster
+		NebOc		= 6,	//!< Open star cluster
+		NebGc		= 7,	//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA		= 8,	//!< Stellar association
+		NebSC		= 9,	//!< Star cloud
+		NebN		= 10,	//!< A nebula
+		NebPn		= 11,	//!< Planetary nebula
+		NebDn		= 12,	//!< Dark Nebula
+		NebRn		= 13,	//!< Reflection nebula
+		NebBn		= 14,	//!< Bipolar nebula
+		NebEn		= 15,	//!< Emission nebula
+		NebCn		= 16,	//!< Cluster associated with nebulosity
+		NebHII		= 17,	//!< HII Region
+		NebHa		= 18,	//!< H-α emission region
+		NebSNR		= 19,	//!< Supernova remnant
+		NebISM		= 20,	//!< Interstellar matter
+		NebEMO		= 21,	//!< Emission object
+		NebUnknown	= 22	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
@@ -147,6 +148,10 @@ private:
 	int orientationAngle;		// Orientation angle in degrees	
 	float oDistance;		// distance (Mpc for galaxies, kpc for other objects)
 	float oDistanceErr;		// Error of distance (Mpc for galaxies, kpc for other objects)
+	float redshift;
+	float redshiftErr;
+	float parallax;
+	float parallaxErr;
 	Vec3d XYZ;                      // Cartesian equatorial position (J2000.0)
 	Vec3d XY;                       // Store temporary 2D position
 	NebulaType nType;

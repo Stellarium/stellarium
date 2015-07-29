@@ -205,6 +205,41 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Extra)
 	{
+		if (redshift<99.f)
+		{
+			QString z;
+			if (redshiftErr>0.f)
+				z = QString("%1%2%3").arg(QString::number(redshift, 'f', 6)).arg(QChar(0x00B1)).arg(QString::number(redshiftErr, 'f', 6));
+			else
+				z = QString("%1").arg(QString::number(redshift, 'f', 6));
+
+			oss << q_("Redshift: %1").arg(z) << "<br>";
+		}
+		if (parallax!=0.f)
+		{
+			QString px, dx;
+			// distance in light years from parallax
+			float distance = 3.162e-5/(qAbs(parallax)*4.848e-9);
+			float distanceErr = 0.f;
+
+			if (parallaxErr>0.f)
+			{
+				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
+				distanceErr = 3.162e-5/(qAbs(parallaxErr)*4.848e-9);
+			}
+			else
+				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
+
+			if (distanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 2));
+			else
+				dx = QString("%1").arg(QString::number(distance, 'f', 2));
+
+			oss << q_("Parallax: %1\"").arg(px) << "<br>";
+			if (oDistance==0.f)
+				oss << q_("Distance: %1 ly").arg(dx) << "<br>";
+		}
+
 		if (oDistance>0.f)
 		{
 			QString dx, du;
@@ -213,7 +248,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				dx = QString("%1").arg(QString::number(oDistance, 'f', 2));
 
-			if (nType==NebAGN || nType==NebGx || nType==NebSy2 || nType==NebSyG || nType==NebIG || nType==NebLIN)
+			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
 				du = q_("Mpc");
 			else
 				du = q_("kpc");
@@ -332,17 +367,17 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	switch (nType)
 	{
 		case NebGx:
-		case NebSy2:
-		case NebSyG:
-		case NebLIN:
-		case NebAGN:
-		case NebIG:
+		case NebIGx:
+		case NebRGx:
+		case NebAGx:
+		case NebQSO:
 			Nebula::texGalaxy->bind();
 			color=galaxyColor;
 			break;
 		case NebOc:
 		case NebSA:
 		case NebSC:
+		case NebCl:
 			Nebula::texOpenCluster->bind();
 			color=clusterColor;
 			break;
@@ -472,8 +507,9 @@ void Nebula::readDSO(QDataStream &in)
 	unsigned int oType;
 
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
-		>> orientationAngle >> oDistance >> oDistanceErr >> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb
-		>> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb >> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> PK_nb;
+		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
+		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> PK_nb;
 
 	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
 		angularSize = majorAxisSize*minorAxisSize;
@@ -500,23 +536,20 @@ QString Nebula::getTypeString(void) const
 		case NebGx:
 			wsType = q_("galaxy");
 			break;
-		case NebSy2:
-			wsType = q_("Seyfert 2 galaxy");
+		case NebAGx:
+			wsType = q_("active galaxy");
 			break;
-		case NebSyG:
-			wsType = q_("Seyfert galaxy");
+		case NebRGx:
+			wsType = q_("radio galaxy");
 			break;
-		case NebAGN:
-			wsType = q_("galaxy with active nucleus");
-			break;
-		case NebLIN:
-			wsType = q_("galaxy with active nucleus (LINER-type)");
-			break;
-		case NebIG:
+		case NebIGx:
 			wsType = q_("interacting galaxy");
 			break;
+		case NebQSO:
+			wsType = q_("quasar");
+			break;
 		case NebCl:
-			wsType = q_("star star cluster");
+			wsType = q_("star cluster");
 			break;
 		case NebOc:
 			wsType = q_("open star cluster");
@@ -559,6 +592,12 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebSC:
 			wsType = q_("star cloud");
+			break;
+		case NebISM:
+			wsType = q_("interstellar matter");
+			break;
+		case NebEMO:
+			wsType = q_("emission object");
 			break;
 		case NebUnknown:
 			wsType = q_("unknown");

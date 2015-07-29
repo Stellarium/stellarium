@@ -266,7 +266,7 @@ private:
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
-	void convertDSOCatalog(const QString& in, const QString& out);
+	void convertDSOCatalog(const QString& in, const QString& out, bool decimal);
 	// Load proper names for DSO
 	bool loadDSONames(const QString& filename);
 
