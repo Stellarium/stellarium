@@ -138,6 +138,12 @@ private:
 
 	QList<MeteorObj*> m_activeMeteors; //! List with all the active meteors
 
+	//! Draws the radiant
+	void drawRadiant(StelCore* core);
+
+	//! Draws all active meteors
+	void drawMeteors(StelCore* core);
+
 	//! Calculates the ZHR using normal distribution
 	//! @param current julian day
 	int calculateZHR(const double& currentJD);

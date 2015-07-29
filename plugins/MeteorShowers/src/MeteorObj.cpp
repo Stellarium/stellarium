@@ -17,10 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "LandscapeMgr.hpp"
+
 #include "MeteorObj.hpp"
-#include "StelApp.hpp"
-#include "StelModuleMgr.hpp"
 
 MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha, const float& radiantDelta,
 		     const float& pidx, QList<Meteor::colorPair> colors, const StelTextureSP& bolideTexture)
@@ -85,20 +83,4 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 
 MeteorObj::~MeteorObj()
 {
-}
-
-void MeteorObj::draw(const StelCore* core, StelPainter& sPainter)
-{
-	if (!core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-		return;
-	}
-
-	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
-	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
-	{
-		return;
-	}
-
-	Meteor::draw(core, sPainter);
 }
