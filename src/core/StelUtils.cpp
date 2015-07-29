@@ -1806,6 +1806,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 		double yDiff1600 = year-1600.0;
 		deltaT = (0.0219167*yDiff1600 -4.0675)*yDiff1600 +196.58333;
 	}
+	Q_ASSERT(0);
 	return deltaT;
 }
 

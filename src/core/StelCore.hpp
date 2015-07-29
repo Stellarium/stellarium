@@ -28,6 +28,7 @@
 #include <QString>
 #include <QStringList>
 #include <QTime>
+#include <QPair>
 
 class StelToneReproducer;
 class StelSkyDrawer;
@@ -269,7 +270,7 @@ public:
 	//! This is used only if the destination planet is different from the starting one.
 	void moveObserverTo(const StelLocation& target, double duration=1., double durationIfPlanetChange=1.);
 
-	// Conversion in standar Julian time format
+	// Conversion in standard Julian time format
 	static const double JD_SECOND;
 	static const double JD_MINUTE;
 	static const double JD_HOUR;
@@ -286,7 +287,8 @@ public:
 	//! Get the duration of a sidereal year for the current observer in days.
 	double getLocalSiderealYearLength() const;
 
-	//! Return the startup mode, can be preset|Preset or anything else
+	//! Return the startup mode, can be "actual" (i.e. take current time from system),
+	//! "today" (take some time e.g. on the evening of today) or "preset" (completely preconfigured).
 	QString getStartupTimeMode();
 	void setStartupTimeMode(const QString& s);
 
@@ -294,18 +296,18 @@ public:
 	//! @param jDay the date and time expressed as a julian day
 	//! @return Delta-T in seconds
 	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
-	double getDeltaT(double jDay) const;
+	double getDeltaT(const double jDay) const;
 
 	//! Get info about valid range for current algorithm for calculation of Delta-T
 	//! @param jDay the JD
-	//! @param marker the marker for valid range
-	//! @return valid range
-	QString getCurrentDeltaTAlgorithmValidRange(double jDay, QString* marker) const;
+	//! @param marker receives a string: "*" if jDay is outside valid range, or "?" if range unknown, else an empty string.
+	//! @return valid range as explanatory string.
+	QString getCurrentDeltaTAlgorithmValidRangeDescription(const double jDay, QString* marker) const;
 
 	//! Checks for altitude of sun - is it night or day?
 	//! @return true if sun higher than about -6 degrees, i.e. "day" includes civil twilight.
 	//! @note Useful mostly for brightness-controlled GUI decisions like font colors.
-	bool isDay() const;
+	bool isBrightDaylight() const;
 
 	//! Get value of the current Julian epoch (i.e. current year with decimal fraction, e.g. 2012.34567)
 	double getCurrentEpoch() const;
@@ -570,6 +572,7 @@ private:
 	// Time variables
 	double timeSpeed;                  // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;                       // Curent time in Julian day
+	QPair<double,double> JD;
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;

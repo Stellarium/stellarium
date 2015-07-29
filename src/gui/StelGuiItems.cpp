@@ -551,7 +551,7 @@ void BottomStelBar::updateText(bool updatePos)
 		deltaT = core->getDeltaT(jd);
 		displayDeltaT = true;		
 		sigma = StelUtils::getDeltaTStandardError(jd);
-		core->getCurrentDeltaTAlgorithmValidRange(jd, &validRangeInfo);
+		core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeInfo);
 	}
 
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
