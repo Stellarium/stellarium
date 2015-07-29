@@ -23,52 +23,40 @@
 #include "SporadicMeteor.hpp"
 #include "StelModule.hpp"
 
-// Factor to convert from zhr to whole earth per second rate (1.6667f / 3600.f)
-#define ZHR_TO_WSR 0.00046297222
-
 //! @class SporadicMeteorMgr
 //! Simulates a sporadic meteor shower, with a random color and a random radiant.
 //! @author Marcos Cardinot <mcardinot@gmail.com>
 class SporadicMeteorMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(int ZHR READ getZHR WRITE setZHR NOTIFY zhrChanged)
-
+	Q_PROPERTY(int zhr READ getZHR WRITE setZHR NOTIFY zhrChanged)
 public:
-	//! Construct a SporadicMeteorMgr object.
-	//! @param zhr the base zenith hourly rate - i.e. the rate when there is no
-	//!            meteor shower in progress.
-	//! @param maxv the initial value of the maximum meteor velocity.
+	//! Constructor
+	//! @param zhr Zenith Hourly Rate
+	//! @param maxv Maximum meteor velocity
 	SporadicMeteorMgr(int zhr, int maxv);
 	virtual ~SporadicMeteorMgr();
 
 	// Methods defined in the StelModule class
-	//! Initialize the MeteorMgr object.
 	virtual void init();
-	//! Draw meteors.
 	virtual void draw(StelCore* core);
-	//! Update time-dependent parts of the module.
-	//! This function adds new meteors to the list of currently visiable
-	//! ones based on the current rate, and removes those which have run their 
-	//! course.
 	virtual void update(double deltaTime);
-	//! Defines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 public slots:
 	// Methods callable from script and GUI
 	//! Get the current zenith hourly rate.
-	int getZHR(void);
+	int getZHR() { return m_zhr; }
 	//! Set the zenith hourly rate.
 	void setZHR(int zhr);
 
 	//! Set flag used to turn on and off meteor rendering.
-	inline void setFlagShow(bool b) { flagShow = b; }
+	void setFlagShow(bool b) { m_flagShow = b; }
 	//! Get value of flag used to turn on and off meteor rendering.
-	inline bool getFlagShow(void) const { return flagShow; }
+	bool getFlagShow() const { return m_flagShow; }
 
 	//! Set the maximum velocity in km/s
-	void setMaxVelocity(int maxv);
+	void setMaxVelocity(int maxv) { m_maxVelocity = maxv; }
 
 signals:
 	void zhrChanged(int);
@@ -76,9 +64,9 @@ signals:
 private:
 	QList<SporadicMeteor*> activeMeteors;
 	StelTextureSP m_bolideTexture;
-	int ZHR;
-	int maxVelocity;
-	bool flagShow;
+	int m_zhr;
+	int m_maxVelocity;
+	bool m_flagShow;
 };
 
 #endif // _SPORADICMETEORMGR_HPP_

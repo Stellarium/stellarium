@@ -18,7 +18,6 @@
  */
 
 #include "LandscapeMgr.hpp"
-#include "Meteor.hpp"
 #include "SolarSystem.hpp"
 #include "SporadicMeteorMgr.hpp"
 #include "StelApp.hpp"
@@ -31,9 +30,9 @@
 #include <QSettings>
 
 SporadicMeteorMgr::SporadicMeteorMgr(int zhr, int maxv)
-	: ZHR(zhr)
-	, maxVelocity(maxv)
-	, flagShow(true)
+	: m_zhr(zhr)
+	, m_maxVelocity(maxv)
+	, m_flagShow(true)
 {
 	setObjectName("SporadicMeteorMgr");
 	qsrand(QDateTime::currentMSecsSinceEpoch());
@@ -57,47 +56,28 @@ void SporadicMeteorMgr::init()
 
 double SporadicMeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
-	if (actionName==StelModule::ActionDraw)
+	if (actionName == StelModule::ActionDraw)
 	{
 		return GETSTELMODULE(SolarSystem)->getCallOrder(actionName) + 10.;
 	}
 	return 0;
 }
 
-void SporadicMeteorMgr::setZHR(int zhr)
-{
-	ZHR = zhr;
-	emit zhrChanged(zhr);
-}
-
-int SporadicMeteorMgr::getZHR()
-{
-	return ZHR;
-}
-
-void SporadicMeteorMgr::setMaxVelocity(int maxv)
-{
-	maxVelocity = maxv;
-}
-
 void SporadicMeteorMgr::update(double deltaTime)
 {
-	if (!flagShow)
+	if (!m_flagShow)
 	{
 		return;
 	}
 
 	StelCore* core = StelApp::getInstance().getCore();
 
-	double tspeed = core->getTimeRate() * 86400;  // sky seconds per actual second
-	if (!tspeed)
-	{ // is paused?
-		return; // freeze meteors at the current position
+	// is paused?
+	// freeze meteors at the current position
+	if (!core->getTimeRate())
+	{
+		return;
 	}
-
-	// if stellarium has been suspended, don't create
-	// huge number of meteors to make up for lost time!
-	deltaTime = deltaTime > 0.05 ? 0.05 : deltaTime;
 
 	// step through and update all active meteors
 	foreach (SporadicMeteor* m, activeMeteors)
@@ -108,42 +88,40 @@ void SporadicMeteorMgr::update(double deltaTime)
 		}
 	}
 
-	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
-	// otherwise high overhead of large numbers of meteors
-	if (tspeed<0 || fabs(tspeed)>1.)
+	// going forward/backward OR current ZHR is zero ?
+	// don't create new meteors
+	if(!core->getRealTimeSpeed() || m_zhr < 1)
 	{
-		// don't start any more meteors
 		return;
 	}
 
-	// determine average meteors per frame needing to be created
-	int mpf = (int) ((double) ZHR * ZHR_TO_WSR * deltaTime + 0.5);
-	if (mpf < 1)
-	{
-		mpf = 1;
-	}
+	// average meteors per frame
+	float mpf = m_zhr * deltaTime / 3600.f;
 
-	for (int i = 0; i < mpf; ++i)
+	// maximum amount of meteors for the current frame
+	int maxMpf = qRound(mpf);
+	maxMpf = maxMpf < 1 ? 1 : maxMpf;
+
+	float rate = mpf / (float) maxMpf;
+	for (int i = 0; i < maxMpf; ++i)
 	{
-		// start new meteor based on ZHR time probability
-		double prob = ((double) qrand()) / RAND_MAX;
-		if (ZHR > 0 && prob < ((double) ZHR * ZHR_TO_WSR * deltaTime / (double) mpf))
+		float prob = (float) qrand() / (float) RAND_MAX;
+		if (prob < rate)
 		{
-			SporadicMeteor* m = new SporadicMeteor(core, maxVelocity, m_bolideTexture);
-			activeMeteors.append(m);
+			activeMeteors.append(new SporadicMeteor(core, m_maxVelocity, m_bolideTexture));
 		}
 	}
 }
 
 void SporadicMeteorMgr::draw(StelCore* core)
 {
-	if (!flagShow || !core->getSkyDrawer()->getFlagHasAtmosphere())
+	if (!m_flagShow || !core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
 		return;
 	}
 
 	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
-	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
+	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance() > 5.f)
 	{
 		return;
 	}
@@ -154,4 +132,10 @@ void SporadicMeteorMgr::draw(StelCore* core)
 	{
 		m->draw(core, sPainter);
 	}
+}
+
+void SporadicMeteorMgr::setZHR(int zhr)
+{
+	m_zhr = zhr;
+	emit zhrChanged(zhr);
 }
