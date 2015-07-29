@@ -94,7 +94,6 @@ private slots:
 	void trackSatellite(const QModelIndex & index);
 	void setOrbitParams(void);
 	void updateTLEs(void);
-	void repaintSourceList(void);
 
 private:
 	//! @todo find out if this is really necessary... --BM
