@@ -311,7 +311,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	if (flagConverter)
-		convertDSOCatalog(srcCatalogPath, dsoCatalogPath);
+		convertDSOCatalog(srcCatalogPath, dsoCatalogPath, true);
 
 	if (dsoCatalogPath.isEmpty() || dsoNamesPath.isEmpty())
 	{
@@ -504,7 +504,7 @@ NebulaP NebulaMgr::searchPK(QString PK)
 	return NebulaP();
 }
 
-void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
+void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool decimal=false)
 {
 	QFile dsoIn(in);
 	if (!dsoIn.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -529,8 +529,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 	dsoOutStream.setVersion(QDataStream::Qt_5_2);
 
 	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC;
-	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr;
+	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
 	QString oType, mType, PK, Ced, ra, dec;
+
 	unsigned int nType;
 
 	int currentLineNumber = 0;	// what input line we are on
@@ -560,46 +561,59 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 			majorAxisSize		= list.at(7).toFloat();  // major axis size (arcmin)
 			minorAxisSize		= list.at(8).toFloat();	 // minor axis size (arcmin)
 			orientationAngle	= list.at(9).toInt();	 // orientation angle (degrees)
-			dist			= list.at(10).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
-			distErr			= list.at(11).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
+			z			= list.at(10).toFloat(); // redshift
+			zErr			= list.at(11).toFloat(); // error of redshift
+			plx			= list.at(12).toFloat(); // parallax (mas)
+			plxErr			= list.at(13).toFloat(); // error of parallax (mas)
+			dist			= list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
+			distErr			= list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
 			// cross-index data
 			// -----------------------------------------------
-			NGC			= list.at(12).toInt();	 // NGC number
-			IC			= list.at(13).toInt();	 // IC number
-			M			= list.at(14).toInt();	 // M number
-			C			= list.at(15).toInt();	 // C number
-			B			= list.at(16).toInt();	 // B number
-			Sh2			= list.at(17).toInt();	 // Sh2 number
-			VdB			= list.at(18).toInt();	 // VdB number
-			RCW			= list.at(19).toInt();	 // RCW number
-			LDN			= list.at(20).toInt();	 // LDN number
-			LBN			= list.at(21).toInt();	 // LBN number
-			Cr			= list.at(22).toInt();	 // Cr number
-			Mel			= list.at(23).toInt();	 // Mel number
-			PGC			= list.at(24).toInt();	 // PGC number (subset)
-			UGC			= list.at(25).toInt();	 // UGC number (subset)
-			Ced			= list.at(26).trimmed(); // Ced number
-			PK			= list.at(27).trimmed(); // PK number
+			NGC			= list.at(16).toInt();	 // NGC number
+			IC			= list.at(17).toInt();	 // IC number
+			M			= list.at(18).toInt();	 // M number
+			C			= list.at(19).toInt();	 // C number
+			B			= list.at(20).toInt();	 // B number
+			Sh2			= list.at(21).toInt();	 // Sh2 number
+			VdB			= list.at(22).toInt();	 // VdB number
+			RCW			= list.at(23).toInt();	 // RCW number
+			LDN			= list.at(24).toInt();	 // LDN number
+			LBN			= list.at(25).toInt();	 // LBN number
+			Cr			= list.at(26).toInt();	 // Cr number
+			Mel			= list.at(27).toInt();	 // Mel number
+			PGC			= list.at(28).toInt();	 // PGC number (subset)
+			UGC			= list.at(29).toInt();	 // UGC number (subset)
+			Ced			= list.at(30).trimmed(); // Ced number
+			PK			= list.at(31).trimmed(); // PK number
 
-			QStringList raLst;
-			if (ra.contains(":"))
-				raLst	= ra.split(":");
+			if (decimal)
+			{
+				// Convert from deg to rad
+				raRad	= ra.toFloat()*M_PI/180.;
+				decRad	= dec.toFloat()*M_PI/180.;
+			}
 			else
-				raLst	= ra.split(" ");
+			{
+				QStringList raLst;
+				if (ra.contains(":"))
+					raLst	= ra.split(":");
+				else
+					raLst	= ra.split(" ");
 
-			QStringList decLst;
-			if (dec.contains(":"))
-				decLst = dec.split(":");
-			else
-				decLst = dec.split(" ");
+				QStringList decLst;
+				if (dec.contains(":"))
+					decLst = dec.split(":");
+				else
+					decLst = dec.split(" ");
 
-			raRad	= raLst.at(0).toFloat() + raLst.at(1).toFloat()/60.f + raLst.at(2).toFloat()/3600.f;
-			decRad	= qAbs(decLst.at(0).toFloat()) + decLst.at(1).toFloat()/60.f + decLst.at(2).toFloat()/3600.f;
-			if (dec.startsWith("-")) decRad *= -1.f;
+				raRad	= raLst.at(0).toFloat() + raLst.at(1).toFloat()/60.f + raLst.at(2).toFloat()/3600.f;
+				decRad	= qAbs(decLst.at(0).toFloat()) + decLst.at(1).toFloat()/60.f + decLst.at(2).toFloat()/3600.f;
+				if (dec.startsWith("-")) decRad *= -1.f;
 
-			raRad  *= M_PI/12.;	// Convert from hours to rad
-			decRad *= M_PI/180.;    // Convert from deg to rad
+				raRad  *= M_PI/12.;	// Convert from hours to rad
+				decRad *= M_PI/180.;    // Convert from deg to rad
+			}
 
 			majorAxisSize /= 60.f;	// Convert from arcmin to degrees
 			minorAxisSize /= 60.f;	// Convert from arcmin to degrees
@@ -609,8 +623,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 
 			QStringList oTypes;
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
-			       << "HA" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "SY2"
-			       << "AGN" << "CL" << "IG" << "SyG" << "LIN";
+			       << "HA" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
+			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -661,22 +675,25 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 					nType = (unsigned int)Nebula::NebSC;
 					break;
 				case 16:
-					nType = (unsigned int)Nebula::NebSy2;
-					break;
-				case 17:
-					nType = (unsigned int)Nebula::NebAGN;
-					break;
-				case 18:
 					nType = (unsigned int)Nebula::NebCl;
 					break;
+				case 17:
+					nType = (unsigned int)Nebula::NebIGx;
+					break;
+				case 18:
+					nType = (unsigned int)Nebula::NebRGx;
+					break;
 				case 19:
-					nType = (unsigned int)Nebula::NebIG;
+					nType = (unsigned int)Nebula::NebAGx;
 					break;
 				case 20:
-					nType = (unsigned int)Nebula::NebSyG;
+					nType = (unsigned int)Nebula::NebQSO;
 					break;
 				case 21:
-					nType = (unsigned int)Nebula::NebLIN;
+					nType = (unsigned int)Nebula::NebISM;
+					break;
+				case 22:
+					nType = (unsigned int)Nebula::NebEMO;
 					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
@@ -686,8 +703,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out)
 			++readOk;
 
 			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
-				     << orientationAngle << dist  << distErr << NGC << IC << M << C << B << Sh2 << VdB << RCW
-				     << LDN << LBN << Cr << Mel << PGC << UGC << Ced << PK;
+				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
+				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << PK;
 		}
 	}
 	dsoIn.close();
