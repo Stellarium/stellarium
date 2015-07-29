@@ -19,6 +19,7 @@
 
 #include <QtMath>
 
+#include "LandscapeMgr.hpp"
 #include "MeteorShower.hpp"
 #include "MeteorShowers.hpp"
 #include "SporadicMeteorMgr.hpp"
@@ -293,7 +294,12 @@ void MeteorShower::draw(StelCore* core)
 	{
 		return;
 	}
+	drawRadiant(core);
+	drawMeteors(core);
+}
 
+void MeteorShower::drawRadiant(StelCore *core)
+{
 	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
 
 	Vec3d XY;
@@ -334,9 +340,23 @@ void MeteorShower::draw(StelCore* core)
 			painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
 		}
 	}
+}
+
+void MeteorShower::drawMeteors(StelCore *core)
+{
+	if (!core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		return;
+	}
+
+	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
+	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance() > 5.f)
+	{
+		return;
+	}
 
 	// step through and draw all active meteors
-	painter.setProjector(core->getProjection(StelCore::FrameAltAz));
+	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
 	foreach (MeteorObj* m, m_activeMeteors)
 	{
 		m->draw(core, painter);

@@ -41,8 +41,6 @@ public:
 	MeteorObj(const StelCore*, int speed, const float& radiantAlpha, const float& radiantDelta,
 		  const float& pidx, QList<Meteor::colorPair> colors, const StelTextureSP& bolideTexture);
 	virtual ~MeteorObj();
-
-	virtual void draw(const StelCore* core, StelPainter& sPainter);
 };
 
 #endif // _METEOROBJ_HPP_
