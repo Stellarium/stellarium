@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-26 17:01+0600\n"
+"POT-Creation-Date: 2015-07-29 10:24+0600\n"
 "PO-Revision-Date: 2015-01-07 16:07+0000\n"
 "Last-Translator: Evie <emailas@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-27 05:20+0000\n"
-"X-Generator: Launchpad (build 17628)\n"
+"X-Launchpad-Export-Date: 2015-07-29 05:23+0000\n"
+"X-Generator: Launchpad (build 17646)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
-#: src/core/modules/GridLinesMgr.cpp:754 src/core/modules/LandscapeMgr.cpp:413
+#: src/core/modules/GridLinesMgr.cpp:872 src/core/modules/LandscapeMgr.cpp:413
 #: src/core/modules/NebulaMgr.cpp:139 src/core/modules/SolarSystem.cpp:174
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:488 src/core/StelCore.cpp:195
+#: src/core/StelApp.cpp:488 src/core/StelCore.cpp:196
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr "Vaizdo nustatymai"
@@ -46,8 +46,8 @@ msgstr "Žvaigždynų pavadinimai"
 msgid "Constellation boundaries"
 msgstr "Žvaigždynų ribos"
 
-#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1291
-#: src/ui_viewDialog.h:1323 src/ui_viewDialog.h:1349
+#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1346 src/ui_viewDialog.h:1372
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "Žvaigždės"
@@ -56,85 +56,113 @@ msgstr "Žvaigždės"
 msgid "Stars labels"
 msgstr "Žvaigždžių pavadinimai"
 
-#: src/core/modules/GridLinesMgr.cpp:587 src/ui_viewDialog.h:1378
+#: src/core/modules/GridLinesMgr.cpp:592 src/ui_viewDialog.h:1447
 msgid "Meridian"
 msgstr "Dienovidinis"
 
-#: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1382
-msgid "Ecliptic"
-msgstr "Ekliptika"
+#: src/core/modules/GridLinesMgr.cpp:596
+msgid "Ecliptic of J2000.0"
+msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:595 src/ui_viewDialog.h:1374
+#: src/core/modules/GridLinesMgr.cpp:600
+msgid "Ecliptic of Date"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:604
+msgid "Equator of J2000.0"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator"
 msgstr "Pusiaujas"
 
-#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1386
+#: src/core/modules/GridLinesMgr.cpp:613
+msgid "Precession Circle"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1439
 msgid "Horizon"
 msgstr "Horizontas"
 
-#: src/core/modules/GridLinesMgr.cpp:603
+#: src/core/modules/GridLinesMgr.cpp:621
 msgid "Galactic Equator"
 msgstr ""
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:608 src/ui_viewDialog.h:1394
+#: src/core/modules/GridLinesMgr.cpp:626 src/ui_viewDialog.h:1451
 msgid "O./C. longitude"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:755
+#: src/core/modules/GridLinesMgr.cpp:873
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial grid"
 msgstr "Pusiaujinis tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:756 src/ui_viewDialog.h:1368
+#: src/core/modules/GridLinesMgr.cpp:874 src/ui_viewDialog.h:1407
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "Azimutinis tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:757
+#: src/core/modules/GridLinesMgr.cpp:875
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Ecliptic line"
 msgstr "Ekliptikos linija"
 
-#: src/core/modules/GridLinesMgr.cpp:758
+#: src/core/modules/GridLinesMgr.cpp:876
+msgid "Ecliptic J2000 line"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equator line"
 msgstr "Pusiaujo linija"
 
-#: src/core/modules/GridLinesMgr.cpp:759
+#: src/core/modules/GridLinesMgr.cpp:878
+msgid "Equator J2000 line"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Meridian line"
 msgstr "Dienovidinio linija"
 
-#: src/core/modules/GridLinesMgr.cpp:760
+#: src/core/modules/GridLinesMgr.cpp:880
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "Horizonto linija"
 
-#: src/core/modules/GridLinesMgr.cpp:761
+#: src/core/modules/GridLinesMgr.cpp:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equatorial J2000 grid"
 msgstr "Pusiaujinis J2000 tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:762
+#: src/core/modules/GridLinesMgr.cpp:882
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptinis J2000 tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:763 src/ui_viewDialog.h:1369
+#: src/core/modules/GridLinesMgr.cpp:883
+msgid "Ecliptic grid"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:884 src/ui_viewDialog.h:1411
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "Galaktikos tinklelis"
 
-#: src/core/modules/GridLinesMgr.cpp:764 src/ui_viewDialog.h:1390
+#: src/core/modules/GridLinesMgr.cpp:885 src/ui_viewDialog.h:1443
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:765
+#: src/core/modules/GridLinesMgr.cpp:886
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:414 src/ui_viewDialog.h:1313
+#: src/core/modules/GridLinesMgr.cpp:887
+msgid "Precession Circles"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:414 src/ui_viewDialog.h:1336
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
@@ -142,7 +170,7 @@ msgstr "Atmosfera"
 msgid "Fog"
 msgstr "Rūkas"
 
-#: src/core/modules/LandscapeMgr.cpp:416 src/ui_viewDialog.h:1370
+#: src/core/modules/LandscapeMgr.cpp:416 src/ui_viewDialog.h:1415
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
 msgstr "Pasaulio kryptys"
@@ -178,7 +206,7 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:212
+#: src/core/modules/Nebula.cpp:140 src/core/modules/Planet.cpp:213
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:270
@@ -193,7 +221,7 @@ msgstr "Tipas: <b>%1</b>"
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:218
+#: src/core/modules/Nebula.cpp:151 src/core/modules/Planet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -202,7 +230,7 @@ msgstr ""
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Ryškis <b>%1</b> (po ekstincijos: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:221
+#: src/core/modules/Nebula.cpp:154 src/core/modules/Planet.cpp:222
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:197
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -379,76 +407,71 @@ msgstr ""
 msgid "Deep-sky objects"
 msgstr "Tolimojo kosmoso objektai"
 
-#: src/core/modules/Planet.cpp:224 src/core/modules/MinorPlanet.cpp:227
+#: src/core/modules/Planet.cpp:225 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:191
 #: src/core/modules/StarWrapper.cpp:201 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Absoliutinis ryškis: %1"
 
-#: src/core/modules/Planet.cpp:233
-#, qt-format
-msgid "Obliquity (of date, for Earth): %1"
-msgstr "Ašies posvyris (datos, Žemei): %1"
-
-#: src/core/modules/Planet.cpp:245 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Planet.cpp:252 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Nuotolis: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:252 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:259 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:228
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Atstumas: %1 av (%2 mln. km)"
 
-#: src/core/modules/Planet.cpp:265
+#: src/core/modules/Planet.cpp:272
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Regimasis diametras: %1, su žiedais: %2"
 
-#: src/core/modules/Planet.cpp:271 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Planet.cpp:278 src/core/modules/MinorPlanet.cpp:260
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Regimasis skersmuo: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:283 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Planet.cpp:294 src/core/modules/MinorPlanet.cpp:267
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Žvaigždinis sukimosi periodas: %1 dienų (%2 a)"
 
-#: src/core/modules/Planet.cpp:286
+#: src/core/modules/Planet.cpp:297
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Žvaigždinių parų: %1"
 
-#: src/core/modules/Planet.cpp:287
+#: src/core/modules/Planet.cpp:298
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Vidutinių žvaigždinių parų: %1"
 
-#: src/core/modules/Planet.cpp:291
+#: src/core/modules/Planet.cpp:302
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:297
+#: src/core/modules/Planet.cpp:308
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Fazės kampas: %1"
 
-#: src/core/modules/Planet.cpp:298
+#: src/core/modules/Planet.cpp:309
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongacija: %1"
 
-#: src/core/modules/Planet.cpp:299
+#: src/core/modules/Planet.cpp:310
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fazė: %1"
 
-#: src/core/modules/Planet.cpp:300
+#: src/core/modules/Planet.cpp:311
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Apšviesta: %1%"
@@ -508,7 +531,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:175 src/translations.h:62
-#: src/ui_viewDialog.h:1292
+#: src/ui_viewDialog.h:1315
 msgid "Planets"
 msgstr "Planetos"
 
@@ -638,153 +661,153 @@ msgstr ""
 msgid "Night mode"
 msgstr "Nakties režimas"
 
-#: src/core/StelCore.cpp:193 src/gui/StelGui.cpp:175
+#: src/core/StelCore.cpp:194 src/gui/StelGui.cpp:175
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "Data ir laikas"
 
-#: src/core/StelCore.cpp:194 src/core/StelMovementMgr.cpp:130
+#: src/core/StelCore.cpp:195 src/core/StelMovementMgr.cpp:130
 msgid "Movement and Selection"
 msgstr "Slinkimas ir parinkimas"
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:198
 msgid "Increase time speed"
 msgstr "Padidinti laiko tėkmės greitį"
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:199
 msgid "Decrease time speed"
 msgstr "Sulėtinti laiko tėkmės greitį"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:200
 msgid "Increase time speed (a little)"
 msgstr "Padidinti laiko greitį (šiek tiek)"
 
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:201
 msgid "Decrease time speed (a little)"
 msgstr "Sumažinti laiko greitį (šiek tiek)"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:202
 msgid "Set normal time rate"
 msgstr "Nustatyti normalų laiko tėkmės greitį"
 
-#: src/core/StelCore.cpp:202
+#: src/core/StelCore.cpp:203
 msgid "Set time rate to zero"
 msgstr "Nustatyti laiko tėkmę lygią nuliui"
 
-#: src/core/StelCore.cpp:203
+#: src/core/StelCore.cpp:204
 msgid "Set time to now"
 msgstr "Naudoti šio momento laiką"
 
-#: src/core/StelCore.cpp:204
+#: src/core/StelCore.cpp:205
 msgid "Add 1 solar hour"
 msgstr "Pridėti 1 saulinę valandą"
 
-#: src/core/StelCore.cpp:205
+#: src/core/StelCore.cpp:206
 msgid "Add 1 solar day"
 msgstr "Pridėti 1 saulinę dieną"
 
-#: src/core/StelCore.cpp:206
+#: src/core/StelCore.cpp:207
 msgid "Add 7 solar days"
 msgstr ""
 
-#: src/core/StelCore.cpp:207
+#: src/core/StelCore.cpp:208
 msgid "Subtract 1 solar hour"
 msgstr "Atimti 1 saulinę valandą"
 
-#: src/core/StelCore.cpp:208
+#: src/core/StelCore.cpp:209
 msgid "Subtract 1 solar day"
 msgstr "Atimti 1 saulinę dieną"
 
-#: src/core/StelCore.cpp:209
+#: src/core/StelCore.cpp:210
 msgid "Subtract 7 solar days"
 msgstr ""
 
-#: src/core/StelCore.cpp:210
+#: src/core/StelCore.cpp:211
 msgid "Add 1 sidereal day"
 msgstr "Pridėti 1 žvaigždinę dieną"
 
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:212
 msgid "Add 1 sidereal year"
 msgstr "Pridėti 1 žvaigždinius metus"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:213
 msgid "Add 1 synodic month"
 msgstr "Pridėti 1 sinodinį mėnesį"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:214
 msgid "Add 1 draconic month"
 msgstr "Pridėti 1 drakoniškąjį mėnesį"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:215
 msgid "Add 1 draconic year"
 msgstr "Pridėti 1 drakoniškuosius metus"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:216
 msgid "Add 1 anomalistic month"
 msgstr "Pridėti 1 anomalųjį mėnesį"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:217
 msgid "Add 1 mean tropical month"
 msgstr "Pridėti 1 vidutinį atogrąžinį mėnesį"
 
-#: src/core/StelCore.cpp:217
+#: src/core/StelCore.cpp:218
 msgid "Add 1 mean tropical year"
 msgstr "Pridėti 1 vidutinus atogrąžinius metus"
 
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 sidereal day"
 msgstr "Atimti 1 žvaigždinę dieną"
 
-#: src/core/StelCore.cpp:219
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 sidereal year"
 msgstr "Atimti 1 žvaigždinius metus"
 
-#: src/core/StelCore.cpp:220
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 synodic month"
 msgstr "Atimti 1 sinodinį mėnesį"
 
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:222
 msgid "Subtract 1 draconic month"
 msgstr "Atimti 1 drakoniškąjį mėnesį"
 
-#: src/core/StelCore.cpp:222
+#: src/core/StelCore.cpp:223
 msgid "Subtract 1 draconic year"
 msgstr "Atimti 1 drakoniškuosius metus"
 
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:224
 msgid "Subtract 1 anomalistic month"
 msgstr "Atimti 1 anomalųjį mėnesį"
 
-#: src/core/StelCore.cpp:224
+#: src/core/StelCore.cpp:225
 msgid "Subtract 1 mean tropical month"
 msgstr "Atimti 1 vidutinį atogrąžinį mėnesį"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:226
 msgid "Subtract 1 mean tropical year"
 msgstr "Atimti 1 vidutinius atogrąžinius metus"
 
-#: src/core/StelCore.cpp:227
+#: src/core/StelCore.cpp:228
 msgid "Set home planet to selected planet"
 msgstr "Parinktą planetą nustatyti namų planeta"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:229
 msgid "Go to home"
 msgstr "Grįžti į pradžią"
 
-#: src/core/StelCore.cpp:229
+#: src/core/StelCore.cpp:230
 msgid "Flip scene horizontally"
 msgstr "Horizontalusis atspindys"
 
-#: src/core/StelCore.cpp:230
+#: src/core/StelCore.cpp:231
 msgid "Flip scene vertically"
 msgstr "Vertikalusis atspindys"
 
-#: src/core/StelCore.cpp:1465
+#: src/core/StelCore.cpp:1530
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Taisymas atjungtas. Naudokite tik jei žinote, ką darote!"
 
-#: src/core/StelCore.cpp:1468
+#: src/core/StelCore.cpp:1533
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -795,7 +818,7 @@ msgstr ""
 "Henriksson straipsnyje <em>Einšteino reliatyvumo teorija patvirtinta "
 "senovinių saulės užtemimų</em> (%1). Daugiau informacijos %2čia%3."
 
-#: src/core/StelCore.cpp:1471
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -804,7 +827,7 @@ msgstr ""
 "Ši empirinė lygtis buvo paskelbta G. M. Clemence straipsnyje <em>Apie "
 "astronominių konstantų sistemą</em> (%1)."
 
-#: src/core/StelCore.cpp:1474
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -817,7 +840,7 @@ msgstr ""
 "<em>Astronominėse formulėse skaičiuotuvams</em>. Ji taip paat naudojama "
 "kompiuterinėje programoje SunTracker Pro."
 
-#: src/core/StelCore.cpp:1478
+#: src/core/StelCore.cpp:1543
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -827,7 +850,7 @@ msgstr ""
 "Mucke ir Meeus <em>Astronominėse efemeridėse</em> ir <em>Saulės užtemimų "
 "kanone</em> (1983)."
 
-#: src/core/StelCore.cpp:1482
+#: src/core/StelCore.cpp:1547
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -839,7 +862,7 @@ msgstr ""
 "pat buvo panaudotas Goldstine (1973) sizigijų (trijų kūnų išsidėstymo "
 "vienoje linijoje) lentelėse."
 
-#: src/core/StelCore.cpp:1486
+#: src/core/StelCore.cpp:1551
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -850,7 +873,7 @@ msgstr ""
 "<em>Žemės ir Mėnulio pagreičiai, remiantis ankstyvaisiais astronominiais "
 "stebėjimais</em> (%1)."
 
-#: src/core/StelCore.cpp:1489
+#: src/core/StelCore.cpp:1554
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -859,7 +882,7 @@ msgstr ""
 "Ši lygtis buvo publikuota F. R. Stephenson straipsnyje <em>Ikiteleskopiniai "
 "astronominiai stebėjimai</em> (%1)."
 
-#: src/core/StelCore.cpp:1492
+#: src/core/StelCore.cpp:1557
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -873,7 +896,7 @@ msgstr ""
 "1975 laikotarpiu</em> (%1) kaip Brouwer (1952) paskelbtų duomenų "
 "aproksimacija."
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1560
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -883,7 +906,7 @@ msgstr ""
 "programos ir lentelės nuo -4000 iki +2800 metų</em> (1986) ir kompiuterinėje "
 "planetariumo programoje RedShift."
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1563
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -895,12 +918,12 @@ msgstr ""
 "(Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980)</em> (%1)."
 
-#: src/core/StelCore.cpp:1501
+#: src/core/StelCore.cpp:1566
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Šis algoritmas panaudotas kompiuterinėje planetariumo programoje Guide 7."
 
-#: src/core/StelCore.cpp:1504
+#: src/core/StelCore.cpp:1569
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -912,7 +935,7 @@ msgstr ""
 "metų kanonas: 1986-2035 (Fifty Year Canon of Lunar Eclipses: 1986-2035)</em> "
 "(1989)"
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1572
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -921,7 +944,7 @@ msgstr ""
 "Šią formulę išgavo K.M. Borkowski (%1) iš 31 saulės užtemimų įrašų (nuo 2137 "
 "pr. Kr. iki 1715 po Kr.) analizės."
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1575
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -930,14 +953,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1578
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1581
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -948,28 +971,28 @@ msgstr ""
 "<em>Ilgo laikotarpio Žemės sukimosi svyravimai: nuo 700 pr. Kr. iki 1990 m. "
 "e.</em> (%1)."
 
-#: src/core/StelCore.cpp:1519
+#: src/core/StelCore.cpp:1584
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1587
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1590
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1593
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -978,14 +1001,14 @@ msgstr ""
 "Šis daugianaris buvo paskelbtas J. Meeus ir L. Simons straipsnyje "
 "<em>Daugianarės delta T aproksimacijos, 1620-2000 m.e.</em> (%1)."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1596
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1599
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -993,7 +1016,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1602
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1001,7 +1024,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1540
+#: src/core/StelCore.cpp:1605
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1010,7 +1033,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1608
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1020,11 +1043,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1608
 msgid "Used by default."
 msgstr "Naudojama pagal nutylėjimą."
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1611
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1032,7 +1055,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1614
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1040,7 +1063,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1617
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1048,43 +1071,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1620
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1558 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1623 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Klaida"
 
-#: src/core/StelCore.cpp:1608
+#: src/core/StelCore.cpp:1673
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1634
+#: src/core/StelCore.cpp:1699
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1656 src/core/StelCore.cpp:1661
-#: src/core/StelCore.cpp:1688 src/core/StelCore.cpp:1693
-#: src/core/StelCore.cpp:1698
+#: src/core/StelCore.cpp:1721 src/core/StelCore.cpp:1726
+#: src/core/StelCore.cpp:1753 src/core/StelCore.cpp:1758
+#: src/core/StelCore.cpp:1763
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1666
+#: src/core/StelCore.cpp:1731
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1708
+#: src/core/StelCore.cpp:1773
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Galimas panaudojimo diapazonas: tarp %1 ir %2 metų, %3."
 
-#: src/core/StelCore.cpp:1710
+#: src/core/StelCore.cpp:1775
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Galimas panaudojimo diapazonas: tarp %1 ir %2 metų."
@@ -1209,39 +1232,43 @@ msgid ""
 "area projection."
 msgstr ""
 
-#: src/core/StelObject.cpp:112
+#: src/core/StelObject.cpp:118
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr ""
 
-#: src/core/StelObject.cpp:119 src/core/StelObject.cpp:121
-#: src/core/StelObject.cpp:129 src/core/StelObject.cpp:131
+#: src/core/StelObject.cpp:125 src/core/StelObject.cpp:127
+#: src/core/StelObject.cpp:135 src/core/StelObject.cpp:137
 msgid "RA/Dec"
 msgstr ""
 
-#: src/core/StelObject.cpp:150 src/core/StelObject.cpp:153
-#: src/core/StelObject.cpp:163 src/core/StelObject.cpp:166
+#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
+#: src/core/StelObject.cpp:169 src/core/StelObject.cpp:172
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Valandinis kampas/DE: %1/%2"
 
-#: src/core/StelObject.cpp:150 src/core/StelObject.cpp:153
-#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:187
+#: src/core/StelObject.cpp:156 src/core/StelObject.cpp:159
+#: src/core/StelObject.cpp:187 src/core/StelObject.cpp:189
 msgid "(apparent)"
 msgstr ""
 
-#: src/core/StelObject.cpp:185 src/core/StelObject.cpp:187
-#: src/core/StelObject.cpp:192 src/core/StelObject.cpp:194
+#: src/core/StelObject.cpp:187 src/core/StelObject.cpp:189
+#: src/core/StelObject.cpp:194 src/core/StelObject.cpp:196
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:206 src/core/StelObject.cpp:208
-#: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
+#: src/core/StelObject.cpp:216 src/core/StelObject.cpp:218
+#: src/core/StelObject.cpp:228 src/core/StelObject.cpp:230
 msgid "Ecliptic longitude/latitude"
 msgstr ""
 
-#: src/core/StelObject.cpp:224 src/core/StelObject.cpp:226
+#: src/core/StelObject.cpp:233 src/core/StelObject.cpp:235
+msgid "Ecliptic obliquity"
+msgstr ""
+
+#: src/core/StelObject.cpp:244 src/core/StelObject.cpp:246
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Galaktinė ilguma/platuma : %1/%2"
@@ -1299,26 +1326,26 @@ msgstr "Rasta"
 msgid "Select screenshot directory"
 msgstr "Nurodykite katalogą ekrano nuotraukoms"
 
-#: src/gui/ConfigurationDialog.cpp:731
+#: src/gui/ConfigurationDialog.cpp:734
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Pradinis apžvalgos laukas: %1 %2"
 
-#: src/gui/ConfigurationDialog.cpp:739
+#: src/gui/ConfigurationDialog.cpp:742
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Pradinė Az/Alt vaizdo kryptis: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:796
+#: src/gui/ConfigurationDialog.cpp:799
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
 msgid "Authors"
 msgstr "Autoriai"
 
-#: src/gui/ConfigurationDialog.cpp:797 src/gui/ViewDialog.cpp:534
+#: src/gui/ConfigurationDialog.cpp:800 src/gui/ViewDialog.cpp:538
 msgid "Contact"
 msgstr "Susisiekite"
 
-#: src/gui/ConfigurationDialog.cpp:799
+#: src/gui/ConfigurationDialog.cpp:802
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
@@ -1333,7 +1360,7 @@ msgstr "Susisiekite"
 msgid "Version"
 msgstr "Versija"
 
-#: src/gui/ConfigurationDialog.cpp:882
+#: src/gui/ConfigurationDialog.cpp:885
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1347,23 +1374,23 @@ msgstr "Versija"
 msgid "Author"
 msgstr "Autorius"
 
-#: src/gui/ConfigurationDialog.cpp:886
+#: src/gui/ConfigurationDialog.cpp:889
 msgid "License"
 msgstr "Licencija"
 
-#: src/gui/ConfigurationDialog.cpp:890
+#: src/gui/ConfigurationDialog.cpp:893
 msgid "Shortcut"
 msgstr "Trumpinys"
 
-#: src/gui/ConfigurationDialog.cpp:914
+#: src/gui/ConfigurationDialog.cpp:917
 msgid "Running script: "
 msgstr "Vykdomas scenarijus: "
 
-#: src/gui/ConfigurationDialog.cpp:921
+#: src/gui/ConfigurationDialog.cpp:924
 msgid "Running script: [none]"
 msgstr "Vykdomas scenarijus: [nėra]"
 
-#: src/gui/ConfigurationDialog.cpp:986
+#: src/gui/ConfigurationDialog.cpp:989
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1371,16 +1398,16 @@ msgstr ""
 "Naujų žvaigždžių katalogų siuntimas baigtas.\n"
 "Norėdami juos pamatyti, paleiskite Stellarium iš naujo."
 
-#: src/gui/ConfigurationDialog.cpp:990
+#: src/gui/ConfigurationDialog.cpp:993
 msgid "All available star catalogs have been installed."
 msgstr "Visi galimi žvaigždžių katalogai įdiegti."
 
-#: src/gui/ConfigurationDialog.cpp:995
+#: src/gui/ConfigurationDialog.cpp:998
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Parsiųsti katalogą %1 iš %2"
 
-#: src/gui/ConfigurationDialog.cpp:1002
+#: src/gui/ConfigurationDialog.cpp:1005
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1389,7 +1416,7 @@ msgstr ""
 "Siunčiama %1...\n"
 "(Jūs galite uždaryti šį langą.)"
 
-#: src/gui/ConfigurationDialog.cpp:1009
+#: src/gui/ConfigurationDialog.cpp:1012
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1400,7 +1427,7 @@ msgstr ""
 "Žvaigždžių skaičius: %2 milijonai\n"
 "Ryškio intervalas: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1052 src/gui/ConfigurationDialog.cpp:1086
+#: src/gui/ConfigurationDialog.cpp:1055 src/gui/ConfigurationDialog.cpp:1089
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1409,11 +1436,11 @@ msgstr ""
 "Klaida siunčiant %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1139
+#: src/gui/ConfigurationDialog.cpp:1142
 msgid "Verifying file integrity..."
 msgstr "Tikrinamas failų vientisumas..."
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1146
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1423,127 +1450,127 @@ msgstr ""
 "Failas sugadintas."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1214
+#: src/gui/ConfigurationDialog.cpp:1217
 msgid "Algorithm of"
 msgstr "Algoritmas"
 
-#: src/gui/ConfigurationDialog.cpp:1225
+#: src/gui/ConfigurationDialog.cpp:1228
 msgid "Without correction"
 msgstr "Be pataisymų"
 
-#: src/gui/ConfigurationDialog.cpp:1226
+#: src/gui/ConfigurationDialog.cpp:1229
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1227
+#: src/gui/ConfigurationDialog.cpp:1230
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1228
+#: src/gui/ConfigurationDialog.cpp:1231
 msgid "IAU (1952)"
 msgstr "TAS (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1229
+#: src/gui/ConfigurationDialog.cpp:1232
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronominės efemeridės (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1230
+#: src/gui/ConfigurationDialog.cpp:1233
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) ir Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1231
+#: src/gui/ConfigurationDialog.cpp:1234
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller ir Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1232
+#: src/gui/ConfigurationDialog.cpp:1235
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1233
+#: src/gui/ConfigurationDialog.cpp:1236
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel ir Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1234
+#: src/gui/ConfigurationDialog.cpp:1237
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison ir Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1235
+#: src/gui/ConfigurationDialog.cpp:1238
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson ir Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1236
+#: src/gui/ConfigurationDialog.cpp:1239
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson ir Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1237
+#: src/gui/ConfigurationDialog.cpp:1240
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1238
+#: src/gui/ConfigurationDialog.cpp:1241
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1239
+#: src/gui/ConfigurationDialog.cpp:1242
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel ir Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1240
+#: src/gui/ConfigurationDialog.cpp:1243
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze ir Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1241
+#: src/gui/ConfigurationDialog.cpp:1244
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson ir Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1242
+#: src/gui/ConfigurationDialog.cpp:1245
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1244
+#: src/gui/ConfigurationDialog.cpp:1247
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (su Chapront, Chapront-Touze ir Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1245
+#: src/gui/ConfigurationDialog.cpp:1248
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1246
+#: src/gui/ConfigurationDialog.cpp:1249
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus ir Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1247
+#: src/gui/ConfigurationDialog.cpp:1250
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck ir Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1248
+#: src/gui/ConfigurationDialog.cpp:1251
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold ir Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1249
+#: src/gui/ConfigurationDialog.cpp:1252
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison ir Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1251
+#: src/gui/ConfigurationDialog.cpp:1254
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak ir Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1252
+#: src/gui/ConfigurationDialog.cpp:1255
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1253
+#: src/gui/ConfigurationDialog.cpp:1256
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1254
+#: src/gui/ConfigurationDialog.cpp:1257
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq ir Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1255
+#: src/gui/ConfigurationDialog.cpp:1258
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1256
+#: src/gui/ConfigurationDialog.cpp:1259
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -1827,111 +1854,111 @@ msgid "Frames per second"
 msgstr "Kadrų per sekundę"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:403
+#: src/gui/ViewDialog.cpp:407
 msgid "Excellent dark-sky site"
 msgstr "Puiki tamsaus dangaus vietovė"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:405
+#: src/gui/ViewDialog.cpp:409
 msgid "Typical truly dark site"
 msgstr "Tipinė tamsaus dangaus vietovė"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:407
+#: src/gui/ViewDialog.cpp:411
 msgid "Rural sky"
 msgstr "Kaimo dangus"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:409
+#: src/gui/ViewDialog.cpp:413
 msgid "Rural/suburban transition"
 msgstr "Kaimo/priemiesčio sankirta"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:411
+#: src/gui/ViewDialog.cpp:415
 msgid "Suburban sky"
 msgstr "Priemiesčio dangus"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:413
+#: src/gui/ViewDialog.cpp:417
 msgid "Bright suburban sky"
 msgstr "Šviesus priemiesčio dangus"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:415
+#: src/gui/ViewDialog.cpp:419
 msgid "Suburban/urban transition"
 msgstr "Priemiesčio/miesto sankirta"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:417
+#: src/gui/ViewDialog.cpp:421
 msgid "City sky"
 msgstr "Miesto dangus"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:419
+#: src/gui/ViewDialog.cpp:423
 msgid "Inner-city sky"
 msgstr "Miesto centro dangus"
 
-#: src/gui/ViewDialog.cpp:433
+#: src/gui/ViewDialog.cpp:437
 msgid "The naked-eye limiting magnitude is"
 msgstr "Plikai akiai ribinis ryškis yra"
 
-#: src/gui/ViewDialog.cpp:457
+#: src/gui/ViewDialog.cpp:461
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:458
+#: src/gui/ViewDialog.cpp:462
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:459
+#: src/gui/ViewDialog.cpp:463
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:583
+#: src/gui/ViewDialog.cpp:587
 msgid "No description"
 msgstr "Be aprašymo"
 
-#: src/gui/ViewDialog.cpp:679
+#: src/gui/ViewDialog.cpp:683
 msgid "No shooting stars"
 msgstr "Nėra krintančių žvaigždžių"
 
-#: src/gui/ViewDialog.cpp:687
+#: src/gui/ViewDialog.cpp:691
 msgid "Normal rate"
 msgstr "Normalus dažnis"
 
-#: src/gui/ViewDialog.cpp:690
+#: src/gui/ViewDialog.cpp:694
 msgid "Standard Orionids rate"
 msgstr "Standartinis Orionidų dažnis"
 
-#: src/gui/ViewDialog.cpp:693
+#: src/gui/ViewDialog.cpp:697
 msgid "Standard Perseids rate"
 msgstr "Standartinis Perseidų"
 
-#: src/gui/ViewDialog.cpp:696
+#: src/gui/ViewDialog.cpp:700
 msgid "Standard Geminids rate"
 msgstr "Standartinis Geminidų dažnis"
 
-#: src/gui/ViewDialog.cpp:699
+#: src/gui/ViewDialog.cpp:703
 msgid "Exceptional Perseid rate"
 msgstr "Ypač geras Perseidų dažnis"
 
-#: src/gui/ViewDialog.cpp:702
+#: src/gui/ViewDialog.cpp:706
 msgid "Meteor storm rate"
 msgstr "Meteorų audros dažnis"
 
-#: src/gui/ViewDialog.cpp:705
+#: src/gui/ViewDialog.cpp:709
 msgid "Exceptional Draconid rate"
 msgstr "Ypač geras Drakonidų dažnis"
 
-#: src/gui/ViewDialog.cpp:708
+#: src/gui/ViewDialog.cpp:712
 msgid "Exceptional Leonid rate"
 msgstr "Nepaprastas Leonidų"
 
-#: src/gui/ViewDialog.cpp:711
+#: src/gui/ViewDialog.cpp:715
 msgid "Very high rate (1966 Leonids)"
 msgstr "Labai aukštas dažnis (1966 Leonidai)"
 
-#: src/gui/ViewDialog.cpp:714
+#: src/gui/ViewDialog.cpp:718
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Aukščiausias pasiektas dažnis (1833 Leonidai)"
 
@@ -4200,92 +4227,92 @@ msgstr "Paieškos parametrai"
 msgid "Use autofill only from the beginning of words"
 msgstr "Naudoti automatinį teksto užpildymą tik nuo žodžių pradžios"
 
-#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1398
-#: src/ui_viewDialog.h:1417 src/ui_viewDialog.h:1425
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1455
+#: src/ui_viewDialog.h:1474 src/ui_viewDialog.h:1482
 #: src/ui_configurationDialog.h:1187 src/ui_configurationDialog.h:1198
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Nustatymai"
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1298
 msgid "View"
 msgstr "Vaizdas"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1304
 msgid "Sky"
 msgstr "Dangus"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1306
 msgid "Markings"
 msgstr "Žymės"
 
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1308
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "Kraštovaizdis"
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1310
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "Žvaigždynų folkloras"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1313
 msgid "Labels and Markers"
 msgstr "Pavadinimai ir žymekliai"
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1317
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Žymekliai ir užrašai giliojo dangaus objektams (žvaigždžių spiečiams, "
 "galaktikoms ir ūkams)"
 
-#: src/ui_viewDialog.h:1296 src/ui_viewDialog.h:1353
+#: src/ui_viewDialog.h:1319 src/ui_viewDialog.h:1376
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr "GDO"
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1320
 msgid "Planets and satellites"
 msgstr "Planetos ir palydovai"
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1321
 msgid "Show planets"
 msgstr "Rodyti planetas"
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1322
 msgid "Show planet markers"
 msgstr "Rodyti planetų užuominas"
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1323
 msgid "Show planet orbits"
 msgstr "Rodyti planetų orbitas"
 
-#: src/ui_viewDialog.h:1301
+#: src/ui_viewDialog.h:1324
 msgid "Simulate light speed"
 msgstr "Imituoti šviesos greitį"
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1325
 msgid "Scale Moon"
 msgstr "Mėnulio mastelis"
 
-#: src/ui_viewDialog.h:1304
+#: src/ui_viewDialog.h:1327
 msgid "Scale factor"
 msgstr ""
 
-#: src/ui_viewDialog.h:1307
+#: src/ui_viewDialog.h:1330
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Automatiškai pakeisti kraštovaizdį kai pakeičiama planeta"
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1332
 msgid "Auto select landscapes"
 msgstr "Automatiškai parinkti kraštovaizdžius"
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1334
 msgid "Show atmosphere"
 msgstr "Rodyti atmosferą"
 
-#: src/ui_viewDialog.h:1315
+#: src/ui_viewDialog.h:1338
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -4293,245 +4320,311 @@ msgstr ""
 "Naudoti šviesos taršos informaciją iš vietovių duomenų bazės ir ignoruoti "
 "žemiau nurodytus šviesos užterštumo nustatymus"
 
-#: src/ui_viewDialog.h:1317
+#: src/ui_viewDialog.h:1340
 msgid "Light pollution data from locations database"
 msgstr "Šviesos taršos informacija iš vietovių duomenų bazės"
 
-#: src/ui_viewDialog.h:1318
+#: src/ui_viewDialog.h:1341
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "Šviesos tarša:"
 
-#: src/ui_viewDialog.h:1320
+#: src/ui_viewDialog.h:1343
 msgid "pressure, temperature, extinction coefficient"
 msgstr "slėgis, temperatūra, ekstinkcijos koeficientas"
 
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1345
 msgid "Refraction/Extinction settings..."
 msgstr "Refrakcijos/ekstinkcijos nustatymai..."
 
-#: src/ui_viewDialog.h:1324
+#: src/ui_viewDialog.h:1347
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
 msgstr "Absoliutinis mastelis:"
 
-#: src/ui_viewDialog.h:1325
+#: src/ui_viewDialog.h:1348
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
 msgstr "Santykinis mastelis:"
 
-#: src/ui_viewDialog.h:1326
+#: src/ui_viewDialog.h:1349
 msgid "Milky Way brightness:"
 msgstr "Paukščių tako ryškumas:"
 
-#: src/ui_viewDialog.h:1327
+#: src/ui_viewDialog.h:1350
 msgid "Zodiacal Light brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1328
+#: src/ui_viewDialog.h:1351
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
 msgstr "Mirgėjimas:"
 
-#: src/ui_viewDialog.h:1330
+#: src/ui_viewDialog.h:1353
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Pritemdyti neryškias žvaigždes, kai matomas labai ryškus objektas."
 
-#: src/ui_viewDialog.h:1332
+#: src/ui_viewDialog.h:1355
 msgid "Dynamic eye adaptation"
 msgstr "Dinamiškas akių prisitaikymas"
 
-#: src/ui_viewDialog.h:1334
+#: src/ui_viewDialog.h:1357
 msgid "Settings for sporadic meteors"
 msgstr "Nustatymai pavieniams meteorams"
 
-#: src/ui_viewDialog.h:1336
+#: src/ui_viewDialog.h:1359
 msgid "Shooting Stars"
 msgstr "Krintančios žvaigždės"
 
-#: src/ui_viewDialog.h:1338
+#: src/ui_viewDialog.h:1361
 msgid "Hourly zenith rate"
 msgstr "Dažnis per valandą ties zenitu"
 
-#: src/ui_viewDialog.h:1340
+#: src/ui_viewDialog.h:1363
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1343
+#: src/ui_viewDialog.h:1366
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 "Riboti matomų objektų ryškį (stebėtojams be prietaisų ar su žiūronais)"
 
-#: src/ui_viewDialog.h:1345
+#: src/ui_viewDialog.h:1368
 msgid "Limit Magnitudes"
 msgstr "Ribojimas pagal ryškį"
 
-#: src/ui_viewDialog.h:1347
+#: src/ui_viewDialog.h:1370
 msgid "Limit the magnitude of stars"
 msgstr "Riboti rodomas žvaigždžes pagal ryškį"
 
-#: src/ui_viewDialog.h:1351
+#: src/ui_viewDialog.h:1374
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Riboti rodomus giliojo dangaus objektus (žvaigždžių spiečius, galaktikas ir "
 "ūkus) pagal ryškį"
 
-#: src/ui_viewDialog.h:1354
+#: src/ui_viewDialog.h:1377
 msgid "Constellations"
 msgstr "Žvaigždynai"
 
-#: src/ui_viewDialog.h:1355
+#: src/ui_viewDialog.h:1378
 msgid "Show lines"
 msgstr "Rodyti kontūrus"
 
-#: src/ui_viewDialog.h:1356
+#: src/ui_viewDialog.h:1379
 msgid "Show labels"
 msgstr "Rodyti pavadinimus"
 
-#: src/ui_viewDialog.h:1357
+#: src/ui_viewDialog.h:1380
 msgid "Show boundaries"
 msgstr "Rodyti ribas"
 
-#: src/ui_viewDialog.h:1358
+#: src/ui_viewDialog.h:1381
 msgid "Show art"
 msgstr "Rodyti piešinius"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1359
+#: src/ui_viewDialog.h:1382
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
 msgstr "Piešinių ryškumas:"
 
-#: src/ui_viewDialog.h:1360
+#: src/ui_viewDialog.h:1383
 msgid "Thickness of lines:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1362
+#: src/ui_viewDialog.h:1385
 msgid "Value in pixels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1364
+#: src/ui_viewDialog.h:1387
 msgid "Celestial Sphere"
 msgstr "Dangaus sfera"
 
-#: src/ui_viewDialog.h:1365
-msgid "Equatorial grid (on J2000)"
-msgstr "Pusiaujinis tinklelis (J2000)"
-
-#: src/ui_viewDialog.h:1366
-msgid "Equatorial grid (on date)"
-msgstr "Pusiaujinis tinklelis (šiai datai)"
-
-#: src/ui_viewDialog.h:1367
-msgid "Ecliptic grid (on J2000)"
-msgstr "Ekliptinis tinklelis (J2000)"
-
-#: src/ui_viewDialog.h:1372
-msgid "Show equator line"
+#: src/ui_viewDialog.h:1389
+msgid "Equatorial coordinates of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1376
-msgid "Show meridian line"
+#: src/ui_viewDialog.h:1391
+msgid "Equatorial grid (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1380
-msgid "Show ecliptic line"
-msgstr "Rodyti ekliptikos liniją"
-
-#: src/ui_viewDialog.h:1384
-msgid "Show horizon line"
+#: src/ui_viewDialog.h:1393
+msgid "Equatorial coordinates of current date and planet."
 msgstr ""
 
-#: src/ui_viewDialog.h:1388
-msgid "Show Galactic equator line"
+#: src/ui_viewDialog.h:1395
+msgid "Equatorial grid (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1392
+#: src/ui_viewDialog.h:1397
+msgid "Ecliptical coordinates for J2000.0."
+msgstr ""
+
+#: src/ui_viewDialog.h:1399
+msgid "Ecliptic grid (J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1401
+msgid "Ecliptical coordinates for current date. Displayed on Earth only."
+msgstr ""
+
+#: src/ui_viewDialog.h:1403
+msgid "Ecliptic grid (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1405
+msgid "Altitudes and azimuth (counted from North towards East)."
+msgstr ""
+
+#: src/ui_viewDialog.h:1409
+msgid "Galactic Coordinates, System II (IAU 1958)."
+msgstr ""
+
+#: src/ui_viewDialog.h:1413
+msgid "Labels for the Cardinal directions."
+msgstr ""
+
+#: src/ui_viewDialog.h:1417
+msgid ""
+"Instantaneous circles of earth's axis on its motion around ecliptical poles. "
+"Displayed on Earth only."
+msgstr ""
+
+#: src/ui_viewDialog.h:1419
+msgid "Precession circles"
+msgstr ""
+
+#: src/ui_viewDialog.h:1421
+msgid "Show celestial equator of J2000.0."
+msgstr ""
+
+#: src/ui_viewDialog.h:1423
+msgid "Equator (J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1425
+msgid "Show celestial equator of current planet and date."
+msgstr ""
+
+#: src/ui_viewDialog.h:1427
+msgid "Equator (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1429
+msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
+msgstr ""
+
+#: src/ui_viewDialog.h:1431
+msgid "Ecliptic (J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1433
+msgid "Show ecliptic line of current date."
+msgstr ""
+
+#: src/ui_viewDialog.h:1435
+msgid "Ecliptic (of date)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1437
+msgid "Show horizon line."
+msgstr ""
+
+#: src/ui_viewDialog.h:1441
+msgid "Show Galactic equator line."
+msgstr ""
+
+#: src/ui_viewDialog.h:1445
+msgid "Show meridian line."
+msgstr ""
+
+#: src/ui_viewDialog.h:1449
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
 
-#: src/ui_viewDialog.h:1395
+#: src/ui_viewDialog.h:1452
 msgid "Projection"
 msgstr "Projekcija"
 
-#: src/ui_viewDialog.h:1396
+#: src/ui_viewDialog.h:1453
 msgid "Vertical viewport offset"
 msgstr ""
 
-#: src/ui_viewDialog.h:1397
+#: src/ui_viewDialog.h:1454
 msgid "%"
 msgstr ""
 
-#: src/ui_viewDialog.h:1399
+#: src/ui_viewDialog.h:1456
 msgid "Use this landscape as default"
 msgstr "Naudoti šį kraštovaizdį kaip numatytąjį"
 
-#: src/ui_viewDialog.h:1400
+#: src/ui_viewDialog.h:1457
 msgid "Use associated planet and position"
 msgstr "Naudoti susijusią planetą ir poziciją"
 
-#: src/ui_viewDialog.h:1401
+#: src/ui_viewDialog.h:1458
 msgid "Show fog"
 msgstr "Rodyti rūką"
 
-#: src/ui_viewDialog.h:1402
+#: src/ui_viewDialog.h:1459
 msgid "Show ground"
 msgstr "Rodyti žemę"
 
-#: src/ui_viewDialog.h:1404
+#: src/ui_viewDialog.h:1461
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1406
+#: src/ui_viewDialog.h:1463
 msgid "Minimal brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1408
+#: src/ui_viewDialog.h:1465
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1411
+#: src/ui_viewDialog.h:1468
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 
-#: src/ui_viewDialog.h:1413
+#: src/ui_viewDialog.h:1470
 msgid "from landscape, if given"
 msgstr ""
 
-#: src/ui_viewDialog.h:1414
+#: src/ui_viewDialog.h:1471
 msgid "Show landscape labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1415
+#: src/ui_viewDialog.h:1472
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1416
+#: src/ui_viewDialog.h:1473
 msgid "Add/remove landscapes..."
 msgstr "Pridėti/pašalinti kraštovaizdžius..."
 
-#: src/ui_viewDialog.h:1418
+#: src/ui_viewDialog.h:1475
 msgid "Use this sky culture as default"
 msgstr "Naudoti šią dangaus kultūrą kaip numatytąją"
 
-#: src/ui_viewDialog.h:1419
+#: src/ui_viewDialog.h:1476
 msgid "Show names"
 msgstr ""
 
-#: src/ui_viewDialog.h:1421
+#: src/ui_viewDialog.h:1478
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 
-#: src/ui_viewDialog.h:1424
+#: src/ui_viewDialog.h:1481
 msgid "Use native names for planets from current culture"
 msgstr ""
 
-#: src/ui_viewDialog.h:1426
+#: src/ui_viewDialog.h:1483
 msgid "Visible"
 msgstr "Matomas"
 
@@ -11188,6 +11281,9 @@ msgstr ""
 #~ msgid "Ecliptic Line"
 #~ msgstr "Ekliptikos liniją"
 
+#~ msgid "Ecliptic"
+#~ msgstr "Ekliptika"
+
 #~ msgid "Titania"
 #~ msgstr "Titanija"
 
@@ -11317,6 +11413,10 @@ msgstr ""
 #~ msgid "Add 1 mean tropical century"
 #~ msgstr "Pridėti 1 vidutinį atogrąžinį amžių"
 
+#, qt-format
+#~ msgid "Obliquity (of date, for Earth): %1"
+#~ msgstr "Ašies posvyris (datos, Žemei): %1"
+
 #~ msgid ""
 #~ "Enable checking updates of Stellarium via Internet. Info for updates of "
 #~ "stable versions you can look on the tab \"About\" of \"Help\" window."
@@ -11376,6 +11476,15 @@ msgstr ""
 
 #~ msgid "Kepler's Supernova"
 #~ msgstr "Keplerio Supernova"
+
+#~ msgid "Ecliptic grid (on J2000)"
+#~ msgstr "Ekliptinis tinklelis (J2000)"
+
+#~ msgid "Equatorial grid (on J2000)"
+#~ msgstr "Pusiaujinis tinklelis (J2000)"
+
+#~ msgid "Equatorial grid (on date)"
+#~ msgstr "Pusiaujinis tinklelis (šiai datai)"
 
 #~ msgid ""
 #~ "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
@@ -11481,6 +11590,9 @@ msgstr ""
 
 #~ msgid "Galactic plane line"
 #~ msgstr "Galaktikos plokštumos linija"
+
+#~ msgid "Show ecliptic line"
+#~ msgstr "Rodyti ekliptikos liniją"
 
 #~ msgid "Change Color"
 #~ msgstr "Pakeisti spalvą"
