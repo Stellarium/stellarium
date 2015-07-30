@@ -57,13 +57,23 @@ public:
 		GalacticCoord		= 0x00000800, //!< The galactic position
 		ObjectType		= 0x00001000, //!< The type of the object (star, planet, etc.)
 		EclipticCoord		= 0x00002000, //!< The ecliptic position
-		PlainText		= 0x00004000  //!< Strip HTML tags from output
+		EclipticCoordXYZ	= 0x00004000, //!< The ecliptic position, XYZ of VSOP87A (used mainly for debugging, not public)
+		PlainText		= 0x00010000,  //!< Strip HTML tags from output
+// TODO GZ
+//		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
+//		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
+//		// and split Ecliptical into
+//		EclipticCoordJ2000	= 0x00002000, //!< The ecliptic position w.r.t. ecliptic of eq.J2000.0
+//		EclipticCoordOfDate	= 0x00002000, //!< The ecliptic position w.r.t. ecliptic of eq. of date
+
+
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord|ObjectType|EclipticCoord);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|
+									   AbsoluteMagnitude|GalacticCoord|ObjectType|EclipticCoord|EclipticCoordXYZ);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 

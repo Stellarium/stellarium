@@ -172,6 +172,8 @@ public:
 	//! Get the radius of the planet in AU.
 	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
+	//! Get the value (1-f) for oblateness f.
+	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
@@ -219,6 +221,8 @@ public:
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
+	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
+	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDay) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
@@ -321,8 +325,10 @@ protected:
 	Vec3f color;                     // exclusively used for drawing the planet halo
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
-	Mat4d rotLocalToParent;
-	float axisRotation;              // Rotation angle of the Planet on it's axis
+	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
+					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+	float axisRotation;              // Rotation angle of the Planet on its axis.
+					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
@@ -333,7 +339,7 @@ protected:
 	double lastJD;                   // caches JD of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
-	void* userDataPtr;
+	void* userDataPtr;               // this is always used with an Orbit object.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth

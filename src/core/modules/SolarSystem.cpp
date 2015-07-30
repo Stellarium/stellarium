@@ -1691,6 +1691,10 @@ void SolarSystem::reloadPlanets()
 	systemPlanets.clear();
 	// Memory leak? What's the proper way of cleaning shared pointers?
 
+	// Also delete Comet textures (loaded in loadPlanets()
+	Comet::tailTexture.clear();
+	Comet::comaTexture.clear();
+
 	// Re-load the ssystem.ini file
 	loadPlanets();	
 	computePositions(StelUtils::getJDFromSystem());
