@@ -343,7 +343,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 	{
 		qWarning() << "MeteorShowersMgr: Failed to download!" << reply->url();
 		qWarning() << "MeteorShowersMgr: Error " << reply->errorString();
-		setStatusOfLastUpdate(ERROR);
+		setStatusOfLastUpdate(FAILED);
 		return;
 	}
 
@@ -353,7 +353,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 	if (!newCatalog.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
 		qWarning() << "MeteorShowersMgr: Cannot write the downloaded catalog!";
-		setStatusOfLastUpdate(ERROR);
+		setStatusOfLastUpdate(FAILED);
 		return;
 	}
 
@@ -362,7 +362,7 @@ void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
 
 	if (!loadCatalog(tempPath))
 	{
-		setStatusOfLastUpdate(ERROR);
+		setStatusOfLastUpdate(FAILED);
 		return;
 	}
 
