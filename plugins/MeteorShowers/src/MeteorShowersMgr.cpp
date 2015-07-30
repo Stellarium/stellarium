@@ -426,7 +426,7 @@ void MeteorShowersMgr::setEnableButtons(const bool& show)
 		qWarning() << "MeteorShowersMgr : unable to create toolbar buttons for MeteorShowers plugin!"
 			   << e.what();
 	}
-
+	m_enableButtons = show;
 	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_buttons", show);
 }
 
