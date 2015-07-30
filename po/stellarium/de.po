@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:24+0600\n"
-"PO-Revision-Date: 2015-07-10 13:36+0000\n"
+"PO-Revision-Date: 2015-07-29 16:59+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-29 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-07-30 05:28+0000\n"
 "X-Generator: Launchpad (build 17646)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -64,15 +64,15 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:596
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Ekliptik (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Ekliptik zum Datum"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Äquator (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator"
@@ -80,7 +80,7 @@ msgstr "Äquator"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Precession Circle"
-msgstr ""
+msgstr "Präzessionskreis"
 
 #: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1439
 msgid "Horizon"
@@ -112,7 +112,7 @@ msgstr "Ekliptik"
 
 #: src/core/modules/GridLinesMgr.cpp:876
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Ekliptiklinie (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -121,7 +121,7 @@ msgstr "Himmelsäquator"
 
 #: src/core/modules/GridLinesMgr.cpp:878
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Äquatorlinie (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -144,7 +144,7 @@ msgstr "Ekliptikales Gradnetz (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Ekliptikales Gradnetz"
 
 #: src/core/modules/GridLinesMgr.cpp:884 src/ui_viewDialog.h:1411
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -162,7 +162,7 @@ msgstr "Ekl. Länge von Opposition bzw. Konjunktion"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Precession Circles"
-msgstr ""
+msgstr "Präzessionskreise"
 
 #: src/core/modules/LandscapeMgr.cpp:414 src/ui_viewDialog.h:1336
 msgid "Atmosphere"
@@ -1075,10 +1075,10 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 "Diese Lösung von F. Espenak and J. Meeus, basierend auf Morrison & "
-"Stephenson (2004) und eine polynomiale Anpassung durch eine Wertetabelle für "
-"1600-2000, wird für die %1NASA Eclipse Web Site%2 und für ihren <em>Five "
+"Stephenson (2004) und einer polynomialen Anpassung durch eine Wertetabelle "
+"für 1600-2000, wird für die %1NASA Eclipse Web Site%2 und für ihren <em>Five "
 "Millennium Canon of Solar Eclipses: -1999 to +3000</em> (2006) verwendet, "
-"ebenso auch im Sonnen- Mond- und PLaneten-Ephemeridenprogramm SOLEX."
+"ebenso auch im Sonnen- Mond- und Planeten-Ephemeridenprogramm SOLEX."
 
 #: src/core/StelCore.cpp:1608
 msgid "Used by default."
@@ -1323,7 +1323,7 @@ msgstr "Ekliptikale Länge/Breite"
 
 #: src/core/StelObject.cpp:233 src/core/StelObject.cpp:235
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Schiefe der Ekliptik"
 
 #: src/core/StelObject.cpp:244 src/core/StelObject.cpp:246
 #, qt-format
@@ -1906,7 +1906,7 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:650
 msgid "Field of view"
-msgstr "Sichtfeld"
+msgstr "Gesichtsfeld"
 
 #: src/gui/StelGuiItems.cpp:668
 msgid "Frames per second"
@@ -4547,101 +4547,105 @@ msgstr "Himmelskugel"
 
 #: src/ui_viewDialog.h:1389
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Äquatoriale Koordinaten (J2000.0)."
 
 #: src/ui_viewDialog.h:1391
 msgid "Equatorial grid (J2000)"
-msgstr ""
+msgstr "Äquatoriales Gradnetz (J2000.0)"
 
 #: src/ui_viewDialog.h:1393
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Äquatoriale Koordinaten zum Datum für aktuellen Planeten."
 
 #: src/ui_viewDialog.h:1395
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Äquatoriales Gradnetz zum Datum"
 
 #: src/ui_viewDialog.h:1397
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Ekliptikale Koordinaten für J2000.0."
 
 #: src/ui_viewDialog.h:1399
 msgid "Ecliptic grid (J2000)"
-msgstr ""
+msgstr "Ekliptikales Gradnetz (J2000.0)"
 
 #: src/ui_viewDialog.h:1401
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
+"Ekliptikale Koordinaten zum aktuellen Datum. Anzeige nur für irdische "
+"Standorte."
 
 #: src/ui_viewDialog.h:1403
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Ekliptikales Gradnetz (zum Datum)"
 
 #: src/ui_viewDialog.h:1405
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
+msgstr "Höhen und Azimute (gezählt von Nord über Ost)."
 
 #: src/ui_viewDialog.h:1409
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Galaktische Koordinaten, System II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1413
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Markierungen der Haupthimmelsrichtungen."
 
 #: src/ui_viewDialog.h:1417
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Darstellung der Kreise, die die Erdachse um den momentanen Ekliptikpol "
+"beschreiben. Anzeige nur für irdische Standorte."
 
 #: src/ui_viewDialog.h:1419
 msgid "Precession circles"
-msgstr ""
+msgstr "Präzessionskreise"
 
 #: src/ui_viewDialog.h:1421
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "Zeige Himmelsäquator von J2000.0."
 
 #: src/ui_viewDialog.h:1423
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "Äquator (J2000.0)"
 
 #: src/ui_viewDialog.h:1425
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Zeige Himmelsäquator des aktuellen Planeten und Datums."
 
 #: src/ui_viewDialog.h:1427
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Äquator (zum Datum)"
 
 #: src/ui_viewDialog.h:1429
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "Zeige Ekiptiklinie von J2000.0 (VSOP87A Hauptebene)."
 
 #: src/ui_viewDialog.h:1431
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "Ekliptik (J2000.0)"
 
 #: src/ui_viewDialog.h:1433
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Zeige Ekliptiklinie zum aktuellen Datum."
 
 #: src/ui_viewDialog.h:1435
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Ekliptik (zum Datum)"
 
 #: src/ui_viewDialog.h:1437
 msgid "Show horizon line."
-msgstr ""
+msgstr "Zeige Horizontlinie."
 
 #: src/ui_viewDialog.h:1441
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Zeige galaktische Äquatorlinie."
 
 #: src/ui_viewDialog.h:1445
 msgid "Show meridian line."
-msgstr ""
+msgstr "Zeige Meridianlinie."
 
 #: src/ui_viewDialog.h:1449
 msgid ""
@@ -4657,11 +4661,11 @@ msgstr "Projektion"
 
 #: src/ui_viewDialog.h:1453
 msgid "Vertical viewport offset"
-msgstr ""
+msgstr "Vertikaler Bildversatz"
 
 #: src/ui_viewDialog.h:1454
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: src/ui_viewDialog.h:1456
 msgid "Use this landscape as default"
@@ -5009,7 +5013,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1127
 msgid "System date at:"
-msgstr "Systemzeit bei:"
+msgstr "Systemdatum um:"
 
 #: src/ui_configurationDialog.h:1128
 msgid "Time correction"
@@ -5602,9 +5606,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
-"Den Himmel wie durch ein Teleskop-Okular betrachten (nur Vergrößerung und "
-"Sichtfeld werden simuliert.) Außerdem können ein Sensor-Rahmen und ein "
-"Telrad-Sucher dargestellt werden."
+"Zeigt den Himmel wie durch ein Teleskop-Okular betrachtet. (Nur Vergrößerung "
+"und Gesichtsfeld werden simuliert.) Außerdem können ein Sensor-Rahmen und "
+"ein Telrad-Sucher dargestellt werden."
 
 #: plugins/Oculars/src/Oculars.cpp:844
 msgid "Please select an object before switching to ocular view."
@@ -6070,7 +6074,7 @@ msgstr "Bedienfeld"
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
-"Markieren, um beim Verlassen des Okularmodus das Gesichtfeld auf den Wert "
+"Markieren, um beim Verlassen des Okularmodus das Gesichtsfeld auf den Wert "
 "bei Programmstart zu setzen."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
@@ -7278,7 +7282,7 @@ msgstr "Einstellungen der Benutzeroberfläche"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Show circles with fixed angular size around the telescope reticle"
-msgstr "Zeige Kreise mit festem Gesichtfeld um das Fadenkreuz des Teleskops"
+msgstr "Zeige Kreise mit festem Gesichtsfeld um das Fadenkreuz des Teleskops"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Use field of view indicators"
@@ -9548,8 +9552,8 @@ msgid ""
 msgstr ""
 "Normalerweise verwendet Stellarium weiches Zoomen mittels Mausrad oder "
 "Tasten. Manche Anwender bevorzugen schrittweises Zoomen auf feste Werte für "
-"das Gesichtfeld ähnlich wie im Programm Cartes du Ciel, und dieses Plugin "
-"bietet diese Möglichkeit. Die Gesichtfelder können konfiguriert und mittels "
+"das Gesichtsfeld ähnlich wie im Programm Cartes du Ciel, und dieses Plugin "
+"bietet diese Möglichkeit. Die Gesichtsfelder können konfiguriert und mittels "
 "Tastenkürzeln ausgewählt werden. Alle Werte in Grad."
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119

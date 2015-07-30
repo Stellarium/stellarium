@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:24+0600\n"
-"PO-Revision-Date: 2015-07-26 13:04+0000\n"
+"PO-Revision-Date: 2015-07-29 16:21+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-29 05:29+0000\n"
+"X-Launchpad-Export-Date: 2015-07-30 05:38+0000\n"
 "X-Generator: Launchpad (build 17646)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -68,15 +68,15 @@ msgstr "Меридіан"
 
 #: src/core/modules/GridLinesMgr.cpp:596
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Екліптика J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Екліптика дати"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Екватор J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator"
@@ -84,7 +84,7 @@ msgstr "Екватор"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Precession Circle"
-msgstr ""
+msgstr "Коло прецесії"
 
 #: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1439
 msgid "Horizon"
@@ -116,7 +116,7 @@ msgstr "Лінія екліптики"
 
 #: src/core/modules/GridLinesMgr.cpp:876
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Лінія екліптики J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -125,7 +125,7 @@ msgstr "Лінія екватора"
 
 #: src/core/modules/GridLinesMgr.cpp:878
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Лінія екватора J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -148,7 +148,7 @@ msgstr "Сітка екліптичних координат, J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Екліптична сітка"
 
 #: src/core/modules/GridLinesMgr.cpp:884 src/ui_viewDialog.h:1411
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -166,7 +166,7 @@ msgstr "Лінія довготи протистояння/сполучення"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Precession Circles"
-msgstr ""
+msgstr "Кола прецесії"
 
 #: src/core/modules/LandscapeMgr.cpp:414 src/ui_viewDialog.h:1336
 msgid "Atmosphere"
@@ -1335,7 +1335,7 @@ msgstr "Екліптична довгота/широта"
 
 #: src/core/StelObject.cpp:233 src/core/StelObject.cpp:235
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Відхилення екліптики"
 
 #: src/core/StelObject.cpp:244 src/core/StelObject.cpp:246
 #, qt-format
@@ -4557,101 +4557,104 @@ msgstr "Небесна сфера"
 
 #: src/ui_viewDialog.h:1389
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Екваторіальні координати J2000.0."
 
 #: src/ui_viewDialog.h:1391
 msgid "Equatorial grid (J2000)"
-msgstr ""
+msgstr "Екваторіальна сітка (J2000)"
 
 #: src/ui_viewDialog.h:1393
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Екваторіальні координати на поточну дати для поточної планети."
 
 #: src/ui_viewDialog.h:1395
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Екваторіальна сітка (дати)"
 
 #: src/ui_viewDialog.h:1397
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Екліптичні координати для J2000.0."
 
 #: src/ui_viewDialog.h:1399
 msgid "Ecliptic grid (J2000)"
-msgstr ""
+msgstr "Екліптична сітка (J2000)"
 
 #: src/ui_viewDialog.h:1401
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
+"Екліптичні координати для поточної дати. Може бути показано лише для Землі."
 
 #: src/ui_viewDialog.h:1403
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Екліптична сітка (дати)"
 
 #: src/ui_viewDialog.h:1405
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
+msgstr "Висоти і азимут (відлік від напрямку півночі на схід)"
 
 #: src/ui_viewDialog.h:1409
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Галактичні координати, система II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1413
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Мітки для напрямків румбів."
 
 #: src/ui_viewDialog.h:1417
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Кола, які викреслює земна вісь під час руху навколо екліптичних полюсів. "
+"Може бути показано лише на Землі."
 
 #: src/ui_viewDialog.h:1419
 msgid "Precession circles"
-msgstr ""
+msgstr "Кола прецесії"
 
 #: src/ui_viewDialog.h:1421
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "Показати небесний екватор для J2000.0."
 
 #: src/ui_viewDialog.h:1423
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "Екватор (J2000)"
 
 #: src/ui_viewDialog.h:1425
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Показати небесний екватор для поточної планети і поточної дати."
 
 #: src/ui_viewDialog.h:1427
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Екватор (дати)"
 
 #: src/ui_viewDialog.h:1429
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "Показати лінію екліптики J2000.0 (фундаментальна площина VSOP87A)."
 
 #: src/ui_viewDialog.h:1431
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "Екліптика (J2000)"
 
 #: src/ui_viewDialog.h:1433
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Показати лінію екліптики для поточної дати."
 
 #: src/ui_viewDialog.h:1435
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Екліптика (дати)"
 
 #: src/ui_viewDialog.h:1437
 msgid "Show horizon line."
-msgstr ""
+msgstr "Показати лінію горизонту."
 
 #: src/ui_viewDialog.h:1441
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Показати лінію галактичного екватора."
 
 #: src/ui_viewDialog.h:1445
 msgid "Show meridian line."
-msgstr ""
+msgstr "Показати лінію меридіана."
 
 #: src/ui_viewDialog.h:1449
 msgid ""
