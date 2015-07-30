@@ -232,8 +232,8 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 	QString src = StelFileMgr::getInstallationDir() + "/data/showers.json";
 
 	qDebug() << "MeteorShowersMgr: Trying to restore the default catalog";
-	qDebug() << "MeteorShowersMgr:    from" << QDir::toNativeSeparators(destination);
-	qDebug() << "MeteorShowersMgr:    to" << QDir::toNativeSeparators(src);
+	qDebug() << "MeteorShowersMgr:    from" << QDir::toNativeSeparators(src);
+	qDebug() << "MeteorShowersMgr:    to" << QDir::toNativeSeparators(destination);
 
 	QFile d(destination);
 	if (d.exists() && !d.remove())
