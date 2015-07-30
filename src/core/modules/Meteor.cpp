@@ -439,7 +439,8 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 	sPainter.enableClientStates(true, false, true);
 	if (thickness)
 	{
-		sPainter.setColorPointer(4, GL_FLOAT, m_trainColorArray.toVector().constData());
+		QVector<Vec4f> trainColorVector = m_trainColorArray.toVector();
+		sPainter.setColorPointer(4, GL_FLOAT, trainColorVector.constData());
 
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
 		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
@@ -450,7 +451,8 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayTop.constData());
 		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayTop.size(), 0, true);
 	}
-	sPainter.setColorPointer(4, GL_FLOAT, m_lineColorArray.toVector().constData());
+	QVector<Vec4f> lineColorVector = m_lineColorArray.toVector();
+	sPainter.setColorPointer(4, GL_FLOAT, lineColorVector.constData());
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
 
