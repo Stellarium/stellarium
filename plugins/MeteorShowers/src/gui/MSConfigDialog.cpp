@@ -52,7 +52,7 @@ void MSConfigDialog::createDialogContent()
 #ifdef Q_OS_WIN
 	// Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
-	addscroll << m_ui->listEvents << m_ui->aboutTextBrowser;
+	addscroll << m_ui->about;
 	installKineticScrolling(addscroll);
 #endif
 
