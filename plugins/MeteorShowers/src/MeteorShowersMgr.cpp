@@ -229,8 +229,11 @@ void MeteorShowersMgr::restoreDefaultSettings()
 
 bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 {
-	qDebug() << "MeteorShowersMgr: Trying to restore the default catalog to"
-		 << QDir::toNativeSeparators(destination);
+	QString src = StelFileMgr::getInstallationDir() + "/data/showers.json";
+
+	qDebug() << "MeteorShowersMgr: Trying to restore the default catalog";
+	qDebug() << "MeteorShowersMgr:    from" << QDir::toNativeSeparators(destination);
+	qDebug() << "MeteorShowersMgr:    to" << QDir::toNativeSeparators(src);
 
 	QFile d(destination);
 	if (d.exists() && !d.remove())
@@ -239,7 +242,7 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 		return false;
 	}
 
-	QFile defaultJson(":/MeteorShowers/showers.json");
+	QFile defaultJson(src);
 	if (!defaultJson.copy(destination))
 	{
 		qWarning() << "MeteorShowersMgr: Cannot copy the default catalog!";
