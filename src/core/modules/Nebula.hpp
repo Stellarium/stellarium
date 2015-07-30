@@ -79,6 +79,8 @@ public:
 	float getSurfaceBrightness(const StelCore* core) const;
 	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
 
+	void setProperName(QString name) { englishName = name; }
+
 private:
 	friend struct DrawNebulaFuncObject;
 	
