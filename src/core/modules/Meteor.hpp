@@ -71,8 +71,8 @@ public:
 	inline float absMag() { return m_absMag; }
 
 private:
-	//! Determine color arrays of line and prism used to draw meteor train.
-	void buildColorArrays(const QList<colorPair> colors);
+	//! Determine color vectors of line and prism used to draw meteor train.
+	void buildColorVectors(const QList<colorPair> colors);
 
 	//! get RGB from color name
 	Vec4f getColorFromName(QString colorName);
@@ -111,8 +111,8 @@ private:
 
 	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 	const int m_segments;           //! Number of segments along the train (useful to curve along projection distortions)
-	QList<Vec4f> m_trainColorArray;
-	QList<Vec4f> m_lineColorArray;
+	QVector<Vec4f> m_trainColorVector;
+	QVector<Vec4f> m_lineColorVector;
 };
 
 #endif // _METEOR_HPP_
