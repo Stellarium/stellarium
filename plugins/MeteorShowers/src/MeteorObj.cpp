@@ -37,7 +37,7 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 		// handle cases when the total intensity is less than 100
 		int totalIntensity = 0;
 		int indexWhite = -1;
-		for (int i=0; i<colors.size(); i++) {
+		for (int i=0; i < colors.size(); ++i) {
 			totalIntensity += colors.at(i).second;
 			if (colors.at(i).first == "white") {
 				indexWhite = i;
