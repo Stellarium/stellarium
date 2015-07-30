@@ -132,7 +132,7 @@ void MSConfigDialog::refreshUpdateTab()
 	{
 		msg = q_("Successfully updated!");
 	}
-	else if (s == MeteorShowersMgr::ERROR)
+	else if (s == MeteorShowersMgr::FAILED)
 	{
 		msg = q_("Failed!");
 	}
