@@ -262,7 +262,6 @@ private:
 	NebulaP searchUGC(unsigned int UGC);
 	NebulaP searchCed(QString Ced);
 	NebulaP searchPK(QString PK);
-	bool loadNGCNames(const QString& fileName);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

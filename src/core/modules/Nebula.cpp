@@ -93,14 +93,14 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
 
-	if (nameI18!="" && flags&Name)
+	if (!nameI18.isEmpty() && flags&Name)
 	{
 		oss << getNameI18n();
 	}
 
 	if (flags&CatalogNumber)
 	{
-		if (nameI18!="" && flags&Name)
+		if (!nameI18.isEmpty() && flags&Name)
 			oss << " (";
 
 		QStringList catIds;
@@ -138,7 +138,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("PK %1").arg(PK_nb);
 		oss << catIds.join(" - ");
 
-		if (nameI18!="" && flags&Name)
+		if (!nameI18.isEmpty() && flags&Name)
 			oss << ")";
 	}
 
@@ -154,7 +154,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			oss << q_("Type: <b>%1</b> (%2)").arg(getTypeString()).arg(mt) << "<br>";
 	}
 
-	if (vMag < 50 && flags&Magnitude)
+	if (vMag < 50.f && flags&Magnitude)
 	{
 		if (nType == NebDn)
 		{
@@ -168,6 +168,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			else
 				oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 		}
+	}
+	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
+	{
+		oss << q_("Magnitude: <b>%1</b>").arg(bMag, 0, 'f', 2)
+		    << q_(" (Photometric system: B)")
+		    << "<br>";
 	}
 	if (flags&Extra)
 	{
