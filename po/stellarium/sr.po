@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:24+0600\n"
-"PO-Revision-Date: 2015-07-28 23:16+0000\n"
+"PO-Revision-Date: 2015-07-29 18:37+0000\n"
 "Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-29 05:27+0000\n"
+"X-Launchpad-Export-Date: 2015-07-30 05:35+0000\n"
 "X-Generator: Launchpad (build 17646)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -6327,7 +6327,7 @@ msgstr "Координате ТЕМЕ (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:319
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr "Брзина ТЕМЕ (km/s): %1"
+msgstr "Брзина ТЕМЕ (километар/секунда): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
@@ -6336,7 +6336,7 @@ msgstr "Угао Сунчеве рефлексије : %1 %2"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
-msgstr "Сателит и посматрач су изложени сунчевој светлости."
+msgstr "Сателит и посматрач су изложени Сунчевој светлости."
 
 #: plugins/Satellites/src/Satellite.cpp:338
 msgid "The satellite is visible."
@@ -6382,8 +6382,8 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"Предвиђене позиције су само добре за релативно кратко време (поредак је "
-"дани, седмице или можда месец у прошлости и будућности). Очекујте велике "
+"Предвиђене позиције су само добре за релативно кратко време (поредак су "
+"дани, седмице или можда месец  који је прошао или долази). Очекуј велике "
 "необичности када се гледа датуме ван овог опсега."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:413
@@ -6391,7 +6391,7 @@ msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr ""
-"Орбитални елементи застаревају веома брзо ( за нешто више од седмице, или за "
+"Орбитални елементи застаревају веома брзо ( за нешто више од седмице или за "
 "пар дана). Да би добио/ла корисне податке,  потребно је редовно ажурирати "
 "\"TLE\" податке ."
 
@@ -6405,7 +6405,7 @@ msgid ""
 msgstr ""
 "Кликом  \"%1\" на дугме \"%2\" на картицу вратићеш на подразумевану %3 "
 "датотеку. Стара датотека ће бити сачувана као %4. Можеш је пронаћи у "
-"фасцикли с корисничким подацима, под \"modules/Satellites/\"."
+"фасцикли с корисничким подацима, под \"модули/сателити/\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 msgid ""
@@ -6418,7 +6418,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:425
 msgid "TLE data updates"
-msgstr "TLE ажурирање података"
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
 msgid ""
@@ -6426,9 +6426,6 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"Додатак за сателите може аутоматски преузети \"TLE\" податке са интернета, а "
-"по подразумеваним додатак ће то учинити ако су постојећи подаци старији од "
-"72 сата. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:427
 #, qt-format
@@ -6475,16 +6472,12 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
-"Позиције се рачунају помоћу SGP4 и SDP4 метода користећи се NORAD TLE  као "
-"улазни  подаци. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:436
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
-"Хосе Луис Каналес је написао код за прорачун орбите на основу исправљеног "
-"Spacetrack извештаја #3 (укључујући и Spacetrack извештај #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
@@ -6628,7 +6621,7 @@ msgstr "Нова група..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
 msgid "Select TLE Update File"
-msgstr "Изабери TLE датотеку за ажурирање"
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -6639,12 +6632,12 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"Stellarium преузима сателитске податке од извора ажурирања. Молим "
-"сачекајте..."
+"\"Stellarium\" преузима сателитске податке од извора ажурирања. Молим "
+"сачекај..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:168
 msgid "Select TLE source file(s)..."
-msgstr "Изабери TLE изворне датотеке..."
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:183
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:184
@@ -6655,7 +6648,7 @@ msgstr "Обрада података..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:238
 msgid "No data could be downloaded. Try again later."
-msgstr "Нема података за преузимање. Покушајте поново касније."
+msgstr "Нема података за преузимање. Покушај поново касније."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:371
 #, qt-format
@@ -6669,7 +6662,7 @@ msgstr "Подешавања сателита"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
-msgstr "Закрпе"
+msgstr "Ажурирање"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
@@ -6705,7 +6698,7 @@ msgstr "Учесталост ажурирања (сати):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "Label font size (pixels):"
-msgstr "Ознака величине словолика (тачкица) :"
+msgstr "Ознака величине слова (пиксели) :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Orbit lines"
@@ -6792,7 +6785,7 @@ msgstr "Орбита"
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr ""
-"Немојте да ажурирате (или бришете приликом ажурирања) означене сателите."
+"Немој да ажурираш (или бришеш  приликом ажурирања) означене сателите."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Do not update"
@@ -6809,7 +6802,7 @@ msgstr "Групе:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "TLE set:"
-msgstr "ТЛЕ сет"
+msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid ""
@@ -6845,7 +6838,7 @@ msgstr "Више сателита"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
-msgstr "Набавите податаке из извора за ажурирање"
+msgstr "Набави податаке из извора за ажурирање"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
@@ -6883,7 +6876,7 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Овај додатак омогућава Stellarium-у да пошаље \" мноштво \" команди "
+"Овај додатак омогућава \"Stellarium\"-у да пошаље \" мноштво \" команди "
 "телескопу  с компјутеризованим носачем (на \"GoTo телескоп\")."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
@@ -6966,9 +6959,9 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
-"Да померите повезани телескоп на неки објекат (нпр. звезду), изаберите "
+"Да помериш повезани телескоп на неки објекат (нпр. звезду), изаберите "
 "објекат, а затим држите тастер %1, и притисните тастер са бројем тог "
-"телескопа. Да извршите центрирање, држите тастер Alt и притисните тастер са "
+"телескопа. Да извршиш центрирање, држи тастер \"Alt\" и притисни тастер са "
 "бројем тог телескопа."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
@@ -6978,20 +6971,20 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
-"Није доступан опис модела уређаја. Stellarium не може самостално "
+"Није доступан опис модела уређаја. \"Stellarium\" не може самостално "
 "контролисати овај телескоп, али је то и даље могуће помоћу спољашње "
-"апликације или да се повежете на удаљени рачунар."
+"апликације или да се повежеш на удаљени рачунар."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr "Притисните дугме \"%1\" да подесите нову везу за телескоп."
+msgstr "Притисните дугме \"%1\" да подесиш нову везу за телескоп."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
 msgid "local, Stellarium"
-msgstr "локални, Stellarium"
+msgstr "локални, \"Stellarium\""
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:329
@@ -7043,7 +7036,7 @@ msgstr "Прекини везе са изабраног телескопа"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:799
 msgid "Select a directory"
-msgstr "Изаберите фасциклу"
+msgstr "Изабери фасциклу"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
@@ -7056,7 +7049,7 @@ msgstr "Деклинација (Ј2000)"
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:257
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:398
 msgid "Select one"
-msgstr "Изаберите један"
+msgstr "Изабери један"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
@@ -7092,7 +7085,7 @@ msgstr "Средина екрана"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
-msgstr "Формат: сати-минутi-секунде"
+msgstr "Формат: сати-минути-секунде"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
@@ -7104,7 +7097,7 @@ msgstr "Формат: степени-минути-секунде"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
-msgstr "&СМС"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
@@ -7136,11 +7129,11 @@ msgid ""
 "directly by Stellarium."
 msgstr ""
 "Телескоп је повезан са овим рачунаром преко серијског прикључка и "
-"контролисан је  од Stellarium-а"
+"контролисан је  од стране \"Stellarium\"-а"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
-msgstr "Stellarium, директно преко серијског прикључка"
+msgstr "\"Stellarium\", директно преко серијског прикључка"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid ""
@@ -7156,7 +7149,7 @@ msgstr "Спољни софтвер или удаљени рачунар"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "Ништа, само имитирај један (покретна мрежа)"
+msgstr "Ништа, само имитира један (покретна мрежа)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Telescope properties"
@@ -7172,7 +7165,7 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
-"Приближно време које је потребно за сигнале из телескопа до Stellarium.\n"
+"Приближно време које је потребно за сигнале из телескопа до \"Stellarium\".\n"
 "Повећај ову вредност ако мрежа врши прескакање."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
@@ -7189,7 +7182,7 @@ msgid ""
 "Stellarium starts"
 msgstr ""
 "Аутоматски покушај  покретање телескопа или успостави везу када се покрене "
-"Stellarium"
+"\"Stellarium\""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid "Start/connect at startup"
@@ -7234,7 +7227,7 @@ msgstr "Прикажи кругове са фиксном угаоном вел�
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Use field of view indicators"
-msgstr "Користите видно поље индикатора"
+msgstr "Користи видно поље индикатора"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Circle size(s):"
@@ -7322,7 +7315,7 @@ msgid ""
 "configuration file. Allows setting the time zone and changing the way the "
 "time and the date are displayed in the bottom bar."
 msgstr ""
-"Погодније сучеље за неке од нејасних могућности је у Stellarium-овој "
+"Погодније сучеље за неке од нејасних могућности је у \"Stellarium\"-овој "
 "конфигурацијској датотеци. Омогућава поставку временске зоне и промену "
 "начина приказивања датума и времена у доњој траци."
 
@@ -7468,7 +7461,7 @@ msgstr "Назив временске зоне:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid "Offset from UTC (hours):"
-msgstr "Одступање од UTC (сати):"
+msgstr "Одступање од УКВ (сати):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 msgid "Daylight saving time (summer time)"
@@ -7476,11 +7469,11 @@ msgstr "Летње рачунање времена"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:454
 msgid "DST timezone name:"
-msgstr "Назив DST временске зоне:"
+msgstr "Назив временске зоне за летње рачунање времена:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST offset from UTC (hours):"
-msgstr "DST одступање од UTC (сати):"
+msgstr "Одступање летњег рачунања времена од УКВ (сати):"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "Daylight saving time start"
@@ -7516,10 +7509,10 @@ msgid ""
 "This behaviour can be changed by changing Stellarium's global time zone "
 "settings."
 msgstr ""
-"По подразумеваној вредности, време приказује у  Stellarium-у се тумачи као "
-"локално време у временској зони система, а не у временској зони приказане у "
-"месту. Ово понашање се може мењати променом  Stellarium-ових глобалних "
-"подешавања временске зоне."
+"По подразумеваној вредности, време приказано у  \"Stellarium\"-у се тумачи "
+"као локално време у временској зони система, а не у временској зони "
+"приказано у месту. Ово понашање се може мењати променом  \"Stellarium\"-ових "
+"глобалних подешавања временске зоне."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
@@ -7527,11 +7520,11 @@ msgstr "Користи подешавања система (подразумев
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
-msgstr "Универзално координисано време (UTC)"
+msgstr "Универзално координисано време (УКВ)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:388
 msgid "(offset = local time - UTC time)"
-msgstr "(одступање = локално време - UTC време)"
+msgstr "(одступање = локално време - УКВ време)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "User-defined:"
@@ -7540,7 +7533,7 @@ msgstr "Корисник-одређен:"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
 msgstr ""
-"Све промене ће ступити на снагу када се следећи пут Stellarium покрене."
+"Све промене ће ступити на снагу када се следећи пут \"Stellarium\" покрене."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:393
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:404
@@ -7598,12 +7591,12 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Уметање додатка 0.9.x серије корисничког текста сучеља (TUI), коришћена у "
+"Уметање додатка 0.9.x серије корисничког текста сучеља (ТКИ), коришћена у "
 "планетаријумским системима"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
-msgstr "Тело сунчевог система"
+msgstr "Тело Сунчевог система"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
@@ -7715,7 +7708,7 @@ msgstr "Интензитет зодијачког светла"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
-msgstr "Учесталостозначене маглине:"
+msgstr "Учесталост означене маглине:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Zoom duration:"
@@ -7739,7 +7732,7 @@ msgstr "Заустави покренуту скрипту"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:498
 msgid "CD/DVD script"
-msgstr "ЦД/ДВД- скрипта"
+msgstr "КД/ДСД- скрипта"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:506
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:510
@@ -7760,16 +7753,16 @@ msgstr "Угаси"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
-msgstr "[нема чвора TUI]"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
-msgstr "Укљ."
+msgstr "Укључено"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:73
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:489
 msgid "Off"
-msgstr "Искљ."
+msgstr "Искључено"
 
 #: plugins/TextUserInterface/src/TuiNodeColor.cpp:109
 #, qt-format
@@ -7783,7 +7776,7 @@ msgstr " [ВРАТИ да бисте активирали]"
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 msgid "Solar System Editor"
-msgstr "Уређивач сунчевог система"
+msgstr "Уређивач Сунчевог система"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
 msgid ""
@@ -7791,14 +7784,14 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database. Still a work in progress."
 msgstr ""
-"Сучеље за додавања астероида и комета у Stellarium. Можете преузети из листе "
-"објеката и претражити листе објеката са веб странице - Центар за проучавање "
-"малих планета. Још је у фази израде."
+"Сучеље за додавања астероида и комета у \"Stellarium\". Можете преузети из "
+"листе објеката и претражити листе објеката са веб странице - Центар за "
+"проучавање малих планета. Још је у фази израде."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import orbital elements in MPC format..."
-msgstr "Увоз орбиталне елементе у MPC формату..."
+msgstr "Увоз орбиталне елементе у \"MPC\" формату..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:155
@@ -7828,8 +7821,8 @@ msgid ""
 msgstr ""
 "Комета <i>називи</i> морају имати префикс са %1 или %2. Ако буде постојало "
 "више резултата са тим именом, биће враћен само први резултат. На пример, ако "
-"тражите \"%3\", биће враћено %4, Халејева комета, али је претрага за \"%5\" "
-"вратиће астероид %6."
+"тражиш \"%3\", биће враћено %4, Халејева комета, али ако је претрага за "
+"\"%5\" вратиће астероид %6."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:207
 msgid "Select bookmark..."
@@ -7849,13 +7842,13 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
-"Податке о астероидима и кометама можете увести у форматима IAU Центар мањих "
+"Податке о астероидима и кометама можете увести у форматима МУА Центра мањих "
 "планета (%1). Можете увести датотеке с листама објеката, преузети такве "
-"листе са интернета или претражити  Comet Ephemeris servis (MPES)."
+"листе са интернета или претражити  \"Comet Ephemeris servis (MPES\")."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:112
 msgid "Solar System Editor plug-in"
-msgstr "Додатак \"Измени сунчеви систем\""
+msgstr "Додатак \"Измени Сунчеви систем\""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -7879,11 +7872,11 @@ msgstr "Изаберите извор са списка:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Or enter a URL:"
-msgstr "Или унесите УРЛ адресу :"
+msgstr "Или унесите URL  адресу :"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Add this URL to the bookmarks list"
-msgstr "Додај овај УРЛ на листу забелешки"
+msgstr "Додај овај URL на листу забелешки"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Bookmark title:"
@@ -7914,11 +7907,11 @@ msgid ""
 "Solar System configuration.<br/>Note that adding a large number of objects "
 "may cause Stellarium to run slowly."
 msgstr ""
-"Означите објекте које желите увести. Имена приказана <i>искошена</i> "
-"подударају са именима већ унетог објеката. Имена приказана <b>подебљана</b> "
-"подударају се се именима која су наслеђена из Stellarium-ове подразумеване "
-"конфигурације  Сунчевог система.<br/>Имајте на уму да додавање великог броја "
-"предмета, Stellarium ће радити споро."
+"Означи објекте које желиш увести. Имена приказана <i>искошена</i> подударају "
+"са именима већ унетог објекта. Имена приказана <b>подебљана</b> подударају "
+"се се именима која су наслеђена из \"Stellarium\"-ове подразумеване "
+"конфигурације  Сунчевог система.<br/>Имај на уму да додавањем великог броја "
+"предмета, \"Stellarium\" ће радити споро."
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Overwrite existing objects"
@@ -7930,7 +7923,7 @@ msgstr "Ажурирај постојеће објекате"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update only the orbital elements"
-msgstr "Ажурирајте само орбиталне елементе"
+msgstr "Ажурирај само орбиталне елементе"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Add objects"
@@ -7939,7 +7932,7 @@ msgstr "Додај објекте"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
 msgid "Solar System objects"
-msgstr "Објекти сунчевог система"
+msgstr "Објекти Сунчевог система"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:295
 msgid "Warning"
@@ -7952,15 +7945,14 @@ msgid ""
 "manually that file from:"
 msgstr ""
 "Овај додатак користи прилагођену конфигурацијску датотеку за Сунчев систем. "
-"Ако се деси нека грешка и Stellarium престане са радом и/или се не покрене, "
-"ту датотеку можете ручно обрисати у:"
+"Ако се деси нека грешка и \"Stellarium\" престане са радом и/или се не "
+"покрене, ту датотеку можеш ручно обрисати у:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
 "You can also reset all changes and return to the default configuration:"
 msgstr ""
-"Такође можете да поништите све промене и вратите се на подразумевана "
-"подешавања:"
+"Такође можеш да поништиш све промене и вратиш  на подразумевана подешавања:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid "Reset to defaults"
@@ -7968,23 +7960,23 @@ msgstr "Врати на подразумевано"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Copy/replace the Solar System file"
-msgstr "Умножи /замени датотеку сунчевог система"
+msgstr "Умножи /замени датотеку Сунчевог система"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:300
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
 msgstr ""
-"Можете направити причувну прилагођене конфигурацијске датотеке за Сунчев "
-"систем на неком другом месту или је заменити тим примерком."
+"Можете направити сигурносну копију прилагођену конфигурацији датотеке за "
+"Сунчев систем на неком другом месту или је заменити тим примерком."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid "Copy the Solar System file..."
-msgstr "Умножи датотеку сунчевог система..."
+msgstr "Умножи датотеку Сунчевог система..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Replace the Solar System file..."
-msgstr "Врати датотеку сунчевог система..."
+msgstr "Врати датотеку Сунчевог система..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Configuration file"
@@ -7992,7 +7984,7 @@ msgstr "Датотека подешавања"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:306
 msgid "Add new Solar System objects"
-msgstr "Додај нове објекте сунчевог система"
+msgstr "Додај нове објекте Сунчевог система"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:308
 msgid "Solar System"
@@ -8005,7 +7997,7 @@ msgstr "Историјат супернове"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr "Додатак Вам омогућава да видите неке сјајне историјске супернове."
+msgstr "Додатак ти омогућава да видиш неке сјајне историјске супернове."
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
@@ -8032,7 +8024,7 @@ msgstr "Додатак за историјске супернове"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
-"Овај додатак Вам омогућава да видите неке сјајне историјске супернове. "
+"Овај додатак ти омогућава да видиш неке сјајне историјске супернове. "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
@@ -8093,8 +8085,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
-"Уколико желите да прочитате потпуне информације о овом додатку, његовој "
-"историји и формату каталога, то можете %1урадити овде%2."
+"Уколико желиш да прочиташ потпуне информације о овом додатку, његовој "
+"историји и формату каталога, то можеш %1урадити овде%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:173
@@ -8172,12 +8164,12 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
-"Можете наћи нову помоћу опције за претраживање тако што ћете унети ознаку "
-"нове или уобичајено име (пример: 'Нова Цигни 1975' или 'В1500 Циг')"
+"Можеш наћи нову помоћу опције за претраживање тако што ћеш унети ознаку нове "
+"или уобичајено име (пример: 'Нова Цигни 1975' или 'В1500 Циг')"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
-msgstr "Овај додатак Вам омогућава да видите тренутне сјајне нове. "
+msgstr "Овај додатак ти омогућава да видиш тренутне сјајне нове. "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
@@ -8216,8 +8208,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
-"Уколико желите да прочитате потпуне информације о овом додатку, његовој "
-"историји и формату каталога, можете %1 погледати овде%2."
+"Уколико желиш да прочиташ потпуне информације о овом додатку, његовој "
+"историји и формату каталога, можеш %1 погледати овде%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
 msgid "Novae is updated"
@@ -8242,9 +8234,9 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
-"Додатак који приказује неке квазаре сјајније од 16 визуелне величине. "
-"Каталог квазара сакупљених из 'Квазари и активна галактичка језгра' (13. "
-"издање) (Верон+ 2010) =2010A&A...518A..10V"
+"Додатак који приказује неке квазаре сјајније од шеснаесте визуелне "
+"магнитуде. Каталог квазара сакупљених из 'Квазари и активна галактичка "
+"језгра' (13. издање) (Верон+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -8293,8 +8285,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
-"Уколико желите да прочитате потпуне информације о овом додатку, његовој "
-"историји и формату каталога, можете %1 погледати овде %2."
+"Уколико желиш да прочиташ потпуне информације о овом додатку, његовој "
+"историји и формату каталога, можеш %1 погледати овде %2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
 msgid "Quasars is updated"
@@ -8388,7 +8380,7 @@ msgstr "Мера расипања:"
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:190
 msgid "cm"
-msgstr "cm"
+msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:193
@@ -8420,7 +8412,7 @@ msgstr "Годишња паралакса је: %1 угаона мс"
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
-"Удаљеност обрачунава на основу модела густине електрона : %1 кпк (%2 св. г.)"
+"Удаљеност обрачунава на основу модела густине електрона : %1 kpc (%2 св. г.)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:220
 #, qt-format
@@ -8437,13 +8429,13 @@ msgstr "Просечно време густине флукса"
 #: plugins/Pulsars/src/Pulsar.cpp:229 plugins/Pulsars/src/Pulsar.cpp:241
 #: plugins/Pulsars/src/Pulsar.cpp:253
 msgid "MHz"
-msgstr "MHz"
+msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:232 plugins/Pulsars/src/Pulsar.cpp:244
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "mJy"
-msgstr "mJy"
+msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:260
 #, qt-format
@@ -8497,9 +8489,6 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
-"Подаци за пулсар су добијени из '' AНТФ пулсар каталог'' (Манчестер, Р. Н, "
-"Хобс, Г. Б, Теох, А. и Хобс, М, Астрон. Ј, 129,1993-2006 (2005) (%1 астро-"
-"пх/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
@@ -8513,7 +8502,7 @@ msgstr "Белешка"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr "Индетификатор пулсара има префикс 'PSR'"
+msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 msgid "Acknowledgment"
@@ -8588,7 +8577,7 @@ msgstr "Прикажи планете ван Сунчевог система"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Exoplanets configuration window"
-msgstr "Конфигурациони прозор за планете ван сунчевог система"
+msgstr "Конфигурациони прозор за планете ван Сунчевог система"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:851
@@ -8646,7 +8635,7 @@ msgstr "металичност"
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Mass"
-msgstr "Masa"
+msgstr "Маса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
@@ -8662,7 +8651,7 @@ msgstr "Полупречник"
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr "Ефективна температура: %1 K"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
@@ -8687,7 +8676,7 @@ msgstr "Велика полуоса"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "AU"
-msgstr "AU"
+msgstr "АЈ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Eccentricity"
@@ -8761,8 +8750,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
-"Уколико желите да прочитате пуне информације о овом додатку, његовој "
-"историји и формату каталога можете %1добити информације овде%2."
+"Уколико желиш да прочиташ пуне информације о овом додатку, његовој историји "
+"и формату каталога можеш %1добити информације овде%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 msgid "Potential habitable exoplanets"

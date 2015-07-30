@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:24+0600\n"
-"PO-Revision-Date: 2015-07-25 19:31+0000\n"
-"Last-Translator: _s4kura <adrianacmatac@gmail.com>\n"
+"PO-Revision-Date: 2015-07-29 06:54+0000\n"
+"Last-Translator: Emanuel Torres Clemente <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-29 05:28+0000\n"
+"X-Launchpad-Export-Date: 2015-07-30 05:36+0000\n"
 "X-Generator: Launchpad (build 17646)\n"
 "Language: es_ES\n"
 
@@ -65,15 +65,15 @@ msgstr "Meridiano"
 
 #: src/core/modules/GridLinesMgr.cpp:596
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Eclíptica de J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Eclíptica de Fecha"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Ecuador de J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator"
@@ -81,7 +81,7 @@ msgstr "Ecuador"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Precession Circle"
-msgstr ""
+msgstr "Circulo de Precesión"
 
 #: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1439
 msgid "Horizon"
@@ -113,7 +113,7 @@ msgstr "Linea de la Eclíptica"
 
 #: src/core/modules/GridLinesMgr.cpp:876
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Eclíptica J2000 linea"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -122,7 +122,7 @@ msgstr "Línea del Ecuador"
 
 #: src/core/modules/GridLinesMgr.cpp:878
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Ecuador J2000 linea"
 
 #: src/core/modules/GridLinesMgr.cpp:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -145,7 +145,7 @@ msgstr "Cuadrícula eclíptica J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Eclíptica  cuadricula"
 
 #: src/core/modules/GridLinesMgr.cpp:884 src/ui_viewDialog.h:1411
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -163,7 +163,7 @@ msgstr "Línea de longitud de oposición/conjunción"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Precession Circles"
-msgstr ""
+msgstr "Circulos de Precesión"
 
 #: src/core/modules/LandscapeMgr.cpp:414 src/ui_viewDialog.h:1336
 msgid "Atmosphere"
@@ -1321,7 +1321,7 @@ msgstr "Longitud/latitud eclíptica"
 
 #: src/core/StelObject.cpp:233 src/core/StelObject.cpp:235
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Oblicuidad Eclíptica"
 
 #: src/core/StelObject.cpp:244 src/core/StelObject.cpp:246
 #, qt-format
@@ -4546,7 +4546,7 @@ msgstr "Esfera celeste"
 
 #: src/ui_viewDialog.h:1389
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Coordenadas Ecuatoriales de J2000.0"
 
 #: src/ui_viewDialog.h:1391
 msgid "Equatorial grid (J2000)"
