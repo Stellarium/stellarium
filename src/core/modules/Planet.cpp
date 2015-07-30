@@ -24,7 +24,8 @@
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
-
+#include "planetsephems/precession.h"
+#include "StelObserver.hpp"
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
 #include "StelTextureMgr.hpp"
@@ -225,15 +226,21 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra)
-	{
-		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
-		if (core->getCurrentLocation().planetName=="Earth")
-			oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
-		//if (englishName!="Sun")
-		//	oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
-	}
+	// GZ This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
+	// TODO: maybe separate this out into:
+	//if (flags&EclipticCoordXYZ)
+	// For now: add to EclipticCoord
+	//if (flags&EclipticCoord)
+	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
+//	if (flags&Extra)
+//	{
+//		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+//		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
+//		if (core->getCurrentLocation().planetName=="Earth")
+//			oss << q_("Ecliptic obliquity (of date): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+//		//if (englishName!="Sun")
+//		//	oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
+//	}
 
 	if (flags&Distance)
 	{
@@ -277,6 +284,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	double siderealDay = getSiderealDay();
 	if (flags&Extra)
 	{
+		// This is a string you can activate for debugging. It shows the distance between observer and center of the body you are standing on.
+		// May be helpful for debugging critical parallax corrections for eclipses.
+		// For general use, find a better location first.
+		// oss << q_("Planetocentric distance &rho;: %1 (km)").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU) <<"<br>";
 		if (siderealPeriod>0)
 		{
 			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
@@ -291,7 +302,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << q_("The period of rotation is chaotic") << "<br>";
 			}
 		}
-		if (englishName.compare("Sun")!=0)
+		if (englishName != "Sun")
 		{
 			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
@@ -391,6 +402,10 @@ void Planet::computePositionWithoutOrbits(const double dateJD)
 	}
 }
 
+// return value in radians!
+// TODO: For earth, decide whether this should be Capitaine's omega_A (angle eclipticPoleJ2000//axis) or epsilon_A (angle axis//current ecliptic pole)
+// For now, it is epsilon_A, the angle between earth's rotational axis and mean ecliptic of date.
+// Details: e.g. Hilton etal, Report on Precession and the Ecliptic, Cel.Mech.Dyn.Astr.94:351-67 (2006), Fig1.
 double Planet::getRotObliquity(double JDay) const
 {
 	// JDay=2451545.0 for J2000.0
@@ -575,16 +590,36 @@ void Planet::computePosition(const double dateJD)
 
 }
 
-// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
+// Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
+// In case of the planets, this makes the axis point to the respective celestial pole.
+// TODO: Verify for the other planets if their axes are relative to J2000 ecliptic (VSOP87A XY plane) or relative to (precessed) ecliptic of date?
 void Planet::computeTransMatrix(double jd)
 {
+	// TODO: correct this for earth with the new model.
 	axisRotation = getSiderealTime(jd);
 
-	// Special case - heliocentric coordinates are on ecliptic,
+	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane),
 	// not solar equator...
+
 	if (parent)
 	{
-		rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
+		// We can inject a proper precession plus even nutation matrix in this stage, if available.
+		if (englishName=="Earth")
+		  {
+			// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
+			// GZ: We follow Capitaine's (2003) formulation P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o).
+			// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
+			// See also Hilton et al, Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006).
+			double eps_A, chi_A, omega_A, psi_A;
+			getPrecessionAnglesVondrak(jd, &eps_A, &chi_A, &omega_A, &psi_A);
+			// GZ This is the right combination for precession of the equator: Nodal rotation psi_A,
+			// then rotation by omega_A, the angle between EclPoleJ2000 and EarthPoleOfDate.
+			// The final rotation by chi_A rotates the equinox (zero degree).
+			// To achieve ecliptical coords of date, you just have now to add a rotX by epsilon_A (obliquity of date).
+			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A);
+		  }
+		else
+			rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
 	}
 }
 
@@ -615,8 +650,17 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 double Planet::getSiderealTime(double jd) const
 {
 	if (englishName=="Earth")
-	{
-		return get_apparent_sidereal_time(jd);
+	{	// GZ I wanted to be sure that nutation is just those ignorable few arcseconds.
+		//qDebug() << "Difference apparent-mean sidereal times (s): " << (get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd))* 240.0; // 1degree=4min=240s.
+		// TODO: Reactivate Nutation (but following IAU-2000A) after fixing JD_UT/JD_ET issues, then change this call back to apparent_sidereal_time.
+		//return get_apparent_sidereal_time(jd);
+		return get_mean_sidereal_time(jd);
+
+		// In the newer precession/nutation literature (starting around 2006) there are two sets of algorithms:
+		// "Classical" sidereal time (Greenwich hour angle GHA) and a solution based on Earth Rotational Angle ERA.
+		// We keep using the classical set, but make sure we are correct!
+
+
 	}
 
 	double t = jd - re.epoch;
@@ -1801,7 +1845,7 @@ void Planet::drawOrbit(const StelCore* core)
 	if (!re.siderealPeriod)
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEcliptic);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
 
 	StelPainter sPainter(prj);
 
@@ -1812,7 +1856,7 @@ void Planet::drawOrbit(const StelCore* core)
 	sPainter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], orbitFader.getInterstate());
 	Vec3d onscreen;
 	// special case - use current Planet position as center vertex so that draws
-	// on it's orbit all the time (since segmented rather than smooth curve)
+	// on its orbit all the time (since segmented rather than smooth curve)
 	Vec3d savePos = orbit[ORBIT_SEGMENTS/2];
 	orbit[ORBIT_SEGMENTS/2]=getHeliocentricEclipticPos();
 	orbit[ORBIT_SEGMENTS]=orbit[0];

@@ -18,6 +18,8 @@ Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
 */
 
 #include <math.h>
+#include <assert.h>
+#include "precession.h"
 
 #ifndef M_PI
 #define M_PI           3.14159265358979323846
@@ -44,7 +46,7 @@ double range_radians (double r)
 #define LN_NUTATION_EPOCH_THRESHOLD 0.1
 
 
-/* Nutation is a period oscillation of the Earths rotational axis around it's mean position.*/
+/* Nutation is a periodic oscillation of the Earth's rotational axis around its mean position.*/
 
 /*
  Contains Nutation in longitude, obliquity and ecliptic obliquity.
@@ -52,9 +54,9 @@ double range_radians (double r)
 */
 struct ln_nutation
 {
-	double longitude;	/*!< Nutation in longitude */
-	double obliquity;	/*!< Nutation in obliquity */
-	double ecliptic;	/*!< Obliquity of the ecliptic */
+	double deltaPsi;	/*!< DeltaPsi, Nutation in longitude */
+	double deltaEps;	/*!< DeltaEps, Nutation in obliquity */
+	double ecliptic;	/*!< epsilon, Mean Obliquity of the ecliptic */
 };
 
 struct nutation_arguments
@@ -215,6 +217,8 @@ static double c_JD = 0.0, c_longitude = 0.0, c_obliquity = 0.0, c_ecliptic = 0.0
 * Meeus, Astr. Alg. (1st ed., 1994), Chapter 21 pg 131-134 Using Table 21A */
 /* GZ: Changed: ecliptic obliquity used to be constant J2000.0. 
  * If you don't compute this, you may as well forget about nutation!
+ * 2015: Laskar's 1986 formula replaced by Vondrak 2011. c_ecliptic is now epsilon_A, Vondrak's obliquity of date.
+ * TODO: replace this whole function with Nutation IAU2000A or compatible version.
  */
 void get_nutation (double JD, struct ln_nutation * nutation)
 {
@@ -245,7 +249,7 @@ void get_nutation (double JD, struct ln_nutation * nutation)
 		F = 93.2719100 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.0;
 		O = 125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.0;
 
-		/ * GZotti: Laskar's formula, only valid for J2000+/-10000 years! */
+		/ * GZotti: Laskar's formula (1986), only valid for J2000+/-10000 years! */
 		if (fabs(T)<100) 
 		  {
 		    double U=T/100.0;	
@@ -322,25 +326,32 @@ void get_nutation (double JD, struct ln_nutation * nutation)
 	  }
 
 	/* return results */
-	nutation->longitude = c_longitude;
-	nutation->obliquity = c_obliquity;
+	nutation->deltaPsi = c_longitude;
+	nutation->deltaEps = c_obliquity;
 	nutation->ecliptic = c_ecliptic;
 }
 
-/* Calculate the mean sidereal time at the meridian of Greenwich of a given date.
- * returns apparent sidereal time (degree).
- * Formula 11.1, 11.4 pg 83 */
+/* Calculate the mean sidereal time at the meridian of Greenwich (GMST) of a given date.
+ * returns mean sidereal time (degrees).
+ * Formula 11.1, 11.4 pg 83
+ * MAKE SURE argument JD is UT, not TT!
+ */
 double get_mean_sidereal_time (double JD)
 {
 	double sidereal;
-	double T;
+	double T, T1;
     
-	T = (JD - 2451545.0) / 36525.0;
+
+	T1 = (JD - 2451545.0);
+	T= T1 * (1.0/ 36525.0);
         
 	/* calc mean angle */
-	sidereal = 280.46061837 + (360.98564736629 * (JD - 2451545.0)) + (0.000387933 * T * T) - (T * T * T / 38710000.0);
+	//sidereal = 280.46061837 + (360.98564736629 * (JD - 2451545.0)) + (0.000387933 * T * T) - (T * T * T / 38710000.0);
     
-	/* add a convenient multiple of 360 degrees */
+	sidereal = range_degrees(T1*360.98564736629); // Number gets large, better bring that to interval soon.
+	sidereal += (-1.0/38710000.0 * T + 0.000387933)*T*T+280.46061837;
+
+	/* add again a convenient multiple of 360 degrees */
 	sidereal = range_degrees (sidereal);
 
 	return sidereal;
@@ -348,13 +359,15 @@ double get_mean_sidereal_time (double JD)
 
 
 /* Calculate the apparent sidereal time at the meridian of Greenwich of a given date.
- * returns apparent sidereal time (degree).
+ * returns apparent sidereal time (degrees).
  * Formula 11.1, 11.4 pg 83 */
 double get_apparent_sidereal_time (double JD)
 {
 	double correction, sidereal;
 	struct ln_nutation nutation;
    
+	// GZ For now this is forbidden!
+	//assert(0);
 	/* get the mean sidereal time */
 	sidereal = get_mean_sidereal_time (JD);
         
@@ -363,23 +376,25 @@ double get_apparent_sidereal_time (double JD)
 	get_nutation (JD, &nutation);
     
 	/* GZ: This was the only place where this was used. I added the summation here. */
-	correction = (nutation.longitude * cos ((nutation.ecliptic+nutation.obliquity)*M_PI/180.));
+	correction = (nutation.deltaPsi * cos ((nutation.ecliptic+nutation.deltaEps)*M_PI/180.));
 
 	sidereal += correction;
    
 	return (sidereal);
 }
 
+// return value in degrees
 double get_mean_ecliptical_obliquity(double JDE)
 {
-	struct ln_nutation nutation;
-	get_nutation(JDE, &nutation);
-	return nutation.ecliptic;
+//	struct ln_nutation nutation;
+//	get_nutation(JDE, &nutation);
+//	return nutation.ecliptic;
+	return getPrecessionAngleVondrakEpsilon(JDE)*180.0/M_PI;
 }
 
 double get_nutation_longitude(double JDE)
 {
 	struct ln_nutation nutation;
 	get_nutation(JDE, &nutation);
-	return nutation.longitude;
+	return nutation.deltaPsi;
 }
