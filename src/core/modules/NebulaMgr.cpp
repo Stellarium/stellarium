@@ -742,22 +742,16 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 
 bool NebulaMgr::loadDSONames(const QString &filename)
 {
-	//qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO names";
-	return true;
-}
-
-bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
-{
-	qDebug() << "Loading NGC name data ...";
-	QFile ngcNameFile(catNGCNames);
-	if (!ngcNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	qDebug() << "Loading DSO name data ...";
+	QFile dsoNameFile(filename);
+	if (!dsoNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "NGC name data file" << QDir::toNativeSeparators(catNGCNames) << "not found.";
+		qWarning() << "DSO name data file" << QDir::toNativeSeparators(filename) << "not found.";
 		return false;
 	}
 
 	// Read the names of the NGC objects
-	QString name, record, ref;
+	QString name, record, ref, cdes;
 	int totalRecords=0;
 	int lineNumber=0;
 	int readOk=0;
@@ -765,155 +759,93 @@ bool NebulaMgr::loadNGCNames(const QString& catNGCNames)
 	NebulaP e;
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	QRegExp transRx("_[(]\"(.*)\"[)]");
-	while (!ngcNameFile.atEnd())
+	while (!dsoNameFile.atEnd())
 	{
-		record = QString::fromUtf8(ngcNameFile.readLine());
+		record = QString::fromUtf8(dsoNameFile.readLine());
 		lineNumber++;
 		if (commentRx.exactMatch(record))
 			continue;
 
 		totalRecords++;
-		nb = record.mid(38,4).toInt();
-		if (record[37] == 'I')
-		{
-			e = searchIC(nb);
-			ref = "IC ";
-		}
-		else if (record[37] == 'B')
-		{
-			e = searchB(nb);
-			ref = "B";
-		}
-		else if (record[37] == 'S')
-		{
-			e = searchSh2(nb);
-			ref = "Sh 2-";
-		}
-		else if (record[37] == 'V')
-		{
-			e = searchVdB(nb);
-			ref = "VdB ";
-		}
-		else if (record[37] == 'R')
-		{
-			e = searchRCW(nb);
-			ref = "RCW ";
-		}
-		else if (record[37] == 'D')
-		{
-			e = searchLDN(nb);
-			ref = "LDN ";
-		}
-		else if (record[37] == 'L')
-		{
-			e = searchLBN(nb);
-			ref = "LBN ";
-		}
-		else
-		{
-			e = searchNGC(nb);
-			ref = "NGC ";
-		}
 
+		ref  = record.left(4).trimmed();
+		cdes = record.mid(5, 10).trimmed().toUpper();
 		// get name, trimmed of whitespace
-		name = record.left(36).trimmed();
+		name = record.mid(20).trimmed();
+
+		nb = cdes.toInt();
+
+		QStringList catalogs;
+		catalogs << "IC" << "M" << "C" << "Cr" << "Mel" << "B" << "Sh 2-" << "VdB" << "RCW" << "LDN" << "LBN"
+			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK";
+
+		switch (catalogs.indexOf(ref.toUpper()))
+		{
+			case 0:
+				e = searchIC(nb);
+				break;
+			case 1:
+				e = searchM(nb);
+				break;
+			case 2:
+				e = searchC(nb);
+				break;
+			case 3:
+				e = searchCr(nb);
+				break;
+			case 4:
+				e = searchMel(nb);
+				break;
+			case 5:
+				e = searchB(nb);
+				break;
+			case 6:
+				e = searchSh2(nb);
+				break;
+			case 7:
+				e = searchVdB(nb);
+				break;
+			case 8:
+				e = searchRCW(nb);
+				break;
+			case 9:
+				e = searchLDN(nb);
+				break;
+			case 10:
+				e = searchLBN(nb);
+				break;
+			case 11:
+				e = searchNGC(nb);
+				break;
+			case 12:
+				e = searchPGC(nb);
+				break;
+			case 13:
+				e = searchUGC(nb);
+				break;
+			case 14:
+				e = searchCed(cdes);
+				break;
+			case 15:
+				e = searchPK(cdes);
+				break;
+			default:
+				e = searchDSO(nb);
+				break;
+		}
 
 		if (e)
 		{
-			// If the name is not a messier number perhaps one is already
-			// defined for this object
-			if (name.left(2).toUpper() != "M " && name.left(2).toUpper() != "C " && name.left(2).toUpper() != "CR" && name.left(2).toUpper() != "ME")
-			{
-				if (transRx.exactMatch(name)) {
-					e->englishName = transRx.capturedTexts().at(1).trimmed();
-				}
-				 else 
-				{
-					e->englishName = name;
-				}
-			}			
-			else if (name.left(2).toUpper() == "M ")
-			{
-				// If it's a Messier number, we will call it a Messier if there is no better name
-				name = name.mid(2); // remove "M "
+			if (transRx.exactMatch(name))
+				e->setProperName(transRx.capturedTexts().at(1).trimmed());
 
-				// read the Messier number
-				QTextStream istr(&name);
-				int num;
-				istr >> num;
-				if (istr.status()!=QTextStream::Ok)
-				{
-					qWarning() << "cannot read Messier number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
-					continue;
-				}
-
-				e->M_nb=(unsigned int)(num);
-				e->englishName = QString("M%1").arg(num);
-			}
-			else if (name.left(2).toUpper() == "C ")
-			{
-				// If it's a Caldwell number, we will call it a Caldwell if there is no better name
-				name = name.mid(2); // remove "C "
-
-				// read the Caldwell number
-				QTextStream istr(&name);
-				int num;
-				istr >> num;
-				if (istr.status()!=QTextStream::Ok)
-				{
-					qWarning() << "cannot read Caldwell number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
-					continue;
-				}
-
-				e->C_nb=(unsigned int)(num);
-				e->englishName = QString("C%1").arg(num);
-			}			
-			else if (name.left(2).toUpper() == "CR")
-			{
-				// If it's a Collinder number, we will call it a Messier if there is no better name
-				name = name.mid(2); // remove "Cr"
-
-				// read the Collinder number
-				QTextStream istr(&name);
-				int num;
-				istr >> num;
-				if (istr.status()!=QTextStream::Ok)
-				{
-					qWarning() << "cannot read Collinder number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
-					continue;
-				}
-
-				e->Cr_nb=(unsigned int)(num);
-				if (e->englishName.isEmpty())
-					e->englishName = QString("%1%2").arg(ref).arg(nb);
-			}
-			else if (name.left(2).toUpper() == "ME")
-			{
-				// If it's a Melotte number, we will call it a Messier if there is no better name
-				name = name.mid(2); // remove "Me"
-
-				// read the Melotte number
-				QTextStream istr(&name);
-				int num;
-				istr >> num;
-				if (istr.status()!=QTextStream::Ok)
-				{
-					qWarning() << "cannot read Melotte number at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
-					continue;
-				}
-
-				e->Mel_nb=(unsigned int)(num);
-				if (e->englishName.isEmpty())
-					e->englishName = QString("%1%2").arg(ref).arg(nb);
-			}
-			readOk++;			
+			readOk++;
 		}
 		else
-			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(catNGCNames);
+			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(filename);
 	}
-	ngcNameFile.close();
-	qDebug() << "Loaded" << readOk << "/" << totalRecords << "NGC name records successfully";
-
+	dsoNameFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
 	return true;
 }
 
