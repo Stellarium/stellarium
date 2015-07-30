@@ -61,6 +61,13 @@ void MSSearchDialog::createDialogContent()
 {
 	m_ui->setupUi(dialog);
 
+#ifdef Q_OS_WIN
+	// Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << m_ui->listEvents;
+	installKineticScrolling(addscroll);
+#endif
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
