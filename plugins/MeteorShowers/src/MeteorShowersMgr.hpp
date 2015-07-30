@@ -61,7 +61,7 @@ public:
 		OUTDATED,
 		UPDATING,
 		UPDATED,
-		ERROR
+		FAILED
 	};
 
 	//! Constructor.
