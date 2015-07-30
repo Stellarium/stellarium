@@ -129,8 +129,8 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 
 	m_firstBrightSegment = m_segments * ((float) qrand() / ((float) RAND_MAX + 1));
 
-	// build the color arrays
-	buildColorArrays(colors);
+	// build the color vector
+	buildColorVectors(colors);
 
 	m_alive = true;
 }
@@ -243,8 +243,10 @@ Vec4f Meteor::getColorFromName(QString colorName)
 	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
 }
 
-void Meteor::buildColorArrays(const QList<colorPair> colors)
+void Meteor::buildColorVectors(const QList<colorPair> colors)
 {
+	QList<Vec4f> lineColor;
+	QList<Vec4f> trainColor;
 	// building color arrays (line and prism)
 	int totalOfSegments = 0;
 	int currentSegment = 1 + (m_segments - 1) * ((float) qrand() / ((float) RAND_MAX + 1));
@@ -262,8 +264,8 @@ void Meteor::buildColorArrays(const QList<colorPair> colors)
 		totalOfSegments += numOfSegments;
 		for (int i=0; i<numOfSegments; i++)
 		{
-			m_lineColorArray.insert(currentSegment, getColorFromName(currentColor.first));
-			m_trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
+			lineColor.insert(currentSegment, getColorFromName(currentColor.first));
+			trainColor.insert(currentSegment, getColorFromName(currentColor.first));
 			if (currentSegment >= m_segments-1)
 			{
 				currentSegment = 0;
@@ -272,9 +274,11 @@ void Meteor::buildColorArrays(const QList<colorPair> colors)
 			{
 				currentSegment++;
 			}
-			m_trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
+			trainColor.insert(currentSegment, getColorFromName(currentColor.first));
 		}
 	}
+	m_lineColorVector = lineColor.toVector();
+	m_trainColorVector = trainColor.toVector();
 }
 
 float Meteor::meteorDistance(float zenithAngle, float altitude)
@@ -378,7 +382,7 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float
 
 void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float& thickness)
 {
-	if (m_segments != m_lineColorArray.size() || 2*m_segments != m_trainColorArray.size())
+	if (m_segments != m_lineColorVector.size() || 2*m_segments != m_trainColorVector.size())
 	{
 		qWarning() << "Meteor: color arrays have an inconsistent size!";
 		return;
@@ -429,9 +433,9 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 		vertexArrayR.push_back(radiantToAltAz(posi));
 		vertexArrayTop.push_back(radiantToAltAz(posi));
 
-		m_lineColorArray[i][3] = mag;
-		m_trainColorArray[i*2][3] = mag;
-		m_trainColorArray[i*2+1][3] = mag;
+		m_lineColorVector[i][3] = mag;
+		m_trainColorVector[i*2][3] = mag;
+		m_trainColorVector[i*2+1][3] = mag;
 	}
 
 	glEnable(GL_BLEND);
@@ -439,8 +443,7 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 	sPainter.enableClientStates(true, false, true);
 	if (thickness)
 	{
-		QVector<Vec4f> trainColorVector = m_trainColorArray.toVector();
-		sPainter.setColorPointer(4, GL_FLOAT, trainColorVector.constData());
+		sPainter.setColorPointer(4, GL_FLOAT, m_trainColorVector.constData());
 
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
 		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
@@ -451,8 +454,7 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float&
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayTop.constData());
 		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayTop.size(), 0, true);
 	}
-	QVector<Vec4f> lineColorVector = m_lineColorArray.toVector();
-	sPainter.setColorPointer(4, GL_FLOAT, lineColorVector.constData());
+	sPainter.setColorPointer(4, GL_FLOAT, m_lineColorVector.constData());
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
 
