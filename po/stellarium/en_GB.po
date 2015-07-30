@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:24+0600\n"
-"PO-Revision-Date: 2015-07-27 10:04+0000\n"
+"PO-Revision-Date: 2015-07-29 11:46+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-29 05:31+0000\n"
+"X-Launchpad-Export-Date: 2015-07-30 05:39+0000\n"
 "X-Generator: Launchpad (build 17646)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -62,15 +62,15 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:596
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Ecliptic of J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Ecliptic of Date"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Equator of J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator"
@@ -78,7 +78,7 @@ msgstr "Equator"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Precession Circle"
-msgstr ""
+msgstr "Precession Circle"
 
 #: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1439
 msgid "Horizon"
@@ -110,7 +110,7 @@ msgstr "Ecliptic line"
 
 #: src/core/modules/GridLinesMgr.cpp:876
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Ecliptic J2000 line"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -119,7 +119,7 @@ msgstr "Equator line"
 
 #: src/core/modules/GridLinesMgr.cpp:878
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Equator J2000 line"
 
 #: src/core/modules/GridLinesMgr.cpp:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -142,7 +142,7 @@ msgstr "Ecliptic J2000 grid"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Ecliptic grid"
 
 #: src/core/modules/GridLinesMgr.cpp:884 src/ui_viewDialog.h:1411
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -160,7 +160,7 @@ msgstr "Opposition/conjunction longitude line"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Precession Circles"
-msgstr ""
+msgstr "Precession Circles"
 
 #: src/core/modules/LandscapeMgr.cpp:414 src/ui_viewDialog.h:1336
 msgid "Atmosphere"
@@ -1309,7 +1309,7 @@ msgstr "Ecliptic longitude/latitude"
 
 #: src/core/StelObject.cpp:233 src/core/StelObject.cpp:235
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Ecliptic obliquity"
 
 #: src/core/StelObject.cpp:244 src/core/StelObject.cpp:246
 #, qt-format
@@ -4513,101 +4513,103 @@ msgstr "Celestial Sphere"
 
 #: src/ui_viewDialog.h:1389
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Equatorial coordinates of J2000.0."
 
 #: src/ui_viewDialog.h:1391
 msgid "Equatorial grid (J2000)"
-msgstr ""
+msgstr "Equatorial grid (J2000)"
 
 #: src/ui_viewDialog.h:1393
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Equatorial coordinates of current date and planet."
 
 #: src/ui_viewDialog.h:1395
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Equatorial grid (of date)"
 
 #: src/ui_viewDialog.h:1397
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Ecliptical coordinates for J2000.0."
 
 #: src/ui_viewDialog.h:1399
 msgid "Ecliptic grid (J2000)"
-msgstr ""
+msgstr "Ecliptic grid (J2000)"
 
 #: src/ui_viewDialog.h:1401
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr ""
+msgstr "Ecliptical coordinates for current date. Displayed on Earth only."
 
 #: src/ui_viewDialog.h:1403
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Ecliptic grid (of date)"
 
 #: src/ui_viewDialog.h:1405
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
+msgstr "Altitudes and azimuth (counted from North towards East)."
 
 #: src/ui_viewDialog.h:1409
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Galactic Coordinates, System II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1413
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Labels for the Cardinal directions."
 
 #: src/ui_viewDialog.h:1417
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Instantaneous circles of Earth's axis on its motion around ecliptical poles. "
+"Displayed on Earth only."
 
 #: src/ui_viewDialog.h:1419
 msgid "Precession circles"
-msgstr ""
+msgstr "Precession circles"
 
 #: src/ui_viewDialog.h:1421
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "Show celestial equator of J2000.0."
 
 #: src/ui_viewDialog.h:1423
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "Equator (J2000)"
 
 #: src/ui_viewDialog.h:1425
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Show celestial equator of current planet and date."
 
 #: src/ui_viewDialog.h:1427
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Equator (of date)"
 
 #: src/ui_viewDialog.h:1429
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 
 #: src/ui_viewDialog.h:1431
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "Ecliptic (J2000)"
 
 #: src/ui_viewDialog.h:1433
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Show ecliptic line of current date."
 
 #: src/ui_viewDialog.h:1435
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Ecliptic (of date)"
 
 #: src/ui_viewDialog.h:1437
 msgid "Show horizon line."
-msgstr ""
+msgstr "Show horizon line."
 
 #: src/ui_viewDialog.h:1441
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Show Galactic equator line."
 
 #: src/ui_viewDialog.h:1445
 msgid "Show meridian line."
-msgstr ""
+msgstr "Show meridian line."
 
 #: src/ui_viewDialog.h:1449
 msgid ""
