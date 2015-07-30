@@ -63,8 +63,6 @@ private slots:
 	void newImportManual();
 	void resetImportManual(bool);
 
-	void repaintSolarSystemList();
-
 private:
 	MpcImportWindow* mpcImportWindow;
 	ManualImportWindow * manualImportWindow;
