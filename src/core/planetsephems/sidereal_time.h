@@ -28,8 +28,8 @@ extern "C" {
 /* Calculate mean sidereal time from date. */
 double get_mean_sidereal_time (double JD);
 
-/* Calculate apparent sidereal time from date.*/
-double get_apparent_sidereal_time (double JD);
+/* Calculate apparent sidereal time from date. We need JD(UT) and JDE(TT) here to accurately compute nutation. */
+double get_apparent_sidereal_time (double JD, double JDE);
 /* Calculate mean ecliptical obliquity in degrees. */
 double get_mean_ecliptical_obliquity(double JDE);
 /* Calculate nutation in longitude in degrees. */

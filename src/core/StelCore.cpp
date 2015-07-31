@@ -65,7 +65,8 @@ StelCore::StelCore()
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(NULL)
 	, timeSpeed(JD_SECOND)
-	, JDay(0.)
+//	, JDay(0.)
+	, JD(0.,0.)
 	, presetSkyTime(0.)
 	, secondsOfLastJDayUpdate(0.)
 	, JDayOfLastJDayUpdate(0.)
@@ -173,7 +174,7 @@ void StelCore::init()
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
 	startupTimeMode = conf->value("navigation/startup_time_mode", "actual").toString().toLower();
 	if (startupTimeMode=="preset")	
-		setJDay(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
+		setJD(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
 
@@ -752,7 +753,7 @@ StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(Refrac
 // called in update() (for every frame)
 void StelCore::updateTransformMatrices()
 {
-	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(JDay);
+	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(getJD(), getJDE());
 	matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
 
 	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
@@ -851,26 +852,40 @@ void StelCore::returnToHome()
 	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
-void StelCore::setJDay(double JD)
+void StelCore::setJD(double newJD)
 {
-	JDay=JD;
+	JD.first=newJD;
+	JD.second=computeDeltaT(newJD);
 	resetSync();
 }
 
-double StelCore::getJDay() const
+double StelCore::getJD() const
 {
-	return JDay;
+	return JD.first;
 }
+
+void StelCore::setJDE(double newJDE)
+{
+	// nitpickerish this is not exact, but as good as it gets...
+	JD.second=computeDeltaT(newJDE);
+	JD.first=newJDE-JD.second/86400.0;
+	resetSync();
+}
+
+double StelCore::getJDE() const
+{
+	return JD.first+JD.second/86400.0;
+}
+
 
 void StelCore::setMJDay(double MJD)
 {
-	JDay=MJD+2400000.5;
-	resetSync();
+	setJD(MJD+2400000.5);
 }
 
 double StelCore::getMJDay() const
 {
-	return JDay-2400000.5;
+	return JD.first-2400000.5;
 }
 
 double StelCore::getPresetSkyTime() const
@@ -981,7 +996,9 @@ void StelCore::setTimeNow()
 {
 	double JD = StelUtils::getJDFromSystem();
 	// add Delta-T correction for actual time
-	setJDay(JD+getDeltaT(JD)/86400);
+	//setJDay(JD+getDeltaT(JD)/86400);
+	// GZ JDfix for 0.14. : No more!
+	setJD(JD);
 }
 
 void StelCore::setTodayTime(const QTime& target)
@@ -992,7 +1009,9 @@ void StelCore::setTodayTime(const QTime& target)
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
 		double JD = StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR);
-		setJDay(JD + getDeltaT(JD)/86400);
+		// GZ JDfix for 0.14: no more!
+		//setJDay(JD + getDeltaT(JD)/86400);
+		setJD(JD);
 	}
 	else
 	{
@@ -1005,12 +1024,16 @@ void StelCore::setTodayTime(const QTime& target)
 bool StelCore::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
-	static double lastJD = getJDay();
-	static bool previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
-	if (fabs(lastJD-getJDay())>JD_SECOND/4)
+	// GZ JDfix: DeltaT confusing stuff removed, our JD is UT now.
+	//static double lastJD = getJDay();
+	//static bool previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
+	static double lastJD = getJD();
+	static bool previousResult = (fabs(getJD()-(StelUtils::getJDFromSystem()))<JD_SECOND);
+	if (fabs(lastJD-getJD())>JD_SECOND/4)
 	{
-		lastJD = getJDay();
-		previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
+		lastJD = getJD();
+		//previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
+		previousResult = (fabs(getJD()-(StelUtils::getJDFromSystem()))<JD_SECOND);
 	}
 	return previousResult;
 }
@@ -1020,14 +1043,14 @@ QTime StelCore::getInitTodayTime(void)
 	return initTodayTime;
 }
 
-void StelCore::setInitTodayTime(const QTime& t)
+void StelCore::setInitTodayTime(const QTime& time)
 {
-	initTodayTime=t;
+	initTodayTime=time;
 }
 
-void StelCore::setPresetSkyTime(QDateTime dt)
+void StelCore::setPresetSkyTime(QDateTime dateTime)
 {
-	setPresetSkyTime(StelUtils::qDateTimeToJd(dt));
+	setPresetSkyTime(StelUtils::qDateTimeToJd(dateTime));
 }
 
 void StelCore::addHour()
@@ -1176,7 +1199,7 @@ void StelCore::addSolarDays(double d)
 	if (home->getEnglishName() != "Solar System Observer")	
 		d *= home->getMeanSolarDay();
 
-	setJDay(getJDay() + d);
+	setJD(getJD() + d);
 }
 
 void StelCore::addSiderealDays(double d)
@@ -1184,13 +1207,14 @@ void StelCore::addSiderealDays(double d)
 	const PlanetP& home = position->getHomePlanet();
 	if (home->getEnglishName() != "Solar System Observer")
 		d *= home->getSiderealDay();
-	setJDay(getJDay() + d);
+	setJD(getJD() + d);
 }
 
 // Get the sidereal time shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
-	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
+	// GZ JDFix: On Earth, this requires UT, on other planets we use TT
+	return (position->getHomePlanet()->getSiderealTime(getJD(), getJDE())+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
 //! Get the duration of a sidereal day for the current observer in day.
@@ -1279,16 +1303,22 @@ void StelCore::updateTime(double deltaTime)
 	if (getRealTimeSpeed())
 	{
 		// Get rid of the error from the 1 /
-		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
+		// JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
+		// GZ I don't understand the comment. Is the constant wrong?
+		JD.first = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * JD_SECOND;
 	}
 	else
 	{
-		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
+		//JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
+		JD.first = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
 	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
-	if (JDay>38245309.499988) JDay = 38245309.499988;
-	if (JDay<-34803211.500012) JDay = -34803211.500012;
+	//if (JDay>38245309.499988) JDay = 38245309.499988;
+	//if (JDay<-34803211.500012) JDay = -34803211.500012;
+	if (JD.first>38245309.499988) JD.first = 38245309.499988;
+	if (JD.first<-34803211.500012) JD.first = -34803211.500012;
+	JD.second=computeDeltaT(JD.first);
 
 	if (position->isObserverLifeOver())
 	{
@@ -1309,12 +1339,13 @@ void StelCore::updateTime(double deltaTime)
 	// GZ maybe setting this static can speedup a bit?
 	static SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	// Likely the only location where we need JDE:
-	solsystem->computePositions(getJDay(), position->getHomePlanet()->getHeliocentricEclipticPos());
+	//solsystem->computePositions(getJDay(), position->getHomePlanet()->getHeliocentricEclipticPos());
+	solsystem->computePositions(getJDE(), position->getHomePlanet()->getHeliocentricEclipticPos());
 }
 
 void StelCore::resetSync()
 {
-	JDayOfLastJDayUpdate = getJDay();
+	JDayOfLastJDayUpdate = getJD();
 	secondsOfLastJDayUpdate = StelApp::getTotalRunTime();
 }
 
@@ -1323,7 +1354,15 @@ void StelCore::setStartupTimeMode(const QString& s)
 	startupTimeMode = s;
 }
 
-double StelCore::getDeltaT(const double jDay) const
+// return precomputed DeltaT in seconds. Public.
+double StelCore::getDeltaT() const
+{
+	return JD.second;
+}
+
+
+// compute and return DeltaT in seconds. Try not to call it directly, current DeltaT, JD, and JDE are available.
+double StelCore::computeDeltaT(const double jDay) const
 {
 	double DeltaT = 0.;
 	double ndot = 0.;
@@ -1464,6 +1503,13 @@ double StelCore::getDeltaT(const double jDay) const
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
 			ndot = -25.858; // n.dot = -25.858 "/cy/cy
+			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
+			break;
+		case EspenakMeeusZeroMoonAccel:
+			// This is a trying area. Something is wrong with DeltaT, maybe ndot is still not applied correctly.
+			// Espenak & Meeus (2006) algorithm for DeltaT
+			ndot = -25.858; // n.dot = -25.858 "/cy/cy
+			dontUseMoon = true;
 			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
 			break;
 		case Banjevic:
@@ -1609,6 +1655,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case EspenakMeeus: // GENERAL SOLUTION
 			description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
 			break;
+		case EspenakMeeusZeroMoonAccel: // PATCHED SOLUTION
+			description = q_("PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION. This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append("</em>");
+			break;
 		case Banjevic:
 			description = q_("This solution by B. Banjevic, based on Stephenson & Morrison (1984), was published in article <em>Ancient eclipses and dating the fall of Babylon</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2006POBeo..80..251B'>2006</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
@@ -1746,6 +1795,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double jD
 			finish	= 1100; // not 1620; // GZ: Not applicable for telescopic era, and better not after 1100 (pers.comm.)
 			break;
 		case EspenakMeeus: // the default, range stated in the Canon, p. 14.
+		case EspenakMeeusZeroMoonAccel:
 			start	= -1999;
 			finish	= 3000;
 			break;
@@ -1793,5 +1843,5 @@ bool StelCore::isBrightDaylight() const
 
 double StelCore::getCurrentEpoch() const
 {
-	return 2000.0 + (getJDay() - 2451545.0)/365.25;
+	return 2000.0 + (getJD() - 2451545.0)/365.25;
 }

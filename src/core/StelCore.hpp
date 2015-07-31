@@ -125,6 +125,7 @@ public:
 		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
 		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
+		EspenakMeeusZeroMoonAccel,      //!< Espenak & Meeus (2006) algorithm for DeltaT (but without additional Lunar acceleration. FOR TESTING ONLY, NONPUBLIC)
 		Banjevic,			//!< Banjevic (2006) algorithm for DeltaT
 		IslamSadiqQureshi,		//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 		KhalidSultanaZaidi,		//!< M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
@@ -292,12 +293,6 @@ public:
 	QString getStartupTimeMode();
 	void setStartupTimeMode(const QString& s);
 
-	//! Get Delta-T estimation for a given date.
-	//! @param jDay the date and time expressed as a julian day
-	//! @return Delta-T in seconds
-	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
-	double getDeltaT(const double jDay) const;
-
 	//! Get info about valid range for current algorithm for calculation of Delta-T
 	//! @param jDay the JD
 	//! @param marker receives a string: "*" if jDay is outside valid range, or "?" if range unknown, else an empty string.
@@ -369,15 +364,44 @@ public slots:
 	//! Return to the default location and set default landscape with atmosphere and fog effects
 	void returnToHome();
 
-	//! Set the current date in Julian Day
-	void setJDay(double JD);
-	//! Get the current date in Julian Day
-	double getJDay() const;
+	// GZ: I THROW THOSE AWAY EXPLICITLY TO NEVER CALL THEM WITH THESE NAMES AGAIN!
+	//! Set the current date in Julian Day (UT)
+	//void setJDay(double JD);
+	void setJD(double newJD);
+	//! Set the current date in Julian Day (TT).
+	//! The name is derived from the classical name "Ephemeris Time", of which TT is the successor.
+	//! It is still frequently used in the literature.
+	void setJDE(double newJDE);
+	//! Get the current date in Julian Day (UT).
+	//double getJDay() const;
+	double getJD() const;
+	//! Get the current date in Julian Day (TT).
+	//! The name is derived from the classical name "Ephemeris Time", of which TT is the successor.
+	//! It is still frequently used in the literature.
+	double getJDE() const;
 
-	//! Set the current date in Modified Julian Day
+	//! Set the current date in Modified Julian Day (UT).
+	//! MJD is simply JD-2400000.5, getting rid of large numbers and starting days at midnight.
+	//! It is mostly used in satellite contexts.
 	void setMJDay(double MJD);
-	//! Get the current date in Modified Julian Day
+	//! Get the current date in Modified Julian Day (UT)
 	double getMJDay() const;
+
+	//! Compute Delta-T estimation for a given date.
+	//! DeltaT is the accumulated effect of earth's rotation slowly getting slower, mostly caused by tidal braking by the Moon.
+	//! For accurate positioning of objects in the sky, we must compute earth-based clock-dependent things like earth rotation
+	//! using plain UT, but all orbital motions or rotation of the other planets must be computed in TT, which is a regular time frame.
+	//! Also satellites are computed in the UT frame because (1) they are short-lived and (2) must follow paths over earth ground.
+	//!
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
+	//! @note Try to use this only if needed, prefer getDeltaT() for access to current value.
+	double computeDeltaT(const double jDay) const;
+	//! Get current DeltaT.
+	double getDeltaT() const;
+
+
 
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;
@@ -417,9 +441,9 @@ public slots:
 	//! get the initial "today time" from the config file
 	QTime getInitTodayTime(void);
 	//! set the initial "today time" from the config file
-	void setInitTodayTime(const QTime& t);
+	void setInitTodayTime(const QTime& time);
 	//! Set the preset sky time from a QDateTime
-	void setPresetSkyTime(QDateTime dt);
+	void setPresetSkyTime(QDateTime dateTime);
 
 	//! Add one [Earth, solar] hour to the current simulation time.
 	void addHour();
@@ -503,7 +527,7 @@ public slots:
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected();
 
-	//! Set year for custom equation for calculation of Delta-T
+	//! Set central year for custom equation for calculation of Delta-T
 	//! @param y the year, e.g. 1820
 	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
 	//! Set n-dot for custom equation for calculation of Delta-T
@@ -513,7 +537,7 @@ public slots:
 	//! @param y the coefficients, e.g. -20,0,32
 	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
 
-	//! Get year for custom equation for calculation of Delta-T
+	//! Get central year for custom equation for calculation of Delta-T
 	float getDeltaTCustomYear() const { return deltaTCustomYear; }
 	//! Get n-dot for custom equation for calculation of Delta-T
 	float getDeltaTCustomNDot() const { return deltaTCustomNDot; }
@@ -547,6 +571,8 @@ private:
 	void updateTime(double deltaTime);
 	void resetSync();
 
+
+
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticJ2000ToAltAz; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matAltAzToHeliocentricEclipticJ2000; // Transform from topocentric (StelObserver) altazimuthal coordinate to heliocentric ecliptic Cartesian (VSOP87A)
@@ -571,8 +597,9 @@ private:
 
 	// Time variables
 	double timeSpeed;                  // Positive : forward, Negative : Backward, 1 = 1sec/sec
-	double JDay;                       // Curent time in Julian day
-	QPair<double,double> JD;
+	double JDay;                     // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to call getDeltaT() explicitly.
+	QPair<double,double> JD;           // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second
+					   // Interfacing calls getJD/setJD will have optional second arg bool needJDE/isJDE=false.
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
