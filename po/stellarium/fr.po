@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:24+0600\n"
-"PO-Revision-Date: 2015-07-29 09:00+0000\n"
+"PO-Revision-Date: 2015-07-30 18:34+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-30 05:27+0000\n"
-"X-Generator: Launchpad (build 17646)\n"
+"X-Launchpad-Export-Date: 2015-07-31 05:14+0000\n"
+"X-Generator: Launchpad (build 17656)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:872 src/core/modules/LandscapeMgr.cpp:413
@@ -10769,12 +10769,13 @@ msgstr "Reliefs %1"
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
-"Le mode cubemap choisi n'est pas supporté. Retour au mode « 6 Textures »"
+"Le mode <i>cubemap</i> choisi n'est pas supporté. Retour au mode « 6 "
+"Textures »"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "<i>Cubemapping</i> retardé : %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
@@ -10786,21 +10787,21 @@ msgstr "Désactivé"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
-msgstr "Taille du cubemap modifiée"
+msgstr "Taille du <i>cubemap</i> modifiée"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr "Taille du cubemap non supportée. Fixée à %1"
+msgstr "Taille du <i>cubemap</i> non supportée. Définie à %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Taille du <i>shadowmap</i> modifiée"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Taille du <i>shadowmap</i> non supportée. Définie à %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
 msgid "3D Sceneries"
@@ -10923,7 +10924,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr "Calcule les ombres séparément pour chaque face du cubemap."
+msgstr "Calcule les ombres séparément pour chaque face du <i>cubemap</i>."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -10940,12 +10941,16 @@ msgstr ""
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Ceci ne fonctionne pas lors de l'utilisation du mode de <i>cubemapping</i> "
+"« nuanceur géométrique »."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Si cette option est cochée, le <i>cubemap</i> n'est re-dessiné qu'à "
+"intervalles déterminés, plutôt qu'à chaque image."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
@@ -10957,12 +10962,16 @@ msgstr ""
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Le <i>cubemap</i> est toujours re-dessiné lorsque la position de "
+"visualisation change."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Si cette option est cochée, seule la face correspondant à la direction de "
+"votre vue est mise à jour lors des déplacements."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
@@ -10976,6 +10985,8 @@ msgstr ""
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
+"Ceci ne fonctionne pas lors de l'utilisation du mode de <i>cubemapping</i> "
+"« nuanceur géométrique »."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
@@ -11058,11 +11069,11 @@ msgstr "Placage de relief"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr "Taille du cubemap :"
+msgstr "Taille du <i>cubemap</i> :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Taille du <i>shadowmap</i> :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
@@ -11094,15 +11105,15 @@ msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Mode de <i>cubemapping</i> :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Ombres <i>cubemap</i> complètes"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "Re-rendu du <i>cubemap</i> retardé"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
