@@ -64,8 +64,8 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  pTypeStr)
 {
 	texMapName = atexMapName;
-	lastOrbitJD =0;
-	deltaJD = StelCore::JD_SECOND;
+	lastOrbitJDE =0;
+	deltaJDE = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 	semiMajorAxis = 0.;
@@ -143,7 +143,7 @@ void MinorPlanet::setSemiMajorAxis(double value)
 {
 	semiMajorAxis = value;
 	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
-	deltaJD = 2.0*semiMajorAxis*StelCore::JD_SECOND;
+	deltaJDE = 2.0*semiMajorAxis*StelCore::JD_SECOND;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
