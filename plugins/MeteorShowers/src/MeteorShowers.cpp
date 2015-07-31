@@ -215,7 +215,8 @@ void MeteorShowers::init()
 	updateTimer->start();
 
 	// skyDate startup
-	skyDate = StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDay());
+	// GZ JDfix for 0.14 I am not sure how skyDate is used. It used to be set to JDE, so again:
+	skyDate = StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDE());
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -273,8 +274,9 @@ void MeteorShowers::setFlagShowMSButton(bool b)
 
 bool MeteorShowers::changedSkyDate(StelCore* core)
 {
-	double JD = core->getJDay();
-	skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
+	// GZ JDfix for 0.14 done
+	double JD = core->getJD();
+	skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24);
 	if (skyDate.toString("MM.dd.yyyy") != lastSkyDate.toString("MM.dd.yyyy"))  //if the sky date changed
 	{
 		return true;

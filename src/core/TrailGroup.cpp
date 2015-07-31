@@ -36,7 +36,8 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	float currentTime = core->getJDay();
+	// GZ JDfix for 0.14. I assume we need JDE here, don't know the semantics of this currentTime.
+	float currentTime = core->getJDE();
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
 	sPainter->setProjector(core->getProjection(transfo));
@@ -66,12 +67,13 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 // Add 1 point to all the curves at current time and suppress too old points
 void TrailGroup::update()
 {
-	times.append(StelApp::getInstance().getCore()->getJDay());
+	// GZ JDfix for 0.14: I don't know if times are ever displayed. Currently I understand we keep JDE here.
+	times.append(StelApp::getInstance().getCore()->getJDE());
 	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
 	{
 		iter->posHistory.append(j2000ToTrailNative*iter->stelObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
 	}
-	if (StelApp::getInstance().getCore()->getJDay()-times.at(0)>timeExtent)
+	if (StelApp::getInstance().getCore()->getJDE()-times.at(0)>timeExtent)
 	{
 		times.pop_front();
 		for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)

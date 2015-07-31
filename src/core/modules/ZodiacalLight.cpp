@@ -93,7 +93,7 @@ void ZodiacalLight::update(double deltaTime)
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.
 	if (core->getCurrentLocation().planetName != "Earth") return;
 
-	double currentJD=core->getJDay();
+	double currentJD=core->getJD();
 	if (qAbs(currentJD - lastJD) > 0.25f) // should be enough to update position every 6 hours.
 	{
 		// update vertices
