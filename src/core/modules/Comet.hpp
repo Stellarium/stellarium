@@ -96,14 +96,10 @@ public:
 	//! get sidereal period for comet, days, or returns 0 if not possible (paraboloid, hyperboloid orbit)
 	virtual double getSiderealPeriod() const;
 
-	//! GZ: override from Planet: extend with tail details.
-	//virtual void computePosition(const double date);
-
 	//! re-implementation of Planet's draw()
 	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
 
 	// re-implementation of Planet's update() to prepare tails (extinction etc). @param deltaTime: ms (since last call)
-	// TODO: computePosition can be removed and things added here!
 	virtual void update(int deltaTime);
 
 private:
@@ -139,8 +135,8 @@ private:
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.
 	bool tailActive;		//! true if there is a tail long enough to be worth drawing. Drawing tails is quite costly.
 	bool tailBright;		//! true if tail is bright enough to draw.
-	double deltaJDtail;             //! like deltaJD, but time difference between tail geometry updates.
-	double lastJDtail;              //! like lastJD, but time of last tail geometry update.
+	double deltaJDEtail;            //! like deltaJDE, but time difference between tail geometry updates.
+	double lastJDEtail;             //! like lastJDE, but time of last tail geometry update.
 	Mat4d gasTailRot;		//! rotation matrix for gas tail parabola
 	Mat4d dustTailRot;		//! rotation matrix for the skewed dust tail parabola
 	float dustTailWidthFactor;      //!< empirical individual broadening of the dust tail end, compared to the gas tail end. Actually, dust tail width=2*comaWidth*dustTailWidthFactor. Default 1.5
