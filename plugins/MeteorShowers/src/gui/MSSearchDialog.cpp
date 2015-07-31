@@ -135,6 +135,9 @@ void MSSearchDialog::searchEvents()
 	{
 	    m_ui->listEvents->resizeColumnToContents(i);
 	}
+
+	// sort-by-date
+	m_ui->listEvents->sortItems(ColumnPeak, Qt::AscendingOrder);
 }
 
 void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
