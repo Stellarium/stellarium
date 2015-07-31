@@ -87,9 +87,9 @@ public:
 
 	//! Get solution of equation of time
 	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
-	//! @param JDay JD
+	//! @param JDE JD in Dynamical Time (previously called Ephemeris Time)
 	//! @return time in minutes
-	double getSolutionEquationOfTime(const double JDay) const;
+	double getSolutionEquationOfTime(const double JDE) const;
 
 	//! Is plugin enabled?
 	bool isEnabled() const

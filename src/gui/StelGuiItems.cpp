@@ -536,56 +536,64 @@ void BottomStelBar::updateButtonsGroups()
 	updateText(true);
 }
 
+// create text elements and tooltips in bottom toolbar.
 // Make sure to avoid any change if not necessary to avoid triggering useless redraw
 void BottomStelBar::updateText(bool updatePos)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	double jd = core->getJDay();
-	double deltaT = 0.;
-	double sigma = -1.;
+	double jd = core->getJD();
+	double deltaT = core->getDeltaT();
+//	double sigma = -1.;
 	QString sigmaInfo = "";	
-	QString validRangeInfo = "";
-	bool displayDeltaT = false;
-	if (core->getCurrentLocation().planetName.contains("Earth"))
-	{
-		deltaT = core->getDeltaT(jd);
-		displayDeltaT = true;		
-		sigma = StelUtils::getDeltaTStandardError(jd);
-		core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeInfo);
-	}
+	QString validRangeMarker = "";
+	// bool displayDeltaT = false; // ==> GZ JDfix for 0.14 ALWAYS TRUE!
+//	if (core->getCurrentLocation().planetName.contains("Earth"))
+//	{
+//		deltaT = core->getDeltaT(jd);
+//		displayDeltaT = true;
+		double sigma = StelUtils::getDeltaTStandardError(jd);
+		core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
+//	}
 
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
-	double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-	QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
+	// GZ JDfix for 0.14: We no longer need deltaT in the main date computations :-)
+	//double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
+	//QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
+	QString tz = locmgr.getPrintableTimeZoneLocal(jd);
 	QString newDateInfo = " ";
 	if (getFlagShowTime())
 	{
 		if (getFlagShowTz())
-			newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz);
+			//newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz);
+			newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd)).arg(tz);
 		else
-			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt));
+			//newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt));
+			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd));
 	}
-	QString newDateAppx = QString("JD %1").arg(jd-dt, 0, 'f', 5);
+	//QString newDateAppx = QString("JD %1").arg(jd-dt, 0, 'f', 5);
+	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 5);
 	if (getFlagTimeJd())
 	{
 		newDateAppx = newDateInfo;
-		newDateInfo = QString("JD %1").arg(jd-dt, 0, 'f', 5);
+		//newDateInfo = QString("JD %1").arg(jd-dt, 0, 'f', 5);
+		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 5);
 	}
 
 	if (datetime->text()!=newDateInfo)
 	{
 		updatePos = true;		
 		datetime->setText(newDateInfo);
-		if (displayDeltaT && core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
+		//if (displayDeltaT && core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
+		if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 		{
 			if (sigma>0)
 				sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
 			QString deltaTInfo = "";
 			if (qAbs(deltaT)>60.)
-				deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeInfo);
+				deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
 			else
-				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeInfo);
+				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
 			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx));
 		}
@@ -593,6 +601,7 @@ void BottomStelBar::updateText(bool updatePos)
 			datetime->setToolTip(QString("%1").arg(newDateAppx));
 	}
 
+	// build location tooltip
 	QString newLocation = "";
 	const StelLocation* loc = &core->getCurrentLocation();
 	const StelTranslator& trans = locmgr.getSkyTranslator();
@@ -631,6 +640,8 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	QString str;
+
+	// build fov tooltip
 	QTextStream wos(&str);
 	if (getFlagFovDms())
 	{
@@ -657,6 +668,8 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	str="";
+
+	// build fps tooltip
 	QTextStream wos2(&str);
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
 	if (fps->text()!=str)

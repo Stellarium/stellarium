@@ -1024,47 +1024,49 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
-void SolarSystem::computePositions(double date, const Vec3d& observerPos)
+void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 {
 	if (flagLightTravelTime)
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
-			p->computePositionWithoutOrbits(date);
+			p->computePositionWithoutOrbits(dateJDE);
 		}
 		foreach (PlanetP p, systemPlanets)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			p->computePosition(date-light_speed_correction);
+			p->computePosition(dateJDE-light_speed_correction);
 		}
 	}
 	else
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
-			p->computePosition(date);
+			p->computePosition(dateJDE);
 		}
 	}
-	computeTransMatrices(date, observerPos);
+	computeTransMatrices(dateJDE, observerPos);
 }
 
 // Compute the transformation matrix for every elements of the solar system.
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
-void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
+void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 {
+	double dateJD=dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
+
 	if (flagLightTravelTime)
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			p->computeTransMatrix(date-light_speed_correction);
+			p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
 		}
 	}
 	else
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
-			p->computeTransMatrix(date);
+			p->computeTransMatrix(dateJD, dateJDE);
 		}
 	}
 }

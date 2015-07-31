@@ -209,18 +209,18 @@ static const struct nutation_coefficients coefficients[TERMS] = {
 	{-3.0,	0.0,	0.0,	0.0}};
 
 /* cache values */
-static double c_JD = 0.0, c_longitude = 0.0, c_obliquity = 0.0, c_ecliptic = 0.0; 
+static double c_JDE = 0.0, c_longitude = 0.0, c_obliquity = 0.0, c_ecliptic = 0.0;
 
 
 /* Calculate nutation of longitude and obliquity in degrees from Julian Ephemeris Day
-* params : JD Julian Day, nutation Pointer to store nutation.
+* params : JDE Julian Day (ET/TT), nutation Pointer to store nutation.
 * Meeus, Astr. Alg. (1st ed., 1994), Chapter 21 pg 131-134 Using Table 21A */
 /* GZ: Changed: ecliptic obliquity used to be constant J2000.0. 
  * If you don't compute this, you may as well forget about nutation!
  * 2015: Laskar's 1986 formula replaced by Vondrak 2011. c_ecliptic is now epsilon_A, Vondrak's obliquity of date.
  * TODO: replace this whole function with Nutation IAU2000A or compatible version.
  */
-void get_nutation (double JD, struct ln_nutation * nutation)
+void get_nutation (double JDE, struct ln_nutation * nutation)
 {
 
 	double D,M,MM,F,O,T;
@@ -228,16 +228,16 @@ void get_nutation (double JD, struct ln_nutation * nutation)
 	int i;
 
 	/* should we bother recalculating nutation */
-	if (fabs(JD - c_JD) > LN_NUTATION_EPOCH_THRESHOLD)
+	if (fabs(JDE - c_JDE) > LN_NUTATION_EPOCH_THRESHOLD)
 	  {
 		/* set the new epoch */
-		c_JD = JD;
+		c_JDE = JDE;
 
 		/* set ecliptic. GZ: This is constant only, J2000.0. WRONG! */
 		/* c_ecliptic = 23.0 + 26.0 / 60.0 + 27.407 / 3600.0; */
 
 		/* calc T */
-		T = (JD - 2451545.0)/36525;
+		T = (JDE - 2451545.0)/36525;
 		/* GZotti: we don't need those. * /
 		T2 = T * T;
 		T3 = T2 * T;
@@ -361,7 +361,7 @@ double get_mean_sidereal_time (double JD)
 /* Calculate the apparent sidereal time at the meridian of Greenwich of a given date.
  * returns apparent sidereal time (degrees).
  * Formula 11.1, 11.4 pg 83 */
-double get_apparent_sidereal_time (double JD)
+double get_apparent_sidereal_time (double JD, double JDE)
 {
 	double correction, sidereal;
 	struct ln_nutation nutation;
@@ -371,9 +371,11 @@ double get_apparent_sidereal_time (double JD)
 	/* get the mean sidereal time */
 	sidereal = get_mean_sidereal_time (JD);
         
-	/* add corrections for nutation in longitude and for the true obliquity of
-	the ecliptic */
-	get_nutation (JD, &nutation);
+	/* add corrections for nutation in longitude and for the true obliquity of the ecliptic
+	   TODO: This should if possible use JDE, maybe change main argument to QPair or std::pair  JD/DeltaT?
+	   The error by calling nutation(JD_UT) is however miniscule.
+	*/
+	get_nutation (JDE, &nutation);
     
 	/* GZ: This was the only place where this was used. I added the summation here. */
 	correction = (nutation.deltaPsi * cos ((nutation.ecliptic+nutation.deltaEps)*M_PI/180.));

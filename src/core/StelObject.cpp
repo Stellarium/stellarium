@@ -44,8 +44,10 @@ Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
 {
 	// Hour Angle corrected to Delta-T value
 	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
-	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
-	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)* getEquinoxEquatorialPos(core);
+	//double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
+	//return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)* getEquinoxEquatorialPos(core);
+	// GZ JDfix for 0.14
+	return Mat4d::zrotation(-core->getLocalSiderealTime())* getEquinoxEquatorialPos(core);
 }
 
 // Get observer local sidereal coordinates, deflected by refraction
@@ -55,8 +57,10 @@ Vec3d StelObject::getSiderealPosApparent(const StelCore* core) const
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
 	// Hour Angle corrected to Delta-T value
 	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
-	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
-	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)*v;
+	//double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
+	//return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)*v;
+	// GZ JDfix for 0.14
+	return Mat4d::zrotation(-core->getLocalSiderealTime())*v;
 }
 
 Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
