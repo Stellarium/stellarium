@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 10:24+0600\n"
-"PO-Revision-Date: 2015-07-30 18:34+0000\n"
+"PO-Revision-Date: 2015-07-31 12:23+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-31 05:14+0000\n"
+"X-Launchpad-Export-Date: 2015-08-01 05:16+0000\n"
 "X-Generator: Launchpad (build 17656)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -11176,11 +11176,11 @@ msgstr "Mi-saison"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Stagnations lunaires majeures"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Stagnations lunaires mineures"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Zenith Passage"
@@ -11233,11 +11233,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Déclinaison des stagnations lunaires majeures"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Déclinaison des stagnations lunaires mineures"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
@@ -11270,6 +11270,11 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"Les lignes de la Lune tiennent compte des effets de parallaxe. Deux lignes "
+"sont dessinées, correspondant aux distances minimale et maximale de la Lune. "
+"La déclinaison de la Lune aux stagnations majeures peut dépasser les limites "
+"indiquées si sa hauteur dans le ciel est grande, en raison des effets de "
+"parallaxe."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
@@ -11285,11 +11290,11 @@ msgstr "Couleur des lignes de mi-saison"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Couleur des lignes de stagnation majeure"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Couleur des lignes de stagnation mineure"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
@@ -11345,11 +11350,11 @@ msgstr "Changer la couleur"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Lignes des stagnations lunaires majeures"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Lignes des stagnations lunaires mineures"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
