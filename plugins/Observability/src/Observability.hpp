@@ -21,6 +21,7 @@
 #include "StelModule.hpp"
 #include <QFont>
 #include <QString>
+#include <QPair>
 #include "VecMath.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -190,33 +191,33 @@ private:
 
 //! Computes the Sun or Moon coordinates at a given Julian date.
 //! @param core the stellarium core.
-//! @param JD double for the Julian date.
+//! @param JD QPair of double for the Julian date: first=JD_UT and .second=JDE_TT
 //! @param RASun right ascension of the Sun (in hours).
 //! @param DecSun declination of the Sun (in radians).
 //! @param RAMoon idem for the Moon.
 //! @param DecMoon idem for the Moon.
 //! @param EclLon is the module of the vector product of Heliocentric Ecliptic Coordinates of Sun and Moon (projected over the Ecliptic plane). Useful to derive the dates of Full Moon.
 //! @param getBack controls whether Earth and Moon must be returned to their original positions after computation.
-	void getSunMoonCoords(StelCore* core, double jd,
-	                      double& raSun, double& decSun,
-	                      double& raMoon, double& decMoon,
-	                      double& eclLon, bool getBack);
+	void getSunMoonCoords(StelCore* core, QPair<double, double> JD,
+			      double& raSun, double& decSun,
+			      double& raMoon, double& decMoon,
+			      double& eclLon, bool getBack);
 
 
 //! computes the selected-planet coordinates at a given Julian date.
 //! @param core the stellarium core.
-//! @param JD double for the Julian date.
+//! @param JD QPair for the Julian date: .first=JD(UT), .second=JDE
 //! @param RA right ascension of the planet (in hours).
 //! @param Dec declination of the planet (in radians).
 //! @param getBack controls whether the planet must be returned to its original positions after computation.
-	void getPlanetCoords(StelCore* core, double JD, double &RA, double &Dec, bool getBack);
+	void getPlanetCoords(StelCore* core, QPair<double, double> JD, double &RA, double &Dec, bool getBack);
 
-//! Comptues the Earth-Moon distance (in AU) at a given Julian date.
-//! The parameters are similar to those of getSunMoonCoords or getPlanetCoords.
+//! Computes the Earth-Moon distance (in AU) at a given Julian date.
+//! The parameters are similar to those of getSunMoonCoords() or getPlanetCoords().
 	void getMoonDistance(StelCore* core,
-	                     double jd,
-	                     double& distance,
-	                     bool getBack);
+			     QPair<double, double> JD,
+			     double& distance,
+			     bool getBack);
 
 //! Returns the angular separation (in radians) between two points.
 //! @param RA1 right ascension of point 1 (in hours)
@@ -268,15 +269,22 @@ private:
 	void toRADec(Vec3d vec3d, double& ra, double& dec);
 
 	//! Table containing the Julian Dates of the days of the current year.
-	double yearJD[366];
+	//double yearJD[366];
+	// GZ JDfix for 0.14. This must become a QPair of JD.first=JD_UT, JD.second=JDE
+	//double yearJD[366];
+	QPair<double, double> yearJD[366];
 
 //! Check if a source is observable during a given date.
 //! @param i the day of the year.
 	bool CheckRise(int day);
 
-//! Some useful constants and variables(almost self-explanatory).
-	double Rad2Deg, Rad2Hr, UA, TFrac, JDsec, Jan1stJD, halfpi, MoonT, nextFullMoon, prevFullMoon, RefFullMoon, GMTShift, MoonPerilune;
-	
+//! Some useful constants (almost self-explanatory).
+// GZ During JDFix for 0.14: Made true constants out of those, and improved accuracy of some.
+	static const double Rad2Deg, Rad2Hr, UA, TFrac, JDsec, halfpi, MoonT, RefFullMoon, MoonPerilune;
+
+//! Some useful variables(almost self-explanatory).
+	double nextFullMoon, prevFullMoon, GMTShift, Jan1stJD;
+
 	//! User-defined angular altitude of astronomical twilight in radians.
 	//! See setTwilightAltitude() and getTwilightAltitude().
 	double twilightAltRad;
@@ -292,7 +300,9 @@ private:
 	int horizonAltDeg;
 
 //! RA, Dec, observer latitude, object's elevation, and Hour Angle at horizon.
-	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt, myJD;
+	double selRA, selDec, mylat, mylon, alti, horizH, culmAlt;
+//! Some place to keep JD and JDE. .first is JD(UT), .second is for the fitting JDE.
+	QPair<double, double> myJD;
 
 //! Vectors to store Sun's RA, Dec, and Sid. Time at twilight and rise/set.
 	double sunRA[366];
@@ -304,7 +314,7 @@ private:
 	double objectRA[366]; 
 	double objectDec[366];
 	double objectH0[366];
-	//! Table of the sidereal time of the object's rising/setting. 
+//! Table of the sidereal time of the object's rising/setting.
 	double objectSidT[2][366];
 
 //! Rise/Set/Transit times for the Moon at current day:
