@@ -595,6 +595,29 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
+	// view dialog / DSO tag settings
+	const Nebula::CatalogGroup& cflags = nmgr->getCatalogFilters();
+
+	conf->beginGroup("dso_catalog_filters");
+	conf->setValue("flag_show_ngc",	(bool) (cflags & Nebula::NGC));
+	conf->setValue("flag_show_ic",	(bool) (cflags & Nebula::IC));
+	conf->setValue("flag_show_m",	(bool) (cflags & Nebula::M));
+	conf->setValue("flag_show_c",	(bool) (cflags & Nebula::C));
+	conf->setValue("flag_show_b",	(bool) (cflags & Nebula::B));
+	conf->setValue("flag_show_vdb",	(bool) (cflags & Nebula::VdB));
+	conf->setValue("flag_show_sh2",	(bool) (cflags & Nebula::Sh2));
+	conf->setValue("flag_show_rcw",	(bool) (cflags & Nebula::RCW));
+	conf->setValue("flag_show_lbn",	(bool) (cflags & Nebula::LBN));
+	conf->setValue("flag_show_ldn",	(bool) (cflags & Nebula::LDN));
+	conf->setValue("flag_show_cr",	(bool) (cflags & Nebula::Cr));
+	conf->setValue("flag_show_mel",	(bool) (cflags & Nebula::Mel));
+	conf->setValue("flag_show_ced",	(bool) (cflags & Nebula::Ced));
+	conf->setValue("flag_show_pk",	(bool) (cflags & Nebula::PK));
+	conf->setValue("flag_show_g",	(bool) (cflags & Nebula::G));
+	conf->setValue("flag_show_pgc",	(bool) (cflags & Nebula::PGC));
+	conf->setValue("flag_show_ugc",	(bool) (cflags & Nebula::UGC));
+	conf->endGroup();
+
 	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());

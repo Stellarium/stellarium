@@ -140,6 +140,10 @@ void ViewDialog::createDialogContent()
 
 	// Connect and initialize checkboxes and other widgets
 
+	// DSO
+	updateSelectedCatalogsCheckBoxes();
+	connect(ui->groupDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
+
 	// Stars section
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
 	connect(ui->starTwinkleCheckBox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setFlagTwinkle(bool)));
@@ -348,6 +352,69 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
 }
+
+void ViewDialog::setSelectedCatalogsFromCheckBoxes()
+{
+	Nebula::CatalogGroup flags(0);
+
+	if (ui->checkBoxNGC->isChecked())
+		flags |= Nebula::NGC;
+	if (ui->checkBoxIC->isChecked())
+		flags |= Nebula::IC;
+	if (ui->checkBoxM->isChecked())
+		flags |= Nebula::M;
+	if (ui->checkBoxB->isChecked())
+		flags |= Nebula::B;
+	if (ui->checkBoxSh2->isChecked())
+		flags |= Nebula::Sh2;
+	if (ui->checkBoxVdB->isChecked())
+		flags |= Nebula::VdB;
+	if (ui->checkBoxRCW->isChecked())
+		flags |= Nebula::RCW;
+	if (ui->checkBoxLBN->isChecked())
+		flags |= Nebula::LBN;
+	if (ui->checkBoxLDN->isChecked())
+		flags |= Nebula::LDN;
+	if (ui->checkBoxCr->isChecked())
+		flags |= Nebula::Cr;
+	if (ui->checkBoxMel->isChecked())
+		flags |= Nebula::Mel;
+	if (ui->checkBoxCed->isChecked())
+		flags |= Nebula::Ced;
+	if (ui->checkBoxPK->isChecked())
+		flags |= Nebula::PK;
+	if (ui->checkBoxPGC->isChecked())
+		flags |= Nebula::PGC;
+	if (ui->checkBoxUGC->isChecked())
+		flags |= Nebula::UGC;
+	if (ui->checkBoxG->isChecked())
+		flags |= Nebula::G;
+
+	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
+}
+
+void ViewDialog::updateSelectedCatalogsCheckBoxes()
+{
+	const Nebula::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
+
+	ui->checkBoxNGC->setChecked(flags & Nebula::NGC);
+	ui->checkBoxIC->setChecked(flags & Nebula::IC);
+	ui->checkBoxM->setChecked(flags & Nebula::M);
+	ui->checkBoxC->setChecked(flags & Nebula::C);
+	ui->checkBoxB->setChecked(flags & Nebula::B);
+	ui->checkBoxSh2->setChecked(flags & Nebula::Sh2);
+	ui->checkBoxVdB->setChecked(flags & Nebula::VdB);
+	ui->checkBoxRCW->setChecked(flags & Nebula::RCW);
+	ui->checkBoxLDN->setChecked(flags & Nebula::LDN);
+	ui->checkBoxLBN->setChecked(flags & Nebula::LBN);
+	ui->checkBoxCr->setChecked(flags & Nebula::Cr);
+	ui->checkBoxMel->setChecked(flags & Nebula::Mel);
+	ui->checkBoxCed->setChecked(flags & Nebula::Ced);
+	ui->checkBoxPGC->setChecked(flags & Nebula::PGC);
+	ui->checkBoxUGC->setChecked(flags & Nebula::UGC);
+	ui->checkBoxG->setChecked(flags & Nebula::G);
+}
+
 
 void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)
 {
