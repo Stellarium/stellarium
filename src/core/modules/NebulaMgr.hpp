@@ -27,12 +27,12 @@
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+#include "Nebula.hpp"
 
 #include <QString>
 #include <QStringList>
 #include <QFont>
 
-class Nebula;
 class StelTranslator;
 class StelToneReproducer;
 class QSettings;
@@ -114,6 +114,9 @@ public:
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
 	
+	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
+	const Nebula::CatalogGroup& getCatalogFilters() const { return catalogFilters; }
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
@@ -227,6 +230,8 @@ private slots:
 	
 
 private:
+
+	Nebula::CatalogGroup catalogFilters;
 	
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
@@ -262,6 +267,7 @@ private:
 	NebulaP searchUGC(unsigned int UGC);
 	NebulaP searchCed(QString Ced);
 	NebulaP searchPK(QString PK);
+	NebulaP searchG(QString G);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
