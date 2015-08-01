@@ -131,6 +131,45 @@ void NebulaMgr::init()
 
 	flagConverter = conf->value("astro/flag_convert_dso_catalog", false).toBool();
 
+	catalogFilters = Nebula::CatalogGroup(0);
+
+	conf->beginGroup("dso_catalog_filters");
+	if (conf->value("flag_show_ngc", true).toBool())
+		catalogFilters	|= Nebula::NGC;
+	if (conf->value("flag_show_ic", true).toBool())
+		catalogFilters	|= Nebula::IC;
+	if (conf->value("flag_show_m", true).toBool())
+		catalogFilters	|= Nebula::M;
+	if (conf->value("flag_show_c", false).toBool())
+		catalogFilters	|= Nebula::C;
+	if (conf->value("flag_show_b", false).toBool())
+		catalogFilters	|= Nebula::B;
+	if (conf->value("flag_show_sh2", false).toBool())
+		catalogFilters	|= Nebula::Sh2;
+	if (conf->value("flag_show_vdb", false).toBool())
+		catalogFilters	|= Nebula::VdB;
+	if (conf->value("flag_show_lbn", false).toBool())
+		catalogFilters	|= Nebula::LBN;
+	if (conf->value("flag_show_ldn", false).toBool())
+		catalogFilters	|= Nebula::LDN;
+	if (conf->value("flag_show_rcw", false).toBool())
+		catalogFilters	|= Nebula::RCW;
+	if (conf->value("flag_show_cr", false).toBool())
+		catalogFilters	|= Nebula::Cr;
+	if (conf->value("flag_show_mel", false).toBool())
+		catalogFilters	|= Nebula::Mel;
+	if (conf->value("flag_show_pgc", false).toBool())
+		catalogFilters	|= Nebula::PGC;
+	if (conf->value("flag_show_ced", false).toBool())
+		catalogFilters	|= Nebula::Ced;
+	if (conf->value("flag_show_ugc", false).toBool())
+		catalogFilters	|= Nebula::UGC;
+	if (conf->value("flag_show_pk", false).toBool())
+		catalogFilters	|= Nebula::PK;
+	if (conf->value("flag_show_g", false).toBool())
+		catalogFilters	|= Nebula::G;
+	conf->endGroup();
+
 	updateI18n();
 	
 	StelApp *app = &StelApp::getInstance();
@@ -143,7 +182,12 @@ void NebulaMgr::init()
 
 struct DrawNebulaFuncObject
 {
-	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, StelCore* aCore, bool acheckMaxMagHints) : maxMagHints(amaxMagHints), maxMagLabels(amaxMagLabels), sPainter(p), core(aCore), checkMaxMagHints(acheckMaxMagHints)
+	DrawNebulaFuncObject(float amaxMagHints, float amaxMagLabels, StelPainter* p, StelCore* aCore, bool acheckMaxMagHints)
+		: maxMagHints(amaxMagHints)
+		, maxMagLabels(amaxMagLabels)
+		, sPainter(p)
+		, core(aCore)
+		, checkMaxMagHints(acheckMaxMagHints)
 	{
 		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
 	}
@@ -169,6 +213,11 @@ struct DrawNebulaFuncObject
 	float angularSizeLimit;
 	bool checkMaxMagHints;
 };
+
+void NebulaMgr::setCatalogFilters(const Nebula::CatalogGroup &cflags)
+{
+	catalogFilters = cflags;
+}
 
 float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
 {
@@ -292,7 +341,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (dcat == "SH") return searchSh2(dnum);
 	}
-	static QRegExp sCatNumRx("^(PK|CED)\\s*(.+)$");
+	static QRegExp sCatNumRx("^(PK|CED|G)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -300,6 +349,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (cat == "PK") return searchPK(num);
 		if (cat == "CED") return searchCed(num);
+		if (cat == "G") return searchG(num);
 	}
 	return NebulaP();
 }
@@ -504,6 +554,15 @@ NebulaP NebulaMgr::searchPK(QString PK)
 	return NebulaP();
 }
 
+NebulaP NebulaMgr::searchG(QString G)
+{
+	foreach (const NebulaP& n, dsoArray)
+		if (n->G_nb.toUpper() == G.toUpper())
+			return n;
+	return NebulaP();
+}
+
+
 void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool decimal=false)
 {
 	QFile dsoIn(in);
@@ -530,7 +589,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC;
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
-	QString oType, mType, PK, Ced, ra, dec;
+	QString oType, mType, PK, Ced, G, ra, dec;
 
 	unsigned int nType;
 
@@ -586,6 +645,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			UGC			= list.at(29).toInt();	 // UGC number (subset)
 			Ced			= list.at(30).trimmed(); // Ced number
 			PK			= list.at(31).trimmed(); // PK number
+			G			= list.at(32).trimmed(); // G number
 
 			if (decimal)
 			{
@@ -704,7 +764,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
 				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
-				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << PK;
+				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << PK << G;
 		}
 	}
 	dsoIn.close();
@@ -776,8 +836,8 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		nb = cdes.toInt();
 
 		QStringList catalogs;
-		catalogs << "IC" << "M" << "C" << "Cr" << "Mel" << "B" << "Sh 2-" << "VdB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK";
+		catalogs << "IC" << "M" << "C" << "Cr" << "Mel" << "B" << "SH2" << "VdB" << "RCW" << "LDN" << "LBN"
+			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK" << "G";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -828,6 +888,9 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 15:
 				e = searchPK(cdes);
+				break;
+			case 16:
+				e = searchG(cdes);
 				break;
 			default:
 				e = searchDSO(nb);
@@ -1021,12 +1084,22 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
-	// Search by Perek-Kohoutek numbers (possible formats are "PK120+09 01" or "PK 120+09 01")
+	// Search by Perek-Kohoutek numbers (possible formats are "PK120+09.1" or "PK 120+09.1")
 	if (objw.left(2) == "PK")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("PK%1").arg(n->PK_nb.toUpper()) == objw || QString("PK %1").arg(n->PK_nb.toUpper()) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by G numbers (possible formats are "G120+09.1" or "G 120+09.1")
+	if (objw.left(1) == "G")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("G%1").arg(n->G_nb.toUpper()) == objw || QString("G %1").arg(n->G_nb.toUpper()) == objw)
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1199,12 +1272,22 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		}
 	}
 
-	// Search by Perek-Kohoutek numbers (possible formats are "PK120+09 01" or "PK 120+09 01")
+	// Search by Perek-Kohoutek numbers (possible formats are "PK120+09.1" or "PK 120+09.1")
 	if (objw.startsWith("PK"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (QString("PK%1").arg(n->PK_nb.toUpper()) == objw || QString("PK %1").arg(n->PK_nb.toUpper()) == objw)
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by G numbers (possible formats are "PK120+09.1" or "PK 120+09.1")
+	if (objw.startsWith("G"))
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("G%1").arg(n->G_nb.toUpper()) == objw || QString("G %1").arg(n->G_nb.toUpper()) == objw)
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1517,7 +1600,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 		}
 	}
 
-	// Search by PK objects number (possible formats are "PK120+09 01" or "PK 120+09 01")
+	// Search by PK objects number (possible formats are "PK120+09.1" or "PK 120+09.1")
 	if (objw.size()>=1 && objw.left(2)=="PK")
 	{
 		foreach (const NebulaP& n, dsoArray)
@@ -1531,6 +1614,26 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("PK %1").arg(n->PK_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by G objects number (possible formats are "G120+09.1" or "G 120+09.1")
+	if (objw.size()>=1 && objw.left(1)=="G")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->G_nb.isEmpty()) continue;
+			QString constw = QString("G%1").arg(n->G_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("G %1").arg(n->G_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;
@@ -1871,7 +1974,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
-	// Search by PK objects number (possible formats are "PK120+09 01" or "PK 120+09 01")
+	// Search by PK objects number (possible formats are "PK120+09.1" or "PK 120+09.1")
 	if (objw.size()>=1 && objw.left(2)=="PK")
 	{
 		foreach (const NebulaP& n, dsoArray)
@@ -1885,6 +1988,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 				continue;	// Prevent adding both forms for name
 			}
 			constw = QString("PK %1").arg(n->PK_nb);
+			constws = constw.mid(0, objw.size());
+			if (constws==objw)
+				result << constw;
+		}
+	}
+
+	// Search by G objects number (possible formats are "G120+09.1" or "G 120+09.1")
+	if (objw.size()>=1 && objw.left(1)=="G")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->G_nb.isEmpty()) continue;
+			QString constw = QString("G%1").arg(n->G_nb);
+			QString constws = constw.mid(0, objw.size());
+			if (constws==objw)
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("G %1").arg(n->G_nb);
 			constws = constw.mid(0, objw.size());
 			if (constws==objw)
 				result << constw;

@@ -73,11 +73,13 @@ Nebula::Nebula()
 	, UGC_nb(0)
 	, Ced_nb()
 	, PK_nb()
+	, G_nb()
 	, bMag(99.)
 	, vMag(99.)
 	, nType()	
 {
 	nameI18 = "";
+	since = "";
 	angularSize = -1;	
 }
 
@@ -136,6 +138,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("Ced %1").arg(Ced_nb);
 		if (!PK_nb.isEmpty())
 			catIds << QString("PK %1").arg(PK_nb);
+		if (!G_nb.isEmpty())
+			catIds << QString("G %1").arg(G_nb);
 		oss << catIds.join(" - ");
 
 		if (!nameI18.isEmpty() && flags&Name)
@@ -323,12 +327,9 @@ float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
-	float lim = vMag;
+	float lim = qMin(vMag, bMag);
 	if (lim > 50) lim = 15.f;
 
-	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
-	if (getEnglishName().contains("Pleiades"))
-		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
 	if (nType==NebDn)
 	{
@@ -430,12 +431,9 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
-	float lim = vMag;
+	float lim = qMin(vMag, bMag);
 	if (lim > 50) lim = 15.f;
 
-	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
-	if (getEnglishName().contains("Pleiades"))
-		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
 	if (nType==NebDn)
 	{
@@ -502,6 +500,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 			str = QString("Ced %1").arg(Ced_nb);
 		else if (!PK_nb.isEmpty())
 			str = QString("PK %1").arg(PK_nb);
+		else if (!G_nb.isEmpty())
+			str = QString("G %1").arg(G_nb);
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
@@ -515,7 +515,7 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> PK_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> PK_nb >> G_nb;
 
 	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
 		angularSize = majorAxisSize*minorAxisSize;
