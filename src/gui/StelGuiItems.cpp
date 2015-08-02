@@ -29,6 +29,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
+#include "StelObserver.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -627,7 +628,8 @@ void BottomStelBar::updateText(bool updatePos)
 			lon *= -1;
 		}
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
-		location->setToolTip(QString("%1 %2").arg(latStr).arg(lonStr));
+		QString rho = q_("Planetocentric distance %1 km").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU);
+		location->setToolTip(QString("%1 %2, %3").arg(latStr).arg(lonStr).arg(rho));
 	}
 
 	QString str;
