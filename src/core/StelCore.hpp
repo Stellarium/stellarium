@@ -433,6 +433,10 @@ public slots:
 	//! on the current planetary body on which the observer is located. Sidereal year
 	//! connected to orbital period of planets.
 	void addSiderealYear();
+	//! Add n sidereal years to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located. Sidereal year
+	//! connected to orbital period of planets.
+	void addSiderealYears(float n=100.f);
 
 	//! Subtract one [Earth, solar] hour to the current simulation time.
 	void subtractHour();
@@ -448,6 +452,10 @@ public slots:
 	//! on the current planetary body on which the observer is located. Sidereal year
 	//! connected to orbital period of planets.
 	void subtractSiderealYear();
+	//! Subtract n sidereal years to the simulation time. The length of time depends
+	//! on the current planetary body on which the observer is located. Sidereal year
+	//! connected to orbital period of planets.
+	void subtractSiderealYears(float n=100.f);
 
 	//! Add one synodic month to the simulation time.
 	void addSynodicMonth();
@@ -459,15 +467,25 @@ public slots:
 
 	//! Add one anomalistic month to the simulation time.
 	void addAnomalisticMonth();
+	//! Add one anomalistic year to the simulation time.
+	void addAnomalisticYear();
+	//! Add n anomalistic years to the simulation time.
+	void addAnomalisticYears(float n=100.f);
 
 	//! Add one mean tropical month to the simulation time.
 	void addTropicalMonth();
 	//! Add one mean tropical year to the simulation time.
 	void addTropicalYear();
-	//! Add one mean tropical century to the simulation time.
-	void addTropicalCentury();
-	//! Add one Julian century to the simulation time.
-	void addJulianCentury();
+	//! Add n mean tropical years to the simulation time.
+	void addTropicalYears(float n=100.f);
+
+	//! Add one Julian year to the simulation time.
+	void addJulianYear();
+	//! Add n Julian years to the simulation time.
+	void addJulianYears(float n=100.f);
+
+	//! Add one Gaussian year to the simulation time.
+	void addGaussianYear();
 
 	//! Subtract one synodic month to the simulation time.
 	void subtractSynodicMonth();
@@ -479,15 +497,25 @@ public slots:
 
 	//! Subtract one anomalistic month to the simulation time.
 	void subtractAnomalisticMonth();
+	//! Subtract one anomalistic year to the simulation time.
+	void subtractAnomalisticYear();
+	//! Subtract n anomalistic years to the simulation time.
+	void subtractAnomalisticYears(float n=100.f);
 
 	//! Subtract one mean tropical month to the simulation time.
 	void subtractTropicalMonth();
 	//! Subtract one mean tropical year to the simulation time.
 	void subtractTropicalYear();
-	//! Subtract one mean tropical century to the simulation time.
-	void subtractTropicalCentury();
-	//! Subtract one Julian century to the simulation time.
-	void subtractJulianCentury();
+	//! Subtract n mean tropical years to the simulation time.
+	void subtractTropicalYears(float n=100.f);
+
+	//! Subtract one Julian year to the simulation time.
+	void subtractJulianYear();
+	//! Subtract n Julian years to the simulation time.
+	void subtractJulianYears(float n=100.f);
+
+	//! Subtract one Gaussian year to the simulation time.
+	void subtractGaussianYear();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)
