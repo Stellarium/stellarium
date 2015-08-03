@@ -543,39 +543,25 @@ void BottomStelBar::updateText(bool updatePos)
 	StelCore* core = StelApp::getInstance().getCore();
 	double jd = core->getJD();
 	double deltaT = core->getDeltaT();
-//	double sigma = -1.;
-	QString sigmaInfo = "";	
+	double sigma = StelUtils::getDeltaTStandardError(jd);
+	QString sigmaInfo = "";
 	QString validRangeMarker = "";
-	// bool displayDeltaT = false; // ==> GZ JDfix for 0.14 ALWAYS TRUE!
-//	if (core->getCurrentLocation().planetName.contains("Earth"))
-//	{
-//		deltaT = core->getDeltaT(jd);
-//		displayDeltaT = true;
-		double sigma = StelUtils::getDeltaTStandardError(jd);
-		core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
-//	}
+	core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
 
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
-	// GZ JDfix for 0.14: We no longer need deltaT in the main date computations :-)
-	//double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-	//QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
 	QString tz = locmgr.getPrintableTimeZoneLocal(jd);
 	QString newDateInfo = " ";
 	if (getFlagShowTime())
 	{
 		if (getFlagShowTz())
-			//newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz);
 			newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd)).arg(tz);
 		else
-			//newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt));
 			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd));
 	}
-	//QString newDateAppx = QString("JD %1").arg(jd-dt, 0, 'f', 5);
 	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 5);
 	if (getFlagTimeJd())
 	{
 		newDateAppx = newDateInfo;
-		//newDateInfo = QString("JD %1").arg(jd-dt, 0, 'f', 5);
 		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 5);
 	}
 
@@ -583,7 +569,6 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		updatePos = true;		
 		datetime->setText(newDateInfo);
-		//if (displayDeltaT && core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 		if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 		{
 			if (sigma>0)

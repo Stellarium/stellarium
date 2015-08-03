@@ -206,10 +206,7 @@ QString MeteorShower::getMonthName(int number) const
 QDateTime MeteorShower::getSkyQDateTime() const
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	//get the current sky date
-	//double JD = core->getJDay();
-	//return StelUtils::jdToQDateTime(JD+ StelUtils::getGMTShiftFromQT(JD)/24 - core->getDeltaT(JD)/86400);
-	// GZ OK, that means we need UT here.
+	//get the current sky date (zone time)
 	double JD = core->getJD();
 	return StelUtils::jdToQDateTime(JD+ StelUtils::getGMTShiftFromQT(JD)/24);
 }

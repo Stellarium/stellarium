@@ -274,7 +274,6 @@ void MeteorShowers::setFlagShowMSButton(bool b)
 
 bool MeteorShowers::changedSkyDate(StelCore* core)
 {
-	// GZ JDfix for 0.14 done
 	double JD = core->getJD();
 	skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24);
 	if (skyDate.toString("MM.dd.yyyy") != lastSkyDate.toString("MM.dd.yyyy"))  //if the sky date changed

@@ -191,7 +191,7 @@ private:
 
 //! Computes the Sun or Moon coordinates at a given Julian date.
 //! @param core the stellarium core.
-//! @param JD QPair of double for the Julian date: first=JD_UT and .second=JDE_TT
+//! @param JD QPair of double for the Julian date: first=JD_UT and .second=JDE_DT
 //! @param RASun right ascension of the Sun (in hours).
 //! @param DecSun declination of the Sun (in radians).
 //! @param RAMoon idem for the Moon.
@@ -269,17 +269,14 @@ private:
 	void toRADec(Vec3d vec3d, double& ra, double& dec);
 
 	//! Table containing the Julian Dates of the days of the current year.
-	//double yearJD[366];
-	// GZ JDfix for 0.14. This must become a QPair of JD.first=JD_UT, JD.second=JDE
-	//double yearJD[366];
-	QPair<double, double> yearJD[366];
+	QPair<double, double> yearJD[366]; // GZ: This had to become a QPair of JD.first=JD_UT, JD.second=JDE
 
 //! Check if a source is observable during a given date.
 //! @param i the day of the year.
 	bool CheckRise(int day);
 
 //! Some useful constants (almost self-explanatory).
-// GZ During JDFix for 0.14: Made true constants out of those, and improved accuracy of some.
+// GZ: Made true constants out of those, and improved accuracy of some.
 	static const double Rad2Deg, Rad2Hr, UA, TFrac, JDsec, halfpi, MoonT, RefFullMoon, MoonPerilune;
 
 //! Some useful variables(almost self-explanatory).

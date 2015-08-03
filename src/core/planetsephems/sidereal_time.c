@@ -372,9 +372,7 @@ double get_apparent_sidereal_time (double JD, double JDE)
 	sidereal = get_mean_sidereal_time (JD);
         
 	/* add corrections for nutation in longitude and for the true obliquity of the ecliptic
-	   TODO: This should if possible use JDE, maybe change main argument to QPair or std::pair  JD/DeltaT?
-	   The error by calling nutation(JD_UT) is however miniscule.
-	*/
+	 */
 	get_nutation (JDE, &nutation);
     
 	/* GZ: This was the only place where this was used. I added the summation here. */

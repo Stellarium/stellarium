@@ -342,7 +342,7 @@ public:
 
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
-	//! @param date the date in JDay
+	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)
 	//! \deprecated ??? In the "deprecated" section, but used in SolarSystem::init()
 	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
 

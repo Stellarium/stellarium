@@ -931,9 +931,6 @@ void ConfigurationDialog::aScriptHasStopped(void)
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	//double JD = core->getJDay();
-	//ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400));
-	// GZ JDfix for 0.14:
 	double JD = core->getJD();
 	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24));
 	ui->fixedTimeRadio->setChecked(true);
@@ -1255,7 +1252,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
-	// GZ JDfix for 0.14. I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
+	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
 	//algorithms->addItem(q_("Espenak & Meeus (2006) no extra moon acceleration"), "EspenakMeeusZeroMoonAccel");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");

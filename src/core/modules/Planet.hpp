@@ -192,9 +192,9 @@ public:
 	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
 	void setApparentMagnitudeAlgorithm(QString algorithm);
 
-	//! Compute the z rotation to use from equatorial to geographic coordinates
-	//! @param jd is JD(UT) for Earth, but JDE for other locations
-	//! GZ JDfix TODO MAYBE CALL WITH (JD, JDE) AND LET SELECTION HAPPEN INSIDE?
+	//! Compute the z rotation to use from equatorial to geographic coordinates. For general applicability we need both time flavours:
+	//! @param JD is JD(UT) for Earth
+	//! @param JDE is used for other locations
 	double getSiderealTime(double JD, double JDE) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
 	void setRotEquatorialToVsop87(const Mat4d &m);
@@ -203,11 +203,10 @@ public:
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double dateJDE);
-	//virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
-	void computePosition(const double dateJDE);// GZ: gets overridden in Comet!
+	void computePosition(const double dateJDE);
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
-	// This requires both flavours of JD.
+	// This requires both flavours of JD in cases involving Earth.
 	void computeTransMatrix(double JD, double JDE);
 
 	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
@@ -281,7 +280,7 @@ public:
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
 	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
 	double lastOrbitJDE;
-	double deltaJDE;                  // time difference between positional updates.
+	double deltaJDE;                 // time difference between positional updates.
 	double deltaOrbitJDE;
 	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                 // whether to connect the beginning of the orbit line to

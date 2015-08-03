@@ -247,8 +247,6 @@ void PointerCoordinates::draw(StelCore *core)
 		case HourAngle:
 		{
 			Vec3d v = core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto);
-			// GZ JDfix 0.14 done
-			// StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime()+((core->getDeltaT(core->getJDay())/240.)*M_PI/180.))*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
 			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime())*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
 			cx = 2.*M_PI-cx;
 			coordsSystem = qc_("HA/Dec", "abbreviated in the plugin");
