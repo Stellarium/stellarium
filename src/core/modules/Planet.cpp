@@ -593,7 +593,7 @@ void Planet::computePosition(const double dateJDE)
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
-// In case of the planets, this makes the axis point to the respective celestial pole.
+// In case of the planets, this makes the axis point to their respective celestial poles.
 // TODO: Verify for the other planets if their axes are relative to J2000 ecliptic (VSOP87A XY plane) or relative to (precessed) ecliptic of date?
 void Planet::computeTransMatrix(double JD, double JDE)
 {

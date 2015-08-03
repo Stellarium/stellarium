@@ -36,7 +36,6 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	// GZ JDfix for 0.14. I assume we need JDE here, don't know the semantics of this currentTime.
 	float currentTime = core->getJDE();
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
@@ -67,7 +66,6 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 // Add 1 point to all the curves at current time and suppress too old points
 void TrailGroup::update()
 {
-	// GZ JDfix for 0.14: I don't know if times are ever displayed. Currently I understand we keep JDE here.
 	times.append(StelApp::getInstance().getCore()->getJDE());
 	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
 	{

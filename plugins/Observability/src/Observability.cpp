@@ -1612,7 +1612,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 			dT = 0.1/1440.; // 6 seconds. Our time span for the finite-difference derivative estimate.
 //			double Deriv1, Deriv2; // Variables for temporal use.
-			QPair<double, double>Sec1, Sec2; // Variables for temporal use. Contrary to the other cases, er have Sec[12].second=DeltaT[days], not JDE. This avoids needless re-computing.
+			QPair<double, double>Sec1, Sec2; // Variables for temporal use. Contrary to the other cases, we have Sec[12].second=DeltaT[days], not JDE. This avoids needless re-computing.
 			double Temp1, Temp2; // Variables for temporal use.
 			double iniEst1, iniEst2;  // JD values that MUST include the solution within them.
 			double Phase1;
