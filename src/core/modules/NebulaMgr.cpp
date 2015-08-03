@@ -227,6 +227,7 @@ void NebulaMgr::setCatalogFilters(const CatalogGroup &cflags)
 
 	StelApp::getInstance().getStelObjectMgr().unSelect();
 
+	qWarning() << "Reloading DSO data...";
 	setFlagShow(false);
 	loadNebulaSet("default");
 	setFlagShow(status);
