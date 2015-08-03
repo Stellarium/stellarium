@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 10:24+0600\n"
+"POT-Creation-Date: 2015-08-02 23:11+0600\n"
 "PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-30 05:39+0000\n"
-"X-Generator: Launchpad (build 17646)\n"
+"X-Launchpad-Export-Date: 2015-08-03 05:29+0000\n"
+"X-Generator: Launchpad (build 17656)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:872 src/core/modules/LandscapeMgr.cpp:413
@@ -732,82 +732,138 @@ msgid "Add 1 sidereal year"
 msgstr "加1個恆星年"
 
 #: src/core/StelCore.cpp:213
+msgid "Add 100 sidereal years"
+msgstr ""
+
+#: src/core/StelCore.cpp:214
 msgid "Add 1 synodic month"
 msgstr "加1個朔望月"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:215
 msgid "Add 1 draconic month"
 msgstr "加1個交點月"
 
-#: src/core/StelCore.cpp:215
+#: src/core/StelCore.cpp:216
 msgid "Add 1 draconic year"
 msgstr "加1個交點年"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:217
 msgid "Add 1 anomalistic month"
 msgstr "加1個近點月"
 
-#: src/core/StelCore.cpp:217
+#: src/core/StelCore.cpp:218
+msgid "Add 1 anomalistic year"
+msgstr ""
+
+#: src/core/StelCore.cpp:219
+msgid "Add 100 anomalistic years"
+msgstr ""
+
+#: src/core/StelCore.cpp:220
 msgid "Add 1 mean tropical month"
 msgstr "加1個回歸月"
 
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:221
 msgid "Add 1 mean tropical year"
 msgstr "加1個回歸年"
 
-#: src/core/StelCore.cpp:219
+#: src/core/StelCore.cpp:222
+msgid "Add 100 mean tropical years"
+msgstr ""
+
+#: src/core/StelCore.cpp:223
+msgid "Add 1 Julian year"
+msgstr ""
+
+#: src/core/StelCore.cpp:224
+msgid "Add 1 Julian century"
+msgstr ""
+
+#: src/core/StelCore.cpp:225
+msgid "Add 1 Gaussian year"
+msgstr ""
+
+#: src/core/StelCore.cpp:226
 msgid "Subtract 1 sidereal day"
 msgstr "減少1恆星日"
 
-#: src/core/StelCore.cpp:220
+#: src/core/StelCore.cpp:227
 msgid "Subtract 1 sidereal year"
 msgstr "減1個恆星年"
 
-#: src/core/StelCore.cpp:221
+#: src/core/StelCore.cpp:228
+msgid "Subtract 100 sidereal years"
+msgstr ""
+
+#: src/core/StelCore.cpp:229
 msgid "Subtract 1 synodic month"
 msgstr "減1個朔望月"
 
-#: src/core/StelCore.cpp:222
+#: src/core/StelCore.cpp:230
 msgid "Subtract 1 draconic month"
 msgstr "減1個交點月"
 
-#: src/core/StelCore.cpp:223
+#: src/core/StelCore.cpp:231
 msgid "Subtract 1 draconic year"
 msgstr "減1個交點年"
 
-#: src/core/StelCore.cpp:224
+#: src/core/StelCore.cpp:232
 msgid "Subtract 1 anomalistic month"
 msgstr "減1個近點月"
 
-#: src/core/StelCore.cpp:225
+#: src/core/StelCore.cpp:233
+msgid "Subtract 1 anomalistic year"
+msgstr ""
+
+#: src/core/StelCore.cpp:234
+msgid "Subtract 100 anomalistic years"
+msgstr ""
+
+#: src/core/StelCore.cpp:235
 msgid "Subtract 1 mean tropical month"
 msgstr "減1個回歸月"
 
-#: src/core/StelCore.cpp:226
+#: src/core/StelCore.cpp:236
 msgid "Subtract 1 mean tropical year"
 msgstr "減1個回歸年"
 
-#: src/core/StelCore.cpp:228
+#: src/core/StelCore.cpp:237
+msgid "Subtract 100 mean tropical years"
+msgstr ""
+
+#: src/core/StelCore.cpp:238
+msgid "Subtract 1 Julian year"
+msgstr ""
+
+#: src/core/StelCore.cpp:239
+msgid "Subtract 1 Julian century"
+msgstr ""
+
+#: src/core/StelCore.cpp:240
+msgid "Subtract 1 Gaussian year"
+msgstr ""
+
+#: src/core/StelCore.cpp:242
 msgid "Set home planet to selected planet"
 msgstr "將選擇的行星設為預設位置"
 
-#: src/core/StelCore.cpp:229
+#: src/core/StelCore.cpp:243
 msgid "Go to home"
 msgstr "返回首頁"
 
-#: src/core/StelCore.cpp:230
+#: src/core/StelCore.cpp:244
 msgid "Flip scene horizontally"
 msgstr "水平翻轉"
 
-#: src/core/StelCore.cpp:231
+#: src/core/StelCore.cpp:245
 msgid "Flip scene vertically"
 msgstr "垂直翻轉"
 
-#: src/core/StelCore.cpp:1530
+#: src/core/StelCore.cpp:1604
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "修正已被禁用, 只有當你知道你在做什麼才禁用！"
 
-#: src/core/StelCore.cpp:1533
+#: src/core/StelCore.cpp:1607
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -818,7 +874,7 @@ msgstr ""
 "在他的文章《古代的日食證明了愛因斯坦的相對論》[<em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em>](%1). 要了解更多信息，請點擊%2這裡%3."
 
-#: src/core/StelCore.cpp:1536
+#: src/core/StelCore.cpp:1610
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -827,7 +883,7 @@ msgstr ""
 "這個經驗公式由GM Clemence 在文章《關於天文常數係統》[<em>On the system of astronomical "
 "constants</em>] (%1)中公佈."
 
-#: src/core/StelCore.cpp:1539
+#: src/core/StelCore.cpp:1613
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -839,7 +895,7 @@ msgstr ""
 "在他的《用於計算器的天文學公式》[<em>Astronomical Formulae for Calculators</em> ] "
 "中使用。計算機程序SunTracker Pro 也使用了這一公式."
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1617
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -849,7 +905,7 @@ msgstr ""
 "Ephemeris</em>]和《日食的法規》[<em>Canon of Solar Eclipses</em>]中使用的IAU (1952) "
 "公式稍加修改之後的版本."
 
-#: src/core/StelCore.cpp:1547
+#: src/core/StelCore.cpp:1621
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -857,7 +913,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1551
+#: src/core/StelCore.cpp:1625
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -866,14 +922,14 @@ msgid ""
 msgstr ""
 "此方程由P. M. Muller及F. R. Stephenson在<em>從早期天文觀測地球和月球的加速現象</em>中發佈 (%1)."
 
-#: src/core/StelCore.cpp:1554
+#: src/core/StelCore.cpp:1628
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr "此方程由F. R. Stephenson在<em>前期望遠鏡時代天文觀察</em>中發佈 (%1)."
 
-#: src/core/StelCore.cpp:1557
+#: src/core/StelCore.cpp:1631
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -885,7 +941,7 @@ msgstr ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) 以符合由Brouwer (1952)發表之數據"
 
-#: src/core/StelCore.cpp:1560
+#: src/core/StelCore.cpp:1634
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -894,7 +950,7 @@ msgstr ""
 "此演算法被應用在 P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -"
 "4000 to +2800</em> (1986) 及PC星象軟件 RedShift."
 
-#: src/core/StelCore.cpp:1563
+#: src/core/StelCore.cpp:1637
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -904,11 +960,11 @@ msgstr ""
 "此方程由F. R. Stephenson及L. V. Morrison<em>公元前700年到公元1980 - 地球自轉的長期變化</em>中發佈 "
 "(%1)"
 
-#: src/core/StelCore.cpp:1566
+#: src/core/StelCore.cpp:1640
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "此演算法被應用在PC星象軟件 Guide 7."
 
-#: src/core/StelCore.cpp:1569
+#: src/core/StelCore.cpp:1643
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -917,14 +973,14 @@ msgstr ""
 "此修正由F. Espenak提供, 並在<em>五十年日食大典: 1986-2035</em>和<em>五十年月食大典: 1986-"
 "2035</em>中提及 (1989)."
 
-#: src/core/StelCore.cpp:1572
+#: src/core/StelCore.cpp:1646
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "此修正由K.M. Borkowski (%1)在硏究由公元前2137至公元1715有紀錄的31次日食所得出."
 
-#: src/core/StelCore.cpp:1575
+#: src/core/StelCore.cpp:1649
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -933,7 +989,7 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1578
+#: src/core/StelCore.cpp:1652
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -942,7 +998,7 @@ msgstr ""
 "此修正由M. Chapront-Touze及J. Chapront在<em>公元前4000至公元月球方程和數據</em> ELP 2000-"
 "85簡化月球理論中所用."
 
-#: src/core/StelCore.cpp:1581
+#: src/core/StelCore.cpp:1655
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -950,42 +1006,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1584
+#: src/core/StelCore.cpp:1658
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1587
+#: src/core/StelCore.cpp:1661
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1590
+#: src/core/StelCore.cpp:1664
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr "NASA噴射推進實驗室之太陽系動態小組在他們互動網站 %1JPL Horizons%2 使用此方程式."
 
-#: src/core/StelCore.cpp:1593
+#: src/core/StelCore.cpp:1667
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1596
+#: src/core/StelCore.cpp:1670
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1599
+#: src/core/StelCore.cpp:1673
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -993,7 +1049,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1602
+#: src/core/StelCore.cpp:1676
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -1001,7 +1057,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1605
+#: src/core/StelCore.cpp:1679
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -1010,7 +1066,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1608
+#: src/core/StelCore.cpp:1682
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1023,11 +1079,11 @@ msgstr ""
 "並通過由1600至2000年列表值多項式擬合, 用作%1NASA日月蝕信息網站%2 及他們的 <em>五千年日食寶典: -1900 到 "
 "+3000</em> (2006). 此方程式亦用在太陽, 月球及行星星歷軟件SOLEX"
 
-#: src/core/StelCore.cpp:1608
+#: src/core/StelCore.cpp:1682
 msgid "Used by default."
 msgstr "預設值"
 
-#: src/core/StelCore.cpp:1611
+#: src/core/StelCore.cpp:1685
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -1037,7 +1093,7 @@ msgstr ""
 "此修正由B. Banjevic提供, 基於Stephenson & Morrison (1984), 並發表在<em>Ancient eclipses "
 "and dating the fall of Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:1614
+#: src/core/StelCore.cpp:1688
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -1048,7 +1104,7 @@ msgstr ""
 "並發表在<em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) "
 "及由 Sana Islam 在2013年審視."
 
-#: src/core/StelCore.cpp:1617
+#: src/core/StelCore.cpp:1691
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -1056,43 +1112,43 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1620
+#: src/core/StelCore.cpp:1694
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "這是一個計算%1T由用戶定義的係數的的二次方程式."
 
-#: src/core/StelCore.cpp:1623 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1697 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "錯誤"
 
-#: src/core/StelCore.cpp:1673
+#: src/core/StelCore.cpp:1747
 msgid "with meaningless values outside this range"
 msgstr "超出此範圍之無意義值"
 
-#: src/core/StelCore.cpp:1699
+#: src/core/StelCore.cpp:1773
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1721 src/core/StelCore.cpp:1726
-#: src/core/StelCore.cpp:1753 src/core/StelCore.cpp:1758
-#: src/core/StelCore.cpp:1763
+#: src/core/StelCore.cpp:1795 src/core/StelCore.cpp:1800
+#: src/core/StelCore.cpp:1827 src/core/StelCore.cpp:1832
+#: src/core/StelCore.cpp:1837
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1731
+#: src/core/StelCore.cpp:1805
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "典型1秒準確度和沒有值超出範圍"
 
-#: src/core/StelCore.cpp:1773
+#: src/core/StelCore.cpp:1847
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "有效使日期用範: 在%1 及 %2, %3之間."
 
-#: src/core/StelCore.cpp:1775
+#: src/core/StelCore.cpp:1849
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "有效使日期用範: 在%1 及 %2之間."
@@ -1301,7 +1357,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:799
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:398
 msgid "Authors"
 msgstr "著作群"
 
@@ -1312,14 +1368,14 @@ msgstr "聯繫"
 #: src/gui/ConfigurationDialog.cpp:802
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:523
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:397
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:183
 msgid "Version"
 msgstr "版本"
@@ -1333,7 +1389,7 @@ msgstr "版本"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:184
 msgid "Author"
 msgstr "作者"
@@ -1785,20 +1841,25 @@ msgstr "自動隱藏垂直工具欄"
 msgid "Toggle visibility of GUI"
 msgstr "切換顯示的圖形用戶界面"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:743
+#: src/gui/StelGuiItems.cpp:290 src/gui/StelGuiItems.cpp:745
 msgid "Space"
 msgstr "太空"
 
-#: src/gui/StelGuiItems.cpp:601
+#: src/gui/StelGuiItems.cpp:602
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:650
+#: src/gui/StelGuiItems.cpp:631
+#, qt-format
+msgid "Planetocentric distance %1 km"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:652
 msgid "Field of view"
 msgstr "視野範圍"
 
-#: src/gui/StelGuiItems.cpp:668
+#: src/gui/StelGuiItems.cpp:670
 msgid "Frames per second"
 msgstr "每秒格數"
 
@@ -4645,7 +4706,7 @@ msgstr "巳顯示的資訊"
 #: src/ui_configurationDialog.h:1056
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:181
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:176
 msgid "Name"
 msgstr "名稱"
 
@@ -5168,25 +5229,25 @@ msgid ""
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:440
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:296
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
 msgid "Links"
 msgstr "連結"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:441
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:435
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:297
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:292
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
 #, qt-format
 msgid ""
@@ -5196,13 +5257,13 @@ msgstr "支援由Launchpad提供. 記得在標題包含%1."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:444
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:300
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:295
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -5210,13 +5271,13 @@ msgstr "如果你有問題, 你可以%1在這取得答案%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:446
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:440
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:297
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -5224,13 +5285,13 @@ msgstr "錯誤報告可以由%1此處%2報告."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:448
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:442
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/Novae/src/gui/NovaeDialog.cpp:141
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:304
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:299
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -6131,40 +6192,40 @@ msgstr "此衛星不可見"
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:396
 msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium衛星插件"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "衛星插件可以預測人造衛星在地球軌道位置"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
 msgid "Notes for users"
 msgstr "用戶注意事項"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:405
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "衛星和其軌道只會在觀測者在地球上才會顯示"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr "預測位置只適用於短期預測 (過去和未來幾天, 週或者一個月的). 當過此範圍之外的日期應預期有不準確位置."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:413
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
 msgstr "軌道參數很快會過時 (僅僅幾個星期, 有時天不等). 為了得到有用的數據出來, 你需要經常更新的TLE數據."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -6172,25 +6233,25 @@ msgid ""
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr "衛星插件仍然處於開發階段. 有些功能未完成, 未整或有錯."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:425
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
 msgid "TLE data updates"
 msgstr "TLE資料更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr "衛星插件會自動由網上下載TLE軌道資料, 預設每72小時更新一次 "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:427
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -6198,17 +6259,17 @@ msgid ""
 "(see %1 for an example)."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:431
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:425
 msgid "Adding new satellites"
 msgstr "加新一個衛星"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
 msgid ""
 "1. Make sure the satellite(s) you wish to add are included in one of the "
 "URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
@@ -6216,40 +6277,40 @@ msgid ""
 "you wish to add and select the \"add\" button."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
 msgid "Technical notes"
 msgstr "技術說明"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:435
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:429
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr "位置通過SGP4＆SDP4方法計算, 使用NORAD TLE數據作為輸入. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:436
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "在%1此%2看更多資訊"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:470
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:319
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:314
 msgid "Internet updates disabled"
 msgstr "互聯網更新已停用"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:488
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:466
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:482
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:168
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:202
 #: plugins/Novae/src/gui/NovaeDialog.cpp:165
@@ -6260,68 +6321,68 @@ msgstr "互聯網更新已停用"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:359
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:318
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:354
 msgid "Updating now..."
 msgstr "更新中...."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:477
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:471
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:170
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:327
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:322
 msgid "Next update: < 1 minute"
 msgstr "下一次更新: < 1 分鐘"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:479
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:473
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:331
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:326
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "下一次更新: %1 分鐘"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:475
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:330
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "下一次更新: %1 小時"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:491
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
 #: plugins/Novae/src/gui/NovaeDialog.cpp:202
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:363
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:358
 msgid "Update error"
 msgstr "更新錯誤"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:504
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:498
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "更新 %1/%2 衛星; 新增%3個; 移除%4個"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:506
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:500
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "更新 %1/%2 衛星; 新增%3個; 缺少%4個"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:568
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:562
 msgid "[new source]"
 msgstr "[新來源]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:620
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:614
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:191
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
@@ -6333,12 +6394,12 @@ msgstr "[新來源]"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:349
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:344
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:473
 msgid "Update now"
 msgstr "更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:622
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:616
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
@@ -6347,32 +6408,32 @@ msgstr "更新"
 msgid "Update from files"
 msgstr "從檔案更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:658
 msgid "[orbit calculation error]"
 msgstr "[軌道計算錯誤]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:659
 msgid "[all newly added]"
 msgstr "[新増的]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:666
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:660
 msgid "[all not displayed]"
 msgstr "[全部新添加]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:667
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:661
 msgid "[all displayed]"
 msgstr "[全部顯示中]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:662
 msgid "[all]"
 msgstr "[全部]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:712
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:706
 msgid "New group..."
 msgstr "新群組..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:918
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:912
 msgid "Select TLE Update File"
 msgstr "選擇TLE更新文件"
 
@@ -6675,7 +6736,7 @@ msgstr "望遠鏡控制插件"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:250
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:113
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:107
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:110
@@ -7540,12 +7601,12 @@ msgid "Select bookmark..."
 msgstr ""
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:104
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:98
 msgid "website"
 msgstr "網站"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:108
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -7556,7 +7617,7 @@ msgstr ""
 "你可以匯入有特定格式彗星和小行星資料, 資料格式可從國際天文聯會小行星中心(%1)下載. 你可以匯入大量從小行星和彗星星歷表服務 "
 "(MPES)下載及搜尋的星體."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:112
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:106
 msgid "Solar System Editor plug-in"
 msgstr "太陽系編輯器插件"
 
@@ -8407,7 +8468,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:306
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:301
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -9157,7 +9218,7 @@ msgid "Meteor Showers"
 msgstr "流星雨插件"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
@@ -9642,53 +9703,53 @@ msgstr "太陽黃經為"
 msgid "variable"
 msgstr "可變的"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:182
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:177
 msgid "ZHR"
 msgstr "每小時天頂流星數"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:178
 msgid "Data Type"
 msgstr "資料類型"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
 msgid "Peak"
 msgstr "極大期"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:195
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:190
 msgid "Start date greater than end date!"
 msgstr "開始日期大於結束日期"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:199
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:194
 msgid "Time interval must be less than one year!"
 msgstr "時間間隔必須小於1年!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:219
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:214
 msgid "Variable"
 msgstr "不定"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:222
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:217
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:501
 msgid "Real"
 msgstr "真實"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:222
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:217
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:493
 msgid "Generic"
 msgstr "通用"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid "Meteor Showers Plug-in"
 msgstr "流星雨插件"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Terms"
 msgstr "條款"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 msgid "Meteor shower"
 msgstr "流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -9704,12 +9765,12 @@ msgstr ""
 "大部分的流星體都比沙礫還要小，因此幾乎所有的流星體都會在大氣層內被銷毀，不會擊中地球的表面.數量特別龐大或表現不尋常的流星雨會被稱為\"流星爆發\"或\""
 "流星暴\", 一般指每小時多於1,000個流星"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:502
 msgid "Radiant"
 msgstr "輻射點"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -9718,7 +9779,7 @@ msgid ""
 msgstr ""
 "輻射點或視輻射點是流星雨在天空中的一點發源處, 流星看起來似乎都來自該處 (對行星上的觀測者). 例如, 英仙座流星雨看起來就像是來自於英仙座."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -9728,18 +9789,18 @@ msgstr ""
 "觀測者看見流星在天空中飛過, 追溯流星的來向時, 會發現似乎集中在一個點, 這個點就稱為輻射點. 如果一顆流星的路徑回溯之後不能指向輻射點, "
 "這顆流星就不屬於這個流星雨, 稱為散亂流星或偶發流星."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr "許多流星雨都有一個輻射點, 位置會在出現時的時間之間隔內改變. 舉例來說, 御夫座δ流星雨的輻射點會每晚漂移多於一度."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr "每小時天頂流星數 (ZHR)"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -9750,11 +9811,11 @@ msgstr ""
 "在天文學, 流星雨之雨每小時天頂流星數 (ZHR) 指觀察者在非常晴天, 沒有光污染 (可見星等6.5) 可見的流星數量, "
 "假設流星雨之輻射點在天頂位置. 但此值會受到流星雨之輻射點接近地平線而影響."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
 msgid "Population index"
 msgstr "光度比"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -9762,36 +9823,36 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr "光度比指流星雨光度分佈. 光度比低於2.5光明流星出現較平均頻密, 而多於3.0指較暗流星佔多數."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 msgid "Notes"
 msgstr "備註"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr "此插件是一個歐洲宇航局(ESA)之太空夏季程式碼大賽中的專案."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
 msgid "Info"
 msgstr "相關資訊"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 msgid "Info about meteor showers you can get here:"
 msgstr "可用流星雨資料:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:292
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr "%1流星雨%2 - 維基百科文章"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:294
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr "%1國際流星組織 (IMO)%2"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:370
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:365
 msgid "Meteor showers is updated"
 msgstr "流星雨插件己更新"
 
