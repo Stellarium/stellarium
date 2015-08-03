@@ -79,7 +79,7 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowCurrentSun(false)
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
-	, lastJD(0.0)
+	, lastJDE(0.0)
 	, toolbarButton(NULL)
 {
 	setObjectName("ArchaeoLines");
@@ -212,6 +212,9 @@ void ArchaeoLines::init()
 
 void ArchaeoLines::update(double deltaTime)
 {
+	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
+		return;
+
 	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 	static const double lunarI=5.145396; // inclination of lunar orbit
 	// compute min and max distance values for horizontal parallax.
@@ -244,16 +247,16 @@ void ArchaeoLines::update(double deltaTime)
 		currentPlanetLine->setDeclination(dec_equ * 180.0/M_PI);
 	}
 
-	double newJD=core->getJDay();
-	if (fabs(newJD-lastJD) > 10.0) // enough to compute this every 10 days?
+	double newJDE=core->getJDE();
+	if (fabs(newJDE-lastJDE) > 10.0) // enough to compute this every 10 days?
 	{
-		eps= ssystem->getEarth()->getRotObliquity(core->getJDay()) *180.0/M_PI;
+		eps= ssystem->getEarth()->getRotObliquity(newJDE) *180.0/M_PI;
 		static const double invSqrt2=1.0/std::sqrt(2.0);
 		northernSolsticeLine->setDeclination( eps);
 		southernSolsticeLine->setDeclination(-eps);
 		northernCrossquarterLine->setDeclination( eps*invSqrt2);
 		southernCrossquarterLine->setDeclination(-eps*invSqrt2);
-		lastJD=newJD;
+		lastJDE=newJDE;
 	}
 	StelLocation loc=core->getCurrentLocation();
 
@@ -347,6 +350,9 @@ void ArchaeoLines::update(double deltaTime)
 //! Draw any parts on the screen which are for our module
 void ArchaeoLines::draw(StelCore* core)
 {
+	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
+		return;
+
 	equinoxLine->draw(core, lineFader.getInterstate());
 	northernSolsticeLine->draw(core, lineFader.getInterstate());
 	southernSolsticeLine->draw(core, lineFader.getInterstate());

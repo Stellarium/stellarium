@@ -237,7 +237,8 @@ void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 	//Change date
 	QString dateString = treeWidget->currentItem()->text(ColumnPeak);
 	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
-	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
+	// GZ JDfix for V0.14 this used to set JDE, so again. If IMO ephemerides are JD(UT), please change.
+	core->setJDE(StelUtils::qDateTimeToJd(qDateTime));
 
 	//Select object
 	QString namel18n = treeWidget->currentItem()->text(ColumnName);

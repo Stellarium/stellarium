@@ -260,7 +260,7 @@ bool Constellation::checkVisibility() const
 	bool visible = false;
 	int year, month, day;
 	// Get the current month
-	StelUtils::getDateFromJulianDay(StelApp::getInstance().getCore()->getJDay(), &year, &month, &day);
+	StelUtils::getDateFromJulianDay(StelApp::getInstance().getCore()->getJD(), &year, &month, &day);
 	if (endSeason >= beginSeason)
 	{
 		// OK, it's a "normal" season rule...

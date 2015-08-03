@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 long long int GetNow(void)
 {
 	long long int t;
-	StelCore *core = StelApp::getInstance().getCore();
+	//StelCore *core = StelApp::getInstance().getCore();
 #ifdef Q_OS_WIN32
 	union
 	{
@@ -50,7 +50,9 @@ long long int GetNow(void)
 	gettimeofday(&tv, 0);
 	t = tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
-	return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
+	// GZ JDfix for 0.14 I am 99.9% sure we no longer need the anti-correction
+	//return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
+	return t;
 }
 
 void Socket::hangup(void)

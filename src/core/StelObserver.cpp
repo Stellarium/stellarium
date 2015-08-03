@@ -77,9 +77,9 @@ void ArtificialPlanet::setDest(const PlanetP& dest)
 
 	// rotation:
 	const RotationElements &r(dest->getRotationElements());
-	lastJD = StelApp::getInstance().getCore()->getJDay();
+	lastJDE = StelApp::getInstance().getCore()->getJDE();
 
-	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJD-re.epoch)/re.period - (lastJD-r.epoch)/r.period), 360.0);
+	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJDE-re.epoch)/re.period - (lastJDE-r.epoch)/r.period), 360.0);
 
 	re.epoch = r.epoch;
 	re.period = r.period;
@@ -218,25 +218,19 @@ double StelObserver::getDistanceFromCenter(void) const
 	return rho*a;
 }
 
-Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
+// For Earth we require JD, for other planets JDE to describe rotation!
+Mat4d StelObserver::getRotAltAzToEquatorial(double JD, double JDE) const
 {
 	double lat = currentLocation.latitude;
 	// TODO: Figure out how to keep continuity in sky as we reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
-	// GZ: Actually, why would that be? Lat should be clamped elsewhere. Added tests.
+	// GZ: Actually, why would that be? Lat should be clamped elsewhere. Added tests to track down problems in other locations.
 	Q_ASSERT(lat <=  90.0);
 	Q_ASSERT(lat >= -90.0);
 	if( lat > 90.0 )  lat = 90.0;
 	if( lat < -90.0 ) lat = -90.0;
-	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
-	// 360 degrees = 24hrs; 15 degrees = 1hr = 3600s; 1 degree = 240s
-	// Apply DeltaT correction only for Earth
-	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
-	double deltaT = 0.;
-	if (getHomePlanet()->getEnglishName()=="Earth")
-		deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/240.;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude-deltaT)*M_PI/180.)
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+currentLocation.longitude)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
