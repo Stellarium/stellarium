@@ -413,6 +413,7 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxPGC->setChecked(flags & NebulaMgr::PGC);
 	ui->checkBoxUGC->setChecked(flags & NebulaMgr::UGC);
 	ui->checkBoxG->setChecked(flags & NebulaMgr::G);
+	ui->checkBoxPK->setChecked(flags & NebulaMgr::PK);
 }
 
 
