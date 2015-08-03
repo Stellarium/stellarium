@@ -36,33 +36,6 @@ class Nebula : public StelObject
 {
 friend class NebulaMgr;
 public:
-
-	enum CatalogGroupFlags
-	{
-		NGC		= 0x00000001, //!< New General Catalogue (NGC)
-		IC		= 0x00000002, //!< Index Catalogue (IC)
-		M		= 0x00000004, //!< Messier Catalog (M)
-		C		= 0x00000008, //!< Caldwell Catalogue (C)
-		B		= 0x00000010, //!< Barnard Catalogue (B)
-		Sh2		= 0x00000020, //!< Sharpless Catalogue (Sh 2)
-		LBN		= 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
-		LDN		= 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)
-		RCW		= 0x00000100, //!< A catalogue of Hα-emission regions in the southern Milky Way (RCW)
-		VdB		= 0x00000200, //!< Van den Bergh Catalogue of reflection nebulae (VdB)
-		Cr		= 0x00000400, //!< Collinder Catalogue (Cr or Col)
-		Mel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
-		PGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
-		UGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		Ced		= 0x00004000, //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
-		PK		= 0x00008000, //!< Catalogue of galactic planetary nebulae (Perek-Kohoutek) (PK)
-		G		= 0x00010000  //!< A catalogue of Galactic supernova remnants (G)
-	};
-	typedef QFlags<CatalogGroupFlags> CatalogGroup;
-	Q_FLAGS(CatalogGroup)
-
-	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(NGC|IC|M|C|B|Sh2|LBN|LDN|RCW|VdB|Cr|Mel|PGC|UGC|Ced|PK|G);
-
 	Nebula();
 	~Nebula();
 
@@ -202,8 +175,6 @@ private:
 	static float circleScale;       // Define the scaling of the hints circle
 	static bool drawHintProportional; // scale hint with nebula size?
 };
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)
 
 #endif // _NEBULA_HPP_
 

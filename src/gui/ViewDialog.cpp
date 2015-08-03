@@ -142,7 +142,7 @@ void ViewDialog::createDialogContent()
 
 	// DSO
 	updateSelectedCatalogsCheckBoxes();
-	connect(ui->groupDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
+	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
 
 	// Stars section
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
@@ -355,64 +355,64 @@ void ViewDialog::updateTabBarListWidgetWidth()
 
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 {
-	Nebula::CatalogGroup flags(0);
+	NebulaMgr::CatalogGroup flags(0);
 
 	if (ui->checkBoxNGC->isChecked())
-		flags |= Nebula::NGC;
+		flags |= NebulaMgr::NGC;
 	if (ui->checkBoxIC->isChecked())
-		flags |= Nebula::IC;
+		flags |= NebulaMgr::IC;
 	if (ui->checkBoxM->isChecked())
-		flags |= Nebula::M;
+		flags |= NebulaMgr::M;
 	if (ui->checkBoxB->isChecked())
-		flags |= Nebula::B;
+		flags |= NebulaMgr::B;
 	if (ui->checkBoxSh2->isChecked())
-		flags |= Nebula::Sh2;
+		flags |= NebulaMgr::Sh2;
 	if (ui->checkBoxVdB->isChecked())
-		flags |= Nebula::VdB;
+		flags |= NebulaMgr::VdB;
 	if (ui->checkBoxRCW->isChecked())
-		flags |= Nebula::RCW;
+		flags |= NebulaMgr::RCW;
 	if (ui->checkBoxLBN->isChecked())
-		flags |= Nebula::LBN;
+		flags |= NebulaMgr::LBN;
 	if (ui->checkBoxLDN->isChecked())
-		flags |= Nebula::LDN;
+		flags |= NebulaMgr::LDN;
 	if (ui->checkBoxCr->isChecked())
-		flags |= Nebula::Cr;
+		flags |= NebulaMgr::Cr;
 	if (ui->checkBoxMel->isChecked())
-		flags |= Nebula::Mel;
+		flags |= NebulaMgr::Mel;
 	if (ui->checkBoxCed->isChecked())
-		flags |= Nebula::Ced;
+		flags |= NebulaMgr::Ced;
 	if (ui->checkBoxPK->isChecked())
-		flags |= Nebula::PK;
+		flags |= NebulaMgr::PK;
 	if (ui->checkBoxPGC->isChecked())
-		flags |= Nebula::PGC;
+		flags |= NebulaMgr::PGC;
 	if (ui->checkBoxUGC->isChecked())
-		flags |= Nebula::UGC;
+		flags |= NebulaMgr::UGC;
 	if (ui->checkBoxG->isChecked())
-		flags |= Nebula::G;
+		flags |= NebulaMgr::G;
 
 	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
 }
 
 void ViewDialog::updateSelectedCatalogsCheckBoxes()
 {
-	const Nebula::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
+	const NebulaMgr::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
 
-	ui->checkBoxNGC->setChecked(flags & Nebula::NGC);
-	ui->checkBoxIC->setChecked(flags & Nebula::IC);
-	ui->checkBoxM->setChecked(flags & Nebula::M);
-	ui->checkBoxC->setChecked(flags & Nebula::C);
-	ui->checkBoxB->setChecked(flags & Nebula::B);
-	ui->checkBoxSh2->setChecked(flags & Nebula::Sh2);
-	ui->checkBoxVdB->setChecked(flags & Nebula::VdB);
-	ui->checkBoxRCW->setChecked(flags & Nebula::RCW);
-	ui->checkBoxLDN->setChecked(flags & Nebula::LDN);
-	ui->checkBoxLBN->setChecked(flags & Nebula::LBN);
-	ui->checkBoxCr->setChecked(flags & Nebula::Cr);
-	ui->checkBoxMel->setChecked(flags & Nebula::Mel);
-	ui->checkBoxCed->setChecked(flags & Nebula::Ced);
-	ui->checkBoxPGC->setChecked(flags & Nebula::PGC);
-	ui->checkBoxUGC->setChecked(flags & Nebula::UGC);
-	ui->checkBoxG->setChecked(flags & Nebula::G);
+	ui->checkBoxNGC->setChecked(flags & NebulaMgr::NGC);
+	ui->checkBoxIC->setChecked(flags & NebulaMgr::IC);
+	ui->checkBoxM->setChecked(flags & NebulaMgr::M);
+	ui->checkBoxC->setChecked(flags & NebulaMgr::C);
+	ui->checkBoxB->setChecked(flags & NebulaMgr::B);
+	ui->checkBoxSh2->setChecked(flags & NebulaMgr::Sh2);
+	ui->checkBoxVdB->setChecked(flags & NebulaMgr::VdB);
+	ui->checkBoxRCW->setChecked(flags & NebulaMgr::RCW);
+	ui->checkBoxLDN->setChecked(flags & NebulaMgr::LDN);
+	ui->checkBoxLBN->setChecked(flags & NebulaMgr::LBN);
+	ui->checkBoxCr->setChecked(flags & NebulaMgr::Cr);
+	ui->checkBoxMel->setChecked(flags & NebulaMgr::Mel);
+	ui->checkBoxCed->setChecked(flags & NebulaMgr::Ced);
+	ui->checkBoxPGC->setChecked(flags & NebulaMgr::PGC);
+	ui->checkBoxUGC->setChecked(flags & NebulaMgr::UGC);
+	ui->checkBoxG->setChecked(flags & NebulaMgr::G);
 }
 
 
