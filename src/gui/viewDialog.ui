@@ -1209,6 +1209,9 @@
                <property name="text">
                 <string>NGC</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="0" column="1">
@@ -1219,6 +1222,9 @@
                <property name="text">
                 <string>C</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="0" column="2">
@@ -1229,6 +1235,9 @@
                <property name="text">
                 <string>LBN</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="0" column="3">
@@ -1239,6 +1248,9 @@
                <property name="text">
                 <string>VdB</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="0" column="4">
@@ -1249,6 +1261,9 @@
                <property name="text">
                 <string>PK</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="0" column="5">
@@ -1256,6 +1271,9 @@
                <property name="text">
                 <string>G</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="0">
@@ -1266,6 +1284,9 @@
                <property name="text">
                 <string>IC</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="1">
@@ -1276,6 +1297,9 @@
                <property name="text">
                 <string>B</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="2">
@@ -1286,6 +1310,9 @@
                <property name="text">
                 <string>LDN</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="3">
@@ -1296,6 +1323,9 @@
                <property name="text">
                 <string>Cr</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="4">
@@ -1306,6 +1336,9 @@
                <property name="text">
                 <string>Ced</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="5">
@@ -1316,6 +1349,9 @@
                <property name="text">
                 <string>UGC</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="2" column="0">
@@ -1326,6 +1362,9 @@
                <property name="text">
                 <string>M</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="2" column="1">
@@ -1336,6 +1375,9 @@
                <property name="text">
                 <string>Sh 2</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="2" column="2">
@@ -1346,6 +1388,9 @@
                <property name="text">
                 <string>RCW</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="2" column="3">
@@ -1356,6 +1401,9 @@
                <property name="text">
                 <string>Mel</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="2" column="4">
@@ -1366,6 +1414,9 @@
                <property name="text">
                 <string>PGC</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
             </layout>
@@ -2392,4 +2443,11 @@
  </tabstops>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

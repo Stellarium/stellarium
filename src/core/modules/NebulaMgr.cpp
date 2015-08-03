@@ -99,15 +99,6 @@ double NebulaMgr::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void NebulaMgr::init()
 {
-	// TODO: mechanism to specify which sets get loaded at start time.
-	// candidate methods:
-	// 1. config file option (list of sets to load at startup)
-	// 2. load all
-	// 3. flag in nebula_textures.fab (yuk)
-	// 4. info.ini file in each set containing a "load at startup" item
-	// For now (0.9.0), just load the default set
-	loadNebulaSet("default");
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
@@ -129,46 +120,57 @@ void NebulaMgr::init()
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 
+	// for DSO convertor
 	flagConverter = conf->value("astro/flag_convert_dso_catalog", false).toBool();
+	flagDecimalCoordinates = conf->value("astro/flag_dso_decimal_coord", true).toBool();
 
-	catalogFilters = Nebula::CatalogGroup(0);
+	catalogFilters = CatalogGroup(0);
 
 	conf->beginGroup("dso_catalog_filters");
 	if (conf->value("flag_show_ngc", true).toBool())
-		catalogFilters	|= Nebula::NGC;
+		catalogFilters	|= NGC;
 	if (conf->value("flag_show_ic", true).toBool())
-		catalogFilters	|= Nebula::IC;
+		catalogFilters	|= IC;
 	if (conf->value("flag_show_m", true).toBool())
-		catalogFilters	|= Nebula::M;
+		catalogFilters	|= M;
 	if (conf->value("flag_show_c", false).toBool())
-		catalogFilters	|= Nebula::C;
+		catalogFilters	|= C;
 	if (conf->value("flag_show_b", false).toBool())
-		catalogFilters	|= Nebula::B;
+		catalogFilters	|= B;
 	if (conf->value("flag_show_sh2", false).toBool())
-		catalogFilters	|= Nebula::Sh2;
+		catalogFilters	|= Sh2;
 	if (conf->value("flag_show_vdb", false).toBool())
-		catalogFilters	|= Nebula::VdB;
+		catalogFilters	|= VdB;
 	if (conf->value("flag_show_lbn", false).toBool())
-		catalogFilters	|= Nebula::LBN;
+		catalogFilters	|= LBN;
 	if (conf->value("flag_show_ldn", false).toBool())
-		catalogFilters	|= Nebula::LDN;
+		catalogFilters	|= LDN;
 	if (conf->value("flag_show_rcw", false).toBool())
-		catalogFilters	|= Nebula::RCW;
+		catalogFilters	|= RCW;
 	if (conf->value("flag_show_cr", false).toBool())
-		catalogFilters	|= Nebula::Cr;
+		catalogFilters	|= Cr;
 	if (conf->value("flag_show_mel", false).toBool())
-		catalogFilters	|= Nebula::Mel;
+		catalogFilters	|= Mel;
 	if (conf->value("flag_show_pgc", false).toBool())
-		catalogFilters	|= Nebula::PGC;
+		catalogFilters	|= PGC;
 	if (conf->value("flag_show_ced", false).toBool())
-		catalogFilters	|= Nebula::Ced;
+		catalogFilters	|= Ced;
 	if (conf->value("flag_show_ugc", false).toBool())
-		catalogFilters	|= Nebula::UGC;
+		catalogFilters	|= UGC;
 	if (conf->value("flag_show_pk", false).toBool())
-		catalogFilters	|= Nebula::PK;
+		catalogFilters	|= PK;
 	if (conf->value("flag_show_g", false).toBool())
-		catalogFilters	|= Nebula::G;
+		catalogFilters	|= G;
 	conf->endGroup();
+
+	// TODO: mechanism to specify which sets get loaded at start time.
+	// candidate methods:
+	// 1. config file option (list of sets to load at startup)
+	// 2. load all
+	// 3. flag in nebula_textures.fab (yuk)
+	// 4. info.ini file in each set containing a "load at startup" item
+	// For now (0.9.0), just load the default set
+	loadNebulaSet("default");
 
 	updateI18n();
 	
@@ -214,9 +216,20 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
-void NebulaMgr::setCatalogFilters(const Nebula::CatalogGroup &cflags)
+void NebulaMgr::setCatalogFilters(const CatalogGroup &cflags)
 {
 	catalogFilters = cflags;
+
+	dsoArray.clear();
+	dsoIndex.clear();
+	nebGrid.clear();
+	bool status = getFlagShow();
+
+	StelApp::getInstance().getStelObjectMgr().unSelect();
+
+	setFlagShow(false);
+	loadNebulaSet("default");
+	setFlagShow(status);
 }
 
 float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
@@ -244,7 +257,7 @@ void NebulaMgr::draw(StelCore* core)
 
 	// Print all the nebulae of all the selected zones
 	float maxMagHints  = computeMaxMagHint(skyDrawer);
-	float maxMagLabels = skyDrawer->getLimitMagnitude()     -2.f+(labelsAmount*1.2f)-2.f;
+	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
 	nebGrid.processIntersectingPointInRegions(p.data(), func);
@@ -361,7 +374,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	if (flagConverter)
-		convertDSOCatalog(srcCatalogPath, dsoCatalogPath, true);
+		convertDSOCatalog(srcCatalogPath, dsoCatalogPath, flagDecimalCoordinates);
 
 	if (dsoCatalogPath.isEmpty() || dsoNamesPath.isEmpty())
 	{
@@ -789,6 +802,8 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 		NebulaP e = NebulaP(new Nebula);
 		e->readDSO(ins);
 
+		if (!objectInDisplayedCatalog(e)) continue;
+
 		dsoArray.append(e);
 		nebGrid.insert(qSharedPointerCast<StelRegionObject>(e));
 		if (e->DSO_nb!=0)
@@ -798,6 +813,47 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 	in.close();
 	qDebug() << "Loaded" << totalRecords << "DSO records";
 	return true;
+}
+
+bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
+{
+	bool r = false;
+	if ((catalogFilters&M) && (n->M_nb>0))
+		r = true;
+	else if ((catalogFilters&C) && (n->C_nb>0))
+		r = true;
+	else if ((catalogFilters&NGC) && (n->NGC_nb>0))
+		r = true;
+	else if ((catalogFilters&IC) && (n->IC_nb>0))
+		r = true;
+	else if ((catalogFilters&B) && (n->B_nb>0))
+		r = true;
+	else if ((catalogFilters&Sh2) && (n->Sh2_nb>0))
+		r = true;
+	else if ((catalogFilters&VdB) && (n->VdB_nb>0))
+		r = true;
+	else if ((catalogFilters&RCW) && (n->RCW_nb>0))
+		r = true;
+	else if ((catalogFilters&LDN) && (n->LDN_nb>0))
+		r = true;
+	else if ((catalogFilters&LBN) && (n->LBN_nb>0))
+		r = true;
+	else if ((catalogFilters&Cr) && (n->Cr_nb>0))
+		r = true;
+	else if ((catalogFilters&Mel) && (n->Mel_nb>0))
+		r = true;
+	else if ((catalogFilters&PGC) && (n->PGC_nb>0))
+		r = true;
+	else if ((catalogFilters&UGC) && (n->UGC_nb>0))
+		r = true;
+	else if ((catalogFilters&Ced) && !(n->Ced_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&PK) && !(n->PK_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&G) && !(n->G_nb.isEmpty()))
+		r = true;
+
+	return r;
 }
 
 bool NebulaMgr::loadDSONames(const QString &filename)
@@ -837,7 +893,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		QStringList catalogs;
 		catalogs << "IC" << "M" << "C" << "Cr" << "Mel" << "B" << "SH2" << "VdB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK" << "G";
+			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK" << "G" << "S";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -860,7 +916,8 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				e = searchB(nb);
 				break;
 			case 6:
-				e = searchSh2(nb);
+			case 17:
+				e = searchSh2(nb); // S 155 and Sh 2-155 are synonyms
 				break;
 			case 7:
 				e = searchVdB(nb);
@@ -904,8 +961,8 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 			readOk++;
 		}
-		else
-			qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(filename);
+		//else
+		//	qWarning() << "no position data for " << name << "at line" << lineNumber << "of" << QDir::toNativeSeparators(filename);
 	}
 	dsoNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "DSO name records successfully";
