@@ -89,10 +89,10 @@ Comet::Comet(const QString& englishName,
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
 {
 	texMapName = atexMapName;
-	lastOrbitJD =0;
-	deltaJD = StelCore::JD_SECOND;
-	deltaJDtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
-	lastJDtail=0.0;
+	lastOrbitJDE =0;
+	deltaJDE = StelCore::JD_SECOND;
+	deltaJDEtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
+	lastJDEtail=0.0;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
@@ -314,27 +314,27 @@ void Comet::update(int deltaTime)
 {
 	Planet::update(deltaTime);
 
-	// The rest used to be in computePosition(), but is better in update(). Unfortunately we need date (JD).
+	// The rest deals with updating tail geometries and brightness
 	StelCore* core=StelApp::getInstance().getCore();
-	double date=core->getJDay();
+	double dateJDE=core->getJDE();
 
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDay())) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbit->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
 	//deltaJDtail=StelCore::JD_SECOND * qMax(1.0, qMin(eclipticPos.length(), 20.0));
 
-	if (fabs(lastJDtail-date)>deltaJDtail)
+	if (fabs(lastJDEtail-dateJDE)>deltaJDEtail)
 	{
-		lastJDtail=date;
+		lastJDEtail=dateJDE;
 
 		// The CometOrbit is in fact available in userDataPtr!
 		CometOrbit* orbit=(CometOrbit*)userDataPtr;
 		Q_ASSERT(orbit);
-		if (!orbit->objectDateValid(date)) return; // out of useful date range. This should allow having hundreds of comet elements.
+		if (!orbit->objectDateValid(dateJDE)) return; // out of useful date range. This should allow having hundreds of comet elements.
 
 		if (orbit->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
@@ -457,7 +457,7 @@ void Comet::update(int deltaTime)
 		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
 		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
 	}
-	//qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
+	//qDebug() << "Comet " << getEnglishName() <<  "JDE: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
 
 
@@ -483,7 +483,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDay())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbit->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	// This removed totally the Planet shaking bug!!!

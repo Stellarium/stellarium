@@ -160,7 +160,7 @@ Vec3f Supernova::getInfoColor(void) const
 float Supernova::getVMagnitude(const StelCore* core) const
 {
 	double vmag = 20;
-	double currentJD = core->getJDay();
+	double currentJD = core->getJDE(); // GZ JDfix for 0.14. I hope the JD in the list is JDE? (Usually difference should be negligible)
 	double deltaJD = qAbs(peakJD-currentJD);
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703

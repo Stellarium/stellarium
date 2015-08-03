@@ -86,7 +86,7 @@ Planet::Planet(const QString& englishName,
 	  axisRotation(0.),
 	  rings(NULL),
 	  sphereScale(1.f),
-	  lastJD(J2000),
+	  lastJDE(J2000),
 	  coordFunc(coordFunc),
 	  userDataPtr(auserDataPtr),
 	  osculatingFunc(osculatingFunc),
@@ -97,11 +97,11 @@ Planet::Planet(const QString& englishName,
 {
 	texMapName = atexMapName;
 	normalMapName = anormalMapName;
-	lastOrbitJD =0;
-	deltaJD = StelCore::JD_SECOND;
+	lastOrbitJDE =0;
+	deltaJDE = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
-	deltaOrbitJD = 0;
+	deltaOrbitJDE = 0;
 	distance = 0;
 
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
@@ -118,7 +118,7 @@ Planet::Planet(const QString& englishName,
 	nativeName = "";
 	if (englishName!="Pluto")
 	{
-		deltaJD = 0.001*StelCore::JD_SECOND;
+		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
 	flagLabels = true;
 	flagNativeName = true;
@@ -383,7 +383,7 @@ void Planet::setRotationElements(float _period, float _offset, double _epoch, fl
 	re.precessionRate = _precessionRate;
 	re.siderealPeriod = _siderealPeriod;  // used for drawing orbit lines
 
-	deltaOrbitJD = re.siderealPeriod/ORBIT_SEGMENTS;
+	deltaOrbitJDE = re.siderealPeriod/ORBIT_SEGMENTS;
 }
 
 Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
@@ -393,12 +393,12 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 
 // Compute the position in the parent Planet coordinate system
 // Actually call the provided function to compute the ecliptical position
-void Planet::computePositionWithoutOrbits(const double dateJD)
+void Planet::computePositionWithoutOrbits(const double dateJDE)
 {
-	if (fabs(lastJD-dateJD)>deltaJD)
+	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
-		coordFunc(dateJD, eclipticPos, userDataPtr);
-		lastJD = dateJD;
+		coordFunc(dateJDE, eclipticPos, userDataPtr);
+		lastJDE = dateJDE;
 	}
 }
 
@@ -406,11 +406,11 @@ void Planet::computePositionWithoutOrbits(const double dateJD)
 // TODO: For earth, decide whether this should be Capitaine's omega_A (angle eclipticPoleJ2000//axis) or epsilon_A (angle axis//current ecliptic pole)
 // For now, it is epsilon_A, the angle between earth's rotational axis and mean ecliptic of date.
 // Details: e.g. Hilton etal, Report on Precession and the Ecliptic, Cel.Mech.Dyn.Astr.94:351-67 (2006), Fig1.
-double Planet::getRotObliquity(double JDay) const
+double Planet::getRotObliquity(double JDE) const
 {
 	// JDay=2451545.0 for J2000.0
 	if (englishName=="Earth")
-		return get_mean_ecliptical_obliquity(JDay) *M_PI/180.0;
+		return get_mean_ecliptical_obliquity(JDE) *M_PI/180.0;
 	else
 		return re.obliquity;
 }
@@ -459,28 +459,30 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	return res;
 }
 
-void Planet::computePosition(const double dateJD)
+void Planet::computePosition(const double dateJDE)
 {
 	// Make sure the parent position is computed for the dateJD, otherwise
 	// getHeliocentricPos() would return incorect values.
 	if (parent)
-		parent->computePositionWithoutOrbits(dateJD);
+		parent->computePositionWithoutOrbits(dateJDE);
 
-	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-dateJD)>deltaOrbitJD || !orbitCached))
+	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJDE > 0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
 	{
+		StelCore *core=StelApp::getInstance().getCore();
+
 		double calc_date;
 		// int delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
 		int delta_points;
 
-		if( dateJD > lastOrbitJD )
+		if( dateJDE > lastOrbitJDE )
 		{
-			delta_points = (int)(0.5 + (dateJD - lastOrbitJD)/deltaOrbitJD);
+			delta_points = (int)(0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
 		}
 		else
 		{
-			delta_points = (int)(-0.5 + (dateJD - lastOrbitJD)/deltaOrbitJD);
+			delta_points = (int)(-0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
 		}
-		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
+		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
 
 		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
 
@@ -492,13 +494,13 @@ void Planet::computePosition(const double dateJD)
 				if(d + delta_points >= ORBIT_SEGMENTS )
 				{
 					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
+					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
 
 					// date increments between points will not be completely constant though
-					computeTransMatrix(calc_date);
+					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 					if (osculatingFunc)
 					{
-						(*osculatingFunc)(dateJD,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
 					}
 					else
 					{
@@ -514,7 +516,7 @@ void Planet::computePosition(const double dateJD)
 				}
 			}
 
-			lastOrbitJD = new_date;
+			lastOrbitJDE = new_date;
 		}
 		else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS  && orbitCached)
 		{
@@ -524,11 +526,11 @@ void Planet::computePosition(const double dateJD)
 				if(d + delta_points < 0 )
 				{
 					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
+					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
 
-					computeTransMatrix(calc_date);
+					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 					if (osculatingFunc) {
-						(*osculatingFunc)(dateJD,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
 					}
 					else
 					{
@@ -544,7 +546,7 @@ void Planet::computePosition(const double dateJD)
 				}
 			}
 
-			lastOrbitJD = new_date;
+			lastOrbitJDE = new_date;
 
 		}
 		else if( delta_points || !orbitCached)
@@ -553,11 +555,11 @@ void Planet::computePosition(const double dateJD)
 			// update all points (less efficient)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
-				calc_date = dateJD + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
-				computeTransMatrix(calc_date);
+				calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+				computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 				if (osculatingFunc)
 				{
-					(*osculatingFunc)(dateJD,calc_date,eclipticPos);
+					(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
 				}
 				else
 				{
@@ -567,36 +569,36 @@ void Planet::computePosition(const double dateJD)
 				orbit[d] = getHeliocentricEclipticPos();
 			}
 
-			lastOrbitJD = dateJD;
+			lastOrbitJDE = dateJDE;
 			if (!osculatingFunc) orbitCached = 1;
 		}
 
 
 		// calculate actual Planet position
-		coordFunc(dateJD, eclipticPos, userDataPtr);
+		coordFunc(dateJDE, eclipticPos, userDataPtr);
 
-		lastJD = dateJD;
+		lastJDE = dateJDE;
 
 	}
-	else if (fabs(lastJD-dateJD)>deltaJD)
+	else if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		// calculate actual Planet position
-		coordFunc(dateJD, eclipticPos, userDataPtr);
+		coordFunc(dateJDE, eclipticPos, userDataPtr);
 		// XXX: do we need to do that even when the orbit is not visible?
 		for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			orbit[d]=getHeliocentricPos(orbitP[d]);
-		lastJD = dateJD;
+		lastJDE = dateJDE;
 	}
 
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
-// In case of the planets, this makes the axis point to the respective celestial pole.
+// In case of the planets, this makes the axis point to their respective celestial poles.
 // TODO: Verify for the other planets if their axes are relative to J2000 ecliptic (VSOP87A XY plane) or relative to (precessed) ecliptic of date?
-void Planet::computeTransMatrix(double jd)
+void Planet::computeTransMatrix(double JD, double JDE)
 {
-	// TODO: correct this for earth with the new model.
-	axisRotation = getSiderealTime(jd);
+	// We have to call with both to correct this for earth with the new model.
+	axisRotation = getSiderealTime(JD, JDE);
 
 	// Special case - heliocentric coordinates are relative to eclipticJ2000 (VSOP87A XY plane),
 	// not solar equator...
@@ -611,7 +613,7 @@ void Planet::computeTransMatrix(double jd)
 			// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
 			// See also Hilton et al, Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006).
 			double eps_A, chi_A, omega_A, psi_A;
-			getPrecessionAnglesVondrak(jd, &eps_A, &chi_A, &omega_A, &psi_A);
+			getPrecessionAnglesVondrak(JDE, &eps_A, &chi_A, &omega_A, &psi_A);
 			// GZ This is the right combination for precession of the equator: Nodal rotation psi_A,
 			// then rotation by omega_A, the angle between EclPoleJ2000 and EarthPoleOfDate.
 			// The final rotation by chi_A rotates the equinox (zero degree).
@@ -619,7 +621,7 @@ void Planet::computeTransMatrix(double jd)
 			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A);
 		  }
 		else
-			rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
+			rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
 	}
 }
 
@@ -646,15 +648,16 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 }
 
 
-// Compute the z rotation to use from equatorial to geographic coordinates
-double Planet::getSiderealTime(double jd) const
+// Compute the z rotation to use from equatorial to geographic coordinates.
+// We need both JD and JDE here: For Earth we use JD(UT), for other planets JDE(TT).
+double Planet::getSiderealTime(double JD, double JDE) const
 {
 	if (englishName=="Earth")
 	{	// GZ I wanted to be sure that nutation is just those ignorable few arcseconds.
 		//qDebug() << "Difference apparent-mean sidereal times (s): " << (get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd))* 240.0; // 1degree=4min=240s.
 		// TODO: Reactivate Nutation (but following IAU-2000A) after fixing JD_UT/JD_ET issues, then change this call back to apparent_sidereal_time.
 		//return get_apparent_sidereal_time(jd);
-		return get_mean_sidereal_time(jd);
+		return get_mean_sidereal_time(JD);
 
 		// In the newer precession/nutation literature (starting around 2006) there are two sets of algorithms:
 		// "Classical" sidereal time (Greenwich hour angle GHA) and a solution based on Earth Rotational Angle ERA.
@@ -663,7 +666,7 @@ double Planet::getSiderealTime(double jd) const
 
 	}
 
-	double t = jd - re.epoch;
+	double t = JDE - re.epoch;
 	// oops... avoid division by zero (typical case for moons with chaotic period of rotation)
 	double rotations = 1.f; // NOTE: Maybe 1e-3 will be better?
 	if (re.period!=0.) // OK, it's not a moon with chaotic period of rotation :)
@@ -679,24 +682,24 @@ double Planet::getSiderealTime(double jd) const
 		{
 			// use semi-empirical coefficient for GRS drift
 			// qDebug() << "Jupiter: offset = " << re.offset << " --> rotation = " << (remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172));
-			return remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172);
+			return remainder * 360. + re.offset - 0.2483 * qAbs(JDE - 2456172);
 		}
 		else
 		{
 			// http://www.projectpluto.com/grs_form.htm
 			// CM( System II) =  181.62 + 870.1869147 * jd + correction [870d rotation every day]
 			const double rad  = M_PI/180.;
-			double jup_mean = (jd - 2455636.938) * 360. / 4332.89709;
+			double jup_mean = (JDE - 2455636.938) * 360. / 4332.89709;
 			double eqn_center = 5.55 * sin( rad*jup_mean);
-			double angle = (jd - 2451870.628) * 360. / 398.884 - eqn_center;
+			double angle = (JDE - 2451870.628) * 360. / 398.884 - eqn_center;
 			//double correction = 11 * sin( rad*angle) + 5 * cos( rad*angle)- 1.25 * cos( rad*jup_mean) - eqn_center; // original correction
 			double correction = 25.8 + 11 * sin( rad*angle) - 2.5 * cos( rad*jup_mean) - eqn_center; // light speed correction not used because in stellarium the jd is manipulated for that
-			double cm2=181.62 + 870.1869147 * jd + correction;
+			double cm2=181.62 + 870.1869147 * JDE + correction; // Central Meridian II
 			cm2=cm2 - 360.0*(int)(cm2/360.);
 			// http://www.skyandtelescope.com/observing/transit-times-of-jupiters-great-red-spot/ writes:
 			// The predictions assume the Red Spot was at Jovian System II longitude 216° in September 2014 and continues to drift 1.25° per month, based on historical trends noted by JUPOS.
 			// GRS longitude was at 2014-09-08 216d with a drift of 1.25d every month
-			double longitudeGRS=216+1.25*( jd - 2456908)/30;
+			double longitudeGRS=216+1.25*( JDE - 2456908)/30;
 			// qDebug() << "Jupiter: CM2 = " << cm2 << " longitudeGRS = " << longitudeGRS << " --> rotation = " << (cm2 - longitudeGRS);
 			return cm2 - longitudeGRS + 25.; // + 25 = Jupiter Texture not 0d
 			// To verify:
@@ -799,7 +802,7 @@ double Planet::computeDistance(const Vec3d& obsHelioPos)
 	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
 	// improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
 	if (pType == Planet::isAsteroid)
-			deltaJD=distance*StelCore::JD_SECOND;
+			deltaJDE=distance*StelCore::JD_SECOND;
 	return distance;
 }
 
@@ -929,8 +932,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 				{
 					// add rings computation
 					// implemented from Meeus, Astr.Alg.1992
-					const double jd=core->getJDay();
-					const double T=(jd-2451545.0)/36525.0;
+					const double jde=core->getJDE();
+					const double T=(jde-2451545.0)/36525.0;
 					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -968,8 +971,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 				{
 					// add rings computation
 					// implemented from Meeus, Astr.Alg.1992
-					const double jd=core->getJDay();
-					const double T=(jd-2451545.0)/36525.0;
+					const double jde=core->getJDE();
+					const double T=(jde-2451545.0)/36525.0;
 					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
 					SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
@@ -1006,8 +1009,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 				{
 					// add rings computation
 					// implemented from Meeus, Astr.Alg.1992
-					const double jd=core->getJDay();
-					const double T=(jd-2451545.0)/36525.0;
+					const double jde=core->getJDE();
+					const double T=(jde-2451545.0)/36525.0;
 					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
 					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
 					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
