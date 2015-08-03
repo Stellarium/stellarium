@@ -236,7 +236,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1198,7 +1198,7 @@
           <item row="0" column="0">
            <widget class="QGroupBox" name="groupDSOCatalogs">
             <property name="title">
-             <string>Catalogs</string>
+             <string>Display objects from catalogs</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_10">
              <item row="0" column="0">
@@ -1230,7 +1230,7 @@
              <item row="0" column="2">
               <widget class="QCheckBox" name="checkBoxLBN">
                <property name="toolTip">
-                <string>Lynds' Catalogue of Bright Nebulae</string>
+                <string>Lynds' Catalogue of Bright Nebulae (Lynds, 1965)</string>
                </property>
                <property name="text">
                 <string>LBN</string>
@@ -1243,7 +1243,7 @@
              <item row="0" column="3">
               <widget class="QCheckBox" name="checkBoxVdB">
                <property name="toolTip">
-                <string>Van den Bergh Catalogue of reflection nebulae</string>
+                <string>Catalogue of Reflection Nebulae (Van den Bergh, 1966)</string>
                </property>
                <property name="text">
                 <string>VdB</string>
@@ -1256,7 +1256,7 @@
              <item row="0" column="4">
               <widget class="QCheckBox" name="checkBoxPK">
                <property name="toolTip">
-                <string>Catalogue of galactic planetary nebulae</string>
+                <string>Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)</string>
                </property>
                <property name="text">
                 <string>PK</string>
@@ -1268,6 +1268,9 @@
              </item>
              <item row="0" column="5">
               <widget class="QCheckBox" name="checkBoxG">
+               <property name="toolTip">
+                <string>A catalogue of Galactic supernova remnants (Green, 2014)</string>
+               </property>
                <property name="text">
                 <string>G</string>
                </property>
@@ -1292,7 +1295,7 @@
              <item row="1" column="1">
               <widget class="QCheckBox" name="checkBoxB">
                <property name="toolTip">
-                <string>Barnard Catalogue of Dark Markings in the Sky</string>
+                <string>Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)</string>
                </property>
                <property name="text">
                 <string>B</string>
@@ -1305,7 +1308,7 @@
              <item row="1" column="2">
               <widget class="QCheckBox" name="checkBoxLDN">
                <property name="toolTip">
-                <string>Lynds' Catalogue of Dark Nebulae</string>
+                <string>Lynds' Catalogue of Dark Nebulae (Lynds, 1962)</string>
                </property>
                <property name="text">
                 <string>LDN</string>
@@ -1331,7 +1334,7 @@
              <item row="1" column="4">
               <widget class="QCheckBox" name="checkBoxCed">
                <property name="toolTip">
-                <string>Cederblad Catalog of bright diffuse Galactic nebulae</string>
+                <string>Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)</string>
                </property>
                <property name="text">
                 <string>Ced</string>
@@ -1370,7 +1373,7 @@
              <item row="2" column="1">
               <widget class="QCheckBox" name="checkBoxSh2">
                <property name="toolTip">
-                <string>Sharpless catalog</string>
+                <string>Catalogue of HII Regions (Sharpless, 1959)</string>
                </property>
                <property name="text">
                 <string>Sh 2</string>
@@ -1383,7 +1386,7 @@
              <item row="2" column="2">
               <widget class="QCheckBox" name="checkBoxRCW">
                <property name="toolTip">
-                <string>A catalogue of Hα-emission regions in the southern Milky Way</string>
+                <string>A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)</string>
                </property>
                <property name="text">
                 <string>RCW</string>
@@ -2339,7 +2342,7 @@
         </item>
         <item>
          <property name="text">
-          <string>DSO</string>
+          <string comment="Deep-Sky Objects">DSO</string>
          </property>
          <property name="toolTip">
           <string>Deep-Sky Objects</string>
