@@ -230,14 +230,6 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double JD, double JDE) const
 	Q_ASSERT(lat >= -90.0);
 	if( lat > 90.0 )  lat = 90.0;
 	if( lat < -90.0 ) lat = -90.0;
-	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
-	// 360 degrees = 24hrs; 15 degrees = 1hr = 3600s; 1 degree = 240s
-	// Apply DeltaT correction only for Earth
-	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
-//	//double deltaT = 0.;
-//	if (getHomePlanet()->getEnglishName()=="Earth")
-//		deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/240.;
-//	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude-deltaT)*M_PI/180.)
 	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+currentLocation.longitude)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }

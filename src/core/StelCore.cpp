@@ -65,11 +65,10 @@ StelCore::StelCore()
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(NULL)
 	, timeSpeed(JD_SECOND)
-//	, JDay(0.)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
-	, secondsOfLastJDayUpdate(0.)
-	, JDayOfLastJDayUpdate(0.)
+	, secondsOfLastJDUpdate(0.)
+	, jdOfLastJDUpdate(0.)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
 {
@@ -994,11 +993,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 //! Set stellarium time to current real world time
 void StelCore::setTimeNow()
 {
-	double JD = StelUtils::getJDFromSystem();
-	// add Delta-T correction for actual time
-	//setJDay(JD+getDeltaT(JD)/86400);
-	// GZ JDfix for 0.14. : No more!
-	setJD(JD);
+	setJD(StelUtils::getJDFromSystem());
 }
 
 void StelCore::setTodayTime(const QTime& target)
@@ -1009,8 +1004,6 @@ void StelCore::setTodayTime(const QTime& target)
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
 		double JD = StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR);
-		// GZ JDfix for 0.14: no more!
-		//setJDay(JD + getDeltaT(JD)/86400);
 		setJD(JD);
 	}
 	else
@@ -1024,15 +1017,11 @@ void StelCore::setTodayTime(const QTime& target)
 bool StelCore::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
-	// GZ JDfix: DeltaT confusing stuff removed, our JD is UT now.
-	//static double lastJD = getJDay();
-	//static bool previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 	static double lastJD = getJD();
 	static bool previousResult = (fabs(getJD()-(StelUtils::getJDFromSystem()))<JD_SECOND);
 	if (fabs(lastJD-getJD())>JD_SECOND/4)
 	{
 		lastJD = getJD();
-		//previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
 		previousResult = (fabs(getJD()-(StelUtils::getJDFromSystem()))<JD_SECOND);
 	}
 	return previousResult;
@@ -1213,7 +1202,7 @@ void StelCore::addSiderealDays(double d)
 // Get the sidereal time shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
-	// GZ JDFix: On Earth, this requires UT, on other planets we use TT
+	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
 	return (position->getHomePlanet()->getSiderealTime(getJD(), getJDE())+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
@@ -1305,17 +1294,14 @@ void StelCore::updateTime(double deltaTime)
 		// Get rid of the error from the 1 /
 		// JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
 		// GZ I don't understand the comment. Is the constant wrong?
-		JD.first = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * JD_SECOND;
+		JD.first = jdOfLastJDUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDUpdate) * JD_SECOND;
 	}
 	else
 	{
-		//JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
-		JD.first = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
+		JD.first = jdOfLastJDUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDUpdate) * timeSpeed;
 	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
-	//if (JDay>38245309.499988) JDay = 38245309.499988;
-	//if (JDay<-34803211.500012) JDay = -34803211.500012;
 	if (JD.first>38245309.499988) JD.first = 38245309.499988;
 	if (JD.first<-34803211.500012) JD.first = -34803211.500012;
 	JD.second=computeDeltaT(JD.first);
@@ -1338,15 +1324,14 @@ void StelCore::updateTime(double deltaTime)
 	// Position of sun and all the satellites (ie planets)
 	// GZ maybe setting this static can speedup a bit?
 	static SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	// Likely the only location where we need JDE:
-	//solsystem->computePositions(getJDay(), position->getHomePlanet()->getHeliocentricEclipticPos());
+	// Likely the most important location where we need JDE:
 	solsystem->computePositions(getJDE(), position->getHomePlanet()->getHeliocentricEclipticPos());
 }
 
 void StelCore::resetSync()
 {
-	JDayOfLastJDayUpdate = getJD();
-	secondsOfLastJDayUpdate = StelApp::getTotalRunTime();
+	jdOfLastJDUpdate = getJD();
+	secondsOfLastJDUpdate = StelApp::getTotalRunTime();
 }
 
 void StelCore::setStartupTimeMode(const QString& s)
@@ -1362,7 +1347,7 @@ double StelCore::getDeltaT() const
 
 
 // compute and return DeltaT in seconds. Try not to call it directly, current DeltaT, JD, and JDE are available.
-double StelCore::computeDeltaT(const double jDay) const
+double StelCore::computeDeltaT(const double JD) const
 {
 	double DeltaT = 0.;
 	double ndot = 0.;
@@ -1377,156 +1362,156 @@ double StelCore::computeDeltaT(const double jDay) const
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
 			ndot = -29.68; // n.dot = -29.68"/cy/cy
-			DeltaT = StelUtils::getDeltaTBySchoch(jDay);
+			DeltaT = StelUtils::getDeltaTBySchoch(JD);
 			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByClemence(jDay);
+			DeltaT = StelUtils::getDeltaTByClemence(JD);
 			break;
 		case IAU:
 			// IAU (1952) algorithm for DeltaT, based on observations by Spencer Jones (1939)
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByIAU(jDay);
+			DeltaT = StelUtils::getDeltaTByIAU(JD);
 			break;
 		case AstronomicalEphemeris:
 			// Astronomical Ephemeris (1960) algorithm for DeltaT
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(jDay);
+			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(JD);
 			break;
 		case TuckermanGoldstine:
 			// Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 			//FIXME: n.dot
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByTuckermanGoldstine(jDay);
+			DeltaT = StelUtils::getDeltaTByTuckermanGoldstine(JD);
 			break;
 		case MullerStephenson:
 			// Muller & Stephenson (1975) algorithm for DeltaT
 			ndot = -37.5; // n.dot = -37.5 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMullerStephenson(jDay);
+			DeltaT = StelUtils::getDeltaTByMullerStephenson(JD);
 			break;
 		case Stephenson1978:
 			// Stephenson (1978) algorithm for DeltaT
 			ndot = -30.0; // n.dot = -30.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephenson1978(jDay);
+			DeltaT = StelUtils::getDeltaTByStephenson1978(JD);
 			break;
 		case SchmadelZech1979:
 			// Schmadel & Zech (1979) algorithm for DeltaT
 			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy
-			DeltaT = StelUtils::getDeltaTBySchmadelZech1979(jDay);
+			DeltaT = StelUtils::getDeltaTBySchmadelZech1979(JD);
 			break;
 		case MorrisonStephenson1982:
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1982(jDay);
+			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1982(JD);
 			break;
 		case StephensonMorrison1984:
 			// Stephenson & Morrison (1984) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephensonMorrison1984(jDay);
+			DeltaT = StelUtils::getDeltaTByStephensonMorrison1984(JD);
 			break;
 		case StephensonHoulden:
 			// Stephenson & Houlden (1986) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephensonHoulden(jDay);
+			DeltaT = StelUtils::getDeltaTByStephensonHoulden(JD);
 			break;
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
 			//FIXME: n.dot
 			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByEspenak(jDay);
+			DeltaT = StelUtils::getDeltaTByEspenak(JD);
 			break;
 		case Borkowski:
 			// Borkowski (1988) algorithm for DeltaT, relates to ELP2000-85!
 			ndot = -23.895; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByBorkowski(jDay);
+			DeltaT = StelUtils::getDeltaTByBorkowski(JD);
 			break;
 		case SchmadelZech1988:
 			// Schmadel & Zech (1988) algorithm for DeltaT
 			//FIXME: n.dot
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTBySchmadelZech1988(jDay);
+			DeltaT = StelUtils::getDeltaTBySchmadelZech1988(JD);
 			break;
 		case ChaprontTouze:
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
 			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByChaprontTouze(jDay);
+			DeltaT = StelUtils::getDeltaTByChaprontTouze(JD);
 			break;
 		case StephensonMorrison1995:
 			// Stephenson & Morrison (1995) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephensonMorrison1995(jDay);
+			DeltaT = StelUtils::getDeltaTByStephensonMorrison1995(JD);
 			break;
 		case Stephenson1997:
 			// Stephenson (1997) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephenson1997(jDay);
+			DeltaT = StelUtils::getDeltaTByStephenson1997(JD);
 			break;
 		case ChaprontMeeus:
 			// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
 			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByChaprontMeeus(jDay);
+			DeltaT = StelUtils::getDeltaTByChaprontMeeus(JD);
 			break;
 		case JPLHorizons:
 			// JPL Horizons algorithm for DeltaT
 			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByJPLHorizons(jDay);
+			DeltaT = StelUtils::getDeltaTByJPLHorizons(JD);
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
 			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMeeusSimons(jDay);
+			DeltaT = StelUtils::getDeltaTByMeeusSimons(JD);
 			break;
 		case ReingoldDershowitz:
 			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
 			// FIXME: n.dot
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByReingoldDershowitz(jDay);
+			DeltaT = StelUtils::getDeltaTByReingoldDershowitz(JD);
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
 			// NOTE: book not contains n.dot value
 			// FIXME: n.dot
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByMontenbruckPfleger(jDay);
+			DeltaT = StelUtils::getDeltaTByMontenbruckPfleger(JD);
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(jDay);
+			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(JD);
 			break;
 		case Reijs:
 			// Reijs (2006) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByReijs(jDay);
+			DeltaT = StelUtils::getDeltaTByReijs(JD);
 			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
 			ndot = -25.858; // n.dot = -25.858 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
+			DeltaT = StelUtils::getDeltaTByEspenakMeeus(JD);
 			break;
 		case EspenakMeeusZeroMoonAccel:
 			// This is a trying area. Something is wrong with DeltaT, maybe ndot is still not applied correctly.
 			// Espenak & Meeus (2006) algorithm for DeltaT
 			ndot = -25.858; // n.dot = -25.858 "/cy/cy
 			dontUseMoon = true;
-			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
+			DeltaT = StelUtils::getDeltaTByEspenakMeeus(JD);
 			break;
 		case Banjevic:
 			// Banjevic (2006) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByBanjevic(jDay);
+			DeltaT = StelUtils::getDeltaTByBanjevic(JD);
 			break;
 		case IslamSadiqQureshi:
 			// Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByIslamSadiqQureshi(jDay);
+			DeltaT = StelUtils::getDeltaTByIslamSadiqQureshi(JD);
 			dontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			break;
 		case KhalidSultanaZaidi:
 			// M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByKhalidSultanaZaidi(jDay);
+			DeltaT = StelUtils::getDeltaTByKhalidSultanaZaidi(JD);
 			dontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			break;
 		case Custom:
@@ -1534,14 +1519,14 @@ double StelCore::computeDeltaT(const double jDay) const
 			ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
 			int year, month, day;
 			Vec3f coeff = getDeltaTCustomEquationCoefficients();
-			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);			
+			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 			double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100;
 			DeltaT = coeff[0] + u*(coeff[1] + u*coeff[2]);
 			break;
 	}
 
 	if (!dontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(jDay, ndot);
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, ndot);
 
 	return DeltaT;
 }
@@ -1676,7 +1661,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	return description;
 }
 
-QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double jDay, QString *marker) const
+QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD, QString *marker) const
 {
 	QString validRange = "";
 	QString validRangeAppendix = "";
@@ -1684,7 +1669,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double jD
 	int year, month, day;
 	int start = 0;
 	int finish = 0;
-	StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	switch (getCurrentDeltaTAlgorithm())
 	{
 		case WithoutCorrection:

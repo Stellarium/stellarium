@@ -44,18 +44,18 @@ public:
 
 // These functions will be available in scripts
 public slots:
-	//! Set the current date in Julian Day
-	//! @param JD the Julian Date
+	//! Set the current date as Julian Day number
+	//! @param JD the Julian Day number
 	void setJDay(double JD);
-	//! Get the current date in Julian Day
-	//! @return the Julian Date
+	//! Get the current date as Julian Day number
+	//! @return the Julian Day number
 	double getJDay() const;
 
-	//! Set the current date in Modified Julian Day
-	//! @param MJD the Modified Julian Date
+	//! Set the current date as Modified Julian Day
+	//! @param MJD the Modified Julian Day
 	void setMJDay(double MJD);
-	//! Get the current date in Modified Julian Day
-	//! @return the Modified Julian Date
+	//! Get the current date as Modified Julian Day
+	//! @return the Modified Julian Day
 	double getMJDay() const;
 
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"

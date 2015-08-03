@@ -212,6 +212,9 @@ void ArchaeoLines::init()
 
 void ArchaeoLines::update(double deltaTime)
 {
+	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
+		return;
+
 	static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 	static const double lunarI=5.145396; // inclination of lunar orbit
 	// compute min and max distance values for horizontal parallax.
@@ -347,6 +350,9 @@ void ArchaeoLines::update(double deltaTime)
 //! Draw any parts on the screen which are for our module
 void ArchaeoLines::draw(StelCore* core)
 {
+	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
+		return;
+
 	equinoxLine->draw(core, lineFader.getInterstate());
 	northernSolsticeLine->draw(core, lineFader.getInterstate());
 	southernSolsticeLine->draw(core, lineFader.getInterstate());
