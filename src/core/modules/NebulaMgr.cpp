@@ -128,39 +128,39 @@ void NebulaMgr::init()
 
 	conf->beginGroup("dso_catalog_filters");
 	if (conf->value("flag_show_ngc", true).toBool())
-		catalogFilters	|= NGC;
+		catalogFilters	|= CatNGC;
 	if (conf->value("flag_show_ic", true).toBool())
-		catalogFilters	|= IC;
+		catalogFilters	|= CatIC;
 	if (conf->value("flag_show_m", true).toBool())
-		catalogFilters	|= M;
+		catalogFilters	|= CatM;
 	if (conf->value("flag_show_c", false).toBool())
-		catalogFilters	|= C;
+		catalogFilters	|= CatC;
 	if (conf->value("flag_show_b", false).toBool())
-		catalogFilters	|= B;
+		catalogFilters	|= CatB;
 	if (conf->value("flag_show_sh2", false).toBool())
-		catalogFilters	|= Sh2;
+		catalogFilters	|= CatSh2;
 	if (conf->value("flag_show_vdb", false).toBool())
-		catalogFilters	|= VdB;
+		catalogFilters	|= CatVdB;
 	if (conf->value("flag_show_lbn", false).toBool())
-		catalogFilters	|= LBN;
+		catalogFilters	|= CatLBN;
 	if (conf->value("flag_show_ldn", false).toBool())
-		catalogFilters	|= LDN;
+		catalogFilters	|= CatLDN;
 	if (conf->value("flag_show_rcw", false).toBool())
-		catalogFilters	|= RCW;
+		catalogFilters	|= CatRCW;
 	if (conf->value("flag_show_cr", false).toBool())
-		catalogFilters	|= Cr;
+		catalogFilters	|= CatCr;
 	if (conf->value("flag_show_mel", false).toBool())
-		catalogFilters	|= Mel;
+		catalogFilters	|= CatMel;
 	if (conf->value("flag_show_pgc", false).toBool())
-		catalogFilters	|= PGC;
+		catalogFilters	|= CatPGC;
 	if (conf->value("flag_show_ced", false).toBool())
-		catalogFilters	|= Ced;
+		catalogFilters	|= CatCed;
 	if (conf->value("flag_show_ugc", false).toBool())
-		catalogFilters	|= UGC;
+		catalogFilters	|= CatUGC;
 	if (conf->value("flag_show_pk", false).toBool())
-		catalogFilters	|= PK;
+		catalogFilters	|= CatPK;
 	if (conf->value("flag_show_g", false).toBool())
-		catalogFilters	|= G;
+		catalogFilters	|= CatG;
 	conf->endGroup();
 
 	// TODO: mechanism to specify which sets get loaded at start time.
@@ -326,7 +326,7 @@ NebulaP NebulaMgr::search(const QString& name)
 	}
 
 	// If no match found, try search by catalog reference
-	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC)\\s*(\\d+)$");
+	static QRegExp catNumRx("^(M|NGC|IC|C|B|VDB|RCW|LDN|LBN|CR|MEL|PGC|UGC|COL|S)\\s*(\\d+)$");
 	if (catNumRx.exactMatch(uname))
 	{
 		QString cat = catNumRx.capturedTexts().at(1);
@@ -341,10 +341,11 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "RCW") return searchRCW(num);
 		if (cat == "LDN") return searchLDN(num);
 		if (cat == "LBN") return searchLBN(num);
-		if (cat == "CR") return searchCr(num);
+		if (cat == "CR" || cat == "COL") return searchCr(num);
 		if (cat == "MEL") return searchMel(num);
 		if (cat == "PGC") return searchPGC(num);
 		if (cat == "UGC") return searchUGC(num);
+		if (cat == "S") return searchSh2(num);
 
 	}
 	static QRegExp dCatNumRx("^(SH)\\s*\\d-\\s*(\\d+)$");
@@ -653,7 +654,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			RCW			= list.at(23).toInt();	 // RCW number
 			LDN			= list.at(24).toInt();	 // LDN number
 			LBN			= list.at(25).toInt();	 // LBN number
-			Cr			= list.at(26).toInt();	 // Cr number
+			Cr			= list.at(26).toInt();	 // Cr number (alias: Col)
 			Mel			= list.at(27).toInt();	 // Mel number
 			PGC			= list.at(28).toInt();	 // PGC number (subset)
 			UGC			= list.at(29).toInt();	 // UGC number (subset)
@@ -819,43 +820,44 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
 {
 	bool r = false;
-	if ((catalogFilters&M) && (n->M_nb>0))
+	if ((catalogFilters&CatM) && (n->M_nb>0))
 		r = true;
-	else if ((catalogFilters&C) && (n->C_nb>0))
+	else if ((catalogFilters&CatC) && (n->C_nb>0))
 		r = true;
-	else if ((catalogFilters&NGC) && (n->NGC_nb>0))
+	else if ((catalogFilters&CatNGC) && (n->NGC_nb>0))
 		r = true;
-	else if ((catalogFilters&IC) && (n->IC_nb>0))
+	else if ((catalogFilters&CatIC) && (n->IC_nb>0))
 		r = true;
-	else if ((catalogFilters&B) && (n->B_nb>0))
+	else if ((catalogFilters&CatB) && (n->B_nb>0))
 		r = true;
-	else if ((catalogFilters&Sh2) && (n->Sh2_nb>0))
+	else if ((catalogFilters&CatSh2) && (n->Sh2_nb>0))
 		r = true;
-	else if ((catalogFilters&VdB) && (n->VdB_nb>0))
+	else if ((catalogFilters&CatVdB) && (n->VdB_nb>0))
 		r = true;
-	else if ((catalogFilters&RCW) && (n->RCW_nb>0))
+	else if ((catalogFilters&CatRCW) && (n->RCW_nb>0))
 		r = true;
-	else if ((catalogFilters&LDN) && (n->LDN_nb>0))
+	else if ((catalogFilters&CatLDN) && (n->LDN_nb>0))
 		r = true;
-	else if ((catalogFilters&LBN) && (n->LBN_nb>0))
+	else if ((catalogFilters&CatLBN) && (n->LBN_nb>0))
 		r = true;
-	else if ((catalogFilters&Cr) && (n->Cr_nb>0))
+	else if ((catalogFilters&CatCr) && (n->Cr_nb>0))
 		r = true;
-	else if ((catalogFilters&Mel) && (n->Mel_nb>0))
+	else if ((catalogFilters&CatMel) && (n->Mel_nb>0))
 		r = true;
-	else if ((catalogFilters&PGC) && (n->PGC_nb>0))
+	else if ((catalogFilters&CatPGC) && (n->PGC_nb>0))
 		r = true;
-	else if ((catalogFilters&UGC) && (n->UGC_nb>0))
+	else if ((catalogFilters&CatUGC) && (n->UGC_nb>0))
 		r = true;
-	else if ((catalogFilters&Ced) && !(n->Ced_nb.isEmpty()))
+	else if ((catalogFilters&CatCed) && !(n->Ced_nb.isEmpty()))
 		r = true;
-	else if ((catalogFilters&PK) && !(n->PK_nb.isEmpty()))
+	else if ((catalogFilters&CatPK) && !(n->PK_nb.isEmpty()))
 		r = true;
-	else if ((catalogFilters&G) && !(n->G_nb.isEmpty()))
+	else if ((catalogFilters&CatG) && !(n->G_nb.isEmpty()))
 		r = true;
 
-	if (catalogFilters&AllCatalogs)
-		r = true;
+	// TODO: Introduce objects without ID from current catalogs (such LMC)
+	//if (catalogFilters&AllCatalogs)
+	//	r = true;
 
 	return r;
 }
@@ -897,7 +899,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		QStringList catalogs;
 		catalogs << "IC" << "M" << "C" << "Cr" << "Mel" << "B" << "SH2" << "VdB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK" << "G" << "S";
+			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK" << "G" << "S" << "COL";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -911,6 +913,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				e = searchC(nb);
 				break;
 			case 3:
+			case 18:
 				e = searchCr(nb);
 				break;
 			case 4:
@@ -1026,7 +1029,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by Caldwell numbers (possible formats are "C31" or "C 31")
-	if (objw.left(1) == "C" && objw.left(2) != "CR" && objw.left(3) != "CED")
+	if (objw.left(1) == "C" && objw.left(2) != "CR" && objw.left(3) != "CED" && objw.left(3) != "COL")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1046,7 +1049,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.left(2) == "SH")
+	if (objw.left(2) == "SH" || objw.left(1) == "S")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1096,7 +1099,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by Collinder numbers (possible formats are "Cr31" or "Cr 31")
-	if (objw.left(2) == "CR")
+	if (objw.left(2) == "CR" || objw.left(3) == "COL")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1214,7 +1217,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Caldwell numbers (possible formats are "C31" or "C 31")
-	if (objw.startsWith("C") && !objw.startsWith("CR") && !objw.startsWith("CE"))
+	if (objw.startsWith("C") && !objw.startsWith("CR") && !objw.startsWith("CE") && !objw.startsWith("CO"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1234,7 +1237,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.startsWith("SH"))
+	if (objw.startsWith("SH") || objw.startsWith("S"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1284,7 +1287,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Collinder numbers (possible formats are "Cr31" or "Cr 31")
-	if (objw.startsWith("CR"))
+	if (objw.startsWith("CR") || objw.startsWith("COL"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1482,7 +1485,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw.left(1)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE")
+	if (objw.size()>=1 && objw.left(1)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE" && objw.left(2)!="CO")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1502,7 +1505,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	// Search by Collinder objects number (possible formats are "Cr31" or "Cr 31")
-	if (objw.size()>=1 && objw.left(2)=="CR")
+	if (objw.size()>=1 && (objw.left(2)=="CR" || objw.left(3)=="COL"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1562,7 +1565,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.size()>=1 && objw.left(2)=="SH")
+	if (objw.size()>=1 && (objw.left(2)=="SH" || objw.left(1)=="S"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1876,7 +1879,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Caldwell objects number (possible formats are "C31" or "C 31")
-	if (objw.size()>=1 && objw.left(1)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE")
+	if (objw.size()>=1 && objw.left(1)=="C" && objw.left(2)!="CR" && objw.left(2)!="CE" && objw.left(2)!="CO")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1896,7 +1899,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Collinder objects number (possible formats are "Cr31" or "Cr 31")
-	if (objw.size()>=1 && objw.left(2)=="CR")
+	if (objw.size()>=1 && (objw.left(2)=="CR" || objw.left(3)=="COL"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1936,7 +1939,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.size()>=1 && objw.left(2)=="SH")
+	if (objw.size()>=1 && (objw.left(2)=="SH" || objw.left(1)=="S"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
