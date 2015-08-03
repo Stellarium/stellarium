@@ -1694,7 +1694,7 @@ bool Satellites::checkJsonFileFormat()
 bool Satellites::isValidRangeDates() const
 {
 	bool ok;
-	double tJD = StelApp::getInstance().getCore()->getJDay();
+	double tJD = StelApp::getInstance().getCore()->getJD();
 	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
 	if (lastUpdate.isNull()) // No updates yet?
 		uJD = tJD;

@@ -42,21 +42,15 @@ Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 // Get observer local sidereal coordinate
 Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
 {
-	// Hour Angle corrected to Delta-T value
-	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
-	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
-	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)* getEquinoxEquatorialPos(core);
+	return Mat4d::zrotation(-core->getLocalSiderealTime())* getEquinoxEquatorialPos(core);
 }
 
 // Get observer local sidereal coordinates, deflected by refraction
 Vec3d StelObject::getSiderealPosApparent(const StelCore* core) const
 {
-	Vec3d v=getAltAzPosApparent(core);
+	Vec3d v=getAltAzPosApparent(core); // These already come with refraction!
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
-	// Hour Angle corrected to Delta-T value
-	// TODO: make code readable by calling siderealTime(JD_UT), this should not contain a deltaT in its algorithm.
-	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
-	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)*v;
+	return Mat4d::zrotation(-core->getLocalSiderealTime())*v;
 }
 
 Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
@@ -204,9 +198,8 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		// and because the ecliptical grid of J2000 is also shown for observers on other planets.
 		// The formulation here has never computed the true position of any observer planet's orbital plane except for Earth,
 		// or ever displayed the coordinates in the observer planet's equivalent to Earth's ecliptical coordinates.
-		// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0.
+		// As quick test you can observe if in any "Ecliptic coordinate" as seen from e.g. Mars or Jupiter the Sun was ever close to beta=0 (except if crossing the node...).
 
-		//double ecl = core->getCurrentPlanet()->getRotObliquity(2451545.0);
 		double ecl=GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
@@ -267,7 +260,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	{
 		Vec3f color = getInfoColor();
 		StelCore* core = StelApp::getInstance().getCore();
-		if (core->isDay() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
+		if (core->isBrightDaylight() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
 		{
 			// make info text more readable when atmosphere enabled at daylight.
 			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_text_color", "0.0,0.0,0.0").toString());
