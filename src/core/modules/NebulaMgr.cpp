@@ -853,6 +853,9 @@ bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
 	else if ((catalogFilters&G) && !(n->G_nb.isEmpty()))
 		r = true;
 
+	if (catalogFilters&AllCatalogs)
+		r = true;
+
 	return r;
 }
 
