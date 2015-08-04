@@ -167,3 +167,56 @@ void TestDeltaT::testDeltaTByChaprontMeeus()
 	}
 }
 
+
+void TestDeltaT::testDeltaTByStephensonMorrison1984()
+{
+	// test data from Mathematical Astronomical Morsels, p. 8. [ISBN 0-943396-51-4]
+	QVariantList data;
+	data <<    0 << 177;
+	data <<  100 << 158;
+	data <<  200 << 140;
+	data <<  300 << 123;
+	data <<  400 << 107;
+	data <<  500 <<  93;
+	data <<  600 <<  79;
+	data <<  700 <<  66;
+	data <<  800 <<  55;
+	data <<  900 <<  45;
+	data << 1000 <<  35;
+	data << 1100 <<  27;
+	data << 1200 <<  20;
+	data << 1300 <<  14;
+	data << 1400 <<   9;
+	data << 1500 <<   5;
+	data << 1600 <<   2;
+	data << 1700 <<   0;
+	data << 1800 <<   0;
+	data << 1980 <<   1;
+	data << 2075 <<   4;
+	data << 2200 <<   8;
+	data << 2300 <<  13;
+	data << 2400 <<  19;
+	data << 2500 <<  26;
+	data << 2600 <<  34;
+	data << 2700 <<  43;
+	data << 2800 <<  53;
+	data << 2900 <<  64;
+	data << 3000 <<  76;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByStephensonMorrison1984(JD)/60.0;
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(result <= expectedResult, QString("date=%2 year=%3 result=%4 expected=%5")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.toUtf8());
+	}
+}

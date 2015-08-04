@@ -32,6 +32,7 @@ private slots:
 	void initTestCase();
 	void testDeltaTByEspenakMeeus();
 	void testDeltaTByChaprontMeeus();
+	void testDeltaTByStephensonMorrison1984();
 
 };
 
