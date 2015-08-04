@@ -558,7 +558,7 @@ NebulaP NebulaMgr::searchUGC(unsigned int UGC)
 NebulaP NebulaMgr::searchCed(QString Ced)
 {
 	foreach (const NebulaP& n, dsoArray)
-		if (n->Ced_nb.toUpper() == Ced.toUpper())
+		if (n->Ced_nb.trimmed().toUpper() == Ced.trimmed().toUpper())
 			return n;
 	return NebulaP();
 }
@@ -566,7 +566,7 @@ NebulaP NebulaMgr::searchCed(QString Ced)
 NebulaP NebulaMgr::searchPK(QString PK)
 {
 	foreach (const NebulaP& n, dsoArray)
-		if (n->PK_nb.toUpper() == PK.toUpper())
+		if (n->PK_nb.trimmed().toUpper() == PK.trimmed().toUpper())
 			return n;
 	return NebulaP();
 }
@@ -574,7 +574,7 @@ NebulaP NebulaMgr::searchPK(QString PK)
 NebulaP NebulaMgr::searchG(QString G)
 {
 	foreach (const NebulaP& n, dsoArray)
-		if (n->G_nb.toUpper() == G.toUpper())
+		if (n->G_nb.trimmed().toUpper() == G.trimmed().toUpper())
 			return n;
 	return NebulaP();
 }
@@ -918,7 +918,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 3:
 			case 18:
-				e = searchCr(nb);
+				e = searchCr(nb); // Cr 20 and Col 25 are synonyms
 				break;
 			case 4:
 				e = searchMel(nb);
@@ -1147,7 +1147,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
-			if (QString("CED%1").arg(n->Ced_nb.toUpper()) == objw || QString("CED %1").arg(n->Ced_nb.toUpper()) == objw)
+			if (QString("CED%1").arg(n->Ced_nb.trimmed().toUpper()) == objw.trimmed() || QString("CED %1").arg(n->Ced_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1157,7 +1157,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
-			if (QString("PK%1").arg(n->PK_nb.toUpper()) == objw || QString("PK %1").arg(n->PK_nb.toUpper()) == objw)
+			if (QString("PK%1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed() || QString("PK %1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1167,7 +1167,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
-			if (QString("G%1").arg(n->G_nb.toUpper()) == objw || QString("G %1").arg(n->G_nb.toUpper()) == objw)
+			if (QString("G%1").arg(n->G_nb.trimmed().toUpper()) == objw.trimmed() || QString("G %1").arg(n->G_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
