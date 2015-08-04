@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-02 23:11+0600\n"
-"PO-Revision-Date: 2015-08-02 16:07+0000\n"
-"Last-Translator: Arinina <nina.m.288@hotmail.com>\n"
+"PO-Revision-Date: 2015-08-03 14:01+0000\n"
+"Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-03 05:25+0000\n"
+"X-Launchpad-Export-Date: 2015-08-04 05:16+0000\n"
 "X-Generator: Launchpad (build 17656)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -62,15 +62,15 @@ msgstr "Меридијан"
 
 #: src/core/modules/GridLinesMgr.cpp:596
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Еклиптика за Ј2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Еклиптика за дан"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Екватор за Ј2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator"
@@ -78,7 +78,7 @@ msgstr "Екватор"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Precession Circle"
-msgstr ""
+msgstr "Прецесиони круг"
 
 #: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1439
 msgid "Horizon"
@@ -110,7 +110,7 @@ msgstr "Линија еклиптике"
 
 #: src/core/modules/GridLinesMgr.cpp:876
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Еклиптика линија за Ј2000"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -119,7 +119,7 @@ msgstr "Линија екватора"
 
 #: src/core/modules/GridLinesMgr.cpp:878
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Екваторијална линија за Ј2000"
 
 #: src/core/modules/GridLinesMgr.cpp:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -142,7 +142,7 @@ msgstr "Еклиптичка J2000 мрежа"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Еклиптичка мрежа"
 
 #: src/core/modules/GridLinesMgr.cpp:884 src/ui_viewDialog.h:1411
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -160,7 +160,7 @@ msgstr "Опозиција / конјукција линија лонгитуд�
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Precession Circles"
-msgstr ""
+msgstr "Прецесиони кругови"
 
 #: src/core/modules/LandscapeMgr.cpp:414 src/ui_viewDialog.h:1336
 msgid "Atmosphere"
@@ -733,7 +733,7 @@ msgstr "Додај једну звездану годину"
 
 #: src/core/StelCore.cpp:213
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "Додај 100 сидеричких година"
 
 #: src/core/StelCore.cpp:214
 msgid "Add 1 synodic month"
@@ -753,11 +753,11 @@ msgstr "Додај један аномалистички месец"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "Додај једну аномалистичку годину"
 
 #: src/core/StelCore.cpp:219
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "Додај 100 аномалистичких година"
 
 #: src/core/StelCore.cpp:220
 msgid "Add 1 mean tropical month"
@@ -769,19 +769,19 @@ msgstr "Додај средњу тропску годину"
 
 #: src/core/StelCore.cpp:222
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "Додај 100 средњих тропских година"
 
 #: src/core/StelCore.cpp:223
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "Додај једну јулијанску годину"
 
 #: src/core/StelCore.cpp:224
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "Додај један јулијански век"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "Додај једну Гаусијанску годину"
 
 #: src/core/StelCore.cpp:226
 msgid "Subtract 1 sidereal day"
@@ -793,7 +793,7 @@ msgstr "Одузми једну звездану годину"
 
 #: src/core/StelCore.cpp:228
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "Одузми 100 сидеричких година"
 
 #: src/core/StelCore.cpp:229
 msgid "Subtract 1 synodic month"
@@ -813,11 +813,11 @@ msgstr "Одузми аномалистички месец"
 
 #: src/core/StelCore.cpp:233
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "Одузми једну аномалистичку годину"
 
 #: src/core/StelCore.cpp:234
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "Одузми 100 аномалистичких година"
 
 #: src/core/StelCore.cpp:235
 msgid "Subtract 1 mean tropical month"
@@ -829,19 +829,19 @@ msgstr "Одузми средњу тропску годину"
 
 #: src/core/StelCore.cpp:237
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "Одузми 100 средњих тропских година"
 
 #: src/core/StelCore.cpp:238
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "Одузми једну јулијанску годину"
 
 #: src/core/StelCore.cpp:239
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "Одузми један јулијански век"
 
 #: src/core/StelCore.cpp:240
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "Одузми једну Гаусијанску годину"
 
 #: src/core/StelCore.cpp:242
 msgid "Set home planet to selected planet"
@@ -1053,7 +1053,7 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
-"Насина ЏПЛ група за динамику сунчевог система користи ову формулу на "
+"Насина ЛМП група за динамику сунчевог система користи ову формулу на "
 "интерактивној веб страници %1JPL Horizons%2."
 
 #: src/core/StelCore.cpp:1667
@@ -1364,7 +1364,7 @@ msgstr "Еклиптичка лонгитуда/латитуда"
 
 #: src/core/StelObject.cpp:233 src/core/StelObject.cpp:235
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Еклиптичко померање"
 
 #: src/core/StelObject.cpp:244 src/core/StelObject.cpp:246
 #, qt-format
@@ -1521,6 +1521,9 @@ msgid ""
 "Star count: %2 Million\n"
 "Magnitude range: %3 - %4"
 msgstr ""
+"Величина преузимања: %1MB\n"
+"Број звезда: %2 милиона\n"
+"Опсег магнитуде: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:1055 src/gui/ConfigurationDialog.cpp:1089
 #, qt-format
@@ -1836,7 +1839,7 @@ msgstr "Графички дизајнер/остало: %1"
 #: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "OSX Developer: %1"
-msgstr ""
+msgstr "OSX програмер: %1"
 
 #: src/gui/HelpDialog.cpp:315
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
@@ -1935,7 +1938,7 @@ msgstr "Видљивост графичког интерфејса"
 
 #: src/gui/StelGuiItems.cpp:290 src/gui/StelGuiItems.cpp:745
 msgid "Space"
-msgstr ""
+msgstr "Свемир"
 
 #: src/gui/StelGuiItems.cpp:602
 #, c-format, qt-format
@@ -1945,7 +1948,7 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "Planetocentric distance %1 km"
-msgstr ""
+msgstr "Планетоцентрична даљина %1 km"
 
 #: src/gui/StelGuiItems.cpp:652
 msgid "Field of view"
@@ -2113,7 +2116,7 @@ msgstr "Изабрани пејзаж није (потпуно) уклоњен."
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr ""
+msgstr "Величина на диску: %1 MiB"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
@@ -2730,7 +2733,7 @@ msgstr "Нулти хоризонт"
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
 #: src/translations.h:191
 msgid "Vienna Sterngarten"
-msgstr ""
+msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
 #: src/translations.h:193
@@ -4143,8 +4146,8 @@ msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"Можете унети вредности као децимални степен, или користити dms формат. На "
-"пример: +1d 12m 8s"
+"Можете унети вредности као децимални запис степена, или користити дмс "
+"формат. На пример: +1д 12м 8с"
 
 #: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:150
@@ -4575,101 +4578,103 @@ msgstr "Небеска сфера"
 
 #: src/ui_viewDialog.h:1389
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Екваторијалне координате за епоху Ј2000.0"
 
 #: src/ui_viewDialog.h:1391
 msgid "Equatorial grid (J2000)"
-msgstr ""
+msgstr "Екваторијална мрежа (Ј2000)"
 
 #: src/ui_viewDialog.h:1393
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Екваторијалне координате за тренутни датум и планету"
 
 #: src/ui_viewDialog.h:1395
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Екваторијална мрежа (за датум)"
 
 #: src/ui_viewDialog.h:1397
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Еклиптичке координате за Ј2000.0"
 
 #: src/ui_viewDialog.h:1399
 msgid "Ecliptic grid (J2000)"
-msgstr ""
+msgstr "Еклиптичка мрежа (Ј2000)"
 
 #: src/ui_viewDialog.h:1401
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr ""
+msgstr "Еклиптичке координате за текући дан. Приказане само на Земљи."
 
 #: src/ui_viewDialog.h:1403
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Еклиптичка мрежа (за датум)"
 
 #: src/ui_viewDialog.h:1405
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
+msgstr "Висина и азимут (мерено од севера према истоку)"
 
 #: src/ui_viewDialog.h:1409
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Галактичке координате, Систем II (МУА 1958)"
 
 #: src/ui_viewDialog.h:1413
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Натписи за важне смерове"
 
 #: src/ui_viewDialog.h:1417
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Тренутни кругови померања Земљине осе око полова еклиптике. Приказани само "
+"на Земљи."
 
 #: src/ui_viewDialog.h:1419
 msgid "Precession circles"
-msgstr ""
+msgstr "Прецесиони кругови"
 
 #: src/ui_viewDialog.h:1421
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "Прикажи небески екватор за епоху Ј2000.0"
 
 #: src/ui_viewDialog.h:1423
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "Екватор (Ј2000)"
 
 #: src/ui_viewDialog.h:1425
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Прикажи небески екватор за текућу планету и датум"
 
 #: src/ui_viewDialog.h:1427
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Екватор (за дан)"
 
 #: src/ui_viewDialog.h:1429
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "Прикажи еклиптичку линију за Ј2000.0 (VSOP87A фундаментална раван)"
 
 #: src/ui_viewDialog.h:1431
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "Еклиптика (Ј2000)"
 
 #: src/ui_viewDialog.h:1433
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Прикажи еклиптичку линију за текући датум"
 
 #: src/ui_viewDialog.h:1435
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Еклиптика (за дан)"
 
 #: src/ui_viewDialog.h:1437
 msgid "Show horizon line."
-msgstr ""
+msgstr "Прикажи хоризонтску линију"
 
 #: src/ui_viewDialog.h:1441
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Прикажи линију галактичког екватора"
 
 #: src/ui_viewDialog.h:1445
 msgid "Show meridian line."
-msgstr ""
+msgstr "Прикажи линију меридијана"
 
 #: src/ui_viewDialog.h:1449
 msgid ""
@@ -4685,11 +4690,11 @@ msgstr "Пројекција"
 
 #: src/ui_viewDialog.h:1453
 msgid "Vertical viewport offset"
-msgstr ""
+msgstr "Вертикална даљина до видног поља"
 
 #: src/ui_viewDialog.h:1454
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: src/ui_viewDialog.h:1456
 msgid "Use this landscape as default"
@@ -5264,11 +5269,11 @@ msgstr "Поставке преламања"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Pressure (mbar):"
-msgstr ""
+msgstr "Притисак (mbar):"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Temperature (C):"
-msgstr ""
+msgstr "Температура (C):"
 
 #: src/ui_AtmosphereDialog.h:184
 msgid ""
@@ -5310,7 +5315,7 @@ msgstr "ведро"
 
 #: src/ui_scriptConsole.h:361
 msgid "pre-process script using SSC preprocessor"
-msgstr "процесирај скрипту користећи SSC препроцесор"
+msgstr "пре-процесирај скрипту користећи \"SSC\" препроцесор"
 
 #: src/ui_scriptConsole.h:364
 msgid "quickly load and run a utility script"
@@ -5649,7 +5654,7 @@ msgstr "Подеси &окулар"
 
 #: plugins/Oculars/src/Oculars.cpp:997
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "(Де)активирај &CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:1004
 msgid "Toggle &Telrad"
@@ -5657,19 +5662,19 @@ msgstr "(Де)активирај &Телрад"
 
 #: plugins/Oculars/src/Oculars.cpp:1012
 msgid "&Previous CCD"
-msgstr ""
+msgstr "&Претходни CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:1013
 msgid "&Next CCD"
-msgstr ""
+msgstr "&Следећи CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:1014
 msgid "&Select CCD"
-msgstr ""
+msgstr "&Изабери CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:1031
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "&Окрени CCD"
 
 #: plugins/Oculars/src/Oculars.cpp:1053
 msgid "&Reset rotation"
@@ -5848,11 +5853,11 @@ msgstr "Следеће сочиво"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "Претходни CCD оквир"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next CCD frame"
-msgstr ""
+msgstr "Следећи CCD оквир"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
 msgid "Previous telescope"
@@ -5979,7 +5984,7 @@ msgid ""
 msgstr ""
 "Овај додатак има за циљ да симулира оно што можете видети кроз окулар. Овај "
 "конфигурациони прозор можете искористити да бисте додали, изменили или "
-"избрисали окуларе и телескопе, као и ЦЦД сензоре . Чим први пут покренете "
+"избрисали окуларе и телескопе, као и ЦЦД сензоре. Када први пут покренете "
 "апликацију попуниће се неки узорци како бисте могли да почнете."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:532
@@ -6101,11 +6106,11 @@ msgstr "Сензор погледа"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr "Користите степене и минуте за FOV CCD-a"
+msgstr "Користи степене и минуте за видно поље CCD-a"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "Користи прекидач за CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
@@ -6243,7 +6248,7 @@ msgstr "Прозор за подешавање сателита"
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
-"Стара датотека satellites.json није више компатибилна - користим "
+"Стара датотека \"сателити.json\" није више компатибилна - користи "
 "подразумевану датотеку."
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
@@ -6414,7 +6419,7 @@ msgstr "Сателит није видљив"
 #: plugins/Satellites/src/Satellite.cpp:369
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
-msgstr ""
+msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:396
 msgid "Stellarium Satellites Plugin"
@@ -6479,7 +6484,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
 msgid "TLE data updates"
-msgstr ""
+msgstr "\"TLE\" ажурирање података"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
 msgid ""
@@ -6487,6 +6492,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
+"Додатак за сателите може аутоматски преузети \"TLE\" податке са интернета, а "
+"по подразумеваним подешавањима додатак ће то учинити ако су постојећи подаци "
+"старији од 72 сата. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 #, qt-format
@@ -6519,10 +6527,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
-"1. Проверите да ли су сателити које желите додати укључени у неки од УРЛ-ова "
+"1. Проверите да ли су сателити које желите додати укључени у неки од URL-ова "
 "у картицама са изворима у конфигурацији сателита. 2. Отворите картицу за "
 "сателите и кликните на дугме '+'. Одаберите сателите које желите додати и "
-"кликните на  \"Додај \" дугме."
+"кликните на \"Додај \" дугме."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
 msgid "Technical notes"
@@ -6533,12 +6541,16 @@ msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr ""
+"Позиције се рачунају помоћу \"SGP4\" и \"SDP4\" метода користећи \"NORAD "
+"TLE\" за улазне податке. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
 msgstr ""
+"Хосе Луис Каналес је написао код за прорачун орбите на основу исправљеног "
+"\"Spacetrack\" извештаја #3 (укључујући и \"Spacetrack\" извештај #6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
@@ -6682,7 +6694,7 @@ msgstr "Нова група..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:912
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Изабери TLE датотеку за ажурирање"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -6697,7 +6709,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:168
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "Изабери TLE изворне датотеке..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:183
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:184
@@ -6862,7 +6874,7 @@ msgstr "Групе:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "TLE set:"
-msgstr ""
+msgstr "ТЛЕ сет"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid ""
@@ -7157,7 +7169,7 @@ msgstr "Формат: степени-минути-секунде"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
-msgstr ""
+msgstr "&ЧМС"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:337
 msgid "Decimal degrees"
@@ -7813,7 +7825,7 @@ msgstr "Угаси"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
-msgstr ""
+msgstr "[нема чвора TUI]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
@@ -8313,7 +8325,7 @@ msgstr "квазар"
 #: plugins/Quasars/src/Quasar.cpp:129
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr "Z (redshift): %1"
+msgstr "Z (црвени помак): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:115
 msgid "Quasars Plug-in"
@@ -8440,17 +8452,17 @@ msgstr "Мера расипања:"
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:190
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:193
 msgid "pc"
-msgstr "лр"
+msgstr "pc"
 
 #: plugins/Pulsars/src/Pulsar.cpp:199
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr "Брзина потрошње енергије за споре ротације: %1 ерг/с"
+msgstr "Брзина потрошње енергије за споре ротације: %1 ergs/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
@@ -8466,7 +8478,7 @@ msgstr "Неуравнотеженост: %1"
 #: plugins/Pulsars/src/Pulsar.cpp:212
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr "Годишња паралакса је: %1 угаона мс"
+msgstr "Годишња паралакса: %1 mas"
 
 #: plugins/Pulsars/src/Pulsar.cpp:216
 #, qt-format
@@ -8489,13 +8501,13 @@ msgstr "Просечно време густине флукса"
 #: plugins/Pulsars/src/Pulsar.cpp:229 plugins/Pulsars/src/Pulsar.cpp:241
 #: plugins/Pulsars/src/Pulsar.cpp:253
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:232 plugins/Pulsars/src/Pulsar.cpp:244
 #: plugins/Pulsars/src/Pulsar.cpp:256
 msgid "mJy"
-msgstr ""
+msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:260
 #, qt-format
@@ -8549,6 +8561,9 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"Подаци за пулсар су добијени из ''ANTF\" пулсар каталог (Манчестер, Р. Н, "
+"Хобс, Г. Б, Теох, А. и Хобс, М, Астрон. Ј, 129,1993-2006 (2005) (%1 astro-"
+"ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
@@ -8562,7 +8577,7 @@ msgstr "Белешка"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "Индетификатор пулсара има префикс 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 msgid "Acknowledgment"
@@ -8711,7 +8726,7 @@ msgstr "Полупречник"
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Ефективна температура: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
@@ -8896,7 +8911,7 @@ msgstr "Професионалне веб стране са информациј
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Вансоларне планете: интерактивна верзија XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "HEK (The Hunt for Exomoons with Kepler)"
@@ -9700,7 +9715,7 @@ msgstr "Јун Ботиди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
 msgid "Piscis Austrinids"
-msgstr "Писцис Аустринидс"
+msgstr "Пискис Аустриниди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
@@ -9710,7 +9725,7 @@ msgstr "Јужни δ-Аквариди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
 msgid "α-Capricornids"
-msgstr "α-Каприкорннид"
+msgstr "α-Каприкорнид"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
@@ -9770,7 +9785,7 @@ msgstr "Јунски Лириди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
 msgid "κ-Cygnids"
-msgstr "к-Цајгниди"
+msgstr "к-Кигниди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
@@ -9830,7 +9845,7 @@ msgstr "Децембарски Леонис Минориди"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
 msgid "Comae Berenicids"
-msgstr "Коме беренициди"
+msgstr "Коме береникиди"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
