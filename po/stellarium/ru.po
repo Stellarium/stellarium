@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-02 23:11+0600\n"
-"PO-Revision-Date: 2015-07-31 07:14+0000\n"
+"PO-Revision-Date: 2015-08-03 06:31+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-03 05:25+0000\n"
+"X-Launchpad-Export-Date: 2015-08-04 05:16+0000\n"
 "X-Generator: Launchpad (build 17656)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -704,11 +704,11 @@ msgstr "Текущее время"
 
 #: src/core/StelCore.cpp:205
 msgid "Add 1 solar hour"
-msgstr "Добавить 1 солнечный час"
+msgstr "Добавить солнечный час"
 
 #: src/core/StelCore.cpp:206
 msgid "Add 1 solar day"
-msgstr "Добавить 1 солнечный день"
+msgstr "Добавить солнечный день"
 
 #: src/core/StelCore.cpp:207
 msgid "Add 7 solar days"
@@ -716,11 +716,11 @@ msgstr "Добавить 7 солнечных дней"
 
 #: src/core/StelCore.cpp:208
 msgid "Subtract 1 solar hour"
-msgstr "Вычесть 1 солнечный час"
+msgstr "Вычесть солнечный час"
 
 #: src/core/StelCore.cpp:209
 msgid "Subtract 1 solar day"
-msgstr "Вычесть 1 солнечный день"
+msgstr "Вычесть солнечный день"
 
 #: src/core/StelCore.cpp:210
 msgid "Subtract 7 solar days"
@@ -728,15 +728,15 @@ msgstr "Вычесть 7 солнечных дней"
 
 #: src/core/StelCore.cpp:211
 msgid "Add 1 sidereal day"
-msgstr "Добавить 1 звёздный день"
+msgstr "Добавить звёздный день"
 
 #: src/core/StelCore.cpp:212
 msgid "Add 1 sidereal year"
-msgstr "Добавить 1 звёздный год"
+msgstr "Добавить звёздный год"
 
 #: src/core/StelCore.cpp:213
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "Добавить 100 звёздных лет"
 
 #: src/core/StelCore.cpp:214
 msgid "Add 1 synodic month"
@@ -756,11 +756,11 @@ msgstr "Добавить аномалистический месяц"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "Добавить аномалистический год"
 
 #: src/core/StelCore.cpp:219
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "Добавить 100 аномалистических лет"
 
 #: src/core/StelCore.cpp:220
 msgid "Add 1 mean tropical month"
@@ -772,31 +772,31 @@ msgstr "Добавить средний тропический год"
 
 #: src/core/StelCore.cpp:222
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "Добавить 100 средних тропических лет"
 
 #: src/core/StelCore.cpp:223
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "Добавить Юлианский год"
 
 #: src/core/StelCore.cpp:224
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "Добавить Юлианское столетие"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "Добавить Гауссов год"
 
 #: src/core/StelCore.cpp:226
 msgid "Subtract 1 sidereal day"
-msgstr "Вычесть 1 звёздный день"
+msgstr "Вычесть звёздный день"
 
 #: src/core/StelCore.cpp:227
 msgid "Subtract 1 sidereal year"
-msgstr "Вычесть 1 звёздный год"
+msgstr "Вычесть звёздный год"
 
 #: src/core/StelCore.cpp:228
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "Вычесть 100 звёздных лет"
 
 #: src/core/StelCore.cpp:229
 msgid "Subtract 1 synodic month"
@@ -816,11 +816,11 @@ msgstr "Вычесть аномалистический месяц"
 
 #: src/core/StelCore.cpp:233
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "Вычесть аномалистический год"
 
 #: src/core/StelCore.cpp:234
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "Вычесть 100 аномалистических лет"
 
 #: src/core/StelCore.cpp:235
 msgid "Subtract 1 mean tropical month"
@@ -832,19 +832,19 @@ msgstr "Вычесть средний тропический год"
 
 #: src/core/StelCore.cpp:237
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "Вычесть 100 средних тропических лет"
 
 #: src/core/StelCore.cpp:238
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "Вычесть Юлианский год"
 
 #: src/core/StelCore.cpp:239
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "Вычесть Юлианское столетие"
 
 #: src/core/StelCore.cpp:240
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "Вычесть Гауссов год"
 
 #: src/core/StelCore.cpp:242
 msgid "Set home planet to selected planet"
@@ -1956,7 +1956,7 @@ msgstr "%1 м"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "Planetocentric distance %1 km"
-msgstr ""
+msgstr "Планетоцентрическое расстояние %1 км"
 
 #: src/gui/StelGuiItems.cpp:652
 msgid "Field of view"
