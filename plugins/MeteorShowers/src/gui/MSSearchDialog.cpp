@@ -80,7 +80,7 @@ void MSSearchDialog::createDialogContent()
 	connect(m_ui->listEvents, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		m_ui->listEvents, SLOT(repaint()));
 
-	int year = QDate::fromJulianDay(StelApp::getInstance().getCore()->getJDay()).year();
+	int year = QDate::fromJulianDay(StelApp::getInstance().getCore()->getJD()).year();
 	refreshRangeDates(year);
 
 	initListEvents();
@@ -150,7 +150,7 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 
 	// Change date
 	QString peak = modelIndex.sibling(modelIndex.row(), ColumnPeak).data().toString();
-	StelApp::getInstance().getCore()->setJDay(QDate::fromString(peak, "dd/MMM/yyyy").toJulianDay());
+	StelApp::getInstance().getCore()->setJD(QDate::fromString(peak, "dd/MMM/yyyy").toJulianDay());
 	m_mgr->repaint();
 
 	// Find the object
