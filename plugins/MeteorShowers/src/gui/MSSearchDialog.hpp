@@ -52,7 +52,8 @@ public:
 	~MSSearchDialog();
 
 	//! Refresh dates
-	void refreshRangeDates(const int& year);
+	//! from Jan 1 to Dec 31 for the current sky year
+	void refreshRangeDates();
 
 protected:
 	//! Initialize the dialog and connect the signals/slots
