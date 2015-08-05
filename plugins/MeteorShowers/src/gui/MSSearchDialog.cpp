@@ -80,9 +80,7 @@ void MSSearchDialog::createDialogContent()
 	connect(m_ui->listEvents, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
 		m_ui->listEvents, SLOT(repaint()));
 
-	int year = QDate::fromJulianDay(StelApp::getInstance().getCore()->getJD()).year();
-	refreshRangeDates(year);
-
+	refreshRangeDates();
 	initListEvents();
 }
 
@@ -170,8 +168,9 @@ void MSSearchDialog::selectEvent(const QModelIndex &modelIndex)
 	}
 }
 
-void MSSearchDialog::refreshRangeDates(const int& year)
+void MSSearchDialog::refreshRangeDates()
 {
+	int year = QDate::fromJulianDay(StelApp::getInstance().getCore()->getJD()).year();
 	m_ui->dateFrom->setDate(QDate(year, 1, 1));
 	m_ui->dateTo->setDate(QDate(year, 12, 31));
 }
