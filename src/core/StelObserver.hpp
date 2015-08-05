@@ -50,7 +50,10 @@ public:
 	Vec3d getCenterVsop87Pos(void) const;
 	//! Get the distance between observer and home planet center in AU
 	double getDistanceFromCenter(void) const;
-	Mat4d getRotAltAzToEquatorial(double jd) const;
+
+	//! returns rotation matrix for conversion of alt-azimuthal to equatorial coordinates
+	//! For Earth we need JD(UT), for other planets JDE! To be general, just have both in here!
+	Mat4d getRotAltAzToEquatorial(double JD, double JDE) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
 
 	virtual const QSharedPointer<Planet> getHomePlanet(void) const;

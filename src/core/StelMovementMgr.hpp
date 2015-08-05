@@ -117,7 +117,7 @@ public slots:
 	//! Changes to viewing direction are instantaneous.
 	//! @param deltaAz change in azimuth angle in radians
 	//! @param deltaAlt change in altitude angle in radians
-	void panView(double deltaAz, double deltaAlt);
+	void panView(const double deltaAz, const double deltaAlt);
 
 	//! Set automove duration in seconds
 	//! @param f the number of seconds it takes for an auto-move operation to complete.
