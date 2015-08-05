@@ -902,8 +902,8 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		nb = cdes.toInt();
 
 		QStringList catalogs;
-		catalogs << "IC" << "M" << "C" << "Cr" << "Mel" << "B" << "SH2" << "VdB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "Ced" << "PK" << "G" << "S" << "COL";
+		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
+			 << "NGC" << "PGC" << "UGC" << "CED" << "PK" << "G" << "S" << "COL";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
