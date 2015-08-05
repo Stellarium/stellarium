@@ -1053,7 +1053,7 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.left(2) == "SH" || objw.left(1) == "S")
+	if (objw.left(1) == "S")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1241,7 +1241,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	}
 
 	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.startsWith("SH") || objw.startsWith("S"))
+	if (objw.startsWith("S"))
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1335,7 +1335,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
-			if (QString("CED%1").arg(n->Ced_nb.toUpper()) == objw || QString("CED %1").arg(n->Ced_nb.toUpper()) == objw)
+			if (QString("CED%1").arg(n->Ced_nb.trimmed().toUpper()) == objw.trimmed() || QString("CED %1").arg(n->Ced_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1345,7 +1345,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
-			if (QString("PK%1").arg(n->PK_nb.toUpper()) == objw || QString("PK %1").arg(n->PK_nb.toUpper()) == objw)
+			if (QString("PK%1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed() || QString("PK %1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1355,7 +1355,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
-			if (QString("G%1").arg(n->G_nb.toUpper()) == objw || QString("G %1").arg(n->G_nb.toUpper()) == objw)
+			if (QString("G%1").arg(n->G_nb.trimmed().toUpper()) == objw.trimmed() || QString("G %1").arg(n->G_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -1534,16 +1534,16 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Ced_nb==0) continue;
-			QString constw = QString("Ced%1").arg(n->Ced_nb);
+			QString constw = QString("Ced%1").arg(n->Ced_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("Ced %1").arg(n->Ced_nb);
+			constw = QString("Ced %1").arg(n->Ced_nb.trimmed());
 			constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 				result << constw;
 		}
 	}
@@ -1569,7 +1569,7 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 	}
 
 	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.size()>=1 && (objw.left(2)=="SH" || objw.left(1)=="S"))
+	if (objw.size()>=1 && objw.left(1)=="S")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -1674,16 +1674,16 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->PK_nb.isEmpty()) continue;
-			QString constw = QString("PK%1").arg(n->PK_nb);
+			QString constw = QString("PK%1").arg(n->PK_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("PK %1").arg(n->PK_nb);
+			constw = QString("PK %1").arg(n->PK_nb.trimmed());
 			constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 				result << constw;
 		}
 	}
@@ -1694,16 +1694,16 @@ QStringList NebulaMgr::listMatchingObjectsI18n(const QString& objPrefix, int max
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->G_nb.isEmpty()) continue;
-			QString constw = QString("G%1").arg(n->G_nb);
+			QString constw = QString("G%1").arg(n->G_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("G %1").arg(n->G_nb);
+			constw = QString("G %1").arg(n->G_nb.trimmed());
 			constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 				result << constw;
 		}
 	}
@@ -1868,16 +1868,16 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->Ced_nb==0) continue;
-			QString constw = QString("Ced%1").arg(n->Ced_nb);
+			QString constw = QString("Ced%1").arg(n->Ced_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;
 			}
-			constw = QString("Ced %1").arg(n->Ced_nb);
+			constw = QString("Ced %1").arg(n->Ced_nb.trimmed());
 			constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 				result << constw;
 		}
 	}
@@ -1943,7 +1943,7 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	}
 
 	// Search by Sharpless objects number (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.size()>=1 && (objw.left(2)=="SH" || objw.left(1)=="S"))
+	if (objw.size()>=1 && objw.left(1)=="S")
 	{
 		foreach (const NebulaP& n, dsoArray)
 		{
@@ -2048,16 +2048,16 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->PK_nb.isEmpty()) continue;
-			QString constw = QString("PK%1").arg(n->PK_nb);
+			QString constw = QString("PK%1").arg(n->PK_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("PK %1").arg(n->PK_nb);
+			constw = QString("PK %1").arg(n->PK_nb.trimmed());
 			constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 				result << constw;
 		}
 	}
@@ -2068,16 +2068,16 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		foreach (const NebulaP& n, dsoArray)
 		{
 			if (n->G_nb.isEmpty()) continue;
-			QString constw = QString("G%1").arg(n->G_nb);
+			QString constw = QString("G%1").arg(n->G_nb.trimmed());
 			QString constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 			{
 				result << constws;
 				continue;	// Prevent adding both forms for name
 			}
-			constw = QString("G %1").arg(n->G_nb);
+			constw = QString("G %1").arg(n->G_nb.trimmed());
 			constws = constw.mid(0, objw.size());
-			if (constws==objw)
+			if (constws.toUpper()==objw.toUpper())
 				result << constw;
 		}
 	}
