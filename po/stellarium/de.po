@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-02 23:11+0600\n"
-"PO-Revision-Date: 2015-07-31 08:30+0000\n"
+"PO-Revision-Date: 2015-08-04 21:58+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-03 05:18+0000\n"
+"X-Launchpad-Export-Date: 2015-08-05 05:16+0000\n"
 "X-Generator: Launchpad (build 17656)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -737,7 +737,7 @@ msgstr "1 siderisches Jahr vorwärts"
 
 #: src/core/StelCore.cpp:213
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "100 Siderische Jahre vor"
 
 #: src/core/StelCore.cpp:214
 msgid "Add 1 synodic month"
@@ -757,11 +757,11 @@ msgstr "1 Anomalistischen Monat vorwärts"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "1 Anomalistisches Jahr vor"
 
 #: src/core/StelCore.cpp:219
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "100 Anomalistische Jahre vor"
 
 #: src/core/StelCore.cpp:220
 msgid "Add 1 mean tropical month"
@@ -773,19 +773,19 @@ msgstr "1 Mittleres Tropisches Jahr vorwärts"
 
 #: src/core/StelCore.cpp:222
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "100 TropischeJahre vor"
 
 #: src/core/StelCore.cpp:223
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "1 Julianisches Jahr vor"
 
 #: src/core/StelCore.cpp:224
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "1 Julianisches Jahrhundert vor"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "1 Gauß'sches Jahr vor"
 
 #: src/core/StelCore.cpp:226
 msgid "Subtract 1 sidereal day"
@@ -797,7 +797,7 @@ msgstr "1 siderisches Jahr zurück"
 
 #: src/core/StelCore.cpp:228
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "100 Siderische Jahre zurück"
 
 #: src/core/StelCore.cpp:229
 msgid "Subtract 1 synodic month"
@@ -817,11 +817,11 @@ msgstr "1 Anomalistischen Monat zurück"
 
 #: src/core/StelCore.cpp:233
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "1 Anomalistisches Jahr zurück"
 
 #: src/core/StelCore.cpp:234
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "100 Anomalistische Jahre zurück"
 
 #: src/core/StelCore.cpp:235
 msgid "Subtract 1 mean tropical month"
@@ -833,19 +833,19 @@ msgstr "1 Mittleres Tropisches Jahr zurück"
 
 #: src/core/StelCore.cpp:237
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "100 Tropische Jahre zurück"
 
 #: src/core/StelCore.cpp:238
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "1 Julianisches Jahr zurück"
 
 #: src/core/StelCore.cpp:239
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "1 Julianisches Jahrhundert zurück"
 
 #: src/core/StelCore.cpp:240
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "1 Gauß'sches Jahr zurück"
 
 #: src/core/StelCore.cpp:242
 msgid "Set home planet to selected planet"
@@ -1963,7 +1963,7 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "Planetocentric distance %1 km"
-msgstr ""
+msgstr "Planetozentrischer Abstand: %1 km"
 
 #: src/gui/StelGuiItems.cpp:652
 msgid "Field of view"
