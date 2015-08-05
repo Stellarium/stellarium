@@ -50,11 +50,11 @@ const Mat4d StelCore::matVsop87ToJ2000(matJ2000ToVsop87.transpose());
 const Mat4d StelCore::matJ2000ToGalactic(-0.054875539726, 0.494109453312, -0.867666135858, 0, -0.873437108010, -0.444829589425, -0.198076386122, 0, -0.483834985808, 0.746982251810, 0.455983795705, 0, 0, 0, 0, 1);
 const Mat4d StelCore::matGalacticToJ2000(matJ2000ToGalactic.transpose());
 
-const double StelCore::JD_SECOND=0.000011574074074074074074;
-const double StelCore::JD_MINUTE=0.00069444444444444444444;
-const double StelCore::JD_HOUR  =0.041666666666666666666;
+const double StelCore::JD_SECOND=0.000011574074074074074074; // 1/(24*60*60)=1/86400
+const double StelCore::JD_MINUTE=0.00069444444444444444444;  // 1/(24*60)   =1/1440
+const double StelCore::JD_HOUR  =0.041666666666666666666;    // 1/24
 const double StelCore::JD_DAY   =1.;
-const double StelCore::ONE_OVER_JD_SECOND = 24 * 60 * 60;
+const double StelCore::ONE_OVER_JD_SECOND = 24 * 60 * 60;    // 86400
 
 
 StelCore::StelCore()
@@ -65,10 +65,10 @@ StelCore::StelCore()
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(NULL)
 	, timeSpeed(JD_SECOND)
-	, JDay(0.)
+	, JD(0.,0.)
 	, presetSkyTime(0.)
-	, secondsOfLastJDayUpdate(0.)
-	, JDayOfLastJDayUpdate(0.)
+	, secondsOfLastJDUpdate(0.)
+	, jdOfLastJDUpdate(0.)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
 {
@@ -173,7 +173,7 @@ void StelCore::init()
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
 	startupTimeMode = conf->value("navigation/startup_time_mode", "actual").toString().toLower();
 	if (startupTimeMode=="preset")	
-		setJDay(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
+		setJD(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
 
@@ -210,20 +210,34 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Solar_Week", timeGroup, N_("Subtract 7 solar days"), this, "subtractWeek()", "[");
 	actionsMgr->addAction("actionAdd_Sidereal_Day", timeGroup, N_("Add 1 sidereal day"), this, "addSiderealDay()", "Alt+=");
 	actionsMgr->addAction("actionAdd_Sidereal_Year", timeGroup, N_("Add 1 sidereal year"), this, "addSiderealYear()", "Ctrl+Alt+Shift+]");
+	actionsMgr->addAction("actionAdd_Sidereal_Century", timeGroup, N_("Add 100 sidereal years"), this, "addSiderealYears(100)");
 	actionsMgr->addAction("actionAdd_Synodic_Month", timeGroup, N_("Add 1 synodic month"), this, "addSynodicMonth()");
 	actionsMgr->addAction("actionAdd_Draconic_Month", timeGroup, N_("Add 1 draconic month"), this, "addDraconicMonth()");
 	actionsMgr->addAction("actionAdd_Draconic_Year", timeGroup, N_("Add 1 draconic year"), this, "addDraconicYear()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Month", timeGroup, N_("Add 1 anomalistic month"), this, "addAnomalisticMonth()");
+	actionsMgr->addAction("actionAdd_Anomalistic_Year", timeGroup, N_("Add 1 anomalistic year"), this, "addAnomalisticYear()");
+	actionsMgr->addAction("actionAdd_Anomalistic_Century", timeGroup, N_("Add 100 anomalistic years"), this, "addAnomalisticYears(100)");
 	actionsMgr->addAction("actionAdd_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addTropicalMonth()");
 	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addTropicalYear()");
+	actionsMgr->addAction("actionAdd_Tropical_Century", timeGroup, N_("Add 100 mean tropical years"), this, "addTropicalYears(100)");
+	actionsMgr->addAction("actionAdd_Julian_Year", timeGroup, N_("Add 1 Julian year"), this, "addJulianYear()");
+	actionsMgr->addAction("actionAdd_Julian_Century", timeGroup, N_("Add 1 Julian century"), this, "addJulianYears(100)");
+	actionsMgr->addAction("actionAdd_Gaussian_Year", timeGroup, N_("Add 1 Gaussian year"), this, "addGaussianYear()");
 	actionsMgr->addAction("actionSubtract_Sidereal_Day", timeGroup, N_("Subtract 1 sidereal day"), this, "subtractSiderealDay()", "Alt+-");
 	actionsMgr->addAction("actionSubtract_Sidereal_Year", timeGroup, N_("Subtract 1 sidereal year"), this, "subtractSiderealYear()", "Ctrl+Alt+Shift+[");
+	actionsMgr->addAction("actionSubtract_Sidereal_Century", timeGroup, N_("Subtract 100 sidereal years"), this, "subtractSiderealYears(100)");
 	actionsMgr->addAction("actionSubtract_Synodic_Month", timeGroup, N_("Subtract 1 synodic month"), this, "subtractSynodicMonth()");
 	actionsMgr->addAction("actionSubtract_Draconic_Month", timeGroup, N_("Subtract 1 draconic month"), this, "subtractDraconicMonth()");
 	actionsMgr->addAction("actionSubtract_Draconic_Year", timeGroup, N_("Subtract 1 draconic year"), this, "subtractDraconicYear()");
 	actionsMgr->addAction("actionSubtract_Anomalistic_Month", timeGroup, N_("Subtract 1 anomalistic month"), this, "subtractAnomalisticMonth()");
+	actionsMgr->addAction("actionSubtract_Anomalistic_Year", timeGroup, N_("Subtract 1 anomalistic year"), this, "subtractAnomalisticYear()");
+	actionsMgr->addAction("actionSubtract_Anomalistic_Century", timeGroup, N_("Subtract 100 anomalistic years"), this, "subtractAnomalisticYears(100)");
 	actionsMgr->addAction("actionSubtract_Tropical_Month", timeGroup, N_("Subtract 1 mean tropical month"), this, "subtractTropicalMonth()");
 	actionsMgr->addAction("actionSubtract_Tropical_Year", timeGroup, N_("Subtract 1 mean tropical year"), this, "subtractTropicalYear()");
+	actionsMgr->addAction("actionSubtract_Tropical_Century", timeGroup, N_("Subtract 100 mean tropical years"), this, "subtractTropicalYears(100)");
+	actionsMgr->addAction("actionSubtract_Julian_Year", timeGroup, N_("Subtract 1 Julian year"), this, "subtractJulianYear()");
+	actionsMgr->addAction("actionSubtract_Julian_Century", timeGroup, N_("Subtract 1 Julian century"), this, "subtractJulianYears(100)");
+	actionsMgr->addAction("actionSubtract_Gaussian_Year", timeGroup, N_("Subtract 1 Gaussian year"), this, "subtractGaussianYear()");
 
 	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", movementGroup, N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");
 	actionsMgr->addAction("actionGo_Home_Global", movementGroup, N_("Go to home"), this, "returnToHome()", "Ctrl+H");
@@ -752,7 +766,7 @@ StelProjector::ModelViewTranformP StelCore::getGalacticModelViewTransform(Refrac
 // called in update() (for every frame)
 void StelCore::updateTransformMatrices()
 {
-	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(JDay);
+	matAltAzToEquinoxEqu = position->getRotAltAzToEquatorial(getJD(), getJDE());
 	matEquinoxEquToAltAz = matAltAzToEquinoxEqu.transpose();
 
 	// multiply static J2000 earth axis tilt (eclipticalJ2000<->equatorialJ2000)
@@ -851,26 +865,40 @@ void StelCore::returnToHome()
 	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
-void StelCore::setJDay(double JD)
+void StelCore::setJD(double newJD)
 {
-	JDay=JD;
+	JD.first=newJD;
+	JD.second=computeDeltaT(newJD);
 	resetSync();
 }
 
-double StelCore::getJDay() const
+double StelCore::getJD() const
 {
-	return JDay;
+	return JD.first;
 }
+
+void StelCore::setJDE(double newJDE)
+{
+	// nitpickerish this is not exact, but as good as it gets...
+	JD.second=computeDeltaT(newJDE);
+	JD.first=newJDE-JD.second/86400.0;
+	resetSync();
+}
+
+double StelCore::getJDE() const
+{
+	return JD.first+JD.second/86400.0;
+}
+
 
 void StelCore::setMJDay(double MJD)
 {
-	JDay=MJD+2400000.5;
-	resetSync();
+	setJD(MJD+2400000.5);
 }
 
 double StelCore::getMJDay() const
 {
-	return JDay-2400000.5;
+	return JD.first-2400000.5;
 }
 
 double StelCore::getPresetSkyTime() const
@@ -979,9 +1007,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 //! Set stellarium time to current real world time
 void StelCore::setTimeNow()
 {
-	double JD = StelUtils::getJDFromSystem();
-	// add Delta-T correction for actual time
-	setJDay(JD+getDeltaT(JD)/86400);
+	setJD(StelUtils::getJDFromSystem());
 }
 
 void StelCore::setTodayTime(const QTime& target)
@@ -992,7 +1018,7 @@ void StelCore::setTodayTime(const QTime& target)
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
 		double JD = StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR);
-		setJDay(JD + getDeltaT(JD)/86400);
+		setJD(JD);
 	}
 	else
 	{
@@ -1005,12 +1031,12 @@ void StelCore::setTodayTime(const QTime& target)
 bool StelCore::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
-	static double lastJD = getJDay();
-	static bool previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
-	if (fabs(lastJD-getJDay())>JD_SECOND/4)
+	static double lastJD = getJD();
+	static bool previousResult = (fabs(getJD()-(StelUtils::getJDFromSystem()))<JD_SECOND);
+	if (fabs(lastJD-getJD())>JD_SECOND/4)
 	{
-		lastJD = getJDay();
-		previousResult = (fabs(getJDay()-(StelUtils::getJDFromSystem()+getDeltaT(lastJD)/86400))<JD_SECOND);
+		lastJD = getJD();
+		previousResult = (fabs(getJD()-(StelUtils::getJDFromSystem()))<JD_SECOND);
 	}
 	return previousResult;
 }
@@ -1020,14 +1046,14 @@ QTime StelCore::getInitTodayTime(void)
 	return initTodayTime;
 }
 
-void StelCore::setInitTodayTime(const QTime& t)
+void StelCore::setInitTodayTime(const QTime& time)
 {
-	initTodayTime=t;
+	initTodayTime=time;
 }
 
-void StelCore::setPresetSkyTime(QDateTime dt)
+void StelCore::setPresetSkyTime(QDateTime dateTime)
 {
-	setPresetSkyTime(StelUtils::qDateTimeToJd(dt));
+	setPresetSkyTime(StelUtils::qDateTimeToJd(dateTime));
 }
 
 void StelCore::addHour()
@@ -1060,6 +1086,16 @@ void StelCore::addSiderealYear()
 	addSolarDays(days);
 }
 
+void StelCore::addSiderealYears(float n)
+{
+	double days = 365.256363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod();
+
+	addSolarDays(days*n);
+}
+
 void StelCore::addSynodicMonth()
 {
 	addSolarDays(29.530588853);
@@ -1080,6 +1116,16 @@ void StelCore::addAnomalisticMonth()
 	addSolarDays(27.554549878);
 }
 
+void StelCore::addAnomalisticYear()
+{
+	addSolarDays(365.259636);
+}
+
+void StelCore::addAnomalisticYears(float n)
+{
+	addSolarDays(365.259636*n);
+}
+
 void StelCore::addDraconicYear()
 {
 	addSolarDays(346.620075883);
@@ -1090,14 +1136,24 @@ void StelCore::addTropicalYear()
 	addSolarDays(365.242190419);
 }
 
-void StelCore::addTropicalCentury()
+void StelCore::addTropicalYears(float n)
 {
-	addSolarDays(36524.21897);
+	addSolarDays(365.2421897*n);
 }
 
-void StelCore::addJulianCentury()
+void StelCore::addJulianYear()
 {
-	addSolarDays(36525.0);
+	addSolarDays(365.25);
+}
+
+void StelCore::addGaussianYear()
+{
+	addSolarDays(365.2568983);
+}
+
+void StelCore::addJulianYears(float n)
+{
+	addSolarDays(365.25*n);
 }
 
 void StelCore::subtractHour()
@@ -1130,6 +1186,16 @@ void StelCore::subtractSiderealYear()
 	addSolarDays(-days);
 }
 
+void StelCore::subtractSiderealYears(float n)
+{
+	double days = 365.256363004;
+	const PlanetP& home = position->getHomePlanet();
+	if ((home->getEnglishName() != "Solar System Observer") && (home->getSiderealPeriod()>0))
+		days = home->getSiderealPeriod();
+
+	addSolarDays(-days*n);
+}
+
 void StelCore::subtractSynodicMonth()
 {
 	addSolarDays(-29.530588853);
@@ -1150,6 +1216,16 @@ void StelCore::subtractAnomalisticMonth()
 	addSolarDays(-27.554549878);
 }
 
+void StelCore::subtractAnomalisticYear()
+{
+	addSolarDays(-365.259636);
+}
+
+void StelCore::subtractAnomalisticYears(float n)
+{
+	addSolarDays(-365.259636*n);
+}
+
 void StelCore::subtractDraconicYear()
 {
 	addSolarDays(-346.620075883);
@@ -1160,14 +1236,24 @@ void StelCore::subtractTropicalYear()
 	addSolarDays(-365.242190419);
 }
 
-void StelCore::subtractTropicalCentury()
+void StelCore::subtractTropicalYears(float n)
 {
-	addSolarDays(-36524.21897);
+	addSolarDays(-365.2421897*n);
 }
 
-void StelCore::subtractJulianCentury()
+void StelCore::subtractJulianYear()
 {
-	addSolarDays(-36525.0);
+	addSolarDays(-365.25);
+}
+
+void StelCore::subtractGaussianYear()
+{
+	addSolarDays(-365.2568983);
+}
+
+void StelCore::subtractJulianYears(float n)
+{
+	addSolarDays(-365.25*n);
 }
 
 void StelCore::addSolarDays(double d)
@@ -1176,7 +1262,7 @@ void StelCore::addSolarDays(double d)
 	if (home->getEnglishName() != "Solar System Observer")	
 		d *= home->getMeanSolarDay();
 
-	setJDay(getJDay() + d);
+	setJD(getJD() + d);
 }
 
 void StelCore::addSiderealDays(double d)
@@ -1184,13 +1270,14 @@ void StelCore::addSiderealDays(double d)
 	const PlanetP& home = position->getHomePlanet();
 	if (home->getEnglishName() != "Solar System Observer")
 		d *= home->getSiderealDay();
-	setJDay(getJDay() + d);
+	setJD(getJD() + d);
 }
 
 // Get the sidereal time shifted by the observer longitude
 double StelCore::getLocalSiderealTime() const
 {
-	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
+	// On Earth, this requires UT deliberately with all its faults, on other planets we use the more regular TT.
+	return (position->getHomePlanet()->getSiderealTime(getJD(), getJDE())+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
 //! Get the duration of a sidereal day for the current observer in day.
@@ -1279,16 +1366,19 @@ void StelCore::updateTime(double deltaTime)
 	if (getRealTimeSpeed())
 	{
 		// Get rid of the error from the 1 /
-		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
+		// JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
+		// GZ I don't understand the comment. Is the constant wrong?
+		JD.first = jdOfLastJDUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDUpdate) * JD_SECOND;
 	}
 	else
 	{
-		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
+		JD.first = jdOfLastJDUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDUpdate) * timeSpeed;
 	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
-	if (JDay>38245309.499988) JDay = 38245309.499988;
-	if (JDay<-34803211.500012) JDay = -34803211.500012;
+	if (JD.first>38245309.499988) JD.first = 38245309.499988;
+	if (JD.first<-34803211.500012) JD.first = -34803211.500012;
+	JD.second=computeDeltaT(JD.first);
 
 	if (position->isObserverLifeOver())
 	{
@@ -1306,14 +1396,16 @@ void StelCore::updateTime(double deltaTime)
 	position->update(deltaTime);
 
 	// Position of sun and all the satellites (ie planets)
-	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-	solsystem->computePositions(getJDay(), position->getHomePlanet()->getHeliocentricEclipticPos());
+	// GZ maybe setting this static can speedup a bit?
+	static SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	// Likely the most important location where we need JDE:
+	solsystem->computePositions(getJDE(), position->getHomePlanet()->getHeliocentricEclipticPos());
 }
 
 void StelCore::resetSync()
 {
-	JDayOfLastJDayUpdate = getJDay();
-	secondsOfLastJDayUpdate = StelApp::getTotalRunTime();
+	jdOfLastJDUpdate = getJD();
+	secondsOfLastJDUpdate = StelApp::getTotalRunTime();
 }
 
 void StelCore::setStartupTimeMode(const QString& s)
@@ -1321,7 +1413,15 @@ void StelCore::setStartupTimeMode(const QString& s)
 	startupTimeMode = s;
 }
 
-double StelCore::getDeltaT(double jDay) const
+// return precomputed DeltaT in seconds. Public.
+double StelCore::getDeltaT() const
+{
+	return JD.second;
+}
+
+
+// compute and return DeltaT in seconds. Try not to call it directly, current DeltaT, JD, and JDE are available.
+double StelCore::computeDeltaT(const double JD) const
 {
 	double DeltaT = 0.;
 	double ndot = 0.;
@@ -1336,149 +1436,156 @@ double StelCore::getDeltaT(double jDay) const
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
 			ndot = -29.68; // n.dot = -29.68"/cy/cy
-			DeltaT = StelUtils::getDeltaTBySchoch(jDay);
+			DeltaT = StelUtils::getDeltaTBySchoch(JD);
 			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByClemence(jDay);
+			DeltaT = StelUtils::getDeltaTByClemence(JD);
 			break;
 		case IAU:
 			// IAU (1952) algorithm for DeltaT, based on observations by Spencer Jones (1939)
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByIAU(jDay);
+			DeltaT = StelUtils::getDeltaTByIAU(JD);
 			break;
 		case AstronomicalEphemeris:
 			// Astronomical Ephemeris (1960) algorithm for DeltaT
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(jDay);
+			DeltaT = StelUtils::getDeltaTByAstronomicalEphemeris(JD);
 			break;
 		case TuckermanGoldstine:
 			// Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 			//FIXME: n.dot
 			ndot = -22.44; // n.dot = -22.44 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByTuckermanGoldstine(jDay);
+			DeltaT = StelUtils::getDeltaTByTuckermanGoldstine(JD);
 			break;
 		case MullerStephenson:
 			// Muller & Stephenson (1975) algorithm for DeltaT
 			ndot = -37.5; // n.dot = -37.5 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMullerStephenson(jDay);
+			DeltaT = StelUtils::getDeltaTByMullerStephenson(JD);
 			break;
 		case Stephenson1978:
 			// Stephenson (1978) algorithm for DeltaT
 			ndot = -30.0; // n.dot = -30.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephenson1978(jDay);
+			DeltaT = StelUtils::getDeltaTByStephenson1978(JD);
 			break;
 		case SchmadelZech1979:
 			// Schmadel & Zech (1979) algorithm for DeltaT
 			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy
-			DeltaT = StelUtils::getDeltaTBySchmadelZech1979(jDay);
+			DeltaT = StelUtils::getDeltaTBySchmadelZech1979(JD);
 			break;
 		case MorrisonStephenson1982:
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1982(jDay);
+			DeltaT = StelUtils::getDeltaTByMorrisonStephenson1982(JD);
 			break;
 		case StephensonMorrison1984:
 			// Stephenson & Morrison (1984) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephensonMorrison1984(jDay);
+			DeltaT = StelUtils::getDeltaTByStephensonMorrison1984(JD);
 			break;
 		case StephensonHoulden:
 			// Stephenson & Houlden (1986) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephensonHoulden(jDay);
+			DeltaT = StelUtils::getDeltaTByStephensonHoulden(JD);
 			break;
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
 			//FIXME: n.dot
 			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByEspenak(jDay);
+			DeltaT = StelUtils::getDeltaTByEspenak(JD);
 			break;
 		case Borkowski:
 			// Borkowski (1988) algorithm for DeltaT, relates to ELP2000-85!
 			ndot = -23.895; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByBorkowski(jDay);
+			DeltaT = StelUtils::getDeltaTByBorkowski(JD);
 			break;
 		case SchmadelZech1988:
 			// Schmadel & Zech (1988) algorithm for DeltaT
 			//FIXME: n.dot
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTBySchmadelZech1988(jDay);
+			DeltaT = StelUtils::getDeltaTBySchmadelZech1988(JD);
 			break;
 		case ChaprontTouze:
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
 			ndot = -23.8946; // n.dot = -23.8946 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByChaprontTouze(jDay);
+			DeltaT = StelUtils::getDeltaTByChaprontTouze(JD);
 			break;
 		case StephensonMorrison1995:
 			// Stephenson & Morrison (1995) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephensonMorrison1995(jDay);
+			DeltaT = StelUtils::getDeltaTByStephensonMorrison1995(JD);
 			break;
 		case Stephenson1997:
 			// Stephenson (1997) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByStephenson1997(jDay);
+			DeltaT = StelUtils::getDeltaTByStephenson1997(JD);
 			break;
 		case ChaprontMeeus:
 			// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
 			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByChaprontMeeus(jDay);
+			DeltaT = StelUtils::getDeltaTByChaprontMeeus(JD);
 			break;
 		case JPLHorizons:
 			// JPL Horizons algorithm for DeltaT
 			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByJPLHorizons(jDay);
+			DeltaT = StelUtils::getDeltaTByJPLHorizons(JD);
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
 			ndot = -25.7376; // n.dot = -25.7376 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMeeusSimons(jDay);
+			DeltaT = StelUtils::getDeltaTByMeeusSimons(JD);
 			break;
 		case ReingoldDershowitz:
 			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
 			// FIXME: n.dot
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByReingoldDershowitz(jDay);
+			DeltaT = StelUtils::getDeltaTByReingoldDershowitz(JD);
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
 			// NOTE: book not contains n.dot value
 			// FIXME: n.dot
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy ???
-			DeltaT = StelUtils::getDeltaTByMontenbruckPfleger(jDay);
+			DeltaT = StelUtils::getDeltaTByMontenbruckPfleger(JD);
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(jDay);
+			DeltaT = StelUtils::getDeltaTByMorrisonStephenson2004(JD);
 			break;
 		case Reijs:
 			// Reijs (2006) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByReijs(jDay);
+			DeltaT = StelUtils::getDeltaTByReijs(JD);
 			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
 			ndot = -25.858; // n.dot = -25.858 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByEspenakMeeus(jDay);
+			DeltaT = StelUtils::getDeltaTByEspenakMeeus(JD);
+			break;
+		case EspenakMeeusZeroMoonAccel:
+			// This is a trying area. Something is wrong with DeltaT, maybe ndot is still not applied correctly.
+			// Espenak & Meeus (2006) algorithm for DeltaT
+			ndot = -25.858; // n.dot = -25.858 "/cy/cy
+			dontUseMoon = true;
+			DeltaT = StelUtils::getDeltaTByEspenakMeeus(JD);
 			break;
 		case Banjevic:
 			// Banjevic (2006) algorithm for DeltaT
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByBanjevic(jDay);
+			DeltaT = StelUtils::getDeltaTByBanjevic(JD);
 			break;
 		case IslamSadiqQureshi:
 			// Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByIslamSadiqQureshi(jDay);
+			DeltaT = StelUtils::getDeltaTByIslamSadiqQureshi(JD);
 			dontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			break;
 		case KhalidSultanaZaidi:
 			// M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
 			ndot = -26.0; // n.dot = -26.0 "/cy/cy
-			DeltaT = StelUtils::getDeltaTByKhalidSultanaZaidi(jDay);
+			DeltaT = StelUtils::getDeltaTByKhalidSultanaZaidi(JD);
 			dontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			break;
 		case Custom:
@@ -1486,14 +1593,14 @@ double StelCore::getDeltaT(double jDay) const
 			ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
 			int year, month, day;
 			Vec3f coeff = getDeltaTCustomEquationCoefficients();
-			StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);			
+			StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 			double u = (StelUtils::getDecYear(year,month,day)-getDeltaTCustomYear())/100;
 			DeltaT = coeff[0] + u*(coeff[1] + u*coeff[2]);
 			break;
 	}
 
 	if (!dontUseMoon)
-		DeltaT += StelUtils::getMoonSecularAcceleration(jDay, ndot);
+		DeltaT += StelUtils::getMoonSecularAcceleration(JD, ndot);
 
 	return DeltaT;
 }
@@ -1530,91 +1637,94 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("Correction is disabled. Use only if you know what you are doing!");
 			break;
 		case Schoch: // historical value.
-			description = q_("This historical formula was obtained by C. Schoch in 1931 and was used by G. Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> (%1). See for more info %2here%3.").arg("2009").arg("<a href='http://journalofcosmology.com/AncientAstronomy123.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This historical formula was obtained by C. Schoch in 1931 and was used by G. Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses</em> (%1). See for more info %2here%3.").arg("2009").arg("<a href='http://journalofcosmology.com/AncientAstronomy123.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Clemence: // historical value.
-			description = q_("This empirical equation was published by G. M. Clemence in the article <em>On the system of astronomical constants</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1948AJ.....53..169C'>1948</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This empirical equation was published by G. M. Clemence in the article <em>On the system of astronomical constants</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1948AJ.....53..169C'>1948</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case IAU: // historical value.
-			description = q_("This formula is based on a study of post-1650 observations of the Sun, the Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his <em>Astronomical Formulae for Calculators</em>. It was also adopted in the PC program SunTracker Pro.").arg("<a href='http://adsabs.harvard.edu/abs/1939MNRAS..99..541S'>1939</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This formula is based on a study of post-1650 observations of the Sun, the Moon and the planets by Spencer Jones (%1) and used by Jean Meeus in his <em>Astronomical Formulae for Calculators</em>. It was also adopted in the PC program SunTracker Pro.").arg("<a href='http://adsabs.harvard.edu/abs/1939MNRAS..99..541S'>1939</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			// find year of publication of AFFC
 			break;
 		case AstronomicalEphemeris: // historical value.
-			description = q_("This is a slightly modified version of the IAU (1952) formula which was adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar Eclipses</em> by Mucke & Meeus (1983).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This is a slightly modified version of the IAU (1952) formula which was adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar Eclipses</em> by Mucke & Meeus (1983).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			// TODO: expand the sentence: ... adopted ... from 19xx-19yy?
 			break;
 		case TuckermanGoldstine: // historical value.
-			description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same relation was also implicitly adopted in the syzygy tables of Goldstine (1973).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			// TODO: These tables are sometimes found cited, but I have no details. Maybe add "based on ... " ?
 			break;
 		case MullerStephenson:
-			description = q_("This equation was published by P. M. Muller and F. R. Stephenson in the article <em>The accelerations of the earth and moon from early astronomical observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1975grhe.conf..459M'>1975</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This equation was published by P. M. Muller and F. R. Stephenson in the article <em>The accelerations of the earth and moon from early astronomical observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1975grhe.conf..459M'>1975</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Stephenson1978:
-			description = q_("This equation was published by F. R. Stephenson in the article <em>Pre-Telescopic Astronomical Observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1978tfer.conf....5S'>1978</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This equation was published by F. R. Stephenson in the article <em>Pre-Telescopic Astronomical Observations</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1978tfer.conf....5S'>1978</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case SchmadelZech1979: // outdated data fit, historical value?
-			description = q_("This 12th-order polynomial equation (outdated and superseded by Schmadel & Zech (1988)) was published by L. D. Schmadel and G. Zech in the article <em>Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1) as fit through data published by Brouwer (1952).").arg("<a href='http://adsabs.harvard.edu/abs/1979AcA....29..101S'>1979</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This 12th-order polynomial equation (outdated and superseded by Schmadel & Zech (1988)) was published by L. D. Schmadel and G. Zech in the article <em>Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975</em> (%1) as fit through data published by Brouwer (1952).").arg("<a href='http://adsabs.harvard.edu/abs/1979AcA....29..101S'>1979</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MorrisonStephenson1982:
-			description = q_("This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary Programs and Tables from -4000 to +2800</em> (1986) and in the PC planetarium program RedShift.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case StephensonMorrison1984: // PRIMARY SOURCE
-			description = q_("This formula was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This formula was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1984RSPTA.313...47S'>1984</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case StephensonHoulden:
-			description = q_("This algorithm is used in the PC planetarium program Guide 7.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This algorithm is used in the PC planetarium program Guide 7.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Espenak: // limited range, but wide availability?
-			description = q_("This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar Eclipses: 1986-2035</em> (1989).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Borkowski: // Linked to ELP2000-85, so it's important...
-			description = q_("This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 solar eclipse records dating between 2137 BCE and 1715 CE.").arg("<a href='http://adsabs.harvard.edu/abs/1988A&A...205L...8B'>1988</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 solar eclipse records dating between 2137 BCE and 1715 CE.").arg("<a href='http://adsabs.harvard.edu/abs/1988A&A...205L...8B'>1988</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case SchmadelZech1988: // data fit through Stephenson&Morrison1984, which itself is important. Unclear who uses this version?
-			description = q_("This 12th-order polynomial equation was published by L. D. Schmadel and G. Zech in the article <em>Empirical Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1) as data fit through values given by Stephenson & Morrison (1984).").arg("<a href='http://adsabs.harvard.edu/abs/1988AN....309..219S'>1988</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This 12th-order polynomial equation was published by L. D. Schmadel and G. Zech in the article <em>Empirical Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1) as data fit through values given by Stephenson & Morrison (1984).").arg("<a href='http://adsabs.harvard.edu/abs/1988AN....309..219S'>1988</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case ChaprontTouze:
-			description = q_("This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case StephensonMorrison1995:
-			description = q_("This equation was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1995RSPTA.351..165S'>1995</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This equation was published by F. R. Stephenson and L. V. Morrison in the article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/1995RSPTA.351..165S'>1995</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Stephenson1997:
-			description = q_("F. R. Stephenson published this formula in his book <em>Historical Eclipses and Earth's Rotation</em> (%1).").arg("<a href='http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186'>1997</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("F. R. Stephenson published this formula in his book <em>Historical Eclipses and Earth's Rotation</em> (%1).").arg("<a href='http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186'>1997</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case ChaprontMeeus:
-			description = q_("From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely used. Table for 1620..2000, and includes a variant of Chapront, Chapront-Touze & Francou (1997) for dates outside 1620..2000.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely used. Table for 1620..2000, and includes a variant of Chapront, Chapront-Touze & Francou (1997) for dates outside 1620..2000.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case JPLHorizons:
-			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory use this formula in their interactive website %1JPL Horizons%2.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory use this formula in their interactive website %1JPL Horizons%2.").arg("<a href='http://ssd.jpl.nasa.gov/?horizons'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MeeusSimons:
-			description = q_("This polynome was published by J. Meeus and L. Simons in article <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2000JBAA..110..323M'>2000</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This polynome was published by J. Meeus and L. Simons in article <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2000JBAA..110..323M'>2000</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MontenbruckPfleger: // uninspired
-			description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits for the recent past.").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits for the recent past.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case ReingoldDershowitz: //
-			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MorrisonStephenson2004: // PRIMARY SOURCE
-			description = q_("This important solution was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This important solution was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Reijs:
-			description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), Victor Reijs derived a %1T formula by using a Simplex optimisation with a cosine and square function. This is based on a possible periodicy described by Stephenson (%2). See for more info %3here%4.").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://www.iol.ie/~geniet/eng/DeltaTeval.htm'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case EspenakMeeus: // GENERAL SOLUTION
-			description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
+			description = q_("This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append(q_("Used by default.")).append("</em>");
+			break;
+		case EspenakMeeusZeroMoonAccel: // PATCHED SOLUTION
+			description = q_("PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION. This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the solar, lunar and planetary ephemeris program SOLEX.").arg("<a href='http://eclipse.gsfc.nasa.gov/eclipse.html'>").arg("</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker)).append(" <em>").append("</em>");
 			break;
 		case Banjevic:
-			description = q_("This solution by B. Banjevic, based on Stephenson & Morrison (1984), was published in article <em>Ancient eclipses and dating the fall of Babylon</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2006POBeo..80..251B'>2006</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This solution by B. Banjevic, based on Stephenson & Morrison (1984), was published in article <em>Ancient eclipses and dating the fall of Babylon</em> (%1).").arg("<a href='http://adsabs.harvard.edu/abs/2006POBeo..80..251B'>2006</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case IslamSadiqQureshi:
-			description = q_("This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & Simons (2000), was published in article <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013.").arg("<a href='http://www.ias.ac.in/jaa/dec2008/JAA610.pdf'>2008</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & Simons (2000), was published in article <em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013.").arg("<a href='http://www.ias.ac.in/jaa/dec2008/JAA610.pdf'>2008</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case KhalidSultanaZaidi:
-			description = q_("This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1).").arg("<a href='http://dx.doi.org/10.1155/2014/480964'>2014</a>").append(getCurrentDeltaTAlgorithmValidRange(jd, &marker));
+			description = q_("This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1).").arg("<a href='http://dx.doi.org/10.1155/2014/480964'>2014</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Custom:
 			description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
@@ -1625,7 +1735,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 	return description;
 }
 
-QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *marker) const
+QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD, QString *marker) const
 {
 	QString validRange = "";
 	QString validRangeAppendix = "";
@@ -1633,7 +1743,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 	int year, month, day;
 	int start = 0;
 	int finish = 0;
-	StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
+	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	switch (getCurrentDeltaTAlgorithm())
 	{
 		case WithoutCorrection:
@@ -1744,6 +1854,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 			finish	= 1100; // not 1620; // GZ: Not applicable for telescopic era, and better not after 1100 (pers.comm.)
 			break;
 		case EspenakMeeus: // the default, range stated in the Canon, p. 14.
+		case EspenakMeeusZeroMoonAccel:
 			start	= -1999;
 			finish	= 3000;
 			break;
@@ -1773,7 +1884,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 			validRange = q_("Valid range of usage: between years %1 and %2, %3.").arg(start).arg(finish).arg(validRangeAppendix);
 		else
 			validRange = q_("Valid range of usage: between years %1 and %2.").arg(start).arg(finish);
-		if (start > year || year > finish)
+		if ((year < start) || (finish < year))
 			*marker = "*";
 	}
 	else
@@ -1783,8 +1894,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 }
 
 // return if sky plus atmosphere is bright enough from sunlight so that e.g. screen labels should be rendered dark.
-// Could be renamed to isBrightDaylight()
-bool StelCore::isDay() const
+bool StelCore::isBrightDaylight() const
 {
 	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
 	return sunPos[2] > -0.12; // Nautical twilight (0.12 > sin (6 deg),
@@ -1792,5 +1902,5 @@ bool StelCore::isDay() const
 
 double StelCore::getCurrentEpoch() const
 {
-	return 2000.0 + (getJDay() - 2451545.0)/365.25;
+	return 2000.0 + (getJD() - 2451545.0)/365.25;
 }

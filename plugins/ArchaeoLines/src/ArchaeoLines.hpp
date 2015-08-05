@@ -272,7 +272,7 @@ private:
 	bool flagShowCurrentSun;
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
-	double lastJD; // cache last-time-computed to 1/month or so?
+	double lastJDE; // cache last-time-computed to every 10 days or so?
 
 	ArchaeoLine * equinoxLine;
 	ArchaeoLine * northernSolsticeLine;

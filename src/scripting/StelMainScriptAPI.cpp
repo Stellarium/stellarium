@@ -104,17 +104,17 @@ StelMainScriptAPI::~StelMainScriptAPI()
 }
 
 //! Set the current date in Julian Day
-//! @param JD the Julian Date
+//! @param JD the Julian Date (UT)
 void StelMainScriptAPI::setJDay(double JD)
 {
-	StelApp::getInstance().getCore()->setJDay(JD);
+	StelApp::getInstance().getCore()->setJD(JD);
 }
 
 //! Get the current date in Julian Day
-//! @return the Julian Date
+//! @return the Julian Date (UT)
 double StelMainScriptAPI::getJDay() const
 {
-	return StelApp::getInstance().getCore()->getJDay();
+	return StelApp::getInstance().getCore()->getJD();
 }
 
 //! Set the current date in Modified Julian Day
@@ -131,31 +131,42 @@ double StelMainScriptAPI::getMJDay() const
 	return StelApp::getInstance().getCore()->getMJDay();
 }
 
-void StelMainScriptAPI::setDate(const QString& dt, const QString& spec, const bool &enableDeltaT)
+void StelMainScriptAPI::setDate(const QString& dateStr, const QString& spec, const bool &dateIsDT)
 {
-	bool relativeTime = false;
-	if (dt.startsWith("+") || dt.startsWith("-") || (dt.startsWith("now") && (dt.startsWith("+") || dt.startsWith("-"))))
-		relativeTime = true;
-	double JD = jdFromDateString(dt, spec);
 	StelCore* core = StelApp::getInstance().getCore();
-	if (relativeTime)
+	double JD = jdFromDateString(dateStr, spec);
+	if (dateIsDT)
 	{
-		core->setJDay(JD);
+		qWarning() << "StelMainScriptAPI::setDate() called with final Boolean set to indicate Dynamical Time. This is new in 0.14, make sure you did this intentionally.";
+		qWarning() << "This warning will go away in Stellarium 0.16, please update the script by then to be sure.";
+		core->setJDE(JD);
 	}
 	else
-	{
-		if (enableDeltaT)
-		{
-			// add Delta-T correction for date
-			core->setJDay(JD + core->getDeltaT(JD)/86400);
-		}
-		else
-		{
-			// set date without Delta-T correction
-			// compatible with 0.11
-			core->setJDay(JD);
-		}
-	}
+		core->setJD(JD);
+
+//	bool relativeTime = false;
+//	if (dateStr.startsWith("+") || dateStr.startsWith("-") || (dateStr.startsWith("now") && (dateStr.startsWith("+") || dateStr.startsWith("-"))))
+//		relativeTime = true;
+//	double JD = jdFromDateString(dateStr, spec);
+//	StelCore* core = StelApp::getInstance().getCore();
+//	if (relativeTime)
+//	{
+//		core->setJDay(JD);
+//	}
+//	else
+//	{
+//		if (dateIsDT)
+//		{
+//			// add Delta-T correction for date
+//			core->setJDay(JD + core->getDeltaT(JD)/86400);
+//		}
+//		else
+//		{
+//			// set date without Delta-T correction
+//			// compatible with 0.11
+//			core->setJDay(JD);
+//		}
+//	}
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
@@ -168,7 +179,7 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 
 QString StelMainScriptAPI::getDeltaT() const
 {
-	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT(getJDay())/3600.);
+	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT()/3600.);
 }
 
 QString StelMainScriptAPI::getDeltaTAlgorithm() const
@@ -691,7 +702,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		if (nowRe.capturedTexts().at(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
-			jd = core->getJDay();
+			jd = core->getJD();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 		{
