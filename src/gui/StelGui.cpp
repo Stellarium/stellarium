@@ -523,7 +523,7 @@ void StelGui::update()
 		forceRefreshGui();
 	}
 
-	dateTimeDialog->setDateTime(core->getJDay());
+	dateTimeDialog->setDateTime(core->getJD());
 }
 
 #ifndef DISABLE_SCRIPTING

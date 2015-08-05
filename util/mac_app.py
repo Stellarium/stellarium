@@ -46,7 +46,6 @@ def getListOfLinkedQtFrameworksForFile(file):
 	'''
 	A utility method used to create a list of Qt frameworks linked into the argument.
 	'''
-	print('getListOfLinkedQtFrameworksForFile %s' % file)
 	args = ['otool', '-L', file]
 	frameworks = []
 	process = Popen(args, stdout=PIPE, stderr=PIPE)

@@ -72,6 +72,17 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
+// TODO: Migrate to static const? --BM ==> GZ during JDfix for 0.14: SURE!
+// Some useful constants:
+const double Observability::Rad2Deg = 180./M_PI;         // Convert degrees into radians
+const double Observability::Rad2Hr = 12./M_PI;           // Convert hours into radians
+const double Observability::UA =  AU;                    // 1.4958e+8;         // Astronomical Unit in Km. ==> HAS BEEN DEFINED IN StelUtils.hpp!
+const double Observability::TFrac = 0.9972677595628414;  // Convert sidereal time into Solar time
+const double Observability::JDsec = 1./86400.;           // A second in days. ==> TODO USE StelCore::JD_SECOND instead
+const double Observability::halfpi = M_PI * 0.5;         //  1.57079632675; // pi/2
+const double Observability::MoonT = 29.530588;           // Moon synodic period (used as first estimate of Full Moon). ==> FIND MORE DEC. PLACES!
+const double Observability::RefFullMoon = 2451564.696; // Reference Julian date of a Full Moon.
+const double Observability::MoonPerilune = 0.0024236308; // Smallest Earth-Moon distance (in AU).
 
 
 Observability::Observability()
@@ -110,17 +121,6 @@ Observability::Observability()
 	setObjectName("Observability");
 	configDialog = new ObservabilityDialog();
 
-	// TODO: Migrate to static const? --BM
-	// Some useful constants:
-	Rad2Deg = 180./3.1415927; // Convert degrees into radians
-	Rad2Hr = 12./3.1415927;  // Convert hours into radians
-	UA = 1.4958e+8;         // Astronomical Unit in Km.
-	TFrac = 0.9972677595628414;  // Convert sidereal time into Solar time
-	JDsec = 1./86400.;      // A second in days.
-	halfpi = 1.57079632675; // pi/2
-	MoonT = 29.530588; // Moon synodic period (used as first estimate of Full Moon).
-	RefFullMoon = 2451564.696; // Reference Julian date of a Full Moon.
-	MoonPerilune = 0.0024236308; // Smallest Earth-Moon distance (in AU).
 	
 	nextFullMoon = 0.0;
 	prevFullMoon = 0.0;
@@ -129,7 +129,8 @@ Observability::Observability()
 
 	// Dummy initial values for parameters and data vectors:
 	mylat = 1000.; mylon = 1000.;
-	myJD = 0.0;
+	myJD.first = 0.0;
+	myJD.second = 0.0;
 	curYear = 0;
 	isStar = true;
 	isMoon = false;
@@ -146,13 +147,21 @@ Observability::Observability()
 
 	// I think this can be done in a more simple way...--BM
 	for (int i=0;i<366;i++) {
-		sunRA[i] = 0.0; sunDec[i] = 0.0;
-		objectRA[i] = 0.0; objectDec[i]=0.0;
-		sunSidT[0][i]=0.0; sunSidT[1][i]=0.0;
-		objectSidT[0][i]=0.0; objectSidT[1][i]=0.0;
-		objectH0[i] = 0.0;
-		yearJD[i] = 0.0;
+//		sunRA[i] = 0.0; sunDec[i] = 0.0;
+//		objectRA[i] = 0.0; objectDec[i]=0.0;
+//		sunSidT[0][i]=0.0; sunSidT[1][i]=0.0;
+//		objectSidT[0][i]=0.0; objectSidT[1][i]=0.0;
+//		objectH0[i] = 0.0;
+		yearJD[i]=QPair<double, double>(0.0, 0.0);
 	};
+	// GZ Sure:
+	memset(sunRA,      0,   366*sizeof(double));
+	memset(sunDec,     0,   366*sizeof(double));
+	memset(objectRA,   0,   366*sizeof(double));
+	memset(objectDec,  0,   366*sizeof(double));
+	memset(sunSidT,    0, 2*366*sizeof(double));
+	memset(objectSidT, 0, 2*366*sizeof(double));
+	memset(objectH0,   0,   366*sizeof(double));
 
 }
 
@@ -281,7 +290,7 @@ void Observability::draw(StelCore* core)
 	double currlat = (core->getCurrentLocation().latitude)/Rad2Deg;
 	double currlon = (core->getCurrentLocation().longitude)/Rad2Deg;
 	double currheight = (6371.+(core->getCurrentLocation().altitude)/1000.)/UA;
-	double currJD = core->getJDay();
+	double currJD = core->getJD();
 	double currJDint;
 //	GMTShift = StelUtils::getGMTShiftFromQT(currJD)/24.0;
 	GMTShift = StelApp::getInstance().getLocaleMgr().getGMTShift(currJD)/24.0;
@@ -302,7 +311,7 @@ void Observability::draw(StelCore* core)
 // NOW WE CHECK THE CHANGED PARAMETERS W.R.T. THE PREVIOUS FRAME:
 
 // Update JD.
-	myJD = currJD;
+	myJD.first = currJD;
 
 // If the year changed, we must recompute the Sun's position for each new day:
 	if (auxy != curYear)
@@ -494,12 +503,12 @@ void Observability::draw(StelCore* core)
 			
 			// Returns false if the calculation fails...
 			solvedMoon = calculateSolarSystemEvents(core, type);
-			currH = qAbs(24.*(MoonCulm-myJD)/TFrac);
-			transit = MoonCulm-myJD<0.0;
+			currH = qAbs(24.*(MoonCulm-myJD.first)/TFrac);
+			transit = MoonCulm-myJD.first<0.0;
 			if (solvedMoon)
 			{  // If failed, Set and Rise will be dummy.
-				settingTime = qAbs(24.*(MoonSet-myJD)/TFrac);
-				risingTime = qAbs(24.*(MoonRise-myJD)/TFrac);
+				settingTime = qAbs(24.*(MoonSet-myJD.first)/TFrac);
+				risingTime = qAbs(24.*(MoonRise-myJD.first)/TFrac);
 			}
 		}
 		else if (horizH>0.0)
@@ -947,7 +956,7 @@ double Observability::toUnsignedRA(double RA)
 QString Observability::formatAsDate(int dayNumber)
 {
 	int day, month, year;
-	StelUtils::getDateFromJulianDay(yearJD[dayNumber], &year, &month, &day);
+	StelUtils::getDateFromJulianDay(yearJD[dayNumber].first, &year, &month, &day);
 
 	QString formatString = (getDateFormat()) ? "%1 %2" : "%2 %1";
 	QString result = formatString.arg(day).arg(monthNames[month-1]);
@@ -960,8 +969,8 @@ QString Observability::formatAsDateRange(int startDay, int endDay)
 {
 	int sDay, sMonth, sYear, eDay, eMonth, eYear;
 	QString range;
-	StelUtils::getDateFromJulianDay(yearJD[startDay], &sYear, &sMonth, &sDay);
-	StelUtils::getDateFromJulianDay(yearJD[endDay], &eYear, &eMonth, &eDay);
+	StelUtils::getDateFromJulianDay(yearJD[startDay].first, &sYear, &sMonth, &sDay);
+	StelUtils::getDateFromJulianDay(yearJD[endDay].first, &eYear, &eMonth, &eDay);
 	if (endDay == 0)
 	{
 		eDay = 31;
@@ -1017,7 +1026,7 @@ void Observability::updateSunData(StelCore* core)
 {
 	int day, month, year, sameYear;
 // Get current date:
-	StelUtils::getDateFromJulianDay(myJD,&year,&month,&day);
+	StelUtils::getDateFromJulianDay(myJD.first,&year,&month,&day);
 
 // Get JD for the Jan 1 of current year:
 	StelUtils::getJDFromDate(&Jan1stJD,year,1,1,0,0,0);
@@ -1030,9 +1039,10 @@ void Observability::updateSunData(StelCore* core)
 	Vec3d pos, sunPos;
 	for (int i=0; i<nDays; i++)
 	{
-		yearJD[i] = Jan1stJD + (double)i;
-		myEarth->computePosition(yearJD[i]);
-		myEarth->computeTransMatrix(yearJD[i]);
+		yearJD[i].first = Jan1stJD + (double)i;
+		yearJD[i].second = yearJD[i].first+core->computeDeltaT(yearJD[i].first)/86400.0;
+		myEarth->computePosition(yearJD[i].second);
+		myEarth->computeTransMatrix(yearJD[i].first, yearJD[i].second);
 		pos = myEarth->getHeliocentricEclipticPos();
 		sunPos = core->j2000ToEquinoxEqu((core->matVsop87ToJ2000)*(-pos));
 		EarthPos[i] = -pos;
@@ -1040,8 +1050,8 @@ void Observability::updateSunData(StelCore* core)
 	};
 
 //Return the Earth to its current time:
-	myEarth->computePosition(myJD);
-	myEarth->computeTransMatrix(myJD);
+	myEarth->computePosition(myJD.second);
+	myEarth->computeTransMatrix(myJD.first, myJD.second);
 }
 ///////////////////////////////////////////////////
 
@@ -1261,24 +1271,24 @@ double Observability::sign(double d)
 //////////////////////////
 // Get the coordinates of Sun or Moon for a given JD:
 // getBack controls whether Earth and Moon must be returned to their original positions after computation.
-void Observability::getSunMoonCoords(StelCore *core, double jd,
-                                     double &raSun, double &decSun,
-                                     double &raMoon, double &decMoon,
-                                     double &eclLon, bool getBack) 
+void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
+				     double &raSun, double &decSun,
+				     double &raMoon, double &decMoon,
+				     double &eclLon, bool getBack)
                                      //, Vec3d &AltAzVector)
 {
 
 	if (getBack) // Return the Moon and Earth to their current position:
 	{
-		myEarth->computePosition(jd);
-		myEarth->computeTransMatrix(jd);
-		myMoon->computePosition(jd);
-		myMoon->computeTransMatrix(jd);
+		myEarth->computePosition(JD.second);
+		myEarth->computeTransMatrix(JD.first, JD.second);
+		myMoon->computePosition(JD.second);
+		myMoon->computeTransMatrix(JD.first, JD.second);
 	} 
 	else // Compute coordinates:
 	{
-		myEarth->computePosition(jd);
-		myEarth->computeTransMatrix(jd);
+		myEarth->computePosition(JD.second);
+		myEarth->computeTransMatrix(JD.first, JD.second);
 		Vec3d earthPos = myEarth->getHeliocentricEclipticPos();
 		double curSidT;
 
@@ -1287,11 +1297,11 @@ void Observability::getSunMoonCoords(StelCore *core, double jd,
 		toRADec(sunPos, raSun, decSun);
 
 // Moon coordinates:
-		curSidT = myEarth->getSiderealTime(jd)/Rad2Deg;
+		curSidT = myEarth->getSiderealTime(JD.first, JD.second)/Rad2Deg;
 		RotObserver = (Mat4d::zrotation(curSidT))*ObserverLoc;
 		LocTrans = (core->matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
-		myMoon->computePosition(jd);
-		myMoon->computeTransMatrix(jd);
+		myMoon->computePosition(JD.second);
+		myMoon->computeTransMatrix(JD.first, JD.second);
 		Vec3d moonPos = myMoon->getHeliocentricEclipticPos();
 		sunPos = (core->j2000ToEquinoxEqu(LocTrans*moonPos))-RotObserver;
 		
@@ -1307,20 +1317,20 @@ void Observability::getSunMoonCoords(StelCore *core, double jd,
 //////////////////////////
 // Get the Observer-to-Moon distance JD:
 // getBack controls whether Earth and Moon must be returned to their original positions after computation.
-void Observability::getMoonDistance(StelCore *core, double jd, double &distance, bool getBack)
+void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, double &distance, bool getBack)
 {
 
 	if (getBack) // Return the Moon and Earth to their current position:
 	{
-		myEarth->computePosition(jd);
-		myEarth->computeTransMatrix(jd);
-		myMoon->computePosition(jd);
-		myMoon->computeTransMatrix(jd);
+		myEarth->computePosition(JD.second);
+		myEarth->computeTransMatrix(JD.first, JD.second);
+		myMoon->computePosition(JD.second);
+		myMoon->computeTransMatrix(JD.first, JD.second);
 	} 
 	else
 	{	// Compute coordinates:
-		myEarth->computePosition(jd);
-		myEarth->computeTransMatrix(jd);
+		myEarth->computePosition(JD.second);
+		myEarth->computeTransMatrix(JD.first, JD.second);
 		Vec3d earthPos = myEarth->getHeliocentricEclipticPos();
 //		double curSidT;
 
@@ -1332,8 +1342,8 @@ void Observability::getMoonDistance(StelCore *core, double jd, double &distance,
 //		curSidT = myEarth->getSiderealTime(JD)/Rad2Deg;
 //		RotObserver = (Mat4d::zrotation(curSidT))*ObserverLoc;
 		LocTrans = (core->matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
-		myMoon->computePosition(jd);
-		myMoon->computeTransMatrix(jd);
+		myMoon->computePosition(JD.second);
+		myMoon->computeTransMatrix(JD.first, JD.second);
 		Pos1 = myMoon->getHeliocentricEclipticPos();
 		Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1)); //-RotObserver;
 
@@ -1349,24 +1359,24 @@ void Observability::getMoonDistance(StelCore *core, double jd, double &distance,
 
 //////////////////////////////////////////////
 // Get the Coords of a planet:
-void Observability::getPlanetCoords(StelCore *core, double JD, double &RA, double &Dec, bool getBack)
+void Observability::getPlanetCoords(StelCore *core, QPair<double, double> JD, double &RA, double &Dec, bool getBack)
 {
 
 	if (getBack)
 	{
 	// Return the planet to its current time:
-		myPlanet->computePosition(JD);
-		myPlanet->computeTransMatrix(JD);
-		myEarth->computePosition(JD);
-		myEarth->computeTransMatrix(JD);
+		myPlanet->computePosition(JD.second);
+		myPlanet->computeTransMatrix(JD.first, JD.second);
+		myEarth->computePosition(JD.second);
+		myEarth->computeTransMatrix(JD.first, JD.second);
 	} else
 	{
 	// Compute planet's position:
-		myPlanet->computePosition(JD);
-		myPlanet->computeTransMatrix(JD);
+		myPlanet->computePosition(JD.second);
+		myPlanet->computeTransMatrix(JD.first, JD.second);
 		Pos1 = myPlanet->getHeliocentricEclipticPos();
-		myEarth->computePosition(JD);
-		myEarth->computeTransMatrix(JD);
+		myEarth->computePosition(JD.second);
+		myEarth->computeTransMatrix(JD.first, JD.second);
 		Pos2 = myEarth->getHeliocentricEclipticPos();
 		LocTrans = (core->matVsop87ToJ2000)*(Mat4d::translation(-Pos2));
 		Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1);
@@ -1385,7 +1395,8 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 	const int NUM_ITER = 100;
 	int i;
-	double hHoriz, ra, dec, raSun, decSun, tempH, tempJd, tempEphH, curSidT, eclLon;
+	double hHoriz, ra, dec, raSun, decSun, tempH, /* tempJd, */ tempEphH, curSidT, eclLon;
+	QPair<double, double> tempJd;
 	//Vec3d Observer;
 
 	hHoriz = calculateHourAngle(mylat, refractedHorizonAlt, selDec);
@@ -1394,15 +1405,15 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 // Only recompute ephemeris from second to second (at least)
 // or if the source has changed (i.e., Sun <-> Moon). This saves resources:
-	if (qAbs(myJD-lastJDMoon)>JDsec || lastType!=bodyType || souChanged)
+	if (qAbs(myJD.first-lastJDMoon)>JDsec || lastType!=bodyType || souChanged)
 	{
 
 //		qDebug() << q_("%1  %2   %3   %4").arg(Kind).arg(LastObject).arg(myJD,0,'f',5).arg(lastJDMoon,0,'f',5);
 
 		lastType = bodyType;
 
-		myEarth->computePosition(myJD);
-		myEarth->computeTransMatrix(myJD);
+		myEarth->computePosition(myJD.second);
+		myEarth->computeTransMatrix(myJD.first, myJD.second);
 		Vec3d earthPos = myEarth->getHeliocentricEclipticPos();
 
 		if (bodyType == 1) // Sun position
@@ -1411,18 +1422,18 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 		}
 		else if (bodyType==2) // Moon position
 		{
-			curSidT = myEarth->getSiderealTime(myJD)/Rad2Deg;
+			curSidT = myEarth->getSiderealTime(myJD.first, myJD.second)/Rad2Deg;
 			RotObserver = (Mat4d::zrotation(curSidT))*ObserverLoc;
 			LocTrans = (core->matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
-			myMoon->computePosition(myJD);
-			myMoon->computeTransMatrix(myJD);
+			myMoon->computePosition(myJD.second);
+			myMoon->computeTransMatrix(myJD.first, myJD.second);
 			Pos1 = myMoon->getHeliocentricEclipticPos();
 			Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1))-RotObserver;
 		}
 		else // Planet position
 		{
-			myPlanet->computePosition(myJD);
-			myPlanet->computeTransMatrix(myJD);
+			myPlanet->computePosition(myJD.second);
+			myPlanet->computeTransMatrix(myJD.first, myJD.second);
 			Pos1 = myPlanet->getHeliocentricEclipticPos();
 			LocTrans = (core->matVsop87ToJ2000)*(Mat4d::translation(-earthPos));
 			Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1);
@@ -1452,11 +1463,12 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 // Rise time:
 			tempEphH = MoonRise*TFrac;
-			MoonRise = myJD + (MoonRise/24.);
+			MoonRise = myJD.first + (MoonRise/24.);
 			for (i=0; i<NUM_ITER; i++)
 			{
 	// Get modified coordinates:
-				tempJd = MoonRise;
+				tempJd.first = MoonRise;
+				tempJd.second=tempJd.first+core->computeDeltaT(tempJd.first)/86400.0;
 	
 				if (bodyType<3)
 				{
@@ -1485,16 +1497,18 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				if (qAbs(tempH-tempEphH)<JDsec) break;
 			// Update rise-time estimate:
 				tempEphH = tempH;
-				MoonRise = myJD + (tempEphH/24.);
+				MoonRise = myJD.first + (tempEphH/24.);
 			};
 
 // Set time:  
 			tempEphH = MoonSet;
-			MoonSet = myJD + (MoonSet/24.);
+			MoonSet = myJD.first + (MoonSet/24.);
 			for (i=0; i<NUM_ITER; i++)
 			{
 	// Get modified coordinates:
-				tempJd = MoonSet;
+				tempJd.first = MoonSet;
+				tempJd.second=tempJd.first+core->computeDeltaT(tempJd.first)/86400.0;
+
 				
 				if (bodyType < 3)
 					getSunMoonCoords(core, tempJd,
@@ -1521,7 +1535,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 					break;
 		// Update set-time estimate:
 				tempEphH = tempH;
-				MoonSet = myJD + (tempEphH/24.);
+				MoonSet = myJD.first + (tempEphH/24.);
 			};
 		} 
 		else // Comes from if(raises)
@@ -1532,12 +1546,14 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 // Culmination time:
 		tempEphH = MoonCulm;
-		MoonCulm = myJD + (MoonCulm/24.);
+		MoonCulm = myJD.first + (MoonCulm/24.);
 
 		for (i=0; i<NUM_ITER; i++)
 		{
 			// Get modified coordinates:
-			tempJd = MoonCulm;
+			tempJd.first = MoonCulm;
+			tempJd.second=tempJd.first+core->computeDeltaT(tempJd.first)/86400.0;
+
 
 			if (bodyType<3)
 			{
@@ -1561,16 +1577,16 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	// Check convergence:
 			if (qAbs(tempH-tempEphH)<JDsec) break;
 			tempEphH = tempH;
-			MoonCulm = myJD + (tempEphH/24.);
+			MoonCulm = myJD.first + (tempEphH/24.);
 			culmAlt = qAbs(mylat-dec); // 90 - altitude at transit.
 		};
 
 //		qDebug() << q_("%1").arg(MoonCulm,0,'f',5);
 
 
-	lastJDMoon = myJD;
+	lastJDMoon = myJD.first;
 
-	}; // Comes from if (qAbs(myJD-lastJDMoon)>JDsec || LastObject!=Kind)
+	}; // Comes from if (qAbs(myJD.first-lastJDMoon)>JDsec || LastObject!=Kind)
 
 
 
@@ -1580,13 +1596,13 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	{
 
 	// Only estimate date of Full Moon if we have changed Lunar month:
-		if (myJD > nextFullMoon || myJD < prevFullMoon)
+		if (myJD.first > nextFullMoon || myJD.first < prevFullMoon)
 		{
 
 
 	// Estimate the nearest (in time) Full Moon:
 			double nT;
-			double dT = std::modf((myJD-RefFullMoon)/MoonT,&nT);
+			double dT = std::modf((myJD.first-RefFullMoon)/MoonT,&nT);
 			if (dT>0.5) {nT += 1.0;};
 			if (dT<-0.5) {nT -= 1.0;};
 
@@ -1596,7 +1612,8 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 			dT = 0.1/1440.; // 6 seconds. Our time span for the finite-difference derivative estimate.
 //			double Deriv1, Deriv2; // Variables for temporal use.
-			double Sec1, Sec2, Temp1, Temp2; // Variables for temporal use.
+			QPair<double, double>Sec1, Sec2; // Variables for temporal use. Contrary to the other cases, we have Sec[12].second=DeltaT[days], not JDE. This avoids needless re-computing.
+			double Temp1, Temp2; // Variables for temporal use.
 			double iniEst1, iniEst2;  // JD values that MUST include the solution within them.
 			double Phase1;
 
@@ -1606,26 +1623,31 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				iniEst1 =  TempFullMoon - 0.25*MoonT; 
 				iniEst2 =  TempFullMoon + 0.25*MoonT; 
 
-				Sec1 = iniEst1; // TempFullMoon - 0.05*MoonT; // Initial estimates of Full-Moon dates
-				Sec2 = iniEst2; // TempFullMoon + 0.05*MoonT; 
 
-				getSunMoonCoords(core,Sec1,raSun,decSun,ra,dec,eclLon,false);
+				Sec1.first = iniEst1; // TempFullMoon - 0.05*MoonT; // Initial estimates of Full-Moon dates
+				Sec1.second= core->computeDeltaT(Sec1.first)/86400.0; // enough to compute this once.
+				Sec2.first = iniEst2; // TempFullMoon + 0.05*MoonT;
+				Sec2.second= core->computeDeltaT(Sec2.first)/86400.0; // enough to compute this once.
+
+				// for the computation calls, we need temporary QPairs here!
+				getSunMoonCoords(core,QPair<double, double>(Sec1.first, Sec1.first+Sec1.second),raSun,decSun,ra,dec,eclLon,false);
 				Temp1 = eclLon; //Lambda(RA,Dec,RAS,DecS);
-				getSunMoonCoords(core,Sec2,raSun,decSun,ra,dec,eclLon,false);
+				getSunMoonCoords(core,QPair<double, double>(Sec2.first, Sec2.first+Sec2.second),raSun,decSun,ra,dec,eclLon,false);
 				Temp2 = eclLon; //Lambda(RA,Dec,RAS,DecS);
 
 
 				for (int i=0; i<100; i++) // A limit of 100 iterations.
 				{
-					Phase1 = (Sec2-Sec1)/(Temp1-Temp2)*Temp1+Sec1;
-					getSunMoonCoords(core,Phase1,raSun,decSun,ra,dec,eclLon,false);
+					Phase1 = (Sec2.first-Sec1.first)/(Temp1-Temp2)*Temp1+Sec1.first;
+					// The ad-hoc pair needs a DeltaT, use the one of Sec1
+					getSunMoonCoords(core,QPair<double, double>(Phase1, Phase1+Sec1.second),raSun,decSun,ra,dec,eclLon,false);
 					
 					if (Temp1*eclLon < 0.0) 
 					{
-						Sec2 = Phase1;
+						Sec2.first = Phase1;
 						Temp2 = eclLon;
 					} else {
-						Sec1 = Phase1;
+						Sec1.first = Phase1;
 						Temp1 = eclLon;
 
 					};
@@ -1633,9 +1655,9 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				//	qDebug() << QString("%1 %2 %3 %4 ").arg(Sec1).arg(Sec2).arg(Temp1).arg(Temp2);	
 
 
-					if (qAbs(Sec2-Sec1) < 10.*dT)  // 1 minute accuracy; convergence.
+					if (qAbs(Sec2.first-Sec1.first) < 10.*dT)  // 1 minute accuracy; convergence.
 					{
-						TempFullMoon = (Sec1+Sec2)/2.;
+						TempFullMoon = (Sec1.first+Sec2.first)/2.;
 				//		qDebug() << QString("%1%2 ").arg(TempFullMoon);	
 						break;
 					};
@@ -1643,7 +1665,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				};
 
 
-				if (TempFullMoon > myJD) 
+				if (TempFullMoon > myJD.first)
 				{
 					nextFullMoon = TempFullMoon;
 					TempFullMoon -= MoonT;

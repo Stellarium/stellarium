@@ -321,7 +321,7 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 {
 	DragHistoryEntry e;
 	e.runTime=StelApp::getInstance().getTotalRunTime();
-	e.jd=core->getJDay();
+	e.jd=core->getJD();
 	e.x=x;
 	e.y=y;
 	timeDragHistory.append(e);
@@ -907,7 +907,7 @@ void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 	viewDirectionMountFrame = j2000ToMountFrame(v);
 }
 
-void StelMovementMgr::panView(double deltaAz, double deltaAlt)
+void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 {
 	double azVision, altVision;
 	StelUtils::rectToSphe(&azVision,&altVision,j2000ToMountFrame(viewDirectionJ2000));
@@ -947,7 +947,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		v2[2]=0; v2.normalize();
 		double angle = (v2^v1)[2];
 		double deltaDay = angle/(2.*M_PI)*core->getLocalSiderealDayLength();
-		core->setJDay(core->getJDay()+deltaDay);
+		core->setJD(core->getJD()+deltaDay);
 		addTimeDragPoint(x2, y2);
 	}
 	else
