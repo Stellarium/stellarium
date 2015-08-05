@@ -378,7 +378,15 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	if (flagConverter)
-		convertDSOCatalog(srcCatalogPath, dsoCatalogPath, flagDecimalCoordinates);
+	{
+		if (srcCatalogPath.isEmpty())
+		{
+			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
+			return;
+		}
+		else
+			convertDSOCatalog(srcCatalogPath, dsoCatalogPath, flagDecimalCoordinates);
+	}
 
 	if (dsoCatalogPath.isEmpty() || dsoNamesPath.isEmpty())
 	{
