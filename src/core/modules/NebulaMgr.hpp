@@ -69,15 +69,13 @@ public:
 		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
 		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
 		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		CatCed		= 0x00004000, //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
-		CatPK		= 0x00008000, //!< Catalogue of galactic planetary nebulae (Perek-Kohoutek) (PK)
-		CatG		= 0x00010000  //!< A catalogue of Galactic supernova remnants (G)
+		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 	};
 	typedef QFlags<CatalogGroupFlags> CatalogGroup;
 	Q_FLAGS(CatalogGroup)
 
 	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed|CatPK|CatG);
+	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);
 
 	NebulaMgr();
 	virtual ~NebulaMgr();
@@ -293,9 +291,7 @@ private:
 	NebulaP searchMel(unsigned int Mel);
 	NebulaP searchPGC(unsigned int PGC);
 	NebulaP searchUGC(unsigned int UGC);
-	NebulaP searchCed(QString Ced);
-	NebulaP searchPK(QString PK);
-	NebulaP searchG(QString G);
+	NebulaP searchCed(QString Ced);	
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);
