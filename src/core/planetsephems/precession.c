@@ -376,8 +376,22 @@ static double c_jdeLastNut=-1e-100;
 //! TODO: find out drift rate behaviour e.g. in 17./18. century, maybe use nutation only e.g. 1610-2200?
 //! @return deltaPsi, deltaEps [radians]
 //! @param JDE Julian Day, TT
+//! @note The model promises mas accuracy in the present era but gives no comment on long-time effects. Given that nutation was discovered in the early 18th century,
+//! it seems wise to set the returned values to zero before 1500 and after 2500. To avoid a jump, a linear fade-in/fade-out is applied within 100 days before 1500 and after 2500.
 void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 {	
+// 1.1.1500
+#define NUT_BEGIN 2268932.5
+// 1.1.2500
+#define NUT_END	2634166.5
+#define NUT_TRANSITION 100.0
+	if ((JDE<=NUT_BEGIN-NUT_TRANSITION ) || (JDE>=NUT_END + NUT_TRANSITION))
+	{
+			*deltaPsi=0.0;
+			*deltaEpsilon=0.0;
+			return;
+	}
+
 	if (fabs(JDE-c_jdeLastNut)>NUTATION_EPOCH_THRESHOLD)
 	{
 		c_jdeLastNut=JDE;
@@ -412,6 +426,16 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 		c_deltaPsi = deltaPsi * arcSec2Rad;
 		c_deltaEps = deltaEps * arcSec2Rad;
 	}
-	*deltaPsi=c_deltaPsi;
-	*deltaEpsilon=c_deltaEps;
+	double limiter=1.0;
+	if (JDE<NUT_BEGIN)
+	{
+		limiter=1.-(NUT_BEGIN-JDE)/NUT_TRANSITION;
+	}
+	if (JDE>NUT_END)
+	{
+		limiter=1.-(JDE-NUT_END)/NUT_TRANSITION;
+	}
+
+	*deltaPsi=c_deltaPsi*limiter;
+	*deltaEpsilon=c_deltaEps*limiter;
 }
