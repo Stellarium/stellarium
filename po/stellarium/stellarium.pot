@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-07 03:08+0600\n"
+"POT-Creation-Date: 2015-08-07 03:56+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -456,22 +456,38 @@ msgstr ""
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:308
+#: src/core/modules/Planet.cpp:314
+msgid "New Moon"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:316
+msgid "Last Quarter"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:318
+msgid "Full Moon"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:320
+msgid "First Quarter"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:322
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:323
 #, qt-format
 msgid "Elongation: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:310
+#: src/core/modules/Planet.cpp:335
 #, qt-format
 msgid "Phase: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:311
+#: src/core/modules/Planet.cpp:336
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr ""
