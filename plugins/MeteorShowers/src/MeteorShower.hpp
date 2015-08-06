@@ -39,11 +39,11 @@ class MeteorShower : public StelObject
 public:
 	//! @enum Meteor Shower status.
 	enum Status {
-		INVALID,         // not initialized properly
-		UNDEFINED,       // it's loaded but with 'activity' undefined
-		INACTIVE,        // inactive radiant
-		ACTIVE_REAL,     // active radiant - real data
-		ACTIVE_GENERIC   // active radiant - generic data
+		INVALID,          // not initialized properly
+		UNDEFINED,        // it's loaded but with 'activity' undefined
+		INACTIVE,         // inactive radiant
+		ACTIVE_CONFIRMED, // active radiant - confirmed data
+		ACTIVE_GENERIC    // active radiant - generic data
 	};
 
 	//! @struct Activity
@@ -76,10 +76,10 @@ public:
 	//! @return Activity
 	Activity hasGenericShower(QDate date, bool &found) const;
 
-	//! Checks if we have real data for a given date
+	//! Checks if we have confirmed data for a given date
 	//! @param date QDate
 	//! @return Activity
-	Activity hasRealShower(QDate date, bool &found) const;
+	Activity hasConfirmedShower(QDate date, bool &found) const;
 
 	//! Checks if this meteor shower is being displayed or not
 	//! @return true if it's being displayed

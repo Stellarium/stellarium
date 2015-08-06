@@ -135,7 +135,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -385,7 +385,7 @@
            </widget>
           </item>
           <item row="0" column="0" alignment="Qt::AlignHCenter">
-           <widget class="QGroupBox" name="activeRealData">
+           <widget class="QGroupBox" name="activeConfirmedData">
             <property name="minimumSize">
              <size>
               <width>130</width>
@@ -393,10 +393,10 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>Active Radiant - Real Data</string>
+             <string>Active Radiant - Confirmed Data</string>
             </property>
             <property name="title">
-             <string>Real</string>
+             <string>Confirmed</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -418,7 +418,7 @@
               <number>0</number>
              </property>
              <item row="0" column="0">
-              <widget class="QPushButton" name="setColorARR">
+              <widget class="QPushButton" name="setColorARC">
                <property name="minimumSize">
                 <size>
                  <width>0</width>

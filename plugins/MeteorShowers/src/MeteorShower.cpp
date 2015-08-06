@@ -193,7 +193,7 @@ bool MeteorShower::enabled() const
 	}
 	else if (m_mgr->getActiveRadiantOnly())
 	{
-		return m_status == ACTIVE_GENERIC || m_status == ACTIVE_REAL;
+		return m_status == ACTIVE_GENERIC || m_status == ACTIVE_CONFIRMED;
 	}
 	else
 	{
@@ -215,10 +215,10 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	// updating status and activity
 	bool found = false;
 	m_status = INACTIVE;
-	m_activity = hasRealShower(currentDate, found);
+	m_activity = hasConfirmedShower(currentDate, found);
 	if (found)
 	{
-		m_status = ACTIVE_REAL;
+		m_status = ACTIVE_CONFIRMED;
 	}
 	else
 	{
@@ -314,8 +314,8 @@ void MeteorShower::drawRadiant(StelCore *core)
 	float alpha = 0.85f + ((float) qrand() / (float) RAND_MAX) / 10.f;
 	switch(m_status)
 	{
-		case ACTIVE_REAL: //Active, real data
-			rgb = m_mgr->getColorARR();
+		case ACTIVE_CONFIRMED: //Active, confirmed data
+			rgb = m_mgr->getColorARC();
 			break;
 		case ACTIVE_GENERIC: //Active, generic data
 			rgb = m_mgr->getColorARG();
@@ -405,7 +405,7 @@ MeteorShower::Activity MeteorShower::hasGenericShower(QDate date, bool &found) c
 	return Activity();
 }
 
-MeteorShower::Activity MeteorShower::hasRealShower(QDate date, bool& found) const
+MeteorShower::Activity MeteorShower::hasConfirmedShower(QDate date, bool& found) const
 {
 	const int activitiesSize = m_activities.size();
 	for (int i = 1; i < activitiesSize; ++i)
@@ -490,9 +490,9 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	{
 		mstdata = q_("generic data");
 	}
-	else if (m_status == ACTIVE_REAL)
+	else if (m_status == ACTIVE_CONFIRMED)
 	{
-		mstdata = q_("real data");
+		mstdata = q_("confirmed data");
 	}
 	else if (m_status == INACTIVE)
 	{
