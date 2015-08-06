@@ -31,6 +31,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 /* Interval threshold (days) for re-computing these values. with 1, compute only 1/day:  */
 #define PRECESSION_EPOCH_THRESHOLD 1.0
+/* Interval threshold (days) for re-computing nutation values. with 1/24, compute only every hour  */
+#define NUTATION_EPOCH_THRESHOLD (1./24.)
 
 /* cache results for retrieval if recomputation is not required */
 
@@ -257,4 +259,159 @@ double getPrecessionAngleVondrakEpsilon(const double jde)
 double getPrecessionAngleVondrakCurrentEpsilonA(void)
 {
 	return c_epsilon_A;
+}
+
+// ====================== NUTATION IAU-2000B below.
+
+
+struct nut2000B
+{
+	double l_factor;     // multiplier for lunar mean anomaly l
+	double ls_factor;    // multiplier for solar mean anomaly
+	double F_factor;     // multiplier for F=L-Omega where L s mean longitude of the moon
+	double D_factor;     // mean elongatin of the moon from the sun
+	double Omega_factor; // mean longitude of lunar ascending node
+	double period;       // days
+	double A;            // A  [0.1 mas]
+	double Ap;           // A' [0.1 mas]
+	double B;            // B  [0.1 mas]
+	double Bp;           // B' [0.1 mas]
+	double App;          // A''[0.1 mas]
+	double Bpp;          // B''[0.1 mas]
+};
+
+static const struct nut2000B nut2000Btable[78] = {
+{  0,  0,  0,  0,  1, -6798.35, -172064161, -174666, 92052331,  9086,  33386, 15377},
+{  0,  0,  2, -2,  2,   182.62,  -13170906,   -1675,  5730336, -3015, -13696, -4587},
+{  0,  0,  2,  0,  2,    13.66,   -2276413,    -234,   978459,  -485,   2796,  1374},
+{  0,  0,  0,  0,  2, -3399.18,    2074554,     207,  -897492,   470,   -698,  -291},
+{  0,  1,  0,  0,  0,   365.26,    1475877,   -3633,    73871,  -184,  11817, -1924},
+{  0,  1,  2, -2,  2,   121.75,    -516821,    1226,   224386,  -677,   -524,  -174},
+{  1,  0,  0,  0,  0,    27.55,     711159,      73,    -6750,     0,   -872,   358},
+{  0,  0,  2,  0,  1,    13.63,    -387298,    -367,   200728,    18,    380,   318},
+{  1,  0,  2,  0,  2,     9.13,    -301461,     -36,   129025,   -63,    816,   367},
+{  0, -1,  2, -2,  2,   365.22,     215829,    -494,   -95929,   299,    111,   132},
+{  0,  0,  2, -2,  1,   177.84,     128227,     137,   -68982,    -9,    181,    39},
+{ -1,  0,  2,  0,  2,    27.09,     123457,      11,   -53311,    32,     19,    -4},
+{ -1,  0,  0,  2,  0,    31.81,     156994,      10,    -1235,     0,   -168,    82},
+{  1,  0,  0,  0,  1,    27.67,      63110,      63,   -33228,     0,     27,    -9},
+{ -1,  0,  0,  0,  1,   -27.44,     -57976,     -63,    31429,     0,   -189,   -75},
+{ -1,  0,  2,  2,  2,     9.56,     -59641,     -11,    25543,   -11,    149,    66},
+{  1,  0,  2,  0,  1,     9.12,     -51613,     -42,    26366,     0,    129,    78},
+{ -2,  0,  2,  0,  1,  1305.48,      45893,      50,   -24236,   -10,     31,    20},
+{  0,  0,  0,  2,  0,    14.77,      63384,      11,    -1220,     0,   -150,    29},
+{  0,  0,  2,  2,  2,     7.10,     -38571,      -1,    16452,   -11,    158,    68},
+{ -2,  0,  0,  2,  0,  -205.89,     -47722,       0,      477,     0,    -18,   -25},
+
+{  2,  0,  2,  0,  2,     6.86,     -31046,      -1,    13238,   -11,    131,    59},
+{  1,  0,  2, -2,  2,    23.94,      28593,       0,   -12338,    10,     -1,    -3},
+{ -1,  0,  2,  0,  1,    26.98,      20441,      21,   -10758,     0,     10,    -3},
+{  2,  0,  0,  0,  0,    13.78,      29243,       0,     -609,     0,    -74,    13},
+{  0,  0,  2,  0,  0,    13.61,      25887,       0,     -550,     0,    -66,    11},
+{  0,  1,  0,  0,  1,   386.00,     -14053,     -25,     8551,    -2,     79,   -45},
+{ -1,  0,  0,  2,  1,    31.96,      15164,      10,    -8001,     0,     11,    -1},
+{  0,  2,  2, -2,  2,    91.31,     -15794,      72,     6850,   -42,    -16,    -5},
+{  0,  0, -2,  2,  0,  -173.31,      21783,       0,     -167,     0,     13,    13},
+{  1,  0,  0, -2,  1,   -31.66,     -12873,     -10,     6953,     0,    -37,   -14},
+{  0, -1,  0,  0,  1,  -346.64,     -12654,      11,     6415,     0,     63,    26},
+{ -1,  0,  2,  2,  1,     9.54,     -10204,       0,     5222,     0,     25,    15},
+{  0,  2,  0,  0,  0,   182.63,      16707,     -85,      168,    -1,    -10,    10},
+{  1,  0,  2,  2,  2,     5.64,      -7691,       0,     3268,     0,     44,    19},
+{ -2,  0,  2,  0,  0,  1095.18,     -11024,       0,      104,     0,    -14,     2},
+{  0,  1,  2,  0,  2,    13.17,       7566,     -21,    -3250,     0,    -11,    -5},
+{  0,  0,  2,  2,  1,     7.09,      -6637,     -11,     3353,     0,     25,    14},
+{  0, -1,  2,  0,  2,    14.19,      -7141,      21,     3070,     0,      8,     4},
+{  0,  0,  0,  2,  1,    14.80,      -6302,     -11,     3272,     0,      2,     4},
+{  1,  0,  2, -2,  1,    23.86,       5800,      10,    -3045,     0,      2,    -1},
+{  2,  0,  2, -2,  2,    12.81,       6443,       0,    -2768,     0,     -7,    -4},
+
+{ -2,  0,  0,  2,  1,  -199.84,      -5774,     -11,     3041,     0,    -15,    -5},
+{  2,  0,  2,  0,  1,     6.85,      -5350,       0,     2695,     0,     21,    12},
+{  0, -1,  2, -2,  1,   346.60,      -4752,     -11,     2719,     0,     -3,    -3},
+{  0,  0,  0, -2,  1,   -14.73,      -4940,     -11,     2720,     0,    -21,    -9},
+{ -1, -1,  0,  2,  0,    34.85,       7350,       0,      -51,     0,     -8,     4},
+{  2,  0,  0, -2,  1,   212.32,       4065,       0,    -2206,     0,      6,     1},
+{  1,  0,  0,  2,  0,     9.61,       6579,       0,     -199,     0,    -24,     2},
+{  0,  1,  2, -2,  1,   119.61,       3579,       0,    -1900,     0,      5,     1},
+{  1, -1,  0,  0,  0,    29.80,       4725,       0,      -41,     0,     -6,     3},
+{ -2,  0,  2,  0,  2,  1615.76,      -3075,       0,     1313,     0,     -2,    -1},
+{  3,  0,  2,  0,  2,     5.49,      -2904,       0,     1233,     0,     15,     7},
+{  0, -1,  0,  2,  0,    15.39,       4348,       0,      -81,     0,    -10,     2},
+{  1, -1,  2,  0,  2,     9.37,      -2878,       0,     1232,     0,      8,     4},
+{  0,  0,  0,  1,  0,    29.53,      -4230,       0,      -20,     0,      5,    -2},
+{ -1, -1,  2,  2,  2,     9.81,      -2819,       0,     1207,     0,      7,     3},
+{ -1,  0,  2,  0,  0,    26.88,      -4056,       0,       40,     0,      5,    -2},
+{  0, -1,  2,  2,  2,     7.24,      -2647,       0,     1129,     0,     11,     5},
+{ -2,  0,  0,  0,  1,   -13.75,      -2294,       0,     1266,     0,    -10,    -4},
+{  1,  1,  2,  0,  2,     8.91,       2481,       0,    -1062,     0,     -7,    -3},
+{  2,  0,  0,  0,  1,    13.81,       2179,       0,    -1129,     0,     -2,    -2},
+{ -1,  1,  0,  1,  0,  3232.87,       3276,       0,       -9,     0,      1,     0},
+
+{  1,  1,  0,  0,  0,    25.62,      -3389,       0,       35,     0,      5,    -2},
+{  1,  0,  2,  0,  0,     9.11,       3339,       0,     -107,     0,    -13,     1},
+{ -1,  0,  2, -2,  1,   -32.61,      -1987,       0,     1073,     0,     -6,    -2},
+{  1,  0,  0,  0,  2,    27.78,      -1981,       0,      854,     0,      0,     0},
+{ -1,  0,  0,  1,  0,  -411.78,       4026,       0,     -553,     0,   -353,  -139},
+{  0,  0,  2,  1,  2,     9.34,       1660,       0,     -710,     0,     -5,    -2},
+{ -1,  0,  2,  4,  2,     5.80,      -1521,       0,      647,     0,      9,     4},
+{ -1,  1,  0,  1,  1,  6146.17,       1314,       0,     -700,     0,      0,     0},
+{  0, -2,  2, -2,  1,  6786.31,      -1283,       0,      672,     0,      0,     0},
+{  1,  0,  2,  2,  1,     5.64,      -1331,       0,      663,     0,      8,     4},
+{ -2,  0,  2,  2,  2,    14.63,       1383,       0,     -594,     0,     -2,    -2},
+{ -1,  0,  0,  0,  2,   -27.33,       1405,       0,     -610,     0,      4,     2},
+{  1,  1,  2, -2,  2,    22.47,       1290,       0,     -556,     0,      0,     0},
+{ -2,  0,  2,  4,  2,     7.35,      -1214,       0,      518,     0,      5,     2},
+{ -1,  0,  4,  0,  2,     9.06,       1146,       0,     -490,     0,     -3,    -1}};
+
+/* cache results for retrieval if recomputation is not required */
+static double c_deltaEps=0.0;
+static double c_deltaPsi=0.0;
+static double c_jdeLastNut=-1e-100;
+
+
+//! Compute and return nutation angles of the abridged IAU-2000B nutation.
+//! Ref: Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the Precession-Nutation of the Celestial Pole.
+//! Celestial Mechanics and Dynamical Astronomy 85: 37-49, 2003.
+//! This model provides accuracy better than 1 milli-arcsecond in the time 1995-2050.
+//! TODO: find out drift rate behaviour e.g. in 17./18. century, maybe use nutation only e.g. 1610-2200?
+//! @return deltaPsi, deltaEps [radians]
+//! @param JDE Julian Day, TT
+void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
+{	
+	if (fabs(JDE-c_jdeLastNut)>NUTATION_EPOCH_THRESHOLD)
+	{
+		c_jdeLastNut=JDE;
+		double t=(JDE-2451545.0)/36525.0;
+		// F1 : l = mean anomaly of the Moon ['']
+		double     l  =  (485868.249036 + 1717915923.2178*t);//*arcSec2Rad;
+		// F2 : l' = mean anomaly of the Sun ['']
+		double     ls = (1287104.79305 + 129596581.0481*t);//*arcSec2Rad;
+		// F3 : F = L - Omega (L is the mean longitude of the Moon)
+		double      F = (335779.526232 + 1739527262.8478*t);//*arcSec2Rad;
+		// F4 : D = mean elongation of the Moon from the Sun
+		double      D =  (1072260.70369 + 1602961601.2090*t);//*arcSec2Rad;
+		// F5 : Omega = mean longitude of the ascending node of the lunar orbit
+		double Omega  = (450160.398036 - 6962890.5431*t);//*arcSec2Rad;
+
+		double deltaEps=0.0, deltaPsi=0.0;
+		int i;
+		for (i=0; i<78; ++i)
+		{
+			const struct nut2000B *nut=&nut2000Btable[i];
+			double theta=nut->l_factor*l + nut->ls_factor*ls + nut->F_factor*F + nut->D_factor*D + nut->Omega_factor*Omega;
+			theta *=arcSec2Rad;
+			double sinTheta=sin(theta);
+			double cosTheta=cos(theta);
+			deltaPsi+=(nut->A + nut->Ap*t)*sinTheta + nut->App*cosTheta;
+			deltaEps+=(nut->B + nut->Bp*t)*cosTheta + nut->Bpp*sinTheta;
+		}
+		deltaPsi *= 1e-7; // convert from units of 0.1uas to arcsec. (The paper says mas, but this is an error!)
+		deltaEps *= 1e-7;
+		deltaPsi -= (0.29965*t + 0.0417750 + 0.0015835);
+		deltaEps -= (0.02524*t + 0.0068192 - 0.0016339);
+		c_deltaPsi = deltaPsi * arcSec2Rad;
+		c_deltaEps = deltaEps * arcSec2Rad;
+	}
+	*deltaPsi=c_deltaPsi;
+	*deltaEpsilon=c_deltaEps;
 }
