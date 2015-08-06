@@ -57,8 +57,8 @@ private slots:
 	//! Refresh the color of all markers
 	void refreshMarkersColor();
 
-	//! Sets the color of the active radiant based on real data.
-	void setColorARR();
+	//! Sets the color of the active radiant based on confirmed data.
+	void setColorARC();
 
 	//! Sets the color of the active radiant based on generic data.
 	void setColorARG();

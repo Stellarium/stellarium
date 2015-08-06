@@ -71,7 +71,7 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
 
 	connect(m_ui->setColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
-	connect(m_ui->setColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
+	connect(m_ui->setColorARC, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(m_ui->setColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
 	// Update tab
@@ -149,9 +149,9 @@ void MSConfigDialog::refreshMarkersColor()
 	QColor color(c[0], c[1], c[2]);
 	m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
 
-	c = m_mgr->getColorARR();
+	c = m_mgr->getColorARC();
 	color = QColor(c[0], c[1], c[2]);
-	m_ui->setColorARR->setStyleSheet("background-color:" + color.name() + ";");
+	m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
 
 	c = m_mgr->getColorIR();
 	color = QColor(c[0], c[1], c[2]);
@@ -170,15 +170,15 @@ void MSConfigDialog::setColorARG()
 	}
 }
 
-void MSConfigDialog::setColorARR()
+void MSConfigDialog::setColorARC()
 {
-	Vec3f c = m_mgr->getColorARR();
+	Vec3f c = m_mgr->getColorARC();
 	QColor color(c[0], c[1], c[2]);
 	color = QColorDialog::getColor(color);
 	if (color.isValid())
 	{
-		m_ui->setColorARR->setStyleSheet("background-color:" + color.name() + ";");
-		m_mgr->setColorARR(Vec3f(color.red(), color.green(), color.blue()));
+		m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
+		m_mgr->setColorARC(Vec3f(color.red(), color.green(), color.blue()));
 	}
 }
 
