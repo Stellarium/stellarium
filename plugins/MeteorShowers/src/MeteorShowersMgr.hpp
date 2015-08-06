@@ -103,9 +103,9 @@ public:
 	void setColorARG(const Vec3f& rgb);
 	Vec3f getColorARG() { return m_colorARG; }
 
-	//! Set the color of the active radiant based on real data.
-	void setColorARR(const Vec3f& rgb);
-	Vec3f getColorARR() { return m_colorARR; }
+	//! Set the color of the active radiant based on confirmed data.
+	void setColorARC(const Vec3f& rgb);
+	Vec3f getColorARC() { return m_colorARC; }
 
 	//! Set the color of the inactive radiant.
 	void setColorIR(const Vec3f& rgb);
@@ -233,7 +233,7 @@ private:
 	bool m_enableMarker;
 
 	Vec3f m_colorARG;        //! color of active radiant based on generic data
-	Vec3f m_colorARR;        //! color of active radiant based on real data
+	Vec3f m_colorARC;        //! color of active radiant based on confirmed data
 	Vec3f m_colorIR;         //! color of inactive radiant
 
 	QTimer* m_messageTimer;

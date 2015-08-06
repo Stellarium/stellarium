@@ -157,7 +157,7 @@ void MeteorShowersMgr::loadConfig()
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
 	setEnableButtons(m_conf->value(MS_CONFIG_PREFIX + "/flag_buttons", true).toBool());
 	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0,255,240").toString()));
-	setColorARR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARR", "255,240,0").toString()));
+	setColorARC(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "255,240,0").toString()));
 	setColorIR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "255,255,255").toString()));
 	setEnableAtStartup(m_conf->value(MS_CONFIG_PREFIX + "/enable_at_startup", true).toBool());
 	setFontSize(m_conf->value(MS_CONFIG_PREFIX + "/font_size", 13).toInt());
@@ -436,11 +436,11 @@ void MeteorShowersMgr::setColorARG(const Vec3f& rgb)
 	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARG", rgbStr);
 }
 
-void MeteorShowersMgr::setColorARR(const Vec3f& rgb)
+void MeteorShowersMgr::setColorARC(const Vec3f& rgb)
 {
-	m_colorARR = rgb;
+	m_colorARC = rgb;
 	QString rgbStr = QString("%1,%2,%3").arg(rgb[0]).arg(rgb[1]).arg(rgb[2]);
-	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARR", rgbStr);
+	m_conf->setValue(MS_CONFIG_PREFIX + "/colorARC", rgbStr);
 }
 
 void MeteorShowersMgr::setColorIR(const Vec3f& rgb)
