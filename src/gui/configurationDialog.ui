@@ -389,6 +389,20 @@
                </property>
               </widget>
              </item>
+             <item>
+              <layout class="QVBoxLayout" name="VariousVerticalLayout">
+               <item>
+                <widget class="QCheckBox" name="nutationCheckBox">
+                 <property name="toolTip">
+                  <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+                 </property>
+                 <property name="text">
+                  <string>Include nutation</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
           </item>
