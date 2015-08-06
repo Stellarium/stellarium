@@ -98,6 +98,8 @@ StelCore::StelCore()
 	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
 	
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
+
+	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
 }
 
 
