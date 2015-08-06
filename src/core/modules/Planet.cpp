@@ -410,7 +410,7 @@ double Planet::getRotObliquity(double JDE) const
 {
 	// JDay=2451545.0 for J2000.0
 	if (englishName=="Earth")
-		return get_mean_ecliptical_obliquity(JDE) *M_PI/180.0;
+		return getPrecessionAngleVondrakEpsilon(JDE); //  get_mean_ecliptical_obliquity(JDE) *M_PI/180.0;
 	else
 		return re.obliquity;
 }
@@ -611,14 +611,24 @@ void Planet::computeTransMatrix(double JD, double JDE)
 			// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
 			// GZ: We follow Capitaine's (2003) formulation P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o).
 			// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
-			// See also Hilton et al, Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006).
+			// See also Hilton et al., Report on Precession and the Ecliptic. Cel.Mech.Dyn.Astr. 94:351-367 (2006), eqn (6) and (21).
 			double eps_A, chi_A, omega_A, psi_A;
 			getPrecessionAnglesVondrak(JDE, &eps_A, &chi_A, &omega_A, &psi_A);
 			// GZ This is the right combination for precession of the equator: Nodal rotation psi_A,
 			// then rotation by omega_A, the angle between EclPoleJ2000 and EarthPoleOfDate.
 			// The final rotation by chi_A rotates the equinox (zero degree).
 			// To achieve ecliptical coords of date, you just have now to add a rotX by epsilon_A (obliquity of date).
+
 			rotLocalToParent= Mat4d::zrotation(-psi_A) * Mat4d::xrotation(-omega_A) * Mat4d::zrotation(chi_A);
+			// Plus nutation IAU-2000B:
+			if (StelApp::getInstance().getCore()->getUseNutation())
+			{
+				double deltaEps, deltaPsi;
+				getNutationAngles(JDE, &deltaPsi, &deltaEps);
+				//qDebug() << "deltaEps, arcsec" << deltaEps*180./M_PI*3600. << "deltaPsi" << deltaPsi*180./M_PI*3600.;
+				Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps);
+				rotLocalToParent=rotLocalToParent*nut2000B;
+			}
 		  }
 		else
 			rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
@@ -649,21 +659,16 @@ void Planet::setRotEquatorialToVsop87(const Mat4d &m)
 
 
 // Compute the z rotation to use from equatorial to geographic coordinates.
-// We need both JD and JDE here: For Earth we use JD(UT), for other planets JDE(TT).
+// We need both JD and JDE here for Earth. (For other planets only JDE.)
 double Planet::getSiderealTime(double JD, double JDE) const
 {
 	if (englishName=="Earth")
-	{	// GZ I wanted to be sure that nutation is just those ignorable few arcseconds.
-		//qDebug() << "Difference apparent-mean sidereal times (s): " << (get_apparent_sidereal_time(jd)- get_mean_sidereal_time(jd))* 240.0; // 1degree=4min=240s.
-		// TODO: Reactivate Nutation (but following IAU-2000A) after fixing JD_UT/JD_ET issues, then change this call back to apparent_sidereal_time.
-		//return get_apparent_sidereal_time(jd);
-		return get_mean_sidereal_time(JD);
-
-		// In the newer precession/nutation literature (starting around 2006) there are two sets of algorithms:
-		// "Classical" sidereal time (Greenwich hour angle GHA) and a solution based on Earth Rotational Angle ERA.
-		// We keep using the classical set, but make sure we are correct!
-
-
+	{	// Check to make sure that nutation is just those few arcseconds.
+		//qDebug() << "Difference apparent-mean sidereal times (s): " << (get_apparent_sidereal_time(JD, JDE)- get_mean_sidereal_time(JD, JDE))* 240.0; // 1degree=4min=240s.
+		if (StelApp::getInstance().getCore()->getUseNutation())
+			return get_apparent_sidereal_time(JD, JDE);
+		else
+			return get_mean_sidereal_time(JD, JDE);
 	}
 
 	double t = JDE - re.epoch;
