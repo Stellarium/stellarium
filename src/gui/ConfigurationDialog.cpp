@@ -171,7 +171,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
-
+	ui->nutationCheckBox->setChecked(core->getUseNutation());
+	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
@@ -597,6 +598,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
+	conf->setValue("astro/flag_nutation", core->getUseNutation());
 
 	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
