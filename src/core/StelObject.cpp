@@ -29,6 +29,7 @@
 #include "StelLocation.hpp"
 #include "SolarSystem.hpp"
 #include "StelModuleMgr.hpp"
+#include "planetsephems/sidereal_time.h"
 
 #include <QRegExp>
 #include <QDebug>
@@ -237,6 +238,15 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDecDegStr(glong), StelUtils::radToDecDegStr(glat)) + "<br>";
 		else
 			res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
+	}
+
+	if ((flags&Extra) && core->getCurrentPlanet()->getEnglishName()=="Earth")
+	{
+		double longitude=core->getCurrentLocation().longitude;
+		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		res += q_("Mean Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
+		sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+		res += q_("Apparent Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
 	}
 
 	return res;

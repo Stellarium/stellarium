@@ -255,6 +255,7 @@ flag_object_trails                  = false
 flag_nebula                         = true
 flag_nebula_name                    = false
 flag_nebula_display_no_texture      = false
+flag_nutation                       = true
 extinction_mode_below_horizon       = mirror
 max_mag_nebula_name                 = 8
 nebula_scale                        = 1
