@@ -612,8 +612,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("flag_show_cr",	(bool) (cflags & NebulaMgr::CatCr));
 	conf->setValue("flag_show_mel",	(bool) (cflags & NebulaMgr::CatMel));
 	conf->setValue("flag_show_ced",	(bool) (cflags & NebulaMgr::CatCed));
-	conf->setValue("flag_show_pk",	(bool) (cflags & NebulaMgr::CatPK));
-	conf->setValue("flag_show_g",	(bool) (cflags & NebulaMgr::CatG));
 	conf->setValue("flag_show_pgc",	(bool) (cflags & NebulaMgr::CatPGC));
 	conf->setValue("flag_show_ugc",	(bool) (cflags & NebulaMgr::CatUGC));
 	conf->endGroup();

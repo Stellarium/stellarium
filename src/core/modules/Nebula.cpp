@@ -72,8 +72,6 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Ced_nb()
-	, PK_nb()
-	, G_nb()
 	, bMag(99.)
 	, vMag(99.)
 	, nType()	
@@ -103,7 +101,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (flags&CatalogNumber)
 	{
 		if (!nameI18.isEmpty() && flags&Name)
-			oss << " (";
+			oss << "<br>";
 
 		QStringList catIds;
 		if (M_nb > 0)
@@ -135,15 +133,11 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (UGC_nb > 0)
 			catIds << QString("UGC %1").arg(UGC_nb);
 		if (!Ced_nb.isEmpty())
-			catIds << QString("Ced %1").arg(Ced_nb);
-		if (!PK_nb.isEmpty())
-			catIds << QString("PK %1").arg(PK_nb);
-		if (!G_nb.isEmpty())
-			catIds << QString("G %1").arg(G_nb);
+			catIds << QString("Ced %1").arg(Ced_nb);		
 		oss << catIds.join(" - ");
 
-		if (!nameI18.isEmpty() && flags&Name)
-			oss << ")";
+		//if (!nameI18.isEmpty() && flags&Name)
+		//	oss << ")";
 	}
 
 	if ((flags&Name) || (flags&CatalogNumber))
@@ -497,11 +491,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		else if (UGC_nb > 0)
 			str = QString("UGC %1").arg(UGC_nb);
 		else if (!Ced_nb.isEmpty())
-			str = QString("Ced %1").arg(Ced_nb);
-		else if (!PK_nb.isEmpty())
-			str = QString("PK %1").arg(PK_nb);
-		else if (!G_nb.isEmpty())
-			str = QString("G %1").arg(G_nb);
+			str = QString("Ced %1").arg(Ced_nb);		
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
@@ -515,7 +505,7 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> PK_nb >> G_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb;
 
 	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
 		angularSize = majorAxisSize*minorAxisSize;
