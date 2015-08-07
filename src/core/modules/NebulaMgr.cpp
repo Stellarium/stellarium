@@ -160,6 +160,7 @@ void NebulaMgr::init()
 		catalogFilters	|= Nebula::CatUGC;
 	conf->endGroup();
 
+	// NB: nebula set loaded inside setter of catalog filter
 	setCatalogFilters(catalogFilters);
 
 	Nebula::TypeGroup typeFilters = Nebula::TypeGroup(0);
@@ -184,7 +185,8 @@ void NebulaMgr::init()
 	// 3. flag in nebula_textures.fab (yuk)
 	// 4. info.ini file in each set containing a "load at startup" item
 	// For now (0.9.0), just load the default set
-	loadNebulaSet("default");
+	// NB: nebula set loaded inside setter of catalog filter --AW
+	// loadNebulaSet("default");
 
 	updateI18n();
 	
