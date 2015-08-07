@@ -72,7 +72,7 @@ void MSConfigDialog::createDialogContent()
 	connect(m_ui->fontSize, SIGNAL(valueChanged(int)), m_mgr, SLOT(setFontSize(int)));
 
 	connect(m_ui->setColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
-	connect(m_ui->setColorARC, SIGNAL(clicked()), this, SLOT(setColorARR()));
+	connect(m_ui->setColorARC, SIGNAL(clicked()), this, SLOT(setColorARC()));
 	connect(m_ui->setColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
 	// Update tab
