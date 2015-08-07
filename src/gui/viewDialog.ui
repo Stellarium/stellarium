@@ -236,7 +236,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1384,7 +1384,7 @@
           <item row="1" column="0">
            <widget class="QGroupBox" name="groupBoxDSOTypeFilters">
             <property name="title">
-             <string>Using filter by type</string>
+             <string>Filter by type</string>
             </property>
             <property name="flat">
              <bool>true</bool>
