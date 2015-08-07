@@ -26,7 +26,7 @@
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "MeteorMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
@@ -972,7 +972,7 @@ void StelMainScriptAPI::clear(const QString& state)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	StarMgr* smgr = GETSTELMODULE(StarMgr);

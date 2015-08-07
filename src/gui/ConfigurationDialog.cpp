@@ -44,7 +44,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "SolarSystem.hpp"
-#include "MeteorMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -518,7 +518,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(lmgr);
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	Q_ASSERT(mmgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	Q_ASSERT(skyd);
