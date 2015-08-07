@@ -8,6 +8,5 @@ INSTALL(FILES textures.json nebula_textures.fab DESTINATION share/${PACKAGE}/neb
 INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/nebulae/default 
 	FILES_MATCHING 
 	PATTERN "*.dat"
-	PATTERN "*.txt"
 	PATTERN "*.png"
 	PATTERN "CMakeFiles" EXCLUDE )
