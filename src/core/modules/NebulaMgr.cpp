@@ -120,9 +120,10 @@ void NebulaMgr::init()
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 
-	// for DSO convertor
-	flagConverter = conf->value("astro/flag_convert_dso_catalog", false).toBool();
-	flagDecimalCoordinates = conf->value("astro/flag_dso_decimal_coord", true).toBool();
+	// for DSO convertor (for developers!)
+	flagConverter = conf->value("main/convert_dso_catalog", false).toBool();
+	flagDecimalCoordinates = conf->value("main/convert_dso_decimal_coord", true).toBool();
+
 	setFlagTypeFiltersUsage(conf->value("astro/flag_use_type_filter", false).toBool());
 
 	Nebula::CatalogGroup catalogFilters = Nebula::CatalogGroup(0);
@@ -391,13 +392,11 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 
 	if (flagConverter)
 	{
-		if (srcCatalogPath.isEmpty())
-		{
-			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
-			return;
-		}
-		else
+		if (!srcCatalogPath.isEmpty())
 			convertDSOCatalog(srcCatalogPath, dsoCatalogPath, flagDecimalCoordinates);
+		else
+			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;			
+
 	}
 
 	if (dsoCatalogPath.isEmpty() || dsoNamesPath.isEmpty())
