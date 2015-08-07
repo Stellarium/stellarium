@@ -86,10 +86,14 @@ const double Observability::MoonPerilune = 0.0024236308; // Smallest Earth-Moon 
 
 
 Observability::Observability()
-	: Jan1stJD(0.)
+	: configDialog(new ObservabilityDialog())
+	, nextFullMoon(0.)
+	, prevFullMoon(0.)
 	, GMTShift(0.)
+	, Jan1stJD(0.)
 	, twilightAltRad(0.)
 	, twilightAltDeg(0.)
+	, refractedHorizonAlt(0.)
 	, horizonAltitude(0.)
 	, horizonAltDeg(0.)
 	, selRA(0.)
@@ -119,18 +123,12 @@ Observability::Observability()
 	, button(NULL)	
 {
 	setObjectName("Observability");
-	configDialog = new ObservabilityDialog();
-
-	
-	nextFullMoon = 0.0;
-	prevFullMoon = 0.0;
-	refractedHorizonAlt = 0.0;
-	selName = "";
 
 	// Dummy initial values for parameters and data vectors:
-	mylat = 1000.; mylon = 1000.;
-	myJD.first = 0.0;
-	myJD.second = 0.0;
+	mylat = 1000.;
+	mylon = 1000.;
+	myJD.first = 0.;
+	myJD.second = 0.;
 	curYear = 0;
 	isStar = true;
 	isMoon = false;
