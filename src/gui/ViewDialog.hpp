@@ -77,6 +77,7 @@ private slots:
 	void skyLayersEnabledChanged(int);
 
 	void setSelectedCatalogsFromCheckBoxes();
+	void setSelectedTypesFromCheckBoxes();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 private:
@@ -89,6 +90,7 @@ private:
 	void updateTabBarListWidgetWidth();
 
 	void updateSelectedCatalogsCheckBoxes();
+	void updateSelectedTypesCheckBoxes();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;

@@ -123,6 +123,7 @@ void NebulaMgr::init()
 	// for DSO convertor
 	flagConverter = conf->value("astro/flag_convert_dso_catalog", false).toBool();
 	flagDecimalCoordinates = conf->value("astro/flag_dso_decimal_coord", true).toBool();
+	setFlagTypeFiltersUsage(conf->value("astro/flag_use_type_filter", false).toBool());
 
 	Nebula::CatalogGroup catalogFilters = Nebula::CatalogGroup(0);
 
@@ -160,6 +161,21 @@ void NebulaMgr::init()
 	conf->endGroup();
 
 	setCatalogFilters(catalogFilters);
+
+	Nebula::TypeGroup typeFilters = Nebula::TypeGroup(0);
+
+	conf->beginGroup("dso_type_filters");
+	if (conf->value("flag_show_galaxies", true).toBool())
+		typeFilters	|= Nebula::TypeGalaxies;
+	if (conf->value("flag_show_clusters", true).toBool())
+		typeFilters	|= Nebula::TypeStarClusters;
+	if (conf->value("flag_show_nebulae", true).toBool())
+		typeFilters	|= Nebula::TypeNebulae;
+	if (conf->value("flag_show_other", true).toBool())
+		typeFilters	|= Nebula::TypeOther;
+	conf->endGroup();
+
+	setTypeFilters(typeFilters);
 
 	// TODO: mechanism to specify which sets get loaded at start time.
 	// candidate methods:

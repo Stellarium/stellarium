@@ -593,6 +593,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
+	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagTypeFiltersUsage());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
 	// view dialog / DSO tag settings
@@ -614,6 +615,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("flag_show_ced",	(bool) (cflags & Nebula::CatCed));
 	conf->setValue("flag_show_pgc",	(bool) (cflags & Nebula::CatPGC));
 	conf->setValue("flag_show_ugc",	(bool) (cflags & Nebula::CatUGC));
+	conf->endGroup();
+
+	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();
+	conf->beginGroup("dso_type_filters");
+	conf->setValue("flag_show_galaxies",	(bool) (tflags & Nebula::TypeGalaxies));
+	conf->setValue("flag_show_clusters",	(bool) (tflags & Nebula::TypeStarClusters));
+	conf->setValue("flag_show_nebulae",	(bool) (tflags & Nebula::TypeNebulae));
+	conf->setValue("flag_show_other",	(bool) (tflags & Nebula::TypeOther));
 	conf->endGroup();
 
 	// view dialog / landscape tab settings

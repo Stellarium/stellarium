@@ -140,9 +140,15 @@ void ViewDialog::createDialogContent()
 
 	// Connect and initialize checkboxes and other widgets
 
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+
 	// DSO
 	updateSelectedCatalogsCheckBoxes();
 	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
+	updateSelectedTypesCheckBoxes();
+	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
+	ui->groupBoxDSOTypeFilters->setChecked(nmgr->getFlagTypeFiltersUsage());
+	connect(ui->groupBoxDSOTypeFilters, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagTypeFiltersUsage(bool)));
 
 	// Stars section
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
@@ -219,8 +225,6 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectCheckBox(ui->nebulaLabelCheckBox, "actionShow_Nebulas");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
-
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 
 	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
 	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
@@ -391,6 +395,23 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
 }
 
+void ViewDialog::setSelectedTypesFromCheckBoxes()
+{
+	Nebula::TypeGroup flags(0);
+
+	if (ui->checkBoxGalaxiesType->isChecked())
+		flags |= Nebula::TypeGalaxies;
+	if (ui->checkBoxStarClustersType->isChecked())
+		flags |= Nebula::TypeStarClusters;
+	if (ui->checkBoxNebulaeType->isChecked())
+		flags |= Nebula::TypeNebulae;
+	if (ui->checkBoxOtherType->isChecked())
+		flags |= Nebula::TypeOther;
+
+	GETSTELMODULE(NebulaMgr)->setTypeFilters(flags);
+}
+
+
 void ViewDialog::updateSelectedCatalogsCheckBoxes()
 {
 	const Nebula::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
@@ -410,6 +431,16 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxCed->setChecked(flags & Nebula::CatCed);
 	ui->checkBoxPGC->setChecked(flags & Nebula::CatPGC);
 	ui->checkBoxUGC->setChecked(flags & Nebula::CatUGC);
+}
+
+void ViewDialog::updateSelectedTypesCheckBoxes()
+{
+	const Nebula::TypeGroup& flags = GETSTELMODULE(NebulaMgr)->getTypeFilters();
+
+	ui->checkBoxGalaxiesType->setChecked(flags & Nebula::TypeGalaxies);
+	ui->checkBoxStarClustersType->setChecked(flags & Nebula::TypeStarClusters);
+	ui->checkBoxNebulaeType->setChecked(flags & Nebula::TypeNebulae);
+	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
 }
 
 
