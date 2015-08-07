@@ -54,7 +54,9 @@ Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
 Vec3f Nebula::brightNebulaColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
 Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
+bool Nebula::flagUsageTypeFilter = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
+Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -412,7 +414,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		default:
 			Nebula::texCircle->bind();
 	}
+
 	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
+	if (!objectInDisplayedType())
+		col = Vec3f(0.f,0.f,0.f);
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
 	if (drawHintProportional)
@@ -453,8 +458,11 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		return;
 
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
+	if (objectInDisplayedType())
+		sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
+	else
+		sPainter.setColor(col[0], col[1], col[2], 0.f);
 
-	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
 	QString str;
@@ -517,6 +525,60 @@ void Nebula::readDSO(QDataStream &in)
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
 	nType = (Nebula::NebulaType)oType;
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
+}
+
+bool Nebula::objectInDisplayedType()
+{
+	if (!flagUsageTypeFilter)
+		return true;
+
+	bool r = false;
+	int cntype = -1;
+	switch (nType)
+	{
+		case NebAGx:
+		case NebIGx:
+		case NebRGx:
+		case NebGx:
+			cntype = 0;
+			break;
+		case NebOc:
+		case NebGc:
+		case NebCl:
+		case NebSA:
+		case NebSC:
+			cntype = 1;
+			break;
+		case NebN:
+		case NebBn:
+		case NebDn:
+		case NebEn:
+		case NebPn:
+		case NebRn:
+		case NebHa:
+		case NebHII:
+		case NebSNR:
+			cntype = 2;
+			break;
+		case NebCn:
+			cntype = 3;
+			break;
+		default:
+			cntype = 4;
+			break;
+	}
+	if (typeFilters&TypeGalaxies && cntype==0)
+		r = true;
+	else if (typeFilters&TypeStarClusters && cntype==1)
+		r = true;
+	else if (typeFilters&TypeNebulae && cntype==2)
+		r = true;
+	else if (typeFilters&TypeStarClusters && typeFilters&TypeNebulae && cntype==3)
+		r = true;
+	else if (typeFilters&TypeOther && cntype==4)
+		r = true;
+
+	return r;
 }
 
 QString Nebula::getMorphologicalTypeString(void) const

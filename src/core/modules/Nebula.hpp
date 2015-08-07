@@ -54,11 +54,24 @@ public:
 		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
 		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 	};
+
+	enum TypeGroupFlags
+	{
+		TypeGalaxies		= 0x00000001, //!< Galaxies
+		TypeStarClusters	= 0x00000002, //!< Star Clusters
+		TypeNebulae		= 0x00000004, //!< Nebulae
+		TypeOther		= 0x00000008  //!< Other objects
+	};
+
+
 	typedef QFlags<CatalogGroupFlags> CatalogGroup;
 	Q_FLAGS(CatalogGroup)
+	typedef QFlags<TypeGroupFlags> TypeGroup;
+	Q_FLAGS(TypeGroup)
 
 	//! A pre-defined set of specifiers for the catalogs filter
 	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);
+	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeStarClusters|TypeNebulae|TypeOther);
 
 	Nebula();
 	~Nebula();
@@ -144,6 +157,8 @@ private:
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
 
+	bool objectInDisplayedType();
+
 	unsigned int DSO_nb;
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
@@ -197,10 +212,13 @@ private:
 	static float circleScale;       // Define the scaling of the hints circle
 	static bool drawHintProportional; // scale hint with nebula size?
 
+	static bool flagUsageTypeFilter;
 	static CatalogGroup catalogFilters;
+	static TypeGroup typeFilters;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::TypeGroup)
 
 #endif // _NEBULA_HPP_
 
