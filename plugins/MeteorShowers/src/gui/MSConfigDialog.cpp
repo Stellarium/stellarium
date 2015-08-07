@@ -62,7 +62,8 @@ void MSConfigDialog::createDialogContent()
 
 	// General tab
 	connect(m_ui->enableAtStartUp, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableAtStartup(bool)));
-	connect(m_ui->enableButtons, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableButtons(bool)));
+	connect(m_ui->showEnableButton, SIGNAL(clicked(bool)), m_mgr, SLOT(setShowEnableButton(bool)));
+	connect(m_ui->showSearchButton, SIGNAL(clicked(bool)), m_mgr, SLOT(setShowSearchButton(bool)));
 
 	// Radiant tab
 	connect(m_ui->enableMarker, SIGNAL(clicked(bool)), m_mgr, SLOT(setEnableMarker(bool)));
@@ -99,7 +100,8 @@ void MSConfigDialog::init()
 {
 	// General tab
 	m_ui->enableAtStartUp->setChecked(m_mgr->getEnableAtStartup());
-	m_ui->enableButtons->setChecked(m_mgr->getEnableButtons());
+	m_ui->showEnableButton->setChecked(m_mgr->getShowEnableButton());
+	m_ui->showSearchButton->setChecked(m_mgr->getShowSearchButton());
 
 	// Radiant tab
 	m_ui->enableMarker->setChecked(m_mgr->getEnableMarker());
