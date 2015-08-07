@@ -121,8 +121,8 @@ void NebulaMgr::init()
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 
 	// for DSO convertor (for developers!)
-	flagConverter = conf->value("main/convert_dso_catalog", false).toBool();
-	flagDecimalCoordinates = conf->value("main/convert_dso_decimal_coord", true).toBool();
+	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
+	flagDecimalCoordinates = conf->value("devel/convert_dso_decimal_coord", true).toBool();
 
 	setFlagTypeFiltersUsage(conf->value("astro/flag_use_type_filter", false).toBool());
 
