@@ -53,30 +53,6 @@ class NebulaMgr : public StelObjectModule
 			   WRITE setFlagHints)
 
 public:
-	enum CatalogGroupFlags
-	{
-		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
-		CatIC		= 0x00000002, //!< Index Catalogue (IC)
-		CatM		= 0x00000004, //!< Messier Catalog (M)
-		CatC		= 0x00000008, //!< Caldwell Catalogue (C)
-		CatB		= 0x00000010, //!< Barnard Catalogue (B)
-		CatSh2		= 0x00000020, //!< Sharpless Catalogue (Sh 2)
-		CatLBN		= 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
-		CatLDN		= 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)
-		CatRCW		= 0x00000100, //!< A catalogue of Hα-emission regions in the southern Milky Way (RCW)
-		CatVdB		= 0x00000200, //!< Van den Bergh Catalogue of reflection nebulae (VdB)
-		CatCr		= 0x00000400, //!< Collinder Catalogue (Cr or Col)
-		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
-		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
-		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
-		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
-	};
-	typedef QFlags<CatalogGroupFlags> CatalogGroup;
-	Q_FLAGS(CatalogGroup)
-
-	//! A pre-defined set of specifiers for the catalogs filter
-	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);
-
 	NebulaMgr();
 	virtual ~NebulaMgr();
 
@@ -138,8 +114,8 @@ public:
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
 	
-	void setCatalogFilters(const CatalogGroup& cflags);
-	const CatalogGroup& getCatalogFilters() const { return catalogFilters; }
+	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
+	const Nebula::CatalogGroup& getCatalogFilters() const { return Nebula::catalogFilters; }
 
 	bool objectInDisplayedCatalog(NebulaP n);
 
@@ -257,8 +233,6 @@ private slots:
 
 private:
 
-	CatalogGroup catalogFilters;
-
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
 
@@ -322,7 +296,5 @@ private:
 	bool flagConverter;
 	bool flagDecimalCoordinates;
 };
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(NebulaMgr::CatalogGroup)
 
 #endif // _NEBULAMGR_HPP_
