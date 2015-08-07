@@ -38,13 +38,13 @@
 #include "StelLocaleMgr.hpp"
 #include "StelActionMgr.hpp"
 
+#include "SporadicMeteorMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyDrawer.hpp"
-#include "MeteorMgr.hpp"
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
