@@ -80,7 +80,6 @@ Nebula::Nebula()
 	, nType()	
 {
 	nameI18 = "";
-	since = "";
 	angularSize = -1;	
 }
 
@@ -465,10 +464,9 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
-	QString str;
-	if (!nameI18.isEmpty())
-		str = getNameI18n();
-	else
+
+	QString str = getNameI18n();
+	if (str.isEmpty())
 	{
 		// On screen label: one only, priority as given here.
 		if (catalogFilters&CatM && M_nb>0)
@@ -480,7 +478,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		else if (catalogFilters&CatIC && IC_nb>0)
 			str = QString("IC %1").arg(IC_nb);
 		else if (catalogFilters&CatB && B_nb>0)
-			str = QString("B %1").arg(B_nb);		
+			str = QString("B %1").arg(B_nb);
 		else if (catalogFilters&CatSh2 && Sh2_nb>0)
 			str = QString("Sh 2-%1").arg(Sh2_nb);
 		else if (catalogFilters&CatVdB && VdB_nb>0)
@@ -500,7 +498,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		else if (catalogFilters&CatUGC && UGC_nb > 0)
 			str = QString("UGC %1").arg(UGC_nb);
 		else if (catalogFilters&CatCed && !Ced_nb.isEmpty())
-			str = QString("Ced %1").arg(Ced_nb);		
+			str = QString("Ced %1").arg(Ced_nb);
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);

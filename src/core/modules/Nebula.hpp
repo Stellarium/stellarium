@@ -175,7 +175,6 @@ private:
 	unsigned int PGC_nb;            // PGC number (Catalog of galaxies)
 	unsigned int UGC_nb;            // UGC number (The Uppsala General Catalogue of Galaxies)
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
-	QString since;			// JD of the nebula formation
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
 	QString mTypeString;		// Morphological type of object (as string)
