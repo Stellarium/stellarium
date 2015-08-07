@@ -596,24 +596,24 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
 	// view dialog / DSO tag settings
-	const NebulaMgr::CatalogGroup& cflags = nmgr->getCatalogFilters();
+	const Nebula::CatalogGroup& cflags = nmgr->getCatalogFilters();
 
 	conf->beginGroup("dso_catalog_filters");
-	conf->setValue("flag_show_ngc",	(bool) (cflags & NebulaMgr::CatNGC));
-	conf->setValue("flag_show_ic",	(bool) (cflags & NebulaMgr::CatIC));
-	conf->setValue("flag_show_m",	(bool) (cflags & NebulaMgr::CatM));
-	conf->setValue("flag_show_c",	(bool) (cflags & NebulaMgr::CatC));
-	conf->setValue("flag_show_b",	(bool) (cflags & NebulaMgr::CatB));
-	conf->setValue("flag_show_vdb",	(bool) (cflags & NebulaMgr::CatVdB));
-	conf->setValue("flag_show_sh2",	(bool) (cflags & NebulaMgr::CatSh2));
-	conf->setValue("flag_show_rcw",	(bool) (cflags & NebulaMgr::CatRCW));
-	conf->setValue("flag_show_lbn",	(bool) (cflags & NebulaMgr::CatLBN));
-	conf->setValue("flag_show_ldn",	(bool) (cflags & NebulaMgr::CatLDN));
-	conf->setValue("flag_show_cr",	(bool) (cflags & NebulaMgr::CatCr));
-	conf->setValue("flag_show_mel",	(bool) (cflags & NebulaMgr::CatMel));
-	conf->setValue("flag_show_ced",	(bool) (cflags & NebulaMgr::CatCed));
-	conf->setValue("flag_show_pgc",	(bool) (cflags & NebulaMgr::CatPGC));
-	conf->setValue("flag_show_ugc",	(bool) (cflags & NebulaMgr::CatUGC));
+	conf->setValue("flag_show_ngc",	(bool) (cflags & Nebula::CatNGC));
+	conf->setValue("flag_show_ic",	(bool) (cflags & Nebula::CatIC));
+	conf->setValue("flag_show_m",	(bool) (cflags & Nebula::CatM));
+	conf->setValue("flag_show_c",	(bool) (cflags & Nebula::CatC));
+	conf->setValue("flag_show_b",	(bool) (cflags & Nebula::CatB));
+	conf->setValue("flag_show_vdb",	(bool) (cflags & Nebula::CatVdB));
+	conf->setValue("flag_show_sh2",	(bool) (cflags & Nebula::CatSh2));
+	conf->setValue("flag_show_rcw",	(bool) (cflags & Nebula::CatRCW));
+	conf->setValue("flag_show_lbn",	(bool) (cflags & Nebula::CatLBN));
+	conf->setValue("flag_show_ldn",	(bool) (cflags & Nebula::CatLDN));
+	conf->setValue("flag_show_cr",	(bool) (cflags & Nebula::CatCr));
+	conf->setValue("flag_show_mel",	(bool) (cflags & Nebula::CatMel));
+	conf->setValue("flag_show_ced",	(bool) (cflags & Nebula::CatCed));
+	conf->setValue("flag_show_pgc",	(bool) (cflags & Nebula::CatPGC));
+	conf->setValue("flag_show_ugc",	(bool) (cflags & Nebula::CatUGC));
 	conf->endGroup();
 
 	// view dialog / landscape tab settings

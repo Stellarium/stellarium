@@ -54,6 +54,7 @@ Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
 Vec3f Nebula::brightNebulaColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
 Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
+Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -462,35 +463,35 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	else
 	{
 		// On screen label: one only, priority as given here.
-		if (M_nb > 0)
+		if (catalogFilters&CatM && M_nb>0)
 			str = QString("M %1").arg(M_nb);
-		else if (C_nb > 0)
+		else if (catalogFilters&CatC && C_nb>0)
 			str = QString("C %1").arg(C_nb);
-		else if (NGC_nb > 0)
+		else if (catalogFilters&CatNGC && NGC_nb>0)
 			str = QString("NGC %1").arg(NGC_nb);
-		else if (IC_nb > 0)
+		else if (catalogFilters&CatIC && IC_nb>0)
 			str = QString("IC %1").arg(IC_nb);
-		else if (B_nb > 0)
+		else if (catalogFilters&CatB && B_nb>0)
 			str = QString("B %1").arg(B_nb);		
-		else if (Sh2_nb > 0)
+		else if (catalogFilters&CatSh2 && Sh2_nb>0)
 			str = QString("Sh 2-%1").arg(Sh2_nb);
-		else if (VdB_nb > 0)
+		else if (catalogFilters&CatVdB && VdB_nb>0)
 			str = QString("VdB %1").arg(VdB_nb);
-		else if (RCW_nb > 0)
+		else if (catalogFilters&CatRCW && RCW_nb>0)
 			str = QString("RCW %1").arg(RCW_nb);
-		else if (LDN_nb > 0)
+		else if (catalogFilters&CatLDN && LDN_nb>0)
 			str = QString("LDN %1").arg(LDN_nb);
-		else if (LBN_nb > 0)
+		else if (catalogFilters&CatLBN && LBN_nb > 0)
 			str = QString("LBN %1").arg(LBN_nb);
-		else if (Cr_nb > 0)
+		else if (catalogFilters&CatCr && Cr_nb > 0)
 			str = QString("Cr %1").arg(Cr_nb);
-		else if (Mel_nb > 0)
+		else if (catalogFilters&CatMel && Mel_nb > 0)
 			str = QString("Mel %1").arg(Mel_nb);
-		else if (PGC_nb > 0)
+		else if (catalogFilters&CatPGC && PGC_nb > 0)
 			str = QString("PGC %1").arg(PGC_nb);
-		else if (UGC_nb > 0)
+		else if (catalogFilters&CatUGC && UGC_nb > 0)
 			str = QString("UGC %1").arg(UGC_nb);
-		else if (!Ced_nb.isEmpty())
+		else if (catalogFilters&CatCed && !Ced_nb.isEmpty())
 			str = QString("Ced %1").arg(Ced_nb);		
 	}
 
