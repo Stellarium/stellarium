@@ -98,6 +98,8 @@ StelCore::StelCore()
 	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
 	
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
+
+	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
 }
 
 
@@ -210,33 +212,33 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Solar_Week", timeGroup, N_("Subtract 7 solar days"), this, "subtractWeek()", "[");
 	actionsMgr->addAction("actionAdd_Sidereal_Day", timeGroup, N_("Add 1 sidereal day"), this, "addSiderealDay()", "Alt+=");
 	actionsMgr->addAction("actionAdd_Sidereal_Year", timeGroup, N_("Add 1 sidereal year"), this, "addSiderealYear()", "Ctrl+Alt+Shift+]");
-	actionsMgr->addAction("actionAdd_Sidereal_Century", timeGroup, N_("Add 100 sidereal years"), this, "addSiderealYears(100)");
+	actionsMgr->addAction("actionAdd_Sidereal_Century", timeGroup, N_("Add 100 sidereal years"), this, "addSiderealYears()");
 	actionsMgr->addAction("actionAdd_Synodic_Month", timeGroup, N_("Add 1 synodic month"), this, "addSynodicMonth()");
 	actionsMgr->addAction("actionAdd_Draconic_Month", timeGroup, N_("Add 1 draconic month"), this, "addDraconicMonth()");
 	actionsMgr->addAction("actionAdd_Draconic_Year", timeGroup, N_("Add 1 draconic year"), this, "addDraconicYear()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Month", timeGroup, N_("Add 1 anomalistic month"), this, "addAnomalisticMonth()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Year", timeGroup, N_("Add 1 anomalistic year"), this, "addAnomalisticYear()");
-	actionsMgr->addAction("actionAdd_Anomalistic_Century", timeGroup, N_("Add 100 anomalistic years"), this, "addAnomalisticYears(100)");
+	actionsMgr->addAction("actionAdd_Anomalistic_Century", timeGroup, N_("Add 100 anomalistic years"), this, "addAnomalisticYears()");
 	actionsMgr->addAction("actionAdd_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addTropicalMonth()");
 	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addTropicalYear()");
-	actionsMgr->addAction("actionAdd_Tropical_Century", timeGroup, N_("Add 100 mean tropical years"), this, "addTropicalYears(100)");
+	actionsMgr->addAction("actionAdd_Tropical_Century", timeGroup, N_("Add 100 mean tropical years"), this, "addTropicalYears()");
 	actionsMgr->addAction("actionAdd_Julian_Year", timeGroup, N_("Add 1 Julian year"), this, "addJulianYear()");
-	actionsMgr->addAction("actionAdd_Julian_Century", timeGroup, N_("Add 1 Julian century"), this, "addJulianYears(100)");
+	actionsMgr->addAction("actionAdd_Julian_Century", timeGroup, N_("Add 1 Julian century"), this, "addJulianYears()");
 	actionsMgr->addAction("actionAdd_Gaussian_Year", timeGroup, N_("Add 1 Gaussian year"), this, "addGaussianYear()");
 	actionsMgr->addAction("actionSubtract_Sidereal_Day", timeGroup, N_("Subtract 1 sidereal day"), this, "subtractSiderealDay()", "Alt+-");
 	actionsMgr->addAction("actionSubtract_Sidereal_Year", timeGroup, N_("Subtract 1 sidereal year"), this, "subtractSiderealYear()", "Ctrl+Alt+Shift+[");
-	actionsMgr->addAction("actionSubtract_Sidereal_Century", timeGroup, N_("Subtract 100 sidereal years"), this, "subtractSiderealYears(100)");
+	actionsMgr->addAction("actionSubtract_Sidereal_Century", timeGroup, N_("Subtract 100 sidereal years"), this, "subtractSiderealYears()");
 	actionsMgr->addAction("actionSubtract_Synodic_Month", timeGroup, N_("Subtract 1 synodic month"), this, "subtractSynodicMonth()");
 	actionsMgr->addAction("actionSubtract_Draconic_Month", timeGroup, N_("Subtract 1 draconic month"), this, "subtractDraconicMonth()");
 	actionsMgr->addAction("actionSubtract_Draconic_Year", timeGroup, N_("Subtract 1 draconic year"), this, "subtractDraconicYear()");
 	actionsMgr->addAction("actionSubtract_Anomalistic_Month", timeGroup, N_("Subtract 1 anomalistic month"), this, "subtractAnomalisticMonth()");
 	actionsMgr->addAction("actionSubtract_Anomalistic_Year", timeGroup, N_("Subtract 1 anomalistic year"), this, "subtractAnomalisticYear()");
-	actionsMgr->addAction("actionSubtract_Anomalistic_Century", timeGroup, N_("Subtract 100 anomalistic years"), this, "subtractAnomalisticYears(100)");
+	actionsMgr->addAction("actionSubtract_Anomalistic_Century", timeGroup, N_("Subtract 100 anomalistic years"), this, "subtractAnomalisticYears()");
 	actionsMgr->addAction("actionSubtract_Tropical_Month", timeGroup, N_("Subtract 1 mean tropical month"), this, "subtractTropicalMonth()");
 	actionsMgr->addAction("actionSubtract_Tropical_Year", timeGroup, N_("Subtract 1 mean tropical year"), this, "subtractTropicalYear()");
-	actionsMgr->addAction("actionSubtract_Tropical_Century", timeGroup, N_("Subtract 100 mean tropical years"), this, "subtractTropicalYears(100)");
+	actionsMgr->addAction("actionSubtract_Tropical_Century", timeGroup, N_("Subtract 100 mean tropical years"), this, "subtractTropicalYears()");
 	actionsMgr->addAction("actionSubtract_Julian_Year", timeGroup, N_("Subtract 1 Julian year"), this, "subtractJulianYear()");
-	actionsMgr->addAction("actionSubtract_Julian_Century", timeGroup, N_("Subtract 1 Julian century"), this, "subtractJulianYears(100)");
+	actionsMgr->addAction("actionSubtract_Julian_Century", timeGroup, N_("Subtract 1 Julian century"), this, "subtractJulianYears()");
 	actionsMgr->addAction("actionSubtract_Gaussian_Year", timeGroup, N_("Subtract 1 Gaussian year"), this, "subtractGaussianYear()");
 
 	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", movementGroup, N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");

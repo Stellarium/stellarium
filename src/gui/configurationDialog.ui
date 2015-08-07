@@ -1130,16 +1130,6 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
@@ -1150,6 +1140,16 @@
                </property>
               </widget>
              </item>
+             <item row="5" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="decimalDegreeCheckBox">
                <property name="toolTip">
@@ -1157,6 +1157,16 @@
                </property>
                <property name="text">
                 <string>Use decimal degrees</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="nutationCheckBox">
+               <property name="toolTip">
+                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+               </property>
+               <property name="text">
+                <string>Include nutation</string>
                </property>
               </widget>
              </item>
