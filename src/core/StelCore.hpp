@@ -52,6 +52,7 @@ class StelCore : public QObject
 	Q_ENUMS(DeltaTAlgorithm)
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
+	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
 
 public:
 	//! @enum FrameType
@@ -64,8 +65,8 @@ public:
 		FrameObservercentricEclipticJ2000,	//!< Fixed-ecliptic reference frame centered on the Observer. GZ: was ObservercentricEcliptic, but renamed because it is Ecliptic of J2000!
 		FrameObservercentricEclipticOfDate,	//!< Moving ecliptic reference frame centered on the Observer. GZ new for V0.14: Ecliptic of date, i.e. includes the precession of the ecliptic.
 		FrameEquinoxEqu,			//!< Equatorial reference frame at the current equinox centered on the observer.
-							//!< The north pole follows the precession of the planet on which the observer is located.
-							//!< TBD: To be Corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model)
+							//!< The north pole follows the precession of the planet on which the observer is located. On Earth, this may include nutation if so configured.
+							//!< Has been corrected for V0.14 to really properly reflect ecliptical motion and precession (Vondrak 2011 model) and nutation.
 		FrameJ2000,				//!< Equatorial reference frame at the J2000 equinox centered on the observer.
 							//!< This is also the ICRS reference frame.
 		FrameGalactic				//!< Galactic reference frame centered on observer.
@@ -399,7 +400,10 @@ public slots:
 	//! Get current DeltaT.
 	double getDeltaT() const;
 
-
+	//! @return whether nutation is currently used.
+	bool getUseNutation() const {return flagUseNutation;}
+	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
+	void setUseNutation(bool useNutation) { flagUseNutation=useNutation;}
 
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;
@@ -621,10 +625,13 @@ private:
 	// The ID of the default startup location
 	QString defaultLocationID;
 
+	// flag to indicate we want to use nutation (the small-scale wobble of earth's axis)
+	bool flagUseNutation;
+
 	// Time variables
 	double timeSpeed;                  // Positive : forward, Negative : Backward, 1 = 1sec/sec
 	//double JDay;                     // Current time in Julian day. IN V0.12 TO V0.14, this was JD in TT, and all places where UT was required had to subtract getDeltaT() explicitly.
-	QPair<double,double> JD;           // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second or just call getJDE()
+	QPair<double,double> JD;           // From 0.14 on: JD.first=JD_UT, JD.second=DeltaT=TT-UT. To gain JD_TT, compute JDE=JD.first+JD.second or better just call getJDE()
 					   // Use is best with calls getJD()/setJD() and getJDE()/setJDE() to explicitly state which flavour of JD you need.
 	double presetSkyTime;
 	QTime initTodayTime;
