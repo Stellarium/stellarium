@@ -317,47 +317,15 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="1" column="0">
               <widget class="QCheckBox" name="planetLabelCheckBox">
                <property name="text">
                 <string>Planets</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QSlider" name="planetsLabelsHorizontalSlider">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>180</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="value">
-                <number>33</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="nebulaLabelCheckBox">
-               <property name="toolTip">
-                <string>Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)</string>
-               </property>
-               <property name="text">
-                <string comment="Deep-sky objects">DSOs</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="1">
-              <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
+              <widget class="QSlider" name="planetsLabelsHorizontalSlider">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -1086,62 +1054,6 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>70</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="frame">
-                <bool>true</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::UpDownArrows</enum>
-               </property>
-               <property name="decimals">
-                <number>2</number>
-               </property>
-               <property name="minimum">
-                <double>3.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>21.000000000000000</double>
-               </property>
-               <property name="singleStep">
-                <double>0.250000000000000</double>
-               </property>
-               <property name="value">
-                <double>8.500000000000000</double>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
-               <property name="toolTip">
-                <string>Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)</string>
-               </property>
-               <property name="text">
-                <string comment="Deep-sky objects">DSOs</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="1">
               <widget class="QDoubleSpinBox" name="starLimitMagnitudeDoubleSpinBox">
                <property name="sizePolicy">
@@ -1195,7 +1107,77 @@
         </widget>
         <widget class="QWidget" name="page_DSO">
          <layout class="QGridLayout" name="gridLayout_11">
-          <item row="0" column="0">
+          <item row="2" column="0">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="2">
+           <widget class="QGroupBox" name="groupBoxDSODisplayOptions">
+            <property name="title">
+             <string>Display options</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_12">
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <item>
+                <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
+                 <property name="text">
+                  <string>Limit Magnitudes</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
+                 <property name="minimum">
+                  <double>3.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>21.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.250000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>8.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QCheckBox" name="nebulaLabelCheckBox">
+                 <property name="text">
+                  <string>Labels and Markers</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
+                 <property name="value">
+                  <number>33</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="3">
            <widget class="QGroupBox" name="groupDSOCatalogs">
             <property name="title">
              <string>Display objects from catalogs</string>
@@ -1400,17 +1382,62 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <spacer name="verticalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+           <widget class="QGroupBox" name="groupBoxDSOTypeFilters">
+            <property name="title">
+             <string>Using filter by type</string>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
+            <property name="flat">
+             <bool>true</bool>
             </property>
-           </spacer>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_13">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxGalaxiesType">
+               <property name="text">
+                <string>Galaxies</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxStarClustersType">
+               <property name="text">
+                <string>Star clusters</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxNebulaeType">
+               <property name="text">
+                <string>Nebulae</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxOtherType">
+               <property name="text">
+                <string>Other</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -2386,8 +2413,6 @@
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
-  <tabstop>nebulaLabelCheckBox</tabstop>
-  <tabstop>nebulasLabelsHorizontalSlider</tabstop>
   <tabstop>planetLabelCheckBox</tabstop>
   <tabstop>planetsLabelsHorizontalSlider</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
@@ -2422,6 +2447,11 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>

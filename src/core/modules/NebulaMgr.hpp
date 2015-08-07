@@ -117,6 +117,9 @@ public:
 	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
 	const Nebula::CatalogGroup& getCatalogFilters() const { return Nebula::catalogFilters; }
 
+	void setTypeFilters(const Nebula::TypeGroup& tflags) { Nebula::typeFilters=tflags; }
+	const Nebula::TypeGroup& getTypeFilters() const { return Nebula::typeFilters; }
+
 	bool objectInDisplayedCatalog(NebulaP n);
 
 	///////////////////////////////////////////////////////////////////////////
@@ -193,6 +196,11 @@ public slots:
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
 	bool getFlagShow(void) const { return flagShow; }
+
+	//! Set flag used to turn on and off DSO type filtering.
+	void setFlagTypeFiltersUsage(bool b) { Nebula::flagUsageTypeFilter=b; }
+	//! Get value of flag used to turn on and off DSO type filtering.
+	bool getFlagTypeFiltersUsage(void) const { return Nebula::flagUsageTypeFilter; }
 
 	//! Set the color used to draw nebula labels.
 	//! @param c The color of the nebula labels
