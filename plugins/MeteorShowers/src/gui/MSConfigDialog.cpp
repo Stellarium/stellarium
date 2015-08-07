@@ -196,46 +196,116 @@ void MSConfigDialog::setColorIR()
 
 void MSConfigDialog::setAboutHtml()
 {
-	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Meteor Showers Plug-in") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>";
-	html += "</table>";
-
-	html += "<p>" + q_("This plugin displays meteor showers and a marker for each active and inactive radiant, showing real information about its activity.") + "</p>";
-	html += "<h3>" + q_("Terms") + "</h3>";
-	html += "<p><b>" + q_("Meteor shower") + "</b>";
-	html += "<br />" + q_("A meteor shower is a celestial event in which a number of meteors are observed to radiate, or originate, from one point in the night sky. These meteors are caused by streams of cosmic debris called meteoroids entering Earth's atmosphere at extremely high speeds on parallel trajectories. Most meteors are smaller than a grain of sand, so almost all of them disintegrate and never hit the Earth's surface. Intense or unusual meteor showers are known as meteor outbursts and meteor storms, which may produce greater than 1,000 meteors an hour.") + "</p>";
-	html += "<p><b>" + q_("Radiant") + "</b>";
-	html += "<br />" + q_("The radiant or apparent radiant of a meteor shower is the point in the sky, from which (to a planetary observer) meteors appear to originate. The Perseids, for example, are meteors which appear to come from a point within the constellation of Perseus.") + "</p>";
-	html += "<p>" + q_("An observer might see such a meteor anywhere in the sky but the direction of motion, when traced back, will point to the radiant. A meteor that does not point back to the known radiant for a given shower is known as a sporadic and is not considered part of that shower.") + "</p>";
-	html += "<p>" + q_("Many showers have a radiant point that changes position during the interval when it appears. For example, the radiant point for the Delta Aurigids drifts by more than a degree per night.") + "</p>";
-	html += "<p><b>" + q_("Zenithal Hourly Rate (ZHR)") + "</b>";
-	html += "<br />" + q_("In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the number of meteors a single observer would see in one hour under a clear, dark sky (limiting apparent magnitude of 6.5) if the radiant of the shower were at the zenith. The rate that can effectively be seen is nearly always lower and decreases the closer the radiant is to the horizon.") + "</p>";
-	html += "<p><b>" + q_("Population index") + "</b>";
-	html += "<br />" + q_("The population index indicates the magnitude distribution of the meteor showers. The values below 2.5 correspond to distributions where bright meteors are more frequent than average, while values above 3.0 mean that the share of faint meteors is larger than usual.") + "</p>";
-	html += "<h3>" + q_("Notes") + "</h3>";
-	html += "<p>" + q_("This plugin was initially created as a project of the ESA Summer of Code in Space 2013.") + "</p>";
-	html += "<h3>" + q_("Info") + "</h3>";
-	html += "<p>" + q_("Info about meteor showers you can get here:") + "</p>";
-	html += "<ul>";
+	QString html = "<html><head></head><body>"
+	"<h2>" + q_("Meteor Showers Plug-in") + "</h2>"
+	"<table width=\"90%\">"
+		"<tr width=\"30%\">"
+			"<td><strong>" + q_("Version") + ":</strong></td>"
+			"<td>" + METEORSHOWERS_PLUGIN_VERSION + "</td>"
+		"</tr>"
+		"<tr>"
+			"<td><strong>" + q_("Author") + ":</strong></td>"
+			"<td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td>"
+		"</tr>"
+	"</table>"
+	"<p>"
+		+ q_(""
+		     "This plugin enables you to simulate periodic meteor showers and "
+		     "to display a marker for each active and inactive radiant."
+		     "") +
+	"</p>"
+		+ q_(""
+		     "By a single click on the radiant's marker, you can see all the "
+		     "details about its position and activity. Most data used on this "
+		     "plugin comes from the oficial <a href=\"http://imo.net\">International "
+		     "Meteor Organization</a> catalog."
+		     "") +
+	"</p>"
+		+ q_("It has three types of markers:") +
+		"<ul>"
+			"<li>"
+				"<b>" + q_("Confirmed:") + "</b> " +
+				q_("the radiant is active and its data was confirmed."
+				" Thus, this is a historical (really occurred in the past) or predicted"
+				" meteor shower.") +
+			"</li>"
+			"<li>"
+				"<b>" + q_("Generic:") + "</b> " +
+				q_("the radiant is active, but its data was not confirmed."
+				" It means that this can occur on real life, but that we do not have real"
+				" data about its activity for the current sky year.") +
+			"</li>"
+			"<li>"
+				"<b>" + q_("Inactive:") + "</b> " +
+				q_("the radiant is inactive for the current sky date.") +
+			"</li>"
+		"</ul>"
+	"</p>"
+	"<h3>" + q_("Terms") + "</h3>"
+	"<p><b>" + q_("Meteor shower") + "</b>"
+		"<br />" +
+		q_("A meteor shower is a celestial event in which a number of meteors are observed to "
+		"radiate, or originate, from one point in the night sky. These meteors are caused by "
+		"streams of cosmic debris called meteoroids entering Earth's atmosphere at extremely "
+		"high speeds on parallel trajectories. Most meteors are smaller than a grain of sand, "
+		"so almost all of them disintegrate and never hit the Earth's surface. Intense or "
+		"unusual meteor showers are known as meteor outbursts and meteor storms, which may "
+		"produce greater than 1,000 meteors an hour.") +
+	"</p>"
+	"<p><b>" + q_("Radiant") + "</b>"
+		"<br />" +
+		q_("The radiant or apparent radiant of a meteor shower is the point in the sky, from "
+		   "which (to a planetary observer) meteors appear to originate. The Perseids, for "
+		   "example, are meteors which appear to come from a point within the constellation "
+		   "of Perseus.") +
+	"</p>"
+	"<p>" +
+		q_("An observer might see such a meteor anywhere in the sky but the direction of motion, "
+		   "when traced back, will point to the radiant. A meteor that does not point back to the "
+		   "known radiant for a given shower is known as a sporadic and is not considered part of "
+		   "that shower.") +
+	"</p>"
+	"<p>" + q_("Many showers have a radiant point that changes position during the interval when it "
+		   "appears. For example, the radiant point for the Delta Aurigids drifts by more than a "
+		   "degree per night.") +
+	"</p>"
+	"<p><b>" + q_("Zenithal Hourly Rate (ZHR)") + "</b>"
+		"<br />" +
+		q_("In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the number of meteors "
+		   "a single observer would see in one hour under a clear, dark sky (limiting apparent "
+		   "magnitude of 6.5) if the radiant of the shower were at the zenith. The rate that can "
+		   "effectively be seen is nearly always lower and decreases the closer the radiant is to "
+		   "the horizon.") +
+	"</p>"
+	"<p><b>" + q_("Population index") + "</b>"
+		"<br />" +
+		q_("The population index indicates the magnitude distribution of the meteor showers. The "
+		   "values below 2.5 correspond to distributions where bright meteors are more frequent "
+		   "than average, while values above 3.0 mean that the share of faint meteors is larger "
+		   "than usual.") +
+	"</p>"
+	"<h3>" + q_("Notes") + "</h3>"
+	"<p>" + q_("This plugin was initially created as a project of the ESA Summer of Code in Space 2013.") + "</p>"
+	"<h3>" + q_("Info") + "</h3>"
+	"<p>" + q_("Info about meteor showers you can get here:") + "</p>"
+	"<ul>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia").arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">")).arg("</a>") + "</li>";
+	"<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia").arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">")).arg("</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>";
-	html += "</ul>";
-	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers Plugin") + "</p>";
-	html += "<ul>";
+	"<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>"
+	"</ul>"
+	"<h3>" + q_("Links") + "</h3>"
+	"<p>" + QString(q_("Support is provided via the Launchpad website. Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers Plugin") + "</p>"
+	"<ul>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	"<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	"<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
+	"<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want to read full information about the plugin, its history and format of the catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Meteor_Showers_plugin\">").arg("</a>") + "</li>";
-	html += "</ul></body></html>";
+	"<li>" + q_("If you want to read full information about the plugin, its history and format of the catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Meteor_Showers_plugin\">").arg("</a>") + "</li>"
+	"</ul></body></html>";
 
 	m_ui->about->setHtml(html);
 }
