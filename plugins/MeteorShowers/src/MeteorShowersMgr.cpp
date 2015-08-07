@@ -550,25 +550,40 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
 	info.contact = "mcardinot@gmail.com";
-	info.description = N_("<p>This plugin enables you to simulate periodic meteor showers and"
-			      "  to display a marker for each active and inactive radiant.</p>"
-			      "<p>By a single click on the radiant's marker, you can see all the"
-			      " details about its position and activity. Most data used on this"
-			      " plugin comes from the oficial <a href=\"http://imo.net\">International"
-			      " Meteor Organization</a> catalog.</p>"
-			      "<p>It has three types of markers:"
-			      "<ul>"
-			      "<li>"
-			      "<b>Confirmed:</b> the radiant is active and its data was confirmed."
-			      " Thus, this is a historical (really occurred in the past) or predicted"
-			      " meteor shower."
-			      "</li>"
-			      "<li>"
-			      "<b>Generic:</b> the radiant is active, but its data was not confirmed."
-			      " It means that this can occur on real life, but that we do not have real"
-			      " data about its activity for the current sky year.</li>"
-			      "<li><b>Inactive:</b> the radiant is inactive for the current sky date.</li>"
-			      "</ul></p>");
+	info.description =
+	"<p>"
+		+ N_(""
+		     "This plugin enables you to simulate periodic meteor showers and "
+		     "to display a marker for each active and inactive radiant."
+		     "") +
+	"</p>"
+		+ N_(""
+		     "By a single click on the radiant's marker, you can see all the "
+		     "details about its position and activity. Most data used on this "
+		     "plugin comes from the oficial <a href=\"http://imo.net\">International "
+		     "Meteor Organization</a> catalog."
+		     "") +
+	"</p>"
+		+ N_("It has three types of markers:") +
+		"<ul>"
+			"<li>"
+				"<b>" + N_("Confirmed:") + "</b> " +
+				N_("the radiant is active and its data was confirmed."
+				" Thus, this is a historical (really occurred in the past) or predicted"
+				" meteor shower.") +
+			"</li>"
+			"<li>"
+				"<b>" + N_("Generic:") + "</b> " +
+				N_("the radiant is active, but its data was not confirmed."
+				" It means that this can occur on real life, but that we do not have real"
+				" data about its activity for the current sky year.") +
+			"</li>"
+			"<li>"
+				"<b>" + N_("Inactive:") + "</b> " +
+				N_("the radiant is inactive for the current sky date.") +
+			"</li>"
+		"</ul>"
+	"</p>";
 	info.version = METEORSHOWERS_PLUGIN_VERSION;
 	return info;
 }
