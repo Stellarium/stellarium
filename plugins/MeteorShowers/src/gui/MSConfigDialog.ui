@@ -135,7 +135,7 @@
    <item>
     <widget class="QTabWidget" name="tabs">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -160,17 +160,24 @@
           <bool>false</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="enableButtons">
-            <property name="text">
-             <string>Show buttons on toolbar</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QCheckBox" name="enableAtStartUp">
             <property name="text">
              <string>Enable plugin at startup</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="showEnableButton">
+            <property name="text">
+             <string>Show a button to enable/disable the plugin</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="showSearchButton">
+            <property name="text">
+             <string>Show a button to open the search panel</string>
             </property>
            </widget>
           </item>

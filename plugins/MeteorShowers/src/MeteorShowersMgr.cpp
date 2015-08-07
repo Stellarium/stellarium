@@ -46,9 +46,10 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enablePlugin(false)
 	, m_activeRadiantOnly(false)
 	, m_enableAtStartup(true)
-	, m_enableButtons(true)
 	, m_enableLabels(true)
 	, m_enableMarker(true)
+	, m_showEnableButton(true)
+	, m_showSearchButton(true)
 	, m_messageTimer(NULL)
 	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
@@ -155,7 +156,8 @@ void MeteorShowersMgr::createActions()
 void MeteorShowersMgr::loadConfig()
 {
 	setActiveRadiantOnly(m_conf->value(MS_CONFIG_PREFIX + "/flag_active_radiant_only", true).toBool());
-	setEnableButtons(m_conf->value(MS_CONFIG_PREFIX + "/flag_buttons", true).toBool());
+	setShowEnableButton(m_conf->value(MS_CONFIG_PREFIX + "/show_enable_button", true).toBool());
+	setShowSearchButton(m_conf->value(MS_CONFIG_PREFIX + "/show_search_button", true).toBool());
 	setColorARG(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARG", "0,255,240").toString()));
 	setColorARC(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorARC", "255,240,0").toString()));
 	setColorIR(StelUtils::strToVec3f(m_conf->value(MS_CONFIG_PREFIX + "/colorIR", "255,255,255").toString()));
@@ -387,7 +389,7 @@ void MeteorShowersMgr::setActiveRadiantOnly(const bool& b)
 	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_active_radiant_only", b);
 }
 
-void MeteorShowersMgr::setEnableButtons(const bool& show)
+void MeteorShowersMgr::setShowEnableButton(const bool& show)
 {
 	try
 	{
@@ -404,19 +406,43 @@ void MeteorShowersMgr::setEnableButtons(const bool& show)
 								  QPixmap(":/MeteorShowers/btMS-off.png"),
 								  QPixmap(":/graphicGui/glow32x32.png"),
 								  "actionShow_MeteorShowers");
+			gui->getButtonBar()->addButton(enablePlugin, "065-pluginsGroup");
+		}
+		else
+		{
+			gui->getButtonBar()->hideButton("actionShow_MeteorShowers");
+		}
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "MeteorShowersMgr : unable to create toolbar buttons for MeteorShowers plugin!"
+			   << e.what();
+	}
+	m_showEnableButton = show;
+	m_conf->setValue(MS_CONFIG_PREFIX + "/show_enable_button", show);
+}
 
+void MeteorShowersMgr::setShowSearchButton(const bool& show)
+{
+	try
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (!gui)
+		{
+			return;
+		}
+
+		if (show)
+		{
 			StelButton* searchMS = new StelButton(NULL,
 							      QPixmap(":/MeteorShowers/btMS-search-on.png"),
 							      QPixmap(":/MeteorShowers/btMS-search-off.png"),
 							      QPixmap(":/graphicGui/glow32x32.png"),
 							      "actionShow_MeteorShowers_search_dialog");
-
-			gui->getButtonBar()->addButton(enablePlugin, "065-pluginsGroup");
 			gui->getButtonBar()->addButton(searchMS, "065-pluginsGroup");
 		}
 		else
 		{
-			gui->getButtonBar()->hideButton("actionShow_MeteorShowers");
 			gui->getButtonBar()->hideButton("actionShow_MeteorShowers_search_dialog");
 		}
 	}
@@ -425,8 +451,8 @@ void MeteorShowersMgr::setEnableButtons(const bool& show)
 		qWarning() << "MeteorShowersMgr : unable to create toolbar buttons for MeteorShowers plugin!"
 			   << e.what();
 	}
-	m_enableButtons = show;
-	m_conf->setValue(MS_CONFIG_PREFIX + "/flag_buttons", show);
+	m_showSearchButton = show;
+	m_conf->setValue(MS_CONFIG_PREFIX + "/show_search_button", show);
 }
 
 void MeteorShowersMgr::setColorARG(const Vec3f& rgb)

@@ -96,8 +96,13 @@ public:
 	//! True if user wants to see the active radiants only.
 	bool getActiveRadiantOnly() { return m_activeRadiantOnly; }
 
-	//! Enable/disable the meteor showers buttons on the toolbar.
-	bool getEnableButtons() { return m_enableButtons; }
+	//! Get the status of the enable button on the toolbar.
+	//! @return true if it's visible
+	bool getShowEnableButton() { return m_showEnableButton; }
+
+	//! Get the status of the search button on the toolbar.
+	//! @return true if it's visible
+	bool getShowSearchButton() { return m_showSearchButton; }
 
 	//! Set the color of the active radiant based on generic data.
 	void setColorARG(const Vec3f& rgb);
@@ -179,8 +184,11 @@ public slots:
 	//! Enable the meteor showers plugin at Stellarium startup.
 	void setEnableAtStartup(const bool& b);
 
-	//! Enable/disable the meteor showers buttons on the toolbar.
-	void setEnableButtons(const bool& show);
+	//! Show/hide the button that enable/disable the meteor showers plugin.
+	void setShowEnableButton(const bool& show);
+
+	//! Show/hide the button that opens the search dialog.
+	void setShowSearchButton(const bool& show);
 
 	//! Enable/disable radiant marker.
 	void setEnableMarker(const bool& b);
@@ -228,9 +236,10 @@ private:
 	bool m_enablePlugin;
 	bool m_activeRadiantOnly;
 	bool m_enableAtStartup;
-	bool m_enableButtons;
 	bool m_enableLabels;
 	bool m_enableMarker;
+	bool m_showEnableButton;
+	bool m_showSearchButton;
 
 	Vec3f m_colorARG;        //! color of active radiant based on generic data
 	Vec3f m_colorARC;        //! color of active radiant based on confirmed data
