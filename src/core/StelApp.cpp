@@ -29,10 +29,10 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
-#include "MeteorMgr.hpp"
 #include "LabelMgr.hpp"
-#include "StarMgr.hpp"
 #include "SolarSystem.hpp"
+#include "SporadicMeteorMgr.hpp"
+#include "StarMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
@@ -454,8 +454,8 @@ void StelApp::init(QSettings* conf)
 	gridLines->init();
 	getModuleMgr().registerModule(gridLines);
 
-	// Meteors
-	MeteorMgr* meteors = new MeteorMgr(10, 72);
+	// Sporadic Meteors
+	SporadicMeteorMgr* meteors = new SporadicMeteorMgr(10, 72);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
