@@ -33,7 +33,8 @@
 #include "EquationOfTime.hpp"
 #include "EquationOfTimeWindow.hpp"
 
-#include "sidereal_time.h"
+//#include "sidereal_time.h"
+#include "precession.h"
 
 #include <QFontMetrics>
 #include <QSettings>
@@ -235,7 +236,10 @@ double EquationOfTime::getSolutionEquationOfTime(const double JDE) const
 	// force it to be the positive remainder, so that 0 <= angle < 360
 	alpha = std::fmod(alpha + 360., 360.);
 
-	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
+	double deltaPsi, deltaEps;
+	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
+	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*180./M_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
 	// The equation of time is always smaller 20 minutes in absolute value
 	if (qAbs(equation)>20)
 	{
