@@ -36,6 +36,30 @@ class Nebula : public StelObject
 {
 friend class NebulaMgr;
 public:
+	enum CatalogGroupFlags
+	{
+		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
+		CatIC		= 0x00000002, //!< Index Catalogue (IC)
+		CatM		= 0x00000004, //!< Messier Catalog (M)
+		CatC		= 0x00000008, //!< Caldwell Catalogue (C)
+		CatB		= 0x00000010, //!< Barnard Catalogue (B)
+		CatSh2		= 0x00000020, //!< Sharpless Catalogue (Sh 2)
+		CatLBN		= 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
+		CatLDN		= 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)
+		CatRCW		= 0x00000100, //!< A catalogue of Hα-emission regions in the southern Milky Way (RCW)
+		CatVdB		= 0x00000200, //!< Van den Bergh Catalogue of reflection nebulae (VdB)
+		CatCr		= 0x00000400, //!< Collinder Catalogue (Cr or Col)
+		CatMel		= 0x00000800, //!< Melotte Catalogue of Deep Sky Objects (Mel)
+		CatPGC		= 0x00001000, //!< HYPERLEDA. I. Catalog of galaxies (PGC)
+		CatUGC		= 0x00002000, //!< The Uppsala General Catalogue of Galaxies
+		CatCed		= 0x00004000 //!< Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
+	};
+	typedef QFlags<CatalogGroupFlags> CatalogGroup;
+	Q_FLAGS(CatalogGroup)
+
+	//! A pre-defined set of specifiers for the catalogs filter
+	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);
+
 	Nebula();
 	~Nebula();
 
@@ -172,7 +196,11 @@ private:
 	static Vec3f labelColor, circleColor, galaxyColor, brightNebulaColor, darkNebulaColor, clusterColor;
 	static float circleScale;       // Define the scaling of the hints circle
 	static bool drawHintProportional; // scale hint with nebula size?
+
+	static CatalogGroup catalogFilters;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)
 
 #endif // _NEBULA_HPP_
 

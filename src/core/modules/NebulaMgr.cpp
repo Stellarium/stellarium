@@ -124,40 +124,42 @@ void NebulaMgr::init()
 	flagConverter = conf->value("astro/flag_convert_dso_catalog", false).toBool();
 	flagDecimalCoordinates = conf->value("astro/flag_dso_decimal_coord", true).toBool();
 
-	catalogFilters = CatalogGroup(0);
+	Nebula::CatalogGroup catalogFilters = Nebula::CatalogGroup(0);
 
 	conf->beginGroup("dso_catalog_filters");
 	if (conf->value("flag_show_ngc", true).toBool())
-		catalogFilters	|= CatNGC;
+		catalogFilters	|= Nebula::CatNGC;
 	if (conf->value("flag_show_ic", true).toBool())
-		catalogFilters	|= CatIC;
+		catalogFilters	|= Nebula::CatIC;
 	if (conf->value("flag_show_m", true).toBool())
-		catalogFilters	|= CatM;
+		catalogFilters	|= Nebula::CatM;
 	if (conf->value("flag_show_c", false).toBool())
-		catalogFilters	|= CatC;
+		catalogFilters	|= Nebula::CatC;
 	if (conf->value("flag_show_b", false).toBool())
-		catalogFilters	|= CatB;
+		catalogFilters	|= Nebula::CatB;
 	if (conf->value("flag_show_sh2", false).toBool())
-		catalogFilters	|= CatSh2;
+		catalogFilters	|= Nebula::CatSh2;
 	if (conf->value("flag_show_vdb", false).toBool())
-		catalogFilters	|= CatVdB;
+		catalogFilters	|= Nebula::CatVdB;
 	if (conf->value("flag_show_lbn", false).toBool())
-		catalogFilters	|= CatLBN;
+		catalogFilters	|= Nebula::CatLBN;
 	if (conf->value("flag_show_ldn", false).toBool())
-		catalogFilters	|= CatLDN;
+		catalogFilters	|= Nebula::CatLDN;
 	if (conf->value("flag_show_rcw", false).toBool())
-		catalogFilters	|= CatRCW;
+		catalogFilters	|= Nebula::CatRCW;
 	if (conf->value("flag_show_cr", false).toBool())
-		catalogFilters	|= CatCr;
+		catalogFilters	|= Nebula::CatCr;
 	if (conf->value("flag_show_mel", false).toBool())
-		catalogFilters	|= CatMel;
+		catalogFilters	|= Nebula::CatMel;
 	if (conf->value("flag_show_pgc", false).toBool())
-		catalogFilters	|= CatPGC;
+		catalogFilters	|= Nebula::CatPGC;
 	if (conf->value("flag_show_ced", false).toBool())
-		catalogFilters	|= CatCed;
+		catalogFilters	|= Nebula::CatCed;
 	if (conf->value("flag_show_ugc", false).toBool())
-		catalogFilters	|= CatUGC;
+		catalogFilters	|= Nebula::CatUGC;
 	conf->endGroup();
+
+	setCatalogFilters(catalogFilters);
 
 	// TODO: mechanism to specify which sets get loaded at start time.
 	// candidate methods:
@@ -212,9 +214,9 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
-void NebulaMgr::setCatalogFilters(const CatalogGroup &cflags)
+void NebulaMgr::setCatalogFilters(const Nebula::CatalogGroup &cflags)
 {
-	catalogFilters = cflags;
+	Nebula::catalogFilters = cflags;
 
 	dsoArray.clear();
 	dsoIndex.clear();
@@ -805,35 +807,36 @@ bool NebulaMgr::loadDSOCatalog(const QString &filename)
 bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
 {
 	bool r = false;
-	if ((catalogFilters&CatM) && (n->M_nb>0))
+	Nebula::CatalogGroup catalogFilters = getCatalogFilters();
+	if ((catalogFilters&Nebula::CatM) && (n->M_nb>0))
 		r = true;
-	else if ((catalogFilters&CatC) && (n->C_nb>0))
+	else if ((catalogFilters&Nebula::CatC) && (n->C_nb>0))
 		r = true;
-	else if ((catalogFilters&CatNGC) && (n->NGC_nb>0))
+	else if ((catalogFilters&Nebula::CatNGC) && (n->NGC_nb>0))
 		r = true;
-	else if ((catalogFilters&CatIC) && (n->IC_nb>0))
+	else if ((catalogFilters&Nebula::CatIC) && (n->IC_nb>0))
 		r = true;
-	else if ((catalogFilters&CatB) && (n->B_nb>0))
+	else if ((catalogFilters&Nebula::CatB) && (n->B_nb>0))
 		r = true;
-	else if ((catalogFilters&CatSh2) && (n->Sh2_nb>0))
+	else if ((catalogFilters&Nebula::CatSh2) && (n->Sh2_nb>0))
 		r = true;
-	else if ((catalogFilters&CatVdB) && (n->VdB_nb>0))
+	else if ((catalogFilters&Nebula::CatVdB) && (n->VdB_nb>0))
 		r = true;
-	else if ((catalogFilters&CatRCW) && (n->RCW_nb>0))
+	else if ((catalogFilters&Nebula::CatRCW) && (n->RCW_nb>0))
 		r = true;
-	else if ((catalogFilters&CatLDN) && (n->LDN_nb>0))
+	else if ((catalogFilters&Nebula::CatLDN) && (n->LDN_nb>0))
 		r = true;
-	else if ((catalogFilters&CatLBN) && (n->LBN_nb>0))
+	else if ((catalogFilters&Nebula::CatLBN) && (n->LBN_nb>0))
 		r = true;
-	else if ((catalogFilters&CatCr) && (n->Cr_nb>0))
+	else if ((catalogFilters&Nebula::CatCr) && (n->Cr_nb>0))
 		r = true;
-	else if ((catalogFilters&CatMel) && (n->Mel_nb>0))
+	else if ((catalogFilters&Nebula::CatMel) && (n->Mel_nb>0))
 		r = true;
-	else if ((catalogFilters&CatPGC) && (n->PGC_nb>0))
+	else if ((catalogFilters&Nebula::CatPGC) && (n->PGC_nb>0))
 		r = true;
-	else if ((catalogFilters&CatUGC) && (n->UGC_nb>0))
+	else if ((catalogFilters&Nebula::CatUGC) && (n->UGC_nb>0))
 		r = true;
-	else if ((catalogFilters&CatCed) && !(n->Ced_nb.isEmpty()))
+	else if ((catalogFilters&Nebula::CatCed) && !(n->Ced_nb.isEmpty()))
 		r = true;
 
 	// TODO: Introduce objects without ID from current catalogs (such LMC)
