@@ -2018,8 +2018,12 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					}
 					else if (n->NGC_nb>0)
 						result << QString("NGC %1").arg(n->NGC_nb);
-					else
+					else if (n->IC_nb>0)
 						result << QString("IC %1").arg(n->IC_nb);
+					else if (n->M_nb>0)
+						result << QString("M %1").arg(n->M_nb);
+					else if (n->C_nb>0)
+						result << QString("C %1").arg(n->C_nb);
 
 				}
 			}
@@ -2094,8 +2098,26 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					}
 					else if (n->NGC_nb>0)
 						result << QString("NGC %1").arg(n->NGC_nb);
-					else
+					else if (n->IC_nb>0)
 						result << QString("IC %1").arg(n->IC_nb);
+					else if (n->M_nb>0)
+						result << QString("M %1").arg(n->M_nb);
+					else if (n->C_nb>0)
+						result << QString("C %1").arg(n->C_nb);
+					else if (n->B_nb>0)
+						result << QString("B %1").arg(n->B_nb);
+					else if (n->Sh2_nb>0)
+						result << QString("Sh 2-%1").arg(n->Sh2_nb);
+					else if (n->VdB_nb>0)
+						result << QString("VdB %1").arg(n->VdB_nb);
+					else if (n->RCW_nb>0)
+						result << QString("RCW %1").arg(n->RCW_nb);
+					else if (n->LBN_nb>0)
+						result << QString("LBN %1").arg(n->LBN_nb);
+					else if (n->Cr_nb>0)
+						result << QString("Cr %1").arg(n->Cr_nb);
+					else if (n->Mel_nb>0)
+						result << QString("Mel %1").arg(n->Mel_nb);
 
 				}
 			}
