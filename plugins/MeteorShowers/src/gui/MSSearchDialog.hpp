@@ -51,10 +51,6 @@ public:
 	//! Destructor
 	~MSSearchDialog();
 
-	//! Refresh dates
-	//! from Jan 1 to Dec 31 for the current sky year
-	void refreshRangeDates();
-
 protected:
 	//! Initialize the dialog and connect the signals/slots
 	void createDialogContent();
@@ -71,6 +67,10 @@ private slots:
 
 	//! If an event is selected by user, the current date change and the object is selected.
 	void selectEvent(const QModelIndex &modelIndex);
+
+	//! Refresh dates
+	//! from Jan 1 to Dec 31 for the current sky year
+	void refreshRangeDates();
 
 private:
 	MeteorShowersMgr* m_mgr;

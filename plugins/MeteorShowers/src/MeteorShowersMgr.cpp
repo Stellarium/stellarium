@@ -274,12 +274,6 @@ void MeteorShowersMgr::update(double deltaTime)
 		return;
 	}
 
-	// is GUI visible? refresh dates
-	if (m_searchDialog->visible())
-	{
-		m_searchDialog->refreshRangeDates();
-	}
-
 	m_meteorShowers->update(deltaTime);
 }
 

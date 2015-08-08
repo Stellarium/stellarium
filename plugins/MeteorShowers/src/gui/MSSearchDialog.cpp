@@ -68,6 +68,8 @@ void MSSearchDialog::createDialogContent()
 	installKineticScrolling(addscroll);
 #endif
 
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(refreshRangeDates()));
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
