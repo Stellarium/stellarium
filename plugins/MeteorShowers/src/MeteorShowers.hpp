@@ -52,10 +52,10 @@ public:
 
 	//! Update
 	//! @param deltaTime the time increment in seconds since the last call.
-	void update(StelCore *core, double deltaTime);
+	virtual void update(StelCore *core, double deltaTime);
 
 	//! Draw
-	void draw(StelCore* core);
+	virtual void draw(StelCore* core);
 
 	//! Loads all meteor showers contained in a QVariantMap.
 	//! @param map
