@@ -195,9 +195,9 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	float bolideSize;
 	calculateThickness(core, thickness, bolideSize);
 
-	drawTrain(core, sPainter, thickness);
+	drawTrain(sPainter, thickness);
 
-	drawBolide(core, sPainter, bolideSize);
+	drawBolide(sPainter, bolideSize);
 }
 
 Vec4f Meteor::getColorFromName(QString colorName)
@@ -333,7 +333,7 @@ void Meteor::calculateThickness(const StelCore* core, float& thickness, float& b
 	bolideSize = thickness*3;
 }
 
-void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float& bolideSize)
+void Meteor::drawBolide(StelPainter& sPainter, const float& bolideSize)
 {
 	if (!bolideSize || !m_bolideTexture || m_position[2] > VISIBLE_RADIUS)
 	{
@@ -380,7 +380,7 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const float
 	sPainter.enableClientStates(false);
 }
 
-void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const float& thickness)
+void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 {
 	if (m_segments != m_lineColorVector.size() || 2*m_segments != m_trainColorVector.size())
 	{
