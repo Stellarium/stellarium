@@ -216,7 +216,8 @@ private:
 	static StelTextureSP texOpenClusterWithNebulosity; // Type 7
 	static float hintsBrightness;
 
-	static Vec3f labelColor, circleColor, galaxyColor, brightNebulaColor, darkNebulaColor, clusterColor;
+	static Vec3f labelColor, circleColor, galaxyColor, radioGalaxyColor, activeGalaxyColor, interactingGalaxyColor,
+		     brightNebulaColor, darkNebulaColor, hydrogenRegionColor, supernovaRemnantColor, clusterColor;
 	static float circleScale;       // Define the scaling of the hints circle
 	static bool drawHintProportional; // scale hint with nebula size?
 
