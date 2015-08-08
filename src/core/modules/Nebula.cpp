@@ -667,7 +667,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				r = qc_("loose towards the center", "Shapley–Sawyer Concentration Class");
 				break;
 			case 9:
-				r = qc_("loose", "Shapley–Sawyer Concentration Class");
+				r = qc_("loose concentration", "Shapley–Sawyer Concentration Class");
 				break;
 			case 10:
 				r = qc_("very loose towards the center", "Shapley–Sawyer Concentration Class");
@@ -901,7 +901,7 @@ QString Nebula::getTypeString(void) const
 			wsType = q_("open star cluster");
 			break;
 		case NebGc:
-			wsType = q_("globular cluster");
+			wsType = q_("globular star cluster");
 			break;
 		case NebN:
 			wsType = q_("nebula");

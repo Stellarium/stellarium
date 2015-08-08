@@ -236,7 +236,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1189,7 +1189,7 @@
                 <string>Index Catalogue of Nebulae and Clusters of Stars</string>
                </property>
                <property name="text">
-                <string>IC</string>
+                <string notr="true">IC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1202,7 +1202,7 @@
                 <string>New General Catalogue of Nebulae and Clusters of Stars</string>
                </property>
                <property name="text">
-                <string>NGC</string>
+                <string notr="true">NGC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1215,7 +1215,7 @@
                 <string>Lynds' Catalogue of Bright Nebulae (Lynds, 1965)</string>
                </property>
                <property name="text">
-                <string>LBN</string>
+                <string notr="true">LBN</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1228,7 +1228,7 @@
                 <string>Messier Catalogue</string>
                </property>
                <property name="text">
-                <string>M</string>
+                <string notr="true">M</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1241,7 +1241,7 @@
                 <string>Caldwell Catalogue</string>
                </property>
                <property name="text">
-                <string>C</string>
+                <string notr="true">C</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1254,7 +1254,7 @@
                 <string>Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)</string>
                </property>
                <property name="text">
-                <string>B</string>
+                <string notr="true">B</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1267,7 +1267,7 @@
                 <string>Catalogue of HII Regions (Sharpless, 1959)</string>
                </property>
                <property name="text">
-                <string>Sh 2</string>
+                <string notr="true">Sh 2</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1280,7 +1280,7 @@
                 <string>Catalogue of Reflection Nebulae (Van den Bergh, 1966)</string>
                </property>
                <property name="text">
-                <string>VdB</string>
+                <string notr="true">VdB</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1293,7 +1293,7 @@
                 <string>A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)</string>
                </property>
                <property name="text">
-                <string>RCW</string>
+                <string notr="true">RCW</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1306,7 +1306,7 @@
                 <string>Lynds' Catalogue of Dark Nebulae (Lynds, 1962)</string>
                </property>
                <property name="text">
-                <string>LDN</string>
+                <string notr="true">LDN</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1319,7 +1319,7 @@
                 <string>Catalog of Open Galactic Clusters (Collinder, 1931)</string>
                </property>
                <property name="text">
-                <string>Cr</string>
+                <string notr="true">Cr</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1332,7 +1332,7 @@
                 <string>A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, 1915)</string>
                </property>
                <property name="text">
-                <string>Mel</string>
+                <string notr="true">Mel</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1345,7 +1345,7 @@
                 <string>Catalog of galaxies</string>
                </property>
                <property name="text">
-                <string>PGC</string>
+                <string notr="true">PGC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1358,7 +1358,7 @@
                 <string>The Uppsala General Catalogue of Galaxies</string>
                </property>
                <property name="text">
-                <string>UGC</string>
+                <string notr="true">UGC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1371,7 +1371,7 @@
                 <string>Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)</string>
                </property>
                <property name="text">
-                <string>Ced</string>
+                <string notr="true">Ced</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
