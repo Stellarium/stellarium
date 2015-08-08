@@ -51,12 +51,21 @@ float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
 Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
+Vec3f Nebula::radioGalaxyColor = Vec3f(0.3,0.3,0.3);
+Vec3f Nebula::activeGalaxyColor = Vec3f(0.8,0.8,0.1);
+Vec3f Nebula::interactingGalaxyColor = Vec3f(0.8,0.8,0.1);
 Vec3f Nebula::brightNebulaColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
+Vec3f Nebula::hydrogenRegionColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::supernovaRemnantColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
+bool Nebula::flagUsageTypeFilter = false;
+Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
+Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 
 Nebula::Nebula()
-	: M_nb(0)
+	: DSO_nb(0)
+	, M_nb(0)
 	, NGC_nb(0)
 	, IC_nb(0)
 	, C_nb(0)
@@ -68,16 +77,15 @@ Nebula::Nebula()
 	, LBN_nb(0)
 	, Cr_nb(0)
 	, Mel_nb(0)
-	, mag(99.)
-	, nType()
-	, formType()
-	, structureType()
-	, brightnessType()
-	, rcwBrightnessType()
+	, PGC_nb(0)
+	, UGC_nb(0)
+	, Ced_nb()
+	, bMag(99.)
+	, vMag(99.)
+	, nType()	
 {
 	nameI18 = "";
-	angularSize = -1;
-	brightnessClass = -1;
+	angularSize = -1;	
 }
 
 Nebula::~Nebula()
@@ -92,54 +100,66 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
 
-	if (nameI18!="" && flags&Name)
+	if (!nameI18.isEmpty() && flags&Name)
 	{
 		oss << getNameI18n();
 	}
 
 	if (flags&CatalogNumber)
 	{
-		if (nameI18!="" && flags&Name)
-			oss << " (";
+		if (!nameI18.isEmpty() && flags&Name)
+			oss << "<br>";
 
 		QStringList catIds;
-		if ((M_nb > 0) && (M_nb < 111))
+		if (M_nb > 0)
 			catIds << QString("M %1").arg(M_nb);
-		if ((C_nb > 0) && (C_nb < 110))
+		if (C_nb > 0)
 			catIds << QString("C %1").arg(C_nb);
 		if (NGC_nb > 0)
 			catIds << QString("NGC %1").arg(NGC_nb);
 		if (IC_nb > 0)
 			catIds << QString("IC %1").arg(IC_nb);		
-		if ((B_nb > 0) && (B_nb <= 370))
+		if (B_nb > 0)
 			catIds << QString("B %1").arg(B_nb);
-		if ((Sh2_nb > 0) && (Sh2_nb <= 313))
+		if (Sh2_nb > 0)
 			catIds << QString("Sh 2-%1").arg(Sh2_nb);
-		if ((VdB_nb > 0) && (VdB_nb <= 158))
+		if (VdB_nb > 0)
 			catIds << QString("VdB %1").arg(VdB_nb);
-		if ((RCW_nb > 0) && (RCW_nb <= 182))
+		if (RCW_nb > 0)
 			catIds << QString("RCW %1").arg(RCW_nb);
-		if ((LDN_nb > 0) && (LDN_nb <= 1802))
+		if (LDN_nb > 0)
 			catIds << QString("LDN %1").arg(LDN_nb);
-		if ((LBN_nb > 0) && (LBN_nb <= 1125))
+		if (LBN_nb > 0)
 			catIds << QString("LBN %1").arg(LBN_nb);
-		if ((Cr_nb > 0) && (Cr_nb <= 471))
+		if (Cr_nb > 0)
 			catIds << QString("Cr %1").arg(Cr_nb);
-		if ((Mel_nb > 0) && (Mel_nb <= 245))
+		if (Mel_nb > 0)
 			catIds << QString("Mel %1").arg(Mel_nb);
+		if (PGC_nb > 0)
+			catIds << QString("PGC %1").arg(PGC_nb);
+		if (UGC_nb > 0)
+			catIds << QString("UGC %1").arg(UGC_nb);
+		if (!Ced_nb.isEmpty())
+			catIds << QString("Ced %1").arg(Ced_nb);		
 		oss << catIds.join(" - ");
 
-		if (nameI18!="" && flags&Name)
-			oss << ")";
+		//if (!nameI18.isEmpty() && flags&Name)
+		//	oss << ")";
 	}
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
 
 	if (flags&ObjectType)
-		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
+	{
+		QString mt = getMorphologicalTypeString();
+		if (mt.isEmpty())
+			oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
+		else
+			oss << q_("Type: <b>%1</b> (%2)").arg(getTypeString()).arg(mt) << "<br>";
+	}
 
-	if (mag < 50 && flags&Magnitude)
+	if (vMag < 50.f && flags&Magnitude)
 	{
 		if (nType == NebDn)
 		{
@@ -154,7 +174,18 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 		}
 	}
-	if (nType != NebDn && mag < 50 && flags&Extra)
+	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
+	{
+		oss << q_("Magnitude: <b>%1</b>").arg(bMag, 0, 'f', 2)
+		    << q_(" (Photometric system: B)")
+		    << "<br>";
+	}
+	if (flags&Extra)
+	{
+		if (vMag < 50 && bMag < 50)
+			oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(bMag-vMag, 'f', 2)) << "<br>";
+	}
+	if (nType != NebDn && vMag < 50 && flags&Extra)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
@@ -168,28 +199,78 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
 		}
 	}
-	if (flags&Extra)
-	{
-        if (nType==NebHII) // Sharpless and LBN
-		{
-			if (LBN_nb!=0)
-				oss << q_("Brightness: %1").arg(brightnessClass) << "<br>";
-			else
-			{
-				oss << qc_("Form: %1","HII Region").arg(getHIIFormTypeString()) << "<br>";
-				oss << qc_("Structure: %1","HII Region").arg(getHIIStructureTypeString()) << "<br>";
-				oss << q_("Brightness: %1").arg(getHIIBrightnessTypeString()) << "<br>";
-			}
-		}
-		if (nType==NebHa)
-		{
-			oss << q_("Brightness: %1").arg(getHaBrightnessTypeString()) << "<br>";
-		}
-	}
+
 	oss << getPositionInfoString(core, flags);
 
 	if (angularSize>0 && flags&Size)
-		oss << q_("Size: %1").arg(StelUtils::radToDmsStr(angularSize*M_PI/180.)) << "<br>";
+	{
+		if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
+			oss << q_("Size: %1").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br>";
+		else
+		{
+			oss << q_("Size: %1 x %2").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)).arg(StelUtils::radToDmsStr(minorAxisSize*M_PI/180.)) << "<br>";
+			if (orientationAngle>0.f)
+				oss << q_("Orientation angle: %1%2").arg(orientationAngle).arg(QChar(0x00B0)) << "<br>";
+		}
+	}
+
+	if (flags&Extra)
+	{
+		if (redshift<99.f)
+		{
+			QString z;
+			if (redshiftErr>0.f)
+				z = QString("%1%2%3").arg(QString::number(redshift, 'f', 6)).arg(QChar(0x00B1)).arg(QString::number(redshiftErr, 'f', 6));
+			else
+				z = QString("%1").arg(QString::number(redshift, 'f', 6));
+
+			oss << q_("Redshift: %1").arg(z) << "<br>";
+		}
+		if (parallax!=0.f)
+		{
+			QString px, dx;
+			// distance in light years from parallax
+			float distance = 3.162e-5/(qAbs(parallax)*4.848e-9);
+			float distanceErr = 0.f;
+
+			if (parallaxErr>0.f)
+			{
+				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
+				distanceErr = 3.162e-5/(qAbs(parallaxErr)*4.848e-9);
+			}
+			else
+				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
+
+			if (distanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 2));
+			else
+				dx = QString("%1").arg(QString::number(distance, 'f', 2));
+
+			oss << q_("Parallax: %1\"").arg(px) << "<br>";
+			if (oDistance==0.f)
+				oss << q_("Distance: %1 ly").arg(dx) << "<br>";
+		}
+
+		if (oDistance>0.f)
+		{
+			QString dx, du;
+			if (oDistanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 2));
+			else
+				dx = QString("%1").arg(QString::number(oDistance, 'f', 2));
+
+			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
+				du = q_("Mpc");
+			else
+				du = q_("kpc");
+
+			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
+		}
+
+		if (!getMorphologicalTypeDescription().isEmpty())
+			oss << q_("Morphological description: ") << getMorphologicalTypeDescription() << ".<br>";
+
+	}
 
 	postProcessInfoString(str, flags);
 
@@ -199,9 +280,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 float Nebula::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
-	return mag;
+	return vMag;
 }
-
 
 float Nebula::getSelectPriority(const StelCore* core) const
 {
@@ -213,9 +293,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	// make very easy to select if labeled
 	float lim=getVMagnitude(core);
 	if (nType==NebDn)
-        lim=15.0f - mag - 2.0f*qMin(1.5f, angularSize); // Note that "mag" field is used for opacity in this catalog!
-    else if (nType==NebHII) // Sharpless and LBN
-        lim=10.0f - 2.0f*qMin(1.5f, angularSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
+		lim=15.0f - vMag - 2.0f*qMin(1.5f, angularSize); // Note that "mag" field is used for opacity in this catalog!
+	else if (nType==NebHII) // Sharpless and LBN
+		lim=10.0f - 2.0f*qMin(1.5f, angularSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
 	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
@@ -252,12 +332,9 @@ float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
-	float lim = mag;
+	float lim = qMin(vMag, bMag);
 	if (lim > 50) lim = 15.f;
 
-	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
-	if (getEnglishName().contains("Pleiades"))
-		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
 	if (nType==NebDn)
 	{
@@ -265,21 +342,14 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		// 9-(opac-5)-2*(angularSize-0.5)
 		// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
 		// The qMin() maximized the visibility gain for large objects.
-		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*qMin(angularSize, 1.5f);
+		if (angularSize>0 && vMag<50)
+			lim = 15.0f - vMag - 2.0f*qMin(angularSize, 1.5f);
 		else if (B_nb>0)
 			lim = 9.0f;
 		else
 			lim= 12.0f; // GZ I assume LDN objects are rather elusive.
 	}
-    else if (LBN_nb>0) // attempt to balance LBN brightness classes
-    {
-        if (brightnessClass==0)
-            lim=10.0f;
-        else
-            lim=brightnessClass+7.0f;
-    }
-    else if (nType==NebHII || nType==NebHa) // NebHII={Sharpless, LBN}, NebHa={RCW}
+	else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
 	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 		lim=9.0f;
 	}
@@ -303,7 +373,25 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			Nebula::texGalaxy->bind();
 			color=galaxyColor;
 			break;
+		case NebIGx:
+			Nebula::texGalaxy->bind();
+			color=interactingGalaxyColor;
+			break;
+		case NebAGx:
+			Nebula::texGalaxy->bind();
+			color=activeGalaxyColor;
+			break;
+		case NebQSO:
+			Nebula::texGalaxy->bind();			
+			break;
+		case NebRGx:
+			Nebula::texGalaxy->bind();
+			color=radioGalaxyColor;
+			break;
 		case NebOc:
+		case NebSA:
+		case NebSC:
+		case NebCl:
 			Nebula::texOpenCluster->bind();
 			color=clusterColor;
 			break;
@@ -313,8 +401,16 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			break;
 		case NebN:
 		case NebHII:
-		case NebRn:
-		case NebHa:
+			Nebula::texDiffuseNebula->bind();
+			color=hydrogenRegionColor;
+			break;
+		case NebRn:		
+		case NebSNR:
+			Nebula::texDiffuseNebula->bind();
+			color=supernovaRemnantColor;
+			break;
+		case NebBn:
+		case NebEn:
 			Nebula::texDiffuseNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -333,7 +429,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		default:
 			Nebula::texCircle->bind();
 	}
+
 	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
+	if (!objectInDisplayedType())
+		col = Vec3f(0.f,0.f,0.f);
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
 	if (drawHintProportional)
@@ -347,25 +446,22 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
-	float lim = mag;
+	float lim = qMin(vMag, bMag);
 	if (lim > 50) lim = 15.f;
 
-	// temporary workaround of this bug: https://bugs.launchpad.net/stellarium/+bug/1115035 --AW
-	if (getEnglishName().contains("Pleiades"))
-		lim = 5.f;
 	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
 	if (nType==NebDn)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
-		if (angularSize>0 && mag<50)
-			lim = 15.0f - mag - 2.0f*qMin(angularSize, 2.5f);
+		if (angularSize>0 && vMag<50)
+			lim = 15.0f - vMag - 2.0f*qMin(angularSize, 2.5f);
 		else if (B_nb>0)
 			lim = 9.0f;
 		else
 			lim= 12.0f; // GZ I assume some LDN objects are rather elusive.
 	}
-	else if (nType==NebHII || nType==NebHa)
+	else if (nType==NebHII)
 		lim=9.0f;
 
 	if (lim>maxMagLabel)
@@ -377,357 +473,404 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		return;
 
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);
+	if (objectInDisplayedType())
+		sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
+	else
+		sPainter.setColor(col[0], col[1], col[2], 0.f);
 
-	sPainter.setColor(col[0], col[1], col[2], hintsBrightness);
 	float size = getAngularSize(NULL)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
-	QString str;
-	if (!nameI18.isEmpty())
-		str = getNameI18n();
-	else
+
+	QString str = getNameI18n();
+	if (str.isEmpty())
 	{
-		// On screen label: one only, priority as given here. NGC should win over Sharpless. (GZ)
-		if (M_nb > 0)
+		// On screen label: one only, priority as given here.
+		if (catalogFilters&CatM && M_nb>0)
 			str = QString("M %1").arg(M_nb);
-		else if (C_nb > 0)
+		else if (catalogFilters&CatC && C_nb>0)
 			str = QString("C %1").arg(C_nb);
-		else if (NGC_nb > 0)
+		else if (catalogFilters&CatNGC && NGC_nb>0)
 			str = QString("NGC %1").arg(NGC_nb);
-		else if (IC_nb > 0)
+		else if (catalogFilters&CatIC && IC_nb>0)
 			str = QString("IC %1").arg(IC_nb);
-		else if (B_nb > 0)
-			str = QString("B %1").arg(B_nb);		
-		else if (Sh2_nb > 0)
+		else if (catalogFilters&CatB && B_nb>0)
+			str = QString("B %1").arg(B_nb);
+		else if (catalogFilters&CatSh2 && Sh2_nb>0)
 			str = QString("Sh 2-%1").arg(Sh2_nb);
-		else if (VdB_nb > 0)
+		else if (catalogFilters&CatVdB && VdB_nb>0)
 			str = QString("VdB %1").arg(VdB_nb);
-		else if (RCW_nb > 0)
+		else if (catalogFilters&CatRCW && RCW_nb>0)
 			str = QString("RCW %1").arg(RCW_nb);
-		else if (LDN_nb > 0)
+		else if (catalogFilters&CatLDN && LDN_nb>0)
 			str = QString("LDN %1").arg(LDN_nb);
-		else if (LBN_nb > 0)
+		else if (catalogFilters&CatLBN && LBN_nb > 0)
 			str = QString("LBN %1").arg(LBN_nb);
-		else if (Cr_nb > 0)
+		else if (catalogFilters&CatCr && Cr_nb > 0)
 			str = QString("Cr %1").arg(Cr_nb);
-		else if (Mel_nb > 0)
+		else if (catalogFilters&CatMel && Mel_nb > 0)
 			str = QString("Mel %1").arg(Mel_nb);
+		else if (catalogFilters&CatPGC && PGC_nb > 0)
+			str = QString("PGC %1").arg(PGC_nb);
+		else if (catalogFilters&CatUGC && UGC_nb > 0)
+			str = QString("UGC %1").arg(UGC_nb);
+		else if (catalogFilters&CatCed && !Ced_nb.isEmpty())
+			str = QString("Ced %1").arg(Ced_nb);
 	}
 
 	sPainter.drawText(XY[0]+shift, XY[1]+shift, str, 0, 0, 0, false);
 }
 
-
-void Nebula::readNGC(QDataStream& in)
+void Nebula::readDSO(QDataStream &in)
 {
-	bool isIc;
-	int nb;
-	float ra, dec;
-	unsigned int type;
-	in >> isIc >> nb >> ra >> dec >> mag >> angularSize >> type;
-	if (isIc)
-	{
-		IC_nb = nb;
-	}
+	float	ra, dec;
+	unsigned int oType;
+
+	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
+		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
+		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb;
+
+	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
+		angularSize = majorAxisSize*minorAxisSize;
 	else
-	{
-		NGC_nb = nb;
-	}
+		angularSize = majorAxisSize;
+
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-	nType = (Nebula::NebulaType)type;
-	//if (type >= 5) {
-	//	qDebug()<< (isIc?"IC" : "NGC") << nb << " type " << type ;
-	//}
-	// This confirms there are currently no dark nebulae in the NGC list.
-	Q_ASSERT(type!=5);
+	nType = (Nebula::NebulaType)oType;
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
 
-#if 0
-QFile filess("filess.dat");
-QDataStream out;
-out.setVersion(QDataStream::Qt_4_5);
-bool Nebula::readNGC(char *recordstr)
+bool Nebula::objectInDisplayedType()
 {
-	int rahr;
-	float ramin;
-	int dedeg;
-	float demin;
-	int nb;
+	if (!flagUsageTypeFilter)
+		return true;
 
-	sscanf(&recordstr[1],"%d",&nb);
-
-	if (recordstr[0] == 'I')
+	bool r = false;
+	int cntype = -1;
+	switch (nType)
 	{
-		IC_nb = nb;
+		case NebGx:
+			cntype = 0; // Galaxies
+			break;
+		case NebAGx:
+		case NebRGx:
+		case NebQSO:
+			cntype = 1; // Active Galaxies
+			break;
+		case NebIGx:
+			cntype = 2; // Interacting Galaxies
+			break;
+		case NebOc:
+		case NebGc:
+		case NebCl:
+		case NebSA:
+		case NebSC:
+			cntype = 3; // Star Clusters
+			break;
+		case NebHII:
+		case NebISM:
+			cntype = 4; // Hydrogen regions (include interstellar matter)
+			break;
+		case NebN:
+		case NebBn:
+		case NebEn:
+		case NebRn:
+			cntype = 5; // Bright Nebulae
+			break;
+		case NebDn:
+			cntype = 6; // Dark Nebulae
+			break;
+		case NebPn:
+			cntype = 7; // Planetary Nebulae
+			break;
+		case NebSNR:
+			cntype = 8; // Supernova Remnants
+			break;
+		case NebCn:
+			cntype = 9;
+			break;
+		default:
+			cntype = 10;
+			break;
 	}
+	if (typeFilters&TypeGalaxies && cntype==0)
+		r = true;
+	else if (typeFilters&TypeActiveGalaxies && cntype==1)
+		r = true;
+	else if (typeFilters&TypeInteractingGalaxies && cntype==2)
+		r = true;
+	else if (typeFilters&TypeStarClusters && cntype==3)
+		r = true;
+	else if (typeFilters&TypeHydrogenRegions && cntype==4)
+		r = true;
+	else if (typeFilters&TypeBrightNebulae && cntype==5)
+		r = true;
+	else if (typeFilters&TypeDarkNebulae && cntype==6)
+		r = true;
+	else if (typeFilters&TypePlanetaryNebulae && cntype==7)
+		r = true;
+	else if (typeFilters&TypeSupernovaRemnants && cntype==8)
+		r = true;
+	else if (typeFilters&TypeStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
+		r = true;
+	else if (typeFilters&TypeOther && cntype==10)
+		r = true;
+
+	return r;
+}
+
+QString Nebula::getMorphologicalTypeString(void) const
+{
+	return mTypeString;
+}
+
+QString Nebula::getMorphologicalTypeDescription(void) const
+{
+	QString m, r = "";
+
+	QRegExp GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
+	int idx = GlClRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
 	else
+		m = mTypeString;
+
+	QStringList glclass;
+	glclass << "I" << "II" << "III" << "IV" << "V" << "VI" << "VII" << "VIII" << "IX" << "X" << "XI" << "XII";
+
+	if (GlClRx.exactMatch(m)) // Globular Clusters
 	{
-		NGC_nb = nb;
+		switch(glclass.indexOf(GlClRx.capturedTexts().at(1).trimmed()))
+		{
+			case 0:
+				r = qc_("high concentration toward the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 1:
+				r = qc_("dense central concentration", "Shapley–Sawyer Concentration Class");
+				break;
+			case 2:
+				r = qc_("strong inner core of stars", "Shapley–Sawyer Concentration Class");
+				break;
+			case 3:
+				r = qc_("intermediate rich concentrations", "Shapley–Sawyer Concentration Class");
+				break;
+			case 4:
+			case 5:
+			case 6:
+				r = qc_("intermediate concentrations", "Shapley–Sawyer Concentration Class");
+				break;
+			case 7:
+				r = qc_("rather loosely concentrated towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 8:
+				r = qc_("loose towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 9:
+				r = qc_("loose", "Shapley–Sawyer Concentration Class");
+				break;
+			case 10:
+				r = qc_("very loose towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 11:
+				r = qc_("almost no concentration towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			default:
+				r = qc_("undocumented concentration class", "Shapley–Sawyer Concentration Class");
+				break;
+		}
 	}
 
-	sscanf(&recordstr[12],"%d %f",&rahr, &ramin);
-	sscanf(&recordstr[22],"%d %f",&dedeg, &demin);
-	float RaRad = (double)rahr+ramin/60;
-	float DecRad = (float)dedeg+demin/60;
-	if (recordstr[21] == '-') DecRad *= -1.;
+	QRegExp OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*)\\.*");
+	idx = OClRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
+	else
+		m = mTypeString;
 
-	RaRad*=M_PI/12.;     // Convert from hours to rad
-	DecRad*=M_PI/180.;    // Convert from deg to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-
-	sscanf(&recordstr[47],"%f",&mag);
-	if (mag < 1) mag = 99;
-
-	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
-	float size;
-	sscanf(&recordstr[40],"%f",&size);
-
-	angularSize = size/60;
-	if (angularSize<0)
-		angularSize=0;
-
-	// this is a huge performance drag if called every frame, so cache here
-	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NebGx;}
-	else if (!strncmp(&recordstr[8],"OC",2)) { nType = NebOc;}
-	else if (!strncmp(&recordstr[8],"Gb",2)) { nType = NebGc;}
-	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NebN;}
-	else if (!strncmp(&recordstr[8],"Pl",2)) { nType = NebPn;}
-	else if (!strncmp(&recordstr[8],"  ",2)) { return false;}
-	else if (!strncmp(&recordstr[8]," -",2)) { return false;}
-	else if (!strncmp(&recordstr[8]," *",2)) { return false;}
-	else if (!strncmp(&recordstr[8],"D*",2)) { return false;}
-	else if (!strncmp(&recordstr[7],"***",3)) { return false;}
-	else if (!strncmp(&recordstr[7],"C+N",3)) { nType = NebCn;}
-	else if (!strncmp(&recordstr[8]," ?",2)) { nType = NebUnknown;}
-	else { nType = NebUnknown;}
-
-	if (!filess.isOpen())
+	if (OClRx.exactMatch(m)) // Open Clusters
 	{
-		filess.open(QIODevice::WriteOnly);
-		out.setDevice(&filess);
+		QStringList occlass, ocrich, rtxt;
+		occlass << "I" << "II" << "III" << "IV";
+		ocrich << "p" << "m" << "r";
+		switch(occlass.indexOf(OClRx.capturedTexts().at(1).trimmed()))
+		{
+			case 0:
+				rtxt << qc_("strong central concentration of stars", "Trumpler's Concentration Class");
+				break;
+			case 1:
+				rtxt << qc_("little central concentration of stars", "Trumpler's Concentration Class");
+				break;
+			case 2:
+				rtxt << qc_("no noticeable concentration of stars", "Trumpler's Concentration Class");
+				break;
+			case 3:
+				rtxt << qc_("a star field condensation", "Trumpler's Concentration Class");
+				break;
+			default:
+				rtxt << qc_("undocumented concentration class", "Trumpler's Concentration Class");
+				break;
+		}
+		switch(OClRx.capturedTexts().at(2).toInt())
+		{
+			case 1:
+				rtxt << qc_("small range of brightness of members", "Trumpler's Brightness Class");
+				break;
+			case 2:
+				rtxt << qc_("medium range of brightness of members", "Trumpler's Brightness Class");
+				break;
+			case 3:
+				rtxt << qc_("large range of brightness of members", "Trumpler's Brightness Class");
+				break;
+			default:
+				rtxt << qc_("undocumented brightness class", "Trumpler's Concentration Class");
+				break;
+		}
+		switch(ocrich.indexOf(OClRx.capturedTexts().at(3).trimmed()))
+		{
+			case 0:
+				rtxt << qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class");
+				break;
+			case 1:
+				rtxt << qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class");
+				break;
+			case 2:
+				rtxt << qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class");
+				break;
+			default:
+				rtxt << qc_("undocumented number of members class", "Trumpler's Number of Members Class");
+				break;
+		}
+		if (!OClRx.capturedTexts().at(4).trimmed().isEmpty())
+			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
+
+		r = rtxt.join(",<br>");
 	}
-	out << ((bool)(recordstr[0] == 'I')) << nb << RaRad << DecRad << mag << angularSize << ((unsigned int)nType);
-	if (nb==5369 && recordstr[0] == 'I')
-		filess.close();
 
-	return true;
-}
-#endif
+	QRegExp VdBRx("\\.*(I|II|I-II|II P|P),\\s+(VBR|VB|BR|M|F|VF|:)\\.*");
+	idx = VdBRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
+	else
+		m = mTypeString;
 
-bool Nebula::readBarnard(QString record)
-{
-	// Line Format: "<B>\t<RAh>\t<RAm>\t<RAs>\t[+-]DD MM\t<size>\t<obs>\t<comment>... ..."
-	int rahr;
-	float ramin;
-	int dedeg;
-	int demin;
+	if (VdBRx.exactMatch(m)) // Reflection Nebulae
+	{
+		QStringList rnclass, rnbrightness, rtx;
+		rnclass << "I" << "II" << "I-II" << "II P" << "P";
+		rnbrightness << "VBR" << "VB" << "BR" << "M" << "F" << "VF" << ":";
+		switch(rnbrightness.indexOf(VdBRx.capturedTexts().at(2).trimmed()))
+		{
+			case 0:
+			case 1:
+				rtx << qc_("very bright", "Reflection Nebulae Brightness");
+				break;
+			case 2:
+				rtx << qc_("bright", "Reflection Nebulae Brightness");
+				break;
+			case 3:
+				rtx << qc_("moderate brightness", "Reflection Nebulae Brightness");
+				break;
+			case 4:
+				rtx << qc_("faint", "Reflection Nebulae Brightness");
+				break;
+			case 5:
+				rtx << qc_("very faint", "Reflection Nebulae Brightness");
+				break;
+			case 6:
+				rtx << qc_("uncertain brightness", "Reflection Nebulae Brightness");
+				break;
+			default:
+				rtx << qc_("undocumented brightness of reflection nebulae", "Reflection Nebulae Brightness");
+				break;
+		}
+		switch(rnclass.indexOf(VdBRx.capturedTexts().at(1).trimmed()))
+		{
+			case 0:
+				rtx << qc_("the illuminating star is embedded in the nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 1:
+				rtx << qc_("star is located outside the illuminated nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 2:
+				rtx << qc_("star is located on the corner of the illuminated nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 3:
+				rtx << qc_("star is located outside the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 4:
+				rtx << qc_("the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
+				break;
+			default:
+				rtx << qc_("undocumented reflection nebulae", "Reflection Nebulae Classification");
+				break;
+		}
+		r = rtx.join(",<br>");
+	}
 
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
 
-	//qDebug() << "Barnard: " << list.at(0) << "RA " << list.at(1) << list.at(2) << list.at(3) <<
-	//	    "Dec" << list.at(4) << "opac" << list.at(6) << "size" << list.at(5);
+	QRegExp HIIRx("\\.*(\\d+),\\s+(\\d+),\\s+(\\d+)\\.*");
+	idx = HIIRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
+	else
+		m = mTypeString;
 
-	B_nb=list.at(0).toInt();
-	rahr=list.at(1).toInt();
-	ramin=list.at(2).toInt() + list.at(3).toInt() / 60.0f;
-	float RaRad = (double)rahr+ramin/60;
+	if (HIIRx.exactMatch(m)) // HII regions
+	{
+		int form	= HIIRx.capturedTexts().at(1).toInt();
+		int structure	= HIIRx.capturedTexts().at(2).toInt();
+		int brightness	= HIIRx.capturedTexts().at(3).toInt();
+		QStringList morph;
+		switch(form)
+		{
+			case 1:
+				morph << q_("circular form");
+				break;
+			case 2:
+				morph << q_("elliptical form");
+				break;
+			case 3:
+				morph << q_("irregular form");
+				break;
+			default:
+				morph << q_("undocumented form");
+				break;
+		}
+		switch(structure)
+		{
+			case 1:
+				morph << q_("amorphous structure");
+				break;
+			case 2:
+				morph << q_("conventional structure");
+				break;
+			case 3:
+				morph << q_("filamentary structure");
+				break;
+			default:
+				morph << q_("undocumented structure");
+				break;
+		}
+		switch(brightness)
+		{
+			case 1:
+				morph << qc_("faintest", "HII region brightness");
+				break;
+			case 2:
+				morph << qc_("moderate brightness", "HII region brightness");
+				break;
+			case 3:
+				morph << qc_("brightest", "HII region brightness");
+				break;
+			default:
+				morph << q_("undocumented brightness");
+				break;
+		}
+		r = morph.join(",<br>");
+	}
 
-	QString degString=list.at(4);
-
-	dedeg=degString.mid(1,2).toInt();
-	demin=degString.mid(4,2).toInt();
-
-	float DecRad = (float)dedeg+(float)demin/60.0f;
-
-	if (degString.at(0) == '-') DecRad *= -1.f;
-
-	RaRad*=M_PI/12.f;     // Convert from hours to rad
-	DecRad*=M_PI/180.f;    // Convert from deg to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	// "mag" will receive opacity for dark nebulae.
-	QString opacityStr=list.at(6);
-
-	if (opacityStr.contains('?')) mag=99;
-	else mag=opacityStr.toFloat();
-
-	// Calc the angular size in degrees
-	float size=list.at(5).toFloat();
-	angularSize = size/60.0f;
-
-	// Barnard are dark nebulae only, so at least type is easy:
-	nType=NebDn;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-//	// Dark nebulae. Not sure how to assess visibility from opacity and size? --GZ
-//	float lim;
-//	// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
-//	// 9-(opac-5)-2*(angularSize-0.5)
-//	if (angularSize>0 && mag<50)
-//		lim = 15.0f - mag - 2.0f*angularSize;
-//	else
-//		lim = 9.0f;
-//	qDebug() << "LIMIT:" << angularSize << "*" << mag << "=" << lim;
-
-	return true;
-}
-
-bool Nebula::readSharpless(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	//qDebug() << "RA:" << list.at(0) << " DE:" << list.at(1) << " Sh2:" << list.at(2) << " size:" << list.at(3) << " F:" << list.at(4) << " S:" << list.at(5) << " B:" << list.at(6);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-	Sh2_nb=list.at(2).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	mag=99.0f;
-
-	// Calc the angular size in degrees
-	int size=list.at(3).toFloat();
-	angularSize = size/60.0f;
-
-	formType = (Nebula::HIIFormType)list.at(4).toInt();
-	structureType = (Nebula::HIIStructureType)list.at(5).toInt();
-	brightnessType = (Nebula::HIIBrightnessType)list.at(6).toInt();
-
-	nType=NebHII;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readVandenBergh(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	VdB_nb=list.at(0).toInt();
-	mag = list.at(1).toFloat();
-	if (mag==0.0f)
-		mag=99.0f;
-
-	// Calc the angular size in degrees
-	float size=list.at(2).toFloat();
-	angularSize = size/60.0f;
-
-	float radeg=list.at(3).toFloat();
-	float dedeg=list.at(4).toFloat();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebRn;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readRCW(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-
-	RCW_nb=list.at(2).toInt();
-	mag = 99.;
-
-	// Calc the angular size in degrees
-	float size=list.at(3).toFloat();
-
-	angularSize = size/60.0f;
-	if (angularSize<0)
-		angularSize=0;
-
-	rcwBrightnessType = (Nebula::HaBrightnessType)list.at(5).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebHa;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readLDN(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-
-	LDN_nb=list.at(2).toInt();
-
-	// Area in square degrees
-	angularSize = list.at(3).toFloat();
-	if (angularSize<0)
-		angularSize=0;
-
-	mag = list.at(4).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebDn;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
-}
-
-bool Nebula::readLBN(QString record)
-{
-	QStringList list=record.split("\t", QString::KeepEmptyParts);
-
-	float radeg=list.at(0).toFloat();
-	float dedeg=list.at(1).toFloat();
-
-	LBN_nb=list.at(2).toInt();
-
-	// Area in square degrees
-	angularSize = list.at(3).toFloat()/60.f;
-	if (angularSize<0)
-		angularSize=0;
-
-	brightnessClass = list.at(4).toInt();
-
-	float RaRad=radeg*M_PI/180.f;     // Convert from degrees to rad
-	float DecRad=dedeg*M_PI/180.f;    // Convert from degrees to rad
-
-	// Calc the Cartesian coord with RA and DE
-	StelUtils::spheToRect(RaRad,DecRad,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
-
-	nType=NebHII;
-	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
-
-	return true;
+	return r;
 }
 
 QString Nebula::getTypeString(void) const
@@ -737,134 +880,73 @@ QString Nebula::getTypeString(void) const
 	switch(nType)
 	{
 		case NebGx:
-			wsType = q_("Galaxy");
+			wsType = q_("galaxy");
+			break;
+		case NebAGx:
+			wsType = q_("active galaxy");
+			break;
+		case NebRGx:
+			wsType = q_("radio galaxy");
+			break;
+		case NebIGx:
+			wsType = q_("interacting galaxy");
+			break;
+		case NebQSO:
+			wsType = q_("quasar");
+			break;
+		case NebCl:
+			wsType = q_("star cluster");
 			break;
 		case NebOc:
-			wsType = q_("Open cluster");
+			wsType = q_("open star cluster");
 			break;
 		case NebGc:
-			wsType = q_("Globular cluster");
+			wsType = q_("globular cluster");
 			break;
 		case NebN:
-			wsType = q_("Nebula");
+			wsType = q_("nebula");
 			break;
 		case NebPn:
-			wsType = q_("Planetary nebula");
+			wsType = q_("planetary nebula");
 			break;
 		case NebDn:
-			wsType = q_("Dark nebula");
-			break;
-		case NebIg:
-			wsType = q_("Irregular galaxy");
+			wsType = q_("dark nebula");
 			break;
 		case NebCn:
-			wsType = q_("Cluster associated with nebulosity");
+			wsType = q_("cluster associated with nebulosity");
 			break;
-		case NebUnknown:
-			wsType = q_("Unknown");
+		case NebBn:
+			wsType = q_("bipolar nebula");
+			break;
+		case NebEn:
+			wsType = q_("emission nebula");
 			break;
 		case NebHII:
 			wsType = q_("HII region");
 			break;
 		case NebRn:
-			wsType = q_("Reflection nebula");
+			wsType = q_("reflection nebula");
+			break;		
+		case NebSNR:
+			wsType = q_("supernova remnant");
 			break;
-		case NebHa:
-			wsType = q_("H-α emission region");
+		case NebSA:
+			wsType = q_("stellar association");
 			break;
-		default:
-			wsType = q_("Undocumented type");
+		case NebSC:
+			wsType = q_("star cloud");
 			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHIIFormTypeString() const
-{
-	QString wsType;
-
-	switch(formType)
-	{
-		case FormCir:
-			wsType = qc_("circular","form");
+		case NebISM:
+			wsType = q_("interstellar matter");
 			break;
-		case FormEll:
-			wsType = qc_("elliptical","form");
+		case NebEMO:
+			wsType = q_("emission object");
 			break;
-		case FormIrr:
-			wsType = qc_("irregular","form");
+		case NebUnknown:
+			wsType = q_("unknown");
 			break;
 		default:
-			wsType = qc_("undocumented form","form");
-			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHIIStructureTypeString() const
-{
-	QString wsType;
-
-	switch(structureType)
-	{
-		case StructureAmo:
-			wsType = qc_("amorphous","structure");
-			break;
-		case StructureCon:
-			wsType = qc_("conventional","structure");
-			break;
-		case StructureFil:
-			wsType = qc_("filamentary","structure");
-			break;
-		default:
-			wsType = qc_("undocumented structure","structure");
-			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHIIBrightnessTypeString() const
-{
-	QString wsType;
-
-	switch(brightnessType)
-	{
-		case Faintest:
-			wsType = qc_("faintest", "HII region brightness");
-			break;
-		case Moderate:
-			wsType = qc_("moderate", "HII region brightness");
-			break;
-		case Brightest:
-			wsType = qc_("brightest", "HII region brightness");
-			break;
-		default:
-			wsType = q_("undocumented brightness");
-			break;
-	}
-	return wsType;
-}
-
-QString Nebula::getHaBrightnessTypeString() const
-{
-	QString wsType;
-
-	switch(rcwBrightnessType)
-	{
-		case HaVeryBright:
-			wsType = qc_("very bright", "H-α emission region brightness");
-			break;
-		case HaBright:
-			wsType = qc_("bright", "H-α emission region brightness");
-			break;
-		case HaMedium:
-			wsType = qc_("medium", "H-α emission region brightness");
-			break;
-		case HaFaint:
-			wsType = qc_("faint", "H-α emission region brightness");
-			break;
-		default:
-			wsType = q_("undocumented brightness");
+			wsType = q_("undocumented type");
 			break;
 	}
 	return wsType;
