@@ -168,14 +168,14 @@ public:
 	//
 	// Methods defined in StelObjectModule class
 	//
-	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const { return QList<StelObjectP>();}
-	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const { return StelObjectP();}
-	virtual StelObjectP searchByName(const QString& name) const { return StelObjectP();}
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const { return QStringList();}
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const { return QStringList();}
-	virtual QStringList listAllObjects(bool inEnglish) const { return QStringList();}
-	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
-	virtual QString getName() const { return QString();}
+	virtual QList<StelObjectP> searchAround(const Vec3d&, double, const StelCore*) const { return QList<StelObjectP>(); }
+	virtual StelObjectP searchByNameI18n(const QString&) const { return StelObjectP(); }
+	virtual StelObjectP searchByName(const QString&) const { return StelObjectP(); }
+	virtual QStringList listMatchingObjectsI18n(const QString&, int, bool) const { return QStringList(); }
+	virtual QStringList listMatchingObjects(const QString&, int, bool) const { return QStringList(); }
+	virtual QStringList listAllObjects(bool) const { return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString&, bool) const { return QStringList(); }
+	virtual QString getName() const { return QString(); }
 
 signals:
 	void downloadStatusChanged(DownloadStatus);

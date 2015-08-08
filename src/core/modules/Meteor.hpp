@@ -81,10 +81,10 @@ private:
 	void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
 
 	//! Draws the meteor bolide.
-	void drawBolide(const StelCore* core, StelPainter &sPainter, const float &bolideSize);
+	void drawBolide(StelPainter &sPainter, const float &bolideSize);
 
 	//! Draws the meteor train.
-	void drawTrain(const StelCore* core, StelPainter& sPainter, const float &thickness);
+	void drawTrain(StelPainter& sPainter, const float &thickness);
 
 	//! Calculating meteor distance as a function of meteor zenith angle
 	float meteorDistance(float zenithAngle, float altitude);
