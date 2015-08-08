@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-07 03:56+0600\n"
+"POT-Creation-Date: 2015-08-07 13:08+0600\n"
 "PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-07 05:32+0000\n"
+"X-Launchpad-Export-Date: 2015-08-08 05:37+0000\n"
 "X-Generator: Launchpad (build 17656)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -509,7 +509,7 @@ msgstr ""
 
 #: src/core/modules/Comet.cpp:173 plugins/Novae/src/Nova.cpp:133
 #: plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:346
+#: plugins/MeteorShowers/src/MeteorShower.cpp:517
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "類型: <b>%1</b> (%2)"
@@ -1082,7 +1082,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1717
+#: src/core/StelCore.cpp:1717 src/core/StelCore.cpp:1720
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -1100,14 +1100,7 @@ msgid "Used by default."
 msgstr "預設值"
 
 #: src/core/StelCore.cpp:1720
-#, qt-format
-msgid ""
-"PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION. This solution by F. "
-"Espenak and J. Meeus, based on Morrison & Stephenson (2004) and a polynomial "
-"fit through tabulated values for 1600-2000, is used for the %1NASA Eclipse "
-"Web Site%2 and in their <em>Five Millennium Canon of Solar Eclipses: -1900 "
-"to +3000</em> (2006). This formula is also used in the solar, lunar and "
-"planetary ephemeris program SOLEX."
+msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
 #: src/core/StelCore.cpp:1723
@@ -1412,7 +1405,7 @@ msgstr "聯繫"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:205
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:183
 msgid "Version"
 msgstr "版本"
@@ -1426,7 +1419,7 @@ msgstr "版本"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:209
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:184
 msgid "Author"
 msgstr "作者"
@@ -4743,7 +4736,7 @@ msgstr "巳顯示的資訊"
 #: src/ui_configurationDialog.h:1062
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:176
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:181
 msgid "Name"
 msgstr "名稱"
 
@@ -5281,7 +5274,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:292
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:299
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
 msgid "Links"
 msgstr "連結"
@@ -5293,7 +5286,6 @@ msgstr "連結"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:144
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:293
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:205
 #, qt-format
 msgid ""
@@ -5309,7 +5301,7 @@ msgstr "支援由Launchpad提供. 記得在標題包含%1."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:296
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -5323,7 +5315,7 @@ msgstr "如果你有問題, 你可以%1在這取得答案%2"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:298
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -5337,7 +5329,7 @@ msgstr "錯誤報告可以由%1此處%2報告."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:300
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -5407,7 +5399,7 @@ msgstr "角度使用角分秒作格式"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:327
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:480
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
 msgid "Restore default settings"
 msgstr "回復預設設定"
@@ -5420,7 +5412,6 @@ msgstr "回復預設設定"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:328
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:481
 msgid "Save settings as default"
 msgstr "儲存預設設定"
 
@@ -5438,7 +5429,7 @@ msgstr "儲存預設設定"
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:410
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:284
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:511
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:365
 msgctxt "tab in plugin windows"
@@ -5937,6 +5928,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "一般設定"
 
@@ -6351,7 +6343,6 @@ msgstr "在%1此%2看更多資訊"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:315
 msgid "Internet updates disabled"
 msgstr "互聯網更新已停用"
 
@@ -6367,8 +6358,6 @@ msgstr "互聯網更新已停用"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:319
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:355
 msgid "Updating now..."
 msgstr "更新中...."
 
@@ -6378,7 +6367,6 @@ msgstr "更新中...."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
 msgid "Next update: < 1 minute"
 msgstr "下一次更新: < 1 分鐘"
 
@@ -6388,7 +6376,6 @@ msgstr "下一次更新: < 1 分鐘"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:327
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "下一次更新: %1 分鐘"
@@ -6399,7 +6386,6 @@ msgstr "下一次更新: %1 分鐘"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:331
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "下一次更新: %1 小時"
@@ -6410,7 +6396,6 @@ msgstr "下一次更新: %1 小時"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:359
 msgid "Update error"
 msgstr "更新錯誤"
 
@@ -6440,8 +6425,7 @@ msgstr "[新來源]"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:345
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:473
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "更新"
 
@@ -6532,7 +6516,6 @@ msgstr "從網絡更新衛星數據"
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:470
 msgid "Last update:"
 msgstr "最後更新:"
 
@@ -6548,7 +6531,7 @@ msgstr "在更新時, 移除本機在更新來源中沒有的衛星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:471
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "更新頻率 (小時):"
 
@@ -6598,7 +6581,6 @@ msgstr "人造衛星真實化顯示"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:482
 msgid "Settings"
 msgstr "設定"
 
@@ -7154,73 +7136,61 @@ msgstr "一個方便的界面用在一些在Stellarium的配置文件中比較�
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:190
 msgid "January"
 msgstr "一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:191
 msgid "February"
 msgstr "二月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:192
 msgid "March"
 msgstr "三月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:193
 msgid "April"
 msgstr "四月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:194
 msgid "May"
 msgstr "五月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:195
 msgid "June"
 msgstr "六月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:196
 msgid "July"
 msgstr "七月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:197
 msgid "August"
 msgstr "八月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:198
 msgid "September"
 msgstr "九月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:199
 msgid "October"
 msgstr "十月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:200
 msgid "November"
 msgstr "十一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:714
-#: plugins/MeteorShowers/src/MeteorShower.cpp:201
 msgid "December"
 msgstr "十二月"
 
@@ -7324,6 +7294,7 @@ msgstr "時間變化:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "日期:"
 
@@ -7935,7 +7906,6 @@ msgstr "更新頻率 (日):"
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:472
 msgid "[next update info]"
 msgstr "[下一次更新資料]"
 
@@ -8514,7 +8484,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -9258,544 +9228,597 @@ msgstr "改變公式正負號"
 msgid "Font size:"
 msgstr "字型大小:"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:63
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:164
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:97
+msgid "The current catalog of Meteor Showers is invalid!"
+msgstr ""
+
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:576
 msgid "Meteor Showers"
 msgstr "流星雨插件"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:66
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
-msgid ""
-"This plugin displays meteor showers and a marker for each active and "
-"inactive radiant, showing real information about its activity."
-msgstr "此插件會顯示流星雨以及活躍及不活躍的流星雨之輻射點標示, 真實流星雨的活動等."
-
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:165
-msgid "Show meteor showers"
-msgstr "顯示流星雨"
-
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:166
-msgid "Radiant labels"
-msgstr "輻射點標示"
-
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:167
-msgid "Meteor Shower configuration window"
-msgstr "流星雨插件設定視窗"
-
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:198
-msgid ""
-"The old showers.json file is no longer compatible - using default file"
-msgstr "舊的 shower.json 檔案已不被支援 - 使用預設檔案"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
-msgid "Quadrantids"
-msgstr "象限儀座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
-msgid "Lyrids"
-msgstr "天琴座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
-msgid "α-Centaurids"
-msgstr "半人馬座α流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
-msgid "γ-Normids"
-msgstr "矩尺座γ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
-msgid "η-Aquariids"
-msgstr "寶瓶座η流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
-msgid "June Bootids"
-msgstr "6月牧夫座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
-msgid "Piscis Austrinids"
-msgstr "南魚座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
-msgid "Southern δ-Aquariids"
-msgstr "南寶瓶座δ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
-msgid "α-Capricornids"
-msgstr "摩羯座α流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
-msgid "α-Aurigids"
-msgstr "御夫座α流星"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
-msgid "September ε-Perseids"
-msgstr "9月英仙座ε流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
-msgid "Draconids"
-msgstr "天龍座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
-msgid "Leonids"
-msgstr "獅子座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
-msgid "Phoenicids"
-msgstr "鳳凰座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
-msgid "Puppid-Velids"
-msgstr "船尾/船帆座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
-msgid "Ursids"
-msgstr "小熊座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
-msgid "Perseids"
-msgstr "英仙座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
-msgid "δ-Leonids"
-msgstr "獅子座δ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
-msgid "π-Puppids"
-msgstr "船尾座π流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
-msgid "June Lyrids"
-msgstr "6月天琴座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
-msgid "κ-Cygnids"
-msgstr "天鵝座κ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
-msgid "ε-Lyrids"
-msgstr "天琴座ε流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
-msgid "δ-Aurigids"
-msgstr "御夫座δ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
-msgid "ε-Geminids"
-msgstr "雙子座ε流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
-msgid "Southern Taurids"
-msgstr "金牛座南支流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
-msgid "Northern Taurids"
-msgstr "金牛座北支流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
-msgid "Monocerotids"
-msgstr "麒麟座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
-msgid "α-Monocerotids"
-msgstr "麒麟座α流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
-msgid "σ-Hydrids"
-msgstr "長蛇座σ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
-msgid "Geminids"
-msgstr "雙子座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
-msgid "Leonis Minorids"
-msgstr "小獅座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
-msgid "December Leonis Minorids"
-msgstr "12月小獅座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
-msgid "Comae Berenicids"
-msgstr "后髮座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
-msgid "Orionids"
-msgstr "獵戶座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
-msgid "Andromedids"
-msgstr "仙女座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
-msgid "η-Lyrids"
-msgstr "天琴座η流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
-msgid "α-Scorpiids"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
+msgid "Toggle meteor showers"
 msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
-msgid "Ophiuchids"
-msgstr "蛇夫座流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
+msgid "Toggle radiant labels"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
-msgid "θ-Ophiuchids"
-msgstr "蛇夫座θ流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
+msgid "Show settings dialog"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
-msgid "κ-Serpentids"
-msgstr "巨蛇座κ流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
+msgid "Show search dialog"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
-msgid "θ-Centaurids"
-msgstr "半人馬座θ流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:259
+msgid "Using the default Meteor Showers catalog."
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
-msgid "ω-Cetids"
-msgstr "鯨魚座ω流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:581
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:214
+msgid ""
+"This plugin enables you to simulate periodic meteor showers and to display a "
+"marker for each active and inactive radiant."
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
-msgid "Southern ω-Scorpiids"
-msgstr "南天蠍座ω流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:584
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
+msgid ""
+"By a single click on the radiant's marker, you can see all the details about "
+"its position and activity. Most data used on this plugin comes from the "
+"oficial <a href=\"http://imo.net\">International Meteor Organization</a> "
+"catalog."
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
-msgid "Northern ω-Scorpiids"
-msgstr "北天蠍座ω流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:589
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:226
+msgid "It has three types of markers:"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
-msgid "Arietids"
-msgstr "白羊座流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:592
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:229
+msgid "Confirmed:"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
-msgid "π-Cetids"
-msgstr "鯨魚座π流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:593
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:230
+msgid ""
+"the radiant is active and its data was confirmed. Thus, this is a historical "
+"(really occurred in the past) or predicted meteor shower."
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
-msgid "δ-Cancrids"
-msgstr "巨蟹座δ流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:598
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:235
+msgid "Generic:"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
-msgid "τ-Herculids"
-msgstr "武仙座τ流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:599
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:236
+msgid ""
+"the radiant is active, but its data was not confirmed. It means that this "
+"can occur on real life, but that we do not have real data about its activity "
+"for the current sky year."
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
-msgid "ρ-Geminids"
-msgstr "雙子座ρ流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:604
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:241
+msgid "Inactive:"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
-msgid "η-Carinids"
-msgstr "船底座η流星雨"
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:605
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:242
+msgid "the radiant is inactive for the current sky date."
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
-msgid "η-Craterids"
-msgstr "巨爵座η流星雨"
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:136
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
+msgid "Confirmed"
+msgstr ""
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
-msgid "π-Virginids"
-msgstr "室女座π流星雨"
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:136
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
+msgid "Generic"
+msgstr "通用"
 
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
-msgid "θ-Virginids"
-msgstr "室女座θ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
-msgid "May Librids"
-msgstr "5月天秤座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
-msgid "June Scutids"
-msgstr "6月天盾座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
-msgid "α-Pisces Australids"
-msgstr "南魚座α流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
-msgid "Southern ι-Aquariids"
-msgstr "南ι-寶瓶座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
-msgid "Northern ι-Aquariids"
-msgstr "北ι-寶瓶座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1361
-msgid "γ-Aquariids"
-msgstr "寶瓶座γ流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
-msgid "Autumn Arietids"
-msgstr "秋季白羊座流星雨"
-
-#. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
-msgid "χ-Orionids"
-msgstr "獵戶座χ流星雨"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
-msgid "Comet 1P/Halley"
-msgstr "1P/哈雷彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
-msgid "Comet 7P/Pons-Winnecke"
-msgstr "7P/龐斯 - 溫內克彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
-msgid "Comet 55P/Tempel-Tuttle"
-msgstr "55P/坦普爾 - 塔特爾彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
-msgid "Comet 96P/Machholz"
-msgstr "96P/麥克霍爾茲彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
-msgid "Comet 109P/Swift-Tuttle"
-msgstr "109P/斯威夫特 - 塔特爾彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
-msgid "Comet Thatcher (1861 I)"
-msgstr "佘契爾彗星 (1861 I)"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
-msgid "Comet 26P/Grigg-Skjellerup"
-msgstr "26P/Grigg-Skjellerup彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
-msgid "Comet 21P/Giacobini-Zinner"
-msgstr "21P/ 賈可比尼 - 秦諾彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
-msgid "Comet 169P/NEAT"
-msgstr "169P/NEAT 彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
-msgid "Comet 289P/Blanpain"
-msgstr "289P/ 寶珀彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
-msgid "Comet 8P/Tuttle"
-msgstr "109P/塔特爾彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
-msgid "Comet 3D/Biela"
-msgstr "3D/比拉彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
-msgid "Comet C/1917 F1 (Mellish)"
-msgstr "彗星C/1917 F1 (Mellish)"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
-msgid "Comet C/1964 N1 (Ikeya)"
-msgstr "彗星C/1964 N1 (池谷)"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
-msgid "Comet Schwassmann-Wachmann 3"
-msgstr "施瓦斯曼-瓦茨曼3號彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
-msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr "小行星2003 EH1和彗星C/1490 Y1"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
-msgid "Minor planet (4450) Pan"
-msgstr "小行星 (4450) Pan"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
-msgid "Minor planet 2008 ED69"
-msgstr "小行星 2008 ED69"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1405
-msgid "Comet 2P/Encke"
-msgstr "2P/恩克彗星"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1407
-msgid "Minor planet 2004 TG10"
-msgstr "小行星2004 TG10"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1409
-msgid "Minor planet (3200) Phaethon"
-msgstr "小行星 (3200) 法厄同"
-
-#: plugins/MeteorShowers/src/MeteorShower.cpp:327
+#: plugins/MeteorShowers/src/MeteorShower.cpp:491
 msgid "generic data"
 msgstr "通用數據"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:329
-msgid "real data"
-msgstr "真實數據"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:495
+msgid "confirmed data"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:346
+#: plugins/MeteorShowers/src/MeteorShower.cpp:499
+msgid "inactive"
+msgstr ""
+
+#: plugins/MeteorShowers/src/MeteorShower.cpp:517
 msgid "meteor shower"
 msgstr "流星雨"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:355
+#: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "Radiant drift (per day)"
 msgstr "輻射點偏移 (每日)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:362
+#: plugins/MeteorShowers/src/MeteorShower.cpp:533
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "地心流星速度: %1 公里/秒"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:367
+#: plugins/MeteorShowers/src/MeteorShower.cpp:538
 #, qt-format
 msgid "The population index: %1"
 msgstr "光度比: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:372
+#: plugins/MeteorShowers/src/MeteorShower.cpp:543
 #, qt-format
 msgid "Parent body: %1"
 msgstr "母體: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:378
+#: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Active"
 msgstr "活躍中"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:386
+#: plugins/MeteorShowers/src/MeteorShower.cpp:560
 msgid "Activity"
 msgstr "活動"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:391
+#: plugins/MeteorShowers/src/MeteorShower.cpp:565
 #, qt-format
 msgid "Maximum: %1"
 msgstr "高峰期: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:394
-msgid "Solar longitude is"
-msgstr "太陽黃經為"
+#: plugins/MeteorShowers/src/MeteorShower.cpp:567
+msgid "Solar longitude"
+msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:403
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "variable"
 msgstr "可變的"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:177
-msgid "ZHR"
-msgstr "每小時天頂流星數"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:33
+msgid "Quadrantids"
+msgstr "象限儀座流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:178
-msgid "Data Type"
-msgstr "資料類型"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:35
+msgid "Lyrids"
+msgstr "天琴座流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
-msgid "Peak"
-msgstr "極大期"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:37
+msgid "α-Centaurids"
+msgstr "半人馬座α流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:190
-msgid "Start date greater than end date!"
-msgstr "開始日期大於結束日期"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:39
+msgid "γ-Normids"
+msgstr "矩尺座γ流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:194
-msgid "Time interval must be less than one year!"
-msgstr "時間間隔必須小於1年!"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:41
+msgid "η-Aquariids"
+msgstr "寶瓶座η流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:214
-msgid "Variable"
-msgstr "不定"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:43
+msgid "June Bootids"
+msgstr "6月牧夫座流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:217
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:501
-msgid "Real"
-msgstr "真實"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:45
+msgid "Piscis Austrinids"
+msgstr "南魚座流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:217
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:493
-msgid "Generic"
-msgstr "通用"
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:47
+msgid "Southern δ-Aquariids"
+msgstr "南寶瓶座δ流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:49
+msgid "α-Capricornids"
+msgstr "摩羯座α流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:51
+msgid "α-Aurigids"
+msgstr "御夫座α流星"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:53
+msgid "September ε-Perseids"
+msgstr "9月英仙座ε流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:55
+msgid "Draconids"
+msgstr "天龍座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:57
+msgid "Leonids"
+msgstr "獅子座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:59
+msgid "Phoenicids"
+msgstr "鳳凰座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:61
+msgid "Puppid-Velids"
+msgstr "船尾/船帆座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:63
+msgid "Ursids"
+msgstr "小熊座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:65
+msgid "Perseids"
+msgstr "英仙座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:67
+msgid "δ-Leonids"
+msgstr "獅子座δ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:69
+msgid "π-Puppids"
+msgstr "船尾座π流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:71
+msgid "June Lyrids"
+msgstr "6月天琴座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:73
+msgid "κ-Cygnids"
+msgstr "天鵝座κ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:75
+msgid "ε-Lyrids"
+msgstr "天琴座ε流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:77
+msgid "δ-Aurigids"
+msgstr "御夫座δ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:79
+msgid "ε-Geminids"
+msgstr "雙子座ε流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:81
+msgid "Southern Taurids"
+msgstr "金牛座南支流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:83
+msgid "Northern Taurids"
+msgstr "金牛座北支流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:85
+msgid "Monocerotids"
+msgstr "麒麟座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:87
+msgid "α-Monocerotids"
+msgstr "麒麟座α流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:89
+msgid "σ-Hydrids"
+msgstr "長蛇座σ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:91
+msgid "Geminids"
+msgstr "雙子座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:93
+msgid "Leonis Minorids"
+msgstr "小獅座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:95
+msgid "December Leonis Minorids"
+msgstr "12月小獅座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:97
+msgid "Comae Berenicids"
+msgstr "后髮座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:99
+msgid "Orionids"
+msgstr "獵戶座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:101
+msgid "Andromedids"
+msgstr "仙女座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:103
+msgid "η-Lyrids"
+msgstr "天琴座η流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:105
+msgid "α-Scorpiids"
+msgstr ""
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:107
+msgid "Ophiuchids"
+msgstr "蛇夫座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:109
+msgid "θ-Ophiuchids"
+msgstr "蛇夫座θ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:111
+msgid "κ-Serpentids"
+msgstr "巨蛇座κ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:113
+msgid "θ-Centaurids"
+msgstr "半人馬座θ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:115
+msgid "ω-Cetids"
+msgstr "鯨魚座ω流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:117
+msgid "Southern ω-Scorpiids"
+msgstr "南天蠍座ω流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:119
+msgid "Northern ω-Scorpiids"
+msgstr "北天蠍座ω流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:121
+msgid "Arietids"
+msgstr "白羊座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:123
+msgid "π-Cetids"
+msgstr "鯨魚座π流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:125
+msgid "δ-Cancrids"
+msgstr "巨蟹座δ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:127
+msgid "τ-Herculids"
+msgstr "武仙座τ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:129
+msgid "ρ-Geminids"
+msgstr "雙子座ρ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:131
+msgid "η-Carinids"
+msgstr "船底座η流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:133
+msgid "η-Craterids"
+msgstr "巨爵座η流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:135
+msgid "π-Virginids"
+msgstr "室女座π流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:137
+msgid "θ-Virginids"
+msgstr "室女座θ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:139
+msgid "May Librids"
+msgstr "5月天秤座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:141
+msgid "June Scutids"
+msgstr "6月天盾座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:143
+msgid "α-Pisces Australids"
+msgstr "南魚座α流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:145
+msgid "Southern ι-Aquariids"
+msgstr "南ι-寶瓶座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:147
+msgid "Northern ι-Aquariids"
+msgstr "北ι-寶瓶座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:149
+msgid "γ-Aquariids"
+msgstr "寶瓶座γ流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:151
+msgid "Autumn Arietids"
+msgstr "秋季白羊座流星雨"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/translations.h:153
+msgid "χ-Orionids"
+msgstr "獵戶座χ流星雨"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:157
+msgid "Comet 1P/Halley"
+msgstr "1P/哈雷彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:159
+msgid "Comet 7P/Pons-Winnecke"
+msgstr "7P/龐斯 - 溫內克彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:161
+msgid "Comet 55P/Tempel-Tuttle"
+msgstr "55P/坦普爾 - 塔特爾彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:163
+msgid "Comet 96P/Machholz"
+msgstr "96P/麥克霍爾茲彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:165
+msgid "Comet 109P/Swift-Tuttle"
+msgstr "109P/斯威夫特 - 塔特爾彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:167
+msgid "Comet Thatcher (1861 I)"
+msgstr "佘契爾彗星 (1861 I)"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:169
+msgid "Comet 26P/Grigg-Skjellerup"
+msgstr "26P/Grigg-Skjellerup彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:171
+msgid "Comet 21P/Giacobini-Zinner"
+msgstr "21P/ 賈可比尼 - 秦諾彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:173
+msgid "Comet 169P/NEAT"
+msgstr "169P/NEAT 彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:175
+msgid "Comet 289P/Blanpain"
+msgstr "289P/ 寶珀彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:177
+msgid "Comet 8P/Tuttle"
+msgstr "109P/塔特爾彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:179
+msgid "Comet 3D/Biela"
+msgstr "3D/比拉彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:181
+msgid "Comet C/1917 F1 (Mellish)"
+msgstr "彗星C/1917 F1 (Mellish)"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:183
+msgid "Comet C/1964 N1 (Ikeya)"
+msgstr "彗星C/1964 N1 (池谷)"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:185
+msgid "Comet Schwassmann-Wachmann 3"
+msgstr "施瓦斯曼-瓦茨曼3號彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:187
+msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
+msgstr "小行星2003 EH1和彗星C/1490 Y1"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:189
+msgid "Minor planet (4450) Pan"
+msgstr "小行星 (4450) Pan"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:191
+msgid "Minor planet 2008 ED69"
+msgstr "小行星 2008 ED69"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:193
+msgid "Comet 2P/Encke"
+msgstr "2P/恩克彗星"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:195
+msgid "Minor planet 2004 TG10"
+msgstr "小行星2004 TG10"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/translations.h:197
+msgid "Minor planet (3200) Phaethon"
+msgstr "小行星 (3200) 法厄同"
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
+msgid "Updating..."
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
+msgid "Successfully updated!"
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:139
+msgid "Failed!"
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:143
+msgid "Outdated!"
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
 msgstr "流星雨插件"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:246
 msgid "Terms"
 msgstr "條款"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:247
 msgid "Meteor shower"
 msgstr "流星雨"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:249
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -9811,12 +9834,12 @@ msgstr ""
 "大部分的流星體都比沙礫還要小，因此幾乎所有的流星體都會在大氣層內被銷毀，不會擊中地球的表面.數量特別龐大或表現不尋常的流星雨會被稱為\"流星爆發\"或\""
 "流星暴\", 一般指每小時多於1,000個流星"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:502
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:257
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
 msgstr "輻射點"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:259
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -9825,7 +9848,7 @@ msgid ""
 msgstr ""
 "輻射點或視輻射點是流星雨在天空中的一點發源處, 流星看起來似乎都來自該處 (對行星上的觀測者). 例如, 英仙座流星雨看起來就像是來自於英仙座."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:265
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -9835,18 +9858,18 @@ msgstr ""
 "觀測者看見流星在天空中飛過, 追溯流星的來向時, 會發現似乎集中在一個點, 這個點就稱為輻射點. 如果一顆流星的路徑回溯之後不能指向輻射點, "
 "這顆流星就不屬於這個流星雨, 稱為散亂流星或偶發流星."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:270
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr "許多流星雨都有一個輻射點, 位置會在出現時的時間之間隔內改變. 舉例來說, 御夫座δ流星雨的輻射點會每晚漂移多於一度."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr "每小時天頂流星數 (ZHR)"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:276
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -9857,11 +9880,11 @@ msgstr ""
 "在天文學, 流星雨之雨每小時天頂流星數 (ZHR) 指觀察者在非常晴天, 沒有光污染 (可見星等6.5) 可見的流星數量, "
 "假設流星雨之輻射點在天頂位置. 但此值會受到流星雨之輻射點接近地平線而影響."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:282
 msgid "Population index"
 msgstr "光度比"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:284
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -9869,124 +9892,169 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr "光度比指流星雨光度分佈. 光度比低於2.5光明流星出現較平均頻密, 而多於3.0指較暗流星佔多數."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:289
 msgid "Notes"
 msgstr "備註"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:290
 msgid ""
-"This plugin was created as project of ESA Summer of Code in Space 2013."
-msgstr "此插件是一個歐洲宇航局(ESA)之太空夏季程式碼大賽中的專案."
+"This plugin was initially created as a project of the ESA Summer of Code in "
+"Space 2013."
+msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
 msgid "Info"
 msgstr "相關資訊"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:292
 msgid "Info about meteor showers you can get here:"
 msgstr "可用流星雨資料:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr "%1流星雨%2 - 維基百科文章"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:290
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:297
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr "%1國際流星組織 (IMO)%2"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:366
-msgid "Meteor showers is updated"
-msgstr "流星雨插件己更新"
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:300
+#, qt-format
+msgid ""
+"Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
+"subject when posting."
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:466
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:103
+msgid "Start date greater than end date!"
+msgstr "開始日期大於結束日期"
+
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:107
+msgid "Time interval must be less than one year!"
+msgstr "時間間隔必須小於1年!"
+
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:182
+msgid "ZHR"
+msgstr "每小時天頂流星數"
+
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
+msgid "Data Type"
+msgstr "資料類型"
+
+#: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
+msgid "Peak"
+msgstr "極大期"
+
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
 msgstr "流星雨插件設定"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:467
-msgid "Meteor Showers Plug-in Configuration"
-msgstr "流星雨插件設定"
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
+msgid "Meteor Showers: Settings"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:469
-msgid "Update data from Internet"
-msgstr "從網上更新資料"
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
+msgid "General settings"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:477
-msgid "Meteor showers"
-msgstr "流星雨"
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
+msgid "Enable plugin at startup"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:478
-msgid "Show meteor showers button on toolbar"
-msgstr "在工具列顯示流星雨插件"
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
+msgid "Show a button to enable/disable the plugin"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:479
-msgid "Enable display of meteor showers at startup"
-msgstr "在啟動時開啟流星雨插件"
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
+msgid "Show a button to open the search panel"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:483
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:484
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:485
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
 msgstr "只顯示活躍中的輻射點"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:487
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:437
 msgid "Label font size (pixels)"
 msgstr "標示的字體大小 (像素)"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:489
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:491
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
 msgstr "活躍輻射點 - 通用數據"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:495
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
 msgstr "不活躍輻射點"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:497
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Inactive"
 msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:499
-msgid "Active Radiant - Real Data"
-msgstr "活躍輻射點 - 真實數據"
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
+msgid "Active Radiant - Confirmed Data"
+msgstr ""
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:503
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:508
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
+msgid "Enable automatic updates"
+msgstr ""
+
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
+msgid "Next update:"
+msgstr ""
+
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
+msgid "Last attempt to update"
+msgstr ""
+
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
+msgid "Status:"
+msgstr ""
+
+#: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
+msgid "Update"
+msgstr ""
+
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
+msgid "Meteor Showers: Search"
+msgstr ""
+
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
 msgstr "搜尋"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:504
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "從："
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:505
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:507
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "dd/MMM/yyyy"
 msgstr "dd/MMM/yyyy"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:506
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "至"
 
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:509
+#: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
 msgstr "結果"
-
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:510
-msgid "Search Events"
-msgstr "搜尋流星雨"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
@@ -10176,10 +10244,6 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle 3D landscape"
-msgstr ""
-
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
-msgid "Show settings dialog"
 msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
@@ -11611,6 +11675,30 @@ msgstr ""
 #~ msgid "Cosmical rise/set"
 #~ msgstr "偕日升/偕日落"
 
+#~ msgid "Show meteor showers"
+#~ msgstr "顯示流星雨"
+
+#~ msgid "Meteor Shower configuration window"
+#~ msgstr "流星雨插件設定視窗"
+
+#~ msgid "Meteor Showers Plug-in Configuration"
+#~ msgstr "流星雨插件設定"
+
+#~ msgid "Meteor showers"
+#~ msgstr "流星雨"
+
+#~ msgid "Enable display of meteor showers at startup"
+#~ msgstr "在啟動時開啟流星雨插件"
+
+#~ msgid "Show meteor showers button on toolbar"
+#~ msgstr "在工具列顯示流星雨插件"
+
+#~ msgid "Meteor showers is updated"
+#~ msgstr "流星雨插件己更新"
+
+#~ msgid "Active Radiant - Real Data"
+#~ msgstr "活躍輻射點 - 真實數據"
+
 #~ msgid "Change Color"
 #~ msgstr "改變顏色"
 
@@ -11619,6 +11707,32 @@ msgstr ""
 
 #~ msgid "Color of radiants markers"
 #~ msgstr "輻射點標示顏色"
+
+#~ msgid "Update data from Internet"
+#~ msgstr "從網上更新資料"
+
+#~ msgid ""
+#~ "This plugin was created as project of ESA Summer of Code in Space 2013."
+#~ msgstr "此插件是一個歐洲宇航局(ESA)之太空夏季程式碼大賽中的專案."
+
+#~ msgid "Real"
+#~ msgstr "真實"
+
+#~ msgid "Solar longitude is"
+#~ msgstr "太陽黃經為"
+
+#~ msgid "Variable"
+#~ msgstr "不定"
+
+#~ msgid "real data"
+#~ msgstr "真實數據"
+
+#~ msgid "Radiant labels"
+#~ msgstr "輻射點標示"
+
+#~ msgid ""
+#~ "The old showers.json file is no longer compatible - using default file"
+#~ msgstr "舊的 shower.json 檔案已不被支援 - 使用預設檔案"
 
 #~ msgid "pre-process script using STS preprocessor"
 #~ msgstr "使用TS預處理器預處理劇本"
@@ -11661,8 +11775,16 @@ msgstr ""
 #~ msgid "Acronychal rise/set"
 #~ msgstr "日沒升/日沒落"
 
+#~ msgid "Search Events"
+#~ msgstr "搜尋流星雨"
+
 #~ msgid "Show labels of radiants"
 #~ msgstr "顯示流星雨之輻射點標示"
 
 #~ msgid "Radiants for meteor showers"
 #~ msgstr "流星雨之輻射點"
+
+#~ msgid ""
+#~ "This plugin displays meteor showers and a marker for each active and "
+#~ "inactive radiant, showing real information about its activity."
+#~ msgstr "此插件會顯示流星雨以及活躍及不活躍的流星雨之輻射點標示, 真實流星雨的活動等."
