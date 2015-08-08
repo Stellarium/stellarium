@@ -109,9 +109,9 @@ public:
 	virtual QString getEnglishName(void) const { return m_designation.trimmed(); }
 	virtual QString getNameI18n(void) const	{ return q_(m_designation.trimmed()); }
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const { return m_position; }
-	virtual float getSelectPriority(const StelCore* core) const { return -4.0; }
+	virtual float getSelectPriority(const StelCore*) const { return -4.0; }
 	virtual Vec3f getInfoColor(void) const;
-	virtual double getAngularSize(const StelCore* core) const { return 0.001; }
+	virtual double getAngularSize(const StelCore*) const { return 0.001; }
 
 private:
 	MeteorShowersMgr* m_mgr;           //! MeteorShowersMgr instance
