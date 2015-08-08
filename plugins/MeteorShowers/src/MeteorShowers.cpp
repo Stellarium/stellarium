@@ -124,16 +124,17 @@ QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(QDate dateFrom, Q
 		{
 			found = false;
 			a = ms->hasConfirmedShower(date, found);
+			r.type = q_("Confirmed");
 			if (!found)
 			{
 				a = ms->hasGenericShower(date, found);
+				r.type = q_("Generic");
 			}
 
 			if (found)
 			{
 				r.name = ms->getNameI18n();
 				r.peak = a.peak;
-				r.type = a.year > 0 ? q_("Confirmed") : q_("Generic");
 				r.zhr = a.zhr == -1
 				      ? QString("%1-%2").arg(a.variable.at(0)).arg(a.variable.at(1))
 				      : QString::number(a.zhr);
