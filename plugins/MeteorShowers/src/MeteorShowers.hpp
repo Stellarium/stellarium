@@ -52,7 +52,7 @@ public:
 
 	//! Update
 	//! @param deltaTime the time increment in seconds since the last call.
-	virtual void update(StelCore *core, double deltaTime);
+	virtual void update(double deltaTime);
 
 	//! Draw
 	virtual void draw(StelCore* core);

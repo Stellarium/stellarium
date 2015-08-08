@@ -268,11 +268,9 @@ void MeteorShowersMgr::update(double deltaTime)
 		return;
 	}
 
-	StelCore* core = StelApp::getInstance().getCore();
-
 	// is paused?
 	// freeze meteors at the current position
-	if (!core->getTimeRate()) {
+	if (!StelApp::getInstance().getCore()->getTimeRate()) {
 		return;
 	}
 
@@ -282,7 +280,7 @@ void MeteorShowersMgr::update(double deltaTime)
 		m_searchDialog->refreshRangeDates();
 	}
 
-	m_meteorShowers->update(core, deltaTime);
+	m_meteorShowers->update(deltaTime);
 }
 
 void MeteorShowersMgr::draw(StelCore* core)
