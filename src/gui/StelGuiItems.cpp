@@ -622,7 +622,7 @@ void BottomStelBar::updateText(bool updatePos)
 			lon *= -1;
 		}
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
-		QString rho = q_("Planetocentric distance %1 km").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU);
+		QString rho = q_("planetocentric distance %1 km").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU);
 		location->setToolTip(QString("%1 %2, %3").arg(latStr).arg(lonStr).arg(rho));
 	}
 
