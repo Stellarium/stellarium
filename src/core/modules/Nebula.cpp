@@ -340,16 +340,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		else
 			lim= 12.0f; // GZ I assume LDN objects are rather elusive.
 	}
-	else if (LBN_nb>0) // attempt to balance LBN brightness classes
-	{
-		/* FIXME: Temporary disabled
-		if (brightnessClass==0)
-			lim=10.0f;
-		else
-			lim=brightnessClass+7.0f;
-		*/
-	}
-	else if (nType==NebHII || nType==NebHa) // NebHII={Sharpless, LBN}, NebHa={RCW}
+	else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
 	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
 		lim=9.0f;
 	}
@@ -390,8 +381,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			break;
 		case NebN:
 		case NebHII:
-		case NebRn:
-		case NebHa:
+		case NebRn:		
 		case NebSNR:
 		case NebBn:
 		case NebEn:
@@ -445,7 +435,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		else
 			lim= 12.0f; // GZ I assume some LDN objects are rather elusive.
 	}
-	else if (nType==NebHII || nType==NebHa)
+	else if (nType==NebHII)
 		lim=9.0f;
 
 	if (lim>maxMagLabel)
@@ -534,46 +524,71 @@ bool Nebula::objectInDisplayedType()
 	int cntype = -1;
 	switch (nType)
 	{
-		case NebAGx:
-		case NebIGx:
-		case NebRGx:
 		case NebGx:
-			cntype = 0;
+			cntype = 0; // Galaxies
+			break;
+		case NebAGx:
+		case NebRGx:
+		case NebQSO:
+			cntype = 1; // Active Galaxies
+			break;
+		case NebIGx:
+			cntype = 2; // Interacting Galaxies
 			break;
 		case NebOc:
 		case NebGc:
 		case NebCl:
 		case NebSA:
 		case NebSC:
-			cntype = 1;
+			cntype = 3; // Star Clusters
+			break;
+		case NebHII:
+		case NebISM:
+			cntype = 4; // Hydrogen regions (include interstellar matter)
 			break;
 		case NebN:
 		case NebBn:
-		case NebDn:
 		case NebEn:
-		case NebPn:
 		case NebRn:
-		case NebHa:
-		case NebHII:
+			cntype = 5; // Bright Nebulae
+			break;
+		case NebDn:
+			cntype = 6; // Dark Nebulae
+			break;
+		case NebPn:
+			cntype = 7; // Planetary Nebulae
+			break;
 		case NebSNR:
-			cntype = 2;
+			cntype = 8; // Supernova Remnants
 			break;
 		case NebCn:
-			cntype = 3;
+			cntype = 9;
 			break;
 		default:
-			cntype = 4;
+			cntype = 10;
 			break;
 	}
 	if (typeFilters&TypeGalaxies && cntype==0)
 		r = true;
-	else if (typeFilters&TypeStarClusters && cntype==1)
+	else if (typeFilters&TypeActiveGalaxies && cntype==1)
 		r = true;
-	else if (typeFilters&TypeNebulae && cntype==2)
+	else if (typeFilters&TypeInteractingGalaxies && cntype==2)
 		r = true;
-	else if (typeFilters&TypeStarClusters && typeFilters&TypeNebulae && cntype==3)
+	else if (typeFilters&TypeStarClusters && cntype==3)
 		r = true;
-	else if (typeFilters&TypeOther && cntype==4)
+	else if (typeFilters&TypeHydrogenRegions && cntype==4)
+		r = true;
+	else if (typeFilters&TypeBrightNebulae && cntype==5)
+		r = true;
+	else if (typeFilters&TypeDarkNebulae && cntype==6)
+		r = true;
+	else if (typeFilters&TypePlanetaryNebulae && cntype==7)
+		r = true;
+	else if (typeFilters&TypeSupernovaRemnants && cntype==8)
+		r = true;
+	else if (typeFilters&TypeStarClusters && (typeFilters&TypeBrightNebulae || typeFilters&TypeHydrogenRegions) && cntype==9)
+		r = true;
+	else if (typeFilters&TypeOther && cntype==10)
 		r = true;
 
 	return r;
@@ -637,10 +652,7 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebRn:
 			wsType = q_("reflection nebula");
-			break;
-		case NebHa:
-			wsType = q_("H-α emission region");
-			break;
+			break;		
 		case NebSNR:
 			wsType = q_("supernova remnant");
 			break;

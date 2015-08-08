@@ -58,9 +58,15 @@ public:
 	enum TypeGroupFlags
 	{
 		TypeGalaxies		= 0x00000001, //!< Galaxies
-		TypeStarClusters	= 0x00000002, //!< Star Clusters
-		TypeNebulae		= 0x00000004, //!< Nebulae
-		TypeOther		= 0x00000008  //!< Other objects
+		TypeActiveGalaxies	= 0x00000002, //!< Different Active Galaxies
+		TypeInteractingGalaxies	= 0x00000004, //!< Different Active Galaxies
+		TypeStarClusters	= 0x00000008, //!< Star Clusters
+		TypeHydrogenRegions	= 0x00000010, //!< Hydrogen Regions
+		TypeBrightNebulae	= 0x00000020, //!< Bright Nebulae
+		TypeDarkNebulae		= 0x00000040, //!< Dark Nebulae
+		TypePlanetaryNebulae	= 0x00000080, //!< Planetary Nebulae
+		TypeSupernovaRemnants	= 0x00000100, //!< Planetary Nebulae
+		TypeOther		= 0x00000200  //!< Other objects
 	};
 
 
@@ -71,7 +77,7 @@ public:
 
 	//! A pre-defined set of specifiers for the catalogs filter
 	static const CatalogGroupFlags AllCatalogs = (CatalogGroupFlags)(CatNGC|CatIC|CatM|CatC|CatB|CatSh2|CatLBN|CatLDN|CatRCW|CatVdB|CatCr|CatMel|CatPGC|CatUGC|CatCed);
-	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeStarClusters|TypeNebulae|TypeOther);
+	static const TypeGroupFlags AllTypes = (TypeGroupFlags)(TypeGalaxies|TypeActiveGalaxies|TypeInteractingGalaxies|TypeStarClusters|TypeHydrogenRegions|TypeBrightNebulae|TypeDarkNebulae|TypePlanetaryNebulae|TypeSupernovaRemnants|TypeOther);
 
 	Nebula();
 	~Nebula();
@@ -141,12 +147,11 @@ private:
 		NebBn		= 14,	//!< Bipolar nebula
 		NebEn		= 15,	//!< Emission nebula
 		NebCn		= 16,	//!< Cluster associated with nebulosity
-		NebHII		= 17,	//!< HII Region
-		NebHa		= 18,	//!< H-α emission region
-		NebSNR		= 19,	//!< Supernova remnant
-		NebISM		= 20,	//!< Interstellar matter
-		NebEMO		= 21,	//!< Emission object
-		NebUnknown	= 22	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebHII		= 17,	//!< HII Region		
+		NebSNR		= 18,	//!< Supernova remnant
+		NebISM		= 19,	//!< Interstellar matter
+		NebEMO		= 20,	//!< Emission object
+		NebUnknown	= 21	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
