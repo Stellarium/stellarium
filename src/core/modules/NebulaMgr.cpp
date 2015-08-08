@@ -130,6 +130,8 @@ void NebulaMgr::init()
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 
+
+
 	// for DSO convertor (for developers!)
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
 	flagDecimalCoordinates = conf->value("devel/convert_dso_decimal_coord", true).toBool();
@@ -353,6 +355,11 @@ void NebulaMgr::setStelStyle(const QString& section)
 	setBrightNebulaColor(StelUtils::strToVec3f(conf->value(section+"/nebula_brightneb_color", "0.1,1.0,0.1").toString()));
 	setDarkNebulaColor(StelUtils::strToVec3f(conf->value(section+"/nebula_darkneb_color", "0.3,0.3,0.3").toString()));
 	setClusterColor(StelUtils::strToVec3f(conf->value(section+"/nebula_cluster_color", "1.0,1.0,0.1").toString()));
+	setRadioGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_radioglx_color", "0.3,0.3,0.3").toString()));
+	setActiveGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_activeglx_color", "1.0,0.2,0.2").toString()));
+	setInteractingGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_intglx_color", "1.0,0.2,0.2").toString()));
+	setHydrogenRegionColor(StelUtils::strToVec3f(conf->value(section+"/nebula_hregion_color", "0.1,1.0,0.1").toString()));
+	setSupernovaRemnantColor(StelUtils::strToVec3f(conf->value(section+"/nebula_snr_color", "0.1,1.0,0.1").toString()));
 }
 
 // Search by name
