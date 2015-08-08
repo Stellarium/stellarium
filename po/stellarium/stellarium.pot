@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-08 20:05+0600\n"
+"POT-Creation-Date: 2015-08-08 21:39+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:872 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:221 src/core/modules/SolarSystem.cpp:174
+#: src/core/modules/NebulaMgr.cpp:223 src/core/modules/SolarSystem.cpp:174
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:488 src/core/StelCore.cpp:198
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
@@ -46,8 +46,8 @@ msgstr ""
 msgid "Constellation boundaries"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1527
-#: src/ui_viewDialog.h:1555 src/ui_viewDialog.h:1581
+#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1542
+#: src/ui_viewDialog.h:1570 src/ui_viewDialog.h:1596
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr ""
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Precession Circles"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1545
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1560
 msgid "Atmosphere"
 msgstr ""
 
@@ -354,7 +354,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:670
 msgctxt "Shapley–Sawyer Concentration Class"
-msgid "loose"
+msgid "loose concentration"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:673
@@ -587,7 +587,7 @@ msgid "open star cluster"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:904
-msgid "globular cluster"
+msgid "globular star cluster"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:907
@@ -650,7 +650,7 @@ msgstr ""
 msgid "undocumented type"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:221
+#: src/core/modules/NebulaMgr.cpp:223
 msgid "Deep-sky objects"
 msgstr ""
 
@@ -787,7 +787,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:175 src/translations.h:62
-#: src/ui_viewDialog.h:1528
+#: src/ui_viewDialog.h:1543
 msgid "Planets"
 msgstr ""
 
@@ -2607,12 +2607,12 @@ msgid "H-α emission regions"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:105 src/ui_viewDialog.h:1599
+#: src/translations.h:105 src/ui_viewDialog.h:1611
 msgid "Messier Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:107 src/ui_viewDialog.h:1603
+#: src/translations.h:107 src/ui_viewDialog.h:1614
 msgid "Caldwell Catalogue"
 msgstr ""
 
@@ -4426,258 +4426,198 @@ msgstr ""
 msgid "Options"
 msgstr ""
 
-#: src/ui_viewDialog.h:1524
+#: src/ui_viewDialog.h:1539
 msgid "View"
 msgstr ""
 
-#: src/ui_viewDialog.h:1526 src/ui_viewDialog.h:1584
+#: src/ui_viewDialog.h:1541 src/ui_viewDialog.h:1599
 msgid "Labels and Markers"
 msgstr ""
 
-#: src/ui_viewDialog.h:1529
+#: src/ui_viewDialog.h:1544
 msgid "Planets and satellites"
 msgstr ""
 
-#: src/ui_viewDialog.h:1530
+#: src/ui_viewDialog.h:1545
 msgid "Show planets"
 msgstr ""
 
-#: src/ui_viewDialog.h:1531
+#: src/ui_viewDialog.h:1546
 msgid "Show planet markers"
 msgstr ""
 
-#: src/ui_viewDialog.h:1532
+#: src/ui_viewDialog.h:1547
 msgid "Show planet orbits"
 msgstr ""
 
-#: src/ui_viewDialog.h:1533
+#: src/ui_viewDialog.h:1548
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1534
+#: src/ui_viewDialog.h:1549
 msgid "Scale Moon"
 msgstr ""
 
-#: src/ui_viewDialog.h:1536
+#: src/ui_viewDialog.h:1551
 msgid "Scale factor"
 msgstr ""
 
-#: src/ui_viewDialog.h:1539
+#: src/ui_viewDialog.h:1554
 msgid "Automatic change of landscape when planet is changed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1541
+#: src/ui_viewDialog.h:1556
 msgid "Auto select landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1543
+#: src/ui_viewDialog.h:1558
 msgid "Show atmosphere"
 msgstr ""
 
-#: src/ui_viewDialog.h:1547
+#: src/ui_viewDialog.h:1562
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
 
-#: src/ui_viewDialog.h:1549
+#: src/ui_viewDialog.h:1564
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/ui_viewDialog.h:1550
+#: src/ui_viewDialog.h:1565
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1552
+#: src/ui_viewDialog.h:1567
 msgid "pressure, temperature, extinction coefficient"
 msgstr ""
 
-#: src/ui_viewDialog.h:1554
+#: src/ui_viewDialog.h:1569
 msgid "Refraction/Extinction settings..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1556
+#: src/ui_viewDialog.h:1571
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1557
+#: src/ui_viewDialog.h:1572
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1558
+#: src/ui_viewDialog.h:1573
 msgid "Milky Way brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1559
+#: src/ui_viewDialog.h:1574
 msgid "Zodiacal Light brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1560
+#: src/ui_viewDialog.h:1575
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1562
+#: src/ui_viewDialog.h:1577
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 
-#: src/ui_viewDialog.h:1564
+#: src/ui_viewDialog.h:1579
 msgid "Dynamic eye adaptation"
 msgstr ""
 
-#: src/ui_viewDialog.h:1566
+#: src/ui_viewDialog.h:1581
 msgid "Settings for sporadic meteors"
 msgstr ""
 
-#: src/ui_viewDialog.h:1568
+#: src/ui_viewDialog.h:1583
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1570
+#: src/ui_viewDialog.h:1585
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1572
+#: src/ui_viewDialog.h:1587
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1575
+#: src/ui_viewDialog.h:1590
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1577 src/ui_viewDialog.h:1583
+#: src/ui_viewDialog.h:1592 src/ui_viewDialog.h:1598
 msgid "Limit Magnitudes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1579
+#: src/ui_viewDialog.h:1594
 msgid "Limit the magnitude of stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1582
+#: src/ui_viewDialog.h:1597
 msgid "Display options"
 msgstr ""
 
-#: src/ui_viewDialog.h:1585
+#: src/ui_viewDialog.h:1600
 msgid "Display objects from catalogs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1587
+#: src/ui_viewDialog.h:1602
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1589
-msgid "IC"
-msgstr ""
-
-#: src/ui_viewDialog.h:1591
+#: src/ui_viewDialog.h:1605
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1593
-msgid "NGC"
-msgstr ""
-
-#: src/ui_viewDialog.h:1595
+#: src/ui_viewDialog.h:1608
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1597
-msgid "LBN"
-msgstr ""
-
-#: src/ui_viewDialog.h:1601
-msgid "M"
-msgstr ""
-
-#: src/ui_viewDialog.h:1605
-msgid "C"
-msgstr ""
-
-#: src/ui_viewDialog.h:1607
+#: src/ui_viewDialog.h:1617
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1609
-msgid "B"
-msgstr ""
-
-#: src/ui_viewDialog.h:1611
+#: src/ui_viewDialog.h:1620
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1613
-msgid "Sh 2"
-msgstr ""
-
-#: src/ui_viewDialog.h:1615
+#: src/ui_viewDialog.h:1623
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1617
-msgid "VdB"
-msgstr ""
-
-#: src/ui_viewDialog.h:1619
+#: src/ui_viewDialog.h:1626
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1621
-msgid "RCW"
-msgstr ""
-
-#: src/ui_viewDialog.h:1623
+#: src/ui_viewDialog.h:1629
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1625
-msgid "LDN"
-msgstr ""
-
-#: src/ui_viewDialog.h:1627
+#: src/ui_viewDialog.h:1632
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1629
-msgid "Cr"
-msgstr ""
-
-#: src/ui_viewDialog.h:1631
+#: src/ui_viewDialog.h:1635
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1633
-msgid "Mel"
-msgstr ""
-
-#: src/ui_viewDialog.h:1635
+#: src/ui_viewDialog.h:1638
 msgid "Catalog of galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1637
-msgid "PGC"
-msgstr ""
-
-#: src/ui_viewDialog.h:1639
+#: src/ui_viewDialog.h:1641
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1641
-msgid "UGC"
-msgstr ""
-
-#: src/ui_viewDialog.h:1643
+#: src/ui_viewDialog.h:1644
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr ""
-
-#: src/ui_viewDialog.h:1645
-msgid "Ced"
 msgstr ""
 
 #: src/ui_viewDialog.h:1646
