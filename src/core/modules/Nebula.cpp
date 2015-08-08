@@ -361,11 +361,13 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	switch (nType)
 	{
 		case NebGx:
-		case NebIGx:		
-		case NebAGx:
-		case NebQSO:
+		case NebIGx:
 			Nebula::texGalaxy->bind();
 			color=galaxyColor;
+			break;
+		case NebAGx:
+		case NebQSO:
+			Nebula::texGalaxy->bind();			
 			break;
 		case NebRGx:
 			Nebula::texGalaxy->bind();
