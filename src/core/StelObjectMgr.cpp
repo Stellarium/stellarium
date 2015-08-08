@@ -361,11 +361,10 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:14"] = "Bipolar nebulae";
 			result["NebulaMgr:15"] = "Emission nebulae";
 			result["NebulaMgr:16"] = "Clusters associated with nebulosity";
-			result["NebulaMgr:17"] = "HII regions";
-			result["NebulaMgr:18"] = "H-α emission regions";
-			result["NebulaMgr:19"] = "Supernova remnants";
-			result["NebulaMgr:20"] = "Interstellar matters";
-			result["NebulaMgr:21"] = "Emission objects";
+			result["NebulaMgr:17"] = "HII regions";			
+			result["NebulaMgr:18"] = "Supernova remnants";
+			result["NebulaMgr:19"] = "Interstellar matters";
+			result["NebulaMgr:20"] = "Emission objects";
 			result["NebulaMgr:100"] = "Messier Catalogue";
 			result["NebulaMgr:101"] = "Caldwell Catalogue";
 			result["NebulaMgr:102"] = "Barnard Catalogue";
