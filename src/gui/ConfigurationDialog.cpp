@@ -619,10 +619,16 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();
 	conf->beginGroup("dso_type_filters");
-	conf->setValue("flag_show_galaxies",	(bool) (tflags & Nebula::TypeGalaxies));
-	conf->setValue("flag_show_clusters",	(bool) (tflags & Nebula::TypeStarClusters));
-	conf->setValue("flag_show_nebulae",	(bool) (tflags & Nebula::TypeNebulae));
-	conf->setValue("flag_show_other",	(bool) (tflags & Nebula::TypeOther));
+	conf->setValue("flag_show_galaxies", 		 (bool) (tflags & Nebula::TypeGalaxies));
+	conf->setValue("flag_show_active_galaxies",	 (bool) (tflags & Nebula::TypeActiveGalaxies));
+	conf->setValue("flag_show_interacting_galaxies", (bool) (tflags & Nebula::TypeInteractingGalaxies));
+	conf->setValue("flag_show_clusters",		 (bool) (tflags & Nebula::TypeStarClusters));
+	conf->setValue("flag_show_bright_nebulae",	 (bool) (tflags & Nebula::TypeBrightNebulae));
+	conf->setValue("flag_show_dark_nebulae",	 (bool) (tflags & Nebula::TypeDarkNebulae));
+	conf->setValue("flag_show_planetary_nebulae",	 (bool) (tflags & Nebula::TypePlanetaryNebulae));
+	conf->setValue("flag_show_hydrogen_regions",	 (bool) (tflags & Nebula::TypeHydrogenRegions));
+	conf->setValue("flag_show_supernova_remnants",	 (bool) (tflags & Nebula::TypeSupernovaRemnants));
+	conf->setValue("flag_show_other",		 (bool) (tflags & Nebula::TypeOther));
 	conf->endGroup();
 
 	// view dialog / landscape tab settings
