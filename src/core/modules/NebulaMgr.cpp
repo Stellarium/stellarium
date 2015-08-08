@@ -169,10 +169,22 @@ void NebulaMgr::init()
 	conf->beginGroup("dso_type_filters");
 	if (conf->value("flag_show_galaxies", true).toBool())
 		typeFilters	|= Nebula::TypeGalaxies;
+	if (conf->value("flag_show_active_galaxies", true).toBool())
+		typeFilters	|= Nebula::TypeActiveGalaxies;
+	if (conf->value("flag_show_interacting_galaxies", true).toBool())
+		typeFilters	|= Nebula::TypeInteractingGalaxies;
 	if (conf->value("flag_show_clusters", true).toBool())
 		typeFilters	|= Nebula::TypeStarClusters;
-	if (conf->value("flag_show_nebulae", true).toBool())
-		typeFilters	|= Nebula::TypeNebulae;
+	if (conf->value("flag_show_bright_nebulae", true).toBool())
+		typeFilters	|= Nebula::TypeBrightNebulae;
+	if (conf->value("flag_show_dark_nebulae", true).toBool())
+		typeFilters	|= Nebula::TypeDarkNebulae;
+	if (conf->value("flag_show_planetary_nebulae", true).toBool())
+		typeFilters	|= Nebula::TypePlanetaryNebulae;
+	if (conf->value("flag_show_hydrogen_regions", true).toBool())
+		typeFilters	|= Nebula::TypeHydrogenRegions;
+	if (conf->value("flag_show_supernova_remnants", true).toBool())
+		typeFilters	|= Nebula::TypeSupernovaRemnants;
 	if (conf->value("flag_show_other", true).toBool())
 		typeFilters	|= Nebula::TypeOther;
 	conf->endGroup();
@@ -700,7 +712,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 			QStringList oTypes;
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
-			       << "HA" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
+			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD";
 
 			switch (oTypes.indexOf(oType.toUpper()))
@@ -725,14 +737,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebDn;
 					break;
 				case 7:
+				case 9:
 					nType = (unsigned int)Nebula::NebRn;
 					break;
 				case 8:
 					nType = (unsigned int)Nebula::NebCn;
-					break;
-				case 9:
-					nType = (unsigned int)Nebula::NebHa;
-					break;
+					break;				
 				case 10:
 				case 23:
 					nType = (unsigned int)Nebula::NebHII;

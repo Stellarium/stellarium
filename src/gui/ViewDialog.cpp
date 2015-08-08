@@ -401,10 +401,22 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 
 	if (ui->checkBoxGalaxiesType->isChecked())
 		flags |= Nebula::TypeGalaxies;
+	if (ui->checkBoxActiveGalaxiesType->isChecked())
+		flags |= Nebula::TypeActiveGalaxies;
+	if (ui->checkBoxInteractingGalaxiesType->isChecked())
+		flags |= Nebula::TypeInteractingGalaxies;
 	if (ui->checkBoxStarClustersType->isChecked())
 		flags |= Nebula::TypeStarClusters;
-	if (ui->checkBoxNebulaeType->isChecked())
-		flags |= Nebula::TypeNebulae;
+	if (ui->checkBoxBrightNebulaeType->isChecked())
+		flags |= Nebula::TypeBrightNebulae;
+	if (ui->checkBoxDarkNebulaeType->isChecked())
+		flags |= Nebula::TypeDarkNebulae;
+	if (ui->checkBoxPlanetaryNebulaeType->isChecked())
+		flags |= Nebula::TypePlanetaryNebulae;
+	if (ui->checkBoxHydrogenRegionsType->isChecked())
+		flags |= Nebula::TypeHydrogenRegions;
+	if (ui->checkBoxSupernovaRemnantsType->isChecked())
+		flags |= Nebula::TypeSupernovaRemnants;
 	if (ui->checkBoxOtherType->isChecked())
 		flags |= Nebula::TypeOther;
 
@@ -438,8 +450,14 @@ void ViewDialog::updateSelectedTypesCheckBoxes()
 	const Nebula::TypeGroup& flags = GETSTELMODULE(NebulaMgr)->getTypeFilters();
 
 	ui->checkBoxGalaxiesType->setChecked(flags & Nebula::TypeGalaxies);
+	ui->checkBoxActiveGalaxiesType->setChecked(flags & Nebula::TypeActiveGalaxies);
+	ui->checkBoxInteractingGalaxiesType->setChecked(flags & Nebula::TypeInteractingGalaxies);
 	ui->checkBoxStarClustersType->setChecked(flags & Nebula::TypeStarClusters);
-	ui->checkBoxNebulaeType->setChecked(flags & Nebula::TypeNebulae);
+	ui->checkBoxBrightNebulaeType->setChecked(flags & Nebula::TypeBrightNebulae);
+	ui->checkBoxDarkNebulaeType->setChecked(flags & Nebula::TypeDarkNebulae);
+	ui->checkBoxPlanetaryNebulaeType->setChecked(flags & Nebula::TypePlanetaryNebulae);
+	ui->checkBoxHydrogenRegionsType->setChecked(flags & Nebula::TypeHydrogenRegions);
+	ui->checkBoxSupernovaRemnantsType->setChecked(flags & Nebula::TypeSupernovaRemnants);
 	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
 }
 

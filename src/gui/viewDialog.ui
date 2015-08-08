@@ -236,7 +236,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1184,32 +1184,19 @@
             </property>
             <layout class="QGridLayout" name="gridLayout_10">
              <item row="0" column="1">
-              <widget class="QCheckBox" name="checkBoxC">
+              <widget class="QCheckBox" name="checkBoxIC">
                <property name="toolTip">
-                <string>Caldwell Catalogue</string>
+                <string>Index Catalogue of Nebulae and Clusters of Stars</string>
                </property>
                <property name="text">
-                <string>C</string>
+                <string>IC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
                </attribute>
               </widget>
              </item>
-             <item row="0" column="3">
-              <widget class="QCheckBox" name="checkBoxVdB">
-               <property name="toolTip">
-                <string>Catalogue of Reflection Nebulae (Van den Bergh, 1966)</string>
-               </property>
-               <property name="text">
-                <string>VdB</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="0" column="0">
+             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxNGC">
                <property name="toolTip">
                 <string>New General Catalogue of Nebulae and Clusters of Stars</string>
@@ -1222,13 +1209,26 @@
                </attribute>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="checkBoxSh2">
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="checkBoxLBN">
                <property name="toolTip">
-                <string>Catalogue of HII Regions (Sharpless, 1959)</string>
+                <string>Lynds' Catalogue of Bright Nebulae (Lynds, 1965)</string>
                </property>
                <property name="text">
-                <string>Sh 2</string>
+                <string>LBN</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxM">
+               <property name="toolTip">
+                <string>Messier Catalogue</string>
+               </property>
+               <property name="text">
+                <string>M</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1236,12 +1236,12 @@
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBoxIC">
+              <widget class="QCheckBox" name="checkBoxC">
                <property name="toolTip">
-                <string>Index Catalogue of Nebulae and Clusters of Stars</string>
+                <string>Caldwell Catalogue</string>
                </property>
                <property name="text">
-                <string>IC</string>
+                <string>C</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1261,7 +1261,33 @@
                </attribute>
               </widget>
              </item>
-             <item row="2" column="2">
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBoxSh2">
+               <property name="toolTip">
+                <string>Catalogue of HII Regions (Sharpless, 1959)</string>
+               </property>
+               <property name="text">
+                <string>Sh 2</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="checkBoxVdB">
+               <property name="toolTip">
+                <string>Catalogue of Reflection Nebulae (Van den Bergh, 1966)</string>
+               </property>
+               <property name="text">
+                <string>VdB</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="2">
               <widget class="QCheckBox" name="checkBoxRCW">
                <property name="toolTip">
                 <string>A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)</string>
@@ -1274,26 +1300,13 @@
                </attribute>
               </widget>
              </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="checkBoxLBN">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="checkBoxLDN">
                <property name="toolTip">
-                <string>Lynds' Catalogue of Bright Nebulae (Lynds, 1965)</string>
+                <string>Lynds' Catalogue of Dark Nebulae (Lynds, 1962)</string>
                </property>
                <property name="text">
-                <string>LBN</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxM">
-               <property name="toolTip">
-                <string>Messier Catalogue</string>
-               </property>
-               <property name="text">
-                <string>M</string>
+                <string>LDN</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1326,26 +1339,13 @@
                </attribute>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="checkBoxLDN">
-               <property name="toolTip">
-                <string>Lynds' Catalogue of Dark Nebulae (Lynds, 1962)</string>
-               </property>
-               <property name="text">
-                <string>LDN</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="0" column="4">
-              <widget class="QCheckBox" name="checkBoxUGC">
+              <widget class="QCheckBox" name="checkBoxPGC">
                <property name="toolTip">
-                <string>The Uppsala General Catalogue of Galaxies</string>
+                <string>Catalog of galaxies</string>
                </property>
                <property name="text">
-                <string>UGC</string>
+                <string>PGC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1353,12 +1353,12 @@
               </widget>
              </item>
              <item row="1" column="4">
-              <widget class="QCheckBox" name="checkBoxPGC">
+              <widget class="QCheckBox" name="checkBoxUGC">
                <property name="toolTip">
-                <string>Catalog of galaxies</string>
+                <string>The Uppsala General Catalogue of Galaxies</string>
                </property>
                <property name="text">
-                <string>PGC</string>
+                <string>UGC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1396,17 +1396,47 @@
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayout_13">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxGalaxiesType">
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBoxSupernovaRemnantsType">
                <property name="text">
-                <string>Galaxies</string>
+                <string>Supernova remnants</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
                </attribute>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxInteractingGalaxiesType">
+               <property name="text">
+                <string>Interacting galaxies</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxHydrogenRegionsType">
+               <property name="text">
+                <string>Hydrogen regions</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxOtherType">
+               <property name="text">
+                <string>Other</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
               <widget class="QCheckBox" name="checkBoxStarClustersType">
                <property name="text">
                 <string>Star clusters</string>
@@ -1416,10 +1446,20 @@
                </attribute>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxNebulaeType">
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxPlanetaryNebulaeType">
                <property name="text">
-                <string>Nebulae</string>
+                <string>Planetary Nebulae</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxGalaxiesType">
+               <property name="text">
+                <string>Galaxies</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
@@ -1427,9 +1467,29 @@
               </widget>
              </item>
              <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBoxOtherType">
+              <widget class="QCheckBox" name="checkBoxActiveGalaxiesType">
                <property name="text">
-                <string>Other</string>
+                <string>Active galaxies</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBoxDarkNebulaeType">
+               <property name="text">
+                <string>Dark Nebulae</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBoxBrightNebulaeType">
+               <property name="text">
+                <string>Bright Nebulae</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOTypes</string>
