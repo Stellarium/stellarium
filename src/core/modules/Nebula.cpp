@@ -51,8 +51,13 @@ float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
 Vec3f Nebula::galaxyColor = Vec3f(1.0,0.2,0.2);
+Vec3f Nebula::radioGalaxyColor = Vec3f(0.3,0.3,0.3);
+Vec3f Nebula::activeGalaxyColor = Vec3f(0.8,0.8,0.1);
+Vec3f Nebula::interactingGalaxyColor = Vec3f(0.8,0.8,0.1);
 Vec3f Nebula::brightNebulaColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::darkNebulaColor = Vec3f(0.3,0.3,0.3);
+Vec3f Nebula::hydrogenRegionColor = Vec3f(0.1,1.0,0.1);
+Vec3f Nebula::supernovaRemnantColor = Vec3f(0.1,1.0,0.1);
 Vec3f Nebula::clusterColor = Vec3f(1.0,1.0,0.1);
 bool Nebula::flagUsageTypeFilter = false;
 Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
@@ -365,17 +370,23 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	switch (nType)
 	{
 		case NebGx:
-		case NebIGx:
 			Nebula::texGalaxy->bind();
 			color=galaxyColor;
 			break;
+		case NebIGx:
+			Nebula::texGalaxy->bind();
+			color=interactingGalaxyColor;
+			break;
 		case NebAGx:
+			Nebula::texGalaxy->bind();
+			color=activeGalaxyColor;
+			break;
 		case NebQSO:
 			Nebula::texGalaxy->bind();			
 			break;
 		case NebRGx:
 			Nebula::texGalaxy->bind();
-			color=darkNebulaColor;
+			color=radioGalaxyColor;
 			break;
 		case NebOc:
 		case NebSA:
@@ -390,8 +401,14 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			break;
 		case NebN:
 		case NebHII:
+			Nebula::texDiffuseNebula->bind();
+			color=hydrogenRegionColor;
+			break;
 		case NebRn:		
 		case NebSNR:
+			Nebula::texDiffuseNebula->bind();
+			color=supernovaRemnantColor;
+			break;
 		case NebBn:
 		case NebEn:
 			Nebula::texDiffuseNebula->bind();
