@@ -157,16 +157,19 @@ bool Meteor::update(double deltaTime)
 	else
 	{
 		// update apparent magnitude based on distance to observer
-		m_aptMag = m_absMag * 0.5f;
+		m_aptMag = m_absMag * 0.7f;
+		float mult;
 		if (m_finalDist == -m_initialDist) // earth-grazer?
 		{
-			float mult = qPow(m_xyDist, 2) / qPow(m_position[2], 2);
-			m_aptMag += 0.5f * mult > 1.f? 1.f : mult;
+			mult = qPow(m_xyDist, 2) / qPow(m_position[2], 2);
 		}
 		else
 		{
-			m_aptMag += 0.5f * (qPow(m_finalDist, 2) / qPow(m_position[2], 2));
+			mult = qPow(m_finalDist, 2) / qPow(m_position[2], 2);
 		}
+		mult = mult > 1.f? 1.f : mult;
+		m_aptMag += m_absMag * 0.3f * mult;
+		m_aptMag = m_aptMag < 0.f ? 0.f : m_aptMag;
 	}
 
 	m_position[2] -= m_speed * deltaTime;
