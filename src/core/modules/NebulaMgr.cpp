@@ -55,10 +55,20 @@ void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c;}
 const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circleColor;}
 void NebulaMgr::setGalaxyColor(const Vec3f& c) {Nebula::galaxyColor = c;}
 const Vec3f &NebulaMgr::getGalaxyColor(void) const {return Nebula::galaxyColor;}
+void NebulaMgr::setRadioGalaxyColor(const Vec3f& c) {Nebula::radioGalaxyColor = c;}
+const Vec3f &NebulaMgr::getRadioGalaxyColor(void) const {return Nebula::radioGalaxyColor;}
+void NebulaMgr::setActiveGalaxyColor(const Vec3f& c) {Nebula::activeGalaxyColor = c;}
+const Vec3f &NebulaMgr::getActiveGalaxyColor(void) const {return Nebula::activeGalaxyColor;}
+void NebulaMgr::setInteractingGalaxyColor(const Vec3f& c) {Nebula::interactingGalaxyColor = c;}
+const Vec3f &NebulaMgr::getInteractingGalaxyColor(void) const {return Nebula::interactingGalaxyColor;}
 void NebulaMgr::setBrightNebulaColor(const Vec3f& c) {Nebula::brightNebulaColor = c;}
 const Vec3f &NebulaMgr::getBrightNebulaColor(void) const {return Nebula::brightNebulaColor;}
 void NebulaMgr::setDarkNebulaColor(const Vec3f& c) {Nebula::darkNebulaColor= c;}
 const Vec3f &NebulaMgr::getDarkNebulaColor(void) const {return Nebula::darkNebulaColor;}
+void NebulaMgr::setHydrogenRegionColor(const Vec3f& c) {Nebula::hydrogenRegionColor= c;}
+const Vec3f &NebulaMgr::getHydrogenRegionColor(void) const {return Nebula::hydrogenRegionColor;}
+void NebulaMgr::setSupernovaRemnantColor(const Vec3f& c) {Nebula::supernovaRemnantColor = c;}
+const Vec3f &NebulaMgr::getSupernovaRemnantColor(void) const {return Nebula::supernovaRemnantColor;}
 void NebulaMgr::setClusterColor(const Vec3f& c) {Nebula::clusterColor= c;}
 const Vec3f &NebulaMgr::getClusterColor(void) const {return Nebula::clusterColor;}
 void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}

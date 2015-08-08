@@ -144,6 +144,33 @@ public slots:
 	void setGalaxyColor(const Vec3f& c);
 	//! Get current value of the galaxy symbol color.
 	const Vec3f& getGalaxyColor(void) const;
+	//! Set the color used to draw the active galaxy symbols (ellipses).
+	//! @param c The color of the active galaxy symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setActiveGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setActiveGalaxyColor(const Vec3f& c);
+	//! Get current value of the active galaxy symbol color.
+	const Vec3f& getActiveGalaxyColor(void) const;
+	//! Set the color used to draw the interacting galaxy symbols (ellipses).
+	//! @param c The color of the interacting galaxy symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setInteractingGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setInteractingGalaxyColor(const Vec3f& c);
+	//! Get current value of the interacting galaxy symbol color.
+	const Vec3f& getInteractingGalaxyColor(void) const;
+	//! Set the color used to draw the radio galaxy symbols (ellipses).
+	//! @param c The color of the radio galaxy symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setRadioGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setRadioGalaxyColor(const Vec3f& c);
+	//! Get current value of the radio galaxy symbol color.
+	const Vec3f& getRadioGalaxyColor(void) const;
 	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
 	//! @param c The color of the nebula symbols
 	//! @code
@@ -153,6 +180,24 @@ public slots:
 	void setBrightNebulaColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getBrightNebulaColor(void) const;
+	//! Set the color used to draw the ionized hydrogen region symbols.
+	//! @param c The color of the ionized hydrogen region symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setHydrogenRegionColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setHydrogenRegionColor(const Vec3f& c);
+	//! Get current value of the hydrogen region symbol color.
+	const Vec3f& getHydrogenRegionColor(void) const;
+	//! Set the color used to draw the supernova remnant symbols.
+	//! @param c The color of the supernova remnant symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSupernovaRemnantColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setSupernovaRemnantColor(const Vec3f& c);
+	//! Get current value of the supernova remnant symbol color.
+	const Vec3f& getSupernovaRemnantColor(void) const;
 	//! Set the color used to draw the dark nebula symbols (gray boxes).
 	//! @param c The color of the dark nebula symbols
 	//! @code
