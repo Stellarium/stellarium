@@ -219,9 +219,10 @@ void StelCore::init()
 	actionsMgr->addAction("actionAdd_Anomalistic_Month", timeGroup, N_("Add 1 anomalistic month"), this, "addAnomalisticMonth()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Year", timeGroup, N_("Add 1 anomalistic year"), this, "addAnomalisticYear()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Century", timeGroup, N_("Add 100 anomalistic years"), this, "addAnomalisticYears()");
-	actionsMgr->addAction("actionAdd_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addTropicalMonth()");
-	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addTropicalYear()");
-	actionsMgr->addAction("actionAdd_Tropical_Century", timeGroup, N_("Add 100 mean tropical years"), this, "addTropicalYears()");
+	actionsMgr->addAction("actionAdd_Mean_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addMeanTropicalMonth()");
+	actionsMgr->addAction("actionAdd_Mean_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addMeanTropicalYear()");
+	actionsMgr->addAction("actionAdd_Mean_Tropical_Century", timeGroup, N_("Add 100 mean tropical years"), this, "addMeanTropicalYears()");
+	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 tropical year"), this, "addTropicalYear()");
 	actionsMgr->addAction("actionAdd_Julian_Year", timeGroup, N_("Add 1 Julian year"), this, "addJulianYear()");
 	actionsMgr->addAction("actionAdd_Julian_Century", timeGroup, N_("Add 1 Julian century"), this, "addJulianYears()");
 	actionsMgr->addAction("actionAdd_Gaussian_Year", timeGroup, N_("Add 1 Gaussian year"), this, "addGaussianYear()");
@@ -234,9 +235,10 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Anomalistic_Month", timeGroup, N_("Subtract 1 anomalistic month"), this, "subtractAnomalisticMonth()");
 	actionsMgr->addAction("actionSubtract_Anomalistic_Year", timeGroup, N_("Subtract 1 anomalistic year"), this, "subtractAnomalisticYear()");
 	actionsMgr->addAction("actionSubtract_Anomalistic_Century", timeGroup, N_("Subtract 100 anomalistic years"), this, "subtractAnomalisticYears()");
-	actionsMgr->addAction("actionSubtract_Tropical_Month", timeGroup, N_("Subtract 1 mean tropical month"), this, "subtractTropicalMonth()");
-	actionsMgr->addAction("actionSubtract_Tropical_Year", timeGroup, N_("Subtract 1 mean tropical year"), this, "subtractTropicalYear()");
-	actionsMgr->addAction("actionSubtract_Tropical_Century", timeGroup, N_("Subtract 100 mean tropical years"), this, "subtractTropicalYears()");
+	actionsMgr->addAction("actionSubtract_Mean_Tropical_Month", timeGroup, N_("Subtract 1 mean tropical month"), this, "subtractMeanTropicalMonth()");
+	actionsMgr->addAction("actionSubtract_Mean_Tropical_Year", timeGroup, N_("Subtract 1 mean tropical year"), this, "subtractMeanTropicalYear()");
+	actionsMgr->addAction("actionSubtract_Mean_Tropical_Century", timeGroup, N_("Subtract 100 mean tropical years"), this, "subtractMeanTropicalYears()");
+	actionsMgr->addAction("actionSubtract_Tropical_Year", timeGroup, N_("Subtract 1 tropical year"), this, "subtractTropicalYear()");
 	actionsMgr->addAction("actionSubtract_Julian_Year", timeGroup, N_("Subtract 1 Julian year"), this, "subtractJulianYear()");
 	actionsMgr->addAction("actionSubtract_Julian_Century", timeGroup, N_("Subtract 1 Julian century"), this, "subtractJulianYears()");
 	actionsMgr->addAction("actionSubtract_Gaussian_Year", timeGroup, N_("Subtract 1 Gaussian year"), this, "subtractGaussianYear()");
@@ -1108,7 +1110,7 @@ void StelCore::addDraconicMonth()
 	addSolarDays(27.212220817);
 }
 
-void StelCore::addTropicalMonth()
+void StelCore::addMeanTropicalMonth()
 {
 	addSolarDays(27.321582241);
 }
@@ -1133,12 +1135,19 @@ void StelCore::addDraconicYear()
 	addSolarDays(346.620075883);
 }
 
-void StelCore::addTropicalYear()
+void StelCore::addMeanTropicalYear()
 {
 	addSolarDays(365.242190419);
 }
 
-void StelCore::addTropicalYears(float n)
+void StelCore::addTropicalYear()
+{
+	// Source: J. Meeus. More Mathematical Astronomy Morsels. 2002, p. 358.
+	float T = (getJD()-2451545.0)/365250.0;
+	addSolarDays(365.242189623 - T*(0.000061522 - T*(0.0000000609 + T*0.00000026525)));
+}
+
+void StelCore::addMeanTropicalYears(float n)
 {
 	addSolarDays(365.2421897*n);
 }
@@ -1208,7 +1217,7 @@ void StelCore::subtractDraconicMonth()
 	addSolarDays(-27.212220817);
 }
 
-void StelCore::subtractTropicalMonth()
+void StelCore::subtractMeanTropicalMonth()
 {
 	addSolarDays(-27.321582241);
 }
@@ -1235,10 +1244,17 @@ void StelCore::subtractDraconicYear()
 
 void StelCore::subtractTropicalYear()
 {
+	// Source: J. Meeus. More Mathematical Astronomy Morsels. 2002, p. 358.
+	float T = (getJD()-2451545.0)/365250.0;
+	addSolarDays(-(365.242189623 - T*(0.000061522 - T*(0.0000000609 + T*0.00000026525))));
+}
+
+void StelCore::subtractMeanTropicalYear()
+{
 	addSolarDays(-365.242190419);
 }
 
-void StelCore::subtractTropicalYears(float n)
+void StelCore::subtractMeanTropicalYears(float n)
 {
 	addSolarDays(-365.2421897*n);
 }

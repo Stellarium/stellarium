@@ -501,11 +501,13 @@ public slots:
 	void addAnomalisticYears(float n=100.f);
 
 	//! Add one mean tropical month to the simulation time.
-	void addTropicalMonth();
+	void addMeanTropicalMonth();
 	//! Add one mean tropical year to the simulation time.
-	void addTropicalYear();
+	void addMeanTropicalYear();
 	//! Add n mean tropical years to the simulation time.
-	void addTropicalYears(float n=100.f);
+	void addMeanTropicalYears(float n=100.f);
+	//! Add one tropical year to the simulation time.
+	void addTropicalYear();
 
 	//! Add one Julian year to the simulation time.
 	void addJulianYear();
@@ -531,11 +533,13 @@ public slots:
 	void subtractAnomalisticYears(float n=100.f);
 
 	//! Subtract one mean tropical month to the simulation time.
-	void subtractTropicalMonth();
+	void subtractMeanTropicalMonth();
 	//! Subtract one mean tropical year to the simulation time.
-	void subtractTropicalYear();
+	void subtractMeanTropicalYear();
 	//! Subtract n mean tropical years to the simulation time.
-	void subtractTropicalYears(float n=100.f);
+	void subtractMeanTropicalYears(float n=100.f);
+	//! Subtract one tropical year to the simulation time.
+	void subtractTropicalYear();
 
 	//! Subtract one Julian year to the simulation time.
 	void subtractJulianYear();
