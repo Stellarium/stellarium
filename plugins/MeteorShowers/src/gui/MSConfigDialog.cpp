@@ -210,39 +210,39 @@ void MSConfigDialog::setAboutHtml()
 			"<td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td>"
 		"</tr>"
 	"</table>"
+	+ q_(
 	"<p>"
-		+ q_(""
-		     "This plugin enables you to simulate periodic meteor showers and "
-		     "to display a marker for each active and inactive radiant."
-		     "") +
+		"This plugin enables you to simulate periodic meteor showers and "
+		"to display a marker for each active and inactive radiant."
 	"</p>"
-		+ q_(""
-		     "By a single click on the radiant's marker, you can see all the "
-		     "details about its position and activity. Most data used on this "
-		     "plugin comes from the oficial <a href=\"http://imo.net\">International "
-		     "Meteor Organization</a> catalog."
-		     "") +
+	"<p>"
+		"By a single click on the radiant's marker, you can see all the "
+		"details about its position and activity. Most data used on this "
+		"plugin comes from the oficial <a href=\"http://imo.net\">International "
+		"Meteor Organization</a> catalog."
 	"</p>"
-		+ q_("It has three types of markers:") +
+	"<p>"
+		"It has three types of markers:"
 		"<ul>"
 			"<li>"
-				"<b>" + q_("Confirmed:") + "</b> " +
-				q_("the radiant is active and its data was confirmed."
+				"<b>Confirmed:</b> "
+				"the radiant is active and its data was confirmed."
 				" Thus, this is a historical (really occurred in the past) or predicted"
-				" meteor shower.") +
+				" meteor shower."
 			"</li>"
 			"<li>"
-				"<b>" + q_("Generic:") + "</b> " +
-				q_("the radiant is active, but its data was not confirmed."
+				"<b>Generic:</b> "
+				"the radiant is active, but its data was not confirmed."
 				" It means that this can occur on real life, but that we do not have real"
-				" data about its activity for the current sky year.") +
+				" data about its activity for the current sky year."
 			"</li>"
 			"<li>"
-				"<b>" + q_("Inactive:") + "</b> " +
-				q_("the radiant is inactive for the current sky date.") +
+				"<b>Inactive:</b> "
+				"the radiant is inactive for the current sky date."
 			"</li>"
 		"</ul>"
 	"</p>"
+	) +
 	"<h3>" + q_("Terms") + "</h3>"
 	"<p><b>" + q_("Meteor shower") + "</b>"
 		"<br />" +
