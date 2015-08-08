@@ -37,8 +37,9 @@ MeteorShowers::~MeteorShowers()
 	m_meteorShowers.clear();
 }
 
-void MeteorShowers::update(StelCore* core, double deltaTime)
+void MeteorShowers::update(double deltaTime)
 {
+	StelCore* core = StelApp::getInstance().getCore();
 	foreach (const MeteorShowerP& ms, m_meteorShowers)
 	{
 		ms->update(core, deltaTime);
