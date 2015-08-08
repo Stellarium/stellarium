@@ -261,6 +261,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
 		}
+
+		if (!getMorphologicalTypeDescription().isEmpty())
+			oss << q_("Morphological description: ") << getMorphologicalTypeDescription() << ".<br>";
+
 	}
 
 	postProcessInfoString(str, flags);
@@ -602,6 +606,254 @@ bool Nebula::objectInDisplayedType()
 QString Nebula::getMorphologicalTypeString(void) const
 {
 	return mTypeString;
+}
+
+QString Nebula::getMorphologicalTypeDescription(void) const
+{
+	QString m, r = "";
+
+	QRegExp GlClRx("\\.*(I|II|III|IV|V|VI|VI|VII|VIII|IX|X|XI|XII)\\.*");
+	int idx = GlClRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
+	else
+		m = mTypeString;
+
+	QStringList glclass;
+	glclass << "I" << "II" << "III" << "IV" << "V" << "VI" << "VII" << "VIII" << "IX" << "X" << "XI" << "XII";
+
+	if (GlClRx.exactMatch(m)) // Globular Clusters
+	{
+		switch(glclass.indexOf(GlClRx.capturedTexts().at(1).trimmed()))
+		{
+			case 0:
+				r = qc_("high concentration toward the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 1:
+				r = qc_("dense central concentration", "Shapley–Sawyer Concentration Class");
+				break;
+			case 2:
+				r = qc_("strong inner core of stars", "Shapley–Sawyer Concentration Class");
+				break;
+			case 3:
+				r = qc_("intermediate rich concentrations", "Shapley–Sawyer Concentration Class");
+				break;
+			case 4:
+			case 5:
+			case 6:
+				r = qc_("intermediate concentrations", "Shapley–Sawyer Concentration Class");
+				break;
+			case 7:
+				r = qc_("rather loosely concentrated towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 8:
+				r = qc_("loose towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 9:
+				r = qc_("loose", "Shapley–Sawyer Concentration Class");
+				break;
+			case 10:
+				r = qc_("very loose towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			case 11:
+				r = qc_("almost no concentration towards the center", "Shapley–Sawyer Concentration Class");
+				break;
+			default:
+				r = qc_("undocumented concentration class", "Shapley–Sawyer Concentration Class");
+				break;
+		}
+	}
+
+	QRegExp OClRx("\\.*(I|II|III|IV)(\\d)(p|m|r)(n*)\\.*");
+	idx = OClRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
+	else
+		m = mTypeString;
+
+	if (OClRx.exactMatch(m)) // Open Clusters
+	{
+		QStringList occlass, ocrich, rtxt;
+		occlass << "I" << "II" << "III" << "IV";
+		ocrich << "p" << "m" << "r";
+		switch(occlass.indexOf(OClRx.capturedTexts().at(1).trimmed()))
+		{
+			case 0:
+				rtxt << qc_("strong central concentration of stars", "Trumpler's Concentration Class");
+				break;
+			case 1:
+				rtxt << qc_("little central concentration of stars", "Trumpler's Concentration Class");
+				break;
+			case 2:
+				rtxt << qc_("no noticeable concentration of stars", "Trumpler's Concentration Class");
+				break;
+			case 3:
+				rtxt << qc_("a star field condensation", "Trumpler's Concentration Class");
+				break;
+			default:
+				rtxt << qc_("undocumented concentration class", "Trumpler's Concentration Class");
+				break;
+		}
+		switch(OClRx.capturedTexts().at(2).toInt())
+		{
+			case 1:
+				rtxt << qc_("small range of brightness of members", "Trumpler's Brightness Class");
+				break;
+			case 2:
+				rtxt << qc_("medium range of brightness of members", "Trumpler's Brightness Class");
+				break;
+			case 3:
+				rtxt << qc_("large range of brightness of members", "Trumpler's Brightness Class");
+				break;
+			default:
+				rtxt << qc_("undocumented brightness class", "Trumpler's Concentration Class");
+				break;
+		}
+		switch(ocrich.indexOf(OClRx.capturedTexts().at(3).trimmed()))
+		{
+			case 0:
+				rtxt << qc_("poor cluster with less than 50 stars", "Trumpler's Number of Members Class");
+				break;
+			case 1:
+				rtxt << qc_("moderately rich cluster with 50-100 stars", "Trumpler's Number of Members Class");
+				break;
+			case 2:
+				rtxt << qc_("rich cluster with more than 100 stars", "Trumpler's Number of Members Class");
+				break;
+			default:
+				rtxt << qc_("undocumented number of members class", "Trumpler's Number of Members Class");
+				break;
+		}
+		if (!OClRx.capturedTexts().at(4).trimmed().isEmpty())
+			rtxt << qc_("the cluster lies within nebulosity", "nebulosity factor of open clusters");
+
+		r = rtxt.join(",<br>");
+	}
+
+	QRegExp VdBRx("\\.*(I|II|I-II|II P|P),\\s+(VBR|VB|BR|M|F|VF|:)\\.*");
+	idx = VdBRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
+	else
+		m = mTypeString;
+
+	if (VdBRx.exactMatch(m)) // Reflection Nebulae
+	{
+		QStringList rnclass, rnbrightness, rtx;
+		rnclass << "I" << "II" << "I-II" << "II P" << "P";
+		rnbrightness << "VBR" << "VB" << "BR" << "M" << "F" << "VF" << ":";
+		switch(rnbrightness.indexOf(VdBRx.capturedTexts().at(2).trimmed()))
+		{
+			case 0:
+			case 1:
+				rtx << qc_("very bright", "Reflection Nebulae Brightness");
+				break;
+			case 2:
+				rtx << qc_("bright", "Reflection Nebulae Brightness");
+				break;
+			case 3:
+				rtx << qc_("moderate brightness", "Reflection Nebulae Brightness");
+				break;
+			case 4:
+				rtx << qc_("faint", "Reflection Nebulae Brightness");
+				break;
+			case 5:
+				rtx << qc_("very faint", "Reflection Nebulae Brightness");
+				break;
+			case 6:
+				rtx << qc_("uncertain brightness", "Reflection Nebulae Brightness");
+				break;
+			default:
+				rtx << qc_("undocumented brightness of reflection nebulae", "Reflection Nebulae Brightness");
+				break;
+		}
+		switch(rnclass.indexOf(VdBRx.capturedTexts().at(1).trimmed()))
+		{
+			case 0:
+				rtx << qc_("the illuminating star is embedded in the nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 1:
+				rtx << qc_("star is located outside the illuminated nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 2:
+				rtx << qc_("star is located on the corner of the illuminated nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 3:
+				rtx << qc_("star is located outside the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
+				break;
+			case 4:
+				rtx << qc_("the illuminated peculiar nebulosity", "Reflection Nebulae Classification");
+				break;
+			default:
+				rtx << qc_("undocumented reflection nebulae", "Reflection Nebulae Classification");
+				break;
+		}
+		r = rtx.join(",<br>");
+	}
+
+
+	QRegExp HIIRx("\\.*(\\d+),\\s+(\\d+),\\s+(\\d+)\\.*");
+	idx = HIIRx.indexIn(mTypeString);
+	if (idx>0)
+		m = mTypeString.mid(idx);
+	else
+		m = mTypeString;
+
+	if (HIIRx.exactMatch(m)) // HII regions
+	{
+		int form	= HIIRx.capturedTexts().at(1).toInt();
+		int structure	= HIIRx.capturedTexts().at(2).toInt();
+		int brightness	= HIIRx.capturedTexts().at(3).toInt();
+		QStringList morph;
+		switch(form)
+		{
+			case 1:
+				morph << q_("circular form");
+				break;
+			case 2:
+				morph << q_("elliptical form");
+				break;
+			case 3:
+				morph << q_("irregular form");
+				break;
+			default:
+				morph << q_("undocumented form");
+				break;
+		}
+		switch(structure)
+		{
+			case 1:
+				morph << q_("amorphous structure");
+				break;
+			case 2:
+				morph << q_("conventional structure");
+				break;
+			case 3:
+				morph << q_("filamentary structure");
+				break;
+			default:
+				morph << q_("undocumented structure");
+				break;
+		}
+		switch(brightness)
+		{
+			case 1:
+				morph << qc_("faintest", "HII region brightness");
+				break;
+			case 2:
+				morph << qc_("moderate brightness", "HII region brightness");
+				break;
+			case 3:
+				morph << qc_("brightest", "HII region brightness");
+				break;
+			default:
+				morph << q_("undocumented brightness");
+				break;
+		}
+		r = morph.join(",<br>");
+	}
+
+	return r;
 }
 
 QString Nebula::getTypeString(void) const

@@ -164,6 +164,10 @@ private:
 
 	bool objectInDisplayedType();
 
+	//! Get the printable description of morphological nebula type.
+	//! @return the nebula morphological type string.
+	QString getMorphologicalTypeDescription() const;
+
 	unsigned int DSO_nb;
 	unsigned int M_nb;              // Messier Catalog number
 	unsigned int NGC_nb;            // New General Catalog number
