@@ -118,7 +118,7 @@ class Translations
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Supernova remnants");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
-		N_("Interstellar matters");
+		N_("Interstellar matter");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Emission objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
