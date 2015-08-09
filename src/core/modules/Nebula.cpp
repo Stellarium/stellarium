@@ -295,8 +295,12 @@ float Nebula::getVMagnitude(const StelCore* core) const
 float Nebula::getSelectPriority(const StelCore* core) const
 {
 	const NebulaMgr* nebMgr = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"));
+	// minimize unwanted selection of the deep-sky objects
 	if (!nebMgr->getFlagHints())
-		return StelObject::getSelectPriority(core)-2.f;
+		return StelObject::getSelectPriority(core)+3.f;
+
+	if (!objectInDisplayedType())
+		return StelObject::getSelectPriority(core)+3.f;
 	
 	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
 	// make very easy to select if labeled
@@ -391,6 +395,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			color=activeGalaxyColor;
 			break;
 		case NebQSO:
+		case NebBLL:
 			Nebula::texGalaxy->bind();			
 			break;
 		case NebRGx:
@@ -550,7 +555,7 @@ void Nebula::readDSO(QDataStream &in)
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));
 }
 
-bool Nebula::objectInDisplayedType()
+bool Nebula::objectInDisplayedType() const
 {
 	if (!flagUsageTypeFilter)
 		return true;
@@ -565,6 +570,7 @@ bool Nebula::objectInDisplayedType()
 		case NebAGx:
 		case NebRGx:
 		case NebQSO:
+		case NebBLL:
 			cntype = 1; // Active Galaxies
 			break;
 		case NebIGx:
@@ -951,8 +957,11 @@ QString Nebula::getTypeString(void) const
 		case NebEMO:
 			wsType = q_("emission object");
 			break;
+		case NebBLL:
+			wsType = q_("BL Lac object");
+			break;
 		case NebUnknown:
-			wsType = q_("unknown");
+			wsType = q_("unknown or undocumented type");
 			break;
 		default:
 			wsType = q_("undocumented type");
