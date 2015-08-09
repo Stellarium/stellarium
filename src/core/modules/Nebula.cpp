@@ -248,7 +248,10 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << q_("Parallax: %1\"").arg(px) << "<br>";
 			if (oDistance==0.f)
+			{
+				//TRANSLATORS: Unit of measure for distance - light years
 				oss << q_("Distance: %1 ly").arg(dx) << "<br>";
+			}
 		}
 
 		if (oDistance>0.f)
@@ -260,9 +263,15 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				dx = QString("%1").arg(QString::number(oDistance, 'f', 2));
 
 			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
+			{
+				//TRANSLATORS: Unit of measure for distance - megaparsecs
 				du = q_("Mpc");
+			}
 			else
+			{
+				//TRANSLATORS: Unit of measure for distance - kiloparsecs
 				du = q_("kpc");
+			}
 
 			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
 		}
