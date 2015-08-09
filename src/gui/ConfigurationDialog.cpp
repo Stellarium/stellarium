@@ -173,6 +173,8 @@ void ConfigurationDialog::createDialogContent()
 	resetStarCatalogControls();
 	ui->nutationCheckBox->setChecked(core->getUseNutation());
 	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
+	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
+	connect(ui->topocentricCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseTopocentricCoordinates(bool)));
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
@@ -601,6 +603,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagTypeFiltersUsage());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 	conf->setValue("astro/flag_nutation", core->getUseNutation());
+	conf->setValue("astro/flag_topocentric_coordinates", core->getUseTopocentricCoordinates());
 
 	// view dialog / DSO tag settings
 	const Nebula::CatalogGroup& cflags = nmgr->getCatalogFilters();
