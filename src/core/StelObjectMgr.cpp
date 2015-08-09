@@ -365,6 +365,7 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:18"] = "Supernova remnants";
 			result["NebulaMgr:19"] = "Interstellar matters";
 			result["NebulaMgr:20"] = "Emission objects";
+			result["NebulaMgr:21"] = "BL Lac objects";
 			result["NebulaMgr:100"] = "Messier Catalogue";
 			result["NebulaMgr:101"] = "Caldwell Catalogue";
 			result["NebulaMgr:102"] = "Barnard Catalogue";

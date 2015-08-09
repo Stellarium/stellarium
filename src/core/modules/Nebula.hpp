@@ -151,7 +151,8 @@ private:
 		NebSNR		= 18,	//!< Supernova remnant
 		NebISM		= 19,	//!< Interstellar matter
 		NebEMO		= 20,	//!< Emission object
-		NebUnknown	= 21	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebBLL		= 21,	//!< BL Lac object
+		NebUnknown	= 22	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
@@ -162,7 +163,7 @@ private:
 	void drawLabel(StelPainter& sPainter, float maxMagLabel);
 	void drawHints(StelPainter& sPainter, float maxMagHints);
 
-	bool objectInDisplayedType();
+	bool objectInDisplayedType() const;
 
 	//! Get the printable description of morphological nebula type.
 	//! @return the nebula morphological type string.

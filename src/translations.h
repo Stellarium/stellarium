@@ -92,15 +92,37 @@ class Translations
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dark nebulae");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
-		N_("Irregular galaxies");
-		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Clusters associated with nebulosity");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("HII regions");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Reflection nebulae");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
-		N_("H-α emission regions");
+		N_("Active galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Radio galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Interacting galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Bright quasars");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Star clusters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Stellar associations");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Star clouds");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Bipolar nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Emission nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Supernova remnants");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Interstellar matters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Emission objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("BL Lac objects");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)

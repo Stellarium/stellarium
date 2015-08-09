@@ -730,7 +730,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			QStringList oTypes;
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
-			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD";
+			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN" << "BLL";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -789,6 +789,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebRGx;
 					break;
 				case 19:
+				case 25: // LINER-type active galaxies
 					nType = (unsigned int)Nebula::NebAGx;
 					break;
 				case 20:
@@ -800,6 +801,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					break;
 				case 22:
 					nType = (unsigned int)Nebula::NebEMO;
+					break;
+				case 26:
+					nType = (unsigned int)Nebula::NebBLL;
 					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
