@@ -714,13 +714,13 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		switch(OClRx.capturedTexts().at(2).toInt())
 		{
 			case 1:
-				rtxt << qc_("small range of brightness of members", "Trumpler's Brightness Class");
+				rtxt << qc_("small range the brightness of members of cluster", "Trumpler's Brightness Class");
 				break;
 			case 2:
-				rtxt << qc_("medium range of brightness of members", "Trumpler's Brightness Class");
+				rtxt << qc_("medium range the brightness of members of cluster", "Trumpler's Brightness Class");
 				break;
 			case 3:
-				rtxt << qc_("large range of brightness of members", "Trumpler's Brightness Class");
+				rtxt << qc_("large range the brightness of members of cluster", "Trumpler's Brightness Class");
 				break;
 			default:
 				rtxt << qc_("undocumented brightness class", "Trumpler's Concentration Class");
