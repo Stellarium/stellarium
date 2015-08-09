@@ -595,6 +595,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_planets_labels", ssmgr->getFlagLabels());
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
+	conf->setValue("astro/nebula_labels_amount", nmgr->getLabelsAmount());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagTypeFiltersUsage());

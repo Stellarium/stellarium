@@ -179,14 +179,16 @@ void ViewDialog::createDialogContent()
 
 	// Limit Magnitudes
 	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	// Stars
 	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
-	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
 	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
+	// DSO
+	ui->groupBoxNebulaLimitMagnitude->setChecked(drawer->getFlagNebulaMagnitudeLimit());
 	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
 	
 	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
 	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
-	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+	connect(ui->groupBoxNebulaLimitMagnitude, SIGNAL(toggled(bool)),
 	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
 	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
 	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
@@ -226,15 +228,17 @@ void ViewDialog::createDialogContent()
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
-	connectCheckBox(ui->nebulaLabelCheckBox, "actionShow_Nebulas");
+	connectGroupBox(ui->groupBoxLabelsAndMarkers, "actionShow_Nebulas");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 
 	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
 	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
 	ui->planetsLabelsHorizontalSlider->setValue((int)(ssmgr->getLabelsAmount()*10.f));
 	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(planetsLabelsValueChanged(int)));
-	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
+	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getLabelsAmount()*10.f));
 	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasLabelsValueChanged(int)));
+	ui->nebulasHintsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
+	connect(ui->nebulasHintsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasMarkersValueChanged(int)));
 
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -869,9 +873,15 @@ void ViewDialog::planetsLabelsValueChanged(int v)
 void ViewDialog::nebulasLabelsValueChanged(int v)
 {
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+	float a= ((float)v)/10.f;	
+	nmgr->setLabelsAmount(a);
+}
+
+void ViewDialog::nebulasMarkersValueChanged(int v)
+{
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	float a= ((float)v)/10.f;
 	nmgr->setHintsAmount(a);
-	nmgr->setLabelsAmount(a);
 }
 
 // Update the widget to make sure it is synchrone if a value was changed programmatically
