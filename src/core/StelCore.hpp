@@ -53,6 +53,7 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz)
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
+	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
 
 public:
 	//! @enum FrameType
@@ -405,6 +406,11 @@ public slots:
 	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
 	void setUseNutation(bool useNutation) { flagUseNutation=useNutation;}
 
+	//! @return whether topocentric coordinates are currently used.
+	bool getUseTopocentricCoordinates() const {return flagUseTopocentricCoordinates;}
+	//! Set whether you want computation and simulation of nutation (a slight wobble of Earth's axis, just a few arcseconds).
+	void setUseTopocentricCoordinates(bool use) { flagUseTopocentricCoordinates=use;}
+
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;
 	//! Set the preset sky time from a JD
@@ -613,11 +619,8 @@ private:
 	Mat4d matAltAzToEquinoxEqu;                // Transform from topocentric altazimuthal coordinate to Earth Equatorial
 	Mat4d matEquinoxEquToAltAz;                // Transform from Earth Equatorial to topocentric (StelObserver) altazimuthal coordinate
 	Mat4d matHeliocentricEclipticToEquinoxEqu; // Transform from heliocentric ecliptic Cartesian (VSOP87A) to earth equatorial coordinate
-	Mat4d matEquinoxEquToJ2000;                // GZ For Earth, this should be inverse precession matrix. Yes, =Rz(VSOPoffset)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
-	Mat4d matJ2000ToEquinoxEqu;                // GZ: Should be precession matrix?
-//	Mat4d matEclOfDateToVsop87;                // GZ NEW: precession of the ecliptic
-//	Mat4d matVsop87ToEclOfDate;                // GZ NEW: precession of the ecliptic
-
+	Mat4d matEquinoxEquToJ2000;                // For Earth, this is almost the inverse precession matrix, =Rz(VSOPbias)Rx(eps0)Rz(-psiA)Rx(-omA)Rz(chiA)
+	Mat4d matJ2000ToEquinoxEqu;                // precession matrix
 
 	Mat4d matJ2000ToAltAz;
 
@@ -631,6 +634,8 @@ private:
 
 	// flag to indicate we want to use nutation (the small-scale wobble of earth's axis)
 	bool flagUseNutation;
+	// flag to indicate that we show topocentrically corrected coordinates. (Switching to false for planetocentric coordinates is new for 0.14)
+	bool flagUseTopocentricCoordinates;
 
 	// Time variables
 	double timeSpeed;                  // Positive : forward, Negative : Backward, 1 = 1sec/sec

@@ -599,7 +599,8 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		newLocation = trans.qtranslate(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
-	if (location->text()!=newLocation)
+	// TODO: When topocentric switch is toggled, this must be redrawn!
+	if (location->text()!=newLocation || updatePos)
 	{
 		updatePos = true;
 		location->setText(newLocation);
@@ -622,7 +623,12 @@ void BottomStelBar::updateText(bool updatePos)
 			lon *= -1;
 		}
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
-		QString rho = q_("planetocentric distance %1 km").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU);
+		QString rho;
+		if (core->getUseTopocentricCoordinates())
+			rho = q_("planetocentric distance %1 km").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU);
+		else
+			rho = q_("planetocentric observer");
+
 		location->setToolTip(QString("%1 %2, %3").arg(latStr).arg(lonStr).arg(rho));
 	}
 

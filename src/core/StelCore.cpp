@@ -64,6 +64,8 @@ StelCore::StelCore()
 	, currentProjectionType(ProjectionStereographic)
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(NULL)
+	, flagUseNutation(true)
+	, flagUseTopocentricCoordinates(true)
 	, timeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
@@ -100,6 +102,7 @@ StelCore::StelCore()
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
+	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
 }
 
 
@@ -787,25 +790,22 @@ void StelCore::updateTransformMatrices()
 	// GZ tmp could be called matAltAzToVsop87
 	Mat4d tmp = matJ2000ToVsop87 * matEquinoxEquToJ2000 * matAltAzToEquinoxEqu;
 
-	// TODO: getDistanceFromCenter assumes spherical planets. Use rectangular coordinates for observer!
-	matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
-						  Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
+	// Before 0.14 getDistanceFromCenter assumed spherical planets. Now uses rectangular coordinates for observer!
+	if (flagUseTopocentricCoordinates)
+	{
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
+				Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
-	matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
-						  Mat4d::translation(-position->getCenterVsop87Pos());
+		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
+				Mat4d::translation(-position->getCenterVsop87Pos());
+	}
+	else
+	{
+		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp;
 
-
-//	Given that ecliptic of date is apparently not used any longer as reference plane for astronomical computations, it is enough to display it.
-//	This half-finished block of comments can the likely go away for V0.14. Else, do we have use for carrying the extra matrices with us? Then complete this:
-//	// GZ Finally, new: rotation of the ecliptic of date. Not sure which direction, though...
-//	double epsilon_A, chi_A, omega_A, psi_A;
-//	// MAKE SURE JDay IS TT!!!
-//	getPrecessionAnglesVondrak(JDay, &epsilon_A, &chi_A, &omega_A, &psi_A);
-//	//matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
-//	matVsop87ToEclOfDate= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-23.4392803055555555556*(M_PI/180));
-//	matEclOfDateToVsop87=matVsop87ToEclOfDate.transpose();
-//	//matEclOfDateToVsop87= Mat4d::xrotation(epsilon_A)*Mat4d::zrotation(chi_A)*Mat4d::xrotation(-omega_A)*Mat4d::zrotation(-psi_A);
-//	//matVsop87ToEclOfDate=matVsop87ToEclOfDate.transpose();
+		matHeliocentricEclipticJ2000ToAltAz =  tmp.transpose() *
+				Mat4d::translation(-position->getCenterVsop87Pos());
+	}
 }
 
 // Return the observer heliocentric position
