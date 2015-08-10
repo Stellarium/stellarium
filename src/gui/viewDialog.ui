@@ -1519,37 +1519,51 @@
                <property name="spacing">
                 <number>6</number>
                </property>
-               <item row="0" column="1">
-                <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
-                 <property name="value">
-                  <number>33</number>
-                 </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
+               <item row="2" column="0">
+                <layout class="QGridLayout" name="gridLayout_15">
+                 <item row="0" column="1">
+                  <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
+                   <property name="value">
+                    <number>33</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelLabels">
+                   <property name="text">
+                    <string>Labels</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="labelHints">
+                   <property name="text">
+                    <string>Hints</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSlider" name="nebulasHintsHorizontalSlider">
+                   <property name="value">
+                    <number>33</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
-               <item row="1" column="1">
-                <widget class="QSlider" name="nebulasHintsHorizontalSlider">
-                 <property name="value">
-                  <number>33</number>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="checkBoxProportionalHints">
+                 <property name="toolTip">
+                  <string>Use hints proportional to angular size of deep-sky objects</string>
                  </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="labelHints">
                  <property name="text">
-                  <string>Hints</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="labelLabels">
-                 <property name="text">
-                  <string>Labels</string>
+                  <string>Use proportional hints</string>
                  </property>
                 </widget>
                </item>
