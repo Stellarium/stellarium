@@ -571,6 +571,7 @@ bool Nebula::objectInDisplayedType() const
 		case NebRGx:
 		case NebQSO:
 		case NebBLL:
+		case NebBLA:
 			cntype = 1; // Active Galaxies
 			break;
 		case NebIGx:
@@ -959,6 +960,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebBLL:
 			wsType = q_("BL Lac object");
+			break;
+		case NebBLA:
+			wsType = q_("blazar");
 			break;
 		case NebUnknown:
 			wsType = q_("unknown or undocumented type");

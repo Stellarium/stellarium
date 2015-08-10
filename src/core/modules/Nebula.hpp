@@ -152,7 +152,8 @@ private:
 		NebISM		= 19,	//!< Interstellar matter
 		NebEMO		= 20,	//!< Emission object
 		NebBLL		= 21,	//!< BL Lac object
-		NebUnknown	= 22	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebBLA		= 22,	//!< Blazar
+		NebUnknown	= 23	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
