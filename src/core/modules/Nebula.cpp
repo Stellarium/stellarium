@@ -545,7 +545,7 @@ void Nebula::readDSO(QDataStream &in)
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb;
 
 	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
-		angularSize = majorAxisSize*minorAxisSize;
+		angularSize = (majorAxisSize+minorAxisSize)/2.f;
 	else
 		angularSize = majorAxisSize;
 
