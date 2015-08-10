@@ -629,7 +629,7 @@ void BottomStelBar::updateText(bool updatePos)
 		else
 			rho = q_("planetocentric observer");
 
-		location->setToolTip(QString("%1 %2, %3").arg(latStr).arg(lonStr).arg(rho));
+		location->setToolTip(QString("%1 %2; %3").arg(latStr).arg(lonStr).arg(rho));
 	}
 
 	QString str;
