@@ -153,7 +153,9 @@ private:
 		NebEMO		= 20,	//!< Emission object
 		NebBLL		= 21,	//!< BL Lac object
 		NebBLA		= 22,	//!< Blazar
-		NebUnknown	= 23	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebMolCld	= 23, 	//!< Molecular Cloud
+		NebYSO		= 24, 	//!< Young Stellar Object
+		NebUnknown	= 25	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
