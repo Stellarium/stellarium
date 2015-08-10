@@ -433,6 +433,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			color=brightNebulaColor;
 			break;
 		case NebDn:
+		case NebMolCld:
+		case NebYSO:
 			Nebula::texDarkNebula->bind();
 			color=darkNebulaColor;
 			break;
@@ -595,6 +597,8 @@ bool Nebula::objectInDisplayedType() const
 			cntype = 5; // Bright Nebulae
 			break;
 		case NebDn:
+		case NebMolCld:
+		case NebYSO:
 			cntype = 6; // Dark Nebulae
 			break;
 		case NebPn:
@@ -963,6 +967,12 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebBLA:
 			wsType = q_("blazar");
+			break;
+		case NebMolCld:
+			wsType = q_("molecular cloud");
+			break;
+		case NebYSO:
+			wsType = q_("young stellar object");
 			break;
 		case NebUnknown:
 			wsType = q_("unknown or undocumented type");

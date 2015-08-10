@@ -125,6 +125,10 @@ class Translations
 		N_("BL Lac objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Blazars");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Molecular Clouds");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Young Stellar Objects");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)

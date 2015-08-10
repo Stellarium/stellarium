@@ -731,7 +731,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
-			       << "BLL" << "BLA";
+			       << "BLL" << "BLA" << "MOC" << "YSO";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -808,6 +808,12 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					break;
 				case 27:
 					nType = (unsigned int)Nebula::NebBLA;
+					break;
+				case 28:
+					nType = (unsigned int)Nebula::NebMolCld;
+					break;
+				case 29:
+					nType = (unsigned int)Nebula::NebYSO;
 					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
@@ -2149,6 +2155,8 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("RCW %1").arg(n->RCW_nb);
 					else if (n->LBN_nb>0)
 						result << QString("LBN %1").arg(n->LBN_nb);
+					else if (n->LDN_nb>0)
+						result << QString("LDN %1").arg(n->LDN_nb);
 					else if (n->Cr_nb>0)
 						result << QString("Cr %1").arg(n->Cr_nb);
 					else if (n->Mel_nb>0)
