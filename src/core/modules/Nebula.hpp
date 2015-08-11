@@ -104,7 +104,7 @@ public:
 	virtual Vec3f getInfoColor() const;
 	virtual QString getNameI18n() const {return nameI18;}
 	virtual QString getEnglishName() const {return englishName;}
-	virtual double getAngularSize(const StelCore*) const {return angularSize*0.5;}
+	virtual double getAngularSize(const StelCore*) const;
 	virtual SphericalRegionP getRegion() const {return pointRegion;}
 
 	// Methods specific to Nebula
@@ -121,6 +121,10 @@ public:
 
 	float getSurfaceBrightness(const StelCore* core) const;
 	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
+
+	//! Get the surface area.
+	//! @return surface area in square degrees.
+	float getSurfaceArea(void) const;
 
 	void setProperName(QString name) { englishName = name; }
 
@@ -193,8 +197,7 @@ private:
 	QString mTypeString;		// Morphological type of object (as string)
 	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here. -- OUTDATED!
 	float bMag;                     // B magnitude
-	float vMag;                     // V magnitude. For Dark Nebulae, opacity is stored here.
-	float angularSize;              // Angular size in degree -- OUTDATED!
+	float vMag;                     // V magnitude. For Dark Nebulae, opacity is stored here.	
 	float majorAxisSize;		// Major axis size in degrees
 	float minorAxisSize;		// Minor axis size in degrees
 	int orientationAngle;		// Orientation angle in degrees	
