@@ -336,7 +336,7 @@ double Nebula::getCloseViewFov(const StelCore*) const
 
 float Nebula::getSurfaceBrightness(const StelCore* core) const
 {
-	if (getVMagnitude(core)<99.f && majorAxisSize>0 && nType!=NebDn && nType!=NebHII && nType!=NebMolCld && nType!=NebISM && nType!=NebYSO)
+	if (getVMagnitude(core)<99.f && majorAxisSize>0 && nType!=NebDn)
 		return getVMagnitude(core) + 2.5*log10(getSurfaceArea()*3600.f);
 	else
 		return 99.f;
@@ -344,7 +344,7 @@ float Nebula::getSurfaceBrightness(const StelCore* core) const
 
 float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
 {
-	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0 && nType!=NebDn && nType!=NebHII && nType!=NebMolCld && nType!=NebISM && nType!=NebYSO)
+	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0 && nType!=NebDn)
 		return getVMagnitudeWithExtinction(core) + 2.5*log10(getSurfaceArea()*3600.f);
 	else
 		return 99.f;
