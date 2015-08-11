@@ -195,8 +195,8 @@ private:
 	float bMag;                     // B magnitude
 	float vMag;                     // V magnitude. For Dark Nebulae, opacity is stored here.
 	float angularSize;              // Angular size in degree -- OUTDATED!
-	float majorAxisSize;		// Major axis size in arcmin
-	float minorAxisSize;		// Minor axis size in arcmin
+	float majorAxisSize;		// Major axis size in degrees
+	float minorAxisSize;		// Minor axis size in degrees
 	int orientationAngle;		// Orientation angle in degrees	
 	float oDistance;		// distance (Mpc for galaxies, kpc for other objects)
 	float oDistanceErr;		// Error of distance (Mpc for galaxies, kpc for other objects)
