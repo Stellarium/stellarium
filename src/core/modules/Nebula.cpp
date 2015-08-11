@@ -84,8 +84,7 @@ Nebula::Nebula()
 	, vMag(99.)
 	, nType()	
 {
-	nameI18 = "";
-	angularSize = -1;	
+	nameI18 = "";	
 }
 
 Nebula::~Nebula()
@@ -202,7 +201,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if (angularSize>0 && flags&Size)
+	if (majorAxisSize>0 && flags&Size)
 	{
 		if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
 			oss << q_("Size: %1").arg(StelUtils::radToDmsStr(majorAxisSize*M_PI/180.)) << "<br>";
@@ -292,6 +291,14 @@ float Nebula::getVMagnitude(const StelCore* core) const
 	return vMag;
 }
 
+double Nebula::getAngularSize(const StelCore *) const
+{
+	float size = majorAxisSize;
+	if (majorAxisSize!=minorAxisSize || minorAxisSize>0)
+		size = (majorAxisSize+minorAxisSize)/2.f;
+	return size*0.5f;
+}
+
 float Nebula::getSelectPriority(const StelCore* core) const
 {
 	const NebulaMgr* nebMgr = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"));
@@ -306,9 +313,9 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	// make very easy to select if labeled
 	float lim=getVMagnitude(core);
 	if (nType==NebDn)
-		lim=15.0f - vMag - 2.0f*qMin(1.5f, angularSize); // Note that "mag" field is used for opacity in this catalog!
+		lim=15.0f - vMag - 2.0f*qMin(1.5f, majorAxisSize); // Note that "mag" field is used for opacity in this catalog!
 	else if (nType==NebHII) // Sharpless and LBN
-		lim=10.0f - 2.0f*qMin(1.5f, angularSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
+		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
 	if (std::min(15.f, lim)<maxMagHint)
 		return -10.f;
@@ -324,23 +331,31 @@ Vec3f Nebula::getInfoColor(void) const
 
 double Nebula::getCloseViewFov(const StelCore*) const
 {
-	return angularSize>0 ? angularSize * 4 : 1;
+	return majorAxisSize>0 ? majorAxisSize * 4 : 1;
 }
 
 float Nebula::getSurfaceBrightness(const StelCore* core) const
 {
-	if (getVMagnitude(core)<99 && angularSize>0 && nType!=NebDn && nType!=NebHII)
-		return getVMagnitude(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
+	if (getVMagnitude(core)<99.f && majorAxisSize>0 && nType!=NebDn && nType!=NebHII && nType!=NebMolCld && nType!=NebISM && nType!=NebYSO)
+		return getVMagnitude(core) + 2.5*log10(getSurfaceArea()*3600.f);
 	else
-		return 99;
+		return 99.f;
 }
 
 float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
 {
-	if (getVMagnitudeWithExtinction(core)<99 && angularSize>0 && nType!=NebDn && nType!=NebHII)
-		return getVMagnitudeWithExtinction(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
+	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0 && nType!=NebDn && nType!=NebHII && nType!=NebMolCld && nType!=NebISM && nType!=NebYSO)
+		return getVMagnitudeWithExtinction(core) + 2.5*log10(getSurfaceArea()*3600.f);
 	else
-		return 99;
+		return 99.f;
+}
+
+float Nebula::getSurfaceArea(void) const
+{
+	if (majorAxisSize==minorAxisSize || minorAxisSize==0)
+		return M_PI*(majorAxisSize/2.f)*(majorAxisSize/2.f); // S = pi*R^2 = pi*(D/2)^2
+	else
+		return M_PI*(majorAxisSize/2.f)*(minorAxisSize/2.f); // S = pi*a*b
 }
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
@@ -355,8 +370,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		// 9-(opac-5)-2*(angularSize-0.5)
 		// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
 		// The qMin() maximized the visibility gain for large objects.
-		if (angularSize>0 && vMag<50)
-			lim = 15.0f - vMag - 2.0f*qMin(angularSize, 1.5f);
+		if (majorAxisSize>0 && vMag<50)
+			lim = 15.0f - vMag - 2.0f*qMin(majorAxisSize, 1.5f);
 		else if (B_nb>0)
 			lim = 9.0f;
 		else
@@ -485,8 +500,8 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 	{
 		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
 		// 9-(opac-5)-2*(angularSize-0.5)
-		if (angularSize>0 && vMag<50)
-			lim = 15.0f - vMag - 2.0f*qMin(angularSize, 2.5f);
+		if (majorAxisSize>0 && vMag<50)
+			lim = 15.0f - vMag - 2.0f*qMin(majorAxisSize, 2.5f);
 		else if (B_nb>0)
 			lim = 9.0f;
 		else
@@ -560,11 +575,6 @@ void Nebula::readDSO(QDataStream &in)
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb;
-
-	if (majorAxisSize!=minorAxisSize && minorAxisSize>0.f)
-		angularSize = (majorAxisSize+minorAxisSize)/2.f;
-	else
-		angularSize = majorAxisSize;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
 	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
