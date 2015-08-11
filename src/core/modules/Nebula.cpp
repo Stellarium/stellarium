@@ -416,6 +416,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			break;
 		case NebN:
 		case NebHII:
+		case NebMolCld:
+		case NebYSO:
 			Nebula::texDiffuseNebula->bind();
 			color=hydrogenRegionColor;
 			break;
@@ -433,9 +435,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			Nebula::texPlanetaryNebula->bind();
 			color=brightNebulaColor;
 			break;
-		case NebDn:
-		case NebMolCld:
-		case NebYSO:
+		case NebDn:		
 			Nebula::texDarkNebula->bind();
 			color=darkNebulaColor;
 			break;
