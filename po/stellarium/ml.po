@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 03:06+0600\n"
+"POT-Creation-Date: 2015-08-12 00:21+0600\n"
 "PO-Revision-Date: 2012-12-20 17:38+0000\n"
 "Last-Translator: Noble P Abraham <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-11 05:26+0000\n"
+"X-Launchpad-Export-Date: 2015-08-12 05:38+0000\n"
 "X-Generator: Launchpad (build 17686)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -206,7 +206,7 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:157 src/core/modules/Planet.cpp:213
+#: src/core/modules/Nebula.cpp:156 src/core/modules/Planet.cpp:213
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:270
@@ -216,19 +216,19 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr "തരം: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:159 src/core/modules/Comet.cpp:173
+#: src/core/modules/Nebula.cpp:158 src/core/modules/Comet.cpp:173
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
 #: plugins/MeteorShowers/src/MeteorShower.cpp:517
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:166
+#: src/core/modules/Nebula.cpp:165
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:171 src/core/modules/Planet.cpp:219
+#: src/core/modules/Nebula.cpp:170 src/core/modules/Planet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -238,7 +238,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 "ദൃശ്യകാന്തിമാനം: <b>%1</b> (എക്സ്റ്റിങ്ഷന്‍ കാരണം <b>%2</b> ആയിരിക്കുന്നു)"
 
-#: src/core/modules/Nebula.cpp:174 src/core/modules/Nebula.cpp:179
+#: src/core/modules/Nebula.cpp:173 src/core/modules/Nebula.cpp:178
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:217
 #: src/core/modules/Comet.cpp:182 src/core/modules/StarWrapper.cpp:60
 #: src/core/modules/StarWrapper.cpp:197
@@ -248,54 +248,54 @@ msgstr ""
 msgid "Magnitude: <b>%1</b>"
 msgstr "കാന്തിമാനം: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:180
+#: src/core/modules/Nebula.cpp:179
 msgid " (Photometric system: B)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:186 src/core/modules/StarWrapper.cpp:65
+#: src/core/modules/Nebula.cpp:185 src/core/modules/StarWrapper.cpp:65
 #: src/core/modules/StarWrapper.cpp:205 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:193
+#: src/core/modules/Nebula.cpp:192
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:199
+#: src/core/modules/Nebula.cpp:198
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:208
+#: src/core/modules/Nebula.cpp:207
 #, qt-format
 msgid "Size: %1"
 msgstr "വലിപ്പം: %1"
 
-#: src/core/modules/Nebula.cpp:211
+#: src/core/modules/Nebula.cpp:210
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:213
+#: src/core/modules/Nebula.cpp:212
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:227
+#: src/core/modules/Nebula.cpp:226
 #, qt-format
 msgid "Redshift: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:249 src/core/modules/StarWrapper.cpp:241
+#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "ദൃഗ്‌ഭ്രംശം: %1"
 
 #. TRANSLATORS: Unit of measure for distance - light years
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:253 src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/Nebula.cpp:252 src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -303,370 +303,370 @@ msgid "Distance: %1 ly"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:268
+#: src/core/modules/Nebula.cpp:267
 msgid "Mpc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:273
+#: src/core/modules/Nebula.cpp:272
 msgid "kpc"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:276
+#: src/core/modules/Nebula.cpp:275
 #, qt-format
 msgid "Distance: %1 %2"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:280
+#: src/core/modules/Nebula.cpp:279
 msgid "Morphological description: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:667
+#: src/core/modules/Nebula.cpp:692
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:670
+#: src/core/modules/Nebula.cpp:695
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:673
+#: src/core/modules/Nebula.cpp:698
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:676
+#: src/core/modules/Nebula.cpp:701
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:681
+#: src/core/modules/Nebula.cpp:706
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:684
+#: src/core/modules/Nebula.cpp:709
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:687
+#: src/core/modules/Nebula.cpp:712
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:690
+#: src/core/modules/Nebula.cpp:715
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:693
+#: src/core/modules/Nebula.cpp:718
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:696
+#: src/core/modules/Nebula.cpp:721
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:699
+#: src/core/modules/Nebula.cpp:724
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:719
+#: src/core/modules/Nebula.cpp:744
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:722
+#: src/core/modules/Nebula.cpp:747
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:725
+#: src/core/modules/Nebula.cpp:750
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:728
+#: src/core/modules/Nebula.cpp:753
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:731
+#: src/core/modules/Nebula.cpp:756
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:737
+#: src/core/modules/Nebula.cpp:762
 msgctxt "Trumpler's Brightness Class"
 msgid "small range the brightness of members of cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:740
+#: src/core/modules/Nebula.cpp:765
 msgctxt "Trumpler's Brightness Class"
 msgid "medium range the brightness of members of cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:743
+#: src/core/modules/Nebula.cpp:768
 msgctxt "Trumpler's Brightness Class"
 msgid "large range the brightness of members of cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:746
+#: src/core/modules/Nebula.cpp:771
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented brightness class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:752
+#: src/core/modules/Nebula.cpp:777
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:755
+#: src/core/modules/Nebula.cpp:780
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:758
+#: src/core/modules/Nebula.cpp:783
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:761
+#: src/core/modules/Nebula.cpp:786
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:765
+#: src/core/modules/Nebula.cpp:790
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:786
+#: src/core/modules/Nebula.cpp:811
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:789
+#: src/core/modules/Nebula.cpp:814
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:792
+#: src/core/modules/Nebula.cpp:817
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:795
+#: src/core/modules/Nebula.cpp:820
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:798
+#: src/core/modules/Nebula.cpp:823
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:801
+#: src/core/modules/Nebula.cpp:826
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:804
+#: src/core/modules/Nebula.cpp:829
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:810
+#: src/core/modules/Nebula.cpp:835
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:813
+#: src/core/modules/Nebula.cpp:838
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:816
+#: src/core/modules/Nebula.cpp:841
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:819
+#: src/core/modules/Nebula.cpp:844
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:822
+#: src/core/modules/Nebula.cpp:847
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:825
+#: src/core/modules/Nebula.cpp:850
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:848
+#: src/core/modules/Nebula.cpp:873
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:851
+#: src/core/modules/Nebula.cpp:876
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:854
+#: src/core/modules/Nebula.cpp:879
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:857
+#: src/core/modules/Nebula.cpp:882
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:863
+#: src/core/modules/Nebula.cpp:888
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:866
+#: src/core/modules/Nebula.cpp:891
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:869
+#: src/core/modules/Nebula.cpp:894
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:872
+#: src/core/modules/Nebula.cpp:897
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:878
+#: src/core/modules/Nebula.cpp:903
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:881
+#: src/core/modules/Nebula.cpp:906
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:884
+#: src/core/modules/Nebula.cpp:909
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:887
+#: src/core/modules/Nebula.cpp:912
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:903
+#: src/core/modules/Nebula.cpp:928
 msgid "galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:906
+#: src/core/modules/Nebula.cpp:931
 msgid "active galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:909
+#: src/core/modules/Nebula.cpp:934
 msgid "radio galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:912
+#: src/core/modules/Nebula.cpp:937
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:915 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:940 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:918
+#: src/core/modules/Nebula.cpp:943
 msgid "star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:921
+#: src/core/modules/Nebula.cpp:946
 msgid "open star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:924
+#: src/core/modules/Nebula.cpp:949
 msgid "globular star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:927
+#: src/core/modules/Nebula.cpp:952
 msgid "nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:930
+#: src/core/modules/Nebula.cpp:955
 msgid "planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:958
 msgid "dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:936
+#: src/core/modules/Nebula.cpp:961
 msgid "cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:939
+#: src/core/modules/Nebula.cpp:964
 msgid "bipolar nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:942
+#: src/core/modules/Nebula.cpp:967
 msgid "emission nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:945
+#: src/core/modules/Nebula.cpp:970
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:948
+#: src/core/modules/Nebula.cpp:973
 msgid "reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:976
 msgid "supernova remnant"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:954
+#: src/core/modules/Nebula.cpp:979
 msgid "stellar association"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:957
+#: src/core/modules/Nebula.cpp:982
 msgid "star cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:960
+#: src/core/modules/Nebula.cpp:985
 msgid "interstellar matter"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:963
+#: src/core/modules/Nebula.cpp:988
 msgid "emission object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:966
+#: src/core/modules/Nebula.cpp:991
 msgid "BL Lac object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:969
+#: src/core/modules/Nebula.cpp:994
 msgid "blazar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:972
+#: src/core/modules/Nebula.cpp:997
 msgid "molecular cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:975
+#: src/core/modules/Nebula.cpp:1000
 msgid "young stellar object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:978
+#: src/core/modules/Nebula.cpp:1003
 msgid "unknown or undocumented type"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:981
+#: src/core/modules/Nebula.cpp:1006
 msgid "undocumented type"
 msgstr ""
 
