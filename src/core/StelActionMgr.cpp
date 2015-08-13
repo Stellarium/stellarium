@@ -30,12 +30,11 @@
 StelAction::StelAction(const QString& actionId,
 					   const QString& groupId,
 					   const QString& text,
+					   QObject* target, const char* slot,
 					   const QString& primaryKey,
 					   const QString& altKey,
 					   bool global):
 	QObject(StelApp::getInstance().getStelActionManager()),
-	checkable(false),
-	checked(false),
 	group(groupId),
 	text(text),
 	global(global),
@@ -43,8 +42,8 @@ StelAction::StelAction(const QString& actionId,
 	altKeySequence(altKey),
 	defaultKeySequence(primaryKey),
 	defaultAltKeySequence(altKey),
-	target(NULL),
-	property(NULL)
+	target(target),
+	property(slot)
 {
 	setObjectName(actionId);
 	// Check the global conf for custom shortcuts.
@@ -58,6 +57,19 @@ StelAction::StelAction(const QString& actionId,
 		setShortcut(shortcuts[0]);
 		if (shortcuts.size() > 1)
 			setAltShortcut(shortcuts[1]);
+	}
+
+	// If the action is linked to a property, listen to it.
+	QVariant prop;
+	QMetaProperty metaProp;
+	int propIndex;
+	prop = target->property(slot);
+	if (prop.isValid())
+	{
+		propIndex = target->metaObject()->indexOfProperty(slot);
+		metaProp = target->metaObject()->property(propIndex);
+		connect(target, metaProp.notifySignal(), this,
+			metaObject()->method(metaObject()->indexOfMethod("onTargetPropertyChanged()")));
 	}
 }
 
@@ -78,73 +90,51 @@ QString StelAction::getText() const
 	return q_(text);
 }
 
+bool StelAction::isCheckable() const
+{
+	if (!target) return false;
+	QVariant prop = target->property(property);
+	return prop.isValid();
+}
+
+bool StelAction::isChecked() const
+{
+	if (!isCheckable()) return false;
+	return target->property(property).toBool();
+}
+
 void StelAction::setChecked(bool value)
 {
-	Q_ASSERT(checkable);
-	if (value == checked)
+	Q_ASSERT(isCheckable());
+	if (value == isChecked())
 		return;
-	checked = value;
-	if (target)
-		target->setProperty(property, checked);
-	emit toggled(checked);
+	target->setProperty(property, value);
+	emit toggled();
 }
 
 void StelAction::toggle()
 {
-	setChecked(!checked);
+	setChecked(!isChecked());
 }
 
 void StelAction::trigger()
 {
-	if (checkable)
+	if (isCheckable())
+	{
 		toggle();
+	}
 	else
+	{
+		int slotIndex = target->metaObject()->indexOfMethod(property);
+		Q_ASSERT(target->metaObject()->method(slotIndex).parameterCount() == 0);
+		target->metaObject()->method(slotIndex).invoke(target);
 		emit triggered();
+	}
 }
 
-void StelAction::connectToObject(QObject* obj, const char* slot)
+void StelAction::onTargetPropertyChanged()
 {
-	QVariant prop = obj->property(slot);
-	if (prop.isValid()) // Connect to a property.
-	{
-		checkable = true;
-		target = obj;
-		property = slot;
-		checked = prop.toBool();
-		// Listen to the property notified signal if there is one.
-		int propIndex = obj->metaObject()->indexOfProperty(slot);
-		QMetaProperty metaProp = obj->metaObject()->property(propIndex);
-		int slotIndex = metaObject()->indexOfMethod("propertyChanged(bool)");
-		if (metaProp.hasNotifySignal())
-			connect(obj, metaProp.notifySignal(), this, metaObject()->method(slotIndex));
-		return;
-	}
-	int slotIndex = obj->metaObject()->indexOfMethod(slot);
-	if (obj->metaObject()->method(slotIndex).parameterCount() == 1)
-	{
-		// connect to a boolean slot.
-		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterType(0) == QMetaType::Bool);
-		checkable = true;
-		int signalIndex = metaObject()->indexOfMethod("toggled(bool)");
-		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
-	}
-	else
-	{
-		// connect to a slot.
-		Q_ASSERT(obj->metaObject()->method(slotIndex).parameterCount() == 0);
-		checkable = false;
-		int signalIndex = metaObject()->indexOfMethod("triggered()");
-		connect(this, metaObject()->method(signalIndex), obj, obj->metaObject()->method(slotIndex));
-	}
 	emit changed();
-}
-
-void StelAction::propertyChanged(bool value)
-{
-	if (value == checked)
-		return;
-	checked	= value;
-	emit toggled(checked);
 }
 
 QKeySequence::SequenceMatch StelAction::matches(const QKeySequence& seq) const
@@ -170,8 +160,7 @@ StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, 
                                      const QString& shortcut, const QString& altShortcut,
                                      bool global)
 {
-	StelAction* action = new StelAction(id, groupId, text, shortcut, altShortcut, global);
-	action->connectToObject(target, slot);
+	StelAction* action = new StelAction(id, groupId, text, target, slot, shortcut, altShortcut, global);
 	return action;
 }
 

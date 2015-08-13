@@ -31,15 +31,13 @@ public:
 	friend class StelActionMgr;
 	Q_PROPERTY(QString text MEMBER text CONSTANT)
 	Q_PROPERTY(QKeySequence shortcut MEMBER keySequence CONSTANT)
-	Q_PROPERTY(bool checked MEMBER checked NOTIFY toggled)
-	Q_PROPERTY(bool checkable MEMBER checkable NOTIFY changed)
+	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
+	Q_PROPERTY(bool checkable READ isCheckable CONSTANT)
 
 	StelAction() {}
 	//! Don't use this constructor, this is just there to ease the migration from QAction.
 	StelAction(QObject *parent)
 		: QObject(parent)
-		, checkable(false)
-		, checked(false)
 		, global(false)
 		, target(NULL)
 		, property(NULL)
@@ -48,14 +46,10 @@ public:
 	StelAction(const QString& actionId,
 	           const QString& groupId,
 	           const QString& text,
+	           QObject* target, const char* slot,
 	           const QString& primaryKey="",
 	           const QString& altKey="",
 	           bool global=false);
-	//! Connect the action to an object property or slot.
-	//! @param slot A property or a slot name.  The slot can either have the signature `func()`, and in that
-	//! case the action is made not checkable, either have the signature `func(bool)` and in that case the action
-	//! is made checkable.  When linked to a property the action is always made checkable.
-	void connectToObject(QObject* obj, const char* slot);
 	bool isGlobal() const {return global;}
 	void setShortcut(const QString& key);
 	void setAltShortcut(const QString& key);
@@ -67,8 +61,11 @@ public:
 	const QKeySequence getAltShortcut() const {return altKeySequence;}
 	QString getText() const;
 	void setText(const QString& value) {text = value; emit changed();}
+
+	bool isCheckable() const;
+	bool isChecked() const;
 signals:
-	void toggled(bool);
+	void toggled();
 	void triggered();
 	void changed();
 public slots:
@@ -76,10 +73,8 @@ public slots:
 	void trigger();
 	void toggle();
 private slots:
-	void propertyChanged(bool);
+	void onTargetPropertyChanged();
 private:
-	bool checkable;
-	bool checked;
 	QString group;
 	QString text;
 	bool global;
