@@ -47,6 +47,76 @@ StelGui::StelGui():
 			  "qrc:///graphicGui/btConstellationArt-off.png",
 			  "actionShow_Constellation_Art",
 			  "010-constellationsGroup");
+
+	addButton("qrc:///graphicGui/btEquatorialGrid-on.png",
+			  "qrc:///graphicGui/btEquatorialGrid-off.png",
+			  "actionShow_Equatorial_Grid",
+			  "020-gridsGroup");
+
+	addButton("qrc:///graphicGui/btAzimuthalGrid-on.png",
+			  "qrc:///graphicGui/btAzimuthalGrid-off.png",
+			  "actionShow_Azimuthal_Grid",
+			  "020-gridsGroup");
+
+	addButton("qrc:///graphicGui/btGround-on.png",
+			  "qrc:///graphicGui/btGround-off.png",
+			  "actionShow_Ground",
+			  "030-landscapeGroup");
+
+	addButton("qrc:///graphicGui/btCardinalPoints-on.png",
+			  "qrc:///graphicGui/btCardinalPoints-off.png",
+			  "actionShow_Cardinal_Points",
+			  "030-landscapeGroup");
+
+	addButton("qrc:///graphicGui/btAtmosphere-on.png",
+			  "qrc:///graphicGui/btAtmosphere-off.png",
+			  "actionShow_Atmosphere",
+			  "030-landscapeGroup");
+
+	addButton("qrc:///graphicGui/btNebula-on.png",
+			  "qrc:///graphicGui/btNebula-off.png",
+			  "actionShow_Nebulas",
+			  "030-nebulaeGroup");
+
+	addButton("qrc:///graphicGui/btPlanets-on.png",
+			  "qrc:///graphicGui/btPlanets-off.png",
+			  "actionShow_Planets_Labels",
+			  "030-nebulaeGroup");
+
+	addButton("qrc:///graphicGui/btGotoSelectedObject-on.png",
+			  "qrc:///graphicGui/btGotoSelectedObject-off.png",
+			  "actionShow_Planets_Labels",
+			  "060-othersGroup");
+
+	addButton("qrc:///graphicGui/btNightView-on.png",
+			  "qrc:///graphicGui/btNightView-off.png",
+			  "actionShow_Night_Mode",
+			  "060-othersGroup");
+
+	addButton("qrc:///graphicGui/btFullScreen-on.png",
+			  "qrc:///graphicGui/btFullScreen-off.png",
+			  "actionSet_Full_Screen_Global",
+			  "060-othersGroup");
+
+	addButton("qrc:///graphicGui/btTimeRewind-on.png",
+			  "qrc:///graphicGui/btTimeRewind-off.png",
+			  "actionDecrease_Time_Speed",
+			  "070-timeGroup");
+
+	addButton("qrc:///graphicGui/btTimeRealtime-on.png",
+			  "qrc:///graphicGui/btTimeRealtime-off.png",
+			  "actionSet_Real_Time_Speed",
+			  "070-timeGroup");
+
+	addButton("qrc:///graphicGui/btTimeNow-on.png",
+			  "qrc:///graphicGui/btTimeNow-off.png",
+			  "actionReturn_To_Current_Time",
+			  "070-timeGroup");
+
+	addButton("qrc:///graphicGui/btTimeForward-on.png",
+			  "qrc:///graphicGui/btTimeForward-off.png",
+			  "actionIncrease_Time_Speed",
+			  "070-timeGroup");
 }
 
 void StelGui::addButton(QString pixOn, QString pixOff,
