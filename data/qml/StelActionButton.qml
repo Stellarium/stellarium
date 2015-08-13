@@ -13,6 +13,10 @@ Item {
 
     property StelAction actionObj: stelActionMgr.findAction(action)
 
+    Component.onCompleted: {
+        if (actionObj == null) console.warn("Cannot find action '%1'".arg(action));
+    }
+
     width: imageItem.width
     height: imageItem.height
 
