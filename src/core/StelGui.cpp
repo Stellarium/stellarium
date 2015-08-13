@@ -18,9 +18,19 @@
  */
 
 #include "StelGui.hpp"
+#include "StelActionMgr.hpp"
+#include "StelApp.hpp"
+#include "StelLocaleMgr.hpp"
 
-StelGui::StelGui()
+StelGui::StelGui():
+	  autoHideHorizontalButtonBar(true)
+	, autoHideVerticalButtonBar(true)
 {
+	QString miscGroup = N_("Miscellaneous");
+	StelActionMgr *actionMgr = StelApp::getInstance().getStelActionManager();
+	actionMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
+	actionMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
+
 	// Register all default buttons.
 	// Maybe this should be done in the different modules directly.
 	addButton("qrc:///graphicGui/btConstellationLines-on.png",
@@ -50,6 +60,6 @@ void StelGui::addButton(QString pixOn, QString pixOff,
 	button["groupName"] = groupName;
 	button["beforeActionName"] = beforeActionName;
 	buttons << button;
-	emit buttonsChanged();
+	emit changed();
 }
 

@@ -119,7 +119,7 @@ Item {
         id: winBar
         onWidthChanged: canvas.requestPaint()
         property bool hovered: false
-        up: hovered || !stelActions.getAction("actionAutoHideVerticalButtonBar").checked
+        up: hovered || !stelActionMgr.findAction("actionAutoHideVerticalButtonBar").checked
         Behavior on width {
             NumberAnimation {
                 duration: 100
@@ -131,7 +131,7 @@ Item {
         id: bottomBar
         onHeightChanged: canvas.requestPaint()
         property bool hovered: false
-        up: hovered || !stelActions.getAction("actionAutoHideHorizontalButtonBar").checked
+        up: hovered || !stelActionMgr.findAction("actionAutoHideHorizontalButtonBar").checked
 
         anchors {
             bottom: parent.bottom

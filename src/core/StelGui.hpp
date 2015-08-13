@@ -25,10 +25,12 @@
 class StelGui : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QVariantList buttons MEMBER buttons NOTIFY buttonsChanged)
+	Q_PROPERTY(QVariantList buttons MEMBER buttons NOTIFY changed)
+	Q_PROPERTY(bool autoHideHorizontalButtonBar MEMBER autoHideHorizontalButtonBar NOTIFY changed)
+	Q_PROPERTY(bool autoHideVerticalButtonBar MEMBER autoHideVerticalButtonBar NOTIFY changed)
 
 signals:
-	void buttonsChanged();
+	void changed();
 
 public:
 	StelGui();
@@ -38,4 +40,6 @@ public:
 
 private:
 	QVariantList buttons;
+	bool autoHideHorizontalButtonBar;
+	bool autoHideVerticalButtonBar;
 };
