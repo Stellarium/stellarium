@@ -1557,6 +1557,16 @@
                  </item>
                 </layout>
                </item>
+               <item row="4" column="0">
+                <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
+                 <property name="toolTip">
+                  <string>Use surface brightness of deep-sky objects for scale of the visibility of their markers and labels.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use surface brightness</string>
+                 </property>
+                </widget>
+               </item>
                <item row="3" column="0">
                 <widget class="QCheckBox" name="checkBoxProportionalHints">
                  <property name="toolTip">
@@ -1567,71 +1577,35 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
-                <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
-                 <property name="text">
-                  <string>Use surface brightness for scale of visibility</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBoxNebulaLimitMagnitude">
-              <property name="title">
-               <string>Limit Magnitudes</string>
-              </property>
-              <property name="flat">
-               <bool>true</bool>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_14">
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <property name="spacing">
-                <number>0</number>
-               </property>
-               <item row="0" column="1">
-                <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
-                 <property name="minimum">
-                  <double>3.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>21.000000000000000</double>
-                 </property>
-                 <property name="singleStep">
-                  <double>0.250000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>8.500000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="labelLimitMagnitude">
-                 <property name="toolTip">
-                  <string>Set visibility of deep-sky objects by limit of the magnitude</string>
-                 </property>
-                 <property name="text">
-                  <string>Set limit for DSOs</string>
-                 </property>
-                </widget>
+               <item row="5" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
+                   <property name="toolTip">
+                    <string>Limit magnitude (for unaided/binocular observers) of deep-sky objects.</string>
+                   </property>
+                   <property name="text">
+                    <string>Limit magnitude</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
+                   <property name="minimum">
+                    <double>3.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>21.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.250000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>8.500000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
