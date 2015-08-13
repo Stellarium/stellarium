@@ -29,9 +29,10 @@ class StelAction : public QObject
 	Q_OBJECT
 public:
 	friend class StelActionMgr;
-	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
 	Q_PROPERTY(QString text MEMBER text CONSTANT)
 	Q_PROPERTY(QKeySequence shortcut MEMBER keySequence CONSTANT)
+	Q_PROPERTY(bool checked MEMBER checked NOTIFY toggled)
+	Q_PROPERTY(bool checkable MEMBER checkable NOTIFY changed)
 
 	StelAction() {}
 	//! Don't use this constructor, this is just there to ease the migration from QAction.
@@ -55,11 +56,6 @@ public:
 	//! case the action is made not checkable, either have the signature `func(bool)` and in that case the action
 	//! is made checkable.  When linked to a property the action is always made checkable.
 	void connectToObject(QObject* obj, const char* slot);
-	//! Don't use setCheckable, connectToObject can automatically determine if the action is checkable or not.
-	//! This is just there to ease the migration from QAction.
-	void setCheckable(bool value) {checkable = value; emit changed();}
-	bool isCheckable() const {return checkable;}
-	bool isChecked() const {return checked;}
 	bool isGlobal() const {return global;}
 	void setShortcut(const QString& key);
 	void setAltShortcut(const QString& key);
