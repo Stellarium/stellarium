@@ -376,6 +376,7 @@ void StelApp::init(QSettings* conf)
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
+	actionMgr = new StelActionMgr();
 	stelGui = new StelGui();
 
 	// Initialize AFTER creation of openGL context
@@ -400,7 +401,6 @@ void StelApp::init(QSettings* conf)
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-	actionMgr = new StelActionMgr();
 
 	localeMgr->init();
 
