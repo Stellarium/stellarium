@@ -17,7 +17,6 @@
  */
 
 #include "StelVideoMgr.hpp"
-#include "StelMainView.hpp"
 #include <QDebug>
 #include <QDir>
 

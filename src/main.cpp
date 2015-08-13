@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelMainView.hpp"
+#include "StelQuickView.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
 #include "StelFileMgr.hpp"
@@ -160,9 +160,11 @@ int main(int argc, char **argv)
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
 #endif
+	/*
 	QPixmap pixmap(":/splash.png");
 	QSplashScreen splash(pixmap);
 	splash.show();
+	*/
 	app.processEvents();
 
 	// QApplication sets current locale, but
@@ -344,9 +346,9 @@ int main(int argc, char **argv)
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	StelMainView mainWin;
+	StelQuickView mainWin;
 	mainWin.init(confSettings); // May exit(0) when OpenGL subsystem insufficient
-	splash.finish(&mainWin);
+	// splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();
 

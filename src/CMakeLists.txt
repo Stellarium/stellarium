@@ -144,8 +144,6 @@ SET(stellarium_lib_SRCS
 	core/StelSphericalIndex.cpp
 	core/StelVertexArray.hpp
 	core/StelVertexArray.cpp
-	core/StelGuiBase.hpp
-	core/StelGuiBase.cpp
 	core/StelViewportEffect.hpp
 	core/StelViewportEffect.cpp
 	core/TrailGroup.hpp
@@ -237,8 +235,8 @@ SET(stellarium_lib_SRCS
 	core/modules/ZodiacalLight.cpp
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
-	StelMainView.hpp
-	StelMainView.cpp
+	StelQuickView.hpp
+	StelQuickView.cpp
 	StelLogger.hpp
 	StelLogger.cpp
 	CLIProcessor.hpp
@@ -283,87 +281,10 @@ QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
-IF(GUI_MODE STREQUAL "Standard")
-	SET(stellarium_gui_SRCS
-		gui/StelGui.hpp
-		gui/StelGui.cpp
-		gui/SkyGui.hpp
-		gui/SkyGui.cpp
-		gui/StelStyle.hpp
-		gui/StelGuiItems.hpp
-		gui/StelGuiItems.cpp
-		gui/HelpDialog.hpp
-		gui/HelpDialog.cpp
-		gui/ShortcutLineEdit.hpp
-		gui/ShortcutLineEdit.cpp
-		gui/ShortcutsDialog.hpp
-		gui/ShortcutsDialog.cpp
-		gui/Dialog.hpp
-		gui/Dialog.cpp
-		gui/MapLabel.hpp
-		gui/MapLabel.cpp
-		gui/AngleSpinBox.hpp
-		gui/AngleSpinBox.cpp
-		gui/LocationDialog.hpp
-		gui/LocationDialog.cpp
-		gui/DateTimeDialog.hpp
-		gui/DateTimeDialog.cpp
-		gui/ViewDialog.hpp
-		gui/ViewDialog.cpp
-		gui/SearchDialog.hpp
-		gui/SearchDialog.cpp
-		gui/ConfigurationDialog.hpp
-		gui/ConfigurationDialog.cpp
-		gui/AddRemoveLandscapesDialog.hpp
-		gui/AddRemoveLandscapesDialog.cpp
-		gui/AtmosphereDialog.hpp
-		gui/AtmosphereDialog.cpp
-		gui/CustomDeltaTEquationDialog.hpp
-		gui/CustomDeltaTEquationDialog.cpp
-		gui/StelDialog.hpp
-		gui/StelDialog.cpp)
-
-	################# compiles .ui files ############
-	SET(stellarium_UIS
-	gui/locationDialogGui.ui
-	gui/helpDialogGui.ui
-	gui/shortcutsDialog.ui
-	gui/dateTimeDialogGui.ui
-	gui/viewDialog.ui
-	gui/searchDialogGui.ui
-	gui/configurationDialog.ui
-	gui/AtmosphereDialog.ui
-	gui/CustomDeltaTEquationDialog.ui
-	gui/addRemoveLandscapesDialog.ui)
-
-        IF(ENABLE_SCRIPTING)
-            IF(ENABLE_SCRIPT_CONSOLE)
-		SET(stellarium_gui_SRCS ${stellarium_gui_SRCS}
-			gui/ScriptConsole.hpp
-			gui/ScriptConsole.cpp
-			gui/StelScriptSyntaxHighlighter.hpp
-			gui/StelScriptSyntaxHighlighter.cpp)
-		SET(stellarium_UIS ${stellarium_UIS}
-			gui/scriptConsole.ui)
-            ENDIF()
-        ENDIF()
-
-	QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
-
-	# compiles resources files
-	SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
-	QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
-
-	SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
-	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS} ${stellarium_gui_SRCS} ${stellarium_UIS_H} ${stellarium_gui_RES_CXX})
-ENDIF()
-
-#############################################################################################
-################################ No GUI plugin compilation ##################################
-#############################################################################################
-IF (GUI_MODE STREQUAL "None")
-    ADD_DEFINITIONS(-DNO_GUI)
-ENDIF()
+# compiles resources files
+SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
+QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
+# SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
 
 
 ###############################################################################################
@@ -420,7 +341,7 @@ ENDIF()
 IF(GENERATE_STELMAINLIB)
     ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-    QT5_USE_MODULES(stelMain Core Concurrent Declarative Gui Network OpenGL Script Widgets)
+    QT5_USE_MODULES(stelMain Core Concurrent Quick Gui Network OpenGL Script Widgets)
     IF(ENABLE_SOUND)
         QT5_USE_MODULES(stelMain Multimedia)
     ENDIF()
@@ -434,7 +355,7 @@ ELSE()
     # This will add the ANGLE lib if the Qt version supports it.
     TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
-    QT5_USE_MODULES(stellarium Core Concurrent Declarative Gui Network OpenGL Script Widgets)
+    QT5_USE_MODULES(stellarium Core Concurrent Quick Gui Network OpenGL Script Widgets)
     IF(ENABLE_SOUND)
         QT5_USE_MODULES(stellarium Multimedia)
     ENDIF()
@@ -474,7 +395,7 @@ IF(WIN32)
 	SET(tests_testDates_SRCS ${tests_testDates_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
-QT5_USE_MODULES(testDates Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testDates Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 ADD_TEST(testDates)
@@ -485,7 +406,7 @@ SET(tests_testStelFileMgr_SRCS
 	core/StelFileMgr.hpp
 	core/StelFileMgr.cpp)
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
-QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 ADD_TEST(testStelFileMgr)
@@ -541,7 +462,7 @@ ADD_TEST(testStelSphereGeometry)
 #	core/StelTranslator.hpp
 #	${glues_lib_SRCS})
 #ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Declarative Test)
+#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Quick Test)
 #TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
 #ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
 
@@ -551,7 +472,7 @@ SET(tests_testStelJsonParser_SRCS
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp)
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
-QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 ADD_TEST(testStelJsonParser)
@@ -576,7 +497,7 @@ IF(WIN32)
 	SET(tests_testDeltaT_SRCS ${tests_testDeltaT_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
-QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 ADD_TEST(testDeltaT)
@@ -591,7 +512,7 @@ IF(WIN32)
 	SET(tests_testConversions_SRCS ${tests_testConversions_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
-QT5_USE_MODULES(testConversions Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testConversions Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
 ADD_TEST(testConversions)
@@ -602,7 +523,7 @@ SET(tests_testExtinction_SRCS
         core/RefractionExtinction.hpp
         core/RefractionExtinction.cpp)
 ADD_EXECUTABLE(testExtinction EXCLUDE_FROM_ALL ${tests_testExtinction_SRCS})
-QT5_USE_MODULES(testExtinction Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testExtinction Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testExtinction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testExtinction)
 ADD_TEST(testExtinction)
@@ -619,7 +540,7 @@ IF(WIN32)
         SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
-QT5_USE_MODULES(testRefraction Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testRefraction Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testRefraction)
 ADD_TEST(testRefraction)
@@ -636,7 +557,7 @@ IF(WIN32)
         SET(tests_testPrecession_SRCS ${tests_testPrecession_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
-QT5_USE_MODULES(testPrecession Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testPrecession Core Gui Widgets Script Quick Test)
 TARGET_LINK_LIBRARIES(testPrecession ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testPrecession)
 ADD_TEST(testPrecession)

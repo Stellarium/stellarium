@@ -1,0 +1,91 @@
+/*
+ * Stellarium
+ * Copyright (C) 2013 Guillaume Chereau
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
+ */
+
+#include "StelQuickView.hpp"
+#include "StelApp.hpp"
+#include "StelPainter.hpp"
+#include "StelActionMgr.hpp"
+#include "StelTranslator.hpp"
+
+#include <QSettings>
+#include <QQuickItem>
+#include <QDebug>
+
+StelQuickView* StelQuickView::singleton = NULL;
+
+StelQuickView::StelQuickView() : stelApp(NULL)
+	, initState(0)
+{
+	singleton = this;
+	connect(this, SIGNAL(beforeRendering()), this, SLOT(paint()), Qt::DirectConnection);
+	connect(this, SIGNAL(beforeSynchronizing()), this, SLOT(synchronize()), Qt::DirectConnection);
+}
+
+void StelQuickView::init(QSettings* conf)
+{
+	this->conf = conf;
+	setResizeMode(QQuickView::SizeRootObjectToView);
+	setClearBeforeRendering(false);
+	int width = conf->value("video/screen_w", 480).toInt();
+	int height = conf->value("video/screen_h", 700).toInt();
+	resize(width, height);
+	setSource(QUrl("qrc:/qml/main.qml"));
+	show();
+	startTimer(16);
+}
+
+void StelQuickView::deinit()
+{
+	delete stelApp;
+	stelApp = NULL;
+	StelApp::deinitStatic();
+	StelPainter::deinitGLShaders();
+}
+
+void StelQuickView::timerEvent(QTimerEvent* event)
+{
+	update();
+}
+
+void StelQuickView::synchronize()
+{
+	if (initState == 0)
+	{
+		stelApp = new StelApp();
+		StelApp::initStatic();
+		stelApp->init(conf);
+		StelPainter::initGLShaders();
+		stelApp->glWindowHasBeenResized(0, 0, width(), height());
+		setFlags(Qt::Window);
+		initState++;
+	}
+}
+
+void StelQuickView::paint()
+{
+	if (stelApp==NULL)
+		return;
+	static double lastPaint = -1.;
+	double newTime = StelApp::getTotalRunTime();
+	if (lastPaint<0)
+		lastPaint = newTime-0.01;
+	stelApp->update(newTime-lastPaint);
+	lastPaint = newTime;
+	stelApp->draw();
+}

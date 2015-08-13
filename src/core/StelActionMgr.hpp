@@ -39,9 +39,6 @@ public:
 		, global(false)
 		, target(NULL)
 		, property(NULL)
-	#ifndef USE_QUICKVIEW
-		, qAction(NULL)
-	#endif
 	{}
 
 	StelAction(const QString& actionId,
@@ -93,17 +90,6 @@ private:
 	const QKeySequence defaultAltKeySequence;
 	QObject* target;
 	const char* property;
-
-	// Currently, there is no proper way to handle shortcuts with non latin
-	// keyboards layouts.  So for the moment, if we don't use QuickView, we
-	// create a QAction added to the main view that will trigger the
-	// StelAction when the shortcut is typed.
-#ifndef USE_QUICKVIEW
-private slots:
-	void onChanged();
-private:
-	class QAction* qAction;
-#endif
 };
 
 class StelActionMgr : public QObject
