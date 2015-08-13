@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-12 00:21+0600\n"
-"PO-Revision-Date: 2015-08-11 19:36+0000\n"
+"PO-Revision-Date: 2015-08-12 06:57+0000\n"
 "Last-Translator: mostafa <m.maleky@chmail.ir>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-12 05:40+0000\n"
+"X-Launchpad-Export-Date: 2015-08-13 05:14+0000\n"
 "X-Generator: Launchpad (build 17686)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -79,7 +79,7 @@ msgstr "استوا"
 
 #: src/core/modules/GridLinesMgr.cpp:613
 msgid "Precession Circle"
-msgstr ""
+msgstr "مدار حرکت تقدیمی"
 
 #: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1775
 msgid "Horizon"
@@ -6688,6 +6688,8 @@ msgstr ""
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
+"ماهواره ها و مدار هایشان فقط وقتی نشان داده می شود که رصد گر بر روی زمین "
+"باشد."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 msgid ""
@@ -8735,7 +8737,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Exoplanets"
-msgstr ""
+msgstr "سیاره های فراخورشیدی"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:77
 msgid ""
@@ -8745,11 +8747,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
-msgstr ""
+msgstr "نمایش سیارات فراخورشیدی"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "پنجره ی پیکره بندی سیارات فراخورشیدی"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:851
@@ -8827,7 +8829,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
-msgstr ""
+msgstr "سیاره ی فراخورشیدی"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
@@ -9026,7 +9028,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "برناه ی ناسا برای اکتشاف سیاره ی فراخورشیدی"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
@@ -9034,7 +9036,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "بایگانی سیاره ی فرا خورشیدی ناسا"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
@@ -9054,7 +9056,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "بازکردن فهرست سیاره ی فراخورشیدی"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "The Habitable Exoplanets Catalog"
@@ -9062,11 +9064,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "سیارات فراخورشیدی به روز شده است"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "پیکره بندی سیارات فراخورشیدی"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "Exoplanets Plug-in Configuration"
@@ -9074,11 +9076,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "به روز رسانی اطلاعات سیارات فراخورشیدی از اینترنت"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "تنظیمات برای سیارات فراخورشیدی"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Plot all systems with exoplanets without labels"
@@ -9108,7 +9110,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "نمایش کلید سیارات فراخورشیدی در نوار ابزار"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
@@ -9650,7 +9652,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:568
 msgid "Meteor Showers"
-msgstr ""
+msgstr "رگبارهای شهابی"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Toggle meteor showers"
@@ -9715,7 +9717,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:517
 msgid "meteor shower"
-msgstr ""
+msgstr "رگبار شهابی"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "Radiant drift (per day)"
@@ -9840,7 +9842,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:65
 msgid "Perseids"
-msgstr ""
+msgstr "بارش شهابی برساوشی"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
@@ -10193,7 +10195,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:247
 msgid "Meteor shower"
-msgstr ""
+msgstr "رگبار شهابی"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:249
 msgid ""
@@ -10276,7 +10278,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:292
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "شما می توانید از اینجا اطلاعاتی در مورد باران شهاب سنگ  دریافت کنید:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
@@ -10320,11 +10322,11 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "پیکره بندی رگبارهای شهابی"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "رگبارهای شهابی: تنظیمات"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
@@ -10400,7 +10402,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "رگبارهای شهابی: جستوجو"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
