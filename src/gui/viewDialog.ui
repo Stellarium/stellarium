@@ -1567,6 +1567,13 @@
                  </property>
                 </widget>
                </item>
+               <item row="4" column="0">
+                <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
+                 <property name="text">
+                  <string>Use surface brightness for scale of visibility</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
             </item>
@@ -1582,7 +1589,7 @@
                <bool>true</bool>
               </property>
               <property name="checked">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
               <layout class="QGridLayout" name="gridLayout_14">
                <property name="leftMargin">
@@ -1600,16 +1607,6 @@
                <property name="spacing">
                 <number>0</number>
                </property>
-               <item row="0" column="0">
-                <widget class="QLabel" name="labelLimitMagnitude">
-                 <property name="toolTip">
-                  <string>Set visibility of deep-sky objects by limit of the magnitude</string>
-                 </property>
-                 <property name="text">
-                  <string>Set limit for DSOs</string>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="1">
                 <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
                  <property name="minimum">
@@ -1623,6 +1620,16 @@
                  </property>
                  <property name="value">
                   <double>8.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="labelLimitMagnitude">
+                 <property name="toolTip">
+                  <string>Set visibility of deep-sky objects by limit of the magnitude</string>
+                 </property>
+                 <property name="text">
+                  <string>Set limit for DSOs</string>
                  </property>
                 </widget>
                </item>
