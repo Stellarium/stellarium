@@ -40,11 +40,11 @@ class StelLocationMgr;
 class StelSkyLayerMgr;
 class StelAudioMgr;
 class StelVideoMgr;
-class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
 class StelActionMgr;
 class StelProgressController;
+class StelGui;
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -171,12 +171,9 @@ public:
 	//! Get the size of font
 	int getBaseFontSize() const { return baseFontSize; }
 	void setBaseFontSize(int s) { baseFontSize=s; }
-	
+
 	//! Get the GUI instance implementing the abstract GUI interface.
-	StelGuiBase* getGui() const {return stelGui;}
-	//! Tell the StelApp instance which GUI si currently being used.
-	//! The caller is responsible for destroying the GUI.
-	void setGui(StelGuiBase* b) {stelGui=b;}
+	class StelGui* getGui() const {return stelGui;}
 
 #ifndef DISABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
@@ -199,7 +196,7 @@ public:
 	void setViewportEffect(const QString& effectName);
 	//! Get the type of viewport effect currently used
 	QString getViewportEffect() const;
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -305,10 +302,8 @@ private:
 	StelScriptMgr* scriptMgr;
 #endif
 
+	StelGui* stelGui;
 
-
-	StelGuiBase* stelGui;
-	
 	// Store the ratio between real device pixel in "Device Independent Pixel"
 	// Usually this value is 1, but for a mac with retina screen this will be value 2.
 	float devicePixelsPerPixel;

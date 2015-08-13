@@ -48,7 +48,7 @@
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
 #include "StelViewportEffect.hpp"
-#include "StelGuiBase.hpp"
+#include "StelGui.hpp"
 #include "StelPainter.hpp"
 #ifndef DISABLE_SCRIPTING
  #include "StelScriptMgr.hpp"
@@ -376,6 +376,8 @@ void StelApp::init(QSettings* conf)
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
+	stelGui = new StelGui();
+
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
 	textureMgr->init();
@@ -488,7 +490,7 @@ void StelApp::init(QSettings* conf)
 	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
-	
+
 	initialized = true;
 }
 

@@ -95,6 +95,8 @@ SET(stellarium_lib_SRCS
 	core/StelCore.hpp
 	core/StelFileMgr.cpp
 	core/StelFileMgr.hpp
+	core/StelGui.hpp
+	core/StelGui.cpp
 	core/StelLocaleMgr.cpp
 	core/StelLocaleMgr.hpp
 	core/StelModule.cpp
