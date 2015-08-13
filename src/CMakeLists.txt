@@ -284,9 +284,8 @@ QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
 # compiles resources files
-SET(stellarium_gui_RES ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
-QT5_ADD_RESOURCES(stellarium_gui_RES_CXX ${stellarium_gui_RES})
-# SET(extLinkerOption ${extLinkerOption} ${QT_QTSCRIPT_LIBRARY} ${OPENGL_LIBRARIES})
+QT5_ADD_RESOURCES(stellarium_RES_CXX ${CMAKE_SOURCE_DIR}/data/gui/guiRes.qrc)
+QT5_ADD_RESOURCES(stellarium_RES_CXX ${CMAKE_SOURCE_DIR}/data/qml/qmlRes.qrc)
 
 
 ###############################################################################################

@@ -18,16 +18,37 @@
  */
 
 #include "StelQuickView.hpp"
+#include "StelActionMgr.hpp"
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelPainter.hpp"
 #include "StelActionMgr.hpp"
 #include "StelTranslator.hpp"
 
-#include <QSettings>
+#include <QQmlContext>
 #include <QQuickItem>
 #include <QDebug>
+#include <QSettings>
 
 StelQuickView* StelQuickView::singleton = NULL;
+
+HoverArea::HoverArea(QQuickItem *parent) : QQuickItem(parent)
+	,m_hovered(false)
+{
+	setAcceptHoverEvents(true);
+	startTimer(16);
+}
+
+void HoverArea::timerEvent(QTimerEvent *event)
+{
+	Q_UNUSED(event);
+	QPointF pos = window()->mapFromGlobal(QCursor::pos());
+	if (contains(mapFromScene(pos)) != m_hovered)
+	{
+		m_hovered = !m_hovered;
+		emit hoveredChanged();
+	}
+}
 
 StelQuickView::StelQuickView() : stelApp(NULL)
 	, initState(0)
@@ -35,6 +56,9 @@ StelQuickView::StelQuickView() : stelApp(NULL)
 	singleton = this;
 	connect(this, SIGNAL(beforeRendering()), this, SLOT(paint()), Qt::DirectConnection);
 	connect(this, SIGNAL(beforeSynchronizing()), this, SLOT(synchronize()), Qt::DirectConnection);
+	connect(this, SIGNAL(initialized()), this, SLOT(showGui()));
+	qmlRegisterType<HoverArea>("org.stellarium", 1, 0, "HoverArea");
+	qmlRegisterType<StelAction>("org.stellarium", 1, 0, "StelAction");
 }
 
 void StelQuickView::init(QSettings* conf)
@@ -45,7 +69,6 @@ void StelQuickView::init(QSettings* conf)
 	int width = conf->value("video/screen_w", 480).toInt();
 	int height = conf->value("video/screen_h", 700).toInt();
 	resize(width, height);
-	setSource(QUrl("qrc:/qml/main.qml"));
 	show();
 	startTimer(16);
 }
@@ -74,7 +97,16 @@ void StelQuickView::synchronize()
 		stelApp->glWindowHasBeenResized(0, 0, width(), height());
 		setFlags(Qt::Window);
 		initState++;
+		emit initialized();
 	}
+}
+
+void StelQuickView::showGui()
+{
+	Q_ASSERT(stelApp);
+	rootContext()->setContextProperty("stelGui", stelApp->getGui());
+	rootContext()->setContextProperty("stelActionMgr", stelApp->getStelActionManager());
+	setSource(QUrl("qrc:/qml/main.qml"));
 }
 
 void StelQuickView::paint()
