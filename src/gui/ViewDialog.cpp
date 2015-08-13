@@ -187,12 +187,12 @@ void ViewDialog::createDialogContent()
 	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
 	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
 	// DSO
-	ui->groupBoxNebulaLimitMagnitude->setChecked(drawer->getFlagNebulaMagnitudeLimit());
+	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
 	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
 	
 	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
 	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
-	connect(ui->groupBoxNebulaLimitMagnitude, SIGNAL(toggled(bool)),
+	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
 	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
 	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
 	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
