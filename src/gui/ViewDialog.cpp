@@ -154,6 +154,8 @@ void ViewDialog::createDialogContent()
 	connect(ui->groupBoxDSOTypeFilters, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagTypeFiltersUsage(bool)));
 	ui->checkBoxProportionalHints->setChecked(nmgr->getHintsProportional());
 	connect(ui->checkBoxProportionalHints, SIGNAL(toggled(bool)), nmgr, SLOT(setHintsProportional(bool)));
+	ui->checkBoxSurfaceBrightnessUsage->setChecked(nmgr->getFlagSurfaceBrightnessUsage());
+	connect(ui->checkBoxSurfaceBrightnessUsage, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagSurfaceBrightnessUsage(bool)));
 
 	// Stars section
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());

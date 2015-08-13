@@ -47,6 +47,7 @@ StelTextureSP Nebula::texDarkNebula;
 StelTextureSP Nebula::texOpenClusterWithNebulosity;
 float Nebula::circleScale = 1.f;
 bool  Nebula::drawHintProportional = false;
+bool  Nebula::surfaceBrightnessUsage = false;
 float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
@@ -311,9 +312,13 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	
 	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
 	// make very easy to select if labeled
-	float lim=getVMagnitude(core);
+	float lim, mag;
+	lim = mag = getVMagnitude(core);
+	if (surfaceBrightnessUsage)
+		lim = mag = getSurfaceBrightness(core);
+
 	if (nType==NebDn)
-		lim=15.0f - vMag - 2.0f*qMin(1.5f, majorAxisSize); // Note that "mag" field is used for opacity in this catalog!
+		lim=15.0f - mag - 2.0f*qMin(1.5f, majorAxisSize); // Note that "mag" field is used for opacity in this catalog!
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
@@ -360,26 +365,37 @@ float Nebula::getSurfaceArea(void) const
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 {
+	StelCore* core = StelApp::getInstance().getCore();
 	float lim = qMin(vMag, bMag);
-	if (lim > 50) lim = 15.f;
 
-	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn)
+	if (surfaceBrightnessUsage)
 	{
-		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
-		// 9-(opac-5)-2*(angularSize-0.5)
-		// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
-		// The qMin() maximized the visibility gain for large objects.
-		if (majorAxisSize>0 && vMag<50)
-			lim = 15.0f - vMag - 2.0f*qMin(majorAxisSize, 1.5f);
-		else if (B_nb>0)
-			lim = 9.0f;
-		else
-			lim= 12.0f; // GZ I assume LDN objects are rather elusive.
+		lim = getSurfaceBrightness(core) - 3.f;
+		if (lim > 50) lim = 16.f;
 	}
-	else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
-	{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
-		lim=9.0f;
+	else
+	{
+		float mag = getVMagnitude(core);
+		if (lim > 50) lim = 15.f;
+
+		// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
+		if (nType==NebDn)
+		{
+			// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
+			// 9-(opac-5)-2*(angularSize-0.5)
+			// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
+			// The qMin() maximized the visibility gain for large objects.
+			if (majorAxisSize>0 && mag<50)
+				lim = 15.0f - mag - 2.0f*qMin(majorAxisSize, 1.5f);
+			else if (B_nb>0)
+				lim = 9.0f;
+			else
+				lim= 12.0f; // GZ I assume LDN objects are rather elusive.
+		}
+		else if (nType==NebHII) // NebHII={Sharpless, LBN, RCW}
+		{ // artificially increase visibility of (most) Sharpless objects? No magnitude recorded:-(
+			lim=9.0f;
+		}
 	}
 
 	if (lim>maxMagHints)
@@ -492,23 +508,37 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 {
-	float lim = qMin(vMag, bMag);
-	if (lim > 50) lim = 15.f;
+	StelCore* core = StelApp::getInstance().getCore();
 
-	// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
-	if (nType==NebDn)
+	float lim = qMin(vMag, bMag);
+
+
+	if (surfaceBrightnessUsage)
 	{
-		// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
-		// 9-(opac-5)-2*(angularSize-0.5)
-		if (majorAxisSize>0 && vMag<50)
-			lim = 15.0f - vMag - 2.0f*qMin(majorAxisSize, 2.5f);
-		else if (B_nb>0)
-			lim = 9.0f;
-		else
-			lim= 12.0f; // GZ I assume some LDN objects are rather elusive.
+		lim = getSurfaceBrightness(core) - 3.f;
+		if (lim > 50) lim = 16.f;
 	}
-	else if (nType==NebHII)
-		lim=9.0f;
+	else
+	{
+		float mag = getVMagnitude(core);
+
+		if (lim > 50) lim = 15.f;
+
+		// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
+		if (nType==NebDn)
+		{
+			// GZ: ad-hoc visibility formula: assuming good visibility if objects of mag9 are visible, "usual" opacity 5 and size 30', better visibility (discernability) comes with higher opacity and larger size,
+			// 9-(opac-5)-2*(angularSize-0.5)
+			if (majorAxisSize>0 && mag<50)
+				lim = 15.0f - mag - 2.0f*qMin(majorAxisSize, 2.5f);
+			else if (B_nb>0)
+				lim = 9.0f;
+			else
+				lim= 12.0f; // GZ I assume some LDN objects are rather elusive.
+		}
+		else if (nType==NebHII)
+			lim=9.0f;
+	}
 
 	if (lim>maxMagLabel)
 		return;

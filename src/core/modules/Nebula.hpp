@@ -227,6 +227,7 @@ private:
 		     brightNebulaColor, darkNebulaColor, hydrogenRegionColor, supernovaRemnantColor, clusterColor;
 	static float circleScale;       // Define the scaling of the hints circle
 	static bool drawHintProportional; // scale hint with nebula size?
+	static bool surfaceBrightnessUsage;
 
 	static bool flagUsageTypeFilter;
 	static CatalogGroup catalogFilters;

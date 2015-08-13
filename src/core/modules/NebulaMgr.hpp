@@ -237,6 +237,11 @@ public slots:
 	//! Get whether hints (symbols) are scaled according to nebula size.
 	bool getHintsProportional(void) const;
 
+	//! Set whether hints (symbols) should be visible according to surface brightness value.
+	void setFlagSurfaceBrightnessUsage(const bool usage) { Nebula::surfaceBrightnessUsage=usage; }
+	//! Get whether hints (symbols) are visible according to surface brightness value.
+	bool getFlagSurfaceBrightnessUsage(void) const { return Nebula::surfaceBrightnessUsage; }
+
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
