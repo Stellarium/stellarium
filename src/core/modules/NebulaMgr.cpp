@@ -129,8 +129,7 @@ void NebulaMgr::init()
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
 	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
-
-
+	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 
 	// for DSO convertor (for developers!)
 	flagConverter = conf->value("devel/convert_dso_catalog", false).toBool();
