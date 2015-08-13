@@ -30,7 +30,10 @@ class StelAction : public QObject
 public:
 	friend class StelActionMgr;
 	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
+	Q_PROPERTY(QString text MEMBER text CONSTANT)
+	Q_PROPERTY(QKeySequence shortcut MEMBER keySequence CONSTANT)
 
+	StelAction() {}
 	//! Don't use this constructor, this is just there to ease the migration from QAction.
 	StelAction(QObject *parent)
 		: QObject(parent)
@@ -114,7 +117,7 @@ public:
 						  QObject* target, const char* slot,
 						  const QString& shortcut="", const QString& altShortcut="",
 						  bool global=false);
-	StelAction* findAction(const QString& id);
+	Q_INVOKABLE StelAction* findAction(const QString& id);
 	bool pushKey(int key, bool global=false);
 
 	QStringList getGroupList() const;
