@@ -28,6 +28,13 @@ class StelGui : public QObject
 	Q_PROPERTY(QVariantList buttons MEMBER buttons NOTIFY changed)
 	Q_PROPERTY(bool autoHideHorizontalButtonBar MEMBER autoHideHorizontalButtonBar NOTIFY changed)
 	Q_PROPERTY(bool autoHideVerticalButtonBar MEMBER autoHideVerticalButtonBar NOTIFY changed)
+	Q_PROPERTY(bool helpDialogVisible MEMBER helpDialogVisible NOTIFY changed)
+	Q_PROPERTY(bool configurationDialogVisible MEMBER configurationDialogVisible NOTIFY changed)
+	Q_PROPERTY(bool searchDialogVisible MEMBER searchDialogVisible NOTIFY changed)
+	Q_PROPERTY(bool viewDialogVisible MEMBER viewDialogVisible NOTIFY changed)
+	Q_PROPERTY(bool dateTimeDialogVisible MEMBER dateTimeDialogVisible NOTIFY changed)
+	Q_PROPERTY(bool locationDialogVisible MEMBER locationDialogVisible NOTIFY changed)
+	Q_PROPERTY(bool shortcutsDialogVisible MEMBER shortcutsDialogVisible NOTIFY changed)
 
 signals:
 	void changed();
@@ -42,4 +49,12 @@ private:
 	QVariantList buttons;
 	bool autoHideHorizontalButtonBar;
 	bool autoHideVerticalButtonBar;
+
+	bool helpDialogVisible;
+	bool configurationDialogVisible;
+	bool searchDialogVisible;
+	bool viewDialogVisible;
+	bool dateTimeDialogVisible;
+	bool locationDialogVisible;
+	bool shortcutsDialogVisible;
 };

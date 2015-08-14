@@ -25,6 +25,13 @@
 StelGui::StelGui():
 	  autoHideHorizontalButtonBar(true)
 	, autoHideVerticalButtonBar(true)
+	, helpDialogVisible(false)
+	, configurationDialogVisible(false)
+	, searchDialogVisible(false)
+	, viewDialogVisible(false)
+	, dateTimeDialogVisible(false)
+	, locationDialogVisible(false)
+	, shortcutsDialogVisible(false)
 {
 	QString miscGroup = N_("Miscellaneous");
 	StelActionMgr *actionMgr = StelApp::getInstance().getStelActionManager();
@@ -117,6 +124,44 @@ StelGui::StelGui():
 			  "qrc:///graphicGui/btTimeForward-off.png",
 			  "actionIncrease_Time_Speed",
 			  "070-timeGroup");
+
+	// Add all the windows bar actions and buttons.
+	// actionMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
+	// actionMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
+
+	QString windowsGroup = N_("Windows");
+	actionMgr->addAction("actionShow_Help_Window_Global", windowsGroup, N_("Help window"), this, "helpDialogVisible", "F1", "", true);
+	actionMgr->addAction("actionShow_Configuration_Window_Global", windowsGroup, N_("Configuration window"), this, "configurationDialogVisible", "F2", "", true);
+	actionMgr->addAction("actionShow_Search_Window_Global", windowsGroup, N_("Search window"), this, "searchDialogVisible", "F3", "Ctrl+F", true);
+	actionMgr->addAction("actionShow_SkyView_Window_Global", windowsGroup, N_("Sky and viewing options window"), this, "viewDialogVisible", "F4", "", true);
+	actionMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), this, "dateTimeDialogVisible", "F5", "", true);
+	actionMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), this, "locationDialogVisible", "F6", "", true);
+	actionMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), this, "shortcutsDialogVisible", "F7", "", true);
+
+	addButton("qrc:///graphicGui/1-on-time.png",
+			  "qrc:///graphicGui/1-off-time.png",
+			  "actionShow_DateTime_Window_Global",
+			  "win-bar");
+
+	addButton("qrc:///graphicGui/2-on-location.png",
+			  "qrc:///graphicGui/2-off-location.png",
+			  "actionShow_Location_Window_Global",
+			  "win-bar");
+
+	addButton("qrc:///graphicGui/5-on-labels.png",
+			  "qrc:///graphicGui/5-off-labels.png",
+			  "actionShow_SkyView_Window_Global",
+			  "win-bar");
+
+	addButton("qrc:///graphicGui/8-on-settings.png",
+			  "qrc:///graphicGui/8-off-settings.png",
+			  "actionShow_Configuration_Window_Global",
+			  "win-bar");
+
+	addButton("qrc:///graphicGui/6-on-search.png",
+			  "qrc:///graphicGui/6-off-search.png",
+			  "actionShow_Search_Window_Global",
+			  "win-bar");
 }
 
 void StelGui::addButton(QString pixOn, QString pixOff,
