@@ -15,12 +15,15 @@ LanguageCodePage=1252
 [CustomMessages]
 ForAllUsers=Para todos os usuários
 ForCurrentUserOnly=Apenas para o usuário atual
-RemoveFromPreviousInstallation=Remover os arquivos deixados por uma instalação anterior:
+RemoveFromPreviousInstallation=Remover arquivos deixados por uma instalação anterior:
 RemoveMainConfig=Remover o arquivo de configuração principal
 RemovePluginsConfig=Remover os arquivos de configuração dos complementos
-RemoveSolarConfig=Remover o arquivo do Sistema Solar
+RemoveSolarConfig=Remover o arquivo do sistema solar
 RemoveUILandscapes=Remover as paisagens instaladas pelo usuário
 RemoveShortcutsConfig=Remover o arquivo de configuração de atalhos
+RemoveCache=Remover os arquivos de cache
 LastRunLog=Registro da última execução
 ChangeLog=Registro de alterações
 FallbackMode=(modo de compatibilidade)
+DebugMode=(modo de depuração)
+RedistRun=Instalando o tempo de execução em C/C++ da Microsoft…
