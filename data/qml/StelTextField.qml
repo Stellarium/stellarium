@@ -18,14 +18,19 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
-Item {
-    Bars { }
-
-    ViewDialog {
-        target: stelGui
-        property: "viewDialogVisible"
-        x: 10
-        y: 10
+TextField {
+    style: TextFieldStyle {
+        textColor: "white"
+        background: Rectangle {
+            color: "#1e1e1f"
+            radius: 2
+            implicitWidth: 100
+            implicitHeight: 26
+            border.color: "black"
+            border.width: 1
+        }
     }
 }

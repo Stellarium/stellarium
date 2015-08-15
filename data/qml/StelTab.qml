@@ -18,14 +18,10 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 1.4
 
-Item {
-    Bars { }
-
-    ViewDialog {
-        target: stelGui
-        property: "viewDialogVisible"
-        x: 10
-        y: 10
-    }
+Tab {
+    id: tab
+    anchors.fill: parent
+    property string icon
 }

@@ -18,14 +18,31 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
-Item {
-    Bars { }
+Slider {
 
-    ViewDialog {
-        target: stelGui
-        property: "viewDialogVisible"
-        x: 10
-        y: 10
+    onValueChanged: {
+    }
+
+    style : SliderStyle {
+        groove: StelGradient {
+            implicitWidth: 200
+            implicitHeight: 4
+            c0: "#000000"    
+            c1: "#363636"
+        }
+        handle: StelGradient {
+            c0: "#b7b8b9"
+            c1: "#6f7172"
+            anchors.centerIn: parent
+            radius: 2
+            color: control.pressed ? "white" : "lightgray"
+            border.color: "black"
+            border.width: 1
+            implicitWidth: 32
+            implicitHeight: 14
+        }
     }
 }

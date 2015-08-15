@@ -19,10 +19,12 @@
 
 #include "StelQuickView.hpp"
 #include "StelActionMgr.hpp"
-#include "StelApp.hpp"
-#include "StelGui.hpp"
-#include "StelPainter.hpp"
 #include "StelActionMgr.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelGui.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 
 #include <QQmlContext>
@@ -106,6 +108,15 @@ void StelQuickView::showGui()
 	Q_ASSERT(stelApp);
 	rootContext()->setContextProperty("stelGui", stelApp->getGui());
 	rootContext()->setContextProperty("stelActionMgr", stelApp->getStelActionManager());
+
+	// Set the global objects name, same as in the scripting module.
+	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
+	foreach (StelModule* m, mmgr->getAllModules())
+	{
+		rootContext()->setContextProperty(m->objectName(), m);
+	}
+	rootContext()->setContextProperty("StelSkyDrawer", stelApp->getCore()->getSkyDrawer());
+
 	setSource(QUrl("qrc:/qml/main.qml"));
 }
 

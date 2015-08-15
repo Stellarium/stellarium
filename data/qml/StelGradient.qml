@@ -19,13 +19,12 @@
 
 import QtQuick 2.4
 
-Item {
-    Bars { }
+Rectangle {
+    property color c0
+    property color c1
 
-    ViewDialog {
-        target: stelGui
-        property: "viewDialogVisible"
-        x: 10
-        y: 10
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: c0 }
+        GradientStop { position: 1.0; color: c1 }
     }
 }

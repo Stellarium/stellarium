@@ -18,14 +18,15 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
-Item {
-    Bars { }
-
-    ViewDialog {
-        target: stelGui
-        property: "viewDialogVisible"
-        x: 10
-        y: 10
+RadioButton {
+    style: RadioButtonStyle {
+        indicator: Image {
+            // source: control.activeFocus ? "qrc://" : "gray"
+            source: control.checked ? "qrc:///graphicGui/radio-checked.png" :
+                                      "qrc:///graphicGui/radio-unchecked.png"
+        }
     }
 }

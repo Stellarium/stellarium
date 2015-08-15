@@ -18,14 +18,41 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.1
 
-Item {
-    Bars { }
+ColumnLayout {
+    id: root
+    property int value
 
-    ViewDialog {
-        target: stelGui
-        property: "viewDialogVisible"
-        x: 10
-        y: 10
+    MouseArea {
+        height: 20
+        Layout.fillWidth: true
+        Image {
+            anchors.centerIn: parent
+            source: "qrc:///graphicGui/spinup.png"
+        }
+        onClicked: {value++}
+    }
+    
+    Item {
+        Layout.fillWidth: true
+        implicitWidth: 200
+        implicitHeight: 20
+
+        TextInput {
+            anchors.fill: parent
+            text: root.value
+            horizontalAlignment: TextInput.AlignHCenter
+        }
+    }
+
+    MouseArea {
+        height: 20
+        Layout.fillWidth: true
+        Image {
+            anchors.centerIn: parent
+            source: "qrc:///graphicGui/spindown.png"
+        }
+        onClicked: {value--}
     }
 }
