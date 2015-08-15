@@ -1698,7 +1698,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	computeModelMatrix(modelMatrix);
 	// TODO explain this
 	const Mat4d mTarget = modelMatrix.inverse();
-	
+
 	QMatrix4x4 shadowCandidatesData;
 	QVector<const Planet*> shadowCandidates = getCandidatesForShadow();
 	// Our shader doesn't support more than 4 planets creating shadow
