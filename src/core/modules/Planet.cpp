@@ -872,7 +872,14 @@ float Planet::getVMagnitude(const StelCore* core) const
 	{
 		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
-		return 4.83 + 5.*(std::log10(distParsec)-1.);
+
+		// check how much of it is visible
+		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+		double shadowFactor = ssm->getEclipseFactor(core);
+		if(shadowFactor < 1e-11)
+			shadowFactor = 1e-11;
+
+		return 4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor));
 	}
 
 	// Compute the angular phase
@@ -1517,12 +1524,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3d tmp = getJ2000EquatorialPos(core);
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
 
-		Vec3d eclMoon = ssm->getMoon()->getJ2000EquatorialPos(core);
-		Vec3d eclSun = ssm->getSun()->getJ2000EquatorialPos(core);
-		float dLong = qAbs(eclMoon.longitude() - eclSun.longitude());
-		float dLat = qAbs(eclMoon.latitude() - eclSun.latitude());
-
-		if (core->getCurrentLocation().planetName == "Earth" && dLong<=0.0002f && dLat<=0.0002f)
+		float eclipseFactor = ssm->getEclipseFactor(core);
+		if (core->getCurrentLocation().planetName == "Earth" && eclipseFactor<0.001f)
 			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 2.f*screenSz, color);
 	}
 }
