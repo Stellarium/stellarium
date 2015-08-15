@@ -69,6 +69,8 @@ class LandscapeMgr : public StelModule
 			READ getFlagUseLightPollutionFromDatabase
 			WRITE setFlagUseLightPollutionFromDatabase
 			NOTIFY lightPollutionUsageChanged)
+	Q_PROPERTY(bool autoSelect MEMBER flagLandscapeAutoSelection NOTIFY changed)
+	Q_PROPERTY(int atmosphereBortleLightPollution READ getAtmosphereBortleLightPollution WRITE setAtmosphereBortleLightPollution NOTIFY lightPollutionChanged)
 
 public:
 	LandscapeMgr();
@@ -348,6 +350,7 @@ signals:
 	void illuminationDisplayedChanged(const bool displayed);
 	void labelsDisplayedChanged(const bool displayed);
 	void lightPollutionUsageChanged(const bool usage);
+	void changed();
 
 	//! Emitted when a landscape has been installed or un-installed.
 	//! For example, it is used to update the list of landscapes in

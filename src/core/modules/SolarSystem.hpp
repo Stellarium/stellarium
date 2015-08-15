@@ -46,18 +46,14 @@ typedef QSharedPointer<Planet> PlanetP;
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool labelsDisplayed
-		   READ getFlagLabels
-		   WRITE setFlagLabels)
-	Q_PROPERTY(bool orbitsDisplayed
-		   READ getFlagOrbits
-		   WRITE setFlagOrbits)
-	Q_PROPERTY(bool trailsDisplayed
-		   READ getFlagTrails
-		   WRITE setFlagTrails)
-	Q_PROPERTY(bool planetsDisplayed
-		   READ getFlagPlanets
-		   WRITE setFlagPlanets)
+	Q_PROPERTY(bool labelsDisplayed READ getFlagLabels WRITE setFlagLabels NOTIFY changed)
+	Q_PROPERTY(bool orbitsDisplayed READ getFlagOrbits WRITE setFlagOrbits NOTIFY changed)
+	Q_PROPERTY(bool trailsDisplayed READ getFlagTrails WRITE setFlagTrails NOTIFY changed)
+	Q_PROPERTY(bool   planetsDisplayed   MEMBER flagShow            NOTIFY changed)
+	Q_PROPERTY(bool   simulateLightSpeed MEMBER flagLightTravelTime NOTIFY changed)
+	Q_PROPERTY(bool   scaleMoon          MEMBER flagMoonScale       NOTIFY changed)
+	Q_PROPERTY(double moonScale          MEMBER moonScale           NOTIFY changed)
+	Q_PROPERTY(double labelsAmount       MEMBER labelsAmount        NOTIFY changed)
 
 public:
 	SolarSystem();
@@ -128,6 +124,9 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Solar System"; }
+
+signals:
+	void changed(); // Emitted when a property value changed.
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////

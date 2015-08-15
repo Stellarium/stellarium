@@ -33,6 +33,7 @@ class MilkyWay : public StelModule
 		   READ getFlagShow
 		   WRITE setFlagShow
 		   NOTIFY milkyWayDisplayedChanged)
+	Q_PROPERTY(double intensity MEMBER intensity NOTIFY changed)
 
 public:
 	MilkyWay();
@@ -74,6 +75,7 @@ public slots:
 	bool getFlagShow(void) const;
 
 signals:
+	void changed(); // Emitted when an attribute value changed.
 	void milkyWayDisplayedChanged(const bool displayed);
 	
 private:

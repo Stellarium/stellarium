@@ -48,9 +48,8 @@ typedef QSharedPointer<Nebula> NebulaP;
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool flagHintDisplayed
-			   READ getFlagHints
-			   WRITE setFlagHints)
+	Q_PROPERTY(bool   flagHintDisplayed READ getFlagHints WRITE setFlagHints NOTIFY changed)
+	Q_PROPERTY(double labelsAmount MEMBER labelsAmount NOTIFY changed)
 
 public:
 	NebulaMgr();
@@ -228,7 +227,7 @@ public slots:
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
-	void setFlagHints(bool b) {hintsFader=b;}
+	void setFlagHints(bool b) {hintsFader=b; emit changed();}
 	//! Get flag for displaying Nebulae Hints.
 	bool getFlagHints(void) const {return hintsFader;}
 
@@ -272,6 +271,9 @@ public slots:
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	float getHintsAmount(void) const {return hintsAmount;}
+
+signals:
+	void changed();
 
 private slots:
 	//! Sets the colors of the Nebula labels and markers according to the

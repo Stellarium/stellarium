@@ -88,6 +88,7 @@ class StarMgr : public StelObjectModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY starLabelsDisplayedChanged)
+	Q_PROPERTY(double labelsAmount MEMBER labelsAmount NOTIFY changed)
 
 public:
 	StarMgr(void);
@@ -298,6 +299,7 @@ private slots:
 	void updateSkyCulture(const QString& skyCultureDir);
 
 signals:
+	void changed();
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
 

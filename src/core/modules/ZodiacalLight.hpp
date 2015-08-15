@@ -53,6 +53,7 @@ class ZodiacalLight : public StelModule
 		   READ getFlagShow
 		   WRITE setFlagShow
 		   NOTIFY zodiacalLightDisplayedChanged)
+	Q_PROPERTY(double intensity MEMBER intensity NOTIFY changed)
 
 public:
 	ZodiacalLight();
@@ -94,6 +95,7 @@ public slots:
 	bool getFlagShow(void) const;
 
 signals:
+	void changed(); // Emitted when an attribute value change.
 	void zodiacalLightDisplayedChanged(const bool displayed);
 	
 private:

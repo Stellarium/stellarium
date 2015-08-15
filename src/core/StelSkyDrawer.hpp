@@ -45,6 +45,15 @@ struct RCMag
 class StelSkyDrawer : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(double starAbsoluteScale   MEMBER starAbsoluteScaleF      NOTIFY changed)
+	Q_PROPERTY(double starRelativeScale   MEMBER starRelativeScale       NOTIFY changed)
+	Q_PROPERTY(bool   flagTwinkle         MEMBER flagStarTwinkle         NOTIFY changed)
+	Q_PROPERTY(double twinkleAmount       MEMBER twinkleAmount           NOTIFY changed)
+	Q_PROPERTY(bool   luminanceAdaptation MEMBER flagLuminanceAdaptation NOTIFY changed)
+	Q_PROPERTY(bool   flagStarMagnitudeLimit   MEMBER flagStarMagnitudeLimit   NOTIFY changed)
+	Q_PROPERTY(bool   flagNebulaMagnitudeLimit MEMBER flagNebulaMagnitudeLimit NOTIFY changed)
+	Q_PROPERTY(float  customStarMagLimit   MEMBER customStarMagLimit    NOTIFY changed)
+	Q_PROPERTY(float  customNebualMagLimit MEMBER customNebulaMagLimit  NOTIFY changed)
 public:
 
 	//! Constructor
@@ -124,6 +133,9 @@ public:
 	{
 		return colorTable[bV];
 	}
+signals:
+	//! Emitted when a property value changed.
+	void changed();
 
 public slots:
 	//! Set the way brighter stars will look bigger as the fainter ones
