@@ -79,6 +79,10 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagLines
 			   WRITE setFlagLines
 			   NOTIFY linesDisplayedChanged)
+	Q_PROPERTY(double linesThickness
+			   READ getConstellationLineThickness
+			   WRITE setConstellationLineThickness
+			   NOTIFY linesThicknessChanged)
 	Q_PROPERTY(Vec3f namesColor
 			   READ getLabelsColor
 			   WRITE setLabelsColor
@@ -258,6 +262,7 @@ signals:
 	void isolateSelectedChanged(const bool isolate) const;	
 	void linesColorChanged(const Vec3f & color) const;
 	void linesDisplayedChanged(const bool displayed) const;
+	void linesThicknessChanged(float v) const;
 	void namesColorChanged(const Vec3f & color) const;
 	void namesDisplayedChanged(const bool displayed) const;
 	void constellationsDisplayStyleChanged(const ConstellationDisplayStyle style) const;

@@ -368,6 +368,7 @@ void ConstellationMgr::setConstellationLineThickness(const double thickness)
 	constellationLineThickness = thickness;
 	if (constellationLineThickness<=0.f) // The line can not be negative or zero thickness
 		constellationLineThickness = 1.f;
+	emit linesThicknessChanged(thickness);
 }
 
 void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)

@@ -72,32 +72,32 @@ GridLayout {
         title: "Constellations"
         StelItem {
             text: "Show lines"
-            target: starsMgr
-            check: "twinkle"
+            target: ConstellationMgr
+            check: "linesDisplayed"
         }
         StelItem {
             text: "Show labels"
-            target: starsMgr
-            check: "twinkle"
+            target: ConstellationMgr
+            check: "namesDisplayed"
         }
         StelItem {
             text: "Show boundaries"
-            target: starsMgr
-            check: "twinkle"
+            target: ConstellationMgr
+            check: "boundariesDisplayed"
         }
         StelItem {
             text: "Show art"
-            target: starsMgr
-            check: "twinkle"
+            target: ConstellationMgr
+            check: "artDisplayed"
         }
         StelItem {
             text: "Art brightness:"
-            target: starsMgr
-            spin: "twinkleAmount"
+            target: ConstellationMgr
+            spin: "artIntensity"
         }
         StelItem {
             text: "Thickness of lines:"
-            target: starsMgr
+            target: ConstellationMgr
             spin: "twinkleAmount"
         }
     }
