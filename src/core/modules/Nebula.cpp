@@ -242,14 +242,14 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
 
 			if (distanceErr>0.f)
-				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 2));
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
 			else
-				dx = QString("%1").arg(QString::number(distance, 'f', 2));
+				dx = QString("%1").arg(QString::number(distance, 'f', 3));
 
 			oss << q_("Parallax: %1\"").arg(px) << "<br>";
 			if (oDistance==0.f)
 			{
-				//TRANSLATORS: Unit of measure for distance - light years
+				//TRANSLATORS: Unit of measure for distance - Light Years
 				oss << q_("Distance: %1 ly").arg(dx) << "<br>";
 			}
 		}
@@ -258,9 +258,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		{
 			QString dx, du;
 			if (oDistanceErr>0.f)
-				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 2));
+				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 3));
 			else
-				dx = QString("%1").arg(QString::number(oDistance, 'f', 2));
+				dx = QString("%1").arg(QString::number(oDistance, 'f', 3));
 
 			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
 			{
