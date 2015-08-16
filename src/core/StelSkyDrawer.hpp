@@ -80,8 +80,6 @@ public:
 
 	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false);
 
-	void drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color);
-
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param v the 3d position of the source in J2000 reference frame
@@ -371,7 +369,6 @@ private:
 	//! Big halo texture
 	StelTextureSP texBigHalo;
 	StelTextureSP texSunHalo;
-	StelTextureSP texSunCorona;
 
 	bool flagLuminanceAdaptation;
 
