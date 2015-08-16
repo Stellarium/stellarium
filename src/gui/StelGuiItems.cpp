@@ -23,6 +23,7 @@
 
 #include "StelUtils.hpp"
 #include "StelGuiItems.hpp"
+#include "StelGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelMainView.hpp"
@@ -810,6 +811,7 @@ QRectF StelProgressBarMgr::boundingRect() const
 
 void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 {
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	QProgressBar* pb = new QProgressBar();
 	pb->setFixedHeight(25);
 	pb->setFixedWidth(200);
@@ -818,10 +820,11 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	pb->setMinimum(p->getMin());
 	pb->setMaximum(p->getMax());
 	pb->setFormat(p->getFormat());
+	pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
 	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-	pbProxy->setZValue(150);
+	pbProxy->setZValue(150);	
 	static_cast<QGraphicsLinearLayout*>(layout())->addItem(pbProxy);
 	allBars.insert(p, pb);
 	pb->setVisible(true);
