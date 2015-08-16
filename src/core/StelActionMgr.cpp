@@ -109,7 +109,7 @@ void StelAction::setChecked(bool value)
 	if (value == isChecked())
 		return;
 	target->setProperty(property, value);
-	emit toggled();
+	emit changed();
 }
 
 void StelAction::toggle()

@@ -31,7 +31,7 @@ public:
 	friend class StelActionMgr;
 	Q_PROPERTY(QString text MEMBER text CONSTANT)
 	Q_PROPERTY(QKeySequence shortcut MEMBER keySequence CONSTANT)
-	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
+	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY changed)
 	Q_PROPERTY(bool checkable READ isCheckable CONSTANT)
 
 	StelAction() {}
@@ -65,7 +65,6 @@ public:
 	bool isCheckable() const;
 	bool isChecked() const;
 signals:
-	void toggled();
 	void triggered();
 	void changed();
 public slots:
