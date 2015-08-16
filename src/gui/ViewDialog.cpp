@@ -216,6 +216,10 @@ void ViewDialog::createDialogContent()
 
 	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
 	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
+	ui->planetIsolatedOrbitCheckBox->setChecked(ssmgr->getFlagIsolatedOrbits());
+	connect(ui->planetIsolatedOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedOrbits(bool)));
+	ui->planetIsolatedTrailsCheckBox->setChecked(ssmgr->getFlagIsolatedTrails());
+	connect(ui->planetIsolatedTrailsCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedTrails(bool)));
 
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
