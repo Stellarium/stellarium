@@ -1505,26 +1505,16 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		sPainter=NULL;
 	}
 
-
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
 	if (hasHalo() || this==ssm->getSun())
 	{
-		StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-		StelPainter sPainter(prj);
-		Vec3d tmp = getJ2000EquatorialPos(core);
 		// Prepare openGL lighting parameters according to luminance
 		float surfArcMin2 = getSpheroidAngularSize(core)*60;
 		surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
+		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+		Vec3d tmp = getJ2000EquatorialPos(core);
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
-
-		Vec3d eclMoon = ssm->getMoon()->getJ2000EquatorialPos(core);
-		Vec3d eclSun = ssm->getSun()->getJ2000EquatorialPos(core);
-		float dLong = qAbs(eclMoon.longitude() - eclSun.longitude());
-		float dLat = qAbs(eclMoon.latitude() - eclSun.latitude());
-
-		if (core->getCurrentLocation().planetName == "Earth" && dLong<=0.0002f && dLat<=0.0002f)
-			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 0.7f*surfArcMin2/prj->getFov(), color);
 	}
 }
 

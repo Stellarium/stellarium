@@ -723,8 +723,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			majorAxisSize /= 60.f;	// Convert from arcmin to degrees
 			minorAxisSize /= 60.f;	// Convert from arcmin to degrees
 
-			if (bMag < 1.f) bMag = 99.f;
-			if (vMag < 1.f) vMag = 99.f;
+			// Warning: Hyades and LMC has visual magnitude less than 1.0 (0.5^m and 0.9^m)
+			if (bMag <= 0.f) bMag = 99.f;
+			if (vMag <= 0.f) vMag = 99.f;
 
 			QStringList oTypes;
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"

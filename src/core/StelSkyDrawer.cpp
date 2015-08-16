@@ -149,7 +149,6 @@ void StelSkyDrawer::init()
 	texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");
-	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/corona.png");
 
 	// Create shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
@@ -465,22 +464,6 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		postDrawPointSource(sPainter);
 	}
 	return true;
-}
-
-// Draw's the Sun's corona during a solar eclipse on Earth.
-void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color)
-{
-	texSunCorona->bind();
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-	painter->enableTexture2d(true);
-
-	Vec3f win;
-	painter->getProjector()->project(v, win);
-	painter->setColor(color[0], color[1], color[2]);
-	painter->drawSprite2dMode(win[0], win[1], radius);
-
-	postDrawPointSource(painter);
 }
 
 
