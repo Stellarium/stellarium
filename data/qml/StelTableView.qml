@@ -24,6 +24,7 @@ import QtGraphicalEffects 1.0
 
 TableView {
     headerDelegate: Item { }
+    function getText(s) {return s}
     itemDelegate: Item {
         StelGradient {
             visible: styleData.selected
@@ -37,7 +38,7 @@ TableView {
                 verticalCenter: parent.verticalCenter
                 margins: 2
             }
-            text: styleData.value
+            text: getText(styleData.value)
             color: styleData.textColor
         }
     }

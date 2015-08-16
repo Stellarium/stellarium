@@ -23,6 +23,7 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.2
+import org.stellarium 1.0
 
 GridLayout {
     columns: 2
@@ -110,33 +111,34 @@ GridLayout {
         title: "Projection"
 
         StelTableView {
-            id: table
+            id: projectionTable
+            property string value: core.getProjectionTypeKey()
             Layout.fillWidth: true
             Layout.fillHeight: true
-            model: ["Perspective", "Equal Area", "Fish-Eye", "Hammer-Aitoff", "Cylinder", "Mercator", "Orthographic", "Sinusoidal"]
+            model: core.getAllProjectionTypeKeys()
+            function getText(k) {return core.projectionTypeKeyToNameI18n(k)}
             TableViewColumn { }
+            Component.onCompleted: {
+                value = core.getCurrentProjectionTypeKey();
+                selection.select(model.indexOf(value));
+            }
+            onCurrentRowChanged: {
+                value = model[currentRow];
+                core.setCurrentProjectionTypeKey(value);
+                projectionHtml.text = core.getProjectionHtmlSummary();
+            }
         }
 
         Column {
             Layout.fillWidth: true
             Layout.fillHeight: true
             spacing: 10
-
             Text {
-                text: "Stereographic"
-                font.bold: true
-            }
-
-            Text {
+                id: projectionHtml
                 width: parent.width
-                text: "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight lines become curves when they appear a large angular distance from the centre of the field of view (like the distortions seen with very wide angle camera lenses)."
                 wrapMode: Text.Wrap
+                text: core.getProjectionHtmlSummary()
             }
-
-            Text {
-                text: "<b>" + "Maximum FOV:" + " </b>" + 10 + "°"
-            }
-
         }
     }
 }

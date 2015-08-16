@@ -106,6 +106,7 @@ void StelQuickView::synchronize()
 void StelQuickView::showGui()
 {
 	Q_ASSERT(stelApp);
+	rootContext()->setContextProperty("core", stelApp->getCore());
 	rootContext()->setContextProperty("stelGui", stelApp->getGui());
 	rootContext()->setContextProperty("stelActionMgr", stelApp->getStelActionManager());
 

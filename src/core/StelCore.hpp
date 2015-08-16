@@ -160,6 +160,8 @@ public:
 	//! Get a new instance of projector using a modelview transformation corresponding to the given frame.
 	//! If not specified the refraction effect is included if atmosphere is on.
 	StelProjectorP getProjection(FrameType frameType, RefractionMode refractionMode=RefractionAuto) const;
+	//! Added so that we can access the html summary from qml.
+	Q_INVOKABLE QString getProjectionHtmlSummary() const { return getProjection(FrameJ2000)->getHtmlSummary(); }
 
 	//! Get a new instance of projector using the given modelview transformation.
 	//! If not specified the projection used is the one currently used as default.
@@ -189,7 +191,7 @@ public:
 	void getClippingPlanes(double* zn, double* zf) const;
 
 	//! Get the translated projection name from its TypeKey for the current locale.
-	QString projectionTypeKeyToNameI18n(const QString& key) const;
+	Q_INVOKABLE QString projectionTypeKeyToNameI18n(const QString& key) const;
 
 	//! Get the projection TypeKey from its translated name for the current locale.
 	QString projectionNameI18nToTypeKey(const QString& nameI18n) const;
