@@ -41,27 +41,28 @@ GridLayout {
 
         Repeater {
             model: [
-                ["Equatorial grid (J2000)", "Equatorial coordinates of J2000.0."],
-                ["Equatorial grid (of date)", "Equatorial coordinates of current date and planet."],
-                ["Ecliptic grid (J2000)", "Equatorial coordinates of J2000.0."],
-                ["Ecliptic grid (of date)", "Ecliptical coordinates for current date. Displayed on Earth only."],
-                ["Azimuthal grid", "Altitudes and azimuth (counted from North towards East)."],
-                ["Galactic grid", "Galactic Coordinates, System II (IAU 1958)."],
-                ["Cardinal points", "Labels for the Cardinal directions."],
-                ["Precession circles", "Instantaneous circles of earth's axis on its motion around ecliptical poles. Displayed on Earth only."],
-                ["Equator (J2000)", "Show celestial equator of J2000.0."],
-                ["Equator (of date)", "Show celestial equator of current planet and date."],
-                ["Ecliptic (J2000)", "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."],
-                ["Ecliptic (of date)", "Show ecliptic line of current date."],
-                ["Horizon", "Show horizon line."],
-                ["Galactic equator", "Show Galactic equator line."],
-                ["Meridian", "Show meridian line."],
-                ["O./C. longitude", "Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point."]
+                ["Equatorial grid (J2000)", "Equatorial coordinates of J2000.0.", "actionShow_Equatorial_J2000_Grid"],
+                ["Equatorial grid (of date)", "Equatorial coordinates of current date and planet.", "actionShow_Equatorial_Grid"],
+                ["Ecliptic grid (J2000)", "Equatorial coordinates of J2000.0.", "actionShow_Ecliptic_J2000_Grid"],
+                ["Ecliptic grid (of date)", "Ecliptical coordinates for current date. Displayed on Earth only.", "actionShow_Ecliptic_Grid"],
+                ["Azimuthal grid", "Altitudes and azimuth (counted from North towards East).", "actionShow_Azimuthal_Grid"],
+                ["Galactic grid", "Galactic Coordinates, System II (IAU 1958).", "actionShow_Galactic_Grid"],
+                ["Cardinal points", "Labels for the Cardinal directions.", "actionShow_Cardinal_Points"],
+                ["Precession circles", "Instantaneous circles of earth's axis on its motion around ecliptical poles. Displayed on Earth only.", "actionShow_Precession_Circles"],
+                ["Equator (J2000)", "Show celestial equator of J2000.0.", "actionShow_Equator_J2000_Line"],
+                ["Equator (of date)", "Show celestial equator of current planet and date.", "actionShow_Equator_Line"],
+                ["Ecliptic (J2000)", "Show ecliptic line of J2000.0 (VSOP87A fundamental plane).", "actionShow_Ecliptic_J2000_Line"],
+                ["Ecliptic (of date)", "Show ecliptic line of current date.", "actionShow_Ecliptic_Line"],
+                ["Horizon", "Show horizon line.", "actionShow_Horizon_Line"],
+                ["Galactic equator", "Show Galactic equator line.", "actionShow_Galactic_Equator_Line"],
+                ["Meridian", "Show meridian line.", "actionShow_Meridian_Line"],
+                ["O./C. longitude", "Opposition/conjunction longitude line - the line of ecliptic longitude which passes through both ecliptic poles, the Sun and opposition point.", "actionShow_Longitude_Line"]
             ]
 
             delegate: StelItem {
                 text: modelData[0]
-                check: "x"
+                target: stelActionMgr.findAction(modelData[2])
+                check: "checked"
             }
         }
     }
