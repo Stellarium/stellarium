@@ -36,6 +36,8 @@ class StelGui : public QObject
 	Q_PROPERTY(bool locationDialogVisible MEMBER locationDialogVisible NOTIFY changed)
 	Q_PROPERTY(bool shortcutsDialogVisible MEMBER shortcutsDialogVisible NOTIFY changed)
 
+	Q_PROPERTY(QString locationName READ getLocationName NOTIFY changed)
+
 signals:
 	void changed();
 
@@ -44,6 +46,7 @@ public:
 	void addButton(QString pixOn, QString pixOff,
 				   QString action, QString groupName,
 				   QString beforeActionName = QString());
+	QString getLocationName() const;
 
 private:
 	QVariantList buttons;

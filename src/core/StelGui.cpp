@@ -20,7 +20,10 @@
 #include "StelGui.hpp"
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelLocation.hpp"
+#include "StelUtils.hpp"
 
 StelGui::StelGui():
 	  autoHideHorizontalButtonBar(true)
@@ -178,3 +181,18 @@ void StelGui::addButton(QString pixOn, QString pixOff,
 	emit changed();
 }
 
+QString StelGui::getLocationName() const
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	const StelLocation* loc = &core->getCurrentLocation();
+	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
+	const StelTranslator& trans = locmgr.getSkyTranslator();
+	if (!loc->name.isEmpty())
+	{
+		return trans.qtranslate(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
+	}
+	else
+	{
+		return trans.qtranslate(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+	}
+}

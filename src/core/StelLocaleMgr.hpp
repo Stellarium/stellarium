@@ -21,12 +21,14 @@
 #define _STELLOCALEMGR_HPP_
 
 #include "StelTranslator.hpp"
+#include <QObject>
 
 //! @class StelLocaleMgr
 //! Manage i18n operations such as message translation and date/time localization.
 //! @author Fabien Chereau
-class StelLocaleMgr
+class StelLocaleMgr : public QObject
 {
+	Q_OBJECT
 public:
 	StelLocaleMgr();
 	~StelLocaleMgr();
@@ -113,16 +115,16 @@ public:
 		SDateSystemDefault,	//!< Use the system default date format
 		SDateYYYYMMDD		//!< e.g. "1998-07-05" for July 5th 1998
 	};
-	
+
 	//! Get a localized, formatted string representation of the date component of a Julian date.
-	QString getPrintableDateLocal(double JD) const;
-	
+	Q_INVOKABLE QString getPrintableDateLocal(double JD) const;
+
 	//! Get a localized, formatted string representation of the time component of a Julian date.
-	QString getPrintableTimeLocal(double JD) const;
+	Q_INVOKABLE QString getPrintableTimeLocal(double JD) const;
 
 	//! Get a localized, formatted string representation of the time zone of a Julian date.
-	QString getPrintableTimeZoneLocal(double JD) const;
-	
+	Q_INVOKABLE QString getPrintableTimeZoneLocal(double JD) const;
+
 	//! @enum STzFormat
 	enum STzFormat
 	{

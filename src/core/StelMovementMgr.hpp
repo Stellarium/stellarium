@@ -36,6 +36,7 @@ class StelMovementMgr : public StelModule
 	Q_PROPERTY(bool tracking
 			   READ getFlagTracking
 			   WRITE setFlagTracking)
+	Q_PROPERTY(double fov READ getCurrentFov NOTIFY changed)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
@@ -96,6 +97,8 @@ public:
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
 
 	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
+signals:
+	void changed();
 
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
@@ -239,6 +242,7 @@ private:
 			currentFov = minFov;
 
 		changeConstellationArtIntensity();
+		emit changed();
 	}
 	void changeFov(double deltaFov);
 	void changeConstellationArtIntensity();

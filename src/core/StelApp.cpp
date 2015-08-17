@@ -568,6 +568,7 @@ void StelApp::update(double deltaTime)
 	}
 
 	stelObjectMgr->update(deltaTime);
+	emit updated();
 }
 
 void StelApp::prepareRenderBuffer()

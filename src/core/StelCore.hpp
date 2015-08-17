@@ -54,6 +54,7 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
+	Q_PROPERTY(double JD READ getJD NOTIFY updated)
 
 public:
 	//! @enum FrameType
@@ -591,6 +592,8 @@ signals:
 	void locationChanged(StelLocation);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
+	//! Emitted at every iteration
+	void updated();
 
 private:
 	StelToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device

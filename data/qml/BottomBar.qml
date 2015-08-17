@@ -38,22 +38,25 @@ Item {
             margins: 8
         }
         Text {
-            text: "Paris"
+            text: stelGui.locationName
             color: "white"
         }
         Item { Layout.fillWidth: true }
         Text {
-            text: "FOV 60"
+            text: "FOV %1".arg(StelMovementMgr.fov.toFixed(1))
             color: "white"
         }
         Item { Layout.fillWidth: true }
         Text {
-            text: "23.3 FPS"
+            text: "%1 FPS".arg(stelApp.fps.toFixed(1))
             color: "white"
         }
         Item { Layout.fillWidth: true }
         Text {
-            text: "2015-08-7 14:50:30 UTC+08:00"
+            text: {
+                var jd = core.JD;
+                return "%1   %2 %3".arg(LocaleMgr.getPrintableDateLocal(jd)).arg(LocaleMgr.getPrintableTimeLocal(jd)).arg(LocaleMgr.getPrintableTimeZoneLocal(jd))
+            }
             color: "white"
         }
     }

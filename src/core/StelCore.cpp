@@ -433,6 +433,7 @@ void StelCore::update(double deltaTime)
 	currentProjectorParams.fov = movementMgr->getCurrentFov();
 
 	skyDrawer->update(deltaTime);
+	emit updated();
 }
 
 

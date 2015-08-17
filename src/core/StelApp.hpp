@@ -61,6 +61,7 @@ class StelApp : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
+	Q_PROPERTY(float fps READ getFps NOTIFY updated)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -229,6 +230,7 @@ signals:
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void skyCultureChanged(const QString&);
+	void updated();
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);
