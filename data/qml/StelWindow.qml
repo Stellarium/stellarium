@@ -73,7 +73,7 @@ Item {
 
         Image {
             id: test
-            source: "qrc:/imgs/imgs/closeButton.png"
+            source: "qrc:///graphicGui/closeButton.png"
             smooth: true
             visible: true
             anchors {
