@@ -1550,6 +1550,7 @@ void SolarSystem::setFlagNativeNames(bool b)
 			p->setFlagNativeName(flagNativeNames);
 	}
 	updateI18n();
+	emit changed();
 }
 
 bool SolarSystem::getFlagNativeNames() const

@@ -96,7 +96,6 @@ class ConstellationMgr : public StelObjectModule
 			   WRITE setConstellationDisplayStyle
 			   NOTIFY constellationsDisplayStyleChanged)
 
-
 public:
 	//! Constructor
 	ConstellationMgr(StarMgr *stars);
@@ -158,6 +157,7 @@ public:
 		constellationsTranslated  = 2,
 		constellationsEnglish     = 3 // Maybe this is not useful?
 	};
+	Q_ENUM(ConstellationDisplayStyle)
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters

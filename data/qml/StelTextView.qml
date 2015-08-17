@@ -25,12 +25,14 @@ import QtGraphicalEffects 1.0
 ScrollView {
     id: root
     property string text
+    property url baseUrl
 
     width: parent.width
     height: parent.height
     Text {
         width: parent.parent.width
         text: root.text
+        baseUrl: root.baseUrl
         wrapMode: Text.Wrap
     }
 

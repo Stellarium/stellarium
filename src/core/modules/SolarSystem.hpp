@@ -54,6 +54,7 @@ class SolarSystem : public StelObjectModule
 	Q_PROPERTY(bool   scaleMoon          MEMBER flagMoonScale       NOTIFY changed)
 	Q_PROPERTY(double moonScale          MEMBER moonScale           NOTIFY changed)
 	Q_PROPERTY(double labelsAmount       MEMBER labelsAmount        NOTIFY changed)
+	Q_PROPERTY(bool useNativeNames READ getFlagNativeNames WRITE setFlagNativeNames NOTIFY changed)
 
 public:
 	SolarSystem();

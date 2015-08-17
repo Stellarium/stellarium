@@ -29,6 +29,7 @@ RowLayout {
     property string check
     property bool checked: root.check ? root.target[root.check] : undefined
     property var choices: null
+    property alias currentIndex: comboBox.currentIndex
     property string type: "default"
     property string spinType: type
 
@@ -119,6 +120,7 @@ RowLayout {
     }
 
     StelComboBox {
+        id: comboBox
         visible: root.choices
         model: root.choices
     }

@@ -25,6 +25,7 @@
 #include "StelGui.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelSkyCultureMgr.hpp"
 #include "StelTranslator.hpp"
 
 #include <QQmlContext>
@@ -109,6 +110,7 @@ void StelQuickView::showGui()
 	rootContext()->setContextProperty("core", stelApp->getCore());
 	rootContext()->setContextProperty("stelGui", stelApp->getGui());
 	rootContext()->setContextProperty("stelActionMgr", stelApp->getStelActionManager());
+	rootContext()->setContextProperty("SkyCultureMgr", &stelApp->getSkyCultureMgr());
 
 	// Set the global objects name, same as in the scripting module.
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();

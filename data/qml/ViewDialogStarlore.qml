@@ -36,8 +36,17 @@ GridLayout {
     StelTableView {
         Layout.fillHeight: true
         Layout.rowSpan: 3
-        model: ["Perspective", "Equal Area", "Fish-Eye", "Hammer-Aitoff", "Cylinder", "Mercator", "Orthographic", "Sinusoidal"]
+        model: SkyCultureMgr.getSkyCultureListIDs()
+        function getText(v) {return SkyCultureMgr.getSkyCultureI18(v)}
         TableViewColumn { }
+        Component.onCompleted: {
+            var current = SkyCultureMgr.currentSkyCultureID;
+            selection.select(model.indexOf(current));
+        }
+        onCurrentRowChanged: {
+            var value = model[currentRow];
+            SkyCultureMgr.currentSkyCultureID = value;
+        }
     }
 
     Column {
@@ -48,21 +57,8 @@ GridLayout {
         StelTextView {
             width: parent.width
             height: parent.height
-            text: {
-                  return "<h2>Western</h2>" +
-                  "<p>Western sky culture is used internationally by modern astronomers, and is the official scheme of The International Astronomical Union.  It has historical roots in Ancient Greek astronomy, with influences from Islamic astronomy.</p>" +
-                  "<h3>Constellations</h3>" +
-                  "<p>The Western culture divides the celestial sphere into 88 areas of various sizes called <i>constellations</i>, each with precise boundary, issued by the International Astronomical Union. These constellations have become the standard way to describe the sky, replacing similar sets in other sky cultures exhaustively in daily usage.</p>" +
-                  "<h3>Star names</h3>" +
-                  "<p>Most of traditional western star names came from Arabic. In astronomy, Bayer/Flamsteed designations and other star catalogues are widely used instead of traditional names except few cases where the traditional names are more famous than the designations.</p>" +
-                  "<h3>Alternative asterism files for Stellarium</h3>" +
-                  "<p><a href=\"http://wackymorningdj.users.sourceforge.net/ha_rey_stellarium.zip\" class='external text' rel=\"nofollow\">Asterisms by H.A. Rey</a>, from his book \"The Stars: A New Way To See Them\", by <a class='external text' href=\"http://sourceforge.net/users/wackymorningdj/' rel=\"nofollow\">Mike Richards</a>.</p>" +
-                  "<h3>External links</h3>" +
-                  "<ul><li> <a href=\"http://en.wikipedia.org/wiki/Constellation\" class='external text' title=\"http://en.wikipedia.org/wiki/Constellation\" rel=\"nofollow\">Constellation</a> article at Wikipedia" +
-                  "</li><li> <a href=\"http://en.wikipedia.org/wiki/Star_catalogue\" class='external text' title=\"http://en.wikipedia.org/wiki/Star catalogue\" rel=\"nofollow\">Star Catalogue</a> article at Wikipedia" +
-                  "</li><li> <a href=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\" class='external text' title=\"http://hubblesource.stsci.edu/sources/illustrations/constellations/\" rel=\"nofollow\">Constellation image library</a> of the U.S. Naval Observatory and the Space Telescope Science Institute. Johannes Hevelius Engravings." +
-                  "</li></ul>";
-            }
+            baseUrl: SkyCultureMgr.getSkyCultureBaseUrl(SkyCultureMgr.currentSkyCultureID)
+            text: SkyCultureMgr.getSkyCultureDesc(SkyCultureMgr.currentSkyCultureID)
         }
     }
 
@@ -71,23 +67,23 @@ GridLayout {
         title: "Options"
         StelItem {
             text: "Use this sky culture as default"
-            target: starsMgr
-            check: "x"
+            checked: SkyCultureMgr.currentSkyCultureID == SkyCulture.defaultSkyCultureID
+            enabled: SkyCultureMgr.currentSkyCultureID != SkyCulture.defaultSkyCultureID
+            onClicked: {
+                SkyCulture.defaultSkyCultureID = SkyCultureMgr.currentSkyCultureID
+            }
         }
         StelItem {
             text: "Use native names for planets from current culture"
-            target: starsMgr
-            check: "x"
+            target: SolarSystem
+            check: "useNativeNames"
         }
         StelItem {
             text: "Show names:"
-            target: starsMgr
+            target: ConstellationMgr
             choices: ["Abbreviated", "Native", "Translated"]
+            currentIndex: ConstellationMgr.constellationDisplayStyle
+            onCurrentIndexChanged: ConstellationMgr.constellationDisplayStyle = currentIndex
         }
-    }
-
-    Button {
-        Layout.fillWidth: true
-        text: "Add/Remove landscapes"
     }
 }
