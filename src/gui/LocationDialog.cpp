@@ -339,7 +339,7 @@ StelLocation LocationDialog::locationFromFields() const
 		loc.planetName = QString();//As returned by QComboBox::currentText()
 	else
 		loc.planetName = ui->planetNameComboBox->itemData(index).toString();
-	loc.name = ui->cityNameLineEdit->text();
+	loc.name = ui->cityNameLineEdit->text().trimmed(); // avoid locations with leading whitespace
 	loc.latitude = qMin(90.0, qMax(-90.0, ui->latitudeSpinBox->valueDegrees()));
 	loc.longitude = ui->longitudeSpinBox->valueDegrees();
 	loc.altitude = ui->altitudeSpinBox->value();
