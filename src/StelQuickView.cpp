@@ -90,6 +90,16 @@ void StelQuickView::timerEvent(QTimerEvent* event)
 	update();
 }
 
+void StelQuickView::keyPressEvent(QKeyEvent* event)
+{
+	stelApp->handleKeys(event);
+}
+
+void StelQuickView::keyReleaseEvent(QKeyEvent* event)
+{
+	stelApp->handleKeys(event);
+}
+
 void StelQuickView::synchronize()
 {
 	if (initState == 0)
