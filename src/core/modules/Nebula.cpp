@@ -214,6 +214,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 	}
 
+
 	if (flags&Extra)
 	{
 		if (redshift<99.f)
@@ -228,25 +229,38 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		if (parallax!=0.f)
 		{
-			QString px, dx;
+			QString px;
+
+			if (parallaxErr>0.f)
+				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
+			else
+				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
+
+			oss << q_("Parallax: %1\"").arg(px) << "<br>";
+		}
+
+		if (!getMorphologicalTypeDescription().isEmpty())
+			oss << q_("Morphological description: ") << getMorphologicalTypeDescription() << ".<br>";
+
+	}
+
+	if (flags&Distance)
+	{
+		if (parallax!=0.f)
+		{
+			QString dx;
 			// distance in light years from parallax
 			float distance = 3.162e-5/(qAbs(parallax)*4.848e-9);
 			float distanceErr = 0.f;
 
 			if (parallaxErr>0.f)
-			{
-				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
 				distanceErr = 3.162e-5/(qAbs(parallaxErr)*4.848e-9);
-			}
-			else
-				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
 
 			if (distanceErr>0.f)
 				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
 			else
 				dx = QString("%1").arg(QString::number(distance, 'f', 3));
 
-			oss << q_("Parallax: %1\"").arg(px) << "<br>";
 			if (oDistance==0.f)
 			{
 				//TRANSLATORS: Unit of measure for distance - Light Years
@@ -275,10 +289,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
 		}
-
-		if (!getMorphologicalTypeDescription().isEmpty())
-			oss << q_("Morphological description: ") << getMorphologicalTypeDescription() << ".<br>";
-
 	}
 
 	postProcessInfoString(str, flags);
