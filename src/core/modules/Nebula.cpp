@@ -214,36 +214,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 	}
 
-
-	if (flags&Extra)
-	{
-		if (redshift<99.f)
-		{
-			QString z;
-			if (redshiftErr>0.f)
-				z = QString("%1%2%3").arg(QString::number(redshift, 'f', 6)).arg(QChar(0x00B1)).arg(QString::number(redshiftErr, 'f', 6));
-			else
-				z = QString("%1").arg(QString::number(redshift, 'f', 6));
-
-			oss << q_("Redshift: %1").arg(z) << "<br>";
-		}
-		if (parallax!=0.f)
-		{
-			QString px;
-
-			if (parallaxErr>0.f)
-				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
-			else
-				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
-
-			oss << q_("Parallax: %1\"").arg(px) << "<br>";
-		}
-
-		if (!getMorphologicalTypeDescription().isEmpty())
-			oss << q_("Morphological description: ") << getMorphologicalTypeDescription() << ".<br>";
-
-	}
-
 	if (flags&Distance)
 	{
 		if (parallax!=0.f)
@@ -289,6 +259,35 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
 		}
+	}
+
+	if (flags&Extra)
+	{
+		if (redshift<99.f)
+		{
+			QString z;
+			if (redshiftErr>0.f)
+				z = QString("%1%2%3").arg(QString::number(redshift, 'f', 6)).arg(QChar(0x00B1)).arg(QString::number(redshiftErr, 'f', 6));
+			else
+				z = QString("%1").arg(QString::number(redshift, 'f', 6));
+
+			oss << q_("Redshift: %1").arg(z) << "<br>";
+		}
+		if (parallax!=0.f)
+		{
+			QString px;
+
+			if (parallaxErr>0.f)
+				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
+			else
+				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
+
+			oss << q_("Parallax: %1\"").arg(px) << "<br>";
+		}
+
+		if (!getMorphologicalTypeDescription().isEmpty())
+			oss << q_("Morphological description: ") << getMorphologicalTypeDescription() << ".<br>";
+
 	}
 
 	postProcessInfoString(str, flags);
