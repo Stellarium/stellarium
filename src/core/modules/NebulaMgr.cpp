@@ -731,7 +731,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
-			       << "BLL" << "BLA" << "MOC" << "YSO";
+			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
+			       << "IR" << "**" << "MUL";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -752,6 +753,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebPn;
 					break;
 				case 6:
+				case 34:
 					nType = (unsigned int)Nebula::NebDn;
 					break;
 				case 7:
@@ -810,10 +812,22 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebBLA;
 					break;
 				case 28:
+				case 33:
 					nType = (unsigned int)Nebula::NebMolCld;
 					break;
 				case 29:
 					nType = (unsigned int)Nebula::NebYSO;
+					break;
+				case 30:
+					nType = (unsigned int)Nebula::NebPossQSO;
+					break;
+				case 31:
+					nType = (unsigned int)Nebula::NebPossPN;
+					break;
+				case 32:
+				case 35:
+				case 36:
+					nType = (unsigned int)Nebula::NebStar;
 					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
