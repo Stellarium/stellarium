@@ -496,6 +496,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 			drawer->setAtmospherePressure(p);
 		}
 	}
+	emit changed();
 	// else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
 }
@@ -525,6 +526,7 @@ bool LandscapeMgr::setDefaultLandscapeID(const QString& id)
 	defaultLandscapeID = id;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->setValue("init_location/landscape_name", id);
+	emit changed();
 	return true;
 }
 

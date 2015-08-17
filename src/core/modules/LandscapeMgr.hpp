@@ -71,6 +71,12 @@ class LandscapeMgr : public StelModule
 			NOTIFY lightPollutionUsageChanged)
 	Q_PROPERTY(bool autoSelect MEMBER flagLandscapeAutoSelection NOTIFY changed)
 	Q_PROPERTY(int atmosphereBortleLightPollution READ getAtmosphereBortleLightPollution WRITE setAtmosphereBortleLightPollution NOTIFY lightPollutionChanged)
+	Q_PROPERTY(bool landscapeSetsLocation MEMBER flagLandscapeSetsLocation NOTIFY changed)
+	Q_PROPERTY(QString currentLandscapeID READ getCurrentLandscapeID WRITE setCurrentLandscapeID NOTIFY changed)
+	Q_PROPERTY(QString defaultLandscapeID READ getDefaultLandscapeID WRITE setDefaultLandscapeID NOTIFY changed)
+	Q_PROPERTY(bool useMinimalBrightness MEMBER flagLandscapeUseMinimalBrightness NOTIFY changed)
+	Q_PROPERTY(double defaultMinimalBrightness MEMBER defaultMinimalBrightness NOTIFY changed)
+	Q_PROPERTY(bool setMinimalBrighntess MEMBER flagLandscapeSetsMinimalBrightness NOTIFY changed)
 
 public:
 	LandscapeMgr();

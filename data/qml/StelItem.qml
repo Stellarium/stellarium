@@ -24,9 +24,10 @@ import QtQuick.Controls 1.4
 RowLayout {
     id: root
     property string text
-    property bool bold : false
+    property bool bold: false
     property var target
     property string check
+    property bool checked: root.check ? root.target[root.check] : undefined
     property var choices: null
     property string type: "default"
     property string spinType: type
@@ -35,19 +36,23 @@ RowLayout {
     property double spinMin
     property double spinMax
     property double spinStep: 1.0
-    // property alias exclusiveGroup: radioItem.exclusiveGroup
+    signal clicked()
+
 
     height: 30
     Layout.fillWidth: true
 
     StelCheckBox {
         id: checkBoxItem
-        visible: root.check && root.type != "radio"
-        checked: visible && root.target[root.check]
+        visible: root.checked !== undefined
+        checked: root.checked
         onCheckedChanged: {
-            root.target[root.check] = checked;
-            checked = Qt.binding(function(){return root.target[root.check]});
+            if (root.check) {
+                root.target[root.check] = checked;
+                checked = Qt.binding(function(){return root.checked});
+            }
         }
+        onClicked: root.clicked()
     }
 
     StelRadioButton {

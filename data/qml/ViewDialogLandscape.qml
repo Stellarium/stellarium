@@ -25,9 +25,11 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.2
 
 GridLayout {
+    id: root
     columns: 2
     columnSpacing: 20
     rowSpacing: 20
+
     anchors {
         fill: parent
         margins: 10
@@ -36,8 +38,17 @@ GridLayout {
     StelTableView {
         Layout.fillHeight: true
         Layout.rowSpan: 3
-        model: ["Perspective", "Equal Area", "Fish-Eye", "Hammer-Aitoff", "Cylinder", "Mercator", "Orthographic", "Sinusoidal"]
+        model: LandscapeMgr.getAllLandscapeNames()
         TableViewColumn { }
+        Component.onCompleted: {
+            var current = LandscapeMgr.getCurrentLandscapeName();
+            selection.select(model.indexOf(current));
+        }
+        onCurrentRowChanged: {
+            var value = model[currentRow];
+            LandscapeMgr.setCurrentLandscapeName(value);
+            landscapeDesc.text = LandscapeMgr.getCurrentLandscapeHtmlDescription();
+        }
     }
 
     Column {
@@ -46,18 +57,10 @@ GridLayout {
         spacing: 10
 
         Text {
-            text: "Stereographic"
-            font.bold: true
-        }
-
-        Text {
+            id: landscapeDesc
             width: parent.width
-            text: "In fish-eye projection, or <i>azimuthal equidistant projection</i>, straight lines become curves when they appear a large angular distance from the centre of the field of view (like the distortions seen with very wide angle camera lenses)."
+            text: LandscapeMgr.getCurrentLandscapeHtmlDescription()
             wrapMode: Text.Wrap
-        }
-
-        Text {
-            text: "<b>" + "Maximum FOV:" + " </b>" + 10 + "°"
         }
     }
 
@@ -66,47 +69,50 @@ GridLayout {
         title: "Options"
         StelItem {
             text: "Show ground"
-            target: starsMgr
-            check: "x"
+            target: LandscapeMgr
+            check: "landscapeDisplayed"
         }
         StelItem {
             text: "Show fog"
-            target: starsMgr
-            check: "x"
+            target: LandscapeMgr
+            check: "fogDisplayed"
         }
         StelItem {
             text: "Use associated planet and position"
-            target: starsMgr
-            check: "x"
+            target: LandscapeMgr
+            check: "landscapeSetsLocation"
         }
         StelItem {
             text: "Use this landscape as default"
-            target: starsMgr
-            check: "x"
+            checked: LandscapeMgr.currentLandscapeID == LandscapeMgr.defaultLandscapeID
+            enabled: LandscapeMgr.currentLandscapeID != LandscapeMgr.defaultLandscapeID
+            onClicked: {
+                LandscapeMgr.defaultLandscapeID = LandscapeMgr.currentLandscapeID;
+            }
         }
         Row {
             spacing: 8
             StelItem {
                 text: "Minimal brightness:"
-                target: starsMgr
-                check: "x"
-                spin: "x"
+                target: LandscapeMgr
+                check: "useMinimalBrightness"
+                spin: "defaultMinimalBrightness"
             }
             StelItem {
                 text: "from landscape, if given"
-                target: starsMgr
-                check: "x"
+                target: LandscapeMgr
+                check: "setMinimalBrightness"
             }
         }
         StelItem {
             text: "Show illumination layer (bright windows, light pollution, etc.)"
-            target: starsMgr
-            check: "x"
+            target: LandscapeMgr
+            check: "illuminationDisplayed"
         }
         StelItem {
             text: "Show landscape labels"
-            target: starsMgr
-            check: "x"
+            target: LandscapeMgr
+            check: "labelsDisplayed"
         }
     }
 
