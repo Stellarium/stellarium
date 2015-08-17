@@ -32,7 +32,10 @@
 #include <QQmlContext>
 #include <QQuickItem>
 #include <QDebug>
+#include <QGuiApplication>
 #include <QSettings>
+#include <QtGlobal>
+#include <QTimer>
 
 StelQuickView* StelQuickView::singleton = NULL;
 
@@ -72,9 +75,19 @@ void StelQuickView::init(QSettings* conf)
 	setClearBeforeRendering(false);
 	int width = conf->value("video/screen_w", 480).toInt();
 	int height = conf->value("video/screen_h", 700).toInt();
+
+	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
+	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
+
 	resize(width, height);
 	show();
-	startTimer(16);
+	timer = new QTimer(this);
+	minFpsTimer = new QTimer(this);
+	minFpsTimer->setSingleShot(true);
+	connect(minFpsTimer, SIGNAL(timeout()), this, SLOT(onMinFpsTimer()));
+
+	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+	thereWasAnEvent();
 }
 
 void StelQuickView::deinit()
@@ -85,11 +98,6 @@ void StelQuickView::deinit()
 	StelPainter::deinitGLShaders();
 }
 
-void StelQuickView::timerEvent(QTimerEvent* event)
-{
-	update();
-}
-
 void StelQuickView::keyPressEvent(QKeyEvent* event)
 {
 	stelApp->handleKeys(event);
@@ -98,6 +106,48 @@ void StelQuickView::keyPressEvent(QKeyEvent* event)
 void StelQuickView::keyReleaseEvent(QKeyEvent* event)
 {
 	stelApp->handleKeys(event);
+}
+
+void StelQuickView::mouseMoveEvent(QMouseEvent* event)
+{
+	// We notify the applicatio to increase the fps if a button has been
+	// clicked, but also if the cursor is currently hidden, so that it gets
+	// restored.
+	if (event->buttons() || QGuiApplication::overrideCursor() != 0)
+		thereWasAnEvent(); // Refresh screen ASAP
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
+	QQuickWindow::mouseMoveEvent(event);
+}
+
+void StelQuickView::mousePressEvent(QMouseEvent* event)
+{
+	thereWasAnEvent(); // Refresh screen ASAP
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
+	stelApp->handleClick(&newEvent);
+	QQuickWindow::mousePressEvent(event);
+}
+
+void StelQuickView::mouseReleaseEvent(QMouseEvent* event)
+{
+	thereWasAnEvent(); // Refresh screen ASAP
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
+	stelApp->handleClick(&newEvent);
+	QQuickWindow::mouseReleaseEvent(event);
+}
+
+void StelQuickView::wheelEvent(QWheelEvent* event)
+{
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+	StelApp::getInstance().handleWheel(&newEvent);
+	QQuickWindow::wheelEvent(event);
 }
 
 void StelQuickView::synchronize()
@@ -147,4 +197,19 @@ void StelQuickView::paint()
 	stelApp->update(newTime-lastPaint);
 	lastPaint = newTime;
 	stelApp->draw();
+}
+
+void StelQuickView::thereWasAnEvent()
+{
+	int interval = qMax(5, (int)(1000 / maxfps));
+	if (timer->interval() == interval) return;
+	timer->start(interval);
+	minFpsTimer->start(2500);
+}
+
+void StelQuickView::onMinFpsTimer()
+{
+	int interval = qMax(5, (int)(1000 / minfps));
+	if (timer->interval() == interval) return;
+	timer->start(interval);
 }

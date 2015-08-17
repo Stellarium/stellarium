@@ -32,21 +32,34 @@ public:
 	void deinit();
 	//! Get the StelMainView singleton instance.
 	static StelQuickView& getInstance() {Q_ASSERT(singleton); return *singleton;}
+
+	//! Notify that an event was handled by the program and therefore the
+	//! FPS should be maximized for a couple of seconds.
+	void thereWasAnEvent();
+
 signals:
 	void initialized();
 protected slots:
 	void paint();
 	void synchronize();
 	void showGui();
+	void onMinFpsTimer();
 protected:
-	void timerEvent(QTimerEvent* event) Q_DECL_OVERRIDE;
 	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
 	void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
+	void mouseMoveEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+	void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+	void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+	void wheelEvent(QWheelEvent* wheelEvent) Q_DECL_OVERRIDE;
 private:
 	static StelQuickView* singleton;
 	StelApp* stelApp;
 	QSettings* conf;
+	QTimer *timer;        // The timer used to update the screen.
+	QTimer *minFpsTimer;  // Timer to change to min pfs mode.
 	int initState;
+	float maxfps;
+	float minfps;
 };
 
 // A special QQuickItem that can be used for mouse hovered area.  This
