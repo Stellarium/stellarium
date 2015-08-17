@@ -435,6 +435,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			color=activeGalaxyColor;
 			break;
 		case NebQSO:
+		case NebPossQSO:
 		case NebBLL:
 		case NebBLA:
 			Nebula::texGalaxy->bind();
@@ -472,6 +473,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			color=brightNebulaColor;
 			break;
 		case NebPn:
+		case NebPossPN:
 			Nebula::texPlanetaryNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -636,6 +638,7 @@ bool Nebula::objectInDisplayedType() const
 		case NebAGx:
 		case NebRGx:
 		case NebQSO:
+		case NebPossQSO:
 		case NebBLL:
 		case NebBLA:
 			cntype = 1; // Active Galaxies
@@ -666,6 +669,7 @@ bool Nebula::objectInDisplayedType() const
 			cntype = 6; // Dark Nebulae
 			break;
 		case NebPn:
+		case NebPossPN:
 			cntype = 7; // Planetary Nebulae
 			break;
 		case NebSNR:
@@ -1038,8 +1042,17 @@ QString Nebula::getTypeString(void) const
 		case NebYSO:
 			wsType = q_("young stellar object");
 			break;
+		case NebPossQSO:
+			wsType = q_("possible quasar");
+			break;
+		case NebPossPN:
+			wsType = q_("possible planetary nebula");
+			break;
+		case NebStar:
+			wsType = q_("star");
+			break;
 		case NebUnknown:
-			wsType = q_("unknown or undocumented type");
+			wsType = q_("object of unknown nature");
 			break;
 		default:
 			wsType = q_("undocumented type");

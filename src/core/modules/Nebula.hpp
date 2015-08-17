@@ -159,7 +159,10 @@ private:
 		NebBLA		= 22,	//!< Blazar
 		NebMolCld	= 23, 	//!< Molecular Cloud
 		NebYSO		= 24, 	//!< Young Stellar Object
-		NebUnknown	= 25	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebPossQSO	= 25, 	//!< Possible Quasar
+		NebPossPN	= 26, 	//!< Possible Planetary Nebula
+		NebStar		= 27, 	//!< Star
+		NebUnknown	= 28	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
