@@ -23,6 +23,7 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.2
+import org.stellarium 1.0
 
 GridLayout {
     id: root
@@ -62,25 +63,31 @@ GridLayout {
 
         Repeater {
             model: [
-                ["Name", ""],
-                ["Catalog number(s)", ""],
-                ["Right ascension/Declination (J2000)", "Geocentric equatorial coordinates, equinox of J2000.0"],
-                ["Right ascension/Declination (of date)", "Geocentric equatorial coordinates, equinox of date"],
-                ["Ecliptic coordinates", "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"],
-                ["Size", "Angular or physical size"],
-                ["Type", "The type of the object (star, planet, etc.)"],
-                ["Visual magnitude", ""],
-                ["Absolute magnitude", ""],
-                ["Galactic coordinates", ""],
-                ["Hour angle/Declination", ""],
-                ["Altitude/Azimuth", ""],
-                ["Distance", ""],
-                ["Additional information", "Spectral class, nebula type, etc."]
+                ["Name", "", StelGui.Name],
+                ["Catalog number(s)", "", StelGui.CatalogNumber],
+                ["Right ascension/Declination (J2000)", "Geocentric equatorial coordinates, equinox of J2000.0", StelGui.RaDecJ2000],
+                ["Right ascension/Declination (of date)", "Geocentric equatorial coordinates, equinox of date", StelGui.RaDecOfDate],
+                ["Ecliptic coordinates", "Ecliptic coordinates, equinox of date and J2000 (only for Earth)", StelGui.EclipticCoord],
+                ["Size", "Angular or physical size", StelGui.Size],
+                ["Type", "The type of the object (star, planet, etc.)", StelGui.ObjectType],
+                ["Visual magnitude", "", StelGui.Magnitude],
+                ["Absolute magnitude", "", StelGui.AbsoluteMagnitude],
+                ["Galactic coordinates", "", StelGui.GalacticCoord],
+                ["Hour angle/Declination", "", StelGui.HourAngle],
+                ["Altitude/Azimuth", "", StelGui.AltAzi],
+                ["Distance", "", StelGui.Distance],
+                ["Additional information", "Spectral class, nebula type, etc.", StelGui.Extra]
             ]
 
             delegate: StelItem {
                 text: modelData[0]
-                check: "x"
+                checked: stelGui.infoTextFilters & modelData[2]
+                onClicked: {
+                    if (checked)
+                        stelGui.infoTextFilters &= ~modelData[2];
+                    else
+                        stelGui.infoTextFilters |= modelData[2];
+                }
             }
         }
     }

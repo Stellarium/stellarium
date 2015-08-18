@@ -125,6 +125,7 @@ StelQuickView::StelQuickView() : stelApp(NULL)
 	qmlRegisterType<HoverArea>("org.stellarium", 1, 0, "HoverArea");
 	qmlRegisterType<StelSkyItem>("org.stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelAction>("org.stellarium", 1, 0, "StelAction");
+	qmlRegisterType<StelGui>("org.stellarium", 1, 0, "StelGui");
 }
 
 void StelQuickView::init(QSettings* conf)
