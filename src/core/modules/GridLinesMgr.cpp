@@ -201,7 +201,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = 0;
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 
@@ -230,7 +230,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = 0;
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 
@@ -259,7 +259,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				}
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 				break;
@@ -281,7 +281,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = M_PI;
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToHmsStrAdapt(textAngle);
 			}
