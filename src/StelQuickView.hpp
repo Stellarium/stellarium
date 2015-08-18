@@ -47,10 +47,6 @@ protected slots:
 protected:
 	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
 	void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
-	void mouseMoveEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
-	void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
-	void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
-	void wheelEvent(QWheelEvent* wheelEvent) Q_DECL_OVERRIDE;
 private:
 	static StelQuickView* singleton;
 	StelApp* stelApp;

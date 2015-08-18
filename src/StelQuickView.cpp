@@ -39,6 +39,66 @@
 
 StelQuickView* StelQuickView::singleton = NULL;
 
+// The root item, only used so that we can get the mouse events.
+class StelSkyItem : public QQuickItem
+{
+public:
+	StelSkyItem(QQuickItem* parent=NULL);
+protected:
+	void mouseMoveEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+	void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+	void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+	void wheelEvent(QWheelEvent* wheelEvent) Q_DECL_OVERRIDE;
+};
+
+StelSkyItem::StelSkyItem(QQuickItem* parent) : QQuickItem(parent)
+{
+	setAcceptedMouseButtons(Qt::AllButtons);
+}
+
+void StelSkyItem::mousePressEvent(QMouseEvent* event)
+{
+	StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
+	qDebug() << "press";
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
+	StelApp::getInstance().handleClick(&newEvent);
+}
+
+void StelSkyItem::mouseReleaseEvent(QMouseEvent* event)
+{
+	qDebug() << "release";
+	StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
+	StelApp::getInstance().handleClick(&newEvent);
+}
+
+void StelSkyItem::mouseMoveEvent(QMouseEvent* event)
+{
+	// We notify the applicatio to increase the fps if a button has been
+	// clicked, but also if the cursor is currently hidden, so that it gets
+	// restored.
+	if (event->buttons() || QGuiApplication::overrideCursor() != 0)
+		StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
+}
+
+
+void StelSkyItem::wheelEvent(QWheelEvent* event)
+{
+	QPointF pos = event->pos();
+	pos.setY(height() - 1 - pos.y());
+	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+	StelApp::getInstance().handleWheel(&newEvent);
+	QQuickItem::wheelEvent(event);
+}
+
+
 HoverArea::HoverArea(QQuickItem *parent) : QQuickItem(parent)
 	,m_hovered(false)
 {
@@ -65,6 +125,7 @@ StelQuickView::StelQuickView() : stelApp(NULL)
 	connect(this, SIGNAL(beforeSynchronizing()), this, SLOT(synchronize()), Qt::DirectConnection);
 	connect(this, SIGNAL(initialized()), this, SLOT(showGui()));
 	qmlRegisterType<HoverArea>("org.stellarium", 1, 0, "HoverArea");
+	qmlRegisterType<StelSkyItem>("org.stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelAction>("org.stellarium", 1, 0, "StelAction");
 }
 
@@ -106,48 +167,6 @@ void StelQuickView::keyPressEvent(QKeyEvent* event)
 void StelQuickView::keyReleaseEvent(QKeyEvent* event)
 {
 	stelApp->handleKeys(event);
-}
-
-void StelQuickView::mouseMoveEvent(QMouseEvent* event)
-{
-	// We notify the applicatio to increase the fps if a button has been
-	// clicked, but also if the cursor is currently hidden, so that it gets
-	// restored.
-	if (event->buttons() || QGuiApplication::overrideCursor() != 0)
-		thereWasAnEvent(); // Refresh screen ASAP
-	QPointF pos = event->pos();
-	pos.setY(height() - 1 - pos.y());
-	StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
-	QQuickWindow::mouseMoveEvent(event);
-}
-
-void StelQuickView::mousePressEvent(QMouseEvent* event)
-{
-	thereWasAnEvent(); // Refresh screen ASAP
-	QPointF pos = event->pos();
-	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
-	stelApp->handleClick(&newEvent);
-	QQuickWindow::mousePressEvent(event);
-}
-
-void StelQuickView::mouseReleaseEvent(QMouseEvent* event)
-{
-	thereWasAnEvent(); // Refresh screen ASAP
-	QPointF pos = event->pos();
-	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
-	stelApp->handleClick(&newEvent);
-	QQuickWindow::mouseReleaseEvent(event);
-}
-
-void StelQuickView::wheelEvent(QWheelEvent* event)
-{
-	QPointF pos = event->pos();
-	pos.setY(height() - 1 - pos.y());
-	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
-	StelApp::getInstance().handleWheel(&newEvent);
-	QQuickWindow::wheelEvent(event);
 }
 
 void StelQuickView::synchronize()

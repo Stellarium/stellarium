@@ -18,8 +18,9 @@
  */
 
 import QtQuick 2.4
+import org.stellarium 1.0
 
-Item {
+StelSky {
     Bars { }
 
     ViewDialog {
