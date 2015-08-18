@@ -70,6 +70,9 @@ public:
 		EclipticCoord		= 0x00002000, //!< The ecliptic position
 		EclipticCoordXYZ	= 0x00004000, //!< The ecliptic position, XYZ of VSOP87A (used mainly for debugging, not public)
 		PlainText		= 0x00010000,  //!< Strip HTML tags from output
+		AllInfo			= Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|
+									   AbsoluteMagnitude|GalacticCoord|ObjectType|EclipticCoord|EclipticCoordXYZ,
+		ShortInfo		= Name|CatalogNumber|Magnitude|RaDecJ2000,
 	};
 	Q_ENUM(InfoStringGroupFlags)
 

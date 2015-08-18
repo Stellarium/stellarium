@@ -40,18 +40,34 @@ GridLayout {
         columns: 2
         useRepeater: true
 
-        Repeater {
-            model: [
-                ["All available", "Display all information available"],
-                ["Short", "Display less information"],
-                ["None", "Display no information"],
-                ["Customized", "Display user settings information"],
-            ]
-            delegate: StelItem {
-                text: modelData[0]
-                check: "x"
-                type: "radio"
-            }
+        StelItem {
+            text: "All available"
+            checked: stelGui.infoTextFilters == StelGui.AllInfo
+            enabled: !checked
+            onClicked: stelGui.infoTextFilters = StelGui.AllInfo
+            type: "radio"
+        }
+        StelItem {
+            text: "Short"
+            checked: stelGui.infoTextFilters == StelGui.ShortInfo
+            onClicked: stelGui.infoTextFilters = StelGui.ShortInfo
+            enabled: !checked
+            type: "radio"
+        }
+        StelItem {
+            text: "None"
+            checked: stelGui.infoTextFilters == 0
+            enabled: !checked
+            onClicked: stelGui.infoTextFilters = 0
+            type: "radio"
+        }
+        StelItem {
+            text: "Customized"
+            checked: stelGui.infoTextFilters != StelGui.AllInfo &&
+                     stelGui.infoTextFilters != StelGui.ShortInfo &&
+                     stelGui.infoTextFilters != 0
+            enabled: false
+            type: "radio"
         }
     }
     StelGroup {

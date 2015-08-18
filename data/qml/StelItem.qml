@@ -50,8 +50,8 @@ RowLayout {
         onCheckedChanged: {
             if (root.check) {
                 root.target[root.check] = checked;
-                checked = Qt.binding(function(){return root.checked});
             }
+            checked = Qt.binding(function(){return root.checked});
         }
         onClicked: root.clicked()
     }
