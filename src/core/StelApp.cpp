@@ -568,6 +568,7 @@ void StelApp::update(double deltaTime)
 	}
 
 	stelObjectMgr->update(deltaTime);
+	stelGui->update();
 	emit updated();
 }
 

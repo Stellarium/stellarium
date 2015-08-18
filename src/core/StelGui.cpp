@@ -24,7 +24,12 @@
 #include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObject.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
+
+#include <QSettings>
 
 StelGui::StelGui():
 	  autoHideHorizontalButtonBar(true)
@@ -37,6 +42,62 @@ StelGui::StelGui():
 	, locationDialogVisible(false)
 	, shortcutsDialogVisible(false)
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString objectInfo = conf->value("gui/selected_object_info", "all").toString();
+
+	if (objectInfo == "all")
+	{
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	}
+	else if (objectInfo == "short")
+	{
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::ShortInfo);
+	}
+	else if (objectInfo == "none")
+	{
+		infoTextFilters = StelObject::InfoStringGroup(0);
+	}
+	else if (objectInfo == "custom")
+	{
+		infoTextFilters = StelObject::InfoStringGroup(0);
+		
+		conf->beginGroup("custom_selected_info");
+		if (conf->value("flag_show_name", false).toBool())
+			infoTextFilters |= StelObject::Name;
+		if (conf->value("flag_show_catalognumber", false).toBool())
+			infoTextFilters |= StelObject::CatalogNumber;
+		if (conf->value("flag_show_magnitude", false).toBool())
+			infoTextFilters |= StelObject::Magnitude;
+		if (conf->value("flag_show_absolutemagnitude", false).toBool())
+			infoTextFilters |= StelObject::AbsoluteMagnitude;
+		if (conf->value("flag_show_radecj2000", false).toBool())
+			infoTextFilters |= StelObject::RaDecJ2000;
+		if (conf->value("flag_show_radecofdate", false).toBool())
+			infoTextFilters |= StelObject::RaDecOfDate;
+		if (conf->value("flag_show_hourangle", false).toBool())
+			infoTextFilters |= StelObject::HourAngle;
+		if (conf->value("flag_show_altaz", false).toBool())
+			infoTextFilters |= StelObject::AltAzi;
+		if (conf->value("flag_show_distance", false).toBool())
+			infoTextFilters |= StelObject::Distance;
+		if (conf->value("flag_show_size", false).toBool())
+			infoTextFilters |= StelObject::Size;
+		if (conf->value("flag_show_extra", false).toBool())
+			infoTextFilters |= StelObject::Extra;
+		if (conf->value("flag_show_type", false).toBool())
+			infoTextFilters |= StelObject::ObjectType;
+		if (conf->value("flag_show_galcoord", false).toBool())
+			infoTextFilters |= StelObject::GalacticCoord;
+		if (conf->value("flag_show_eclcoord", false).toBool())
+			infoTextFilters |= StelObject::EclipticCoord;
+		conf->endGroup();
+	}
+	else
+	{
+		qWarning() << "config.ini option gui/selected_object_info is invalid, using \"all\"";
+		infoTextFilters = StelObject::InfoStringGroup(StelObject::AllInfo);
+	}
+
 	QString miscGroup = N_("Miscellaneous");
 	StelActionMgr *actionMgr = StelApp::getInstance().getStelActionManager();
 	actionMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
@@ -229,4 +290,19 @@ void StelGui::setSkyLanguage(QString v)
 	QString code = StelTranslator::nativeNameToIso639_1Code(v);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 	emit changed();
+}
+
+void StelGui::update()
+{
+	QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (selected.isEmpty())
+	{
+		selectionInfoText.clear();
+	}
+	else
+	{
+		StelObject::InfoStringGroup flags = (StelObject::InfoStringGroup)infoTextFilters;
+		selectionInfoText = selected[0]->getInfoString(StelApp::getInstance().getCore(), flags);
+	}
+	emit updated();
 }

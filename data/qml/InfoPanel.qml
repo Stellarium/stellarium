@@ -20,27 +20,9 @@
 import QtQuick 2.4
 import org.stellarium 1.0
 
-StelSky {
-    Bars { }
-
-    ViewDialog {
-        target: stelGui
-        property: "viewDialogVisible"
-        x: 10
-        y: 10
-    }
-
-    ConfigurationDialog {
-        target: stelGui
-        property: "configurationDialogVisible"
-        x: 10
-        y: 10
-    }
-
-    InfoPanel {
-        anchors {
-            left: parent.left
-            top: parent.top
-        }
+Item {
+    Text {
+        text: stelGui.selectionInfoText
+        color: "white"
     }
 }

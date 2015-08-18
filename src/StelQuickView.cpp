@@ -59,7 +59,6 @@ StelSkyItem::StelSkyItem(QQuickItem* parent) : QQuickItem(parent)
 void StelSkyItem::mousePressEvent(QMouseEvent* event)
 {
 	StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
-	qDebug() << "press";
 	QPointF pos = event->pos();
 	pos.setY(height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
@@ -68,7 +67,6 @@ void StelSkyItem::mousePressEvent(QMouseEvent* event)
 
 void StelSkyItem::mouseReleaseEvent(QMouseEvent* event)
 {
-	qDebug() << "release";
 	StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
 	QPointF pos = event->pos();
 	pos.setY(height() - 1 - pos.y());

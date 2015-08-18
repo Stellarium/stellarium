@@ -40,11 +40,39 @@ class StelGui : public QObject
 	Q_PROPERTY(QStringList languages READ getLanguages NOTIFY changed)
 	Q_PROPERTY(QString language READ getLanguage WRITE setLanguage NOTIFY changed)
 	Q_PROPERTY(QString skyLanguage READ getSkyLanguage WRITE setSkyLanguage NOTIFY changed)
+	Q_PROPERTY(int infoTextFilters MEMBER infoTextFilters NOTIFY changed)
+	Q_PROPERTY(QString selectionInfoText MEMBER selectionInfoText NOTIFY updated)
 
 signals:
 	void changed();
+	void updated();
 
 public:
+
+	// This is copied from StelObject.hpp, I need to put it into a QObject
+	// so that it can be binded to qml.
+	// TODO: find a better way.
+	enum InfoStringGroupFlags
+	{
+		Name			= 0x00000001, //!< An object's name
+		CatalogNumber		= 0x00000002, //!< Catalog numbers
+		Magnitude		= 0x00000004, //!< Magnitude related data
+		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
+		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
+		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
+		Distance		= 0x00000040, //!< Info about an object's distance
+		Size			= 0x00000080, //!< Info about an object's size
+		Extra			= 0x00000100, //!< Derived class-specific extra fields
+		HourAngle		= 0x00000200, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00000400, //!< The absolute magnitude
+		GalacticCoord		= 0x00000800, //!< The galactic position
+		ObjectType		= 0x00001000, //!< The type of the object (star, planet, etc.)
+		EclipticCoord		= 0x00002000, //!< The ecliptic position
+		EclipticCoordXYZ	= 0x00004000, //!< The ecliptic position, XYZ of VSOP87A (used mainly for debugging, not public)
+		PlainText		= 0x00010000,  //!< Strip HTML tags from output
+	};
+	Q_ENUM(InfoStringGroupFlags)
+
 	StelGui();
 	void addButton(QString pixOn, QString pixOff,
 				   QString action, QString groupName,
@@ -56,6 +84,11 @@ public:
 	void setLanguage(QString v);
 	QString getSkyLanguage() const;
 	void setSkyLanguage(QString v);
+
+	int getInfoStringGroupFlags() const;
+	void setInfoStringGroupFlags(int v);
+
+	void update();
 
 private:
 	QVariantList buttons;
@@ -69,4 +102,7 @@ private:
 	bool dateTimeDialogVisible;
 	bool locationDialogVisible;
 	bool shortcutsDialogVisible;
+
+	int infoTextFilters;
+	QString selectionInfoText;
 };
