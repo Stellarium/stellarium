@@ -190,10 +190,12 @@ void StelButton::updateIcon()
 	painter.setOpacity(opacity);
 	if (!pixBackground.isNull() && noBckground==false)
 		painter.drawPixmap(0, 0, pixBackground);
-		painter.drawPixmap(0, 0,
+
+	painter.drawPixmap(0, 0,
 		(isTristate_ && checked == ButtonStateNoChange) ? (pixNoChange) :
 		(checked == ButtonStateOn) ? (pixOn) :
 		/* (checked == ButtonStateOff) ? */ (pixOff));
+
 	if (hoverOpacity > 0)
 	{
 		painter.setOpacity(hoverOpacity * opacity);
@@ -820,7 +822,8 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	pb->setMinimum(p->getMin());
 	pb->setMaximum(p->getMax());
 	pb->setFormat(p->getFormat());
-	pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	if (gui!=NULL)
+		pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
 	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);

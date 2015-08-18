@@ -27,10 +27,17 @@
 #include <QtMath>
 
 Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
-	: m_core(core),
-	  m_alive(false),
-	  m_bolideTexture(bolideTexture),
-	  m_segments(10)
+	: m_core(core)
+	, m_alive(false)
+	, m_speed(72.)
+	, m_xyDist(1.)
+	, m_initialDist(1.)
+	, m_finalDist(1.)
+	, m_absMag(.5)
+	, m_aptMag(.5)
+	, m_firstBrightSegment(1)
+	, m_bolideTexture(bolideTexture)
+	, m_segments(10)
 {
 	qsrand(QDateTime::currentMSecsSinceEpoch());
 }
