@@ -404,19 +404,8 @@ void StelGui::setStelStyle(const QString& section)
 		// Load the style sheets
 		currentStelStyle.confSectionName = section;
 
-		QString qtStyleFileName;
-		QString htmlStyleFileName;
-
-		if (section=="night_color")
-		{
-			qtStyleFileName = ":/graphicGui/nightStyle.css";
-			htmlStyleFileName = ":/graphicGui/nightHtml.css";
-		}
-		else if (section=="color")
-		{
-			qtStyleFileName = ":/graphicGui/normalStyle.css";
-			htmlStyleFileName = ":/graphicGui/normalHtml.css";
-		}
+		QString qtStyleFileName = ":/graphicGui/normalStyle.css";
+		QString htmlStyleFileName = ":/graphicGui/normalHtml.css";
 
 		// Load Qt style sheet
 		QFile styleFile(qtStyleFileName);
