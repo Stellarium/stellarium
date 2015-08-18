@@ -49,11 +49,14 @@ protected:
 	void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
 	void mouseReleaseEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
 	void wheelEvent(QWheelEvent* wheelEvent) Q_DECL_OVERRIDE;
+	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
+	void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
 };
 
 StelSkyItem::StelSkyItem(QQuickItem* parent) : QQuickItem(parent)
 {
 	setAcceptedMouseButtons(Qt::AllButtons);
+	setFocus(true);
 }
 
 void StelSkyItem::mousePressEvent(QMouseEvent* event)
@@ -89,6 +92,7 @@ void StelSkyItem::mouseMoveEvent(QMouseEvent* event)
 
 void StelSkyItem::wheelEvent(QWheelEvent* event)
 {
+	StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
 	QPointF pos = event->pos();
 	pos.setY(height() - 1 - pos.y());
 	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
@@ -96,6 +100,17 @@ void StelSkyItem::wheelEvent(QWheelEvent* event)
 	QQuickItem::wheelEvent(event);
 }
 
+void StelSkyItem::keyPressEvent(QKeyEvent* event)
+{
+	StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
+	StelApp::getInstance().handleKeys(event);
+}
+
+void StelSkyItem::keyReleaseEvent(QKeyEvent* event)
+{
+	StelQuickView::getInstance().thereWasAnEvent(); // Refresh screen ASAP
+	StelApp::getInstance().handleKeys(event);
+}
 
 HoverArea::HoverArea(QQuickItem *parent) : QQuickItem(parent)
 	,m_hovered(false)
@@ -156,16 +171,6 @@ void StelQuickView::deinit()
 	stelApp = NULL;
 	StelApp::deinitStatic();
 	StelPainter::deinitGLShaders();
-}
-
-void StelQuickView::keyPressEvent(QKeyEvent* event)
-{
-	stelApp->handleKeys(event);
-}
-
-void StelQuickView::keyReleaseEvent(QKeyEvent* event)
-{
-	stelApp->handleKeys(event);
 }
 
 void StelQuickView::synchronize()

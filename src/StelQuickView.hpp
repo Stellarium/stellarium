@@ -45,8 +45,6 @@ protected slots:
 	void showGui();
 	void onMinFpsTimer();
 protected:
-	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
-	void keyReleaseEvent(QKeyEvent* event) Q_DECL_OVERRIDE;
 private:
 	static StelQuickView* singleton;
 	StelApp* stelApp;
