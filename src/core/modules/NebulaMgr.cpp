@@ -77,9 +77,11 @@ void NebulaMgr::setHintsProportional(const bool proportional) {Nebula::drawHintP
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 
 NebulaMgr::NebulaMgr(void)
-	: nebGrid(200),
-	  hintsAmount(0),
-	  labelsAmount(0)
+	: nebGrid(200)
+	, hintsAmount(0)
+	, labelsAmount(0)
+	, flagConverter(false)
+	, flagDecimalCoordinates(true)
 {
 	setObjectName("NebulaMgr");
 }
@@ -2062,7 +2064,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 		case 0: // Bright galaxies?
 			foreach(const NebulaP& n, dsoArray)
 			{
-				if (n->nType==type && n->mag<=10.)
+				if (n->nType==type && qMin(n->vMag, n->bMag)<=10.)
 				{
 					if (!n->getEnglishName().isEmpty())
 					{

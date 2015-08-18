@@ -51,6 +51,7 @@ Landscape::Landscape(float _radius)
 	, defaultTemperature(-1000.)
 	, defaultPressure(-2.)
 	, horizonPolygon(NULL)
+	, fontSize(18)
 {
 	validLandscape = 0;
 }
