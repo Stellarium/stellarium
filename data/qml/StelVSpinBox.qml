@@ -23,6 +23,7 @@ import QtQuick.Layouts 1.1
 ColumnLayout {
     id: root
     property int value
+    signal newValue(int newValue)
 
     MouseArea {
         height: 20
@@ -31,7 +32,7 @@ ColumnLayout {
             anchors.centerIn: parent
             source: "qrc:///graphicGui/spinup.png"
         }
-        onClicked: {value++}
+        onClicked: {root.newValue(value + 1)}
     }
     
     Item {
@@ -53,6 +54,6 @@ ColumnLayout {
             anchors.centerIn: parent
             source: "qrc:///graphicGui/spindown.png"
         }
-        onClicked: {value--}
+        onClicked: {root.newValue(value - 1)}
     }
 }

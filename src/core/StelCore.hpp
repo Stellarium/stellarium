@@ -54,7 +54,7 @@ class StelCore : public QObject
 	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 	Q_PROPERTY(bool flagUseNutation READ getUseNutation WRITE setUseNutation)
 	Q_PROPERTY(bool flagUseTopocentricCoordinates READ getUseTopocentricCoordinates WRITE setUseTopocentricCoordinates)
-	Q_PROPERTY(double JD READ getJD NOTIFY updated)
+	Q_PROPERTY(double JD READ getJD WRITE setJD NOTIFY updated)
 
 public:
 	//! @enum FrameType

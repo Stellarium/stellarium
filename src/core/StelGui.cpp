@@ -306,3 +306,20 @@ void StelGui::update()
 	}
 	emit updated();
 }
+
+QVariantList StelGui::jdToDate(double jd) const
+{
+	int year, month, day, hour, minute, second;
+	jd += (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0); // UTC -> local tz
+	StelUtils::getDateFromJulianDay(jd, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(jd, &hour, &minute, &second);
+	return QVariantList() << year << month << day << hour << minute << second;
+}
+
+double StelGui::jdFromDate(int Y, int M, int D, int h, int m, int s) const
+{
+	double jd;
+	StelUtils::getJDFromDate(&jd, Y, M, D, h, m, s);
+	jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0); // local tz -> UTC
+	return jd;
+}

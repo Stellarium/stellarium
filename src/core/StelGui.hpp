@@ -93,6 +93,9 @@ public:
 
 	void update();
 
+	Q_INVOKABLE QVariantList jdToDate(double jd) const;
+	Q_INVOKABLE double jdFromDate(int Y, int M, int D, int h, int m, int s) const;
+
 private:
 	QVariantList buttons;
 	bool autoHideHorizontalButtonBar;

@@ -30,6 +30,13 @@ StelSky {
         y: 10
     }
 
+    DateTimeDialog {
+        target: stelGui
+        property: "dateTimeDialogVisible"
+        x: 10
+        y: 10
+    }
+
     ConfigurationDialog {
         target: stelGui
         property: "configurationDialogVisible"
