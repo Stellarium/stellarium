@@ -27,7 +27,7 @@ RowLayout {
     property bool bold: false
     property var target
     property string check
-    property bool checked: root.check ? root.target[root.check] : undefined
+    property var checked: root.check ? root.target[root.check] : undefined
     property var choices: null
     property alias currentIndex: comboBox.currentIndex
     property string type: "default"
@@ -46,7 +46,7 @@ RowLayout {
     StelCheckBox {
         id: checkBoxItem
         visible: root.checked !== undefined
-        checked: root.checked
+        checked: visible ? root.checked : false
         onCheckedChanged: {
             if (root.check) {
                 root.target[root.check] = checked;

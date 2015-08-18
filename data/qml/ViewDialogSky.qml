@@ -149,7 +149,7 @@ GridLayout {
         StelItem {
             text: "DSOs"
             target: NebulaMgr
-            check: "flagHinDisplayed"
+            check: "flagHintDisplayed"
             spin: "labelsAmount"
             spinMin: 0.0
             spinMax: 10.0
