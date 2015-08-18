@@ -102,6 +102,7 @@ StelGui::StelGui():
 	StelActionMgr *actionMgr = StelApp::getInstance().getStelActionManager();
 	actionMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
 	actionMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
+	actionMgr->addAction("actionQuit_Global", miscGroup, N_("Quit"), this, "quit()", "Ctrl+Q", "Ctrl+X");
 
 	// Register all default buttons.
 	// Maybe this should be done in the different modules directly.
@@ -189,6 +190,8 @@ StelGui::StelGui():
 			  "qrc:///graphicGui/btTimeForward-off.png",
 			  "actionIncrease_Time_Speed",
 			  "070-timeGroup");
+
+	addButton("qrc:///graphicGui/btQuit.png", NULL, "actionQuit_Global", "080-quitGroup");
 
 	// Add all the windows bar actions and buttons.
 	// actionMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
@@ -322,4 +325,9 @@ double StelGui::jdFromDate(int Y, int M, int D, int h, int m, int s) const
 	StelUtils::getJDFromDate(&jd, Y, M, D, h, m, s);
 	jd -= (StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.0); // local tz -> UTC
 	return jd;
+}
+
+void StelGui::quit()
+{
+	StelApp::getInstance().quit();
 }
