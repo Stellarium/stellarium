@@ -500,8 +500,20 @@ void StelMainView::init(QSettings* conf)
 	// The script manager can only be fully initialized after the plugins have loaded.
 	StelApp::getInstance().initScriptMgr();
 
+	// Set the global stylesheet, this is only useful for the tooltips.
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+	updateNightModeProperty();
+
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
+}
+
+void StelMainView::updateNightModeProperty()
+{
+	// So that the bottom bar tooltips get properly rendered in night mode.
+	setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
