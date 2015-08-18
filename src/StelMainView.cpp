@@ -502,7 +502,8 @@ void StelMainView::init(QSettings* conf)
 
 	// Set the global stylesheet, this is only useful for the tooltips.
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	if (gui!=NULL)
+		setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
 	updateNightModeProperty();
 
