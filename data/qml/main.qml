@@ -29,4 +29,11 @@ StelSky {
         x: 10
         y: 10
     }
+
+    ConfigurationDialog {
+        target: stelGui
+        property: "configurationDialogVisible"
+        x: 10
+        y: 10
+    }
 }

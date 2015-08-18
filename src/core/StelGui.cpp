@@ -21,6 +21,7 @@
 #include "StelActionMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelUtils.hpp"
@@ -195,4 +196,37 @@ QString StelGui::getLocationName() const
 	{
 		return trans.qtranslate(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
+}
+
+QStringList StelGui::getLanguages() const
+{
+	QStringList ret = StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir());
+	ret.sort();
+	return ret;
+}
+
+QString StelGui::getLanguage() const
+{
+	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	return StelTranslator::iso639_1CodeToNativeName(appLang);
+}
+
+void StelGui::setLanguage(QString v)
+{
+	QString code = StelTranslator::nativeNameToIso639_1Code(v);
+	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
+	emit changed();
+}
+
+QString StelGui::getSkyLanguage() const
+{
+	QString appLang = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
+	return StelTranslator::iso639_1CodeToNativeName(appLang);
+}
+
+void StelGui::setSkyLanguage(QString v)
+{
+	QString code = StelTranslator::nativeNameToIso639_1Code(v);
+	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
+	emit changed();
 }

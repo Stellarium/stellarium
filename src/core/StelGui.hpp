@@ -37,6 +37,9 @@ class StelGui : public QObject
 	Q_PROPERTY(bool shortcutsDialogVisible MEMBER shortcutsDialogVisible NOTIFY changed)
 
 	Q_PROPERTY(QString locationName READ getLocationName NOTIFY changed)
+	Q_PROPERTY(QStringList languages READ getLanguages NOTIFY changed)
+	Q_PROPERTY(QString language READ getLanguage WRITE setLanguage NOTIFY changed)
+	Q_PROPERTY(QString skyLanguage READ getSkyLanguage WRITE setSkyLanguage NOTIFY changed)
 
 signals:
 	void changed();
@@ -47,6 +50,12 @@ public:
 				   QString action, QString groupName,
 				   QString beforeActionName = QString());
 	QString getLocationName() const;
+
+	QStringList getLanguages() const;
+	QString getLanguage() const;
+	void setLanguage(QString v);
+	QString getSkyLanguage() const;
+	void setSkyLanguage(QString v);
 
 private:
 	QVariantList buttons;
