@@ -116,7 +116,9 @@ StelWindow {
                             horizontalAlignment: Text.AlignRight
                         }
                         StelVSpinBox {
-                            value: 10
+                            value: core.JD
+                            function getRepr(v) {return v.toFixed(5)}
+                            onNewValue: core.JD = newValue
                         }
                     }
                 }
@@ -133,7 +135,9 @@ StelWindow {
                             horizontalAlignment: Text.AlignRight
                         }
                         StelVSpinBox {
-                            value: 10
+                            function getRepr(v) {return v.toFixed(5)}
+                            value: core.JD - 2400000.5
+                            onNewValue: core.JD = newValue + 2400000.5
                         }
                     }
                 }

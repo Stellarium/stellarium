@@ -22,8 +22,9 @@ import QtQuick.Layouts 1.1
 
 ColumnLayout {
     id: root
-    property int value
-    signal newValue(int newValue)
+    property double value
+    signal newValue(double newValue)
+    function getRepr(v) {return v}
 
     MouseArea {
         height: 20
@@ -42,7 +43,7 @@ ColumnLayout {
 
         TextInput {
             anchors.fill: parent
-            text: root.value
+            text: root.getRepr(root.value)
             horizontalAlignment: TextInput.AlignHCenter
         }
     }
