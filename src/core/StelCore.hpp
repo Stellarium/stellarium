@@ -301,7 +301,7 @@ public:
 	//! @return valid range as explanatory string.
 	QString getCurrentDeltaTAlgorithmValidRangeDescription(const double JD, QString* marker) const;
 
-	//! Checks for altitude of sun - is it night or day?
+	//! Checks for altitude of the Sun - is it night or day?
 	//! @return true if sun higher than about -6 degrees, i.e. "day" includes civil twilight.
 	//! @note Useful mostly for brightness-controlled GUI decisions like font colors.
 	bool isBrightDaylight() const;

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>497</width>
-    <height>495</height>
+    <height>509</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1177,6 +1177,16 @@
                </property>
                <property name="text">
                 <string>Topocentric coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west (as in old astronomical literature).</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
                </property>
               </widget>
              </item>

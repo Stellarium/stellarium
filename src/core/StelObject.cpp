@@ -106,7 +106,8 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app);
@@ -173,7 +174,10 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		// calculate alt az
 		double az,alt;
 		StelUtils::rectToSphe(&az,&alt,getAltAzPosGeometric(core));
-		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+		float direction = 3.; // N is zero, E is 90 degrees
+		if (useOldAzimuth)
+			direction = 2.;
+		az = direction*M_PI - az;
 		if (az > M_PI*2)
 			az -= M_PI*2;
 		if (withAtmosphere && (alt_app>-3.0*M_PI/180.0)) // Don't show refracted altitude much below horizon where model is meaningless.

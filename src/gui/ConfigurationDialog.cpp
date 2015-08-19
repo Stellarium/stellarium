@@ -266,6 +266,8 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
+	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagOldAzimuthUsage());
+	connect(ui->azimuthFromSouthcheckBox, SIGNAL(toggled(bool)), this, SLOT(updateStartPointForAzimuth(bool)));
 
 	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
 	ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
@@ -474,6 +476,11 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	gui->setInfoTextFilters(flags);
 }
 
+
+void ConfigurationDialog::updateStartPointForAzimuth(bool b)
+{
+	StelApp::getInstance().setFlagOldAzimuthUsage(b);
+}
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
@@ -719,6 +726,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
+	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagOldAzimuthUsage());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();

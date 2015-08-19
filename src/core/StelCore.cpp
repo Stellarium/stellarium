@@ -65,7 +65,7 @@ StelCore::StelCore()
 	, currentDeltaTAlgorithm(EspenakMeeus)
 	, position(NULL)
 	, flagUseNutation(true)
-	, flagUseTopocentricCoordinates(true)
+	, flagUseTopocentricCoordinates(true)	
 	, timeSpeed(JD_SECOND)
 	, JD(0.,0.)
 	, presetSkyTime(0.)
@@ -102,7 +102,7 @@ StelCore::StelCore()
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 
 	flagUseNutation=conf->value("astro/flag_nutation", true).toBool();
-	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();
+	flagUseTopocentricCoordinates=conf->value("astro/flag_topocentric_coordinates", true).toBool();	
 }
 
 

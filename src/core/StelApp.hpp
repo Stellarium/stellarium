@@ -213,6 +213,11 @@ public slots:
 	void setFlagShowDecimalDegrees(bool b);
 	//! Get flag for showing decimal degree in various places.
 	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
+
+	//! Set flag for using calculation of azimuth from south towards west (as in old astronomical literature)
+	bool getFlagOldAzimuthUsage() const { return flagUseAzimuthFromSouth; }
+	//! Get flag for using calculation of azimuth from south towards west (as in old astronomical literature)
+	void setFlagOldAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
 	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
@@ -361,6 +366,9 @@ private:
 	StelViewportEffect* viewportEffect;
 	
 	bool flagShowDecimalDegrees;
+	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
+	bool flagUseAzimuthFromSouth;
+
 };
 
 #endif // _STELAPP_HPP_

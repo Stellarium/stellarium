@@ -218,6 +218,7 @@ StelApp::StelApp(QObject* parent)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
 	, flagShowDecimalDegrees(false)
+	, flagUseAzimuthFromSouth(false)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -488,6 +489,7 @@ void StelApp::init(QSettings* conf)
 	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
+	setFlagOldAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
 	
 	initialized = true;
 }
