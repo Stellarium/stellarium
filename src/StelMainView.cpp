@@ -30,7 +30,6 @@
 #include "StelActionMgr.hpp"
 #include "StelOpenGL.hpp"
 
-#include <QDeclarativeItem>
 #include <QDebug>
 #include <QDir>
 #if STEL_USE_NEW_OPENGL_WIDGETS
@@ -43,6 +42,7 @@
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
+#include <QGraphicsWidget>
 #include <QGraphicsEffect>
 #include <QFileInfo>
 #include <QIcon>
@@ -56,7 +56,6 @@
 #include <QWidget>
 #include <QWindow>
 #include <QMessageBox>
-#include <QDeclarativeContext>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
 #endif
