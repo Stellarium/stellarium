@@ -41,6 +41,8 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGuiApplication>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsAnchorLayout>
 #include <QFileInfo>
 #include <QIcon>
 #include <QMoveEvent>
@@ -66,10 +68,10 @@
 StelMainView* StelMainView::singleton = NULL;
 
 //! Render Stellarium sky. 
-class StelSkyItem : public QDeclarativeItem
+class StelSkyItem : public QGraphicsWidget
 {
 public:
-	StelSkyItem(QDeclarativeItem* parent = NULL);
+	StelSkyItem(QGraphicsItem* parent = NULL);
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent* event);
@@ -78,12 +80,13 @@ protected:
 	void wheelEvent(QGraphicsSceneWheelEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);
+	void resizeEvent(QGraphicsSceneResizeEvent* event);
 #ifdef Q_OS_WIN
 	bool event(QEvent * e);
 #endif
 private:
 	double previousPaintTime;
-	void onSizeChanged();
+	// void onSizeChanged();
 #ifdef Q_OS_WIN
 	void pinchTriggered(QPinchGesture *gesture);
 	bool gestureEvent(QGestureEvent *event);
@@ -91,16 +94,18 @@ private:
 };
 
 //! Initialize and render Stellarium gui.
-class StelGuiItem : public QDeclarativeItem
+class StelGuiItem : public QGraphicsWidget
 {
 public:
-	StelGuiItem(QDeclarativeItem* parent = NULL);
+	StelGuiItem(QGraphicsItem* parent = NULL);
+protected:
+	void resizeEvent(QGraphicsSceneResizeEvent* event);
 private:
 	QGraphicsWidget *widget;
-	void onSizeChanged();
+	// void onSizeChanged();
 };
 
-StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
+StelSkyItem::StelSkyItem(QGraphicsItem* parent)
 {
 	Q_UNUSED(parent);
 	setObjectName("SkyItem");
@@ -111,16 +116,14 @@ StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 	grabGesture(Qt::PinchGesture);
 #endif
 	setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
-	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
-	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
 	previousPaintTime = StelApp::getTotalRunTime();
-	StelMainView::getInstance().skyItem = this;
-	setFocus(true);
+	setFocus();
 }
 
-void StelSkyItem::onSizeChanged()
+void StelSkyItem::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-	StelApp::getInstance().glWindowHasBeenResized(x(), y(), width(), height());
+	QGraphicsWidget::resizeEvent(event);
+	StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
 }
 
 void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -144,9 +147,9 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	//To get back the focus from dialogs
-	this->setFocus(true);
+	this->setFocus();
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
@@ -154,7 +157,7 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
@@ -162,14 +165,14 @@ void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 void StelSkyItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
 }
 
 void StelSkyItem::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	StelApp::getInstance().handleWheel(&newEvent);
 }
@@ -208,7 +211,7 @@ bool StelSkyItem::gestureEvent(QGestureEvent *event)
 		pinchTriggered(static_cast<QPinchGesture *>(pinch));
 
 	return true;
-}
+c
 
 void StelSkyItem::pinchTriggered(QPinchGesture *gesture)
 {
@@ -234,23 +237,17 @@ void StelSkyItem::keyReleaseEvent(QKeyEvent* event)
 }
 
 
-StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
+StelGuiItem::StelGuiItem(QGraphicsItem* parent) : QGraphicsWidget(parent)
 {
-	connect(this, &StelGuiItem::widthChanged, this, &StelGuiItem::onSizeChanged);
-	connect(this, &StelGuiItem::heightChanged, this, &StelGuiItem::onSizeChanged);
 	widget = new QGraphicsWidget(this);
-	StelMainView::getInstance().guiWidget = widget;
 	StelApp::getInstance().getGui()->init(widget);
 }
 
-void StelGuiItem::onSizeChanged()
+void StelGuiItem::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-    // I wish I could find a way to let Qt automatically resize the widget
-	// when the QDeclarativeItem size changes.
-	widget->setGeometry(0, 0, width(), height());
+	widget->setGeometry(0, 0, size().width(), size().height());
 	StelApp::getInstance().getGui()->forceRefreshGui();
 }
-
 
 #if STEL_USE_NEW_OPENGL_WIDGETS
 
@@ -323,7 +320,7 @@ protected:
 
 
 StelMainView::StelMainView(QWidget* parent)
-	: QDeclarativeView(parent), gui(NULL),
+	: QGraphicsView(parent), gui(NULL),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
@@ -394,6 +391,11 @@ StelMainView::StelMainView(QWidget* parent)
 
 	setViewport(glWidget);
 
+	setScene(new QGraphicsScene(this));
+	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
+	rootItem = new QGraphicsWidget();
+	rootItem->setFocusPolicy(Qt::NoFocus);
+
 	// Workaround (see Bug #940638) Although we have already explicitly set
 	// LC_NUMERIC to "C" in main.cpp there seems to be a bug in OpenGL where
 	// it will silently reset LC_NUMERIC to the value of LC_ALL during OpenGL
@@ -403,11 +405,18 @@ StelMainView::StelMainView(QWidget* parent)
 	// End workaround
 }
 
+void StelMainView::resizeEvent(QResizeEvent* event)
+{
+	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
+	rootItem->setGeometry(0,0,event->size().width(),event->size().height());
+	QGraphicsView::resizeEvent(event);
+}
+
 void StelMainView::focusSky() {
 	StelMainView::getInstance().scene()->setActiveWindow(0);
-	QGraphicsObject* skyItem = rootObject()->findChild<QGraphicsObject*>("SkyItem");
-	Q_ASSERT(skyItem);
-	skyItem->setFocus();
+	// QGraphicsObject* skyItem = rootObject()->findChild<QGraphicsObject*>("SkyItem");
+	// Q_ASSERT(skyItem);
+	// skyItem->setFocus();
 }
 
 StelMainView::~StelMainView()
@@ -444,12 +453,18 @@ void StelMainView::init(QSettings* conf)
 	
 	StelPainter::initGLShaders();
 
-	setResizeMode(QDeclarativeView::SizeRootObjectToView);
-	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
-	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
-	rootContext()->setContextProperty("stelApp", stelApp);	
-	setSource(QUrl("qrc:/qml/main.qml"));
-	
+	skyItem = new StelSkyItem();
+	guiItem = new StelGuiItem();
+	QGraphicsAnchorLayout* l = new QGraphicsAnchorLayout(rootItem);
+	l->setSpacing(0);
+	l->setContentsMargins(0,0,0,0);
+	l->addCornerAnchors(skyItem, Qt::TopLeftCorner, l, Qt::TopLeftCorner);
+	l->addCornerAnchors(skyItem, Qt::BottomRightCorner, l, Qt::BottomRightCorner);
+	l->addCornerAnchors(guiItem, Qt::BottomLeftCorner, l, Qt::BottomLeftCorner);
+	l->addCornerAnchors(guiItem, Qt::TopRightCorner, l, Qt::TopRightCorner);
+	rootItem->setLayout(l);
+	scene()->addItem(rootItem);
+
 	QSize size = glWidget->windowHandle()->screen()->size();
 	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
 		     conf->value("video/screen_h", size.height()).toInt());
@@ -973,25 +988,25 @@ void StelMainView::mouseMoveEvent(QMouseEvent* event)
 	// restored.
 	if (event->buttons() || QGuiApplication::overrideCursor()!=0)
 		thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::mouseMoveEvent(event);
+	QGraphicsView::mouseMoveEvent(event);
 }
 
 void StelMainView::mousePressEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::mousePressEvent(event);
+	QGraphicsView::mousePressEvent(event);
 }
 
 void StelMainView::mouseReleaseEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::mouseReleaseEvent(event);
+	QGraphicsView::mouseReleaseEvent(event);
 }
 
 void StelMainView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::wheelEvent(event);
+	QGraphicsView::wheelEvent(event);
 }
 
 void StelMainView::moveEvent(QMoveEvent * event)
@@ -1017,13 +1032,13 @@ void StelMainView::keyPressEvent(QKeyEvent* event)
 		event->setAccepted(true);
 		return;
 	}
-	QDeclarativeView::keyPressEvent(event);
+	QGraphicsView::keyPressEvent(event);
 }
 
 void StelMainView::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::keyReleaseEvent(event);
+	QGraphicsView::keyReleaseEvent(event);
 }
 
 
