@@ -174,6 +174,7 @@ private:
 	QGraphicsWidget* rootItem;
 	QGraphicsWidget* skyItem;
 	QGraphicsWidget* guiItem;
+	QGraphicsEffect* nightModeEffect;
 
 	//! The openGL window
 #if STEL_USE_NEW_OPENGL_WIDGETS
