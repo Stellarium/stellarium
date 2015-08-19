@@ -782,6 +782,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -798,7 +799,10 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	float direction = 3.; // N is zero, E is 90 degrees
+	if (useOldAzimuth)
+		direction = 2.;
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -808,7 +812,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -888,6 +892,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -904,7 +909,10 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	float direction = 3.; // N is zero, E is 90 degrees
+	if (useOldAzimuth)
+		direction = 2.;
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -914,7 +922,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -1184,8 +1192,11 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aim;
-	double dAlt = StelUtils::getDecAngle(alt);
+	double dAlt = StelUtils::getDecAngle(alt);	
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagOldAzimuthUsage())
+		dAzi -= M_PI;
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
 	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), duration);

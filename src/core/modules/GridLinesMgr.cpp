@@ -171,7 +171,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	direc.normalize();
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 
 	QString text;
 	if (d->text.isEmpty())
@@ -199,6 +200,9 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 
 				if (raAngle==2*M_PI && delta==-M_PI)
 					textAngle = 0;
+
+				if (useOldAzimuth)
+					textAngle += M_PI;
 
 				if (withDecimalDegree)
 					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
