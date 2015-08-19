@@ -43,6 +43,7 @@
 #include <QGuiApplication>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsAnchorLayout>
+#include <QGraphicsEffect>
 #include <QFileInfo>
 #include <QIcon>
 #include <QMoveEvent>
@@ -61,11 +62,97 @@
 #endif
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
+#include <QGLFramebufferObject>
+#include <QGLShaderProgram>
 
 #include <clocale>
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
+
+// A custom QGraphicsEffect to apply the night mode on top of the screen.
+class NightModeGraphicsEffect : public QGraphicsEffect
+{
+public:
+	NightModeGraphicsEffect(QObject* parent = NULL);
+protected:
+	virtual void draw(QPainter* painter);
+private:
+	QGLFramebufferObject* fbo;
+	QGLShaderProgram *program;
+	struct {
+		int pos;
+		int texCoord;
+		int source;
+	} vars;
+};
+
+NightModeGraphicsEffect::NightModeGraphicsEffect(QObject* parent) :
+	QGraphicsEffect(parent)
+	, fbo(NULL)
+{
+	program = new QGLShaderProgram(this);
+	QString vertexCode =
+		"attribute highp vec4 a_pos;\n"
+		"attribute highp vec2 a_texCoord;\n"
+		"varying highp   vec2 v_texCoord;\n"
+		"void main(void)\n"
+		"{\n"
+			"v_texCoord = a_texCoord;\n"
+			"gl_Position = a_pos;\n"
+		"}\n";
+	QString fragmentCode =
+		"varying highp vec2 v_texCoord;\n"
+		"uniform sampler2D  u_source;\n"
+		"void main(void)\n"
+		"{\n"
+		"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
+		"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
+		"	gl_FragColor = vec4(luminance, 0.0, 0.0, 1.0);\n"
+		"}\n";
+	program->addShaderFromSourceCode(QGLShader::Vertex, vertexCode);
+	program->addShaderFromSourceCode(QGLShader::Fragment, fragmentCode);
+	program->link();
+	vars.pos = program->attributeLocation("a_pos");
+	vars.texCoord = program->attributeLocation("a_texCoord");
+	vars.source = program->uniformLocation("u_source");
+}
+
+void NightModeGraphicsEffect::draw(QPainter* painter)
+{
+	QSize size(painter->device()->width(), painter->device()->height());
+	if (fbo && fbo->size() != size)
+	{
+		delete fbo;
+		fbo = NULL;
+	}
+	if (!fbo)
+	{
+		QGLFramebufferObjectFormat format;
+		format.setAttachment(QGLFramebufferObject::CombinedDepthStencil);
+		format.setInternalTextureFormat(GL_RGBA);
+		fbo = new QGLFramebufferObject(size, format);
+	}
+	QPainter fboPainter(fbo);
+	drawSource(&fboPainter);
+
+	painter->save();
+	painter->beginNativePainting();
+	program->bind();
+	const GLfloat pos[] = {-1, -1, +1, -1, -1, +1, +1, +1};
+	const GLfloat texCoord[] = {0, 0, 1, 0, 0, 1, 1, 1};
+	program->setUniformValue(vars.source, 0);
+	program->setAttributeArray(vars.pos, pos, 2);
+	program->setAttributeArray(vars.texCoord, texCoord, 2);
+	program->enableAttributeArray(vars.pos);
+	program->enableAttributeArray(vars.texCoord);
+	QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
+	f->glBindTexture(GL_TEXTURE_2D, fbo->texture());
+	f->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	program->release();
+	painter->endNativePainting();
+	painter->restore();
+}
 
 //! Render Stellarium sky. 
 class StelSkyItem : public QGraphicsWidget
@@ -464,6 +551,8 @@ void StelMainView::init(QSettings* conf)
 	l->addCornerAnchors(guiItem, Qt::TopRightCorner, l, Qt::TopRightCorner);
 	rootItem->setLayout(l);
 	scene()->addItem(rootItem);
+	nightModeEffect = new NightModeGraphicsEffect(this);
+	rootItem->setGraphicsEffect(nightModeEffect);
 
 	QSize size = glWidget->windowHandle()->screen()->size();
 	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
@@ -529,6 +618,7 @@ void StelMainView::updateNightModeProperty()
 {
 	// So that the bottom bar tooltips get properly rendered in night mode.
 	setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
+	nightModeEffect->setEnabled(StelApp::getInstance().getVisionModeNight());
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
