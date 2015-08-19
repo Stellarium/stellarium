@@ -20,6 +20,9 @@
 #include "RemoteSync.hpp"
 #include "RemoteSyncDialog.hpp"
 
+#include "SyncServer.hpp"
+#include "SyncClient.hpp"
+
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -52,7 +55,7 @@ StelPluginInfo RemoteSyncStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-RemoteSync::RemoteSync()
+RemoteSync::RemoteSync() : state(IDLE), server(NULL), client(NULL)
 {
 	setObjectName("RemoteSync");
 
@@ -79,6 +82,7 @@ void RemoteSync::init()
 
 	loadSettings();
 
+	qDebug()<<"[RemoteSync] Plugin initialized";
 
 	// TODO create actions/buttons, if required
 }
@@ -89,6 +93,24 @@ void RemoteSync::update(double deltaTime)
 	Q_UNUSED(deltaTime);
 }
 
+void RemoteSync::setClientServerHost(const QString &clientServerHost)
+{
+	if(clientServerHost != this->clientServerHost)
+	{
+		this->clientServerHost = clientServerHost;
+		emit clientServerHostChanged(clientServerHost);
+	}
+}
+
+void RemoteSync::setClientServerPort(const int port)
+{
+	if(port != this->clientServerPort)
+	{
+		this->clientServerPort = port;
+		emit clientServerPortChanged(port);
+	}
+}
+
 void RemoteSync::setServerPort(const int port)
 {
 	if(port!= serverPort)
@@ -96,6 +118,78 @@ void RemoteSync::setServerPort(const int port)
 		serverPort = port;
 		emit serverPortChanged(port);
 	}
+}
+
+void RemoteSync::startServer()
+{
+	if(state == IDLE)
+	{
+		server = new SyncServer(this);
+		if(server->start(serverPort))
+			setState(SERVER);
+		else
+		{
+			setError(server->errorString());
+			delete server;
+		}
+	}
+	else
+		qWarning()<<"[RemoteSync] startServer: invalid state";
+}
+
+void RemoteSync::stopServer()
+{
+	if(state == SERVER)
+	{
+		server->stop();
+		delete server;
+		setState(IDLE);
+	}
+	else
+		qWarning()<<"[RemoteSync] stopServer: invalid state";
+}
+
+void RemoteSync::connectToServer()
+{
+	if(state == IDLE)
+	{
+		client = new SyncClient(this);
+		connect(client, SIGNAL(connectionError()), this, SLOT(clientConnectionFailed()));
+		connect(client, SIGNAL(connected()), this, SLOT(clientConnected()));
+		connect(client, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+		client->connectToServer(clientServerHost,clientServerPort);
+		setState(CLIENT_CONNECTING);
+	}
+	else
+		qWarning()<<"[RemoteSync] connectToServer: invalid state";
+}
+
+void RemoteSync::clientConnected()
+{
+	setState(CLIENT);
+}
+
+void RemoteSync::clientDisconnected()
+{
+	setState(IDLE);
+	client->deleteLater();
+}
+
+void RemoteSync::clientConnectionFailed()
+{
+	setState(IDLE);
+	setError(client->errorString());
+	client->deleteLater();
+}
+
+void RemoteSync::disconnectFromServer()
+{
+	if(state == CLIENT)
+	{
+		client->disconnectFromServer();
+	}
+	else
+		qWarning()<<"[RemoteSync] disconnectFromServer: invalid state";
 }
 
 void RemoteSync::restoreDefaultSettings()
@@ -112,6 +206,8 @@ void RemoteSync::restoreDefaultSettings()
 void RemoteSync::loadSettings()
 {
 	conf->beginGroup("RemoteSync");
+	setClientServerHost(conf->value("clientServerHost","127.0.0.1").toString());
+	setClientServerPort(conf->value("clientServerPort",20180).toInt());
 	setServerPort(conf->value("serverPort",20180).toInt());
 	conf->endGroup();
 }
@@ -119,6 +215,47 @@ void RemoteSync::loadSettings()
 void RemoteSync::saveSettings()
 {
 	conf->beginGroup("RemoteSync");
+	conf->setValue("clientServerHost",clientServerHost);
+	conf->setValue("clientServerPort",clientServerPort);
 	conf->setValue("serverPort",serverPort);
 	conf->endGroup();
+}
+
+void RemoteSync::setState(RemoteSync::SyncState state)
+{
+	if(state != this->state)
+	{
+		this->state = state;
+		qDebug()<<"[RemoteSync] New state:"<<state;
+		emit stateChanged(state);
+	}
+}
+
+void RemoteSync::setError(const QString &errorString)
+{
+	this->errorString = errorString;
+	emit errorOccurred(errorString);
+}
+
+QDebug operator<<(QDebug deb, RemoteSync::SyncState state)
+{
+	switch (state) {
+		case RemoteSync::IDLE:
+			deb<<"IDLE";
+			break;
+		case RemoteSync::SERVER:
+			deb<<"SERVER";
+			break;
+		case RemoteSync::CLIENT:
+			deb<<"CLIENT";
+			break;
+		case RemoteSync::CLIENT_CONNECTING:
+			deb<<"CLIENT_CONNECTING";
+			break;
+		default:
+			deb<<"RemoteSync::SyncState(" <<int(state)<<')';
+			break;
+	}
+
+	return deb;
 }
