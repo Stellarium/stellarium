@@ -26,6 +26,8 @@
 #include "StelModule.hpp"
 
 class RemoteSyncDialog;
+class SyncServer;
+class SyncClient;
 
 //! Main class of the RemoteSync plug-in.
 //! Provides a synchronization mechanism for multiple Stellarium instances in a network.
@@ -33,8 +35,17 @@ class RemoteSyncDialog;
 class RemoteSync : public StelModule
 {
 	Q_OBJECT
+	Q_ENUMS(SyncState)
 
 public:
+	enum SyncState
+	{
+		IDLE, //Plugin is disabled
+		SERVER, //Plugin is running as server
+		CLIENT, //Plugin is connected as a client to a server
+		CLIENT_CONNECTING //Plugin is currently trying to connect to a server
+	};
+
 	RemoteSync();
 	virtual ~RemoteSync();
 	
@@ -49,12 +60,31 @@ public:
 	virtual bool configureGui(bool show=true);
 	///////////////////////////////////////////////////////////////////////////
 
+	QString getClientServerHost() const { return clientServerHost; }
+	int getClientServerPort() const { return clientServerPort; }
 	int getServerPort() const { return serverPort; }
+	SyncState getState() const { return state; }
 
 public slots:
-
+	void setClientServerHost(const QString& clientServerHost);
+	void setClientServerPort(const int port);
 	void setServerPort(const int port);
 
+	//! Starts the plugin in server mode, on the port specified by the serverPort property.
+	//! If currently in a state other than IDLE, this call has no effect.
+	void startServer();
+
+	//! Tries to disconnect all current clients and stops the server, returning to the IDLE state.
+	//! Only has an effect in the SERVER state.
+	void stopServer();
+
+	//! Connects the plugin to the server specified by the clientServerHost and clientServerPort properties.
+	//! If currently in a state other than IDLE, this call has no effect.
+	void connectToServer();
+
+	//! Disconnects from the server and returns to the IDLE state.
+	//! Only has an effect in the CLIENT state.
+	void disconnectFromServer();
 
 	//! Load the plug-in's settings from the configuration file.
 	//! Settings are kept in the "RemoteSync" section in Stellarium's
@@ -74,10 +104,33 @@ public slots:
 	void restoreDefaultSettings();
 
 signals:
-	void serverPortChanged(const int val);
+	void errorOccurred(const QString errorString);
+	void clientServerHostChanged(const QString clientServerHost);
+	void clientServerPortChanged(const int port);
+	void serverPortChanged(const int port);
+	void stateChanged(RemoteSync::SyncState state);
 
+private slots:
+	void clientDisconnected();
+	void clientConnected();
+	void clientConnectionFailed();
 private:
+	void setState(RemoteSync::SyncState state);
+	void setError(const QString& errorString);
+
+	//The host string/IP addr to connect to
+	QString clientServerHost;
+	//The host port to connect to
+	int clientServerPort;
+	//the port used in server mode
 	int serverPort;
+	SyncState state;
+
+	SyncServer* server;
+	SyncClient* client;
+
+	// the last error that occurred
+	QString errorString;
 
 	QSettings* conf;
 
@@ -85,6 +138,10 @@ private:
 	RemoteSyncDialog* configDialog;
 };
 
+Q_DECLARE_METATYPE(RemoteSync::SyncState)
+
+//! Stream overload for debugging
+QDebug operator<<(QDebug, RemoteSync::SyncState);
 
 #include "StelPluginInterface.hpp"
 

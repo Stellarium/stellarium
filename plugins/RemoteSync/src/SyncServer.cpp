@@ -34,13 +34,17 @@ SyncServer::~SyncServer()
 	stop();
 }
 
-void SyncServer::start(int port)
+bool SyncServer::start(int port)
 {
 	if(qserver->isListening())
 		stop();
 
-	qserver->listen(QHostAddress::Any, port);
-	qDebug()<<"[SyncServer] Started on port"<<port;
+	bool ok = qserver->listen(QHostAddress::Any, port);
+	if(ok)
+		qDebug()<<"[SyncServer] Started on port"<<port;
+	else
+		qDebug()<<"[SyncServer] Error while starting:"<<errorString();
+	return ok;
 }
 
 void SyncServer::stop()
@@ -48,18 +52,56 @@ void SyncServer::stop()
 	if(qserver->isListening())
 	{
 		qserver->close();
+		foreach(QAbstractSocket* c , clients)
+		{
+			c->disconnectFromHost();
+			c->deleteLater();
+		}
+		clients.clear();
+
 		qDebug()<<"[SyncServer] Stopped";
 	}
+}
+
+QString SyncServer::errorString() const
+{
+	return qserver->errorString();
 }
 
 void SyncServer::handleNewConnection()
 {
 	QTcpSocket* newConn = qserver->nextPendingConnection();
 
-	qDebug()<<"[SyncServer] New connection:"<<(newConn->peerAddress().toString() + ":" + newConn->peerPort());
+	clients.append(newConn);
+	connect(newConn, SIGNAL(disconnected()), this, SLOT(clientDisconnected()));
+	connect(newConn, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(clientError(QAbstractSocket::SocketError)));
+	clientLog(newConn,"New Connection");
+	qDebug()<<"[SyncServer] "<<clients.size()<<" connections";
+
+	newConn->write("Hello you!");
+	newConn->waitForBytesWritten(500);
+}
+
+void SyncServer::clientError(QAbstractSocket::SocketError)
+{
+	QAbstractSocket* sock = qobject_cast<QAbstractSocket*>(sender());
+	clientLog(sock, "Socket error: " + sock->errorString());
+}
+
+void SyncServer::clientDisconnected()
+{
+	QAbstractSocket* sock = qobject_cast<QAbstractSocket*>(sender());
+	clientLog(sock, "Socket disconnected");
+	clients.removeOne(sock);
+	sock->deleteLater();
 }
 
 void SyncServer::connectionError(QAbstractSocket::SocketError err)
 {
 	qWarning()<<"[SyncServer] Could not accept an incoming connection, socket error is: "<<err;
+}
+
+void SyncServer::clientLog(QAbstractSocket *cl, const QString &msg)
+{
+	qDebug()<<"[SyncServer][Client"<<(cl->peerAddress().toString() + ":" + QString::number(cl->peerPort()))<<"]:"<<msg;
 }
