@@ -43,6 +43,10 @@ public slots:
 protected:
 	void createDialogContent();
 
+private slots:
+	void printErrorMessage(const QString error);
+	void updateState();
+
 private:
 	Ui_remoteSyncDialog* ui;
 	RemoteSync* rs;

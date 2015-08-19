@@ -61,7 +61,15 @@ void RemoteSyncDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	// TODO Fill other buttons
+	connect(rs, SIGNAL(stateChanged(RemoteSync::SyncState)), this, SLOT(updateState()));
+	updateState();
+
+	connect(rs, SIGNAL(errorOccurred(QString)), this, SLOT(printErrorMessage(QString)));
+
+	ui->clientServerHostEdit->setText(rs->getClientServerHost());
+	connect(ui->clientServerHostEdit, SIGNAL(textChanged(QString)), rs, SLOT(setClientServerHost(QString)));
+	ui->clientServerPortSpinBox->setValue(rs->getClientServerPort());
+	connect(ui->clientServerPortSpinBox, SIGNAL(valueChanged(int)), rs, SLOT(setClientServerPort(int)));
 
 	ui->serverPortSpinBox->setValue(rs->getServerPort());
 	connect(ui->serverPortSpinBox, SIGNAL(valueChanged(int)), rs, SLOT(setServerPort(int)));
@@ -70,6 +78,65 @@ void RemoteSyncDialog::createDialogContent()
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), rs, SLOT(restoreDefaultSettings()));
 
 	setAboutHtml();
+}
+
+void RemoteSyncDialog::printErrorMessage(const QString error)
+{
+	ui->statusLabel->setText(QString(q_("ERROR: %1")).arg(error));
+	ui->statusLabel->setStyleSheet("color: Red;");
+}
+
+void RemoteSyncDialog::updateState()
+{
+	RemoteSync::SyncState state = rs->getState();
+
+	//disconnect the click signals from whatever is connected
+	disconnect(ui->serverButton, SIGNAL(clicked(bool)), NULL, NULL);
+	disconnect(ui->clientButton, SIGNAL(clicked(bool)), NULL, NULL);
+	ui->statusLabel->setStyleSheet("");
+
+	if(state == RemoteSync::IDLE)
+	{
+		ui->serverGroupBox->setEnabled(true);
+		ui->serverControls->setEnabled(true);
+		ui->serverButton->setText(q_("Start server"));
+		connect(ui->serverButton, SIGNAL(clicked(bool)), rs, SLOT(startServer()));
+
+		ui->clientGroupBox->setEnabled(true);
+		ui->clientControls->setEnabled(true);
+		ui->clientButton->setText(q_("Connect to server"));
+		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(connectToServer()));
+
+		ui->statusLabel->setText(q_("Not running"));
+	}
+	else if (state == RemoteSync::SERVER)
+	{
+		ui->serverButton->setText("Stop server");
+		ui->serverControls->setEnabled(false);
+		connect(ui->serverButton, SIGNAL(clicked(bool)), rs, SLOT(stopServer()));
+		ui->clientGroupBox->setEnabled(false);
+
+		ui->statusLabel->setText(QString(q_("Running as server on port %1")).arg(rs->getServerPort()));
+	}
+	else if(state == RemoteSync::CLIENT_CONNECTING)
+	{
+		ui->serverGroupBox->setEnabled(false);
+		ui->clientGroupBox->setEnabled(false);
+
+		ui->clientButton->setText(q_("Connecting..."));
+		ui->statusLabel->setText(QString(q_("Connecting to %1:%2...")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+	}
+	else if (state == RemoteSync::CLIENT)
+	{
+		ui->serverGroupBox->setEnabled(false);
+		ui->clientGroupBox->setEnabled(true);
+		ui->clientControls->setEnabled(false);
+
+		ui->clientButton->setText(q_("Disconnect from server"));
+		connect(ui->clientButton, SIGNAL(clicked(bool)), rs, SLOT(disconnectFromServer()));
+
+		ui->statusLabel->setText(QString(q_("Connected to %1:%2")).arg(rs->getClientServerHost()).arg(rs->getClientServerPort()));
+	}
 }
 
 void RemoteSyncDialog::setAboutHtml(void)

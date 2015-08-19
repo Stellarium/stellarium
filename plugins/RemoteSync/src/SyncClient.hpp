@@ -21,8 +21,8 @@
 #define SYNCCLIENT_HPP_
 
 #include <QObject>
-
-class QTcpSocket;
+#include <QTcpSocket>
+#include <QTimer>
 
 //! A client which can connect to a SyncServer to receive state changes, and apply them
 class SyncClient : public QObject
@@ -32,8 +32,28 @@ public:
 	SyncClient(QObject* parent = 0);
 	virtual ~SyncClient();
 
+	//! True if the connection has been established completely
+	bool isConnected() const;
+	QString errorString() const { return errorStr; }
+
+public slots:
+	void connectToServer(const QString& host, const int port);
+	void disconnectFromServer();
+signals:
+	void connected();
+	void disconnected();
+	void connectionError();
+private slots:
+	void dataReceived();
+	void timeoutOccurred();
+	void socketConnected();
+	void socketDisconnected();
+	void socketError(QAbstractSocket::SocketError err);
 private:
+	QString errorStr;
+	bool isConnecting;
 	QTcpSocket* qsocket;
+	QTimer* timeoutTimer;
 };
 
 
