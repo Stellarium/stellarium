@@ -406,7 +406,7 @@ protected:
 
 
 StelMainView::StelMainView(QWidget* parent)
-	: QGraphicsView(parent), gui(NULL),
+	: QGraphicsView(parent), guiItem(NULL), gui(NULL),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
