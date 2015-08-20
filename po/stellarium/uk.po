@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-19 04:32+0600\n"
+"POT-Creation-Date: 2015-08-19 17:21+0600\n"
 "PO-Revision-Date: 2015-08-13 15:22+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-19 05:28+0000\n"
+"X-Launchpad-Export-Date: 2015-08-20 05:30+0000\n"
 "X-Generator: Launchpad (build 17690)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -24,10 +24,10 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
-#: src/core/modules/GridLinesMgr.cpp:872 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:488 src/core/StelCore.cpp:201
+#: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
 msgid "Display Options"
 msgstr "Параметри показу"
@@ -62,109 +62,109 @@ msgstr "Зірки"
 msgid "Stars labels"
 msgstr "Мітки зірок"
 
-#: src/core/modules/GridLinesMgr.cpp:592 src/ui_viewDialog.h:1756
+#: src/core/modules/GridLinesMgr.cpp:596 src/ui_viewDialog.h:1756
 msgid "Meridian"
 msgstr "Меридіан"
 
-#: src/core/modules/GridLinesMgr.cpp:596
+#: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of J2000.0"
 msgstr "Екліптика J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:600
+#: src/core/modules/GridLinesMgr.cpp:604
 msgid "Ecliptic of Date"
 msgstr "Екліптика дати"
 
-#: src/core/modules/GridLinesMgr.cpp:604
+#: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator of J2000.0"
 msgstr "Екватор J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:608
+#: src/core/modules/GridLinesMgr.cpp:612
 msgid "Equator"
 msgstr "Екватор"
 
-#: src/core/modules/GridLinesMgr.cpp:613
+#: src/core/modules/GridLinesMgr.cpp:617
 msgid "Precession Circle"
 msgstr "Коло прецесії"
 
-#: src/core/modules/GridLinesMgr.cpp:617 src/ui_viewDialog.h:1748
+#: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1748
 msgid "Horizon"
 msgstr "Горизонт"
 
-#: src/core/modules/GridLinesMgr.cpp:621
+#: src/core/modules/GridLinesMgr.cpp:625
 msgid "Galactic Equator"
 msgstr "Галактичний екватор"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:626 src/ui_viewDialog.h:1760
+#: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1760
 msgid "O./C. longitude"
 msgstr "Довгота п./с."
 
-#: src/core/modules/GridLinesMgr.cpp:873
+#: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial grid"
 msgstr "Екваторіальна сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:874 src/ui_viewDialog.h:1716
+#: src/core/modules/GridLinesMgr.cpp:878 src/ui_viewDialog.h:1716
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "Азимутальна сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:875
+#: src/core/modules/GridLinesMgr.cpp:879
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Ecliptic line"
 msgstr "Лінія екліптики"
 
-#: src/core/modules/GridLinesMgr.cpp:876
+#: src/core/modules/GridLinesMgr.cpp:880
 msgid "Ecliptic J2000 line"
 msgstr "Лінія екліптики J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:877
+#: src/core/modules/GridLinesMgr.cpp:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equator line"
 msgstr "Лінія екватора"
 
-#: src/core/modules/GridLinesMgr.cpp:878
+#: src/core/modules/GridLinesMgr.cpp:882
 msgid "Equator J2000 line"
 msgstr "Лінія екватора J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:879
+#: src/core/modules/GridLinesMgr.cpp:883
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Meridian line"
 msgstr "Лінія меридіана"
 
-#: src/core/modules/GridLinesMgr.cpp:880
+#: src/core/modules/GridLinesMgr.cpp:884
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "Лінія горизонту"
 
-#: src/core/modules/GridLinesMgr.cpp:881
+#: src/core/modules/GridLinesMgr.cpp:885
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equatorial J2000 grid"
 msgstr "Екваторіальна сітка J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:882
+#: src/core/modules/GridLinesMgr.cpp:886
 msgid "Ecliptic J2000 grid"
 msgstr "Сітка екліптичних координат, J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:883
+#: src/core/modules/GridLinesMgr.cpp:887
 msgid "Ecliptic grid"
 msgstr "Екліптична сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:884 src/ui_viewDialog.h:1720
+#: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1720
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "Галактична сітка"
 
-#: src/core/modules/GridLinesMgr.cpp:885 src/ui_viewDialog.h:1752
+#: src/core/modules/GridLinesMgr.cpp:889 src/ui_viewDialog.h:1752
 msgid "Galactic equator"
 msgstr "Галактичний екватор"
 
-#: src/core/modules/GridLinesMgr.cpp:886
+#: src/core/modules/GridLinesMgr.cpp:890
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr "Лінія довготи протистояння/сполучення"
 
-#: src/core/modules/GridLinesMgr.cpp:887
+#: src/core/modules/GridLinesMgr.cpp:891
 msgid "Precession Circles"
 msgstr "Кола прецесії"
 
@@ -927,7 +927,7 @@ msgstr "Чумацький Шлях"
 msgid "Zodiacal Light"
 msgstr "Зодіакальне світло"
 
-#: src/core/StelApp.cpp:488
+#: src/core/StelApp.cpp:489
 msgid "Night mode"
 msgstr "Нічний режим"
 
@@ -1632,53 +1632,53 @@ msgstr ""
 "збереженням площі</i>, її також іноді називають проекцією Сенсона–Флемстіда "
 "або Меркатора із збереженням площі."
 
-#: src/core/StelObject.cpp:113
+#: src/core/StelObject.cpp:114
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "на дату"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:122
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:132
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
+#: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/Dec"
 msgstr "ПС/Схил"
 
-#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:154
-#: src/core/StelObject.cpp:164 src/core/StelObject.cpp:167
+#: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
+#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Годинний кут/Сх: %1/%2"
 
-#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:154
-#: src/core/StelObject.cpp:182 src/core/StelObject.cpp:184
+#: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
+#: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
 msgid "(apparent)"
 msgstr "(видимі)"
 
-#: src/core/StelObject.cpp:182 src/core/StelObject.cpp:184
-#: src/core/StelObject.cpp:189 src/core/StelObject.cpp:191
+#: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
+#: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Аз/Висота: %1/%2"
 
-#: src/core/StelObject.cpp:210 src/core/StelObject.cpp:212
-#: src/core/StelObject.cpp:222 src/core/StelObject.cpp:224
+#: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
+#: src/core/StelObject.cpp:226 src/core/StelObject.cpp:228
 msgid "Ecliptic longitude/latitude"
 msgstr "Екліптична довгота/широта"
 
-#: src/core/StelObject.cpp:227 src/core/StelObject.cpp:229
+#: src/core/StelObject.cpp:231 src/core/StelObject.cpp:233
 msgid "Ecliptic obliquity"
 msgstr "Відхилення екліптики"
 
-#: src/core/StelObject.cpp:238 src/core/StelObject.cpp:240
+#: src/core/StelObject.cpp:242 src/core/StelObject.cpp:244
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Галактична довгота/широта: %1/%2"
 
-#: src/core/StelObject.cpp:247
+#: src/core/StelObject.cpp:251
 #, qt-format
 msgid "Mean Sidereal Time: %1"
 msgstr "Середній сидеричний час: %1"
 
-#: src/core/StelObject.cpp:249
+#: src/core/StelObject.cpp:253
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
 msgstr "Видимий сидеричний час: %1"
@@ -1732,30 +1732,30 @@ msgstr "Не знайдено"
 msgid "Found"
 msgstr "Знайдено"
 
-#: src/gui/ConfigurationDialog.cpp:487
+#: src/gui/ConfigurationDialog.cpp:494
 msgid "Select screenshot directory"
 msgstr "Оберіть каталог для знімків екрана"
 
-#: src/gui/ConfigurationDialog.cpp:778
+#: src/gui/ConfigurationDialog.cpp:786
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Початкове поле зору: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:794
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Початковий напрямок зору Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:843
+#: src/gui/ConfigurationDialog.cpp:851
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:398
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:844 src/gui/ViewDialog.cpp:663
+#: src/gui/ConfigurationDialog.cpp:852 src/gui/ViewDialog.cpp:663
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:846
+#: src/gui/ConfigurationDialog.cpp:854
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:397
@@ -1770,7 +1770,7 @@ msgstr "Контакти"
 msgid "Version"
 msgstr "Версія"
 
-#: src/gui/ConfigurationDialog.cpp:929
+#: src/gui/ConfigurationDialog.cpp:937
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1784,23 +1784,23 @@ msgstr "Версія"
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:933
+#: src/gui/ConfigurationDialog.cpp:941
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/gui/ConfigurationDialog.cpp:937
+#: src/gui/ConfigurationDialog.cpp:945
 msgid "Shortcut"
 msgstr "Комбінація клавіш"
 
-#: src/gui/ConfigurationDialog.cpp:961
+#: src/gui/ConfigurationDialog.cpp:969
 msgid "Running script: "
 msgstr "Запуск скрипту: "
 
-#: src/gui/ConfigurationDialog.cpp:968
+#: src/gui/ConfigurationDialog.cpp:976
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/gui/ConfigurationDialog.cpp:1033
+#: src/gui/ConfigurationDialog.cpp:1041
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1808,16 +1808,16 @@ msgstr ""
 "Завершено завантаження нових каталогів зірок!\n"
 "Перезапустіть Stellarium для їх відображення."
 
-#: src/gui/ConfigurationDialog.cpp:1037
+#: src/gui/ConfigurationDialog.cpp:1045
 msgid "All available star catalogs have been installed."
 msgstr "Було встановлено всі доступні зоряні каталоги."
 
-#: src/gui/ConfigurationDialog.cpp:1042
+#: src/gui/ConfigurationDialog.cpp:1050
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Отримати каталог %1 із %2"
 
-#: src/gui/ConfigurationDialog.cpp:1049
+#: src/gui/ConfigurationDialog.cpp:1057
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1826,7 +1826,7 @@ msgstr ""
 "Звантаження %1…\n"
 "(Ви можете закрити це вікно.)"
 
-#: src/gui/ConfigurationDialog.cpp:1056
+#: src/gui/ConfigurationDialog.cpp:1064
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1837,7 +1837,7 @@ msgstr ""
 "Кількість зірок: %2 мільйонів\n"
 "Діапазон зоряних величин: %3-%4"
 
-#: src/gui/ConfigurationDialog.cpp:1099 src/gui/ConfigurationDialog.cpp:1133
+#: src/gui/ConfigurationDialog.cpp:1107 src/gui/ConfigurationDialog.cpp:1141
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1846,11 +1846,11 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "Verifying file integrity..."
 msgstr "Перевірка цілісності файлів…"
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1198
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1860,127 +1860,127 @@ msgstr ""
 "Файл пошкоджено."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1261
+#: src/gui/ConfigurationDialog.cpp:1269
 msgid "Algorithm of"
 msgstr "Алгоритм обчислення"
 
-#: src/gui/ConfigurationDialog.cpp:1272
+#: src/gui/ConfigurationDialog.cpp:1280
 msgid "Without correction"
 msgstr "Без виправлення"
 
-#: src/gui/ConfigurationDialog.cpp:1273
+#: src/gui/ConfigurationDialog.cpp:1281
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1274
+#: src/gui/ConfigurationDialog.cpp:1282
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1275
+#: src/gui/ConfigurationDialog.cpp:1283
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1276
+#: src/gui/ConfigurationDialog.cpp:1284
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астрономічні таблиці (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1277
+#: src/gui/ConfigurationDialog.cpp:1285
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) і Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1278
+#: src/gui/ConfigurationDialog.cpp:1286
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller і Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1279
+#: src/gui/ConfigurationDialog.cpp:1287
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1280
+#: src/gui/ConfigurationDialog.cpp:1288
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel і Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1281
+#: src/gui/ConfigurationDialog.cpp:1289
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison і Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1282
+#: src/gui/ConfigurationDialog.cpp:1290
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson і Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1283
+#: src/gui/ConfigurationDialog.cpp:1291
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson і Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1284
+#: src/gui/ConfigurationDialog.cpp:1292
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1285
+#: src/gui/ConfigurationDialog.cpp:1293
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1286
+#: src/gui/ConfigurationDialog.cpp:1294
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel і Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1287
+#: src/gui/ConfigurationDialog.cpp:1295
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze і Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1288
+#: src/gui/ConfigurationDialog.cpp:1296
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson і Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1289
+#: src/gui/ConfigurationDialog.cpp:1297
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1291
+#: src/gui/ConfigurationDialog.cpp:1299
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze і Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1292
+#: src/gui/ConfigurationDialog.cpp:1300
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1293
+#: src/gui/ConfigurationDialog.cpp:1301
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus і Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1294
+#: src/gui/ConfigurationDialog.cpp:1302
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck і Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1295
+#: src/gui/ConfigurationDialog.cpp:1303
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold і Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1296
+#: src/gui/ConfigurationDialog.cpp:1304
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison і Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1298
+#: src/gui/ConfigurationDialog.cpp:1306
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak і Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1301
+#: src/gui/ConfigurationDialog.cpp:1309
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1302
+#: src/gui/ConfigurationDialog.cpp:1310
 msgid "Banjevic (2006)"
 msgstr "Баньєвич (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1303
+#: src/gui/ConfigurationDialog.cpp:1311
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq та Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1304
+#: src/gui/ConfigurationDialog.cpp:1312
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana та Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1305
+#: src/gui/ConfigurationDialog.cpp:1313
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
@@ -4431,7 +4431,7 @@ msgstr "Тека"
 msgid "&Choose"
 msgstr "Ви&брати"
 
-#: src/translations.h:564 src/ui_configurationDialog.h:1206
+#: src/translations.h:564 src/ui_configurationDialog.h:1216
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Скасувати"
@@ -4497,7 +4497,7 @@ msgstr "Про програму"
 msgid "Log"
 msgstr "Журнал"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1115
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1121
 msgid "Edit keyboard shortcuts..."
 msgstr "Змінити клавіатурні скорочення…"
 
@@ -4762,7 +4762,7 @@ msgstr "Використовувати автодоповнення лише д�
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1763
 #: src/ui_viewDialog.h:1782 src/ui_viewDialog.h:1790
-#: src/ui_configurationDialog.h:1207 src/ui_configurationDialog.h:1218
+#: src/ui_configurationDialog.h:1217 src/ui_configurationDialog.h:1228
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Параметри"
@@ -5296,27 +5296,27 @@ msgstr "Ландшафт"
 msgid "Starlore"
 msgstr "Зіркова статистика"
 
-#: src/ui_configurationDialog.h:1029
+#: src/ui_configurationDialog.h:1035
 msgid "Configuration"
 msgstr "Налаштування"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1037
 msgid "Language settings"
 msgstr "Параметри мови"
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1038
 msgid "Program Language"
 msgstr "Мова програми"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1039
 msgid "Sky Culture Language"
 msgstr "Мова картин зоряного неба"
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1040
 msgid "Default options"
 msgstr "Типові параметри"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1042
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -5324,7 +5324,7 @@ msgstr ""
 "Зберегти параметри, які було змінено протягом сеансу, щоб використати їх "
 "наступного разу при запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1044
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:391
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
@@ -5332,17 +5332,17 @@ msgstr ""
 msgid "Save settings"
 msgstr "Зберегти параметри"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1046
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Відновити типові значення параметрів Stellarium"
 
-#: src/ui_configurationDialog.h:1042 plugins/FOV/src/ui_fovWindow.h:408
+#: src/ui_configurationDialog.h:1048 plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
 msgid "Restore defaults"
 msgstr "Відновити типові"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1049
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -5352,213 +5352,213 @@ msgstr ""
 "Stellarium. Збереження поточних параметрів для використання після наступного "
 "запуску, серед іншого буде збережено поле і напрям зору."
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1051
 msgid "The width of your view when Stellarium starts"
 msgstr "Ширина вікна при запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1054
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Напрямок зору, який слід використовувати при запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1050 src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1239
 msgid "Selected object information"
 msgstr "Інформація про вибраний об’єкт"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1058
 msgid "Display all information available"
 msgstr "Показувати всю наявну інформацію"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1060
 msgid "All available"
 msgstr "Вся доступна"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1062
 msgid "Display no information"
 msgstr "Зовсім не показувати інформацію"
 
-#: src/ui_configurationDialog.h:1058 plugins/Oculars/src/Oculars.cpp:1980
+#: src/ui_configurationDialog.h:1064 plugins/Oculars/src/Oculars.cpp:1980
 #: plugins/Observability/src/Observability.cpp:208
 msgid "None"
 msgstr "Нічого"
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1066
 msgid "Display less information"
 msgstr "Показувати менше інформації"
 
-#: src/ui_configurationDialog.h:1062
+#: src/ui_configurationDialog.h:1068
 msgid "Short"
 msgstr "Коротко"
 
-#: src/ui_configurationDialog.h:1064
+#: src/ui_configurationDialog.h:1070
 msgid "Display user settings information"
 msgstr "Показати дані щодо параметрів, встановлених користувачем"
 
-#: src/ui_configurationDialog.h:1066
+#: src/ui_configurationDialog.h:1072
 msgid "Customized"
 msgstr "Змінено"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1073
 msgid "Displayed fields"
 msgstr "Показані поля"
 
-#: src/ui_configurationDialog.h:1068
+#: src/ui_configurationDialog.h:1074
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
 msgid "Name"
 msgstr "Назва"
 
-#: src/ui_configurationDialog.h:1070
+#: src/ui_configurationDialog.h:1076
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "Геоцентричні екваторіальні координати, рівнодення дати"
 
-#: src/ui_configurationDialog.h:1072
+#: src/ui_configurationDialog.h:1078
 msgid "Right ascension/Declination (of date)"
 msgstr "Пряме сходження/Схилення (дати)"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1079
 msgid "Catalog number(s)"
 msgstr "Номери за каталогом"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1081
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "Геоцентричні екваторіальні координати, рівнодення J2000.0"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1083
 msgid "Right ascension/Declination (J2000)"
 msgstr "Пряме сходження/Схилення (J2000)"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1084
 msgid "Absolute magnitude"
 msgstr "Абсолютна величина"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1085
 msgid "Galactic coordinates"
 msgstr "Галактичні координати"
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1086
 msgid "Visual magnitude"
 msgstr "Видима величина"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1088
 msgid "Angular or physical size"
 msgstr "Кутовий або фізичний розмір"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1090
 msgid "Size"
 msgstr "Розмір"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1092
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Тип об’єкта (зірка, планета тощо)"
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1094
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 msgid "Type"
 msgstr "Тип"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1096
 msgid "Spectral class, nebula type, etc."
 msgstr "Спектральний клас, тип туманності тощо."
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1098
 msgid "Additional information"
 msgstr "Додаткова інформація"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1100
 msgid "Topocentric equatorial coordinates"
 msgstr "Топоцентричні екваторіальні координати"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1102
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
 msgstr "Годинний кут/Схилення"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1104
 msgid "Horizontal coordinates"
 msgstr "Горизонтальні координати"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1106
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Altitude/Azimuth"
 msgstr "Висота/Азимут"
 
-#: src/ui_configurationDialog.h:1101
+#: src/ui_configurationDialog.h:1107
 msgid "Distance"
 msgstr "Відстань"
 
-#: src/ui_configurationDialog.h:1103
+#: src/ui_configurationDialog.h:1109
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 "Екліптичні координати, рівнодення на поточну дату та на епоху J2000 (лише "
 "для Землі)"
 
-#: src/ui_configurationDialog.h:1105
+#: src/ui_configurationDialog.h:1111
 msgid "Ecliptic coordinates"
 msgstr "Екліптичні координати"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1112
 msgid "Control"
 msgstr "Керування"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1114
 msgid "Allow keyboard to pan and zoom"
 msgstr "Дозволити використовувати клавіатуру для масштабування"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1116
 msgid "Enable keyboard navigation"
 msgstr "Увімкнути навігацію з клавіатури"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1118
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Дозволити перетягування та масштабування з допомогою мишки"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1120
 msgid "Enable mouse navigation"
 msgstr "Увімкнути навігацію мишею"
 
-#: src/ui_configurationDialog.h:1117
+#: src/ui_configurationDialog.h:1123
 msgid "Hides the mouse cursor when inactive"
 msgstr "Приховує вказівник миші, коли він неактивний"
 
-#: src/ui_configurationDialog.h:1119
+#: src/ui_configurationDialog.h:1125
 msgid "Mouse cursor timeout:"
 msgstr "Час очікування на вказівник миші:"
 
-#: src/ui_configurationDialog.h:1121
+#: src/ui_configurationDialog.h:1127
 msgid "seconds"
 msgstr "секунд"
 
-#: src/ui_configurationDialog.h:1123
+#: src/ui_configurationDialog.h:1129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Дата і час при запуску"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1131
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Використовувати конкретну дату і час при запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1133
 msgid "Other:"
 msgstr "Інше:"
 
-#: src/ui_configurationDialog.h:1129
+#: src/ui_configurationDialog.h:1135
 msgid "Use current local date and time"
 msgstr "Використовувати місцеву дату і час"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1137
 msgid "use current"
 msgstr "використовувати поточне"
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1139
 msgid "Starts Stellarium at system clock date and time"
 msgstr "При запуску Stellarium використовує системні дату і час"
 
-#: src/ui_configurationDialog.h:1135
+#: src/ui_configurationDialog.h:1141
 msgid "System date and time"
 msgstr "Системні дата та час"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1143
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -5566,23 +5566,23 @@ msgstr ""
 "Встановлює модельний час у значення цього самого часу доби під час наступних "
 "запусків Stellarium"
 
-#: src/ui_configurationDialog.h:1139
+#: src/ui_configurationDialog.h:1145
 msgid "System date at:"
 msgstr "Системна дата на:"
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1146
 msgid "Time correction"
 msgstr "Виправлення часу"
 
-#: src/ui_configurationDialog.h:1143
+#: src/ui_configurationDialog.h:1149
 msgid "Edit equation"
 msgstr "Редагувати рівняння"
 
-#: src/ui_configurationDialog.h:1145
+#: src/ui_configurationDialog.h:1151
 msgid "Planetarium options"
 msgstr "Параметри планетарію"
 
-#: src/ui_configurationDialog.h:1147
+#: src/ui_configurationDialog.h:1153
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -5590,62 +5590,62 @@ msgstr ""
 "Викривлення сферичного дзеркала використовуються під час створення проекції "
 "Stellarium на сферичне дзеркало для малобюджетних планетаріїв."
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1155
 msgid "Spheric mirror distortion"
 msgstr "Викривлення сферичного дзеркала"
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1157
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Маскувати все поза центральним колом основної області перегляду"
 
-#: src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:1159
 msgid "Disc viewport"
 msgstr "Дискове поле зору"
 
-#: src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1161
 msgid "Hide other constellations when you click one"
 msgstr "Приховувати інші сузір'я, коли ви клацаєте по якомусь одному"
 
-#: src/ui_configurationDialog.h:1157
+#: src/ui_configurationDialog.h:1163
 msgid "Select single constellation"
 msgstr "Виберіть одне сузір'я"
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1165
 msgid "Align labels with the horizon"
 msgstr "Вирівнювати написи за горизонтом"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1167
 msgid "Gravity labels"
 msgstr "Позначки з тяжінням"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1169
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Увімкнути або вимкнути показ тла туманностей."
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1171
 msgid "Show nebula background button"
 msgstr "Показувати кнопку тла туманностей"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1173
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 "Увімкнути або вимкнути кнопки вертикального та горизонтального "
 "віддзеркалення зображення."
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1175
 msgid "Show flip buttons"
 msgstr "Показати кнопки віддзеркалення"
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1177
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr "Автоматичне вмикання атмосфери для тіл з атмосферою у вікні місць"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1179
 msgid "Auto-enabling for the atmosphere"
 msgstr "Автоматичне вмикання атмосфери"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1181
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -5653,28 +5653,28 @@ msgstr ""
 "Якщо позначити цей пункт, клавіша «автоматичного зменшення» встановлюватиме "
 "і початковий напрям погляду"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1183
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Автоматичне зменшення повертає початковий напрям погляду"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1185
 msgid "Use decimal degrees for coordinates"
 msgstr "Використовувати десяткові градуси для координат"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1187
 msgid "Use decimal degrees"
 msgstr "Використовувати десяткові градуси"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1189
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr "Нутація — невеличке коливання вісі Землі у декілька кутових секунд."
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1191
 msgid "Include nutation"
 msgstr "Включити нутацію"
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1193
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -5682,88 +5682,98 @@ msgstr ""
 "Позначте для перегляду з поверхні планети (рекомендовано). Якщо не "
 "позначено, буде показано планетоцентричний перегляд."
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1195
 msgid "Topocentric coordinates"
 msgstr "Топоцентричні координати"
 
-#: src/ui_configurationDialog.h:1190
+#: src/ui_configurationDialog.h:1197
+msgid ""
+"Activate this option to calculate azimuth from south towards west (as in old "
+"astronomical literature)."
+msgstr ""
+
+#: src/ui_configurationDialog.h:1199
+msgid "Azimuth from South"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1200
 msgid "Screenshots"
 msgstr "Знімки екрана"
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1201
 msgid "Screenshot Directory"
 msgstr "Каталог знімків екрана"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1203
 msgid "Invert colors"
 msgstr "Інвертувати кольори"
 
-#: src/ui_configurationDialog.h:1194
+#: src/ui_configurationDialog.h:1204
 msgid "Star catalog updates"
 msgstr "Оновлення каталогу зірок"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1206
 msgid "Click here to start downloading"
 msgstr "Натисніть тут, щоб розпочати звантаження"
 
-#: src/ui_configurationDialog.h:1198
+#: src/ui_configurationDialog.h:1208
 msgid "Download this file to view even more stars"
 msgstr "Звантажте цей файл, щоб збільшити кількість видимих зірок"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1210
 msgid "Restart the download"
 msgstr "Почати звантаження з початку"
 
-#: src/ui_configurationDialog.h:1202
+#: src/ui_configurationDialog.h:1212
 msgid "Retry"
 msgstr "Повторити"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1214
 msgid "Stop the download. You can always restart it later"
 msgstr "Зупинити звантаження. Ви можете поновити його  пізніше."
 
-#: src/ui_configurationDialog.h:1209
+#: src/ui_configurationDialog.h:1219
 msgid "Close window when script runs"
 msgstr "Закрити вікно, коли працює скрипт"
 
-#: src/ui_configurationDialog.h:1211
+#: src/ui_configurationDialog.h:1221
 msgid "Run the selected script"
 msgstr "Запуск вказаного скрипту"
 
-#: src/ui_configurationDialog.h:1215
+#: src/ui_configurationDialog.h:1225
 msgid "Stop a running script"
 msgstr "Зупинити запущений скрипт"
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1229
 msgid "Load at startup"
 msgstr "Завантажувати при запуску"
 
-#: src/ui_configurationDialog.h:1220
+#: src/ui_configurationDialog.h:1230
 msgid "configure"
 msgstr "налаштувати"
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1235
 msgid "Main"
 msgstr "Основне"
 
-#: src/ui_configurationDialog.h:1227
+#: src/ui_configurationDialog.h:1237
 msgid "Information"
 msgstr "Інформація"
 
-#: src/ui_configurationDialog.h:1232
+#: src/ui_configurationDialog.h:1242
 msgid "Navigation"
 msgstr "Навігація"
 
-#: src/ui_configurationDialog.h:1234
+#: src/ui_configurationDialog.h:1244
 msgid "Tools"
 msgstr "Інструменти"
 
-#: src/ui_configurationDialog.h:1236
+#: src/ui_configurationDialog.h:1246
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "Скрипти"
 
-#: src/ui_configurationDialog.h:1238
+#: src/ui_configurationDialog.h:1248
 msgid "Plugins"
 msgstr "Додатки"
 
@@ -8406,6 +8416,9 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
+"Інтерфейс для додавання записів астероїдів та комет до бази даних "
+"Stellarium. Може отримувати списки об’єктів із сайта Центру малих планет та "
+"виконувати пошук даних у базі даних в інтернеті."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
@@ -11070,37 +11083,37 @@ msgstr ""
 msgid "Show coordinates of the mouse pointer"
 msgstr "Показувати координати вказівника миші"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:144
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:145
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "ПС/Схил (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:161
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "ПС/Схил"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:184
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Аз/Вис"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:200
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "Гал. довг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:215
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:219
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr "Екл. довг./шир."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:234
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:238
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Екл. довг./шир. (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:252
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:256
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "ПС/Схил"
