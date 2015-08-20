@@ -457,45 +457,46 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 			delete oldLandscape;
 		oldLandscape = landscape; // keep old while transitioning!
 		landscape = newLandscape;
+
+		if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
+		{
+			StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+			StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+
+			if (landscape->getDefaultFogSetting() >-1)
+			{
+				setFlagFog((bool) landscape->getDefaultFogSetting());
+				landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
+			}
+			if (landscape->getDefaultBortleIndex() > 0)
+			{
+				setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
+				drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
+			}
+			if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
+			{
+				drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
+			}
+			if (landscape->getDefaultAtmosphericTemperature() > -273.15)
+			{
+				drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
+			}
+			if (landscape->getDefaultAtmosphericPressure() >= 0.0)
+			{
+				drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
+			}
+			else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+			{
+				// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
+				// International altitude formula found in Wikipedia.
+				double alt=landscape->getLocation().altitude;
+				double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
+				drawer->setAtmospherePressure(p);
+			}
+		}
 	}
 	currentLandscapeID = id;
 
-	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
-	{
-		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
-		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
-
-		if (landscape->getDefaultFogSetting() >-1)
-		{
-			setFlagFog((bool) landscape->getDefaultFogSetting());
-			landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
-		}
-		if (landscape->getDefaultBortleIndex() > 0)
-		{
-			setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
-		}
-		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
-		{
-			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
-		}
-		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
-		{
-			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
-		}
-		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
-		{
-			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
-		}
-		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
-		{
-			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
-			// International altitude formula found in Wikipedia.
-			double alt=landscape->getLocation().altitude;
-			double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
-			drawer->setAtmospherePressure(p);
-		}
-	}
 	// else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
 }
