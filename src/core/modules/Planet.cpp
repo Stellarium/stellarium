@@ -513,7 +513,7 @@ void Planet::computePosition(const double dateJDE)
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
 
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
+			for( int d=0; d<ORBIT_SEGMENTS-1; d++ )
 			{
 				if(d + delta_points >= ORBIT_SEGMENTS )
 				{
