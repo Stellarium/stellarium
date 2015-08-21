@@ -1684,17 +1684,20 @@ void Oculars::paintText(const StelCore* core)
 	}
 
 	// The CCD
-	if (flagShowCCD) {
+	if (flagShowCCD && ccd!=NULL) {
 		QString ccdSensorLabel, ccdInfoLabel;
 		QString name = "";
+		QString telescopeName = "";
 		double fovX = 0.0;
 		double fovY = 0.0;
-		if (ccd!=NULL)
+		if (telescope!=NULL && lens!=NULL)
 		{
 			fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
 			fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
 			name = ccd->name();
+			telescopeName = telescope->name();
 		}
+
 		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
 		if (name.isEmpty())
@@ -1707,14 +1710,8 @@ void Oculars::paintText(const StelCore* core)
 					.arg(selectedCCDIndex)
 					.arg(name);
 		}
-		painter.drawText(xPosition, yPosition, ccdSensorLabel);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, ccdInfoLabel);
-		yPosition-=lineHeight;
-
 		// The telescope
-		QString telescopeNumberLabel;
-		QString telescopeName = telescope->name();
+		QString telescopeNumberLabel;		
 		if (telescopeName.isEmpty())
 		{
 			telescopeNumberLabel = QString(q_("Telescope #%1"))
@@ -1726,6 +1723,10 @@ void Oculars::paintText(const StelCore* core)
 					.arg(selectedTelescopeIndex)
 					.arg(telescopeName);
 		}
+		painter.drawText(xPosition, yPosition, ccdSensorLabel);
+		yPosition-=lineHeight;
+		painter.drawText(xPosition, yPosition, ccdInfoLabel);
+		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
 	
