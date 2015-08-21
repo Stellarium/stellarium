@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-19 17:21+0600\n"
-"PO-Revision-Date: 2015-08-19 20:11+0000\n"
+"PO-Revision-Date: 2015-08-20 15:43+0000\n"
 "Last-Translator: Birger <tjaly.92@hotmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-20 05:29+0000\n"
+"X-Launchpad-Export-Date: 2015-08-21 05:12+0000\n"
 "X-Generator: Launchpad (build 17690)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -5919,7 +5919,7 @@ msgstr "PV"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
-msgstr "Vinkelmåttsplugin"
+msgstr "VInkelmåttstillägg"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
@@ -5927,7 +5927,7 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
-"Vinkelmåttspluginet är ett verktyg som används för att mäta vinkelavstånd "
+"Vinkelmåttstillägget är ett verktyg som används för att mäta vinkelavstånd "
 "mellan två punkter på himlen (och beräkning av positionsvinkeln mellan dessa "
 "två punkter)."
 
@@ -6046,7 +6046,7 @@ msgstr "Konfiguration för pulsarer"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
-msgstr "Konfiguration för vinkelmåttsplugin"
+msgstr "Konfiguration för vinkelmåttstillägg"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
@@ -6234,7 +6234,7 @@ msgstr "Telrad-sikte"
 
 #: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Oculars plugin configuration"
-msgstr "Konfiguration av okularinsticksmodulen"
+msgstr "Konfiguration av okulartillägget"
 
 #: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select next telescope"
@@ -6762,7 +6762,7 @@ msgid ""
 "TLE data"
 msgstr ""
 "Prognos för positioner av artificiella satelliter i omloppsbana runt Jorden "
-"baserad på NORADs TLE-data"
+"baserad på NORAD:s TLE-data"
 
 #: plugins/Satellites/src/Satellites.cpp:142
 msgid "Satellite hints"
@@ -6955,15 +6955,15 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:396
 msgid "Stellarium Satellites Plugin"
-msgstr "Satellitprogramtillägg för Stellarium"
+msgstr "Satellittillägg för Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"Satellitprogramtillägget förutsäger positionerna till artificiella "
-"satelliter i bana runt jorden."
+"Satellittillägget förutsäger positionerna till artificiella satelliter i "
+"bana runt jorden."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
 msgid "Notes for users"
@@ -7011,8 +7011,8 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"Satellitprogramtillägget är under utveckling. Några funktioner är "
-"ofullständiga, saknas eller kan innehålla fel."
+"Satellittillägget är under utveckling. Några funktioner är ofullständiga, "
+"saknas eller kan innehålla fel."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
@@ -7025,9 +7025,8 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"Satellitsprogramtillägget kan ladda ner TLE-data från internet automatiskt, "
-"och har som standard att göra det om existerande data är mer än 72 timmar "
-"gammal. "
+"Satellitstillägget kan ladda ner TLE-data från internet automatiskt, och har "
+"som standard att göra det om existerande data är mer än 72 timmar gammal. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 #, qt-format
@@ -7298,7 +7297,7 @@ msgstr "Etikettstorlek (pixlar):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Orbit lines"
-msgstr "Omloppsbanelinjer"
+msgstr "Omloppsbanor"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:693
 #: plugins/Satellites/src/ui_satellitesDialog.h:697
@@ -7312,24 +7311,24 @@ msgstr "Antal segment:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:700
 #: plugins/Satellites/src/ui_satellitesDialog.h:704
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Varaktighet för enkelt segment i sekunder"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Segment length (s):"
-msgstr ""
+msgstr "Segmentlängd (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:707
 #: plugins/Satellites/src/ui_satellitesDialog.h:710
 msgid "Number of segments used to draw each end of the line"
-msgstr ""
+msgstr "Antal segment som behövs för att rita varje slut av linje"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:712
 msgid "Fade length:"
-msgstr ""
+msgstr "Toningslängd:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Realistic mode for the artificial satellites"
-msgstr ""
+msgstr "Realistiskt läge för artificiella satelliter"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
@@ -7343,11 +7342,11 @@ msgstr "Inställningar"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "Dubbelklicka på en satellit för att spåra den."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:721
 msgid "Add more satellites"
-msgstr ""
+msgstr "Lägg till fler satelliter"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:724
 msgid "Remove the selected satellites"
@@ -7371,15 +7370,15 @@ msgstr "Visad"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:738
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "Visa omloppsbanor för valda satelliter"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:740
 msgid "Orbit"
-msgstr "Bana"
+msgstr "Omloppsbana"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr ""
+msgstr "Uppdatera inte (eller ta bort uppdatering) de valda satelliterna"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Do not update"
@@ -7396,7 +7395,7 @@ msgstr "Grupper:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "TLE set:"
-msgstr ""
+msgstr "Ställ in TLE:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid ""
@@ -7411,14 +7410,15 @@ msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
+"Skriv in URL för vald källa. Ändringar sparas genom att klicka Enter."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:754
 msgid "Add new source"
-msgstr ""
+msgstr "Lägg till ny källa"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:758
 msgid "Remove selected source"
-msgstr ""
+msgstr "Ta bort vald källa"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:761
 msgid "Sources"
@@ -7435,7 +7435,7 @@ msgstr "Hämta data från uppdateringskällor"
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "Abort download"
-msgstr ""
+msgstr "Avbryt nedladdning"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 msgid "New satellites"
@@ -7522,7 +7522,7 @@ msgstr "Stoppad"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:249
 msgid "Telescope Control plug-in"
-msgstr ""
+msgstr "Teleskopkontrollstillägg"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:250
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -7552,6 +7552,10 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
+"För att rikta det anslutna teleskopet mot ett objekt (till exempel en "
+"stjärna), välj objektet och håll sedan ner %1-tangenten och tryck tangenten "
+"med teleskopets nummer. För att rikta det mot mitten av nuvarande vy, håll "
+"inne alt-tangenten och tryck på tangenten med teleskopets nummer."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
@@ -7560,12 +7564,15 @@ msgid ""
 "control a telescope on its own, but it is still possible to do it through an "
 "external application or to connect to a remote host."
 msgstr ""
+"Inga instruktioner för anordningen finns tillgängliga. Stellarium kommer "
+"inte kunna kontrollera ett teleskop självt, men det är fortfarande möjligt "
+"att göra det genom externa program eller genom att ansluta en fjärrkontroll."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
-msgstr ""
+msgstr "Tryck på \"%1\" för att upprätta en ny teleskopanslutning."
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:325
@@ -7580,7 +7587,7 @@ msgstr "lokal, extern"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:333
 msgid "remote, unknown"
-msgstr ""
+msgstr "fjärrkontroll, okänd"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:337
@@ -7594,7 +7601,7 @@ msgstr "Starta"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:760
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "Starta det valda lokala teleskopet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:765
 msgid "Stop"
@@ -7602,7 +7609,7 @@ msgstr "Stoppa"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:766
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "Avsluta det valda lokala teleskopet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:771
 msgid "Connect"
@@ -7610,7 +7617,7 @@ msgstr "Anslut"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:772
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "Anslut till det valda teleskopet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:777
 msgid "Disconnect"
@@ -7618,7 +7625,7 @@ msgstr "Koppla från"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:778
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "Koppla ifrån det valda teleskopet"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:799
 msgid "Select a directory"
@@ -7626,28 +7633,28 @@ msgstr "Välj en katalog"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Rektascension (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Deklination (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:259
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:400
 msgid "Select one"
-msgstr ""
+msgstr "Välj ett"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:319
 msgid "Slew telescope to"
-msgstr ""
+msgstr "Rikta teleskop mot"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:321
 msgid "There are no active devices."
-msgstr ""
+msgstr "Det finns inga aktiva anordningar"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:322
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Rikta teleskop mot koordinater"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:323
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:235
@@ -7662,16 +7669,16 @@ msgstr "De&clination (J2000):"
 #: plugins/TelescopeControl/src/ui_slewDialog.h:325
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:232
 msgid "&Current object"
-msgstr ""
+msgstr "&Nuvarande objekt"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:326
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:233
 msgid "Center of the screen"
-msgstr ""
+msgstr "Mitten av skärmen"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:329
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Timme-minut-sekundformat"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:331
 msgid "&HMS"
@@ -7679,7 +7686,7 @@ msgstr "&TMS"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:333
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Grad-minut-sekundformat"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:335
 msgid "&DMS"
@@ -7695,43 +7702,47 @@ msgstr "D&ecimal"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
-msgstr ""
+msgstr "&Rikta"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "Konfigurera &teleskop"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "Teleskopkonfiguration"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
-msgstr ""
+msgstr "Teleskop kontrollerat av:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
+"Ett teleskop är anslutet till denna dator via en serieport och kontrolleras "
+"direkt av Stellarium."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "Stellarium, direkt genom en serieport"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
+"Ett teleskop kontrollers av ett externt program, antingen på denna dator "
+"eller en annan dator."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "Extern mjukvara eller annan dator"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "Inget, bara simulera ett (hårkors i rörelse)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Telescope properties"
@@ -7739,7 +7750,7 @@ msgstr "Teleskopegenskaper"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid "Connection delay:"
-msgstr ""
+msgstr "Anslutningsförsening:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid ""
@@ -7747,6 +7758,7 @@ msgid ""
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
+"Ungefärlig tid det tar för signaler från teleskopet att nå Stellarium"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "J2000 (default)"
@@ -7754,17 +7766,19 @@ msgstr "J2000 (standard)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "Dagjämningspunkt för datum (JNu)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
+"Försök automatiskt att starta teleskopet eller skapa anslutning när "
+"Stellarium startar"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Anslut vid uppstart"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Device settings"
@@ -7790,6 +7804,7 @@ msgstr "Värd:"
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
+"Värdnamn eller IPv4-adress för datorn som är värd för teleskopservern"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
 msgid "TCP port:"
@@ -8151,8 +8166,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Insticksprogram för versioner ur 0,9-serien av Text User Interface (TUI), "
-"som används i planetariumsystem"
+"Tillägg för versioner ur 0,9-serien av Text User Interface (TUI), som "
+"används i planetariumsystem"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
@@ -8348,7 +8363,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "Importera omloppsbanor i MPC-format..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:155
@@ -8436,7 +8451,7 @@ msgstr "En fil som innehåller en lista över objekt"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Get orbital elements"
-msgstr ""
+msgstr "Skaffa omloppsbana"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:527
@@ -8466,7 +8481,7 @@ msgstr "Uppdatera existerande objekt"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "Uppdatera endast omloppsbanorna"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Add objects"
@@ -8534,7 +8549,7 @@ msgstr "Historiska supernovor"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr ""
+msgstr "Detta tillägg visar ljusa historiska supernovor."
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
@@ -8560,8 +8575,7 @@ msgstr "Insticksmodulen Historiska supernovor"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "This plugin allows you to see some bright historical supernovae: "
-msgstr ""
-"Denna insticksmodul låter dig se några ljusstarka historiska supernovor: "
+msgstr "Detta tillägg visar ljusa historiska supernovor. "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
@@ -8587,6 +8601,9 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"Detta tillägg skapar en enkel modell av ljuskurvorna för olika supernovor. "
+"Typiska ljuskurvor för typ I- och typ II-supernovor kan ses %1här%2 (höger "
+"skala i dagar), och den här modellen används för tillägget."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 msgid "Acknowledgments"
@@ -8619,6 +8636,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
+"Om du vill läsa den fullständiga informationen om detta tillägg, dess "
+"historia och katalogformat, klicka %1här%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
 #: plugins/Novae/src/gui/NovaeDialog.cpp:173
@@ -8676,7 +8695,7 @@ msgstr ""
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "Ett tillägg som visar några ljusstarka novor i Vintergatan."
 
 #: plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae configuration window"
@@ -8698,7 +8717,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Detta tillägg visar nyliga ljusstarka novor: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
@@ -8710,6 +8729,8 @@ msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"Detta tillägg använder sig av en enkel modell för beräkning av ljuskurvor "
+"för stjärnnovor."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #, qt-format
@@ -8723,6 +8744,8 @@ msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
+"Om en nova inte har några värden för minskning av ljusstyrka kommer detta "
+"tillägg att använda generaliserade värden."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
@@ -8731,6 +8754,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Om du vill läsa den fullständiga informationen om detta tillägg, dess "
+"historia och katalogformat, klicka %1här%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
 msgid "Novae is updated"
@@ -8755,6 +8780,9 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"Ett tillägg som visar några kvasarer som nått magnitud +16 eller ljusare. En "
+"katalog över kvasaser som skapats ur 'Quasars and Active Galactic Nuclei' "
+"(13:e uppl.) (Veron+ 2010) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -8779,6 +8807,8 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Kvasartillägget visar kvasarer ljusare än magnitud +16. Katalogen över "
+"kvasaser har skapats ur \"Quasars and Active Galactic Nuclei\" (13:e uppl.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 msgid "Veron+ 2010"
@@ -8796,6 +8826,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Om du vill läsa den fullständiga informationen om detta tillägg, dess "
+"historia och katalogformat, klicka %1här%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
 msgid "Quasars is updated"
@@ -8843,6 +8875,7 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Detta tillägg visar flera pulsarers positioner, med information om varje."
 
 #: plugins/Pulsars/src/Pulsars.cpp:167
 msgid "Show pulsars"
@@ -9068,6 +9101,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Detta tillägg visar stjärnor med exoplaneter och deras positioner. "
+"Informationen är hämtad från 'Extrasolar Planets Encyclopaedia' på hemsidan "
+"exoplanet.eu."
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
@@ -9216,6 +9252,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Detta tillägg visar stjärnor med exoplaneter och deras positioner. "
+"Informationen är hämtad från \"%1The Extrasolar Planets Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:140
 #, qt-format
@@ -9241,6 +9279,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"Om du vill läsa den fullständiga informationen om detta tillägg, dess "
+"historia och katalogformat, klicka %1här%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 msgid "Potential habitable exoplanets"
@@ -9251,6 +9291,8 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Detta tillägg visar möjliga beboeliga planeter (orangemarkerade) och "
+"information om dessa planeter."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
