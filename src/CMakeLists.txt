@@ -320,6 +320,8 @@ IF(GUI_MODE STREQUAL "Standard")
 		gui/AtmosphereDialog.cpp
 		gui/CustomDeltaTEquationDialog.hpp
 		gui/CustomDeltaTEquationDialog.cpp
+		gui/AstroCalcDialog.hpp
+		gui/AstroCalcDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -334,6 +336,7 @@ IF(GUI_MODE STREQUAL "Standard")
 	gui/configurationDialog.ui
 	gui/atmosphereDialog.ui
 	gui/customDeltaTEquationDialog.ui
+	gui/astroCalcDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
         IF(ENABLE_SCRIPTING)
