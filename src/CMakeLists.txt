@@ -332,8 +332,8 @@ IF(GUI_MODE STREQUAL "Standard")
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
-	gui/AtmosphereDialog.ui
-	gui/CustomDeltaTEquationDialog.ui
+	gui/atmosphereDialog.ui
+	gui/customDeltaTEquationDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
         IF(ENABLE_SCRIPTING)
