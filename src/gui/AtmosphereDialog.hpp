@@ -27,7 +27,7 @@
 #include "StelDialog.hpp"
 #include "RefractionExtinction.hpp"
 
-class Ui_AtmosphereDialogForm;
+class Ui_atmosphereDialogForm;
 
 class AtmosphereDialog : public StelDialog
 {
@@ -43,7 +43,7 @@ public slots:
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
         virtual void createDialogContent();
-        Ui_AtmosphereDialogForm *ui;
+        Ui_atmosphereDialogForm *ui;
 
 private:
         Refraction *refraction;
