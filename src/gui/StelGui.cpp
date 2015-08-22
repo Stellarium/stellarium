@@ -59,6 +59,7 @@
 #include "SearchDialog.hpp"
 #include "ViewDialog.hpp"
 #include "ShortcutsDialog.hpp"
+#include "AstroCalcDialog.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -92,6 +93,7 @@ StelGui::StelGui()
 #ifdef ENABLE_SCRIPT_CONSOLE
 	, scriptConsole(0)
 #endif
+	, astroCalcDialog(0)
 	, flagShowFlipButtons(false)
 	, flipVert(NULL)
 	, flipHoriz(NULL)
@@ -145,6 +147,11 @@ StelGui::~StelGui()
 		scriptConsole = 0;
 	}
 #endif
+	if (astroCalcDialog)
+	{
+		delete astroCalcDialog;
+		astroCalcDialog = NULL;
+	}
 }
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
@@ -163,6 +170,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 #ifdef ENABLE_SCRIPT_CONSOLE
 	scriptConsole = new ScriptConsole();
 #endif
+	astroCalcDialog = new AstroCalcDialog();
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -194,6 +202,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
+	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("AstroCalc window"), astroCalcDialog, "visible", "F10", "", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);	
 
 	QSettings* conf = StelApp::getInstance().getSettings();
