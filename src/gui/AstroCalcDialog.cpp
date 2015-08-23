@@ -634,6 +634,9 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP &object1, Plan
 	if (object1->getEnglishName()=="Venus" || object2->getEnglishName()=="Venus" || object1->getEnglishName()=="Mercury" || object2->getEnglishName()=="Mercury")
 		if (step0 > 5.f)
 			step0 = 5.f;
+	if (object1->getEnglishName()=="Moon" || object2->getEnglishName()=="Moon")
+		if (step0 > 0.25)
+			step0 = 0.25;
 
 	step = step0;
 	double jd = startJD;
