@@ -23,9 +23,11 @@
 #include <QObject>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QMap>
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
+#include "Planet.hpp"
 
 class Ui_astroCalcDialogForm;
 
@@ -56,6 +58,17 @@ public:
 		EphemerisCount		//! total number of columns
 	};
 
+	//! Defines the number and the order of the columns in the phenomena table
+	//! @enum PhenomenaColumns
+	enum PhenomenaColumns {
+		PhenomenaType,		//! type of phenomena
+		PhenomenaDate,		//! date and time of ephemeris
+		PhenomenaObject1,	//! first object
+		PhenomenaObject2,	//! second object
+		PhenomenaSeparation,	//! angular separation
+		PhenomenaCount		//! total number of columns
+	};
+
 	AstroCalcDialog();
 	virtual ~AstroCalcDialog();
 
@@ -70,15 +83,15 @@ protected:
 private slots:
 	//! Search planetary positions and fill the list.
 	void currentPlanetaryPositions();
-
-	//! If a current planetary position is selected by user, the current date change and the object is selected.
 	void selectCurrentPlanetaryPosition(const QModelIndex &modelIndex);
 
 	//! Calculate ephemeris for selected celestial body and fill the list.
 	void generateEphemeris();
-
-	//! If an ephemride is selected by user, the current date change and the object is selected.
 	void selectCurrentEphemeride(const QModelIndex &modelIndex);
+
+	//! Calculate phenomena for selected celestial body and fill the list.
+	void calculatePhenomena();
+	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 
 private:
 	class StelCore* core;
@@ -89,22 +102,38 @@ private:
 	void setPlanetaryPositionsHeaderNames();
 	//! Update header names for ephemeris table
 	void setEphemerisHeaderNames();
+	//! Update header names for phenomena table
+	void setPhenomenaHeaderNames();
 	//! Update description of the AstroCalc
 	void setAstroCalcDescription();
 
 	//! Init header and list of planetary positions
 	void initListPlanetaryPositions();
-
 	//! Init header and list of ephemeris
 	void initListEphemeris();
+	//! Init header and list of phenomena
+	void initListPhenomena();
 
 	//! Populates the drop-down list of celestial bodies.
 	//! The displayed names are localized in the current interface language.
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
 	void populateCelestialBodyList();
-
+	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
+	//! Populates the drop-down list of major planets.
+	void populateMajorPlanetList();
+	//! Populates the drop-down list of groups of celestial bodies.
+	void populateGroupCelestialBodyList();
+
+	//! Calculation conjuctions and oppositions.
+	//! @note Ported from KStars, should be improved, because this feature calculate
+	//! angular separation ("conjunction" defined as equality of right ascension
+	//! of two body) and current solution is not accurate and slow.
+	QMap<double, double> findClosestApproach(PlanetP& object1, PlanetP& object2, double startJD, double stopJD, float maxSeparation, bool opposition);
+	double findDistance(double JD, PlanetP object1, PlanetP object2, bool opposition);
+	bool findPrecise(QPair<double, double>* out, PlanetP object1, PlanetP object2, double JD, double step, int prevSign, bool opposition);
+	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
