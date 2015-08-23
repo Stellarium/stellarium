@@ -631,7 +631,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 	{
 		// We can inject a proper precession plus even nutation matrix in this stage, if available.
 		if (englishName=="Earth")
-		  {
+		{
 			// rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(-getRotObliquity(jd));
 			// We follow Capitaine's (2003) formulation P=Rz(Chi_A)*Rx(-omega_A)*Rz(-psi_A)*Rx(eps_o).
 			// ADS: 2011A&A...534A..22V = A&A 534, A22 (2011): Vondrak, Capitane, Wallace: New Precession Expressions, valid for long time intervals:
@@ -653,7 +653,7 @@ void Planet::computeTransMatrix(double JD, double JDE)
 				Mat4d nut2000B=Mat4d::xrotation(eps_A) * Mat4d::zrotation(deltaPsi)* Mat4d::xrotation(-eps_A-deltaEps);
 				rotLocalToParent=rotLocalToParent*nut2000B;
 			}
-		  }
+		}
 		else
 			rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(JDE-re.epoch)) * Mat4d::xrotation(re.obliquity);
 	}
