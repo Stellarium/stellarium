@@ -57,6 +57,7 @@ void AstroCalcDialog::retranslate()
 		populateEphemerisTimeStepsList();
 		populateMajorPlanetList();
 		populateGroupCelestialBodyList();
+		currentPlanetaryPositions();
 	}
 }
 
