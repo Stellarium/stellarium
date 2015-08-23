@@ -142,6 +142,9 @@
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
          </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="1" column="0">
@@ -258,6 +261,9 @@
          </item>
          <item>
           <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
+           <property name="displayFormat">
+            <string>yyyy.MM.dd hh:mm</string>
+           </property>
            <property name="calendarPopup">
             <bool>true</bool>
            </property>
@@ -276,6 +282,9 @@
          </item>
          <item>
           <widget class="QDateTimeEdit" name="dateToDateTimeEdit">
+           <property name="displayFormat">
+            <string>yyyy.MM.dd hh:mm</string>
+           </property>
            <property name="calendarPopup">
             <bool>true</bool>
            </property>
@@ -292,6 +301,136 @@
        </item>
        <item row="3" column="0" colspan="2">
         <widget class="QTreeWidget" name="ephemerisTreeWidget">
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Phenomena</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="betweenObjectsLabel">
+           <property name="text">
+            <string>Between objects:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="object1ComboBox">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="andLabel">
+           <property name="text">
+            <string>and</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="object2ComboBox">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="insertPolicy">
+            <enum>QComboBox::NoInsert</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="phenomenFromLabel">
+           <property name="text">
+            <string>From:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="phenomenFromDateEdit">
+           <property name="displayFormat">
+            <string>yyyy.MM.dd</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="phenomenToLabel">
+           <property name="text">
+            <string>To:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="phenomenToDateEdit">
+           <property name="displayFormat">
+            <string>yyyy.MM.dd</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="allowedSeparationLabel">
+           <property name="text">
+            <string>Maximum allowed separation:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="allowedSeparationDoubleSpinBox">
+           <property name="decimals">
+            <number>4</number>
+           </property>
+           <property name="maximum">
+            <double>10.000000000000000</double>
+           </property>
+           <property name="value">
+            <double>1.000000000000000</double>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="phenomenaPushButton">
+         <property name="text">
+          <string>Calculate phenomena</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QTreeWidget" name="phenomenaTreeWidget">
          <column>
           <property name="text">
            <string notr="true">1</string>
