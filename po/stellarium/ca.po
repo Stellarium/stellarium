@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-23 04:20+0600\n"
-"PO-Revision-Date: 2015-08-14 22:33+0000\n"
+"POT-Creation-Date: 2015-08-23 22:27+0600\n"
+"PO-Revision-Date: 2015-08-23 13:44+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-23 05:16+0000\n"
+"X-Launchpad-Export-Date: 2015-08-24 04:38+0000\n"
 "X-Generator: Launchpad (build 17690)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -205,7 +205,7 @@ msgstr "Ubicació: "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:257
+#: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:376
 msgid "Celestial body:"
 msgstr "Cos celeste:"
 
@@ -335,214 +335,214 @@ msgstr "concentració central densa d'estrelles"
 #: src/core/modules/Nebula.cpp:751
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "nucli intern dens de estrelles"
 
 #: src/core/modules/Nebula.cpp:754
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "concentració rica intermèdia d'estrelles"
 
 #: src/core/modules/Nebula.cpp:759
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "concentració intermèdia d'estrelles"
 
 #: src/core/modules/Nebula.cpp:762
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
-msgstr ""
+msgstr "Més aviat concentració vaga d'estrelles cap al centre"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
-msgstr ""
+msgstr "concentració baixa d'estrelles cap al centre"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "concentració baixa d'estrelles"
 
 #: src/core/modules/Nebula.cpp:771
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "concentració molt baixa d'estrelles cap al centre"
 
 #: src/core/modules/Nebula.cpp:774
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "Gairebé sense concentració cap al centre"
 
 #: src/core/modules/Nebula.cpp:777
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "classe de concentració no documentada"
 
 #: src/core/modules/Nebula.cpp:797
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
-msgstr ""
+msgstr "forta concentració central d'estrelles"
 
 #: src/core/modules/Nebula.cpp:800
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
-msgstr ""
+msgstr "petita concentració central d'estrelles"
 
 #: src/core/modules/Nebula.cpp:803
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
-msgstr ""
+msgstr "sense concentració noticiable d'estrelles"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
-msgstr ""
+msgstr "camp de concentració d'estrelles"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "classe de concentració no documentada"
 
 #: src/core/modules/Nebula.cpp:815
 msgctxt "Trumpler's Brightness Class"
 msgid "small range the brightness of members of cluster"
-msgstr ""
+msgstr "rang petit de brillantor de membres del clúster"
 
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
 msgid "medium range the brightness of members of cluster"
-msgstr ""
+msgstr "rang mitjà de brillantor de membres del clúster"
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "Trumpler's Brightness Class"
 msgid "large range the brightness of members of cluster"
-msgstr ""
+msgstr "rang ample de brillantor de membres del clúster"
 
 #: src/core/modules/Nebula.cpp:824
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented brightness class"
-msgstr ""
+msgstr "classe de brillantor no documentada"
 
 #: src/core/modules/Nebula.cpp:830
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
-msgstr ""
+msgstr "clúster pobre amb menys de 50 estrelles"
 
 #: src/core/modules/Nebula.cpp:833
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
-msgstr ""
+msgstr "clúster moderadament ric amb entre 50 i 100 estrelles"
 
 #: src/core/modules/Nebula.cpp:836
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
-msgstr ""
+msgstr "clúster ric amb més de 100 estrelles"
 
 #: src/core/modules/Nebula.cpp:839
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
-msgstr ""
+msgstr "nombre de membres de la classe no documentat"
 
 #: src/core/modules/Nebula.cpp:843
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
-msgstr ""
+msgstr "el clúster es troba dins de la nebulositat"
 
 #: src/core/modules/Nebula.cpp:864
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
-msgstr ""
+msgstr "molt brillant"
 
 #: src/core/modules/Nebula.cpp:867
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "brillant"
 
 #: src/core/modules/Nebula.cpp:870
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "brillantor moderada"
 
 #: src/core/modules/Nebula.cpp:873
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "feble"
 
 #: src/core/modules/Nebula.cpp:876
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "molt feble"
 
 #: src/core/modules/Nebula.cpp:879
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "brillantor incerta"
 
 #: src/core/modules/Nebula.cpp:882
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
-msgstr ""
+msgstr "brillantor de les nebuloses de reflexió no documentada"
 
 #: src/core/modules/Nebula.cpp:888
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "l'estrella il·luminadora està incrustada en el nebulositat"
 
 #: src/core/modules/Nebula.cpp:891
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
-msgstr ""
+msgstr "estrella localitzada fora de la nebulosa il·luminada"
 
 #: src/core/modules/Nebula.cpp:894
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr ""
+msgstr "estrella localitzada a la cantonada de la nebulosa il·luminada"
 
 #: src/core/modules/Nebula.cpp:897
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "estrella localitzada fora de la peculiar nebulosa il·luminada"
 
 #: src/core/modules/Nebula.cpp:900
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "la peculiar nebulosa il·luminada"
 
 #: src/core/modules/Nebula.cpp:903
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
-msgstr ""
+msgstr "nebuloses de reflexió no documentada"
 
 #: src/core/modules/Nebula.cpp:926
 msgid "circular form"
-msgstr ""
+msgstr "formar circular"
 
 #: src/core/modules/Nebula.cpp:929
 msgid "elliptical form"
-msgstr ""
+msgstr "forma el·líptica"
 
 #: src/core/modules/Nebula.cpp:932
 msgid "irregular form"
-msgstr ""
+msgstr "forma irregular"
 
 #: src/core/modules/Nebula.cpp:935
 msgid "undocumented form"
-msgstr ""
+msgstr "forma no documentada"
 
 #: src/core/modules/Nebula.cpp:941
 msgid "amorphous structure"
-msgstr ""
+msgstr "estructura amorfa"
 
 #: src/core/modules/Nebula.cpp:944
 msgid "conventional structure"
-msgstr ""
+msgstr "estructura convencional"
 
 #: src/core/modules/Nebula.cpp:947
 msgid "filamentary structure"
-msgstr ""
+msgstr "estructura filamentosa"
 
 #: src/core/modules/Nebula.cpp:950
 msgid "undocumented structure"
-msgstr ""
+msgstr "estructura no documentada"
 
 #: src/core/modules/Nebula.cpp:956
 msgctxt "HII region brightness"
@@ -552,7 +552,7 @@ msgstr "molt feble"
 #: src/core/modules/Nebula.cpp:959
 msgctxt "HII region brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "brillantor moderada"
 
 #: src/core/modules/Nebula.cpp:962
 msgctxt "HII region brightness"
@@ -565,19 +565,19 @@ msgstr "brillantor no documentada"
 
 #: src/core/modules/Nebula.cpp:981
 msgid "galaxy"
-msgstr ""
+msgstr "galàxia"
 
 #: src/core/modules/Nebula.cpp:984
 msgid "active galaxy"
-msgstr ""
+msgstr "galàxia activa"
 
 #: src/core/modules/Nebula.cpp:987
 msgid "radio galaxy"
-msgstr ""
+msgstr "radio galàxia"
 
 #: src/core/modules/Nebula.cpp:990
 msgid "interacting galaxy"
-msgstr ""
+msgstr "galàxia interactiva"
 
 #: src/core/modules/Nebula.cpp:993 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
@@ -585,39 +585,39 @@ msgstr "quàsar"
 
 #: src/core/modules/Nebula.cpp:996
 msgid "star cluster"
-msgstr ""
+msgstr "clúster d'estrelles"
 
 #: src/core/modules/Nebula.cpp:999
 msgid "open star cluster"
-msgstr ""
+msgstr "clúster obert d'estrelles"
 
 #: src/core/modules/Nebula.cpp:1002
 msgid "globular star cluster"
-msgstr ""
+msgstr "clúster globular d'estrelles"
 
 #: src/core/modules/Nebula.cpp:1005
 msgid "nebula"
-msgstr ""
+msgstr "nebulosa"
 
 #: src/core/modules/Nebula.cpp:1008
 msgid "planetary nebula"
-msgstr ""
+msgstr "nebulosa planetària"
 
 #: src/core/modules/Nebula.cpp:1011
 msgid "dark nebula"
-msgstr ""
+msgstr "nebulosa fosca"
 
 #: src/core/modules/Nebula.cpp:1014
 msgid "cluster associated with nebulosity"
-msgstr ""
+msgstr "clúster associat amb una nebulositat"
 
 #: src/core/modules/Nebula.cpp:1017
 msgid "bipolar nebula"
-msgstr ""
+msgstr "nebulosa bipolar"
 
 #: src/core/modules/Nebula.cpp:1020
 msgid "emission nebula"
-msgstr ""
+msgstr "nebulosa d'emissió"
 
 #: src/core/modules/Nebula.cpp:1023
 msgid "HII region"
@@ -625,51 +625,51 @@ msgstr "Regió HII"
 
 #: src/core/modules/Nebula.cpp:1026
 msgid "reflection nebula"
-msgstr ""
+msgstr "nebulosa de reflexió"
 
 #: src/core/modules/Nebula.cpp:1029
 msgid "supernova remnant"
-msgstr ""
+msgstr "restes d'una supernova"
 
 #: src/core/modules/Nebula.cpp:1032
 msgid "stellar association"
-msgstr ""
+msgstr "associació estel·lar"
 
 #: src/core/modules/Nebula.cpp:1035
 msgid "star cloud"
-msgstr ""
+msgstr "núvol estel·lar"
 
 #: src/core/modules/Nebula.cpp:1038
 msgid "interstellar matter"
-msgstr ""
+msgstr "matèria interestel·lar"
 
 #: src/core/modules/Nebula.cpp:1041
 msgid "emission object"
-msgstr ""
+msgstr "objecte emissor"
 
 #: src/core/modules/Nebula.cpp:1044
 msgid "BL Lac object"
-msgstr ""
+msgstr "objecte BL Lac"
 
 #: src/core/modules/Nebula.cpp:1047
 msgid "blazar"
-msgstr ""
+msgstr "blàzar"
 
 #: src/core/modules/Nebula.cpp:1050
 msgid "molecular cloud"
-msgstr ""
+msgstr "núvol molecular"
 
 #: src/core/modules/Nebula.cpp:1053
 msgid "young stellar object"
-msgstr ""
+msgstr "objecte estel·lar jove"
 
 #: src/core/modules/Nebula.cpp:1056
 msgid "possible quasar"
-msgstr ""
+msgstr "possible quàsar"
 
 #: src/core/modules/Nebula.cpp:1059
 msgid "possible planetary nebula"
-msgstr ""
+msgstr "possible nebulosa planetària"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1062 src/core/modules/StarWrapper.cpp:50
@@ -679,11 +679,11 @@ msgstr "estrella"
 
 #: src/core/modules/Nebula.cpp:1065
 msgid "object of unknown nature"
-msgstr ""
+msgstr "objecte de naturalesa desconeguda"
 
 #: src/core/modules/Nebula.cpp:1068
 msgid "undocumented type"
-msgstr ""
+msgstr "tipus no documentat"
 
 #: src/core/modules/NebulaMgr.cpp:224
 msgid "Deep-sky objects"
@@ -740,19 +740,19 @@ msgstr "El període de rotació és caòtic"
 
 #: src/core/modules/Planet.cpp:314
 msgid "New Moon"
-msgstr ""
+msgstr "Lluna nova"
 
 #: src/core/modules/Planet.cpp:316
 msgid "Last Quarter"
-msgstr ""
+msgstr "Lluna en quart minvant"
 
 #: src/core/modules/Planet.cpp:318
 msgid "Full Moon"
-msgstr ""
+msgstr "Lluna plena"
 
 #: src/core/modules/Planet.cpp:320
 msgid "First Quarter"
-msgstr ""
+msgstr "Lluna en quart creixent"
 
 #: src/core/modules/Planet.cpp:322
 #, qt-format
@@ -821,8 +821,8 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "La longitud de la cua de gas (estimat): %1 M km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:176 src/translations.h:62
-#: src/ui_viewDialog.h:1582
+#: src/core/modules/SolarSystem.cpp:176 src/gui/AstroCalcDialog.cpp:415
+#: src/translations.h:62 src/ui_viewDialog.h:1582
 msgid "Planets"
 msgstr "Planetes"
 
@@ -929,8 +929,8 @@ msgstr "Mode nocturn"
 
 #. TRANSLATORS: name of object
 #: src/core/StelCore.cpp:199 src/gui/StelGui.cpp:183
-#: src/gui/AstroCalcDialog.cpp:222 src/ui_dateTimeDialogGui.h:376
-#: src/ui_dateTimeDialogGui.h:379
+#: src/gui/AstroCalcDialog.cpp:233 src/gui/AstroCalcDialog.cpp:437
+#: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "Data i hora"
@@ -1001,7 +1001,7 @@ msgstr "Afegeix 1 any sideral"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "Afegir 100 anys siderals"
 
 #: src/core/StelCore.cpp:219
 msgid "Add 1 synodic month"
@@ -1021,11 +1021,11 @@ msgstr "Afegir un mes anomalísti"
 
 #: src/core/StelCore.cpp:223
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "Afegir 1 any anomalístic"
 
 #: src/core/StelCore.cpp:224
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "Afegir 100 any anomalístics"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 mean tropical month"
@@ -1037,23 +1037,23 @@ msgstr "Afegir un any tropical mitjà"
 
 #: src/core/StelCore.cpp:227
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "Afegir 100 anys tropicals mitjans"
 
 #: src/core/StelCore.cpp:228
 msgid "Add 1 tropical year"
-msgstr ""
+msgstr "Afegir 1 any tropical"
 
 #: src/core/StelCore.cpp:229
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "Afegir 1 any Julià"
 
 #: src/core/StelCore.cpp:230
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "Afegir 1 centúria Juliana"
 
 #: src/core/StelCore.cpp:231
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "Afegir 1 any Gaussià"
 
 #: src/core/StelCore.cpp:232
 msgid "Subtract 1 sidereal day"
@@ -1065,7 +1065,7 @@ msgstr "Resta 1 any sideral"
 
 #: src/core/StelCore.cpp:234
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "Restar 100 anys siderals"
 
 #: src/core/StelCore.cpp:235
 msgid "Subtract 1 synodic month"
@@ -1085,11 +1085,11 @@ msgstr "Resta un mes anomalístic"
 
 #: src/core/StelCore.cpp:239
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "Restar 1 any anomalístic"
 
 #: src/core/StelCore.cpp:240
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "Restar 100 anys anomalístics"
 
 #: src/core/StelCore.cpp:241
 msgid "Subtract 1 mean tropical month"
@@ -1101,23 +1101,23 @@ msgstr "Resta una any tropical mitjà"
 
 #: src/core/StelCore.cpp:243
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "Restar 100 anys tropicals mitjans"
 
 #: src/core/StelCore.cpp:244
 msgid "Subtract 1 tropical year"
-msgstr ""
+msgstr "Restar 1 any tropical"
 
 #: src/core/StelCore.cpp:245
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "Restar 1 any Julià"
 
 #: src/core/StelCore.cpp:246
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "Restar 1 centúria Juliana"
 
 #: src/core/StelCore.cpp:247
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "Restar 1 any Gaussià"
 
 #: src/core/StelCore.cpp:249
 msgid "Set home planet to selected planet"
@@ -1415,7 +1415,7 @@ msgstr "Fet servir per omissió."
 
 #: src/core/StelCore.cpp:1736
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
-msgstr ""
+msgstr "VERSIÓ APEDAÇADA SENSE ACCELERACIÓ LUNAR ADDICIONAL"
 
 #: src/core/StelCore.cpp:1739
 #, qt-format
@@ -1666,12 +1666,12 @@ msgstr "Longitud/latitud galàctica: %1/%2"
 #: src/core/StelObject.cpp:251
 #, qt-format
 msgid "Mean Sidereal Time: %1"
-msgstr ""
+msgstr "Mitjana de Temps Sideral: %1"
 
 #: src/core/StelObject.cpp:253
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
-msgstr ""
+msgstr "Temps Sideral aparent: %1"
 
 #: src/core/StelSkyLayerMgr.cpp:88
 msgid "Deep-sky objects background images"
@@ -2224,7 +2224,7 @@ msgstr "Finestra de dreceres"
 
 #: src/gui/StelGui.cpp:205
 msgid "AstroCalc window"
-msgstr ""
+msgstr "Finestra d'AstroCalc"
 
 #: src/gui/StelGui.cpp:206
 msgid "Copy selected object information to clipboard"
@@ -2254,11 +2254,11 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "distància planetocèntrica %1 km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
-msgstr ""
+msgstr "observador planetocèntric"
 
 #: src/gui/StelGuiItems.cpp:657
 msgid "Field of view"
@@ -2582,7 +2582,7 @@ msgid "year"
 msgstr "any"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:114 src/ui_configurationDialog.h:1074
+#: src/gui/AstroCalcDialog.cpp:125 src/ui_configurationDialog.h:1074
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
@@ -2590,75 +2590,158 @@ msgid "Name"
 msgstr "Nom"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:116 src/gui/AstroCalcDialog.cpp:225
+#: src/gui/AstroCalcDialog.cpp:127 src/gui/AstroCalcDialog.cpp:236
 msgid "RA (J2000)"
-msgstr ""
+msgstr "AR (J2000)"
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:118 src/gui/AstroCalcDialog.cpp:227
+#: src/gui/AstroCalcDialog.cpp:129 src/gui/AstroCalcDialog.cpp:238
 msgid "Dec (J2000)"
-msgstr ""
+msgstr "Dec (J2000)"
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:120 src/gui/AstroCalcDialog.cpp:229
+#: src/gui/AstroCalcDialog.cpp:131 src/gui/AstroCalcDialog.cpp:240
 msgid "Mag."
-msgstr ""
+msgstr "Mag."
 
 #. TRANSLATORS: type of object
-#: src/gui/AstroCalcDialog.cpp:122 src/ui_configurationDialog.h:1094
+#. TRANSLATORS: type of phenomena
+#: src/gui/AstroCalcDialog.cpp:133 src/gui/AstroCalcDialog.cpp:436
+#: src/ui_configurationDialog.h:1094
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 msgid "Type"
 msgstr "Tipus"
 
-#: src/gui/AstroCalcDialog.cpp:223
+#: src/gui/AstroCalcDialog.cpp:234
 msgid "JD"
-msgstr ""
+msgstr "DJ"
 
-#: src/gui/AstroCalcDialog.cpp:351
+#: src/gui/AstroCalcDialog.cpp:362
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minuts"
 
-#: src/gui/AstroCalcDialog.cpp:352
+#: src/gui/AstroCalcDialog.cpp:363
 msgid "1 hour"
-msgstr ""
+msgstr "1 hora"
 
-#: src/gui/AstroCalcDialog.cpp:353
+#: src/gui/AstroCalcDialog.cpp:364
 msgid "1 day"
-msgstr ""
+msgstr "1 dia"
 
-#: src/gui/AstroCalcDialog.cpp:354
+#: src/gui/AstroCalcDialog.cpp:365
 msgid "10 days"
-msgstr ""
+msgstr "10 dies"
 
-#: src/gui/AstroCalcDialog.cpp:355
+#: src/gui/AstroCalcDialog.cpp:366
 msgid "30 days"
+msgstr "30 dies"
+
+#: src/gui/AstroCalcDialog.cpp:414
+msgid "Solar system"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:367 src/ui_astroCalcDialog.h:251
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:416 src/translations.h:66
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
+msgid "Asteroids"
+msgstr "Asteroides"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:417 src/translations.h:70
+msgid "Plutinos"
+msgstr "Plutins"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:418 src/translations.h:64
+#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
+msgid "Comets"
+msgstr "Cometes"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:419 src/translations.h:72
+msgid "Dwarf planets"
+msgstr "Planetes nans"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:420 src/translations.h:74
+msgid "Cubewanos"
+msgstr "Cubewanos"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:76
+msgid "Scattered disc objects"
+msgstr "Objectes de disc dispers"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/gui/AstroCalcDialog.cpp:422 src/translations.h:78
+msgid "Oort cloud objects"
+msgstr "Objectes del núvol d'Oort"
+
+#: src/gui/AstroCalcDialog.cpp:438
+msgid "Object 1"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:439
+msgid "Object 2"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:440
+msgid "Separation"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:595
+msgid "Conjunction"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:599
+msgid "Opposition"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:741 src/ui_astroCalcDialog.h:370
 msgid "AstroCalc"
-msgstr ""
+msgstr "AstroCalc"
 
-#: src/gui/AstroCalcDialog.cpp:367
+#: src/gui/AstroCalcDialog.cpp:741
 msgid ""
 "a tool for calculating planetary phenomena and which contains few modules."
 msgstr ""
+"una eina per al càlcul dels fenòmens planetaris i que conté uns mòduls."
 
-#: src/gui/AstroCalcDialog.cpp:369 src/ui_astroCalcDialog.h:256
+#: src/gui/AstroCalcDialog.cpp:743 src/ui_astroCalcDialog.h:375
 msgid "Planetary positions"
-msgstr ""
+msgstr "Posicions planetàries"
 
-#: src/gui/AstroCalcDialog.cpp:369
+#: src/gui/AstroCalcDialog.cpp:743
 msgid "a tool for displaying planetary positions every 5 minutes."
 msgstr ""
+"una eina per a la visualització de les posicions planetàries cada 5 minuts."
 
-#: src/gui/AstroCalcDialog.cpp:370 src/ui_astroCalcDialog.h:263
+#: src/gui/AstroCalcDialog.cpp:744 src/ui_astroCalcDialog.h:384
 msgid "Ephemeris"
-msgstr ""
+msgstr "Efemèrides"
 
-#: src/gui/AstroCalcDialog.cpp:370
+#: src/gui/AstroCalcDialog.cpp:744
 msgid ""
 "a tool for calculation ephemeris of celestial bodies for different time "
 "ranges and steps of the time."
+msgstr ""
+"una eina per al càlcul d'efemèrides dels cossos celestes per a diferents "
+"rangs de temps i èpoques."
+
+#: src/gui/AstroCalcDialog.cpp:745 src/ui_astroCalcDialog.h:393
+msgid "Phenomena"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:745
+msgid ""
+"a tool for calculation phenomena of celestial bodies (conjunctions and "
+"oppositions) for different time ranges."
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:745
+msgid ""
+"Important note: calculations can be slow when for calculation used many "
+"celestial bodies."
 msgstr ""
 
 #: src/StelMainView.cpp:358 src/StelMainView.cpp:373
@@ -2807,46 +2890,9 @@ msgid "Oort cloud object"
 msgstr "objecte del núvol d'Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:64
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
-msgid "Comets"
-msgstr "Cometes"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:66
-#: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
-msgid "Asteroids"
-msgstr "Asteroides"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:68
 msgid "Moons"
 msgstr "Llunes"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:70
-msgid "Plutinos"
-msgstr "Plutins"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:72
-msgid "Dwarf planets"
-msgstr "Planetes nans"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:74
-msgid "Cubewanos"
-msgstr "Cubewanos"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:76
-msgid "Scattered disc objects"
-msgstr "Objectes de disc dispers"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:78
-msgid "Oort cloud objects"
-msgstr "Objectes del núvol d'Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
@@ -2896,82 +2942,82 @@ msgstr "Nebuloses de reflexió"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101 src/ui_viewDialog.h:1668
 msgid "Active galaxies"
-msgstr ""
+msgstr "Galàxies actives"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "Radio galaxies"
-msgstr ""
+msgstr "Radio galàxies"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105 src/ui_viewDialog.h:1662
 msgid "Interacting galaxies"
-msgstr ""
+msgstr "Galàxies interactives"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
 msgid "Bright quasars"
-msgstr ""
+msgstr "Quàsar brillants"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109 src/ui_viewDialog.h:1665
 msgid "Star clusters"
-msgstr ""
+msgstr "Clúster d'estrelles"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Stellar associations"
-msgstr ""
+msgstr "Associacions estel·lars"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Star clouds"
-msgstr ""
+msgstr "Núvols d'estrelles"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Bipolar nebulae"
-msgstr ""
+msgstr "Nebulosa bipolar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Emission nebulae"
-msgstr ""
+msgstr "Nebulosa d'emissió"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119 src/ui_viewDialog.h:1661
 msgid "Supernova remnants"
-msgstr ""
+msgstr "Romanents de supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Interstellar matter"
-msgstr ""
+msgstr "Matèria interestel·lar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Emission objects"
-msgstr ""
+msgstr "Objectes emissors"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "BL Lac objects"
-msgstr ""
+msgstr "Objectes BL Lac"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "Blazars"
-msgstr ""
+msgstr "Blàzars"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
 msgid "Molecular Clouds"
-msgstr ""
+msgstr "Núvols molecutars"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
 msgid "Young Stellar Objects"
-msgstr ""
+msgstr "Objectes Estel·lars joves"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:133 src/ui_viewDialog.h:1625
@@ -4550,11 +4596,11 @@ msgstr "Data i hora al calendari Gregorià"
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
-msgstr ""
+msgstr "Dia Julià"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
-msgstr ""
+msgstr "Dia Julià modificat"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -4870,7 +4916,7 @@ msgstr "Limit de la magnitud dels estels"
 
 #: src/ui_viewDialog.h:1563 src/ui_viewDialog.h:1685
 msgid "Limit magnitude"
-msgstr ""
+msgstr "Límit de magnitud"
 
 #: src/ui_viewDialog.h:1565
 msgid "Dim faint stars when a very bright object is visible"
@@ -4934,20 +4980,24 @@ msgid ""
 "Deactivate this option if you want to see orbits for selected planet and "
 "their moons."
 msgstr ""
+"Desactiva aquesta opció si vols veure les orbites per el planeta seleccionat "
+"i les seves llunes"
 
 #: src/ui_viewDialog.h:1591
 msgid "Show orbit for selected planet"
-msgstr ""
+msgstr "Mostar l'òrbita del planeta seleccionat"
 
 #: src/ui_viewDialog.h:1593
 msgid ""
 "Deactivate this option if you want to see the trails for all celestial "
 "bodies from Solar system."
 msgstr ""
+"Desactiva aquesta opció si vols veure les traces per tots els cossos "
+"celestes del sistema Solar."
 
 #: src/ui_viewDialog.h:1595
 msgid "Show trail for selected planet"
-msgstr ""
+msgstr "Mostra la traça per el planeta seleccionat"
 
 #: src/ui_viewDialog.h:1596
 msgid "Simulate light speed"
@@ -4988,70 +5038,73 @@ msgstr "THZ:"
 
 #: src/ui_viewDialog.h:1614
 msgid "Display objects from catalogs"
-msgstr ""
+msgstr "Mostrar objectes dels catàlegs"
 
 #: src/ui_viewDialog.h:1616
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
-msgstr ""
+msgstr "Índex del Catàleg de Nebuloses i Clúster d'estrelles"
 
 #: src/ui_viewDialog.h:1619
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
-msgstr ""
+msgstr "Nou Catàleg General de Nebuloses i Clúster d'estrelles"
 
 #: src/ui_viewDialog.h:1622
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
-msgstr ""
+msgstr "Catàleg de Lynd de Nebuloses Brillants (Lynds, 1965)"
 
 #: src/ui_viewDialog.h:1631
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
-msgstr ""
+msgstr "Catàleg Barnard de 349 Objectes Foscos al Cel (Barnard, 1927)"
 
 #: src/ui_viewDialog.h:1634
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
-msgstr ""
+msgstr "Catàleg de Regions HII (Sharpless, 1959)"
 
 #: src/ui_viewDialog.h:1637
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
-msgstr ""
+msgstr "Catàleg de Nebuloses de Reflexió (Van den Bergh, 1966)"
 
 #: src/ui_viewDialog.h:1640
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
+"Un catàleg de regions d'emissió Hα al sud de la Via Làctia  (Rodgers+, 1960)"
 
 #: src/ui_viewDialog.h:1643
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
-msgstr ""
+msgstr "Catàleg de Lynd de Nebuloses Fosques (Lynds, 1962)"
 
 #: src/ui_viewDialog.h:1646
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
-msgstr ""
+msgstr "Catàleg de Clústers Galàctic Oberts (Collinder, 1931)"
 
 #: src/ui_viewDialog.h:1649
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
+"Un Catàleg de Clústers d'Estrelles mostrat a unes plaques de Franklin-Adams "
+"(Melotte, 1915)"
 
 #: src/ui_viewDialog.h:1652
 msgid "Catalog of galaxies"
-msgstr ""
+msgstr "Catàleg de galàxies"
 
 #: src/ui_viewDialog.h:1655
 msgid "The Uppsala General Catalogue of Galaxies"
-msgstr ""
+msgstr "El Catàleg General de Galàxies d'Uppsala"
 
 #: src/ui_viewDialog.h:1658
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr ""
+msgstr "Catàleg de nebuloses Galàctiques difoses brillants (Cederblad, 1946)"
 
 #: src/ui_viewDialog.h:1660
 msgid "Filter by type"
-msgstr ""
+msgstr "Filtrar per tipus"
 
 #: src/ui_viewDialog.h:1663
 msgid "Hydrogen regions"
-msgstr ""
+msgstr "Regions d'hidrogen"
 
 #: src/ui_viewDialog.h:1664
 msgid "Other"
@@ -5059,46 +5112,52 @@ msgstr "Altre"
 
 #: src/ui_viewDialog.h:1666
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Nebuloses planetàries"
 
 #: src/ui_viewDialog.h:1667
 msgid "Galaxies"
-msgstr ""
+msgstr "Galàxies"
 
 #: src/ui_viewDialog.h:1669
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Nebuloses Fosques"
 
 #: src/ui_viewDialog.h:1670
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Nebuloses Brillants"
 
 #: src/ui_viewDialog.h:1673
 msgid "Hints"
-msgstr ""
+msgstr "Consells"
 
 #: src/ui_viewDialog.h:1675
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
+"Utilitzar brillantor de la superfície dels objectes de cel profund per "
+"l'escala de la visibilitat dels seus marcadors i etiquetes."
 
 #: src/ui_viewDialog.h:1677
 msgid "Use surface brightness"
-msgstr ""
+msgstr "Utilitzar brillantor de la superfície"
 
 #: src/ui_viewDialog.h:1679
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
+"Utilitza consells proporcionals a la mida angular dels objectes de cel "
+"profund"
 
 #: src/ui_viewDialog.h:1681
 msgid "Use proportional hints"
-msgstr ""
+msgstr "Utilització de consells proporcionals"
 
 #: src/ui_viewDialog.h:1683
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
+"Magnitud límit d'objectes de cel profund (per als observadors d'ull "
+"nu/binoculars)."
 
 #: src/ui_viewDialog.h:1686
 msgid "Constellations"
@@ -5337,11 +5396,11 @@ msgstr "Cel"
 #: src/ui_viewDialog.h:1798
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr ""
+msgstr "OCP"
 
 #: src/ui_viewDialog.h:1800
 msgid "Deep-Sky Objects"
-msgstr ""
+msgstr "Objectes del Cel Profund"
 
 #: src/ui_viewDialog.h:1803
 msgid "Markings"
@@ -5717,30 +5776,36 @@ msgstr "Utilitzeu graus decimals"
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
+"Nutació és un petit balanceig de l'eix de la Terra,  d'una magnitud d'uns "
+"segons d'arc."
 
 #: src/ui_configurationDialog.h:1191
 msgid "Include nutation"
-msgstr ""
+msgstr "Incloure nutació"
 
 #: src/ui_configurationDialog.h:1193
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
+"Activa per veure com es veu des de la superfície del planeta (recomanat). Si "
+"es desconnecta, mostrar la vista planetocéntrica."
 
 #: src/ui_configurationDialog.h:1195
 msgid "Topocentric coordinates"
-msgstr ""
+msgstr "Coordenades topocèntriques"
 
 #: src/ui_configurationDialog.h:1197
 msgid ""
 "Activate this option to calculate azimuth from south towards west (as in old "
 "astronomical literature)."
 msgstr ""
+"Habiliteu aquesta opció per calcular l'azimut des del sud cap a l'oest (com "
+"en la literatura astronòmica antiga)."
 
 #: src/ui_configurationDialog.h:1199
 msgid "Azimuth from South"
-msgstr ""
+msgstr "Azimuth del Sud"
 
 #: src/ui_configurationDialog.h:1200
 msgid "Screenshots"
@@ -5959,32 +6024,56 @@ msgstr "Inclou el directori:"
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:254 plugins/Oculars/src/ui_ocularDialog.h:1091
+#: src/ui_astroCalcDialog.h:373 plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "Opcions generals"
 
-#: src/ui_astroCalcDialog.h:255
+#: src/ui_astroCalcDialog.h:374
 msgid "Planetary positions every 5 minutes."
-msgstr ""
+msgstr "Posicions planetàries cada 5 minuts."
 
-#: src/ui_astroCalcDialog.h:259
+#: src/ui_astroCalcDialog.h:378
 msgid "Time step:"
-msgstr ""
+msgstr "Pas de temps:"
 
-#: src/ui_astroCalcDialog.h:260
+#: src/ui_astroCalcDialog.h:379 src/ui_astroCalcDialog.h:387
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "Des de"
 
-#: src/ui_astroCalcDialog.h:261
+#: src/ui_astroCalcDialog.h:380 src/ui_astroCalcDialog.h:382
+msgid "yyyy.MM.dd hh:mm"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:381 src/ui_astroCalcDialog.h:389
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "Per a:"
 
-#: src/ui_astroCalcDialog.h:262
+#: src/ui_astroCalcDialog.h:383
 msgid "Calculate ephemeris"
+msgstr "Calcula efemèrides"
+
+#: src/ui_astroCalcDialog.h:385
+msgid "Between objects:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:386
+msgid "and"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:388 src/ui_astroCalcDialog.h:390
+msgid "yyyy.MM.dd"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:391
+msgid "Maximum allowed separation:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:392
+msgid "Calculate phenomena"
 msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
@@ -7059,7 +7148,7 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:396
 msgid "Stellarium Satellites Plugin"
-msgstr "Afegits de satèl·lits de Stellarium"
+msgstr "Connectors de satèl·lits de Stellarium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
 msgid ""
@@ -8290,8 +8379,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Plugin d'aplicació de la sèrie 0.9.x interfície d'usuari (IU), utilitzats en "
-"sistemes de planetari"
+"Implementació del connector de Text d'Interfície d'Usuari (TIU) de la sèrie "
+"0.9.x, fet servir en sistemes de planetari"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
@@ -8483,6 +8572,9 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
+"Una interfície per afegir asteroides i cometes a Stellarium. Es pot "
+"descarregar llistes d'objectes de la pàgina web del Centre de Planetes "
+"Menors i fer cerques a la base de dades en línia."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
@@ -8988,8 +9080,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
-"Si voleu llegir la informació completa sobre aquest plugin, la seva història "
-"i el format del catàleg, pots aconseguir informació %1 aquí %2."
+"Si voleu llegir la informació completa sobre aquest connector, la seva "
+"història i el format del catàleg, pots aconseguir informació %1 aquí %2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
 msgid "Quasars is updated"
@@ -9701,8 +9793,8 @@ msgstr ""
 "través de l'any. Un objecte se suposa que és observable si està per sobre de "
 "l'horitzó durant una fracció de la nit. També s'inclouen les dates de la "
 "major separació del Sol i els valors acrònics i còsmics de l'ortus i l'ocàs. "
-"(La informació es proporcionada a la pestanya \"Quant a\" Ode la finestra de "
-"configuració del plug-in.)"
+"(La informació es proporcionada a la pestanya \"Quant a\"  a la finestra de "
+"configuració del connector)"
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
@@ -10068,24 +10160,6 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation "
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"El programa calcula l'interval de dates quan l'objecte celeste està per "
-"sobre de l'horitzó, com a mínim durant un moment de la nit. Per 'nit', el "
-"programa considera que el lapse de temps quan l'altitud del sol és inferior "
-"a la del crepuscle (que pot ser ajustat per l'usuari, consulteu més amunt). "
-"Quan els objectes estan fixos al cel (o són planetes exteriors), el rang de "
-"les èpoques observables per al'any en curs pot tenir dues formes possibles: "
-"o bé una sèrie d'una data a una altra (per exemple, des del 20 de Gener al "
-"15 de Setembre) o en dos passos (d'1 de Gener a una data determinada i d'una "
-"altra data al 31 de Desembre). En el primer cas, la primera data (20 de "
-"Gener en el nostre exemple) ha d'estar a prop del \"ortus helíac d'una "
-"estrella\" i la segona data (15 September en el nostre exemple) ha d'estar a "
-"prop del \"ocàs helíac\" . En el segon cas (per exemple, un rang de l'1 de "
-"Gener  al 20 de Maig i del 21 de Setembre al 31 de Desembre), la primera "
-"data (20 de Maig en el nostre exemple) s'aproparia al ocàs helíac i la "
-"segona (21 de Setembre al nostre exemple) al ortus helíac. Equacions més "
-"exactes per estimar l'ortus/ocàs helíac de les estrelles i els planetes (que "
-"no depenen de la mera entrada de l'elevació del Sol en el crepuscle) "
-"s'implementaran en futures versions d'aquest connector."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Full Moon:"
@@ -10302,20 +10376,20 @@ msgstr "Mida de la font:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:98
 msgid "The current catalog of Meteor Showers is invalid!"
-msgstr ""
+msgstr "El catàleg de Pluja de Meteors es invàlid!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:569
 msgid "Meteor Showers"
-msgstr "Pluja de meteors"
+msgstr "Pluja de Meteors"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "Commuta pluja de meteors"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "Commuta etiquetes dels radiants"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
@@ -10324,11 +10398,11 @@ msgstr "Show settings dialog"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:154
 msgid "Show search dialog"
-msgstr ""
+msgstr "Mostra diàleg de cerca"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:260
 msgid "Using the default Meteor Showers catalog."
-msgstr ""
+msgstr "Utilitzant el catàleg per defecte de Pluja de Meteors"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:573
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:214
@@ -10347,11 +10421,24 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p> Aquest connector us permet simular les pluges de meteors periòdiques i "
+"permet mostrar un marcador per a cada radiant actiu i inactiu.</p> <p> Amb "
+"un sol clic al marcador del radiant, es pot veure tots els detalls sobre la "
+"seva posició i activitat. La majoria de les dades utilitzades en aquest "
+"connector ve del catàleg <a oficial href=\"http://imo.net\">International "
+"Meteor Organization</a> </p> <p> Té tres tipus de marcadors: <ul> <li> <b> "
+"Confirmat: </b> el radiant està actiu i les seves dades estan confirmades. "
+"Per tant, és una pluja de meteors amb història (ha succeït en el passat) o "
+"predicció.</ li> <li> <b> Genèric:. </ B> el radiant està actiu, però les "
+"seves dades no estan confirmades. Això vol dir que això pot passar a la vida "
+"real, però que no tenim dades reals sobre la seva activitat a del cel  "
+"aquest any</ li> <li> <b>Inactiu :. </b> el radiant està inactiu per a la "
+"data actual. </li> </ul> </p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr ""
+msgstr "Confirmat"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:132
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
@@ -10364,15 +10451,15 @@ msgstr "dades genèriques"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:495
 msgid "confirmed data"
-msgstr ""
+msgstr "data confirmada"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:499
 msgid "inactive"
-msgstr ""
+msgstr "inactiu"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:517
 msgid "meteor shower"
-msgstr "pluja de meteorits"
+msgstr "pluja de meteors"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "Radiant drift (per day)"
@@ -10408,7 +10495,7 @@ msgstr "Màxim: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:567
 msgid "Solar longitude"
-msgstr ""
+msgstr "Longitud Solar"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "variable"
@@ -10826,23 +10913,23 @@ msgstr "Planeta menor (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
-msgstr ""
+msgstr "Actualitzant..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
 msgid "Successfully updated!"
-msgstr ""
+msgstr "Actualització exitosa!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:139
 msgid "Failed!"
-msgstr ""
+msgstr "Ha fallat!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:143
 msgid "Outdated!"
-msgstr ""
+msgstr "No actualitzat!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
-msgstr "Connector de pluja de meteorits"
+msgstr "Connector de pluja de meteors"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:246
 msgid "Terms"
@@ -10850,7 +10937,7 @@ msgstr "Termes"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:247
 msgid "Meteor shower"
-msgstr "pluja de meteorits"
+msgstr "pluja de meteors"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:249
 msgid ""
@@ -10885,10 +10972,10 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
-"El radiant o el radiant aparent d'una pluja de meteorits és el punt en el "
-"cel, d'on (per a un observador planetari) els meteors semblen originar-se. "
-"Les Perseides, per exemple, són meteors que semblen provenir d'un punt dins "
-"de la constel·lació de Perseu."
+"El radiant o el radiant aparent d'una pluja de meteors és el punt en el cel, "
+"d'on (per a un observador planetari) els meteors semblen originar-se. Les "
+"Perseides, per exemple, són meteors que semblen provenir d'un punt dins de "
+"la constel·lació de Perseu."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:265
 msgid ""
@@ -10925,7 +11012,7 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
-"En astronomia, la Taxa Horària Zenital (THZ) d'una pluja de meteorits és el "
+"En astronomia, la Taxa Horària Zenital (THZ) d'una pluja de meteors és el "
 "nombre de meteors que un sol observador podria veure en una hora sota un cel "
 "clar i fosc (limitant la magnitud aparent a 6,5) si el punt radiant de la "
 "pluja fos al zenit. La taxa efectiva que es pot veure és gairebé sempre "
@@ -10957,6 +11044,8 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
+"Aquest connector va ser creat inicialment com un projecte de l'ESA Summer of "
+"Code in Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
 msgid "Info"
@@ -10984,6 +11073,8 @@ msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"El suport es realitza a través de la pàgina web de Launchpad. Assegureu-vos "
+"de posar \"%1\" en l'assumpte al publicar."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:105
 msgid "Start date greater than end date!"
@@ -11012,23 +11103,23 @@ msgstr "Configuració de Pluges de Meteors"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "Pluja de Meteors: Ajustaments"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "Arranjaments generals"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "Activar connector al iniciar"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "Mostar un botó per activar/desactivar el connector"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "Mostra un botó per obrir el panel de cerca"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
@@ -11064,31 +11155,31 @@ msgstr "Inactiu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "Radiant Actiu - Data Confirmada"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "Activar actualitzacions automàtiques"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "Propera actualització:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "Últim intent per actualitzar"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "Estat:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "Actualitza"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "Pluja de Meteors: Cerca"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
