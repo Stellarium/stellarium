@@ -20,8 +20,11 @@
 #ifndef SYNCSERVER_HPP_
 #define SYNCSERVER_HPP_
 
+#include "SyncProtocol.hpp"
 #include <QObject>
 #include <QAbstractSocket>
+#include <QDateTime>
+#include <QUuid>
 
 class QTcpServer;
 
@@ -34,6 +37,8 @@ public:
 	SyncServer(QObject* parent = 0);
 	virtual ~SyncServer();
 
+	//! Broadcasts this message to all connected and authenticated clients
+	void broadcastMessage(const SyncProtocol::SyncMessage& msg);
 public slots:
 	//! Starts the SyncServer on the specified port. If the server is already running, stops it first.
 	//! Returns true if successful (false usually means port was in use, use getErrorString)
@@ -42,20 +47,31 @@ public slots:
 	void stop();
 	//! Returns a string of the last server error.
 	QString errorString() const;
+
+protected:
+	void timerEvent(QTimerEvent* evt) Q_DECL_OVERRIDE;
 private slots:
 	void handleNewConnection();
 	void connectionError(QAbstractSocket::SocketError err);
 
+	//! On receipt of new client data
+	void clientDataReceived();
 	void clientError(QAbstractSocket::SocketError);
 	void clientDisconnected();
 
 private:
+	void checkTimeouts();
 	void clientLog(QAbstractSocket* cl, const QString& msg);
 	//use composition instead of inheritance, cleaner interfaace this way
 	//for now, we use TCP, but will test multicast UDP later if the basic setup is working
 	QTcpServer* qserver;
+	QVector<SyncProtocol::SyncMessageHandler*> handlerList;
 
-	QList<QAbstractSocket*> clients;
+	// a map to associate sockets with the client data
+	typedef QMap<QAbstractSocket*,SyncProtocol::SyncRemotePeer> tClientMap;
+	tClientMap clients;
+
+	int timeoutTimerId;
 };
 
 #endif

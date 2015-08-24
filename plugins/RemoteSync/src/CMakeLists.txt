@@ -6,8 +6,16 @@ SET(RemoteSync_SRCS
   RemoteSync.cpp
   SyncClient.hpp
   SyncClient.cpp
+  SyncClientHandlers.hpp
+  SyncClientHandlers.cpp
+  SyncMessages.hpp
+  SyncMessages.cpp
+  SyncProtocol.hpp
+  SyncProtocol.cpp
   SyncServer.hpp
   SyncServer.cpp
+  SyncServerHandlers.hpp
+  SyncServerHandlers.cpp
   gui/RemoteSyncDialog.hpp
   gui/RemoteSyncDialog.cpp
 )
