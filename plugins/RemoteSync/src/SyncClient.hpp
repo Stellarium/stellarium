@@ -22,7 +22,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
-#include <QTimer>
+#include <SyncProtocol.hpp>
 
 //! A client which can connect to a SyncServer to receive state changes, and apply them
 class SyncClient : public QObject
@@ -39,21 +39,28 @@ public:
 public slots:
 	void connectToServer(const QString& host, const int port);
 	void disconnectFromServer();
+
+protected:
+	void timerEvent(QTimerEvent* evt) Q_DECL_OVERRIDE;
 signals:
 	void connected();
 	void disconnected();
 	void connectionError();
 private slots:
 	void dataReceived();
-	void timeoutOccurred();
 	void socketConnected();
 	void socketDisconnected();
 	void socketError(QAbstractSocket::SocketError err);
+	void emitError(const QString& msg);
+
 private:
+	void checkTimeout();
+
 	QString errorStr;
 	bool isConnecting;
-	QTcpSocket* qsocket;
-	QTimer* timeoutTimer;
+	SyncProtocol::SyncRemotePeer* server;
+	int timeoutTimerId;
+	QVector<SyncProtocol::SyncMessageHandler*> handlerList;
 };
 
 

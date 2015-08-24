@@ -18,104 +18,163 @@
  */
 
 #include "SyncClient.hpp"
+#include "SyncClientHandlers.hpp"
+#include "SyncMessages.hpp"
+
+#include "StelTranslator.hpp"
+
+#include <QDateTime>
 #include <QTcpSocket>
+#include <QTimerEvent>
+
+using namespace SyncProtocol;
 
 SyncClient::SyncClient(QObject *parent)
-	: QObject(parent), isConnecting(false)
+	: QObject(parent), isConnecting(false), server(NULL), timeoutTimerId(-1)
 {
-	timeoutTimer = new QTimer(this);
-	timeoutTimer->setSingleShot(true);
-	qsocket = new QTcpSocket(this);
-	connect(qsocket, SIGNAL(connected()), this, SLOT(socketConnected()));
-	connect(qsocket, SIGNAL(disconnected()),this, SLOT(socketDisconnected()));
-	connect(qsocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketError(QAbstractSocket::SocketError)));
-	connect(qsocket, SIGNAL(readyRead()), this, SLOT(dataReceived()));
-	connect(timeoutTimer, SIGNAL(timeout()), this, SLOT(timeoutOccurred()));
 }
 
 SyncClient::~SyncClient()
 {
-	//try to disconnect gracefully
-	if(qsocket->state() != QAbstractSocket::UnconnectedState)
-	{
-		qsocket->disconnectFromHost();
-		qsocket->waitForDisconnected(2000);
-	}
+	disconnectFromServer();
 }
 
 void SyncClient::connectToServer(const QString &host, const int port)
 {
-	if(qsocket->state() != QAbstractSocket::UnconnectedState)
+	if(server)
 	{
-		qsocket->disconnectFromHost();
-		if(qsocket->state() != QAbstractSocket::UnconnectedState && !qsocket->waitForDisconnected(5000))
-		{
-			qDebug()<<"[SyncClient] Error disconnecting, aborting socket:"<<qsocket->error();
-			qsocket->abort();
-		}
+		disconnectFromServer();
 	}
+
+	handlerList.resize(MSGTYPE_SIZE);
+	handlerList[ERROR] = new ClientErrorHandler(this);
+	handlerList[SERVER_CHALLENGE] = new ClientAuthHandler(this);
+	handlerList[SERVER_CHALLENGERESPONSEVALID] = new ClientAuthHandler(this);
+	handlerList[ALIVE] = new ClientAliveHandler();
+
+	server = new SyncRemotePeer(new QTcpSocket(this), true, handlerList );
+	connect(server->sock, SIGNAL(connected()), this, SLOT(socketConnected()));
+	connect(server->sock, SIGNAL(disconnected()),this, SLOT(socketDisconnected()));
+	connect(server->sock, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketError(QAbstractSocket::SocketError)));
+	connect(server->sock, SIGNAL(readyRead()), this, SLOT(dataReceived()));
+
 	isConnecting = true;
 	qDebug()<<"[SyncClient] Connecting to"<<(host + ":" + QString::number(port));
-	qsocket->connectToHost(host,port);
-	timeoutTimer->start(10000);
-}
-
-void SyncClient::timeoutOccurred()
-{
-	qDebug()<<"[SyncClient] Connect timeout occurred";
-	disconnectFromServer();
-	errorStr = "Connect timeout occurred";
-	emit connectionError();
+	server->sock->connectToHost(host,port);
+	timeoutTimerId = startTimer(2000,Qt::VeryCoarseTimer); //the connection is checked all 5 seconds
 }
 
 void SyncClient::disconnectFromServer()
 {
-	if(qsocket->state()!= QAbstractSocket::UnconnectedState)
+	if(server)
 	{
-		qsocket->disconnectFromHost();
-		if(qsocket->state() != QAbstractSocket::UnconnectedState && !qsocket->waitForDisconnected(5000))
+		if(server->sock->state()!= QAbstractSocket::UnconnectedState)
 		{
-			qDebug()<<"[SyncClient] Error disconnecting, aborting socket:"<<qsocket->error();
-			qsocket->abort();
+			server->sock->disconnectFromHost();
+			if(!server)
+				return;
+
+			if(server->sock->state() != QAbstractSocket::UnconnectedState && !server->sock->waitForDisconnected(500))
+			{
+				qDebug()<<"[SyncClient] Error disconnecting, aborting socket:"<<server->sock->error();
+				server->sock->abort();
+			}
+		}
+
+		//this must be tested AGAIN because waitForDisconnected might re-enter here trough the disconnected signal
+		if(server)
+		{
+			killTimer(timeoutTimerId);
+
+			isConnecting = false;
+			server->sock->deleteLater();
+			delete server;
+			server = NULL;
+
+			//delete handlers
+			foreach(SyncMessageHandler* h, handlerList)
+			{
+				if(h)
+					delete h;
+			}
+			handlerList.clear();
 		}
 	}
-	isConnecting = false;
 }
+
+void SyncClient::timerEvent(QTimerEvent *evt)
+{
+	if(evt->timerId() == timeoutTimerId)
+	{
+		checkTimeout();
+		evt->accept();
+	}
+}
+
+void SyncClient::checkTimeout()
+{
+	if(!server)
+		return;
+
+	qint64 curTime = QDateTime::currentMSecsSinceEpoch();
+	qint64 diff = curTime - server->lastReceiveTime;
+	qint64 writeDiff = curTime - server->lastSendTime;
+
+
+	if(writeDiff>5000)
+	{
+		//send an ALIVE message
+		Alive msg;
+		server->writeMessage(msg);
+	}
+
+
+	if(diff > 15000)
+	{
+		qDebug()<<"[SyncClient] No data received for"<<diff<<"ms, timing out";
+		emitError(q_("Connection timed out"));
+		emit connectionError();
+	}
+}
+
 
 bool SyncClient::isConnected() const
 {
-	return qsocket->state() == QAbstractSocket::ConnectedState;
+	return server->sock->state() == QAbstractSocket::ConnectedState;
 }
 
 void SyncClient::socketConnected()
 {
 	isConnecting = false;
-	timeoutTimer->stop();
-	qDebug()<<"[SyncClient] Connection successful";
-	emit connected();
+	qDebug()<<"[SyncClient] Socket connection established, waiting for challenge";
+	//set low delay option
+	server->sock->setSocketOption(QAbstractSocket::LowDelayOption,1);
 }
 
 void SyncClient::socketDisconnected()
 {
-	qDebug()<<"[SyncClient] Disconnected from server";
+	qDebug()<<"[SyncClient] Socket disconnected";
+	disconnectFromServer();
 	emit disconnected();
 }
 
 void SyncClient::socketError(QAbstractSocket::SocketError err)
 {
 	Q_UNUSED(err);
-	errorStr = qsocket->errorString();
-	qDebug()<<"[SyncClient] Socket error:"<<errorStr<<", connection state:"<<qsocket->state();
+	emitError(server->sock->errorString());
+}
 
-	if(isConnecting)
-	{
-		isConnecting = false;
-		emit connectionError();
-	}
+void SyncClient::emitError(const QString &msg)
+{
+	errorStr = msg;
+	qDebug()<<"[SyncClient] Connection error:"<<msg<<", connection state:"<<server->sock->state();
+	disconnectFromServer();
+	emit connectionError();
 }
 
 void SyncClient::dataReceived()
 {
+	qDebug()<<"[SyncClient] server data received";
 	//a chunk of data is avaliable for reading
-	qDebug()<<"[SyncClient] Received data:"<<qsocket->readAll();
+	server->receiveMessage();
 }
