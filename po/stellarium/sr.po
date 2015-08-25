@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-23 22:27+0600\n"
-"PO-Revision-Date: 2015-08-15 12:34+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2015-08-24 18:59+0000\n"
+"Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-24 04:48+0000\n"
+"X-Launchpad-Export-Date: 2015-08-25 05:30+0000\n"
 "X-Generator: Launchpad (build 17690)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -249,7 +249,7 @@ msgstr "Магнитуда: <b> %1 </b>"
 
 #: src/core/modules/Nebula.cpp:190
 msgid " (Photometric system: B)"
-msgstr ""
+msgstr " Фотометријски систем: B"
 
 #: src/core/modules/Nebula.cpp:196 src/core/modules/StarWrapper.cpp:65
 #: src/core/modules/StarWrapper.cpp:205 plugins/Quasars/src/Quasar.cpp:119
@@ -275,12 +275,12 @@ msgstr "Величина: %1"
 #: src/core/modules/Nebula.cpp:221
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Величина: %1 x %2"
 
 #: src/core/modules/Nebula.cpp:223
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "Оријентациони угао: %1 %2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:247 src/core/modules/StarWrapper.cpp:235
@@ -293,22 +293,22 @@ msgstr "Даљина: %1сг"
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:262
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:267
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #: src/core/modules/Nebula.cpp:270
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Даљина: %1 %2"
 
 #: src/core/modules/Nebula.cpp:284
 #, qt-format
 msgid "Redshift: %1"
-msgstr ""
+msgstr "Црвени помак: %1"
 
 #: src/core/modules/Nebula.cpp:295 src/core/modules/StarWrapper.cpp:244
 #, qt-format
@@ -317,7 +317,7 @@ msgstr "Паралакса: %1\""
 
 #: src/core/modules/Nebula.cpp:299
 msgid "Morphological description: "
-msgstr ""
+msgstr "Морфолошки опис: "
 
 #: src/core/modules/Nebula.cpp:745
 msgctxt "Shapley–Sawyer Concentration Class"
