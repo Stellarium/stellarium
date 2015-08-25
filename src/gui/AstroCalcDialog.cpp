@@ -463,6 +463,7 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex &modelIndex)
 	QString date = modelIndex.sibling(modelIndex.row(), PhenomenaDate).data().toString();
 	bool ok;
 	double JD  = StelUtils::getJulianDayFromISO8601String(date.left(10) + "T" + date.right(8), &ok);
+	JD -= StelUtils::getGMTShiftFromQT(JD)/24.;
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
