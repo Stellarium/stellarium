@@ -104,8 +104,6 @@ private:
 	void setEphemerisHeaderNames();
 	//! Update header names for phenomena table
 	void setPhenomenaHeaderNames();
-	//! Update description of the AstroCalc
-	void setAstroCalcDescription();
 
 	//! Init header and list of planetary positions
 	void initListPlanetaryPositions();
