@@ -49,7 +49,6 @@ void AstroCalcDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		setAstroCalcDescription();
 		setPlanetaryPositionsHeaderNames();
 		setEphemerisHeaderNames();
 		setPhenomenaHeaderNames();
@@ -76,7 +75,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	setAstroCalcDescription();
 	initListPlanetaryPositions();
 	initListEphemeris();
 	initListPhenomena();
@@ -738,17 +736,4 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, PlanetP object2
 	if (opposition)
 		angle = M_PI - angle;
 	return angle;
-}
-
-void AstroCalcDialog::setAstroCalcDescription()
-{
-	QString description;
-	description  = "<p><b>" + q_("AstroCalc") + "</b> &mdash; " + q_("a tool for calculating planetary phenomena and which contains few modules.") + "</p>";
-	description += "<ul>";
-	description += "<li><b>" + q_("Planetary positions") + "</b> &mdash; " + q_("a tool for displaying planetary positions every 5 minutes.") + "</li>";
-	description += "<li><b>" + q_("Ephemeris") + "</b> &mdash; " + q_("a tool for calculation ephemeris of celestial bodies for different time ranges and steps of the time.") + "</li>";
-	description += "<li><b>" + q_("Phenomena") + "</b> &mdash; " + q_("a tool for calculation phenomena of celestial bodies (conjunctions and oppositions) for different time ranges.") + " " + q_("Important note: calculations can be slow when for calculation used many celestial bodies.") + "</li>";
-	description += "</ul>";
-
-	ui->astroCalcDescription->setText(description);
 }
