@@ -135,10 +135,10 @@ private:
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
-class TreeWidgetItem : public QTreeWidgetItem
+class ACTreeWidgetItem : public QTreeWidgetItem
 {
 public:
-	TreeWidgetItem(QTreeWidget* parent)
+	ACTreeWidgetItem(QTreeWidget* parent)
 		: QTreeWidgetItem(parent)
 	{
 	}
@@ -149,10 +149,13 @@ private:
 		int column = treeWidget()->sortColumn();
 
 		if (column == AstroCalcDialog::ColumnMagnitude)
+		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
 		else
+		{
 			return text(column).toLower() < other.text(column).toLower();
-
+		}
 	}
 };
 

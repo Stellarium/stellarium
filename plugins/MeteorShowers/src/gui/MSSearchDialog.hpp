@@ -84,10 +84,10 @@ private:
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
-class TreeWidgetItem : public QTreeWidgetItem
+class MSTreeWidgetItem : public QTreeWidgetItem
 {
 public:
-	TreeWidgetItem(QTreeWidget* parent)
+	MSTreeWidgetItem(QTreeWidget* parent)
 		: QTreeWidgetItem(parent)
 	{
 	}
