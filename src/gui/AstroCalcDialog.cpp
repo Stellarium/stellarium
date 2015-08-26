@@ -151,7 +151,7 @@ void AstroCalcDialog::currentPlanetaryPositions()
 		if (planet->getPlanetType()!=Planet::isUNDEFINED && planet->getEnglishName()!="Sun" && planet->getEnglishName()!=core->getCurrentPlanet()->getEnglishName())
 		{
 			StelUtils::rectToSphe(&ra,&dec,planet->getJ2000EquatorialPos(core));
-			TreeWidgetItem *treeItem = new TreeWidgetItem(ui->planetaryPositionsTreeWidget);
+			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->planetaryPositionsTreeWidget);
 			treeItem->setText(ColumnName, planet->getNameI18n());
 			treeItem->setText(ColumnRA, StelUtils::radToHmsStr(ra));
 			treeItem->setTextAlignment(ColumnRA, Qt::AlignRight);
@@ -295,7 +295,7 @@ void AstroCalcDialog::generateEphemeris()
 			core->setJD(JD);
 			core->update(10); // force update to get new coordinates
 			StelUtils::rectToSphe(&ra,&dec,obj->getJ2000EquatorialPos(core));
-			TreeWidgetItem *treeItem = new TreeWidgetItem(ui->ephemerisTreeWidget);
+			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
 			treeItem->setText(EphemerisDate, StelUtils::jdToQDateTime(JD + StelUtils::getGMTShiftFromQT(JD)/24).toString("yyyy-MM-dd hh:mm:ss"));
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
@@ -600,7 +600,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			separation += M_PI;
 		}
 
-		TreeWidgetItem *treeItem = new TreeWidgetItem(ui->phenomenaTreeWidget);
+		ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
 		treeItem->setText(PhenomenaDate, StelUtils::jdToQDateTime(it.key() + StelUtils::getGMTShiftFromQT(it.key())/24).toString("yyyy-MM-dd hh:mm:ss"));
