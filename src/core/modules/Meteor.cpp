@@ -58,13 +58,8 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, radiantAltAz);
 	radiantAltAz = m_core->j2000ToAltAz(radiantAltAz);
 	float radiantAlt, radiantAz;
+	// S is zero, E is 90 degrees (SDSS)
 	StelUtils::rectToSphe(&radiantAz, &radiantAlt, radiantAltAz);
-	// N is zero, E is 90 degrees
-	radiantAz = 3. * M_PI - radiantAz;
-	if (radiantAz > M_PI*2)
-	{
-		radiantAz -= M_PI*2;
-	}
 
 	// meteors won't be visible if radiant is below 0degrees
 	if (radiantAlt < 0.f)
@@ -73,7 +68,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	}
 
 	// determine the rotation matrix to align z axis with radiant
-	m_matAltAzToRadiant = Mat4d::yrotation(M_PI_2 - radiantAlt) * Mat4d::zrotation(radiantAz);
+	m_matAltAzToRadiant = Mat4d::zrotation(radiantAz) * Mat4d::yrotation(M_PI_2 - radiantAlt);
 
 	// select a random initial meteor altitude [MIN_ALTITUDE, MAX_ALTITUDE]
 	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
@@ -314,7 +309,7 @@ float Meteor::meteorDistance(float zenithAngle, float altitude)
 
 Vec3d Meteor::altAzToRadiant(Vec3d position)
 {
-	position.transfo4d(m_matAltAzToRadiant);
+	position.transfo4d(m_matAltAzToRadiant.transpose());
 	position *= 1242;
 	return position;
 }
@@ -322,7 +317,7 @@ Vec3d Meteor::altAzToRadiant(Vec3d position)
 Vec3d Meteor::radiantToAltAz(Vec3d position)
 {
 	position /= 1242; // 1242 to scale down under 1
-	position.transfo4d(m_matAltAzToRadiant.transpose());
+	position.transfo4d(m_matAltAzToRadiant);
 	return position;
 }
 
