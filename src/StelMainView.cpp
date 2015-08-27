@@ -145,9 +145,8 @@ void NightModeGraphicsEffect::draw(QPainter* painter)
 	program->setAttributeArray(vars.texCoord, texCoord, 2);
 	program->enableAttributeArray(vars.pos);
 	program->enableAttributeArray(vars.texCoord);
-	QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
-	f->glBindTexture(GL_TEXTURE_2D, fbo->texture());
-	f->glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glBindTexture(GL_TEXTURE_2D, fbo->texture());
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	program->release();
 	painter->endNativePainting();
 	painter->restore();
