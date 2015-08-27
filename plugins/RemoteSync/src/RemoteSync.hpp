@@ -51,13 +51,12 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init();
-	virtual void update(double deltaTime);
+	virtual void init() Q_DECL_OVERRIDE;
+	virtual void update(double deltaTime) Q_DECL_OVERRIDE;
 
-	//virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void handleKeys(QKeyEvent* event){event->setAccepted(false);}
+	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
-	virtual bool configureGui(bool show=true);
+	virtual bool configureGui(bool show=true) Q_DECL_OVERRIDE;
 	///////////////////////////////////////////////////////////////////////////
 
 	QString getClientServerHost() const { return clientServerHost; }

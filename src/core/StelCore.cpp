@@ -66,12 +66,13 @@ StelCore::StelCore()
 	, timeSpeed(JD_SECOND)
 	, JDay(0.)
 	, presetSkyTime(0.)
-	, secondsOfLastJDayUpdate(0.)
+	, milliSecondsOfLastJDayUpdate(0.)
 	, JDayOfLastJDayUpdate(0.)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
 {
 	toneConverter = new StelToneReproducer();
+	milliSecondsOfLastJDayUpdate = QDateTime::currentMSecsSinceEpoch();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Create and initialize the default projector params
@@ -811,6 +812,26 @@ void StelCore::returnToHome()
 	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
+void StelCore::setJDayOfLastJDayUpdate(double jday)
+{
+	JDayOfLastJDayUpdate = jday;
+}
+
+double StelCore::getJDayOfLastJDayUpdate() const
+{
+	return JDayOfLastJDayUpdate;
+}
+
+void StelCore::setMilliSecondsOfLastJDayUpdate(qint64 millis)
+{
+	milliSecondsOfLastJDayUpdate = millis;
+}
+
+qint64 StelCore::getMilliSecondsOfLastJDayUpdate() const
+{
+	return milliSecondsOfLastJDayUpdate;
+}
+
 void StelCore::setJDay(double JD)
 {
 	JDay=JD;
@@ -1274,11 +1295,11 @@ void StelCore::updateTime(double deltaTime)
 	if (getRealTimeSpeed())
 	{
 		// Get rid of the error from the 1 /
-		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
+		JDay = JDayOfLastJDayUpdate + (QDateTime::currentMSecsSinceEpoch() - milliSecondsOfLastJDayUpdate) / 1000.0 / ONE_OVER_JD_SECOND;
 	}
 	else
 	{
-		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
+		JDay = JDayOfLastJDayUpdate + (QDateTime::currentMSecsSinceEpoch() - milliSecondsOfLastJDayUpdate) / 1000.0 * timeSpeed;
 	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
@@ -1308,7 +1329,11 @@ void StelCore::updateTime(double deltaTime)
 void StelCore::resetSync()
 {
 	JDayOfLastJDayUpdate = getJDay();
-	secondsOfLastJDayUpdate = StelApp::getTotalRunTime();
+	//use currentMsecsSinceEpoch directly instead of StelApp::getTotalRuntime,
+	//because the StelApp::startMSecs gets subtracted anyways in update()
+	//also changed to qint64 to increase precision
+	milliSecondsOfLastJDayUpdate = QDateTime::currentMSecsSinceEpoch();
+	emit timeSyncOccurred(JDayOfLastJDayUpdate);
 }
 
 void StelCore::setStartupTimeMode(const QString& s)

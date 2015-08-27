@@ -24,6 +24,8 @@
 #include <QHostAddress>
 #include <QVector>
 
+using namespace SyncProtocol;
+
 namespace SyncProtocol
 {
 
@@ -39,6 +41,8 @@ QDataStream& operator>>(QDataStream& in, SyncHeader& header)
 	in>>header.msgType;
 	in>>header.dataSize;
 	return in;
+}
+
 }
 
 qint64 SyncMessage::createFullMessage(QByteArray &target) const
@@ -122,52 +126,58 @@ void SyncRemotePeer::receiveMessage()
 
 	lastReceiveTime = QDateTime::currentMSecsSinceEpoch();
 
-	if(!waitingForBody)
+	//This loop is required to make sure all pending data is read (i.e. multiple messages may be queued up)
+	while(sock->bytesAvailable()>0)
 	{
-		//we use the socket's read buffer to wait until a full packet is available
-		if(sock->bytesAvailable() < SYNC_HEADER_SIZE)
-			return;
-
-		dataStream>>msgHeader;
-		//check if msgtype is valid
-		if(msgHeader.msgType>MSGTYPE_MAX)
+		if(!waitingForBody)
 		{
-			writeError("invalid message type " + QString::number(msgHeader.msgType));
+			//we use the socket's read buffer to wait until a full packet is available
+			if(sock->bytesAvailable() < SYNC_HEADER_SIZE)
+				return;
+
+			dataStream>>msgHeader;
+			//check if msgtype is valid
+			if(msgHeader.msgType>MSGTYPE_MAX)
+			{
+				writeError("invalid message type " + QString::number(msgHeader.msgType));
+				return;
+			}
+			if(!isAuthenticated && msgHeader.msgType > SERVER_CHALLENGERESPONSEVALID)
+			{
+				//if not fully authenticated, it is an error to send messages other than auth messages
+				writeError("not authenticated");
+				return;
+			}
+
+			qDebug()<<"receive header for "<<msgHeader.msgType;
+		}
+
+		if(sock->bytesAvailable() < msgHeader.dataSize)
+		{
+			waitingForBody = true;
 			return;
 		}
-		if(!isAuthenticated && msgHeader.msgType > SERVER_CHALLENGERESPONSEVALID)
+		else
 		{
-			//if not fully authenticated, it is an error to send messages other than auth messages
-			writeError("not authenticated");
-			return;
-		}
+			waitingForBody = false;
+			qDebug()<<"received body, processing";
 
-		qDebug()<<"receive header for "<<msgHeader.msgType;
+			//full packet available, pass to handler
+			SyncMessageHandler* handler = handlerList[msgHeader.msgType];
+			if(!handler)
+			{
+				//no handler registered on this end for this msgtype
+				writeError("unregistered message type " + QString::number(msgHeader.msgType));
+				return;
+			}
+			if(!handlerList[msgHeader.msgType]->handleMessage(dataStream,*this))
+			{
+				writeError("last message of type " + QString::number(msgHeader.msgType) + " was rejected");
+			}
+		}
 	}
 
-	if(sock->bytesAvailable() < msgHeader.dataSize)
-	{
-		waitingForBody = true;
-		return;
-	}
-	else
-	{
-		waitingForBody = false;
-		qDebug()<<"received body, processing";
-
-		//full packet available, pass to handler
-		SyncMessageHandler* handler = handlerList[msgHeader.msgType];
-		if(!handler)
-		{
-			//no handler registered on this end for this msgtype
-			writeError("invalid message type " + QString::number(msgHeader.msgType));
-			return;
-		}
-		if(!handlerList[msgHeader.msgType]->handleMessage(dataStream,*this))
-		{
-			writeError("last message of type " + QString::number(msgHeader.msgType) + " was rejected");
-		}
-	}
+	qDebug()<<"Available bytes after receiveMessage"<<sock->bytesAvailable();
 }
 
 void SyncRemotePeer::peerLog(const QString &msg)
@@ -178,6 +188,7 @@ void SyncRemotePeer::peerLog(const QString &msg)
 void SyncRemotePeer::writeMessage(const SyncMessage &msg)
 {
 	qint64 size = msg.createFullMessage(msgWriteBuffer);
+	qDebug()<<"[SyncPeer] Send message"<<msg.getMessageType();
 
 	if(!size)
 	{
@@ -191,7 +202,6 @@ void SyncRemotePeer::writeMessage(const SyncMessage &msg)
 	else
 	{
 		writeData(msgWriteBuffer,size);
-		qDebug()<<"send message "<<msg.getMessageType();
 	}
 }
 
@@ -201,6 +211,8 @@ void SyncRemotePeer::writeData(const QByteArray &data, int size)
 	if(sock->state() == QAbstractSocket::ConnectedState)
 	{
 		sock->write(data.constData(),size>0?size:data.size());
+		//flush immediately if possible to reduce delay
+		sock->flush();
 		lastSendTime = QDateTime::currentMSecsSinceEpoch();
 	}
 	else
@@ -212,6 +224,4 @@ void SyncRemotePeer::writeError(const QString &err)
 	qWarning()<<"[SyncPlugin] Disconnecting with error:"<<err;
 	writeMessage(ErrorMessage(err));
 	sock->disconnectFromHost();
-}
-
 }

@@ -89,9 +89,23 @@ void RemoteSync::init()
 
 void RemoteSync::update(double deltaTime)
 {
-	//include update logic here
 	Q_UNUSED(deltaTime);
+	if(server)
+	{
+		//pass update on to server, client does not need this
+		server->update();
+	}
 }
+
+double RemoteSync::getCallOrder(StelModuleActionName actionName) const
+{
+	//we want update() to be called as late as possible
+	if(actionName == ActionUpdate)
+		return 100000.0;
+
+	return StelModule::getCallOrder(actionName);
+}
+
 
 void RemoteSync::setClientServerHost(const QString &clientServerHost)
 {
@@ -143,6 +157,7 @@ void RemoteSync::stopServer()
 	{
 		server->stop();
 		delete server;
+		server = NULL;
 		setState(IDLE);
 	}
 	else

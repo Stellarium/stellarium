@@ -22,7 +22,9 @@
 
 #include <QObject>
 #include <QTcpSocket>
-#include <SyncProtocol.hpp>
+
+class SyncMessageHandler;
+class SyncRemotePeer;
 
 //! A client which can connect to a SyncServer to receive state changes, and apply them
 class SyncClient : public QObject
@@ -58,9 +60,11 @@ private:
 
 	QString errorStr;
 	bool isConnecting;
-	SyncProtocol::SyncRemotePeer* server;
+	SyncRemotePeer* server;
 	int timeoutTimerId;
-	QVector<SyncProtocol::SyncMessageHandler*> handlerList;
+	QVector<SyncMessageHandler*> handlerList;
+
+	friend class ClientErrorHandler;
 };
 
 

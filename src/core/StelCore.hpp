@@ -353,6 +353,19 @@ public slots:
 	//! Return to the default location and set default landscape with atmosphere and fog effects
 	void returnToHome();
 
+	//! Sets the JDay of the last time resetSync() was called.
+	//! Usually, you do NOT want to call this method, use setJDay instead.
+	//! This method is used by the RemoteSync plugin.
+	void setJDayOfLastJDayUpdate(double jday);
+	//! Returns the JDay of the last time resetSync() was called
+	double getJDayOfLastJDayUpdate() const;
+	//! Sets the system date which corresponds to the JDayOfLastJDayUpdate.
+	//! Usually, you do NOT want to call this method.
+	//! This method is used by the RemoteSync plugin.
+	void setMilliSecondsOfLastJDayUpdate(qint64 millis);
+	//! Returns the system date of the last time resetSync() was called
+	qint64 getMilliSecondsOfLastJDayUpdate() const;
+
 	//! Set the current date in Julian Day
 	void setJDay(double JD);
 	//! Get the current date in Julian Day
@@ -527,6 +540,10 @@ signals:
 	void locationChanged(StelLocation);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
+	//! This signal is emmited whenever the time is re-synced.
+	//! This happens whenever the internal jDay is changed through setJDay/setMJDay and similar,
+	//! and whenever the time rate changes.
+	void timeSyncOccurred(double jDay);
 
 private:
 	StelToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
@@ -573,7 +590,7 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
-	double secondsOfLastJDayUpdate;         // Time in seconds when the time rate or time last changed
+	qint64 milliSecondsOfLastJDayUpdate;         // Time in milliseconds when the time rate or time last changed (QDateTime::currentMSecsSinceEpoch())
 	double JDayOfLastJDayUpdate;         // JDay when the time rate or time last changed
 
 	// Variables for custom equation of Delta-T

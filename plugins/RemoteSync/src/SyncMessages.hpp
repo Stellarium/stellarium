@@ -22,18 +22,15 @@
 
 #include "SyncProtocol.hpp"
 
-namespace SyncProtocol
-{
-
 class ErrorMessage : public SyncMessage
 {
 public:
 	ErrorMessage();
 	ErrorMessage(const QString& msg);
 
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return ERROR; }
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::ERROR; }
 	void serialize(QDataStream& stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream& stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream& stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
 
 	QString message;
 };
@@ -44,9 +41,9 @@ public:
 	//! Sets all values except clientId to the compile-time values
 	ServerChallenge();
 
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SERVER_CHALLENGE; }
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::SERVER_CHALLENGE; }
 	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
 
 	quint8 protocolVersion;
 	quint32 remoteSyncVersion;
@@ -60,9 +57,9 @@ public:
 	//! Sets all values except clientId to the compile-time values
 	ClientChallengeResponse();
 
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return CLIENT_CHALLENGE_RESPONSE; }
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::CLIENT_CHALLENGE_RESPONSE; }
 	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
-	bool deserialize(QDataStream &stream, tPayloadSize dataSize) Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
 
 	//basically the same as the challenge, without magic string and proto version
 	quint32 remoteSyncVersion;
@@ -74,16 +71,30 @@ public:
 class ServerChallengeResponseValid : public SyncMessage
 {
 public:
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SERVER_CHALLENGERESPONSEVALID; }
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::SERVER_CHALLENGERESPONSEVALID; }
+};
+
+class Time : public SyncMessage
+{
+public:
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::TIME; }
+
+	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	//TODO implement network delay compensation (also for other message types where it makes sense)
+	//TODO maybe split up so that each message is only for 1 thing?
+	qint64 lastTimeSyncTime; //corresponds to StelCore::milliSecondsOfLastJDayUpdate
+	double jDay; //current jDay, without any time zone/deltaT adjustments
+	double timeRate; //current time rate
+
 };
 
 class Alive : public SyncMessage
 {
 public:
-	SyncMessageType getMessageType() const Q_DECL_OVERRIDE  { return ALIVE; }
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE  { return SyncProtocol::ALIVE; }
 };
 
-
-}
 
 #endif

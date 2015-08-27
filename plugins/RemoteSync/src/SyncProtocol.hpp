@@ -43,11 +43,13 @@ typedef quint16 tPayloadSize;
 struct SyncHeader
 {
 	quint8 msgType; //The SyncMessageType of the data
-	tPayloadSize dataSize; //The size of the data part
+	SyncProtocol::tPayloadSize dataSize; //The size of the data part
 	//TODO maybe add checksum?
 };
 
+//! Write a SyncHeader to a DataStream
 QDataStream& operator<<(QDataStream& out, const SyncHeader& header);
+//! Read a SyncHeader from a DataStream
 QDataStream& operator>>(QDataStream& in, SyncHeader& header);
 
 const qint64 SYNC_HEADER_SIZE = sizeof(quint8) + sizeof(tPayloadSize); //3 byte
@@ -64,10 +66,13 @@ enum SyncMessageType
 	SERVER_CHALLENGERESPONSEVALID, //sent from the server to the client after valid client hello was received.
 
 	//all messages below here can only be sent from authenticated peers
+	TIME, //time jumps + time scale updates
 	ALIVE, //sent from a peer after no data was sent for about 5 seconds to indicate it is still alive
 	MSGTYPE_MAX = ALIVE,
 	MSGTYPE_SIZE = MSGTYPE_MAX+1
 };
+
+}
 
 //! Base interface for the messages themselves, allowing to serialize/deserialize them
 class SyncMessage
@@ -76,7 +81,7 @@ public:
 	virtual ~SyncMessage() {}
 
 	//! Subclasses must return the message type this message represents
-	virtual SyncMessageType getMessageType() const = 0;
+	virtual SyncProtocol::SyncMessageType getMessageType() const = 0;
 
 	//! Writes a full message (with header) to the specified byte array.
 	//! Returns the total message size. If zero, the payload is too large for a SyncMessage.
@@ -87,7 +92,7 @@ public:
 	virtual void serialize(QDataStream& stream) const;
 	//! Subclasses should override this to load their contents from the data stream.
 	//! The default implementation expects a zero dataSize, and reads nothing.
-	virtual bool deserialize(QDataStream& stream, tPayloadSize dataSize);
+	virtual bool deserialize(QDataStream& stream, SyncProtocol::tPayloadSize dataSize);
 
 protected:
 	static void writeString(QDataStream& stream, const QString& str);
@@ -143,9 +148,7 @@ public:
 	virtual bool handleMessage(QDataStream& stream, SyncRemotePeer& peer) = 0;
 };
 
-}
-
-Q_DECLARE_INTERFACE(SyncProtocol::SyncMessageHandler,"Stellarium/RemoteSync/SyncMessageHandler/1.0")
+Q_DECLARE_INTERFACE(SyncMessageHandler,"Stellarium/RemoteSync/SyncMessageHandler/1.0")
 
 
 #endif
