@@ -21,10 +21,11 @@
 #include "SyncClient.hpp"
 
 #include "SyncMessages.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelTranslator.hpp"
 
-namespace SyncProtocol
-{
+using namespace SyncProtocol;
 
 ClientHandler::ClientHandler(SyncClient *client)
 	: client(client)
@@ -36,7 +37,7 @@ ClientHandler::ClientHandler(SyncClient *client)
 ClientErrorHandler::ClientErrorHandler(SyncClient *client)
 	: ClientHandler(client)
 {
-	connect(this,SIGNAL(errorReceived(QString)),client,SLOT(emitError(QString)));
+
 }
 
 bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
@@ -45,7 +46,7 @@ bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer
 	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
 	peer.peerLog("Received error message from server: " + msg.message);
 
-	emit errorReceived(msg.message);
+	client->emitError(msg.message);
 
 	//we don't drop the connection here, we let the remote end do that
 	return ok;
@@ -148,4 +149,23 @@ bool ClientAliveHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer
 	return p.deserialize(stream,peer.msgHeader.dataSize);
 }
 
+ClientTimeHandler::ClientTimeHandler()
+{
+	core = StelApp::getInstance().getCore();
+}
+
+bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+{
+	Time msg;
+	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+
+	if(!ok)
+		return false;
+
+	//set time variables, time rate first because it causes a resetSync which we overwrite
+	core->setTimeRate(msg.timeRate);
+	core->setJDayOfLastJDayUpdate(msg.jDay);
+	core->setMilliSecondsOfLastJDayUpdate(msg.lastTimeSyncTime);
+
+	return true;
 }

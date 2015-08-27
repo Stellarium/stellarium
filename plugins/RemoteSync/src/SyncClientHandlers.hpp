@@ -24,13 +24,10 @@
 
 class SyncClient;
 
-namespace SyncProtocol
-{
-
 class ClientHandler : public QObject, public SyncMessageHandler
 {
 	Q_OBJECT
-	Q_INTERFACES(SyncProtocol::SyncMessageHandler)
+	Q_INTERFACES(SyncMessageHandler)
 
 public:
 	ClientHandler(SyncClient *client);
@@ -44,9 +41,6 @@ class ClientErrorHandler : public ClientHandler
 public:
 	ClientErrorHandler(SyncClient* client);
 	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
-
-signals:
-	void errorReceived(const QString& message);
 };
 
 //! Reacts to Server challenge and challenge OK on the client
@@ -66,6 +60,17 @@ public:
 	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 };
 
-}
+class StelCore;
+
+class ClientTimeHandler : public SyncMessageHandler
+{
+public:
+	ClientTimeHandler();
+
+	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelCore* core;
+};
+
 
 #endif
