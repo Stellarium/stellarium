@@ -14,6 +14,8 @@ SET(RemoteSync_SRCS
   SyncProtocol.cpp
   SyncServer.hpp
   SyncServer.cpp
+  SyncServerEventSenders.hpp
+  SyncServerEventSenders.cpp
   SyncServerHandlers.hpp
   SyncServerHandlers.cpp
   gui/RemoteSyncDialog.hpp

@@ -19,8 +19,7 @@
 
 #include "SyncMessages.hpp"
 
-namespace SyncProtocol
-{
+using namespace SyncProtocol;
 
 ErrorMessage::ErrorMessage()
 {
@@ -116,6 +115,21 @@ bool ClientChallengeResponse::deserialize(QDataStream &stream, tPayloadSize data
 	return true;
 }
 
+void Time::serialize(QDataStream &stream) const
+{
+	stream<<lastTimeSyncTime;
+	stream<<jDay;
+	stream<<timeRate;
+}
 
+bool Time::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	if(dataSize != 24)
+		return false;
 
+	stream>>lastTimeSyncTime;
+	stream>>jDay;
+	stream>>timeRate;
+
+	return true;
 }

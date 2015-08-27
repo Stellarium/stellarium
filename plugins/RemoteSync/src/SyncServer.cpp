@@ -20,6 +20,7 @@
 #include "SyncServer.hpp"
 #include "SyncMessages.hpp"
 #include "SyncServerHandlers.hpp"
+#include "SyncServerEventSenders.hpp"
 
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -54,14 +55,48 @@ bool SyncServer::start(int port)
 		//create message handlers
 		handlerList.resize(MSGTYPE_SIZE);
 		handlerList[ERROR] =  new ServerErrorHandler();
-		handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(true);
+		handlerList[CLIENT_CHALLENGE_RESPONSE] = new ServerAuthHandler(this, true);
 		handlerList[ALIVE] = new ServerAliveHandler();
+
+		addSender(new TimeEventSender());
 
 		timeoutTimerId = startTimer(5000,Qt::VeryCoarseTimer);
 	}
 	else
 		qDebug()<<"[SyncServer] Error while starting:"<<errorString();
 	return ok;
+}
+
+void SyncServer::addSender(SyncServerEventSender *snd)
+{
+	snd->server = this;
+	senderList.append(snd);
+}
+
+void SyncServer::broadcastMessage(const SyncMessage &msg)
+{
+	qDebug()<<"[SyncServer] Broadcast message"<<msg.getMessageType();
+	qint64 size = msg.createFullMessage(broadcastBuffer);
+
+	if(!size)
+	{
+		//crash here when message is too large in debugging
+		Q_ASSERT(true);
+		qCritical()<<"[SyncServer] A message is too large for broadcast! Message buffer contents follow...";
+		qCritical()<<broadcastBuffer.toHex();
+		//stop server
+		stop();
+		return;
+	}
+
+	for(tClientMap::iterator it = clients.begin();it!=clients.end();++it)
+	{
+		SyncRemotePeer& client = it.value();
+		if(client.isAuthenticated)
+		{
+			client.writeData(broadcastBuffer,size);
+		}
+	}
 }
 
 void SyncServer::stop()
@@ -105,10 +140,25 @@ void SyncServer::stop()
 			if(h)
 				delete h;
 		}
-
 		handlerList.clear();
 
+		//delete senders
+		foreach(SyncServerEventSender* s, senderList)
+		{
+			if(s)
+				delete s;
+		}
+		senderList.clear();
+
 		qDebug()<<"[SyncServer] Stopped";
+	}
+}
+
+void SyncServer::update()
+{
+	foreach(SyncServerEventSender* s, senderList)
+	{
+		s->update();
 	}
 }
 
@@ -211,6 +261,15 @@ void SyncServer::clientError(QAbstractSocket::SocketError)
 	clientLog(sock, "Socket error: " + sock->errorString());
 }
 
+void SyncServer::clientAuthenticated(SyncRemotePeer &peer)
+{
+	//we have to send the client the current app state
+	foreach(SyncServerEventSender* s, senderList)
+	{
+		s->newClientConnected(peer);
+	}
+}
+
 void SyncServer::clientDisconnected()
 {
 	QAbstractSocket* sock = qobject_cast<QAbstractSocket*>(sender());
@@ -224,6 +283,8 @@ void SyncServer::connectionError(QAbstractSocket::SocketError err)
 {
 	qWarning()<<"[SyncServer] Could not accept an incoming connection, socket error is: "<<err;
 }
+
+
 
 void SyncServer::clientLog(QAbstractSocket *cl, const QString &msg)
 {

@@ -18,10 +18,13 @@
  */
 
 #include "SyncServerHandlers.hpp"
+#include "SyncServer.hpp"
 
-namespace SyncProtocol
+ServerHandler::ServerHandler(SyncServer *server)
+	: server(server)
 {
 
+}
 
 bool ServerErrorHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peerData)
 {
@@ -34,8 +37,8 @@ bool ServerErrorHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer
 }
 
 
-ServerAuthHandler::ServerAuthHandler(bool allowDivergingAppVersions)
-	: allowDivergingAppVersions(allowDivergingAppVersions)
+ServerAuthHandler::ServerAuthHandler(SyncServer* server, bool allowDivergingAppVersions)
+	: ServerHandler(server), allowDivergingAppVersions(allowDivergingAppVersions)
 {
 
 }
@@ -90,6 +93,7 @@ bool ServerAuthHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	//if we got here, peer is successfully authenticated!
 	peer.isAuthenticated = true;
 	peer.writeMessage(ServerChallengeResponseValid());
+	server->clientAuthenticated(peer);
 
 	return true;
 }
@@ -98,6 +102,4 @@ bool ServerAliveHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer
 {
 	Alive p;
 	return p.deserialize(stream,peer.msgHeader.dataSize);
-}
-
 }
