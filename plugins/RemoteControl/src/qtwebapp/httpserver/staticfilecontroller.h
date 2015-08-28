@@ -34,6 +34,7 @@ struct StaticFileControllerSettings
 	int maxCachedFileSize;
 };
 
+
 /**
   Delivers static files. It is usually called by the applications main request handler when
   the caller request a path that is mapped to static files.
@@ -67,7 +68,7 @@ class DECLSPEC StaticFileController : public HttpRequestHandler  {
 public:
 
     /** Constructor */
-    StaticFileController(const StaticFileControllerSettings& settings, QObject* parent = 0);
+    StaticFileController(const StaticFileControllerSettings& settings, QObject* parent = NULL);
 
     /** Generates the response */
     void service(HttpRequest& request, HttpResponse& response);
@@ -82,7 +83,7 @@ private:
     QString docroot;
 
     /** Maximum age of files in the browser cache */
-    int maxAge;    
+    int maxAge;
 
     struct CacheEntry {
         QByteArray document;

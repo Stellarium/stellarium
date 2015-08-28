@@ -795,6 +795,7 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 			if (!desc.info.version.isEmpty())
 				html += "<br /><strong>" + q_("Version") + "</strong>: " + desc.info.version;
 			html += "</p></body></html>";
+			ui->pluginsInfoBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
 			StelModule* pmod = StelApp::getInstance().getModuleMgr().getModule(desc.info.id, true);

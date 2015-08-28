@@ -419,7 +419,7 @@ button.button32 {
 .button32.btTimeRealtime { background-position: -777px 0; } 
 .button32.btTimeRewind { background-position: -814px 0; } 
 .button32.glow32x32 { background-position: -851px 0; } 
-.button32wrapper.paused .btTimeRealtime { background-image: url("icons-active.png"); background-position: -851px 0; } 
+.button32.btTimeRealtime.paused  { background-image: url("icons-active.png"); background-position: -851px 0; } 
 
 #activescript {
 	font-weight: bold;

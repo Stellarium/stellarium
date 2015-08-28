@@ -49,14 +49,14 @@ public:
       @param name name of the header
       @param value value of the header
     */
-    void setHeader(const QByteArray name, const QByteArray value);
+    void setHeader(QByteArray name, QByteArray value);
 
     /**
       Set a HTTP response header
       @param name name of the header
       @param value value of the header
     */
-    void setHeader(const QByteArray name, const int value);
+    void setHeader(QByteArray name, int value);
 
     /** Returns wether this header has already been set */
     bool hasHeader(const QByteArray name) const;

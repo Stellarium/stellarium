@@ -6,10 +6,12 @@
 #ifndef HTTPCONNECTIONHANDLER_H
 #define HTTPCONNECTIONHANDLER_H
 
+#ifndef QT_NO_OPENSSL
+   #include <QSslConfiguration>
+#endif
 #include <QTcpSocket>
 #include <QTimer>
 #include <QThread>
-#include <QSslConfiguration>
 #include "httpglobal.h"
 #include "httprequest.h"
 #include "httprequesthandler.h"
@@ -19,6 +21,11 @@
     typedef qintptr tSocketDescriptor;
 #else
     typedef int tSocketDescriptor;
+#endif
+
+/** Alias for QSslConfiguration if OpenSSL is not supported */
+#ifdef QT_NO_OPENSSL
+  #define QSslConfiguration QObject
 #endif
 
 /**
@@ -31,15 +38,12 @@ struct HttpConnectionHandlerSettings {
 
 	/** Defines the maximum time to wait for a complete HTTP request in msec. Default 10000. */
 	int readTimeout;
-	/** The file path to the SSL key file. Default empty. */
-	QString sslKeyFile;
-	/** The file path to the SSL cert file. Default empty. */
-	QString sslCertFile;
 	/** Maximum size of a request in bytes. Default 16384. */
 	int maxRequestSize;
 	/** Maximum size of a multipart request in bytes. Default 1048576 (1MB) */
 	int maxMultipartSize;
 };
+
 
 /**
   The connection handler accepts incoming connections and dispatches incoming requests to to a
@@ -49,24 +53,12 @@ struct HttpConnectionHandlerSettings {
   Example for the required configuration settings:
   <code><pre>
   readTimeout=60000
-  ;sslKeyFile=ssl/my.key
-  ;sslCertFile=ssl/my.cert
   maxRequestSize=16000
   maxMultiPartSize=1000000
   </pre></code>
   <p>
   The readTimeout value defines the maximum time to wait for a complete HTTP request.
-  <p>
-  For SSL support, you need an openssl certificate file and a key file.
-Both can be created with the command
-  <code><pre>
-  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout my.key -out my.cert
-  </pre></code>
-  <p>
-  Please not that a connection handler with ssl settings can only handle HTTPS protocol. To
-  support bth HTTP and HTTPS simultaneously, you need to start two listeners on different ports -
-  one with ssl and one without ssl.
-  @see HttpRequest for description of config settings maxRequestSize and maxMultiPartSize
+  @see HttpRequest for description of config settings maxRequestSize and maxMultiPartSize.
 */
 class DECLSPEC HttpConnectionHandler : public QThread {
     Q_OBJECT
@@ -77,9 +69,10 @@ public:
     /**
       Constructor.
       @param settings Configuration settings of the HTTP webserver
-      @param requestHandler handler that will process each incomin HTTP request
+      @param requestHandler Handler that will process each incoming HTTP request
+      @param sslConfiguration SSL (HTTPS) will be used if not NULL
     */
-    HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler);
+    HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, QSslConfiguration* sslConfiguration=NULL);
 
     /** Destructor */
     virtual ~HttpConnectionHandler();
@@ -95,14 +88,8 @@ private:
     /** Configuration settings */
     HttpConnectionHandlerSettings settings;
 
-    /** TCP socket of the current connection (used for both HTTP and HTTPS) */
-    QSslSocket* socket;
-
-    /** Holds the configuration settings for SSL */
-    QSslConfiguration sslConfiguration;
-
-    /** Whether SSL is enabled */
-    bool useSsl;
+    /** TCP socket of the current connection  */
+    QTcpSocket* socket;
 
     /** Time for read timeout detection */
     QTimer readTimer;
@@ -116,11 +103,14 @@ private:
     /** This shows the busy-state from a very early time */
     bool busy;
 
+    /** Configuration for SSL */
+    QSslConfiguration* sslConfiguration;
+
     /** Executes the threads own event loop */
     void run();
 
-    /** Load the SSL certificate and key files */
-    void loadSslConfig();
+    /**  Create SSL or TCP socket */
+    void createSocket();
 
 public slots:
 

@@ -8,7 +8,7 @@
 #include <QDir>
 #include <QDateTime>
 
-StaticFileController::StaticFileController(const StaticFileControllerSettings &settings, QObject* parent)
+StaticFileController::StaticFileController(const StaticFileControllerSettings& settings, QObject* parent)
     :HttpRequestHandler(parent)
 {
     maxAge=settings.maxAge;
@@ -17,8 +17,7 @@ StaticFileController::StaticFileController(const StaticFileControllerSettings &s
     // Convert relative path to absolute, based on the current working directory
     if (QDir::isRelativePath(docroot))
     {
-	QDir relPath(docroot);
-	docroot=relPath.absolutePath();
+	docroot=QDir(docroot).absolutePath();
     }
     qDebug("StaticFileController: docroot=%s, encoding=%s, maxAge=%i",qPrintable(docroot),qPrintable(encoding),maxAge);
     maxCachedFileSize=settings.maxCachedFileSize;

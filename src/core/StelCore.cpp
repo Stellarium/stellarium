@@ -812,11 +812,6 @@ void StelCore::returnToHome()
 	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
-void StelCore::setJDayOfLastJDayUpdate(double jday)
-{
-	JDayOfLastJDayUpdate = jday;
-}
-
 double StelCore::getJDayOfLastJDayUpdate() const
 {
 	return JDayOfLastJDayUpdate;
