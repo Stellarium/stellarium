@@ -118,9 +118,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_j2000, ra_j2000;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
 		if (withDecimalDegree)
-			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDecDegStr(ra_j2000,5,false,true), StelUtils::radToDecDegStr(dec_j2000)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDecDegStr(ra_j2000,5,false,true), StelUtils::radToDecDegStr(dec_j2000)) + "<br>";
 		else
-			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
 	}
 
 	if (flags&RaDecOfDate)
@@ -211,9 +211,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
 		if (withDecimalDegree)
-			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
+			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
 		else
-			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 
 		if (core->getCurrentPlanet()->getEnglishName()=="Earth")
 		{
