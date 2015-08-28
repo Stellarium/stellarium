@@ -278,7 +278,7 @@ bool StelSkyItem::event(QEvent * e)
 
 		return true;
 		break;
-	}		
+	}
 
 	case QEvent::Gesture:
 		setAcceptedMouseButtons(0);
@@ -296,7 +296,7 @@ bool StelSkyItem::gestureEvent(QGestureEvent *event)
 		pinchTriggered(static_cast<QPinchGesture *>(pinch));
 
 	return true;
-c
+}
 
 void StelSkyItem::pinchTriggered(QPinchGesture *gesture)
 {
