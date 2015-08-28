@@ -168,7 +168,7 @@ void StelCore::init()
 	presetSkyTime = presetTimeStr.toDouble(&ok);
 	if (ok)
 	{
-		qDebug() << "navigation/preset_sky_time is a double - treating as jday:" << presetSkyTime;
+		qDebug() << "navigation/preset_sky_time is a double - treating as jday:" << QString::number(presetSkyTime, 'f', 5);
 	}
 	else
 	{
