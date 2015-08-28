@@ -17,7 +17,7 @@
 struct HttpListenerSettings : public HttpConnectionHandlerPoolSettings
 {
 	HttpListenerSettings()
-		:host(8080)
+		:port(8080)
 	{}
 
 	/** The local IP address to bind to. Default empty (listen on all interfaces). */
