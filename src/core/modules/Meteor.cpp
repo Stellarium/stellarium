@@ -67,31 +67,37 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		return;
 	}
 
-	// determine the rotation matrix to align z axis with radiant
-	m_matAltAzToRadiant = Mat4d::zrotation(radiantAz) * Mat4d::yrotation(M_PI_2 - radiantAlt);
-
-	// select a random initial meteor altitude [MIN_ALTITUDE, MAX_ALTITUDE]
+	// select a random initial meteor altitude in the horizontal system [MIN_ALTITUDE, MAX_ALTITUDE]
 	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
 
-	// determine the initial distance from observer to radiant
+	// define the radiant coordinate system
+	// rotation matrix to align z axis with radiant
+	m_matAltAzToRadiant = Mat4d::zrotation(radiantAz) * Mat4d::yrotation(M_PI_2 - radiantAlt);
+
+	// determine the initial distance from observer to meteor (radiant system)
 	m_initialDist = meteorDistance(M_PI_2 - radiantAlt, initialAlt);
 
 	// meteor trajectory
+	// select a random xy position in polar coordinates (radiant system)
 	m_xyDist = VISIBLE_RADIUS * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, visibleRadius]
-	float angle = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, 2pi]
+	float theta = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, 2pi]
 
-	// initial meteor coordinates
-	m_position[0] = m_xyDist * qCos(angle);
-	m_position[1] = m_xyDist * qSin(angle);
+	// initial meteor coordinates (radiant system)
+	m_position[0] = m_xyDist * qCos(theta);
+	m_position[1] = m_xyDist * qSin(theta);
 	m_position[2] = m_initialDist;
 	m_posTrain = m_position;
 
-	// find the angle from horizon to meteor
-	Vec3d positionAltAz = radiantToAltAz(m_position);
-	float meteorLat = qAsin(positionAltAz[2] / positionAltAz.length());
+	// find the initial meteor coordinates in the horizontal system
+	Vec3d positionAltAz = m_position;
+	positionAltAz.transfo4d(m_matAltAzToRadiant);
 
-	// below the horizon ?
-	if (meteorLat < 0.f)
+	// find the angle from horizon to meteor
+	float meteorAlt = qAsin(positionAltAz[2] / positionAltAz.length());
+
+	// this meteor should not be visible if it is above the maximum altitude
+	// or if it's below the horizon!
+	if (positionAltAz[2] > MAX_ALTITUDE || meteorAlt < 0.f)
 	{
 		return;
 	}
@@ -108,7 +114,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	}
 	else
 	{
-		m_finalDist = meteorDistance(M_PI_2 - meteorLat, MIN_ALTITUDE);
+		m_finalDist = meteorDistance(M_PI_2 - meteorAlt, MIN_ALTITUDE);
 	}
 
 	// determine intensity [-3; 4.5]
