@@ -164,7 +164,8 @@ bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 
 	//set time variables, time rate first because it causes a resetSync which we overwrite
 	core->setTimeRate(msg.timeRate);
-	core->setJDayOfLastJDayUpdate(msg.jDay);
+	core->setJDay(msg.jDay);
+	//This is needed for compensation of network delay. Requires system clocks of client/server to be calibrated to the same values.
 	core->setMilliSecondsOfLastJDayUpdate(msg.lastTimeSyncTime);
 
 	return true;

@@ -22,14 +22,14 @@ Template::Template(QFile& file, QTextCodec* textCodec) {
     QByteArray data=file.readAll();
     file.close();
     if (data.size()==0 || file.error()) {
-	qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
-    }
-    else
-    {
-	    if(textCodec)
-		    append(textCodec->toUnicode(data));
-	    else
-		    append(fromUtf8(data));
+	    qCritical("Template: cannot read from %s, %s",qPrintable(sourceName),qPrintable(file.errorString()));
+	}
+	else
+	{
+		if(textCodec)
+			append(textCodec->toUnicode(data));
+		else
+			append(fromUtf8(data));
     }
 }
 
@@ -243,4 +243,3 @@ void Template::translate(ITemplateTranslationProvider &provider)
 		}
 	}while(match.hasMatch());
 }
-

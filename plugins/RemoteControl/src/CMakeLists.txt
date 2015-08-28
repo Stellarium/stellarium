@@ -18,20 +18,12 @@ SET(QtWebApp_SRCS
   qtwebapp/httpserver/httprequesthandler.h
   qtwebapp/httpserver/httpresponse.cpp
   qtwebapp/httpserver/httpresponse.h
-  qtwebapp/httpserver/httpsession.cpp
-  qtwebapp/httpserver/httpsession.h
-  qtwebapp/httpserver/httpsessionstore.cpp
-  qtwebapp/httpserver/httpsessionstore.h
   qtwebapp/httpserver/staticfilecontroller.cpp
   qtwebapp/httpserver/staticfilecontroller.h
   
   qtwebapp/templateengine/template.cpp
   qtwebapp/templateengine/template.h
-  qtwebapp/templateengine/templatecache.cpp
-  qtwebapp/templateengine/templatecache.h
   qtwebapp/templateengine/templateglobal.h
-  qtwebapp/templateengine/templateloader.cpp
-  qtwebapp/templateengine/templateloader.h
 )
 
 SET(RemoteControl_SRCS
