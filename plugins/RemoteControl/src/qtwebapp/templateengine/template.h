@@ -22,6 +22,7 @@ public:
 	virtual QString getTranslation(const QString& key) = 0;
 };
 
+
 /**
  Enhanced version of QString for template processing. Templates
  are usually loaded from files, but may also be loaded from

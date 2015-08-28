@@ -273,8 +273,7 @@ QByteArray HttpRequest::getMethod() const {
     return method;
 }
 
-QByteArray HttpRequest::getRawPath() const
-{
+QByteArray HttpRequest::getRawPath() const {
     return path;
 }
 

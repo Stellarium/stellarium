@@ -8,19 +8,33 @@
 #include "httpconnectionhandlerpool.h"
 #include <QCoreApplication>
 
-HttpListener::HttpListener(const HttpListenerSettings& settings, HttpRequestHandler* requestHandler, QObject *parent)
+HttpListener::HttpListener(const HttpListenerSettings &settings, HttpRequestHandler* requestHandler, QObject *parent)
     : QTcpServer(parent)
 {
     Q_ASSERT(requestHandler!=0);
+    pool=NULL;
+    this->settings=settings;
+    this->requestHandler=requestHandler;
     // Reqister type of socketDescriptor for signal/slot handling
     qRegisterMetaType<tSocketDescriptor>("tSocketDescriptor");
-    // Create connection handler pool
-    this->settings=settings;
-    pool=new HttpConnectionHandlerPool(settings,requestHandler);
     // Start listening
+    listen();
+}
+
+
+HttpListener::~HttpListener() {
+    close();
+    qDebug("HttpListener: destroyed");
+}
+
+
+void HttpListener::listen() {
+    if (!pool) {
+        pool=new HttpConnectionHandlerPool(settings,requestHandler);
+    }
     QString host = settings.host;
     int port=settings.port;
-    listen(host.isEmpty() ? QHostAddress::Any : QHostAddress(host), port);
+    QTcpServer::listen(host.isEmpty() ? QHostAddress::Any : QHostAddress(host), port);
     if (!isListening()) {
         qCritical("HttpListener: Cannot bind on port %i: %s",port,qPrintable(errorString()));
     }
@@ -29,23 +43,30 @@ HttpListener::HttpListener(const HttpListenerSettings& settings, HttpRequestHand
     }
 }
 
-HttpListener::~HttpListener() {
-    close();
+
+void HttpListener::close() {
+    QTcpServer::close();
     qDebug("HttpListener: closed");
-    delete pool;
-    qDebug("HttpListener: destroyed");
+    if (pool) {
+        delete pool;
+        pool=NULL;
+    }
 }
 
 void HttpListener::incomingConnection(tSocketDescriptor socketDescriptor) {
 #ifdef SUPERVERBOSE
     qDebug("HttpListener: New connection");
 #endif
-    HttpConnectionHandler* freeHandler=pool->getConnectionHandler();
+
+    HttpConnectionHandler* freeHandler=NULL;
+    if (pool) {
+        freeHandler=pool->getConnectionHandler();
+    }
 
     // Let the handler process the new connection.
     if (freeHandler) {
         // The descriptor is passed via signal/slot because the handler lives in another
-        // thread and cannot open the socket when called by another thread.
+        // thread and cannot open the socket when directly called by another thread.
         connect(this,SIGNAL(handleConnection(tSocketDescriptor)),freeHandler,SLOT(handleConnection(tSocketDescriptor)));
         emit handleConnection(socketDescriptor);
         disconnect(this,SIGNAL(handleConnection(tSocketDescriptor)),freeHandler,SLOT(handleConnection(tSocketDescriptor)));

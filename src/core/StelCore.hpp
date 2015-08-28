@@ -353,10 +353,6 @@ public slots:
 	//! Return to the default location and set default landscape with atmosphere and fog effects
 	void returnToHome();
 
-	//! Sets the JDay of the last time resetSync() was called.
-	//! Usually, you do NOT want to call this method, use setJDay instead.
-	//! This method is used by the RemoteSync plugin.
-	void setJDayOfLastJDayUpdate(double jday);
 	//! Returns the JDay of the last time resetSync() was called
 	double getJDayOfLastJDayUpdate() const;
 	//! Sets the system date which corresponds to the JDayOfLastJDayUpdate.

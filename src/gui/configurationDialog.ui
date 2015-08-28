@@ -1466,7 +1466,11 @@
           <item>
            <layout class="QVBoxLayout" name="pluginsVerticalLayout">
             <item>
-             <widget class="QTextBrowser" name="pluginsInfoBrowser"/>
+             <widget class="QTextBrowser" name="pluginsInfoBrowser">
+              <property name="openExternalLinks">
+               <bool>true</bool>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QGroupBox" name="pluginsGroupBox">

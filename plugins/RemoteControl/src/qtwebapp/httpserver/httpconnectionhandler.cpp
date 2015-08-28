@@ -3,36 +3,33 @@
   @author Stefan Frings
 */
 
-#include <QSslKey>
-#include <QSslCertificate>
-#include <QDir>
 #include "httpconnectionhandler.h"
 #include "httpresponse.h"
 
-HttpConnectionHandler::HttpConnectionHandler(const HttpConnectionHandlerSettings &settings, HttpRequestHandler* requestHandler)
+HttpConnectionHandler::HttpConnectionHandler(const HttpConnectionHandlerSettings& settings, HttpRequestHandler* requestHandler, QSslConfiguration* sslConfiguration)
     : QThread()
 {
     Q_ASSERT(requestHandler!=0);
     this->settings=settings;
     this->requestHandler=requestHandler;
+    this->sslConfiguration=sslConfiguration;
     currentRequest=0;
-    busy = false;
-    useSsl = false;
+    busy=false;
 
-    // Load SSL configuration
-    loadSslConfig();
-
-    // Create a socket object, used for both HTTP and HTTPS
-    socket=new QSslSocket();
+    // Create TCP or SSL socket
+    createSocket();
 
     // execute signals in my own thread
     moveToThread(this);
     socket->moveToThread(this);
     readTimer.moveToThread(this);
+
+    // Connect signals
     connect(socket, SIGNAL(readyRead()), SLOT(read()));
     connect(socket, SIGNAL(disconnected()), SLOT(disconnected()));
     connect(&readTimer, SIGNAL(timeout()), SLOT(readTimeout()));
     readTimer.setSingleShot(true);
+
     qDebug("HttpConnectionHandler (%p): constructed", this);
     this->start();
 }
@@ -41,46 +38,24 @@ HttpConnectionHandler::HttpConnectionHandler(const HttpConnectionHandlerSettings
 HttpConnectionHandler::~HttpConnectionHandler() {
     quit();
     wait();
+    delete socket;
     qDebug("HttpConnectionHandler (%p): destroyed", this);
 }
 
 
-void HttpConnectionHandler::loadSslConfig() {
-    QString sslKeyFileName=settings.sslKeyFile;
-    QString sslCertFileName=settings.sslCertFile;
-    if (!sslKeyFileName.isEmpty() && !sslCertFileName.isEmpty()) {
-	// Convert relative fileNames to absolute, based on the current working directory
-	if (QDir::isRelativePath(sslKeyFileName))
-        {
-	    sslKeyFileName=QDir(sslKeyFileName).absolutePath();
-        }
-
-	if (QDir::isRelativePath(sslCertFileName))
-        {
-	    sslCertFileName=QDir(sslCertFileName).absolutePath();
-        }
-        // Load the two files
-        QFile certFile(sslCertFileName);
-        if (!certFile.open(QIODevice::ReadOnly)) {
-            qCritical("HttpConnectionHandler (%p): cannot open sslCertFile %s", this, qPrintable(sslCertFileName));
+void HttpConnectionHandler::createSocket() {
+    // If SSL is supported and configured, then create an instance of QSslSocket
+    #ifndef QT_NO_OPENSSL
+        if (sslConfiguration) {
+            QSslSocket* sslSocket=new QSslSocket();
+            sslSocket->setSslConfiguration(*sslConfiguration);
+            socket=sslSocket;
+            qDebug("HttpConnectionHandler (%p): SSL is enabled", this);
             return;
         }
-        QSslCertificate certificate(&certFile, QSsl::Pem);
-        certFile.close();
-        QFile keyFile(sslKeyFileName);
-        if (!keyFile.open(QIODevice::ReadOnly)) {
-            qCritical("HttpConnectionHandler (%p): cannot open sslKeyFile %s", this, qPrintable(sslKeyFileName));
-            return;
-        }
-        QSslKey sslKey(&keyFile, QSsl::Rsa, QSsl::Pem);
-        keyFile.close();
-        sslConfiguration.setPeerVerifyMode(QSslSocket::VerifyNone);
-        sslConfiguration.setLocalCertificate(certificate);
-        sslConfiguration.setPrivateKey(sslKey);
-        sslConfiguration.setProtocol(QSsl::TlsV1SslV3);
-        useSsl=true;
-        qDebug("HttpConnectionHandler (%p): SSL is enabled", this);
-    }
+    #endif
+    // else create an instance of QTcpSocket
+    socket=new QTcpSocket();
 }
 
 
@@ -88,22 +63,17 @@ void HttpConnectionHandler::run() {
     qDebug("HttpConnectionHandler (%p): thread started", this);
     try {
         exec();
-
-	socket->close();
-	delete socket;
     }
     catch (...) {
         qCritical("HttpConnectionHandler (%p): an uncatched exception occured in the thread",this);
     }
+    socket->close();
     qDebug("HttpConnectionHandler (%p): thread stopped", this);
 }
 
 
 void HttpConnectionHandler::handleConnection(tSocketDescriptor socketDescriptor) {
-	Q_ASSERT(QThread::currentThread() == this);
-	Q_ASSERT(this->thread() == this);
-
-    qDebug("HttpConnectionHandler (%p): handle new connection (%d)", this, socketDescriptor);
+    qDebug("HttpConnectionHandler (%p): handle new connection", this);
     busy = true;
     Q_ASSERT(socket->isOpen()==false); // if not, then the handler is already busy
 
@@ -117,11 +87,13 @@ void HttpConnectionHandler::handleConnection(tSocketDescriptor socketDescriptor)
         return;
     }
 
-    // Switch on encryption, if enabled
-    if (useSsl) {
-        socket->setSslConfiguration(sslConfiguration);
-        socket->startServerEncryption();
-    }
+    #ifndef QT_NO_OPENSSL
+        // Switch on encryption, if SSL is configured
+        if (sslConfiguration) {
+            qDebug("HttpConnectionHandler (%p): Starting encryption", this);
+            ((QSslSocket*)socket)->startServerEncryption();
+        }
+    #endif
 
     // Start timer for read timeout
     int readTimeout=settings.readTimeout;
@@ -142,13 +114,12 @@ void HttpConnectionHandler::setBusy() {
 
 
 void HttpConnectionHandler::readTimeout() {
-	Q_ASSERT(QThread::currentThread() == this);
-
     qDebug("HttpConnectionHandler (%p): read timeout occured",this);
 
     //Commented out because QWebView cannot handle this.
     //socket->write("HTTP/1.1 408 request timeout\r\nConnection: close\r\n\r\n408 request timeout\r\n");
 
+    socket->flush();
     socket->disconnectFromHost();
     delete currentRequest;
     currentRequest=0;
@@ -156,8 +127,6 @@ void HttpConnectionHandler::readTimeout() {
 
 
 void HttpConnectionHandler::disconnected() {
-	Q_ASSERT(QThread::currentThread() == this);
-
     qDebug("HttpConnectionHandler (%p): disconnected", this);
     socket->close();
     readTimer.stop();
@@ -165,8 +134,6 @@ void HttpConnectionHandler::disconnected() {
 }
 
 void HttpConnectionHandler::read() {
-	Q_ASSERT(QThread::currentThread() == this);
-
     // The loop adds support for HTTP pipelinig
     while (socket->bytesAvailable()) {
         #ifdef SUPERVERBOSE
@@ -192,6 +159,7 @@ void HttpConnectionHandler::read() {
         // If the request is aborted, return error message and close the connection
         if (currentRequest->getStatus()==HttpRequest::abort) {
             socket->write("HTTP/1.1 413 entity too large\r\nConnection: close\r\n\r\n413 Entity too large\r\n");
+            socket->flush();
             socket->disconnectFromHost();
             delete currentRequest;
             currentRequest=0;
@@ -214,8 +182,12 @@ void HttpConnectionHandler::read() {
             if (!response.hasSentLastPart()) {
                 response.write(QByteArray(),true);
             }
+
+            qDebug("HttpConnectionHandler (%p): finished request",this);
+
             // Close the connection after delivering the response, if requested
             if (QString::compare(currentRequest->getHeader("Connection"),"close",Qt::CaseInsensitive)==0) {
+                socket->flush();
                 socket->disconnectFromHost();
             }
             else {

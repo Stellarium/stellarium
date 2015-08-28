@@ -27,8 +27,11 @@ class DECLSPEC HttpRequestHandler : public QObject {
     Q_DISABLE_COPY(HttpRequestHandler)
 public:
 
-    /** Constructor */
-    HttpRequestHandler(QObject* parent=0);
+    /**
+     * Constructor.
+     * @param parent Parent object.
+     */
+    HttpRequestHandler(QObject* parent=NULL);
 
     /** Destructor */
     virtual ~HttpRequestHandler();
