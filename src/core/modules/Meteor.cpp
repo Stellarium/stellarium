@@ -82,7 +82,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	// initial meteor coordinates (radiant system)
 	m_position[0] = m_xyDist * qCos(theta);
 	m_position[1] = m_xyDist * qSin(theta);
-	m_position[2] = meteorDistance(M_PI_2 - radiantAlt, initialAlt);
+	m_position[2] = meteorZ(M_PI_2 - radiantAlt, initialAlt);
 	m_posTrain = m_position;
 
 	// store the initial z-component (radiant system)
@@ -114,7 +114,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	}
 	else
 	{
-		m_finalZ = meteorDistance(M_PI_2 - meteorAlt, MIN_ALTITUDE);
+		m_finalZ = meteorZ(M_PI_2 - meteorAlt, MIN_ALTITUDE);
 	}
 
 	// determine intensity [-3; 4.5]
@@ -313,7 +313,7 @@ void Meteor::buildColorVectors(const QList<ColorPair> colors)
 	m_trainColorVector = trainColor.toVector();
 }
 
-float Meteor::meteorDistance(float zenithAngle, float altitude)
+float Meteor::meteorZ(float zenithAngle, float altitude)
 {
 	float distance;
 
@@ -343,7 +343,7 @@ Vec3d Meteor::altAzToRadiant(Vec3d position)
 
 Vec3d Meteor::radiantToAltAz(Vec3d position)
 {
-	position /= 1242; // 1242 to scale down under 1
+	position /= 1242.0; // 1242 to scale down under 1
 	position.transfo4d(m_matAltAzToRadiant);
 	return position;
 }
