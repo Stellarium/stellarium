@@ -18,6 +18,8 @@
  */
 
 #include "SporadicMeteor.hpp"
+#include "StelCore.hpp"
+#include "StelUtils.hpp"
 
 SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture)
 	: Meteor(core, bolideTexture)
@@ -26,10 +28,18 @@ SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const 
 	// (see line 460 in StelApp.cpp)
 	float speed = 11 + (maxVel - 11) * ((float) qrand() / ((float) RAND_MAX + 1)); // [11, maxVel]
 
-	// radiant position
-	float rAlpha = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 2pi]
-	float rDelta = M_PI_2 - M_PI * ((float) qrand() / ((double) RAND_MAX + 1));  // [-pi/2, pi/2]
+	// select a random radiant in a visible area
+	float rAlt = M_PI_2 * ((float) qrand() / ((double) RAND_MAX + 1));  // [0, pi/2]
+	float rAz = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 2pi]
+	Vec3d pos;
+	StelUtils::spheToRect(rAz, rAlt, pos);
 
+	// convert to J2000
+	float rAlpha, rDelta;
+	pos = core->altAzToJ2000(pos);
+	StelUtils::rectToSphe(&rAlpha, &rDelta, pos);
+
+	// initialize the meteor model
 	init(rAlpha, rDelta, speed, getRandColor());
 }
 
