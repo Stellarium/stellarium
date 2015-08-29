@@ -63,12 +63,12 @@ public:
 	//! Draws the meteor.
 	virtual void draw(const StelCore* core, StelPainter& sPainter);
 
-	//! Indicate if the meteor it still visible.
-	inline bool isAlive() { return m_alive; }
+	//! Indicate if the meteor still visible.
+	bool isAlive() { return m_alive; }
 	//! Set meteor absolute magnitude.
-	inline void setAbsMag(float mag) { m_absMag = mag; }
+	void setAbsMag(float mag) { m_absMag = mag; }
 	//! Get meteor absolute magnitude.
-	inline float absMag() { return m_absMag; }
+	float absMag() { return m_absMag; }
 
 private:
 	//! Determine color vectors of line and prism used to draw meteor train.
