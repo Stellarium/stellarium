@@ -21,45 +21,13 @@
 #include "MeteorObj.hpp"
 
 MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha, const float& radiantDelta,
-		     const float& pidx, QList<Meteor::colorPair> colors, const StelTextureSP& bolideTexture)
+		     const float& pidx, QList<Meteor::ColorPair> colors, const StelTextureSP& bolideTexture)
 	: Meteor(core, bolideTexture)
 {
 	// if speed is zero, use a random value
 	if (!speed)
 	{
 		speed = 11 + (double)qrand() / ((double)RAND_MAX + 1) * 61;  // abs range 11-72 km/s
-	}
-
-	// determine the meteor color
-	if (colors.isEmpty()) {
-		colors.push_back(Meteor::colorPair("white", 100));
-	} else {
-		// handle cases when the total intensity is less than 100
-		int totalIntensity = 0;
-		int indexWhite = -1;
-		for (int i=0; i < colors.size(); ++i) {
-			totalIntensity += colors.at(i).second;
-			if (colors.at(i).first == "white") {
-				indexWhite = i;
-			}
-		}
-
-		int increaseWhite = 0;
-		if (totalIntensity > 100) {
-			qWarning() << "MeteorShowers plugin (showers.json): Total intensity must be less than 100";
-			colors.clear();
-			colors.push_back(Meteor::colorPair("white", 100));
-		} else {
-			increaseWhite = 100 - totalIntensity;
-		}
-
-		if (increaseWhite > 0) {
-			if (indexWhite == -1) {
-				colors.push_back(Meteor::colorPair("white", increaseWhite));
-			} else {
-				colors[indexWhite].second = increaseWhite;
-			}
-		}
 	}
 
 	// building meteor model
