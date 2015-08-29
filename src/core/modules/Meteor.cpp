@@ -110,7 +110,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 
 		// earth-grazers are rare!
 		// introduce a probabilistic factor just to make them a bit harder to occur
-		float prob = ((float) rand() / ((float) RAND_MAX + 1));
+		float prob = ((float) qrand() / ((float) RAND_MAX + 1));
 		if (prob > 0.3f) {
 			return;
 		}
