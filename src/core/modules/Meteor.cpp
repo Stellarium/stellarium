@@ -256,38 +256,59 @@ Vec4f Meteor::getColorFromName(QString colorName)
 
 void Meteor::buildColorVectors(const QList<ColorPair> colors)
 {
+	// building color arrays (line and prism)
 	QList<Vec4f> lineColor;
 	QList<Vec4f> trainColor;
-	// building color arrays (line and prism)
-	int totalOfSegments = 0;
-	int currentSegment = 1 + (m_segments - 1) * ((float) qrand() / ((float) RAND_MAX + 1));
-	for (int colorIndex = 0; colorIndex < colors.size(); colorIndex++)
+	foreach (ColorPair color, colors)
 	{
-		ColorPair currentColor = colors[colorIndex];
-
-		// segments which we'll paint with the current color
-		int numOfSegments = m_segments * (currentColor.second / 100.f) + 0.4f; // +0.4 affect approximation
-		if (colorIndex == colors.size()-1)
+		// segments to be painted with the current color
+		int segs = qRound(m_segments * (color.second / 100.f)); // rounds to nearest integer
+		for (int s = 0; s < segs; ++s)
 		{
-			numOfSegments = m_segments - totalOfSegments;
-		}
-
-		totalOfSegments += numOfSegments;
-		for (int i=0; i<numOfSegments; i++)
-		{
-			lineColor.insert(currentSegment, getColorFromName(currentColor.first));
-			trainColor.insert(currentSegment, getColorFromName(currentColor.first));
-			if (currentSegment >= m_segments-1)
-			{
-				currentSegment = 0;
-			}
-			else
-			{
-				currentSegment++;
-			}
-			trainColor.insert(currentSegment, getColorFromName(currentColor.first));
+			Vec4f rgba = getColorFromName(color.first);
+			lineColor.append(rgba);
+			trainColor.append(rgba);
+			trainColor.append(rgba);
 		}
 	}
+
+	// make sure that all segments have been painted!
+	const int segs = lineColor.size();
+	if (segs < m_segments) {
+		// use the last color to paint the last segments
+		Vec4f rgba = getColorFromName(colors.last().first);
+		for (int s = segs; s < m_segments; ++s) {
+			lineColor.append(rgba);
+			trainColor.append(rgba);
+			trainColor.append(rgba);
+		}
+	} else if (segs > m_segments) {
+		// remove the extra segments
+		for (int s = segs; s > m_segments; --s) {
+			lineColor.removeLast();
+			trainColor.removeLast();
+			trainColor.removeLast();
+		}
+	}
+
+	// multi-color ?
+	// select a random segment to be the first (to alternate colors)
+	if (colors.size() > 1) {
+		int firstSegment = (segs - 1) * ((float) qrand() / ((float) RAND_MAX + 1)); // [0, segments-1]
+		QList<Vec4f> lineColor2 = lineColor.mid(0, firstSegment);
+		QList<Vec4f> lineColor1 = lineColor.mid(firstSegment);
+		lineColor.clear();
+		lineColor.append(lineColor1);
+		lineColor.append(lineColor2);
+
+		firstSegment *= 2;
+		QList<Vec4f> trainColor2 = trainColor.mid(0, firstSegment);
+		QList<Vec4f> trainColor1 = trainColor.mid(firstSegment);
+		trainColor.clear();
+		trainColor.append(trainColor1);
+		trainColor.append(trainColor2);
+	}
+
 	m_lineColorVector = lineColor.toVector();
 	m_trainColorVector = trainColor.toVector();
 }
