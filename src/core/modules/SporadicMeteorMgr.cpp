@@ -108,7 +108,11 @@ void SporadicMeteorMgr::update(double deltaTime)
 		float prob = (float) qrand() / (float) RAND_MAX;
 		if (prob < rate)
 		{
-			activeMeteors.append(new SporadicMeteor(core, m_maxVelocity, m_bolideTexture));
+			SporadicMeteor* m = new SporadicMeteor(core, m_maxVelocity, m_bolideTexture);
+			if (m->isAlive())
+			{
+				activeMeteors.append(m);
+			}
 		}
 	}
 }

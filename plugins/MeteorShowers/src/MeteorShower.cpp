@@ -297,7 +297,10 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta,
 						     m_pidx, m_colors, m_mgr->getBolideTexture());
-			m_activeMeteors.append(m);
+			if (m->isAlive())
+			{
+				m_activeMeteors.append(m);
+			}
 		}
 	}
 }
