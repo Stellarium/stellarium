@@ -48,7 +48,7 @@ Meteor::~Meteor()
 }
 
 void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
-		  const float& speed, const QList<colorPair> colors)
+		  const float& speed, const QList<ColorPair> colors)
 {
 	// meteor velocity in km/s
 	m_speed = speed;
@@ -254,7 +254,7 @@ Vec4f Meteor::getColorFromName(QString colorName)
 	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
 }
 
-void Meteor::buildColorVectors(const QList<colorPair> colors)
+void Meteor::buildColorVectors(const QList<ColorPair> colors)
 {
 	QList<Vec4f> lineColor;
 	QList<Vec4f> trainColor;
@@ -263,7 +263,7 @@ void Meteor::buildColorVectors(const QList<colorPair> colors)
 	int currentSegment = 1 + (m_segments - 1) * ((float) qrand() / ((float) RAND_MAX + 1));
 	for (int colorIndex = 0; colorIndex < colors.size(); colorIndex++)
 	{
-		colorPair currentColor = colors[colorIndex];
+		ColorPair currentColor = colors[colorIndex];
 
 		// segments which we'll paint with the current color
 		int numOfSegments = m_segments * (currentColor.second / 100.f) + 0.4f; // +0.4 affect approximation

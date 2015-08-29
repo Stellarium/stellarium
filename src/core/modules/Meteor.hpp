@@ -45,7 +45,7 @@ class Meteor
 {
 public:
 	//! <colorName, intensity>
-	typedef QPair<QString, int> colorPair;
+	typedef QPair<QString, int> ColorPair;
 
 	//! Create a Meteor object.
 	Meteor(const StelCore* core, const StelTextureSP &bolideTexture);
@@ -53,7 +53,7 @@ public:
 
 	//! Initialize meteor
 	void init(const float& radiantAlpha, const float& radiantDelta,
-		  const float& speed, const QList<colorPair> colors);
+		  const float& speed, const QList<ColorPair> colors);
 
 	//! Updates the position of the meteor, and expires it if necessary.
 	//! @param deltaTime the time increment in seconds since the last call.
@@ -72,7 +72,7 @@ public:
 
 private:
 	//! Determine color vectors of line and prism used to draw meteor train.
-	void buildColorVectors(const QList<colorPair> colors);
+	void buildColorVectors(const QList<ColorPair> colors);
 
 	//! get RGB from color name
 	Vec4f getColorFromName(QString colorName);
