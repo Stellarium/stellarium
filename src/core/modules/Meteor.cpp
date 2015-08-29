@@ -31,8 +31,8 @@ Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 	, m_alive(false)
 	, m_speed(72.)
 	, m_xyDist(1.)
-	, m_initialDist(1.)
-	, m_finalDist(1.)
+	, m_initialZ(1.)
+	, m_finalZ(1.)
 	, m_absMag(.5)
 	, m_aptMag(.5)
 	, m_firstBrightSegment(1)
@@ -74,9 +74,6 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	// rotation matrix to align z axis with radiant
 	m_matAltAzToRadiant = Mat4d::zrotation(radiantAz) * Mat4d::yrotation(M_PI_2 - radiantAlt);
 
-	// determine the initial distance from observer to meteor (radiant system)
-	m_initialDist = meteorDistance(M_PI_2 - radiantAlt, initialAlt);
-
 	// meteor trajectory
 	// select a random xy position in polar coordinates (radiant system)
 	m_xyDist = VISIBLE_RADIUS * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, visibleRadius]
@@ -85,8 +82,11 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	// initial meteor coordinates (radiant system)
 	m_position[0] = m_xyDist * qCos(theta);
 	m_position[1] = m_xyDist * qSin(theta);
-	m_position[2] = m_initialDist;
+	m_position[2] = meteorDistance(M_PI_2 - radiantAlt, initialAlt);
 	m_posTrain = m_position;
+
+	// store the initial z-component (radiant system)
+	m_initialZ = m_position[2];
 
 	// find the initial meteor coordinates in the horizontal system
 	Vec3d positionAltAz = m_position;
@@ -105,7 +105,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	// determine the final distance from observer to meteor
 	if (radiantAlt < 0.0174532925f) // (<1 degrees) earth grazing meteor ?
 	{
-		m_finalDist = -m_initialDist;
+		m_finalZ = -m_initialZ;
 		// a meteor cannot hit the observer
 		if (m_xyDist < BURN_ALTITUDE)
 		{
@@ -114,7 +114,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	}
 	else
 	{
-		m_finalDist = meteorDistance(M_PI_2 - meteorAlt, MIN_ALTITUDE);
+		m_finalZ = meteorDistance(M_PI_2 - meteorAlt, MIN_ALTITUDE);
 	}
 
 	// determine intensity [-3; 4.5]
@@ -129,7 +129,7 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 
 	// most visible meteors are under about 184km distant
 	// scale max mag down if outside this range
-	float scale = qPow(184, 2) / qPow(m_initialDist, 2);
+	float scale = qPow(184, 2) / qPow(m_position.length(), 2);
 	if (scale < 1.0f)
 	{
 		m_absMag *= scale;
@@ -150,7 +150,7 @@ bool Meteor::update(double deltaTime)
 		return false;
 	}
 
-	if (m_position[2] < m_finalDist)
+	if (m_position[2] < m_finalZ)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
@@ -167,13 +167,13 @@ bool Meteor::update(double deltaTime)
 		// update apparent magnitude based on distance to observer
 		m_aptMag = m_absMag * 0.7f;
 		float mult;
-		if (m_finalDist == -m_initialDist) // earth-grazer?
+		if (m_finalZ == -m_initialZ) // earth-grazer?
 		{
 			mult = qPow(m_xyDist, 2) / qPow(m_position[2], 2);
 		}
 		else
 		{
-			mult = qPow(m_finalDist, 2) / qPow(m_position[2], 2);
+			mult = qPow(m_finalZ, 2) / qPow(m_position[2], 2);
 		}
 		mult = mult > 1.f? 1.f : mult;
 		m_aptMag += m_absMag * 0.3f * mult;
@@ -183,9 +183,9 @@ bool Meteor::update(double deltaTime)
 	m_position[2] -= m_speed * deltaTime;
 
 	// train doesn't extend beyond start of burn
-	if (m_position[2] + m_speed * 0.5f > m_initialDist)
+	if (m_position[2] + m_speed * 0.5f > m_initialZ)
 	{
-		m_posTrain[2] = m_initialDist;
+		m_posTrain[2] = m_initialZ;
 	}
 	else
 	{
