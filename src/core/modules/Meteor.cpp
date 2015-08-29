@@ -29,6 +29,7 @@
 Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 	: m_core(core)
 	, m_alive(false)
+	, m_isEarthGrazer(false)
 	, m_speed(72.)
 	, m_xyDist(1.)
 	, m_initialZ(1.)
@@ -83,10 +84,6 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	m_position[0] = m_xyDist * qCos(theta);
 	m_position[1] = m_xyDist * qSin(theta);
 	m_position[2] = meteorZ(M_PI_2 - radiantAlt, initialAlt);
-	m_posTrain = m_position;
-
-	// store the initial z-component (radiant system)
-	m_initialZ = m_position[2];
 
 	// find the initial meteor coordinates in the horizontal system
 	Vec3d positionAltAz = m_position;
@@ -102,20 +99,40 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		return;
 	}
 
-	// determine the final distance from observer to meteor
-	if (radiantAlt < 0.0174532925f) // (<1 degrees) earth grazing meteor ?
+	// determine the final z-component
+	if (radiantAlt < 0.0262f) // (<1.5 degrees) earth grazing meteor ?
 	{
-		m_finalZ = -m_initialZ;
-		// a meteor cannot hit the observer
+		// a meteor cannot hit the observer!
 		if (m_xyDist < BURN_ALTITUDE)
 		{
 			return;
 		}
+
+		// earth-grazers are rare!
+		// introduce a probabilistic factor just to make them a bit harder to occur
+		float prob = ((float) rand() / ((float) RAND_MAX + 1));
+		if (prob > 0.3f) {
+			return;
+		}
+
+		// fix z-coordinate [visibleRadius/2, visibleRadius]
+		float v2 = VISIBLE_RADIUS / 2.f;
+		m_position[2] = v2 + (VISIBLE_RADIUS - v2) * ((double) qrand() / ((double) RAND_MAX + 1));
+
+		// limit lifetime to 12sec
+		m_finalZ = qMax(m_position[2] - m_speed * 12.f, -m_position[2]);
+
+		m_isEarthGrazer = true;
 	}
 	else
 	{
 		m_finalZ = meteorZ(M_PI_2 - meteorAlt, MIN_ALTITUDE);
 	}
+
+	m_posTrain = m_position;
+
+	// store the initial z-component (radiant system)
+	m_initialZ = m_position[2];
 
 	// determine intensity [-3; 4.5]
 	float Mag1 = (double)qrand()/((double)RAND_MAX+1)*7.5f - 3;
@@ -133,6 +150,8 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 	if (scale < 1.0f)
 	{
 		m_absMag *= scale;
+		if (m_isEarthGrazer)
+			m_absMag *= 2.f; // increase it a little bit!
 	}
 
 	m_firstBrightSegment = m_segments * ((float) qrand() / ((float) RAND_MAX + 1));
@@ -167,7 +186,7 @@ bool Meteor::update(double deltaTime)
 		// update apparent magnitude based on distance to observer
 		m_aptMag = m_absMag * 0.7f;
 		float mult;
-		if (m_finalZ == -m_initialZ) // earth-grazer?
+		if (m_isEarthGrazer)
 		{
 			mult = qPow(m_xyDist, 2) / qPow(m_position[2], 2);
 		}

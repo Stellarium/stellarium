@@ -97,7 +97,8 @@ private:
 
 	const StelCore* m_core;         //! The associated StelCore instance.
 
-	bool m_alive;                   //! Indicate if the meteor it still visible.
+	bool m_alive;                   //! Indicates if the meteor it still visible.
+	bool m_isEarthGrazer;           //! Indicates if the meteor is a Earth-grazer.
 	float m_speed;                  //! Velocity of meteor in km/s.
 	Mat4d m_matAltAzToRadiant;      //! Rotation matrix to convert from horizontal to radiant coordinate system.
 	Vec3d m_position;               //! Meteor position in radiant coordinate system.
