@@ -37,30 +37,30 @@ SporadicMeteor::~SporadicMeteor()
 {
 }
 
-QList<Meteor::colorPair> SporadicMeteor::getRandColor()
+QList<Meteor::ColorPair> SporadicMeteor::getRandColor()
 {
-	QList<colorPair> colors;
+	QList<ColorPair> colors;
 	float prob = (float) qrand() / (float) RAND_MAX;
 	if (prob > 0.9f)
 	{
-		colors.push_back(Meteor::colorPair("white", 70));
-		colors.push_back(Meteor::colorPair("orangeYellow", 10));
-		colors.push_back(Meteor::colorPair("yellow", 10));
-		colors.push_back(Meteor::colorPair("blueGreen", 10));
+		colors.push_back(Meteor::ColorPair("white", 70));
+		colors.push_back(Meteor::ColorPair("orangeYellow", 10));
+		colors.push_back(Meteor::ColorPair("yellow", 10));
+		colors.push_back(Meteor::ColorPair("blueGreen", 10));
 	}
 	else if (prob > 0.85f)
 	{
-		colors.push_back(Meteor::colorPair("white", 80));
-		colors.push_back(Meteor::colorPair("violet", 20));
+		colors.push_back(Meteor::ColorPair("white", 80));
+		colors.push_back(Meteor::ColorPair("violet", 20));
 	}
 	else if (prob > 0.80f)
 	{
-		colors.push_back(Meteor::colorPair("white", 80));
-		colors.push_back(Meteor::colorPair("orangeYellow", 20));
+		colors.push_back(Meteor::ColorPair("white", 80));
+		colors.push_back(Meteor::ColorPair("orangeYellow", 20));
 	}
 	else
 	{
-		colors.push_back(Meteor::colorPair("white", 100));
+		colors.push_back(Meteor::ColorPair("white", 100));
 	}
 
 	return colors;
