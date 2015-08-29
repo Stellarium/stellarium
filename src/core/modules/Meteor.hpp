@@ -103,8 +103,8 @@ private:
 	Vec3d m_position;               //! Meteor position in radiant coordinate system.
 	Vec3d m_posTrain;               //! End of train in radiant coordinate system.
 	float m_xyDist;                 //! Distance in XY plane (orthogonal to radiant) from observer to meteor
-	float m_initialDist;            //! Initial distance from observer to meteor.
-	float m_finalDist;              //! Final distance from observer to meteor.
+	float m_initialZ;               //! Initial z-component of the meteor in radiant coordinates.
+	float m_finalZ;                 //! Final z-compoenent of the meteor in radiant coordinates.
 	float m_absMag;                 //! Absolute magnitude [0, 1]
 	float m_aptMag;                 //! Apparent magnitude [0, 1]
 	int m_firstBrightSegment;       //! First bright segment of the train
