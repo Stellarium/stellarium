@@ -86,8 +86,8 @@ private:
 	//! Draws the meteor train.
 	void drawTrain(StelPainter& sPainter, const float &thickness);
 
-	//! Calculating meteor distance as a function of meteor zenith angle
-	float meteorDistance(float zenithAngle, float altitude);
+	//! Calculates the z-component of a meteor as a function of meteor zenith angle
+	float meteorZ(float zenithAngle, float altitude);
 
 	//! find meteor position in horizontal coordinate system
 	Vec3d radiantToAltAz(Vec3d position);
