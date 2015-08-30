@@ -69,7 +69,7 @@ public:
 		PhenomenaCount		//! total number of columns
 	};
 
-	AstroCalcDialog();
+	AstroCalcDialog(QObject* parent);
 	virtual ~AstroCalcDialog();
 
 public slots:
