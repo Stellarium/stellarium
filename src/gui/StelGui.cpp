@@ -168,9 +168,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
 	configurationDialog = new ConfigurationDialog(this, atopLevelGraphicsWidget);
 #ifdef ENABLE_SCRIPT_CONSOLE
-	scriptConsole = new ScriptConsole();
+	scriptConsole = new ScriptConsole(atopLevelGraphicsWidget);
 #endif
-	astroCalcDialog = new AstroCalcDialog();
+	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts

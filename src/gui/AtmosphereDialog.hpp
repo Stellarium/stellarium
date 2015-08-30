@@ -31,11 +31,11 @@ class Ui_atmosphereDialogForm;
 
 class AtmosphereDialog : public StelDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    AtmosphereDialog();
-    virtual ~AtmosphereDialog();
+	AtmosphereDialog();
+	virtual ~AtmosphereDialog();
 
 public slots:
         void retranslate();
