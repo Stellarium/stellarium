@@ -29,14 +29,11 @@
 Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
 	: m_core(core)
 	, m_alive(false)
-	, m_isEarthGrazer(false)
 	, m_speed(72.)
-	, m_xyDist(1.)
 	, m_initialZ(1.)
 	, m_finalZ(1.)
 	, m_absMag(.5)
 	, m_aptMag(.5)
-	, m_firstBrightSegment(1)
 	, m_bolideTexture(bolideTexture)
 	, m_segments(10)
 {
@@ -68,22 +65,30 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		return;
 	}
 
-	// select a random initial meteor altitude in the horizontal system [MIN_ALTITUDE, MAX_ALTITUDE]
-	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
-
 	// define the radiant coordinate system
 	// rotation matrix to align z axis with radiant
 	m_matAltAzToRadiant = Mat4d::zrotation(radiantAz) * Mat4d::yrotation(M_PI_2 - radiantAlt);
 
+	// select a random initial meteor altitude in the horizontal system [MIN_ALTITUDE, MAX_ALTITUDE]
+	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
+
+	// calculates the max z-coordinate for the currrent radiant
+	float maxZ = meteorZ(M_PI_2 - radiantAlt, initialAlt);
+
 	// meteor trajectory
 	// select a random xy position in polar coordinates (radiant system)
-	m_xyDist = VISIBLE_RADIUS * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, visibleRadius]
+
+	float xyDist = maxZ * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, maxZ]
 	float theta = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, 2pi]
 
 	// initial meteor coordinates (radiant system)
-	m_position[0] = m_xyDist * qCos(theta);
-	m_position[1] = m_xyDist * qSin(theta);
-	m_position[2] = meteorZ(M_PI_2 - radiantAlt, initialAlt);
+	m_position[0] = xyDist * qCos(theta);
+	m_position[1] = xyDist * qSin(theta);
+	m_position[2] = maxZ;
+	m_posTrain = m_position;
+
+	// store the initial z-component (radiant system)
+	m_initialZ = m_position[2];
 
 	// find the initial meteor coordinates in the horizontal system
 	Vec3d positionAltAz = m_position;
@@ -94,20 +99,14 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 
 	// this meteor should not be visible if it is above the maximum altitude
 	// or if it's below the horizon!
-	if (positionAltAz[2] > MAX_ALTITUDE || meteorAlt < 0.f)
+	if (positionAltAz[2] > MAX_ALTITUDE || meteorAlt <= 0.f)
 	{
 		return;
 	}
 
-	// determine the final z-component
+	// determine the final z-component and the min distance between meteor and observer
 	if (radiantAlt < 0.0262f) // (<1.5 degrees) earth grazing meteor ?
 	{
-		// a meteor cannot hit the observer!
-		if (m_xyDist < BURN_ALTITUDE)
-		{
-			return;
-		}
-
 		// earth-grazers are rare!
 		// introduce a probabilistic factor just to make them a bit harder to occur
 		float prob = ((float) qrand() / ((float) RAND_MAX + 1));
@@ -115,46 +114,43 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 			return;
 		}
 
-		// fix z-coordinate [visibleRadius/2, visibleRadius]
-		float v2 = VISIBLE_RADIUS / 2.f;
-		m_position[2] = v2 + (VISIBLE_RADIUS - v2) * ((double) qrand() / ((double) RAND_MAX + 1));
-
 		// limit lifetime to 12sec
-		m_finalZ = qMax(m_position[2] - m_speed * 12.f, -m_position[2]);
+		m_finalZ = -m_position[2];
+		m_finalZ = qMax(m_position[2] - m_speed * 12.f, (double) m_finalZ);
 
-		m_isEarthGrazer = true;
+		m_minDist = xyDist;
 	}
 	else
 	{
+		// limit lifetime to 12sec
 		m_finalZ = meteorZ(M_PI_2 - meteorAlt, MIN_ALTITUDE);
+		m_finalZ = qMax(m_position[2] - m_speed * 12.f, (double) m_finalZ);
+
+		m_minDist = qSqrt(m_finalZ * m_finalZ + xyDist * xyDist);
 	}
 
-	m_posTrain = m_position;
-
-	// store the initial z-component (radiant system)
-	m_initialZ = m_position[2];
+	// a meteor cannot hit the observer!
+	if (m_minDist < MIN_ALTITUDE) {
+		return;
+	}
 
 	// determine intensity [-3; 4.5]
-	float Mag1 = (double)qrand()/((double)RAND_MAX+1)*7.5f - 3;
-	float Mag2 = (double)qrand()/((double)RAND_MAX+1)*7.5f - 3;
-	float Mag = (Mag1 + Mag2)/2.0f;
+	float Mag1 = (float) qrand() / ((float) RAND_MAX + 1) * 7.5f - 3;
+	float Mag2 = (float) qrand() / ((float) RAND_MAX + 1) * 7.5f - 3;
+	float Mag = (Mag1 + Mag2) / 2.0f;
 
 	// compute RMag and CMag
 	RCMag rcMag;
 	m_core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
-	m_absMag = rcMag.luminance;
+	m_absMag = rcMag.radius <= 1.2f ? 0.f : rcMag.luminance;
+	if (m_absMag == 0.f) {
+		return;
+	}
 
 	// most visible meteors are under about 184km distant
 	// scale max mag down if outside this range
-	float scale = qPow(184, 2) / qPow(m_position.length(), 2);
-	if (scale < 1.0f)
-	{
-		m_absMag *= scale;
-		if (m_isEarthGrazer)
-			m_absMag *= 2.f; // increase it a little bit!
-	}
-
-	m_firstBrightSegment = m_segments * ((float) qrand() / ((float) RAND_MAX + 1));
+	float scale = qPow(184.0 / m_minDist, 2);
+	m_absMag *= qMin(scale, 1.0f);
 
 	// build the color vector
 	buildColorVectors(colors);
@@ -174,29 +170,11 @@ bool Meteor::update(double deltaTime)
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
 		m_absMag -= deltaTime * 2.f;
-		m_aptMag = m_absMag;
-		if(m_absMag < 0)
+		if(m_absMag <= 0.f)
 		{
 			m_alive = false;
 			return false;    // no longer visible
 		}
-	}
-	else
-	{
-		// update apparent magnitude based on distance to observer
-		m_aptMag = m_absMag * 0.7f;
-		float mult;
-		if (m_isEarthGrazer)
-		{
-			mult = qPow(m_xyDist, 2) / qPow(m_position[2], 2);
-		}
-		else
-		{
-			mult = qPow(m_finalZ, 2) / qPow(m_position[2], 2);
-		}
-		mult = mult > 1.f? 1.f : mult;
-		m_aptMag += m_absMag * 0.3f * mult;
-		m_aptMag = m_aptMag < 0.f ? 0.f : m_aptMag;
 	}
 
 	m_position[2] -= m_speed * deltaTime;
@@ -210,6 +188,11 @@ bool Meteor::update(double deltaTime)
 	{
 		m_posTrain[2] -= m_speed * deltaTime;
 	}
+
+	// update apparent magnitude based on distance to observer
+	float scale = qPow(m_minDist / m_position.length(), 2);
+	m_aptMag = m_absMag * qMin(scale, 1.f);
+	m_aptMag = qMax(m_aptMag, 0.f);
 
 	return true;
 }
@@ -386,7 +369,7 @@ void Meteor::calculateThickness(const StelCore* core, float& thickness, float& b
 
 void Meteor::drawBolide(StelPainter& sPainter, const float& bolideSize)
 {
-	if (!bolideSize || !m_bolideTexture || m_position[2] > VISIBLE_RADIUS)
+	if (!bolideSize || !m_bolideTexture)
 	{
 		return;
 	}
@@ -454,14 +437,8 @@ void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 	Vec3d posTrainR = m_posTrain;
 	posTrainR[0] -= thickness;
 
-	for (int i=0; i<m_segments; i++)
+	for (int i = 0; i < m_segments; ++i)
 	{
-		float mag = m_aptMag * i/(3* (m_segments-1));
-		if (i > m_firstBrightSegment)
-		{
-			mag *= 12./5.;
-		}
-
 		double height = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/(m_segments-1);
 		Vec3d posi;
 
@@ -484,6 +461,7 @@ void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 		vertexArrayR.push_back(radiantToAltAz(posi));
 		vertexArrayTop.push_back(radiantToAltAz(posi));
 
+		float mag = m_aptMag * ((float) i / (float) (m_segments-1));
 		m_lineColorVector[i][3] = mag;
 		m_trainColorVector[i*2][3] = mag;
 		m_trainColorVector[i*2+1][3] = mag;
