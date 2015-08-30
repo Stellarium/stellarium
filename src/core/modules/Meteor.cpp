@@ -134,10 +134,8 @@ void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
 		return;
 	}
 
-	// determine intensity [-3; 4.5]
-	float Mag1 = (float) qrand() / ((float) RAND_MAX + 1) * 7.5f - 3;
-	float Mag2 = (float) qrand() / ((float) RAND_MAX + 1) * 7.5f - 3;
-	float Mag = (Mag1 + Mag2) / 2.0f;
+	// select random magnitude [-3; 4.5]
+	float Mag = (float) qrand() / ((float) RAND_MAX + 1) * 7.5f - 3.f;
 
 	// compute RMag and CMag
 	RCMag rcMag;
@@ -170,11 +168,13 @@ bool Meteor::update(double deltaTime)
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
 		m_absMag -= deltaTime * 2.f;
-		if(m_absMag <= 0.f)
-		{
-			m_alive = false;
-			return false;    // no longer visible
-		}
+	}
+
+	// no longer visible
+	if(m_absMag <= 0.f)
+	{
+		m_alive = false;
+		return false;
 	}
 
 	m_position[2] -= m_speed * deltaTime;

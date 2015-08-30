@@ -38,13 +38,17 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 		return;
 	}
 
-	// implements the population index
-	float oneMag = -0.2; // negative, working in different scale ( 0 to 1 - where 1 is brighter)
-	if (pidx) // is not zero
+	// implements the population index (pidx) - usually a decimal between 2 and 4
+	if (pidx > 1.f)
 	{
-		if (qrand()%100 < 100.f/pidx) // probability
+		// higher pidx implies a larger fraction of faint meteors than average
+		float prob = (float) qrand() / ((float) RAND_MAX + 1);
+		if (prob > 1.f / pidx)
 		{
-			setAbsMag(absMag() + oneMag);  // (m+1)
+			// Increase the absolute magnitude ([-3; 4.5]) in 1.5!
+			// As we are working on a 0-1 scale (where 1 is brighter),
+			// more 1.5 means less 0.2!
+			setAbsMag(absMag() - 0.2f);
 		}
 	}
 }
