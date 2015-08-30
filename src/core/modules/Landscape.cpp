@@ -758,7 +758,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		static QString lastLandscapeName;
 		if (lastLandscapeName != name)
 		{
-			qWarning() << "Dubious result: Landscape \"" << name << "\" not calibrated. Opacity test represents mathematical horizon only.";
+			qWarning() << "Dubious result: Landscape " << name << " not calibrated. Opacity test represents mathematical horizon only.";
 			lastLandscapeName=name;
 		}
 		return (azalt[2] > 0 ? 0.0f : 1.0f);
