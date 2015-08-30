@@ -18,20 +18,23 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "SolarSystem.hpp"
-#include "Planet.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
+
+#include "SolarSystem.hpp"
+#include "Planet.hpp"
+
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
 
 #include <QTimer>
 
-AstroCalcDialog::AstroCalcDialog()
+AstroCalcDialog::AstroCalcDialog(QObject *parent)
+	: StelDialog(parent)
 {
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
