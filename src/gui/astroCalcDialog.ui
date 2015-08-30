@@ -376,6 +376,9 @@
          </item>
          <item>
           <widget class="QDoubleSpinBox" name="allowedSeparationDoubleSpinBox">
+           <property name="toolTip">
+            <string>Value in decimal degrees</string>
+           </property>
            <property name="decimals">
             <number>4</number>
            </property>
