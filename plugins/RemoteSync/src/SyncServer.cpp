@@ -59,6 +59,8 @@ bool SyncServer::start(int port)
 		handlerList[ALIVE] = new ServerAliveHandler();
 
 		addSender(new TimeEventSender());
+		addSender(new LocationEventSender());
+		addSender(new SelectionEventSender());
 
 		timeoutTimerId = startTimer(5000,Qt::VeryCoarseTimer);
 	}

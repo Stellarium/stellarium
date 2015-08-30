@@ -18,14 +18,18 @@
  */
 
 #include "SyncServerEventSenders.hpp"
+#include "SyncServer.hpp"
+
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "SyncServer.hpp"
+#include "StelObserver.hpp"
+#include "StelObjectMgr.hpp"
+
 
 SyncServerEventSender::SyncServerEventSender()
 	: isDirty(false)
 {
-
+	core = StelApp::getInstance().getCore();
 }
 
 void SyncServerEventSender::broadcastMessage(const SyncMessage &msg)
@@ -35,7 +39,6 @@ void SyncServerEventSender::broadcastMessage(const SyncMessage &msg)
 
 TimeEventSender::TimeEventSender()
 {
-	core = StelApp::getInstance().getCore();
 	//this is the only event we need to listen to
 	connect(core,SIGNAL(timeSyncOccurred(double)),this,SLOT(reactToStellariumEvent()));
 }
@@ -46,5 +49,56 @@ Time TimeEventSender::constructMessage()
 	msg.lastTimeSyncTime = core->getMilliSecondsOfLastJDayUpdate();
 	msg.jDay = core->getJDayOfLastJDayUpdate();
 	msg.timeRate = core->getTimeRate();
+	return msg;
+}
+
+LocationEventSender::LocationEventSender()
+{
+	connect(core,SIGNAL(locationChanged(StelLocation)), this, SLOT(reactToStellariumEvent()));
+}
+
+Location LocationEventSender::constructMessage()
+{
+	Location loc;
+	const StelObserver* obs = core->getCurrentObserver();
+
+	//test if the observer is moving (spaceship)
+	const SpaceShipObserver* sso = qobject_cast<const SpaceShipObserver*>(obs);
+
+	if(sso)
+	{
+		loc.timeToGo = sso->getRemainingTime();
+		loc.totalDuration = sso->getTransitTime();
+		loc.stelLocation = sso->getTargetLocation();
+	}
+	else
+	{
+		loc.stelLocation = obs->getCurrentLocation();
+	}
+
+	return loc;
+}
+
+SelectionEventSender::SelectionEventSender()
+{
+	objMgr = &StelApp::getInstance().getStelObjectMgr();
+	connect(objMgr,SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),this,SLOT(reactToStellariumEvent()));
+}
+
+Selection SelectionEventSender::constructMessage()
+{
+	Selection msg;
+	const QList<StelObjectP>& selObj = objMgr->getSelectedObject();
+
+	//note: there is no current way to uniquely identify an object
+	//maybe identify by type+name? but it seems this needs some changes
+	//(StelObject::getType does not correspond directly to StelObjectModule::getName)
+	//even then, some objects (e.g. Nebulas) dont seem to have a name at all!
+
+	for (QList<StelObjectP>::const_iterator iter=selObj.constBegin();iter!=selObj.constEnd();++iter)
+	{
+		msg.selectedObjectNames.append((*iter)->getEnglishName());
+	}
+
 	return msg;
 }

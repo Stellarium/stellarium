@@ -23,6 +23,7 @@
 #include "SyncProtocol.hpp"
 
 class SyncClient;
+class StelCore;
 
 class ClientHandler : public QObject, public SyncMessageHandler
 {
@@ -30,9 +31,11 @@ class ClientHandler : public QObject, public SyncMessageHandler
 	Q_INTERFACES(SyncMessageHandler)
 
 public:
+	ClientHandler();
 	ClientHandler(SyncClient *client);
 protected:
 	SyncClient* client;
+	StelCore* core;
 };
 
 class ClientErrorHandler : public ClientHandler
@@ -60,17 +63,27 @@ public:
 	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
 };
 
-class StelCore;
-
-class ClientTimeHandler : public SyncMessageHandler
+class ClientTimeHandler : public ClientHandler
 {
 public:
-	ClientTimeHandler();
-
 	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
-private:
-	StelCore* core;
 };
 
+class ClientLocationHandler : public ClientHandler
+{
+public:
+	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+};
+
+class StelObjectMgr;
+
+class ClientSelectionHandler : public ClientHandler
+{
+public:
+	ClientSelectionHandler();
+	bool handleMessage(QDataStream &stream, SyncRemotePeer &peer) Q_DECL_OVERRIDE;
+private:
+	StelObjectMgr* objMgr;
+};
 
 #endif

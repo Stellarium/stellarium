@@ -24,13 +24,22 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTranslator.hpp"
+#include "StelObserver.hpp"
+#include "StelObjectMgr.hpp"
 
 using namespace SyncProtocol;
+
+ClientHandler::ClientHandler()
+	: client(NULL)
+{
+	core = StelApp::getInstance().getCore();
+}
 
 ClientHandler::ClientHandler(SyncClient *client)
 	: client(client)
 {
 	Q_ASSERT(client);
+	core = StelApp::getInstance().getCore();
 }
 
 
@@ -149,11 +158,6 @@ bool ClientAliveHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer
 	return p.deserialize(stream,peer.msgHeader.dataSize);
 }
 
-ClientTimeHandler::ClientTimeHandler()
-{
-	core = StelApp::getInstance().getCore();
-}
-
 bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 {
 	Time msg;
@@ -167,6 +171,73 @@ bool ClientTimeHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
 	core->setJDay(msg.jDay);
 	//This is needed for compensation of network delay. Requires system clocks of client/server to be calibrated to the same values.
 	core->setMilliSecondsOfLastJDayUpdate(msg.lastTimeSyncTime);
+
+	return true;
+}
+
+bool ClientLocationHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+{
+	Location msg;
+	bool ok = msg.deserialize(stream,peer.msgHeader.dataSize);
+
+	if(!ok)
+		return false;
+
+	//replicated from StelCore::moveObserverTo
+	//first, emit a locationChanged like StelCore does
+	emit core->locationChanged(msg.stelLocation);
+
+	if(msg.totalDuration>0.0)
+	{
+		//for optimal results, the network latency should be subtracted from the timeToGo...
+
+		StelLocation curLoc = core->getCurrentLocation();
+		if (core->getCurrentObserver()->isTraveling())
+		{
+			// Avoid using a temporary location name to create another temporary one (otherwise it looks like loc1 -> loc2 -> loc3 etc..)
+			curLoc.name = ".";
+		}
+
+		//create a spaceship observer
+		SpaceShipObserver* newObs = new SpaceShipObserver(curLoc, msg.stelLocation, msg.totalDuration,msg.timeToGo);
+		core->setObserver(newObs);
+		newObs->update(0);
+	}
+	else
+	{
+		//create a normal observer
+		core->setObserver(new StelObserver(msg.stelLocation));
+	}
+
+	return true;
+}
+
+ClientSelectionHandler::ClientSelectionHandler()
+{
+	objMgr = &StelApp::getInstance().getStelObjectMgr();
+}
+
+bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncRemotePeer &peer)
+{
+	Selection msg;
+	bool ok = msg.deserialize(stream, peer.msgHeader.dataSize);
+
+	if(!ok)
+		return false;
+
+	//lookup the objects from their names
+	//this might cause problems if 2 objects of different types have the same name!
+	QList<StelObjectP> selection;
+
+	for(QList<QString>::iterator it = msg.selectedObjectNames.begin(); it!=msg.selectedObjectNames.end();++it)
+	{
+		StelObjectP obj = objMgr->searchByName(*it);
+		if(!obj.isNull())
+			selection.append(obj);
+	}
+
+	//set selection
+	objMgr->setSelectedObject(selection,StelModule::ReplaceSelection);
 
 	return true;
 }
