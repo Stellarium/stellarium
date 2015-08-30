@@ -21,6 +21,7 @@
 #define SYNCMESSAGES_HPP_
 
 #include "SyncProtocol.hpp"
+#include "StelLocation.hpp"
 
 class ErrorMessage : public SyncMessage
 {
@@ -88,6 +89,32 @@ public:
 	double jDay; //current jDay, without any time zone/deltaT adjustments
 	double timeRate; //current time rate
 
+};
+
+class Location : public SyncMessage
+{
+public:
+	Location();
+
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::LOCATION; }
+
+	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	StelLocation stelLocation;
+	double totalDuration;
+	double timeToGo;
+};
+
+class Selection : public SyncMessage
+{
+public:
+	SyncProtocol::SyncMessageType getMessageType() const Q_DECL_OVERRIDE { return SyncProtocol::SELECTION; }
+
+	void serialize(QDataStream &stream) const Q_DECL_OVERRIDE;
+	bool deserialize(QDataStream &stream, SyncProtocol::tPayloadSize dataSize) Q_DECL_OVERRIDE;
+
+	QList<QString> selectedObjectNames;
 };
 
 class Alive : public SyncMessage

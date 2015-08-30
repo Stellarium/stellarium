@@ -67,10 +67,47 @@ enum SyncMessageType
 
 	//all messages below here can only be sent from authenticated peers
 	TIME, //time jumps + time scale updates
+	LOCATION, //location changes
+	SELECTION,
+
 	ALIVE, //sent from a peer after no data was sent for about 5 seconds to indicate it is still alive
 	MSGTYPE_MAX = ALIVE,
 	MSGTYPE_SIZE = MSGTYPE_MAX+1
 };
+
+inline QDebug& operator<<(QDebug& deb, SyncMessageType msg)
+{
+	switch (msg) {
+		case SyncProtocol::ERROR:
+			deb<<"ERROR";
+			break;
+		case SyncProtocol::SERVER_CHALLENGE:
+			deb<<"SERVER_CHALLENGE";
+			break;
+		case SyncProtocol::CLIENT_CHALLENGE_RESPONSE:
+			deb<<"CLIENT_CHALLENGE_RESPONSE";
+			break;
+		case SyncProtocol::SERVER_CHALLENGERESPONSEVALID:
+			deb<<"SERVER_CHALLENGERESPONSEVALID";
+			break;
+		case SyncProtocol::TIME:
+			deb<<"TIME";
+			break;
+		case SyncProtocol::LOCATION:
+			deb<<"LOCATION";
+			break;
+		case SyncProtocol::SELECTION:
+			deb<<"SELECTION";
+			break;
+		case SyncProtocol::ALIVE:
+			deb<<"ALIVE";
+			break;
+		default:
+			deb<<"UNKNOWN("<<int(msg)<<')';
+			break;
+	}
+	return deb;
+}
 
 }
 

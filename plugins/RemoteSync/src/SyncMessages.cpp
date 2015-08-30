@@ -40,7 +40,7 @@ bool ErrorMessage::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
 	Q_UNUSED(dataSize);
 	message = readString(stream);
-	return stream.status() == QDataStream::Ok;
+	return !stream.status();;
 }
 
 ServerChallenge::ServerChallenge()
@@ -85,7 +85,7 @@ bool ServerChallenge::deserialize(QDataStream &stream, tPayloadSize dataSize)
 
 	stream>>clientId;
 
-	return true;
+	return !stream.status();;
 }
 
 ClientChallengeResponse::ClientChallengeResponse()
@@ -112,7 +112,7 @@ bool ClientChallengeResponse::deserialize(QDataStream &stream, tPayloadSize data
 	stream>>stellariumVersion;
 	stream>>clientId;
 
-	return true;
+	return !stream.status();;
 }
 
 void Time::serialize(QDataStream &stream) const
@@ -131,5 +131,41 @@ bool Time::deserialize(QDataStream &stream, tPayloadSize dataSize)
 	stream>>jDay;
 	stream>>timeRate;
 
-	return true;
+	return !stream.status();;
+}
+
+Location::Location()
+	: totalDuration(0.0),timeToGo(0.0)
+{
+
+}
+
+void Location::serialize(QDataStream &stream) const
+{
+	//! Serialize StelLocation directly
+	//! Note: this introduces dependency on Stellarium version!
+	stream<<stelLocation;
+	stream<<totalDuration;
+	stream<<timeToGo;
+}
+
+bool Location::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	Q_UNUSED(dataSize);
+	stream>>stelLocation;
+	stream>>totalDuration;
+	stream>>timeToGo;
+	return !stream.status();
+}
+
+void Selection::serialize(QDataStream &stream) const
+{
+	stream<<selectedObjectNames;
+}
+
+bool Selection::deserialize(QDataStream &stream, tPayloadSize dataSize)
+{
+	Q_UNUSED(dataSize);
+	stream>>selectedObjectNames;
+	return !stream.status();
 }

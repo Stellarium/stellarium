@@ -246,6 +246,13 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 
+	//! Returns the current observer.
+	//! Note that the observer object may be deleted at any time when control returns to StelCore.
+	const StelObserver* getCurrentObserver() const;
+
+	//! Replaces the current observer. StelCore assumes ownership of the observer.
+	void setObserver(StelObserver* obs);
+
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
 	SphericalCap getVisibleSkyArea() const;
