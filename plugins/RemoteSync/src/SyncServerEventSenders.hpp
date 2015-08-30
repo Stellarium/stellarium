@@ -24,6 +24,8 @@
 #include "SyncMessages.hpp"
 
 class SyncServer;
+class StelCore;
+class StelObjectMgr;
 
 //! Subclasses of this class notify clients of state changes.
 class SyncServerEventSender : public QObject
@@ -55,6 +57,8 @@ protected:
 	void broadcastMessage(const SyncMessage& msg);
 	//! Free to use by sublasses. Recommendation: use to track if update() should broadcast a message.
 	bool isDirty;
+	//! Direct access to StelCore
+	StelCore* core;
 private:
 	SyncServer* server;
 	friend class SyncServer;
@@ -93,9 +97,6 @@ void TypedSyncServerEventSender<T>::update()
 	}
 }
 
-
-class StelCore;
-
 //! Notifies clients of simulation time jumps and time scale changes
 class TimeEventSender : public TypedSyncServerEventSender<Time>
 {
@@ -105,8 +106,26 @@ public:
 	TimeEventSender();
 protected:
 	Time constructMessage() Q_DECL_OVERRIDE;
+};
+
+class LocationEventSender : public TypedSyncServerEventSender<Location>
+{
+	Q_OBJECT
+public:
+	LocationEventSender();
+protected:
+	Location constructMessage() Q_DECL_OVERRIDE;
+};
+
+class SelectionEventSender : public TypedSyncServerEventSender<Selection>
+{
+	Q_OBJECT
+public:
+	SelectionEventSender();
+protected:
+	Selection constructMessage() Q_DECL_OVERRIDE;
 private:
-	StelCore* core;
+	StelObjectMgr* objMgr;
 };
 
 #endif

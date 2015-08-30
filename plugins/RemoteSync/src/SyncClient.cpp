@@ -54,6 +54,8 @@ void SyncClient::connectToServer(const QString &host, const int port)
 
 	//these are the actual sync handlers
 	handlerList[TIME] = new ClientTimeHandler();
+	handlerList[LOCATION] = new ClientLocationHandler();
+	handlerList[SELECTION] = new ClientSelectionHandler();
 
 	server = new SyncRemotePeer(new QTcpSocket(this), true, handlerList );
 	connect(server->sock, SIGNAL(connected()), this, SLOT(socketConnected()));

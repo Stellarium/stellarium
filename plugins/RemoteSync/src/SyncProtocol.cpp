@@ -149,7 +149,7 @@ void SyncRemotePeer::receiveMessage()
 				return;
 			}
 
-			qDebug()<<"receive header for "<<msgHeader.msgType;
+			qDebug()<<"received header for "<<SyncMessageType(msgHeader.msgType);
 		}
 
 		if(sock->bytesAvailable() < msgHeader.dataSize)
