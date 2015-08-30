@@ -33,8 +33,6 @@ class StelPainter;
 #define EARTH_RADIUS2 40678884.f     //! earth_radius^2 in km
 #define MAX_ALTITUDE 120.f           //! max meteor altitude in km
 #define MIN_ALTITUDE 80.f            //! min meteor altitude in km
-#define BURN_ALTITUDE 45.f           //! meteors usually disintegrate at altitudes greater than 45km
-#define VISIBLE_RADIUS 457.8f        //! max visible distance in km
 
 //! @class Meteor 
 //! Models a single meteor.
@@ -98,17 +96,15 @@ private:
 	const StelCore* m_core;         //! The associated StelCore instance.
 
 	bool m_alive;                   //! Indicates if the meteor it still visible.
-	bool m_isEarthGrazer;           //! Indicates if the meteor is a Earth-grazer.
 	float m_speed;                  //! Velocity of meteor in km/s.
 	Mat4d m_matAltAzToRadiant;      //! Rotation matrix to convert from horizontal to radiant coordinate system.
 	Vec3d m_position;               //! Meteor position in radiant coordinate system.
 	Vec3d m_posTrain;               //! End of train in radiant coordinate system.
-	float m_xyDist;                 //! Distance in XY plane (orthogonal to radiant) from observer to meteor
 	float m_initialZ;               //! Initial z-component of the meteor in radiant coordinates.
 	float m_finalZ;                 //! Final z-compoenent of the meteor in radiant coordinates.
+	float m_minDist;                //! Shortest distance between meteor and observer.
 	float m_absMag;                 //! Absolute magnitude [0, 1]
 	float m_aptMag;                 //! Apparent magnitude [0, 1]
-	int m_firstBrightSegment;       //! First bright segment of the train
 
 	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 	const int m_segments;           //! Number of segments along the train (useful to curve along projection distortions)
