@@ -23,6 +23,7 @@
 
 #include "APIController.hpp"
 #include "LocationService.hpp"
+#include "LocationSearchService.hpp"
 #include "MainService.hpp"
 #include "ObjectService.hpp"
 #include "ScriptService.hpp"
@@ -80,6 +81,7 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 	apiController->registerService(new SimbadService("simbad",apiController));
 	apiController->registerService(new StelActionService("stelaction",apiController));
 	apiController->registerService(new LocationService("location",apiController));
+	apiController->registerService(new LocationSearchService("locationsearch",apiController));
 	apiController->registerService(new ViewService("view",apiController));
 
 	connect(&StelApp::getInstance(),SIGNAL(languageChanged()),this,SLOT(refreshHtmlTemplate()));

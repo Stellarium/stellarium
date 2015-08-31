@@ -158,7 +158,7 @@ var Main = (function($) {
                     // Firefox wraps long text (possibly a rounding bug)
                     // so we add 1px to avoid the wrapping (#7513)
                     ul.width("").outerWidth() + 1,
-                    this.options.position.of === null ? this.element.outerWidth() : this.options.position.of.outerWidth()
+                    ('of' in this.options.position) ? this.options.position.of.outerWidth() : this.element.outerWidth()
                 ));
             }
         });
