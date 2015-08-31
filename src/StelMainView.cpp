@@ -195,6 +195,7 @@ StelSkyItem::StelSkyItem(QGraphicsItem* parent)
 	Q_UNUSED(parent);
 	setObjectName("SkyItem");
 	setFlag(QGraphicsItem::ItemHasNoContents, false);
+	setFlag(QGraphicsItem::ItemIsFocusable, true);
 	setAcceptHoverEvents(true);
 #ifdef Q_OS_WIN
 	setAcceptTouchEvents(true);
@@ -232,7 +233,7 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	//To get back the focus from dialogs
-	this->setFocus();
+	setFocus();
 	QPointF pos = event->scenePos();
 	pos.setY(size().height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
@@ -498,10 +499,8 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 }
 
 void StelMainView::focusSky() {
-	StelMainView::getInstance().scene()->setActiveWindow(0);
-	// QGraphicsObject* skyItem = rootObject()->findChild<QGraphicsObject*>("SkyItem");
-	// Q_ASSERT(skyItem);
-	// skyItem->setFocus();
+	scene()->setActiveWindow(0);
+	skyItem->setFocus();
 }
 
 StelMainView::~StelMainView()
