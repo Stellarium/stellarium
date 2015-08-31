@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-25 21:55+0600\n"
+"POT-Creation-Date: 2015-08-30 11:40+0600\n"
 "PO-Revision-Date: 2015-04-23 02:45+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-26 05:20+0000\n"
+"X-Launchpad-Export-Date: 2015-08-31 04:43+0000\n"
 "X-Generator: Launchpad (build 17690)\n"
 "Language: is\n"
 
@@ -27,7 +27,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:443
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "Skjástillingar"
 
@@ -223,7 +223,7 @@ msgstr "Gerð: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:169 src/core/modules/Comet.cpp:173
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:517
+#: plugins/MeteorShowers/src/MeteorShower.cpp:534
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Gerð: <b>%1</b> (%2)"
@@ -823,7 +823,7 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Lengd gashala (ágiskun): %1 Mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:176 src/gui/AstroCalcDialog.cpp:414
+#: src/core/modules/SolarSystem.cpp:176 src/gui/AstroCalcDialog.cpp:417
 #: src/translations.h:62 src/ui_viewDialog.h:1582
 msgid "Planets"
 msgstr "Reikistjörnur"
@@ -931,7 +931,7 @@ msgstr "Næturhamur"
 
 #. TRANSLATORS: name of object
 #: src/core/StelCore.cpp:199 src/gui/StelGui.cpp:183
-#: src/gui/AstroCalcDialog.cpp:232 src/gui/AstroCalcDialog.cpp:436
+#: src/gui/AstroCalcDialog.cpp:235 src/gui/AstroCalcDialog.cpp:439
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
@@ -1597,7 +1597,7 @@ msgid "Deep-sky objects background images"
 msgstr "Bakgrunnsmyndir djúpfyrirbæra"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:442
+#: src/StelMainView.cpp:536
 msgid "Miscellaneous"
 msgstr "Ýmislegt"
 
@@ -2374,27 +2374,27 @@ msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 "Þú getur fjarlægt það handvirkt með því að eyða eftirfarandi möppu: %1"
 
-#: src/gui/ScriptConsole.cpp:73
+#: src/gui/ScriptConsole.cpp:75
 msgid "quickrun..."
 msgstr "flýtikeyrsla..."
 
-#: src/gui/ScriptConsole.cpp:74
+#: src/gui/ScriptConsole.cpp:76
 msgid "selected text"
 msgstr "valinn texti"
 
-#: src/gui/ScriptConsole.cpp:75
+#: src/gui/ScriptConsole.cpp:77
 msgid "clear text"
 msgstr "hreinsa texta"
 
-#: src/gui/ScriptConsole.cpp:76
+#: src/gui/ScriptConsole.cpp:78
 msgid "clear images"
 msgstr "hreinsa myndir"
 
-#: src/gui/ScriptConsole.cpp:77
+#: src/gui/ScriptConsole.cpp:79
 msgid "natural"
 msgstr "náttúrulegt"
 
-#: src/gui/ScriptConsole.cpp:78
+#: src/gui/ScriptConsole.cpp:80
 msgid "starchart"
 msgstr "stjörnukort"
 
@@ -2503,7 +2503,7 @@ msgid "year"
 msgstr "ár"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:124 src/ui_configurationDialog.h:1074
+#: src/gui/AstroCalcDialog.cpp:127 src/ui_configurationDialog.h:1074
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:93
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:183
@@ -2511,114 +2511,114 @@ msgid "Name"
 msgstr "Heiti"
 
 #. TRANSLATORS: right ascension
-#: src/gui/AstroCalcDialog.cpp:126 src/gui/AstroCalcDialog.cpp:235
+#: src/gui/AstroCalcDialog.cpp:129 src/gui/AstroCalcDialog.cpp:238
 msgid "RA (J2000)"
 msgstr ""
 
 #. TRANSLATORS: declination
-#: src/gui/AstroCalcDialog.cpp:128 src/gui/AstroCalcDialog.cpp:237
+#: src/gui/AstroCalcDialog.cpp:131 src/gui/AstroCalcDialog.cpp:240
 msgid "Dec (J2000)"
 msgstr ""
 
 #. TRANSLATORS: magnitude
-#: src/gui/AstroCalcDialog.cpp:130 src/gui/AstroCalcDialog.cpp:239
+#: src/gui/AstroCalcDialog.cpp:133 src/gui/AstroCalcDialog.cpp:242
 msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: type of object
 #. TRANSLATORS: type of phenomena
-#: src/gui/AstroCalcDialog.cpp:132 src/gui/AstroCalcDialog.cpp:435
+#: src/gui/AstroCalcDialog.cpp:135 src/gui/AstroCalcDialog.cpp:438
 #: src/ui_configurationDialog.h:1094
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 msgid "Type"
 msgstr "Tegund"
 
-#: src/gui/AstroCalcDialog.cpp:233
+#: src/gui/AstroCalcDialog.cpp:236
 msgid "JD"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:361
+#: src/gui/AstroCalcDialog.cpp:364
 msgid "10 minutes"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:362
+#: src/gui/AstroCalcDialog.cpp:365
 msgid "1 hour"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:363
+#: src/gui/AstroCalcDialog.cpp:366
 msgid "1 day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:364
+#: src/gui/AstroCalcDialog.cpp:367
 msgid "10 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:365
+#: src/gui/AstroCalcDialog.cpp:368
 msgid "30 days"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:413
+#: src/gui/AstroCalcDialog.cpp:416
 msgid "Solar system"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:415 src/translations.h:66
+#: src/gui/AstroCalcDialog.cpp:418 src/translations.h:66
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
 msgstr "Smástirni"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:416 src/translations.h:70
+#: src/gui/AstroCalcDialog.cpp:419 src/translations.h:70
 msgid "Plutinos"
 msgstr "Plútóstirni"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:417 src/translations.h:64
+#: src/gui/AstroCalcDialog.cpp:420 src/translations.h:64
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
 msgstr "Halastjörnur"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:418 src/translations.h:72
+#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:72
 msgid "Dwarf planets"
 msgstr "Dvergplánetur"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:419 src/translations.h:74
+#: src/gui/AstroCalcDialog.cpp:422 src/translations.h:74
 msgid "Cubewanos"
 msgstr "Kuipersbeltisstirni"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:420 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:423 src/translations.h:76
 msgid "Scattered disc objects"
 msgstr "Dreifstirni"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:421 src/translations.h:78
+#: src/gui/AstroCalcDialog.cpp:424 src/translations.h:78
 msgid "Oort cloud objects"
 msgstr "Oortsský"
 
-#: src/gui/AstroCalcDialog.cpp:437
+#: src/gui/AstroCalcDialog.cpp:440
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:438
+#: src/gui/AstroCalcDialog.cpp:441
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:439
+#: src/gui/AstroCalcDialog.cpp:442
 msgid "Separation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:595
+#: src/gui/AstroCalcDialog.cpp:598
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:599
+#: src/gui/AstroCalcDialog.cpp:602
 msgid "Opposition"
 msgstr ""
 
-#: src/StelMainView.cpp:358 src/StelMainView.cpp:373
+#: src/StelMainView.cpp:440 src/StelMainView.cpp:455
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2626,19 +2626,19 @@ msgstr ""
 "Ekkert OpenGL 2 fannst á þessu kerfi. Uppfærðu vélbúnaðinn eða notaðu MESA "
 "eða eldri útgáfu."
 
-#: src/StelMainView.cpp:387
+#: src/StelMainView.cpp:469
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Get ekki nálgast nauðsynleg OpenGL tilföng."
 
-#: src/StelMainView.cpp:442
+#: src/StelMainView.cpp:536
 msgid "Save screenshot"
 msgstr "Vista skjámynd"
 
-#: src/StelMainView.cpp:443
+#: src/StelMainView.cpp:537
 msgid "Full-screen mode"
 msgstr "Heilskjár"
 
-#: src/StelMainView.cpp:575
+#: src/StelMainView.cpp:678
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2646,12 +2646,12 @@ msgstr ""
 "Ónothæf útgáfa OpenGL. Uppfærðu rekla, skjákort, eða notaðu MESA (eða ANGLE) "
 "útgáfuna."
 
-#: src/StelMainView.cpp:578
+#: src/StelMainView.cpp:681
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "Ónothæf útgáfa OpenGL. Uppfærðu rekla eða skjákort."
 
-#: src/StelMainView.cpp:620
+#: src/StelMainView.cpp:723
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2662,7 +2662,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:671
+#: src/StelMainView.cpp:774
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2673,7 +2673,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:726
+#: src/StelMainView.cpp:829
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2683,7 +2683,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:763
+#: src/StelMainView.cpp:866
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2694,7 +2694,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:872
+#: src/StelMainView.cpp:975
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5886,11 +5886,15 @@ msgstr ""
 msgid "Maximum allowed separation:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:370
+#: src/ui_astroCalcDialog.h:371
+msgid "Value in decimal degrees"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:373
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:371
+#: src/ui_astroCalcDialog.h:374
 msgid "Phenomena"
 msgstr ""
 
@@ -9969,59 +9973,59 @@ msgstr ""
 msgid "Generic"
 msgstr "Algengt"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:491
+#: plugins/MeteorShowers/src/MeteorShower.cpp:508
 msgid "generic data"
 msgstr "almenn gögn"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:495
+#: plugins/MeteorShowers/src/MeteorShower.cpp:512
 msgid "confirmed data"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:499
+#: plugins/MeteorShowers/src/MeteorShower.cpp:516
 msgid "inactive"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:517
+#: plugins/MeteorShowers/src/MeteorShower.cpp:534
 msgid "meteor shower"
 msgstr "loftsteinadrífa"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:526
+#: plugins/MeteorShowers/src/MeteorShower.cpp:543
 msgid "Radiant drift (per day)"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:533
+#: plugins/MeteorShowers/src/MeteorShower.cpp:550
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:538
+#: plugins/MeteorShowers/src/MeteorShower.cpp:555
 #, qt-format
 msgid "The population index: %1"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:543
+#: plugins/MeteorShowers/src/MeteorShower.cpp:560
 #, qt-format
 msgid "Parent body: %1"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:552
+#: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Active"
 msgstr "Virkt"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:560
+#: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Activity"
 msgstr "Virkni"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:565
+#: plugins/MeteorShowers/src/MeteorShower.cpp:582
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Hámark: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:567
+#: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgid "Solar longitude"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:577
+#: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "variable"
 msgstr "breytileg"
 
