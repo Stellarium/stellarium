@@ -25,7 +25,8 @@
 #include <QMetaType>
 #include <QMap>
 
-class QStringListModel;
+typedef QList<StelLocation> LocationList;
+typedef QMap<QString,StelLocation> LocationMap;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -34,18 +35,20 @@ class StelLocationMgr : public QObject
 	Q_OBJECT
 
 public:
-	//! Default constructor
+	//! Default constructor which loads the list of locations from the base and user location files.
 	StelLocationMgr();
-	//! Destructor
-	~StelLocationMgr();
 
-	//! Return the model containing all the city
-	QStringListModel* getModelAll() {return modelAllLocation;}
-	//! Return the model containing picked (nearby) cities or cities from a single country, or other preselection.
-	QStringListModel* getModelPicked() {return modelPickedLocation;}
+	//! Construct a StelLocationMgr which uses the locations given instead of loading them from the files.
+	StelLocationMgr(const LocationList& locations);
+
+	//! Replaces the loaded location list
+	void setLocations(const LocationList& locations);
 
 	//! Return the list of all loaded locations
 	QList<StelLocation> getAll() const {return locations.values();}
+
+	//! Returns a map of all loaded locations. The key is the location ID, suitable for a list view.
+	LocationMap getAllMap() const { return locations; }
 
 	//! Return the StelLocation from a CLI
 	const StelLocation locationFromCLI() const;
@@ -74,12 +77,10 @@ public:
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
-	//! Preselect list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
-	//! The list can be retrieved by calling @name getModelPicked().
-	void pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
-	//! Preselect list of locations in a particular country only.
-	//! The list can be retrieved by calling @name getModelPicked().
-	void pickLocationsInCountry(const QString country);
+	//! Find list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
+	LocationMap pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
+	//! Find list of locations in a particular country only.
+	LocationMap pickLocationsInCountry(const QString country);
 
 public slots:
 	//! Return the StelLocation for a given string
@@ -89,22 +90,20 @@ public slots:
 	//! Process answer from online lookup of IP address
 	void changeLocationFromNetworkLookup();
 
+signals:
+	//! Can be used to detect changes to the full location list
+	//! i.e. when the user added or removed locations
+	void locationListChanged();
+
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
 	//! Load cities from a file
-	QMap<QString, StelLocation> loadCities(const QString& fileName, bool isUserLocation) const;
-	QMap<QString, StelLocation> loadCitiesBin(const QString& fileName) const;
-
-	//! Model containing all the city information
-	QStringListModel* modelAllLocation;
-	//! Model containing selected city information
-	QStringListModel* modelPickedLocation;
+	static LocationMap loadCities(const QString& fileName, bool isUserLocation);
+	static LocationMap loadCitiesBin(const QString& fileName);
 
 	//! The list of all loaded locations
-	QMap<QString, StelLocation> locations;
-	//! A list of locations generated on-the-fly by filtering from @name locations
-	QMap<QString, StelLocation> pickedLocations;
+	LocationMap locations;
 	
 	StelLocation lastResortLocation;
 };

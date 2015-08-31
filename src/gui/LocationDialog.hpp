@@ -25,6 +25,8 @@
 
 class Ui_locationDialogForm;
 class QModelIndex;
+class QSortFilterProxyModel;
+class QStringListModel;
 class StelLocation;
 
 class LocationDialog : public StelDialog
@@ -74,6 +76,9 @@ private:
 	void populateCountryList();
 	
 private slots:
+	//! Called whenever the StelLocationMgr is updated
+	void reloadLocations();
+
 	//! To be called when user edits any field
 	void reportEdit();
 	
@@ -113,6 +118,10 @@ private slots:
 	
 private:
 	QString lastPlanet;
+	QStringListModel* allModel;
+	QStringListModel* pickedModel;
+	QSortFilterProxyModel *proxyModel;
+
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
 };
