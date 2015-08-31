@@ -286,7 +286,7 @@ bool StelSkyItem::event(QEvent * e)
 		break;
 
 	default:
-		return false;
+		return QGraphicsWidget::event(e);
 	}
 }
 
