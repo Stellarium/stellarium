@@ -43,13 +43,28 @@ StelLocationMgr::StelLocationMgr()
 
 	locations = loadCitiesBin("data/base_locations.bin.gz");
 	locations.unite(loadCities("data/user_locations.txt", true));
-
-	modelAllLocation = new QStringListModel(this);
-	modelAllLocation->setStringList(locations.keys());
-	modelPickedLocation = new QStringListModel(this); // keep empty for now.
 	
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+}
+
+StelLocationMgr::StelLocationMgr(const LocationList &locations)
+{
+	setLocations(locations);
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	// Init to Paris France because it's the center of the world.
+	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
+}
+
+void StelLocationMgr::setLocations(const LocationList &locations)
+{
+	for(LocationList::const_iterator it = locations.constBegin();it!=locations.constEnd();++it)
+	{
+		this->locations.insert(it->getID(),*it);
+	}
+
+	emit locationListChanged();
 }
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
@@ -65,7 +80,7 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 	}
 }
 
-QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileName) const
+LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 {
 	QMap<QString, StelLocation> res;
 	QString cityDataPath = StelFileMgr::findFile(fileName);
@@ -95,7 +110,7 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 	}
 }
 
-QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation) const
+LocationMap StelLocationMgr::loadCities(const QString& fileName, bool isUserLocation)
 {
 	// Load the cities from data file
 	QMap<QString, StelLocation> locations;
@@ -150,14 +165,6 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 	}
 	sourcefile.close();
 	return locations;
-}
-
-StelLocationMgr::~StelLocationMgr()
-{
-	delete modelPickedLocation;
-	modelPickedLocation=NULL;
-	delete modelAllLocation;
-	modelAllLocation=NULL;
 }
 
 static float parseAngle(const QString& s, bool* ok)
@@ -240,8 +247,8 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	// Add in the program
 	locations[loc.getID()]=loc;
 
-	// Append in the Qt model
-	modelAllLocation->setStringList(locations.keys());
+	//emit before saving the list
+	emit locationListChanged();
 
 	// Append to the user location file
 	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
@@ -297,8 +304,9 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 		return false;
 
 	locations.remove(id);
-	// Remove in the Qt model file
-	modelAllLocation->setStringList(locations.keys());
+
+	//emit before saving the list
+	emit locationListChanged();
 
 	// Resave the whole remaining user locations file
 	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
@@ -416,9 +424,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	networkReply->deleteLater();
 }
 
-void StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
+LocationMap StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
 {
-	pickedLocations.clear();
+	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
 	while (iter.hasNext())
 	{
@@ -427,15 +435,15 @@ void StelLocationMgr::pickLocationsNearby(const QString planetName, const float 
 		if ( (loc->planetName == planetName) &&
 				(StelLocation::distanceDegrees(longitude, latitude, loc->longitude, loc->latitude) <= radiusDegrees) )
 		{
-			pickedLocations.insert(iter.key(), iter.value());
+			results.insert(iter.key(), iter.value());
 		}
 	}
-	modelPickedLocation->setStringList(pickedLocations.keys());
+	return results;
 }
 
-void StelLocationMgr::pickLocationsInCountry(const QString country)
+LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 {
-	pickedLocations.clear();
+	QMap<QString, StelLocation> results;
 	QMapIterator<QString, StelLocation> iter(locations);
 	while (iter.hasNext())
 	{
@@ -443,8 +451,8 @@ void StelLocationMgr::pickLocationsInCountry(const QString country)
 		const StelLocation *loc=&iter.value();
 		if (loc->country == country)
 		{
-			pickedLocations.insert(iter.key(), iter.value());
+			results.insert(iter.key(), iter.value());
 		}
 	}
-	modelPickedLocation->setStringList(pickedLocations.keys());
+	return results;
 }

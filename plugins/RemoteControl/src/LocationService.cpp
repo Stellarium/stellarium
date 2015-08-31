@@ -51,8 +51,7 @@ void LocationService::getImpl(const QByteArray& operation, const APIParameters &
 		//same as in the LocationDialog list
 
 		//TODO not fully thread safe
-		QStringListModel* mdl = locMgr->getModelAll();
-		QJsonArray list = QJsonArray::fromStringList(mdl->stringList());
+		QJsonArray list = QJsonArray::fromStringList(QStringList(locMgr->getAllMap().keys()));
 
 		response.writeJSON(QJsonDocument(list));
 	}
