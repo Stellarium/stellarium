@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var Locations = (function($) {
     "use strict";
 
@@ -14,7 +16,6 @@ var Locations = (function($) {
     var $loc_country;
     var $loc_planet;
 
-    var locationList;
     var lastLat;
     var lastLon;
     var lastPlanet = "";
@@ -23,6 +24,9 @@ var Locations = (function($) {
     var queuedData = {};
     var updateQueue;
 
+    var locSearchTimeout;
+    var locSearchXHR;
+
     function initControls() {
         $loc_mapimg = $("#loc_mapimg");
         $loc_mapimg.click(locationFromMap);
@@ -30,9 +34,22 @@ var Locations = (function($) {
         $loc_list = $("#loc_list");
         $loc_list.dblclick(setLocationFromList);
         $loc_search = $("#loc_search");
-
-        $loc_search.autocomplete({
-            delay: 500
+        $loc_search.on("input",function(evt){
+            //queue a search if search string is at least 2 chars
+            if(this.value.length >= 2)
+            {
+                locSearchTimeout && clearTimeout(locSearchTimeout);
+                locSearchTimeout = setTimeout( $.proxy(function() { performLocationSearch(this.value); }, this) , UISettings.editUpdateDelay);
+            }
+            else
+            {
+                locSearchTimeout && clearTimeout(locSearchTimeout);
+                //clear results to avoid confusion
+                $loc_list.empty();
+                //var op = document.createElement("option");
+                //op.textContent = Main.tr("Need at least 2 characters");
+                //$loc_list.append(op);
+            }
         });
 
         $loc_latitude = $("#loc_latitude");
@@ -96,6 +113,72 @@ var Locations = (function($) {
         });
     }
 
+    function performLocationSearch(str) {
+        //kill old XHR if running
+        locSearchXHR && locSearchXHR.abort();
+
+        locSearchXHR = $.ajax({
+                url: "/api/locationsearch/search",
+                data: {
+                    term: str
+                },
+                success: handleSearchResults,
+                error: function(xhr, status, errorThrown) {
+                    if (status !== "abort") {
+                        console.log("Error performing search");
+                        console.log("Error: " + errorThrown.message);
+                        console.log("Status: " + status);
+
+                        alert(Main.tr("Error performing search"));
+                    }
+                }
+        });
+    }
+
+    function performNearbySearch(lat,lon) {
+        //kill old XHR if running (use the same one as the string-based search)
+        locSearchXHR && locSearchXHR.abort();
+
+        //replicate LocationDialog behaviour
+        var radius = lastPlanet === "Earth" ? 3 : 30;
+
+        locSearchXHR = $.ajax({
+            url: "/api/locationsearch/nearby",
+            data: {
+                planet: lastPlanet,
+                latitude: lat,
+                longitude: lon,
+                radius: radius
+            },
+            success: handleSearchResults,
+            error: function(xhr, status, errorThrown) {
+                if (status !== "abort") {
+                    console.log("Error performing search");
+                    console.log("Error: " + errorThrown.message);
+                    console.log("Status: " + status);
+
+                    alert(Main.tr("Error performing search"));
+                }
+            }
+        });
+    }
+
+    function handleSearchResults(data)
+    {
+        var parent = $loc_list.parent();
+        $loc_list.detach();
+        $loc_list.empty();
+
+        for(var i = 0; i < data.length; ++i)
+        {
+            var op = document.createElement("option");
+            op.textContent = data[i];
+            $loc_list[0].appendChild(op);
+        }
+
+        parent.prepend($loc_list);
+    }
+
     function setLocationFromList() {
         var e = $loc_list[0];
         if(e.selectedIndex>=0){
@@ -117,6 +200,9 @@ var Locations = (function($) {
 
         queueData("latitude", lat);
         queueData("longitude", lon);
+
+        //also, perform a search for locations near here
+        performNearbySearch(lat,lon);
     }
 
     function queueData(field, value) {
@@ -131,38 +217,6 @@ var Locations = (function($) {
             $loc_longitude.spinner("value",lon);
             movePointer(lat, lon);
         }
-    }
-
-    function updateLocationList() {
-        $.ajax({
-            url: "/api/location/list",
-            success: function(data) {
-                locationList = data;
-
-                //detach for performance
-                var parent = $loc_list.parent();
-                $loc_list.detach();
-
-                //dont use jquery here for better performance
-                //it is quite the large list!
-                for (var i = 0; i < data.length; i++) {
-                    var op = document.createElement("option");
-                    op.innerHTML = data[i];
-                    $loc_list[0].appendChild(op);
-                }
-
-                parent.prepend($loc_list);
-
-                $loc_search.autocomplete("option", "source", locationList);
-
-            },
-            error: function(xhr, status, errorThrown) {
-                console.log("Error updating location list");
-                console.log("Error: " + errorThrown.message);
-                console.log("Status: " + status);
-                alert(Main.tr("Could not retrieve location list"));
-            }
-        });
     }
 
     function localizedSort(a, b) {
@@ -258,7 +312,6 @@ var Locations = (function($) {
     return {
         init: function() {
             //init location data
-            updateLocationList();
             updateCountryList();
             updatePlanetList();
 

@@ -45,7 +45,7 @@ public:
 	void setLocations(const LocationList& locations);
 
 	//! Return the list of all loaded locations
-	QList<StelLocation> getAll() const {return locations.values();}
+	LocationList getAll() const {return locations.values();}
 
 	//! Returns a map of all loaded locations. The key is the location ID, suitable for a list view.
 	LocationMap getAllMap() const { return locations; }
