@@ -90,11 +90,11 @@ public slots:
 	//! Settings are kept in the "RemoteControl" section in Stellarium's
 	//! configuration file. If no such section exists, it will load default
 	//! values.
-	//! @see saveSettings(), restoreSettings()
+	//! @see saveSettings(), restoreDefaultSettings()
 	void loadSettings();
 
 	//! Save the plug-in's settings to the configuration file.
-	//! @see loadSettings(), restoreSettings()
+	//! @see loadSettings(), restoreDefaultSettings()
 	void saveSettings();
 
 	//! Restore the plug-in's settings to the default state.
