@@ -174,6 +174,8 @@ SET(stellarium_lib_SRCS
 	core/planetsephems/marssat.h
 	core/planetsephems/pluto.c
 	core/planetsephems/pluto.h
+	core/planetsephems/precession.c
+	core/planetsephems/precession.h
 	core/planetsephems/sidereal_time.c
 	core/planetsephems/sidereal_time.h
 	core/planetsephems/stellplanet.c
@@ -199,8 +201,10 @@ SET(stellarium_lib_SRCS
 	core/modules/LandscapeMgr.hpp
 	core/modules/Meteor.cpp
 	core/modules/Meteor.hpp
-	core/modules/MeteorMgr.cpp
-	core/modules/MeteorMgr.hpp
+	core/modules/SporadicMeteor.cpp
+	core/modules/SporadicMeteor.hpp
+	core/modules/SporadicMeteorMgr.cpp
+	core/modules/SporadicMeteorMgr.hpp
 	core/modules/MilkyWay.cpp
 	core/modules/MilkyWay.hpp
 	core/modules/Nebula.cpp
@@ -242,15 +246,11 @@ SET(stellarium_lib_SRCS
 	translations.h
 )
 
-# On Windows, QZipReader is already included in the lib
-# since r7669 we must add our private version also in Windows.
-# IF(NOT WIN32)
-	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-		core/external/qtcompress/qzip.cpp
-		core/external/qtcompress/qzipreader.h
-		core/external/qtcompress/qzipwriter.h
-	)
-# ENDIF()
+SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+        core/external/qtcompress/qzip.cpp
+        core/external/qtcompress/qzipreader.h
+        core/external/qtcompress/qzipwriter.h
+)
 
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
@@ -320,6 +320,8 @@ IF(GUI_MODE STREQUAL "Standard")
 		gui/AtmosphereDialog.cpp
 		gui/CustomDeltaTEquationDialog.hpp
 		gui/CustomDeltaTEquationDialog.cpp
+		gui/AstroCalcDialog.hpp
+		gui/AstroCalcDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp)
 
@@ -332,8 +334,9 @@ IF(GUI_MODE STREQUAL "Standard")
 	gui/viewDialog.ui
 	gui/searchDialogGui.ui
 	gui/configurationDialog.ui
-	gui/AtmosphereDialog.ui
-	gui/CustomDeltaTEquationDialog.ui
+	gui/atmosphereDialog.ui
+	gui/customDeltaTEquationDialog.ui
+	gui/astroCalcDialog.ui
 	gui/addRemoveLandscapesDialog.ui)
 
         IF(ENABLE_SCRIPTING)
@@ -424,7 +427,7 @@ ENDIF()
 IF(GENERATE_STELMAINLIB)
     ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-    QT5_USE_MODULES(stelMain Core Concurrent Declarative Gui Network OpenGL Script Widgets)
+    QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets)
     IF(ENABLE_MEDIA)
         QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
     ENDIF()
@@ -438,7 +441,7 @@ ELSE()
     # This will add the ANGLE lib if the Qt version supports it.
     TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
-    QT5_USE_MODULES(stellarium Core Concurrent Declarative Gui Network OpenGL Script Widgets)
+    QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets)
     IF(ENABLE_MEDIA)
         QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
     ENDIF()
@@ -478,7 +481,7 @@ IF(WIN32)
 	SET(tests_testDates_SRCS ${tests_testDates_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
-QT5_USE_MODULES(testDates Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testDates Core Gui Widgets Script Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 ADD_TEST(testDates)
@@ -489,7 +492,7 @@ SET(tests_testStelFileMgr_SRCS
 	core/StelFileMgr.hpp
 	core/StelFileMgr.cpp)
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
-QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Test)
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 ADD_TEST(testStelFileMgr)
@@ -545,7 +548,7 @@ ADD_TEST(testStelSphereGeometry)
 #	core/StelTranslator.hpp
 #	${glues_lib_SRCS})
 #ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Declarative Test)
+#QT5_USE_MODULES(testStelSphericalIndex Core Gui Widgets OpenGL Script Test)
 #TARGET_LINK_LIBRARIES(testStelSphericalIndex ${extLinkerOptionTest})
 #ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
 
@@ -555,7 +558,7 @@ SET(tests_testStelJsonParser_SRCS
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp)
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
-QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Test)
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 ADD_TEST(testStelJsonParser)
@@ -580,7 +583,7 @@ IF(WIN32)
 	SET(tests_testDeltaT_SRCS ${tests_testDeltaT_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
-QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 ADD_TEST(testDeltaT)
@@ -595,7 +598,7 @@ IF(WIN32)
 	SET(tests_testConversions_SRCS ${tests_testConversions_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
-QT5_USE_MODULES(testConversions Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testConversions Core Gui Widgets Script Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
 ADD_TEST(testConversions)
@@ -606,7 +609,7 @@ SET(tests_testExtinction_SRCS
         core/RefractionExtinction.hpp
         core/RefractionExtinction.cpp)
 ADD_EXECUTABLE(testExtinction EXCLUDE_FROM_ALL ${tests_testExtinction_SRCS})
-QT5_USE_MODULES(testExtinction Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testExtinction Core Gui Widgets Script Test)
 TARGET_LINK_LIBRARIES(testExtinction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testExtinction)
 ADD_TEST(testExtinction)
@@ -623,10 +626,27 @@ IF(WIN32)
         SET(tests_testRefraction_SRCS ${tests_testRefraction_SRCS} ${zlib_SRCS})
 ENDIF()
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
-QT5_USE_MODULES(testRefraction Core Gui Widgets Script Declarative Test)
+QT5_USE_MODULES(testRefraction Core Gui Widgets Script Test)
 TARGET_LINK_LIBRARIES(testRefraction ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testRefraction)
 ADD_TEST(testRefraction)
+
+SET(tests_testPrecession_SRCS
+        tests/testPrecession.hpp
+        tests/testPrecession.cpp
+        core/planetsephems/precession.h
+        core/planetsephems/precession.c
+        core/StelUtils.hpp
+        core/StelUtils.cpp)
+IF(WIN32)
+        # StelUtils required zlib sources
+        SET(tests_testPrecession_SRCS ${tests_testPrecession_SRCS} ${zlib_SRCS})
+ENDIF()
+ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
+QT5_USE_MODULES(testPrecession Core Gui Widgets Script Test)
+TARGET_LINK_LIBRARIES(testPrecession ${extLinkerOptionTest})
+ADD_DEPENDENCIES(buildTests testPrecession)
+ADD_TEST(testPrecession)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
 FOREACH(NAME ${STELLARIUM_TESTS})
@@ -637,4 +657,3 @@ FOREACH(NAME ${STELLARIUM_TESTS})
 	ENDIF()
 ENDFOREACH()
 ADD_DEPENDENCIES(tests buildTests)
-

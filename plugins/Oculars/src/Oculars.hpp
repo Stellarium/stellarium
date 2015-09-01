@@ -254,6 +254,8 @@ private:
 	bool flagLimitDSOs;		//!< Flag to track limit magnitude for DSOs
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
 
+	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
+
 	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.

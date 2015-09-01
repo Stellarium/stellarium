@@ -84,6 +84,9 @@ public:
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
 
+	//! Registers all loaded StelModules with the ScriptMgr, and queues starting of the startup script.
+	void initScriptMgr();
+
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
 	static StelApp& getInstance() {Q_ASSERT(singleton); return *singleton;}
@@ -210,6 +213,11 @@ public slots:
 	void setFlagShowDecimalDegrees(bool b);
 	//! Get flag for showing decimal degree in various places.
 	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
+
+	//! Set flag for using calculation of azimuth from south towards west (as in old astronomical literature)
+	bool getFlagOldAzimuthUsage() const { return flagUseAzimuthFromSouth; }
+	//! Get flag for using calculation of azimuth from south towards west (as in old astronomical literature)
+	void setFlagOldAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
 	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
@@ -249,8 +257,6 @@ private:
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
 	void handlePinch(qreal scale, bool started);
-
-	void initScriptMgr(QSettings* conf);
 
 	void prepareRenderBuffer();
 	void applyRenderBuffer();
@@ -360,6 +366,9 @@ private:
 	StelViewportEffect* viewportEffect;
 	
 	bool flagShowDecimalDegrees;
+	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
+	bool flagUseAzimuthFromSouth;
+
 };
 
 #endif // _STELAPP_HPP_

@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2015 Georg Zotti (offset view adaptations)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,9 +103,7 @@ void StelMovementMgr::init()
 	flagAutoZoomOutResetsDirection = conf->value("navigation/auto_zoom_out_resets_direction", true).toBool();
 	flagEnableMouseNavigation = conf->value("navigation/flag_enable_mouse_navigation",true).toBool();
 
-	minFov = 0.001389; // minimal FOV = 5"
-	// GZ: This value should be configurable! Zooming in too much is useless for archaeoastronomy.
-	minFov = conf->value("navigation/min_fov",minFov).toDouble();
+	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
@@ -322,7 +321,7 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 {
 	DragHistoryEntry e;
 	e.runTime=StelApp::getInstance().getTotalRunTime();
-	e.jd=core->getJDay();
+	e.jd=core->getJD();
 	e.x=x;
 	e.y=y;
 	timeDragHistory.append(e);
@@ -464,7 +463,7 @@ void StelMovementMgr::setInitViewDirectionToCurrent()
 }
 
 /*************************************************************************
- The selected objects changed, follow it it we were already following another one
+ The selected objects changed, follow it if we were already following another one
 *************************************************************************/
 void StelMovementMgr::selectedObjectChange(StelModule::StelModuleSelectAction)
 {
@@ -561,29 +560,24 @@ void StelMovementMgr::updateMotion(double deltaTime)
 		if (deltaAz<-0.2)
 			deltaAz = -0.2;
 	}
-	else
+	else if (deltaAz>0)
 	{
-		if (deltaAz>0)
-		{
-			deltaAz = (depl/30);
-			if (deltaAz>0.2)
-				deltaAz = 0.2;
-		}
+		deltaAz = (depl/30);
+		if (deltaAz>0.2)
+			deltaAz = 0.2;
 	}
+
 	if (deltaAlt<0)
 	{
 		deltaAlt = -depl/30;
 		if (deltaAlt<-0.2)
 			deltaAlt = -0.2;
 	}
-	else
+	else if (deltaAlt>0)
 	{
-		if (deltaAlt>0)
-		{
-			deltaAlt = depl/30;
-			if (deltaAlt>0.2)
-				deltaAlt = 0.2;
-		}
+		deltaAlt = depl/30;
+		if (deltaAlt>0.2)
+			deltaAlt = 0.2;
 	}
 
 	if (deltaFov<0)
@@ -592,14 +586,11 @@ void StelMovementMgr::updateMotion(double deltaTime)
 		if (deltaFov<-0.15*currentFov)
 			deltaFov = -0.15*currentFov;
 	}
-	else
+	else if (deltaFov>0)
 	{
-		if (deltaFov>0)
-		{
-			deltaFov = deplzoom*5;
-			if (deltaFov>20)
-				deltaFov = 20;
-		}
+		deltaFov = deplzoom*5;
+		if (deltaFov>20)
+			deltaFov = 20;
 	}
 
 	if (deltaFov != 0 )
@@ -618,7 +609,32 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 		if (!move.targetObject.isNull())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = core->altAzToJ2000(move.targetObject->getAltAzPosAuto(core), StelCore::RefractionOff);
+			// In case we have offset center, we want object still visible in center.
+			// Note that if we do not center on an object, we set view direction of the potentially offset screen center!
+			// This is by design, to allow accurate setting of display coordinates.
+			Vec3d v;
+			switch (mountMode)
+			{
+				case MountAltAzimuthal:
+					v = move.targetObject->getAltAzPosAuto(core);
+					break;
+				case MountEquinoxEquatorial:
+					v = move.targetObject->getEquinoxEquatorialPos(core);
+					break;
+				case MountGalactic:
+					v = move.targetObject->getGalacticPos(core);
+					break;
+				default:
+					qWarning() << "StelMovementMgr: unexpected mountMode" << mountMode;
+					Q_ASSERT(0);
+			}
+
+			double lat, lon;
+			StelUtils::rectToSphe(&lon, &lat, v);
+			float altOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*currentFov*M_PI/180.0f;
+			lat+=altOffset;
+			StelUtils::spheToRect(lon, lat, v);
+			move.aim=mountFrameToJ2000(v);
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -686,8 +702,30 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	{
 		if (flagTracking && objectMgr->getWasSelected()) // Equatorial vision vector locked on selected object
 		{
-			Vec3d v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
-			setViewDirectionJ2000(core->altAzToJ2000(v, StelCore::RefractionOff));
+			Vec3d v;
+			switch (mountMode)
+			{
+				case MountAltAzimuthal:
+					v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+					break;
+				case MountEquinoxEquatorial:
+					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core);
+					break;
+				case MountGalactic:
+					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);
+					break;
+				default:
+					qWarning() << "StelMovementMgr: unexpected mountMode" << mountMode;
+					Q_ASSERT(0);
+			}
+
+			double lat, lon; // general: longitudinal, latitudinal
+			StelUtils::rectToSphe(&lon, &lat, v);
+			float latOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*currentFov*M_PI/180.0f;
+			lat+=latOffset;
+			StelUtils::spheToRect(lon, lat, v);
+
+			setViewDirectionJ2000(mountFrameToJ2000(v));
 		}
 		else
 		{
@@ -705,7 +743,7 @@ void StelMovementMgr::updateVisionVector(double deltaTime)
 	}
 }
 
-// Go and zoom to the selected object.
+// Go and zoom to the selected object. (Action linked to key, default "/")
 void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 {
 	if (!objectMgr->getWasSelected())
@@ -716,7 +754,7 @@ void StelMovementMgr::autoZoomIn(float moveDuration, bool allowManualZoom)
 	float manualMoveDuration;
 	if (!getFlagTracking())
 	{
-		setFlagTracking(true);
+		setFlagTracking(true); // includes a call to moveToObject(), but without zooming=1!
 		moveToObject(objectMgr->getSelectedObject()[0], moveDuration, 1);
 		manualMoveDuration = moveDuration;
 	}
@@ -784,7 +822,7 @@ void StelMovementMgr::autoZoomOut(float moveDuration, bool full)
 	}
 }
 
-
+// This is called when you press SPACEBAR: slowly centering&tracking object
 void StelMovementMgr::setFlagTracking(bool b)
 {
 	if (!b || !objectMgr->getWasSelected())
@@ -801,6 +839,7 @@ void StelMovementMgr::setFlagTracking(bool b)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given J2000 equatorial position
+
 void StelMovementMgr::moveToJ2000(const Vec3d& aim, float moveDuration, int zooming)
 {
 	moveDuration /= movementsSpeedFactor;
@@ -868,7 +907,7 @@ void StelMovementMgr::setViewDirectionJ2000(const Vec3d& v)
 	viewDirectionMountFrame = j2000ToMountFrame(v);
 }
 
-void StelMovementMgr::panView(double deltaAz, double deltaAlt)
+void StelMovementMgr::panView(const double deltaAz, const double deltaAlt)
 {
 	double azVision, altVision;
 	StelUtils::rectToSphe(&azVision,&altVision,j2000ToMountFrame(viewDirectionJ2000));
@@ -908,7 +947,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		v2[2]=0; v2.normalize();
 		double angle = (v2^v1)[2];
 		double deltaDay = angle/(2.*M_PI)*core->getLocalSiderealDayLength();
-		core->setJDay(core->getJDay()+deltaDay);
+		core->setJD(core->getJD()+deltaDay);
 		addTimeDragPoint(x2, y2);
 	}
 	else
@@ -935,23 +974,64 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 		// Use a smooth function
 		double c;
 
-		if( zoomMove.start > zoomMove.aim )
+		if( zoomMove.startFov > zoomMove.aimFov )
 		{
-			// slow down as approach final view
+			// slow down as we approach final view
 			c = 1 - (1-zoomMove.coef)*(1-zoomMove.coef)*(1-zoomMove.coef);
 		}
 		else
 		{
-			// speed up as leave zoom target
+			// speed up as we leave zoom target
 			c = (zoomMove.coef)*(zoomMove.coef)*(zoomMove.coef);
 		}
 
-		setFov(zoomMove.start + (zoomMove.aim - zoomMove.start) * c);
+		double newFov=zoomMove.startFov + (zoomMove.aimFov - zoomMove.startFov) * c;
+
 		zoomMove.coef+=zoomMove.speed*deltaTime*1000;
 		if (zoomMove.coef>=1.)
 		{
 			flagAutoZoom = 0;
-			setFov(zoomMove.aim);
+			newFov=zoomMove.aimFov;
+		}
+
+		setFov(newFov); // updates currentFov->don't use newFov later!
+
+		// In case we have offset center, we want object still visible in center.
+		if (flagTracking && objectMgr->getWasSelected()) // vision vector locked on selected object
+		{
+			Vec3d v;
+			switch (mountMode)
+			{
+				case MountAltAzimuthal:
+					v = objectMgr->getSelectedObject()[0]->getAltAzPosAuto(core);
+					break;
+				case MountEquinoxEquatorial:
+					v = objectMgr->getSelectedObject()[0]->getEquinoxEquatorialPos(core);
+					break;
+				case MountGalactic:
+					v = objectMgr->getSelectedObject()[0]->getGalacticPos(core);
+					break;
+				default:
+					qWarning() << "StelMovementMgr: unexpected mountMode" << mountMode;
+					Q_ASSERT(0);
+			}
+
+			double lat, lon; // general: longitudinal, latitudinal
+			StelUtils::rectToSphe(&lon, &lat, v);
+			float latOffset=core->getCurrentStelProjectorParams().viewportCenterOffset[1]*currentFov*M_PI/180.0f;
+			lat+=latOffset;
+			StelUtils::spheToRect(lon, lat, v);
+
+			if (flagAutoMove)
+			{
+				move.aim=mountFrameToJ2000(v);
+				move.aim.normalize();
+				move.aim*=2.;
+			}
+			else
+			{
+				setViewDirectionJ2000(mountFrameToJ2000(v));
+			}
 		}
 	}
 }
@@ -961,8 +1041,8 @@ void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
 {
 	moveDuration /= movementsSpeedFactor;
 
-	zoomMove.aim=aim_fov;
-	zoomMove.start=currentFov;
+	zoomMove.aimFov=aim_fov;
+	zoomMove.startFov=currentFov;
 	zoomMove.speed=1.f/(moveDuration*1000);
 	zoomMove.coef=0.;
 	flagAutoZoom = true;
@@ -991,7 +1071,7 @@ void StelMovementMgr::changeConstellationArtIntensity()
 
 double StelMovementMgr::getAimFov(void) const
 {
-	return (flagAutoZoom ? zoomMove.aim : currentFov);
+	return (flagAutoZoom ? zoomMove.aimFov : currentFov);
 }
 
 void StelMovementMgr::setMaxFov(double max)

@@ -17,7 +17,7 @@
 */
 
 #include "CustomDeltaTEquationDialog.hpp"
-#include "ui_CustomDeltaTEquationDialog.h"
+#include "ui_customDeltaTEquationDialog.h"
 
 #include "Dialog.hpp"
 #include "StelApp.hpp"
@@ -28,7 +28,7 @@
 
 CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
 {
-	ui = new Ui_CustomDeltaTEquationDialogForm;
+	ui = new Ui_customDeltaTEquationDialogForm;
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();
 

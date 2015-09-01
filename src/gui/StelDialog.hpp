@@ -69,6 +69,8 @@ public slots:
 	void close();
 signals:
 	void visibleChanged(bool);
+private slots:
+	void updateNightModeProperty();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.

@@ -20,14 +20,14 @@
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "AtmosphereDialog.hpp"
-#include "ui_AtmosphereDialog.h"
+#include "ui_atmosphereDialog.h"
 
 AtmosphereDialog::AtmosphereDialog()
 	: refraction(NULL)
 	, extinction(NULL)
 
 {
-	ui = new Ui_AtmosphereDialogForm;
+	ui = new Ui_atmosphereDialogForm;
 }
 
 AtmosphereDialog::~AtmosphereDialog()

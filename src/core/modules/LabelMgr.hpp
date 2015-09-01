@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * This file Copyright (C) 2008 Matthew Gates
+ * Horizon system labels (c) 2015 Georg Zotti
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,6 +39,7 @@ class StelPainter;
 //! Because this class is intended for use in scripting (although
 //! other uses are also fine), all label types and so on are specified 
 //! by QString descriptions.
+//! The labels are painted very late, i.e. also sky object labels will be written over the landscape.
 //! TODO: when QT4.5 is out, change implementation to use QGraphicsTextItem.
 //! (QT4.5 should allow for opacity changes for fades, but it is not currently
 //! implemented.
@@ -87,6 +89,20 @@ public slots:
 	                const QString& side="E",
 	                double labelDistance=-1.0,
 	                const QString& style="TextOnly");
+
+	//! Create a label in azimuthal coordinate system. Can be used e.g. to show landscape features
+	//! @param text the text to display
+	//! @param az azimuth, degrees
+	//! @param alt altitude, degrees
+	//! @param visible if true, the label starts displayed, else it starts hidden
+	//! @param fontSize size of the font to use
+	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
+	int labelHorizon(const QString& text,
+			float az,
+			float alt,
+			bool visible=true,
+			float fontSize=14,
+			const QString& fontColor="#999999");
 
 	//! Create a label at fixed screen coordinates
 	//! @param text the text to display
