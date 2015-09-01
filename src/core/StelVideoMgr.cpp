@@ -59,7 +59,11 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 
 	videoObjects[id] = new VideoPlayer;
 	videoObjects[id]->videoItem= new QGraphicsVideoItem();
-	videoObjects[id]->player = new QMediaPlayer();
+	// GZ maybe this helps on win?
+	videoObjects[id]->videoItem->setSize(QSizeF(100,100));
+
+
+	videoObjects[id]->player = new QMediaPlayer(0, QMediaPlayer::VideoSurface);
 	videoObjects[id]->duration=-1; // -1 to signal "unknown".
 	videoObjects[id]->resolution=QSize(); // initialize with "invalid" resolution, we must detect this when player is starting!
 	videoObjects[id]->keepVisible=false;
