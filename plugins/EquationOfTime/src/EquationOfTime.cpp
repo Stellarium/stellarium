@@ -33,7 +33,8 @@
 #include "EquationOfTime.hpp"
 #include "EquationOfTimeWindow.hpp"
 
-#include "sidereal_time.h"
+//#include "sidereal_time.h"
+#include "precession.h"
 
 #include <QFontMetrics>
 #include <QSettings>
@@ -113,6 +114,8 @@ void EquationOfTime::draw(StelCore *core)
 {
 	if (!isEnabled())
 		return;
+	if (core->getCurrentPlanet()->getEnglishName()!="Earth")
+		return;
 
 	StelPainter sPainter(core->getProjection2d());
 	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
@@ -120,26 +123,26 @@ void EquationOfTime::draw(StelCore *core)
 	sPainter.setFont(font);
 
 	QString timeText;
-	double time = getSolutionEquationOfTime(core->getJDay());
+	double eqTime = getSolutionEquationOfTime(core->getJDE());
 
 	if (getFlagInvertedValue())
-		time *= -1;
+		eqTime *= -1;
 
 	if (getFlagMsFormat())
 	{
-		int seconds = qRound((time - (int)time)*60);
+		int seconds = qRound((eqTime - (int)eqTime)*60);
 		QString messageSecondsValue = QString("%1").arg(qAbs(seconds), 2, 10, QLatin1Char('0'));
 
-		timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (time<0? QString(QLatin1Char('-')):QString()), QString::number((int)qAbs(time)), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
+		timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (eqTime<0? QString(QLatin1Char('-')):QString()), QString::number((int)qAbs(eqTime)), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
 	}
 	else
-		timeText = QString("%1: %2%3").arg(messageEquation, QString::number(time, 'f', 2), messageEquationMinutes);
+		timeText = QString("%1: %2%3").arg(messageEquation, QString::number(eqTime, 'f', 2), messageEquationMinutes);
 
 
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, timeText);	
-	if (core->getCurrentPlanet().data()->getEnglishName()=="Earth")
-		sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, timeText);
+
+	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, timeText);
 
 	//qDebug() << timeText;
 }
@@ -212,11 +215,11 @@ void EquationOfTime::saveSettingsToConfig(void)
 	conf->endGroup();
 }
 
-double EquationOfTime::getSolutionEquationOfTime(const double JDay) const
+double EquationOfTime::getSolutionEquationOfTime(const double JDE) const
 {
 	StelCore* core = StelApp::getInstance().getCore();
 
-	double tau = (JDay - 2451545.0)/365250.0;
+	double tau = (JDE - 2451545.0)/365250.0;
 	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1./49931. - tau*(1./15300. - tau/2000000.))));
 
 	// reduce the angle
@@ -233,7 +236,10 @@ double EquationOfTime::getSolutionEquationOfTime(const double JDay) const
 	// force it to be the positive remainder, so that 0 <= angle < 360
 	alpha = std::fmod(alpha + 360., 360.);
 
-	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDay)*cos(get_mean_ecliptical_obliquity(JDay)));
+	double deltaPsi, deltaEps;
+	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
+	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*180./M_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
 	// The equation of time is always smaller 20 minutes in absolute value
 	if (qAbs(equation)>20)
 	{

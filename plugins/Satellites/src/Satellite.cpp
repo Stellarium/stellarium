@@ -59,6 +59,7 @@ int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
+Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2,0.2,0.2);
 
 #ifdef IRIDIUM_SAT_TEXT_DEBUG
 QString Satellite::myText = "";
@@ -78,7 +79,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
       height(0.),
       range(0.),
       rangeRate(0.),
-      hintColor(0.0,0.0,0.0),            
+      hintColor(0.0,0.0,0.0),
       lastUpdated(),
       pSatWrapper(NULL),
       visibility(0),
@@ -395,6 +396,9 @@ float Satellite::getVMagnitude(const StelCore* core) const
 	if (!realisticModeFlag)
 		vmag = 5.0;
 
+	if (realisticModeFlag && visibility != VISIBLE)
+		vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
+
 	if (stdMag!=99.f)
 	{
 		sunReflAngle = -1.;
@@ -567,8 +571,6 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			vmag = vmag - 15.75 + 2.5 * std::log10(range * range / fracil);
 
 		}
-		else
-			vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
 	}
 	return vmag;
 }
@@ -600,6 +602,7 @@ void Satellite::setNewTleElements(const QString& tle1, const QString& tle2)
 
 	pSatWrapper = new gSatWrapper(id, tle1, tle2);
 	orbitPoints.clear();
+	visibilityPoints.clear();
 	
 	parseInternationalDesignator(tle1);
 }
@@ -609,8 +612,7 @@ void Satellite::update(double)
 	if (pSatWrapper && orbitValid)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJDay();
-		epochTime = JD - core->getDeltaT(JD)/86400; // Delta T anti-correction for artificial satellites
+		epochTime = core->getJD(); // We have "true" JD from core, satellites don't need JDE!
 
 		pSatWrapper->setEpoch(epochTime);
 		position                 = pSatWrapper->getTEMEPos();
@@ -654,6 +656,7 @@ double Satellite::getDoppler(double freq) const
 void Satellite::recalculateOrbitLines(void)
 {
 	orbitPoints.clear();
+	visibilityPoints.clear();
 }
 
 SatFlags Satellite::getFlags()
@@ -726,13 +729,13 @@ bool Satellite::operator <(const Satellite& another) const
 
 void Satellite::draw(StelCore* core, StelPainter& painter, float)
 {
-	if (core->getJDay()<jdLaunchYearJan1 || !displayed)
+	if (core->getJD()<jdLaunchYearJan1 || !displayed)
 		return;
 
 	XYZ = getJ2000EquatorialPos(core);
 	StelSkyDrawer* sd = core->getSkyDrawer();
-	Vec3f drawColor(0.2f,0.2f,0.2f);
-	if (visibility != RADAR_NIGHT)
+	Vec3f drawColor = invisibleSatelliteColor;
+	if (visibility == VISIBLE) // Use hintColor for visible satellites only
 		drawColor = hintColor;
 	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
 
@@ -751,19 +754,27 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			StelProjectorP origP = painter.getProjector(); // Save projector state
 			painter.setProjector(prj);
 
+			// Draw the satellite
 			sd->preDrawPointSource(&painter);
 			if (mag <= sd->getLimitMagnitude())
 			{
 				sd->computeRCMag(mag, &rcMag);
 				sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, true);
+			}
+			sd->postDrawPointSource(&painter);
+
+			float txtMag = mag;
+			if (visibility != VISIBLE)
+			{
+				txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
+				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1);
+			}
+			else
 				painter.setColor(color[0], color[1], color[2], 1);
 
-				if (Satellite::showLabels)
-					painter.drawText(XYZ, name, 0, 10, 10, false);
-
-			}
-
-			sd->postDrawPointSource(&painter);
+			// Draw the label of the satellite when it enabled
+			if (txtMag <= sd->getLimitMagnitude() && Satellite::showLabels)
+				painter.drawText(XYZ, name, 0, 10, 10, false);
 
 			painter.setProjector(origP); // Restrore projector state
 		}
@@ -772,8 +783,11 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 			if (Satellite::showLabels)
 				painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
 
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_ONE, GL_ONE);
+
 			Satellite::hintTexture->bind();
-			painter.drawSprite2dMode(xy[0], xy[1], 11);
+			painter.drawSprite2dMode(xy[0], xy[1], 11);			
 		}
 	}
 	if (orbitDisplayed && Satellite::orbitLinesFlag && orbitValid) drawOrbit(painter);
@@ -782,43 +796,37 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 void Satellite::drawOrbit(StelPainter& painter)
 {
-	Vec3d position,previousPosition;
+	Vec3d position;
+	Vec3f drawColor;
+	int size = orbitPoints.size();
 
 	glDisable(GL_TEXTURE_2D);
 
 	QList<Vec3d>::iterator it= orbitPoints.begin();
-
-	//First point projection calculation
-	previousPosition.set(it->operator [](0), it->operator [](1), it->operator [](2));
-
 	it++;
-	StelVertexArray vertexArray;
-	vertexArray.primitiveType=StelVertexArray::Lines;
+
+	QVector<Vec3d> vertexArray;
+	QVector<Vec4f> colorArray;
+
+	vertexArray.resize(size);
+	colorArray.resize(size);
 
 	//Rest of points
-	for (int i=1; i<orbitPoints.size(); i++)
+	for (int i=1; i<size; i++)
 	{
 		position.set(it->operator [](0), it->operator [](1), it->operator [](2));
 		it++;
 		position.normalize();
-		previousPosition.normalize();
-		
-		// Draw end (fading) parts of orbit lines one segment at a time.
-		if (i<=orbitLineFadeSegments || orbitLineSegments-i < orbitLineFadeSegments)
-		{
-			painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
-			painter.drawGreatCircleArc(previousPosition, position, &viewportHalfspace);
-		}
-		else
-		{
-			vertexArray.vertex << previousPosition << position;
-		}
-		previousPosition = position;
+
+		vertexArray[i] = position;
+		drawColor = invisibleSatelliteColor;
+		if (visibilityPoints[i] == VISIBLE)
+			drawColor = orbitColor;
+		colorArray[i] = Vec4f(drawColor[0], drawColor[1], drawColor[2], hintBrightness * calculateOrbitSegmentIntensity(i));
 	}
 
-	// Draw center section of orbit in one go
-	painter.setColor(orbitColor[0], orbitColor[1], orbitColor[2], hintBrightness);
-	painter.drawGreatCircleArcs(vertexArray, &viewportHalfspace);
+
+	painter.drawPath(vertexArray, colorArray);
 
 	glEnable(GL_TEXTURE_2D);
 }
@@ -858,6 +866,7 @@ void Satellite::computeOrbitPoints()
 			pSatWrapper->setEpoch(epochTm.getGmtTm());
 			elAzVector  = pSatWrapper->getAltAz();
 			orbitPoints.append(elAzVector);
+			visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 			epochTm    += computeInterval;
 		}
 		lastEpochCompForOrbit = epochTime;
@@ -884,9 +893,11 @@ void Satellite::computeOrbitPoints()
 			{
 				//remove points at beginning of list and add points at end.
 				orbitPoints.removeFirst();
+				visibilityPoints.removeFirst();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
 				elAzVector  = pSatWrapper->getAltAz();
 				orbitPoints.append(elAzVector);
+				visibilityPoints.append(pSatWrapper->getVisibilityPredict());
 				epochTm    += computeInterval;
 			}
 
@@ -912,9 +923,11 @@ void Satellite::computeOrbitPoints()
 			for (int i=0; i<diffSlots; i++)
 			{ //remove points at end of list and add points at beginning.
 				orbitPoints.removeLast();
+				visibilityPoints.removeLast();
 				pSatWrapper->setEpoch(epochTm.getGmtTm());
 				elAzVector  = pSatWrapper->getAltAz();
 				orbitPoints.push_front(elAzVector);
+				visibilityPoints.push_front(pSatWrapper->getVisibilityPredict());
 				epochTm -= computeInterval;
 
 			}

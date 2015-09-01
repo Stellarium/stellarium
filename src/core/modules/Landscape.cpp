@@ -26,6 +26,7 @@
 #include "StelLocation.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "StelLocaleMgr.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -43,12 +44,14 @@ Landscape::Landscape(float _radius)
 	, cols(40)
 	, angleRotateZ(0.)
 	, angleRotateZOffset(0.)
+	, sinMinAltitudeLimit(-0.035) //sin(-2 degrees))
 	, defaultBortleIndex(-1)
 	, defaultFogSetting(-1)
 	, defaultExtinctionCoefficient(-1.)
 	, defaultTemperature(-1000.)
 	, defaultPressure(-2.)
 	, horizonPolygon(NULL)
+	, fontSize(18)
 {
 	validLandscape = 0;
 }
@@ -115,6 +118,10 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	// Set minimal brightness for landscape
 	minBrightness = landscapeIni.value("landscape/minimal_brightness", -1.0).toDouble();
 
+	// set a minimal altitude which the landscape covers. (new in 0.14)
+	// This is to allow landscapes with "holes" in the ground (space station?) (Bug lp:1469407)
+	sinMinAltitudeLimit = (float) std::sin(M_PI/180.0 * landscapeIni.value("landscape/minimal_altitude", -2.0).toDouble());
+
 	// This is now optional for all classes, for mixing with a photo horizon:
 	// they may have different offsets, like a south-centered pano and a geographically-oriented polygon.
 	// In case they are aligned, we can use one value angle_rotatez, or define the polygon rotation individually.
@@ -125,8 +132,13 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat(),
 					landscapeIni.value("landscape/polygonal_horizon_list_mode", "azDeg_altDeg").toString());
 		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
-		horizonPolygonLineColor=StelUtils::strToVec3f( landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
+		horizonPolygonLineColor=StelUtils::strToVec3f(landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
 	}
+	// we must get label color, this is global. (No sense to make that per-landscape!)
+	QSettings *config = StelApp::getInstance().getSettings();
+	labelColor=StelUtils::strToVec3f(config->value("landscape/label_color", "0.2,0.8,0.2").toString());
+	fontSize=config->value("landscape/label_font_size", 18).toInt();
+	loadLabels(landscapeId);
 }
 
 void Landscape::createPolygonalHorizon(const QString& lineFileName, const float polyAngleRotateZ, const QString &listMode )
@@ -223,6 +235,112 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	return path;
 }
 
+// find optional file and fill landscapeLabels list.
+void Landscape::loadLabels(const QString& landscapeId)
+{
+	// in case we have labels and this is called for a retranslation, clean list first.
+	landscapeLabels.clear();
+
+	QString lang, descFileName, locLabelFileName, engLabelFileName;
+
+	lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	locLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer." + lang + ".utf8";
+	engLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer.en.utf8";
+
+	// Check the file with full name of locale
+	if (!QFileInfo(locLabelFileName).exists())
+	{
+		// File not found. What about short name of locale?
+		lang = lang.split("_").at(0);
+		locLabelFileName = StelFileMgr::findFile("landscapes/" + landscapeId, StelFileMgr::Directory) + "/gazetteer." + lang + ".utf8";
+	}
+
+	// Get localized or at least English description for landscape
+	if (QFileInfo(locLabelFileName).exists())
+		descFileName = locLabelFileName;
+	else if (QFileInfo(engLabelFileName).exists())
+		descFileName = engLabelFileName;
+	else
+		return;
+
+	// We have found some file now.
+	QFile file(descFileName);
+	if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		QTextStream in(&file);
+		in.setCodec("UTF-8");
+		while (!in.atEnd())
+		{
+			QString line=in.readLine();
+
+			// TODO: Read entries, construct vectors, put in list.
+			if (line.startsWith('#'))
+				continue;
+			QStringList parts=line.split('|');
+			if (parts.count() != 5)
+			{
+				qWarning() << "Invalid line in landscape" << descFileName << ":" << line;
+				continue;
+			}
+			LandscapeLabel newLabel;
+			newLabel.name=parts.at(4).trimmed();
+			StelUtils::spheToRect((180.0f-parts.at(0).toFloat()) *M_PI/180.0, parts.at(1).toFloat()*M_PI/180.0, newLabel.featurePoint);
+			StelUtils::spheToRect((180.0f-parts.at(0).toFloat() - parts.at(3).toFloat())*M_PI/180.0, (parts.at(1).toFloat() + parts.at(2).toFloat())*M_PI/180.0, newLabel.labelPoint);
+			landscapeLabels.append(newLabel);
+			//qDebug() << "Added landscape label " << newLabel.name;
+		}
+		file.close();
+	}
+}
+
+void Landscape::drawLabels(StelCore* core, StelPainter *painter)
+{
+	if (landscapeLabels.length()==0) // no labels
+		return;
+	if (labelFader.getInterstate() < 0.0001f) // switched off
+		return;
+
+	// We must reset painter to pure altaz coordinates without pano-based rotation
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	painter->setProjector(prj);
+	QFont font;
+	font.setPixelSize(fontSize);
+	painter->setFont(font);
+	QFontMetrics fm(font);
+	painter->setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate()*landFader.getInterstate());
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
+
+	for (int i = 0; i < landscapeLabels.size(); ++i)
+	{
+		// in case of gravityLabels, we cannot shift-adjust centered placename, sorry!
+		if (prj->getFlagGravityLabels())
+		{
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, 0, 0, false);
+		}
+		else
+		{
+			int textWidth=fm.width(landscapeLabels.at(i).name);
+			painter->drawText(landscapeLabels.at(i).labelPoint, landscapeLabels.at(i).name, 0, -textWidth/2, 2, true);
+		}
+		painter->drawGreatCircleArc(landscapeLabels.at(i).featurePoint, landscapeLabels.at(i).labelPoint, NULL);
+	}
+
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
+	glDisable(GL_BLEND);
+}
+
+
 LandscapeOldStyle::LandscapeOldStyle(float _radius)
 	: Landscape(_radius)
 	, sideTexs(NULL)
@@ -255,6 +373,7 @@ LandscapeOldStyle::~LandscapeOldStyle()
 		qDeleteAll(sidesImages);
 		sidesImages.clear();
 	}
+	landscapeLabels.clear();
 }
 
 void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -537,6 +656,8 @@ void LandscapeOldStyle::draw(StelCore* core)
 		painter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	}
 	//else qDebug() << "no polygon defined";
+
+	drawLabels(core, &painter);
 }
 
 
@@ -637,7 +758,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		static QString lastLandscapeName;
 		if (lastLandscapeName != name)
 		{
-			qWarning() << "Dubious result: Landscape \"" << name << "\" not calibrated. Opacity test represents mathematical horizon only.";
+			qWarning() << "Dubious result: Landscape " << name << " not calibrated. Opacity test represents mathematical horizon only.";
 			lastLandscapeName=name;
 		}
 		return (azalt[2] > 0 ? 0.0f : 1.0f);
@@ -684,6 +805,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	float y_baseImg_1 = sides[currentSide].texCoords[1]+ y_img_1*(sides[currentSide].texCoords[3]-sides[currentSide].texCoords[1]);
 	int y=(1.0-y_baseImg_1)*sidesImages[currentSide]->height();           // pixel Y from top.
 	QRgb pixVal=sidesImages[currentSide]->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Oldstyle Landscape sampling: az=" << az*180.0 << "° alt=" << alt_rad*180.0f/M_PI
@@ -692,6 +814,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 			 << ", w=" << sidesImages[currentSide]->width() << " h=" << sidesImages[currentSide]->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 }
 
@@ -701,7 +824,9 @@ LandscapePolygonal::LandscapePolygonal(float _radius) : Landscape(_radius)
 {}
 
 LandscapePolygonal::~LandscapePolygonal()
-{}
+{
+	landscapeLabels.clear();
+}
 
 void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
@@ -765,6 +890,7 @@ void LandscapePolygonal::draw(StelCore* core)
 		#endif
 	}
 	glDisable(GL_CULL_FACE);
+	drawLabels(core, &sPainter);
 }
 
 float LandscapePolygonal::getOpacity(Vec3d azalt) const
@@ -788,6 +914,7 @@ LandscapeFisheye::LandscapeFisheye(float _radius)
 LandscapeFisheye::~LandscapeFisheye()
 {
 	if (mapImage) delete mapImage;
+	landscapeLabels.clear();
 }
 
 void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -870,6 +997,7 @@ void LandscapeFisheye::draw(StelCore* core)
 	}
 
 	glDisable(GL_CULL_FACE);
+	drawLabels(core, &sPainter);
 }
 
 float LandscapeFisheye::getOpacity(Vec3d azalt) const
@@ -898,12 +1026,14 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 	int y= mapImage->height()/2*(1 + radius*std::cos(az));
 
 	QRgb pixVal=mapImage->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
 			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 
 
@@ -925,6 +1055,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius)
 LandscapeSpherical::~LandscapeSpherical()
 {
 	if (mapImage) delete mapImage;
+	landscapeLabels.clear();
 }
 
 void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& landscapeId)
@@ -1044,7 +1175,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	}
 	//else qDebug() << "no polygon defined";
 	glDisable(GL_CULL_FACE);
-
+	drawLabels(core, &sPainter);
 }
 
 //! Sample landscape texture for transparency. May be used for advanced visibility computation like sunrise on the visible horizon etc.
@@ -1085,6 +1216,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	int x=(az_phot/2.0f) * mapImage->width(); // pixel X from left.
 
 	QRgb pixVal=mapImage->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << az*180.0 << "° alt=" << alt_pm1*90.0f
@@ -1092,6 +1224,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 			 << ", w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 
 }

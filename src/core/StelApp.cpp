@@ -29,10 +29,10 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
-#include "MeteorMgr.hpp"
 #include "LabelMgr.hpp"
-#include "StarMgr.hpp"
 #include "SolarSystem.hpp"
+#include "SporadicMeteorMgr.hpp"
+#include "StarMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
@@ -218,6 +218,7 @@ StelApp::StelApp(QObject* parent)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
 	, flagShowDecimalDegrees(false)
+	, flagUseAzimuthFromSouth(false)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -347,16 +348,14 @@ void StelApp::setupHttpProxy()
 }
 
 #ifndef DISABLE_SCRIPTING
-void StelApp::initScriptMgr(QSettings *conf)
+void StelApp::initScriptMgr()
 {
-	scriptAPIProxy = new StelMainScriptAPIProxy(this);
-	scriptMgr = new StelScriptMgr(this);
 	scriptMgr->addModules();
 	QString startupScript;
 	if (qApp->property("onetime_startup_script").isValid())
 		startupScript = qApp->property("onetime_startup_script").toString();
 	else
-		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
+		startupScript = confSettings->value("scripts/startup_script", "startup.ssc").toString();
 	// Use a queued slot call to start the script only once the main qApp event loop is running...
 	QMetaObject::invokeMethod(scriptMgr,
 				  "runScript",
@@ -364,7 +363,7 @@ void StelApp::initScriptMgr(QSettings *conf)
 				  Q_ARG(QString, startupScript));
 }
 #else
-void StelApp::initScriptMgr(QSettings *conf) {Q_UNUSED(conf);}
+void StelApp::initScriptMgr() {}
 #endif
 
 void StelApp::init(QSettings* conf)
@@ -459,8 +458,8 @@ void StelApp::init(QSettings* conf)
 	gridLines->init();
 	getModuleMgr().registerModule(gridLines);
 
-	// Meteors
-	MeteorMgr* meteors = new MeteorMgr(10, 72);
+	// Sporadic Meteors
+	SporadicMeteorMgr* meteors = new SporadicMeteorMgr(10, 72);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
@@ -471,7 +470,12 @@ void StelApp::init(QSettings* conf)
 
 	skyCultureMgr->init();
 
-	initScriptMgr(conf);
+	//Create the script manager here, maybe some modules/plugins may want to connect to it
+	//It has to be initialized later after all modules have been loaded by calling initScriptMgr
+#ifndef DISABLE_SCRIPTING
+	scriptAPIProxy = new StelMainScriptAPIProxy(this);
+	scriptMgr = new StelScriptMgr(this);
+#endif
 
 	// Initialisation of the color scheme
 	emit colorSchemeChanged("color");
@@ -488,6 +492,7 @@ void StelApp::init(QSettings* conf)
 	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
+	setFlagOldAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
 	
 	initialized = true;
 }
