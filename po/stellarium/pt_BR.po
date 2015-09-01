@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-30 11:40+0600\n"
-"PO-Revision-Date: 2015-08-30 13:44+0000\n"
+"PO-Revision-Date: 2015-09-01 04:09+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-08-31 04:52+0000\n"
+"X-Launchpad-Export-Date: 2015-09-01 05:12+0000\n"
 "X-Generator: Launchpad (build 17690)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1237,7 +1237,7 @@ msgid ""
 "planetarium program RedShift."
 msgstr ""
 "<p align=\"justify\">Este algoritmo foi adotado no <em>Planetary Programs "
-"and Tables from -4000 to +2800</em> (1986) de P. Bretagnon e L. Simon (1986) "
+"and Tables from −4000 to +2800</em> (1986) de P. Bretagnon e L. Simon (1986) "
 "e no programa de planetário para computador RedShift."
 
 #: src/core/StelCore.cpp:1688
@@ -1248,7 +1248,7 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 "<p align=\"justify\">Esta fórmula foi publicada por F. R. Stephenson e L. V. "
-"Morrison no artigo <em>Long-term changes in the rotation of the earth - 700 "
+"Morrison no artigo <em>Long-term changes in the rotation of the earth −700 "
 "B.C. to A.D. 1980</em> (%1)."
 
 #: src/core/StelCore.cpp:1691
@@ -1286,7 +1286,7 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 "<p align=\"justify\">Esta equação polinomial de décima segunda ordem foi "
-"publicada por L. D. Schmadel e G. Zech no artigo em>Empirical "
+"publicada por L. D. Schmadel e G. Zech no artigo <em>Empirical "
 "Transformations from U.T. to E.T. for the Period 1800-1988</em> (%1) como "
 "uma adaptação de informações por meio dos valores oferecidos por Stephenson "
 "e Morrison (1984)."
@@ -1411,8 +1411,8 @@ msgstr ""
 "<p align=\"justify\">Esta solução, obtida por F. Espenak e J. Meeus, com "
 "base em Morrison e Stephenson (2004) e uma adaptação polinomial por meio de "
 "valores tabelados para o ano de 1600 a 2000, é utilizada para o %1sítio de "
-"eclipses da NASA%2 e no seu <em>Five Millennium Canon of Solar Eclipses: -"
-"1900 to +3000</em> (2006). Esta fórmula também é empregada no SOLEX, um "
+"eclipses da NASA%2 e no seu <em>Five Millennium Canon of Solar Eclipses: "
+"−1900 to +3000</em> (2006). Esta fórmula também é empregada no SOLEX, um "
 "programa de efemérides solares, lunares e planetárias."
 
 #: src/core/StelCore.cpp:1733
@@ -1733,7 +1733,7 @@ msgstr "Encontrado"
 
 #: src/gui/ConfigurationDialog.cpp:494
 msgid "Select screenshot directory"
-msgstr "Selecione o diretório em que serão armazenadas as capturas de tela"
+msgstr "Selecione a pasta em que serão armazenadas as capturas de tela"
 
 #: src/gui/ConfigurationDialog.cpp:786
 #, qt-format
@@ -2462,7 +2462,7 @@ msgstr "Uma paisagem com o mesmo nome ou identificador (%1) já existe."
 #: src/gui/AddRemoveLandscapesDialog.cpp:238
 #, qt-format
 msgid "You can remove it manually by deleting the following directory: %1"
-msgstr "Você pode removê-la manualmente, excluindo o seguinte diretório: %1"
+msgstr "Você pode removê-la manualmente, excluindo a seguinte pasta: %1"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "quickrun..."
@@ -2506,7 +2506,7 @@ msgstr "Horizontal"
 #: src/gui/SearchDialog.cpp:236
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr "Galáctico"
+msgstr "Galáctica"
 
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
@@ -2577,7 +2577,7 @@ msgstr "Atalho alternativo"
 #: src/gui/CustomDeltaTEquationDialog.cpp:134
 #, qt-format
 msgid "Custom equation for %1T"
-msgstr "Equação personalizada para o %1T"
+msgstr "Equação personalizada do %1T"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
@@ -2951,7 +2951,7 @@ msgstr "Nebulosas de emissão"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119 src/ui_viewDialog.h:1661
 msgid "Supernova remnants"
-msgstr "Reminescentes de supernova"
+msgstr "Remanescentes de supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
@@ -4519,7 +4519,7 @@ msgstr "Procurar em:"
 
 #: src/translations.h:561
 msgid "Directory:"
-msgstr "Diretório:"
+msgstr "Pasta:"
 
 #: src/translations.h:562
 msgid "Folder"
@@ -4544,7 +4544,7 @@ msgstr "Data de modificação"
 
 #: src/translations.h:567
 msgid "Directories"
-msgstr "Diretórios"
+msgstr "Pastas"
 
 #: src/translations.h:568
 msgid "Computer"
@@ -5803,7 +5803,7 @@ msgstr "Capturas de tela"
 
 #: src/ui_configurationDialog.h:1201
 msgid "Screenshot Directory"
-msgstr "Diretório das capturas de tela"
+msgstr "Pasta das capturas de tela"
 
 #: src/ui_configurationDialog.h:1203
 msgid "Invert colors"
@@ -6009,7 +6009,7 @@ msgstr "Posição do cursor"
 
 #: src/ui_scriptConsole.h:380
 msgid "Include dir:"
-msgstr "Incluir o diretório:"
+msgstr "Incluir a pasta:"
 
 #: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
@@ -7227,8 +7227,8 @@ msgstr ""
 "<p align=\"justify\">Ao clicar no botão “%1” na aba “%2” desta janela, o "
 "arquivo “%3” modificado será revertido para o arquivo “%3” padrão. Será "
 "feita uma cópia de segurança do arquivo antigo, e este será renomeado para "
-"“%4”. Ele poderá ser encontrado no diretório que contém os dados do usuário, "
-"em “modules/Satellites/”."
+"“%4”. Ele poderá ser encontrado na pasta que contém os dados do usuário, em "
+"“modules/Satellites/”."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
 msgid ""
@@ -7871,7 +7871,7 @@ msgstr "Desconectar do telescópio selecionado"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:799
 msgid "Select a directory"
-msgstr "Selecione um diretório"
+msgstr "Selecione uma pasta"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
@@ -8132,7 +8132,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
-msgstr "Diretório de executáveis:"
+msgstr "Pasta de executáveis:"
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:230
 msgid "Points"
@@ -8416,7 +8416,7 @@ msgstr "MM-DD-AAAA"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
-msgstr "Interface textual"
+msgstr "Interface textual do usuário"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:93
 msgid ""
@@ -8424,7 +8424,7 @@ msgid ""
 "planetarium systems"
 msgstr ""
 "<p align=\"justify\">Implementação do complemento das séries 0.9.x da "
-"interface textual (TUI), utilizada em sistemas de planetário."
+"interface textual do usuário (TUI), utilizada em sistemas de planetário."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
@@ -8585,7 +8585,7 @@ msgstr "Desligar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:595
 msgid "[no TUI node]"
-msgstr "[nenhum nodo de interface textual]"
+msgstr "[nenhum nodo de interface textual do usuário]"
 
 #: plugins/TextUserInterface/src/TuiNodeBool.cpp:72
 msgid "On"
@@ -10520,7 +10520,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr "Confirmada"
+msgstr "Confirmado"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:132
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
@@ -11015,7 +11015,7 @@ msgstr "Complemento de chuva de meteoros"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:246
 msgid "Terms"
-msgstr "Cláusulas"
+msgstr "Terminologia"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:247
 msgid "Meteor shower"
@@ -11226,7 +11226,7 @@ msgstr "Definir cor do radiante"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr "Radiantes ativos – Informações genéricas"
+msgstr "Radiante ativo – informações genéricas"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
