@@ -35,10 +35,10 @@
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "NebulaMgr.hpp"
-#include "MeteorMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
 #include "ConstellationMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
@@ -134,11 +134,28 @@ void ViewDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	populateLists();
+	ui->viewportOffsetSpinBox->setValue((int) round(StelApp::getInstance().getCore()->getCurrentStelProjectorParams().viewportCenterOffset[1] * 100.0f));
+
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyCultureChanged(const QString&)));
 	connect(ui->projectionListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(projectionChanged(const QString&)));
+	connect(ui->viewportOffsetSpinBox, SIGNAL(valueChanged(int)), this, SLOT(viewportVerticalShiftChanged(int)));
 	connect(ui->landscapesListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(landscapeChanged(QListWidgetItem*)));
 
 	// Connect and initialize checkboxes and other widgets
+
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+
+	// DSO
+	updateSelectedCatalogsCheckBoxes();
+	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
+	updateSelectedTypesCheckBoxes();
+	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
+	ui->groupBoxDSOTypeFilters->setChecked(nmgr->getFlagTypeFiltersUsage());
+	connect(ui->groupBoxDSOTypeFilters, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagTypeFiltersUsage(bool)));
+	ui->checkBoxProportionalHints->setChecked(nmgr->getHintsProportional());
+	connect(ui->checkBoxProportionalHints, SIGNAL(toggled(bool)), nmgr, SLOT(setHintsProportional(bool)));
+	ui->checkBoxSurfaceBrightnessUsage->setChecked(nmgr->getFlagSurfaceBrightnessUsage());
+	connect(ui->checkBoxSurfaceBrightnessUsage, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagSurfaceBrightnessUsage(bool)));
 
 	// Stars section
 	ui->starTwinkleCheckBox->setChecked(StelApp::getInstance().getCore()->getSkyDrawer()->getFlagTwinkle());
@@ -166,9 +183,11 @@ void ViewDialog::createDialogContent()
 
 	// Limit Magnitudes
 	const StelSkyDrawer* drawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	// Stars
 	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
-	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
 	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
+	// DSO
+	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
 	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
 	
 	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
@@ -197,12 +216,16 @@ void ViewDialog::createDialogContent()
 
 	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
 	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
+	ui->planetIsolatedOrbitCheckBox->setChecked(ssmgr->getFlagIsolatedOrbits());
+	connect(ui->planetIsolatedOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedOrbits(bool)));
+	ui->planetIsolatedTrailsCheckBox->setChecked(ssmgr->getFlagIsolatedTrails());
+	connect(ui->planetIsolatedTrailsCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagIsolatedTrails(bool)));
 
 	ui->planetLightSpeedCheckBox->setChecked(ssmgr->getFlagLightTravelTime());
 	connect(ui->planetLightSpeedCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagLightTravelTime(bool)));
 
 	// Shooting stars section
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	Q_ASSERT(mmgr);
 
 	ui->zhrSpinBox->setValue(mmgr->getZHR());
@@ -213,17 +236,17 @@ void ViewDialog::createDialogContent()
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
-	connectCheckBox(ui->nebulaLabelCheckBox, "actionShow_Nebulas");
+	connectGroupBox(ui->groupBoxLabelsAndMarkers, "actionShow_Nebulas");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
-
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 
 	ui->starsLabelsHorizontalSlider->setValue((int)(smgr->getLabelsAmount()*10.f));
 	connect(ui->starsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(starsLabelsValueChanged(int)));
 	ui->planetsLabelsHorizontalSlider->setValue((int)(ssmgr->getLabelsAmount()*10.f));
 	connect(ui->planetsLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(planetsLabelsValueChanged(int)));
-	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
+	ui->nebulasLabelsHorizontalSlider->setValue((int)(nmgr->getLabelsAmount()*10.f));
 	connect(ui->nebulasLabelsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasLabelsValueChanged(int)));
+	ui->nebulasHintsHorizontalSlider->setValue((int)(nmgr->getHintsAmount()*10.f));
+	connect(ui->nebulasHintsHorizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(nebulasMarkersValueChanged(int)));
 
 	// Landscape section
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -231,6 +254,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
 	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
 	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
+	connectCheckBox(ui->landscapeLabelsCheckBox, "actionShow_LandscapeLabels");
 
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
@@ -267,7 +291,9 @@ void ViewDialog::createDialogContent()
 
 	// Grid and lines
 	connectCheckBox(ui->showEquatorLineCheckBox, "actionShow_Equator_Line");
-	connectCheckBox(ui->showEclipticLineCheckBox, "actionShow_Ecliptic_Line");
+	connectCheckBox(ui->showEquatorJ2000LineCheckBox, "actionShow_Equator_J2000_Line");
+	connectCheckBox(ui->showEclipticLineJ2000CheckBox, "actionShow_Ecliptic_J2000_Line");
+	connectCheckBox(ui->showEclipticLineOfDateCheckBox, "actionShow_Ecliptic_Line");
 	connectCheckBox(ui->showMeridianLineCheckBox, "actionShow_Meridian_Line");
 	connectCheckBox(ui->showLongitudeLineCheckBox, "actionShow_Longitude_Line");
 	connectCheckBox(ui->showHorizonLineCheckBox, "actionShow_Horizon_Line");
@@ -277,7 +303,9 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showAzimuthalGridCheckBox, "actionShow_Azimuthal_Grid");
 	connectCheckBox(ui->showEquatorialJ2000GridCheckBox, "actionShow_Equatorial_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox, "actionShow_Ecliptic_J2000_Grid");
+	connectCheckBox(ui->showEclipticGridOfDateCheckBox, "actionShow_Ecliptic_Grid");
 	connectCheckBox(ui->showCardinalPointsCheckBox, "actionShow_Cardinal_Points");
+	connectCheckBox(ui->showPrecessionCirclesCheckBox, "actionShow_Precession_Circles");
 
 	// Constellations
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
@@ -347,6 +375,111 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
 }
+
+void ViewDialog::setSelectedCatalogsFromCheckBoxes()
+{
+	Nebula::CatalogGroup flags(0);
+
+	if (ui->checkBoxNGC->isChecked())
+		flags |= Nebula::CatNGC;
+	if (ui->checkBoxIC->isChecked())
+		flags |= Nebula::CatIC;
+	if (ui->checkBoxM->isChecked())
+		flags |= Nebula::CatM;
+	if (ui->checkBoxC->isChecked())
+		flags |= Nebula::CatC;
+	if (ui->checkBoxB->isChecked())
+		flags |= Nebula::CatB;
+	if (ui->checkBoxSh2->isChecked())
+		flags |= Nebula::CatSh2;
+	if (ui->checkBoxVdB->isChecked())
+		flags |= Nebula::CatVdB;
+	if (ui->checkBoxRCW->isChecked())
+		flags |= Nebula::CatRCW;
+	if (ui->checkBoxLBN->isChecked())
+		flags |= Nebula::CatLBN;
+	if (ui->checkBoxLDN->isChecked())
+		flags |= Nebula::CatLDN;
+	if (ui->checkBoxCr->isChecked())
+		flags |= Nebula::CatCr;
+	if (ui->checkBoxMel->isChecked())
+		flags |= Nebula::CatMel;
+	if (ui->checkBoxCed->isChecked())
+		flags |= Nebula::CatCed;
+	if (ui->checkBoxPGC->isChecked())
+		flags |= Nebula::CatPGC;
+	if (ui->checkBoxUGC->isChecked())
+		flags |= Nebula::CatUGC;
+
+	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
+}
+
+void ViewDialog::setSelectedTypesFromCheckBoxes()
+{
+	Nebula::TypeGroup flags(0);
+
+	if (ui->checkBoxGalaxiesType->isChecked())
+		flags |= Nebula::TypeGalaxies;
+	if (ui->checkBoxActiveGalaxiesType->isChecked())
+		flags |= Nebula::TypeActiveGalaxies;
+	if (ui->checkBoxInteractingGalaxiesType->isChecked())
+		flags |= Nebula::TypeInteractingGalaxies;
+	if (ui->checkBoxStarClustersType->isChecked())
+		flags |= Nebula::TypeStarClusters;
+	if (ui->checkBoxBrightNebulaeType->isChecked())
+		flags |= Nebula::TypeBrightNebulae;
+	if (ui->checkBoxDarkNebulaeType->isChecked())
+		flags |= Nebula::TypeDarkNebulae;
+	if (ui->checkBoxPlanetaryNebulaeType->isChecked())
+		flags |= Nebula::TypePlanetaryNebulae;
+	if (ui->checkBoxHydrogenRegionsType->isChecked())
+		flags |= Nebula::TypeHydrogenRegions;
+	if (ui->checkBoxSupernovaRemnantsType->isChecked())
+		flags |= Nebula::TypeSupernovaRemnants;
+	if (ui->checkBoxOtherType->isChecked())
+		flags |= Nebula::TypeOther;
+
+	GETSTELMODULE(NebulaMgr)->setTypeFilters(flags);
+}
+
+
+void ViewDialog::updateSelectedCatalogsCheckBoxes()
+{
+	const Nebula::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
+
+	ui->checkBoxNGC->setChecked(flags & Nebula::CatNGC);
+	ui->checkBoxIC->setChecked(flags & Nebula::CatIC);
+	ui->checkBoxM->setChecked(flags & Nebula::CatM);
+	ui->checkBoxC->setChecked(flags & Nebula::CatC);
+	ui->checkBoxB->setChecked(flags & Nebula::CatB);
+	ui->checkBoxSh2->setChecked(flags & Nebula::CatSh2);
+	ui->checkBoxVdB->setChecked(flags & Nebula::CatVdB);
+	ui->checkBoxRCW->setChecked(flags & Nebula::CatRCW);
+	ui->checkBoxLDN->setChecked(flags & Nebula::CatLDN);
+	ui->checkBoxLBN->setChecked(flags & Nebula::CatLBN);
+	ui->checkBoxCr->setChecked(flags & Nebula::CatCr);
+	ui->checkBoxMel->setChecked(flags & Nebula::CatMel);
+	ui->checkBoxCed->setChecked(flags & Nebula::CatCed);
+	ui->checkBoxPGC->setChecked(flags & Nebula::CatPGC);
+	ui->checkBoxUGC->setChecked(flags & Nebula::CatUGC);
+}
+
+void ViewDialog::updateSelectedTypesCheckBoxes()
+{
+	const Nebula::TypeGroup& flags = GETSTELMODULE(NebulaMgr)->getTypeFilters();
+
+	ui->checkBoxGalaxiesType->setChecked(flags & Nebula::TypeGalaxies);
+	ui->checkBoxActiveGalaxiesType->setChecked(flags & Nebula::TypeActiveGalaxies);
+	ui->checkBoxInteractingGalaxiesType->setChecked(flags & Nebula::TypeInteractingGalaxies);
+	ui->checkBoxStarClustersType->setChecked(flags & Nebula::TypeStarClusters);
+	ui->checkBoxBrightNebulaeType->setChecked(flags & Nebula::TypeBrightNebulae);
+	ui->checkBoxDarkNebulaeType->setChecked(flags & Nebula::TypeDarkNebulae);
+	ui->checkBoxPlanetaryNebulaeType->setChecked(flags & Nebula::TypePlanetaryNebulae);
+	ui->checkBoxHydrogenRegionsType->setChecked(flags & Nebula::TypeHydrogenRegions);
+	ui->checkBoxSupernovaRemnantsType->setChecked(flags & Nebula::TypeSupernovaRemnants);
+	ui->checkBoxOtherType->setChecked(flags & Nebula::TypeOther);
+}
+
 
 void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)
 {
@@ -601,6 +734,18 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 }
 
+void ViewDialog::viewportVerticalShiftChanged(const int shift)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	StelProjector::StelProjectorParams params=core->getCurrentStelProjectorParams();
+	params.viewportCenterOffset[1]=qMax(-0.5f, qMin(shift/100.0f, 0.5f)); // Sanity check
+
+	params.viewportCenter.set(params.viewportXywh[0]+(0.5f+params.viewportCenterOffset.v[0])*params.viewportXywh[2],
+				  params.viewportXywh[1]+(0.5f+params.viewportCenterOffset.v[1])*params.viewportXywh[3]);
+
+	core->setCurrentStelProjectorParams(params);
+}
+
 void ViewDialog::landscapeChanged(QListWidgetItem* item)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
@@ -611,8 +756,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
-	//StelSkyDrawer *drawer=StelApp::getInstance().getSkyDrawer();
-	// GZ: Reset values that might have changed.
+	// Reset values that might have changed.
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
 	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 }
@@ -629,9 +773,6 @@ void ViewDialog::showAtmosphereDialog()
 {
 	if(atmosphereDialog == NULL)
 		atmosphereDialog = new AtmosphereDialog();
-	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
 
 	atmosphereDialog->setVisible(true);
 }
@@ -639,7 +780,7 @@ void ViewDialog::showAtmosphereDialog()
 
 void ViewDialog::setZhrFromControls(int zhr)
 {
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);	
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	if (zhr==0)
 	{
 		mmgr->setFlagShow(false);
@@ -740,9 +881,15 @@ void ViewDialog::planetsLabelsValueChanged(int v)
 void ViewDialog::nebulasLabelsValueChanged(int v)
 {
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+	float a= ((float)v)/10.f;	
+	nmgr->setLabelsAmount(a);
+}
+
+void ViewDialog::nebulasMarkersValueChanged(int v)
+{
+	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	float a= ((float)v)/10.f;
 	nmgr->setHintsAmount(a);
-	nmgr->setLabelsAmount(a);
 }
 
 // Update the widget to make sure it is synchrone if a value was changed programmatically

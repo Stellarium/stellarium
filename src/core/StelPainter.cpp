@@ -518,7 +518,7 @@ struct StringTexture
 
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
-	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
+	//StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
@@ -1764,7 +1764,7 @@ void StelPainter::enableTexture2d(bool b)
 
 void StelPainter::initGLShaders()
 {
-	qWarning() << "Intializing basic GL shaders... ";
+	qDebug() << "Initializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =

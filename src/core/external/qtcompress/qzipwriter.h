@@ -41,9 +41,9 @@
 #ifndef QZIPWRITER_H
 #define QZIPWRITER_H
 
-#include <QtCore/qglobal.h>
-#include <QtCore/qstring.h>
-#include <QtCore/qfile.h>
+#include <QtGlobal>
+#include <QString>
+#include <QFile>
 
 // QT_BEGIN_NAMESPACE
 namespace Stel {
