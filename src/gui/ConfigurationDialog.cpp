@@ -243,6 +243,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
 	connect(ui->pushButtonCustomDeltaTEquationDialog, SIGNAL(clicked()), this, SLOT(showCustomDeltaTEquationDialog()));
+	if (core->getCurrentDeltaTAlgorithm()==StelCore::Custom)
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
 
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
