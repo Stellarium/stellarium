@@ -77,7 +77,7 @@ protected:
 	{
 		static const double d2000 = 2451545.0;
 		Vec3f v;
-		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25) / a->star_position_scale, v);
+		s->getJ2000Pos(z, (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / a->star_position_scale, v);
 		return Vec3d(v[0], v[1], v[2]);
 	}
 	Vec3f getInfoColor(void) const

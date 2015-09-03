@@ -132,6 +132,10 @@ void StelDialog::setVisible(bool v)
 		createDialogContent();
 		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 
+		// Ensure that tooltip get rendered in red in night mode.
+		connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+		updateNightModeProperty();
+
 		proxy = new CustomProxy(parent, Qt::Tool);
 		proxy->setWidget(dialog);
 		QSizeF size = proxy->size();
@@ -162,13 +166,13 @@ void StelDialog::setVisible(bool v)
 	}
 }
 
-void StelDialog::connectCheckbox(QAbstractButton *checkBox, const QString &actionName)
+void StelDialog::connectCheckBox(QAbstractButton *checkBox, const QString &actionName)
 {
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction(actionName);
-	connectCheckbox(checkBox,action);
+	connectCheckBox(checkBox,action);
 }
 
-void StelDialog::connectCheckbox(QAbstractButton *checkBox, StelAction *action)
+void StelDialog::connectCheckBox(QAbstractButton *checkBox, StelAction *action)
 {
 	Q_ASSERT(action);
 	checkBox->setChecked(action->isChecked());
@@ -192,3 +196,9 @@ void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 	}
 }
 #endif
+
+
+void StelDialog::updateNightModeProperty()
+{
+	dialog->setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
+}

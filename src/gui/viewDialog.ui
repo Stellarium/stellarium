@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
-    <height>560</height>
+    <width>650</width>
+    <height>589</height>
    </rect>
   </property>
   <property name="font">
@@ -233,110 +233,6 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <item row="0" column="0">
-       <widget class="QListWidget" name="stackListWidget">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>74</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>74</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="movement">
-         <enum>QListView::Static</enum>
-        </property>
-        <property name="flow">
-         <enum>QListView::LeftToRight</enum>
-        </property>
-        <property name="isWrapping" stdset="0">
-         <bool>false</bool>
-        </property>
-        <property name="resizeMode">
-         <enum>QListView::Adjust</enum>
-        </property>
-        <property name="layoutMode">
-         <enum>QListView::SinglePass</enum>
-        </property>
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="viewMode">
-         <enum>QListView::IconMode</enum>
-        </property>
-        <property name="uniformItemSizes">
-         <bool>false</bool>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-        <property name="selectionRectVisible">
-         <bool>false</bool>
-        </property>
-        <item>
-         <property name="text">
-          <string>Sky</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-sky.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Markings</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-markings.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Landscape</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-landscape.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Starlore</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-starlore.png</normalon>
-          </iconset>
-         </property>
-        </item>
-       </widget>
-      </item>
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
@@ -359,141 +255,24 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <item row="1" column="1" alignment="Qt::AlignTop">
-           <widget class="QGroupBox" name="labelsGroupBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>150</height>
-             </size>
-            </property>
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="starGroupBox">
             <property name="title">
-             <string>Labels and Markers</string>
+             <string>Stars</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading</set>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
             <property name="checkable">
              <bool>false</bool>
             </property>
-            <layout class="QGridLayout" name="gridLayoutx">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="starLabelCheckBox">
-               <property name="text">
-                <string>Stars</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QSlider" name="starsLabelsHorizontalSlider">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>180</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="value">
-                <number>33</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="planetLabelCheckBox">
-               <property name="text">
-                <string>Planets</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QSlider" name="planetsLabelsHorizontalSlider">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>180</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="value">
-                <number>33</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="nebulaLabelCheckBox">
-               <property name="toolTip">
-                <string>Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)</string>
-               </property>
-               <property name="text">
-                <string comment="Deep-sky objects">DSOs</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>180</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="value">
-                <number>33</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QGroupBox" name="planetsGroupBox">
-            <property name="title">
-             <string>Planets and satellites</string>
-            </property>
-            <property name="checkable">
+            <property name="checked">
              <bool>false</bool>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
+            <layout class="QVBoxLayout" name="verticalLayout">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -507,82 +286,318 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="showPlanetCheckBox">
-               <property name="text">
-                <string>Show planets</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="planetMarkerCheckBox">
-               <property name="text">
-                <string>Show planet markers</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="planetOrbitCheckBox">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="text">
-                <string>Show planet orbits</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="planetLightSpeedCheckBox">
-               <property name="text">
-                <string>Simulate light speed</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
                <item>
-                <widget class="QCheckBox" name="planetScaleMoonCheckBox">
+                <widget class="QLabel" name="label_5">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>Scale Moon</string>
+                  <string>Absolute scale:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="moonScaleFactor">
-                 <property name="toolTip">
-                  <string>Scale factor</string>
+                <widget class="QDoubleSpinBox" name="starScaleRadiusDoubleSpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
                  </property>
                  <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>1.000000000000000</double>
+                  <number>2</number>
                  </property>
                  <property name="maximum">
-                  <double>20.000000000000000</double>
+                  <double>9.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.100000000000000</double>
                  </property>
                  <property name="value">
-                  <double>4.000000000000000</double>
+                  <double>1.000000000000000</double>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
              <item>
-              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QLabel" name="label_7">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Relative scale:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="starRelativeScaleDoubleSpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="frame">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::UpDownArrows</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.250000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>5.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.050000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="labelMilkyWay">
+                 <property name="text">
+                  <string>Milky Way brightness:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="milkyWayBrightnessDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="maximum">
+                  <double>10.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QLabel" name="labelZodiacalLight">
+                 <property name="text">
+                  <string>Zodiacal Light brightness:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="maximum">
+                  <double>10.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QCheckBox" name="starTwinkleCheckBox">
+                 <property name="text">
+                  <string>Twinkle:</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="starTwinkleAmountDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="maximum">
+                  <double>1.500000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QCheckBox" name="starLimitMagnitudeCheckBox">
+                 <property name="toolTip">
+                  <string>Limit the magnitude of stars</string>
+                 </property>
+                 <property name="text">
+                  <string>Limit magnitude</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="starLimitMagnitudeDoubleSpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>70</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="frame">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::UpDownArrows</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>21.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>6.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="adaptationCheckbox">
                <property name="toolTip">
-                <string>Automatic change of landscape when planet is changed</string>
+                <string>Dim faint stars when a very bright object is visible</string>
                </property>
                <property name="text">
-                <string>Auto select landscapes</string>
+                <string>Dynamic eye adaptation</string>
+               </property>
+               <property name="checked">
+                <bool>false</bool>
                </property>
               </widget>
              </item>
@@ -666,43 +681,112 @@
                </property>
               </widget>
              </item>
-             <item>
-              <spacer name="verticalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Expanding</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>0</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="0" alignment="Qt::AlignTop">
-           <widget class="QGroupBox" name="starGroupBox">
+          <item row="1" column="1" alignment="Qt::AlignTop">
+           <widget class="QGroupBox" name="labelsGroupBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>150</height>
+             </size>
+            </property>
             <property name="title">
-             <string>Stars</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading</set>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
+             <string>Labels and Markers</string>
             </property>
             <property name="checkable">
              <bool>false</bool>
             </property>
-            <property name="checked">
+            <layout class="QGridLayout" name="gridLayoutx">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="planetLabelCheckBox">
+               <property name="text">
+                <string>Planets</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QSlider" name="starsLabelsHorizontalSlider">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="value">
+                <number>33</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QSlider" name="planetsLabelsHorizontalSlider">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="value">
+                <number>33</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="starLabelCheckBox">
+               <property name="text">
+                <string>Stars</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QGroupBox" name="planetsGroupBox">
+            <property name="title">
+             <string>Planets and satellites</string>
+            </property>
+            <property name="checkable">
              <bool>false</bool>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout">
+            <layout class="QVBoxLayout" name="verticalLayout_2">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -716,356 +800,109 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QFrame" name="frame_2">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="label_5">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Absolute scale:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QDoubleSpinBox" name="starScaleRadiusDoubleSpinBox">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>70</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="decimals">
-                   <number>1</number>
-                  </property>
-                  <property name="maximum">
-                   <double>9.000000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.100000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>1.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_3">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_3">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="label_7">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>Relative scale:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QDoubleSpinBox" name="starRelativeScaleDoubleSpinBox">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>0</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>70</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="frame">
-                   <bool>true</bool>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="buttonSymbols">
-                   <enum>QAbstractSpinBox::UpDownArrows</enum>
-                  </property>
-                  <property name="decimals">
-                   <number>2</number>
-                  </property>
-                  <property name="minimum">
-                   <double>0.250000000000000</double>
-                  </property>
-                  <property name="maximum">
-                   <double>5.000000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.050000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>1.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frameMilkyWay">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_8">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="labelMilkyWay">
-                  <property name="text">
-                   <string>Milky Way brightness:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QDoubleSpinBox" name="milkyWayBrightnessDoubleSpinBox">
-                  <property name="maximumSize">
-                   <size>
-                    <width>70</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="decimals">
-                   <number>1</number>
-                  </property>
-                  <property name="maximum">
-                   <double>10.000000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.100000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>1.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frameZodiacalLight">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_ZL">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="labelZodiacalLight">
-                  <property name="text">
-                   <string>Zodiacal Light brightness:</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
-                  <property name="maximumSize">
-                   <size>
-                    <width>70</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="decimals">
-                   <number>1</number>
-                  </property>
-                  <property name="maximum">
-                   <double>10.000000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.100000000000000</double>
-                  </property>
-                  <property name="value">
-                   <double>1.000000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_12">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <layout class="QHBoxLayout" name="horizontalLayout_9">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QCheckBox" name="starTwinkleCheckBox">
-                  <property name="text">
-                   <string>Twinkle:</string>
-                  </property>
-                  <property name="checked">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QDoubleSpinBox" name="starTwinkleAmountDoubleSpinBox">
-                  <property name="maximumSize">
-                   <size>
-                    <width>70</width>
-                    <height>16777215</height>
-                   </size>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="decimals">
-                   <number>1</number>
-                  </property>
-                  <property name="maximum">
-                   <double>1.500000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.100000000000000</double>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="adaptationCheckbox">
-               <property name="toolTip">
-                <string>Dim faint stars when a very bright object is visible</string>
-               </property>
+              <widget class="QCheckBox" name="showPlanetCheckBox">
                <property name="text">
-                <string>Dynamic eye adaptation</string>
+                <string>Show planets</string>
                </property>
                <property name="checked">
-                <bool>false</bool>
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="planetMarkerCheckBox">
+               <property name="text">
+                <string>Show planet markers</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="planetOrbitCheckBox">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Show planet orbits</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="planetIsolatedOrbitCheckBox">
+               <property name="toolTip">
+                <string>Deactivate this option if you want to see orbits for selected planet and their moons.</string>
+               </property>
+               <property name="text">
+                <string>Show orbit for selected planet</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="planetIsolatedTrailsCheckBox">
+               <property name="toolTip">
+                <string>Deactivate this option if you want to see the trails for all celestial bodies from Solar system.</string>
+               </property>
+               <property name="text">
+                <string>Show trail for selected planet</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="planetLightSpeedCheckBox">
+               <property name="text">
+                <string>Simulate light speed</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="planetScaleMoonCheckBox">
+                 <property name="text">
+                  <string>Scale Moon</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="moonScaleFactor">
+                 <property name="toolTip">
+                  <string>Scale factor</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>20.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>4.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+               <property name="toolTip">
+                <string>Automatic change of landscape when planet is changed</string>
+               </property>
+               <property name="text">
+                <string>Auto select landscapes</string>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0" colspan="2">
            <widget class="QGroupBox" name="shootingStarsGroupBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -1144,30 +981,31 @@
             </layout>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QGroupBox" name="limitsGroupBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Limit Magnitudes (for unaided/binocular observers)</string>
-            </property>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_DSO">
+         <layout class="QGridLayout" name="gridLayout_11">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0" colspan="2">
+           <widget class="QGroupBox" name="groupDSOCatalogs">
             <property name="title">
-             <string>Limit Magnitudes</string>
+             <string>Display objects from catalogs</string>
             </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_6">
+            <layout class="QGridLayout" name="gridLayout_10">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -1180,120 +1018,477 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="starLimitMagnitudeCheckBox">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="checkBoxIC">
                <property name="toolTip">
-                <string>Limit the magnitude of stars</string>
+                <string>Index Catalogue of Nebulae and Clusters of Stars</string>
                </property>
                <property name="text">
-                <string>Stars</string>
+                <string notr="true">IC</string>
                </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>70</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="frame">
-                <bool>true</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::UpDownArrows</enum>
-               </property>
-               <property name="decimals">
-                <number>2</number>
-               </property>
-               <property name="minimum">
-                <double>3.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>21.000000000000000</double>
-               </property>
-               <property name="singleStep">
-                <double>0.250000000000000</double>
-               </property>
-               <property name="value">
-                <double>8.500000000000000</double>
-               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="2" column="0">
-              <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
+              <widget class="QCheckBox" name="checkBoxNGC">
                <property name="toolTip">
-                <string>Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)</string>
+                <string>New General Catalogue of Nebulae and Clusters of Stars</string>
                </property>
                <property name="text">
-                <string comment="Deep-sky objects">DSOs</string>
+                <string notr="true">NGC</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="checkBoxLBN">
+               <property name="toolTip">
+                <string>Lynds' Catalogue of Bright Nebulae (Lynds, 1965)</string>
+               </property>
+               <property name="text">
+                <string notr="true">LBN</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxM">
+               <property name="toolTip">
+                <string>Messier Catalogue</string>
+               </property>
+               <property name="text">
+                <string notr="true">M</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxC">
+               <property name="toolTip">
+                <string>Caldwell Catalogue</string>
+               </property>
+               <property name="text">
+                <string notr="true">C</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QDoubleSpinBox" name="starLimitMagnitudeDoubleSpinBox">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+              <widget class="QCheckBox" name="checkBoxB">
+               <property name="toolTip">
+                <string>Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)</string>
                </property>
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
+               <property name="text">
+                <string notr="true">B</string>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>70</width>
-                 <height>16777215</height>
-                </size>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBoxSh2">
+               <property name="toolTip">
+                <string>Catalogue of HII Regions (Sharpless, 1959)</string>
                </property>
-               <property name="frame">
-                <bool>true</bool>
+               <property name="text">
+                <string notr="true">Sh 2</string>
                </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="checkBoxVdB">
+               <property name="toolTip">
+                <string>Catalogue of Reflection Nebulae (Van den Bergh, 1966)</string>
                </property>
-               <property name="buttonSymbols">
-                <enum>QAbstractSpinBox::UpDownArrows</enum>
+               <property name="text">
+                <string notr="true">VdB</string>
                </property>
-               <property name="decimals">
-                <number>2</number>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="checkBoxRCW">
+               <property name="toolTip">
+                <string>A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)</string>
                </property>
-               <property name="minimum">
-                <double>0.000000000000000</double>
+               <property name="text">
+                <string notr="true">RCW</string>
                </property>
-               <property name="maximum">
-                <double>21.000000000000000</double>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="checkBoxLDN">
+               <property name="toolTip">
+                <string>Lynds' Catalogue of Dark Nebulae (Lynds, 1962)</string>
                </property>
-               <property name="singleStep">
-                <double>0.100000000000000</double>
+               <property name="text">
+                <string notr="true">LDN</string>
                </property>
-               <property name="value">
-                <double>6.500000000000000</double>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QCheckBox" name="checkBoxCr">
+               <property name="toolTip">
+                <string>Catalog of Open Galactic Clusters (Collinder, 1931)</string>
                </property>
+               <property name="text">
+                <string notr="true">Cr</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="checkBoxMel">
+               <property name="toolTip">
+                <string>A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, 1915)</string>
+               </property>
+               <property name="text">
+                <string notr="true">Mel</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QCheckBox" name="checkBoxPGC">
+               <property name="toolTip">
+                <string>Catalog of galaxies</string>
+               </property>
+               <property name="text">
+                <string notr="true">PGC</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QCheckBox" name="checkBoxUGC">
+               <property name="toolTip">
+                <string>The Uppsala General Catalogue of Galaxies</string>
+               </property>
+               <property name="text">
+                <string notr="true">UGC</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="2" column="4">
+              <widget class="QCheckBox" name="checkBoxCed">
+               <property name="toolTip">
+                <string>Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)</string>
+               </property>
+               <property name="text">
+                <string notr="true">Ced</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
               </widget>
              </item>
             </layout>
            </widget>
+          </item>
+          <item row="3" column="0">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0">
+           <widget class="QGroupBox" name="groupBoxDSOTypeFilters">
+            <property name="title">
+             <string>Filter by type</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_13">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBoxSupernovaRemnantsType">
+               <property name="text">
+                <string>Supernova remnants</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxInteractingGalaxiesType">
+               <property name="text">
+                <string>Interacting galaxies</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxHydrogenRegionsType">
+               <property name="text">
+                <string>Hydrogen regions</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBoxOtherType">
+               <property name="text">
+                <string>Other</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxStarClustersType">
+               <property name="text">
+                <string>Star clusters</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBoxPlanetaryNebulaeType">
+               <property name="text">
+                <string>Planetary Nebulae</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxGalaxiesType">
+               <property name="text">
+                <string>Galaxies</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxActiveGalaxiesType">
+               <property name="text">
+                <string>Active galaxies</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBoxDarkNebulaeType">
+               <property name="text">
+                <string>Dark Nebulae</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBoxBrightNebulaeType">
+               <property name="text">
+                <string>Bright Nebulae</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOTypes</string>
+               </attribute>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QGroupBox" name="groupBoxLabelsAndMarkers">
+              <property name="title">
+               <string>Labels and Markers</string>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_12">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <property name="spacing">
+                <number>6</number>
+               </property>
+               <item row="2" column="0">
+                <layout class="QGridLayout" name="gridLayout_15">
+                 <item row="0" column="1">
+                  <widget class="QSlider" name="nebulasLabelsHorizontalSlider">
+                   <property name="value">
+                    <number>33</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelLabels">
+                   <property name="text">
+                    <string>Labels</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="labelHints">
+                   <property name="text">
+                    <string>Hints</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSlider" name="nebulasHintsHorizontalSlider">
+                   <property name="value">
+                    <number>33</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="4" column="0">
+                <widget class="QCheckBox" name="checkBoxSurfaceBrightnessUsage">
+                 <property name="toolTip">
+                  <string>Use surface brightness of deep-sky objects for scale of the visibility of their markers and labels.</string>
+                 </property>
+                 <property name="text">
+                  <string>Use surface brightness</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QCheckBox" name="checkBoxProportionalHints">
+                 <property name="toolTip">
+                  <string>Use hints proportional to angular size of deep-sky objects</string>
+                 </property>
+                 <property name="text">
+                  <string>Use proportional hints</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
+                   <property name="toolTip">
+                    <string>Limit magnitude (for unaided/binocular observers) of deep-sky objects.</string>
+                   </property>
+                   <property name="text">
+                    <string>Limit magnitude</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="nebulaLimitMagnitudeDoubleSpinBox">
+                   <property name="minimum">
+                    <double>3.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>21.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.250000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>8.500000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -1453,27 +1648,49 @@
                 <layout class="QVBoxLayout" name="verticalLayout_13">
                  <item>
                   <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
+                   <property name="toolTip">
+                    <string>Equatorial coordinates of J2000.0.</string>
+                   </property>
                    <property name="text">
-                    <string>Equatorial grid (on J2000)</string>
+                    <string>Equatorial grid (J2000)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEquatorialGridCheckBox">
+                   <property name="toolTip">
+                    <string>Equatorial coordinates of current date and planet.</string>
+                   </property>
                    <property name="text">
-                    <string>Equatorial grid (on date)</string>
+                    <string>Equatorial grid (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEclipticGridJ2000CheckBox">
+                   <property name="toolTip">
+                    <string>Ecliptical coordinates for J2000.0.</string>
+                   </property>
                    <property name="text">
-                    <string>Ecliptic grid (on J2000)</string>
+                    <string>Ecliptic grid (J2000)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showEclipticGridOfDateCheckBox">
+                   <property name="toolTip">
+                    <string>Ecliptical coordinates for current date. Displayed on Earth only.</string>
+                   </property>
+                   <property name="text">
+                    <string>Ecliptic grid (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showAzimuthalGridCheckBox">
+                   <property name="toolTip">
+                    <string>Altitudes and azimuth (counted from North towards East).</string>
+                   </property>
                    <property name="text">
                     <string>Azimuthal grid</string>
                    </property>
@@ -1481,6 +1698,9 @@
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showGalacticGridCheckBox">
+                   <property name="toolTip">
+                    <string>Galactic Coordinates, System II (IAU 1958).</string>
+                   </property>
                    <property name="text">
                     <string>Galactic grid</string>
                    </property>
@@ -1488,8 +1708,21 @@
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showCardinalPointsCheckBox">
+                   <property name="toolTip">
+                    <string>Labels for the Cardinal directions.</string>
+                   </property>
                    <property name="text">
                     <string>Cardinal points</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showPrecessionCirclesCheckBox">
+                   <property name="toolTip">
+                    <string>Instantaneous circles of earth's axis on its motion around ecliptical poles. Displayed on Earth only.</string>
+                   </property>
+                   <property name="text">
+                    <string>Precession circles</string>
                    </property>
                   </widget>
                  </item>
@@ -1498,39 +1731,49 @@
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_15">
                  <item>
+                  <widget class="QCheckBox" name="showEquatorJ2000LineCheckBox">
+                   <property name="toolTip">
+                    <string>Show celestial equator of J2000.0.</string>
+                   </property>
+                   <property name="text">
+                    <string>Equator (J2000)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QCheckBox" name="showEquatorLineCheckBox">
                    <property name="toolTip">
-                    <string>Show equator line</string>
+                    <string>Show celestial equator of current planet and date.</string>
                    </property>
                    <property name="text">
-                    <string>Equator</string>
+                    <string>Equator (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showMeridianLineCheckBox">
+                  <widget class="QCheckBox" name="showEclipticLineJ2000CheckBox">
                    <property name="toolTip">
-                    <string>Show meridian line</string>
+                    <string>Show ecliptic line of J2000.0 (VSOP87A fundamental plane).</string>
                    </property>
                    <property name="text">
-                    <string>Meridian</string>
+                    <string>Ecliptic (J2000)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showEclipticLineCheckBox">
+                  <widget class="QCheckBox" name="showEclipticLineOfDateCheckBox">
                    <property name="toolTip">
-                    <string>Show ecliptic line</string>
+                    <string>Show ecliptic line of current date.</string>
                    </property>
                    <property name="text">
-                    <string>Ecliptic</string>
+                    <string>Ecliptic (of date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showHorizonLineCheckBox">
                    <property name="toolTip">
-                    <string>Show horizon line</string>
+                    <string>Show horizon line.</string>
                    </property>
                    <property name="text">
                     <string>Horizon</string>
@@ -1540,10 +1783,20 @@
                  <item>
                   <widget class="QCheckBox" name="showGalacticEquatorLineCheckBox">
                    <property name="toolTip">
-                    <string>Show Galactic equator line</string>
+                    <string>Show Galactic equator line.</string>
                    </property>
                    <property name="text">
                     <string>Galactic equator</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="showMeridianLineCheckBox">
+                   <property name="toolTip">
+                    <string>Show meridian line.</string>
+                   </property>
+                   <property name="text">
+                    <string>Meridian</string>
                    </property>
                   </widget>
                  </item>
@@ -1636,11 +1889,71 @@
               </widget>
              </item>
              <item>
-              <widget class="QTextBrowser" name="projectionTextBrowser">
-               <property name="openExternalLinks">
-                <bool>true</bool>
-               </property>
-              </widget>
+              <layout class="QVBoxLayout" name="projectionDetailsVerticalLayout">
+               <item>
+                <widget class="QTextBrowser" name="projectionTextBrowser">
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="viewportOffsetHorizontalLayout">
+                 <property name="leftMargin">
+                  <number>5</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="viewportOffsetLabel">
+                   <property name="text">
+                    <string>Vertical viewport offset</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="viewportOffsetSpinBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimum">
+                    <number>-50</number>
+                   </property>
+                   <property name="maximum">
+                    <number>50</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="percentLabel">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string notr="true">%</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -1740,10 +2053,10 @@
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayout_7">
-             <item row="1" column="0" colspan="2">
-              <widget class="QCheckBox" name="showFogCheckBox">
+             <item row="3" column="0" rowspan="2" colspan="2">
+              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
                <property name="text">
-                <string>Show fog</string>
+                <string>Use this landscape as default</string>
                </property>
               </widget>
              </item>
@@ -1754,13 +2067,10 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0" colspan="2">
-              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+             <item row="1" column="0" colspan="2">
+              <widget class="QCheckBox" name="showFogCheckBox">
                <property name="text">
-                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
+                <string>Show fog</string>
                </property>
               </widget>
              </item>
@@ -1768,13 +2078,6 @@
               <widget class="QCheckBox" name="showGroundCheckBox">
                <property name="text">
                 <string>Show ground</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0" rowspan="2" colspan="2">
-              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
-               <property name="text">
-                <string>Use this landscape as default</string>
                </property>
               </widget>
              </item>
@@ -1820,6 +2123,23 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="landscapeLabelsCheckBox">
+               <property name="text">
+                <string>Show landscape labels</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+               <property name="text">
+                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -2118,6 +2438,123 @@
         </widget>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="QListWidget" name="stackListWidget">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>74</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>74</height>
+         </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="movement">
+         <enum>QListView::Static</enum>
+        </property>
+        <property name="flow">
+         <enum>QListView::LeftToRight</enum>
+        </property>
+        <property name="isWrapping" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="resizeMode">
+         <enum>QListView::Adjust</enum>
+        </property>
+        <property name="layoutMode">
+         <enum>QListView::SinglePass</enum>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="viewMode">
+         <enum>QListView::IconMode</enum>
+        </property>
+        <property name="uniformItemSizes">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="selectionRectVisible">
+         <bool>false</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Sky</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-sky.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string comment="Deep-Sky Objects">DSO</string>
+         </property>
+         <property name="toolTip">
+          <string>Deep-Sky Objects</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-sky.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Markings</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-markings.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Landscape</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-landscape.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Starlore</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-starlore.png</normalon>
+          </iconset>
+         </property>
+        </item>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -2132,10 +2569,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>starScaleRadiusDoubleSpinBox</tabstop>
-  <tabstop>starRelativeScaleDoubleSpinBox</tabstop>
-  <tabstop>starTwinkleCheckBox</tabstop>
-  <tabstop>starTwinkleAmountDoubleSpinBox</tabstop>
   <tabstop>adaptationCheckbox</tabstop>
   <tabstop>showPlanetCheckBox</tabstop>
   <tabstop>planetMarkerCheckBox</tabstop>
@@ -2145,8 +2578,6 @@
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
-  <tabstop>nebulaLabelCheckBox</tabstop>
-  <tabstop>nebulasLabelsHorizontalSlider</tabstop>
   <tabstop>planetLabelCheckBox</tabstop>
   <tabstop>planetsLabelsHorizontalSlider</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
@@ -2155,8 +2586,7 @@
   <tabstop>showAzimuthalGridCheckBox</tabstop>
   <tabstop>showGalacticGridCheckBox</tabstop>
   <tabstop>showEquatorLineCheckBox</tabstop>
-  <tabstop>showMeridianLineCheckBox</tabstop>
-  <tabstop>showEclipticLineCheckBox</tabstop>
+  <tabstop>showEclipticLineOfDateCheckBox</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showGalacticEquatorLineCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
@@ -2164,7 +2594,6 @@
   <tabstop>showConstellationBoundariesCheckBox</tabstop>
   <tabstop>showConstellationArtCheckBox</tabstop>
   <tabstop>constellationArtBrightnessSpinBox</tabstop>
-  <tabstop>projectionTextBrowser</tabstop>
   <tabstop>landscapeTextBrowser</tabstop>
   <tabstop>showGroundCheckBox</tabstop>
   <tabstop>showFogCheckBox</tabstop>
@@ -2179,4 +2608,16 @@
  </tabstops>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

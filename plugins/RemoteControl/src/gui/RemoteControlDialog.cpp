@@ -63,7 +63,7 @@ void RemoteControlDialog::createDialogContent()
 
 	// TODO Fill other buttons
 
-	connectCheckbox(ui->enabledCheckbox,"actionShow_Remote_Control");
+	connectCheckBox(ui->enabledCheckbox,"actionShow_Remote_Control");
 
 	ui->activateOnStartCheckBox->setChecked(rc->getFlagAutoStart());
 	connect(ui->activateOnStartCheckBox, SIGNAL(toggled(bool)), rc, SLOT(setFlagAutoStart(bool)));

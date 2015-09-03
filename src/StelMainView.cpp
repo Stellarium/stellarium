@@ -30,7 +30,6 @@
 #include "StelActionMgr.hpp"
 #include "StelOpenGL.hpp"
 
-#include <QDeclarativeItem>
 #include <QDebug>
 #include <QDir>
 #if STEL_USE_NEW_OPENGL_WIDGETS
@@ -41,6 +40,10 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QGuiApplication>
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsAnchorLayout>
+#include <QGraphicsWidget>
+#include <QGraphicsEffect>
 #include <QFileInfo>
 #include <QIcon>
 #include <QMoveEvent>
@@ -53,23 +56,107 @@
 #include <QWidget>
 #include <QWindow>
 #include <QMessageBox>
-#include <QDeclarativeContext>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
 #endif
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
+#include <QGLFramebufferObject>
+#include <QGLShaderProgram>
 
 #include <clocale>
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
 
-//! Render Stellarium sky. 
-class StelSkyItem : public QDeclarativeItem
+// A custom QGraphicsEffect to apply the night mode on top of the screen.
+class NightModeGraphicsEffect : public QGraphicsEffect
 {
 public:
-	StelSkyItem(QDeclarativeItem* parent = NULL);
+	NightModeGraphicsEffect(QObject* parent = NULL);
+protected:
+	virtual void draw(QPainter* painter);
+private:
+	QGLFramebufferObject* fbo;
+	QGLShaderProgram *program;
+	struct {
+		int pos;
+		int texCoord;
+		int source;
+	} vars;
+};
+
+NightModeGraphicsEffect::NightModeGraphicsEffect(QObject* parent) :
+	QGraphicsEffect(parent)
+	, fbo(NULL)
+{
+	program = new QGLShaderProgram(this);
+	QString vertexCode =
+		"attribute highp vec4 a_pos;\n"
+		"attribute highp vec2 a_texCoord;\n"
+		"varying highp   vec2 v_texCoord;\n"
+		"void main(void)\n"
+		"{\n"
+			"v_texCoord = a_texCoord;\n"
+			"gl_Position = a_pos;\n"
+		"}\n";
+	QString fragmentCode =
+		"varying highp vec2 v_texCoord;\n"
+		"uniform sampler2D  u_source;\n"
+		"void main(void)\n"
+		"{\n"
+		"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
+		"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
+		"	gl_FragColor = vec4(luminance, 0.0, 0.0, 1.0);\n"
+		"}\n";
+	program->addShaderFromSourceCode(QGLShader::Vertex, vertexCode);
+	program->addShaderFromSourceCode(QGLShader::Fragment, fragmentCode);
+	program->link();
+	vars.pos = program->attributeLocation("a_pos");
+	vars.texCoord = program->attributeLocation("a_texCoord");
+	vars.source = program->uniformLocation("u_source");
+}
+
+void NightModeGraphicsEffect::draw(QPainter* painter)
+{
+	QSize size(painter->device()->width(), painter->device()->height());
+	if (fbo && fbo->size() != size)
+	{
+		delete fbo;
+		fbo = NULL;
+	}
+	if (!fbo)
+	{
+		QGLFramebufferObjectFormat format;
+		format.setAttachment(QGLFramebufferObject::CombinedDepthStencil);
+		format.setInternalTextureFormat(GL_RGBA);
+		fbo = new QGLFramebufferObject(size, format);
+	}
+	QPainter fboPainter(fbo);
+	drawSource(&fboPainter);
+
+	painter->save();
+	painter->beginNativePainting();
+	program->bind();
+	const GLfloat pos[] = {-1, -1, +1, -1, -1, +1, +1, +1};
+	const GLfloat texCoord[] = {0, 0, 1, 0, 0, 1, 1, 1};
+	program->setUniformValue(vars.source, 0);
+	program->setAttributeArray(vars.pos, pos, 2);
+	program->setAttributeArray(vars.texCoord, texCoord, 2);
+	program->enableAttributeArray(vars.pos);
+	program->enableAttributeArray(vars.texCoord);
+	glBindTexture(GL_TEXTURE_2D, fbo->texture());
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	program->release();
+	painter->endNativePainting();
+	painter->restore();
+}
+
+//! Render Stellarium sky. 
+class StelSkyItem : public QGraphicsWidget
+{
+public:
+	StelSkyItem(QGraphicsItem* parent = NULL);
 	void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent* event);
@@ -78,12 +165,13 @@ protected:
 	void wheelEvent(QGraphicsSceneWheelEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);
+	void resizeEvent(QGraphicsSceneResizeEvent* event);
 #ifdef Q_OS_WIN
 	bool event(QEvent * e);
 #endif
 private:
 	double previousPaintTime;
-	void onSizeChanged();
+	// void onSizeChanged();
 #ifdef Q_OS_WIN
 	void pinchTriggered(QPinchGesture *gesture);
 	bool gestureEvent(QGestureEvent *event);
@@ -91,36 +179,37 @@ private:
 };
 
 //! Initialize and render Stellarium gui.
-class StelGuiItem : public QDeclarativeItem
+class StelGuiItem : public QGraphicsWidget
 {
 public:
-	StelGuiItem(QDeclarativeItem* parent = NULL);
+	StelGuiItem(QGraphicsItem* parent = NULL);
+protected:
+	void resizeEvent(QGraphicsSceneResizeEvent* event);
 private:
 	QGraphicsWidget *widget;
-	void onSizeChanged();
+	// void onSizeChanged();
 };
 
-StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
+StelSkyItem::StelSkyItem(QGraphicsItem* parent)
 {
 	Q_UNUSED(parent);
 	setObjectName("SkyItem");
 	setFlag(QGraphicsItem::ItemHasNoContents, false);
+	setFlag(QGraphicsItem::ItemIsFocusable, true);
 	setAcceptHoverEvents(true);
 #ifdef Q_OS_WIN
 	setAcceptTouchEvents(true);
 	grabGesture(Qt::PinchGesture);
 #endif
 	setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
-	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
-	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
 	previousPaintTime = StelApp::getTotalRunTime();
-	StelMainView::getInstance().skyItem = this;
-	setFocus(true);
+	setFocus();
 }
 
-void StelSkyItem::onSizeChanged()
+void StelSkyItem::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-	StelApp::getInstance().glWindowHasBeenResized(x(), y(), width(), height());
+	QGraphicsWidget::resizeEvent(event);
+	StelApp::getInstance().glWindowHasBeenResized(scenePos().x(), scene()->sceneRect().height()-(scenePos().y()+geometry().height()), geometry().width(), geometry().height());
 }
 
 void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -144,9 +233,9 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	//To get back the focus from dialogs
-	this->setFocus(true);
+	setFocus();
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
@@ -154,7 +243,7 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
@@ -162,14 +251,14 @@ void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 void StelSkyItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
 }
 
 void StelSkyItem::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
 	QPointF pos = event->scenePos();
-	pos.setY(height() - 1 - pos.y());
+	pos.setY(size().height() - 1 - pos.y());
 	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	StelApp::getInstance().handleWheel(&newEvent);
 }
@@ -190,7 +279,7 @@ bool StelSkyItem::event(QEvent * e)
 
 		return true;
 		break;
-	}		
+	}
 
 	case QEvent::Gesture:
 		setAcceptedMouseButtons(0);
@@ -198,7 +287,7 @@ bool StelSkyItem::event(QEvent * e)
 		break;
 
 	default:
-		return false;
+		return QGraphicsWidget::event(e);
 	}
 }
 
@@ -234,23 +323,17 @@ void StelSkyItem::keyReleaseEvent(QKeyEvent* event)
 }
 
 
-StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
+StelGuiItem::StelGuiItem(QGraphicsItem* parent) : QGraphicsWidget(parent)
 {
-	connect(this, &StelGuiItem::widthChanged, this, &StelGuiItem::onSizeChanged);
-	connect(this, &StelGuiItem::heightChanged, this, &StelGuiItem::onSizeChanged);
 	widget = new QGraphicsWidget(this);
-	StelMainView::getInstance().guiWidget = widget;
 	StelApp::getInstance().getGui()->init(widget);
 }
 
-void StelGuiItem::onSizeChanged()
+void StelGuiItem::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
-    // I wish I could find a way to let Qt automatically resize the widget
-	// when the QDeclarativeItem size changes.
-	widget->setGeometry(0, 0, width(), height());
+	widget->setGeometry(0, 0, size().width(), size().height());
 	StelApp::getInstance().getGui()->forceRefreshGui();
 }
-
 
 #if STEL_USE_NEW_OPENGL_WIDGETS
 
@@ -323,7 +406,7 @@ protected:
 
 
 StelMainView::StelMainView(QWidget* parent)
-	: QDeclarativeView(parent), gui(NULL),
+	: QGraphicsView(parent), guiItem(NULL), gui(NULL),
 	  flagInvertScreenShotColors(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
@@ -394,6 +477,11 @@ StelMainView::StelMainView(QWidget* parent)
 
 	setViewport(glWidget);
 
+	setScene(new QGraphicsScene(this));
+	scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
+	rootItem = new QGraphicsWidget();
+	rootItem->setFocusPolicy(Qt::NoFocus);
+
 	// Workaround (see Bug #940638) Although we have already explicitly set
 	// LC_NUMERIC to "C" in main.cpp there seems to be a bug in OpenGL where
 	// it will silently reset LC_NUMERIC to the value of LC_ALL during OpenGL
@@ -403,10 +491,15 @@ StelMainView::StelMainView(QWidget* parent)
 	// End workaround
 }
 
+void StelMainView::resizeEvent(QResizeEvent* event)
+{
+	scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
+	rootItem->setGeometry(0,0,event->size().width(),event->size().height());
+	QGraphicsView::resizeEvent(event);
+}
+
 void StelMainView::focusSky() {
-	StelMainView::getInstance().scene()->setActiveWindow(0);
-	QGraphicsObject* skyItem = rootObject()->findChild<QGraphicsObject*>("SkyItem");
-	Q_ASSERT(skyItem);
+	scene()->setActiveWindow(0);
 	skyItem->setFocus();
 }
 
@@ -444,12 +537,20 @@ void StelMainView::init(QSettings* conf)
 	
 	StelPainter::initGLShaders();
 
-	setResizeMode(QDeclarativeView::SizeRootObjectToView);
-	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
-	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
-	rootContext()->setContextProperty("stelApp", stelApp);	
-	setSource(QUrl("qrc:/qml/main.qml"));
-	
+	skyItem = new StelSkyItem();
+	guiItem = new StelGuiItem();
+	QGraphicsAnchorLayout* l = new QGraphicsAnchorLayout(rootItem);
+	l->setSpacing(0);
+	l->setContentsMargins(0,0,0,0);
+	l->addCornerAnchors(skyItem, Qt::TopLeftCorner, l, Qt::TopLeftCorner);
+	l->addCornerAnchors(skyItem, Qt::BottomRightCorner, l, Qt::BottomRightCorner);
+	l->addCornerAnchors(guiItem, Qt::BottomLeftCorner, l, Qt::BottomLeftCorner);
+	l->addCornerAnchors(guiItem, Qt::TopRightCorner, l, Qt::TopRightCorner);
+	rootItem->setLayout(l);
+	scene()->addItem(rootItem);
+	nightModeEffect = new NightModeGraphicsEffect(this);
+	rootItem->setGraphicsEffect(nightModeEffect);
+
 	QSize size = glWidget->windowHandle()->screen()->size();
 	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
 		     conf->value("video/screen_h", size.height()).toInt());
@@ -497,8 +598,25 @@ void StelMainView::init(QSettings* conf)
 	// plugins, because the gui create the QActions needed by some plugins.
 	StelApp::getInstance().initPlugIns();
 
+	// The script manager can only be fully initialized after the plugins have loaded.
+	StelApp::getInstance().initScriptMgr();
+
+	// Set the global stylesheet, this is only useful for the tooltips.
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui!=NULL)
+		setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
+	updateNightModeProperty();
+
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
+}
+
+void StelMainView::updateNightModeProperty()
+{
+	// So that the bottom bar tooltips get properly rendered in night mode.
+	setProperty("nightMode", StelApp::getInstance().getVisionModeNight());
+	nightModeEffect->setEnabled(StelApp::getInstance().getVisionModeNight());
 }
 
 // This is a series of various diagnostics based on "bugs" reported for 0.13.0 and 0.13.1.
@@ -958,25 +1076,25 @@ void StelMainView::mouseMoveEvent(QMouseEvent* event)
 	// restored.
 	if (event->buttons() || QGuiApplication::overrideCursor()!=0)
 		thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::mouseMoveEvent(event);
+	QGraphicsView::mouseMoveEvent(event);
 }
 
 void StelMainView::mousePressEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::mousePressEvent(event);
+	QGraphicsView::mousePressEvent(event);
 }
 
 void StelMainView::mouseReleaseEvent(QMouseEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::mouseReleaseEvent(event);
+	QGraphicsView::mouseReleaseEvent(event);
 }
 
 void StelMainView::wheelEvent(QWheelEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::wheelEvent(event);
+	QGraphicsView::wheelEvent(event);
 }
 
 void StelMainView::moveEvent(QMoveEvent * event)
@@ -1002,13 +1120,13 @@ void StelMainView::keyPressEvent(QKeyEvent* event)
 		event->setAccepted(true);
 		return;
 	}
-	QDeclarativeView::keyPressEvent(event);
+	QGraphicsView::keyPressEvent(event);
 }
 
 void StelMainView::keyReleaseEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
-	QDeclarativeView::keyReleaseEvent(event);
+	QGraphicsView::keyReleaseEvent(event);
 }
 
 

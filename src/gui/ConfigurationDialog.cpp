@@ -44,7 +44,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "SolarSystem.hpp"
-#include "MeteorMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -171,7 +171,10 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
-
+	ui->nutationCheckBox->setChecked(core->getUseNutation());
+	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
+	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
+	connect(ui->topocentricCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseTopocentricCoordinates(bool)));
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
@@ -240,6 +243,8 @@ void ConfigurationDialog::createDialogContent()
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
 	connect(ui->pushButtonCustomDeltaTEquationDialog, SIGNAL(clicked()), this, SLOT(showCustomDeltaTEquationDialog()));
+	if (core->getCurrentDeltaTAlgorithm()==StelCore::Custom)
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
 
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
@@ -263,6 +268,8 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
+	ui->azimuthFromSouthcheckBox->setChecked(StelApp::getInstance().getFlagOldAzimuthUsage());
+	connect(ui->azimuthFromSouthcheckBox, SIGNAL(toggled(bool)), this, SLOT(updateStartPointForAzimuth(bool)));
 
 	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
 	ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
@@ -472,6 +479,11 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 }
 
 
+void ConfigurationDialog::updateStartPointForAzimuth(bool b)
+{
+	StelApp::getInstance().setFlagOldAzimuthUsage(b);
+}
+
 void ConfigurationDialog::cursorTimeOutChanged()
 {
 	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
@@ -517,7 +529,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	Q_ASSERT(lmgr);
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	Q_ASSERT(mmgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	Q_ASSERT(skyd);
@@ -563,13 +575,16 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
 	conf->setValue("viewing/flag_equatorial_grid", glmgr->getFlagEquatorGrid());
+	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_equator_line", glmgr->getFlagEquatorLine());
+	conf->setValue("viewing/flag_equator_J2000_line", glmgr->getFlagEquatorJ2000Line());
 	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
+	conf->setValue("viewing/flag_ecliptic_J2000_line", glmgr->getFlagEclipticJ2000Line());
+	conf->setValue("viewing/flag_ecliptic_grid", glmgr->getFlagEclipticGrid());
 	conf->setValue("viewing/flag_ecliptic_J2000_grid", glmgr->getFlagEclipticJ2000Grid());
 	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
 	conf->setValue("viewing/flag_longitude_line", glmgr->getFlagLongitudeLine());
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
-	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
 	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
@@ -591,9 +606,50 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_planets_labels", ssmgr->getFlagLabels());
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
+	conf->setValue("astro/nebula_labels_amount", nmgr->getLabelsAmount());
+	conf->setValue("astro/flag_nebula_hints_proportional", nmgr->getHintsProportional());
+	conf->setValue("astro/flag_surface_brightness_usage", nmgr->getFlagSurfaceBrightnessUsage());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
 	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
+	conf->setValue("astro/flag_use_type_filter", nmgr->getFlagTypeFiltersUsage());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
+	conf->setValue("astro/flag_nutation", core->getUseNutation());
+	conf->setValue("astro/flag_topocentric_coordinates", core->getUseTopocentricCoordinates());
+
+	// view dialog / DSO tag settings
+	const Nebula::CatalogGroup& cflags = nmgr->getCatalogFilters();
+
+	conf->beginGroup("dso_catalog_filters");
+	conf->setValue("flag_show_ngc",	(bool) (cflags & Nebula::CatNGC));
+	conf->setValue("flag_show_ic",	(bool) (cflags & Nebula::CatIC));
+	conf->setValue("flag_show_m",	(bool) (cflags & Nebula::CatM));
+	conf->setValue("flag_show_c",	(bool) (cflags & Nebula::CatC));
+	conf->setValue("flag_show_b",	(bool) (cflags & Nebula::CatB));
+	conf->setValue("flag_show_vdb",	(bool) (cflags & Nebula::CatVdB));
+	conf->setValue("flag_show_sh2",	(bool) (cflags & Nebula::CatSh2));
+	conf->setValue("flag_show_rcw",	(bool) (cflags & Nebula::CatRCW));
+	conf->setValue("flag_show_lbn",	(bool) (cflags & Nebula::CatLBN));
+	conf->setValue("flag_show_ldn",	(bool) (cflags & Nebula::CatLDN));
+	conf->setValue("flag_show_cr",	(bool) (cflags & Nebula::CatCr));
+	conf->setValue("flag_show_mel",	(bool) (cflags & Nebula::CatMel));
+	conf->setValue("flag_show_ced",	(bool) (cflags & Nebula::CatCed));
+	conf->setValue("flag_show_pgc",	(bool) (cflags & Nebula::CatPGC));
+	conf->setValue("flag_show_ugc",	(bool) (cflags & Nebula::CatUGC));
+	conf->endGroup();
+
+	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();
+	conf->beginGroup("dso_type_filters");
+	conf->setValue("flag_show_galaxies", 		 (bool) (tflags & Nebula::TypeGalaxies));
+	conf->setValue("flag_show_active_galaxies",	 (bool) (tflags & Nebula::TypeActiveGalaxies));
+	conf->setValue("flag_show_interacting_galaxies", (bool) (tflags & Nebula::TypeInteractingGalaxies));
+	conf->setValue("flag_show_clusters",		 (bool) (tflags & Nebula::TypeStarClusters));
+	conf->setValue("flag_show_bright_nebulae",	 (bool) (tflags & Nebula::TypeBrightNebulae));
+	conf->setValue("flag_show_dark_nebulae",	 (bool) (tflags & Nebula::TypeDarkNebulae));
+	conf->setValue("flag_show_planetary_nebulae",	 (bool) (tflags & Nebula::TypePlanetaryNebulae));
+	conf->setValue("flag_show_hydrogen_regions",	 (bool) (tflags & Nebula::TypeHydrogenRegions));
+	conf->setValue("flag_show_supernova_remnants",	 (bool) (tflags & Nebula::TypeSupernovaRemnants));
+	conf->setValue("flag_show_other",		 (bool) (tflags & Nebula::TypeOther));
+	conf->endGroup();
 
 	// view dialog / landscape tab settings
 	lmgr->setDefaultLandscapeID(lmgr->getCurrentLandscapeID());
@@ -603,6 +659,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("landscape/flag_enable_illumination_layer", lmgr->getFlagIllumination());
+	conf->setValue("landscape/flag_enable_labels", lmgr->getFlagLabels());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScaleIndex());
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
@@ -671,6 +728,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_decimal_degrees", StelApp::getInstance().getFlagShowDecimalDegrees());
+	conf->setValue("gui/flag_use_azimuth_from_south", StelApp::getInstance().getFlagOldAzimuthUsage());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();
@@ -694,6 +752,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
 	conf->setValue("video/viewport_effect", StelApp::getInstance().getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
+	conf->setValue("projection/viewport_center_offset_x", core->getCurrentStelProjectorParams().viewportCenterOffset[0]);
+	conf->setValue("projection/viewport_center_offset_y", core->getCurrentStelProjectorParams().viewportCenterOffset[1]);
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainView::getInstance().getFlagCursorTimeout());
@@ -926,8 +986,8 @@ void ConfigurationDialog::aScriptHasStopped(void)
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	double JD = core->getJDay();
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400));
+	double JD = core->getJD();
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }
@@ -1247,6 +1307,8 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
 	// Espenak & Meeus (2006) used by default
 	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
+	// GZ: I want to try out some things. Something is still wrong with eclipses, see lp:1275092.
+	//algorithms->addItem(q_("Espenak & Meeus (2006) no extra moon acceleration"), "EspenakMeeusZeroMoonAccel");
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");

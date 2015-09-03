@@ -9,6 +9,7 @@
 \title{Scenery3d - Walkable 3D Models in Stellarium} \author{Georg
 Zotti\thanks{\url{Georg.Zotti@univie.ac.at},
 \url{http://astrosim.univie.ac.at}}\  \ and Florian Schaukowitsch}
+\date{April 10, 2015; last updated \today}
 \begin{document}
 \maketitle
 
@@ -555,6 +556,20 @@ size=<int>              Defines how many entries are in this file.
 2/position    = 593155.2421280354,5333348.6304404084,325.7295809038,0.8805893660
 2/view_fov    = 84.315399,-8.187078,83.000000
 \end{verbatim}
+
+\subsection{Concatenating OBJ files}
+\label{sec:concatenating}
+
+Some automated workflows may involve tiled landscape areas, e.g. to
+overcome texture limitations or triangle count limits in simpler tools
+like Sketchup. In this case you can create separate meshes in the same
+coordinate system, but you need to concatenate them. in Blender, import
+the OBJ files (File/Import/Wavefront .obj), select them and press
+Ctrl-J to join them, then export to a single OBJ
+(File/Export/Wavefront .obj)%
+\footnote{http://blender.stackexchange.com/questions/3352/merging-multiple-obj-files}.
+
+Verify the new model loads correctly, e.g. in Meshlab!
 
 \subsection{Working with non-georeferenced OBJ files}
 \label{sec:NonGeoreferenced}

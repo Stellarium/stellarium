@@ -190,12 +190,11 @@ var Time = ( function($) {
     function animate() {
         if (timeData && !timeEditMode) {
             var currentJday = getCurrentTime();
-            var correctedTime = currentJday - timeData.deltaT;
 
             //what we have to animate depends on which tab is shown
             if ($timewidget.tabs('option', 'active') === 0) {
                 //apply timezone
-                var localTime = correctedTime + timeData.gmtShift;
+                var localTime = currentJday + timeData.gmtShift;
 
                 //we only update the spinners when there is a discrepancy, to improve performance
                 var date = jdayToDate(localTime);
@@ -222,17 +221,17 @@ var Time = ( function($) {
                 }
                 currentDisplayTime.time = time;
             } else {
-                var jd = correctedTime.toFixed(5);
+                var jd = currentJday.toFixed(5);
 
                 if (currentDisplayTime.jd.toFixed(5) !== jd) {
                     if (!$input_jd.is(":focus"))
-                        $input_jd.spinner("value", correctedTime);
+                        $input_jd.spinner("value", currentJday);
                     //MJD directly depends on JD
-                    var mjd = (correctedTime - 2400000.5);
+                    var mjd = (currentJday - 2400000.5);
                     if (!$input_mjd.is(":focus"))
                         $input_mjd.spinner("value", mjd);
                 }
-                currentDisplayTime.jd = correctedTime;
+                currentDisplayTime.jd = currentJday;
             }
         }
     }
@@ -530,12 +529,12 @@ var Time = ( function($) {
         //we have to change an eventual rollover
         dateTimeForRollover(currentDisplayTime);
 
-        //calculate a new JD, subtracting timezone shift and adding deltaT
+        //calculate a new JD in local time
         var newJD = dateTimeToJd(currentDisplayTime.date.year, currentDisplayTime.date.month, currentDisplayTime.date.day,
             currentDisplayTime.time.hour, currentDisplayTime.time.minute, currentDisplayTime.time.second);
 
-        //we dont have access to the exact timezone shift and deltaT for the new JD (would require a server poll), so this may introduce errors, most notably when entering/exiting summer time
-        newJD -= (timeData.gmtShift - timeData.deltaT);
+        //we dont have access to the exact timezone shift for the new JD (would require a server poll), so this may introduce errors, most notably when entering/exiting summer time
+        newJD -= (timeData.gmtShift);
 
         //set the new jDay locally
         resyncTime();
@@ -562,7 +561,7 @@ var Time = ( function($) {
 
             //update deltaT display
             var deltaTinSec = time.deltaT * (60 * 60 * 24);
-            $deltat.html(deltaTinSec.toFixed(2) + "s");
+            $deltat[0].textContent=deltaTinSec.toFixed(2) + "s";
 
             updateTimeButtonState();
 
@@ -604,12 +603,10 @@ var Time = ( function($) {
         setDateNow: function() {
             //for now, this is only calculated here in JS
             //this may not be the same result as pressing the NOW button in the GUI
-            //because of varying deltaT which may be quite different from the current time + latency issues
             var jd = jsDateToJd(new Date());
 
-            //we have to apply reverse deltaT
             resyncTime();
-            timeData.jday = jd + timeData.deltaT;
+            timeData.jday = jd;
 
             Main.postCmd("/api/main/time", {
                 time: timeData.jday
@@ -626,8 +623,6 @@ var Time = ( function($) {
 
                 currentDisplayTime.jday = val;
 
-                //remove deltaT
-                val = val + timeData.deltaT;
                 resyncTime();
                 timeData.jday = val;
 

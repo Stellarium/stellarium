@@ -21,7 +21,7 @@ QT5_ADD_RESOURCES(ArchaeoLines_RES_CXX ${ArchaeoLines_RES})
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ADD_LIBRARY(ArchaeoLines-static STATIC ${ArchaeoLines_SRCS} ${ArchaeoLines_RES_CXX} ${ArchaeoLines_UIS_H})
-QT5_USE_MODULES(ArchaeoLines-static Core Network Widgets Declarative)
+QT5_USE_MODULES(ArchaeoLines-static Core Network Widgets)
 # The library target "ArchaeoLines-static" has a default OUTPUT_NAME of "ArchaeoLines-static", so change it.
 SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES OUTPUT_NAME "ArchaeoLines")
 TARGET_LINK_LIBRARIES(ArchaeoLines-static ${extLinkerOption})

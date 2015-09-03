@@ -207,20 +207,15 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSourceButton, SIGNAL(clicked()), this, SLOT(addSourceRow()));
 	connect(plugin, SIGNAL(settingsChanged()),
 	        this, SLOT(toggleCheckableSources()));
-	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), this, SLOT(repaintSourceList()));
+
+	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
+	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
 
 	// About tab
 	populateAboutPage();
 
 	populateFilterMenu();
 	populateSourcesList();
-}
-
-void SatellitesDialog::repaintSourceList()
-{
-	// Enable force repaint sourceList to avoiding artifacts
-	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
-	ui->sourceList->repaint();
 }
 
 void SatellitesDialog::filterListByGroup(int index)
@@ -293,9 +288,8 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
 		ui->tleSecondLineEdit->setCursorPosition(0);
 	}
-	
-	// Enable force repaint satellitesList to avoiding artifacts
-	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+
+	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	ui->satellitesList->repaint();
 
 	// TODO: Fix the comms button...
