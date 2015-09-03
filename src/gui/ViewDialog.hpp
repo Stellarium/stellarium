@@ -50,12 +50,14 @@ private slots:
 	void populateLists();
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
+	void viewportVerticalShiftChanged(const int shift);
 	void landscapeChanged(QListWidgetItem* item);
 	void setZhrFromControls(int zhr);
 	void updateZhrDescription();
 	void updateZhrControls(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
+	void nebulasMarkersValueChanged(int);
 	void setBortleScaleToolTip(int Bindex);
 	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
@@ -76,15 +78,19 @@ private slots:
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);
 
+	void setSelectedCatalogsFromCheckBoxes();
+	void setSelectedTypesFromCheckBoxes();
+
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 private:
-	//! convenience method to link a checkbox to a StelAction.
-	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
+
+	void updateSelectedCatalogsCheckBoxes();
+	void updateSelectedTypesCheckBoxes();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;

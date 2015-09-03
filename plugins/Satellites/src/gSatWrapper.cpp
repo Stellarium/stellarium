@@ -122,7 +122,7 @@ Vec3d gSatWrapper::getSubPoint()
 
 void gSatWrapper::updateEpoch()
 {
-	double jul_utc = StelApp::getInstance().getCore()->getJDay();
+	double jul_utc = StelApp::getInstance().getCore()->getJD();
         epoch = jul_utc;
 
 	if (pSatellite)

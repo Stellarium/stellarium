@@ -72,15 +72,17 @@ public slots:
 	void close();
 signals:
 	void visibleChanged(bool);
+private slots:
+	void updateNightModeProperty();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots.
 	virtual void createDialogContent()=0;
 
 	//! Helper function to connect a checkbox to the StelAction with the specified name
-	static void connectCheckbox(QAbstractButton* checkBox,const QString& actionName);
+	static void connectCheckBox(QAbstractButton* checkBox,const QString& actionName);
 	//! Helper function to connect a checkbox to the given StelAction
-	static void connectCheckbox(QAbstractButton *checkBox, StelAction* action);
+	static void connectCheckBox(QAbstractButton *checkBox, StelAction* action);
 
 	//! The main dialog
 	QWidget* dialog;

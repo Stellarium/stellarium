@@ -34,10 +34,44 @@ class StelButton;
 class ArchaeoLinesDialog;
 class ArchaeoLine;
 
+/*! @defgroup archaeoLines ArchaeoLines Plug-in
+@{
+A tool for archaeo-/ethnoastronomical alignment studies.
+
+The ArchaeoLines plugin displays any combination of declination arcs most
+relevant to archaeo- or ethnoastronomical studies. Of course, principles
+used in this context are derived from natural observations, and many of
+these declinations are still important in everyday astronomy.
+ -# Declinations of equinoxes (i.e. equator) and the solstices
+ -# Declinations of the crossquarter days (days right between solstices and equinoxes)
+ -# Declinations of the Major Lunar Standstills
+ -# Declinations of the Minor Lunar Standstills
+ -# Declination of the Zenith passage
+ -# Declination of the Nadir passage
+ -# Declination of the currently selected object
+ -# Current declination of the sun
+ -# Current declination of the moon
+ -# Current declination of a naked-eye planet
+
+The lunar lines include horizon parallax effects. There are two lines each
+drawn, for maximum and minimum distance of the moon. Note that declination
+of the moon at the major standstill can exceed the indicated limits if it
+is high in the sky due to parallax effects.
+
+It may be very instructive to let the time run quite fast and observe the
+line of "current moon" swinging between its north and south limits each month.
+These limits grow and shrink between the Major and Minor Standstills.
+
+The sun likewise swings between the solstices. Over centuries, the solstice
+declinations very slightly move as well.
+@}
+*/
 
 //! @class ArchaeoLine
 //! Class which manages a line (small circle) to display around the sky like the solstices line.
 //! Modelled after @class SkyLine found in GridLinesMgr.cpp at V0.13.2, but with small-circle drawing.
+//! @author Georg Zotti
+//! @ingroup archaeoLines
 class ArchaeoLine : QObject
 {
 	Q_OBJECT
@@ -238,7 +272,7 @@ private:
 	bool flagShowCurrentSun;
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
-	double lastJD; // cache last-time-computed to 1/month or so?
+	double lastJDE; // cache last-time-computed to every 10 days or so?
 
 	ArchaeoLine * equinoxLine;
 	ArchaeoLine * northernSolsticeLine;

@@ -108,6 +108,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	maskType = (StelProjectorMaskType)params.maskType;
 	zNear = params.zNear;
 	oneOverZNearMinusZFar = 1.f/(zNear-params.zFar);
+	viewportCenterOffset = params.viewportCenterOffset;
 	viewportXywh = params.viewportXywh;
 	viewportXywh[0] *= devicePixelsPerPixel;
 	viewportXywh[1] *= devicePixelsPerPixel;
@@ -385,7 +386,9 @@ bool StelProjector::unProject(const Vec3d& win, Vec3d& v) const
 void StelProjector::computeBoundingCap()
 {
 	bool ok = unProject(viewportXywh[0]+0.5f*viewportXywh[2], viewportXywh[1]+0.5f*viewportXywh[3], boundingCap.n);
-	Q_ASSERT(ok);	// The central point should be at a valid position by definition
+	// The central point should be at a valid position by definition.
+	// When center is offset, this assumption may not hold however.
+	Q_ASSERT(ok || (viewportCenterOffset.lengthSquared()>0.0) );
 	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.00000001;
 
 	// Now need to determine the aperture

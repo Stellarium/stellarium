@@ -61,6 +61,10 @@ class LandscapeMgr : public StelModule
 			   READ getFlagIllumination
 			   WRITE setFlagIllumination
 			   NOTIFY illuminationDisplayedChanged)
+	Q_PROPERTY(bool labelsDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels
+			   NOTIFY labelsDisplayedChanged)
 	Q_PROPERTY(bool databaseUsage
 			READ getFlagUseLightPollutionFromDatabase
 			WRITE setFlagUseLightPollutionFromDatabase
@@ -87,6 +91,7 @@ public:
 	//! - Atmophere colour calculation based on location, position of sun
 	//!   and moon.
 	//! - updates adaptation luminescence based on visible bright objects.
+	//! - Landscape and lightscape brightness computations based on sun position and whether atmosphere is on or off.
 	virtual void update(double deltaTime);
 
 	//! Get the order in which this module will draw its objects relative to other modules.
@@ -178,8 +183,10 @@ public slots:
 	//! Set flag for displaying Landscape.
 	void setFlagLandscape(const bool displayed);
 
-	//! Get whether the landscape is currently visible. If true, object below landscape must be rendered.
+	//! Get whether the landscape is currently visible. If true, objects below landscape's limiting altitude limit can be omitted.
 	bool getIsLandscapeFullyVisible() const;
+	//! Get the sine of current landscape's minimal altitude. Useful to construct bounding caps.
+	float getLandscapeSinMinAltitudeLimit() const;
 	
 	//! Get flag for displaying Fog.
 	bool getFlagFog() const;
@@ -189,6 +196,10 @@ public slots:
 	bool getFlagIllumination() const;
 	//! Set flag for displaying illumination layer
 	void setFlagIllumination(const bool on);
+	//! Get flag for displaying landscape labels
+	bool getFlagLabels() const;
+	//! Set flag for displaying landscape labels
+	void setFlagLabels(const bool on);
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -232,7 +243,7 @@ public slots:
 	//! Set atmosphere fade duration in s.
 	void setAtmosphereFadeDuration(const float f);
 
-	//! Set the light pollution following the Bortle Scale
+	//! Set the light pollution following the Bortle Scale. Emits lightPollutionChanged().
 	void setAtmosphereBortleLightPollution(const int bIndex);
 	//! Get the light pollution following the Bortle Scale
 	int getAtmosphereBortleLightPollution() const;
@@ -339,6 +350,7 @@ signals:
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
 	void illuminationDisplayedChanged(const bool displayed);
+	void labelsDisplayedChanged(const bool displayed);
 	void lightPollutionUsageChanged(const bool usage);
 
 	//! Emitted when a landscape has been installed or un-installed.
@@ -346,6 +358,7 @@ signals:
 	//! the Sky and viewing options window (the ViewDialog class)
 	void landscapesChanged();
 
+	//! emitted by setAtmosphereBortleLightPollution().
 	void lightPollutionChanged();
 
 	//! Emitted when installLandscapeFromArchive() can't read from, write to or
@@ -396,6 +409,7 @@ private:
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinalsPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
+	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
 
 	// Define whether the observer location is to be updated when the landscape is updated.
 	bool flagLandscapeSetsLocation;

@@ -28,7 +28,7 @@ QT5_ADD_RESOURCES(Observability_RES_CXX ${Observability_RES})
 SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ADD_LIBRARY(Observability-static STATIC ${Observability_SRCS} ${Observability_RES_CXX} ${ObservabilityDialog_UIS_H})
-QT5_USE_MODULES(Observability-static Core Declarative Network)
+QT5_USE_MODULES(Observability-static Core Network Widgets)
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES OUTPUT_NAME "Observability")
 TARGET_LINK_LIBRARIES(Observability-static ${extLinkerOption})
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

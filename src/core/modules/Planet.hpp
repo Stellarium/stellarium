@@ -33,7 +33,7 @@
 // The last variable is the userData pointer.
 typedef void (*posFuncType)(double, double*, void*);
 
-typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
+typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3]);
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -51,7 +51,7 @@ public:
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.), siderealPeriod(0.) {}
 	float period;          // (sidereal) rotation period [earth days]
 	float offset;          // rotation at epoch  [degrees]
-	double epoch;          // JD (TD) of epoch for these elements
+	double epoch;          // JDE (JD TT) of epoch for these elements
 	float obliquity;       // tilt of rotation axis w.r.t. ecliptic [radians]
 	float ascendingNode;   // long. of ascending node of equator on the ecliptic [radians]
 	float precessionRate;  // rate of precession of rotation axis in [rads/JulianCentury(36525d)]
@@ -172,6 +172,8 @@ public:
 	//! Get the radius of the planet in AU.
 	//! @return the radius of the planet in astronomical units.
 	double getRadius(void) const {return radius;}
+	//! Get the value (1-f) for oblateness f.
+	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
@@ -190,20 +192,22 @@ public:
 	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
 	void setApparentMagnitudeAlgorithm(QString algorithm);
 
-	// Compute the z rotation to use from equatorial to geographic coordinates
-	double getSiderealTime(double jd) const;
+	//! Compute the z rotation to use from equatorial to geographic coordinates. For general applicability we need both time flavours:
+	//! @param JD is JD(UT) for Earth
+	//! @param JDE is used for other locations
+	double getSiderealTime(double JD, double JDE) const;
 	Mat4d getRotEquatorialToVsop87(void) const;
 	void setRotEquatorialToVsop87(const Mat4d &m);
 
 	const RotationElements &getRotationElements(void) const {return re;}
 
 	// Compute the position in the parent Planet coordinate system
-	void computePositionWithoutOrbits(const double dateJD);
-	//virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
-	void computePosition(const double dateJD);// GZ: gets overridden in Comet!
+	void computePositionWithoutOrbits(const double dateJDE);
+	void computePosition(const double dateJDE);
 
-	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
-	void computeTransMatrix(double date);
+	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
+	// This requires both flavours of JD in cases involving Earth.
+	void computeTransMatrix(double JD, double JDE);
 
 	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
@@ -219,7 +223,9 @@ public:
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
-	double getRotObliquity(double JDay) const;
+	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
+	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
+	double getRotObliquity(double JDE) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;
@@ -273,9 +279,9 @@ public:
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
 	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
-	double lastOrbitJD;
-	double deltaJD;                  // time difference between positional updates.
-	double deltaOrbitJD;
+	double lastOrbitJDE;
+	double deltaJDE;                 // time difference between positional updates.
+	double deltaOrbitJDE;
 	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
 					 // the end: good for elliptical orbits, bad for parabolic
@@ -321,8 +327,10 @@ protected:
 	Vec3f color;                     // exclusively used for drawing the planet halo
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
-	Mat4d rotLocalToParent;
-	float axisRotation;              // Rotation angle of the Planet on it's axis
+	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
+					 // Apparently this is the axis orientation with respect to the parent body. For planets, this is axis orientation w.r.t. VSOP87A/J2000 ecliptical system.
+	float axisRotation;              // Rotation angle of the Planet on its axis.
+					 // For Earth, this should be Greenwich Mean Sidereal Time GMST.
 	StelTextureSP texMap;            // Planet map texture
 	StelTextureSP normalMap;         // Planet normal map texture
 
@@ -330,10 +338,10 @@ protected:
 	double distance;                 // Temporary variable used to store the distance to a given point
 					 // it is used for sorting while drawing
 	float sphereScale;               // Artificial scaling for better viewing
-	double lastJD;                   // caches JD of last positional computation
-	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
+	double lastJDE;                  // caches JDE of last positional computation
+	// The callback for the calculation of the equatorial rect heliocentric position at time JDE.
 	posFuncType coordFunc;
-	void* userDataPtr;
+	void* userDataPtr;               // this is always used with an Orbit object.
 
 	OsculatingFunctType *const osculatingFunc;
 	QSharedPointer<Planet> parent;           // Planet parent i.e. sun for earth

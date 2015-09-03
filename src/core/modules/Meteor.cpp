@@ -1,18 +1,17 @@
 /*
  * Stellarium
- * Copyright (C) 2004 Robert Spearman
- * Copyright (C) 2014 Marcos Cardinot
- * 
+ * Copyright (C) 2014-2015 Marcos Cardinot
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -23,136 +22,232 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelTexture.hpp"
+#include "StelUtils.hpp"
 
-StelTextureSP Meteor::bolideTexture;
+#include <QtMath>
 
-Meteor::Meteor(const StelCore* core, float v)
-	: m_distMultiplier(0.)
+Meteor::Meteor(const StelCore* core, const StelTextureSP& bolideTexture)
+	: m_core(core)
+	, m_alive(false)
+	, m_speed(72.)
+	, m_initialZ(1.)
+	, m_finalZ(1.)
+	, m_absMag(.5)
+	, m_aptMag(.5)
+	, m_bolideTexture(bolideTexture)
 	, m_segments(10)
 {
-	qsrand (QDateTime::currentMSecsSinceEpoch());
-	// determine meteor velocity
-	// abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
-	m_speed = 11+(float)qrand()/((float)RAND_MAX+1)*(v-11);
+	qsrand(QDateTime::currentMSecsSinceEpoch());
+}
 
-	// view matrix of sporadic meteors model
-	float alpha = (double)qrand()/((double)RAND_MAX+1)*2*M_PI;
-	float delta = M_PI_2 - (double)qrand()/((double)RAND_MAX+1)*M_PI;
-	m_viewMatrix = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
+Meteor::~Meteor()
+{
+	m_bolideTexture.clear();
+}
 
-	// building meteor model
-	m_alive = initMeteorModel(core, m_segments, m_viewMatrix, meteor);
+void Meteor::init(const float& radiantAlpha, const float& radiantDelta,
+		  const float& speed, const QList<ColorPair> colors)
+{
+	// meteor velocity in km/s
+	m_speed = speed;
+
+	// find the radiant in horizontal coordinates
+	Vec3d radiantAltAz;
+	StelUtils::spheToRect(radiantAlpha, radiantDelta, radiantAltAz);
+	radiantAltAz = m_core->j2000ToAltAz(radiantAltAz);
+	float radiantAlt, radiantAz;
+	// S is zero, E is 90 degrees (SDSS)
+	StelUtils::rectToSphe(&radiantAz, &radiantAlt, radiantAltAz);
+
+	// meteors won't be visible if radiant is below 0degrees
+	if (radiantAlt < 0.f)
+	{
+		return;
+	}
+
+	// define the radiant coordinate system
+	// rotation matrix to align z axis with radiant
+	m_matAltAzToRadiant = Mat4d::zrotation(radiantAz) * Mat4d::yrotation(M_PI_2 - radiantAlt);
+
+	// select a random initial meteor altitude in the horizontal system [MIN_ALTITUDE, MAX_ALTITUDE]
+	float initialAlt = MIN_ALTITUDE + (MAX_ALTITUDE - MIN_ALTITUDE) * ((float) qrand() / ((float) RAND_MAX + 1));
+
+	// calculates the max z-coordinate for the currrent radiant
+	float maxZ = meteorZ(M_PI_2 - radiantAlt, initialAlt);
+
+	// meteor trajectory
+	// select a random xy position in polar coordinates (radiant system)
+
+	float xyDist = maxZ * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, maxZ]
+	float theta = 2 * M_PI * ((double) qrand() / ((double) RAND_MAX + 1)); // [0, 2pi]
+
+	// initial meteor coordinates (radiant system)
+	m_position[0] = xyDist * qCos(theta);
+	m_position[1] = xyDist * qSin(theta);
+	m_position[2] = maxZ;
+	m_posTrain = m_position;
+
+	// store the initial z-component (radiant system)
+	m_initialZ = m_position[2];
+
+	// find the initial meteor coordinates in the horizontal system
+	Vec3d positionAltAz = m_position;
+	positionAltAz.transfo4d(m_matAltAzToRadiant);
+
+	// find the angle from horizon to meteor
+	float meteorAlt = qAsin(positionAltAz[2] / positionAltAz.length());
+
+	// this meteor should not be visible if it is above the maximum altitude
+	// or if it's below the horizon!
+	if (positionAltAz[2] > MAX_ALTITUDE || meteorAlt <= 0.f)
+	{
+		return;
+	}
+
+	// determine the final z-component and the min distance between meteor and observer
+	if (radiantAlt < 0.0262f) // (<1.5 degrees) earth grazing meteor ?
+	{
+		// earth-grazers are rare!
+		// introduce a probabilistic factor just to make them a bit harder to occur
+		float prob = ((float) qrand() / ((float) RAND_MAX + 1));
+		if (prob > 0.3f) {
+			return;
+		}
+
+		// limit lifetime to 12sec
+		m_finalZ = -m_position[2];
+		m_finalZ = qMax(m_position[2] - m_speed * 12.f, (double) m_finalZ);
+
+		m_minDist = xyDist;
+	}
+	else
+	{
+		// limit lifetime to 12sec
+		m_finalZ = meteorZ(M_PI_2 - meteorAlt, MIN_ALTITUDE);
+		m_finalZ = qMax(m_position[2] - m_speed * 12.f, (double) m_finalZ);
+
+		m_minDist = qSqrt(m_finalZ * m_finalZ + xyDist * xyDist);
+	}
+
+	// a meteor cannot hit the observer!
+	if (m_minDist < MIN_ALTITUDE) {
+		return;
+	}
+
+	// select random magnitude [-3; 4.5]
+	float Mag = (float) qrand() / ((float) RAND_MAX + 1) * 7.5f - 3.f;
+
+	// compute RMag and CMag
+	RCMag rcMag;
+	m_core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
+	m_absMag = rcMag.radius <= 1.2f ? 0.f : rcMag.luminance;
+	if (m_absMag == 0.f) {
+		return;
+	}
+
+	// most visible meteors are under about 184km distant
+	// scale max mag down if outside this range
+	float scale = qPow(184.0 / m_minDist, 2);
+	m_absMag *= qMin(scale, 1.0f);
+
+	// build the color vector
+	buildColorVectors(colors);
+
+	m_alive = true;
+}
+
+bool Meteor::update(double deltaTime)
+{
+	if (!m_alive)
+	{
+		return false;
+	}
+
+	if (m_position[2] < m_finalZ)
+	{
+		// burning has stopped so magnitude fades out
+		// assume linear fade out
+		m_absMag -= deltaTime * 2.f;
+	}
+
+	// no longer visible
+	if(m_absMag <= 0.f)
+	{
+		m_alive = false;
+		return false;
+	}
+
+	m_position[2] -= m_speed * deltaTime;
+
+	// train doesn't extend beyond start of burn
+	if (m_position[2] + m_speed * 0.5f > m_initialZ)
+	{
+		m_posTrain[2] = m_initialZ;
+	}
+	else
+	{
+		m_posTrain[2] -= m_speed * deltaTime;
+	}
+
+	// update apparent magnitude based on distance to observer
+	float scale = qPow(m_minDist / m_position.length(), 2);
+	m_aptMag = m_absMag * qMin(scale, 1.f);
+	m_aptMag = qMax(m_aptMag, 0.f);
+
+	return true;
+}
+
+void Meteor::draw(const StelCore* core, StelPainter& sPainter)
+{
 	if (!m_alive)
 	{
 		return;
 	}
 
-	// building lineColorArray and trainColorArray
-	buildColorArrays(m_segments, getRandColor(), m_lineColorArray, m_trainColorArray);
+	float thickness;
+	float bolideSize;
+	calculateThickness(core, thickness, bolideSize);
+
+	drawTrain(sPainter, thickness);
+
+	drawBolide(sPainter, bolideSize);
 }
 
-Meteor::~Meteor()
+Vec4f Meteor::getColorFromName(QString colorName)
 {
-}
-
-// returns true if alive
-bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat4d viewMatrix, MeteorModel &mm)
-{
-	float high_range = EARTH_RADIUS + HIGH_ALTITUDE;
-	float low_range = EARTH_RADIUS + LOW_ALTITUDE;
-
-	// find observer position in meteor coordinate system
-	mm.obs = core->altAzToJ2000(Vec3d(0,0,EARTH_RADIUS));
-	mm.obs.transfo4d(viewMatrix.transpose());
-
-	// select random trajectory using polar coordinates in XY plane, centered on observer
-	mm.xydistance = (double)qrand() / ((double)RAND_MAX+1)*(VISIBLE_RADIUS);
-	float angle = (double)qrand() / ((double)RAND_MAX+1)*2*M_PI;
-
-	// set meteor start x,y
-	mm.position[0] = mm.posTrain[0] = mm.xydistance*cos(angle) + mm.obs[0];
-	mm.position[1] = mm.posTrain[1] = mm.xydistance*sin(angle) + mm.obs[1];
-
-	// D is distance from center of earth
-	float D = std::sqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);
-
-	if (D > high_range)     // won't be visible, meteor still dead
-	{
-		return false;
-	}
-
-	mm.posTrain[2] = mm.position[2] = mm.startH = std::sqrt(high_range*high_range - D*D);
-
-	// determine end of burn point, and nearest point to observer for distance mag calculation
-	// mag should be max at nearest point still burning
-	if (D > low_range)
-	{
-		mm.endH = -mm.startH;  // earth grazing
-		mm.minDist = mm.xydistance;
-	}
-	else
-	{
-		mm.endH = std::sqrt(low_range*low_range - D*D);
-		mm.minDist = std::sqrt(mm.xydistance*mm.xydistance + pow(mm.endH - mm.obs[2], 2));
-	}
-
-	if (mm.minDist > VISIBLE_RADIUS)
-	{
-		// on average, not visible (although if were zoomed ...)
-		return false; //meteor still dead
-	}
-
-	// determine intensity [-3; 4.5]
-	float Mag1 = (double)qrand()/((double)RAND_MAX+1)*7.5f - 3;
-	float Mag2 = (double)qrand()/((double)RAND_MAX+1)*7.5f - 3;
-	float Mag = (Mag1 + Mag2)/2.0f;
-
-	// compute RMag and CMag
-	RCMag rcMag;
-	core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
-	mm.mag = rcMag.luminance;
-
-	// most visible meteors are under about 180km distant
-	// scale max mag down if outside this range
-	float scale = 1;
-	if (mm.minDist)
-	{
-		scale = 180*180 / (mm.minDist*mm.minDist);
-	}
-	if (scale < 1)
-	{
-		mm.mag *= scale;
-	}
-
-	mm.firstBrightSegment = (double)qrand()/((double)RAND_MAX+1)*segments;
-
-	// If everything is ok until here,
-	return true;  //the meteor is alive
-}
-
-Vec4f Meteor::getColorFromName(QString colorName) {
 	int R, G, B; // 0-255
-	if (colorName == "violet") { // Calcium
+	if (colorName == "violet")
+	{ // Calcium
 		R = 176;
 		G = 67;
 		B = 172;
-	} else if (colorName == "blueGreen") { // Magnesium
+	}
+	else if (colorName == "blueGreen")
+	{ // Magnesium
 		R = 0;
 		G = 255;
 		B = 152;
-	} else if (colorName == "yellow") { // Iron
+	}
+	else if (colorName == "yellow")
+	{ // Iron
 		R = 255;
 		G = 255;
 		B = 0;
-	} else if (colorName == "orangeYellow") { // Sodium
+	}
+	else if (colorName == "orangeYellow")
+	{ // Sodium
 		R = 255;
 		G = 160;
 		B = 0;
-	} else if (colorName == "red") { // atmospheric nitrogen and oxygen
+	}
+	else if (colorName == "red")
+	{ // atmospheric nitrogen and oxygen
 		R = 255;
 		G = 30;
 		B = 0;
-	} else { // white
+	}
+	else
+	{ // white
 		R = 255;
 		G = 255;
 		B = 255;
@@ -161,116 +256,98 @@ Vec4f Meteor::getColorFromName(QString colorName) {
 	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
 }
 
-QList<Meteor::colorPair> Meteor::getRandColor() {
-	QList<colorPair> colors;
-	float prob = (double)qrand()/((double)RAND_MAX+1);
-	if (prob > 0.9) {
-		colors.push_back(Meteor::colorPair("white", 70));
-		colors.push_back(Meteor::colorPair("orangeYellow", 10));
-		colors.push_back(Meteor::colorPair("yellow", 10));
-		colors.push_back(Meteor::colorPair("blueGreen", 10));
-	} else if (prob > 0.85)  {
-		colors.push_back(Meteor::colorPair("white", 80));
-		colors.push_back(Meteor::colorPair("violet", 20));
-	} else if (prob > 0.80)  {
-		colors.push_back(Meteor::colorPair("white", 80));
-		colors.push_back(Meteor::colorPair("orangeYellow", 20));
-	} else {
-		colors.push_back(Meteor::colorPair("white", 100));
-	}
-
-	return colors;
-}
-
-void Meteor::buildColorArrays(const int segments,
-			      const QList<colorPair> colors,
-			      QList<Vec4f> &lineColorArray,
-			      QList<Vec4f> &trainColorArray)
+void Meteor::buildColorVectors(const QList<ColorPair> colors)
 {
 	// building color arrays (line and prism)
-	int totalOfSegments = 0;
-	int currentSegment = 1+(double)qrand()/((double)RAND_MAX+1)*(segments-1);
-	for (int colorIndex=0; colorIndex<colors.size(); colorIndex++) {
-		colorPair currentColor = colors[colorIndex];
-
-		// segments which we'll paint with the current color
-		int numOfSegments = segments*(currentColor.second / 100.f) + 0.4f; // +0.4 affect approximation
-		if (colorIndex == colors.size()-1) {
-			numOfSegments = segments - totalOfSegments;
-		}
-
-		totalOfSegments += numOfSegments;
-		for (int i=0; i<numOfSegments; i++) {
-			lineColorArray.insert(currentSegment, getColorFromName(currentColor.first));
-			trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
-			if (currentSegment >= segments-1) {
-				currentSegment = 0;
-			} else {
-				currentSegment++;
-			}
-			trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
+	QList<Vec4f> lineColor;
+	QList<Vec4f> trainColor;
+	foreach (ColorPair color, colors)
+	{
+		// segments to be painted with the current color
+		int segs = qRound(m_segments * (color.second / 100.f)); // rounds to nearest integer
+		for (int s = 0; s < segs; ++s)
+		{
+			Vec4f rgba = getColorFromName(color.first);
+			lineColor.append(rgba);
+			trainColor.append(rgba);
+			trainColor.append(rgba);
 		}
 	}
+
+	// make sure that all segments have been painted!
+	const int segs = lineColor.size();
+	if (segs < m_segments) {
+		// use the last color to paint the last segments
+		Vec4f rgba = getColorFromName(colors.last().first);
+		for (int s = segs; s < m_segments; ++s) {
+			lineColor.append(rgba);
+			trainColor.append(rgba);
+			trainColor.append(rgba);
+		}
+	} else if (segs > m_segments) {
+		// remove the extra segments
+		for (int s = segs; s > m_segments; --s) {
+			lineColor.removeLast();
+			trainColor.removeLast();
+			trainColor.removeLast();
+		}
+	}
+
+	// multi-color ?
+	// select a random segment to be the first (to alternate colors)
+	if (colors.size() > 1) {
+		int firstSegment = (segs - 1) * ((float) qrand() / ((float) RAND_MAX + 1)); // [0, segments-1]
+		QList<Vec4f> lineColor2 = lineColor.mid(0, firstSegment);
+		QList<Vec4f> lineColor1 = lineColor.mid(firstSegment);
+		lineColor.clear();
+		lineColor.append(lineColor1);
+		lineColor.append(lineColor2);
+
+		firstSegment *= 2;
+		QList<Vec4f> trainColor2 = trainColor.mid(0, firstSegment);
+		QList<Vec4f> trainColor1 = trainColor.mid(firstSegment);
+		trainColor.clear();
+		trainColor.append(trainColor1);
+		trainColor.append(trainColor2);
+	}
+
+	m_lineColorVector = lineColor.toVector();
+	m_trainColorVector = trainColor.toVector();
 }
 
-bool Meteor::updateMeteorModel(double deltaTime, double speed, MeteorModel &mm)
+float Meteor::meteorZ(float zenithAngle, float altitude)
 {
-	if (mm.position[2] < mm.endH)
-	{
-		// burning has stopped so magnitude fades out
-		// assume linear fade out
-		mm.mag -= deltaTime/500.0f;
-		if(mm.mag < 0)
-		{
-			return false;    // no longer visible
-		}
-	}
+	float distance;
 
-	// *** would need time direction multiplier to allow reverse time replay
-	float dt = 820+(double)qrand()/((double)RAND_MAX+1)*185; // range 820-1005
-	mm.position[2] -= speed*deltaTime/dt;
-
-	// train doesn't extend beyond start of burn
-	if (mm.position[2] + speed*0.5f > mm.startH)
+	if (zenithAngle > 1.13446401f) // > 65 degrees?
 	{
-		mm.posTrain[2] = mm.startH;
+		float zcos = qCos(zenithAngle);
+		distance = qSqrt(EARTH_RADIUS2 * qPow(zcos, 2)
+				 + 2 * EARTH_RADIUS * altitude
+				 + qPow(altitude, 2));
+		distance -= EARTH_RADIUS * zcos;
 	}
 	else
 	{
-		mm.posTrain[2] -= speed*deltaTime/dt;
+		// (first order approximation)
+		distance = altitude / qCos(zenithAngle);
 	}
 
-	return true;
+	return distance;
 }
 
-// returns true if alive
-bool Meteor::update(double deltaTime)
+Vec3d Meteor::altAzToRadiant(Vec3d position)
 {
-	if (!m_alive)
-	{
-		return false;
-	}
-
-	m_alive = updateMeteorModel(deltaTime, m_speed, meteor);
-
-	// determine visual magnitude based on distance to observer
-	double dist = std::sqrt(meteor.xydistance*meteor.xydistance + pow(meteor.position[2]-meteor.obs[2], 2));
-	if (dist == 0)
-	{
-		dist = .01;    // just to be cautious (meteor hits observer!)
-	}
-	m_distMultiplier = meteor.minDist*meteor.minDist / (dist*dist);
-
-	return m_alive;
+	position.transfo4d(m_matAltAzToRadiant.transpose());
+	position *= 1242;
+	return position;
 }
 
-void Meteor::insertVertex(const StelCore* core, const Mat4d& viewMatrix, QVector<Vec3d> &vertexArray, Vec3d vertex)
+Vec3d Meteor::radiantToAltAz(Vec3d position)
 {
-	vertex.transfo4d(viewMatrix);
-	vertex = core->j2000ToAltAz(vertex);
-	vertex[2] -= EARTH_RADIUS;
-	vertex/=1216; // 1216 is to scale down under 1 for desktop version
-	vertexArray.push_back(vertex);
+	position /= 1242.0; // 1242 to scale down under 1
+	position.transfo4d(m_matAltAzToRadiant);
+	return position;
 }
 
 void Meteor::calculateThickness(const StelCore* core, float& thickness, float& bolideSize)
@@ -281,16 +358,19 @@ void Meteor::calculateThickness(const StelCore* core, float& thickness, float& b
 	if (FOV <= 0.5)
 	{
 		thickness = 0.013 * FOV; // decreasing faster
-	} else if (FOV > 100.0) {
+	}
+	else if (FOV > 100.0)
+	{
 		thickness = 0; // remove prism
 	}
+
 	bolideSize = thickness*3;
 }
 
-void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const MeteorModel& mm,
-			const Mat4d& viewMatrix, const float bolideSize)
+void Meteor::drawBolide(StelPainter& sPainter, const float& bolideSize)
 {
-	if (!bolideSize) {
+	if (!bolideSize || !m_bolideTexture)
+	{
 		return;
 	}
 
@@ -298,32 +378,32 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const Meteo
 	//
 	QVector<Vec3d> vertexArrayBolide;
 	QVector<Vec4f> colorArrayBolide;
-	Vec4f bolideColor = Vec4f(1,1,1,mm.mag);
+	Vec4f bolideColor = Vec4f(1, 1, 1, m_aptMag);
 
-	Vec3d topLeft = mm.position;
+	Vec3d topLeft = m_position;
 	topLeft[1] -= bolideSize;
-	insertVertex(core, viewMatrix, vertexArrayBolide, topLeft);
+	vertexArrayBolide.push_back(radiantToAltAz(topLeft));
 	colorArrayBolide.push_back(bolideColor);
 
-	Vec3d topRight = mm.position;
+	Vec3d topRight = m_position;
 	topRight[0] -= bolideSize;
-	insertVertex(core, viewMatrix, vertexArrayBolide, topRight);
+	vertexArrayBolide.push_back(radiantToAltAz(topRight));
 	colorArrayBolide.push_back(bolideColor);
 
-	Vec3d bottomRight = mm.position;
+	Vec3d bottomRight = m_position;
 	bottomRight[1] += bolideSize;
-	insertVertex(core, viewMatrix, vertexArrayBolide, bottomRight);
+	vertexArrayBolide.push_back(radiantToAltAz(bottomRight));
 	colorArrayBolide.push_back(bolideColor);
 
-	Vec3d bottomLeft = mm.position;
+	Vec3d bottomLeft = m_position;
 	bottomLeft[0] += bolideSize;
-	insertVertex(core, viewMatrix, vertexArrayBolide, bottomLeft);
+	vertexArrayBolide.push_back(radiantToAltAz(bottomLeft));
 	colorArrayBolide.push_back(bolideColor);
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	sPainter.enableClientStates(true, true, true);
-	Meteor::bolideTexture->bind();
+	m_bolideTexture->bind();
 	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
 	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData);
 	sPainter.setColorPointer(4, GL_FLOAT, colorArrayBolide.constData());
@@ -334,11 +414,9 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const Meteo
 	sPainter.enableClientStates(false);
 }
 
-void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const MeteorModel& mm,
-		       const Mat4d& viewMatrix, const float thickness, const int segments,
-		       QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray)
+void Meteor::drawTrain(StelPainter& sPainter, const float& thickness)
 {
-	if (segments != lineColorArray.size() || 2*segments != trainColorArray.size())
+	if (m_segments != m_lineColorVector.size() || 2*m_segments != m_trainColorVector.size())
 	{
 		qWarning() << "Meteor: color arrays have an inconsistent size!";
 		return;
@@ -351,52 +429,50 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const Meteor
 	QVector<Vec3d> vertexArrayR;
 	QVector<Vec3d> vertexArrayTop;
 
-	Vec3d posTrainB = mm.posTrain;
+	Vec3d posTrainB = m_posTrain;
 	posTrainB[0] += thickness*0.7;
 	posTrainB[1] += thickness*0.7;
-	Vec3d posTrainL = mm.posTrain;
+	Vec3d posTrainL = m_posTrain;
 	posTrainL[1] -= thickness;
-	Vec3d posTrainR = mm.posTrain;
+	Vec3d posTrainR = m_posTrain;
 	posTrainR[0] -= thickness;
 
-	for (int i=0; i<segments; i++) {
-		float mag = mm.mag * i/(3* (segments-1));
-		if (i > mm.firstBrightSegment) {
-			mag *= 12./5.;
-		}
-
-		double height = mm.posTrain[2] + i*(mm.position[2] - mm.posTrain[2])/(segments-1);
+	for (int i = 0; i < m_segments; ++i)
+	{
+		double height = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/(m_segments-1);
 		Vec3d posi;
 
-		posi = mm.posTrain;
+		posi = m_posTrain;
 		posi[2] = height;
-		insertVertex(core, viewMatrix, vertexArrayLine, posi);
+		vertexArrayLine.push_back(radiantToAltAz(posi));
 
 		posi = posTrainB;
 		posi[2] = height;
-		insertVertex(core, viewMatrix, vertexArrayL, posi);
-		insertVertex(core, viewMatrix, vertexArrayR, posi);
+		vertexArrayL.push_back(radiantToAltAz(posi));
+		vertexArrayR.push_back(radiantToAltAz(posi));
 
 		posi = posTrainL;
 		posi[2] = height;
-		insertVertex(core, viewMatrix, vertexArrayL, posi);
-		insertVertex(core, viewMatrix, vertexArrayTop, posi);
+		vertexArrayL.push_back(radiantToAltAz(posi));
+		vertexArrayTop.push_back(radiantToAltAz(posi));
 
 		posi = posTrainR;
 		posi[2] = height;
-		insertVertex(core, viewMatrix, vertexArrayR, posi);
-		insertVertex(core, viewMatrix, vertexArrayTop, posi);
+		vertexArrayR.push_back(radiantToAltAz(posi));
+		vertexArrayTop.push_back(radiantToAltAz(posi));
 
-		lineColorArray[i][3] = mag;
-		trainColorArray[i*2][3] = mag;
-		trainColorArray[i*2+1][3] = mag;
+		float mag = m_aptMag * ((float) i / (float) (m_segments-1));
+		m_lineColorVector[i][3] = mag;
+		m_trainColorVector[i*2][3] = mag;
+		m_trainColorVector[i*2+1][3] = mag;
 	}
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
-	if (thickness) {
-		sPainter.setColorPointer(4, GL_FLOAT, trainColorArray.toVector().constData());
+	if (thickness)
+	{
+		sPainter.setColorPointer(4, GL_FLOAT, m_trainColorVector.constData());
 
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
 		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
@@ -407,28 +483,10 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const Meteor
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayTop.constData());
 		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayTop.size(), 0, true);
 	}
-	sPainter.setColorPointer(4, GL_FLOAT, lineColorArray.toVector().constData());
+	sPainter.setColorPointer(4, GL_FLOAT, m_lineColorVector.constData());
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
 
 	glDisable(GL_BLEND);
 	sPainter.enableClientStates(false);
-}
-
-// returns true if visible
-// Assumes that we are in local frame
-void Meteor::draw(const StelCore* core, StelPainter& sPainter)
-{
-	if (!m_alive)
-	{
-		return;
-	}
-
-	float thickness, bolideSize;
-	calculateThickness(core, thickness, bolideSize);
-
-	drawTrain(core, sPainter, meteor, m_viewMatrix, thickness,
-		  m_segments, m_lineColorArray, m_trainColorArray);
-
-	drawBolide(core, sPainter, meteor, m_viewMatrix, bolideSize);
 }

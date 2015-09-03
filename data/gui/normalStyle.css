@@ -132,6 +132,13 @@ QToolTip {
         background: rgb(143, 143, 143);
 }
 
+*[nightMode="true"] QToolTip {
+	color: rgb(4, 0, 0);
+	font-size: 13px;
+	padding: 2px;
+	background: rgb(101, 0, 0);
+}
+
 QLineEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;

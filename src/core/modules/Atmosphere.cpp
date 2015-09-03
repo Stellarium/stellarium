@@ -220,7 +220,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 	else
 		eclipseFactor = 1.f;
-
+	// TODO: compute eclipse factor also for Lunar eclipses! (lp:#1471546)
 
 	// No need to calculate if not visible
 	if (!fader.getInterstate())

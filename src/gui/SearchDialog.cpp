@@ -450,7 +450,7 @@ void SearchDialog::manualPositionChanged()
 		case ecliptic:
 		{
 			double ra, dec;
-			StelUtils::eclToEqu(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), core->getCurrentPlanet()->getRotObliquity(core->getJDay()), &ra, &dec);
+			StelUtils::eclToEqu(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &ra, &dec);
 			StelUtils::spheToRect(ra, dec, pos);
 			pos = core->equinoxEquToJ2000(pos);
 			break;

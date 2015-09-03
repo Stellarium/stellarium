@@ -33,34 +33,37 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class NovaeDialog;
 class StelPainter;
 
-
-typedef QSharedPointer<Nova> NovaP;
-
-/*! @mainpage notitle
-@section overview Plugin Overview
-
+/*! @defgroup brightNovae Bright Novae Plug-in
+@{
 The %Bright Novae plugin displays the positions some bright
 novae in the Milky Way galaxy.
 
-@section ncat Bright Novae Catalog
+<b>Bright Novae Catalog</b>
+
 The novae catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "novae.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file (section [Novae]).
+
+@}
 */
+
+//! @ingroup brightNovae
+typedef QSharedPointer<Nova> NovaP;
 
 //! @class Novae
 //! Main class of the %Bright Novae plugin.
 //! @author Alexander Wolf
+//! @ingroup brightNovae
 class Novae : public StelObjectModule
 {
 	Q_OBJECT
