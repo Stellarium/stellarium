@@ -870,14 +870,17 @@ float Planet::getVMagnitude(const StelCore* core) const
 {
 	if (parent == 0)
 	{
-		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
+		// Sun, compute the apparent magnitude for the absolute mag (V: 4.83) and observer's distance
+		// Hint: Absolute Magnitude of the Sun in Several Bands: http://mips.as.arizona.edu/~cnaw/sun.html
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
 
 		// check how much of it is visible
 		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 		double shadowFactor = ssm->getEclipseFactor(core);
-		if(shadowFactor < 1e-11)
-			shadowFactor = 1e-11;
+		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
+		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
+		if(shadowFactor < 0.0128)
+			shadowFactor = 0.0128;
 
 		return 4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor));
 	}
@@ -1526,7 +1529,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		float eclipseFactor = ssm->getEclipseFactor(core);
 		if (core->getCurrentLocation().planetName == "Earth" && eclipseFactor<0.001f)
-			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 2.f*screenSz, color);
+			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 2.f*screenSz, color, 1.0 - eclipseFactor * 1000);
 	}
 }
 

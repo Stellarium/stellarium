@@ -1914,8 +1914,14 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 // return if sky plus atmosphere is bright enough from sunlight so that e.g. screen labels should be rendered dark.
 bool StelCore::isBrightDaylight() const
 {
-	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
-	return sunPos[2] > -0.12; // Nautical twilight (0.12 > sin (6 deg),
+	bool r = false;
+	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
+	const Vec3d& sunPos = ssys->getSun()->getAltAzPosGeometric(this);
+	if (sunPos[2] > -0.12) // Nautical twilight (0.12 > sin (6 deg))
+		r = true;
+	if (ssys->getEclipseFactor(this)<=0.01) // Total solar eclipse
+		r = false;
+	return r;
 }
 
 double StelCore::getCurrentEpoch() const
