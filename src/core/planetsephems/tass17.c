@@ -3147,6 +3147,7 @@ void CalcAllTass17Elem(const double t,double elem[TASS17_DIM]) {
   int body;
   double lon[7];
   CalcLon(t,lon);
+  // FIXME: why here body<=7 and why body<7 broke drawing orbits?
   for (body=0;body<=7;body++) CalcTass17Elem(t,lon,body,elem+(body*6));
 }
 

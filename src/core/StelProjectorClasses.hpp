@@ -22,8 +22,6 @@
 
 #include "StelProjector.hpp"
 
-#include <limits>
-
 class StelProjectorPerspective : public StelProjector
 {
 public:
@@ -31,26 +29,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 120.f;}
-	bool forward(Vec3f &v) const
-	{
-		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-		if (v[2] < 0) {
-			v[0] /= (-v[2]);
-			v[1] /= (-v[2]);
-			v[2] = r;
-			return true;
-		}
-		if (v[2] > 0) {
-			v[0] /= v[2];
-			v[1] /= v[2];
-			v[2] = -std::numeric_limits<float>::max();
-			return false;
-		}
-		v[0] = std::numeric_limits<float>::max();
-		v[1] = std::numeric_limits<float>::max();
-		v[2] = -std::numeric_limits<float>::max();
-		return false;
-	}
+	bool forward(Vec3f &v) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -68,15 +47,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 360.f;}
-	bool forward(Vec3f &v) const
-	{
-		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-		const float f = std::sqrt(2.f/(r*(r-v[2])));
-		v[0] *= f;
-		v[1] *= f;
-		v[2] = r;
-		return true;
-	}
+	bool forward(Vec3f &v) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -94,23 +65,6 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 235.f;}
-	bool forward(Vec3f &v) const
-	{
-		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-		const float h = 0.5f*(r-v[2]);
-		if (h <= 0.f) {
-			v[0] = std::numeric_limits<float>::max();
-			v[1] = std::numeric_limits<float>::max();
-			v[2] = -std::numeric_limits<float>::min();
-			return false;
-		}
-		const float f = 1.f / h;
-		v[0] *= f;
-		v[1] *= f;
-		v[2] = r;
-		return true;
-	}
-
 	virtual void project(int n, const Vec3d* in, Vec3f* out)
 	{
 		Vec3d v;
@@ -126,6 +80,7 @@ public:
 		}
 	}
 
+	bool forward(Vec3f &v) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -143,28 +98,7 @@ public:
 	virtual QString getNameI18() const;
 	virtual QString getDescriptionI18() const;
 	virtual float getMaxFov() const {return 180.00001f;}
-	bool forward(Vec3f &v) const
-	{
-		const float rq1 = v[0]*v[0] + v[1]*v[1];
-		if (rq1 > 0.f) {
-			const float h = std::sqrt(rq1);
-			const float f = std::atan2(h,-v[2]) / h;
-			v[0] *= f;
-			v[1] *= f;
-			v[2] = std::sqrt(rq1 + v[2]*v[2]);
-			return true;
-		}
-		if (v[2] < 0.f) {
-			v[0] = 0.f;
-			v[1] = 0.f;
-			v[2] = 1.f;
-			return true;
-		}
-		v[0] = std::numeric_limits<float>::max();
-		v[1] = std::numeric_limits<float>::max();
-		v[2] = std::numeric_limits<float>::min();
-		return false;
-	}
+	bool forward(Vec3f &v) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -196,18 +130,7 @@ public:
 			out[i][2] = (out[i][2] - zNear) * oneOverZNearMinusZFar;
 		}
 	}
-	bool forward(Vec3f &v) const
-	{
-		// Hammer Aitoff
-		const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
-		const float alpha = std::atan2(v[0],-v[2]);
-		const float cosDelta = std::sqrt(1.f-v[1]*v[1]/(r*r));
-		float z = std::sqrt(1.+cosDelta*std::cos(alpha/2.f));
-		v[0] = 2.f*M_SQRT2*cosDelta*std::sin(alpha/2.f)/z;
-		v[1] = M_SQRT2*v[1]/r/z;
-		v[2] = r;
-		return true;
-	}
+	bool forward(Vec3f &v) const;
 	bool backward(Vec3d &v) const;
 	float fovToViewScalingFactor(float fov) const;
 	float viewScalingFactorToFov(float vsf) const;
@@ -298,6 +221,17 @@ protected:
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, const Vec3d&) const {return false;}
 	virtual bool intersectViewportDiscontinuityInternal(const Vec3d&, double) const {return false;}
 };
+
+class StelProjectorSinusoidal : public StelProjectorCylinder
+{
+public:
+	StelProjectorSinusoidal(ModelViewTranformP func) : StelProjectorCylinder(func) {;}
+	virtual QString getNameI18() const;
+	virtual QString getDescriptionI18() const;
+	bool forward(Vec3f &win) const;
+	bool backward(Vec3d &v) const;
+};
+
 
 class StelProjector2d : public StelProjector
 {

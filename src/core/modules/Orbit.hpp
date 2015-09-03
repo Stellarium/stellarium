@@ -51,10 +51,10 @@ public:
 	// which is the reference frame for VSOP87
 	// In order to rotate to VSOP87
 	// parentRotObliquity and parentRotAscendingnode must be supplied.
-	void positionAtTimevInVSOP87Coordinates(const double JD, double* v) const;
+	void positionAtTimevInVSOP87Coordinates(const double JDE, double* v) const;
 
 	// Original one
-	Vec3d positionAtTime(const double JD) const;
+	Vec3d positionAtTime(const double JDE) const;
 	double getPeriod() const;
 	double getBoundingRadius() const;
 	virtual void sample(double, double, int, OrbitSampleProc&) const;
@@ -92,13 +92,13 @@ public:
 		   );
 	// Compute the orbit for a specified Julian day and return a "stellarium compliant" function
 	// GZ: new optional variable: updateVelocityVector, true required for dust tail orientation!
-	void positionAtTimevInVSOP87Coordinates(double JD, double* v, bool updateVelocityVector=true);
+	void positionAtTimevInVSOP87Coordinates(double JDE, double* v, bool updateVelocityVector=true);
 	// updating the tails is a bit expensive. try not to overdo it.
 	bool getUpdateTails() const { return updateTails; }
 	void setUpdateTails(const bool update){ updateTails=update; }
-	//! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JD, v, true)
+	//! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JDE, v, true)
 	Vec3d getVelocity() const { return rdot; }
-	bool objectDateValid(const double JD) const { return (fabs(t0-JD)<orbitGood); }
+	bool objectDateValid(const double JDE) const { return (fabs(t0-JDE)<orbitGood); }
 private:
 	const double q;  //! perihel distance
 	const double e;  //! eccentricity
@@ -134,11 +134,11 @@ class CachingOrbit : public Orbit
 public:
 	CachingOrbit() : lastTime(1.0e-30) {} //;
 
-	virtual Vec3d computePosition(double jd) const = 0;
+	virtual Vec3d computePosition(double JDE) const = 0;
 	virtual double getPeriod() const = 0;
 	virtual double getBoundingRadius() const = 0;
 
-	Vec3d positionAtTime(double jd) const;
+	Vec3d positionAtTime(double JDE) const;
 
 	virtual void sample(double, double, int, OrbitSampleProc& proc) const;
 

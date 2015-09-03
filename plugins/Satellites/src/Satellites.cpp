@@ -514,6 +514,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("auto_add_enabled", true);
 	conf->setValue("auto_remove_enabled", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
+	conf->setValue("invisible_satellite_color", "0.2,0.2,0.2");
 	conf->setValue("hint_font_size", 10);
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", false);
@@ -679,6 +680,8 @@ void Satellites::loadSettings()
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
+
+	Satellite::invisibleSatelliteColor = StelUtils::strToVec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString());
 
 	// realistic mode
 	setFlagRelisticMode(conf->value("realistic_mode_enabled", true).toBool());
@@ -1691,7 +1694,7 @@ bool Satellites::checkJsonFileFormat()
 bool Satellites::isValidRangeDates() const
 {
 	bool ok;
-	double tJD = StelApp::getInstance().getCore()->getJDay();
+	double tJD = StelApp::getInstance().getCore()->getJD();
 	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
 	if (lastUpdate.isNull()) // No updates yet?
 		uJD = tJD;

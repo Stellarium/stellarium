@@ -26,6 +26,7 @@
 class Telescope;
 class Lens;
 
+//! @ingroup oculars
 class CCD : public QObject
 {
 	Q_OBJECT

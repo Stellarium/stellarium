@@ -46,8 +46,8 @@ TimeEventSender::TimeEventSender()
 Time TimeEventSender::constructMessage()
 {
 	Time msg;
-	msg.lastTimeSyncTime = core->getMilliSecondsOfLastJDayUpdate();
-	msg.jDay = core->getJDayOfLastJDayUpdate();
+	msg.lastTimeSyncTime = core->getMilliSecondsOfLastJDUpdate();
+	msg.jDay = core->getJDOfLastJDUpdate();
 	msg.timeRate = core->getTimeRate();
 	return msg;
 }

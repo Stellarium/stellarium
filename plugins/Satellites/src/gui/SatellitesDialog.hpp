@@ -38,6 +38,7 @@ class SatellitesListFilterModel;
 
 //! Main configuration window of the %Satellites plugin.
 //! @todo Save sources list on check/uncheck.
+//! @ingroup satellites
 class SatellitesDialog : public StelDialog
 {
 	Q_OBJECT
@@ -93,7 +94,6 @@ private slots:
 	void trackSatellite(const QModelIndex & index);
 	void setOrbitParams(void);
 	void updateTLEs(void);
-	void repaintSourceList(void);
 
 private:
 	//! @todo find out if this is really necessary... --BM

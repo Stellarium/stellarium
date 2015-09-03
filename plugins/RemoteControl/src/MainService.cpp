@@ -151,21 +151,16 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 
 		//// Time related stuff
 		{
-			double jday = core->getJDay();
-			double deltaT = 0;
-			if(loc.planetName == "Earth")
-			{
-				//apply deltaT on Earth
-				deltaT = core->getDeltaT(jday) * StelCore::JD_SECOND;
-			}
-			double correctedTime = jday - deltaT;
-			double gmtShift = localeMgr->getGMTShift(correctedTime) / 24.0;
+			double jday = core->getJD();
+			double deltaT = core->getDeltaT() * StelCore::JD_SECOND;
 
-			QString utcIso = StelUtils::julianDayToISO8601String(correctedTime,true).append('Z');
-			QString localIso = StelUtils::julianDayToISO8601String(correctedTime+gmtShift,true);
+			double gmtShift = localeMgr->getGMTShift(jday) / 24.0;
+
+			QString utcIso = StelUtils::julianDayToISO8601String(jday,true).append('Z');
+			QString localIso = StelUtils::julianDayToISO8601String(jday+gmtShift,true);
 
 			//time zone string
-			QString timeZone = localeMgr->getPrintableTimeZoneLocal(correctedTime);
+			QString timeZone = localeMgr->getPrintableTimeZoneLocal(jday);
 
 			QJsonObject obj2;
 			obj2.insert("jday",jday);
@@ -250,7 +245,7 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 				{
 					doneSomething = true;
 					//set new time
-					QMetaObject::invokeMethod(core,"setJDay", SERVICE_DEFAULT_INVOKETYPE,
+					QMetaObject::invokeMethod(core,"setJD", SERVICE_DEFAULT_INVOKETYPE,
 								  Q_ARG(double,jday));
 				}
 			}

@@ -42,6 +42,7 @@ QT_END_NAMESPACE
 
 class Oculars;
 
+//! @ingroup oculars
 class OcularDialog : public StelDialog
 {
 	Q_OBJECT

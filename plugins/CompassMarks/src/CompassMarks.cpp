@@ -196,6 +196,9 @@ void CompassMarks::setCompassMarks(bool b)
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(cardinalPointsState);
 	}
 	markFader = b;
+	// autosaving the state by default
+	displayedAtStartup = b;
+	saveConfiguration();
 	emit compassMarksChanged(b);
 }
 
