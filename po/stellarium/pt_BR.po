@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-30 11:40+0600\n"
-"PO-Revision-Date: 2015-09-02 05:08+0000\n"
+"PO-Revision-Date: 2015-09-03 04:11+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-02 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-09-03 05:13+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -275,7 +275,7 @@ msgstr "Grandeza: %1"
 #: src/core/modules/Nebula.cpp:221
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr "Tamanho: %1 × %2"
+msgstr "Grandeza: %1 × %2"
 
 #: src/core/modules/Nebula.cpp:223
 #, qt-format
@@ -4696,7 +4696,7 @@ msgstr "Encontrar objeto"
 
 #: src/ui_searchDialogGui.h:618 src/ui_searchDialogGui.h:622
 msgid "Use tab key for select of found items"
-msgstr "Utilizar a tecla de tabulação para a seleção de itens encontrados"
+msgstr "Utilize a tecla de tabulação para a seleção de itens encontrados"
 
 #: src/ui_searchDialogGui.h:627
 msgid "iota"
@@ -5155,7 +5155,7 @@ msgstr "Exibir linhas"
 
 #: src/ui_viewDialog.h:1688
 msgid "Show labels"
-msgstr "Exibir rótulos"
+msgstr "Exibir os rótulos"
 
 #: src/ui_viewDialog.h:1689
 msgid "Show boundaries"
@@ -5193,7 +5193,7 @@ msgstr "Grade equatorial (J2000)"
 
 #: src/ui_viewDialog.h:1702
 msgid "Equatorial coordinates of current date and planet."
-msgstr "Coordenadas equatoriais da data e do planeta atuais."
+msgstr "Coordenadas equatoriais da data e do planeta atuais"
 
 #: src/ui_viewDialog.h:1704
 msgid "Equatorial grid (of date)"
@@ -5201,7 +5201,7 @@ msgstr "Grade equatorial (da data)"
 
 #: src/ui_viewDialog.h:1706
 msgid "Ecliptical coordinates for J2000.0."
-msgstr "Coordenadas eclípticas para J2000.0."
+msgstr "Coordenadas eclípticas para J2000.0"
 
 #: src/ui_viewDialog.h:1708
 msgid "Ecliptic grid (J2000)"
@@ -5209,7 +5209,7 @@ msgstr "Grade eclíptica (J2000)"
 
 #: src/ui_viewDialog.h:1710
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr "Coordenadas eclípticas para a data atual. Exibidas somente na Terra."
+msgstr "Coordenadas eclípticas para a data atual; exibidas somente na Terra"
 
 #: src/ui_viewDialog.h:1712
 msgid "Ecliptic grid (of date)"
@@ -5217,16 +5217,15 @@ msgstr "Grade eclíptica (da data)"
 
 #: src/ui_viewDialog.h:1714
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
-"Altitudes e azimute (contados a partir do norte em direção ao leste)."
+msgstr "Altitudes e azimute (contados a partir do norte em direção ao leste)"
 
 #: src/ui_viewDialog.h:1718
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr "Coordenadas galácticas, Sistema II (UAI 1958)."
+msgstr "Coordenadas galácticas, Sistema II (UAI 1958)"
 
 #: src/ui_viewDialog.h:1722
 msgid "Labels for the Cardinal directions."
-msgstr "Rótulos para os pontos cardeais."
+msgstr "Rótulos para os pontos cardeais"
 
 #: src/ui_viewDialog.h:1726
 msgid ""
@@ -5234,7 +5233,7 @@ msgid ""
 "Displayed on Earth only."
 msgstr ""
 "Círculos instantâneos do eixo terrestre em seu movimento ao redor dos polos "
-"eclípticos. Exibidos somente na Terra."
+"eclípticos. Exibidos somente na Terra"
 
 #: src/ui_viewDialog.h:1728
 msgid "Precession circles"
@@ -5250,7 +5249,7 @@ msgstr "Equador (J2000)"
 
 #: src/ui_viewDialog.h:1734
 msgid "Show celestial equator of current planet and date."
-msgstr "Exibir o equador celeste do planeta e da data atuais."
+msgstr "Exibir o equador celeste do planeta e da data atuais"
 
 #: src/ui_viewDialog.h:1736
 msgid "Equator (of date)"
@@ -5258,7 +5257,7 @@ msgstr "Equador (da data)"
 
 #: src/ui_viewDialog.h:1738
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr "Exibir a linha eclíptica de J2000.0 (plano fundamental VSOP87A)."
+msgstr "Exibir a linha eclíptica de J2000.0 (plano fundamental VSOP87A)"
 
 #: src/ui_viewDialog.h:1740
 msgid "Ecliptic (J2000)"
@@ -5266,7 +5265,7 @@ msgstr "Eclíptica (J2000)"
 
 #: src/ui_viewDialog.h:1742
 msgid "Show ecliptic line of current date."
-msgstr "Exibir a linha eclíptica da data atual."
+msgstr "Exibir a linha eclíptica da data atual"
 
 #: src/ui_viewDialog.h:1744
 msgid "Ecliptic (of date)"
@@ -5274,24 +5273,24 @@ msgstr "Eclíptica (da data)"
 
 #: src/ui_viewDialog.h:1746
 msgid "Show horizon line."
-msgstr "Exibir a linha do horizonte."
+msgstr "Exibir a linha do horizonte"
 
 #: src/ui_viewDialog.h:1750
 msgid "Show Galactic equator line."
-msgstr "Exibir a linha do equador galáctico."
+msgstr "Exibir a linha do equador galáctico"
 
 #: src/ui_viewDialog.h:1754
 msgid "Show meridian line."
-msgstr "Exibir a linha do meridiano."
+msgstr "Exibir a linha do meridiano"
 
 #: src/ui_viewDialog.h:1758
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
-"<p align=\"justify\">Linha de longitude de oposição/conjunção – a linha da "
-"longitude eclíptica que passa através de ambos os polos eclípticos, pelo Sol "
-"e pelo ponto de oposição."
+"Linha de longitude de oposição/conjunção – a linha da longitude eclíptica "
+"que passa através de ambos os polos eclípticos, pelo Sol e pelo ponto de "
+"oposição"
 
 #: src/ui_viewDialog.h:1761
 msgid "Projection"
@@ -5307,15 +5306,15 @@ msgstr "Utilizar esta paisagem como padrão"
 
 #: src/ui_viewDialog.h:1765
 msgid "Use associated planet and position"
-msgstr "Utilizar planeta e posição associados"
+msgstr "Utilizar o planeta e a posição associados"
 
 #: src/ui_viewDialog.h:1766
 msgid "Show fog"
-msgstr "Exibir névoa"
+msgstr "Exibir a névoa"
 
 #: src/ui_viewDialog.h:1767
 msgid "Show ground"
-msgstr "Exibir superfície"
+msgstr "Exibir a superfície"
 
 #: src/ui_viewDialog.h:1769
 msgid "Use minimal brightness to leave landscape visible also in darkness"
@@ -5344,7 +5343,7 @@ msgstr "da paisagem, se fornecido"
 
 #: src/ui_viewDialog.h:1779
 msgid "Show landscape labels"
-msgstr "Exibir rótulos das paisagens"
+msgstr "Exibir os rótulos das paisagens"
 
 #: src/ui_viewDialog.h:1780
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -5543,15 +5542,15 @@ msgstr "Magnitude visual"
 
 #: src/ui_configurationDialog.h:1088
 msgid "Angular or physical size"
-msgstr "Tamanho físico ou angular"
+msgstr "Dimensão física ou angular"
 
 #: src/ui_configurationDialog.h:1090
 msgid "Size"
-msgstr "Tamanho"
+msgstr "Dimensão"
 
 #: src/ui_configurationDialog.h:1092
 msgid "The type of the object (star, planet, etc.)"
-msgstr "O tipo do objeto (estrela, planeta, etc.)"
+msgstr "Tipo de objeto (estrela, planeta, etc.)"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Spectral class, nebula type, etc."
@@ -5586,7 +5585,7 @@ msgstr "Distância"
 #: src/ui_configurationDialog.h:1109
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
-"Coordenadas eclípticas, equinócio da data e de J2000 (apenas para a Terra)."
+"Coordenadas eclípticas, equinócio da data e de J2000 (apenas para a Terra)"
 
 #: src/ui_configurationDialog.h:1111
 msgid "Ecliptic coordinates"
@@ -5766,7 +5765,7 @@ msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "A nutação é uma pequena oscilação do eixo da Terra, no valor de alguns "
-"segundos de arco."
+"segundos de arco"
 
 #: src/ui_configurationDialog.h:1191
 msgid "Include nutation"
@@ -5779,7 +5778,7 @@ msgid ""
 msgstr ""
 "Ative esta opção para visualizar como seriam vistas as coisas da superfície "
 "do planeta (recomendado). Se estiver desativada, será exibida a visão "
-"planetocêntrica."
+"planetocêntrica"
 
 #: src/ui_configurationDialog.h:1195
 msgid "Topocentric coordinates"
@@ -5791,7 +5790,7 @@ msgid ""
 "astronomical literature)."
 msgstr ""
 "Ative esta opção para calcular o azimute a partir do sul em direção ao oeste "
-"(como em literatura astronômica antiga)."
+"(como em literatura astronômica antiga)"
 
 #: src/ui_configurationDialog.h:1199
 msgid "Azimuth from South"
@@ -8106,7 +8105,7 @@ msgstr "Interface gráfica de usuário"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:410
 msgid "Show telescope labels"
-msgstr "Exibir rótulos dos telescópios"
+msgstr "Exibir os rótulos dos telescópios"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
 msgid "Show telescope reticles"
@@ -11210,7 +11209,7 @@ msgstr "Exibir a marcação do radiante"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
-msgstr "Exibir rótulos do radiante"
+msgstr "Exibir os rótulos dos radiantes"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
@@ -11599,7 +11598,7 @@ msgstr "O tamanho do mapa cúbico foi alterado"
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr "O tamanho do mapa cúbico não é suportado. Altere-o para %1."
+msgstr "O tamanho do mapa cúbico não é suportado. Altere-o para %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
@@ -11608,7 +11607,7 @@ msgstr "O tamanho do mapa umbral foi alterado"
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr "O tamanho do mapa umbral não é suportado. Altere-o para %1."
+msgstr "O tamanho do mapa umbral não é suportado. Altere-o para %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
 msgid "3D Sceneries"
