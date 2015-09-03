@@ -468,7 +468,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 }
 
 // Draw's the Sun's corona during a solar eclipse on Earth.
-void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color)
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha)
 {
 	texSunCorona->bind();
 	glEnable(GL_BLEND);
@@ -477,7 +477,7 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float ra
 
 	Vec3f win;
 	painter->getProjector()->project(v, win);
-	painter->setColor(color[0], color[1], color[2]);
+	painter->setColor(color[0], color[1], color[2], alpha);
 	painter->drawSprite2dMode(win[0], win[1], radius);
 
 	postDrawPointSource(painter);
