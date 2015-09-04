@@ -335,6 +335,19 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString(q_("Phase: %1")).arg(phase) << "<br>";
 			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
 		}
+		if (englishName=="Sun")
+		{
+			// Only show during eclipse, show percent?
+			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			// Debug solution:
+//			float eclipseFactor = ssystem->getEclipseFactor(core);
+//			oss << QString(q_("Eclipse Factor: %1 alpha: %2")).arg(eclipseFactor).arg(-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor))) << "<br>";
+			// Release version:
+			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
+			if (eclipseFactor>0.f)
+				oss << QString(q_("Eclipse Factor: %1%")).arg(eclipseFactor) << "<br>";
+
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -879,8 +892,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 		double shadowFactor = ssm->getEclipseFactor(core);
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
-		if(shadowFactor < 0.0128)
-			shadowFactor = 0.0128;
+		if(shadowFactor < 0.000128)
+			shadowFactor = 0.000128;
 
 		return 4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor));
 	}
@@ -1526,9 +1539,13 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		Vec3d tmp = getJ2000EquatorialPos(core);
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
 
-		float eclipseFactor = ssm->getEclipseFactor(core);
-		if (core->getCurrentLocation().planetName == "Earth" && eclipseFactor<0.001f)
-			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 2.f*screenSz, color, 1.0 - eclipseFactor * 1000);
+		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
+		{
+			float eclipseFactor = ssm->getEclipseFactor(core);
+			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
+			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));
+			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 2.f*screenSz, color, alpha*alpha);
+		}
 	}
 }
 
