@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CustomDeltaTEquationDialogForm</class>
- <widget class="QWidget" name="CustomDeltaTEquationDialogForm">
+ <class>atmosphereDialogForm</class>
+ <widget class="QWidget" name="AtmosphereDialogForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>168</width>
-    <height>261</height>
+    <width>330</width>
+    <height>190</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -73,7 +73,7 @@
          <font/>
         </property>
         <property name="text">
-         <string/>
+         <string>Atmosphere Details</string>
         </property>
        </widget>
       </item>
@@ -116,133 +116,122 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="customDeltaTEquationGroupBox">
+    <widget class="QGroupBox" name="atmosphereGroupBox">
      <property name="title">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <string>Refraction Settings</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="margin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QLabel" name="labelDescription">
-        <property name="text">
-         <string notr="true">description</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelEquation">
-        <property name="text">
-         <string notr="true">equation</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::RichText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelSubEquation">
-        <property name="text">
-         <string notr="true">subequation</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="pressureLayout">
         <item>
-         <widget class="QLabel" name="labelCoefficientA">
+         <widget class="QLabel" name="pressureLabel">
           <property name="text">
-           <string notr="true">a:</string>
+           <string>Pressure (mbar):</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEditCoefficientA">
+         <widget class="QDoubleSpinBox" name="pressureDoubleSpinBox">
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="maximum">
+           <double>1500.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>1013.250000000000000</double>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <layout class="QHBoxLayout" name="temperatureLayout">
         <item>
-         <widget class="QLabel" name="labelCoefficientB">
+         <widget class="QLabel" name="temperatureLabel">
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
+          </property>
           <property name="text">
-           <string notr="true">b:</string>
+           <string>Temperature (C):</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEditCoefficientB">
+         <widget class="QDoubleSpinBox" name="temperatureDoubleSpinBox">
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="minimum">
+           <double>-100.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>10.000000000000000</double>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <layout class="QHBoxLayout" name="extinctionLayout">
         <item>
-         <widget class="QLabel" name="labelCoefficientC">
+         <widget class="QLabel" name="extinctionLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="whatsThis">
+           <string>Extinction is the loss of star brightness due to Earth's atmosphere. It is given in mag/airmass, where airmass is number of atmospheres light has to pass. (zenith: 1; horizon: about 40)</string>
+          </property>
           <property name="text">
-           <string notr="true">c:</string>
+           <string>Extinction Coefficient:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEditCoefficientC">
+         <widget class="QDoubleSpinBox" name="extinctionDoubleSpinBox">
+          <property name="toolTip">
+           <string>Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 for murky conditions.</string>
+          </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="maximum">
+           <double>3.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.220000000000000</double>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QLabel" name="labelYear">
-          <property name="text">
-           <string notr="true">y:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEditYear">
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <widget class="QLabel" name="labelNDot">
-          <property name="text">
-           <string notr="true">ndot:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEditNDot">
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>

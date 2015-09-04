@@ -21,45 +21,13 @@
 #include "MeteorObj.hpp"
 
 MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha, const float& radiantDelta,
-		     const float& pidx, QList<Meteor::colorPair> colors, const StelTextureSP& bolideTexture)
+		     const float& pidx, QList<Meteor::ColorPair> colors, const StelTextureSP& bolideTexture)
 	: Meteor(core, bolideTexture)
 {
 	// if speed is zero, use a random value
 	if (!speed)
 	{
 		speed = 11 + (double)qrand() / ((double)RAND_MAX + 1) * 61;  // abs range 11-72 km/s
-	}
-
-	// determine the meteor color
-	if (colors.isEmpty()) {
-		colors.push_back(Meteor::colorPair("white", 100));
-	} else {
-		// handle cases when the total intensity is less than 100
-		int totalIntensity = 0;
-		int indexWhite = -1;
-		for (int i=0; i < colors.size(); ++i) {
-			totalIntensity += colors.at(i).second;
-			if (colors.at(i).first == "white") {
-				indexWhite = i;
-			}
-		}
-
-		int increaseWhite = 0;
-		if (totalIntensity > 100) {
-			qWarning() << "MeteorShowers plugin (showers.json): Total intensity must be less than 100";
-			colors.clear();
-			colors.push_back(Meteor::colorPair("white", 100));
-		} else {
-			increaseWhite = 100 - totalIntensity;
-		}
-
-		if (increaseWhite > 0) {
-			if (indexWhite == -1) {
-				colors.push_back(Meteor::colorPair("white", increaseWhite));
-			} else {
-				colors[indexWhite].second = increaseWhite;
-			}
-		}
 	}
 
 	// building meteor model
@@ -70,13 +38,17 @@ MeteorObj::MeteorObj(const StelCore* core, int speed, const float& radiantAlpha,
 		return;
 	}
 
-	// implements the population index
-	float oneMag = -0.2; // negative, working in different scale ( 0 to 1 - where 1 is brighter)
-	if (pidx) // is not zero
+	// implements the population index (pidx) - usually a decimal between 2 and 4
+	if (pidx > 1.f)
 	{
-		if (qrand()%100 < 100.f/pidx) // probability
+		// higher pidx implies a larger fraction of faint meteors than average
+		float prob = (float) qrand() / ((float) RAND_MAX + 1);
+		if (prob > 1.f / pidx)
 		{
-			setAbsMag(absMag() + oneMag);  // (m+1)
+			// Increase the absolute magnitude ([-3; 4.5]) in 1.5!
+			// As we are working on a 0-1 scale (where 1 is brighter),
+			// more 1.5 means less 0.2!
+			setAbsMag(absMag() - 0.2f);
 		}
 	}
 }

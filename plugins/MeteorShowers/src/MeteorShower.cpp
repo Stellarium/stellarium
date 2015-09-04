@@ -161,13 +161,27 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 
 	if(map.contains("colors"))
 	{
+		int totalIntensity = 0;
 		foreach(const QVariant &ms, map.value("colors").toList())
 		{
 			QVariantMap colorMap = ms.toMap();
 			QString color = colorMap.value("color").toString();
 			int intensity = colorMap.value("intensity").toInt();
-			m_colors.append(Meteor::colorPair(color, intensity));
+			m_colors.append(Meteor::ColorPair(color, intensity));
+			totalIntensity += intensity;
 		}
+
+		// the total intensity must be 100
+		if (totalIntensity != 100) {
+			qWarning() << "MeteorShower: INVALID data for "
+				   << m_showerID << "The total intensity must be equal to 100";
+			qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
+			m_colors.clear();
+		}
+	}
+
+	if (m_colors.isEmpty()) {
+		m_colors.push_back(Meteor::ColorPair("white", 100));
 	}
 
 	m_status = UNDEFINED;
@@ -283,7 +297,10 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 		{
 			MeteorObj *m = new MeteorObj(core, m_speed, m_radiantAlpha, m_radiantDelta,
 						     m_pidx, m_colors, m_mgr->getBolideTexture());
-			m_activeMeteors.append(m);
+			if (m->isAlive())
+			{
+				m_activeMeteors.append(m);
+			}
 		}
 	}
 }

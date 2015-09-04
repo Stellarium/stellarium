@@ -128,7 +128,7 @@ private:
 	float m_driftDelta;                //! Drift of Dec. for each day from peak
 	QString m_parentObj;               //! Parent object for meteor shower
 	float m_pidx;                      //! The population index
-	QList<Meteor::colorPair> m_colors; //! <colorName, 0-100>
+	QList<Meteor::ColorPair> m_colors; //! <colorName, 0-100>
 
 	//current information
 	Vec3d m_position;                  //! Cartesian equatorial position

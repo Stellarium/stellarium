@@ -77,9 +77,11 @@ void NebulaMgr::setHintsProportional(const bool proportional) {Nebula::drawHintP
 bool NebulaMgr::getHintsProportional(void) const {return Nebula::drawHintProportional;}
 
 NebulaMgr::NebulaMgr(void)
-	: nebGrid(200),
-	  hintsAmount(0),
-	  labelsAmount(0)
+	: nebGrid(200)
+	, hintsAmount(0)
+	, labelsAmount(0)
+	, flagConverter(false)
+	, flagDecimalCoordinates(true)
 {
 	setObjectName("NebulaMgr");
 }
@@ -355,8 +357,8 @@ void NebulaMgr::setStelStyle(const QString& section)
 	setDarkNebulaColor(StelUtils::strToVec3f(conf->value(section+"/nebula_darkneb_color", "0.3,0.3,0.3").toString()));
 	setClusterColor(StelUtils::strToVec3f(conf->value(section+"/nebula_cluster_color", "1.0,1.0,0.1").toString()));
 	setRadioGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_radioglx_color", "0.3,0.3,0.3").toString()));
-	setActiveGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_activeglx_color", "1.0,0.2,0.2").toString()));
-	setInteractingGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_intglx_color", "1.0,0.2,0.2").toString()));
+	setActiveGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_activeglx_color", "1.0,0.5,0.2").toString()));
+	setInteractingGalaxyColor(StelUtils::strToVec3f(conf->value(section+"/nebula_intglx_color", "0.2,0.5,1.0").toString()));
 	setHydrogenRegionColor(StelUtils::strToVec3f(conf->value(section+"/nebula_hregion_color", "0.1,1.0,0.1").toString()));
 	setSupernovaRemnantColor(StelUtils::strToVec3f(conf->value(section+"/nebula_snr_color", "0.1,1.0,0.1").toString()));
 }
@@ -723,14 +725,16 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			majorAxisSize /= 60.f;	// Convert from arcmin to degrees
 			minorAxisSize /= 60.f;	// Convert from arcmin to degrees
 
-			if (bMag < 1.f) bMag = 99.f;
-			if (vMag < 1.f) vMag = 99.f;
+			// Warning: Hyades and LMC has visual magnitude less than 1.0 (0.5^m and 0.9^m)
+			if (bMag <= 0.f) bMag = 99.f;
+			if (vMag <= 0.f) vMag = 99.f;
 
 			QStringList oTypes;
 			oTypes << "G" << "GX" << "GC" << "OC" << "NB" << "PN" << "DN" << "RN" << "C+N"
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
-			       << "BLL" << "BLA" << "MOC" << "YSO";
+			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
+			       << "IR" << "**" << "MUL";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -751,6 +755,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebPn;
 					break;
 				case 6:
+				case 34:
 					nType = (unsigned int)Nebula::NebDn;
 					break;
 				case 7:
@@ -809,10 +814,22 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					nType = (unsigned int)Nebula::NebBLA;
 					break;
 				case 28:
+				case 33:
 					nType = (unsigned int)Nebula::NebMolCld;
 					break;
 				case 29:
 					nType = (unsigned int)Nebula::NebYSO;
+					break;
+				case 30:
+					nType = (unsigned int)Nebula::NebPossQSO;
+					break;
+				case 31:
+					nType = (unsigned int)Nebula::NebPossPN;
+					break;
+				case 32:
+				case 35:
+				case 36:
+					nType = (unsigned int)Nebula::NebStar;
 					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
@@ -2047,7 +2064,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 		case 0: // Bright galaxies?
 			foreach(const NebulaP& n, dsoArray)
 			{
-				if (n->nType==type && n->mag<=10.)
+				if (n->nType==type && qMin(n->vMag, n->bMag)<=10.)
 				{
 					if (!n->getEnglishName().isEmpty())
 					{

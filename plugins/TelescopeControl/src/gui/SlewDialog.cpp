@@ -40,11 +40,13 @@ SlewDialog::SlewDialog()
 	
 	//TODO: Fix this - it's in the same plugin
 	telescopeManager = GETSTELMODULE(TelescopeControl);
+	storedPointsDialog = NULL;
 }
 
 SlewDialog::~SlewDialog()
 {	
 	delete ui;
+	storedPointsDialog = NULL;
 }
 
 void SlewDialog::retranslate()
