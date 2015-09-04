@@ -33,7 +33,7 @@ public:
 	virtual ~SporadicMeteor();
 
 private:
-	QList<colorPair> getRandColor();
+	QList<ColorPair> getRandColor();
 };
 
 

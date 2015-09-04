@@ -26,7 +26,7 @@ QT5_WRAP_UI(TimeZoneConfiguration_UIS_H ${TimeZoneConfiguration_UIS})
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
 ADD_LIBRARY(TimeZoneConfiguration-static STATIC ${TimeZoneConfiguration_SRCS} ${TimeZoneConfiguration_RES_CXX} ${TimeZoneConfiguration_UIS_H})
-QT5_USE_MODULES(TimeZoneConfiguration-static Core Declarative Network)
+QT5_USE_MODULES(TimeZoneConfiguration-static Core Network Gui Widgets)
 SET_TARGET_PROPERTIES(TimeZoneConfiguration-static PROPERTIES OUTPUT_NAME "TimeZoneConfiguration")
 TARGET_LINK_LIBRARIES(TimeZoneConfiguration-static ${extLinkerOption})
 SET_TARGET_PROPERTIES(TimeZoneConfiguration-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

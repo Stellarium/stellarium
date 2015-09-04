@@ -159,7 +159,10 @@ private:
 		NebBLA		= 22,	//!< Blazar
 		NebMolCld	= 23, 	//!< Molecular Cloud
 		NebYSO		= 24, 	//!< Young Stellar Object
-		NebUnknown	= 25	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebPossQSO	= 25, 	//!< Possible Quasar
+		NebPossPN	= 26, 	//!< Possible Planetary Nebula
+		NebStar		= 27, 	//!< Star
+		NebUnknown	= 28	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
@@ -194,8 +197,7 @@ private:
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString englishName;            // English name
 	QString nameI18;                // Nebula name
-	QString mTypeString;		// Morphological type of object (as string)
-	float mag;                      // Apparent magnitude. For Dark Nebulae, opacity is stored here. -- OUTDATED!
+	QString mTypeString;		// Morphological type of object (as string)	
 	float bMag;                     // B magnitude
 	float vMag;                     // V magnitude. For Dark Nebulae, opacity is stored here.	
 	float majorAxisSize;		// Major axis size in degrees
