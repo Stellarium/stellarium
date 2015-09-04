@@ -69,7 +69,8 @@ SolarSystem::SolarSystem()
 	, flagMarker(false)
 	, flagNativeNames(false)
 	, flagTranslatedNames(false)
-	, flagIsolatedTrails(false)
+	, flagIsolatedTrails(true)
+	, flagIsolatedOrbits(true)
 	, allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());

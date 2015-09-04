@@ -18,6 +18,8 @@
  */
 
 #include "SporadicMeteor.hpp"
+#include "StelCore.hpp"
+#include "StelUtils.hpp"
 
 SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture)
 	: Meteor(core, bolideTexture)
@@ -26,10 +28,18 @@ SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const 
 	// (see line 460 in StelApp.cpp)
 	float speed = 11 + (maxVel - 11) * ((float) qrand() / ((float) RAND_MAX + 1)); // [11, maxVel]
 
-	// radiant position
-	float rAlpha = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 2pi]
-	float rDelta = M_PI_2 - M_PI * ((float) qrand() / ((double) RAND_MAX + 1));  // [-pi/2, pi/2]
+	// select a random radiant in a visible area
+	float rAlt = M_PI_2 * ((float) qrand() / ((double) RAND_MAX + 1));  // [0, pi/2]
+	float rAz = 2 * M_PI * ((float) qrand() / ((float) RAND_MAX + 1));  // [0, 2pi]
+	Vec3d pos;
+	StelUtils::spheToRect(rAz, rAlt, pos);
 
+	// convert to J2000
+	float rAlpha, rDelta;
+	pos = core->altAzToJ2000(pos);
+	StelUtils::rectToSphe(&rAlpha, &rDelta, pos);
+
+	// initialize the meteor model
 	init(rAlpha, rDelta, speed, getRandColor());
 }
 
@@ -37,30 +47,30 @@ SporadicMeteor::~SporadicMeteor()
 {
 }
 
-QList<Meteor::colorPair> SporadicMeteor::getRandColor()
+QList<Meteor::ColorPair> SporadicMeteor::getRandColor()
 {
-	QList<colorPair> colors;
+	QList<ColorPair> colors;
 	float prob = (float) qrand() / (float) RAND_MAX;
 	if (prob > 0.9f)
 	{
-		colors.push_back(Meteor::colorPair("white", 70));
-		colors.push_back(Meteor::colorPair("orangeYellow", 10));
-		colors.push_back(Meteor::colorPair("yellow", 10));
-		colors.push_back(Meteor::colorPair("blueGreen", 10));
+		colors.push_back(Meteor::ColorPair("white", 70));
+		colors.push_back(Meteor::ColorPair("orangeYellow", 10));
+		colors.push_back(Meteor::ColorPair("yellow", 10));
+		colors.push_back(Meteor::ColorPair("blueGreen", 10));
 	}
 	else if (prob > 0.85f)
 	{
-		colors.push_back(Meteor::colorPair("white", 80));
-		colors.push_back(Meteor::colorPair("violet", 20));
+		colors.push_back(Meteor::ColorPair("white", 80));
+		colors.push_back(Meteor::ColorPair("violet", 20));
 	}
 	else if (prob > 0.80f)
 	{
-		colors.push_back(Meteor::colorPair("white", 80));
-		colors.push_back(Meteor::colorPair("orangeYellow", 20));
+		colors.push_back(Meteor::ColorPair("white", 80));
+		colors.push_back(Meteor::ColorPair("orangeYellow", 20));
 	}
 	else
 	{
-		colors.push_back(Meteor::colorPair("white", 100));
+		colors.push_back(Meteor::ColorPair("white", 100));
 	}
 
 	return colors;

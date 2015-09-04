@@ -483,7 +483,6 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float ra
 	postDrawPointSource(painter);
 }
 
-
 // Terminate drawing of a 3D model, draw the halo
 void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color)
 {

@@ -39,7 +39,7 @@ public:
 	//! @param colors Meteor color.
 	//! @param bolideTexture Bolide texture.
 	MeteorObj(const StelCore*, int speed, const float& radiantAlpha, const float& radiantDelta,
-		  const float& pidx, QList<Meteor::colorPair> colors, const StelTextureSP& bolideTexture);
+		  const float& pidx, QList<Meteor::ColorPair> colors, const StelTextureSP& bolideTexture);
 	virtual ~MeteorObj();
 };
 

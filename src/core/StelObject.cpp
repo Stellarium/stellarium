@@ -106,7 +106,8 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app);
@@ -117,9 +118,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_j2000, ra_j2000;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
 		if (withDecimalDegree)
-			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDecDegStr(ra_j2000,5,false,true), StelUtils::radToDecDegStr(dec_j2000)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDecDegStr(ra_j2000,5,false,true), StelUtils::radToDecDegStr(dec_j2000)) + "<br>";
 		else
-			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
 	}
 
 	if (flags&RaDecOfDate)
@@ -173,7 +174,10 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		// calculate alt az
 		double az,alt;
 		StelUtils::rectToSphe(&az,&alt,getAltAzPosGeometric(core));
-		az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+		float direction = 3.; // N is zero, E is 90 degrees
+		if (useOldAzimuth)
+			direction = 2.;
+		az = direction*M_PI - az;
 		if (az > M_PI*2)
 			az -= M_PI*2;
 		if (withAtmosphere && (alt_app>-3.0*M_PI/180.0)) // Don't show refracted altitude much below horizon where model is meaningless.
@@ -207,9 +211,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
 		if (withDecimalDegree)
-			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
+			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDecDegStr(lambda), StelUtils::radToDecDegStr(beta)) + "<br>";
 		else
-			res += q_("Ecliptic longitude/latitude") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+			res += q_("Ecliptic longitude/latitude") + QString(" (J2000.0): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 
 		if (core->getCurrentPlanet()->getEnglishName()=="Earth")
 		{
@@ -270,7 +274,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	{
 		Vec3f color = getInfoColor();
 		StelCore* core = StelApp::getInstance().getCore();
-		if (core->isBrightDaylight() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
+		if (core->isBrightDaylight() && core->getSkyDrawer()->getFlagHasAtmosphere()==true && !StelApp::getInstance().getVisionModeNight())
 		{
 			// make info text more readable when atmosphere enabled at daylight.
 			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_text_color", "0.0,0.0,0.0").toString());

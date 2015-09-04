@@ -81,8 +81,18 @@ Nebula::Nebula()
 	, PGC_nb(0)
 	, UGC_nb(0)
 	, Ced_nb()
+	, mTypeString()
 	, bMag(99.)
 	, vMag(99.)
+	, majorAxisSize(0.)
+	, minorAxisSize(0.)
+	, orientationAngle(0)
+	, oDistance(0.)
+	, oDistanceErr(0.)
+	, redshift(99.)
+	, redshiftErr(0.)
+	, parallax(0.)
+	, parallaxErr(0.)
 	, nType()	
 {
 	nameI18 = "";	
@@ -214,6 +224,53 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 	}
 
+	if (flags&Distance)
+	{
+		if (parallax!=0.f)
+		{
+			QString dx;
+			// distance in light years from parallax
+			float distance = 3.162e-5/(qAbs(parallax)*4.848e-9);
+			float distanceErr = 0.f;
+
+			if (parallaxErr>0.f)
+				distanceErr = 3.162e-5/(qAbs(parallaxErr)*4.848e-9);
+
+			if (distanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 3));
+			else
+				dx = QString("%1").arg(QString::number(distance, 'f', 3));
+
+			if (oDistance==0.f)
+			{
+				//TRANSLATORS: Unit of measure for distance - Light Years
+				oss << q_("Distance: %1 ly").arg(dx) << "<br>";
+			}
+		}
+
+		if (oDistance>0.f)
+		{
+			QString dx, du;
+			if (oDistanceErr>0.f)
+				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 3));
+			else
+				dx = QString("%1").arg(QString::number(oDistance, 'f', 3));
+
+			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
+			{
+				//TRANSLATORS: Unit of measure for distance - megaparsecs
+				du = q_("Mpc");
+			}
+			else
+			{
+				//TRANSLATORS: Unit of measure for distance - kiloparsecs
+				du = q_("kpc");
+			}
+
+			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
+		}
+	}
+
 	if (flags&Extra)
 	{
 		if (redshift<99.f)
@@ -228,52 +285,14 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		if (parallax!=0.f)
 		{
-			QString px, dx;
-			// distance in light years from parallax
-			float distance = 3.162e-5/(qAbs(parallax)*4.848e-9);
-			float distanceErr = 0.f;
+			QString px;
 
 			if (parallaxErr>0.f)
-			{
 				px = QString("%1%2%3").arg(QString::number(qAbs(parallax)*0.001, 'f', 5)).arg(QChar(0x00B1)).arg(QString::number(parallaxErr*0.001, 'f', 5));
-				distanceErr = 3.162e-5/(qAbs(parallaxErr)*4.848e-9);
-			}
 			else
 				px = QString("%1").arg(QString::number(qAbs(parallax)*0.001, 'f', 5));
 
-			if (distanceErr>0.f)
-				dx = QString("%1%2%3").arg(QString::number(distance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(distanceErr, 'f', 2));
-			else
-				dx = QString("%1").arg(QString::number(distance, 'f', 2));
-
 			oss << q_("Parallax: %1\"").arg(px) << "<br>";
-			if (oDistance==0.f)
-			{
-				//TRANSLATORS: Unit of measure for distance - light years
-				oss << q_("Distance: %1 ly").arg(dx) << "<br>";
-			}
-		}
-
-		if (oDistance>0.f)
-		{
-			QString dx, du;
-			if (oDistanceErr>0.f)
-				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 2)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 2));
-			else
-				dx = QString("%1").arg(QString::number(oDistance, 'f', 2));
-
-			if (nType==NebAGx || nType==NebGx || nType==NebRGx || nType==NebIGx || nType==NebQSO || nType==NebISM)
-			{
-				//TRANSLATORS: Unit of measure for distance - megaparsecs
-				du = q_("Mpc");
-			}
-			else
-			{
-				//TRANSLATORS: Unit of measure for distance - kiloparsecs
-				du = q_("kpc");
-			}
-
-			oss << q_("Distance: %1 %2").arg(dx).arg(du) << "<br>";
 		}
 
 		if (!getMorphologicalTypeDescription().isEmpty())
@@ -426,6 +445,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			color=activeGalaxyColor;
 			break;
 		case NebQSO:
+		case NebPossQSO:
 		case NebBLL:
 		case NebBLA:
 			Nebula::texGalaxy->bind();
@@ -463,6 +483,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			color=brightNebulaColor;
 			break;
 		case NebPn:
+		case NebPossPN:
 			Nebula::texPlanetaryNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -627,6 +648,7 @@ bool Nebula::objectInDisplayedType() const
 		case NebAGx:
 		case NebRGx:
 		case NebQSO:
+		case NebPossQSO:
 		case NebBLL:
 		case NebBLA:
 			cntype = 1; // Active Galaxies
@@ -657,6 +679,7 @@ bool Nebula::objectInDisplayedType() const
 			cntype = 6; // Dark Nebulae
 			break;
 		case NebPn:
+		case NebPossPN:
 			cntype = 7; // Planetary Nebulae
 			break;
 		case NebSNR:
@@ -1029,8 +1052,17 @@ QString Nebula::getTypeString(void) const
 		case NebYSO:
 			wsType = q_("young stellar object");
 			break;
+		case NebPossQSO:
+			wsType = q_("possible quasar");
+			break;
+		case NebPossPN:
+			wsType = q_("possible planetary nebula");
+			break;
+		case NebStar:
+			wsType = q_("star");
+			break;
 		case NebUnknown:
-			wsType = q_("unknown or undocumented type");
+			wsType = q_("object of unknown nature");
 			break;
 		default:
 			wsType = q_("undocumented type");

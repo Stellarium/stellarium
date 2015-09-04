@@ -242,9 +242,10 @@ Prepare date elements from newJd and send to spinner_*
 void DateTimeDialog::setDateTime(double newJd)
 {
 	if (this->visible()) {
-		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0); // UTC -> local tz
-		StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
-		StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
+		// JD and MJD should be at the UTC scale on the window!
+		double newJdC = newJd + StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0; // UTC -> local tz
+		StelUtils::getDateFromJulianDay(newJdC, &year, &month, &day);
+		StelUtils::getTimeFromJulianDay(newJdC, &hour, &minute, &second);
 		jd = newJd;
 		mjd = newJd-2400000.5;
 

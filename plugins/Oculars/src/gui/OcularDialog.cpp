@@ -317,7 +317,7 @@ void OcularDialog::requireSelectionStateChanged(int state)
 void OcularDialog::scaleImageCircleStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
-	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle",01.0).toBool();
+	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool();
 	if (shouldScale != useMaxImageCircle)
 	{
 		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);

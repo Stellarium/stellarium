@@ -33,8 +33,6 @@ class StelPainter;
 #define EARTH_RADIUS2 40678884.f     //! earth_radius^2 in km
 #define MAX_ALTITUDE 120.f           //! max meteor altitude in km
 #define MIN_ALTITUDE 80.f            //! min meteor altitude in km
-#define BURN_ALTITUDE 45.f           //! meteors usually disintegrate at altitudes greater than 45km
-#define VISIBLE_RADIUS 457.8f        //! max visible distance in km
 
 //! @class Meteor 
 //! Models a single meteor.
@@ -45,7 +43,7 @@ class Meteor
 {
 public:
 	//! <colorName, intensity>
-	typedef QPair<QString, int> colorPair;
+	typedef QPair<QString, int> ColorPair;
 
 	//! Create a Meteor object.
 	Meteor(const StelCore* core, const StelTextureSP &bolideTexture);
@@ -53,7 +51,7 @@ public:
 
 	//! Initialize meteor
 	void init(const float& radiantAlpha, const float& radiantDelta,
-		  const float& speed, const QList<colorPair> colors);
+		  const float& speed, const QList<ColorPair> colors);
 
 	//! Updates the position of the meteor, and expires it if necessary.
 	//! @param deltaTime the time increment in seconds since the last call.
@@ -63,16 +61,16 @@ public:
 	//! Draws the meteor.
 	virtual void draw(const StelCore* core, StelPainter& sPainter);
 
-	//! Indicate if the meteor it still visible.
-	inline bool isAlive() { return m_alive; }
+	//! Indicate if the meteor still visible.
+	bool isAlive() { return m_alive; }
 	//! Set meteor absolute magnitude.
-	inline void setAbsMag(float mag) { m_absMag = mag; }
+	void setAbsMag(float mag) { m_absMag = mag; }
 	//! Get meteor absolute magnitude.
-	inline float absMag() { return m_absMag; }
+	float absMag() { return m_absMag; }
 
 private:
 	//! Determine color vectors of line and prism used to draw meteor train.
-	void buildColorVectors(const QList<colorPair> colors);
+	void buildColorVectors(const QList<ColorPair> colors);
 
 	//! get RGB from color name
 	Vec4f getColorFromName(QString colorName);
@@ -86,8 +84,8 @@ private:
 	//! Draws the meteor train.
 	void drawTrain(StelPainter& sPainter, const float &thickness);
 
-	//! Calculating meteor distance as a function of meteor zenith angle
-	float meteorDistance(float zenithAngle, float altitude);
+	//! Calculates the z-component of a meteor as a function of meteor zenith angle
+	float meteorZ(float zenithAngle, float altitude);
 
 	//! find meteor position in horizontal coordinate system
 	Vec3d radiantToAltAz(Vec3d position);
@@ -97,17 +95,16 @@ private:
 
 	const StelCore* m_core;         //! The associated StelCore instance.
 
-	bool m_alive;                   //! Indicate if the meteor it still visible.
+	bool m_alive;                   //! Indicates if the meteor it still visible.
 	float m_speed;                  //! Velocity of meteor in km/s.
 	Mat4d m_matAltAzToRadiant;      //! Rotation matrix to convert from horizontal to radiant coordinate system.
 	Vec3d m_position;               //! Meteor position in radiant coordinate system.
 	Vec3d m_posTrain;               //! End of train in radiant coordinate system.
-	float m_xyDist;                 //! Distance in XY plane (orthogonal to radiant) from observer to meteor
-	float m_initialDist;            //! Initial distance from observer to meteor.
-	float m_finalDist;              //! Final distance from observer to meteor.
+	float m_initialZ;               //! Initial z-component of the meteor in radiant coordinates.
+	float m_finalZ;                 //! Final z-compoenent of the meteor in radiant coordinates.
+	float m_minDist;                //! Shortest distance between meteor and observer.
 	float m_absMag;                 //! Absolute magnitude [0, 1]
 	float m_aptMag;                 //! Apparent magnitude [0, 1]
-	int m_firstBrightSegment;       //! First bright segment of the train
 
 	StelTextureSP m_bolideTexture;  //! Meteor bolide texture
 	const int m_segments;           //! Number of segments along the train (useful to curve along projection distortions)

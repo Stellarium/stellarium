@@ -23,6 +23,7 @@
 
 #include "StelUtils.hpp"
 #include "StelGuiItems.hpp"
+#include "StelGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelMainView.hpp"
@@ -189,10 +190,12 @@ void StelButton::updateIcon()
 	painter.setOpacity(opacity);
 	if (!pixBackground.isNull() && noBckground==false)
 		painter.drawPixmap(0, 0, pixBackground);
-		painter.drawPixmap(0, 0,
+
+	painter.drawPixmap(0, 0,
 		(isTristate_ && checked == ButtonStateNoChange) ? (pixNoChange) :
 		(checked == ButtonStateOn) ? (pixOn) :
 		/* (checked == ButtonStateOff) ? */ (pixOff));
+
 	if (hoverOpacity > 0)
 	{
 		painter.setOpacity(hoverOpacity * opacity);
@@ -810,6 +813,7 @@ QRectF StelProgressBarMgr::boundingRect() const
 
 void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 {
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	QProgressBar* pb = new QProgressBar();
 	pb->setFixedHeight(25);
 	pb->setFixedWidth(200);
@@ -818,10 +822,12 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	pb->setMinimum(p->getMin());
 	pb->setMaximum(p->getMax());
 	pb->setFormat(p->getFormat());
+	if (gui!=NULL)
+		pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
 	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-	pbProxy->setZValue(150);
+	pbProxy->setZValue(150);	
 	static_cast<QGraphicsLinearLayout*>(layout())->addItem(pbProxy);
 	allBars.insert(p, pb);
 	pb->setVisible(true);
