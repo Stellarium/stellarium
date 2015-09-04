@@ -477,7 +477,8 @@ void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float ra
 
 	Vec3f win;
 	painter->getProjector()->project(v, win);
-	painter->setColor(color[0], color[1], color[2], alpha);
+	// For some reason we must mix color with the given alpha as well, else mixing does not work.
+	painter->setColor(color[0]*alpha, color[1]*alpha, color[2]*alpha, alpha);
 	painter->drawSprite2dMode(win[0], win[1], radius);
 
 	postDrawPointSource(painter);
