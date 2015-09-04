@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-30 11:40+0600\n"
-"PO-Revision-Date: 2015-09-03 04:55+0000\n"
+"PO-Revision-Date: 2015-09-03 17:24+0000\n"
 "Last-Translator: Ar Far <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-03 05:13+0000\n"
+"X-Launchpad-Export-Date: 2015-09-04 05:13+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1449,7 +1449,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:141
 msgid "Stereographic"
-msgstr "استریوگرافی"
+msgstr "استریوگرافی [استطرلابی تخت]"
 
 #: src/core/StelProjectorClasses.cpp:146
 msgid ""
@@ -1459,7 +1459,8 @@ msgid ""
 msgstr ""
 "طرح استریوگرافی از دیر باز شناخته شده است و در اصل آن را طرح جهان‌نمای مسطح "
 "می‌شناختند . این طرح زاویه‌ها را در محل برخورد خم ها با یکدیگر حفظ می کند "
-"اما مساحت را به هم می‌زند ."
+"اما مساحت را به هم می‌زند. [صفحهٔ دایره‌ای اسطرلاب‌های تخت با این شیوه درست "
+"می‌شود]"
 
 #: src/core/StelProjectorClasses.cpp:195
 msgid "Fish-eye"
@@ -1515,15 +1516,16 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:408
 msgid "Orthographic"
-msgstr "عمودنگاری (ارتوگرافیک)"
+msgstr "ارتوگرافی (عمودنگاری؛ [اسطرلابی کروی])"
 
 #: src/core/StelProjectorClasses.cpp:413
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
-"طرح عمودنگاری (ارتوگرافیک) مانند طرح چشم‌انداز (یا پرسپکتیو) است ولی  نقطهٔ "
-"چشم‌انداز در فاصله بی نهایت تنظیم شده‌است ."
+"طرح ارتوگرافی (عمودنگاری) مانند طرح چشم‌انداز (یا پرسپکتیو) است ولی  نقطهٔ "
+"چشم‌انداز در فاصله بی نهایت تنظیم شده‌است . [گوی اسطرلاب‌های کروی با این "
+"شیوه درست می‌شود]"
 
 #: src/core/StelProjectorClasses.cpp:459
 msgid "Sinusoidal"
@@ -2049,7 +2051,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:308
 #, qt-format
 msgid "Graphic/other designer: %1"
-msgstr "طراح گرافیک و سایر موارد: %1"
+msgstr "طراح نگاشتار و دیگر موارد: %1"
 
 #: src/gui/HelpDialog.cpp:313 src/gui/HelpDialog.cpp:314
 #, qt-format
@@ -4779,7 +4781,7 @@ msgstr "تنظیمات شکست/خاموشی..."
 
 #: src/ui_viewDialog.h:1581 src/ui_viewDialog.h:1671
 msgid "Labels and Markers"
-msgstr "نام‌ها و نشانه‌ها"
+msgstr "نام‌ها و نشانگرها"
 
 #: src/ui_viewDialog.h:1584
 msgid "Planets and satellites"
@@ -4787,23 +4789,23 @@ msgstr "سيارات و قمرها"
 
 #: src/ui_viewDialog.h:1585
 msgid "Show planets"
-msgstr "نمایش سیارات"
+msgstr "نشان دادن سیاره‌ها"
 
 #: src/ui_viewDialog.h:1586
 msgid "Show planet markers"
-msgstr "نمایش نشانگر سیارات"
+msgstr "نشان دادن نشانگر سیاره‌ها"
 
 #: src/ui_viewDialog.h:1587
 msgid "Show planet orbits"
-msgstr "نمایش مدار سیارات"
+msgstr "نمایش مدار سیاره‌ها"
 
 #: src/ui_viewDialog.h:1589
 msgid ""
 "Deactivate this option if you want to see orbits for selected planet and "
 "their moons."
 msgstr ""
-"اگر می‌خواهید مدار سیاره‌های انتخابی و قمرهایشان را ببیند، این گزینه را باز "
-"فعال کنید."
+"اگر می‌خواهید مدار سیاره‌های انتخابی و قمرهایشان را ببیند، این گزینه را "
+"غیرفعال کنید."
 
 #: src/ui_viewDialog.h:1591
 msgid "Show orbit for selected planet"
@@ -4815,7 +4817,7 @@ msgid ""
 "bodies from Solar system."
 msgstr ""
 "اگر می‌خواهید رد همه جرم‌های آسمانی منظومه خورشیدی را ببینید این گزینه را "
-"باز فعال کنید."
+"غیر فعال کنید."
 
 #: src/ui_viewDialog.h:1595
 msgid "Show trail for selected planet"
@@ -4823,23 +4825,23 @@ msgstr "نمایش رد سیاره انتخاب‌شده"
 
 #: src/ui_viewDialog.h:1596
 msgid "Simulate light speed"
-msgstr "شبیه سازی سرعت نور"
+msgstr "شبیه‌سازی سرعت نور"
 
 #: src/ui_viewDialog.h:1597
 msgid "Scale Moon"
-msgstr "بزرگ‌نمايي ماه"
+msgstr "برزرگ‌نمایی ماه"
 
 #: src/ui_viewDialog.h:1599
 msgid "Scale factor"
-msgstr "عامل شاخص"
+msgstr "ضریب مقیاس"
 
 #: src/ui_viewDialog.h:1602
 msgid "Automatic change of landscape when planet is changed"
-msgstr "تغییر خودکار منظره با تغییر سیاره"
+msgstr "تغییر خودکار چشم‌انداز با تغییر سیاره"
 
 #: src/ui_viewDialog.h:1604
 msgid "Auto select landscapes"
-msgstr "گزینش خودکار منظره"
+msgstr "گزینش خودکار چشم‌انداز"
 
 #: src/ui_viewDialog.h:1606
 msgid "Settings for sporadic meteors"
@@ -4847,7 +4849,7 @@ msgstr "تنظیمات شهاب‌های پراکنده"
 
 #: src/ui_viewDialog.h:1608
 msgid "Shooting Stars"
-msgstr "بارش شهابي"
+msgstr "بارش شهابی"
 
 #: src/ui_viewDialog.h:1610
 msgid "Hourly zenith rate"
@@ -4856,7 +4858,7 @@ msgstr "آهنگ ساعتی سرسویی"
 #: src/ui_viewDialog.h:1612
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr "ZHR"
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1614
 msgid "Display objects from catalogs"
@@ -4864,7 +4866,7 @@ msgstr "نمایش اجرام از فهرست‌ها"
 
 #: src/ui_viewDialog.h:1616
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
-msgstr "شاخص فهرست سحابی‌ها و خوشه‌های ستاره‌ای"
+msgstr "نمایش فهرست سحابی‌ها و خوشه‌های ستاره‌ای"
 
 #: src/ui_viewDialog.h:1619
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
@@ -4872,15 +4874,15 @@ msgstr "فهرست عمومی جدید شامل سحابی‌ها و خوشه‌
 
 #: src/ui_viewDialog.h:1622
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
-msgstr "فهرست لیندز شامل روشنی سحابی‌ها (لیندز، ۱۹۶۵ م.)"
+msgstr "فهرست لیندز شامل سحابی‌های روشن (لیندز، ۱۹۶۵ م.)"
 
 #: src/ui_viewDialog.h:1631
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
-msgstr "فهرست بارنارد شامل ۳۴۹ اجرام تاریک در آسمان (بارنارد، ۱۹۲۷)"
+msgstr "فهرست بارنارد شامل ۳۴۹ جرم تاریک در آسمان (بارنارد، ۱۹۲۷ م.)"
 
 #: src/ui_viewDialog.h:1634
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
-msgstr "فهرست منطقه‌ها اچ۲ (شارپلس، ۱۹۵۹)"
+msgstr "فهرست منطقه‌های اچ۲ (شارپلس، ۱۹۵۹ م.)"
 
 #: src/ui_viewDialog.h:1637
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
@@ -4889,7 +4891,7 @@ msgstr "فهرست سحابی‌های بازتابی (وَن دِن بِرگ، 
 #: src/ui_viewDialog.h:1640
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
-msgstr "فهرستی از منطقه‌های اچ-آلفا گسیل در جنوب راه شیری (رودگرز+، ۱۹۶۰ م.)"
+msgstr "فهرستی از منطقه‌های اچ-آلفا گسیل در جنوب راه‌شیری (رودگرز+، ۱۹۶۰ م.)"
 
 #: src/ui_viewDialog.h:1643
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
@@ -4917,7 +4919,7 @@ msgstr "فهرست عمومی اوپسالا شامل کهکشان‌ها"
 
 #: src/ui_viewDialog.h:1658
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr "فهرست سحابی‌های کهکشانی پخشیده روشن (Cederblad، ۱۹۴۶ م.)"
+msgstr "فهرست سحابی‌های کهکشانی پخشیده روشن (سیدربلاد، ۱۹۴۶ م.)"
 
 #: src/ui_viewDialog.h:1660
 msgid "Filter by type"
@@ -4961,7 +4963,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1677
 msgid "Use surface brightness"
-msgstr "به‌کارگیری روشنایی سطحی"
+msgstr "استفاده از روشنایی سطحی"
 
 #: src/ui_viewDialog.h:1679
 msgid "Use hints proportional to angular size of deep-sky objects"
@@ -4975,7 +4977,7 @@ msgstr ""
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
-"محدودیت قدر (برای بینندگان با چشم غیرمسلح/دوربین دوچشمی) برای جرام ژرفای فضا"
+"محدودیت قدر (برای بینندگان با چشم غیرمسلح/دوربین دوچشمی) برای اجرام ژرفای فضا"
 
 #: src/ui_viewDialog.h:1686
 msgid "Constellations"
@@ -4987,7 +4989,7 @@ msgstr "نمایش خط‌ها"
 
 #: src/ui_viewDialog.h:1688
 msgid "Show labels"
-msgstr "نمايش نام‌ها"
+msgstr "نمایش برچسب‌ها"
 
 #: src/ui_viewDialog.h:1689
 msgid "Show boundaries"
@@ -4995,13 +4997,13 @@ msgstr "نمایش مرزها"
 
 #: src/ui_viewDialog.h:1690
 msgid "Show art"
-msgstr "نمايش طرح هنري"
+msgstr "نمایش طرح‌های هنری"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1691
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
-msgstr "روشنای طرح‌های هنری:"
+msgstr "روشنایی طرح‌ها:"
 
 #: src/ui_viewDialog.h:1692
 msgid "Thickness of lines:"
@@ -5009,11 +5011,11 @@ msgstr "کلفتی خط‌ها:"
 
 #: src/ui_viewDialog.h:1694
 msgid "Value in pixels"
-msgstr "ارزش پیکسل‌ها"
+msgstr "مقدار در پیکسل‌ها"
 
 #: src/ui_viewDialog.h:1696
 msgid "Celestial Sphere"
-msgstr "کره سماوی"
+msgstr "کره آسمان"
 
 #: src/ui_viewDialog.h:1698
 msgid "Equatorial coordinates of J2000.0."
@@ -5042,7 +5044,7 @@ msgstr "شبکه دایرةالبروجی  (J2000)"
 #: src/ui_viewDialog.h:1710
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
-"مختصات دایرةالبروجی برای تاریخ کنون. تنها در روی زمین نشان داده می‌شود."
+"مختصات دایرةالبروجی برای تاریخ کنونی. تنها در روی زمین نشان داده می‌شود."
 
 #: src/ui_viewDialog.h:1712
 msgid "Ecliptic grid (of date)"
@@ -5050,7 +5052,7 @@ msgstr "شبکه دایرةالبروجی (از تاریخ)"
 
 #: src/ui_viewDialog.h:1714
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr "سمت و ارتفاع (اندازه‌گیری از شمال به شرق)"
+msgstr "سمت و ارتفاع (اندازه‌گیری از شمال به شرق)."
 
 #: src/ui_viewDialog.h:1718
 msgid "Galactic Coordinates, System II (IAU 1958)."
@@ -5090,7 +5092,7 @@ msgstr "استوا (از تاریخ)"
 
 #: src/ui_viewDialog.h:1738
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr "نشان دادن خط دایرةالبروج از J2000.0 (VSOP87A fundamental plane)."
+msgstr "نشان دادن خط دایرةالبروج از J2000.0 (صفحهٔ بنیادین VSOP87A)."
 
 #: src/ui_viewDialog.h:1740
 msgid "Ecliptic (J2000)"
@@ -5114,7 +5116,7 @@ msgstr "نمایش خط استوای کهکشانی."
 
 #: src/ui_viewDialog.h:1754
 msgid "Show meridian line."
-msgstr "نمایش نصف‌النهار ناظر."
+msgstr "نمایش خط نصف‌النهار ناظر."
 
 #: src/ui_viewDialog.h:1758
 msgid ""
@@ -5126,7 +5128,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1761
 msgid "Projection"
-msgstr "نگاشت"
+msgstr "تصویرسازی"
 
 #: src/ui_viewDialog.h:1762
 msgid "Vertical viewport offset"
@@ -5138,7 +5140,7 @@ msgstr "چشم‌انداز پيش‌‌فرض"
 
 #: src/ui_viewDialog.h:1765
 msgid "Use associated planet and position"
-msgstr "به‌كاربري سياره و موقعيت متناظر"
+msgstr "استفاده از سیاره و موقعیت مرتبط"
 
 #: src/ui_viewDialog.h:1766
 msgid "Show fog"
@@ -5146,11 +5148,12 @@ msgstr "نمایش مه"
 
 #: src/ui_viewDialog.h:1767
 msgid "Show ground"
-msgstr "نمايش چشم‌انداز"
+msgstr "نمايش زمینه"
 
 #: src/ui_viewDialog.h:1769
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"از روشنایی کمینه برای روشن ماندن چشم‌انداز حتی در تاریکی، استفاده کنید"
 
 #: src/ui_viewDialog.h:1771
 msgid "Minimal brightness:"
@@ -5159,19 +5162,20 @@ msgstr "روشنایی کمینه:"
 #: src/ui_viewDialog.h:1773
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr "مقدار بازه ۰..۱ (منظره در شب سیاه است - منظره تمام روشن است)"
+msgstr "بازه مقدار ۰..۱ (چشم‌انداز در شب سیاه است - منظره کاملا روشن است)"
 
 #: src/ui_viewDialog.h:1776
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
+"اگر مقدار روشنایی کمینه در landscape.ini مشخص شده‌است، از همان استفاده شود"
 
 #: src/ui_viewDialog.h:1778
 msgid "from landscape, if given"
-msgstr ""
+msgstr "از خود چشم‌انداز، اگر مشخص شده‌باشد"
 
 #: src/ui_viewDialog.h:1779
 msgid "Show landscape labels"
-msgstr "نمایش برچسب‌های منظره"
+msgstr "نمایش برچسب‌های چشم‌انداز"
 
 #: src/ui_viewDialog.h:1780
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -5179,11 +5183,11 @@ msgstr "نمایش لایه تابان (پنجره‌های روشن، آلود�
 
 #: src/ui_viewDialog.h:1781
 msgid "Add/remove landscapes..."
-msgstr "حذف / اضافه چشم‌انداز..."
+msgstr "افزودن/حذف چشم‌انداز..."
 
 #: src/ui_viewDialog.h:1783
 msgid "Use this sky culture as default"
-msgstr "فرهنگ پيش‌فرض آسمان"
+msgstr "پیش‌فرض قرار دادن این فرهنگ آسمان"
 
 #: src/ui_viewDialog.h:1784
 msgid "Show names"
@@ -5191,11 +5195,11 @@ msgstr "نمایش نام‌ها"
 
 #: src/ui_viewDialog.h:1786
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "انتخاب کنید که کدام نام‌ها را می‌خواهید: اختصاری، اصلی، ترجمه‌شده"
 
 #: src/ui_viewDialog.h:1789
 msgid "Use native names for planets from current culture"
-msgstr "از این فرهنگ از نام‌های بومی برای سیاره‌ها استفاده شود"
+msgstr "برای نام‌های بومی برای سیاره‌ها از همین فرهنگ استفاده شود"
 
 #: src/ui_viewDialog.h:1791
 msgid "Visible"
@@ -5208,7 +5212,7 @@ msgstr "آسمان"
 #: src/ui_viewDialog.h:1798
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr "اجرام ژرفای آسمان"
+msgstr "ژرفنایی"
 
 #: src/ui_viewDialog.h:1800
 msgid "Deep-Sky Objects"
@@ -5226,7 +5230,7 @@ msgstr "چشم‌انداز"
 #: src/ui_viewDialog.h:1807
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
-msgstr "آسمان‌شناسي"
+msgstr "افسانه‌ها و ستارگان"
 
 #: src/ui_configurationDialog.h:1035
 msgid "Configuration"
@@ -5252,7 +5256,9 @@ msgstr "تنظيمات پيش‌فرض"
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
-msgstr "ذخيره تنظيمات جاري بعنوان تنظيماتِ هنگام راه‌اندازي stellarium"
+msgstr ""
+"ذخیره تنظیمات جاری این بار استلاریوم برای بار دیگر که استلاریوم را "
+"راه‌اندازی می‌شود"
 
 #: src/ui_configurationDialog.h:1044
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
@@ -5260,17 +5266,17 @@ msgstr "ذخيره تنظيمات جاري بعنوان تنظيماتِ هنگ�
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:281
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
 msgid "Save settings"
-msgstr "ذخيره تنظيمات"
+msgstr "ذخیره تنظیمات"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Restore the default settings that came with Stellarium"
-msgstr "بازگشت به تنظيمات اوليه stellarium"
+msgstr "بازگشت به تنظیمات اولیه استلاریوم"
 
 #: src/ui_configurationDialog.h:1048 plugins/FOV/src/ui_fovWindow.h:408
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:282
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
 msgid "Restore defaults"
-msgstr "تنظيمات اوليه"
+msgstr "تنظیمات پیش‌فرض"
 
 #: src/ui_configurationDialog.h:1049
 msgid ""
@@ -5278,20 +5284,21 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"بازگشت به تنظيمات اوليه نيازمندِ راه‌اندازي مجدد stellarium است. تنظيمات "
-"ذخيره شده شامل FOV و زاويه ديد آغازين است."
+"بازیابی تنظیمات اولیه نیاز به راه‌اندازی دوبارهٔ استلاریوم دارد. ذخیره‌سازی "
+"همهٔ گزینه‌های کنونی شامل میدان دید و جهت‌گیری نمای کنونی است برای استفاده "
+"در راه‌اندازی بعدی."
 
 #: src/ui_configurationDialog.h:1051
 msgid "The width of your view when Stellarium starts"
-msgstr "پهناي ديد وقتي stellarium بالا مي‌آيد"
+msgstr "پهنای دید هنگامی که استلاریوم دوباره راه‌اندازی می‌شود."
 
 #: src/ui_configurationDialog.h:1054
 msgid "The direction you're looking when Stellarium starts"
-msgstr "جهت نگاه وقتي كه stellarium بالا مي‌‌آيد"
+msgstr "جهت‌گیری‌ای که هنگام راه‌اندازی استلاریوم مشاهده خواهید کرد"
 
 #: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1239
 msgid "Selected object information"
-msgstr "اطلاعات جرم انتخابي"
+msgstr "اطلاعات جرم انتخابی"
 
 #: src/ui_configurationDialog.h:1058
 msgid "Display all information available"
@@ -5303,16 +5310,16 @@ msgstr "كامل"
 
 #: src/ui_configurationDialog.h:1062
 msgid "Display no information"
-msgstr "عدم نمايش اطلاعات"
+msgstr "نمایش ندادن هیچ کدام از اطلاعات"
 
 #: src/ui_configurationDialog.h:1064 plugins/Oculars/src/Oculars.cpp:1979
 #: plugins/Observability/src/Observability.cpp:208
 msgid "None"
-msgstr "هيچ"
+msgstr "هیچ"
 
 #: src/ui_configurationDialog.h:1066
 msgid "Display less information"
-msgstr "نمايش اطلاعات مختصر"
+msgstr "نمایش بخشی از اطلاعات"
 
 #: src/ui_configurationDialog.h:1068
 msgid "Short"
@@ -5328,7 +5335,7 @@ msgstr "سفارشی"
 
 #: src/ui_configurationDialog.h:1073
 msgid "Displayed fields"
-msgstr ""
+msgstr "موردهایی که نمایش داده می‌شود"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -5360,7 +5367,7 @@ msgstr "مختصات کهکشانی"
 
 #: src/ui_configurationDialog.h:1086
 msgid "Visual magnitude"
-msgstr "قدر ظاهری"
+msgstr "قدر دیداری"
 
 #: src/ui_configurationDialog.h:1088
 msgid "Angular or physical size"
@@ -5380,7 +5387,7 @@ msgstr "رده طیفی، گونه سحابی، ..."
 
 #: src/ui_configurationDialog.h:1098
 msgid "Additional information"
-msgstr "اطلاعات اضافی"
+msgstr "اطلاعات بیشتر"
 
 #: src/ui_configurationDialog.h:1100
 msgid "Topocentric equatorial coordinates"
@@ -5414,27 +5421,27 @@ msgstr "مختصات دایرةالبروجی"
 
 #: src/ui_configurationDialog.h:1112
 msgid "Control"
-msgstr "کنترل"
+msgstr "مهار"
 
 #: src/ui_configurationDialog.h:1114
 msgid "Allow keyboard to pan and zoom"
-msgstr "امكان حركت و درشت‌نمايي توسط صفحه كليد"
+msgstr "امکان حرکت و بزرگ‌نمایی با صفحه‌کلید"
 
 #: src/ui_configurationDialog.h:1116
 msgid "Enable keyboard navigation"
-msgstr "فعال كردن كاوشگر صفحه كليد"
+msgstr "فعال کردن ناوبری با صفحه‌کلید"
 
 #: src/ui_configurationDialog.h:1118
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "امكان حركت و درشت‌نمايي توسط ماوس"
+msgstr "امکان حرکت (با کشیدن) و بزرگ‌نمایی (با کلید وسط) با موشواره"
 
 #: src/ui_configurationDialog.h:1120
 msgid "Enable mouse navigation"
-msgstr "فعال كردن كاوشگر ماوس"
+msgstr "فعال کردن ناوبری با موشواره"
 
 #: src/ui_configurationDialog.h:1123
 msgid "Hides the mouse cursor when inactive"
-msgstr "پنهان‌کردن نشانگر ماوس هنگام بیکاری"
+msgstr "پنهان کردن نشانگر موشواره هنگام بیکاری"
 
 #: src/ui_configurationDialog.h:1125
 msgid "Mouse cursor timeout:"
@@ -5447,11 +5454,11 @@ msgstr "ثانیه"
 #: src/ui_configurationDialog.h:1129
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
-msgstr "تاريخ و ساعت شروع"
+msgstr "تاريخ و زمان هنگام راه‌اندازی"
 
 #: src/ui_configurationDialog.h:1131
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "قرارگيري در تاريخ و زمان خاص هنگام بالاآمدن برنامه"
+msgstr "استفاده از تاریخ و زمانی به‌خصوص هنگام راه‌اندازی استلاریوم"
 
 #: src/ui_configurationDialog.h:1133
 msgid "Other:"
@@ -5459,25 +5466,25 @@ msgstr "دیگر:"
 
 #: src/ui_configurationDialog.h:1135
 msgid "Use current local date and time"
-msgstr "از زمان و تاریخ محلی کنونی استفاده شود"
+msgstr "از تاریخ و زمان محلی کنونی استفاده شود"
 
 #: src/ui_configurationDialog.h:1137
 msgid "use current"
-msgstr "زمان اكنون"
+msgstr "هم‌اکنون"
 
 #: src/ui_configurationDialog.h:1139
 msgid "Starts Stellarium at system clock date and time"
-msgstr "شروع برنامه در تاريخ و زمان رايانه"
+msgstr "راه‌اندازی استلاریوم با تاریخ و زمان رایانه"
 
 #: src/ui_configurationDialog.h:1141
 msgid "System date and time"
-msgstr "تاريخ و زمان رايانه"
+msgstr "تاریخ و ساعت رایانه"
 
 #: src/ui_configurationDialog.h:1143
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
-msgstr "هنگام بالا آمدن برنامه زمان در ساعت ديگري از روز قرار مي‌گيرد."
+msgstr ""
 
 #: src/ui_configurationDialog.h:1145
 msgid "System date at:"
