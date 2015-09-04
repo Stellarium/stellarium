@@ -1544,7 +1544,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			float eclipseFactor = ssm->getEclipseFactor(core);
 			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));
-			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 2.f*screenSz, color, alpha*alpha);
+			//core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 2.f*screenSz, color, alpha*alpha);
+			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 512.f/192.f*screenSz, color, alpha*alpha);
 		}
 	}
 }
