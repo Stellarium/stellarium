@@ -1731,7 +1731,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 			while (dt<1)
 			{
 				Satellite::timeShift = dt+delta;
-				sat.data()->update(1);
+				sat.data()->update(0);
 
 				Vec3d pos = sat.data()->getAltAzPosApparent(pcore);
 				double lat = pos.latitude();
