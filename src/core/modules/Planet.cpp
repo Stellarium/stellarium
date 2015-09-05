@@ -335,6 +335,19 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString(q_("Phase: %1")).arg(phase) << "<br>";
 			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
 		}
+		if (englishName=="Sun")
+		{
+			// Only show during eclipse, show percent?
+			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			// Debug solution:
+//			float eclipseFactor = ssystem->getEclipseFactor(core);
+//			oss << QString(q_("Eclipse Factor: %1 alpha: %2")).arg(eclipseFactor).arg(-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor))) << "<br>";
+			// Release version:
+			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
+			if (eclipseFactor>0.f)
+				oss << QString(q_("Eclipse Factor: %1%")).arg(eclipseFactor) << "<br>";
+
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -870,9 +883,19 @@ float Planet::getVMagnitude(const StelCore* core) const
 {
 	if (parent == 0)
 	{
-		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
+		// Sun, compute the apparent magnitude for the absolute mag (V: 4.83) and observer's distance
+		// Hint: Absolute Magnitude of the Sun in Several Bands: http://mips.as.arizona.edu/~cnaw/sun.html
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
-		return 4.83 + 5.*(std::log10(distParsec)-1.);
+
+		// check how much of it is visible
+		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+		double shadowFactor = ssm->getEclipseFactor(core);
+		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
+		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
+		if(shadowFactor < 0.000128)
+			shadowFactor = 0.000128;
+
+		return 4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor));
 	}
 
 	// Compute the angular phase
@@ -1515,6 +1538,14 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 		Vec3d tmp = getJ2000EquatorialPos(core);
 		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
+
+		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
+		{
+			float eclipseFactor = ssm->getEclipseFactor(core);
+			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
+			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));			
+			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 512.f/192.f*screenSz, color, alpha*alpha);
+		}
 	}
 }
 
