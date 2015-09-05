@@ -967,6 +967,7 @@ void SatellitesDialog::predictIridiumFlares()
 {
 	IridiumFlaresPredictionList predictions = GETSTELMODULE(Satellites)->getIridiumFlaresPrediction();
 
+	ui->iridiumFlaresTreeWidget->clear();
 	foreach (const IridiumFlaresPrediction& flare, predictions)
 	{
 		SatPIFTreeWidgetItem *treeItem = new SatPIFTreeWidgetItem(ui->iridiumFlaresTreeWidget);
