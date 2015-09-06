@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-30 11:40+0600\n"
+"POT-Creation-Date: 2015-09-05 15:56+0600\n"
 "PO-Revision-Date: 2015-09-04 00:16+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-05 05:13+0000\n"
+"X-Launchpad-Export-Date: 2015-09-06 05:25+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -22,7 +22,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:536
 msgid "Display Options"
 msgstr "Opções de Visualização"
 
@@ -184,7 +184,7 @@ msgid "Illumination"
 msgstr "Iluminação"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1672
-#: plugins/Satellites/src/ui_satellitesDialog.h:689
+#: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Labels"
 msgstr "Rótulos"
 
@@ -202,7 +202,7 @@ msgstr "Localização: "
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:354
+#: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:361
 msgid "Celestial body:"
 msgstr "Astro:"
 
@@ -770,6 +770,11 @@ msgstr "Fase: %1"
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Iluminado: %1%"
+
+#: src/core/modules/Planet.cpp:348
+#, qt-format
+msgid "Eclipse Factor: %1%"
+msgstr ""
 
 #: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
@@ -1678,7 +1683,7 @@ msgid "Deep-sky objects background images"
 msgstr "Imagens de fundo de objectos do céu profundo"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:535
 msgid "Miscellaneous"
 msgstr "Diversos"
 
@@ -1722,33 +1727,33 @@ msgstr "Não encontrado"
 msgid "Found"
 msgstr "Encontrado"
 
-#: src/gui/ConfigurationDialog.cpp:494
+#: src/gui/ConfigurationDialog.cpp:496
 msgid "Select screenshot directory"
 msgstr "Seleccione o directório para as capturas do ecrã"
 
-#: src/gui/ConfigurationDialog.cpp:786
+#: src/gui/ConfigurationDialog.cpp:788
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "FOV Inicial: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:794
+#: src/gui/ConfigurationDialog.cpp:796
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direcção inicial de visualização Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:851
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:398
+#: src/gui/ConfigurationDialog.cpp:853
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Authors"
 msgstr "Autores"
 
-#: src/gui/ConfigurationDialog.cpp:852 src/gui/ViewDialog.cpp:663
+#: src/gui/ConfigurationDialog.cpp:854 src/gui/ViewDialog.cpp:663
 msgid "Contact"
 msgstr "Contacto"
 
-#: src/gui/ConfigurationDialog.cpp:854
+#: src/gui/ConfigurationDialog.cpp:856
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:523
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:397
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
@@ -1760,7 +1765,7 @@ msgstr "Contacto"
 msgid "Version"
 msgstr "Versão"
 
-#: src/gui/ConfigurationDialog.cpp:937
+#: src/gui/ConfigurationDialog.cpp:939
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1774,23 +1779,23 @@ msgstr "Versão"
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:941
+#: src/gui/ConfigurationDialog.cpp:943
 msgid "License"
 msgstr "Licença"
 
-#: src/gui/ConfigurationDialog.cpp:945
+#: src/gui/ConfigurationDialog.cpp:947
 msgid "Shortcut"
 msgstr "Atalho"
 
-#: src/gui/ConfigurationDialog.cpp:969
+#: src/gui/ConfigurationDialog.cpp:971
 msgid "Running script: "
 msgstr "A executar \"script\": "
 
-#: src/gui/ConfigurationDialog.cpp:976
+#: src/gui/ConfigurationDialog.cpp:978
 msgid "Running script: [none]"
 msgstr "A executar \"script\": [nenhum]"
 
-#: src/gui/ConfigurationDialog.cpp:1041
+#: src/gui/ConfigurationDialog.cpp:1043
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1798,16 +1803,16 @@ msgstr ""
 "Terminou a transferência de novos catálogos!\n"
 "Reinicie o Stellarium para exibir as estrelas."
 
-#: src/gui/ConfigurationDialog.cpp:1045
+#: src/gui/ConfigurationDialog.cpp:1047
 msgid "All available star catalogs have been installed."
 msgstr "Todos os catálogos estelares disponíveis foram instalados."
 
-#: src/gui/ConfigurationDialog.cpp:1050
+#: src/gui/ConfigurationDialog.cpp:1052
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obter catálogo %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:1057
+#: src/gui/ConfigurationDialog.cpp:1059
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1816,7 +1821,7 @@ msgstr ""
 "Transferindo %1...\n"
 "(Pode fechar esta janela.)"
 
-#: src/gui/ConfigurationDialog.cpp:1064
+#: src/gui/ConfigurationDialog.cpp:1066
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1827,7 +1832,7 @@ msgstr ""
 "Estrelas: %2 Milhões\n"
 "Magnitude: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1107 src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1109 src/gui/ConfigurationDialog.cpp:1143
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1836,11 +1841,11 @@ msgstr ""
 "Erro ao transferir %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Verifying file integrity..."
 msgstr "A verificar a integridade dos ficheiros..."
 
-#: src/gui/ConfigurationDialog.cpp:1198
+#: src/gui/ConfigurationDialog.cpp:1200
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1850,127 +1855,127 @@ msgstr ""
 "O ficheiro está danificado."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1269
+#: src/gui/ConfigurationDialog.cpp:1271
 msgid "Algorithm of"
 msgstr "Algoritmo do"
 
-#: src/gui/ConfigurationDialog.cpp:1280
+#: src/gui/ConfigurationDialog.cpp:1282
 msgid "Without correction"
 msgstr "Sem correção"
 
-#: src/gui/ConfigurationDialog.cpp:1281
+#: src/gui/ConfigurationDialog.cpp:1283
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1282
+#: src/gui/ConfigurationDialog.cpp:1284
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1283
+#: src/gui/ConfigurationDialog.cpp:1285
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1284
+#: src/gui/ConfigurationDialog.cpp:1286
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1285
+#: src/gui/ConfigurationDialog.cpp:1287
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) e Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1286
+#: src/gui/ConfigurationDialog.cpp:1288
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1287
+#: src/gui/ConfigurationDialog.cpp:1289
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1288
+#: src/gui/ConfigurationDialog.cpp:1290
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1289
+#: src/gui/ConfigurationDialog.cpp:1291
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1290
+#: src/gui/ConfigurationDialog.cpp:1292
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1291
+#: src/gui/ConfigurationDialog.cpp:1293
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1292
+#: src/gui/ConfigurationDialog.cpp:1294
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1293
+#: src/gui/ConfigurationDialog.cpp:1295
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1294
+#: src/gui/ConfigurationDialog.cpp:1296
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1295
+#: src/gui/ConfigurationDialog.cpp:1297
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1296
+#: src/gui/ConfigurationDialog.cpp:1298
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1297
+#: src/gui/ConfigurationDialog.cpp:1299
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1299
+#: src/gui/ConfigurationDialog.cpp:1301
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1300
+#: src/gui/ConfigurationDialog.cpp:1302
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1301
+#: src/gui/ConfigurationDialog.cpp:1303
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1302
+#: src/gui/ConfigurationDialog.cpp:1304
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1303
+#: src/gui/ConfigurationDialog.cpp:1305
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1304
+#: src/gui/ConfigurationDialog.cpp:1306
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1306
+#: src/gui/ConfigurationDialog.cpp:1308
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1309
+#: src/gui/ConfigurationDialog.cpp:1311
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1310
+#: src/gui/ConfigurationDialog.cpp:1312
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1311
+#: src/gui/ConfigurationDialog.cpp:1313
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq e Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1312
+#: src/gui/ConfigurationDialog.cpp:1314
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana e Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1313
+#: src/gui/ConfigurationDialog.cpp:1315
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Equação personalizada do %1T"
@@ -2518,10 +2523,12 @@ msgid "Declination"
 msgstr "Declinação"
 
 #: src/gui/SearchDialog.cpp:269
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
 msgid "Azimuth"
 msgstr "Azimute"
 
 #: src/gui/SearchDialog.cpp:272
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:942
 msgid "Altitude"
 msgstr "Altitude"
 
@@ -2699,7 +2706,7 @@ msgstr "Conjunção"
 msgid "Opposition"
 msgstr "Oposição"
 
-#: src/StelMainView.cpp:440 src/StelMainView.cpp:455
+#: src/StelMainView.cpp:441 src/StelMainView.cpp:456
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2707,19 +2714,19 @@ msgstr ""
 "O OpenGL 2 não foi encontrado neste sistema. Actualize a placa gráfica ou "
 "utilize o MESA ou uma versão mais antiga."
 
-#: src/StelMainView.cpp:469
+#: src/StelMainView.cpp:470
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Não é possível obter os recursos OpenGL necessários."
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:535
 msgid "Save screenshot"
 msgstr "Gravar captura de ecrã"
 
-#: src/StelMainView.cpp:537
+#: src/StelMainView.cpp:536
 msgid "Full-screen mode"
 msgstr "Modo de ecrã completo"
 
-#: src/StelMainView.cpp:678
+#: src/StelMainView.cpp:677
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2727,13 +2734,13 @@ msgstr ""
 "A versão do OpenGL é insuficiente. Atualize os drivers, a placa gráfica ou "
 "use a versão MESA (ou ANGLE)."
 
-#: src/StelMainView.cpp:681
+#: src/StelMainView.cpp:680
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "A versão do OpenGL é insuficiente. Atualize os drivers ou a placa gráfica."
 
-#: src/StelMainView.cpp:723
+#: src/StelMainView.cpp:722
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2744,7 +2751,7 @@ msgstr ""
 "Quer ignorar e suprimir este aviso no futuro e tentar continuar mesmo assim "
 "no modo degradado?"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:773
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2755,7 +2762,7 @@ msgstr ""
 "Deseja ignorar e suprimir este aviso no futuro e tentar continuar mesmo "
 "assim no modo degradado?"
 
-#: src/StelMainView.cpp:829
+#: src/StelMainView.cpp:828
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2766,7 +2773,7 @@ msgstr ""
 "Deseja ignorar e suprimir este aviso no futuro e tentar continuar mesmo "
 "assim no modo degradado?"
 
-#: src/StelMainView.cpp:866
+#: src/StelMainView.cpp:865
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2777,7 +2784,7 @@ msgstr ""
 "Deseja ignorar e suprimir este aviso no futuro e tentar continuar mesmo "
 "assim no modo degradado?"
 
-#: src/StelMainView.cpp:975
+#: src/StelMainView.cpp:974
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5994,69 +6001,69 @@ msgstr "Incluir o diretório:"
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:350
+#: src/ui_astroCalcDialog.h:357
 msgid "AstroCalc"
 msgstr "Calculadora Astronómica"
 
-#: src/ui_astroCalcDialog.h:352
+#: src/ui_astroCalcDialog.h:359
 msgid "Planetary positions every 5 minutes."
 msgstr "Posições planetárias a cada 5 minutos."
 
-#: src/ui_astroCalcDialog.h:353
+#: src/ui_astroCalcDialog.h:360
 msgid "Planetary positions"
 msgstr "Posições planetárias"
 
-#: src/ui_astroCalcDialog.h:356
+#: src/ui_astroCalcDialog.h:363
 msgid "Time step:"
 msgstr "Passo de tempo:"
 
-#: src/ui_astroCalcDialog.h:357 src/ui_astroCalcDialog.h:365
+#: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
 msgstr "De:"
 
-#: src/ui_astroCalcDialog.h:358 src/ui_astroCalcDialog.h:360
+#: src/ui_astroCalcDialog.h:365 src/ui_astroCalcDialog.h:367
 msgid "yyyy.MM.dd hh:mm"
 msgstr "aaaa.mm.dd hh:mm"
 
-#: src/ui_astroCalcDialog.h:359 src/ui_astroCalcDialog.h:367
+#: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:374
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
 msgstr "A:"
 
-#: src/ui_astroCalcDialog.h:361
+#: src/ui_astroCalcDialog.h:368
 msgid "Calculate ephemeris"
 msgstr "Calcular as efemérides"
 
-#: src/ui_astroCalcDialog.h:362
+#: src/ui_astroCalcDialog.h:369
 msgid "Ephemeris"
 msgstr "Efemérides"
 
-#: src/ui_astroCalcDialog.h:363
+#: src/ui_astroCalcDialog.h:370
 msgid "Between objects:"
 msgstr "Entre os objectos:"
 
-#: src/ui_astroCalcDialog.h:364
+#: src/ui_astroCalcDialog.h:371
 msgid "and"
 msgstr "e"
 
-#: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:368
+#: src/ui_astroCalcDialog.h:373 src/ui_astroCalcDialog.h:375
 msgid "yyyy.MM.dd"
 msgstr "aaaa.mm.dd"
 
-#: src/ui_astroCalcDialog.h:369
+#: src/ui_astroCalcDialog.h:376
 msgid "Maximum allowed separation:"
 msgstr "Separação máxima permitida:"
 
-#: src/ui_astroCalcDialog.h:371
+#: src/ui_astroCalcDialog.h:378
 msgid "Value in decimal degrees"
 msgstr "Valor em graus decimais"
 
-#: src/ui_astroCalcDialog.h:373
+#: src/ui_astroCalcDialog.h:380
 msgid "Calculate phenomena"
 msgstr "Calcular fenómenos"
 
-#: src/ui_astroCalcDialog.h:374
+#: src/ui_astroCalcDialog.h:381
 msgid "Phenomena"
 msgstr "Fenómenos"
 
@@ -6136,7 +6143,7 @@ msgstr ""
 "laboratório. Nós medimos e calculamos. Queríamos estar no Havaí."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:444
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
@@ -6148,7 +6155,7 @@ msgid "Links"
 msgstr "Hiperligações"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:435
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:445
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
@@ -6165,7 +6172,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:448
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
@@ -6179,7 +6186,7 @@ msgstr "Se tiver uma pergunta, pode %1obter uma resposta aqui%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:440
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
@@ -6193,7 +6200,7 @@ msgstr "Relatórios de erros podem ser feitos %1aqui%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:442
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/Novae/src/gui/NovaeDialog.cpp:141
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -6266,7 +6273,7 @@ msgid "Use dms format for angles"
 msgstr "Utilizar o formato GMS para os ângulos"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Satellites/src/ui_satellitesDialog.h:743
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
@@ -6279,7 +6286,7 @@ msgid "Restore default settings"
 msgstr "Restaurar as configurações padrão"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:243
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Satellites/src/ui_satellitesDialog.h:744
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
@@ -6291,7 +6298,7 @@ msgstr "Guardar as configurações como padrão"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:245
 #: plugins/Oculars/src/ui_ocularDialog.h:1129
-#: plugins/Satellites/src/ui_satellitesDialog.h:762
+#: plugins/Satellites/src/ui_satellitesDialog.h:793
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
@@ -6854,7 +6861,7 @@ msgstr "Adicionar"
 #: plugins/Oculars/src/ui_ocularDialog.h:1105
 #: plugins/Oculars/src/ui_ocularDialog.h:1112
 #: plugins/Oculars/src/ui_ocularDialog.h:1123
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/Satellites/src/ui_satellitesDialog.h:760
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
@@ -6938,13 +6945,13 @@ msgstr "Inversão horizontal"
 msgid "Vertical flip"
 msgstr "Inversão vertical"
 
-#: plugins/Satellites/src/Satellites.cpp:67
-#: plugins/Satellites/src/Satellites.cpp:141
-#: plugins/Satellites/src/ui_satellitesDialog.h:748
+#: plugins/Satellites/src/Satellites.cpp:68
+#: plugins/Satellites/src/Satellites.cpp:142
+#: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Satellites"
 msgstr "Satélites"
 
-#: plugins/Satellites/src/Satellites.cpp:70
+#: plugins/Satellites/src/Satellites.cpp:71
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
@@ -6952,19 +6959,19 @@ msgstr ""
 "Uma previsão das posições dum satélite artificial na órbita da Terra com "
 "base nos dados da NORAD TLE"
 
-#: plugins/Satellites/src/Satellites.cpp:142
+#: plugins/Satellites/src/Satellites.cpp:143
 msgid "Satellite hints"
 msgstr "Ajuda dos satélites"
 
-#: plugins/Satellites/src/Satellites.cpp:143
+#: plugins/Satellites/src/Satellites.cpp:144
 msgid "Satellite labels"
 msgstr "Campos do satélite"
 
-#: plugins/Satellites/src/Satellites.cpp:144
+#: plugins/Satellites/src/Satellites.cpp:145
 msgid "Satellites configuration window"
 msgstr "Janela de configuração do satélite"
 
-#: plugins/Satellites/src/Satellites.cpp:176
+#: plugins/Satellites/src/Satellites.cpp:177
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -6972,92 +6979,92 @@ msgstr ""
 "omisso"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1714
+#: plugins/Satellites/src/Satellites.cpp:1786
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1716
+#: plugins/Satellites/src/Satellites.cpp:1788
 msgid "scientific"
 msgstr "científico"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1718
+#: plugins/Satellites/src/Satellites.cpp:1790
 msgid "communications"
 msgstr "de comunicação"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1720
+#: plugins/Satellites/src/Satellites.cpp:1792
 msgid "navigation"
 msgstr "navegação"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1722
+#: plugins/Satellites/src/Satellites.cpp:1794
 msgid "amateur"
 msgstr "amador"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1724
+#: plugins/Satellites/src/Satellites.cpp:1796
 msgid "weather"
 msgstr "meteorológico"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1726
+#: plugins/Satellites/src/Satellites.cpp:1798
 msgid "geostationary"
 msgstr "geoestacionário"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1728
+#: plugins/Satellites/src/Satellites.cpp:1800
 msgid "non-operational"
 msgstr "não operacional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1730
+#: plugins/Satellites/src/Satellites.cpp:1802
 msgid "gps"
 msgstr "de posicionamento global (GPS)"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:1732
+#: plugins/Satellites/src/Satellites.cpp:1804
 msgid "glonass"
 msgstr "glonass"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:1734
+#: plugins/Satellites/src/Satellites.cpp:1806
 msgid "galileo"
 msgstr "galileo"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1736
+#: plugins/Satellites/src/Satellites.cpp:1808
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:1738
+#: plugins/Satellites/src/Satellites.cpp:1810
 msgid "stations"
 msgstr "estações"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:1740
+#: plugins/Satellites/src/Satellites.cpp:1812
 msgid "education"
 msgstr "educacional"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
-#: plugins/Satellites/src/Satellites.cpp:1742
+#: plugins/Satellites/src/Satellites.cpp:1814
 msgid "observatory"
 msgstr "observatório"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1753
+#: plugins/Satellites/src/Satellites.cpp:1825
 msgid "The Hubble Space Telescope"
 msgstr "O Telescópio Espacial Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1755
+#: plugins/Satellites/src/Satellites.cpp:1827
 msgid "The International Space Station"
 msgstr "A Estação Espacial Internacional"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1757
+#: plugins/Satellites/src/Satellites.cpp:1829
 msgid "China's first space station"
 msgstr "Primeira estação espacial da China"
 
@@ -7141,11 +7148,16 @@ msgstr "O satélite não está visível."
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:396
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:405
 msgid "Stellarium Satellites Plugin"
 msgstr "Complemento de satélites do Stellarium"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
+#: plugins/Satellites/src/ui_satellitesDialog.h:792
+msgid "Iridium flares"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -7153,18 +7165,18 @@ msgstr ""
 "O complemento de satélites prevê as posições de satélites artificiais na "
 "órbita da Terra."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:414
 msgid "Notes for users"
 msgstr "Notas para os usuários"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:405
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Os satélites e as suas órbitas são mostrados apenas se o observador estiver "
 "na Terra."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -7174,7 +7186,7 @@ msgstr ""
 "(da ordem de dias, semanas ou talvez um mês para o passado e para o futuro). "
 "Conte com previsões pouco válidas quando observar em datas fora dessa faixa."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -7184,7 +7196,7 @@ msgstr ""
 "os dados TLE regularmente."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -7197,7 +7209,7 @@ msgstr ""
 "encontrado-lo no directório que contém os dados do utilizador, em "
 "“modules/Satellites/”."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:425
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -7206,11 +7218,11 @@ msgstr ""
 "desenvolvimento. Alguns recursos estão incompletos, ausentes ou com falhas."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:429
 msgid "TLE data updates"
 msgstr "Atualizações dos dados do TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -7220,7 +7232,7 @@ msgstr ""
 "partir de fontes na Internet, e, por padrão, ele fará isso se os dados "
 "existentes tiverem mais de 72 horas. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:431
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -7231,7 +7243,7 @@ msgstr ""
 "partir de um ficheiro no seu computador. Ele deve estar no mesmo formato das "
 "actualizações do Celestrak (veja, a título de exemplo, o arquivo %1)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -7240,11 +7252,11 @@ msgstr ""
 "algo entre colchetes no final, ele será removido antes de os dados serem "
 "utilizados."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:425
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:435
 msgid "Adding new satellites"
 msgstr "A adicionar novos satélites..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:436
 msgid ""
 "1. Make sure the satellite(s) you wish to add are included in one of the "
 "URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
@@ -7257,11 +7269,11 @@ msgstr ""
 "botão ‘+’. Selecione o(s) satélite(s) que deseja adicionar e carregue no "
 "botão “Adicionar”."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
 msgid "Technical notes"
 msgstr "Notas técnicas"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:429
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:439
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
@@ -7269,7 +7281,7 @@ msgstr ""
 "As posições são calculadas utilizando os métodos SGP4 e SDP4, utilizando "
 "dados do NORAD TLE como fonte. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:440
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -7279,12 +7291,12 @@ msgstr ""
 "Spacetrack Report N#6). "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:442
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Veja %1este documento%2 para detalhes."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:474
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
@@ -7293,8 +7305,8 @@ msgstr "Veja %1este documento%2 para detalhes."
 msgid "Internet updates disabled"
 msgstr "Actualizações a partir da Internet desactivadas"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:466
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:482
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:476
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:492
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:168
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:202
 #: plugins/Novae/src/gui/NovaeDialog.cpp:165
@@ -7308,7 +7320,7 @@ msgstr "Actualizações a partir da Internet desactivadas"
 msgid "Updating now..."
 msgstr "A actualizar agora…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:471
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:170
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
@@ -7317,7 +7329,7 @@ msgstr "A actualizar agora…"
 msgid "Next update: < 1 minute"
 msgstr "Próxima actualização: < 1 minuto"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:473
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:483
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
@@ -7327,7 +7339,7 @@ msgstr "Próxima actualização: < 1 minuto"
 msgid "Next update: %1 minutes"
 msgstr "Próxima actualização: %1 minutos"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:475
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
@@ -7337,7 +7349,7 @@ msgstr "Próxima actualização: %1 minutos"
 msgid "Next update: %1 hours"
 msgstr "Próxima actualização: %1 horas"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:495
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
 #: plugins/Novae/src/gui/NovaeDialog.cpp:202
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
@@ -7346,25 +7358,25 @@ msgstr "Próxima actualização: %1 horas"
 msgid "Update error"
 msgstr "Erro de actualização"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:498
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:508
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
 "Foram actualizados %1/%2 satélite(s); %3 foram adicionados; %4 foram "
 "removidos"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:500
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:510
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr ""
 "Foram actualizados %1/%2 satélite(s); %3 foram adicionados; %4 estão em falta"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:562
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:572
 msgid "[new source]"
 msgstr "[nova fonte]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:614
-#: plugins/Satellites/src/ui_satellitesDialog.h:686
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:624
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:191
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:188
@@ -7379,7 +7391,7 @@ msgstr "[nova fonte]"
 msgid "Update now"
 msgstr "Actualizar agora"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:616
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
@@ -7388,34 +7400,46 @@ msgstr "Actualizar agora"
 msgid "Update from files"
 msgstr "Actualizar a partir de ficheiros"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:658
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
 msgid "[orbit calculation error]"
 msgstr "[erro de cálculo da órbita]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:659
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:669
 msgid "[all newly added]"
 msgstr "[todos os adicionados recentemente]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:660
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:670
 msgid "[all not displayed]"
 msgstr "[todos que não são exibidos]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:661
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:671
 msgid "[all displayed]"
 msgstr "[todos que são exibidos]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:662
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:672
 msgid "[all]"
 msgstr "[todos]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:706
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
 msgid "New group..."
 msgstr "Novo grupo..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:912
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:922
 msgid "Select TLE Update File"
 msgstr "Selecione o ficheiro de actualização do TLE"
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
+msgid "Time"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:941
+msgid "Brightness"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
+msgid "Satellite"
+msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -7449,20 +7473,20 @@ msgstr "Não foi possível descarregar os dados. Tente de novo mais tarde."
 msgid "Catalog Number: %1"
 msgstr "Número do catálogo: %1"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:679
-#: plugins/Satellites/src/ui_satellitesDialog.h:680
+#: plugins/Satellites/src/ui_satellitesDialog.h:708
+#: plugins/Satellites/src/ui_satellitesDialog.h:709
 msgid "Satellites Configuration"
 msgstr "Configuração de satélites"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:682
+#: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Updates"
 msgstr "Actualizações"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:683
+#: plugins/Satellites/src/ui_satellitesDialog.h:712
 msgid "Update satellite data from Internet sources"
 msgstr "Actualizar os dados dos satélites de fontes web"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:684
+#: plugins/Satellites/src/ui_satellitesDialog.h:713
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
@@ -7471,13 +7495,13 @@ msgstr "Actualizar os dados dos satélites de fontes web"
 msgid "Last update:"
 msgstr "Última actualização:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:685
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "On update, add all new satellites from the selected source(s)"
 msgstr ""
 "Ao actualizar, adicionar todos os novos satélites da(s) fonte(s) "
 "seleccionada(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:687
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
@@ -7485,52 +7509,52 @@ msgstr ""
 "Ao actualizar, remover os satélites que não estão listados nas fontes de "
 "actualização"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:688
+#: plugins/Satellites/src/ui_satellitesDialog.h:717
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "Frequência de actualização (em horas):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:690
+#: plugins/Satellites/src/ui_satellitesDialog.h:719
 msgid "Label font size (pixels):"
 msgstr "Tamanho da fonte dos rótulos (em píxeis):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:691
+#: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Orbit lines"
 msgstr "Linhas das órbitas"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:693
-#: plugins/Satellites/src/ui_satellitesDialog.h:697
+#: plugins/Satellites/src/ui_satellitesDialog.h:722
+#: plugins/Satellites/src/ui_satellitesDialog.h:726
 msgid "Number of segments used to draw the line"
 msgstr "Número de segmentos utilizados para compôr a linha"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:695
+#: plugins/Satellites/src/ui_satellitesDialog.h:724
 msgid "Number of  segments:"
 msgstr "Número de segmentos:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:700
-#: plugins/Satellites/src/ui_satellitesDialog.h:704
+#: plugins/Satellites/src/ui_satellitesDialog.h:729
+#: plugins/Satellites/src/ui_satellitesDialog.h:733
 msgid "Duration of a single segment in seconds"
 msgstr "Duração de um segmento simples, em segundos"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:702
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
 msgid "Segment length (s):"
 msgstr "Duração do segmento (s):"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:707
-#: plugins/Satellites/src/ui_satellitesDialog.h:710
+#: plugins/Satellites/src/ui_satellitesDialog.h:736
+#: plugins/Satellites/src/ui_satellitesDialog.h:739
 msgid "Number of segments used to draw each end of the line"
 msgstr "Número de segmentos utilizados para compôr cada fim de linha"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:712
+#: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Fade length:"
 msgstr "Duração do desvanecimento:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:713
+#: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid "Realistic mode for the artificial satellites"
 msgstr "Modo realístico para satélites artificiais"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Satellites/src/ui_satellitesDialog.h:745
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
@@ -7540,66 +7564,66 @@ msgstr "Modo realístico para satélites artificiais"
 msgid "Settings"
 msgstr "Definições"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:718
+#: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Double-click a satellite to start tracking it."
 msgstr "Faça um duplo click num satélite para começar a segui-lo."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:721
+#: plugins/Satellites/src/ui_satellitesDialog.h:750
 msgid "Add more satellites"
 msgstr "Adiciona mais satélites"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:724
+#: plugins/Satellites/src/ui_satellitesDialog.h:753
 msgid "Remove the selected satellites"
 msgstr "Remove os satélites selecionados"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:728
+#: plugins/Satellites/src/ui_satellitesDialog.h:757
 msgid "Save changes"
 msgstr "Gravar as alterações"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:732
+#: plugins/Satellites/src/ui_satellitesDialog.h:761
 msgid "Catalog number:"
 msgstr "Número do catálogo:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:734
+#: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Display the selected satellite(s)"
 msgstr "Exibe o(s) satélite(s) selecionado(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:736
+#: plugins/Satellites/src/ui_satellitesDialog.h:765
 msgid "Displayed"
 msgstr "Apresentado"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:738
+#: plugins/Satellites/src/ui_satellitesDialog.h:767
 msgid "Display orbit line(s) for the selected satellite(s)"
 msgstr ""
 "Exibe a(s) linha(s) da(s) órbita(s) para o(s) satélite(s) selecionado(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:740
+#: plugins/Satellites/src/ui_satellitesDialog.h:769
 msgid "Orbit"
 msgstr "Órbita"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:742
+#: plugins/Satellites/src/ui_satellitesDialog.h:771
 msgid "Do not update (or remove on update) the selected satellite(s)"
 msgstr ""
 "Não actualizar (ou remover ao actualizar) o(s) satélite(s) seleccionado(s)"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:744
+#: plugins/Satellites/src/ui_satellitesDialog.h:773
 msgid "Do not update"
 msgstr "Não actualizar"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:745
+#: plugins/Satellites/src/ui_satellitesDialog.h:774
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:211
 msgid "Description:"
 msgstr "Descrição:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:746
+#: plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Groups:"
 msgstr "Grupos:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:747
+#: plugins/Satellites/src/ui_satellitesDialog.h:776
 msgid "TLE set:"
 msgstr "Conjunto de elementos de duas linhas:"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:749
+#: plugins/Satellites/src/ui_satellitesDialog.h:778
 msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
@@ -7607,7 +7631,7 @@ msgstr ""
 "Os satélites contidos nas listas da fonte marcada serão automaticamente "
 "adicionados na próxima actualização se eles ainda não estiverem na colecção."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:751
+#: plugins/Satellites/src/ui_satellitesDialog.h:780
 msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
@@ -7615,17 +7639,21 @@ msgstr ""
 "Insira ou edite a URL da fonte selecionada. As alterações serão gravadas ao "
 "pressionar Enter."
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:754
+#: plugins/Satellites/src/ui_satellitesDialog.h:783
 msgid "Add new source"
 msgstr "Adicionar uma nova fonte"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:758
+#: plugins/Satellites/src/ui_satellitesDialog.h:787
 msgid "Remove selected source"
 msgstr "Remover a fonte selecionada"
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:761
+#: plugins/Satellites/src/ui_satellitesDialog.h:790
 msgid "Sources"
 msgstr "Fontes"
+
+#: plugins/Satellites/src/ui_satellitesDialog.h:791
+msgid "Predict Iridium flares"
+msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
