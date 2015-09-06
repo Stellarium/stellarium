@@ -435,7 +435,7 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 {
 	QStringList headerStrings;
 	//TRANSLATORS: type of phenomena
-	headerStrings << q_("Type");
+	headerStrings << q_("Phenomen");
 	headerStrings << q_("Date and Time");
 	headerStrings << q_("Object 1");
 	headerStrings << q_("Object 2");
