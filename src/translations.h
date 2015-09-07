@@ -129,6 +129,12 @@ class Translations
 		N_("Molecular Clouds");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Young Stellar Objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Possible Quasars");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Possible Planetary Nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Protoplanetary Nebulae");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)

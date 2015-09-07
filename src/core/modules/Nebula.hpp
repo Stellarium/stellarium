@@ -161,8 +161,9 @@ private:
 		NebYSO		= 24, 	//!< Young Stellar Object
 		NebPossQSO	= 25, 	//!< Possible Quasar
 		NebPossPN	= 26, 	//!< Possible Planetary Nebula
-		NebStar		= 27, 	//!< Star
-		NebUnknown	= 28	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebPPN		= 27, 	//!< Protoplanetary Nebula
+		NebStar		= 28, 	//!< Star
+		NebUnknown	= 29	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	//! Translate nebula name using the passed translator
