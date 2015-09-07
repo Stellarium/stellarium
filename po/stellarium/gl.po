@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-05 15:56+0600\n"
-"PO-Revision-Date: 2015-08-30 22:52+0000\n"
+"POT-Creation-Date: 2015-09-06 19:36+0600\n"
+"PO-Revision-Date: 2015-09-06 17:14+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-06 05:18+0000\n"
+"X-Launchpad-Export-Date: 2015-09-07 05:21+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -774,7 +774,7 @@ msgstr "Iluminado: %1%"
 #: src/core/modules/Planet.cpp:348
 #, qt-format
 msgid "Eclipse Factor: %1%"
-msgstr ""
+msgstr "Factor de Eclipse: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
@@ -2602,9 +2602,7 @@ msgid "Mag."
 msgstr "Mag."
 
 #. TRANSLATORS: type of object
-#. TRANSLATORS: type of phenomena
-#: src/gui/AstroCalcDialog.cpp:135 src/gui/AstroCalcDialog.cpp:438
-#: src/ui_configurationDialog.h:1094
+#: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1094
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 msgid "Type"
 msgstr "Tipo"
@@ -2673,6 +2671,11 @@ msgstr "Obxectos de disco disperso"
 #: src/gui/AstroCalcDialog.cpp:424 src/translations.h:78
 msgid "Oort cloud objects"
 msgstr "Obxectos da nube de Oort"
+
+#. TRANSLATORS: type of phenomena
+#: src/gui/AstroCalcDialog.cpp:438
+msgid "Phenomen"
+msgstr "Fenómeno"
 
 #: src/gui/AstroCalcDialog.cpp:440
 msgid "Object 1"
@@ -7108,7 +7111,7 @@ msgstr "Plugin de satélites para Stellarium"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Iridium flares"
-msgstr ""
+msgstr "Labaradas de iridio"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
@@ -7384,15 +7387,15 @@ msgstr "Selecciona o arquivo de actualización TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
 msgid "Time"
-msgstr ""
+msgstr "Tempo"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:941
 msgid "Brightness"
-msgstr ""
+msgstr "Brillo"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Satellite"
-msgstr ""
+msgstr "Satélite"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -7605,7 +7608,7 @@ msgstr "Fontes"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "Predicir labaradas de iridio"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
