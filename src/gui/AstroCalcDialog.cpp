@@ -434,7 +434,6 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 void AstroCalcDialog::setPhenomenaHeaderNames()
 {
 	QStringList headerStrings;
-	//TRANSLATORS: type of phenomena
 	headerStrings << q_("Phenomen");
 	headerStrings << q_("Date and Time");
 	headerStrings << q_("Object 1");
