@@ -734,7 +734,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
 			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL";
+			       << "IR" << "**" << "MUL" << "PPN";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -831,6 +831,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 36:
 					nType = (unsigned int)Nebula::NebStar;
 					break;
+				case 37:
+					nType = (unsigned int)Nebula::NebPPN;
+					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
 					break;
@@ -913,9 +916,9 @@ bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
 	else if ((catalogFilters&Nebula::CatCed) && !(n->Ced_nb.isEmpty()))
 		r = true;
 
-	// TODO: Introduce objects without ID from current catalogs (such LMC)
-	//if (catalogFilters&AllCatalogs)
-	//	r = true;
+	// Special case: objects without ID from current catalogs
+	if (catalogFilters==Nebula::AllCatalogs)
+		r = true;
 
 	return r;
 }
@@ -955,7 +958,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		nb = cdes.toInt();
 
-		QStringList catalogs;
+		QStringList catalogs;		
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
 			 << "NGC" << "PGC" << "UGC" << "CED";
 
@@ -1005,7 +1008,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 14:
 				e = searchCed(cdes);
-				break;
+				break;			
 			default:
 				e = searchDSO(nb);
 				break;

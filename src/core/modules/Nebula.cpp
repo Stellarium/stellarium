@@ -117,9 +117,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&CatalogNumber)
 	{
-		if (!nameI18.isEmpty() && flags&Name)
-			oss << "<br>";
-
 		QStringList catIds;
 		if (M_nb > 0)
 			catIds << QString("M %1").arg(M_nb);
@@ -151,10 +148,11 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("UGC %1").arg(UGC_nb);
 		if (!Ced_nb.isEmpty())
 			catIds << QString("Ced %1").arg(Ced_nb);		
-		oss << catIds.join(" - ");
 
-		//if (!nameI18.isEmpty() && flags&Name)
-		//	oss << ")";
+		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
+			oss << "<br>";
+
+		oss << catIds.join(" - ");
 	}
 
 	if ((flags&Name) || (flags&CatalogNumber))
@@ -484,6 +482,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			break;
 		case NebPn:
 		case NebPossPN:
+		case NebPPN:
 			Nebula::texPlanetaryNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -680,6 +679,7 @@ bool Nebula::objectInDisplayedType() const
 			break;
 		case NebPn:
 		case NebPossPN:
+		case NebPPN:
 			cntype = 7; // Planetary Nebulae
 			break;
 		case NebSNR:
@@ -1057,6 +1057,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebPossPN:
 			wsType = q_("possible planetary nebula");
+			break;
+		case NebPPN:
+			wsType = q_("protoplanetary nebula");
 			break;
 		case NebStar:
 			wsType = q_("star");
