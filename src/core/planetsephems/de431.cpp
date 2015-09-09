@@ -48,9 +48,10 @@ void InitDE431(const char* filepath)
         qDebug() << "Error "<< jpl_init_error_code() << "at DE431 init:" << jpl_init_error_message();
     }
 }
+
 void GetDe431Coor(double jd, int planet_id, double * xyz)
 {
-    jpl_pleph(ephem, jd, planet_id, 3, tempXYZ, 0);
+    jpl_pleph(ephem, jd, planet_id, CENTRAL_PLANET_ID, tempXYZ, 0);
 
     tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
     tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
