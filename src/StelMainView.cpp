@@ -331,6 +331,7 @@ StelGuiItem::StelGuiItem(QGraphicsItem* parent) : QGraphicsWidget(parent)
 
 void StelGuiItem::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
+	Q_UNUSED(event);
 	widget->setGeometry(0, 0, size().width(), size().height());
 	StelApp::getInstance().getGui()->forceRefreshGui();
 }
