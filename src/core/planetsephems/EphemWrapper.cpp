@@ -39,7 +39,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define EPHEM_NEPTUNE_ID  7
 #define EPHEM_PLUTO_ID    8
 
-#define EPHEM_JPL_EARTH_ID 4
+#define EPHEM_IMD_EARTH_ID 2
 
 /**   JPL PlANET ID LIST
 **            1 = mercury           8 = neptune                             **
@@ -121,7 +121,7 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
  * params : Julian day, rect coords */
 void get_pluto_helio_coords(double jd, double * X, double * Y, double * Z)
 {
-  
+    
 }
 
 void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
@@ -148,11 +148,11 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused)
 {
   	if(use_de430(jd))
   	{
-  		  GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+  		  GetDe430Coor(jd, EPHEM_IMD_EARTH_ID, xyz);
   	}
   	else if(use_de431(jd))
   	{
-  		  GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+  		  GetDe431Coor(jd, EPHEM_IMD_EARTH_ID, xyz);
   	}
   	else //VSOP87 as fallback
   	{

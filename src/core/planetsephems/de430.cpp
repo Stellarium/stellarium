@@ -47,8 +47,6 @@ void InitDE430(const char* filepath)
     StelApp::getInstance().getCore()->setDe430Status(false);
     qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
   }
-
-  // qDebug() << "Path: " << filepath << "sizeof(double):" << sizeof(double);
 }
 
 void TerminateDE430()
@@ -58,7 +56,7 @@ void TerminateDE430()
 
 void GetDe430Coor(double jd, int planet_id, double * xyz)
 {
-    jpl_pleph(ephem, jd, planet_id, 3, tempXYZ, 0);
+    jpl_pleph(ephem, jd, planet_id, CENTRAL_PLANET_ID, tempXYZ, 0);
     //qDebug() << "tempXYZ: (" << tempXYZ[0] << "|" << tempXYZ[1]<< "|"<<tempXYZ[2] << ")"; 
     
     tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
