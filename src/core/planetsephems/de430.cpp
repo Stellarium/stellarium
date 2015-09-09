@@ -25,9 +25,6 @@ THE SOFTWARE.
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
-#include "jpleph.h"
-#include <fstream>
-#include <stdio.h>
 
 #ifdef __cplusplus
   extern "C" {
@@ -41,41 +38,6 @@ static char nams[JPL_MAX_N_CONSTANTS][6];
 static double vals[JPL_MAX_N_CONSTANTS];
 static double tempXYZ[6];
 
-void testReadDe430(const char *path)
-{
-  std::ifstream file (path, std::ios::in | std::ios::binary);
-  if(file)
-  {
-      int fileSize = file.tellg();
-      char* fileContents = new char[fileSize];
-      file.seekg(0, std::ios::beg);
-      if(!file.read(fileContents, fileSize))
-      {
-          qDebug() << "fail to read";
-          return;
-      }
-      file.close();
-
-      qDebug() << "size: " << fileSize;
-      qDebug() << "First 25 bytes:";
-      for(int i = 0; i < 100; i+=5)
-      {
-        qDebug() << fileContents[i] << fileContents[i+1] << fileContents[i+2] << 
-          fileContents[i+3] <<  fileContents[i+4];
-      }
-
-      qDebug() << "Last 25 bytes:";
-      for(int i = 0; i < 100; i+=5)
-      {
-        qDebug() << fileContents[fileSize+i-25] << fileContents[fileSize+i-25+1] << fileContents[fileSize+i-25+2] << 
-          fileContents[fileSize+i-25+3] <<  fileContents[fileSize+i-25+4];
-      }      
-      delete[] fileContents;
-  }
-  file.close();
-}
-
-
 void InitDE430(const char* filepath)
 {
   ephem = jpl_init_ephemeris(filepath, nams, vals);
@@ -86,8 +48,7 @@ void InitDE430(const char* filepath)
     qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
   }
 
-  qDebug() << "Path: " << filepath << "sizeof(double):" << sizeof(double);
-  testReadDe430(filepath);
+  // qDebug() << "Path: " << filepath << "sizeof(double):" << sizeof(double);
 }
 
 void TerminateDE430()
@@ -99,6 +60,7 @@ void GetDe430Coor(double jd, int planet_id, double * xyz)
 {
     jpl_pleph(ephem, jd, planet_id, 3, tempXYZ, 0);
     //qDebug() << "tempXYZ: (" << tempXYZ[0] << "|" << tempXYZ[1]<< "|"<<tempXYZ[2] << ")"; 
+    
     tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
     tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
 
