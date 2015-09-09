@@ -1828,7 +1828,7 @@ void StelCore::initEphemeridesFunctions()
 	{
 
 		//TODO: check for correct filesize
-		QString de430FilePath = StelFileMgr::findFile("ephem/de430.bsp", 
+		QString de430FilePath = StelFileMgr::findFile("ephem/linux_p1550p2650.430", 
 			StelFileMgr::File);
 	  	
 		setDe430Status(!de430FilePath.isEmpty());
@@ -1840,20 +1840,16 @@ void StelCore::initEphemeridesFunctions()
   			EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
   		}
 
-	 	QString de431FilePathP1 = StelFileMgr::findFile("ephem/de431_part-1.bsp", 
+	 	QString de431FilePath = StelFileMgr::findFile("ephem/lnxm13000p17000.431", 
 	 		StelFileMgr::File);
 	  	
-	 	QString de431FilePathP2 = StelFileMgr::findFile("ephem/de431_part-2.bsp", 
-			StelFileMgr::File);
+	 	setDe431Status(!(de431FilePath.isEmpty()));
 
-	 	setDe431Status(!(de431FilePathP1.isEmpty() && de431FilePathP2.isEmpty()));
-
-	 	qDebug() << "DE431: " << !de431FilePathP1.isEmpty() << "+" 
-	 		<< !de431FilePathP2.isEmpty();
+	 	qDebug() << "DE431: " << !de431FilePath.isEmpty();
 	 	
 	 	if(de431Active)
 		{
-			EphemWrapper::init_de431(de431FilePathP1.toStdString().c_str());
+			EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
   		}
   		
   		//std::ofstream outfile;
