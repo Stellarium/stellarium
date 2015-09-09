@@ -24,6 +24,11 @@ THE SOFTWARE.
 #include "jpleph.h"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
+#include "StelApp.hpp"
+
+#ifdef __cplusplus
+  extern "C" {
+#endif
 
 static void * ephem;
    
@@ -36,6 +41,12 @@ static double tempXYZ[6];
 void InitDE431(const char* filepath)
 {
     ephem = jpl_init_ephemeris(filepath, nams, vals);
+
+    if(jpl_init_error_code() != 0)
+    {
+        StelApp::getInstance().getCore()->setDe431Status(false);
+        qDebug() << "Error "<< jpl_init_error_code() << "at DE431 init:" << jpl_init_error_message();
+    }
 }
 void GetDe431Coor(double jd, int planet_id, double * xyz)
 {
@@ -53,3 +64,7 @@ void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
 {
 	
 }
+
+#ifdef __cplusplus
+  }
+#endif
