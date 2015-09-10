@@ -832,7 +832,7 @@
              <item>
               <widget class="QCheckBox" name="planetIsolatedOrbitCheckBox">
                <property name="toolTip">
-                <string>Deactivate this option if you want to see orbits for selected planet and their moons.</string>
+                <string>Deactivate this option if you want to see orbit for selected planet and its moons.</string>
                </property>
                <property name="text">
                 <string>Show orbit for selected planet</string>
@@ -842,15 +842,18 @@
              <item>
               <widget class="QCheckBox" name="planetIsolatedTrailsCheckBox">
                <property name="toolTip">
-                <string>Deactivate this option if you want to see the trails for all celestial bodies from Solar system.</string>
+                <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
                </property>
                <property name="text">
-                <string>Show trail for selected planet</string>
+                <string>Show trail only for selected planet</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QCheckBox" name="planetLightSpeedCheckBox">
+			   <property name="toolTip">
+                <string>Activate this option to simulate the effect of real speed of light (recommended).</string>
+               </property>
                <property name="text">
                 <string>Simulate light speed</string>
                </property>
