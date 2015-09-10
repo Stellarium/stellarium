@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-08 00:58+0600\n"
+"POT-Creation-Date: 2015-09-09 22:54+0600\n"
 "PO-Revision-Date: 2015-02-22 17:58+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-08 05:28+0000\n"
+"X-Launchpad-Export-Date: 2015-09-10 05:42+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -22,7 +22,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:536
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "Možnosti zobrazenia"
 
@@ -1665,7 +1665,7 @@ msgid "Deep-sky objects background images"
 msgstr "Obrázky na pozadí objektov hlbokého vesmíru"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Miscellaneous"
 msgstr "Rôzne"
 
@@ -2663,7 +2663,7 @@ msgid "Oort cloud objects"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:437
-msgid "Phenomen"
+msgid "Phenomenon"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:439
@@ -2686,7 +2686,7 @@ msgstr ""
 msgid "Opposition"
 msgstr ""
 
-#: src/StelMainView.cpp:441 src/StelMainView.cpp:456
+#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2694,19 +2694,19 @@ msgstr ""
 "Na tomto systéme nebol nájdený OpenGL 2. Vymeňte hardvér, použite MESA, "
 "alebo nainštalujte staršiu verziu programu."
 
-#: src/StelMainView.cpp:470
+#: src/StelMainView.cpp:471
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Nepodarilo sa získať potrebné prostriedky OpenGL."
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Save screenshot"
 msgstr "Uložiť snímku obrazovky"
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:537
 msgid "Full-screen mode"
 msgstr "Celoobrazovkový režim"
 
-#: src/StelMainView.cpp:677
+#: src/StelMainView.cpp:678
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2714,13 +2714,13 @@ msgstr ""
 "Nízka verzia OpenGL. Prosím, aktualizujte ovládače, grafický hardvér, alebo "
 "použite verziu MESA (prípadne ANGLE)."
 
-#: src/StelMainView.cpp:680
+#: src/StelMainView.cpp:681
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Nízka verzia OpenGL. Prosím, aktualizujte ovládače, grafický hardvér."
 
-#: src/StelMainView.cpp:722
+#: src/StelMainView.cpp:723
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2730,7 +2730,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:773
+#: src/StelMainView.cpp:774
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2740,7 +2740,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:828
+#: src/StelMainView.cpp:829
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2750,7 +2750,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:865
+#: src/StelMainView.cpp:866
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2760,7 +2760,7 @@ msgstr ""
 "Má sa toto hlásenie ignorovať a stlmiť? Potom sa bude pokračovať v "
 "obmedzenom režime."
 
-#: src/StelMainView.cpp:974
+#: src/StelMainView.cpp:975
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
