@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-08 00:58+0600\n"
+"POT-Creation-Date: 2015-09-09 22:54+0600\n"
 "PO-Revision-Date: 2015-08-10 03:01+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-08 05:29+0000\n"
+"X-Launchpad-Export-Date: 2015-09-10 05:44+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:536
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "ตัวเลือกการแสดงผล"
 
@@ -1660,7 +1660,7 @@ msgid "Deep-sky objects background images"
 msgstr "ภาพพื้นหลังของวัตถุท้องฟ้าห้วงลึก"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Miscellaneous"
 msgstr "จิปาถะ"
 
@@ -2660,7 +2660,7 @@ msgid "Oort cloud objects"
 msgstr "วัตถุในเมฆของออร์ต"
 
 #: src/gui/AstroCalcDialog.cpp:437
-msgid "Phenomen"
+msgid "Phenomenon"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:439
@@ -2683,7 +2683,7 @@ msgstr ""
 msgid "Opposition"
 msgstr ""
 
-#: src/StelMainView.cpp:441 src/StelMainView.cpp:456
+#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2691,19 +2691,19 @@ msgstr ""
 "ไม่พบ OpenGL 2 ในระบบ กรุณาอัปเกรดฮาร์ดแวร์ หรือใช้โปรแกรมรุ่น MESA "
 "หรือรุ่นที่เก่ากว่า"
 
-#: src/StelMainView.cpp:470
+#: src/StelMainView.cpp:471
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "ไม่สามารถเข้าถึงทรัพยากร OpenGL ที่จำเป็น"
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Save screenshot"
 msgstr "บันทึกภาพหน้าจอ"
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:537
 msgid "Full-screen mode"
 msgstr "โหมดเต็มจอ"
 
-#: src/StelMainView.cpp:677
+#: src/StelMainView.cpp:678
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2711,14 +2711,14 @@ msgstr ""
 "รุ่นของ OpenGL ไม่สูงพอ กรุณาติดตั้งไดรเวอร์รุ่นปรับปรุง หรือใช้โปรแกรมรุ่น "
 "MESA (หรือ ANGLE)"
 
-#: src/StelMainView.cpp:680
+#: src/StelMainView.cpp:681
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "รุ่นของ OpenGL ไม่สูงพอ กรุณาติดตั้งไดรเวอร์รุ่นปรับปรุง "
 "หรือเปลี่ยนการ์ดแสดงผล"
 
-#: src/StelMainView.cpp:722
+#: src/StelMainView.cpp:723
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2727,7 +2727,7 @@ msgstr ""
 "ระบบ DirectX/OpenGL ES ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
 "ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
-#: src/StelMainView.cpp:773
+#: src/StelMainView.cpp:774
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2736,7 +2736,7 @@ msgstr ""
 "ระบบ OpenGL/Mesa ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
 "ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
-#: src/StelMainView.cpp:828
+#: src/StelMainView.cpp:829
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2745,7 +2745,7 @@ msgstr ""
 "ระบบ OpenGL ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
 "ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
-#: src/StelMainView.cpp:865
+#: src/StelMainView.cpp:866
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2754,7 +2754,7 @@ msgstr ""
 "ระบบ  OpenGL ES ของคุณมีปัญหา ดูรายละเอียดได้ในบันทึก\n"
 "ต้องการข้ามคำเตือนนี้ในอนาคต และพยายามทำงานในโหมดการแสดงผลระดับต่ำหรือไม่?"
 
-#: src/StelMainView.cpp:974
+#: src/StelMainView.cpp:975
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"

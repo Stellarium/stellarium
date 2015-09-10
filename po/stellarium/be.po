@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-08 00:58+0600\n"
-"PO-Revision-Date: 2015-08-26 14:56+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2015-09-09 22:54+0600\n"
+"PO-Revision-Date: 2015-09-09 11:48+0000\n"
+"Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-08 05:16+0000\n"
+"X-Launchpad-Export-Date: 2015-09-10 05:30+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:536
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "Настройкі адлюстраваньня"
 
@@ -404,17 +404,17 @@ msgstr "незадакумэнтаваная кляса канцэтрацыі"
 #: src/core/modules/Nebula.cpp:815
 msgctxt "Trumpler's Brightness Class"
 msgid "small range the brightness of members of cluster"
-msgstr ""
+msgstr "малы дыяпазон яркасьці членай скопішча"
 
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
 msgid "medium range the brightness of members of cluster"
-msgstr ""
+msgstr "сярэдні дыяпазон яркасьці членай скопішча"
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "Trumpler's Brightness Class"
 msgid "large range the brightness of members of cluster"
-msgstr ""
+msgstr "вялікі дыяпазон яркасьці членай скопішча"
 
 #: src/core/modules/Nebula.cpp:824
 msgctxt "Trumpler's Concentration Class"
@@ -439,7 +439,7 @@ msgstr "багатае скопішча з больш як 100 зорак"
 #: src/core/modules/Nebula.cpp:839
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
-msgstr ""
+msgstr "незадакумэнтаваная кляса колькасьці членаў"
 
 #: src/core/modules/Nebula.cpp:843
 msgctxt "nebulosity factor of open clusters"
@@ -484,27 +484,27 @@ msgstr "незадакумэнтаваная яркасьць адбіваючы
 #: src/core/modules/Nebula.cpp:888
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "зорка, якая асьвятляе, знаходзіца ў туманнасьці"
 
 #: src/core/modules/Nebula.cpp:891
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
-msgstr ""
+msgstr "зорка знаходзіцца па-за асьвечанай туманнасьцю"
 
 #: src/core/modules/Nebula.cpp:894
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr ""
+msgstr "зорка знаходзіцца ў куце асьвечанай туманнасьці"
 
 #: src/core/modules/Nebula.cpp:897
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "зорка знаходзіцца па-за асьвечанай пэкулярнай туманнасьцю"
 
 #: src/core/modules/Nebula.cpp:900
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "асьветленая пэкулярная туманнасьць"
 
 #: src/core/modules/Nebula.cpp:903
 msgctxt "Reflection Nebulae Classification"
@@ -672,7 +672,7 @@ msgstr "магчымая плянэтарная туманнасьць"
 
 #: src/core/modules/Nebula.cpp:1062
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "протаплянэтная туманнасьць"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1065 src/core/modules/StarWrapper.cpp:50
@@ -780,7 +780,7 @@ msgstr "Асьветлены: %1%"
 #: src/core/modules/Planet.cpp:348
 #, qt-format
 msgid "Eclipse Factor: %1%"
-msgstr ""
+msgstr "Каэфіцыент зацьменьня: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
@@ -1680,7 +1680,7 @@ msgid "Deep-sky objects background images"
 msgstr "Відарысы асноведзі аб'ектаў глыбокага космасу"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Miscellaneous"
 msgstr "Рознае"
 
@@ -2227,7 +2227,7 @@ msgstr "Вакно скаротаў"
 
 #: src/gui/StelGui.cpp:205
 msgid "AstroCalc window"
-msgstr ""
+msgstr "Астракалькулятар"
 
 #: src/gui/StelGui.cpp:206
 msgid "Copy selected object information to clipboard"
@@ -2598,17 +2598,17 @@ msgstr "Назва"
 #. TRANSLATORS: right ascension
 #: src/gui/AstroCalcDialog.cpp:129 src/gui/AstroCalcDialog.cpp:238
 msgid "RA (J2000)"
-msgstr ""
+msgstr "ПУ (J2000)"
 
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:131 src/gui/AstroCalcDialog.cpp:240
 msgid "Dec (J2000)"
-msgstr ""
+msgstr "Сх. (J2000)"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:133 src/gui/AstroCalcDialog.cpp:242
 msgid "Mag."
-msgstr ""
+msgstr "Вел."
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1094
@@ -2642,7 +2642,7 @@ msgstr "30 дзён"
 
 #: src/gui/AstroCalcDialog.cpp:416
 msgid "Solar system"
-msgstr ""
+msgstr "Сонечная сыстэма"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:418 src/translations.h:66
@@ -2682,30 +2682,30 @@ msgid "Oort cloud objects"
 msgstr "Аб'екты воблака Аорта"
 
 #: src/gui/AstroCalcDialog.cpp:437
-msgid "Phenomen"
+msgid "Phenomenon"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:439
 msgid "Object 1"
-msgstr ""
+msgstr "Аб'ект 1"
 
 #: src/gui/AstroCalcDialog.cpp:440
 msgid "Object 2"
-msgstr ""
+msgstr "Аб'ект 2"
 
 #: src/gui/AstroCalcDialog.cpp:441
 msgid "Separation"
-msgstr ""
+msgstr "Аддаленьне"
 
 #: src/gui/AstroCalcDialog.cpp:597
 msgid "Conjunction"
-msgstr ""
+msgstr "Злучэньне"
 
 #: src/gui/AstroCalcDialog.cpp:601
 msgid "Opposition"
-msgstr ""
+msgstr "Супрацьстаяньне"
 
-#: src/StelMainView.cpp:441 src/StelMainView.cpp:456
+#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2713,19 +2713,19 @@ msgstr ""
 "Сыстэма не падтрымлівае OpenGL 2. Калі ласка, абнаві апаратнае "
 "забесьпячэньне, выкарыстоўвац MESA ці ранейшую вэрсію."
 
-#: src/StelMainView.cpp:470
+#: src/StelMainView.cpp:471
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Немагчыма атрымаць патрэбныя рэсурсы OpenGL."
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Save screenshot"
 msgstr "Захаваць здымак экрану"
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:537
 msgid "Full-screen mode"
 msgstr "Поўнаэкранны рэжым"
 
-#: src/StelMainView.cpp:677
+#: src/StelMainView.cpp:678
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2733,14 +2733,14 @@ msgstr ""
 "Незадавальняючая вэрсія OpenGL. Калі ласка, абнаві драйвэры, ґрафічнае "
 "абсталяваньне, ці карыстайся вэрсіяй для MESA (ці ANGLE)."
 
-#: src/StelMainView.cpp:680
+#: src/StelMainView.cpp:681
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Незадавальняючая вэрсія OpenGL. Калі ласка, абнаві драйвэры, ґрафічнае "
 "абсталяваньне."
 
-#: src/StelMainView.cpp:722
+#: src/StelMainView.cpp:723
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2751,7 +2751,7 @@ msgstr ""
 "Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
 "паспрабаваць працягнуць у пагоршаным рэжыме?"
 
-#: src/StelMainView.cpp:773
+#: src/StelMainView.cpp:774
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2761,7 +2761,7 @@ msgstr ""
 "Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
 "паспрабаваць працягнуць у пагоршаным рэжыме?"
 
-#: src/StelMainView.cpp:828
+#: src/StelMainView.cpp:829
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2771,7 +2771,7 @@ msgstr ""
 "Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
 "паспрабаваць працягнуць у пагоршаным рэжыме?"
 
-#: src/StelMainView.cpp:865
+#: src/StelMainView.cpp:866
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2781,7 +2781,7 @@ msgstr ""
 "Ці праіґнараваць і не паказваць гэтае паведамленьне ў будучыні й "
 "паспрабаваць працягнуць у пагоршаным рэжыме?"
 
-#: src/StelMainView.cpp:974
+#: src/StelMainView.cpp:975
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2980,17 +2980,17 @@ msgstr "Маладыя зоркавыя аб'екты"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Possible Quasars"
-msgstr ""
+msgstr "Магчымыя квазары"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "Магчымыя плянэтарныя туманнасьці"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "Протаплянэтная туманнасьць"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:139 src/ui_viewDialog.h:1625
@@ -5009,7 +5009,7 @@ msgstr "Паказваць аб'екты з каталёґаў"
 
 #: src/ui_viewDialog.h:1616
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
-msgstr ""
+msgstr "Пералік туманнасьцяў і скопішчаў зорак"
 
 #: src/ui_viewDialog.h:1619
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
@@ -5062,7 +5062,7 @@ msgstr "Агульны каталёґ ґаляктык Упсалы"
 
 #: src/ui_viewDialog.h:1658
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr ""
+msgstr "Каталёґ яркіх расьсеяных ґаляктычных туманнасьцяў (Сэдэрблад, 1946)"
 
 #: src/ui_viewDialog.h:1660
 msgid "Filter by type"
@@ -5101,6 +5101,8 @@ msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
+"Выкарыстоўваць яркасьць паверхні аб'ектаў глыбокага космасу для "
+"маштабаваньня бачнасьці іхных пазнак і назваў."
 
 #: src/ui_viewDialog.h:1677
 msgid "Use surface brightness"
@@ -5108,7 +5110,7 @@ msgstr "Выкарыстоўваць яркасьць паверхні"
 
 #: src/ui_viewDialog.h:1679
 msgid "Use hints proportional to angular size of deep-sky objects"
-msgstr ""
+msgstr "Рабіць намінкі прапарцыйнымі вуглавому памеру АГК"
 
 #: src/ui_viewDialog.h:1681
 msgid "Use proportional hints"
@@ -5744,6 +5746,8 @@ msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
+"Задзейнічай каб праволзіць назіраньні нібы з паверхні плянэты (раіцца). Калі "
+"выключана, паказваць плянэтацэнтрычны від."
 
 #: src/ui_configurationDialog.h:1195
 msgid "Topocentric coordinates"
@@ -5979,19 +5983,19 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:357
 msgid "AstroCalc"
-msgstr ""
+msgstr "Астракалькулятар"
 
 #: src/ui_astroCalcDialog.h:359
 msgid "Planetary positions every 5 minutes."
-msgstr ""
+msgstr "Становішчы плянэтаў кожныя 5 хвілін."
 
 #: src/ui_astroCalcDialog.h:360
 msgid "Planetary positions"
-msgstr ""
+msgstr "Становішчы плянэтаў"
 
 #: src/ui_astroCalcDialog.h:363
 msgid "Time step:"
-msgstr ""
+msgstr "Крок часу:"
 
 #: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
@@ -6000,7 +6004,7 @@ msgstr "Ад:"
 
 #: src/ui_astroCalcDialog.h:365 src/ui_astroCalcDialog.h:367
 msgid "yyyy.MM.dd hh:mm"
-msgstr ""
+msgstr "гггг.мм.дд гг:хх"
 
 #: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:374
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
@@ -6009,39 +6013,39 @@ msgstr "Да:"
 
 #: src/ui_astroCalcDialog.h:368
 msgid "Calculate ephemeris"
-msgstr ""
+msgstr "Разьлічыць эфэмэрыды"
 
 #: src/ui_astroCalcDialog.h:369
 msgid "Ephemeris"
-msgstr ""
+msgstr "Эфэмэрыды"
 
 #: src/ui_astroCalcDialog.h:370
 msgid "Between objects:"
-msgstr ""
+msgstr "Між абʼектамі:"
 
 #: src/ui_astroCalcDialog.h:371
 msgid "and"
-msgstr ""
+msgstr "і"
 
 #: src/ui_astroCalcDialog.h:373 src/ui_astroCalcDialog.h:375
 msgid "yyyy.MM.dd"
-msgstr ""
+msgstr "гггг.мм.дд"
 
 #: src/ui_astroCalcDialog.h:376
 msgid "Maximum allowed separation:"
-msgstr ""
+msgstr "Найбольшае дазволенае аддаленьне:"
 
 #: src/ui_astroCalcDialog.h:378
 msgid "Value in decimal degrees"
-msgstr ""
+msgstr "Значэньне ў дзесятковых ґрадусах"
 
 #: src/ui_astroCalcDialog.h:380
 msgid "Calculate phenomena"
-msgstr ""
+msgstr "Разьлічыць фэномэны"
 
 #: src/ui_astroCalcDialog.h:381
 msgid "Phenomena"
-msgstr ""
+msgstr "Фэномэны"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -7124,7 +7128,7 @@ msgstr "Дададак Stellarium «Спадарожнікі»"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Iridium flares"
-msgstr ""
+msgstr "Бліскі Iridium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
@@ -7392,15 +7396,15 @@ msgstr "Выберы файл з абнаўленьнямі TLE"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
 msgid "Time"
-msgstr ""
+msgstr "Час"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:941
 msgid "Brightness"
-msgstr ""
+msgstr "Яркасьць"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Satellite"
-msgstr ""
+msgstr "Спадарожнік"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -7610,7 +7614,7 @@ msgstr "Крыніцы"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "Прадказваць бліскі Iridium"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"

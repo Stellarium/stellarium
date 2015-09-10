@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-08 00:58+0600\n"
+"POT-Creation-Date: 2015-09-09 22:54+0600\n"
 "PO-Revision-Date: 2015-08-24 18:39+0000\n"
 "Last-Translator: José A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-08 05:28+0000\n"
+"X-Launchpad-Export-Date: 2015-09-10 05:42+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 "Language: es_ES\n"
 
@@ -25,7 +25,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:536
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "Opciones de visualización"
 
@@ -1685,7 +1685,7 @@ msgid "Deep-sky objects background images"
 msgstr "Imágenes de fondo de objetos del espacio profundo"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Miscellaneous"
 msgstr "Miscelánea"
 
@@ -2686,7 +2686,7 @@ msgid "Oort cloud objects"
 msgstr "Objetos de la nube de Oort"
 
 #: src/gui/AstroCalcDialog.cpp:437
-msgid "Phenomen"
+msgid "Phenomenon"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:439
@@ -2709,7 +2709,7 @@ msgstr "Conjunción"
 msgid "Opposition"
 msgstr "Oposición"
 
-#: src/StelMainView.cpp:441 src/StelMainView.cpp:456
+#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2717,19 +2717,19 @@ msgstr ""
 "No se encontró OpenGL 2 en este sistema. Por favor actualice su hardware o "
 "use MESA o una versión anterior."
 
-#: src/StelMainView.cpp:470
+#: src/StelMainView.cpp:471
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "No se pueden adquirir los recursos OpenGL necesarios."
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Save screenshot"
 msgstr "Guardar captura de pantalla"
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:537
 msgid "Full-screen mode"
 msgstr "Modo de pantalla completa"
 
-#: src/StelMainView.cpp:677
+#: src/StelMainView.cpp:678
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2737,14 +2737,14 @@ msgstr ""
 "Versión insuficiente de OpenGL. Por favor actualice controladores, hardware "
 "de gráficos, o use la versión MESA (o ANGLE)."
 
-#: src/StelMainView.cpp:680
+#: src/StelMainView.cpp:681
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Versión insuficiente de OpenGL. Por favor actualice controladores, hardware "
 "de gráficos."
 
-#: src/StelMainView.cpp:722
+#: src/StelMainView.cpp:723
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2755,7 +2755,7 @@ msgstr ""
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas "
 "formas en el modo degradado?"
 
-#: src/StelMainView.cpp:773
+#: src/StelMainView.cpp:774
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2766,7 +2766,7 @@ msgstr ""
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas "
 "formas en el modo degradado?"
 
-#: src/StelMainView.cpp:828
+#: src/StelMainView.cpp:829
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2776,7 +2776,7 @@ msgstr ""
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas "
 "formas en el modo degradado ?"
 
-#: src/StelMainView.cpp:865
+#: src/StelMainView.cpp:866
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2786,7 +2786,7 @@ msgstr ""
 "¿Ignorar y suprimir este aviso en el futuro, y tratar de continuar de todas "
 "formas en el modo degradado?"
 
-#: src/StelMainView.cpp:974
+#: src/StelMainView.cpp:975
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"

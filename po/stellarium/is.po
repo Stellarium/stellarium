@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-08 00:58+0600\n"
+"POT-Creation-Date: 2015-09-09 22:54+0600\n"
 "PO-Revision-Date: 2015-04-23 02:45+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-08 05:21+0000\n"
+"X-Launchpad-Export-Date: 2015-09-10 05:35+0000\n"
 "X-Generator: Launchpad (build 17706)\n"
 "Language: is\n"
 
@@ -27,7 +27,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:536
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "Skjástillingar"
 
@@ -1606,7 +1606,7 @@ msgid "Deep-sky objects background images"
 msgstr "Bakgrunnsmyndir djúpfyrirbæra"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Miscellaneous"
 msgstr "Ýmislegt"
 
@@ -2608,7 +2608,7 @@ msgid "Oort cloud objects"
 msgstr "Oortsský"
 
 #: src/gui/AstroCalcDialog.cpp:437
-msgid "Phenomen"
+msgid "Phenomenon"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:439
@@ -2631,7 +2631,7 @@ msgstr ""
 msgid "Opposition"
 msgstr ""
 
-#: src/StelMainView.cpp:441 src/StelMainView.cpp:456
+#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2639,19 +2639,19 @@ msgstr ""
 "Ekkert OpenGL 2 fannst á þessu kerfi. Uppfærðu vélbúnaðinn eða notaðu MESA "
 "eða eldri útgáfu."
 
-#: src/StelMainView.cpp:470
+#: src/StelMainView.cpp:471
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Get ekki nálgast nauðsynleg OpenGL tilföng."
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Save screenshot"
 msgstr "Vista skjámynd"
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:537
 msgid "Full-screen mode"
 msgstr "Heilskjár"
 
-#: src/StelMainView.cpp:677
+#: src/StelMainView.cpp:678
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2659,12 +2659,12 @@ msgstr ""
 "Ónothæf útgáfa OpenGL. Uppfærðu rekla, skjákort, eða notaðu MESA (eða ANGLE) "
 "útgáfuna."
 
-#: src/StelMainView.cpp:680
+#: src/StelMainView.cpp:681
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "Ónothæf útgáfa OpenGL. Uppfærðu rekla eða skjákort."
 
-#: src/StelMainView.cpp:722
+#: src/StelMainView.cpp:723
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2675,7 +2675,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:773
+#: src/StelMainView.cpp:774
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2686,7 +2686,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:828
+#: src/StelMainView.cpp:829
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2696,7 +2696,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:865
+#: src/StelMainView.cpp:866
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2707,7 +2707,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:974
+#: src/StelMainView.cpp:975
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
