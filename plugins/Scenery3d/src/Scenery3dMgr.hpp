@@ -242,8 +242,8 @@ public slots:
     QString getDefaultScenery3dID() const { return defaultScenery3dID; }
     void setDefaultScenery3dID(const QString& id);
 
-    //! Changes the current view to the given view
-    void setView(const StoredView& view);
+    //! Changes the current view to the given view. JD is updated only if view contains valid data and setDate is true
+    void setView(const StoredView& view, const bool setDate);
     //! Returns a StoredView that represents the current observer position + view direction.
     //! Label and description are empty.
     StoredView getCurrentView();
