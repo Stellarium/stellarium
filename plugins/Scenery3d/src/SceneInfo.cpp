@@ -459,6 +459,13 @@ void StoredView::readArray(QSettings &ini, StoredViewList &list, int size, bool 
 		sv.description = ini.value("description").toString();
 		sv.position = StelUtils::strToVec4d(ini.value("position").toString());
 		sv.view_fov = StelUtils::strToVec3f(ini.value("view_fov").toString());
+		if (ini.contains("JD"))
+		{
+			sv.jdIsRelevant=true;
+			sv.jd=ini.value("JD").toDouble();
+		}
+		else
+			sv.jdIsRelevant=false;
 
 		list.append(sv);
 	}
@@ -475,6 +482,8 @@ void StoredView::writeArray(QSettings &ini, const StoredViewList &list)
 		ini.setValue("description", view.description);
 		ini.setValue("position", StelUtils::vec4dToStr(view.position));
 		ini.setValue("view_fov", StelUtils::vec3fToStr(view.view_fov));
+		if (view.jdIsRelevant)
+			ini.setValue("JD", (view.jd));
 	}
 }
 
