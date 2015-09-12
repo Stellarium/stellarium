@@ -88,8 +88,8 @@ public slots:
 	//! The format of the file, and hence the filename extension
 	//! depends on the architecture and build type.
 	//! @arg filePrefix changes the beginning of the file name
-	//! @arg shotDir changes the directory where the screenshot is saved
-	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
+	//! @arg saveDir changes the directory where the screenshot is saved
+	//! If saveDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="");
 
 	//! Get whether colors are inverted when saving screenshot
