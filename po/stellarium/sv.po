@@ -7,22 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-05 15:56+0600\n"
+"POT-Creation-Date: 2015-09-10 20:09+0600\n"
 "PO-Revision-Date: 2015-08-21 20:48+0000\n"
 "Last-Translator: Birger <tjaly.92@hotmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-06 05:27+0000\n"
-"X-Generator: Launchpad (build 17706)\n"
+"X-Launchpad-Export-Date: 2015-09-11 05:29+0000\n"
+"X-Generator: Launchpad (build 17720)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:536
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "Visningsalternativ"
 
@@ -56,7 +56,7 @@ msgstr "Stjärnor"
 msgid "Stars labels"
 msgstr "Stjärnetiketter"
 
-#: src/core/modules/GridLinesMgr.cpp:596 src/ui_viewDialog.h:1756
+#: src/core/modules/GridLinesMgr.cpp:596 src/ui_viewDialog.h:1759
 msgid "Meridian"
 msgstr "Meridianen"
 
@@ -80,7 +80,7 @@ msgstr "Ekvatorn"
 msgid "Precession Circle"
 msgstr "Precessionscirkel"
 
-#: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1748
+#: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1751
 msgid "Horizon"
 msgstr "Horisont"
 
@@ -89,7 +89,7 @@ msgid "Galactic Equator"
 msgstr "Galaktisk ekvator"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1760
+#: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1763
 msgid "O./C. longitude"
 msgstr "O./K.-longitud"
 
@@ -98,7 +98,7 @@ msgstr "O./K.-longitud"
 msgid "Equatorial grid"
 msgstr "Konprojicerat rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:878 src/ui_viewDialog.h:1716
+#: src/core/modules/GridLinesMgr.cpp:878 src/ui_viewDialog.h:1719
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "Planprojicerat rutnät (azimutisk)"
@@ -144,12 +144,12 @@ msgstr "Ekliptiskt J2000-rutnät"
 msgid "Ecliptic grid"
 msgstr "Ekliptiskt rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1720
+#: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1723
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "Galaktiskt rutnät"
 
-#: src/core/modules/GridLinesMgr.cpp:889 src/ui_viewDialog.h:1752
+#: src/core/modules/GridLinesMgr.cpp:889 src/ui_viewDialog.h:1755
 msgid "Galactic equator"
 msgstr "Galaktisk ekvator"
 
@@ -170,7 +170,7 @@ msgstr "Atmosfär"
 msgid "Fog"
 msgstr "Dimma"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1724
+#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1727
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
 msgstr "Kardinalpunkter"
@@ -183,7 +183,7 @@ msgstr "Marknivå"
 msgid "Illumination"
 msgstr "Belysning"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1672
+#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1675
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Labels"
 msgstr "Rubriker"
@@ -206,7 +206,7 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr "Himlakropp"
 
-#: src/core/modules/Nebula.cpp:167 src/core/modules/Planet.cpp:213
+#: src/core/modules/Nebula.cpp:165 src/core/modules/Planet.cpp:213
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:184 src/core/modules/StarWrapper.cpp:187
 #: plugins/Satellites/src/Satellite.cpp:270
@@ -216,19 +216,19 @@ msgstr "Himlakropp"
 msgid "Type: <b>%1</b>"
 msgstr "Typ: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:169 src/core/modules/Comet.cpp:173
+#: src/core/modules/Nebula.cpp:167 src/core/modules/Comet.cpp:173
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
 #: plugins/MeteorShowers/src/MeteorShower.cpp:534
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Typ: <b>%1</b> (%2)"
 
-#: src/core/modules/Nebula.cpp:176
+#: src/core/modules/Nebula.cpp:174
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "Genomskinlighet: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:181 src/core/modules/Planet.cpp:219
+#: src/core/modules/Nebula.cpp:179 src/core/modules/Planet.cpp:219
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:179
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -237,7 +237,7 @@ msgstr "Genomskinlighet: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (extinktion: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:184 src/core/modules/Nebula.cpp:189
+#: src/core/modules/Nebula.cpp:182 src/core/modules/Nebula.cpp:187
 #: src/core/modules/Planet.cpp:222 src/core/modules/MinorPlanet.cpp:217
 #: src/core/modules/Comet.cpp:182 src/core/modules/StarWrapper.cpp:60
 #: src/core/modules/StarWrapper.cpp:197
@@ -247,43 +247,43 @@ msgstr "Magnitud: <b>%1</b> (extinktion: <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:190
+#: src/core/modules/Nebula.cpp:188
 msgid " (Photometric system: B)"
 msgstr " Fotometriskt system"
 
-#: src/core/modules/Nebula.cpp:196 src/core/modules/StarWrapper.cpp:65
+#: src/core/modules/Nebula.cpp:194 src/core/modules/StarWrapper.cpp:65
 #: src/core/modules/StarWrapper.cpp:205 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Färgindex (B-V): <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:203
+#: src/core/modules/Nebula.cpp:201
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Ytljusstyrka: <b>%1</b> (utdör till: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:209
+#: src/core/modules/Nebula.cpp:207
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "Ytljusstyrka: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:218
+#: src/core/modules/Nebula.cpp:216
 #, qt-format
 msgid "Size: %1"
 msgstr "Storlek: %1"
 
-#: src/core/modules/Nebula.cpp:221
+#: src/core/modules/Nebula.cpp:219
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr "Storlek: %1 x %2"
 
-#: src/core/modules/Nebula.cpp:223
+#: src/core/modules/Nebula.cpp:221
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr "Orienteringsvinkel: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:247 src/core/modules/StarWrapper.cpp:235
+#: src/core/modules/Nebula.cpp:245 src/core/modules/StarWrapper.cpp:235
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -291,31 +291,31 @@ msgid "Distance: %1 ly"
 msgstr "Avstånd: %1 ljusår"
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:262
+#: src/core/modules/Nebula.cpp:260
 msgid "Mpc"
 msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:267
+#: src/core/modules/Nebula.cpp:265
 msgid "kpc"
 msgstr "kpc"
 
-#: src/core/modules/Nebula.cpp:270
+#: src/core/modules/Nebula.cpp:268
 #, qt-format
 msgid "Distance: %1 %2"
 msgstr "Avstånd: %1 %2"
 
-#: src/core/modules/Nebula.cpp:284
+#: src/core/modules/Nebula.cpp:282
 #, qt-format
 msgid "Redshift: %1"
 msgstr "Rödförskjutning: %1"
 
-#: src/core/modules/Nebula.cpp:295 src/core/modules/StarWrapper.cpp:244
+#: src/core/modules/Nebula.cpp:293 src/core/modules/StarWrapper.cpp:244
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Parallax: %1\""
 
-#: src/core/modules/Nebula.cpp:299
+#: src/core/modules/Nebula.cpp:297
 msgid "Morphological description: "
 msgstr "Morfologisk beskrivning: "
 
@@ -401,23 +401,23 @@ msgstr "ej dokumenterad koncentrationsklass"
 
 #: src/core/modules/Nebula.cpp:815
 msgctxt "Trumpler's Brightness Class"
-msgid "small range the brightness of members of cluster"
-msgstr "litet omgång på ljusstyrkan av hopmedlemmarna"
+msgid "small brightness range of cluster members"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
-msgid "medium range the brightness of members of cluster"
-msgstr "medelstort omgång på ljusstyrkan av hopmedlemmarna"
+msgid "medium brightness range of cluster members"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "Trumpler's Brightness Class"
-msgid "large range the brightness of members of cluster"
-msgstr "stort omgång på ljusstyrkan av hopmedlemmarna"
+msgid "large brightness range of cluster members"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:824
-msgctxt "Trumpler's Concentration Class"
-msgid "undocumented brightness class"
-msgstr "ej dokumenterad ljusstyrkeklass"
+msgctxt "Trumpler's Brightness Class"
+msgid "undocumented brightness range of cluster members"
+msgstr ""
 
 #: src/core/modules/Nebula.cpp:830
 msgctxt "Trumpler's Number of Members Class"
@@ -668,17 +668,21 @@ msgstr "möjlig kvasar"
 msgid "possible planetary nebula"
 msgstr "möjlig planetarisk nebulosa"
 
+#: src/core/modules/Nebula.cpp:1062
+msgid "protoplanetary nebula"
+msgstr ""
+
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1062 src/core/modules/StarWrapper.cpp:50
+#: src/core/modules/Nebula.cpp:1065 src/core/modules/StarWrapper.cpp:50
 #: src/core/modules/StarWrapper.cpp:177 src/translations.h:42
 msgid "star"
 msgstr "stjärna"
 
-#: src/core/modules/Nebula.cpp:1065
+#: src/core/modules/Nebula.cpp:1068
 msgid "object of unknown nature"
 msgstr "objekt av okänd natur"
 
-#: src/core/modules/Nebula.cpp:1068
+#: src/core/modules/Nebula.cpp:1071
 msgid "undocumented type"
 msgstr "ej dokumenterad typ"
 
@@ -931,7 +935,7 @@ msgstr "Nattläge"
 
 #. TRANSLATORS: name of object
 #: src/core/StelCore.cpp:199 src/gui/StelGui.cpp:183
-#: src/gui/AstroCalcDialog.cpp:235 src/gui/AstroCalcDialog.cpp:439
+#: src/gui/AstroCalcDialog.cpp:235 src/gui/AstroCalcDialog.cpp:438
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
@@ -1674,7 +1678,7 @@ msgid "Deep-sky objects background images"
 msgstr "Bakgrundsbilder för djuprymdsobjekt"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Miscellaneous"
 msgstr "Diverse"
 
@@ -2602,9 +2606,7 @@ msgid "Mag."
 msgstr ""
 
 #. TRANSLATORS: type of object
-#. TRANSLATORS: type of phenomena
-#: src/gui/AstroCalcDialog.cpp:135 src/gui/AstroCalcDialog.cpp:438
-#: src/ui_configurationDialog.h:1094
+#: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1094
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 msgid "Type"
 msgstr "Filtyp"
@@ -2674,27 +2676,31 @@ msgstr "Spridda diskobjekt"
 msgid "Oort cloud objects"
 msgstr "Objekt från Oorts kometmoln"
 
-#: src/gui/AstroCalcDialog.cpp:440
+#: src/gui/AstroCalcDialog.cpp:437
+msgid "Phenomenon"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:439
 msgid "Object 1"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:441
+#: src/gui/AstroCalcDialog.cpp:440
 msgid "Object 2"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:442
+#: src/gui/AstroCalcDialog.cpp:441
 msgid "Separation"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:598
+#: src/gui/AstroCalcDialog.cpp:597
 msgid "Conjunction"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:602
+#: src/gui/AstroCalcDialog.cpp:601
 msgid "Opposition"
 msgstr ""
 
-#: src/StelMainView.cpp:441 src/StelMainView.cpp:456
+#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2702,19 +2708,19 @@ msgstr ""
 "Inget OpenGL 2 finns på denna dator. Uppgradera hårdvaran eller använd MESA "
 "eller en äldre version."
 
-#: src/StelMainView.cpp:470
+#: src/StelMainView.cpp:471
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Kan inte hitta nödvändiga OpenGL-resurser."
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:536
 msgid "Save screenshot"
 msgstr "Spara skärmbild"
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:537
 msgid "Full-screen mode"
 msgstr "Helskärmsläge"
 
-#: src/StelMainView.cpp:677
+#: src/StelMainView.cpp:678
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2722,13 +2728,13 @@ msgstr ""
 "Otillräcklig OpenGL-version. Uppdatera drivrutiner, grafikhårdvara, eller "
 "använd MESA- eller ANGLE-versionen."
 
-#: src/StelMainView.cpp:680
+#: src/StelMainView.cpp:681
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Otillräcklig OpenGL-version. Uppdatera drivrutiner eller grafikhårdvara."
 
-#: src/StelMainView.cpp:722
+#: src/StelMainView.cpp:723
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2739,7 +2745,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:773
+#: src/StelMainView.cpp:774
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2750,7 +2756,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:828
+#: src/StelMainView.cpp:829
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2760,7 +2766,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:865
+#: src/StelMainView.cpp:866
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2771,7 +2777,7 @@ msgstr ""
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att "
 "fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:974
+#: src/StelMainView.cpp:975
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2888,7 +2894,7 @@ msgid "Reflection nebulae"
 msgstr "Reflektionsnebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:101 src/ui_viewDialog.h:1668
+#: src/translations.h:101 src/ui_viewDialog.h:1671
 msgid "Active galaxies"
 msgstr "Aktiva galaxer"
 
@@ -2898,7 +2904,7 @@ msgid "Radio galaxies"
 msgstr "Radiogalaxer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:105 src/ui_viewDialog.h:1662
+#: src/translations.h:105 src/ui_viewDialog.h:1665
 msgid "Interacting galaxies"
 msgstr "Interagerande galaxer"
 
@@ -2908,7 +2914,7 @@ msgid "Bright quasars"
 msgstr "Ljusa kvasarer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109 src/ui_viewDialog.h:1665
+#: src/translations.h:109 src/ui_viewDialog.h:1668
 msgid "Star clusters"
 msgstr "Stjärnhopar"
 
@@ -2933,7 +2939,7 @@ msgid "Emission nebulae"
 msgstr "Emissionsnebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:119 src/ui_viewDialog.h:1661
+#: src/translations.h:119 src/ui_viewDialog.h:1664
 msgid "Supernova remnants"
 msgstr "Supernovarester"
 
@@ -2967,388 +2973,403 @@ msgstr "Molekylmoln"
 msgid "Young Stellar Objects"
 msgstr "Unga stellära objekt"
 
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:133
+msgid "Possible Quasars"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:135
+msgid "Possible Planetary Nebulae"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:137
+msgid "Protoplanetary Nebulae"
+msgstr ""
+
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:133 src/ui_viewDialog.h:1625
+#: src/translations.h:139 src/ui_viewDialog.h:1628
 msgid "Messier Catalogue"
 msgstr "Messiers katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:135 src/ui_viewDialog.h:1628
+#: src/translations.h:141 src/ui_viewDialog.h:1631
 msgid "Caldwell Catalogue"
 msgstr "Caldwells katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:137
+#: src/translations.h:143
 msgid "Barnard Catalogue"
 msgstr "Banards katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:139
+#: src/translations.h:145
 msgid "Sharpless Catalogue"
 msgstr "Sharpless katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:141
+#: src/translations.h:147
 msgid "Van den Bergh Catalogue"
 msgstr "Van den Berghs katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:143
+#: src/translations.h:149
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr "Rodgers, Campbell och Whiteoaks katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:145
+#: src/translations.h:151
 msgid "Collinder Catalogue"
 msgstr "Collinders katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:147
+#: src/translations.h:153
 msgid "Melotte Catalogue"
 msgstr "Melottes katalog"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:152
+#: src/translations.h:158
 msgid "Interesting double stars"
 msgstr "Intressanta dubbelstjärnor"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:154
+#: src/translations.h:160
 msgid "Interesting variable stars"
 msgstr "Intressanta variabla stjärnor"
 
-#: src/translations.h:158
+#: src/translations.h:164
 msgid "Arabic"
 msgstr "Arabiska"
 
-#: src/translations.h:159
+#: src/translations.h:165
 msgid "Arabic Moon Stations"
 msgstr "Arabiska månstationer"
 
-#: src/translations.h:160
+#: src/translations.h:166
 msgid "Aztec"
 msgstr "Aztek"
 
-#: src/translations.h:161
+#: src/translations.h:167
 msgid "Boorong"
 msgstr "Boorong"
 
-#: src/translations.h:162
+#: src/translations.h:168
 msgid "Chinese"
 msgstr "Kinesisk"
 
-#: src/translations.h:163
+#: src/translations.h:169
 msgid "Egyptian"
 msgstr "Egyptisk"
 
-#: src/translations.h:164
+#: src/translations.h:170
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:165
+#: src/translations.h:171
 msgid "Indian Vedic"
 msgstr "Indisk vedisk"
 
-#: src/translations.h:166
+#: src/translations.h:172
 msgid "Japanese Moon Stations"
 msgstr "Japanska månstationer"
 
-#: src/translations.h:167
+#: src/translations.h:173
 msgid "Korean"
 msgstr "Koreanska"
 
-#: src/translations.h:168
+#: src/translations.h:174
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:169
+#: src/translations.h:175
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:170
+#: src/translations.h:176
 msgid "Mongolian"
 msgstr "Mongolisk"
 
-#: src/translations.h:171
+#: src/translations.h:177
 msgid "Navajo"
 msgstr "Navaho"
 
-#: src/translations.h:172
+#: src/translations.h:178
 msgid "Norse"
 msgstr "Norse"
 
-#: src/translations.h:173
+#: src/translations.h:179
 msgid "Polynesian"
 msgstr "Polynesiska"
 
-#: src/translations.h:174
+#: src/translations.h:180
 msgid "Romanian"
 msgstr "Rumänska"
 
-#: src/translations.h:175
+#: src/translations.h:181
 msgid "Sami"
 msgstr "Samisk"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:177
+#: src/translations.h:183
 msgid "Siberian"
 msgstr "Sibirisk"
 
-#: src/translations.h:178
+#: src/translations.h:184
 msgid "Tukano"
 msgstr "Tukano"
 
-#: src/translations.h:179
+#: src/translations.h:185
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:180
+#: src/translations.h:186
 msgid "Tongan"
 msgstr "Tongansk"
 
-#: src/translations.h:181
+#: src/translations.h:187
 msgid "Western"
 msgstr "Västerländsk"
 
-#: src/translations.h:182
+#: src/translations.h:188
 msgid "Western (H.A.Rey)"
 msgstr "Västerländsk (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:188
+#: src/translations.h:194
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:190
+#: src/translations.h:196
 msgid "Trees"
 msgstr "Träd"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:192 plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
+#: src/translations.h:198 plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
 msgid "Moon"
 msgstr "Månen"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:194
+#: src/translations.h:200
 msgid "Hurricane"
 msgstr "Orkan"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:196
+#: src/translations.h:202
 msgid "Ocean"
 msgstr "Ocean"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:198
+#: src/translations.h:204
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:200 plugins/ArchaeoLines/src/ArchaeoLines.cpp:788
+#: src/translations.h:206 plugins/ArchaeoLines/src/ArchaeoLines.cpp:788
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:202 plugins/ArchaeoLines/src/ArchaeoLines.cpp:791
+#: src/translations.h:208 plugins/ArchaeoLines/src/ArchaeoLines.cpp:791
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:204 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
 msgid "Saturn"
 msgstr "Saturnus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:206
+#: src/translations.h:212
 msgid "Uranus"
 msgstr "Uranus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:208
+#: src/translations.h:214
 msgid "Neptune"
 msgstr "Neptunus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210
+#: src/translations.h:216
 msgid "Geneva"
 msgstr "Genève"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:212
+#: src/translations.h:218
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:214
+#: src/translations.h:220
 msgid "Zero Horizon"
 msgstr "Matematisk horisont"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:219
+#: src/translations.h:225
 msgid "Vienna Sterngarten"
 msgstr "Wiens Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:221
+#: src/translations.h:227
 msgid "Testscene"
 msgstr "Testscen"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:226
+#: src/translations.h:232
 msgid "Landscape Tour"
 msgstr "Landskapsrundtur"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:228
+#: src/translations.h:234
 msgid "Partial Lunar Eclipse"
 msgstr "Partiell månförmörkelse"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:230
+#: src/translations.h:236
 msgid "Total Lunar Eclipse"
 msgstr "Total månförmörkelse"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:232
+#: src/translations.h:238
 msgid "Screensaver"
 msgstr "Skärmsläckare"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:234
+#: src/translations.h:240
 msgid "Solar Eclipse 2009"
 msgstr "Solförmörkelse 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:236
+#: src/translations.h:242
 msgid "Startup Script"
 msgstr "Programstartsskript"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:238
+#: src/translations.h:244
 msgid "Zodiac"
 msgstr "Zodiaken"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:240
+#: src/translations.h:246
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Merkurius soluppgång & solnedgång x3"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:242
+#: src/translations.h:248
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dubbelförmörkelse från Deimos 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:244
+#: src/translations.h:250
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dubbelförmörkelse från Deimos 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:246
+#: src/translations.h:252
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Förmörkelse från Olympus Mons 10 jan 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:248
+#: src/translations.h:254
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Ockultation av jorden och Jupiter 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:250
+#: src/translations.h:256
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 passager & 2 förmörkelser från Deimos 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:252
+#: src/translations.h:258
 msgid "Solar System Screensaver"
 msgstr "Skärmsläckare – Solsystemet"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:254
+#: src/translations.h:260
 msgid "Constellations Tour"
 msgstr "Stjärnbildsrundtur"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:256
+#: src/translations.h:262
 msgid "Sun from different planets"
 msgstr "Solen från olika planeter"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:258
+#: src/translations.h:264
 msgid "Earth best views from other bodies"
 msgstr "Bästa utsikt över jorden från andra himlakroppar"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:260
+#: src/translations.h:266
 msgid "Transit of Venus"
 msgstr "Venuspassage"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:262
+#: src/translations.h:268
 msgid "Analemma"
 msgstr "Analemman"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:264
+#: src/translations.h:270
 msgid "Sky Culture Tour"
 msgstr "Stjärnbildsmytologisk rundtur"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:266
+#: src/translations.h:272
 msgid "Earth Events from Mercury"
 msgstr "Jordhändelser sett från Merkurius"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:268
+#: src/translations.h:274
 msgid "Earth Events from a floating city on Venus"
 msgstr "Jordhändelser sett från en flytande stad på Venus"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:270
+#: src/translations.h:276
 msgid "Earth Events from Mars"
 msgstr "Jordhändelser sett från Mars"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:272
+#: src/translations.h:278
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr "Jordens och Venus största elongationer och ljusstyrkor från Mars."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:274
+#: src/translations.h:280
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Jordens och Mars största elongationer och ljusstyrkor från Callisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:276
+#: src/translations.h:282
 msgid "Tycho's Supernova"
 msgstr "Tychos supernova"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:282
+#: src/translations.h:288
 msgid "Look around each installed landscape."
 msgstr "Se dig omkring i alla installerade landskap."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:284
+#: src/translations.h:290
 msgid "Look at each installed sky culture."
 msgstr "En översikt över alla installerade stjärnbildsmytologier."
 
-#: src/translations.h:285
+#: src/translations.h:291
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript för att visa en partiell månförmörkelse."
 
-#: src/translations.h:286
+#: src/translations.h:292
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript för att visa en total månförmörkelse."
 
-#: src/translations.h:287
+#: src/translations.h:293
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "En långsam, oändlig rundtur på himlavalvet där du tittar på slumpmässiga "
 "objekt."
 
-#: src/translations.h:288
+#: src/translations.h:294
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -3356,11 +3377,11 @@ msgstr ""
 "Skript som visar en total solförmörkelse som inträffade 2009 (plats: Rangpur "
 "i Bangladesh)."
 
-#: src/translations.h:289
+#: src/translations.h:295
 msgid "Script which runs automatically at startup"
 msgstr "Skript som körs automatiskt vid programstart"
 
-#: src/translations.h:290
+#: src/translations.h:296
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -3369,7 +3390,7 @@ msgstr ""
 "Detta skript visar stjärnbilderna i zodiaken. Det innebär att stjärnbilderna "
 "som ligger längs den bara som solen följer över himlavalvet under året."
 
-#: src/translations.h:291
+#: src/translations.h:297
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -3377,7 +3398,7 @@ msgstr ""
 "På grund av Merkurius speciella kretslopp och rotation kommer solen att gå "
 "upp och gå ner vid 3 olika tillfällen och platser under samma dygn."
 
-#: src/translations.h:292
+#: src/translations.h:298
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -3385,7 +3406,7 @@ msgstr ""
 "Precis innan Mars förmörkar solen tittar Phobos fram och hinner förmörka "
 "solen före Mars. Detta sker mellan Skorpionen och Skytten den 26 april 2017."
 
-#: src/translations.h:293
+#: src/translations.h:299
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -3393,11 +3414,11 @@ msgstr ""
 "Precis innan Mars förmörkar solen tittar Phobos fram och hinner förmörka "
 "solen före Mars. Detta sker mellan Oxen och Tvillingarna den 23 juli 2031."
 
-#: src/translations.h:294
+#: src/translations.h:300
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "Phobos förmörkar solen, betraktat från Olympus Mons den 10 jan 2068."
 
-#: src/translations.h:295
+#: src/translations.h:301
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -3407,7 +3428,7 @@ msgstr ""
 "Jupiter. Men förmörkelser av båda på samma dag är väldigt sällsynta. Här är "
 "en som inträffar 2048-01-23, i verklig hastighet."
 
-#: src/translations.h:296
+#: src/translations.h:302
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3423,41 +3444,41 @@ msgstr ""
 "Phobos framträder från Mars är den fortfarande förmörkad och kan ses svagt i "
 "Mars skugga, den lyser inte upp förrän senare."
 
-#: src/translations.h:297
+#: src/translations.h:303
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 "Skärmsläckare med diverse företeelser i solsystemet. Totalt 232 stycken!"
 
-#: src/translations.h:298
+#: src/translations.h:304
 msgid "A tour of the western constellations."
 msgstr "En genomgång av de västerländska stjärnbilderna."
 
-#: src/translations.h:299
+#: src/translations.h:305
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Titta på solen från Pluto och de stora planterna i solsystemet."
 
-#: src/translations.h:300
+#: src/translations.h:306
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "De bästa vyerna över jordklotet från andra kroppar i solsystemet under 2000-"
 "talet."
 
-#: src/translations.h:301
+#: src/translations.h:307
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Venuspassagen som den såg ut från Sydney i Australien på Sveriges "
 "nationaldag den 6 juni 2012."
 
-#: src/translations.h:302
+#: src/translations.h:308
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 "En förevisning av analemman, d.v.s. solens bana över himlen under ett solår."
 
-#: src/translations.h:303
+#: src/translations.h:309
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -3465,13 +3486,13 @@ msgstr ""
 "Skenet från supernovan som Tycho Brahe observerade år 1572. "
 "Supernoveinsticksmodulen måste vara aktiverad."
 
-#: src/translations.h:304
+#: src/translations.h:310
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 "Jordens och Venus största elongationer och ljusstyrkor från Mars 2000-3000."
 
-#: src/translations.h:305
+#: src/translations.h:311
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3483,991 +3504,991 @@ msgstr ""
 "helt utanför Jupiters strålningsbälte. Om människan någonsin skulle "
 "kolonisera Jupiters månar skulle man välja Callisto."
 
-#: src/translations.h:309
+#: src/translations.h:315
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:310
+#: src/translations.h:316
 msgid "United Arab Emirates"
 msgstr "Förenade Arabemiraten"
 
-#: src/translations.h:311
+#: src/translations.h:317
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
-#: src/translations.h:312
+#: src/translations.h:318
 msgid "Antigua and Barbuda"
 msgstr "Antigua och Barbuda"
 
-#: src/translations.h:313
+#: src/translations.h:319
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:314
+#: src/translations.h:320
 msgid "Albania"
 msgstr "Albanien"
 
-#: src/translations.h:315
+#: src/translations.h:321
 msgid "Armenia"
 msgstr "Armenien"
 
-#: src/translations.h:316
+#: src/translations.h:322
 msgid "Netherlands Antilles"
 msgstr "Nederländska Antillerna"
 
-#: src/translations.h:317
+#: src/translations.h:323
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:318
+#: src/translations.h:324
 msgid "Antarctica"
 msgstr "Antarktis"
 
-#: src/translations.h:319
+#: src/translations.h:325
 msgid "Argentina"
 msgstr "Argentina"
 
-#: src/translations.h:320
+#: src/translations.h:326
 msgid "American Samoa"
 msgstr "Amerikanska Samoa"
 
-#: src/translations.h:321
+#: src/translations.h:327
 msgid "Austria"
 msgstr "Österrike"
 
-#: src/translations.h:322
+#: src/translations.h:328
 msgid "Australia"
 msgstr "Australien"
 
-#: src/translations.h:323
+#: src/translations.h:329
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:324
+#: src/translations.h:330
 msgid "Azerbaijan"
 msgstr "Azerbajdzjan"
 
-#: src/translations.h:325
+#: src/translations.h:331
 msgid "Bosnia and Herzegowina"
 msgstr "Bosnien och Hercegovina"
 
-#: src/translations.h:326
+#: src/translations.h:332
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:327
+#: src/translations.h:333
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: src/translations.h:328
+#: src/translations.h:334
 msgid "Belgium"
 msgstr "Belgien"
 
-#: src/translations.h:329
+#: src/translations.h:335
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:330
+#: src/translations.h:336
 msgid "Bulgaria"
 msgstr "Bulgarien"
 
-#: src/translations.h:331
+#: src/translations.h:337
 msgid "Bahrain"
 msgstr "Bahrain"
 
-#: src/translations.h:332
+#: src/translations.h:338
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:333
+#: src/translations.h:339
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:334
+#: src/translations.h:340
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: src/translations.h:335
+#: src/translations.h:341
 msgid "Brunei Darussalam"
 msgstr "Brunei"
 
-#: src/translations.h:336
+#: src/translations.h:342
 msgid "Bolivia"
 msgstr "Bolivien"
 
-#: src/translations.h:337
+#: src/translations.h:343
 msgid "Brazil"
 msgstr "Brasilien"
 
-#: src/translations.h:338
+#: src/translations.h:344
 msgid "Bahamas"
 msgstr "Bahamas"
 
-#: src/translations.h:339
+#: src/translations.h:345
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: src/translations.h:340
+#: src/translations.h:346
 msgid "Bouvet Island"
 msgstr "Bouvetön"
 
-#: src/translations.h:341
+#: src/translations.h:347
 msgid "Botswana"
 msgstr "Botswana"
 
-#: src/translations.h:342
+#: src/translations.h:348
 msgid "Belarus"
 msgstr "Vitryssland"
 
-#: src/translations.h:343
+#: src/translations.h:349
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:344
+#: src/translations.h:350
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:345
+#: src/translations.h:351
 msgid "Cocos Islands"
 msgstr "Kokosöarna"
 
-#: src/translations.h:346
+#: src/translations.h:352
 msgid "Democratic Republic of the Congo"
 msgstr "Demokratiska republiken Kongo"
 
-#: src/translations.h:347
+#: src/translations.h:353
 msgid "Central African Republic"
 msgstr "Centralafrikanska republiken"
 
-#: src/translations.h:348
+#: src/translations.h:354
 msgid "Republic of the Congo"
 msgstr "Republiken Kongo"
 
-#: src/translations.h:349
+#: src/translations.h:355
 msgid "Switzerland"
 msgstr "Schweiz"
 
-#: src/translations.h:350
+#: src/translations.h:356
 msgid "Cote d'Ivoire"
 msgstr "Elfenbenskusten"
 
-#: src/translations.h:351
+#: src/translations.h:357
 msgid "Cook Islands"
 msgstr "Cooköarna"
 
-#: src/translations.h:352
+#: src/translations.h:358
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:353
+#: src/translations.h:359
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: src/translations.h:354
+#: src/translations.h:360
 msgid "China"
 msgstr "Kina"
 
-#: src/translations.h:355
+#: src/translations.h:361
 msgid "Colombia"
 msgstr "Colombia"
 
-#: src/translations.h:356
+#: src/translations.h:362
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:357
+#: src/translations.h:363
 msgid "Serbia and Montenegro"
 msgstr "Serbien och Montenegro"
 
-#: src/translations.h:358
+#: src/translations.h:364
 msgid "Cuba"
 msgstr "Kuba"
 
-#: src/translations.h:359
+#: src/translations.h:365
 msgid "Cape Verde"
 msgstr "Kap Verde"
 
-#: src/translations.h:360
+#: src/translations.h:366
 msgid "Christmas Island"
 msgstr "Julön"
 
-#: src/translations.h:361
+#: src/translations.h:367
 msgid "Cyprus"
 msgstr "Cypern"
 
-#: src/translations.h:362
+#: src/translations.h:368
 msgid "Czech Republic"
 msgstr "Tjeckien"
 
-#: src/translations.h:363
+#: src/translations.h:369
 msgid "Germany"
 msgstr "Tyskland"
 
-#: src/translations.h:364
+#: src/translations.h:370
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: src/translations.h:365
+#: src/translations.h:371
 msgid "Denmark"
 msgstr "Danmark"
 
-#: src/translations.h:366
+#: src/translations.h:372
 msgid "Dominica"
 msgstr "Dominique"
 
-#: src/translations.h:367
+#: src/translations.h:373
 msgid "Dominican Republic"
 msgstr "Dominikanska Republiken"
 
-#: src/translations.h:368
+#: src/translations.h:374
 msgid "Algeria"
 msgstr "Algeriet"
 
-#: src/translations.h:369
+#: src/translations.h:375
 msgid "Ecuador"
 msgstr "Equador"
 
-#: src/translations.h:370
+#: src/translations.h:376
 msgid "Estonia"
 msgstr "Estland"
 
-#: src/translations.h:371
+#: src/translations.h:377
 msgid "Egypt"
 msgstr "Egypten"
 
-#: src/translations.h:372
+#: src/translations.h:378
 msgid "Western Sahara"
 msgstr "Västsahara"
 
-#: src/translations.h:373
+#: src/translations.h:379
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: src/translations.h:374
+#: src/translations.h:380
 msgid "Spain"
 msgstr "Spanien"
 
-#: src/translations.h:375
+#: src/translations.h:381
 msgid "Ethiopia"
 msgstr "Etiopien"
 
-#: src/translations.h:376
+#: src/translations.h:382
 msgid "Finland"
 msgstr "Finland"
 
-#: src/translations.h:377
+#: src/translations.h:383
 msgid "Fiji"
 msgstr "Fiji"
 
-#: src/translations.h:378
+#: src/translations.h:384
 msgid "Falkland Islands"
 msgstr "Falklandsöarna"
 
-#: src/translations.h:379
+#: src/translations.h:385
 msgid "Micronesia"
 msgstr "Mikronesien"
 
-#: src/translations.h:380
+#: src/translations.h:386
 msgid "Faroe Islands"
 msgstr "Färöarna"
 
-#: src/translations.h:381
+#: src/translations.h:387
 msgid "France"
 msgstr "Frankrike"
 
-#: src/translations.h:382
+#: src/translations.h:388
 msgid "Gabon"
 msgstr "Gabon"
 
-#: src/translations.h:383
+#: src/translations.h:389
 msgid "United Kingdom"
 msgstr "Storbritannien"
 
-#: src/translations.h:384
+#: src/translations.h:390
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:385
+#: src/translations.h:391
 msgid "Georgia"
 msgstr "Georgien"
 
-#: src/translations.h:386
+#: src/translations.h:392
 msgid "French Guiana"
 msgstr "Franska Guyana"
 
-#: src/translations.h:387
+#: src/translations.h:393
 msgid "Ghana"
 msgstr "Ghana"
 
-#: src/translations.h:388
+#: src/translations.h:394
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: src/translations.h:389
+#: src/translations.h:395
 msgid "Greenland"
 msgstr "Grönland"
 
-#: src/translations.h:390
+#: src/translations.h:396
 msgid "Gambia"
 msgstr "Gambia"
 
-#: src/translations.h:391
+#: src/translations.h:397
 msgid "Guinea"
 msgstr "Guinea"
 
-#: src/translations.h:392
+#: src/translations.h:398
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: src/translations.h:393
+#: src/translations.h:399
 msgid "Equatorial Guinea"
 msgstr "Ekvatorialguinea"
 
-#: src/translations.h:394
+#: src/translations.h:400
 msgid "Greece"
 msgstr "Grekland"
 
-#: src/translations.h:395
+#: src/translations.h:401
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Sydgeorgien och Sydsandwichöarna"
 
-#: src/translations.h:396
+#: src/translations.h:402
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:397
+#: src/translations.h:403
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:398
+#: src/translations.h:404
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
-#: src/translations.h:399
+#: src/translations.h:405
 msgid "Guyana"
 msgstr "Guyana"
 
-#: src/translations.h:400
+#: src/translations.h:406
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: src/translations.h:401
+#: src/translations.h:407
 msgid "Heard Island and McDonald Islands"
 msgstr "Heard- och McDonaldsöarna"
 
-#: src/translations.h:402
+#: src/translations.h:408
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:403
+#: src/translations.h:409
 msgid "Croatia"
 msgstr "Kroatien"
 
-#: src/translations.h:404
+#: src/translations.h:410
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:405
+#: src/translations.h:411
 msgid "Hungary"
 msgstr "Ungern"
 
-#: src/translations.h:406
+#: src/translations.h:412
 msgid "Indonesia"
 msgstr "Indonesien"
 
-#: src/translations.h:407
+#: src/translations.h:413
 msgid "Ireland"
 msgstr "Irland"
 
-#: src/translations.h:408
+#: src/translations.h:414
 msgid "Israel"
 msgstr "Israel"
 
-#: src/translations.h:409
+#: src/translations.h:415
 msgid "India"
 msgstr "Indien"
 
-#: src/translations.h:410
+#: src/translations.h:416
 msgid "British Indian Ocean Territory"
 msgstr "Brittiska territoriet i Indiska Oceanen"
 
-#: src/translations.h:411
+#: src/translations.h:417
 msgid "Iraq"
 msgstr "Irak"
 
-#: src/translations.h:412
+#: src/translations.h:418
 msgid "Iran"
 msgstr "Iran"
 
-#: src/translations.h:413
+#: src/translations.h:419
 msgid "Iceland"
 msgstr "Island"
 
-#: src/translations.h:414
+#: src/translations.h:420
 msgid "Italy"
 msgstr "Italien"
 
-#: src/translations.h:415
+#: src/translations.h:421
 msgid "Jamaica"
 msgstr "Jamaica"
 
-#: src/translations.h:416
+#: src/translations.h:422
 msgid "Jordan"
 msgstr "Jordanien"
 
-#: src/translations.h:417
+#: src/translations.h:423
 msgid "Japan"
 msgstr "Japan"
 
-#: src/translations.h:418
+#: src/translations.h:424
 msgid "Kenya"
 msgstr "Kenya"
 
-#: src/translations.h:419
+#: src/translations.h:425
 msgid "Kyrgyzstan"
 msgstr "Kirgizistan"
 
-#: src/translations.h:420
+#: src/translations.h:426
 msgid "Cambodia"
 msgstr "Kambodja"
 
-#: src/translations.h:421
+#: src/translations.h:427
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:422
+#: src/translations.h:428
 msgid "Comoros"
 msgstr "Komorerna"
 
-#: src/translations.h:423
+#: src/translations.h:429
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts och Nevis"
 
-#: src/translations.h:424
+#: src/translations.h:430
 msgid "Democratic People's Republic of Korea"
 msgstr "Nordkorea"
 
-#: src/translations.h:425
+#: src/translations.h:431
 msgid "Republic of Korea"
 msgstr "Sydkorea"
 
-#: src/translations.h:426
+#: src/translations.h:432
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: src/translations.h:427
+#: src/translations.h:433
 msgid "Cayman Islands"
 msgstr "Caymanöarna"
 
-#: src/translations.h:428
+#: src/translations.h:434
 msgid "Kazakhstan"
 msgstr "Kazakstan"
 
-#: src/translations.h:429
+#: src/translations.h:435
 msgid "Lao"
 msgstr "Laos"
 
-#: src/translations.h:430
+#: src/translations.h:436
 msgid "Lebanon"
 msgstr "Libanon"
 
-#: src/translations.h:431
+#: src/translations.h:437
 msgid "Saint Lucia"
 msgstr "St Lucia"
 
-#: src/translations.h:432
+#: src/translations.h:438
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: src/translations.h:433
+#: src/translations.h:439
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: src/translations.h:434
+#: src/translations.h:440
 msgid "Liberia"
 msgstr "Liberia"
 
-#: src/translations.h:435
+#: src/translations.h:441
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: src/translations.h:436
+#: src/translations.h:442
 msgid "Lithuania"
 msgstr "Litauen"
 
-#: src/translations.h:437
+#: src/translations.h:443
 msgid "Luxembourg"
 msgstr "Luxemburg"
 
-#: src/translations.h:438
+#: src/translations.h:444
 msgid "Latvia"
 msgstr "Lettland"
 
-#: src/translations.h:439
+#: src/translations.h:445
 msgid "Libyan Arab Jamahiriya"
 msgstr "Libyen"
 
-#: src/translations.h:440
+#: src/translations.h:446
 msgid "Morocco"
 msgstr "Marocko"
 
-#: src/translations.h:441
+#: src/translations.h:447
 msgid "Monaco"
 msgstr "Monaco"
 
-#: src/translations.h:442
+#: src/translations.h:448
 msgid "Moldova"
 msgstr "Moldavien"
 
-#: src/translations.h:443
+#: src/translations.h:449
 msgid "Madagascar"
 msgstr "Madagaskar"
 
-#: src/translations.h:444
+#: src/translations.h:450
 msgid "Marshall Islands"
 msgstr "Marshallöarna"
 
-#: src/translations.h:445
+#: src/translations.h:451
 msgid "Macedonia"
 msgstr "Makedonien"
 
-#: src/translations.h:446
+#: src/translations.h:452
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:447
+#: src/translations.h:453
 msgid "Myanmar"
 msgstr "Myanmar (Burma)"
 
-#: src/translations.h:448
+#: src/translations.h:454
 msgid "Mongolia"
 msgstr "Mongoliet"
 
-#: src/translations.h:449
+#: src/translations.h:455
 msgid "Macau"
 msgstr "Macao"
 
-#: src/translations.h:450
+#: src/translations.h:456
 msgid "Northern Mariana Islands"
 msgstr "Norra Marianeröarna"
 
-#: src/translations.h:451
+#: src/translations.h:457
 msgid "Martinique"
 msgstr "Martinique"
 
-#: src/translations.h:452
+#: src/translations.h:458
 msgid "Mauritania"
 msgstr "Mauretanien"
 
-#: src/translations.h:453
+#: src/translations.h:459
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:454
+#: src/translations.h:460
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:455
+#: src/translations.h:461
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: src/translations.h:456
+#: src/translations.h:462
 msgid "Maldives"
 msgstr "Maldiverna"
 
-#: src/translations.h:457
+#: src/translations.h:463
 msgid "Malawi"
 msgstr "Malawi"
 
-#: src/translations.h:458
+#: src/translations.h:464
 msgid "Mexico"
 msgstr "Mexiko"
 
-#: src/translations.h:459
+#: src/translations.h:465
 msgid "Malaysia"
 msgstr "Malaysia"
 
-#: src/translations.h:460
+#: src/translations.h:466
 msgid "Mozambique"
 msgstr "Moçambique"
 
-#: src/translations.h:461
+#: src/translations.h:467
 msgid "Namibia"
 msgstr "Namibia"
 
-#: src/translations.h:462
+#: src/translations.h:468
 msgid "New Caledonia"
 msgstr "Nya Kaledonien"
 
-#: src/translations.h:463
+#: src/translations.h:469
 msgid "Niger"
 msgstr "Niger"
 
-#: src/translations.h:464
+#: src/translations.h:470
 msgid "Norfolk Island"
 msgstr "Norfolköarna"
 
-#: src/translations.h:465
+#: src/translations.h:471
 msgid "Nigeria"
 msgstr "Nigeria"
 
-#: src/translations.h:466
+#: src/translations.h:472
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: src/translations.h:467
+#: src/translations.h:473
 msgid "Netherlands"
 msgstr "Nederländerna"
 
-#: src/translations.h:468
+#: src/translations.h:474
 msgid "Norway"
 msgstr "Norge"
 
-#: src/translations.h:469
+#: src/translations.h:475
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:470
+#: src/translations.h:476
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:471
+#: src/translations.h:477
 msgid "Niue"
 msgstr "Niue"
 
-#: src/translations.h:472
+#: src/translations.h:478
 msgid "New Zealand"
 msgstr "Nya Zeeland"
 
-#: src/translations.h:473
+#: src/translations.h:479
 msgid "Oman"
 msgstr "Oman"
 
-#: src/translations.h:474
+#: src/translations.h:480
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:475
+#: src/translations.h:481
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:476
+#: src/translations.h:482
 msgid "French Polynesia"
 msgstr "Franska Polynesien"
 
-#: src/translations.h:477
+#: src/translations.h:483
 msgid "Papua New Guinea"
 msgstr "Papua Nya Guinea"
 
-#: src/translations.h:478
+#: src/translations.h:484
 msgid "Philippines"
 msgstr "Filippinerna"
 
-#: src/translations.h:479
+#: src/translations.h:485
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: src/translations.h:480
+#: src/translations.h:486
 msgid "Poland"
 msgstr "Polen"
 
-#: src/translations.h:481
+#: src/translations.h:487
 msgid "Saint Pierre and Miquelon"
 msgstr "St Pierre och Miquelon"
 
-#: src/translations.h:482
+#: src/translations.h:488
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: src/translations.h:483
+#: src/translations.h:489
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: src/translations.h:484
+#: src/translations.h:490
 msgid "Palestinian Territories"
 msgstr "Palestina"
 
-#: src/translations.h:485
+#: src/translations.h:491
 msgid "Portugal"
 msgstr "Portugal"
 
-#: src/translations.h:486
+#: src/translations.h:492
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:487
+#: src/translations.h:493
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:488
+#: src/translations.h:494
 msgid "Qatar"
 msgstr "Qatar"
 
-#: src/translations.h:489
+#: src/translations.h:495
 msgid "Réunion"
 msgstr "Réunion"
 
-#: src/translations.h:490
+#: src/translations.h:496
 msgid "Romania"
 msgstr "Rumänien"
 
-#: src/translations.h:491
+#: src/translations.h:497
 msgid "Serbia"
 msgstr "Serbien"
 
-#: src/translations.h:492
+#: src/translations.h:498
 msgid "Russian Federation"
 msgstr "Ryssland"
 
-#: src/translations.h:493
+#: src/translations.h:499
 msgid "Rwanda"
 msgstr "Rwanda"
 
-#: src/translations.h:494
+#: src/translations.h:500
 msgid "Saudi Arabia"
 msgstr "Saudiarabien"
 
-#: src/translations.h:495
+#: src/translations.h:501
 msgid "Solomon Islands"
 msgstr "Solomonöarna"
 
-#: src/translations.h:496
+#: src/translations.h:502
 msgid "Seychelles"
 msgstr "Seychellerna"
 
-#: src/translations.h:497
+#: src/translations.h:503
 msgid "Sudan"
 msgstr "Sudan"
 
-#: src/translations.h:498
+#: src/translations.h:504
 msgid "Sweden"
 msgstr "Sverige"
 
-#: src/translations.h:499
+#: src/translations.h:505
 msgid "Singapore"
 msgstr "Singapore"
 
-#: src/translations.h:500
+#: src/translations.h:506
 msgid "Saint Helena"
 msgstr "St. Helena"
 
-#: src/translations.h:501
+#: src/translations.h:507
 msgid "Slovenia"
 msgstr "Slovenien"
 
-#: src/translations.h:502
+#: src/translations.h:508
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard och Jan Mayen"
 
-#: src/translations.h:503
+#: src/translations.h:509
 msgid "Slovakia"
 msgstr "Slovakien"
 
-#: src/translations.h:504
+#: src/translations.h:510
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
-#: src/translations.h:505
+#: src/translations.h:511
 msgid "San Marino"
 msgstr "San Marino"
 
-#: src/translations.h:506
+#: src/translations.h:512
 msgid "Senegal"
 msgstr "Senegal"
 
-#: src/translations.h:507
+#: src/translations.h:513
 msgid "Somalia"
 msgstr "Somalia"
 
-#: src/translations.h:508
+#: src/translations.h:514
 msgid "Suriname"
 msgstr "Surinam"
 
-#: src/translations.h:509
+#: src/translations.h:515
 msgid "Sao Tome and Principe"
 msgstr "São Tomé och Principe"
 
-#: src/translations.h:510
+#: src/translations.h:516
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: src/translations.h:511
+#: src/translations.h:517
 msgid "Syrian Arab Republic"
 msgstr "Syrien"
 
-#: src/translations.h:512
+#: src/translations.h:518
 msgid "Swaziland"
 msgstr "Swaziland"
 
-#: src/translations.h:513
+#: src/translations.h:519
 msgid "Turks and Caicos Islands"
 msgstr "Turks- och Caicosöarna"
 
-#: src/translations.h:514
+#: src/translations.h:520
 msgid "Chad"
 msgstr "Tchad"
 
-#: src/translations.h:515
+#: src/translations.h:521
 msgid "French Southern Territories"
 msgstr "Franska Sydterritorierna"
 
-#: src/translations.h:516
+#: src/translations.h:522
 msgid "Togo"
 msgstr "Togo"
 
-#: src/translations.h:517
+#: src/translations.h:523
 msgid "Thailand"
 msgstr "Thailand"
 
-#: src/translations.h:518
+#: src/translations.h:524
 msgid "Tajikistan"
 msgstr "Tadzjikistan"
 
-#: src/translations.h:519
+#: src/translations.h:525
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:520
+#: src/translations.h:526
 msgid "East Timor"
 msgstr "Östtimor"
 
-#: src/translations.h:521
+#: src/translations.h:527
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-#: src/translations.h:522
+#: src/translations.h:528
 msgid "Tunisia"
 msgstr "Tunisien"
 
-#: src/translations.h:523
+#: src/translations.h:529
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:524
+#: src/translations.h:530
 msgid "Turkey"
 msgstr "Turkiet"
 
-#: src/translations.h:525
+#: src/translations.h:531
 msgid "Trinidad and Tobago"
 msgstr "Trinidad och Tobago"
 
-#: src/translations.h:526
+#: src/translations.h:532
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:527
+#: src/translations.h:533
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: src/translations.h:528
+#: src/translations.h:534
 msgid "Tanzania"
 msgstr "Tanzania"
 
-#: src/translations.h:529
+#: src/translations.h:535
 msgid "Ukraine"
 msgstr "Ukraina"
 
-#: src/translations.h:530
+#: src/translations.h:536
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:531
+#: src/translations.h:537
 msgid "United States Minor Outlying Islands"
 msgstr "USA:s mindre avlägsna öar"
 
-#: src/translations.h:532
+#: src/translations.h:538
 msgid "United States"
 msgstr "USA"
 
-#: src/translations.h:533
+#: src/translations.h:539
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:534
+#: src/translations.h:540
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
-#: src/translations.h:535
+#: src/translations.h:541
 msgid "Vatican City State"
 msgstr "Vatikanstaten"
 
-#: src/translations.h:536
+#: src/translations.h:542
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent och Grenadinerna"
 
-#: src/translations.h:537
+#: src/translations.h:543
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:538
+#: src/translations.h:544
 msgid "British Virgin Islands"
 msgstr "Brittiska Jungfruöarna"
 
-#: src/translations.h:539
+#: src/translations.h:545
 msgid "United States Virgin Islands"
 msgstr "Amerikanska Jungfruöarna"
 
-#: src/translations.h:540
+#: src/translations.h:546
 msgid "Viet Nam"
 msgstr "Vietnam"
 
-#: src/translations.h:541
+#: src/translations.h:547
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:542
+#: src/translations.h:548
 msgid "Wallis and Futuna"
 msgstr "Wallis och Futuna"
 
-#: src/translations.h:543
+#: src/translations.h:549
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:544
+#: src/translations.h:550
 msgid "Yemen"
 msgstr "Jemen"
 
-#: src/translations.h:545
+#: src/translations.h:551
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: src/translations.h:546
+#: src/translations.h:552
 msgid "Yugoslavia"
 msgstr "Jugoslavien"
 
-#: src/translations.h:547
+#: src/translations.h:553
 msgid "South Africa"
 msgstr "Sydafrika"
 
-#: src/translations.h:548
+#: src/translations.h:554
 msgid "Zambia"
 msgstr "Zambia"
 
-#: src/translations.h:549
+#: src/translations.h:555
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: src/translations.h:553
+#: src/translations.h:559
 msgid "&Undo"
 msgstr "&Ångra"
 
-#: src/translations.h:554
+#: src/translations.h:560
 msgid "&Redo"
 msgstr "&Gör om"
 
-#: src/translations.h:555
+#: src/translations.h:561
 msgid "Cu&t"
 msgstr "Klipp u&t"
 
-#: src/translations.h:556
+#: src/translations.h:562
 msgid "&Copy"
 msgstr "&Kopiera"
 
-#: src/translations.h:557
+#: src/translations.h:563
 msgid "&Paste"
 msgstr "&Klistra in"
 
-#: src/translations.h:558 src/ui_locationDialogGui.h:432
+#: src/translations.h:564 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1094
 #: plugins/Oculars/src/ui_ocularDialog.h:1104
 #: plugins/Oculars/src/ui_ocularDialog.h:1111
@@ -4475,64 +4496,64 @@ msgstr "&Klistra in"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: src/translations.h:559
+#: src/translations.h:565
 msgid "Select All"
 msgstr "Markera alla"
 
-#: src/translations.h:560
+#: src/translations.h:566
 msgid "Look in:"
 msgstr "Leta i:"
 
-#: src/translations.h:561
+#: src/translations.h:567
 msgid "Directory:"
 msgstr "Katalog:"
 
-#: src/translations.h:562
+#: src/translations.h:568
 msgid "Folder"
 msgstr "Mapp"
 
-#: src/translations.h:563
+#: src/translations.h:569
 msgid "&Choose"
 msgstr "&Välj"
 
-#: src/translations.h:564 src/ui_configurationDialog.h:1216
+#: src/translations.h:570 src/ui_configurationDialog.h:1216
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/translations.h:565
+#: src/translations.h:571
 msgid "Files of type:"
 msgstr "Filer av typen:"
 
-#: src/translations.h:566
+#: src/translations.h:572
 msgid "Date Modified"
 msgstr "Ändringsdatum"
 
-#: src/translations.h:567
+#: src/translations.h:573
 msgid "Directories"
 msgstr "Kataloger"
 
-#: src/translations.h:568
+#: src/translations.h:574
 msgid "Computer"
 msgstr "Dator"
 
-#: src/translations.h:569
+#: src/translations.h:575
 msgid "&Open"
 msgstr "&Öppna"
 
-#: src/translations.h:570
+#: src/translations.h:576
 msgid "File &name:"
 msgstr "Fil&namn:"
 
-#: src/translations.h:571
+#: src/translations.h:577
 msgid "Copy &Link Location"
 msgstr "Kopiera &Länka plats"
 
-#: src/translations.h:572
+#: src/translations.h:578
 msgid "Abort"
 msgstr "Avbryt"
 
-#: src/translations.h:573
+#: src/translations.h:579
 msgid "Ignore"
 msgstr "Ignorera"
 
@@ -4821,8 +4842,8 @@ msgstr "Alternativ för sökning"
 msgid "Use autofill only from the beginning of words"
 msgstr "Använd automatisk ifyllning endast från början av ord"
 
-#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1763
-#: src/ui_viewDialog.h:1782 src/ui_viewDialog.h:1790
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1766
+#: src/ui_viewDialog.h:1785 src/ui_viewDialog.h:1793
 #: src/ui_configurationDialog.h:1217 src/ui_configurationDialog.h:1228
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
@@ -4859,7 +4880,7 @@ msgstr "Blinkning:"
 msgid "Limit the magnitude of stars"
 msgstr "Begränsa magnitud för stjärnor"
 
-#: src/ui_viewDialog.h:1563 src/ui_viewDialog.h:1685
+#: src/ui_viewDialog.h:1563 src/ui_viewDialog.h:1688
 msgid "Limit magnitude"
 msgstr "Gränsmagnitud"
 
@@ -4900,7 +4921,7 @@ msgstr "tryck, temperatur, absorptionskoefficient"
 msgid "Refraction/Extinction settings..."
 msgstr "Refraktions-/absorptionsinställningar..."
 
-#: src/ui_viewDialog.h:1581 src/ui_viewDialog.h:1671
+#: src/ui_viewDialog.h:1581 src/ui_viewDialog.h:1674
 msgid "Labels and Markers"
 msgstr "Etiketter och markörer"
 
@@ -4922,11 +4943,9 @@ msgstr "Visa planeters omloppsbanor"
 
 #: src/ui_viewDialog.h:1589
 msgid ""
-"Deactivate this option if you want to see orbits for selected planet and "
-"their moons."
+"Deactivate this option if you want to see orbit for selected planet and its "
+"moons."
 msgstr ""
-"Stäng av denna inställning om du vill se de valda planeternas (och deras "
-"månars) omloppsbanor"
 
 #: src/ui_viewDialog.h:1591
 msgid "Show orbit for selected planet"
@@ -4934,97 +4953,101 @@ msgstr "Visa omloppsbana för vald planet"
 
 #: src/ui_viewDialog.h:1593
 msgid ""
-"Deactivate this option if you want to see the trails for all celestial "
-"bodies from Solar system."
+"Deactivate this option if you want to see the trails for all Solar system "
+"bodies."
 msgstr ""
-"Stäng av denna inställning om du vill se spår av alla himlakroppar i "
-"solsystemet."
 
 #: src/ui_viewDialog.h:1595
-msgid "Show trail for selected planet"
-msgstr "Visa spår av vald planet"
+msgid "Show trail only for selected planet"
+msgstr ""
 
-#: src/ui_viewDialog.h:1596
+#: src/ui_viewDialog.h:1597
+msgid ""
+"Activate this option to simulate the effect of real speed of light "
+"(recommended)."
+msgstr ""
+
+#: src/ui_viewDialog.h:1599
 msgid "Simulate light speed"
 msgstr "Simulera ljushastighet"
 
-#: src/ui_viewDialog.h:1597
+#: src/ui_viewDialog.h:1600
 msgid "Scale Moon"
 msgstr "Ändra skala på månen"
 
-#: src/ui_viewDialog.h:1599
+#: src/ui_viewDialog.h:1602
 msgid "Scale factor"
 msgstr "Skalfaktor"
 
-#: src/ui_viewDialog.h:1602
+#: src/ui_viewDialog.h:1605
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Automatisk förändring av landskap vid planetbyte"
 
-#: src/ui_viewDialog.h:1604
+#: src/ui_viewDialog.h:1607
 msgid "Auto select landscapes"
 msgstr "Automatiskt landskapsval"
 
-#: src/ui_viewDialog.h:1606
+#: src/ui_viewDialog.h:1609
 msgid "Settings for sporadic meteors"
 msgstr "Inställningar för sporadiska meteorer"
 
-#: src/ui_viewDialog.h:1608
+#: src/ui_viewDialog.h:1611
 msgid "Shooting Stars"
 msgstr "Stjärnfall"
 
-#: src/ui_viewDialog.h:1610
+#: src/ui_viewDialog.h:1613
 msgid "Hourly zenith rate"
 msgstr "Timfrekvens vid zenit"
 
-#: src/ui_viewDialog.h:1612
+#: src/ui_viewDialog.h:1615
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1614
+#: src/ui_viewDialog.h:1617
 msgid "Display objects from catalogs"
 msgstr "Visa objekt från kataloger"
 
-#: src/ui_viewDialog.h:1616
+#: src/ui_viewDialog.h:1619
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Indexkatalog över nebulosor och stjärnhopar"
 
-#: src/ui_viewDialog.h:1619
+#: src/ui_viewDialog.h:1622
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "Ny generell katalog över nebulosor och stjärnhopar"
 
-#: src/ui_viewDialog.h:1622
+#: src/ui_viewDialog.h:1625
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Lynds katalog över ljusa nebulosor (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:1631
+#: src/ui_viewDialog.h:1634
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Barnards katalog över 349 mörka objekt på himlen (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:1634
+#: src/ui_viewDialog.h:1637
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Katalog över HII-regioner (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:1637
+#: src/ui_viewDialog.h:1640
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Katalog över reflektionsnebulosor (Van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:1640
+#: src/ui_viewDialog.h:1643
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
 "En katalog över Hα-emissionsregioner i södra delen av Vintergatan (Rodgers+, "
 "1960)"
 
-#: src/ui_viewDialog.h:1643
+#: src/ui_viewDialog.h:1646
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Lynds katalog över mörka nebulosor (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:1646
+#: src/ui_viewDialog.h:1649
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Katalog över öppna galaxhopar (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:1649
+#: src/ui_viewDialog.h:1652
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -5032,51 +5055,51 @@ msgstr ""
 "En katalog över stjärnhopar som syns på Franklin-Adams kartplåtar (Melotte, "
 "1915)"
 
-#: src/ui_viewDialog.h:1652
+#: src/ui_viewDialog.h:1655
 msgid "Catalog of galaxies"
 msgstr "Katalog över galaxer"
 
-#: src/ui_viewDialog.h:1655
+#: src/ui_viewDialog.h:1658
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Generella Uppsalakatalogen över galaxer"
 
-#: src/ui_viewDialog.h:1658
+#: src/ui_viewDialog.h:1661
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Katalog över ljusa diffusa galaktiska nebulosor (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:1660
+#: src/ui_viewDialog.h:1663
 msgid "Filter by type"
 msgstr "Filtrera efter typ"
 
-#: src/ui_viewDialog.h:1663
+#: src/ui_viewDialog.h:1666
 msgid "Hydrogen regions"
 msgstr "Väteregioner"
 
-#: src/ui_viewDialog.h:1664
+#: src/ui_viewDialog.h:1667
 msgid "Other"
 msgstr "Annat"
 
-#: src/ui_viewDialog.h:1666
+#: src/ui_viewDialog.h:1669
 msgid "Planetary Nebulae"
 msgstr "Planetariska nebulosor"
 
-#: src/ui_viewDialog.h:1667
+#: src/ui_viewDialog.h:1670
 msgid "Galaxies"
 msgstr "Galaxer"
 
-#: src/ui_viewDialog.h:1669
+#: src/ui_viewDialog.h:1672
 msgid "Dark Nebulae"
 msgstr "Mörka nebulosor"
 
-#: src/ui_viewDialog.h:1670
+#: src/ui_viewDialog.h:1673
 msgid "Bright Nebulae"
 msgstr "Ljusa nebulosor"
 
-#: src/ui_viewDialog.h:1673
+#: src/ui_viewDialog.h:1676
 msgid "Hints"
 msgstr "Tips"
 
-#: src/ui_viewDialog.h:1675
+#: src/ui_viewDialog.h:1678
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
@@ -5084,107 +5107,107 @@ msgstr ""
 "Använd ytljusstyrkan hos djuprymdsobjekt som skala för deras markörers och "
 "etiketters synlighet."
 
-#: src/ui_viewDialog.h:1677
+#: src/ui_viewDialog.h:1680
 msgid "Use surface brightness"
 msgstr "Använd ytljusstyrka"
 
-#: src/ui_viewDialog.h:1679
+#: src/ui_viewDialog.h:1682
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr "Använd tips proportionellt till vinkelstorlek hos djuprymdsobjekt"
 
-#: src/ui_viewDialog.h:1681
+#: src/ui_viewDialog.h:1684
 msgid "Use proportional hints"
 msgstr "Använd proportionella tips"
 
-#: src/ui_viewDialog.h:1683
+#: src/ui_viewDialog.h:1686
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Gränsmagnitud (för blotta ögat/kikarobservatörer) för djuprymdsobjekt."
 
-#: src/ui_viewDialog.h:1686
+#: src/ui_viewDialog.h:1689
 msgid "Constellations"
 msgstr "Stjärnbilder"
 
-#: src/ui_viewDialog.h:1687
+#: src/ui_viewDialog.h:1690
 msgid "Show lines"
 msgstr "Visa linjer"
 
-#: src/ui_viewDialog.h:1688
+#: src/ui_viewDialog.h:1691
 msgid "Show labels"
 msgstr "Visa etiketter"
 
-#: src/ui_viewDialog.h:1689
+#: src/ui_viewDialog.h:1692
 msgid "Show boundaries"
 msgstr "Visa gränser"
 
-#: src/ui_viewDialog.h:1690
+#: src/ui_viewDialog.h:1693
 msgid "Show art"
 msgstr "Visa grafik"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1691
+#: src/ui_viewDialog.h:1694
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
 msgstr "Ljusstyrka på konst:"
 
-#: src/ui_viewDialog.h:1692
+#: src/ui_viewDialog.h:1695
 msgid "Thickness of lines:"
 msgstr "Linjetjocklek"
 
-#: src/ui_viewDialog.h:1694
+#: src/ui_viewDialog.h:1697
 msgid "Value in pixels"
 msgstr "Värde i pixlar"
 
-#: src/ui_viewDialog.h:1696
+#: src/ui_viewDialog.h:1699
 msgid "Celestial Sphere"
 msgstr "Himlasfär"
 
-#: src/ui_viewDialog.h:1698
+#: src/ui_viewDialog.h:1701
 msgid "Equatorial coordinates of J2000.0."
 msgstr "Ekvatoriella koordinater för J2000.0"
 
-#: src/ui_viewDialog.h:1700
+#: src/ui_viewDialog.h:1703
 msgid "Equatorial grid (J2000)"
 msgstr "Ekvatoriellt rutnät (J2000)"
 
-#: src/ui_viewDialog.h:1702
+#: src/ui_viewDialog.h:1705
 msgid "Equatorial coordinates of current date and planet."
 msgstr "Ekvatoriella koordinater för dagens datum och planet"
 
-#: src/ui_viewDialog.h:1704
+#: src/ui_viewDialog.h:1707
 msgid "Equatorial grid (of date)"
 msgstr "Ekvatoriellt rutnät (för datum)"
 
-#: src/ui_viewDialog.h:1706
+#: src/ui_viewDialog.h:1709
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "Ekliptiska koordinater för J2000.0"
 
-#: src/ui_viewDialog.h:1708
+#: src/ui_viewDialog.h:1711
 msgid "Ecliptic grid (J2000)"
 msgstr "Ekliptiskt rutnät (J2000)"
 
-#: src/ui_viewDialog.h:1710
+#: src/ui_viewDialog.h:1713
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "Ekliptiska koordinater för dagens datum. Visas endast på jorden."
 
-#: src/ui_viewDialog.h:1712
+#: src/ui_viewDialog.h:1715
 msgid "Ecliptic grid (of date)"
 msgstr "Ekliptiskt rutnät (för datum)"
 
-#: src/ui_viewDialog.h:1714
+#: src/ui_viewDialog.h:1717
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "Altitud och azimut (räknat från norr och österut)"
 
-#: src/ui_viewDialog.h:1718
+#: src/ui_viewDialog.h:1721
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Galaktiska koordinater, System II (IAU 1958)."
 
-#: src/ui_viewDialog.h:1722
+#: src/ui_viewDialog.h:1725
 msgid "Labels for the Cardinal directions."
 msgstr "Etiketter för kardinalriktningar"
 
-#: src/ui_viewDialog.h:1726
+#: src/ui_viewDialog.h:1729
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
@@ -5192,55 +5215,55 @@ msgstr ""
 "Momentana cirklar över jordens rotationsaxel på dess rörelse runt "
 "ekliptikans poler. Visas endast på jorden."
 
-#: src/ui_viewDialog.h:1728
+#: src/ui_viewDialog.h:1731
 msgid "Precession circles"
 msgstr "Precessionscirklar"
 
-#: src/ui_viewDialog.h:1730
+#: src/ui_viewDialog.h:1733
 msgid "Show celestial equator of J2000.0."
 msgstr "Visa himmelsekvatorn för J2000.0"
 
-#: src/ui_viewDialog.h:1732
+#: src/ui_viewDialog.h:1735
 msgid "Equator (J2000)"
 msgstr "Ekvator (J2000)"
 
-#: src/ui_viewDialog.h:1734
+#: src/ui_viewDialog.h:1737
 msgid "Show celestial equator of current planet and date."
 msgstr "Visa himmelsekvatorn för nuvarande planet och datum"
 
-#: src/ui_viewDialog.h:1736
+#: src/ui_viewDialog.h:1739
 msgid "Equator (of date)"
 msgstr "Ekvator (för datum)"
 
-#: src/ui_viewDialog.h:1738
+#: src/ui_viewDialog.h:1741
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "Visa ekliptisk linje för J2000.0 (VSOP87A fundamentalt plan)."
 
-#: src/ui_viewDialog.h:1740
+#: src/ui_viewDialog.h:1743
 msgid "Ecliptic (J2000)"
 msgstr "Ekliptikan (J2000)"
 
-#: src/ui_viewDialog.h:1742
+#: src/ui_viewDialog.h:1745
 msgid "Show ecliptic line of current date."
 msgstr "Visa ekliptisk linje för dagens datum"
 
-#: src/ui_viewDialog.h:1744
+#: src/ui_viewDialog.h:1747
 msgid "Ecliptic (of date)"
 msgstr "Ekliptikan (för datum)"
 
-#: src/ui_viewDialog.h:1746
+#: src/ui_viewDialog.h:1749
 msgid "Show horizon line."
 msgstr "Visa horisontlinje"
 
-#: src/ui_viewDialog.h:1750
+#: src/ui_viewDialog.h:1753
 msgid "Show Galactic equator line."
 msgstr "Visa galaktisk ekvatorlinje"
 
-#: src/ui_viewDialog.h:1754
+#: src/ui_viewDialog.h:1757
 msgid "Show meridian line."
 msgstr "Visa meridianlinje"
 
-#: src/ui_viewDialog.h:1758
+#: src/ui_viewDialog.h:1761
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
@@ -5248,109 +5271,109 @@ msgstr ""
 "Opposition-/konjunktionslongitudlinje - den ekliptiska longitud som passerar "
 "genom båda de ekliptiska polerna, solen och oppositionspunkten."
 
-#: src/ui_viewDialog.h:1761
+#: src/ui_viewDialog.h:1764
 msgid "Projection"
 msgstr "Projektion"
 
-#: src/ui_viewDialog.h:1762
+#: src/ui_viewDialog.h:1765
 msgid "Vertical viewport offset"
 msgstr "Förskjutning av vertikal visning"
 
-#: src/ui_viewDialog.h:1764
+#: src/ui_viewDialog.h:1767
 msgid "Use this landscape as default"
 msgstr "Använd detta landskap som standard"
 
-#: src/ui_viewDialog.h:1765
+#: src/ui_viewDialog.h:1768
 msgid "Use associated planet and position"
 msgstr "Använd associerad planet och position"
 
-#: src/ui_viewDialog.h:1766
+#: src/ui_viewDialog.h:1769
 msgid "Show fog"
 msgstr "Visa dimma"
 
-#: src/ui_viewDialog.h:1767
+#: src/ui_viewDialog.h:1770
 msgid "Show ground"
 msgstr "Visa markyta"
 
-#: src/ui_viewDialog.h:1769
+#: src/ui_viewDialog.h:1772
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "Använd lägsta ljusstyrka för att göra landskap synliga även i mörker"
 
-#: src/ui_viewDialog.h:1771
+#: src/ui_viewDialog.h:1774
 msgid "Minimal brightness:"
 msgstr "Lägsta ljusstyrka:"
 
-#: src/ui_viewDialog.h:1773
+#: src/ui_viewDialog.h:1776
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Värdeomfång 0..1 (landskapet är svart på natten - landskapet är fullt "
 "synligt)"
 
-#: src/ui_viewDialog.h:1776
+#: src/ui_viewDialog.h:1779
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Använd lägsta ljusstyrka som den specificeras i landscape.ini"
 
-#: src/ui_viewDialog.h:1778
+#: src/ui_viewDialog.h:1781
 msgid "from landscape, if given"
 msgstr "från landskap, om givet"
 
-#: src/ui_viewDialog.h:1779
+#: src/ui_viewDialog.h:1782
 msgid "Show landscape labels"
 msgstr "Visa landskapsetiketter"
 
-#: src/ui_viewDialog.h:1780
+#: src/ui_viewDialog.h:1783
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Visa belysningslager (ljusa fönster, ljusföroreningar etc.)"
 
-#: src/ui_viewDialog.h:1781
+#: src/ui_viewDialog.h:1784
 msgid "Add/remove landscapes..."
 msgstr "Lägg till/ta bort landskap"
 
-#: src/ui_viewDialog.h:1783
+#: src/ui_viewDialog.h:1786
 msgid "Use this sky culture as default"
 msgstr "Använd denna himmelskultur som standard"
 
-#: src/ui_viewDialog.h:1784
+#: src/ui_viewDialog.h:1787
 msgid "Show names"
 msgstr "Visa namn"
 
-#: src/ui_viewDialog.h:1786
+#: src/ui_viewDialog.h:1789
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 "Välj om du vill ha förkortade namn, originalnamn eller översatta namn"
 
-#: src/ui_viewDialog.h:1789
+#: src/ui_viewDialog.h:1792
 msgid "Use native names for planets from current culture"
 msgstr "Använd ursprungliga namn på planeter för nuvarande stjärnmytologi"
 
-#: src/ui_viewDialog.h:1791
+#: src/ui_viewDialog.h:1794
 msgid "Visible"
 msgstr "Synlig"
 
-#: src/ui_viewDialog.h:1796
+#: src/ui_viewDialog.h:1799
 msgid "Sky"
 msgstr "Himmel"
 
-#: src/ui_viewDialog.h:1798
+#: src/ui_viewDialog.h:1801
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "DSO"
 
-#: src/ui_viewDialog.h:1800
+#: src/ui_viewDialog.h:1803
 msgid "Deep-Sky Objects"
 msgstr "Djuprymdsobjekt"
 
-#: src/ui_viewDialog.h:1803
+#: src/ui_viewDialog.h:1806
 msgid "Markings"
 msgstr "Markeringar"
 
-#: src/ui_viewDialog.h:1805
+#: src/ui_viewDialog.h:1808
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "Landskap"
 
-#: src/ui_viewDialog.h:1807
+#: src/ui_viewDialog.h:1810
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "Stjärnmytologi"
@@ -6109,7 +6132,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:299
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:204
 msgid "Links"
 msgstr "Länkar"
@@ -6138,7 +6161,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:208
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -6152,7 +6175,7 @@ msgstr "Om du har några frågor, kan du %1få svar här%2"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:149
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:305
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:210
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -6166,7 +6189,7 @@ msgstr "Felrapportering kan göras %1här%2."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:311
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:212
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -9489,7 +9512,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -10288,7 +10311,6 @@ msgid "Using the default Meteor Showers catalog."
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:573
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:214
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
@@ -10801,15 +10823,40 @@ msgstr ""
 msgid "Meteor Showers Plug-in"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:246
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
+msgid ""
+"This plugin enables you to simulate periodic meteor showers and to display a "
+"marker for each active and inactive radiant."
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
+msgid ""
+"By a single click on the radiant's marker, you can see all the details about "
+"its position and activity. Most data used on this plugin comes from the "
+"official <a href=\"http://imo.net\">International Meteor Organization</a> "
+"catalog."
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:228
+msgid ""
+"<p>It has three types of markers:<ul><li><b>Confirmed:</b> the radiant is "
+"active and its data was confirmed. Thus, this is a historical (really "
+"occurred in the past) or predicted meteor shower.</li><li><b>Generic:</b> "
+"the radiant is active, but its data was not confirmed. It means that this "
+"can occur in real life, but that we do not have proper data about its "
+"activity for the current year.</li><li><b>Inactive:</b> the radiant is "
+"inactive for the current sky date.</li></ul></p>"
+msgstr ""
+
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:247
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:251
 msgid "Meteor shower"
 msgstr "Meteorregn"
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:249
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:253
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -10821,12 +10868,12 @@ msgid ""
 "1,000 meteors an hour."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:257
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:261
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:259
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -10834,7 +10881,7 @@ msgid ""
 "the constellation of Perseus."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:265
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:269
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -10842,18 +10889,18 @@ msgid ""
 "and is not considered part of that shower."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:270
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:276
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:280
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -10862,11 +10909,11 @@ msgid ""
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
 msgid "Population index"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:284
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:288
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -10874,37 +10921,37 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:289
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:293
 msgid "Notes"
 msgstr "Kommentarer"
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:290
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:294
 msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Info"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:292
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:296
 msgid "Info about meteor showers you can get here:"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:299
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr "%1Meteor shower%2 - artikel på Wikipedia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:297
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:301
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:300
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:304
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
