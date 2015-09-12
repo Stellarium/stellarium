@@ -106,6 +106,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app);
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
@@ -175,7 +178,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 			else
@@ -195,7 +198,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	}
 	if (nType != NebDn && vMag < 50 && flags&Extra)
 	{
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted surface brightness much below horizon where model is meaningless.
 		{
 			if (getSurfaceBrightness(core)<99 && getSurfaceBrightnessWithExtinction(core)<99)
 				oss << q_("Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
