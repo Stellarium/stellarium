@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-10 20:09+0600\n"
+"POT-Creation-Date: 2015-09-12 18:42+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7244,7 +7244,7 @@ msgid "Do not update"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:774
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:211
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:219
 msgid "Description:"
 msgstr ""
 
@@ -10930,11 +10930,11 @@ msgstr ""
 msgid "Shadowmap size not supported, set to %1"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:921
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:927
 msgid "3D Sceneries"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3dMgr.cpp:924
+#: plugins/Scenery3d/src/Scenery3dMgr.cpp:930
 msgid ""
 "<p>3D foreground renderer. Walk around, find and avoid obstructions in your "
 "garden, find and demonstrate possible astronomical alignments in temples, "
@@ -11088,7 +11088,7 @@ msgstr ""
 msgid "Geometry shader"
 msgstr ""
 
-#: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:157
+#: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:163
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
 msgstr ""
@@ -11207,23 +11207,27 @@ msgstr ""
 msgid "Quality/Performance settings"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:205
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:207
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:208
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Delete view"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:209
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Add current view"
 msgstr ""
 
-#: plugins/Scenery3d/src/ui_storedViewDialog.h:210
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:217
+msgid "Load/store with date"
+msgstr ""
+
+#: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
 msgstr ""
 
