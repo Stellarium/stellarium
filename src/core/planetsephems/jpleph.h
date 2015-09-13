@@ -112,6 +112,6 @@ int DLL_FUNC jpl_init_error_code( void);
 /* addition for use in stellarium */
 #define JPL_MAX_N_CONSTANTS 1018
 #define CALC_VELOCITY       0
-#define CENTRAL_PLANET_ID   4
+#define CENTRAL_PLANET_ID   11  //ID of sun in JPL enumeration
 
 const char * jpl_init_error_message(void);

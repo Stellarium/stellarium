@@ -40,6 +40,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define EPHEM_PLUTO_ID    8
 
 #define EPHEM_IMD_EARTH_ID 2
+#define EPHEM_JPL_EARTH_ID 3
 
 /**   JPL PlANET ID LIST
 **            1 = mercury           8 = neptune                             **
@@ -148,11 +149,11 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused)
 {
   	if(use_de430(jd))
   	{
-  		  GetDe430Coor(jd, EPHEM_IMD_EARTH_ID, xyz);
+  		  GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
   	}
   	else if(use_de431(jd))
   	{
-  		  GetDe431Coor(jd, EPHEM_IMD_EARTH_ID, xyz);
+  		  GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
   	}
   	else //VSOP87 as fallback
   	{
@@ -166,6 +167,8 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused)
         xyz[1] -= 0.0121505677733761 * moon[1];
         xyz[2] -= 0.0121505677733761 * moon[2];
   	}
+
+    qDebug() << "Earth (" << xyz[0] << "|" << xyz[1] << "|" << xyz[2] << ")";
 }
 
 void get_mars_helio_coordsv(double jd,double xyz[3], void* unused)
