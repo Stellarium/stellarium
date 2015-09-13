@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>589</height>
+    <width>688</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="font">
@@ -601,6 +601,39 @@
                </property>
               </widget>
              </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_14">
+               <item>
+                <widget class="QCheckBox" name="starLabelCheckBox">
+                 <property name="text">
+                  <string>Labels and Markers</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSlider" name="starsLabelsHorizontalSlider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>180</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="value">
+                  <number>33</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
           </item>
@@ -678,100 +711,6 @@
                </property>
                <property name="text">
                 <string>Refraction/Extinction settings...</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="1" column="1" alignment="Qt::AlignTop">
-           <widget class="QGroupBox" name="labelsGroupBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>150</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>Labels and Markers</string>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-            <layout class="QGridLayout" name="gridLayoutx">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="planetLabelCheckBox">
-               <property name="text">
-                <string>Planets</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QSlider" name="starsLabelsHorizontalSlider">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>180</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="value">
-                <number>33</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QSlider" name="planetsLabelsHorizontalSlider">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>180</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="value">
-                <number>33</number>
-               </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="starLabelCheckBox">
-               <property name="text">
-                <string>Stars</string>
                </property>
               </widget>
              </item>
@@ -929,10 +868,43 @@
                </property>
               </widget>
              </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <item>
+                <widget class="QCheckBox" name="planetLabelCheckBox">
+                 <property name="text">
+                  <string>Labels and Markers</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSlider" name="planetsLabelsHorizontalSlider">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>180</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="value">
+                  <number>33</number>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
             </layout>
            </widget>
           </item>
-          <item row="2" column="0" colspan="2">
+          <item row="1" column="1">
            <widget class="QGroupBox" name="shootingStarsGroupBox">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -2606,10 +2578,6 @@
   <tabstop>planetLightSpeedCheckBox</tabstop>
   <tabstop>useLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
-  <tabstop>starLabelCheckBox</tabstop>
-  <tabstop>starsLabelsHorizontalSlider</tabstop>
-  <tabstop>planetLabelCheckBox</tabstop>
-  <tabstop>planetsLabelsHorizontalSlider</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
   <tabstop>showEquatorialGridCheckBox</tabstop>
   <tabstop>showEclipticGridJ2000CheckBox</tabstop>
