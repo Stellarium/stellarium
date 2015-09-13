@@ -268,6 +268,8 @@ labels_amount                       = 3.0
 nebula_hints_amount                 = 3.0
 flag_star_magnitude_limit           = false
 star_magnitude_limit                = 6.5
+flag_planet_magnitude_limit         = false
+planet_magnitude_limit              = 6.5
 flag_nebula_magnitude_limit         = false
 nebula_magnitude_limit              = 8.5
 
