@@ -78,9 +78,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 	setFlagStarMagnitudeLimit((conf->value("astro/flag_star_magnitude_limit", false).toBool()));
 	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toFloat());
+	setFlagPlanetMagnitudeLimit((conf->value("astro/flag_planet_magnitude_limit", false).toBool()));
+	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toFloat());
 	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
 	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toFloat());
-	// qDebug() << "drawer: clampStellarMag: " << clampStellarMagnitude << " , clampDSOmagnitude: " << clampDSOMagnitude;
 
 	bool ok=true;
 

@@ -470,6 +470,10 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	if (hidden)
 		return;
 
+	// Exclude drawing if user set a hard limit magnitude.
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
+		return;
+
 	if (getEnglishName() == core->getCurrentLocation().planetName)
 	{ // Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
 		return;
