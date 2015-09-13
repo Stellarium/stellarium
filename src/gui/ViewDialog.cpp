@@ -186,20 +186,26 @@ void ViewDialog::createDialogContent()
 	// Stars
 	ui->starLimitMagnitudeCheckBox->setChecked(drawer->getFlagStarMagnitudeLimit());
 	ui->starLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomStarMagnitudeLimit());
+	// Planets
+	ui->planetLimitMagnitudeCheckBox->setChecked(drawer->getFlagPlanetMagnitudeLimit());
+	ui->planetLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomPlanetMagnitudeLimit());
 	// DSO
 	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
 	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
 	
 	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
 	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
+	connect(ui->planetLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
+		drawer, SLOT(setFlagPlanetMagnitudeLimit(bool)));
 	connect(ui->nebulaLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
 	        drawer, SLOT(setFlagNebulaMagnitudeLimit(bool)));
 	connect(ui->starLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
 	        drawer, SLOT(setCustomStarMagnitudeLimit(double)));
+	connect(ui->planetLimitMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)),
+		drawer, SLOT(setCustomPlanetMagnitudeLimit(double)));
 	connect(ui->nebulaLimitMagnitudeDoubleSpinBox,
 	        SIGNAL(valueChanged(double)),
-	        drawer,
-	        SLOT(setCustomNebulaMagnitudeLimit(double)));
+		drawer, SLOT(setCustomNebulaMagnitudeLimit(double)));
 
 	// Planets section
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
