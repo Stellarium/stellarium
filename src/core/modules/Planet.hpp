@@ -109,7 +109,7 @@ public:
 	       int flagLighting,
 	       double radius,
 	       double oblateness,
-	       Vec3f color,
+	       Vec3f halocolor,
 	       float albedo,
 	       const QString& texMapName,
 	       const QString& normalMapName,
@@ -324,7 +324,7 @@ protected:
 					 // centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
-	Vec3f color;                     // exclusively used for drawing the planet halo
+	Vec3f haloColor;                 // exclusively used for drawing the planet halo
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
