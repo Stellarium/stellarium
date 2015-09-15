@@ -22,10 +22,10 @@
 #include <QDebug>
 #ifdef ENABLE_MEDIA
 	#include <QDir>
-	//#include <QVideoWidget> // Adapt to that when we finally switch to QtQuick2!
 	#include <QGraphicsVideoItem>
 	#include <QMediaPlayer>
 	#include <QTimer>
+	#include <QApplication>
 	#include "StelApp.hpp"
 	#include "StelFader.hpp"
 #endif
@@ -51,6 +51,7 @@ StelVideoMgr::~StelVideoMgr()
 
 void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha)
 {
+	qDebug() << QApplication::libraryPaths();
 	if (videoObjects.contains(id))
 	{
 		qWarning() << "[StelVideoMgr] Video object with ID" << id << "already exists, dropping it";
@@ -110,32 +111,43 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 		qDebug() << "\tSTATUS:        " << videoObjects[id]->player->mediaStatus();
 		qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
 	}
+	qDebug() << "scene->addItem...";
 	StelMainView::getInstance().scene()->addItem(videoObjects[id]->videoItem);
+	qDebug() << "scene->addItem OK";
 
 	videoObjects[id]->videoItem->setPos(x, y);
 	// DEFAULT SIZE: show a tiny frame. This gets updated to native resolution as soon as resolution becomes known. Needed?
 	//videoObjects[id]->videoItem->setSize(QSizeF(160, 160));
+	qDebug() << "bla1";
 
 	// after many troubles with incompletely loaded files we attempt a blocking load from https://wiki.qt.io/Seek_in_Sound_File
-	if (! videoObjects[id]->player->isSeekable())
-	{
-		if (verbose)
-			qDebug() << "Blocking load ...";
-		QEventLoop loop;
-		QTimer timer;
-		timer.setSingleShot(true);
-		timer.setInterval(5000); // 5 seconds, may be too long?
-		loop.connect(&timer, SIGNAL (timeout()), &loop, SLOT (quit()) );
-		loop.connect(videoObjects[id]->player, SIGNAL (seekableChanged(bool)), &loop, SLOT (quit()));
-		loop.exec();
-		if (verbose)
-			qDebug() << "Blocking load finished, should be seekable now or 5s are over.";
-	}
+//	if (! videoObjects[id]->player->isSeekable())
+//	{
+//		qDebug() << "bla1-NotSeekable";
+//		if (verbose)
+//			qDebug() << "Blocking load ...";
+//		QEventLoop loop;
+//		QTimer timer;
+//		qDebug() << "bla1-NotSeekable-setSingleShot";
+//		timer.setSingleShot(true);
+//		timer.setInterval(5000); // 5 seconds, may be too long?
+//		qDebug() << "bla1-NotSeekable-connect...";
+//		loop.connect(&timer, SIGNAL (timeout()), &loop, SLOT (quit()) );
+//		loop.connect(videoObjects[id]->player, SIGNAL (seekableChanged(bool)), &loop, SLOT (quit()));
+//		qDebug() << "bla1-NotSeekable-loop...";
+//		loop.exec();
+//		if (verbose)
+//			qDebug() << "Blocking load finished, should be seekable now or 5s are over.";
+//	}
+
+	qDebug() << "bla2";
 
 	if (verbose)
 		qDebug() << "Loaded video" << id << "for pos " << x << "/" << y << "Size" << videoObjects[id]->videoItem->size();
 	videoObjects[id]->player->setPosition(0); // This should force triggering a metadataAvailable() with resolution update.
+	qDebug() << "bla3";
 	videoObjects[id]->player->pause();
+	qDebug() << "bla4";
 
 }
 
@@ -293,6 +305,8 @@ void StelVideoMgr::pauseVideo(const QString& id)
 	{
 		if (videoObjects[id]->player!=NULL)
 		{
+			if (verbose)
+				qDebug() << "pauseVideo() pause()...";
 			videoObjects[id]->player->pause();
 		}
 	}
@@ -714,20 +728,20 @@ void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus ava
 void StelVideoMgr::handleMetaDataChanged()
 {
 	QString id=QObject::sender()->property("Stel_id").toString();
-    if (verbose)
-        qDebug() << "StelVideoMgr: " << id << ":  Metadata changed (global notification).";
+	if (verbose)
+		qDebug() << "StelVideoMgr: " << id << ":  Metadata changed (global notification).";
 
 	if (videoObjects.contains(id) && videoObjects[id]->player->isMetaDataAvailable())
 	{
-        if (verbose)
-            qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
+		if (verbose)
+			qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
 		QStringList metadataList=videoObjects[id]->player->availableMetaData();
 		QStringList::const_iterator mdIter;
 		for (mdIter=metadataList.constBegin(); mdIter!=metadataList.constEnd(); ++mdIter)
 		{
 			QString key=(*mdIter).toLocal8Bit().constData();
-            if (verbose)
-                qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key);
+			if (verbose)
+				qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key);
 
 			if ((key=="Resolution") && !(videoObjects[id]->resolution.isValid()))
 			{
@@ -737,10 +751,10 @@ void StelVideoMgr::handleMetaDataChanged()
 			}
 		}
 	}
-    else if (videoObjects.contains(id) && !(videoObjects[id]->player->isMetaDataAvailable()) &&verbose)
-        qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no metadata now.";
-    else
-        qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
+	else if (videoObjects.contains(id) && !(videoObjects[id]->player->isMetaDataAvailable()) &&verbose)
+		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no metadata now.";
+	else
+		qDebug() << "StelVideoMgr::handleMetaDataChanged()" << id << ": no such video - this is absurd.";
 }
 
 
@@ -780,8 +794,8 @@ void StelVideoMgr::update(double deltaTime)
 		QMediaPlayer::MediaStatus mediaStatus = (*voIter)->player->mediaStatus();
 		QString id=voIter.key();
 		// Maybe we have verbose as int with levels of verbosity, and output the next line with verbose>=2?
-//		if (verbose)
-//			qDebug() << "StelVideoMgr::update()" << id << ": PlayerState:" << (*voIter)->player->state() << "MediaStatus: " << mediaStatus;
+		if (verbose)
+			qDebug() << "StelVideoMgr::update()" << id << ": PlayerState:" << (*voIter)->player->state() << "MediaStatus: " << mediaStatus;
 
 		// It seems we need a more thorough analysis of MediaStatus!
 		// In all not-ready status we immediately leave further handling, usually in the hope that loading is successful really soon.
@@ -803,6 +817,8 @@ void StelVideoMgr::update(double deltaTime)
 				break;
 		}
 
+		if (verbose)
+			qDebug() << "update() Still alive";
 		(*voIter)->fader.update((int)(deltaTime*1000)); // This must be done, even for simplePlay mode, else fader may be in some bad state.
 
 		// First fix targetFrameSize if needed and possible.
