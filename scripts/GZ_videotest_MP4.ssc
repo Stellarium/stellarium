@@ -10,7 +10,13 @@
 
 lab = LabelMgr.labelScreen("Playing MP4 video file...", 100, 20, true, 20, "#ff0000");
 
-core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, false, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
+//core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, true, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
+//core.loadVideo("media/stellarium.mov", "mp4", 100, 70, true, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
+core.loadVideo("media/stellarium.avi", "mp4", 100, 70, true, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
+
+//core.loadVideo("media/big_buck_bunny.mp4", "mp4", 100, 70, true, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARRGH!! Setting false causes a crash. 
+
 
 // It is wise to pause about 2s so that resolution can be detected by the system, else some default frame size will be used.
 core.pauseVideo("mp4");

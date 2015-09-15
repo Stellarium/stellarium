@@ -10,9 +10,10 @@
 
 lab = LabelMgr.labelScreen("Playing WMV video file...", 100, 20, true, 20, "#ff0000");
 
-core.loadVideo("media/karnak.wmv", "wmv", 100, 70, false, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
+core.loadVideo("media/karnak.wmv", "wmv", 100, 70, true, 0.5); // having visible==true here means loading first at a default size, then (as soon as size is known), jumping to that size.
+// Having it false causes a crash on Windows!
 
-//core.pauseVideo("wmv");
+core.pauseVideo("wmv");
 
 core.wait(2);
 
@@ -24,7 +25,7 @@ core.playVideo("wmv");
 // Apparently, the following block does not work with WMV movies. :-(
 core.wait(3);
 LabelMgr.setLabelText(lab, "Jump back to 500ms, continue.");
-core.seekVideo("wmv", 500);
+core.seekVideo("wmv", 300);
 
 core.wait(2);
 dur=core.getVideoDuration("wmv");
