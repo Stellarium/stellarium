@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-11 12:48+0000\n"
+"PO-Revision-Date: 2015-09-15 02:43+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:15+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-15 05:10+0000\n"
+"X-Generator: Launchpad (build 17737)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3150,7 +3150,7 @@ msgstr "জঙ্গল"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:198 plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
 msgid "Moon"
-msgstr "চন্দ্র"
+msgstr "চাঁদ"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:200
@@ -6200,7 +6200,7 @@ msgstr "পালসারের বৈশিষ্ট্য বিন্যা�
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
-msgstr "কৌণিক দূররত্ব পরিমাপ সরঞ্জামের রূপরেখা"
+msgstr "কৌণিক দূরত্ব পরিমাপ সরঞ্জামের রূপরেখা"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
@@ -9565,7 +9565,7 @@ msgstr "অতিরিক্ত তথ্য"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "নক্ষত্রের চারপাশে অবস্থিত বসবাসযোগ্য অঞ্চল"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
@@ -9861,7 +9861,7 @@ msgstr "এখান থেকে একে দেখা সম্ভব নয় 
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr "সূর্যদয় বা সূর্যাস্তের সাথে উদিত বা অস্তমিত হবে না ।"
+msgstr "সূর্যোদয় বা সূর্যাস্তের সাথে উদিত বা অস্তমিত হবে না ।"
 
 #: plugins/Observability/src/Observability.cpp:206
 #, qt-format
@@ -9877,7 +9877,7 @@ msgstr "সূর্য থেকে সর্বোচ্চ চ্যুতি
 #: plugins/Observability/src/Observability.cpp:210
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr "%1 তারিখে সূর্যাস্তের সময় উঠবে ও %2 তারিখে সূর্যদয়ের সাথে ডুববে । "
+msgstr "সূর্যাস্তে উদয় / সূর্যোদয়ে অস্ত : %1/%2 । "
 
 #: plugins/Observability/src/Observability.cpp:211
 #, qt-format
@@ -9896,11 +9896,11 @@ msgstr "সূর্যাস্তে উদিত বা সূর্যদয়
 #: plugins/Observability/src/Observability.cpp:215
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr "%1 তারিখে সূর্যদয়ের সময় উঠবে ও %2 তারিখে সূর্যাস্তের সময় ডুববে ।"
+msgstr "সূর্যোদয় উদয় / সূর্যাস্তে অস্ত : %1/%2 ।"
 
 #: plugins/Observability/src/Observability.cpp:216
 msgid "No Cosmical rise/set."
-msgstr "সূর্যদয়ে উদিত বা সূর্যাস্তে অস্তমিত হবে না ।"
+msgstr "সূর্যোদয়ে উদিত বা সূর্যাস্তে অস্তমিত হবে না ।"
 
 #: plugins/Observability/src/Observability.cpp:217
 msgid "Observable during the whole year."
@@ -10016,7 +10016,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "বিভিন্ন উদয় ও অস্তের দিনক্ষন"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -10038,6 +10038,13 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"সূর্যাস্তে উদয় ও সূর্যোদয়ে অস্ত বলতে, সূর্যাস্তের সাথে সাথে জ্যোতিষ্কটির "
+"উদয় ও সূর্যোদয়ের সাথে সাথে জ্যোতিষ্কটির অস্ত যাওয়া বোঝায় । এক্ষেত্রে সূর্য "
+"দিগন্তের নীচে নামা মাত্রই জ্যোতিষ্কটি দিগন্তের উপরে উঠে আসে ফলে "
+"জ্যোতিষ্কটিকে সারা রাত আকাশে থাকে । অপরপক্ষে সূর্যাস্তে অস্ত ও সূর্যোদয়ে "
+"উদয় বলতে, সূর্য ও জ্যোতিষ্কটির একসাথে উদয় ও অস্ত যাওয়া বোঝায় । তাই "
+"এক্ষেত্রে এই দুই সময়ের মাঝে বস্তুকে দেখতে পাওয়া সম্ভব নয় । তাছাড়া এগুলির "
+"দিনক্ষন পর্যবেক্ষন স্থানের উপর নির্ভর করে ।"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -10233,6 +10240,10 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"এই সরঞ্জামটি দিক নির্ণয়ে ব্যবহৃত ৫৮টি তারার অবস্থান চিহ্নিত করে । এগুলি হল "
+"মহারানীর নৌসারণী অফিস এবং মার্কিন নৌ মানমন্দির দ্বারা ১৯৫৮ সাল থেকে যৌথভাবে "
+"প্রকাশিত  <em>The Nautical Almanac</em> তালিকায় থাকা ধ্রুবতারা সমেত আরও ৫৭টি "
+"তারা ।"
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
@@ -10313,12 +10324,12 @@ msgstr "হরফের আকার :"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:98
 msgid "The current catalog of Meteor Showers is invalid!"
-msgstr ""
+msgstr "উল্কাবৃষ্টি সংক্রান্ত বর্তমান তালিকাটি বেকার !"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:569
 msgid "Meteor Showers"
-msgstr "উল্কাপাত"
+msgstr "উল্কাবৃষ্টি"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
@@ -10357,6 +10368,18 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>এই সরঞ্জামটি নির্দিষ্ট সময় অন্তর হওয়া উল্কা বৃষ্টির পরিস্থিতি নকর করে "
+"দেখায় ও বিভিন্ন সক্রিয় এবং নিষ্ক্রিয় উৎপত্তি বিন্দুগুলির অবস্থান দেখায় "
+"।</p><p>উৎপত্তি বিন্দুতে একবার ক্লিক করে আপনি ঐ উল্কাবৃষ্টি সম্পর্কে তথ্য "
+"জানতে পারবেন । তথ্যগুলির বেশিভাগই <a href=\"http://imo.net\">International "
+"Meteor Organization</a> এর অফিসিয়াল তালিকা থেকে নেওয়া ।</p><p>সাধারনত: তিন "
+"রকমের উৎপত্তি বিন্দু হয়ে থাকে :<ul><li><b>Confirmed:</b> the radiant is "
+"active and its data was confirmed. Thus, this is a historical (really "
+"occurred in the past) or predicted meteor shower.</li><li><b>Generic:</b> "
+"the radiant is active, but its data was not confirmed. It means that this "
+"can occur on real life, but that we do not have real data about its activity "
+"for the current sky year.</li><li><b>Inactive:</b> the radiant is inactive "
+"for the current sky date.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -10378,11 +10401,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:516
 msgid "inactive"
-msgstr ""
+msgstr "নিষ্ক্রিয়"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:534
 msgid "meteor shower"
-msgstr "উল্কাপাত"
+msgstr "উল্কাবৃষ্টি"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:543
 msgid "Radiant drift (per day)"
@@ -10414,7 +10437,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:582
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "সর্বোচ্চ : %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgid "Solar longitude"
@@ -10422,7 +10445,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "variable"
-msgstr ""
+msgstr "পরিবর্তনশীল"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:33
@@ -10777,32 +10800,32 @@ msgstr "১৬৯পি/এন ই এ টি ধূমকেতু"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "২৮৯পি/ব্লাঁপেন ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "৮পি/টাট্টেল ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "৩ডি/বিযেলা ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "সি/১৯১৭ এফ১ (মেলিশ) ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "সি/১৯৬৪ এন১ (ইকেয়া) ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "স্বোয়াশম্যান-ওয্যাচম্যান ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:187
@@ -10822,7 +10845,7 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "২পি/এনকে ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
@@ -10836,23 +10859,23 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
-msgstr ""
+msgstr "সংশোধন করা হচ্ছে..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
 msgid "Successfully updated!"
-msgstr ""
+msgstr "সফলভাবে সংশোধিত হয়েছে !"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:139
 msgid "Failed!"
-msgstr ""
+msgstr "ব্যর্থ !"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:143
 msgid "Outdated!"
-msgstr ""
+msgstr "সেকেলে !"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "উল্কাবৃষ্টি"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
 msgid ""
@@ -10881,11 +10904,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
-msgstr ""
+msgstr "পরিভাষা"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:251
 msgid "Meteor shower"
-msgstr ""
+msgstr "উল্কাবৃষ্টি"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:253
 msgid ""
@@ -10902,7 +10925,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:261
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
-msgstr ""
+msgstr "উৎপত্তি বিন্দু"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 msgid ""
@@ -10911,6 +10934,9 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"উৎপত্তি বিন্দু হল আকাশের এমন একটি কাল্পনিক বিন্দু যেদিক থেকে উল্কাগুলি ধেয়ে "
+"আসছে বলে মনে হয় । যেমন - পারসেইড উল্কাবৃষ্টি, এক্ষেত্রে উল্কাগুলিকে পারসিউস "
+"মন্ডলের একটি বিন্দু থেকে ধেয়ে আসছে বলে মনে হয় ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:269
 msgid ""
@@ -10919,6 +10945,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"আকাশের যেকোনো দিকেই উক্কাপাত দেখা যেতে পারে । তবে তার গতিপথ পর্যবেক্ষন করলে "
+"অনেক সময় দেখা যায় যে সেটি কোনো জানা উৎপত্তি বিন্দু থেকে আসছে । কিন্তু যদি তা "
+"কোনো উৎপত্তি বিন্দু থেকে না আসে তবে তাকে বিক্ষিপ্ত উল্কাপাত বলে, সেটি কোনো "
+"উল্কাবৃষ্টির অংশ নয় ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
 msgid ""
@@ -10926,10 +10956,13 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"অনেক সময় উল্কাবৃষ্টির উৎপত্তি বিন্দু আাকাশে তারাদের পটভূমিতে তাদের স্থান "
+"পরিবর্তন করে থাকে । যেমন - ডেল্টা অরাইজিডস উল্কাবৃষ্টির উৎপত্তি বিন্দু প্রতি "
+"রাতে এক ডিগ্রিরও বেশি স্থান পরিবর্তন করে ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "উল্কাপাতের হার (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:280
 msgid ""
@@ -10939,6 +10972,9 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"একদম ঝকঝকে পরিষ্কার আকাশে মধ্যগগনে অবস্থিত কোনো উৎপত্তি বিন্দু থেকে এক "
+"ঘন্টায় খালি চোখে (৬.৫ উজ্জ্বল্যতা পর্যন্ত) যতগুলি উল্কাপাত দেখা যায় তাকে "
+"উল্কাপাতের হার বলে ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
 msgid "Population index"
@@ -10954,33 +10990,35 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:293
 msgid "Notes"
-msgstr ""
+msgstr "বি.দ্র."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:294
 msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
+"এই সরঞ্জামটি প্রাথমিকভাবে ESA Summer of Code in Space 2013 এর একটি প্রকল্প "
+"হিসাবে শুরু করা হয়েছিল ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Info"
-msgstr ""
+msgstr "তথ্যাদি"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:296
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "বিশদ জানতে দেখুন :"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:299
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1উল্কাবৃষ্টি%2 সংক্রান্ত উইকিপিডিয়া নিবন্ধ"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:301
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:304
 #, qt-format
@@ -10988,22 +11026,24 @@ msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Launchpad ওয়েবসাইটের মাধ্যমে অতিরিক্ত সাহায্য উপলব্ধ আছে । তবে এ ব্যাপারে "
+"কিছু পোস্ট করার সময় বিষয় হিসাবে \"%1\" নির্বাচণ করতে ভুলবেন না ।"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:105
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "শুরুর তারিখ শেষের তারিখের থেকে ছোটো হতে হবে !"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:109
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "সময় অবকাশ অবশ্যই এক বছরের কম হতে হবে !"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
 msgid "ZHR"
-msgstr ""
+msgstr "হার :"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
-msgstr ""
+msgstr "ধরণ"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:186
 msgid "Peak"
@@ -11048,7 +11088,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:437
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "হরফের আকার (পিক্সেল) :"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
@@ -11076,7 +11116,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "পরবর্তী সংশোধন :"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
@@ -11088,7 +11128,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "সংশোধনী"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
@@ -11097,16 +11137,16 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
-msgstr ""
+msgstr "অনুসন্ধান"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "dd/MMM/yyyy"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
-msgstr ""
+msgstr "ফলাফল"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
@@ -11114,45 +11154,45 @@ msgstr ""
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "কার্সারের স্থানাঙ্ক"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:59
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "এই সরঞ্জামটি মাউস কার্সারের অবস্থান দেখায় ।"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "মাউস কার্সারের অবস্থান"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:145
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "বিষুবাংশ/বিষুবলম্ব (J2000.0 অনুসারে)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:161
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "বিষুবাংশ/বিষুবলম্ব"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:184
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "দিগংশ / উন্নতি"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:200
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:219
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:238
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ (J2000.0 অনুসারে)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:256
 msgctxt "abbreviated in the plugin"
@@ -11161,23 +11201,23 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "কার্সারের স্থানাঙ্ক সরঞ্জাম"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
-msgstr ""
+msgstr "স্ক্রীনের উপরের মাঝখানে"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "স্ক্রীনের উপরের ডানদিক ঘেঁষে"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "স্ক্রীনের নীচের ডান কোনে"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "পছন্দমত জায়গায়"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
@@ -11189,23 +11229,23 @@ msgstr "বিষুবাংশ / বিষুবলম্ব"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ (J2000.0 অনুযায়ী)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "ছায়াপথ কেন্দিক স্থানাঙ্ক, দ্রাঘিমাংশ/অক্ষাংশ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "পছন্দসই জায়গা :"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "স্ক্রীনে কার্সারটি দেখানো হবে ।"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
@@ -11213,7 +11253,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "টুলবারে সরঞ্জামটি দেখানো হবে"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
@@ -11221,7 +11261,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
-msgstr ""
+msgstr "স্থানাঙ্ক ব্যবস্থা :"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
@@ -11233,11 +11273,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "ভূজ"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "কোটি"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:166
 msgid "Loading model..."
@@ -11366,14 +11406,14 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "চালু"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "বন্ধ"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #, qt-format
@@ -11426,7 +11466,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:927
 msgid "3D Sceneries"
-msgstr ""
+msgstr "ত্রিমাত্রিক ভূমিরূপ"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:930
 msgid ""
@@ -11737,11 +11777,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:749
 msgid "Equinox"
-msgstr ""
+msgstr "বিষুবরেখা"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Solstice"
-msgstr ""
+msgstr "সূর্যায়ণ"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Crossquarter"
@@ -11749,24 +11789,24 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "সর্বোচ্চ চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "সর্বনিম্ন চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
 msgid "Zenith Passage"
-msgstr ""
+msgstr "সুবিন্দু"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:767
 msgid "Nadir Passage"
-msgstr ""
+msgstr "কুবিন্দু"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:770
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "পছন্দসই বস্তু"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:779
 msgid "error if you can read this"
@@ -11792,7 +11832,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "বিষুবরেখা ও তার থেকে সূর্যের সর্বোচ্চ চ্যুতি বা সূর্যায়ণ"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
@@ -11802,11 +11842,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি বা সর্বোচ্চ চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি বা সর্বনিম্ন চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
@@ -11822,11 +11862,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "সূর্যের বর্তমান বিষুবলম্ব"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "চাঁদের বর্তমান বিষুবলম্ব"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
@@ -11842,11 +11882,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "বিষুবরেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "বিষুবরেখা থেকে সূর্যের সর্বোচ্চ চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
@@ -11854,31 +11894,31 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "বিষুবরেখা থেকে চাঁদের সর্বোচ্চ চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "বিষুবরেখা থেকে চাঁদের সর্বনিম্ন চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "বিষুবরেখা থেকে সুবিন্দুর চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "বিষুবরেখা থেকে কুবিন্দুর চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "বিষুবরেখা থেকে পছন্দসই বস্তুর চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "বিষুবরেখা থেকে সূর্যের চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "বিষুবরেখা থেকে চাঁদের চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
@@ -11898,11 +11938,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "বিষুবরেখা বা নিরক্ষরেখা"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
-msgstr ""
+msgstr "সূর্যায়ন"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
@@ -11910,55 +11950,55 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "রং বদলান"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "সর্বোচ্চ চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "সর্বনিম্ন চন্দ্রায়ণ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "সুবিন্দু"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "কুবিন্দু"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "সূর্য"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "চাঁদ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "পছন্দ করুন"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "বুধ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "শুক্র"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "মঙ্গল"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "বৃহস্পতি"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "শনি"
 
 #~ msgid "Planet: "
 #~ msgstr "গ্রহ "
