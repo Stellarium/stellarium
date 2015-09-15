@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-13 13:33+0000\n"
+"PO-Revision-Date: 2015-09-15 04:19+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:31+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-15 05:11+0000\n"
+"X-Generator: Launchpad (build 17737)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -983,7 +983,7 @@ msgstr "Avançar um dia solar"
 
 #: src/core/StelCore.cpp:212
 msgid "Add 7 solar days"
-msgstr "Avançar sete dias solares"
+msgstr "Avançar uma semana solar"
 
 #: src/core/StelCore.cpp:213
 msgid "Subtract 1 solar hour"
@@ -995,7 +995,7 @@ msgstr "Retroceder um dia solar"
 
 #: src/core/StelCore.cpp:215
 msgid "Subtract 7 solar days"
-msgstr "Retroceder sete dias solares"
+msgstr "Retroceder uma semana solar"
 
 #: src/core/StelCore.cpp:216
 msgid "Add 1 sidereal day"
@@ -6881,7 +6881,7 @@ msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 "Marque esta opção se você deseja que o valor do campo de visão seja o mesmo "
-"do início do Stellarium."
+"do início do Stellarium"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
@@ -8034,7 +8034,7 @@ msgid ""
 "or at a remote machine."
 msgstr ""
 "Um telescópio controlado por uma aplicação externa, quer neste computador, "
-"quer numa máquina remota."
+"quer numa máquina remota"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "External software or a remote computer"
