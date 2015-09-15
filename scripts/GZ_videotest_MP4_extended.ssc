@@ -13,7 +13,7 @@ lab = LabelMgr.labelScreen("MP4 video stress test...", 100, 40, true, 18, "#ff00
 
 // OK, let's see what we can achieve:
 // loadVideo(filename, id, x, y, show, opacity)
-core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, false, 0.15); // we start with "false" to not show some undecided size.
+core.loadVideo("media/stellarium.mp4", "mp4", 100, 70, true, 0.15); // we start with "false" to not show some undecided size. ===>>> AAAARGH! false caused that month-long crash. 
 
 core.wait(4);
 core.resizeVideo("mp4", -1, 0.5);

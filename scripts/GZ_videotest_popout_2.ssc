@@ -9,8 +9,8 @@
 //
 
 // API for loadVideo:("filename", "id", ULposX, ULposY, visible, alpha);
-core.loadVideo("media/stellarium.mp4", "grow", 100, 70, false, 0.5);
-//core.loadVideo("media/stellarium.mp4", "grow", 100, 70, true, 0.5); // test with box visible before messages?
+//core.loadVideo("media/stellarium.mp4", "grow", 100, 70, false, 0.5);
+core.loadVideo("media/stellarium.mp4", "grow", 100, 70, true, 0.5); // test with box visible before messages?
 
 lab = LabelMgr.labelScreen("Playing video file with special effect...", 100, 20, true, 20, "#ff0000");
 lab2 = LabelMgr.labelScreen("spawning from 0.4/0.9 towards 0.6/0.4 (sized -1/0.6) within transition time of 2 seconds", 100, 45, true, 15, "#ff0000");
