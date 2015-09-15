@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-06-19 17:15+0000\n"
+"PO-Revision-Date: 2015-09-15 03:29+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:17+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-15 05:11+0000\n"
+"X-Generator: Launchpad (build 17737)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -61,15 +61,15 @@ msgstr "Meridiaani"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Ekliptika (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Ekliptika (nykyinen)"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Ekvaattori (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:612
 msgid "Equator"
@@ -77,7 +77,7 @@ msgstr "Ekvaattori"
 
 #: src/core/modules/GridLinesMgr.cpp:617
 msgid "Precession Circle"
-msgstr ""
+msgstr "Prekressioympyrä"
 
 #: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1769
 msgid "Horizon"
@@ -109,7 +109,7 @@ msgstr "Ekliptika"
 
 #: src/core/modules/GridLinesMgr.cpp:880
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Ekliptika (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -118,7 +118,7 @@ msgstr "Ekvaattori"
 
 #: src/core/modules/GridLinesMgr.cpp:882
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Ekvaattori (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -141,7 +141,7 @@ msgstr "Ekliptikaalinen asteikko (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Ekliptikaalinen koordinaatisto"
 
 #: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1741
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -159,7 +159,7 @@ msgstr "Opposition/konjunktion pituuspiiri"
 
 #: src/core/modules/GridLinesMgr.cpp:891
 msgid "Precession Circles"
-msgstr ""
+msgstr "Prekressioympyrät"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1587
 msgid "Atmosphere"
@@ -248,7 +248,7 @@ msgstr "Magnitudi: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:191
 msgid " (Photometric system: B)"
-msgstr ""
+msgstr " (Fotometrinen järjestelmä: B)"
 
 #: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:119
@@ -274,12 +274,12 @@ msgstr "Koko: %1"
 #: src/core/modules/Nebula.cpp:222
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Koko: %1 × %2"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "Suuntakulma: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:238
@@ -292,22 +292,22 @@ msgstr "Etäisyys: %1 vv"
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:263
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:268
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Etäisyys: %1 %2"
 
 #: src/core/modules/Nebula.cpp:285
 #, qt-format
 msgid "Redshift: %1"
-msgstr ""
+msgstr "Punasiirtymä: %1"
 
 #: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:247
 #, qt-format
@@ -316,7 +316,7 @@ msgstr "Parallaksi: %1\""
 
 #: src/core/modules/Nebula.cpp:300
 msgid "Morphological description: "
-msgstr ""
+msgstr "Rakenteellinen kuvaus: "
 
 #: src/core/modules/Nebula.cpp:748
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -9738,13 +9738,14 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
-"Näyttää analyysin valitun kohteen havaittavuudesta (nousu, lasku ja "
-"ylikulkuajat) nykyiselle ajankohdalle, sekä ajan jolloin se on havaittavissa "
-"vuoden aikana. Kohteen oletetaan olevan havaittavissa, jos se on horisontin "
-"yläpuolella edes pienen hetken yön aikana. Sisällytetynä on myös päivät "
-"jolloin kohde on kauimmillaan auringosta, sekä akronikaalinen ja "
-"kosmikaalinen nousu ja lasku. (Selitykset näille termeille löytyvät "
-"\"Tietoja\"-välilehdeltä laajennuksen asetusikkunasta."
+"Näyttää analyysin valitun kohteen havaittavuudesta (nousu-, lasku- ja "
+"ylikulkuajat) nykyiselle ajankohdalle, sekä aikavälin, jolloin kyseinen "
+"kohde on havaittavissa kuluvan vuoden aikana. Kohteen oletetaan olevan "
+"havaittavissa, jos se käy horisontin yläpuolella yön aikana. Sisällytettyinä "
+"ovat myös kohteen suurimman kulmaetäisyyden ajanhetki (so. päivä jolloin "
+"kohde on kauimmillaan Auringosta), sekä akronisen ja kosmisen nousun ja "
+"laskun ajankohdat. (Selitykset näille termeille löytyvät \"Tietoja\"-"
+"välilehdeltä laajennuksen asetusikkunasta."
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
@@ -9865,7 +9866,7 @@ msgstr "Kohde ei ole havaittavissa"
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr "Ei akronikaalista tai kosmista nousua/laskua."
+msgstr "Ei akronista tai kosmista nousua/laskua."
 
 #: plugins/Observability/src/Observability.cpp:206
 #, qt-format
@@ -9900,7 +9901,7 @@ msgstr "Ei akronikaalista nousua/laskua. "
 #: plugins/Observability/src/Observability.cpp:215
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr "Kosmikaalinen nousu/lasku: %1/%2."
+msgstr "Kosminen nousu/lasku: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:216
 msgid "No Cosmical rise/set."
@@ -9963,15 +9964,16 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Laajennus analysoi valitun kohteen havaittavuutta (tai ruudun keskikohdan, "
-"jos kohdetta ei ole valittuna). Laajennus näyttää nousun, meridiaanin "
-"ohituksen ja laskun ajankohdan, kuten myös parhaan vuodenajan havaintoihin "
-"(eli ajan, jolloin kohteen kulmaetäisyys Auringosta on suurimmillaan), "
-"ajanjakson, jolloin kohde on horisontin yläpuolella pimeään yöaikaan, ja "
-"akronikaalisen ja kosmikaalisen nousun/laskun päivämäärät.<br>Aurinkokunnan "
-"kohteiden efemeridit ja parallaksin vaikutukset on huomioitu.<br><br> Tekijä "
-"kiittää Alexander Wolfia ja Georg Zottia heidän antamistaan "
-"neuvoista.<br><br>Ivan Martin-Vidal (Onsala Space Observatory)"
+"Laajennus esittää analyysin valitun kohteen (tai näytön keskikohdan, jos "
+"kohdetta ei ole valittuna) havaittavuudesta. Laajennus näyttää kohteen "
+"nousun, meridiaanin ohituksen ja laskun ajankohdan, sekä parhaan vuodenajan "
+"havaintoihin (so. ajankohdan jolloin kohteen kulmaetäisyys Auringosta on "
+"suurimmillaan), ajanjakson, jolloin kohde on horisontin yläpuolella pimeään "
+"yöaikaan, sekä akronisen ja kosmisen nousun ja laskun "
+"päivämäärät.<br>Aurinkokunnan kohteiden efemeridit ja parallaksin "
+"vaikutukset on huomioitu.<br><br> Tekijä kiittää Alexander Wolfia ja Georg "
+"Zottia heidän antamistaan neuvoista.<br><br>Ivan Martin-Vidal (Onsala Space "
+"Observatory)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Explanation of some parameters"
@@ -10022,7 +10024,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr "Akronikaalinen/kosmikaalinen/heliakkinen nousu/lasku:"
+msgstr "Akroninen/kosminen/heliakkinen nousu/lasku:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -10044,21 +10046,21 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
-"Kohteen kosmikaalisen nousun/laskun päivät arvioidaan päiviksi, jolloin "
+"Kohteen kosmisen nousun (tai laskun) ajankohta arvioidaan päiväksi, jolloin "
 "kohde nousee (tai laskee) samaan aikaan Auringon kanssa. Näiden tapahtumien "
-"tarkat päivämäärät riippuvat havaitsijan sijainnista. Akronikaalinen nousu "
-"sitävastoin taphtuu, kun kohde nousee/laskee kun Aurinko laskee/nousee (eli "
-"päinvastoin kuin Aurinko). Toisin sanoen kohde on siis vaikeasti (tai ei "
-"lainkaan) havaittavissa kosmikaalisen nousun ja laskun aikoihin. "
-"Akronikaalisen nousun ja laskun aikoihin kohde on taas päinvastoin "
-"korkeimmillaan Auringon ollessa syvällä horisontin alapuolella (eli kohde on "
-"hyvin havaittavissa). Heliakkinen nousu tapahtuu sinä päivänä, jolloin tähti "
-"tulee ensimmäisen kerran näkyviin. Se tapahtuu kun tähti on lähellä itäistä "
-"horisonttia suunnilleen astronomisen yön (eli astronomisen hämärän) "
-"loppuessa. Seuraavina öinä tähti on näkyvissä joka kerta pidemmän aikaa, "
-"kunnes se saavuttaa heliakkisen laskun (eli vuoden viimeisen yön jolloin se "
-"on näkyvissä). Heliakkisessa laskussa tähti laskee suunnilleen astronomisen "
-"hämärän alussa."
+"tarkat päivämäärät riippuvat havaitsijan sijainnista. Akroninen nousu (tai "
+"lasku) sitä vastoin tapahtuu, kun kohde nousee (tai laskee) Auringon "
+"laskiessa (tai noustessa), siis päinvastoin kuin Aurinko. Toisin sanoen "
+"kohde on vaikeasti (tai ei lainkaan) havaittavissa kosmisen nousun tai "
+"laskun aikana. Akronisen nousun tai laskun aikoihin kohde on taas "
+"päinvastoin korkeimmillaan Auringon ollessa syvimmillään horisontin "
+"alapuolella (eli kohde on hyvin havaittavissa). Heliakkinen nousu tapahtuu "
+"sinä päivänä, jolloin tähti tulee ensimmäistä kertaa näkyviin vuoden aikana. "
+"Se tapahtuu kun tähti on lähellä itäistä horisonttia suunnilleen "
+"astronomisen yön loppuessa (eli astronomisen hämärän alkaessa). Seuraavina "
+"öinä tähti on näkyvissä joka kerta pidemmän aikaa, kunnes se saavuttaa "
+"heliakkisen laskun (eli vuoden viimeisen yön, jolloin se on näkyvissä). "
+"Heliakkisessa laskussa tähti laskee suunnilleen astronomisen yön alussa."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -10189,7 +10191,7 @@ msgstr "Efemeridit tänään (nousu-, lasku- ja meridiaaninohitusajat)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr "Akronikaalisen/kosmikaalisen/heliakkisen nousun/laskun päivämäärät"
+msgstr "Akronisen/kosmisen/heliakkisen nousun/laskun päivämäärät"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
@@ -10730,17 +10732,17 @@ msgstr "α-Pisces Australidit"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:145
 msgid "Southern ι-Aquariids"
-msgstr "Eteläiset ι-Aquariids"
+msgstr "Eteläiset ι-Akvaridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:147
 msgid "Northern ι-Aquariids"
-msgstr "Pohjoiset ι-Aquariids"
+msgstr "Pohjoiset ι-Akvaridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr "γ-Aquariidit"
+msgstr "γ-Akvaridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
@@ -10923,7 +10925,7 @@ msgid ""
 msgstr ""
 "Meteoriparvella tarkoitetaan Maan ilmakehään tulevia meteoreja, jotka "
 "tulevat tietystä taivaan suunnasta. Meteoriparvet ovat yleensä törmäyksissä "
-"hajonneiden isompien kappaleiden tai ohi kulkeneen komeetan jäännöksiä. "
+"hajonneiden isompien kappaleiden, tai ohi kulkeneen komeetan jäännöksiä. "
 "Suurin osa meteoreista on hiekanjyvää pienempiä, ja ne hajoavat ilmakehään "
 "tullessaan eivätkä koskaan pääse maan pinnalle asti. Poikkeuksellisen "
 "voimakkaita meteoriparvia kutsutaan meteorimyrskyiksi, jolloin meteoreja "
