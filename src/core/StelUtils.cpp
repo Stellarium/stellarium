@@ -1229,7 +1229,7 @@ double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 {
 	int y, m, d, h, min;
 	float s;
-	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);
+	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);	
 	if (*ok)
 	{
 		double jd;

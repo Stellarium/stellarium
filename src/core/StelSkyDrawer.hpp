@@ -80,6 +80,8 @@ public:
 
 	bool drawPointSource(StelPainter* sPainter, const Vec3f& v, const RCMag &rcMag, const Vec3f& bcolor, bool checkInScreen=false);
 
+	void drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha);
+
 	//! Terminate drawing of a 3D model, draw the halo
 	//! @param p the StelPainter instance to use for this drawing operation
 	//! @param v the 3d position of the source in J2000 reference frame
@@ -163,15 +165,22 @@ public slots:
 	//! setCustomStarMagnitudeLimit() will not be displayed.
 	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
 	void setFlagStarMagnitudeLimit(bool b) {flagStarMagnitudeLimit = b;}
+	//! @return true if the user-defined star magnitude limit is in force.
+	bool getFlagStarMagnitudeLimit() const {return flagStarMagnitudeLimit;}
 	//! Toggle the application of user-defined deep-sky object magnitude limit.
 	//! If enabled, deep-sky objects fainter than the magnitude set with
 	//! setCustomNebulaMagnitudeLimit() will not be displayed.
 	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
 	void setFlagNebulaMagnitudeLimit(bool b) {flagNebulaMagnitudeLimit = b;}
-	//! @return true if the user-defined star magnitude limit is in force.
-	bool getFlagStarMagnitudeLimit() const {return flagStarMagnitudeLimit;}
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagNebulaMagnitudeLimit() const {return flagNebulaMagnitudeLimit;}
+	//! Toggle the application of user-defined solar system object magnitude limit.
+	//! If enabled, planets, planetary moons, asteroids (KBO, ...) and comets fainter than the magnitude set with
+	//! setCustomPlanetMagnitudeLimit() will not be displayed.
+	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM  --- GZ: this was copy/paste. Track down BM's changes!!!
+	void setFlagPlanetMagnitudeLimit(bool b) {flagPlanetMagnitudeLimit = b;}
+	//! @return true if the user-defined nebula magnitude limit is in force.
+	bool getFlagPlanetMagnitudeLimit() const {return flagPlanetMagnitudeLimit;}
 
 	//! Get the value used for forced star magnitude limiting.
 	float getCustomStarMagnitudeLimit() const {return customStarMagLimit;}
@@ -183,6 +192,11 @@ public slots:
 	//! Sets a lower limit for nebula magnitudes (anything fainter is ignored).
 	//! In force only if flagNebulaMagnitudeLimit is set.
 	void setCustomNebulaMagnitudeLimit(double limit) {customNebulaMagLimit=limit;}
+	//! Get the value used for forced solar system object magnitude limiting.
+	float getCustomPlanetMagnitudeLimit() const {return customPlanetMagLimit;}
+	//! Sets a lower limit for solar system object magnitudes (anything fainter is ignored).
+	//! In force only if flagPlanetMagnitudeLimit is set.
+	void setCustomPlanetMagnitudeLimit(double limit) {customPlanetMagLimit=limit;}
 
 	//! Get the luminance of the faintest visible object (e.g. RGB<0.05)
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
@@ -293,6 +307,9 @@ private:
 	//! Controls the application of the user-defined nebula magnitude limit.
 	//! @see customNebulaMagnitudeLimit
 	bool flagNebulaMagnitudeLimit;
+	//! Controls the application of the user-defined planet magnitude limit.
+	//! @see customPlanetMagnitudeLimit
+	bool flagPlanetMagnitudeLimit;
 
 	float starRelativeScale;
 	float starAbsoluteScaleF;
@@ -315,7 +332,13 @@ private:
 	//! be displayed.
 	//! Used if flagNebulaMagnitudeLimit is true.
 	//! @todo Why the asterisks this is not in NebulaMgr? --BM
+	//  GZ To explain: we have 3 limits for stars, nebulae, planets. It's easier to maintain the pretty similar code in 1 place.
 	float customNebulaMagLimit;
+	//! User-defined magnitude limit for solar system objects.
+	//! Interpreted as a lower limit - planets fainter than this value will not
+	//! be displayed.
+	//! Used if flagPlanetMagnitudeLimit is true.
+	float customPlanetMagLimit;
 
 	//! Little halo texture
 	StelTextureSP texHalo;
@@ -369,6 +392,7 @@ private:
 	//! Big halo texture
 	StelTextureSP texBigHalo;
 	StelTextureSP texSunHalo;
+	StelTextureSP texSunCorona;
 
 	bool flagLuminanceAdaptation;
 

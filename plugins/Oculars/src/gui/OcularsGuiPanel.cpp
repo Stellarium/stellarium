@@ -392,7 +392,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	//Border/background for the widget
 	borderPath = new QGraphicsPathItem();
-	borderPath->setZValue(100);
+	borderPath->setZValue(100);		
 	QBrush borderBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2));
 	borderPath->setBrush(borderBrush);
 	QPen borderPen = QPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
@@ -512,7 +512,7 @@ void OcularsGuiPanel::updateOcularControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldOcularName->boundingRect().height() - prevOcularButton->boundingRect().height()) / 2.;
-    prevOcularButton->setPos(posX, qRound(posY + heightAdjustment));
+	prevOcularButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevOcularButton->boundingRect().width();
 	widgetWidth += prevOcularButton->boundingRect().width();
 

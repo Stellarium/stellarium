@@ -296,10 +296,13 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 {
 	//Main telescope properties
 	QString name = ui->lineEditTelescopeName->text().trimmed();
+
 	if(name.isEmpty())
 		return;
+
 	QString host = ui->lineEditHostName->text();
-	if(host.isEmpty())//TODO: Validate host
+
+	if(host.isEmpty() || !validateHost(host))
 		return;
 	
 	int delay = MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxTelescopeDelay->value());
@@ -337,7 +340,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	if(ui->radioButtonTelescopeLocal->isChecked())
 	{
 		//Read the serial port
-		QString serialPortName = ui->lineEditSerialPort->text();
+		QString serialPortName = ui->lineEditSerialPort->text();		
 		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX))
 			return;//TODO: Add more validation!
 		
@@ -370,4 +373,19 @@ void TelescopeConfigurationDialog::deviceModelSelected(const QString& deviceMode
 {
 	ui->labelDeviceModelDescription->setText(telescopeManager->getDeviceModels().value(deviceModelName).description);
 	ui->doubleSpinBoxTelescopeDelay->setValue(SECONDS_FROM_MICROSECONDS(telescopeManager->getDeviceModels().value(deviceModelName).defaultDelay));
+}
+
+bool TelescopeConfigurationDialog::validateHost(QString hostName)
+{
+    // Simple validation by ping
+    int exitCode;
+#ifdef Q_OS_WIN32
+    // WTF? It's not working anymore!
+    //exitCode = QProcess::execute("ping", QStringList() << "-n 1" << hostName);
+    exitCode = 0;
+#else
+    exitCode = QProcess::execute("ping", QStringList() << "-c1" << hostName);
+#endif
+    return (0 == exitCode);
+    //TODO: Add debug if host not alive?
 }

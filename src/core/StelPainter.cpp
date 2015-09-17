@@ -1764,7 +1764,7 @@ void StelPainter::enableTexture2d(bool b)
 
 void StelPainter::initGLShaders()
 {
-	qWarning() << "Intializing basic GL shaders... ";
+	qDebug() << "Initializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =

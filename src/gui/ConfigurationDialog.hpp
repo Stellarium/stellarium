@@ -101,6 +101,8 @@ private slots:
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double) {cursorTimeOutChanged();}
 
+	void updateStartPointForAzimuth(bool b);
+
 	void newStarCatalogData();
 	void downloadStars();
 	void cancelDownload();

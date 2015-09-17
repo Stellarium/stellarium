@@ -59,12 +59,24 @@ def getListOfLinkedQtFrameworksForFile(file):
 def copyFrameworkToApp(framework):
 	'''
 	Copy the Qt framework into the bundle.
+	
+	NOTE: OS X 10.11 changes things, and the framework now has @rpath, not the absolute path.
 	'''
-	frameworkRoot = os.path.split(os.path.split(os.path.split(framework)[0])[0])[0]
-	frameworkName = os.path.split(frameworkRoot)[1]
-	target = os.path.join(installDirectory, 'Frameworks', frameworkName)
-	if not os.path.exists(target):
-		shutil.copytree(frameworkRoot, target, symlinks=True, ignore=shutil.ignore_patterns('*debug*'))
+	# print('%s' % framework)
+	if '@rpath' in framework:
+		frameworkRoot = os.path.split(os.path.split(os.path.split(framework)[0])[0])[0]
+		beginPosition = framework.index('/') + 1
+		endPosition = framework.index('/', beginPosition)
+		frameworkName = framework[beginPosition:endPosition]
+		# print('====> %s : %s' % (frameworkName, qtFrameworksDirectory))
+	else:
+		frameworkRoot = os.path.split(os.path.split(os.path.split(framework)[0])[0])[0]
+		frameworkName = os.path.split(frameworkRoot)[1]
+	
+	if frameworkName != 'Qt':
+		target = os.path.join(installDirectory, 'Frameworks', frameworkName)
+		if not os.path.exists(target):
+			shutil.copytree(os.path.join(qtFrameworksDirectory, frameworkName), target, symlinks=True, ignore=shutil.ignore_patterns('*debug*'))
 	
 def updateName(file):
 	'''
@@ -84,18 +96,22 @@ def updateLibraryPath(file, where):
 	'where' is the path relative to the installDirectory
 	'''
 	base = ''
+	if '@rpath' in file:
+		file = file[file.find('/') + 1:]
+		file = os.path.join(installDirectory, 'Frameworks', file)
 	if file.endswith('dylib') or file == 'stellarium':
 		base = file
 		file = os.path.join(installDirectory, where, file)
 	else:
 		base = file[file.find(file[file.rfind('/'):]) + 1:]
+
 	args = ['install_name_tool', '-change', '', '', os.path.join(installDirectory, where, base )]
 	for framework in getListOfLinkedQtFrameworksForFile(file):
 		# otool adds self, so ignore it
 		if not framework == file:
 			args[2] = framework
 			args[3] = '@executable_path/../Frameworks' + framework[framework.find(framework[framework.rfind('/'):]):]
-			# print(args)
+			#print(args)
 			process = Popen(args, stdout=PIPE, stderr=PIPE)
 			output, oerr = process.communicate()
 			if process.returncode != 0:
@@ -123,6 +139,7 @@ def processFrameworks():
 			allFramework.append(dependentFramework)
 	# for framework in set(allFramework):
 		updateName(framework)
+		print('Processing %s' % framework)
 		updateLibraryPath(framework, 'Frameworks')
 
 def copyPluginDirectory(pluginDirectoryName):

@@ -60,7 +60,7 @@ void GetVsop87Coor(double jd,int body,double *xyz);
   */
 
 void GetVsop87OsculatingCoor(const double jd0,const double jd, const int body,double *xyz);
-  /* The oculating orbit of epoch jd0, evatuated at jd, is returned.
+  /* The oculating orbit of epoch jd0, evaluated at jd, is returned.
   */
 
 #ifdef __cplusplus
