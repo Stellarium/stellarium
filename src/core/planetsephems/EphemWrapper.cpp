@@ -167,8 +167,6 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused)
         xyz[1] -= 0.0121505677733761 * moon[1];
         xyz[2] -= 0.0121505677733761 * moon[2];
   	}
-
-    qDebug() << "Earth (" << xyz[0] << "|" << xyz[1] << "|" << xyz[2] << ")";
 }
 
 void get_mars_helio_coordsv(double jd,double xyz[3], void* unused)

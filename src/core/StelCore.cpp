@@ -1826,8 +1826,6 @@ void StelCore::initEphemeridesFunctions()
 
 	if(!ephemFilePath.isEmpty())
 	{
-
-		//TODO: check for correct filesize
 		QString de430FilePath = StelFileMgr::findFile("ephem/linux_p1550p2650.430", 
 			StelFileMgr::File);
 	  	
@@ -1851,12 +1849,5 @@ void StelCore::initEphemeridesFunctions()
 		{
 			EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
   		}
-  		
-  		//std::ofstream outfile;
-		//outfile.open("/Users/holger/Desktop/log.txt", std::ios_base::app);
-		//outfile << "DE430: " << de430IsActive() << "(" << (!de430FilePath.isEmpty())<< ")\n";
-		//outfile << "DE43P1: " << de431IsActive() << "(" << (!de431FilePathP1.isEmpty())<< ")\n";
-		//outfile << "DE43P2: " << de431IsActive() << "(" << (!de431FilePathP2.isEmpty())<< ")\n";
-		//outfile.close();
   	}
 }
