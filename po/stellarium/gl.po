@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-06 17:14+0000\n"
+"PO-Revision-Date: 2015-09-16 23:37+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:18+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-17 05:13+0000\n"
+"X-Generator: Launchpad (build 17737)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -401,22 +401,22 @@ msgstr "tipo de concentración non documentado"
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
-msgstr ""
+msgstr "intervalo de brillo pequeno dos membros do cúmulo"
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
-msgstr ""
+msgstr "intervalo de brillo mediano dos membros do cúmulo"
 
 #: src/core/modules/Nebula.cpp:824
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
-msgstr ""
+msgstr "intervalo de brillo grande dos membros do cúmulo"
 
 #: src/core/modules/Nebula.cpp:827
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr ""
+msgstr "intervalo de brillo indocumentado dos membros do cúmulo"
 
 #: src/core/modules/Nebula.cpp:833
 msgctxt "Trumpler's Number of Members Class"
@@ -669,7 +669,7 @@ msgstr "posible nebulosa planetaria"
 
 #: src/core/modules/Nebula.cpp:1065
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "nebulosa protoplanetaria"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
@@ -2677,7 +2677,7 @@ msgstr "Obxectos da nube de Oort"
 
 #: src/gui/AstroCalcDialog.cpp:437
 msgid "Phenomenon"
-msgstr ""
+msgstr "Fenómeno"
 
 #: src/gui/AstroCalcDialog.cpp:439
 msgid "Object 1"
@@ -2975,17 +2975,17 @@ msgstr "Obxectos estelares recentes"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Possible Quasars"
-msgstr ""
+msgstr "Posible Quasar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "Posible Nebulosa Planetaria"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "Nebulosa Protoplanetaria"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:139 src/ui_viewDialog.h:1646
@@ -4946,6 +4946,7 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
+"Desactiva isto se queres ver a órbita do planeta seleccionado e as súas lúas."
 
 #: src/ui_viewDialog.h:1604
 msgid "Show orbit for selected planet"
@@ -4956,16 +4957,18 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Desactiva isto se queres ver o ronsel de todos os corpos do sistema solar."
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Amosar ronseis só do planeta seleccionado"
 
 #: src/ui_viewDialog.h:1610
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Activa isto para simular o efecto da velocidade real da luz (recomendado)."
 
 #: src/ui_viewDialog.h:1612
 msgid "Simulate light speed"
@@ -4981,7 +4984,7 @@ msgstr "Factor de escala"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Límite de magnitude dos obxectos do sistema solar"
 
 #: src/ui_viewDialog.h:1622
 msgid "Automatic change of landscape when planet is changed"
@@ -10953,6 +10956,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"Este plugin permite simular choivas de meteoros periódicas e ver un marcador "
+"para cada radiante activo e inactivo."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
 msgid ""
@@ -10961,6 +10966,10 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"Cun só click no marcador do radiante podes ver todos os detalles sobre a súa "
+"posición e actividade. A maioría dos datos utilizados neste plugin veñen do "
+"catálogo oficial da <a href=\"http://imo.net\"> International Meteor "
+"Organization</a>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:228
 msgid ""
@@ -10972,6 +10981,14 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p> Hai tres tipos de marcadores: <ul> <li> <b> Confirmado: </ b> o radiante "
+"está activo e os seus datos foron confirmados. Así, este é un histórico "
+"(realmente ocorreu no pasado) ou un preditor da choiva de meteoros </ li> "
+"<li> <b> Xenérico : </ B> o radiante está activo, pero os seus datos non "
+"foron confirmados. Isto significa que pode ocorrer na vida real, pero que "
+"non temos datos axeitados sobre a súa actividade para o ano en curso </ li> "
+"<li> <b> Inactivo : </ B> o radiante está inactivo no ceo da data actual. </ "
+"li> </ ul> </ p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
@@ -11901,7 +11918,7 @@ msgstr "Engadir a vista actual"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "Cargar/tenda con datos"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"

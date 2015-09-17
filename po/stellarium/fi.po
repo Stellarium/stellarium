@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-16 03:31+0000\n"
+"PO-Revision-Date: 2015-09-17 01:04+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-16 05:17+0000\n"
+"X-Launchpad-Export-Date: 2015-09-17 05:13+0000\n"
 "X-Generator: Launchpad (build 17737)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1198,7 +1198,7 @@ msgstr ""
 "Tuckermanin luettelo (1962, 1964) taulukoi auringon, kuun ja planeettojen "
 "paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649. Luetteloidut "
 "paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin aikaa eli 16.00 "
-"GMT. Sama suhde otettiin epäsuorasti käyttöön myös Goldstinen (1973) "
+"GMT. Samat suhteet otettiin epäsuorasti käyttöön myös Goldstinen (1973) "
 "syzygitaulukoihin."
 
 #: src/core/StelCore.cpp:1676
@@ -5053,8 +5053,8 @@ msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
-"Frankin-Adamsin valokuvalevyillä näkyvien tähtijoukkojen luettelo (Melotte, "
-"1915)"
+"Franklinin-Adamsin valokuvalevyillä näkyvien tähtijoukkojen luettelo "
+"(Melotte, 1915)"
 
 #: src/ui_viewDialog.h:1673
 msgid "Catalog of galaxies"
@@ -5492,7 +5492,7 @@ msgstr "Näytettävät näkökentät"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr "Geosentrinen ekvatoriaalinen koordinaatisto, nykyhetken epookki"
+msgstr "Maakeskinen ekvatoriaalinen koordinaatisto, nykyhetken epookki"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Right ascension/Declination (of date)"
@@ -5504,7 +5504,7 @@ msgstr "Luettelonumero(t)"
 
 #: src/ui_configurationDialog.h:1081
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr "Geosentrinen ekvatoriaalinen koordinaatisto, epookki J2000.0"
+msgstr "Maakeskinen ekvatoriaalinen koordinaatisto, nykyhetken epookki"
 
 #: src/ui_configurationDialog.h:1083
 msgid "Right ascension/Declination (J2000)"
@@ -5544,7 +5544,7 @@ msgstr "Lisätietoja"
 
 #: src/ui_configurationDialog.h:1100
 msgid "Topocentric equatorial coordinates"
-msgstr "Toposentrinen ekvatoriaalinen koordinaatisto"
+msgstr "Paikkakeskeiset ekvatoriaaliset koordinaatit"
 
 #: src/ui_configurationDialog.h:1102
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
@@ -7053,7 +7053,7 @@ msgstr "Kiinan ensimmäinen avaruusasema"
 #: plugins/Satellites/src/Satellite.cpp:257
 #: plugins/Satellites/src/Satellite.cpp:261
 msgid "Catalog #"
-msgstr "Luettelo"
+msgstr "Luettelonumero"
 
 #: plugins/Satellites/src/Satellite.cpp:263
 msgid "International Designator"
@@ -9502,9 +9502,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
-"Luettelon mahdollisesti elinkelpoisista eksoplaneetoista lähteenä oli "
-"%2Planetary Habitability Laboratoryn%3 \"%1The Habitable Exoplanets "
-"Catalog%3\"."
+"Mahdollisesti elinkelpoisten eksoplaneettojen luettelo ja tiedot perustuvat "
+"%2Planetary Habitability Laboratoryn%3 luetteloon \"%1The Habitable "
+"Exoplanets Catalog%3\"."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:142
 #, qt-format
@@ -10455,7 +10455,7 @@ msgstr "Radiantin siirtyminen (päivässä)"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:550
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr "Geosentrinen meteoriittien nopeus: %1 km/s"
+msgstr "Maakeskinen meteoriittien nopeus: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:555
 #, qt-format
@@ -10482,11 +10482,11 @@ msgstr "Maksimi: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgid "Solar longitude"
-msgstr ""
+msgstr "Auringon pituuspiiri"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "variable"
-msgstr "muuttuja"
+msgstr "vaihtelee"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:33
@@ -10900,19 +10900,19 @@ msgstr "Pikkuplaneetta (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
-msgstr ""
+msgstr "Päivitetään..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
 msgid "Successfully updated!"
-msgstr ""
+msgstr "Pävitetty onnistuneesti!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:139
 msgid "Failed!"
-msgstr ""
+msgstr "Epäonnistui!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:143
 msgid "Outdated!"
-msgstr ""
+msgstr "Vanhentunut!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
@@ -10923,6 +10923,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"Tämä laajennus mahdollistaa jaksollisten meteoriparvien sekä aktiivisten ja "
+"epäaktiivisten radianttien näyttämisen."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
 msgid ""
@@ -10931,6 +10933,10 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"Klikkaamalla radianttia saat näkyviin tiedot sen sijainnista ja "
+"aktiivisuudesta. Suurin osa tämän laajennuksen käyttämistä tiedoista on "
+"saatu virallisesta <a href=\"http://imo.net\">Kansainvälisen "
+"meteorijärjestön</a> luettelosta."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:228
 msgid ""
@@ -10942,6 +10948,14 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"</p><p>Osoittimia on kolmea tyyppiä:<ul><li><b>Vahvistettu:</b> radiantti on "
+"aktiivinen ja sen tiedot on vahvistettu. Näin ollen kyseessä on "
+"historiallinen (vahvistetusti menneisyydessä tapahtunut) tai ennustettu "
+"meteoriparvi.</li><li><b>Ei vahvistettu:</b> radiantti on aktiivinen, mutta "
+"sen tietoja ei ole vahvistettu. Parvi voi tapahtua todellisuudessa, mutta "
+"sen aktiivisuudesta ei ole tietoja kuluvalle "
+"vuodelle.</li><li><b>Epäaktiivinen:</b> radiantti on epäaktiivinen nykyisenä "
+"ajanhetkenä.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
@@ -11009,7 +11023,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr "Meteoria tunnissa zeniitissä (ZHR)"
+msgstr "Aktiivisuus tunnissa zeniitissä (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:280
 msgid ""
@@ -11019,12 +11033,12 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
-"Meteoriparven ZHR  (Zenithal Hourly Rate, meteoria tunnissa zeniitissä) "
-"määrittää kuinka monta kyseisen parven meteoria yksittäinen havaitsija voisi "
-"teoriassa nähdä kirkkaalla, pimeällä taivaalla (rajamagnitudi 6.5), ja "
-"mikäli parven radiantti olisi zeniitissä. Todellinen lukumäärä on "
-"käytännössä aina pienempi ja pienenee sitä mukaa mitä lähempänä horisonttia "
-"radiantti on."
+"Meteoriparven ZHR (Zenithal Hourly Rate, aktiivisuus tunnissa zeniitissä) "
+"kertoo, kuinka monta kyseisen parven meteoria yksittäinen havaitsija voisi "
+"teoriassa nähdä, jos havainto-olosuhteet olisivat ihanteelliset "
+"(rajamagnitudi 6.5), ja parven radiantti olisi zeniitissä. Havaittavien "
+"meteorien lukumäärä on käytännössä aina ZHR:a pienempi, ja pienenee sitä "
+"mukaa mitä lähempänä horisonttia radiantti on."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
 msgid "Population index"
@@ -11051,6 +11065,8 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
+"Tämä laajennus luotiin alun perin ESA:n Summer of Code in Space 2013 -"
+"ohjelman projektina."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Info"
@@ -11078,6 +11094,8 @@ msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon "
+"\"%1\", kun lähetät viestin."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:105
 msgid "Start date greater than end date!"
@@ -11089,7 +11107,7 @@ msgstr "Aikavälin pitää olla vähemmän kuin yksi vuosi!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
 msgid "ZHR"
-msgstr "ZHR"
+msgstr "Meteoreja tunnissa"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
@@ -11106,31 +11124,31 @@ msgstr "Meteoriparvien asetukset"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "Meteoriparvet: asetukset"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "Yleiset asetukset"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "Ota laajennus käyttöön käynnistyksen yhteydessä"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "Näytä laajennuksen käyttöönotto/käytöstäpoistamispainike"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "Näytä hakuikkunan avaamispainike"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Näytä radianttien merkit"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Näytä parvien nimet"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
@@ -11142,7 +11160,7 @@ msgstr "Nimien fonttikoko (pikseliä)"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
-msgstr ""
+msgstr "Aseta radianttien värit"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
@@ -11154,35 +11172,35 @@ msgstr "Epäaktiivinen radiantti"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Inactive"
-msgstr ""
+msgstr "Epäaktiivinen"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "Aktiivinen radiantti - tiedot vahvistettu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "Ota automaattiset päivitykset käyttöön"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "Seuraava päivitys:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "Viimeisin päivitysyritys:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "Tila:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "Päivitä"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "Meteoriparvet: haku"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -11331,192 +11349,198 @@ msgstr "Koordinaatti Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:166
 msgid "Loading model..."
-msgstr ""
+msgstr "Ladataan mallia..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:181
 msgid "Transforming model..."
-msgstr ""
+msgstr "Muunnetaan mallia..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:193
 msgid "Loading ground..."
-msgstr ""
+msgstr "Ladataan maanpntaa..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:204
 msgid "Transforming ground..."
-msgstr ""
+msgstr "Muunnetaan maanpintaa..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "Lasketaan estemallia..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
-msgstr ""
+msgstr "Viimeistellään latausta..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"3D-maiseman varjostinvirhe, piirtämistä ei voida suorittaa. Katso "
+"yksityiskohdat virheenkorjaustiedostosta."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2096
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
+"Laitteistosi ei tue kuutiopintakuviointia, ole hyvä ja vaihda "
+"perspektiiviprojektioon."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "Geometriavarjostinta ei tueta. Vaihdetaan 6 pintakuvion tilaan."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Vaihdetaan 6 pintakuvion tilaan ANGLE-virheen vuoksi."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Laitteistosi ei tue varjojen pirtämistä, katso yksityiskohdat lokista."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "3D-maisemat ladattu"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "3D-maisemat"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle 3D landscape"
-msgstr ""
+msgstr "Ota 3D-maisema käyttöön"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "Näytä näkymäikkuna"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle shadows"
-msgstr ""
+msgstr "Ota varjot käyttöön"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
-msgstr ""
+msgstr "Tallenna virheenkorjaustiedot"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle location text"
-msgstr ""
+msgstr "Näytä paikkatekstit"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "Näytä valonheitin"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
-msgstr ""
+msgstr "Lataa varjostimet uudelleen"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "Ladattu 3D-maisemien varjostimet uudelleen"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "Ladataan maisemaa. Ole hyvä ja odota!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:337
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "Ladataan maisemaa \"%1\""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:360
 msgid "Could not load scene, please check log for error messages!"
-msgstr ""
+msgstr "Maisemaa ei voitu ladata, katso virheilmoitukset lokista!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:364
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "Maisema ladattu onnistuneesti."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:423
 msgid "Could not load scene info, please check log for error messages!"
-msgstr ""
+msgstr "Maiseman tietoja ei voitu ladata, katso virheilmoitukset lokista!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
 #, qt-format
 msgid "Could not find scene ID for %1"
-msgstr ""
+msgstr "Maiseman %1 tunnistetta ei löytynyt"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "Ole hyvä ja lataa maisema!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Kuvapistekohtainen varjostus %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "enable"
 msgid "on"
-msgstr ""
+msgstr "käytössä"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 msgctxt "disable"
 msgid "off"
-msgstr ""
+msgstr "ei käytössä"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
 #, qt-format
 msgid "Shadows %1."
-msgstr ""
+msgstr "Varjot %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Varjot poissa käytöstä, tai ei voida piirtää."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
 msgid "Surface bumps %1."
-msgstr ""
+msgstr "Pinnan epätasaisuus %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
+"Valittua kuutiokuvapintatilaa ei tueta, vaihdetaan 6 kuvapinnan tilaan"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "\"Laiska\" kuutiokuvapinnoitus: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
-msgstr ""
+msgstr "käytössä"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "disabled"
-msgstr ""
+msgstr "ei käytössä"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Kuutiokuvapinnan koko muutettu"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Kuutiokuvapinnan koko ei tuettu, aseta kooksi %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Varjokuvapinnan koko muutettu"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Varjokuvapinnan koko ei tuettu, aseta kooksi %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:927
 msgid "3D Sceneries"
-msgstr ""
+msgstr "3D-maisemat"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:930
 msgid ""
@@ -11529,52 +11553,69 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Kolmiulotteisten maisemien mallintaja. Liiku vapaasti ympäri maisemaa, "
+"löydä ja tutki mahdollisia tähtitieteellisiä linjauksia, näe varjot "
+"aurinkokellolla jne.</p><p>Liiku Ctrl+nuolinäppäimillä. Vaihda "
+"katselukorkeutta Ctrl+PgUp/PgDn-näppäimillä. Liikenopeus riippuu "
+"näkökentästä (lähennä tehdäksesi tarkkoja säätöjä). Vapauttamalla Ctrl-"
+"näppäin ennen nuolinäppäimiä liike jatkuu automaattisesti "
+"katselusuuntaan</p><p>Laajennuksen kehittämistä on osittain tukenut "
+"Itävallan tiederahaston (FWF) ASTROSIM-projekti (P 21208-G19). Lisää: "
+"http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
-msgstr ""
+msgstr "Laskee tarkemman valaistuksen pikseli- eikä solmukohtaisesti."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Vaadittu epätasaisen kuvapinnoituksen ja varjojen mallintamiseksi!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "Rajoita varjojenkertaus yhteen enintään neljän sijasta."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"Parantaa suorituskykyä varjojen laadun kustannuksella, erityisesti suurissa "
+"maisemissa."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
 "Determines how the shadows are filtered, in increasing quality from top to "
 "bottom."
 msgstr ""
+"Määrittää miten varjot suodatetaan. Ylös = huonompi laatu, alas = parempi "
+"laatu."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS vaatii laadun asettamisen korkeaksi tai matalaksi"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Puolivarjojen likimääräinen laskenta (terävät varjot kosketuspisteen "
+"lähellä, pehmeät varjot kauempana)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Vaatii <b>matalan</b> tai <b>korkean</b> varjojen suodatustason (ilman "
+"<b>laitteistoa</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Huonontaa suorituskykyä."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
@@ -11583,17 +11624,26 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Määrittää miten maisema mallinnettaan, kun Stellarium käyttää muuta kuin "
+"&quot;Perspektiiviprojektiota&quot;. Maisema mallinnetaan aina kuutiolle, "
+"joka korjataan käytetyn projektion mukaiseksi. Kuutio kuvataan ns. "
+"&quot;kuutiokuvapinnan&quot; avulla."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 kuvapintaa</b> käyttää 6 erillistä kuvapintaa, yhtä jokaiselle kuution "
+"sivulle. Tämä on kaikkein yhteensopivin menetelmä, mutta saattaa olla muita "
+"tapoja hitaampi."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Kuutiokuvapinta</b> käyttää yhtä kuvapintaa koko kuutiolle. Suositellaan "
+"useimmille käyttäjille."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -11601,10 +11651,14 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Geometriavarjostin</b> käyttää nykyaikaista grafiikkasuoritinta kuution "
+"kaikkien sivujen samanaikaiseen laskemiseen. Maisemasta ja "
+"grafiikkasuorittimsta riippuen se voi olla nopein menetelmä. Jos menetelmää "
+"ei ole tuettu, sitä ei voi valita."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr ""
+msgstr "Laske varjot jokaiselle kuutiokuvapinnan sivulle erikseen."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -11612,255 +11666,269 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Jos valinta on poistettu käytöstä, varjostettu alue lasketaan "
+"perspektiiviprojektiota käyttäen, mikä on nopeampaa, mutta saattaa aiheuttaa "
+"puuttuvia varjoja näkökentän ollessa laaja."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
-msgstr ""
+msgstr "Ei toimi jos <b>Geometriavarjostin</b> on käytössä!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Jos valittu, kuutiokuvapinta piirretään uudelleen vain tietyn ajan välein "
+"joka kehyksen sijaan."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
 msgstr ""
+"Säästää energiaa ja saattaa parantaa sovelluksen näennäistä suorituskykyä."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Huomaa, että kuutiokuvapinta piirretään uudestaan aina katselusuunnan "
+"muuttuessa."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Jos valittu, ainoastaan katselusuunnan puoleinen sivu päivitetään liikkuessa."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Tämä nopeuttaa mallinnusta, mutta saa maiseman näyttämään "
+"&quot;rikkonaiselta&quot; liikkumisen aikana."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
-msgstr ""
+msgstr "Ei toimi &quot;Geometriavarjostimen&quot; kanssa!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Tämä päivittää myös toiseksi lähimmän sivun, jolloin maisema näyttää "
+"vähemmän &quot;rikkonaiselta&quot; liikkumisen aikana."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
+"Aikaväli (sekunteina) jonka aikana uudelleenpiirtämistä ei suoriteta."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
-msgstr ""
+msgstr "6 kuvapintaa"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr ""
+msgstr "Kuutiokuvapinta"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
-msgstr ""
+msgstr "Geometriavarjostin"
 
 #: plugins/Scenery3d/src/gui/StoredViewDialog.cpp:163
 #, qt-format
 msgid "Grid coordinates (%1): %2m, %3m, %4m"
-msgstr "Asteikon koordinaatit (%1): %2m, %3m, %4m"
+msgstr "Koordinaatit (%1): %2m, %3m, %4m"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "3D-maisema"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "Aseta oletusmaisemaksi"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "Lataa/tallenna näkymät"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Valonheittimen kirkkaus:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Valonheittimen kantama:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Valonheitin (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr "Näytä asteikon koordinaatit (%1)"
+msgstr "Näytä koordinaatit (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "Näyttöasetukset"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "Kuvapistekohtainen valaistus"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "Varjot"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "Yksinkertaiset varjot"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Epätasainen kuvapinnoitus"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Kuutiokuvapinnan koko:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "Varjokuvapinnan koko:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "Suodauslaatu:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "Laitteisto"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "Matala"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "Matala + laitteisto"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "Korkea (hidas)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "Korkea + laitteisto (hidas)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Kuutiokuvapinnan asetus:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Täydet kuutiokuvapintavarjot"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "\"Laiska\" kuutiokuvapinnan uudelleenmallinnus"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "Päivitysväli:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Päivitä liikkuessa vain lähin sivu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Päivitä myös toiseksi lähin sivu"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "Laadun ja suorituskyvyn asetukset"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
-msgstr ""
+msgstr "Tallennetut näkymät"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
-msgstr ""
+msgstr "Lataa näkymä"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Delete view"
-msgstr ""
+msgstr "Poista näkymä"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Add current view"
-msgstr ""
+msgstr "Lisää nykyinen näkymä"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "Lataa/tallenna päivämäärän kanssa"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
-msgstr ""
+msgstr "Nimi:"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "Arkeolinjat"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "Työkalu arkeo-/etnoastronomisten linjausten tutkimiseen"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:749
 msgid "Equinox"
-msgstr ""
+msgstr "Päiväntasaus"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Solstice"
-msgstr ""
+msgstr "Päivänseisaus"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Crossquarter"
-msgstr ""
+msgstr "Ristineljännes"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Yläkuunseisaus"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Alakuunseisaus"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Zeniitin ohitus"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:767
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Nadiirin ohitus"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:770
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
-msgstr ""
+msgstr "Valittu kohde"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:779
 msgid "error if you can read this"
-msgstr ""
+msgstr "virhe jos voit lukea tämän"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
 msgid "Mercury"
@@ -11872,55 +11940,59 @@ msgstr "Venus"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Arkeolinjat-laajennus"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"Arkeolinjat-laajennus näyttää valikoiman arkeo- ja etnoastronomisille "
+"tutkimuksille tärkeitä deklinaatiolinjoja."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "Päiväntasausten (so. ekvaattorin) ja päivänseisausten deklinaatiot"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"Ristineljännesten (päiväntasausten ja -seisausten puoliväliin osuvien "
+"päivien) deklinaatiot"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Yläkuunseisausten deklinaatiot"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Alakuunseisausten deklinaatiot"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Zeniitin ohituksen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Nadiirin ohituksen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "Valitun kohteen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Auringn nykyinen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Kuun nykyinen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Paljaalla silmällä havaittavan planeetan nykyinen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -11929,126 +12001,131 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"Kuun linjoissa on otettu huomioon horisonttiparallaksin vaikutus. Jokaisesta "
+"linjasta on piirretty kaksi hieman toisistaan eroavaa versiota Kuun "
+"pienimmälle ja suurimmalle etäisyydelle. Huomaa, että Kuun deklinaatio voi "
+"ylittää merkityt rajat yläkuunseisauksessa, jos se on korkeammalla taivaalla "
+"parallaksi-ilmiöiden takia."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Valitse päivantasauslinjan väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:293
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Valitse päivänseisauslinjojen väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Valitse ristineljänneslinjojen väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Valitse yläkuunseisauslinjojen väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Valitse alakuunseisauslinjojen väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Valitse zeniitinohituslinjan väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:353
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Valitse nadiirinohituslinjan väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:365
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Valitse valitun kohteen linjan väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Valitse nykyisen Auringon linjan väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:389
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "Valitse nykyisen Kuun linjan väri"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Valitse nykyisen planeetan linjan väri"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "Arkeolinjat-asetukset"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "Arkeolinjat-laajennuksen asetukset"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "Saatat joutua poistumaan kokonäyttötilasta valitaksesi värin!"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "Päiväntasauslinja (ekvaattori)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
-msgstr ""
+msgstr "Päivänseisauslinjat"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Ristineljänneslinjat"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
-msgstr ""
+msgstr "Vaihda väri"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Yläkuuntasauslinjat"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Alakuuntasauslinjat"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "Zeniitinohituksen deklinaatio"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Nadiirinohituksen deklinaatio"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
-msgstr ""
+msgstr "Nykyinen Aurinko"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:350
 msgid "Current Moon"
-msgstr ""
+msgstr "Nykyinen Kuu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:353
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Nykyinen planeetta: ei mitään"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:354
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Nykyinen planeetta: Merkurius"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:355
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Nykyinen planeetta: Venus"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:356
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Nykyinen planeetta: Mars"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:357
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Nykyinen planeetta: Jupiter"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:358
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Nykyinen planeetta: Saturnus"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriaaliasteikko"
