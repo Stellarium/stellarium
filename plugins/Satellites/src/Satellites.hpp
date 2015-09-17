@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009, 2012 Matthew Gates
+ * Copyright (C) 2015 Nick Fedoseev (Iridium flares)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,6 +123,17 @@ struct TleSource
 
 //! @ingroup satellites
 typedef QList<TleSource> TleSourceList;
+
+struct IridiumFlaresPrediction
+{
+	QString datetime;
+	QString satellite;
+	float azimuth;		// radians
+	float altitude;		// radians
+	float magnitude;
+};
+
+typedef QList<IridiumFlaresPrediction> IridiumFlaresPredictionList;
 
 //! @class Satellites
 //! Main class of the %Satellites plugin.
@@ -362,6 +374,8 @@ public:
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
 
+	IridiumFlaresPredictionList getIridiumFlaresPrediction();
+
 signals:
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -598,7 +612,6 @@ private slots:
 	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
 	void updateObserverLocation(StelLocation loc);
-
 };
 
 

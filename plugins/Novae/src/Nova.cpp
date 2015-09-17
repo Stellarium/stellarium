@@ -167,7 +167,7 @@ float Nova::getVMagnitude(const StelCore* core) const
 {
 	// OK, start from minimal brightness
 	double vmag = minMagnitude;
-	double currentJD = core->getJDay();
+	double currentJD = core->getJDE();
 	double deltaJD = qAbs(peakJD-currentJD);
     
 	// Fill "default" values for mX

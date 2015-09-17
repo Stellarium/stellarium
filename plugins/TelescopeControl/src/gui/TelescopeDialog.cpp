@@ -56,7 +56,7 @@ TelescopeDialog::TelescopeDialog()
 
 	//TODO: Fix this - it's in the same plugin
 	telescopeManager = GETSTELMODULE(TelescopeControl);
-	telescopeListModel = new QStandardItemModel(0, ColumnCount);
+    telescopeListModel = new QStandardItemModel(0, ColumnCount);
 
 	//TODO: This shouldn't be a hash...
 	statusString[StatusNA] = QString(N_("N/A"));

@@ -780,9 +780,15 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 
 		variableStar.designation = fields.at(1).trimmed();
 		variableStar.vtype = fields.at(2).trimmed();
-		variableStar.maxmag = fields.at(3).toFloat();
+		if (fields.at(3).isEmpty())
+			variableStar.maxmag = 99.f;
+		else
+			variableStar.maxmag = fields.at(3).toFloat();
 		variableStar.mflag = fields.at(4).toInt();
-		variableStar.min1mag = fields.at(5).toFloat();
+		if (fields.at(5).isEmpty())
+			variableStar.min1mag = 99.f;
+		else
+			variableStar.min1mag = fields.at(5).toFloat();
 		if (fields.at(6).isEmpty())
 			variableStar.min2mag = 99.f;
 		else

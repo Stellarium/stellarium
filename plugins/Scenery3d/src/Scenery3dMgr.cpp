@@ -843,7 +843,7 @@ uint Scenery3dMgr::getMaximumFramebufferSize() const
 	return scenery3d->getMaximumFramebufferSize();
 }
 
-void Scenery3dMgr::setView(const StoredView &view)
+void Scenery3dMgr::setView(const StoredView &view, const bool setDate)
 {
 	//update position
 	//important: set eye height first
@@ -851,9 +851,15 @@ void Scenery3dMgr::setView(const StoredView &view)
 	//then, set grid position
 	scenery3d->setGridPosition(Vec3d(view.position[0],view.position[1],view.position[2]));
 
+	//update time, if relevant and wanted.
+	if (view.jdIsRelevant && setDate)
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		core->setJD(view.jd);
+	}
+
 	//update view vector
 	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
-
 	// This vector is (az_deg, alt_deg, fov_deg)
 	Vec3d v;
 	StelUtils::spheToRect((180.0-view.view_fov[0])*M_PI/180.0, view.view_fov[1]*M_PI/180.0, v);
