@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>682</width>
-    <height>520</height>
+    <width>497</width>
+    <height>509</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1130,16 +1130,6 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
@@ -1150,6 +1140,16 @@
                </property>
               </widget>
              </item>
+             <item row="7" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="decimalDegreeCheckBox">
                <property name="toolTip">
@@ -1157,6 +1157,36 @@
                </property>
                <property name="text">
                 <string>Use decimal degrees</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="nutationCheckBox">
+               <property name="toolTip">
+                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+               </property>
+               <property name="text">
+                <string>Include nutation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="topocentricCheckBox">
+               <property name="toolTip">
+                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+               </property>
+               <property name="text">
+                <string>Topocentric coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west (as in old astronomical literature).</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
                </property>
               </widget>
              </item>

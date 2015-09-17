@@ -97,19 +97,23 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	engine.globalObject().setProperty("core", objectValue);
 
 	engine.evaluate("function mywait__(sleepDurationSec) {"
-					"if (sleepDurationSec<0) return;"
-					"var date = new Date();"
-					"var curDate = null;"
-					"do {curDate = new Date();}"
-					"    while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
+			"if (sleepDurationSec<0) return;"
+			"var date = new Date();"
+			"var curDate = null;"
+			"do {curDate = new Date();}"
+			"while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
 	engine.evaluate("core['wait'] = mywait__;");
 
-	engine.evaluate("function mywaitFor__(dt, spec) {if (!spec) spec=\"utc\";"
-	"	var JD = core.jdFromDateString(dt, spec);"
-	"	var timeSpeed = core.getTimeRate();"
-	"	if (timeSpeed == 0.) {core.debug(\"waitFor called with no time passing - would be infinite. not waiting!\"); return;}"
-	"	if (timeSpeed > 0) {core.wait((JD-core.getJDay())*timeSpeed);}"
-	"	else {core.wait((core.getJDay()-JD)*timeSpeed);}}");
+	engine.evaluate("function mywaitFor__(dt, spec) {"
+			"if (!spec) spec=\"utc\";"
+			"var deltaJD = core.jdFromDateString(dt, spec) - core.getJDay();"
+			"var timeSpeed = core.getTimeRate();"
+			"if (timeSpeed == 0.) {core.debug(\"waitFor called with no time passing - would be infinite. not waiting!\"); return;}"
+			"var date = new Date();"
+			"var curDate = null;"
+			"do {curDate = new Date();}"
+			"while(curDate-date < deltaJD*86400000/timeSpeed);}");
+
 	engine.evaluate("core['waitFor'] = mywaitFor__;");
 	
 	// Add other classes which we want to be directly accessible from scripts

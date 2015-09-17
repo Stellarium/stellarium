@@ -326,7 +326,7 @@ namespace StelUtils
 		return Vec3f(max, 0, 0);
 	}
 
-	//! Calculate and getting sidereal period in days from semi-major axis (in AU)
+	//! Calculate and return sidereal period in days from semi-major axis (in AU)
 	double calculateSiderealPeriod(const double SemiMajorAxis);
 
 	//! Convert decimal hours to hours, minutes, seconds

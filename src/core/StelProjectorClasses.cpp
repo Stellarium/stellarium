@@ -469,7 +469,7 @@ bool StelProjectorSinusoidal::forward(Vec3f &v) const
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
-	const float delta = std::asin(v[1]/r);
+	const float delta = std::asin(v[1]/r);	
 	v[0] = alpha*std::cos(delta);
 	v[1] = delta;
 	v[2] = r;

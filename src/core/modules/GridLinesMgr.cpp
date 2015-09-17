@@ -29,6 +29,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "precession.h"
 
 #include <set>
 #include <QSettings>
@@ -66,15 +67,19 @@ class SkyLine
 public:
 	enum SKY_LINE_TYPE
 	{
-		EQUATOR,
-		ECLIPTIC,
+		EQUATOR_J2000,
+		EQUATOR_OF_DATE,
+		ECLIPTIC_J2000,
+		ECLIPTIC_OF_DATE,
+		PRECESSIONCIRCLE_N,
+		PRECESSIONCIRCLE_S,
 		MERIDIAN,
 		HORIZON,
 		GALACTICEQUATOR,
 		LONGITUDE
 	};
 	// Create and precompute positions of a SkyGrid
-	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
+	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
 	virtual ~SkyLine();
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
@@ -166,7 +171,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	direc.normalize();
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 
 	QString text;
 	if (d->text.isEmpty())
@@ -195,14 +201,18 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				if (raAngle==2*M_PI && delta==-M_PI)
 					textAngle = 0;
 
+				if (useOldAzimuth)
+					textAngle += M_PI;
+
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 
 				break;			
 			}
-			case StelCore::FrameObservercentricEcliptic:						
+			case StelCore::FrameObservercentricEclipticJ2000:
+			case StelCore::FrameObservercentricEclipticOfDate:
 			{
 				double raAngle = d->raAngle;
 				if (raAngle<0.)
@@ -224,7 +234,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = 0;
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 
@@ -253,7 +263,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				}
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToDmsStrAdapt(textAngle);
 				break;
@@ -275,7 +285,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					textAngle = M_PI;
 
 				if (withDecimalDegree)
-					text = StelUtils::radToDecDegStr(textAngle);
+					text = StelUtils::radToDecDegStr(textAngle, 4, false, true);
 				else
 					text = StelUtils::radToHmsStrAdapt(textAngle);
 			}
@@ -355,11 +365,10 @@ void SkyGrid::draw(const StelCore* core) const
 	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
 		glEnable(GL_LINE_SMOOTH);
 	#endif
-	Vec4f textColor(color[0], color[1], color[2], 0);
-	sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
 
-	textColor*=2;
-	textColor[3]=fader.getInterstate();
+	// make text colors just a bit brighter. (But if >1, QColor::setRgb fails and makes text invisible.)
+	Vec4f textColor(qMin(1.0f, 1.25f*color[0]), qMin(1.0f, 1.25f*color[1]), qMin(1.0f, 1.25f*color[2]), fader.getInterstate());
+	sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
 
 	sPainter.setFont(font);
 	ViewportEdgeIntersectCallbackData userData(&sPainter);
@@ -586,13 +595,26 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameAltAz;
 			label = q_("Meridian");
 			break;
-		case ECLIPTIC:
-			frameType = StelCore::FrameObservercentricEcliptic;
-			label = q_("Ecliptic");
+		case ECLIPTIC_J2000:
+			frameType = StelCore::FrameObservercentricEclipticJ2000;
+			label = q_("Ecliptic of J2000.0");
 			break;
-		case EQUATOR:
+		case ECLIPTIC_OF_DATE:
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			label = q_("Ecliptic of Date");
+			break;
+		case EQUATOR_J2000:
+			frameType = StelCore::FrameJ2000;
+			label = q_("Equator of J2000.0");
+			break;
+		case EQUATOR_OF_DATE:
 			frameType = StelCore::FrameEquinoxEqu;
 			label = q_("Equator");
+			break;
+		case PRECESSIONCIRCLE_N:
+		case PRECESSIONCIRCLE_S:
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			label = q_("Precession Circle");
 			break;
 		case HORIZON:
 			frameType = StelCore::FrameAltAz;
@@ -603,10 +625,12 @@ void SkyLine::updateLabel()
 			label = q_("Galactic Equator");
 			break;
 		case LONGITUDE:
-			frameType = StelCore::FrameObservercentricEcliptic;
+			frameType = StelCore::FrameObservercentricEclipticJ2000; // TODO: Switch to FrameObservercentriEclipticOfDate
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
 			label = q_("O./C. longitude");
 			break;
+		default:
+			Q_ASSERT(0);
 	}
 }
 
@@ -625,7 +649,10 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.setColor(color[0], color[1], color[2], fader.getInterstate());
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
 	Vec4f textColor(color[0], color[1], color[2], 0);		
 	textColor[3]=fader.getInterstate();
 
@@ -635,6 +662,79 @@ void SkyLine::draw(StelCore *core) const
 	userData.text = label;
 	/////////////////////////////////////////////////
 	// Draw the line
+
+	// Precession circles are Small Circles, all others are Great Circles.
+	if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
+	{
+		const double lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI/2.0-getPrecessionAngleVondrakCurrentEpsilonA());
+		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
+		const Vec3d rotCenter(0,0,declinationCap.d);
+
+		Vec3d p1, p2;
+		if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
+		{
+			if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
+				|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+			{
+				// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+				Vec3d pt1;
+				Vec3d pt2;
+				Vec3d pt3;
+				const double lon1=0.0;
+				const double lon2=120.0*M_PI/180.0;
+				const double lon3=240.0*M_PI/180.0;
+				StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
+				StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
+				StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
+
+				sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, viewportEdgeIntersectCallback, &userData);
+				sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, viewportEdgeIntersectCallback, &userData);
+				#ifdef GL_LINE_SMOOTH
+				if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+					glDisable(GL_LINE_SMOOTH);
+				#endif
+				glDisable(GL_BLEND);
+				return;
+			}
+			else
+			{
+				#ifdef GL_LINE_SMOOTH
+				if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+					glDisable(GL_LINE_SMOOTH);
+				#endif
+				glDisable(GL_BLEND);
+				return;
+			}
+		}
+		// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+		Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+		middlePoint.normalize();
+		middlePoint*=(p1-rotCenter).length();
+		middlePoint+=rotCenter;
+		if (!viewPortSphericalCap.contains(middlePoint))
+		{
+			middlePoint-=rotCenter;
+			middlePoint*=-1.;
+			middlePoint+=rotCenter;
+		}
+
+		sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,viewportEdgeIntersectCallback, &userData);
+		sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, viewportEdgeIntersectCallback, &userData);
+
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glDisable(GL_LINE_SMOOTH);
+		#endif
+
+		glDisable(GL_BLEND);
+
+
+		return;
+	}
+
+	// All the other "lines" are Great Circles
 	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
 	Vec3d fpt(1,0,0);
 	if (line_type==MERIDIAN)
@@ -683,6 +783,14 @@ void SkyLine::draw(StelCore *core) const
 	sPainter.drawGreatCircleArc(p1, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
 	sPainter.drawGreatCircleArc(p2, middlePoint, NULL, viewportEdgeIntersectCallback, &userData);
 
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
+
+	glDisable(GL_BLEND);
+
 // 	// Johannes: use a big radius as a dirty workaround for the bug that the
 // 	// ecliptic line is not drawn around the observer, but around the sun:
 // 	const Vec3d vv(1000000,0,0);
@@ -694,11 +802,16 @@ GridLinesMgr::GridLinesMgr()
 	setObjectName("GridLinesMgr");
 	equGrid = new SkyGrid(StelCore::FrameEquinoxEqu);
 	equJ2000Grid = new SkyGrid(StelCore::FrameJ2000);
-	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEcliptic);
+	eclJ2000Grid = new SkyGrid(StelCore::FrameObservercentricEclipticJ2000);
+	eclGrid = new SkyGrid(StelCore::FrameObservercentricEclipticOfDate);
 	galacticGrid = new SkyGrid(StelCore::FrameGalactic);
 	aziGrid = new SkyGrid(StelCore::FrameAltAz);
-	equatorLine = new SkyLine(SkyLine::EQUATOR);
-	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
+	equatorLine = new SkyLine(SkyLine::EQUATOR_OF_DATE);
+	equatorJ2000Line = new SkyLine(SkyLine::EQUATOR_J2000);
+	eclipticJ2000Line = new SkyLine(SkyLine::ECLIPTIC_J2000); // previous eclipticLine
+	eclipticLine = new SkyLine(SkyLine::ECLIPTIC_OF_DATE); // GZ NEW
+	precessionCircleN = new SkyLine(SkyLine::PRECESSIONCIRCLE_N);
+	precessionCircleS = new SkyLine(SkyLine::PRECESSIONCIRCLE_S);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 	horizonLine = new SkyLine(SkyLine::HORIZON);
 	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
@@ -710,10 +823,15 @@ GridLinesMgr::~GridLinesMgr()
 	delete equGrid;
 	delete equJ2000Grid;
 	delete eclJ2000Grid;
+	delete eclGrid;
 	delete galacticGrid;
 	delete aziGrid;
 	delete equatorLine;
+	delete equatorJ2000Line;
 	delete eclipticLine;
+	delete eclipticJ2000Line;
+	delete precessionCircleN;
+	delete precessionCircleS;
 	delete meridianLine;
 	delete horizonLine;
 	delete galacticEquatorLine;
@@ -739,9 +857,13 @@ void GridLinesMgr::init()
 	setFlagEquatorGrid(conf->value("viewing/flag_equatorial_grid").toBool());
 	setFlagEquatorJ2000Grid(conf->value("viewing/flag_equatorial_J2000_grid").toBool());
 	setFlagEclipticJ2000Grid(conf->value("viewing/flag_ecliptic_J2000_grid").toBool());
+	setFlagEclipticGrid(conf->value("viewing/flag_ecliptic_grid").toBool());
 	setFlagGalacticGrid(conf->value("viewing/flag_galactic_grid").toBool());
 	setFlagEquatorLine(conf->value("viewing/flag_equator_line").toBool());
+	setFlagEquatorJ2000Line(conf->value("viewing/flag_equator_J2000_line").toBool());
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
+	setFlagEclipticJ2000Line(conf->value("viewing/flag_ecliptic_J2000_line").toBool());
+	setFlagPrecessionCircles(conf->value("viewing/flag_precession_circles").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
@@ -755,14 +877,18 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equatorial_Grid", displayGroup, N_("Equatorial grid"), "equatorGridDisplayed", "E");
 	addAction("actionShow_Azimuthal_Grid", displayGroup, N_("Azimuthal grid"), "azimuthalGridDisplayed", "Z");
 	addAction("actionShow_Ecliptic_Line", displayGroup, N_("Ecliptic line"), "eclipticLineDisplayed", ",");
+	addAction("actionShow_Ecliptic_J2000_Line", displayGroup, N_("Ecliptic J2000 line"), "eclipticJ2000LineDisplayed");
 	addAction("actionShow_Equator_Line", displayGroup, N_("Equator line"), "equatorLineDisplayed", ".");
+	addAction("actionShow_Equator_J2000_Line", displayGroup, N_("Equator J2000 line"), "equatorJ2000LineDisplayed"); // or with Hotkey??
 	addAction("actionShow_Meridian_Line", displayGroup, N_("Meridian line"), "meridianLineDisplayed", ";");
 	addAction("actionShow_Horizon_Line", displayGroup, N_("Horizon line"), "horizonLineDisplayed", "H");
 	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
+	addAction("actionShow_Ecliptic_Grid", displayGroup, N_("Ecliptic grid"), "eclipticGridDisplayed");
 	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
 	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
+	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -771,10 +897,15 @@ void GridLinesMgr::update(double deltaTime)
 	equGrid->update(deltaTime);
 	equJ2000Grid->update(deltaTime);
 	eclJ2000Grid->update(deltaTime);
+	eclGrid->update(deltaTime);
 	galacticGrid->update(deltaTime);
 	aziGrid->update(deltaTime);
 	equatorLine->update(deltaTime);
+	equatorJ2000Line->update(deltaTime);
 	eclipticLine->update(deltaTime);
+	eclipticJ2000Line->update(deltaTime);
+	precessionCircleN->update(deltaTime);
+	precessionCircleS->update(deltaTime);
 	meridianLine->update(deltaTime);
 	horizonLine->update(deltaTime);
 	galacticEquatorLine->update(deltaTime);
@@ -783,17 +914,30 @@ void GridLinesMgr::update(double deltaTime)
 
 void GridLinesMgr::draw(StelCore* core)
 {
-	equGrid->draw(core);
 	galacticGrid->draw(core);
-	equJ2000Grid->draw(core);
 	eclJ2000Grid->draw(core);
+	// While ecliptic of J2000 may be helpful to get a feeling of the Z=0 plane of VSOP87,
+	// ecliptic of date is related to Earth and does not make much sense for the other planets.
+	// Of course, orbital plane of respective planet would be better, but is not implemented.
+	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+		eclGrid->draw(core);
+	equJ2000Grid->draw(core);
+	equGrid->draw(core);
 	aziGrid->draw(core);
+	// Lines after grids, to be able to e.g. draw equators in different color!
+	galacticEquatorLine->draw(core);
+	eclipticJ2000Line->draw(core);
+	if (core->getCurrentPlanet()->getEnglishName()=="Earth")
+	{
+		eclipticLine->draw(core);
+		precessionCircleN->draw(core);
+		precessionCircleS->draw(core);
+	}
+	longitudeLine->draw(core);
+	equatorJ2000Line->draw(core);
 	equatorLine->draw(core);
-	eclipticLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
-	galacticEquatorLine->draw(core);
-	longitudeLine->draw(core);
 }
 
 void GridLinesMgr::setStelStyle(const QString& section)
@@ -804,11 +948,14 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	QString defaultColor = conf->value(section+"/default_color").toString();
 	setColorEquatorGrid(StelUtils::strToVec3f(conf->value(section+"/equatorial_color", defaultColor).toString()));
 	setColorEquatorJ2000Grid(StelUtils::strToVec3f(conf->value(section+"/equatorial_J2000_color", defaultColor).toString()));
-	setColorEclipticJ2000Grid(StelUtils::strToVec3f(conf->value(section+"/ecliptic_J2000_color", defaultColor).toString()));
+	setColorEclipticJ2000Grid(StelUtils::strToVec3f(conf->value(section+"/ecliptical_J2000_color", defaultColor).toString()));
+	setColorEclipticGrid(StelUtils::strToVec3f(conf->value(section+"/ecliptical_color", defaultColor).toString()));
 	setColorGalacticGrid(StelUtils::strToVec3f(conf->value(section+"/galactic_color", defaultColor).toString()));
 	setColorAzimuthalGrid(StelUtils::strToVec3f(conf->value(section+"/azimuthal_color", defaultColor).toString()));
 	setColorEquatorLine(StelUtils::strToVec3f(conf->value(section+"/equator_color", defaultColor).toString()));
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
+	setColorEclipticJ2000Line(StelUtils::strToVec3f(conf->value(section+"/ecliptic_J2000_color", defaultColor).toString()));
+	setColorPrecessionCircles(StelUtils::strToVec3f(conf->value(section+"/precession_circles_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
 	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value(section+"/galactic_equator_color", defaultColor).toString()));
@@ -817,8 +964,12 @@ void GridLinesMgr::setStelStyle(const QString& section)
 
 void GridLinesMgr::updateLineLabels()
 {
+	equatorJ2000Line->updateLabel();
 	equatorLine->updateLabel();
 	eclipticLine->updateLabel();
+	eclipticJ2000Line->updateLabel();
+	precessionCircleN->updateLabel();
+	precessionCircleS->updateLabel();
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
 	galacticEquatorLine->updateLabel();
@@ -925,6 +1076,31 @@ void GridLinesMgr::setColorEclipticJ2000Grid(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying Ecliptic of Date Grid
+void GridLinesMgr::setFlagEclipticGrid(const bool displayed)
+{
+	if(displayed != eclGrid->isDisplayed()) {
+		eclGrid->setDisplayed(displayed);
+		emit eclipticGridDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic of Date Grid
+bool GridLinesMgr::getFlagEclipticGrid(void) const
+{
+	return eclGrid->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEclipticGrid(void) const
+{
+	return eclGrid->getColor();
+}
+void GridLinesMgr::setColorEclipticGrid(const Vec3f& newColor)
+{
+	if(newColor != eclGrid->getColor()) {
+		eclGrid->setColor(newColor);
+		emit eclipticGridColorChanged(newColor);
+	}
+}
+
 //! Set flag for displaying Galactic Grid
 void GridLinesMgr::setFlagGalacticGrid(const bool displayed)
 {
@@ -975,6 +1151,31 @@ void GridLinesMgr::setColorEquatorLine(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying J2000 Equatorial Line
+void GridLinesMgr::setFlagEquatorJ2000Line(const bool displayed)
+{
+	if(displayed != equatorJ2000Line->isDisplayed()) {
+		equatorJ2000Line->setDisplayed(displayed);
+		emit equatorJ2000LineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying J2000 Equatorial Line
+bool GridLinesMgr::getFlagEquatorJ2000Line(void) const
+{
+	return equatorJ2000Line->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEquatorJ2000Line(void) const
+{
+	return equatorJ2000Line->getColor();
+}
+void GridLinesMgr::setColorEquatorJ2000Line(const Vec3f& newColor)
+{
+	if(newColor != equatorJ2000Line->getColor()) {
+		equatorJ2000Line->setColor(newColor);
+		emit equatorJ2000LineColorChanged(newColor);
+	}
+}
+
 //! Set flag for displaying Ecliptic Line
 void GridLinesMgr::setFlagEclipticLine(const bool displayed)
 {
@@ -1000,6 +1201,58 @@ void GridLinesMgr::setColorEclipticLine(const Vec3f& newColor)
 	}
 }
 
+//! Set flag for displaying Ecliptic J2000 Line
+void GridLinesMgr::setFlagEclipticJ2000Line(const bool displayed)
+{
+	if(displayed != eclipticJ2000Line->isDisplayed()) {
+		eclipticJ2000Line->setDisplayed(displayed);
+		emit eclipticJ2000LineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Ecliptic J2000 Line
+bool GridLinesMgr::getFlagEclipticJ2000Line(void) const
+{
+	return eclipticJ2000Line->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorEclipticJ2000Line(void) const
+{
+	return eclipticJ2000Line->getColor();
+}
+void GridLinesMgr::setColorEclipticJ2000Line(const Vec3f& newColor)
+{
+	if(newColor != eclipticJ2000Line->getColor()) {
+		eclipticJ2000Line->setColor(newColor);
+		emit eclipticJ2000LineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Precession Circles
+void GridLinesMgr::setFlagPrecessionCircles(const bool displayed)
+{
+	if(displayed != precessionCircleN->isDisplayed()) {
+		precessionCircleN->setDisplayed(displayed);
+		precessionCircleS->setDisplayed(displayed);
+		emit precessionCirclesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Precession Circles
+bool GridLinesMgr::getFlagPrecessionCircles(void) const
+{
+	// precessionCircleS is always synchronous, no separate queries.
+	return precessionCircleN->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorPrecessionCircles(void) const
+{
+	return precessionCircleN->getColor();
+}
+void GridLinesMgr::setColorPrecessionCircles(const Vec3f& newColor)
+{
+	if(newColor != precessionCircleN->getColor()) {
+		precessionCircleN->setColor(newColor);
+		precessionCircleS->setColor(newColor);
+		emit precessionCirclesColorChanged(newColor);
+	}
+}
 
 //! Set flag for displaying Meridian Line
 void GridLinesMgr::setFlagMeridianLine(const bool displayed)

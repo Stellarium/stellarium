@@ -467,7 +467,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
 	static const double d2000 = 2451545.0;
-	const float movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
+	const float movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDE()-d2000)/365.25) / star_position_scale;
 
 	// GZ, added for extinction
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
@@ -549,7 +549,7 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 					  QList<StelObjectP > &result)
 {
 	static const double d2000 = 2451545.0;
-	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDay()-d2000)/365.25)/ star_position_scale;
+	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
 	Vec3f vf(v[0], v[1], v[2]);

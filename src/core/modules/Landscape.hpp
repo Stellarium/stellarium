@@ -111,7 +111,6 @@ public:
 	void setFlagShowIllumination(const bool b) {illumFader=b;}
 	//! Get whether illumination is displayed
 	bool getFlagShowIllumination() const {return (bool)illumFader;}
-	// GZ 2 new
 	//! Set whether labels are displayed
 	void setFlagShowLabels(const bool b) {labelFader=b;}
 	//! Get whether labels are displayed
@@ -155,11 +154,14 @@ public:
 
 	//! Get whether the landscape is currently fully visible (i.e. opaque).
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
+	//! Get the sine of the limiting altitude (can be used to short-cut drawing below horizon, like star fields). There is no set here, value is only from landscape.ini
+	float getSinMinAltitudeLimit() const {return sinMinAltitudeLimit;}
 
-	// GZ: NEW FUNCTION:
+	//! Find opacity in a certain direction. (New in V0.13 series)
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
 	//! Default implementation indicates the horizon equals math horizon.
-	virtual float getOpacity(Vec3d azalt) const {return (azalt[2]<0 ? 1.0f : 0.0f); }
+	// TBD: Maybe change this to azalt[2]<sinMinAltitudeLimit ? (But never called in practice, reimplemented by the subclasses...)
+	virtual float getOpacity(Vec3d azalt) const { Q_ASSERT(0); return (azalt[2]<0 ? 1.0f : 0.0f); }
 	//! The list of azimuths (counted from True North towards East) and altitudes can come in various formats. We read the first two elements, which can be of formats:
 	enum horizonListMode {
 		azDeg_altDeg   = 0, //! azimuth[degrees] altitude[degrees]
@@ -212,6 +214,8 @@ protected:
 	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]angle_rotatez (or decor_angle_rotatez for old_style landscapes)
 	float angleRotateZOffset; //! [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
 				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
+
+	float sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
 	int defaultBortleIndex; //! May be given in landscape.ini:[location]light_pollution. Default: -1 (no change).

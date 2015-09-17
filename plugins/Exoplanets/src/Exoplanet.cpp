@@ -417,7 +417,7 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 	QList<int> discovery;
 	// For getting value of new year from midnight at 1 Jan we need increase a value of JD on 0.5.
 	// This hack need for correct display of discovery mode of exoplanets.
-	StelUtils::getDateFromJulianDay(core->getJDay()+0.5, &year, &month, &day);
+	StelUtils::getDateFromJulianDay(core->getJD()+0.5, &year, &month, &day);
 	discovery.clear();
 	foreach(const exoplanetData &p, exoplanets)
 	{

@@ -44,12 +44,14 @@ Landscape::Landscape(float _radius)
 	, cols(40)
 	, angleRotateZ(0.)
 	, angleRotateZOffset(0.)
+	, sinMinAltitudeLimit(-0.035) //sin(-2 degrees))
 	, defaultBortleIndex(-1)
 	, defaultFogSetting(-1)
 	, defaultExtinctionCoefficient(-1.)
 	, defaultTemperature(-1000.)
 	, defaultPressure(-2.)
 	, horizonPolygon(NULL)
+	, fontSize(18)
 {
 	validLandscape = 0;
 }
@@ -115,6 +117,10 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 
 	// Set minimal brightness for landscape
 	minBrightness = landscapeIni.value("landscape/minimal_brightness", -1.0).toDouble();
+
+	// set a minimal altitude which the landscape covers. (new in 0.14)
+	// This is to allow landscapes with "holes" in the ground (space station?) (Bug lp:1469407)
+	sinMinAltitudeLimit = (float) std::sin(M_PI/180.0 * landscapeIni.value("landscape/minimal_altitude", -2.0).toDouble());
 
 	// This is now optional for all classes, for mixing with a photo horizon:
 	// they may have different offsets, like a south-centered pano and a geographically-oriented polygon.
@@ -752,7 +758,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 		static QString lastLandscapeName;
 		if (lastLandscapeName != name)
 		{
-			qWarning() << "Dubious result: Landscape \"" << name << "\" not calibrated. Opacity test represents mathematical horizon only.";
+			qWarning() << "Dubious result: Landscape " << name << " not calibrated. Opacity test represents mathematical horizon only.";
 			lastLandscapeName=name;
 		}
 		return (azalt[2] > 0 ? 0.0f : 1.0f);
@@ -799,6 +805,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	float y_baseImg_1 = sides[currentSide].texCoords[1]+ y_img_1*(sides[currentSide].texCoords[3]-sides[currentSide].texCoords[1]);
 	int y=(1.0-y_baseImg_1)*sidesImages[currentSide]->height();           // pixel Y from top.
 	QRgb pixVal=sidesImages[currentSide]->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Oldstyle Landscape sampling: az=" << az*180.0 << "° alt=" << alt_rad*180.0f/M_PI
@@ -807,6 +814,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 			 << ", w=" << sidesImages[currentSide]->width() << " h=" << sidesImages[currentSide]->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 }
 
@@ -1018,12 +1026,14 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 	int y= mapImage->height()/2*(1 + radius*std::cos(az));
 
 	QRgb pixVal=mapImage->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
 			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 
 
@@ -1206,6 +1216,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	int x=(az_phot/2.0f) * mapImage->width(); // pixel X from left.
 
 	QRgb pixVal=mapImage->pixel(x, y);
+/*
 #ifndef NDEBUG
 	// GZ: please leave the comment available for further development!
 	qDebug() << "Landscape sampling: az=" << az*180.0 << "° alt=" << alt_pm1*90.0f
@@ -1213,6 +1224,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 			 << ", w=" << mapImage->width() << " h=" << mapImage->height()
 			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 #endif
+*/
 	return qAlpha(pixVal)/255.0f;
 
 }
