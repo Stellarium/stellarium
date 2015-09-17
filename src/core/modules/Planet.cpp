@@ -386,6 +386,7 @@ void Planet::computePositionWithoutOrbits(const double dateJD)
 {
 	if (fabs(lastJD-dateJD)>deltaJD)
 	{
+		qDebug() << "computePositionWithoutOrbits() for " << getEnglishName();
 		coordFunc(dateJD, eclipticPos, userDataPtr);
 		lastJD = dateJD;
 	}
@@ -446,10 +447,14 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJD)
 {
+	qDebug() << "Planet::computePosition() for " << getEnglishName();
 	// Make sure the parent position is computed for the dateJD, otherwise
-	// getHeliocentricPos() would return incorect values.
+	// getHeliocentricPos() would return incorrect values.
 	if (parent)
+	{
+		//qDebug() << "Parent is " << parent->getEnglishName();
 		parent->computePositionWithoutOrbits(dateJD);
+	}
 
 	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-dateJD)>deltaOrbitJD || !orbitCached))
 	{
@@ -467,7 +472,7 @@ void Planet::computePosition(const double dateJD)
 		}
 		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
+		//qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
@@ -565,6 +570,9 @@ void Planet::computePosition(const double dateJD)
 	}
 	else if (fabs(lastJD-dateJD)>deltaJD)
 	{
+		qDebug() << "Planet::computePosition() actual position for " << getEnglishName();
+		// GZ: THE ACTUAL CRASH ON WINDOWS IS HERE!
+		// DE430 initialisation has not been called (no log entries) when this is first executed.
 		// calculate actual Planet position
 		coordFunc(dateJD, eclipticPos, userDataPtr);
 		// XXX: do we need to do that even when the orbit is not visible?
