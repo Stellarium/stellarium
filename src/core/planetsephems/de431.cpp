@@ -38,6 +38,8 @@ static char nams[JPL_MAX_N_CONSTANTS][6];
 static double vals[JPL_MAX_N_CONSTANTS];
 static double tempXYZ[6];
 
+static bool initDone = false;
+
 void InitDE431(const char* filepath)
 {
     ephem = jpl_init_ephemeris(filepath, nams, vals);
@@ -47,18 +49,26 @@ void InitDE431(const char* filepath)
         StelApp::getInstance().getCore()->setDe431Status(false);
         qDebug() << "Error "<< jpl_init_error_code() << "at DE431 init:" << jpl_init_error_message();
     }
+    else
+    {
+        initDone = true;
+        qDebug() << "DE431 init successful";
+    }
 }
 
 void GetDe431Coor(double jd, int planet_id, double * xyz)
 {
-    jpl_pleph(ephem, jd, planet_id, CENTRAL_PLANET_ID, tempXYZ, 0);
+    if(initDone)
+    {
+        jpl_pleph(ephem, jd, planet_id, CENTRAL_PLANET_ID, tempXYZ, 0);
 
-    tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
-    tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
+        tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
+        tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
 
-    xyz[0] = tempECL[0];
-    xyz[1] = tempECL[1];
-    xyz[2] = tempECL[2];
+        xyz[0] = tempECL[0];
+        xyz[1] = tempECL[1];
+        xyz[2] = tempECL[2];
+    }
 }
 
 void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
