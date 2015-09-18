@@ -28,6 +28,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "gust86.h"
 #include "de431.hpp"
 #include "de430.hpp"
+#include "pluto.h"
 
 #define EPHEM_MERCURY_ID  0
 #define EPHEM_VENUS_ID    1
@@ -41,6 +42,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #define EPHEM_IMD_EARTH_ID 2
 #define EPHEM_JPL_EARTH_ID 3
+#define EPHEM_JPL_PLUTO_ID 9
 
 /**   JPL PlANET ID LIST
 **            1 = mercury           8 = neptune                             **
@@ -120,14 +122,20 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
  * Calculate planets rectangular heliocentric ecliptical coordinates
  * for given julian day. Values are in AU.
  * params : Julian day, rect coords */
-void get_pluto_helio_coords(double jd, double * X, double * Y, double * Z)
-{
-    
-}
 
 void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-    get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);
+	if(use_de430(jd))
+	{
+		  GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+	}
+	else if(use_de431(jd))
+	{
+		  GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+	}
+	else // fallback to previous solution
+
+		get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);
 }
 
 /* Return 0 for the sun */
