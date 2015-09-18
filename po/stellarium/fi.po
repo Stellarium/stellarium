@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-17 01:04+0000\n"
+"PO-Revision-Date: 2015-09-18 01:30+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-17 05:13+0000\n"
-"X-Generator: Launchpad (build 17737)\n"
+"X-Launchpad-Export-Date: 2015-09-18 05:11+0000\n"
+"X-Generator: Launchpad (build 17746)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -269,12 +269,12 @@ msgstr "Pintakirkkaus: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:219
 #, qt-format
 msgid "Size: %1"
-msgstr "Koko: %1"
+msgstr "Kulmaläpimitta: %1"
 
 #: src/core/modules/Nebula.cpp:222
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr "Koko: %1 × %2"
+msgstr "Kulmaläpimitta: %1 × %2"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
@@ -5524,7 +5524,7 @@ msgstr "Visuaalinen magnitudi"
 
 #: src/ui_configurationDialog.h:1088
 msgid "Angular or physical size"
-msgstr "Kulmaläpimitta tai fysikaalinen koko"
+msgstr "Kulmaläpimitta tai todellinen koko"
 
 #: src/ui_configurationDialog.h:1090
 msgid "Size"
@@ -6127,11 +6127,11 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
-"Muistan kuinka mittasimme Cassinin jakoa opiskelijoina. Se ei ollut "
-"akateemista glamouria jota voisi odottaa... Oli pilvistä... Oli sateista... "
-"Observatorion labrassa oli muutama vanha kaukoputki , osoittamassa "
-"<em>valokuvaan</em> Saturnuksesta labran toisessa päässä. Me mittasimme. Me "
-"laskimme. Ja toivoimme että olisimme olleet Hawaijilla"
+"Muistan kuinka opiskelijoina mittasimme Cassinin jakoa. Se ei ollut "
+"sellaista akateemista glamouria, kuin voisi olettaa... Oli pilvistä ja "
+"sateista. Observatorion laboratoriossa oli muutama vanha kaukoputki "
+"osoittamassa <em>valokuvaan</em> Saturnuksesta laboratorion toisessa päässä. "
+"Me mittasimme. Me laskimme. Ja toivoimme että olisimme olleet Havaijilla."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:444
@@ -7482,7 +7482,7 @@ msgstr "Päivitysväli (tuntia):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:719
 msgid "Label font size (pixels):"
-msgstr "Nimien kirjasinkoko (pikseliä):"
+msgstr "Nimien kirjasinkoko (kuvapistettä):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:720
 msgid "Orbit lines"
@@ -8010,7 +8010,7 @@ msgstr "Käyttöliittymäasetukset"
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
-"Näytä kaukoputken ristikon ympärillä kiinteää kulmakokoa olevat renkaat"
+"Näytä kaukoputken ristikon ympärillä kulmaläpimitaltaan kiinteät renkaat"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
 msgid "Use field of view indicators"
@@ -8018,7 +8018,7 @@ msgstr "Käytä näkökentän osoitinta"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Circle size(s):"
-msgstr "Renkaiden koot:"
+msgstr "Ympyröiden koko:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
