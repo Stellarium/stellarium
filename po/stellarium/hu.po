@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-13 07:32+0000\n"
+"PO-Revision-Date: 2015-09-17 16:04+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:20+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-18 05:12+0000\n"
+"X-Generator: Launchpad (build 17746)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -318,7 +318,7 @@ msgstr "Parallaxis: %1\""
 
 #: src/core/modules/Nebula.cpp:300
 msgid "Morphological description: "
-msgstr ""
+msgstr "Alaktani leírás: "
 
 #: src/core/modules/Nebula.cpp:748
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -328,77 +328,77 @@ msgstr "csillagok nagy koncentrációja a középpont felé"
 #: src/core/modules/Nebula.cpp:751
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "központi csillagok sűrű koncentrációja"
 
 #: src/core/modules/Nebula.cpp:754
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "központi csillagok erős koncentrációja"
 
 #: src/core/modules/Nebula.cpp:757
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "központi csillagok közepesen erős koncentrációja"
 
 #: src/core/modules/Nebula.cpp:762
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "központi csillagok közepes koncentrációja"
 
 #: src/core/modules/Nebula.cpp:765
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
-msgstr ""
+msgstr "központi csillagok inkább laza koncentrációja"
 
 #: src/core/modules/Nebula.cpp:768
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
-msgstr ""
+msgstr "központi csillagok laza koncentrációja"
 
 #: src/core/modules/Nebula.cpp:771
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "csillagok laza koncentrációja"
 
 #: src/core/modules/Nebula.cpp:774
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "központi csillagok nagyon laza koncentrációja"
 
 #: src/core/modules/Nebula.cpp:777
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "központi csillagok alig létező koncentrációja"
 
 #: src/core/modules/Nebula.cpp:780
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "ismeretlen koncentráció"
 
 #: src/core/modules/Nebula.cpp:800
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
-msgstr ""
+msgstr "központi csillagok erős koncentrációja"
 
 #: src/core/modules/Nebula.cpp:803
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
-msgstr ""
+msgstr "központi csillagok gyenge koncentrációja"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
-msgstr ""
+msgstr "csillagok alig észlelhető koncentrációja"
 
 #: src/core/modules/Nebula.cpp:809
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
-msgstr ""
+msgstr "csillagmező  koncentrációja"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "ismeretlen koncentráció"
 
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
@@ -532,15 +532,15 @@ msgstr "alaktalan"
 
 #: src/core/modules/Nebula.cpp:947
 msgid "conventional structure"
-msgstr ""
+msgstr "hagyományos felépítés"
 
 #: src/core/modules/Nebula.cpp:950
 msgid "filamentary structure"
-msgstr ""
+msgstr "rostos felépítés"
 
 #: src/core/modules/Nebula.cpp:953
 msgid "undocumented structure"
-msgstr ""
+msgstr "ismeretlen felépítés"
 
 #: src/core/modules/Nebula.cpp:959
 msgctxt "HII region brightness"
@@ -575,7 +575,7 @@ msgstr "rádiógalaxis"
 
 #: src/core/modules/Nebula.cpp:993
 msgid "interacting galaxy"
-msgstr ""
+msgstr "közreható galaxis"
 
 #: src/core/modules/Nebula.cpp:996 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
@@ -623,7 +623,7 @@ msgstr "Hill régió"
 
 #: src/core/modules/Nebula.cpp:1029
 msgid "reflection nebula"
-msgstr ""
+msgstr "reflexiós köd"
 
 #: src/core/modules/Nebula.cpp:1032
 msgid "supernova remnant"
@@ -685,7 +685,7 @@ msgstr "ismeretlen objektum"
 
 #: src/core/modules/Nebula.cpp:1074
 msgid "undocumented type"
-msgstr ""
+msgstr "ismeretlen típus"
 
 #: src/core/modules/NebulaMgr.cpp:224
 msgid "Deep-sky objects"
@@ -779,7 +779,7 @@ msgstr "Megvilágítva: %1%"
 #: src/core/modules/Planet.cpp:351
 #, qt-format
 msgid "Eclipse Factor: %1%"
-msgstr ""
+msgstr "Fogyatkozási tényező: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:204
 #, qt-format
@@ -1010,7 +1010,7 @@ msgstr "+1 sziderikus év"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "+100 sziderikus év"
 
 #: src/core/StelCore.cpp:219
 msgid "Add 1 synodic month"
@@ -1030,11 +1030,11 @@ msgstr "+1 anomális hónap"
 
 #: src/core/StelCore.cpp:223
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "+1 anomalisztikus év"
 
 #: src/core/StelCore.cpp:224
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "+100 anomalisztikus év"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 mean tropical month"
