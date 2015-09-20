@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-18 01:30+0000\n"
+"PO-Revision-Date: 2015-09-19 17:43+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-19 05:13+0000\n"
+"X-Launchpad-Export-Date: 2015-09-20 04:33+0000\n"
 "X-Generator: Launchpad (build 17746)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -90,7 +90,7 @@ msgstr "Galaktinen Ekvaattori"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1781
 msgid "O./C. longitude"
-msgstr "O./K. pituuspiiri"
+msgstr "Oppos./konj. pituuspiiri"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -4946,7 +4946,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1604
 msgid "Show orbit for selected planet"
-msgstr "Näytä valitun planeetan kiertorata"
+msgstr "Näytä vain valitun emokappaleen kiertorata"
 
 #: src/ui_viewDialog.h:1606
 msgid ""
@@ -4958,7 +4958,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
-msgstr "Näytä vain valitun planeetan kiertorata"
+msgstr "Näytä myös valitun kappaleen kuiden kiertoradat"
 
 #: src/ui_viewDialog.h:1610
 msgid ""
@@ -5202,7 +5202,7 @@ msgstr "Ekliptinen asteikko (nykyinen)"
 
 #: src/ui_viewDialog.h:1735
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr "Korkeus ja atsimuutti (laskettuna pohjoisesta itään päin)."
+msgstr "Korkeus ja atsimuutti (pohjoisesta itään laskien)."
 
 #: src/ui_viewDialog.h:1739
 msgid "Galactic Coordinates, System II (IAU 1958)."
@@ -5488,7 +5488,7 @@ msgstr "Muokattu"
 
 #: src/ui_configurationDialog.h:1073
 msgid "Displayed fields"
-msgstr "Näytettävät näkökentät"
+msgstr "Näytettävät tiedot"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Geocentric equatorial coordinates, equinox of date"
@@ -5774,7 +5774,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1199
 msgid "Azimuth from South"
-msgstr "Atsimuutin laskenta etelästä"
+msgstr "Atsimuutti etelästä laskien"
 
 #: src/ui_configurationDialog.h:1200
 msgid "Screenshots"
@@ -7090,7 +7090,7 @@ msgstr "Korkeus (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "Sijainti (Lat./Long.): %1%2%3%4"
+msgstr "Sijainti (Lev./Pit.): %1%2%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:311

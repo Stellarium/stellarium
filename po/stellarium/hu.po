@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-17 16:04+0000\n"
+"PO-Revision-Date: 2015-09-19 09:44+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-18 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-09-20 04:33+0000\n"
 "X-Generator: Launchpad (build 17746)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -143,7 +143,7 @@ msgstr "Ekliptikus rács J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Ekliptikus háló"
 
 #: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1741
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -438,7 +438,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:842
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
-msgstr ""
+msgstr "ismeretlen számú tag"
 
 #: src/core/modules/Nebula.cpp:846
 msgctxt "nebulosity factor of open clusters"
@@ -473,7 +473,7 @@ msgstr "nagyon halvány"
 #: src/core/modules/Nebula.cpp:882
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "bizonytalan fényesség"
 
 #: src/core/modules/Nebula.cpp:885
 msgctxt "Reflection Nebulae Brightness"
@@ -508,7 +508,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:906
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
-msgstr ""
+msgstr "ismeretlen reflexiós köd"
 
 #: src/core/modules/Nebula.cpp:929
 msgid "circular form"
@@ -591,7 +591,7 @@ msgstr "nyílt csillagcsoport"
 
 #: src/core/modules/Nebula.cpp:1005
 msgid "globular star cluster"
-msgstr ""
+msgstr "gömbhalmaz"
 
 #: src/core/modules/Nebula.cpp:1008
 msgid "nebula"
@@ -631,7 +631,7 @@ msgstr "szupernova-maradvány"
 
 #: src/core/modules/Nebula.cpp:1035
 msgid "stellar association"
-msgstr ""
+msgstr "csillag csoportosulás"
 
 #: src/core/modules/Nebula.cpp:1038
 msgid "star cloud"
@@ -671,7 +671,7 @@ msgstr "lehetséges planetáris köd"
 
 #: src/core/modules/Nebula.cpp:1065
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "protoplanetáris köd"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
@@ -1046,7 +1046,7 @@ msgstr "+1 átlagos tropikus év"
 
 #: src/core/StelCore.cpp:227
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "+100 tropikus év"
 
 #: src/core/StelCore.cpp:228
 msgid "Add 1 tropical year"
@@ -1110,7 +1110,7 @@ msgstr "-1 átlagos tropikus év"
 
 #: src/core/StelCore.cpp:243
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "-100 tropikus év"
 
 #: src/core/StelCore.cpp:244
 msgid "Subtract 1 tropical year"
@@ -2251,7 +2251,7 @@ msgstr "%1 m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "bolygóközép távolsága %1 km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
@@ -2890,12 +2890,12 @@ msgstr "Reflexiós köd"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101 src/ui_viewDialog.h:1689
 msgid "Active galaxies"
-msgstr ""
+msgstr "aktív galaxis"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "Radio galaxies"
-msgstr ""
+msgstr "rádiógalaxis"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105 src/ui_viewDialog.h:1683
@@ -2915,7 +2915,7 @@ msgstr "csillagcsoport"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Stellar associations"
-msgstr ""
+msgstr "csillag csoport"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
@@ -2980,7 +2980,7 @@ msgstr "lehetséges planetáris köd"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "protoplanetáris köd"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:139 src/ui_viewDialog.h:1646
@@ -4948,16 +4948,20 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Kapcsolja ki ezt az opciót, ha meg akarja figyelni a Naprendszer összes "
+"objektumainak pályáját."
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Csak a kiválasztott bolygó pályájának mutatása"
 
 #: src/ui_viewDialog.h:1610
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Kapcsolja be ezt az opciót a fénysebesség hatásának szimulációjához "
+"(ajánlott)."
 
 #: src/ui_viewDialog.h:1612
 msgid "Simulate light speed"
@@ -5002,7 +5006,7 @@ msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Display objects from catalogs"
-msgstr ""
+msgstr "Objektumok mutatása katalógusból"
 
 #: src/ui_viewDialog.h:1637
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
@@ -5010,36 +5014,36 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1640
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
-msgstr ""
+msgstr "Ködök és csillagcsoportok NGC katalógusa"
 
 #: src/ui_viewDialog.h:1643
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
-msgstr ""
+msgstr "Fényes ködök Lynds katalógusa (Lynds, 1965)"
 
 #: src/ui_viewDialog.h:1652
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
-msgstr ""
+msgstr "349 sötét objektum Barnard katalógusa  (Barnard, 1927)"
 
 #: src/ui_viewDialog.h:1655
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
-msgstr ""
+msgstr "HII régiók katalógusa (Sharpless, 1959)"
 
 #: src/ui_viewDialog.h:1658
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
-msgstr ""
+msgstr "Reflexiós ködök katalógusa (Van den Bergh, 1966)"
 
 #: src/ui_viewDialog.h:1661
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
-msgstr ""
+msgstr "H-alfa régiók a déli Tejúton katalógusa  (Rodgers+, 1960)"
 
 #: src/ui_viewDialog.h:1664
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
-msgstr ""
+msgstr "Sötét ködök Lynds katalógusa (Lynds, 1962)"
 
 #: src/ui_viewDialog.h:1667
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
-msgstr ""
+msgstr "Nyílt galaktikus halmazok katalógusa (Collinder, 1931)"
 
 #: src/ui_viewDialog.h:1670
 msgid ""
@@ -5053,11 +5057,11 @@ msgstr "Galaxiskatalógus"
 
 #: src/ui_viewDialog.h:1676
 msgid "The Uppsala General Catalogue of Galaxies"
-msgstr ""
+msgstr "Galaxisok általános Uppsala katalógusa"
 
 #: src/ui_viewDialog.h:1679
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr ""
+msgstr "Galaktikus fényes diffúz ködök  katalógusa (Cederblad, 1946)"
 
 #: src/ui_viewDialog.h:1681
 msgid "Filter by type"
@@ -5065,7 +5069,7 @@ msgstr "Típus szerinti szűrés"
 
 #: src/ui_viewDialog.h:1684
 msgid "Hydrogen regions"
-msgstr ""
+msgstr "Hidrogén régiók"
 
 #: src/ui_viewDialog.h:1685
 msgid "Other"
@@ -5099,7 +5103,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1698
 msgid "Use surface brightness"
-msgstr ""
+msgstr "Felszíni fényesség használata"
 
 #: src/ui_viewDialog.h:1700
 msgid "Use hints proportional to angular size of deep-sky objects"
@@ -5154,35 +5158,35 @@ msgstr "Éggömb"
 
 #: src/ui_viewDialog.h:1719
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Egyenlítői koordináták (J2000.0)."
 
 #: src/ui_viewDialog.h:1721
 msgid "Equatorial grid (J2000)"
-msgstr ""
+msgstr "Egyenlítői háló  (J2000)"
 
 #: src/ui_viewDialog.h:1723
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Jelenlegi bolygó és dátum egyenlítői koordinátái."
 
 #: src/ui_viewDialog.h:1725
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Jelenlegi dátum egyenlítői hálója"
 
 #: src/ui_viewDialog.h:1727
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Ekliptikus koordináták (J2000.0)."
 
 #: src/ui_viewDialog.h:1729
 msgid "Ecliptic grid (J2000)"
-msgstr ""
+msgstr "Ekliptikus háló (J2000)"
 
 #: src/ui_viewDialog.h:1731
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr ""
+msgstr "Jelenlegi dátum ekliptikus koordinátái. Csak a Föld esetén mutatva."
 
 #: src/ui_viewDialog.h:1733
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Jelenlegi dátum ekliptikus hálója"
 
 #: src/ui_viewDialog.h:1735
 msgid "Altitudes and azimuth (counted from North towards East)."
@@ -5190,11 +5194,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1739
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Galaktikus Koordináták, System II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1743
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Fő égtájak feliratai"
 
 #: src/ui_viewDialog.h:1747
 msgid ""
@@ -5208,19 +5212,19 @@ msgstr "Precessziós körök"
 
 #: src/ui_viewDialog.h:1751
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "Égi egyenlítő mutatása (J2000.0)"
 
 #: src/ui_viewDialog.h:1753
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "Egyenlítő (J2000)"
 
 #: src/ui_viewDialog.h:1755
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Jelenlegi dátum és bolygó égi egyenlítője."
 
 #: src/ui_viewDialog.h:1757
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Jelenlegi egyenlítő"
 
 #: src/ui_viewDialog.h:1759
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
@@ -5228,7 +5232,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1761
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "Ekliptika (J2000)"
 
 #: src/ui_viewDialog.h:1763
 msgid "Show ecliptic line of current date."
@@ -5236,7 +5240,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1765
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Jelenlegi ekliptika"
 
 #: src/ui_viewDialog.h:1767
 msgid "Show horizon line."
@@ -6010,7 +6014,7 @@ msgstr "Efemerisz"
 
 #: src/ui_astroCalcDialog.h:370
 msgid "Between objects:"
-msgstr ""
+msgstr "Objektumok között:"
 
 #: src/ui_astroCalcDialog.h:371
 msgid "and"
@@ -6022,7 +6026,7 @@ msgstr "éééé.hh.nn"
 
 #: src/ui_astroCalcDialog.h:376
 msgid "Maximum allowed separation:"
-msgstr ""
+msgstr "Maximális engedélyezett elválasztás:"
 
 #: src/ui_astroCalcDialog.h:378
 msgid "Value in decimal degrees"
@@ -6030,7 +6034,7 @@ msgstr "Decimális fokok"
 
 #: src/ui_astroCalcDialog.h:380
 msgid "Calculate phenomena"
-msgstr ""
+msgstr "Jelenség számítása"
 
 #: src/ui_astroCalcDialog.h:381
 msgid "Phenomena"
@@ -7569,7 +7573,7 @@ msgstr "Források"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "Iridium felvillanások számítása"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -8502,6 +8506,8 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
+"Kisbolygók és üstökösök hozzáadása a Stellarium programhoz. Az objektumok "
+"listáit a Minor Planet Center webhelyéről tölti le, ami online kereshető is."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
@@ -10928,6 +10934,8 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
+"Ez a kiegészítő eredetileg az \"ESA Summer of Code in Space 2013\" során "
+"készült."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Info"
