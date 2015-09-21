@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>497</width>
-    <height>509</height>
+    <height>538</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1092,6 +1092,9 @@
              </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="selectSingleConstellationButton">
+               <property name="toolTip">
+                <string>Hide other constellations when you click one</string>
+               </property>
                <property name="statusTip">
                 <string>Hide other constellations when you click one</string>
                </property>
