@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-19 17:43+0000\n"
+"PO-Revision-Date: 2015-09-20 18:05+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-20 04:33+0000\n"
+"X-Launchpad-Export-Date: 2015-09-21 05:12+0000\n"
 "X-Generator: Launchpad (build 17746)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -85,7 +85,7 @@ msgstr "Horisontti"
 
 #: src/core/modules/GridLinesMgr.cpp:625
 msgid "Galactic Equator"
-msgstr "Galaktinen Ekvaattori"
+msgstr "Galaktinen ekvaattori"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1781
@@ -180,7 +180,7 @@ msgstr "Maanpinta"
 
 #: src/core/modules/LandscapeMgr.cpp:419
 msgid "Illumination"
-msgstr "Valaistus"
+msgstr "Maiseman valot"
 
 #: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1693
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
@@ -287,7 +287,7 @@ msgstr "Suuntakulma: %1%2"
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr "Etäisyys: %1 vv"
+msgstr "Etäisyys: %1 valovuotta"
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:263
@@ -401,22 +401,22 @@ msgstr "tähtikasauma ei tiedossa"
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
-msgstr "vähäinen joukonjäsenten välinen kirkkausvaihtelu"
+msgstr "vähäinen joukon jäsenten välinen kirkkausvaihtelu"
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
-msgstr "keskitasoinen joukonjäsenten välinen kirkkausvaihtelu"
+msgstr "keskitasoinen joukon jäsenten välinen kirkkausvaihtelu"
 
 #: src/core/modules/Nebula.cpp:824
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
-msgstr "suuri joukonjäsenten välinen kirkkausvaihtelu"
+msgstr "suuri joukon jäsenten välinen kirkkausvaihtelu"
 
 #: src/core/modules/Nebula.cpp:827
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr "joukonjäsenten välinen kirkkausvaihtelu ei tiedossa"
+msgstr "joukon jäsenten välinen kirkkausvaihtelu ei tiedossa"
 
 #: src/core/modules/Nebula.cpp:833
 msgctxt "Trumpler's Number of Members Class"
@@ -557,7 +557,7 @@ msgstr "kirkkain"
 
 #: src/core/modules/Nebula.cpp:968
 msgid "undocumented brightness"
-msgstr "dokumentoimaton kirkkaus"
+msgstr "kirkkaus ei tiedossa"
 
 #: src/core/modules/Nebula.cpp:984
 msgid "galaxy"
@@ -669,7 +669,7 @@ msgstr "mahdollinen planetaarinen sumu"
 
 #: src/core/modules/Nebula.cpp:1065
 msgid "protoplanetary nebula"
-msgstr "protoplanetaarinen sumu"
+msgstr "esiplanetaarinen sumu"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
@@ -706,12 +706,12 @@ msgstr "Etäisyys: %1 AU (%2 km)"
 #: src/core/modules/Comet.cpp:231
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr "Etäisyys: %1AU (%2 Milj. km)"
+msgstr "Etäisyys: %1 AU (%2 milj. km)"
 
 #: src/core/modules/Planet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr "Näennäinen halkaisija: %1, renkaat mukaanlukien: %2"
+msgstr "Näennäinen läpimitta: %1, renkaat mukaan luettuna: %2"
 
 #: src/core/modules/Planet.cpp:281 src/core/modules/MinorPlanet.cpp:263
 #, qt-format
@@ -797,18 +797,18 @@ msgstr "jaksollinen"
 #: src/core/modules/Comet.cpp:207
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "Etäisyys auringosta: %1AU (%2 km)"
+msgstr "Etäisyys auringosta: %1 AU (%2 km)"
 
 #: src/core/modules/Comet.cpp:214
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Etäisyys auringosta: %1AU (%2 milj. km)"
+msgstr "Etäisyys auringosta: %1 AU (%2 milj. km)"
 
 #. TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
 #: src/core/modules/Comet.cpp:244
 #, qt-format
 msgid "Sidereal period: %1 a"
-msgstr "Sideerinen kiertoaika: %1 a"
+msgstr "Sideerinen kiertoaika: %1 vuotta"
 
 #: src/core/modules/Comet.cpp:249
 #, no-c-format, qt-format
@@ -882,12 +882,13 @@ msgstr "Tyyppi: <b>%1, %2</b>"
 #: src/core/modules/StarWrapper.cpp:226
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr "Magnitudiväli: <b>%1</b>%2<b>%3</b> (Fotometrinen systeemi: %4)"
+msgstr "Magnitudiväli: <b>%1</b>%2<b>%3</b> (Fotometrinen järjestelmä: %4)"
 
 #: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr "Magnitudiväli: <b>%1</b>%2<b>%3/%4</b> (Fotometrinen systeemi: %5)"
+msgstr ""
+"Magnitudiväli: <b>%1</b>%2<b>%3/%4</b> (Fotometrinen järjestelmä: %5)"
 
 #: src/core/modules/StarWrapper.cpp:244
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -903,12 +904,12 @@ msgstr "Jakso: %1 päivää"
 #: src/core/modules/StarWrapper.cpp:259
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr "Seuraava valominimi: %1 UTC"
+msgstr "Seuraava kirkkausminimi: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:261
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr "Seuraava valomaksimi: %1 UTC"
+msgstr "Seuraava kirkkausmaksimi: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:268
 #, qt-format
@@ -918,7 +919,7 @@ msgstr "Pimennyksen kesto: %1%"
 #: src/core/modules/StarWrapper.cpp:270
 #, qt-format
 msgid "Rising time: %1%"
-msgstr "Nousuaika: %1%"
+msgstr "Kirkkausmuutoksen kesto: %1%"
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
@@ -1026,7 +1027,7 @@ msgstr "Lisää anomalistinen kuukausi"
 
 #: src/core/StelCore.cpp:223
 msgid "Add 1 anomalistic year"
-msgstr "Lisää 1 anomalistinen vuosi"
+msgstr "Lisää anomalistinen vuosi"
 
 #: src/core/StelCore.cpp:224
 msgid "Add 100 anomalistic years"
@@ -1042,23 +1043,23 @@ msgstr "Lisää trooppinen vuosi"
 
 #: src/core/StelCore.cpp:227
 msgid "Add 100 mean tropical years"
-msgstr "Lisää 100 keskimääräistä trooppista vuotta"
+msgstr "Lisää 100 trooppista vuotta"
 
 #: src/core/StelCore.cpp:228
 msgid "Add 1 tropical year"
-msgstr "Lisää 1 trooppinen vuosi"
+msgstr "Lisää trooppinen vuosi"
 
 #: src/core/StelCore.cpp:229
 msgid "Add 1 Julian year"
-msgstr "Lisää 1 juliaaninen vuosi"
+msgstr "Lisää juliaaninen vuosi"
 
 #: src/core/StelCore.cpp:230
 msgid "Add 1 Julian century"
-msgstr "Lisää 1 juliaaninen vuosi"
+msgstr "Lisää juliaaninen vuosisata"
 
 #: src/core/StelCore.cpp:231
 msgid "Add 1 Gaussian year"
-msgstr "Lisää 1 gaussinen vuosi"
+msgstr "Lisää gaussinen vuosi"
 
 #: src/core/StelCore.cpp:232
 msgid "Subtract 1 sidereal day"
@@ -1090,7 +1091,7 @@ msgstr "Vähennä anomalistinen kuukausi"
 
 #: src/core/StelCore.cpp:239
 msgid "Subtract 1 anomalistic year"
-msgstr "Vähennä 1 anomalistinen vuosi"
+msgstr "Vähennä anomalistinen vuosi"
 
 #: src/core/StelCore.cpp:240
 msgid "Subtract 100 anomalistic years"
@@ -1106,23 +1107,23 @@ msgstr "Vähennä trooppinen vuosi"
 
 #: src/core/StelCore.cpp:243
 msgid "Subtract 100 mean tropical years"
-msgstr "Vähennä 100 keskimääräistä trooppista vuotta"
+msgstr "Vähennä 100 trooppista vuotta"
 
 #: src/core/StelCore.cpp:244
 msgid "Subtract 1 tropical year"
-msgstr "Vähennä 1 trooppinen vuosi"
+msgstr "Vähennä trooppinen vuosi"
 
 #: src/core/StelCore.cpp:245
 msgid "Subtract 1 Julian year"
-msgstr "Vähennä 1 juliaaninen vuosi"
+msgstr "Vähennä juliaaninen vuosi"
 
 #: src/core/StelCore.cpp:246
 msgid "Subtract 1 Julian century"
-msgstr "Vähennä 1 juliaaninen vuosisata"
+msgstr "Vähennä juliaaninen vuosisata"
 
 #: src/core/StelCore.cpp:247
 msgid "Subtract 1 Gaussian year"
-msgstr "Vähennä 1 gaussinen vuosi"
+msgstr "Vähennä gaussinen vuosi"
 
 #: src/core/StelCore.cpp:249
 msgid "Set home planet to selected planet"
@@ -1143,7 +1144,7 @@ msgstr "Peilaa pystysuunnassa"
 #: src/core/StelCore.cpp:1655
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
-"Korjaus on poistettu käytöstä. Käytä vain jos tiedät mitä olet tekemässä!"
+"Korjaus on poistettu käytöstä. Käytä vain, jos tiedät mitä olet tekemässä!"
 
 #: src/core/StelCore.cpp:1658
 #, qt-format
@@ -1152,7 +1153,7 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
-"Tämän kaavan otti käyttöön C. Schoch vuonna 1931 ja sitä käytti G. "
+"Tämän kaavan otti käyttöön C. Schoch vuonna 1931, ja sitä käytti G. "
 "Henrikkson artikkelissaan <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
@@ -1173,10 +1174,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
-"Tämä kaava perustuu Spencer Jonesin (%1) tutkimuksiin auringon, kuun ja "
+"Tämä kaava perustuu Spencer Jonesin (%1) tutkimuksiin Auringon, Kuun ja "
 "planeettojen havainnoista ennen vuotta 1650, ja sitä käytti Meeus "
-"teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin myös "
-"käyttöön PC-ohjelmaan SunTracker Pro."
+"teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin "
+"käyttöön myös SunTracker Pro -ohjelmistoon."
 
 #: src/core/StelCore.cpp:1668
 msgid ""
@@ -1184,8 +1185,8 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
-"Tämä on hieman muunneltu versio IAU:n (1952) kaavasta, ja otettiin käyttöön "
-"<em>Astronomical Ephemeris</em> -almanakkaan, sekä Mucken & Meeuksen (1983) "
+"Tämä hieman muunneltu versio IAU:n (1952) kaavasta otettiin käyttöön "
+"<em>Astronomical Ephemeris</em> -almanakkaan, sekä Mucken ja Meeuksen (1983) "
 "<em>Canon of Solar Eclipses</em> -teokseen."
 
 #: src/core/StelCore.cpp:1672
@@ -1195,10 +1196,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
-"Tuckermanin luettelo (1962, 1964) taulukoi auringon, kuun ja planeettojen "
-"paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649. Luetteloidut "
+"Tuckermanin luettelo (1962, 1964) listaa auringon, kuun ja planeettojen "
+"paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649. Luetellut "
 "paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin aikaa eli 16.00 "
-"GMT. Samat suhteet otettiin epäsuorasti käyttöön myös Goldstinen (1973) "
+"GMT. Sama suhde otettiin epäsuorasti käyttöön myös Goldstinen (1973) "
 "syzygitaulukoihin."
 
 #: src/core/StelCore.cpp:1676
@@ -1229,10 +1230,10 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
-"Tämän 12. asteen polynomiyhtälön (vanhentunut ja korvattu Schmadelin & "
-"Zechin toimesta (1988)) julkaisivat L. D. Schmadel ja G. Zech artikkelissaan "
-"<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
-"period 1800-1975</em> (%1)."
+"Tämän 12. asteen polynomiyhtälön julkaisivat L. D. Schmadel ja G. Zech "
+"artikkelissaan <em>Polynomial approximations for the correction delta T E.T.-"
+"U.T. in the period 1800-1975</em> (%1). Schmadel ja Zech korvasivat tämän "
+"yhtälön uudella vuonna 1988."
 
 #: src/core/StelCore.cpp:1685
 msgid ""
@@ -1240,9 +1241,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
-"Algoritmin ottivat käyttöön P. Bretagnon & L. Simons teokseen <em>Planetary "
-"Programs and Tables from -4000 to +2800</em> (1986), sekä PC-planetaario-"
-"ohjelma RedShift."
+"Tämän algoritmin esittelivät P. Bretagnon ja L. Simons teoksessaan "
+"<em>Planetary Programs and Tables from -4000 to +2800</em> (1986). Sen "
+"otettiin käyttöön myös RedShift-planetaario-ohjelmaan."
 
 #: src/core/StelCore.cpp:1688
 #, qt-format
@@ -1257,7 +1258,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1691
 msgid "This algorithm is used in the PC planetarium program Guide 7."
-msgstr "Tämä algoritmi on käytössä PC-planetaario-ohjelmassa Guide 7."
+msgstr "Tämä algoritmi on käytössä Guide 7 -planetaario-ohjelmassa."
 
 #: src/core/StelCore.cpp:1694
 msgid ""
@@ -1265,9 +1266,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
-"Tämän algoritmin antoi F. Espenak teoksissaan <em>Fifty Year Canon of Solar "
-"Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar Eclipses: "
-"1986-2035</em> (1989)."
+"Tämän algoritmin esitteli F. Espenak teoksissaan <em>Fifty Year Canon of "
+"Solar Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar "
+"Eclipses: 1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:1697
 #, qt-format
@@ -1275,8 +1276,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
-"Tämän kaavan kehitti K. M. Borkowski (%1) analysoimalla 31 "
-"auringonpimennystä jotka tapahtuivat vuosien 2173 eKr. ja 1715 välillä."
+"Tämän kaavan laski K. M. Borkowski (%1) analysoimalla 31:tä vuosien 2173 "
+"eaa. - 1715 jaa. välillä tapahtunutta auringonpimennystä."
 
 #: src/core/StelCore.cpp:1700
 #, qt-format
@@ -1286,9 +1287,9 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
-"Tämän yhtälön julkaisivat L. D. Schmadel ja G. Zech artikkelissaan "
-"<em>Empirical Transformations from U.T. to E.T. for the Period 1800-"
-"1988</em> (%1)."
+"Tämän 12. asteen polynomiyhtälön julkaisivat L. D. Schmadel ja G. Zech "
+"artikkelissaan <em>Empirical Transformations from U.T. to E.T. for the "
+"Period 1800-1988</em> (%1)."
 
 #: src/core/StelCore.cpp:1703
 msgid ""
@@ -1296,8 +1297,8 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
-"Tämän kaavan ottivat käyttöön M. Chapront-Touze & J. Chapront lyhennettyyn "
-"ELP 2000-85 -kuuteoriaan teoksessa <em>Lunar Tables and Programs from 4000 "
+"Tämän kaavan ottivat käyttöön M. Chapront-Touze ja J. Chapront lyhennettyyn "
+"ELP 2000-85 -kuuteoriaan teoksessaan <em>Lunar Tables and Programs from 4000 "
 "B.C. to A.D. 8000</em> (1991)."
 
 #: src/core/StelCore.cpp:1706
@@ -1328,7 +1329,7 @@ msgid ""
 msgstr ""
 "J. Meeuksen teoksesta <em>Astronomical Algorithms</em> (2. painos, 1998), "
 "laajasti käytetty. Taulukko vuosille 1620-2000, sisältää myös Chaprontin, "
-"Chapront-Touzen & Francoun variantin tämän aikavälin ulkopuolelle."
+"Chapront-Touzen ja Francoun variantin tämän aikavälin ulkopuolelle."
 
 #: src/core/StelCore.cpp:1715
 #, qt-format
@@ -1354,8 +1355,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
-"O. Montenbruckin & T. Pflegerin teos <em>Astronomy on the Personal "
-"Computer</em> (2000) tarjoaa kolmannen asteen polynomeja lähimenneisyydelle."
+"O. Montenbruckin ja T. Pflegerin teoksen <em>Astronomy on the Personal "
+"Computer</em> neljäs painos (2000) tarjoaa kolmannen asteen polynomeja "
+"lähimenneisyydelle."
 
 #: src/core/StelCore.cpp:1724
 msgid ""
@@ -1364,10 +1366,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
-"E. M. Reingold & N. Dershowitz esittävät likimääräisen kaavan teoksissaan "
-"<em>Calendrical Calculations</em> (3. painos 2007) ja <em>Calendrical "
-"Tabulations</em> (2002) perustuen Jean Meeuksen teokseen <em>Astronomical "
-"Algorithms</em> (1991)."
+"E. M. Reingold ja N. Dershowitz esittelevät tämän likimääräisen kaavan "
+"teoksissaan <em>Calendrical Calculations</em> (3. painos, 2007) ja "
+"<em>Calendrical Tabulations</em> (2002). Kaava perustuu Jean Meeuksen "
+"teokseen <em>Astronomical Algorithms</em> (1991)."
 
 #: src/core/StelCore.cpp:1727
 #, qt-format
@@ -1378,7 +1380,7 @@ msgid ""
 msgstr ""
 "Tämän tärkeän ratkaisun julkaisivat L. V. Morrison ja F. R. Stephenson "
 "artikkelissaan <em>Historical values of the Earth's clock error %1T and the "
-"calculation of eclipses</em> (%2) lisäyksin (%3)."
+"calculation of eclipses</em> (%2), seuraavin lisäyksin (%3)."
 
 #: src/core/StelCore.cpp:1730
 #, qt-format
@@ -1388,9 +1390,9 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
-"Victor Reijs johti %1T-kaavan päivän pituudesta (LOD; Stephensonin & "
+"Victor Reijs johti %1T-kaavan päivän pituudesta (LOD; Stephensonin ja "
 "Morrisonin määrittelemänä (%2)) käyttäen Simplex-optimisaatiota cosini- ja "
-"neliöfunktiolla. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
+"neliöfunktion kanssa. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
 "jaksollisuuteen (%2). Lisätietoa %3täällä%4."
 
 #: src/core/StelCore.cpp:1733 src/core/StelCore.cpp:1736
@@ -1402,9 +1404,10 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
-"Tämä F. Espenakin ja J. Meeuksen teoksessaan <em>Five Millennium Canon of "
-"Solar Eclipses: -1900 to +3000</em> (2006) esittämä kaava on käytössä "
-"%1NASAn pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
+"Tämä F. Espenakin ja J. Meeuksen Morrisoniin ja Stephensoniin (2004) sekä "
+"vuosien 1600-2000 luetteloarvoihin perustuva, <em>Five Millennium Canon of "
+"Solar Eclipses: -1900 to +3000</em> -teoksessa (2006) esitelty kaava on "
+"käytössä %1NASAn pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
 "planeettaefemeridiohjelma SOLEXissa."
 
 #: src/core/StelCore.cpp:1733
@@ -1413,7 +1416,7 @@ msgstr "Käytössä oletuksena."
 
 #: src/core/StelCore.cpp:1736
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
-msgstr "Päivitetty versio ilman erillistä lunaarista kiihtyvyyttä"
+msgstr "Päivitetty versio ilman erillistä Kuun kiihtyvyyttä"
 
 #: src/core/StelCore.cpp:1739
 #, qt-format
@@ -1422,7 +1425,7 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
-"Tämä B. Banjevicin Stephensoniin & Morrisoniin (1984) perustuva ratkaisu "
+"Tämä B. Banjevicin Stephensoniin ja Morrisoniin (1984) perustuva ratkaisu "
 "julkaistiin artikkelissa <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
@@ -1433,9 +1436,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
-"Tämä S. islamin, M. Sadiqin ja M. S. Qureshin Meeusille & Simonsille "
+"Tämä S. islamin, M. Sadiqin ja M. S. Qureshin Meeusiin ja Simonsiin (2000) "
 "perustuva ratkaisu julkaistiin artikkelissa <em>Error Minimization of "
-"Polynomial Approximation of DeltaT</em> (%1) ja Sana Islam tarkisti sen 2013."
+"Polynomial Approximation of DeltaT</em> (%1), ja Sana Islam tarkisti sen "
+"2013."
 
 #: src/core/StelCore.cpp:1745
 #, qt-format
@@ -1444,9 +1448,9 @@ msgid ""
 "Mariam Sultana and Faheem Zaidi was published in <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
-"Tämän polynomiaalisen likiarvoistuksen tarkkuus on 0,6 sekuntia, ja sen "
-"julkaisivat M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: "
-"Polynomial Approximation of Time Period 1620-2013</em> (%1)."
+"Tämän polynomiaalisen likiarvon tarkkuus on 0,6 sekuntia, ja sen julkaisivat "
+"M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: Polynomial "
+"Approximation of Time Period 1620-2013</em> (%1)."
 
 #: src/core/StelCore.cpp:1748
 #, qt-format
@@ -1455,7 +1459,7 @@ msgid ""
 "by the user."
 msgstr ""
 "Tämä on toisen asteen kaava %1T:n laskemiseksi käyttäjän määrittelemillä "
-"kertoimilla."
+"arvoilla."
 
 #: src/core/StelCore.cpp:1751 src/core/SimbadSearcher.cpp:133
 msgid "Error"
@@ -1463,27 +1467,25 @@ msgstr "Virhe"
 
 #: src/core/StelCore.cpp:1801
 msgid "with meaningless values outside this range"
-msgstr "järjettömillä arvoilla tämän alueen ulkopuolella"
+msgstr "mielivaltaiset arvot alueen ulkopuolella"
 
 #: src/core/StelCore.cpp:1827
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
-"keskimääräisellä alle yhden sekunnin virheellä, max. 1.9s, ja järjettömillä "
-"arvoilla tämän alueen ulkopuolella"
+"keskimääräinen virhe alle yksi sekunti, max. 1.9s, mielivaltaiset arvot "
+"alueen ulkopuolella"
 
 #: src/core/StelCore.cpp:1849 src/core/StelCore.cpp:1854
 #: src/core/StelCore.cpp:1882 src/core/StelCore.cpp:1887
 #: src/core/StelCore.cpp:1892
 msgid "with zero values outside this range"
-msgstr "nolla-arvolla tämän alueen ulkopuolella"
+msgstr "nolla-arvo alueen ulkopuolella"
 
 #: src/core/StelCore.cpp:1859
 msgid "with a typical 1-second accuracy and zero values outside this range"
-msgstr ""
-"tyypillisellä 1 sekunnin tarkkuudella ja nolla-arvolla tämän alueen "
-"ulkopuolella"
+msgstr "tyypillinen yhden sekunnin tarkkuus, nolla-arvo alueen ulkopuolella"
 
 #: src/core/StelCore.cpp:1902
 #, qt-format
@@ -1562,7 +1564,7 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"Hammerin projektio oikeapintainen karttaprojektio, jonka esitteli Ernst "
+"Hammerin projektio on oikeapintainen karttaprojektio, jonka esitteli Ernst "
 "Hammer vuonna 1892, ja joka perustuu suoraan Aitoffin projektioon."
 
 #: src/core/StelProjectorClasses.cpp:309
@@ -1614,7 +1616,7 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
-"SInusoidaalinen projektio on <i>oikeapintainen pseudolieriöprojektio</i>, "
+"SInusoidaalinen projektio on <i>oikeapintainen näennäislieriöprojektio</i>, "
 "jota kutsutaan myös Sanson-Flamsteedin tai Mercatorin oikeapintaiseksi "
 "projektioksi."
 
@@ -1680,7 +1682,7 @@ msgstr "Sekalaista"
 
 #: src/core/StelMovementMgr.cpp:131
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "Vaihda ekvatoriaali- tai atsimutaalijalustan välillä"
+msgstr "Vaihda ekvatoriaali- ja atsimutaalijalustan välillä"
 
 #: src/core/StelMovementMgr.cpp:132
 msgid "Center on selected object"
@@ -1852,7 +1854,7 @@ msgstr "Algoritmi"
 
 #: src/gui/ConfigurationDialog.cpp:1286
 msgid "Without correction"
-msgstr "Ilman korjausta"
+msgstr "Ei korjausta"
 
 #: src/gui/ConfigurationDialog.cpp:1287
 msgid "Schoch (1931)"
@@ -1989,11 +1991,11 @@ msgstr "Pyöritä näkymää taivaan ympäri"
 
 #: src/gui/HelpDialog.cpp:146
 msgid "Arrow keys & left mouse drag"
-msgstr "Nuolinäppäimet & veto hiiren vasemmalla näppäimellä"
+msgstr "Nuolinäppäimet & raahaus hiiren vasemmalla näppäimellä"
 
 #: src/gui/HelpDialog.cpp:148
 msgid "Zoom in/out"
-msgstr "Suurenna/loitonna"
+msgstr "Lähennä/loitonna"
 
 #: src/gui/HelpDialog.cpp:150
 msgid "Page Up/Down"
@@ -2064,7 +2066,7 @@ msgid ""
 "request here and we'll try to help."
 msgstr ""
 "{Tukipyyntöjärjestelmä} - jos tarvitset Stellariumin käyttöapua, lähetä "
-"tukipyyntösi tänne, niin yritämme auttaa."
+"tukipyyntösi tänne niin yritämme auttaa."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:231
@@ -2073,9 +2075,9 @@ msgid ""
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
-"{Järjestelmä virheiden raportointiin ja ominaisuuksien tilaamiseen} - jos "
-"jokin ei toimi tai jotain puuttuu, eikä ole listattuna seurantaan, voit "
-"avata virheraportin täällä."
+"{Virheiden raportointi ja uusien ominaisuuksien ehdottaminen} - jos jokin ei "
+"toimi tai jotain puuttuu, eikä ole listattuna seurantaan, voit täyttää "
+"virheraportin täällä."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:236
@@ -2125,8 +2127,8 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
-"Monet henkilöt ovat antaneet merkittävän panoksen, mutteivat ole enää "
-"aktiivisia. Heidän työnsä on ollut projektille todella tärkeää:"
+"Monet henkilöt, jotka eivät ole enää aktiivisia ovat antaneen merkittävä "
+"panoksen kehitystyöhön. Heidän työllään on ollut suuri merkitys projektille:"
 
 #: src/gui/HelpDialog.cpp:308
 #, qt-format
@@ -2339,7 +2341,7 @@ msgstr "Normaali aktiivisuus"
 
 #: src/gui/ViewDialog.cpp:825
 msgid "Standard Orionids rate"
-msgstr "Normaali orionidien aktiivisuus"
+msgstr "Orionidien normaaliaktiivisuus"
 
 #: src/gui/ViewDialog.cpp:828
 msgid "Standard Perseids rate"
@@ -2347,11 +2349,11 @@ msgstr "Perseidien normaaliaktiivisuus"
 
 #: src/gui/ViewDialog.cpp:831
 msgid "Standard Geminids rate"
-msgstr "Normaali Geminidien aktiivisuus"
+msgstr "Geminidien normaaliaktiivisuus"
 
 #: src/gui/ViewDialog.cpp:834
 msgid "Exceptional Perseid rate"
-msgstr "Poikkeuksellinen Perseidien aktiivisuus"
+msgstr "Perseidien poikkeuksellinen aktiivisuus"
 
 #: src/gui/ViewDialog.cpp:837
 msgid "Meteor storm rate"
@@ -2359,19 +2361,19 @@ msgstr "Meteoreja tunnissa"
 
 #: src/gui/ViewDialog.cpp:840
 msgid "Exceptional Draconid rate"
-msgstr "Poikkeuksellinen Draconidien aktiivisuus"
+msgstr "Draconidien poikkeuksellinen aktiivisuus"
 
 #: src/gui/ViewDialog.cpp:843
 msgid "Exceptional Leonid rate"
-msgstr "Poikkeuksellinen leonidien aktiivisuus"
+msgstr "Leonidien poikkeuksellinen aktiivisuus"
 
 #: src/gui/ViewDialog.cpp:846
 msgid "Very high rate (1966 Leonids)"
-msgstr "Erittäin korkea aktiivisuus (1966 Leonidit)"
+msgstr "Erittäin korkea aktiivisuus (Leonidit 1966)"
 
 #: src/gui/ViewDialog.cpp:849
 msgid "Highest rate ever (1833 Leonids)"
-msgstr "Suurin tunnettu aktiivisuus (1833 Leonidit)"
+msgstr "Suurin tunnettu aktiivisuus (Leonidit 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -2397,7 +2399,7 @@ msgstr "Onnistui"
 #: src/gui/AddRemoveLandscapesDialog.cpp:220
 #: src/gui/AddRemoveLandscapesDialog.cpp:228
 msgid "No landscape was installed."
-msgstr "Maisemia ei ole asennettu."
+msgstr "Maisemaa ei asennettu."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:142
 #: src/gui/AddRemoveLandscapesDialog.cpp:166
@@ -2416,13 +2418,13 @@ msgstr "Maisema \"%1\" on poistettu onnistuneesti."
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
-msgstr "Valittua maisemaa ei voida (täydellisesti) poistaa."
+msgstr "Valittua maisemaa ei voitu (täydellisesti) poistaa."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
 #, qt-format
 msgid "Size on disk: %1 MiB"
-msgstr "Koko levyllä: %1 MiB"
+msgstr "Koko levyllä: %1 Mt"
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long.
 #: src/gui/AddRemoveLandscapesDialog.cpp:214
@@ -2498,12 +2500,12 @@ msgstr "Galaktinen"
 #: src/gui/SearchDialog.cpp:237
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr "Ekliptinen"
+msgstr "Ekliptikaalinen"
 
 #: src/gui/SearchDialog.cpp:238
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr "Ekliptinen (J2000.0)"
+msgstr "Ekliptikaalinen (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:258
 msgid "Right ascension"
@@ -2571,7 +2573,7 @@ msgstr "Käyttäjän määrittelemä %1T-yhtälö"
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr "Tyypillinen yhtälö %1T:n laskemiseksi näyttää tältä."
+msgstr "Tyypillinen yhtälö %1T:n laskemiseksi näyttää tältä:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
@@ -4976,7 +4978,7 @@ msgstr "Kuun koko"
 
 #: src/ui_viewDialog.h:1615
 msgid "Scale factor"
-msgstr "Skaalauskerroin"
+msgstr "Mittakaavakerroin"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
@@ -6362,7 +6364,7 @@ msgstr "&Okulaarien asetukset"
 
 #: plugins/Oculars/src/Oculars.cpp:999
 msgid "Toggle &CCD"
-msgstr "Näytä &CCD"
+msgstr "Näytä &ilmaisin"
 
 #: plugins/Oculars/src/Oculars.cpp:1006
 msgid "Toggle &Telrad"
@@ -6370,19 +6372,19 @@ msgstr "Näytä &Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1014
 msgid "&Previous CCD"
-msgstr "&Edellinen CCD"
+msgstr "&Edellinen ilmaisin"
 
 #: plugins/Oculars/src/Oculars.cpp:1015
 msgid "&Next CCD"
-msgstr "&Seuraava CCD"
+msgstr "&Seuraava ilmaisin"
 
 #: plugins/Oculars/src/Oculars.cpp:1016
 msgid "&Select CCD"
-msgstr "&Valitse CCD"
+msgstr "&Valitse ilmaisin"
 
 #: plugins/Oculars/src/Oculars.cpp:1033
 msgid "&Rotate CCD"
-msgstr "&Kierrä CCD:tä"
+msgstr "&Kierrä ilmaisinta"
 
 #: plugins/Oculars/src/Oculars.cpp:1055
 msgid "&Reset rotation"
@@ -6561,11 +6563,11 @@ msgstr "Seuraava linssi"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
 msgid "Previous CCD frame"
-msgstr "Edellinen CCD-kenttä"
+msgstr "Edellinen kuvailmaisin"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
 msgid "Next CCD frame"
-msgstr "Seuraava CCD-kenttä"
+msgstr "Seuraava kuvailmaisin"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
 msgid "Previous telescope"
@@ -6605,7 +6607,7 @@ msgstr "Kierrä ilmaisimen kenttää 15 astetta myötäpäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 msgid "Effective focal length of the ocular"
-msgstr "Okulaarin efektiivinen polttoväli"
+msgstr "Okulaarin tehokas polttoväli"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
 msgid "Apparent field of view of the ocular"
@@ -6614,7 +6616,7 @@ msgstr "Okulaarin näennäinen näkökenttä"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:587
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr "Kerroin: %1"
+msgstr "Suurennuskerroin: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
 msgid "Lens: None"
@@ -6622,7 +6624,7 @@ msgstr "Linssi: ei"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Multiplicity: N/A"
-msgstr "Kerroin: N/A"
+msgstr "Suurennuskerroin: ei mitään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 msgid "Focal length of eyepiece"
@@ -6670,7 +6672,7 @@ msgstr "Näenn. näkökenttä"
 #: plugins/Oculars/src/ui_ocularDialog.h:1097
 #: plugins/Oculars/src/ui_ocularDialog.h:1124
 msgid "Focal length:"
-msgstr "Polttoväli"
+msgstr "Polttoväli:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
@@ -6693,7 +6695,7 @@ msgid ""
 msgstr ""
 "Tämän laajennuksen tarkoitus on mallintaa näkymää okulaarin läpi. Tässä "
 "asetusvalintaikkunassa voit lisätä, muokata tai poistaa okulaareja ja "
-"kaukoputkia, kuten myös CCD-ilmaisimia. Ensimmäisellä käynnistyskerralla "
+"kaukoputkia, kuten myös kuvailmaisimia. Ensimmäisellä käynnistyskerralla "
 "näytetään joitakin esimerkkejä, joilla pääset alkuun."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:532
@@ -6768,7 +6770,7 @@ msgstr "Käytössä vain, jos kohde on valittuna"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1073
 msgid "Scale image circle"
-msgstr "Muuta ympyrän kokoa"
+msgstr "Muuta kuvaympyrän kokoa"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
@@ -6814,11 +6816,11 @@ msgstr "Kuvailmaisinnäkymä"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr "Käytä asteita ja minuutteja CCD:n näkökentälle"
+msgstr "Käytä asteita ja minuutteja ilmaisimen näkökentälle"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr "Käytä CCD:n kääntöä"
+msgstr "Käytä ilmaisimen kääntöä"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
@@ -6869,7 +6871,7 @@ msgstr "Linssit"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Multiplier:"
-msgstr "Kerroin:"
+msgstr "Suurennuskerroin:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1107
 msgid ""
@@ -6917,7 +6919,7 @@ msgstr "Kaukoputket"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1125
 msgid "Diameter:"
-msgstr "Halkaisija:"
+msgstr "Objekt. halk.:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1126
 msgid "Horizontal flip"
@@ -7090,7 +7092,7 @@ msgstr "Korkeus (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "Sijainti (Lev./Pit.): %1%2%3%4"
+msgstr "Sijainti (leveys/pituus): %1%2%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:311
@@ -11984,7 +11986,7 @@ msgstr "Valitun kohteen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr "Auringn nykyinen deklinaatio"
+msgstr "Auringon nykyinen deklinaatio"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"

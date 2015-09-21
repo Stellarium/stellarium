@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-08-07 19:44+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2015-09-20 21:17+0000\n"
+"Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:24+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-21 05:12+0000\n"
+"X-Generator: Launchpad (build 17746)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -64,15 +64,15 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Ekliptisk (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Ekliptisk for dato"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Ekvator (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:612
 msgid "Equator"
@@ -80,7 +80,7 @@ msgstr "Ekvator"
 
 #: src/core/modules/GridLinesMgr.cpp:617
 msgid "Precession Circle"
-msgstr ""
+msgstr "Presesjonssirkel"
 
 #: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1769
 msgid "Horizon"
@@ -112,7 +112,7 @@ msgstr "Ekliptikken"
 
 #: src/core/modules/GridLinesMgr.cpp:880
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Ekliptikken (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -121,7 +121,7 @@ msgstr "Ekvatorlinje"
 
 #: src/core/modules/GridLinesMgr.cpp:882
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Ekvatorlinje (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -144,7 +144,7 @@ msgstr "Ekliptisk nett (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Ekliptisk nett"
 
 #: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1741
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -162,7 +162,7 @@ msgstr "Ekl. lengde til opposisjon/konjunksjon"
 
 #: src/core/modules/GridLinesMgr.cpp:891
 msgid "Precession Circles"
-msgstr ""
+msgstr "Presesjonssirkler"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1587
 msgid "Atmosphere"
@@ -277,7 +277,7 @@ msgstr "Størrelse: %1"
 #: src/core/modules/Nebula.cpp:222
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Størrelse: %1 x %2"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
@@ -564,19 +564,19 @@ msgstr "udokumentert lysstyrke"
 
 #: src/core/modules/Nebula.cpp:984
 msgid "galaxy"
-msgstr ""
+msgstr "galakse"
 
 #: src/core/modules/Nebula.cpp:987
 msgid "active galaxy"
-msgstr ""
+msgstr "aktiv galakse"
 
 #: src/core/modules/Nebula.cpp:990
 msgid "radio galaxy"
-msgstr ""
+msgstr "radiogalakse"
 
 #: src/core/modules/Nebula.cpp:993
 msgid "interacting galaxy"
-msgstr ""
+msgstr "interagerende galakse"
 
 #: src/core/modules/Nebula.cpp:996 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
@@ -584,31 +584,31 @@ msgstr "Kvasar"
 
 #: src/core/modules/Nebula.cpp:999
 msgid "star cluster"
-msgstr ""
+msgstr "Stjernehop"
 
 #: src/core/modules/Nebula.cpp:1002
 msgid "open star cluster"
-msgstr ""
+msgstr "Åpen stjernehop"
 
 #: src/core/modules/Nebula.cpp:1005
 msgid "globular star cluster"
-msgstr ""
+msgstr "Kulestjernehop"
 
 #: src/core/modules/Nebula.cpp:1008
 msgid "nebula"
-msgstr ""
+msgstr "Stjernetåke"
 
 #: src/core/modules/Nebula.cpp:1011
 msgid "planetary nebula"
-msgstr ""
+msgstr "Planetarisk tåke"
 
 #: src/core/modules/Nebula.cpp:1014
 msgid "dark nebula"
-msgstr ""
+msgstr "Mørk tåke"
 
 #: src/core/modules/Nebula.cpp:1017
 msgid "cluster associated with nebulosity"
-msgstr ""
+msgstr "Stjernehop assosiert med tåke"
 
 #: src/core/modules/Nebula.cpp:1020
 msgid "bipolar nebula"
@@ -628,7 +628,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1032
 msgid "supernova remnant"
-msgstr ""
+msgstr "Supernova-levning"
 
 #: src/core/modules/Nebula.cpp:1035
 msgid "stellar association"
@@ -1578,7 +1578,7 @@ msgstr "Ekliptisk lengde/bredde"
 
 #: src/core/StelObject.cpp:231 src/core/StelObject.cpp:233
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Ekliptisk aksehelning"
 
 #: src/core/StelObject.cpp:242 src/core/StelObject.cpp:244
 #, qt-format
@@ -1588,12 +1588,12 @@ msgstr "Galaktisk lengde/bredde: %1/%2"
 #: src/core/StelObject.cpp:251
 #, qt-format
 msgid "Mean Sidereal Time: %1"
-msgstr ""
+msgstr "Siderisk gjennomsnittstid: %1"
 
 #: src/core/StelObject.cpp:253
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
-msgstr ""
+msgstr "Tilsynelatende siderisk tid: %1"
 
 #: src/core/StelSkyLayerMgr.cpp:88
 msgid "Deep-sky objects background images"
@@ -2144,7 +2144,7 @@ msgstr "Snarveivindu"
 
 #: src/gui/StelGui.cpp:205
 msgid "AstroCalc window"
-msgstr ""
+msgstr "AstroCalc"
 
 #: src/gui/StelGui.cpp:206
 msgid "Copy selected object information to clipboard"
@@ -2525,7 +2525,7 @@ msgstr ""
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:133 src/gui/AstroCalcDialog.cpp:242
 msgid "Mag."
-msgstr ""
+msgstr "Mag."
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1094
@@ -2535,31 +2535,31 @@ msgstr "Type"
 
 #: src/gui/AstroCalcDialog.cpp:236
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #: src/gui/AstroCalcDialog.cpp:364
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minutter"
 
 #: src/gui/AstroCalcDialog.cpp:365
 msgid "1 hour"
-msgstr ""
+msgstr "1 time"
 
 #: src/gui/AstroCalcDialog.cpp:366
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 #: src/gui/AstroCalcDialog.cpp:367
 msgid "10 days"
-msgstr ""
+msgstr "10 dager"
 
 #: src/gui/AstroCalcDialog.cpp:368
 msgid "30 days"
-msgstr ""
+msgstr "30 dager"
 
 #: src/gui/AstroCalcDialog.cpp:416
 msgid "Solar system"
-msgstr ""
+msgstr "Solsystem"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:418 src/translations.h:66
@@ -2600,27 +2600,27 @@ msgstr "Objekter fra Oorts sky"
 
 #: src/gui/AstroCalcDialog.cpp:437
 msgid "Phenomenon"
-msgstr ""
+msgstr "Fenomen"
 
 #: src/gui/AstroCalcDialog.cpp:439
 msgid "Object 1"
-msgstr ""
+msgstr "Objekt 1"
 
 #: src/gui/AstroCalcDialog.cpp:440
 msgid "Object 2"
-msgstr ""
+msgstr "Objekt 2"
 
 #: src/gui/AstroCalcDialog.cpp:441
 msgid "Separation"
-msgstr ""
+msgstr "Separasjon"
 
 #: src/gui/AstroCalcDialog.cpp:597
 msgid "Conjunction"
-msgstr ""
+msgstr "Konjunksjon"
 
 #: src/gui/AstroCalcDialog.cpp:601
 msgid "Opposition"
-msgstr ""
+msgstr "Opposisjon"
 
 #: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
@@ -2802,17 +2802,17 @@ msgstr "Refleksjonståker"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101 src/ui_viewDialog.h:1689
 msgid "Active galaxies"
-msgstr ""
+msgstr "Aktive galakser"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "Radio galaxies"
-msgstr ""
+msgstr "Radiogalakser"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105 src/ui_viewDialog.h:1683
 msgid "Interacting galaxies"
-msgstr ""
+msgstr "Interagerende galakser"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
@@ -2822,7 +2822,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109 src/ui_viewDialog.h:1686
 msgid "Star clusters"
-msgstr ""
+msgstr "Stjernehoper"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
@@ -2847,7 +2847,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119 src/ui_viewDialog.h:1682
 msgid "Supernova remnants"
-msgstr ""
+msgstr "Supernova-levninger"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
@@ -4467,11 +4467,11 @@ msgstr "Dato og tid i gregoriansk kalender"
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
-msgstr ""
+msgstr "Juliansk dag"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
-msgstr ""
+msgstr "Modifisert Juliansk dag"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -4786,7 +4786,7 @@ msgstr "Avgrens magnituden til stjerner"
 
 #: src/ui_viewDialog.h:1578 src/ui_viewDialog.h:1620 src/ui_viewDialog.h:1706
 msgid "Limit magnitude"
-msgstr ""
+msgstr "Avgrensingsmagnitude"
 
 #: src/ui_viewDialog.h:1580
 msgid "Dim faint stars when a very bright object is visible"
@@ -4850,20 +4850,24 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
+"Deaktiver dette alternativet hvis du ønsker å se bane for valgte planet og "
+"dens måner."
 
 #: src/ui_viewDialog.h:1604
 msgid "Show orbit for selected planet"
-msgstr ""
+msgstr "Vis bane for valgte planet"
 
 #: src/ui_viewDialog.h:1606
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Deaktiver dette alternativet hvis du ønsker å se sporene for alle "
+"solsystemlegemer."
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Vis spor bare for valgte planet"
 
 #: src/ui_viewDialog.h:1610
 msgid ""
@@ -4885,7 +4889,7 @@ msgstr "Skaleringsfaktor"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Avgrens magnituden til solsystemobjekter"
 
 #: src/ui_viewDialog.h:1622
 msgid "Automatic change of landscape when planet is changed"
@@ -4914,7 +4918,7 @@ msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Display objects from catalogs"
-msgstr ""
+msgstr "Vis objekter fra følgende kataloger"
 
 #: src/ui_viewDialog.h:1637
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
@@ -4973,11 +4977,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1681
 msgid "Filter by type"
-msgstr ""
+msgstr "Filtrer etter type"
 
 #: src/ui_viewDialog.h:1684
 msgid "Hydrogen regions"
-msgstr ""
+msgstr "Hydrogenregioner"
 
 #: src/ui_viewDialog.h:1685
 msgid "Other"
@@ -4985,19 +4989,19 @@ msgstr "Annet"
 
 #: src/ui_viewDialog.h:1687
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Planetariske tåker"
 
 #: src/ui_viewDialog.h:1688
 msgid "Galaxies"
-msgstr ""
+msgstr "Galakser"
 
 #: src/ui_viewDialog.h:1690
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Mørke stjernetåker"
 
 #: src/ui_viewDialog.h:1691
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Lyse stjernetåker"
 
 #: src/ui_viewDialog.h:1694
 msgid "Hints"
@@ -5011,7 +5015,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1698
 msgid "Use surface brightness"
-msgstr ""
+msgstr "Bruk overflatelysstyrke"
 
 #: src/ui_viewDialog.h:1700
 msgid "Use hints proportional to angular size of deep-sky objects"
@@ -5019,12 +5023,14 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1702
 msgid "Use proportional hints"
-msgstr ""
+msgstr "Bruk proporsjonale hint"
 
 #: src/ui_viewDialog.h:1704
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
+"Avgrensingsmagnitude (for observatører med kikkert eller uten hjelpemiddel) "
+"for deep-sky-objekter."
 
 #: src/ui_viewDialog.h:1707
 msgid "Constellations"
@@ -5066,11 +5072,11 @@ msgstr "Himmelhvelving"
 
 #: src/ui_viewDialog.h:1719
 msgid "Equatorial coordinates of J2000.0."
-msgstr ""
+msgstr "Ekvatorialkoordinater (J2000.0)."
 
 #: src/ui_viewDialog.h:1721
 msgid "Equatorial grid (J2000)"
-msgstr ""
+msgstr "Ekvatorialnett (J2000)"
 
 #: src/ui_viewDialog.h:1723
 msgid "Equatorial coordinates of current date and planet."
@@ -5078,15 +5084,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1725
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Ekvatorialnett for dato"
 
 #: src/ui_viewDialog.h:1727
 msgid "Ecliptical coordinates for J2000.0."
-msgstr ""
+msgstr "Ekliptiske koordinater for J2000.0."
 
 #: src/ui_viewDialog.h:1729
 msgid "Ecliptic grid (J2000)"
-msgstr ""
+msgstr "Ekliptisk nett (J2000)"
 
 #: src/ui_viewDialog.h:1731
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
@@ -5094,7 +5100,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1733
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Ekliptisk nett (for dato)"
 
 #: src/ui_viewDialog.h:1735
 msgid "Altitudes and azimuth (counted from North towards East)."
@@ -5116,7 +5122,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1749
 msgid "Precession circles"
-msgstr ""
+msgstr "Presesjonssirkler"
 
 #: src/ui_viewDialog.h:1751
 msgid "Show celestial equator of J2000.0."
@@ -5124,7 +5130,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1753
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "Ekvator (J2000)"
 
 #: src/ui_viewDialog.h:1755
 msgid "Show celestial equator of current planet and date."
@@ -5132,7 +5138,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1757
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Ekvator (for dato)"
 
 #: src/ui_viewDialog.h:1759
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
@@ -5140,19 +5146,19 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1761
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "Ekliptisk (J2000)"
 
 #: src/ui_viewDialog.h:1763
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Vis ekliptikken for gjeldende dato."
 
 #: src/ui_viewDialog.h:1765
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Ekliptisk (for dato)"
 
 #: src/ui_viewDialog.h:1767
 msgid "Show horizon line."
-msgstr ""
+msgstr "Vis horisontlinje."
 
 #: src/ui_viewDialog.h:1771
 msgid "Show Galactic equator line."
@@ -5176,7 +5182,7 @@ msgstr "Projeksjon"
 
 #: src/ui_viewDialog.h:1783
 msgid "Vertical viewport offset"
-msgstr ""
+msgstr "Vertikal visningsfeltoffset"
 
 #: src/ui_viewDialog.h:1785
 msgid "Use this landscape as default"
@@ -5256,11 +5262,11 @@ msgstr "Himmel"
 #: src/ui_viewDialog.h:1819
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr ""
+msgstr "DSO"
 
 #: src/ui_viewDialog.h:1821
 msgid "Deep-Sky Objects"
-msgstr ""
+msgstr "Deep-sky-objekter"
 
 #: src/ui_viewDialog.h:1824
 msgid "Markings"
@@ -5637,7 +5643,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1191
 msgid "Include nutation"
-msgstr ""
+msgstr "Inkluder nutasjon"
 
 #: src/ui_configurationDialog.h:1193
 msgid ""
@@ -5647,7 +5653,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1195
 msgid "Topocentric coordinates"
-msgstr ""
+msgstr "Toposentriske koordinater"
 
 #: src/ui_configurationDialog.h:1197
 msgid ""
@@ -5657,7 +5663,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1199
 msgid "Azimuth from South"
-msgstr ""
+msgstr "Asimut fra sør"
 
 #: src/ui_configurationDialog.h:1200
 msgid "Screenshots"
@@ -5878,19 +5884,19 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:357
 msgid "AstroCalc"
-msgstr ""
+msgstr "AstroCalc"
 
 #: src/ui_astroCalcDialog.h:359
 msgid "Planetary positions every 5 minutes."
-msgstr ""
+msgstr "Planetposisjoner hvert 5. minutt."
 
 #: src/ui_astroCalcDialog.h:360
 msgid "Planetary positions"
-msgstr ""
+msgstr "Planetposisjoner"
 
 #: src/ui_astroCalcDialog.h:363
 msgid "Time step:"
-msgstr ""
+msgstr "Tidstrinn:"
 
 #: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
@@ -5908,19 +5914,19 @@ msgstr "Til:"
 
 #: src/ui_astroCalcDialog.h:368
 msgid "Calculate ephemeris"
-msgstr ""
+msgstr "Beregn efemerider"
 
 #: src/ui_astroCalcDialog.h:369
 msgid "Ephemeris"
-msgstr ""
+msgstr "Efemerider"
 
 #: src/ui_astroCalcDialog.h:370
 msgid "Between objects:"
-msgstr ""
+msgstr "Mellom objekter:"
 
 #: src/ui_astroCalcDialog.h:371
 msgid "and"
-msgstr ""
+msgstr "og"
 
 #: src/ui_astroCalcDialog.h:373 src/ui_astroCalcDialog.h:375
 msgid "yyyy.MM.dd"
@@ -5928,19 +5934,19 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:376
 msgid "Maximum allowed separation:"
-msgstr ""
+msgstr "Maksimun tillatt separasjon:"
 
 #: src/ui_astroCalcDialog.h:378
 msgid "Value in decimal degrees"
-msgstr ""
+msgstr "Verdi i desimalgrader"
 
 #: src/ui_astroCalcDialog.h:380
 msgid "Calculate phenomena"
-msgstr ""
+msgstr "Beregn fenomener"
 
 #: src/ui_astroCalcDialog.h:381
 msgid "Phenomena"
-msgstr ""
+msgstr "Fenomener"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -7009,7 +7015,7 @@ msgstr "Satellittprogramtillegg for Stellarium"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Iridium flares"
-msgstr ""
+msgstr "Iridiumglimt"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
@@ -7275,15 +7281,15 @@ msgstr "Velg TLE-oppdateringsfil"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
 msgid "Time"
-msgstr ""
+msgstr "Tid"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:941
 msgid "Brightness"
-msgstr ""
+msgstr "Lysstyrke"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Satellite"
-msgstr ""
+msgstr "Satellitt"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -7491,7 +7497,7 @@ msgstr "Kilder"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "Forutsi Iridiumglimt"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -7701,11 +7707,11 @@ msgstr "Velg en mappe"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Rektasensjon (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "Deklinasjon (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:259
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:400
@@ -7965,7 +7971,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:238
 msgid "Remove selected"
-msgstr ""
+msgstr "Fjern valgte"
 
 #: plugins/TimeZoneConfiguration/src/TimeZoneConfiguration.cpp:41
 msgid "Time Zone"
@@ -10186,7 +10192,7 @@ msgstr "Skriftstørrelse:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:98
 msgid "The current catalog of Meteor Showers is invalid!"
-msgstr ""
+msgstr "Den gjeldende Meteorsvermkatalogen er ugyldig!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:569
@@ -10195,24 +10201,24 @@ msgstr "Meteorsvermer"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "Meteorsvermer av/på"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "Radiantpåskrifter av/på"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Vis innstillingsdialog"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:154
 msgid "Show search dialog"
-msgstr ""
+msgstr "Vis søkevindu"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:260
 msgid "Using the default Meteor Showers catalog."
-msgstr ""
+msgstr "Bruker standard Meteorsvermkatalog."
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:573
 msgid ""
@@ -10230,11 +10236,24 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Dette programtillegget gjør det mulig å simulere periodiske meteorsvermer "
+"og å vise en markør for hver aktive og inaktive radiant.</p><p>Med et "
+"enkeltklikk på radiantens markør, kan du se alle detaljene om dens posisjon "
+"og aktivitet. De fleste data som brukes i dette programtillegget kommer fra "
+"den offisielle katalogen til <a href=\"http://imo.net\">International Meteor "
+"Organization</a>.</p><p>Den har tre typer markører:<ul><li><b>Bekreftet:</b> "
+"Radianten er aktiv og dens data er bekreftet. Derfor er dette en historisk "
+"(virkelig skjedd i fortiden) eller forutsett "
+"meteorsverm.</li><li><b>Generell:</b> Radianten er aktiv, men dens data er "
+"ikke bekreftet. Det betyr at dette faktisk kan skje, men at vi ikke har "
+"reelle data om dens aktivitet for det gjeldende "
+"himmelåret.</li><li><b>Inaktiv:</b> Radianten er inaktiv for den gjeldende "
+"himmeldatoen.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr ""
+msgstr "Bekreftet"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:132
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
@@ -10247,11 +10266,11 @@ msgstr "Generelle data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:512
 msgid "confirmed data"
-msgstr ""
+msgstr "bekreftede data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:516
 msgid "inactive"
-msgstr ""
+msgstr "inaktiv"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:534
 msgid "meteor shower"
@@ -10291,7 +10310,7 @@ msgstr "Maksimum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgid "Solar longitude"
-msgstr ""
+msgstr "Sol-lengdegrad"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "variable"
@@ -10709,19 +10728,19 @@ msgstr "Småplanet (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
-msgstr ""
+msgstr "Oppdaterer..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
 msgid "Successfully updated!"
-msgstr ""
+msgstr "Vellykket oppdatert!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:139
 msgid "Failed!"
-msgstr ""
+msgstr "Feilet!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:143
 msgid "Outdated!"
-msgstr ""
+msgstr "Utdatert!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
@@ -10732,6 +10751,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"Dette programtillegget gjør det mulig å simulere periodiske meteorsvermer og "
+"å vise en markør for hver aktive og inaktive radiant."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
 msgid ""
@@ -10740,6 +10761,10 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"Med et enkeltklikk på radiantens markør, kan du se alle detaljene om dens "
+"posisjon og aktivitet. De fleste data som brukes i dette programtillegget "
+"kommer fra den offisielle katalogen til <a "
+"href=\"http://imo.net\">International Meteor Organization</a>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:228
 msgid ""
@@ -10751,6 +10776,13 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>Den har tre typer markører:<ul><li><b>Bekreftet:</b> Radianten er aktiv "
+"og dens data er bekreftet. Derfor er dette en historisk (virkelig skjedd i "
+"fortiden) eller forutsett meteorsverm.</li><li><b>Generell:</b> Radianten er "
+"aktiv, men dens data er ikke bekreftet. Det betyr at dette faktisk kan skje, "
+"men at vi ikke har skikkelige data om dens aktivitet for det gjeldende "
+"året.</li><li><b>Inaktiv:</b> Radianten er inaktiv for den gjeldende "
+"himmeldatoen.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
@@ -10861,6 +10893,8 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
+"Dette programtillegget ble opprinnelig opprettet som et prosjekt for ESA "
+"Summer of Code in Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Info"
@@ -10888,6 +10922,8 @@ msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Støtte gis via Launchpad-nettstedet. Pass på å sette \"%1\" i emnefeltet når "
+"du poster."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:105
 msgid "Start date greater than end date!"
@@ -10916,23 +10952,23 @@ msgstr "Meteorsverminnstilling"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "Meteorsvermer: Innstillinger"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "Generelle innstillinger"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "Aktiver programtillegget ved oppstart"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "Vis en knapp for å aktivere/deaktivere programtillegget"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "Vis en knapp for å åpne søkevindu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
@@ -10968,31 +11004,31 @@ msgstr "Inaktiv"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "Aktiv radiant - bekreftede data"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "Aktiver automatiske oppdateringer"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "Neste oppdatering:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "Siste forsøk på å oppdatere"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "Oppdater"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "Meteorsvermer: Søk"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
