@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-13 19:02+0600\n"
+"POT-Creation-Date: 2015-09-21 20:34+0600\n"
 "PO-Revision-Date: 2012-12-20 17:38+0000\n"
 "Last-Translator: Noble P Abraham <Unknown>\n"
 "Language-Team: Malayalam <ml@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:23+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:22+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -4351,7 +4351,7 @@ msgstr ""
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:570 src/ui_configurationDialog.h:1216
+#: src/translations.h:570 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "വേണ്ട"
@@ -4675,7 +4675,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1784
 #: src/ui_viewDialog.h:1803 src/ui_viewDialog.h:1811
-#: src/ui_configurationDialog.h:1217 src/ui_configurationDialog.h:1228
+#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1231
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "ഐച്ഛികങ്ങള്‍"
@@ -5266,7 +5266,7 @@ msgstr "സ്റ്റെല്ലേറിയം ആരംഭികുമ്�
 msgid "The direction you're looking when Stellarium starts"
 msgstr "സ്റ്റെല്ലേറിയ ആരംഭിക്കുമ്പോള്‍ നിങ്ങള്‍ നോക്കുന്ന ദിശ"
 
-#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1239
+#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1242
 msgid "Selected object information"
 msgstr "തിരഞ്ഞെടുത്ത വസ്തുവിന്റെ വിവരങ്ങള്‍"
 
@@ -5494,173 +5494,173 @@ msgstr ""
 msgid "Disc viewport"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1161 src/ui_configurationDialog.h:1164
 msgid "Hide other constellations when you click one"
 msgstr "ഒന്നില്‍ ക്ലിക് ചെയ്താല്‍ മറ്റുള്ള നക്ഷത്രരാശികള്‍ മറയ്ക്കുക"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1166
 msgid "Select single constellation"
 msgstr "ഒരു നക്ഷത്രരാശി മാത്രം തിരഞ്ഞെടുക്കുക"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1168
 msgid "Align labels with the horizon"
 msgstr "ലേബലുകള്‍ ചക്രവാളത്തോടടുപ്പിച്ച് നിര്‍ത്തുക"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1170
 msgid "Gravity labels"
 msgstr "ഗുരുത്വാകര്‍ഷണ ലേബലുകള്‍"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1172
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1174
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1176
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1178
 msgid "Show flip buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1180
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1182
 msgid "Auto-enabling for the atmosphere"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1184
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1186
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1188
 msgid "Use decimal degrees for coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1190
 msgid "Use decimal degrees"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1192
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1194
 msgid "Include nutation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1196
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1200
 msgid ""
 "Activate this option to calculate azimuth from south towards west (as in old "
 "astronomical literature)."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1199
+#: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1203
 msgid "Screenshots"
 msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1204
 msgid "Screenshot Directory"
 msgstr "സ്ക്രീന്‍ഷോട്ടുകള്‍ സേവ് ചെയ്യേണ്ടയിടം"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1206
 msgid "Invert colors"
 msgstr "നെഗറ്റീവ് നിറങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1207
 msgid "Star catalog updates"
 msgstr "നക്ഷത്ര കാറ്റലോഗിലെ പുതിയ മാറ്റങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1209
 msgid "Click here to start downloading"
 msgstr "ഡൌണ്‍ലോഡ് ചെയ്യാന്‍ ഇവിടെ ഞെക്കുക"
 
-#: src/ui_configurationDialog.h:1208
+#: src/ui_configurationDialog.h:1211
 msgid "Download this file to view even more stars"
 msgstr "കൂടുതല്‍ നക്ഷത്രങ്ങള്‍ക്കായി ഇത് ഡൌണ്‍ലോഡ് ചെയ്യുക"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1213
 msgid "Restart the download"
 msgstr "ഡൌണ്‍ലോഡ്  പുനരാരംഭിക്കുക"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1215
 msgid "Retry"
 msgstr "വീണ്ടും ശ്രമിക്കുക"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1217
 msgid "Stop the download. You can always restart it later"
 msgstr ""
 "ഡൌണ്‍ലോഡ്  നിര്‍ത്തി വയ്ക്കുക. താങ്കള്‍ക്ക് പിന്നീട്  പുനരാരംഭിക്കാവുന്നതാണ്."
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1222
 msgid "Close window when script runs"
 msgstr "സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിക്കുന്പോള്‍ ജാലകം അടക്കുക"
 
-#: src/ui_configurationDialog.h:1221
+#: src/ui_configurationDialog.h:1224
 msgid "Run the selected script"
 msgstr "തിരഞ്ഞെടുത്ത സ്ക്രിപ്റ്റ് പ്രവര്‍ത്തിപ്പിക്കുക"
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1228
 msgid "Stop a running script"
 msgstr "സ്ക്രിപ്റ്റ് നിര്‍ത്തിവക്കുക."
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1232
 msgid "Load at startup"
 msgstr "ആരംഭത്തില്‍ ലോഡ് ചെയ്യുക"
 
-#: src/ui_configurationDialog.h:1230
+#: src/ui_configurationDialog.h:1233
 msgid "configure"
 msgstr "ക്രമീകരിക്കുക"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1238
 msgid "Main"
 msgstr "പ്രധാനപ്പെട്ട"
 
-#: src/ui_configurationDialog.h:1237
+#: src/ui_configurationDialog.h:1240
 msgid "Information"
 msgstr "വിവരം"
 
-#: src/ui_configurationDialog.h:1242
+#: src/ui_configurationDialog.h:1245
 msgid "Navigation"
 msgstr "നാവിഗേഷന്‍"
 
-#: src/ui_configurationDialog.h:1244
+#: src/ui_configurationDialog.h:1247
 msgid "Tools"
 msgstr "ഉപകരണങ്ങള്‍"
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "സ്ക്രിപ്റ്റുകള്‍"
 
-#: src/ui_configurationDialog.h:1248
+#: src/ui_configurationDialog.h:1251
 msgid "Plugins"
 msgstr "പ്ലഗിനുകള്‍"
 

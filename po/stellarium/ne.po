@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2015-09-13 19:02+0600\n"
+"POT-Creation-Date: 2015-09-21 20:34+0600\n"
 "PO-Revision-Date: 2014-10-06 12:59+0000\n"
 "Last-Translator: Sameer Aryal <sameer_aryal52@yahoo.com>\n"
 "Language-Team: Nepali <ne@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:24+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:24+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 "Language: ne\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -4373,7 +4373,7 @@ msgstr "फोल्डर"
 msgid "&Choose"
 msgstr "र छान्नुहोस्"
 
-#: src/translations.h:570 src/ui_configurationDialog.h:1216
+#: src/translations.h:570 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "रद्द गर्नुहोस्"
@@ -4698,7 +4698,7 @@ msgstr "शब्दहरूको सुरुदेखि मात्र स
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1784
 #: src/ui_viewDialog.h:1803 src/ui_viewDialog.h:1811
-#: src/ui_configurationDialog.h:1217 src/ui_configurationDialog.h:1228
+#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1231
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "विकल्पहरु‍"
@@ -5286,7 +5286,7 @@ msgstr "Stellarium सुरू गर्दा आफुले देख्न�
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium सुरू गर्दा आफुले देख्ने दिशा"
 
-#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1239
+#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1242
 msgid "Selected object information"
 msgstr "चयन वस्तुकाे जानकारी"
 
@@ -5512,49 +5512,49 @@ msgstr ""
 msgid "Disc viewport"
 msgstr "डिस्क भ्यूपोर्ट"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1161 src/ui_configurationDialog.h:1164
 msgid "Hide other constellations when you click one"
 msgstr "तपाईंले एकलाई  क्लिक गर्दा अरु तारामण्डल लुकाउनुहोस्"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1166
 msgid "Select single constellation"
 msgstr "एकमात्र नक्षत्रकाे चयन"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1168
 msgid "Align labels with the horizon"
 msgstr "क्षितिजसंग लेबल पङ्क्तिबद्ध गर्नुहोस्"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1170
 msgid "Gravity labels"
 msgstr "गुरुत्वाकर्षण लेबल"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1172
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "नेबुलएका पृष्ठभूमि टगल प्रदर्शन गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1174
 msgid "Show nebula background button"
 msgstr "नेबुलएका पृष्ठभूमिका बटनहरु देखाउनुहाेस्"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1176
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "ठाडो र तेर्सो प्रतिमा फ्लिप बटन टगल गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1178
 msgid "Show flip buttons"
 msgstr "फ्लिप बटन देखाउनुहोस्"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1180
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "स्थान सञ्झ्यालकाे वायुमण्डलमा भएका शरीरका लागि वायुमण्डलको को स्वत-सक्षम"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1182
 msgid "Auto-enabling for the atmosphere"
 msgstr "वायुमण्डलको लागि स्वतः सक्षम"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1184
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -5562,125 +5562,125 @@ msgstr ""
 "जव यसकाे प्रयाेग तव अटाे जूम ओउट बटनले प्रारम्भिक दृश्य दिशामा फर्किन "
 "प्रयाेग पनि गर्ने"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1186
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "अटाे जूम ओउटले प्रारम्भिक दृश्य दिशामा फर्काउछ"
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1188
 msgid "Use decimal degrees for coordinates"
 msgstr "निर्देशांकका लागि दशमलव डिग्रीका प्रयोग"
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1190
 msgid "Use decimal degrees"
 msgstr "दशमलव डिग्रीका प्रयोग"
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1192
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1194
 msgid "Include nutation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1196
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1200
 msgid ""
 "Activate this option to calculate azimuth from south towards west (as in old "
 "astronomical literature)."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1199
+#: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1203
 msgid "Screenshots"
 msgstr "स्क्रिनसटहरू"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1204
 msgid "Screenshot Directory"
 msgstr "स्क्रिनसट निर्देशिका"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1206
 msgid "Invert colors"
 msgstr "रंगहरुका उल्टो"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1207
 msgid "Star catalog updates"
 msgstr "स्टार सूचीका अपडेट"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1209
 msgid "Click here to start downloading"
 msgstr "डाउनलोड सुरु गर्न यहाँ क्लिक गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1208
+#: src/ui_configurationDialog.h:1211
 msgid "Download this file to view even more stars"
 msgstr "अझ ताराहरु हेर्न यो फाइल डाउनलोड गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1213
 msgid "Restart the download"
 msgstr "डाउनलोड पुन: सुरु गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1215
 msgid "Retry"
 msgstr "पुन: प्रयास गर्नुहोस्"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1217
 msgid "Stop the download. You can always restart it later"
 msgstr "डाउनलोड रोक्नुहोस्।तपाईंले सधैं पछि फेरि सुरू गर्न सक्नुहुन्छ"
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1222
 msgid "Close window when script runs"
 msgstr "लिपि रन गर्दा विन्डो बन्द गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1221
+#: src/ui_configurationDialog.h:1224
 msgid "Run the selected script"
 msgstr "चयन लिपि चलान गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1228
 msgid "Stop a running script"
 msgstr "चलिरहेको लिपि रोक्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1232
 msgid "Load at startup"
 msgstr "स्टार्टअपमा लोड गर्नुहाेस्"
 
-#: src/ui_configurationDialog.h:1230
+#: src/ui_configurationDialog.h:1233
 msgid "configure"
 msgstr "कन्फिगर"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1238
 msgid "Main"
 msgstr "मुख्य"
 
-#: src/ui_configurationDialog.h:1237
+#: src/ui_configurationDialog.h:1240
 msgid "Information"
 msgstr "जानकारी"
 
-#: src/ui_configurationDialog.h:1242
+#: src/ui_configurationDialog.h:1245
 msgid "Navigation"
 msgstr "नेभिगेसन"
 
-#: src/ui_configurationDialog.h:1244
+#: src/ui_configurationDialog.h:1247
 msgid "Tools"
 msgstr "उपकरणहरू"
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "स्क्रिप्टहरू"
 
-#: src/ui_configurationDialog.h:1248
+#: src/ui_configurationDialog.h:1251
 msgid "Plugins"
 msgstr "प्लगइनहरू"
 

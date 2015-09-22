@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-13 19:02+0600\n"
+"POT-Creation-Date: 2015-09-21 20:34+0600\n"
 "PO-Revision-Date: 2015-09-10 15:06+0000\n"
 "Last-Translator: José A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-14 05:27+0000\n"
-"X-Generator: Launchpad (build 17720)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:27+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 "Language: es_ES\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -4531,7 +4531,7 @@ msgstr "Carpeta"
 msgid "&Choose"
 msgstr "E&legir"
 
-#: src/translations.h:570 src/ui_configurationDialog.h:1216
+#: src/translations.h:570 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Cancelar"
@@ -4861,7 +4861,7 @@ msgstr "Utilizar autorelleno únicamente desde el inicio de las palabras"
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1784
 #: src/ui_viewDialog.h:1803 src/ui_viewDialog.h:1811
-#: src/ui_configurationDialog.h:1217 src/ui_configurationDialog.h:1228
+#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1231
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Opciones"
@@ -5467,7 +5467,7 @@ msgstr "Anchura de su vista cuando inicia Stellarium"
 msgid "The direction you're looking when Stellarium starts"
 msgstr "La dirección a la que está viendo cuando inicia Stellarium"
 
-#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1239
+#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1242
 msgid "Selected object information"
 msgstr "Información del objeto seleccionado"
 
@@ -5698,49 +5698,49 @@ msgstr "Ocultar todo fuera del círculo central en la vista principal"
 msgid "Disc viewport"
 msgstr "Ventana de disco"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1161 src/ui_configurationDialog.h:1164
 msgid "Hide other constellations when you click one"
 msgstr "Ocultar las demás constelaciones cuando seleccione una"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1166
 msgid "Select single constellation"
 msgstr "Seleccionar una constelación"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1168
 msgid "Align labels with the horizon"
 msgstr "Alinear etiquetas con el horizonte"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1170
 msgid "Gravity labels"
 msgstr "Etiquetas de gravedad"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1172
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Activar la muestra de fondos de las nebulosas."
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1174
 msgid "Show nebula background button"
 msgstr "Mostrar boton de fondo de nebulosas"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1176
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Intercambiar los botones de giro de imagen vertical y horizontal."
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1178
 msgid "Show flip buttons"
 msgstr "Mostrar los botones de giro"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1180
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Autohabilita atmósfera para cuerpos con atmósfera en la ventana de ubicación"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1182
 msgid "Auto-enabling for the atmosphere"
 msgstr "Autohabilitar atmósfera"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1184
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -5748,28 +5748,28 @@ msgstr ""
 "Una vez activado, la tecla de \"Alejar zum automáticamente\" también volverá "
 "a la dirección de la vista inicial"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1186
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Alejar zum automáticamente vuelve a la dirección de la vista inicial"
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1188
 msgid "Use decimal degrees for coordinates"
 msgstr "Usa grados decimales para las coordenadas"
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1190
 msgid "Use decimal degrees"
 msgstr "Usar grados decimales"
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1192
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1194
 msgid "Include nutation"
 msgstr "Incuir nutación"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1196
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -5777,11 +5777,11 @@ msgstr ""
 "Activar para ver como vista desde la superficie del planeta (recomendado). "
 "Si se desactiva, muesta vista planetocéntrica."
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
 msgstr "Coordenadas topocéntricas"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1200
 msgid ""
 "Activate this option to calculate azimuth from south towards west (as in old "
 "astronomical literature)."
@@ -5789,88 +5789,88 @@ msgstr ""
 "Activar esta opción para calcular el azimut desde el sur hacia el oeste "
 "(como en literatura astronómica antigua)."
 
-#: src/ui_configurationDialog.h:1199
+#: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
 msgstr "Azimut desde el Sur"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1203
 msgid "Screenshots"
 msgstr "Capturas de pantalla"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1204
 msgid "Screenshot Directory"
 msgstr "Directorio de capturas de pantalla"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1206
 msgid "Invert colors"
 msgstr "Invertir colores"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1207
 msgid "Star catalog updates"
 msgstr "Actualizaciones de catálogos de estrellas"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1209
 msgid "Click here to start downloading"
 msgstr "Presione aquí para empezar a descargar"
 
-#: src/ui_configurationDialog.h:1208
+#: src/ui_configurationDialog.h:1211
 msgid "Download this file to view even more stars"
 msgstr "Descarga este archivo para ver aún más estrellas"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1213
 msgid "Restart the download"
 msgstr "Reiniciar la descarga"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1215
 msgid "Retry"
 msgstr "Reintentar"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1217
 msgid "Stop the download. You can always restart it later"
 msgstr "Detener la descarga. Puede reiniciarla luego si desea"
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1222
 msgid "Close window when script runs"
 msgstr "Cerrar ventana cuando se ejecute un script"
 
-#: src/ui_configurationDialog.h:1221
+#: src/ui_configurationDialog.h:1224
 msgid "Run the selected script"
 msgstr "Ejecutar script seleccionado"
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1228
 msgid "Stop a running script"
 msgstr "Detener script en ejecución"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1232
 msgid "Load at startup"
 msgstr "Cargar al inicio"
 
-#: src/ui_configurationDialog.h:1230
+#: src/ui_configurationDialog.h:1233
 msgid "configure"
 msgstr "configurar"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1238
 msgid "Main"
 msgstr "Principal"
 
-#: src/ui_configurationDialog.h:1237
+#: src/ui_configurationDialog.h:1240
 msgid "Information"
 msgstr "Información"
 
-#: src/ui_configurationDialog.h:1242
+#: src/ui_configurationDialog.h:1245
 msgid "Navigation"
 msgstr "Navegación"
 
-#: src/ui_configurationDialog.h:1244
+#: src/ui_configurationDialog.h:1247
 msgid "Tools"
 msgstr "Herramientas"
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "Scripts"
 
-#: src/ui_configurationDialog.h:1248
+#: src/ui_configurationDialog.h:1251
 msgid "Plugins"
 msgstr "Complementos"
 
