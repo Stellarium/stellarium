@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-13 19:02+0600\n"
-"PO-Revision-Date: 2015-09-20 18:05+0000\n"
+"POT-Creation-Date: 2015-09-21 20:34+0600\n"
+"PO-Revision-Date: 2015-09-22 04:45+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-21 05:12+0000\n"
-"X-Generator: Launchpad (build 17746)\n"
+"X-Launchpad-Export-Date: 2015-09-22 05:17+0000\n"
+"X-Generator: Launchpad (build 17749)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -2691,7 +2691,7 @@ msgstr "Kohde 2"
 
 #: src/gui/AstroCalcDialog.cpp:441
 msgid "Separation"
-msgstr "Erotus"
+msgstr "Kulmaerotus"
 
 #: src/gui/AstroCalcDialog.cpp:597
 msgid "Conjunction"
@@ -2706,7 +2706,7 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
-"OpenGL 2 ei löydetty tästä järjestelmästä. Ole hyvä ja päivitä laitteistosi "
+"OpenGL 2 ei löydetty tästä järjestelmästä. Ole hyvä ja päivitä laitteistosi, "
 "tai käytä MESA- tai vanhempaa versiota."
 
 #: src/StelMainView.cpp:471
@@ -2742,7 +2742,7 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
-"DirectX/OpenGL-alijärjestelmässäsi on ongelmia. Katso yksityiskohdat "
+"DirectX/OpenGL ES -alijärjestelmässäsi on ongelmia. Katso yksityiskohdat "
 "lokista.\n"
 "Ohita tämä huomautus tulevaisuudessa ja yritä jatkaa vajaatoimintaisessa "
 "tilassa siitä huolimatta?"
@@ -2856,7 +2856,7 @@ msgstr "Kirkkaat galaksit"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:85
 msgid "Open star clusters"
-msgstr "Avoimet tähtijoukot"
+msgstr "Avonaiset tähtijoukot"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:87
@@ -2881,7 +2881,7 @@ msgstr "Pimeät sumut"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:95
 msgid "Clusters associated with nebulosity"
-msgstr "Sumumaiset tähtijoukot"
+msgstr "Tähtijoukot ja sumut"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:97
@@ -2986,7 +2986,7 @@ msgstr "Mahdolliset planetaariset sumut"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Protoplanetary Nebulae"
-msgstr "Protoplanetaariset sumut"
+msgstr "Esiplanetaariset sumut"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:139 src/ui_viewDialog.h:1646
@@ -4516,7 +4516,7 @@ msgstr "Kansio"
 msgid "&Choose"
 msgstr "Valitse"
 
-#: src/translations.h:570 src/ui_configurationDialog.h:1216
+#: src/translations.h:570 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Peru"
@@ -4842,7 +4842,7 @@ msgstr "Käytä automaattista täyttöä sanan alusta"
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1784
 #: src/ui_viewDialog.h:1803 src/ui_viewDialog.h:1811
-#: src/ui_configurationDialog.h:1217 src/ui_configurationDialog.h:1228
+#: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1231
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Asetukset"
@@ -5451,7 +5451,7 @@ msgstr "Näkymän leveys Stellariumin käynnistyessä"
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Katselusuunta Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1239
+#: src/ui_configurationDialog.h:1056 src/ui_configurationDialog.h:1242
 msgid "Selected object information"
 msgstr "Valitun kohteen tiedot"
 
@@ -5680,50 +5680,50 @@ msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
 msgid "Disc viewport"
 msgstr "Putkinäkymä"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1161 src/ui_configurationDialog.h:1164
 msgid "Hide other constellations when you click one"
 msgstr "Piilota muut tähdistöt napsautettaessa yhtä"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1166
 msgid "Select single constellation"
 msgstr "Valitse yksittäinen tähdistö"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1168
 msgid "Align labels with the horizon"
 msgstr "Suuntaa nimet horisontin mukaan"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1170
 msgid "Gravity labels"
 msgstr "\"Gravitaationimet\""
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1172
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Tähtisumukuvat päälle"
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1174
 msgid "Show nebula background button"
 msgstr "Näytä tähtisumukuvat-painike"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1176
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Pysty- ja vaakapeilauksen painikkeet päälle/pois."
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1178
 msgid "Show flip buttons"
 msgstr "Näytä peilauspainikkeet"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1180
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Aseta paikkakuntaikkunassa ilmakehä automaattisesti kohteille, joilla on "
 "ilmakehä"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1182
 msgid "Auto-enabling for the atmosphere"
 msgstr "Ilmakehän automaattinen asetus"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1184
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -5731,30 +5731,30 @@ msgstr ""
 "Kun käytössä, \"automaattinen loitonnus\"-näppäin asettaa myös "
 "aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1186
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automaattinen loitonnus palauttaa aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1188
 msgid "Use decimal degrees for coordinates"
 msgstr "Käytä desimaaliasteita koordinaateille"
 
-#: src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1190
 msgid "Use decimal degrees"
 msgstr "Käytä desimaaliasteita"
 
-#: src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1192
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Nutaatio tarkoittaa Maan akselin muutamien kaarisekuntien laajuista "
 "huojuntaa."
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1194
 msgid "Include nutation"
 msgstr "Sisällytä nutaatio"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1196
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -5762,11 +5762,11 @@ msgstr ""
 "Ota käyttöön havaitsijan sijoittamiseksi planeetan pinnalle (suositus). Jos "
 "valinta on poistetu käytöstä, havaitsija asetetaan planeetan keskustaan."
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
 msgstr "Paikkakeskeiset koordinaatit"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1200
 msgid ""
 "Activate this option to calculate azimuth from south towards west (as in old "
 "astronomical literature)."
@@ -5774,88 +5774,88 @@ msgstr ""
 "Ota tämä valinta käyttöön laskeaksesi atsimuutti etelästä itään päin (kuten "
 "vanhassa kirjallisuudessa)."
 
-#: src/ui_configurationDialog.h:1199
+#: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
 msgstr "Atsimuutti etelästä laskien"
 
-#: src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1203
 msgid "Screenshots"
 msgstr "Kuvankaappaukset"
 
-#: src/ui_configurationDialog.h:1201
+#: src/ui_configurationDialog.h:1204
 msgid "Screenshot Directory"
 msgstr "Kuvankaappaushakemisto"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1206
 msgid "Invert colors"
 msgstr "Käänteiset värit"
 
-#: src/ui_configurationDialog.h:1204
+#: src/ui_configurationDialog.h:1207
 msgid "Star catalog updates"
 msgstr "Tähtiluetteloiden päivitykset"
 
-#: src/ui_configurationDialog.h:1206
+#: src/ui_configurationDialog.h:1209
 msgid "Click here to start downloading"
 msgstr "Napsauta tästä aloittaaksesi haku"
 
-#: src/ui_configurationDialog.h:1208
+#: src/ui_configurationDialog.h:1211
 msgid "Download this file to view even more stars"
 msgstr "Hae tämä tiedosto näyttääkseni enemmän tähtiä"
 
-#: src/ui_configurationDialog.h:1210
+#: src/ui_configurationDialog.h:1213
 msgid "Restart the download"
 msgstr "Aloita haku uudelleen"
 
-#: src/ui_configurationDialog.h:1212
+#: src/ui_configurationDialog.h:1215
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: src/ui_configurationDialog.h:1214
+#: src/ui_configurationDialog.h:1217
 msgid "Stop the download. You can always restart it later"
 msgstr "Keskeytä haku. Voit aina aloittaa sen myöhemmin uudelleen"
 
-#: src/ui_configurationDialog.h:1219
+#: src/ui_configurationDialog.h:1222
 msgid "Close window when script runs"
 msgstr "Sulje ikkuna komentosarjaa suoritettaessa"
 
-#: src/ui_configurationDialog.h:1221
+#: src/ui_configurationDialog.h:1224
 msgid "Run the selected script"
 msgstr "Suorita valittu komentosarja"
 
-#: src/ui_configurationDialog.h:1225
+#: src/ui_configurationDialog.h:1228
 msgid "Stop a running script"
 msgstr "Pysäytä suoritettava komentosarja"
 
-#: src/ui_configurationDialog.h:1229
+#: src/ui_configurationDialog.h:1232
 msgid "Load at startup"
 msgstr "Lataa käynnistettäessä"
 
-#: src/ui_configurationDialog.h:1230
+#: src/ui_configurationDialog.h:1233
 msgid "configure"
 msgstr "muuta asetuksia"
 
-#: src/ui_configurationDialog.h:1235
+#: src/ui_configurationDialog.h:1238
 msgid "Main"
 msgstr "Pää"
 
-#: src/ui_configurationDialog.h:1237
+#: src/ui_configurationDialog.h:1240
 msgid "Information"
 msgstr "Tiedot"
 
-#: src/ui_configurationDialog.h:1242
+#: src/ui_configurationDialog.h:1245
 msgid "Navigation"
 msgstr "Siirtyminen"
 
-#: src/ui_configurationDialog.h:1244
+#: src/ui_configurationDialog.h:1247
 msgid "Tools"
 msgstr "Työkalut"
 
-#: src/ui_configurationDialog.h:1246
+#: src/ui_configurationDialog.h:1249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Scripts"
 msgstr "Komentosarjat"
 
-#: src/ui_configurationDialog.h:1248
+#: src/ui_configurationDialog.h:1251
 msgid "Plugins"
 msgstr "Laajennukset"
 
