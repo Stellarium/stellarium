@@ -297,6 +297,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
 	bool getFlagIsolatedTrails(void) const;
 
+	//! Set flag which enabled the showing of isolated orbits for selected objects only or not
+	void setFlagIsolatedOrbits(bool b);
+	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
+	bool getFlagIsolatedOrbits(void) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -326,6 +331,9 @@ public:
 	//! Reload the planets
 	void reloadPlanets();
 
+	//! Determines relative amount of sun visible from the observer's position.
+	double getEclipseFactor(const StelCore *core) const;
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -337,9 +345,9 @@ public:
 
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param observerPos Position of the observer in heliocentric ecliptic frame (Required for light travel time computation).
-	//! @param date the date in JDay
+	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)
 	//! \deprecated ??? In the "deprecated" section, but used in SolarSystem::init()
-	void computePositions(double date, const Vec3d& observerPos = Vec3d(0.));
+	void computePositions(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Get the list of all the bodies of the solar system.
 	//! \deprecated Used in LandscapeMgr::update(), but commented out.
@@ -367,7 +375,7 @@ private:
 
 	//! Compute the transformation matrix for every elements of the solar system.
 	//! observerPos is needed for light travel time computation.
-	void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0.));
+	void computeTransMatrices(double dateJDE, const Vec3d& observerPos = Vec3d(0.));
 
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
@@ -423,6 +431,7 @@ private:
 	bool flagNativeNames;
 	bool flagTranslatedNames;
 	bool flagIsolatedTrails;
+	bool flagIsolatedOrbits;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;

@@ -1,5 +1,5 @@
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
 IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0))
   CMAKE_POLICY(SET CMP0050 OLD)
@@ -12,18 +12,22 @@ IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" L
   CMAKE_POLICY(SET CMP0043 OLD)
 ENDIF()
 
+IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" LESS 3.1.3))
+  CMAKE_POLICY(SET CMP0054 OLD)
+ENDIF()
+
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
-SET(STELLARIUM_MINOR "13")
-SET(STELLARIUM_PATCH "3")
+SET(STELLARIUM_MINOR "14")
+SET(STELLARIUM_PATCH "0")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
 SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 
-SET(MINIMAL_QT_VERSION "5.4.0")
+SET(MINIMAL_QT_VERSION "5.3.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -76,22 +80,13 @@ ELSE()
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
 ENDIF()
 
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+# CMake 3.0.0 the CMAKE_<LANG>_COMPILER_ID value for Apple-provided Clang is now AppleClang
+IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
+ # using regular Clang or AppleClang
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized -Wno-tautological-constant-out-of-range-compare")
  # The cosmetic fix for Clang 3.4
  IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable -Wno-unused-result")
- ENDIF()
-ENDIF()
-
-SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
-IF(OPTIMIZE_INTEL_ATOM)
- IF (MSVC)
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2 ")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2 ")
- ELSE()
-  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
  ENDIF()
 ENDIF()
 
@@ -101,7 +96,7 @@ IF(RASPI_BUILD)
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DRASPI_BUILD -DQT_OPENGL_ES_2")
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DRASPI_BUILD -DQT_OPENGL_ES_2")
   FIND_LIBRARY(GLES2_LIBRARIES GLESv2 PATHS /opt/vc/lib/ DOC "GLES2 link option")
-# TODO: Find the right CMake call to add the magic link command to link.txt
+# TODO: Find the right CMake call to add the magic link command to link.txt (see README_RaspberryPi.txt for details)
 #  TARGET_LINK_LIBRARIES(  ${GLES2})
 ENDIF(RASPI_BUILD)
 
@@ -118,7 +113,8 @@ ENDIF()
 # best way to get to APPLE?
 IF(APPLE)
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra")
- IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+ # using regular Clang or AppleClang
+ IF("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field -Wno-unknown-warning-option -Wno-unused-const-variable -Wno-unused-result")
  ENDIF()
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
@@ -126,6 +122,13 @@ IF(APPLE)
  # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
+
+# This activates Link Time Optimization on recent GCC
+# Unfortunately, it also seems to break static plugins
+# It's providing a 20% size reduction, and probably a faster code when activated
+#SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -ffunction-sections -flto")
+#SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections -flto -ffunction-sections -fuse-linker-plugin")
 
 ########### Others ###########
 # Activate translation
@@ -146,13 +149,12 @@ IF(ENABLE_SCRIPTING)
   IF(ENABLE_SCRIPT_CONSOLE)
 	ADD_DEFINITIONS(-DENABLE_SCRIPT_CONSOLE)
   ENDIF()
-  SET(ENABLE_STRATOSCRIPT_COMPAT 0 CACHE BOOL "Set to 1 or true if you want to build the Stratoscript compatibility mode")
 ELSE()
   ADD_DEFINITIONS(-DDISABLE_SCRIPTING)
 ENDIF()
 
 
-SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None, External")
+SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
 
@@ -180,6 +182,7 @@ ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
 # GZ: I have disabled building most plugins for now, just to save time. They all compiled without change. 
 ADD_PLUGIN(AngleMeasure 1)
+ADD_PLUGIN(ArchaeoLines 1)
 ADD_PLUGIN(CompassMarks 1)
 ADD_PLUGIN(Exoplanets 0)
 ADD_PLUGIN(EquationOfTime 1)
@@ -194,59 +197,17 @@ ADD_PLUGIN(PointerCoordinates 0)
 ADD_PLUGIN(Pulsars 0)
 ADD_PLUGIN(Quasars 0)
 ADD_PLUGIN(Satellites 0)
+ADD_PLUGIN(Scenery3d 0)
 ADD_PLUGIN(SolarSystemEditor 0)
 ADD_PLUGIN(Supernovae 0)
-ADD_PLUGIN(SVMT 0)
 ADD_PLUGIN(TextUserInterface 1)
 ADD_PLUGIN(TelescopeControl 0)
 ADD_PLUGIN(TimeZoneConfiguration 0)
-ADD_PLUGIN(VirGO 0)
-# GZ: Here was the old config. Consider reactivating a few when all is done.
-#ADD_PLUGIN(AngleMeasure 1)
-#ADD_PLUGIN(CompassMarks 1)
-#ADD_PLUGIN(Exoplanets 1)
-#ADD_PLUGIN(EquationOfTime 1)
-#ADD_PLUGIN(FOV 1)
-#ADD_PLUGIN(LogBook 0)
-#ADD_PLUGIN(MeteorShowers 1)
-#ADD_PLUGIN(NavStars 1)
-#ADD_PLUGIN(Novae 1)
-#ADD_PLUGIN(Observability 1)
-#ADD_PLUGIN(Oculars 1)
-#ADD_PLUGIN(PointerCoordinates 1)
-#ADD_PLUGIN(Pulsars 1)
-#ADD_PLUGIN(Quasars 1)
-#ADD_PLUGIN(Satellites 1)
-#ADD_PLUGIN(SolarSystemEditor 1)
-#ADD_PLUGIN(Supernovae 1)
-#ADD_PLUGIN(SVMT 0)
-#ADD_PLUGIN(TextUserInterface 1)
-#ADD_PLUGIN(TelescopeControl 1)
-#ADD_PLUGIN(TimeZoneConfiguration 1)
-#ADD_PLUGIN(VirGO 0)
+ADD_PLUGIN(TelescopeControl 1)
+ADD_PLUGIN(TimeZoneConfiguration 1)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-IF(USE_PLUGIN_SVMT)
-    SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
-    SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-    SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
-ENDIF()
-
-IF(USE_PLUGIN_VIRGO)
-    ## Library for loading FITS image files
-    FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
-        /usr/include
-        /usr/local/include
-        DOC "Should point to the directory where the include files for libcfitsio are installed")
-    FIND_LIBRARY(CFITSIO_LIBRARIES cfitsio
-        PATHS
-        /usr/lib/
-        /usr/local/lib
-        /opt/local/lib
-        DOC "cfitsio link options")
-    SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
-ENDIF()
 
 IF(USE_PLUGIN_LOGBOOK)
     SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
@@ -262,10 +223,9 @@ GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
 IF(${Qt5Core_VERSION_STRING} VERSION_LESS MINIMAL_QT_VERSION)
     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
 ELSE()
-    MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+    MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION_STRING}\")")
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
-FIND_PACKAGE(Qt5Declarative REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
@@ -331,10 +291,6 @@ IF(NOT RELEASE_BUILD)
     ENDIF()
 ENDIF()
 
-IF(ENABLE_STRATOSCRIPT_COMPAT)
-    ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
-ENDIF()
-
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
 
 ### [Optional] Embed icon in the Windows executable ###
@@ -359,10 +315,10 @@ IF(WIN32)
     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
         SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
         SET(ISS_PACKAGE_PLATFORM "win32")
-        IF(MSVC)
-          #SET(REDIST_FILES "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+        SET(REDIST_VERSION "VC_REDIST_X86")
+        IF(MSVC)          
           SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x86.exe\"; DestDir: \"{tmp}\";")
-          SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x86.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"")
+          SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x86.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"; Check: VCRedistNeedsInstall")
         ELSE()
           SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
           SET(REDIST_RUN "; Redistributable package not required for MinGW")
@@ -370,10 +326,10 @@ IF(WIN32)
     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
         SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
         SET(ISS_PACKAGE_PLATFORM "win64")
+        SET(REDIST_VERSION "VC_REDIST_X64")
         IF(MSVC)
-          #SET(REDIST_FILES "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
           SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x64.exe\"; DestDir: \"{tmp}\";")
-          SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x64.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"")
+          SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x64.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"; Check: VCRedistNeedsInstall")
         ELSE()
           SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
           SET(REDIST_RUN "; Redistributable package not required for MinGW")
@@ -384,7 +340,7 @@ IF(WIN32)
     IF(GENERATE_STELMAINLIB)
         SET(STELMAINLIB "Source: \"${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"; DestDir: \"{app}\";")
     ELSE()
-        SET(STELMAINLIB "; StelMainLib don't used")
+        SET(STELMAINLIB "; StelMainLib isn't used")
     ENDIF()
     GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
     GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
@@ -392,21 +348,20 @@ IF(WIN32)
     GET_TARGET_PROPERTY(QtOpenGL_location Qt5::OpenGL LOCATION)
     GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
     GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
-    GET_TARGET_PROPERTY(QtDeclarative_location Qt5::Declarative LOCATION)
     GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)    
     GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
     IF(ENABLE_SCRIPTING)
         GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
         SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
     ELSE()
-        SET(ISS_QT_SCRIPT "; QtScript don't used")
+        SET(ISS_QT_SCRIPT "; QtScript isn't used")
     ENDIF()
     IF(ENABLE_SOUND)
         GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
         GET_TARGET_PROPERTY(QtMultimediaWidgets_location Qt5::MultimediaWidgets LOCATION)
         SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";\nSource: \"${QtMultimediaWidgets_location}\"; DestDir: \"{app}\";")
     ELSE()
-        SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
+        SET(ISS_QT_MULTIMEDIA "; QtMultimedia isn't used")
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
     IF(MSVC)
@@ -422,7 +377,7 @@ IF(WIN32)
     IF(ENABLE_SOUND)
         SET(ISS_MULTIMEDIA_PLUGINS "Source: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
     ELSE()
-        SET(ISS_MULTIMEDIA_PLUGINS "; QtMultimedia don't used")
+        SET(ISS_MULTIMEDIA_PLUGINS "; QtMultimedia isn't used")
     ENDIF()
     SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")
     SET(ISS_QML_PLUGINS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/plugins.qmltypes\"; DestDir: \"{app}/Qt/labs/shaders/\";")
@@ -499,6 +454,8 @@ ENDIF()
 ########### Generate doxygen doc ###############
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile-plugins.cmake ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-plugins @ONLY)
+ADD_CUSTOM_TARGET(apidoc-plugins doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile-plugins WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc-plugins directory.")
 
 ##################### Generate translation copying script ######################
 IF(WIN32)
@@ -539,6 +496,10 @@ ADD_SUBDIRECTORY( skycultures )
 ADD_SUBDIRECTORY( nebulae )
 IF(ENABLE_SCRIPTING)
   ADD_SUBDIRECTORY( scripts )
+ENDIF()
+if(USE_PLUGIN_SCENERY3D)
+  # add scenery3d scenes
+  ADD_SUBDIRECTORY( scenery3d )
 ENDIF()
 ADD_SUBDIRECTORY( stars )
 ADD_SUBDIRECTORY( plugins )

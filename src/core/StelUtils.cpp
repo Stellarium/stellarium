@@ -23,6 +23,7 @@
 
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
+#include <QBuffer>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
@@ -474,6 +475,36 @@ Vec3f strToVec3f(const QString& s)
 	return strToVec3f(s.split(","));
 }
 
+Vec4d strToVec4d(const QStringList &s)
+{
+	if(s.size()<4)
+		return Vec4d(0.0,0.0,0.0,0.0);
+
+	return Vec4d(s[0].toDouble(), s[1].toDouble(), s[2].toDouble(), s[3].toDouble());
+}
+
+Vec4d strToVec4d(const QString& str)
+{
+	return strToVec4d(str.split(","));
+}
+
+QString vec3fToStr(const Vec3f &v)
+{
+	return QString("%1,%2,%3")
+		.arg(v[0],0,'f',6)
+		.arg(v[1],0,'f',6)
+		.arg(v[2],0,'f',6);
+}
+
+QString vec4dToStr(const Vec4d &v)
+{
+	return QString("%1,%2,%3,%4")
+		.arg(v[0],0,'f',10)
+		.arg(v[1],0,'f',10)
+		.arg(v[2],0,'f',10)
+		.arg(v[3],0,'f',10);
+}
+
 // Converts a Vec3f to HTML color notation.
 QString vec3fToHtmlColor(const Vec3f& v)
 {
@@ -546,10 +577,16 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 	*lng = atan2(v[1],v[0]);
 }
 
-void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
+void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
 {
 	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
 	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
+}
+
+void eclToEqu(const double lambdaRad, const double betaRad, const double eclRad, double *raRad, double *decRad)
+{
+	*raRad = std::atan2(std::sin(lambdaRad)*std::cos(eclRad)-std::tan(betaRad)*std::sin(eclRad), std::cos(lambdaRad));
+	*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
 }
 
 double getDecAngle(const QString& str)
@@ -739,7 +776,7 @@ QString julianDayToISO8601String(const double jd)
 }
 
 // Format the date per the fmt.
-QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt)
+QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt)
 {
 	/* we have to handle the year zero, and the years before qdatetime can represent. */
 	const QLatin1Char quote('\'');
@@ -1192,7 +1229,7 @@ double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 {
 	int y, m, d, h, min;
 	float s;
-	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);
+	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);	
 	if (*ok)
 	{
 		double jd;
@@ -1275,7 +1312,7 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
 
-	double y = year+((month-1)*30.5+day/31*30.5)/366;
+	double y = year+((month-1)*30.5+day/31.*30.5)/366;
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
@@ -1377,14 +1414,14 @@ double getDeltaTByEspenakMeeus(const double jDay)
 double getDeltaTBySchoch(const double jDay)
 {
 	double u=(jDay-2378496.0)/36525.0; // (1800-jan-0.5)
-	return -36.28 + 36.28*std::pow(u,2);
+	return -36.28 + 36.28*u*u;
 }
 
 // Implementation of algorithm by Clemence (1948) for DeltaT computation
 double getDeltaTByClemence(const double jDay)
 {
 	double u=(jDay-2415020.0)/36525.0; // (1900-jan-0.5)
-	return +8.72 + 26.75*u + 11.22*std::pow(u,2);
+	return +8.72 + 26.75*u + 11.22*u*u;
 }
 
 // Implementation of algorithm by IAU (1952) for DeltaT computation
@@ -1445,7 +1482,7 @@ double getDeltaTBySchmadelZech1979(const double jDay)
 double getDeltaTByMorrisonStephenson1982(const double jDay)
 {
 	double u=(jDay-2382148.0)/36525.0; // (1810-jan-0.5)
-	return -15.0+32.50*std::pow(u,2);
+	return -15.0+32.50*u*u;
 }
 
 // Implementation of algorithm by Stephenson & Morrison (1984) for DeltaT computation
@@ -1455,8 +1492,7 @@ double getDeltaTByStephensonMorrison1984(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-	double u = (yeardec-1800)/100;
+	double u = (getDecYear(year, month, day)-1800)/100;
 
 	if (-391 < year && year <= 948)
 		deltaT = (44.3*u +320.0)*u +1360.0;
@@ -1481,7 +1517,7 @@ double getDeltaTByStephensonHoulden(const double jDay)
 	double deltaT = 0.;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+	double yeardec=getDecYear(year, month, day);
 
 	if (year <= 948)
 	{
@@ -1571,7 +1607,7 @@ double getDeltaTByReijs(const double jDay)
 {
 	double OffSetYear = (2385800.0 - jDay)/365.25;
 
-	return ((1.8 * std::pow(OffSetYear,2)/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
+	return ((1.8 * OffSetYear*OffSetYear/200 + 1443*3.76/(2*M_PI)*(std::cos(2*M_PI*OffSetYear/1443)-1))*365.25)/1000;
 }
 
 // Implementation of algorithm by Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) for DeltaT computation
@@ -1605,7 +1641,7 @@ double getDeltaTByChaprontMeeus(const double jDay)
 	//        deltaT= (((((((( 58353.42*u19 -232424.66)*u19 +372919.88)*u19 - 303191.19)*u19 + 124906.15)*u19 - 18756.33)*u19 - 2637.80)*u19 + 815.20)*u19 + 87.24)*u19 - 2.44;
 	else if (year <2000)
 	{
-		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+		double yeardec=getDecYear(year, month, day);
 		int pos=(year-1620)/2; // this is a deliberate integer division! 2->1, 3->1, 4->2, 5->2 etc.
 		deltaT= MeeusDeltaTTable[pos]+ (yeardec-(2*pos+1620))*0.5  *(MeeusDeltaTTable[pos+1]-MeeusDeltaTTable[pos]);
 		deltaT /= 10.0;
@@ -1844,13 +1880,64 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	return deltaT;
 }
 
+// Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+double getDeltaTByKhalidSultanaZaidi(const double jDay)
+{
+	int year, month, day;
+	getDateFromJulianDay(jDay, &year, &month, &day);
+	double k, a0, a1, a2, a3, a4;
+	if (year>=1620 && year<=1672)
+	{
+		k = 3.670; a0 = 76.541; a1 = -253.532; a2 = 695.901; a3 = -1256.982; a4 = 627.152;
+	}
+	else if (year>=1673 && year<=1729)
+	{
+		k = 3.120; a0 = 10.872; a1 = -40.744; a2 = 236.890; a3 = -351.537; a4 = 36.612;
+	}
+	else if (year>=1730 && year<=1797)
+	{
+		k = 2.495; a0 = 13.480; a1 = 13.075; a2 = 8.635; a3 = -3.307; a4 = -128.294;
+	}
+	else if (year>=1798 && year<=1843)
+	{
+		k = 1.925; a0 = 12.584; a1 = 1.929; a2 = 60.896; a3 = -1432.216; a4 = 3129.071;
+	}
+	else if (year>=1844 && year<=1877)
+	{
+		k = 1.525; a0 = 6.364; a1 = 11.004; a2 = 407.776; a3 = -4168.394; a4 = 7561.686;
+	}
+	else if (year>=1878 && year<=1904)
+	{
+		k = 1.220; a0 = -5.058; a1 = -1.701; a2 = -46.403; a3 = -866.171; a4 = 5917.585;
+	}
+	else if (year>=1905 && year<=1945)
+	{
+		k = 0.880; a0 = 13.392; a1 = 128.592; a2 = -279.165; a3 = -1282.050; a4 = 4039.490;
+	}
+	else if (year>=1946 && year<=1989)
+	{
+		k = 0.455; a0 = 30.782; a1 = 34.348; a2 = 46.452; a3 = 1295.550; a4 = -3210.913;
+	}
+	else if (year>=1990 && year<=2013)
+	{
+		k = 0.115; a0 = 55.281; a1 = 91.248; a2 = 87.202; a3 = -3092.565; a4 = 8255.422;
+	}
+	else
+	{
+		k = 0.0; a0 = 0.0; a1 = 0.0; a2 = 0.0; a3 = 0.0; a4 = 0.0;
+	}
+
+	double u = k + (year - 2000)/100;
+
+	return (((a4*u + a3)*u + a2)*u + a1)*u + a0;
+}
+
 double getMoonSecularAcceleration(const double jDay, const double nd)
 {
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	double yeardec=year+((month-1)*30.5+day/31*30.5)/366.0;
-	double t = (yeardec-1955.5)/100.0;
+	double t = (getDecYear(year, month, day)-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
 	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
@@ -1861,7 +1948,6 @@ double getDeltaTStandardError(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 
-	//double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
 	double sigma = -1.;
 
 	if (-1000 <= year && year <= 1600)
@@ -1972,41 +2058,126 @@ float *ComputeCosSinRhoZone(const float dRho, const int segments, const float mi
 	return cos_sin_rho;
 }
 
+double getDecYear(const int year, const int month, const int day)
+{
+	return year+((month-1)*30.5+day/31.*30.5)/366;
+}
+
 //! Uncompress gzip or zlib compressed data.
 QByteArray uncompress(const QByteArray& data)
 {
 	if (data.size() <= 4)
 		return QByteArray();
-	static const int CHUNK = 1024;
-	QByteArray buffer(CHUNK, 0);
+
+	//needed for const-correctness, no deep copy performed
+	QByteArray dataNonConst(data);
+	QBuffer buf(&dataNonConst);
+	buf.open(QIODevice::ReadOnly);
+
+	return uncompress(buf);
+}
+
+//! Uncompress (gzip/zlib) data from this QIODevice, which must be open and readable.
+//! @param device The device to read from, must already be opened with an OpenMode supporting reading
+//! @param maxBytes The max. amount of bytes to read from the device, or -1 to read until EOF.  Note that it
+//! always stops when inflate() returns Z_STREAM_END. Positive values can be used for interleaving compressed data
+//! with other data.
+QByteArray uncompress(QIODevice& device, qint64 maxBytes)
+{
+	// this is a basic zlib decompression routine, similar to:
+	// http://zlib.net/zlib_how.html
+
+	// buffer size 256k, zlib recommended size
+	static const int CHUNK = 262144;
+	QByteArray readBuffer(CHUNK, 0);
+	QByteArray inflateBuffer(CHUNK, 0);
 	QByteArray out;
+
+	// zlib stream
 	z_stream strm;
 	strm.zalloc = Z_NULL;
 	strm.zfree = Z_NULL;
 	strm.opaque = Z_NULL;
-	strm.avail_in = data.size();
-	strm.next_in = (Bytef*)(data.data());
+	strm.avail_in = Z_NULL;
+	strm.next_in = Z_NULL;
 
+	// the amount of bytes already read from the device
+	qint64 bytesRead = 0;
+
+	// initialize zlib
 	// 15 + 32 for gzip automatic header detection.
 	int ret = inflateInit2(&strm, 15 +  32);
-	if (ret != Z_OK) return QByteArray();
+	if (ret != Z_OK)
+	{
+		qWarning()<<"zlib init error ("<<ret<<"), can't uncompress";
+		if(strm.msg)
+			qWarning()<<"zlib message: "<<QString(strm.msg);
+		return QByteArray();
+	}
 
+	//zlib double loop - one for reading from file, one for inflating
 	do
 	{
-		strm.avail_out = CHUNK;
-		strm.next_out = (Bytef*)(buffer.data());
-		ret = inflate(&strm, Z_NO_FLUSH);
-		Q_ASSERT(ret != Z_STREAM_ERROR);
-		if (ret < 0)
+		qint64 bytesToRead = CHUNK;
+		if(maxBytes>=0)
 		{
-			out.clear();
-			break;
+			//check if we reach the desired limit with the next read
+			bytesToRead = qMin((qint64)CHUNK,maxBytes-bytesRead);
 		}
-		out.append(buffer.data(), CHUNK - strm.avail_out);
-	}
-	while (strm.avail_out == 0);
 
-    inflateEnd(&strm);
+		if(bytesToRead==0)
+			break;
+
+		//perform read from device
+		qint64 read = device.read(readBuffer.data(), bytesToRead);
+		if (read<0)
+		{
+			qWarning()<<"Error while reading from device";
+			inflateEnd(&strm);
+			return QByteArray();
+		}
+
+		bytesRead += read;
+		strm.next_in = reinterpret_cast<Bytef*>(readBuffer.data());
+		strm.avail_in = read;
+
+		if(read==0)
+			break;
+
+		//inflate loop
+		do
+		{
+			strm.avail_out = CHUNK;
+			strm.next_out = reinterpret_cast<Bytef*>(inflateBuffer.data());
+			ret = inflate(&strm,Z_NO_FLUSH);
+			Q_ASSERT(ret != Z_STREAM_ERROR); // must never happen, indicates a programming error
+
+			if(ret < 0 || ret == Z_NEED_DICT)
+			{
+				qWarning()<<"zlib inflate error ("<<ret<<"), can't uncompress";
+				if(strm.msg)
+					qWarning()<<"zlib message: "<<QString(strm.msg);
+				inflateEnd(&strm);
+				return QByteArray();
+			}
+
+			out.append(inflateBuffer.constData(), CHUNK - strm.avail_out);
+
+		}while(strm.avail_out == 0); //if zlib has more data for us, repeat
+
+	}while(ret!=Z_STREAM_END);
+
+	// close zlib
+	inflateEnd(&strm);
+
+	if(ret!=Z_STREAM_END)
+	{
+		qWarning()<<"Premature end of compressed stream";
+		if(strm.msg)
+			qWarning()<<"zlib message: "<<QString(strm.msg);
+		return QByteArray();
+	}
+
 	return out;
 }
 

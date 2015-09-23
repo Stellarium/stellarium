@@ -36,6 +36,12 @@ class StelPainter;
 //! A Nova object represents one nova on the sky.
 //! Details about the novae are passed using a QVariant which contains
 //! a map of data from the json file.
+//! @ingroup brightNovae
+//
+// GZ NOTE from JDfix for V0.14:
+// TODO: I don't know whether the peak times given are UT or DT times.
+// If DT, please change relevant calls from core->getJD() to getJDE() etc
+// and rename variables to include JDE for clarity.
 
 class Nova : public StelObject
 {

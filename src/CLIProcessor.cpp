@@ -27,6 +27,7 @@
 #include <iostream>
 
 #include <QGuiApplication>
+#include <QStandardPaths>
 #include <QDir>
 
 #include <stdio.h>
@@ -232,6 +233,24 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 				qWarning() << "WARNING: problem while setting screenshot from config file setting: " << e.what();
 			}
 		}
+		else
+		{
+			QString screenshotDirSuffix = "/Stellarium";
+			if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+				screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+			else
+				screenshotDir = StelFileMgr::getUserDir().append(screenshotDirSuffix);
+
+			try
+			{
+				StelFileMgr::setScreenshotDir(screenshotDir);
+				confSettings->setValue("main/screenshot_dir", screenshotDir);
+			}
+			catch (std::runtime_error &e)
+			{
+				qDebug("Error: cannot create screenshot directory: %s", e.what());
+			}
+		}
 	}
 }
 
@@ -269,7 +288,7 @@ QVariant CLIProcessor::argsGetOptionWithArg(const QStringList& args, QString sho
 		QString argStr;
 
 		// form -n=arg
-		if ((shortOpt!="" && args.at(i).left(shortOpt.length()+1)==shortOpt+"="))
+		if ((!shortOpt.isEmpty() && args.at(i).left(shortOpt.length()+1)==shortOpt+"="))
 		{
 			match=true;
 			argStr=args.at(i).right(args.at(i).length() - shortOpt.length() - 1);
@@ -281,7 +300,7 @@ QVariant CLIProcessor::argsGetOptionWithArg(const QStringList& args, QString sho
 			argStr=args.at(i).right(args.at(i).length() - longOpt.length() - 1);
 		}
 		// forms -n arg and --number arg
-		else if ((shortOpt!="" && args.at(i)==shortOpt) || args.at(i)==longOpt)
+		else if ((!shortOpt.isEmpty() && args.at(i)==shortOpt) || args.at(i)==longOpt)
 		{
 			if (i+1>=lastOptIdx)
 			{

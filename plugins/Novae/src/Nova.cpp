@@ -167,7 +167,7 @@ float Nova::getVMagnitude(const StelCore* core) const
 {
 	// OK, start from minimal brightness
 	double vmag = minMagnitude;
-	double currentJD = core->getJDay();
+	double currentJD = core->getJDE();
 	double deltaJD = qAbs(peakJD-currentJD);
     
 	// Fill "default" values for mX
@@ -307,7 +307,7 @@ void Nova::draw(StelCore* core, StelPainter* painter)
 	if (mag <= mlimit)
 	{
 		sd->computeRCMag(mag, &rcMag);
-		sd->drawPointSource(painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
+		sd->drawPointSource(painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, false);
 		painter->setColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;

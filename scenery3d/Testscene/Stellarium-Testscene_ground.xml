@@ -1,0 +1,167 @@
+<Root Label="Default Kernel" Name="" Type="Kernel">
+<Object Identifier="./Modellers/XML Modeller" Label="XML Modeller" Name="XML Modeller" Type="Modeller">
+</Object>
+<Object Identifier="./Ray Tracers/Standard Ray Tracer" Label="Standard Ray Tracer" Name="Standard Ray Tracer" Type="Ray Tracer">
+	<Parameter Name="Rasterization" Type="String" Value="Auto"/>
+	<Parameter Name="Antialiasing" Type="String" Value="Production AA"/>
+	<Parameter Name="Antialiasing Filter" Type="String" Value="Mitchell-Netravali 0.5 0.8"/>
+	<Parameter Name="Antialiasing Threshold" Type="Real" Value="0.3"/>
+	<Parameter Name="Texture Filtering" Type="Boolean" Value="1"/>
+	<Parameter Name="Brightness Threshold" Type="Real" Value="0.002"/>
+	<Parameter Name="Max Ray Tracing Depth" Type="Integer" Value="5"/>
+	<Parameter Name="Irradiance Scale" Type="RGB" Value="1 1 1"/>
+	<Parameter Name="Linear Lightflow" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Diffuse Samples" Type="Integer" Value="64"/>
+	<Parameter Name="./Sampling Criteria/Specular Samples" Type="Integer" Value="8"/>
+	<Parameter Name="./Sampling Criteria/Dispersion Samples" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Trace Diffusers" Type="Boolean" Value="0"/>
+	<Parameter Name="./Sampling Criteria/Trace Translucencies" Type="Boolean" Value="0"/>
+	<Parameter Name="./Sampling Criteria/Trace Fuzzy Reflections" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Trace Fuzzy Refractions" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Trace Reflections" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Trace Refractions" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Random Generator" Type="String" Value="Pure"/>
+</Object>
+<Object Identifier="./Irradiance Estimators/Diffuse Interreflection" Label="Diffuse Interreflection" Name="Diffuse Interreflection" Type="Irradiance Estimator">
+	<Parameter Name="Enabled" Type="Boolean" Value="1"/>
+	<Parameter Name="Max Recursion Depth" Type="Integer" Value="1"/>
+	<Parameter Name="Max Ray Tracing Depth" Type="Integer" Value="5"/>
+	<Parameter Name="Final Gathering Rays" Type="Integer" Value="500"/>
+	<Parameter Name="Light Sampling" Type="Boolean" Value="1"/>
+	<Parameter Name="Ambient Lighting" Type="Boolean" Value="0"/>
+	<Parameter Name="Accuracy" Type="Real" Value="0.25"/>
+	<Parameter Name="Minimum Pixel Reuse" Type="Real" Value="2.5"/>
+	<Parameter Name="Maximum Pixel Reuse" Type="Real" Value="0"/>
+	<Parameter Name="Radiance Limit" Type="Real" Value="0.3"/>
+	<Parameter Name="Secondary Estimator" Type="String" Value="Density Estimation"/>
+</Object>
+<Object Identifier="./Irradiance Estimators/Density Estimation" Label="Density Estimation" Name="Density Estimation" Type="Irradiance Estimator">
+	<Parameter Name="Enabled" Type="Boolean" Value="1"/>
+	<Parameter Name="Direct Lighting" Type="Boolean" Value="1"/>
+	<Parameter Name="Max Photon Tracing Depth" Type="Integer" Value="6"/>
+	<Parameter Name="Terminating Brightness" Type="Real" Value="0.01"/>
+	<Parameter Name="Samples per Light" Type="Integer" Value="100000"/>
+	<Parameter Name="Sample Sky" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Diffuse Samples" Type="Integer" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Specular Samples" Type="Integer" Value="0"/>
+	<Parameter Name="./Sampling Criteria/Dispersion Samples" Type="Boolean" Value="0"/>
+	<Parameter Name="./Sampling Criteria/Trace Reflections" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Trace Refractions" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Importance Sampling" Type="Boolean" Value="1"/>
+	<Parameter Name="./Sampling Criteria/Russian Roulette" Type="Boolean" Value="0"/>
+</Object>
+<Object Identifier="./Direct Light Estimators/Refraction Enhanced" Label="Refraction Enhanced" Name="Refraction Enhanced" Type="Direct Light Estimator">
+	<Parameter Name="Enabled" Type="Boolean" Value="1"/>
+	<Parameter Name="PseudoCaustics" Type="Boolean" Value="0"/>
+	<Parameter Name="Antialiasing" Type="String" Value="Low"/>
+	<Parameter Name="Optimized Area Lights" Type="Boolean" Value="1"/>
+</Object>
+<Object Identifier="./Environments/Octree Environment" Label="Octree Environment" Name="Octree Environment" Type="Environment">
+	<Parameter Name="Max Objects per Cell" Type="Integer" Value="20"/>
+</Object>
+<Object Identifier="./Filters/Simple Tone Mapping" Label="Simple Tone Mapping" Name="" Type="Filter">
+	<Parameter Name="Enabled" Type="Boolean" Value="1"/>
+	<Parameter Name="Method" Type="String" Value="Simple"/>
+	<Parameter Name="Exposure" Type="Real" Value="1"/>
+	<Parameter Name="Gamma Correction" Type="Real" Value="2.2"/>
+</Object>
+<Object Identifier="./Scenes/Stellarium-Testscene_ground" Label="Default Scene" Name="Stellarium-Testscene_ground" Type="Scene">
+<Object Identifier="Default Global Settings" Label="Default Global Settings" Name="" Type="Global Settings">
+	<Parameter Name="Ambient Light" Type="RGB" Value="0 0 0"/>
+	<Parameter Name="Background Color" Type="RGB" Value="0 0 0"/>
+	<Parameter Name="Compute Volume Transfer" Type="Boolean" Value="0"/>
+	<Parameter Name="Transfer Recursion Depth" Type="Integer" Value="1"/>
+	<Parameter Name="Background Type" Type="String" Value="Physical Sky"/>
+	<Parameter Name="Sky Intensity" Type="Real" Value="1"/>
+	<Parameter Name="Sky Frame" Type="Transform" Value="0.9999 -0.0164 0 0 0.0164 0.9999 0 0 0.0000 0.0000 1 0"/>
+	<Parameter Name="Sun Direction" Type="String" Value="-0.4471 -0.8223 0.3521"/>
+	<Parameter Name="Sky Turbidity" Type="Real" Value="2"/>
+	<Parameter Name="./Location/Latitude" Type="Real" Value="48.1812"/>
+	<Parameter Name="./Location/Longitude" Type="Real" Value="16.2596"/>
+	<Parameter Name="./Location/Timezone" Type="Integer" Value="1"/>
+	<Parameter Name="./Location/Date" Type="String" Value="7/10/2010"/>
+	<Parameter Name="./Location/Time" Type="String" Value="13:30:0"/>
+</Object>
+<Object Identifier="./Models/Bodenbelag_Schotter_Indisch" Label="Default Model" Name="Bodenbelag_Schotter_Indisch" Type="Model">
+	<Object Identifier="Triangular Mesh" Label="Triangular Mesh" Name="" Type="Surface">
+	<Parameter Name="Vertex List" Type="Point3D List" Value="4">
+	<P xyz="12.0000 12.0000 0.0000"/>
+	<P xyz="-12.0000 -12.0000 0.0000"/>
+	<P xyz="-12.0000 12.0000 0.0000"/>
+	<P xyz="12.0000 -12.0000 0.0000"/>
+	</Parameter>
+	<Parameter Name="Normal List" Type="Point3D List" Value="4">
+	<P xyz="0.0000 0.0000 -1.0000"/>
+	<P xyz="0.0000 0.0000 -1.0000"/>
+	<P xyz="0.0000 0.0000 -1.0000"/>
+	<P xyz="0.0000 0.0000 -1.0000"/>
+	</Parameter>
+	<Parameter Name="Index List" Type="Triangle Index List" Value="2">
+	<F ijk="0 1 2"/>
+	<F ijk="1 0 3"/>
+	</Parameter>
+	<Parameter Name="Smooth" Type="Boolean" Value="1"/>
+	<Parameter Name="AA Tolerance" Type="Real" Value="15"/>
+	</Object>
+<Object Identifier="Whitted Material" Label="Whitted Material" Name="" Type="Material">
+	<Object Identifier="./Diffuse/Weighted Texture" Label="Weighted Texture" Name="" Type="Texture">
+		<Object Identifier="Bitmap Texture" Label="Bitmap Texture" Name="" Type="Texture">
+		<Parameter Name="Filename" Type="String" Value="TX_Stellarium-Testscene_ground\Bodenbelag_Schotter_Indisch.jpg"/>
+		<Parameter Name="Projection" Type="String" Value="UV"/>
+		</Object>
+	<Parameter Name="Bitmap Texture:Weight" Type="Real" Value="1"/>
+</Object>
+	<Parameter Name="Smooth" Type="Boolean" Value="1"/>
+	<Parameter Name="Inverted" Type="Boolean" Value="0"/>
+	<Parameter Name="Shininess" Type="Real" Value="128"/>
+	<Parameter Name="Transmitted Shininess" Type="Real" Value="128"/>
+	<Parameter Name="Index of Refraction" Type="Real" Value="3"/>
+	<Parameter Name="Specular Sampling" Type="Boolean" Value="0"/>
+	<Parameter Name="Transmitted Sampling" Type="Boolean" Value="0"/>
+	<Parameter Name="Specular Attenuation" Type="String" Value="Fresnel"/>
+	<Parameter Name="Transmitted Attenuation" Type="String" Value="Fresnel"/>
+	</Object>
+	<Parameter Name="Map Channel" Type="Point2D List" Value="4">
+	<P xy="-13.1234 -12.1234"/>
+	<P xy="0.0000 1.0000"/>
+	<P xy="0.0000 -12.1234"/>
+	<P xy="-13.1234 1.0000"/>
+	</Parameter>
+	<Parameter Name="Frame" Type="Transform" Value="1 0 0 0 0 1 0 0 0 0 1 0"/>
+	<Parameter Name="Visible" Type="Boolean" Value="1"/>
+	<Parameter Name="Shadow Caster" Type="Boolean" Value="1"/>
+	<Parameter Name="Shadow Receiver" Type="Boolean" Value="1"/>
+	<Parameter Name="Caustics Transmitter" Type="Boolean" Value="1"/>
+	<Parameter Name="Caustics Receiver" Type="Boolean" Value="1"/>
+</Object>
+<Object Identifier="./Cameras/## Current View ##" Label="Pinhole Camera" Name="## Current View ##" Type="Camera">
+<Parameter Name="Focal Length" Type="Real" Value="1.5858" />
+<Parameter Name="Resolution" Type="String" Value="1606x840"/>
+<Parameter Name="Frame" Type="Transform" Value="1.9341 -0.9740 1.3275 -25.0820
+-1.6465 -1.1442 1.5593 -30.4113
+-0.0000 -2.0479 -1.5026 29.4454
+"/>
+<Parameter Name="Focus Distance" Type="Real" Value="1"/>
+</Object>
+<Object Identifier="./Lights/Sun" Label="Default Light" Name="Sun" Type="Light">
+<Object Identifier="Omni Light" Label="Omni Light" Name="" Type="Emittance">
+<Object Identifier="./Radiance/Constant Texture" Label="Constant Texture" Name="" Type="Texture">
+<Parameter Name="Color" Type="RGB" Value="1 1 1" />
+</Object>
+<Parameter Name="Attenuation" Type="String" Value="None"/>
+</Object>
+<Parameter Name="Enabled" Type="Boolean" Value="1"/>
+<Parameter Name="Shadow" Type="Boolean" Value="1"/>
+<Parameter Name="Soft Shadow" Type="Boolean" Value="0"/>
+<Parameter Name="Negative Light" Type="Boolean" Value="0"/>
+<Parameter Name="Global Photons" Type="Boolean" Value="1"/>
+<Parameter Name="Caustic Photons" Type="Boolean" Value="1"/>
+<Parameter Name="Multiplier" Type="Real" Value="3.0"/>
+<Parameter Name="Frame" Type="Transform" Value="1 0 0 -1158.35546638266 0 1 0 -2216.07648197586 0 0 1 941.388271619026"/>
+<Parameter Name="Focus Distance" Type="Real" Value="4"/>
+<Parameter Name="Radius" Type="Real" Value="0.2"/>
+<Parameter Name="Shadow Color" Type="RGB" Value="0 0 0"/>
+</Object>
+<Parameter Name="./Cameras/Active" Type="String" Value="## Current View ##"/>
+</Object>
+</Root>

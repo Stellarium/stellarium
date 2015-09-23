@@ -122,7 +122,7 @@ Vec3d gSatWrapper::getSubPoint()
 
 void gSatWrapper::updateEpoch()
 {
-	double jul_utc = StelApp::getInstance().getCore()->getJDay();
+	double jul_utc = StelApp::getInstance().getCore()->getJD();
         epoch = jul_utc;
 
 	if (pSatellite)
@@ -150,7 +150,7 @@ void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity
 	/* Reference:  Explanatory supplement to the Astronomical Almanac, page 209-210. */
 	/* Elipsoid earth model*/
 	/* c = Nlat/a */
-	c = 1/sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
+	c = 1/std::sqrt(1 + __f*(__f - 2)*Sqr(sin(radLatitude)));
 	sq = Sqr(1 - __f)*c;
 
 	r = (KEARTHRADIUS*c + (loc.altitude/1000))*cos(radLatitude);

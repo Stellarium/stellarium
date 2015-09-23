@@ -95,6 +95,8 @@ private slots:
 	void cursorTimeOutChanged();
 	void cursorTimeOutChanged(double) {cursorTimeOutChanged();}
 
+	void updateStartPointForAzimuth(bool b);
+
 	void newStarCatalogData();
 	void downloadStars();
 	void cancelDownload();
@@ -123,8 +125,6 @@ private slots:
 	void pluginsSelectionChanged(QListWidgetItem *item, QListWidgetItem *previousItem);
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
-
-	void setUpdatesFlag(bool b);
 
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);

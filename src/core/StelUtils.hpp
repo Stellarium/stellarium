@@ -134,7 +134,17 @@ namespace StelUtils
 	//! @return The corresponding vector
 	//! @deprecated Use the >> operator from Vec3f class
 	Vec3f strToVec3f(const QStringList& s);
+	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
 	Vec3f strToVec3f(const QString& s);
+	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
+	Vec4d strToVec4d(const QStringList& s);
+	//! Like StelUtils::strToVec3f, but with 4 components and with double precision
+	Vec4d strToVec4d(const QString& s);
+
+	//! Converts a Vec3f to a string in the same format that can be read by strToVec3f
+	QString vec3fToStr(const Vec3f& v);
+	//! Converts a Vec4d to a string in the same format that can be read by strToVec4d
+	QString vec4dToStr(const Vec4d& v);
 
 	//! Converts a Vec3f to HTML color notation.
 	//! @param v The vector
@@ -176,7 +186,10 @@ namespace StelUtils
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
 	//! Coordinate Transformation from equatorial to ecliptical
-	void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
+	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
+
+	//! Coordinate Transformation from ecliptical to equatorial
+	void eclToEqu(const double lambdaRad, const double betaRad, const double eclRad, double *raRad, double *decRad);
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.
@@ -233,7 +246,7 @@ namespace StelUtils
 	//! (see QDateTime::toString()). Uses the @b system locale, not
 	//! the one set in Stellarium.
 	//! @return QString representing the formatted date
-	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString fmt);
+	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek, const QString &fmt);
 
 	//! Format the date and day-of-week per the @b system locale's
 	//! QLocale::ShortFormat.
@@ -313,9 +326,10 @@ namespace StelUtils
 		return Vec3f(max, 0, 0);
 	}
 
-	//! Calculate and getting sidereal period in days from semi-major axis (in AU)
+	//! Calculate and return sidereal period in days from semi-major axis (in AU)
 	double calculateSiderealPeriod(const double SemiMajorAxis);
 
+	//! Convert decimal hours to hours, minutes, seconds
 	QString hoursToHmsStr(const double hours);
 
 	//! Get the number of seconds since program start.
@@ -575,6 +589,15 @@ namespace StelUtils
 	//! @return Delta-T in seconds
 	double getDeltaTByIslamSadiqQureshi(const double jDay);
 
+	//! Get Delta-T estimation for a given date.
+	//! Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
+	//! Source: Delta T: Polynomial Approximation of Time Period 1620-2013
+	//! Journal of Astrophysics, Vol. 2014, Article ID 480964
+	//! http://dx.doi.org/10.1155/2014/480964
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	double getDeltaTByKhalidSultanaZaidi(const double jDay);
+
 	//! Get Secular Acceleration estimation for a given year.
 	//! Method described is here: http://eclipse.gsfc.nasa.gov/SEcat5/secular.html
 	//! For adapting from -26 to -25.858, use -0.91072 * (-25.858 + 26.0) = -0.12932224
@@ -617,8 +640,22 @@ namespace StelUtils
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
 
+	//! Compute date in decimal year format
+	//! @param year
+	//! @param month
+	//! @param day
+	//! @return decimal year
+	double getDecYear(const int year, const int month, const int day);
+
 	//! Uncompress gzip or zlib compressed data.
 	QByteArray uncompress(const QByteArray& data);
+
+	//! Uncompress (gzip/zlib) data from this QIODevice, which must be open and readable.
+	//! @param device The device to read from, must already be opened with an OpenMode supporting reading
+	//! @param maxBytes The max. amount of bytes to read from the device, or -1 to read until EOF.  Note that it
+	//! always stops when inflate() returns Z_STREAM_END. Positive values can be used for interleaving compressed data
+	//! with other data.
+	QByteArray uncompress(QIODevice &device, qint64 maxBytes=-1);
 
 #ifdef _MSC_BUILD
 	inline double trunc(double x)

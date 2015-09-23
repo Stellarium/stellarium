@@ -69,7 +69,8 @@ SolarSystem::SolarSystem()
 	, flagMarker(false)
 	, flagNativeNames(false)
 	, flagTranslatedNames(false)
-	, flagIsolatedTrails(false)
+	, flagIsolatedTrails(true)
+	, flagIsolatedOrbits(true)
 	, allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
@@ -104,6 +105,13 @@ SolarSystem::~SolarSystem()
 	{
 		p->satellites.clear();
 	}
+
+	//delete comet textures created in loadPlanets
+	Comet::comaTexture.clear();
+	Comet::tailTexture.clear();
+
+	//deinit of SolarSystem is NOT called at app end automatically
+	deinit();
 }
 
 /*************************************************************************
@@ -145,6 +153,7 @@ void SolarSystem::init()
 	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
+	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 
 	recreateTrails();
 
@@ -172,7 +181,8 @@ void SolarSystem::init()
 
 void SolarSystem::deinit()
 {
-	Planet::deinitShader();
+	if(Planet::planetShaderProgram)
+		Planet::deinitShader();
 }
 
 void SolarSystem::recreateTrails()
@@ -525,10 +535,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				period = pd.value(secname+"/orbit_Period",-1e100).toDouble();
 				if (period <= -1e100) {
 					meanMotion = (eccentricity == 1.0)
-								? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
+								? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)
 								: (semi_major_axis > 0.0)
-								? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-								: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+								? 0.01720209895 / (semi_major_axis*std::sqrt(semi_major_axis))
+								: 0.01720209895 / (-semi_major_axis*std::sqrt(-semi_major_axis));
 					period = 2.0*M_PI/meanMotion;
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -641,8 +651,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						//			? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
 						//			: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
 						meanMotion = (eccentricity == 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
-									: 0.01720209895 / (fabs(semi_major_axis)*sqrt(fabs(semi_major_axis)));
+									? 0.01720209895 * (1.5/pericenterDistance) * std::sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
+									: 0.01720209895 / (fabs(semi_major_axis)*std::sqrt(fabs(semi_major_axis)));
 					}
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -821,7 +831,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
-		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "sdo" || type == "oco") && !englishName.contains("Pluto"))
+		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
 		{
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/lighting").toBool(),
@@ -908,8 +918,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 
-			mp->setSemiMajorAxis(pd.value(secname+"/orbit_SemiMajorAxis", 0).toDouble());
-
+			const double eccentricity = pd.value(secname+"/orbit_Eccentricity",0.0).toDouble();
+			const double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
+			if (eccentricity<1 && pericenterDistance>0)
+			{
+				mp->setSemiMajorAxis(pericenterDistance / (1.0-eccentricity));
+			}
 		}
 		else
 		{
@@ -1001,58 +1015,59 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	// special case: load earth shadow texture
 	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
 
-	// GZ: Also comets just have static textures.
+	// Also comets just have static textures.
 	Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
+	//tail textures. We use paraboloid tail bodies, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
 	Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: I think we need only one texture for the tails.
 
 	return true;
 }
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
-void SolarSystem::computePositions(double date, const Vec3d& observerPos)
+void SolarSystem::computePositions(double dateJDE, const Vec3d& observerPos)
 {
 	if (flagLightTravelTime)
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
-			p->computePositionWithoutOrbits(date);
+			p->computePositionWithoutOrbits(dateJDE);
 		}
 		foreach (PlanetP p, systemPlanets)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			p->computePosition(date-light_speed_correction);
+			p->computePosition(dateJDE-light_speed_correction);
 		}
 	}
 	else
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
-			p->computePosition(date);
+			p->computePosition(dateJDE);
 		}
 	}
-	computeTransMatrices(date, observerPos);
+	computeTransMatrices(dateJDE, observerPos);
 }
 
 // Compute the transformation matrix for every elements of the solar system.
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
-void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos)
+void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 {
+	double dateJD=dateJDE - (StelApp::getInstance().getCore()->computeDeltaT(dateJDE))/86400.0;
+
 	if (flagLightTravelTime)
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
-			p->computeTransMatrix(date-light_speed_correction);
+			p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
 		}
 	}
 	else
 	{
 		foreach (PlanetP p, systemPlanets)
 		{
-			p->computeTransMatrix(date);
+			p->computeTransMatrix(dateJD, dateJDE);
 		}
 	}
 }
@@ -1332,12 +1347,23 @@ void SolarSystem::setFlagOrbits(bool b)
 		foreach (PlanetP p, systemPlanets)
 			p->setFlagOrbits(b);
 	}
-	else
+	else if (getFlagIsolatedOrbits())
 	{
 		// If a Planet is selected and orbits are on, fade out non-selected ones
 		foreach (PlanetP p, systemPlanets)
 		{
 			if (selected == p)
+				p->setFlagOrbits(b);
+			else
+				p->setFlagOrbits(false);
+		}
+	}
+	else
+	{
+		// A planet is selected and orbits are on - draw orbits for the planet and their moons
+		foreach (PlanetP p, systemPlanets)
+		{
+			if (selected == p || selected == p->parent)
 				p->setFlagOrbits(b);
 			else
 				p->setFlagOrbits(false);
@@ -1511,7 +1537,10 @@ void SolarSystem::setFlagPlanets(bool b)
 	flagShow=b;
 }
 
-bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
+bool SolarSystem::getFlagPlanets(void) const
+{
+	return flagShow;
+}
 
 void SolarSystem::setFlagNativeNames(bool b)
 {
@@ -1524,7 +1553,10 @@ void SolarSystem::setFlagNativeNames(bool b)
 	updateI18n();
 }
 
-bool SolarSystem::getFlagNativeNames() const {return flagNativeNames; }
+bool SolarSystem::getFlagNativeNames() const
+{
+	return flagNativeNames;
+}
 
 void SolarSystem::setFlagTranslatedNames(bool b)
 {
@@ -1537,14 +1569,31 @@ void SolarSystem::setFlagTranslatedNames(bool b)
 	updateI18n();
 }
 
-bool SolarSystem::getFlagTranslatedNames() const {return flagTranslatedNames; }
+bool SolarSystem::getFlagTranslatedNames() const
+{
+	return flagTranslatedNames;
+}
 
 void SolarSystem::setFlagIsolatedTrails(bool b)
 {
 	flagIsolatedTrails = b;
 }
 
-bool SolarSystem::getFlagIsolatedTrails() const { return flagIsolatedTrails; }
+bool SolarSystem::getFlagIsolatedTrails() const
+{
+	return flagIsolatedTrails;
+}
+
+void SolarSystem::setFlagIsolatedOrbits(bool b)
+{
+	flagIsolatedOrbits = b;
+}
+
+bool SolarSystem::getFlagIsolatedOrbits() const
+{
+	return flagIsolatedOrbits;
+}
+
 
 // Set/Get planets names color
 void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
@@ -1645,6 +1694,10 @@ void SolarSystem::reloadPlanets()
 	systemPlanets.clear();
 	// Memory leak? What's the proper way of cleaning shared pointers?
 
+	// Also delete Comet textures (loaded in loadPlanets()
+	Comet::tailTexture.clear();
+	Comet::comaTexture.clear();
+
 	// Re-load the ssystem.ini file
 	loadPlanets();	
 	computePositions(StelUtils::getJDFromSystem());
@@ -1684,4 +1737,78 @@ void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
 	return getEarth()->getApparentMagnitudeAlgorithmString();
+}
+
+double SolarSystem::getEclipseFactor(const StelCore* core) const
+{
+	Vec3d Lp = sun->getEclipticPos();
+	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
+	const double RS = sun->getRadius();
+
+	double final_illumination = 1.0;
+
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		if(planet == sun || planet == core->getCurrentPlanet())
+			continue;
+
+		Mat4d trans;
+		planet->computeModelMatrix(trans);
+
+		const Vec3d C = trans * Vec3d(0, 0, 0);
+		const double radius = planet->getRadius();
+
+		Vec3d v1 = Lp - P3;
+		Vec3d v2 = C - P3;
+
+		const double L = v1.length();
+		const double l = v2.length();
+
+		v1 = v1 / L;
+		v2 = v2 / l;
+
+		const double R = RS / L;
+		const double r = radius / l;
+		const double d = ( v1 - v2 ).length();
+
+		if(planet->englishName == "Moon")
+			v1 = planet->getHeliocentricEclipticPos();
+
+		double illumination;
+
+		// distance too far
+		if(d >= R + r)
+		{
+			illumination = 1.0;
+		}
+		// umbra
+		else if(r >= R + d)
+		{
+			illumination = 0.0;
+		}
+		// penumbra completely inside
+		else if(d + r <= R)
+		{
+			illumination = 1.0 - r * r / (R * R);
+		}
+		// penumbra partially inside
+		else
+		{
+			const double x = (R * R + d * d - r * r) / (2.0 * d);
+
+			const double alpha = std::acos(x / R);
+			const double beta = std::acos((d - x) / r);
+
+			const double AR = R * R * (alpha - 0.5 * std::sin(2.0 * alpha));
+			const double Ar = r * r * (beta - 0.5 * std::sin(2.0 * beta));
+			const double AS = R * R * 2.0 * std::asin(1.0);
+
+			illumination = 1.0 - (AR + Ar) / AS;
+		}
+
+		if(illumination < final_illumination)
+			final_illumination = illumination;
+	}
+
+	return final_illumination;
 }

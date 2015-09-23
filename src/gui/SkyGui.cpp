@@ -121,8 +121,11 @@ SkyGui::SkyGui(QGraphicsItem * parent)
 	// Construct the Windows buttons bar
 	winBar = new LeftStelBar(this);
 	// Construct the bottom buttons bar
-	buttonBar = new BottomStelBar(this, QPixmap(":/graphicGui/btbg-left.png"), QPixmap(":/graphicGui/btbg-right.png"),
-																QPixmap(":/graphicGui/btbg-middle.png"), QPixmap(":/graphicGui/btbg-single.png"));
+	buttonBar = new BottomStelBar(this,
+				      QPixmap(":/graphicGui/btbg-left.png"),
+				      QPixmap(":/graphicGui/btbg-right.png"),
+				      QPixmap(":/graphicGui/btbg-middle.png"),
+				      QPixmap(":/graphicGui/btbg-single.png"));
 	infoPanel = new InfoPanel(this);
 
 	// Used to display some progress bar in the lower right corner, e.g. when loading a file
@@ -192,7 +195,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));		
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -203,7 +206,7 @@ void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
 
 void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 {
-	const int hh = geometry().height();
+	const int hh = getSkyGuiHeight();
 
 	double x = event->pos().x();
 	double y = event->pos().y();
@@ -234,6 +237,18 @@ void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 		animBottomBarTimeLine->setDirection(QTimeLine::Backward);
 		animBottomBarTimeLine->start();
 	}
+}
+
+// Used to recompute the bars position when we toggle the gui off and on.
+// This was not necessary with Qt < 5.4.  So it might be a bug.
+QVariant SkyGui::itemChange(GraphicsItemChange change, const QVariant & value)
+{
+#if QT_VERSION > QT_VERSION_CHECK(5, 5, 0)
+	#warning Please test if this code is still needed.
+#endif
+	if (change == QGraphicsItem::ItemVisibleHasChanged && value.toBool())
+		updateBarsPos();
+	return QGraphicsItem::itemChange(change, value);
 }
 
 int SkyGui::getSkyGuiWidth() const
@@ -282,9 +297,9 @@ void SkyGui::updateBarsPos()
 		buttonBarPath->updatePath(buttonBar, winBar);
 
 	const qreal newProgressBarX = ww-progressBarMgr->boundingRect().width()-20;
-	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()+7;
+	const qreal newProgressBarY = hh-progressBarMgr->boundingRect().height()+7;	
 	progressBarMgr->setPos(newProgressBarX, newProgressBarY);
-	progressBarMgr->setZValue(400);
+	progressBarMgr->setZValue(400);	
 
 	// Update position of the auto-hide buttons
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);

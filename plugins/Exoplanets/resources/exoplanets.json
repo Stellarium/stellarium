@@ -152,7 +152,7 @@
 			"exoplanets":
 			[
 			{
-				"mass": 8.0,
+				"mass": 14.0,
 				"radius": 1.7,
 				"semiAxis": 330.0,
 				"angleDistance": 2.275862,
@@ -479,11 +479,12 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.468,
-				"period": 4.23077,
+				"mass": 0.46,
+				"radius": 1.9,
+				"period": 4.2308,
 				"semiAxis": 0.052,
-				"eccentricity": 0.0,
-				"inclination": 80.9,
+				"eccentricity": 0.0069,
+				"inclination": 80.0,
 				"angleDistance": 0.003537,
 				"discovered": 1995,
 				"planetName": "b"
@@ -832,6 +833,28 @@
 			"RA": "1h43m40.9s",
 			"DE": "21d0m17.9s"
 		},
+		"BD+49 828":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.6,
+				"period": 2590.0,
+				"semiAxis": 4.2,
+				"eccentricity": 0.35,
+				"discovered": 2015,
+				"planetName": "828"
+			}
+			],
+			"stype": "KO",
+			"smass": 1.52,
+			"smetal": -0.19,
+			"Vmag": 9.38,
+			"sradius": 7.6,
+			"effectiveTemp": 4943.0,
+			"RA": "3h2m34s",
+			"DE": "49d43m48s"
+		},
 		"BD-061339":
 		{
 			"exoplanets":
@@ -907,10 +930,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.48,
-				"period": 3.487,
+				"mass": 0.46,
+				"radius": 1.03,
+				"period": 3.4878,
 				"semiAxis": 0.046,
-				"eccentricity": 0.05,
+				"eccentricity": 0.0104,
 				"angleDistance": 0.000697,
 				"discovered": 2000,
 				"planetName": "b"
@@ -1420,6 +1444,32 @@
 			"RA": "6h44m12.5s",
 			"DE": "0d17m56.8s"
 		},
+		"CoRoT-22":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.0383853003178,
+				"radius": 0.435365216104,
+				"period": 9.75598,
+				"semiAxis": 0.092,
+				"eccentricity": 0.077,
+				"inclination": 89.749,
+				"angleDistance": 0.000149,
+				"discovered": 2011,
+				"planetName": "b"
+			}
+			],
+			"distance": 592.0,
+			"stype": "G0IV",
+			"smass": 1.099,
+			"smetal": 0.17,
+			"Vmag": 11.93,
+			"sradius": 1.136,
+			"effectiveTemp": 5939.0,
+			"RA": "18h42m40s",
+			"DE": "6d13m30s"
+		},
 		"CoRoT-23":
 		{
 			"exoplanets":
@@ -1445,6 +1495,42 @@
 			"effectiveTemp": 5900.0,
 			"RA": "18h39m7.8s",
 			"DE": "4d21m28s"
+		},
+		"CoRoT-24":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.018,
+				"radius": 0.33,
+				"period": 5.1134,
+				"semiAxis": 0.056,
+				"eccentricity": 0.0,
+				"inclination": 86.5,
+				"angleDistance": 9.3e-05,
+				"discovered": 2011,
+				"planetName": "b"
+			},
+			{
+				"mass": 0.088,
+				"radius": 0.44,
+				"period": 11.759,
+				"semiAxis": 0.098,
+				"eccentricity": 0.0,
+				"inclination": 89.0,
+				"angleDistance": 0.000163,
+				"discovered": 2011,
+				"planetName": "c"
+			}
+			],
+			"distance": 600.0,
+			"stype": "K1V",
+			"smass": 0.91,
+			"smetal": 0.3,
+			"sradius": 0.86,
+			"effectiveTemp": 4950.0,
+			"RA": "6h47m42s",
+			"DE": "-3d43m10s"
 		},
 		"CoRoT-25":
 		{
@@ -1760,6 +1846,81 @@
 			"Vmag": 17.5,
 			"RA": "11h17m16s",
 			"DE": "17d57m41s"
+		},
+		"EPIC 201367065":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.191,
+				"period": 10.05403,
+				"semiAxis": 0.0769,
+				"inclination": 89.28,
+				"discovered": 2015,
+				"planetName": "b"
+			},
+			{
+				"radius": 0.153,
+				"period": 24.6454,
+				"semiAxis": 0.1399,
+				"inclination": 89.55,
+				"discovered": 2015,
+				"planetName": "c"
+			},
+			{
+				"radius": 0.136,
+				"period": 44.5631,
+				"semiAxis": 0.2076,
+				"inclination": 89.68,
+				"discovered": 2015,
+				"pclass": "M-Warm Superterran",
+				"EqTemp": 282,
+				"ESI": 80,
+				"planetName": "d"
+			}
+			],
+			"distance": 45.0,
+			"stype": "M0.2V",
+			"smass": 0.601,
+			"smetal": -0.32,
+			"Vmag": 12.17,
+			"sradius": 0.561,
+			"effectiveTemp": 3896.0,
+			"hasHP": true,
+			"RA": "11h29m20s",
+			"DE": "-1d27m17s"
+		},
+		"EPIC 201505350":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.645,
+				"period": 7.919454,
+				"semiAxis": 0.077,
+				"eccentricity": 0.0,
+				"inclination": 88.83,
+				"discovered": 2015,
+				"planetName": "b"
+			},
+			{
+				"mass": 1.1,
+				"radius": 0.376,
+				"period": 11.90701,
+				"semiAxis": 0.103,
+				"eccentricity": 0.0,
+				"inclination": 89.91,
+				"discovered": 2015,
+				"planetName": "c"
+			}
+			],
+			"smass": 0.89,
+			"smetal": 0.38,
+			"Vmag": 13.5,
+			"sradius": 0.88,
+			"effectiveTemp": 5230.0,
+			"RA": "11h39m50s",
+			"DE": "0d36m13s"
 		},
 		"FU Tau":
 		{
@@ -2208,11 +2369,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.0737,
-				"radius": 0.365,
-				"period": 2.6438986,
+				"mass": 0.07,
+				"radius": 0.38,
+				"period": 2.64394,
 				"semiAxis": 0.02887,
-				"eccentricity": 0.15,
+				"eccentricity": 0.1912,
 				"inclination": 85.8,
 				"angleDistance": 0.00283,
 				"discovered": 2004,
@@ -2329,10 +2490,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.037,
-				"period": 4.6938,
+				"mass": 0.04,
+				"radius": 1.13,
+				"period": 4.6944,
 				"semiAxis": 0.039,
-				"eccentricity": 0.2,
+				"eccentricity": 0.07,
 				"angleDistance": 0.00859,
 				"discovered": 2007,
 				"planetName": "b"
@@ -2423,6 +2585,31 @@
 			"hasHP": true,
 			"RA": "17h37m3.6s",
 			"DE": "-43d40m50.8s"
+		},
+		"GJ 758":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 35.0,
+				"period": 109000.0,
+				"semiAxis": 44.8,
+				"eccentricity": 0.564,
+				"inclination": 43.6,
+				"angleDistance": 3.516129,
+				"discovered": 2009,
+				"planetName": "b"
+			}
+			],
+			"distance": 15.5,
+			"stype": "K0V",
+			"smass": 0.97,
+			"smetal": 0.18,
+			"Vmag": 6.36,
+			"sradius": 0.88,
+			"effectiveTemp": 5425.0,
+			"RA": "19h23m34s",
+			"DE": "33d13m18.9s"
 		},
 		"GJ 832":
 		{
@@ -2531,6 +2718,7 @@
 			[
 			{
 				"mass": 11.0,
+				"radius": 1.35,
 				"semiAxis": 2000.0,
 				"discovered": 2014,
 				"planetName": "b"
@@ -3062,11 +3250,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.196960639335,
-				"radius": 0.990277438268,
+				"mass": 0.183,
+				"radius": 0.947,
 				"period": 5.508023,
 				"semiAxis": 0.0559,
-				"eccentricity": 0.084,
+				"eccentricity": 0.106,
 				"inclination": 88.8,
 				"angleDistance": 0.000337,
 				"discovered": 2010,
@@ -3078,8 +3266,8 @@
 			"smass": 0.77,
 			"smetal": 0.1,
 			"Vmag": 12.76,
-			"sradius": 0.749,
-			"effectiveTemp": 4803.0,
+			"sradius": 0.717,
+			"effectiveTemp": 4870.0,
 			"RA": "17h5m23.9s",
 			"DE": "33d0m45s"
 		},
@@ -3877,6 +4065,102 @@
 			"RA": "18h17m37s",
 			"DE": "36d37m18s"
 		},
+		"HAT-P-50":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.35,
+				"radius": 1.288,
+				"period": 3.1220109,
+				"semiAxis": 0.0453,
+				"eccentricity": 0.115,
+				"inclination": 83.65,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 597.0,
+			"smass": 1.273,
+			"smetal": -0.18,
+			"Vmag": 11.76,
+			"sradius": 1.698,
+			"effectiveTemp": 6280.0,
+			"RA": "7h52m15s",
+			"DE": "28d8m22s"
+		},
+		"HAT-P-51":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.309,
+				"radius": 1.293,
+				"period": 4.2180278,
+				"semiAxis": 0.05069,
+				"eccentricity": 0.123,
+				"inclination": 88.48,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 470.0,
+			"smass": 0.976,
+			"smetal": 0.27,
+			"Vmag": 13.44,
+			"sradius": 1.041,
+			"effectiveTemp": 5449.0,
+			"RA": "1h24m16s",
+			"DE": "32d48m39s"
+		},
+		"HAT-P-52":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.818,
+				"radius": 1.009,
+				"period": 2.7535953,
+				"semiAxis": 0.03694,
+				"eccentricity": 0.047,
+				"inclination": 87.02,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 385.0,
+			"smass": 0.887,
+			"smetal": 0.28,
+			"Vmag": 14.07,
+			"sradius": 0.893,
+			"effectiveTemp": 5131.0,
+			"RA": "2h50m53s",
+			"DE": "29d1m21s"
+		},
+		"HAT-P-53":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.484,
+				"radius": 1.318,
+				"period": 1.9616241,
+				"semiAxis": 0.03159,
+				"eccentricity": 0.134,
+				"inclination": 86.2,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 719.0,
+			"smass": 1.093,
+			"smetal": 0.0,
+			"Vmag": 13.73,
+			"sradius": 1.209,
+			"effectiveTemp": 5956.0,
+			"RA": "1h27m29s",
+			"DE": "38d58m5s"
+		},
 		"HAT-P-54":
 		{
 			"exoplanets":
@@ -3935,7 +4219,7 @@
 			{
 				"mass": 1.741,
 				"radius": 1.431,
-				"period": 2.2047298,
+				"period": 2.204735471,
 				"semiAxis": 0.0379,
 				"eccentricity": 0.0,
 				"inclination": 84.1,
@@ -4027,6 +4311,78 @@
 			"effectiveTemp": 5870.0,
 			"RA": "11h42m5.9s",
 			"DE": "-23d21m16.9s"
+		},
+		"HATS-10":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.526,
+				"radius": 0.969,
+				"period": 3.312846,
+				"semiAxis": 0.0449,
+				"eccentricity": 0.5,
+				"inclination": 87.79,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 496.0,
+			"smass": 1.1,
+			"smetal": 0.15,
+			"Vmag": 13.1,
+			"sradius": 1.105,
+			"effectiveTemp": 5880.0,
+			"RA": "19h37m14s",
+			"DE": "-22d12m16s"
+		},
+		"HATS-13":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.543,
+				"radius": 1.212,
+				"period": 3.0440499,
+				"semiAxis": 0.04057,
+				"eccentricity": 0.18,
+				"inclination": 88.55,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 476.0,
+			"smass": 0.962,
+			"smetal": 0.05,
+			"Vmag": 13.89,
+			"sradius": 0.887,
+			"effectiveTemp": 5523.0,
+			"RA": "21h7m51s",
+			"DE": "-26d5m48s"
+		},
+		"HATS-14":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.071,
+				"radius": 1.039,
+				"period": 2.7667641,
+				"semiAxis": 0.03815,
+				"eccentricity": 0.141,
+				"inclination": 88.83,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 513.0,
+			"smass": 0.967,
+			"smetal": 0.33,
+			"Vmag": 13.79,
+			"sradius": 0.933,
+			"effectiveTemp": 5346.0,
+			"RA": "20h52m52s",
+			"DE": "-25d41m14s"
 		},
 		"HATS-2":
 		{
@@ -4135,7 +4491,7 @@
 				"semiAxis": 0.03623,
 				"inclination": 88.21,
 				"discovered": 2014,
-				"planetName": "a"
+				"planetName": "b"
 			}
 			],
 			"distance": 148.4,
@@ -4146,6 +4502,30 @@
 			"effectiveTemp": 3724.0,
 			"RA": "5h52m35.2s",
 			"DE": "-19d1m54s"
+		},
+		"HATS-9":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.837,
+				"radius": 1.065,
+				"period": 1.9153073,
+				"semiAxis": 0.03048,
+				"eccentricity": 0.129,
+				"inclination": 86.5,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 622.0,
+			"smass": 1.03,
+			"smetal": 0.34,
+			"Vmag": 13.3,
+			"sradius": 1.5,
+			"effectiveTemp": 5336.0,
+			"RA": "19h23m14s",
+			"DE": "-20d8m59s"
 		},
 		"HD 100655":
 		{
@@ -4877,9 +5257,10 @@
 			[
 			{
 				"mass": 0.28,
-				"period": 5.24,
+				"radius": 0.99,
+				"period": 5.23921,
 				"semiAxis": 0.0635,
-				"eccentricity": 0.01,
+				"eccentricity": 0.0451,
 				"angleDistance": 0.001076,
 				"discovered": 2005,
 				"planetName": "b"
@@ -5239,10 +5620,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 2.13,
-				"period": 6.1335,
+				"mass": 2.14,
+				"radius": 1.05,
+				"period": 6.13322,
 				"semiAxis": 0.07,
-				"eccentricity": 0.309,
+				"eccentricity": 0.2943,
 				"angleDistance": 0.00079,
 				"discovered": 2005,
 				"planetName": "b"
@@ -6449,10 +6831,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 1.36,
-				"period": 4.088,
+				"mass": 1.33,
+				"radius": 1.05,
+				"period": 4.07206,
 				"semiAxis": 0.052,
-				"eccentricity": 0.0,
+				"eccentricity": 0.0123,
 				"angleDistance": 0.000825,
 				"discovered": 2005,
 				"planetName": "b"
@@ -6914,6 +7297,37 @@
 			"RA": "17h38m59.9s",
 			"DE": "-43d8m44s"
 		},
+		"HD 1605":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.96,
+				"period": 577.9,
+				"semiAxis": 1.48,
+				"eccentricity": 0.078,
+				"discovered": 2015,
+				"planetName": "b"
+			},
+			{
+				"mass": 3.48,
+				"period": 2111.0,
+				"semiAxis": 3.52,
+				"eccentricity": 0.098,
+				"discovered": 2015,
+				"planetName": "c"
+			}
+			],
+			"distance": 84.6,
+			"stype": "K1 IV",
+			"smass": 1.31,
+			"smetal": 0.21,
+			"Vmag": 7.52,
+			"sradius": 3.8,
+			"effectiveTemp": 4757.0,
+			"RA": "0h20m32s",
+			"DE": "30d58m29s"
+		},
 		"HD 16141":
 		{
 			"exoplanets":
@@ -7111,6 +7525,29 @@
 			"effectiveTemp": 5385.0,
 			"RA": "18h2m30s",
 			"DE": "26d18m46s"
+		},
+		"HD 1666":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 6.43,
+				"period": 270.0,
+				"semiAxis": 0.94,
+				"eccentricity": 0.63,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 110.6,
+			"stype": "F7 V",
+			"smass": 1.5,
+			"smetal": 0.37,
+			"Vmag": 8.17,
+			"sradius": 193.0,
+			"effectiveTemp": 6317.0,
+			"RA": "0h20m52s",
+			"DE": "-19d55m52s"
 		},
 		"HD 166724":
 		{
@@ -7563,10 +8000,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.95,
+				"mass": 0.92,
+				"radius": 1.05,
 				"period": 3.0925,
 				"semiAxis": 0.045,
-				"eccentricity": 0.022,
+				"eccentricity": 0.0104,
 				"angleDistance": 0.001667,
 				"discovered": 2000,
 				"planetName": "b"
@@ -8648,11 +9086,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.714,
+				"mass": 0.69,
 				"radius": 1.38,
-				"period": 3.52474859,
+				"period": 3.52472,
 				"semiAxis": 0.04747,
-				"eccentricity": 0.0004,
+				"eccentricity": 0.0082,
 				"inclination": 86.59,
 				"angleDistance": 0.00101,
 				"discovered": 1999,
@@ -8744,10 +9182,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.45,
-				"period": 2.245715,
-				"semiAxis": 0.036,
-				"eccentricity": 0.0,
+				"mass": 0.4,
+				"radius": 1.07,
+				"period": 2.24571,
+				"semiAxis": 1.036,
+				"eccentricity": 0.0147,
 				"angleDistance": 0.000683,
 				"discovered": 2005,
 				"planetName": "b"
@@ -8948,6 +9387,28 @@
 			"RA": "22h54m39s",
 			"DE": "-70d4m24.9s"
 		},
+		"HD 216536":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.47,
+				"period": 148.6,
+				"semiAxis": 0.609,
+				"eccentricity": 0.38,
+				"discovered": 2015,
+				"planetName": "216536"
+			}
+			],
+			"stype": "K0",
+			"smass": 1.36,
+			"smetal": -0.17,
+			"Vmag": 9.23,
+			"sradius": 12.5,
+			"effectiveTemp": 4639.0,
+			"RA": "22h35m48s",
+			"DE": "44d28m40s"
+		},
 		"HD 216770":
 		{
 			"exoplanets":
@@ -9130,7 +9591,7 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.066,
+				"mass": 0.085,
 				"period": 3.8335,
 				"semiAxis": 0.052,
 				"eccentricity": 0.0,
@@ -9549,9 +10010,10 @@
 			[
 			{
 				"mass": 0.48,
-				"period": 3.4442,
+				"radius": 1.04,
+				"period": 3.43752,
 				"semiAxis": 0.044,
-				"eccentricity": 0.0,
+				"eccentricity": 0.0407,
 				"angleDistance": 0.000819,
 				"discovered": 2005,
 				"planetName": "b"
@@ -9980,9 +10442,10 @@
 			[
 			{
 				"mass": 0.62,
-				"period": 3.38773,
+				"radius": 1.06,
+				"period": 3.6413,
 				"semiAxis": 0.039,
-				"eccentricity": 0.0,
+				"eccentricity": 0.0187,
 				"angleDistance": 0.000777,
 				"discovered": 2004,
 				"planetName": "b"
@@ -10027,9 +10490,10 @@
 			[
 			{
 				"mass": 0.33,
-				"period": 18.179,
+				"radius": 0.99,
+				"period": 18.1801,
 				"semiAxis": 0.168,
-				"eccentricity": 0.48,
+				"eccentricity": 0.458,
 				"angleDistance": 0.001953,
 				"discovered": 2006,
 				"planetName": "b"
@@ -10486,9 +10950,10 @@
 			[
 			{
 				"mass": 18.4,
-				"period": 1.3283,
+				"radius": 1.06,
+				"period": 1.32363,
 				"semiAxis": 0.0177,
-				"eccentricity": 0.081,
+				"eccentricity": 0.058,
 				"angleDistance": 0.000411,
 				"discovered": 2004,
 				"planetName": "b"
@@ -10804,10 +11269,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.249,
-				"period": 3.024,
+				"mass": 0.23,
+				"radius": 1.02,
+				"period": 3.02358,
 				"semiAxis": 0.041,
-				"eccentricity": 0.04,
+				"eccentricity": 0.0524,
 				"angleDistance": 0.001228,
 				"discovered": 2000,
 				"planetName": "b"
@@ -10912,10 +11378,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.115,
-				"period": 4.9437,
+				"mass": 0.1,
+				"radius": 0.98,
+				"period": 4.94739,
 				"semiAxis": 0.058,
-				"eccentricity": 0.23,
+				"eccentricity": 0.0495,
 				"angleDistance": 0.001425,
 				"discovered": 2002,
 				"planetName": "b"
@@ -11216,10 +11683,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.38,
-				"period": 2.818049,
+				"mass": 0.39,
+				"radius": 1.06,
+				"period": 2.81747,
 				"semiAxis": 0.036,
-				"eccentricity": 2e-05,
+				"eccentricity": 0.0177,
 				"angleDistance": 0.001006,
 				"discovered": 2005,
 				"planetName": "b"
@@ -11357,6 +11825,37 @@
 			"effectiveTemp": 5752.0,
 			"RA": "8h3m28s",
 			"DE": "-1d9m45s"
+		},
+		"HD 67087":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 3.06,
+				"period": 352.2,
+				"semiAxis": 1.08,
+				"eccentricity": 0.17,
+				"discovered": 2015,
+				"planetName": "b"
+			},
+			{
+				"mass": 4.85,
+				"period": 2374.0,
+				"semiAxis": 3.86,
+				"eccentricity": 0.76,
+				"discovered": 2015,
+				"planetName": "c"
+			}
+			],
+			"distance": 88.8,
+			"stype": "F8 V",
+			"smass": 1.36,
+			"smetal": 0.25,
+			"Vmag": 8.05,
+			"sradius": 1.55,
+			"effectiveTemp": 6330.0,
+			"RA": "8h7m40s",
+			"DE": "31d33m5s"
 		},
 		"HD 6718":
 		{
@@ -11722,10 +12221,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.42,
-				"period": 3.5098,
+				"mass": 0.47,
+				"radius": 1.03,
+				"period": 3.50928,
 				"semiAxis": 0.046,
-				"eccentricity": 0.024,
+				"eccentricity": 0.0211,
 				"angleDistance": 0.001589,
 				"discovered": 1999,
 				"planetName": "b"
@@ -11770,10 +12270,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.197,
-				"period": 3.971,
+				"mass": 0.23,
+				"radius": 0.99,
+				"period": 3.97101,
 				"semiAxis": 0.049,
-				"eccentricity": 0.0,
+				"eccentricity": 0.0616,
 				"angleDistance": 0.000821,
 				"discovered": 2002,
 				"planetName": "b"
@@ -11816,10 +12317,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.029,
-				"period": 5.3978,
+				"mass": 0.03,
+				"radius": 1.05,
+				"period": 5.39785,
 				"semiAxis": 0.057,
-				"eccentricity": 0.17,
+				"eccentricity": 0.1186,
 				"angleDistance": 0.003393,
 				"discovered": 2009,
 				"planetName": "b"
@@ -12005,9 +12507,10 @@
 			[
 			{
 				"mass": 0.4,
-				"period": 2.985625,
+				"radius": 1.04,
+				"period": 2.98572,
 				"semiAxis": 0.0406,
-				"eccentricity": 0.008,
+				"eccentricity": 0.007,
 				"angleDistance": 0.000932,
 				"discovered": 2002,
 				"planetName": "b"
@@ -12131,9 +12634,10 @@
 			[
 			{
 				"mass": 1.5,
-				"period": 2.1375,
+				"radius": 1.08,
+				"period": 1.99809,
 				"semiAxis": 0.039,
-				"eccentricity": 0.008,
+				"eccentricity": 0.0575,
 				"angleDistance": 0.000429,
 				"discovered": 2006,
 				"planetName": "b"
@@ -12249,10 +12753,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.22,
-				"period": 3.416,
+				"mass": 0.3,
+				"radius": 1.0,
+				"period": 3.41566,
 				"semiAxis": 0.047,
-				"eccentricity": 0.133,
+				"eccentricity": 0.0761,
 				"angleDistance": 0.000631,
 				"discovered": 2004,
 				"planetName": "b"
@@ -12507,6 +13012,29 @@
 			"effectiveTemp": 5002.0,
 			"RA": "10h58m47.9s",
 			"DE": "1d43m45s"
+		},
+		"HD 95127":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 5.01,
+				"period": 482.0,
+				"semiAxis": 1.28,
+				"eccentricity": 0.11,
+				"discovered": 2015,
+				"planetName": "95127"
+			}
+			],
+			"distance": 300.0,
+			"stype": "K0",
+			"smass": 1.2,
+			"smetal": -0.18,
+			"Vmag": 8.15,
+			"sradius": 20.0,
+			"effectiveTemp": 4218.0,
+			"RA": "10h59m35s",
+			"DE": "43d48m52s"
 		},
 		"HD 9578":
 		{
@@ -13368,30 +13896,6 @@
 			"RA": "12h44m19.9s",
 			"DE": "-8d40m17s"
 		},
-		"KOI-4427":
-		{
-			"exoplanets":
-			[
-			{
-				"radius": 0.164,
-				"period": 147.6606,
-				"semiAxis": 0.419,
-				"eccentricity": 0.02,
-				"inclination": 89.97,
-				"discovered": 2015,
-				"planetName": "a"
-			}
-			],
-			"distance": 240.0,
-			"smass": 0.526,
-			"smetal": -0.07,
-			"Vmag": 9.34,
-			"sradius": 0.505,
-			"effectiveTemp": 3813.0,
-			"hasHP": true,
-			"RA": "19h40m28s",
-			"DE": "39d16m27s"
-		},
 		"KELT-1":
 		{
 			"exoplanets":
@@ -13409,10 +13913,10 @@
 			],
 			"distance": 263.0,
 			"stype": "F5",
-			"smass": 1.471,
+			"smass": 1.335,
 			"smetal": 0.052,
 			"Vmag": 10.7,
-			"sradius": 1.335,
+			"sradius": 1.471,
 			"effectiveTemp": 6516.0,
 			"RA": "0h1m26s",
 			"DE": "39d23m1s"
@@ -13489,6 +13993,29 @@
 			"effectiveTemp": 6102.0,
 			"RA": "13h3m55.9s",
 			"DE": "30d38m24s"
+		},
+		"KELT-7":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.28,
+				"radius": 1.533,
+				"period": 2.7347749,
+				"semiAxis": 0.04415,
+				"inclination": 83.76,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"distance": 129.0,
+			"smass": 1.535,
+			"smetal": 0.139,
+			"Vmag": 8.54,
+			"sradius": 1.732,
+			"effectiveTemp": 6789.0,
+			"RA": "5h13m11s",
+			"DE": "33d19m5s"
 		},
 		"KIC 10001893":
 		{
@@ -14121,6 +14648,30 @@
 			"effectiveTemp": 9257.0,
 			"RA": "19h23m25s",
 			"DE": "42d5m13s"
+		},
+		"KOI-4427":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.164,
+				"period": 147.6606,
+				"semiAxis": 0.419,
+				"eccentricity": 0.02,
+				"inclination": 89.97,
+				"discovered": 2015,
+				"planetName": "a"
+			}
+			],
+			"distance": 240.0,
+			"smass": 0.526,
+			"smetal": -0.07,
+			"Vmag": 9.34,
+			"sradius": 0.505,
+			"effectiveTemp": 3813.0,
+			"hasHP": true,
+			"RA": "19h40m28s",
+			"DE": "39d16m27s"
 		},
 		"Kepler-51":
 		{
@@ -15073,7 +15624,8 @@
 			{
 				"mass": 6.5,
 				"radius": 1.406,
-				"period": 1.7637,
+				"period": 1.7633587,
+				"inclination": 81.8,
 				"discovered": 2011,
 				"planetName": "b"
 			}
@@ -24007,10 +24559,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 0.72,
-				"radius": 1.2,
-				"period": 2.68432848,
-				"semiAxis": 0.0396,
+				"mass": 0.595,
+				"radius": 1.192,
+				"period": 2.6843285,
+				"semiAxis": 0.03585,
+				"eccentricity": 0.019,
 				"discovered": 2014,
 				"planetName": "b"
 			}
@@ -24302,6 +24855,64 @@
 			"RA": "19h14m27s",
 			"DE": "49d58m7s"
 		},
+		"Kepler-444":
+		{
+			"exoplanets":
+			[
+			{
+				"radius": 0.036,
+				"period": 3.60001053,
+				"semiAxis": 0.04178,
+				"eccentricity": 0.16,
+				"inclination": 88.0,
+				"discovered": 2015,
+				"planetName": "b"
+			},
+			{
+				"radius": 0.0443,
+				"period": 4.5458841,
+				"semiAxis": 0.04881,
+				"eccentricity": 0.31,
+				"inclination": 88.2,
+				"discovered": 2015,
+				"planetName": "c"
+			},
+			{
+				"radius": 0.0473,
+				"period": 6.189392,
+				"semiAxis": 0.06,
+				"eccentricity": 0.18,
+				"inclination": 88.16,
+				"discovered": 2015,
+				"planetName": "d"
+			},
+			{
+				"radius": 0.0487,
+				"period": 7.743493,
+				"semiAxis": 0.0696,
+				"eccentricity": 0.1,
+				"inclination": 89.13,
+				"discovered": 2015,
+				"planetName": "e"
+			},
+			{
+				"radius": 0.0661,
+				"period": 9.740486,
+				"semiAxis": 0.0811,
+				"eccentricity": 0.29,
+				"inclination": 87.96,
+				"discovered": 2015,
+				"planetName": "f"
+			}
+			],
+			"smass": 0.758,
+			"smetal": -0.55,
+			"Vmag": 9.0,
+			"sradius": 0.752,
+			"effectiveTemp": 5046.0,
+			"RA": "19h19m1s",
+			"DE": "41d38m5s"
+		},
 		"Kepler-445":
 		{
 			"exoplanets":
@@ -24383,6 +24994,28 @@
 			"effectiveTemp": 3359.0,
 			"RA": "18h48m59.9s",
 			"DE": "44d55m16s"
+		},
+		"Kepler-447":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.37,
+				"radius": 1.65,
+				"period": 7.79430132,
+				"semiAxis": 0.0769,
+				"inclination": 86.55,
+				"discovered": 2015,
+				"planetName": "b"
+			}
+			],
+			"smass": 1.0,
+			"smetal": 0.07,
+			"Vmag": 12.5,
+			"sradius": 1.03,
+			"effectiveTemp": 5493.0,
+			"RA": "19h1m4s",
+			"DE": "48d33m36s"
 		},
 		"Kepler-45":
 		{
@@ -27047,23 +27680,24 @@
 			"RA": "16h23m37.9s",
 			"DE": "-26d31m53s"
 		},
-		"PZ  Tel":
+		"PZ Tel":
 		{
 			"exoplanets":
 			[
 			{
-				"mass": 7.5,
-				"radius": 2.42,
+				"mass": 62.0,
 				"semiAxis": 20.0,
+				"eccentricity": 0.62,
 				"discovered": 2010,
 				"planetName": "b"
 			}
 			],
-			"distance": 49.7,
-			"stype": "G9IV",
+			"distance": 51.49,
+			"stype": "G6.5",
 			"smass": 1.13,
 			"smetal": 0.05,
 			"Vmag": 8.43,
+			"sradius": 1.23,
 			"effectiveTemp": 5338.0,
 			"RA": "18h53m5.9s",
 			"DE": "-50d10m50s"
@@ -27178,7 +27812,8 @@
 			"exoplanets":
 			[
 			{
-				"mass": 10.0,
+				"mass": 9.0,
+				"radius": 2.5,
 				"semiAxis": 140.0,
 				"discovered": 2013,
 				"planetName": "b"
@@ -27216,16 +27851,18 @@
 			"exoplanets":
 			[
 			{
-				"mass": 8.5,
+				"mass": 11.3,
+				"radius": 1.07,
 				"semiAxis": 1168.0,
 				"angleDistance": 10.245614,
 				"discovered": 2010,
 				"planetName": "c"
 			}
 			],
-			"distance": 114.0,
-			"stype": "M2V",
+			"distance": 11.7,
+			"stype": "M0.5",
 			"smass": 0.6,
+			"smetal": 0.0,
 			"Vmag": 9.76,
 			"RA": "13h0m46.9s",
 			"DE": "12d22m32.9s"
@@ -27312,6 +27949,26 @@
 			"sradius": 1.45,
 			"RA": "17h59m3s",
 			"DE": "-29d11m53.9s"
+		},
+		"TWA 5":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 25.0,
+				"period": 1200.0,
+				"semiAxis": 100.0,
+				"eccentricity": 0.19,
+				"discovered": 2009,
+				"planetName": "b"
+			}
+			],
+			"distance": 25.0,
+			"stype": "M1.5",
+			"smass": 0.4,
+			"Vmag": 12.12,
+			"RA": "11h31m55s",
+			"DE": "-34d36m27s"
 		},
 		"TYC+1422-614-1":
 		{
@@ -29252,6 +29909,31 @@
 			"RA": "21h19m48s",
 			"DE": "-57d51m3.9s"
 		},
+		"WASP-74":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.95,
+				"radius": 1.56,
+				"period": 2.13775,
+				"semiAxis": 0.037,
+				"eccentricity": 0.0,
+				"inclination": 79.81,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 120.0,
+			"stype": "F9",
+			"smass": 1.48,
+			"smetal": 0.39,
+			"Vmag": 9.7,
+			"sradius": 1.64,
+			"effectiveTemp": 5970.0,
+			"RA": "20h18m10s",
+			"DE": "-1d4m33s"
+		},
 		"WASP-75":
 		{
 			"exoplanets":
@@ -29452,6 +30134,31 @@
 			"RA": "4h50m38.9s",
 			"DE": "1d53m38s"
 		},
+		"WASP-83":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.3,
+				"radius": 1.04,
+				"period": 4.071252,
+				"semiAxis": 0.059,
+				"eccentricity": 0.0,
+				"inclination": 88.9,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 300.0,
+			"stype": "G8",
+			"smass": 1.11,
+			"smetal": 0.29,
+			"Vmag": 12.9,
+			"sradius": 1.05,
+			"effectiveTemp": 5480.0,
+			"RA": "12h40m37s",
+			"DE": "-19d17m3s"
+		},
 		"WASP-84":
 		{
 			"exoplanets":
@@ -29544,6 +30251,30 @@
 			"effectiveTemp": 6431.0,
 			"RA": "20h38m3s",
 			"DE": "-47d32m16.9s"
+		},
+		"WASP-89":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 5.9,
+				"radius": 1.04,
+				"period": 3.3564227,
+				"semiAxis": 0.0427,
+				"eccentricity": 0.193,
+				"inclination": 89.4,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"stype": "K3",
+			"smass": 0.92,
+			"smetal": 0.15,
+			"Vmag": 13.1,
+			"sradius": 0.88,
+			"effectiveTemp": 4955.0,
+			"RA": "20h55m36s",
+			"DE": "-18d58m16s"
 		},
 		"WASP-90":
 		{
@@ -29758,7 +30489,8 @@
 			"exoplanets":
 			[
 			{
-				"mass": 10.0,
+				"mass": 13.0,
+				"radius": 1.009,
 				"period": 25800.0,
 				"semiAxis": 5.0,
 				"discovered": 2011,
@@ -29767,8 +30499,9 @@
 			],
 			"distance": 10.5,
 			"stype": "T 8.5",
-			"smass": 0.01,
-			"effectiveTemp": 600.0,
+			"smass": 0.019,
+			"sradius": 0.098,
+			"effectiveTemp": 730.0,
 			"RA": "4h58m54s",
 			"DE": "64d34m53s"
 		},
@@ -29778,7 +30511,8 @@
 			[
 			{
 				"mass": 22.0,
-				"radius": 1.0,
+				"radius": 0.96,
+				"period": 47400.0,
 				"semiAxis": 7.6,
 				"discovered": 2012,
 				"planetName": "b"
@@ -29798,7 +30532,7 @@
 			"exoplanets":
 			[
 			{
-				"mass": 13.0,
+				"mass": 18.0,
 				"period": 125000.0,
 				"semiAxis": 15.0,
 				"discovered": 2012,
@@ -29807,9 +30541,9 @@
 			],
 			"distance": 19.0,
 			"stype": "T8",
-			"smass": 0.024,
+			"smass": 0.034,
 			"Vmag": 18.0,
-			"effectiveTemp": 580.0,
+			"effectiveTemp": 770.0,
 			"RA": "17h11m5s",
 			"DE": "35d0m37s"
 		},
@@ -29885,7 +30619,7 @@
 			"RA": "16h2m12s",
 			"DE": "28d10m10.9s"
 		},
-		"XO-2":
+		"XO-2N":
 		{
 			"exoplanets":
 			[
@@ -30335,18 +31069,20 @@
 			"exoplanets":
 			[
 			{
-				"mass": 12.8,
+				"mass": 14.0,
+				"radius": 1.2,
 				"semiAxis": 55.0,
-				"discovered": 2012,
+				"discovered": 2013,
 				"planetName": "b"
 			}
 			],
 			"distance": 51.6,
 			"stype": "B9IV",
-			"smass": 2.45,
-			"smetal": -0.32,
+			"smass": 2.8,
+			"smetal": -0.36,
 			"Vmag": 4.14,
-			"effectiveTemp": 10700.0,
+			"sradius": 2.29,
+			"effectiveTemp": 11361.0,
 			"RA": "23h40m25s",
 			"DE": "44d20m2s"
 		},
@@ -30601,10 +31337,11 @@
 			"exoplanets":
 			[
 			{
-				"mass": 5.9,
-				"period": 3.3135,
+				"mass": 4.13,
+				"radius": 1.06,
+				"period": 3.31249,
 				"semiAxis": 0.046,
-				"eccentricity": 0.023,
+				"eccentricity": 0.787,
 				"inclination": 45.0,
 				"angleDistance": 0.002949,
 				"discovered": 1996,

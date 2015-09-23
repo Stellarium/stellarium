@@ -28,7 +28,7 @@
 struct StelPluginInfo
 {
 	StelPluginInfo() : startByDefault(false) {;}
-	//! The plugin ID. It MUST match the lib file name (case sensitive), e.g. "HelloStelModule", or "VirGO".
+	//! The plugin ID. It MUST match the lib file name (case sensitive), e.g. "HelloStelModule".
 	QString id;
 	//! The displayed name, e.g. "Artificial Satellites".
 	QString displayedName;
@@ -63,6 +63,7 @@ public:
 	virtual StelPluginInfo getPluginInfo() const = 0;
 };
 
-Q_DECLARE_INTERFACE(StelPluginInterface, "stellarium.StelPluginInterface/2.0")
+#define StelPluginInterface_iid "org.stellarium.StelPluginInterface"
+Q_DECLARE_INTERFACE(StelPluginInterface, StelPluginInterface_iid)
 
 #endif // _STELPLUGININTERFACE_HPP_

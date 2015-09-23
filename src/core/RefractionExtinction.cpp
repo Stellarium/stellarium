@@ -88,9 +88,9 @@ void Refraction::setPreTransfoMat(const Mat4d& m)
 	invertPreTransfoMat=m.inverse();
 	preTransfoMatf.set(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
 	invertPreTransfoMatf.set(invertPreTransfoMat[0], invertPreTransfoMat[1], invertPreTransfoMat[2], invertPreTransfoMat[3],
-							 invertPreTransfoMat[4], invertPreTransfoMat[5], invertPreTransfoMat[6], invertPreTransfoMat[7],
-							 invertPreTransfoMat[8], invertPreTransfoMat[9], invertPreTransfoMat[10], invertPreTransfoMat[11],
-							 invertPreTransfoMat[12], invertPreTransfoMat[13], invertPreTransfoMat[14], invertPreTransfoMat[15]);
+				 invertPreTransfoMat[4], invertPreTransfoMat[5], invertPreTransfoMat[6], invertPreTransfoMat[7],
+				 invertPreTransfoMat[8], invertPreTransfoMat[9], invertPreTransfoMat[10], invertPreTransfoMat[11],
+				 invertPreTransfoMat[12], invertPreTransfoMat[13], invertPreTransfoMat[14], invertPreTransfoMat[15]);
 }
 
 void Refraction::setPostTransfoMat(const Mat4d& m)
@@ -99,9 +99,9 @@ void Refraction::setPostTransfoMat(const Mat4d& m)
 	invertPostTransfoMat=m.inverse();
 	postTransfoMatf.set(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
 	invertPostTransfoMatf.set(invertPostTransfoMat[0], invertPostTransfoMat[1], invertPostTransfoMat[2], invertPostTransfoMat[3],
-							 invertPostTransfoMat[4], invertPostTransfoMat[5], invertPostTransfoMat[6], invertPostTransfoMat[7],
-							 invertPostTransfoMat[8], invertPostTransfoMat[9], invertPostTransfoMat[10], invertPostTransfoMat[11],
-							 invertPostTransfoMat[12], invertPostTransfoMat[13], invertPostTransfoMat[14], invertPostTransfoMat[15]);
+				  invertPostTransfoMat[4], invertPostTransfoMat[5], invertPostTransfoMat[6], invertPostTransfoMat[7],
+				  invertPostTransfoMat[8], invertPostTransfoMat[9], invertPostTransfoMat[10], invertPostTransfoMat[11],
+				  invertPostTransfoMat[12], invertPostTransfoMat[13], invertPostTransfoMat[14], invertPostTransfoMat[15]);
 }
 
 void Refraction::updatePrecomputed()
@@ -112,16 +112,25 @@ void Refraction::updatePrecomputed()
 void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
 	const double length = altAzPos.length();
+	if (length==0.0)
+	{
+		// Under some circumstances there are zero coordinates. Just leave them alone.
+		//qDebug() << "Refraction::innerRefractionForward(): Zero vector detected - Continue with zero vector.";
+		return;
+	}
+
+	Q_ASSERT(length>0.0);
 	const double sinGeo = altAzPos[2]/length;
+	Q_ASSERT(fabs(sinGeo)<=1.0);
 	double geom_alt_rad = std::asin(sinGeo);
-	double geom_alt_deg = 180./M_PI*geom_alt_rad;
+	float geom_alt_deg = 180./M_PI*geom_alt_rad;
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
-		double r=press_temp_corr * ( 1.02 / std::tan((geom_alt_deg+10.3/(geom_alt_deg+5.11))*M_PI/180.) + 0.0019279);
+		float r=press_temp_corr * ( 1.02f / std::tan((geom_alt_deg+10.3f/(geom_alt_deg+5.11f))*M_PI/180.f) + 0.0019279f);
 		geom_alt_deg += r;
-		if (geom_alt_deg > 90.)
-			geom_alt_deg=90.;
+		if (geom_alt_deg > 90.f)
+			geom_alt_deg=90.f;
 	}
 	else if(geom_alt_deg>MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG)
 	{
@@ -135,24 +144,33 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 
 	const double refr_alt_rad=geom_alt_deg*M_PI/180.;
 	const double sinRef=std::sin(refr_alt_rad);
-	const double shortenxy=std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo)); // we need double's mantissa length here, sorry!
+
+	const double shortenxy=((fabs(sinGeo)>=1.0) ? 1.0 :
+			std::sqrt((1.-sinRef*sinRef)/(1.-sinGeo*sinGeo))); // we need double's mantissa length here, sorry!
 
 	altAzPos[0]*=shortenxy;
 	altAzPos[1]*=shortenxy;
 	altAzPos[2]=sinRef*length;
-
 }
 
+// going from observed position to geometrical position.
 void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
-	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
 	const double length = altAzPos.length();
+	if (length==0.0)
+	{
+		// Under some circumstances there are zero coordinates. Just leave them alone.
+		//qDebug() << "Refraction::innerRefractionBackward(): Zero vector detected - Continue with zero vector.";
+		return;
+	}
+	Q_ASSERT(length>0.0);
 	const double sinObs = altAzPos[2]/length;
-	double obs_alt_deg=180./M_PI*std::asin(sinObs);
+	Q_ASSERT(fabs(sinObs)<=1.0);
+	float obs_alt_deg=180./M_PI*std::asin(sinObs);
 	if (obs_alt_deg > 0.22879f)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
-		double r=press_temp_corr * (1. / std::tan((obs_alt_deg+7.31/(obs_alt_deg+4.4))*M_PI/180.) + 0.0013515);
+		float r=press_temp_corr * (1.f / std::tan((obs_alt_deg+7.31f/(obs_alt_deg+4.4f))*M_PI/180.f) + 0.0013515f);
 		obs_alt_deg -= r;
 	}
 	else if (obs_alt_deg > MIN_APP_ALTITUDE_DEG)
@@ -176,7 +194,8 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 
 	const double geo_alt_rad=obs_alt_deg*M_PI/180.;
 	const double sinGeo=std::sin(geo_alt_rad);
-	const double longerxy=std::sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs));
+	const double longerxy=((fabs(sinObs)>=1.0) ? 1.0 :
+			std::sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs)));
 	altAzPos[0]*=longerxy;
 	altAzPos[1]*=longerxy;
 	altAzPos[2]=sinGeo*length;

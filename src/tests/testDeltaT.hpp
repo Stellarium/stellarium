@@ -31,6 +31,10 @@ Q_OBJECT
 private slots:
 	void initTestCase();
 	void testDeltaTByEspenakMeeus();
+	void testDeltaTByChaprontMeeus();
+	void testDeltaTByChaprontMeeusWideDates();
+	void testDeltaTByMorrisonStephenson1982WideDates();
+	void testDeltaTByStephensonMorrison1984WideDates();
 
 };
 

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009, 2012 Matthew Gates
+ * Copyright (C) 2015 Nick Fedoseev (Iridium flares)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -508,12 +509,13 @@ void Satellites::restoreDefaultSettings()
 	// delete all existing Satellite settings...
 	conf->remove("");
 
-	conf->setValue("show_satellite_hints", false);
-	conf->setValue("show_satellite_labels", true);
+	conf->setValue("show_satellite_hints", true);
+	conf->setValue("show_satellite_labels", false);
 	conf->setValue("updates_enabled", true);
 	conf->setValue("auto_add_enabled", true);
 	conf->setValue("auto_remove_enabled", true);
 	conf->setValue("hint_color", "0.0,0.4,0.6");
+	conf->setValue("invisible_satellite_color", "0.2,0.2,0.2");
 	conf->setValue("hint_font_size", 10);
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("orbit_line_flag", false);
@@ -526,16 +528,41 @@ void Satellites::restoreDefaultSettings()
 	
 	// TLE update sources
 	QStringList urls;
-	urls << "1,http://celestrak.com/NORAD/elements/visual.txt" // Auto-add ON!
-	     << "http://celestrak.com/NORAD/elements/tle-new.txt"
-	     << "http://celestrak.com/NORAD/elements/science.txt"
-	     << "http://celestrak.com/NORAD/elements/noaa.txt"
-	     << "http://celestrak.com/NORAD/elements/goes.txt"
-	     << "http://celestrak.com/NORAD/elements/amateur.txt"
-	     << "http://celestrak.com/NORAD/elements/gps-ops.txt"
-	     << "http://celestrak.com/NORAD/elements/galileo.txt"
-	     << "http://celestrak.com/NORAD/elements/iridium.txt"
-	     << "http://celestrak.com/NORAD/elements/geo.txt";
+	urls << "1,http://www.celestrak.com/NORAD/elements/visual.txt" // Auto-add ON!
+	     << "http://www.celestrak.com/NORAD/elements/tle-new.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/science.txt"
+	     << "http://www.celestrak.com/NORAD/elements/noaa.txt"
+	     << "http://www.celestrak.com/NORAD/elements/goes.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/amateur.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/gps-ops.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/galileo.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/iridium.txt"
+	     << "http://www.celestrak.com/NORAD/elements/geo.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/stations.txt"
+	     << "http://www.celestrak.com/NORAD/elements/weather.txt"
+	     << "http://www.celestrak.com/NORAD/elements/resource.txt"
+	     << "http://www.celestrak.com/NORAD/elements/sarsat.txt"
+	     << "http://www.celestrak.com/NORAD/elements/dmc.txt"
+	     << "http://www.celestrak.com/NORAD/elements/tdrss.txt"
+	     << "http://www.celestrak.com/NORAD/elements/argos.txt"
+	     << "http://www.celestrak.com/NORAD/elements/intelsat.txt"
+	     << "http://www.celestrak.com/NORAD/elements/gorizont.txt"
+	     << "http://www.celestrak.com/NORAD/elements/raduga.txt"
+	     << "http://www.celestrak.com/NORAD/elements/molniya.txt"
+	     << "http://www.celestrak.com/NORAD/elements/orbcomm.txt"
+	     << "http://www.celestrak.com/NORAD/elements/globalstar.txt"
+	     << "http://www.celestrak.com/NORAD/elements/x-comm.txt"
+	     << "http://www.celestrak.com/NORAD/elements/other-comm.txt"
+	     << "1,http://www.celestrak.com/NORAD/elements/glo-ops.txt"
+	     << "http://www.celestrak.com/NORAD/elements/beidou.txt"
+	     << "http://www.celestrak.com/NORAD/elements/sbas.txt"
+	     << "http://www.celestrak.com/NORAD/elements/nnss.txt"
+	     << "http://www.celestrak.com/NORAD/elements/engineering.txt"
+	     << "http://www.celestrak.com/NORAD/elements/education.txt"
+	     << "http://www.celestrak.com/NORAD/elements/geodetic.txt"
+	     << "http://www.celestrak.com/NORAD/elements/radar.txt"
+	     << "http://www.celestrak.com/NORAD/elements/cubesat.txt"
+	     << "http://www.celestrak.com/NORAD/elements/other.txt";
 	saveTleSources(urls);
 }
 
@@ -561,7 +588,7 @@ void Satellites::restoreDefaultCatalog()
 		// the json file has been manually removed, that an update is schreduled in a timely
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
-		lastUpdate = QDateTime::fromString("2001-05-25T12:00:00", Qt::ISODate);
+		lastUpdate = QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate);
 
 	}
 }
@@ -640,8 +667,8 @@ void Satellites::loadSettings()
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	// last update default is the first Towell Day.  <3 DA
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2001-05-25T12:00:00").toString(), Qt::ISODate);
-	setFlagHints(conf->value("show_satellite_hints", false).toBool());
-	Satellite::showLabels = conf->value("show_satellite_labels", true).toBool();
+	setFlagHints(conf->value("show_satellite_hints", true).toBool());
+	Satellite::showLabels = conf->value("show_satellite_labels", false).toBool();
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	autoAddEnabled = conf->value("auto_add_enabled", true).toBool();
 	autoRemoveEnabled = conf->value("auto_remove_enabled", true).toBool();
@@ -650,13 +677,15 @@ void Satellites::loadSettings()
 	labelFont.setPixelSize(conf->value("hint_font_size", 10).toInt());
 
 	// orbit drawing params
-	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", true).toBool();
+	Satellite::orbitLinesFlag = conf->value("orbit_line_flag", false).toBool();
 	Satellite::orbitLineSegments = conf->value("orbit_line_segments", 90).toInt();
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
 
+	Satellite::invisibleSatelliteColor = StelUtils::strToVec3f(conf->value("invisible_satellite_color", "0.2,0.2,0.2").toString());
+
 	// realistic mode
-	setFlagRelisticMode(conf->value("realistic_mode_enabled", false).toBool());
+	setFlagRelisticMode(conf->value("realistic_mode_enabled", true).toBool());
 
 	conf->endGroup();
 }
@@ -1666,7 +1695,7 @@ bool Satellites::checkJsonFileFormat()
 bool Satellites::isValidRangeDates() const
 {
 	bool ok;
-	double tJD = StelApp::getInstance().getCore()->getJDay();
+	double tJD = StelApp::getInstance().getCore()->getJD();
 	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
 	if (lastUpdate.isNull()) // No updates yet?
 		uJD = tJD;
@@ -1676,6 +1705,77 @@ bool Satellites::isValidRangeDates() const
 		return false;
 	else
 		return true;
+}
+
+IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
+{
+	StelCore* pcore = StelApp::getInstance().getCore();
+	double currentJD = pcore->getJD(); // save current JD
+	bool isTimeNow = pcore->getIsTimeNow();
+	long iJD =currentJD;
+	double JDMidnight = iJD + 0.5 - pcore->getCurrentLocation().longitude / 360.f;
+	double delta = currentJD - JDMidnight;
+
+	pcore->setJD(iJD + 0.5 - pcore->getCurrentLocation().longitude / 360.f);
+	pcore->update(10); // force update to get new coordinates
+
+	IridiumFlaresPredictionList predictions;
+	predictions.clear();
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat.data()->getEnglishName().startsWith("IRIDIUM"))
+		{
+			double dt  = 0;
+			double angle0 = 100;
+			double lat0 = -1;
+			while (dt<1)
+			{
+				Satellite::timeShift = dt+delta;
+				sat.data()->update(0);
+
+				Vec3d pos = sat.data()->getAltAzPosApparent(pcore);
+				double lat = pos.latitude();
+				double lon = M_PI - pos.longitude();
+				double v =   sat.data()->getVMagnitude(pcore);
+				double angle =  sat.data()->sunReflAngle;
+
+				if (angle>0 && angle<2)
+				{
+					if (angle>angle0 && (v<1) && lat>5*M_PI/180)
+					{
+						IridiumFlaresPrediction flare;
+						flare.datetime = StelUtils::julianDayToISO8601String(currentJD+dt+StelUtils::getGMTShiftFromQT(currentJD+dt)/24.f);
+						flare.satellite = sat.data()->getEnglishName();
+						flare.azimuth   = lon;
+						flare.altitude  = lat;
+						flare.magnitude = v;
+
+						predictions.append(flare);
+
+						dt +=0.005;
+					}
+					angle0 = angle;
+				}
+				if (angle>0)
+					dt+=0.000002*angle*angle;
+				else
+				{
+					if (lat0>0 && lat<0)
+						dt+=0.05;
+					else
+						dt+=0.0002;
+				}
+				lat0 = lat;
+			}
+		}
+	}
+	Satellite::timeShift = 0.;
+	if (isTimeNow)
+		pcore->setTimeNow();
+	else
+		pcore->setJD(currentJD);
+
+	return predictions;
 }
 
 void Satellites::translations()
@@ -1700,8 +1800,18 @@ void Satellites::translations()
 	N_("non-operational");
 	// TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 	N_("gps");
+	// TRANSLATORS: Satellite group: Satellites belonging to the GLONASS constellation (GLObal NAvigation Satellite System)
+	N_("glonass");
+	// TRANSLATORS: Satellite group: Satellites belonging to the Galileo constellation (global navigation satellite system by the European Union)
+	N_("galileo");
 	// TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 	N_("iridium");
+	// TRANSLATORS: Satellite group: Space stations
+	N_("stations");
+	// TRANSLATORS: Satellite group: Education satellites
+	N_("education");
+	// TRANSLATORS: Satellite group: Satellites belonging to the space observatories
+	N_("observatory");
 	
 	/* For copy/paste:
 	// TRANSLATORS: Satellite group: 
@@ -1715,5 +1825,7 @@ void Satellites::translations()
 	N_("The Hubble Space Telescope");
 	// TRANSLATORS: Satellite description.
 	N_("The International Space Station");
+	// TRANSLATORS: Satellite description.
+	N_("China's first space station");
 #endif
 }
