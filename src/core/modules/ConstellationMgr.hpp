@@ -233,13 +233,20 @@ public slots:
 	//! Get the font size used for constellation names display
 	float getFontSize() const;
 
-	//! set the way how contellation names are displayed: abbbreviated/as-given/translated
+	//! Set the way how contellation names are displayed: abbbreviated/as-given/translated
 	//! @param style acceptable values 0=abbreviated, 1=untranslated, 2=translated.
 	//! @note Will be cast to enum'ed value, but usually receives value from a QComboBox in the GUI.
 	void setConstellationDisplayStyle(int style);
 	//! get the way how contellation names are displayed: abbbreviated/as-given/translated
 	ConstellationDisplayStyle getConstellationDisplayStyle();
 	QString getConstellationDisplayStyleString();
+
+	//! Set the thickness of lines of the constellations
+	//! @param thickness of line in pixels
+	void setConstellationLineThickness(const double thickness);
+	//! Get the thickness of lines of the constellations
+	double getConstellationLineThickness() const { return constellationLineThickness; }
+
 
 signals:
 	void artDisplayedChanged(const bool displayed) const;
@@ -359,6 +366,9 @@ private:
 	bool boundariesDisplayed;
 	bool linesDisplayed;
 	bool namesDisplayed;
+
+	// Store the thickness of lines of the constellations
+	float constellationLineThickness;
 };
 
 #endif // _CONSTELLATIONMGR_HPP_

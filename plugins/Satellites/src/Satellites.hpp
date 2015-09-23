@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009, 2012 Matthew Gates
+ * Copyright (C) 2015 Nick Fedoseev (Iridium flares)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +43,52 @@ class QTimer;
 class SatellitesDialog;
 class SatellitesListModel;
 
+/*! @defgroup satellites Satellites Plug-in
+@{
+The %Satellites plugin displays the positions of artifical satellites in Earth
+orbit based on a catalog of orbital data.
+
+The Satellites class is the main class of the plug-in. It manages a collection
+of Satellite objects and takes care of loading, saving and updating the
+satellite catalog. It allows automatic updates from online sources and manages
+a list of update file URLs.
+
+To calculate satellite positions, the plugin uses an implementation of
+the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
+
+<b>Satellite Properties</b>
+
+<i>Name and identifiers</i>
+
+Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
+for presentation purposes.
+
+In the <b>Satellite Catalog</b> satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
+
+<i>Grouping</i>
+
+A satellite can belong to one or more groups such as "amateur", "geostationary" or "navigation". They have no other function but to help the user organize the satellite collection.
+
+Group names are arbitrary strings defined in the <b>Satellite Catalog</b> for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
+
+By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
+
+<b>Satellite Catalog</b>
+
+The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
+format, in a file named "satellites.json". A default copy is embedded in the
+plug-in at compile time. A working copy is kept in the user data directory.
+
+<b>Configuration</b>
+
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file.
+
+@}
+*/
+
 //! Data structure containing unvalidated TLE set as read from a TLE list file.
+//! @ingroup satellites
 struct TleData
 {
 	//! NORAD catalog number, as extracted from the TLE set.
@@ -56,10 +102,13 @@ struct TleData
 	bool addThis;
 };
 
+//! @ingroup satellites
 typedef QList<TleData> TleDataList;
+//! @ingroup satellites
 typedef QHash<QString, TleData> TleDataHash ;
 
 //! TLE update source, used only internally for now.
+//! @ingroup satellites
 struct TleSource
 {
 	//! URL from where the source list should be downloaded.
@@ -72,52 +121,25 @@ struct TleSource
 	bool addNew;
 };
 
+//! @ingroup satellites
 typedef QList<TleSource> TleSourceList;
 
-/*! @mainpage notitle
-@section overview Plugin Overview
+struct IridiumFlaresPrediction
+{
+	QString datetime;
+	QString satellite;
+	float azimuth;		// radians
+	float altitude;		// radians
+	float magnitude;
+};
 
-The %Satellites plugin displays the positions of artifical satellites in Earth
-orbit based on a catalog of orbital data.
-
-The Satellites class is the main class of the plug-in. It manages a collection
-of Satellite objects and takes care of loading, saving and updating the
-satellite catalog. It allows automatic updates from online sources and manages
-a list of update file URLs.
-
-To calculate satellite positions, the plugin uses an implementation of
-the SGP4/SDP4 algorithms (J.L. Canales' gsat library).
-
-@section satprop Satellite Properties
-
-@subsection ident Name and identifiers
-Each satellite has a name. It's displayed as a label of the satellite hint and in the list of satellites. Names are not unique though, so they are used only
-for presentation purposes.
-
-In the @ref satcat satellites are uniquely identified by their NORAD number, which is encoded in TLEs.
-
-@subsection groups Grouping
-A satellite can belong to one or more groups such as "amateur", "geostationary" or "navigation". They have no other function but to help the user organize the satellite collection.
-
-Group names are arbitrary strings defined in the @ref satcat for each satellite and are more similar to the concept of "tags" than a hierarchical grouping. A satellite may not belong to any group at all.
-
-By convention, group names are in lowercase. The GUI translates some of the groups used in the default catalog.
-
-@section satcat Satellite Catalog
-The satellite catalog is stored on the disk in [JSON](http://www.json.org/)
-format, in a file named "satellites.json". A default copy is embedded in the
-plug-in at compile time. A working copy is kept in the user data directory.
-
-@section config Configuration
-The plug-ins' configuration data is stored in Stellarium's main configuration
-file.
-*/
-
+typedef QList<IridiumFlaresPrediction> IridiumFlaresPredictionList;
 
 //! @class Satellites
 //! Main class of the %Satellites plugin.
 //! @author Matthew Gates
 //! @author Bogdan Marinov
+//! @ingroup satellites
 class Satellites : public StelObjectModule
 {
 	Q_OBJECT
@@ -351,6 +373,8 @@ public:
 	bool getOrbitLinesFlag();
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
+
+	IridiumFlaresPredictionList getIridiumFlaresPrediction();
 
 signals:
 	//! Emitted when some of the plugin settings have been changed.
@@ -588,7 +612,6 @@ private slots:
 	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
 	void updateObserverLocation(StelLocation loc);
-
 };
 
 
@@ -600,7 +623,7 @@ private slots:
 class SatellitesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

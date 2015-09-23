@@ -42,25 +42,35 @@
 #define COMET_TAIL_SLICES 16 // segments around the perimeter
 #define COMET_TAIL_STACKS 16 // cuts along the rotational axis
 
+// These are to avoid having index arrays for each comet when all are equal.
+bool Comet::createTailIndices=true;
+bool Comet::createTailTextureCoords=true;
+StelTextureSP Comet::comaTexture;
+StelTextureSP Comet::tailTexture;
+QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
+QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.
+
 Comet::Comet(const QString& englishName,
-		 int flagLighting,
-		 double radius,
-		 double oblateness,
-		 Vec3f color,
-		 float albedo,
-		 const QString& atexMapName,
-		 posFuncType coordFunc,
-		 void* auserDataPtr,
-		 OsculatingFunctType *osculatingFunc,
-		 bool acloseOrbit,
-		 bool hidden,
-		 const QString& pTypeStr,
-		 float dustTailWidthFact, float dustTailLengthFact, float dustTailBrightnessFact)
+	     int flagLighting,
+	     double radius,
+	     double oblateness,
+	     Vec3f halocolor,
+	     float albedo,
+	     const QString& atexMapName,
+	     posFuncType coordFunc,
+	     void* auserDataPtr,
+	     OsculatingFunctType *osculatingFunc,
+	     bool acloseOrbit,
+	     bool hidden,
+	     const QString& pTypeStr,
+	     float dustTailWidthFact,
+	     float dustTailLengthFact,
+	     float dustTailBrightnessFact)
 	: Planet (englishName,
 		  flagLighting,
 		  radius,
 		  oblateness,
-		  color,
+		  halocolor,
 		  albedo,
 		  atexMapName,
 		  "",
@@ -79,10 +89,10 @@ Comet::Comet(const QString& englishName,
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
 {
 	texMapName = atexMapName;
-	lastOrbitJD =0;
-	deltaJD = StelCore::JD_SECOND;
-	deltaJDtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
-	lastJDtail=0.0;
+	lastOrbitJDE =0;
+	deltaJDE = StelCore::JD_SECOND;
+	deltaJDEtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
+	lastJDEtail=0.0;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
@@ -90,6 +100,7 @@ Comet::Comet(const QString& englishName,
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
+	tailFactors[0]=-1.0f; tailFactors[1]=-1.0f; // mark "invalid"
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
 	comaVertexArr.clear();
@@ -139,6 +150,9 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	//Mostly copied from Planet::getInfoString():
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app);
 
 	if (flags&Name)
 	{
@@ -153,12 +167,18 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
+		QString cometType = qc_("non-periodic", "type of comet");
+		if (semiMajorAxis>0.0)
+		{
+			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
+			cometType = qc_("periodic", "type of comet");
+		}
+		oss << q_("Type: <b>%1</b> (%2)").arg(q_(getPlanetTypeString())).arg(cometType) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 									    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
@@ -216,14 +236,24 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 	if (flags&Extra)
 	{
+		// If semi-major axis not zero then calculate and display orbital period for comet in days
+		double siderealPeriod = getSiderealPeriod();
+		if (siderealPeriod>0)
+		{
+			// TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
+			oss << q_("Sidereal period: %1 a").arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+		}
+
 		// GZ: Add speed. I don't know where else to place that bit of information.
 		// xgettext:no-c-format
 		oss << QString(q_("Speed: %1 km/s"))
 			   .arg(((CometOrbit*)userDataPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
 		oss << "<br>";
+
 	}
 
-	if (flags&Size)
+
+	if ((flags&Size) && (tailFactors[0]>0.0f))
 	{
 		// GZ: Add estimates for coma diameter and tail length.
 		// xgettext:no-c-format
@@ -234,14 +264,6 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString(q_("Gas tail length (estimate): %1 Mio km"))
 			   .arg(tailFactors[1]*AU*1e-6, 0, 'G', 3);
 		oss << "<br>";
-	}
-
-	// If semi-major axis not zero then calculate and display orbital period for comet in days
-	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra) && (siderealPeriod>0))
-	{
-		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 	}
 
 	postProcessInfoString(str, flags);
@@ -295,27 +317,27 @@ void Comet::update(int deltaTime)
 {
 	Planet::update(deltaTime);
 
-	// The rest used to be in computePosition(), but is better in update(). Unfortunately we need date (JD).
+	// The rest deals with updating tail geometries and brightness
 	StelCore* core=StelApp::getInstance().getCore();
-	double date=core->getJDay();
+	double dateJDE=core->getJDE();
 
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDay())) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbit->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
 	//deltaJDtail=StelCore::JD_SECOND * qMax(1.0, qMin(eclipticPos.length(), 20.0));
 
-	if (fabs(lastJDtail-date)>deltaJDtail)
+	if (fabs(lastJDEtail-dateJDE)>deltaJDEtail)
 	{
-		lastJDtail=date;
+		lastJDEtail=dateJDE;
 
 		// The CometOrbit is in fact available in userDataPtr!
 		CometOrbit* orbit=(CometOrbit*)userDataPtr;
 		Q_ASSERT(orbit);
-		if (!orbit->objectDateValid(date)) return; // out of useful date range. This should allow having hundreds of comet elements.
+		if (!orbit->objectDateValid(dateJDE)) return; // out of useful date range. This should allow having hundreds of comet elements.
 
 		if (orbit->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
@@ -438,7 +460,7 @@ void Comet::update(int deltaTime)
 		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
 		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
 	}
-	//qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
+	//qDebug() << "Comet " << getEnglishName() <<  "JDE: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
 
 
@@ -446,6 +468,10 @@ void Comet::update(int deltaTime)
 void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
 {
 	if (hidden)
+		return;
+
+	// Exclude drawing if user set a hard limit magnitude.
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
 		return;
 
 	if (getEnglishName() == core->getCurrentLocation().planetName)
@@ -464,7 +490,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDay())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbit->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	// This removed totally the Planet shaking bug!!!
@@ -538,8 +564,7 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	}
 	glDisable(GL_BLEND);
 
-	if (sPainter)
-		delete sPainter;
+	delete sPainter;
 	sPainter=NULL;
 }
 
@@ -568,8 +593,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 
 	glDisable(GL_BLEND);
 
-	if (sPainter)
-		delete sPainter;
+	delete sPainter;
 	sPainter=NULL;
 }
 
@@ -663,12 +687,3 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	createTailIndices=false;
 	createTailTextureCoords=false;
 }
-
-
-// These are to avoid having index arrays for each comet when all are equal.
-bool Comet::createTailIndices=true;
-bool Comet::createTailTextureCoords=true;
-StelTextureSP Comet::comaTexture;
-StelTextureSP Comet::tailTexture;
-QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
-QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.

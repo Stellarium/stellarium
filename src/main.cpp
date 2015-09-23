@@ -160,9 +160,11 @@ int main(int argc, char **argv)
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
 #endif
+	bool useSplash= qgetenv("STELLARIUM_NOSPLASH") != "1";
 	QPixmap pixmap(":/splash.png");
 	QSplashScreen splash(pixmap);
-	splash.show();
+	if (useSplash)
+		splash.show();
 	app.processEvents();
 
 	// QApplication sets current locale, but
@@ -192,7 +194,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2014 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) 2000-2015 Fabien Chereau et al.");
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -346,7 +348,8 @@ int main(int argc, char **argv)
 
 	StelMainView mainWin;
 	mainWin.init(confSettings); // May exit(0) when OpenGL subsystem insufficient
-	splash.finish(&mainWin);
+	if (useSplash)
+		splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();
 

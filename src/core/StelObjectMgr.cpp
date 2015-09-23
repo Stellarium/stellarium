@@ -154,7 +154,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	foreach (const StelObjectP& obj, candidates)
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
-		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
+		float distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
 		float priority =  obj->getSelectPriority(core);
 		// qDebug() << (*iter).getShortInfoString(core) << ": " << priority << " " << distance;
 		if (distance + priority < best_object_value)
@@ -228,7 +228,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
 }
 
 /*************************************************************************
- Return the list objects of type "withType" which was recently selected by
+ Return the list objects of type "type" which was recently selected by
   the user
 *************************************************************************/
 QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
@@ -341,19 +341,51 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["SolarSystem:scattered disc object"] = "Scattered disc objects";
 			result["SolarSystem:Oort cloud object"] = "Oort cloud objects";
 		}
-		// Deep-sky objects by type + couple amateur catalogue
+		// Deep-sky objects by type + amateur catalogues
 		if (m->objectName()=="NebulaMgr")
 		{
 			result["NebulaMgr:0"] = "Bright galaxies";
-			result["NebulaMgr:1"] = "Open star clusters";
-			result["NebulaMgr:2"] = "Globular star clusters";
-			result["NebulaMgr:3"] = "Nebulae";
-			result["NebulaMgr:4"] = "Planetary nebulae";
-			result["NebulaMgr:5"] = "Dark nebulae";
-			result["NebulaMgr:6"] = "Irregular galaxies";
-			result["NebulaMgr:7"] = "Clusters associated with nebulosity";
-			result["NebulaMgr:10"] = "Messier Catalogue";
-			result["NebulaMgr:11"] = "Caldwell Catalogue";
+			result["NebulaMgr:1"] = "Active galaxies";
+			result["NebulaMgr:2"] = "Radio galaxies";
+			result["NebulaMgr:3"] = "Interacting galaxies";
+			result["NebulaMgr:4"] = "Bright quasars";
+			result["NebulaMgr:5"] = "Star clusters";
+			result["NebulaMgr:6"] = "Open star clusters";
+			result["NebulaMgr:7"] = "Globular star clusters";
+			result["NebulaMgr:8"] = "Stellar associations";
+			result["NebulaMgr:9"] = "Star clouds";
+			result["NebulaMgr:10"] = "Nebulae";
+			result["NebulaMgr:11"] = "Planetary nebulae";
+			result["NebulaMgr:12"] = "Dark nebulae";
+			result["NebulaMgr:13"] = "Reflection nebulae";
+			result["NebulaMgr:14"] = "Bipolar nebulae";
+			result["NebulaMgr:15"] = "Emission nebulae";
+			result["NebulaMgr:16"] = "Clusters associated with nebulosity";
+			result["NebulaMgr:17"] = "HII regions";			
+			result["NebulaMgr:18"] = "Supernova remnants";
+			result["NebulaMgr:19"] = "Interstellar matter";
+			result["NebulaMgr:20"] = "Emission objects";
+			result["NebulaMgr:21"] = "BL Lac objects";
+			result["NebulaMgr:22"] = "Blazars";
+			result["NebulaMgr:23"] = "Molecular Clouds";
+			result["NebulaMgr:24"] = "Young Stellar Objects";
+			result["NebulaMgr:25"] = "Possible Quasars";
+			result["NebulaMgr:26"] = "Possible Planetary Nebulae";
+			result["NebulaMgr:27"] = "Protoplanetary Nebulae";
+			result["NebulaMgr:100"] = "Messier Catalogue";
+			result["NebulaMgr:101"] = "Caldwell Catalogue";
+			result["NebulaMgr:102"] = "Barnard Catalogue";
+			result["NebulaMgr:103"] = "Sharpless Catalogue";
+			result["NebulaMgr:104"] = "Van den Bergh Catalogue";
+			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
+			result["NebulaMgr:106"] = "Collinder Catalogue";
+			result["NebulaMgr:107"] = "Melotte Catalogue";
+		}
+		// Interesting stars
+		if (m->objectName()=="StarMgr")
+		{
+			result["StarMgr:0"] = "Interesting double stars";
+			result["StarMgr:1"] = "Interesting variable stars";
 		}
 	}
 	return result;

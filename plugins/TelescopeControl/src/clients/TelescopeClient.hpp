@@ -122,7 +122,7 @@ public:
 		XYZ = XYZ * 31.0 + desired_pos;
 		const double lq = XYZ.lengthSquared();
 		if (lq > 0.0)
-			XYZ *= (1.0/sqrt(lq));
+			XYZ *= (1.0/std::sqrt(lq));
 		else
 			XYZ = desired_pos;
 		return true;
@@ -200,6 +200,7 @@ private:
 	Equinox equinox;
 	
 private slots:
+	void socketConnected(void);
 	void socketFailed(QAbstractSocket::SocketError socketError);
 };
 

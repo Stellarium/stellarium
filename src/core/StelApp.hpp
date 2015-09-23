@@ -35,7 +35,6 @@ class QOpenGLFramebufferObject;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QTime;
 class QTimer;
 class StelLocationMgr;
 class StelSkyLayerMgr;
@@ -84,6 +83,9 @@ public:
 
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
+
+	//! Registers all loaded StelModules with the ScriptMgr, and queues starting of the startup script.
+	void initScriptMgr();
 
 	//! Get the StelApp singleton instance.
 	//! @return the StelApp singleton instance
@@ -207,6 +209,16 @@ public slots:
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
 
+	//! Set flag for showing decimal degree in various places.
+	void setFlagShowDecimalDegrees(bool b);
+	//! Get flag for showing decimal degree in various places.
+	bool getFlagShowDecimalDegrees() const {return flagShowDecimalDegrees;}
+
+	//! Set flag for using calculation of azimuth from south towards west (as in old astronomical literature)
+	bool getFlagOldAzimuthUsage() const { return flagUseAzimuthFromSouth; }
+	//! Get flag for using calculation of azimuth from south towards west (as in old astronomical literature)
+	void setFlagOldAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
+	
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
@@ -245,8 +257,6 @@ private:
 	void handleKeys(class QKeyEvent* event);
 	//! Handle pinch on multi touch devices.
 	void handlePinch(qreal scale, bool started);
-
-	void initScriptMgr(QSettings* conf);
 
 	void prepareRenderBuffer();
 	void applyRenderBuffer();
@@ -329,7 +339,7 @@ private:
 	// Define whether the StelApp instance has completed initialization
 	bool initialized;
 
-	static QTime* qtime;
+	static qint64 startMSecs;
 
 	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized
@@ -354,6 +364,11 @@ private:
 	QOpenGLFramebufferObject* renderBuffer;
 
 	StelViewportEffect* viewportEffect;
+	
+	bool flagShowDecimalDegrees;
+	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
+	bool flagUseAzimuthFromSouth;
+
 };
 
 #endif // _STELAPP_HPP_

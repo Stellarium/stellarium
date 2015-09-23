@@ -39,27 +39,32 @@ class SupernovaeDialog;
 
 class StelPainter;
 
-typedef QSharedPointer<Supernova> SupernovaP;
-
-/*! @mainpage notitle
-@section overview Plugin Overview
-
-The %Supernovae plugin displays the positions some historical
+/*! @defgroup historicalSupernovae Historical Supernovae Plug-in
+@{
+The %Historical Supernovae plugin displays the positions some historical
 supernovae brighter than 10 visual magnitude.
 
-@section sncat Supernovae Catalog
+<b>Supernovae Catalog</b>
+
 The supernovae catalog is stored on the disk in [JSON](http://www.json.org/)
 format, in a file named "supernovae.json". A default copy is embedded in the
 plug-in at compile time. A working copy is kept in the user data directory.
 
-@section config Configuration
+<b>Configuration</b>
+
 The plug-ins' configuration data is stored in Stellarium's main configuration
 file.
+
+@}
 */
+
+//! @ingroup historicalSupernovae
+typedef QSharedPointer<Supernova> SupernovaP;
 
 //! @class Supernovae
 //! Main class of the %Historical Supernovae plugin.
 //! @author Alexander Wolf
+//! @ingroup historicalSupernovae
 class Supernovae : public StelObjectModule
 {
 	Q_OBJECT
@@ -260,7 +265,7 @@ private slots:
 class SupernovaeStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

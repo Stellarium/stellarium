@@ -92,13 +92,72 @@ class Translations
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dark nebulae");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
-		N_("Irregular galaxies");
-		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Clusters associated with nebulosity");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("HII regions");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Reflection nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Active galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Radio galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Interacting galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Bright quasars");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Star clusters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Stellar associations");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Star clouds");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Bipolar nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Emission nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Supernova remnants");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Interstellar matter");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Emission objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("BL Lac objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Blazars");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Molecular Clouds");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Young Stellar Objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Possible Quasars");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Possible Planetary Nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Protoplanetary Nebulae");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Messier Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Caldwell Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Barnard Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Sharpless Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Van den Bergh Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("The Catalogue of Rodgers, Campbell, and Whiteoak");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Collinder Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Melotte Catalogue");
+		
+		// =====================================================================
+		// List of stars types
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Interesting double stars");
+		// TRANSLATORS: Type of stars (for "Lists" in the search tool)
+		N_("Interesting variable stars");
 		
 		// =====================================================================
 		// Constellation cultures
@@ -122,6 +181,7 @@ class Translations
 		N_("Sami");
 		// TRANSLATORS: Name of the sky culture
 		N_("Siberian");
+		N_("Tukano");
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
@@ -159,6 +219,12 @@ class Translations
 		// TRANSLATORS: Name of landscape
 		N_("Zero Horizon");
 
+		// =====================================================================
+		// 3D landscapes (scenes) names
+		// TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
+		N_("Vienna Sterngarten");
+		// TRANSLATORS: Name of 3D scene
+		N_("Testscene")
 		
 		// =====================================================================
 		// Script names

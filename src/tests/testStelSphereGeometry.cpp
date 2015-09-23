@@ -83,22 +83,21 @@ void TestStelSphericalGeometry::initTestCase()
 	southPoleSquare.setContour(cpole);
 }
 
-//FIXME: Doesn't pass on Windows
 void TestStelSphericalGeometry::testSphericalCap()
 {
-	Vec3d p0(1,0,0);
-	Vec3d p1(-1,0,0);
-	Vec3d p2(1,1,1);
+	Vec3d p0(1.,0.,0.);
+	Vec3d p1(-1.,0.,0.);
+	Vec3d p2(1.,1.,1.);
 	p2.normalize();
-	Vec3d p3(0,1,0);
+	Vec3d p3(0.,1.,0.);
 
-	SphericalCap h0(p0, 0);
+	SphericalCap h0(p0, 0.);
 	SphericalCap h1(p0, 0.8);
 	SphericalCap h2(p0, -0.5);
 	SphericalCap h3(p1, 0.5);
 	SphericalCap h4(p2, 0.8);
 	SphericalCap h5(p2, 1.);
-	SphericalCap h6(p1, 0);
+	SphericalCap h6(p1, 0.);
 
 	QVERIFY2(h0.contains(p0), "SphericalCap contains point failure");
 	QVERIFY2(h1.contains(p0), "SphericalCap contains point failure");

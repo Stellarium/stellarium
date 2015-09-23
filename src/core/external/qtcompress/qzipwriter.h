@@ -41,15 +41,16 @@
 #ifndef QZIPWRITER_H
 #define QZIPWRITER_H
 
-#include <QtCore/qglobal.h>
-#include <QtCore/qstring.h>
-#include <QtCore/qfile.h>
+#include <QtGlobal>
+#include <QString>
+#include <QFile>
 
-QT_BEGIN_NAMESPACE
+// QT_BEGIN_NAMESPACE
+namespace Stel {
 
 class QZipWriterPrivate;
 
-class Q_GUI_EXPORT QZipWriter
+class /* Q_GUI_EXPORT */ QZipWriter
 {
 public:
     explicit QZipWriter(const QString &fileName, QIODevice::OpenMode mode = (QIODevice::WriteOnly | QIODevice::Truncate) );
@@ -98,6 +99,7 @@ private:
     Q_DISABLE_COPY(QZipWriter)
 };
 
-QT_END_NAMESPACE
+// QT_END_NAMESPACE
+}
 
 #endif // QZIPWRITER_H

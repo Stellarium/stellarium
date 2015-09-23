@@ -1,0 +1,664 @@
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{a4wide}
+\usepackage{hyperref}
+\newcommand{\filename}[1]{\texttt{#1}}
+\newcommand{\cmd}[1]{\texttt{#1}}
+
+\title{Scenery3d - Walkable 3D Models in Stellarium} \author{Georg
+Zotti\thanks{\url{Georg.Zotti@univie.ac.at},
+\url{http://astrosim.univie.ac.at}}\  \ and Florian Schaukowitsch}
+\date{April 10, 2015; last updated \today}
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\label{sec:Introduction}
+
+
+Have you ever wished to be able to walk through Stonehenge or other
+ancient building structures described as being constructed with
+astronomical orientation in mind, and experience such orientation in a
+3D virtual environment that also provides a good sky simulation?
+
+The Stellarium Scenery3d plugin allows you to see architectural 3D models
+embedded in a landscape combined with the excellent representation of the sky
+provided by Stellarium. You can walk around, check for (or
+demonstrate) possible astronomical alignments of ancient architecture, see
+sundials and other shadow casters in action, etc.
+
+\section{Usage}
+\label{sec:Usage}
+
+
+You activate the plugin with the \emph{circular enclosure} button at screen
+bottom or by pressing [Ctrl+3]. The other button with circular enclosure and
+tool icon (or [Ctrl+Shift+3]) opens the settings dialog. Once loaded and
+displaying, you can walk around pressing [Ctrl] plus cursor keys. Change eye
+height with [Ctrl]+[PgUp]/[PgDn] keys. Adding [Shift] key increases speed by 10,
+[Alt] by 5 (pressing both keys multiplies by 50!). If you release [Ctrl] before
+the cursor key, animation will continue. (Press [Ctrl]+any cursor key to stop
+moving.)\footnote{I (GZ) had to change keyboard handling in the
+main program, somewhat breaking the plugin concept.}
+
+Further key bindings exist which can be configured using the Stellarium default
+key-binding interface. Some options are also available in the Scenery3d dialog.
+For example, coordinate display can be enabled. If your models are georeferenced
+in a true geographical coordinate grid, e.g. UTM or Gauss-Krueger, you will
+especially like this, and this makes the plugin usable for scientific purposes.
+Display shows grid name, Easting, Northing, Altitude of ground, and eye height
+above ground.
+
+Other features include a virtual ``torchlight'', which can be enabled to give
+additional local illumination around the viewer to help to see in the dark.
+Interesting points of view can be saved and restored later by the user,
+including a description of the view. Scene authors can also distribute
+predefined viewpoints in their scene.
+
+The plugin also simulates the shadows of the scene's objects cast by
+the Sun, Moon and even Venus (only 1 shadow caster used at a time, you
+will never see shadows cast by Venus in moonlight), so you could use
+it for examining sundials, or analyze and simulate light-and-shadow
+interactions in archeological structures.
+
+\section{Hardware Requirements \& Performance}
+\label{sec:HardwareRequirements}
+
+In order to work with the non-linear projection models in Stellarium,
+this plugin uses a trick to create the foreground renderings: it
+renders the scene into the six planes of a so-called cubemap, which is
+then correctly reprojected onto the sides of a cube, depending on the
+current projection settings. Your graphics card must be able to do
+this, i.e. it must support the OpenGL extension called
+\texttt{EXT\_framebuffer\_object}. Typical modern 3D cards (by NVidia
+or ATI/AMD) support this extension. In case your graphics hardware
+does not suppport it, the plugin will still work, but you are limited
+to perspective projection.
+
+You can influence rendering quality, but also speed, using the plugin's 
+GUI, which provides some options such as enabling the use
+of shadows, bumpmapping (provides more realistic surface lighting) or 
+configuring the sizes of the textures used
+for the cubemap or shadowmaps. Larger values there improve the quality,
+but require faster hardware and more video memory for smooth results.
+
+Because the ``cubemap trick'' requires quite a large amount of performance (in
+essence, the scene has to be rendered 6 times), there are some options available
+that try to reduce this burden. The first option is to change the type of the
+``cubemap''. The most compatible setting is \emph{6 textures}, which seems to
+work best on older integrated Intel GPUs. The recommended default is the second
+setting, \emph{Cubemap}, which uses a more modern OpenGL feature and generally
+works a bit faster than \emph{6 textures} on more modern graphics cards. Finally,
+the \emph{Geometry shader} option tries to render all 6 cube faces at once. This
+requires a more recent GPU + drivers (at least OpenGL 3.2 must be supported),
+the setting is disabled otherwise. Depending on your hardware and the scene's
+complexity, this method may give a speedup or may be slower, you must find this out yourself.
+
+Another option prevents re-rendering of the cubemap if nothing relevant has
+changed. You can define the interval (in Stellarium's simulation time) in which
+nothing is updated in the GUI. You can still rotate the camera without causing a
+re-draw, giving a subjective performance that is close to Stellarium's
+performance without Scenery3d. When moving, the cubemap will be updated. You can
+enable another option that only causes 1 or 2 sides of the cubemap to be updated
+while you move, giving a speedup but causing some parts of the image to be
+outdated and discontinuous. The cubemap will be completed again when you stop
+moving.
+
+Shadow rendering may also cause quite a performance impact. The \emph{Simple
+shadows} option can speed this up a lot, at the cost of shadow quality
+especially in larger scenes. Another performance/quality factor is shadow
+filtering. The sharpest (and fastest) possible shadows are achieved with
+filtering \emph{Off}, but depending on shadowmap resolution and scene size the
+shadows may look quite ``blocky''. \emph{Hardware} shadow filtering is usually
+very fast, but may not improve appearance a lot. Therefore, there are additional
+filter options available, the \emph{High} filter option is relatively expensive.
+Finally, the \emph{PCSS} option allows to approximate the increase of solar and lunar shadow
+penumbras relative to the distance from their shadow casters, i.e. shadows are
+sharp near contact points, and more blurred further away. This again requires
+quite a bit of performance, and only works if the shadow filter option is set to
+\emph{Low} or \emph{High} (without \emph{Hardware}).
+
+The configuration GUI shows tooltips for most of its settings, which can explain
+what a setting does. All settings are saved automatically, and restored when you
+reopen Stellarium.
+
+
+\subsection{Performance notes}
+\label{sec:Performance}
+
+On reasonably good hardware 
+%2012: (tested on a notebook PC with NVidia M9800 GTS), 
+% models up to 100.000 triangles are fluent, up to 250.000 are still ``interactive''.  
+% we have 2015, and a much faster implementation!
+(tested on a notebook PC with NVidia M580 GTS), models with about
+500.000 triangles are fluent with shadows and bumpmaps.  On very small
+hardware like single-board computers with native OpenGL ES2, models
+may be limited to 64k vertices (points).  If display is too slow,
+switch to perspective projection: all other projections require almost
+sixfold effort!  You should also prefer the ``lazy'' cubemap mode, 
+where the scene is only rendered in specific timesteps or
+when movement happens.  
+
+
+\section{Model Configuration}
+\label{sec:ModelConfiguration}
+
+The model format supported in Scenery3d is Wavefront .OBJ, which is
+pretty common for 3D models.  You can use several modeling programs to
+build your models. Software such as Blender, Maya, 3D Studio
+Max etc.\ can export OBJ. 
+
+A simple to use and cost-free modeling program is Google Sketchup, commonly
+used to create the 3D buildings seen in Google Earth. It can be used
+to create georeferenced models.  OBJ is not a native export format for
+the standard version of Google Sketchup. If you are not willing to
+afford Sketchup Pro, you have to find another way to export a textured
+OBJ model.
+
+
+\begin{table}[t]
+  \centering
+\begin{tabular}{rl}
+Geometry&Yes\\Lights&Yes\\Clay&No\\Photomatched&Yes\\DefaultUVs&No\\Instanced&No
+\end{tabular}
+\caption{Kerkythea Export Settings}
+  \label{fig:KerkytheaExportSettings}
+\end{table}
+
+One good exporter is available in the Kerkythea renderer project\footnote{
+Available at \url{http://www.kerkythea.net/cms/}}.  You need
+\filename{SU2KT~3.17}
+or better, and \filename{KT2OBJ~1.1.0} or better.  Deselect any selection, then
+export your model to the Kerkythea XML format with settings shown in
+\ref{fig:KerkytheaExportSettings}.
+(Or, with selection enabled, make sure settings are No-Yes-Yes-No-Yes-No-No.)  
+You do not have to launch Kerkythea unless you want to create nice renderings of
+your model. 
+Then, use the \filename{KT2OBJ} converter to create an OBJ.  You can delete the
+XML after the conversion.  Note that some texture coordinates may not be
+exported correctly. The setting Photomatched:Yes seems now to have
+corrected this issue, esp. with distorted/manu\-ally shifted textures.
+
+Another free OBJ exporter has been made available by 
+TIG: \filename{OBJexporter.rb}\footnote{Available from
+\url{http://forums.sketchucation.com/viewtopic.php?f=323&t=33448}}. 
+This is the only OBJ exporter capable of handling large TIN landscapes
+($>450.000$ triangles). 
+As of version 2.6 it seems to be the best OBJ exporter available for Sketchup. 
+
+%As of version 1.6 it appears to have valid texture coordinates, but I have
+%experienced problems with black faces which need more
+%investigation. Maybe you can combine two OBJ files with another 3D
+%editor after creating individual OBJs if this is a problem. 
+
+This exporter swaps Y/Z coordinates, but you can add a key to the config file to
+correct swapped axes, see below. Other exporters may also provide coordinates in
+any order of X, Y, Z -- all those can be properly configured.
+
+Another (almost) working alternative: \filename{ObjExporter.rb} by author
+Honing.  Here, export with settings 0xxx00. This will not create a
+\filename{TX...} folder but dump all textures in the same directory as the OBJ
+and MTL files. Unfortunately, currently some material assignments seem to be
+bad.
+
+Yet another exporter, \filename{su2objmtl}, does also not provide good texture
+coordinates and cannot be recommended at this time.
+
+\subsection{Notes on OBJ file format limitations}
+\label{sec:OBJlimitations}
+
+The OBJ format supported is only a subset of the full OBJ format: Only
+(optionally textured) triangle meshes are supported, i.e., only lines containing
+statements: \cmd{mtllib}, \cmd{usemtl}, \cmd{v}, \cmd{vn}, \cmd{vt}, \cmd{f}
+(with three elements only!), \cmd{g}. Negative vertex numbers (i.e., a
+specification of relative positions) are not supported.
+
+A further recommendation for correct illumination is that all vertices should
+have vertex normals. Sketchup models exported with the Kerkythea or TIG plugins
+should have correct normals. If your model does not provide them, default
+normals can be reconstructed from the triangle edges, resulting in a faceted
+look.
+
+If possible, the model should also be triangulated, but the current loader may
+also work with non-triangle geometry. 
+%% TODO: GZ: Does that mean Quads, or higher-level polygons? 
+The correct use of objects ('o') and
+groups ('g') will improve performance: it is best if you pre-combine all objects
+that use the same material into a single one. The loader will try to optimize it
+anyways if this is not the case, but can do this only partly (to combine 2
+objects with the same material into 1, it requires them to follow directly after
+each other in the OBJ). A simple guide to use Blender for this task follows:
+
+\begin{itemize}
+\item Import from Wavefront (.obj) - you may need to change the forward/up axes for correct orientation, try -Y for forward and Z for up
+\item Select an object which has a shared material
+\item Press Shift+L and select 'By Material'
+\item Select 'Join' in the left (main) tool window
+\item Repeat for other objects that have shared materials
+\item Export the .obj, making sure to select the same forward/up axes as in the import, also make sure ``Write Normals'', ``Write Materials'' and ``Include UVs'' are checked
+\end{itemize}
+
+For transparent objects (with a 'd' or 'Tr' value, alpha testing does NOT need this), this recommendation does NOT hold: for optimal results, each separate transparent object should be exported as a separate ``OBJ object''. This is because they need to be sorted during rendering to achieve correct transparency. If the objects are combined already, you can separate them using Blender:
+
+\begin{itemize}
+\item Import .obj (see above)
+\item Select the combined transparent object
+\item Enter ``Edit'' mode with TAB and make sure everything is selected (press A if not)
+\item Press P and select ``By loose parts'', this should separate the object into its unconnected regions
+\item Export .obj (see above), also check ``Objects as OBJ Objects''
+\end{itemize}
+
+\begin{table}[b]
+\begin{tabular}{llll}
+Parameter           &Default      &Range           & Meaning\\
+\cmd{Ka}            &set to \cmd{Kd} values & $0\dots1$ each& R/G/B Ambient color\\
+\cmd{Kd}            &0.8 0.8 0.8  & $0\dots1$ each & R/G/B Diffuse color\\
+\cmd{Ke}            &0.0 0.0 0.0  & $0\dots1$ each & R/G/B Emissive color\\
+\cmd{Ks}            &0.0 0.0 0.0  & $0\dots1$ each & R/G/B Specular color\\
+\cmd{Ns}            &8.0          & $0\dots\infty$ & shinyness \\
+\cmd{d} or \cmd{Tr} &1.0          & $0\dots1$      & opacity \\
+\cmd{bAlphatest}    &0            & 0 or 1         & perform alpha test \\
+\cmd{bBackface}     &0            & 0 or 1         & render backface \\
+\cmd{map\_Kd}       & (none)      & filename       & texture map to be mixed with Ka, Kd \\
+\cmd{map\_Ke}       & (none)      & filename       & texture map to be mixed with Ke \\
+\cmd{map\_bump}     & (none)      & filename       & normal map for surface roughness  
+\end{tabular}
+\caption{MTL parameters evaluated}
+\label{tab:MTL}
+\end{table}
+
+The MTL file specified by ``mtllib'' contains the material parameters. The
+minimum that should be specified is either \cmd{map\_Kd} or a \cmd{Kd} line
+specifying color values used for the respective faces. But there are other
+options in MTL files, and the supported parameters and defaults are listed in
+Table~\ref{tab:MTL}.
+
+If no ambient color is specified, the diffuse color values are taken for the
+ambient color. An optional emissive term \cmd{Ke} can be added, which is
+modulated to only be visible during nighttime. This also requires the
+landscape's self-illumination layer to be enabled. It allows to model
+self-illuminating objects such as street lights, windows etc. It can optionally
+also be modulated by the emissive texture \cmd{map\_Ke}.
+
+If a value for \cmd{Ks} is specified, specularity is evaluated using the
+\href{https://en.wikipedia.org/wiki/Phong_reflection_model}{Phong reflection
+model} with \cmd{Ns} as the exponential shininess constant. Larger shininess
+means smaller specular highlights (more metal-like appearance). Specularity is
+not modulated by the texture maps.
+
+If a value for \cmd{d} or \cmd{Tr} exists, alpha blending is enabled for this
+material. This simulates transparency effects. Transparency can be further
+controlled using the alpha channel of the \cmd{map\_Kd} texture.
+
+A simpler and usually more performant way to achieve simple ``cutout''
+transparency effects is alpha-testing, by setting \cmd{bAlphatest} to 1. This
+simply discards all pixels of the model where the alpha value of the
+\cmd{map\_Kd} is below the \cmd{transparency\_threshold} value from
+\filename{scenery3d.ini}, making ``holes'' in the model. This also produces
+better shadows for such objects. If required, alpha testing can be combined with
+``real'' blending-based transparency.
+
+Sometimes, exported objects only have a single side (``paper wall''), and are only visible
+from one side when looked at in Scenery3d. This is caused by an optimization
+called \href{https://en.wikipedia.org/wiki/Back-face_culling}{back-face
+culling}, which skips drawing the back sides of objects because they are usually
+not visible anyway. If possible, avoid such ``thin'' geometry, this will also
+produce better shadows on the object. As a workaround, you can also set
+\cmd{bBackface} to 1 to disable back-face culling for this material.
+
+The optional \cmd{map\_bump} enables the use of a tangent-space
+\href{https://en.wikipedia.org/wiki/Normal_mapping}{normal maps}, which provides
+a dramatic improvement in surface detail under illumination.
+
+\subsection{Configuring OBJ for Scenery3d}
+\label{sec:Configuring}
+
+The walkaround in your scene can use a ground level (piece of terrain)
+on which the observer can walk. The observer eye will always stay ``eye
+height'' above ground. Currently, there is no collision detection with
+walls implemented, so you can easily walk through walls, or jump on
+high towers, if their platform or roof is exported in the ground
+layer. If your model has no explicit ground layer, walk will be on the
+highest surface of the scenery layer.  If you use the special name
+\texttt{NULL} as ground layer, walk will be above \texttt{zero\_ground\_height} level.
+
+Technically, if your model has cavities or doors, you should export
+your model twice. Once, just the ground plane, i.e. where you will
+walk. Of course, for a temple or other building, this includes its
+socket above soil, and any steps, but pillars should not be included.  
+This plane is required to compute
+eye position above ground. Note that it is not possible to walk in
+several floors of a building, or in a multi-plane staircase. You may
+have to export several ``ground'' planes and configure several scenery
+directories for those rare cases. For optimal performance, the ground 
+model should consist of as few triangles as you can tolerate.
+
+The second export includes all visible model parts, and will be used for
+rendering. Of course, this requires the ground plane again, but also
+all building elements, walls, roofs, etc. 
+
+If you have not done so by yourself, it is recommended to separate
+ground and buildings into Sketchup layers 
+(or similar concepts in whichever editor you are using) 
+in order to easily switch the model to the right state prior to exporting.
+
+Filename recommendations: 
+\begin{verbatim}
+<Temple>.skp        Name of a Sketchup Model file. 
+                    (The "<>" brackets signal "use your own name here!")
+                    The SKP file is not used by Scenery3d, but you may want
+                    to leave it in the folder for later improvements.
+<Temple>.obj        Model in OBJ format. 
+<Temple>_ground.obj Ground layer, if different from Model file. 
+\end{verbatim}
+
+OBJ export may also create folders \verb|TX_<Temple>| and
+\verb|TX_<Temple>_ground|. You can delete the \verb|TX_<Temple>_ground| folder, 
+\verb|<Temple>_ground.obj| is just used to compute vertical height.
+
+Stellarium uses a directory to store additional data per-user. On Windows, this
+defaults to \verb|C:\Documents and Settings\<username>\Application Data\Stellarium|, 
+but you can use another directory by using the command-line
+argument \cmd{--user-dir <USERDATA>}. We will refer to this directory. Put the
+OBJ, MTL and TX directories into a directory, \\
+\verb|<USERDATA>/Stellarium/scenery3d/<Temple>|, and add a text file
+called \texttt{scenery3d.ini} (This name is mandatory!) with content described as
+follows.
+
+% A Sketchup plugin "Write scenery3d.ini for Stellarium" will write this
+% file. Locate the directory where the .obj file(s) reside(s), and store
+% scenery3d.ini there. If you have other modelers and models, or if your
+% model is not georeferenced in Sketchup, write the file yourself and
+% use the following format.
+%
+% TBD GZ: Release this Sketchup export plugin?
+
+\begin{verbatim}
+
+[model]
+name=<Temple>                Unique ID within all models in scenery3d directory.
+                             Recommendation: use directory name.
+landscape=<landscapename>    Name of an available Stellarium landscape.
+\end{verbatim}
+This is required if the landscape file includes geographical
+coordinates and your model does not: First, the location coordinates
+of the \filename{landscape.ini} file are used, then location coordinates given here.
+The landscape also provides the background image of your scenery. - If
+you want a zero-height (mathematical) horizon, use the provided
+landscape called \filename{Zero Horizon}.
+\begin{verbatim}
+scenery=<Temple>.obj         The complete model, including visible ground.
+ground=<Temple>_ground.obj   Optional: separate ground plane. (NULL for zero altitude.)
+description=<Description>    A basic scene description (including HTML tags)
+\end{verbatim}
+The \filename{scenery3d.ini} may contain a simple scene description, but it is
+recommended to use the \emph{localizable} description format: in the scene's
+directory (which contains \filename{scenery3d.ini}) create files in the format
+\filename{description.<lang\_code>.utf8} which can contain arbitrary
+\cmd{UTF-8}-encoded HTML content. \cmd{<lang\_code>} stands for the ISO 639
+language code.
+\begin{verbatim}
+author=<Your Name yourname@yourplace.com>
+copyright=<Copyright Info>
+
+obj_order=XYZ      | Use this if you have used an exporter which swaps Y/Z coordinates.
+                   | Defaults to XYZ, other options: XZY, YZX, YXZ, ZXY, ZYX
+camNearZ=0.3       This defines the distance of the camera near plane, default 0.3.
+                   Everything closer than this value to the camera can not be 
+                   displayed. Must be larger than zero. It may seem tempting 
+                   to set this very small, but this will lead to accuracy issues. 
+                   Recommendation is not to go under 0.1
+camFarZ=10000      Defines the maximal viewing distance, default 10000.
+shadowDistance=<val>  The maximal distance shadows are displayed. If left out, the
+                      value from camFarZ is used here. If this is set to a smaller
+                      value, this may increase the quality of the shadows that are
+                      still visible.
+shadowSplitWeight=0..1 Decimal value for further shadow tweaking. If you require
+                       better shadows up close, try setting this to higher values.
+                       The default is calculated using a heuristic that incorporates
+                       scene size.
+
+[general]
+\end{verbatim}
+The general section defines some further import/rendering options.
+% GZ TBD: Why do we need ground normals? 
+%
+\begin{verbatim}
+transparency_threshold=0.5   Defines the alpha threshold for alpha-testing, 
+                             as described in section 4.1. Default 0.5
+scenery_generate_normals=0   Boolean, if true normals are recalculated by the
+                             plugin, instead of imported. Default false
+ground_generate_normals=0    Boolean, same as above, for ground model. Default
+                             false.
+
+[location]
+\end{verbatim}
+Optional section to specify geographic longitude $\lambda$, latitude $\varphi$,
+and altitude. Required if\\ \verb|coord/convergence_angle=from_grid|, else
+location is inherited from landscape.
+\begin{verbatim}
+planet = Earth
+latitude = +48d31'30.4"      ; Required if coord/convergence_angle=from_grid
+longitude = +16d12'25.5"     ; "--"
+altitude =from_model|<int>   ; 
+\end{verbatim}
+altitude (for astronomical computations) can be computed from the model:  if
+\verb|from_model|, it is computed as $(z_{min}+z_{max})/2+\mathtt{orig\_H}$,
+i.e. from the model bounding box centre height.
+
+\begin{verbatim}
+display_fog = 0
+atmospheric_extinction_coefficient = 0.2
+atmospheric_temperature = 10.0
+atmospheric_pressure = -1
+light_pollution = 1
+
+[coord]
+\end{verbatim}
+
+Entries in the \verb|[coord]| section are again optional, default to zero when
+not specified, but are
+required if you want to display meaningful eye coordinates in your
+survey (world) coordinate system, like UTM or Gauss-Kr\"uger.  
+
+\begin{verbatim}
+grid_name=<string> 
+\end{verbatim}
+Name of grid coordinates, e.g. \texttt{``UTM 33 U (WGS 84)''},
+\texttt{``Gauss-Kr\"uger M34''} or \texttt{``Relative to <Center>''} This name is
+only displayed, there is no evaluation of its contents.
+
+\begin{verbatim}
+orig_E=<double> | (Easting)  East-West-distance to zone central meridian
+orig_N=<double> | (Northing) North distance from Equator
+orig_H=<double> | (Height)   Altitude above Mean Sea Level of model origin
+\end{verbatim}
+These entries describe the offset, in metres, of the model coordinates relative
+to coordinates in a geographic grid, like Gauss-Kr\"uger. If you have your model
+vertices specified in grid coordinates, do not specify \verb|orig_...| data, but
+please definitely add \verb|start_...| data, below.
+
+Note that using grid coordinates without offset for the vertices is
+usually a bad idea for real-world applications like surveyed sites in
+UTM coordinates. Coordinate values are often very large numbers
+(ranging into millions of meters from equator and many thousands from
+the zone meridian). If you want to assign millimetre values to model
+vertices, you will hit numerical problems with the usual
+single-precision floating point arithmetic. Therefore we can specify
+this offset which is only necessary for coordinate display.
+
+\begin{verbatim}
+convergence_angle=from_grid|<double> 
+grid_meridian=<double>|+<int>d<int>'<float>"      
+\end{verbatim}
+Typically, digital elevation models and building structures built on those are
+survey-grid aligned, so true geographical north will not coincide with grid
+north, the difference is known as meridian convergence.
+\begin{equation}
+\gamma(\lambda, \varphi)=\arctan(\tan(\lambda-\lambda_0)\sin\varphi)
+\end{equation}
+This amount can be given in \verb|convergence_angle| (degrees), so
+that your model will be rotated clockwise by this amount around
+the vertical axis to be aligned with True North\footnote{%
+  \url{http://en.wikipedia.org/wiki/Transverse_Mercator_projection}}\footnote{Note that Sketchup's \emph{georeferencing dictionary} provides a NorthAngle entry, which is $360-\mathtt{convergence\_angle}$.}. 
+
+\verb|grid_meridian| Central
+meridian $\lambda_0$ of grid zone, e.g.\ for UTM or Gauss-Kr\"uger,
+ is only required to compute convergence angle if
+\verb|convergence_angle="from_grid"|
+
+\begin{verbatim}
+zero_ground_height=<double> 
+\end{verbatim}
+height of terrain outside \filename{<Temple>\_ground.OBJ}, or if \verb|ground=NULL|.
+Allows smooth approach from outside.  This value is relative to the model
+origin, or typically close to zero, i.e.,  use a Z value in model coordinates,
+not world coordinates! (If you want the terrain height surrounding your model to
+be \verb|orig_H|, use 0, not the correct mean height above sea level!)  Defaults
+to minimum of height of ground level (or model, resp.) bounding box.
+
+\begin{verbatim}
+start_E=<double> 
+start_N=<double> 
+start_H=<double>     /* only meaningful if ground==NULL, else H is derived from ground */
+start_Eye=<double>   /* default: 1.65m */
+start_az_alt_fov=<az_deg>,<alt_deg>,<fov_deg> /* initial view direction and field of view.*/
+\end{verbatim}
+\verb|start_...| defines the view position to be set after loading the scenery.
+Defaults to center of model boundingbox.
+
+It is advisable to use the grid coordinates of the location of the panoramic
+photo ("landscape") as \verb|start_...| coordinates, or the correct coordinates
+and some carefully selected \texttt{start\_az\_alt\_fov} in case of certain view
+corridors (temple axes, \ldots).
+
+\subsection{Predefined views}
+You can also distribute some predefined views with your model in a
+\filename{viewpoints.ini} file. See the provided ``Sterngarten'' scene for an
+example. These entries are not editable by the user through the interface. The
+user can always save his own views, they will be saved into the file
+\filename{userviews.ini} in the user's Stellarium user directory, and are editable.
+
+\begin{verbatim}
+[StoredViews]
+size=<int>              Defines how many entries are in this file. 
+                        Prefix each entry with its index!
+1/label=<string>        The name of this entry
+1/description=<string>  A description of this entry (can include HTML)
+1/position=<x,y,z,h>    The x,y,z grid coordinates (like orig_* or start_*
+                        in scenery3d.ini) + the current eye height
+1/view_fov=<az_deg,alt_deg,fov_deg>  The view direction + FOV
+                                    (like start_az_alt_fov in scenery3d.ini)
+; an example for the second entry (note the 2 at the beginning of each line!)
+2/label       = Signs
+2/description = Two signs that describe the Sterngarten
+2/position    = 593155.2421280354,5333348.6304404084,325.7295809038,0.8805893660
+2/view_fov    = 84.315399,-8.187078,83.000000
+\end{verbatim}
+
+\subsection{Concatenating OBJ files}
+\label{sec:concatenating}
+
+Some automated workflows may involve tiled landscape areas, e.g. to
+overcome texture limitations or triangle count limits in simpler tools
+like Sketchup. In this case you can create separate meshes in the same
+coordinate system, but you need to concatenate them. in Blender, import
+the OBJ files (File/Import/Wavefront .obj), select them and press
+Ctrl-J to join them, then export to a single OBJ
+(File/Export/Wavefront .obj)%
+\footnote{http://blender.stackexchange.com/questions/3352/merging-multiple-obj-files}.
+
+Verify the new model loads correctly, e.g. in Meshlab!
+
+\subsection{Working with non-georeferenced OBJ files}
+\label{sec:NonGeoreferenced}
+
+
+There exists modeling software which produces nice models, but without
+concept of georeference. One spectacular example is AutoDesk PhotoFly,
+a cloud application which delivers 3D models from a bunch of photos
+uploaded via its program interface. This ``technological preview'' is
+in version 2 and free of cost as of mid-2011.
+
+The problem with these models is that you cannot assign surveyed
+coordinates to points in the model, so either you can georeference the
+models in other applications, or you must find the correct
+transformation matrix.  Importing the OBJ in Sketchup may take a long
+time for detailed photo-generated models, and the texturing may
+suffer, so you can cut the model down to the minimum necessary e.g.\ in
+Meshlab, and import just a stub required to georeference the model in
+Sketchup. 
+
+Now, how would you find the proper orientation? The easiest chance
+would be with a structure visible in the photo layer of Google
+Earth. So, start a new model and immediately "add location" from the
+Google Earth interface. Then you can import the OBJ with TIG's importer
+plugin.  If the imported model looks perfect, you may just place the
+model into the Sketchup landscape and export a complete landscape just
+like above. If not, or if you had to cut/simplify the OBJ to be able
+to import it, you can rotate/scale the OBJ (it must be grouped!). If
+you see a shadow in the photos, you may want to set the date/time of
+the original photos in the scene and verify that the shadows created by
+Sketchup illuminating the model match those in the model's photo
+texture. When you are satisfied with placement/orientation, you create
+a \filename{scenery3d.ini} like above with the command
+\cmd{Plugins->ASTROSIM/Stellarium scenery3d helpers->Create scenery3d.ini}.
+
+Then, you select the OBJ group, open \cmd{Windows->Ruby Console} and call
+\cmd{Plugins->ASTROSIM/Stellarium scenery3d helpers->Export transformation
+of selected group (e.g., from PhotoFly import)}.
+
+On the Ruby console, you will find a line of numbers (the $4\times4$
+transformation matrix) which you copy/paste (all in one line!) into the
+\filename{[model]} section in \filename{scenery3d.ini}.
+\begin{verbatim}
+obj2grid_trafo=<a11>,<a12>,<a13>,<a14>,<a21>,<a22>,<a23>,<a24>,
+               <a31>,<a32>,<a33>,<a34>,<a41>,<a42>,<a43>,<a44>
+\end{verbatim}
+You edit the \filename{scenery3d.ini} to use your full (unmodified)
+PhotoFly model and, if you don't have a panorama, take \filename{Zero Horizon}
+landscape as (no-)background. It depends on the model if you want to
+be able to step on it, or to declare \verb|ground=NULL| for a
+constant-height ground. Run Stellarum once and adjust the
+\verb|start_N|, \verb|start_E| and \verb|zero_ground_height|.
+
+\subsubsection{Rotating OBJs with recognized survey points}
+\label{sec:RotatingOBJ}
+
+If you have survey points measured in a survey grid plus a photomodel
+with those points visible, you can use Meshlab to find the model
+vertex coordinates in the photo model, and some other program like
+CoordTrans in the JavaGraticule3D suite to find either the matrix
+values to enter in \filename{scenery3d.ini} or even rotate the OBJ
+points. However, this involves more math than can be described here;
+if you came that far, you likely know the required steps.  Here it
+really helps if you know how to operate automatic text processors like
+AWK.
+
+\section*{Authors and Acknowledgements}
+\label{Acknowledgments}
+
+
+Scenery3d was conceived by Georg Zotti for the ASTROSIM project. A first prototype was
+implemented originally in 2010/2011 by Simon Parzer and Peter Neubauer as
+student work supervised by Michael Wimmer (TU Wien). 
+Models for accuracy tests (Sterngarten, Testscene), and later improvements in
+integration, user interaction, .ini option handling, OBJ/MTL loader bugfixes and
+georeference testing by Georg Zotti. 
+
+Andrei Borza in 2011/12 further improved
+rendering quality (shadow mapping, normal mapping) and speed. 
+
+In 2014/15,
+Florian Schaukowitsch adapted the code to work with Qt 5 and the current
+Stellarium 0.13 codebase, replaced the renderer with a more efficient, fully
+shader-based system, implemented various performance, quality and usability
+enhancements, and did some code cleanup. Both Andrei and Florian were again
+supervised by Michael Wimmer.
+
+This work has been originally created during the ASTROSIM project supported 2008-2012 by
+the Austrian Science Fund (FWF) under grant number P~21208-G19.
+
+\end{document}
+

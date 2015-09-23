@@ -46,12 +46,15 @@ public:
 	//! Contains the parameters defining how a texture is created.
 	struct StelTextureParams
 	{
-		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE) :
+		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false) :
 				generateMipmaps(qgenerateMipmaps),
+				filterMipmaps(qfilterMipmaps),
 				filtering(afiltering),
-				wrapMode(awrapMode) {;}
+				wrapMode(awrapMode){;}
 		//! Define if mipmaps must be created.
 		bool generateMipmaps;
+		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
+		bool filterMipmaps;
 		//! Define the scaling filter to use. Must be one of GL_NEAREST or GL_LINEAR
 		GLint filtering;
 		//! Define the wrapping mode to use. Must be one of GL_CLAMP_TO_EDGE, or GL_REPEAT.
@@ -72,6 +75,10 @@ public:
 
 	//! Return the width and heigth of the texture in pixels
 	bool getDimensions(int &width, int &height);
+
+	//! Returns whether the texture has an alpha channel (GL_RGBA or GL_LUMINANCE_ALPHA format)
+	//! This only returns valid information after the texture is fully loaded.
+	bool hasAlphaChannel() const { return alphaChannel ; }
 
 	//! Get the error message which caused the texture loading to fail
 	//! @return the human friendly error message or empty string if no errors occured
@@ -144,6 +151,9 @@ private:
 
 	//! True when something when wrong in the loading process
 	bool errorOccured;
+
+	//! True if this texture contains an alpha channel
+	bool alphaChannel;
 
 	//! Human friendly error message if loading failed
 	QString errorMessage;

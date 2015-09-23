@@ -38,8 +38,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include <cmath>
 #include <cstdlib>
 
-static const float icosahedron_G = 0.5*(1.0+sqrt(5.0));
-static const float icosahedron_b = 1.0/sqrt(1.0+icosahedron_G*icosahedron_G);
+static const float icosahedron_G = 0.5*(1.0+std::sqrt(5.0));
+static const float icosahedron_b = 1.0/std::sqrt(1.0+icosahedron_G*icosahedron_G);
 static const float icosahedron_a = icosahedron_b*icosahedron_G;
 
 static const Vec3f icosahedron_corners[12] =

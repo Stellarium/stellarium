@@ -44,6 +44,9 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 {
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app);
 
 	if (flags&ObjectType)
 	{
@@ -52,7 +55,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	if (flags&Magnitude)
 	{
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)")
 			       .arg(QString::number(getVMagnitude(core), 'f', 2))
 			       .arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
@@ -103,6 +106,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		const QString sciName = StarMgr::getSciName(s->getHip());
 		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
 		const QString varSciName = StarMgr::getGcvsName(s->getHip());
+		const QString crossIndexData = StarMgr::getCrossIndexDesignations(s->getHip());
 		QStringList sciNames;
 		if (!sciName.isEmpty())
 			sciNames.append(sciName);
@@ -133,9 +137,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << " - ";
 
 		if (flags&CatalogNumber || (nameWasEmpty && (flags&Name)))
+		{
 			oss << "HIP " << s->getHip();
-		if (s->getComponentIds())
-			oss << " " << StarMgr::convertToComponentIds(s->getComponentIds());
+			if (s->getComponentIds())
+				oss << " " << StarMgr::convertToComponentIds(s->getComponentIds());
+
+			if (!crossIndexData.isEmpty())
+				oss << " (" << crossIndexData << ")";
+		}
 
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
@@ -211,10 +220,13 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				minimumM2 += maxVMag;
 			}
 
-			if (min2VMag==99.f)
-				oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(photoVSys) << "<br />";
-			else
-				oss << q_("Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2)).arg(photoVSys) << "<br />";
+			if (maxVMag!=99.f) // seems it is not eruptive variable star
+			{
+				if (min2VMag==99.f)
+					oss << q_("Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(photoVSys) << "<br />";
+				else
+					oss << q_("Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)").arg(QString::number(maxVMag, 'f', 2)).arg(QChar(0x00F7)).arg(QString::number(minimumM1, 'f', 2)).arg(QString::number(minimumM2, 'f', 2)).arg(photoVSys) << "<br />";
+			}
 		}
 	}
 
@@ -234,35 +246,21 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		if (s->getPlx())
 			oss << q_("Parallax: %1\"").arg(0.00001*s->getPlx(), 0, 'f', 5) << "<br />";
 
-		if (vEpoch>0)
-		{
-			double vsEpoch = 2400000+vEpoch;
-			if (ebsFlag)
-				oss << q_("Epoch for minimum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
-			else
-				oss << q_("Epoch for maximum light: %1 JD").arg(QString::number(vsEpoch, 'f', 5)) << "<br />";
-		}
-
 		if (vPeriod>0)
 			oss << q_("Period: %1 days").arg(vPeriod) << "<br />";
 
-		/*
-		// FIXME: This calculations don't contains correction to Earth's rotation around the Sun.
-		// Details for Algol:
-		//	https://sourceforge.net/p/stellarium/discussion/278769/thread/05aae684/
-		//	http://calgary.rasc.ca/algol_minima.htm
 		if (vEpoch>0 && vPeriod>0)
 		{
 			// Calculate next minimum or maximum light
-			double vsEpoch = 2400000+vEpoch;			
-			double npDate = vsEpoch + ((::floor((core->getJDay()-vsEpoch)/vPeriod)+1.0)*vPeriod);
+			double vsEpoch = 2400000+vEpoch;
+			double npDate = vsEpoch + vPeriod * ::floor(1.0 + (core->getJDE() - vsEpoch)/vPeriod);
 			QString nextDate = StelUtils::julianDayToISO8601String(npDate).replace("T", " ");
 			if (ebsFlag)
 				oss << q_("Next minimum light: %1 UTC").arg(nextDate) << "<br />";
 			else
 				oss << q_("Next maximum light: %1 UTC").arg(nextDate) << "<br />";
+
 		}
-		*/
 
 		if (vMm>0)
 		{

@@ -42,7 +42,7 @@ public:
 		    int flagLighting,
 		    double radius,
 		    double oblateness,
-		    Vec3f color,
+		    Vec3f halocolor,
 		    float albedo,
 		    const QString& texMapName,
 		    posFuncType _coordFunc,

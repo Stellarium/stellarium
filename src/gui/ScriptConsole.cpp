@@ -37,7 +37,9 @@
 #include <QSyntaxHighlighter>
 #include <QTextDocumentFragment>
 
-ScriptConsole::ScriptConsole() : highlighter(NULL)
+ScriptConsole::ScriptConsole(QObject *parent)
+	: StelDialog(parent)
+	, highlighter(NULL)
 {
 	ui = new Ui_scriptConsoleForm;
 }
@@ -90,11 +92,6 @@ void ScriptConsole::createDialogContent()
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptOutput(const QString&)), this, SLOT(appendOutputLine(const QString&)));
-#ifndef ENABLE_STRATOSCRIPT_COMPAT
-	ui->preprocessSTSButton->setHidden(true);
-#else
-	connect(ui->preprocessSTSButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
-#endif
 	ui->tabs->setCurrentIndex(0);
 	ui->scriptEdit->setFocus();
 }
@@ -163,13 +160,6 @@ void ScriptConsole::preprocessScript()
 			qDebug() << "Preprocessing with SSC proprocessor";
 			StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
 		}
-#ifdef ENABLE_STRATOSCRIPT_COMPAT
-		else if (sender() == ui->preprocessSTSButton)
-		{
-			qDebug() << "Preprocessing with STS proprocessor";
-			StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
-		}
-#endif
 		else
 			qWarning() << "WARNING: unknown preprocessor type";
 
@@ -313,9 +303,5 @@ void ScriptConsole::rowColumnChanged()
 
 QString ScriptConsole::getFileMask()
 {
-#ifdef ENABLE_STRATOSCRIPT_COMPAT
-	return "(*.ssc *.sts *.inc)";
-#else
 	return "(*.ssc *.inc)";
-#endif
 }

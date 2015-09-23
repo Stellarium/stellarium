@@ -38,13 +38,13 @@
 #include "StelLocaleMgr.hpp"
 #include "StelActionMgr.hpp"
 
+#include "SporadicMeteorMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyDrawer.hpp"
-#include "MeteorMgr.hpp"
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
@@ -59,6 +59,7 @@
 #include "SearchDialog.hpp"
 #include "ViewDialog.hpp"
 #include "ShortcutsDialog.hpp"
+#include "AstroCalcDialog.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -73,14 +74,6 @@
 #include <QPalette>
 #include <QColor>
 #include <QAction>
-
-StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
-{
-	// Allow to load the resources when used as a static plugin
-	Q_INIT_RESOURCE(guiRes);
-
-	return new StelGui();
-}
 
 StelGui::StelGui()
 	: topLevelGraphicsWidget(NULL)
@@ -100,13 +93,13 @@ StelGui::StelGui()
 #ifdef ENABLE_SCRIPT_CONSOLE
 	, scriptConsole(0)
 #endif
+	, astroCalcDialog(0)
 	, flagShowFlipButtons(false)
 	, flipVert(NULL)
 	, flipHoriz(NULL)
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(NULL)
 	, initDone(false)
-	, flagShowDecimalDegrees(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 }
@@ -154,6 +147,11 @@ StelGui::~StelGui()
 		scriptConsole = 0;
 	}
 #endif
+	if (astroCalcDialog)
+	{
+		delete astroCalcDialog;
+		astroCalcDialog = NULL;
+	}
 }
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
@@ -170,8 +168,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
 	configurationDialog = new ConfigurationDialog(this, atopLevelGraphicsWidget);
 #ifdef ENABLE_SCRIPT_CONSOLE
-	scriptConsole = new ScriptConsole();
+	scriptConsole = new ScriptConsole(atopLevelGraphicsWidget);
 #endif
+	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -203,8 +202,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
-	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);
-	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
+	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("AstroCalc window"), astroCalcDialog, "visible", "F10", "Alt+A", true);
+	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);	
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -212,6 +211,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setAutoHideVerticalButtonBar(conf->value("gui/auto_hide_vertical_toolbar", true).toBool());
 	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
 	actionsMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
+
+	setGuiVisible(conf->value("gui/flag_show_gui", true).toBool());
+	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
 #ifndef DISABLE_SCRIPTING
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
@@ -357,9 +359,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
-	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
-
-	setFlagShowDecimalDegrees(conf->value("gui/flag_show_decimal_degrees", false).toBool());
+	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());	
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -413,19 +413,8 @@ void StelGui::setStelStyle(const QString& section)
 		// Load the style sheets
 		currentStelStyle.confSectionName = section;
 
-		QString qtStyleFileName;
-		QString htmlStyleFileName;
-
-		if (section=="night_color")
-		{
-			qtStyleFileName = ":/graphicGui/nightStyle.css";
-			htmlStyleFileName = ":/graphicGui/nightHtml.css";
-		}
-		else if (section=="color")
-		{
-			qtStyleFileName = ":/graphicGui/normalStyle.css";
-			htmlStyleFileName = ":/graphicGui/normalHtml.css";
-		}
+		QString qtStyleFileName = ":/graphicGui/normalStyle.css";
+		QString htmlStyleFileName = ":/graphicGui/normalHtml.css";
 
 		// Load Qt style sheet
 		QFile styleFile(qtStyleFileName);
@@ -529,10 +518,10 @@ void StelGui::update()
 	if (savedProgressBarSize!=skyGui->progressBarMgr->boundingRect().size())
 	{
 		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
-		skyGui->updateBarsPos();
+		forceRefreshGui();
 	}
 
-	dateTimeDialog->setDateTime(core->getJDay());
+	dateTimeDialog->setDateTime(core->getJD());
 }
 
 #ifndef DISABLE_SCRIPTING
@@ -595,19 +584,15 @@ void StelGui::setFlagShowFlipButtons(bool b)
 		if (flipVert==NULL) {
 			// Create the vertical flip button
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			flipVert = new StelButton(NULL,
-																QPixmap(":/graphicGui/btFlipVertical-on.png"),
-																QPixmap(":/graphicGui/btFlipVertical-off.png"),
-																pxmapGlow32x32,
-																"actionVertical_Flip");
+			QPixmap pxmapOn(":/graphicGui/btFlipVertical-on.png");
+			QPixmap pxmapOff(":/graphicGui/btFlipVertical-off.png");
+			flipVert = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionVertical_Flip");
 		}
 		if (flipHoriz==NULL) {
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			flipHoriz = new StelButton(NULL,
-																 QPixmap(":/graphicGui/btFlipHorizontal-on.png"),
-																 QPixmap(":/graphicGui/btFlipHorizontal-off.png"),
-																 pxmapGlow32x32,
-																 "actionHorizontal_Flip");
+			QPixmap pxmapOn(":/graphicGui/btFlipHorizontal-on.png");
+			QPixmap pxmapOff(":/graphicGui/btFlipHorizontal-off.png");
+			flipHoriz = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionHorizontal_Flip");
 		}
 		getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit_Global");
 		getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
@@ -629,7 +614,9 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 		if (btShowNebulaeBackground==NULL) {
 			// Create the nebulae background button
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			btShowNebulaeBackground = new StelButton(NULL, QPixmap(":/graphicGui/btDSS-on.png"), QPixmap(":/graphicGui/btDSS-off.png"), pxmapGlow32x32, "actionShow_DSS");
+			QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
+			QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
+			btShowNebulaeBackground = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSS");
 		}
 		getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
 	} else {
@@ -640,12 +627,17 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 
 void StelGui::setFlagShowDecimalDegrees(bool b)
 {
-	flagShowDecimalDegrees=b;
+	StelApp::getInstance().setFlagShowDecimalDegrees(b);
+	if (searchDialog->visible())
+	{
+		// Update format of input fields if Search Dialog is open
+		searchDialog->populateCoordinateAxis();
+	}
 }
 
 void StelGui::setVisible(bool b)
 {
-	skyGui->setVisible(b);
+	skyGui->setVisible(b);	
 }
 
 bool StelGui::getVisible() const
@@ -719,11 +711,6 @@ bool StelGui::getFlagShowFlipButtons() const
 bool StelGui::getFlagShowNebulaBackgroundButton() const
 {
 	return flagShowNebulaBackgroundButton;
-}
-
-bool StelGui::getFlagShowDecimalDegrees() const
-{
-	return flagShowDecimalDegrees;
 }
 
 bool StelGui::initComplete(void) const

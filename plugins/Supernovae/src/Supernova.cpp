@@ -160,7 +160,7 @@ Vec3f Supernova::getInfoColor(void) const
 float Supernova::getVMagnitude(const StelCore* core) const
 {
 	double vmag = 20;
-	double currentJD = core->getJDay();
+	double currentJD = core->getJDE(); // GZ JDfix for 0.14. I hope the JD in the list is JDE? (Usually difference should be negligible)
 	double deltaJD = qAbs(peakJD-currentJD);
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
@@ -243,7 +243,7 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	if (mag <= mlimit)
 	{
 		sd->computeRCMag(mag, &rcMag);		
-		sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, false);
+		sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, color, false);
 		painter.setColor(color[0], color[1], color[2], 1);
 		size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		shift = 6.f + size/1.8f;
