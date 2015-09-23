@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-21 20:34+0600\n"
-"PO-Revision-Date: 2015-09-22 04:45+0000\n"
+"POT-Creation-Date: 2015-09-22 22:35+0600\n"
+"PO-Revision-Date: 2015-09-22 12:00+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-22 05:17+0000\n"
+"X-Launchpad-Export-Date: 2015-09-23 05:17+0000\n"
 "X-Generator: Launchpad (build 17749)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -90,7 +90,7 @@ msgstr "Galaktinen ekvaattori"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1781
 msgid "O./C. longitude"
-msgstr "Oppos./konj. pituuspiiri"
+msgstr "Oppositio/konjunktiolinja"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -155,7 +155,7 @@ msgstr "Galaktinen ekvaattori"
 #: src/core/modules/GridLinesMgr.cpp:890
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
-msgstr "Opposition/konjunktion pituuspiiri"
+msgstr "Oppositio/konjunktiolinja"
 
 #: src/core/modules/GridLinesMgr.cpp:891
 msgid "Precession Circles"
@@ -1197,7 +1197,7 @@ msgid ""
 "(1973)."
 msgstr ""
 "Tuckermanin luettelo (1962, 1964) listaa auringon, kuun ja planeettojen "
-"paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649. Luetellut "
+"paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649 jKr.. Luetellut "
 "paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin aikaa eli 16.00 "
 "GMT. Sama suhde otettiin epäsuorasti käyttöön myös Goldstinen (1973) "
 "syzygitaulukoihin."
@@ -1277,7 +1277,7 @@ msgid ""
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 "Tämän kaavan laski K. M. Borkowski (%1) analysoimalla 31:tä vuosien 2173 "
-"eaa. - 1715 jaa. välillä tapahtunutta auringonpimennystä."
+"eKr. - 1715 jKr. välillä tapahtunutta auringonpimennystä."
 
 #: src/core/StelCore.cpp:1700
 #, qt-format
@@ -1991,7 +1991,7 @@ msgstr "Pyöritä näkymää taivaan ympäri"
 
 #: src/gui/HelpDialog.cpp:146
 msgid "Arrow keys & left mouse drag"
-msgstr "Nuolinäppäimet & raahaus hiiren vasemmalla näppäimellä"
+msgstr "Nuolinäppäimet & veto hiiren vasemmalla näppäimellä"
 
 #: src/gui/HelpDialog.cpp:148
 msgid "Zoom in/out"
@@ -3273,7 +3273,7 @@ msgstr "Pimennys Olympys Monsilta 10. tammikuuta 2068"
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr "Maan ja Jupiterin peittyminen 2048"
+msgstr "Phoboksen Maan ja Jupiterin peitto 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:256
@@ -3318,7 +3318,7 @@ msgstr "Taivaskulttuurimatka"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:272
 msgid "Earth Events from Mercury"
-msgstr "Maan tapahtumia merkuriuksesta"
+msgstr "Maan tapahtumia Merkuriuksesta"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:274
@@ -3328,7 +3328,7 @@ msgstr "Maan tapahtumia Venuksesta"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:276
 msgid "Earth Events from Mars"
-msgstr "Maan tapahtumia marsista"
+msgstr "Maan tapahtumia Marsista"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:278
@@ -3348,7 +3348,7 @@ msgstr "Tykon supernova"
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:288
 msgid "Look around each installed landscape."
-msgstr "Katso jokaista asennettua maisemaa"
+msgstr "Katsele jokaista asennettua maisemaa."
 
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:290
@@ -3365,15 +3365,15 @@ msgstr "Komentojono esittelee täydellisen kuunpimennyksen."
 
 #: src/translations.h:293
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr "Hidas, loppumaton matka taivaalla, katsellaan satunnaisia kohteita."
+msgstr "Hidas, loppumaton matka taivaalla; katsellaan satunnaisia kohteita."
 
 #: src/translations.h:294
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
-"Komentojono esittelee täydellisen vuoden 2009 auringonpimennyksen "
-"(paikka=Rangpur, Bangladesh)."
+"Komentojono esittelee vuoden 2009 täydellisen auringonpimennyksen (paikka = "
+"Rangpur, Bangladesh)."
 
 #: src/translations.h:295
 msgid "Script which runs automatically at startup"
@@ -3394,7 +3394,7 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
-"Merkuriuksen radan ja pyörimisen erikoisuuksien vuoksi tietyissä kohdissa "
+"Merkuriuksen radan ja pyörimisen erikoisuuksien vuoksi tietyissä paikoissa "
 "Aurinko nousee ja laskee 3 kertaa yhden Merkuriuksen päivän aikana."
 
 #: src/translations.h:298
@@ -3426,8 +3426,8 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
-"Phoboksen maanpeitot ovat yleisiä, kuten myös Jupiterin peitot. Mutta "
-"molempien peitot samana päivänä ovat harvinaisia. Tässä yksi, joka tapahtuu "
+"Phoboksen Maanpeitot ovat yleisiä, kuten myös Jupiterin peitot. Molempien "
+"peitot samana päivänä ovat kuitnekin harvinaisia. Tässä yksi, joka tapahtuu "
 "23. 1.2048. Todellisella nopeudella."
 
 #: src/translations.h:302
@@ -3439,12 +3439,12 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
-"Phobos kulkee Marsin edestä ja pimentää Auringon, kulkee sen editse, sitten "
-"palaa takaisin Aurinkoa kohti ja pimentää sen osittain (vain Deimosin "
-"eteleäiseltä puoliskolta nähtynä). Sitten Mars pimentää täydellisesti "
-"Auringon ja Phoboksen, joka kulkee pimentyneenä Marsin ja Deimoksen välissä. "
-" Phobos tulee esiin Marsin takaa edelleen pimentyneenä, kunnes se poistuu "
-"Marsin varjosta."
+"Phobos kulkee Marsin edestä ja pimentää Auringon, kulkee sen editse ja palaa "
+"sitten takaisin Aurinkoa kohti pimentäen sen osittain (vain Deimosin "
+"eteleäiseltä puoliskolta nähtynä). Tämän jälkeen Mars pimentää täydellisesti "
+"Auringon, sekä Phoboksen joka kulkee pimentyneenä Marsin ja Deimoksen "
+"välissä. Phobos tulee esiin Marsin takaa edelleen pimentyneenä, kunnes se "
+"poistuu Marsin varjosta."
 
 #: src/translations.h:303
 msgid ""
@@ -3483,7 +3483,7 @@ msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
-"Tyko Brahen vuonna 1572 havaitsema supernovan räjähdys. Supernovat-"
+"Tyko Brahen vuonna 1572 havaitseman supernovan räjähdys. Supernovat-"
 "laajennuksen on oltava käytössä."
 
 #: src/translations.h:310
@@ -3500,9 +3500,9 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 "Maan suurimmat elongaatiot ja yilkulut Kallistosta 2000-2003. Miksi "
-"Kallisto? Neljästä Galilein kuusta Kallisto on ainoa Jupiterin "
-"säteilyvyöhykkeen ulkopuolella. Näin ollen, jos ihmiset joskus asuttavat "
-"Jupiterin kuut, Kallisto on paras vaihtoehto."
+"Kallisto? Neljästä Galilein kuusta Kallisto on ainoa, joka on Jupiterin "
+"säteilyvyöhykkeen ulkopuolella. Jos ihmiset joskus asuttaisivat Jupiterin "
+"kuut, olisi Kallisto siis paras vaihtoehto."
 
 #: src/translations.h:315
 msgid "Andorra"
@@ -4514,12 +4514,12 @@ msgstr "Kansio"
 
 #: src/translations.h:569
 msgid "&Choose"
-msgstr "Valitse"
+msgstr "&Valitse"
 
 #: src/translations.h:570 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
-msgstr "Peru"
+msgstr "Peruuta"
 
 #: src/translations.h:571
 msgid "Files of type:"
@@ -4543,7 +4543,7 @@ msgstr "&Avaa"
 
 #: src/translations.h:576
 msgid "File &name:"
-msgstr "Tiedosto &nimi:"
+msgstr "Tiedoston &nimi:"
 
 #: src/translations.h:577
 msgid "Copy &Link Location"
@@ -4551,7 +4551,7 @@ msgstr "Kopioi &linkin osoite"
 
 #: src/translations.h:578
 msgid "Abort"
-msgstr "Lopeta"
+msgstr "Keskeytä"
 
 #: src/translations.h:579
 msgid "Ignore"
@@ -4651,7 +4651,7 @@ msgstr "Palauta oletussijainti"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
-msgstr "Lisää listaan"
+msgstr "Lisää luetteloon"
 
 #: src/ui_locationDialogGui.h:434
 msgid "Name/City:"
@@ -4805,7 +4805,9 @@ msgstr "Sijainti"
 
 #: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
-msgstr "Joidenkin kohteiden löytyminen voi vaatia laajennoksen aktivoimista"
+msgstr ""
+"Joidenkin kohteiden löytäminen voi vaatia tarvittavan laajennuksen "
+"aktivoimista"
 
 #: src/ui_searchDialogGui.h:708
 msgid "names in English"
@@ -4813,12 +4815,12 @@ msgstr "Nimet englanniksi"
 
 #: src/ui_searchDialogGui.h:709
 msgid "Search in list..."
-msgstr "Hae listasta..."
+msgstr "Hae luettelosta..."
 
 #: src/ui_searchDialogGui.h:710
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
-msgstr "Listat"
+msgstr "Luettelot"
 
 #: src/ui_searchDialogGui.h:711
 msgid "On-line astronomical database SIMBAD"
@@ -4838,7 +4840,7 @@ msgstr "Haun asetukset"
 
 #: src/ui_searchDialogGui.h:715
 msgid "Use autofill only from the beginning of words"
-msgstr "Käytä automaattista täyttöä sanan alusta"
+msgstr "Käytä automaattista tekstinsyöttöä"
 
 #: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1784
 #: src/ui_viewDialog.h:1803 src/ui_viewDialog.h:1811
@@ -4920,7 +4922,7 @@ msgstr "paine, lämpötila, ekstinktiokerroin"
 
 #: src/ui_viewDialog.h:1596
 msgid "Refraction/Extinction settings..."
-msgstr "Refraktio/ekstinktioasetukset"
+msgstr "Refraktio/ekstinktioasetukset..."
 
 #: src/ui_viewDialog.h:1597
 msgid "Planets and satellites"
@@ -4943,7 +4945,7 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
-"Poista tämä valinta käytöstä jos haluat nähdä valitun planeetan ja sen "
+"Poista tämä valinta käytöstä, jos haluat nähdä valitun planeetan ja sen "
 "kuiden kiertoradat."
 
 #: src/ui_viewDialog.h:1604
@@ -4955,7 +4957,7 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
-"Poista tämä valinta käytöstä jos haluat nähdä kaikkien aurinkokunnan "
+"Poista tämä valinta käytöstä, jos haluat nähdä kaikkien aurinkokunnan "
 "kohteiden kiertoradat."
 
 #: src/ui_viewDialog.h:1608
@@ -4994,7 +4996,7 @@ msgstr "Valitse maisema automaattisesti"
 
 #: src/ui_viewDialog.h:1627
 msgid "Settings for sporadic meteors"
-msgstr "Sporadisten meteorien asetukset"
+msgstr "Satunnaisten meteorien asetukset"
 
 #: src/ui_viewDialog.h:1629
 msgid "Shooting Stars"
@@ -5073,7 +5075,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1681
 msgid "Filter by type"
-msgstr "Suodintyyppi"
+msgstr "Suodata tyypin mukaan"
 
 #: src/ui_viewDialog.h:1684
 msgid "Hydrogen regions"
@@ -5187,20 +5189,20 @@ msgstr "Ekvatoriaalinen asteikko (nykyinen)"
 
 #: src/ui_viewDialog.h:1727
 msgid "Ecliptical coordinates for J2000.0."
-msgstr "Ekliptiset koordinaatit (J2000.0)"
+msgstr "Ekliptikaaliset koordinaatit (J2000.0)"
 
 #: src/ui_viewDialog.h:1729
 msgid "Ecliptic grid (J2000)"
-msgstr "Ekliptinen asteikko (J2000)"
+msgstr "Ekliptikaalinen asteikko (J2000)"
 
 #: src/ui_viewDialog.h:1731
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
-"Ekliptiset koordinaatit nykyiselle ajankohdalle. Näytetään vain Maassa."
+"Ekliptikaaliset koordinaatit nykyiselle ajankohdalle. Näytetään vain Maassa."
 
 #: src/ui_viewDialog.h:1733
 msgid "Ecliptic grid (of date)"
-msgstr "Ekliptinen asteikko (nykyinen)"
+msgstr "Ekliptikaalinen asteikko (nykyinen)"
 
 #: src/ui_viewDialog.h:1735
 msgid "Altitudes and azimuth (counted from North towards East)."
@@ -5208,11 +5210,11 @@ msgstr "Korkeus ja atsimuutti (pohjoisesta itään laskien)."
 
 #: src/ui_viewDialog.h:1739
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr "Galaktiset koordinaatit, järjestelmä II (IAU 1958)"
+msgstr "Galaktiset koordinaatit, järjestelmä II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1743
 msgid "Labels for the Cardinal directions."
-msgstr "Pääilmansuuntien merkit"
+msgstr "Pääilmansuuntien merkit."
 
 #: src/ui_viewDialog.h:1747
 msgid ""
@@ -5228,7 +5230,7 @@ msgstr "Prekressioympyrät"
 
 #: src/ui_viewDialog.h:1751
 msgid "Show celestial equator of J2000.0."
-msgstr "Näytä taivaanekvaattori (J2000.0)"
+msgstr "Näytä taivaanekvaattori (J2000.0)."
 
 #: src/ui_viewDialog.h:1753
 msgid "Equator (J2000)"
@@ -5236,7 +5238,7 @@ msgstr "Ekvaattori (J2000)"
 
 #: src/ui_viewDialog.h:1755
 msgid "Show celestial equator of current planet and date."
-msgstr "Näytä tämänhetkisen planeetan nykyinen taivaanekvaattori."
+msgstr "Näytä tämän hetkisen planeetan nykyinen taivaanekvaattori."
 
 #: src/ui_viewDialog.h:1757
 msgid "Equator (of date)"
@@ -5321,7 +5323,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1797
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
-"Käytä maisemien asetustiedostossa (landscape.ini) määriteltyä "
+"Käytä maiseman asetustiedostossa (landscape.ini) määriteltyä "
 "vähimmäiskirkkautta"
 
 #: src/ui_viewDialog.h:1799
@@ -5494,7 +5496,8 @@ msgstr "Näytettävät tiedot"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr "Maakeskinen ekvatoriaalinen koordinaatisto, nykyhetken epookki"
+msgstr ""
+"Maakeskinen ekvatoriaalinen koordinaatisto, nykyinen kevättasauspiste"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Right ascension/Declination (of date)"
@@ -5506,7 +5509,8 @@ msgstr "Luettelonumero(t)"
 
 #: src/ui_configurationDialog.h:1081
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr "Maakeskinen ekvatoriaalinen koordinaatisto, nykyhetken epookki"
+msgstr ""
+"Maakeskinen ekvatoriaalinen koordinaatisto, nykyinen kevättasauspiste"
 
 #: src/ui_configurationDialog.h:1083
 msgid "Right ascension/Declination (J2000)"
@@ -5534,7 +5538,7 @@ msgstr "Koko"
 
 #: src/ui_configurationDialog.h:1092
 msgid "The type of the object (star, planet, etc.)"
-msgstr "Kohteen tyyppi (tähti, planeetta, ym.)"
+msgstr "Kohteen tyyppi (tähti, planeetta, jne.)"
 
 #: src/ui_configurationDialog.h:1096
 msgid "Spectral class, nebula type, etc."
@@ -5546,7 +5550,7 @@ msgstr "Lisätietoja"
 
 #: src/ui_configurationDialog.h:1100
 msgid "Topocentric equatorial coordinates"
-msgstr "Paikkakeskeiset ekvatoriaaliset koordinaatit"
+msgstr "Paikkakeskiset ekvatoriaaliset koordinaatit"
 
 #: src/ui_configurationDialog.h:1102
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
@@ -5569,11 +5573,12 @@ msgstr "Etäisyys"
 #: src/ui_configurationDialog.h:1109
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
-"Ekliptiset koordinaatit, kevätpäiväntasaus (nykyinen ja  J2000) (vain maalle)"
+"Ekliptikaaliset koordinaatit, kevättasauspiste nykyinen ja J2000 (vain "
+"Maalle)"
 
 #: src/ui_configurationDialog.h:1111
 msgid "Ecliptic coordinates"
-msgstr "Ekliptiset koordinaatit"
+msgstr "Ekliptikaaliset koordinaatit"
 
 #: src/ui_configurationDialog.h:1112
 msgid "Control"
@@ -5581,7 +5586,7 @@ msgstr "Hallinta"
 
 #: src/ui_configurationDialog.h:1114
 msgid "Allow keyboard to pan and zoom"
-msgstr "Salli siirtyminen ja suurennus/loitonnus näppäimistöllä"
+msgstr "Salli siirtyminen ja lähennys/loitonnus näppäimistöllä"
 
 #: src/ui_configurationDialog.h:1116
 msgid "Enable keyboard navigation"
@@ -5590,7 +5595,7 @@ msgstr "Salli liikkuminen näppäimistöllä"
 #: src/ui_configurationDialog.h:1118
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
-"Salli hiirellä liikkuminen (vetämällä) ja suurennus/loitonnus (rullalla)"
+"Salli hiirellä liikkuminen (vetämällä) ja lähennys/loitonnus (rullalla)"
 
 #: src/ui_configurationDialog.h:1120
 msgid "Enable mouse navigation"
@@ -5615,7 +5620,8 @@ msgstr "Aloituspäiväys ja -aika"
 
 #: src/ui_configurationDialog.h:1131
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "Käytä tiettyä päiväystä ja aikaa Stellariumin käynnistyessä"
+msgstr ""
+"Käytä erikseen määriteltyä päiväystä ja aikaa Stellariumin käynnistyessä"
 
 #: src/ui_configurationDialog.h:1133
 msgid "Other:"
@@ -5642,7 +5648,8 @@ msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
-"Asettaa simulaation ajan Stellariumin käynnistyspäivää seuraavaksi ajaksi"
+"Asettaa simulaation ajan seuraavaaksi tähän asetetuksi ajanhetkeksi "
+"Stellariumin käynnistyessä."
 
 #: src/ui_configurationDialog.h:1145
 msgid "System date at:"
@@ -5698,7 +5705,7 @@ msgstr "\"Gravitaationimet\""
 
 #: src/ui_configurationDialog.h:1172
 msgid "Toggle display backgrounds of the nebulae."
-msgstr "Tähtisumukuvat päälle"
+msgstr "Ota tähtisumukuvat käyttöön"
 
 #: src/ui_configurationDialog.h:1174
 msgid "Show nebula background button"
@@ -5716,8 +5723,8 @@ msgstr "Näytä peilauspainikkeet"
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
-"Aseta paikkakuntaikkunassa ilmakehä automaattisesti kohteille, joilla on "
-"ilmakehä"
+"Ota paikkakuntaikkunassa ilmakehä automaattisesti käyttöön kohteille, joilla "
+"on ilmakehä"
 
 #: src/ui_configurationDialog.h:1182
 msgid "Auto-enabling for the atmosphere"
@@ -5764,15 +5771,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
-msgstr "Paikkakeskeiset koordinaatit"
+msgstr "Paikkakeskiset koordinaatit"
 
 #: src/ui_configurationDialog.h:1200
 msgid ""
 "Activate this option to calculate azimuth from south towards west (as in old "
 "astronomical literature)."
 msgstr ""
-"Ota tämä valinta käyttöön laskeaksesi atsimuutti etelästä itään päin (kuten "
-"vanhassa kirjallisuudessa)."
+"Ota tämä valinta käyttöön laskeaksesi atsimuutti etelästä länteen päin "
+"(kuten vanhassa kirjallisuudessa)."
 
 #: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
@@ -5844,7 +5851,7 @@ msgstr "Tiedot"
 
 #: src/ui_configurationDialog.h:1245
 msgid "Navigation"
-msgstr "Siirtyminen"
+msgstr "Siirtyminen ja aika"
 
 #: src/ui_configurationDialog.h:1247
 msgid "Tools"
@@ -5873,7 +5880,7 @@ msgstr "Asenna uusi maisema ZIP-arkistosta..."
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Switch to the new landscape after installation"
-msgstr "Aseta uusi maisema asennuksen jälkeen"
+msgstr "Ota uusi maisema käyttöön asennuksen jälkeen"
 
 #: src/ui_addRemoveLandscapesDialog.h:272
 msgid "Remove an installed landscape"
@@ -5927,9 +5934,10 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
-"Ekstinktio on tähden kirkkauden himmenemistä Maan ilmakehän vaikutuksesta. "
-"Se annetaan yksiköissä mag/ilmamassa, missä ilmamassa on ilmakehien määrä, "
-"jonka läpi valo kulkenut (zeniitti: 1; horisontti noin 40)"
+"Ekstinktio tarkoittaa tähden (tai minkä tahansa muun kohteen) kirkkauden "
+"himmenemistä Maan ilmakehän vaikutuksesta. Se annetaan yksiköissä "
+"mag/ilmamassa, missä ilmamassa on ilmakehien määrä jonka läpi valo on "
+"kulkenut (zeniitti: 1; horisontti noin 40)"
 
 #: src/ui_atmosphereDialog.h:186
 msgid "Extinction Coefficient:"
@@ -5940,8 +5948,8 @@ msgid ""
 "Use about 0.12 for superb mountaintops, 0.2 for good rural landscape, 0.35 "
 "for murky conditions."
 msgstr ""
-"Käytä arvoa noin 0,12 korkeimmille vuorenhuipuille, 0,2 hyvälle "
-"maaseututaivaalle, 0,35 huonoille olosuhteille."
+"Käytä noin arvoa 0,12 korkeimmille vuorenhuipuille, 0,2 hyvälle "
+"maaseututaivaalle ja 0,35 huonoille olosuhteille."
 
 #: src/ui_scriptConsole.h:346
 msgid "Script console"
@@ -5949,15 +5957,15 @@ msgstr "Komentosarjojen hallintapaneeli"
 
 #: src/ui_scriptConsole.h:349
 msgid "load script from file"
-msgstr "Hae komentosarja tiedostosta"
+msgstr "Lataa komentosarja"
 
 #: src/ui_scriptConsole.h:353
 msgid "save script to file"
-msgstr "Tallenna komentosarja tiedostoon"
+msgstr "Tallenna komentosarja nimellä"
 
 #: src/ui_scriptConsole.h:357
 msgid "clear"
-msgstr "tyhjennä"
+msgstr "Tyhjennä"
 
 #: src/ui_scriptConsole.h:361
 msgid "pre-process script using SSC preprocessor"
@@ -6047,7 +6055,7 @@ msgstr "vvvv.kk.pp"
 
 #: src/ui_astroCalcDialog.h:376
 msgid "Maximum allowed separation:"
-msgstr "Suurin sallittu erotus:"
+msgstr "Suurin sallittu kulmaerotus:"
 
 #: src/ui_astroCalcDialog.h:378
 msgid "Value in decimal degrees"

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-21 20:34+0600\n"
-"PO-Revision-Date: 2015-09-22 05:09+0000\n"
+"POT-Creation-Date: 2015-09-22 22:35+0600\n"
+"PO-Revision-Date: 2015-09-23 03:52+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-22 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-09-23 05:12+0000\n"
 "X-Generator: Launchpad (build 17749)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -4971,12 +4971,12 @@ msgstr "زخات الشهب"
 
 #: src/ui_viewDialog.h:1631
 msgid "Hourly zenith rate"
-msgstr "معدل عدد الشهب السمتي كل ساعة"
+msgstr "معدل عدد الشهب في الساعة عندما تكون نقطة المنشأ في الأوج"
 
 #: src/ui_viewDialog.h:1633
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr "المعدل السمتي في الساعة"
+msgstr "معدل عدد الشهب في الساعة للأوج"
 
 #: src/ui_viewDialog.h:1635
 msgid "Display objects from catalogs"
@@ -10961,7 +10961,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr "<p dir=rtl>المعدل السمتي في الساعة"
+msgstr "<p dir=rtl>معدل عدد الشهب في الساعة للأوج"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:280
 msgid ""
@@ -10971,9 +10971,9 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
-"<p dir=rtl>فلكيا، يعد المعدل السمتي في الساعة لزخة شهب هو عدد الشهب التي "
+"<p dir=rtl>فلكيا، يعد المعدل الأوجي في الساعة لزخة شهب هو عدد الشهب التي "
 "يراها الفرد خلال ساعة في سماء صافية ومظلمة بحيث يكون حد قدر السطوع الذي يراه "
-"يصل إلى 6.5 إذا كانت نقطة منشأ  زخة الشهب في السمت. والمعدل الفعلي في العادة "
+"يصل إلى 6.5 إذا كانت نقطة منشأ  زخة الشهب في الأوج. والمعدل الفعلي في العادة "
 "يكون أقل من ذلك ويتناقص كلما كانت نقطة المنشأ أقرب للأفق."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
@@ -11042,7 +11042,7 @@ msgstr "الفترة الزمنية يجب أن تكون أقل من سنة!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
 msgid "ZHR"
-msgstr "‎المعدل السمتي لكل ساعة‎: %1"
+msgstr "معدل عدد الشهب في الساعة للأوج"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
