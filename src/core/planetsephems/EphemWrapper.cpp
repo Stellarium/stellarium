@@ -71,7 +71,7 @@ bool jd_fits_de431(double jd)
 
 bool jd_fits_de430(double jd)
 {
-    return !(jd < 2287184.5 || jd > 2688976.5);
+    return !(jd < 2287184.5 || jd > 2688974.5);
 }
 
 bool use_de430(double jd)
@@ -88,6 +88,11 @@ bool use_de431(double jd)
 
 void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 {
+    if(!std::isfinite(jd))
+    {
+        qDebug() << "SKIPPED CoordCalc, jd is infinite/nan";
+        return;
+    }
   	if(use_de430(jd))
   	{
   		GetDe430Coor(jd, planet_id + 1, xyz);
