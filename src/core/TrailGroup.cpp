@@ -36,7 +36,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	float currentTime = core->getJDay();
+	float currentTime = core->getJDE();
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
 	sPainter->setProjector(core->getProjection(transfo));
@@ -59,23 +59,19 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 			colorArray[i].set(trail.color[0], trail.color[1], trail.color[2], colorRatio*opacity);
 			vertexArray[i]=posHistory.at(i);
 		}
-		sPainter->setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
-		sPainter->setColorPointer(4, GL_FLOAT, colorArray.constData());
-		sPainter->enableClientStates(true, false, true);
-		sPainter->drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
-		sPainter->enableClientStates(false);
+		sPainter->drawPath(vertexArray, colorArray);
 	}
 }
 
 // Add 1 point to all the curves at current time and suppress too old points
 void TrailGroup::update()
 {
-	times.append(StelApp::getInstance().getCore()->getJDay());
+	times.append(StelApp::getInstance().getCore()->getJDE());
 	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
 	{
 		iter->posHistory.append(j2000ToTrailNative*iter->stelObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
 	}
-	if (StelApp::getInstance().getCore()->getJDay()-times.at(0)>timeExtent)
+	if (StelApp::getInstance().getCore()->getJDE()-times.at(0)>timeExtent)
 	{
 		times.pop_front();
 		for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)

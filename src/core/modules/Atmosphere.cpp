@@ -123,7 +123,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		delete[] colorGrid;
 		delete [] posGrid;
 		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
-		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
+		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*std::sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
 		colorGrid = new Vec4f[(1+skyResolutionX)*(1+skyResolutionY)];
 		float stepX = (float)prj->getViewportWidth() / (skyResolutionX-0.5);
@@ -220,7 +220,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 	else
 		eclipseFactor = 1.f;
-
+	// TODO: compute eclipse factor also for Lunar eclipses! (lp:#1471546)
 
 	// No need to calculate if not visible
 	if (!fader.getInterstate())

@@ -21,11 +21,9 @@
 #include "Dialog.hpp"
 #include "AngleSpinBox.hpp"
 #include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
-#include "StelUtils.hpp"
+
 #include "VecMath.hpp"
 #include "TelescopeControl.hpp"
 #include "SlewDialog.hpp"
@@ -42,11 +40,13 @@ SlewDialog::SlewDialog()
 	
 	//TODO: Fix this - it's in the same plugin
 	telescopeManager = GETSTELMODULE(TelescopeControl);
+	storedPointsDialog = NULL;
 }
 
 SlewDialog::~SlewDialog()
 {	
 	delete ui;
+	storedPointsDialog = NULL;
 }
 
 void SlewDialog::retranslate()
@@ -72,13 +72,26 @@ void SlewDialog::createDialogContent()
 
 	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
 	connect(telescopeManager, SIGNAL(clientDisconnected(int)), this, SLOT(removeTelescope(int)));
-        //
+
+	connect(ui->comboBoxStoredPoints, SIGNAL(currentIndexChanged(int)), this, SLOT(getStoredPointInfo()));
+	connect(ui->toolButtonStoredPoints, SIGNAL(clicked()), this, SLOT(editStoredPoints()));
+
 	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
 	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
+
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
 
+	storedPointsDialog = new StoredPointsDialog;
+	// add point and remove
+	connect(storedPointsDialog, SIGNAL(addStoredPoint(int, QString, double, double)),
+		this, SLOT(addStoredPointToComboBox(int, QString, double, double)));
+	// remove point
+	connect(storedPointsDialog, SIGNAL(removeStoredPoint(int)),
+		this, SLOT(removeStoredPointFromComboBox(int)));
+
 	updateTelescopeList();
+	updateStoredPointsList();
 }
 
 void SlewDialog::showConfiguration()
@@ -89,21 +102,33 @@ void SlewDialog::showConfiguration()
 
 void SlewDialog::setFormatHMS(bool set)
 {
-	if (!set) return;
+	if (!set)
+		return;
+
+	ui->spinBoxRA->setDecimals(2);
+	ui->spinBoxDec->setDecimals(2);
 	ui->spinBoxRA->setDisplayFormat(AngleSpinBox::HMSLetters);
-	ui->spinBoxDec->setDisplayFormat(AngleSpinBox::DMSLetters);
+	ui->spinBoxDec->setDisplayFormat(AngleSpinBox::DMSSymbols);
 }
 
 void SlewDialog::setFormatDMS(bool set)
 {
-	if (!set) return;
-	ui->spinBoxRA->setDisplayFormat(AngleSpinBox::DMSLetters);
-	ui->spinBoxDec->setDisplayFormat(AngleSpinBox::DMSLetters);
+	if (!set)
+		return;
+
+	ui->spinBoxRA->setDecimals(2);
+	ui->spinBoxDec->setDecimals(2);
+	ui->spinBoxRA->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->spinBoxDec->setDisplayFormat(AngleSpinBox::DMSSymbols);
 }
 
 void SlewDialog::setFormatDecimal(bool set)
 {
-	if (!set) return;
+	if (!set)
+		return;
+
+	ui->spinBoxRA->setDecimals(6);
+	ui->spinBoxDec->setDecimals(6);
 	ui->spinBoxRA->setDisplayFormat(AngleSpinBox::DecimalDeg);
 	ui->spinBoxDec->setDisplayFormat(AngleSpinBox::DecimalDeg);
 }
@@ -152,6 +177,7 @@ void SlewDialog::removeTelescope(int slot)
 	QString name = connectedSlotsByName.key(slot, QString());
 	if (name.isEmpty())
 		return;
+
 	connectedSlotsByName.remove(name);
 
 	int index = ui->comboBoxTelescope->findText(name);
@@ -171,7 +197,7 @@ void SlewDialog::removeTelescope(int slot)
 
 void SlewDialog::slew()
 {
-	double radiansRA = ui->spinBoxRA->valueRadians();
+	double radiansRA  = ui->spinBoxRA->valueRadians();
 	double radiansDec = ui->spinBoxDec->valueRadians();
 	int slot = connectedSlotsByName.value(ui->comboBoxTelescope->currentText());
 
@@ -207,3 +233,185 @@ void SlewDialog::getCenterInfo()
 	ui->spinBoxDec->setRadians(dec_j2000);
 }
 
+void SlewDialog::editStoredPoints()
+{
+
+	storedPointsDialog->setVisible(true);
+	QVariantList qvl;
+	for (int i = 1;i< ui->comboBoxStoredPoints->count(); i++)
+	{
+		QVariant var = ui->comboBoxStoredPoints->itemData(i);
+		qvl.append(var);
+	}
+	storedPointsDialog->populatePointsList(qvl);
+}
+
+void SlewDialog::updateStoredPointsList()
+{
+	//user point from file
+	loadPointsFromFile();
+}
+
+void SlewDialog::addStoredPointToComboBox(int number, QString name, double radiansRA, double radiansDec)
+{
+	if (!ui->comboBoxStoredPoints->count())
+	{
+		ui->comboBoxStoredPoints->addItem(q_("Select one"));
+	}
+	storedPoint sp;
+	sp.number = number;
+	sp.name = name;
+	sp.radiansRA = radiansRA;
+	sp.radiansDec= radiansDec;
+
+	QVariant var;
+	var.setValue(sp);
+	ui->comboBoxStoredPoints->addItem(name,var);
+
+	savePointsToFile();
+}
+
+void SlewDialog::removeStoredPointFromComboBox(int number)
+{
+	ui->comboBoxStoredPoints->removeItem(number+1);
+	if (1 == ui->comboBoxStoredPoints->count())
+	{
+		ui->comboBoxStoredPoints->removeItem(0);
+	}
+	this->savePointsToFile();
+}
+
+void SlewDialog::getStoredPointInfo()
+{
+	QVariant var = ui->comboBoxStoredPoints->currentData();
+	storedPoint sp = var.value<storedPoint>();
+
+	ui->spinBoxRA->setRadians(sp.radiansRA);
+	ui->spinBoxDec->setRadians(sp.radiansDec);
+}
+
+void SlewDialog::savePointsToFile()
+{
+	//Open/create the JSON file
+	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
+	if (pointsJsonPath.isEmpty())
+	{
+		qWarning() << "SlewDialog: Error saving points";
+		return;
+	}
+	QFile pointsJsonFile(pointsJsonPath);
+	if(!pointsJsonFile.open(QFile::WriteOnly|QFile::Text))
+	{
+		qWarning() << "SlewDialog: Points can not be saved. A file can not be open for writing:"
+			   << QDir::toNativeSeparators(pointsJsonPath);
+		return;
+	}
+
+	storedPointsDescriptions.clear();
+	// All user stored points from comboBox
+	for (int i = 1;i< ui->comboBoxStoredPoints->count(); i++)
+	{
+		QVariant var = ui->comboBoxStoredPoints->itemData(i);
+		storedPoint sp = var.value<storedPoint>();
+		QVariantMap point;
+		point.insert("number",        sp.number);
+		point.insert("name",          sp.name);
+		point.insert("radiansRA",     sp.radiansRA);
+		point.insert("radiansDec",    sp.radiansDec);
+
+		storedPointsDescriptions.insert(QString::number(sp.number),point);
+	}
+	//Add the version:
+	storedPointsDescriptions.insert("version", QString(TELESCOPE_CONTROL_VERSION));
+	//Convert the tree to JSON
+	StelJsonParser::write(storedPointsDescriptions, &pointsJsonFile);
+	pointsJsonFile.flush();//Is this necessary?
+	pointsJsonFile.close();
+}
+
+void SlewDialog::loadPointsFromFile()
+{
+	QVariantMap result;
+	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
+
+	if (pointsJsonPath.isEmpty())
+	{
+		qWarning() << "SlewDialog: Error loading points";
+		return;
+	}
+	if(!QFileInfo(pointsJsonPath).exists())
+	{
+		qWarning() << "SlewDialog::loadPointsFromFile(): No pointss loaded. File is missing:"
+			   << QDir::toNativeSeparators(pointsJsonPath);
+		storedPointsDescriptions = result;
+		return;
+	}
+
+	QFile pointsJsonFile(pointsJsonPath);
+
+	QVariantMap map;
+
+	if(!pointsJsonFile.open(QFile::ReadOnly))
+	{
+		qWarning() << "SlewDialog: No points loaded. Can't open for reading"
+			   << QDir::toNativeSeparators(pointsJsonPath);
+		storedPointsDescriptions = result;
+		return;
+	}
+	else
+	{
+		map = StelJsonParser::parse(&pointsJsonFile).toMap();
+		pointsJsonFile.close();
+	}
+
+	//File contains any points?
+	if(map.isEmpty())
+	{
+		storedPointsDescriptions = result;
+		return;
+	}
+
+	QString version = map.value("version", "0.0.0").toString();
+	if(version < QString(TELESCOPE_CONTROL_VERSION))
+	{
+		QString newName = pointsJsonPath + ".backup." + QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
+		if(pointsJsonFile.rename(newName))
+		{
+			qWarning() << "SlewDialog: The existing version of points.json is obsolete. Backing it up as "
+				   << QDir::toNativeSeparators(newName);
+			qWarning() << "SlewDialog: A blank points.json file will have to be created.";
+			storedPointsDescriptions = result;
+			return;
+		}
+		else
+		{
+			qWarning() << "SlewDialog: The existing version of points.json is obsolete. Unable to rename.";
+			storedPointsDescriptions = result;
+			return;
+		}
+	}
+	map.remove("version");//Otherwise it will try to read it as a point
+
+	//Read pointss, if any
+	QMapIterator<QString, QVariant> node(map);
+
+	if(node.hasNext())
+	{
+		ui->comboBoxStoredPoints->addItem(q_("Select one"));
+		do
+		{
+			node.next();
+
+			QVariantMap point = node.value().toMap();
+			storedPoint sp;
+			sp.name       = point.value("name").toString();
+			sp.number     = point.value("number").toInt();
+			sp.radiansRA  = point.value("radiansRA").toDouble();
+			sp.radiansDec = point.value("radiansDec").toDouble();
+
+			QVariant var;
+			var.setValue(sp);
+			ui->comboBoxStoredPoints->addItem(sp.name,var);
+		} while (node.hasNext());
+	}
+}

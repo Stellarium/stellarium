@@ -38,6 +38,7 @@
 #include "StelProjector.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
+#include "SolarSystem.hpp"
 #include "StelUtils.hpp"
 
 #include <QAction>
@@ -110,6 +111,7 @@ Oculars::Oculars():
 	flagEclipticLine(false),
 	flagEclipticJ2000Grid(false),
 	flagMeridianLine(false),
+	flagLongitudeLine(false),
 	flagHorizonLine(false),
 	flagGalacticEquatorLine(false),
 	flagAdaptation(false),
@@ -117,6 +119,9 @@ Oculars::Oculars():
 	magLimitStars(0.0),
 	flagLimitDSOs(false),
 	magLimitDSOs(0.0),
+	flagLimitPlanets(false),
+	magLimitPlanets(0.0),
+	flagMoonScale(false),
 	ccdRotationAngle(0.0),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
@@ -573,7 +578,7 @@ void Oculars::init()
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 		
-		guiPanelEnabled = settings->value("enable_control_panel", false).toBool();
+		guiPanelEnabled = settings->value("enable_control_panel", true).toBool();
 		enableGuiPanel(guiPanelEnabled);
 
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
@@ -1445,7 +1450,7 @@ void Oculars::paintCCDBounds()
 					double cx, cy;
 					QString cxt, cyt;
 					StelUtils::rectToSphe(&cx,&cy,core->equinoxEquToJ2000(centerPosition)); // Calculate RA/DE (J2000.0) and show it...
-					bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+					bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 					if (withDecimalDegree)
 					{
 						cxt = StelUtils::radToDecDegStr(cx, 5, false, true);
@@ -1555,9 +1560,18 @@ void Oculars::paintText(const StelCore* core)
 	if(selectedCCDIndex != -1) {
 		ccd = ccds[selectedCCDIndex];
 	}
-	Ocular *ocular = oculars[selectedOcularIndex];
-	Telescope *telescope = telescopes[selectedTelescopeIndex];
-	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
+	Ocular *ocular = NULL;
+	if(selectedOcularIndex !=-1) {
+		ocular = oculars[selectedOcularIndex];
+	}
+	Telescope *telescope = NULL;
+	if(selectedTelescopeIndex != -1) {
+		telescope = telescopes[selectedTelescopeIndex];
+	}
+	Lens *lens = NULL;
+	if(selectedLensIndex != -1) {
+		lens = lense[selectedLensIndex];
+	}
 
 	// set up the color and the GL state
 	painter.setColor(0.8, 0.48, 0.0, 1);
@@ -1578,7 +1592,8 @@ void Oculars::paintText(const StelCore* core)
 	
 	
 	// The Ocular
-	if (flagShowOculars) {
+	if (flagShowOculars && ocular!=NULL)
+	{
 		QString ocularNumberLabel;
 		QString name = ocular->name();
 		if (name.isEmpty())
@@ -1636,47 +1651,57 @@ void Oculars::paintText(const StelCore* core)
 			yPosition-=lineHeight;
 		
 			// The telescope
-			QString telescopeNumberLabel;
-			QString telescopeName = telescope->name();
-			if (telescopeName.isEmpty())
+			QString telescopeString = "";
+			QString magString = "";
+			QString fovString = "";
+
+			if (telescope!=NULL)
 			{
-				telescopeNumberLabel = QString(q_("Telescope #%1"))
-						.arg(selectedTelescopeIndex);
+				QString telescopeName = telescope->name();
+
+				if (telescopeName.isEmpty())
+					telescopeString = QString("%1").arg(selectedTelescopeIndex);
+				else
+					telescopeString = QString("%1: %2").arg(selectedTelescopeIndex).arg(telescopeName);
+
+				// General info
+				if (lens!=NULL)
+				{
+					magString = QString::number(((int)(ocular->magnification(telescope, lens) * 10.0)) / 10.0);
+					magString.append(QChar(0x00D7));//Multiplication sign
+
+					fovString = QString::number(((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0);
+					fovString.append(QChar(0x00B0));//Degree sign
+				}
 			}
-			else
-			{
-				telescopeNumberLabel = QString(q_("Telescope #%1: %2"))
-						.arg(selectedTelescopeIndex)
-						.arg(telescopeName);
-			}
-			painter.drawText(xPosition, yPosition, telescopeNumberLabel);
+
+			painter.drawText(xPosition, yPosition, QString(q_("Telescope #%1")).arg(telescopeString));
 			yPosition-=lineHeight;
-			
-			// General info
-			double magnification = ((int)(ocular->magnification(telescope, lens) * 10.0)) / 10.0;
-			QString magString = QString::number(magnification);
-			magString.append(QChar(0x00D7));//Multiplication sign
-			QString magnificationLabel = QString(q_("Magnification: %1"))
-			                             .arg(magString);
-			painter.drawText(xPosition, yPosition, magnificationLabel);
+
+			painter.drawText(xPosition, yPosition, QString(q_("Magnification: %1")).arg(magString));
 			yPosition-=lineHeight;
-			
-			double fov = ((int)(ocular->actualFOV(telescope, lens) * 10000.00)) / 10000.0;
-			QString fovString = QString::number(fov);
-			fovString.append(QChar(0x00B0));//Degree sign
-			QString fovLabel = QString(q_("FOV: %1")).arg(fovString);
-			painter.drawText(xPosition, yPosition, fovLabel);
+
+			painter.drawText(xPosition, yPosition, QString(q_("FOV: %1")).arg(fovString));
 		}
 	}
 
 	// The CCD
-	if (flagShowCCD) {
+	if (flagShowCCD && ccd!=NULL) {
 		QString ccdSensorLabel, ccdInfoLabel;
-		double fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
-		double fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+		QString name = "";
+		QString telescopeName = "";
+		double fovX = 0.0;
+		double fovY = 0.0;
+		if (telescope!=NULL && lens!=NULL)
+		{
+			fovX = ((int)(ccd->getActualFOVx(telescope, lens) * 1000.0)) / 1000.0;
+			fovY = ((int)(ccd->getActualFOVy(telescope, lens) * 1000.0)) / 1000.0;
+			name = ccd->name();
+			telescopeName = telescope->name();
+		}
+
 		ccdInfoLabel = QString(q_("Dimensions: %1")).arg(getDimensionsString(fovX, fovY));
 		
-		QString name = ccd->name();
 		if (name.isEmpty())
 		{
 			ccdSensorLabel = QString(q_("Sensor #%1")).arg(selectedCCDIndex);
@@ -1687,14 +1712,8 @@ void Oculars::paintText(const StelCore* core)
 					.arg(selectedCCDIndex)
 					.arg(name);
 		}
-		painter.drawText(xPosition, yPosition, ccdSensorLabel);
-		yPosition-=lineHeight;
-		painter.drawText(xPosition, yPosition, ccdInfoLabel);
-		yPosition-=lineHeight;
-
 		// The telescope
-		QString telescopeNumberLabel;
-		QString telescopeName = telescope->name();
+		QString telescopeNumberLabel;		
 		if (telescopeName.isEmpty())
 		{
 			telescopeNumberLabel = QString(q_("Telescope #%1"))
@@ -1706,6 +1725,10 @@ void Oculars::paintText(const StelCore* core)
 					.arg(selectedTelescopeIndex)
 					.arg(telescopeName);
 		}
+		painter.drawText(xPosition, yPosition, ccdSensorLabel);
+		yPosition-=lineHeight;
+		painter.drawText(xPosition, yPosition, ccdInfoLabel);
+		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
 	
@@ -1782,16 +1805,21 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEclipticLine(flagEclipticLine);
 	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
+	gridManager->setFlagLongitudeLine(flagLongitudeLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
 	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
 	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
+	skyManager->setFlagPlanetMagnitudeLimit(flagLimitPlanets);
 	skyManager->setFlagNebulaMagnitudeLimit(flagLimitDSOs);
 	skyManager->setCustomStarMagnitudeLimit(magLimitStars);
+	skyManager->setCustomPlanetMagnitudeLimit(magLimitPlanets);
 	skyManager->setCustomNebulaMagnitudeLimit(magLimitDSOs);
 	movementManager->setFlagTracking(false);
 	movementManager->setFlagEnableZoomKeys(true);
 	movementManager->setFlagEnableMouseNavigation(true);
+
+	GETSTELMODULE(SolarSystem)->setFlagMoonScale(flagMoonScale);
 
 	// Set the screen display
 	core->setMaskType(StelProjector::MaskNone);
@@ -1825,6 +1853,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEclipticLine = gridManager->getFlagEclipticLine();
 			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
+			flagLongitudeLine = gridManager->getFlagLongitudeLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
 
@@ -1832,9 +1861,13 @@ void Oculars::zoom(bool zoomedIn)
 			// Current state
 			flagAdaptation = skyManager->getFlagLuminanceAdaptation();
 			flagLimitStars = skyManager->getFlagStarMagnitudeLimit();
+			flagLimitPlanets = skyManager->getFlagPlanetMagnitudeLimit();
 			flagLimitDSOs = skyManager->getFlagNebulaMagnitudeLimit();
 			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
+			magLimitPlanets = skyManager->getCustomPlanetMagnitudeLimit();
 			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
+
+			flagMoonScale = GETSTELMODULE(SolarSystem)->getFlagMoonScale();
 
 			StelMovementMgr *movementManager = core->getMovementMgr();
 			initialFOV = movementManager->getCurrentFov();
@@ -1865,9 +1898,12 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEclipticLine(false);
 	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
+	gridManager->setFlagLongitudeLine(false);
 	gridManager->setFlagHorizonLine(false);
 	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
+
+	GETSTELMODULE(SolarSystem)->setFlagMoonScale(false);
 	
 	movementManager->setFlagTracking(true);
 	movementManager->setFlagEnableZoomKeys(false);

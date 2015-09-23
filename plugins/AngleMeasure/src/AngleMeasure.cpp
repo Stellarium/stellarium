@@ -74,8 +74,22 @@ AngleMeasure::AngleMeasure()
 	, flagShowHorizontalPA(false)
 	, flagShowHorizontalStartSkylinked(false)
 	, flagShowHorizontalEndSkylinked(false)
+	, angleHor(0.)
 	, toolbarButton(NULL)
 {
+	startPoint.set(0.,0.,0.);
+	endPoint.set(0.,0.,0.);
+	perp1StartPoint.set(0.,0.,0.);
+	perp1EndPoint.set(0.,0.,0.);
+	perp2StartPoint.set(0.,0.,0.);
+	perp2EndPoint.set(0.,0.,0.);
+	startPointHor.set(0.,0.,0.);
+	endPointHor.set(0.,0.,0.);
+	perp1StartPointHor.set(0.,0.,0.);
+	perp1EndPointHor.set(0.,0.,0.);
+	perp2StartPointHor.set(0.,0.,0.);
+	perp2EndPointHor.set(0.,0.,0.);
+
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);
 
@@ -118,19 +132,6 @@ void AngleMeasure::init()
 
 	loadSettings();
 
-	startPoint.set(0.,0.,0.);
-	endPoint.set(0.,0.,0.);
-	perp1StartPoint.set(0.,0.,0.);
-	perp1EndPoint.set(0.,0.,0.);
-	perp2StartPoint.set(0.,0.,0.);
-	perp2EndPoint.set(0.,0.,0.);
-	startPointHor.set(0.,0.,0.);
-	endPointHor.set(0.,0.,0.);
-	perp1StartPointHor.set(0.,0.,0.);
-	perp1EndPointHor.set(0.,0.,0.);
-	perp2StartPointHor.set(0.,0.,0.);
-	perp2EndPointHor.set(0.,0.,0.);
-
 	StelApp& app = StelApp::getInstance();
 
 	// Create action for enable/disable & hook up signals	
@@ -167,7 +168,7 @@ void AngleMeasure::update(double deltaTime)
 	lineVisible.update((int)(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
 
-	withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	// if altAz endpoint linked to the rotating sky, move respective point(s)
 	if (flagShowHorizontalStartSkylinked)
@@ -181,7 +182,6 @@ void AngleMeasure::update(double deltaTime)
 		calculateEnds();
 	}
 }
-
 
 void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor)
 {
@@ -268,6 +268,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 //! Draw any parts on the screen which are for our module
 void AngleMeasure::draw(StelCore* core)
 {
+	if (startPoint.lengthSquared()==0.0) // avoid crash on switch-on, lp:#1455839
+		return;
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
 	if (flagShowHorizontal)

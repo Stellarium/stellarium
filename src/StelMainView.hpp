@@ -20,8 +20,8 @@
 #ifndef _STELMAINGRAPHICSVIEW_HPP_
 #define _STELMAINGRAPHICSVIEW_HPP_
 
-#include <QDeclarativeView>
 #include <QCoreApplication>
+#include <QGraphicsView>
 #include <QEventLoop>
 #include <QOpenGLContext>
 
@@ -30,7 +30,6 @@
 // has not been done. As soon as Qt5.4 is out, we should finish this migration process!
 #define STEL_USE_NEW_OPENGL_WIDGETS 0
 
-class QDeclarativeItem;
 #if STEL_USE_NEW_OPENGL_WIDGETS
 class QOpenGLWidget;
 class StelQOpenGLWidget;
@@ -47,7 +46,7 @@ class QSettings;
 //! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
-class StelMainView : public QDeclarativeView
+class StelMainView : public QGraphicsView
 {
 	friend class StelGuiItem;
 	friend class StelSkyItem;
@@ -75,7 +74,7 @@ public:
 	void focusSky();
 	//! Return the parent gui widget, this should be used as parent to all
 	//! the StelDialog instances.
-	QGraphicsWidget* getGuiWidget() const {return guiWidget;}
+	QGraphicsWidget* getGuiWidget() const {return guiItem;}
 	//! Return mouse position coordinates
 	QPoint getMousePos();
 public slots:
@@ -89,8 +88,8 @@ public slots:
 	//! The format of the file, and hence the filename extension
 	//! depends on the architecture and build type.
 	//! @arg filePrefix changes the beginning of the file name
-	//! @arg shotDir changes the directory where the screenshot is saved
-	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
+	//! @arg saveDir changes the directory where the screenshot is saved
+	//! If saveDir is "" then StelFileMgr::getScreenshotDir() will be used
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="");
 
 	//! Get whether colors are inverted when saving screenshot
@@ -137,6 +136,7 @@ protected:
 	virtual void wheelEvent(QWheelEvent* wheelEvent);
 	virtual void moveEvent(QMoveEvent* event);
 	virtual void closeEvent(QCloseEvent* event);
+	virtual void resizeEvent(QResizeEvent* event);
 
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
@@ -151,8 +151,8 @@ signals:
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
-
 	void minFpsChanged();
+	void updateNightModeProperty();
 
 private:
 	//! Start the display loop
@@ -171,10 +171,10 @@ private:
 	//! The StelMainView singleton
 	static StelMainView* singleton;
 
-	//! This is created by the StelGuiItem, but need to be publicly
-	//! accessible so that StelDialog instances can reparent to it.
-	QGraphicsWidget *guiWidget;
-	QDeclarativeItem* skyItem;
+	QGraphicsWidget* rootItem;
+	QGraphicsWidget* skyItem;
+	QGraphicsWidget* guiItem;
+	QGraphicsEffect* nightModeEffect;
 
 	//! The openGL window
 #if STEL_USE_NEW_OPENGL_WIDGETS

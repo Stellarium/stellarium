@@ -26,7 +26,6 @@
 #include <QMap>
 
 class QStringListModel;
-class QNetworkReply;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -108,10 +107,6 @@ private:
 	QMap<QString, StelLocation> pickedLocations;
 	
 	StelLocation lastResortLocation;
-
-	//! For IP-based location lookup
-	QNetworkReply *networkReply;
-
 };
 
 #endif // _STELLOCATIONMGR_HPP_

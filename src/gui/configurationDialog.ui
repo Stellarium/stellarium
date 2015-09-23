@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>497</width>
-    <height>495</height>
+    <height>538</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -264,43 +264,6 @@
                 </widget>
                </item>
               </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBoxUpdates">
-            <property name="title">
-             <string>Check updates</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayoutForUpdatesBox">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="labelUpdates">
-               <property name="text">
-                <string>Enable checking updates of Stellarium via Internet. Info for updates of stable versions you can look on the tab &quot;About&quot; of &quot;Help&quot; window.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
@@ -1129,6 +1092,9 @@
              </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="selectSingleConstellationButton">
+               <property name="toolTip">
+                <string>Hide other constellations when you click one</string>
+               </property>
                <property name="statusTip">
                 <string>Hide other constellations when you click one</string>
                </property>
@@ -1167,16 +1133,6 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
@@ -1187,6 +1143,16 @@
                </property>
               </widget>
              </item>
+             <item row="7" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="decimalDegreeCheckBox">
                <property name="toolTip">
@@ -1194,6 +1160,36 @@
                </property>
                <property name="text">
                 <string>Use decimal degrees</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="nutationCheckBox">
+               <property name="toolTip">
+                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+               </property>
+               <property name="text">
+                <string>Include nutation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="topocentricCheckBox">
+               <property name="toolTip">
+                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+               </property>
+               <property name="text">
+                <string>Topocentric coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west (as in old astronomical literature).</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
                </property>
               </widget>
              </item>

@@ -31,6 +31,7 @@ class QPushButton;
 class QWidget;
 
 //! A screen widget similar to InfoPanel. Contains controls and information.
+//! @ingroup oculars
 class OcularsGuiPanel : public QGraphicsWidget
 {
 	Q_OBJECT

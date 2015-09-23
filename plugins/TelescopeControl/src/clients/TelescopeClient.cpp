@@ -146,7 +146,7 @@ qint64 getNow(void)
 // At the moment this can't be done in a platform-independent way with Qt
 // (QDateTime and QTime don't support microsecond precision)
 	qint64 t;
-	StelCore *core = StelApp::getInstance().getCore();
+	//StelCore *core = StelApp::getInstance().getCore();
 #ifdef Q_OS_WIN32
 	FILETIME file_time;
 	GetSystemTimeAsFileTime(&file_time);
@@ -156,7 +156,9 @@ qint64 getNow(void)
 	gettimeofday(&tv,0);
 	t = tv.tv_sec * 1000000LL + tv.tv_usec;
 #endif
-	return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
+	// GZ JDfix for 0.14 I am 99.9% sure we no longer need the anti-correction
+	//return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
+	return t;
 }
 
 TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox eq)
@@ -235,6 +237,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox e
 	
 	interpolatedPosition.reset();
 	
+	connect(tcpSocket, SIGNAL(connected()), this, SLOT(socketConnected()));
 	connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(socketFailed(QAbstractSocket::SocketError)));
 }
 
@@ -272,7 +275,7 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos)
 		const double ra_signed = atan2(position[1], position[0]);
 		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
-		const double dec = atan2(position[2], sqrt(position[0]*position[0]+position[1]*position[1]));
+		const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
 		unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
 		int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
 		// length of packet:
@@ -513,6 +516,12 @@ void TelescopeTCP::performCommunication()
 			performReading();
 		}
 	}
+}
+
+void TelescopeTCP::socketConnected(void)
+{
+	qDebug() << "TelescopeTCP(" << name <<"): turning off Nagle algorithm.";
+	tcpSocket->setSocketOption(QAbstractSocket::LowDelayOption, 1);
 }
 
 //TODO: More informative error messages?

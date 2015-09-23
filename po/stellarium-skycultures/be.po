@@ -1,22 +1,22 @@
 # Belarusian translation for stellarium
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the stellarium package.
-# Hleb Valoshka <375gnu@gmail.com>, 2008.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 01:35+0600\n"
-"PO-Revision-Date: 2015-01-11 23:26+0000\n"
+"POT-Creation-Date: 2015-09-08 00:58+0600\n"
+"PO-Revision-Date: 2015-09-08 06:43+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-01-17 06:11+0000\n"
-"X-Generator: Launchpad (build 17304)\n"
-"Language: be_BY\n"
+"X-Launchpad-Export-Date: 2015-09-09 05:13+0000\n"
+"X-Generator: Launchpad (build 17706)\n"
+"Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: skycultures/translations.fab:9
@@ -338,12 +338,12 @@ msgstr "Салацыя"
 #. TRANSLATORS: Plutino (38628) Huya
 #: skycultures/translations.fab:100
 msgid "Huya"
-msgstr ""
+msgstr "Гуя"
 
 #. TRANSLATORS: Cubewano (174567) Varda
 #: skycultures/translations.fab:102
 msgid "Varda"
-msgstr ""
+msgstr "Варда"
 
 #. TRANSLATORS: Asteroid (5) Astraea
 #: skycultures/translations.fab:109
@@ -465,703 +465,986 @@ msgstr "Звышновая Тыха"
 msgid "Kepler's Supernova"
 msgstr "Звышновая Кеплера"
 
-#: nebulae/default/ngc2000names.dat:218
-msgid "47 Tuc"
-msgstr "47 Тукана"
-
-#: nebulae/default/ngc2000names.dat:219 nebulae/default/ngc2000names.dat:220
-msgid "Antennae"
-msgstr "Антэна"
-
-#: nebulae/default/ngc2000names.dat:221
-msgid "Barnard's galaxy"
-msgstr "Ґаляктыка Барнарда"
-
-#: nebulae/default/ngc2000names.dat:222
-msgid "Bear's Paw galaxy"
-msgstr "Ґаляктыка «Лапа мядзьведзя»"
-
-#: nebulae/default/ngc2000names.dat:223
-msgid "Beehive cluster"
-msgstr "Скопішча «Вулей»"
-
-#: nebulae/default/ngc2000names.dat:224
-msgid "Black-eye galaxy"
-msgstr "Ґаляктыка «Чорнае вока»"
-
-#: nebulae/default/ngc2000names.dat:225
-msgid "Blinking planetary"
-msgstr "Міргаючая плянэтарная"
-
-#: nebulae/default/ngc2000names.dat:226
-msgid "Blue Snowball"
-msgstr "Сіняя сьнежка"
-
-#: nebulae/default/ngc2000names.dat:227
-msgid "Blue planetary"
-msgstr "Сіняя плянэтарная"
-
-#: nebulae/default/ngc2000names.dat:228
-msgid "Bode's nebulae"
-msgstr "Туманнасьць Бадэ"
-
-#: nebulae/default/ngc2000names.dat:229
-msgid "Cigar Galaxy"
-msgstr "Ґаляктыка «Цыґара»"
-
-#: nebulae/default/ngc2000names.dat:230 nebulae/default/ngc2000names.dat:231
-#: nebulae/default/ngc2000names.dat:232 nebulae/default/ngc2000names.dat:233
-msgid "Box"
-msgstr "Куфэрак"
-
-#: nebulae/default/ngc2000names.dat:234
-msgid "Box nebula"
-msgstr "Туманнасьць «Куфэрак»"
-
-#: nebulae/default/ngc2000names.dat:235
-msgid "Bubble nebula"
-msgstr "Туманнасьць «Бурбалка»"
-
-#: nebulae/default/ngc2000names.dat:236
-msgid "Bug nebula"
-msgstr "Туманнасьць «Жук»"
-
-#: nebulae/default/ngc2000names.dat:237
-msgid "Butterfly cluster"
-msgstr "Скопішча «Матылёк»"
-
-#: nebulae/default/ngc2000names.dat:238
-msgid "Butterfly nebula"
-msgstr "Туманнасьць «Матылёк»"
-
-#: nebulae/default/ngc2000names.dat:239
-msgid "California nebula"
-msgstr "Туманнасьць «Каліфорнія»"
-
-#: nebulae/default/ngc2000names.dat:240
-msgid "Centaurus A"
-msgstr "Цэнтаўр A"
-
-#: nebulae/default/ngc2000names.dat:241
-msgid "Christmas Tree cluster"
-msgstr "Скопішча «Калядная ёлка»"
-
-#: nebulae/default/ngc2000names.dat:242
-msgid "Cocoon nebula"
-msgstr "Туманнасьць «Кокан»"
-
-#: nebulae/default/ngc2000names.dat:243
-msgid "Cone nebula"
-msgstr "Туманнасьць «Конус»"
-
-#: nebulae/default/ngc2000names.dat:244 nebulae/default/ngc2000names.dat:245
-#: nebulae/default/ngc2000names.dat:246 nebulae/default/ngc2000names.dat:247
-#: nebulae/default/ngc2000names.dat:248 nebulae/default/ngc2000names.dat:249
-#: nebulae/default/ngc2000names.dat:250
-msgid "Copeland's Septet"
-msgstr "Сэптэт Коўплэнда"
-
-#: nebulae/default/ngc2000names.dat:251
-msgid "Crab nebula"
-msgstr "Туманнасьць «Краб»"
-
-#: nebulae/default/ngc2000names.dat:252
-msgid "Crescent nebula"
-msgstr "Серпападобная туманнасьць"
-
-#: nebulae/default/ngc2000names.dat:253 nebulae/default/ngc2000names.dat:254
-msgid "Double cluster"
-msgstr "Падвойнае скопішча"
-
-#: nebulae/default/ngc2000names.dat:255
-msgid "Dumbbell nebula"
-msgstr "Туманнасьць «Гантэлі»"
-
-#: nebulae/default/ngc2000names.dat:256
-msgid "Eagle nebula"
-msgstr "Туманнасьць «Арол»"
-
-#: nebulae/default/ngc2000names.dat:257
-msgid "Eight-burst planetary"
-msgstr "Плянэтарная «Васьмі ўспышак»"
-
-#: nebulae/default/ngc2000names.dat:258
-msgid "Eskimo nebula"
-msgstr "Туманнасьць «Эскімос»"
-
-#: nebulae/default/ngc2000names.dat:259 nebulae/default/ngc2000names.dat:260
-msgid "The Eyes"
-msgstr "Вочы"
-
-#: nebulae/default/ngc2000names.dat:261
-msgid "Filamentary nebula"
-msgstr "Валакністая туманнасьць"
-
-#: nebulae/default/ngc2000names.dat:262
-msgid "Flaming Star nebula"
-msgstr "Туманнасьць «Палаючая зорка»"
-
-#: nebulae/default/ngc2000names.dat:263
-msgid "Ghost of Jupiter"
-msgstr "Прывід Юпітэра"
-
-#: nebulae/default/ngc2000names.dat:264
-msgid "Great Cluster in Hercules"
-msgstr "Вялікае скопішча ў Гекулесе"
-
-#: nebulae/default/ngc2000names.dat:265
-msgid "Andromeda Galaxy"
-msgstr "Ґаляктыка «Андрамэда»"
-
-#: nebulae/default/ngc2000names.dat:266
-msgid "Great Nebula in Orion"
-msgstr "Вялікая туманнасьць у Арыёне"
-
-#: nebulae/default/ngc2000names.dat:267
-msgid "Helix galaxy"
-msgstr "Сьпіральная ґаляктыка"
-
-#: nebulae/default/ngc2000names.dat:268
-msgid "Helix nebula"
-msgstr "Сьпіральная туманнасьць"
-
-#: nebulae/default/ngc2000names.dat:269
-msgid "Hind's variable nebula"
-msgstr "Зьменная туманнасьць Гінда"
-
-#: nebulae/default/ngc2000names.dat:270
-msgid "Horsehead nebula"
-msgstr "Туманнасьць «Конская галава»"
-
-#: nebulae/default/ngc2000names.dat:271
-msgid "Hourglass nebula"
-msgstr "Туманнасьць «Пясочны гадзіннік»"
-
-#: nebulae/default/ngc2000names.dat:272
-msgid "Hubble's variable nebula"
-msgstr "Зьменная туманнасьць Габла"
-
-#: nebulae/default/ngc2000names.dat:273
-msgid "Jewel Box"
-msgstr "Куфэрак з каштоўнасьцямі"
-
-#: nebulae/default/ngc2000names.dat:274
-msgid "Lace-work nebula"
-msgstr "Туманнасьць «Карункі»"
-
-#: nebulae/default/ngc2000names.dat:275
-msgid "Lagoon nebula"
-msgstr "Туманнасьць «Ляґуна»"
-
-#: nebulae/default/ngc2000names.dat:276 nebulae/default/ngc2000names.dat:277
-msgid "Little Dumbbell"
-msgstr "Маленькія гантэлі"
-
-#: nebulae/default/ngc2000names.dat:278
-msgid "Little Gem"
-msgstr "Маленькая пэрла"
-
-#: nebulae/default/ngc2000names.dat:279
-msgid "Maia nebula"
-msgstr "Туманнасьць «Мая»"
-
-#: nebulae/default/ngc2000names.dat:280
-#: skycultures/western_rey/star_names.fab:26
-msgid "Pleiades"
-msgstr "Плеяды"
-
-#: nebulae/default/ngc2000names.dat:281
-msgid "Merope nebula"
-msgstr "Туманнасьць «Мэропа»"
-
-#: nebulae/default/ngc2000names.dat:282
-msgid "The Mice"
-msgstr "Мышкі"
-
-#: nebulae/default/ngc2000names.dat:283 nebulae/default/ngc2000names.dat:284
-msgid "Network nebula"
-msgstr "Туманнасьць «Сетка»"
-
-#: nebulae/default/ngc2000names.dat:285
-msgid "North America nebula"
-msgstr "Туманнасьць «Паўночная Амэрыка»"
-
-#: nebulae/default/ngc2000names.dat:286
-msgid "Omega nebula"
-msgstr "Туманнасьць «Амэга»"
-
-#: nebulae/default/ngc2000names.dat:287
-msgid "Owl nebula"
-msgstr "Туманнасьць «Сава»"
-
-#: nebulae/default/ngc2000names.dat:288
-msgid "Papillon"
-msgstr "Папіён"
-
-#: nebulae/default/ngc2000names.dat:289
-msgid "Pelican nebula"
-msgstr "Туманнасьць «Пэлікан»"
-
-#: nebulae/default/ngc2000names.dat:290
-msgid "Pin-wheel nebula"
-msgstr "Туманнасьць «Цэўкавае кола»"
-
-#: nebulae/default/ngc2000names.dat:291
-msgid "Polarissima Australis"
-msgstr "Палярысыма Аўстраліс"
-
-#: nebulae/default/ngc2000names.dat:292
-msgid "Polarissima Borealis"
-msgstr "Палярысыма Барэаліс"
-
-#: nebulae/default/ngc2000names.dat:293
-msgid "Praesepe"
-msgstr "Жолаб"
-
-#: nebulae/default/ngc2000names.dat:294
-msgid "Ring nebula in Lyra"
-msgstr "Колцавая туманнасьць у Ліры"
-
-#: nebulae/default/ngc2000names.dat:295 nebulae/default/ngc2000names.dat:296
-#: nebulae/default/ngc2000names.dat:297 nebulae/default/ngc2000names.dat:298
-msgid "Rosette nebula"
-msgstr "Туманнасьць «Разэта»"
-
-#: nebulae/default/ngc2000names.dat:299
-msgid "Saturn nebula"
-msgstr "Туманнасьць «Сатурн»"
-
-#: nebulae/default/ngc2000names.dat:300
-msgid "Sculptor galaxy"
-msgstr "Ґаляктыка «Скульптар»"
-
-#: nebulae/default/ngc2000names.dat:301 nebulae/default/ngc2000names.dat:302
-msgid "Siamese Twins"
-msgstr "Сыямскія блізьняты"
-
-#: nebulae/default/ngc2000names.dat:303
-msgid "Sombrero galaxy"
-msgstr "Ґаляктыка «Самбрэра»"
-
-#: nebulae/default/ngc2000names.dat:304
-msgid "Southern Pleiades"
-msgstr "Паўднёвыя плеяды"
-
-#: nebulae/default/ngc2000names.dat:305
-msgid "Spindle galaxy"
-msgstr "Ґаляктыка «Верацяно»"
-
-#: nebulae/default/ngc2000names.dat:306
-msgid "Star Queen nebula"
-msgstr "Туманнасьць «Каралева зорак»"
-
-#: nebulae/default/ngc2000names.dat:307 nebulae/default/ngc2000names.dat:308
-#: nebulae/default/ngc2000names.dat:309 nebulae/default/ngc2000names.dat:310
-msgid "Stephan's Quintet"
-msgstr "Квінтэт Стэфана"
-
-#: nebulae/default/ngc2000names.dat:311
-msgid "Struve's Lost nebula"
-msgstr "Страчаная туманнасьць Струвэ"
-
-#: nebulae/default/ngc2000names.dat:312
-msgid "Sunflower galaxy"
-msgstr "Ґаляктыка «Сланечнік»"
-
-#: nebulae/default/ngc2000names.dat:313
-msgid "Tarantula nebula"
-msgstr "Туманнасьць «Тарантул»"
-
-#: nebulae/default/ngc2000names.dat:314
-msgid "Toby Jug nebula"
-msgstr "Туманнасьць «Тобі Джаґ»"
-
-#: nebulae/default/ngc2000names.dat:315
-msgid "Triangulum galaxy"
-msgstr "Ґаляктыка «Трохкутнік»"
-
-#: nebulae/default/ngc2000names.dat:316
-msgid "Trifid nebula"
-msgstr "Туманнасьць «Трылісьнік»"
-
-#: nebulae/default/ngc2000names.dat:317 nebulae/default/ngc2000names.dat:318
-#: nebulae/default/ngc2000names.dat:319
-msgid "Veil nebula"
-msgstr "Туманнасьць «Вэлюм»"
-
-#: nebulae/default/ngc2000names.dat:320
-msgid "Whirlpool galaxy"
-msgstr "Ґаляктыка «Вадаварот»"
-
-#: nebulae/default/ngc2000names.dat:321
-msgid "Wild Duck cluster"
-msgstr "Скопішча «Дзікая качка»"
-
-#: nebulae/default/ngc2000names.dat:322
-msgid "Witch Head nebula"
-msgstr "Туманнасьць «Галава ведзьмы»"
-
-#: nebulae/default/ngc2000names.dat:323
-msgid "η Car nebula"
-msgstr "Туманнасьць η Кіля"
-
-#: nebulae/default/ngc2000names.dat:324 nebulae/default/ngc2000names.dat:325
-msgid "γ Cas nebula"
-msgstr "Туманнасьць γ Касіяпэі"
-
-#: nebulae/default/ngc2000names.dat:326
-msgid "κ Cru cluster"
-msgstr "Скопішча κ Крумкача"
-
-#: nebulae/default/ngc2000names.dat:327 nebulae/default/ngc2000names.dat:328
-msgid "λ Cen nebula"
-msgstr "Туманнасьць λ Кентаўра"
-
-#: nebulae/default/ngc2000names.dat:329
-msgid "ω Cen cluster"
-msgstr "Скопішча ω Цэнтаўра"
-
-#: nebulae/default/ngc2000names.dat:330
-msgid "ρ Oph nebula"
-msgstr "Туманнасьць ρ Зьмеяносца"
-
-#: nebulae/default/ngc2000names.dat:331
-msgid "Rim nebula"
-msgstr "Туманнасьць «Вобад»"
-
-#: nebulae/default/ngc2000names.dat:332
-msgid "Cat's Paw nebula"
-msgstr "Туманнасьць «Лапа ката»"
-
-#: nebulae/default/ngc2000names.dat:333
-msgid "War and Peace nebula"
-msgstr "Туманнасьць «Вайна й мір»"
-
-#: nebulae/default/ngc2000names.dat:334
-msgid "Little Ghost nebula"
-msgstr "Туманнасьць «Маленькі прывід»"
-
-#: nebulae/default/ngc2000names.dat:335
-msgid "Little Gem nebula"
-msgstr "Туманнасьць «Маленькая пэрла»"
-
-#: nebulae/default/ngc2000names.dat:336
-msgid "Perseus A"
-msgstr "Пэрсэй А"
-
-#: nebulae/default/ngc2000names.dat:337
-msgid "Fornax A"
-msgstr "Печ А"
-
-#: nebulae/default/ngc2000names.dat:338
-msgid "Fornax B"
-msgstr "Печ Б"
-
-#: nebulae/default/ngc2000names.dat:339
-msgid "de Mairan's nebula"
-msgstr "Туманнасьць дэ Майрана"
-
-#: nebulae/default/ngc2000names.dat:340
-msgid "Flame nebula"
-msgstr "Туманнасьць «Полымя»"
-
-#: nebulae/default/ngc2000names.dat:341
-msgid "Satellite cluster"
-msgstr "Спадарожнае скопішча"
-
-#: nebulae/default/ngc2000names.dat:342
-msgid "Thor's Helmet"
-msgstr "Шлем Тора"
-
-#: nebulae/default/ngc2000names.dat:343
-msgid "Caroline's cluster"
-msgstr "Скопішча Караліны"
-
-#: nebulae/default/ngc2000names.dat:344
-msgid "τ Canis Majoris cluster"
-msgstr "Скопішча τ Вялікага пса"
-
-#: nebulae/default/ngc2000names.dat:345
-msgid "Pencil nebula"
-msgstr "Туманнасьць «Аловак»"
-
-#: nebulae/default/ngc2000names.dat:346
-msgid "Supernova Factory"
-msgstr "«Фабрыка звышновых»"
-
-#: nebulae/default/ngc2000names.dat:347
-msgid "Galaxy cluster"
-msgstr "Ґаляктычнае скопішча"
-
-#: nebulae/default/ngc2000names.dat:348
-msgid "Southern Pinwheel galaxy"
-msgstr "Ґаляктыка «Паўднёвая круцёлка»"
-
-#: nebulae/default/ngc2000names.dat:349
-msgid "Pinwheel galaxy"
-msgstr "Ґаляктыка «Круцёлка»"
-
-#: nebulae/default/ngc2000names.dat:350
-msgid "Atoms for Peace galaxy"
-msgstr "Ґаляктыка «Атам дзеля міру»"
-
-#: nebulae/default/ngc2000names.dat:351
-msgid "Grand Design galaxy"
-msgstr "Ґаляктыка «Вялікая задума»"
-
-#: nebulae/default/ngc2000names.dat:352
-msgid "Monkey Head nebula"
-msgstr "Туманнасьць «Галава малпы»"
-
-#: nebulae/default/ngc2000names.dat:353
-msgid "Lemon slice nebula"
-msgstr "Туманнасьць «Долька лімона»"
-
-#: nebulae/default/ngc2000names.dat:354
-msgid "Red spider nebula"
-msgstr "Туманнасьць «Чырвоны снайпэр»"
-
-#: nebulae/default/ngc2000names.dat:355
-msgid "Retina nebula"
-msgstr "Туманнасьць «Сятчатка»"
-
-#: nebulae/default/ngc2000names.dat:356
-msgid "Spirograph nebula"
-msgstr "Туманнасьць «Сьпіроґраф»"
-
-#: nebulae/default/ngc2000names.dat:357
-msgid "Spiral planetary nebula"
-msgstr "Плянэтарная туманнасьць «Сьпіраль»"
-
-#: nebulae/default/ngc2000names.dat:358
-msgid "20 Vulpeculae cluster"
-msgstr "Скопішча «20 Лісічкі»"
-
-#: nebulae/default/ngc2000names.dat:359
-msgid "Ambartsumian's Knot"
-msgstr "Вузел Амбарцумяна"
-
-#: nebulae/default/ngc2000names.dat:360
-msgid "Cetus A"
-msgstr "Кіт А"
-
-#: nebulae/default/ngc2000names.dat:361
-msgid "Cleopatra's Eye"
-msgstr "Вока Клеапатры"
-
-#: nebulae/default/ngc2000names.dat:362
-msgid "Cooling Tower"
-msgstr "Ахаладжальная вежа"
-
-#: nebulae/default/ngc2000names.dat:363
-msgid "Crowbar galaxy"
-msgstr "Ґаляктыка «Лом»"
-
-#: nebulae/default/ngc2000names.dat:364
-msgid "Sagittarius Star Cloud"
-msgstr "Зоркавае воблака Стральца"
-
-#: nebulae/default/ngc2000names.dat:365
-msgid "Dragon nebula"
-msgstr "Туманнасьць «Дракон»"
-
-#: nebulae/default/ngc2000names.dat:366
-msgid "Dragonfly cluster"
-msgstr "Скопішча «Страказа»"
-
-#: nebulae/default/ngc2000names.dat:367
-msgid "Elephant's Trunk nebula"
-msgstr "Туманнасьць «Хобат слана»"
-
-#: nebulae/default/ngc2000names.dat:368 nebulae/default/ngc2000names.dat:369
-#: nebulae/default/ngc2000names.dat:370 nebulae/default/ngc2000names.dat:371
-msgid "Grus Quartet"
-msgstr "Квартэт Жорава"
-
-#: nebulae/default/ngc2000names.dat:372
-msgid "Heart nebula"
-msgstr "Туманнасьць «Сэрца»"
-
-#: nebulae/default/ngc2000names.dat:373
-msgid "Heart-Shaped cluster"
-msgstr "Скопішча ў форме сэрца"
-
-#: nebulae/default/ngc2000names.dat:374
-msgid "Herring galaxy"
-msgstr "Ґаляктыка «Селядзец»"
-
-#: nebulae/default/ngc2000names.dat:375
-msgid "Hole in a cluster"
-msgstr "Дзірка ў скопішчы"
-
-#: nebulae/default/ngc2000names.dat:376
-msgid "Intergalactic Wanderer/Tramp"
-msgstr "Міжґаляктычны бадзяга"
-
-#: nebulae/default/ngc2000names.dat:377 nebulae/default/ngc2000names.dat:378
-msgid "Keenan's System"
-msgstr "Сыстэма Кінана"
-
-#: nebulae/default/ngc2000names.dat:379
-msgid "Kidney Bean galaxy"
-msgstr "Ґаляктыка «Фасоля»"
-
-#: nebulae/default/ngc2000names.dat:380 nebulae/default/ngc2000names.dat:381
-#: nebulae/default/ngc2000names.dat:382
-msgid "Leo Triplet"
-msgstr "Трыплет ільва"
-
-#: nebulae/default/ngc2000names.dat:383
-msgid "McLeish's Object"
-msgstr "Аб'ект Мак-Лейша"
-
-#: nebulae/default/ngc2000names.dat:384
-msgid "Miniature Spiral"
-msgstr "Мініяцюрная сьпіраль"
-
-#: nebulae/default/ngc2000names.dat:385
-msgid "Mirach's Ghost"
-msgstr "Прывід Міраха"
-
-#: nebulae/default/ngc2000names.dat:386
-msgid "Sailboat cluster"
-msgstr "Скопішча «Ветразьнік»"
-
-#: nebulae/default/ngc2000names.dat:387
-msgid "Seyfert's Sextet"
-msgstr "Сэкстэт Сэйфэрта"
-
-#: nebulae/default/ngc2000names.dat:388
-msgid "Soul nebula"
-msgstr "Туманнасьць «Душа»"
-
-#: nebulae/default/ngc2000names.dat:389
-msgid "Southern Integral Sign"
-msgstr "Паўднёвы знак інтэґралу"
-
-#: nebulae/default/ngc2000names.dat:390 nebulae/default/ngc2000names.dat:402
-msgid "Starfish cluster"
-msgstr "Скопішча «Марская зорка»"
-
-#: nebulae/default/ngc2000names.dat:391
-msgid "Superwind-Galaxy"
-msgstr "Ґаляктыка-Супэрвецер"
-
-#: nebulae/default/ngc2000names.dat:392
-msgid "Turtle planetary nebula"
-msgstr "Плянэтарная туманнасьць «Чарапаха»"
-
-#: nebulae/default/ngc2000names.dat:393
-msgid "Small Magellanic Cloud"
-msgstr "Малое Маґеланава воблака"
-
-#: nebulae/default/ngc2000names.dat:394
+#: nebulae/default/names.dat:9
 msgid "Bow-Tie nebula"
 msgstr "Туманнасьць «Гальштук-матылёк»"
 
-#: nebulae/default/ngc2000names.dat:395
-msgid "Iris nebula"
-msgstr "Туманнасьць «Касач»"
+#: nebulae/default/names.dat:10 nebulae/default/names.dat:11
+#: nebulae/default/names.dat:12 nebulae/default/names.dat:13
+msgid "Robert's Quartet"
+msgstr "Квартэт Робэрта"
 
-#: nebulae/default/ngc2000names.dat:396
-msgid "Fireworks galaxy"
-msgstr "Ґаляктыка «Фэервэрк»"
+#: nebulae/default/names.dat:14
+msgid "47 Tuc"
+msgstr "47 Тукана"
 
-#: nebulae/default/ngc2000names.dat:397
-msgid "Whale galaxy"
-msgstr "Ґаляктыка «Кіт»"
+#: nebulae/default/names.dat:15
+msgid "Andromeda Galaxy"
+msgstr "Ґаляктыка «Андрамэда»"
 
-#: nebulae/default/ngc2000names.dat:398
-msgid "Needle galaxy"
-msgstr "Ґаляктыка «Голка»"
+#: nebulae/default/names.dat:16
+msgid "Sailboat cluster"
+msgstr "Скопішча «Ветразьнік»"
 
-#: nebulae/default/ngc2000names.dat:399
-msgid "Pearl cluster"
-msgstr "Скопішча «Пэрла»"
+#: nebulae/default/names.dat:17
+msgid "Skull Nebula"
+msgstr "Туманнасьць «Чэрап»"
 
-#: nebulae/default/ngc2000names.dat:400
-msgid "S Normae cluster"
-msgstr "Скопішча S Нарожніка"
+#: nebulae/default/names.dat:18
+msgid "Sculptor galaxy"
+msgstr "Ґаляктыка «Скульптар»"
 
-#: nebulae/default/ngc2000names.dat:401
+#: nebulae/default/names.dat:19
+msgid "Small Magellanic Cloud"
+msgstr "Малое Маґеланава воблака"
+
+#: nebulae/default/names.dat:20
+msgid "Mirach's Ghost"
+msgstr "Прывід Міраха"
+
+#: nebulae/default/names.dat:21
+msgid "Dragonfly cluster"
+msgstr "Скопішча «Страказа»"
+
+#: nebulae/default/names.dat:22
+msgid "Triangulum galaxy"
+msgstr "Ґаляктыка «Трохкутнік»"
+
+#: nebulae/default/names.dat:23
+msgid "Little Dumbbell"
+msgstr "Маленькія гантэлі"
+
+#: nebulae/default/names.dat:24 nebulae/default/names.dat:25
+msgid "Double cluster"
+msgstr "Падвойнае скопішча"
+
+#: nebulae/default/names.dat:26
 msgid "Spiral cluster"
 msgstr "Сьпіральнае скопішча"
 
-#: nebulae/default/ngc2000names.dat:403
-msgid "Surfboard galaxy"
-msgstr "Ґаляктыка «Дошка для сэрфінґу»"
+#: nebulae/default/names.dat:27
+msgid "Cetus A"
+msgstr "Кіт А"
 
-#: nebulae/default/ngc2000names.dat:404
-msgid "Vacuum Cleaner galaxy"
-msgstr "Ґаляктыка «Пыласос»"
+#: nebulae/default/names.dat:28
+msgid "Perseus A"
+msgstr "Пэрсэй А"
 
-#: nebulae/default/ngc2000names.dat:405
-msgid "Blowdryer galaxy"
-msgstr "Ґаляктыка «Сушылка»"
+#: nebulae/default/names.dat:29
+msgid "Fornax A"
+msgstr "Печ А"
 
-#: nebulae/default/ngc2000names.dat:406
-msgid "Coddington's nebula"
-msgstr "Туманнасьць Кодынґтана"
+#: nebulae/default/names.dat:30
+msgid "Fornax B"
+msgstr "Печ Б"
 
-#: nebulae/default/ngc2000names.dat:407
-msgid "ε Ori nebula"
-msgstr "Туманнасьць «ε Арыёна»"
+#: nebulae/default/names.dat:31
+msgid "Little Scorpion cluster"
+msgstr "Скопішча «Малы скарпіён»"
 
-#: nebulae/default/ngc2000names.dat:408
-msgid "Fath 703"
-msgstr "Фатх 703"
+#: nebulae/default/names.dat:32
+msgid "Maia nebula"
+msgstr "Туманнасьць «Мая»"
 
-#: nebulae/default/ngc2000names.dat:409
-msgid "Fleming's Triangular nebula"
-msgstr "Туманнасьць «Трохкутнік Флемінґа»"
+#: nebulae/default/names.dat:33
+msgid "Merope nebula"
+msgstr "Туманнасьць «Мэропа»"
 
-#: nebulae/default/ngc2000names.dat:410
-msgid "Graff's cluster"
-msgstr "Скопішча Ґрафа"
+#: nebulae/default/names.dat:34
+msgid "California nebula"
+msgstr "Туманнасьць «Каліфорнія»"
 
-#: nebulae/default/ngc2000names.dat:411
-msgid "Lost galaxy"
-msgstr "Страчаная ґаляктыка"
+#: nebulae/default/names.dat:35
+msgid "Cleopatra's Eye"
+msgstr "Вока Клеапатры"
 
-#: nebulae/default/ngc2000names.dat:412
-msgid "White Eyed Pea"
-msgstr "Белы гарох"
+#: nebulae/default/names.dat:36
+msgid "Struve's Lost nebula"
+msgstr "Страчаная туманнасьць Струвэ"
 
-#: nebulae/default/ngc2000names.dat:413
+#: nebulae/default/names.dat:37
+msgid "Hind's variable nebula"
+msgstr "Зьменная туманнасьць Гінда"
+
+#: nebulae/default/names.dat:38 nebulae/default/names.dat:39
+msgid "Starfish cluster"
+msgstr "Скопішча «Марская зорка»"
+
+#: nebulae/default/names.dat:40
+msgid "Fly nebula"
+msgstr "Туманнасьць «Муха»"
+
+#: nebulae/default/names.dat:41
+msgid "Crab nebula"
+msgstr "Туманнасьць «Краб»"
+
+#: nebulae/default/names.dat:42
+msgid "Great Nebula in Orion"
+msgstr "Вялікая туманнасьць у Арыёне"
+
+#: nebulae/default/names.dat:43
 msgid "Running Man Nebula"
 msgstr "Туманнасьць «Чалавек, які бяжыць»"
 
-#: nebulae/default/ngc2000names.dat:414
+#: nebulae/default/names.dat:44
+msgid "de Mairan's nebula"
+msgstr "Туманнасьць дэ Майрана"
+
+#: nebulae/default/names.dat:45
+msgid "ε Ori nebula"
+msgstr "Туманнасьць «ε Арыёна»"
+
+#: nebulae/default/names.dat:46
+msgid "Flame nebula"
+msgstr "Туманнасьць «Полымя»"
+
+#: nebulae/default/names.dat:47
+msgid "Tarantula nebula"
+msgstr "Туманнасьць «Тарантул»"
+
+#: nebulae/default/names.dat:48
+msgid "Ghost Head Nebula"
+msgstr "Туманнасьць «Галава прывіда»"
+
+#: nebulae/default/names.dat:49
 msgid "The 37 Cluster"
 msgstr "Скопішча 37"
 
-#: nebulae/default/ngc2000names.dat:415
+#: nebulae/default/names.dat:50
+msgid "Monkey Head nebula"
+msgstr "Туманнасьць «Галава малпы»"
+
+#: nebulae/default/names.dat:51
+msgid "Rosette A"
+msgstr "Разэтка A"
+
+#: nebulae/default/names.dat:52
+msgid "Rosette nebula"
+msgstr "Туманнасьць «Разэта»"
+
+#: nebulae/default/names.dat:53
+msgid "Satellite cluster"
+msgstr "Спадарожнае скопішча"
+
+#: nebulae/default/names.dat:54
+msgid "Rosette B"
+msgstr "Разэтка B"
+
+#: nebulae/default/names.dat:55
+msgid "Hubble's variable nebula"
+msgstr "Зьменная туманнасьць Габла"
+
+#: nebulae/default/names.dat:56
+msgid "Cone nebula"
+msgstr "Туманнасьць «Конус»"
+
+#: nebulae/default/names.dat:57
+msgid "Heart-Shaped cluster"
+msgstr "Скопішча ў форме сэрца"
+
+#: nebulae/default/names.dat:58 nebulae/default/names.dat:204
+msgid "Butterfly nebula"
+msgstr "Туманнасьць «Матылёк»"
+
+#: nebulae/default/names.dat:59
+msgid "Thor's Helmet"
+msgstr "Шлем Тора"
+
+#: nebulae/default/names.dat:60
+msgid "Caroline's cluster"
+msgstr "Скопішча Караліны"
+
+#: nebulae/default/names.dat:61
+msgid "τ Canis Majoris cluster"
+msgstr "Скопішча τ Вялікага пса"
+
+#: nebulae/default/names.dat:62
+msgid "Gemini nebula"
+msgstr "Туманнасьць «Блізьняты»"
+
+#: nebulae/default/names.dat:63
+msgid "Eskimo nebula"
+msgstr "Туманнасьць «Эскімос»"
+
+#: nebulae/default/names.dat:64
+msgid "Intergalactic Wanderer/Tramp"
+msgstr "Міжґаляктычны бадзяга"
+
+#: nebulae/default/names.dat:65
+msgid "Sprinter cluster"
+msgstr "Скопішча «Спрынтар»"
+
+#: nebulae/default/names.dat:66
+msgid "Bear's Paw galaxy"
+msgstr "Ґаляктыка «Лапа мядзьведзя»"
+
+#: nebulae/default/names.dat:67
+msgid "Polarissima Australis"
+msgstr "Палярысыма Аўстраліс"
+
+#: nebulae/default/names.dat:68
+msgid "Beehive cluster"
+msgstr "Скопішча «Вулей»"
+
+#: nebulae/default/names.dat:69
+msgid "Helix galaxy"
+msgstr "Сьпіральная ґаляктыка"
+
+#: nebulae/default/names.dat:70
+msgid "Pencil nebula"
+msgstr "Туманнасьць «Аловак»"
+
+#: nebulae/default/names.dat:71
+msgid "Supernova Factory"
+msgstr "«Фабрыка звышновых»"
+
+#: nebulae/default/names.dat:72
+msgid "Bode's nebulae"
+msgstr "Туманнасьць Бадэ"
+
+#: nebulae/default/names.dat:73
+msgid "Cigar Galaxy"
+msgstr "Ґаляктыка «Цыґара»"
+
+#: nebulae/default/names.dat:74
+msgid "Spindle galaxy"
+msgstr "Ґаляктыка «Верацяно»"
+
+#: nebulae/default/names.dat:75
+msgid "Eight-burst planetary"
+msgstr "Плянэтарная «Васьмі ўспышак»"
+
+#: nebulae/default/names.dat:76
+msgid "Polarissima Borealis"
+msgstr "Палярысыма Барэаліс"
+
+#: nebulae/default/names.dat:77
+msgid "Ghost of Jupiter"
+msgstr "Прывід Юпітэра"
+
+#: nebulae/default/names.dat:78
+msgid "η Car nebula"
+msgstr "Туманнасьць η Кіля"
+
+#: nebulae/default/names.dat:79
+msgid "Wishing Well Cluster"
+msgstr "Скопішча «Калодзеж жаданьняў»"
+
+#: nebulae/default/names.dat:80
+msgid "Surfboard galaxy"
+msgstr "Ґаляктыка «Дошка для сэрфінґу»"
+
+#: nebulae/default/names.dat:81
+msgid "Ambartsumian's Knot"
+msgstr "Вузел Амбарцумяна"
+
+#: nebulae/default/names.dat:82
+msgid "Owl nebula"
+msgstr "Туманнасьць «Сава»"
+
+#: nebulae/default/names.dat:83 nebulae/default/names.dat:84
+msgid "Leo Triplet"
+msgstr "Трыплет ільва"
+
+#: nebulae/default/names.dat:85
+msgid "Hamburger Galaxy (Leo Triplet)"
+msgstr "Ґаляктыка «Гамбурґер» (Трыплет ільва)"
+
+#: nebulae/default/names.dat:86 nebulae/default/names.dat:87
+#: nebulae/default/names.dat:88 nebulae/default/names.dat:89
+#: nebulae/default/names.dat:90 nebulae/default/names.dat:91
+#: nebulae/default/names.dat:92
+msgid "Copeland's Septet"
+msgstr "Сэптэт Коўплэнда"
+
+#: nebulae/default/names.dat:93
+msgid "Pearl cluster"
+msgstr "Скопішча «Пэрла»"
+
+#: nebulae/default/names.dat:94
+msgid "Blue planetary"
+msgstr "Сіняя плянэтарная"
+
+#: nebulae/default/names.dat:95
+msgid "Miniature Spiral"
+msgstr "Мініяцюрная сьпіраль"
+
+#: nebulae/default/names.dat:96
+msgid "Vacuum Cleaner galaxy"
+msgstr "Ґаляктыка «Пыласос»"
+
+#: nebulae/default/names.dat:97 nebulae/default/names.dat:98
+msgid "Antennae"
+msgstr "Антэна"
+
+#: nebulae/default/names.dat:99 nebulae/default/names.dat:100
+#: nebulae/default/names.dat:101
+msgid "Box"
+msgstr "Куфэрак"
+
+#: nebulae/default/names.dat:102
+msgid "Pin-wheel nebula"
+msgstr "Туманнасьць «Цэўкавае кола»"
+
+#: nebulae/default/names.dat:103
+msgid "Blowdryer galaxy"
+msgstr "Ґаляктыка «Сушылка»"
+
+#: nebulae/default/names.dat:104
+msgid "Galaxy cluster"
+msgstr "Ґаляктычнае скопішча"
+
+#: nebulae/default/names.dat:105
+msgid "Markarian's Chain"
+msgstr "Ланцуг Маркарыяна"
+
+#: nebulae/default/names.dat:106 nebulae/default/names.dat:107
+msgid "The Eyes"
+msgstr "Вочы"
+
+#: nebulae/default/names.dat:108
 msgid "Cocoon galaxy"
 msgstr "Ґаляктыка «Кокан»"
 
-#: nebulae/default/ngc2000names.dat:416
-msgid "Jellyfish nebula"
-msgstr "Туманнасьць «Мэдуза»"
+#: nebulae/default/names.dat:109
+msgid "Lost galaxy"
+msgstr "Страчаная ґаляктыка"
 
-#: nebulae/default/ngc2000names.dat:417
-msgid "The Wizard Nebula"
-msgstr "Туманнасьць «Чараўнік»"
+#: nebulae/default/names.dat:110
+msgid "McLeish's Object"
+msgstr "Аб'ект Мак-Лейша"
 
-#: nebulae/default/ngc2000names.dat:418
+#: nebulae/default/names.dat:111
+msgid "Needle galaxy"
+msgstr "Ґаляктыка «Голка»"
+
+#: nebulae/default/names.dat:112 nebulae/default/names.dat:113
+msgid "Siamese Twins"
+msgstr "Сыямскія блізьняты"
+
+#: nebulae/default/names.dat:114
+msgid "Sombrero galaxy"
+msgstr "Ґаляктыка «Самбрэра»"
+
+#: nebulae/default/names.dat:115
+msgid "Whale galaxy"
+msgstr "Ґаляктыка «Кіт»"
+
+#: nebulae/default/names.dat:116
+msgid "Crowbar galaxy"
+msgstr "Ґаляктыка «Лом»"
+
+#: nebulae/default/names.dat:117
+msgid "Superwind-Galaxy"
+msgstr "Ґаляктыка-Супэрвецер"
+
+#: nebulae/default/names.dat:118
+msgid "The Mice"
+msgstr "Мышкі"
+
+#: nebulae/default/names.dat:119
+msgid "Jewel Box"
+msgstr "Куфэрак з каштоўнасьцямі"
+
+#: nebulae/default/names.dat:120
+msgid "Kidney Bean galaxy"
+msgstr "Ґаляктыка «Фасоля»"
+
+#: nebulae/default/names.dat:121
+msgid "Black Eye Galaxy"
+msgstr "Галактыка Чорнае вока"
+
+#: nebulae/default/names.dat:122
+msgid "Coma B"
+msgstr "Кома B"
+
+#: nebulae/default/names.dat:123
+msgid "Sunflower galaxy"
+msgstr "Ґаляктыка «Сланечнік»"
+
+#: nebulae/default/names.dat:124
+msgid "Centaurus A"
+msgstr "Цэнтаўр A"
+
+#: nebulae/default/names.dat:125
+msgid "ω Cen cluster"
+msgstr "Скопішча ω Цэнтаўра"
+
+#: nebulae/default/names.dat:126
+msgid "Spiral planetary nebula"
+msgstr "Плянэтарная туманнасьць «Сьпіраль»"
+
+#: nebulae/default/names.dat:127
+msgid "Whirlpool galaxy"
+msgstr "Ґаляктыка «Вадаварот»"
+
+#: nebulae/default/names.dat:128 nebulae/default/names.dat:129
+msgid "Keenan's System"
+msgstr "Сыстэма Кінана"
+
+#: nebulae/default/names.dat:130
+msgid "Southern Pinwheel galaxy"
+msgstr "Ґаляктыка «Паўднёвая круцёлка»"
+
+#: nebulae/default/names.dat:131
+msgid "Pinwheel galaxy"
+msgstr "Ґаляктыка «Круцёлка»"
+
+#: nebulae/default/names.dat:132
+msgid "Dragon nebula"
+msgstr "Туманнасьць «Дракон»"
+
+#: nebulae/default/names.dat:133
+msgid "Fath 703"
+msgstr "Фатх 703"
+
+#: nebulae/default/names.dat:134
+msgid "Seyfert's Sextet"
+msgstr "Сэкстэт Сэйфэрта"
+
+#: nebulae/default/names.dat:135
+msgid "S Normae cluster"
+msgstr "Скопішча S Нарожніка"
+
+#: nebulae/default/names.dat:136
+msgid "Rim nebula"
+msgstr "Туманнасьць «Вобад»"
+
+#: nebulae/default/names.dat:137
+msgid "Great Cluster in Hercules"
+msgstr "Вялікае скопішча ў Гекулесе"
+
+#: nebulae/default/names.dat:138
+msgid "Turtle planetary nebula"
+msgstr "Плянэтарная туманнасьць «Чарапаха»"
+
+#: nebulae/default/names.dat:139
+msgid "Northern Jewel Box"
+msgstr "Паўночны куфэрак з каштоўнасьцямі"
+
+#: nebulae/default/names.dat:140
+msgid "Bug nebula"
+msgstr "Туманнасьць «Жук»"
+
+#: nebulae/default/names.dat:141
+msgid "Box nebula"
+msgstr "Туманнасьць «Куфэрак»"
+
+#: nebulae/default/names.dat:142
+msgid "Cat's Paw nebula"
+msgstr "Туманнасьць «Лапа ката»"
+
+#: nebulae/default/names.dat:143
+msgid "War and Peace nebula"
+msgstr "Туманнасьць «Вайна й мір»"
+
+#: nebulae/default/names.dat:144
+msgid "Little Ghost nebula"
+msgstr "Туманнасьць «Маленькі прывід»"
+
+#: nebulae/default/names.dat:145
+msgid "Butterfly cluster"
+msgstr "Скопішча «Матылёк»"
+
+#: nebulae/default/names.dat:146
+msgid "Little Gem"
+msgstr "Маленькая пэрла"
+
+#: nebulae/default/names.dat:147
+msgid "Ptolemy cluster"
+msgstr "Скопішча Пталемэя"
+
+#: nebulae/default/names.dat:148
+msgid "Trifid nebula"
+msgstr "Туманнасьць «Трылісьнік»"
+
+#: nebulae/default/names.dat:149
+msgid "Red spider nebula"
+msgstr "Туманнасьць «Чырвоны снайпэр»"
+
+#: nebulae/default/names.dat:150
+msgid "Cat's Eye Nebula"
+msgstr "Туманнасьць «Вока ката»"
+
+#: nebulae/default/names.dat:151
+msgid "Sagittarius Star Cloud"
+msgstr "Зоркавае воблака Стральца"
+
+#: nebulae/default/names.dat:152
+msgid "Eagle nebula"
+msgstr "Туманнасьць «Арол»"
+
+#: nebulae/default/names.dat:153
+msgid "Omega nebula"
+msgstr "Туманнасьць «Амэга»"
+
+#: nebulae/default/names.dat:154
+msgid "Wild Duck cluster"
+msgstr "Скопішча «Дзікая качка»"
+
+#: nebulae/default/names.dat:155
+msgid "Ring nebula in Lyra"
+msgstr "Колцавая туманнасьць у Ліры"
+
+#: nebulae/default/names.dat:156
+msgid "R CrA nebula"
+msgstr "Туманнасьць R CrA"
+
+#: nebulae/default/names.dat:157
+msgid "The Phantom Streak Nebula"
+msgstr "Туманнасьць «Фантомная паласа»"
+
+#: nebulae/default/names.dat:158
 msgid "Ruprecht 147"
 msgstr "Рупрэхт 147"
 
-#: nebulae/default/ngc2000names.dat:419
-msgid "Prawn nebula"
-msgstr "Туманнасць «Крэветка»"
+#: nebulae/default/names.dat:159
+msgid "Hole in a cluster"
+msgstr "Дзірка ў скопішчы"
 
-#: nebulae/default/ngc2000names.dat:420
+#: nebulae/default/names.dat:160
+msgid "Little Gem nebula"
+msgstr "Туманнасьць «Маленькая пэрла»"
+
+#: nebulae/default/names.dat:161
 msgid "The Foxhead cluster"
 msgstr "Скопішча «Галава лісы»"
 
-#: nebulae/default/ngc2000names.dat:421
+#: nebulae/default/names.dat:162
+msgid "Barnard's galaxy"
+msgstr "Ґаляктыка Барнарда"
+
+#: nebulae/default/names.dat:163
+msgid "Blinking planetary"
+msgstr "Міргаючая плянэтарная"
+
+#: nebulae/default/names.dat:164
+msgid "Dumbbell nebula"
+msgstr "Туманнасьць «Гантэлі»"
+
+#: nebulae/default/names.dat:165
+msgid "20 Vulpeculae cluster"
+msgstr "Скопішча «20 Лісічкі»"
+
+#: nebulae/default/names.dat:166
+msgid "Crescent nebula"
+msgstr "Серпападобная туманнасьць"
+
+#: nebulae/default/names.dat:167
+msgid "Cooling Tower"
+msgstr "Ахаладжальная вежа"
+
+#: nebulae/default/names.dat:168
+msgid "Fireworks galaxy"
+msgstr "Ґаляктыка «Фэервэрк»"
+
+#: nebulae/default/names.dat:169
+msgid "Filamentary nebula"
+msgstr "Валакністая туманнасьць"
+
+#: nebulae/default/names.dat:170
+msgid "Veil nebula"
+msgstr "Туманнасьць «Вэлюм»"
+
+#: nebulae/default/names.dat:171
+msgid "Network nebula"
+msgstr "Туманнасьць «Сетка»"
+
+#: nebulae/default/names.dat:172
+msgid "North America nebula"
+msgstr "Туманнасьць «Паўночная Амэрыка»"
+
+#: nebulae/default/names.dat:173
+msgid "Saturn nebula"
+msgstr "Туманнасьць «Сатурн»"
+
+#: nebulae/default/names.dat:174
+msgid "Iris nebula"
+msgstr "Туманнасьць «Касач»"
+
+#: nebulae/default/names.dat:175
+msgid "Atoms for Peace galaxy"
+msgstr "Ґаляктыка «Атам дзеля міру»"
+
+#: nebulae/default/names.dat:176
+msgid "Helix nebula"
+msgstr "Сьпіральная туманнасьць"
+
+#: nebulae/default/names.dat:177 nebulae/default/names.dat:178
+#: nebulae/default/names.dat:179 nebulae/default/names.dat:180
+msgid "Stephan's Quintet"
+msgstr "Квінтэт Стэфана"
+
+#: nebulae/default/names.dat:181
+msgid "Deer Lick Group"
+msgstr "Ґрупа «Саланчак»"
+
+#: nebulae/default/names.dat:182
+msgid "The Wizard Nebula"
+msgstr "Туманнасьць «Чараўнік»"
+
+#: nebulae/default/names.dat:183
+msgid "Grand Design galaxy"
+msgstr "Ґаляктыка «Вялікая задума»"
+
+#: nebulae/default/names.dat:184 nebulae/default/names.dat:185
+#: nebulae/default/names.dat:186 nebulae/default/names.dat:187
+msgid "Grus Quartet"
+msgstr "Квартэт Жорава"
+
+#: nebulae/default/names.dat:188
+msgid "Blue Snowball"
+msgstr "Сіняя сьнежка"
+
+#: nebulae/default/names.dat:189
+msgid "Bubble nebula"
+msgstr "Туманнасьць «Бурбалка»"
+
+#: nebulae/default/names.dat:190
+msgid "Caroline's Rose Cluster"
+msgstr "Скопішча «Ружа Караліны»"
+
+#: nebulae/default/names.dat:191 nebulae/default/names.dat:192
+msgid "γ Cas nebula"
+msgstr "Туманнасьць γ Касіяпэі"
+
+#: nebulae/default/names.dat:193
+msgid "Maffei Group"
+msgstr "Ґрупа Мафэя"
+
+#: nebulae/default/names.dat:194
+msgid "Flaming Star nebula"
+msgstr "Туманнасьць «Палаючая зорка»"
+
+#: nebulae/default/names.dat:195
+msgid "Spider Nebula"
+msgstr "Туманнасьць «Павук»"
+
+#: nebulae/default/names.dat:196
+msgid "Spirograph nebula"
+msgstr "Туманнасьць «Сьпіроґраф»"
+
+#: nebulae/default/names.dat:197 nebulae/default/names.dat:225
+msgid "Horsehead nebula"
+msgstr "Туманнасьць «Конская галава»"
+
+#: nebulae/default/names.dat:198
+msgid "Jellyfish nebula"
+msgstr "Туманнасьць «Мэдуза»"
+
+#: nebulae/default/names.dat:199
+msgid "Papillon"
+msgstr "Папіён"
+
+#: nebulae/default/names.dat:200
+msgid "Elephant's Trunk nebula"
+msgstr "Туманнасьць «Хобат слана»"
+
+#: nebulae/default/names.dat:201
+msgid "Heart nebula"
+msgstr "Туманнасьць «Сэрца»"
+
+#: nebulae/default/names.dat:202
+msgid "Soul nebula"
+msgstr "Туманнасьць «Душа»"
+
+#: nebulae/default/names.dat:203
+msgid "Witch Head nebula"
+msgstr "Туманнасьць «Галава ведзьмы»"
+
+#: nebulae/default/names.dat:205
+msgid "Omicron Velorum Cluster"
+msgstr "Скопішча «Амікрон Вэлорум»"
+
+#: nebulae/default/names.dat:206
+msgid "Coddington's nebula"
+msgstr "Туманнасьць Кодынґтана"
+
+#: nebulae/default/names.dat:207
+msgid "Southern Pleiades"
+msgstr "Паўднёвыя плеяды"
+
+#: nebulae/default/names.dat:208
+msgid "Running Chicken nebula"
+msgstr "Туманнасьць «Куранё, якое бяжыць»"
+
+#: nebulae/default/names.dat:209
+msgid "λ Cen nebula"
+msgstr "Туманнасьць λ Кентаўра"
+
+#: nebulae/default/names.dat:210
+msgid "Lemon slice nebula"
+msgstr "Туманнасьць «Долька лімона»"
+
+#: nebulae/default/names.dat:211
+msgid "Retina nebula"
+msgstr "Туманнасьць «Сятчатка»"
+
+#: nebulae/default/names.dat:212
+msgid "White Eyed Pea"
+msgstr "Белы гарох"
+
+#: nebulae/default/names.dat:213
+msgid "ρ Oph nebula"
+msgstr "Туманнасьць ρ Зьмеяносца"
+
+#: nebulae/default/names.dat:214
+msgid "Prawn nebula"
+msgstr "Туманнасць «Крэветка»"
+
+#: nebulae/default/names.dat:215
 msgid "Summer Beehive cluster"
 msgstr "Скопішча «Летні вулей»"
+
+#: nebulae/default/names.dat:216
+msgid "Graff's cluster"
+msgstr "Скопішча Ґрафа"
+
+#: nebulae/default/names.dat:217
+msgid "Pelican nebula"
+msgstr "Туманнасьць «Пэлікан»"
+
+#: nebulae/default/names.dat:218
+msgid "Southern Integral Sign"
+msgstr "Паўднёвы знак інтэґралу"
+
+#: nebulae/default/names.dat:219
+msgid "Cocoon nebula"
+msgstr "Туманнасьць «Кокан»"
+
+#: nebulae/default/names.dat:220
+msgid "Lagoon nebula"
+msgstr "Туманнасьць «Ляґуна»"
+
+#: nebulae/default/names.dat:221 skycultures/western_rey/star_names.fab:26
+msgid "Pleiades"
+msgstr "Плеяды"
+
+#: nebulae/default/names.dat:222
+msgid "α Per Cluster"
+msgstr "Скопішча α Пэрсэя"
+
+#: nebulae/default/names.dat:223
+msgid "Coma Berenices Cluster"
+msgstr "Скопішча Валасоў Веранікі"
+
+#: nebulae/default/names.dat:224
+msgid "Taurus Poniatovii cluster"
+msgstr "Скопішча «Бык Панятоўскага»"
+
+#: nebulae/default/names.dat:226 nebulae/default/names.dat:227
+#: nebulae/default/names.dat:228 nebulae/default/names.dat:229
+msgid "Pipe (stem)"
+msgstr "Трубка (сьцябло)"
+
+#: nebulae/default/names.dat:230
+msgid "Ink Spot Nebula"
+msgstr "Туманнасьць «Пляма чарніла»"
+
+#: nebulae/default/names.dat:231
+#: skycultures/arabic/constellation_names.eng.fab:48
+msgid "The Snake"
+msgstr "Зьмяя"
+
+#: nebulae/default/names.dat:232
+msgid "Pipe (bowl)"
+msgstr "Трубка (міска)"
+
+#: nebulae/default/names.dat:233
+msgid "Parrot's Head"
+msgstr "Галава папугая"
+
+#: nebulae/default/names.dat:234 nebulae/default/names.dat:235
+msgid "E Nebula"
+msgstr "Туманнасьць «Е»"
+
+#: nebulae/default/names.dat:236
+msgid "Hyades"
+msgstr "Гіяды"
+
+#: nebulae/default/names.dat:237
+msgid "Coalsack Nebula"
+msgstr "Туманнасьць «Вугальны мяшок»"
+
+#: nebulae/default/names.dat:238
+msgid "Orion Cluster"
+msgstr "Скопішча Арыёна"
+
+#: nebulae/default/names.dat:239
+msgid "Orion Belt Cluster"
+msgstr "Скопішча «Пас Арыёна»"
+
+#: nebulae/default/names.dat:240
+msgid "Markarian 18 cluster"
+msgstr "Скопішча «18 Маркарыяна»"
+
+#: nebulae/default/names.dat:241
+msgid "η Car cluster"
+msgstr "Скопішча η Кіля"
+
+#: nebulae/default/names.dat:242
+msgid "Ursa Major Cluster"
+msgstr "Скопішча Вялікай мядзьведзіцы"
+
+#: nebulae/default/names.dat:243
+msgid "Antares Cluster"
+msgstr "Скопішча «Антарэс»"
+
+#: nebulae/default/names.dat:244
+msgid "Coathanger (Brocchi's Cluster)"
+msgstr "Вяшак (скопішча Брачы)"
+
+#: nebulae/default/names.dat:245
+msgid "Burnham's Nebula"
+msgstr "Туманнасьць Бурнама"
+
+#: nebulae/default/names.dat:246
+msgid "Orion Loop Nebula"
+msgstr "Туманнасьць «Пятля Арыёна»"
+
+#: nebulae/default/names.dat:247
+msgid "Green Ring Nebula"
+msgstr "Туманнасьць «Зялёнае колца»"
+
+#: nebulae/default/names.dat:248
+msgid "Bear Claw Nebula"
+msgstr "Туманнасьць «Кіпцюр медзьвядзя»"
+
+#: nebulae/default/names.dat:249
+msgid "Little Cocoon Nebula"
+msgstr "Туманнасьць «Маленькі кокан»"
+
+#: nebulae/default/names.dat:250
+msgid "Cygnus Star Cloud"
+msgstr "Зоркавае воблака Лебедзя"
+
+#: nebulae/default/names.dat:251
+msgid "Cygnus Loop"
+msgstr "Пятля Лебедзя"
+
+#: nebulae/default/names.dat:252
+msgid "Sadr Region"
+msgstr "Вобласьць Садра"
+
+#: nebulae/default/names.dat:253
+msgid "Abell 71"
+msgstr "Абэль 71"
+
+#: nebulae/default/names.dat:254 nebulae/default/names.dat:272
+msgid "Cave Nebula"
+msgstr "Туманнасьць «Пячора»"
+
+#: nebulae/default/names.dat:255
+msgid "Dreyer's Object"
+msgstr "Аб'ект Дрэера"
+
+#: nebulae/default/names.dat:256
+msgid "Pacman Nebula"
+msgstr "Туманнасьць «Пакман»"
+
+#: nebulae/default/names.dat:257
+msgid "Maffei 1"
+msgstr "Мафэй 1"
+
+#: nebulae/default/names.dat:258
+msgid "Maffei 2"
+msgstr "Мафэй 2"
+
+#: nebulae/default/names.dat:259
+msgid "Second Closest Planetary"
+msgstr "Другая найбліжэйшая плянэтарная"
+
+#: nebulae/default/names.dat:260
+msgid "Northern Trifid"
+msgstr "Паўночны трыфід"
+
+#: nebulae/default/names.dat:261
+msgid "Spaghetti Nebula"
+msgstr "Туманнасьць «Спаґеці»"
+
+#: nebulae/default/names.dat:262
+msgid "Lower's Nebula"
+msgstr "Туманнасьць Лоўэра"
+
+#: nebulae/default/names.dat:263
+msgid "Angelfish Nebula"
+msgstr "Туманнасьць «Марскі анёл»"
+
+#: nebulae/default/names.dat:264
+msgid "Medusa Nebula"
+msgstr "Туманнасьць «Мэдуза»"
+
+#: nebulae/default/names.dat:265
+msgid "Barnard's Loop"
+msgstr "Пятля Барнарда"
+
+#: nebulae/default/names.dat:266
+msgid "Seagull Nebula"
+msgstr "Туманнасьць «Чайка»"
+
+#: nebulae/default/names.dat:267
+msgid "Snowman Nebula"
+msgstr "Туманнасьць «Сьнегавік»"
+
+#: nebulae/default/names.dat:268
+msgid "Abell 35"
+msgstr "Абэль 35"
+
+#: nebulae/default/names.dat:269
+msgid "Ghost Nebula"
+msgstr "Туманнасьць «Прывід»"
+
+#: nebulae/default/names.dat:270
+msgid "Large Magellanic Cloud"
+msgstr "Вялікае Маґеланава воблака"
+
+#: nebulae/default/names.dat:271
+msgid "Boomerang Nebula"
+msgstr "Туманнасьць «Бумэранґ»"
+
+#: nebulae/default/names.dat:273
+msgid "Calabash Nebula"
+msgstr "Туманнасьць «Гарлянка»"
+
+#: nebulae/default/names.dat:274
+msgid "Egg Nebula"
+msgstr "Туманнасьць «Яйка»"
+
+#: nebulae/default/names.dat:275
+msgid "Frosty Leo Nebula"
+msgstr "Туманнасьць «Сівы леў»"
+
+#: nebulae/default/names.dat:276
+msgid "Gomez's Hamburger"
+msgstr "Гамбурґер Ґомэза"
+
+#: nebulae/default/names.dat:277
+msgid "Cotton Candy Nebula"
+msgstr "Туманнасьць «Ваўняная цукерка»"
+
+#: nebulae/default/names.dat:278
+msgid "Water lily nebula"
+msgstr "Туманнасьць «Вадзяная лілея»"
+
+#: nebulae/default/names.dat:279
+msgid "Westbrook Nebula"
+msgstr "Туманнасьць «Уэстбрук»"
+
+#: nebulae/default/names.dat:280
+msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
+msgstr "Туманнасьць «Сьлед» (Сьлед Мінкоўскага, M1-92)"
+
+#: nebulae/default/names.dat:281
+msgid "Minkowski's Butterfly (M2-9)"
+msgstr "Матылёк Мінкоўскага (M2-9)"
+
+#: nebulae/default/names.dat:282
+msgid "Sagittarius A East"
+msgstr "Стралец А усходняя"
+
+#: nebulae/default/names.dat:283
+msgid "Sagittarius A West"
+msgstr "Стралец А заходняя"
 
 #: skycultures/arabic/constellation_names.eng.fab:1
 msgid "The Shackled Woman"
@@ -1359,10 +1642,6 @@ msgstr "Карабель"
 #: skycultures/arabic/constellation_names.eng.fab:47
 msgid "The Maiden"
 msgstr "Дзяўчына"
-
-#: skycultures/arabic/constellation_names.eng.fab:48
-msgid "The Snake"
-msgstr "Зьмяя"
 
 #: skycultures/arabic/constellation_names.eng.fab:49
 msgid "The Beast of Prey"
@@ -1763,7 +2042,7 @@ msgstr "Адзіны дзіданосец"
 
 #: skycultures/arabic/star_names.fab:101
 #: skycultures/romanian/star_names.fab:132
-#: skycultures/western/star_names.fab:186
+#: skycultures/western/star_names.fab:187
 msgid "Hadar"
 msgstr "Гадар"
 
@@ -2278,7 +2557,7 @@ msgstr "Бакавая пазнака"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:6
 msgid "The Neck bend"
-msgstr ""
+msgstr "Выгін шыі"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:7
 msgid "The Arm"
@@ -2307,15 +2586,15 @@ msgstr "Зорка перамены надвор'я"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:13
 msgid "The Bend"
-msgstr ""
+msgstr "Выгін"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:14
 msgid "The High one"
-msgstr ""
+msgstr "Волат"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:15
 msgid "The tail tuft"
-msgstr ""
+msgstr "Хваставы пучок"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:16
 msgid "The Scorpion Claws"
@@ -2349,7 +2628,7 @@ msgstr "Шчасьлівыя зоркі мясьніка"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:23
 msgid "The Lucky stars of the swallower"
-msgstr ""
+msgstr "Шчасьлівыя зоркі таго, хто глытае"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:24
 msgid "The Lucky stars of the Luckiest ones"
@@ -2361,11 +2640,11 @@ msgstr "Шчасьлівыя зоркі шатроў"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:26
 msgid "The Front mouth of the bucket"
-msgstr ""
+msgstr "Гарлавіна вядра"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:27
 msgid "The Rear mouth of the bucket"
-msgstr ""
+msgstr "Днішча вядра"
 
 #: skycultures/arabic_moon_stations/constellation_names.eng.fab:28
 #: skycultures/arabic_moon_stations/star_names.fab:4
@@ -2374,7 +2653,7 @@ msgstr "Шнурок вядра"
 
 #: skycultures/arabic_moon_stations/star_names.fab:1
 msgid "The Hand dyed with Henna"
-msgstr ""
+msgstr "Рука, пафарбаваная хной"
 
 #: skycultures/arabic_moon_stations/star_names.fab:2
 msgid "The First Frog"
@@ -2402,11 +2681,11 @@ msgstr "Два знакі 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:9
 msgid "The Two friendly ones 1"
-msgstr ""
+msgstr "Два сябры 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:10
 msgid "The Two friendly ones 2"
-msgstr ""
+msgstr "два сябры 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:11
 msgid "The Kid"
@@ -2418,7 +2697,7 @@ msgstr "Локаць"
 
 #: skycultures/arabic_moon_stations/star_names.fab:13
 msgid "The Shoulder side"
-msgstr ""
+msgstr "Плечы"
 
 #: skycultures/arabic_moon_stations/star_names.fab:15
 msgid "The Foot of Al-Jawza"
@@ -2426,7 +2705,7 @@ msgstr "Нага Аль-Джаўза"
 
 #: skycultures/arabic_moon_stations/star_names.fab:16
 msgid "The Obstructor"
-msgstr ""
+msgstr "Праціўнік"
 
 #: skycultures/arabic_moon_stations/star_names.fab:17
 msgid "AlNajith"
@@ -2458,7 +2737,7 @@ msgstr "Ґазэлі 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:24
 msgid "The Shoulder side of Al-Jawza"
-msgstr ""
+msgstr "Плечы Аль-Джаўза"
 
 #: skycultures/arabic_moon_stations/star_names.fab:25
 msgid "The Precedent of Southern Shi'ra"
@@ -2466,11 +2745,11 @@ msgstr "Папярэднік паўднёвага Шы'ра"
 
 #: skycultures/arabic_moon_stations/star_names.fab:27
 msgid "The Neck bend 1"
-msgstr ""
+msgstr "Выгін шыі 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:28
 msgid "The Neck bend 2"
-msgstr ""
+msgstr "Выгін шыі 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:29
 msgid "The Southern Shi'ra"
@@ -2514,11 +2793,11 @@ msgstr "Лоб 4"
 
 #: skycultures/arabic_moon_stations/star_names.fab:39
 msgid "The Two first ones 1"
-msgstr ""
+msgstr "Дзьве першыя 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:40
 msgid "The Two first ones 2"
-msgstr ""
+msgstr "Дзьве першыя 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:41
 msgid "The Mane 1"
@@ -2530,23 +2809,23 @@ msgstr "Грыва 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:44
 msgid "The Bend 1"
-msgstr ""
+msgstr "Выгін 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:45
 msgid "The Bend 2"
-msgstr ""
+msgstr "Выгін 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:46
 msgid "The Bend 3"
-msgstr ""
+msgstr "Выгін 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:47
 msgid "The Bend 4"
-msgstr ""
+msgstr "Выгін 4"
 
 #: skycultures/arabic_moon_stations/star_names.fab:48
 msgid "The Bend 5"
-msgstr ""
+msgstr "Выгін 5"
 
 #: skycultures/arabic_moon_stations/star_names.fab:49
 msgid "The Obscure one"
@@ -2566,7 +2845,7 @@ msgstr "Маладая авечка"
 
 #: skycultures/arabic_moon_stations/star_names.fab:53
 msgid "The Unarmed high one"
-msgstr ""
+msgstr "Няўзброены волат"
 
 #: skycultures/arabic_moon_stations/star_names.fab:54
 msgid "The neglected one"
@@ -2574,19 +2853,19 @@ msgstr "Занядбаная"
 
 #: skycultures/arabic_moon_stations/star_names.fab:55
 msgid "The Tail tuft 1"
-msgstr ""
+msgstr "Хваставы пучок 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:56
 msgid "The Tail tuft 2"
-msgstr ""
+msgstr "Хваставы пучок 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:57
 msgid "The Tail tuft 3"
-msgstr ""
+msgstr "Хваставы пучок 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:58
 msgid "The Bright one of the fractured bowl"
-msgstr ""
+msgstr "Яркі кавалак расколатай місы"
 
 #: skycultures/arabic_moon_stations/star_names.fab:59
 msgid "The Leader"
@@ -2598,7 +2877,7 @@ msgstr "Дзіда"
 
 #: skycultures/arabic_moon_stations/star_names.fab:61
 msgid "The Armed High one"
-msgstr ""
+msgstr "Узброены волат"
 
 #: skycultures/arabic_moon_stations/star_names.fab:62
 msgid "The Brighter of the two calves"
@@ -2626,11 +2905,11 @@ msgstr "Стужка на галаве 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:68
 msgid "The headband 2"
-msgstr ""
+msgstr "Стужка на галаве 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:69
 msgid "The headband 3"
-msgstr ""
+msgstr "Стужка на галаве 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:70
 msgid "The Veins of the heart 1"
@@ -2646,19 +2925,19 @@ msgstr "Вярблюд, які бяжыць трушком"
 
 #: skycultures/arabic_moon_stations/star_names.fab:74
 msgid "The Mother camels 1"
-msgstr ""
+msgstr "Маці вярблюдаў 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:75
 msgid "The Mother camels 2"
-msgstr ""
+msgstr "Маці вярблюдаў 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:76
 msgid "The Mother camels 3"
-msgstr ""
+msgstr "Маці вярблюдаў 3"
 
 #: skycultures/arabic_moon_stations/star_names.fab:77
 msgid "The Mother camels 4"
-msgstr ""
+msgstr "Маці вярблюдаў 4"
 
 #: skycultures/arabic_moon_stations/star_names.fab:79
 msgid "The Shepherd"
@@ -2790,19 +3069,19 @@ msgstr "Шчасьлівая зорка выдатнага чалавека 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:111
 msgid "The Front mouth of the bucket 1"
-msgstr ""
+msgstr "Гарлавіна вядра 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:112
 msgid "The Front mouth of the bucket 2"
-msgstr ""
+msgstr "Гарлавіна вядра 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:113
 msgid "The Rear mouth of the bucket 1"
-msgstr ""
+msgstr "Днішча вядра 1"
 
 #: skycultures/arabic_moon_stations/star_names.fab:114
 msgid "The Rear mouth of the bucket 2"
-msgstr ""
+msgstr "Днішча вядра 2"
 
 #: skycultures/arabic_moon_stations/star_names.fab:115
 msgid "The Bucket knot 1"
@@ -2838,7 +3117,7 @@ msgstr "Даўгашыяя чарапаха"
 
 #: skycultures/boorong/constellation_names.eng.fab:2
 msgid "Fan-tailed cockatoo"
-msgstr ""
+msgstr "Какаду са сьмешным хвастом"
 
 #: skycultures/boorong/constellation_names.eng.fab:3
 msgid "Two teenage boys"
@@ -2854,11 +3133,11 @@ msgstr "Чырвоны кенґуру"
 
 #: skycultures/boorong/constellation_names.eng.fab:6
 msgid "Ring-tail possum"
-msgstr ""
+msgstr "Апосум, у якога хвост абаранкам"
 
 #: skycultures/boorong/constellation_names.eng.fab:7
 msgid "Red-rumped parrot"
-msgstr ""
+msgstr "Пеўчы папугай"
 
 #: skycultures/boorong/constellation_names.eng.fab:8
 msgid "Crow"
@@ -2870,15 +3149,15 @@ msgstr "Варона, жонка Ўара"
 
 #: skycultures/boorong/constellation_names.eng.fab:10
 msgid "Owlet nightjar"
-msgstr ""
+msgstr "Савіны ляляк"
 
 #: skycultures/boorong/constellation_names.eng.fab:11
 msgid "Needlewood hakea and willie wagtails"
-msgstr ""
+msgstr "Ігольчастае дрэва й аўстралійскія пліскаўкі"
 
 #: skycultures/boorong/constellation_names.eng.fab:12
 msgid "Red-kneed dotterel"
-msgstr ""
+msgstr "Чырвонагруды зуёк"
 
 #: skycultures/boorong/constellation_names.eng.fab:13
 msgid "Australian kestrel"
@@ -2886,15 +3165,15 @@ msgstr "Аўстралійская пустальга"
 
 #: skycultures/boorong/constellation_names.eng.fab:14
 msgid "Mallee fowl"
-msgstr ""
+msgstr "Курыца ў вочкі"
 
 #: skycultures/boorong/constellation_names.eng.fab:15
 msgid "Jacky lizard"
-msgstr ""
+msgstr "Даўгахвостая драўняная яшчарка"
 
 #: skycultures/boorong/constellation_names.eng.fab:16
 msgid "Male and female brolga"
-msgstr ""
+msgstr "Самец і саміца аўстралійскіх жораваў"
 
 #: skycultures/boorong/constellation_names.eng.fab:17
 msgid "Great fish"
@@ -2902,7 +3181,7 @@ msgstr "Вялікая рыба"
 
 #: skycultures/boorong/constellation_names.eng.fab:18
 msgid "Wedge tailed eagle"
-msgstr ""
+msgstr "Клінахвосты арол"
 
 #: skycultures/boorong/constellation_names.eng.fab:19
 msgid "Female eagle, wife of Warepil"
@@ -2914,7 +3193,7 @@ msgstr "Эму"
 
 #: skycultures/boorong/constellation_names.eng.fab:21
 msgid "Purple crowned lorikeet"
-msgstr ""
+msgstr "Пурпуровы каралеўскі папугайчык"
 
 #: skycultures/boorong/constellation_names.eng.fab:22
 msgid "Meat ant"
@@ -2926,7 +3205,7 @@ msgstr "Ґаляктыка"
 
 #: skycultures/boorong/constellation_names.eng.fab:24
 msgid "Singing bushlark"
-msgstr ""
+msgstr "Пеўчы яванскі жаўрук"
 
 #: skycultures/boorong/constellation_names.eng.fab:25
 msgid "Pink cockatoo"
@@ -2934,7 +3213,7 @@ msgstr "Ружовы какаду"
 
 #: skycultures/boorong/constellation_names.eng.fab:26
 msgid "Species of ant"
-msgstr ""
+msgstr "Віды мурашак"
 
 #: skycultures/boorong/constellation_names.eng.fab:27
 msgid "Boomerang"
@@ -2946,7 +3225,7 @@ msgstr "Зьмяя з грывай"
 
 #: skycultures/boorong/star_names.fab:1
 msgid "Marpeankurrk"
-msgstr ""
+msgstr "Марпеэнкурк"
 
 #: skycultures/boorong/star_names.fab:2
 msgid "Djuit"
@@ -2954,11 +3233,11 @@ msgstr "Джуіт"
 
 #: skycultures/boorong/star_names.fab:3
 msgid "Neilloan"
-msgstr ""
+msgstr "Нэйлоан"
 
 #: skycultures/boorong/star_names.fab:4
 msgid "Totyarguil"
-msgstr ""
+msgstr "Тот'ярґуіл"
 
 #: skycultures/boorong/star_names.fab:5
 msgid "Karik Karik"
@@ -2966,23 +3245,23 @@ msgstr "Карык карык"
 
 #: skycultures/boorong/star_names.fab:6 skycultures/boorong/star_names.fab:7
 msgid "Berm-berm-gle"
-msgstr ""
+msgstr "Бэрм-бэрм-ґле"
 
 #: skycultures/boorong/star_names.fab:8
 msgid "Bunya"
-msgstr ""
+msgstr "Бунья"
 
 #: skycultures/boorong/star_names.fab:9
 msgid "Tourchingboiongerra"
-msgstr ""
+msgstr "Тоўрчынґбоіонґерра"
 
 #: skycultures/boorong/star_names.fab:10
 msgid "Kourt-chin"
-msgstr ""
+msgstr "Коўрт-чын"
 
 #: skycultures/boorong/star_names.fab:11
 msgid "Warring"
-msgstr ""
+msgstr "Уаррынґ"
 
 #: skycultures/boorong/star_names.fab:12
 msgid "Kulkanbulla"
@@ -2990,11 +3269,11 @@ msgstr "Кулканбула"
 
 #: skycultures/boorong/star_names.fab:13
 msgid "Lamankurrk"
-msgstr ""
+msgstr "Ламанкурк"
 
 #: skycultures/boorong/star_names.fab:14
 msgid "Gellarlec"
-msgstr ""
+msgstr "Ґеларлек"
 
 #: skycultures/boorong/star_names.fab:15
 msgid "Warepil"
@@ -3002,7 +3281,7 @@ msgstr "Варэпіл"
 
 #: skycultures/boorong/star_names.fab:16
 msgid "Colowgulloric Warepil"
-msgstr ""
+msgstr "Калоўґулорык варэпіл"
 
 #: skycultures/boorong/star_names.fab:17
 msgid "Won"
@@ -3010,7 +3289,7 @@ msgstr "Уон"
 
 #: skycultures/boorong/star_names.fab:18
 msgid "Weetkurrk"
-msgstr ""
+msgstr "Уээткурк"
 
 #: skycultures/boorong/star_names.fab:19
 msgid "War"
@@ -3018,27 +3297,27 @@ msgstr "Уар"
 
 #: skycultures/boorong/star_names.fab:20
 msgid "Collowgulloric War"
-msgstr ""
+msgstr "Калоўґулорык уар"
 
 #: skycultures/boorong/star_names.fab:21
 msgid "Yerredetkurrk"
-msgstr ""
+msgstr "Ерэдэткурк"
 
 #: skycultures/boorong/star_names.fab:22
 msgid "Otchocut"
-msgstr ""
+msgstr "Отчокут"
 
 #: skycultures/boorong/star_names.fab:23
 msgid "Collenbitchick"
-msgstr ""
+msgstr "Коленбітчык"
 
 #: skycultures/boorong/star_names.fab:24
 msgid "Yurree"
-msgstr ""
+msgstr "Юрээ"
 
 #: skycultures/boorong/star_names.fab:25
 msgid "Wanjel"
-msgstr ""
+msgstr "Уанджэл"
 
 #: skycultures/boorong/star_names.fab:26
 msgid "Purra"
@@ -3046,7 +3325,7 @@ msgstr "Пурра"
 
 #: skycultures/boorong/star_names.fab:27
 msgid "Unurgunite"
-msgstr ""
+msgstr "Унурґунітэ"
 
 #. TRANSLATORS: Native name of the Sun in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:2
@@ -3056,7 +3335,7 @@ msgstr "Дзень"
 #. TRANSLATORS: Native name of the Moon in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:4
 msgid "Quoll"
-msgstr ""
+msgstr "Куол"
 
 #. TRANSLATORS: Native name of Venus in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:6
@@ -3066,7 +3345,7 @@ msgstr "Старэйшая сястра"
 #. TRANSLATORS: Native name of Jupiter in Boorong culture (in English words)
 #: skycultures/boorong/planet_names.fab:8
 msgid "Sulphur-crested white cockatoo"
-msgstr ""
+msgstr "Вялікі жаўтачубы какаду"
 
 #: skycultures/chinese/constellation_names.eng.fab:1
 #: skycultures/korean/constellation_names.eng.fab:219
@@ -3742,6 +4021,54 @@ msgstr "Авечка"
 msgid "Stars of Water"
 msgstr "Зоркі вады"
 
+#: skycultures/egyptian/star_names.fab:1
+#: skycultures/romanian/star_names.fab:80
+#: skycultures/western/star_names.fab:116
+#: skycultures/western_rey/star_names.fab:32
+msgid "Procyon"
+msgstr "Працыён"
+
+#: skycultures/egyptian/star_names.fab:2
+#: skycultures/western/star_names.fab:102
+#: skycultures/western_rey/star_names.fab:36
+msgid "Sirius"
+msgstr "Сырыюс"
+
+#. TRANSLATORS: Native name of the Sun in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:2
+msgid "God of Sun"
+msgstr "Бог Сонца"
+
+#. TRANSLATORS: Native name of the Moon in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:4
+msgid "Khonsu, the Traveler"
+msgstr "Хонсу, падарожны"
+
+#. TRANSLATORS: Native name of Mercury in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:6
+msgid "Unknown"
+msgstr "Невядомы"
+
+#. TRANSLATORS: Native name of Venus in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:8
+msgid "Star that Crosses / The God of the Morning"
+msgstr "Зорка, якая перасякае / Бог раніцы"
+
+#. TRANSLATORS: Native name of Mars in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:10
+msgid "Red Horus"
+msgstr "Чырвоны Хорус"
+
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:12
+msgid "Horus Who Binds the Two Lands"
+msgstr "Хорус, які зьвязвае дзьве зямлі"
+
+#. TRANSLATORS: Native name of Saturn in Egyptian culture
+#: skycultures/egyptian/planet_names.fab:14
+msgid "Horus, the Bull of Heaven"
+msgstr "Хорус, бык нябёсаў"
+
 #: skycultures/inuit/constellation_names.eng.fab:1
 msgid "Two Sunbeams"
 msgstr "Два сонечныя промні"
@@ -4075,6 +4402,41 @@ msgstr "Дж'ешта"
 msgid "Auggashta"
 msgstr "Аўґашта"
 
+#. TRANSLATORS: Native name of the Sun in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:2
+msgid "Surya Deva"
+msgstr "Сурыя Дэва"
+
+#. TRANSLATORS: Native name of the Moon in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:4
+msgid "Chandra"
+msgstr "Чандра"
+
+#. TRANSLATORS: Native name of Mercury in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:6
+msgid "Budha"
+msgstr "Буда"
+
+#. TRANSLATORS: Native name of Venus in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:8
+msgid "Shukr"
+msgstr "Шукр"
+
+#. TRANSLATORS: Native name of Mars in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:10
+msgid "Mangala"
+msgstr "Манґала"
+
+#. TRANSLATORS: Native name of Jupiter in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:12
+msgid "Guru"
+msgstr "Ґуру"
+
+#. TRANSLATORS: Native name of Saturn in Indian culture (in English words)
+#: skycultures/indian/planet_names.fab:14
+msgid "Shani"
+msgstr "Шані"
+
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:5
 msgid "Chamber"
 msgstr "Пакой"
@@ -4129,7 +4491,7 @@ msgstr "Расьцягнутая сетка"
 
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:32
 msgid "Chariot Cross-Board"
-msgstr ""
+msgstr "Крыжавіна калясьніцы"
 
 #: skycultures/korean/constellation_names.eng.fab:1
 msgid "Holy Kettle"
@@ -5407,6 +5769,14 @@ msgstr "Птушка грому"
 msgid "Bear's Lodge"
 msgstr "Медзьвядзёва бярлога"
 
+#: skycultures/lakota/star_names.fab:1
+msgid "Wichapi Owanjila"
+msgstr "Вічапі Аванджыла"
+
+#: skycultures/lakota/star_names.fab:2
+msgid "Oglechkutepi"
+msgstr "Аґлечкутэпі"
+
 #: skycultures/maori/constellation_names.eng.fab:1
 msgid "Taki-o-Autahi"
 msgstr "Такі-о-Аутахі"
@@ -5547,7 +5917,7 @@ msgstr "Папа"
 #. TRANSLATORS: Native name of Mars in Maori culture
 #: skycultures/maori/planet_names.fab:12
 msgid "Rangiwhenua"
-msgstr ""
+msgstr "Ранґіўхэнуа"
 
 #. TRANSLATORS: Native name of Jupiter in Maori culture
 #: skycultures/maori/planet_names.fab:14
@@ -5634,17 +6004,17 @@ msgstr "Суґар"
 #. TRANSLATORS: Native name of Earth in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:10
 msgid "Delkhii"
-msgstr ""
+msgstr "Дэлкхіі"
 
 #. TRANSLATORS: Native name of Mars in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:12
 msgid "Angarag"
-msgstr ""
+msgstr "Анґараґ"
 
 #. TRANSLATORS: Native name of Jupiter in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:14
 msgid "Barhasbadi"
-msgstr ""
+msgstr "Баршасбадзі"
 
 #. TRANSLATORS: Native name of Saturn in Mongolian culture
 #: skycultures/mongolian/planet_names.fab:16
@@ -6051,42 +6421,42 @@ msgstr "Дыфда"
 msgid "Van Maanen 2"
 msgstr "Ван Маанэн 2"
 
-#: skycultures/romanian/star_names.fab:8 skycultures/western/star_names.fab:11
+#: skycultures/romanian/star_names.fab:8 skycultures/western/star_names.fab:12
 msgid "Mirach"
 msgstr "Мірах"
 
-#: skycultures/romanian/star_names.fab:9 skycultures/western/star_names.fab:13
+#: skycultures/romanian/star_names.fab:9 skycultures/western/star_names.fab:14
 msgid "Adhil"
 msgstr "Азіль"
 
 #: skycultures/romanian/star_names.fab:10
-#: skycultures/western/star_names.fab:14
+#: skycultures/western/star_names.fab:15
 msgid "Ruchbah"
 msgstr "Рухба"
 
 #: skycultures/romanian/star_names.fab:11
-#: skycultures/western/star_names.fab:16
+#: skycultures/western/star_names.fab:17
 #: skycultures/western_rey/star_names.fab:53
 msgid "Achernar"
 msgstr "Ахернар"
 
 #: skycultures/romanian/star_names.fab:12
-#: skycultures/western/star_names.fab:19
+#: skycultures/western/star_names.fab:20
 msgid "Baten Kaitos"
 msgstr "Батэн Каітас"
 
 #: skycultures/romanian/star_names.fab:13
-#: skycultures/western/star_names.fab:20
+#: skycultures/western/star_names.fab:21
 msgid "Mothallah"
 msgstr "Масалаг"
 
 #: skycultures/romanian/star_names.fab:14
-#: skycultures/western/star_names.fab:21
+#: skycultures/western/star_names.fab:22
 msgid "Mesarthim"
 msgstr "Мэзарсым"
 
 #: skycultures/romanian/star_names.fab:15
-#: skycultures/western/star_names.fab:22
+#: skycultures/western/star_names.fab:23
 msgid "Sheratan"
 msgstr "Шэратан"
 
@@ -6095,17 +6465,17 @@ msgid "Alrescha"
 msgstr "Альрэша"
 
 #: skycultures/romanian/star_names.fab:17
-#: skycultures/western/star_names.fab:24
+#: skycultures/western/star_names.fab:25
 msgid "Almaak"
 msgstr "Альмаак"
 
 #: skycultures/romanian/star_names.fab:18
-#: skycultures/western/star_names.fab:25
+#: skycultures/western/star_names.fab:26
 msgid "Hamal"
 msgstr "Гамаль"
 
 #: skycultures/romanian/star_names.fab:19
-#: skycultures/western/star_names.fab:26
+#: skycultures/western/star_names.fab:27
 #: skycultures/western_rey/star_names.fab:48
 msgid "Mira"
 msgstr "Міра"
@@ -6115,113 +6485,113 @@ msgid "The Sky's Votive Light"
 msgstr "Запаветнае сьвятло неба"
 
 #: skycultures/romanian/star_names.fab:21
-#: skycultures/western/star_names.fab:31
+#: skycultures/western/star_names.fab:32
 msgid "Azha"
 msgstr "Азга"
 
 #: skycultures/romanian/star_names.fab:22
-#: skycultures/western/star_names.fab:32
+#: skycultures/western/star_names.fab:33
 msgid "Acamar"
 msgstr "Акамар"
 
 #: skycultures/romanian/star_names.fab:23
-#: skycultures/western/star_names.fab:34
+#: skycultures/western/star_names.fab:35
 msgid "Menkar"
 msgstr "Мэнкар"
 
 #: skycultures/romanian/star_names.fab:24
-#: skycultures/western/star_names.fab:36
+#: skycultures/western/star_names.fab:37
 #: skycultures/western_rey/star_names.fab:24
 msgid "Algol"
 msgstr "Альголь"
 
 #: skycultures/romanian/star_names.fab:25
-#: skycultures/western/star_names.fab:39
+#: skycultures/western/star_names.fab:40
 msgid "Botein"
 msgstr "Батэін"
 
 #: skycultures/romanian/star_names.fab:26
-#: skycultures/western/star_names.fab:40
+#: skycultures/western/star_names.fab:41
 msgid "Zibal"
 msgstr "Зібаль"
 
 #: skycultures/romanian/star_names.fab:27
-#: skycultures/western/star_names.fab:41
+#: skycultures/western/star_names.fab:42
 msgid "Mirphak"
 msgstr "Мірфак"
 
 #: skycultures/romanian/star_names.fab:28
-#: skycultures/western/star_names.fab:43
+#: skycultures/western/star_names.fab:44
 msgid "Atik"
 msgstr "Ацік"
 
 #: skycultures/romanian/star_names.fab:29
-#: skycultures/western/star_names.fab:44
+#: skycultures/western/star_names.fab:45
 msgid "Celaeno"
 msgstr "Келена"
 
 #: skycultures/romanian/star_names.fab:30
-#: skycultures/western/star_names.fab:45
+#: skycultures/western/star_names.fab:46
 msgid "Electra"
 msgstr "Электра"
 
 #: skycultures/romanian/star_names.fab:31
-#: skycultures/western/star_names.fab:46
+#: skycultures/western/star_names.fab:47
 msgid "Taygeta"
 msgstr "Тайгета"
 
 #: skycultures/romanian/star_names.fab:32
-#: skycultures/western/star_names.fab:47
+#: skycultures/western/star_names.fab:48
 msgid "Maia"
 msgstr "Мая"
 
 #: skycultures/romanian/star_names.fab:33
-#: skycultures/western/star_names.fab:48
+#: skycultures/western/star_names.fab:49
 msgid "Asterope"
 msgstr "Астэропа"
 
 #: skycultures/romanian/star_names.fab:34
-#: skycultures/western/star_names.fab:49
+#: skycultures/western/star_names.fab:50
 msgid "Merope"
 msgstr "Мэропа"
 
 #: skycultures/romanian/star_names.fab:35
-#: skycultures/western/star_names.fab:50
+#: skycultures/western/star_names.fab:51
 msgid "Alcyone"
 msgstr "Алькіёна"
 
 #: skycultures/romanian/star_names.fab:36
-#: skycultures/western/star_names.fab:51
+#: skycultures/western/star_names.fab:52
 msgid "Atlas"
 msgstr "Атляс"
 
 #: skycultures/romanian/star_names.fab:37
-#: skycultures/western/star_names.fab:52
+#: skycultures/western/star_names.fab:53
 msgid "Pleione"
 msgstr "Плеёна"
 
 #: skycultures/romanian/star_names.fab:38
-#: skycultures/western/star_names.fab:53
+#: skycultures/western/star_names.fab:54
 msgid "Zaurak"
 msgstr "Заўрак"
 
 #: skycultures/romanian/star_names.fab:39
-#: skycultures/western/star_names.fab:54
+#: skycultures/western/star_names.fab:55
 msgid "Menkib"
 msgstr "Мэнкіб"
 
 #: skycultures/romanian/star_names.fab:40
-#: skycultures/western/star_names.fab:55
+#: skycultures/western/star_names.fab:56
 msgid "Beid"
 msgstr "Бэід"
 
 #: skycultures/romanian/star_names.fab:41
-#: skycultures/western/star_names.fab:56
+#: skycultures/western/star_names.fab:57
 msgid "Keid"
 msgstr "Кэід"
 
 #: skycultures/romanian/star_names.fab:42
-#: skycultures/western/star_names.fab:60
+#: skycultures/western/star_names.fab:61
 msgid "Ain"
 msgstr "Аін"
 
@@ -6230,126 +6600,126 @@ msgid "The Bright Star of the Pig (The Alarm Clock)"
 msgstr "Яркая зорка сьвіньні (Трывожная зорка)"
 
 #: skycultures/romanian/star_names.fab:44
-#: skycultures/western/star_names.fab:70
+#: skycultures/western/star_names.fab:71
 msgid "Cursa"
 msgstr "Курса"
 
 #: skycultures/romanian/star_names.fab:45
-#: skycultures/western/star_names.fab:71
+#: skycultures/western/star_names.fab:72
 msgid "Kapteyn's Star"
 msgstr "Зорка Каптэйна"
 
 #: skycultures/romanian/star_names.fab:46
-#: skycultures/western/star_names.fab:72
+#: skycultures/western/star_names.fab:73
 #: skycultures/western_rey/star_names.fab:35
 msgid "Rigel"
 msgstr "Рыґель"
 
 #: skycultures/romanian/star_names.fab:47
-#: skycultures/western/star_names.fab:73
+#: skycultures/western/star_names.fab:74
 #: skycultures/western_rey/star_names.fab:31
 msgid "Capella"
 msgstr "Капэла"
 
 #: skycultures/romanian/star_names.fab:48
-#: skycultures/western/star_names.fab:74
+#: skycultures/western/star_names.fab:75
 msgid "Bellatrix"
 msgstr "Бэлятрыкс"
 
 #: skycultures/romanian/star_names.fab:49
-#: skycultures/western/star_names.fab:75
+#: skycultures/western/star_names.fab:76
 msgid "Alnath"
 msgstr "Альнас"
 
 #: skycultures/romanian/star_names.fab:50
-#: skycultures/western/star_names.fab:76
+#: skycultures/western/star_names.fab:77
 msgid "Nihal"
 msgstr "Нігаль"
 
 #: skycultures/romanian/star_names.fab:51
-#: skycultures/western/star_names.fab:78
+#: skycultures/western/star_names.fab:79
 msgid "Mintaka"
 msgstr "Мінтака"
 
 #: skycultures/romanian/star_names.fab:52
-#: skycultures/western/star_names.fab:80
+#: skycultures/western/star_names.fab:81
 msgid "Arneb"
 msgstr "Арнэб"
 
 #: skycultures/romanian/star_names.fab:53
-#: skycultures/western/star_names.fab:81
+#: skycultures/western/star_names.fab:82
 msgid "Meissa"
 msgstr "Мэіса"
 
 #: skycultures/romanian/star_names.fab:54
-#: skycultures/western/star_names.fab:83
+#: skycultures/western/star_names.fab:84
 msgid "Alnilam"
 msgstr "Альнілям"
 
 #: skycultures/romanian/star_names.fab:55
-#: skycultures/western/star_names.fab:84
+#: skycultures/western/star_names.fab:85
 msgid "Phact"
 msgstr "Факт"
 
 #: skycultures/romanian/star_names.fab:56
-#: skycultures/western/star_names.fab:85
+#: skycultures/western/star_names.fab:86
 msgid "Alnitak"
 msgstr "Альнітак"
 
 #: skycultures/romanian/star_names.fab:57
-#: skycultures/western/star_names.fab:86
+#: skycultures/western/star_names.fab:87
 msgid "Saiph"
 msgstr "Саіф"
 
 #: skycultures/romanian/star_names.fab:58
-#: skycultures/western/star_names.fab:87
+#: skycultures/western/star_names.fab:88
 msgid "Wazn"
 msgstr "Вазн"
 
 #: skycultures/romanian/star_names.fab:59
-#: skycultures/western/star_names.fab:88
+#: skycultures/western/star_names.fab:89
 #: skycultures/western_rey/star_names.fab:34
 msgid "Betelgeuse"
 msgstr "Бэтэльґейзэ"
 
 #: skycultures/romanian/star_names.fab:60
-#: skycultures/western/star_names.fab:89
+#: skycultures/western/star_names.fab:90
 msgid "Menkalinan"
 msgstr "Мэнкалінан"
 
 #: skycultures/romanian/star_names.fab:61
-#: skycultures/western/star_names.fab:90
+#: skycultures/western/star_names.fab:91
 msgid "Propus"
 msgstr "Пропус"
 
 #: skycultures/romanian/star_names.fab:62
-#: skycultures/western/star_names.fab:93
+#: skycultures/western/star_names.fab:94
 msgid "Red Rectangle"
 msgstr "Чырвоны прастакутнік"
 
 #: skycultures/romanian/star_names.fab:63
-#: skycultures/western/star_names.fab:94
+#: skycultures/western/star_names.fab:95
 msgid "Furud"
 msgstr "Фуруд"
 
 #: skycultures/romanian/star_names.fab:64
-#: skycultures/western/star_names.fab:95
+#: skycultures/western/star_names.fab:96
 msgid "Mirzam"
 msgstr "Мірзам"
 
 #: skycultures/romanian/star_names.fab:66
-#: skycultures/western/star_names.fab:97
+#: skycultures/western/star_names.fab:98
 #: skycultures/western_rey/star_names.fab:52
 msgid "Canopus"
 msgstr "Канопус"
 
 #: skycultures/romanian/star_names.fab:67
-#: skycultures/western/star_names.fab:99
+#: skycultures/western/star_names.fab:100
 msgid "Alhena"
 msgstr "Альгена"
 
 #: skycultures/romanian/star_names.fab:68
-#: skycultures/western/star_names.fab:100
+#: skycultures/western/star_names.fab:101
 msgid "Mebsuta"
 msgstr "Мэбсута"
 
@@ -6359,47 +6729,47 @@ msgid "Morning Star"
 msgstr "Ранішняя зорка"
 
 #: skycultures/romanian/star_names.fab:70
-#: skycultures/western/star_names.fab:103
+#: skycultures/western/star_names.fab:104
 msgid "Adhara"
 msgstr "Азара"
 
 #: skycultures/romanian/star_names.fab:71
-#: skycultures/western/star_names.fab:104
+#: skycultures/western/star_names.fab:105
 msgid "Muliphein"
 msgstr "Муліфэйн"
 
 #: skycultures/romanian/star_names.fab:72
-#: skycultures/western/star_names.fab:105
+#: skycultures/western/star_names.fab:106
 msgid "Mekbuda"
 msgstr "Мэкбуда"
 
 #: skycultures/romanian/star_names.fab:73
-#: skycultures/western/star_names.fab:106
+#: skycultures/western/star_names.fab:107
 msgid "Wezen"
 msgstr "Вэзэн"
 
 #: skycultures/romanian/star_names.fab:74
-#: skycultures/western/star_names.fab:108
+#: skycultures/western/star_names.fab:109
 msgid "Bernes 135"
 msgstr "Бэрнэс 135"
 
 #: skycultures/romanian/star_names.fab:75
-#: skycultures/western/star_names.fab:109
+#: skycultures/western/star_names.fab:110
 msgid "Wasat"
 msgstr "Уасат"
 
 #: skycultures/romanian/star_names.fab:76
-#: skycultures/western/star_names.fab:110
+#: skycultures/western/star_names.fab:111
 msgid "Aludra"
 msgstr "Алюдра"
 
 #: skycultures/romanian/star_names.fab:77
-#: skycultures/western/star_names.fab:111
+#: skycultures/western/star_names.fab:112
 msgid "Gomeisa"
 msgstr "Ґамэіса"
 
 #: skycultures/romanian/star_names.fab:78
-#: skycultures/western/star_names.fab:112
+#: skycultures/western/star_names.fab:113
 msgid "Luyten's Star"
 msgstr "Зорка Лейтэна"
 
@@ -6407,256 +6777,250 @@ msgstr "Зорка Лейтэна"
 msgid "Romulus"
 msgstr "Ромул"
 
-#: skycultures/romanian/star_names.fab:80
-#: skycultures/western/star_names.fab:115
-#: skycultures/western_rey/star_names.fab:32
-msgid "Procyon"
-msgstr "Працыён"
-
 #: skycultures/romanian/star_names.fab:81
 msgid "Remus"
 msgstr "Рэм"
 
 #: skycultures/romanian/star_names.fab:82
-#: skycultures/western/star_names.fab:118
+#: skycultures/western/star_names.fab:119
 msgid "Naos"
 msgstr "Наас"
 
 #: skycultures/romanian/star_names.fab:83
-#: skycultures/western/star_names.fab:119
+#: skycultures/western/star_names.fab:120
 msgid "Regor"
 msgstr "Рэґар"
 
 #: skycultures/romanian/star_names.fab:84
-#: skycultures/western/star_names.fab:120
+#: skycultures/western/star_names.fab:121
 msgid "Tegmine"
 msgstr "Тэґмэн"
 
 #: skycultures/romanian/star_names.fab:85
-#: skycultures/western/star_names.fab:122
+#: skycultures/western/star_names.fab:123
 msgid "Avior"
 msgstr "Авіёр"
 
 #: skycultures/romanian/star_names.fab:86
-#: skycultures/western/star_names.fab:124
+#: skycultures/western/star_names.fab:125
 msgid "Muscida"
 msgstr "Мусцыда"
 
 #: skycultures/romanian/star_names.fab:87
-#: skycultures/western/star_names.fab:126
+#: skycultures/western/star_names.fab:127
 msgid "Asellus Borealis"
 msgstr "Асэлюс Барэаліс"
 
 #: skycultures/romanian/star_names.fab:88
-#: skycultures/western/star_names.fab:127
+#: skycultures/western/star_names.fab:128
 msgid "Asellus Australis"
 msgstr "Асэлюс Аўстраліс"
 
 #: skycultures/romanian/star_names.fab:89
-#: skycultures/western/star_names.fab:129
+#: skycultures/western/star_names.fab:130
 msgid "Acubens"
 msgstr "Акубэнс"
 
 #: skycultures/romanian/star_names.fab:90
-#: skycultures/western/star_names.fab:130
+#: skycultures/western/star_names.fab:131
 msgid "Talitha"
 msgstr "Таліса"
 
 #: skycultures/romanian/star_names.fab:91
-#: skycultures/western/star_names.fab:131
+#: skycultures/western/star_names.fab:132
 msgid "Suhail"
 msgstr "Сугаіл"
 
 #: skycultures/romanian/star_names.fab:92
-#: skycultures/western/star_names.fab:132
+#: skycultures/western/star_names.fab:133
 msgid "Miaplacidus"
 msgstr "Міяпляцыдус"
 
 #: skycultures/romanian/star_names.fab:93
-#: skycultures/western/star_names.fab:133
+#: skycultures/western/star_names.fab:134
 msgid "Aspidiske"
 msgstr "Асьпідыска"
 
 #: skycultures/romanian/star_names.fab:94
-#: skycultures/western/star_names.fab:134
+#: skycultures/western/star_names.fab:135
 #: skycultures/western_rey/star_names.fab:38
 msgid "Alphard"
 msgstr "Альфард"
 
 #: skycultures/romanian/star_names.fab:95
-#: skycultures/western/star_names.fab:135
+#: skycultures/western/star_names.fab:136
 msgid "Alterf"
 msgstr "Альтэрф"
 
 #: skycultures/romanian/star_names.fab:96
-#: skycultures/western/star_names.fab:136
+#: skycultures/western/star_names.fab:137
 msgid "Subra"
 msgstr "Субра"
 
 #: skycultures/romanian/star_names.fab:97
-#: skycultures/western/star_names.fab:138
+#: skycultures/western/star_names.fab:139
 msgid "Rasalas"
 msgstr "Расалас"
 
 #: skycultures/romanian/star_names.fab:98
-#: skycultures/western/star_names.fab:140
+#: skycultures/western/star_names.fab:141
 #: skycultures/western_rey/star_names.fab:12
 msgid "Regulus"
 msgstr "Рэґул"
 
 #: skycultures/romanian/star_names.fab:99
-#: skycultures/western/star_names.fab:142
+#: skycultures/western/star_names.fab:143
 msgid "Adhafera"
 msgstr "Азафэра"
 
 #: skycultures/romanian/star_names.fab:100
-#: skycultures/western/star_names.fab:143
+#: skycultures/western/star_names.fab:144
 msgid "Tania Borealis"
 msgstr "Танія Барэаліс"
 
 #: skycultures/romanian/star_names.fab:101
-#: skycultures/western/star_names.fab:144
+#: skycultures/western/star_names.fab:145
 msgid "Algieba"
 msgstr "Альґеба"
 
 #: skycultures/romanian/star_names.fab:102
-#: skycultures/western/star_names.fab:145
+#: skycultures/western/star_names.fab:146
 msgid "Tania Australis"
 msgstr "Танія Аўстраліс"
 
 #: skycultures/romanian/star_names.fab:103
-#: skycultures/western/star_names.fab:147
+#: skycultures/western/star_names.fab:148
 msgid "Alkes"
 msgstr "Алькес"
 
 #: skycultures/romanian/star_names.fab:104
-#: skycultures/western/star_names.fab:148
+#: skycultures/western/star_names.fab:149
 msgid "Merak"
 msgstr "Мэрак"
 
 #: skycultures/romanian/star_names.fab:105
-#: skycultures/western/star_names.fab:149
+#: skycultures/western/star_names.fab:150
 msgid "Dubhe"
 msgstr "Дубге"
 
 #: skycultures/romanian/star_names.fab:106
-#: skycultures/western/star_names.fab:150
+#: skycultures/western/star_names.fab:151
 msgid "Zosma"
 msgstr "Зосма"
 
 #: skycultures/romanian/star_names.fab:107
-#: skycultures/western/star_names.fab:151
+#: skycultures/western/star_names.fab:152
 msgid "Chertan"
 msgstr "Хорт"
 
 #: skycultures/romanian/star_names.fab:108
-#: skycultures/western/star_names.fab:153
+#: skycultures/western/star_names.fab:154
 msgid "Alula Australis"
 msgstr "Алюля Аўстраліс"
 
 #: skycultures/romanian/star_names.fab:109
-#: skycultures/western/star_names.fab:154
+#: skycultures/western/star_names.fab:155
 msgid "Alula Borealis"
 msgstr "Алюля Аўстраліс"
 
 #: skycultures/romanian/star_names.fab:110
-#: skycultures/western/star_names.fab:156
+#: skycultures/western/star_names.fab:157
 msgid "Giausar"
 msgstr "Джаўсар"
 
 #: skycultures/romanian/star_names.fab:111
-#: skycultures/western/star_names.fab:159
+#: skycultures/western/star_names.fab:160
 #: skycultures/western_rey/star_names.fab:13
 msgid "Denebola"
 msgstr "Дэнэбала"
 
 #: skycultures/romanian/star_names.fab:112
-#: skycultures/western/star_names.fab:160
+#: skycultures/western/star_names.fab:161
 msgid "Zavijava"
 msgstr "Завіява"
 
 #: skycultures/romanian/star_names.fab:113
-#: skycultures/western/star_names.fab:161
+#: skycultures/western/star_names.fab:162
 msgid "Phad"
 msgstr "Фад"
 
 #: skycultures/romanian/star_names.fab:114
-#: skycultures/western/star_names.fab:162
+#: skycultures/western/star_names.fab:163
 msgid "Alchiba"
 msgstr "Альхіба"
 
 #: skycultures/romanian/star_names.fab:115
-#: skycultures/western/star_names.fab:164
+#: skycultures/western/star_names.fab:165
 msgid "Megrez"
 msgstr "Мэґрэз"
 
 #: skycultures/romanian/star_names.fab:116
 #: skycultures/romanian/star_names.fab:203
-#: skycultures/western/star_names.fab:165
-#: skycultures/western/star_names.fab:302
+#: skycultures/western/star_names.fab:166
+#: skycultures/western/star_names.fab:303
 msgid "Gienah"
 msgstr "Джэнаг"
 
 #: skycultures/romanian/star_names.fab:117
-#: skycultures/western/star_names.fab:166
+#: skycultures/western/star_names.fab:167
 msgid "Zaniah"
 msgstr "Заніяг"
 
 #: skycultures/romanian/star_names.fab:118
-#: skycultures/western/star_names.fab:167
+#: skycultures/western/star_names.fab:168
 #: skycultures/western_rey/star_names.fab:55
 msgid "Acrux"
 msgstr "Акрукс"
 
 #: skycultures/romanian/star_names.fab:119
-#: skycultures/western/star_names.fab:168
+#: skycultures/western/star_names.fab:169
 msgid "Algorab"
 msgstr "Алґораб"
 
 #: skycultures/romanian/star_names.fab:120
-#: skycultures/western/star_names.fab:169
+#: skycultures/western/star_names.fab:170
 msgid "Gacrux"
 msgstr "Ґакрукс"
 
 #: skycultures/romanian/star_names.fab:121
-#: skycultures/western/star_names.fab:170
+#: skycultures/western/star_names.fab:171
 msgid "Chara"
 msgstr "Хара"
 
 #: skycultures/romanian/star_names.fab:122
-#: skycultures/western/star_names.fab:172
+#: skycultures/western/star_names.fab:173
 msgid "Porrima"
 msgstr "Парыма"
 
 #: skycultures/romanian/star_names.fab:123
-#: skycultures/western/star_names.fab:174
+#: skycultures/western/star_names.fab:175
 msgid "Mimosa"
 msgstr "Мімоза"
 
 #: skycultures/romanian/star_names.fab:124
-#: skycultures/western/star_names.fab:175
+#: skycultures/western/star_names.fab:176
 msgid "Alioth"
 msgstr "Аліёт"
 
 #: skycultures/romanian/star_names.fab:125
-#: skycultures/western/star_names.fab:177
+#: skycultures/western/star_names.fab:178
 #: skycultures/western_rey/star_names.fab:14
 msgid "Cor Caroli"
 msgstr "Кор Каролі"
 
 #: skycultures/romanian/star_names.fab:126
-#: skycultures/western/star_names.fab:178
+#: skycultures/western/star_names.fab:179
 msgid "Vindemiatrix"
 msgstr "Віндэміятрыкс"
 
 #: skycultures/romanian/star_names.fab:127
-#: skycultures/western/star_names.fab:180
+#: skycultures/western/star_names.fab:181
 #: skycultures/western_rey/star_names.fab:7
 msgid "Mizar"
 msgstr "Міцар"
 
 #: skycultures/romanian/star_names.fab:128
-#: skycultures/western/star_names.fab:181
+#: skycultures/western/star_names.fab:182
 #: skycultures/western_rey/star_names.fab:40
 msgid "Spica"
 msgstr "Сьпіка"
@@ -6666,59 +7030,59 @@ msgid "The Little Bitch"
 msgstr "Сучка"
 
 #: skycultures/romanian/star_names.fab:130
-#: skycultures/western/star_names.fab:184
+#: skycultures/western/star_names.fab:185
 msgid "Alkaid"
 msgstr "Алькайд"
 
 #: skycultures/romanian/star_names.fab:131
-#: skycultures/western/star_names.fab:185
+#: skycultures/western/star_names.fab:186
 msgid "Muphrid"
 msgstr "Муфрыд"
 
 #: skycultures/romanian/star_names.fab:133
-#: skycultures/western/star_names.fab:187
+#: skycultures/western/star_names.fab:188
 #: skycultures/western_rey/star_names.fab:10
 msgid "Thuban"
 msgstr "Субан"
 
 #: skycultures/romanian/star_names.fab:134
-#: skycultures/western/star_names.fab:188
+#: skycultures/western/star_names.fab:189
 msgid "Menkent"
 msgstr "Мэнкент"
 
 #: skycultures/romanian/star_names.fab:135
-#: skycultures/western/star_names.fab:189
+#: skycultures/western/star_names.fab:190
 #: skycultures/western_rey/star_names.fab:16
 msgid "Arcturus"
 msgstr "Арктур"
 
 #: skycultures/romanian/star_names.fab:136
-#: skycultures/western/star_names.fab:191
+#: skycultures/western/star_names.fab:192
 msgid "Syrma"
 msgstr "Сырма"
 
 #: skycultures/romanian/star_names.fab:137
-#: skycultures/western/star_names.fab:195
+#: skycultures/western/star_names.fab:196
 msgid "Proxima"
 msgstr "Проксіма"
 
 #: skycultures/romanian/star_names.fab:138
-#: skycultures/western/star_names.fab:196
+#: skycultures/western/star_names.fab:197
 msgid "Seginus"
 msgstr "Сэґінус"
 
 #: skycultures/romanian/star_names.fab:139
-#: skycultures/western/star_names.fab:197
+#: skycultures/western/star_names.fab:198
 msgid "Rigil Kent"
 msgstr "Рыґіль Кентаўрус"
 
 #: skycultures/romanian/star_names.fab:140
-#: skycultures/western/star_names.fab:199
+#: skycultures/western/star_names.fab:200
 msgid "Izar"
 msgstr "Ізар"
 
 #: skycultures/romanian/star_names.fab:141
-#: skycultures/western/star_names.fab:200
+#: skycultures/western/star_names.fab:201
 msgid "Merga"
 msgstr "Мэрґа"
 
@@ -6727,58 +7091,58 @@ msgid "Kocab"
 msgstr "Кохаб"
 
 #: skycultures/romanian/star_names.fab:143
-#: skycultures/western/star_names.fab:201
-#: skycultures/western/star_names.fab:203
+#: skycultures/western/star_names.fab:202
+#: skycultures/western/star_names.fab:204
 msgid "Zubenelgenubi"
 msgstr "Зубэн-аль-джэнубі"
 
 #: skycultures/romanian/star_names.fab:144
-#: skycultures/western/star_names.fab:205
+#: skycultures/western/star_names.fab:206
 msgid "Nekkar"
 msgstr "Нэкар"
 
 #: skycultures/romanian/star_names.fab:145
-#: skycultures/western/star_names.fab:209
+#: skycultures/western/star_names.fab:210
 msgid "Zubeneschamali"
 msgstr "Зубэн-аш-шамалі"
 
 #: skycultures/romanian/star_names.fab:146
-#: skycultures/western/star_names.fab:211
+#: skycultures/western/star_names.fab:212
 msgid "Pherkad"
 msgstr "Фэркад"
 
 #: skycultures/romanian/star_names.fab:147
-#: skycultures/western/star_names.fab:212
+#: skycultures/western/star_names.fab:213
 msgid "Alkalurops"
 msgstr "Алькалюропс"
 
 #: skycultures/romanian/star_names.fab:148
-#: skycultures/western/star_names.fab:214
+#: skycultures/western/star_names.fab:215
 msgid "Edasich"
 msgstr "Эдасіх"
 
 #: skycultures/romanian/star_names.fab:149
-#: skycultures/western/star_names.fab:215
+#: skycultures/western/star_names.fab:216
 msgid "Nusakan"
 msgstr "Нусакан"
 
 #: skycultures/romanian/star_names.fab:150
-#: skycultures/western/star_names.fab:216
+#: skycultures/western/star_names.fab:217
 msgid "Alphekka"
 msgstr "Альфэка"
 
 #: skycultures/romanian/star_names.fab:151
-#: skycultures/western/star_names.fab:219
+#: skycultures/western/star_names.fab:220
 msgid "Unukalhai"
 msgstr "Унукальгаі"
 
 #: skycultures/romanian/star_names.fab:152
-#: skycultures/western/star_names.fab:220
+#: skycultures/western/star_names.fab:221
 msgid "Dschubba"
 msgstr "Джуба"
 
 #: skycultures/romanian/star_names.fab:153
-#: skycultures/western/star_names.fab:222
+#: skycultures/western/star_names.fab:223
 msgid "Acrab"
 msgstr "Акраб"
 
@@ -6787,43 +7151,43 @@ msgid "Marsic"
 msgstr "Марсык"
 
 #: skycultures/romanian/star_names.fab:155
-#: skycultures/western/star_names.fab:225
+#: skycultures/western/star_names.fab:226
 msgid "Yed Prior"
 msgstr "Ед Прыёр"
 
 #: skycultures/romanian/star_names.fab:156
-#: skycultures/western/star_names.fab:226
+#: skycultures/western/star_names.fab:227
 msgid "Yed Posterior"
 msgstr "Ед Пастэрыёр"
 
 #: skycultures/romanian/star_names.fab:157
-#: skycultures/western/star_names.fab:227
+#: skycultures/western/star_names.fab:228
 msgid "Al Niyat"
 msgstr "Аль Ніят"
 
 #: skycultures/romanian/star_names.fab:158
-#: skycultures/western/star_names.fab:228
+#: skycultures/western/star_names.fab:229
 msgid "Cujam"
 msgstr "Каям"
 
 #: skycultures/romanian/star_names.fab:159
-#: skycultures/western/star_names.fab:229
+#: skycultures/western/star_names.fab:230
 #: skycultures/western_rey/star_names.fab:42
 msgid "Antares"
 msgstr "Антарэс"
 
 #: skycultures/romanian/star_names.fab:160
-#: skycultures/western/star_names.fab:230
+#: skycultures/western/star_names.fab:231
 msgid "Kornephoros"
 msgstr "Карнэфарос"
 
 #: skycultures/romanian/star_names.fab:161
-#: skycultures/western/star_names.fab:231
+#: skycultures/western/star_names.fab:232
 msgid "Marfik"
 msgstr "Марфік"
 
 #: skycultures/romanian/star_names.fab:162
-#: skycultures/western/star_names.fab:234
+#: skycultures/western/star_names.fab:235
 msgid "Atria"
 msgstr "Атрыя"
 
@@ -6832,87 +7196,86 @@ msgid "Alrakis"
 msgstr "Альракіс"
 
 #: skycultures/romanian/star_names.fab:164
-#: skycultures/western/star_names.fab:238
+#: skycultures/western/star_names.fab:239
 msgid "Sabik"
 msgstr "Сабік"
 
 #: skycultures/romanian/star_names.fab:165
-#: skycultures/western/star_names.fab:239
+#: skycultures/western/star_names.fab:240
 msgid "Rasalgethi"
 msgstr "Расальґесі"
 
 #: skycultures/romanian/star_names.fab:166
-#: skycultures/western/star_names.fab:241
+#: skycultures/western/star_names.fab:242
 msgid "Rastaban"
 msgstr "Растабан"
 
 #: skycultures/romanian/star_names.fab:167
-#: skycultures/western/star_names.fab:242
+#: skycultures/western/star_names.fab:243
 msgid "Maasym"
 msgstr "Маасым"
 
 #: skycultures/romanian/star_names.fab:168
-#: skycultures/western/star_names.fab:243
+#: skycultures/western/star_names.fab:244
 msgid "Lesath"
 msgstr "Лесас"
 
 #: skycultures/romanian/star_names.fab:169
-#: skycultures/western/star_names.fab:245
+#: skycultures/western/star_names.fab:246
 msgid "Yildun"
 msgstr "Ільдун"
 
 #: skycultures/romanian/star_names.fab:170
-#: skycultures/western/star_names.fab:246
+#: skycultures/western/star_names.fab:247
 msgid "Shaula"
 msgstr "Шаўла"
 
 #: skycultures/romanian/star_names.fab:171
-#: skycultures/western/star_names.fab:247
+#: skycultures/western/star_names.fab:248
 msgid "Rasalhague"
 msgstr "Рас Альгаґ"
 
 #: skycultures/romanian/star_names.fab:172
-#: skycultures/western/star_names.fab:248
 msgid "Girtab"
 msgstr "Ґіртаб"
 
 #: skycultures/romanian/star_names.fab:173
-#: skycultures/western/star_names.fab:250
+#: skycultures/western/star_names.fab:251
 msgid "Cebalrai"
 msgstr "Кебальраі"
 
 #: skycultures/romanian/star_names.fab:174
-#: skycultures/western/star_names.fab:251
+#: skycultures/western/star_names.fab:252
 msgid "Grumium"
 msgstr "Ґруміюм"
 
 #: skycultures/romanian/star_names.fab:175
-#: skycultures/western/star_names.fab:252
+#: skycultures/western/star_names.fab:253
 msgid "Etamin"
 msgstr "Этамін"
 
 #: skycultures/romanian/star_names.fab:176
-#: skycultures/western/star_names.fab:253
+#: skycultures/western/star_names.fab:254
 msgid "Barnard's Star"
 msgstr "Зорка Барнарда"
 
 #: skycultures/romanian/star_names.fab:177
-#: skycultures/western/star_names.fab:256
+#: skycultures/western/star_names.fab:257
 msgid "Alnasl"
 msgstr "Альнасл"
 
 #: skycultures/romanian/star_names.fab:178
-#: skycultures/western/star_names.fab:258
+#: skycultures/western/star_names.fab:259
 msgid "Kaus Media"
 msgstr "Каўс Мэдыя"
 
 #: skycultures/romanian/star_names.fab:179
-#: skycultures/western/star_names.fab:259
+#: skycultures/western/star_names.fab:260
 msgid "Kaus Australis"
 msgstr "Каўс Аўстраліс"
 
 #: skycultures/romanian/star_names.fab:180
-#: skycultures/western/star_names.fab:261
+#: skycultures/western/star_names.fab:262
 msgid "Kaus Borealis"
 msgstr "Каўс Барэаліс"
 
@@ -6921,246 +7284,246 @@ msgid "The Shepherd (The Stars Queen)"
 msgstr "Пастух (Каралева зорак)"
 
 #: skycultures/romanian/star_names.fab:182
-#: skycultures/western/star_names.fab:263
+#: skycultures/western/star_names.fab:264
 msgid "Sheliak"
 msgstr "Шэліяк"
 
 #: skycultures/romanian/star_names.fab:183
-#: skycultures/western/star_names.fab:264
+#: skycultures/western/star_names.fab:265
 msgid "Nunki"
 msgstr "Нункі"
 
 #: skycultures/romanian/star_names.fab:184
-#: skycultures/western/star_names.fab:265
+#: skycultures/western/star_names.fab:266
 msgid "Alya"
 msgstr "Алья"
 
 #: skycultures/romanian/star_names.fab:185
-#: skycultures/western/star_names.fab:266
+#: skycultures/western/star_names.fab:267
 msgid "Sulafat"
 msgstr "Суляфат"
 
 #: skycultures/romanian/star_names.fab:186
-#: skycultures/western/star_names.fab:267
+#: skycultures/western/star_names.fab:268
 msgid "Ascella"
 msgstr "Асцэла"
 
 #: skycultures/romanian/star_names.fab:187
-#: skycultures/western/star_names.fab:273
+#: skycultures/western/star_names.fab:274
 msgid "Altais"
 msgstr "Альтаіс"
 
 #: skycultures/romanian/star_names.fab:188
-#: skycultures/western/star_names.fab:274
+#: skycultures/western/star_names.fab:275
 msgid "Arkab"
 msgstr "Аркаб"
 
 #: skycultures/romanian/star_names.fab:189
-#: skycultures/western/star_names.fab:275
+#: skycultures/western/star_names.fab:276
 msgid "Rukbat"
 msgstr "Рукбат"
 
 #: skycultures/romanian/star_names.fab:190
-#: skycultures/western/star_names.fab:278
+#: skycultures/western/star_names.fab:279
 #: skycultures/western_rey/star_names.fab:19
 msgid "Albireo"
 msgstr "Альбірэо"
 
 #: skycultures/romanian/star_names.fab:191
-#: skycultures/western/star_names.fab:280
+#: skycultures/western/star_names.fab:281
 msgid "Campbell's Star"
 msgstr "Зорка Кэмпбэла"
 
 #: skycultures/romanian/star_names.fab:192
-#: skycultures/western/star_names.fab:282
+#: skycultures/western/star_names.fab:283
 msgid "Sham"
 msgstr "Шам"
 
 #: skycultures/romanian/star_names.fab:193
-#: skycultures/western/star_names.fab:284
+#: skycultures/western/star_names.fab:285
 msgid "Tarazed"
 msgstr "Таразэд"
 
 #: skycultures/romanian/star_names.fab:194
-#: skycultures/western/star_names.fab:286
+#: skycultures/western/star_names.fab:287
 #: skycultures/western_rey/star_names.fab:44
 msgid "Altair"
 msgstr "Альтаір"
 
 #: skycultures/romanian/star_names.fab:195
-#: skycultures/western/star_names.fab:287
+#: skycultures/western/star_names.fab:288
 msgid "Alshain"
 msgstr "Альшаін"
 
 #: skycultures/romanian/star_names.fab:196
-#: skycultures/western/star_names.fab:292
+#: skycultures/western/star_names.fab:293
 msgid "Algedi"
 msgstr "Альджэдзі"
 
 #: skycultures/romanian/star_names.fab:197
-#: skycultures/western/star_names.fab:294
+#: skycultures/western/star_names.fab:295
 msgid "Dabih"
 msgstr "Дабіг"
 
 #: skycultures/romanian/star_names.fab:198
-#: skycultures/western/star_names.fab:295
+#: skycultures/western/star_names.fab:296
 msgid "Sadr"
 msgstr "Садр"
 
 #: skycultures/romanian/star_names.fab:199
-#: skycultures/western/star_names.fab:296
+#: skycultures/western/star_names.fab:297
 msgid "Peacock"
 msgstr "Пікак"
 
 #: skycultures/romanian/star_names.fab:200
-#: skycultures/western/star_names.fab:299
+#: skycultures/western/star_names.fab:300
 msgid "Rotanev"
 msgstr "Рутанеў"
 
 #: skycultures/romanian/star_names.fab:201
-#: skycultures/western/star_names.fab:300
+#: skycultures/western/star_names.fab:301
 msgid "Sualocin"
 msgstr "Суаляцын"
 
 #: skycultures/romanian/star_names.fab:202
-#: skycultures/western/star_names.fab:301
+#: skycultures/western/star_names.fab:302
 #: skycultures/western_rey/star_names.fab:20
 msgid "Deneb"
 msgstr "Дэнэб"
 
 #: skycultures/romanian/star_names.fab:204
-#: skycultures/western/star_names.fab:303
+#: skycultures/western/star_names.fab:304
 msgid "Albali"
 msgstr "Альбалі"
 
 #: skycultures/romanian/star_names.fab:205
-#: skycultures/western/star_names.fab:307
+#: skycultures/western/star_names.fab:308
 msgid "Kitalpha"
 msgstr "Кітальфа"
 
 #: skycultures/romanian/star_names.fab:206
-#: skycultures/western/star_names.fab:308
+#: skycultures/western/star_names.fab:309
 msgid "Alderamin"
 msgstr "Альдэрамін"
 
 #: skycultures/romanian/star_names.fab:207
-#: skycultures/western/star_names.fab:309
+#: skycultures/western/star_names.fab:310
 msgid "Alfirk"
 msgstr "Альфірк"
 
 #: skycultures/romanian/star_names.fab:208
-#: skycultures/western/star_names.fab:310
+#: skycultures/western/star_names.fab:311
 msgid "Sadalsuud"
 msgstr "Садальсуд"
 
 #: skycultures/romanian/star_names.fab:209
-#: skycultures/western/star_names.fab:312
+#: skycultures/western/star_names.fab:313
 msgid "Nashira"
 msgstr "Нашыра"
 
 #: skycultures/romanian/star_names.fab:210
-#: skycultures/western/star_names.fab:313
+#: skycultures/western/star_names.fab:314
 msgid "Azelfafage"
 msgstr "Азэльфафаґе"
 
 #: skycultures/romanian/star_names.fab:211
-#: skycultures/western/star_names.fab:314
+#: skycultures/western/star_names.fab:315
 msgid "The Garnet Star"
 msgstr "Ґранатавая зорка"
 
 #: skycultures/romanian/star_names.fab:212
-#: skycultures/western/star_names.fab:315
+#: skycultures/western/star_names.fab:316
 msgid "Enif"
 msgstr "Эніф"
 
 #: skycultures/romanian/star_names.fab:213
-#: skycultures/western/star_names.fab:318
+#: skycultures/western/star_names.fab:319
 msgid "Deneb Algedi"
 msgstr "Дэнэб Альджэдзі"
 
 #: skycultures/romanian/star_names.fab:214
-#: skycultures/western/star_names.fab:320
+#: skycultures/western/star_names.fab:321
 msgid "Kurhah"
 msgstr "Кургаг"
 
 #: skycultures/romanian/star_names.fab:215
-#: skycultures/western/star_names.fab:321
+#: skycultures/western/star_names.fab:322
 msgid "Sadalmelik"
 msgstr "Садальмэлік"
 
 #: skycultures/romanian/star_names.fab:216
-#: skycultures/western/star_names.fab:322
+#: skycultures/western/star_names.fab:323
 msgid "Alnair"
 msgstr "Альнаір"
 
 #: skycultures/romanian/star_names.fab:217
-#: skycultures/western/star_names.fab:323
+#: skycultures/western/star_names.fab:324
 msgid "Biham"
 msgstr "Бігам"
 
 #: skycultures/romanian/star_names.fab:218
-#: skycultures/western/star_names.fab:324
+#: skycultures/western/star_names.fab:325
 msgid "Ancha"
 msgstr "Анха"
 
 #: skycultures/romanian/star_names.fab:219
-#: skycultures/western/star_names.fab:325
+#: skycultures/western/star_names.fab:326
 msgid "Sadachbia"
 msgstr "Садахбія"
 
 #: skycultures/romanian/star_names.fab:220
-#: skycultures/western/star_names.fab:326
+#: skycultures/western/star_names.fab:327
 msgid "Kruger 60"
 msgstr "Круґер 60"
 
 #: skycultures/romanian/star_names.fab:221
-#: skycultures/western/star_names.fab:328
+#: skycultures/western/star_names.fab:330
 msgid "Situla"
 msgstr "Сітула"
 
 #: skycultures/romanian/star_names.fab:222
-#: skycultures/western/star_names.fab:329
+#: skycultures/western/star_names.fab:331
 msgid "Homan"
 msgstr "Гомам"
 
 #: skycultures/romanian/star_names.fab:223
-#: skycultures/western/star_names.fab:330
+#: skycultures/western/star_names.fab:332
 msgid "Matar"
 msgstr "Матар"
 
 #: skycultures/romanian/star_names.fab:224
-#: skycultures/western/star_names.fab:331
+#: skycultures/western/star_names.fab:333
 msgid "Babcock's Star"
 msgstr "Зорка Бэбкапа"
 
 #: skycultures/romanian/star_names.fab:225
-#: skycultures/western/star_names.fab:332
+#: skycultures/western/star_names.fab:334
 msgid "Sadalbari"
 msgstr "Садальбары"
 
 #: skycultures/romanian/star_names.fab:226
-#: skycultures/western/star_names.fab:333
+#: skycultures/western/star_names.fab:335
 msgid "Skat"
 msgstr "Скат"
 
 #: skycultures/romanian/star_names.fab:227
-#: skycultures/western/star_names.fab:334
+#: skycultures/western/star_names.fab:336
 #: skycultures/western_rey/star_names.fab:46
 msgid "Fomalhaut"
 msgstr "Фамальгаўт"
 
 #: skycultures/romanian/star_names.fab:228
-#: skycultures/western/star_names.fab:335
+#: skycultures/western/star_names.fab:337
 msgid "Scheat"
 msgstr "Шэат"
 
 #: skycultures/romanian/star_names.fab:229
-#: skycultures/western/star_names.fab:337
+#: skycultures/western/star_names.fab:339
 msgid "Markab"
 msgstr "Маркаб"
 
 #: skycultures/romanian/star_names.fab:230
-#: skycultures/western/star_names.fab:338
+#: skycultures/western/star_names.fab:340
 msgid "Errai"
 msgstr "Эраі"
 
@@ -7308,6 +7671,50 @@ msgstr "Тапукітэа"
 #: skycultures/tongan/planet_names.fab:8
 msgid "Matamemea"
 msgstr "Матамэмэа"
+
+#: skycultures/tukano/constellation_names.eng.fab:1
+msgid "Fer-de-lance (snake)"
+msgstr "Фэр-дэ-ланс (зьмяя)"
+
+#: skycultures/tukano/constellation_names.eng.fab:2
+msgid "Armadillo"
+msgstr "Армадыла"
+
+#: skycultures/tukano/constellation_names.eng.fab:3
+msgid "Caridean Shrimp"
+msgstr "Карыбская крэвэтка"
+
+#: skycultures/tukano/constellation_names.eng.fab:4
+msgid "A kind of fish"
+msgstr "Нейкая рыбіна"
+
+#: skycultures/tukano/constellation_names.eng.fab:5
+msgid "Puma or Jaguar"
+msgstr "Пума ці яґуар"
+
+#: skycultures/tukano/constellation_names.eng.fab:6
+msgid "Group of Stars"
+msgstr "Ґрупа зорак"
+
+#: skycultures/tukano/constellation_names.eng.fab:7
+msgid "A kind of grill to cook fish"
+msgstr "Нейкі ґрыль смажыць рыбу"
+
+#: skycultures/tukano/constellation_names.eng.fab:8
+msgid "Adze Handle"
+msgstr "Ручка Адзэ"
+
+#: skycultures/tukano/constellation_names.eng.fab:9
+msgid "Egret"
+msgstr "Белая чапля"
+
+#: skycultures/tukano/constellation_names.eng.fab:10
+msgid "Tortoise"
+msgstr "Чарапаха"
+
+#: skycultures/tukano/constellation_names.eng.fab:11
+msgid "Snake Large Anus"
+msgstr "Вялікі анус зьмяі"
 
 #: skycultures/tupi/constellation_names.eng.fab:1
 msgid "White Ostrich"
@@ -7778,485 +8185,492 @@ msgid "Deneb Kaitos Shemali"
 msgstr "Дэнэб Кайтас Шэмалі"
 
 #: skycultures/western/star_names.fab:8
+msgid "Achird"
+msgstr "Ачырд"
+
+#: skycultures/western/star_names.fab:9
 msgid "van Maanen 2"
 msgstr "Ван Маанэн 2"
 
-#: skycultures/western/star_names.fab:9
+#: skycultures/western/star_names.fab:10
 msgid "Navi"
 msgstr "Наві"
 
-#: skycultures/western/star_names.fab:10
+#: skycultures/western/star_names.fab:11
 msgid "Deneb Algenubi"
 msgstr "Дэнэб Альджэнубі"
 
-#: skycultures/western/star_names.fab:12
+#: skycultures/western/star_names.fab:13
 msgid "Marfark"
 msgstr "Марфарк"
 
-#: skycultures/western/star_names.fab:15
+#: skycultures/western/star_names.fab:16
 msgid "Kullat Nunu"
 msgstr "Кулат Нуну"
 
-#: skycultures/western/star_names.fab:17
+#: skycultures/western/star_names.fab:18
 msgid "Nembus"
 msgstr "Нэмбус"
 
-#: skycultures/western/star_names.fab:18
+#: skycultures/western/star_names.fab:19
 msgid "Torcularis Septentrionalis"
-msgstr ""
+msgstr "Таркулярыс сэптэнтрыяналіс"
 
-#: skycultures/western/star_names.fab:23
+#: skycultures/western/star_names.fab:24
 msgid "Alrischa"
 msgstr "Альрыша"
 
-#: skycultures/western/star_names.fab:27
+#: skycultures/western/star_names.fab:28
 msgid "Polaris"
 msgstr "Палярная"
 
-#: skycultures/western/star_names.fab:28
+#: skycultures/western/star_names.fab:29
 msgid "Kaffaljidhma"
 msgstr "Кафальджыдма"
 
-#: skycultures/western/star_names.fab:29
+#: skycultures/western/star_names.fab:30
 msgid "Miram"
 msgstr "Мірам"
 
-#: skycultures/western/star_names.fab:30
+#: skycultures/western/star_names.fab:31
 msgid "Angetenar"
 msgstr "Анджэтэнар"
 
-#: skycultures/western/star_names.fab:33
+#: skycultures/western/star_names.fab:34
 msgid "Gorgonea Secunda"
 msgstr "Ґарґанэа Сэкунда"
 
-#: skycultures/western/star_names.fab:35
+#: skycultures/western/star_names.fab:36
 msgid "Gorgonea Tertia"
 msgstr "Ґарґанэа Тэртыя"
 
-#: skycultures/western/star_names.fab:37
+#: skycultures/western/star_names.fab:38
 msgid "Misam"
 msgstr "Місам"
 
-#: skycultures/western/star_names.fab:38
+#: skycultures/western/star_names.fab:39
 msgid "Gorgonea Quarta"
 msgstr "Ґарґанэа Кварта"
 
-#: skycultures/western/star_names.fab:42
+#: skycultures/western/star_names.fab:43
 msgid "Rana"
 msgstr "Рана"
 
-#: skycultures/western/star_names.fab:57
+#: skycultures/western/star_names.fab:58
 msgid "Hyadum I"
 msgstr "Гіядум I"
 
-#: skycultures/western/star_names.fab:58
+#: skycultures/western/star_names.fab:59
 msgid "Hyadum II"
 msgstr "Гіядум II"
 
-#: skycultures/western/star_names.fab:59
+#: skycultures/western/star_names.fab:60
 msgid "Cleeia"
 msgstr "Клеэя"
 
-#: skycultures/western/star_names.fab:61
+#: skycultures/western/star_names.fab:62
 msgid "Theemim"
 msgstr "Тээмім"
 
-#: skycultures/western/star_names.fab:62
+#: skycultures/western/star_names.fab:63
 #: skycultures/western_rey/star_names.fab:27
 msgid "Aldebaran"
 msgstr "Альдэбаран"
 
-#: skycultures/western/star_names.fab:63
+#: skycultures/western/star_names.fab:64
 msgid "Sceptrum"
 msgstr "Сцэптрум"
 
-#: skycultures/western/star_names.fab:64
+#: skycultures/western/star_names.fab:65
 msgid "Tabit"
 msgstr "Табіт"
 
-#: skycultures/western/star_names.fab:65
+#: skycultures/western/star_names.fab:66
 msgid "Hassaleh"
 msgstr "Гасале"
 
-#: skycultures/western/star_names.fab:66
+#: skycultures/western/star_names.fab:67
 msgid "Hind's Crimson Star"
 msgstr "Пурпуровая зорка Гайнда"
 
-#: skycultures/western/star_names.fab:67
+#: skycultures/western/star_names.fab:68
 msgid "Almaaz"
 msgstr "Альмааз"
 
-#: skycultures/western/star_names.fab:68
+#: skycultures/western/star_names.fab:69
 msgid "Haedus"
 msgstr "Гэдус"
 
-#: skycultures/western/star_names.fab:69
+#: skycultures/western/star_names.fab:70
 msgid "Hoedus II"
 msgstr "Гаэдус II"
 
-#: skycultures/western/star_names.fab:77
+#: skycultures/western/star_names.fab:78
 msgid "Thabit"
 msgstr "Табіт"
 
-#: skycultures/western/star_names.fab:79
+#: skycultures/western/star_names.fab:80
 msgid "Ruby Star"
 msgstr "Рубінавая зорка"
 
-#: skycultures/western/star_names.fab:82
+#: skycultures/western/star_names.fab:83
 msgid "Hatsya"
 msgstr "Хатсія"
 
-#: skycultures/western/star_names.fab:91
+#: skycultures/western/star_names.fab:92
 msgid "Al Kurud"
 msgstr "Аль Куруд"
 
-#: skycultures/western/star_names.fab:92
+#: skycultures/western/star_names.fab:93
 msgid "Tejat Prior"
 msgstr "Тэят прыёр"
 
-#: skycultures/western/star_names.fab:96
+#: skycultures/western/star_names.fab:97
 msgid "Tejat Posterior"
 msgstr "Тэят пастэрыёр"
 
-#: skycultures/western/star_names.fab:98
+#: skycultures/western/star_names.fab:99
 msgid "Plaskett's star"
 msgstr "Зорка Пласкета"
 
-#: skycultures/western/star_names.fab:101
-#: skycultures/western_rey/star_names.fab:36
-msgid "Sirius"
-msgstr "Сырыюс"
-
-#: skycultures/western/star_names.fab:102
+#: skycultures/western/star_names.fab:103
 msgid "Alzirr"
 msgstr "Альзыр"
 
-#: skycultures/western/star_names.fab:107
+#: skycultures/western/star_names.fab:108
 msgid "Tureis"
 msgstr "Турэйс"
 
-#: skycultures/western/star_names.fab:113
+#: skycultures/western/star_names.fab:114
 #: skycultures/western_rey/star_names.fab:29
 msgid "Castor"
 msgstr "Кастор"
 
-#: skycultures/western/star_names.fab:114
+#: skycultures/western/star_names.fab:115
 msgid "Markeb"
 msgstr "Маркеб"
 
-#: skycultures/western/star_names.fab:116
+#: skycultures/western/star_names.fab:117
 #: skycultures/western_rey/star_names.fab:30
 msgid "Pollux"
 msgstr "Палукс"
 
-#: skycultures/western/star_names.fab:117
+#: skycultures/western/star_names.fab:118
 msgid "Asmidiske"
 msgstr "Асмідыске"
 
-#: skycultures/western/star_names.fab:121
+#: skycultures/western/star_names.fab:122
 msgid "Tarf"
 msgstr "Тарф"
 
-#: skycultures/western/star_names.fab:123
+#: skycultures/western/star_names.fab:124
 msgid "Alsciaukat"
 msgstr "Альшаўкат"
 
-#: skycultures/western/star_names.fab:125
+#: skycultures/western/star_names.fab:126
 msgid "Minchir"
 msgstr "Мінхір"
 
-#: skycultures/western/star_names.fab:128
+#: skycultures/western/star_names.fab:129
 msgid "Hydrobius"
 msgstr "Гідробіюс"
 
-#: skycultures/western/star_names.fab:137
+#: skycultures/western/star_names.fab:138
 msgid "Algenubi"
 msgstr "Альджэнубі"
 
-#: skycultures/western/star_names.fab:139
+#: skycultures/western/star_names.fab:140
 msgid "Tseen Ke"
 msgstr "Цээн Ке"
 
-#: skycultures/western/star_names.fab:141
+#: skycultures/western/star_names.fab:142
 msgid "Al'dzhabkhakh"
-msgstr ""
+msgstr "Альджабхах"
 
-#: skycultures/western/star_names.fab:146
+#: skycultures/western/star_names.fab:147
 msgid "Praecipua"
 msgstr "Прэцыпуа"
 
-#: skycultures/western/star_names.fab:152
+#: skycultures/western/star_names.fab:153
 msgid "Innes' Star"
 msgstr "Зорка Іннэсы"
 
-#: skycultures/western/star_names.fab:155
+#: skycultures/western/star_names.fab:156
 msgid "Labr"
 msgstr "Лабр"
 
-#: skycultures/western/star_names.fab:157
+#: skycultures/western/star_names.fab:158
 msgid "Przybylski's Star"
 msgstr "Зорка Пшыбыльскага"
 
-#: skycultures/western/star_names.fab:158
+#: skycultures/western/star_names.fab:159
 msgid "Alkaphrah"
-msgstr ""
+msgstr "Алькафра"
 
-#: skycultures/western/star_names.fab:163
+#: skycultures/western/star_names.fab:164
 msgid "Minkar"
 msgstr "Мінкар"
 
-#: skycultures/western/star_names.fab:171
+#: skycultures/western/star_names.fab:172
 msgid "Kraz"
 msgstr "Краз"
 
-#: skycultures/western/star_names.fab:173
+#: skycultures/western/star_names.fab:174
 msgid "La Superba"
 msgstr "Ля Супэрба"
 
-#: skycultures/western/star_names.fab:176
+#: skycultures/western/star_names.fab:177
 msgid "Auva"
 msgstr "Аува"
 
-#: skycultures/western/star_names.fab:179
+#: skycultures/western/star_names.fab:180
 msgid "Diadem"
 msgstr "Дыядэм"
 
-#: skycultures/western/star_names.fab:182
+#: skycultures/western/star_names.fab:183
 #: skycultures/western_rey/star_names.fab:8
 msgid "Alcor"
 msgstr "Алькор"
 
-#: skycultures/western/star_names.fab:183
+#: skycultures/western/star_names.fab:184
 msgid "Heze"
 msgstr "Гезэ"
 
-#: skycultures/western/star_names.fab:190
+#: skycultures/western/star_names.fab:191
 msgid "Asellus Tertius"
 msgstr "Асэлюс Тэртыюс"
 
-#: skycultures/western/star_names.fab:192
+#: skycultures/western/star_names.fab:193
 msgid "Asellus Secundus"
 msgstr "Асэлюс Сэкундус"
 
-#: skycultures/western/star_names.fab:193
-msgid "Kkhambaliya"
-msgstr ""
-
 #: skycultures/western/star_names.fab:194
+msgid "Kkhambaliya"
+msgstr "Кхамбалія"
+
+#: skycultures/western/star_names.fab:195
 msgid "Asellus Primus"
 msgstr "Асэлюс Прымус"
 
-#: skycultures/western/star_names.fab:198
+#: skycultures/western/star_names.fab:199
 msgid "Rijl al Awwa"
 msgstr "Рыджль аль Аўа"
 
-#: skycultures/western/star_names.fab:202
+#: skycultures/western/star_names.fab:203
 #: skycultures/western_rey/star_names.fab:6
 msgid "Kochab"
 msgstr "Кахаб"
 
-#: skycultures/western/star_names.fab:204
+#: skycultures/western/star_names.fab:205
 msgid "Zuben Elakribi"
 msgstr "Зубэн Элакрыбі"
 
-#: skycultures/western/star_names.fab:206
+#: skycultures/western/star_names.fab:207
 msgid "Brachium"
 msgstr "Брахіюм"
 
-#: skycultures/western/star_names.fab:207
+#: skycultures/western/star_names.fab:208
 msgid "Zuben Hakrabi"
 msgstr "Зубэн Гакрабі"
 
-#: skycultures/western/star_names.fab:208
+#: skycultures/western/star_names.fab:209
 msgid "Printseps"
-msgstr ""
+msgstr "Прынцэпс"
 
-#: skycultures/western/star_names.fab:210
+#: skycultures/western/star_names.fab:211
 msgid "Pherkad Minor"
 msgstr "Фэркад Мінор"
 
-#: skycultures/western/star_names.fab:213
+#: skycultures/western/star_names.fab:214
 msgid "Inkalunis"
 msgstr "Інкалюніс"
 
-#: skycultures/western/star_names.fab:217
+#: skycultures/western/star_names.fab:218
 msgid "Zuben Elakrab"
 msgstr "Зубэн Эльфкраб"
 
-#: skycultures/western/star_names.fab:218
+#: skycultures/western/star_names.fab:219
 msgid "Ceginus"
 msgstr "Цэґінус"
 
-#: skycultures/western/star_names.fab:221
+#: skycultures/western/star_names.fab:222
 msgid "Graffias"
 msgstr "Ґрафіяс"
 
-#: skycultures/western/star_names.fab:223
+#: skycultures/western/star_names.fab:224
 msgid "Marsik"
 msgstr "Марсік"
 
-#: skycultures/western/star_names.fab:224
+#: skycultures/western/star_names.fab:225
 msgid "Jabbah"
 msgstr "Джаба"
 
-#: skycultures/western/star_names.fab:232
+#: skycultures/western/star_names.fab:233
 msgid "Alniyat"
 msgstr "Альніят"
 
-#: skycultures/western/star_names.fab:233
+#: skycultures/western/star_names.fab:234
 msgid "Han"
 msgstr "Ган"
 
-#: skycultures/western/star_names.fab:235
+#: skycultures/western/star_names.fab:236
 msgid "Grafias"
 msgstr "Ґрафіяс"
 
-#: skycultures/western/star_names.fab:236
+#: skycultures/western/star_names.fab:237
 msgid "Arrakis"
 msgstr "Аракіс"
 
-#: skycultures/western/star_names.fab:237
+#: skycultures/western/star_names.fab:238
 msgid "Aldhibah"
 msgstr "Альдыба"
 
-#: skycultures/western/star_names.fab:240
+#: skycultures/western/star_names.fab:241
 msgid "Sarin"
 msgstr "Сарын"
 
-#: skycultures/western/star_names.fab:244
+#: skycultures/western/star_names.fab:245
 msgid "Kuma"
 msgstr "Кума"
 
 #: skycultures/western/star_names.fab:249
+msgid "Sargas"
+msgstr "Сарґас"
+
+#: skycultures/western/star_names.fab:250
 msgid "Dziban"
 msgstr "Дзібан"
 
-#: skycultures/western/star_names.fab:254
+#: skycultures/western/star_names.fab:255
 msgid "Sinistra"
 msgstr "Сіністра"
 
-#: skycultures/western/star_names.fab:255
+#: skycultures/western/star_names.fab:256
 msgid "Nash"
 msgstr "Наш"
 
-#: skycultures/western/star_names.fab:257
+#: skycultures/western/star_names.fab:258
 msgid "Polis"
 msgstr "Поліс"
 
-#: skycultures/western/star_names.fab:260
+#: skycultures/western/star_names.fab:261
 msgid "Alathfar"
 msgstr "Аладфар"
 
-#: skycultures/western/star_names.fab:262
+#: skycultures/western/star_names.fab:263
 #: skycultures/western_rey/star_names.fab:21
 msgid "Vega"
 msgstr "Вэга"
 
-#: skycultures/western/star_names.fab:268
+#: skycultures/western/star_names.fab:269
 msgid "Manubrij"
 msgstr "Манубрый"
 
-#: skycultures/western/star_names.fab:269
+#: skycultures/western/star_names.fab:270
 msgid "Deneb el Okab"
 msgstr "Дэнэб эль Акаб"
 
-#: skycultures/western/star_names.fab:270
+#: skycultures/western/star_names.fab:271
 msgid "Al Thalimain Prior"
 msgstr "Аль Таліман Прыёр"
 
-#: skycultures/western/star_names.fab:271
+#: skycultures/western/star_names.fab:272
 msgid "Alphekka Meridiana"
 msgstr "Альфэка Мэрыдыяна"
 
-#: skycultures/western/star_names.fab:272
+#: skycultures/western/star_names.fab:273
 msgid "Albaldah"
 msgstr "Альбада"
 
-#: skycultures/western/star_names.fab:276
+#: skycultures/western/star_names.fab:277
 msgid "Deneb Okab"
 msgstr "Дэнэб Акаб"
 
-#: skycultures/western/star_names.fab:277
+#: skycultures/western/star_names.fab:278
 msgid "Lukida"
 msgstr "Лукіда"
 
-#: skycultures/western/star_names.fab:279
+#: skycultures/western/star_names.fab:280
 msgid "Alsafi"
 msgstr "Альсафі"
 
-#: skycultures/western/star_names.fab:281
+#: skycultures/western/star_names.fab:282
 msgid "Al Thalimain"
 msgstr "Аль Таліман"
 
-#: skycultures/western/star_names.fab:283
+#: skycultures/western/star_names.fab:284
 msgid "Rukh"
 msgstr "Рукх"
 
-#: skycultures/western/star_names.fab:285
+#: skycultures/western/star_names.fab:286
 msgid "Tyl"
 msgstr "Тыль"
 
-#: skycultures/western/star_names.fab:288
+#: skycultures/western/star_names.fab:289
 msgid "Terebellum I"
 msgstr "Тэрэбэлюм I"
 
-#: skycultures/western/star_names.fab:289
+#: skycultures/western/star_names.fab:290
 msgid "Terebellum II"
 msgstr "Тэрэбэлюм II"
 
-#: skycultures/western/star_names.fab:290
+#: skycultures/western/star_names.fab:291
 msgid "Terebellum III"
 msgstr "Тэрэбэлюм III"
 
-#: skycultures/western/star_names.fab:291
+#: skycultures/western/star_names.fab:292
 msgid "Terebellum IV"
 msgstr "Тэрэбэлюм IV"
 
-#: skycultures/western/star_names.fab:293
+#: skycultures/western/star_names.fab:294
 msgid "Alshat"
 msgstr "Альшат"
 
-#: skycultures/western/star_names.fab:297
+#: skycultures/western/star_names.fab:298
 msgid "Okul"
 msgstr "Окул"
 
-#: skycultures/western/star_names.fab:298
+#: skycultures/western/star_names.fab:299
 msgid "Deneb Dulfim"
 msgstr "Дэнэб Дульфім"
 
-#: skycultures/western/star_names.fab:304
-msgid "Arm"
-msgstr "Рука"
-
 #: skycultures/western/star_names.fab:305
+msgid "Armus"
+msgstr "Армус"
+
+#: skycultures/western/star_names.fab:306
 msgid "Bessel's Star"
 msgstr "Зорка Бэссэля"
 
-#: skycultures/western/star_names.fab:306
+#: skycultures/western/star_names.fab:307
 msgid "Polaris Australis"
 msgstr "Палярыс Аўстраліс (Паўднёвая палярная)"
 
-#: skycultures/western/star_names.fab:311
+#: skycultures/western/star_names.fab:312
 msgid "Castra"
 msgstr "Кастра"
 
-#: skycultures/western/star_names.fab:316
+#: skycultures/western/star_names.fab:317
 msgid "Jih"
 msgstr "Джы"
 
-#: skycultures/western/star_names.fab:317
+#: skycultures/western/star_names.fab:318
 msgid "Pennae Caudalis"
 msgstr "Пэна Каўдаліс"
 
-#: skycultures/western/star_names.fab:319
+#: skycultures/western/star_names.fab:320
 msgid "Al Dhanab"
 msgstr "Аль Дханаб"
 
-#: skycultures/western/star_names.fab:327
+#: skycultures/western/star_names.fab:328
+msgid "Sadaltager"
+msgstr "Садальтаґер"
+
+#: skycultures/western/star_names.fab:329
 msgid "Al Kalb al Rai"
 msgstr "Аль Кальб аль Раі"
 
-#: skycultures/western/star_names.fab:336
+#: skycultures/western/star_names.fab:338
 msgid "Fum al Samakah"
 msgstr "Фум аль Самака"
 
@@ -8348,7 +8762,7 @@ msgstr "выцягнутая шыя"
 #: skycultures/western_rey/constellation_names.eng.fab:44
 #: skycultures/western_rey/constellation_names.eng.fab:76
 msgid "club"
-msgstr ""
+msgstr "дубіна"
 
 #: skycultures/western_rey/constellation_names.eng.fab:45
 msgid "Keystone"
@@ -8443,11 +8857,11 @@ msgstr "Фальшывы крыж"
 
 #: skycultures/western_rey/constellation_names.eng.fab:148
 msgid "figurehead"
-msgstr ""
+msgstr "упрыгажэньне на носе"
 
 #: skycultures/western_rey/constellation_names.eng.fab:150
 msgid "transom"
-msgstr ""
+msgstr "транец"
 
 #: skycultures/western_rey/constellation_names.eng.fab:167
 msgid "ears"
@@ -8499,11 +8913,32 @@ msgstr "Бэта Цэнтаўра"
 #~ msgid "Bear Paw galaxy"
 #~ msgstr "Ґаляктыка «Лапа мядзьведзя»"
 
+#~ msgid "Black-eye galaxy"
+#~ msgstr "Ґаляктыка «Чорнае вока»"
+
+#~ msgid "Christmas Tree cluster"
+#~ msgstr "Скопішча «Калядная ёлка»"
+
 #~ msgid "Great Nebula in Andromeda"
 #~ msgstr "Вялікая туманнасьць у Андрамэдзе"
 
+#~ msgid "Hourglass nebula"
+#~ msgstr "Туманнасьць «Пясочны гадзіннік»"
+
 #~ msgid "Hubble's variable neb"
 #~ msgstr "Зьменная туманнасьць Габла"
+
+#~ msgid "Lace-work nebula"
+#~ msgstr "Туманнасьць «Карункі»"
+
+#~ msgid "Praesepe"
+#~ msgstr "Жолаб"
+
+#~ msgid "Star Queen nebula"
+#~ msgstr "Туманнасьць «Каралева зорак»"
+
+#~ msgid "Toby Jug nebula"
+#~ msgstr "Туманнасьць «Тобі Джаґ»"
 
 #~ msgid "Ofice for Construction"
 #~ msgstr "Чыноўнік па забесьпячэньні"
@@ -8513,3 +8948,15 @@ msgstr "Бэта Цэнтаўра"
 
 #~ msgid "Cerficate of Sky"
 #~ msgstr "Пасьведчаньне неба"
+
+#~ msgid "κ Cru cluster"
+#~ msgstr "Скопішча κ Крумкача"
+
+#~ msgid "Herring galaxy"
+#~ msgstr "Ґаляктыка «Селядзец»"
+
+#~ msgid "Fleming's Triangular nebula"
+#~ msgstr "Туманнасьць «Трохкутнік Флемінґа»"
+
+#~ msgid "Arm"
+#~ msgstr "Рука"

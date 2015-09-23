@@ -557,7 +557,7 @@
      </widget>
      <widget class="QWidget" name="julianDateTab">
       <attribute name="title">
-       <string>Julian Date</string>
+       <string>Julian Day</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <property name="leftMargin">
@@ -599,7 +599,7 @@
           <item>
            <widget class="QLabel" name="label_5">
             <property name="toolTip">
-             <string>Julian Date</string>
+             <string>Julian Day</string>
             </property>
             <property name="text">
              <string notr="true">JD:</string>
@@ -628,6 +628,9 @@
             </property>
             <property name="maximum">
              <double>100000000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.000010000000000</double>
             </property>
            </widget>
           </item>
@@ -661,7 +664,7 @@
           <item>
            <widget class="QLabel" name="label_6">
             <property name="toolTip">
-             <string>Modified Julian Date</string>
+             <string>Modified Julian Day</string>
             </property>
             <property name="text">
              <string notr="true">MJD:</string>
@@ -690,6 +693,9 @@
             </property>
             <property name="maximum">
              <double>100000000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.000010000000000</double>
             </property>
            </widget>
           </item>

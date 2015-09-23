@@ -30,8 +30,6 @@
 #include <QPair>
 #include <QtAlgorithms>
 #include <QDebug>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
 #include <QFileInfo>
 #include <QFile>
 #include <QDir>
@@ -51,24 +49,11 @@
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
-#include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog(parent)
-	, updateState(CompleteNoUpdates)
-	, downloadMgr(NULL)
 {
 	ui = new Ui_helpDialogForm;
-
-	conf = StelApp::getInstance().getSettings();
-	setUpdatesEnabled(conf->value("main/check_updates_enabled", true).toBool()); // Enable check for updates by default
-	QString lang = conf->value("localization/app_locale", "en").toString();
-	if (lang=="system" || lang=="C")
-		lang = "en";
-	updateUrl = QString("http://www.stellarium.org/%1/updates.php").arg(lang);
-	currentVersion = StelUtils::getApplicationVersion();
-
-	conf->setValue("main/check_updates_enabled", getUpdatesEnabled());
 }
 
 HelpDialog::~HelpDialog()
@@ -102,28 +87,6 @@ void HelpDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	setUpdatesMessage(false);
-	if (getUpdatesEnabled())
-	{
-		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/data");
-		jsonDataPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/updates.json";
-
-		// If the json file does not already exist, create it from the resource in the Qt resource
-		if(!QFileInfo(jsonDataPath).exists())
-		{
-			//qDebug() << "HelpDialog::createDialogContent() updates.json does not exist - copying default file to " << QDir::toNativeSeparators(jsonDataPath);
-			restoreDefaultJsonFile();
-		}
-
-		//qDebug() << "HelpDialog::createDialogContent() using file: " << QDir::toNativeSeparators(jsonDataPath);
-
-		// Set up download manager and the update schedule
-		downloadMgr = new QNetworkAccessManager(this);
-		connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
-		updateState = CompleteNoUpdates;
-		updateJSON();
-	}
-
 #ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
@@ -142,200 +105,6 @@ void HelpDialog::createDialogContent()
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
-}
-
-void HelpDialog::updateDownloadComplete(QNetworkReply *reply)
-{
-	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "HelpDialog::updateDownloadComplete() FAILED to download" << reply->url() << " Error: " << reply->errorString();
-	}
-	else
-	{
-		// download completed successfully.
-		QString jsonFilePath = StelFileMgr::findFile("data", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/updates.json";
-		if (jsonFilePath.isEmpty())
-		{
-			qWarning() << "HelpDialog::updateDownloadComplete(): cannot write JSON data to file data/updates.json";
-			return;
-		}
-		QFile jsonFile(jsonFilePath);
-		if (jsonFile.exists())
-			jsonFile.remove();
-
-		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
-		{
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
-		}
-	}
-}
-
-void HelpDialog::updateJSON(void)
-{
-	if (updateState==HelpDialog::Updating)
-	{
-		qWarning() << "HelpDialog: already updating...  will not start again current update is complete.";
-		return;
-	}
-
-	updateState = HelpDialog::Updating;
-	emit(updateStateChanged(updateState));
-
-	// Get info about operating system
-	QString OS = StelUtils::getOperatingSystemInfo();
-	if (OS.contains("Linux"))
-		OS = "Linux";
-	// Set user agent as "Stellarium/$version$ ($platform$)"
-	QString UserAgent = QString("Stellarium/%1 (%2)").arg(currentVersion).arg(OS);
-	QNetworkRequest request;
-	request.setUrl(QUrl(updateUrl));
-	request.setRawHeader("User-Agent", UserAgent.toUtf8());
-	downloadMgr->get(request);
-
-	updateState = HelpDialog::CompleteUpdates;
-	emit(updateStateChanged(updateState));
-	readJsonFile();
-}
-
-QString HelpDialog::getLatestVersionFromJson()
-{
-	QString jsonVersion("unknown");
-	QFile jsonDataFile(jsonDataPath);
-	if (!jsonDataFile.open(QIODevice::ReadOnly))
-	{
-		qWarning() << "HelpDialog::getLatestVersionFromJson() cannot open " << QDir::toNativeSeparators(jsonDataPath);
-		return jsonVersion;
-	}
-
-	QVariantMap map;
-	try
-	{
-		map = StelJsonParser::parse(&jsonDataFile).toMap();
-		if (map.contains("latestVersion"))
-		{
-			jsonVersion = map.value("latestVersion").toString();
-		}
-		jsonDataFile.close();
-	}
-	catch(std::runtime_error& e)
-	{
-		qDebug() << "HelpDialog::getLatestVersionFromJson() error:" << e.what();
-	}
-
-	//qDebug() << "HelpDialog::getLatestVersionFromJson() latest version from file:" << jsonVersion;
-	return jsonVersion;
-}
-
-int HelpDialog::getRequiredOpenGLVersionFromJson()
-{
-	int jsonVersion = 0;
-	QFile jsonDataFile(jsonDataPath);
-	if (!jsonDataFile.open(QIODevice::ReadOnly))
-	{
-		qWarning() << "HelpDialog::getRequiredOpenGLVersionFromJson() cannot open " << QDir::toNativeSeparators(jsonDataPath);
-		return jsonVersion;
-	}
-
-	QVariantMap map;
-	try
-	{
-		map = StelJsonParser::parse(&jsonDataFile).toMap();
-		if (map.contains("requiredOpenGLVersion"))
-		{
-			jsonVersion = map.value("requiredOpenGLVersion").toInt();
-		}
-		jsonDataFile.close();
-	}
-	catch(std::runtime_error& e)
-	{
-		qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() error:" << e.what();
-	}
-
-	//qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() required OpenGL version from file:" << jsonVersion;
-	return jsonVersion;
-}
-
-/*
-  Replace the JSON file with the default from the compiled-in resource
-*/
-void HelpDialog::restoreDefaultJsonFile(void)
-{
-	QFile src(StelFileMgr::findFile("data/updates.json"));
-	if (!src.copy(jsonDataPath))
-	{
-		qWarning() << "HelpDialog::restoreDefaultJsonFile() cannot copy json resource to " + QDir::toNativeSeparators(jsonDataPath);
-	}
-	else
-	{
-		//qDebug() << "HelpDialog::restoreDefaultJsonFile() copied default updates.json to " << QDir::toNativeSeparators(jsonDataPath);
-		// The resource is read only, and the new file inherits this...  make sure the new file
-		// is writable by the Stellarium process so that updates can be done.
-		QFile dest(jsonDataPath);
-		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
-	}
-}
-
-void HelpDialog::readJsonFile()
-{
-	QString version = getLatestVersionFromJson();
-	unsigned int OpenGLversion = getRequiredOpenGLVersionFromJson();
-	if (version!=currentVersion)
-	{
-		setUpdatesMessage(true, version, OpenGLversion);
-	}
-}
-
-void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version, int OpenGL)
-{
-	if (version.contains("unknown"))
-	{
-		// TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
-		updatesMessage = q_("Oops... Stellarium can't check latest version.");
-		return;
-	}
-	int cVMajor = 0, cVMinor = 0, cVPatch = 0, rVMajor = 0, rVMinor = 0, rVPatch = 0;
-	QRegExp vRx("(\\d+)\\.(\\d+)\\.(\\d+)");
-	if (vRx.exactMatch(currentVersion))
-	{
-		cVMajor = vRx.capturedTexts().at(1).toInt();
-		cVMinor = vRx.capturedTexts().at(2).toInt();
-		cVPatch = vRx.capturedTexts().at(3).toInt();
-	}
-	if (vRx.exactMatch(version))
-	{
-		rVMajor = vRx.capturedTexts().at(1).toInt();
-		rVMinor = vRx.capturedTexts().at(2).toInt();
-		rVPatch = vRx.capturedTexts().at(3).toInt();
-	}
-	if (hasUpdates)
-	{
-		if ((cVMajor>rVMajor) || (cVMinor>rVMinor) || (cVPatch>rVPatch))
-		{
-			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
-			updatesMessage = q_("Looks like you are using the development version of Stellarium.");
-		}
-		else
-		{
-			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
-			updatesMessage = q_("This version of Stellarium is outdated! Latest version is %1.").arg(version);
-			if (!(QGLFormat::openGLVersionFlags() & OpenGL))
-			{
-				updatesMessage.append(q_(" Sorry, your hardware is not compatible with newest version of Stellarium!"));
-			}
-		}		
-	}
-	else
-	{
-		// TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
-		updatesMessage = q_("This is latest stable version of Stellarium.");
-	}
-}
-
-QString HelpDialog::getUpdatesMessage()
-{
-	return updatesMessage;
 }
 
 void HelpDialog::showShortcutsWindow()
@@ -483,12 +252,29 @@ void HelpDialog::updateText(void)
 	ui->helpBrowser->insertHtml(newHtml);
 	ui->helpBrowser->scrollToAnchor("top");
 
+	QStringList contributors;
+	contributors << "Vladislav Bataron" << "Barry Gerdes" << "Peter Walser" << "Michal Sojka"
+		     << "Nick Fedoseev" << "Clement Sommelet" << "Ivan Marti-Vidal" << "Nicolas Martignoni"
+		     << "Oscar Roig Felius" << "M.S. Adityan" << "Tomasz Buchert" << "Adam Majer"
+		     << "Roland Bosa" << "Łukasz 'sil2100' Zemczak" << "Gábor Péterffy"
+		     << "Mircea Lite" << "Alexey Dokuchaev" << "William Formyduval" << "Daniel De Mickey"
+		     << "François Scholder" << "Anton Samoylov" << "Mykyta Sytyi" << "Shantanu Agarwal"
+		     << "Teemu Nätkinniemi" << "Kutaibaa Akraa" << "J.L.Canales" << "Froenchenko Leonid"
+		     << "Peter Mousley" << "Greg Alexander" << "Yuri Chornoivan" << "Daniel Michalik"
+		     << "Hleb Valoshka" << "Matthias Drochner" << "Kenan Dervišević" << "Alex Gamper"
+		     << "Volker Hören" << "Max Digruber" << "Dan Smale" << "Victor Reijs"
+		     << "Tanmoy Saha" << "Oleg Ginzburg" << "Peter Hickey" << "Bernd Kreuss"
+		     << "Alexander Miller" << "Maciej Serylak" << "Eleni Maria Stea" << "Kirill Snezhko"
+		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Florian Schaukowitsch"
+		     << "Allan Johnson" << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell"
+		     << "David Baucum" << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony"
+		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko";
+	contributors.sort();
+
 	// populate About tab
 	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
 	newHtml += "<h3>Copyright &copy; 2000-2014 Stellarium Developers</h3>";
-	if (getUpdatesEnabled())
-		newHtml += "<p><strong>" + getUpdatesMessage() + "</strong></p>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
 	newHtml += "as published by the Free Software Foundation; either version 2 ";
@@ -515,10 +301,9 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Tester: %1").arg(QString("Barry Gerdes")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";	
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
-	newHtml += "<h3>" + q_("Past Developers").toHtmlEscaped() + "</h3>";
+	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
 	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
 	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Johannes Gajdosik")).toHtmlEscaped() + "</li>";
@@ -527,6 +312,8 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
+	newHtml += "<h3>" + q_("Contributors").toHtmlEscaped() + "</h3>";
+	newHtml += "<p>"  + q_("Several people have made contributions to the project and their work has made Stellarium better (sorted alphabetically): %1.").arg(contributors.join(", ")).toHtmlEscaped() + "</p>";
 	newHtml += "<p>";
 	ui->aboutBrowser->clear();
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));

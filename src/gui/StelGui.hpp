@@ -20,6 +20,8 @@
 #ifndef _STELGUI_HPP_
 #define _STELGUI_HPP_
 
+#ifndef NO_GUI
+
 #include "StelModule.hpp"
 #include "StelObject.hpp"
 #include "StelGuiBase.hpp"
@@ -39,6 +41,7 @@ class LocationDialog;
 class SearchDialog;
 class ViewDialog;
 class ShortcutsDialog;
+class AstroCalcDialog;
 #ifdef ENABLE_SCRIPT_CONSOLE
 class ScriptConsole;
 #endif
@@ -87,8 +90,6 @@ public:
 	
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
-
-	bool getFlagShowDecimalDegrees() const;
 
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
@@ -187,6 +188,7 @@ private:
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole* scriptConsole;
 #endif
+	AstroCalcDialog* astroCalcDialog;
 
 	bool flagShowFlipButtons;
 	StelButton* flipVert;
@@ -197,22 +199,38 @@ private:
 
 	bool initDone;
 
-	bool flagShowDecimalDegrees;
-
 	QSizeF savedProgressBarSize;
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
 };
 
-//! Allow to load the GUI as a static plugin
-class StelStandardGuiPluginInterface : public QObject, public StelGuiPluginInterface
+#else // NO_GUI
+
+#include "StelGuiBase.hpp"
+#include <QProgressBar>
+
+class StelGui : public StelGuiBase
 {
-	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
-	Q_INTERFACES(StelGuiPluginInterface)
 public:
-	virtual class StelGuiBase* getStelGuiBase() const;
+	StelGui() {;}
+	~StelGui() {;}
+	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget) {;}
+	virtual void updateI18n() {;}
+	virtual void setStelStyle(const QString& section) {;}
+	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {dummyInfoTextFilter=aflags;}
+	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
+	virtual QProgressBar* addProgressBar() {return new QProgressBar;}
+	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return NULL;}
+	virtual void forceRefreshGui() {;}
+	virtual void setVisible(bool b) {visible=b;}
+	virtual bool getVisible() const {return visible;}
+	virtual bool isCurrentlyUsed() const {return false;}
+private:
+	StelObject::InfoStringGroup dummyInfoTextFilter;
+	bool visible;
 };
+
+#endif
 
 #endif // _STELGUI_HPP_

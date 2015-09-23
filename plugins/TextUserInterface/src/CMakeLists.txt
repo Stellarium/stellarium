@@ -31,7 +31,7 @@ SET(TextUserInterface_SRCS
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
 ADD_LIBRARY(TextUserInterface-static STATIC ${TextUserInterface_SRCS})
-QT5_USE_MODULES(TextUserInterface-static Core Declarative)
+QT5_USE_MODULES(TextUserInterface-static Core Widgets)
 # The library target "TextUserInterface-static" has a default OUTPUT_NAME of "TextUserInterface-static", so change it.
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
 TARGET_LINK_LIBRARIES(TextUserInterface-static ${extLinkerOption})

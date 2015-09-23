@@ -1,0 +1,127 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2006 Google, Inc.
+
+newmtl Metal_Rough
+#Ka 0.000000 0.000000 0.000000
+Kd 0.600000 0.615686 0.627451
+Ks 0.330000 0.330000 0.330000
+Ns 2
+map_Kd Sterngarten_Wien_innerArea/Metal_Rough.jpg
+
+newmtl Metal_Aluminum_Anodized
+Kd 0.792157 0.819608 0.858824
+Ks 0.330000 0.330000 0.330000
+map_Kd Sterngarten_Wien_innerArea/Metal_Aluminum_Anodized.jpg
+
+newmtl Metal_Corrogated_Shiny_90
+Kd 0.756863 0.756863 0.756863
+Ks 0.830000 0.830000 0.830000
+Ns 30
+map_Kd Sterngarten_Wien_innerArea/Metal_Corrogated_Shiny_90.jpg
+
+newmtl Metal_Brushed
+Kd 0.513725 0.549020 0.607843
+Ks 0.330000 0.330000 0.330000
+map_Kd Sterngarten_Wien_innerArea/Metal_Brushed.jpg
+
+newmtl Concrete_White
+#Ka 0.000000 0.000000 0.000000
+Kd 0.937255 0.937255 0.937255
+#Ks 0.330000 0.330000 0.330000
+map_Kd Sterngarten_Wien_innerArea/Concrete_White.jpg
+
+newmtl Metal_Seamed
+#Ka 0.000000 0.000000 0.000000
+Kd 0.462745 0.466667 0.450980
+Ks 0.330000 0.330000 0.330000
+map_Kd Sterngarten_Wien_innerArea/Metal_Seamed.jpg
+
+newmtl _Charcoal_
+Kd 0.137255 0.137255 0.137255
+bBackface 1
+
+newmtl M_0010_Snow
+Kd 1.000000 0.980392 0.980392
+#Ks 0.330000 0.330000 0.330000
+
+newmtl _LightGray_
+Kd 0.662745 0.662745 0.662745
+#Ks 0.330000 0.330000 0.330000
+
+newmtl Ungeziffer
+Kd 0.901961 0.901961 0.901961
+#Ks 0.330000 0.330000 0.330000
+map_Kd Sterngarten_Wien_innerArea/Ungeziffer.png
+
+newmtl _DimGray_
+Kd 0.411765 0.411765 0.411765
+#Ks 0.330000 0.330000 0.330000
+
+newmtl M_0128_White
+Kd 1.000000 1.000000 1.000000
+
+newmtl Fencing_Mesh
+Kd 0.317647 0.317647 0.309804
+#Ks 0.330000 0.330000 0.330000
+bAlphatest 1
+bBackface 1
+map_Kd Sterngarten_Wien_innerArea/Fencing_Mesh.png
+
+newmtl Tafel_Sterngarten
+# This material (the information panel) can be made special: Note Ke values. Those describe emissive surfaces. 
+# These don't illuminate their neighbourhood, but are visible also at night.
+# You can think of a dimly illuminated showcase. 
+# Note that the real Sterngarten does not have light panels, this is just for demonstration.
+# The color is mostly red to avoid overly strong irritation of the eyes.
+# The brightness is modulated with solar altitude similar to the landscapes. 
+# Brightness should include Ke*map_Ke*solarAltitudeTerm.
+# If there is no map_Ke, of course only Ke*solarAltitudeTerm.
+Kd 1 1 1
+#Ks 0.330000 0.330000 0.330000
+#Ke 0.25 0.1 0.05
+map_Kd Sterngarten_Wien_innerArea/Tafel_Sterngarten.jpg
+#map_Ke Sterngarten_Wien_innerArea/Tafel_Sterngarten.jpg
+
+newmtl Tafel_Wienplan
+Kd 1 1 1
+#Ks 0.330000 0.330000 0.330000
+map_Kd Sterngarten_Wien_innerArea/Tafel_Wienplan.jpg
+
+newmtl Google_Earth_Snapshot_1
+#Ka 0.000000 0.000000 0.000000
+Kd 0.274510 0.270588 0.235294
+#Ks 0.330000 0.330000 0.330000
+map_Kd Sterngarten_Wien_innerArea/Google_Earth_Snapshot_1.jpg
+
+newmtl abedul
+#Ka 0.000000 0.000000 0.000000
+Kd 0.462745 0.564706 0.529412
+#Ks 0.330000 0.330000 0.330000
+bAlphatest 1
+bBackface 1
+map_Kd Sterngarten_Wien_innerArea/abedul.png
+
+newmtl Vegetation_Bark_Birch1
+Kd 0.694118 0.690196 0.709804
+#Ks 0.330000 0.330000 0.330000
+bBackface 1
+map_Kd Sterngarten_Wien_innerArea/Vegetation_Bark_Birch1.jpg
+
+newmtl hawthorne
+Kd 0.082353 0.090196 0.062745
+#Ks 0.330000 0.330000 0.330000
+bAlphatest 1
+bBackface 1
+map_Kd Sterngarten_Wien_innerArea/hawthorne.png
+
+newmtl Color_C10
+Kd 0.509804 0.419608 0.341176
+#Ks 0.330000 0.330000 0.330000
+
+newmtl Vegetation_Juniper2
+Kd 0.388235 0.501961 0.274510
+#Ks 0.330000 0.330000 0.330000
+bBackface 1
+map_Kd Sterngarten_Wien_innerArea/Vegetation_Juniper2.jpg
+

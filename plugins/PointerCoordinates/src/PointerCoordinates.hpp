@@ -31,6 +31,22 @@ class QPixmap;
 class StelButton;
 class PointerCoordinatesWindow;
 
+/*! @defgroup pointerCoordinates Pointer Coordinates Plug-in
+@{
+The %Pointer Coordinates plugin shows the coordinates of the mouse pointer.
+
+<b>Configuration</b>
+
+The plug-ins' configuration data is stored in Stellarium's main configuration
+file (section [PointerCoordinates]).
+
+@}
+*/
+
+//! @class PointerCoordinates
+//! Main class of the %Pointer Coordinates plugin.
+//! @author Alexander Wolf
+//! @ingroup pointerCoordinates
 class PointerCoordinates : public StelModule
 {
 	Q_OBJECT
@@ -190,7 +206,7 @@ private:
 class PointerCoordinatesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID StelPluginInterface_iid)
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;
