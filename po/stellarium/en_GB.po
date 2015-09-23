@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-21 20:34+0600\n"
-"PO-Revision-Date: 2015-09-07 16:59+0000\n"
+"POT-Creation-Date: 2015-09-22 22:35+0600\n"
+"PO-Revision-Date: 2015-09-22 17:15+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-22 05:30+0000\n"
+"X-Launchpad-Export-Date: 2015-09-23 05:30+0000\n"
 "X-Generator: Launchpad (build 17749)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -401,22 +401,22 @@ msgstr "undocumented concentration class"
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
-msgstr ""
+msgstr "small brightness range of cluster members"
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
-msgstr ""
+msgstr "medium brightness range of cluster members"
 
 #: src/core/modules/Nebula.cpp:824
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
-msgstr ""
+msgstr "large brightness range of cluster members"
 
 #: src/core/modules/Nebula.cpp:827
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr ""
+msgstr "undocumented brightness range of cluster members"
 
 #: src/core/modules/Nebula.cpp:833
 msgctxt "Trumpler's Number of Members Class"
@@ -669,7 +669,7 @@ msgstr "possible planetary nebula"
 
 #: src/core/modules/Nebula.cpp:1065
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "protoplanetary nebula"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
@@ -2674,7 +2674,7 @@ msgstr "Oort cloud objects"
 
 #: src/gui/AstroCalcDialog.cpp:437
 msgid "Phenomenon"
-msgstr ""
+msgstr "Phenomenon"
 
 #: src/gui/AstroCalcDialog.cpp:439
 msgid "Object 1"
@@ -2969,17 +2969,17 @@ msgstr "Young Stellar Objects"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Possible Quasars"
-msgstr ""
+msgstr "Possible Quasars"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "Possible Planetary Nebulae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "Protoplanetary Nebulae"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:139 src/ui_viewDialog.h:1646
@@ -4934,6 +4934,8 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
+"Deactivate this option if you want to see orbit for selected planet and its "
+"moons."
 
 #: src/ui_viewDialog.h:1604
 msgid "Show orbit for selected planet"
@@ -4944,16 +4946,20 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Deactivate this option if you want to see the trails for all Solar System "
+"bodies."
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Show trail only for selected planet"
 
 #: src/ui_viewDialog.h:1610
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Activate this option to simulate the effect of real speed of light "
+"(recommended)."
 
 #: src/ui_viewDialog.h:1612
 msgid "Simulate light speed"
@@ -4969,7 +4975,7 @@ msgstr "Scale factor"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Limit the magnitude of Solar System objects"
 
 #: src/ui_viewDialog.h:1622
 msgid "Automatic change of landscape when planet is changed"
@@ -10898,6 +10904,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"This plug-in enables you to simulate periodic meteor showers and to display "
+"a marker for each active and inactive radiant."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
 msgid ""
@@ -10906,6 +10914,10 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"By a single click on the radiant's marker, you can see all the details about "
+"its position and activity. Most data used on this plug-in comes from the "
+"official <a href=\"http://imo.net\">International Meteor Organisation</a> "
+"catalogue."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:228
 msgid ""
@@ -10917,6 +10929,13 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>It has three types of markers:<ul><li><b>Confirmed:</b> the radiant is "
+"active and its data was confirmed. Thus, this is a historical (really "
+"occurred in the past) or predicted meteor shower.</li><li><b>Generic:</b> "
+"the radiant is active, but its data was not confirmed. It means that this "
+"can occur in real life, but that we do not have proper data about its "
+"activity for the current year.</li><li><b>Inactive:</b> the radiant is "
+"inactive for the current sky date.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
@@ -11835,7 +11854,7 @@ msgstr "Add current view"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "Load/store with date"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
