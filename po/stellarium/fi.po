@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-22 22:35+0600\n"
-"PO-Revision-Date: 2015-09-22 12:00+0000\n"
+"PO-Revision-Date: 2015-09-23 10:34+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-23 05:17+0000\n"
+"X-Launchpad-Export-Date: 2015-09-24 05:11+0000\n"
 "X-Generator: Launchpad (build 17749)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -2418,7 +2418,7 @@ msgstr "Maisema \"%1\" on poistettu onnistuneesti."
 #: src/gui/AddRemoveLandscapesDialog.cpp:165
 #: src/gui/AddRemoveLandscapesDialog.cpp:235
 msgid "The selected landscape could not be (completely) removed."
-msgstr "Valittua maisemaa ei voitu (täydellisesti) poistaa."
+msgstr "Valitun maiseman kaikkia tiedostoja ei voitu poistaa."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:188
@@ -6115,9 +6115,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
-"Kulmanmittauslaajennus on pieni työkalu, jota voi käyttää kulman "
-"mittaamiseen asteina kahden taivaalla olevan pisteen välillä (ja "
-"asentokulman laskemiseen näiden kahden pisteen välillä)."
+"Kulmanmittaustyökalua voi käyttää kulman mittaamiseen kahden taivaalla "
+"olevan pisteen välillä (ja asentokulman laskemiseen näiden kahden pisteen "
+"välillä)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 msgid ""
@@ -6125,9 +6125,11 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
-"Atsimutaalijalustan kanssa alku- ja loppupisteet on mahdollista liittää "
-"kiertyvään taivaaseen, josta voi olla apua etsittäessä kohteita "
-"tähtihyppelyllä."
+"Horisontaalitilassa mittauksen alku- tai loppupiste (tai molemmat) on "
+"mahdollista lukita kiertyvään taivaaseen. Näin voidaan säilyttää esimerkiksi "
+"horisontin ja jonkin kohteen välinen suhde, ja molempien pisteiden "
+"lukitsemisesta on apua erityisesti etsittäessä kohteita "
+"tähtihyppelymenetelmällä."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -6137,11 +6139,12 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
-"Muistan kuinka opiskelijoina mittasimme Cassinin jakoa. Se ei ollut "
-"sellaista akateemista glamouria, kuin voisi olettaa... Oli pilvistä ja "
-"sateista. Observatorion laboratoriossa oli muutama vanha kaukoputki "
-"osoittamassa <em>valokuvaan</em> Saturnuksesta laboratorion toisessa päässä. "
-"Me mittasimme. Me laskimme. Ja toivoimme että olisimme olleet Havaijilla."
+"*Tekijä muistelee* Muistan, kuinka opiskelijoina mittasimme Cassinin jakoa. "
+"Se ei ollut sellaista akateemista glamouria, jota joku voisi odottaa... Oli "
+"pilvistä ja sateista. Observatorion laboratoriossa oli muutama vanha "
+"kaukoputki osoittamassa <em>valokuvaan</em> Saturnuksesta laboratorion "
+"toisessa päässä. Me mittasimme. Me laskimme. Ja toivoimme että olisimme "
+"olleet Havaijilla."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:444
@@ -6168,8 +6171,8 @@ msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
-"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon "
-"\"%1\", kun lähetät viestin."
+"Tukea tarjotaan Launchpad-sivustolta. Varmista, että lisäät otsikkoon \"%1\" "
+"kun lähetät viestin."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
@@ -6224,7 +6227,7 @@ msgid ""
 "can %1get info here%2."
 msgstr ""
 "Jos haluat lukea enemmän tästä laajennuksesta ja sen historiasta, löydät "
-"tiedot %1täältä%2."
+"lisätietoja %1täältä%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -7235,7 +7238,7 @@ msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
-"<b>Huomaa:</b> jos päivitystiedoissa olevan satelliitin nimen lopussa "
+"<b>Huomaa:</b> jos päivitystiedoissa olevan satelliitin nimen lopussa on "
 "hakasuluissa olevaa tekstiä, se poistetaan ennen tietojen käyttämistä."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:435
