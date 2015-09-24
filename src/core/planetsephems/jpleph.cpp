@@ -883,8 +883,7 @@ void * DLL_FUNC jpl_init_ephemeris(const char *ephemeris_filename,
                /* see how many constants there _really_ are.  Older readers */
                /* will just see 400 names and won't know about the others.  */
                /* But on the upside, they won't crash.                      */
-    qDebug() << "CacheSize: " << sizeof(rval->cache);
-    
+
     if(rval->ncon == 400)
     {
       char buff[7];
