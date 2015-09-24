@@ -31,6 +31,9 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifndef _EPHEMWRAPPER_HPP_
 #define _EPHEMWRAPPER_HPP_
 
+#define DE430_FILENAME  "linux_p1550p2650.430"
+#define DE431_FILENAME  "lnxm13000p17000.431"
+
 class EphemWrapper{
 public:
     static void init_de430(const char* filepath);
