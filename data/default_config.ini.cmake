@@ -272,6 +272,8 @@ flag_planet_magnitude_limit         = false
 planet_magnitude_limit              = 6.5
 flag_nebula_magnitude_limit         = false
 nebula_magnitude_limit              = 8.5
+de430_path                          = ""
+de431_path                          = ""
 
 [init_location]
 location                            = auto

@@ -93,6 +93,7 @@ void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
         qDebug() << "SKIPPED CoordCalc, jd is infinite/nan";
         return;
     }
+
   	if(use_de430(jd))
   	{
   		GetDe430Coor(jd, planet_id + 1, xyz);
@@ -109,6 +110,12 @@ void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 
 void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], int planet_id)
 {
+    if(!(std::isfinite(jd) && std::isfinite(jd0)))
+    {
+        qDebug() << "SKIPPED CoordCalc, jd is infinite/nan";
+        return;
+    }
+
     if(use_de430(jd))
     {
         GetDe430OsculatingCoor(jd0, jd, planet_id + 1, xyz);
@@ -130,6 +137,12 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
 
 void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 {
+    if(!std::isfinite(jd))
+    {
+        qDebug() << "SKIPPED PlutoCoordCalc, jd is infinite/nan";
+        return;
+    }
+
 	if(use_de430(jd))
 	{
 		  GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
@@ -160,6 +173,12 @@ void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
 
 void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) 
 {
+    if(!std::isfinite(jd))
+    {
+        qDebug() << "SKIPPED EarthCoordCalc, jd is infinite/nan";
+        return;
+    }
+
   	if(use_de430(jd))
   	{
   		  GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);

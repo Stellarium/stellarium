@@ -1956,7 +1956,8 @@ void StelCore::setDe431Status(bool status)
 
 void StelCore::initEphemeridesFunctions()
 {
-	//check ephem/ folder
+	QSettings* conf = StelApp::getInstance().getSettings();
+
 	QString ephemFilePath = StelFileMgr::findFile("ephem", 
 		StelFileMgr::Directory);
 	
@@ -1964,24 +1965,51 @@ void StelCore::initEphemeridesFunctions()
 
 	if(!ephemFilePath.isEmpty())
 	{
-		QString de430FilePath = StelFileMgr::findFile("ephem/linux_p1550p2650.430", 
-			StelFileMgr::File);
-	  	
-		setDe430Status(!de430FilePath.isEmpty());
+		QString de430ConfigPath = conf->value("astro/de430_path").toString();
+		QString de431ConfigPath = conf->value("astro/de431_path").toString();
+		QString de430FilePath;
+		QString de431FilePath;
 
-		qDebug() << "DE430 available: " << !de430FilePath.isEmpty();
+		//<-- DE430 -->
+		if(de430ConfigPath.remove(QChar('"')).isEmpty())
+		{
+			de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), 
+				StelFileMgr::File);
+			qDebug() << "DE430 file in default search path: " <<
+				de430FilePath;
+  		}
+  		else
+  		{
+  			de430FilePath = StelFileMgr::findFile(de430ConfigPath, 
+				StelFileMgr::File);
+  		}
+
+  		setDe430Status(!de430FilePath.isEmpty());
+		qDebug() << "DE430 available: " << de430Active;
   		
   		if(de430Active)
   		{
   			EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
   		}
 
-	 	QString de431FilePath = StelFileMgr::findFile("ephem/lnxm13000p17000.431", 
-	 		StelFileMgr::File);
-	  	
-	 	setDe431Status(!(de431FilePath.isEmpty()));
+  		//<-- DE431 -->
+  		if(de431ConfigPath.remove(QChar('"')).isEmpty())
+		{
+			de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), 
+				StelFileMgr::File);
+			qDebug() << "DE431 file via default search path:" <<
+				de431FilePath;
+  		}
+  		else
+  		{
+  			de431FilePath = StelFileMgr::findFile(de431ConfigPath, 
+				StelFileMgr::File);
+  			qDebug() << "DE431 file via configured external path:" <<
+  				de431ConfigPath;
+  		}
 
-	 	qDebug() << "DE431 available: " << !de431FilePath.isEmpty();
+	 	setDe431Status(!(de431FilePath.isEmpty()));
+	 	qDebug() << "DE431 available: " << de431Active;
 	 	
 	 	if(de431Active)
 		{
