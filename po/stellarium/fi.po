@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-22 22:35+0600\n"
-"PO-Revision-Date: 2015-09-23 10:34+0000\n"
+"PO-Revision-Date: 2015-09-24 15:11+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-24 05:11+0000\n"
-"X-Generator: Launchpad (build 17749)\n"
+"X-Launchpad-Export-Date: 2015-09-25 05:12+0000\n"
+"X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -1639,7 +1639,7 @@ msgstr "Tuntikulma/Dekl.: %1/%2"
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
 msgid "(apparent)"
-msgstr "(nykyinen)"
+msgstr "(refraktiokorjattu)"
 
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
 #: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
@@ -5238,7 +5238,7 @@ msgstr "Ekvaattori (J2000)"
 
 #: src/ui_viewDialog.h:1755
 msgid "Show celestial equator of current planet and date."
-msgstr "Näytä tämän hetkisen planeetan nykyinen taivaanekvaattori."
+msgstr "Näytä tämänhetkisen planeetan nykyinen taivaanekvaattori."
 
 #: src/ui_viewDialog.h:1757
 msgid "Equator (of date)"
@@ -5442,7 +5442,7 @@ msgid ""
 "next startup."
 msgstr ""
 "Oletusarvojen palautus vaatii Stellariumin uudelleenkäynnistyksen. "
-"Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset mukaan "
+"Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset, mukaan "
 "lukien nykyinen näkökenttä ja katselusuunta."
 
 #: src/ui_configurationDialog.h:1051
@@ -5496,8 +5496,7 @@ msgstr "Näytettävät tiedot"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
-"Maakeskinen ekvatoriaalinen koordinaatisto, nykyinen kevättasauspiste"
+msgstr "Maakeskiset ekvatoriaaliset koordinaatit, nykyinen kevättasauspiste"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Right ascension/Declination (of date)"
@@ -5510,7 +5509,8 @@ msgstr "Luettelonumero(t)"
 #: src/ui_configurationDialog.h:1081
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr ""
-"Maakeskinen ekvatoriaalinen koordinaatisto, nykyinen kevättasauspiste"
+"Maakeskiset ekvatoriaaliset koordinaatit, J2000.0-epookin mukainen "
+"kevättasauspiste"
 
 #: src/ui_configurationDialog.h:1083
 msgid "Right ascension/Declination (J2000)"
@@ -5573,8 +5573,8 @@ msgstr "Etäisyys"
 #: src/ui_configurationDialog.h:1109
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
-"Ekliptikaaliset koordinaatit, kevättasauspiste nykyinen ja J2000 (vain "
-"Maalle)"
+"Ekliptikaaliset koordinaatit, kevättasauspiste nykyinen ja J2000.0-epookin "
+"mukainen (vain Maalle)"
 
 #: src/ui_configurationDialog.h:1111
 msgid "Ecliptic coordinates"
@@ -7973,7 +7973,7 @@ msgstr "J2000 (oletus)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Equinox of the date (JNow)"
-msgstr "Nykyinen epookki (Jnow)"
+msgstr "Nykyinen kevättasaupiste (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
