@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 22:35+0600\n"
+"POT-Creation-Date: 2015-09-25 20:04+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2615,7 +2615,7 @@ msgid ""
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:975
+#: src/StelMainView.cpp:977
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -4725,7 +4725,7 @@ msgid "Planets and satellites"
 msgstr ""
 
 #: src/ui_viewDialog.h:1598
-msgid "Show planets"
+msgid "Show Solar System objects"
 msgstr ""
 
 #: src/ui_viewDialog.h:1599
@@ -9857,15 +9857,15 @@ msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
 "click on the radiant's marker, you can see all the details about its "
-"position and activity. Most data used on this plugin comes from the oficial "
+"position and activity. Most data used on this plugin comes from the official "
 "<a href=\"http://imo.net\">International Meteor Organization</a> catalog.</"
 "p><p>It has three types of markers:<ul><li><b>Confirmed:</b> the radiant is "
 "active and its data was confirmed. Thus, this is a historical (really "
 "occurred in the past) or predicted meteor shower.</li><li><b>Generic:</b> "
 "the radiant is active, but its data was not confirmed. It means that this "
-"can occur on real life, but that we do not have real data about its activity "
-"for the current sky year.</li><li><b>Inactive:</b> the radiant is inactive "
-"for the current sky date.</li></ul></p>"
+"can occur on real life, but that we do not have proper data about its "
+"activity for the current year.</li><li><b>Inactive:</b> the radiant is "
+"inactive for the current sky date.</li></ul></p>"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
