@@ -16,13 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelUtils.hpp"
-
 #include <cmath>
 #include <QDebug>
 
 #include "Skybright.hpp"
 #include "StelUtils.hpp"
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
+#include "SolarSystem.hpp"
 
 Skybright::Skybright() : SN(1.f)
 {
@@ -95,6 +96,11 @@ float Skybright::getLuminance( float cosDistMoon,
                                const float cosDistSun,
                                const float cosDistZenith) const
 {
+	// No Sun and Moon on the sky
+	// Details: https://bugs.launchpad.net/stellarium/+bug/1499699
+	if (!GETSTELMODULE(SolarSystem)->getFlagPlanets())
+		return 0.f;
+
 	// Air mass
 	const float bKX = stelpow10f(-0.4f * K * (1.f / (cosDistZenith + 0.025f*StelUtils::fastExp(-11.f*cosDistZenith))));
 
