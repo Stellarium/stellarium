@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 22:35+0600\n"
+"POT-Creation-Date: 2015-09-25 20:04+0600\n"
 "PO-Revision-Date: 2015-08-24 18:59+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-23 05:25+0000\n"
-"X-Generator: Launchpad (build 17749)\n"
+"X-Launchpad-Export-Date: 2015-09-26 05:25+0000\n"
+"X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -2773,7 +2773,7 @@ msgstr ""
 "Занемари и склони ову поруку убудуће и покушај да наставиш у деградираном "
 "режиму?"
 
-#: src/StelMainView.cpp:975
+#: src/StelMainView.cpp:977
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Стеларијум %1"
@@ -4923,8 +4923,8 @@ msgid "Planets and satellites"
 msgstr "Планете и сателити"
 
 #: src/ui_viewDialog.h:1598
-msgid "Show planets"
-msgstr "Прикажи планете"
+msgid "Show Solar System objects"
+msgstr ""
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -10358,14 +10358,14 @@ msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
 "click on the radiant's marker, you can see all the details about its "
-"position and activity. Most data used on this plugin comes from the oficial "
+"position and activity. Most data used on this plugin comes from the official "
 "<a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog.</p><p>It has three types of markers:<ul><li><b>Confirmed:</b> the "
 "radiant is active and its data was confirmed. Thus, this is a historical "
 "(really occurred in the past) or predicted meteor "
 "shower.</li><li><b>Generic:</b> the radiant is active, but its data was not "
 "confirmed. It means that this can occur on real life, but that we do not "
-"have real data about its activity for the current sky "
+"have proper data about its activity for the current "
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
@@ -12460,6 +12460,9 @@ msgstr "Тренутна планета: Сатурн"
 
 #~ msgid "RA/Dec (J2000):"
 #~ msgstr "Ректасцензија/Деклинација (J2000):"
+
+#~ msgid "Show planets"
+#~ msgstr "Прикажи планете"
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Часовна стопа зенита:"

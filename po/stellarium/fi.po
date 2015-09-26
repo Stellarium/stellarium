@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 22:35+0600\n"
-"PO-Revision-Date: 2015-09-24 15:11+0000\n"
+"POT-Creation-Date: 2015-09-25 20:04+0600\n"
+"PO-Revision-Date: 2015-09-25 15:49+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-25 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-09-26 05:16+0000\n"
 "X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -2127,8 +2127,9 @@ msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
-"Monet henkilöt, jotka eivät ole enää aktiivisia ovat antaneen merkittävä "
-"panoksen kehitystyöhön. Heidän työllään on ollut suuri merkitys projektille:"
+"Monet henkilöt, jotka nyttemmin eivät ole enää aktiivisia ovat antaneet "
+"merkittävän panoksen ohjelman kehittämiseen. Heidän työllään on ollut suuri "
+"merkitys projektille:"
 
 #: src/gui/HelpDialog.cpp:308
 #, qt-format
@@ -2353,7 +2354,7 @@ msgstr "Geminidien normaaliaktiivisuus"
 
 #: src/gui/ViewDialog.cpp:834
 msgid "Exceptional Perseid rate"
-msgstr "Perseidien poikkeuksellinen aktiivisuus"
+msgstr "Poikkeuksellinen perseidien aktiivisuus"
 
 #: src/gui/ViewDialog.cpp:837
 msgid "Meteor storm rate"
@@ -2361,19 +2362,19 @@ msgstr "Meteoreja tunnissa"
 
 #: src/gui/ViewDialog.cpp:840
 msgid "Exceptional Draconid rate"
-msgstr "Draconidien poikkeuksellinen aktiivisuus"
+msgstr "Poikkeuksellinen draconidien aktiivisuus"
 
 #: src/gui/ViewDialog.cpp:843
 msgid "Exceptional Leonid rate"
-msgstr "Leonidien poikkeuksellinen aktiivisuus"
+msgstr "Poikkeuksellinen leonidien aktiivisuus"
 
 #: src/gui/ViewDialog.cpp:846
 msgid "Very high rate (1966 Leonids)"
-msgstr "Erittäin korkea aktiivisuus (Leonidit 1966)"
+msgstr "Erittäin korkea aktiivisuus (leonidit 1966)"
 
 #: src/gui/ViewDialog.cpp:849
 msgid "Highest rate ever (1833 Leonids)"
-msgstr "Suurin tunnettu aktiivisuus (Leonidit 1833)"
+msgstr "Suurin tunnettu aktiivisuus (leonidit 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -2777,7 +2778,7 @@ msgstr ""
 "Ohita tämä huomautus tulevaisuudessa ja yritä jatkaa vajaatoimintaisessa "
 "tilassa siitä huolimatta?"
 
-#: src/StelMainView.cpp:975
+#: src/StelMainView.cpp:977
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4929,8 +4930,8 @@ msgid "Planets and satellites"
 msgstr "Planeetat ja kuut"
 
 #: src/ui_viewDialog.h:1598
-msgid "Show planets"
-msgstr "Näytä planeetat"
+msgid "Show Solar System objects"
+msgstr "Näytä aurinkokunnan kohteet"
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -6240,7 +6241,7 @@ msgstr "Kulmanmittaustyökalun asetukset"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr "Näytä ekvatoriaalikoordinaatit"
+msgstr "Näytä ekvatoriaaliset koordinaatit"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
@@ -6248,11 +6249,11 @@ msgstr "Näytä asentokulma"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr "Näytä horisontaalikoordinaatit"
+msgstr "Näytä horisontaaliset koordinaatit"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr "(esim. tähtihyppelylle)"
+msgstr "(esim. tähtihyppelyä varten)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
@@ -6260,11 +6261,11 @@ msgstr "Näytä asentokulma "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr "Liitä alkupiste kiertyvään taivaaseen"
+msgstr "Lukitse alkupiste kiertyvään taivaaseen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr "Liitä loppupiste kiertyvään taivaaseen"
+msgstr "Lukitse loppupiste kiertyvään taivaaseen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
@@ -6274,7 +6275,7 @@ msgstr "Muoto"
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
-msgstr "Käytä kulmille dms-formaattia"
+msgstr "Näytä kulmat dms-muodossa"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:743
@@ -6351,7 +6352,7 @@ msgstr ""
 
 #: plugins/Oculars/src/Oculars.cpp:846
 msgid "Please select an object before switching to ocular view."
-msgstr "Valitse kohde ennen okulaarinäkymään vaihtamista."
+msgstr "Valitse kohde ennen okulaarinäkymään siirtymistä."
 
 #: plugins/Oculars/src/Oculars.cpp:940
 msgid "&Previous ocular"
@@ -6367,7 +6368,7 @@ msgstr "Valitse &okulaari"
 
 #: plugins/Oculars/src/Oculars.cpp:983
 msgid "Toggle &crosshair"
-msgstr "Näytä &ristikko"
+msgstr "Näytä &hiusristikko"
 
 #: plugins/Oculars/src/Oculars.cpp:991
 msgid "Configure &Oculars"
@@ -6412,7 +6413,7 @@ msgstr "Okulaarit-valikko"
 
 #: plugins/Oculars/src/Oculars.cpp:1326
 msgid "Show crosshairs"
-msgstr "Näytä ristikko"
+msgstr "Näytä hiusristikko"
 
 #: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Image sensor frame"
@@ -6428,11 +6429,11 @@ msgstr "Okulaarit-laajennuksen asetukset"
 
 #: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Select next telescope"
-msgstr "Valitse seuraava teleskooppi"
+msgstr "Valitse seuraava kaukoputki"
 
 #: plugins/Oculars/src/Oculars.cpp:1333
 msgid "Select previous telescope"
-msgstr "Valitse edellinen teleskooppi"
+msgstr "Valitse edellinen kaukoputki"
 
 #: plugins/Oculars/src/Oculars.cpp:1335
 msgid "Select next eyepiece"
@@ -6451,13 +6452,13 @@ msgstr "Ristikon Rekt./Dekl. (J2000.0)"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
-msgstr "Okulaari %1"
+msgstr "Okulaari n:o %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1606
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
-msgstr "Okulaari %1 : %2"
+msgstr "Okulaari n:o %1 : %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1620
@@ -6487,13 +6488,13 @@ msgstr "Linssi #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1648
 msgid "Lens: none"
-msgstr "Linssi: ei"
+msgstr "Linssi: ei mitään"
 
 #: plugins/Oculars/src/Oculars.cpp:1678 plugins/Oculars/src/Oculars.cpp:1719
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
-msgstr "Kaukoputki %1"
+msgstr "Kaukoputki n:o %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1681
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
@@ -6518,19 +6519,19 @@ msgstr "Mitat: %1"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
-msgstr "Ilmaisin %1"
+msgstr "Ilmaisin n:o %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1711
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr "Ilmaisin %1: %2"
+msgstr "Ilmaisin n:o %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1724
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr "Kaukoputki %1: %2"
+msgstr "Kaukoputki n:o %1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1981
 msgid "&Lens"
@@ -6602,7 +6603,7 @@ msgstr "Kierrä ilmaisimen kenttää 1 aste vastapäivään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
 msgid "Reset the sensor frame rotation"
-msgstr "Palauta kennon kierto"
+msgstr "Palauta ilmaisimen kierto"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:313
 msgid "Rotate the sensor frame 1 degree clockwise"
@@ -6631,7 +6632,7 @@ msgstr "Suurennuskerroin: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
 msgid "Lens: None"
-msgstr "Linssi: ei"
+msgstr "Linssi: ei mitään"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Multiplicity: N/A"
@@ -6656,18 +6657,18 @@ msgstr "Näiden kiikarien antama todellinen näkökenttä"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr "Tämän okulaari/barlow/kaukoputki-yhditelmän antama suurennus"
+msgstr "Tämän okulaari/barlow/kaukoputki-yhdistelmän antama suurennus"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
-"Tämän okulaari/barlow/kaukoputki -yhdistelmän antama todellinen näkökenttä"
+"Tämän okulaari/barlow/kaukoputki-yhdistelmän antama todellinen näkökenttä"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr "tod. näkök."
+msgstr "Todell. näkökenttä"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
@@ -10057,9 +10058,10 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
-"Itsensäselittävä. Laajennus näyttää nousun, laskun ja meridiaanin ohituksen "
-"ajat. Tarkat ajat näille efemerideille on annettu kahdella tavalla: "
-"aikaväleinä (viitaten nykyhetkeen) ja kellonaikoina (paikallista aikaa)."
+"Itsensäselittävä. Laajennus näyttää nousun, laskun ja kulminoinnin "
+"(meridiaanin ohituksen ajat). Tarkat ajat näille efemerideille on annettu "
+"kahdella tavalla: aikaväleinä (viitaten nykyhetkeen) ja kellonaikoina "
+"(paikallista aikaa)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
@@ -10118,11 +10120,11 @@ msgid ""
 msgstr ""
 "Tapahtuu, kun taivaankappaleen kulmaetäisyys Aurinkoon on suurimmillaan. "
 "Useimmissa tapauksissa voidaan sanoa, että Auringon ja kohteen "
-"ekvatoriaaliset longitudit eroavat 180 astetta, eli Aurinko on kohteen "
+"ekvatoriaaliset pituusasteet eroavat 180 astetta, eli Aurinko on kohteen "
 "vastakkaisella puolella. Kun kohteen kulmaetäisyys on suurimmillaan "
 "Auringosta (oli se sitten planeetta tai tähti), se kulminoi (on etelässä) "
-"keskiyöllä ja on taivaan tummimmalla alueella tällä deklinaatiolla. Eli on "
-"siis 'paras' yö tämän nimenomaisen kohteen havaitsemiseen."
+"keskiyöllä ja on taivaan tummimmalla alueella tällä deklinaatiolla; on siis "
+"'paras' yö tämän nimenomaisen kohteen havaitsemiseen."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Nights with source above horizon:"
@@ -10410,26 +10412,26 @@ msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
 "click on the radiant's marker, you can see all the details about its "
-"position and activity. Most data used on this plugin comes from the oficial "
+"position and activity. Most data used on this plugin comes from the official "
 "<a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog.</p><p>It has three types of markers:<ul><li><b>Confirmed:</b> the "
 "radiant is active and its data was confirmed. Thus, this is a historical "
 "(really occurred in the past) or predicted meteor "
 "shower.</li><li><b>Generic:</b> the radiant is active, but its data was not "
 "confirmed. It means that this can occur on real life, but that we do not "
-"have real data about its activity for the current sky "
+"have proper data about its activity for the current "
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
 "<p>Tämä laajennus mahdollistaa jaksollisten meteoriparvien sekä aktiivisten "
 "ja epäaktiivisten radianttien näyttämisen.</p><p>Klikkaamalla radianttia "
 "saat näkyviin tiedot sen sijainnista ja aktiivisuudesta. Suurin osa tämän "
-"laajennuksen käyttämistä tiedoista on saatu virallisesta <a "
-"href=\"http://imo.net\">Kansainvälisen meteorijärjestön</a> "
+"laajennuksen käyttämistä tiedoista on saatu virallisesta <ahref=\\"
+"\"http://imo.net\\\">Kansainvälisen meteorijärjestön</a> "
 "luettelosta.</p><p>Osoittimia on kolmea tyyppiä:<ul><li><b>Vahvistettu:</b> "
 "radiantti on aktiivinen ja sen tiedot on vahvistettu. Näin ollen kyseessä on "
 "historiallinen (vahvistetusti menneisyydessä tapahtunut) tai ennustettu "
-"meteoriparvi.</li><li><b>Ei vahvistettu:</b> radiantti on aktiivinen, mutta "
+"meteoriparvi.</li><li><b>Vahvistamaton:</b> radiantti on aktiivinen, mutta "
 "sen tietoja ei ole vahvistettu. Parvi voi tapahtua todellisuudessa, mutta "
 "sen aktiivisuudesta ei ole tietoja kuluvalle "
 "vuodelle.</li><li><b>Epäaktiivinen:</b> radiantti on epäaktiivinen nykyisenä "
@@ -10443,11 +10445,11 @@ msgstr "Vahvistettu"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:132
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
 msgid "Generic"
-msgstr "Geneerinen"
+msgstr "Vahvistamaton"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:508
 msgid "generic data"
-msgstr "geneerinen data"
+msgstr "tiedot vahvistamattomat"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:512
 msgid "confirmed data"
@@ -10495,7 +10497,7 @@ msgstr "Maksimi: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgid "Solar longitude"
-msgstr "Auringon pituuspiiri"
+msgstr "Auringon pituusaste"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "variable"
@@ -11177,7 +11179,7 @@ msgstr "Aseta radianttien värit"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr "Aktiivinen radiantti - geneerinen data"
+msgstr "Aktiivinen radiantti - tiedot vahvistamattomat"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
@@ -12465,6 +12467,9 @@ msgstr "Nykyinen planeetta: Saturnus"
 
 #~ msgid "/"
 #~ msgstr "/"
+
+#~ msgid "Show planets"
+#~ msgstr "Näytä planeetat"
 
 #~ msgid "Light pollution: "
 #~ msgstr "Valosaaste: "
