@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 22:35+0600\n"
+"POT-Creation-Date: 2015-09-25 20:04+0600\n"
 "PO-Revision-Date: 2015-09-20 23:25+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-23 05:14+0000\n"
-"X-Generator: Launchpad (build 17749)\n"
+"X-Launchpad-Export-Date: 2015-09-26 05:14+0000\n"
+"X-Generator: Launchpad (build 17754)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -2779,7 +2779,7 @@ msgstr ""
 "এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে "
 "চান ?"
 
-#: src/StelMainView.cpp:975
+#: src/StelMainView.cpp:977
 #, qt-format
 msgid "Stellarium %1"
 msgstr "স্টেলারিয়াম %1"
@@ -4930,8 +4930,8 @@ msgid "Planets and satellites"
 msgstr "গ্রহ এবং উপগ্রহ"
 
 #: src/ui_viewDialog.h:1598
-msgid "Show planets"
-msgstr "গ্রহ এবং উপগ্রহ"
+msgid "Show Solar System objects"
+msgstr ""
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -10357,29 +10357,17 @@ msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
 "click on the radiant's marker, you can see all the details about its "
-"position and activity. Most data used on this plugin comes from the oficial "
+"position and activity. Most data used on this plugin comes from the official "
 "<a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog.</p><p>It has three types of markers:<ul><li><b>Confirmed:</b> the "
 "radiant is active and its data was confirmed. Thus, this is a historical "
 "(really occurred in the past) or predicted meteor "
 "shower.</li><li><b>Generic:</b> the radiant is active, but its data was not "
 "confirmed. It means that this can occur on real life, but that we do not "
-"have real data about its activity for the current sky "
+"have proper data about its activity for the current "
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
-"<p>এই সরঞ্জামটি নির্দিষ্ট সময় অন্তর হওয়া উল্কা বৃষ্টির পরিস্থিতি নকর করে "
-"দেখায় ও বিভিন্ন সক্রিয় এবং নিষ্ক্রিয় উৎপত্তি বিন্দুগুলির অবস্থান দেখায় "
-"।</p><p>উৎপত্তি বিন্দুতে একবার ক্লিক করে আপনি ঐ উল্কাবৃষ্টি সম্পর্কে তথ্য "
-"জানতে পারবেন । তথ্যগুলির বেশিভাগই <a href=\"http://imo.net\">International "
-"Meteor Organization</a> এর অফিসিয়াল তালিকা থেকে নেওয়া ।</p><p>সাধারনত: তিন "
-"রকমের উৎপত্তি বিন্দু হয়ে থাকে :<ul><li><b>সুনিশ্চিত:</b> the radiant is "
-"active and its data was confirmed. Thus, this is a historical (really "
-"occurred in the past) or predicted meteor shower.</li><li><b>Generic:</b> "
-"the radiant is active, but its data was not confirmed. It means that this "
-"can occur on real life, but that we do not have real data about its activity "
-"for the current sky year.</li><li><b>নিষ্ক্রিয়:</b> এই মূহুর্তে এখান থেকে "
-"কোনো উল্কা বৃষ্টির সম্ভাবনা নেই ।</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -12653,6 +12641,9 @@ msgstr "শনি"
 
 #~ msgid "Use as default"
 #~ msgstr "প্রতিবার শুরুর সময় এখানে অবস্থান"
+
+#~ msgid "Show planets"
+#~ msgstr "গ্রহ এবং উপগ্রহ"
 
 #~ msgid "Use brightness settings for landscapes"
 #~ msgstr "ভূমিরূপ প্রদত্ত উজ্জ্বল্যতার বিন্যাস ব্যবহার"

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 22:35+0600\n"
+"POT-Creation-Date: 2015-09-25 20:04+0600\n"
 "PO-Revision-Date: 2015-09-09 17:33+0000\n"
 "Last-Translator: yuri manuel <yur1m4nuel@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-23 05:25+0000\n"
-"X-Generator: Launchpad (build 17749)\n"
+"X-Launchpad-Export-Date: 2015-09-26 05:24+0000\n"
+"X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -2789,7 +2789,7 @@ msgstr ""
 "Deseja ignorar e suprimir este aviso no futuro e tentar continuar mesmo "
 "assim no modo degradado?"
 
-#: src/StelMainView.cpp:975
+#: src/StelMainView.cpp:977
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4956,8 +4956,8 @@ msgid "Planets and satellites"
 msgstr "Planetas e satélites"
 
 #: src/ui_viewDialog.h:1598
-msgid "Show planets"
-msgstr "Mostrar planetas"
+msgid "Show Solar System objects"
+msgstr ""
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -10488,31 +10488,17 @@ msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "
 "click on the radiant's marker, you can see all the details about its "
-"position and activity. Most data used on this plugin comes from the oficial "
+"position and activity. Most data used on this plugin comes from the official "
 "<a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog.</p><p>It has three types of markers:<ul><li><b>Confirmed:</b> the "
 "radiant is active and its data was confirmed. Thus, this is a historical "
 "(really occurred in the past) or predicted meteor "
 "shower.</li><li><b>Generic:</b> the radiant is active, but its data was not "
 "confirmed. It means that this can occur on real life, but that we do not "
-"have real data about its activity for the current sky "
+"have proper data about its activity for the current "
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
-"<p align=\"justify\">Este complemento permite-lhe simular chuvas de meteoros "
-"periódicas e mostrar um marcador para cada radiante activo e "
-"inactivo.</p><p>Com um clique no marcador do radiante, pode ver todos os "
-"detalhes sobre a sua posição e a sua actividade. A maior parte dos dados "
-"utilizados neste complemento provém do catálogo oficial disponível em <a "
-"href=\"http://imo.net\">International Meteor Organization</a>.</p><p>Ele tem "
-"três tipos de marcadores:<ul><li><b>Confirmado</b>: o radiante está activo e "
-"os seus dados foram confirmados. Assim, essa é uma chuva de meteoros "
-"histórica (que, de facto, ocorreu no passado) ou "
-"prevista.</li><li><b>Genérico</b>: o radiante está activo, mas os dados não "
-"foram confirmados, ou seja, isso significa que pode ocorrer na vida real, "
-"mas não temos dados reais sobre a sua actividade no ano celeste "
-"actual.</li><li><b>Inativo</b>: o radiante está inactivo na data celeste "
-"actual.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -12418,6 +12404,9 @@ msgstr "Planeta Atual: Saturno"
 
 #~ msgid "/"
 #~ msgstr "/"
+
+#~ msgid "Show planets"
+#~ msgstr "Mostrar planetas"
 
 #, qt-format
 #~ msgid "Distance: %1 Light Years"
