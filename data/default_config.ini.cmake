@@ -272,6 +272,8 @@ flag_planet_magnitude_limit         = false
 planet_magnitude_limit              = 6.5
 flag_nebula_magnitude_limit         = false
 nebula_magnitude_limit              = 8.5
+flag_use_de430                      = false
+flag_use_de431                      = false
 de430_path                          = ""
 de431_path                          = ""
 
