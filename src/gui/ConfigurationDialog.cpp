@@ -1148,34 +1148,49 @@ void ConfigurationDialog::downloadStars()
 
 void ConfigurationDialog::de430ButtonClicked()
 {
-	StelApp::getInstance().getCore()->
-		setDe430Status(StelApp::getInstance().getCore()->de430IsActive());
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
 
+	StelApp::getInstance().getCore()->
+		setDe430Active(!StelApp::getInstance().getCore()->de430IsActive());
+	conf->setValue("astro/flag_use_de430", StelApp::getInstance().getCore()->de430IsActive());
+
+	resetEphemControls(); //refresh labels
 }
 
 void ConfigurationDialog::de431ButtonClicked()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
 	StelApp::getInstance().getCore()->
-		setDe431Status(StelApp::getInstance().getCore()->de431IsActive());
+		setDe431Active(!StelApp::getInstance().getCore()->de431IsActive());
+	conf->setValue("astro/flag_use_de431", StelApp::getInstance().getCore()->de431IsActive());
+
+	resetEphemControls(); //refresh labels
 }
 
 
 void ConfigurationDialog::resetEphemControls()
 {
-	StelApp::getInstance().getCore()->initEphemeridesFunctions();
+//	StelApp::getInstance().getCore()->initEphemeridesFunctions(); // WHY HERE?
 
 	ui->downloadLabel->setText(q_("VSOP87 is available"));
 	ui->de430Button->setText(q_("DE430: NO"));
 	ui->de431Button->setText(q_("DE431: NO"));
 
+	ui->de430Button->setEnabled(StelApp::getInstance().getCore()->de430IsAvailable());
+	ui->de431Button->setEnabled(StelApp::getInstance().getCore()->de431IsAvailable());
+
+
 	if(StelApp::getInstance().getCore()->de430IsActive())
 	{
-		ui->de430Button->setText(q_("DE430: YES"));
+		ui->de430Button->setText(q_("DE430: 1550...2650"));
 	}
 
 	if(StelApp::getInstance().getCore()->de431IsActive())
 	{
-		ui->de431Button->setText(q_("DE431: YES"));
+		ui->de431Button->setText(q_("DE431: -13.000...17.000"));
 	}
 }
 
