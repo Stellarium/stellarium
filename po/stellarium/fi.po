@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-09-25 15:49+0000\n"
+"PO-Revision-Date: 2015-09-26 14:25+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:16+0000\n"
+"X-Launchpad-Export-Date: 2015-09-27 05:11+0000\n"
 "X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -939,7 +939,7 @@ msgstr "Yötila"
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
-msgstr "Päivays ja aika"
+msgstr "Päiväys ja aika"
 
 #: src/core/StelCore.cpp:200 src/core/StelMovementMgr.cpp:130
 msgid "Movement and Selection"
@@ -2314,11 +2314,11 @@ msgstr "Kantakaupunki"
 
 #: src/gui/ViewDialog.cpp:568
 msgid "The naked-eye limiting magnitude is"
-msgstr "Paljaan silmän rajamagnitudi on"
+msgstr "paljaan silmän rajamagnitudi on"
 
 #: src/gui/ViewDialog.cpp:592
 msgid "Abbreviated"
-msgstr "Lyhennetty"
+msgstr "Lyhennetyt"
 
 #: src/gui/ViewDialog.cpp:593
 msgid "Native"
@@ -2326,7 +2326,7 @@ msgstr "Paikalliset"
 
 #: src/gui/ViewDialog.cpp:594
 msgid "Translated"
-msgstr "Käännetty"
+msgstr "Käännetyt"
 
 #: src/gui/ViewDialog.cpp:718
 msgid "No description"
@@ -10257,8 +10257,8 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
-"Tämä laajennus mahdollistaa portaittaisen zoomaamisen näppäimistöllä kuten "
-"<em>Cartes du Ciel</em> -ohjelmassa."
+"Tämä laajennus mahdollistaa portaittaisen lähentämisen ja loitontamisen "
+"näppäimistöllä kuten <em>Cartes du Ciel</em> -ohjelmassa."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
@@ -11151,7 +11151,7 @@ msgstr "Ota laajennus käyttöön käynnistyksen yhteydessä"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr "Näytä laajennuksen käyttöönotto/käytöstäpoistamispainike"
+msgstr "Näytä laajennuksen käyttöönotto-/käytöstäpoistamispainike"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
