@@ -46,7 +46,7 @@ void InitDE430(const char* filepath)
 
 	if(jpl_init_error_code() != 0)
 	{
-		StelApp::getInstance().getCore()->setDe430Status(false);
+		StelApp::getInstance().getCore()->setDe430Active(false);
 		qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
 	}
 	else

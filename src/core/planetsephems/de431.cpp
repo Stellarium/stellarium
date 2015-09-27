@@ -46,7 +46,7 @@ void InitDE431(const char* filepath)
 
 	if(jpl_init_error_code() != 0)
 	{
-		StelApp::getInstance().getCore()->setDe431Status(false);
+		StelApp::getInstance().getCore()->setDe431Active(false);
 		qDebug() << "Error "<< jpl_init_error_code() << "at DE431 init:" << jpl_init_error_message();
 	}
 	else

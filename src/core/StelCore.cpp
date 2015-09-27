@@ -78,6 +78,10 @@ StelCore::StelCore()
 	, jdOfLastJDUpdate(0.)
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
+	, de430Available(false)
+	, de431Available(false)
+	, de430Active(false)
+	, de431Active(false)
 {
 	toneConverter = new StelToneReproducer();
 
@@ -1934,6 +1938,18 @@ double StelCore::getCurrentEpoch() const
 	return 2000.0 + (getJD() - 2451545.0)/365.25;
 }
 
+// DE430/DE431 handling
+
+bool StelCore::de430IsAvailable()
+{
+	return de430Available;
+}
+
+bool StelCore::de431IsAvailable()
+{
+	return de431Available;
+}
+
 bool StelCore::de430IsActive()
 {
 	return de430Active;
@@ -1944,22 +1960,21 @@ bool StelCore::de431IsActive()
 	return de431Active;
 }
 
-void StelCore::setDe430Status(bool status)
+void StelCore::setDe430Active(bool status)
 {
-	de430Active = status;
+	de430Active = de430Available && status;
 }
 
-void StelCore::setDe431Status(bool status)
+void StelCore::setDe431Active(bool status)
 {
-	de431Active = status;
+	de431Active = de431Available && status;
 }
 
 void StelCore::initEphemeridesFunctions()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	QString ephemFilePath = StelFileMgr::findFile("ephem", 
-		StelFileMgr::Directory);
+	QString ephemFilePath = StelFileMgr::findFile("ephem", StelFileMgr::Directory);
 	
 	qDebug() << "ephem Folder available: " << !ephemFilePath.isEmpty();
 
@@ -1973,47 +1988,41 @@ void StelCore::initEphemeridesFunctions()
 		//<-- DE430 -->
 		if(de430ConfigPath.remove(QChar('"')).isEmpty())
 		{
-			de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), 
-				StelFileMgr::File);
-			qDebug() << "DE430 file in default search path: " <<
-				de430FilePath;
+			de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
+			qDebug() << "DE430 file in default search path: " << de430FilePath;
   		}
   		else
   		{
-  			de430FilePath = StelFileMgr::findFile(de430ConfigPath, 
-				StelFileMgr::File);
-  		}
+			de430FilePath = StelFileMgr::findFile(de430ConfigPath, StelFileMgr::File);
+			qDebug() << "DE430 file via configured external path:" << de431ConfigPath;
+		}
 
-  		setDe430Status(!de430FilePath.isEmpty());
-		qDebug() << "DE430 available: " << de430Active;
-  		
-  		if(de430Active)
+		de430Available=!de430FilePath.isEmpty();
+		qDebug() << "DE430 available: " << de430Available;
+		if(de430Available)
   		{
   			EphemWrapper::init_de430(de430FilePath.toStdString().c_str());
   		}
+		setDe430Active(de430Available && conf->value("astro/flag_use_de430").toBool());
 
   		//<-- DE431 -->
   		if(de431ConfigPath.remove(QChar('"')).isEmpty())
 		{
-			de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), 
-				StelFileMgr::File);
-			qDebug() << "DE431 file via default search path:" <<
-				de431FilePath;
+			de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);
+			qDebug() << "DE431 file in default search path:" << de431FilePath;
   		}
   		else
   		{
-  			de431FilePath = StelFileMgr::findFile(de431ConfigPath, 
-				StelFileMgr::File);
-  			qDebug() << "DE431 file via configured external path:" <<
-  				de431ConfigPath;
+			de431FilePath = StelFileMgr::findFile(de431ConfigPath, StelFileMgr::File);
+			qDebug() << "DE431 file via configured external path:" << de431ConfigPath;
   		}
 
-	 	setDe431Status(!(de431FilePath.isEmpty()));
-	 	qDebug() << "DE431 available: " << de431Active;
-	 	
-	 	if(de431Active)
+		de431Available=!de431FilePath.isEmpty();
+		qDebug() << "DE431 available: " << de431Available;
+		if(de431Available)
 		{
 			EphemWrapper::init_de431(de431FilePath.toStdString().c_str());
   		}
-  	}
+		setDe431Active(de431Available && conf->value("astro/flag_use_de431").toBool());
+	}
 }
