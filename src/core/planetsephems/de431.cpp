@@ -42,18 +42,21 @@ static bool initDone = false;
 
 void InitDE431(const char* filepath)
 {
-    ephem = jpl_init_ephemeris(filepath, nams, vals);
+	ephem = jpl_init_ephemeris(filepath, nams, vals);
 
-    if(jpl_init_error_code() != 0)
-    {
-        StelApp::getInstance().getCore()->setDe431Status(false);
-        qDebug() << "Error "<< jpl_init_error_code() << "at DE431 init:" << jpl_init_error_message();
-    }
-    else
-    {
-        initDone = true;
-        qDebug() << "DE431 init successful";
-    }
+	if(jpl_init_error_code() != 0)
+	{
+		StelApp::getInstance().getCore()->setDe431Status(false);
+		qDebug() << "Error "<< jpl_init_error_code() << "at DE431 init:" << jpl_init_error_message();
+	}
+	else
+	{
+		initDone = true;
+		double jd1, jd2;
+		jd1=jpl_get_double(ephem, JPL_EPHEM_START_JD);
+		jd2=jpl_get_double(ephem, JPL_EPHEM_END_JD);
+		qDebug() << "DE431 init successful. startJD=" << QString::number(jd1, 'f', 4) << "endJD=" << QString::number(jd2, 'f', 4);
+	}
 }
 
 void GetDe431Coor(double jd, int planet_id, double * xyz)
