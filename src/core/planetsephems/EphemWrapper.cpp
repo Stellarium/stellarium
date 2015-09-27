@@ -64,14 +64,21 @@ void EphemWrapper::init_de431(const char* filepath)
   InitDE431(filepath);
 }
 
-bool jd_fits_de431(double jd)
+bool jd_fits_de431(const double jd)
 {
-    return !(jd < -3100015.5 || jd > 8000016.5);
+	// return !(jd < -3100015.5 || jd > 8000016.5);
+	// GZ Those limits lead to crash.
+	//    Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
+	//return !(jd < -3027215.5 || jd > 7930192.5);
+	// GZ limits inside those where sun can jump between ecliptic of date and ecliptic2000.
+	// TODO: Behaviour at upper limit is totally whacko!
+	return !(jd < -3027188.25 || jd > 7930192.5);
 }
 
-bool jd_fits_de430(double jd)
+bool jd_fits_de430(const double jd)
 {
-    return !(jd < 2287184.5 || jd > 2688974.5);
+	//return !(jd < 2287184.5 || jd > 2688974.5);
+	return !(jd < 2287184.5 || jd > 2688976.5);
 }
 
 bool use_de430(double jd)
@@ -88,68 +95,69 @@ bool use_de431(double jd)
 
 void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 {
-    if(!std::isfinite(jd))
-    {
-        qDebug() << "SKIPPED CoordCalc, jd is infinite/nan";
-        return;
-    }
+	if(!std::isfinite(jd))
+	{
+		qDebug() << "get_planet_helio_coordsv(): SKIPPED CoordCalc, jd is infinite/nan: " << jd;
+		return;
+	}
 
-  	if(use_de430(jd))
-  	{
-  		GetDe430Coor(jd, planet_id + 1, xyz);
-  	}
-  	else if(use_de431(jd))
-  	{
-  		GetDe431Coor(jd, planet_id + 1, xyz);
-  	}
-  	else //VSOP87 as fallback
-  	{
-      GetVsop87Coor(jd, planet_id, xyz);
-    }
+	if(use_de430(jd))
+	{
+		GetDe430Coor(jd, planet_id + 1, xyz);
+	}
+	else if(use_de431(jd))
+	{
+		GetDe431Coor(jd, planet_id + 1, xyz);
+	}
+	else //VSOP87 as fallback
+	{
+		GetVsop87Coor(jd, planet_id, xyz);
+	}
 }
 
 void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], int planet_id)
 {
-    if(!(std::isfinite(jd) && std::isfinite(jd0)))
-    {
-        qDebug() << "SKIPPED CoordCalc, jd is infinite/nan";
-        return;
-    }
+	if(!(std::isfinite(jd) && std::isfinite(jd0)))
+	{
+		qDebug() << "get_planet_helio_osculating_coordsv(): SKIPPED CoordCalc, jd0 or jd is infinite/nan. jd0:" << jd0 << "jd: "<< jd;
+		return;
+	}
 
-    if(use_de430(jd))
-    {
-        GetDe430OsculatingCoor(jd0, jd, planet_id + 1, xyz);
-    }
-    else if(use_de431(jd))
-    {
-        GetDe431OsculatingCoor(jd0, jd, planet_id + 1, xyz);
-    }
-    else //VSOP87 as fallback
-    {
-      GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz);
-    }
+	if(use_de430(jd))
+	{
+		GetDe430OsculatingCoor(jd0, jd, planet_id + 1, xyz);
+	}
+	else if(use_de431(jd))
+	{
+		GetDe431OsculatingCoor(jd0, jd, planet_id + 1, xyz);
+	}
+	else //VSOP87 as fallback
+	{
+		GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz);
+	}
 }
 
-/* Chapter 31 Pg 206-207 Equ 31.1 31.2 , 31.3 using VSOP 87
- * Calculate planets rectangular heliocentric ecliptical coordinates
- * for given julian day. Values are in AU.
+/* Chapter 31 Pg 206-207 Equ 31.1 31.2, 31.3 using VSOP 87
+ * Calculate Pluto's rectangular heliocentric ecliptical coordinates
+ * for given Julian Day. Values are in AU.
  * params : Julian day, rect coords */
 
 void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 {
-    if(!std::isfinite(jd))
-    {
-        qDebug() << "SKIPPED PlutoCoordCalc, jd is infinite/nan";
-        return;
-    }
+	Q_UNUSED(unused);
+	if(!std::isfinite(jd))
+	{
+		qDebug() << "get_pluto_helio_coordsv(): SKIPPED PlutoCoordCalc, jd is infinite/nan:" << jd;
+		return;
+	}
 
 	if(use_de430(jd))
 	{
-		  GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+		GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
 	}
 	else if(use_de431(jd))
 	{
-		  GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+		GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
 	}
 	else // fallback to previous solution
 
@@ -173,32 +181,32 @@ void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
 
 void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) 
 {
-    if(!std::isfinite(jd))
-    {
-        qDebug() << "SKIPPED EarthCoordCalc, jd is infinite/nan";
-        return;
-    }
+	if(!std::isfinite(jd))
+	{
+		qDebug() << "get_earth_helio_coordsv(): SKIPPED EarthCoordCalc, jd is infinite/nan:" << jd;
+		return;
+	}
 
-  	if(use_de430(jd))
-  	{
-  		  GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
-  	}
-  	else if(use_de431(jd))
-  	{
-  		  GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
-  	}
-  	else //VSOP87 as fallback
-  	{
-        double moon[3];
-        GetVsop87Coor(jd,EPHEM_EMB_ID,xyz);
-        GetElp82bCoor(jd,moon);
-        /* Earth != EMB:
-        0.0121505677733761 = mu_m/(1+mu_m),
-        mu_m = mass(moon)/mass(earth) = 0.01230002 */
-        xyz[0] -= 0.0121505677733761 * moon[0];
-        xyz[1] -= 0.0121505677733761 * moon[1];
-        xyz[2] -= 0.0121505677733761 * moon[2];
-  	}
+	if(use_de430(jd))
+	{
+		GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+	}
+	else if(use_de431(jd))
+	{
+		GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+	}
+	else //VSOP87 as fallback
+	{
+		double moon[3];
+		GetVsop87Coor(jd,EPHEM_EMB_ID,xyz);
+		GetElp82bCoor(jd,moon);
+		/* Earth != EMB:
+	0.0121505677733761 = mu_m/(1+mu_m),
+	mu_m = mass(moon)/mass(earth) = 0.01230002 */
+		xyz[0] -= 0.0121505677733761 * moon[0];
+		xyz[1] -= 0.0121505677733761 * moon[1];
+		xyz[2] -= 0.0121505677733761 * moon[2];
+	}
 }
 
 void get_mars_helio_coordsv(double jd,double xyz[3], void* unused)

@@ -42,18 +42,21 @@ static bool initDone = false;
 
 void InitDE430(const char* filepath)
 {
-  ephem = jpl_init_ephemeris(filepath, nams, vals);
-  
-  if(jpl_init_error_code() != 0)
-  {
-    StelApp::getInstance().getCore()->setDe430Status(false);
-    qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
-  }
-  else
-  {
-    initDone = true;
-    qDebug() << "DE430 init successful";
-  }
+	ephem = jpl_init_ephemeris(filepath, nams, vals);
+
+	if(jpl_init_error_code() != 0)
+	{
+		StelApp::getInstance().getCore()->setDe430Status(false);
+		qDebug() << "Error "<< jpl_init_error_code() << "at DE430 init:" << jpl_init_error_message();
+	}
+	else
+	{
+		initDone = true;
+		double jd1, jd2;
+		jd1=jpl_get_double(ephem, JPL_EPHEM_START_JD);
+		jd2=jpl_get_double(ephem, JPL_EPHEM_END_JD);
+		qDebug() << "DE430 init successful. startJD=" << QString::number(jd1, 'f', 4) << "endJD=" << QString::number(jd2, 'f', 4);
+	}
 }
 
 void TerminateDE430()
