@@ -592,7 +592,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 			"<li>"
 				"<b>Generic:</b> "
 				"the radiant is active, but its data was not confirmed."
-				" It means that this can occur on real life, but that we do not have proper"
+				" It means that this can occur in real life, but that we do not have proper"
 				" data about its activity for the current year."
 			"</li>"
 			"<li>"
