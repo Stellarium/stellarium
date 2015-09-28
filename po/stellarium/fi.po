@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-09-26 14:25+0000\n"
+"PO-Revision-Date: 2015-09-27 09:48+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-27 05:11+0000\n"
+"X-Launchpad-Export-Date: 2015-09-28 05:11+0000\n"
 "X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -90,7 +90,7 @@ msgstr "Galaktinen ekvaattori"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1781
 msgid "O./C. longitude"
-msgstr "Oppositio/konjunktiolinja"
+msgstr "Oppositio-/konjunktiolinja"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -155,7 +155,7 @@ msgstr "Galaktinen ekvaattori"
 #: src/core/modules/GridLinesMgr.cpp:890
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
-msgstr "Oppositio/konjunktiolinja"
+msgstr "Oppositio-/konjunktiolinja"
 
 #: src/core/modules/GridLinesMgr.cpp:891
 msgid "Precession Circles"
@@ -1196,11 +1196,11 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
-"Tuckermanin luettelo (1962, 1964) listaa auringon, kuun ja planeettojen "
-"paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649 jKr.. Luetellut "
-"paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin aikaa eli 16.00 "
-"GMT. Sama suhde otettiin epäsuorasti käyttöön myös Goldstinen (1973) "
-"syzygitaulukoihin."
+"Tuckermanin taulukot (1962, 1964) luetteloivat Auringon, Kuun ja "
+"planeettojen paikat 5 ja 10 päivän välein vuodesta 601 eKr. vuoteen 1649 "
+"jKr. Luetellut paikat ovat (keskimäärin) kello 19.00 Babylonin/Bagdadin "
+"aikaa eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös "
+"Goldstinen (1973) syzygitaulukoihin."
 
 #: src/core/StelCore.cpp:1676
 #, qt-format
@@ -1650,7 +1650,7 @@ msgstr "Atsim./Kork.: %1/%2"
 #: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #: src/core/StelObject.cpp:226 src/core/StelObject.cpp:228
 msgid "Ecliptic longitude/latitude"
-msgstr "Ekliptinen pituus/leveys"
+msgstr "Ekliptikaalinen pituus/leveys"
 
 #: src/core/StelObject.cpp:231 src/core/StelObject.cpp:233
 msgid "Ecliptic obliquity"
@@ -5278,8 +5278,8 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
-"Oppositio/konjunktiolinja - ekliptisen pituuden linja, joka kulkee molempien "
-"ekliptisten napojen sekä Auringon ja oppositiopisteen kautta."
+"Oppositio-/konjunktiolinja - ekliptisen pituuden linja, joka kulkee "
+"molempien ekliptisten napojen sekä Auringon ja oppositiopisteen kautta."
 
 #: src/ui_viewDialog.h:1782
 msgid "Projection"
@@ -11312,11 +11312,11 @@ msgstr "Rektaskensio/Deklinaatio"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr "Ekliptinen pituus/leveys"
+msgstr "Ekliptikaalinen pituus/leveys"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr "Ekliptinen Pituus/Leveys (J2000.0)"
+msgstr "Ekliptikaalinen pituus/leveys (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"

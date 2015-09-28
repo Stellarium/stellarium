@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-08-07 19:43+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2015-09-27 20:23+0000\n"
+"Last-Translator: Andrea Giudiceandrea <andreaerdna@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-09-28 05:11+0000\n"
 "X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -274,7 +274,7 @@ msgstr "Dimensione: %1"
 #: src/core/modules/Nebula.cpp:222
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Dimensione: %1 x %2"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
@@ -302,12 +302,12 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Distanza: %1 %2"
 
 #: src/core/modules/Nebula.cpp:285
 #, qt-format
 msgid "Redshift: %1"
-msgstr ""
+msgstr "Redshift: %1"
 
 #: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:247
 #, qt-format
@@ -561,7 +561,7 @@ msgstr "luminosità non documentata"
 
 #: src/core/modules/Nebula.cpp:984
 msgid "galaxy"
-msgstr ""
+msgstr "galassia"
 
 #: src/core/modules/Nebula.cpp:987
 msgid "active galaxy"
@@ -597,11 +597,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1011
 msgid "planetary nebula"
-msgstr ""
+msgstr "nebulosa planetaria"
 
 #: src/core/modules/Nebula.cpp:1014
 msgid "dark nebula"
-msgstr ""
+msgstr "nebulosa oscura"
 
 #: src/core/modules/Nebula.cpp:1017
 msgid "cluster associated with nebulosity"
@@ -625,7 +625,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1032
 msgid "supernova remnant"
-msgstr ""
+msgstr "resto di supernova"
 
 #: src/core/modules/Nebula.cpp:1035
 msgid "stellar association"
@@ -645,11 +645,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1047
 msgid "BL Lac object"
-msgstr ""
+msgstr "oggetto BL Lacertae"
 
 #: src/core/modules/Nebula.cpp:1050
 msgid "blazar"
-msgstr ""
+msgstr "blazar"
 
 #: src/core/modules/Nebula.cpp:1053
 msgid "molecular cloud"
@@ -669,7 +669,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1065
 msgid "protoplanetary nebula"
-msgstr ""
+msgstr "nebulosa protoplanetaria"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
@@ -1654,7 +1654,7 @@ msgstr "Longitudine eclittica/latitudine"
 
 #: src/core/StelObject.cpp:231 src/core/StelObject.cpp:233
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Obliquità dell'eclittica"
 
 #: src/core/StelObject.cpp:242 src/core/StelObject.cpp:244
 #, qt-format
@@ -1966,7 +1966,7 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1318
 msgid "Khalid, Sultana & Zaidi (2014)"
-msgstr ""
+msgstr "Khalid, Sultana & Zaidi (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1319
 #, qt-format
@@ -2250,7 +2250,7 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "distanza planetocentrica %1 km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
@@ -2597,12 +2597,12 @@ msgstr ""
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:131 src/gui/AstroCalcDialog.cpp:240
 msgid "Dec (J2000)"
-msgstr ""
+msgstr "Dec (J2000)"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:133 src/gui/AstroCalcDialog.cpp:242
 msgid "Mag."
-msgstr ""
+msgstr "Mag."
 
 #. TRANSLATORS: type of object
 #: src/gui/AstroCalcDialog.cpp:135 src/ui_configurationDialog.h:1094
@@ -2612,31 +2612,31 @@ msgstr "Tipo"
 
 #: src/gui/AstroCalcDialog.cpp:236
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #: src/gui/AstroCalcDialog.cpp:364
 msgid "10 minutes"
-msgstr ""
+msgstr "10 minuti"
 
 #: src/gui/AstroCalcDialog.cpp:365
 msgid "1 hour"
-msgstr ""
+msgstr "1 ora"
 
 #: src/gui/AstroCalcDialog.cpp:366
 msgid "1 day"
-msgstr ""
+msgstr "1 giorno"
 
 #: src/gui/AstroCalcDialog.cpp:367
 msgid "10 days"
-msgstr ""
+msgstr "10 giorni"
 
 #: src/gui/AstroCalcDialog.cpp:368
 msgid "30 days"
-msgstr ""
+msgstr "30 giorni"
 
 #: src/gui/AstroCalcDialog.cpp:416
 msgid "Solar system"
-msgstr ""
+msgstr "Sistema solare"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:418 src/translations.h:66
@@ -2689,15 +2689,15 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:441
 msgid "Separation"
-msgstr ""
+msgstr "Separazione"
 
 #: src/gui/AstroCalcDialog.cpp:597
 msgid "Conjunction"
-msgstr ""
+msgstr "Congiunzione"
 
 #: src/gui/AstroCalcDialog.cpp:601
 msgid "Opposition"
-msgstr ""
+msgstr "Opposizione"
 
 #: src/StelMainView.cpp:442 src/StelMainView.cpp:457
 msgid ""
@@ -2954,12 +2954,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "BL Lac objects"
-msgstr ""
+msgstr "Oggetti BL Lacertae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "Blazars"
-msgstr ""
+msgstr "Blazars"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
@@ -4567,11 +4567,11 @@ msgstr "Data e ora in calendario gregoriano"
 
 #: src/ui_dateTimeDialogGui.h:382 src/ui_dateTimeDialogGui.h:387
 msgid "Julian Day"
-msgstr ""
+msgstr "Giorno giuliano"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
-msgstr ""
+msgstr "Giorno giuliano modificato"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -4963,6 +4963,8 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Disattiva questa opzione se vuoi vedere le traiettorie di tutti i corpi del "
+"sistema solare."
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
