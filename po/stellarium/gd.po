@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-07-29 22:06+0000\n"
+"PO-Revision-Date: 2015-10-01 10:06+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:17+0000\n"
-"X-Generator: Launchpad (build 17754)\n"
+"X-Launchpad-Export-Date: 2015-10-02 05:11+0000\n"
+"X-Generator: Launchpad (build 17783)\n"
 "Language: gd\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -249,7 +249,7 @@ msgstr "Meudachd: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:191
 msgid " (Photometric system: B)"
-msgstr ""
+msgstr " (Siostam foto-meatrach: B)"
 
 #: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:119
@@ -275,12 +275,12 @@ msgstr "Meud: %1"
 #: src/core/modules/Nebula.cpp:222
 #, qt-format
 msgid "Size: %1 x %2"
-msgstr ""
+msgstr "Meud: %1 x %2"
 
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "Ceàrn na comhair: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:238
@@ -293,17 +293,17 @@ msgstr "Astar: %1 ly"
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:263
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:268
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Astar: %1 %2"
 
 #: src/core/modules/Nebula.cpp:285
 #, qt-format
@@ -447,27 +447,27 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:867
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
-msgstr ""
+msgstr "glè sholleir"
 
 #: src/core/modules/Nebula.cpp:870
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "soilleir"
 
 #: src/core/modules/Nebula.cpp:873
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "meadhanach soilleir"
 
 #: src/core/modules/Nebula.cpp:876
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "fann"
 
 #: src/core/modules/Nebula.cpp:879
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "glè fhann"
 
 #: src/core/modules/Nebula.cpp:882
 msgctxt "Reflection Nebulae Brightness"
