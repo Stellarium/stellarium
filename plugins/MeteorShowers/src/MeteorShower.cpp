@@ -456,7 +456,7 @@ int MeteorShower::calculateZHR(const double& currentJD)
 	float maxZHR = m_activity.zhr == -1 ? m_activity.variable.at(1) : m_activity.zhr;
 	float minZHR = m_activity.zhr == -1 ? m_activity.variable.at(0) : 0;
 
-	float gaussian = maxZHR * qExp( - qPow(currentJD - peakJD, 2) / (sd * sd) ) + minZHR;
+	float gaussian = maxZHR * qExp( - qPow(currentJD - peakJD, 2) / (2 * sd * sd) ) + minZHR;
 
 	return qRound(gaussian);
 }
