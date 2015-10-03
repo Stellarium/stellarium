@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-09-19 09:44+0000\n"
+"PO-Revision-Date: 2015-09-26 08:48+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-09-27 05:11+0000\n"
 "X-Generator: Launchpad (build 17754)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -63,15 +63,15 @@ msgstr "Meridián"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of J2000.0"
-msgstr ""
+msgstr "Ekliptika (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "Ekliptika (dátum szerint)"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator of J2000.0"
-msgstr ""
+msgstr "Egyenlítő (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:612
 msgid "Equator"
@@ -111,7 +111,7 @@ msgstr "Ekliptika vonala"
 
 #: src/core/modules/GridLinesMgr.cpp:880
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "Ekliptika vonala (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -120,7 +120,7 @@ msgstr "Egyenlítő vonala"
 
 #: src/core/modules/GridLinesMgr.cpp:882
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "Egyenlítő vonala (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -423,17 +423,17 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:833
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
-msgstr ""
+msgstr "ritkás csillagcsoport (50-nél kevesebb tag)"
 
 #: src/core/modules/Nebula.cpp:836
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
-msgstr ""
+msgstr "közepes csillagcsoport  (50-100 tag)"
 
 #: src/core/modules/Nebula.cpp:839
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
-msgstr ""
+msgstr "nagylétszámú csillagcsoport  (több mint 100 tag)"
 
 #: src/core/modules/Nebula.cpp:842
 msgctxt "Trumpler's Number of Members Class"
@@ -478,7 +478,7 @@ msgstr "bizonytalan fényesség"
 #: src/core/modules/Nebula.cpp:885
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
-msgstr ""
+msgstr "ismeretlen fényességű reflexiós köd"
 
 #: src/core/modules/Nebula.cpp:891
 msgctxt "Reflection Nebulae Classification"
@@ -986,7 +986,7 @@ msgstr "1 szoláris nappal előre"
 
 #: src/core/StelCore.cpp:212
 msgid "Add 7 solar days"
-msgstr ""
+msgstr "+7 nap"
 
 #: src/core/StelCore.cpp:213
 msgid "Subtract 1 solar hour"
@@ -998,7 +998,7 @@ msgstr "1 szoláris nappal vissza"
 
 #: src/core/StelCore.cpp:215
 msgid "Subtract 7 solar days"
-msgstr ""
+msgstr "-7 nap"
 
 #: src/core/StelCore.cpp:216
 msgid "Add 1 sidereal day"
@@ -1062,7 +1062,7 @@ msgstr "+1 julián évszázad"
 
 #: src/core/StelCore.cpp:231
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "+1 Gauss év"
 
 #: src/core/StelCore.cpp:232
 msgid "Subtract 1 sidereal day"
@@ -1126,7 +1126,7 @@ msgstr "-100 julián év"
 
 #: src/core/StelCore.cpp:247
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "-1 Gauss év"
 
 #: src/core/StelCore.cpp:249
 msgid "Set home planet to selected planet"
@@ -1658,7 +1658,7 @@ msgstr "Ekliptikus hosszúság/szélesség"
 
 #: src/core/StelObject.cpp:231 src/core/StelObject.cpp:233
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "Ekliptikai ferdeség"
 
 #: src/core/StelObject.cpp:242 src/core/StelObject.cpp:244
 #, qt-format
@@ -2255,7 +2255,7 @@ msgstr "bolygóközép távolsága %1 km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
-msgstr ""
+msgstr "bolygóközponti megfigyelő"
 
 #: src/gui/StelGuiItems.cpp:657
 msgid "Field of view"
@@ -2900,7 +2900,7 @@ msgstr "rádiógalaxis"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105 src/ui_viewDialog.h:1683
 msgid "Interacting galaxies"
-msgstr ""
+msgstr "közreható galaxisok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
@@ -2950,7 +2950,7 @@ msgstr "emissziós objektum"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "BL Lac objects"
-msgstr ""
+msgstr "BL Lac objektumok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
@@ -4921,7 +4921,7 @@ msgstr "Bolygók és holdak"
 
 #: src/ui_viewDialog.h:1598
 msgid "Show Solar System objects"
-msgstr ""
+msgstr "Naprendszerbeli objektumok mutatása"
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -4977,7 +4977,7 @@ msgstr "Méretezési tényező"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Naprendszerbeli objektumok magnitúdó behatárolása"
 
 #: src/ui_viewDialog.h:1622
 msgid "Automatic change of landscape when planet is changed"
@@ -5117,6 +5117,8 @@ msgstr ""
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
+"Magnitúdó korlátozása szabad szemes vagy binokuláros megfigyeléshez mélyég "
+"objektumokhoz."
 
 #: src/ui_viewDialog.h:1707
 msgid "Constellations"
@@ -5236,7 +5238,7 @@ msgstr "Ekliptika (J2000)"
 
 #: src/ui_viewDialog.h:1763
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Ekliptika vonala dátum szerint"
 
 #: src/ui_viewDialog.h:1765
 msgid "Ecliptic (of date)"
@@ -5742,6 +5744,8 @@ msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
+"Nézet a bolygó felszínéről (ajánlott beállítás). Kikapcsolva a nézet a "
+"bolygó közepéről történik."
 
 #: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
@@ -7780,7 +7784,7 @@ msgstr "Válasszon ki egy könyvtárat"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:94
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "Rektaszcenzió (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
@@ -8390,19 +8394,19 @@ msgstr "Tippek ködökhöz"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Galaxis tippek"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Fényes köd tippek"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:369
 msgid "Dark nebulae hints"
-msgstr ""
+msgstr "Sötét köd tippek"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:373
 msgid "Clusters hints"
-msgstr ""
+msgstr "Csillagcsoport tippek"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:387
 msgid "Galactic equator line"
@@ -10995,11 +10999,11 @@ msgstr "Kiegészítő indítása a programmal együtt"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "Gomb a bővítmény be/ki kapcsolásához"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "Gomb a keresőablakhoz"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
@@ -11047,7 +11051,7 @@ msgstr "Következő frissítés:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "Utolsó frissítési kísérlet"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
@@ -11241,8 +11245,8 @@ msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
-"Az Ön hardvere nem támogatja a \"cubemapping\" funkciót, kérjük kapcsoljon "
-"át \"Perspective\" módra."
+"A hardver nem támogatja a kockatérkép (\"cubemap\") funkciót, kérjük "
+"kapcsoljon át \"Perspective\" módra."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
@@ -11369,11 +11373,13 @@ msgstr "Felszíni bumpszlik %1."
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:620
 msgid "Selected cubemap mode not supported, falling back to '6 Textures'"
 msgstr ""
+"A kiválasztott kockatérkép (\"cubemap\")  mód nincs támogatva, visszaállás "
+"\"6 textúra\" módra."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "Lusta kockatérkép (\"cubemap\"): %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
@@ -11385,12 +11391,12 @@ msgstr "ki"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:789
 msgid "Cubemap size changed"
-msgstr ""
+msgstr "Kockatérkép (\"cubemap\") mérete megváltozott"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:791
 #, qt-format
 msgid "Cubemap size not supported, set to %1"
-msgstr ""
+msgstr "Kockatérkép (\"cubemap\") méret nincs támogatva, beállítás: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
@@ -11485,6 +11491,10 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Meghatározza azt a módot, ahogyan a Stellarium a kivetítést használja a "
+"\"perspektivikus\" módon kívül. A kép először mindig egy kockára képződik "
+"le, ahonnan a kiválasztott kivetítési módszer szerint megjelenik a néző "
+"számára. A kockán megjelenő képet kockatérképnek (\"cubemap\") nevezik."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
@@ -11499,6 +11509,8 @@ msgstr ""
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"A <b>kockatérkép</b> (\"cubemap\") egyszeres GL_TEXTURE_CUBEMAP-ot használ. "
+"Ez a legtöbb felhasználó számára ajánlott."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -11514,6 +11526,8 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
 msgstr ""
+"Kiszámítja az árnyékokat mindegyik kockatérkép (\"cubemap\") oldalnak külön-"
+"külön."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -11526,12 +11540,16 @@ msgstr ""
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Ez nem működik, ha \"geometrikus árnyékolás\" van a kockatérképhez "
+"(\"cubemap\")  kiválasztva."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Kipipálva a kockatérkép (\"cubemap\") csak meghatározott időközönként jön "
+"létre, nem pedig minden képkockához."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
@@ -11541,6 +11559,8 @@ msgstr "Energiaspórolás és szubjektív teljesítménynövekedés."
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
+"Megjegyzés: a kockatérkép (\"cubemap\") újra létrejön, ha a nézőpont "
+"megváltozik."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
@@ -11559,6 +11579,8 @@ msgstr ""
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
+"Ez nem működik a \"geometriai árnyékolás\" kiválasztásával kockatérkép "
+"(\"cubemap\") módban."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
@@ -11576,7 +11598,7 @@ msgstr "6 textúra"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr "Cubemap"
+msgstr "Kockatérkép (\"cubemap\")"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
@@ -11639,7 +11661,7 @@ msgstr "Bucka leképzés"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "Kockatérkép (\"cubemap\") mérete:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
@@ -11675,15 +11697,15 @@ msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "Kockatérkép (\"cubemap\") mód:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Teljes kockatérkép (\"cubemap\") árnyékok"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "Lusta kockatérkép (\"cubemap\") újra-renderelés"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
@@ -11719,7 +11741,7 @@ msgstr "Jelenlegi nézet hozzáadása"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "Dátum szerinti mentés/betöltés"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
