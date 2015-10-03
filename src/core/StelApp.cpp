@@ -279,12 +279,15 @@ StelApp::~StelApp()
 	singleton = NULL;
 }
 
-void StelApp::setupHttpProxy()
+void StelApp::setupNetworkProxy()
 {
 	QString proxyHost = confSettings->value("proxy/host_name").toString();
 	QString proxyPort = confSettings->value("proxy/port").toString();
 	QString proxyUser = confSettings->value("proxy/user").toString();
 	QString proxyPass = confSettings->value("proxy/password").toString();
+	QString proxyType = confSettings->value("proxy/type").toString();
+
+	bool useSocksProxy = proxyType.contains("socks", Qt::CaseInsensitive);
 
 	// If proxy settings not found in config, use environment variable
 	// if it is defined.  (Config file over-rides environment).
@@ -328,7 +331,10 @@ void StelApp::setupHttpProxy()
 	if (!proxyHost.isEmpty())
 	{
 		QNetworkProxy proxy;
-		proxy.setType(QNetworkProxy::HttpProxy);
+		if (useSocksProxy)
+			proxy.setType(QNetworkProxy::Socks5Proxy);
+		else
+			proxy.setType(QNetworkProxy::HttpProxy);
 		proxy.setHostName(proxyHost);
 		if (!proxyPort.isEmpty())
 			proxy.setPort(proxyPort.toUShort());
@@ -341,7 +347,10 @@ void StelApp::setupHttpProxy()
 
 		QString ppDisp = proxyPass;
 		ppDisp.fill('*');
-		qDebug() << "Using HTTP proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
+		if (useSocksProxy)
+			qDebug() << "Using SOCKS proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
+		else
+			qDebug() << "Using HTTP proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
 		QNetworkProxy::setApplicationProxy(proxy);
 	}
 }
@@ -482,7 +491,7 @@ void StelApp::init(QSettings* conf)
 	setViewportEffect(confSettings->value("video/viewport_effect", "none").toString());
 
 	// Proxy Initialisation
-	setupHttpProxy();
+	setupNetworkProxy();
 	updateI18n();
 
 	// Init actions.
