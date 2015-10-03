@@ -275,11 +275,13 @@ class Translations
 		// TRANSLATORS: Name and description of script
 		N_("Earth Events from Mars");
 		// TRANSLATORS: Name of script
-		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars");
+		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars");
 		// TRANSLATORS: Name of script
 		N_("Earth and Mars Greatest Elongations and Transits from Callisto");
 		// TRANSLATORS: Name of script
 		N_("Tycho's Supernova");
+		// TRANSLATORS: Name of script
+		N_("Earth and other Planets from Ceres");
 		
 		// =====================================================================
 		// Script descriptions
@@ -307,8 +309,9 @@ class Translations
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
-		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000");
+		N_("Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-3000");
 		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
+		N_("Earth the other visible Planet's Greatest Elongations and Oppositions from Ceres 2000-3000");
 		
 		// =====================================================================
 		// List of countries
