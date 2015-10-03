@@ -167,14 +167,15 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensName->setTextWidth(maxWidth);
 	fieldLensMultipler->setTextWidth(maxWidth);
 
+	float scale = lineHeight*1.5; // TODO: change hardcoded 1.5 to editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
-	QPixmap prevArrow = pa.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap prevArrow = pa.scaledToHeight(scale, Qt::SmoothTransformation);
 	QPixmap paOff(":/graphicGui/btTimeRewind-off.png");
-	QPixmap prevArrowOff = paOff.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap prevArrowOff = paOff.scaledToHeight(scale, Qt::SmoothTransformation);
 	QPixmap na(":/graphicGui/btTimeForward-on.png");
-	QPixmap nextArrow = na.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap nextArrow = na.scaledToHeight(scale, Qt::SmoothTransformation);
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
-	QPixmap nextArrowOff = naOff.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap nextArrowOff = naOff.scaledToHeight(scale, Qt::SmoothTransformation);
 
 	StelAction* defaultAction = new StelAction(this);
 	defaultAction->setCheckable(false);
