@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-09-24 20:01+0000\n"
+"PO-Revision-Date: 2015-09-27 11:18+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:15+0000\n"
+"X-Launchpad-Export-Date: 2015-09-28 05:11+0000\n"
 "X-Generator: Launchpad (build 17754)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -4945,7 +4945,7 @@ msgstr "Planetes i satèl·lits"
 
 #: src/ui_viewDialog.h:1598
 msgid "Show Solar System objects"
-msgstr ""
+msgstr "Mostra objectes del Sistema Solar"
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -10471,6 +10471,19 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Aquest connector us permet simular les pluges de meteors periòdiques i "
+"permet mostrar un marcador per a cada radiant actiu i inactiu.</p><p>Amb un "
+"sol clic a la marca del radiant, es pot veure tots els detalls sobre la seva "
+"posició i activitat. La majoria de les dades utilitzades en aquest connector "
+"son del catàleg oficial de la<a  href=\"http://imo.net\">Organització "
+"Internacional de Meteors</a></p><p>Té tres tipus de "
+"marcadors:<ui><li><b>Confirmat:</b> el radiant està actiu i les seves dades "
+"estan confirmades. Per tant, aquesta és un històric (en realitat va ocórrer "
+"en el passat) o predicció de pluja de meteors</li><li><b>Genèric:</b> el "
+"radiant està actiu, però les seves dades no estan confirmades. Això vol dir "
+"que això pot passar, però que no tenim dades adequades sobre la seva "
+"activitat durant l'any en curs</li><li><b>Inactiu:</b> el radiant està "
+"inactiu per al cel i data actual.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451

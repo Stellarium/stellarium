@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-09-20 21:17+0000\n"
+"PO-Revision-Date: 2015-10-02 15:32+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:23+0000\n"
-"X-Generator: Launchpad (build 17754)\n"
+"X-Launchpad-Export-Date: 2015-10-03 05:12+0000\n"
+"X-Generator: Launchpad (build 17783)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -64,11 +64,11 @@ msgstr "Meridian"
 
 #: src/core/modules/GridLinesMgr.cpp:600
 msgid "Ecliptic of J2000.0"
-msgstr "Ekliptisk (J2000.0)"
+msgstr "Ekliptikken (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Ecliptic of Date"
-msgstr "Ekliptisk for dato"
+msgstr "Ekliptikken for dato"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator of J2000.0"
@@ -251,7 +251,7 @@ msgstr "Magnitude: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:191
 msgid " (Photometric system: B)"
-msgstr ""
+msgstr " (Fotometrisk system: B)"
 
 #: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:119
@@ -305,7 +305,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Avstand: %1 %2"
 
 #: src/core/modules/Nebula.cpp:285
 #, qt-format
@@ -4835,7 +4835,7 @@ msgstr "Planeter og satellitter"
 
 #: src/ui_viewDialog.h:1598
 msgid "Show Solar System objects"
-msgstr ""
+msgstr "Vis solsystemobjekter"
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -4874,6 +4874,8 @@ msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Aktiver dette alternativet for å simulere virkningen av den faktiske "
+"lyshastigheten (anbefales)."
 
 #: src/ui_viewDialog.h:1612
 msgid "Simulate light speed"
@@ -5080,15 +5082,15 @@ msgstr "Ekvatorialnett (J2000)"
 
 #: src/ui_viewDialog.h:1723
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Ekvatorialkoordinater for gjeldende dato og planet."
 
 #: src/ui_viewDialog.h:1725
 msgid "Equatorial grid (of date)"
-msgstr "Ekvatorialnett for dato"
+msgstr "Ekvatorialnett (for dato)"
 
 #: src/ui_viewDialog.h:1727
 msgid "Ecliptical coordinates for J2000.0."
-msgstr "Ekliptiske koordinater for J2000.0."
+msgstr "Ekliptiske koordinater (J2000.0)."
 
 #: src/ui_viewDialog.h:1729
 msgid "Ecliptic grid (J2000)"
@@ -5096,7 +5098,7 @@ msgstr "Ekliptisk nett (J2000)"
 
 #: src/ui_viewDialog.h:1731
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr ""
+msgstr "Ekliptiske koordinater for gjeldende dato. Bare for jorden."
 
 #: src/ui_viewDialog.h:1733
 msgid "Ecliptic grid (of date)"
@@ -5104,15 +5106,15 @@ msgstr "Ekliptisk nett (for dato)"
 
 #: src/ui_viewDialog.h:1735
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
+msgstr "Høyde/Asimut (regnet fra nord mot øst)."
 
 #: src/ui_viewDialog.h:1739
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Galaktiske koordinater, System II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1743
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Påskrifter for himmelretningene."
 
 #: src/ui_viewDialog.h:1747
 msgid ""
@@ -5126,7 +5128,7 @@ msgstr "Presesjonssirkler"
 
 #: src/ui_viewDialog.h:1751
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "Vis himmelekvator (J2000.0)."
 
 #: src/ui_viewDialog.h:1753
 msgid "Equator (J2000)"
@@ -5134,7 +5136,7 @@ msgstr "Ekvator (J2000)"
 
 #: src/ui_viewDialog.h:1755
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Vis himmelekvator for gjeldende planet og dato."
 
 #: src/ui_viewDialog.h:1757
 msgid "Equator (of date)"
@@ -5142,11 +5144,11 @@ msgstr "Ekvator (for dato)"
 
 #: src/ui_viewDialog.h:1759
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "Vis ekliptikken (J2000.0, VSOP87A fundamentalplan)."
 
 #: src/ui_viewDialog.h:1761
 msgid "Ecliptic (J2000)"
-msgstr "Ekliptisk (J2000)"
+msgstr "Ekliptikken (J2000)"
 
 #: src/ui_viewDialog.h:1763
 msgid "Show ecliptic line of current date."
@@ -5154,7 +5156,7 @@ msgstr "Vis ekliptikken for gjeldende dato."
 
 #: src/ui_viewDialog.h:1765
 msgid "Ecliptic (of date)"
-msgstr "Ekliptisk (for dato)"
+msgstr "Ekliptikken (for dato)"
 
 #: src/ui_viewDialog.h:1767
 msgid "Show horizon line."
@@ -5162,11 +5164,11 @@ msgstr "Vis horisontlinje."
 
 #: src/ui_viewDialog.h:1771
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "Vis galaktisk ekvatorlinje."
 
 #: src/ui_viewDialog.h:1775
 msgid "Show meridian line."
-msgstr ""
+msgstr "Vis meridianlinje."
 
 #: src/ui_viewDialog.h:1779
 msgid ""
@@ -5393,7 +5395,7 @@ msgstr "Geosentriske ekvatorialkoordinater, ekvinoktium av dato"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Right ascension/Declination (of date)"
-msgstr "Rektasensjon/Deklinasjon (av dato)"
+msgstr "Rektasensjon/Deklinasjon (for dato)"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Catalog number(s)"
@@ -10236,6 +10238,19 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Dette programtillegget gjør det mulig å simulere periodiske meteorsvermer "
+"og å vise en markør for hver aktive og inaktive radiant.</p><p>Med et "
+"enkeltklikk på radiantens markør, kan du se alle detaljene om dens posisjon "
+"og aktivitet. De fleste data som brukes i dette programtillegget kommer fra "
+"den offisielle katalogen til <a href=\"http://imo.net\">International Meteor "
+"Organization</a>.</p><p>Den har tre typer markører:<ul><li><b>Bekreftet:</b> "
+"Radianten er aktiv og dens data er bekreftet. Derfor er dette en historisk "
+"(virkelig skjedd i fortiden) eller forutsett "
+"meteorsverm.</li><li><b>Generell:</b> Radianten er aktiv, men dens data er "
+"ikke bekreftet. Det betyr at dette faktisk kan skje, men at vi ikke har "
+"skikkelige data om dens aktivitet for det gjeldende "
+"året.</li><li><b>Inaktiv:</b> Radianten er inaktiv for den gjeldende "
+"himmeldatoen.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
