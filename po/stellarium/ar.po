@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-09-23 07:46+0000\n"
+"PO-Revision-Date: 2015-09-30 13:29+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:12+0000\n"
-"X-Generator: Launchpad (build 17754)\n"
+"X-Launchpad-Export-Date: 2015-10-01 05:11+0000\n"
+"X-Generator: Launchpad (build 17780)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -2014,8 +2014,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
-"في الأسفل قائمة بالإجراءات التي لها مفاتيح اختصار. يمكن إضافة إجراءات عن "
-"طريق زر \"%1\""
+"‏في الأسفل قائمة بالإجراءات التي لها مفاتيح اختصار. يمكن إضافة إجراءات عن "
+"طريق زر \"%1\"‏"
 
 #: src/gui/HelpDialog.cpp:211
 msgid ""
@@ -2320,7 +2320,7 @@ msgstr "لا يوجد شهب"
 
 #: src/gui/ViewDialog.cpp:822
 msgid "Normal rate"
-msgstr "المعدل الطبيعي للشهب"
+msgstr "معدل طبيعي لعدد للشهب"
 
 #: src/gui/ViewDialog.cpp:825
 msgid "Standard Orionids rate"
@@ -2975,17 +2975,17 @@ msgstr "السدم في المرحلة ماقبل الكوكبية"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:139 src/ui_viewDialog.h:1646
 msgid "Messier Catalogue"
-msgstr "دليل ميسييه"
+msgstr "<P DIR=RTL>دليل ميسييه</P>"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:141 src/ui_viewDialog.h:1649
 msgid "Caldwell Catalogue"
-msgstr "دليل كالدويل"
+msgstr "<P DIR=RTL>دليل كالدويل"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:143
 msgid "Barnard Catalogue"
-msgstr "دليل بارنارد"
+msgstr "<P DIR=RTL>دليل بارنارد"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:145
@@ -4848,7 +4848,7 @@ msgstr "التلألؤ"
 
 #: src/ui_viewDialog.h:1576
 msgid "Limit the magnitude of stars"
-msgstr "تحديد النجوم الظاهرة حسب مقاديرها"
+msgstr "أظهر فقط النجوم التي يفوق قدر سطوعها الحد الأدنى"
 
 #: src/ui_viewDialog.h:1578 src/ui_viewDialog.h:1620 src/ui_viewDialog.h:1706
 msgid "Limit magnitude"
@@ -4856,7 +4856,8 @@ msgstr "الحد الأدنى للقدر"
 
 #: src/ui_viewDialog.h:1580
 msgid "Dim faint stars when a very bright object is visible"
-msgstr "تعتيم النجوم الباهتة عندما تكون الأجرام اللامعة منظورة"
+msgstr ""
+"<P DIR=RTL>جعل النجوم أكثر خفوتا عندما تكون قريبة من جسم مضيء مثل القمر</P>"
 
 #: src/ui_viewDialog.h:1582
 msgid "Dynamic eye adaptation"
@@ -4868,15 +4869,15 @@ msgstr "الأسماء  والعلامات"
 
 #: src/ui_viewDialog.h:1585
 msgid "Show atmosphere"
-msgstr "أظهر الغلاف الجوي"
+msgstr "<P DIR=RTL>أظهر الغلاف الجوي</P>"
 
 #: src/ui_viewDialog.h:1589
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
-"استخدم بيانات التلوث الضوئي من قاعدة معلومات المواقع والمدن وتجاهل إعدادات "
-"التلوث الضوئي أدناه"
+"<P DIR=RTL>استخدم بيانات التلوث الضوئي من قاعدة معلومات المواقع والمدن "
+"وتجاهل إعدادات التلوث الضوئي أدناه</P>"
 
 #: src/ui_viewDialog.h:1591
 msgid "Light pollution data from locations database"
@@ -4885,7 +4886,7 @@ msgstr "استخدم بيانات التلوث الضوئي من قاعدة مع
 #: src/ui_viewDialog.h:1592
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
-msgstr "التلوث الضوئي:"
+msgstr "التلوث الضوئي"
 
 #: src/ui_viewDialog.h:1594
 msgid "pressure, temperature, extinction coefficient"
@@ -4901,7 +4902,7 @@ msgstr "الكواكب و التوابع"
 
 #: src/ui_viewDialog.h:1598
 msgid "Show Solar System objects"
-msgstr ""
+msgstr "أظهر أجرام النظام الشمسي"
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
@@ -4915,7 +4916,8 @@ msgstr "أظهر مدارات الكواكب"
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
-msgstr "عطّل هذا الخيار إذا أردت أن ترى مدار الكوكب المختار مع أقماره"
+msgstr ""
+"<P DIR=RTL>عطّل هذا الخيار إذا أردت أن ترى مدار الكوكب المختار مع أقماره</P>"
 
 #: src/ui_viewDialog.h:1604
 msgid "Show orbit for selected planet"
@@ -4925,7 +4927,8 @@ msgstr "أظهر مدار الكوكب المختار"
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
-msgstr "عطّل هذا الخيار إذا أردت أن ترى مسارات كل أجسام النظام الشمسي"
+msgstr ""
+"<P DIR=RTL>عطّل هذا الخيار إذا أردت أن ترى مسارات كل أجسام النظام الشمسي</P>"
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
@@ -4935,7 +4938,9 @@ msgstr "أظهر مسار الكوكب المختار فقط"
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
-msgstr "(علّم على هذا الخيار لمحاكاة تأثير سرعة الضوء الحقيقية (يفضل ذلك"
+msgstr ""
+"<P DIR=RTL>علّم على هذا الخيار لمحاكاة تأثير سرعة الضوء الحقيقية (يفضل "
+"ذلك)</P>"
 
 #: src/ui_viewDialog.h:1612
 msgid "Simulate light speed"
@@ -4951,7 +4956,7 @@ msgstr "عامل المقياس"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
-msgstr "الحد الأدنى لقدر السطوع لعرض أجرام النظام الشمسي"
+msgstr "أظهر فقط أجرام النظام الشمسي التي يفوق قدر سطوعها الحد الأدنى"
 
 #: src/ui_viewDialog.h:1622
 msgid "Automatic change of landscape when planet is changed"
@@ -4963,7 +4968,7 @@ msgstr "اختيار منظر الرصد تلقائياً"
 
 #: src/ui_viewDialog.h:1627
 msgid "Settings for sporadic meteors"
-msgstr "إعدادات لزخات الشهب المتفرقة"
+msgstr "<P DIR=RTL>إعدادات لزخات الشهب المتفرقة</P>"
 
 #: src/ui_viewDialog.h:1629
 msgid "Shooting Stars"
@@ -4980,7 +4985,7 @@ msgstr "معدل عدد الشهب في الساعة للأوج"
 
 #: src/ui_viewDialog.h:1635
 msgid "Display objects from catalogs"
-msgstr "اختر الفهارس التي تريد عرض الأجرام منها"
+msgstr "اختر الأدلة التي تريد عرض الأجرام منها"
 
 #: src/ui_viewDialog.h:1637
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
@@ -4988,56 +4993,58 @@ msgstr "الدليل المفهرس للسدم والحشود النجمية"
 
 #: src/ui_viewDialog.h:1640
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
-msgstr "الفهرس الجديد للسدم والحشود النجمية"
+msgstr "الدليل الجديد للسدم والحشود النجمية"
 
 #: src/ui_viewDialog.h:1643
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
-msgstr "فهرس ليند للسدم الساطعة (ليند 1965)"
+msgstr "دليل ليند للسدم الساطعة (ليند 1965)"
 
 #: src/ui_viewDialog.h:1652
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
-msgstr "فهرس بارنارد ل 349 جرم معتم في السماء (بارنارد 1927)"
+msgstr "دليل بارنارد ل 349 جرم معتم في السماء (بارنارد 1927)"
 
 #: src/ui_viewDialog.h:1655
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
-msgstr "فهرس حقول HII  (شاربلس 1959)"
+msgstr "<P DIR=RTL>دليل حقول HII  (شاربلس 1959)"
 
 #: src/ui_viewDialog.h:1658
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
-msgstr "فهرس السدم العاكسة (فان دن بيرج، 1966)"
+msgstr "دليل السدم العاكسة (فان دن بيرج، 1966)"
 
 #: src/ui_viewDialog.h:1661
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
-"فهرس لحقول الهيدروجين الفا الإشعاعية في درب التبانة الجنوبي (رودجرز +، 1960)"
+"<P DIR=RTL>دليل لحقول الهيدروجين الفا الإشعاعية في درب التبانة الجنوبي "
+"(رودجرز +، 1960)"
 
 #: src/ui_viewDialog.h:1664
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
-msgstr "فهرس ليند للسدم المعتمة (ليند ، 1962)"
+msgstr "دليل ليند للسدم المعتمة (ليند ، 1962)"
 
 #: src/ui_viewDialog.h:1667
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
-msgstr "فهرس الحشود المجرية المفتوحة (كوليندر، 1931)"
+msgstr "دليل الحشود المجرية المفتوحة (كوليندر، 1931)"
 
 #: src/ui_viewDialog.h:1670
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
-"فهرس الحشود النجمية الموجودة على ألواح خرائط فرانكلين أدامز (ميلوت، 1915)"
+"<p DIR=RTL>دليل الحشود النجمية الموجودة على ألواح خرائط فرانكلين أدامز "
+"(ميلوت، 1915)"
 
 #: src/ui_viewDialog.h:1673
 msgid "Catalog of galaxies"
-msgstr "فهرس المجرات"
+msgstr "<p DIR=RTL>دليل المجرات"
 
 #: src/ui_viewDialog.h:1676
 msgid "The Uppsala General Catalogue of Galaxies"
-msgstr "فهرس أبسالا العام للمجرات"
+msgstr "دليل أبسالا العام للمجرات"
 
 #: src/ui_viewDialog.h:1679
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr "فهرس السدم  المجرية الساطعة المنتشرة (سيديربلاد، 1946)"
+msgstr "دليل السدم  المجرية الساطعة المنتشرة (سيديربلاد، 1946)"
 
 #: src/ui_viewDialog.h:1681
 msgid "Filter by type"
@@ -5246,7 +5253,7 @@ msgstr "الإسقاط"
 
 #: src/ui_viewDialog.h:1783
 msgid "Vertical viewport offset"
-msgstr "الفرق العمودي في منظر العرض"
+msgstr "<P DIR=RTL>الفرق العمودي في منظر العرض</P>"
 
 #: src/ui_viewDialog.h:1785
 msgid "Use this landscape as default"
@@ -5571,11 +5578,11 @@ msgstr "تاريخ ووقت البدء"
 
 #: src/ui_configurationDialog.h:1131
 msgid "Use a specific date and time when Stellarium starts up"
-msgstr "استخدم تاريخاً و وقتاً محددين عندما  يبدأ ستيللاريوم"
+msgstr "استخدم تاريخاً ووقتاً ثابتين عندما  يبدأ ستيللاريوم"
 
 #: src/ui_configurationDialog.h:1133
 msgid "Other:"
-msgstr "أخرى:"
+msgstr "وقت ثابت"
 
 #: src/ui_configurationDialog.h:1135
 msgid "Use current local date and time"
@@ -5583,7 +5590,7 @@ msgstr "استخدم التاريخ والوقت المحليين الحاليي
 
 #: src/ui_configurationDialog.h:1137
 msgid "use current"
-msgstr "إستخدام القيمة الحالية"
+msgstr "استخدم الوقت والتاريخ الحاليين"
 
 #: src/ui_configurationDialog.h:1139
 msgid "Starts Stellarium at system clock date and time"
@@ -5601,7 +5608,7 @@ msgstr "يضبط محاكاة الوقت لمثل هذه اللحظة من ال�
 
 #: src/ui_configurationDialog.h:1145
 msgid "System date at:"
-msgstr "تاريخ النظام عند:"
+msgstr "تاريخ النظام عند الساعة"
 
 #: src/ui_configurationDialog.h:1146
 msgid "Time correction"
@@ -7857,7 +7864,7 @@ msgstr "وجِّه"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
-msgstr "هيئ  التلسكوب"
+msgstr "هيئ  التلسكوبات"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
@@ -7865,7 +7872,7 @@ msgstr "تهيئة التلسكوب"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
-msgstr "التحكم بالتلسكوب بواسطة:"
+msgstr ":التحكم بالتلسكوب بواسطة"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 msgid ""
@@ -7892,7 +7899,7 @@ msgstr "برنامج خارجي أو حاسب عن بعد"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr "لاشيء، محاكاة فقط للتلسكوب (عدسة متحركة)"
+msgstr "(لاشيء، محاكاة فقط للتلسكوب (عدسة متحركة"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Telescope properties"
@@ -9022,7 +9029,7 @@ msgstr "إعدادات الكوازارات"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Quasars Plug-in Configuration"
-msgstr "إعدادات تطبيق الكوازارات الإضافي"
+msgstr "إعدادات تطبيق الكوازارات"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Settings for quasars"
@@ -9533,8 +9540,7 @@ msgid ""
 "surface temperature."
 msgstr ""
 "<p dit=rtl>مدى الشبه لكوكب الأرض بمقياس من 0 إلى 1، حيث 1 يشير إلى كوكب شديد "
-"الشبه بالأرض. ال ESI (مؤشر المشابهة للأرض) يعتمد على نصف القطر والكثافة "
-"وسرعة الإفلات وحرارة السطح."
+"الشبه بالأرض. يعتمد على نصف القطر والكثافة وسرعة الإفلات وحرارة السطح"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Additional info"
@@ -9562,26 +9568,27 @@ msgstr "مواقع الإنترنت المتخصصة ذات العلاقة با�
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr "Exoplanets: نسخة تفاعلية من XKCD 1071"
+msgstr "<p dir=rtl>Exoplanets: نسخة تفاعلية من XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
-"HEK  اختصار The Hunt for Exomoons with Kepler - اقتناص الأقمار الخارجية "
-"بواسطة كبلر"
+"<p dir=rtl>HEK  اختصار The Hunt for Exomoons with Kepler - اقتناص الأقمار "
+"الخارجية بواسطة كبلر"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
-"الكواكب الخارجية في النظم الشمسية الثنائية والمتعددة (ريتشارد شوارتز)"
+"<p dir=rtl>الكواكب الخارجية في النظم الشمسية الثنائية والمتعددة (ريتشارد "
+"شوارتز)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "Naming exoplanets (IAU)"
-msgstr "تسمية الكواكب الخارجية (الاتحاد الفلكي العالمي)"
+msgstr "<p dir=rtl>تسمية الكواكب الخارجية (الاتحاد الفلكي العالمي)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
-msgstr "بعض الفلكيين والمجموعات النشطة في دراسات الكواكب الخارجية"
+msgstr "<p dir=rtl>بعض الفلكيين والمجموعات النشطة في دراسات الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "update: 16 April 2012"
@@ -9589,31 +9596,31 @@ msgstr "التحديث: 16 إبريل 2012 م"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "The Exoplanet Data Explorer"
-msgstr "مستكشف بيانات الكواكب الخارجية"
+msgstr "<p dir=rtl>مستكشف بيانات الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Anglo-Australian Planet Search"
-msgstr "عملية البحث الإنجليزية-الاسترالية عن الكواكب"
+msgstr "<p dir=rtl>عملية البحث الإنجليزية-الاسترالية عن الكواكب"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr "برامج جنيف للبحث عن الكواكب خارج النظام الشمسي"
+msgstr "<p dir=rtl>برامج جنيف للبحث عن الكواكب خارج النظام الشمسي"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr "OLBIN  اختصار Optical Long-Baseline Interferometry News"
+msgstr "<p dir=rtl>OLBIN  اختصار Optical Long-Baseline Interferometry News"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
-msgstr "برنامج ناسا لاستكشاف الكواكب الخارجية"
+msgstr "<p dir=rtl>برنامج ناسا لاستكشاف الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
-msgstr "كواكب النجوم النابضة"
+msgstr "<p dir=rtl>كواكب النجوم النابضة"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
-msgstr "أرشيف ناسا للكواكب الخارجية"
+msgstr "<p dir=rtl>أرشيف ناسا للكواكب الخارجية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
@@ -9622,24 +9629,24 @@ msgstr "<p dir=rtl>لجنة إتحاد الفلك الدولي 53: الكواك�
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "ExoMol"
 msgstr ""
-"ExoMol - قاعدة بيانات للجزيئات الصالحة للتصنيف الطيفي ومحاكاة الغلاف الجوي "
-"للكواكب الخارجية"
+"<p dir=rtl>ExoMol - قاعدة بيانات للجزيئات الصالحة للتصنيف الطيفي ومحاكاة "
+"الغلاف الجوي للكواكب الخارجية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "The Habitable Zone Gallery"
-msgstr "معرض المنطقة القابلة للعيش"
+msgstr "<p dir=rtl>معرض المنطقة القابلة للعيش"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr "PlanetQuest  - البحث عن كوكب مشابه للأرض"
+msgstr "<p dir=rtl>PlanetQuest  - البحث عن كوكب مشابه للأرض"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Open Exoplanet Catalogue"
-msgstr "الدليل المفتوح للكواكب الخارجية"
+msgstr "<p dir=rtl>الدليل المفتوح للكواكب الخارجية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "The Habitable Exoplanets Catalog"
-msgstr "دليل الكواكب الخارجية القابلة للحياة"
+msgstr "<p dir=rtl>دليل الكواكب الخارجية القابلة للحياة"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Exoplanets is updated"
@@ -10352,6 +10359,16 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<P DIR=RTL>هذه الإضافة تحاكي زخات الشهب الدورية وترسم علامة لكل نقطة منشأ "
+"نشطة أو خاملة. </p><p DIR=RTL>بالنقر على العلامة، تحصل على كل التفاصيل عن "
+"نشاط زخة الشهب وموقعها. معظم البيانات الموجودة في هذه الإضافة مستقاة من "
+"الموقع الرسمي: دليل <a href=\\\"http://imo.net\\\"> منظمة زخات الشهب "
+"العالمية</a>. </p><p DIR=RTL>تستخدم ثلاثة أنواع من العلامات في هذه الإضافة: "
+"<ul><li><b>مثبت:</b> منشأ الشهب نشط وبياناته مثبتة. لذلك زخة الشهب هذه حدثت "
+"في الواقع ويمكن التنبؤ بها. </li><li><b>عام:</b> يعني هذا أن زخة الشهب نشطة "
+"ولكن لم يتثبت من بياناتها، ويمكن أن تحدث في الواقع، ولكن ليس هناك بيانات "
+"حقيقية عن نشاطها في السنة الحالية. </li><li><b>خاملة:</b> يعني هذا أن منشأ "
+"زخة الشهب غير نشط في السنة الحالية.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
