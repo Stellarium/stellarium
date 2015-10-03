@@ -12,13 +12,13 @@ msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-10-01 19:39+0000\n"
+"PO-Revision-Date: 2015-10-02 19:40+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-02 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-03 05:11+0000\n"
 "X-Generator: Launchpad (build 17783)\n"
 "Language: is\n"
 
@@ -2865,7 +2865,7 @@ msgstr "Tvípóla geimþokur"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Emission nebulae"
-msgstr "geisnunarþokur"
+msgstr "Geislunarþokur"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119 src/ui_viewDialog.h:1682
@@ -5977,7 +5977,7 @@ msgstr "Hægrismellur breytir einungis endapunktinum."
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:517
 msgid "PA="
-msgstr ""
+msgstr "SH="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
@@ -5989,6 +5989,8 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"Hornamælingaviðbótin er lítið verkfæri til að mæla hornbil milli tveggja "
+"punkta á himninum (og til að reikna stöðuhorn milli þessara tveggja punkta)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 msgid ""
@@ -6094,31 +6096,31 @@ msgstr "Stillingar hornamælingaviðbótar"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Birta í miðbaugshnitakerfi"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Sýna með stöðuhorni"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Birta í láréttum hnitum"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(t.d. fyrir Dobson stjörnuflakk)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Sýna með stöðuhorni "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Festa upphafspunkt á hringsnúandi himinn"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Festa endapunkt á hringsnúandi himinn"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
@@ -6128,7 +6130,7 @@ msgstr "Snið"
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Nota dms-snið fyrir horn"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:743
@@ -6141,7 +6143,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:363
 msgid "Restore default settings"
-msgstr ""
+msgstr "Endurheimta sjálfgefnar stillingar"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:243
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
@@ -6199,10 +6201,13 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Sýnir himininn eins og hann sé skoðaður í gegnum augngler sjónauka. "
+"(einungis er hermt eftir stækkun og sjónsviði.) Einnig er hægt að birta "
+"ramma fyrir myndflögu og merki fyrir Telrad-mið."
 
 #: plugins/Oculars/src/Oculars.cpp:846
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "Veldu einhvern hlut áður en þú skiptir yfir í augnglerjasýn."
 
 #: plugins/Oculars/src/Oculars.cpp:940
 msgid "&Previous ocular"
@@ -6279,19 +6284,19 @@ msgstr "Stillingar Oculars viðbótar"
 
 #: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Select next telescope"
-msgstr ""
+msgstr "Veldu næsta sjónauka"
 
 #: plugins/Oculars/src/Oculars.cpp:1333
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Veldu fyrri sjónauka"
 
 #: plugins/Oculars/src/Oculars.cpp:1335
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Veldu næsta augngler"
 
 #: plugins/Oculars/src/Oculars.cpp:1337
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Veldu fyrra augngler"
 
 #: plugins/Oculars/src/Oculars.cpp:1464
 msgctxt "abbreviated in the plugin"
@@ -6441,31 +6446,31 @@ msgstr "Næsti sjónauki"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:261
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Snúa myndflögurammanum 15 gráður rangsælis"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:274
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Snúa myndflögurammanum 5 gráður rangsælis"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:287
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Snúa myndflögurammanum 1 gráðu rangsælis"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Núllstilla snúning myndflöguramma"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:313
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Snúa myndflögurammanum 1 gráðu réttsælis"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:326
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Snúa myndflögurammanum 5 gráður réttsælis"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:339
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Snúa myndflögurammanum 15 gráður réttsælis"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 msgid "Effective focal length of the ocular"
@@ -6473,12 +6478,12 @@ msgstr "Virk brennivídd augnglersins"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "Sýndarsjónsvið (FOV) augnglersins"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:587
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "Margföldun: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
 msgid "Lens: None"
@@ -6486,11 +6491,11 @@ msgstr "Linsa: engin"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "Margföldun: Ekki tiltæk"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "Brennivídd augnglers"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
 #, qt-format
@@ -6517,12 +6522,12 @@ msgstr ""
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid "tFOV:"
-msgstr ""
+msgstr "tFOV:"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "Magnification factor:"
-msgstr ""
+msgstr "Stækkunarstuðull:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
@@ -6541,7 +6546,7 @@ msgstr "Augnglerjaviðbót (Oculars)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Barlow lens feature"
-msgstr ""
+msgstr "Barlow linsueiginleiki"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:529
 msgid "Overview"
@@ -6554,6 +6559,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"Þessari viðbót er ætlað að herma eftir því sem þú myndir sjá í gegnum "
+"augngler. Þessi stillingagluggi nýtist til að bæta við eða eyða augnglerjum "
+"og sjónaukum, auk þess að sýsla með myndflögur. Þegar þú keyrir viðbótina í "
+"fyrsta skipti fylgja með nokkur sýnishorn til að koma þér í gang."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid ""
@@ -6584,7 +6593,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "If you find any issues, please let me know.  Enjoy!"
-msgstr ""
+msgstr "Ef þú finnur einhverja hnökra, láttu mig vita. Njóttu vel!"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Hot Keys"
@@ -6601,19 +6610,19 @@ msgstr "(engir lyklar skilgreindir)"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Víxlar augnglersyfirlagi af/á."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Opnar flakkvalmyndina."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Virkja eingöngu ef hlutur er valinn"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1073
 msgid "Scale image circle"
-msgstr ""
+msgstr "Kvarða myndhring"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
@@ -6621,7 +6630,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1077
 msgid "Limit stellar magnitude"
-msgstr ""
+msgstr "Takmarka birtustig stjarna"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Key mappings"
@@ -6629,11 +6638,11 @@ msgstr "Lyklavörpun"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Toggle ocular view:"
-msgstr ""
+msgstr "Víxla augnglersskoðun af/á:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Opna flakkvalmynd:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1082
 msgid "Interface"
@@ -6650,7 +6659,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Frumstilla sjónsvið á upphafleg gildi"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
@@ -6696,7 +6705,7 @@ msgstr "Heiti:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
-msgstr ""
+msgstr "Sjónsviðsstopp:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1099
 msgid "Binoculars"
@@ -6704,7 +6713,7 @@ msgstr "Handsjónaukar"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "Er með fast krossmið"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -6867,7 +6876,7 @@ msgstr "stöðvar"
 #. TRANSLATORS: Satellite group: Education satellites
 #: plugins/Satellites/src/Satellites.cpp:1812
 msgid "education"
-msgstr ""
+msgstr "menntun"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space observatories
 #: plugins/Satellites/src/Satellites.cpp:1814
@@ -6887,7 +6896,7 @@ msgstr "Alþjóðlega geimstöðin ISS"
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1829
 msgid "China's first space station"
-msgstr ""
+msgstr "Fyrsta kínverska geimstöðin"
 
 #: plugins/Satellites/src/Satellite.cpp:257
 #: plugins/Satellites/src/Satellite.cpp:261
@@ -6896,7 +6905,7 @@ msgstr "Gervihnattaskrá #"
 
 #: plugins/Satellites/src/Satellite.cpp:263
 msgid "International Designator"
-msgstr ""
+msgstr "Alþjóðlegt auðkenni"
 
 #: plugins/Satellites/src/Satellite.cpp:270
 msgid "artificial satellite"
@@ -6905,19 +6914,19 @@ msgstr "gervihnöttur"
 #: plugins/Satellites/src/Satellite.cpp:275
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
-msgstr ""
+msgstr "Áætlað birtustig: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "Range (km): %1"
-msgstr ""
+msgstr "Fjarlægð (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:291
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr ""
+msgstr "Hreyfihraði (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:294
@@ -6929,7 +6938,7 @@ msgstr "Hæð (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr ""
+msgstr "Lóðpunktur (breidd/lengd): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:311
@@ -6946,23 +6955,23 @@ msgstr "TEME hraði (km/sek): %1"
 #: plugins/Satellites/src/Satellite.cpp:324
 #, qt-format
 msgid "Sun reflection angle: %1%2"
-msgstr ""
+msgstr "Endurkastshorn sólar: %1%2"
 
 #: plugins/Satellites/src/Satellite.cpp:335
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "Gervitunglið og athugandinn eru í sólskini."
 
 #: plugins/Satellites/src/Satellite.cpp:338
 msgid "The satellite is visible."
-msgstr ""
+msgstr "Gervitunglið er sýnilegt."
 
 #: plugins/Satellites/src/Satellite.cpp:341
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "Gervitunglið er hulið."
 
 #: plugins/Satellites/src/Satellite.cpp:344
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "Gervitunglið er ekki sýnilegt"
 
 #: plugins/Satellites/src/Satellite.cpp:369
 #, qt-format
@@ -6976,13 +6985,14 @@ msgstr "Gervihnattaviðbót fyrir Stellarium"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Iridium flares"
-msgstr ""
+msgstr "Iridium blossar"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
+"Gervihnattaviðbótin spáir fyrir um staðsetningu gervihnatta á braut um jörðu."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:414
 msgid "Notes for users"
@@ -7024,7 +7034,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:429
 msgid "TLE data updates"
-msgstr ""
+msgstr "Uppfærslur TLE-gagna"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
 msgid ""
@@ -7061,7 +7071,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
 msgid "Technical notes"
-msgstr ""
+msgstr "Tæknileg atriði"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:439
 msgid ""
@@ -7079,7 +7089,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:442
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "Skoðaðu %1tþetta skjal%2 fyrir ítarlegri upplýsingar."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:474
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
@@ -7088,7 +7098,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Uppfærslur af internetinu óvirkar"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:476
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:492
@@ -7146,12 +7156,12 @@ msgstr "Uppfærsluvilla"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:508
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "Uppfærði %1/%2 gervihnött/gervihnetti; %3 bætt við; %4 fjarlægðir"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:510
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Uppfærði %1/%2 gervihnött/gervihnetti; %3 bætt við; %4 vantar"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:572
 msgid "[new source]"
@@ -7188,15 +7198,15 @@ msgstr "[villa í útreikningi sporbrautar]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:669
 msgid "[all newly added]"
-msgstr ""
+msgstr "[allir nýlega viðbættir]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:670
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[allir ekki birtir]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:671
 msgid "[all displayed]"
-msgstr ""
+msgstr "[allir birtir]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:672
 msgid "[all]"
@@ -7209,19 +7219,19 @@ msgstr "Nýr hópur..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:922
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "Veldu TLE-uppfærsluskrá"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:940
 msgid "Time"
-msgstr ""
+msgstr "Tími"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:941
 msgid "Brightness"
-msgstr ""
+msgstr "Birtustig"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Satellite"
-msgstr ""
+msgstr "Gervihnöttur"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -7232,10 +7242,11 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
+"Stellarium er að ná í gervihnattagögn frá uppfærsluheimildum. Bíddu aðeins..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:168
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "Veldu TLE-heimildaskrá(r)..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:183
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:184
@@ -7246,7 +7257,7 @@ msgstr "Vinn með gögn..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:238
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "Það tókst ekki að hlaða inn neinum gögnum. Reyndu aftur síðar."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:371
 #, qt-format
@@ -7264,7 +7275,7 @@ msgstr "Uppfærslur"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:712
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Uppfæra gervihnattagögn af internetinu"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -7411,15 +7422,15 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:783
 msgid "Add new source"
-msgstr ""
+msgstr "Bæta við nýrri heimild"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:787
 msgid "Remove selected source"
-msgstr ""
+msgstr "Fjarlægja valda heimild"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:790
 msgid "Sources"
-msgstr "Uppruni"
+msgstr "Heimildir"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
@@ -7431,7 +7442,7 @@ msgstr "Fleiri gervihnettir"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
-msgstr "Ná í gögn frá uppfærslumiðlum"
+msgstr "Ná í gögn frá uppfærsluheimildum"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
@@ -8256,7 +8267,7 @@ msgstr "Handvirkur aðdráttur"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:445
 msgid "Magnitude scaling multiplier"
-msgstr ""
+msgstr "Margfaldari birtustigskvörðunar"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Milky Way intensity:"
@@ -8408,7 +8419,7 @@ msgstr "Veldu tegund"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Select the source"
-msgstr "Veldu uppruna"
+msgstr "Veldu heimild"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Download a list of objects from the Internet"
@@ -8416,7 +8427,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Veldu heimild af listanum:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Or enter a URL:"
@@ -8654,7 +8665,7 @@ msgstr "Uppfæra gagnaskrá af internetinu"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:307
 msgid "Update from Internet sources"
-msgstr "Uppfært af internetinu"
+msgstr "Uppfæra af internetinu"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Novae/src/ui_novaeDialog.h:238
