@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-25 20:04+0600\n"
-"PO-Revision-Date: 2015-09-25 14:31+0000\n"
+"POT-Creation-Date: 2015-10-04 02:27+0600\n"
+"PO-Revision-Date: 2015-10-03 20:47+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-09-26 05:25+0000\n"
-"X-Generator: Launchpad (build 17754)\n"
+"X-Launchpad-Export-Date: 2015-10-04 05:25+0000\n"
+"X-Generator: Launchpad (build 17783)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:489 src/core/StelCore.cpp:201
+#: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
 msgid "Display Options"
 msgstr "Параметры отображения"
@@ -931,7 +931,7 @@ msgstr "Млечный Путь"
 msgid "Zodiacal Light"
 msgstr "Зодиакальный свет"
 
-#: src/core/StelApp.cpp:489
+#: src/core/StelApp.cpp:498
 msgid "Night mode"
 msgstr "Ночной режим"
 
@@ -3333,8 +3333,9 @@ msgstr "События Земли с Марса"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:278
-msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
-msgstr "Наибольшие элонгации и яркость Земли и Венеры с Марса"
+msgid ""
+"Earth and other planet's Greatest Elongations and Oppositions from Mars"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:280
@@ -3346,30 +3347,35 @@ msgstr "Наибольшие элонгации и прохождения Зем
 msgid "Tycho's Supernova"
 msgstr "Сверхновая Тихо Браге"
 
+#. TRANSLATORS: Name of script
+#: src/translations.h:284
+msgid "Earth and other Planets from Ceres"
+msgstr "Земля и другие планеты с Цереры"
+
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:288
+#: src/translations.h:290
 msgid "Look around each installed landscape."
 msgstr "Посмотрите вокруг каждого установленного ландшафта."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:290
+#: src/translations.h:292
 msgid "Look at each installed sky culture."
 msgstr "Посмотрите каждую установленную культуру неба."
 
-#: src/translations.h:291
+#: src/translations.h:293
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Сценарий для демонстрации частного лунного затмения."
 
-#: src/translations.h:292
+#: src/translations.h:294
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Сценарий для демонстрации полного лунного затмения."
 
-#: src/translations.h:293
+#: src/translations.h:295
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Медленная, бесконечная экскурсия по небу с просмотром случайных объектов."
 
-#: src/translations.h:294
+#: src/translations.h:296
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -3377,11 +3383,11 @@ msgstr ""
 "Сценарий для демонстрации полного солнечного затмения, которое произошло в "
 "2009 году (место - Рангпур, Бангладеш)."
 
-#: src/translations.h:295
+#: src/translations.h:297
 msgid "Script which runs automatically at startup"
 msgstr "Сценарий, который запускается автоматически при запуске"
 
-#: src/translations.h:296
+#: src/translations.h:298
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -3390,7 +3396,7 @@ msgstr ""
 "Этот сценарий демонстрирует Зодиак - линию созвездий, через которые Солнце "
 "проходит по небесной сфере в течении года."
 
-#: src/translations.h:297
+#: src/translations.h:299
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -3399,7 +3405,7 @@ msgstr ""
 "определенных местах на планете Солнце восходит и заходит три раза в течении "
 "меркурианского дня."
 
-#: src/translations.h:298
+#: src/translations.h:300
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -3408,7 +3414,7 @@ msgstr ""
 "затмевает Солнце первым. Действие происходит между Скорпионом и Стрельцом 26 "
 "апреля 2017 года."
 
-#: src/translations.h:299
+#: src/translations.h:301
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -3417,11 +3423,11 @@ msgstr ""
 "затмевает Солнце первым. Действие происходит между Тельцом и Близнецами 23 "
 "июля 2031 года."
 
-#: src/translations.h:300
+#: src/translations.h:302
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "Вид затмения Солнца Фобосом с горы Олимп 10 января 2068 года."
 
-#: src/translations.h:301
+#: src/translations.h:303
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -3431,7 +3437,7 @@ msgstr ""
 "покрытия обоих планет в один и тот же день очень редки. Вот одно из таких "
 "покрытий в режиме реального времени, которое произойдёт 23 января 2048 года."
 
-#: src/translations.h:302
+#: src/translations.h:304
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3447,39 +3453,39 @@ msgstr ""
 "с диска Марса он всё ещё оказывается в тени планеты и только спустя "
 "некоторое время он попадает на свет."
 
-#: src/translations.h:303
+#: src/translations.h:305
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 "Хранитель экрана с различными событиями в Солнечной системе. Всего 232 "
 "события!"
 
-#: src/translations.h:304
+#: src/translations.h:306
 msgid "A tour of the western constellations."
 msgstr "Экскурсия по западным созвездиям."
 
-#: src/translations.h:305
+#: src/translations.h:307
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Вид Солнца на больших планетах Солнечной системы и Плутоне."
 
-#: src/translations.h:306
+#: src/translations.h:308
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "Лучшие в 21-м веке виды Земли с других тел Солнечной системы."
 
-#: src/translations.h:307
+#: src/translations.h:309
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Прохождение Венеры, каким оно было видно 6 июня 2012 года из Сиднея, "
 "Австралия."
 
-#: src/translations.h:308
+#: src/translations.h:310
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "Демонстрация аналеммы - пути Солнца по небу в течение года."
 
-#: src/translations.h:309
+#: src/translations.h:311
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -3487,13 +3493,13 @@ msgstr ""
 "Вспышка сверхновой, которую наблюдал Тихо Браге в 1572 году. Плагин "
 "\"Исторические сверхновые\" должен быть включён."
 
-#: src/translations.h:310
+#: src/translations.h:312
 msgid ""
-"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
+"Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
+"3000"
 msgstr ""
-"Наибольшие элонгации и яркость Земли и Венеры с Марса в 2000-3000 годах."
 
-#: src/translations.h:311
+#: src/translations.h:313
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3505,991 +3511,997 @@ msgstr ""
 "пределами радиационного пояса Юпитера. Поэтому, если люди когда-нибудь "
 "колонизируют спутники Юпитера, Каллисто будет одним из них."
 
-#: src/translations.h:315
+#: src/translations.h:314
+msgid ""
+"Earth the other visible Planet's Greatest Elongations and Oppositions from "
+"Ceres 2000-3000"
+msgstr ""
+
+#: src/translations.h:318
 msgid "Andorra"
 msgstr "Андорра"
 
-#: src/translations.h:316
+#: src/translations.h:319
 msgid "United Arab Emirates"
 msgstr "Объединенные Арабские Эмираты"
 
-#: src/translations.h:317
+#: src/translations.h:320
 msgid "Afghanistan"
 msgstr "Афганистан"
 
-#: src/translations.h:318
+#: src/translations.h:321
 msgid "Antigua and Barbuda"
 msgstr "Антигуа и Барбуда"
 
-#: src/translations.h:319
+#: src/translations.h:322
 msgid "Anguilla"
 msgstr "Ангилья"
 
-#: src/translations.h:320
+#: src/translations.h:323
 msgid "Albania"
 msgstr "Албания"
 
-#: src/translations.h:321
+#: src/translations.h:324
 msgid "Armenia"
 msgstr "Армения"
 
-#: src/translations.h:322
+#: src/translations.h:325
 msgid "Netherlands Antilles"
 msgstr "Нидерландские Антилы"
 
-#: src/translations.h:323
+#: src/translations.h:326
 msgid "Angola"
 msgstr "Ангола"
 
-#: src/translations.h:324
+#: src/translations.h:327
 msgid "Antarctica"
 msgstr "Антарктида"
 
-#: src/translations.h:325
+#: src/translations.h:328
 msgid "Argentina"
 msgstr "Аргентина"
 
-#: src/translations.h:326
+#: src/translations.h:329
 msgid "American Samoa"
 msgstr "Американские Самоа"
 
-#: src/translations.h:327
+#: src/translations.h:330
 msgid "Austria"
 msgstr "Австрия"
 
-#: src/translations.h:328
+#: src/translations.h:331
 msgid "Australia"
 msgstr "Австралия"
 
-#: src/translations.h:329
+#: src/translations.h:332
 msgid "Aruba"
 msgstr "Аруба"
 
-#: src/translations.h:330
+#: src/translations.h:333
 msgid "Azerbaijan"
 msgstr "Азербайджан"
 
-#: src/translations.h:331
+#: src/translations.h:334
 msgid "Bosnia and Herzegowina"
 msgstr "Босния и Герцеговина"
 
-#: src/translations.h:332
+#: src/translations.h:335
 msgid "Barbados"
 msgstr "Барбадос"
 
-#: src/translations.h:333
+#: src/translations.h:336
 msgid "Bangladesh"
 msgstr "Бангладеш"
 
-#: src/translations.h:334
+#: src/translations.h:337
 msgid "Belgium"
 msgstr "Бельгия"
 
-#: src/translations.h:335
+#: src/translations.h:338
 msgid "Burkina Faso"
 msgstr "Буркина Фасо"
 
-#: src/translations.h:336
+#: src/translations.h:339
 msgid "Bulgaria"
 msgstr "Болгария"
 
-#: src/translations.h:337
+#: src/translations.h:340
 msgid "Bahrain"
 msgstr "Бахрейн"
 
-#: src/translations.h:338
+#: src/translations.h:341
 msgid "Burundi"
 msgstr "Бурунди"
 
-#: src/translations.h:339
+#: src/translations.h:342
 msgid "Benin"
 msgstr "Бенин"
 
-#: src/translations.h:340
+#: src/translations.h:343
 msgid "Bermuda"
 msgstr "Бермуды"
 
-#: src/translations.h:341
+#: src/translations.h:344
 msgid "Brunei Darussalam"
 msgstr "Бруней Даруссалам"
 
-#: src/translations.h:342
+#: src/translations.h:345
 msgid "Bolivia"
 msgstr "Боливия"
 
-#: src/translations.h:343
+#: src/translations.h:346
 msgid "Brazil"
 msgstr "Бразилия"
 
-#: src/translations.h:344
+#: src/translations.h:347
 msgid "Bahamas"
 msgstr "Багамы"
 
-#: src/translations.h:345
+#: src/translations.h:348
 msgid "Bhutan"
 msgstr "Бутан"
 
-#: src/translations.h:346
+#: src/translations.h:349
 msgid "Bouvet Island"
 msgstr "Остров Буве"
 
-#: src/translations.h:347
+#: src/translations.h:350
 msgid "Botswana"
 msgstr "Ботсвана"
 
-#: src/translations.h:348
+#: src/translations.h:351
 msgid "Belarus"
 msgstr "Беларусь"
 
-#: src/translations.h:349
+#: src/translations.h:352
 msgid "Belize"
 msgstr "Белиз"
 
-#: src/translations.h:350
+#: src/translations.h:353
 msgid "Canada"
 msgstr "Канада"
 
-#: src/translations.h:351
+#: src/translations.h:354
 msgid "Cocos Islands"
 msgstr "Кокосовые острова"
 
-#: src/translations.h:352
+#: src/translations.h:355
 msgid "Democratic Republic of the Congo"
 msgstr "Демократическая Республика Конго"
 
-#: src/translations.h:353
+#: src/translations.h:356
 msgid "Central African Republic"
 msgstr "Центрально-Африканская Республика"
 
-#: src/translations.h:354
+#: src/translations.h:357
 msgid "Republic of the Congo"
 msgstr "Республика Конго"
 
-#: src/translations.h:355
+#: src/translations.h:358
 msgid "Switzerland"
 msgstr "Швейцария"
 
-#: src/translations.h:356
+#: src/translations.h:359
 msgid "Cote d'Ivoire"
 msgstr "Берег Слоновой Кости"
 
-#: src/translations.h:357
+#: src/translations.h:360
 msgid "Cook Islands"
 msgstr "Острова Кука"
 
-#: src/translations.h:358
+#: src/translations.h:361
 msgid "Chile"
 msgstr "Чили"
 
-#: src/translations.h:359
+#: src/translations.h:362
 msgid "Cameroon"
 msgstr "Камерун"
 
-#: src/translations.h:360
+#: src/translations.h:363
 msgid "China"
 msgstr "Китай"
 
-#: src/translations.h:361
+#: src/translations.h:364
 msgid "Colombia"
 msgstr "Колумбия"
 
-#: src/translations.h:362
+#: src/translations.h:365
 msgid "Costa Rica"
 msgstr "Коста-Рика"
 
-#: src/translations.h:363
+#: src/translations.h:366
 msgid "Serbia and Montenegro"
 msgstr "Сербия и Черногория"
 
-#: src/translations.h:364
+#: src/translations.h:367
 msgid "Cuba"
 msgstr "Куба"
 
-#: src/translations.h:365
+#: src/translations.h:368
 msgid "Cape Verde"
 msgstr "Кабо-Верде"
 
-#: src/translations.h:366
+#: src/translations.h:369
 msgid "Christmas Island"
 msgstr "Остров Рождества"
 
-#: src/translations.h:367
+#: src/translations.h:370
 msgid "Cyprus"
 msgstr "Кипр"
 
-#: src/translations.h:368
+#: src/translations.h:371
 msgid "Czech Republic"
 msgstr "Чешская республика"
 
-#: src/translations.h:369
+#: src/translations.h:372
 msgid "Germany"
 msgstr "Германия"
 
-#: src/translations.h:370
+#: src/translations.h:373
 msgid "Djibouti"
 msgstr "Джибути"
 
-#: src/translations.h:371
+#: src/translations.h:374
 msgid "Denmark"
 msgstr "Дания"
 
-#: src/translations.h:372
+#: src/translations.h:375
 msgid "Dominica"
 msgstr "Доминика"
 
-#: src/translations.h:373
+#: src/translations.h:376
 msgid "Dominican Republic"
 msgstr "Доминиканская республика"
 
-#: src/translations.h:374
+#: src/translations.h:377
 msgid "Algeria"
 msgstr "Алжир"
 
-#: src/translations.h:375
+#: src/translations.h:378
 msgid "Ecuador"
 msgstr "Эквадор"
 
-#: src/translations.h:376
+#: src/translations.h:379
 msgid "Estonia"
 msgstr "Эстония"
 
-#: src/translations.h:377
+#: src/translations.h:380
 msgid "Egypt"
 msgstr "Египет"
 
-#: src/translations.h:378
+#: src/translations.h:381
 msgid "Western Sahara"
 msgstr "Западная Сахара"
 
-#: src/translations.h:379
+#: src/translations.h:382
 msgid "Eritrea"
 msgstr "Эритрея"
 
-#: src/translations.h:380
+#: src/translations.h:383
 msgid "Spain"
 msgstr "Испания"
 
-#: src/translations.h:381
+#: src/translations.h:384
 msgid "Ethiopia"
 msgstr "Эфиопия"
 
-#: src/translations.h:382
+#: src/translations.h:385
 msgid "Finland"
 msgstr "Финляндия"
 
-#: src/translations.h:383
+#: src/translations.h:386
 msgid "Fiji"
 msgstr "Фиджи"
 
-#: src/translations.h:384
+#: src/translations.h:387
 msgid "Falkland Islands"
 msgstr "Фолклендские острова"
 
-#: src/translations.h:385
+#: src/translations.h:388
 msgid "Micronesia"
 msgstr "Микронезия"
 
-#: src/translations.h:386
+#: src/translations.h:389
 msgid "Faroe Islands"
 msgstr "Фарерские острова"
 
-#: src/translations.h:387
+#: src/translations.h:390
 msgid "France"
 msgstr "Франция"
 
-#: src/translations.h:388
+#: src/translations.h:391
 msgid "Gabon"
 msgstr "Габон"
 
-#: src/translations.h:389
+#: src/translations.h:392
 msgid "United Kingdom"
 msgstr "Великобритания"
 
-#: src/translations.h:390
+#: src/translations.h:393
 msgid "Grenada"
 msgstr "Гренада"
 
-#: src/translations.h:391
+#: src/translations.h:394
 msgid "Georgia"
 msgstr "Грузия"
 
-#: src/translations.h:392
+#: src/translations.h:395
 msgid "French Guiana"
 msgstr "Французская Гвинея"
 
-#: src/translations.h:393
+#: src/translations.h:396
 msgid "Ghana"
 msgstr "Гана"
 
-#: src/translations.h:394
+#: src/translations.h:397
 msgid "Gibraltar"
 msgstr "Гибралтар"
 
-#: src/translations.h:395
+#: src/translations.h:398
 msgid "Greenland"
 msgstr "Гренландия"
 
-#: src/translations.h:396
+#: src/translations.h:399
 msgid "Gambia"
 msgstr "Гамбия"
 
-#: src/translations.h:397
+#: src/translations.h:400
 msgid "Guinea"
 msgstr "Гвинея"
 
-#: src/translations.h:398
+#: src/translations.h:401
 msgid "Guadeloupe"
 msgstr "Гваделупа"
 
-#: src/translations.h:399
+#: src/translations.h:402
 msgid "Equatorial Guinea"
 msgstr "Экваториальная Гвинея"
 
-#: src/translations.h:400
+#: src/translations.h:403
 msgid "Greece"
 msgstr "Греция"
 
-#: src/translations.h:401
+#: src/translations.h:404
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Южная Джорджия и Южные Сандвичевы Острова"
 
-#: src/translations.h:402
+#: src/translations.h:405
 msgid "Guatemala"
 msgstr "Гватемала"
 
-#: src/translations.h:403
+#: src/translations.h:406
 msgid "Guam"
 msgstr "Гуам"
 
-#: src/translations.h:404
+#: src/translations.h:407
 msgid "Guinea-Bissau"
 msgstr "Гвинея-Биссау"
 
-#: src/translations.h:405
+#: src/translations.h:408
 msgid "Guyana"
 msgstr "Гвиана"
 
-#: src/translations.h:406
+#: src/translations.h:409
 msgid "Hong Kong"
 msgstr "Гонконг"
 
-#: src/translations.h:407
+#: src/translations.h:410
 msgid "Heard Island and McDonald Islands"
 msgstr "Острова Херд и Макдональд"
 
-#: src/translations.h:408
+#: src/translations.h:411
 msgid "Honduras"
 msgstr "Гондурас"
 
-#: src/translations.h:409
+#: src/translations.h:412
 msgid "Croatia"
 msgstr "Хорватия"
 
-#: src/translations.h:410
+#: src/translations.h:413
 msgid "Haiti"
 msgstr "Гаити"
 
-#: src/translations.h:411
+#: src/translations.h:414
 msgid "Hungary"
 msgstr "Венгрия"
 
-#: src/translations.h:412
+#: src/translations.h:415
 msgid "Indonesia"
 msgstr "Индонезия"
 
-#: src/translations.h:413
+#: src/translations.h:416
 msgid "Ireland"
 msgstr "Ирландия"
 
-#: src/translations.h:414
+#: src/translations.h:417
 msgid "Israel"
 msgstr "Израиль"
 
-#: src/translations.h:415
+#: src/translations.h:418
 msgid "India"
 msgstr "Индия"
 
-#: src/translations.h:416
+#: src/translations.h:419
 msgid "British Indian Ocean Territory"
 msgstr "Британские территории в Индийском океане"
 
-#: src/translations.h:417
+#: src/translations.h:420
 msgid "Iraq"
 msgstr "Ирак"
 
-#: src/translations.h:418
+#: src/translations.h:421
 msgid "Iran"
 msgstr "Иран"
 
-#: src/translations.h:419
+#: src/translations.h:422
 msgid "Iceland"
 msgstr "Исландия"
 
-#: src/translations.h:420
+#: src/translations.h:423
 msgid "Italy"
 msgstr "Италия"
 
-#: src/translations.h:421
+#: src/translations.h:424
 msgid "Jamaica"
 msgstr "Ямайка"
 
-#: src/translations.h:422
+#: src/translations.h:425
 msgid "Jordan"
 msgstr "Иордания"
 
-#: src/translations.h:423
+#: src/translations.h:426
 msgid "Japan"
 msgstr "Япония"
 
-#: src/translations.h:424
+#: src/translations.h:427
 msgid "Kenya"
 msgstr "Кения"
 
-#: src/translations.h:425
+#: src/translations.h:428
 msgid "Kyrgyzstan"
 msgstr "Кыргызстан"
 
-#: src/translations.h:426
+#: src/translations.h:429
 msgid "Cambodia"
 msgstr "Камбоджа"
 
-#: src/translations.h:427
+#: src/translations.h:430
 msgid "Kiribati"
 msgstr "Кирибати"
 
-#: src/translations.h:428
+#: src/translations.h:431
 msgid "Comoros"
 msgstr "Коморские Острова"
 
-#: src/translations.h:429
+#: src/translations.h:432
 msgid "Saint Kitts and Nevis"
 msgstr "Сен-Китс и Невис"
 
-#: src/translations.h:430
+#: src/translations.h:433
 msgid "Democratic People's Republic of Korea"
 msgstr "Корейская Народно-Демократическая Республика"
 
-#: src/translations.h:431
+#: src/translations.h:434
 msgid "Republic of Korea"
 msgstr "Республика Корея"
 
-#: src/translations.h:432
+#: src/translations.h:435
 msgid "Kuwait"
 msgstr "Кувейт"
 
-#: src/translations.h:433
+#: src/translations.h:436
 msgid "Cayman Islands"
 msgstr "Каймановы острова"
 
-#: src/translations.h:434
+#: src/translations.h:437
 msgid "Kazakhstan"
 msgstr "Казахстан"
 
-#: src/translations.h:435
+#: src/translations.h:438
 msgid "Lao"
 msgstr "Лаос"
 
-#: src/translations.h:436
+#: src/translations.h:439
 msgid "Lebanon"
 msgstr "Ливан"
 
-#: src/translations.h:437
+#: src/translations.h:440
 msgid "Saint Lucia"
 msgstr "Санта Лючия"
 
-#: src/translations.h:438
+#: src/translations.h:441
 msgid "Liechtenstein"
 msgstr "Лихтенштейн"
 
-#: src/translations.h:439
+#: src/translations.h:442
 msgid "Sri Lanka"
 msgstr "Шри-Ланка"
 
-#: src/translations.h:440
+#: src/translations.h:443
 msgid "Liberia"
 msgstr "Либерия"
 
-#: src/translations.h:441
+#: src/translations.h:444
 msgid "Lesotho"
 msgstr "Лесото"
 
-#: src/translations.h:442
+#: src/translations.h:445
 msgid "Lithuania"
 msgstr "Литва"
 
-#: src/translations.h:443
+#: src/translations.h:446
 msgid "Luxembourg"
 msgstr "Люксембург"
 
-#: src/translations.h:444
+#: src/translations.h:447
 msgid "Latvia"
 msgstr "Латвия"
 
-#: src/translations.h:445
+#: src/translations.h:448
 msgid "Libyan Arab Jamahiriya"
 msgstr "Ливийская Арабская Джамахирия"
 
-#: src/translations.h:446
+#: src/translations.h:449
 msgid "Morocco"
 msgstr "Марокко"
 
-#: src/translations.h:447
+#: src/translations.h:450
 msgid "Monaco"
 msgstr "Монако"
 
-#: src/translations.h:448
+#: src/translations.h:451
 msgid "Moldova"
 msgstr "Молдавия"
 
-#: src/translations.h:449
+#: src/translations.h:452
 msgid "Madagascar"
 msgstr "Мадагаскар"
 
-#: src/translations.h:450
+#: src/translations.h:453
 msgid "Marshall Islands"
 msgstr "Маршалловы острова"
 
-#: src/translations.h:451
+#: src/translations.h:454
 msgid "Macedonia"
 msgstr "Македония"
 
-#: src/translations.h:452
+#: src/translations.h:455
 msgid "Mali"
 msgstr "Мали"
 
-#: src/translations.h:453
+#: src/translations.h:456
 msgid "Myanmar"
 msgstr "Бирма"
 
-#: src/translations.h:454
+#: src/translations.h:457
 msgid "Mongolia"
 msgstr "Монголия"
 
-#: src/translations.h:455
+#: src/translations.h:458
 msgid "Macau"
 msgstr "Макао"
 
-#: src/translations.h:456
+#: src/translations.h:459
 msgid "Northern Mariana Islands"
 msgstr "Северные Марианские острова"
 
-#: src/translations.h:457
+#: src/translations.h:460
 msgid "Martinique"
 msgstr "Мартиника"
 
-#: src/translations.h:458
+#: src/translations.h:461
 msgid "Mauritania"
 msgstr "Мавритания"
 
-#: src/translations.h:459
+#: src/translations.h:462
 msgid "Montserrat"
 msgstr "Монсеррат"
 
-#: src/translations.h:460
+#: src/translations.h:463
 msgid "Malta"
 msgstr "Мальта"
 
-#: src/translations.h:461
+#: src/translations.h:464
 msgid "Mauritius"
 msgstr "Мавтрития"
 
-#: src/translations.h:462
+#: src/translations.h:465
 msgid "Maldives"
 msgstr "Мальдивы"
 
-#: src/translations.h:463
+#: src/translations.h:466
 msgid "Malawi"
 msgstr "Малави"
 
-#: src/translations.h:464
+#: src/translations.h:467
 msgid "Mexico"
 msgstr "Мексика"
 
-#: src/translations.h:465
+#: src/translations.h:468
 msgid "Malaysia"
 msgstr "Малайзия"
 
-#: src/translations.h:466
+#: src/translations.h:469
 msgid "Mozambique"
 msgstr "Мозамбик"
 
-#: src/translations.h:467
+#: src/translations.h:470
 msgid "Namibia"
 msgstr "Намибия"
 
-#: src/translations.h:468
+#: src/translations.h:471
 msgid "New Caledonia"
 msgstr "Новая Каледония"
 
-#: src/translations.h:469
+#: src/translations.h:472
 msgid "Niger"
 msgstr "Нигер"
 
-#: src/translations.h:470
+#: src/translations.h:473
 msgid "Norfolk Island"
 msgstr "Остров Норфолк"
 
-#: src/translations.h:471
+#: src/translations.h:474
 msgid "Nigeria"
 msgstr "Нигерия"
 
-#: src/translations.h:472
+#: src/translations.h:475
 msgid "Nicaragua"
 msgstr "Никарагуа"
 
-#: src/translations.h:473
+#: src/translations.h:476
 msgid "Netherlands"
 msgstr "Нидерланды"
 
-#: src/translations.h:474
+#: src/translations.h:477
 msgid "Norway"
 msgstr "Норвегия"
 
-#: src/translations.h:475
+#: src/translations.h:478
 msgid "Nepal"
 msgstr "Непал"
 
-#: src/translations.h:476
+#: src/translations.h:479
 msgid "Nauru"
 msgstr "Науру"
 
-#: src/translations.h:477
+#: src/translations.h:480
 msgid "Niue"
 msgstr "Ниуэ"
 
-#: src/translations.h:478
+#: src/translations.h:481
 msgid "New Zealand"
 msgstr "Новая Зеландия"
 
-#: src/translations.h:479
+#: src/translations.h:482
 msgid "Oman"
 msgstr "Оман"
 
-#: src/translations.h:480
+#: src/translations.h:483
 msgid "Panama"
 msgstr "Панама"
 
-#: src/translations.h:481
+#: src/translations.h:484
 msgid "Peru"
 msgstr "Перу"
 
-#: src/translations.h:482
+#: src/translations.h:485
 msgid "French Polynesia"
 msgstr "Французская Полинезия"
 
-#: src/translations.h:483
+#: src/translations.h:486
 msgid "Papua New Guinea"
 msgstr "Папуа-Новая Гвинея"
 
-#: src/translations.h:484
+#: src/translations.h:487
 msgid "Philippines"
 msgstr "Филиппины"
 
-#: src/translations.h:485
+#: src/translations.h:488
 msgid "Pakistan"
 msgstr "Пакистан"
 
-#: src/translations.h:486
+#: src/translations.h:489
 msgid "Poland"
 msgstr "Польша"
 
-#: src/translations.h:487
+#: src/translations.h:490
 msgid "Saint Pierre and Miquelon"
 msgstr "Сен-Пьер и Микелон"
 
-#: src/translations.h:488
+#: src/translations.h:491
 msgid "Pitcairn"
 msgstr "Питкэрн"
 
-#: src/translations.h:489
+#: src/translations.h:492
 msgid "Puerto Rico"
 msgstr "Пуэрто-Рико"
 
-#: src/translations.h:490
+#: src/translations.h:493
 msgid "Palestinian Territories"
 msgstr "Палестинская автономия"
 
-#: src/translations.h:491
+#: src/translations.h:494
 msgid "Portugal"
 msgstr "Португалия"
 
-#: src/translations.h:492
+#: src/translations.h:495
 msgid "Palau"
 msgstr "Палау"
 
-#: src/translations.h:493
+#: src/translations.h:496
 msgid "Paraguay"
 msgstr "Парагвай"
 
-#: src/translations.h:494
+#: src/translations.h:497
 msgid "Qatar"
 msgstr "Катар"
 
-#: src/translations.h:495
+#: src/translations.h:498
 msgid "Réunion"
 msgstr "Реюньон"
 
-#: src/translations.h:496
+#: src/translations.h:499
 msgid "Romania"
 msgstr "Румыния"
 
-#: src/translations.h:497
+#: src/translations.h:500
 msgid "Serbia"
 msgstr "Сербия"
 
-#: src/translations.h:498
+#: src/translations.h:501
 msgid "Russian Federation"
 msgstr "Российская Федерация"
 
-#: src/translations.h:499
+#: src/translations.h:502
 msgid "Rwanda"
 msgstr "Руанда"
 
-#: src/translations.h:500
+#: src/translations.h:503
 msgid "Saudi Arabia"
 msgstr "Саудовская Аравия"
 
-#: src/translations.h:501
+#: src/translations.h:504
 msgid "Solomon Islands"
 msgstr "Соломоновы острова"
 
-#: src/translations.h:502
+#: src/translations.h:505
 msgid "Seychelles"
 msgstr "Сейшельские острова"
 
-#: src/translations.h:503
+#: src/translations.h:506
 msgid "Sudan"
 msgstr "Судан"
 
-#: src/translations.h:504
+#: src/translations.h:507
 msgid "Sweden"
 msgstr "Швеция"
 
-#: src/translations.h:505
+#: src/translations.h:508
 msgid "Singapore"
 msgstr "Сингапур"
 
-#: src/translations.h:506
+#: src/translations.h:509
 msgid "Saint Helena"
 msgstr "Остров Святой Елены"
 
-#: src/translations.h:507
+#: src/translations.h:510
 msgid "Slovenia"
 msgstr "Словения"
 
-#: src/translations.h:508
+#: src/translations.h:511
 msgid "Svalbard and Jan Mayen"
 msgstr "Свальбард и Ян-Майен"
 
-#: src/translations.h:509
+#: src/translations.h:512
 msgid "Slovakia"
 msgstr "Словакия"
 
-#: src/translations.h:510
+#: src/translations.h:513
 msgid "Sierra Leone"
 msgstr "Сьерра-Леоне"
 
-#: src/translations.h:511
+#: src/translations.h:514
 msgid "San Marino"
 msgstr "Сан-Марино"
 
-#: src/translations.h:512
+#: src/translations.h:515
 msgid "Senegal"
 msgstr "Сенегал"
 
-#: src/translations.h:513
+#: src/translations.h:516
 msgid "Somalia"
 msgstr "Сомали"
 
-#: src/translations.h:514
+#: src/translations.h:517
 msgid "Suriname"
 msgstr "Суринам"
 
-#: src/translations.h:515
+#: src/translations.h:518
 msgid "Sao Tome and Principe"
 msgstr "Сан-Томе и Принсили"
 
-#: src/translations.h:516
+#: src/translations.h:519
 msgid "El Salvador"
 msgstr "Сальвадор"
 
-#: src/translations.h:517
+#: src/translations.h:520
 msgid "Syrian Arab Republic"
 msgstr "Сирия"
 
-#: src/translations.h:518
+#: src/translations.h:521
 msgid "Swaziland"
 msgstr "Свазиленд"
 
-#: src/translations.h:519
+#: src/translations.h:522
 msgid "Turks and Caicos Islands"
 msgstr "Тёркс и Кайкос"
 
-#: src/translations.h:520
+#: src/translations.h:523
 msgid "Chad"
 msgstr "Чад"
 
-#: src/translations.h:521
+#: src/translations.h:524
 msgid "French Southern Territories"
 msgstr "Французские Южные Территории"
 
-#: src/translations.h:522
+#: src/translations.h:525
 msgid "Togo"
 msgstr "Того"
 
-#: src/translations.h:523
+#: src/translations.h:526
 msgid "Thailand"
 msgstr "Таиланд"
 
-#: src/translations.h:524
+#: src/translations.h:527
 msgid "Tajikistan"
 msgstr "Таджикистан"
 
-#: src/translations.h:525
+#: src/translations.h:528
 msgid "Tokelau"
 msgstr "Токелау"
 
-#: src/translations.h:526
+#: src/translations.h:529
 msgid "East Timor"
 msgstr "Восточный Тимор"
 
-#: src/translations.h:527
+#: src/translations.h:530
 msgid "Turkmenistan"
 msgstr "Туркменистан"
 
-#: src/translations.h:528
+#: src/translations.h:531
 msgid "Tunisia"
 msgstr "Тунис"
 
-#: src/translations.h:529
+#: src/translations.h:532
 msgid "Tonga"
 msgstr "Тонга"
 
-#: src/translations.h:530
+#: src/translations.h:533
 msgid "Turkey"
 msgstr "Турция"
 
-#: src/translations.h:531
+#: src/translations.h:534
 msgid "Trinidad and Tobago"
 msgstr "Тринидад и Тобаго"
 
-#: src/translations.h:532
+#: src/translations.h:535
 msgid "Tuvalu"
 msgstr "Тувалу"
 
-#: src/translations.h:533
+#: src/translations.h:536
 msgid "Taiwan"
 msgstr "Тайвань"
 
-#: src/translations.h:534
+#: src/translations.h:537
 msgid "Tanzania"
 msgstr "Танзания"
 
-#: src/translations.h:535
+#: src/translations.h:538
 msgid "Ukraine"
 msgstr "Украина"
 
-#: src/translations.h:536
+#: src/translations.h:539
 msgid "Uganda"
 msgstr "Уганда"
 
-#: src/translations.h:537
+#: src/translations.h:540
 msgid "United States Minor Outlying Islands"
 msgstr "Внешние малые острова США"
 
-#: src/translations.h:538
+#: src/translations.h:541
 msgid "United States"
 msgstr "Соединенные Штаты Америки"
 
-#: src/translations.h:539
+#: src/translations.h:542
 msgid "Uruguay"
 msgstr "Уругвай"
 
-#: src/translations.h:540
+#: src/translations.h:543
 msgid "Uzbekistan"
 msgstr "Узбекистан"
 
-#: src/translations.h:541
+#: src/translations.h:544
 msgid "Vatican City State"
 msgstr "Ватикан"
 
-#: src/translations.h:542
+#: src/translations.h:545
 msgid "Saint Vincent and the Grenadines"
 msgstr "Сент-Винсент и Гренадины"
 
-#: src/translations.h:543
+#: src/translations.h:546
 msgid "Venezuela"
 msgstr "Венесуэла"
 
-#: src/translations.h:544
+#: src/translations.h:547
 msgid "British Virgin Islands"
 msgstr "Британские Виргинские острова"
 
-#: src/translations.h:545
+#: src/translations.h:548
 msgid "United States Virgin Islands"
 msgstr "Виргинские острова США"
 
-#: src/translations.h:546
+#: src/translations.h:549
 msgid "Viet Nam"
 msgstr "Вьетнам"
 
-#: src/translations.h:547
+#: src/translations.h:550
 msgid "Vanuatu"
 msgstr "Вануту"
 
-#: src/translations.h:548
+#: src/translations.h:551
 msgid "Wallis and Futuna"
 msgstr "Уоллис и Футуна"
 
-#: src/translations.h:549
+#: src/translations.h:552
 msgid "Samoa"
 msgstr "Самоа"
 
-#: src/translations.h:550
+#: src/translations.h:553
 msgid "Yemen"
 msgstr "Йемен"
 
-#: src/translations.h:551
+#: src/translations.h:554
 msgid "Mayotte"
 msgstr "Майотта"
 
-#: src/translations.h:552
+#: src/translations.h:555
 msgid "Yugoslavia"
 msgstr "Югославия"
 
-#: src/translations.h:553
+#: src/translations.h:556
 msgid "South Africa"
 msgstr "Южно-Африканская Республика"
 
-#: src/translations.h:554
+#: src/translations.h:557
 msgid "Zambia"
 msgstr "Замбия"
 
-#: src/translations.h:555
+#: src/translations.h:558
 msgid "Zimbabwe"
 msgstr "Зимбабве"
 
-#: src/translations.h:559
+#: src/translations.h:562
 msgid "&Undo"
 msgstr "&Отменить"
 
-#: src/translations.h:560
+#: src/translations.h:563
 msgid "&Redo"
 msgstr "&Повторить"
 
-#: src/translations.h:561
+#: src/translations.h:564
 msgid "Cu&t"
 msgstr "Выре&зать"
 
-#: src/translations.h:562
+#: src/translations.h:565
 msgid "&Copy"
 msgstr "&Копировать"
 
-#: src/translations.h:563
+#: src/translations.h:566
 msgid "&Paste"
 msgstr "В&ставить"
 
-#: src/translations.h:564 src/ui_locationDialogGui.h:432
+#: src/translations.h:567 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1094
 #: plugins/Oculars/src/ui_ocularDialog.h:1104
 #: plugins/Oculars/src/ui_ocularDialog.h:1111
@@ -4497,64 +4509,64 @@ msgstr "В&ставить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/translations.h:565
+#: src/translations.h:568
 msgid "Select All"
 msgstr "Выделить всё"
 
-#: src/translations.h:566
+#: src/translations.h:569
 msgid "Look in:"
 msgstr "Искать в:"
 
-#: src/translations.h:567
+#: src/translations.h:570
 msgid "Directory:"
 msgstr "Каталог:"
 
-#: src/translations.h:568
+#: src/translations.h:571
 msgid "Folder"
 msgstr "Папка"
 
-#: src/translations.h:569
+#: src/translations.h:572
 msgid "&Choose"
 msgstr "&Выбрать"
 
-#: src/translations.h:570 src/ui_configurationDialog.h:1219
+#: src/translations.h:573 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/translations.h:571
+#: src/translations.h:574
 msgid "Files of type:"
 msgstr "Файлы типа:"
 
-#: src/translations.h:572
+#: src/translations.h:575
 msgid "Date Modified"
 msgstr "Дата изменения"
 
-#: src/translations.h:573
+#: src/translations.h:576
 msgid "Directories"
 msgstr "Каталоги"
 
-#: src/translations.h:574
+#: src/translations.h:577
 msgid "Computer"
 msgstr "Компьютер"
 
-#: src/translations.h:575
+#: src/translations.h:578
 msgid "&Open"
 msgstr "&Открыть"
 
-#: src/translations.h:576
+#: src/translations.h:579
 msgid "File &name:"
 msgstr "&Имя файла:"
 
-#: src/translations.h:577
+#: src/translations.h:580
 msgid "Copy &Link Location"
 msgstr "Копировать ссылку"
 
-#: src/translations.h:578
+#: src/translations.h:581
 msgid "Abort"
 msgstr "Прервать"
 
-#: src/translations.h:579
+#: src/translations.h:582
 msgid "Ignore"
 msgstr "Игнорировать"
 
@@ -5477,7 +5489,7 @@ msgid "Display no information"
 msgstr "Не отображать информации"
 
 #: src/ui_configurationDialog.h:1064 plugins/Oculars/src/Oculars.cpp:1985
-#: plugins/Observability/src/Observability.cpp:208
+#: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "Отключена"
 
@@ -6445,39 +6457,39 @@ msgid "RA/Dec (J2000.0) of cross"
 msgstr "П.В./Скл. (J2000.0) перекрестия"
 
 #: plugins/Oculars/src/Oculars.cpp:1601
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Окуляр #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1606
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Окуляр #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1620
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФР окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1627
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Видимое ПЗ окуляра: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1639
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
 #, qt-format
 msgid "Lens #%1"
 msgstr "Линза #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1643
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Линза #%1: %2"
@@ -6487,44 +6499,44 @@ msgid "Lens: none"
 msgstr "Линза: нет"
 
 #: plugins/Oculars/src/Oculars.cpp:1678 plugins/Oculars/src/Oculars.cpp:1719
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:739
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1681
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увеличение: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1684
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 #, qt-format
 msgid "FOV: %1"
 msgstr "Поле зрения: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1703
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:684
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Размеры: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1707
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сенсор #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1711
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сенсор #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1724
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
@@ -6553,109 +6565,109 @@ msgstr "&Предыдущий телескоп"
 msgid "&Next telescope"
 msgstr "&Следующий телескоп"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:187
 msgid "Previous ocular"
 msgstr "Предыдущий окуляр"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
 msgid "Next ocular"
 msgstr "Следующий окуляр"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
 msgid "Previous lens"
 msgstr "Предыдущая линза"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
 msgid "Next lens"
 msgstr "Следующая линза"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:211
 msgid "Previous CCD frame"
 msgstr "Предыдущая рамка ПЗС"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:217
 msgid "Next CCD frame"
 msgstr "Следующая рамка ПЗС"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:223
 msgid "Previous telescope"
 msgstr "Предыдущий телескоп"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:228
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:229
 msgid "Next telescope"
 msgstr "Следующий телескоп"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:261
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Повернуть рамку сенсора на 15 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:274
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:275
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Повернуть рамку сенсора на 5 градусов против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:287
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:288
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Повернуть рамку сенсора на градус против часовой стрелки"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:301
 msgid "Reset the sensor frame rotation"
 msgstr "Сбросить поворот рамки сенсора"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:313
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:314
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Повернуть рамку сенсора на градус по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:326
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:327
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Повернуть рамку сенсора на 5 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:339
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:340
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Повернуть рамку сенсора на 15 градусов по часовой стрелке"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
 msgid "Effective focal length of the ocular"
 msgstr "Эффективный фокус окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:555
 msgid "Apparent field of view of the ocular"
 msgstr "Видимое поле зрения окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:587
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Кратность: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Lens: None"
 msgstr "Линза: нет"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:594
 msgid "Multiplicity: N/A"
 msgstr "Кратность: н/д"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 msgid "Focal length of eyepiece"
 msgstr "Фокусное расстояние окуляра"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:692
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Поворот: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
 msgid "Magnification provided by these binoculars"
 msgstr "Увеличение, даваемое этим биноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Actual field of view provided by these binoculars"
 msgstr "Актуальное поле зрения, даваемое биноклем"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "Увеличение определяется комбинацией окуляра/линзы/телекскопа"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:812
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
@@ -9780,11 +9792,11 @@ msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "Веб-сайты"
 
-#: plugins/Observability/src/Observability.cpp:67
+#: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
 msgstr "Анализ условий видимости"
 
-#: plugins/Observability/src/Observability.cpp:70
+#: plugins/Observability/src/Observability.cpp:68
 msgid ""
 "Displays an analysis of a selected object's observability (rise, set, and "
 "transit times) for the current date, as well as when it is observable "
@@ -9802,205 +9814,205 @@ msgstr ""
 "закатов. (Объяснение показываемых величин изложено во вкладке 'О плагине' "
 "окна конфигурации.)"
 
-#: plugins/Observability/src/Observability.cpp:177
+#: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Jan"
 msgstr "янв."
 
-#: plugins/Observability/src/Observability.cpp:178
+#: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Feb"
 msgstr "фев."
 
-#: plugins/Observability/src/Observability.cpp:179
+#: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Mar"
 msgstr "мар."
 
-#: plugins/Observability/src/Observability.cpp:180
+#: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "Apr"
 msgstr "апр."
 
-#: plugins/Observability/src/Observability.cpp:181
+#: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "May"
 msgstr "мая"
 
-#: plugins/Observability/src/Observability.cpp:182
+#: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jun"
 msgstr "июн."
 
-#: plugins/Observability/src/Observability.cpp:183
+#: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Jul"
 msgstr "июл."
 
-#: plugins/Observability/src/Observability.cpp:184
+#: plugins/Observability/src/Observability.cpp:182
 msgctxt "short month name"
 msgid "Aug"
 msgstr "авг."
 
-#: plugins/Observability/src/Observability.cpp:185
+#: plugins/Observability/src/Observability.cpp:183
 msgctxt "short month name"
 msgid "Sep"
 msgstr "сен."
 
-#: plugins/Observability/src/Observability.cpp:186
+#: plugins/Observability/src/Observability.cpp:184
 msgctxt "short month name"
 msgid "Oct"
 msgstr "окт."
 
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:185
 msgctxt "short month name"
 msgid "Nov"
 msgstr "ноя."
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:186
 msgctxt "short month name"
 msgid "Dec"
 msgstr "дек."
 
 #. TRANSLATORS: Short for "hours".
-#: plugins/Observability/src/Observability.cpp:191
+#: plugins/Observability/src/Observability.cpp:189
 msgid "h"
 msgstr "ч"
 
 #. TRANSLATORS: Short for "minutes".
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:191
 msgid "m"
 msgstr "м"
 
 #. TRANSLATORS: Short for "seconds".
-#: plugins/Observability/src/Observability.cpp:195
+#: plugins/Observability/src/Observability.cpp:193
 msgid "s"
 msgstr "с"
 
-#: plugins/Observability/src/Observability.cpp:196
+#: plugins/Observability/src/Observability.cpp:194
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Закат в %1 (через %2)"
 
-#: plugins/Observability/src/Observability.cpp:197
+#: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "Восход в %1 (%2 назад)"
 
-#: plugins/Observability/src/Observability.cpp:198
+#: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "Закат в %1 (%2 назад)"
 
-#: plugins/Observability/src/Observability.cpp:199
+#: plugins/Observability/src/Observability.cpp:197
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "Восход в %1 (через %2)"
 
-#: plugins/Observability/src/Observability.cpp:200
+#: plugins/Observability/src/Observability.cpp:198
 msgid "Circumpolar."
 msgstr "Приполярное."
 
-#: plugins/Observability/src/Observability.cpp:201
+#: plugins/Observability/src/Observability.cpp:199
 msgid "No rise."
 msgstr "Не восходит."
 
-#: plugins/Observability/src/Observability.cpp:202
+#: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Кульминация в %1 (через %2) на высоте %3 град."
 
-#: plugins/Observability/src/Observability.cpp:203
+#: plugins/Observability/src/Observability.cpp:201
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "Кульминировало в %1 (%2 назад) на высоте %3 град."
 
-#: plugins/Observability/src/Observability.cpp:204
+#: plugins/Observability/src/Observability.cpp:202
 msgid "Source is not observable."
 msgstr "Источник не наблюдаем."
 
-#: plugins/Observability/src/Observability.cpp:205
+#: plugins/Observability/src/Observability.cpp:203
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "Нет ни акронического, ни космического восхода и заката."
 
-#: plugins/Observability/src/Observability.cpp:206
+#: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
 msgstr "Наибольшая элонгация: %1 (на %2 град.)"
 
-#: plugins/Observability/src/Observability.cpp:207
+#: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
 msgstr "Наибольшее удаление от Солнца: %1 (на %2 град.)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
 msgstr "Акронический восход/закат: %1/%2. "
 
-#: plugins/Observability/src/Observability.cpp:211
+#: plugins/Observability/src/Observability.cpp:209
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
 msgstr "Гелиакический восход/закат: %1/%2. "
 
-#: plugins/Observability/src/Observability.cpp:212
+#: plugins/Observability/src/Observability.cpp:210
 msgid "No Heliacal rise/set. "
 msgstr "Нет гелиакического восхода/заката. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:214
+#: plugins/Observability/src/Observability.cpp:212
 msgid "No Acronycal rise/set. "
 msgstr "Нет акронического восхода/заката. "
 
-#: plugins/Observability/src/Observability.cpp:215
+#: plugins/Observability/src/Observability.cpp:213
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
 msgstr "Космический восход/закат: %1/%2."
 
-#: plugins/Observability/src/Observability.cpp:216
+#: plugins/Observability/src/Observability.cpp:214
 msgid "No Cosmical rise/set."
 msgstr "Нет космического восхода и заката."
 
-#: plugins/Observability/src/Observability.cpp:217
+#: plugins/Observability/src/Observability.cpp:215
 msgid "Observable during the whole year."
 msgstr "Наблюдается в течение всего года."
 
-#: plugins/Observability/src/Observability.cpp:218
+#: plugins/Observability/src/Observability.cpp:216
 msgid "Not observable at dark night."
 msgstr "Не наблюдаемо в тёмное время ночи."
 
-#: plugins/Observability/src/Observability.cpp:219
+#: plugins/Observability/src/Observability.cpp:217
 #, qt-format
 msgid "Nights above horizon: %1"
 msgstr "Ночи над горизонтом: %1"
 
-#: plugins/Observability/src/Observability.cpp:220
+#: plugins/Observability/src/Observability.cpp:218
 msgid "TODAY:"
 msgstr "СЕГОДНЯ:"
 
-#: plugins/Observability/src/Observability.cpp:221
+#: plugins/Observability/src/Observability.cpp:219
 msgid "THIS YEAR:"
 msgstr "ЭТОТ ГОД:"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:223
+#: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "Предыдущее полнолуние: %1 %2 в %3:%4. "
 
-#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Следующее полнолуние: %1 %2 в %3:%4. "
 
-#: plugins/Observability/src/Observability.cpp:239
-#: plugins/Observability/src/Observability.cpp:240
-#: plugins/Observability/src/Observability.cpp:244
+#: plugins/Observability/src/Observability.cpp:237
+#: plugins/Observability/src/Observability.cpp:238
+#: plugins/Observability/src/Observability.cpp:242
 msgid "Observability"
 msgstr "Условия видимости"
 
-#: plugins/Observability/src/Observability.cpp:245
+#: plugins/Observability/src/Observability.cpp:243
 msgid "Observability configuration window"
 msgstr "Окно настройки плагина \"Условия видимости\""
 
@@ -10436,26 +10448,11 @@ msgid ""
 "radiant is active and its data was confirmed. Thus, this is a historical "
 "(really occurred in the past) or predicted meteor "
 "shower.</li><li><b>Generic:</b> the radiant is active, but its data was not "
-"confirmed. It means that this can occur on real life, but that we do not "
+"confirmed. It means that this can occur in real life, but that we do not "
 "have proper data about its activity for the current "
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
-"<p>Этот плагин позволяет моделировать периодические метеорные потоки и "
-"показывать маркеры для каждого активного и неактивного радианта.</p><p>Раз "
-"кликнув по маркеру радианта, вы можете увидеть все подробности о  "
-"местоположении и деятельности потока. Источником большинства данных, "
-"используемые в этом плагине, является официальный каталог <a "
-"href=\"http://imo.net\">Международной метеорной "
-"организации</a>.</p><p>Имеются три типа "
-"маркеров:<ul><li><b>Подтвержденный:</b> радиант активен и его данные были "
-"подтверждены. Таким образом, это либо исторический (на самом деле "
-"произошедший в прошлом) или предсказанный метеорный "
-"поток.</li><li><b>Общий:</b> радиант активен, но его данные не были "
-"подтверждены. Это означает, что это может произойти в реальной жизни, но мы "
-"не имеем действительных данных о его активности на текущий год "
-"неба.</li><li><b>Неактивный:</b> радиант неактивен для текущей даты "
-"неба.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -13512,6 +13509,14 @@ msgstr "Текущая планета: Сатурн"
 #~ msgstr ""
 #~ "Этот плагин показывает метеорные потоки и маркеры для каждого активного и "
 #~ "неактивного радианта, включая реальную информацию об их активности."
+
+#~ msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
+#~ msgstr "Наибольшие элонгации и яркость Земли и Венеры с Марса"
+
+#~ msgid ""
+#~ "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
+#~ msgstr ""
+#~ "Наибольшие элонгации и яркость Земли и Венеры с Марса в 2000-3000 годах."
 
 #~ msgid "Julian Date"
 #~ msgstr "Юлианская дата"
