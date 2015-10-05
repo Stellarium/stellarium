@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-09-30 13:29+0000\n"
+"PO-Revision-Date: 2015-10-05 03:03+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-04 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-05 05:11+0000\n"
 "X-Generator: Launchpad (build 17783)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3318,7 +3318,7 @@ msgstr "أحداث كوكب الأرض الفلكية كما تبدو من ال�
 #: src/translations.h:278
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
-msgstr ""
+msgstr "الاستطالة العظمى والتقابل للأرض والكواكب الأخرى من المريخ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:280
@@ -3333,7 +3333,7 @@ msgstr "مستعر تايكو"
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
 msgid "Earth and other Planets from Ceres"
-msgstr ""
+msgstr "منظر الأرض والكواكب الأخرى من سيريز"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:290
@@ -3470,6 +3470,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"الاستطالة العظمى والتقابل للأرض والكواكب الأخرى من المريخ من عام 2000 حتى "
+"3000 م"
 
 #: src/translations.h:313
 msgid ""
@@ -3488,6 +3490,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"الاستطالة العظمى والتقابل للأرض والكواكب الأخرى المرئية من سيريز من عام 2000 "
+"حتى 3000 م"
 
 #: src/translations.h:318
 msgid "Andorra"
@@ -10371,6 +10375,16 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<P DIR=RTL>هذه الإضافة تحاكي زخات الشهب الدورية وترسم علامة لكل نقطة منشأ "
+"نشطة أو خاملة. </p><p DIR=RTL>بالنقر على العلامة، تحصل على كل التفاصيل عن "
+"نشاط زخة الشهب وموقعها. معظم البيانات الموجودة في هذه الإضافة مستقاة من "
+"الموقع الرسمي: دليل <a href=\\\\\\\"http://imo.net\\\\\\\"> منظمة زخات الشهب "
+"العالمية</a>. </p><p DIR=RTL>تستخدم ثلاثة أنواع من العلامات في هذه الإضافة: "
+"<ul><li><b>مثبت:</b> منشأ الشهب نشط وبياناته مثبتة. لذلك زخة الشهب هذه حدثت "
+"في الواقع ويمكن التنبؤ بها. </li><li><b>عام:</b> يعني هذا أن زخة الشهب نشطة "
+"ولكن لم يتثبت من بياناتها، ويمكن أن تحدث في الواقع، ولكن ليس هناك بيانات "
+"حقيقية عن نشاطها في السنة الحالية. </li><li><b>خاملة:</b> يعني هذا أن منشأ "
+"زخة الشهب غير نشط في السنة الحالية.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451

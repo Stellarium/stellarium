@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-09-25 16:04+0000\n"
+"PO-Revision-Date: 2015-10-04 08:24+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-04 05:17+0000\n"
+"X-Launchpad-Export-Date: 2015-10-05 05:11+0000\n"
 "X-Generator: Launchpad (build 17783)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3359,6 +3359,8 @@ msgstr "Événements terrestres vus de Mars"
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
+"Plus grandes élongations et oppositions de la Terre et d'autres planètes, "
+"vues de Mars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:280
@@ -3374,7 +3376,7 @@ msgstr "Supernova de Tycho"
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
 msgid "Earth and other Planets from Ceres"
-msgstr ""
+msgstr "La Terre et autres planètes, vues de Cérès"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:290
@@ -3524,6 +3526,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Plus grandes élongations et oppositions de la Terre et d'autres planètes, "
+"vues de Mars, entre 2000 et 3000"
 
 #: src/translations.h:313
 msgid ""
@@ -3543,6 +3547,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Plus grandes élongations et oppositions de la Terre et d'autres planètes, "
+"vues de Cérès, entre 2000 et 3000"
 
 #: src/translations.h:318
 msgid "Andorra"
@@ -10519,6 +10525,21 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Ce plugin permet de simuler les pluies de météores et d'afficher un "
+"marqueur pour chaque radiant actif ou inactif.</p>\r\n"
+"<p>Des informations sur la position et l'activité d'un radiant sont "
+"indiquées lorsque l'on clique sur son marqueur. La plupart des données "
+"fournies par ce plugin sont tirée du catalogue officiel de l'<a "
+"href=\"http://imo.net\">International Meteor Organization</a>.</p>\r\n"
+"<p>Il y trois types de radiants :</p>\r\n"
+"<ul><li><b>confirmé :</b> le radiant est actif et ses données sont "
+"confirmées. Il s'agit donc d'une pluies de météores historique (déjaà "
+"survenue) ou prévue ;</li>\r\n"
+"<li><b>générique :</b> le radiant est actif, mais ses données ne sont pas "
+"confirmées. Cela signifie que la pluie de météores peut survenir réellement, "
+"mais qu'il n'y a pas de données propres sur son activité durant l'année en "
+"cours ;</li>\r\n"
+"<li><b>inactif :</b> le radiant est inactif pour l'année en cours.</li></ul>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
