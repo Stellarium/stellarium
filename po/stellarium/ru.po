@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-03 20:47+0000\n"
+"PO-Revision-Date: 2015-10-04 07:21+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-04 05:25+0000\n"
+"X-Launchpad-Export-Date: 2015-10-05 05:12+0000\n"
 "X-Generator: Launchpad (build 17783)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3335,7 +3335,7 @@ msgstr "События Земли с Марса"
 #: src/translations.h:278
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
-msgstr ""
+msgstr "Великие элонгации и противостояния Земля и других планет с Марса"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:280
@@ -3498,6 +3498,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Великие элонгации и противостояния Земля и других планет с Марса на "
+"протяжении 2000-3000 годов"
 
 #: src/translations.h:313
 msgid ""
@@ -3516,6 +3518,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Великие элонгации и противостояния Земля и других видимых планет с Цереры на "
+"протяжении 2000-3000 годов"
 
 #: src/translations.h:318
 msgid "Andorra"
@@ -10453,6 +10457,21 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Этот плагин позволяет моделировать периодические метеорные потоки и "
+"показывать маркеры для каждого активного и неактивного радианта.</p><p>Раз "
+"кликнув по маркеру радианта, вы можете увидеть все подробности о  "
+"местоположении и деятельности потока. Источником большинства данных, "
+"используемые в этом плагине, является официальный каталог <a "
+"href=\"http://imo.net\">Международной метеорной "
+"организации</a>.</p><p>Имеются три типа "
+"маркеров:<ul><li><b>Подтвержденный:</b> радиант активен и его данные были "
+"подтверждены. Таким образом, это либо исторический (на самом деле "
+"произошедший в прошлом) или предсказанный метеорный "
+"поток.</li><li><b>Общий:</b> радиант активен, но его данные не были "
+"подтверждены. Это означает, что это может произойти в реальной жизни, но мы "
+"не имеем действительных данных о его активности на текущий год "
+"неба.</li><li><b>Неактивный:</b> радиант неактивен для текущей даты "
+"неба.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
