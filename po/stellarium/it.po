@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-01 23:27+0000\n"
+"PO-Revision-Date: 2015-10-05 11:28+0000\n"
 "Last-Translator: Andrea Giudiceandrea <andreaerdna@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-04 05:19+0000\n"
-"X-Generator: Launchpad (build 17783)\n"
+"X-Launchpad-Export-Date: 2015-10-06 05:12+0000\n"
+"X-Generator: Launchpad (build 17796)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -90,7 +90,7 @@ msgstr "Equatore Galattico"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1781
 msgid "O./C. longitude"
-msgstr "O./C. longitudine"
+msgstr "Longitudine Opp./Cong."
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -155,7 +155,7 @@ msgstr "Equatore galattico"
 #: src/core/modules/GridLinesMgr.cpp:890
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
-msgstr "Opposizione/congiunzione linea di longitudine"
+msgstr "Linea della longitudine di opposizione/congiunzione"
 
 #: src/core/modules/GridLinesMgr.cpp:891
 msgid "Precession Circles"
@@ -1650,7 +1650,7 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #: src/core/StelObject.cpp:226 src/core/StelObject.cpp:228
 msgid "Ecliptic longitude/latitude"
-msgstr "Longitudine eclittica/latitudine"
+msgstr "Longitudine/latitudine eclittica"
 
 #: src/core/StelObject.cpp:231 src/core/StelObject.cpp:233
 msgid "Ecliptic obliquity"
@@ -5166,7 +5166,7 @@ msgstr "Mostra figure"
 #: src/ui_viewDialog.h:1712
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
-msgstr "Luminosità dell'arte:"
+msgstr "Luminosità delle figure"
 
 #: src/ui_viewDialog.h:1713
 msgid "Thickness of lines:"
@@ -5283,6 +5283,9 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Linea della longitudine di opposizione/congiunzione - la linea di "
+"longitudine eclittica che passa da entrambi i poli eclittici, dal Sole e dal "
+"punto di opposizione."
 
 #: src/ui_viewDialog.h:1782
 msgid "Projection"
@@ -10477,7 +10480,7 @@ msgstr "Massimo: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgid "Solar longitude"
-msgstr ""
+msgstr "Longitudine solare"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "variable"
@@ -11289,7 +11292,7 @@ msgstr "Longitudine/Latitudine eclittica (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
-msgstr "Latitudine/Longitudine galattica"
+msgstr "Longitudine/Latitudine galattica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
