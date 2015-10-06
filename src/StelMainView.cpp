@@ -550,6 +550,7 @@ void StelMainView::init(QSettings* conf)
 	rootItem->setLayout(l);
 	scene()->addItem(rootItem);
 	nightModeEffect = new NightModeGraphicsEffect(this);
+	updateNightModeProperty();
 	rootItem->setGraphicsEffect(nightModeEffect);
 
 	QSize size = glWidget->windowHandle()->screen()->size();
@@ -607,7 +608,6 @@ void StelMainView::init(QSettings* conf)
 	if (gui!=NULL)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
-	updateNightModeProperty();
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
