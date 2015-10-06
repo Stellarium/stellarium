@@ -76,7 +76,7 @@ def copyFrameworkToApp(framework):
 	if frameworkName != 'Qt':
 		target = os.path.join(installDirectory, 'Frameworks', frameworkName)
 		if not os.path.exists(target):
-			shutil.copytree(os.path.join(qtFrameworksDirectory, frameworkName), target, symlinks=True, ignore=shutil.ignore_patterns('*debug*', 'Headers'))
+			shutil.copytree(os.path.join(qtFrameworksDirectory, frameworkName), target, symlinks=True, ignore=shutil.ignore_patterns('*debug*', 'Headers', '*.prl'))
 	
 def updateName(file):
 	'''
