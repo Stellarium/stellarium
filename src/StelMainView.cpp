@@ -117,9 +117,28 @@ NightModeGraphicsEffect::NightModeGraphicsEffect(QObject* parent) :
 	vars.source = program->uniformLocation("u_source");
 }
 
+// Qt 5.5 does not support setting the devicePixelRatio of a QGLFramebufferObject,
+// So here we make a sub class just so that we can return the correct ratio when
+// using the buffer on a retina display.
+class NightModeGraphicsEffectFbo : public QGLFramebufferObject
+{
+public:
+	NightModeGraphicsEffectFbo(const QSize& s, const QGLFramebufferObjectFormat& f, int pixelRatio_) :
+		QGLFramebufferObject(s, f), pixelRatio(pixelRatio_) {}
+protected:
+	virtual int metric(PaintDeviceMetric m) const
+	{
+		if (m == QPaintDevice::PdmDevicePixelRatio) return pixelRatio;
+		return QGLFramebufferObject::metric(m);
+	}
+private:
+	int pixelRatio;
+};
+
 void NightModeGraphicsEffect::draw(QPainter* painter)
 {
-	QSize size(painter->device()->width(), painter->device()->height());
+	int pixelRatio = painter->device()->devicePixelRatio();
+	QSize size(painter->device()->width() * pixelRatio, painter->device()->height() * pixelRatio);
 	if (fbo && fbo->size() != size)
 	{
 		delete fbo;
@@ -130,7 +149,7 @@ void NightModeGraphicsEffect::draw(QPainter* painter)
 		QGLFramebufferObjectFormat format;
 		format.setAttachment(QGLFramebufferObject::CombinedDepthStencil);
 		format.setInternalTextureFormat(GL_RGBA);
-		fbo = new QGLFramebufferObject(size, format);
+		fbo = new NightModeGraphicsEffectFbo(size, format, pixelRatio);
 	}
 	QPainter fboPainter(fbo);
 	drawSource(&fboPainter);
