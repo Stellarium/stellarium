@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-05 11:28+0000\n"
+"PO-Revision-Date: 2015-10-06 17:07+0000\n"
 "Last-Translator: Andrea Giudiceandrea <andreaerdna@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-06 05:12+0000\n"
-"X-Generator: Launchpad (build 17796)\n"
+"X-Launchpad-Export-Date: 2015-10-07 05:20+0000\n"
+"X-Generator: Launchpad (build 17802)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -2220,7 +2220,7 @@ msgstr "Finestra scorciatoie"
 
 #: src/gui/StelGui.cpp:205
 msgid "AstroCalc window"
-msgstr ""
+msgstr "Finestra AstroCalc"
 
 #: src/gui/StelGui.cpp:206
 msgid "Copy selected object information to clipboard"
@@ -2254,7 +2254,7 @@ msgstr "distanza planetocentrica %1 km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
-msgstr ""
+msgstr "osservatore planetocentrico"
 
 #: src/gui/StelGuiItems.cpp:657
 msgid "Field of view"
@@ -5001,7 +5001,7 @@ msgstr "Fattore di Scala"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Limita la magnitudine degli oggetti del sistema solare"
 
 #: src/ui_viewDialog.h:1622
 msgid "Automatic change of landscape when planet is changed"
@@ -5030,7 +5030,7 @@ msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Display objects from catalogs"
-msgstr ""
+msgstr "Visualizza gli oggetti dai cataloghi"
 
 #: src/ui_viewDialog.h:1637
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
@@ -5089,7 +5089,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1681
 msgid "Filter by type"
-msgstr ""
+msgstr "Filtra per tipo"
 
 #: src/ui_viewDialog.h:1684
 msgid "Hydrogen regions"
@@ -6007,11 +6007,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:359
 msgid "Planetary positions every 5 minutes."
-msgstr ""
+msgstr "Posizioni planetarie ogni 5 minuti."
 
 #: src/ui_astroCalcDialog.h:360
 msgid "Planetary positions"
-msgstr ""
+msgstr "Posizioni planetarie"
 
 #: src/ui_astroCalcDialog.h:363
 msgid "Time step:"
@@ -6020,7 +6020,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
-msgstr "Da:"
+msgstr "Dal:"
 
 #: src/ui_astroCalcDialog.h:365 src/ui_astroCalcDialog.h:367
 msgid "yyyy.MM.dd hh:mm"
@@ -6029,7 +6029,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:374
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
-msgstr "A:"
+msgstr "Al:"
 
 #: src/ui_astroCalcDialog.h:368
 msgid "Calculate ephemeris"
@@ -6045,7 +6045,7 @@ msgstr "Fra gli oggetti:"
 
 #: src/ui_astroCalcDialog.h:371
 msgid "and"
-msgstr ""
+msgstr "e"
 
 #: src/ui_astroCalcDialog.h:373 src/ui_astroCalcDialog.h:375
 msgid "yyyy.MM.dd"
