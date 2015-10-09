@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-06 22:32+0000\n"
+"PO-Revision-Date: 2015-10-08 21:28+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-07 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-10-09 05:12+0000\n"
 "X-Generator: Launchpad (build 17802)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -7083,7 +7083,7 @@ msgstr "Luettelonumero"
 
 #: plugins/Satellites/src/Satellite.cpp:263
 msgid "International Designator"
-msgstr "Kansainvälinen tunnus"
+msgstr "kansainvälinen tunnus"
 
 #: plugins/Satellites/src/Satellite.cpp:270
 msgid "artificial satellite"
@@ -10470,7 +10470,7 @@ msgstr "Radiantin siirtyminen (vuorokaudessa)"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:550
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr "Maakeskinen meteoriittien nopeus: %1 km/s"
+msgstr "Maakeskinen meteorien nopeus: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:555
 #, qt-format
@@ -11002,7 +11002,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:261
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
-msgstr "Radiantti"
+msgstr "Radiantit"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 msgid ""
@@ -11011,9 +11011,9 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
-"Meteoriparven radiantti tai näennäinen radiantti on se taivaan piste, josta "
-"meteorit näyttävät tulevan. Esimerkiksi Perseidit näyttävät tulevan tietystä "
-"pisteestä Perseuksen tähdistössä."
+"Meteoriparven radiantti on se taivaan piste, josta meteorit näyttävät "
+"tulevan. Esimerkiksi perseidien meteorit näyttävät tulevan tietystä "
+"Perseuksen tähdistössä sijaitsevasta pisteestä."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:269
 msgid ""
@@ -11033,8 +11033,8 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
-"Monilla parvilla radiantti siirtyy aktiivisuusjakson aikana. Esimerkiksi "
-"delta-Aurigidien radiantti siirtyy yli asteen verran yhdessä yössä."
+"Useiden parvien radiantti siirtyy aktiivisuusjakson aikana. Esimerkiksi "
+"delta-aurigidien radiantti siirtyy yli asteen verran yhdessä yössä."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -11051,8 +11051,8 @@ msgstr ""
 "Meteoriparven ZHR (Zenithal Hourly Rate, aktiivisuus tunnissa zeniitissä) "
 "kertoo, kuinka monta kyseisen parven meteoria yksittäinen havainnoija voisi "
 "teoriassa nähdä, jos havainto-olosuhteet olisivat ihanteelliset "
-"(rajamagnitudi 6.5), ja parven radiantti olisi zeniitissä. Havaittavien "
-"meteorien lukumäärä on käytännössä aina ZHR:a pienempi, ja pienenee sitä "
+"(rajamagnitudi 6.5) ja parven radiantti olisi zeniitissä. Havaittavien "
+"meteorien lukumäärä on käytännössä aina pienempi kuin ZHR, ja pienenee sitä "
 "mukaa mitä lähempänä horisonttia radiantti on."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
