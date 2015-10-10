@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-08 21:28+0000\n"
+"PO-Revision-Date: 2015-10-10 00:48+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-09 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-10 05:12+0000\n"
 "X-Generator: Launchpad (build 17802)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1710,15 +1710,15 @@ msgstr "Virhe sijainnin tulkinnassa"
 
 #: src/core/SimbadSearcher.cpp:131
 msgid "Querying"
-msgstr "Kysytään"
+msgstr "kysytään"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Not found"
-msgstr "Ei löytynyt"
+msgstr "ei löytynyt"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Found"
-msgstr "Löytyi"
+msgstr "löytyi"
 
 #: src/gui/ConfigurationDialog.cpp:496
 msgid "Select screenshot directory"
@@ -4997,7 +4997,7 @@ msgstr "Mittakaavakerroin"
 
 #: src/ui_viewDialog.h:1618
 msgid "Limit the magnitude of solar system objects"
-msgstr "Rajoita aurinkokunnan kohteiden magnitudeja"
+msgstr "Rajoita aurinkokunnan kohteiden magnitudia"
 
 #: src/ui_viewDialog.h:1622
 msgid "Automatic change of landscape when planet is changed"
@@ -6802,7 +6802,7 @@ msgstr "Magnitudirajoitus teleskooppien eri aukoille"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1077
 msgid "Limit stellar magnitude"
-msgstr "Rajoita magnitudia"
+msgstr "Rajoita tähtien magnitudia"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Key mappings"
@@ -11590,7 +11590,7 @@ msgstr "Vaadittu epätasaisen kuvapinnoituksen ja varjojen mallintamiseksi!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr "Rajoita varjojenkertaus yhteen enintään neljän sijasta."
+msgstr "Rajoita varjojen kertaus yhteen enintään neljän sijasta."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
