@@ -55,6 +55,8 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			  //<< "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
+			  << "--angle-mode (or -a)    : Use ANGLE as rendering engine\n"
+			  << "--mesa-mode (or -m)     : Use MESA as rendering engine\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile\n"
 			  << "                          Try this is you have graphics problems\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
@@ -84,6 +86,15 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		qApp->setProperty("onetime_safe_mode", true);
 	}
 	*/
+
+	if (argsGetOption(argList, "-a", "--angle-mode"))
+	{
+		qApp->setProperty("onetime_angle_mode", true);
+	}
+	if (argsGetOption(argList, "-m", "--mesa-mode"))
+	{
+		qApp->setProperty("onetime_mesa_mode", true);
+	}
 
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{

@@ -138,7 +138,7 @@ QString getOperatingSystemInfo()
 		case QSysInfo::MV_YOSEMITE:
 			OS = "Mac OS X 10.10 series";
 			break;
-		#ifdef MV_ELCAPITAN
+		#if QT_VERSION >= 0x050500
 		case QSysInfo::MV_ELCAPITAN:
 			OS = "Mac OS X 10.11 series";
 			break;

@@ -23,5 +23,7 @@ RemoveCache=Remove cache files
 LastRunLog=Last run log
 ChangeLog=Change log
 FallbackMode=(fallback mode)
+AngleMode=(ANGLE mode)
+MesaMode=(MESA mode)
 DebugMode=(debug mode)
 RedistRun=Installing Microsoft's C/C++ runtime...

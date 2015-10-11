@@ -25,5 +25,7 @@ RemoveCache=Удалить файлы кэша
 LastRunLog=Журнал последнего запуска
 ChangeLog=Журнал изменений
 FallbackMode=(режим совместимости)
+AngleMode=(режим ANGLE)
+MesaMode=(режим MESA)
 DebugMode=(режим отладки)
 RedistRun=Установка библиотеки времени выполнения Microsoft C/C++...
