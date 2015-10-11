@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-10 00:48+0000\n"
+"PO-Revision-Date: 2015-10-10 19:36+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-10 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-11 05:12+0000\n"
 "X-Generator: Launchpad (build 17802)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3105,7 +3105,7 @@ msgstr "Polynesialainen"
 
 #: src/translations.h:180
 msgid "Romanian"
-msgstr "Roomalainen"
+msgstr "Romanialainen"
 
 #: src/translations.h:181
 msgid "Sami"
@@ -3118,7 +3118,7 @@ msgstr "Siperialainen"
 
 #: src/translations.h:184
 msgid "Tukano"
-msgstr "Tukano"
+msgstr "Tukanojen"
 
 #: src/translations.h:185
 msgid "Tupi-Guarani"
@@ -5661,8 +5661,8 @@ msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
-"Asettaa simulaation ajan seuraavaaksi tähän asetetuksi ajanhetkeksi "
-"Stellariumin käynnistyessä."
+"Asettaa simulaation ajan seuraavaksi tähän asetetuksi kuluvan vurokauden "
+"ajanhetkeksi Stellariumin käynnistyessä."
 
 #: src/ui_configurationDialog.h:1145
 msgid "System date at:"
@@ -5780,7 +5780,7 @@ msgid ""
 "switched off, display planetocentric view."
 msgstr ""
 "Ota käyttöön havainnoijan sijoittamiseksi planeetan pinnalle (suositus). Jos "
-"valinta on poistetu käytöstä, havainnoija asetetaan planeetan keskustaan."
+"valinta on poistettu käytöstä, havainnoija asetetaan planeetan keskustaan."
 
 #: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
@@ -5791,8 +5791,7 @@ msgid ""
 "Activate this option to calculate azimuth from south towards west (as in old "
 "astronomical literature)."
 msgstr ""
-"Ota tämä valinta käyttöön laskeaksesi atsimuutti etelästä länteen päin "
-"(kuten vanhassa kirjallisuudessa)."
+"Laske atsimuutti etelästä länteen päin (kuten vanhemmassa kirjallisuudessa)."
 
 #: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
