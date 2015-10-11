@@ -27,6 +27,7 @@ Compression=zip/9
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
 @STELMAINLIB@
+@MESALIB@
 @REDIST_FILES@
 Source: "stellarium.url"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
