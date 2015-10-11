@@ -90,16 +90,12 @@ QString getOperatingSystemInfo()
 		case QSysInfo::WV_WINDOWS7:
 			OS = "Windows 7";
 			break;
-		#ifdef WV_WINDOWS8
 		case QSysInfo::WV_WINDOWS8:
 			OS = "Windows 8";
 			break;
-		#endif
-		#ifdef WV_WINDOWS8_1
 		case QSysInfo::WV_WINDOWS8_1:
 			OS = "Windows 8.1";
 			break;
-		#endif
 		#ifdef WV_WINDOWS10
 		case QSysInfo::WV_WINDOWS10:
 			OS = "Windows 10";
@@ -135,9 +131,12 @@ QString getOperatingSystemInfo()
 		case QSysInfo::MV_MAVERICKS:
 			OS = "Mac OS X 10.9 series";
 			break;
-		#ifdef MV_YOSEMITE
 		case QSysInfo::MV_YOSEMITE:
 			OS = "Mac OS X 10.10 series";
+			break;
+		#ifdef MV_ELCAPITAN
+		case QSysInfo::MV_ELCAPITAN:
+			OS = "Mac OS X 10.11 series";
 			break;
 		#endif
 		default:
