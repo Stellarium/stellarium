@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-09-26 07:48+0000\n"
-"Last-Translator: Tiago S. <Unknown>\n"
+"PO-Revision-Date: 2015-10-10 22:42+0000\n"
+"Last-Translator: Spacial <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-04 05:24+0000\n"
-"X-Generator: Launchpad (build 17783)\n"
+"X-Launchpad-Export-Date: 2015-10-11 05:12+0000\n"
+"X-Generator: Launchpad (build 17802)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -3347,6 +3347,8 @@ msgstr "Eventos da Terra a partir de Marte"
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
+"As maiores elongações e oposições da Terra e outros planetas a partir de "
+"Marte"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:280
@@ -3362,7 +3364,7 @@ msgstr "Supernova Tycho"
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
 msgid "Earth and other Planets from Ceres"
-msgstr ""
+msgstr "Terra e outros planetas a partir de Ceres"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:290
@@ -3515,6 +3517,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"As maiores elongações e oposições da Terra e outros planetas a partir de "
+"Marte 2000-3000"
 
 #: src/translations.h:313
 msgid ""
@@ -3534,6 +3538,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"As maiores elongações e oposições da Terra e outros planetas a partir de "
+"Ceres 2000-3000"
 
 #: src/translations.h:318
 msgid "Andorra"
@@ -10516,6 +10522,20 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Este complemento permite a simulação de chuvas de meteoros, mostrando um "
+"marcador para cada radiante activo e inactivo.</p><p>Com um simples clique "
+"sobre um marcador de um radiante, pode ver todos os detalhes sobre a sua "
+"posição e a sua actividade. A maior parte dos dados utilizados neste "
+"complemento provêm do catálogo oficial da <a "
+"href=\"http://imo.net\">International Meteor Organization</a>.</p><p>Existem "
+"três tipos de marcadores:<ul><li><b>Confirmado:</b> o radiante está activo e "
+"seus dados foram confirmados. Portanto, esta é uma chuva histórica "
+"(realmente aconteceu no passado) ou é uma chuva que está prevista para "
+"acontecer.</li><li><b>Genérico:</b> o radiante está activo, mas seus dados "
+"não foram confirmados, ou seja, isso significa que essa chuva pode ocorrer "
+"na vida real, mas não se tem dados reais sobre a sua actividade no ano "
+"celeste actual.</li><li><b>Inactivo:</b> o radiante está inactivo na data "
+"celeste actual.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451

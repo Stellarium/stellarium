@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-04 17:33+0000\n"
+"PO-Revision-Date: 2015-10-10 15:39+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-05 05:12+0000\n"
-"X-Generator: Launchpad (build 17783)\n"
+"X-Launchpad-Export-Date: 2015-10-11 05:12+0000\n"
+"X-Generator: Launchpad (build 17802)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -282,7 +282,7 @@ msgstr "Størrelse: %1 x %2"
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "Orienteringsvinkel: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:238
@@ -310,7 +310,7 @@ msgstr "Avstand: %1 %2"
 #: src/core/modules/Nebula.cpp:285
 #, qt-format
 msgid "Redshift: %1"
-msgstr ""
+msgstr "Rødforskyvning: %1"
 
 #: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:247
 #, qt-format
@@ -319,7 +319,7 @@ msgstr "Parallakse: %1\""
 
 #: src/core/modules/Nebula.cpp:300
 msgid "Morphological description: "
-msgstr ""
+msgstr "Morfologisk beskrivelse: "
 
 #: src/core/modules/Nebula.cpp:748
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -449,32 +449,32 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:867
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
-msgstr ""
+msgstr "veldig lys"
 
 #: src/core/modules/Nebula.cpp:870
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
-msgstr ""
+msgstr "lys"
 
 #: src/core/modules/Nebula.cpp:873
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "moderat lysstyrke"
 
 #: src/core/modules/Nebula.cpp:876
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
-msgstr ""
+msgstr "svak"
 
 #: src/core/modules/Nebula.cpp:879
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
-msgstr ""
+msgstr "veldig svak"
 
 #: src/core/modules/Nebula.cpp:882
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
-msgstr ""
+msgstr "usikker lysstyrke"
 
 #: src/core/modules/Nebula.cpp:885
 msgctxt "Reflection Nebulae Brightness"
@@ -509,31 +509,31 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:906
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
-msgstr ""
+msgstr "udokumenterte refleksjonståker"
 
 #: src/core/modules/Nebula.cpp:929
 msgid "circular form"
-msgstr ""
+msgstr "sirkelform"
 
 #: src/core/modules/Nebula.cpp:932
 msgid "elliptical form"
-msgstr ""
+msgstr "elliptisk"
 
 #: src/core/modules/Nebula.cpp:935
 msgid "irregular form"
-msgstr ""
+msgstr "uregelmessig form"
 
 #: src/core/modules/Nebula.cpp:938
 msgid "undocumented form"
-msgstr ""
+msgstr "udokumentert form"
 
 #: src/core/modules/Nebula.cpp:944
 msgid "amorphous structure"
-msgstr ""
+msgstr "amorf struktur"
 
 #: src/core/modules/Nebula.cpp:947
 msgid "conventional structure"
-msgstr ""
+msgstr "konvensjonell struktur"
 
 #: src/core/modules/Nebula.cpp:950
 msgid "filamentary structure"
@@ -541,7 +541,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:953
 msgid "undocumented structure"
-msgstr ""
+msgstr "udokumentert struktur"
 
 #: src/core/modules/Nebula.cpp:959
 msgctxt "HII region brightness"
@@ -551,7 +551,7 @@ msgstr "svakeste"
 #: src/core/modules/Nebula.cpp:962
 msgctxt "HII region brightness"
 msgid "moderate brightness"
-msgstr ""
+msgstr "moderat lysstyrke"
 
 #: src/core/modules/Nebula.cpp:965
 msgctxt "HII region brightness"
@@ -564,7 +564,7 @@ msgstr "udokumentert lysstyrke"
 
 #: src/core/modules/Nebula.cpp:984
 msgid "galaxy"
-msgstr "galakse"
+msgstr "Galakse"
 
 #: src/core/modules/Nebula.cpp:987
 msgid "active galaxy"
@@ -572,7 +572,7 @@ msgstr "aktiv galakse"
 
 #: src/core/modules/Nebula.cpp:990
 msgid "radio galaxy"
-msgstr "radiogalakse"
+msgstr "Radiogalakse"
 
 #: src/core/modules/Nebula.cpp:993
 msgid "interacting galaxy"
@@ -616,7 +616,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1023
 msgid "emission nebula"
-msgstr ""
+msgstr "Emisjonståke"
 
 #: src/core/modules/Nebula.cpp:1026
 msgid "HII region"
@@ -624,7 +624,7 @@ msgstr "H II-region"
 
 #: src/core/modules/Nebula.cpp:1029
 msgid "reflection nebula"
-msgstr ""
+msgstr "Refleksjonståke"
 
 #: src/core/modules/Nebula.cpp:1032
 msgid "supernova remnant"
@@ -636,15 +636,15 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1038
 msgid "star cloud"
-msgstr ""
+msgstr "Stjernesky"
 
 #: src/core/modules/Nebula.cpp:1041
 msgid "interstellar matter"
-msgstr ""
+msgstr "Interstellar materie"
 
 #: src/core/modules/Nebula.cpp:1044
 msgid "emission object"
-msgstr ""
+msgstr "Emisjonsobjekt"
 
 #: src/core/modules/Nebula.cpp:1047
 msgid "BL Lac object"
@@ -656,7 +656,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1053
 msgid "molecular cloud"
-msgstr ""
+msgstr "Molekylsky"
 
 #: src/core/modules/Nebula.cpp:1056
 msgid "young stellar object"
@@ -664,11 +664,11 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1059
 msgid "possible quasar"
-msgstr ""
+msgstr "Mulig kvasar"
 
 #: src/core/modules/Nebula.cpp:1062
 msgid "possible planetary nebula"
-msgstr ""
+msgstr "Mulig planetarisk tåke"
 
 #: src/core/modules/Nebula.cpp:1065
 msgid "protoplanetary nebula"
@@ -682,11 +682,11 @@ msgstr "Stjerne"
 
 #: src/core/modules/Nebula.cpp:1071
 msgid "object of unknown nature"
-msgstr ""
+msgstr "Objekt av ukjent natur"
 
 #: src/core/modules/Nebula.cpp:1074
 msgid "undocumented type"
-msgstr ""
+msgstr "Udokumentert type"
 
 #: src/core/modules/NebulaMgr.cpp:224
 msgid "Deep-sky objects"
@@ -780,7 +780,7 @@ msgstr "Opplyst: %1%"
 #: src/core/modules/Planet.cpp:351
 #, qt-format
 msgid "Eclipse Factor: %1%"
-msgstr ""
+msgstr "Formørkelsesfaktor: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:204
 #, qt-format
@@ -1009,7 +1009,7 @@ msgstr "Legg til 1 siderisk år"
 
 #: src/core/StelCore.cpp:218
 msgid "Add 100 sidereal years"
-msgstr ""
+msgstr "Legg til 100 sideriske år"
 
 #: src/core/StelCore.cpp:219
 msgid "Add 1 synodic month"
@@ -1029,39 +1029,39 @@ msgstr "Legg til 1 anomalistisk måned"
 
 #: src/core/StelCore.cpp:223
 msgid "Add 1 anomalistic year"
-msgstr ""
+msgstr "Legg til 1 anomalistisk år"
 
 #: src/core/StelCore.cpp:224
 msgid "Add 100 anomalistic years"
-msgstr ""
+msgstr "Legg til 100 anomalistiske år"
 
 #: src/core/StelCore.cpp:225
 msgid "Add 1 mean tropical month"
-msgstr "Legg til 1 tropisk måned"
+msgstr "Legg til 1 gjennomsnitts tropisk måned"
 
 #: src/core/StelCore.cpp:226
 msgid "Add 1 mean tropical year"
-msgstr "Legg til 1 tropisk år"
+msgstr "Legg til 1 gjennomsnitts tropisk år"
 
 #: src/core/StelCore.cpp:227
 msgid "Add 100 mean tropical years"
-msgstr ""
+msgstr "Legg til 100 gjennomsnitts tropiske år"
 
 #: src/core/StelCore.cpp:228
 msgid "Add 1 tropical year"
-msgstr ""
+msgstr "Legg til 1 tropisk år"
 
 #: src/core/StelCore.cpp:229
 msgid "Add 1 Julian year"
-msgstr ""
+msgstr "Legg til 1 juliansk år"
 
 #: src/core/StelCore.cpp:230
 msgid "Add 1 Julian century"
-msgstr ""
+msgstr "Legg til 1 juliansk århundre"
 
 #: src/core/StelCore.cpp:231
 msgid "Add 1 Gaussian year"
-msgstr ""
+msgstr "Legg til 1 gaussisk år"
 
 #: src/core/StelCore.cpp:232
 msgid "Subtract 1 sidereal day"
@@ -1073,7 +1073,7 @@ msgstr "Trekk fra 1 siderisk år"
 
 #: src/core/StelCore.cpp:234
 msgid "Subtract 100 sidereal years"
-msgstr ""
+msgstr "Trekk fra 100 sideriske år"
 
 #: src/core/StelCore.cpp:235
 msgid "Subtract 1 synodic month"
@@ -1093,39 +1093,39 @@ msgstr "Trekk fra 1 anomalistisk måned"
 
 #: src/core/StelCore.cpp:239
 msgid "Subtract 1 anomalistic year"
-msgstr ""
+msgstr "Trekk fra 1 anomalistisk år"
 
 #: src/core/StelCore.cpp:240
 msgid "Subtract 100 anomalistic years"
-msgstr ""
+msgstr "Trekk fra 100 anomalistiske år"
 
 #: src/core/StelCore.cpp:241
 msgid "Subtract 1 mean tropical month"
-msgstr "Trekk fra 1 tropisk måned"
+msgstr "Trekk fra 1 gjennomsnitts tropisk måned"
 
 #: src/core/StelCore.cpp:242
 msgid "Subtract 1 mean tropical year"
-msgstr "Trekk fra 1 tropisk år"
+msgstr "Trekk fra 1 gjennomsnitts tropisk år"
 
 #: src/core/StelCore.cpp:243
 msgid "Subtract 100 mean tropical years"
-msgstr ""
+msgstr "Trekk fra 100 gjennomsnitts tropiske år"
 
 #: src/core/StelCore.cpp:244
 msgid "Subtract 1 tropical year"
-msgstr ""
+msgstr "Trekk fra 1 tropisk år"
 
 #: src/core/StelCore.cpp:245
 msgid "Subtract 1 Julian year"
-msgstr ""
+msgstr "Trekk fra 1 juliansk år"
 
 #: src/core/StelCore.cpp:246
 msgid "Subtract 1 Julian century"
-msgstr ""
+msgstr "Trekk fra 1 juliansk århundre"
 
 #: src/core/StelCore.cpp:247
 msgid "Subtract 1 Gaussian year"
-msgstr ""
+msgstr "Trekk fra 1 gaussisk år"
 
 #: src/core/StelCore.cpp:249
 msgid "Set home planet to selected planet"
@@ -1547,7 +1547,7 @@ msgstr ""
 #: src/core/StelObject.cpp:114
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr "på dato"
+msgstr "for dato"
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
@@ -2174,11 +2174,11 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "Planetosentrisk avstand %1km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
-msgstr ""
+msgstr "Planetosentrisk observatør"
 
 #: src/gui/StelGuiItems.cpp:657
 msgid "Field of view"
@@ -2817,7 +2817,7 @@ msgstr "Interagerende galakser"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
 msgid "Bright quasars"
-msgstr ""
+msgstr "Lyse kvasarer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109 src/ui_viewDialog.h:1686
@@ -2832,7 +2832,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Star clouds"
-msgstr ""
+msgstr "Stjerneskyer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
@@ -2842,7 +2842,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Emission nebulae"
-msgstr ""
+msgstr "Emisjonståker"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119 src/ui_viewDialog.h:1682
@@ -2852,12 +2852,12 @@ msgstr "Supernova-levninger"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Interstellar matter"
-msgstr ""
+msgstr "Interstellar materie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Emission objects"
-msgstr ""
+msgstr "Emisjonsobjekter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
@@ -2872,7 +2872,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
 msgid "Molecular Clouds"
-msgstr ""
+msgstr "Molekylskyer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
@@ -2882,12 +2882,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Possible Quasars"
-msgstr ""
+msgstr "Mulige kvasarer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "Mulige planetariske tåker"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
@@ -4486,7 +4486,7 @@ msgstr "Juliansk dag"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
-msgstr "Modifisert Juliansk dag"
+msgstr "Modifisert juliansk dag"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -5667,6 +5667,8 @@ msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
+"Aktiver for å vise som sett fra overflaten av planeten (anbefales). Hvis "
+"slått av, vis planetosentrisk visning."
 
 #: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
