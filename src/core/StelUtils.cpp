@@ -90,13 +90,17 @@ QString getOperatingSystemInfo()
 		case QSysInfo::WV_WINDOWS7:
 			OS = "Windows 7";
 			break;
+		#if QT_VERSION >= 0x050000
 		case QSysInfo::WV_WINDOWS8:
 			OS = "Windows 8";
 			break;
+		#endif
+		#if QT_VERSION >= 0x050200
 		case QSysInfo::WV_WINDOWS8_1:
 			OS = "Windows 8.1";
 			break;
-		#ifdef WV_WINDOWS10
+		#endif
+		#if QT_VERSION >= 0x050500
 		case QSysInfo::WV_WINDOWS10:
 			OS = "Windows 10";
 			break;
