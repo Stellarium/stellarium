@@ -687,14 +687,21 @@ void StelMainView::updateNightModeProperty()
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
 #ifndef Q_OS_MAC
 	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
+	bool isANGLE=glRenderer.startsWith("ANGLE");
 	if ( openGLerror ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))  )
 	{
 		#ifdef Q_OS_WIN
-		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
-		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."), QMessageBox::Abort, QMessageBox::Abort);
+		if ((!isANGLE) && (!isMesa))
+			qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or even --mesa-mode) option.";
+		else if (isANGLE)
+			qWarning() << "Oops... Insufficient OpenGL version in ANGLE. Please update drivers, graphics hardware, or use --mesa-mode option.";
+		else
+			qWarning() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
+
+		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
 		#else
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
 		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
@@ -712,7 +719,7 @@ void StelMainView::updateNightModeProperty()
 
 #ifdef Q_OS_WIN
 	// If we have ANGLE, check esp. for insufficient ps_2 level.
-	if (glRenderer.startsWith("ANGLE"))
+	if (isANGLE)
 	{
 		QRegExp angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
 		int angleVSPSpos=angleVsPsRegExp.indexIn(glRenderer);
@@ -721,14 +728,14 @@ void StelMainView::updateNightModeProperty()
 		{
 			float vsVersion=angleVsPsRegExp.cap(1).toFloat() + 0.1*angleVsPsRegExp.cap(2).toFloat();
 			float psVersion=angleVsPsRegExp.cap(3).toFloat() + 0.1*angleVsPsRegExp.cap(4).toFloat();
-			qDebug() << "VS Version Number after parsing: " << vsVersion;
-			qDebug() << "PS Version Number after parsing: " << psVersion;
+			qDebug() << "VS Version Number detected: " << vsVersion;
+			qDebug() << "PS Version Number detected: " << psVersion;
 			if ((vsVersion<2.0) || (psVersion<3.0))
 			{
 				openGLerror=true;
 				qDebug() << "This is not enough: we need DirectX9 with vs_2_0 and ps_3_0 or later.";
-				qDebug() << "You should update graphics drivers, graphics hardware, or use the OpenGL-MESA version.";
-				qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+				qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
+				qDebug() << "Else, please try to use an older version like 0.12.5, and try with --safe-mode";
 
 				if (conf->value("main/ignore_opengl_warning", false).toBool())
 				{
@@ -773,13 +780,13 @@ void StelMainView::updateNightModeProperty()
 		if (mesaPos >-1)
 		{
 			float mesaVersion=mesaRegExp.cap(1).toFloat();
-			qDebug() << "MESA Version Number after parsing: " << mesaVersion;
+			qDebug() << "MESA Version Number detected: " << mesaVersion;
 			if ((mesaVersion<10.0f))
 			{
 				openGLerror=true;
 				qDebug() << "This is not enough: we need Mesa 10.0 or later.";
 				qDebug() << "You should update graphics drivers or graphics hardware.";
-				qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+				qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
 
 				if (conf->value("main/ignore_opengl_warning", false).toBool())
 				{
@@ -828,13 +835,13 @@ void StelMainView::updateNightModeProperty()
 	if (pos >-1)
 	{
 		float glslVersion=glslRegExp.cap(1).toFloat();
-		qDebug() << "GLSL Version Number after parsing: " << glslVersion;
+		qDebug() << "GLSL Version Number detected: " << glslVersion;
 		if (glslVersion<1.3f)
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL1.30 or later.";
-			qDebug() << "You should update graphics drivers, graphics hardware, or use the MESA version.";
-			qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+			qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
+			qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
 
 			if (conf->value("main/ignore_opengl_warning", false).toBool())
 			{
@@ -865,13 +872,17 @@ void StelMainView::updateNightModeProperty()
 	else if (posES >-1)
 	{
 		float glslesVersion=glslesRegExp.cap(1).toFloat();
-		qDebug() << "GLSL ES Version Number after parsing: " << glslesVersion;
+		qDebug() << "GLSL ES Version Number detected: " << glslesVersion;
 		if (glslesVersion<1.0) // TBD: is this possible at all?
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL ES 1.00 or later.";
-			qDebug() << "You should update graphics drivers, graphics hardware, or use the OpenGL-MESA version.";
-			qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+#ifdef Q_OS_WIN
+			qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
+#else
+			qDebug() << "You should update graphics drivers or graphics hardware.";
+#endif
+			qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
 
 			if (conf->value("main/ignore_opengl_warning", false).toBool())
 			{

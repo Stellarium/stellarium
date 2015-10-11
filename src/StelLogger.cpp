@@ -138,20 +138,11 @@ void StelLogger::init(const QString& logFilePath)
 		writeLog(QString("Total physical memory: %1 MB").arg(statex.ullTotalPhys/(1024<<10)));
 		writeLog(QString("Available physical memory: %1 MB").arg(statex.ullAvailPhys/(1024<<10)));
 		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-#ifndef _WIN64
-		// This always reports about 8TB on Win64, not really useful.
+		#ifndef _WIN64
+		// This always reports about 8TB on Win64, not really useful to show.
 		writeLog(QString("Total virtual memory: %1 MB").arg(statex.ullTotalVirtual/(1024<<10)));
 		writeLog(QString("Available virtual memory: %1 MB").arg(statex.ullAvailVirtual/(1024<<10)));
-#endif
-#if 0
-		//#else
-		// TODO: If the above works on 32bit Windows, delete the following old lines:
-		MEMORYSTATUS statex;
-		GlobalMemoryStatus(&statex);
-		writeLog(QString("Total memory: %1 MB (unreliable)").arg(statex.dwTotalPhys/(1024<<10)));
-		writeLog(QString("Total virtual memory: %1 MB (unreliable)").arg(statex.dwTotalVirtual/(1024<<10)));
-		writeLog(QString("Physical memory in use: %1%").arg(statex.dwMemoryLoad));
-#endif
+		#endif
 	}
 	else
 		writeLog("Windows version too old to get memory info.");
