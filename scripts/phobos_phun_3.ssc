@@ -28,7 +28,7 @@ core.wait(5);
 
 StelMovementMgr.zoomTo(0.8, 1);
 
-core.waitr(60);
+core.wait(60);
 
 StelMovementMgr.zoomTo(1.8, 1);
 
