@@ -54,11 +54,14 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--help (or -h)          : This cruft.\n"
 		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
-			  //<< "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
-			  << "--angle-mode (or -a)    : Use ANGLE as rendering engine\n"
-			  << "--mesa-mode (or -m)     : Use MESA as rendering engine\n"
-			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile\n"
-			  << "                          Try this is you have graphics problems\n"
+			#ifdef Q_OS_WIN
+			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine\n"
+			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
+			  << "--safe-mode (or -s)     : Synonymous to --mesa-mode \n"
+			#endif
+			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile.\n"
+			  << "                          Use this is you have graphics problems\n"
+			  << "                          and want to send a bug report\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 		          << "                          the full screen setting in the config file\n"
 		          << "--screenshot-dir        : Specify directory to save screenshots\n"
@@ -67,7 +70,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--altitude              : Specify observer altitude in meters\n"
 		          << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
 		          << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
-		          << "--list-landscapes       : Print a list of value landscape IDs\n"
+			  << "--list-landscapes       : Print a list of valid landscape IDs\n"
 		          << "--landscape             : Start using landscape whose ID (dir name)\n"
 		          << "                          is passed as parameter to option\n"
 		          << "--sky-date              : Specify sky date in format yyyymmdd\n"
@@ -80,13 +83,11 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		exit(0);
 	}
 
-	/*
+	#ifdef Q_OS_WIN
 	if (argsGetOption(argList, "-s", "--safe-mode"))
 	{
-		qApp->setProperty("onetime_safe_mode", true);
+		qApp->setProperty("onetime_mesa_mode", true);
 	}
-	*/
-
 	if (argsGetOption(argList, "-a", "--angle-mode"))
 	{
 		qApp->setProperty("onetime_angle_mode", true);
@@ -95,7 +96,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	{
 		qApp->setProperty("onetime_mesa_mode", true);
 	}
-
+	#endif
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
 		const QSet<QString>& landscapeIds = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
