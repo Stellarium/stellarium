@@ -186,14 +186,18 @@ int main(int argc, char **argv)
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
 	#ifdef Q_OS_WIN
+	#if QT_VERSION >= 0x050300
 	if (qApp->property("onetime_angle_mode").isValid())
 	{
 		app.setAttribute(Qt::AA_UseOpenGLES, true);
 	}
+	#endif
+	#if QT_VERSION >= 0x050400
 	if (qApp->property("onetime_mesa_mode").isValid())
 	{
 		app.setAttribute(Qt::AA_UseSoftwareOpenGL, true);
 	}
+	#endif
 	#endif
 
 	// Start logging.
