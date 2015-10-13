@@ -687,13 +687,13 @@ void StelMainView::updateNightModeProperty()
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
 #ifndef Q_OS_MAC
 	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
+	bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseSensitive);
 	if ( openGLerror ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))  )
 	{
 		#ifdef Q_OS_WIN
-		bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseInsensitive);
 		if ((!isANGLE) && (!isMesa))
 			qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or even --mesa-mode) option.";
 		else if (isANGLE)
