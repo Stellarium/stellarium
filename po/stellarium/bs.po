@@ -4,22 +4,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-04 02:27+0600\n"
+"POT-Creation-Date: 2015-10-12 18:03+0600\n"
 "PO-Revision-Date: 2015-08-14 23:33+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-04 05:14+0000\n"
-"X-Generator: Launchpad (build 17783)\n"
+"X-Launchpad-Export-Date: 2015-10-13 05:13+0000\n"
+"X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:556
 msgid "Display Options"
 msgstr "Opcije prikaza"
 
@@ -204,7 +204,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:216
 #: src/core/modules/MinorPlanet.cpp:211 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:187 src/core/modules/StarWrapper.cpp:190
+#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -226,7 +226,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:222
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:197
+#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
@@ -236,7 +236,7 @@ msgstr "Veličina: <b>%1</b> (neaktivno do: <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:185 src/core/modules/Nebula.cpp:190
 #: src/core/modules/Planet.cpp:225 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:200
+#: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
@@ -248,7 +248,7 @@ msgid " (Photometric system: B)"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:119
+#: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr ""
@@ -279,7 +279,7 @@ msgid "Orientation angle: %1%2"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -306,7 +306,7 @@ msgstr ""
 msgid "Redshift: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:247
+#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Paralaksa: %1\""
@@ -670,7 +670,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:180 src/translations.h:42
+#: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "zvijezda"
 
@@ -688,7 +688,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:228 src/core/modules/MinorPlanet.cpp:230
 #: src/core/modules/MinorPlanet.cpp:234 src/core/modules/Comet.cpp:194
-#: src/core/modules/StarWrapper.cpp:204 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Apsolutna veličina: %1"
@@ -843,76 +843,76 @@ msgstr "Orbite planeta"
 msgid "Planet trails"
 msgstr "Tragovi planete"
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:163
+#: src/core/modules/StarWrapper.cpp:157
 msgid "pulsating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:159
 msgid "rotating variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:167
+#: src/core/modules/StarWrapper.cpp:161
 msgid "cataclysmic variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:170
+#: src/core/modules/StarWrapper.cpp:164
 msgid "eclipsing binary system"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:174
+#: src/core/modules/StarWrapper.cpp:168
 msgid "variable star"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:178
+#: src/core/modules/StarWrapper.cpp:172
 msgid "double star"
 msgstr "dvostruka zvijezda"
 
-#: src/core/modules/StarWrapper.cpp:185
+#: src/core/modules/StarWrapper.cpp:179
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:226
+#: src/core/modules/StarWrapper.cpp:220
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:228
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:244
+#: src/core/modules/StarWrapper.cpp:238
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektralna vrsta: %1"
 
-#: src/core/modules/StarWrapper.cpp:250
+#: src/core/modules/StarWrapper.cpp:244
 #, qt-format
 msgid "Period: %1 days"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:259
+#: src/core/modules/StarWrapper.cpp:253
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:261
+#: src/core/modules/StarWrapper.cpp:255
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:268
+#: src/core/modules/StarWrapper.cpp:262
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:270
+#: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Rising time: %1%"
 msgstr ""
@@ -1578,7 +1578,7 @@ msgid "Deep-sky objects background images"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Miscellaneous"
 msgstr "Razno"
 
@@ -2597,64 +2597,64 @@ msgstr ""
 msgid "Opposition"
 msgstr ""
 
-#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
+#: src/StelMainView.cpp:461 src/StelMainView.cpp:476
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
 
-#: src/StelMainView.cpp:471
+#: src/StelMainView.cpp:490
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr ""
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Save screenshot"
 msgstr "Snimi sliku ekrana"
 
-#: src/StelMainView.cpp:537
+#: src/StelMainView.cpp:556
 msgid "Full-screen mode"
 msgstr "Prikaz na cijelom ekranu"
 
-#: src/StelMainView.cpp:678
+#: src/StelMainView.cpp:704
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-"use MESA (or ANGLE) version."
+"use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:681
+#: src/StelMainView.cpp:707
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:723
+#: src/StelMainView.cpp:749
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:800
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:829
+#: src/StelMainView.cpp:855
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:866
+#: src/StelMainView.cpp:896
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:1007
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -3312,7 +3312,7 @@ msgstr ""
 
 #: src/translations.h:305
 msgid ""
-"Screensaver of various happenings in the Solar System. 232 events in all!"
+"Screensaver of various happenings in the Solar System. 248 events in all!"
 msgstr ""
 
 #: src/translations.h:306
@@ -10802,7 +10802,7 @@ msgstr "Traži"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-msgid "dd/MMM/yyyy"
+msgid "dd/MM/yyyy"
 msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197

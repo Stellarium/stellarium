@@ -11,15 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-04 02:27+0600\n"
+"POT-Creation-Date: 2015-10-12 18:03+0600\n"
 "PO-Revision-Date: 2015-10-02 19:40+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-04 05:19+0000\n"
-"X-Generator: Launchpad (build 17783)\n"
+"X-Launchpad-Export-Date: 2015-10-13 05:18+0000\n"
+"X-Generator: Launchpad (build 17812)\n"
 "Language: is\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -27,7 +27,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:556
 msgid "Display Options"
 msgstr "Skjástillingar"
 
@@ -212,7 +212,7 @@ msgstr "Himinhnöttur:"
 
 #: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:216
 #: src/core/modules/MinorPlanet.cpp:211 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:187 src/core/modules/StarWrapper.cpp:190
+#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -234,7 +234,7 @@ msgstr "Ógegnsæi: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:222
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:197
+#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
@@ -244,7 +244,7 @@ msgstr "Birtustig: <b>%1</b> (fallandi í: <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:185 src/core/modules/Nebula.cpp:190
 #: src/core/modules/Planet.cpp:225 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:200
+#: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
@@ -256,7 +256,7 @@ msgid " (Photometric system: B)"
 msgstr " (Ljósmælikerfi: B)"
 
 #: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:119
+#: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Skráningarlitur (B-V): <b>%1</b>"
@@ -287,7 +287,7 @@ msgid "Orientation angle: %1%2"
 msgstr "Stefnuhorn: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -314,7 +314,7 @@ msgstr "Fjarlægð: %1 %2"
 msgid "Redshift: %1"
 msgstr "Rauðvik: %1"
 
-#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:247
+#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Hliðrun: %1\""
@@ -678,7 +678,7 @@ msgstr ""
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:180 src/translations.h:42
+#: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "stjarna"
 
@@ -696,7 +696,7 @@ msgstr "Djúpfyrirbæri"
 
 #: src/core/modules/Planet.cpp:228 src/core/modules/MinorPlanet.cpp:230
 #: src/core/modules/MinorPlanet.cpp:234 src/core/modules/Comet.cpp:194
-#: src/core/modules/StarWrapper.cpp:204 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Reyndarbirtustig: %1"
@@ -851,76 +851,76 @@ msgstr "Brautir reikistjarna"
 msgid "Planet trails"
 msgstr "Ferlar reikistjarna"
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
 msgstr "gosstjarna"
 
-#: src/core/modules/StarWrapper.cpp:163
+#: src/core/modules/StarWrapper.cpp:157
 msgid "pulsating variable star"
 msgstr "sveiflustjarna"
 
-#: src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:159
 msgid "rotating variable star"
 msgstr "snúningsbreytistjarna"
 
-#: src/core/modules/StarWrapper.cpp:167
+#: src/core/modules/StarWrapper.cpp:161
 msgid "cataclysmic variable star"
 msgstr "hamfarastjarna"
 
-#: src/core/modules/StarWrapper.cpp:170
+#: src/core/modules/StarWrapper.cpp:164
 msgid "eclipsing binary system"
 msgstr "myrkvatvístirni"
 
-#: src/core/modules/StarWrapper.cpp:174
+#: src/core/modules/StarWrapper.cpp:168
 msgid "variable star"
 msgstr "breytistjarna"
 
-#: src/core/modules/StarWrapper.cpp:178
+#: src/core/modules/StarWrapper.cpp:172
 msgid "double star"
 msgstr "tvístirni"
 
-#: src/core/modules/StarWrapper.cpp:185
+#: src/core/modules/StarWrapper.cpp:179
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "Gerð: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:226
+#: src/core/modules/StarWrapper.cpp:220
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "Svið birtustigs: <b>%1</b>%2<b>%3</b> (Ljósmælikerfi: %4)"
 
-#: src/core/modules/StarWrapper.cpp:228
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "Svið birtustigs: <b>%1</b>%2<b>%3/%4</b> (Ljósmælikerfi: %5)"
 
-#: src/core/modules/StarWrapper.cpp:244
+#: src/core/modules/StarWrapper.cpp:238
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Litrófsflokkur: %1"
 
-#: src/core/modules/StarWrapper.cpp:250
+#: src/core/modules/StarWrapper.cpp:244
 #, qt-format
 msgid "Period: %1 days"
 msgstr "Umferðartími: %1 dagar"
 
-#: src/core/modules/StarWrapper.cpp:259
+#: src/core/modules/StarWrapper.cpp:253
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "Næsta lágmarksljósmagn: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:261
+#: src/core/modules/StarWrapper.cpp:255
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "Næsta hámarksljósmagn: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:268
+#: src/core/modules/StarWrapper.cpp:262
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Tímalengd myrkva: %1%"
 
-#: src/core/modules/StarWrapper.cpp:270
+#: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Ristími: %1%"
@@ -1605,7 +1605,7 @@ msgid "Deep-sky objects background images"
 msgstr "Bakgrunnsmyndir djúpfyrirbæra"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Miscellaneous"
 msgstr "Ýmislegt"
 
@@ -2630,7 +2630,7 @@ msgstr "Samstaða"
 msgid "Opposition"
 msgstr "Gagnstaða"
 
-#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
+#: src/StelMainView.cpp:461 src/StelMainView.cpp:476
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2638,32 +2638,30 @@ msgstr ""
 "Ekkert OpenGL 2 fannst á þessu kerfi. Uppfærðu vélbúnaðinn eða notaðu MESA "
 "eða eldri útgáfu."
 
-#: src/StelMainView.cpp:471
+#: src/StelMainView.cpp:490
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Get ekki nálgast nauðsynleg OpenGL tilföng."
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Save screenshot"
 msgstr "Vista skjámynd"
 
-#: src/StelMainView.cpp:537
+#: src/StelMainView.cpp:556
 msgid "Full-screen mode"
 msgstr "Heilskjár"
 
-#: src/StelMainView.cpp:678
+#: src/StelMainView.cpp:704
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-"use MESA (or ANGLE) version."
+"use --angle-mode (or --mesa-mode) option."
 msgstr ""
-"Ónothæf útgáfa OpenGL. Uppfærðu rekla, skjákort, eða notaðu MESA (eða ANGLE) "
-"útgáfuna."
 
-#: src/StelMainView.cpp:681
+#: src/StelMainView.cpp:707
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "Ónothæf útgáfa OpenGL. Uppfærðu rekla eða skjákort."
 
-#: src/StelMainView.cpp:723
+#: src/StelMainView.cpp:749
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2674,7 +2672,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:800
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2685,7 +2683,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:829
+#: src/StelMainView.cpp:855
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2695,7 +2693,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:866
+#: src/StelMainView.cpp:896
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2706,7 +2704,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:1007
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -3365,8 +3363,8 @@ msgstr ""
 
 #: src/translations.h:305
 msgid ""
-"Screensaver of various happenings in the Solar System. 232 events in all!"
-msgstr "Skjáhvíla með ýmsum atburðum í sólkerfinu, alls 232 atburðir!"
+"Screensaver of various happenings in the Solar System. 248 events in all!"
+msgstr ""
 
 #: src/translations.h:306
 msgid "A tour of the western constellations."
@@ -10797,8 +10795,8 @@ msgstr "Leita"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-msgid "dd/MMM/yyyy"
-msgstr "dd/MMM/áááá"
+msgid "dd/MM/yyyy"
+msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
@@ -12439,6 +12437,10 @@ msgstr "Núverandi pláneta: Satúrnus"
 #~ msgid "Irregular galaxies"
 #~ msgstr "óreglulegar vetrarbrautir"
 
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 232 events in all!"
+#~ msgstr "Skjáhvíla með ýmsum atburðum í sólkerfinu, alls 232 atburðir!"
+
 #~ msgid "Julian Date"
 #~ msgstr "Júliönsk dagsetning"
 
@@ -12499,8 +12501,18 @@ msgstr "Núverandi pláneta: Satúrnus"
 #~ msgid "Enable display of meteor showers at startup"
 #~ msgstr "Virkja birtingu á loftsteinadrífum þegar forritið er ræst"
 
+#~ msgid "dd/MMM/yyyy"
+#~ msgstr "dd/MMM/áááá"
+
 #~ msgid "Search Events"
 #~ msgstr "Leita að atburðum"
+
+#~ msgid ""
+#~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+#~ "use MESA (or ANGLE) version."
+#~ msgstr ""
+#~ "Ónothæf útgáfa OpenGL. Uppfærðu rekla, skjákort, eða notaðu MESA (eða ANGLE) "
+#~ "útgáfuna."
 
 #~ msgid ""
 #~ "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
