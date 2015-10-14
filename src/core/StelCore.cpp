@@ -518,7 +518,7 @@ void StelCore::setFlagGravityLabels(bool gravity)
 
 void StelCore::setDefautAngleForGravityText(float a)
 {
-	currentProjectorParams.defautAngleForGravityText = a;
+	currentProjectorParams.defaultAngleForGravityText = a;
 }
 
 void StelCore::setFlipHorz(bool flip)
