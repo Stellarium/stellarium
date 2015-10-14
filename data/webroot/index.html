@@ -24,221 +24,245 @@
       <img src="stellarium.png" alt="Stellarium logo"/>
       <h1><?= tr("Stellarium remote control")?></h1>
     </header>
-    <section id="time" class="block">
-      <header><h2><?= tr("Time")?></h2></header>
-      <div id="timewidget">
-        <ul>
-          <li><a href="#time_local"><?= tr("Date and Time")?></a></li>
-          <li><a href="#time_jday"><?= tr("Julian Date")?></a></li>
-        </ul>
-        <div id="time_local" class="timetab">
-          <p class="timedisplay">
-            <input id="date_year" />
-            /
-            <input id="date_month" />
-            /
-            <input id="date_day" />
-          </p>
-          <p class="timedisplay">
-            <input id="time_hour" />
-            :
-            <input id="time_minute" />
-            :
-            <input id="time_second" />
-          </p>
+    <div id="tabs">
+      <ul>
+        <li><a href="#tab_main"><?= tr("Main controls")?></a></li>
+        <li><a href="#tab_view"><?= tr("View")?></a></li>
+        <li><a href="#tab_landscape"><?= tr("Landscape")?></a></li>
+        <li><a href="#tab_skyculture"><?= tr("Starlore")?></a></li>
+        <li><a href="#tab_actions"><?= tr("Actions and scripts")?></a></li>
+        <li><a href="#tab_location_objects"><?= tr("Location and objects")?></a></li>
+      </ul>
+      <div id="tab_main">
+        <div class="flex">
+          <section id="time" class="block flex-noshrink">
+            <header><h2><?= tr("Time")?></h2></header>
+            <div id="timewidget">
+              <ul>
+                <li><a href="#time_local"><?= tr("Date and Time")?></a></li>
+                <li><a href="#time_jday"><?= tr("Julian Day")?></a></li>
+              </ul>
+              <div id="time_local" class="timetab">
+                <p class="timedisplay">
+                  <input id="date_year" />
+                  /
+                  <input id="date_month" />
+                  /
+                  <input id="date_day" />
+                </p>
+                <p class="timedisplay">
+                  <input id="time_hour" />
+                  :
+                  <input id="time_minute" />
+                  :
+                  <input id="time_second" />
+                </p>
+              </div>
+              <div id="time_jday" class="timetab">
+                <div>
+                  <p class="timedisplay"><label for="input_jd">JD: </label><input id="input_jd"/></p>
+                  <p class="timedisplay"><label for="input_mjd">MJD: </label><input id="input_mjd"/></p>
+                </div>
+              </div>
+            </div>
+            <p class="textcenter">&Delta;T = <span id="deltat"></span></p>
+            <div id="mainbuttons">
+              <ul id="timecontrols" class="ui-corner-all ui-widget-content">
+                <li class="button32wrapper" title="Decrease time speed"><button id="bt_timerewind" class="button32 btTimeRewind"/></li><li class="button32wrapper" title="Pause"><button id="bt_timeplaypause" class="button32 btTimeRealtime"/></li><li class="button32wrapper" title="Set time to now"><button id="bt_timenow" class="button32 btTimeNow"/></li><li class="button32wrapper" title="Increase time speed"><button id="bt_timeforward" class="button32 btTimeForward"/></li>
+              </ul>
+            </div>
+          </section>
+          <section id="view" class="block textcenter">
+            <header><h2><?= tr("View")?></h2></header>
+            <div id="view_controls" class="ui-corner-all ui-widget-content">
+              <div id="view_upleft" class="joybutton"><?= tr("Up/Left")?></div><div id="view_up" class="joybutton"><?= tr("Up")?></div><div id="view_upright" class="joybutton"><?= tr("Up/Right")?></div><div id="view_left" class="joybutton"><?= tr("Left")?></div><div id="view_center" class="joybutton" title='<?= tr("Focus on selected object")?>'><?= tr("Focus on selection")?></div><div id="view_right" class="joybutton"><?= tr("Right")?></div><div id="view_downleft" class="joybutton"><?= tr("Down/Left")?></div><div id="view_down" class="joybutton"><?= tr("Down")?></div><div id="view_downright" class="joybutton"><?= tr("Down/Right")?></div>
+            </div>
+            <div id="view_wrapper">
+              <div id="view_fov"></div>
+              <p>FOV: <span id="view_fov_text"></span></p>
+              <p><?= tr("Projection")?>: <span id="view_projection"></span></p>
+            </div>
+          </section>
+          <section id="selection" class="block flex-expand">
+            <header><h2><?= tr("Selection")?></h2></header>
+            <div id="sel_infostring"></div>
+          </section>
         </div>
-        <div id="time_jday" class="timetab">
-          <div>
-            <p class="timedisplay"><label for="input_jd">JD: </label><input id="input_jd"/></p>
-            <p class="timedisplay"><label for="input_mjd">MJD: </label><input id="input_mjd"/></p>
-          </div>
-        </div>
-      </div>
-      <p>&Delta;T = <span id="deltat"></span></p>
-      <div id="mainbuttons">
-        <ul id="timecontrols" class="ui-corner-all ui-widget-content">
-          <li class="button32wrapper" title="Decrease time speed"><button id="bt_timerewind" class="button32 btTimeRewind"/></li><li class="button32wrapper" title="Pause"><button id="bt_timeplaypause" class="button32 btTimeRealtime"/></li><li class="button32wrapper" title="Set time to now"><button id="bt_timenow" class="button32 btTimeNow"/></li><li class="button32wrapper" title="Increase time speed"><button id="bt_timeforward" class="button32 btTimeForward"/></li>
-        </ul>
+
         <ul id="autobuttons" class="ui-corner-all ui-widget-content">
         </ul>
       </div>
-    </section>
-    <section id="selection" class="block">
-      <header><h2><?= tr("Selection")?></h2></header>
-      <div id="sel_infostring"></div>
-    </section>
-    <section id="view" class="block">
-      <header><h2><?= tr("View")?></h2></header>
-      <div id="view_controls" class="ui-corner-all ui-widget-content">
-        <div id="view_upleft" class="joybutton"><?= tr("Up/Left")?></div><div id="view_up" class="joybutton"><?= tr("Up")?></div><div id="view_upright" class="joybutton"><?= tr("Up/Right")?></div><div id="view_left" class="joybutton"><?= tr("Left")?></div><div id="view_center" class="joybutton" title='<?= tr("Focus on selected object")?>'><?= tr("Focus on selection")?></div><div id="view_right" class="joybutton"><?= tr("Right")?></div><div id="view_downleft" class="joybutton"><?= tr("Down/Left")?></div><div id="view_down" class="joybutton"><?= tr("Down")?></div><div id="view_downright" class="joybutton"><?= tr("Down/Right")?></div>
-      </div>
-      <div id="view_wrapper">
-        <div id="view_fov"></div>
-        <p>FOV: <span id="view_fov_text"></span></p>
-        <p><?= tr("Projection")?>: <span id="view_projection"></span></p>
-      </div>
-    </section>
-    <section id="scripts" class="block">
-      <header><h2><?= tr("Scripts")?></h2></header>
-      <select id="scriptlist" class="scrollselect" size="10">
-      </select>
-      <div><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
-      <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
-    </section>
-    <section id="stelaction" class="block">
-      <header><h2><?= tr("Actions")?></h2></header>
-      <select id="actionlist" class="scrollselect" size="10">
-      </select>
-      <div>
-        <button id="bt_doaction" disabled="disabled"><?= tr("Run/toggle action")?></button>
-      </div>
-    </section>
-    <section id="location" class="block">
-      <header><h2><?= tr("Location")?></h2></header>
-      <div>
-        <div id="loc_map">
-          <img id="loc_mapimg" src="world.png" alt='<?= tr("Planet map")?>'/>
-          <img id="loc_mappointer" src="map-pointeur.png" alt='<?= tr("Planet map pointer")?>'/>
-        </div><div id="loc_searchlist" class="inline-flex flex-column" >
-        <select id="loc_list" size="10"></select>
-        <input id="loc_search" placeholder='<?= tr("Type to search location")?>' autocomplete="off"/>
-      </div>
-    </div>
-    <div id="loc_inputs">
-      <div>
-        <p><label for="loc_latitude"><?= tr("Latitude:")?></label><input id="loc_latitude"/></p>
-        <p><label for="loc_longitude"><?= tr("Longitude:")?></label><input id="loc_longitude"/></p>
-        <p><label for="loc_altitude"><?= tr("Altitude:")?></label><input id="loc_altitude"/></p>
-      </div>
-      <div>
-        <p><label for="loc_name"><?= tr("Name/City:")?></label><input id="loc_name" type="text"/></p>
-        <p><label for="loc_country"><?= tr("Country:")?></label><select id="loc_country"></select></p>
-        <p><label for="loc_planet"><?= tr("Planet:")?></label><select id="loc_planet"></select></p>
-      </div>
-    </div>
-  </section>
-  <section id="search" class="block">
-    <header><h2><?= tr("Search")?></h2></header>
-    <div id="srch_tabs">
-      <ul>
-        <li><a href="#srch_tab_object"><?= tr("Object")?></a></li>
-        <li><a href="#srch_tab_list"><?= tr("Lists")?></a></li>
-      </ul>
-      <div id="srch_tab_object">
-        <form class="flex">
-          <input id="srch_input" class="flex-expand" type="text" placeholder='<?= tr("Enter search term. Use TAB to navigate results.")?>' autocomplete="off"/>
-          <button id="srch_button" type="submit"><?= tr("Select and focus")?></button>
-        </form>
-        <div>
-          <div id="srch_results" class="ui-widget ui-widget-content"></div>
-        </div>
-        <div>
-          Simbad: <span id="srch_simbad"><?= tr("idle")?></span>
-        </div>
-        <div id="srch_greek">
-          <div>
-            <button>&alpha;</button><button>&beta;</button><button>&gamma;</button><button>&delta;</button><button>&epsilon;</button><button>&zeta;</button><button>&eta;</button><button>&theta;</button><button>&iota;</button><button>&kappa;</button><button>&lambda;</button><button>&mu;</button>
-          </div>
-          <div>
-            <button>&nu;</button><button>&xi;</button><button>&omicron;</button><button>&pi;</button><button>&rho;</button><button>&sigma;</button><button>&tau;</button><button>&upsilon;</button><button>&phi;</button><button>&chi;</button><button>&psi;</button><button>&omega;</button>
-          </div>
-        </div>
-      </div>
-      <div id="srch_tab_list">
-        <div class="flex">
-          <select id="srch_list_objecttype" class="flex-expand"></select>
-          <input id="srch_list_english" type="checkbox" /><label for="srch_list_english"><?= tr("names in English")?></label>
-        </div>
-        <select id="srch_list_objectlist" class="scrollselect" size="10"></select>
-      </div>
-    </div>
-  </section>
-  <section id="viewoptions" class="block">
-    <header><h2><?= tr("Sky/Viewing options")?></h2></header>
-    <div id="vo_tabs">
-      <ul>
-        <li><a href="#vo_tab_sky"><?= tr("Sky")?></a></li>
-        <li><a href="#vo_tab_markers"><?= tr("Markers")?></a></li>
-        <li><a href="#vo_tab_landscape"><?= tr("Landscape")?></a></li>
-        <li><a href="#vo_tab_skyculture"><?= tr("Starlore")?></a></li>
-      </ul>
-      <!-- checkboxes get automatically hooked up if the have a StelAction as value -->
-      <div id="vo_tab_sky">
-        <div class="smallblock">
-          <h3><?= tr("Planets and satellites")?></h3>
-          <label><input type="checkbox" value="actionShow_Planets" /><?= tr("Show planets")?></label>
-          <label><input type="checkbox" value="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
-          <label><input type="checkbox" value="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
-        </div>
-        <div class="smallblock">
-          <h3><?= tr("Labels and Markers")?></h3>
-          <label><input type="checkbox" value="actionShow_Stars_Labels" /><?= tr("Stars")?></label>
-          <label><input type="checkbox" value="actionShow_Nebulas" /><?= tr("DSOs")?></label>
-          <label><input type="checkbox" value="actionShow_Planets_Labels" /><?= tr("Planets")?></label>
-        </div>
-        <label><input type="checkbox" value="actionShow_Atmosphere" /><?= tr("Atmosphere")?></label>
-      </div>
-      <div id="vo_tab_markers">
-        <div id="vo_markers_boxes" class="smallblock">
-          <h3><?= tr("Celestial Sphere")?></h3>
-          <div>
-            <label><input type="checkbox" value="actionShow_Equatorial_J2000_Grid" /><?= tr("Equatorial grid (on J2000)")?></label>
-            <label><input type="checkbox" value="actionShow_Equatorial_Grid" /><?= tr("Equatorial grid (on date)")?></label>
-            <label><input type="checkbox" value="actionShow_Ecliptic_J2000_Grid" /><?= tr("Ecliptic grid (on J2000)")?></label>
-            <label><input type="checkbox" value="actionShow_Azimuthal_Grid" /><?= tr("Azimuthal grid")?></label>
-            <label><input type="checkbox" value="actionShow_Galactic_Grid" /><?= tr("Galactic grid")?></label>
-            <label><input type="checkbox" value="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
-          </div>
-          <div>
-            <label><input type="checkbox" value="actionShow_Equator_Line" /><?= tr("Equator")?></label>
-            <label><input type="checkbox" value="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
-            <label><input type="checkbox" value="actionShow_Ecliptic_Line" /><?= tr("Ecliptic")?></label>
-            <label><input type="checkbox" value="actionShow_Horizon_Line" /><?= tr("Horizon")?></label>
-            <label><input type="checkbox" value="actionShow_Galactic_Equator_Line" /><?= tr("Galactic equator")?></label>
-            <label><input type="checkbox" value="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
-          </div>
-        </div>
-        <div class="flex">
+      <div id="tab_view">
+        <div class="flex flex-wrap">
+          <!-- checkboxes get automatically hooked up if the have a StelAction as value -->
           <div class="smallblock">
-            <h3><?= tr("Constellations")?></h3>
-            <label><input type="checkbox" value="actionShow_Constellation_Lines" /><?= tr("Show lines")?></label>
-            <label><input type="checkbox" value="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
-            <label><input type="checkbox" value="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
-            <label><input type="checkbox" value="actionShow_Constellation_Art" /><?= tr("Show art")?></label>
+            <h3><?= tr("Sky")?></h3>
+            <div class="innerblock">
+              <h3><?= tr("Planets and satellites")?></h3>
+              <label><input type="checkbox" value="actionShow_Planets" /><?= tr("Show planets")?></label>
+              <label><input type="checkbox" value="actionShow_Planets_Hints" /><?= tr("Show planet markers")?></label>
+              <label><input type="checkbox" value="actionShow_Planets_Orbits" /><?= tr("Show planet orbits")?></label>
+            </div>
+            <div class="innerblock">
+              <h3><?= tr("Labels and Markers")?></h3>
+              <label><input type="checkbox" value="actionShow_Stars_Labels" /><?= tr("Stars")?></label>
+              <label><input type="checkbox" value="actionShow_Nebulas" /><?= tr("DSOs")?></label>
+              <label><input type="checkbox" value="actionShow_Planets_Labels" /><?= tr("Planets")?></label>
+            </div>
+            <label><input type="checkbox" value="actionShow_Atmosphere" /><?= tr("Atmosphere")?></label>
+            <label><input type="checkbox" value="actionShow_LightPollution_Database" /><?= tr("Light pollution data from locations database")?></label>
           </div>
-          <div class="smallblock flex-expand">
-            <h3><?= tr("Projection")?></h3>
-            <select id="vo_projectionlist" class="scrollselect" size="5">
-            </select>
+          <div class="smallblock flex">
+            <h3><?= tr("Markings")?></h3>
+            <div id="vo_markers_boxes" class="innerblock">
+              <h3><?= tr("Celestial Sphere")?></h3>
+              <div class="inline-block">
+                <label><input type="checkbox" value="actionShow_Equatorial_J2000_Grid" /><?= tr("Equatorial grid (J2000)")?></label>
+                <label><input type="checkbox" value="actionShow_Equatorial_Grid" /><?= tr("Equatorial grid (of date)")?></label>
+                <label><input type="checkbox" value="actionShow_Ecliptic_J2000_Grid" /><?= tr("Ecliptic grid (J2000)")?></label>
+                <label><input type="checkbox" value="actionShow_Ecliptic_Grid" /><?= tr("Ecliptic grid (of date)")?></label>
+                <label><input type="checkbox" value="actionShow_Azimuthal_Grid" /><?= tr("Azimuthal grid")?></label>
+                <label><input type="checkbox" value="actionShow_Galactic_Grid" /><?= tr("Galactic grid")?></label>
+                <label><input type="checkbox" value="actionShow_Cardinal_Points" /><?= tr("Cardinal points")?></label>
+                <label><input type="checkbox" value="actionShow_Precession_Circles" /><?= tr("Precession circles")?></label>
+              </div>
+              <div class="inline-block">
+                <label><input type="checkbox" value="actionShow_Equator_J2000_Line" /><?= tr("Equator (J2000)")?></label>
+                <label><input type="checkbox" value="actionShow_Equator_Line" /><?= tr("Equator (of date)")?></label>
+                <label><input type="checkbox" value="actionShow_Ecliptic_J2000_Line" /><?= tr("Ecliptic (J2000)")?></label>
+                <label><input type="checkbox" value="actionShow_Ecliptic_Line" /><?= tr("Ecliptic (of date)")?></label>
+                <label><input type="checkbox" value="actionShow_Horizon_Line" /><?= tr("Horizon")?></label>
+                <label><input type="checkbox" value="actionShow_Galactic_Equator_Line" /><?= tr("Galactic equator")?></label>
+                <label><input type="checkbox" value="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
+                <label><input type="checkbox" value="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
+              </div>
+            </div>
+            <div class="innerblock">
+              <h3><?= tr("Constellations")?></h3>
+              <label><input type="checkbox" value="actionShow_Constellation_Lines" /><?= tr("Show lines")?></label>
+              <label><input type="checkbox" value="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
+              <label><input type="checkbox" value="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
+              <label><input type="checkbox" value="actionShow_Constellation_Art" /><?= tr("Show art")?></label>
+            </div>
+            <div class="innerblock">
+              <h3><?= tr("Projection")?></h3>
+              <select id="vo_projectionlist" class="scrollselect" size="5">
+              </select>
+            </div>
           </div>
         </div>
       </div>
-      <div id="vo_tab_landscape">
+      <div id="tab_landscape">
         <div class="smallblock">
-          <h3><?= tr("Settings")?></h3>
+          <h3><?= tr("Options")?></h3>
           <label><input type="checkbox" value="actionShow_Ground" /><?= tr("Show ground")?></label>
           <label><input type="checkbox" value="actionShow_Fog" /><?= tr("Show fog")?></label>
           <label><input type="checkbox" value="actionShow_LandscapeIllumination" /><?= tr("Show illumination layer")?></label>
         </div>
-        <select id="vo_landscapelist" ></select>
-        <div class="smallblock">
-          <h3><?= tr("Current landscape information")?></h3>
-          <iframe id="vo_landscapeinfo" src="/api/view/landscapedescription"></iframe>
+        <div class="smallblock flex landscapeblock">
+          <h3><?= tr("Current landscape")?></h3>
+          <select id="vo_landscapelist" class="scrollselect" size="5">
+          </select>
+          <iframe id="vo_landscapeinfo" class="flex-expand" src="/api/view/landscapedescription/"></iframe>
         </div>
       </div>
-      <div id="vo_tab_skyculture">
+      <div id="tab_skyculture">
         <div class="smallblock">
-          <h3><?= tr("Settings")?></h3>
-          <label><input type="checkbox" value="actionShow_Skyculture_Nativenames" /><?= tr("Show native planet names")?></label>
+          <h3><?= tr("Options")?></h3>
+          <label><input type="checkbox" value="actionShow_Skyculture_Nativenames" /><?= tr("Use native names for planets from current culture")?></label>
         </div>
-        <select id="vo_skyculturelist" ></select>
-        <div class="smallblock">
-          <h3><?= tr("Current sky culture information")?></h3>
-          <iframe id="vo_skycultureinfo" src="/api/view/skyculturedescription"></iframe>
+        <div class="smallblock flex landscapeblock">
+          <h3><?= tr("Current sky culture")?></h3>
+          <select id="vo_skyculturelist" class="scrollselect" size="5">
+          </select>
+          <iframe id="vo_skycultureinfo" class="flex-expand" src="/api/view/skyculturedescription/"></iframe>
         </div>
+      </div>
+      <div id="tab_actions">
+        <div class="flex">
+          <section id="scripts" class="block flex flex-column">
+            <header><h2><?= tr("Scripts")?></h2></header>
+            <select id="scriptlist" class="scrollselect flex-expand" size="10">
+            </select>
+            <div class="textcenter"><?= tr("Active script:")?> <span id="activescript"><?= tr("-none-")?></span></div>
+            <div><button id="bt_runscript" disabled="disabled"><?= tr("Run selected script")?></button><button id="bt_stopscript" disabled="disabled"><?= tr("Stop current script")?></button></div>
+          </section>
+          <section id="stelaction" class="block flex flex-column">
+            <header><h2><?= tr("Actions")?></h2></header>
+            <select id="actionlist" class="scrollselect flex-expand" size="10">
+            </select>
+            <div>
+              <button id="bt_doaction" disabled="disabled"><?= tr("Run/toggle action")?></button>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div id="tab_location_objects">
+        <div class="flex">
+          <section id="location" class="block flex-noshrink">
+            <header><h2><?= tr("Location")?></h2></header>
+            <div>
+              <div id="loc_map">
+                <img id="loc_mapimg" src="world.png" alt='<?= tr("Planet map")?>'/>
+                <img id="loc_mappointer" src="map-pointeur.png" alt='<?= tr("Planet map pointer")?>'/>
+              </div><div id="loc_searchlist" class="inline-flex flex-column" >
+              <select id="loc_list" size="10"></select>
+              <input id="loc_search" placeholder='<?= tr("Type to search location")?>' autocomplete="off"/>
+            </div>
+          </div>
+          <div id="loc_inputs">
+            <div>
+              <p><label for="loc_latitude"><?= tr("Latitude:")?></label><input id="loc_latitude"/></p>
+              <p><label for="loc_longitude"><?= tr("Longitude:")?></label><input id="loc_longitude"/></p>
+              <p><label for="loc_altitude"><?= tr("Altitude:")?></label><input id="loc_altitude"/></p>
+            </div>
+            <div>
+              <p><label for="loc_name"><?= tr("Name/City:")?></label><input id="loc_name" type="text"/></p>
+              <p><label for="loc_country"><?= tr("Country:")?></label><select id="loc_country"></select></p>
+              <p><label for="loc_planet"><?= tr("Planet:")?></label><select id="loc_planet"></select></p>
+            </div>
+          </div>
+        </section>
+        <section id="search" class="block">
+          <header><h2><?= tr("Search")?></h2></header>
+          <div id="srch_tabs">
+            <ul>
+              <li><a href="#srch_tab_object"><?= tr("Object")?></a></li>
+              <li><a href="#srch_tab_list"><?= tr("Lists")?></a></li>
+            </ul>
+            <div id="srch_tab_object">
+              <form class="flex">
+                <input id="srch_input" class="flex-expand" type="text" placeholder='<?= tr("Enter search term. Use TAB to navigate results.")?>' autocomplete="off"/>
+                <button id="srch_button" type="submit"><?= tr("Select and focus")?></button>
+              </form>
+              <div>
+                <div id="srch_results"></div>
+              </div>
+              <p id="srch_simbad_text">Simbad: <span id="srch_simbad"><?= tr("idle")?></span>
+              </p>
+              <div id="srch_greek">
+                <div>
+                  <button>&alpha;</button><button>&beta;</button><button>&gamma;</button><button>&delta;</button><button>&epsilon;</button><button>&zeta;</button><button>&eta;</button><button>&theta;</button><button>&iota;</button><button>&kappa;</button><button>&lambda;</button><button>&mu;</button>
+                </div>
+                <div>
+                  <button>&nu;</button><button>&xi;</button><button>&omicron;</button><button>&pi;</button><button>&rho;</button><button>&sigma;</button><button>&tau;</button><button>&upsilon;</button><button>&phi;</button><button>&chi;</button><button>&psi;</button><button>&omega;</button>
+                </div>
+              </div>
+            </div>
+            <div id="srch_tab_list">
+              <div class="flex flex-column" style="height: 100%">
+                <div class="flex">
+                  <select id="srch_list_objecttype" class="flex-expand"></select>
+                  <input id="srch_list_english" type="checkbox" /><label for="srch_list_english"><?= tr("names in English")?></label>
+                </div>
+                <select id="srch_list_objectlist" class="scrollselect flex-expand" size="10"></select>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 <div id="noresponse" title='<?= tr("No response from server")?>'>
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server since %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>

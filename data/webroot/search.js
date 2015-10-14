@@ -48,7 +48,9 @@ var Search = (function($) {
             }
         });
 
-        $srch_tabs.tabs();
+        $srch_tabs.tabs({
+            heightStyle: "content"
+        });
 
         $srch_list_objecttype.combobox({
             select: function(evt, data) {
