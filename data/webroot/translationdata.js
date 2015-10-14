@@ -3,9 +3,11 @@
 //It contains all strings that can be translated through the StelTranslator in the JavaScript code by calling Main.tr()
 
 var TranslationData = {
+	"on" : '<?= tr("on")?>',
+	"off" : '<?= tr("off")?>',
 	"Could not retrieve action list" : '<?= tr("Could not retrieve action list")?>',
 	"Error sending action to server: " : '<?= tr("Error sending action to server: ")?>',
-	"Could not retrieve location list" : '<?= tr("Could not retrieve location list")?>',
+	"Error performing search" : '<?= tr("Error performing search")?>',
 	"Could not retrieve country list" : '<?= tr("Could not retrieve country list")?>',
 	"Could not retrieve planet list" : '<?= tr("Could not retrieve planet list")?>',
 	"No current selection" : '<?= tr("No current selection")?>',
@@ -16,7 +18,6 @@ var TranslationData = {
 	"-none-" : '<?= tr("-none-")?>',
 	"Error (%1)" : '<?= tr("Error (%1)")?>',
 	"idle" : '<?= tr("idle")?>',
-	"Error performing search" : '<?= tr("Error performing search")?>',
 	"waiting" : '<?= tr("waiting")?>',
 	"querying" : '<?= tr("querying")?>',
 	"Error performing Simbad lookup" : '<?= tr("Error performing Simbad lookup")?>',
@@ -24,4 +25,4 @@ var TranslationData = {
 	"Error getting object list" : '<?= tr("Error getting object list")?>',
 	"Could not retrieve projection list" : '<?= tr("Could not retrieve projection list")?>',
 	"Could not retrieve landscape list" : '<?= tr("Could not retrieve landscape list")?>'
-}
+};

@@ -107,7 +107,7 @@ var Actions = (function ($) {
 
     function handleActionChanged(evt, data) {
         var action = actionData[data.id];
-        action.option.textContent = action.text + " (" + data.isChecked + ")";
+        action.option.textContent = action.text + " (" + (data.isChecked ? Main.tr("on") : Main.tr("off") ) + ")";
         if (action.checkboxes) {
             action.checkboxes.forEach(function (val) {
                 val.checked = data.isChecked;
@@ -156,7 +156,7 @@ var Actions = (function ($) {
 
                         if (v2.isCheckable) {
                             option.className = "checkableaction";
-                            option.textContent = v2.text + " (" + v2.isChecked + ")";
+                            option.textContent = v2.text + " (" + (v2.isChecked ? Main.tr("on") : Main.tr("off") ) + ")";
 
                             fireActionChanged(v2.id);
                         } else {

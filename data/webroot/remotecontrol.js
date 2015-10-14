@@ -211,6 +211,30 @@ var Main = (function($) {
             });
         });
 
+        //main tabs
+        //remember which tab was active after refresh by storing id in sessionstore
+        var oldTabId = 0;
+        var tabDataKey = "activeMainTab";
+
+        var webStorageSupported = typeof(Storage) !== "undefined";
+
+        if(webStorageSupported) {
+            oldTabId = sessionStorage.getItem(tabDataKey);
+        } else {
+            console.log("webstorage API unsupported");
+        }
+
+        var $tabs = $("#tabs");
+        $tabs.tabs({
+            active: oldTabId,
+            activate: function(evt,ui) {
+                var idx = ui.newTab.index();
+                if(webStorageSupported){
+                    sessionStorage.setItem(tabDataKey, idx);
+                }
+            }
+        });
+
         sel_infostring = document.getElementById("sel_infostring");
 
         var $loading = $("#loadindicator").hide(),
