@@ -418,6 +418,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Labels"), "labelsDisplayed", "Ctrl+Shift+G");
+	addAction("actionShow_LightPollution_Database", displayGroup, N_("Light pollution data from locations database"), "databaseUsage");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)

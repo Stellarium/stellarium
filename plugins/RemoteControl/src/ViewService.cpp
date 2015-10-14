@@ -21,11 +21,14 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "LandscapeMgr.hpp"
 
+#include <QFile>
+#include <QMimeDatabase>
 #include <QJsonArray>
 #include <QJsonDocument>
 
@@ -36,12 +39,16 @@ ViewService::ViewService(const QByteArray &serviceName, QObject *parent) : Abstr
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 }
 
-QString ViewService::wrapHtml(QString text) const
+QString ViewService::wrapHtml(QString &text, const QString &title) const
 {
-	const QString head = "<html><head>"
-			     "<link type=\"text/css\" rel=\"stylesheet\" href=\"/iframestyle.css\">"
-			     "<base target=\"_blank\">"
-			     "</head><body>";
+	//because the html descriptions are often not compatible with "clean" HTML5 which is used for the main interface
+	//we explicitely set the doctype to 4.01 transitional for better results
+	const QString head = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
+			     "<html><head>\n"
+			     "<title>" + title + "</title>\n"
+			     "<link type=\"text/css\" rel=\"stylesheet\" href=\"/iframestyle.css\">\n"
+			     "<base target=\"_blank\">\n"
+			     "</head><body>\n";
 	const QString tail = "</body></html>";
 
 	return text.prepend(head).append(tail);
@@ -66,12 +73,53 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 
 		response.writeJSON(QJsonDocument(obj));
 	}
-	else if (operation=="landscapedescription")
+	else if (operation=="landscapedescription/")
 	{
-		//return the HTML description of the current landscape
-		QString str = lsMgr->getCurrentLandscapeHtmlDescription();
-		response.setHeader("Content-Type","text/html; charset=UTF-8");
-		response.setData(wrapHtml(str).toUtf8());
+		int startidx = operation.indexOf('/');
+		//get the path after the name and map it to the landscapes' directory
+		QByteArray path = operation.mid(startidx+1);
+
+		if(path.isEmpty())
+		{
+			//return the HTML description of the current landscape
+			QString str = lsMgr->getCurrentLandscapeHtmlDescription();
+			response.setHeader("Content-Type","text/html; charset=UTF-8");
+			response.setData(wrapHtml(str, lsMgr->getCurrentLandscapeName()).toUtf8());
+		}
+		else
+		{
+			//map path to landscape dir and return files
+			QString baseFolder = StelFileMgr::findFile("landscapes/" + lsMgr->getCurrentLandscapeID());
+			QString pathString = baseFolder + '/' + QString::fromUtf8(path);
+
+			QFile file(pathString);
+			if (pathString.isEmpty() || !file.exists())
+			{
+				response.setStatus(404,"not found");
+				response.setData("requested landscape resource not found");
+				return;
+			}
+
+			QMimeType mime = QMimeDatabase().mimeTypeForFile(pathString);
+
+			if(file.open(QIODevice::ReadOnly))
+			{
+				//reply with correct mime type if possible
+				if(!mime.isDefault())
+				{
+					response.setHeader("Content-Type", mime.name().toLatin1());
+				}
+
+				//load and write data
+				response.setData(file.readAll());
+			}
+			else
+			{
+				response.setStatus(500,"internal server error");
+				response.setData("could not open resource file");
+			}
+
+		}
 	}
 	else if (operation=="listskyculture")
 	{
@@ -88,12 +136,53 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 
 		response.writeJSON(QJsonDocument(obj));
 	}
-	else if (operation=="skyculturedescription")
+	else if (operation.startsWith("skyculturedescription/"))
 	{
-		//return the HTML description of the current landscape
-		QString str = skyCulMgr->getCurrentSkyCultureHtmlDescription();
-		response.setHeader("Content-Type","text/html; charset=UTF-8");
-		response.setData(wrapHtml(str).toUtf8());
+		int startidx = operation.indexOf('/');
+		//get the path after the name and map it to the sky cultures' directory
+		QByteArray path = operation.mid(startidx+1);
+
+		if(path.isEmpty())
+		{
+			//return the HTML description of the current landscape
+			QString str = skyCulMgr->getCurrentSkyCultureHtmlDescription();
+			response.setHeader("Content-Type","text/html; charset=UTF-8");
+			response.setData(wrapHtml(str, skyCulMgr->getCurrentSkyCultureNameI18()).toUtf8());
+		}
+		else
+		{
+			//map path to sky cultures dir and return files
+			QString baseFolder = StelFileMgr::findFile("skycultures/" + skyCulMgr->getCurrentSkyCultureID());
+			QString pathString = baseFolder + '/' + QString::fromUtf8(path);
+
+			QFile file(pathString);
+			if (pathString.isEmpty() || !file.exists())
+			{
+				response.setStatus(404,"not found");
+				response.setData("requested skyculture resource not found");
+				return;
+			}
+
+			QMimeType mime = QMimeDatabase().mimeTypeForFile(pathString);
+
+			if(file.open(QIODevice::ReadOnly))
+			{
+				//reply with correct mime type if possible
+				if(!mime.isDefault())
+				{
+					response.setHeader("Content-Type", mime.name().toLatin1());
+				}
+
+				//load and write data
+				response.setData(file.readAll());
+			}
+			else
+			{
+				response.setStatus(500,"internal server error");
+				response.setData("could not open resource file");
+			}
+
+		}
 	}
 	else if (operation=="listprojection")
 	{
@@ -113,7 +202,7 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. GET: listlandscape,listskyculture,listprojection");
+		response.writeRequestError("unsupported operation. GET: listlandscape,listskyculture,skyculturedescription/,listprojection");
 	}
 }
 

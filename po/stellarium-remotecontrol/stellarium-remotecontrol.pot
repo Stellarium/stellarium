@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 01:42+0200\n"
+"POT-Creation-Date: 2015-10-15 01:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: data/webroot/actions.js:110 data/webroot/actions.js:159
+msgid "on"
+msgstr ""
+
+#: data/webroot/actions.js:110 data/webroot/actions.js:159
+msgid "off"
+msgstr ""
 
 #: data/webroot/actions.js:177
 msgid "Could not retrieve action list"
@@ -25,15 +33,16 @@ msgstr ""
 msgid "Error sending action to server: "
 msgstr ""
 
-#: data/webroot/location.js:163
-msgid "Could not retrieve location list"
+#: data/webroot/location.js:132 data/webroot/location.js:160
+#: data/webroot/search.js:237
+msgid "Error performing search"
 msgstr ""
 
-#: data/webroot/location.js:204
+#: data/webroot/location.js:258
 msgid "Could not retrieve country list"
 msgstr ""
 
-#: data/webroot/location.js:234
+#: data/webroot/location.js:288
 msgid "Could not retrieve planet list"
 msgstr ""
 
@@ -41,15 +50,15 @@ msgstr ""
 msgid "No current selection"
 msgstr ""
 
-#: data/webroot/remotecontrol.js:311
+#: data/webroot/remotecontrol.js:333
 msgid "Error sending command to server: "
 msgstr ""
 
-#: data/webroot/remotecontrol.js:383
+#: data/webroot/remotecontrol.js:405
 msgid "Show All Items"
 msgstr ""
 
-#: data/webroot/remotecontrol.js:449
+#: data/webroot/remotecontrol.js:471
 msgid "Input did not match any item"
 msgstr ""
 
@@ -57,47 +66,43 @@ msgstr ""
 msgid "Could not retrieve script list"
 msgstr ""
 
-#: data/webroot/scripts.js:73 index.html:85
+#: data/webroot/scripts.js:73 index.html:187
 msgid "-none-"
 msgstr ""
 
-#: data/webroot/search.js:168
+#: data/webroot/search.js:175
 msgid "Error (%1)"
 msgstr ""
 
-#: data/webroot/search.js:211 index.html:136
+#: data/webroot/search.js:218 index.html:241
 msgid "idle"
 msgstr ""
 
-#: data/webroot/search.js:230
-msgid "Error performing search"
-msgstr ""
-
-#: data/webroot/search.js:240
+#: data/webroot/search.js:247
 msgid "waiting"
 msgstr ""
 
-#: data/webroot/search.js:255
+#: data/webroot/search.js:262
 msgid "querying"
 msgstr ""
 
-#: data/webroot/search.js:267
+#: data/webroot/search.js:274
 msgid "Error performing Simbad lookup"
 msgstr ""
 
-#: data/webroot/search.js:352
+#: data/webroot/search.js:359
 msgid "Error loading object types"
 msgstr ""
 
-#: data/webroot/search.js:393
+#: data/webroot/search.js:400
 msgid "Error getting object list"
 msgstr ""
 
-#: data/webroot/viewoptions.js:68
+#: data/webroot/viewoptions.js:75
 msgid "Could not retrieve projection list"
 msgstr ""
 
-#: data/webroot/viewoptions.js:104 data/webroot/viewoptions.js:140
+#: data/webroot/viewoptions.js:111 data/webroot/viewoptions.js:147
 msgid "Could not retrieve landscape list"
 msgstr ""
 
@@ -109,122 +114,126 @@ msgstr ""
 msgid "Stellarium remote control"
 msgstr ""
 
-#: index.html:28
+#: index.html:29
+msgid "Main controls"
+msgstr ""
+
+#: index.html:33
+msgid "Actions and scripts"
+msgstr ""
+
+#: index.html:34
+msgid "Location and objects"
+msgstr ""
+
+#: index.html:39
 msgid "Time"
 msgstr ""
 
-#: index.html:67
-msgid "Selection"
-msgstr ""
-
-#: index.html:73
+#: index.html:78
 msgid "Up/Left"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Up"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Up/Right"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Left"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Focus on selected object"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Focus on selection"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Right"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Down/Left"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Down"
 msgstr ""
 
-#: index.html:73
+#: index.html:78
 msgid "Down/Right"
 msgstr ""
 
-#: index.html:85
-msgid "Active script:"
+#: index.html:87
+msgid "Selection"
 msgstr ""
 
-#: index.html:86
-msgid "Run selected script"
-msgstr ""
-
-#: index.html:86
-msgid "Stop current script"
-msgstr ""
-
-#: index.html:89
-msgid "Actions"
-msgstr ""
-
-#: index.html:93
-msgid "Run/toggle action"
-msgstr ""
-
-#: index.html:100
-msgid "Planet map"
-msgstr ""
-
-#: index.html:101
-msgid "Planet map pointer"
-msgstr ""
-
-#: index.html:129
-msgid "Enter search term. Use TAB to navigate results."
-msgstr ""
-
-#: index.html:130
-msgid "Select and focus"
-msgstr ""
-
-#: index.html:157
-msgid "Sky/Viewing options"
-msgstr ""
-
-#: index.html:161
-msgid "Markers"
-msgstr ""
-
-#: index.html:176
+#: index.html:109
 msgid "DSOs"
 msgstr ""
 
-#: index.html:221
+#: index.html:160
 msgid "Show illumination layer"
 msgstr ""
 
-#: index.html:225
-msgid "Current landscape information"
+#: index.html:163
+msgid "Current landscape"
 msgstr ""
 
-#: index.html:232
-msgid "Show native planet names"
+#: index.html:175
+msgid "Current sky culture"
+msgstr ""
+
+#: index.html:187
+msgid "Active script:"
+msgstr ""
+
+#: index.html:188
+msgid "Run selected script"
+msgstr ""
+
+#: index.html:188
+msgid "Stop current script"
+msgstr ""
+
+#: index.html:191
+msgid "Actions"
+msgstr ""
+
+#: index.html:195
+msgid "Run/toggle action"
+msgstr ""
+
+#: index.html:206
+msgid "Planet map"
+msgstr ""
+
+#: index.html:207
+msgid "Planet map pointer"
+msgstr ""
+
+#: index.html:210
+msgid "Type to search location"
+msgstr ""
+
+#: index.html:235
+msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
 
 #: index.html:236
-msgid "Current sky culture information"
+msgid "Select and focus"
 msgstr ""
 
-#: index.html:243
+#: index.html:267
 msgid "No response from server"
 msgstr ""
 
-#: index.html:244
+#: index.html:268
 msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""

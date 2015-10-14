@@ -35,7 +35,7 @@ var TranslationData = {
 				jsfile.write(',\n\t');
 			jsfile.write('"'+i.group(1)+'" : \'<?= tr("'+i.group(1)+'")?>\'')
 			first = False
-	jsfile.write("\n}");
+	jsfile.write("\n};");
 
 if __name__ == '__main__':
 	main()

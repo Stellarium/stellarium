@@ -3,17 +3,20 @@ var ViewOptions = (function ($) {
 
     //Private variables
     var $selectedoption;
+    var $vo_projectionlist;
     var $vo_landscapelist;
     var $vo_skyculturelist;
     var currentLandscape;
     var currentSkyculture;
 
     function initControls() {
-        var tabs = $("#vo_tabs").tabs();
         $vo_landscapelist = $("#vo_landscapelist");
         $vo_skyculturelist = $("#vo_skyculturelist");
-        Actions.connectActionContainer(tabs);
-        $("#vo_projectionlist").dblclick(function () {
+        Actions.connectActionContainer($("#tab_view"));
+        Actions.connectActionContainer($("#tab_landscape"));
+        Actions.connectActionContainer($("#tab_skyculture"));
+        $vo_projectionlist = $("#vo_projectionlist");
+        $vo_projectionlist.dblclick(function () {
             if (this.selectedIndex >= 0) {
                 var proj = this.options[this.selectedIndex].value;
 
@@ -23,18 +26,22 @@ var ViewOptions = (function ($) {
             }
         });
 
-        $vo_landscapelist.combobox({
-            select: function(evt,data){
+        $vo_landscapelist.dblclick(function(evt,data){
+            if(this.selectedIndex >= 0) {
+                var ls = this.options[this.selectedIndex].value;
+
                 Main.postCmd("/api/view/setlandscape", {
-                    id : data.item.value
+                    id : ls
                 });
             }
         });
 
-        $vo_skyculturelist.combobox({
-            select: function(evt,data){
+        $vo_skyculturelist.dblclick(function(evt,data){
+            if(this.selectedIndex >= 0) {
+                var sc = this.options[this.selectedIndex].value;
+
                 Main.postCmd("/api/view/setskyculture", {
-                    id : data.item.value
+                    id : sc
                 });
             }
         });
@@ -156,11 +163,12 @@ var ViewOptions = (function ($) {
         updateFromServer: function (view) {
             if (!$selectedoption || $selectedoption[0].value !== view.projection) {
                 if ($selectedoption) {
-                    $selectedoption.removeClass("italic");
+                    $selectedoption.removeClass("select_selected");
                 }
+                $vo_projectionlist.val(view.projection);
 
                 $selectedoption = $('#vo_projectionlist option[value="' + view.projection + '"]');
-                $selectedoption.addClass("italic");
+                $selectedoption.addClass("select_selected");
             }
 
             if (currentLandscape !== view.landscape) {
@@ -170,7 +178,9 @@ var ViewOptions = (function ($) {
                 });
                 currentLandscape = view.landscape;
 
-                $("#vo_landscapelist").combobox("autocomplete",view.landscape);
+                $vo_landscapelist.children(".select_selected").removeClass("select_selected");
+                $vo_landscapelist.val(view.landscape);
+                $vo_landscapelist.children("option[value='"+view.landscape+"']").addClass("select_selected");
             }
             if(currentSkyculture !== view.skyculture) {
                 //this forces a reload of the iframe
@@ -179,7 +189,9 @@ var ViewOptions = (function ($) {
                 });
                 currentSkyculture = view.skyculture;
 
-                $("#vo_skyculturelist").combobox("autocomplete",view.skyculture);
+                $vo_skyculturelist.children(".select_selected").removeClass("select_selected");
+                $vo_skyculturelist.val(view.skyculture);
+                $vo_skyculturelist.children("option[value='"+view.skyculture+"']").addClass("select_selected");
             }
         }
     };

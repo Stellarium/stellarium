@@ -18,8 +18,8 @@
 
 .ui-widget-content {
 	border: none;
-    color: rgb(3,3,3);
-    background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
+	color: rgb(3,3,3);
+	background: linear-gradient(rgb(86, 87, 90),rgb(48, 49, 52));
 }
 
 /* Tab customization */
@@ -44,7 +44,7 @@
     color: rgb(220, 223, 214);
 }
 
-.ui-tabs.ui-corner-all {
+div#srch_tab_object {
     border-radius: 0px;
 }
 
@@ -207,6 +207,14 @@ select {
 	font-weight: bold;
 }
 
+.textcenter {
+	text-align: center;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
 .block {
 	position: relative;
 	padding: 15px;
@@ -216,18 +224,11 @@ select {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	background: rgba(149, 150, 152, 0.2);
-	border: 1px 
-	
-	solid 
-	
-	rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-style: inset;
 	border-radius: 10px;
-	text-align: center;
-	vertical-align: top;
+	/* vertical-align: top; */
 	min-width: 18em;
-	min-height: 22em;
-	display: inline-block;
 }
 
 .block header {
@@ -245,6 +246,27 @@ select {
 	display: inline-block;
 }
 
+.innerblock {
+	position: relative;
+	padding: 5px;
+	padding-top: 25px;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/* vertical-align: top; */
+}
+
+.innerblock h3 {
+	display: block;
+	position: absolute;
+	left: 10px;
+	top: 2px;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 0px;
+}
+
 .smallblock {
 	position: relative;
 	padding: 5px;
@@ -257,8 +279,8 @@ select {
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	border-style: inset;
 	border-radius: 5px;
-	vertical-align: top;
-	display: block;
+	/* vertical-align: top; */
+	/* display: inline-block; */
 }
 
 .smallblock h3 {
@@ -271,8 +293,16 @@ select {
 	line-height: 0px;
 }
 
+.relative {
+	position: relative;
+}
+
 .flex {
 	display: flex;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
 }
 
 .inline-flex {
@@ -281,6 +311,10 @@ select {
 
 .flex-expand {
 	flex-grow: 1;
+}
+
+.flex-noshrink {
+	flex-shrink: 0;
 }
 
 .flex-column {
@@ -427,13 +461,15 @@ button.button32 {
 
 .scrollselect {
 	padding: 1px 0px;
-	height: 12em;
+	min-height: 12em;
+	/* display: block; */
+	/* margin-left: auto; */
+	/* margin-right: auto; */
+	box-sizing: border-box;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
 }
 
-.italic,
+.select_selected,
 .checkableaction {
 	font-style: italic;
 }
@@ -535,9 +571,9 @@ button.button32 {
 }
 
 #srch_results {
-	text-align: left;
-	width: 400px;
-	min-height: 90px;
+	/* text-align: left; */
+	max-width: 367px;
+	height: 180px;
 	font-size: 14px;
 	padding-left: 10px;
 	padding-right: 5px;
@@ -571,7 +607,8 @@ button.button32 {
 
 #srch_list_objectlist {
 	margin-top: 5px;
-	width: 400px;
+	height: 270px;
+	/* width: 400px; */
 }
 
 #srch_tab_list {
@@ -592,10 +629,13 @@ button.button32 {
 
 #sel_infostring {
 	text-align: left;
-	white-space: nowrap;
-	overflow: auto;
-	width: 20em;
-	height: 22em;
+	/* white-space: nowrap; */
+	/* overflow-x: hidden; */
+	overflow-y: auto;
+	/* width: 20em; */
+	max-height: 22em;
+	/* max-width: 100%; */
+	display: inline-block;
 }
 
 #view_controls {
@@ -639,38 +679,26 @@ button.button32 {
 	margin-top: 10px;
 }
 
-#vo_tabs {
-	text-align: left;
-}
-
-#vo_markers_boxes div {
-	display: inline-block;
-}
-
-#vo_tabs label {
+#tab_view label {
 	display: block;
 }
 
-#vo_projectionlist {
-	width: 100%;
-	height: 76px;
+.landscapeblock {
+	height: 30em;
 }
 
-#vo_tab_landscape label {
-	display: inline;
+#tab_actions > div {
+    height: 30em;
 }
 
-#vo_tabs span.custom-combobox {
-	display: block;
-	margin-left: 5px;
-	margin-right: 5px;
+#location {
+	height: auto;
 }
 
-#vo_tabs input.custom-combobox-input {
-	width: 100%;
+#srch_simbad {
+	font-style: italic;
 }
 
-#vo_tabs iframe {
-	border: none;
-	width: 100%;
+#srch_simbad_text{
+	font-weight: bold;
 }
