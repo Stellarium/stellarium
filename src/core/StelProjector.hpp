@@ -97,7 +97,7 @@ public:
 			: viewportXywh(0, 0, 256, 256)
 			, fov(60.f)
 			, gravityLabels(false)
-			, defautAngleForGravityText(0.f)
+			, defaultAngleForGravityText(0.f)
 			, maskType(MaskNone)
 			, zNear(0.f)
 			, zFar(0.f)
@@ -108,18 +108,18 @@ public:
 			, flipVert(false)
 			, devicePixelsPerPixel(1.f) {;}
 
-		Vector4<int> viewportXywh;      //! posX, posY, width, height
-		float fov;                      //! FOV in degrees
-		bool gravityLabels;             //! the flag to use gravity labels or not
-		float defautAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
-		StelProjectorMaskType maskType; //! The current projector mask
-		float zNear, zFar;              //! Near and far clipping planes
-		Vec2f viewportCenter;           //! Viewport center in screen pixel
-		Vec2f viewportCenterOffset;     //! Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
-						//! Currently only Y shift is fully implemented, X shift likely not too meaningful.
-		float viewportFovDiameter;      //! diameter of the FOV disk in pixel
-		bool flipHorz, flipVert;        //! Whether to flip in horizontal or vertical directions
-		float devicePixelsPerPixel;     //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
+		Vector4<int> viewportXywh;       //! posX, posY, width, height
+		float fov;                       //! FOV in degrees
+		bool gravityLabels;              //! the flag to use gravity labels or not
+		float defaultAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
+		StelProjectorMaskType maskType;  //! The current projector mask
+		float zNear, zFar;               //! Near and far clipping planes
+		Vec2f viewportCenter;            //! Viewport center in screen pixel
+		Vec2f viewportCenterOffset;      //! Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
+						 //! Currently only Y shift is fully implemented, X shift likely not too meaningful.
+		float viewportFovDiameter;       //! diameter of the FOV disk in pixel
+		bool flipHorz, flipVert;         //! Whether to flip in horizontal or vertical directions
+		float devicePixelsPerPixel;      //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
 	};
 
 	//! Destructor
