@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-12 21:58+0000\n"
+"PO-Revision-Date: 2015-10-15 03:09+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-13 05:16+0000\n"
+"X-Launchpad-Export-Date: 2015-10-15 05:12+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -5450,9 +5450,9 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"Oletusarvojen palautus vaatii Stellariumin uudelleenkäynnistyksen. "
-"Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset, mukaan "
-"lukien nykyinen näkökenttä ja katselusuunta."
+"Oletusarvojen palautus vaatii Stellariumin uudelleenkäynnistyksen. Seuraavaa "
+"käynnistystä varten tallennetaan kaikki nykyiset asetukset, mukaan lukien "
+"nykyinen näkökenttä ja katselusuunta."
 
 #: src/ui_configurationDialog.h:1051
 msgid "The width of your view when Stellarium starts"
@@ -10163,11 +10163,11 @@ msgstr ""
 "asettaa; katso yllä). Kun kohteet on kiinteästi taivaalla (tai ovat "
 "ulkoplaneettoja), voidaan kuluvan vuoden havainnointijakson väli antaa "
 "kahdessa muodossa: joko jaksona yhdestä päivämäärästä toiseen (kuten "
-"tammikuun 20:nnesta syyskuun 15:nteen) tai kahdessa jaksossa (tammikuun "
-"ensimmäisestä annettuun päivään ja toisesta päivämäärästä joulukuun "
-"31:seen). Ensimmäisessä tapauksessa ensimmäisen päivän (esimerkissämme 20. "
-"tammikuuta) tulisi olla lähellä ns. 'tähden heliakkista nousua' ja toisen "
-"päivän (esimerkissämme 15. syyskuuta) lähellä 'heliakkista laskua'. Toisessa "
+"tammikuun 20:sta syyskuun 15:een) tai kahdessa jaksossa (tammikuun "
+"ensimmäisestä annettuun päivään ja toisesta päivämäärästä joulukuun 31:een). "
+"Ensimmäisessä tapauksessa ensimmäisen päivän (esimerkissämme 20. tammikuuta) "
+"tulisi olla lähellä ns. 'tähden heliakkista nousua' ja toisen päivän "
+"(esimerkissämme 15. syyskuuta) lähellä 'heliakkista laskua'. Toisessa "
 "tapauksessa (esim. aikavälin 1.1. - 20.5. ja 21.9. - 31.12.), ensimmäisen "
 "päivän (esimerkissämme 20. toukokuuta) tulisi olla lähellä heliakkista "
 "laskua ja toisen (esimerkissämme 21. syyskuuta) lähellä heliakkista nousua. "
@@ -10446,11 +10446,11 @@ msgstr "Vahvistamaton"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:508
 msgid "generic data"
-msgstr "tiedot vahvistamattomat"
+msgstr "vahvistamaton"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:512
 msgid "confirmed data"
-msgstr "tiedot vahvistettu"
+msgstr "vahvistettu"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:516
 msgid "inactive"
@@ -10485,7 +10485,7 @@ msgstr "Aktiivinen"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Activity"
-msgstr "Aktiivisuus"
+msgstr "Aktiivisena"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:582
 #, qt-format
@@ -11030,8 +11030,8 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
-"Useiden parvien radiantti siirtyy aktiivisuusjakson aikana. Esimerkiksi "
-"delta-aurigidien radiantti siirtyy yli asteen verran yhdessä yössä."
+"Monien parvien radiantti siirtyy aktiivisuusjakson aikana. Esimerkiksi delta-"
+"aurigidien radiantti siirtyy yli asteen verran yhdessä yössä."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -11047,7 +11047,7 @@ msgid ""
 msgstr ""
 "Meteoriparven ZHR (Zenithal Hourly Rate, aktiivisuus tunnissa zeniitissä) "
 "kertoo, kuinka monta kyseisen parven meteoria yksittäinen havainnoija voisi "
-"teoriassa nähdä, jos havainto-olosuhteet olisivat ihanteelliset "
+"teoriassa nähdä, mikäli havainto-olosuhteet olisivat ihanteelliset "
 "(rajamagnitudi 6.5) ja parven radiantti olisi zeniitissä. Havaittavien "
 "meteorien lukumäärä on käytännössä aina pienempi kuin ZHR, ja pienenee sitä "
 "mukaa mitä lähempänä horisonttia radiantti on."
@@ -11176,7 +11176,7 @@ msgstr "Aseta radianttien värit"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr "Aktiivinen radiantti - tiedot vahvistamattomat"
+msgstr "Aktiivinen radiantti – tietoja ei vahvistettu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
@@ -11188,7 +11188,7 @@ msgstr "Epäaktiivinen"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr "Aktiivinen radiantti - tiedot vahvistettu"
+msgstr "Aktiivinen radiantti – tiedot vahvistettu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2014-12-30 23:00+0000\n"
-"Last-Translator: Linh <linhgeomatics55@gmail.com>\n"
+"PO-Revision-Date: 2015-10-14 15:30+0000\n"
+"Last-Translator: Le Van Bach <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-13 05:28+0000\n"
+"X-Launchpad-Export-Date: 2015-10-15 05:13+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -77,7 +77,7 @@ msgstr "Xích đạo"
 
 #: src/core/modules/GridLinesMgr.cpp:617
 msgid "Precession Circle"
-msgstr ""
+msgstr "Chu kỳ tiến động"
 
 #: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1769
 msgid "Horizon"
@@ -141,7 +141,7 @@ msgstr "Lưới hoàng đạo J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "Lưới Hoàng đạo"
 
 #: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1741
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -159,7 +159,7 @@ msgstr "Đường kinh độ đối lập/giao hội"
 
 #: src/core/modules/GridLinesMgr.cpp:891
 msgid "Precession Circles"
-msgstr ""
+msgstr "Chu kỳ tiến động"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1587
 msgid "Atmosphere"
@@ -292,17 +292,17 @@ msgstr "Khoảng cách: %1 nas"
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:263
 msgid "Mpc"
-msgstr ""
+msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:268
 msgid "kpc"
-msgstr ""
+msgstr "kpc"
 
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
 msgid "Distance: %1 %2"
-msgstr ""
+msgstr "Khoảng cách: %1 %2"
 
 #: src/core/modules/Nebula.cpp:285
 #, qt-format
@@ -316,7 +316,7 @@ msgstr "Thị sai: %1\""
 
 #: src/core/modules/Nebula.cpp:300
 msgid "Morphological description: "
-msgstr ""
+msgstr "Mô tả hình thái: "
 
 #: src/core/modules/Nebula.cpp:748
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -577,7 +577,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:996 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
-msgstr ""
+msgstr "Chuẩn tinh"
 
 #: src/core/modules/Nebula.cpp:999
 msgid "star cluster"
@@ -5963,7 +5963,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
-msgstr ""
+msgstr "Từ:"
 
 #: src/ui_astroCalcDialog.h:365 src/ui_astroCalcDialog.h:367
 msgid "yyyy.MM.dd hh:mm"
@@ -5972,7 +5972,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:374
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
-msgstr ""
+msgstr "Tới:"
 
 #: src/ui_astroCalcDialog.h:368
 msgid "Calculate ephemeris"
@@ -7910,7 +7910,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "Bắt đầu/kết nối lúc khởi động"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "Device settings"
@@ -8434,7 +8434,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:467
 msgid "Setting landscape sets location"
-msgstr ""
+msgstr "Đang cài đặt vị trí cài đặt cảnh quan"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:489
 msgid "Run local script"
@@ -8952,11 +8952,11 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
-msgstr ""
+msgstr "Hiển thị chuẩn tinh"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "Cửa sổ cấu hình chuẩn tinh"
 
 #: plugins/Quasars/src/Quasar.cpp:129
 #, qt-format
@@ -8965,7 +8965,7 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:115
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "Phần bổ trợ Chuẩn tinh"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid ""
@@ -8981,7 +8981,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "Danh mục hiện tại chứa thông tin về %1 các chuẩn tinh."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
@@ -8990,46 +8990,48 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Nếu bạn muốn đọc thông tin đầy đủ về phần bổ trợ này, lịch sử và định dạnh "
+"danh mục của nó, bạn có thể %1lấy thông tin ở đây%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
 msgid "Quasars is updated"
-msgstr ""
+msgstr "Các chuẩn tinh được cập nhật"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "Cấu hình Chuẩn tinh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "Cấu hình Bổ trợ Chuẩn tinh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Settings for quasars"
-msgstr ""
+msgstr "Cài đặt chuẩn tinh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "Đánh dấu các chuẩn tinh không có nhãn"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "Bật hiển thị phân loại chuẩn tinh"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:325
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
 msgid "Enable display at startup"
-msgstr ""
+msgstr "Bật hiển thị lúc khởi động"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "Thể hiện nút chuẩn tinh ở thanh dưới cùng"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
 #: plugins/Pulsars/src/Pulsars.cpp:168
 msgid "Pulsars"
-msgstr ""
+msgstr "Ẩn tinh"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
@@ -9037,28 +9039,30 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
+"Phần bổ trợ này đánh dấu vị trí của các ẩn tinh khác nhau, với thông tin về "
+"mỗi đối tượng."
 
 #: plugins/Pulsars/src/Pulsars.cpp:167
 msgid "Show pulsars"
-msgstr ""
+msgstr "Hiển thị ẩn tinh"
 
 #: plugins/Pulsars/src/Pulsars.cpp:168
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "Cửa sổ cấu hình ẩn tinh"
 
 #: plugins/Pulsars/src/Pulsar.cpp:155
 msgid "pulsar"
-msgstr ""
+msgstr "ẩn tinh"
 
 #: plugins/Pulsars/src/Pulsar.cpp:160
 msgid "has one registered glitch"
-msgstr ""
+msgstr "có một sự cố được ghi nhận"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:164
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "có %1 sự cố được ghi nhận"
 
 #: plugins/Pulsars/src/Pulsar.cpp:166
 msgid "pulsar with glitches"
@@ -9077,17 +9081,17 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "Dispersion measure:"
-msgstr ""
+msgstr "Độ tán sắc:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:190
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:193
 msgid "pc"
-msgstr ""
+msgstr "parsecs"
 
 #: plugins/Pulsars/src/Pulsar.cpp:199
 #, qt-format
@@ -9097,23 +9101,23 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
-msgstr ""
+msgstr "Chu kỳ nhị phân của ẩn tinh: %1 ngày"
 
 #: plugins/Pulsars/src/Pulsar.cpp:207
 #, qt-format
 msgid "Eccentricity: %1"
-msgstr ""
+msgstr "Độ lệnh tâm: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:212
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "Thị sai hàng năm: %1 mas (milliarcseconds)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:216
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
-msgstr ""
+msgstr "Khoảng cách dựa trên mô hình mật độ electron: %1 kpc (%2 n.a.s)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:220
 #, qt-format
@@ -9130,7 +9134,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:229 plugins/Pulsars/src/Pulsar.cpp:241
 #: plugins/Pulsars/src/Pulsar.cpp:253
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:232 plugins/Pulsars/src/Pulsar.cpp:244
@@ -9141,7 +9145,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:260
 #, qt-format
 msgid "Notes: %1"
-msgstr ""
+msgstr "Chú ý: %1"
 
 #: plugins/Pulsars/src/Pulsar.cpp:327
 msgid ""
@@ -9150,23 +9154,23 @@ msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:332
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "có một bạn đồng hành hoặc nhiều hơn"
 
 #: plugins/Pulsars/src/Pulsar.cpp:337
 msgid "with pulsed emission from radio to infrared or higher frequencies"
-msgstr ""
+msgstr "với phát xung từ tần số vô tuyến đến hồng ngoại hoặc cao hơn"
 
 #: plugins/Pulsars/src/Pulsar.cpp:342
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr ""
+msgstr "với phát xung chỉ ở tần số hồng ngoại hoặc cao hơn"
 
 #: plugins/Pulsars/src/Pulsar.cpp:347
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "với phát xung trong dải tầng vô tuyến"
 
 #: plugins/Pulsars/src/Pulsar.cpp:352
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "với phát xung vô tuyến không liên tục"
 
 #: plugins/Pulsars/src/Pulsar.cpp:357
 msgid ""
@@ -9176,7 +9180,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "Phần bổ trợ Ẩn tinh"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 #, qt-format
@@ -9185,106 +9189,112 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"Dữ liệu Ẩn tinh được lấy từ 'Danh mục Ẩn tinh ATNF' (Manchester, R. N., "
+"Hobbs, C. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
+"(%1astro-ph/0412641%2))."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "Danh mục hiện tại chứa thông tin về %1 các ẩn tinh"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
 msgid "Note"
-msgstr ""
+msgstr "Ghi chú"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "định danh ẩn tinh có tiền tố 'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 msgid "Acknowledgment"
-msgstr ""
+msgstr "Lời cảm ơn"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 msgid "Pushchino Radio Astronomy Observatory"
-msgstr ""
+msgstr "Đài quan sát thiên văn vô tuyến Pushchino"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 msgid "Nancay Radioastronomical Observatory"
-msgstr ""
+msgstr "Đài quan sát thiên văn vô tuyến Nancay"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "in France"
-msgstr ""
+msgstr "ở Pháp"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:249
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "Ẩn tinh được cập nhật"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "Cấu hình bổ trợ Ẩn tinh"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Cài đặt cho ẩn tinh"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "Đánh dấu tất cả ẩn tinh không có nhãn"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "Bật hiển thị sự phân loại ẩn tinh"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "Thể hiện nút ẩn tinh ở thanh dưới cùng"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Sử dụng màu sắc riêng biệt cho những ẩn tinh gặp sự cố"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:74
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Exoplanets"
-msgstr ""
+msgstr "Ngoại hành tinh"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:77
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
+"Phần bổ trợ này đánh dấu vị trí của những ngôi sao với ngoại hành tinh.  Dữ "
+"liệu ngoại hành tinh được lấy từ 'Extrasolar Planets Encyclopaedia' ở "
+"exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
-msgstr ""
+msgstr "Hiển thị ngoại hành tinh"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Exoplanets configuration window"
-msgstr ""
+msgstr "Cửa sổ cấu hình ngoại hành tinh"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:851
 msgid "Hot"
-msgstr ""
+msgstr "Nóng"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:853
 msgid "Warm"
-msgstr ""
+msgstr "Ấm"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Cold"
-msgstr ""
+msgstr "Lạnh"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:858
@@ -9309,16 +9319,16 @@ msgstr ""
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:866
 msgid "Jovian"
-msgstr ""
+msgstr "Cỡ Mộc Tinh"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:868
 msgid "Neptunian"
-msgstr ""
+msgstr "Cỡ Thiên Vương Tinh"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "planetary system"
-msgstr ""
+msgstr "Hệ hành tinh"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Metallicity"
@@ -9327,7 +9337,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Mass"
-msgstr ""
+msgstr "Khối lượng"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
@@ -9338,16 +9348,16 @@ msgstr "Mặt trời"
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 #: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Radius"
-msgstr ""
+msgstr "Bán kính"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Nhiệt độ bề mặt: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
-msgstr ""
+msgstr "Ngoại hành tinh"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
@@ -9355,7 +9365,7 @@ msgstr "Chu kỳ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "days"
-msgstr ""
+msgstr "ngày"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
 #: plugins/Exoplanets/src/Exoplanet.cpp:232
@@ -9372,7 +9382,7 @@ msgstr "Đơn vị thiên văn"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Eccentricity"
-msgstr ""
+msgstr "Độ lệch tâm"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Inclination"
@@ -9380,29 +9390,29 @@ msgstr "Độ nghiêng"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Angle Distance"
-msgstr ""
+msgstr "Khoảng cách góc"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Discovered year"
-msgstr ""
+msgstr "Năm khám phá"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Planetary class"
-msgstr ""
+msgstr "Lớp hành tinh"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Nhiệt độ cân bằng"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "ESI"
-msgstr ""
+msgstr "Chỉ số tương đồng với Trái đất"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Phần bổ trợ Ngoại hành tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 #, qt-format
@@ -9410,6 +9420,8 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Phần bổ trợ này đánh dấu vị trí của các ngôi sao với các ngoại hành tinh. Dữ "
+"liệu ngoại hành tinh được lấy từ \"%1The Extrasolar Planets Encyclopaedia%2\""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:140
 #, qt-format
@@ -9418,6 +9430,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Danh sách các ngoại hành tinh tiềm năng có thể sống được và dữ liệu về chúng "
+"được lấy từ \"%1The Habitable Exoplanets Catalog%3\" bởi %2Planetary "
+"Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:142
 #, qt-format
@@ -9426,6 +9441,8 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Danh mục hiện tại chứa thông tin về %1 hệ hành tinh, tổng cộng có %2 ngoại "
+"hành tinh (bao gồm %3 hành tinh tiềm năng có thể sống được)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
@@ -9435,20 +9452,24 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"Nếu bạn muốn đọc thông tin đầy đủ về phần bổ trợ, lịch sủ và định dạng danh "
+"mục của nó bạn có thể %1lấy thông tin ở đây%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Ngoại hành tinh tiềm năng có thể sống được"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Phần bổ trợ này có thể hiển thị các ngoại hành tinh tiềm năng có sự sống "
+"(đánh dấu màu cam) và một vài thông tin về các hành tinh đó."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Lớp hành tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -9456,10 +9477,13 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Phân loại hành tinh từ loại quang phổ ngôi sao chủ (F, G, K, M), vùng có thể "
+"sống (nóng, ấm, lạnh) và kích thước (miniterran, subterran, Terran, "
+"superterran, cỡ Mộc Tinh, cỡ Hải Vương Tinh) (Trái Đất = G-ấm Terran)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Nhiệt độ cân bằng"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid ""
@@ -9471,7 +9495,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Chỉ số tương đồng với Trái Đất (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid ""
@@ -9479,66 +9503,71 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Sự tương đông với Trái đất theo một thang đo từ 0 tới 1, với giá trị 1 là "
+"gần như giống với Trái đất. ESI phụ thuộc vào bán kính, tỷ trọng, vận tốc "
+"thoát và nhiệt độ bề mặt của hành tinh."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Additional info"
-msgstr ""
+msgstr "Thông tin thêm"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Khu vực có thể sống được cạnh ngôi sao"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Nhiệt độ cân bằng hành tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Planetary habitability"
-msgstr ""
+msgstr "Hành tinh có sự sống"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Chỉ số tường đồng với Trái đất"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "Tổng hợp các trang Web chính thống liên quan đến ngoại hành tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Ngoại hành tinh: một phiên bản tường tác của XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "HEK (Truy lùng Ngoại mặt trăng với Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "Ngoại hành tinh trong hệ sao đôi và đa (Richard Schwarz)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Đặt tên ngoại hành tinh (IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
+"Một vài nhà thiên văn học và hoạt động nhóm trong các lớp học về ngoại hành "
+"tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "cập nhật: ngày 16/04/2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "The Exoplanet Data Explorer"
-msgstr ""
+msgstr "Khám phá dữ liệu ngoại hành tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Anglo-Australian Planet Search"
-msgstr ""
+msgstr "The Anglo-Australian Planet Search"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "Chương trình tìm kiếm hành tinh ngoài hệ mặt trời Geneva"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
@@ -9546,19 +9575,19 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "Chương trình Khám phá Ngoại hành tinh của NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Hành tinh Ẩn tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "Tài liệu lưu trữ Ngoại hành tinh NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "Ủy ban IAU 53: Hành tinh ngoài hệ Mặt trời"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "ExoMol"
@@ -9574,75 +9603,76 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Mở danh mục Ngoại hành tinh"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Danh mục Ngoại hành tinh có thể sống được"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Ngoại hành tinh được cập nhật"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Cấu hình ngoại hành tinh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "Cấu hình Phần bổ trợ Ngoại hành tinh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "Cập nhật dữ liệu ngoại hành tinh từ trên mạng"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Đang cài đặt ngoại hành tinh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "Đánh dấu tất cả hệ thống với những ngoại hành tinh không có nhãn"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "Bật hiển thị sự phân loại ngoại hành tinh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "Hiển thị ngoại hành tinh kể từ sự khám phá của chúng"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "Bật dòng thời gian khám phá các ngoại hành tinh"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
 msgstr ""
+"Hiển thị các hệ hành tinh chứa các ngoại hành tinh tiềm năng có sự sống"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Bật hiển thị chỉ những ngoại hành tinh tiềm năng có sự sống"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "Thể hiện nút ngọa hành tinh ở thanh dưới cùng"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Thông tin"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:331
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Trang web"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Phân tích khả năng quan sát"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
@@ -9654,109 +9684,116 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Hiển thị một phân tích về khả năng quan sát của một đối tượng được chọn "
+"(mọc, lặn, thời gian đi qua) cho ngày hiện tại, cũng như khi nó được quan "
+"sát qua các năm. Một đối tượng được giả định là có thể được quan sát nếu nó "
+"nằm trên đường chân trời trong phần nhỏ của đêm. Cũng bao gồm những ngày "
+"cách xa mặt trời nhất và mọc và lặn lúc chập tối và 'cosmical'. (Phần giải "
+"thích được cung cấp trong tab 'Giới thiệu về' của cửa sổ cấu hình của phần "
+"bổ trợ)."
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "Tháng 1"
 
 #: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "Tháng 2"
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "Tháng 3"
 
 #: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "Tháng 4"
 
 #: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "Tháng 5"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "Tháng 6"
 
 #: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "Tháng 7"
 
 #: plugins/Observability/src/Observability.cpp:182
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "Tháng 8"
 
 #: plugins/Observability/src/Observability.cpp:183
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "Tháng 9"
 
 #: plugins/Observability/src/Observability.cpp:184
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "Tháng 10"
 
 #: plugins/Observability/src/Observability.cpp:185
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "Tháng 11"
 
 #: plugins/Observability/src/Observability.cpp:186
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "Tháng 12"
 
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:189
 msgid "h"
-msgstr ""
+msgstr "giờ"
 
 #. TRANSLATORS: Short for "minutes".
 #: plugins/Observability/src/Observability.cpp:191
 msgid "m"
-msgstr ""
+msgstr "phút"
 
 #. TRANSLATORS: Short for "seconds".
 #: plugins/Observability/src/Observability.cpp:193
 msgid "s"
-msgstr ""
+msgstr "giây"
 
 #: plugins/Observability/src/Observability.cpp:194
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "Lặn lúc %1 (trong %2)"
 
 #: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "Đã mọc lúc %1 (cách đây %2)"
 
 #: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "Đã lặn lúc %1 (cách đây %2)"
 
 #: plugins/Observability/src/Observability.cpp:197
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "mọc lúc %1 (trong %2)"
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "Circumpolar."
-msgstr ""
+msgstr "Vùng cực"
 
 #: plugins/Observability/src/Observability.cpp:199
 msgid "No rise."
-msgstr ""
+msgstr "Không mọc."
 
 #: plugins/Observability/src/Observability.cpp:200
 #, qt-format
@@ -9770,7 +9807,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:202
 msgid "Source is not observable."
-msgstr ""
+msgstr "Nguồn không thể nhận thấy được"
 
 #: plugins/Observability/src/Observability.cpp:203
 msgid "No Acronychal nor Cosmical rise/set."
@@ -9779,18 +9816,18 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Ly giác lớn nhất: %1 (ở %2 độ)"
 
 #: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Cách xa mặt trời nhất: %1 (ở %2 độ)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "Mọc/lặn lúc chập tối: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:209
 #, qt-format
@@ -9817,49 +9854,49 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:215
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "Quan sát được trong cả năm."
 
 #: plugins/Observability/src/Observability.cpp:216
 msgid "Not observable at dark night."
-msgstr ""
+msgstr "Không thể quan sát được vào đêm tối"
 
 #: plugins/Observability/src/Observability.cpp:217
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Những đêm trên đường chân trời: %1"
 
 #: plugins/Observability/src/Observability.cpp:218
 msgid "TODAY:"
-msgstr ""
+msgstr "HÔM NAY:"
 
 #: plugins/Observability/src/Observability.cpp:219
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "NĂM NAY:"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Trăng tròn lần trước: %1 %2 lúc %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "Trăng tròn kế tiếp: %1 %2 lúc %3:%4. "
 
 #: plugins/Observability/src/Observability.cpp:237
 #: plugins/Observability/src/Observability.cpp:238
 #: plugins/Observability/src/Observability.cpp:242
 msgid "Observability"
-msgstr ""
+msgstr "Khả năng quan sát"
 
 #: plugins/Observability/src/Observability.cpp:243
 msgid "Observability configuration window"
-msgstr ""
+msgstr "Cửa sổ cấu hình Khả năng quan sát"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:132
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "Phần bổ trợ Khả năng quan sát"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid ""
@@ -9875,11 +9912,11 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "Giải thích một vài thông số"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid "Sun altitude at twilight:"
-msgstr ""
+msgstr "Độ cao mặt trời lúc hoàng hôn"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid ""
@@ -9888,10 +9925,14 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"Một vài vật thể bầu trời sẽ được coi là quan sát được khi mặt trời ở dưới độ "
+"cao này. Độ cao tại lúc hoàng hôn thiên văn thường là giữa -12 và -18 độ. "
+"Thông số này chỉ được dùng để ước lượng thời khắc quan sát được (xem bên "
+"dưới)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Độ cao từ đường chân trời:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
@@ -9901,7 +9942,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Today ephemeris:"
-msgstr ""
+msgstr "Lịch thiên văn hôm nay:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid ""
@@ -9910,6 +9951,10 @@ msgid ""
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
 msgstr ""
+"Tự giải thích. Chương trình sẽ hiển thị thời gian mọc, lặn và sự đi qua. "
+"Thời gian chính xác cho những sự kiện thiên văn này được đưa ra theo hai "
+"cách: nhịp thời gian (dựa vào giờ hiện tại) và giờ đồng hồ (theo giờ địa "
+"phương)."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
@@ -9935,10 +9980,26 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"Các ngày mọc/lặn lúc mặt trời mọc của một đối tượng được ước tính tức là "
+"những ngày khi đối tượng mọc (hoặc lặn) cùng lúc với mặt trời mọc. Thời gian "
+"chính xác của những sự kiện này phụ thuộc vào vị trí của người quan sát. Và "
+"ngược lại, sự mọc (hay lặn) lúc mặt trời lặn xảy ra khi ngôi sao mọc/lặn "
+"cùng mặt trời lặn(tức là ở vị trí đối lập với mặt trời). Một mặt, nó thì rõ "
+"ràng là rất khó quan sát đươc (hoặc không thể quan sát được) trong những "
+"ngày giữa sự lặn lúc mặt trời mọc và sự mọc lúc mặt trời mọc. Mặt khác, xung "
+"quanh những ngày mọc và lặn lúc mặt trời lặn là khi độ cao của các đối tượng "
+"trên bầu trời thì cao khi mặt trời thì xuống dưới đường chân trời (vì thế "
+"đối tượng có thể được quan sát tốt). Ngày mọc gần mặt trời là ngày đầu tiên "
+"của năm khi ngôi sao trở nên nhìn thấy được. Nó xảy ra khi ngôi sao thì ở "
+"gần đường chân trời phía động khoảng lúc trước khi kết thúc đêm thiên văn "
+"(tức là lúc hoàng hôn thiên văn). Trong những đêm sau, ngôi sao sẽ được nhìn "
+"thầy trong suốt chu kỳ dài của thời gian, mãi đến khi nó đạt tới sự lặn gần "
+"mặt trời (tức là đêm cuối cùng của năm khi ngôi sao vẫn nhìn thấy được). Vào "
+"lúc lặn gần mặt trời, ngôi sao lặn khoảng lúc sau khi bắt đầu đêm thiên văn."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
-msgstr ""
+msgstr "Ly giác mặt trời lớn nhất:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid ""
@@ -9951,10 +10012,17 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
+"Xảy ra khi ly giác giữa mặt trời và đối tượng trên bầu trời là tối đa. Trong "
+"hầu hết các trường hợp, điều này nghĩa là Xích kinh của mặt trời và đối "
+"tượng khác nhau 180 độ, vì thế mặt trời thì đối lập với đối tượng. Khi một "
+"đối tượng ở vị trí ly giác lớn nhất từ mặt trời (không thành vấn đề nếu nó "
+"là một hành tinh hay ngôi sao), nó sẽ lên thiên đỉnh vào lúc nửa đêm, và vào "
+"khu vực có lẽ tối nhất của bầu trời ở độ lệch đó. Do đó, đây là đêm tốt nhất "
+"để quan sát một đối tượng cụ thể."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "Những đêm với nguồn ở trên đường chân trời:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid ""
@@ -9978,100 +10046,104 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Full Moon:"
-msgstr ""
+msgstr "Trăng tròn:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr ""
+"Khi Mặt trăng được chọn, chương trình có thể tính toán chính xác những ngày "
+"gần nhất của sự đổi lập của Mặt trăng với Mặt trời"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:200
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Độ cao mặt trời lúc hoàng hôn: %1 độ."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Độ cao chân trời: %1 độ."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
-msgstr ""
+msgstr "Cấu hình khả năng quan sát"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "Cấu hình Phần bổ trợ Khả năng quan sát"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
-msgstr ""
+msgstr "Màu và cỡ chữ"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Red"
-msgstr ""
+msgstr "Đỏ"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Green"
-msgstr ""
+msgstr "Lục"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Blue"
-msgstr ""
+msgstr "Lam"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font Size"
-msgstr ""
+msgstr "Cỡ chữ"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Observing conditions"
-msgstr ""
+msgstr "Điều kiện quan sát"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "Hiển thị tùy chọn"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr ""
+msgstr "Lịch thiên văn hôm nay (giờ mọc, lặn và đi qua)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "Những ngày mọc/lặn lúc mặt trời lặn/mọc/gần"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
-msgstr ""
+msgstr "Ngày ly giác lớn nhất đối với mặt trời"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "Những đêm với nguồn ở trên đường chân trời"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:356
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "Những ngày trăng tròn trước và sau"
 
 #: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
 #: plugins/FOV/src/ui_fovWindow.h:388 plugins/FOV/src/ui_fovWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:409
 msgid "Field of View"
-msgstr ""
+msgstr "Trường nhìn"
 
 #: plugins/FOV/src/FOV.cpp:43
 msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"Phần bổ trợ này cho phép phóng to từng bước thông qua phím tắt bàn phím "
+"giống như trong chương trình thiên văn <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "Cài đặt trường nhìn đối với %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "Phần bổ trợ Trường nhìn"
 
 #: plugins/FOV/src/ui_fovWindow.h:392
 msgid ""
@@ -10081,10 +10153,15 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Theo mặc định Stellarium sử dụng phóng to mịn thông qua con lăn chuột và "
+"phím tắt bàn phím. Một vài người dùng muốn phóng to từng bước chỉnh sửa giá "
+"trị trường nhìn giống như trong chương trình Cartes du Ciel, và phần bổ trợ "
+"này cũng cung cấp tính năng này. Bạn có thể chỉnh sửa và sử dụng bàn phím "
+"cho việc cài đặt nhanh trường nhìn. Tất cả giá trị chia theo độ."
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Sao định vị"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -10095,10 +10172,15 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"Phần bổ trợ này đánh dấu 58 ngôi sao đinh vị - Polaris và 57 \"ngôi sao được "
+"chọn\" được liệt kê trong <em>The Nautical Almanac</em>tham gia xuất bản bởi "
+"Cơ quan Nautical Almanac của Her Majesty và Đài quan trắc Hải quân Mỹ kể từ "
+"năm 1958; do đó, những ngôi sao này cũng được dùng trong việc hỗ trợ định "
+"hướng như 2102D Star Finder and Identifier."
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Đánh dấu sao đinh vị"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
@@ -10121,13 +10203,13 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "phút"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:262
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "giây"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
@@ -10148,11 +10230,11 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "Thể hiện nút phần bổ trợ ở thanh dưới cùng"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "dùng phút và giây"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 msgid "Change sign of equation"
@@ -10161,7 +10243,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:280
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
-msgstr ""
+msgstr "Cỡ chữ:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:98
 msgid "The current catalog of Meteor Showers is invalid!"
@@ -10170,7 +10252,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:569
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Mưa sao băng"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
@@ -10218,11 +10300,11 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:132
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
 msgid "Generic"
-msgstr ""
+msgstr "Chung"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:508
 msgid "generic data"
-msgstr ""
+msgstr "Dữ liệu chung"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:512
 msgid "confirmed data"
@@ -10234,16 +10316,16 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:534
 msgid "meteor shower"
-msgstr ""
+msgstr "mưa sao băng"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:543
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Độ lệch tâm điểm (trên ngày)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:550
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Vận tốc sao băng so mặt đất: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:555
 #, qt-format
@@ -10253,20 +10335,20 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:560
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "Vật thể mẹ: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Active"
-msgstr ""
+msgstr "Hiệu lực"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Activity"
-msgstr ""
+msgstr "Hoạt động"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:582
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Cực đại: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:584
 msgid "Solar longitude"
@@ -10274,417 +10356,417 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:594
 msgid "variable"
-msgstr ""
+msgstr "Biến thiên"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:33
 msgid "Quadrantids"
-msgstr ""
+msgstr "Quadrantids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:35
 msgid "Lyrids"
-msgstr ""
+msgstr "Lyrids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centaurids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr ""
+msgstr "Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr ""
+msgstr "June Bootids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austrinids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:47
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Southern δ-Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:49
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricornids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:51
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:53
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "September ε-Perseids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:55
 msgid "Draconids"
-msgstr ""
+msgstr "Draconids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:57
 msgid "Leonids"
-msgstr ""
+msgstr "Leonids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:59
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:61
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppid-Velids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:63
 msgid "Ursids"
-msgstr ""
+msgstr "Ursids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:65
 msgid "Perseids"
-msgstr ""
+msgstr "Perseids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leonids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:69
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:71
 msgid "June Lyrids"
-msgstr ""
+msgstr "June Lyrids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:73
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygnids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:75
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyrids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:77
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:79
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:81
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Southern Taurids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:83
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Northern Taurids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:85
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:87
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Monocerotids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:89
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydrids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:91
 msgid "Geminids"
-msgstr ""
+msgstr "Geminids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:93
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minorids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:95
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "December Leonis Minorids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:97
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Comae Berenicids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:99
 msgid "Orionids"
-msgstr ""
+msgstr "Orionids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:101
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromedids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:103
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lyrids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:105
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:109
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:111
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:113
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centaurids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:115
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:117
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "Southern ω-Scorpiids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:119
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "Northern ω-Scorpiids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:121
 msgid "Arietids"
-msgstr ""
+msgstr "Arietids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:123
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:125
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancrids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:127
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:129
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:131
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:133
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Craterids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:135
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:137
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:139
 msgid "May Librids"
-msgstr ""
+msgstr "May Librids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:141
 msgid "June Scutids"
-msgstr ""
+msgstr "June Scutids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:143
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:145
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "Southern ι-Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:147
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "Northern ι-Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Autumn Arietids"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:153
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orionids"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Sao chổi 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Sao chổi 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Sao chổi 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:163
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Sao chổi 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Sao chổi 109/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:167
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Sao chổi Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:169
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Sao chổi 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:171
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Sao chổi 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:173
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Sao chổi 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:175
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Sao chổi 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:177
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Sao chổi 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Sao chổi 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:181
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "Sao chổi C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:183
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Sao chổi C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:185
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Sao chổi Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:187
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Tiểu hành tinh 2003 EH1 và sao chổi C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:189
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Tiểu hành tinh (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:191
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Tiểu hành tinh 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:193
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Sao chổi 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Tiểu hành tinh 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:197
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "Tiểu hành tinh (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
@@ -10704,7 +10786,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Phần bổ trợ Mưa sao băng"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
 msgid ""
@@ -10733,11 +10815,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
-msgstr ""
+msgstr "Các điều khoản"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:251
 msgid "Meteor shower"
-msgstr ""
+msgstr "Mưa sao băng"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:253
 msgid ""
@@ -10750,11 +10832,19 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Một cơn mưa sao băng là một sự kiện thiên văn trong đó số lượng sao băng "
+"được quan sát phát ra hoặc bắt đầu từ một điểm trong bầu trời đêm. Những vệt "
+"sao băng này được gây ra bởi những dòng mảnh vỡ vũ trụ được gọi là "
+"meteoroids bay vào khí quyển trái đất ở vận tốc cực cao trên quỹ đạo song "
+"song. Hầu hết sao băng đều nhỏ hơn một hạt cát, vì thế hầu hết chúng tan "
+"biến và không bao giờ đánh trúng bề mặt trái đất. Những cơn mưa sao băng dữ "
+"dội hoặc bất thường được biết như là sự bùng phát sao băng và bão sao băng, "
+"có thể tạo ra hơn 1000 sao băng một giờ."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:261
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
-msgstr ""
+msgstr "Tâm điểm"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 msgid ""
@@ -10763,6 +10853,10 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Tâm điểm hoặc tâm điểm biểu kiến của một cơn mưa sao băng là một điểm trên "
+"bầu trời mà từ đó (đối với người quan sát bầu trời) các vệt sao băng xuất "
+"hiện và tỏa ra. Ví dụ, mưa sao băng Perseids thì các ngôi sao băng xuất hiện "
+"đến từ một điểm nằm trong chòm sao Perseus."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:269
 msgid ""
@@ -10771,6 +10865,11 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Một người quan sát có thể nhìn thấy một ngôi sao băng như ở bất cứ nơi nào "
+"trên bầu trời nhưng hướng chuyển động, khi tìm trở lại, sẽ chỉ đến tâm điểm. "
+"Một sao băng mà không chỉ trở lại tâm điểm được biết của một cơn mưa sao "
+"băng nhất định thì được gọi là rời rạc và không được coi là một phần của mưa "
+"sao băng."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
 msgid ""
@@ -10778,10 +10877,13 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Nhiều cơn mưa sao băng có tâm điểm thay đổi vị trí trong suốt khoản thời "
+"gian khi chúng xuất hiện. Ví dụ, tâm điểm của mưa sao băng Delta Aurigids "
+"lệch hơn một độ một đêm."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Tần suất theo giờ"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:280
 msgid ""
@@ -10806,7 +10908,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:293
 msgid "Notes"
-msgstr ""
+msgstr "Ghi chú"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:294
 msgid ""
@@ -10816,23 +10918,23 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Info"
-msgstr ""
+msgstr "Thông tin"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:296
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "Thông tin về mưa sao băng bạn có thê lất ở đây:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:299
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Mưa sao băng%2 - bài viết trên Wikipedia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:301
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1Tổ chức Sao băng Quốc tế%2"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:304
 #, qt-format
@@ -10843,28 +10945,28 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:105
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Ngày bắt đầu lớn hơn ngày kết thúc"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:109
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Khoảng thời gian phải ít hơn một năm!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
 msgid "ZHR"
-msgstr ""
+msgstr "Tần suất"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
-msgstr ""
+msgstr "Kiểu dữ liệu"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:186
 msgid "Peak"
-msgstr ""
+msgstr "Đỉnh"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Cấu hình mưa sao băng"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
@@ -10896,11 +10998,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Chỉ hiển thị nhãn tâm điểm"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:437
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Cỡ chữ nhãn (pixel)"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
@@ -10908,11 +11010,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Tâm điểm hoạt động - Dữ liệu chung"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Tâm điểm không hoạt động"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Inactive"
@@ -10949,7 +11051,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
-msgstr ""
+msgstr "Tìm kiếm"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
@@ -10958,7 +11060,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
-msgstr ""
+msgstr "Kết quả"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
@@ -10966,25 +11068,25 @@ msgstr ""
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Tọa độ con trỏ"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:59
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Phần bổ trợ này hiển thị tọa độ của con trỏ chuột."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Hiển thị tọa độ của con trỏ chuột"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:145
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "Xích kinh/Độ lệch (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:161
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "Xích kinh/Độ lệch"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:184
 msgctxt "abbreviated in the plugin"
@@ -11017,27 +11119,27 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
-msgstr ""
+msgstr "Giữa phía trên của màn hình"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "Trung tâm của đỉnh nửa bên phải của màn hình"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "Góc phải dưới của màn hình"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Vị trí tùy chỉnh"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Xích kinh/Độ lệch (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Xích kinh/Độ lệch"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
@@ -11053,19 +11155,19 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Tọa độ vị trí tùy chỉnh"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Thể hiện tọa độ của con trỏ chuột trên màn hình."
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Bật hiển thị tọa độ lúc khởi động"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "Thể hiện nút phần bổ trợ ở thanh dưới cùng"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
@@ -11073,7 +11175,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
-msgstr ""
+msgstr "Tọa độ:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
@@ -12264,3 +12366,78 @@ msgstr ""
 #~ "thể tải danh sách đối tượng từ trang web của Minor Planet Center và thực "
 #~ "hiện tìm kiếm trong dữ liệu trực tuyến của chính nó. Vẫn trong quá trình làm "
 #~ "việc."
+
+#~ msgid "Show meteor showers"
+#~ msgstr "Hiển thị mưa sao băng"
+
+#~ msgid ""
+#~ "This plugin displays meteor showers and a marker for each active and "
+#~ "inactive radiant, showing real information about its activity."
+#~ msgstr ""
+#~ "Phần bổ trợ này hiển thị các trận mưa sao băng và đánh dấu mỗi tâm điểm hoạt "
+#~ "động và không hoạt động, thể hiện thông tin thực vê hoạt động của chúng."
+
+#~ msgid "Meteor Shower configuration window"
+#~ msgstr "Cửa sổ cấu hình Mưa sao băng"
+
+#~ msgid "Radiant labels"
+#~ msgstr "Nhãn tâm điểm"
+
+#~ msgid ""
+#~ "The old showers.json file is no longer compatible - using default file"
+#~ msgstr ""
+#~ "Tập tin showers.json cũ không còn tương thích - sử dụng tập tin mặc định"
+
+#~ msgid "real data"
+#~ msgstr "Dữ liệu thực"
+
+#~ msgid "Real"
+#~ msgstr "Thực"
+
+#~ msgid "Variable"
+#~ msgstr "Biến thiên"
+
+#~ msgid "Meteor showers is updated"
+#~ msgstr "Mưa sao băng được cập nhật"
+
+#~ msgid "Change Color"
+#~ msgstr "Thay đổi màu sắc"
+
+#~ msgid "Color of radiants markers"
+#~ msgstr "Màu sắc đánh dấu tâm điểm"
+
+#~ msgid "Show meteor showers button on toolbar"
+#~ msgstr "Hiển thị nút mưa sao băng ở thanh dưới cùng"
+
+#~ msgid "Enable display of meteor showers at startup"
+#~ msgstr "Bật hiển thị mưa sao băng lúc khởi động"
+
+#~ msgid "Meteor Showers Plug-in Configuration"
+#~ msgstr "Cấu hình phần bổ trợ Mưa sao băng"
+
+#~ msgid "Meteor showers"
+#~ msgstr "Mưa sao băng"
+
+#~ msgid "Update data from Internet"
+#~ msgstr "Cập nhật dữ liệu từ trên mạng"
+
+#~ msgid "Show labels of radiants"
+#~ msgstr "Hiển thị nhãn tâm điểm"
+
+#~ msgid "Active Radiant - Real Data"
+#~ msgstr "Tâm điểm hoạt động - Dữ liệu thực"
+
+#~ msgid "Radiants for meteor showers"
+#~ msgstr "Tâm điểm mưa sao băng"
+
+#~ msgid "dd/MMM/yyyy"
+#~ msgstr "ngày/tháng/năm"
+
+#~ msgid "Radiants"
+#~ msgstr "Tâm điểm"
+
+#~ msgid "Search Events"
+#~ msgstr "Tìm kiếm sự kiện"
+
+#~ msgid "Light Pollution Luminance: "
+#~ msgstr "Độ sáng ô nhiễm ánh sáng: "
