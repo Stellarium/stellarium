@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-09-27 11:18+0000\n"
+"PO-Revision-Date: 2015-10-15 16:12+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-13 05:14+0000\n"
+"X-Launchpad-Export-Date: 2015-10-16 05:12+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -2734,6 +2734,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Versió OpenGL insuficient. Si us plau, actualitzi els controladors, el "
+"maquinari de gràfics, o utilitza la opció --angle-mode (o --mesa-mode)."
 
 #: src/StelMainView.cpp:707
 msgid ""
@@ -3344,6 +3346,7 @@ msgstr "Events de la Terra des de Mart"
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
+"Elongacions i oposicions des de Mart més grans de la Terra i altres planetes"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:280
@@ -3360,7 +3363,7 @@ msgstr "Supernova de Tycho"
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
 msgid "Earth and other Planets from Ceres"
-msgstr ""
+msgstr "Terra i altres Planetes des de Ceres"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:290
@@ -3465,6 +3468,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 248 events in all!"
 msgstr ""
+"Salvapantalles de diversos esdeveniments en el Sistema Solar. 248 "
+"esdeveniments en total!"
 
 #: src/translations.h:306
 msgid "A tour of the western constellations."
@@ -3506,6 +3511,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Elongacions i oposicions des de Mart més grans de la Terra i altres planetes "
+"2000-3000"
 
 #: src/translations.h:313
 msgid ""
@@ -3524,6 +3531,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
+"Elongacions i oposicions des de Ceres més grans de la Terra i altres "
+"planetes 2000-3000"
 
 #: src/translations.h:318
 msgid "Andorra"
@@ -10479,6 +10488,19 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Aquest connector us permet simular les pluges de meteors periòdiques i "
+"permet mostrar un marcador per a cada radiant actiu i inactiu.</p><p>Amb un "
+"sol clic al marcador del radiant, es pot veure tots els detalls sobre la "
+"seva posició i activitat. La majoria de les dades utilitzades en aquest "
+"connector provenen del  catàleg oficial <a href=\"http://imo.net\"> "
+"Organització Internacional de Meteors</a></p><p>Té tres tipus de "
+"marcadors:<ul><li><b>confirmat:</ b>el radiant està actiu i les seves dades "
+"estan confirmades. Per tant, aquesta és una històric (en realitat va ocórrer "
+"en el passat) o predicció de pluja de meteors</li><li><b>Genèrica:</b>el "
+"radiant està actiu, però les seves dades no estan confirmades. Això vol dir "
+"que això pot passar a la vida real, però que no tenim dades adequades sobre "
+"la seva activitat durant l'any en curs</li><li><b>Inactiva:</b>el radiant "
+"està inactiu per al cel i data actual.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -11273,7 +11295,7 @@ msgstr "Cercar"
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "dd/MM/yyyy"
-msgstr ""
+msgstr "dd/MM/aaaa"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
