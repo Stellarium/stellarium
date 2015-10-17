@@ -7,22 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-05 07:18+0000\n"
+"POT-Creation-Date: 2015-10-12 18:03+0600\n"
+"PO-Revision-Date: 2015-10-13 07:48+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-06 05:11+0000\n"
-"X-Generator: Launchpad (build 17796)\n"
+"X-Launchpad-Export-Date: 2015-10-14 05:11+0000\n"
+"X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:556
 msgid "Display Options"
 msgstr "اختيارات العرض"
 
@@ -163,7 +163,7 @@ msgstr "دوائر ترنح محور الأرض"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1587
 msgid "Atmosphere"
-msgstr "الغلاف الجوي"
+msgstr ". الغلاف الجوي ."
 
 #: src/core/modules/LandscapeMgr.cpp:416
 msgid "Fog"
@@ -203,11 +203,11 @@ msgstr ", %1 متر"
 
 #: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:361
 msgid "Celestial body:"
-msgstr ":الجرم السماوي"
+msgstr "الجرم السماوي"
 
 #: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:216
 #: src/core/modules/MinorPlanet.cpp:211 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:187 src/core/modules/StarWrapper.cpp:190
+#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -229,7 +229,7 @@ msgstr "‎الحجب‎:‎<b>%1</b>‎"
 
 #: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:222
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:197
+#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
@@ -239,7 +239,7 @@ msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:185 src/core/modules/Nebula.cpp:190
 #: src/core/modules/Planet.cpp:225 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:200
+#: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
@@ -251,7 +251,7 @@ msgid " (Photometric system: B)"
 msgstr " ‎(النظام الفوتومتري:‎ B)‎"
 
 #: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:119
+#: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "‎المؤشر اللوني‎(B-V): <b>%1</b>"
@@ -282,7 +282,7 @@ msgid "Orientation angle: %1%2"
 msgstr "‎زاوية الاتجاه‎: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -309,7 +309,7 @@ msgstr "‎المسافة‎: %1 %2‎"
 msgid "Redshift: %1"
 msgstr "‎الانزياح الأحمر‎: %1‎"
 
-#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:247
+#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "‎اختلاف المنظر:‎ %1\""
@@ -673,7 +673,7 @@ msgstr "‎سديم في مرحلة ماقبل الشكل الكوكبي‎"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:180 src/translations.h:42
+#: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "نجم"
 
@@ -691,7 +691,7 @@ msgstr "أجرام الفضاء السحيق"
 
 #: src/core/modules/Planet.cpp:228 src/core/modules/MinorPlanet.cpp:230
 #: src/core/modules/MinorPlanet.cpp:234 src/core/modules/Comet.cpp:194
-#: src/core/modules/StarWrapper.cpp:204 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "‎القدر المطلق:‎ %1"
@@ -846,76 +846,76 @@ msgstr "مدارات الكواكب"
 msgid "Planet trails"
 msgstr "مسار  الكوكب"
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
 msgstr "نجم متغيِّر ثائر"
 
-#: src/core/modules/StarWrapper.cpp:163
+#: src/core/modules/StarWrapper.cpp:157
 msgid "pulsating variable star"
 msgstr "نجم متغيِّر نابض"
 
-#: src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:159
 msgid "rotating variable star"
 msgstr "نجم متغيِّر دوار"
 
-#: src/core/modules/StarWrapper.cpp:167
+#: src/core/modules/StarWrapper.cpp:161
 msgid "cataclysmic variable star"
 msgstr "نجم متغيِّر مدمِّر"
 
-#: src/core/modules/StarWrapper.cpp:170
+#: src/core/modules/StarWrapper.cpp:164
 msgid "eclipsing binary system"
 msgstr "نظام ثنائي كسوفي"
 
-#: src/core/modules/StarWrapper.cpp:174
+#: src/core/modules/StarWrapper.cpp:168
 msgid "variable star"
 msgstr "نجم متغيِّر"
 
-#: src/core/modules/StarWrapper.cpp:178
+#: src/core/modules/StarWrapper.cpp:172
 msgid "double star"
 msgstr "نجم ثنائي"
 
-#: src/core/modules/StarWrapper.cpp:185
+#: src/core/modules/StarWrapper.cpp:179
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "‎النوع:‎ <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:226
+#: src/core/modules/StarWrapper.cpp:220
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "‎نطاق قدر اللمعان:‎ <b>%1</b>%2<b>%3</b> (‎النظام الفوتومتري:‎%4)"
 
-#: src/core/modules/StarWrapper.cpp:228
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "‎نطاق قدر اللمعان:‎ <b>%1</b>%2<b>%3/%4</b> (‎النظام الفوتومتري:‎%5)"
 
-#: src/core/modules/StarWrapper.cpp:244
+#: src/core/modules/StarWrapper.cpp:238
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "‎النوع الطيفي:‎ %1"
 
-#: src/core/modules/StarWrapper.cpp:250
+#: src/core/modules/StarWrapper.cpp:244
 #, qt-format
 msgid "Period: %1 days"
 msgstr "‎الدورة:‎%1‎ يوماً"
 
-#: src/core/modules/StarWrapper.cpp:259
+#: src/core/modules/StarWrapper.cpp:253
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "‎وقت اللمعان الأدنى التالي:‎%1‎ UTC"
 
-#: src/core/modules/StarWrapper.cpp:261
+#: src/core/modules/StarWrapper.cpp:255
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "‎وقت اللمعان الأعلى التالي:‎%1‎ UTC"
 
-#: src/core/modules/StarWrapper.cpp:268
+#: src/core/modules/StarWrapper.cpp:262
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "‎مدة الكسوف:‎%1%"
 
-#: src/core/modules/StarWrapper.cpp:270
+#: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "‎وقت الشروق:‎%1%"
@@ -1659,7 +1659,7 @@ msgid "Deep-sky objects background images"
 msgstr "الصور الخلفية لأجرام الفضاء السحيق"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Miscellaneous"
 msgstr "منوعات"
 
@@ -2684,7 +2684,7 @@ msgstr "اقتران"
 msgid "Opposition"
 msgstr "تقابل"
 
-#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
+#: src/StelMainView.cpp:461 src/StelMainView.cpp:476
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2694,30 +2694,30 @@ msgstr ""
 "OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 
-#: src/StelMainView.cpp:471
+#: src/StelMainView.cpp:490
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr ""
 "لم يتمكن البرنامج من الحصول على الموارد الضرورية في مكتبة الرسومات المفتوحة. "
 "Cannot acquire necessary OpenGL resources."
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Save screenshot"
 msgstr "احفظ لقطة الشاشة"
 
-#: src/StelMainView.cpp:537
+#: src/StelMainView.cpp:556
 msgid "Full-screen mode"
 msgstr "نَسَق الشاشة الكاملة"
 
-#: src/StelMainView.cpp:678
+#: src/StelMainView.cpp:704
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-"use MESA (or ANGLE) version."
+"use --angle-mode (or --mesa-mode) option."
 msgstr ""
-"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-"use MESA (or ANGLE) version.  نسخة أوبن جي إل ليست حديثة، الرجاء تحديث "
-"الدرايفر لكرت الشاشة أو استخدام نسخ ستيللاريوم التي تعتمد على ميسا أو آنجل"
+"إصدار  OpenGL لديك قديم. الرجاء تحديث بطاقة الرسومات والبرنامج السواق لها "
+"(drivers, graphics hardware) أو استخدم هذه الخيارات  --angle-mode أو --mesa-"
+"mode فضلا"
 
-#: src/StelMainView.cpp:681
+#: src/StelMainView.cpp:707
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
@@ -2725,7 +2725,7 @@ msgstr ""
 "شاشة حديث. Insufficient OpenGL version. Please update drivers, or graphics "
 "hardware."
 
-#: src/StelMainView.cpp:723
+#: src/StelMainView.cpp:749
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2734,7 +2734,7 @@ msgstr ""
 "التفاصيل في السجل. . DirectX/OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:800
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2743,7 +2743,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL/Mesa لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:829
+#: src/StelMainView.cpp:855
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2752,7 +2752,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:866
+#: src/StelMainView.cpp:896
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2761,7 +2761,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:1007
 #, qt-format
 msgid "Stellarium %1"
 msgstr "ستيللاريوم %1"
@@ -2890,7 +2890,7 @@ msgstr "المجرات الراديوية"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105 src/ui_viewDialog.h:1683
 msgid "Interacting galaxies"
-msgstr "المجرات المتفاعلة"
+msgstr "المجرات المتفاعلة ."
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
@@ -3430,8 +3430,8 @@ msgstr ""
 
 #: src/translations.h:305
 msgid ""
-"Screensaver of various happenings in the Solar System. 232 events in all!"
-msgstr "حافظ للشاشة يعرض 232 حدثاً في النظام الشمسي"
+"Screensaver of various happenings in the Solar System. 248 events in all!"
+msgstr "حافظ شاشة لأحداث مختلفة في النظام الشمسي، 248 مجموع الأحداث"
 
 #: src/translations.h:306
 msgid "A tour of the western constellations."
@@ -4988,7 +4988,7 @@ msgstr "<P DIR=RTL>إعدادات لزخات الشهب المتفرقة</P>"
 
 #: src/ui_viewDialog.h:1629
 msgid "Shooting Stars"
-msgstr "زخات الشهب"
+msgstr ". زخات الشهب ."
 
 #: src/ui_viewDialog.h:1631
 msgid "Hourly zenith rate"
@@ -4997,7 +4997,7 @@ msgstr "معدل عدد الشهب في الساعة عندما تكون نقط�
 #: src/ui_viewDialog.h:1633
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr "معدل عدد الشهب في الساعة للأوج"
+msgstr ". معدل عدد الشهب في الساعة للأوج ."
 
 #: src/ui_viewDialog.h:1635
 msgid "Display objects from catalogs"
@@ -5021,7 +5021,7 @@ msgstr "دليل بارنارد ل 349 جرم معتم في السماء (بار
 
 #: src/ui_viewDialog.h:1655
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
-msgstr "دليل حقول HII  (شاربلس 1959)"
+msgstr "<P DIR=RTL>دليل حقول HII  (شاربلس 1959)"
 
 #: src/ui_viewDialog.h:1658
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
@@ -5031,7 +5031,8 @@ msgstr "دليل السدم العاكسة (فان دن بيرج، 1966)"
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
-"دليل لحقول الهيدروجين الفا الإشعاعية في درب التبانة الجنوبي (رودجرز +، 1960)"
+"<P DIR=RTL>دليل لحقول الهيدروجين الفا الإشعاعية في درب التبانة الجنوبي "
+"(رودجرز +، 1960)"
 
 #: src/ui_viewDialog.h:1664
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
@@ -5063,11 +5064,11 @@ msgstr "دليل السدم  المجرية الساطعة المنتشرة (س�
 
 #: src/ui_viewDialog.h:1681
 msgid "Filter by type"
-msgstr "إعرض حسب النوع"
+msgstr ". إعرض حسب النوع ."
 
 #: src/ui_viewDialog.h:1684
 msgid "Hydrogen regions"
-msgstr "حقول الهيدروجين"
+msgstr "حقول الهيدروجين ."
 
 #: src/ui_viewDialog.h:1685
 msgid "Other"
@@ -5091,7 +5092,7 @@ msgstr "السدم الساطعة"
 
 #: src/ui_viewDialog.h:1694
 msgid "Hints"
-msgstr "العلامات"
+msgstr "العلامات ."
 
 #: src/ui_viewDialog.h:1696
 msgid ""
@@ -5321,11 +5322,11 @@ msgstr "أضف/احذف مناظر الرصد الطبيعية"
 
 #: src/ui_viewDialog.h:1804
 msgid "Use this sky culture as default"
-msgstr "اجعل التراث الفلكي الحالي هو الافتراضي"
+msgstr "اجعل التراث الفلكي الحالي هو الافتراضي    ."
 
 #: src/ui_viewDialog.h:1805
 msgid "Show names"
-msgstr "اعرض الأسماء"
+msgstr ". اعرض الأسماء ."
 
 #: src/ui_viewDialog.h:1807
 msgid "Select if you want names abbreviated, original or translated"
@@ -5989,7 +5990,7 @@ msgstr "الفاصل الزمني"
 #: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
-msgstr "من"
+msgstr "من ."
 
 #: src/ui_astroCalcDialog.h:365 src/ui_astroCalcDialog.h:367
 msgid "yyyy.MM.dd hh:mm"
@@ -5998,7 +5999,7 @@ msgstr "س س س س . ش ش . ي ي   ساعة ساعة:د د"
 #: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:374
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
-msgstr "إلى"
+msgstr "إلى ."
 
 #: src/ui_astroCalcDialog.h:368
 msgid "Calculate ephemeris"
@@ -6638,13 +6639,13 @@ msgstr "معامل التكبير"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:512
 #: plugins/Oculars/src/ui_ocularDialog.h:1096
 msgid "aFOV:"
-msgstr "حقل الرؤية الظاهري"
+msgstr "حقل الرؤية الظاهري ."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:513
 #: plugins/Oculars/src/ui_ocularDialog.h:1097
 #: plugins/Oculars/src/ui_ocularDialog.h:1124
 msgid "Focal length:"
-msgstr "الطول البؤري"
+msgstr "الطول البؤري ."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:522
 msgid "Oculars Plug-in"
@@ -6847,7 +6848,7 @@ msgstr "العدسات"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Multiplier:"
-msgstr "مضاعف التكبير"
+msgstr "مضاعف التكبير ."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1107
 msgid ""
@@ -6880,11 +6881,11 @@ msgstr "طول الشريحة (مم)"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1117
 msgid "Pixel width (micron):"
-msgstr "عرض البكسل (ميكرون)"
+msgstr "عرض البكسل (ميكرون)  ."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1118
 msgid "Pixel height (micron):"
-msgstr "طول البكسل (ميكرون)"
+msgstr "طول البكسل (ميكرون)  ."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1120
 #: plugins/Oculars/src/ui_ocularDialog.h:1128
@@ -7341,7 +7342,7 @@ msgstr "[مصدر جديد]"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
-msgstr "حدِّث البيانات الآن"
+msgstr ". حدِّث البيانات الآن ."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:626
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
@@ -7461,7 +7462,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
-msgstr "حدِّث البيانات كل (ساعة)"
+msgstr "حدِّث البيانات كل (ساعة)    ."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:719
 msgid "Label font size (pixels):"
@@ -8864,7 +8865,7 @@ msgstr "إعدادات تطبيق \"المستعرات الموثّقة تاري
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "Update catalog from Internet"
-msgstr "حدّث الدليل من الإنترنت"
+msgstr ". حدّث الدليل من الإنترنت ."
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
@@ -9677,11 +9678,11 @@ msgstr "إعدادات تطبيق الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
-msgstr "حدّث بيانات الكواكب الخارجية من الإنترنت"
+msgstr ". حدّث بيانات الكواكب الخارجية من الإنترنت      ."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
-msgstr "إعدادات الكواكب الخارجية"
+msgstr ". إعدادات الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Plot all systems with exoplanets without labels"
@@ -11157,7 +11158,7 @@ msgstr "التحديث"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr "زخات الشهب: البحث"
+msgstr "زخات الشهب: البحث  ."
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -11166,8 +11167,8 @@ msgstr "ابحث"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-msgid "dd/MMM/yyyy"
-msgstr "ي ي/ش ش ش/س س س س"
+msgid "dd/MM/yyyy"
+msgstr "ي ي / ش ش / س س س س"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
@@ -11699,7 +11700,7 @@ msgstr "المنظر ثلاثي الأبعاد"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr "اجعل هذا المشهد هو الافتراضي"
+msgstr ". اجعل هذا المشهد هو الافتراضي ."
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
@@ -11711,7 +11712,7 @@ msgstr "قوة نور الكشاف"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr "مدى نور الكشاف"
+msgstr "مدى نور الكشاف ."
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
@@ -12010,15 +12011,15 @@ msgstr "لتغيير الخطوط ربما تحتاج إلى مغادرة وضع
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
-msgstr "(خط الاعتدال (الاستواء"
+msgstr "(خط الاعتدال (الاستواء  ."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:340
 msgid "Solstice Lines"
-msgstr "خط الانقلاب"
+msgstr "خط الانقلاب  ."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr "خطوط منتصف الوقت بين الاعتدال والانقلاب"
+msgstr "خطوط منتصف الوقت بين الاعتدال والانقلاب     ."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
@@ -12026,19 +12027,19 @@ msgstr "غيّر اللون"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr "خطوط الوقوف القمرية الكبرى"
+msgstr "خطوط الوقوف القمرية الكبرى  ."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr "خطوط الوقوف القمرية الصغرى"
+msgstr "خطوط الوقوف القمرية الصغرى  ."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr "ميل عبور السمت"
+msgstr "ميل عبور السمت  ."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr "ميل عبور النظير"
+msgstr "ميل عبور النظير  ."
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
@@ -13339,6 +13340,9 @@ msgstr "الكوكب الحالي: زحل"
 #~ msgid "Radiants"
 #~ msgstr "نقاط المنشأ"
 
+#~ msgid "dd/MMM/yyyy"
+#~ msgstr "ي ي/ش ش ش/س س س س"
+
 #~ msgid "Search Events"
 #~ msgstr "البحث عن مواعيد الزخات"
 
@@ -13353,6 +13357,10 @@ msgstr "الكوكب الحالي: زحل"
 #~ msgstr "الاستطالة العظمى والسطوع  للأرض والزهرة من المريخ"
 
 #~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 232 events in all!"
+#~ msgstr "حافظ للشاشة يعرض 232 حدثاً في النظام الشمسي"
+
+#~ msgid ""
 #~ "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 #~ msgstr ""
 #~ "الاستطالة العظمى والسطوع  للأرض والزهرة من المريخ خلال الفترة 2000 م - 3000 م"
@@ -13365,6 +13373,14 @@ msgstr "الكوكب الحالي: زحل"
 
 #~ msgid "Irregular galaxies"
 #~ msgstr "مجرات غير منتظمة"
+
+#~ msgid ""
+#~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+#~ "use MESA (or ANGLE) version."
+#~ msgstr ""
+#~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+#~ "use MESA (or ANGLE) version.  نسخة أوبن جي إل ليست حديثة، الرجاء تحديث "
+#~ "الدرايفر لكرت الشاشة أو استخدام نسخ ستيللاريوم التي تعتمد على ميسا أو آنجل"
 
 #~ msgid "Julian Date"
 #~ msgstr "التاريخ اليولياني"

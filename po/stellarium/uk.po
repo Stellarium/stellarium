@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-04 02:27+0600\n"
-"PO-Revision-Date: 2015-10-04 06:37+0000\n"
+"POT-Creation-Date: 2015-10-12 18:03+0600\n"
+"PO-Revision-Date: 2015-10-13 06:12+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-05 05:12+0000\n"
-"X-Generator: Launchpad (build 17783)\n"
+"X-Launchpad-Export-Date: 2015-10-14 05:12+0000\n"
+"X-Generator: Launchpad (build 17812)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:537
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:556
 msgid "Display Options"
 msgstr "Параметри показу"
 
@@ -213,7 +213,7 @@ msgstr "Небесне тіло:"
 
 #: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:216
 #: src/core/modules/MinorPlanet.cpp:211 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:187 src/core/modules/StarWrapper.cpp:190
+#: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
@@ -235,7 +235,7 @@ msgstr "Непрозорість: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:222
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
-#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:197
+#: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
@@ -245,7 +245,7 @@ msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:185 src/core/modules/Nebula.cpp:190
 #: src/core/modules/Planet.cpp:225 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
-#: src/core/modules/StarWrapper.cpp:200
+#: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
@@ -257,7 +257,7 @@ msgid " (Photometric system: B)"
 msgstr " (Фотометрична система: B)"
 
 #: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
-#: src/core/modules/StarWrapper.cpp:208 plugins/Quasars/src/Quasar.cpp:119
+#: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Показник кольору (B — V): <b>%1</b>"
@@ -288,7 +288,7 @@ msgid "Orientation angle: %1%2"
 msgstr "Кут орієнтації: %1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -315,7 +315,7 @@ msgstr "Відстань: %1 %2"
 msgid "Redshift: %1"
 msgstr "Червоний зсув: %1"
 
-#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:247
+#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "Паралакс: %1\""
@@ -679,7 +679,7 @@ msgstr "протопланетна туманність"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/Nebula.cpp:1068 src/core/modules/StarWrapper.cpp:53
-#: src/core/modules/StarWrapper.cpp:180 src/translations.h:42
+#: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "зірка"
 
@@ -697,7 +697,7 @@ msgstr "Віддалені об’єкти"
 
 #: src/core/modules/Planet.cpp:228 src/core/modules/MinorPlanet.cpp:230
 #: src/core/modules/MinorPlanet.cpp:234 src/core/modules/Comet.cpp:194
-#: src/core/modules/StarWrapper.cpp:204 plugins/Quasars/src/Quasar.cpp:113
+#: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютна зіркова величина: %1"
@@ -852,77 +852,77 @@ msgstr "Орбіти планет"
 msgid "Planet trails"
 msgstr "Траєкторії планет"
 
-#: src/core/modules/StarWrapper.cpp:161
+#: src/core/modules/StarWrapper.cpp:155
 msgid "eruptive variable star"
 msgstr "еруптивна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:163
+#: src/core/modules/StarWrapper.cpp:157
 msgid "pulsating variable star"
 msgstr "пульсаційна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:159
 msgid "rotating variable star"
 msgstr "затемнена змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:167
+#: src/core/modules/StarWrapper.cpp:161
 msgid "cataclysmic variable star"
 msgstr "катаклізмічна змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:170
+#: src/core/modules/StarWrapper.cpp:164
 msgid "eclipsing binary system"
 msgstr "подвійна система з затемненнями"
 
-#: src/core/modules/StarWrapper.cpp:174
+#: src/core/modules/StarWrapper.cpp:168
 msgid "variable star"
 msgstr "змінна зірка"
 
-#: src/core/modules/StarWrapper.cpp:178
+#: src/core/modules/StarWrapper.cpp:172
 msgid "double star"
 msgstr "подвійна зірка"
 
-#: src/core/modules/StarWrapper.cpp:185
+#: src/core/modules/StarWrapper.cpp:179
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
 msgstr "Тип: <b>%1, %2</b>"
 
-#: src/core/modules/StarWrapper.cpp:226
+#: src/core/modules/StarWrapper.cpp:220
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "Діапазон величини: <b>%1</b>%2<b>%3</b> (фотометрична система: %4)"
 
-#: src/core/modules/StarWrapper.cpp:228
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 "Діапазон величини: <b>%1</b>%2<b>%3/%4</b> (фотометрична система: %5)"
 
-#: src/core/modules/StarWrapper.cpp:244
+#: src/core/modules/StarWrapper.cpp:238
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектральний тип: %1"
 
-#: src/core/modules/StarWrapper.cpp:250
+#: src/core/modules/StarWrapper.cpp:244
 #, qt-format
 msgid "Period: %1 days"
 msgstr "Період: %1 днів"
 
-#: src/core/modules/StarWrapper.cpp:259
+#: src/core/modules/StarWrapper.cpp:253
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "Наступний мінімум світності: %1 ВКЧ (UTC)"
 
-#: src/core/modules/StarWrapper.cpp:261
+#: src/core/modules/StarWrapper.cpp:255
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "Наступний максимум світності: %1 ВКЧ (UTC)"
 
-#: src/core/modules/StarWrapper.cpp:268
+#: src/core/modules/StarWrapper.cpp:262
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "Тривалість затемнення: %1%"
 
-#: src/core/modules/StarWrapper.cpp:270
+#: src/core/modules/StarWrapper.cpp:264
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "Тривалість сходу: %1%"
@@ -1698,7 +1698,7 @@ msgid "Deep-sky objects background images"
 msgstr "Зображення тла для далеких об’єктів"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Miscellaneous"
 msgstr "Інше"
 
@@ -2722,7 +2722,7 @@ msgstr "З’єднання"
 msgid "Opposition"
 msgstr "Протистояння"
 
-#: src/StelMainView.cpp:442 src/StelMainView.cpp:457
+#: src/StelMainView.cpp:461 src/StelMainView.cpp:476
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2730,34 +2730,35 @@ msgstr ""
 "У вашій системі не виявлено OpenGL 2. Будь ласка, оновіть обладнання або "
 "скористайтеся MESA чи старішою версією драйверів."
 
-#: src/StelMainView.cpp:471
+#: src/StelMainView.cpp:490
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Не вдалося отримати потрібні ресурси OpenGL."
 
-#: src/StelMainView.cpp:536
+#: src/StelMainView.cpp:555
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/StelMainView.cpp:537
+#: src/StelMainView.cpp:556
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/StelMainView.cpp:678
+#: src/StelMainView.cpp:704
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
-"use MESA (or ANGLE) version."
+"use --angle-mode (or --mesa-mode) option."
 msgstr ""
-"Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери, графічне "
-"обладнання або скористайтеся версією драйвера зі складу MESA (або ANGLE)."
+"Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвер, обладнання "
+"графічної підсистеми або скористайтеся параметром --angle-mode (або --mesa-"
+"mode)."
 
-#: src/StelMainView.cpp:681
+#: src/StelMainView.cpp:707
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери або графічне "
 "обладнання."
 
-#: src/StelMainView.cpp:723
+#: src/StelMainView.cpp:749
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2768,7 +2769,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:774
+#: src/StelMainView.cpp:800
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2779,7 +2780,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:829
+#: src/StelMainView.cpp:855
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2790,7 +2791,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:866
+#: src/StelMainView.cpp:896
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2801,7 +2802,7 @@ msgstr ""
 "Проігнорувати і придушити це повідомлення надалі і спробувати продовжити "
 "роботу у звуженому режимі попри це?"
 
-#: src/StelMainView.cpp:977
+#: src/StelMainView.cpp:1007
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -3478,10 +3479,10 @@ msgstr ""
 
 #: src/translations.h:305
 msgid ""
-"Screensaver of various happenings in the Solar System. 232 events in all!"
+"Screensaver of various happenings in the Solar System. 248 events in all!"
 msgstr ""
-"Зберігач екрана з різноманітними подіями у Сонячній системі. Загалом 232 "
-"події!"
+"Зберігач екрана із показом різноманітних подій у Сонячній системі. Загалом, "
+"248 записів подій!"
 
 #: src/translations.h:306
 msgid "A tour of the western constellations."
@@ -11305,8 +11306,8 @@ msgstr "Пошук"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
-msgid "dd/MMM/yyyy"
-msgstr "dd-MMM-yyyy"
+msgid "dd/MM/yyyy"
+msgstr "dd-MM-yyyy"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
@@ -13567,6 +13568,9 @@ msgstr "Поточна планета: Сатурн"
 #~ msgid "Radiants"
 #~ msgstr "Радіанти"
 
+#~ msgid "dd/MMM/yyyy"
+#~ msgstr "dd-MMM-yyyy"
+
 #~ msgid "Show meteor showers"
 #~ msgstr "Показувати метеорні потоки"
 
@@ -13590,6 +13594,19 @@ msgstr "Поточна планета: Сатурн"
 #~ msgstr ""
 #~ "Моменти найбільшої елонгації та яскравості для Землі та Венери з Марса за "
 #~ "період з 2000 до 3000 року"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 232 events in all!"
+#~ msgstr ""
+#~ "Зберігач екрана з різноманітними подіями у Сонячній системі. Загалом 232 "
+#~ "події!"
+
+#~ msgid ""
+#~ "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+#~ "use MESA (or ANGLE) version."
+#~ msgstr ""
+#~ "Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери, графічне "
+#~ "обладнання або скористайтеся версією драйвера зі складу MESA (або ANGLE)."
 
 #~ msgid "Julian Date"
 #~ msgstr "Юліанська дата"
