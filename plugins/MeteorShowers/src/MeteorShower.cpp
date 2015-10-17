@@ -66,7 +66,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	m_rAlphaPeak = m_radiantAlpha;
 	m_rDeltaPeak = m_radiantDelta;
 
-	int genericYear = 1000;
+	const int genericYear = 1000;
 
 	// build the activity list
 	QList<QVariant> activities = map.value("activity").toList();
@@ -114,49 +114,53 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 		peak = peak.isEmpty() ? "" : peak + " " + year;
 		d.peak = QDate::fromString(peak, "MM.dd yyyy");
 
-		if (d.start.isValid() && d.finish.isValid() && d.peak.isValid())
-		{
-			// Fix the 'finish' year! Handling cases when the shower starts on
-			// the current year and ends on the next year!
-			if(d.start.operator >(d.finish))
-			{
-				d.finish = d.finish.addYears(1);
-			}
-			// Fix the 'peak' year
-			if(d.start.operator >(d.peak))
-			{
-				d.peak = d.peak.addYears(1);
-			}
-		}
-
 		m_activities.append(d);
 	}
 
 	// filling null values of the activity list with generic data
+	// and fixing the edge cases (showers between december and january)
 	const Activity& g = m_activities.at(0);
 	const int activitiesSize = m_activities.size();
-	for (int i = 1; i < activitiesSize; ++i)
+	for (int i = 0; i < activitiesSize; ++i)
 	{
 		Activity a = m_activities.at(i);
-		if (a.zhr == 0)
+		if (i != 0)
 		{
-			a.zhr = g.zhr;
-			a.variable = g.variable;
+			if (a.zhr == 0)
+			{
+				a.zhr = g.zhr;
+				a.variable = g.variable;
+			}
+
+			int aux = a.year - genericYear;
+			a.start = a.start.isValid() ? a.start : g.start.addYears(aux);
+			a.finish = a.finish.isValid() ? a.finish : g.finish.addYears(aux);
+			a.peak = a.peak.isValid() ? a.peak : g.peak.addYears(aux);
 		}
 
-		int aux = a.year - genericYear;
-		a.start = a.start.isValid() ? a.start : g.start.addYears(aux);
-		a.finish = a.finish.isValid() ? a.finish : g.finish.addYears(aux);
-		a.peak = a.peak.isValid() ? a.peak : g.peak.addYears(aux);
-		m_activities.replace(i, a);
-
-		if (!a.start.isValid() || !a.finish.isValid() || !a.peak.isValid())
+		if (a.start.isValid() && a.finish.isValid() && a.peak.isValid())
+		{
+			// Fix the 'finish' year! Handling cases when the shower starts on
+			// the current year and ends on the next year!
+			if(a.start.operator >(a.finish))
+			{
+				a.finish = a.finish.addYears(1);
+			}
+			// Fix the 'peak' year
+			if(a.start.operator >(a.peak))
+			{
+				a.peak = a.peak.addYears(1);
+			}
+		}
+		else
 		{
 			qWarning() << "MeteorShower: INVALID data for "
 				   << m_showerID << "Unable to read some dates!";
 			qWarning() << "MeteorShower: Please, check your 'showers.json' catalog!";
 			return;
 		}
+
+		m_activities.replace(i, a);
 	}
 
 	if(map.contains("colors"))
@@ -419,6 +423,7 @@ MeteorShower::Activity MeteorShower::hasGenericShower(QDate date, bool &found) c
 			       g.peak.day());
 		return g;
 	}
+
 	return Activity();
 }
 
