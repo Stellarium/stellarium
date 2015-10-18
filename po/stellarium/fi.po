@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-16 06:47+0000\n"
+"PO-Revision-Date: 2015-10-18 04:03+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-17 05:11+0000\n"
+"X-Launchpad-Export-Date: 2015-10-18 05:12+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3819,7 +3819,7 @@ msgstr "Grenada"
 
 #: src/translations.h:394
 msgid "Georgia"
-msgstr "Gruusia"
+msgstr "Georgia"
 
 #: src/translations.h:395
 msgid "French Guiana"
@@ -4047,7 +4047,7 @@ msgstr "Monaco"
 
 #: src/translations.h:451
 msgid "Moldova"
-msgstr "Moldavia"
+msgstr "Moldova"
 
 #: src/translations.h:452
 msgid "Madagascar"
@@ -11522,7 +11522,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr "\"Laiska\" kuutiokuvapinnoitus: %1"
+msgstr "”Laiska” kuutiokuvapinnoitus: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
@@ -11583,7 +11583,7 @@ msgstr "Laskee tarkemman valaistuksen pikseli- eikä solmukohtaisesti."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr "Vaadittu epätasaisen kuvapinnoituksen ja varjojen mallintamiseksi!"
+msgstr "Vaaditaan epätasaisen kuvapinnoituksen ja varjojen mallintamiseksi!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
@@ -11637,7 +11637,7 @@ msgid ""
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
 "Määrittää miten maisema mallinnettaan, kun Stellarium käyttää muuta kuin "
-"&quot;Perspektiiviprojektiota&quot;. Maisema mallinnetaan aina kuutiolle, "
+"&quot;perspektiiviprojektiota&quot;. Maisema mallinnetaan aina kuutiolle, "
 "joka korjataan käytetyn projektion mukaiseksi. Kuutio kuvataan ns. "
 "&quot;kuutiokuvapinnan&quot; avulla."
 
@@ -11670,7 +11670,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr "Laske varjot jokaiselle kuutiokuvapinnan sivulle erikseen."
+msgstr "Laskee varjot jokaiselle kuutiokuvapinnan sivulle erikseen."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -11692,7 +11692,7 @@ msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
-"Jos valittu, kuutiokuvapinta piirretään uudelleen vain tietyn ajan välein "
+"Jos valittuna, kuutiokuvapinta piirretään uudelleen vain tietyin väliajoin "
 "joka kehyksen sijaan."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
@@ -11853,7 +11853,7 @@ msgstr "Täydet kuutiokuvapintavarjot"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr "\"Laiska\" kuutiokuvapinnan uudelleenmallinnus"
+msgstr "”Laiska” kuutiokuvapinnan uudelleenpiirto"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
