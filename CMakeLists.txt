@@ -386,7 +386,6 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebI
 ENDIF()
 
 CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/default_config.ini.cmake ${CMAKE_SOURCE_DIR}/data/default_config.ini @ONLY)
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/updates.json.cmake ${CMAKE_SOURCE_DIR}/data/updates.json @ONLY)
 
 ########### uninstall files ###############
 CONFIGURE_FILE(
