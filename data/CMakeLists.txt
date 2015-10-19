@@ -1,6 +1,6 @@
 ########### install files ###############
 
-INSTALL(FILES stellarium.ico ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini updates.json DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
+INSTALL(FILES stellarium.ico ssystem.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
 
 # install Scenery3d shaders
 INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCHING 
