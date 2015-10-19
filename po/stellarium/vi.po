@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-18 04:01+0000\n"
-"Last-Translator: Le Van Bach <levanbach1994ag@gmail.com>\n"
+"PO-Revision-Date: 2015-10-19 05:09+0000\n"
+"Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-18 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-19 05:12+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -371,7 +371,7 @@ msgstr "hầu như không có sự tập trung về hướng trung tâm"
 #: src/core/modules/Nebula.cpp:780
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "Lớp mật độ không có tư liệu"
 
 #: src/core/modules/Nebula.cpp:800
 msgctxt "Trumpler's Concentration Class"
@@ -381,7 +381,7 @@ msgstr "mật độ trung tâm mạnh mẽ của các ngôi sao"
 #: src/core/modules/Nebula.cpp:803
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
-msgstr ""
+msgstr "mật độ sao trung tâm nhỏ"
 
 #: src/core/modules/Nebula.cpp:806
 msgctxt "Trumpler's Concentration Class"
@@ -391,12 +391,12 @@ msgstr "mật độ tập trung không đáng kể của các ngôi sao"
 #: src/core/modules/Nebula.cpp:809
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
-msgstr ""
+msgstr "sự cô đặc sao"
 
 #: src/core/modules/Nebula.cpp:812
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "Lớp mật độ không có tư liệu"
 
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
@@ -436,7 +436,7 @@ msgstr "cụm sao giàu với hơn 100 sao"
 #: src/core/modules/Nebula.cpp:842
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
-msgstr ""
+msgstr "Số lớp thành viên không có tư liệu"
 
 #: src/core/modules/Nebula.cpp:846
 msgctxt "nebulosity factor of open clusters"
@@ -481,7 +481,7 @@ msgstr "độ sáng không có cơ sở của tinh vân phản xạ"
 #: src/core/modules/Nebula.cpp:891
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "ngôi sao chiếu sáng được lồng vào trong tinh vân"
 
 #: src/core/modules/Nebula.cpp:894
 msgctxt "Reflection Nebulae Classification"
@@ -649,7 +649,7 @@ msgstr "Vật thể BL Lac"
 
 #: src/core/modules/Nebula.cpp:1050
 msgid "blazar"
-msgstr ""
+msgstr "bùng cháy"
 
 #: src/core/modules/Nebula.cpp:1053
 msgid "molecular cloud"
@@ -744,7 +744,7 @@ msgstr "Trăng non"
 
 #: src/core/modules/Planet.cpp:319
 msgid "Last Quarter"
-msgstr ""
+msgstr "Quý cuối"
 
 #: src/core/modules/Planet.cpp:321
 msgid "Full Moon"
@@ -752,7 +752,7 @@ msgstr "Trăng tròn"
 
 #: src/core/modules/Planet.cpp:323
 msgid "First Quarter"
-msgstr ""
+msgstr "Quý đầu"
 
 #: src/core/modules/Planet.cpp:325
 #, qt-format
@@ -1606,6 +1606,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"Phép chiếu hình sin là một <i>phép chiếu bản đồ bảo toàn tỉ lệ hình trụ "
+"giả</i>, thỉnh thoảng được gọi là phép chiếu bảo toàn tỉ lện Sanson-"
+"Flamsteed hay Mercator."
 
 #: src/core/StelObject.cpp:114
 msgctxt "coordinates for current epoch"
@@ -2209,7 +2212,7 @@ msgstr "Cửa sổ tắt"
 
 #: src/gui/StelGui.cpp:205
 msgid "AstroCalc window"
-msgstr ""
+msgstr "Cửa sổ AstroCalc"
 
 #: src/gui/StelGui.cpp:206
 msgid "Copy selected object information to clipboard"
@@ -2239,11 +2242,11 @@ msgstr "%1m"
 #: src/gui/StelGuiItems.cpp:631
 #, qt-format
 msgid "planetocentric distance %1 km"
-msgstr ""
+msgstr "Khoảng cách hành tinh tâm %1 km"
 
 #: src/gui/StelGuiItems.cpp:633
 msgid "planetocentric observer"
-msgstr ""
+msgstr "Người quan sát hành tinh tâm"
 
 #: src/gui/StelGuiItems.cpp:657
 msgid "Field of view"
@@ -2256,7 +2259,7 @@ msgstr "Khung hình/giây"
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:538
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Vị trí bầu trời tối tuyệt vời"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:540
@@ -2712,6 +2715,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Không đủ phiên bản OpenGL. Vui lòng cập nhật trình điều khiển, phần cứng đồ "
+"họa, hoặc sử dụng tùy chọn --chế độ-góc (hoặc --chế độ-đỉnh bằng)."
 
 #: src/StelMainView.cpp:707
 msgid ""
@@ -2725,6 +2730,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Hệ thống phụ DirectX/OpenGL ES của bạn có vấn đề. Xem đăng nhập để biết chi "
+"tiết. Bỏ qua và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục "
+"ở chế độ hạ thấp không?"
 
 #: src/StelMainView.cpp:800
 msgid ""
@@ -2940,7 +2948,7 @@ msgstr "Vật thể BL Lac"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "Blazars"
-msgstr ""
+msgstr "Chuẩn tinh Cô đọng"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
@@ -3010,12 +3018,12 @@ msgstr "Danh mục Melotte"
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:158
 msgid "Interesting double stars"
-msgstr ""
+msgstr "Sao đôi thú vị"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:160
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "Sao biến quang thú vị"
 
 #: src/translations.h:164
 msgid "Arabic"
@@ -3023,7 +3031,7 @@ msgstr "Ả Rập"
 
 #: src/translations.h:165
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Hệ thống chiêm tinh Ả-Râp"
 
 #: src/translations.h:166
 msgid "Aztec"
@@ -3047,11 +3055,11 @@ msgstr "Ngườ Inuit"
 
 #: src/translations.h:171
 msgid "Indian Vedic"
-msgstr ""
+msgstr "Kinh Vệ Đà Ấn Độ"
 
 #: src/translations.h:172
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Hệ thống chiêm tinh Nhật Bản"
 
 #: src/translations.h:173
 msgid "Korean"
@@ -3287,7 +3295,7 @@ msgstr "Sự vượt qua của Kim tinh"
 #. TRANSLATORS: Name of script
 #: src/translations.h:268
 msgid "Analemma"
-msgstr "Rất nhiều"
+msgstr "Địa cầu đồ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:270
@@ -3464,6 +3472,8 @@ msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"Một dẫn chứng của địa cầu đồ - đường đi của mặt trời ngang qua bầu trời "
+"trong suốt năm."
 
 #: src/translations.h:311
 msgid ""
@@ -4683,7 +4693,7 @@ msgstr "Sử dụng phím tab để chọn các phần tìm thấy"
 
 #: src/ui_searchDialogGui.h:627
 msgid "iota"
-msgstr ""
+msgstr "iota"
 
 #: src/ui_searchDialogGui.h:630
 msgid "alpha"
@@ -4954,6 +4964,8 @@ msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Vô hiệu hóa tùy chọn này nếu bạn muốn thấy đường đi của tất cả các bộ phận "
+"của hệ Mặt Trời"
 
 #: src/ui_viewDialog.h:1608
 msgid "Show trail only for selected planet"
@@ -5055,6 +5067,8 @@ msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
+"Một danh mục các cụm sao được hiển thị trên các bản đồ thị Franklin-Adams "
+"(Melotte, 1915)"
 
 #: src/ui_viewDialog.h:1673
 msgid "Catalog of galaxies"
@@ -5067,6 +5081,7 @@ msgstr "Danh mục thiên hà tổng quát Uppsala"
 #: src/ui_viewDialog.h:1679
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr ""
+"Danh mục tinh vân khuếch tán sáng thuộc dải Ngân Hà (Cederblad, 1946)"
 
 #: src/ui_viewDialog.h:1681
 msgid "Filter by type"
@@ -5114,11 +5129,11 @@ msgstr "Sử dụng độ sáng bề mặt"
 
 #: src/ui_viewDialog.h:1700
 msgid "Use hints proportional to angular size of deep-sky objects"
-msgstr ""
+msgstr "Sử dụng gợi ý tỉ lệ để đo kích thước góc của các vật thể xa."
 
 #: src/ui_viewDialog.h:1702
 msgid "Use proportional hints"
-msgstr ""
+msgstr "Sử dụng gợi ý cân đối"
 
 #: src/ui_viewDialog.h:1704
 msgid ""
@@ -5214,6 +5229,8 @@ msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Vòng tròn tức thời của trục trái đất dựa trên sự vận động của nó quanh các "
+"cực mặt phẳng hoàng đạo. Chỉ hiển thị trên Trái Đất."
 
 #: src/ui_viewDialog.h:1749
 msgid "Precession circles"
@@ -5268,6 +5285,8 @@ msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
+"Đường kinh độ đối lập/giao hội - đường mà đường hoàng đạo đi qua cả hai cực "
+"của mặt phẳng hoàng đạo, Mặt Trời và điểm đối lập."
 
 #: src/ui_viewDialog.h:1782
 msgid "Projection"
@@ -5275,7 +5294,7 @@ msgstr "Phép chiếu"
 
 #: src/ui_viewDialog.h:1783
 msgid "Vertical viewport offset"
-msgstr ""
+msgstr "Sự bù điểm nhìn dọc"
 
 #: src/ui_viewDialog.h:1785
 msgid "Use this landscape as default"
@@ -5536,7 +5555,7 @@ msgstr "Thông tin bổ sung"
 
 #: src/ui_configurationDialog.h:1100
 msgid "Topocentric equatorial coordinates"
-msgstr ""
+msgstr "Tọa độ xích đạo bề mặt trái đất"
 
 #: src/ui_configurationDialog.h:1102
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
@@ -5706,6 +5725,7 @@ msgstr "Hiển thị nút lật"
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"Tự động bật khí quyển cho các vất thể với khí quyển trong cửa sổ vị trí"
 
 #: src/ui_configurationDialog.h:1182
 msgid "Auto-enabling for the atmosphere"
@@ -5747,10 +5767,12 @@ msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr ""
+"Kích hoạt để như được nhìn thấy từ bề mặt của hành tinh (được khuyến khích). "
+"Nếu chuyển sang tắt, sẽ hiển thị tầm nhìn hành tinh tâm."
 
 #: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
-msgstr ""
+msgstr "Tọa độ bề mặt trái đất"
 
 #: src/ui_configurationDialog.h:1200
 msgid ""
@@ -5947,7 +5969,7 @@ msgstr "xóa"
 
 #: src/ui_scriptConsole.h:361
 msgid "pre-process script using SSC preprocessor"
-msgstr ""
+msgstr "lệnh tiền xử lý đang sử dụng bộ xử lý trước SSC"
 
 #: src/ui_scriptConsole.h:364
 msgid "quickly load and run a utility script"
@@ -5983,7 +6005,7 @@ msgstr "…"
 
 #: src/ui_astroCalcDialog.h:357
 msgid "AstroCalc"
-msgstr ""
+msgstr "AstroCalc"
 
 #: src/ui_astroCalcDialog.h:359
 msgid "Planetary positions every 5 minutes."
@@ -5995,7 +6017,7 @@ msgstr "Vị trí hành tinh"
 
 #: src/ui_astroCalcDialog.h:363
 msgid "Time step:"
-msgstr ""
+msgstr "Thời gian dừng:"
 
 #: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
@@ -6372,7 +6394,7 @@ msgstr "Xem bằng mắt"
 
 #: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Trình đơn tự động Trực quan"
 
 #: plugins/Oculars/src/Oculars.cpp:1326
 msgid "Show crosshairs"
@@ -6384,7 +6406,7 @@ msgstr "Khung hình ảnh cảm biến"
 
 #: plugins/Oculars/src/Oculars.cpp:1328
 msgid "Telrad sight"
-msgstr ""
+msgstr "Tầm nhìn Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Oculars plugin configuration"
@@ -6730,6 +6752,7 @@ msgstr "Phím nóng"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
+"Tổ hợp phím của phần bổ trợ có thể được chỉnh sửa trong tab tổng quan."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:553
 #: plugins/Oculars/src/gui/OcularDialog.cpp:558
@@ -6738,11 +6761,11 @@ msgstr "[Không có từ khóa được định nghĩa]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:562
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Chuyển đổi mở/tắt lớp phủ mắt kính"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:566
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Mở trình đơn điều hướng tự động."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 msgid "Enable only if an object is selected"
@@ -6750,7 +6773,7 @@ msgstr "Chỉ cho phép một đối tượng được chọn"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1073
 msgid "Scale image circle"
-msgstr ""
+msgstr "Tỉ lệ vòng tròng hình ảnh"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
@@ -6763,7 +6786,7 @@ msgstr "Giới hạn độ sáng sao"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Key mappings"
-msgstr ""
+msgstr "Hình chiếu chính"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Toggle ocular view:"
@@ -6771,7 +6794,7 @@ msgstr "Chuyển đổi ánh nhìn trực quan:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Mở trình đơn điều hướng tự động:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1082
 msgid "Interface"
@@ -6835,7 +6858,7 @@ msgstr "Tên:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
-msgstr ""
+msgstr "Phạm vi dừng:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1099
 msgid "Binoculars"
@@ -6843,7 +6866,7 @@ msgstr "Ống nhòm"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "Có khung nhìn cố định"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -7120,7 +7143,7 @@ msgstr "Phần bổ trợ Vệ tinh Stellarium"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Iridium flares"
-msgstr ""
+msgstr "Pháo sáng Iridium"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
@@ -7602,7 +7625,7 @@ msgstr "Các nguồn tài nguyên"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "Dự đoán pháo sáng Iridium"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -7882,7 +7905,7 @@ msgstr "Thập& phân"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:340
 msgid "&Slew"
-msgstr ""
+msgstr "&xoay"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
@@ -8060,7 +8083,7 @@ msgstr "Tập tin"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:414
 msgid "Log telescope driver messages to files"
-msgstr ""
+msgstr "Đưa tin nhắn điều khiển kính thiên văn đến tập tin"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
@@ -8373,7 +8396,7 @@ msgstr "Chọn múi giờ"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Day keys"
-msgstr ""
+msgstr "Các phím ngày"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "Startup date/time preset"
@@ -9211,6 +9234,8 @@ msgstr "Chú ý: %1"
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
+"Ẩn tinh phát tia X dị thường hoặc sự lặp lại tia gamma mềm với những rung "
+"động được phát hiện"
 
 #: plugins/Pulsars/src/Pulsar.cpp:332
 msgid "has one or more binary companions"
@@ -9361,22 +9386,22 @@ msgstr "Lạnh"
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:858
 msgid "Miniterran"
-msgstr ""
+msgstr "Cỡ Thủy Tinh"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:860
 msgid "Subterran"
-msgstr ""
+msgstr "Cỡ Hỏa Tinh"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:862
 msgid "Terran"
-msgstr ""
+msgstr "Cỡ Trái Đất"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:864
 msgid "Superterran"
-msgstr ""
+msgstr "Siêu Trái Đất"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:866
@@ -9394,7 +9419,7 @@ msgstr "Hệ hành tinh"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Metallicity"
-msgstr ""
+msgstr "Tính Kim Loại"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
@@ -9653,11 +9678,11 @@ msgstr "Ủy ban IAU 53: Hành tinh ngoài hệ Mặt trời"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "Hành lang Khu vực có thể tồn tại sự sống"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "PlanetQuest - The Search for Another Earth"
@@ -10356,11 +10381,11 @@ msgstr "Mưa sao băng"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "Chuyển đổi mưa sao băng"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "Chuyển đổi nhãn tâm điểm"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
@@ -10391,6 +10416,19 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p> Phần bổ sung này cho phép bạn mô phỏng các trận mưa sao băng định kỳ và "
+"hiển thị tâm đánh dấu cho mỗi tâm điểm hoạt động và không hoạt "
+"động.</p><p>Bằng việc nhấn vào đánh dấu tâm điểm, bạn có thể thấy tất cả chi "
+"tiết về vị trí và sự hoạt động của nó. Hầu hết dữ liệu trên phần bổ sung này "
+"đến từ danh mục chính thức <a href=\"http://imo.net\"<International Meteor "
+"Organization</a>.</p><p>Có ba loại đánh dấu:<ul><li><b>Xác nhận:</b> tâm "
+"điểm thì hoạt động và dữ liệu của nó đã được xác nhận. Như vậy, đây là một "
+"trận mưa sao băng lịch sử (thực sự diễn ra trong quá khứ) hoặc được dự "
+"đoán.</li><li><b>Chung chung:</b> tâm điểm thì hoạt động nhưng dữ liệu của "
+"nó thì không được xác nhận. Nghĩa là cái này có thể xảy ra thực tế nhưng "
+"chúng tôi không có dữ liệu chắc chắn về hoạt động của nó trong những năm gần "
+"đây.</li><li><b>Không hoạt động:</b> tâm điểm thì không hoạt động cho thời "
+"điểm bầu trời hiện tại.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -10918,6 +10956,14 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>Có ba loại đánh dấu:<ul><li><b>Xác nhận:</b> tâm điểm thì hoạt động và dữ "
+"liệu của nó đã được xác nhận. Như vậy, đây là một trận mưa sao băng lịch sử "
+"(thực sự diễn ra trong quá khứ) hoặc được dự đoán.</li><li><b>Chung "
+"chung:</b> tâm điểm thì hoạt động nhưng dữ liệu của nó thì không được xác "
+"nhận. Nghĩa là cái này có thể xảy ra thực tế nhưng chúng tôi không có dữ "
+"liệu chắc chắn về hoạt động của nó trong những năm gần đây.</li><li><b>Không "
+"hoạt động:</b> tâm điểm thì không hoạt động cho thời điểm bầu trời hiện "
+"tại.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
@@ -11026,6 +11072,8 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
+"Phần bổ trợ này bước đầu đã được tạo ra như là một dự án của  ESA Summer of "
+"Code trong vũ trụ năm 2013."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
 msgid "Info"
@@ -11053,6 +11101,8 @@ msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Hỗ trợ được cung cấp thông qua trang web Launchpad. Hãy chắc chắn đặt \"%1\" "
+"trong chủ để khi đăng lên."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:105
 msgid "Start date greater than end date!"
@@ -11345,15 +11395,18 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
+"Vẽ bóng hình học thi không được hỗ trợ. Hạ trở lại chế độ '6 Textures'."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "Hạ trở lại '6 Textures' bởi vì lỗi GÓC"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2636
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
+"Hình chiếu bóng không thể được sử dụng trên phần cứng của bạn, hãy kiểm tra "
+"bản ghi để biết chi tiết"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
@@ -11393,7 +11446,7 @@ msgstr "Tải lại bóng"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "Vẽ bóng Scenery3d được tải lại"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
@@ -11430,7 +11483,7 @@ msgstr "Vui lòng tải cảnh đầu tiên!"
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
 msgid "Per-Pixel shading %1."
-msgstr ""
+msgstr "Che bóng trên pixel %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:536
@@ -11453,7 +11506,7 @@ msgstr "Bóng %1."
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:541
 msgid "Shadows deactivated or not possible."
-msgstr ""
+msgstr "Các bóng không hoạt động hoặc không khả dụng"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:572
 #, qt-format
@@ -11488,12 +11541,12 @@ msgstr "Kích thước hình chiếu khối không được hỗ trợ, cài đ�
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:812
 msgid "Shadowmap size changed"
-msgstr ""
+msgstr "Kích thước hình chiếu bóng đã thay đổi"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:814
 #, qt-format
 msgid "Shadowmap size not supported, set to %1"
-msgstr ""
+msgstr "Kích thước hình chiếu bóng không được hỗ trợ, cài đặt đến %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:927
 msgid "3D Sceneries"
@@ -11516,6 +11569,8 @@ msgid ""
 "Provides more accurate lighting by calculating it per-pixel instead of per-"
 "vertex."
 msgstr ""
+"Cung cấp độ sáng chính xác bằng việc tính toán nó trên pixel thay vì trên "
+"đỉnh"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
@@ -11523,13 +11578,15 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
-msgstr ""
+msgstr "Chỉ sử dụng một lớp bóng duy nhất thay vi lên đến bốn."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:248
 msgid ""
 "Provides a speedup in exchange for shadow quality, especially in large "
 "scenes."
 msgstr ""
+"Cung cấp một cách nhanh hơn trong việc thay đổi chất lượng bóng, đặc biệt "
+"trong màn hình lớn."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:250
 msgid ""
@@ -11541,19 +11598,22 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS yêu cầu chất lượng được cài đặt đến CAO hoặc THẤP"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
 "Approximate calculation of shadow penumbras (sharper shadows near contact "
 "points, blurred shadows further away)."
 msgstr ""
+"Tính toán gần đúng của bóng nửa tối (bóng sắc nét cạnh các điểm tiếp xúc, "
+"bóng mờ khi ở xa)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:254
 msgid ""
 "Requires <b>LOW</b> or <b>HIGH</b> shadow filtering (without "
 "<b>Hardware</b>)."
 msgstr ""
+"Yêu cầu <b>THẤP</b> hoặc <b>CAO</b> lọc bóng (không cần <b>phần cứng</b>)."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
@@ -11572,11 +11632,16 @@ msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"<b>6 Textures</b> sử dụng 6 cấu trúc đơn lẻ, mỗi cái cho mỗi cạnh của hình "
+"khối. Đây là phương pháp thích hợp nhất, nhưng có lẽ là chậm hơn những cái "
+"khác."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"<b>Hình chiếu khối</b> sử dụng một cái GL_TEXTURE_CUBEMAP đơn lẻ. Được đề "
+"nghị cho hầu hết người dùng."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -11584,6 +11649,9 @@ msgid ""
 "the cube at once. It may be the fastest method depending on the scene and "
 "your GPU hardware. If not supported, this cannot be selected."
 msgstr ""
+"<b>Vẽ bóng hình học</b> sử dụng tính năng GPU hiện đại để diễn tả tất cả 6 "
+"mặt của hình khối cùng lúc. Nó có lẽ là phương pháp nhanh nhất phụ thuộc vào "
+"phần cứng GPU của bạn. Nếu không được hỗ trợ, cái này không thể được chọn."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
@@ -11595,17 +11663,23 @@ msgid ""
 "which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
 msgstr ""
+"Nếu tắt, khu vực bóng được tính toán sử dụng một hình chiếu phối cảnh, điều "
+"này có thể làm khuyết bóng với giá trị trường nhìn cao, nhưng nó thì hoàn "
+"toàn nhanh hơn!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:264
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
+"Cái này không làm việc khi sử dụng chế độ hình chiếu <b>Vẽ bóng Hình học</b>!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
 msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
+"Khi kiểm tra, hình chiếu chỉ được tái tạo trong khoảng thời gian cụ thể, "
+"thay vì trong mỗi khung hình."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
 msgid "Saves energy and may increase subjective application performance."
@@ -11614,13 +11688,15 @@ msgstr "Tiết kiệm năng lượng và có thể làm tăng hiệu suất ứn
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:268
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
-msgstr ""
+msgstr "Chú ý rằng hình chiếu luôn hiển thị lại khi thay đổi điểm nhìn."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
 msgid ""
 "When checked, only the face that corresponds to your viewing direction is "
 "updated on movement."
 msgstr ""
+"Khi kiểm tra, chỉ có bề mặt tương ứng với hướng nhìn của bạn được cập nhật "
+"vào sự chuyển động."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:271
 msgid ""
@@ -11674,16 +11750,16 @@ msgstr "Tải/lưu điểm nhìn"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "Cường độ sáng:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "Phạm vi sáng:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "Phơi sáng (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
@@ -11696,7 +11772,7 @@ msgstr "Tùy chọn tầm nhìn"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "độ sáng trên pixel"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
@@ -11744,7 +11820,7 @@ msgstr "Cao + Phần cứng (chậm)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
-msgstr ""
+msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
@@ -11752,7 +11828,7 @@ msgstr "Chế độ hình chiếu khối"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr ""
+msgstr "Bóng hình chiếu đầy đủ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
@@ -11764,11 +11840,11 @@ msgstr "Khoảng:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
-msgstr ""
+msgstr "Chỉ cập nhật bề mặt vượt trội khi di chuyển"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:502
 msgid "Also update second-most dominant face"
-msgstr ""
+msgstr "Cũng cập nhật bề mặt vượt trội nhất thứ hai"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
@@ -11818,7 +11894,7 @@ msgstr "Điểm chí"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Crossquarter"
-msgstr ""
+msgstr "Đường giữa các quý"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Major Lunar Standstill"
@@ -11883,11 +11959,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Độ lệch của đoạn Thiên Đỉnh"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Độ lệch của đoạn Thiên Để"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
@@ -11923,7 +11999,7 @@ msgstr "Chọn màu sắc cho điểm chí"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Chọn màu sắc cho đường giữa các quý"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
@@ -11959,11 +12035,11 @@ msgstr "Chọn màu sắc cho đường hành tinh hiện tại"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "Cấu hình ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "Cấu hình phần bổ trợ ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
@@ -11979,7 +12055,7 @@ msgstr "Đường chí"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Đường Giữa Các Quý"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
@@ -13272,3 +13348,24 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 #, qt-format
 #~ msgid " (at %1 deg.)"
 #~ msgstr " (ở %1 độ)"
+
+#~ msgid "pre-process script using STS preprocessor"
+#~ msgstr "lệnh tiền xử lý đang xử lý bộ xử lý trước STS"
+
+#~ msgid ""
+#~ "This plugin was created as project of ESA Summer of Code in Space 2013."
+#~ msgstr ""
+#~ "Phần bổ trợ  này được tạo ra như dự án của ESA Summer of Code trong không "
+#~ "gian năm 2013."
+
+#~ msgid "SNR association"
+#~ msgstr "Quần hợp SNR"
+
+#~ msgid "glitches in period"
+#~ msgstr "Bất thường trong chu kỳ"
+
+#~ msgid "optical, X-ray or Gamma-ray pulsed emission (high energy)"
+#~ msgstr "phát xạ xung nhìn thấy được, tia X hoặc tia Gamma (năng lượng cao)"
+
+#~ msgid "millisecond pulsar"
+#~ msgstr "Ẩn tinh milli giây"
