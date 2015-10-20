@@ -99,7 +99,7 @@ Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
 Name: "{group}\{cm:ChangeLog}"; Filename: "{app}\ChangeLog.rtf"
-Name: "{group}\{cm:Scenery3dDocs}"; Filename: "{app}\Scenery3d.pdf"
+Name: "{group}\{cm:Scenery3dDocs}"; Filename: "{app}\data\Scenery3d.pdf"
 Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
 
