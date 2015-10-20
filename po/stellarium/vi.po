@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-19 05:09+0000\n"
+"PO-Revision-Date: 2015-10-19 16:05+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-19 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-20 05:11+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -6122,6 +6122,9 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"Điểm bắt đầu và kết thúc trong chế độ chân trời có thể liên kết với bầu trời "
+"xoay, có thể giúp ích để giữ mối liên hệ giữa quang cảnh và một vài vật thể "
+"bầu trời hoặc (với cả hai liên kết) cho cách nhảy sao Dobson."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -6238,7 +6241,7 @@ msgstr "Hiển thị trong tọa độ chân trời"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(tức là cho cách nhảy sao Dobson)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
@@ -11894,7 +11897,7 @@ msgstr "Điểm chí"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Crossquarter"
-msgstr "Đường giữa các quý"
+msgstr "Giữa các quý"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Major Lunar Standstill"
@@ -11948,6 +11951,8 @@ msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"Độ lệch của các ngày giữa các quý (các ngày giữa các điểm chí và điểm các "
+"phân)"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
@@ -13369,3 +13374,50 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 
 #~ msgid "millisecond pulsar"
 #~ msgstr "Ẩn tinh milli giây"
+
+#~ msgid ""
+#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+#~ msgstr ""
+#~ "Tọa độ bề mặt trái đất hoàng đạo, điểm phân của ngày và J2000 (chỉ dành cho "
+#~ "Trái Đất)"
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
+#~ msgstr "Hệ bề mặt trái đất hoàng đạo (của J2000): %1/%2"
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of date): %1/%2"
+#~ msgstr "Hệ bề mặt trái đất hoàng đạo (của ngày): %1/%2"
+
+#~ msgid ""
+#~ "This script shows the analemma - the path of the Sun across the sky during "
+#~ "the year."
+#~ msgstr ""
+#~ "Lệnh này hiển thị địa cầu đồ - đường đi của Mặt Trời đi qua bầu trời trong "
+#~ "suốt năm"
+
+#~ msgid ""
+#~ "Phobos races ahead of Mars and eclipses the sun, passes thru it and then "
+#~ "retrogrades back towards the sun and just partially eclipses it (only seen "
+#~ "in the SH) again, then Mars totally eclipses the sun and Phobos, and then as "
+#~ "Phobos emerges from the sun it passes through Mars' shadow and dims."
+#~ msgstr ""
+#~ "Phobos chạy trước Hỏa Tinh và che khuất mặt trời, vượt qua nó và sau đó lùi "
+#~ "lại hướng về mặt trời và che khuất một phần nó lần nữa (chỉ nhìn thấy trong "
+#~ "\"SH\"), sau đó Hỏa Tinh che khuất hoàn toàn mặt trời và Phobos, và sau đó "
+#~ "khi Phobos hiện lên từ mặt trời nó vượt qua bóng của Hỏa Tinh và mờ đi."
+
+#~ msgid ""
+#~ "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
+#~ "Occultations of both on the same day are very rare. Here's one that takes "
+#~ "place 1/23/2048. In real speed."
+#~ msgstr ""
+#~ "Phobos che khuất Trái Đất thì phổ biến, giống như sự che khuất Mộc Tinh. "
+#~ "Nhưng sự che khuất cả hai vào cùng ngày thì rất hiếm. Đây là cái diễn ra vào "
+#~ "ngày 23/1/2048. Trong tốc độ thực."
+
+#~ msgid "Render Solar Shadows"
+#~ msgstr "Diễn tả Bóng Mặt trời"
+
+#~ msgid "radio interpulse"
+#~ msgstr "phát xạ vô tuyến"
