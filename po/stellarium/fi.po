@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-19 02:31+0000\n"
+"PO-Revision-Date: 2015-10-20 03:57+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-19 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-20 05:11+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1732,7 +1732,7 @@ msgstr "Aloitusnäkökenttä: %1%2"
 #: src/gui/ConfigurationDialog.cpp:800
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Aloituskatselusuunta Atsim./Kork.: %1/%2"
+msgstr "Aloituskatselusuunta (atsim./kork.): %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:857
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
@@ -5744,7 +5744,7 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Kun käytössä, \"automaattinen loitonnus\"-näppäin asettaa myös "
+"Kun käytössä, ”automaattinen loitonnus” -näppäin asettaa myös "
 "aloituskatselusuunnan"
 
 #: src/ui_configurationDialog.h:1186
@@ -6453,7 +6453,7 @@ msgstr "Valitse edellinen okulaari"
 #: plugins/Oculars/src/Oculars.cpp:1464
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr "Ristikon Rekt./Dekl. (J2000.0)"
+msgstr "Ristikon rekt./dekl. (J2000.0)"
 
 #: plugins/Oculars/src/Oculars.cpp:1601
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
@@ -7111,7 +7111,7 @@ msgstr "Korkeus (km): %1"
 #: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
-msgstr "Sijainti (leveys/pituus): %1%2%3%4"
+msgstr "Nadiiripiste (leveys/pituus): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:311
@@ -11247,12 +11247,12 @@ msgstr "Näytä hiiren osoittimen koordinaatit"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:145
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr "Rekt./Dekl. (J2000.0)"
+msgstr "Rekt./dekl. (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:161
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr "Rekt./Dekl."
+msgstr "Rekt./dekl."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:184
 msgctxt "abbreviated in the plugin"
@@ -11301,11 +11301,11 @@ msgstr "Mukautettu paikka"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr "Rektaskensio/Deklinaatio (J2000.0)"
+msgstr "Rektaskensio/deklinaatio (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr "Rektaskensio/Deklinaatio"
+msgstr "Rektaskensio/deklinaatio"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
