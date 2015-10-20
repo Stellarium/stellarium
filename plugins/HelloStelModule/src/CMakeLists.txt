@@ -3,8 +3,9 @@ INCLUDE_DIRECTORIES(.)
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(HelloStelModule_SRCS
-  HelloStelModule.hpp
-  HelloStelModule.cpp)
+     HelloStelModule.hpp
+     HelloStelModule.cpp
+)
 
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
