@@ -1,23 +1,23 @@
 INCLUDE_DIRECTORIES(
-    .
-    gui
-    ${CMAKE_BINARY_DIR}/plugins/Observability/src
-    ${CMAKE_BINARY_DIR}/plugins/Observability/src/gui
+     .
+     gui
+     ${CMAKE_BINARY_DIR}/plugins/Observability/src
+     ${CMAKE_BINARY_DIR}/plugins/Observability/src/gui
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(Observability_SRCS
- Observability.hpp
- Observability.cpp
- gui/ObservabilityDialog.hpp
- gui/ObservabilityDialog.cpp
+     Observability.hpp
+     Observability.cpp
+     gui/ObservabilityDialog.hpp
+     gui/ObservabilityDialog.cpp
 )
 
 ################# compiles resources files ############
 
 SET(ObservabilityDialog_UIS
-  gui/ObservabilityDialog.ui
+     gui/ObservabilityDialog.ui
 )
 QT5_WRAP_UI(ObservabilityDialog_UIS_H ${ObservabilityDialog_UIS})
 
