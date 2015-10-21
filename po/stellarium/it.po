@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-09 21:35+0000\n"
-"Last-Translator: Giulia <giulia.iafrate@gmail.com>\n"
+"PO-Revision-Date: 2015-10-20 20:47+0000\n"
+"Last-Translator: Andrea Giudiceandrea <andreaerdna@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-13 05:19+0000\n"
+"X-Launchpad-Export-Date: 2015-10-21 05:13+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -65,7 +65,7 @@ msgstr "Eclittica (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Ecliptic of Date"
-msgstr "Eclittica (alla data)"
+msgstr "Eclittica (data corrente)"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator of J2000.0"
@@ -4983,6 +4983,8 @@ msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
+"Attivare questa opzione per simulare l'effetto della reale velocità della "
+"luce (raccomandato)."
 
 #: src/ui_viewDialog.h:1612
 msgid "Simulate light speed"
@@ -5187,11 +5189,11 @@ msgstr "Griglia equatoriale (J2000)"
 
 #: src/ui_viewDialog.h:1723
 msgid "Equatorial coordinates of current date and planet."
-msgstr ""
+msgstr "Coordinate equatoriali della data e del pianeta correnti."
 
 #: src/ui_viewDialog.h:1725
 msgid "Equatorial grid (of date)"
-msgstr ""
+msgstr "Griglia equatoriale (data corrente)"
 
 #: src/ui_viewDialog.h:1727
 msgid "Ecliptical coordinates for J2000.0."
@@ -5204,10 +5206,11 @@ msgstr "Griglia dell'eclittica (J2000)"
 #: src/ui_viewDialog.h:1731
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
+"Coordinate eclittiche per la data corrente. Visualizzate solo per la Terra."
 
 #: src/ui_viewDialog.h:1733
 msgid "Ecliptic grid (of date)"
-msgstr ""
+msgstr "Griglia dell'eclittica (data corrente)"
 
 #: src/ui_viewDialog.h:1735
 msgid "Altitudes and azimuth (counted from North towards East)."
@@ -5215,21 +5218,23 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1739
 msgid "Galactic Coordinates, System II (IAU 1958)."
-msgstr ""
+msgstr "Coordinate galattiche, Sistema II (IAU 1958)."
 
 #: src/ui_viewDialog.h:1743
 msgid "Labels for the Cardinal directions."
-msgstr ""
+msgstr "Etichette dei punti cardinali."
 
 #: src/ui_viewDialog.h:1747
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
+"Cerchi istantanei dell'asse terrestre nel suo movimento attorno ai poli "
+"eclittici. Visualizzati solo per la Terra."
 
 #: src/ui_viewDialog.h:1749
 msgid "Precession circles"
-msgstr ""
+msgstr "Cerchi di precessione"
 
 #: src/ui_viewDialog.h:1751
 msgid "Show celestial equator of J2000.0."
@@ -5241,15 +5246,16 @@ msgstr "Equatore (J2000)"
 
 #: src/ui_viewDialog.h:1755
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "Mostra l'equatore celeste per la data e il pianeta correnti."
 
 #: src/ui_viewDialog.h:1757
 msgid "Equator (of date)"
-msgstr ""
+msgstr "Equatore (data corrente)"
 
 #: src/ui_viewDialog.h:1759
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr ""
+"Mostra la linea dell'eclittica per J2000.0 (piano fondamentale VSOP87A)."
 
 #: src/ui_viewDialog.h:1761
 msgid "Ecliptic (J2000)"
@@ -5257,11 +5263,11 @@ msgstr "Eclittica (J2000)"
 
 #: src/ui_viewDialog.h:1763
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "Mostra la linea dell'eclittica per la data corrente."
 
 #: src/ui_viewDialog.h:1765
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "Eclittica (data corrente)"
 
 #: src/ui_viewDialog.h:1767
 msgid "Show horizon line."
@@ -5502,7 +5508,7 @@ msgstr "Coordinate equatoriali geocentriche, data dell'equinozio"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Right ascension/Declination (of date)"
-msgstr "Ascensione destra/Declinazione (della data)"
+msgstr "Ascensione retta/Declinazione (data corrente)"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Catalog number(s)"
@@ -5756,6 +5762,8 @@ msgstr "Utilizzare gradi decimali"
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
+"La nutazione è una piccola oscillazione dell'asse terrestre che ammonta a "
+"pochi arcosecondi."
 
 #: src/ui_configurationDialog.h:1194
 msgid "Include nutation"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-19 16:05+0000\n"
+"PO-Revision-Date: 2015-10-20 13:17+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-20 05:11+0000\n"
+"X-Launchpad-Export-Date: 2015-10-21 05:14+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -287,7 +287,7 @@ msgstr "Góc định hướng: %1%2"
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr "Khoảng cách: %1 nas"
+msgstr "Khoảng cách: %1 n.a.s"
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:263
@@ -818,7 +818,7 @@ msgstr "Tốc độ: %1 km/s"
 #: src/core/modules/Comet.cpp:260
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr "Đường kính sao chổi (ước lượng): %1 km"
+msgstr "Đường kính đầu sao chổi (ước lượng): %1 km"
 
 #: src/core/modules/Comet.cpp:264
 #, no-c-format, qt-format
@@ -1624,7 +1624,7 @@ msgstr "Xích kinh/Độ lệch"
 #: src/core/StelObject.cpp:165 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Góc giờ/DE: %1/%2"
+msgstr "Góc giờ/Độ lệch: %1/%2"
 
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
@@ -1635,7 +1635,7 @@ msgstr "(biểu kiến)"
 #: src/core/StelObject.cpp:193 src/core/StelObject.cpp:195
 #, qt-format
 msgid "Az/Alt: %1/%2"
-msgstr "Az/Alt: %1/%2"
+msgstr "Góc phương vị/Cao độ: %1/%2"
 
 #: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #: src/core/StelObject.cpp:226 src/core/StelObject.cpp:228
@@ -1722,7 +1722,7 @@ msgstr "Trường nhìn khởi phát: %1%2"
 #: src/gui/ConfigurationDialog.cpp:800
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
-msgstr "Hướng nhìn ban đầu Az/Alt: %1/%2"
+msgstr "Hướng nhìn ban đầu Góc phương vị/Cao độ: %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:857
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
@@ -2311,7 +2311,7 @@ msgstr "Tóm tắt"
 
 #: src/gui/ViewDialog.cpp:593
 msgid "Native"
-msgstr "Tự nhiên"
+msgstr "Bản địa"
 
 #: src/gui/ViewDialog.cpp:594
 msgid "Translated"
@@ -3071,11 +3071,11 @@ msgstr "Lakota"
 
 #: src/translations.h:175
 msgid "Maori"
-msgstr "Tiếng Maori"
+msgstr "Maori"
 
 #: src/translations.h:176
 msgid "Mongolian"
-msgstr "Tiếng Mông Cổ"
+msgstr "Mông Cổ"
 
 #: src/translations.h:177
 msgid "Navajo"
@@ -3083,7 +3083,7 @@ msgstr "Navajo"
 
 #: src/translations.h:178
 msgid "Norse"
-msgstr "Tiếng Na-uy"
+msgstr "Na-Uy"
 
 #: src/translations.h:179
 msgid "Polynesian"
@@ -3091,7 +3091,7 @@ msgstr "Người Pô-li-nê-di"
 
 #: src/translations.h:180
 msgid "Romanian"
-msgstr "Tiếng Rô-ma-ni"
+msgstr "Rô-ma-ni"
 
 #: src/translations.h:181
 msgid "Sami"
@@ -3112,7 +3112,7 @@ msgstr "Tupi-Guarani"
 
 #: src/translations.h:186
 msgid "Tongan"
-msgstr "Tiếng Tông-ga"
+msgstr "Tông-ga"
 
 #: src/translations.h:187
 msgid "Western"
@@ -4591,7 +4591,7 @@ msgstr "Ghi nhận"
 
 #: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1121
 msgid "Edit keyboard shortcuts..."
-msgstr "Chỉn sữa những phím tăt..."
+msgstr "Chỉnh sửa những phím tắt..."
 
 #: src/ui_helpDialogGui.h:291
 msgid "Refresh"
@@ -4941,11 +4941,11 @@ msgstr "Hiển thị vật thể Hệ Mặt Trời"
 
 #: src/ui_viewDialog.h:1599
 msgid "Show planet markers"
-msgstr "Thể hiện đánh dấu hành tinh"
+msgstr "Hiển thị đánh dấu hành tinh"
 
 #: src/ui_viewDialog.h:1600
 msgid "Show planet orbits"
-msgstr "Hiện Quỹ đạo các hành tinh"
+msgstr "Hiển thị quỹ đạo hành tinh"
 
 #: src/ui_viewDialog.h:1602
 msgid ""
@@ -5018,7 +5018,7 @@ msgstr "Tỷ lệ cực điểm theo giờ"
 #: src/ui_viewDialog.h:1633
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr "Tần suất theo giờ"
+msgstr "Tỉ lệ cực điểm theo giờ:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Display objects from catalogs"
@@ -5560,7 +5560,7 @@ msgstr "Tọa độ xích đạo bề mặt trái đất"
 #: src/ui_configurationDialog.h:1102
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
-msgstr "Góc giờ/Xích vĩ độ"
+msgstr "Góc giờ/Độ lệch"
 
 #: src/ui_configurationDialog.h:1104
 msgid "Horizontal coordinates"
@@ -7075,7 +7075,7 @@ msgstr "Vệ tinh nhân tạo"
 #: plugins/Satellites/src/Satellite.cpp:275
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
-msgstr "Độ lớn xấp xỉ: <b>%1</b>"
+msgstr "Độ sáng xấp xỉ: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:288
@@ -9917,7 +9917,7 @@ msgstr "Cách xa mặt trời nhất: %1 (ở %2 độ)"
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr "Mọc/lặn lúc chập tối: %1/%2. "
+msgstr "Mọc/lặn lúc mặt trời lặn: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:209
 #, qt-format
@@ -9936,7 +9936,7 @@ msgstr "Không phải mọc/lặn lúc mặt trời lặn "
 #: plugins/Observability/src/Observability.cpp:213
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr "Mọc/lặn lúc mặt trời lặn: %1/%2."
+msgstr "Mọc/lặn lúc mặt trời mọc: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:214
 msgid "No Cosmical rise/set."
@@ -10480,7 +10480,7 @@ msgstr "Vật thể mẹ: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Active"
-msgstr "Hiệu lực"
+msgstr "Hoạt động"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Activity"
@@ -11038,7 +11038,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr "Tần suất theo giờ"
+msgstr "Tỉ lệ cực điểm theo giờ (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:280
 msgid ""
@@ -11048,11 +11048,11 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
-"Trong thiên văn học Tần suất Theo giờ Thiên đỉnh (ZHR) của một cơn mưa sao "
-"băng là số sao băng mà người quan sát sẽ thấy trong một giờ dưới một bầu "
-"trời trong trẻo và đen (độ sáng biểu kiến giới hạn của 6.5) nếu tâm điểm của "
-"cơn mưa thì ở thiên đỉnh. Tỉ lệ hiệu quả có thể nhìn thấy luôn thấp hơn và "
-"giảm dần khi tâm điểm đi tới đường chân trời."
+"Trong thiên văn học Tỉ lệ cực điểm theo giờ (ZHR) của một cơn mưa sao băng "
+"là số sao băng mà người quan sát sẽ thấy trong một giờ dưới một bầu trời "
+"trong trẻo và đen (độ sáng biểu kiến giới hạn của 6.5) nếu tâm điểm của cơn "
+"mưa thì ở thiên đỉnh. Tỉ lệ hiệu quả có thể nhìn thấy luôn thấp hơn và giảm "
+"dần khi tâm điểm đi tới đường chân trời."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
 msgid "Population index"
@@ -11117,7 +11117,7 @@ msgstr "Khoảng thời gian phải ít hơn một năm!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
 msgid "ZHR"
-msgstr "Tần suất"
+msgstr "Tỉ lệ cực điểm theo giờ"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
