@@ -160,7 +160,7 @@ div#srch_tab_object {
 /* End jQuery UI override */
 
 html {
-	background: #fff url("stars.png");
+	background: #fff url("images/stars.png");
 	font-size: 13px;
 	font-family: DejaVuSans,Verdana,Helvetica,Arial,sans-serif;
 }
@@ -327,7 +327,7 @@ select {
 	height: 32px;
 	bottom: 12px;
 	right: 21px;
-	background-image: url("ajax-loader.gif");
+	background-image: url("images/ajax-loader.gif");
 }
 
 header h1 {
@@ -403,7 +403,7 @@ header img {
 }
 
 .button32wrapper:hover {
-	background: url("icons.png") no-repeat top left;
+	background: url("images/icons.png") no-repeat top left;
 	background-position: -851px 0;
 }
 
@@ -414,7 +414,7 @@ button.button32 {
 }
 
 .button32 {
-	background: url("icons.png") no-repeat top left;
+	background: url("images/icons.png") no-repeat top left;
 	cursor: pointer;
 	height: 32px;
 	width: 32px;
@@ -426,7 +426,7 @@ button.button32 {
 }
 
 .button32.active {
-	background-image: url("icons-active.png");
+	background-image: url("images/icons-active.png");
 }
 
 .button32.btAtmosphere { background-position: 0 0; } 
@@ -453,7 +453,7 @@ button.button32 {
 .button32.btTimeRealtime { background-position: -777px 0; } 
 .button32.btTimeRewind { background-position: -814px 0; } 
 .button32.glow32x32 { background-position: -851px 0; } 
-.button32.btTimeRealtime.paused  { background-image: url("icons-active.png"); background-position: -851px 0; } 
+.button32.btTimeRealtime.paused  { background-image: url("images/icons-active.png"); background-position: -851px 0; } 
 
 #activescript {
 	font-weight: bold;
@@ -646,7 +646,7 @@ button.button32 {
 }
 
 .joybutton {
-	background: url("joystick.png") no-repeat;
+	background: url("images/joystick.png") no-repeat;
 	cursor: pointer;
 	width: 32px;
 	height: 32px;
