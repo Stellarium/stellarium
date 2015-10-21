@@ -8,20 +8,21 @@
   <script src="/external/jquery-1.11.3.js" type="text/javascript"></script>
   <script src="/external/jquery-ui.js" type="text/javascript"></script>
   <!-- Stellarium functionality is distributed over several .js files-->
-  <script src="translationdata.js" type="text/javascript"></script>
-  <script src="time.js" type="text/javascript"></script>
-  <script src="actions.js" type="text/javascript"></script>
-  <script src="search.js" type="text/javascript"></script>
-  <script src="scripts.js" type="text/javascript"></script>
-  <script src="location.js" type="text/javascript"></script>
-  <script src="viewcontrol.js" type="text/javascript"></script>
-  <script src="viewoptions.js" type="text/javascript"></script>
-  <script src="remotecontrol.js" type="text/javascript"></script>
+  <script src="js/api/translationdata.js" type="text/javascript"></script>
+  <script src="js/api/time.js" type="text/javascript"></script>
+  <script src="js/api/actions.js" type="text/javascript"></script>
+  <script src="js/api/search.js" type="text/javascript"></script>
+  <script src="js/api/scripts.js" type="text/javascript"></script>
+  <script src="js/api/location.js" type="text/javascript"></script>
+  <script src="js/api/viewcontrol.js" type="text/javascript"></script>
+  <script src="js/api/viewoptions.js" type="text/javascript"></script>
+  <script src="js/api/remotecontrol.js" type="text/javascript"></script>
+  <script src="js/ui/uisettings.js" type="text/javascript"></script>
 </head>
 <body>
   <div id="wrapper" class="ui-corner-all ui-widget-content">
     <header>
-      <img src="stellarium.png" alt="Stellarium logo"/>
+      <img src="images/stellarium.png" alt="Stellarium logo"/>
       <h1><?= tr("Stellarium remote control")?></h1>
     </header>
     <div id="tabs">
@@ -203,8 +204,8 @@
             <header><h2><?= tr("Location")?></h2></header>
             <div>
               <div id="loc_map">
-                <img id="loc_mapimg" src="world.png" alt='<?= tr("Planet map")?>'/>
-                <img id="loc_mappointer" src="map-pointeur.png" alt='<?= tr("Planet map pointer")?>'/>
+                <img id="loc_mapimg" src="images/world.png" alt='<?= tr("Planet map")?>'/>
+                <img id="loc_mappointer" src="images/map-pointeur.png" alt='<?= tr("Planet map pointer")?>'/>
               </div><div id="loc_searchlist" class="inline-flex flex-column" >
               <select id="loc_list" size="10"></select>
               <input id="loc_search" placeholder='<?= tr("Type to search location")?>' autocomplete="off"/>

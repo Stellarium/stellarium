@@ -335,7 +335,7 @@ var Locations = (function($) {
             if (lastPlanet !== loc.planet) {
                 var planetUrl = "/api/location/planetimage?planet=" + encodeURIComponent(loc.planet);
                 if (loc.planet === "Earth")
-                    planetUrl = "world.png";
+                    planetUrl = "images/world.png";
                 console.log("updating planet map image: " + planetUrl);
 
                 $loc_mapimg.attr("src", planetUrl);

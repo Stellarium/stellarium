@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-15 01:15+0200\n"
+"POT-Creation-Date: 2015-10-21 16:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,91 +17,92 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/webroot/actions.js:110 data/webroot/actions.js:159
+#: data/webroot/js/api/actions.js:110 data/webroot/js/api/actions.js:159
 msgid "on"
 msgstr ""
 
-#: data/webroot/actions.js:110 data/webroot/actions.js:159
+#: data/webroot/js/api/actions.js:110 data/webroot/js/api/actions.js:159
 msgid "off"
 msgstr ""
 
-#: data/webroot/actions.js:177
+#: data/webroot/js/api/actions.js:177
 msgid "Could not retrieve action list"
 msgstr ""
 
-#: data/webroot/actions.js:212
+#: data/webroot/js/api/actions.js:212
 msgid "Error sending action to server: "
 msgstr ""
 
-#: data/webroot/location.js:132 data/webroot/location.js:160
-#: data/webroot/search.js:237
+#: data/webroot/js/api/location.js:132 data/webroot/js/api/location.js:160
+#: data/webroot/js/api/search.js:232
 msgid "Error performing search"
 msgstr ""
 
-#: data/webroot/location.js:258
+#: data/webroot/js/api/location.js:258
 msgid "Could not retrieve country list"
 msgstr ""
 
-#: data/webroot/location.js:288
+#: data/webroot/js/api/location.js:288
 msgid "Could not retrieve planet list"
 msgstr ""
 
-#: data/webroot/remotecontrol.js:102
+#: data/webroot/js/api/remotecontrol.js:102
 msgid "No current selection"
 msgstr ""
 
-#: data/webroot/remotecontrol.js:333
+#: data/webroot/js/api/remotecontrol.js:335
 msgid "Error sending command to server: "
 msgstr ""
 
-#: data/webroot/remotecontrol.js:405
+#: data/webroot/js/api/remotecontrol.js:407
 msgid "Show All Items"
 msgstr ""
 
-#: data/webroot/remotecontrol.js:471
+#: data/webroot/js/api/remotecontrol.js:473
 msgid "Input did not match any item"
 msgstr ""
 
-#: data/webroot/scripts.js:64
+#: data/webroot/js/api/scripts.js:64
 msgid "Could not retrieve script list"
 msgstr ""
 
-#: data/webroot/scripts.js:73
+#: data/webroot/js/api/scripts.js:73
 msgid "-none-"
 msgstr ""
 
-#: data/webroot/search.js:175
+#: data/webroot/js/api/search.js:170
 msgid "Error (%1)"
 msgstr ""
 
-#: data/webroot/search.js:218
+#: data/webroot/js/api/search.js:213
 msgid "idle"
 msgstr ""
 
-#: data/webroot/search.js:247
+#: data/webroot/js/api/search.js:242
 msgid "waiting"
 msgstr ""
 
-#: data/webroot/search.js:262
+#: data/webroot/js/api/search.js:257
 msgid "querying"
 msgstr ""
 
-#: data/webroot/search.js:274
+#: data/webroot/js/api/search.js:269
 msgid "Error performing Simbad lookup"
 msgstr ""
 
-#: data/webroot/search.js:359
+#: data/webroot/js/api/search.js:354
 msgid "Error loading object types"
 msgstr ""
 
-#: data/webroot/search.js:400
+#: data/webroot/js/api/search.js:395
 msgid "Error getting object list"
 msgstr ""
 
-#: data/webroot/viewoptions.js:75
+#: data/webroot/js/api/viewoptions.js:75
 msgid "Could not retrieve projection list"
 msgstr ""
 
-#: data/webroot/viewoptions.js:111 data/webroot/viewoptions.js:147
+#: data/webroot/js/api/viewoptions.js:111
+#: data/webroot/js/api/viewoptions.js:147
 msgid "Could not retrieve landscape list"
 msgstr ""
