@@ -1,6 +1,7 @@
 
 //This file is generated automatically by the stellarium-remotecontrol-update-translationdata target through update_translationdata.py from stellarium-remotecontrol-js.pot
 //It contains all strings that can be translated through the StelTranslator in the JavaScript code by calling Main.tr()
+//When this file is requested through the RemoteControl web server, the strings are translated using the current Stellarium app language
 
 var TranslationData = {
 	"on" : '<?= tr("on")?>',
