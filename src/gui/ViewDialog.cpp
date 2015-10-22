@@ -234,10 +234,10 @@ void ViewDialog::createDialogContent()
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	Q_ASSERT(mmgr);
 
-	ui->zhrSpinBox->setValue(mmgr->getZHR());
-	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(updateZhrControls(int)));
-	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setZhrFromControls(int)));
-	updateZhrDescription();
+	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(setZHR(int)));
+	connect(ui->zhrSlider, SIGNAL(valueChanged(int)), this, SLOT(setZHR(int)));
+	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setZHR(int)));
+	setZHR(mmgr->getZHR());
 
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
@@ -784,25 +784,22 @@ void ViewDialog::showAtmosphereDialog()
 }
 
 
-void ViewDialog::setZhrFromControls(int zhr)
+void ViewDialog::setZHR(int zhr)
 {
 	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
-	if (zhr==0)
-	{
-		mmgr->setFlagShow(false);
-	}
-	else
-	{
-		mmgr->setFlagShow(true);
-		mmgr->setZHR(zhr);
-	}
-	updateZhrDescription();
-}
+	mmgr->blockSignals(true);
+	ui->zhrSlider->blockSignals(true);
+	ui->zhrSpinBox->blockSignals(true);
 
-void ViewDialog::updateZhrControls(int zhr)
-{
+	mmgr->setFlagShow(zhr > 0);
+	mmgr->setZHR(zhr);
+	ui->zhrSlider->setValue(zhr);
 	ui->zhrSpinBox->setValue(zhr);
 	updateZhrDescription();
+
+	mmgr->blockSignals(false);
+	ui->zhrSlider->blockSignals(false);
+	ui->zhrSpinBox->blockSignals(false);
 }
 
 void ViewDialog::updateZhrDescription()
