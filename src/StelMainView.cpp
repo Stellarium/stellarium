@@ -982,8 +982,9 @@ void StelMainView::initTitleI18n()
 void StelMainView::setFullScreen(bool b)
 {
 	QSettings *conf = StelApp::getInstance().getSettings();
-	QSize size = QSize(conf->value("video/screen_w", 1024).toInt(),
-			   conf->value("video/screen_h", 768).toInt());
+	QSize size = glWidget->windowHandle()->screen()->size();
+	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
+		     conf->value("video/screen_h", size.height()).toInt());
 
 	QDesktopWidget *desktop = QApplication::desktop();
 	int screen = conf->value("video/screen_number", 0).toInt();
@@ -996,6 +997,7 @@ void StelMainView::setFullScreen(bool b)
 
 	if (b)
 	{
+		resize(size);
 		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
 		move(screenGeom.x()+1, screenGeom.y()+1);
 		// The fullscreen window appears on screen where is the majority of
@@ -1010,8 +1012,9 @@ void StelMainView::setFullScreen(bool b)
 		showNormal();
 
 		resize(size);
-		int x = conf->value("video/screen_x", 0).toInt();
-		int y = conf->value("video/screen_y", 0).toInt();
+		// By default use shift for 10 pixels
+		int x = conf->value("video/screen_x", 10).toInt();
+		int y = conf->value("video/screen_y", 10).toInt();
 		move(x + screenGeom.x(), y + screenGeom.y());
 	}
 }
