@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-20 13:17+0000\n"
+"PO-Revision-Date: 2015-10-21 15:55+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-21 05:14+0000\n"
+"X-Launchpad-Export-Date: 2015-10-22 05:09+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -711,12 +711,12 @@ msgstr "Khoảng cách: %1AU (%2 triệu km)"
 #: src/core/modules/Planet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr "đường kính biểu kiến: %1, with rings: %2"
+msgstr "Đường kính biểu kiến: %1, với vành đai: %2"
 
 #: src/core/modules/Planet.cpp:281 src/core/modules/MinorPlanet.cpp:263
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr "đường kính biểu kiến: %1"
+msgstr "Đường kính biểu kiến: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:297 src/core/modules/MinorPlanet.cpp:270
@@ -818,7 +818,7 @@ msgstr "Tốc độ: %1 km/s"
 #: src/core/modules/Comet.cpp:260
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr "Đường kính đầu sao chổi (ước lượng): %1 km"
+msgstr "Đường kính đầu sao chổi (ước tính): %1 km"
 
 #: src/core/modules/Comet.cpp:264
 #, no-c-format, qt-format
@@ -1618,7 +1618,7 @@ msgstr "vào ngày"
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/Dec"
-msgstr "Xích kinh/Độ lệch"
+msgstr "Xích kinh/Xích vĩ"
 
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:165 src/core/StelObject.cpp:168
@@ -2502,7 +2502,7 @@ msgstr "Xích kinh"
 
 #: src/gui/SearchDialog.cpp:261
 msgid "Declination"
-msgstr "Độ lệch"
+msgstr "Xích vĩ"
 
 #: src/gui/SearchDialog.cpp:269
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:943
@@ -2588,7 +2588,7 @@ msgstr "Xích kinh (J2000)"
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:131 src/gui/AstroCalcDialog.cpp:240
 msgid "Dec (J2000)"
-msgstr "Độ lệch (J2000)"
+msgstr "Xích vĩ (J2000)"
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:133 src/gui/AstroCalcDialog.cpp:242
@@ -5507,7 +5507,7 @@ msgstr "Tọa độ xích đạo địa tâm, diểm phân của ngày"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Right ascension/Declination (of date)"
-msgstr "Xích kinh/Xích vĩ (of date)"
+msgstr "Xích kinh/Xích vĩ (của ngày)"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Catalog number(s)"
@@ -5560,7 +5560,7 @@ msgstr "Tọa độ xích đạo bề mặt trái đất"
 #: src/ui_configurationDialog.h:1102
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
-msgstr "Góc giờ/Độ lệch"
+msgstr "Góc giờ/Xích vĩ"
 
 #: src/ui_configurationDialog.h:1104
 msgid "Horizontal coordinates"
@@ -6434,7 +6434,7 @@ msgstr "Chọn kính mắt kế tiếp"
 #: plugins/Oculars/src/Oculars.cpp:1464
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr "Khúc xạ/Tán xạ (J2000.0) của việc đi ngang qua"
+msgstr "Xích kinh/Xích vĩ (J2000.0) của việc đi ngang qua"
 
 #: plugins/Oculars/src/Oculars.cpp:1601
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
@@ -7843,7 +7843,7 @@ msgstr "Xích kinh (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 msgid "Declination (J2000)"
-msgstr "Độ lệch (J2000)"
+msgstr "Xích vĩ (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:259
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:400
@@ -11245,12 +11245,12 @@ msgstr "Hiển thị tọa độ của con trỏ chuột"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:145
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr "Xích kinh/Độ lệch (J2000.0)"
+msgstr "Xích kinh/Xích vĩ (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:161
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr "Xích kinh/Độ lệch"
+msgstr "Xích kinh/Xích vĩ"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:184
 msgctxt "abbreviated in the plugin"
@@ -11275,7 +11275,7 @@ msgstr "Kinh độ/Vĩ độ Hoàng Đạo (J2000.0)"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:256
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr "Góc giờ/Độ lệch"
+msgstr "Góc giờ/Xích vĩ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
@@ -11299,11 +11299,11 @@ msgstr "Vị trí tùy chỉnh"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr "Xích kinh/Độ lệch (J2000.0)"
+msgstr "Xích kinh/Xích vĩ (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr "Xích kinh/Độ lệch"
+msgstr "Xích kinh/Xích vĩ"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
@@ -11944,14 +11944,14 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr "Độ lệch của điểm phân (tức là xích đạo) và điểm chí"
+msgstr "Xích vĩ của điểm phân (tức là xích đạo) và điểm chí"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:190
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
-"Độ lệch của các ngày giữa các quý (các ngày giữa các điểm chí và điểm các "
+"Xích vĩ của các ngày giữa các quý (các ngày giữa các điểm chí và điểm các "
 "phân)"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
@@ -11964,27 +11964,27 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr "Độ lệch của đoạn Thiên Đỉnh"
+msgstr "Xích vĩ của đoạn Thiên Đỉnh"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr "Độ lệch của đoạn Thiên Để"
+msgstr "Xích vĩ của đoạn Thiên Để"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr "Độ lệch của vật thể được chọn hiện tại được chọn"
+msgstr "Xích vĩ của vật thể được chọn hiện tại"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
-msgstr "Độ lệch hiện tại của mặt trời"
+msgstr "Xích vĩ hiện tại của mặt trời"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:197
 msgid "Current declination of the moon"
-msgstr "Độ lệch hiện tại của mặt trăng"
+msgstr "Xích vĩ hiện tại của mặt trăng"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr "Độ lệch hiện tại của hành tinh nhìn bằng mắt thường"
+msgstr "Xích vĩ hiện tại của hành tinh nhìn bằng mắt thường"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -12076,11 +12076,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
-msgstr "Độ lệch của đoạn thiên đỉnh"
+msgstr "Xích vĩ của đoạn thiên đỉnh"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:348
 msgid "Declination of Nadir passage"
-msgstr "Độ lệch của đoạn thiên để"
+msgstr "Xích vĩ của đoạn thiên để"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:349
 msgid "Current Sun"
