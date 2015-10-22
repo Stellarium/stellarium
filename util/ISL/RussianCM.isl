@@ -29,3 +29,6 @@ AngleMode=(режим ANGLE)
 MesaMode=(режим MESA)
 DebugMode=(режим отладки)
 RedistRun=Установка библиотеки времени выполнения Microsoft C/C++...
+UserGuideOnTheWeb=Руководство пользователя в Интернете
+DevelopersDocsOnTheWeb=Документация разработчика в Интернете
+Scenery3dDocs=Scenery3D - Проходимые 3D-модели в Stellarium
