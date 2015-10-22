@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 16:58+0200\n"
+"POT-Creation-Date: 2015-10-22 23:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/webroot/js/api/actions.js:110 data/webroot/js/api/actions.js:159
-msgid "on"
-msgstr ""
-
-#: data/webroot/js/api/actions.js:110 data/webroot/js/api/actions.js:159
-msgid "off"
-msgstr ""
-
-#: data/webroot/js/api/actions.js:177
+#: data/webroot/js/api/actions.js:71
 msgid "Could not retrieve action list"
 msgstr ""
 
-#: data/webroot/js/api/actions.js:212
+#: data/webroot/js/api/actions.js:105
 msgid "Error sending action to server: "
 msgstr ""
 
@@ -46,20 +38,8 @@ msgstr ""
 msgid "Could not retrieve planet list"
 msgstr ""
 
-#: data/webroot/js/api/remotecontrol.js:102
-msgid "No current selection"
-msgstr ""
-
-#: data/webroot/js/api/remotecontrol.js:335
+#: data/webroot/js/api/remotecontrol.js:115
 msgid "Error sending command to server: "
-msgstr ""
-
-#: data/webroot/js/api/remotecontrol.js:407
-msgid "Show All Items"
-msgstr ""
-
-#: data/webroot/js/api/remotecontrol.js:473
-msgid "Input did not match any item"
 msgstr ""
 
 #: data/webroot/js/api/scripts.js:64
@@ -105,4 +85,24 @@ msgstr ""
 #: data/webroot/js/api/viewoptions.js:111
 #: data/webroot/js/api/viewoptions.js:147
 msgid "Could not retrieve landscape list"
+msgstr ""
+
+#: data/webroot/js/ui/actions.js:116 data/webroot/js/ui/actions.js:132
+msgid "on"
+msgstr ""
+
+#: data/webroot/js/ui/actions.js:116 data/webroot/js/ui/actions.js:132
+msgid "off"
+msgstr ""
+
+#: data/webroot/js/ui/combobox.js:58
+msgid "Show All Items"
+msgstr ""
+
+#: data/webroot/js/ui/combobox.js:124
+msgid "Input did not match any item"
+msgstr ""
+
+#: data/webroot/js/ui/mainui.js:132
+msgid "No current selection"
 msgstr ""

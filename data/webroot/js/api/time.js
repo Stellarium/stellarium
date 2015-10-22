@@ -1,13 +1,12 @@
-
 // This file contains time-related functions and conversion helpers
 
-//ensure that the browser has a trunc function
-Math.trunc = Math.trunc || function(x) {
-    return x < 0 ? Math.ceil(x) : Math.floor(x);
-};
-
-var Time = ( function($) {
+define(["jquery", "./remotecontrol", "./updatequeue"], function($, rc, UpdateQueue) {
     "use strict";
+
+    //ensure that the browser has a trunc function
+    Math.trunc = Math.trunc || function(x) {
+        return x < 0 ? Math.ceil(x) : Math.floor(x);
+    };
 
     //Constants
     var ONE_OVER_JD_MILLISECOND = 24 * 60 * 60 * 1000;
@@ -18,223 +17,8 @@ var Time = ( function($) {
     //Private stuff
     var timeData; //the current time data
     var lastTimeSync; //The real time which timeData.jday corresponds to
-    var timeEditMode; //If the user currently focuses a time-edit control
-    var updateQueue; //The UpdateQueue object for time updates
-    var currentDisplayTime = {}; //the time shown in the controls, not automatically synced with timeData
+    var updateQueue = new UpdateQueue("/api/main/time"); //The UpdateQueue object for time updates
 
-    //controls
-    var $deltat;
-    var $bt_timerewind;
-    var $bt_timeforward;
-    var $bt_timeplaypause;
-    var $bt_timenow;
-    var $timewidget;
-    var $date_year;
-    var $date_month;
-    var $date_day;
-    var $time_hour;
-    var $time_minute;
-    var $time_second;
-    var $input_jd;
-    var $input_mjd;
-
-    function initControls() {
-        $deltat = $("#deltat");
-        $bt_timerewind = $("#bt_timerewind");
-        $bt_timeforward = $("#bt_timeforward");
-        $bt_timenow = $("#bt_timenow");
-        $bt_timeplaypause = $("#bt_timeplaypause");
-
-        $timewidget = $("#timewidget");
-        $date_year = $("#date_year");
-        $date_month = $("#date_month");
-        $date_day = $("#date_day");
-        $time_hour = $("#time_hour");
-        $time_minute = $("#time_minute");
-        $time_second = $("#time_second");
-
-        $input_jd = $("#input_jd");
-        $input_mjd = $("#input_mjd");
-
-
-        $("#bt_timerewind").click(Time.decreaseTimeRate);
-        $("#bt_timeforward").click(Time.increaseTimeRate);
-        $("#bt_timeplaypause").click(Time.togglePlayPause);
-        $("#bt_timenow").click(Time.setDateNow);
-
-        //jQuery UI initialization
-        $("#timewidget").tabs();
-
-        $("#date_year").spinner({
-            min: -100000,
-            max: 100000
-        }).data({
-            type: "date",
-            field: "year"
-        });
-        $("#date_month").spinner({
-            min: 0,
-            max: 13
-        }).data({
-            type: "date",
-            field: "month"
-        });
-        $("#date_day").spinner({
-            min: 0,
-            max: 32
-        }).data({
-            type: "date",
-            field: "day"
-        });
-        $("#time_hour").spinner({
-            min: -1,
-            max: 24
-        }).data({
-            type: "time",
-            field: "hour"
-        });
-        $("#time_minute").spinner({
-            min: -1,
-            max: 60
-        }).data({
-            type: "time",
-            field: "minute"
-        });
-        $("#time_second").spinner({
-            min: -1,
-            max: 60
-        }).data({
-            type: "time",
-            field: "second"
-        });
-        $("#input_jd").spinner({
-            min: -100000000,
-            max: 100000000,
-            numberFormat: "d5",
-            step: 0.00001
-        });
-        $("#input_mjd").spinner({
-            min: -100000000,
-            max: 100000000,
-            numberFormat: "d5",
-            step: 0.00001
-        });
-
-        //use delegated event style here to reduce number of unique events
-        var scope = ".timedisplay input";
-        $("#timewidget").on("focusin", scope, function(evt) {
-            Time.enterTimeEditMode();
-        }).on("focusout", scope, function(evt) {
-            Time.leaveTimeEditMode();
-        });
-
-        $("#time_local").on('input', scope, function() {
-            if ($(this).data('onInputPrevented')) return;
-            var val = this.value,
-                $this = $(this),
-                max = $this.spinner('option', 'max'),
-                min = $this.spinner('option', 'min');
-            console.log("val: " + val);
-            if (!val.match(/^\d+$/)) val = $this.data('prevData'); //we want only number, no alpha
-            val = parseFloat(val);
-            this.value = val > max ? max : val < min ? min : val;
-            //for some obscure reason, this.value may be a string instead of a float, so use val directly!
-            if (val !== $this.data('prevData')) Time.setDateTimeField($(this).data("type"), $(this).data("field"), val);
-        }).on('keydown', scope, function(e) { // to allow 'Backspace' key behaviour
-            $(this).data('onInputPrevented', e.which === 8 ? true : false);
-            $(this).data('prevData', this.value);
-        }).on("spin", scope, function(evt, ui) {
-            Time.setDateTimeField($(this).data("type"), $(this).data("field"), ui.value);
-            return false;
-        });
-
-        $("#input_jd").on('input', function() {
-            if ($(this).data('onInputPrevented')) return;
-            var val = this.value,
-                $this = $(this),
-                max = $this.spinner('option', 'max'),
-                min = $this.spinner('option', 'min');
-            console.log("val: " + val);
-            if (!val.match(/^\d+\.?\d*$/)) val = $this.data('prevData'); //we want only number, no alpha
-            var val2 = parseFloat(val);
-            this.value = val2 > max ? max : val2 < min ? min : val2;
-            //for some obscure reason, this.value may be a string instead of a float, so use val directly!
-            if (val !== $this.data('prevData')) Time.setJDay(val2);
-        }).on('keydown', function(e) { // to allow 'Backspace' key behaviour
-            $(this).data('onInputPrevented', e.which === 8 ? true : false);
-            $(this).data('prevData', this.value);
-        }).on("spin", function(evt, ui) {
-            Time.setJDay(ui.value);
-        });
-
-        $("#input_mjd").on('input', function() {
-            if ($(this).data('onInputPrevented')) return;
-            var val = this.value,
-                $this = $(this),
-                max = $this.spinner('option', 'max'),
-                min = $this.spinner('option', 'min');
-            console.log("val: " + val);
-            if (!val.match(/^\d+\.?\d*$/)) val = $this.data('prevData'); //we want only number, no alpha
-            var val2 = parseFloat(val);
-            this.value = val2 > max ? max : val2 < min ? min : val2;
-            //for some obscure reason, this.value may be a string instead of a float, so use val directly!
-            if (val !== $this.data('prevData')) Time.setJDay(val2 + 2400000.5);
-        }).on('keydown', function(e) { // to allow 'Backspace' key behaviour
-            $(this).data('onInputPrevented', e.which === 8 ? true : false);
-            $(this).data('prevData', this.value);
-        }).on("spin", function(evt, ui) {
-            Time.setJDay(ui.value + 2400000.5);
-        });
-    }
-
-    function animate() {
-        if (timeData && !timeEditMode) {
-            var currentJday = getCurrentTime();
-
-            //what we have to animate depends on which tab is shown
-            if ($timewidget.tabs('option', 'active') === 0) {
-                //apply timezone
-                var localTime = currentJday + timeData.gmtShift;
-
-                //we only update the spinners when there is a discrepancy, to improve performance
-                var date = jdayToDate(localTime);
-                if (currentDisplayTime.date.year !== date.year) {
-                    $date_year.spinner("value", date.year);
-                }
-                if (currentDisplayTime.date.month !== date.month) {
-                    $date_month.spinner("value", date.month);
-                }
-                if (currentDisplayTime.date.day !== date.day) {
-                    $date_day.spinner("value", date.day);
-                }
-                currentDisplayTime.date = date;
-
-                var time = jdayToTime(localTime);
-                if (currentDisplayTime.time.hour !== time.hour) {
-                    $time_hour.spinner("value", time.hour);
-                }
-                if (currentDisplayTime.time.minute !== time.minute) {
-                    $time_minute.spinner("value", time.minute);
-                }
-                if (currentDisplayTime.time.second !== time.second) {
-                    $time_second.spinner("value", time.second);
-                }
-                currentDisplayTime.time = time;
-            } else {
-                var jd = currentJday.toFixed(5);
-
-                if (currentDisplayTime.jd.toFixed(5) !== jd) {
-                    if (!$input_jd.is(":focus"))
-                        $input_jd.spinner("value", currentJday);
-                    //MJD directly depends on JD
-                    var mjd = (currentJday - 2400000.5);
-                    if (!$input_mjd.is(":focus"))
-                        $input_mjd.spinner("value", mjd);
-                }
-                currentDisplayTime.jd = currentJday;
-            }
-        }
-    }
 
     //Finds out if the time flows in 1:1 relation to real time
     function isRealTimeSpeed() {
@@ -365,10 +149,10 @@ var Time = ( function($) {
         timeData.timerate = timerate;
 
         //update time button now
-        updateTimeButtonState();
+        $(publ).trigger("timeDataUpdated", timeData);
 
         //we also update the time we have to reduce the effect of network latency
-        Main.postCmd("/api/main/time", {
+        rc.postCmd("/api/main/time", {
             timerate: timerate,
             time: getCurrentTime()
         });
@@ -481,98 +265,58 @@ var Time = ( function($) {
         }
     }
 
-    function updateTimeButtonState() {
-        //updates the state of the time buttons
-        //replicates functionality from StelGui.cpp update() function
-        $bt_timerewind.toggleClass("active", timeData.timerate < -0.99 * JD_SECOND);
-        $bt_timeforward.toggleClass("active", timeData.timerate > 1.01 * JD_SECOND);
-        $bt_timenow.toggleClass("active", timeData.isTimeNow);
-
-        if (timeData.timerate === 0) {
-            $bt_timeplaypause.removeClass("active").addClass("paused");
-        } else if (isRealTimeSpeed()) {
-            $bt_timeplaypause.removeClass("paused").addClass("active");
-        } else {
-            $bt_timeplaypause.removeClass("paused").removeClass("active");
-        }
-    }
-
-    function resetCurrentDisplayTime() {
-        currentDisplayTime.date = {
-            year: undefined,
-            month: undefined,
-            day: undefined
-        };
-        currentDisplayTime.time = {
-            hour: undefined,
-            minute: undefined,
-            second: undefined
-        };
-        currentDisplayTime.jd = 0;
-    }
-
-    function forceSpinnerUpdate() {
-        $date_year.spinner("value", currentDisplayTime.date.year);
-        $date_month.spinner("value", currentDisplayTime.date.month);
-        $date_day.spinner("value", currentDisplayTime.date.day);
-
-        $time_hour.spinner("value", currentDisplayTime.time.hour);
-        $time_minute.spinner("value", currentDisplayTime.time.minute);
-        $time_second.spinner("value", currentDisplayTime.time.second);
-
-        $input_jd.spinner("value", currentDisplayTime.jd);
-        $input_mjd.spinner("value", currentDisplayTime.jd - 2400000.5);
-    }
-
-    //Uses the currently set display time to queue an update of the server
-    function setTimeFromCurrentDisplayTime() {
+    //Uses a timeObj time to queue an update of the server
+    function setTimeFromTimeObj(timeObj) {
         //we have to change an eventual rollover
-        dateTimeForRollover(currentDisplayTime);
+        dateTimeForRollover(timeObj);
 
         //calculate a new JD in local time
-        var newJD = dateTimeToJd(currentDisplayTime.date.year, currentDisplayTime.date.month, currentDisplayTime.date.day,
-            currentDisplayTime.time.hour, currentDisplayTime.time.minute, currentDisplayTime.time.second);
+        var newJD = dateTimeToJd(timeObj.date.year, timeObj.date.month, timeObj.date.day,
+            timeObj.time.hour, timeObj.time.minute, timeObj.time.second);
 
         //we dont have access to the exact timezone shift for the new JD (would require a server poll), so this may introduce errors, most notably when entering/exiting summer time
         newJD -= (timeData.gmtShift);
 
-        //set the new jDay locally
-        resyncTime();
-        timeData.jday = newJD;
+        //set the new jDay
+        setJDay(newJD);
+    }
 
-        forceSpinnerUpdate();
+    function setJDay(jd) {
+        resyncTime();
+        timeData.jday = jd;
+
+        $(publ).trigger("timeChangeQueued", jd);
+
         updateQueue.enqueue({
-            time: newJD
+            time: jd
         });
     }
 
+    $(rc).on("serverDataReceived", function(evt, data) {
+        timeData = data.time;
+        lastTimeSync = $.now();
+
+        $(publ).trigger("timeDataUpdated", timeData);
+    });
+
     //Public stuff
-    return {
-        init: function() {
-            initControls();
-            updateQueue = new Main.UpdateQueue("/api/main/time");
+    var publ = {
 
-            resetCurrentDisplayTime();
+        getTimeData: function() {
+            return timeData;
         },
 
-        updateFromServer: function(time) {
-            timeData = time;
-            lastTimeSync = $.now();
+        getCurrentTime: getCurrentTime,
+        isRealTimeSpeed: isRealTimeSpeed,
 
-            //update deltaT display
-            var deltaTinSec = time.deltaT * (60 * 60 * 24);
-            $deltat[0].textContent=deltaTinSec.toFixed(2) + "s";
+        jdayToDate: jdayToDate,
+        jdayToTime: jdayToTime,
+        dateTimeToJd: dateTimeToJd,
+        dateTimeForRollover: dateTimeForRollover,
 
-            updateTimeButtonState();
-
-            if (!(timeEditMode || updateQueue.isQueued)) {
-                //if user is focusing the edit controls, or we have a pending time push, don't do this
-                //force an update
-                animate();
-            }
+        isTimeUpdatePending: function() {
+            return updateQueue.isQueued;
         },
-
-        updateAnimation: animate,
 
         increaseTimeRate: function() {
             var s = timeData.timerate;
@@ -592,6 +336,22 @@ var Time = ( function($) {
             setTimeRate(s);
         },
 
+        isRewind: function() {
+            return timeData.timerate < -0.99 * JD_SECOND;
+        },
+
+        isFastForward: function() {
+            return timeData.timerate > 1.01 * JD_SECOND;
+        },
+
+        isTimeNow: function() {
+            return timeData.isTimeNow;
+        },
+
+        isTimeStopped: function() {
+            return timeData.timerate === 0;
+        },
+
         togglePlayPause: function() {
             if (isRealTimeSpeed()) {
                 setTimeRate(0);
@@ -608,46 +368,15 @@ var Time = ( function($) {
             resyncTime();
             timeData.jday = jd;
 
-            Main.postCmd("/api/main/time", {
+            rc.postCmd("/api/main/time", {
                 time: timeData.jday
             });
         },
 
-        setJDay: function(val) {
-            if (isNaN(val)) {
-                console.log("Prevented NaN value");
-                return;
-            }
-            if (currentDisplayTime.jday !== val) {
-                console.log('setJDay: ' + val);
-
-                currentDisplayTime.jday = val;
-
-                resyncTime();
-                timeData.jday = val;
-
-                updateQueue.enqueue({
-                    time: val
-                });
-            }
-        },
-
-
-        setDateTimeField: function(type, field, val) {
-            if (currentDisplayTime[type][field] !== val) {
-                currentDisplayTime[type][field] = val;
-                setTimeFromCurrentDisplayTime();
-            }
-        },
-
-        enterTimeEditMode: function() {
-            console.log("Entering time edit mode...");
-            timeEditMode = true;
-        },
-
-        leaveTimeEditMode: function() {
-            console.log("Leaving time edit mode...");
-            timeEditMode = false;
-        }
+        setJDay: setJDay,
+        setTimeFromTimeObj: setTimeFromTimeObj,
     };
-})(jQuery);
+
+    return publ;
+
+});
