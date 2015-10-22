@@ -401,7 +401,6 @@ public:
 		setAttribute(Qt::WA_PaintOnScreen);
 		setAttribute(Qt::WA_NoSystemBackground);
 		setAttribute(Qt::WA_OpaquePaintEvent);
-		setAttribute(Qt::WA_AlwaysShowToolTips);
 	}
 
 protected:
@@ -573,41 +572,10 @@ void StelMainView::init(QSettings* conf)
 	updateNightModeProperty();
 	rootItem->setGraphicsEffect(nightModeEffect);
 
-	QSize size = glWidget->windowHandle()->screen()->size();
-	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
-		     conf->value("video/screen_h", size.height()).toInt());
-
-	bool fullscreen = conf->value("video/fullscreen", true).toBool();
-
-	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
-	resize(size);
-
-	QDesktopWidget *desktop = QApplication::desktop();
-	int screen = conf->value("video/screen_number", 0).toInt();
-	if (screen < 0 || screen >= desktop->screenCount())
-	{
-		qWarning() << "WARNING: screen" << screen << "not found";
-		screen = 0;
-	}
-	QRect screenGeom = desktop->screenGeometry(screen);
-
-	if (fullscreen)
-	{
-		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
-		move(screenGeom.x()+1, screenGeom.y()+1);
-		// The fullscreen window appears on screen where is the majority of
-		// the normal window. Therefore we crop the normal window to the
-		// screen area to ensure that the majority is not on another screen.
-		setGeometry(geometry() & screenGeom);
+	if (conf->value("video/fullscreen", true).toBool())
 		setFullScreen(true);
-	}
 	else
-	{
 		setFullScreen(false);
-		int x = conf->value("video/screen_x", 0).toInt();
-		int y = conf->value("video/screen_y", 0).toInt();
-		move(x + screenGeom.x(), y + screenGeom.y());
-	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
@@ -647,7 +615,7 @@ void StelMainView::updateNightModeProperty()
 // Work in progress, as long as we get reports about bad systems or until OpenGL startup is finalized and safe.
 // Several tests do not apply to MacOS X.
 #if STEL_USE_NEW_OPENGL_WIDGETS
-	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const
+	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
 #else
 	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const
 #endif
@@ -1013,10 +981,39 @@ void StelMainView::initTitleI18n()
 
 void StelMainView::setFullScreen(bool b)
 {
+	QSettings *conf = StelApp::getInstance().getSettings();
+	QSize size = QSize(conf->value("video/screen_w", 1024).toInt(),
+			   conf->value("video/screen_h", 768).toInt());
+
+	QDesktopWidget *desktop = QApplication::desktop();
+	int screen = conf->value("video/screen_number", 0).toInt();
+	if (screen < 0 || screen >= desktop->screenCount())
+	{
+		qWarning() << "WARNING: screen" << screen << "not found";
+		screen = 0;
+	}
+	QRect screenGeom = desktop->screenGeometry(screen);
+
 	if (b)
+	{
+		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
+		move(screenGeom.x()+1, screenGeom.y()+1);
+		// The fullscreen window appears on screen where is the majority of
+		// the normal window. Therefore we crop the normal window to the
+		// screen area to ensure that the majority is not on another screen.
+		setGeometry(geometry() & screenGeom);
+
 		showFullScreen();
+	}
 	else
+	{
 		showNormal();
+
+		resize(size);
+		int x = conf->value("video/screen_x", 0).toInt();
+		int y = conf->value("video/screen_y", 0).toInt();
+		move(x + screenGeom.x(), y + screenGeom.y());
+	}
 }
 
 void StelMainView::updateScene() {
