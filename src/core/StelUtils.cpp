@@ -49,8 +49,8 @@ QString getApplicationVersion()
 {
 #ifdef BZR_REVISION
 	return QString(PACKAGE_VERSION)+" (BZR r"+BZR_REVISION+")";
-#elif SVN_REVISION
-	return QString(PACKAGE_VERSION)+" (SVN r"+SVN_REVISION+")";
+#elif DEV_VERSION
+	return QString(DEV_VERSION);
 #else
 	return QString(PACKAGE_VERSION);
 #endif
