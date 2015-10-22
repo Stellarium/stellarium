@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-05-31 11:20+0000\n"
-"Last-Translator: Yao Chengyun <skystaryy@163.com>\n"
+"PO-Revision-Date: 2015-10-21 14:02+0000\n"
+"Last-Translator: Uirginis <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2015-10-22 05:09+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -65,7 +65,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:604
 msgid "Ecliptic of Date"
-msgstr ""
+msgstr "瞬时黄道"
 
 #: src/core/modules/GridLinesMgr.cpp:608
 msgid "Equator of J2000.0"
@@ -77,7 +77,7 @@ msgstr "赤道"
 
 #: src/core/modules/GridLinesMgr.cpp:617
 msgid "Precession Circle"
-msgstr ""
+msgstr "岁差圈"
 
 #: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1769
 msgid "Horizon"
@@ -141,7 +141,7 @@ msgstr "黄道坐标（J2000）"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "黄道网格"
 
 #: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1741
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -203,7 +203,7 @@ msgstr ", %1 米"
 
 #: src/core/modules/LandscapeMgr.cpp:686 src/ui_astroCalcDialog.h:361
 msgid "Celestial body:"
-msgstr ""
+msgstr "天体"
 
 #: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:216
 #: src/core/modules/MinorPlanet.cpp:211 src/core/modules/StarWrapper.cpp:53
@@ -225,7 +225,7 @@ msgstr "类型： <b>%1</b> (%2)"
 #: src/core/modules/Nebula.cpp:177
 #, qt-format
 msgid "Opacity: <b>%1</b>"
-msgstr ""
+msgstr "不透明度：<b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:222
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
@@ -279,7 +279,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Orientation angle: %1%2"
-msgstr ""
+msgstr "定向角:%1%2"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:232
@@ -292,12 +292,12 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
 #: src/core/modules/Nebula.cpp:263
 msgid "Mpc"
-msgstr ""
+msgstr "兆秒差距"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
 #: src/core/modules/Nebula.cpp:268
 msgid "kpc"
-msgstr ""
+msgstr "千秒差距"
 
 #: src/core/modules/Nebula.cpp:271
 #, qt-format
@@ -9875,7 +9875,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:283
 msgid "Equation of Time"
-msgstr ""
+msgstr "天文时差"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:59
 msgid "This plugin shows the solution of the equation of time."
