@@ -243,6 +243,15 @@ void MainService::postImpl(const QByteArray& operation, const APIParameters &par
 				double jday = QString(raw).toDouble(&ok);
 				if(ok)
 				{
+					//check for invalid double (NaN, inf...)
+					//this will crash the app if it is allowed
+					if(qIsNaN(jday) || qIsInf(jday))
+					{
+						qWarning()<<"[RemoteControl] Prevented setting invalid time"<<jday<<", does the web interface have a bug?";
+						response.setData("error: invalid time value");
+						return;
+					}
+
 					doneSomething = true;
 					//set new time
 					QMetaObject::invokeMethod(core,"setJD", SERVICE_DEFAULT_INVOKETYPE,

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-21 16:58+0200\n"
+"POT-Creation-Date: 2015-10-22 23:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/webroot/js/api/actions.js:110 data/webroot/js/api/actions.js:159
-msgid "on"
-msgstr ""
-
-#: data/webroot/js/api/actions.js:110 data/webroot/js/api/actions.js:159
-msgid "off"
-msgstr ""
-
-#: data/webroot/js/api/actions.js:177
+#: data/webroot/js/api/actions.js:71
 msgid "Could not retrieve action list"
 msgstr ""
 
-#: data/webroot/js/api/actions.js:212
+#: data/webroot/js/api/actions.js:105
 msgid "Error sending action to server: "
 msgstr ""
 
@@ -46,27 +38,15 @@ msgstr ""
 msgid "Could not retrieve planet list"
 msgstr ""
 
-#: data/webroot/js/api/remotecontrol.js:102
-msgid "No current selection"
-msgstr ""
-
-#: data/webroot/js/api/remotecontrol.js:335
+#: data/webroot/js/api/remotecontrol.js:115
 msgid "Error sending command to server: "
-msgstr ""
-
-#: data/webroot/js/api/remotecontrol.js:407
-msgid "Show All Items"
-msgstr ""
-
-#: data/webroot/js/api/remotecontrol.js:473
-msgid "Input did not match any item"
 msgstr ""
 
 #: data/webroot/js/api/scripts.js:64
 msgid "Could not retrieve script list"
 msgstr ""
 
-#: data/webroot/js/api/scripts.js:73 index.html:187
+#: data/webroot/js/api/scripts.js:73 index.html:177
 msgid "-none-"
 msgstr ""
 
@@ -74,7 +54,7 @@ msgstr ""
 msgid "Error (%1)"
 msgstr ""
 
-#: data/webroot/js/api/search.js:213 index.html:241
+#: data/webroot/js/api/search.js:213 index.html:231
 msgid "idle"
 msgstr ""
 
@@ -107,134 +87,154 @@ msgstr ""
 msgid "Could not retrieve landscape list"
 msgstr ""
 
+#: data/webroot/js/ui/actions.js:116 data/webroot/js/ui/actions.js:132
+msgid "on"
+msgstr ""
+
+#: data/webroot/js/ui/actions.js:116 data/webroot/js/ui/actions.js:132
+msgid "off"
+msgstr ""
+
+#: data/webroot/js/ui/combobox.js:58
+msgid "Show All Items"
+msgstr ""
+
+#: data/webroot/js/ui/combobox.js:124
+msgid "Input did not match any item"
+msgstr ""
+
+#: data/webroot/js/ui/mainui.js:132
+msgid "No current selection"
+msgstr ""
+
 #: index.html:5
 msgid "Stellarium remote control plugin"
 msgstr ""
 
-#: index.html:25
+#: index.html:15
 msgid "Stellarium remote control"
 msgstr ""
 
-#: index.html:29
+#: index.html:19
 msgid "Main controls"
 msgstr ""
 
-#: index.html:33
+#: index.html:23
 msgid "Actions and scripts"
 msgstr ""
 
-#: index.html:34
+#: index.html:24
 msgid "Location and objects"
 msgstr ""
 
-#: index.html:39
+#: index.html:29
 msgid "Time"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Up/Left"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Up"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Up/Right"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Left"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Focus on selected object"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Focus on selection"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Right"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Down/Left"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Down"
 msgstr ""
 
-#: index.html:78
+#: index.html:68
 msgid "Down/Right"
 msgstr ""
 
-#: index.html:87
+#: index.html:77
 msgid "Selection"
 msgstr ""
 
-#: index.html:109
+#: index.html:99
 msgid "DSOs"
 msgstr ""
 
-#: index.html:160
+#: index.html:150
 msgid "Show illumination layer"
 msgstr ""
 
-#: index.html:163
+#: index.html:153
 msgid "Current landscape"
 msgstr ""
 
-#: index.html:175
+#: index.html:165
 msgid "Current sky culture"
 msgstr ""
 
-#: index.html:187
+#: index.html:177
 msgid "Active script:"
 msgstr ""
 
-#: index.html:188
+#: index.html:178
 msgid "Run selected script"
 msgstr ""
 
-#: index.html:188
+#: index.html:178
 msgid "Stop current script"
 msgstr ""
 
-#: index.html:191
+#: index.html:181
 msgid "Actions"
 msgstr ""
 
-#: index.html:195
+#: index.html:185
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:206
+#: index.html:196
 msgid "Planet map"
 msgstr ""
 
-#: index.html:207
+#: index.html:197
 msgid "Planet map pointer"
 msgstr ""
 
-#: index.html:210
+#: index.html:200
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:235
+#: index.html:225
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
 
-#: index.html:236
+#: index.html:226
 msgid "Select and focus"
 msgstr ""
 
-#: index.html:267
+#: index.html:257
 msgid "No response from server"
 msgstr ""
 
-#: index.html:268
+#: index.html:258
 msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""

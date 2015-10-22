@@ -25,7 +25,7 @@ def main():
 //It contains all strings that can be translated through the StelTranslator in the JavaScript code by calling Main.tr()
 //When this file is requested through the RemoteControl web server, the strings are translated using the current Stellarium app language
 
-var TranslationData = {
+define({
 	""")
 	
 	first = True
@@ -36,7 +36,7 @@ var TranslationData = {
 				jsfile.write(',\n\t');
 			jsfile.write('"'+i.group(1)+'" : \'<?= tr("'+i.group(1)+'")?>\'')
 			first = False
-	jsfile.write("\n};");
+	jsfile.write("\n});");
 
 if __name__ == '__main__':
 	main()

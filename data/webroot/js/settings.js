@@ -1,4 +1,6 @@
-var UISettings = (function() {
+//This includes some easily changeable properties of the interface
+
+define(function() {
     "use strict";
 
     var data = {};
@@ -17,4 +19,4 @@ var UISettings = (function() {
     data.spinnerDelay = 100;
 
     return data;
-})();
+});
