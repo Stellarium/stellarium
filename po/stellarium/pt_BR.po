@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-15 22:02+0000\n"
+"PO-Revision-Date: 2015-10-22 03:48+0000\n"
 "Last-Translator: Marcos CARDINOT <mcardinot@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-16 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-22 05:09+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -3376,7 +3376,7 @@ msgstr "Visualização de cada uma das paisagens instaladas."
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:292
 msgid "Look at each installed sky culture."
-msgstr "Observe cada cultura do céu instalada."
+msgstr "Observe cada cultura celeste instalada."
 
 #: src/translations.h:293
 msgid "Script to demonstrate a partial lunar eclipse."
@@ -5019,7 +5019,7 @@ msgstr "Simular a velocidade da luz"
 
 #: src/ui_viewDialog.h:1613
 msgid "Scale Moon"
-msgstr "Aumentar a escala da Lua"
+msgstr "Escala da Lua"
 
 #: src/ui_viewDialog.h:1615
 msgid "Scale factor"
@@ -5389,7 +5389,7 @@ msgstr "Adicionar/remover paisagens…"
 
 #: src/ui_viewDialog.h:1804
 msgid "Use this sky culture as default"
-msgstr "Utilizar esta cultura do céu como padrão"
+msgstr "Utilizar esta cultura celeste como padrão"
 
 #: src/ui_viewDialog.h:1805
 msgid "Show names"
@@ -5444,11 +5444,11 @@ msgstr "Configurações de idioma"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Program Language"
-msgstr "Idioma do programa"
+msgstr "Idioma do Programa"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Sky Culture Language"
-msgstr "Idioma da cultura do céu"
+msgstr "Idioma da Cultura Celeste"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Default options"
@@ -8652,10 +8652,10 @@ msgid ""
 "object lists from the Minor Planet Center's website and perform searches in "
 "its online database."
 msgstr ""
-"<p align = \"justify\">Este complemento apresenta uma interface para "
-"adicionar asteroides e cometas ao Stellarium. Ele pode baixar listas de "
-"objetos do sítio da rede do Minor Planet Center e efetuar pesquisas em seu "
-"banco de dados na rede."
+"Este complemento apresenta uma interface para adicionar asteroides e cometas "
+"ao Stellarium. Ele permite baixar listas de objetos do website do Minor "
+"Planet Center, além de possibilitar a execução de pesquisas no banco de "
+"dados online."
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
