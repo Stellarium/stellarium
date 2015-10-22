@@ -130,6 +130,9 @@ IF(ENABLE_NLS)
 ENDIF()
 
 SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
+IF(RELEASE_BUILD)
+     ADD_DEFINITIONS(-DRELEASE_BUILD)
+ENDIF()
 
 # Activate sound support
 SET(ENABLE_SOUND 0 CACHE BOOL "Define whether sound support should be activated.")
