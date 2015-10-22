@@ -274,7 +274,7 @@ void HelpDialog::updateText(void)
 	// populate About tab
 	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
-	newHtml += "<h3>Copyright &copy; 2000-2014 Stellarium Developers</h3>";
+	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
 	newHtml += "as published by the Free Software Foundation; either version 2 ";
