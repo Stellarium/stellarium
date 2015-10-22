@@ -615,7 +615,7 @@ void StelMainView::updateNightModeProperty()
 // Work in progress, as long as we get reports about bad systems or until OpenGL startup is finalized and safe.
 // Several tests do not apply to MacOS X.
 #if STEL_USE_NEW_OPENGL_WIDGETS
-	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const;
+	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQOpenGLWidget* glWidget) const
 #else
 	void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, StelQGLWidget* glWidget) const
 #endif
