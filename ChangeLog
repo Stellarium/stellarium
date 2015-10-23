@@ -1,7 +1,24 @@
+0.14.0 [2015-10-31]
+A big leap forward in astronomical accuracy for historical applications:
+ - Precession now follows the IAU2006 model in the long-time version from Vondrák et al. 2011.
+ - Nutation is applied (IAU2000B solution). Given that nobody has observed it without telescope and the model does not give limits of applicability, we limit its application to 1500..2500
+ - Application of DeltaT has been simplified and made a bit more intuitive.
+We now dare to add another coordinate system: Ecliptic coordinates of date.
+We can therefore now show that planetary positions given by the commonly used solution VSOP87 is applicable to -4000..+8000 only, and its use outside this range will give somewhat artificial results. There is more to follow in future versions.
+
+The other big addition is a greatly improved collection of DSO data with lots of possibilities in a new GUI tab to select for object type and/or catalog. In total, 15 catalogs are now built-in!
+
+Also the Meteor Shower, Satellites, Telescope Control and 3D Sceneries plugins have been improved.
+
+Landscapes can have switchable labels, so you can e.g. indicate mountain peaks.
+
+In total 83 bugs and wishlist items were fixed or at least decided.
+Full list of changes: https://launchpad.net/stellarium/+milestone/0.14.0
+
 0.13.3 [2015-04-25]
 Bugfix release with few new features.
 
-This version is contains over 30 closed bugs, who include some wishes and new nice features - like 
+This version is contains over 30 closed bugs, who include some wishes and new nice features - like
 visualization of the 3D landscapes and extra DSO catalogs.
 
 Full list of changes: https://launchpad.net/stellarium/+milestone/0.13.3
@@ -9,7 +26,7 @@ Full list of changes: https://launchpad.net/stellarium/+milestone/0.13.3
 0.13.2 [2015-01-20]
 Major bugfix release with few new features.
 
-This version is contains over 70 closed bugs, who include some wishes and new nice features - like 
+This version is contains over 70 closed bugs, who include some wishes and new nice features - like
 visualization of the zodiacal light and new sky cultures.
 
 Full list of changes: https://launchpad.net/stellarium/+milestone/0.13.2
