@@ -13,6 +13,11 @@ Also the Meteor Shower, Satellites, Telescope Control and 3D Sceneries plugins h
 Landscapes can have switchable labels, so you can e.g. indicate mountain peaks.
 
 In total 83 bugs and wishlist items were fixed or at least decided.
+
+A platform-specific change for Windows: OpenGL binding is now dynamic.
+That means, there are no more separate OpenGL/ANGLE/MESA downlads, but after installation
+you will have separate commands in the start menu which force ANGLE or MESA modes.
+
 Full list of changes: https://launchpad.net/stellarium/+milestone/0.14.0
 
 0.13.3 [2015-04-25]
