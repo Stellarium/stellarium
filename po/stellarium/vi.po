@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-21 15:55+0000\n"
+"PO-Revision-Date: 2015-10-23 04:36+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-22 05:09+0000\n"
+"X-Launchpad-Export-Date: 2015-10-23 05:08+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -90,7 +90,7 @@ msgstr "Xích đạo thiên hà"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1781
 msgid "O./C. longitude"
-msgstr "Kinh độ"
+msgstr "Kinh độ đối lập/giao hội"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -1624,7 +1624,7 @@ msgstr "Xích kinh/Xích vĩ"
 #: src/core/StelObject.cpp:165 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Góc giờ/Độ lệch: %1/%2"
+msgstr "Góc giờ/Xích vĩ: %1/%2"
 
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
@@ -2833,7 +2833,7 @@ msgstr "Vật thể đám mây Oort"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:68
 msgid "Moons"
-msgstr "mặt trăng"
+msgstr "Mặt trăng"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
@@ -5278,7 +5278,7 @@ msgstr "Hiển thị đường xích đạo Ngân Hà"
 
 #: src/ui_viewDialog.h:1775
 msgid "Show meridian line."
-msgstr "Thể hiện đường thiên đỉnh"
+msgstr "Hiển thị đường kinh tuyến"
 
 #: src/ui_viewDialog.h:1779
 msgid ""
