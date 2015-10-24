@@ -536,7 +536,7 @@
                   <string>Limit the magnitude of stars</string>
                  </property>
                  <property name="text">
-                  <string>Limit magnitude</string>
+                  <string>Limit magnitude:</string>
                  </property>
                 </widget>
                </item>
@@ -803,7 +803,7 @@
                <item>
                 <widget class="QCheckBox" name="planetScaleMoonCheckBox">
                  <property name="text">
-                  <string>Scale Moon</string>
+                  <string>Scale Moon:</string>
                  </property>
                 </widget>
                </item>
@@ -839,7 +839,7 @@
                   <string>Limit the magnitude of solar system objects</string>
                  </property>
                  <property name="text">
-                  <string>Limit magnitude</string>
+                  <string>Limit magnitude:</string>
                  </property>
                 </widget>
                </item>
@@ -1509,7 +1509,7 @@
                     <string>Limit magnitude (for unaided/binocular observers) of deep-sky objects.</string>
                    </property>
                    <property name="text">
-                    <string>Limit magnitude</string>
+                    <string>Limit magnitude:</string>
                    </property>
                   </widget>
                  </item>
@@ -2651,12 +2651,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
