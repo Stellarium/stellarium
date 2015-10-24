@@ -553,22 +553,18 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
-	conf->setValue("astro/flag_star_magnitude_limit",
-	               skyd->getFlagStarMagnitudeLimit());
-	conf->setValue("astro/star_magnitude_limit",
-	               skyd->getCustomStarMagnitudeLimit());
-	conf->setValue("astro/flag_planet_magnitude_limit",
-		       skyd->getFlagPlanetMagnitudeLimit());
-	conf->setValue("astro/planet_magnitude_limit",
-		       skyd->getCustomPlanetMagnitudeLimit());
-	conf->setValue("astro/flag_nebula_magnitude_limit",
-	               skyd->getFlagNebulaMagnitudeLimit());
-	conf->setValue("astro/nebula_magnitude_limit",
-	               skyd->getCustomNebulaMagnitudeLimit());
+	conf->setValue("astro/flag_star_magnitude_limit", skyd->getFlagStarMagnitudeLimit());
+	conf->setValue("astro/star_magnitude_limit", skyd->getCustomStarMagnitudeLimit());
+	conf->setValue("astro/flag_planet_magnitude_limit", skyd->getFlagPlanetMagnitudeLimit());
+	conf->setValue("astro/planet_magnitude_limit", skyd->getCustomPlanetMagnitudeLimit());
+	conf->setValue("astro/flag_nebula_magnitude_limit", skyd->getFlagNebulaMagnitudeLimit());
+	conf->setValue("astro/nebula_magnitude_limit", skyd->getCustomNebulaMagnitudeLimit());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
 	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
+	conf->setValue("viewing/flag_isolated_trails", ssmgr->getFlagIsolatedTrails());
+	conf->setValue("viewing/flag_isolated_orbits", ssmgr->getFlagIsolatedOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
