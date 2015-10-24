@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-12 18:03+0600\n"
-"PO-Revision-Date: 2015-10-21 15:55+0000\n"
+"PO-Revision-Date: 2015-10-23 16:59+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-22 05:09+0000\n"
+"X-Launchpad-Export-Date: 2015-10-24 05:06+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -90,7 +90,7 @@ msgstr "Xích đạo thiên hà"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1781
 msgid "O./C. longitude"
-msgstr "Kinh độ"
+msgstr "Kinh độ đối lập/giao hội"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -1335,6 +1335,8 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"Nhóm Động lực học Hệ Mặt trời JPL của Phòng thí nghiệm tên lửa đẩy NASA sử "
+"dụng công thức này trong trang web tương tác %1JPL Horizons%2 của họ."
 
 #: src/core/StelCore.cpp:1718
 #, qt-format
@@ -1400,6 +1402,11 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Giải pháp này bởi F. Espenak và J. Meeus, dựa theo Morrison và Stephenson "
+"(2004) và sự phù hợp đa thức qua các giá trị bảng cho 1600-2000, được sử "
+"dụng cho %1NASA Eclipse Web Site%2 và trong <em>Five Millennium Canon of "
+"Solar Eclipse: -1900 to +3000</em> (2006) của họ. Công thức này cũng được sử "
+"dụng trong chương trình thiên văn SOLEX mặt trời, mặt trăng và hành tinh."
 
 #: src/core/StelCore.cpp:1733
 msgid "Used by default."
@@ -1624,7 +1631,7 @@ msgstr "Xích kinh/Xích vĩ"
 #: src/core/StelObject.cpp:165 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Góc giờ/Độ lệch: %1/%2"
+msgstr "Góc giờ/Xích vĩ: %1/%2"
 
 #: src/core/StelObject.cpp:152 src/core/StelObject.cpp:155
 #: src/core/StelObject.cpp:186 src/core/StelObject.cpp:188
@@ -2444,7 +2451,7 @@ msgstr "Bạn có thể xóa nó một cách thủ công bằng cách xóa chỉ
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "quickrun..."
-msgstr ""
+msgstr "chạy nhanh..."
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "selected text"
@@ -2833,7 +2840,7 @@ msgstr "Vật thể đám mây Oort"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:68
 msgid "Moons"
-msgstr "mặt trăng"
+msgstr "Mặt trăng"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
@@ -5278,7 +5285,7 @@ msgstr "Hiển thị đường xích đạo Ngân Hà"
 
 #: src/ui_viewDialog.h:1775
 msgid "Show meridian line."
-msgstr "Thể hiện đường thiên đỉnh"
+msgstr "Hiển thị đường kinh tuyến"
 
 #: src/ui_viewDialog.h:1779
 msgid ""
@@ -5449,8 +5456,8 @@ msgid ""
 "next startup."
 msgstr ""
 "Khôi phục cài đặt mặc định yêu cầu khởi động lại Stellarium. Lưu tất cả các "
-"tùy chọn hiện thời bao gồm FOV và hướng nhìn cho việc sử dụng ở lần khởi "
-"động kế tiếp."
+"tùy chọn hiện thời bao gồm trường nhìn và hướng nhìn cho việc sử dụng ở lần "
+"khởi động kế tiếp."
 
 #: src/ui_configurationDialog.h:1051
 msgid "The width of your view when Stellarium starts"
@@ -5997,7 +6004,7 @@ msgstr "Vị trí con trỏ"
 
 #: src/ui_scriptConsole.h:380
 msgid "Include dir:"
-msgstr ""
+msgstr "Bao gồm các thư mục:"
 
 #: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
@@ -6134,6 +6141,12 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
+"*goes misty eyed* Tôi nhớ lại việc đo kích thước của Cassini Division khi "
+"tôi là sinh viên. Nó không phải là một lý thuyết cao siêu quyến rũ mà người "
+"ta có thể mong đợi... Nó là mây... Nó là mưa... Phòng thí nghiệm của đài "
+"quan sát có một vài phạm vi cũ thiết lập ở một đầu, chỉ vào một <em>bức "
+"ảnh</em> của Thổ tinh ở đầu khác của phòng thí nghiệm. Chúng tôi đo. Chúng "
+"tôi tính toán. Chúng tôi mong ước chúng tôi thì ở Hawaii."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:444
@@ -7526,7 +7539,7 @@ msgstr "Số phân đoạn được dùng để vẽ mỗi đoạn cuối của 
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:741
 msgid "Fade length:"
-msgstr ""
+msgstr "Độ dài fade:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:742
 msgid "Realistic mode for the artificial satellites"
@@ -8091,6 +8104,8 @@ msgstr "Đưa tin nhắn điều khiển kính thiên văn đến tập tin"
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
+"Sử dụng máy chủ kính thiên văn có thể thực hiện được (ghi đè trình điều "
+"khiển tích hợp)"
 
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Executables directory:"
@@ -9182,7 +9197,7 @@ msgstr "parsecs"
 #: plugins/Pulsars/src/Pulsar.cpp:199
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
-msgstr ""
+msgstr "Tỷ lệ tổn thất năng lượng suy thoái: %1 ergs/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:203
 #, qt-format
@@ -9208,7 +9223,7 @@ msgstr "Khoảng cách dựa trên mô hình mật độ electron: %1 kpc (%2 n.
 #: plugins/Pulsars/src/Pulsar.cpp:220
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
-msgstr ""
+msgstr "Độ rộng đặc trưng ở 50% của đỉnh: %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:226 plugins/Pulsars/src/Pulsar.cpp:238
@@ -9582,6 +9597,10 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"Nhiệt độ cân bằng các hành tinh là một nhiệt độ lý thuyết theo (°C) mà hành "
+"tinh đều có một khi chỉ đơn giản coi như nó là một vật thể đen được làm nóng "
+"chỉ bởi ngôi sao mẹ của nó (giả sử một  0,3 bond albedo). Như ví dụ nhiệt độ "
+"cân bằng của hành tinh Trái đất là -18,15 ° C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Earth Similarity Index (ESI)"
@@ -9661,7 +9680,7 @@ msgstr "Chương trình tìm kiếm hành tinh ngoài hệ mặt trời Geneva"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Tin tức về Giao thoa Quang học Đường dài)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "NASA's Exoplanet Exploration Program"
@@ -10471,7 +10490,7 @@ msgstr "Vận tốc sao băng so mặt đất: %1 km/s"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:555
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Chỉ số dân số: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:560
 #, qt-format
@@ -11056,7 +11075,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
 msgid "Population index"
-msgstr ""
+msgstr "Chỉ số dân số"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:288
 msgid ""
@@ -11065,6 +11084,10 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"Chỉ số dân số chỉ ra sự phân bố cường độ của các cơn mưa sao băng. Giá trị "
+"dưới 2,5 tương ứng với sự phân bố nơi mà sao băng sáng thì nhiều hơn mức "
+"trung bình, trong khi giá trị trên 3,0 nghĩa là sự chia sẽ của các sao băng "
+"mờ nhạt thì lớn hơn thông thường."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:293
 msgid "Notes"
@@ -11523,7 +11546,7 @@ msgstr "Chế độ hình khối được chọn không được hỗ trợ, h�
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "Hình chiếu khối lười: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
@@ -11577,7 +11600,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:245
 msgid "Required for bump mapping and shadows!"
-msgstr ""
+msgstr "Yêu cầu cho hình chiếu va chạm và bóng!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:247
 msgid "Uses only a single shadow cascade instead of up to four."
@@ -11706,17 +11729,23 @@ msgid ""
 "This will speed up rendering, but the appearance will look "
 "&quot;broken&quot; until you stop moving."
 msgstr ""
+"Điều này sẽ tăng tốc độ diễn tả, nhưng sự xuất hiện sẽ nhìn "
+"&quot;broken&quot; mãi đến khi bạn ngừng di chuyển."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:272
 msgid ""
 "This does NOT work with the &quot;Geometry-Shader&quot; cubemapping mode!"
 msgstr ""
+"Cái này không làm việc với &quot;Bộ đổ bóng hình học&quot; chế độ hình chiếu "
+"khối!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:274
 msgid ""
 "This updates a second face, so that the visual appearance seems less "
 "&quot;broken&quot;."
 msgstr ""
+"Điều này cập nhật một khuôn mặt thứ hai, do đó xuất hiện hình ảnh có vẻ ít "
+"&quot;broken&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
@@ -11787,7 +11816,7 @@ msgstr "Bóng đơn"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "Hình chiếu va chạm"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
@@ -11835,7 +11864,7 @@ msgstr "Bóng hình chiếu đầy đủ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr ""
+msgstr "Vẽ lại hình chiếu khối lười biếng"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
@@ -11881,7 +11910,7 @@ msgstr "Tiêu đề:"
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
@@ -11901,11 +11930,11 @@ msgstr "Giữa các quý"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Mặt trăng dừng lại lớn"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Mặt trăng dừng lại nhỏ"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
 msgid "Zenith Passage"
@@ -11934,7 +11963,7 @@ msgstr "Kim tinh"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Phần bổ trợ ArchaeLines"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
@@ -11956,11 +11985,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Xích vĩ của Mặt trăng dừng lại lớn"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:192
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Xích vĩ của Mặt trăng dừng lại nhỏ"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
@@ -12008,11 +12037,11 @@ msgstr "Chọn màu sắc cho đường giữa các quý"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Chọn màu sắc cho đường dừng lại lớn"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:329
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Chọn màu sắc cho đường dừng lại nhỏ"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:341
 msgid "Select color for zenith passage line"
@@ -12068,11 +12097,11 @@ msgstr "Đổi màu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:345
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Đường Mặt trăng dừng lại lớn"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:346
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Đường Mặt trăng dừng lại nhỏ"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:347
 msgid "Declination of Zenith passage"
@@ -13421,3 +13450,36 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 
 #~ msgid "radio interpulse"
 #~ msgstr "phát xạ vô tuyến"
+
+#~ msgid "IAU Comission 53: Extrasolar Planets"
+#~ msgstr "Ủy ban IAU 53: Ngoại Hành tinh"
+
+#~ msgid ""
+#~ "Reports an analysis of source observability (rise, set, and transit times), "
+#~ "as well as the epochs of year when the source is best observed. It assumes "
+#~ "that a source is observable if it is above the horizon during a fraction of "
+#~ "the night. The plugin also gives the day for largest separation from the Sun "
+#~ "and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
+#~ "the quantities shown by this script is given in the 'About' tab of the "
+#~ "configuration window"
+#~ msgstr ""
+#~ "Báo cáo một phân tích của khả năng quan sát nguồn (giờ mọc, lặn, đi qua), "
+#~ "cũng như thời điểm trong năm khi nguồn được quan sát tốt nhất. Nó giả định "
+#~ "rằng một nguồn được quan sát nếu nó ở trên đường chân trời trong một phần "
+#~ "nhỏ của đêm. Phần bổ sung này cũng đưa ra ngày ly giác lớn nhất từ mặt trời "
+#~ "và những ngày mọc/lặn lúc mặt trời lặn và mọc.<br><br> Một lời giải thích "
+#~ "của các đại lượng được hiển thị bởi bài viết này được đưa ra trong thẻ 'Giới "
+#~ "thiệu về' của cửa sổ cấu hình"
+
+#~ msgid "Compass Marks Plugin"
+#~ msgstr "Phần bổ trợ Đánh dấu La bàn"
+
+#~ msgid ""
+#~ "A plugin that shows some historical supernovae brighter than 10 visual "
+#~ "magnitude."
+#~ msgstr ""
+#~ "Phần bổ trợ hiển thị một vài siêu tân tinh lịch sử sáng hơn độ sáng khả kiến "
+#~ "10."
+
+#~ msgid "Display a derived class-specific extra fields"
+#~ msgstr "Hiển thị nguồn gốc trường bổ sung lớp cụ thể"
