@@ -347,8 +347,13 @@ void MeteorShower::drawRadiant(StelCore *core)
 	rgb /= 255.f;
 	painter.setColor(rgb[0], rgb[1], rgb[2], alpha);
 
+	// Hide the radiant markers at during day light and make it visible
+	// when first stars will shine on the sky.
+	float mlimit = core->getSkyDrawer()->getLimitMagnitude();
+	float mag = 2.0f;
+
 	Vec3d win;
-	if (m_mgr->getEnableMarker() && painter.getProjector()->projectCheck(m_position, win))
+	if (m_mgr->getEnableMarker() && painter.getProjector()->projectCheck(m_position, win) && mag<=mlimit)
 	{
 		m_mgr->getRadiantTexture()->bind();
 		painter.drawSprite2dMode(XY[0], XY[1], 45);
@@ -358,7 +363,8 @@ void MeteorShower::drawRadiant(StelCore *core)
 			painter.setFont(m_mgr->getFont());
 			float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			float shift = 8.f + size/1.8f;
-			painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+			if ((mag+1.f)<mlimit)
+				painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
 		}
 	}
 }
