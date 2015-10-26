@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-24 17:13+0600\n"
-"PO-Revision-Date: 2015-10-14 19:51+0000\n"
+"PO-Revision-Date: 2015-10-25 11:21+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-25 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-10-26 05:05+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1591,6 +1591,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"A proxección Mercator é unha das proxeccións de mapa do mundo máis "
+"utilizada. Preserva a dirección e as formas, pero distorsiona o tamaño, nun "
+"grao crecente, dende o ecuador."
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
@@ -4898,7 +4901,7 @@ msgstr "Límite da magnitude das estrelas"
 
 #: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1726
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "Magnitude límite:"
 
 #: src/ui_viewDialog.h:1600
 msgid "Dim faint stars when a very bright object is visible"
@@ -4992,7 +4995,7 @@ msgstr "Simular velocidade da luz"
 
 #: src/ui_viewDialog.h:1633
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Escala da Lúa:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Scale factor"
