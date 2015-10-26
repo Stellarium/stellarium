@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-24 17:13+0600\n"
-"PO-Revision-Date: 2015-10-13 06:12+0000\n"
+"PO-Revision-Date: 2015-10-25 09:02+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-25 05:21+0000\n"
+"X-Launchpad-Export-Date: 2015-10-26 05:05+0000\n"
 "X-Generator: Launchpad (build 17812)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -1612,6 +1612,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"Проекція Меркатора є однією з найпоширеніших проекцій карти світу. Її "
+"використання дає змогу зберегти напрямки і форми, але призводить до "
+"наростання похибок у обчисленні відстаней при віддаленні від екватора."
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
@@ -4925,7 +4928,7 @@ msgstr "Обмежити зоряну величину зірок"
 
 #: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1726
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "Обмеження величини:"
 
 #: src/ui_viewDialog.h:1600
 msgid "Dim faint stars when a very bright object is visible"
@@ -5022,7 +5025,7 @@ msgstr "Імітувати швидкість світла"
 
 #: src/ui_viewDialog.h:1633
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Масштаб Місяця:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Scale factor"
