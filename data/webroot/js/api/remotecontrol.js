@@ -1,6 +1,6 @@
 // The main functionality including communication with the server
 
-define(["jquery", "settings", "./translationdata"], function($, settings, TranslationData) {
+define(["jquery", "settings", "translationdata"], function($, settings, TranslationData) {
     "use strict";
 
     //Private variables

@@ -1,4 +1,4 @@
-define(["jquery", "jquery-ui"], function($, jqueryui) {
+define(["jquery", "api/remotecontrol", "jquery-ui"], function($, rc) {
     "use strict";
 
     $.widget("custom.combobox", {
@@ -55,7 +55,7 @@ define(["jquery", "jquery-ui"], function($, jqueryui) {
 
             $("<a>")
                 .attr("tabIndex", -1)
-                .attr("title", Main.tr("Show All Items"))
+                .attr("title", rc.tr("Show All Items"))
                 .tooltip()
                 .appendTo(this.wrapper)
                 .button({
@@ -121,7 +121,7 @@ define(["jquery", "jquery-ui"], function($, jqueryui) {
             // Remove invalid value
             this.input
                 .val("")
-                .attr("title", Main.tr("Input did not match any item"))
+                .attr("title", rc.tr("Input did not match any item"))
                 .tooltip("open");
             this.element.val("");
             this._delay(function() {
