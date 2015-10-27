@@ -1,6 +1,6 @@
 /* jshint expr: true */
 
-define(["jquery", "settings", "api/remotecontrol", "./time", "./actions", "jquery-ui"], function($, settings, rc, timeui) {
+define(["jquery", "settings", "api/remotecontrol", "./time", "./actions", "./viewoptions", "./scripts", "./viewcontrol", "./location", "./search", "jquery-ui"], function($, settings, rc, timeui) {
 	"use strict";
 
 	var animationSupported = (window.requestAnimationFrame !== undefined);

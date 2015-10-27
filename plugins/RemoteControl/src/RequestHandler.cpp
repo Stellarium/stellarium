@@ -88,7 +88,7 @@ RequestHandler::RequestHandler(const StaticFileControllerSettings& settings, QOb
 
 	staticFiles = new StaticFileController(settings,this);
 	indexFilePath = staticFiles->getDocRoot() + "/index.html";
-	transDataPath = staticFiles->getDocRoot() + "/js/api/translationdata.js";
+	transDataPath = staticFiles->getDocRoot() + "/js/translationdata.js";
 	qDebug()<<"Index file located at "<<indexFilePath;
 
 	refreshHtmlTemplate();
@@ -154,7 +154,7 @@ void RequestHandler::service(HttpRequest &request, HttpResponse &response)
 #endif
 			response.write(indexFile.toUtf8(),true);
 		}
-		else if (path == "/js/api/translationdata.js")
+		else if (path == "/js/translationdata.js")
 		{
 			response.setHeader("Content-Type", qPrintable("text/javascript; charset=UTF-8"));
 

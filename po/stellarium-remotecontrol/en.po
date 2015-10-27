@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 23:41+0200\n"
+"POT-Creation-Date: 2015-10-27 23:50+0100\n"
 "Language-Team: English\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,16 +19,16 @@ msgstr ""
 msgid "Error sending action to server: "
 msgstr ""
 
-#: data/webroot/js/api/location.js:132 data/webroot/js/api/location.js:160
-#: data/webroot/js/api/search.js:232
+#: data/webroot/js/api/location.js:33 data/webroot/js/api/location.js:61
+#: data/webroot/js/api/search.js:157
 msgid "Error performing search"
 msgstr ""
 
-#: data/webroot/js/api/location.js:258
+#: data/webroot/js/api/location.js:124
 msgid "Could not retrieve country list"
 msgstr ""
 
-#: data/webroot/js/api/location.js:288
+#: data/webroot/js/api/location.js:137
 msgid "Could not retrieve planet list"
 msgstr ""
 
@@ -36,48 +36,43 @@ msgstr ""
 msgid "Error sending command to server: "
 msgstr ""
 
-#: data/webroot/js/api/scripts.js:64
+#: data/webroot/js/api/scripts.js:34
 msgid "Could not retrieve script list"
 msgstr ""
 
-#: data/webroot/js/api/scripts.js:73 index.html:177
-msgid "-none-"
-msgstr ""
-
-#: data/webroot/js/api/search.js:170
-msgid "Error (%1)"
-msgstr ""
-
-#: data/webroot/js/api/search.js:213 index.html:231
-msgid "idle"
-msgstr ""
-
-#: data/webroot/js/api/search.js:242
-msgid "waiting"
-msgstr ""
-
-#: data/webroot/js/api/search.js:257
+#: data/webroot/js/api/search.js:32
 msgid "querying"
 msgstr ""
 
-#: data/webroot/js/api/search.js:269
+#: data/webroot/js/api/search.js:41
+msgid "Error (%1)"
+msgstr ""
+
+#: data/webroot/js/api/search.js:53
 msgid "Error performing Simbad lookup"
 msgstr ""
 
-#: data/webroot/js/api/search.js:354
+#: data/webroot/js/api/search.js:71 index.html:231
+msgid "idle"
+msgstr ""
+
+#: data/webroot/js/api/search.js:90
 msgid "Error loading object types"
 msgstr ""
 
-#: data/webroot/js/api/search.js:395
+#: data/webroot/js/api/search.js:115
 msgid "Error getting object list"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:75
+#: data/webroot/js/api/search.js:167
+msgid "waiting"
+msgstr ""
+
+#: data/webroot/js/api/viewoptions.js:47
 msgid "Could not retrieve projection list"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:111
-#: data/webroot/js/api/viewoptions.js:147
+#: data/webroot/js/api/viewoptions.js:60 data/webroot/js/api/viewoptions.js:73
 msgid "Could not retrieve landscape list"
 msgstr ""
 
@@ -99,6 +94,10 @@ msgstr ""
 
 #: data/webroot/js/ui/mainui.js:132
 msgid "No current selection"
+msgstr ""
+
+#: data/webroot/js/ui/scripts.js:51 index.html:177
+msgid "-none-"
 msgstr ""
 
 #: index.html:5

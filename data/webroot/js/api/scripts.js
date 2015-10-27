@@ -1,80 +1,60 @@
-var Scripts = (function($) {
+define(["jquery", "./remotecontrol"], function($, rc) {
     "use strict";
 
-    //Private variables
-    var $activescript;
-    var $bt_runscript;
-    var $bt_stopscript;
-    var $scriptlist;
+    var activescript;
 
-    function initControls() {
-        $scriptlist = $("#scriptlist");
-        $bt_runscript = $("#bt_runscript");
-        $bt_stopscript = $("#bt_stopscript");
-        $activescript = $("#activescript");
-
-        var runscriptfn = function() {
-            var selection = $scriptlist.children("option").filter(":selected").text();
-            if (selection) {
-                //post a run requests
-                Main.postCmd("/api/scripts/run", {
-                    id: selection
-                });
-            }
-        };
-
-        $scriptlist.change(function() {
-            var selection = $scriptlist.children("option").filter(":selected").text();
-
-            $bt_runscript.prop({
-                disabled: false
-            });
-            console.log("selected: " + selection);
-        }).dblclick(runscriptfn);
-
-        $bt_runscript.dblclick(runscriptfn);
-
-        $bt_stopscript.click(function() {
-            //post a stop request
-            Main.postCmd("/api/scripts/stop");
-        });
+    function changeActiveScript(scriptName) {
+        if (activescript !== scriptName) {
+            activescript = scriptName;
+            $(publ).trigger("activeScriptChanged", activescript);
+        }
     }
 
+    $(rc).on("serverDataReceived", function(evt, data) {
+
+        if (data.script.scriptIsRunning) {
+            changeActiveScript(data.script.runningScriptId);
+        } else if (activescript) {
+            //a script was running before, but now is not
+            changeActiveScript(undefined);
+        }
+
+    });
+
     //Public stuff
-    return {
-        init: function() {
-
-            initControls();
-
-            //init script list
+    var publ = {
+        loadScriptList: function(callback) {
             $.ajax({
                 url: "/api/scripts/list",
-                success: function(data) {
-                    $scriptlist.empty();
-
-                    //sort it and insert
-                    $.each(data.sort(), function(idx, elem) {
-                        $("<option/>").text(elem).appendTo($scriptlist);
-                    });
-                },
+                success: callback,
                 error: function(xhr, status, errorThrown) {
                     console.log("Error updating script list");
                     console.log("Error: " + errorThrown);
                     console.log("Status: " + status);
-                    alert(Main.tr("Could not retrieve script list"));
+                    alert(rc.tr("Could not retrieve script list"));
                 }
             });
         },
 
-        updateFromServer: function(script) {
-            if (script.scriptIsRunning) {
-                $activescript.text(script.runningScriptId);
-            } else {
-                $activescript.text(Main.tr("-none-"));
-            }
-            $bt_stopscript.prop({
-                disabled: !script.scriptIsRunning
+        runScript: function(name) {
+            //change the local active script for improved responsiveness
+            changeActiveScript(name);
+
+            //post a run requests
+            rc.postCmd("/api/scripts/run", {
+                id: name
             });
+        },
+
+        stopScript: function() {
+            //change the local active script for improved responsiveness
+            changeActiveScript(undefined);
+
+            //post a stop request
+            rc.postCmd("/api/scripts/stop");
         }
     };
-})(jQuery);
+
+    return publ;
+
+});
