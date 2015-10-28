@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-24 17:13+0600\n"
-"PO-Revision-Date: 2015-10-15 20:19+0000\n"
+"PO-Revision-Date: 2015-10-26 23:57+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-25 05:11+0000\n"
-"X-Generator: Launchpad (build 17812)\n"
+"X-Launchpad-Export-Date: 2015-10-28 05:10+0000\n"
+"X-Generator: Launchpad (build 17833)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -1600,6 +1600,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"Die Mercator-Projektion ist eine der meistbenutzten Weltkartenprojektionen. "
+"Sie erhält Richtungen und Formen, aber verfälscht Größen bei zunehmender "
+"Entfernung vom Äquator."
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
@@ -4915,7 +4918,7 @@ msgstr "Helligkeitsbegrenzung für Sterne"
 
 #: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1726
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "Grenzgröße:"
 
 #: src/ui_viewDialog.h:1600
 msgid "Dim faint stars when a very bright object is visible"
@@ -5011,7 +5014,7 @@ msgstr "Lichtlaufzeiten berücksichtigen"
 
 #: src/ui_viewDialog.h:1633
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Mond vergrößern:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Scale factor"
