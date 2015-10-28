@@ -61,7 +61,8 @@ class EquationOfTime : public StelModule
 	Q_OBJECT
 	Q_PROPERTY(bool showEOT
 		   READ isEnabled
-		   WRITE enableEquationOfTime)
+		   WRITE enableEquationOfTime
+		   NOTIFY equationOfTimeStateChanged)
 
 public:
 	EquationOfTime();
@@ -137,6 +138,9 @@ public slots:
 
 private slots:
 	void updateMessageText();
+
+signals:
+	void equationOfTimeStateChanged(bool b);
 
 private:
 	// if existing, delete EquationOfTime section in main config.ini, then create with default values
