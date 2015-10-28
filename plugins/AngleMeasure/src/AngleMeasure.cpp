@@ -473,6 +473,8 @@ void AngleMeasure::enableAngleMeasure(bool b)
 		//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 		messageTimer->start();
 	}
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/enable_at_startup", flagShowAngleMeasure);
 }
 
 void AngleMeasure::showPositionAngle(bool b)
@@ -557,6 +559,7 @@ void AngleMeasure::loadSettings()
 {
 	conf->beginGroup("AngleMeasure");
 
+	enableAngleMeasure(conf->value("enable_at_startup", false).toBool());
 	useDmsFormat(conf->value("angle_format_dms", false).toBool());
 	showPositionAngle(conf->value("show_position_angle", false).toBool());
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
