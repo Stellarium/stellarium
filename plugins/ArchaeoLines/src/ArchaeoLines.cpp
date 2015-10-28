@@ -381,6 +381,7 @@ void ArchaeoLines::enableArchaeoLines(bool b)
 {
 	flagShowArchaeoLines = b;
 	lineFader = b;
+	conf->setValue("ArchaeoLines/enable_at_startup", flagShowArchaeoLines);
 }
 
 
@@ -450,6 +451,8 @@ void ArchaeoLines::loadSettings()
 	showCurrentSun(conf->value("ArchaeoLines/show_current_sun", true).toBool());
 	showCurrentMoon(conf->value("ArchaeoLines/show_current_moon", true).toBool());
 	showCurrentPlanet(conf->value("ArchaeoLines/show_current_planet", "none").toString());
+
+	enableArchaeoLines(conf->value("ArchaeoLines/enable_at_startup", false).toBool());
 }
 
 void ArchaeoLines::showEquinox(bool b)
