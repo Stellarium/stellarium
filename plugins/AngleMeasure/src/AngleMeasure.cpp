@@ -557,20 +557,16 @@ void AngleMeasure::restoreDefaultSettings()
 
 void AngleMeasure::loadSettings()
 {
-	conf->beginGroup("AngleMeasure");
-
-	enableAngleMeasure(conf->value("enable_at_startup", false).toBool());
-	useDmsFormat(conf->value("angle_format_dms", false).toBool());
-	showPositionAngle(conf->value("show_position_angle", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
-	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
-	horTextColor = StelUtils::strToVec3f(conf->value("text_color_horizontal", "0.9,0.6,0.4").toString());
-	horLineColor = StelUtils::strToVec3f(conf->value("line_color_horizontal", "0.9,0.6,0.4").toString());
-	showPositionAngleHor(conf->value("show_position_angle_horizontal", false).toBool());
-	showEquatorial(conf->value("show_equatorial", true).toBool());
-	showHorizontal(conf->value("show_horizontal", false).toBool());
-	showHorizontalStartSkylinked(conf->value("link_horizontal_start_to_sky", false).toBool());
-	showHorizontalEndSkylinked(conf->value("link_horizontal_end_to_sky", false).toBool());
-
-	conf->endGroup();
+	enableAngleMeasure(conf->value("AngleMeasure/enable_at_startup", false).toBool());
+	useDmsFormat(conf->value("AngleMeasure/angle_format_dms", false).toBool());
+	showPositionAngle(conf->value("AngleMeasure/show_position_angle", false).toBool());
+	textColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
+	lineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
+	horTextColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color_horizontal", "0.9,0.6,0.4").toString());
+	horLineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color_horizontal", "0.9,0.6,0.4").toString());
+	showPositionAngleHor(conf->value("AngleMeasure/show_position_angle_horizontal", false).toBool());
+	showEquatorial(conf->value("AngleMeasure/show_equatorial", true).toBool());
+	showHorizontal(conf->value("AngleMeasure/show_horizontal", false).toBool());
+	showHorizontalStartSkylinked(conf->value("AngleMeasure/link_horizontal_start_to_sky", false).toBool());
+	showHorizontalEndSkylinked(conf->value("AngleMeasure/link_horizontal_end_to_sky", false).toBool());
 }
