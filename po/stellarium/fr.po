@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-24 17:13+0600\n"
-"PO-Revision-Date: 2015-10-24 15:24+0000\n"
+"PO-Revision-Date: 2015-10-26 17:08+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-25 05:11+0000\n"
-"X-Generator: Launchpad (build 17812)\n"
+"X-Launchpad-Export-Date: 2015-10-28 05:10+0000\n"
+"X-Generator: Launchpad (build 17833)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -3425,8 +3425,8 @@ msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
-"En raison des irrégularités de l'orbite de Mercure et de la rotation en "
-"certains points, le soleil se lèvera et se couchera 3 fois en un seul jour "
+"En raison des irrégularités de l'orbite et de la rotation de Mercure à "
+"certains endroits, le Soleil se lèvera et se couchera 3 fois en un seul jour "
 "mercurien."
 
 #: src/translations.h:300
@@ -4996,22 +4996,24 @@ msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
-"Si vous désirez n'afficher que  l'orbite de la planète sélectionnée ainsi "
-"que celle de ses lunes, veuillez décocher cette option."
+"Cochez cette option si vous désirez afficher uniquement l'orbite de la "
+"planète sélectionnée ainsi que celle de ses lunes."
 
 #: src/ui_viewDialog.h:1624
 msgid "Show orbit for selected planet"
-msgstr "Afficher l'orbite de la planète sélectionnée"
+msgstr "N'afficher l'orbite que de la planète sélectionnée"
 
 #: src/ui_viewDialog.h:1626
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
-msgstr "Afficher les orbites des corps du système solaire"
+msgstr ""
+"Cochez cette option si vous désirez afficher uniquement le chemin du corps "
+"du système solaire sélectionné."
 
 #: src/ui_viewDialog.h:1628
 msgid "Show trail only for selected planet"
-msgstr "N'afficher l'orbite que de la planète sélectionnée"
+msgstr "N'afficher le chemin que de la planète sélectionnée"
 
 #: src/ui_viewDialog.h:1630
 msgid ""
