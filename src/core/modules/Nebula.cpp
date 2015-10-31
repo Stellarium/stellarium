@@ -506,27 +506,26 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		col = Vec3f(0.f,0.f,0.f);
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
-	//Q_ASSERT(majorAxisSize>0.); // THIS ASSERT FAILS. Catalog error?
+	float size = 6.0f;
+	float scaledSize = 0.0f;
 	if (drawHintProportional && (majorAxisSize>0.))
+		scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+
+	// Rotation looks good only for galaxies.
+	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
 	{
-		float size = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-		// Rotation looks good only for galaxies.
-		if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
-		{
-			// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
-			// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-			Vec3d XYZrel(XYZ);
-			XYZrel[2]*=0.99;
-			Vec3d XYrel;
-			sPainter.getProjector()->project(XYZrel, XYrel);
-			float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(6.0f,size), screenAngle*180./M_PI + orientationAngle);
-		}
-		else	// no galaxy
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(6.0f,size));
+		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
+		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
+		Vec3d XYZrel(XYZ);
+		XYZrel[2]*=0.99;
+		Vec3d XYrel;
+		sPainter.getProjector()->project(XYZrel, XYrel);
+		float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
 	}
-	else // not proportional or size unknown
-		sPainter.drawSprite2dMode(XY[0], XY[1], 6.0f);
+	else	// no galaxy
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
+
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)

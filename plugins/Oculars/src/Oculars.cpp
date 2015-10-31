@@ -1530,7 +1530,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		glEnable(GL_BLEND);
 		painter.enableTexture2d(true);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(0.77, 0.14, 0.16, 1.0);		
+		painter.setColor(0.77, 0.14, 0.16, 1.0);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		reticleTexture->bind();
 
