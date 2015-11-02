@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-24 17:13+0600\n"
-"PO-Revision-Date: 2015-10-10 09:14+0000\n"
+"PO-Revision-Date: 2015-11-01 17:00+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-10-25 05:13+0000\n"
-"X-Generator: Launchpad (build 17812)\n"
+"X-Launchpad-Export-Date: 2015-11-02 05:07+0000\n"
+"X-Generator: Launchpad (build 17838)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -403,22 +403,22 @@ msgstr "ismeretlen koncentráció"
 #: src/core/modules/Nebula.cpp:818
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
-msgstr ""
+msgstr "kis fényesség a csoport tagjainál"
 
 #: src/core/modules/Nebula.cpp:821
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
-msgstr ""
+msgstr "közepes  fényesség a csoport tagjainál"
 
 #: src/core/modules/Nebula.cpp:824
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
-msgstr ""
+msgstr "nagy  fényesség a csoport tagjainál"
 
 #: src/core/modules/Nebula.cpp:827
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
-msgstr ""
+msgstr "ismeretlen  fényesség a csoport tagjainál"
 
 #: src/core/modules/Nebula.cpp:833
 msgctxt "Trumpler's Number of Members Class"
@@ -1595,6 +1595,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
+"A Mercator-vetület az egyik leggyakrabban használt világtérkép vetület. "
+"Előnye, hogy megtartja az irányokat és az alakokat, de hátránya, hogy "
+"torzítja  a méreteket az Egyenlítőtől távolodva egyre nagyobb mértékben."
 
 #: src/core/StelProjectorClasses.cpp:410
 msgid "Orthographic"
@@ -2722,6 +2725,8 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
+"Nem megfelelő OpenGL verzió.  Javasoljuk a driver-programok frissítését, a "
+"video-hardver megújítását, vagy az ANGLE opció használatát."
 
 #: src/StelMainView.cpp:709
 msgid ""
@@ -3444,7 +3449,7 @@ msgstr ""
 #: src/translations.h:305
 msgid ""
 "Screensaver of various happenings in the Solar System. 248 events in all!"
-msgstr ""
+msgstr "Képernyőkímélő a Naprendszer 248 eseményének bemutatásával."
 
 #: src/translations.h:306
 msgid "A tour of the western constellations."
@@ -4883,7 +4888,7 @@ msgstr "Csillagok fényességének határa"
 
 #: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1726
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "Magnitúdó limitálása:"
 
 #: src/ui_viewDialog.h:1600
 msgid "Dim faint stars when a very bright object is visible"
@@ -11084,7 +11089,7 @@ msgstr "Keres"
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "dd/MM/yyyy"
-msgstr ""
+msgstr "nn/hh/éééé"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
