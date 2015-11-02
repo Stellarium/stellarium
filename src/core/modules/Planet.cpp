@@ -199,6 +199,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -272,13 +273,21 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
-			oss << q_("Apparent diameter: %1, with rings: %2")
-			       .arg(StelUtils::radToDmsStr(withoutRings, true),
-			            StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDecDegStr(withoutRings,4,false,true),
+					    StelUtils::radToDecDegStr(angularSize,4,false,true));
+			else
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDmsStr(withoutRings, true),
+					    StelUtils::radToDmsStr(angularSize, true));
 		}
 		else
 		{
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			else
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
 		}
 		oss << "<br>";
 	}
@@ -322,8 +331,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			if (deg>=267.5 && deg<=272.5)
 				phase = q_("First Quarter");
 
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			if (withDecimalDegree)
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			}
+			else
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			}
 
 			if (englishName=="Moon" && !phase.isEmpty())
 			{
