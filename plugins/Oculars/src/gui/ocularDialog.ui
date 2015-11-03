@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>668</width>
-    <height>478</height>
+    <height>495</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1259,6 +1259,13 @@
                   </property>
                  </widget>
                 </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="CCDChipX_lbl">
+                  <property name="text">
+                   <string>Chip width (mm):</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="2" column="1">
                  <widget class="QSpinBox" name="ccdResY">
                   <property name="minimum">
@@ -1269,29 +1276,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="CCDChipX_lbl">
-                  <property name="text">
-                   <string>Chip width (mm):</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QDoubleSpinBox" name="ccdChipX">
-                  <property name="decimals">
-                   <number>1</number>
-                  </property>
-                  <property name="minimum">
-                   <double>0.100000000000000</double>
-                  </property>
-                  <property name="maximum">
-                   <double>9999.000000000000000</double>
-                  </property>
-                  <property name="singleStep">
-                   <double>0.100000000000000</double>
-                  </property>
-                 </widget>
-                </item>
                 <item row="4" column="0">
                  <widget class="QLabel" name="CCDChipY_lbl">
                   <property name="text">
@@ -1299,8 +1283,8 @@
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="1">
-                 <widget class="QDoubleSpinBox" name="ccdChipY">
+                <item row="3" column="1">
+                 <widget class="QDoubleSpinBox" name="ccdChipX">
                   <property name="decimals">
                    <number>1</number>
                   </property>
@@ -1322,6 +1306,29 @@
                   </property>
                  </widget>
                 </item>
+                <item row="4" column="1">
+                 <widget class="QDoubleSpinBox" name="ccdChipY">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>9999.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QLabel" name="CCDPixelY_lbl">
+                  <property name="text">
+                   <string>Pixel height (micron):</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="5" column="1">
                  <widget class="QDoubleSpinBox" name="ccdPixelX">
                   <property name="decimals">
@@ -1338,13 +1345,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="6" column="0">
-                 <widget class="QLabel" name="CCDPixelY_lbl">
-                  <property name="text">
-                   <string>Pixel height (micron):</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="6" column="1">
                  <widget class="QDoubleSpinBox" name="ccdPixelY">
                   <property name="decimals">
@@ -1358,6 +1358,47 @@
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="OAGDist_lbl">
+                  <property name="text">
+                   <string>Prism distance (mm):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGDist">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="0">
+                 <widget class="QLabel" name="OAGPrismH_lbl">
+                  <property name="text">
+                   <string>Prism height (mm):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGPrismH">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="0" colspan="2">
+                 <widget class="QCheckBox" name="OAG_checkBox">
+                  <property name="text">
+                   <string>Off-Axis guider range</string>
                   </property>
                  </widget>
                 </item>
