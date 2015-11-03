@@ -35,6 +35,9 @@ CCD::CCD()
 	, m_chipHeight(0.)
 	, m_pixelWidth(0.)
 	, m_pixelHeight(0.)
+	, m_has_oag(false)
+	, m_oag_prismHeight(0.)
+	, m_oag_prismDistance(0.)
 {
 }
 
@@ -46,6 +49,9 @@ CCD::CCD(const QObject& other)
 	, m_chipHeight(other.property("chipHeight").toFloat())
 	, m_pixelWidth(other.property("pixelWidth").toFloat())
 	, m_pixelHeight(other.property("pixelHeight").toFloat())
+	, m_has_oag(other.property("hasOAG").toBool())
+	, m_oag_prismHeight(other.property("prismHeight").toFloat())
+	, m_oag_prismDistance(other.property("prismDistance").toFloat())
 {
 }
 
@@ -67,6 +73,9 @@ QMap<int, QString> CCD::propertyMap()
 		mapping[4] = "pixelWidth";
 		mapping[5] = "resolutionX";
 		mapping[6] = "resolutionY";
+		mapping[7] = "hasOAG";
+		mapping[8] = "prismHeight";
+		mapping[9] = "prismDistance";
 	}
 	return mapping;
 }
@@ -148,6 +157,50 @@ void CCD::setPixelHeight(double height)
 	m_pixelHeight = height;
 }
 
+bool CCD::hasOAG() const
+{
+	return m_has_oag;
+}
+
+void CCD::setHasOAG(bool oag)
+{
+	m_has_oag = oag;
+}
+
+double CCD::prismHeight()  const
+{
+	return m_oag_prismHeight;
+}
+
+void CCD::setPrismHeight(double height)
+{
+	m_oag_prismHeight = height;
+}
+
+double CCD::prismDistance()  const
+{
+	return m_oag_prismDistance;
+}
+
+void CCD::setPrismDistance(double distance)
+{
+	m_oag_prismDistance = distance;
+}
+
+double CCD::getInnerOAGRadius(Telescope *telescope, Lens *lens) const
+{
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+	double radius = RADIAN_TO_DEGREES * 2 * qAtan(this->prismDistance() /(2.0 * telescope->focalLength() * lens_multipler));
+	return radius;
+}
+
+double CCD::getOuterOAGRadius(Telescope *telescope, Lens *lens) const
+{
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+	double radius = RADIAN_TO_DEGREES * 2 * qAtan((this->prismDistance() + this->prismHeight()) /(2.0 * telescope->focalLength() * lens_multipler));
+	return radius;
+}
+
 double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
 	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
@@ -172,6 +225,9 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "chip_height", this->chipHeight());
 	settings->setValue(prefix + "pixel_width", this->pixelWidth());
 	settings->setValue(prefix + "pixel_height", this->pixelWidth());
+	settings->setValue(prefix + "has_oag", this->hasOAG());
+	settings->setValue(prefix + "prism_height", this->prismHeight());
+	settings->setValue(prefix + "prism_distance", this->prismDistance());
 }
 /* ********************************************************************* */
 #if 0
@@ -190,7 +246,9 @@ CCD* CCD::ccdFromSettings(QSettings* theSettings, int ccdIndex)
 	ccd->setChipHeight(theSettings->value(prefix + "chip_height", "0.0").toDouble());
 	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", "0.0").toDouble());
 	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", "0.0").toDouble());
-	
+	ccd->setHasOAG(theSettings->value(prefix + "has_oag", "false").toBool());
+	ccd->setPrismHeight(theSettings->value(prefix + "prism_height", "0.0").toDouble());
+	ccd->setPrismDistance(theSettings->value(prefix + "prism_distance", "0.0").toDouble());
 	return ccd;
 }
 

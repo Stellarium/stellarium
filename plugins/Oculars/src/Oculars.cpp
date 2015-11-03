@@ -1428,6 +1428,16 @@ void Oculars::paintCCDBounds()
 				b = transform.map(QPoint(width/2.0, -height/2.0));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 
+				if(ccd->hasOAG()) {
+					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
+					const double OuterOAGRatio = ccd->getOuterOAGRadius(telescope, lens) / screenFOV;
+					float in_oag_r = params.viewportXywh[aspectIndex] * InnerOAGRatio * params.devicePixelsPerPixel;
+					float out_oag_r = params.viewportXywh[aspectIndex] * OuterOAGRatio * params.devicePixelsPerPixel;
+					//painter.setColor(0.60f, 0.20f, 0.20f, .5f);
+					painter.drawCircle(params.viewportCenter[0], params.viewportCenter[1], in_oag_r);
+					painter.drawCircle(params.viewportCenter[0], params.viewportCenter[1], out_oag_r);
+				}
+
 				// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
