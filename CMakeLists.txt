@@ -286,7 +286,7 @@ IF(NOT RELEASE_BUILD)
     ENDIF()
 ENDIF()
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
 
 ### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
