@@ -283,7 +283,7 @@ QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
-IF(GUI_MODE STREQUAL "Standard")
+IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
      SET(stellarium_gui_SRCS
           gui/StelGui.hpp
           gui/StelGui.cpp
@@ -368,7 +368,7 @@ ENDIF()
 #############################################################################################
 ################################ No GUI plugin compilation ##################################
 #############################################################################################
-IF (GUI_MODE STREQUAL "None")
+IF (STELLARIUM_GUI_MODE STREQUAL "None")
     ADD_DEFINITIONS(-DNO_GUI)
 ENDIF()
 

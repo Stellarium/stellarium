@@ -129,9 +129,9 @@ IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
 
-SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
-IF(RELEASE_BUILD)
-     ADD_DEFINITIONS(-DRELEASE_BUILD)
+SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
+IF(STELLARIUM_RELEASE_BUILD)
+     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
 ENDIF()
 
 # Activate sound support
@@ -149,7 +149,7 @@ ELSE()
 ENDIF()
 
 
-SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
+SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
 
@@ -275,14 +275,15 @@ ELSE()
 ENDIF()
 
 ########### Get revision number for non-release builds ###########
-IF(NOT RELEASE_BUILD)
+IF(NOT STELLARIUM_RELEASE_BUILD)
     #Hack until CMake detection for Bazaar is finished
     IF(BZR_REVISION)
         SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
     ENDIF()
-    IF(DEV_VERSION)
-        ADD_DEFINITIONS(-DDEV_VERSION="${DEV_VERSION}")
+    IF(STELLARIUM_VERSION)
+        SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
+        ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
     ENDIF()
 ENDIF()
 
