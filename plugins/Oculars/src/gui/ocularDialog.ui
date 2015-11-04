@@ -1421,8 +1421,14 @@
                 </item>
                 <item row="11" column="1">
                  <widget class="QDoubleSpinBox" name="OAGPrismPA">
+                  <property name="decimals">
+                   <number>0</number>
+                  </property>
+                  <property name="maximum">
+                   <double>360.000000000000000</double>
+                  </property>
                   <property name="singleStep">
-                   <double>0.010000000000000</double>
+                   <double>1.000000000000000</double>
                   </property>
                  </widget>
                 </item>
