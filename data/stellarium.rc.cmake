@@ -1,5 +1,5 @@
 stellarium-icon ICON "stellarium.ico"
-1 Manifest "stellarium.exe.manifest"
+1 RT_MANIFEST "stellarium.exe.manifest"
 1 VERSIONINFO
 FILEVERSION     @PACKAGE_VERSION_RC@
 PRODUCTVERSION  @PACKAGE_VERSION_RC@
