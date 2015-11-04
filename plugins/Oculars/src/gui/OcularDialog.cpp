@@ -421,7 +421,9 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdResY, 6);
 	ccdMapper->addMapping(ui->OAG_checkBox, 7);
 	ccdMapper->addMapping(ui->OAGPrismH, 8);
-	ccdMapper->addMapping(ui->OAGDist, 9);
+	ccdMapper->addMapping(ui->OAGPrismW, 9);
+	ccdMapper->addMapping(ui->OAGDist, 10);
+	ccdMapper->addMapping(ui->OAGPrismPA, 11);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 					ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -525,7 +527,7 @@ void OcularDialog::initAboutText()
 	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";
-	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")<br />Alexander Wolf<br />Rumen Bogdanovski (" + q_("Off-Axis Guider feature") + ")</td></tr>";
+	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")<br />Alexander Wolf<br />Rumen G. Bogdanovski &lt;rumen@skyarchive.org&gt;</td></tr>";
 	html += "</table>";
 
 	//Overview
