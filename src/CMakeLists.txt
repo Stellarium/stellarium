@@ -452,7 +452,9 @@ ELSE()
 ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
-
+IF(MSVC)
+     ADD_DEPENDENCIES(stellarium stellariumManifest)
+ENDIF()
 INSTALL(TARGETS stellarium DESTINATION bin)
 
 
