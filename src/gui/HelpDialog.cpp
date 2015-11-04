@@ -268,7 +268,7 @@ void HelpDialog::updateText(void)
 		     << "Simon Parzer" << "Peter Neubauer" << "Andrei Borza" << "Florian Schaukowitsch"
 		     << "Allan Johnson" << "Felix Zeltner" << "Paolo Cancedda" << "Ross Mitchell"
 		     << "David Baucum" << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony"
-		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko";
+		     << "Tony Furr" << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski";
 	contributors.sort();
 
 	// populate About tab
