@@ -72,6 +72,8 @@ IF(WIN32)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
           SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
      ELSE()
+          SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /MANIFEST:NO")
+          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /MANIFEST:NO")
           # _USE_MATH_DEFINES Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
           # NOMINMAX So that windows.h does not redefine min and max
           # _WINSOCKAPI_ Prevent window.s from including winsock.h
@@ -293,7 +295,10 @@ IF(WIN32)
     ### Generate a manifest file                        ###
     #######################################################
 
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
+    IF(MSVC)
+        CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
+        ADD_CUSTOM_TARGET(stellariumManifest ALL COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_SOURCE_DIR} mt -nologo -manifest ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.exe.manifest -outputresource:${CMAKE_CURRENT_BINARY_DIR}/src/${CMAKE_BUILD_TYPE}/stellarium.exe)
+    ENDIF()
 
     #######################################################
     ### Generate a VersionInfo file                     ###
@@ -412,7 +417,6 @@ IF(WIN32)
 
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
-
 ENDIF()
 
 IF(APPLE)
@@ -489,7 +493,8 @@ IF(WIN32)
     STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
     STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/util/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
-ENDIF()
+ENDIF() 
+
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
