@@ -452,11 +452,18 @@ ELSE()
 ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
-IF(MSVC)
-     ADD_DEPENDENCIES(stellarium stellariumManifest)
-ENDIF()
-INSTALL(TARGETS stellarium DESTINATION bin)
 
+# Adding manifest
+IF(MSVC)
+     ADD_CUSTOM_COMMAND(TARGET stellarium
+          POST_BUILD
+          COMMAND "mt.exe" -nologo -manifest ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest -outputresource:$<TARGET_FILE:stellarium>
+          COMMENT "Adding manifest..."
+          VERBATIM
+     )
+ENDIF(MSVC)
+
+INSTALL(TARGETS stellarium DESTINATION bin)
 
 
 #############################################################################################

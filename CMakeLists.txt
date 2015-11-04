@@ -295,10 +295,7 @@ IF(WIN32)
     ### Generate a manifest file                        ###
     #######################################################
 
-    IF(MSVC)
-        CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
-        ADD_CUSTOM_TARGET(stellariumManifest ALL COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_SOURCE_DIR} mt -nologo -manifest ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.exe.manifest -outputresource:${CMAKE_CURRENT_BINARY_DIR}/src/${CMAKE_BUILD_TYPE}/stellarium.exe)
-    ENDIF()
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
 
     #######################################################
     ### Generate a VersionInfo file                     ###
