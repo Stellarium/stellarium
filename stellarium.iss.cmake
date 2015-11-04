@@ -12,8 +12,14 @@ WizardImageBackColor=clBlack
 AppName=Stellarium
 AppVersion=@PACKAGE_VERSION@
 AppVerName=Stellarium @PACKAGE_VERSION@
+AppCopyright=Copyright (C) @COPYRIGHT_YEARS@ Stellarium team
 AppPublisher=Stellarium team
 AppPublisherURL=http://www.stellarium.org/
+AppSupportURL=http://www.stellarium.org/
+AppUpdatesURL=http://www.stellarium.org/
+VersionInfoVersion=@PACKAGE_VERSION@
+MinVersion=0,@MIN_VERSION@
+SetupIconFile=data\stellarium.ico
 OutputBaseFilename=stellarium-@PACKAGE_VERSION@-@ISS_PACKAGE_PLATFORM@
 OutputDir=installers
 ; In 64-bit mode, {pf} is equivalent to {pf64},
@@ -32,7 +38,6 @@ Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
 Source: "stellarium.url"; DestDir: "{app}"
 Source: "stellarium-guide.url"; DestDir: "{app}"
 Source: "stellarium-devdocs.url"; DestDir: "{app}"
-Source: "stellarium.exe.manifest"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"

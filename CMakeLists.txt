@@ -287,10 +287,30 @@ IF(NOT STELLARIUM_RELEASE_BUILD)
     ENDIF()
 ENDIF()
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
 
-### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
+    #######################################################
+    ### Generate a manifest file                        ###
+    #######################################################
+
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
+
+    #######################################################
+    ### Generate a VersionInfo file                     ###
+    #######################################################
+
+    IF(STELLARIUM_RELEASE_BUILD)
+       SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
+    ELSE()
+       SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
+    ENDIF()
+    STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.rc.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.rc @ONLY)
+
+    #######################################################
+    ### [Optional] Embed icon in the Windows executable ###
+    #######################################################
+
     SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
     IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
         IF(NOT MSVC)
@@ -302,10 +322,11 @@ IF(WIN32)
             MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
         ENDIF(RC_COMPILER_PATH)
     ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-ENDIF()
 
-### Generate an Inno Setup project file ###
-IF(WIN32)
+    #######################################################
+    ### Generate an Inno Setup project file             ###
+    #######################################################
+
     # Try to guess the MinGW /bin directory...
     GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
@@ -363,8 +384,16 @@ IF(WIN32)
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
     IF(MSVC)
+        # Use installer for checking minimum requirements
+        # Stellarium/MSVC require Windows 7 (6.1.7600) for work
+        # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+        SET(MIN_VERSION "6.1.7600")
         SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
     ELSE()
+        # Use installer for checking minimum requirements
+        # Stellarium/MinGW require Windows XP (5.1.2600) for work
+        # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+        SET(MIN_VERSION "5.1.2600")
         SET(ISS_ANGLE_LIBS "; ANGLE support doesn't exists for MinGW")
     ENDIF()
     SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
@@ -383,6 +412,7 @@ IF(WIN32)
 
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
+
 ENDIF()
 
 IF(APPLE)
