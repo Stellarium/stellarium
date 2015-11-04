@@ -47,13 +47,13 @@ QString getApplicationName()
 //! Return the version of stellarium, i.e. "0.9.0"
 QString getApplicationVersion()
 {
-#ifdef RELEASE_BUILD
+#ifdef STELLARIUM_RELEASE_BUILD
 	return QString(PACKAGE_VERSION);
 #else
 	#ifdef BZR_REVISION
 	return QString(PACKAGE_VERSION)+" (BZR r"+BZR_REVISION+")";
-	#elif defined(DEV_VERSION)
-	return QString(DEV_VERSION);
+	#elif defined(STELLARIUM_VERSION)
+	return QString(STELLARIUM_VERSION);
 	#else
 	return QString(PACKAGE_VERSION)+QChar(0x03B2);
 	#endif
