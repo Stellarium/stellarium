@@ -9,14 +9,18 @@ FILESUBTYPE     0x0L
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "040904E4"
+        BLOCK "000004B0"
         BEGIN
-            VALUE "CompanyName",      "Stellarium team\0"
-            VALUE "FileDescription",  "Stellarium is a free open source planetarium\0"
-            VALUE "FileVersion",      "@PACKAGE_VERSION@\0"
-            VALUE "LegalCopyright",   "Copyright (C) @COPYRIGHT_YEARS@ Stellarium team\0"
-            VALUE "ProductName",      "Stellarium\0"
-            VALUE "ProductVersion",   "@PACKAGE_VERSION@\0"
+            VALUE "CompanyName",      "Stellarium team"
+            VALUE "FileDescription",  "Stellarium is a free open source planetarium"
+            VALUE "FileVersion",      "@PACKAGE_VERSION@"
+            VALUE "LegalCopyright",   "Copyright (C) @COPYRIGHT_YEARS@ Stellarium team"
+            VALUE "ProductName",      "Stellarium"
+            VALUE "ProductVersion",   "@PACKAGE_VERSION@"
         END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 0x04B0
     END
 END
