@@ -1,5 +1,4 @@
 stellarium-icon ICON "stellarium.ico"
-1 RT_MANIFEST "stellarium.exe.manifest"
 1 VERSIONINFO
 FILEVERSION     @PACKAGE_VERSION_RC@
 PRODUCTVERSION  @PACKAGE_VERSION_RC@
@@ -18,9 +17,5 @@ BEGIN
             VALUE "ProductName",      "Stellarium"
             VALUE "ProductVersion",   "@PACKAGE_VERSION@"
         END
-    END
-    BLOCK "VarFileInfo"
-    BEGIN
-        VALUE "Translation", 0x0409, 0x04B0
     END
 END
