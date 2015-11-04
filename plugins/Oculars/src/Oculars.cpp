@@ -1431,11 +1431,36 @@ void Oculars::paintCCDBounds()
 				if(ccd->hasOAG()) {
 					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
 					const double OuterOAGRatio = ccd->getOuterOAGRadius(telescope, lens) / screenFOV;
+					const double prismXRatio = ccd->getOAGActualFOVx(telescope, lens) / screenFOV;
 					float in_oag_r = params.viewportXywh[aspectIndex] * InnerOAGRatio * params.devicePixelsPerPixel;
 					float out_oag_r = params.viewportXywh[aspectIndex] * OuterOAGRatio * params.devicePixelsPerPixel;
+					float h_width = params.viewportXywh[aspectIndex] * prismXRatio * params.devicePixelsPerPixel / 2.0;
+
 					//painter.setColor(0.60f, 0.20f, 0.20f, .5f);
-					painter.drawCircle(params.viewportCenter[0], params.viewportCenter[1], in_oag_r);
-					painter.drawCircle(params.viewportCenter[0], params.viewportCenter[1], out_oag_r);
+					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							params.viewportCenter[1] * params.devicePixelsPerPixel, in_oag_r);
+					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							params.viewportCenter[1] * params.devicePixelsPerPixel, out_oag_r);
+
+					QTransform oag_transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccdRotationAngle + ccd->prismPosAngle()));
+
+					// bottom line
+					a = oag_transform.map(QPoint(-h_width, in_oag_r));
+					b = oag_transform.map(QPoint(h_width, in_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
+					// top line
+					a = oag_transform.map(QPoint(-h_width, out_oag_r));
+					b = oag_transform.map(QPoint(h_width, out_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
+					// left line
+					a = oag_transform.map(QPoint(-h_width, out_oag_r));
+					b = oag_transform.map(QPoint(-h_width, in_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
+					// right line
+					a = oag_transform.map(QPoint(h_width, out_oag_r));
+					b = oag_transform.map(QPoint(h_width, in_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
 				}
 
 				// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
