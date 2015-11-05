@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-03 20:48+0600\n"
+"POT-Creation-Date: 2015-11-04 21:40+0600\n"
 "PO-Revision-Date: 2015-08-24 18:59+0000\n"
 "Last-Translator: miljan <www.miljan@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-04 05:26+0000\n"
+"X-Launchpad-Export-Date: 2015-11-05 05:18+0000\n"
 "X-Generator: Launchpad (build 17838)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1738,7 +1738,7 @@ msgstr "Контакт"
 
 #: src/gui/ConfigurationDialog.cpp:856
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1753,7 +1753,7 @@ msgstr "Издање"
 
 #: src/gui/ConfigurationDialog.cpp:939
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -2136,7 +2136,7 @@ msgstr "OSX програмер: %1"
 
 #: src/gui/HelpDialog.cpp:315
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
 msgid "Contributors"
 msgstr "Сарадници"
 
@@ -4489,10 +4489,10 @@ msgid "&Paste"
 msgstr "&Налепи"
 
 #: src/translations.h:567 src/ui_locationDialogGui.h:432
-#: plugins/Oculars/src/ui_ocularDialog.h:1128
-#: plugins/Oculars/src/ui_ocularDialog.h:1138
-#: plugins/Oculars/src/ui_ocularDialog.h:1145
-#: plugins/Oculars/src/ui_ocularDialog.h:1159
+#: plugins/Oculars/src/ui_ocularDialog.h:1155
+#: plugins/Oculars/src/ui_ocularDialog.h:1165
+#: plugins/Oculars/src/ui_ocularDialog.h:1172
+#: plugins/Oculars/src/ui_ocularDialog.h:1188
 msgid "Delete"
 msgstr "Избриши"
 
@@ -5450,7 +5450,7 @@ msgstr "Све доступно"
 msgid "Display no information"
 msgstr "Немој приказати информације"
 
-#: src/ui_configurationDialog.h:1064 plugins/Oculars/src/Oculars.cpp:1995
+#: src/ui_configurationDialog.h:1064 plugins/Oculars/src/Oculars.cpp:2020
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "Ништа"
@@ -6255,7 +6255,7 @@ msgid "Restore default settings"
 msgstr "Враћање подразумеване поставке"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1166
+#: plugins/Oculars/src/ui_ocularDialog.h:1195
 #: plugins/Satellites/src/ui_satellitesDialog.h:793
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -6289,7 +6289,7 @@ msgid "Compass marks"
 msgstr "Ознаке компаса"
 
 #: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1307
-#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1130
 msgid "Oculars"
 msgstr "Окулари"
 
@@ -6356,7 +6356,7 @@ msgid "&Reset rotation"
 msgstr "&Поништи окретање"
 
 #: plugins/Oculars/src/Oculars.cpp:1308
-#: plugins/Oculars/src/ui_ocularDialog.h:1105
+#: plugins/Oculars/src/ui_ocularDialog.h:1132
 msgid "Ocular view"
 msgstr "Окуларни поглед"
 
@@ -6396,117 +6396,117 @@ msgstr "Изабери следећи окулар"
 msgid "Select previous eyepiece"
 msgstr "Изабери претходни окулар"
 
-#: plugins/Oculars/src/Oculars.cpp:1474
+#: plugins/Oculars/src/Oculars.cpp:1499
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "Ректасцензија/деклинација (Ј2000.0) крстића"
 
-#: plugins/Oculars/src/Oculars.cpp:1611
+#: plugins/Oculars/src/Oculars.cpp:1636
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:501
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Окулар #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1616
+#: plugins/Oculars/src/Oculars.cpp:1641
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:505
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Окулар #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1630
+#: plugins/Oculars/src/Oculars.cpp:1655
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Окулар ФД: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1637
+#: plugins/Oculars/src/Oculars.cpp:1662
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Окулар видног поља: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1649
+#: plugins/Oculars/src/Oculars.cpp:1674
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
 #, qt-format
 msgid "Lens #%1"
 msgstr "Сочиво #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1653
+#: plugins/Oculars/src/Oculars.cpp:1678
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Сочиво #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1658
+#: plugins/Oculars/src/Oculars.cpp:1683
 msgid "Lens: none"
 msgstr "Сочиво: без сочива"
 
-#: plugins/Oculars/src/Oculars.cpp:1688 plugins/Oculars/src/Oculars.cpp:1729
+#: plugins/Oculars/src/Oculars.cpp:1713 plugins/Oculars/src/Oculars.cpp:1754
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:739
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1691
+#: plugins/Oculars/src/Oculars.cpp:1716
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:819
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увећање: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1694
+#: plugins/Oculars/src/Oculars.cpp:1719
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:828
 #, qt-format
 msgid "FOV: %1"
 msgstr "Видно поље:%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1713
+#: plugins/Oculars/src/Oculars.cpp:1738
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:684
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:781
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Величина: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1717
+#: plugins/Oculars/src/Oculars.cpp:1742
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:644
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сензор #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1721
+#: plugins/Oculars/src/Oculars.cpp:1746
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сензор #%1:%2"
 
-#: plugins/Oculars/src/Oculars.cpp:1734
+#: plugins/Oculars/src/Oculars.cpp:1759
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:743
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1991
+#: plugins/Oculars/src/Oculars.cpp:2016
 msgid "&Lens"
 msgstr "&Сочиво"
 
-#: plugins/Oculars/src/Oculars.cpp:1992
+#: plugins/Oculars/src/Oculars.cpp:2017
 msgid "&Previous lens"
 msgstr "&Претходно сочиво"
 
-#: plugins/Oculars/src/Oculars.cpp:1993
+#: plugins/Oculars/src/Oculars.cpp:2018
 msgid "&Next lens"
 msgstr "&Следеће сочиво"
 
-#: plugins/Oculars/src/Oculars.cpp:2023
+#: plugins/Oculars/src/Oculars.cpp:2048
 msgid "&Telescope"
 msgstr "&Телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2024
+#: plugins/Oculars/src/Oculars.cpp:2049
 msgid "&Previous telescope"
 msgstr "&Претходни телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:2025
+#: plugins/Oculars/src/Oculars.cpp:2050
 msgid "&Next telescope"
 msgstr "&Следећи телескоп"
 
@@ -6618,43 +6618,39 @@ msgid ""
 msgstr "Тренутно видно поље зависно од окулара/сочива/телескопа"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:509
+#: plugins/Oculars/src/gui/OcularDialog.cpp:511
 msgid "tFOV:"
 msgstr "Право видно поље:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
 msgid "Magnification factor:"
 msgstr "Фактор увећања:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:515
-#: plugins/Oculars/src/ui_ocularDialog.h:1130
+#: plugins/Oculars/src/gui/OcularDialog.cpp:517
+#: plugins/Oculars/src/ui_ocularDialog.h:1157
 msgid "aFOV:"
 msgstr "Видно пољњ:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:516
-#: plugins/Oculars/src/ui_ocularDialog.h:1131
-#: plugins/Oculars/src/ui_ocularDialog.h:1161
+#: plugins/Oculars/src/gui/OcularDialog.cpp:518
+#: plugins/Oculars/src/ui_ocularDialog.h:1158
+#: plugins/Oculars/src/ui_ocularDialog.h:1190
 msgid "Focal length:"
 msgstr "Жижна даљина:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
+#: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid "Oculars Plug-in"
 msgstr "Додатак за окуларе"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
 msgid "Barlow lens feature"
 msgstr "Особине Барловљевог наставка"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:528
-msgid "Off-Axis Guider feature"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:534
 msgid "Overview"
 msgstr "Преглед"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:534
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -6666,7 +6662,7 @@ msgstr ""
 "избрисали окуларе и телескопе, као и ЦЦД сензоре. Када први пут покренете "
 "апликацију попуниће се неки узорци како бисте могли да почнете."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -6683,7 +6679,7 @@ msgstr ""
 "добар део екрана може бити бескористан. Зато препоручујемо да оставиш "
 "искључено све док ти не буде потребно."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -6693,7 +6689,7 @@ msgstr ""
 "поравнато са севером.  Нисам био у могућности да то урадим, па се тренутно "
 "поравнава са врхом екрана."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:537
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -6706,143 +6702,143 @@ msgstr ""
 "0.5%1, 2.0%1 и 4.0%1, помажући ти да видиш шта би видео/ла голим оком кроз "
 "Телрад (или сличан) тражилац."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:538
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 "Уколико пронађеш  било какав проблем, молим те обавестите нас. Уживај!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:541
+#: plugins/Oculars/src/gui/OcularDialog.cpp:543
 msgid "Hot Keys"
 msgstr "Врући тастери"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:542
+#: plugins/Oculars/src/gui/OcularDialog.cpp:544
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "Типковне пречице додатка се могу изменити у општим опцијама."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:556
-#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
+#: plugins/Oculars/src/gui/OcularDialog.cpp:563
 msgid "[no key defined]"
 msgstr "[није изабран тастер]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:565
+#: plugins/Oculars/src/gui/OcularDialog.cpp:567
 msgid "Switches on/off the ocular overlay."
 msgstr "Укључи / искључи преклапање окулара"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:569
+#: plugins/Oculars/src/gui/OcularDialog.cpp:571
 msgid "Opens the pop-up navigation menu."
 msgstr "Отвори навигациони падајући мени"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1106
+#: plugins/Oculars/src/ui_ocularDialog.h:1133
 msgid "Enable only if an object is selected"
 msgstr "Омогући само ако је објекат изабран"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1107
+#: plugins/Oculars/src/ui_ocularDialog.h:1134
 msgid "Scale image circle"
 msgstr "Размера слике круга"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1109
+#: plugins/Oculars/src/ui_ocularDialog.h:1136
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "Потврди граничне магнитуде звезда за различите отворе телескопа."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1111
+#: plugins/Oculars/src/ui_ocularDialog.h:1138
 msgid "Limit stellar magnitude"
 msgstr "Ограничи магнитуду звезде"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1112
+#: plugins/Oculars/src/ui_ocularDialog.h:1139
 msgid "Key mappings"
 msgstr "Распоређивање тастера"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1113
+#: plugins/Oculars/src/ui_ocularDialog.h:1140
 msgid "Toggle ocular view:"
 msgstr "Де(активирај) приказ окулара:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1115
+#: plugins/Oculars/src/ui_ocularDialog.h:1142
 msgid "Open pop-up navigation menu:"
 msgstr "Отвори искачући навигациони изборник :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1116
+#: plugins/Oculars/src/ui_ocularDialog.h:1143
 msgid "Interface"
 msgstr "Сучеље"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1117
+#: plugins/Oculars/src/ui_ocularDialog.h:1144
 msgid "On-screen control panel"
 msgstr "Контролна табла на екрану"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1119
+#: plugins/Oculars/src/ui_ocularDialog.h:1146
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 "Обележи ако желиш да вредност поља прегледача буде иста као и при покретању "
 "Стеларијума."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1121
+#: plugins/Oculars/src/ui_ocularDialog.h:1148
 msgid "Restore FOV to initial values"
 msgstr "Врати поље прегледача на почетну вредност"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1122
+#: plugins/Oculars/src/ui_ocularDialog.h:1149
 msgid "Sensor view"
 msgstr "Сензор погледа"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1123
+#: plugins/Oculars/src/ui_ocularDialog.h:1150
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Користи степене и минуте за видно поље CCD-a"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
+#: plugins/Oculars/src/ui_ocularDialog.h:1151
 msgid "Use flip for CCD"
 msgstr "Користи прекидач за CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1125
+#: plugins/Oculars/src/ui_ocularDialog.h:1152
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "Опште"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1126
-#: plugins/Oculars/src/ui_ocularDialog.h:1135
+#: plugins/Oculars/src/ui_ocularDialog.h:1153
+#: plugins/Oculars/src/ui_ocularDialog.h:1162
 msgid "Eyepieces"
 msgstr "Очна сочива"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1127
-#: plugins/Oculars/src/ui_ocularDialog.h:1137
-#: plugins/Oculars/src/ui_ocularDialog.h:1144
-#: plugins/Oculars/src/ui_ocularDialog.h:1158
+#: plugins/Oculars/src/ui_ocularDialog.h:1154
+#: plugins/Oculars/src/ui_ocularDialog.h:1164
+#: plugins/Oculars/src/ui_ocularDialog.h:1171
+#: plugins/Oculars/src/ui_ocularDialog.h:1187
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "Додај"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1129
-#: plugins/Oculars/src/ui_ocularDialog.h:1139
-#: plugins/Oculars/src/ui_ocularDialog.h:1146
-#: plugins/Oculars/src/ui_ocularDialog.h:1160
+#: plugins/Oculars/src/ui_ocularDialog.h:1156
+#: plugins/Oculars/src/ui_ocularDialog.h:1166
+#: plugins/Oculars/src/ui_ocularDialog.h:1173
+#: plugins/Oculars/src/ui_ocularDialog.h:1189
 #: plugins/Satellites/src/ui_satellitesDialog.h:760
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
 msgstr "Назив:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1132
+#: plugins/Oculars/src/ui_ocularDialog.h:1159
 msgid "Field stop:"
 msgstr "Крај поља:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1133
+#: plugins/Oculars/src/ui_ocularDialog.h:1160
 msgid "Binoculars"
 msgstr "Двогледи"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1134
+#: plugins/Oculars/src/ui_ocularDialog.h:1161
 msgid "Has permanent cross-hairs"
 msgstr "Има стални објектив"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1136
-#: plugins/Oculars/src/ui_ocularDialog.h:1142
+#: plugins/Oculars/src/ui_ocularDialog.h:1163
+#: plugins/Oculars/src/ui_ocularDialog.h:1169
 msgid "Lenses"
 msgstr "Сочива"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1140
+#: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Multiplier:"
 msgstr "Множилац:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1141
+#: plugins/Oculars/src/ui_ocularDialog.h:1168
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -6850,63 +6846,71 @@ msgstr ""
 "Ако су  вредности многостуркости >1 ,повећај жижну даљину (Барлова сочива). "
 "Ако су вредности многострукости <1 , смањи жижну даљину (Шејплијева сочива)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1143
-#: plugins/Oculars/src/ui_ocularDialog.h:1156
+#: plugins/Oculars/src/ui_ocularDialog.h:1170
+#: plugins/Oculars/src/ui_ocularDialog.h:1185
 msgid "Sensors"
 msgstr "Сензори"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1147
+#: plugins/Oculars/src/ui_ocularDialog.h:1174
 msgid "Resolution x (pixels):"
 msgstr "Резолуција * (тачкица):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1148
+#: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "Resolution y (pixels):"
 msgstr "Резолуција y (тачкица):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1149
+#: plugins/Oculars/src/ui_ocularDialog.h:1176
 msgid "Chip width (mm):"
 msgstr "Ширина чипа (милиметар):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1150
+#: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Chip height (mm):"
 msgstr "Висина чипа (милметар):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1151
+#: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "Pixel width (micron):"
 msgstr "Ширина тачкица (микрона):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1152
+#: plugins/Oculars/src/ui_ocularDialog.h:1179
 msgid "Pixel height (micron):"
 msgstr "Висина тачкица (микрона):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1153
-msgid "Prism distance (mm):"
+#: plugins/Oculars/src/ui_ocularDialog.h:1180
+msgid "Prism/CCD distance (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1154
-msgid "Prism height (mm):"
+#: plugins/Oculars/src/ui_ocularDialog.h:1181
+msgid "Prism/CCD height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1155
-msgid "Off-Axis guider range"
+#: plugins/Oculars/src/ui_ocularDialog.h:1182
+msgid "Prism/CCD width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1157
-#: plugins/Oculars/src/ui_ocularDialog.h:1165
+#: plugins/Oculars/src/ui_ocularDialog.h:1183
+msgid "Position angle (degrees):"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1184
+msgid "Off-Axis guider"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1186
+#: plugins/Oculars/src/ui_ocularDialog.h:1194
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Телескопи"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1162
+#: plugins/Oculars/src/ui_ocularDialog.h:1191
 msgid "Diameter:"
 msgstr "Пречник:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1163
+#: plugins/Oculars/src/ui_ocularDialog.h:1192
 msgid "Horizontal flip"
 msgstr "Водоравно преокретање"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1164
+#: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid "Vertical flip"
 msgstr "Усправно преокретање"
 
