@@ -503,7 +503,7 @@
              <item row="3" column="0">
               <widget class="QCheckBox" name="checkBoxRaDecOfDate">
                <property name="toolTip">
-                <string>Geocentric equatorial coordinates, equinox of date</string>
+                <string>Equatorial coordinates, equinox of date</string>
                </property>
                <property name="text">
                 <string>Right ascension/Declination (of date)</string>
@@ -526,7 +526,7 @@
              <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxRaDecJ2000">
                <property name="toolTip">
-                <string>Geocentric equatorial coordinates, equinox of J2000.0</string>
+                <string>Equatorial coordinates, equinox of J2000.0</string>
                </property>
                <property name="text">
                 <string>Right ascension/Declination (J2000)</string>
@@ -608,7 +608,7 @@
              <item row="3" column="1">
               <widget class="QCheckBox" name="checkBoxHourAngle">
                <property name="toolTip">
-                <string>Topocentric equatorial coordinates</string>
+                <string>Equatorial coordinates, equinox of date</string>
                </property>
                <property name="text">
                 <string>Hour angle/Declination</string>
