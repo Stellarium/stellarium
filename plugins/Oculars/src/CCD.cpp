@@ -257,7 +257,7 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "chip_width", this->chipWidth());
 	settings->setValue(prefix + "chip_height", this->chipHeight());
 	settings->setValue(prefix + "pixel_width", this->pixelWidth());
-	settings->setValue(prefix + "pixel_height", this->pixelWidth());
+	settings->setValue(prefix + "pixel_height", this->pixelHeight());
 	settings->setValue(prefix + "has_oag", this->hasOAG());
 	settings->setValue(prefix + "prism_height", this->prismHeight());
 	settings->setValue(prefix + "prism_width", this->prismWidth());
