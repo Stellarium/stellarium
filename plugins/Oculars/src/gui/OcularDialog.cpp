@@ -464,6 +464,7 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->addMapping(ui->telescopeFL, 2);
 	telescopeMapper->addMapping(ui->telescopeHFlip, 3, "checked");
 	telescopeMapper->addMapping(ui->telescopeVFlip, 4, "checked");
+	telescopeMapper->addMapping(ui->telescopeEQ, 5, "checked");
 	ocularMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 					telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
