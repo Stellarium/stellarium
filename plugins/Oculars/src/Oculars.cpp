@@ -1407,10 +1407,25 @@ void Oculars::paintCCDBounds()
 			float width = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
 			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 
+			double polarAngle = 0;
+			// if the telescope is Equatorial derotate the field
+			if (telescope->isEquatorial()) {
+				Vec3d CPos;
+				Vec2f cpos = projector->getViewportCenter();
+				projector->unProject(cpos[0], cpos[1], CPos);
+				Vec3d CPrel(CPos);
+				CPrel[2]*=0.2;
+				Vec3d crel;
+				projector->project(CPrel, crel);
+				polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
+				if (CPos[2] > 0) polarAngle += 90.0;
+				else polarAngle -= 90.0;
+			}
+
 			if (width > 0.0 && height > 0.0) {
 				QPoint a, b;
 				QTransform transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-ccdRotationAngle);
+						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccdRotationAngle + polarAngle));
 				// bottom line
 				a = transform.map(QPoint(-width/2.0, -height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
@@ -1443,7 +1458,7 @@ void Oculars::paintCCDBounds()
 							params.viewportCenter[1] * params.devicePixelsPerPixel, out_oag_r);
 
 					QTransform oag_transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccdRotationAngle + ccd->prismPosAngle()));
+							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccdRotationAngle + polarAngle + ccd->prismPosAngle()));
 
 					// bottom line
 					a = oag_transform.map(QPoint(-h_width, in_oag_r));
@@ -1498,7 +1513,7 @@ void Oculars::paintCCDBounds()
 					}
 					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
 					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
-					painter.drawText(a.x(), a.y(), coords, -ccdRotationAngle);
+					painter.drawText(a.x(), a.y(), coords, -(ccdRotationAngle + polarAngle));
 				}
 			}
 		}
