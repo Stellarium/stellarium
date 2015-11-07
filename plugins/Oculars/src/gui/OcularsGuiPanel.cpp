@@ -604,7 +604,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldLensName->boundingRect().height() - prevLensButton->boundingRect().height()) / 2.;
-    prevLensButton->setPos(posX, qRound(posY + heightAdjustment));
+	prevLensButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevLensButton->boundingRect().width();
 	widgetWidth += prevLensButton->boundingRect().width();
 
@@ -636,7 +636,7 @@ void OcularsGuiPanel::updateCcdControls()
 	//Get the name
 	int index = ocularsPlugin->selectedCCDIndex;
 	CCD* ccd = ocularsPlugin->ccds[index];	
-	Q_ASSERT(ccd);
+	Q_ASSERT(ccd);	
 	QString name = ccd->name();
 	QString fullName;
 	if (name.isEmpty())
@@ -686,8 +686,7 @@ void OcularsGuiPanel::updateCcdControls()
 	fieldCcdDimensions->setPos(posX, posY);
 	posY += fieldCcdDimensions->boundingRect().height();
 	widgetHeight += fieldCcdDimensions->boundingRect().height();
-
-	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle, 'f', 2);
+	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle(), 'f', 1);
 	rotation.append(QChar(0x00B0));
 	QString rotationLabel = QString(q_("Rotation: %1")).arg(rotation);
 	fieldCcdRotation->setPlainText(rotationLabel);

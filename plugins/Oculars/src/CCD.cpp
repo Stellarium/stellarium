@@ -35,6 +35,7 @@ CCD::CCD()
 	, m_chipHeight(0.)
 	, m_pixelWidth(0.)
 	, m_pixelHeight(0.)
+	, m_chipRotAngle(0.)
 	, m_has_oag(false)
 	, m_oag_prismHeight(0.)
 	, m_oag_prismWidth(0.)
@@ -51,6 +52,7 @@ CCD::CCD(const QObject& other)
 	, m_chipHeight(other.property("chipHeight").toFloat())
 	, m_pixelWidth(other.property("pixelWidth").toFloat())
 	, m_pixelHeight(other.property("pixelHeight").toFloat())
+	, m_chipRotAngle(other.property("chipRotAngle").toFloat())
 	, m_has_oag(other.property("hasOAG").toBool())
 	, m_oag_prismHeight(other.property("prismHeight").toFloat())
 	, m_oag_prismWidth(other.property("prismWidth").toFloat())
@@ -77,11 +79,12 @@ QMap<int, QString> CCD::propertyMap()
 		mapping[4] = "pixelWidth";
 		mapping[5] = "resolutionX";
 		mapping[6] = "resolutionY";
-		mapping[7] = "hasOAG";
-		mapping[8] = "prismHeight";
-		mapping[9] = "prismWidth";
-		mapping[10] = "prismDistance";
-		mapping[11] = "prismPosAngle";
+		mapping[7] = "chipRotAngle";
+		mapping[8] = "hasOAG";
+		mapping[9] = "prismHeight";
+		mapping[10] = "prismWidth";
+		mapping[11] = "prismDistance";
+		mapping[12] = "prismPosAngle";
 	}
 	return mapping;
 }
@@ -161,6 +164,16 @@ double CCD::pixelHeight()  const
 void CCD::setPixelHeight(double height)
 {
 	m_pixelHeight = height;
+}
+
+void CCD::setChipRotAngle(double angle)
+{
+	m_chipRotAngle = angle;
+}
+
+double CCD::chipRotAngle() const
+{
+	return m_chipRotAngle;
 }
 
 bool CCD::hasOAG() const
@@ -258,6 +271,7 @@ void CCD::writeToSettings(QSettings * settings, const int index)
 	settings->setValue(prefix + "chip_height", this->chipHeight());
 	settings->setValue(prefix + "pixel_width", this->pixelWidth());
 	settings->setValue(prefix + "pixel_height", this->pixelHeight());
+	settings->setValue(prefix + "chip_rot_angle", this->chipRotAngle());
 	settings->setValue(prefix + "has_oag", this->hasOAG());
 	settings->setValue(prefix + "prism_height", this->prismHeight());
 	settings->setValue(prefix + "prism_width", this->prismWidth());
@@ -281,6 +295,7 @@ CCD* CCD::ccdFromSettings(QSettings* theSettings, int ccdIndex)
 	ccd->setChipHeight(theSettings->value(prefix + "chip_height", "0.0").toDouble());
 	ccd->setPixelWidth(theSettings->value(prefix + "pixel_width", "0.0").toDouble());
 	ccd->setPixelHeight(theSettings->value(prefix + "pixel_height", "0.0").toDouble());
+	ccd->setChipRotAngle(theSettings->value(prefix + "chip_rot_angle", "0.0").toDouble());
 	ccd->setHasOAG(theSettings->value(prefix + "has_oag", "false").toBool());
 	ccd->setPrismHeight(theSettings->value(prefix + "prism_height", "0.0").toDouble());
 	ccd->setPrismWidth(theSettings->value(prefix + "prism_width", "0.0").toDouble());
@@ -299,5 +314,6 @@ CCD* CCD::ccdModel()
 	model->setPixelWidth(9);
 	model->setResolutionX(4096);
 	model->setResolutionY(4096);
+	model->setChipRotAngle(0);
 	return model;
 }
