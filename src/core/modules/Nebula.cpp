@@ -508,8 +508,13 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 	float size = 6.0f;
 	float scaledSize = 0.0f;
-	if (drawHintProportional && (majorAxisSize>0.))
-		scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+	if (drawHintProportional)
+	{
+		if (majorAxisSize>0.)
+			scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		else
+			scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+	}
 
 	// Rotation looks good only for galaxies.
 	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
