@@ -29,7 +29,7 @@ DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\data\stellarium.ico
 LicenseFile=COPYING
 ; LZMA2/max required 95 MB RAM for compression and 8 MB RAM for decompression
-; Using LZMA2/max algorithm reduce size of package on 10%
+; Using LZMA2/max algorithm reduces size of package on ~10%
 Compression=lzma2/max
 
 [Files]
