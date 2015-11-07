@@ -122,7 +122,6 @@ Oculars::Oculars():
 	flagLimitPlanets(false),
 	magLimitPlanets(0.0),
 	flagMoonScale(false),
-	ccdRotationAngle(0.0),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
 	flagLimitMagnitude(false),	
@@ -793,7 +792,16 @@ void Oculars::updateLists()
 
 void Oculars::ccdRotationReset()
 {
-	ccdRotationAngle = 0.0;
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (ccd) ccd->setChipRotAngle(0.0);
+	emit(selectedCCDChanged());
+}
+
+double Oculars::ccdRotationAngle() const
+{
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (ccd) return ccd->chipRotAngle();
+	else return 0.0;
 }
 
 void Oculars::enableOcular(bool enableOcularMode)
@@ -1127,12 +1135,17 @@ void Oculars::disableLens()
 
 void Oculars::rotateCCD(QString amount)
 {
-	ccdRotationAngle += amount.toInt();
-	if (ccdRotationAngle >= 360) {
-		ccdRotationAngle -= 360;
-	} else if (ccdRotationAngle <= -360) {
-		ccdRotationAngle += 360;
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (!ccd) return;
+	double angle = ccd->chipRotAngle();
+	angle += amount.toInt();
+	if (angle >= 360) {
+		angle -= 360;
+	} else if (angle <= -360) {
+		angle += 360;
 	}
+	ccd->setChipRotAngle(angle);
+	emit(selectedCCDChanged());
 }
 
 void Oculars::selectCCDAtIndex(QString indexString)
@@ -1425,7 +1438,7 @@ void Oculars::paintCCDBounds()
 			if (width > 0.0 && height > 0.0) {
 				QPoint a, b;
 				QTransform transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccdRotationAngle + polarAngle));
+						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle));
 				// bottom line
 				a = transform.map(QPoint(-width/2.0, -height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
@@ -1458,7 +1471,7 @@ void Oculars::paintCCDBounds()
 							params.viewportCenter[1] * params.devicePixelsPerPixel, out_oag_r);
 
 					QTransform oag_transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccdRotationAngle + polarAngle + ccd->prismPosAngle()));
+							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle + ccd->prismPosAngle()));
 
 					// bottom line
 					a = oag_transform.map(QPoint(-h_width, in_oag_r));
@@ -1513,7 +1526,7 @@ void Oculars::paintCCDBounds()
 					}
 					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
 					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
-					painter.drawText(a.x(), a.y(), coords, -(ccdRotationAngle + polarAngle));
+					painter.drawText(a.x(), a.y(), coords, -(ccd->chipRotAngle() + polarAngle));
 				}
 			}
 		}

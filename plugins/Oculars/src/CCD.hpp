@@ -37,6 +37,7 @@ class CCD : public QObject
 	Q_PROPERTY(double chipHeight READ chipHeight WRITE setChipHeight)
 	Q_PROPERTY(double pixelWidth READ pixelWidth WRITE setPixelWidth)
 	Q_PROPERTY(double pixelHeight READ pixelHeight WRITE setPixelHeight)
+	Q_PROPERTY(double chipRotAngle READ chipRotAngle WRITE setChipRotAngle)
 	Q_PROPERTY(double hasOAG READ hasOAG WRITE setHasOAG)
 	Q_PROPERTY(double prismHeight READ prismHeight WRITE setPrismHeight)
 	Q_PROPERTY(double prismWidth READ prismWidth WRITE setPrismWidth)
@@ -65,6 +66,8 @@ public:
 	void setPixelWidth(double width);
 	double pixelHeight() const;
 	void setPixelHeight(double height);
+	double chipRotAngle() const;
+	void setChipRotAngle(double angle);
 	bool hasOAG() const;
 	void setHasOAG(bool oag);
 	double prismDistance() const;
@@ -100,6 +103,8 @@ private:
 	double m_pixelWidth;
 	//! width of 1 pixel in micron (micrometer)
 	double m_pixelHeight;
+	//! chip rotation angle around its axis (degrees)
+	double m_chipRotAngle;
 	//! Show off axis guider view
 	bool m_has_oag;
 	//! OAG prism height (milimeters)
