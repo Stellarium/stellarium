@@ -387,15 +387,15 @@ IF(WIN32)
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
     IF(MSVC)
         # Use installer for checking minimum requirements
-        # Stellarium/MSVC require Windows 7 (6.1.7600) for work
+        # Stellarium/MSVC require Windows Vista (6.0) for work
         # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-        SET(MIN_VERSION "6.1.7600")
+        SET(MIN_VERSION "6.0")
         SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
     ELSE()
         # Use installer for checking minimum requirements
-        # Stellarium/MinGW require Windows XP (5.1.2600) for work
+        # Stellarium/MinGW require Windows XP (5.1) for work
         # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
-        SET(MIN_VERSION "5.1.2600")
+        SET(MIN_VERSION "5.1")
         SET(ISS_ANGLE_LIBS "; ANGLE support doesn't exists for MinGW")
     ENDIF()
     SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
