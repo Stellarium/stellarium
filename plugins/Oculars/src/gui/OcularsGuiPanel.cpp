@@ -686,7 +686,7 @@ void OcularsGuiPanel::updateCcdControls()
 	fieldCcdDimensions->setPos(posX, posY);
 	posY += fieldCcdDimensions->boundingRect().height();
 	widgetHeight += fieldCcdDimensions->boundingRect().height();
-	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle(), 'f', 1);
+	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle(), 'f', 0);
 	rotation.append(QChar(0x00B0));
 	QString rotationLabel = QString(q_("Rotation: %1")).arg(rotation);
 	fieldCcdRotation->setPlainText(rotationLabel);
