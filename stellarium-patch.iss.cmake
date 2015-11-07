@@ -33,7 +33,7 @@ DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\data\stellarium.ico
 LicenseFile=COPYING
-Compression=zip/9
+Compression=lzma2/max
 
 ; If uncommented, this file will be displayed before the installation begins
 ; (see http://www.jrsoftware.org/ishelp/index.php?topic=wizardpages)
