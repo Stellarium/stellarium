@@ -429,6 +429,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(selectedCCDRotationAngleChanged()));
+	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
 	// The ocular mapper
@@ -444,6 +445,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->ocularListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
 	// The lens mapper
@@ -455,6 +457,7 @@ void OcularDialog::createDialogContent()
 	lensMapper->toFirst();
 	connect(ui->lensListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
 	// The telescope mapper
@@ -470,6 +473,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
