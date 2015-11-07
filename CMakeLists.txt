@@ -72,6 +72,8 @@ IF(WIN32)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
           SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
      ELSE()
+          SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /MANIFEST:NO")
+          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /MANIFEST:NO")
           # _USE_MATH_DEFINES Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
           # NOMINMAX So that windows.h does not redefine min and max
           # _WINSOCKAPI_ Prevent window.s from including winsock.h
@@ -129,9 +131,9 @@ IF(ENABLE_NLS)
      ADD_DEFINITIONS(-DENABLE_NLS)
 ENDIF()
 
-SET(RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
-IF(RELEASE_BUILD)
-     ADD_DEFINITIONS(-DRELEASE_BUILD)
+SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Flag this build as an official release.")
+IF(STELLARIUM_RELEASE_BUILD)
+     ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
 ENDIF()
 
 # Activate sound support
@@ -149,7 +151,7 @@ ELSE()
 ENDIF()
 
 
-SET(GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
+SET(STELLARIUM_GUI_MODE Standard CACHE STRING "Choose the type of GUI to build, options are: Standard, None")
 
 SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have make package target")
 
@@ -275,21 +277,42 @@ ELSE()
 ENDIF()
 
 ########### Get revision number for non-release builds ###########
-IF(NOT RELEASE_BUILD)
+IF(NOT STELLARIUM_RELEASE_BUILD)
     #Hack until CMake detection for Bazaar is finished
     IF(BZR_REVISION)
         SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
     ENDIF()
-    IF(DEV_VERSION)
-        ADD_DEFINITIONS(-DDEV_VERSION="${DEV_VERSION}")
+    IF(STELLARIUM_VERSION)
+        SET(PACKAGE_VERSION "${STELLARIUM_VERSION}")
+        ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
     ENDIF()
 ENDIF()
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
 
-### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
+    #######################################################
+    ### Generate a manifest file                        ###
+    #######################################################
+
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
+
+    #######################################################
+    ### Generate a VersionInfo file                     ###
+    #######################################################
+
+    IF(STELLARIUM_RELEASE_BUILD)
+       SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION},0")
+    ELSE()
+       SET(PACKAGE_VERSION_RC "${PACKAGE_VERSION}")
+    ENDIF()
+    STRING(REGEX REPLACE "([.]+)" "," PACKAGE_VERSION_RC ${PACKAGE_VERSION_RC})
+    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.rc.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.rc @ONLY)
+
+    #######################################################
+    ### [Optional] Embed icon in the Windows executable ###
+    #######################################################
+
     SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
     IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
         IF(NOT MSVC)
@@ -301,10 +324,11 @@ IF(WIN32)
             MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
         ENDIF(RC_COMPILER_PATH)
     ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-ENDIF()
 
-### Generate an Inno Setup project file ###
-IF(WIN32)
+    #######################################################
+    ### Generate an Inno Setup project file             ###
+    #######################################################
+
     # Try to guess the MinGW /bin directory...
     GET_FILENAME_COMPONENT(MINGW_BIN_DIRECTORY ${CMAKE_CXX_COMPILER} PATH)
     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
@@ -362,8 +386,16 @@ IF(WIN32)
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
     IF(MSVC)
+        # Use installer for checking minimum requirements
+        # Stellarium/MSVC require Windows 7 (6.1.7600) for work
+        # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+        SET(MIN_VERSION "6.1.7600")
         SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
     ELSE()
+        # Use installer for checking minimum requirements
+        # Stellarium/MinGW require Windows XP (5.1.2600) for work
+        # Details: http://www.jrsoftware.org/ishelp/index.php?topic=winvernotes
+        SET(MIN_VERSION "5.1.2600")
         SET(ISS_ANGLE_LIBS "; ANGLE support doesn't exists for MinGW")
     ENDIF()
     SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
@@ -458,7 +490,8 @@ IF(WIN32)
     STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
     STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
     CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/util/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
-ENDIF()
+ENDIF() 
+
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
