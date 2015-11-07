@@ -381,32 +381,32 @@ void OcularDialog::createDialogContent()
 	bindingString = Oculars::appSettings()->value("bindings/popup_navigator", "Alt+O").toString();
 	ui->togglePopupNavigatorWindowLineEdit->setText(bindingString);
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(const QString&)),
-					this, SLOT(keyBindingTogglePluginChanged(const QString&)));
+		this, SLOT(keyBindingTogglePluginChanged(const QString&)));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(const QString&)),
-					this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
+		this, SLOT(keyBindingPopupNavigatorConfigChanged(const QString&)));
 	
 	initAboutText();
 	connect(ui->togglePluginLineEdit, SIGNAL(textEdited(QString)),
-					this, SLOT(initAboutText()));
+		this, SLOT(initAboutText()));
 	connect(ui->togglePopupNavigatorWindowLineEdit, SIGNAL(textEdited(QString)),
-					this, SLOT(initAboutText()));
+		this, SLOT(initAboutText()));
 
 	connect(ui->pushButtonMoveOcularUp, SIGNAL(pressed()),
-					this, SLOT(moveUpSelectedOcular()));
+		this, SLOT(moveUpSelectedOcular()));
 	connect(ui->pushButtonMoveOcularDown, SIGNAL(pressed()),
-					this, SLOT(moveDownSelectedOcular()));
+		this, SLOT(moveDownSelectedOcular()));
 	connect(ui->pushButtonMoveSensorUp, SIGNAL(pressed()),
-					this, SLOT(moveUpSelectedSensor()));
+		this, SLOT(moveUpSelectedSensor()));
 	connect(ui->pushButtonMoveSensorDown, SIGNAL(pressed()),
-					this, SLOT(moveDownSelectedSensor()));
+		this, SLOT(moveDownSelectedSensor()));
 	connect(ui->pushButtonMoveTelescopeUp, SIGNAL(pressed()),
-					this, SLOT(moveUpSelectedTelescope()));
+		this, SLOT(moveUpSelectedTelescope()));
 	connect(ui->pushButtonMoveTelescopeDown, SIGNAL(pressed()),
-					this, SLOT(moveDownSelectedTelescope()));
+		this, SLOT(moveDownSelectedTelescope()));
 	connect(ui->pushButtonMoveLensUp, SIGNAL(pressed()),
-					this, SLOT(moveUpSelectedLens()));
+		this, SLOT(moveUpSelectedLens()));
 	connect(ui->pushButtonMoveLensDown, SIGNAL(pressed()),
-					this, SLOT(moveDownSelectedLens()));
+		this, SLOT(moveDownSelectedLens()));
 
 	// The CCD mapper
 	ccdMapper = new QDataWidgetMapper();
@@ -419,14 +419,16 @@ void OcularDialog::createDialogContent()
 	ccdMapper->addMapping(ui->ccdPixelX, 4);
 	ccdMapper->addMapping(ui->ccdResX, 5);
 	ccdMapper->addMapping(ui->ccdResY, 6);
-	ccdMapper->addMapping(ui->OAG_checkBox, 7);
-	ccdMapper->addMapping(ui->OAGPrismH, 8);
-	ccdMapper->addMapping(ui->OAGPrismW, 9);
-	ccdMapper->addMapping(ui->OAGDist, 10);
-	ccdMapper->addMapping(ui->OAGPrismPA, 11);
+	ccdMapper->addMapping(ui->ccdRotAngle, 7);
+	ccdMapper->addMapping(ui->OAG_checkBox, 8);
+	ccdMapper->addMapping(ui->OAGPrismH, 9);
+	ccdMapper->addMapping(ui->OAGPrismW, 10);
+	ccdMapper->addMapping(ui->OAGDist, 11);
+	ccdMapper->addMapping(ui->OAGPrismPA, 12);
 	ccdMapper->toFirst();
 	connect(ui->ccdListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-					ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+		ccdMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), this, SLOT(selectedCCDRotationAngleChanged()));
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
 	// The ocular mapper
@@ -441,7 +443,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+		ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
 	// The lens mapper
@@ -452,7 +454,7 @@ void OcularDialog::createDialogContent()
 	lensMapper->addMapping(ui->lensMultipler, 1);
 	lensMapper->toFirst();
 	connect(ui->lensListView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-			lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+		lensMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
 	// The telescope mapper
@@ -467,7 +469,7 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->addMapping(ui->telescopeEQ, 5, "checked");
 	ocularMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
-					telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
+		telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
@@ -502,6 +504,11 @@ void OcularDialog::createDialogContent()
 
 	//Initialize the style
 	updateStyle();
+}
+
+void OcularDialog::selectedCCDRotationAngleChanged()
+{
+	emit(plugin->selectedCCDChanged());
 }
 
 void OcularDialog::setLabelsDescriptionText(bool state)
