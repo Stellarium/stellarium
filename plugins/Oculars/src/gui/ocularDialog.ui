@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>668</width>
-    <height>478</height>
+    <height>594</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1259,6 +1259,13 @@
                   </property>
                  </widget>
                 </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="CCDChipY_lbl">
+                  <property name="text">
+                   <string>Chip height (mm):</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="2" column="1">
                  <widget class="QSpinBox" name="ccdResY">
                   <property name="minimum">
@@ -1273,6 +1280,13 @@
                  <widget class="QLabel" name="CCDChipX_lbl">
                   <property name="text">
                    <string>Chip width (mm):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
+                 <widget class="QLabel" name="CCDPixelX_lbl">
+                  <property name="text">
+                   <string>Pixel width (micron):</string>
                   </property>
                  </widget>
                 </item>
@@ -1292,10 +1306,10 @@
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="CCDChipY_lbl">
+                <item row="6" column="0">
+                 <widget class="QLabel" name="CCDPixelY_lbl">
                   <property name="text">
-                   <string>Chip height (mm):</string>
+                   <string>Pixel height (micron):</string>
                   </property>
                  </widget>
                 </item>
@@ -1315,10 +1329,19 @@
                   </property>
                  </widget>
                 </item>
-                <item row="5" column="0">
-                 <widget class="QLabel" name="CCDPixelX_lbl">
-                  <property name="text">
-                   <string>Pixel width (micron):</string>
+                <item row="6" column="1">
+                 <widget class="QDoubleSpinBox" name="ccdPixelY">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>99.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -1338,26 +1361,98 @@
                   </property>
                  </widget>
                 </item>
-                <item row="6" column="0">
-                 <widget class="QLabel" name="CCDPixelY_lbl">
-                  <property name="text">
-                   <string>Pixel height (micron):</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="6" column="1">
-                 <widget class="QDoubleSpinBox" name="ccdPixelY">
+                <item row="9" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGDist">
                   <property name="decimals">
                    <number>1</number>
                   </property>
-                  <property name="minimum">
+                  <property name="singleStep">
                    <double>0.100000000000000</double>
                   </property>
-                  <property name="maximum">
-                   <double>99.000000000000000</double>
+                 </widget>
+                </item>
+                <item row="9" column="0">
+                 <widget class="QLabel" name="OAGDist_lbl">
+                  <property name="text">
+                   <string>Prism/CCD distance (mm):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="0">
+                 <widget class="QLabel" name="OAGPrismH_lbl">
+                  <property name="text">
+                   <string>Prism/CCD height (mm):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGPrismH">
+                  <property name="decimals">
+                   <number>1</number>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="11" column="0">
+                 <widget class="QLabel" name="OAGPrismW_lbl">
+                  <property name="text">
+                   <string>Prism/CCD width (mm):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="12" column="0">
+                 <widget class="QLabel" name="OAGPrismPA_lbl">
+                  <property name="text">
+                   <string>Position angle (degrees):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="11" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGPrismW">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0" colspan="2">
+                 <widget class="QCheckBox" name="OAG_checkBox">
+                  <property name="text">
+                   <string>Off-Axis guider</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="12" column="1">
+                 <widget class="QDoubleSpinBox" name="OAGPrismPA">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <double>360.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>1.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="0">
+                 <widget class="QLabel" name="ccdRotAngle_lbl">
+                  <property name="text">
+                   <string>Rotation Angle (degrees):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="1">
+                 <widget class="QDoubleSpinBox" name="ccdRotAngle">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <double>360.000000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -1637,6 +1732,13 @@
                   </property>
                  </widget>
                 </item>
+                <item row="5" column="0" colspan="2">
+                 <widget class="QCheckBox" name="telescopeEQ">
+                  <property name="text">
+                   <string>Equatorial Mount</string>
+                  </property>
+                 </widget>
+                </item>
                </layout>
               </widget>
              </item>
@@ -1736,6 +1838,7 @@
   <tabstop>telescopeDiameter</tabstop>
   <tabstop>telescopeHFlip</tabstop>
   <tabstop>telescopeVFlip</tabstop>
+  <tabstop>telescopeEQ</tabstop>
   <tabstop>textBrowser</tabstop>
  </tabstops>
  <resources>
