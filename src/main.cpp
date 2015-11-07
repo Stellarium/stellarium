@@ -147,7 +147,14 @@ int main(int argc, char **argv)
 
 	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
-	QDir appDir(appInfo.absolutePath());
+	#ifdef Q_OS_WIN
+	// Special case for Windows - retrive installation path from registry (it's NOT a portable application)
+	QSettings registry("HKEY_LOCAL_MACHINE\\Software\\Stellarium", QSettings::NativeFormat);
+	QString installDir = registry.value("InstallPath").toString();
+	if (!installDir.isEmpty())
+		QFileInfo appInfo(installDir);
+	#endif
+	QDir appDir(appInfo.absolutePath());	
 	registerPluginsDir(appDir);
 
 	QGuiApplication::setDesktopSettingsAware(false);
