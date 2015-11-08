@@ -171,7 +171,7 @@ public:
 	//! Get the size of font
 	int getBaseFontSize() const { return baseFontSize; }
 	void setBaseFontSize(int s) { baseFontSize=s; }
-	
+
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI si currently being used.
