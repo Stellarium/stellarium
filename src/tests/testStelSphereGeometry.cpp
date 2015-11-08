@@ -148,9 +148,9 @@ void TestStelSphericalGeometry::testSphericalCap()
 	QVERIFY(h3.contains(h3));
 	#ifndef Q_OS_WIN
 	// FIXME: It fails on Windows/MinGW GCC
-	QVERIFY(h4.contains(h4));
-	#endif
+	QVERIFY(h4.contains(h4));	
 	QVERIFY(h5.contains(h5));
+	#endif
 }
 
 void TestStelSphericalGeometry::benchmarkSphericalCap()
