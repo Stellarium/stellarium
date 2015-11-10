@@ -290,12 +290,6 @@ ENDIF()
 
 IF(WIN32)
     #######################################################
-    ### Generate a manifest file                        ###
-    #######################################################
-
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
-
-    #######################################################
     ### Generate a VersionInfo file                     ###
     #######################################################
 
