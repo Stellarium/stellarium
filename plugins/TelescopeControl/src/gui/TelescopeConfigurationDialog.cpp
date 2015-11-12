@@ -133,7 +133,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->lineEditTelescopeName->setValidator(telescopeNameValidator);
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
-	ui->lineEditSerialPort->setValidator(serialPortValidator);
+	ui->comboSerialPort->setValidator(serialPortValidator);
 }
 
 //Set the configuration panel in a predictable state
@@ -153,9 +153,10 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 
 	//Serial port
 	QStringList *plist = listSerialPorts();
-	ui->lineEditSerialPort->clear();
-	ui->lineEditSerialPort->setCompleter(new QCompleter(*plist, this));
-	ui->lineEditSerialPort->setText(plist->value(0));
+	ui->comboSerialPort->clear();
+	ui->comboSerialPort->addItems(*plist);
+	ui->comboSerialPort->activated(plist->value(0));
+	ui->comboSerialPort->setEditText(plist->value(0));
 	delete(plist);
 	
 	//Populating the list of available devices
@@ -241,7 +242,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
 		}
 		//Initialize the serial port value
-		ui->lineEditSerialPort->setText(serialPortName);
+		ui->comboSerialPort->activated(serialPortName);
+		ui->comboSerialPort->setEditText(serialPortName);
 	}
 	else if (connectionType == ConnectionRemote)
 	{
@@ -292,7 +294,8 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 		//Re-initialize values that may have been changed
 		ui->comboBoxDeviceModel->setCurrentIndex(0);
 		QStringList *plist = listSerialPorts();
-		ui->lineEditSerialPort->setText(plist->value(0));
+		ui->comboSerialPort->activated(plist->value(0));
+		ui->comboSerialPort->setEditText(plist->value(0));
 		delete(plist);
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
@@ -385,7 +388,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	if(ui->radioButtonTelescopeLocal->isChecked())
 	{
 		//Read the serial port
-		QString serialPortName = ui->lineEditSerialPort->text();		
+		QString serialPortName = ui->comboSerialPort->currentText();
 		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX))
 			return;//TODO: Add more validation!
 		
