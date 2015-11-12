@@ -55,6 +55,7 @@ Source: "@QtXmlPatterns_location@"; DestDir: "{app}";
 Source: "@QtConcurrent_location@"; DestDir: "{app}";
 @ISS_QT_SCRIPT@
 @ISS_QT_MULTIMEDIA@
+@ISS_QT_SERIALPORT@
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_WINDOWS_PLUGIN@
