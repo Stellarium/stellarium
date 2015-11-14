@@ -83,7 +83,7 @@ template<class T> class Vector2
 {
 public:
 	inline Vector2();
-    inline Vector2(T);
+	inline Vector2(T);
 	inline Vector2(T, T);
 
 	inline Vector2& operator=(const T*);
