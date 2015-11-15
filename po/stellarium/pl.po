@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 13:07+0600\n"
-"PO-Revision-Date: 2015-10-18 23:48+0000\n"
+"PO-Revision-Date: 2015-11-15 02:35+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-08 05:19+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-11-15 05:09+0000\n"
+"X-Generator: Launchpad (build 17845)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 
@@ -6977,7 +6977,7 @@ msgstr "Oznaczenia satelitów"
 
 #: plugins/Satellites/src/Satellites.cpp:144
 msgid "Satellite labels"
-msgstr "Oznaczenia satelitów"
+msgstr "Etykiety satelitów"
 
 #: plugins/Satellites/src/Satellites.cpp:145
 msgid "Satellites configuration window"
@@ -11146,7 +11146,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "Deszcze meteorów: Wyszukiwanie"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -11156,7 +11156,7 @@ msgstr "Szukaj"
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 msgid "dd/MM/yyyy"
-msgstr ""
+msgstr "dd/MM/rrrr"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
@@ -11320,6 +11320,8 @@ msgstr "Kończenie ładowania..."
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
+"Błąd jednostki cieniowania Scenery3d, nie można narysować obiektu. Szczegóły "
+"w informacjach debuggera."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2096
 msgid ""
@@ -11332,6 +11334,8 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3d.cpp:2105
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
+"Jednostka cieniowania geometrycznego nie jest obsługiwana. Przełączenie "
+"awaryjne do trybu '6 tekstur'."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:2115
 msgid "Falling back to '6 Textures' because of ANGLE bug"
@@ -11346,11 +11350,11 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
-msgstr ""
+msgstr "Wtyczka Scenery3d załadowana!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Scenery3d: 3D landscapes"
-msgstr ""
+msgstr "Scenery3d: Krajobrazy trójwymiarowe"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:232
 msgid "Toggle 3D landscape"
@@ -11382,7 +11386,7 @@ msgstr "Załaduj ponownie shadery"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:280
 msgid "Scenery3d shaders reloaded"
-msgstr ""
+msgstr "Moduły cieniowania Scenery3d zostały ponownie załadowane"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
@@ -11460,7 +11464,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr ""
+msgstr "&quot;Leniwe&quot; mapowanie sześcienne: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
@@ -11503,6 +11507,16 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Moduł rysujący otoczenie 3D. Umożliwia spacerowanie, znajdowanie "
+"przeszkód w terenie i unikanie ich,  wyszukiwanie i demonstrowanie możliwych "
+"osi astronomicznych w świątyniach, oglądanie cieni na zegarach słonecznych "
+"itp.</p><p>Aby się poruszać, naciskaj Ctrl+klawisze kursora. Aby zmienić "
+"punkt widzenia, użyj Ctrl+PgUp/PgDn. Prędkość poruszania się jest powiązana "
+"z polem widzenia (tzn. przybliżenie widoku umożliwia drobniejsze zmiany). "
+"Jeśli nie chcesz się zatrzymywać, zwolnij klawisz Ctrl przed zwolnieniem "
+"klawisza kursora.</p><p>Opracowanie tej wtyczki było częściowo wsparte w "
+"ramach projektu ASTROSIM (P 21208-G19) Austriackiego Funduszu Nauki (FWF). "
+"Więcej: http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -11537,7 +11551,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:251
 msgid "PCSS requires the quality set to LOW or HIGH."
-msgstr ""
+msgstr "PCSS wymaga ustawienia jakości na NISKĄ lub WYSOKĄ."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:253
 msgid ""
@@ -11572,11 +11586,16 @@ msgid ""
 "<b>6 Textures</b> uses 6 single textures, one for each cube side. This is "
 "the most compatible method, but may be slower than the others."
 msgstr ""
+"W trybie <b>6 tekstur</b> jest używanych 6 pojedynczych tekstur, jedna na "
+"każdą stronę sześcianu. Jest to metoda najbardziej zgodna, ale może być "
+"wolniejsza niż inna."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
 msgid ""
 "<b>Cubemap</b> uses a single GL_TEXTURE_CUBEMAP. Recommended for most users."
 msgstr ""
+"W trybie <b>Mapa sześcienna</b> używana jest pojedyncza GL_TEXTURE_CUBEMAP. "
+"Ustawienie zalecane dla większości użytkowników."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
 msgid ""
@@ -11591,7 +11610,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:262
 msgid "Calculates shadows for each cubemap face separately."
-msgstr "Wylicza cienie dla każdej ściany mapy wypukłości osobno."
+msgstr "Wylicza cienie dla każdej ściany mapy sześciennej osobno."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:263
 msgid ""
@@ -11607,7 +11626,7 @@ msgstr ""
 msgid ""
 "This does not work when using the <b>Geometry shader</b> cubemapping mode!"
 msgstr ""
-"Ta opcja nie działa gdy używany jest tryb mapowania wypukłości <b>Geometry "
+"Ta opcja nie działa gdy używany jest tryb mapowania sześciennego <b>Geometry "
 "shader</b>!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:266
@@ -11615,7 +11634,7 @@ msgid ""
 "When checked, the cubemap is only recreated in specific time intervals, "
 "instead of each frame."
 msgstr ""
-"Gdy ta opcja jest wybrana, mapa wypukłości jest odtwarzana tylko co pewien "
+"Gdy ta opcja jest wybrana, mapa sześcienna jest odtwarzana tylko co pewien "
 "czas, zamiast w każdej klatce."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:267
@@ -11628,7 +11647,7 @@ msgstr ""
 msgid ""
 "Note that the cubemap is always re-rendered when the view position changes."
 msgstr ""
-"Zauważ, że mapa wypukłości jest zawsze renderowana od nowa po zmianie punktu "
+"Zauważ, że mapa sześcienna jest zawsze renderowana od nowa po zmianie punktu "
 "widzenia."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:270
@@ -11673,7 +11692,7 @@ msgstr "6 tekstur"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:70
 msgid "Cubemap"
-msgstr "Mapa wypukłości (cubemap)"
+msgstr "Mapa sześcienna (cubemap)"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:72
 msgid "Geometry shader"
@@ -11772,15 +11791,15 @@ msgstr "PCSS"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr "Tryb mapowania wypukłości:"
+msgstr "Tryb mapowania sześciennego:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
-msgstr "Pełne cienie mapy wypukłości"
+msgstr "Pełne cienie mapy sześciennej"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr "Powolne powtórne renderowanie mapy wypukłości"
+msgstr "&quot;Leniwe&quot; powtórne renderowanie mapy sześciennej"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
@@ -11816,7 +11835,7 @@ msgstr "Dodaj bieżący widok"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "Załaduj/zachowaj z datą"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
