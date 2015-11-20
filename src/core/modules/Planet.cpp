@@ -520,8 +520,8 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE)
 {
-	// Make sure the parent position is computed for the dateJD, otherwise
-	// getHeliocentricPos() would return incorect values.
+	// Make sure the parent position is computed for the dateJDE, otherwise
+	// getHeliocentricPos() would return incorrect values.
 	if (parent)
 		parent->computePositionWithoutOrbits(dateJDE);
 
@@ -543,7 +543,7 @@ void Planet::computePosition(const double dateJDE)
 		}
 		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJDE, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
