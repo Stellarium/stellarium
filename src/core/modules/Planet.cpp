@@ -51,6 +51,8 @@ Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
+bool Planet::permanentDrawingOrbits = false;
+
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
 Planet::PlanetShaderVars Planet::planetShaderVars;
 QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
@@ -199,6 +201,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -272,13 +275,21 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
-			oss << q_("Apparent diameter: %1, with rings: %2")
-			       .arg(StelUtils::radToDmsStr(withoutRings, true),
-			            StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDecDegStr(withoutRings,4,false,true),
+					    StelUtils::radToDecDegStr(angularSize,4,false,true));
+			else
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDmsStr(withoutRings, true),
+					    StelUtils::radToDmsStr(angularSize, true));
 		}
 		else
 		{
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			else
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
 		}
 		oss << "<br>";
 	}
@@ -322,8 +333,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			if (deg>=267.5 && deg<=272.5)
 				phase = q_("First Quarter");
 
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			if (withDecimalDegree)
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			}
+			else
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			}
 
 			if (englishName=="Moon" && !phase.isEmpty())
 			{
@@ -501,8 +520,8 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE)
 {
-	// Make sure the parent position is computed for the dateJD, otherwise
-	// getHeliocentricPos() would return incorect values.
+	// Make sure the parent position is computed for the dateJDE, otherwise
+	// getHeliocentricPos() would return incorrect values.
 	if (parent)
 		parent->computePositionWithoutOrbits(dateJDE);
 
@@ -524,7 +543,7 @@ void Planet::computePosition(const double dateJDE)
 		}
 		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJDE, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
@@ -1160,9 +1179,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0), screenPos)
-	    && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
-	    && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	if ((prj->project(Vec3d(0), screenPos)
+	     && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
+	     && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	     || permanentDrawingOrbits)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (e.g. for Jupiter's satellites)

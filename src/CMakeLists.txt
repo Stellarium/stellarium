@@ -431,6 +431,9 @@ IF(GENERATE_STELMAINLIB)
      IF(ENABLE_SOUND)
           QT5_USE_MODULES(stelMain Multimedia)
      ENDIF()
+     IF(USE_PLUGIN_TELESCOPECONTROL)
+          QT5_USE_MODULES(stelMain SerialPort)
+     ENDIF()
      INSTALL(TARGETS stelMain DESTINATION lib)
      ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
      #stelMain should be after the plug-ins, otherwise the build crashes
@@ -441,9 +444,12 @@ ELSE()
      # This will add the ANGLE lib if the Qt version supports it.
      TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
-     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets)
+     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets SerialPort)
      IF(ENABLE_SOUND)
           QT5_USE_MODULES(stellarium Multimedia)
+     ENDIF()
+     IF(USE_PLUGIN_TELESCOPECONTROL)
+          QT5_USE_MODULES(stellarium SerialPort)
      ENDIF()
 
      IF(APPLE)

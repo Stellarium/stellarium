@@ -154,6 +154,7 @@ void SolarSystem::init()
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
+	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 
 	recreateTrails();
 
@@ -1737,6 +1738,11 @@ void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
 	return getEarth()->getApparentMagnitudeAlgorithmString();
+}
+
+void SolarSystem::setFlagPermanentOrbits(bool b)
+{
+	Planet::permanentDrawingOrbits=b;
 }
 
 double SolarSystem::getEclipseFactor(const StelCore* core) const

@@ -72,8 +72,6 @@ IF(WIN32)
           SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -fexceptions -fident -mthreads -Wno-unused-parameter -Wno-unused-result")
           SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
      ELSE()
-          SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /MANIFEST:NO")
-          SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /MANIFEST:NO")
           # _USE_MATH_DEFINES Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
           # NOMINMAX So that windows.h does not redefine min and max
           # _WINSOCKAPI_ Prevent window.s from including winsock.h
@@ -224,6 +222,9 @@ FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
+IF(USE_PLUGIN_TELESCOPECONTROL)
+     FIND_PACKAGE(Qt5SerialPort REQUIRED)
+ENDIF()
 IF(WIN32)
      FIND_PACKAGE(Qt5Sql REQUIRED)
      FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
@@ -291,12 +292,6 @@ ENDIF()
 
 
 IF(WIN32)
-    #######################################################
-    ### Generate a manifest file                        ###
-    #######################################################
-
-    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/stellarium.exe.manifest @ONLY)
-
     #######################################################
     ### Generate a VersionInfo file                     ###
     #######################################################
@@ -376,6 +371,12 @@ IF(WIN32)
         SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
     ELSE()
         SET(ISS_QT_SCRIPT "; QtScript isn't used")
+    ENDIF()
+    IF(USE_PLUGIN_TELESCOPECONTROL)
+        GET_TARGET_PROPERTY(QtSerialPort_location Qt5::SerialPort LOCATION)
+        SET(ISS_QT_SERIALPORT "Source: \"${QtSerialPort_location}\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_QT_SERIALPORT "; QtSerialPort isn't used")
     ENDIF()
     IF(ENABLE_SOUND)
         GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
