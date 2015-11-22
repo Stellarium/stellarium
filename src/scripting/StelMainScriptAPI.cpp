@@ -273,11 +273,12 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	return map;
 }
 
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite)
 {
 	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
-	StelMainView::getInstance().saveScreenShot(prefix, dir);
+	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
+	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
@@ -669,6 +670,11 @@ void StelMainScriptAPI::debug(const QString& s)
 void StelMainScriptAPI::output(const QString &s)
 {
 	StelApp::getInstance().getScriptMgr().output(s);
+}
+
+void StelMainScriptAPI::resetOutput(void)
+{
+	StelApp::getInstance().getScriptMgr().resetOutput();
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
