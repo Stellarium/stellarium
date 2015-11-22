@@ -28,6 +28,7 @@ DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\data\stellarium.ico
 LicenseFile=COPYING
+ChangesAssociations=yes
 ; LZMA2/max required 95 MB RAM for compression and 8 MB RAM for decompression
 ; Using LZMA2/max algorithm reduces size of package on ~10%
 Compression=lzma2/max
@@ -116,6 +117,11 @@ Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: 
 Root: HKLM; Subkey: "Software\Stellarium"; Flags: uninsdeletekey
 ; Save path of installation into Windows registry
 Root: HKLM; Subkey: "Software\Stellarium"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"
+; Set file associations for Stellarium scripts
+Root: HKCR; Subkey: ".ssc"; ValueType: string; ValueName: ""; ValueData: "Stellarium.Script"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: "Stellarium.Script"; ValueType: string; ValueName: ""; ValueData: "Stellarium Script"; Flags: uninsdeletekey
+Root: HKCR; Subkey: "Stellarium.Script\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\stellarium.exe,0"
+Root: HKCR; Subkey: "Stellarium.Script\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\stellarium.exe"" --startup-script ""%1"""
 
 ; Recommended use Inno Setup 5.5.3+
 [Languages]
