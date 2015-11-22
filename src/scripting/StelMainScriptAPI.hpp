@@ -325,7 +325,8 @@ public slots:
 	//! @param dir the path of the directory to save the screenshot in.  If
 	//! none is specified, the default screenshot directory will be used.
 	//! @param invert whether colors have to be inverted in the output image
-	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
+	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
+	void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false);
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
@@ -655,6 +656,9 @@ public slots:
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
 	void output(const QString& s);
+
+	//! Reset (clear) output file
+	void resetOutput(void);
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
