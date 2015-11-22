@@ -144,6 +144,9 @@ public slots:
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
 	void output(const QString& msg);
 
+	//! Reset output file and cause the emission of an (empty) scriptOutput signal.
+	void resetOutput(void);
+
 	//! Pause a running script.
 	void pauseScript();
 

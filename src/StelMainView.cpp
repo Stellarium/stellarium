@@ -428,6 +428,7 @@ protected:
 StelMainView::StelMainView(QWidget* parent)
 	: QGraphicsView(parent), guiItem(NULL), gui(NULL),
 	  flagInvertScreenShotColors(false),
+	  flagOverwriteScreenshots(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL), maxfps(10000.f)
@@ -1173,10 +1174,11 @@ void StelMainView::deinitGL()
 	gui = NULL;
 }
 
-void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
+void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
 	screenShotPrefix = filePrefix;
 	screenShotDir = saveDir;
+	flagOverwriteScreenshots=overwrite;
 	emit(screenshotRequested());
 }
 
@@ -1208,13 +1210,19 @@ void StelMainView::doScreenshot(void)
 	}
 
 	QFileInfo shotPath;
-	for (int j=0; j<100000; ++j)
+	if (flagOverwriteScreenshots)
 	{
-		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png");
-		if (!shotPath.exists())
-			break;
+		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + ".png");
 	}
-
+	else
+	{
+		for (int j=0; j<100000; ++j)
+		{
+			shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png");
+			if (!shotPath.exists())
+				break;
+		}
+	}
 	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
 	if (!im.save(shotPath.filePath())) {
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
