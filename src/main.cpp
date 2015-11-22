@@ -152,7 +152,7 @@ int main(int argc, char **argv)
 	QSettings registry("HKEY_LOCAL_MACHINE\\Software\\Stellarium", QSettings::NativeFormat);
 	QString installDir = registry.value("InstallPath").toString();
 	if (!installDir.isEmpty())
-		QFileInfo appInfo(installDir);
+		QFileInfo appInfo(installDir.append("\\stellarium.exe"));
 	#endif
 	QDir appDir(appInfo.absolutePath());	
 	registerPluginsDir(appDir);
