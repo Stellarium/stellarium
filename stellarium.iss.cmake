@@ -112,9 +112,6 @@ Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
 
 [Registry]
-Root: HKLM; Subkey: "Software\Stellarium"; Flags: uninsdeletekey
-; Save path of installation into Windows registry
-Root: HKLM; Subkey: "Software\Stellarium"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"
 ; Set file associations for Stellarium scripts
 Root: HKCR; Subkey: ".ssc"; ValueType: string; ValueName: ""; ValueData: "Stellarium.Script"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "Stellarium.Script"; ValueType: string; ValueName: ""; ValueData: "Stellarium Script"; Flags: uninsdeletekey
