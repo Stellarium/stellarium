@@ -59,13 +59,8 @@ Source: "@QtConcurrent_location@"; DestDir: "{app}";
 @ISS_QT_SERIALPORT@
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
-@ISS_WINDOWS_PLUGIN@
-@ISS_ICO_PLUGIN@
-@ISS_JPEG_PLUGIN@
+@ISS_QT_PLUGINS@
 @ISS_MULTIMEDIA_PLUGINS@
-@ISS_QML_DIR@
-@ISS_QML_PLUGINS@
-@ISS_QML_SHADERS@
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 
 [Tasks]
@@ -117,9 +112,6 @@ Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
 
 [Registry]
-Root: HKLM; Subkey: "Software\Stellarium"; Flags: uninsdeletekey
-; Save path of installation into Windows registry
-Root: HKLM; Subkey: "Software\Stellarium"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"
 ; Set file associations for Stellarium scripts
 Root: HKCR; Subkey: ".ssc"; ValueType: string; ValueName: ""; ValueData: "Stellarium.Script"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: "Stellarium.Script"; ValueType: string; ValueName: ""; ValueData: "Stellarium Script"; Flags: uninsdeletekey
