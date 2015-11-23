@@ -16,7 +16,6 @@ from subprocess import Popen
 from subprocess import PIPE
 
 installDirectory = None
-qmlDirectory = None
 qtFrameworksDirectory = None
 qtPluginsDirectory = None
 sourceDirectory = None
@@ -171,7 +170,6 @@ def processPlugins():
 	# copy over image plugins
 	copyPluginDirectory('imageformats')
 	copyPluginDirectory('iconengines')
-	copyPluginDirectory('qmltooling')
 	# check multimedia support
 	if 'QtMultimedia' in ' '.join(getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))):
 		copyPluginDirectory('mediaservice')
@@ -185,34 +183,6 @@ def processPlugins():
 		updateLibraryPath(framework, 'Frameworks')
 	# Always update paths after copying...
 	updateLibraryPath('libqcocoa.dylib', 'plugins/platforms')
-
-def processQmlDirectory(qtImportsDirectoryName):
-	qmlOutputDirectory = os.path.join(installDirectory, 'MacOS/Qt/labs')
-	toDir = os.path.join(qmlOutputDirectory, qtImportsDirectoryName)
-	os.mkdir(toDir)
-	fromDir = os.path.join(qmlDirectory, qtImportsDirectoryName)
-	for plugin in os.listdir(fromDir):
-		# there may be debug versions installed; if so, ignore them
-		if plugin.find('_debug') is -1:
-			shutil.copy(os.path.join(fromDir, plugin), toDir)
-	# Update all paths
-	for plugin in os.listdir(toDir):
-		if plugin[-5:] == 'dylib':
-			# copy required frameworks
-			for framework in getListOfLinkedQtFrameworksForFile(os.path.join(toDir, plugin)):
-				copyFrameworkToApp(framework)
-				updateLibraryPath(framework, 'Frameworks')
-			# Update path
-			updateLibraryPath(plugin, 'MacOS/Qt/labs/' + qtImportsDirectoryName)
-
-def processQml():
-	qmlQtDir = os.path.join(installDirectory, 'MacOS/Qt')
-	os.mkdir(qmlQtDir)
-	
-	qmlOutputDirectory = os.path.join(qmlQtDir, 'labs')
-	os.mkdir(qmlOutputDirectory)
-
-	processQmlDirectory("shaders")
 
 def processBin():
 	'''
@@ -253,7 +223,7 @@ def main():
 	'''
 	main expects three arguments:
 	'''
-	global installDirectory, sourceDirectory, qtFrameworksDirectory, qtPluginsDirectory, qmlDirectory
+	global installDirectory, sourceDirectory, qtFrameworksDirectory, qtPluginsDirectory
 	if len(sys.argv) < 4:
 		print("usage: mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
 		print(sys.argv)
@@ -281,7 +251,6 @@ def main():
 	processResources()
 	processFrameworks()
 	processPlugins()
-	processQml()
 	# update application lib's locations; we need to do this here, as the above rely
 	# on the binary with the 'original' paths.
 	updateLibraryPath('stellarium', 'MacOS')
