@@ -55,7 +55,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			#ifdef Q_OS_WIN
-			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine\n"
+			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
+			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
 			  << "--safe-mode (or -s)     : Synonymous to --mesa-mode \n"
 			#endif
@@ -90,6 +93,21 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	}
 	if (argsGetOption(argList, "-a", "--angle-mode"))
 	{
+		qApp->setProperty("onetime_angle_mode", true);
+	}
+	if (argsGetOption(argList, "-9", "--angle-d3d9"))
+	{
+		qputenv("QT_ANGLE_PLATFORM", "d3d9");
+		qApp->setProperty("onetime_angle_mode", true);
+	}
+	if (argsGetOption(argList, "", "--angle-d3d11"))
+	{
+		qputenv("QT_ANGLE_PLATFORM", "d3d11");
+		qApp->setProperty("onetime_angle_mode", true);
+	}
+	if (argsGetOption(argList, "", "--angle-warp"))
+	{
+		qputenv("QT_ANGLE_PLATFORM", "warp");
 		qApp->setProperty("onetime_angle_mode", true);
 	}
 	if (argsGetOption(argList, "-m", "--mesa-mode"))
