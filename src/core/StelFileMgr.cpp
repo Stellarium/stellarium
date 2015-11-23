@@ -105,7 +105,8 @@ void StelFileMgr::init()
 		QFileInfo installLocation(ResourcesDir.absolutePath());
 		QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
 	#elif defined(Q_OS_WIN)
-		installDir = QCoreApplication::applicationDirPath();
+		QFileInfo installLocation(QCoreApplication::applicationDirPath());
+		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
 	#else
 		// Linux, BSD, Solaris etc.
 		// We use the value from the config.h filesystem
