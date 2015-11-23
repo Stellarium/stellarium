@@ -87,7 +87,7 @@ void StelFileMgr::init()
 	}
 	else
 	{
-	#ifdef Q_OS_MAC
+	#if defined(Q_OS_MAC)
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
 			relativePath = "/../..";
@@ -104,6 +104,8 @@ void StelFileMgr::init()
 		}
 		QFileInfo installLocation(ResourcesDir.absolutePath());
 		QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
+	#elif defined(Q_OS_WIN)
+		installDir = QCoreApplication::applicationDirPath();
 	#else
 		// Linux, BSD, Solaris etc.
 		// We use the value from the config.h filesystem
@@ -123,15 +125,6 @@ void StelFileMgr::init()
 		}
 	}
 
-	#ifdef Q_OS_WIN
-	// Special case for Windows - retrive installation path from registry.
-	QSettings registry("HKEY_LOCAL_MACHINE\\Software\\Stellarium", QSettings::NativeFormat);
-	QString installDirReg = registry.value("InstallPath").toString();
-	// Let's check for existence of required registry key
-	if (!installDirReg.isEmpty())
-		installDir = installDirReg;
-	#endif
-	
 	// Then add the installation directory to the search path
 	fileLocations.append(installDir);	
 }
