@@ -56,9 +56,9 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
 			#ifdef Q_OS_WIN
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
-			  << "--angle-d3d9 (or -9)    : Force DirectX9 for ANGLE OpenGL ES2 rendering engine\n"
-			  << "--angle-d3d11           : Force DirectX11 for ANGLE OpenGL ES2 rendering engine\n"
-			  << "--angle-warp            : Force software rendering for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--angle-d3d11           : Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine\n"
+			  << "--angle-warp            : Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine\n"
 			  << "--mesa-mode (or -m)     : Use MESA as software OpenGL rendering engine\n"
 			  << "--safe-mode (or -s)     : Synonymous to --mesa-mode \n"
 			#endif
