@@ -30,7 +30,6 @@
 #include <stdio.h>
 
 #ifdef Q_OS_WIN
-#include <QSettings>
 #include <windows.h>
 #ifndef _SHOBJ_H
 	#include <shlobj.h>
