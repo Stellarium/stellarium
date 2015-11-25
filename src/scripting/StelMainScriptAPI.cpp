@@ -26,7 +26,7 @@
 #include "ConstellationMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "MeteorMgr.hpp"
+#include "SporadicMeteorMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
@@ -104,17 +104,17 @@ StelMainScriptAPI::~StelMainScriptAPI()
 }
 
 //! Set the current date in Julian Day
-//! @param JD the Julian Date
+//! @param JD the Julian Date (UT)
 void StelMainScriptAPI::setJDay(double JD)
 {
-	StelApp::getInstance().getCore()->setJDay(JD);
+	StelApp::getInstance().getCore()->setJD(JD);
 }
 
 //! Get the current date in Julian Day
-//! @return the Julian Date
+//! @return the Julian Date (UT)
 double StelMainScriptAPI::getJDay() const
 {
-	return StelApp::getInstance().getCore()->getJDay();
+	return StelApp::getInstance().getCore()->getJD();
 }
 
 //! Set the current date in Modified Julian Day
@@ -131,31 +131,42 @@ double StelMainScriptAPI::getMJDay() const
 	return StelApp::getInstance().getCore()->getMJDay();
 }
 
-void StelMainScriptAPI::setDate(const QString& dt, const QString& spec, const bool &enableDeltaT)
+void StelMainScriptAPI::setDate(const QString& dateStr, const QString& spec, const bool &dateIsDT)
 {
-	bool relativeTime = false;
-	if (dt.startsWith("+") || dt.startsWith("-") || (dt.startsWith("now") && (dt.startsWith("+") || dt.startsWith("-"))))
-		relativeTime = true;
-	double JD = jdFromDateString(dt, spec);
 	StelCore* core = StelApp::getInstance().getCore();
-	if (relativeTime)
+	double JD = jdFromDateString(dateStr, spec);
+	if (dateIsDT)
 	{
-		core->setJDay(JD);
+		qWarning() << "StelMainScriptAPI::setDate() called with final Boolean set to indicate Dynamical Time. This is new in 0.14, make sure you did this intentionally.";
+		qWarning() << "This warning will go away in Stellarium 0.16, please update the script by then to be sure.";
+		core->setJDE(JD);
 	}
 	else
-	{
-		if (enableDeltaT)
-		{
-			// add Delta-T correction for date
-			core->setJDay(JD + core->getDeltaT(JD)/86400);
-		}
-		else
-		{
-			// set date without Delta-T correction
-			// compatible with 0.11
-			core->setJDay(JD);
-		}
-	}
+		core->setJD(JD);
+
+//	bool relativeTime = false;
+//	if (dateStr.startsWith("+") || dateStr.startsWith("-") || (dateStr.startsWith("now") && (dateStr.startsWith("+") || dateStr.startsWith("-"))))
+//		relativeTime = true;
+//	double JD = jdFromDateString(dateStr, spec);
+//	StelCore* core = StelApp::getInstance().getCore();
+//	if (relativeTime)
+//	{
+//		core->setJDay(JD);
+//	}
+//	else
+//	{
+//		if (dateIsDT)
+//		{
+//			// add Delta-T correction for date
+//			core->setJDay(JD + core->getDeltaT(JD)/86400);
+//		}
+//		else
+//		{
+//			// set date without Delta-T correction
+//			// compatible with 0.11
+//			core->setJDay(JD);
+//		}
+//	}
 }
 
 QString StelMainScriptAPI::getDate(const QString& spec)
@@ -168,7 +179,7 @@ QString StelMainScriptAPI::getDate(const QString& spec)
 
 QString StelMainScriptAPI::getDeltaT() const
 {
-	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT(getJDay())/3600.);
+	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT()/3600.);
 }
 
 QString StelMainScriptAPI::getDeltaTAlgorithm() const
@@ -262,11 +273,12 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	return map;
 }
 
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite)
 {
 	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
-	StelMainView::getInstance().saveScreenShot(prefix, dir);
+	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
+	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
@@ -660,6 +672,11 @@ void StelMainScriptAPI::output(const QString &s)
 	StelApp::getInstance().getScriptMgr().output(s);
 }
 
+void StelMainScriptAPI::resetOutput(void)
+{
+	StelApp::getInstance().getScriptMgr().resetOutput();
+}
+
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -691,7 +708,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		if (nowRe.capturedTexts().at(1)=="now")
 			jd = StelUtils::getJDFromSystem();
 		else
-			jd = core->getJDay();
+			jd = core->getJD();
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 		{
@@ -738,10 +755,10 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	omgr->setFlagSelectedObjectPointer(pointer);
-	if (name=="")
+	if (name.isEmpty() || !omgr->findAndSelect(name))
+	{
 		omgr->unSelect();
-	else
-		omgr->findAndSelect(name);
+	}
 }
 
 //DEPRECATED: Use getObjectInfo()
@@ -771,6 +788,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -787,7 +805,10 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	float direction = 3.; // N is zero, E is 90 degrees
+	if (useOldAzimuth)
+		direction = 2.;
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -797,7 +818,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -877,6 +898,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	Vec3d pos;
 	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
+	bool useOldAzimuth = StelApp::getInstance().getFlagOldAzimuthUsage();
 
 	// ra/dec
 	pos = obj->getEquinoxEquatorialPos(core);
@@ -893,7 +915,10 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	float direction = 3.; // N is zero, E is 90 degrees
+	if (useOldAzimuth)
+		direction = 2.;
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -903,7 +928,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
-	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	az = direction*M_PI - az;
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
@@ -961,7 +986,7 @@ void StelMainScriptAPI::clear(const QString& state)
 {
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
+	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
 	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
@@ -1072,6 +1097,40 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagFog(false);
 		zl->setFlagShow(false);
 	}
+	else if (state.toLower() == "galactic")
+	{
+		movmgr->setMountMode(StelMovementMgr::MountGalactic);
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagTrails(false);
+		mmgr->setZHR(0);
+		glmgr->setFlagAzimuthalGrid(false);
+		glmgr->setFlagGalacticGrid(false);
+		glmgr->setFlagEquatorGrid(false);
+		glmgr->setFlagEquatorLine(false);
+		glmgr->setFlagEclipticLine(false);
+		glmgr->setFlagMeridianLine(false);
+		glmgr->setFlagLongitudeLine(false);
+		glmgr->setFlagHorizonLine(false);
+		glmgr->setFlagGalacticEquatorLine(false);
+		glmgr->setFlagEquatorJ2000Grid(false);
+		lmgr->setFlagCardinalsPoints(false);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		nmgr->setFlagHints(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
+	}
 	else
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";
@@ -1139,8 +1198,11 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aim;
-	double dAlt = StelUtils::getDecAngle(alt);
+	double dAlt = StelUtils::getDecAngle(alt);	
 	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagOldAzimuthUsage())
+		dAzi -= M_PI;
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
 	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), duration);

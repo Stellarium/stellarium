@@ -128,7 +128,11 @@ static void InitEll(const double q, const double n, const double e, const double
 //	}
 //	GZ: Comet orbits are quite often near-parabolic, where this may still only converge slowly.
 //	Better always use Laguerre-Conway. See Heafner, Ch. 5.3
+//	Ouch! https://bugs.launchpad.net/stellarium/+bug/1465112 ==>It seems we still need an escape counter!
+//      Debug line in test case fabs(E-Ep) indicates it usually takes 2-3, occasionally up to 6 cycles.
+//	It seems safe to assume 10 should not be exceeded. N.B.: A GPU fixed-loopcount implementation could go for 8 passes.
 	double E=M+0.85*e*StelUtils::sign(sin(M));
+	int escape=0;
 	for (;;)
 	{
 		const double Ep=E;
@@ -136,7 +140,17 @@ static void InitEll(const double q, const double n, const double e, const double
 		const double f=E-f2-M;
 		const double f1=1.0-e*cos(E);
 		E+= (-5.0*f)/(f1+StelUtils::sign(f1)*std::sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
-		if (fabs(E-Ep) < EPSILON) break;
+		if (fabs(E-Ep) < EPSILON)
+		{
+			//qDebug() << "Ell. orbit with eccentricity " << e << "Escaping after" << escape << "loops at E-Ep=" << E-Ep;
+			break;
+		}
+		escape++;
+		if (escape>10)
+		{
+			qDebug() << "Ell. orbit with eccentricity " << e << "would have caused endless loop. Escaping after 10 runs at E-Ep=" << E-Ep;
+			break;
+		}
 	}
 //	Note: q=a*(1-e)
 	const double h1 = q*std::sqrt((1.0+e)/(1.0-e));  // elsewhere: a sqrt(1-e²)     ... q / (1-e) sqrt( (1+e)(1-e)) = q sqrt((1+e)/(1-e))
@@ -222,15 +236,6 @@ CometOrbit::CometOrbit(double pericenterDistance,
 	const double cj = cos(parentRotJ2000Longitude);
 	const double sj = sin(parentRotJ2000Longitude);
 
-//	rotateToVsop87[0] =  c_nod;
-//	rotateToVsop87[1] = -s_nod * c_obl;
-//	rotateToVsop87[2] =  s_nod * s_obl;
-//	rotateToVsop87[3] =  s_nod;
-//	rotateToVsop87[4] =  c_nod * c_obl;
-//	rotateToVsop87[5] = -c_nod * s_obl;
-//	rotateToVsop87[6] =  0.0;
-//	rotateToVsop87[7] =          s_obl;
-//	rotateToVsop87[8] =          c_obl;
 	rotateToVsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
 	rotateToVsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
 	rotateToVsop87[2] =           s_nod*s_obl;
@@ -243,20 +248,20 @@ CometOrbit::CometOrbit(double pericenterDistance,
 	//  qDebug() << "CometOrbit::()...done";
 }
 
-void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD, double *v, bool updateVelocityVector)
+void CometOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v, bool updateVelocityVector)
 {
-	JD -= t0;
+	JDE -= t0;
 	double rCosNu,rSinNu;
 //	temporary solve freezes for near-parabolic comets - using (e < 0.9999) for elliptical orbits
 //	TODO: improve calculations orbits for near-parabolic comets --AW
 //	if (e < 0.9999) InitEll(q,n,e,JD,a1,a2);
-	if (e < 1.0) InitEll(q,n,e,JD,rCosNu,rSinNu); // GZ: After solving with Laguerre-Conway, I dare to go for 1.0.
+	if (e < 1.0) InitEll(q,n,e,JDE,rCosNu,rSinNu); // GZ: After solving with Laguerre-Conway, I dare to go for 1.0.
 	else if (e > 1.0)
 	{
 		// qDebug() << "Hyperbolic orbit for ecc=" << e << ", i=" << i << ", w=" << w << ", Mean Motion n=" << n;
-		InitHyp(q,n,e,JD,rCosNu,rSinNu);
+		InitHyp(q,n,e,JDE,rCosNu,rSinNu);
 	}
-	else InitPar(q,n,JD,rCosNu,rSinNu);
+	else InitPar(q,n,JDE,rCosNu,rSinNu);
 	double p0,p1,p2, s0, s1, s2;
 	Init3D(i,Om,w,rCosNu,rSinNu,p0,p1,p2, s0, s1, s2, updateVelocityVector, e, q);
 	v[0] = rotateToVsop87[0]*p0 + rotateToVsop87[1]*p1 + rotateToVsop87[2]*p2;
@@ -475,34 +480,34 @@ Vec3d EllipticalOrbit::positionAtE(const double E) const
 }
 
 // Return the offset from the center.
-Vec3d EllipticalOrbit::positionAtTime(const double JD) const
+Vec3d EllipticalOrbit::positionAtTime(const double JDE) const
 {
 	double meanMotion = 2.0 * M_PI / period;
-	double meanAnomaly = meanAnomalyAtEpoch + (JD-epoch) * meanMotion;
+	double meanAnomaly = meanAnomalyAtEpoch + (JDE-epoch) * meanMotion;
 	double E = eccentricAnomaly(meanAnomaly);
 
 	return positionAtE(E);
 }
 
-//void EllipticalOrbit::positionAtTime(double JD, double * X, double * Y, double * Z) const
+//void EllipticalOrbit::positionAtTime(double JDE, double * X, double * Y, double * Z) const
 //{
-//	Vec3d pos = positionAtTime(JD);
+//	Vec3d pos = positionAtTime(JDE);
 //	*X=pos[2];
 //	*Y=pos[0];
 //	*Z=pos[1];
 //}
 
-//void EllipticalOrbit::positionAtTimev(double JD, double* v)
+//void EllipticalOrbit::positionAtTimev(double JDE, double* v)
 //{
-//	Vec3d pos = positionAtTime(JD);
+//	Vec3d pos = positionAtTime(JDE);
 //	v[0]=pos[2];
 //	v[1]=pos[0];
 //	v[2]=pos[1];
 //}
 
-void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(const double JD, double* v) const
+void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(const double JDE, double* v) const
 {
-	Vec3d pos = positionAtTime(JD);
+	Vec3d pos = positionAtTime(JDE);
 	v[0] = rotateToVsop87[0]*pos[0] + rotateToVsop87[1]*pos[1] + rotateToVsop87[2]*pos[2];
 	v[1] = rotateToVsop87[3]*pos[0] + rotateToVsop87[4]*pos[1] + rotateToVsop87[5]*pos[2];
 	v[2] = rotateToVsop87[6]*pos[0] + rotateToVsop87[7]*pos[1] + rotateToVsop87[8]*pos[2];
@@ -529,12 +534,12 @@ void EllipticalOrbit::sample(double, double, int nSamples, OrbitSampleProc& proc
 }
 
 
-Vec3d CachingOrbit::positionAtTime(double jd) const
+Vec3d CachingOrbit::positionAtTime(double JDE) const
 {
-	if (jd != lastTime)
+	if (JDE != lastTime)
 	{
-		lastTime = jd;
-		lastPosition = computePosition(jd);
+		lastTime = JDE;
+		lastPosition = computePosition(JDE);
 	}
 	return lastPosition;
 }

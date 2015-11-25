@@ -2,8 +2,9 @@ INCLUDE_DIRECTORIES(.)
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(CompassMarks_SRCS
-  CompassMarks.hpp
-  CompassMarks.cpp)
+     CompassMarks.hpp
+     CompassMarks.cpp
+)
 
 SET(CompassMarks_RES ../CompassMarks.qrc)
 QT5_ADD_RESOURCES(CompassMarks_RES_CXX ${CompassMarks_RES})

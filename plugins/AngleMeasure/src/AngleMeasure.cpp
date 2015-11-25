@@ -473,36 +473,52 @@ void AngleMeasure::enableAngleMeasure(bool b)
 		//qDebug() << "AngleMeasure::enableAngleMeasure starting timer";
 		messageTimer->start();
 	}
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/enable_at_startup", flagShowAngleMeasure);
 }
 
 void AngleMeasure::showPositionAngle(bool b)
 {
 	flagShowPA = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_position_angle", flagShowPA);
 }
 
 void AngleMeasure::showPositionAngleHor(bool b)
 {
 	flagShowHorizontalPA = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_position_angle_horizontal", flagShowHorizontalPA);
 }
 void AngleMeasure::showEquatorial(bool b)
 {
 	flagShowEquatorial = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_equatorial", flagShowEquatorial);
 }
 void AngleMeasure::showHorizontal(bool b)
 {
 	flagShowHorizontal = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/show_horizontal", flagShowHorizontal);
 }
 void AngleMeasure::showHorizontalStartSkylinked(bool b)
 {
 	flagShowHorizontalStartSkylinked = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/link_horizontal_start_to_sky", flagShowHorizontalStartSkylinked);
 }
 void AngleMeasure::showHorizontalEndSkylinked(bool b)
 {
 	flagShowHorizontalEndSkylinked = b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/link_horizontal_end_to_sky", flagShowHorizontalEndSkylinked);
 }
 void AngleMeasure::useDmsFormat(bool b)
 {
 	flagUseDmsFormat=b;
+	// Immediate saving of settings
+	conf->setValue("AngleMeasure/angle_format_dms", flagUseDmsFormat);
 }
 
 void AngleMeasure::updateMessageText()
@@ -529,9 +545,7 @@ void AngleMeasure::restoreDefaultSettings()
 	// Remove the old values...
 	conf->remove("AngleMeasure");
 	// ...load the default values...
-	loadSettings();
-	// ...and then save them.
-	saveSettings();
+	loadSettings();	
 	// But this doesn't save the colors, so:
 	conf->beginGroup("AngleMeasure");
 	conf->setValue("text_color", "0,0.5,1");
@@ -543,34 +557,16 @@ void AngleMeasure::restoreDefaultSettings()
 
 void AngleMeasure::loadSettings()
 {
-	conf->beginGroup("AngleMeasure");
-
-	useDmsFormat(conf->value("angle_format_dms", false).toBool());
-	showPositionAngle(conf->value("show_position_angle", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
-	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
-	horTextColor = StelUtils::strToVec3f(conf->value("text_color_horizontal", "0.9,0.6,0.4").toString());
-	horLineColor = StelUtils::strToVec3f(conf->value("line_color_horizontal", "0.9,0.6,0.4").toString());
-	showPositionAngleHor(conf->value("show_position_angle_horizontal", false).toBool());
-	flagShowEquatorial = conf->value("show_equatorial", true).toBool();
-	flagShowHorizontal = conf->value("show_horizontal", false).toBool();
-	flagShowHorizontalStartSkylinked = conf->value("link_horizontal_start_to_sky", false).toBool();
-	flagShowHorizontalEndSkylinked = conf->value("link_horizontal_end_to_sky", false).toBool();
-
-	conf->endGroup();
-}
-
-void AngleMeasure::saveSettings()
-{
-	conf->beginGroup("AngleMeasure");
-
-	conf->setValue("angle_format_dms", isDmsFormat());
-	conf->setValue("show_position_angle", isPaDisplayed());
-	conf->setValue("show_position_angle_horizontal", isHorPaDisplayed());
-	conf->setValue("show_equatorial", isEquatorial());
-	conf->setValue("show_horizontal", isHorizontal());
-	conf->setValue("link_horizontal_start_to_sky", isHorizontalStartSkylinked());
-	conf->setValue("link_horizontal_end_to_sky", isHorizontalEndSkylinked());
-
-	conf->endGroup();
+	enableAngleMeasure(conf->value("AngleMeasure/enable_at_startup", false).toBool());
+	useDmsFormat(conf->value("AngleMeasure/angle_format_dms", false).toBool());
+	showPositionAngle(conf->value("AngleMeasure/show_position_angle", false).toBool());
+	textColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
+	lineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
+	horTextColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color_horizontal", "0.9,0.6,0.4").toString());
+	horLineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color_horizontal", "0.9,0.6,0.4").toString());
+	showPositionAngleHor(conf->value("AngleMeasure/show_position_angle_horizontal", false).toBool());
+	showEquatorial(conf->value("AngleMeasure/show_equatorial", true).toBool());
+	showHorizontal(conf->value("AngleMeasure/show_horizontal", false).toBool());
+	showHorizontalStartSkylinked(conf->value("AngleMeasure/link_horizontal_start_to_sky", false).toBool());
+	showHorizontalEndSkylinked(conf->value("AngleMeasure/link_horizontal_end_to_sky", false).toBool());
 }

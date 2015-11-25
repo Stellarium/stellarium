@@ -34,8 +34,10 @@ class AngleMeasureDialog;
 /*! @defgroup angleMeasure Angle Measure plug-in
 @{
 The Angle Measure plugin is a small tool which is used to measure
-the angular distance between two points on the sky. *goes misty eyed*
-I recall measuring the size of the Cassini Division when I was a student.
+the angular distance between two points on the sky.
+
+*goes misty eyed* I recall measuring the size of the Cassini Division
+when I was a student.
 It was not the high academic glamor one might expect... It was cloudy...
 It was rainy... The observatory lab had some old scopes set up at one end,
 pointing at a photograph of Saturn at the other end of the lab. We measured.
@@ -64,7 +66,7 @@ still always in alt/azimuthal coordinates.
 //! Main class of the Angle Measure plug-in.
 //! @author Matthew Gates
 //! @author Alexander Wolf
-//! @anchor Georg Zotti
+//! @author Georg Zotti
 class AngleMeasure : public StelModule
 {
 	Q_OBJECT
@@ -100,7 +102,6 @@ public:
 	bool isHorizontalEndSkylinked() const { return flagShowHorizontalEndSkylinked; }
 	bool isHorPaDisplayed() const { return flagShowHorizontalPA; }
 
-
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
 	//! with the default values and re-load them.
@@ -113,14 +114,6 @@ public:
 	//! values.
 	//! @see saveSettings(), restoreSettings()
 	void loadSettings();
-
-	//! Save the plug-in's settings to the configuration file.
-	//! @warning textColor and lineColor are not saved, probably because
-	//! they can't be changed by the user in-program.
-	//! @todo find a way to save color values without "rounding drift"
-	//! (this is especially important for restoring default color values).
-	//! @see loadSettings(), restoreSettings()
-	void saveSettings();
 
 public slots:
 	void enableAngleMeasure(bool b);

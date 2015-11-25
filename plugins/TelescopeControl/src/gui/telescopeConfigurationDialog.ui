@@ -29,7 +29,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -144,7 +153,16 @@
       <property name="spacing">
        <number>6</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
@@ -227,14 +245,23 @@
         <x>0</x>
         <y>0</y>
         <width>382</width>
-        <height>476</height>
+        <height>479</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">
        <property name="spacing">
         <number>0</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -243,7 +270,16 @@
           <string>Telescope properties</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayoutTelescope">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -355,7 +391,16 @@ Increase this value if the reticle is skipping.</string>
           <item>
            <widget class="QFrame" name="frameEquinox">
             <layout class="QHBoxLayout" name="horizontalLayoutEpoch">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -400,7 +445,16 @@ Increase this value if the reticle is skipping.</string>
           <string>Device settings</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayoutDevice">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -425,25 +479,9 @@ Increase this value if the reticle is skipping.</string>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEditSerialPort">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>24</height>
-               </size>
+             <widget class="QComboBox" name="comboSerialPort">
+              <property name="editable">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -527,7 +565,16 @@ Increase this value if the reticle is skipping.</string>
           <string>Connection settings</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item row="0" column="0">
@@ -598,7 +645,16 @@ Increase this value if the reticle is skipping.</string>
           <string>User interface settings</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayoutUserInterface">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -718,14 +774,12 @@ Increase this value if the reticle is skipping.</string>
   <tabstop>lineEditTelescopeName</tabstop>
   <tabstop>doubleSpinBoxTelescopeDelay</tabstop>
   <tabstop>checkBoxConnectAtStartup</tabstop>
-  <tabstop>lineEditSerialPort</tabstop>
   <tabstop>comboBoxDeviceModel</tabstop>
   <tabstop>lineEditHostName</tabstop>
   <tabstop>spinBoxTCPPort</tabstop>
   <tabstop>checkBoxCircles</tabstop>
   <tabstop>lineEditCircleList</tabstop>
   <tabstop>pushButtonDiscard</tabstop>
-  <tabstop>pushButtonSave</tabstop>
  </tabstops>
  <resources/>
  <connections>

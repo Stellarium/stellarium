@@ -391,7 +391,7 @@ void Scenery3d::update(double deltaTime)
 				movement[2]);
 
 		//get current time
-		double curTime = core->getJDay();
+		double curTime = core->getJD();
 
 		if(lazyDrawing)
 		{
@@ -1542,7 +1542,7 @@ void Scenery3d::generateCubeMap()
 
 	if(needsCubemapUpdate)
 	{
-		lastCubemapUpdate = core->getJDay();
+		lastCubemapUpdate = core->getJD();
 		lastCubemapUpdateRealTime = QDateTime::currentMSecsSinceEpoch();
 	}
 }
@@ -1893,7 +1893,7 @@ void Scenery3d::drawDebug()
 	    str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
 	    painter.drawText(screen_x, screen_y, str);
 	    screen_y -= 15.0f;
-	    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJDay()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
+	    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJD()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
 	    painter.drawText(screen_x, screen_y, str);
     }
 

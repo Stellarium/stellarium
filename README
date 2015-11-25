@@ -207,6 +207,13 @@ for more details on the location of the user data directory for your OS.
 		[19] "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4nd ed., 2000)
 		[20] "Calendrical Calculations" by E. M. Reingold & N. Dershowitz (2nd ed., 2001)
 		[21] DeltaT webpage by V. Reijs: http://www.iol.ie/~geniet/eng/DeltaTeval.htm
+	1.5 An accurate long-time precession model compatible with P03:
+		J. Vondrak, N. Capitaine, P. Wallace: New precession expressions, valid for long time intervals.
+		Astronomy&Astrophysics 534, A22 (2011); DOI: 10.1051/0004-6361/201117274
+	1.6 Nutation: 
+		Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the Precession-Nutation of the Celestial Pole.
+		Celestial Mechanics and Dynamical Astronomy 85: 37-49, 2003.
+		This model provides accuracy better than 1 milli-arcsecond in the time 1995-2050. It is applied for years 1500..2500 only.
 
 2. Included source code
 	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
@@ -252,7 +259,7 @@ for more details on the location of the user data directory for your OS.
 		-) compute nr_of_measurements = the number of valid b,v,r values
 		-) throw away or keep stars (depending on magnitude,
 		   nr_of_measurements, combination of flags, tycho2 number)
-		-) add all stars from hiparcos (incl. component solutions), and
+		-) add all stars from Hipparcos (incl. component solutions), and
 		   tycho2+1st supplement
 		-) reorganize the stars in several brigthness levels and
 		   triangular zones according to position and magnitude
@@ -271,8 +278,51 @@ for more details on the location of the user data directory for your OS.
 		Samus N.N., Durlevich O.V., Kazarovets E V., Kireeva N.N., Pastukhova E.N., 
 		Zharova A.V., et al., General Catalogue of Variable Stars (Samus+ 2007-2012)
 		http://cdsarc.u-strasbg.fr/viz-bin/Cat?cat=B%2Fgcvs&
-	3.9 Barnard catalog taken from http://www.dvaa.org/AData/Barnard.html,
-		courtesy of Delaware Valley Amateur Astronomers.
+	3.9 Consolidated DSO catalog was created from various data:
+		[1]  NGC/IC data taken from SIMBAD Astronomical Database
+		     http://simbad.u-strasbg.fr
+		[2]  Distance to NGC/IC data taken from NED (NASA/IPAC EXTRAGALACTIC DATABASE) 
+		     http://ned.ipac.caltech.edu
+		[3]  Catalogue of HII Regions (Sharpless, 1959) taken from VizieR
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/20
+		[4]  H-α emission regions in Southern Milky Way (Rodgers+, 1960) taken from 
+		     VizieR
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/216
+		[5]  Catalogue of Reflection Nebulae (Van den Bergh, 1966) taken from VizieR
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/21
+		[6]  Lynds' Catalogue of Dark Nebulae (LDN) (Lynds, 1962) taken from VizieR
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/7A
+		[7]  Lynds' Catalogue of Bright Nebulae (Lynds, 1965) taken from VizieR
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/9
+		[8]  Catalog of bright diffuse Galactic nebulae (Cederblad, 1946) taken from 
+		     VizieR
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/231
+		[9]  Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927) taken 
+		     from VizieR
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/220A
+		[10] A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates 
+		     (Melotte, 1915) taken from NASA ADS
+		     http://adsabs.harvard.edu/abs/1915MmRAS..60..175M
+		[11] On Structural Properties of Open Galactic Clusters and their Spatial 
+		     Distribution. Catalog of Open Galactic Clusters. (Collinder, 1931) taken 
+		     from NASA ADS
+		     http://adsabs.harvard.edu/abs/1931AnLun...2....1C
+		[12] The Collinder Catalog of Open Star Clusters. An Observer’s Checklist. 
+		     Edited by Thomas Watson. Taken from CloudyNights
+		     http://www.cloudynights.com/page/articles/cat/articles/the-collinder-catalog-updated-r2467
+	3.10 Cross-identification of objects in consolidated DSO catalog was maked with:
+		[1]  SIMBAD Astronomical Database
+		     http://simbad.u-strasbg.fr
+		[2]  Merged catalogue of reflection nebulae (Magakian, 2003)
+		     http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=J/A+A/399/141
+		[3]  Messier Catalogue was taken from Wikipedia (includes morphological classification and distances)
+		     https://en.wikipedia.org/wiki/List_of_Messier_objects
+		[4]  Caldwell Catalogue was taken from Wikipedia (includes morphological classification and distances)
+		     https://en.wikipedia.org/wiki/Caldwell_catalogue
+	3.11 Morphological classification and magnitudes (partially) for Melotte catalogue was taken from
+		DeepSkyPedia
+		http://deepskypedia.com/wiki/List:Melotte
+
 
 4. Graphics
 	4.1 All graphics are copyrighted by the Stellarium's Team (GPL) except
@@ -317,7 +367,13 @@ for more details on the location of the user data directory for your OS.
 		Schenk at the Lunar and Planetary Institute, Houston, Texas. Image data from 
 		Voyager 2 (NASA, JPL). Original texture has "white spots", which was filled by 
 		Dizel777 (http://spaceengine.org/forum/19-563-25069-16-1409101585).
-	4.5j All other planet maps from David Seal's site:
+	4.4j Pluto map is produced by NASA from New Horizons data and colored by RVS.
+	     (Courtesy NASA/Johns Hopkins University Applied Physics Laboratory/Southwest 
+	     Research Institute - http://photojournal.jpl.nasa.gov/catalog/PIA19858)
+	4.4k Charon map is produced by NASA from New Horizons data and colored by RVS.
+	     (Courtesy NASA/Johns Hopkins University Applied Physics Laboratory/Southwest 
+	     Research Institute - http://photojournal.jpl.nasa.gov/catalog/PIA19866)
+	4.5l All other planet maps from David Seal's site:
 		http://maps.jpl.nasa.gov/   see license in section 10.2
 	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 		University of Potsdam, Germany. Further information and more
@@ -394,11 +450,12 @@ for more details on the location of the user data directory for your OS.
 		from Peter Vasey, Plover Hill Observatory
 		http://www.madpc.co.uk/~peterv/
 	4.26 Image of IC434 from Marc Aragnou
+	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
 
 --------------------------------------------------------------------------------
 9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2004-2012 Fabien Chereau et al.
+   Copyright (C) 2004-2015 Fabien Chereau et al.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License

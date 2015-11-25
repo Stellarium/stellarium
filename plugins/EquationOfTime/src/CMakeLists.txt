@@ -1,20 +1,22 @@
 INCLUDE_DIRECTORIES(
-  ${CMAKE_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src
-  ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src/gui
-  . gui)
+     .
+     gui
+     ${CMAKE_BINARY_DIR}
+     ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src
+     ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src/gui
+)
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(EQUATIONOFTIME_SRCS
-  EquationOfTime.hpp
-  EquationOfTime.cpp
-  gui/EquationOfTimeWindow.hpp
-  gui/EquationOfTimeWindow.cpp
-  )
+     EquationOfTime.hpp
+     EquationOfTime.cpp
+     gui/EquationOfTimeWindow.hpp
+     gui/EquationOfTimeWindow.cpp
+)
 
 SET(EQUATIONOFTIME_UIS
-  gui/equationOfTimeWindow.ui
+     gui/equationOfTimeWindow.ui
 )
 
 QT5_WRAP_UI(EQUATIONOFTIME_UIS_H ${EQUATIONOFTIME_UIS})
@@ -26,7 +28,7 @@ QT5_ADD_RESOURCES(EQUATIONOFTIME_RES_CXX ${EQUATIONOFTIME_RES})
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 
 ADD_LIBRARY(EquationOfTime-static STATIC ${EQUATIONOFTIME_SRCS} ${EQUATIONOFTIME_RES_CXX} ${EQUATIONOFTIME_UIS_H})
-QT5_USE_MODULES(EquationOfTime-static Core Declarative Network)
+QT5_USE_MODULES(EquationOfTime-static Core Network Gui Widgets)
 SET_TARGET_PROPERTIES(EquationOfTime-static PROPERTIES OUTPUT_NAME "EquationOfTime")
 TARGET_LINK_LIBRARIES(EquationOfTime-static ${extLinkerOption})
 SET_TARGET_PROPERTIES(EquationOfTime-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

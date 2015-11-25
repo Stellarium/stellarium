@@ -33,6 +33,7 @@ src/gui/ScriptConsole.cpp
 src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
+src/gui/AstroCalcDialog.cpp
 src/main.cpp
 src/StelMainView.cpp
 
@@ -48,8 +49,9 @@ src/ui_viewDialog.h
 src/ui_configurationDialog.h
 src/ui_addRemoveLandscapesDialog.h
 src/ui_shortcutsDialog.h
-src/ui_AtmosphereDialog.h
+src/ui_atmosphereDialog.h
 src/ui_scriptConsole.h
+src/ui_astroCalcDialog.h
 
 # Plug-in translations
 # NOTE: Plugins should be enabled for building
@@ -122,10 +124,15 @@ plugins/NavStars/src/NavStars.cpp
 plugins/EquationOfTime/src/EquationOfTime.cpp
 plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp
 plugins/EquationOfTime/src/ui_equationOfTimeWindow.h
+plugins/MeteorShowers/src/MeteorShowersMgr.cpp
 plugins/MeteorShowers/src/MeteorShowers.cpp
 plugins/MeteorShowers/src/MeteorShower.cpp
-plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp
-plugins/MeteorShowers/src/ui_meteorShowerDialog.h
+plugins/MeteorShowers/src/MeteorObj.cpp
+plugins/MeteorShowers/src/translations.h
+plugins/MeteorShowers/src/gui/MSConfigDialog.cpp
+plugins/MeteorShowers/src/gui/MSSearchDialog.cpp
+plugins/MeteorShowers/src/ui_MSConfigDialog.h
+plugins/MeteorShowers/src/ui_MSSearchDialog.h
 plugins/PointerCoordinates/src/PointerCoordinates.cpp
 plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp
 plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h
