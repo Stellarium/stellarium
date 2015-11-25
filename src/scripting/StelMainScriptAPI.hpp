@@ -44,22 +44,22 @@ public:
 
 // These functions will be available in scripts
 public slots:
-	//! Set the current date in Julian Day
-	//! @param JD the Julian Date
+	//! Set the current date as Julian Day number
+	//! @param JD the Julian Day number
 	void setJDay(double JD);
-	//! Get the current date in Julian Day
-	//! @return the Julian Date
+	//! Get the current date as Julian Day number
+	//! @return the Julian Day number
 	double getJDay() const;
 
-	//! Set the current date in Modified Julian Day
-	//! @param MJD the Modified Julian Date
+	//! Set the current date as Modified Julian Day
+	//! @param MJD the Modified Julian Day
 	void setMJDay(double MJD);
-	//! Get the current date in Modified Julian Day
-	//! @return the Modified Julian Date
+	//! Get the current date as Modified Julian Day
+	//! @return the Modified Julian Day
 	double getMJDay() const;
 
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
-	//! @param dt the date string to use.  Formats:
+	//! @param dateStr the date string to use.  Formats:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
 	//! - "now" (set sim time to real time)
 	//! - relative, e.g. "+ 4 days", "-2 weeks".  can use these
@@ -71,8 +71,9 @@ public slots:
 	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
 	//! @note when sidereal time is used, the length of time for
 	//! each unit is dependent on the current planet.  By contrast
-	//! when sidereal timeis not specified (i.e. solar time is used)
+	//! when sidereal time is not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
+	// TODO: This calls for implementing "sol" days (planets's solar days)!
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used. Defaults to "utc".
 	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
@@ -81,7 +82,11 @@ public slots:
 	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
 	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
-	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
+	//! @note starting with version 0.14.0 the final optional Boolean argument has a different meaning and default!
+	//! @param dateIsTT \a true if the given date is formulated in Dynamical Time, i.e. with DeltaT added.
+	//  GZ JDfix for 0.14: I estimate 99.7% of users will want to set UT-based dates here. We could use an awkward name like dateIsUTbased=true to keep default value true.
+	//void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
+	void setDate(const QString& dateStr, const QString& spec="utc", const bool& dateIsDT=false);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
@@ -219,6 +224,7 @@ public slots:
 	//! - starchart : equatorial mount, constellation lines,
 	//!   no landscape, atmosphere etc.  labels & markers on.
 	//! - deepspace : like starchart, but no planets, no eq.grid, no markers, no lines.
+	//! - galactic  : like deepspace, but in galactic coordinate system.
 	//! @param state the name of a preset state.
 	void clear(const QString& state="natural");
 
@@ -319,7 +325,8 @@ public slots:
 	//! @param dir the path of the directory to save the screenshot in.  If
 	//! none is specified, the default screenshot directory will be used.
 	//! @param invert whether colors have to be inverted in the output image
-	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
+	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
+	void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false);
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
@@ -649,6 +656,9 @@ public slots:
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
 	void output(const QString& s);
+
+	//! Reset (clear) output file
+	void resetOutput(void);
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.

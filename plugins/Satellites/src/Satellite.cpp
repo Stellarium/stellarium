@@ -65,7 +65,7 @@ Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2,0.2,0.2);
 QString Satellite::myText = "";
 #endif
 double Satellite::sunReflAngle = 180.;
-
+double Satellite::timeShift = 0.;
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
     : initialized(false),
@@ -612,8 +612,7 @@ void Satellite::update(double)
 	if (pSatWrapper && orbitValid)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		double JD = core->getJDay();
-		epochTime = JD - core->getDeltaT(JD)/86400; // Delta T anti-correction for artificial satellites
+		epochTime = core->getJD() + timeShift; // We have "true" JD from core, satellites don't need JDE!
 
 		pSatWrapper->setEpoch(epochTime);
 		position                 = pSatWrapper->getTEMEPos();
@@ -730,7 +729,7 @@ bool Satellite::operator <(const Satellite& another) const
 
 void Satellite::draw(StelCore* core, StelPainter& painter, float)
 {
-	if (core->getJDay()<jdLaunchYearJan1 || !displayed)
+	if (core->getJD()<jdLaunchYearJan1 || !displayed)
 		return;
 
 	XYZ = getJ2000EquatorialPos(core);

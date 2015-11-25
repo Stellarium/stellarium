@@ -37,7 +37,9 @@
 #include <QSyntaxHighlighter>
 #include <QTextDocumentFragment>
 
-ScriptConsole::ScriptConsole() : highlighter(NULL)
+ScriptConsole::ScriptConsole(QObject *parent)
+	: StelDialog(parent)
+	, highlighter(NULL)
 {
 	ui = new Ui_scriptConsoleForm;
 }

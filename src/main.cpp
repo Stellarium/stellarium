@@ -110,20 +110,6 @@ void clearCache()
 	cacheMgr->clear(); // Removes all items from the cache.
 }
 
-void registerPluginsDir(QDir& appDir)
-{
-	QStringList pathes;
-	// Windows
-	pathes << appDir.absolutePath();
-	pathes << appDir.absoluteFilePath("platforms");
-	// OS X
-	appDir.cdUp();	
-	pathes << appDir.absoluteFilePath("plugins");
-	// All systems
-	pathes << QCoreApplication::libraryPaths();
-	QCoreApplication::setLibraryPaths(pathes);
-}
-
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
@@ -145,10 +131,15 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
-	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
+	#if defined(Q_OS_MAC)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
-	registerPluginsDir(appDir);
+	appDir.cdUp();
+	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("plugins"));
+	#elif defined(Q_OS_WIN)
+	QFileInfo appInfo(QString::fromUtf8(argv[0]));
+	QCoreApplication::addLibraryPath(appInfo.absolutePath());
+	#endif	
 
 	QGuiApplication::setDesktopSettingsAware(false);
 
@@ -185,6 +176,21 @@ int main(int argc, char **argv)
 	// output, such as --help and --version
 	CLIProcessor::parseCLIArgsPreConfig(argList);
 
+	#ifdef Q_OS_WIN
+	#if QT_VERSION >= 0x050300
+	if (qApp->property("onetime_angle_mode").isValid())
+	{
+		app.setAttribute(Qt::AA_UseOpenGLES, true);
+	}
+	#endif
+	#if QT_VERSION >= 0x050400
+	if (qApp->property("onetime_mesa_mode").isValid())
+	{
+		app.setAttribute(Qt::AA_UseSoftwareOpenGL, true);
+	}
+	#endif
+	#endif
+
 	// Start logging.
 	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
 	StelLogger::writeLog(argStr);
@@ -192,7 +198,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2014 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) %1 Fabien Chereau et al.").arg(COPYRIGHT_YEARS);
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));

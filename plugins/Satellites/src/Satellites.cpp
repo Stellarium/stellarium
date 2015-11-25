@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009, 2012 Matthew Gates
+ * Copyright (C) 2015 Nick Fedoseev (Iridium flares)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1694,7 +1695,7 @@ bool Satellites::checkJsonFileFormat()
 bool Satellites::isValidRangeDates() const
 {
 	bool ok;
-	double tJD = StelApp::getInstance().getCore()->getJDay();
+	double tJD = StelApp::getInstance().getCore()->getJD();
 	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
 	if (lastUpdate.isNull()) // No updates yet?
 		uJD = tJD;
@@ -1704,6 +1705,77 @@ bool Satellites::isValidRangeDates() const
 		return false;
 	else
 		return true;
+}
+
+IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
+{
+	StelCore* pcore = StelApp::getInstance().getCore();
+	double currentJD = pcore->getJD(); // save current JD
+	bool isTimeNow = pcore->getIsTimeNow();
+	long iJD =currentJD;
+	double JDMidnight = iJD + 0.5 - pcore->getCurrentLocation().longitude / 360.f;
+	double delta = currentJD - JDMidnight;
+
+	pcore->setJD(iJD + 0.5 - pcore->getCurrentLocation().longitude / 360.f);
+	pcore->update(10); // force update to get new coordinates
+
+	IridiumFlaresPredictionList predictions;
+	predictions.clear();
+	foreach(const SatelliteP& sat, satellites)
+	{
+		if (sat->initialized && sat.data()->getEnglishName().startsWith("IRIDIUM"))
+		{
+			double dt  = 0;
+			double angle0 = 100;
+			double lat0 = -1;
+			while (dt<1)
+			{
+				Satellite::timeShift = dt+delta;
+				sat.data()->update(0);
+
+				Vec3d pos = sat.data()->getAltAzPosApparent(pcore);
+				double lat = pos.latitude();
+				double lon = M_PI - pos.longitude();
+				double v =   sat.data()->getVMagnitude(pcore);
+				double angle =  sat.data()->sunReflAngle;
+
+				if (angle>0 && angle<2)
+				{
+					if (angle>angle0 && (v<1) && lat>5*M_PI/180)
+					{
+						IridiumFlaresPrediction flare;
+						flare.datetime = StelUtils::julianDayToISO8601String(currentJD+dt+StelUtils::getGMTShiftFromQT(currentJD+dt)/24.f);
+						flare.satellite = sat.data()->getEnglishName();
+						flare.azimuth   = lon;
+						flare.altitude  = lat;
+						flare.magnitude = v;
+
+						predictions.append(flare);
+
+						dt +=0.005;
+					}
+					angle0 = angle;
+				}
+				if (angle>0)
+					dt+=0.000002*angle*angle;
+				else
+				{
+					if (lat0>0 && lat<0)
+						dt+=0.05;
+					else
+						dt+=0.0002;
+				}
+				lat0 = lat;
+			}
+		}
+	}
+	Satellite::timeShift = 0.;
+	if (isTimeNow)
+		pcore->setTimeNow();
+	else
+		pcore->setJD(currentJD);
+
+	return predictions;
 }
 
 void Satellites::translations()

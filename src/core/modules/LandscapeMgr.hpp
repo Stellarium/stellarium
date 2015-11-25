@@ -91,6 +91,7 @@ public:
 	//! - Atmophere colour calculation based on location, position of sun
 	//!   and moon.
 	//! - updates adaptation luminescence based on visible bright objects.
+	//! - Landscape and lightscape brightness computations based on sun position and whether atmosphere is on or off.
 	virtual void update(double deltaTime);
 
 	//! Get the order in which this module will draw its objects relative to other modules.

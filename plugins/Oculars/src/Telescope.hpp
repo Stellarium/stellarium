@@ -32,6 +32,7 @@ class Telescope : public QObject
 	Q_PROPERTY(double focalLength READ focalLength WRITE setFocalLength)
 	Q_PROPERTY(bool hFlipped READ isHFlipped WRITE setHFlipped)
 	Q_PROPERTY(bool vFlipped READ isVFlipped WRITE setVFlipped)
+	Q_PROPERTY(bool equatorial READ isEquatorial WRITE setEquatorial)
 public:
 	Telescope();
 	Q_INVOKABLE Telescope(const QObject& other);
@@ -50,6 +51,8 @@ public:
 	void setHFlipped(bool flipped);
 	bool isVFlipped() const;
 	void setVFlipped(bool flipped);
+	bool isEquatorial() const;
+	void setEquatorial(bool eq);
 	QMap<int, QString> propertyMap();
 private:
 	QString m_name;
@@ -57,6 +60,7 @@ private:
 	double m_focalLength;
 	bool m_hFlipped;
 	bool m_vFlipped;
+	bool m_equatorial;
 };
 
 #endif /*TELESCOPE_HPP_*/
