@@ -167,14 +167,15 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensName->setTextWidth(maxWidth);
 	fieldLensMultipler->setTextWidth(maxWidth);
 
+	float scale = lineHeight*1.5; // TODO: change hardcoded 1.5 to editable value of scaling coefficient
 	QPixmap pa(":/graphicGui/btTimeRewind-on.png");
-	QPixmap prevArrow = pa.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap prevArrow = pa.scaledToHeight(scale, Qt::SmoothTransformation);
 	QPixmap paOff(":/graphicGui/btTimeRewind-off.png");
-	QPixmap prevArrowOff = paOff.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap prevArrowOff = paOff.scaledToHeight(scale, Qt::SmoothTransformation);
 	QPixmap na(":/graphicGui/btTimeForward-on.png");
-	QPixmap nextArrow = na.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap nextArrow = na.scaledToHeight(scale, Qt::SmoothTransformation);
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
-	QPixmap nextArrowOff = naOff.scaledToHeight(lineHeight, Qt::SmoothTransformation);
+	QPixmap nextArrowOff = naOff.scaledToHeight(scale, Qt::SmoothTransformation);
 
 	StelAction* defaultAction = new StelAction(this);
 	defaultAction->setCheckable(false);
@@ -392,7 +393,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	//Border/background for the widget
 	borderPath = new QGraphicsPathItem();
-	borderPath->setZValue(100);
+	borderPath->setZValue(100);		
 	QBrush borderBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2));
 	borderPath->setBrush(borderBrush);
 	QPen borderPen = QPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
@@ -603,7 +604,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldLensName->boundingRect().height() - prevLensButton->boundingRect().height()) / 2.;
-    prevLensButton->setPos(posX, qRound(posY + heightAdjustment));
+	prevLensButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevLensButton->boundingRect().width();
 	widgetWidth += prevLensButton->boundingRect().width();
 
@@ -635,7 +636,7 @@ void OcularsGuiPanel::updateCcdControls()
 	//Get the name
 	int index = ocularsPlugin->selectedCCDIndex;
 	CCD* ccd = ocularsPlugin->ccds[index];	
-	Q_ASSERT(ccd);
+	Q_ASSERT(ccd);	
 	QString name = ccd->name();
 	QString fullName;
 	if (name.isEmpty())
@@ -685,8 +686,7 @@ void OcularsGuiPanel::updateCcdControls()
 	fieldCcdDimensions->setPos(posX, posY);
 	posY += fieldCcdDimensions->boundingRect().height();
 	widgetHeight += fieldCcdDimensions->boundingRect().height();
-
-	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle, 'f', 2);
+	QString rotation = QString::number(ocularsPlugin->ccdRotationAngle(), 'f', 0);
 	rotation.append(QChar(0x00B0));
 	QString rotationLabel = QString(q_("Rotation: %1")).arg(rotation);
 	fieldCcdRotation->setPlainText(rotationLabel);

@@ -16,7 +16,6 @@ from subprocess import Popen
 from subprocess import PIPE
 
 installDirectory = None
-qmlDirectory = None
 qtFrameworksDirectory = None
 qtPluginsDirectory = None
 sourceDirectory = None
@@ -59,12 +58,24 @@ def getListOfLinkedQtFrameworksForFile(file):
 def copyFrameworkToApp(framework):
 	'''
 	Copy the Qt framework into the bundle.
+	
+	NOTE: OS X 10.11 changes things, and the framework now has @rpath, not the absolute path.
 	'''
-	frameworkRoot = os.path.split(os.path.split(os.path.split(framework)[0])[0])[0]
-	frameworkName = os.path.split(frameworkRoot)[1]
-	target = os.path.join(installDirectory, 'Frameworks', frameworkName)
-	if not os.path.exists(target):
-		shutil.copytree(frameworkRoot, target, symlinks=True, ignore=shutil.ignore_patterns('*debug*'))
+	# print('%s' % framework)
+	if '@rpath' in framework:
+		frameworkRoot = os.path.split(os.path.split(os.path.split(framework)[0])[0])[0]
+		beginPosition = framework.index('/') + 1
+		endPosition = framework.index('/', beginPosition)
+		frameworkName = framework[beginPosition:endPosition]
+		# print('====> %s : %s' % (frameworkName, qtFrameworksDirectory))
+	else:
+		frameworkRoot = os.path.split(os.path.split(os.path.split(framework)[0])[0])[0]
+		frameworkName = os.path.split(frameworkRoot)[1]
+	
+	if frameworkName != 'Qt':
+		target = os.path.join(installDirectory, 'Frameworks', frameworkName)
+		if not os.path.exists(target):
+			shutil.copytree(os.path.join(qtFrameworksDirectory, frameworkName), target, symlinks=True, ignore=shutil.ignore_patterns('*debug*', 'Headers', '*.prl'))
 	
 def updateName(file):
 	'''
@@ -84,18 +95,22 @@ def updateLibraryPath(file, where):
 	'where' is the path relative to the installDirectory
 	'''
 	base = ''
+	if '@rpath' in file:
+		file = file[file.find('/') + 1:]
+		file = os.path.join(installDirectory, 'Frameworks', file)
 	if file.endswith('dylib') or file == 'stellarium':
 		base = file
 		file = os.path.join(installDirectory, where, file)
 	else:
 		base = file[file.find(file[file.rfind('/'):]) + 1:]
+
 	args = ['install_name_tool', '-change', '', '', os.path.join(installDirectory, where, base )]
 	for framework in getListOfLinkedQtFrameworksForFile(file):
 		# otool adds self, so ignore it
 		if not framework == file:
 			args[2] = framework
 			args[3] = '@executable_path/../Frameworks' + framework[framework.find(framework[framework.rfind('/'):]):]
-			# print(args)
+			#print(args)
 			process = Popen(args, stdout=PIPE, stderr=PIPE)
 			output, oerr = process.communicate()
 			if process.returncode != 0:
@@ -123,6 +138,7 @@ def processFrameworks():
 			allFramework.append(dependentFramework)
 	# for framework in set(allFramework):
 		updateName(framework)
+		print('Processing %s' % framework)
 		updateLibraryPath(framework, 'Frameworks')
 
 def copyPluginDirectory(pluginDirectoryName):
@@ -154,7 +170,6 @@ def processPlugins():
 	# copy over image plugins
 	copyPluginDirectory('imageformats')
 	copyPluginDirectory('iconengines')
-	copyPluginDirectory('qmltooling')
 	# check multimedia support
 	if 'QtMultimedia' in ' '.join(getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))):
 		copyPluginDirectory('mediaservice')
@@ -168,34 +183,6 @@ def processPlugins():
 		updateLibraryPath(framework, 'Frameworks')
 	# Always update paths after copying...
 	updateLibraryPath('libqcocoa.dylib', 'plugins/platforms')
-
-def processQmlDirectory(qtImportsDirectoryName):
-	qmlOutputDirectory = os.path.join(installDirectory, 'MacOS/Qt/labs')
-	toDir = os.path.join(qmlOutputDirectory, qtImportsDirectoryName)
-	os.mkdir(toDir)
-	fromDir = os.path.join(qmlDirectory, qtImportsDirectoryName)
-	for plugin in os.listdir(fromDir):
-		# there may be debug versions installed; if so, ignore them
-		if plugin.find('_debug') is -1:
-			shutil.copy(os.path.join(fromDir, plugin), toDir)
-	# Update all paths
-	for plugin in os.listdir(toDir):
-		if plugin[-5:] == 'dylib':
-			# copy required frameworks
-			for framework in getListOfLinkedQtFrameworksForFile(os.path.join(toDir, plugin)):
-				copyFrameworkToApp(framework)
-				updateLibraryPath(framework, 'Frameworks')
-			# Update path
-			updateLibraryPath(plugin, 'MacOS/Qt/labs/' + qtImportsDirectoryName)
-
-def processQml():
-	qmlQtDir = os.path.join(installDirectory, 'MacOS/Qt')
-	os.mkdir(qmlQtDir)
-	
-	qmlOutputDirectory = os.path.join(qmlQtDir, 'labs')
-	os.mkdir(qmlOutputDirectory)
-
-	processQmlDirectory("shaders")
 
 def processBin():
 	'''
@@ -236,7 +223,7 @@ def main():
 	'''
 	main expects three arguments:
 	'''
-	global installDirectory, sourceDirectory, qtFrameworksDirectory, qtPluginsDirectory, qmlDirectory
+	global installDirectory, sourceDirectory, qtFrameworksDirectory, qtPluginsDirectory
 	if len(sys.argv) < 4:
 		print("usage: mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
 		print(sys.argv)
@@ -264,7 +251,6 @@ def main():
 	processResources()
 	processFrameworks()
 	processPlugins()
-	processQml()
 	# update application lib's locations; we need to do this here, as the above rely
 	# on the binary with the 'original' paths.
 	updateLibraryPath('stellarium', 'MacOS')

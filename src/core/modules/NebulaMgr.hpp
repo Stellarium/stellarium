@@ -27,12 +27,12 @@
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+#include "Nebula.hpp"
 
 #include <QString>
 #include <QStringList>
 #include <QFont>
 
-class Nebula;
 class StelTranslator;
 class StelToneReproducer;
 class QSettings;
@@ -49,8 +49,8 @@ class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool flagHintDisplayed
-			   READ getFlagHints
-			   WRITE setFlagHints)
+		   READ getFlagHints
+		   WRITE setFlagHints)
 
 public:
 	NebulaMgr();
@@ -114,6 +114,14 @@ public:
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
 	
+	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
+	const Nebula::CatalogGroup& getCatalogFilters() const { return Nebula::catalogFilters; }
+
+	void setTypeFilters(const Nebula::TypeGroup& tflags) { Nebula::typeFilters=tflags; }
+	const Nebula::TypeGroup& getTypeFilters() const { return Nebula::typeFilters; }
+
+	bool objectInDisplayedCatalog(NebulaP n);
+
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
@@ -136,6 +144,33 @@ public slots:
 	void setGalaxyColor(const Vec3f& c);
 	//! Get current value of the galaxy symbol color.
 	const Vec3f& getGalaxyColor(void) const;
+	//! Set the color used to draw the active galaxy symbols (ellipses).
+	//! @param c The color of the active galaxy symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setActiveGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setActiveGalaxyColor(const Vec3f& c);
+	//! Get current value of the active galaxy symbol color.
+	const Vec3f& getActiveGalaxyColor(void) const;
+	//! Set the color used to draw the interacting galaxy symbols (ellipses).
+	//! @param c The color of the interacting galaxy symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setInteractingGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setInteractingGalaxyColor(const Vec3f& c);
+	//! Get current value of the interacting galaxy symbol color.
+	const Vec3f& getInteractingGalaxyColor(void) const;
+	//! Set the color used to draw the radio galaxy symbols (ellipses).
+	//! @param c The color of the radio galaxy symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setRadioGalaxyColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setRadioGalaxyColor(const Vec3f& c);
+	//! Get current value of the radio galaxy symbol color.
+	const Vec3f& getRadioGalaxyColor(void) const;
 	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
 	//! @param c The color of the nebula symbols
 	//! @code
@@ -145,6 +180,24 @@ public slots:
 	void setBrightNebulaColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getBrightNebulaColor(void) const;
+	//! Set the color used to draw the ionized hydrogen region symbols.
+	//! @param c The color of the ionized hydrogen region symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setHydrogenRegionColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setHydrogenRegionColor(const Vec3f& c);
+	//! Get current value of the hydrogen region symbol color.
+	const Vec3f& getHydrogenRegionColor(void) const;
+	//! Set the color used to draw the supernova remnant symbols.
+	//! @param c The color of the supernova remnant symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setSupernovaRemnantColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setSupernovaRemnantColor(const Vec3f& c);
+	//! Get current value of the supernova remnant symbol color.
+	const Vec3f& getSupernovaRemnantColor(void) const;
 	//! Set the color used to draw the dark nebula symbols (gray boxes).
 	//! @param c The color of the dark nebula symbols
 	//! @code
@@ -184,10 +237,20 @@ public slots:
 	//! Get whether hints (symbols) are scaled according to nebula size.
 	bool getHintsProportional(void) const;
 
+	//! Set whether hints (symbols) should be visible according to surface brightness value.
+	void setFlagSurfaceBrightnessUsage(const bool usage) { Nebula::surfaceBrightnessUsage=usage; }
+	//! Get whether hints (symbols) are visible according to surface brightness value.
+	bool getFlagSurfaceBrightnessUsage(void) const { return Nebula::surfaceBrightnessUsage; }
+
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
 	//! Get value of flag used to turn on and off Nebula rendering.
 	bool getFlagShow(void) const { return flagShow; }
+
+	//! Set flag used to turn on and off DSO type filtering.
+	void setFlagTypeFiltersUsage(bool b) { Nebula::flagUsageTypeFilter=b; }
+	//! Get value of flag used to turn on and off DSO type filtering.
+	bool getFlagTypeFiltersUsage(void) const { return Nebula::flagUsageTypeFilter; }
 
 	//! Set the color used to draw nebula labels.
 	//! @param c The color of the nebula labels
@@ -227,7 +290,7 @@ private slots:
 	
 
 private:
-	
+
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
 
@@ -245,6 +308,7 @@ private:
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const StelCore* core, StelPainter& sPainter);
 
+	NebulaP searchDSO(unsigned int DSO);
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);
 	NebulaP searchIC(unsigned int IC);
@@ -257,18 +321,19 @@ private:
 	NebulaP searchLBN(unsigned int LBN);
 	NebulaP searchCr(unsigned int Cr);
 	NebulaP searchMel(unsigned int Mel);
-	bool loadNGC(const QString& fileName);
-	bool loadNGCOld(const QString& catNGC);
-	bool loadNGCNames(const QString& fileName);
-	bool loadBarnard(const QString& filename);
-	bool loadSharpless(const QString& filename);
-	bool loadVandenBergh(const QString& filename);
-	bool loadRCW(const QString& filename);
-	bool loadLDN(const QString& filename);
-	bool loadLBN(const QString& filename);
+	NebulaP searchPGC(unsigned int PGC);
+	NebulaP searchUGC(unsigned int UGC);
+	NebulaP searchCed(QString Ced);	
 
-	QVector<NebulaP> nebArray;		// The nebulas list
-	QHash<unsigned int, NebulaP> ngcIndex;
+	// Load catalog of DSO
+	bool loadDSOCatalog(const QString& filename);
+	void convertDSOCatalog(const QString& in, const QString& out, bool decimal);
+	// Load proper names for DSO
+	bool loadDSONames(const QString& filename);
+
+	QVector<NebulaP> dsoArray;		// The DSO list
+	QHash<unsigned int, NebulaP> dsoIndex;
+
 	LinearFader hintsFader;
 	LinearFader flagShow;
 
@@ -284,6 +349,10 @@ private:
 	StelTextureSP texPointer;
 	
 	QFont nebulaFont;      // Font used for names printing
+
+	// For DSO convertor
+	bool flagConverter;
+	bool flagDecimalCoordinates;
 };
 
 #endif // _NEBULAMGR_HPP_

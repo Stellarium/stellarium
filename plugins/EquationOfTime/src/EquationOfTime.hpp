@@ -61,7 +61,8 @@ class EquationOfTime : public StelModule
 	Q_OBJECT
 	Q_PROPERTY(bool showEOT
 		   READ isEnabled
-		   WRITE enableEquationOfTime)
+		   WRITE enableEquationOfTime
+		   NOTIFY equationOfTimeStateChanged)
 
 public:
 	EquationOfTime();
@@ -87,9 +88,9 @@ public:
 
 	//! Get solution of equation of time
 	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
-	//! @param JDay JD
+	//! @param JDE JD in Dynamical Time (previously called Ephemeris Time)
 	//! @return time in minutes
-	double getSolutionEquationOfTime(const double JDay) const;
+	double getSolutionEquationOfTime(const double JDE) const;
 
 	//! Is plugin enabled?
 	bool isEnabled() const
@@ -137,6 +138,9 @@ public slots:
 
 private slots:
 	void updateMessageText();
+
+signals:
+	void equationOfTimeStateChanged(bool b);
 
 private:
 	// if existing, delete EquationOfTime section in main config.ini, then create with default values

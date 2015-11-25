@@ -29,10 +29,10 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
-#include "MeteorMgr.hpp"
 #include "LabelMgr.hpp"
-#include "StarMgr.hpp"
 #include "SolarSystem.hpp"
+#include "SporadicMeteorMgr.hpp"
+#include "StarMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
@@ -218,6 +218,7 @@ StelApp::StelApp(QObject* parent)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
 	, flagShowDecimalDegrees(false)
+	, flagUseAzimuthFromSouth(false)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -278,12 +279,15 @@ StelApp::~StelApp()
 	singleton = NULL;
 }
 
-void StelApp::setupHttpProxy()
+void StelApp::setupNetworkProxy()
 {
 	QString proxyHost = confSettings->value("proxy/host_name").toString();
 	QString proxyPort = confSettings->value("proxy/port").toString();
 	QString proxyUser = confSettings->value("proxy/user").toString();
 	QString proxyPass = confSettings->value("proxy/password").toString();
+	QString proxyType = confSettings->value("proxy/type").toString();
+
+	bool useSocksProxy = proxyType.contains("socks", Qt::CaseInsensitive);
 
 	// If proxy settings not found in config, use environment variable
 	// if it is defined.  (Config file over-rides environment).
@@ -327,7 +331,10 @@ void StelApp::setupHttpProxy()
 	if (!proxyHost.isEmpty())
 	{
 		QNetworkProxy proxy;
-		proxy.setType(QNetworkProxy::HttpProxy);
+		if (useSocksProxy)
+			proxy.setType(QNetworkProxy::Socks5Proxy);
+		else
+			proxy.setType(QNetworkProxy::HttpProxy);
 		proxy.setHostName(proxyHost);
 		if (!proxyPort.isEmpty())
 			proxy.setPort(proxyPort.toUShort());
@@ -340,7 +347,10 @@ void StelApp::setupHttpProxy()
 
 		QString ppDisp = proxyPass;
 		ppDisp.fill('*');
-		qDebug() << "Using HTTP proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
+		if (useSocksProxy)
+			qDebug() << "Using SOCKS proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
+		else
+			qDebug() << "Using HTTP proxy:" << proxyUser << ppDisp << proxyHost << proxyPort;
 		QNetworkProxy::setApplicationProxy(proxy);
 	}
 }
@@ -459,8 +469,8 @@ void StelApp::init(QSettings* conf)
 	gridLines->init();
 	getModuleMgr().registerModule(gridLines);
 
-	// Meteors
-	MeteorMgr* meteors = new MeteorMgr(10, 72);
+	// Sporadic Meteors
+	SporadicMeteorMgr* meteors = new SporadicMeteorMgr(10, 72);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
@@ -486,13 +496,14 @@ void StelApp::init(QSettings* conf)
 	setViewportEffect(confSettings->value("video/viewport_effect", "none").toString());
 
 	// Proxy Initialisation
-	setupHttpProxy();
+	setupNetworkProxy();
 	updateI18n();
 
 	// Init actions.
-	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
+	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode", "Ctrl+N");
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
+	setFlagOldAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
 	
 	initialized = true;
 }

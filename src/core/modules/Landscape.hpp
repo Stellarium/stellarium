@@ -160,7 +160,8 @@ public:
 	//! Find opacity in a certain direction. (New in V0.13 series)
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
 	//! Default implementation indicates the horizon equals math horizon.
-	virtual float getOpacity(Vec3d azalt) const {return (azalt[2]<0 ? 1.0f : 0.0f); }
+	// TBD: Maybe change this to azalt[2]<sinMinAltitudeLimit ? (But never called in practice, reimplemented by the subclasses...)
+	virtual float getOpacity(Vec3d azalt) const { Q_ASSERT(0); return (azalt[2]<0 ? 1.0f : 0.0f); }
 	//! The list of azimuths (counted from True North towards East) and altitudes can come in various formats. We read the first two elements, which can be of formats:
 	enum horizonListMode {
 		azDeg_altDeg   = 0, //! azimuth[degrees] altitude[degrees]

@@ -90,6 +90,7 @@ private slots:
 	void requireSelectionStateChanged(int state);
 	void scaleImageCircleStateChanged(int state);
 	void setLabelsDescriptionText(bool state);
+	void selectedCCDRotationAngleChanged();
 
 private:
 	Oculars* plugin;

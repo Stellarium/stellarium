@@ -131,7 +131,7 @@ public:
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
-	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
+	//! @param v direction vector of object to draw. Will draw only if this is in the visible hemisphere.
 	void drawSprite2dMode(float x, float y, float radius);
 	void drawSprite2dMode(const Vec3d& v, float radius);
 

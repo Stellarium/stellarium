@@ -1457,7 +1457,6 @@ void StelPainter::drawCircle(float x, float y, float r)
 	enableClientStates(false);
 }
 
-
 void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
@@ -1764,7 +1763,7 @@ void StelPainter::enableTexture2d(bool b)
 
 void StelPainter::initGLShaders()
 {
-	qWarning() << "Intializing basic GL shaders... ";
+	qDebug() << "Initializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =

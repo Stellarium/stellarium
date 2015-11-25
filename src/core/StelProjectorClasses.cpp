@@ -103,6 +103,7 @@ bool StelProjectorEqualArea::forward(Vec3f &v) const
 
 bool StelProjectorEqualArea::backward(Vec3d &v) const
 {
+	// FIXME: for high FoV, return false but don't cause crash with Mouse Pointer Coordinates.
 	const double dq = v[0]*v[0] + v[1]*v[1];
 	double l = 1.0 - 0.25*dq;
 	if (l < 0)
@@ -110,6 +111,7 @@ bool StelProjectorEqualArea::backward(Vec3d &v) const
 		v[0] = 0.0;
 		v[1] = 0.0;
 		v[2] = 1.0;
+		//return false; // GZ tentative fix for projecting invalid outlying screen point. CAUSES CRASH SOMETIMES!?
 	}
 	else
 	{
@@ -358,7 +360,7 @@ QString StelProjectorMercator::getNameI18() const
 
 QString StelProjectorMercator::getDescriptionI18() const
 {
-	return q_("The mercator projection is one of the most used world map projection. It preserves direction and shapes but distorts size, in an increasing degree away from the equator.");
+	return q_("The Mercator projection is one of the most used world map projections. It preserves direction and shapes but distorts size, in an increasing degree away from the equator.");
 }
 
 bool StelProjectorMercator::forward(Vec3f &v) const
@@ -469,7 +471,7 @@ bool StelProjectorSinusoidal::forward(Vec3f &v) const
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
-	const float delta = std::asin(v[1]/r);
+	const float delta = std::asin(v[1]/r);	
 	v[0] = alpha*std::cos(delta);
 	v[1] = delta;
 	v[2] = r;
@@ -485,6 +487,8 @@ bool StelProjectorSinusoidal::backward(Vec3d &v) const
 	{
 		v[0] = -cd;
 		v[1] = 1.0;
+		// FIXME: It is unclear what happens to v[2] here.
+		v.normalize(); // make sure the length test in Atmosphere.cpp work.
 		return false;
 	}
 	v[2] = -cd * std::cos(pcd);

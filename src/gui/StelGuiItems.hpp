@@ -163,7 +163,7 @@ private:
 class LeftStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-	Q_INTERFACES(QGraphicsItem);
+	Q_INTERFACES(QGraphicsItem)
 public:
 	LeftStelBar(QGraphicsItem* parent);
 	~LeftStelBar();
@@ -185,7 +185,7 @@ private:
 class BottomStelBar : public QObject, public QGraphicsItem
 {
 	Q_OBJECT
-	Q_INTERFACES(QGraphicsItem);
+	Q_INTERFACES(QGraphicsItem)
 public:
 	BottomStelBar(QGraphicsItem* parent, const QPixmap& pixLeft=QPixmap(), const QPixmap& pixRight=QPixmap(), const QPixmap& pixMiddle=QPixmap(), const QPixmap& pixSingle=QPixmap());
 	virtual ~BottomStelBar();
