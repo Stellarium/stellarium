@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 13:07+0600\n"
-"PO-Revision-Date: 2015-11-08 09:18+0000\n"
+"PO-Revision-Date: 2015-11-23 03:37+0000\n"
 "Last-Translator: Lê Văn Bách <levanbach1994ag@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-09 05:07+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-11-24 05:10+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
@@ -6934,7 +6934,7 @@ msgstr "Vị trí góc (độ):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid "Off-Axis guider"
-msgstr ""
+msgstr "Bộ điều hướng ngoài trục"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Rotation Angle (degrees):"
@@ -11613,6 +11613,15 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P 21208-"
 "G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
+"<p>Bộ diễn tả cận cảnh 3D. Đi dạo, tìm và tránh các chướng ngại vạt trong "
+"khu vườn của bạn, tìm và chứng minh sự điều chỉnh thiên văn có thể trong đền "
+"thờ, xem bóng trên đồng hồ mặt trời...</p><p>Để di chuyển xung quanh, nhấn "
+"Ctrl+con trỏ. Để nâng cao tầm mắt, sử dụng Ctrl+PgUp/PgDn. Tốc độ di chuyển "
+"được liên kết với trường nhìn (tức là phóng to cho sự điều chỉnh tốt). Bạn "
+"thậm chí có thể tiếp tục di chuyển bằng cách bỏ Ctrl trước khi chính con "
+"trỏ.</p><p>Sự phát triển của phần bổ sung này thì nằm trong phần hỗ trợ của "
+"Quỹ Khoa học Áo (FWF) dự án ASTROSIM (P 21208-G19). Xem thêm: "
+"http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -11667,7 +11676,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:255
 msgid "Causes a performance hit."
-msgstr ""
+msgstr "Gây ra một sự giảm hiệu suất"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:257
 msgid ""
@@ -11676,6 +11685,11 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
+"Điều này xác định cách mà cảnh được diễn tả khi Stellarium sử dụng một hình "
+"chiếu khác hơn &quot;Hình chiếu phối cảnh&quot;. Cảnh thi luôn được diễn tả "
+"vào trong một khối lập phương, và khối lập phương này được bóp méo theo hình "
+"chiếu thực. Khối lập phương được mô tả là sử dụng một hình ảnh được gọi là "
+"&quot;hình chiếu khối&quot;."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:258
 msgid ""
@@ -11774,6 +11788,8 @@ msgstr ""
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:283
 msgid "The interval (in timeline seconds) in which no redraw is performed"
 msgstr ""
+"Khoảng thời gian (tính bằng giây) trong thời điểm không được vẽ lại được thể "
+"hiện"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog_p.hpp:68
 msgid "6 Textures"
@@ -11938,7 +11954,7 @@ msgstr "ArchaeoLines"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "Công cụ cho việc nghiên cứu sự liên kết thiên văn học cổ/vô thần"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Equinox"
@@ -11994,6 +12010,8 @@ msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"Phần bổ sung ArchaeoLines hiển thị bất kì sự kết nối của độ lệch cung hầu "
+"hết liên quan đến các nghiên cứu thiên văn học cổ hoặc vô thần."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
@@ -12046,6 +12064,10 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"Đường mặt trăng bao gồm hiệu ứng thị sai chân trời. Có hai đường mỗi phần, "
+"dành cho khoảng cách cực đại và cực tiểu của mặt trăng. Chú ý rằng độ lệch "
+"của mặt trăng lúc bế tắc lớn có thể vượt quá giới hạn được chỉ ra nếu nó thì "
+"ở cao trên bầu trời do hiệu ứng thị sai."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
@@ -13552,3 +13574,13 @@ msgstr "Hành tinh hiện tại: Thổ Tinh"
 #~ "Nhiệt độ theo (°C) dựa trên một bầu khí quyển mặt đất tương tự với tỉ lệ "
 #~ "khối lượng hành tinh và hiệu ứng nhà kính do 1 phần trăm CO2 (giả sử suất "
 #~ "phản chiếu là 0.3 trong mọi trường hợp)."
+
+#, qt-format
+#~ msgid "Equivalent width of the integrated pulse profile: %1 ms"
+#~ msgstr "Chiều rộng tương đương với hồ sơ xung tích hợp: %1 ms"
+
+#~ msgid "NORAD two line element orbit data"
+#~ msgstr "Dữ liệu quỹ đạo 2 dòng yếu tố NORAD"
+
+#~ msgid "extragalactic (in MC) pulsar"
+#~ msgstr "Ẩn tinh ngoài ngân hà (trong MC)"

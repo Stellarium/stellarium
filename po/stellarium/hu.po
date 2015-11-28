@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 13:07+0600\n"
-"PO-Revision-Date: 2015-11-01 17:00+0000\n"
+"PO-Revision-Date: 2015-11-25 14:57+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-08 05:15+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-11-26 05:10+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -4986,7 +4986,7 @@ msgstr "Fénysebesség szimulálása"
 
 #: src/ui_viewDialog.h:1633
 msgid "Scale Moon:"
-msgstr ""
+msgstr "Holdskála:"
 
 #: src/ui_viewDialog.h:1635
 msgid "Scale factor"
@@ -5027,7 +5027,7 @@ msgstr "Objektumok mutatása katalógusból"
 
 #: src/ui_viewDialog.h:1657
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
-msgstr ""
+msgstr "Ködök és csillagcsoportok katalógusa"
 
 #: src/ui_viewDialog.h:1660
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
@@ -5067,6 +5067,8 @@ msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
+"Csillagcsoportok katalógusa ahogy a  Franklin–Adams féle égbolt térképeken "
+"ábrázolva van  (Melotte, 1915)"
 
 #: src/ui_viewDialog.h:1693
 msgid "Catalog of galaxies"
@@ -5774,7 +5776,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
-msgstr ""
+msgstr "azimut délről"
 
 #: src/ui_configurationDialog.h:1203
 msgid "Screenshots"
@@ -6878,19 +6880,19 @@ msgstr "Pixelmagasság (mikron):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Prism/CCD distance (mm):"
-msgstr ""
+msgstr "Prizma/CCD távolsága (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1204
 msgid "Prism/CCD height (mm):"
-msgstr ""
+msgstr "Prizma/CCD magassága (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 msgid "Prism/CCD width (mm):"
-msgstr ""
+msgstr "Prizma/CCD szélessége (mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1206
 msgid "Position angle (degrees):"
-msgstr ""
+msgstr "Pozíciós szög (fok):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid "Off-Axis guider"
@@ -6898,7 +6900,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "Rotációs szög (fok):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1210
 #: plugins/Oculars/src/ui_ocularDialog.h:1219
@@ -6921,7 +6923,7 @@ msgstr "Függőleges tükrözés"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Equatorial Mount"
-msgstr ""
+msgstr "Egyenlítői szerelés"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
