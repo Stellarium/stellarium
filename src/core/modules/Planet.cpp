@@ -238,15 +238,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// For now: add to EclipticCoord
 	//if (flags&EclipticCoord)
 	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
-//	if (flags&Extra)
-//	{
-//		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-//		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
-//		if (core->getCurrentLocation().planetName=="Earth")
-//			oss << q_("Ecliptic obliquity (of date): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
-//		//if (englishName!="Sun")
-//		//	oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
-//	}
 
 	if (flags&Distance)
 	{
