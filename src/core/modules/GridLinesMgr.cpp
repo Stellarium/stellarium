@@ -638,11 +638,11 @@ void SkyLine::updateLabel()
 			break;
 		case COLURE_1:
 			frameType=StelCore::FrameEquinoxEqu;
-			label = q_("First Colure");
+			label = q_("Equinoctial Colure");
 			break;
 		case COLURE_2:
 			frameType=StelCore::FrameEquinoxEqu;
-			label = q_("Second Colure");
+			label = q_("Solstitial Colure");
 			break;
 		default:
 			Q_ASSERT(0);
@@ -759,6 +759,7 @@ void SkyLine::draw(StelCore *core) const
 	if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
 	{
 		meridianSphericalCap.n.set(1,0,0);
+		fpt.set(0,0,1);
 	}
 
 	if (line_type==LONGITUDE)
@@ -964,6 +965,8 @@ void GridLinesMgr::draw(StelCore* core)
 		eclipticLine->draw(core);
 		precessionCircleN->draw(core);
 		precessionCircleS->draw(core);
+		colureLine_1->draw(core);
+		colureLine_2->draw(core);
 	}
 	longitudeLine->draw(core);
 	equatorJ2000Line->draw(core);
@@ -971,8 +974,6 @@ void GridLinesMgr::draw(StelCore* core)
 	meridianLine->draw(core);
 	horizonLine->draw(core);
 	primeVerticalLine->draw(core);
-	colureLine_1->draw(core); // TBD: Maybe these go also into the "earth only"-clause 8 lines above?
-	colureLine_2->draw(core);
 }
 
 void GridLinesMgr::setStelStyle(const QString& section)
