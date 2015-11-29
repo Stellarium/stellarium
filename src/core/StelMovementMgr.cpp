@@ -1063,9 +1063,10 @@ void StelMovementMgr::changeConstellationArtIntensity()
 		double artInt = getInitConstellationIntensity();
 		// Fade out constellation art when FOV less 2 degrees
 		if (currentFov<=2.)
+		{
 			artInt *= currentFov>1.? (currentFov-1.) : 0. ;
-
-		cmgr->setArtIntensity(artInt);
+			cmgr->setArtIntensity(artInt);
+		}
 	}
 }
 
