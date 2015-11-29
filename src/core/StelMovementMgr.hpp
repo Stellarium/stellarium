@@ -211,14 +211,14 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
-private slots:
-	//! Called when the selected object changes.
-	void selectedObjectChange(StelModule::StelModuleSelectAction action);
-
 	//! Return the initial value of intensity of art of constellations.
 	double getInitConstellationIntensity() const {return initConstellationIntensity;}
 	//! Set the initial value of intensity of art of constellations.
-	void setInitConstellationIntensity(double v) {initConstellationIntensity=v;}
+	void setInitConstellationIntensity(double v) {initConstellationIntensity=v; changeConstellationArtIntensity();}
+
+private slots:
+	//! Called when the selected object changes.
+	void selectedObjectChange(StelModule::StelModuleSelectAction action);
 	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;

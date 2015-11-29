@@ -76,7 +76,10 @@ public:
 		MERIDIAN,
 		HORIZON,
 		GALACTICEQUATOR,
-		LONGITUDE
+		LONGITUDE,
+		PRIME_VERTICAL,
+		COLURE_1,
+		COLURE_2
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR_J2000);
@@ -625,9 +628,21 @@ void SkyLine::updateLabel()
 			label = q_("Galactic Equator");
 			break;
 		case LONGITUDE:
-			frameType = StelCore::FrameObservercentricEclipticJ2000; // TODO: Switch to FrameObservercentriEclipticOfDate
+			frameType = StelCore::FrameObservercentricEclipticOfDate; // For 0.14.2: Switch from Ecl2000 to FrameObservercentriEclipticOfDate
 			// TRANSLATORS: Full term is "opposition/conjunction longitude"
 			label = q_("O./C. longitude");
+			break;
+		case PRIME_VERTICAL:
+			frameType=StelCore::FrameAltAz;
+			label = q_("Prime Vertical");
+			break;
+		case COLURE_1:
+			frameType=StelCore::FrameEquinoxEqu;
+			label = q_("First Colure");
+			break;
+		case COLURE_2:
+			frameType=StelCore::FrameEquinoxEqu;
+			label = q_("Second Colure");
 			break;
 		default:
 			Q_ASSERT(0);
@@ -737,9 +752,13 @@ void SkyLine::draw(StelCore *core) const
 	// All the other "lines" are Great Circles
 	SphericalCap meridianSphericalCap(Vec3d(0,0,1), 0);	
 	Vec3d fpt(1,0,0);
-	if (line_type==MERIDIAN)
+	if ((line_type==MERIDIAN) || (line_type==COLURE_1))
 	{
 		meridianSphericalCap.n.set(0,1,0);
+	}
+	if ((line_type==PRIME_VERTICAL) || (line_type==COLURE_2))
+	{
+		meridianSphericalCap.n.set(1,0,0);
 	}
 
 	if (line_type==LONGITUDE)
@@ -816,6 +835,9 @@ GridLinesMgr::GridLinesMgr()
 	horizonLine = new SkyLine(SkyLine::HORIZON);
 	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
 	longitudeLine = new SkyLine(SkyLine::LONGITUDE);
+	primeVerticalLine = new SkyLine(SkyLine::PRIME_VERTICAL);
+	colureLine_1 = new SkyLine(SkyLine::COLURE_1);
+	colureLine_2 = new SkyLine(SkyLine::COLURE_2);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -836,6 +858,9 @@ GridLinesMgr::~GridLinesMgr()
 	delete horizonLine;
 	delete galacticEquatorLine;
 	delete longitudeLine;
+	delete primeVerticalLine;
+	delete colureLine_1;
+	delete colureLine_2;
 }
 
 /*************************************************************************
@@ -868,6 +893,8 @@ void GridLinesMgr::init()
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
 	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
 	setFlagLongitudeLine(conf->value("viewing/flag_longitude_line").toBool());
+	setFlagPrimeVerticalLine(conf->value("viewing/flag_prime_vertical_line").toBool());
+	setFlagColureLines(conf->value("viewing/flag_colure_lines").toBool());
 	
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -889,6 +916,8 @@ void GridLinesMgr::init()
 	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
 	addAction("actionShow_Longitude_Line", displayGroup, N_("Opposition/conjunction longitude line"), "longitudeLineDisplayed");
 	addAction("actionShow_Precession_Circles", displayGroup, N_("Precession Circles"), "precessionCirclesDisplayed");
+	addAction("actionShow_Prime_Vertical_Line", displayGroup, N_("Prime Vertical"), "primeVerticalLineDisplayed");
+	addAction("actionShow_Colure_Lines", displayGroup, N_("Colure Lines"), "colureLinesDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -910,6 +939,9 @@ void GridLinesMgr::update(double deltaTime)
 	horizonLine->update(deltaTime);
 	galacticEquatorLine->update(deltaTime);
 	longitudeLine->update(deltaTime);
+	primeVerticalLine->update(deltaTime);
+	colureLine_1->update(deltaTime);
+	colureLine_2->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -938,6 +970,9 @@ void GridLinesMgr::draw(StelCore* core)
 	equatorLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
+	primeVerticalLine->draw(core);
+	colureLine_1->draw(core); // TBD: Maybe these go also into the "earth only"-clause 8 lines above?
+	colureLine_2->draw(core);
 }
 
 void GridLinesMgr::setStelStyle(const QString& section)
@@ -960,6 +995,8 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
 	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value(section+"/galactic_equator_color", defaultColor).toString()));
 	setColorLongitudeLine(StelUtils::strToVec3f(conf->value(section+"/longitude_color", defaultColor).toString()));
+	setColorPrimeVerticalLine(StelUtils::strToVec3f(conf->value(section+"/prime_vertical_color", defaultColor).toString()));
+	setColorColureLines(StelUtils::strToVec3f(conf->value(section+"/colures_color", defaultColor).toString()));
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -974,6 +1011,9 @@ void GridLinesMgr::updateLineLabels()
 	horizonLine->updateLabel();
 	galacticEquatorLine->updateLabel();
 	longitudeLine->updateLabel();
+	primeVerticalLine->updateLabel();
+	colureLine_1->updateLabel();
+	colureLine_2->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -1351,5 +1391,57 @@ void GridLinesMgr::setColorGalacticEquatorLine(const Vec3f& newColor)
 	if(newColor != galacticEquatorLine->getColor()) {
 		galacticEquatorLine->setColor(newColor);
 		emit galacticEquatorLineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Prime Vertical Line
+void GridLinesMgr::setFlagPrimeVerticalLine(const bool displayed)
+{
+	if(displayed != primeVerticalLine->isDisplayed()) {
+		primeVerticalLine->setDisplayed(displayed);
+		emit  primeVerticalLineDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Prime Vertical Line
+bool GridLinesMgr::getFlagPrimeVerticalLine(void) const
+{
+	return primeVerticalLine->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorPrimeVerticalLine(void) const
+{
+	return primeVerticalLine->getColor();
+}
+void GridLinesMgr::setColorPrimeVerticalLine(const Vec3f& newColor)
+{
+	if(newColor != primeVerticalLine->getColor()) {
+		primeVerticalLine->setColor(newColor);
+		emit primeVerticalLineColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying Colure Lines
+void GridLinesMgr::setFlagColureLines(const bool displayed)
+{
+	if(displayed != colureLine_1->isDisplayed()) {
+		colureLine_1->setDisplayed(displayed);
+		colureLine_2->setDisplayed(displayed);
+		emit  colureLinesDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying Colure Lines
+bool GridLinesMgr::getFlagColureLines(void) const
+{
+	return colureLine_1->isDisplayed();
+}
+Vec3f GridLinesMgr::getColorColureLines(void) const
+{
+	return colureLine_1->getColor();
+}
+void GridLinesMgr::setColorColureLines(const Vec3f& newColor)
+{
+	if(newColor != colureLine_1->getColor()) {
+		colureLine_1->setColor(newColor);
+		colureLine_2->setColor(newColor);
+		emit colureLinesColorChanged(newColor);
 	}
 }
