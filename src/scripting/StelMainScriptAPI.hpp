@@ -166,8 +166,8 @@ public slots:
 	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
-	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
-	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
 	//! - size: angular size in radians
@@ -189,15 +189,15 @@ public slots:
 	//! Fetch a map with data about an latest selected object's position, magnitude and so on
 	//! @return a map of object data.  Keys:
 	//! - altitude : apparent altitude angle in decimal degrees
-	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees	
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
-	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees	
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees	
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
-	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
-	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees	
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)	
 	//! - size: angular size in radians
