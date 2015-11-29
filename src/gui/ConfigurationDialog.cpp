@@ -588,6 +588,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
 	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf->setValue("viewing/flag_prime_vertical_line", glmgr->getFlagPrimeVerticalLine());
+	conf->setValue("viewing/flag_colure_lines", glmgr->getFlagColureLines());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
 	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
@@ -597,7 +599,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
-	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
+	conf->setValue("viewing/constellation_art_intensity", mvmgr->getInitConstellationIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
 	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
