@@ -339,6 +339,8 @@ public slots:
 	//! Forward opacity query to current landscape.
 	//! @param azalt direction of view line to sample in azaltimuth coordinates.
 	float getLandscapeOpacity(Vec3d azalt) const {return landscape->getOpacity(azalt);}
+	// This variant is required for scripting!
+	float getLandscapeOpacity(Vec3f azalt) const {return landscape->getOpacity(Vec3d(azalt[0], azalt[1], azalt[2]));}
 	//! Forward opacity query to current landscape.
 	//! @param azimuth in degrees
 	//! @param altitude in degrees
