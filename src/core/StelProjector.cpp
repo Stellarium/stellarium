@@ -165,6 +165,11 @@ Vec2f StelProjector::getViewportCenter() const
 	return Vec2f(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
 }
 
+Vec2f StelProjector::getViewportCenterOffset() const
+{
+	return viewportCenterOffset;
+}
+
 int StelProjector::getViewportPosX() const
 {
 	return viewportXywh[0];
