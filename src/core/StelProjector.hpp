@@ -168,6 +168,7 @@ public:
 
 	//! Get the center of the viewport relative to the lower left corner of the screen.
 	Vec2f getViewportCenter() const;
+	Vec2f getViewportCenterOffset() const;
 
 	//! Get the horizontal viewport offset in pixels.
 	int getViewportPosX() const;
