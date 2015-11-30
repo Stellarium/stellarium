@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 13:07+0600\n"
-"PO-Revision-Date: 2014-11-30 13:42+0000\n"
-"Last-Translator: Nadanomics <hb7701@naver.com>\n"
+"PO-Revision-Date: 2015-11-30 03:22+0000\n"
+"Last-Translator: SeokHwan Park <mints1324@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-08 05:16+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-11-30 05:10+0000\n"
+"X-Generator: Launchpad (build 17850)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -566,7 +566,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:986
 msgid "active galaxy"
-msgstr ""
+msgstr "활성은하"
 
 #: src/core/modules/Nebula.cpp:989
 msgid "radio galaxy"
@@ -574,7 +574,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:992
 msgid "interacting galaxy"
-msgstr ""
+msgstr "상호작용은하"
 
 #: src/core/modules/Nebula.cpp:995 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
@@ -582,7 +582,7 @@ msgstr "퀘이사"
 
 #: src/core/modules/Nebula.cpp:998
 msgid "star cluster"
-msgstr ""
+msgstr "성단"
 
 #: src/core/modules/Nebula.cpp:1001
 msgid "open star cluster"
@@ -602,7 +602,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1013
 msgid "dark nebula"
-msgstr ""
+msgstr "암흑성운"
 
 #: src/core/modules/Nebula.cpp:1016
 msgid "cluster associated with nebulosity"
@@ -626,7 +626,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1031
 msgid "supernova remnant"
-msgstr ""
+msgstr "초신성잔해"
 
 #: src/core/modules/Nebula.cpp:1034
 msgid "stellar association"
@@ -924,11 +924,11 @@ msgstr "광도 증가기간: %1%"
 
 #: src/core/modules/MilkyWay.cpp:75
 msgid "Milky Way"
-msgstr ""
+msgstr "은하수"
 
 #: src/core/modules/ZodiacalLight.cpp:81
 msgid "Zodiacal Light"
-msgstr ""
+msgstr "황도광"
 
 #: src/core/StelApp.cpp:498
 msgid "Night mode"
@@ -1617,12 +1617,12 @@ msgstr "은경/은위: %1/%2"
 #: src/core/StelObject.cpp:251
 #, qt-format
 msgid "Mean Sidereal Time: %1"
-msgstr ""
+msgstr "평균항성시: %1"
 
 #: src/core/StelObject.cpp:253
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
-msgstr ""
+msgstr "시항성시: %1"
 
 #: src/core/StelSkyLayerMgr.cpp:88
 msgid "Deep-sky objects background images"
@@ -2134,27 +2134,27 @@ msgstr "스크립트 콘솔 창"
 
 #: src/gui/StelGui.cpp:198
 msgid "Help window"
-msgstr "도움말 창"
+msgstr "도움말"
 
 #: src/gui/StelGui.cpp:199
 msgid "Configuration window"
-msgstr "설정 창"
+msgstr "설정"
 
 #: src/gui/StelGui.cpp:200 src/ui_searchDialogGui.h:615
 msgid "Search window"
-msgstr "검색 창"
+msgstr "검색"
 
 #: src/gui/StelGui.cpp:201
 msgid "Sky and viewing options window"
-msgstr "하늘과 보기 설정 창"
+msgstr "하늘 및 보기 설정"
 
 #: src/gui/StelGui.cpp:202
 msgid "Date/time window"
-msgstr "날짜/시간 창"
+msgstr "날짜/시간"
 
 #: src/gui/StelGui.cpp:203
 msgid "Location window"
-msgstr "위치 창"
+msgstr "위치"
 
 #: src/gui/StelGui.cpp:204
 msgid "Shortcuts window"
@@ -2778,7 +2778,7 @@ msgstr "위성"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:83
 msgid "Bright galaxies"
-msgstr "밝은 은하"
+msgstr "발광은하"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:85
@@ -2823,7 +2823,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101 src/ui_viewDialog.h:1709
 msgid "Active galaxies"
-msgstr ""
+msgstr "활성은하"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
@@ -2833,7 +2833,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105 src/ui_viewDialog.h:1703
 msgid "Interacting galaxies"
-msgstr ""
+msgstr "상호작용은하"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
@@ -2843,7 +2843,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109 src/ui_viewDialog.h:1706
 msgid "Star clusters"
-msgstr ""
+msgstr "성단"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
@@ -2868,7 +2868,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119 src/ui_viewDialog.h:1702
 msgid "Supernova remnants"
-msgstr ""
+msgstr "초신성잔해"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
@@ -3090,7 +3090,7 @@ msgstr "바다"
 #. TRANSLATORS: Landscape name: Garching bei Munchen
 #: src/translations.h:204
 msgid "Garching"
-msgstr "Garching"
+msgstr "가르힝"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:206 plugins/ArchaeoLines/src/ArchaeoLines.cpp:791
@@ -3120,7 +3120,7 @@ msgstr "해왕성"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:216
 msgid "Geneva"
-msgstr "Geneva"
+msgstr "제네바"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:218
@@ -4794,7 +4794,7 @@ msgstr "별의 한계등급"
 
 #: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1726
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "한계등급:"
 
 #: src/ui_viewDialog.h:1600
 msgid "Dim faint stars when a very bright object is visible"
@@ -4806,7 +4806,7 @@ msgstr "명암순응"
 
 #: src/ui_viewDialog.h:1603 src/ui_viewDialog.h:1645 src/ui_viewDialog.h:1712
 msgid "Labels and Markers"
-msgstr "이름표와 표지"
+msgstr "이름표와 강조 표시"
 
 #: src/ui_viewDialog.h:1605
 msgid "Show atmosphere"
@@ -4841,11 +4841,11 @@ msgstr "행성과 위성"
 
 #: src/ui_viewDialog.h:1618
 msgid "Show Solar System objects"
-msgstr ""
+msgstr "태양계 천체 보기"
 
 #: src/ui_viewDialog.h:1619
 msgid "Show planet markers"
-msgstr "행성 표지 보기"
+msgstr "행성 강조 하기"
 
 #: src/ui_viewDialog.h:1620
 msgid "Show planet orbits"
@@ -4916,19 +4916,19 @@ msgstr "천정에서의 시간당 평균 유성 낙하개수"
 #: src/ui_viewDialog.h:1653
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr "정점 시율"
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1655
 msgid "Display objects from catalogs"
-msgstr ""
+msgstr "표시할 딥스카이 목록"
 
 #: src/ui_viewDialog.h:1657
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
-msgstr ""
+msgstr "IC 목록의 성운과 성단"
 
 #: src/ui_viewDialog.h:1660
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
-msgstr ""
+msgstr "NGC 목록의 성운과 성단"
 
 #: src/ui_viewDialog.h:1663
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
@@ -4979,11 +4979,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1701
 msgid "Filter by type"
-msgstr ""
+msgstr "종류별 분류"
 
 #: src/ui_viewDialog.h:1704
 msgid "Hydrogen regions"
-msgstr ""
+msgstr "수소영역"
 
 #: src/ui_viewDialog.h:1705
 msgid "Other"
@@ -4991,7 +4991,7 @@ msgstr "기타"
 
 #: src/ui_viewDialog.h:1707
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "행성상성운"
 
 #: src/ui_viewDialog.h:1708
 msgid "Galaxies"
@@ -4999,15 +4999,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1710
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "암흑성운"
 
 #: src/ui_viewDialog.h:1711
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "발광성운"
 
 #: src/ui_viewDialog.h:1714
 msgid "Hints"
-msgstr ""
+msgstr "강조"
 
 #: src/ui_viewDialog.h:1716
 msgid ""
@@ -5025,7 +5025,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1722
 msgid "Use proportional hints"
-msgstr ""
+msgstr "비례 강조 사용"
 
 #: src/ui_viewDialog.h:1724
 msgid ""
@@ -5180,7 +5180,7 @@ msgstr "도법"
 
 #: src/ui_viewDialog.h:1803
 msgid "Vertical viewport offset"
-msgstr ""
+msgstr "수직 뷰포트 상쇄"
 
 #: src/ui_viewDialog.h:1805
 msgid "Use this landscape as default"
@@ -5217,11 +5217,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1819
 msgid "from landscape, if given"
-msgstr ""
+msgstr "풍경에서 가져오기"
 
 #: src/ui_viewDialog.h:1820
 msgid "Show landscape labels"
-msgstr ""
+msgstr "풍경 이름표 보기"
 
 #: src/ui_viewDialog.h:1821
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -5258,7 +5258,7 @@ msgstr "하늘"
 #: src/ui_viewDialog.h:1839
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr ""
+msgstr "딥스카이"
 
 #: src/ui_viewDialog.h:1841
 msgid "Deep-Sky Objects"
@@ -5623,7 +5623,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1194
 msgid "Include nutation"
-msgstr ""
+msgstr "장동(Nutation) 포함"
 
 #: src/ui_configurationDialog.h:1196
 msgid ""
@@ -5633,7 +5633,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1198
 msgid "Topocentric coordinates"
-msgstr ""
+msgstr "지구중심좌표계"
 
 #: src/ui_configurationDialog.h:1200
 msgid ""
@@ -5643,7 +5643,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1202
 msgid "Azimuth from South"
-msgstr ""
+msgstr "방위각의 기준점을 남쪽으로 설정"
 
 #: src/ui_configurationDialog.h:1203
 msgid "Screenshots"
@@ -5876,7 +5876,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:364 src/ui_astroCalcDialog.h:372
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:192
 msgid "From:"
-msgstr ""
+msgstr "부터:"
 
 #: src/ui_astroCalcDialog.h:365 src/ui_astroCalcDialog.h:367
 msgid "yyyy.MM.dd hh:mm"
@@ -5885,7 +5885,7 @@ msgstr ""
 #: src/ui_astroCalcDialog.h:366 src/ui_astroCalcDialog.h:374
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "To:"
-msgstr ""
+msgstr "까지:"
 
 #: src/ui_astroCalcDialog.h:368
 msgid "Calculate ephemeris"
@@ -6795,7 +6795,7 @@ msgstr "지구상에서 보이는 인공위성의 위치 예측은 NORAD TLE 데
 
 #: plugins/Satellites/src/Satellites.cpp:143
 msgid "Satellite hints"
-msgstr "인공위성 힌트"
+msgstr "인공위성"
 
 #: plugins/Satellites/src/Satellites.cpp:144
 msgid "Satellite labels"
@@ -8304,7 +8304,7 @@ msgstr "은하수 밝기:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:453
 msgid "Zodiacal light intensity:"
-msgstr ""
+msgstr "황도광 강도:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:459
 msgid "Nebula label frequency:"
@@ -10052,7 +10052,7 @@ msgstr "유성우"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "유성우"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Toggle radiant labels"
@@ -10065,7 +10065,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:154
 msgid "Show search dialog"
-msgstr ""
+msgstr "유성우 검색"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:260
 msgid "Using the default Meteor Showers catalog."
@@ -10112,7 +10112,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgid "meteor shower"
-msgstr ""
+msgstr "유성우"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:563
 msgid "Radiant drift (per day)"
@@ -10177,12 +10177,12 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr ""
+msgstr "물병자리 에타 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr ""
+msgstr "6월 목동자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
@@ -10222,7 +10222,7 @@ msgstr "사자자리 유성우"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:59
 msgid "Phoenicids"
-msgstr ""
+msgstr "불사조자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:61
@@ -10232,12 +10232,12 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:63
 msgid "Ursids"
-msgstr ""
+msgstr "작은곰자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:65
 msgid "Perseids"
-msgstr ""
+msgstr "페르세우스자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
@@ -10302,7 +10302,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:91
 msgid "Geminids"
-msgstr ""
+msgstr "쌍둥이자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:93
@@ -10322,7 +10322,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:99
 msgid "Orionids"
-msgstr ""
+msgstr "오리온자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:101
@@ -10570,7 +10570,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
 msgid "Successfully updated!"
-msgstr ""
+msgstr "성공적으로 업데이트됨."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:139
 msgid "Failed!"
@@ -10582,7 +10582,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
-msgstr "유성우 확장 기능"
+msgstr "유성우 플러그인"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
 msgid ""
@@ -10729,7 +10729,7 @@ msgstr "시간 주기는 1년보다 반드시 짧아야 합니다!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:184
 msgid "ZHR"
-msgstr ""
+msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
@@ -10746,23 +10746,23 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "유성우: 설정"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "일반 설정"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "시작시 플러그인 활성화"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "플러그인 활성화/비활성화 버튼 보이기"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "검색 창 버튼 보이기"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
@@ -10802,32 +10802,32 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "자동 업데이트 활성화"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "다음 업데이트:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "최근 업데이트 날짜"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "상태:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "업데이트"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "유성우: 검색"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "Search"
-msgstr ""
+msgstr "검색"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
@@ -10836,7 +10836,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "Results"
-msgstr ""
+msgstr "결과"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:56
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
