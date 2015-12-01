@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-07 13:07+0600\n"
-"PO-Revision-Date: 2015-11-21 13:59+0000\n"
-"Last-Translator: Jean-Marc <Unknown>\n"
+"PO-Revision-Date: 2015-11-29 12:09+0000\n"
+"Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-22 05:09+0000\n"
+"X-Launchpad-Export-Date: 2015-11-30 05:09+0000\n"
 "X-Generator: Launchpad (build 17850)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -1831,7 +1831,7 @@ msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
-"Téléchargement de %1...\n"
+"Téléchargement de %1…\n"
 "(Vous pouvez fermer cette fenêtre.)"
 
 #: src/gui/ConfigurationDialog.cpp:1066
@@ -1856,7 +1856,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1196
 msgid "Verifying file integrity..."
-msgstr "Vérification de l'intégrité du fichier..."
+msgstr "Vérification de l'intégrité du fichier…"
 
 #: src/gui/ConfigurationDialog.cpp:1200
 #, qt-format
@@ -2477,7 +2477,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "quickrun..."
-msgstr "démarrage rapide..."
+msgstr "démarrage rapide…"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "selected text"
@@ -3520,7 +3520,7 @@ msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
-"Flash de la supernova observée par Tycho Brahe en 1572. Le greffon Supernovæ "
+"Flash de la supernova observée par Tycho Brahe en 1572. Le plugin Supernovæ "
 "doit être activé."
 
 #: src/translations.h:312
@@ -4632,7 +4632,7 @@ msgstr "Journal"
 
 #: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1121
 msgid "Edit keyboard shortcuts..."
-msgstr "Modifier les raccourcis clavier..."
+msgstr "Modifier les raccourcis clavier…"
 
 #: src/ui_helpDialogGui.h:291
 msgid "Refresh"
@@ -4856,7 +4856,7 @@ msgstr "Position"
 #: src/ui_searchDialogGui.h:706
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
-"Certains objets ne seront trouvés qu'après activation du greffon adéquat"
+"Certains objets ne seront trouvés qu'après activation du plugin adéquat"
 
 #: src/ui_searchDialogGui.h:708
 msgid "names in English"
@@ -4864,7 +4864,7 @@ msgstr "Noms en anglais"
 
 #: src/ui_searchDialogGui.h:709
 msgid "Search in list..."
-msgstr "Chercher dans la liste..."
+msgstr "Chercher dans la liste…"
 
 #: src/ui_searchDialogGui.h:710
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
@@ -4974,7 +4974,7 @@ msgstr "Pression, température, coefficient d'extinction"
 
 #: src/ui_viewDialog.h:1616
 msgid "Refraction/Extinction settings..."
-msgstr "Paramètres de réfraction/extinction..."
+msgstr "Paramètres de réfraction/extinction…"
 
 #: src/ui_viewDialog.h:1617
 msgid "Planets and satellites"
@@ -5398,7 +5398,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1822
 msgid "Add/remove landscapes..."
-msgstr "Ajouter/supprimer des paysages..."
+msgstr "Ajouter/supprimer des paysages…"
 
 #: src/ui_viewDialog.h:1824
 msgid "Use this sky culture as default"
@@ -5919,7 +5919,7 @@ msgstr "Scripts"
 
 #: src/ui_configurationDialog.h:1251
 msgid "Plugins"
-msgstr "Greffons"
+msgstr "Plugins"
 
 #: src/ui_addRemoveLandscapesDialog.h:265
 msgid "Add/Remove Landscapes"
@@ -5931,7 +5931,7 @@ msgstr "Ajouter un paysage"
 
 #: src/ui_addRemoveLandscapesDialog.h:268
 msgid "Install a new landscape from a ZIP archive..."
-msgstr "Installer un paysage à partir d'un fichier ZIP..."
+msgstr "Installer un paysage à partir d'un fichier ZIP…"
 
 #: src/ui_addRemoveLandscapesDialog.h:269
 msgid "Switch to the new landscape after installation"
@@ -6056,7 +6056,7 @@ msgstr "Inclure le dossier :"
 
 #: src/ui_scriptConsole.h:381 plugins/TelescopeControl/src/ui_slewDialog.h:327
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: src/ui_astroCalcDialog.h:357
 msgid "AstroCalc"
@@ -6160,7 +6160,7 @@ msgstr "PA ="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
 msgid "Angle Measure Plug-in"
-msgstr "Greffon Mesure d'angle"
+msgstr "Plugin Mesure d'angle"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 msgid ""
@@ -6168,8 +6168,8 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
-"Le greffon Mesure d'angle  permet de mesurer la distance angulaire entre "
-"deux points du ciel et de calculer l'angle de position entre ces deux points."
+"Le plugin Mesure d'angle  permet de mesurer la distance angulaire entre deux "
+"points du ciel et de calculer l'angle de position entre ces deux points."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
@@ -6193,10 +6193,10 @@ msgid ""
 msgstr ""
 "*Larme à l'oeil* Je me rappelle avoir mesuré la taille de la division de "
 "Cassini, lorsque j'étais étudiant. Ça ne ressemblait pas au prestige du "
-"niveau académique auquel on pourrait s'attendre... Le ciel était nuageux... "
-"Il pleuvait... Il y avait dans un coin du laboratoire de l'observatoire de "
-"vieux télescopes pointant vers des <em>photos</em> de Saturne, de l'autre "
-"côté du labo. Nous avons mesuré et calculé. Ah ! si nous avions été à Hawaii."
+"niveau académique auquel on pourrait s'attendre… Le ciel était nuageux… Il "
+"pleuvait… Il y avait dans un coin du laboratoire de l'observatoire de vieux "
+"télescopes pointant vers des <em>photos</em> de Saturne, de l'autre côté du "
+"labo. Nous avons mesuré et calculé. Ah ! si nous avions été à Hawaii."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:444
@@ -6277,16 +6277,16 @@ msgstr ""
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
-msgstr "Pour plus d'informations sur ce greffon, %1cliquez ici %2."
+msgstr "Pour plus d'informations sur ce plugin, %1cliquez ici %2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
-msgstr "Greffons Pulsars"
+msgstr "Plugin Pulsars"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:218
 msgid "Angle Measure Plug-in Configuration"
-msgstr "Greffon Mesure d'angle"
+msgstr "Plugin Mesure d'angle"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:220
 msgid "Show in Equatorial Coordinates"
@@ -6463,7 +6463,7 @@ msgstr "Viseur Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1342
 msgid "Oculars plugin configuration"
-msgstr "Greffon Oculaires"
+msgstr "Plugin Oculaires"
 
 #: plugins/Oculars/src/Oculars.cpp:1344
 msgid "Select next telescope"
@@ -6727,7 +6727,7 @@ msgstr "Distance focale :"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "Oculars Plug-in"
-msgstr "Greffon pour les oculaires"
+msgstr "Plugin Oculaires"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:538
 msgid "Barlow lens feature"
@@ -6744,8 +6744,8 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
-"Ce greffon simule ce que vous pouvez voir à travers un oculaire. Cet écran "
-"de configuration peut être utilisé pour ajouter, modifier ou supprimer "
+"Ce plugin simule ce que vous pouvez voir à travers un oculaire. Cet écran de "
+"configuration peut être utilisé pour ajouter, modifier ou supprimer "
 "oculaires et télescopes, ainsi que des capteurs CCD. La première fois que "
 "vous lancerez cette application, cette section sera remplie avec quelques "
 "exemples afin que vous puissiez commencer."
@@ -6803,7 +6803,7 @@ msgstr "Raccourcis"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:552
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
-"Les raccourcis clavier du greffon peuvent être modifiés sur l'onglet général."
+"Les raccourcis clavier du plugin peuvent être modifiés sur l'onglet général."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:566
 #: plugins/Oculars/src/gui/OcularDialog.cpp:571
@@ -7219,7 +7219,7 @@ msgstr "%1 MHz (%2%3 kHz)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:405
 msgid "Stellarium Satellites Plugin"
-msgstr "Greffon Satellites"
+msgstr "Plugin Satellites"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
@@ -7231,7 +7231,7 @@ msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr ""
-"Le greffon Satellites affiche la position des satellites artificiels en "
+"Le plugin Satellites affiche la position des satellites artificiels en "
 "orbite autour de la Terre."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:414
@@ -7282,7 +7282,7 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"Le greffon Satellites est en cours de développement. Certaines "
+"Le plugin Satellites est en cours de développement. Certaines "
 "fonctionnalités sont incomplètes, manquantes ou sujettes à dysfonctionnement."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
@@ -7296,7 +7296,7 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"Le greffon Satellites peut télécharger automatiquement les données TLE à "
+"Le plugin Satellites peut télécharger automatiquement les données TLE à "
 "partir de sources Internet, et, par défaut, le fera si les données "
 "existantes datent de plus de 72h. "
 
@@ -7385,7 +7385,7 @@ msgstr "Mise à jour via Internet désactivée"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "Updating now..."
-msgstr "Mise à jour en cours..."
+msgstr "Mise à jour en cours…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:481
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:170
@@ -7487,7 +7487,7 @@ msgstr "[Tous les satellites]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:716
 msgid "New group..."
-msgstr "Nouveau groupe..."
+msgstr "Nouveau groupe…"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:922
 msgid "Select TLE Update File"
@@ -7507,7 +7507,7 @@ msgstr "Satellite"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
-msgstr "Téléchargement des données..."
+msgstr "Téléchargement des données…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:152
 msgid ""
@@ -7515,18 +7515,18 @@ msgid ""
 "wait..."
 msgstr ""
 "Stellarium télécharge les données des satellites à partir des sources de "
-"mise à jour. Veuillez patienter..."
+"mise à jour. Veuillez patienter…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:168
 msgid "Select TLE source file(s)..."
-msgstr "Sélectionnez le(s) fichier(s) source TLE..."
+msgstr "Sélectionnez le(s) fichier(s) source TLE…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:183
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:184
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:243
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:244
 msgid "Processing data..."
-msgstr "Traitement des données..."
+msgstr "Traitement des données…"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:238
 msgid "No data could be downloaded. Try again later."
@@ -7774,7 +7774,7 @@ msgid ""
 "This plug-in allows Stellarium to send \"slew\" commands to a telescope on a "
 "computerized mount (a \"GoTo telescope\")."
 msgstr ""
-"Ce greffon permet à Stellarium d'envoyer des commandes d'orientation à un "
+"Ce plugin permet à Stellarium d'envoyer des commandes d'orientation à un "
 "télescope sur une monture pilotée par ordinateur."
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:162
@@ -7827,7 +7827,7 @@ msgstr "Arrêté"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:249
 msgid "Telescope Control plug-in"
-msgstr "Greffon de pilotage de télescope"
+msgstr "Plugin Pilotage de télescope"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:250
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
@@ -8015,11 +8015,11 @@ msgstr "&Pointer"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:341
 msgid "Configure &telescopes..."
-msgstr "Configuration des &télescopes..."
+msgstr "Configuration des &télescopes…"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
-msgstr "Greffon Télescope"
+msgstr "Plugin Télescope"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
@@ -8340,7 +8340,7 @@ msgstr "Samedi"
 
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:104
 msgid "Time Zone plug-in"
-msgstr "Greffon de fuseau horaire"
+msgstr "Plugin Fuseau horaire"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:448
 msgid "Define a time zone"
@@ -8490,8 +8490,8 @@ msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
 msgstr ""
-"Implémentation du greffon de l'environnement en mode texte (TUI) des "
-"versions 0.9.x, utilisé dans les systèmes de planétariums."
+"Implémentation du plugin de l'environnement en mode texte (TUI) des versions "
+"0.9.x, utilisé dans les systèmes de planétariums."
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
@@ -8690,7 +8690,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:120
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:307
 msgid "Import orbital elements in MPC format..."
-msgstr "Importation des paramètres orbitaux en format MPC..."
+msgstr "Importation des paramètres orbitaux en format MPC…"
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:155
@@ -8725,7 +8725,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:207
 msgid "Select bookmark..."
-msgstr "Sélectionnez un marque-page..."
+msgstr "Sélectionnez un marque-page…"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:98
@@ -8749,7 +8749,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:106
 msgid "Solar System Editor plug-in"
-msgstr "Greffon d'édition du système solaire"
+msgstr "Plugin Édition du système solaire"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:511
 msgid "Import data"
@@ -8845,7 +8845,7 @@ msgid ""
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
 msgstr ""
-"Ce greffon utilise un fichier de configuration du système solaire "
+"Ce plugin utilise un fichier de configuration du système solaire "
 "personnalisé. Si quelque chose se passe mal et que Stellarium plante ou "
 "refuse de démarrer, vous pouvez supprimer manuellement ce fichier à "
 "l'emplacement :"
@@ -8876,11 +8876,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid "Copy the Solar System file..."
-msgstr "Copie du fichier de configuration du système solaire..."
+msgstr "Copie du fichier de configuration du système solaire…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:302
 msgid "Replace the Solar System file..."
-msgstr "Remplacement du fichier de configuration du système solaire..."
+msgstr "Remplacement du fichier de configuration du système solaire…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:303
 msgid "Configuration file"
@@ -8901,11 +8901,11 @@ msgstr "Supernovæ historiques"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr "Ce greffon permet de voir certaines supernovæ historiques"
+msgstr "Ce plugin permet de voir certaines supernovæ historiques"
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
-msgstr "Configuration du greffon Supernovæ historiques"
+msgstr "Configuration du plugin Supernovæ historiques"
 
 #: plugins/Supernovae/src/Supernova.cpp:127
 msgid "supernova"
@@ -8923,11 +8923,11 @@ msgstr "Luminosité maximale : %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Historical Supernovae Plug-in"
-msgstr "Greffon Supernovæ historiques"
+msgstr "Plugin Supernovæ historiques"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "This plugin allows you to see some bright historical supernovae: "
-msgstr "Ce greffon permet de voir certaines supernovæ historiques : "
+msgstr "Ce plugin permet de voir certaines supernovæ historiques : "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
@@ -8955,7 +8955,7 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
-"Ce greffon utilise un modèle simple de courbes de lumière pour différentes "
+"Ce plugin utilise un modèle simple de courbes de lumière pour différentes "
 "supernovæ. Vous pouvez voir %1ici%2 des vues typiques de courbes de lumière "
 "pour les supernovæ de type I et II (échelle horizontale en jours)."
 
@@ -8992,7 +8992,7 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
-"Obtenir des %1informations détaillées sur ce greffon %2, son histoire et le "
+"Obtenir des %1informations détaillées sur ce plugin%2, son histoire et le "
 "format de son catalogue."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
@@ -9013,7 +9013,7 @@ msgstr "Configuration Supernovæ historiques"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Greffon Supernovæ historiques"
+msgstr "Plugin Supernovæ historiques"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
@@ -9051,11 +9051,11 @@ msgstr "Novæ lumineuses"
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr "Ce greffon montre quelques novæ lumineuses de la Voie lactée."
+msgstr "Ce plugin montre quelques novæ lumineuses de la Voie lactée."
 
 #: plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae configuration window"
-msgstr "Configuration du greffon Novæ"
+msgstr "Configuration du plugin Novæ"
 
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
@@ -9076,7 +9076,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
-msgstr "Ce greffon vous permet d'afficher des novæ brillantes récentes : "
+msgstr "Ce plugin vous permet d'afficher des novæ brillantes récentes : "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
@@ -9089,7 +9089,7 @@ msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
-"Ce greffon utilise un modèle de calcul très simple pour les courbes de "
+"Ce plugin utilise un modèle de calcul très simple pour les courbes de "
 "lumière des novæ."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
@@ -9106,7 +9106,7 @@ msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr ""
-"Si une nova n'a pas de donnée pour la diminution de magnitude, le greffon "
+"Si une nova n'a pas de donnée pour la diminution de magnitude, le plugin "
 "utilisera pour elle des valeurs génériques."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
@@ -9116,7 +9116,7 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
-"Obtenir des %1informations détaillées sur ce greffon %2, son histoire et le "
+"Obtenir des %1informations détaillées sur ce plugin%2, son histoire et le "
 "format de son catalogue."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
@@ -9129,7 +9129,7 @@ msgstr "Configuration Novæ lumineuses"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr "Greffon Novæ lumineuses"
+msgstr "Plugin Novæ lumineuses"
 
 #: plugins/Quasars/src/Quasars.cpp:72 plugins/Quasars/src/Quasars.cpp:169
 #: plugins/Quasars/src/Quasars.cpp:170
@@ -9142,9 +9142,9 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
-"Greffon montrant quelques quasars plus brillants que 16 de magnitude "
+"Un plugin montrant quelques quasars plus brillants que 16 de magnitude "
 "visuelle. Catalogue de quasars compilé de « Quasar and Active Galactic "
-"Nuclei » (13<sup>e</sup> éd.) (Veron+ 2010) =2010A&A...518A..10V"
+"Nuclei » (13<sup>e</sup> éd.) (Veron+ 2010) =2010A&A…518A..10V"
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -9152,7 +9152,7 @@ msgstr "Afficher les quasars"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Quasars configuration window"
-msgstr "Greffon Quasars"
+msgstr "Plugin Quasars"
 
 #: plugins/Quasars/src/Quasar.cpp:129
 #, qt-format
@@ -9161,7 +9161,7 @@ msgstr "Z (décalage vers le rouge) : %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:115
 msgid "Quasars Plug-in"
-msgstr "Greffon des quasars"
+msgstr "Plugin Quasars"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid ""
@@ -9169,7 +9169,7 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
-"Le greffon Quasars permet d'afficher quelques quasars plus brillants que la "
+"Le plugin Quasars permet d'afficher quelques quasars plus brillants que la "
 "magnitude 16. Le catalogue de quasars a été compilé à partir de « Quasar and "
 "Active Galactic Nuclei » (13<sup>e</sup> éd.)."
 
@@ -9189,7 +9189,7 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
-"Obtenir des %1informations détaillées sur ce greffon%2, son histoire et le "
+"Obtenir des %1informations détaillées sur ce plugin%2, son histoire et le "
 "format de son catalogue."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
@@ -9202,7 +9202,7 @@ msgstr "Configuration des quasars"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Quasars Plug-in Configuration"
-msgstr "Greffon Quasars"
+msgstr "Plugin Quasars"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Settings for quasars"
@@ -9238,7 +9238,7 @@ msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
-"Ce greffon affiche la position de divers pulsars avec des informations sur "
+"Ce plugin affiche la position de divers pulsars avec des informations sur "
 "chacun des objets."
 
 #: plugins/Pulsars/src/Pulsars.cpp:167
@@ -9387,7 +9387,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 msgid "Pulsars Plug-in"
-msgstr "Greffon des pulsars"
+msgstr "Plugin Pulsars"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 #, qt-format
@@ -9444,7 +9444,7 @@ msgstr "Les pulsars sont à jour"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
-msgstr "Greffon Pulsars"
+msgstr "Plugin Pulsars"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
@@ -9477,9 +9477,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
-"Ce greffon affiche la position des étoiles ayant des exoplanètes. Les "
-"données des exoplanètes proviennent de « Extrasolar Planets Encyclopaedia » "
-"sur exoplanet.eu."
+"Ce plugin affiche la position des étoiles ayant des exoplanètes. Les données "
+"des exoplanètes proviennent de « Extrasolar Planets Encyclopaedia » sur "
+"exoplanet.eu."
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:169
 msgid "Show exoplanets"
@@ -9620,7 +9620,7 @@ msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
 msgid "Exoplanets Plug-in"
-msgstr "Greffon des exoplanètes"
+msgstr "Plugin Exoplanètes"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 #, qt-format
@@ -9628,7 +9628,7 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
-"Ce greffon affiche la position des étoiles qui ont des exoplanètes. Les "
+"Ce plugin affiche la position des étoiles qui ont des exoplanètes. Les "
 "données des exoplanètes proviennent de « %1The Extrasolar Planets "
 "Encyclopaedia%2 »."
 
@@ -9662,7 +9662,7 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
-"Obtenir des %1informations détaillées sur ce greffon%2, son histoire et le "
+"Obtenir des %1informations détaillées sur ce plugin%2, son histoire et le "
 "format de son catalogue."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
@@ -9674,7 +9674,7 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
-"Ce greffon peut afficher les exoplanètes potentiellement habitable (marqueur "
+"Ce plugin peut afficher les exoplanètes potentiellement habitable (marqueur "
 "orange) et des informations y relatives."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
@@ -9836,7 +9836,7 @@ msgstr "Configuration des exoplanètes"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Greffon Exoplanètes"
+msgstr "Plugin Exoplanètes"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
@@ -9904,12 +9904,12 @@ msgid ""
 msgstr ""
 "Affiche une analyse de l'observabilité de l'objet sélectionné (lever, "
 "coucher et passage au méridien) à la date actuelle, ainsi que les moments de "
-"l'année pour lesquels l'observation de l'objet est optimale.Un objet est dit "
-"observable s'il se trouve au-dessus de l'horizon durant une partie de la "
-"nuit. Le greffon donne également le jour de la plus grande séparation avec "
-"le Soleil et les jours du lever/coucher achronique et cosmique. Des "
+"l'année pour lesquels l'observation de l'objet est optimale. Un objet est "
+"dit observable s'il se trouve au-dessus de l'horizon durant une partie de la "
+"nuit. Le plugin donne également le jour de la plus grande séparation avec le "
+"Soleil et les jours du lever/coucher achronique et cosmique. Des "
 "explications plus détaillées sont fournies dans l'onglet « À propos » de la "
-"fenêtre de configuration de ce greffon."
+"fenêtre de configuration de ce plugin."
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
@@ -10115,7 +10115,7 @@ msgstr "Fenêtre de configuration de l'observabilité"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:132
 msgid "Observability Plug-in"
-msgstr "Greffon Observabilité"
+msgstr "Plugin Observabilité"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid ""
@@ -10128,7 +10128,7 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"Greffon analysant l'observabilité de la source sélectionnée (ou du centre de "
+"Ce plugin analyse l'observabilité de la source sélectionnée (ou du centre de "
 "l'écran si aucune source n'est sélectionnée). Le greffon peut indiquer le "
 "moment du lever, du transit et du coucher, ainsi que la meilleur période de "
 "l'année (c.-à-d. la plus grande séparation angulaire au soleil), la période "
@@ -10277,11 +10277,11 @@ msgid ""
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
 "Le programme calcule la plage de dates où l'objet céleste se trouve au-"
-"dessus de l'horizon à au moins un moment de la nuit. Le programme considère "
-"la nuit comme étant l'espace de temps durant lequel l'élévation du soleil "
-"est au-dessous de la limite du crépuscule (réglable par l'utilisateur, cf. "
-"ci-dessus). Quand les objets sont fixes sur le ciel (ou sont des planètes "
-"extérieures), la plage des époques observables pour l'année en cours peuvent "
+"dessus de l'horizon à au moins un moment de la nuit. Il considère la nuit "
+"comme étant l'espace de temps durant lequel l'élévation du Soleil est au-"
+"dessous de la limite du crépuscule (réglable par l'utilisateur, cf. ci-"
+"dessus). Quand les objets sont fixes sur le ciel (ou sont des planètes "
+"extérieures), la plage des époques observables pour l'année en cours peut "
 "avoir deux formes : soit une plage d'une date à une autre (p. ex. : du 20 "
 "janv. au 15 sept.), soit en deux parties (du 1er janv. à une certaine date "
 "et d'une autre date au 31 déc.). Dans le premier cas, la date de début (le "
@@ -10291,9 +10291,9 @@ msgstr ""
 "correspondant en fait à une plage allant du 21 sept. au 20 mai suivant), la "
 "date de début (21 sept. dans notre exemple) sera proche du lever héliaque, "
 "tandis que la date de fin (20 mai dans notre exemple) sera proche du coucher "
-"héliaque. Des versions ultérieures de ce greffon utiliseront des équations "
+"héliaque. Des versions ultérieures de ce plugin utiliseront des équations "
 "plus précises pour estimer les levers et couchers héliaques des étoiles et "
-"des planètes. Ils ne dépendront plus simplement de l'élévation du soleil au "
+"des planètes. Ils ne dépendront plus simplement de l'élévation du Soleil au "
 "crépuscule donnée par l'utilisateur."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
@@ -10324,7 +10324,7 @@ msgstr "Configuration de l'observabilité"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
-msgstr "Greffon Observabilité"
+msgstr "Plugin Observabilité"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
@@ -10385,7 +10385,7 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
-"Ce greffon permet de zoomer sur des champs de vision prédéfinis, au moyen de "
+"Ce plugin permet de zoomer sur des champs de vision prédéfinis, au moyen de "
 "raccourcis clavier, comme dans le logiciel de planétarium <em>Cartes du "
 "Ciel</em>."
 
@@ -10396,7 +10396,7 @@ msgstr "Définir le champ de vision à %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
-msgstr "Greffon champ de vision"
+msgstr "Plugin Champ de vision"
 
 #: plugins/FOV/src/ui_fovWindow.h:392
 msgid ""
@@ -10407,7 +10407,7 @@ msgid ""
 "All values in degrees."
 msgstr ""
 "Stellarium offre par défaut un mode de zoom continu, actionnable au moyen de "
-"la molette de la souris ou de raccourcis clavier. Ce greffon offre la "
+"la molette de la souris ou de raccourcis clavier. Ce plugin offre la "
 "possibilité de zoomer sur des champs de vision prédéfinis, au moyen de "
 "raccourcis clavier, comme dans le programme <em>{Cartes du Ciel}</em>. Les "
 "champs de vision prédéfinis (en degrés) peuvent être modifiés."
@@ -10425,7 +10425,7 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
-"Ce greffon marque 58 étoiles de navigation : l'Étoile polaire ainsi que les "
+"Ce plugin marque 58 étoiles de navigation : l'Étoile polaire ainsi que les "
 "57 étoiles sélectionnées mentionnées dans <em>The Nautical Almanac</em>, "
 "publié depuis 1958 conjointement par Her Majesty's Nautical Almanac Office "
 "et par le US Naval Observatory. Ces étoiles sont par conséquent utilisées "
@@ -10447,7 +10447,7 @@ msgstr "Équation du temps"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:59
 msgid "This plugin shows the solution of the equation of time."
-msgstr "Ce greffon affiche l'équation du temps"
+msgstr "Ce plugin affiche l'équation du temps"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
 msgid "Show solution for Equation of Time"
@@ -10467,7 +10467,7 @@ msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
-msgstr "Greffon équation du temps"
+msgstr "Plugin Équation du temps"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 msgid ""
@@ -10493,7 +10493,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 msgid "Show plug-ins button on toolbar"
-msgstr "Afficher le bouton du greffon dans la barre d'outils"
+msgstr "Afficher le bouton du plugin dans la barre d'outils"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Use minutes and seconds"
@@ -10554,7 +10554,7 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
-"<p>Ce greffon permet de simuler les pluies de météores et d'afficher un "
+"<p>Ce plugin permet de simuler les pluies de météores et d'afficher un "
 "marqueur pour chaque radiant actif ou inactif.</p>\r\n"
 "<p>Des informations sur la position et l'activité d'un radiant sont "
 "indiquées lorsque l'on clique sur son marqueur. La plupart des données "
@@ -11048,7 +11048,7 @@ msgstr "Astéroïde (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
-msgstr "Mise à jour..."
+msgstr "Mise à jour…"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
 msgid "Successfully updated!"
@@ -11064,15 +11064,15 @@ msgstr "Plus à jour !"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
-msgstr "Greffon pluie de météores"
+msgstr "Plugin Pluie de météores"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
 msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
-"Ce greffon permet de simuler les pluies de météores et d'afficher un "
-"marqueur pour chaque radiant actif ou inactif."
+"Ce plugin permet de simuler les pluies de météores et d'afficher un marqueur "
+"pour chaque radiant actif ou inactif."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
 msgid ""
@@ -11083,7 +11083,7 @@ msgid ""
 msgstr ""
 "Des informations sur la position et l'activité d'un radiant sont indiquées "
 "lorsque l'on clique sur son marqueur. La plupart des données fournies par ce "
-"greffon sont tirée du catalogue officiel de l'<a href=\\\"http://imo.net\\"
+"plugin sont tirées du catalogue officiel de l'<a href=\\\"http://imo.net\\"
 "\">International Meteor Organization</a>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:228
@@ -11223,7 +11223,7 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
-"Ce greffon a été créé initialement dans le cadre d'un projet pour l'<i>ESA "
+"Ce plugin a été créé initialement dans le cadre d'un projet pour l'<i>ESA "
 "Summer of Code in Space 2013</i>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:295
@@ -11291,11 +11291,11 @@ msgstr "Paramètres généraux"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr "Activer le greffon au démarrage"
+msgstr "Activer le plugin au démarrage"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr "Afficher un bouton pour activer/désactiver le greffon"
+msgstr "Afficher un bouton pour activer/désactiver le plugin"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
@@ -11385,7 +11385,7 @@ msgstr "Coordonnées du pointeur"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:59
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr "Ce greffon permet d'afficher les coordonnées du pointeur"
+msgstr "Ce plugin permet d'afficher les coordonnées du pointeur"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:98
 msgid "Show coordinates of the mouse pointer"
@@ -11428,7 +11428,7 @@ msgstr "AH/Déc"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
-msgstr "Greffon coordonnées du pointeur"
+msgstr "Plugin Coordonnées du pointeur"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
@@ -11480,7 +11480,7 @@ msgstr "Activer l'affichage des coordonnées au démarrage"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
-msgstr "Afficher le bouton du greffon au démarrage"
+msgstr "Afficher le bouton du plugin au démarrage"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
@@ -11508,27 +11508,27 @@ msgstr "Coordonnée Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:166
 msgid "Loading model..."
-msgstr "Chargement du modèle..."
+msgstr "Chargement du modèle…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:181
 msgid "Transforming model..."
-msgstr "Transformation du modèle..."
+msgstr "Transformation du modèle…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:193
 msgid "Loading ground..."
-msgstr "Chargement du sol..."
+msgstr "Chargement du sol…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:204
 msgid "Transforming ground..."
-msgstr "Transformation du sol..."
+msgstr "Transformation du sol…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr "Calcul de la carte de collision..."
+msgstr "Calcul de la carte de collision…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
-msgstr "Finalisation du chargement..."
+msgstr "Finalisation du chargement…"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
@@ -11562,7 +11562,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:172
 msgid "Scenery3d plugin loaded!"
-msgstr "Greffon Scenery3d chargé"
+msgstr "Plugin Scenery3d chargé"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:229
 msgid "Scenery3d: 3D landscapes"
@@ -11721,13 +11721,14 @@ msgstr ""
 "<p>Moteur de rendu 3D de l'avant-plan. Déplacez-vous, trouvez et évitez les "
 "obstacles de votre jardin, trouvez et démontrez de possibles alignements "
 "astronomiques dans des temples, observez les ombres sur les cadrans "
-"solaires, etc.</p><p>Pressez Ctrl+flèches pour vous déplacer. Utilisez "
-"Ctrl+PgUp/PgDn pour ajuster la hauteur des yeux. La vitesse du mouvement est "
-"liée au champ de vision (c'est-à-dire qu'il faut zoomer pour un ajustement "
-"fin). Vous pouvez continuer le déplacement en relâchant la touche Ctrl avant "
-"la touche flèche.</p><p>Le développement de ce plugin a été en partie "
-"supporté par le projet ASTROSIM (P 21208-G19) du Fond Autrichien pour la "
-"Science (FWF). Plus d'informations : http://astrosim.univie.ac.at/</p>"
+"solaires, etc.</p>\r\n"
+"<p>Pressez Ctrl+flèches pour vous déplacer. Utilisez Ctrl+PgUp/PgDn pour "
+"ajuster la hauteur des yeux. La vitesse du mouvement est liée au champ de "
+"vision (c'est-à-dire qu'il faut zoomer pour un ajustement fin). Vous pouvez "
+"continuer le déplacement en relâchant la touche Ctrl avant la touche "
+"flèche.</p><p>Le développement de ce plugin a été en partie supporté par le "
+"projet ASTROSIM (P 21208-G19) du Fond Autrichien pour la Science (FWF). Plus "
+"d'informations : http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:244
 msgid ""
@@ -12113,14 +12114,14 @@ msgstr "Vénus"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr "Greffon ArchéoLignes"
+msgstr "Plugin ArchéoLignes"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
-"Le greffon ArchéoLignes affiche les arcs de déclinaison les plus importants "
+"Le plugin ArchéoLignes affiche les arcs de déclinaison les plus importants "
 "dans le cadre d'études archéoastronomiques ou ethnoastronomiques."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
@@ -12230,7 +12231,7 @@ msgstr "Configuration ArchéoLignes"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr "Configuration du greffon ArchéoLignes"
+msgstr "Configuration du plugin ArchéoLignes"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
