@@ -42,13 +42,19 @@ class QGraphicsVideoItem;
 //! Therefore smooth fading in/out or setting a semitransparent overlay does not work, but there is now an intro/end animation available:
 //! zooming out from a pixel position to a player frame position, and returning to that spot close to end of video playback.
 //!
-//! However, support for multimedia content depends on the operating system and completeness of the QtMultimedia system support,
-//! some features may not work for you.
+//! However, support for multimedia content depends on the operating system, installed codecs, and completeness of the QtMultimedia system support,
+//! so some features or video formats may not work for you (test video and re-code it if necessary).
 //!
 //! The listed functions have been tested and work on Ubuntu 15.04 with Qt5.4 with NVidia 9800M and Intel Core-i3/HD5500.
 //! You need to install GStreamer plugins. Most critical seems to be gstreamer0.10-ffmpeg from
 //! https://launchpad.net/~mc3man/+archive/ubuntu/gstffmpeg-keep,
-//! then it plays MP4 (h264), Apple MOV(Sorenson) and WMV. Some type of AVI failed.
+//! then it plays
+//! <ul>
+//! <li>MP4 (h264)</li>
+//! <li>Apple MOV(Sorenson)</li>
+//! <li>WMV.</li>
+//! <li>Some type of AVI failed</li>
+//! </ul>
 //! Note on Windows version:
 //! According to https://wiki.qt.io/Qt_Multimedia, MinGW is limited to the decaying DirectShow platform plugin.
 //! The WMF platform plugin requires Visual Studio, so building with MSVC should provide better result.
@@ -56,6 +62,16 @@ class QGraphicsVideoItem;
 //! There is partial success with MP4 files on MinGW, but also these are rendered badly. Often just shows an error on Windows/MinGW:
 //! DirectShowPlayerService::doRender: Unresolved error code 80040154
 //! (number may differ, also seen: 80040228. Where is a list?)
+//! The formats tested on Windows are: <ul>
+//! <li>MP4 (OK) </li>
+//! <li>WMV (OK, but jumping to different locations via seekVideo() seems not to work properly) </li>
+//! <li>MOV (mp4v codec, very jerky, basically unusable) </li>
+//! <li>AVI (DIVX MP4 codec, same bad issues as MOV) </li>
+//! <li>OGV (invalid media) </li>
+//! <li>WEBM (invalid media) </li>
+//! </ul>
+//!
+//! Mac: NOT TESTED!
 //!
 //! QtMultimedia is a bit tricky to use: There seems bo be no way to load a media file to analyze resolution or duration before starting its replay.
 //! This means, configuring player frames either require absolute frame coordinates, or triggering necessary configuration steps only after replay has started.
@@ -67,7 +83,7 @@ class QGraphicsVideoItem;
 //! and non-appearing video frame, this seems to be https://bugreports.qt.io/browse/QTBUG-39567.
 //! This occurred on an Intel NUC5i3 with SSD, so loading the file should not be much of an issue.
 //!
-//! To help in debugging scripts, this module can be quite verbose if Stellarium is called with the command-line argument "--verbose".
+//! To help in debugging scripts, this module can be quite verbose in the logfile if Stellarium is called with the command-line argument "--verbose".
 
 class StelVideoMgr : public StelModule
 {
@@ -88,8 +104,8 @@ public slots:
 
 	//! load a video from @param filename, assign an @param id for it for later reference.
 	//! If @param id is already in use, replace it.
-	//! Prepare replay at upper-left corner @param x/@param y in natural resolution,
-	//! decide whether to @param show the box already (paused at Frame 1), and set opacity @name alpha.
+	//! Prepare replay at upper-left corner @param x/@param y in native resolution,
+	//! decide whether to @param show (play) the video already, and set opacity @name alpha.
 	//! If you want non-native resolution, load with @param show set to false, and use @name resizeVideo() and @name showVideo().
 	//! @bug Note that with @param alpha =0 the video is invisible as expected, other values make it fully opaque. There is no semi-transparency possible.
 	void loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha);
@@ -132,7 +148,7 @@ public slots:
 	//! sets opacity
 	//! @param alpha opacity for the video (0=transparent, ... 1=fully opaque).
 	//! @note if alpha is 0, also @name showVideo(id, true) cannot show the video.
-	//! @bug (as of Qt5.4) Note that with @param alpha =0 the video is invisible as expected, other values make it fully opaque. There is no semi-transparency possible.
+	//! @bug (as of Qt5.5) Note that with @param alpha =0 the video is invisible as expected, other values make it fully opaque. There is no semi-transparency possible.
 	void setVideoAlpha(const QString& id, const float alpha);
 
 	//! set video size to width @param w and height @param h.
@@ -167,9 +183,9 @@ public slots:
 	//! set mute state of video player
 	//! @param mute true to silence the video, false to hear audio.
 	void muteVideo(const QString& id, bool muteVideo=true);
-	//! set volume for video
+	//! set volume for video. Valid values are 0..100, values outside this range will be clamped.
 	void setVideoVolume(const QString& id, int newVolume);
-	//! return currently set volume of media player, or -1 in case of some error.
+	//! return currently set volume (0..100) of media player, or -1 in case of some error.
 	int getVideoVolume(const QString& id);
 
 	//! returns whether video is currently playing.
@@ -177,7 +193,7 @@ public slots:
 	//! @note If video is not found, also returns @value false.
 	bool isVideoPlaying(const QString& id);
 
-
+private slots:
 	// Slots to handle QMediaPlayer signals. Never call them yourself!
 	// Some of them are useful to understand media handling and to get to crucial information like native resolution and duration during loading of media.
 	// Most only give simple debug output...
@@ -192,7 +208,8 @@ public slots:
 	void handleStateChanged(QMediaPlayer::State state);
 	void handleVideoAvailableChanged(bool videoAvailable);
 	void handleVolumeChanged(int volume);
-	// Slots to handle QMediaPlayer change signals inherited from QMediaObject
+
+	// Slots to handle QMediaPlayer change signals inherited from QMediaObject:
 	void handleAvailabilityChanged(bool available);
 	void handleAvailabilityChanged(QMultimedia::AvailabilityStatus availability);
 	//! @note This one works, while handleMetaDataChanged(key, value) is not called on Windows (QTBUG-42034)
@@ -221,7 +238,7 @@ private:
 		QSize resolution;          //!< stores resolution of video. This becomes available only after loading or at begin of playing, so we must apply a trick with signals and slots to set it.
 		bool keepVisible;          //!< true if you want to show the last frame after video has played. (Due to delays in signal/slot handling of mediaplayer status changes, we use update() to stop a few frames before end.)
 		bool needResize;           //!< becomes true if resize is called before resolution becomes available.
-		bool simplePlay;           //!< only play in static size. true for playVideo(), false during playVideoPopout().
+		bool simplePlay;           //!< only play in one static size. true for playVideo(), false during playVideoPopout().
 		LinearFader fader;         //!< Used during @name playVideoPopout() for nice transition effects.
 		QSizeF  targetFrameSize;   //!< Video frame size, used during @name playVideo(), and final frame size during @name playVideoPopout().
 		QPointF popupOrigin;       //!< Screen point where video appears to come out during @name playVideoPopout()
