@@ -76,7 +76,10 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	videoObjects[id]->player->setProperty("Stel_id", id); // allow tracking of log messages and access of members.
 	videoObjects[id]->player->setVideoOutput(videoObjects[id]->videoItem);
 	videoObjects[id]->videoItem->setOpacity(alpha);
-	//videoObjects[id]->videoItem->setVisible(show); // Interesting: WMV file on Linux is displayed with default resolution 320x240. We must set this invisible to avoid a brief flash of visibility.
+#ifndef Q_OS_WIN
+	// There is a notable difference: on Windows this causes a crash. On Linux, it is required, else the movie frame is visible.
+	videoObjects[id]->videoItem->setVisible(show); // Interesting: On Linux is displayed with default resolution 320x240. We must set this invisible to avoid a brief flash of visibility.
+#endif
 	videoObjects[id]->lastPos=-1;
 
 	// A few connections are not really needed, they are signals we don't use. TBD: Remove or keep commented out?
@@ -166,6 +169,11 @@ void StelVideoMgr::playVideo(const QString& id, const bool keepVisibleAtEnd)
 			{
 				videoObjects[id]->player->stop();
 			}
+#ifndef Q_OS_WIN
+			// On Linux, we may have made movie frame invisible.
+			videoObjects[id]->videoItem->setVisible(true);
+#endif
+
 			// otherwise just play it, or resume playing paused video.
 			if (videoObjects[id]->player->state() == QMediaPlayer::PausedState)
 				videoObjects[id]->lastPos=videoObjects[id]->player->position() - 1;
@@ -895,7 +903,7 @@ void StelVideoMgr::update(double deltaTime)
 			else if ((*voIter)->fader.getInterstate()<1.0f)
 			{
 				if (verbose)
-					qDebug() << "StelVideoMgr::update(): not fully grown: pause at start or end!";
+					qDebug() << "StelVideoMgr::update(): not fully grown: pausing video at start or end!";
 				(*voIter)->player->pause();
 			}
 			else if (((*voIter)->duration > 0) && ((*voIter)->player->position() >= ((*voIter)->duration - 250))) // allow stop 250ms before end. 100ms was too short!
