@@ -33,9 +33,14 @@ SET(MINIMAL_QT_VERSION "5.3.0")
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 ########### Main global variables ###########
-IF(NOT CMAKE_BUILD_TYPE)
-  SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
-ENDIF()
+# IF(NOT CMAKE_BUILD_TYPE)
+  SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+# ENDIF()
+
+# Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
+if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DQT_NO_DEBUG -DNDEBUG)
+endif()
 
 # Add gprof build options if necessary.  Note gmon.out will be created in working directory when Stellarium is executed
 IF(${CMAKE_BUILD_TYPE} MATCHES "GProf")
