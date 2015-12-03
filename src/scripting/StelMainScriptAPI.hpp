@@ -562,16 +562,17 @@ public slots:
 	void dropSound(const QString& id);
 
 	//! Load a video from a file.
-	//! @param filename the name of the file to load.
+	//! @param filename the name of the file to load, relative to the scripts directory.
 	//! @param id the identifier which will be used to refer to the video
-	//! when calling playVideo, pauseVideo, stopVideo and dropVideo.
-	//! @param x  the x-coordinate for the video widget.
-	//! @param y  the y-coordinate for the video widget.
-	//! @param show  the visibility state for the video. You should load a video with show=false,
-	//!              wait for a second or so, resize as needed, and then call playVideo(), showVideo().
-	//! @param alpha the initial alpha value of the video.
-	//! @bug With Qt5/V0.13+, @param alpha does not work properly, only @param alpha=0 makes it invisible.
-	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
+	//! when calling playVideo(), pauseVideo(), stopVideo(), dropVideo() etc.
+	//! @param x  the x-coordinate (pixels from left) for the video frame.
+	//! @param y  the y-coordinate (pixels from top) for the video frame.
+	//! @param show  the visibility state for the video. (Optional since V0.15)
+	//! You should load a video with show=true (or leave default), to start it immediately in native size.
+	//! Else set show=false, and then call resizeVideo(), playVideo() or use playVideoPopout().
+	//! @param alpha the initial alpha value of the video, defaults to 1.
+	//! @bug With Qt5/V0.15+, @param alpha does not work properly (no semitransparency), only @param alpha=0 makes it invisible.
+	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show=true, float alpha=1.0f);
 
 	//! Play a video which has previously been loaded with loadVideo
 	//! @param id the identifier used when loadVideo was called
