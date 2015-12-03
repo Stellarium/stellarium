@@ -71,9 +71,10 @@ class QGraphicsVideoItem;
 //! <li>WEBM (invalid media) </li>
 //! </ul>
 //!
-//! Mac: NOT TESTED!
+//! Mac: NOT TESTED! There is a critical difference (causing a crash!) between Win and Linux to either hide or not hide the player just after loading.
+//! Please somebody find out Mac behaviour.
 //!
-//! QtMultimedia is a bit tricky to use: There seems bo be no way to load a media file to analyze resolution or duration before starting its replay.
+//! QtMultimedia is a bit tricky to use: There seems to be no way to load a media file to analyze resolution or duration before starting its replay.
 //! This means, configuring player frames either require absolute frame coordinates, or triggering necessary configuration steps only after replay has started.
 //! We opted for the latter solution because it allows scaled but undistorted video frames which may also take current screen resolution into account.
 //!
