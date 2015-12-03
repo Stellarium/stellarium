@@ -868,23 +868,24 @@ void StelVideoMgr::update(double deltaTime)
 			qDebug() << "StelVideoMgr::update(): Video" << id << "at" << (*voIter)->player->position()
 				 << ", player state=" << (*voIter)->player->state() << ", media status=" << (*voIter)->player->mediaStatus();
 		int newPos=(*voIter)->player->position();
-		if ((newPos==(*voIter)->lastPos) && ((*voIter)->player->state()==QMediaPlayer::PlayingState))
-		{
-			// I (GZ) have no idea how this can happen, but it does, every couple of runs.
-			// I see this happen only in the grow-while-play phase, but I see no logical error.
-			// It seemed to indicate not-fully-loaded, but this would have been caught in the intro test.
-			// But this even can happen if MediaStatus==BufferedMedia, i.e. fully loaded. Really a shame!
-			// TODO: check with every version of Qt whether this can still happen.
-			if (verbose)
-			{
-				qDebug() << "StelVideoMgr::update(): player state" << (*voIter)->player->state() << "with MediaStatus" << mediaStatus;
-				qDebug() << "This should not be: video should play but position" << newPos << "does not increase? Bumping video.";
-			}
-			//(*voIter)->player->stop(); // GZ Dec2: Do we really need to stop?
-			(*voIter)->player->setPosition(newPos+1); // GZ Dec2 flipped 2 lines.
-			(*voIter)->player->play();
-			qDebug() << "We had an issue with a stuck mediaplayer, should play again!";
-		}
+//		if ((newPos==(*voIter)->lastPos) && ((*voIter)->player->state()==QMediaPlayer::PlayingState))
+//		{
+//			// I (GZ) have no idea how this can happen, but it does, every couple of runs.
+//			// I see this happen only in the grow-while-play phase, but I see no logical error.
+//			// It seemed to indicate not-fully-loaded, but this would have been caught in the intro test.
+//			// But this even can happen if MediaStatus==BufferedMedia, i.e. fully loaded. Really a shame!
+//			// TODO: check with every version of Qt whether this can still happen.
+//			// SILLY! Of course if Stellarium framerate > video framerate...
+//			if (verbose)
+//			{
+//				qDebug() << "StelVideoMgr::update(): player state" << (*voIter)->player->state() << "with MediaStatus" << mediaStatus;
+//				qDebug() << "This should not be: video should play but position" << newPos << "does not increase? Bumping video.";
+//			}
+//			//(*voIter)->player->stop(); // GZ Dec2: Do we really need to stop?
+//			(*voIter)->player->setPosition(newPos+1); // GZ Dec2 flipped 2 lines.
+//			(*voIter)->player->play();
+//			qDebug() << "We had an issue with a stuck mediaplayer, should play again!";
+//		}
 		(*voIter)->lastPos=newPos;
 
 		if (verbose)
