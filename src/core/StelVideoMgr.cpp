@@ -357,6 +357,8 @@ void StelVideoMgr::seekVideo(const QString& id, const qint64 ms, bool pause)
 			{
 				qDebug() << "[StelVideoMgr] Cannot seek media source" << id;
 			}
+			// visual update only happens if we play. So even with pause set, we must play to freeze the frame!
+			videoObjects[id]->player->play();
 			if (pause)
 				videoObjects[id]->player->pause();
 		}
