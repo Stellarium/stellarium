@@ -609,10 +609,10 @@ public slots:
 	//! @param id the identifier used when loadVideo() was called
 	void dropVideo(const QString& id);
 
-	//! Seeks a video to the requested time.
+	//! Seeks a video to the requested time and either start playing or freeze there.
 	//! @param id the identifier used when loadVideo() was called
 	//! @param ms the time in milliseconds from the start of the media.
-	//! @param pause true if you want to pause at the requested position.
+	//! @param pause true if you want to pause at the requested position, keep it false to play from here.
 	void seekVideo(const QString& id, qint64 ms, bool pause=false);
 
 	//! Sets the position of the video widget.
