@@ -734,7 +734,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			       << "RNE" << "HII" << "SNR" << "BN" << "EN" << "SA" << "SC" << "CL" << "IG"
 			       << "RG" << "AGX" << "QSO" << "ISM" << "EMO" << "GNE" << "RAD" << "LIN"
 			       << "BLL" << "BLA" << "MOC" << "YSO" << "Q?" << "PN?" << "*" << "SFR"
-			       << "IR" << "**" << "MUL";
+			       << "IR" << "**" << "MUL" << "PPN";
 
 			switch (oTypes.indexOf(oType.toUpper()))
 			{
@@ -831,6 +831,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 36:
 					nType = (unsigned int)Nebula::NebStar;
 					break;
+				case 37:
+					nType = (unsigned int)Nebula::NebPPN;
+					break;
 				default:
 					nType = (unsigned int)Nebula::NebUnknown;
 					break;
@@ -913,9 +916,9 @@ bool NebulaMgr::objectInDisplayedCatalog(NebulaP n)
 	else if ((catalogFilters&Nebula::CatCed) && !(n->Ced_nb.isEmpty()))
 		r = true;
 
-	// TODO: Introduce objects without ID from current catalogs (such LMC)
-	//if (catalogFilters&AllCatalogs)
-	//	r = true;
+	// Special case: objects without ID from current catalogs
+	if (catalogFilters==Nebula::AllCatalogs)
+		r = true;
 
 	return r;
 }
@@ -948,14 +951,16 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		totalRecords++;
 
-		ref  = record.left(4).trimmed();
-		cdes = record.mid(5, 10).trimmed().toUpper();
-		// get name, trimmed of whitespace
-		name = record.mid(20).trimmed();
+		// bytes 1 - 5, designator for catalogue (prefix)
+		ref  = record.left(5).trimmed();
+		// bytes 6 -20, identificator for object in the catalog
+		cdes = record.mid(5, 15).trimmed().toUpper();
+		// bytes 21-80, proper name of the object (translatable)
+		name = record.mid(21).trimmed(); // Let gets the name with trimmed whitespaces
 
 		nb = cdes.toInt();
 
-		QStringList catalogs;
+		QStringList catalogs;		
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
 			 << "NGC" << "PGC" << "UGC" << "CED";
 
@@ -1005,7 +1010,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 14:
 				e = searchCed(cdes);
-				break;
+				break;			
 			default:
 				e = searchDSO(nb);
 				break;
@@ -2139,6 +2144,16 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			{
 				if (n->Mel_nb>0)
 					result << QString("Mel %1").arg(n->Mel_nb);
+			}
+			break;
+		case 150: // Dwarf galaxies
+			{
+			QStringList dwarfGalaxies;
+			dwarfGalaxies  << "PGC 3589" << "PGC 3792" << "PGC 6830" << "PGC 10074" << "PGC 19441"
+				       << "PGC 28913" << "PGC 29194" << "PGC 29653" << "PGC 50779" << "PGC 54074"
+				       << "PGC 60095" << "PGC 63287" << "PGC 69519" << "PGC 88608" << "PGC 2807155"
+				       << "PGC 3097691";
+			result = dwarfGalaxies;
 			}
 			break;
 		default:

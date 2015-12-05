@@ -1058,13 +1058,18 @@ void StelMovementMgr::changeFov(double deltaFov)
 void StelMovementMgr::changeConstellationArtIntensity()
 {
 	ConstellationMgr *cmgr = GETSTELMODULE(ConstellationMgr);
+	// During startup this may not have been initialized yet!
+	if (!cmgr)
+		return;
+
 	if (cmgr->getFlagArt())
 	{
 		double artInt = getInitConstellationIntensity();
 		// Fade out constellation art when FOV less 2 degrees
 		if (currentFov<=2.)
+		{
 			artInt *= currentFov>1.? (currentFov-1.) : 0. ;
-
+		}
 		cmgr->setArtIntensity(artInt);
 	}
 }

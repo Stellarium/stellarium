@@ -30,11 +30,11 @@
 #include <stdio.h>
 
 #ifdef Q_OS_WIN
-# include <windows.h>
-# ifndef _SHOBJ_H
-# include <shlobj.h>
-# include <QLibrary>
-# endif
+#include <windows.h>
+#ifndef _SHOBJ_H
+	#include <shlobj.h>
+	#include <QLibrary>
+#endif
 #endif
 
 #include "StelFileMgr.hpp"
@@ -86,7 +86,7 @@ void StelFileMgr::init()
 	}
 	else
 	{
-#ifdef Q_OS_MAC
+	#if defined(Q_OS_MAC)
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
 			relativePath = "/../..";
@@ -103,12 +103,15 @@ void StelFileMgr::init()
 		}
 		QFileInfo installLocation(ResourcesDir.absolutePath());
 		QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
-#else
+	#elif defined(Q_OS_WIN)
+		QFileInfo installLocation(QCoreApplication::applicationDirPath());
+		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
+	#else
 		// Linux, BSD, Solaris etc.
 		// We use the value from the config.h filesystem
 		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
 		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
-#endif
+	#endif
 		if (checkFile.exists())
 		{
 			installDir = installLocation.filePath();
@@ -121,7 +124,7 @@ void StelFileMgr::init()
 			qFatal("Couldn't find install directory location.");
 		}
 	}
-	
+
 	// Then add the installation directory to the search path
 	fileLocations.append(installDir);	
 }

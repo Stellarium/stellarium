@@ -48,9 +48,9 @@ double getPrecessionAngleVondrakEpsilon(const double jde);
 //! Just return (previously computed) ecliptic obliquity. [radians]
 double getPrecessionAngleVondrakCurrentEpsilonA(void);
 
-// To complete the task of correct&accurate precession-nutation handling, find fitting IAU-2000A Nutation and how this fits in here.
+// To complete the task of correct&accurate precession-nutation handling, we need fitting IAU-2000A or IAU-2000B Nutation.
 // E.g. A&A 459, 981–985 (2006) P. T. Wallace and N. Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions. DOI: 10.1051/0004-6361:20065897
-// Oh well, IAU 2000A nutation has 1400 terms and goes into micro-arcseconds. All we ever aim for is sub-arcsecond, if at all, this is more than covered by IAU-2000B.
+// IAU 2000A nutation has 1400 terms and goes into micro-arcseconds. All we ever aim for is sub-arcsecond, if at all, this is more than covered by IAU-2000B.
 
 //! Compute and return nutation angles of the abridged IAU-2000B nutation.
 //! @param JDE Julian day (TT)

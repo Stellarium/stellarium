@@ -1657,7 +1657,22 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     //set final rendering matrices
     modelViewMatrix = mvMatrix;
     projectionMatrix.setToIdentity();
-    projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
+
+    //without viewport offset, you could simply call this:
+    //projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
+    //these 2 lines replicate gluPerspective with glFrustum
+    float fH = qTan( fov / 360.0f * M_PI ) * currentScene.camNearZ;
+    float fW = fH * aspect;
+
+    //apply offset values
+    Vec2f vp = altAzProjector->getViewportCenterOffset();
+    float horizOffset = 2.0 * fW * vp[0];
+    float vertOffset = - 2.0 * fH * vp[1];
+
+    //final projection matrix
+    projectionMatrix.frustum(-fW + horizOffset, fW + horizOffset,
+			     -fH + vertOffset, fH + vertOffset,
+			     currentScene.camNearZ, currentScene.camFarZ);
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);

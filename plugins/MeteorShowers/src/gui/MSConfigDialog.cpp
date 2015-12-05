@@ -210,17 +210,21 @@ void MSConfigDialog::setAboutHtml()
 			"<td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td>"
 		"</tr>"
 	"</table>"
-	+ q_(
 	"<p>"
+	+ q_(
 		"This plugin enables you to simulate periodic meteor showers and "
 		"to display a marker for each active and inactive radiant."
+	) +
 	"</p>"
 	"<p>"
+	+ q_(
 		"By a single click on the radiant's marker, you can see all the "
 		"details about its position and activity. Most data used on this "
-		"plugin comes from the oficial <a href=\"http://imo.net\">International "
+		"plugin comes from the official <a href=\"http://imo.net\">International "
 		"Meteor Organization</a> catalog."
+	) +
 	"</p>"
+	+ q_(
 	"<p>"
 		"It has three types of markers:"
 		"<ul>"
@@ -233,8 +237,8 @@ void MSConfigDialog::setAboutHtml()
 			"<li>"
 				"<b>Generic:</b> "
 				"the radiant is active, but its data was not confirmed."
-				" It means that this can occur on real life, but that we do not have real"
-				" data about its activity for the current sky year."
+				" It means that this can occur in real life, but that we do not have proper"
+				" data about its activity for the current year."
 			"</li>"
 			"<li>"
 				"<b>Inactive:</b> "

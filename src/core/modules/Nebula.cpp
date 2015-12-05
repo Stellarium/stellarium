@@ -106,6 +106,9 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app);
 
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "<h2>";
@@ -117,9 +120,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&CatalogNumber)
 	{
-		if (!nameI18.isEmpty() && flags&Name)
-			oss << "<br>";
-
 		QStringList catIds;
 		if (M_nb > 0)
 			catIds << QString("M %1").arg(M_nb);
@@ -151,10 +151,11 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("UGC %1").arg(UGC_nb);
 		if (!Ced_nb.isEmpty())
 			catIds << QString("Ced %1").arg(Ced_nb);		
-		oss << catIds.join(" - ");
 
-		//if (!nameI18.isEmpty() && flags&Name)
-		//	oss << ")";
+		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
+			oss << "<br>";
+
+		oss << catIds.join(" - ");
 	}
 
 	if ((flags&Name) || (flags&CatalogNumber))
@@ -177,7 +178,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		else
 		{
-			if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 												QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 			else
@@ -197,7 +198,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	}
 	if (nType != NebDn && vMag < 50 && flags&Extra)
 	{
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted surface brightness much below horizon where model is meaningless.
 		{
 			if (getSurfaceBrightness(core)<99 && getSurfaceBrightnessWithExtinction(core)<99)
 				oss << q_("Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
@@ -484,6 +485,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			break;
 		case NebPn:
 		case NebPossPN:
+		case NebPPN:
 			Nebula::texPlanetaryNebula->bind();
 			color=brightNebulaColor;
 			break;
@@ -504,27 +506,31 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 		col = Vec3f(0.f,0.f,0.f);
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
-	//Q_ASSERT(majorAxisSize>0.); // THIS ASSERT FAILS. Catalog error?
-	if (drawHintProportional && (majorAxisSize>0.))
+	float size = 6.0f;
+	float scaledSize = 0.0f;
+	if (drawHintProportional)
 	{
-		float size = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-		// Rotation looks good only for galaxies.
-		if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
-		{
-			// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
-			// Find an on-screen direction vector from a point offset somewhat in declination from our object.
-			Vec3d XYZrel(XYZ);
-			XYZrel[2]*=0.99;
-			Vec3d XYrel;
-			sPainter.getProjector()->project(XYZrel, XYrel);
-			float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(6.0f,size), screenAngle*180./M_PI + orientationAngle);
-		}
-		else	// no galaxy
-			sPainter.drawSprite2dMode(XY[0], XY[1], qMax(6.0f,size));
+		if (majorAxisSize>0.)
+			scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		else
+			scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 	}
-	else // not proportional or size unknown
-		sPainter.drawSprite2dMode(XY[0], XY[1], 6.0f);
+
+	// Rotation looks good only for galaxies.
+	if ((nType <=NebQSO) || (nType==NebBLA) || (nType==NebBLL) )
+	{
+		// The rotation angle in drawSprite2dMode() is relative to screen. Make sure to compute correct angle from 90+orientationAngle.
+		// Find an on-screen direction vector from a point offset somewhat in declination from our object.
+		Vec3d XYZrel(XYZ);
+		XYZrel[2]*=0.99;
+		Vec3d XYrel;
+		sPainter.getProjector()->project(XYZrel, XYrel);
+		float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
+	}
+	else	// no galaxy
+		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
+
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
@@ -680,6 +686,7 @@ bool Nebula::objectInDisplayedType() const
 			break;
 		case NebPn:
 		case NebPossPN:
+		case NebPPN:
 			cntype = 7; // Planetary Nebulae
 			break;
 		case NebSNR:
@@ -812,16 +819,16 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		switch(OClRx.capturedTexts().at(2).toInt())
 		{
 			case 1:
-				rtxt << qc_("small range the brightness of members of cluster", "Trumpler's Brightness Class");
+				rtxt << qc_("small brightness range of cluster members", "Trumpler's Brightness Class");
 				break;
 			case 2:
-				rtxt << qc_("medium range the brightness of members of cluster", "Trumpler's Brightness Class");
+				rtxt << qc_("medium brightness range of cluster members", "Trumpler's Brightness Class");
 				break;
 			case 3:
-				rtxt << qc_("large range the brightness of members of cluster", "Trumpler's Brightness Class");
+				rtxt << qc_("large brightness range of cluster members", "Trumpler's Brightness Class");
 				break;
 			default:
-				rtxt << qc_("undocumented brightness class", "Trumpler's Concentration Class");
+				rtxt << qc_("undocumented brightness range of cluster members", "Trumpler's Brightness Class");
 				break;
 		}
 		switch(ocrich.indexOf(OClRx.capturedTexts().at(3).trimmed()))
@@ -1057,6 +1064,9 @@ QString Nebula::getTypeString(void) const
 			break;
 		case NebPossPN:
 			wsType = q_("possible planetary nebula");
+			break;
+		case NebPPN:
+			wsType = q_("protoplanetary nebula");
 			break;
 		case NebStar:
 			wsType = q_("star");
