@@ -54,7 +54,7 @@ Comet::Comet(const QString& englishName,
 	     int flagLighting,
 	     double radius,
 	     double oblateness,
-	     Vec3f color,
+	     Vec3f halocolor,
 	     float albedo,
 	     const QString& atexMapName,
 	     posFuncType coordFunc,
@@ -70,7 +70,7 @@ Comet::Comet(const QString& englishName,
 		  flagLighting,
 		  radius,
 		  oblateness,
-		  color,
+		  halocolor,
 		  albedo,
 		  atexMapName,
 		  "",
@@ -150,6 +150,9 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	//Mostly copied from Planet::getInfoString():
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app);
 
 	if (flags&Name)
 	{
@@ -175,7 +178,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 									    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
@@ -465,6 +468,10 @@ void Comet::update(int deltaTime)
 void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
 {
 	if (hidden)
+		return;
+
+	// Exclude drawing if user set a hard limit magnitude.
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
 		return;
 
 	if (getEnglishName() == core->getCurrentLocation().planetName)

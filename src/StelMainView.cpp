@@ -117,9 +117,28 @@ NightModeGraphicsEffect::NightModeGraphicsEffect(QObject* parent) :
 	vars.source = program->uniformLocation("u_source");
 }
 
+// Qt 5.5 does not support setting the devicePixelRatio of a QGLFramebufferObject,
+// So here we make a sub class just so that we can return the correct ratio when
+// using the buffer on a retina display.
+class NightModeGraphicsEffectFbo : public QGLFramebufferObject
+{
+public:
+	NightModeGraphicsEffectFbo(const QSize& s, const QGLFramebufferObjectFormat& f, int pixelRatio_) :
+		QGLFramebufferObject(s, f), pixelRatio(pixelRatio_) {}
+protected:
+	virtual int metric(PaintDeviceMetric m) const
+	{
+		if (m == QPaintDevice::PdmDevicePixelRatio) return pixelRatio;
+		return QGLFramebufferObject::metric(m);
+	}
+private:
+	int pixelRatio;
+};
+
 void NightModeGraphicsEffect::draw(QPainter* painter)
 {
-	QSize size(painter->device()->width(), painter->device()->height());
+	int pixelRatio = painter->device()->devicePixelRatio();
+	QSize size(painter->device()->width() * pixelRatio, painter->device()->height() * pixelRatio);
 	if (fbo && fbo->size() != size)
 	{
 		delete fbo;
@@ -130,7 +149,7 @@ void NightModeGraphicsEffect::draw(QPainter* painter)
 		QGLFramebufferObjectFormat format;
 		format.setAttachment(QGLFramebufferObject::CombinedDepthStencil);
 		format.setInternalTextureFormat(GL_RGBA);
-		fbo = new QGLFramebufferObject(size, format);
+		fbo = new NightModeGraphicsEffectFbo(size, format, pixelRatio);
 	}
 	QPainter fboPainter(fbo);
 	drawSource(&fboPainter);
@@ -331,6 +350,7 @@ StelGuiItem::StelGuiItem(QGraphicsItem* parent) : QGraphicsWidget(parent)
 
 void StelGuiItem::resizeEvent(QGraphicsSceneResizeEvent* event)
 {
+	Q_UNUSED(event);
 	widget->setGeometry(0, 0, size().width(), size().height());
 	StelApp::getInstance().getGui()->forceRefreshGui();
 }
@@ -408,6 +428,7 @@ protected:
 StelMainView::StelMainView(QWidget* parent)
 	: QGraphicsView(parent), guiItem(NULL), gui(NULL),
 	  flagInvertScreenShotColors(false),
+	  flagOverwriteScreenshots(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  cursorTimeout(-1.f), flagCursorTimeout(false), minFpsTimer(NULL), maxfps(10000.f)
@@ -549,6 +570,7 @@ void StelMainView::init(QSettings* conf)
 	rootItem->setLayout(l);
 	scene()->addItem(rootItem);
 	nightModeEffect = new NightModeGraphicsEffect(this);
+	updateNightModeProperty();
 	rootItem->setGraphicsEffect(nightModeEffect);
 
 	QSize size = glWidget->windowHandle()->screen()->size();
@@ -606,7 +628,6 @@ void StelMainView::init(QSettings* conf)
 	if (gui!=NULL)
 		setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	connect(&StelApp::getInstance(), SIGNAL(visionNightModeChanged(bool)), this, SLOT(updateNightModeProperty()));
-	updateNightModeProperty();
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
@@ -667,15 +688,24 @@ void StelMainView::updateNightModeProperty()
 	// The correct way to handle driver issues on MacOS X remains however unclear for now.
 #ifndef Q_OS_MAC
 	bool isMesa=glDriver.contains("Mesa", Qt::CaseInsensitive);
+	#ifdef Q_OS_WIN
+	bool isANGLE=glRenderer.startsWith("ANGLE", Qt::CaseSensitive);
+	#endif
 	if ( openGLerror ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1)) && !isMesa) ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 0)) &&  isMesa) || // Mesa defaults to 2.0 but works!
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))  )
 	{
 		#ifdef Q_OS_WIN
-		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
-		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."), QMessageBox::Abort, QMessageBox::Abort);
-		#else
+		if ((!isANGLE) && (!isMesa))
+			qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or even --mesa-mode) option.";
+		else if (isANGLE)
+			qWarning() << "Oops... Insufficient OpenGL version in ANGLE. Please update drivers, graphics hardware, or use --mesa-mode option.";
+		else
+			qWarning() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
+
+		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
+		#else		
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
 		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
 		#endif
@@ -692,7 +722,7 @@ void StelMainView::updateNightModeProperty()
 
 #ifdef Q_OS_WIN
 	// If we have ANGLE, check esp. for insufficient ps_2 level.
-	if (glRenderer.startsWith("ANGLE"))
+	if (isANGLE)
 	{
 		QRegExp angleVsPsRegExp(" vs_(\\d)_(\\d) ps_(\\d)_(\\d)");
 		int angleVSPSpos=angleVsPsRegExp.indexIn(glRenderer);
@@ -701,14 +731,14 @@ void StelMainView::updateNightModeProperty()
 		{
 			float vsVersion=angleVsPsRegExp.cap(1).toFloat() + 0.1*angleVsPsRegExp.cap(2).toFloat();
 			float psVersion=angleVsPsRegExp.cap(3).toFloat() + 0.1*angleVsPsRegExp.cap(4).toFloat();
-			qDebug() << "VS Version Number after parsing: " << vsVersion;
-			qDebug() << "PS Version Number after parsing: " << psVersion;
+			qDebug() << "VS Version Number detected: " << vsVersion;
+			qDebug() << "PS Version Number detected: " << psVersion;
 			if ((vsVersion<2.0) || (psVersion<3.0))
 			{
 				openGLerror=true;
 				qDebug() << "This is not enough: we need DirectX9 with vs_2_0 and ps_3_0 or later.";
-				qDebug() << "You should update graphics drivers, graphics hardware, or use the OpenGL-MESA version.";
-				qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+				qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
+				qDebug() << "Else, please try to use an older version like 0.12.5, and try with --safe-mode";
 
 				if (conf->value("main/ignore_opengl_warning", false).toBool())
 				{
@@ -753,13 +783,13 @@ void StelMainView::updateNightModeProperty()
 		if (mesaPos >-1)
 		{
 			float mesaVersion=mesaRegExp.cap(1).toFloat();
-			qDebug() << "MESA Version Number after parsing: " << mesaVersion;
+			qDebug() << "MESA Version Number detected: " << mesaVersion;
 			if ((mesaVersion<10.0f))
 			{
 				openGLerror=true;
 				qDebug() << "This is not enough: we need Mesa 10.0 or later.";
 				qDebug() << "You should update graphics drivers or graphics hardware.";
-				qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+				qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
 
 				if (conf->value("main/ignore_opengl_warning", false).toBool())
 				{
@@ -808,13 +838,13 @@ void StelMainView::updateNightModeProperty()
 	if (pos >-1)
 	{
 		float glslVersion=glslRegExp.cap(1).toFloat();
-		qDebug() << "GLSL Version Number after parsing: " << glslVersion;
+		qDebug() << "GLSL Version Number detected: " << glslVersion;
 		if (glslVersion<1.3f)
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL1.30 or later.";
-			qDebug() << "You should update graphics drivers, graphics hardware, or use the MESA version.";
-			qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+			qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
+			qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
 
 			if (conf->value("main/ignore_opengl_warning", false).toBool())
 			{
@@ -845,13 +875,17 @@ void StelMainView::updateNightModeProperty()
 	else if (posES >-1)
 	{
 		float glslesVersion=glslesRegExp.cap(1).toFloat();
-		qDebug() << "GLSL ES Version Number after parsing: " << glslesVersion;
+		qDebug() << "GLSL ES Version Number detected: " << glslesVersion;
 		if (glslesVersion<1.0) // TBD: is this possible at all?
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL ES 1.00 or later.";
-			qDebug() << "You should update graphics drivers, graphics hardware, or use the OpenGL-MESA version.";
-			qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
+#ifdef Q_OS_WIN
+			qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
+#else
+			qDebug() << "You should update graphics drivers or graphics hardware.";
+#endif
+			qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
 
 			if (conf->value("main/ignore_opengl_warning", false).toBool())
 			{
@@ -900,63 +934,65 @@ void StelMainView::dumpOpenGLdiagnostics() const
 	{
 		context->functions()->initializeOpenGLFunctions();
 		qDebug() << "initializeOpenGLFunctions()...";
+		QOpenGLFunctions::OpenGLFeatures oglFeatures=context->functions()->openGLFeatures();
+		qDebug() << "OpenGL Features:";
+		qDebug() << " - glActiveTexture() function" << (oglFeatures&QOpenGLFunctions::Multitexture ? "is" : "is NOT") << "available.";
+		qDebug() << " - Shader functions" << (oglFeatures&QOpenGLFunctions::Shaders ? "are" : "are NOT ") << "available.";
+		qDebug() << " - Vertex and index buffer functions" << (oglFeatures&QOpenGLFunctions::Buffers ? "are" : "are NOT") << "available.";
+		qDebug() << " - Framebuffer object functions" << (oglFeatures&QOpenGLFunctions::Framebuffers ? "are" : "are NOT") << "available.";
+		qDebug() << " - glBlendColor()" << (oglFeatures&QOpenGLFunctions::BlendColor ? "is" : "is NOT") << "available.";
+		qDebug() << " - glBlendEquation()" << (oglFeatures&QOpenGLFunctions::BlendEquation ? "is" : "is NOT") << "available.";
+		qDebug() << " - glBlendEquationSeparate()" << (oglFeatures&QOpenGLFunctions::BlendEquationSeparate ? "is" : "is NOT") << "available.";
+		qDebug() << " - glBlendFuncSeparate()" << (oglFeatures&QOpenGLFunctions::BlendFuncSeparate ? "is" : "is NOT") << "available.";
+		qDebug() << " - Blend subtract mode" << (oglFeatures&QOpenGLFunctions::BlendSubtract ? "is" : "is NOT") << "available.";
+		qDebug() << " - Compressed texture functions" << (oglFeatures&QOpenGLFunctions::CompressedTextures ? "are" : "are NOT") << "available.";
+		qDebug() << " - glSampleCoverage() function" << (oglFeatures&QOpenGLFunctions::Multisample ? "is" : "is NOT") << "available.";
+		qDebug() << " - Separate stencil functions" << (oglFeatures&QOpenGLFunctions::StencilSeparate ? "are" : "are NOT") << "available.";
+		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
+		qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
+		qDebug() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
+		
+		qDebug() << "OpenGL shader capabilities and details:";
+		qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
+		qDebug() << " - Fragment Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Fragment, context) ? "YES" : "NO");
+		qDebug() << " - Geometry Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry, context) ? "YES" : "NO");
+		qDebug() << " - TessellationControl Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationControl, context) ? "YES" : "NO");
+		qDebug() << " - TessellationEvaluation Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationEvaluation, context) ? "YES" : "NO");
+		qDebug() << " - Compute Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Compute, context) ? "YES" : "NO");
+		
+		// GZ: List available extensions. Not sure if this is in any way useful?
+		QSet<QByteArray> extensionSet=context->extensions();
+		qDebug() << "We have" << extensionSet.count() << "OpenGL extensions:";
+		QMap<QString, QString> extensionMap;
+		QSetIterator<QByteArray> iter(extensionSet);
+		while (iter.hasNext())
+		{
+			if (!iter.peekNext().isEmpty()) {// Don't insert empty lines
+				extensionMap.insert(QString(iter.peekNext()), QString(iter.peekNext()));
+			}
+			iter.next();
+		}
+		QMapIterator<QString, QString> iter2(extensionMap);
+		while (iter2.hasNext()) {
+			qDebug() << " -" << iter2.next().key();
+		}
+		// Apparently EXT_gpu_shader4 is required for GLSL1.3. (http://en.wikipedia.org/wiki/OpenGL#OpenGL_3.0).
+		qDebug() << "EXT_gpu_shader4" << (extensionSet.contains(("EXT_gpu_shader4")) ? "present, OK." : "MISSING!");
+		
+		QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
+		if (programParameterPtr == 0) {
+			qDebug() << "glProgramParameteri cannot be resolved here. BAD!";
+		}
+		programParameterPtr =context->getProcAddress("glProgramParameteriEXT");
+		if (programParameterPtr == 0) {
+			qDebug() << "glProgramParameteriEXT cannot be resolved here. BAD!";
+		}
 	}
 	else
-		qDebug() << "dumpOpenGLdiagnostics(): No OpenGL context";
-
-	QOpenGLFunctions::OpenGLFeatures oglFeatures=context->functions()->openGLFeatures();
-	qDebug() << "OpenGL Features:";
-	qDebug() << " - glActiveTexture() function" << (oglFeatures&QOpenGLFunctions::Multitexture ? "is" : "is NOT") << "available.";
-	qDebug() << " - Shader functions" << (oglFeatures&QOpenGLFunctions::Shaders ? "are" : "are NOT ") << "available.";
-	qDebug() << " - Vertex and index buffer functions" << (oglFeatures&QOpenGLFunctions::Buffers ? "are" : "are NOT") << "available.";
-	qDebug() << " - Framebuffer object functions" << (oglFeatures&QOpenGLFunctions::Framebuffers ? "are" : "are NOT") << "available.";
-	qDebug() << " - glBlendColor()" << (oglFeatures&QOpenGLFunctions::BlendColor ? "is" : "is NOT") << "available.";
-	qDebug() << " - glBlendEquation()" << (oglFeatures&QOpenGLFunctions::BlendEquation ? "is" : "is NOT") << "available.";
-	qDebug() << " - glBlendEquationSeparate()" << (oglFeatures&QOpenGLFunctions::BlendEquationSeparate ? "is" : "is NOT") << "available.";
-	qDebug() << " - glBlendFuncSeparate()" << (oglFeatures&QOpenGLFunctions::BlendFuncSeparate ? "is" : "is NOT") << "available.";
-	qDebug() << " - Blend subtract mode" << (oglFeatures&QOpenGLFunctions::BlendSubtract ? "is" : "is NOT") << "available.";
-	qDebug() << " - Compressed texture functions" << (oglFeatures&QOpenGLFunctions::CompressedTextures ? "are" : "are NOT") << "available.";
-	qDebug() << " - glSampleCoverage() function" << (oglFeatures&QOpenGLFunctions::Multisample ? "is" : "is NOT") << "available.";
-	qDebug() << " - Separate stencil functions" << (oglFeatures&QOpenGLFunctions::StencilSeparate ? "are" : "are NOT") << "available.";
-	qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
-	qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
-	qDebug() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
-
-	qDebug() << "OpenGL shader capabilities and details:";
-	qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
-	qDebug() << " - Fragment Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Fragment, context) ? "YES" : "NO");
-	qDebug() << " - Geometry Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry, context) ? "YES" : "NO");
-	qDebug() << " - TessellationControl Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationControl, context) ? "YES" : "NO");
-	qDebug() << " - TessellationEvaluation Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationEvaluation, context) ? "YES" : "NO");
-	qDebug() << " - Compute Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Compute, context) ? "YES" : "NO");
-
-	// GZ: List available extensions. Not sure if this is in any way useful?
-	QSet<QByteArray> extensionSet=context->extensions();
-	qDebug() << "We have" << extensionSet.count() << "OpenGL extensions:";
-	QMap<QString, QString> extensionMap;
-	QSetIterator<QByteArray> iter(extensionSet);
-	while (iter.hasNext())
 	{
-		if (!iter.peekNext().isEmpty()) // Don't insert empty lines
-			extensionMap.insert(QString(iter.peekNext()), QString(iter.peekNext()));
-		iter.next();
+		qDebug() << "dumpOpenGLdiagnostics(): No OpenGL context";
 	}
-	QMapIterator<QString, QString> iter2(extensionMap);
-	while (iter2.hasNext())
-		qDebug() << " -" << iter2.next().key();
-	// Apparently EXT_gpu_shader4 is required for GLSL1.3. (http://en.wikipedia.org/wiki/OpenGL#OpenGL_3.0).
-	qDebug() << "EXT_gpu_shader4" << (extensionSet.contains(("EXT_gpu_shader4")) ? "present, OK." : "MISSING!");
 
-	QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
-	if (programParameterPtr == 0)
-		qDebug() << "glProgramParameteri cannot be resolved here. BAD!";
-	//else
-	//	qDebug() << "glProgramParameteri can be resolved. GOOD!";
-	programParameterPtr =context->getProcAddress("glProgramParameteriEXT");
-	if (programParameterPtr == 0)
-		qDebug() << "glProgramParameteriEXT cannot be resolved here. BAD!";
-	//else
-	//	qDebug() << "glProgramParameteriEXT can be resolved here. GOOD!";
 
 }
 
@@ -1138,10 +1174,11 @@ void StelMainView::deinitGL()
 	gui = NULL;
 }
 
-void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir)
+void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
 	screenShotPrefix = filePrefix;
 	screenShotDir = saveDir;
+	flagOverwriteScreenshots=overwrite;
 	emit(screenshotRequested());
 }
 
@@ -1173,13 +1210,19 @@ void StelMainView::doScreenshot(void)
 	}
 
 	QFileInfo shotPath;
-	for (int j=0; j<100000; ++j)
+	if (flagOverwriteScreenshots)
 	{
-		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png");
-		if (!shotPath.exists())
-			break;
+		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + ".png");
 	}
-
+	else
+	{
+		for (int j=0; j<100000; ++j)
+		{
+			shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png");
+			if (!shotPath.exists())
+				break;
+		}
+	}
 	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
 	if (!im.save(shotPath.filePath())) {
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());

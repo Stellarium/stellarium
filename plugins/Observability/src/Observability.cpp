@@ -24,8 +24,6 @@
 #include <QString>
 #include <QTimer>
 
-//#include <QtNetwork> // Why do we need a full part of the framwork again?
-
 #include "Observability.hpp"
 #include "ObservabilityDialog.hpp"
 
@@ -310,6 +308,7 @@ void Observability::draw(StelCore* core)
 
 // Update JD.
 	myJD.first = currJD;
+	myJD.second = currJD + core->computeDeltaT(currJD)/86400.;
 
 // If the year changed, we must recompute the Sun's position for each new day:
 	if (auxy != curYear)

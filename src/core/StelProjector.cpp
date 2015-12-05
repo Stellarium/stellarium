@@ -117,7 +117,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	viewportCenter = params.viewportCenter;
 	viewportCenter *= devicePixelsPerPixel;
 	gravityLabels = params.gravityLabels;
-	defaultAngleForGravityText = params.defautAngleForGravityText;
+	defaultAngleForGravityText = params.defaultAngleForGravityText;
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter * devicePixelsPerPixel;
@@ -163,6 +163,11 @@ const Vec4i& StelProjector::getViewport() const
 Vec2f StelProjector::getViewportCenter() const
 {
 	return Vec2f(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
+}
+
+Vec2f StelProjector::getViewportCenterOffset() const
+{
+	return viewportCenterOffset;
 }
 
 int StelProjector::getViewportPosX() const

@@ -45,6 +45,7 @@ Note: This shader currently requires some #version 120 features!
 #define FILTER_STEPS 64
 //NOTE: Intel does NOT like it for some reason if this is a const array, so we set it as uniform
 uniform vec2 poissonDisk[FILTER_STEPS] = vec2[](
+/* GZ This disk is bad. Taken from online repo, but bad.
    vec2(-0.613392, 0.617481),
    vec2(0.170019, -0.040254),
    vec2(-0.299417, 0.791925),
@@ -109,11 +110,78 @@ uniform vec2 poissonDisk[FILTER_STEPS] = vec2[](
    vec2(0.789239, -0.419965),
    vec2(-0.545396, 0.538133),
    vec2(-0.178564, -0.596057)
+*/
+
+   vec2(-0.610470, -0.702763),
+   vec2( 0.609267,  0.765488),
+   vec2(-0.817537, -0.412950),
+   vec2( 0.777710, -0.446717),
+   vec2(-0.668764, -0.524195),
+   vec2( 0.425181,  0.797780),
+   vec2(-0.766728, -0.065185),
+   vec2( 0.266692,  0.917346),
+   vec2(-0.578028, -0.268598),
+   vec2( 0.963767,  0.079058),
+   vec2(-0.968971, -0.039291),
+   vec2( 0.174263, -0.141862),
+   vec2(-0.348933, -0.505110),
+   vec2( 0.837686, -0.083142),
+   vec2(-0.462722, -0.072878),
+   vec2( 0.701887, -0.281632),
+   vec2(-0.377209, -0.247278),
+   vec2( 0.765589,  0.642157),
+   vec2(-0.678950,  0.128138),
+   vec2( 0.418512, -0.186050),
+   vec2(-0.442419,  0.242444),
+   vec2( 0.442748, -0.456745),
+   vec2(-0.196461,  0.084314),
+   vec2( 0.536558, -0.770240),
+   vec2(-0.190154, -0.268138),
+   vec2( 0.643032, -0.584872),
+   vec2(-0.160193, -0.457076),
+   vec2( 0.089220,  0.855679),
+   vec2(-0.200650, -0.639838),
+   vec2( 0.220825,  0.710969),
+   vec2(-0.330313, -0.812004),
+   vec2(-0.046886,  0.721859),
+   vec2( 0.070102, -0.703208),
+   vec2(-0.161384,  0.952897),
+   vec2( 0.034711, -0.432054),
+   vec2(-0.508314,  0.638471),
+   vec2(-0.026992, -0.163261),
+   vec2( 0.702982,  0.089288),
+   vec2(-0.004114, -0.901428),
+   vec2( 0.656819,  0.387131),
+   vec2(-0.844164,  0.526829),
+   vec2( 0.843124,  0.220030),
+   vec2(-0.802066,  0.294509),
+   vec2( 0.863563,  0.399832),
+   vec2( 0.268762, -0.576295),
+   vec2( 0.465623,  0.517930),
+   vec2( 0.340116, -0.747385),
+   vec2( 0.223493,  0.516709),
+   vec2( 0.240980, -0.942373),
+   vec2(-0.689804,  0.649927),
+   vec2( 0.272309, -0.297217),
+   vec2( 0.378957,  0.162593),
+   vec2( 0.061461,  0.067313),
+   vec2( 0.536957,  0.249192),
+   vec2(-0.252331,  0.265096),
+   vec2( 0.587532, -0.055223),
+   vec2( 0.034467,  0.289122),
+   vec2( 0.215271,  0.278700),
+   vec2(-0.278059,  0.615201),
+   vec2(-0.369530,  0.791952),
+   vec2(-0.026918,  0.542170),
+   vec2( 0.274033,  0.010652),
+   vec2(-0.561495,  0.396310),
+   vec2(-0.367752,  0.454260)
 );
 #elif SHADOW_FILTER
 #define FILTER_STEPS 16
 //NOTE: Intel does NOT like it for some reason if this is a const array, so we set it as uniform
 uniform vec2 poissonDisk[FILTER_STEPS] = vec2[]( 
+/* GZ This old solution is in a square. Rather use a disk of radius 1!
    vec2( -0.94201624, -0.39906216 ), 
    vec2( 0.94558609, -0.76890725 ), 
    vec2( -0.094184101, -0.92938870 ), 
@@ -130,6 +198,24 @@ uniform vec2 poissonDisk[FILTER_STEPS] = vec2[](
    vec2( -0.81409955, 0.91437590 ), 
    vec2( 0.19984126, 0.78641367 ), 
    vec2( 0.14383161, -0.14100790 ) 
+*/
+
+   vec2(0.9000000, -0.400000),
+   vec2(0.399595 ,  0.786532),
+   vec2(-0.262009,  0.408517),
+   vec2(0.628532 , -0.032680),
+   vec2(0.137324 , -0.084276),
+   vec2(-0.698111,  0.091123),
+   vec2(0.221654 ,  0.309229),
+   vec2(0.381427 , -0.563157),
+   vec2(-0.571974, -0.663951),
+   vec2(-0.721133,  0.495191),
+   vec2(-0.224557,  0.948409),
+   vec2(-0.924346, -0.305464),
+   vec2(-0.078683, -0.793631),
+   vec2(0.371462 , -0.926405),
+   vec2(-0.374038, -0.136753), 
+   vec2(0.767156 ,  0.425900)
 );
 #else
 #define FILTER_STEPS 0
@@ -252,7 +338,10 @@ float depthToViewZ(float depth, float nearPlane, float farPlane)
 	return depth * (farPlane - nearPlane) + nearPlane;
 }
 
-#define LIGHT_SCALE 0.003
+// GZ 20150911: increase LIGHT_SCALE, to fit a light source's diameter of 1/2 degree.
+//#define LIGHT_SCALE 0.003
+// assumption: should be 0.25deg/180*pi
+#define LIGHT_SCALE 0.00436
 #define SEARCH_WIDTH 0.08
 
 float PenumbraSize(in float zReceiver, in float zBlocker)
@@ -466,7 +555,7 @@ void main(void)
 	vec3 eye = normalize(-v_viewPos);
 	
 	#if HEIGHT
-	//pertube texture coords with heightmap
+	//perturb texture coords with heightmap
 	float height = texture2D(u_texHeight, texCoords).r;
 	//*scale +bias
 	height = height * heightScale - 0.5*heightScale;

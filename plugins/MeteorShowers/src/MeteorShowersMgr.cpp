@@ -148,10 +148,10 @@ bool MeteorShowersMgr::configureGui(bool show)
 void MeteorShowersMgr::createActions()
 {
 	QString msGroup = N_("Meteor Showers");
-	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Alt+M");
+	addAction("actionShow_MeteorShowers",               msGroup, N_("Toggle meteor showers"), this,           "enablePlugin", "Ctrl+Shift+M");
 	addAction("actionShow_MeteorShowers_labels",        msGroup, N_("Toggle radiant labels"), this,           "enableLabels", "Shift+M");
-	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Shift+M");
-	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show search dialog"),    m_searchDialog, "visible",      "Ctrl+Shift+S");
+	addAction("actionShow_MeteorShowers_config_dialog", msGroup, N_("Show settings dialog"),  m_configDialog, "visible",      "Ctrl+Alt+Shift+M");
+	addAction("actionShow_MeteorShowers_search_dialog", msGroup, N_("Show search dialog"),    m_searchDialog, "visible",      "Ctrl+Alt+M");
 }
 
 void MeteorShowersMgr::loadConfig()
@@ -577,7 +577,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	"<p>"
 		"By a single click on the radiant's marker, you can see all the "
 		"details about its position and activity. Most data used on this "
-		"plugin comes from the oficial <a href=\"http://imo.net\">International "
+		"plugin comes from the official <a href=\"http://imo.net\">International "
 		"Meteor Organization</a> catalog."
 	"</p>"
 	"<p>"
@@ -592,8 +592,8 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 			"<li>"
 				"<b>Generic:</b> "
 				"the radiant is active, but its data was not confirmed."
-				" It means that this can occur on real life, but that we do not have real"
-				" data about its activity for the current sky year."
+				" It means that this can occur in real life, but that we do not have proper"
+				" data about its activity for the current year."
 			"</li>"
 			"<li>"
 				"<b>Inactive:</b> "

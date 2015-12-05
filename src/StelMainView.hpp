@@ -88,14 +88,20 @@ public slots:
 	//! The format of the file, and hence the filename extension
 	//! depends on the architecture and build type.
 	//! @arg filePrefix changes the beginning of the file name
-	//! @arg shotDir changes the directory where the screenshot is saved
-	//! If shotDir is "" then StelFileMgr::getScreenshotDir() will be used
-	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="");
+	//! @arg saveDir changes the directory where the screenshot is saved
+	//! If saveDir is "" then StelFileMgr::getScreenshotDir() will be used
+	//! @arg overwrite if true, @arg filePrefix is used as filename, and existing file will be overwritten.
+	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="", const bool overwrite=false);
 
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
 	//! Set whether colors should be inverted when saving screenshot
 	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b;}
+
+	//! Get whether existing files are overwritten when saving screenshot
+	bool getFlagOverwriteScreenShots() const {return flagOverwriteScreenshots;}
+	//! Set whether existing files are overwritten when saving screenshot
+	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b;}
 
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
@@ -186,6 +192,7 @@ private:
 	class StelApp* stelApp;
 
 	bool flagInvertScreenShotColors;
+	bool flagOverwriteScreenshots; //! if set to true, screenshot is named exactly screenShotPrefix.png and overwrites existing file
 
 	QString screenShotPrefix;
 	QString screenShotDir;
