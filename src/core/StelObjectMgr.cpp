@@ -380,6 +380,7 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["NebulaMgr:105"] = "The Catalogue of Rodgers, Campbell, and Whiteoak";
 			result["NebulaMgr:106"] = "Collinder Catalogue";
 			result["NebulaMgr:107"] = "Melotte Catalogue";
+			result["NebulaMgr:150"] = "Dwarf galaxies";
 		}
 		// Interesting stars
 		if (m->objectName()=="StarMgr")
