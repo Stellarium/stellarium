@@ -29,14 +29,16 @@ core.seekVideo("mp4", 0, true);
 
 LabelMgr.setLabelText(lab, "Waiting 5 seconds on frame 0, then switch to 4 freezed frames in the video with 1sec-pauses.")
 core.wait(5);
-core.seekVideo("mp4", 500, true);
+core.seekVideo("mp4", 500, false);
 core.pauseVideo("mp4");
 core.wait(1);
-core.seekVideo("mp4", 4500, true);
+core.seekVideo("mp4", 4500, false);
+core.pauseVideo("mp4");
 core.wait(1);
-core.seekVideo("mp4", 12500, true);
+core.seekVideo("mp4", 12500, false);
+core.pauseVideo("mp4");
 core.wait(1);
-core.seekVideo("mp4", 2500, true);
+core.seekVideo("mp4", 2500, false);
 core.pauseVideo("mp4");
 
 LabelMgr.setLabelText(lab, "Waiting 4 seconds, then play video.")
