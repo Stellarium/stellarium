@@ -151,6 +151,8 @@ class Translations
 		N_("Collinder Catalogue");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Melotte Catalogue");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Dwarf galaxies");
 		
 		// =====================================================================
 		// List of stars types
