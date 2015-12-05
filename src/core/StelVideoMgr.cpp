@@ -60,7 +60,7 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 
 	videoObjects[id] = new VideoPlayer;
 	videoObjects[id]->videoItem= new QGraphicsVideoItem();
-	// This seta a iny size so that if window should appear before proper resize, it should not disturb.
+	// This sets a tiny size so that if window should appear before proper resize, it should not disturb.
 	videoObjects[id]->videoItem->setSize(QSizeF(1,1));
 
 	videoObjects[id]->player = new QMediaPlayer(0, QMediaPlayer::VideoSurface);
@@ -315,7 +315,7 @@ void StelVideoMgr::pauseVideo(const QString& id)
 				videoObjects[id]->player->play();
 
 			if (verbose)
-				qDebug() << "pauseVideo() pause()...";
+				qDebug() << "StelVideoMgr::pauseVideo() ...";
 			videoObjects[id]->player->pause();
 		}
 	}
@@ -345,7 +345,7 @@ void StelVideoMgr::seekVideo(const QString& id, const qint64 ms, bool pause)
 			if (videoObjects[id]->player->isSeekable())
 			{
 				videoObjects[id]->player->setPosition(ms);
-				// Seek capability depends on the backend used.
+				// Seek capability depends on the backend used and likely media codec.
 			}
 			else
 			{

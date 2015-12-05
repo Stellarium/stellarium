@@ -142,7 +142,7 @@ public slots:
 	void dropVideo(const QString& id);
 
 	//! Seek a position in video @param id. Pause the video playing if @param pause=true.
-	//! This may not work if video has not beem fully loaded. Better wait a second before proceeding after loadVideo()
+	//! @note This may not work if video has not been fully loaded. Better wait a second before proceeding after loadVideo(), and call seekVideo(., ., false); pauseVideo(.);
 	void seekVideo(const QString& id, const qint64 ms, bool pause=false);
 
 	//! move upper left corner of video @name id to @name x, @name y.
