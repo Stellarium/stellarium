@@ -45,6 +45,7 @@ class QGraphicsVideoItem;
 //! However, support for multimedia content depends on the operating system, installed codecs, and completeness of the QtMultimedia system support,
 //! so some features or video formats may not work for you (test video and re-code it if necessary).
 //!
+//! <h2>Linux notes</h2>
 //! The listed functions have been tested and work on Ubuntu 15.04 with Qt5.4 with NVidia 9800M and Intel Core-i3/HD5500.
 //! You need to install GStreamer plugins. Most critical seems to be gstreamer0.10-ffmpeg from
 //! https://launchpad.net/~mc3man/+archive/ubuntu/gstffmpeg-keep,
@@ -55,7 +56,8 @@ class QGraphicsVideoItem;
 //! <li>WMV.</li>
 //! <li>Some type of AVI failed</li>
 //! </ul>
-//! Note on Windows version:
+//!
+//! <h2>Windows notes</h2>
 //! According to https://wiki.qt.io/Qt_Multimedia, MinGW is limited to the decaying DirectShow platform plugin.
 //! The WMF platform plugin requires Visual Studio, so building with MSVC should provide better result.
 //! Some signals are not triggered under Windows, so we cannot use them, globally.
@@ -63,7 +65,7 @@ class QGraphicsVideoItem;
 //! DirectShowPlayerService::doRender: Unresolved error code 80040154
 //! (number may differ, also seen: 80040228. Where is a list?)
 //! The formats tested on Windows are: <ul>
-//! <li>MP4 (OK) </li>
+//! <li>MP4 (h264; OK) </li>
 //! <li>WMV (OK, but jumping to different locations via seekVideo() seems not to work properly) </li>
 //! <li>MOV (mp4v codec, very jerky, basically unusable) </li>
 //! <li>AVI (DIVX MP4 codec, same bad issues as MOV) </li>
@@ -71,7 +73,8 @@ class QGraphicsVideoItem;
 //! <li>WEBM (invalid media) </li>
 //! </ul>
 //!
-//! Mac: NOT TESTED! There is a critical difference (causing a crash!) between Win and Linux to either hide or not hide the player just after loading.
+//! <h2>Mac OS X Notes</h2>
+//! NOT TESTED ON A MAC! There is a critical difference (causing a crash!) between Win and Linux to either hide or not hide the player just after loading.
 //! Please somebody find out Mac behaviour.
 //!
 //! QtMultimedia is a bit tricky to use: There seems to be no way to load a media file to analyze resolution or duration before starting its replay.

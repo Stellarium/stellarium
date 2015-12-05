@@ -60,9 +60,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 
 	videoObjects[id] = new VideoPlayer;
 	videoObjects[id]->videoItem= new QGraphicsVideoItem();
-	// GZ maybe this helps on win?
-	videoObjects[id]->videoItem->setSize(QSizeF(100,100));
-
+	// This seta a iny size so that if window should appear before proper resize, it should not disturb.
+	videoObjects[id]->videoItem->setSize(QSizeF(1,1));
 
 	videoObjects[id]->player = new QMediaPlayer(0, QMediaPlayer::VideoSurface);
 	videoObjects[id]->duration=-1; // -1 to signal "unknown".
@@ -77,8 +76,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 	videoObjects[id]->player->setVideoOutput(videoObjects[id]->videoItem);
 	videoObjects[id]->videoItem->setOpacity(alpha);
 #ifndef Q_OS_WIN
-	// There is a notable difference: on Windows this causes a crash. On Linux, it is required, else the movie frame is visible.
-	videoObjects[id]->videoItem->setVisible(show); // Interesting: On Linux is displayed with default resolution 320x240. We must set this invisible to avoid a brief flash of visibility.
+	// There is a notable difference: on Windows this causes a crash. On Linux, it is required, else the movie frame is visible before proper resize.
+	videoObjects[id]->videoItem->setVisible(show);
 #endif
 	videoObjects[id]->lastPos=-1;
 
@@ -114,47 +113,42 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const f
 		qDebug() << "\tSTATUS:        " << videoObjects[id]->player->mediaStatus();
 		qDebug() << "\tFile:          " << videoObjects[id]->player->currentMedia().canonicalUrl();
 	}
-	qDebug() << "scene->addItem...";
+//	qDebug() << "scene->addItem...";
 	StelMainView::getInstance().scene()->addItem(videoObjects[id]->videoItem);
-	qDebug() << "scene->addItem OK";
+//	qDebug() << "scene->addItem OK";
 
 	videoObjects[id]->videoItem->setPos(x, y);
 	// DEFAULT SIZE: show a tiny frame. This gets updated to native resolution as soon as resolution becomes known. Needed?
-	//videoObjects[id]->videoItem->setSize(QSizeF(160, 160));
-	qDebug() << "bla1";
+	//videoObjects[id]->videoItem->setSize(QSizeF(1, 1));
 
 	// after many troubles with incompletely loaded files we attempt a blocking load from https://wiki.qt.io/Seek_in_Sound_File
+	// This may be no longer required. But please keep the block here for testing/reactivation if necessary.
 //	if (! videoObjects[id]->player->isSeekable())
 //	{
-//		qDebug() << "bla1-NotSeekable";
+//		qDebug() << "Not Seekable!";
 //		if (verbose)
 //			qDebug() << "Blocking load ...";
 //		QEventLoop loop;
 //		QTimer timer;
-//		qDebug() << "bla1-NotSeekable-setSingleShot";
+//		qDebug() << "Not Seekable: setSingleShot";
 //		timer.setSingleShot(true);
 //		timer.setInterval(5000); // 5 seconds, may be too long?
-//		qDebug() << "bla1-NotSeekable-connect...";
+//		qDebug() << "Not Seekable: connect...";
 //		loop.connect(&timer, SIGNAL (timeout()), &loop, SLOT (quit()) );
 //		loop.connect(videoObjects[id]->player, SIGNAL (seekableChanged(bool)), &loop, SLOT (quit()));
-//		qDebug() << "bla1-NotSeekable-loop...";
+//		qDebug() << "Not Seekable: loop...";
 //		loop.exec();
 //		if (verbose)
 //			qDebug() << "Blocking load finished, should be seekable now or 5s are over.";
 //	}
 
-	qDebug() << "bla2";
-
 	if (verbose)
 		qDebug() << "Loaded video" << id << "for pos " << x << "/" << y << "Size" << videoObjects[id]->videoItem->size();
 	videoObjects[id]->player->setPosition(0); // This should force triggering a metadataAvailable() with resolution update.
-	qDebug() << "bla3";
 	if (show)
 		videoObjects[id]->player->play();
 	else
 		videoObjects[id]->player->pause();
-	qDebug() << "bla4";
-
 }
 
 void StelVideoMgr::playVideo(const QString& id, const bool keepVisibleAtEnd)
@@ -170,7 +164,7 @@ void StelVideoMgr::playVideo(const QString& id, const bool keepVisibleAtEnd)
 				videoObjects[id]->player->stop();
 			}
 #ifndef Q_OS_WIN
-			// On Linux, we may have made movie frame invisible.
+			// On Linux, we may have made movie frame invisible during loadVideo().
 			videoObjects[id]->videoItem->setVisible(true);
 #endif
 
@@ -705,8 +699,12 @@ void StelVideoMgr::handleStateChanged(QMediaPlayer::State state)
 
 void StelVideoMgr::handleVideoAvailableChanged(bool videoAvailable)
 {
+	QString senderId=QObject::sender()->property("Stel_id").toString();
 	if (verbose)
-		qDebug() << "StelVideoMgr: " << QObject::sender()->property("Stel_id").toString() << ":  Video available:" << videoAvailable;
+		qDebug() << "StelVideoMgr: " << senderId << ":  Video available:" << videoAvailable;
+	// Sometimes it appears the video has not fully loaded when popup stars, and the movie is not shown.
+	// Maybe force showing here? --> NO, breaks our own logic...
+	//videoObjects[senderId]->videoItem->setVisible(videoAvailable);
 }
 
 void StelVideoMgr::handleVolumeChanged(int volume)
@@ -782,7 +780,7 @@ void StelVideoMgr::handleMetaDataChanged()
 void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & value)
 {
     qDebug() << "!!! StelVideoMgr::handleMetadataChanged(.,.): Is this called on Windows when built with MSVC? ";  // NOT WITH MinGW and Qt5.4!!!
-    qDebug() << "THIS IS TO ENSURE YOU SEE A CRASH ! CURRENTLY THE SIGNAL IS NOT SENT ON WINDOWS WHEN BUILT WITH minGW Qt5.4 and not with MSVC on Qt5.3.2";
+    qDebug() << "THIS IS TO ENSURE YOU SEE A CRASH! (If you see it, be happy!) CURRENTLY THE SIGNAL IS NOT SENT ON WINDOWS WHEN BUILT WITH minGW Qt5.4 and not with MSVC on Qt5.3.2";
     Q_ASSERT(0); // Remove the Q_ASSERT and write a comment that it works on (which) Windows/Mac/...!
     QString id=QObject::sender()->property("Stel_id").toString();
     qDebug() << "StelVideoMgr: " << id << ":  Metadata change:" << key << "=>" << value;
@@ -812,6 +810,9 @@ void StelVideoMgr::update(double deltaTime)
 		if (verbose)
 			qDebug() << "StelVideoMgr::update() for" << id << ": PlayerState:" << (*voIter)->player->state() << "MediaStatus: " << mediaStatus;
 
+		// fader must be updated here, else the video may not be visible when not yet fully loaded?
+		(*voIter)->fader.update((int)(deltaTime*1000));
+
 		// It seems we need a more thorough analysis of MediaStatus!
 		// In all not-ready status we immediately leave further handling, usually in the hope that loading is successful really soon.
 		switch (mediaStatus)
@@ -832,9 +833,8 @@ void StelVideoMgr::update(double deltaTime)
 				break;
 		}
 
-		if (verbose)
-			qDebug() << "update() Still alive";
-		(*voIter)->fader.update((int)(deltaTime*1000)); // This must be done, even for simplePlay mode, else fader may be in some bad state.
+//		if (verbose)
+//			qDebug() << "update() Still alive";
 
 		// First fix targetFrameSize if needed and possible.
 		if ((*voIter)->needResize && ((*voIter)->resolution.isValid()))
