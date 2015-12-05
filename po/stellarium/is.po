@@ -11,23 +11,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-07 13:07+0600\n"
+"POT-Creation-Date: 2015-12-02 21:36+0600\n"
 "PO-Revision-Date: 2015-10-02 19:40+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-11-08 05:15+0000\n"
-"X-Generator: Launchpad (build 17838)\n"
+"X-Launchpad-Export-Date: 2015-12-03 05:21+0000\n"
+"X-Generator: Launchpad (build 17856)\n"
 "Language: is\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
-#: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:175
+#: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:176
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
-#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:556
+#: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
 msgid "Display Options"
 msgstr "Skjástillingar"
 
@@ -51,7 +51,7 @@ msgstr "Merkingar stjörnumerkja"
 msgid "Constellation boundaries"
 msgstr "Mörk stjörnumerkja"
 
-#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1589
+#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1582
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "Stjörnur"
@@ -60,113 +60,130 @@ msgstr "Stjörnur"
 msgid "Stars labels"
 msgstr "Stjörnumerkingar"
 
-#: src/core/modules/GridLinesMgr.cpp:596 src/ui_viewDialog.h:1797
+#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1776
 msgid "Meridian"
 msgstr "Hádegisbaugur"
 
-#: src/core/modules/GridLinesMgr.cpp:600
+#: src/core/modules/GridLinesMgr.cpp:603
 msgid "Ecliptic of J2000.0"
 msgstr "Sólbaugshnit J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:604
+#: src/core/modules/GridLinesMgr.cpp:607
 msgid "Ecliptic of Date"
 msgstr "Sólbaugshnit m.v. dagsetningu"
 
-#: src/core/modules/GridLinesMgr.cpp:608
+#: src/core/modules/GridLinesMgr.cpp:611
 msgid "Equator of J2000.0"
 msgstr "Miðbaugur J2000.0"
 
-#: src/core/modules/GridLinesMgr.cpp:612
+#: src/core/modules/GridLinesMgr.cpp:615
 msgid "Equator"
 msgstr "Miðbaugur"
 
-#: src/core/modules/GridLinesMgr.cpp:617
+#: src/core/modules/GridLinesMgr.cpp:620
 msgid "Precession Circle"
 msgstr "Pólveltuhringur"
 
-#: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1789
+#: src/core/modules/GridLinesMgr.cpp:624 src/ui_viewDialog.h:1764
 msgid "Horizon"
 msgstr "Sjóndeildarhringur"
 
-#: src/core/modules/GridLinesMgr.cpp:625
+#: src/core/modules/GridLinesMgr.cpp:628
 msgid "Galactic Equator"
 msgstr "Vetrarbaugur"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1801
+#: src/core/modules/GridLinesMgr.cpp:633 src/ui_viewDialog.h:1788
 msgid "O./C. longitude"
 msgstr "Lengdarb. G./S."
 
-#: src/core/modules/GridLinesMgr.cpp:877
+#: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
+#: src/ui_viewDialog.h:1780
+msgid "Prime Vertical"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:641
+msgid "Equinoctial Colure"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:645
+msgid "Solstitial Colure"
+msgstr ""
+
+#: src/core/modules/GridLinesMgr.cpp:905
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial grid"
 msgstr "Miðbaugshnit"
 
-#: src/core/modules/GridLinesMgr.cpp:878 src/ui_viewDialog.h:1757
+#: src/core/modules/GridLinesMgr.cpp:906 src/ui_viewDialog.h:1740
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "Sjónbaugshnit"
 
-#: src/core/modules/GridLinesMgr.cpp:879
+#: src/core/modules/GridLinesMgr.cpp:907
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Ecliptic line"
 msgstr "Sólbaugur"
 
-#: src/core/modules/GridLinesMgr.cpp:880
+#: src/core/modules/GridLinesMgr.cpp:908
 msgid "Ecliptic J2000 line"
 msgstr "Sólbaugslína J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:881
+#: src/core/modules/GridLinesMgr.cpp:909
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equator line"
 msgstr "Miðbaugur himins"
 
-#: src/core/modules/GridLinesMgr.cpp:882
+#: src/core/modules/GridLinesMgr.cpp:910
 msgid "Equator J2000 line"
 msgstr "Miðbaugslína J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:883
+#: src/core/modules/GridLinesMgr.cpp:911
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Meridian line"
 msgstr "Hádegisbaugur"
 
-#: src/core/modules/GridLinesMgr.cpp:884
+#: src/core/modules/GridLinesMgr.cpp:912
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "Sjóndeildarhringur"
 
-#: src/core/modules/GridLinesMgr.cpp:885
+#: src/core/modules/GridLinesMgr.cpp:913
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equatorial J2000 grid"
 msgstr "Miðbaugshnit J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:886
+#: src/core/modules/GridLinesMgr.cpp:914
 msgid "Ecliptic J2000 grid"
 msgstr "Sólbaugshnit J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:887
+#: src/core/modules/GridLinesMgr.cpp:915
 msgid "Ecliptic grid"
 msgstr "Sólbaugshnit"
 
-#: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1761
+#: src/core/modules/GridLinesMgr.cpp:916 src/ui_viewDialog.h:1744
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "Vetrarbrautarhnit"
 
-#: src/core/modules/GridLinesMgr.cpp:889 src/ui_viewDialog.h:1793
+#: src/core/modules/GridLinesMgr.cpp:917 src/ui_viewDialog.h:1768
 msgid "Galactic equator"
 msgstr "Vetrarbaugur"
 
-#: src/core/modules/GridLinesMgr.cpp:890
+#: src/core/modules/GridLinesMgr.cpp:918
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr "Lengdarbaugur gagnstöðu/samstöðu"
 
-#: src/core/modules/GridLinesMgr.cpp:891
+#: src/core/modules/GridLinesMgr.cpp:919
 msgid "Precession Circles"
 msgstr "Pólveltuhringir"
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1607
+#: src/core/modules/GridLinesMgr.cpp:921
+msgid "Colure Lines"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1600
 msgid "Atmosphere"
 msgstr "Lofthjúpur"
 
@@ -174,7 +191,7 @@ msgstr "Lofthjúpur"
 msgid "Fog"
 msgstr "Mistur"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1765
+#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1772
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
 msgstr "Höfuðáttir"
@@ -187,7 +204,7 @@ msgstr "Jörð"
 msgid "Illumination"
 msgstr "Ljósvarp"
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1713
+#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1706
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Labels"
 msgstr "Nöfn"
@@ -210,7 +227,7 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr "Himinhnöttur:"
 
-#: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:217
+#: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:212 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
@@ -232,7 +249,7 @@ msgstr "Gerð: <b>%1</b> (%2)"
 msgid "Opacity: <b>%1</b>"
 msgstr "Ógegnsæi: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:223
+#: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:226
 #: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -242,7 +259,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Birtustig: <b>%1</b> (fallandi í: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:185 src/core/modules/Nebula.cpp:190
-#: src/core/modules/Planet.cpp:226 src/core/modules/MinorPlanet.cpp:221
+#: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:221
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -323,370 +340,370 @@ msgstr "Hliðrun: %1\""
 msgid "Morphological description: "
 msgstr "Formfræðileg lýsing: "
 
-#: src/core/modules/Nebula.cpp:747
+#: src/core/modules/Nebula.cpp:752
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr "há þéttni stjarna nær miðju"
 
-#: src/core/modules/Nebula.cpp:750
+#: src/core/modules/Nebula.cpp:755
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr "þétt miðlæg samsöfnun stjarna"
 
-#: src/core/modules/Nebula.cpp:753
+#: src/core/modules/Nebula.cpp:758
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr "sterkur innri kjarni stjarna"
 
-#: src/core/modules/Nebula.cpp:756
+#: src/core/modules/Nebula.cpp:761
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:761
+#: src/core/modules/Nebula.cpp:766
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr "miðlungsþétt samsöfnun stjarna"
 
-#: src/core/modules/Nebula.cpp:764
+#: src/core/modules/Nebula.cpp:769
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr "fremur lausleg þéttni stjarna nær miðju"
 
-#: src/core/modules/Nebula.cpp:767
+#: src/core/modules/Nebula.cpp:772
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr "lausleg þéttni stjarna nær miðju"
 
-#: src/core/modules/Nebula.cpp:770
+#: src/core/modules/Nebula.cpp:775
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr "lausleg þéttni stjarna"
 
-#: src/core/modules/Nebula.cpp:773
+#: src/core/modules/Nebula.cpp:778
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:776
+#: src/core/modules/Nebula.cpp:781
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:779
+#: src/core/modules/Nebula.cpp:784
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:799
+#: src/core/modules/Nebula.cpp:804
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr "sterk miðlæg samsöfnun stjarna"
 
-#: src/core/modules/Nebula.cpp:802
+#: src/core/modules/Nebula.cpp:807
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:805
+#: src/core/modules/Nebula.cpp:810
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr "engin sjáanleg samsöfnun stjarna"
 
-#: src/core/modules/Nebula.cpp:808
+#: src/core/modules/Nebula.cpp:813
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:811
+#: src/core/modules/Nebula.cpp:816
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:817
+#: src/core/modules/Nebula.cpp:822
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:820
+#: src/core/modules/Nebula.cpp:825
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:823
+#: src/core/modules/Nebula.cpp:828
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:826
+#: src/core/modules/Nebula.cpp:831
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:832
+#: src/core/modules/Nebula.cpp:837
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:835
+#: src/core/modules/Nebula.cpp:840
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:838
+#: src/core/modules/Nebula.cpp:843
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:841
+#: src/core/modules/Nebula.cpp:846
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:845
+#: src/core/modules/Nebula.cpp:850
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr "þyrpingin liggur innan þokuslæðu"
 
-#: src/core/modules/Nebula.cpp:866
+#: src/core/modules/Nebula.cpp:871
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "mjög bjart"
 
-#: src/core/modules/Nebula.cpp:869
+#: src/core/modules/Nebula.cpp:874
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "bjart"
 
-#: src/core/modules/Nebula.cpp:872
+#: src/core/modules/Nebula.cpp:877
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "meðalbirta"
 
-#: src/core/modules/Nebula.cpp:875
+#: src/core/modules/Nebula.cpp:880
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "dauf"
 
-#: src/core/modules/Nebula.cpp:878
+#: src/core/modules/Nebula.cpp:883
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "mjög dauf"
 
-#: src/core/modules/Nebula.cpp:881
+#: src/core/modules/Nebula.cpp:886
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "óvisst birtustig"
 
-#: src/core/modules/Nebula.cpp:884
+#: src/core/modules/Nebula.cpp:889
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "óskráð birtustig endurskinsþoka"
 
-#: src/core/modules/Nebula.cpp:890
+#: src/core/modules/Nebula.cpp:895
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:893
+#: src/core/modules/Nebula.cpp:898
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:896
+#: src/core/modules/Nebula.cpp:901
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:899
+#: src/core/modules/Nebula.cpp:904
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:902
+#: src/core/modules/Nebula.cpp:907
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:905
+#: src/core/modules/Nebula.cpp:910
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr "óskráðar endurskinsþokur"
 
-#: src/core/modules/Nebula.cpp:928
+#: src/core/modules/Nebula.cpp:933
 msgid "circular form"
 msgstr "hringlaga"
 
-#: src/core/modules/Nebula.cpp:931
+#: src/core/modules/Nebula.cpp:936
 msgid "elliptical form"
 msgstr "sporöskjulaga"
 
-#: src/core/modules/Nebula.cpp:934
+#: src/core/modules/Nebula.cpp:939
 msgid "irregular form"
 msgstr "óreglulegt"
 
-#: src/core/modules/Nebula.cpp:937
+#: src/core/modules/Nebula.cpp:942
 msgid "undocumented form"
 msgstr "óskráð lögun"
 
-#: src/core/modules/Nebula.cpp:943
+#: src/core/modules/Nebula.cpp:948
 msgid "amorphous structure"
 msgstr "myndlaus uppbygging"
 
-#: src/core/modules/Nebula.cpp:946
+#: src/core/modules/Nebula.cpp:951
 msgid "conventional structure"
 msgstr "hefðbundin uppbygging"
 
-#: src/core/modules/Nebula.cpp:949
+#: src/core/modules/Nebula.cpp:954
 msgid "filamentary structure"
 msgstr "þráðlaga"
 
-#: src/core/modules/Nebula.cpp:952
+#: src/core/modules/Nebula.cpp:957
 msgid "undocumented structure"
 msgstr "óskráð uppbygging"
 
-#: src/core/modules/Nebula.cpp:958
+#: src/core/modules/Nebula.cpp:963
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "daufust"
 
-#: src/core/modules/Nebula.cpp:961
+#: src/core/modules/Nebula.cpp:966
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "meðalbirta"
 
-#: src/core/modules/Nebula.cpp:964
+#: src/core/modules/Nebula.cpp:969
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "skærust"
 
-#: src/core/modules/Nebula.cpp:967
+#: src/core/modules/Nebula.cpp:972
 msgid "undocumented brightness"
 msgstr "óskráð birtustig"
 
-#: src/core/modules/Nebula.cpp:983
+#: src/core/modules/Nebula.cpp:988
 msgid "galaxy"
 msgstr "vetrarbraut"
 
-#: src/core/modules/Nebula.cpp:986
+#: src/core/modules/Nebula.cpp:991
 msgid "active galaxy"
 msgstr "virk vetrarbraut"
 
-#: src/core/modules/Nebula.cpp:989
+#: src/core/modules/Nebula.cpp:994
 msgid "radio galaxy"
 msgstr "rafaldsvetrarbraut"
 
-#: src/core/modules/Nebula.cpp:992
+#: src/core/modules/Nebula.cpp:997
 msgid "interacting galaxy"
 msgstr "gagnvirk vetrarbraut"
 
-#: src/core/modules/Nebula.cpp:995 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:1000 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr "kvasi"
 
-#: src/core/modules/Nebula.cpp:998
+#: src/core/modules/Nebula.cpp:1003
 msgid "star cluster"
 msgstr "stjörnuþyrping"
 
-#: src/core/modules/Nebula.cpp:1001
+#: src/core/modules/Nebula.cpp:1006
 msgid "open star cluster"
 msgstr "opin stjörnuþyrping"
 
-#: src/core/modules/Nebula.cpp:1004
+#: src/core/modules/Nebula.cpp:1009
 msgid "globular star cluster"
 msgstr "hnattlaga stjörnuþyrping"
 
-#: src/core/modules/Nebula.cpp:1007
+#: src/core/modules/Nebula.cpp:1012
 msgid "nebula"
 msgstr "geimþoka"
 
-#: src/core/modules/Nebula.cpp:1010
+#: src/core/modules/Nebula.cpp:1015
 msgid "planetary nebula"
 msgstr "hringþoka"
 
-#: src/core/modules/Nebula.cpp:1013
+#: src/core/modules/Nebula.cpp:1018
 msgid "dark nebula"
 msgstr "gleypiþoka"
 
-#: src/core/modules/Nebula.cpp:1016
+#: src/core/modules/Nebula.cpp:1021
 msgid "cluster associated with nebulosity"
 msgstr "þyrping með þokuslæðu"
 
-#: src/core/modules/Nebula.cpp:1019
+#: src/core/modules/Nebula.cpp:1024
 msgid "bipolar nebula"
 msgstr "tvípóla geimþoka"
 
-#: src/core/modules/Nebula.cpp:1022
+#: src/core/modules/Nebula.cpp:1027
 msgid "emission nebula"
 msgstr "geislunarþoka"
 
-#: src/core/modules/Nebula.cpp:1025
+#: src/core/modules/Nebula.cpp:1030
 msgid "HII region"
 msgstr "Rafað vetnisský"
 
-#: src/core/modules/Nebula.cpp:1028
+#: src/core/modules/Nebula.cpp:1033
 msgid "reflection nebula"
 msgstr "endurskinsþoka"
 
-#: src/core/modules/Nebula.cpp:1031
+#: src/core/modules/Nebula.cpp:1036
 msgid "supernova remnant"
 msgstr "leifar sprengistjörnu"
 
-#: src/core/modules/Nebula.cpp:1034
+#: src/core/modules/Nebula.cpp:1039
 msgid "stellar association"
 msgstr "stjörnufélag"
 
-#: src/core/modules/Nebula.cpp:1037
+#: src/core/modules/Nebula.cpp:1042
 msgid "star cloud"
 msgstr "stjörnuský"
 
-#: src/core/modules/Nebula.cpp:1040
+#: src/core/modules/Nebula.cpp:1045
 msgid "interstellar matter"
 msgstr "miðgeimsefni"
 
-#: src/core/modules/Nebula.cpp:1043
+#: src/core/modules/Nebula.cpp:1048
 msgid "emission object"
 msgstr "ljómhlutur"
 
-#: src/core/modules/Nebula.cpp:1046
+#: src/core/modules/Nebula.cpp:1051
 msgid "BL Lac object"
 msgstr "BL Lac hlutur"
 
-#: src/core/modules/Nebula.cpp:1049
+#: src/core/modules/Nebula.cpp:1054
 msgid "blazar"
 msgstr "blasi"
 
-#: src/core/modules/Nebula.cpp:1052
+#: src/core/modules/Nebula.cpp:1057
 msgid "molecular cloud"
 msgstr "sameindaský"
 
-#: src/core/modules/Nebula.cpp:1055
+#: src/core/modules/Nebula.cpp:1060
 msgid "young stellar object"
 msgstr "ungstirni"
 
-#: src/core/modules/Nebula.cpp:1058
+#: src/core/modules/Nebula.cpp:1063
 msgid "possible quasar"
 msgstr "mögulegur kvasi"
 
-#: src/core/modules/Nebula.cpp:1061
+#: src/core/modules/Nebula.cpp:1066
 msgid "possible planetary nebula"
 msgstr "mögulega hringþoka"
 
-#: src/core/modules/Nebula.cpp:1064
+#: src/core/modules/Nebula.cpp:1069
 msgid "protoplanetary nebula"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1067 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1072 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "stjarna"
 
-#: src/core/modules/Nebula.cpp:1070
+#: src/core/modules/Nebula.cpp:1075
 msgid "object of unknown nature"
 msgstr "hlutur með óþekkta eiginleika"
 
-#: src/core/modules/Nebula.cpp:1073
+#: src/core/modules/Nebula.cpp:1078
 msgid "undocumented type"
 msgstr "óskráð gerð"
 
@@ -694,93 +711,93 @@ msgstr "óskráð gerð"
 msgid "Deep-sky objects"
 msgstr "Djúpfyrirbæri"
 
-#: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:231
+#: src/core/modules/Planet.cpp:232 src/core/modules/MinorPlanet.cpp:231
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Reyndarbirtustig: %1"
 
-#: src/core/modules/Planet.cpp:256 src/core/modules/MinorPlanet.cpp:248
+#: src/core/modules/Planet.cpp:250 src/core/modules/MinorPlanet.cpp:248
 #: src/core/modules/Comet.cpp:224
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Fjarlægð: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:263 src/core/modules/MinorPlanet.cpp:255
+#: src/core/modules/Planet.cpp:257 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:231
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Fjarlægð: %1AU (%2 Mio km)"
 
-#: src/core/modules/Planet.cpp:277 src/core/modules/Planet.cpp:281
+#: src/core/modules/Planet.cpp:271 src/core/modules/Planet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Sýndarþvermál: %1, með hringjum: %2"
 
-#: src/core/modules/Planet.cpp:288 src/core/modules/Planet.cpp:290
+#: src/core/modules/Planet.cpp:282 src/core/modules/Planet.cpp:284
 #: src/core/modules/MinorPlanet.cpp:266 src/core/modules/MinorPlanet.cpp:268
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Sýndarþvermál: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:306 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Planet.cpp:300 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Stjarnbundinn umferðartími: %1 dagar (%2 a)"
 
-#: src/core/modules/Planet.cpp:309
+#: src/core/modules/Planet.cpp:303
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Stjörnudagur: %1"
 
-#: src/core/modules/Planet.cpp:310
+#: src/core/modules/Planet.cpp:304
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Miðgildi sólardags: %1"
 
-#: src/core/modules/Planet.cpp:314
+#: src/core/modules/Planet.cpp:308
 msgid "The period of rotation is chaotic"
 msgstr "Umferðartími snúnings er óreglulegur"
 
-#: src/core/modules/Planet.cpp:326
+#: src/core/modules/Planet.cpp:320
 msgid "New Moon"
 msgstr "Nýtt tungl"
 
-#: src/core/modules/Planet.cpp:328
+#: src/core/modules/Planet.cpp:322
 msgid "Last Quarter"
 msgstr "Síðasta kvartil"
 
-#: src/core/modules/Planet.cpp:330
+#: src/core/modules/Planet.cpp:324
 msgid "Full Moon"
 msgstr "Fullt tungl"
 
-#: src/core/modules/Planet.cpp:332
+#: src/core/modules/Planet.cpp:326
 msgid "First Quarter"
 msgstr "Fyrsta kvartil"
 
-#: src/core/modules/Planet.cpp:336 src/core/modules/Planet.cpp:341
+#: src/core/modules/Planet.cpp:330 src/core/modules/Planet.cpp:335
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Afstöðuhorn: %1"
 
-#: src/core/modules/Planet.cpp:337 src/core/modules/Planet.cpp:342
+#: src/core/modules/Planet.cpp:331 src/core/modules/Planet.cpp:336
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Álengd: %1"
 
-#: src/core/modules/Planet.cpp:355
+#: src/core/modules/Planet.cpp:349
 #, qt-format
 msgid "Phase: %1"
 msgstr "Birtustaða: %1"
 
-#: src/core/modules/Planet.cpp:356
+#: src/core/modules/Planet.cpp:350
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Upplýst: %1"
 
-#: src/core/modules/Planet.cpp:368
+#: src/core/modules/Planet.cpp:362
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "Myrkvunarstuðull: %1%"
@@ -832,22 +849,22 @@ msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Lengd gashala (ágiskun): %1 Mio km"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:176 src/gui/AstroCalcDialog.cpp:417
+#: src/core/modules/SolarSystem.cpp:177 src/gui/AstroCalcDialog.cpp:417
 #: src/translations.h:62
 msgid "Planets"
 msgstr "Reikistjörnur"
 
-#: src/core/modules/SolarSystem.cpp:177
+#: src/core/modules/SolarSystem.cpp:178
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "Skýringar reikistjarna"
 
-#: src/core/modules/SolarSystem.cpp:178
+#: src/core/modules/SolarSystem.cpp:179
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "Brautir reikistjarna"
 
-#: src/core/modules/SolarSystem.cpp:179
+#: src/core/modules/SolarSystem.cpp:180
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "Ferlar reikistjarna"
@@ -1604,7 +1621,7 @@ msgid "Deep-sky objects background images"
 msgstr "Bakgrunnsmyndir djúpfyrirbæra"
 
 #: src/core/StelMovementMgr.cpp:131 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:555
+#: src/StelMainView.cpp:556
 msgid "Miscellaneous"
 msgstr "Ýmislegt"
 
@@ -1652,28 +1669,28 @@ msgstr "Fannst"
 msgid "Select screenshot directory"
 msgstr "Velja möppu fyrir skjámyndir"
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:790
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Sjónsvið við ræsingu: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:796
+#: src/gui/ConfigurationDialog.cpp:798
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Stefna við ræsingu Áttarh/hæð: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:853
+#: src/gui/ConfigurationDialog.cpp:855
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Authors"
 msgstr "Höfundar"
 
-#: src/gui/ConfigurationDialog.cpp:854 src/gui/ViewDialog.cpp:669
+#: src/gui/ConfigurationDialog.cpp:856 src/gui/ViewDialog.cpp:675
 msgid "Contact"
 msgstr "Tengiliður"
 
-#: src/gui/ConfigurationDialog.cpp:856
+#: src/gui/ConfigurationDialog.cpp:858
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
@@ -1686,9 +1703,9 @@ msgstr "Tengiliður"
 msgid "Version"
 msgstr "Útgáfa"
 
-#: src/gui/ConfigurationDialog.cpp:939
+#: src/gui/ConfigurationDialog.cpp:941
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
-#: plugins/Oculars/src/gui/OcularDialog.cpp:537
+#: plugins/Oculars/src/gui/OcularDialog.cpp:541
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
@@ -1700,23 +1717,23 @@ msgstr "Útgáfa"
 msgid "Author"
 msgstr "Höfundur"
 
-#: src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:945
 msgid "License"
 msgstr "Leyfi"
 
-#: src/gui/ConfigurationDialog.cpp:947
+#: src/gui/ConfigurationDialog.cpp:949
 msgid "Shortcut"
 msgstr "Flýtilykill"
 
-#: src/gui/ConfigurationDialog.cpp:971
+#: src/gui/ConfigurationDialog.cpp:973
 msgid "Running script: "
 msgstr "Keyri skriftu: "
 
-#: src/gui/ConfigurationDialog.cpp:978
+#: src/gui/ConfigurationDialog.cpp:980
 msgid "Running script: [none]"
 msgstr "Keyri skriftu: [engin]"
 
-#: src/gui/ConfigurationDialog.cpp:1043
+#: src/gui/ConfigurationDialog.cpp:1045
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1724,16 +1741,16 @@ msgstr ""
 "Lauk niðurhali á nýjum stjörnuskrám!\n"
 "Endurræstu Stellarium til að sýna þær."
 
-#: src/gui/ConfigurationDialog.cpp:1047
+#: src/gui/ConfigurationDialog.cpp:1049
 msgid "All available star catalogs have been installed."
 msgstr "Allar tiltækar stjörnuskrár hafa verið settar upp."
 
-#: src/gui/ConfigurationDialog.cpp:1052
+#: src/gui/ConfigurationDialog.cpp:1054
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Ná í stjörnuskrá %1 af %2"
 
-#: src/gui/ConfigurationDialog.cpp:1059
+#: src/gui/ConfigurationDialog.cpp:1061
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1742,7 +1759,7 @@ msgstr ""
 "Hala niður %1...\n"
 "(þú mátt loka þessum glugga.)"
 
-#: src/gui/ConfigurationDialog.cpp:1066
+#: src/gui/ConfigurationDialog.cpp:1068
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1753,7 +1770,7 @@ msgstr ""
 "Fjöldi stjarna: %2 milljón\n"
 "Styrksvið: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1109 src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1111 src/gui/ConfigurationDialog.cpp:1147
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1762,11 +1779,11 @@ msgstr ""
 "Villa við niðurhal %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1196
+#: src/gui/ConfigurationDialog.cpp:1200
 msgid "Verifying file integrity..."
 msgstr "Kanna hvort skrá er rétt formuð..."
 
-#: src/gui/ConfigurationDialog.cpp:1200
+#: src/gui/ConfigurationDialog.cpp:1204
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1776,127 +1793,127 @@ msgstr ""
 "Skráin er skemmd."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1271
+#: src/gui/ConfigurationDialog.cpp:1275
 msgid "Algorithm of"
 msgstr "Reiknirit"
 
-#: src/gui/ConfigurationDialog.cpp:1282
+#: src/gui/ConfigurationDialog.cpp:1286
 msgid "Without correction"
 msgstr "Án leiðréttingar"
 
-#: src/gui/ConfigurationDialog.cpp:1283
+#: src/gui/ConfigurationDialog.cpp:1287
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1284
+#: src/gui/ConfigurationDialog.cpp:1288
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1285
+#: src/gui/ConfigurationDialog.cpp:1289
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1286
+#: src/gui/ConfigurationDialog.cpp:1290
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris stjörnualmanakið (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1287
+#: src/gui/ConfigurationDialog.cpp:1291
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1288
+#: src/gui/ConfigurationDialog.cpp:1292
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1289
+#: src/gui/ConfigurationDialog.cpp:1293
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1290
+#: src/gui/ConfigurationDialog.cpp:1294
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1291
+#: src/gui/ConfigurationDialog.cpp:1295
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1292
+#: src/gui/ConfigurationDialog.cpp:1296
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1293
+#: src/gui/ConfigurationDialog.cpp:1297
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1294
+#: src/gui/ConfigurationDialog.cpp:1298
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1295
+#: src/gui/ConfigurationDialog.cpp:1299
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1296
+#: src/gui/ConfigurationDialog.cpp:1300
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1297
+#: src/gui/ConfigurationDialog.cpp:1301
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1298
+#: src/gui/ConfigurationDialog.cpp:1302
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1299
+#: src/gui/ConfigurationDialog.cpp:1303
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1301
+#: src/gui/ConfigurationDialog.cpp:1305
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (með Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1302
+#: src/gui/ConfigurationDialog.cpp:1306
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1303
+#: src/gui/ConfigurationDialog.cpp:1307
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1304
+#: src/gui/ConfigurationDialog.cpp:1308
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1305
+#: src/gui/ConfigurationDialog.cpp:1309
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1306
+#: src/gui/ConfigurationDialog.cpp:1310
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1308
+#: src/gui/ConfigurationDialog.cpp:1312
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1311
+#: src/gui/ConfigurationDialog.cpp:1315
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1312
+#: src/gui/ConfigurationDialog.cpp:1316
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1313
+#: src/gui/ConfigurationDialog.cpp:1317
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1314
+#: src/gui/ConfigurationDialog.cpp:1318
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1315
+#: src/gui/ConfigurationDialog.cpp:1319
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Sérsniðin jafna %1T"
@@ -2070,7 +2087,7 @@ msgstr "OSX hönnuður: %1"
 
 #: src/gui/HelpDialog.cpp:315
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:538
+#: plugins/Oculars/src/gui/OcularDialog.cpp:542
 msgid "Contributors"
 msgstr "Framlög frá"
 
@@ -2195,111 +2212,111 @@ msgid "Frames per second"
 msgstr "Rammar á sekúndu"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:538
+#: src/gui/ViewDialog.cpp:544
 msgid "Excellent dark-sky site"
 msgstr "Frábær dimmur athugunarstaður"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:540
+#: src/gui/ViewDialog.cpp:546
 msgid "Typical truly dark site"
 msgstr "Algengur dimmur athugunarstaður"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:542
+#: src/gui/ViewDialog.cpp:548
 msgid "Rural sky"
 msgstr "Landsbyggðarhiminn"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:544
+#: src/gui/ViewDialog.cpp:550
 msgid "Rural/suburban transition"
 msgstr "Millistig sveitar og úthverfis"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:546
+#: src/gui/ViewDialog.cpp:552
 msgid "Suburban sky"
 msgstr "Úthverfahiminn"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:548
+#: src/gui/ViewDialog.cpp:554
 msgid "Bright suburban sky"
 msgstr "Bjartur himinn úthverfa"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:550
+#: src/gui/ViewDialog.cpp:556
 msgid "Suburban/urban transition"
 msgstr "Millistig borgar og úthverfis"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:558
 msgid "City sky"
 msgstr "Borgarhiminn"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:554
+#: src/gui/ViewDialog.cpp:560
 msgid "Inner-city sky"
 msgstr "Miðbæjarhiminn"
 
-#: src/gui/ViewDialog.cpp:568
+#: src/gui/ViewDialog.cpp:574
 msgid "The naked-eye limiting magnitude is"
 msgstr "Takmörk birtustigs fyrir ber augu er"
 
-#: src/gui/ViewDialog.cpp:592
+#: src/gui/ViewDialog.cpp:598
 msgid "Abbreviated"
 msgstr "Stytt"
 
-#: src/gui/ViewDialog.cpp:593
+#: src/gui/ViewDialog.cpp:599
 msgid "Native"
 msgstr "Innbyggt"
 
-#: src/gui/ViewDialog.cpp:594
+#: src/gui/ViewDialog.cpp:600
 msgid "Translated"
 msgstr "Þýtt"
 
-#: src/gui/ViewDialog.cpp:718
+#: src/gui/ViewDialog.cpp:724
 msgid "No description"
 msgstr "Engin lýsing"
 
-#: src/gui/ViewDialog.cpp:811
+#: src/gui/ViewDialog.cpp:817
 msgid "No shooting stars"
 msgstr "Engin stjörnuhröp"
 
-#: src/gui/ViewDialog.cpp:819
+#: src/gui/ViewDialog.cpp:825
 msgid "Normal rate"
 msgstr "Venjuleg tíðni"
 
-#: src/gui/ViewDialog.cpp:822
+#: src/gui/ViewDialog.cpp:828
 msgid "Standard Orionids rate"
 msgstr "Venjuleg tíðni Óríoníta"
 
-#: src/gui/ViewDialog.cpp:825
+#: src/gui/ViewDialog.cpp:831
 msgid "Standard Perseids rate"
 msgstr "Venjuleg tíðni Persíta"
 
-#: src/gui/ViewDialog.cpp:828
+#: src/gui/ViewDialog.cpp:834
 msgid "Standard Geminids rate"
 msgstr "Venjuleg tíðni Geminíta"
 
-#: src/gui/ViewDialog.cpp:831
+#: src/gui/ViewDialog.cpp:837
 msgid "Exceptional Perseid rate"
 msgstr "Óvenju há tíðni Persíta"
 
-#: src/gui/ViewDialog.cpp:834
+#: src/gui/ViewDialog.cpp:840
 msgid "Meteor storm rate"
 msgstr "Tíðni loftsteinadrífu"
 
-#: src/gui/ViewDialog.cpp:837
+#: src/gui/ViewDialog.cpp:843
 msgid "Exceptional Draconid rate"
 msgstr "Óvenju há tíðni Drakóníta"
 
-#: src/gui/ViewDialog.cpp:840
+#: src/gui/ViewDialog.cpp:846
 msgid "Exceptional Leonid rate"
 msgstr "Óvenju há tíðni Leoníta"
 
-#: src/gui/ViewDialog.cpp:843
+#: src/gui/ViewDialog.cpp:849
 msgid "Very high rate (1966 Leonids)"
 msgstr "Mjög há tíðni (Leonítadrífan 1966)"
 
-#: src/gui/ViewDialog.cpp:846
+#: src/gui/ViewDialog.cpp:852
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Hæsta tíðni (Leonítadrífan 1833)"
 
@@ -2629,7 +2646,7 @@ msgstr "Samstaða"
 msgid "Opposition"
 msgstr "Gagnstaða"
 
-#: src/StelMainView.cpp:461 src/StelMainView.cpp:476
+#: src/StelMainView.cpp:462 src/StelMainView.cpp:477
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2637,30 +2654,30 @@ msgstr ""
 "Ekkert OpenGL 2 fannst á þessu kerfi. Uppfærðu vélbúnaðinn eða notaðu MESA "
 "eða eldri útgáfu."
 
-#: src/StelMainView.cpp:490
+#: src/StelMainView.cpp:491
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Get ekki nálgast nauðsynleg OpenGL tilföng."
 
-#: src/StelMainView.cpp:555
+#: src/StelMainView.cpp:556
 msgid "Save screenshot"
 msgstr "Vista skjámynd"
 
-#: src/StelMainView.cpp:556
+#: src/StelMainView.cpp:557
 msgid "Full-screen mode"
 msgstr "Heilskjár"
 
-#: src/StelMainView.cpp:706
+#: src/StelMainView.cpp:707
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:709
+#: src/StelMainView.cpp:710
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "Ónothæf útgáfa OpenGL. Uppfærðu rekla eða skjákort."
 
-#: src/StelMainView.cpp:751
+#: src/StelMainView.cpp:752
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2671,7 +2688,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:802
+#: src/StelMainView.cpp:803
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2682,7 +2699,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:857
+#: src/StelMainView.cpp:858
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2692,7 +2709,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:898
+#: src/StelMainView.cpp:899
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2703,7 +2720,7 @@ msgstr ""
 "Á að hunsa þessi skilaboð í framtíðinni og reyna að halda samt áfram í "
 "fötluðum ham?"
 
-#: src/StelMainView.cpp:1009
+#: src/StelMainView.cpp:1010
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2820,7 +2837,7 @@ msgid "Reflection nebulae"
 msgstr "Endurskinsþokur"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:101 src/ui_viewDialog.h:1709
+#: src/translations.h:101 src/ui_viewDialog.h:1702
 msgid "Active galaxies"
 msgstr "Virkar vetrarbrautir"
 
@@ -2830,7 +2847,7 @@ msgid "Radio galaxies"
 msgstr "Rafaldsvetrarbrautir"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:105 src/ui_viewDialog.h:1703
+#: src/translations.h:105 src/ui_viewDialog.h:1696
 msgid "Interacting galaxies"
 msgstr "Gagnvirkar vetrarbrautir"
 
@@ -2840,7 +2857,7 @@ msgid "Bright quasars"
 msgstr "Bjartir kvasar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109 src/ui_viewDialog.h:1706
+#: src/translations.h:109 src/ui_viewDialog.h:1699
 msgid "Star clusters"
 msgstr "Stjörnuþyrpingar"
 
@@ -2865,7 +2882,7 @@ msgid "Emission nebulae"
 msgstr "Geislunarþokur"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:119 src/ui_viewDialog.h:1702
+#: src/translations.h:119 src/ui_viewDialog.h:1695
 msgid "Supernova remnants"
 msgstr "Leifar sprengistjarna"
 
@@ -2915,12 +2932,12 @@ msgid "Protoplanetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:139 src/ui_viewDialog.h:1666
+#: src/translations.h:139 src/ui_viewDialog.h:1659
 msgid "Messier Catalogue"
 msgstr "Stjörnuskrá Messiers"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:141 src/ui_viewDialog.h:1669
+#: src/translations.h:141 src/ui_viewDialog.h:1662
 msgid "Caldwell Catalogue"
 msgstr "Stjörnuskrá Caldwells"
 
@@ -4400,10 +4417,10 @@ msgid "&Paste"
 msgstr "&Líma"
 
 #: src/translations.h:567 src/ui_locationDialogGui.h:432
-#: plugins/Oculars/src/ui_ocularDialog.h:1178
-#: plugins/Oculars/src/ui_ocularDialog.h:1188
-#: plugins/Oculars/src/ui_ocularDialog.h:1195
-#: plugins/Oculars/src/ui_ocularDialog.h:1212
+#: plugins/Oculars/src/ui_ocularDialog.h:1180
+#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid "Delete"
 msgstr "Eyða"
 
@@ -4428,7 +4445,7 @@ msgid "&Choose"
 msgstr "V&elja"
 
 #: src/translations.h:573 src/ui_configurationDialog.h:1219
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "Hætta við"
 
@@ -4701,7 +4718,7 @@ msgid "Object"
 msgstr "Fyrirbæri"
 
 #: src/ui_searchDialogGui.h:701
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
 msgid "Coordinate system:"
 msgstr "Hnitakerfi:"
 
@@ -4752,65 +4769,65 @@ msgstr "Leitarvalkostir"
 msgid "Use autofill only from the beginning of words"
 msgstr "Nota sjálfvirka orðafyllingu einungis frá upphafi orða"
 
-#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1804
-#: src/ui_viewDialog.h:1823 src/ui_viewDialog.h:1831
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1795
+#: src/ui_viewDialog.h:1817 src/ui_viewDialog.h:1834
 #: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1231
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Valkostir"
 
-#: src/ui_viewDialog.h:1587
+#: src/ui_viewDialog.h:1580
 msgid "View"
 msgstr "Sýn"
 
-#: src/ui_viewDialog.h:1590
+#: src/ui_viewDialog.h:1583
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
 msgstr "Raunkvarði:"
 
-#: src/ui_viewDialog.h:1591
+#: src/ui_viewDialog.h:1584
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
 msgstr "Afstæður kvarði:"
 
-#: src/ui_viewDialog.h:1592
+#: src/ui_viewDialog.h:1585
 msgid "Milky Way brightness:"
 msgstr "Birtustig Vetrarbrautar:"
 
-#: src/ui_viewDialog.h:1593
+#: src/ui_viewDialog.h:1586
 msgid "Zodiacal Light brightness:"
 msgstr "Birtustig sverðbjarma:"
 
-#: src/ui_viewDialog.h:1594
+#: src/ui_viewDialog.h:1587
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
 msgstr "Stjörnublik:"
 
-#: src/ui_viewDialog.h:1596
+#: src/ui_viewDialog.h:1589
 msgid "Limit the magnitude of stars"
 msgstr "Takmarka birtustig stjarna"
 
-#: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1726
+#: src/ui_viewDialog.h:1591 src/ui_viewDialog.h:1633 src/ui_viewDialog.h:1719
 msgid "Limit magnitude:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1600
+#: src/ui_viewDialog.h:1593
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Dekkja daufar stjörnur þegar bjart fyrirbæri sést á himni"
 
-#: src/ui_viewDialog.h:1602
+#: src/ui_viewDialog.h:1595
 msgid "Dynamic eye adaptation"
 msgstr "Kvik aðlögun augans"
 
-#: src/ui_viewDialog.h:1603 src/ui_viewDialog.h:1645 src/ui_viewDialog.h:1712
+#: src/ui_viewDialog.h:1596 src/ui_viewDialog.h:1638 src/ui_viewDialog.h:1705
 msgid "Labels and Markers"
 msgstr "Nöfn og merkingar"
 
-#: src/ui_viewDialog.h:1605
+#: src/ui_viewDialog.h:1598
 msgid "Show atmosphere"
 msgstr "Sýna lofthjúp"
 
-#: src/ui_viewDialog.h:1609
+#: src/ui_viewDialog.h:1602
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -4818,149 +4835,149 @@ msgstr ""
 "Nota gögn um ljósmengun úr gagnagrunni staðsetninga hunsa stillingar fyrir "
 "ljósmengun hér fyrir neðan"
 
-#: src/ui_viewDialog.h:1611
+#: src/ui_viewDialog.h:1604
 msgid "Light pollution data from locations database"
 msgstr "Nota gögn um ljósmengun úr gagnagrunni staðsetninga"
 
-#: src/ui_viewDialog.h:1612
+#: src/ui_viewDialog.h:1605
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "Ljósmengun:"
 
-#: src/ui_viewDialog.h:1614
+#: src/ui_viewDialog.h:1607
 msgid "pressure, temperature, extinction coefficient"
 msgstr "þrýstingur, hitastig, ljósdeyfingarstuðull"
 
-#: src/ui_viewDialog.h:1616
+#: src/ui_viewDialog.h:1609
 msgid "Refraction/Extinction settings..."
 msgstr "Stillingar ljósbrots/ljósdeyfingar"
 
-#: src/ui_viewDialog.h:1617
+#: src/ui_viewDialog.h:1610
 msgid "Planets and satellites"
 msgstr "Reikistjörnur og tungl"
 
-#: src/ui_viewDialog.h:1618
+#: src/ui_viewDialog.h:1611
 msgid "Show Solar System objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1619
+#: src/ui_viewDialog.h:1612
 msgid "Show planet markers"
 msgstr "Merkja reikistjörnur"
 
-#: src/ui_viewDialog.h:1620
+#: src/ui_viewDialog.h:1613
 msgid "Show planet orbits"
 msgstr "Sýna brautir reikistjarna"
 
-#: src/ui_viewDialog.h:1622
+#: src/ui_viewDialog.h:1615
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
 
-#: src/ui_viewDialog.h:1624
+#: src/ui_viewDialog.h:1617
 msgid "Show orbit for selected planet"
 msgstr "Sýna sporbraut valinnar plánetu"
 
-#: src/ui_viewDialog.h:1626
+#: src/ui_viewDialog.h:1619
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
 
-#: src/ui_viewDialog.h:1628
+#: src/ui_viewDialog.h:1621
 msgid "Show trail only for selected planet"
 msgstr ""
 
-#: src/ui_viewDialog.h:1630
+#: src/ui_viewDialog.h:1623
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1632
+#: src/ui_viewDialog.h:1625
 msgid "Simulate light speed"
 msgstr "Líkja eftir ljóshraða"
 
-#: src/ui_viewDialog.h:1633
+#: src/ui_viewDialog.h:1626
 msgid "Scale Moon:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1635
+#: src/ui_viewDialog.h:1628
 msgid "Scale factor"
 msgstr "Kvörðunargildi"
 
-#: src/ui_viewDialog.h:1638
+#: src/ui_viewDialog.h:1631
 msgid "Limit the magnitude of solar system objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1642
+#: src/ui_viewDialog.h:1635
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Breyta landslagi sjálfvirkt þegar skipt er um plánetur"
 
-#: src/ui_viewDialog.h:1644
+#: src/ui_viewDialog.h:1637
 msgid "Auto select landscapes"
 msgstr "Velja landslag sjálfvirkt"
 
-#: src/ui_viewDialog.h:1647
+#: src/ui_viewDialog.h:1640
 msgid "Settings for sporadic meteors"
 msgstr "Stillingar fyrir óreglulega loftsteina"
 
-#: src/ui_viewDialog.h:1649
+#: src/ui_viewDialog.h:1642
 msgid "Shooting Stars"
 msgstr "Stjörnuhröp"
 
-#: src/ui_viewDialog.h:1651
+#: src/ui_viewDialog.h:1644
 msgid "Hourly zenith rate"
 msgstr "Tíðni á klst. í hvirfilpunkti (ZHR)"
 
-#: src/ui_viewDialog.h:1653
+#: src/ui_viewDialog.h:1646
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1655
+#: src/ui_viewDialog.h:1648
 msgid "Display objects from catalogs"
 msgstr "Sýna hluti úr stjörnuskrám"
 
-#: src/ui_viewDialog.h:1657
+#: src/ui_viewDialog.h:1650
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "Yfirlitsskrá yfir geimþokur og stjörnuþyrpingar"
 
-#: src/ui_viewDialog.h:1660
+#: src/ui_viewDialog.h:1653
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "Ný almenn skrá yfir geimþokur og stjörnuþyrpingar"
 
-#: src/ui_viewDialog.h:1663
+#: src/ui_viewDialog.h:1656
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "Skrá Lynds yfir bjartar geimþokur (Lynds, 1965)"
 
-#: src/ui_viewDialog.h:1672
+#: src/ui_viewDialog.h:1665
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "Skrá Barnard yfir 349 dimma hluti á himinhvolfinu (Barnard, 1927)"
 
-#: src/ui_viewDialog.h:1675
+#: src/ui_viewDialog.h:1668
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "Skrá yfir HII röfuð vetnisský (Sharpless, 1959)"
 
-#: src/ui_viewDialog.h:1678
+#: src/ui_viewDialog.h:1671
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "Skrá yfir endurskinsþokur (Van den Bergh, 1966)"
 
-#: src/ui_viewDialog.h:1681
+#: src/ui_viewDialog.h:1674
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
 "Skrá yfir Hα-geislunarsvæði í sunnanverðri Vetrarbrautinni (Rodgers+, 1960)"
 
-#: src/ui_viewDialog.h:1684
+#: src/ui_viewDialog.h:1677
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "Skrá Lynds yfir gleypiþokur (Lynds, 1962)"
 
-#: src/ui_viewDialog.h:1687
+#: src/ui_viewDialog.h:1680
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "Skrá yfir opnar stjörnuþyrpingar (Collinder, 1931)"
 
-#: src/ui_viewDialog.h:1690
+#: src/ui_viewDialog.h:1683
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
@@ -4968,317 +4985,319 @@ msgstr ""
 "Skrá yfir stjörnuþyrpingar sem sýndar eru á kortaplötum Franklin-Adams "
 "(Melotte, 1915)"
 
-#: src/ui_viewDialog.h:1693
+#: src/ui_viewDialog.h:1686
 msgid "Catalog of galaxies"
 msgstr "Skrá yfir vetrarbrautir"
 
-#: src/ui_viewDialog.h:1696
+#: src/ui_viewDialog.h:1689
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "Almenn skrá Uppsala yfir vetrarbrautir"
 
-#: src/ui_viewDialog.h:1699
+#: src/ui_viewDialog.h:1692
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "Skrá yfir bjartar dreifðar vetrarbrautaþokur (Cederblad, 1946)"
 
-#: src/ui_viewDialog.h:1701
+#: src/ui_viewDialog.h:1694
 msgid "Filter by type"
 msgstr "Sía eftir tegund"
 
-#: src/ui_viewDialog.h:1704
+#: src/ui_viewDialog.h:1697
 msgid "Hydrogen regions"
 msgstr "Vetnisþokur"
 
-#: src/ui_viewDialog.h:1705
+#: src/ui_viewDialog.h:1698
 msgid "Other"
 msgstr "Annað"
 
-#: src/ui_viewDialog.h:1707
+#: src/ui_viewDialog.h:1700
 msgid "Planetary Nebulae"
 msgstr "Hringþokur"
 
-#: src/ui_viewDialog.h:1708
+#: src/ui_viewDialog.h:1701
 msgid "Galaxies"
 msgstr "Vetrarbrautir"
 
-#: src/ui_viewDialog.h:1710
+#: src/ui_viewDialog.h:1703
 msgid "Dark Nebulae"
 msgstr "Gleypiþokur"
 
-#: src/ui_viewDialog.h:1711
+#: src/ui_viewDialog.h:1704
 msgid "Bright Nebulae"
 msgstr "Bjartar geimþokur"
 
-#: src/ui_viewDialog.h:1714
+#: src/ui_viewDialog.h:1707
 msgid "Hints"
 msgstr "Vísbendingar"
 
-#: src/ui_viewDialog.h:1716
+#: src/ui_viewDialog.h:1709
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
 
-#: src/ui_viewDialog.h:1718
+#: src/ui_viewDialog.h:1711
 msgid "Use surface brightness"
 msgstr "Nota yfirborðsbirtu"
 
-#: src/ui_viewDialog.h:1720
+#: src/ui_viewDialog.h:1713
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1722
+#: src/ui_viewDialog.h:1715
 msgid "Use proportional hints"
 msgstr ""
 
-#: src/ui_viewDialog.h:1724
+#: src/ui_viewDialog.h:1717
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 "Takmarka birtustig djúpfyrirbæra (fyrir þá sem eru án hjálpartækja/sjónuka)."
 
-#: src/ui_viewDialog.h:1727
-msgid "Constellations"
-msgstr "Stjörnumerki"
-
-#: src/ui_viewDialog.h:1728
-msgid "Show lines"
-msgstr "Sýna línur"
-
-#: src/ui_viewDialog.h:1729
-msgid "Show labels"
-msgstr "Sýna nöfn"
-
-#: src/ui_viewDialog.h:1730
-msgid "Show boundaries"
-msgstr "Sýna mörk"
-
-#: src/ui_viewDialog.h:1731
-msgid "Show art"
-msgstr "Sýna myndskreytingar"
-
-#. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1732
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
-msgid "Art brightness:"
-msgstr "Birtustig myndskreytinga:"
-
-#: src/ui_viewDialog.h:1733
-msgid "Thickness of lines:"
-msgstr "Breidd lína:"
-
-#: src/ui_viewDialog.h:1735
-msgid "Value in pixels"
-msgstr "Stærð í mynddílum"
-
-#: src/ui_viewDialog.h:1737
+#: src/ui_viewDialog.h:1720
 msgid "Celestial Sphere"
 msgstr "Himinhvelfing"
 
-#: src/ui_viewDialog.h:1739
+#: src/ui_viewDialog.h:1722
 msgid "Equatorial coordinates of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1741
+#: src/ui_viewDialog.h:1724
 msgid "Equatorial grid (J2000)"
 msgstr "Miðbaugshnit (J2000)"
 
-#: src/ui_viewDialog.h:1743
+#: src/ui_viewDialog.h:1726
 msgid "Equatorial coordinates of current date and planet."
 msgstr ""
 
-#: src/ui_viewDialog.h:1745
+#: src/ui_viewDialog.h:1728
 msgid "Equatorial grid (of date)"
 msgstr "Miðbaugshnit (m.v. dagsetningu)"
 
-#: src/ui_viewDialog.h:1747
+#: src/ui_viewDialog.h:1730
 msgid "Ecliptical coordinates for J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1749
+#: src/ui_viewDialog.h:1732
 msgid "Ecliptic grid (J2000)"
 msgstr "Sólbaugshnit (J2000)"
 
-#: src/ui_viewDialog.h:1751
+#: src/ui_viewDialog.h:1734
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
 
-#: src/ui_viewDialog.h:1753
+#: src/ui_viewDialog.h:1736
 msgid "Ecliptic grid (of date)"
 msgstr "Sólbaugshnit (m.v. dagsetningu)"
 
-#: src/ui_viewDialog.h:1755
+#: src/ui_viewDialog.h:1738
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1759
+#: src/ui_viewDialog.h:1742
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "Hnit vetrarbrautar, kerfi II (IAU 1958)."
 
-#: src/ui_viewDialog.h:1763
-msgid "Labels for the Cardinal directions."
-msgstr ""
-
-#: src/ui_viewDialog.h:1767
-msgid ""
-"Instantaneous circles of earth's axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
-msgstr ""
-
-#: src/ui_viewDialog.h:1769
-msgid "Precession circles"
-msgstr "Pólveltuhringir"
-
-#: src/ui_viewDialog.h:1771
+#: src/ui_viewDialog.h:1746
 msgid "Show celestial equator of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1773
+#: src/ui_viewDialog.h:1748
 msgid "Equator (J2000)"
 msgstr "Miðbaugur (J2000)"
 
-#: src/ui_viewDialog.h:1775
+#: src/ui_viewDialog.h:1750
 msgid "Show celestial equator of current planet and date."
 msgstr ""
 
-#: src/ui_viewDialog.h:1777
+#: src/ui_viewDialog.h:1752
 msgid "Equator (of date)"
 msgstr "Miðbaugur (m.v. dagsetningu)"
 
-#: src/ui_viewDialog.h:1779
+#: src/ui_viewDialog.h:1754
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1781
+#: src/ui_viewDialog.h:1756
 msgid "Ecliptic (J2000)"
 msgstr "Sólbaugur (J2000)"
 
-#: src/ui_viewDialog.h:1783
+#: src/ui_viewDialog.h:1758
 msgid "Show ecliptic line of current date."
 msgstr "Sýna sólbaugslínu núverandi dagsetningar."
 
-#: src/ui_viewDialog.h:1785
+#: src/ui_viewDialog.h:1760
 msgid "Ecliptic (of date)"
 msgstr "Sólbaugur (m.v. dagsetningu)"
 
-#: src/ui_viewDialog.h:1787
+#: src/ui_viewDialog.h:1762
 msgid "Show horizon line."
 msgstr "Sýna sjóndeildarhringslínu."
 
-#: src/ui_viewDialog.h:1791
+#: src/ui_viewDialog.h:1766
 msgid "Show Galactic equator line."
 msgstr "Birta miðbaugslínu vetrarbrautar."
 
-#: src/ui_viewDialog.h:1795
+#: src/ui_viewDialog.h:1770
+msgid "Labels for the Cardinal directions."
+msgstr ""
+
+#: src/ui_viewDialog.h:1774
 msgid "Show meridian line."
 msgstr "Sýna hádegisbaugslínu."
 
-#: src/ui_viewDialog.h:1799
+#: src/ui_viewDialog.h:1778
+msgid "Show Prime (East-West) Vertical."
+msgstr ""
+
+#: src/ui_viewDialog.h:1782
+msgid "Show colures (great circles through poles and solstices/equinoxes)."
+msgstr ""
+
+#: src/ui_viewDialog.h:1784
+msgid "Colures"
+msgstr ""
+
+#: src/ui_viewDialog.h:1786
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
 
-#: src/ui_viewDialog.h:1802
+#: src/ui_viewDialog.h:1790
+msgid ""
+"Instantaneous circles of earth's axis on its motion around ecliptical poles. "
+"Displayed on Earth only."
+msgstr ""
+
+#: src/ui_viewDialog.h:1792
+msgid "Precession circles"
+msgstr "Pólveltuhringir"
+
+#: src/ui_viewDialog.h:1793
 msgid "Projection"
 msgstr "Vörpun :"
 
-#: src/ui_viewDialog.h:1803
+#: src/ui_viewDialog.h:1794
 msgid "Vertical viewport offset"
 msgstr "Lóðrétt hliðrun glugga"
 
-#: src/ui_viewDialog.h:1805
-msgid "Use this landscape as default"
-msgstr "Nota þetta landslag sem sjálfgefið"
-
-#: src/ui_viewDialog.h:1806
-msgid "Use associated planet and position"
-msgstr "Nota tengda reikistjörnu og stöðu"
-
-#: src/ui_viewDialog.h:1807
-msgid "Show fog"
-msgstr "Sýna mistur"
-
-#: src/ui_viewDialog.h:1808
+#: src/ui_viewDialog.h:1796
 msgid "Show ground"
 msgstr "Sýna yfirborð"
 
-#: src/ui_viewDialog.h:1810
+#: src/ui_viewDialog.h:1797
+msgid "Use this landscape as default"
+msgstr "Nota þetta landslag sem sjálfgefið"
+
+#: src/ui_viewDialog.h:1798
+msgid "Use associated planet and position"
+msgstr "Nota tengda reikistjörnu og stöðu"
+
+#: src/ui_viewDialog.h:1799
+msgid "Show landscape labels"
+msgstr "Sýna merkingar í landslagi"
+
+#: src/ui_viewDialog.h:1800
+msgid "Show fog"
+msgstr "Sýna mistur"
+
+#: src/ui_viewDialog.h:1802
+msgid "Show illumination layer (bright windows, light pollution, etc.)"
+msgstr "Birta lýsingarlag (upplýstir gluggar, ljósmengun, o.s.frv.)"
+
+#: src/ui_viewDialog.h:1804
+msgid "Show illumination "
+msgstr ""
+
+#: src/ui_viewDialog.h:1806
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "Nota lágmarks birtustig svo landslag sé einnig sýnilegt í myrkri"
 
-#: src/ui_viewDialog.h:1812
+#: src/ui_viewDialog.h:1808
 msgid "Minimal brightness:"
 msgstr "Lágmarks birtustig:"
 
-#: src/ui_viewDialog.h:1814
+#: src/ui_viewDialog.h:1810
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "Svið gildis frá 0 - 1 (landslag svart í myrkri - landslag fullbjart)"
 
-#: src/ui_viewDialog.h:1817
+#: src/ui_viewDialog.h:1813
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 "Nota lágmarks birtustig eins og það gæti verið skilgreint í landscape.ini"
 
-#: src/ui_viewDialog.h:1819
+#: src/ui_viewDialog.h:1815
 msgid "from landscape, if given"
 msgstr "úr landslagi, ef gefið upp"
 
-#: src/ui_viewDialog.h:1820
-msgid "Show landscape labels"
-msgstr "Sýna merkingar í landslagi"
-
-#: src/ui_viewDialog.h:1821
-msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr "Birta lýsingarlag (upplýstir gluggar, ljósmengun, o.s.frv.)"
-
-#: src/ui_viewDialog.h:1822
+#: src/ui_viewDialog.h:1816
 msgid "Add/remove landscapes..."
 msgstr "Bæta við/fjarlægja landslag..."
 
-#: src/ui_viewDialog.h:1824
+#: src/ui_viewDialog.h:1818
 msgid "Use this sky culture as default"
 msgstr "Nota þetta stjörnumerkjakerfi sem sjálfgefið"
 
-#: src/ui_viewDialog.h:1825
-msgid "Show names"
-msgstr "Birta nöfn"
+#: src/ui_viewDialog.h:1819
+msgid "Show labels"
+msgstr "Sýna nöfn"
 
-#: src/ui_viewDialog.h:1827
+#: src/ui_viewDialog.h:1821
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "Velja hvort þú vilt að nöfn séu stytt, upprunaleg eða þýdd"
 
-#: src/ui_viewDialog.h:1830
+#: src/ui_viewDialog.h:1825
 msgid "Use native names for planets from current culture"
 msgstr "Nota upprunaleg nöfn pláneta úr viðkomandi stjörnumerkjakerfi"
 
+#: src/ui_viewDialog.h:1827
+msgid "Use native names for planets"
+msgstr ""
+
+#: src/ui_viewDialog.h:1828
+msgid "Show lines with thickness"
+msgstr ""
+
+#: src/ui_viewDialog.h:1830
+msgid "Value in pixels"
+msgstr "Stærð í mynddílum"
+
 #: src/ui_viewDialog.h:1832
+msgid "Show art in brightness"
+msgstr ""
+
+#: src/ui_viewDialog.h:1833
+msgid "Show boundaries"
+msgstr "Sýna mörk"
+
+#: src/ui_viewDialog.h:1835
 msgid "Visible"
 msgstr "Sýnilegt"
 
-#: src/ui_viewDialog.h:1837
+#: src/ui_viewDialog.h:1840
 msgid "Sky"
 msgstr "Himinn"
 
-#: src/ui_viewDialog.h:1839
+#: src/ui_viewDialog.h:1842
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "DFB"
 
-#: src/ui_viewDialog.h:1841
+#: src/ui_viewDialog.h:1844
 msgid "Deep-Sky Objects"
 msgstr "Djúpfyrirbæri"
 
-#: src/ui_viewDialog.h:1844
+#: src/ui_viewDialog.h:1847
 msgid "Markings"
 msgstr "Merkingar"
 
-#: src/ui_viewDialog.h:1846
+#: src/ui_viewDialog.h:1849
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "Landslag"
 
-#: src/ui_viewDialog.h:1848
+#: src/ui_viewDialog.h:1851
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "Stjörnumerki"
@@ -6152,7 +6171,7 @@ msgid "Restore default settings"
 msgstr "Endurheimta sjálfgefnar stillingar"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1220
+#: plugins/Oculars/src/ui_ocularDialog.h:1222
 #: plugins/Satellites/src/ui_satellitesDialog.h:793
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -6186,7 +6205,7 @@ msgid "Compass marks"
 msgstr "Áttavitastrik"
 
 #: plugins/Oculars/src/Oculars.cpp:81 plugins/Oculars/src/Oculars.cpp:1320
-#: plugins/Oculars/src/ui_ocularDialog.h:1153
+#: plugins/Oculars/src/ui_ocularDialog.h:1155
 msgid "Oculars"
 msgstr "Augngler"
 
@@ -6253,7 +6272,7 @@ msgid "&Reset rotation"
 msgstr "&Núllstilla snúning"
 
 #: plugins/Oculars/src/Oculars.cpp:1321
-#: plugins/Oculars/src/ui_ocularDialog.h:1155
+#: plugins/Oculars/src/ui_ocularDialog.h:1157
 msgid "Ocular view"
 msgstr "Augnglersskoðun"
 
@@ -6515,39 +6534,39 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
 msgid "tFOV:"
 msgstr "tFOV:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:521
+#: plugins/Oculars/src/gui/OcularDialog.cpp:525
 msgid "Magnification factor:"
 msgstr "Stækkunarstuðull:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:525
-#: plugins/Oculars/src/ui_ocularDialog.h:1180
+#: plugins/Oculars/src/gui/OcularDialog.cpp:529
+#: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
-#: plugins/Oculars/src/ui_ocularDialog.h:1181
-#: plugins/Oculars/src/ui_ocularDialog.h:1214
+#: plugins/Oculars/src/gui/OcularDialog.cpp:530
+#: plugins/Oculars/src/ui_ocularDialog.h:1183
+#: plugins/Oculars/src/ui_ocularDialog.h:1216
 msgid "Focal length:"
 msgstr "Brennivídd:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:539
 msgid "Oculars Plug-in"
 msgstr "Augnglerjaviðbót (Oculars)"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:538
+#: plugins/Oculars/src/gui/OcularDialog.cpp:542
 msgid "Barlow lens feature"
 msgstr "Barlow linsueiginleiki"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:542
+#: plugins/Oculars/src/gui/OcularDialog.cpp:546
 msgid "Overview"
 msgstr "Yfirlit"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:548
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -6559,7 +6578,7 @@ msgstr ""
 "og sjónaukum, auk þess að sýsla með myndflögur. Þegar þú keyrir viðbótina í "
 "fyrsta skipti fylgja með nokkur sýnishorn til að koma þér í gang."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:545
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -6570,14 +6589,14 @@ msgid ""
 "recommend that you leave it off, unless you feel you have a need of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:546
+#: plugins/Oculars/src/gui/OcularDialog.cpp:550
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:547
+#: plugins/Oculars/src/gui/OcularDialog.cpp:551
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -6586,218 +6605,218 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:552
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Ef þú finnur einhverja hnökra, láttu mig vita. Njóttu vel!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:551
+#: plugins/Oculars/src/gui/OcularDialog.cpp:555
 msgid "Hot Keys"
 msgstr "Flýtilyklar"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:552
+#: plugins/Oculars/src/gui/OcularDialog.cpp:556
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:566
-#: plugins/Oculars/src/gui/OcularDialog.cpp:571
+#: plugins/Oculars/src/gui/OcularDialog.cpp:570
+#: plugins/Oculars/src/gui/OcularDialog.cpp:575
 msgid "[no key defined]"
 msgstr "(engir lyklar skilgreindir)"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:575
+#: plugins/Oculars/src/gui/OcularDialog.cpp:579
 msgid "Switches on/off the ocular overlay."
 msgstr "Víxlar augnglersyfirlagi af/á."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:579
+#: plugins/Oculars/src/gui/OcularDialog.cpp:583
 msgid "Opens the pop-up navigation menu."
 msgstr "Opnar flakkvalmyndina."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1156
+#: plugins/Oculars/src/ui_ocularDialog.h:1158
 msgid "Enable only if an object is selected"
 msgstr "Virkja eingöngu ef hlutur er valinn"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1157
+#: plugins/Oculars/src/ui_ocularDialog.h:1159
 msgid "Scale image circle"
 msgstr "Kvarða myndhring"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1159
+#: plugins/Oculars/src/ui_ocularDialog.h:1161
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1161
+#: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid "Limit stellar magnitude"
 msgstr "Takmarka birtustig stjarna"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1162
+#: plugins/Oculars/src/ui_ocularDialog.h:1164
 msgid "Key mappings"
 msgstr "Lyklavörpun"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1163
+#: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Toggle ocular view:"
 msgstr "Víxla augnglersskoðun af/á:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1165
+#: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Open pop-up navigation menu:"
 msgstr "Opna flakkvalmynd:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1166
+#: plugins/Oculars/src/ui_ocularDialog.h:1168
 msgid "Interface"
 msgstr "Viðmót"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1167
+#: plugins/Oculars/src/ui_ocularDialog.h:1169
 msgid "On-screen control panel"
 msgstr "Stjórnborð á skjá"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1169
+#: plugins/Oculars/src/ui_ocularDialog.h:1171
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1171
+#: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Restore FOV to initial values"
 msgstr "Frumstilla sjónsvið á upphafleg gildi"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1172
+#: plugins/Oculars/src/ui_ocularDialog.h:1174
 msgid "Sensor view"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1173
+#: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1174
+#: plugins/Oculars/src/ui_ocularDialog.h:1176
 msgid "Use flip for CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1175
+#: plugins/Oculars/src/ui_ocularDialog.h:1177
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "Almennt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1176
-#: plugins/Oculars/src/ui_ocularDialog.h:1185
+#: plugins/Oculars/src/ui_ocularDialog.h:1178
+#: plugins/Oculars/src/ui_ocularDialog.h:1187
 msgid "Eyepieces"
 msgstr "Augngler"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1177
-#: plugins/Oculars/src/ui_ocularDialog.h:1187
-#: plugins/Oculars/src/ui_ocularDialog.h:1194
-#: plugins/Oculars/src/ui_ocularDialog.h:1211
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
-msgid "Add"
-msgstr "Bæta við"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
 #: plugins/Oculars/src/ui_ocularDialog.h:1196
 #: plugins/Oculars/src/ui_ocularDialog.h:1213
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
+msgid "Add"
+msgstr "Bæta við"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1181
+#: plugins/Oculars/src/ui_ocularDialog.h:1191
+#: plugins/Oculars/src/ui_ocularDialog.h:1198
+#: plugins/Oculars/src/ui_ocularDialog.h:1215
 #: plugins/Satellites/src/ui_satellitesDialog.h:760
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
 #: plugins/TelescopeControl/src/ui_storedPointsDialog.h:234
 msgid "Name:"
 msgstr "Heiti:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1182
+#: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Field stop:"
 msgstr "Sjónsviðsstopp:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1183
+#: plugins/Oculars/src/ui_ocularDialog.h:1185
 msgid "Binoculars"
 msgstr "Handsjónaukar"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1184
+#: plugins/Oculars/src/ui_ocularDialog.h:1186
 msgid "Has permanent cross-hairs"
 msgstr "Er með fast krossmið"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1186
-#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Lenses"
 msgstr "Linsur"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1192
 msgid "Multiplier:"
 msgstr "Margfaldari"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1191
+#: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1193
-#: plugins/Oculars/src/ui_ocularDialog.h:1209
+#: plugins/Oculars/src/ui_ocularDialog.h:1195
+#: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Sensors"
 msgstr "Skynjarar"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid "Resolution x (pixels):"
 msgstr "Upplausn x (mynddílar):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1198
+#: plugins/Oculars/src/ui_ocularDialog.h:1200
 msgid "Resolution y (pixels):"
 msgstr "Upplausn y (mynddílar):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1201
 msgid "Chip height (mm):"
 msgstr "Hæð myndflögu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1202
 msgid "Chip width (mm):"
 msgstr "Breidd myndflögu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1201
+#: plugins/Oculars/src/ui_ocularDialog.h:1203
 msgid "Pixel width (micron):"
 msgstr "Breidd mynddíla (míkron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1204
 msgid "Pixel height (micron):"
 msgstr "Hæð mynddíla (míkron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:1205
 msgid "Prism/CCD distance (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1206
 msgid "Prism/CCD height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid "Prism/CCD width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Position angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1207
+#: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "Off-Axis guider"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1208
+#: plugins/Oculars/src/ui_ocularDialog.h:1210
 msgid "Rotation Angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1210
-#: plugins/Oculars/src/ui_ocularDialog.h:1219
+#: plugins/Oculars/src/ui_ocularDialog.h:1212
+#: plugins/Oculars/src/ui_ocularDialog.h:1221
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Sjónaukar"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1215
+#: plugins/Oculars/src/ui_ocularDialog.h:1217
 msgid "Diameter:"
 msgstr "Þvermál:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1216
+#: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Horizontal flip"
 msgstr "Spegla lárétt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1217
+#: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Vertical flip"
 msgstr "Spegla lóðrétt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1218
+#: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Equatorial Mount"
 msgstr ""
 
@@ -7532,11 +7551,11 @@ msgstr "Færa sjónauka #%1 á punktinn sem núna er á miðjum skjánum"
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Færa sjónauka á uppgefin hnit"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:151
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:195
 msgid "Add New Telescope"
 msgstr "Bæta við nýjum sjónauka"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:161
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:205
 msgid "Configure Telescope"
 msgstr "Stilla sjónauka"
 
@@ -7745,121 +7764,121 @@ msgstr ""
 msgid "Configure &telescopes..."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:461
 msgid "Telescope Configuration"
 msgstr "Stillingar sjónauka"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:463
 msgid "Telescope controlled by:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:474
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:465
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:476
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:467
 msgid "Stellarium, directly through a serial port"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:478
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:469
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:480
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:471
 msgid "External software or a remote computer"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:473
 msgid "Telescope properties"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:475
 msgid "Connection delay:"
 msgstr "Seinkun tengingar:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:477
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium.\n"
 "Increase this value if the reticle is skipping."
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:481
 msgid "J2000 (default)"
 msgstr "J2000 (sjálfgefið)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:482
 msgid "Equinox of the date (JNow)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:484
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:486
 msgid "Start/connect at startup"
 msgstr "Ræsa/tengja við ræsingu"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:487
 msgid "Device settings"
 msgstr "Stillingar tækis"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:497
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:488
 msgid "Serial port:"
 msgstr "Raðtengi (serial):"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Device model:"
 msgstr "Tegund tækis:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:499
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "Connection settings"
 msgstr "Tengistillingar"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Host:"
 msgstr "Vél:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:502
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
 "Host name or IPv4 address of the machine that hosts the telescope server"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:504
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:495
 msgid "TCP port:"
 msgstr "TCP gátt:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:496
 msgid "User interface settings"
 msgstr "Stillingar notendaviðmóts"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:498
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:509
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:500
 msgid "Use field of view indicators"
 msgstr "Nota vísbendingar fyrir sjónsvið"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:501
 msgid "Circle size(s):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:503
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:515
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:506
 msgid "OK"
 msgstr "Í lagi"
 
@@ -8261,6 +8280,11 @@ msgstr "Sýna stjörnur"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Colors"
 msgstr "Litir"
+
+#. TRANSLATORS: Refers to constellation art
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
+msgid "Art brightness:"
+msgstr "Birtustig myndskreytinga:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:353
 msgid "Nebula names"
@@ -10983,21 +11007,21 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2096
+#: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2105
+#: plugins/Scenery3d/src/Scenery3d.cpp:2120
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2115
+#: plugins/Scenery3d/src/Scenery3d.cpp:2130
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2636
+#: plugins/Scenery3d/src/Scenery3d.cpp:2651
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
@@ -11988,6 +12012,12 @@ msgstr "Núverandi pláneta: Satúrnus"
 #~ msgid "144000"
 #~ msgstr "144000"
 
+#~ msgid "Constellations"
+#~ msgstr "Stjörnumerki"
+
+#~ msgid "Show lines"
+#~ msgstr "Sýna línur"
+
 #~ msgid "Program language"
 #~ msgstr "Tungumál forrits"
 
@@ -12300,6 +12330,9 @@ msgstr "Núverandi pláneta: Satúrnus"
 #~ msgid "Galactic plane line"
 #~ msgstr "Lýna fyrir vetrarbrautarflöt"
 
+#~ msgid "Show art"
+#~ msgstr "Sýna myndskreytingar"
+
 #, qt-format
 #~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 #~ msgstr "Sýndarbirtustig: <b>%1</b> (með ljósdeyfingu)"
@@ -12561,6 +12594,9 @@ msgstr "Núverandi pláneta: Satúrnus"
 
 #~ msgid "Ecliptic grid (on J2000)"
 #~ msgstr "Sólbaugshnit (á J2000)"
+
+#~ msgid "Show names"
+#~ msgstr "Birta nöfn"
 
 #~ msgid "Topocentric equatorial coordinates"
 #~ msgstr "staðbundið miðbaugs-hnitakerfi"
