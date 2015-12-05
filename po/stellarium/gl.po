@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-02 21:36+0600\n"
-"PO-Revision-Date: 2015-12-01 16:45+0000\n"
+"PO-Revision-Date: 2015-12-04 19:36+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-03 05:19+0000\n"
-"X-Generator: Launchpad (build 17856)\n"
+"X-Launchpad-Export-Date: 2015-12-05 05:14+0000\n"
+"X-Generator: Launchpad (build 17862)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
@@ -95,15 +95,15 @@ msgstr "Lonxitude O/C"
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
 #: src/ui_viewDialog.h:1780
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Vertical Primordial"
 
 #: src/core/modules/GridLinesMgr.cpp:641
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "Coluro Equinoccial"
 
 #: src/core/modules/GridLinesMgr.cpp:645
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Coluro Solsticial"
 
 #: src/core/modules/GridLinesMgr.cpp:905
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -176,7 +176,7 @@ msgstr "Círculos de Precesión"
 
 #: src/core/modules/GridLinesMgr.cpp:921
 msgid "Colure Lines"
-msgstr ""
+msgstr "Liñas de Coluro"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1600
 msgid "Atmosphere"
@@ -5265,15 +5265,18 @@ msgstr "Amosar liña do meridiano."
 
 #: src/ui_viewDialog.h:1778
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Amosar Vertical Primordial (Leste-Oeste)"
 
 #: src/ui_viewDialog.h:1782
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
+"Amosar coluros (cada un dos dous círculos máximos que, na esfera celeste, "
+"pasan polos polos e cortan a eclíptica nos puntos equinocciais e nos puntos "
+"solsticiais)."
 
 #: src/ui_viewDialog.h:1784
 msgid "Colures"
-msgstr ""
+msgstr "Coluros"
 
 #: src/ui_viewDialog.h:1786
 msgid ""
@@ -5329,7 +5332,7 @@ msgstr "Amosar a capa de iluminación (ventá de brillo, polución lumínica...)
 
 #: src/ui_viewDialog.h:1804
 msgid "Show illumination "
-msgstr ""
+msgstr "Amosar iluminación "
 
 #: src/ui_viewDialog.h:1806
 msgid "Use minimal brightness to leave landscape visible also in darkness"
@@ -5378,11 +5381,11 @@ msgstr "Usar nomes nativos da cultura actual para os planetas"
 
 #: src/ui_viewDialog.h:1827
 msgid "Use native names for planets"
-msgstr ""
+msgstr "Usar nomes nativos para os planetas"
 
 #: src/ui_viewDialog.h:1828
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Amosar as liñas con espesor"
 
 #: src/ui_viewDialog.h:1830
 msgid "Value in pixels"
