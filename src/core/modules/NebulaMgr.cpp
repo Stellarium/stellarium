@@ -2146,6 +2146,16 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					result << QString("Mel %1").arg(n->Mel_nb);
 			}
 			break;
+		case 150: // Dwarf galaxies
+			{
+			QStringList dwarfGalaxies;
+			dwarfGalaxies  << "PGC 3589" << "PGC 3792" << "PGC 6830" << "PGC 10074" << "PGC 19441"
+				       << "PGC 28913" << "PGC 29194" << "PGC 29653" << "PGC 50779" << "PGC 54074"
+				       << "PGC 60095" << "PGC 63287" << "PGC 69519" << "PGC 88608" << "PGC 2807155"
+				       << "PGC 3097691";
+			result = dwarfGalaxies;
+			}
+			break;
 		default:
 			foreach(const NebulaP& n, dsoArray)
 			{
