@@ -1457,7 +1457,6 @@ void StelPainter::drawCircle(float x, float y, float r)
 	enableClientStates(false);
 }
 
-
 void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};

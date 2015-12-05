@@ -277,12 +277,13 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 	} else {
 		gui->getButtonBar()->hideButton("actionShow_EquationOfTime");
 	}
-	flagShowEOTButton = b;
+	flagShowEOTButton = b;	
 }
 
 void EquationOfTime::enableEquationOfTime(bool b)
 {
 	flagShowSolutionEquationOfTime = b;
+	emit equationOfTimeStateChanged(b);
 }
 
 void EquationOfTime::setFlagInvertedValue(bool b)

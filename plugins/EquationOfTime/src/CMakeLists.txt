@@ -1,20 +1,22 @@
 INCLUDE_DIRECTORIES(
-  ${CMAKE_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src
-  ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src/gui
-  . gui)
+     .
+     gui
+     ${CMAKE_BINARY_DIR}
+     ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src
+     ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src/gui
+)
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(EQUATIONOFTIME_SRCS
-  EquationOfTime.hpp
-  EquationOfTime.cpp
-  gui/EquationOfTimeWindow.hpp
-  gui/EquationOfTimeWindow.cpp
-  )
+     EquationOfTime.hpp
+     EquationOfTime.cpp
+     gui/EquationOfTimeWindow.hpp
+     gui/EquationOfTimeWindow.cpp
+)
 
 SET(EQUATIONOFTIME_UIS
-  gui/equationOfTimeWindow.ui
+     gui/equationOfTimeWindow.ui
 )
 
 QT5_WRAP_UI(EQUATIONOFTIME_UIS_H ${EQUATIONOFTIME_UIS})

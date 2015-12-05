@@ -128,7 +128,11 @@ static void InitEll(const double q, const double n, const double e, const double
 //	}
 //	GZ: Comet orbits are quite often near-parabolic, where this may still only converge slowly.
 //	Better always use Laguerre-Conway. See Heafner, Ch. 5.3
+//	Ouch! https://bugs.launchpad.net/stellarium/+bug/1465112 ==>It seems we still need an escape counter!
+//      Debug line in test case fabs(E-Ep) indicates it usually takes 2-3, occasionally up to 6 cycles.
+//	It seems safe to assume 10 should not be exceeded. N.B.: A GPU fixed-loopcount implementation could go for 8 passes.
 	double E=M+0.85*e*StelUtils::sign(sin(M));
+	int escape=0;
 	for (;;)
 	{
 		const double Ep=E;
@@ -136,7 +140,17 @@ static void InitEll(const double q, const double n, const double e, const double
 		const double f=E-f2-M;
 		const double f1=1.0-e*cos(E);
 		E+= (-5.0*f)/(f1+StelUtils::sign(f1)*std::sqrt(fabs(16.0*f1*f1-20.0*f*f2)));
-		if (fabs(E-Ep) < EPSILON) break;
+		if (fabs(E-Ep) < EPSILON)
+		{
+			//qDebug() << "Ell. orbit with eccentricity " << e << "Escaping after" << escape << "loops at E-Ep=" << E-Ep;
+			break;
+		}
+		escape++;
+		if (escape>10)
+		{
+			qDebug() << "Ell. orbit with eccentricity " << e << "would have caused endless loop. Escaping after 10 runs at E-Ep=" << E-Ep;
+			break;
+		}
 	}
 //	Note: q=a*(1-e)
 	const double h1 = q*std::sqrt((1.0+e)/(1.0-e));  // elsewhere: a sqrt(1-e²)     ... q / (1-e) sqrt( (1+e)(1-e)) = q sqrt((1+e)/(1-e))

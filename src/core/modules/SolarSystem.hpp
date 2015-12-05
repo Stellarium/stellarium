@@ -331,6 +331,9 @@ public:
 	//! Reload the planets
 	void reloadPlanets();
 
+	//! Determines relative amount of sun visible from the observer's position.
+	double getEclipseFactor(const StelCore *core) const;
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -387,6 +390,9 @@ private:
 	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
+
+	//! Set flag who enable display a permanent orbits for objects or not
+	void setFlagPermanentOrbits(bool b);
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;

@@ -51,8 +51,7 @@ private:
 
 	void setAboutHtml();
 
-private slots:
-	void saveAngleMeasureSettings();
+private slots:	
 	void resetAngleMeasureSettings();
 };
 

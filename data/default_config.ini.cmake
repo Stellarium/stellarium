@@ -145,6 +145,8 @@ equatorial_color                       = 0.2,0.3,0.8
 galactic_color                      = 0.0,0.3,0.2
 galactic_equator_color              = 0.5,0.3,0.1
 meridian_color                      = 0.2,0.6,0.2
+prime_vertical_color                = 0.18,0.54,0.18
+colures_color                       = 0.5,0.0,0.5
 longitude_color                     = 0.2,0.4,0.4
 horizon_color                       = 0.2,0.6,0.2
 const_lines_color                   = 0.2,0.2,0.6
@@ -268,6 +270,8 @@ labels_amount                       = 3.0
 nebula_hints_amount                 = 3.0
 flag_star_magnitude_limit           = false
 star_magnitude_limit                = 6.5
+flag_planet_magnitude_limit         = false
+planet_magnitude_limit              = 6.5
 flag_nebula_magnitude_limit         = false
 nebula_magnitude_limit              = 8.5
 

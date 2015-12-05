@@ -23,6 +23,7 @@
 #include "StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
+#include "LandscapeMgr.hpp"
 #include "Planet.hpp"
 #include "planetsephems/precession.h"
 #include "StelObserver.hpp"
@@ -51,6 +52,8 @@ Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 
+bool Planet::permanentDrawingOrbits = false;
+
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
 Planet::PlanetShaderVars Planet::planetShaderVars;
 QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
@@ -65,7 +68,7 @@ Planet::Planet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
 	       double oblateness,
-	       Vec3f color,
+	       Vec3f halocolor,
 	       float albedo,
 	       const QString& atexMapName,
 	       const QString& anormalMapName,
@@ -81,7 +84,7 @@ Planet::Planet(const QString& englishName,
 	  flagLighting(flagLighting),
 	  radius(radius),
 	  oneMinusOblateness(1.0-oblateness),
-	  color(color),
+	  haloColor(halocolor),
 	  albedo(albedo),
 	  axisRotation(0.),
 	  rings(NULL),
@@ -197,6 +200,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 {
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	Q_UNUSED(az_app);
 
 	if (flags&Name)
 	{
@@ -215,7 +222,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Magnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
 	{
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 											QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 		else
@@ -232,15 +239,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// For now: add to EclipticCoord
 	//if (flags&EclipticCoord)
 	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
-//	if (flags&Extra)
-//	{
-//		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-//		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
-//		if (core->getCurrentLocation().planetName=="Earth")
-//			oss << q_("Ecliptic obliquity (of date): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
-//		//if (englishName!="Sun")
-//		//	oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
-//	}
 
 	if (flags&Distance)
 	{
@@ -269,13 +267,21 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
-			oss << q_("Apparent diameter: %1, with rings: %2")
-			       .arg(StelUtils::radToDmsStr(withoutRings, true),
-			            StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDecDegStr(withoutRings,4,false,true),
+					    StelUtils::radToDecDegStr(angularSize,4,false,true));
+			else
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDmsStr(withoutRings, true),
+					    StelUtils::radToDmsStr(angularSize, true));
 		}
 		else
 		{
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			else
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
 		}
 		oss << "<br>";
 	}
@@ -319,8 +325,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			if (deg>=267.5 && deg<=272.5)
 				phase = q_("First Quarter");
 
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			if (withDecimalDegree)
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			}
+			else
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			}
 
 			if (englishName=="Moon" && !phase.isEmpty())
 			{
@@ -334,6 +348,19 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 			oss << QString(q_("Phase: %1")).arg(phase) << "<br>";
 			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
+		}
+		if (englishName=="Sun")
+		{
+			// Only show during eclipse, show percent?
+			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+			// Debug solution:
+//			float eclipseFactor = ssystem->getEclipseFactor(core);
+//			oss << QString(q_("Eclipse Factor: %1 alpha: %2")).arg(eclipseFactor).arg(-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor))) << "<br>";
+			// Release version:
+			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
+			if (eclipseFactor>0.f)
+				oss << QString(q_("Eclipse Factor: %1%")).arg(eclipseFactor) << "<br>";
+
 		}
 	}
 
@@ -485,8 +512,8 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE)
 {
-	// Make sure the parent position is computed for the dateJD, otherwise
-	// getHeliocentricPos() would return incorect values.
+	// Make sure the parent position is computed for the dateJDE, otherwise
+	// getHeliocentricPos() would return incorrect values.
 	if (parent)
 		parent->computePositionWithoutOrbits(dateJDE);
 
@@ -508,7 +535,7 @@ void Planet::computePosition(const double dateJDE)
 		}
 		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJDE, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
@@ -828,8 +855,8 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
 	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
-	// improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
-	if (pType == Planet::isAsteroid)
+	// improve fps by juggling updates for asteroids and other minor bodies. They must be fast if close to observer, but can be slow if further away.
+	if (pType >= Planet::isAsteroid)
 			deltaJDE=distance*StelCore::JD_SECOND;
 	return distance;
 }
@@ -870,9 +897,19 @@ float Planet::getVMagnitude(const StelCore* core) const
 {
 	if (parent == 0)
 	{
-		// sun, compute the apparent magnitude for the absolute mag (4.83) and observer's distance
+		// Sun, compute the apparent magnitude for the absolute mag (V: 4.83) and observer's distance
+		// Hint: Absolute Magnitude of the Sun in Several Bands: http://mips.as.arizona.edu/~cnaw/sun.html
 		const double distParsec = std::sqrt(core->getObserverHeliocentricEclipticPos().lengthSquared())*AU/PARSEC;
-		return 4.83 + 5.*(std::log10(distParsec)-1.);
+
+		// check how much of it is visible
+		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+		double shadowFactor = ssm->getEclipseFactor(core);
+		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
+		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
+		if(shadowFactor < 0.000128)
+			shadowFactor = 0.000128;
+
+		return 4.83 + 5.*(std::log10(distParsec)-1.) - 2.5*(std::log10(shadowFactor));
 	}
 
 	// Compute the angular phase
@@ -1091,6 +1128,11 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 {
 	if (hidden)
 		return;
+
+	// Exclude drawing if user set a hard limit magnitude.
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
+		return;
+
 	// Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
 	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
@@ -1129,9 +1171,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0), screenPos)
-	    && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
-	    && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	if ((prj->project(Vec3d(0), screenPos)
+	     && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
+	     && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	     || permanentDrawingOrbits)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (e.g. for Jupiter's satellites)
@@ -1180,11 +1223,12 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(shadowCount = p->uniformLocation("shadowCount"));
 	GL(shadowData = p->uniformLocation("shadowData"));
 	GL(sunInfo = p->uniformLocation("sunInfo"));
+	GL(skyBrightness = p->uniformLocation("skyBrightness"));
 }
 
 void Planet::initShader()
 {
-	qWarning() << "Intializing planets GL shaders... ";
+	qDebug() << "Initializing planets GL shaders... ";
 	
 	const char *vsrc =
 		"attribute highp vec3 vertex;\n"
@@ -1227,6 +1271,7 @@ void Planet::initShader()
 		"uniform mediump vec3 ambientLight;\n"
 		"uniform mediump vec3 diffuseLight;\n"
 		"uniform highp vec4 sunInfo;\n"
+		"uniform mediump float skyBrightness;\n"
 		"varying highp vec3 P;\n"
 		"\n"
 		"uniform int shadowCount;\n"
@@ -1352,15 +1397,17 @@ void Planet::initShader()
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0
-		"    lowp float roughness = 0.8;\n"
+		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0, then 0.8 in 0.14.0.
+		"    lowp float roughness = 0.9;\n"
 		"    lowp float roughnessSquared = roughness * roughness;\n"
 		"    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
 		"    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
 		"    lowp float C = sin(alpha) * tan(beta);\n"
-		// GZ final number was 2, but this causes overly bright moon.
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
+		// GZ final number was 2, but this causes overly bright moon. was 1.5 in 0.14.0.
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.85;\n"
 		"#endif\n"
+		//Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
+		"    lum *= (1.0-0.4*skyBrightness);\n"
 		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
@@ -1452,6 +1499,11 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	// Some work has to be done on this method to make the rendering nicer
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
+	// Find extinction settings to change colors. The method is rather ad-hoc.
+	float extinctedMag=getVMagnitudeWithExtinction(core)-getVMagnitude(core); // this is net value of extinction, in mag.
+	float magFactorGreen=pow(0.85f, 0.6f*extinctedMag);
+	float magFactorBlue=pow(0.6f, 0.5f*extinctedMag);
+
 	if (screenSz>1.)
 	{
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
@@ -1466,19 +1518,33 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			light.position=Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f);
 
 			// Set the light parameters taking sun as the light source
-			light.diffuse = Vec4f(1.f,1.f,1.f);
-			light.ambient = Vec4f(0.02f,0.02f,0.02f);
+			light.diffuse = Vec4f(1.f,magFactorGreen*1.f,magFactorBlue*1.f);
+			light.ambient = Vec4f(0.02f,magFactorGreen*0.02f,magFactorBlue*0.02f);
+			// TODO: ambient for the moon should provide the Ashen light!
 
 			if (this==ssm->getMoon())
 			{
-				// Special case for the Moon (maybe better use 1.5,1.5,1.5,1.0 ?)
-				light.diffuse = Vec4f(1.6f,1.6f,1.6f,1.f);
+				float fov=core->getProjection(transfo)->getFov();
+				float fovFactor=1.6f;
+				// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
+				if (fov<5.0f)
+				{
+					fovFactor -= 0.1f*(5.0f-qMax(2.0f, fov));
+				}
+				// Special case for the Moon. Was 1.6, but this often is too bright.
+				light.diffuse = Vec4f(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor,1.f);
+
 			}
 		}
 		else
 		{
-			sPainter->setColor(albedo,albedo,albedo);
+			sPainter->setColor(albedo,magFactorGreen*albedo,magFactorBlue*albedo);
 		}
+
+		// possibly tint sun's color from extinction. This should deliberately cause stronger reddening than for the other objects.
+		if (this==ssm->getSun())
+			sPainter->setColor(2.f, pow(0.75f, extinctedMag)*2.f, pow(0.42f, 0.9f*extinctedMag)*2.f);
+
 
 		if (rings)
 		{
@@ -1514,7 +1580,24 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 		Vec3d tmp = getJ2000EquatorialPos(core);
-		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
+
+		// Find new extincted color for halo. The method is again rather ad-hoc, but does not look too bad.
+		// For the sun, we have again to use the stronger extinction to avoid color mismatch.
+		Vec3f haloColorToDraw;
+		if (this==ssm->getSun())
+			haloColorToDraw.set(haloColor[0], pow(0.75f, extinctedMag) * haloColor[1], pow(0.42f, 0.9f*extinctedMag) * haloColor[2]);
+		else
+			haloColorToDraw.set(haloColor[0], magFactorGreen * haloColor[1], magFactorBlue * haloColor[2]);
+
+		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), haloColorToDraw);
+
+		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
+		{
+			float eclipseFactor = ssm->getEclipseFactor(core);
+			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
+			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));			
+			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha);
+		}
 	}
 }
 
@@ -1665,7 +1748,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	if (this==ssm->getSun())
 	{
 		texMap->bind();
-		painter->setColor(2, 2, 2);
+		//painter->setColor(2, 2, 0.2); // This is now in draw3dModel() to apply extinction
 		painter->setArrays((Vec3f*)projectedVertexArr.constData(), (Vec2f*)model.texCoordArr.constData());
 		painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
 		return;
@@ -1731,6 +1814,9 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	projector->getModelViewTransform()->backward(eyePos);
 	eyePos.normalize();
 	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
+	LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
+	Q_ASSERT(lmgr);
+
 
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
@@ -1742,6 +1828,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->setUniformValue(shaderVars->shadowData, shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars->sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
 	GL(texMap->bind(1));
+	GL(shader->setUniformValue(shaderVars->skyBrightness, lmgr->getLuminance()));
+
 	
 	if (rings!=NULL)
 	{

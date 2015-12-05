@@ -274,11 +274,12 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	return map;
 }
 
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite)
 {
 	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
-	StelMainView::getInstance().saveScreenShot(prefix, dir);
+	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
+	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
@@ -687,6 +688,11 @@ void StelMainScriptAPI::output(const QString &s)
 	StelApp::getInstance().getScriptMgr().output(s);
 }
 
+void StelMainScriptAPI::resetOutput(void)
+{
+	StelApp::getInstance().getScriptMgr().resetOutput();
+}
+
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -804,13 +810,13 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	pos = obj->getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
+	map.insert("dec", dec*180./M_PI);	
 
 	// ra/dec in J2000
 	pos = obj->getJ2000EquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);	
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
@@ -823,7 +829,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 		az -= M_PI*2;
 
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);	
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
@@ -833,13 +839,13 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 		az -= M_PI*2;
 
 	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);	
 
 	// galactic long/lat
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);
+	map.insert("glat", glat*180./M_PI);	
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
@@ -914,13 +920,13 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	pos = obj->getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
+	map.insert("dec", dec*180./M_PI);	
 
 	// ra/dec in J2000
 	pos = obj->getJ2000EquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
+	map.insert("decJ2000", dec*180./M_PI);	
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
@@ -933,7 +939,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		az -= M_PI*2;
 
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);	
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
@@ -943,13 +949,13 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 		az -= M_PI*2;
 
 	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);	
 
 	// galactic long/lat
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);
+	map.insert("glat", glat*180./M_PI);	
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));

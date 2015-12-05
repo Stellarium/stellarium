@@ -41,7 +41,7 @@ namespace TelescopeControlGlobals {
 	const QString SERIAL_PORT_PREFIX = QString("COM");
 	#else
 	const QString TELESCOPE_SERVER_PATH = QString("/%1");
-	const QString SERIAL_PORT_PREFIX = QString("/dev/");
+	const QString SERIAL_PORT_PREFIX = QString("/");
 	#endif
 	
 	const int DEFAULT_DELAY = 500000; //Microseconds; == 0.5 seconds
@@ -65,16 +65,7 @@ namespace TelescopeControlGlobals {
 		int defaultDelay;
 		bool useExecutable;
 	};
-	
-	
-	#ifdef Q_OS_WIN32
-	const QStringList SERIAL_PORT_NAMES = QString("COM1 COM2 COM3 COM4").split(' ', QString::SkipEmptyParts);
-	#elif defined(Q_OS_MAC)
-	const QStringList SERIAL_PORT_NAMES = QString("/dev/ ").split(' ', QString::SkipEmptyParts);
-	#else
-	const QStringList SERIAL_PORT_NAMES = QString("/dev/ttyS0 /dev/ttyS1 /dev/ttyS2 /dev/ttyS3 /dev/ttyUSB0 /dev/ttyUSB1 /dev/ttyUSB2 /dev/ttyUSB3").split(' ', QString::SkipEmptyParts);
-	#endif
-	
+
 	//! List of the telescope servers that don't need external executables
 	const QStringList EMBEDDED_TELESCOPE_SERVERS = QString("TelescopeServerDummy TelescopeServerLx200 TelescopeServerNexStar").split(' ', QString::SkipEmptyParts);
 };
