@@ -951,10 +951,12 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		totalRecords++;
 
-		ref  = record.left(4).trimmed();
-		cdes = record.mid(5, 10).trimmed().toUpper();
-		// get name, trimmed of whitespace
-		name = record.mid(20).trimmed();
+		// bytes 1 - 5, designator for catalogue (prefix)
+		ref  = record.left(5).trimmed();
+		// bytes 6 -20, identificator for object in the catalog
+		cdes = record.mid(5, 15).trimmed().toUpper();
+		// bytes 21-80, proper name of the object (translatable)
+		name = record.mid(21).trimmed(); // Let gets the name with trimmed whitespaces
 
 		nb = cdes.toInt();
 
