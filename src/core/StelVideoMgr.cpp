@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2012 Sibi Antony (Phonon/QT4)
- * Copyright (C) 2015 Georg Zotti (Reactivate for QT5)
+ * Copyright (C) 2012 Sibi Antony (Phonon/QT4 implementation)
+ * Copyright (C) 2015 Georg Zotti (Reactivated with QT5 classes)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
