@@ -144,6 +144,7 @@ public slots:
 	void setGalaxyColor(const Vec3f& c);
 	//! Get current value of the galaxy symbol color.
 	const Vec3f& getGalaxyColor(void) const;
+
 	//! Set the color used to draw the active galaxy symbols (ellipses).
 	//! @param c The color of the active galaxy symbols
 	//! @code
@@ -153,6 +154,7 @@ public slots:
 	void setActiveGalaxyColor(const Vec3f& c);
 	//! Get current value of the active galaxy symbol color.
 	const Vec3f& getActiveGalaxyColor(void) const;
+
 	//! Set the color used to draw the interacting galaxy symbols (ellipses).
 	//! @param c The color of the interacting galaxy symbols
 	//! @code
@@ -162,6 +164,7 @@ public slots:
 	void setInteractingGalaxyColor(const Vec3f& c);
 	//! Get current value of the interacting galaxy symbol color.
 	const Vec3f& getInteractingGalaxyColor(void) const;
+
 	//! Set the color used to draw the radio galaxy symbols (ellipses).
 	//! @param c The color of the radio galaxy symbols
 	//! @code
@@ -171,15 +174,79 @@ public slots:
 	void setRadioGalaxyColor(const Vec3f& c);
 	//! Get current value of the radio galaxy symbol color.
 	const Vec3f& getRadioGalaxyColor(void) const;
+
+	//! Set the color used to draw the quasars symbols (ellipses).
+	//! @param c The color of the quasars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setQuasarColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setQuasarColor(const Vec3f& c);
+	//! Get current value of the quasar symbol color.
+	const Vec3f& getQuasarColor(void) const;
+
 	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
 	//! @param c The color of the nebula symbols
 	//! @code
 	//! // example of usage in scripts
 	//! NebulaMgr.setBrightNebulaColor(Vec3f(0.0,1.0,0.0));
 	//! @endcode
+	//! @deprecated
 	void setBrightNebulaColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
+	//! @deprecated
 	const Vec3f& getBrightNebulaColor(void) const;
+
+	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
+	//! @param c The color of the nebula symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setNebulaColor(const Vec3f& c);
+	//! Get current value of the nebula circle color.
+	const Vec3f& getNebulaColor(void) const;
+
+	//! Set the color used to draw the planetary nebulae symbols.
+	//! @param c The color of the planetary nebulae symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setPlanetaryNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setPlanetaryNebulaColor(const Vec3f& c);
+	//! Get current value of the planetary nebula circle color.
+	const Vec3f& getPlanetaryNebulaColor(void) const;
+
+	//! Set the color used to draw the reflection nebulae symbols.
+	//! @param c The color of the reflection nebulae symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setReflectionNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setReflectionNebulaColor(const Vec3f& c);
+	//! Get current value of the reflection nebula circle color.
+	const Vec3f& getReflectionNebulaColor(void) const;
+
+	//! Set the color used to draw the bipolar nebulae symbols.
+	//! @param c The color of the bipolar nebulae symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setBipolarNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setBipolarNebulaColor(const Vec3f& c);
+	//! Get current value of the bipolar nebula circle color.
+	const Vec3f& getBipolarNebulaColor(void) const;
+
+	//! Set the color used to draw the emission nebulae symbols.
+	//! @param c The color of the emission nebulae symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setEmissionNebulaColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setEmissionNebulaColor(const Vec3f& c);
+	//! Get current value of the emission nebula circle color.
+	const Vec3f& getEmissionNebulaColor(void) const;
+
 	//! Set the color used to draw the ionized hydrogen region symbols.
 	//! @param c The color of the ionized hydrogen region symbols
 	//! @code
@@ -189,6 +256,7 @@ public slots:
 	void setHydrogenRegionColor(const Vec3f& c);
 	//! Get current value of the hydrogen region symbol color.
 	const Vec3f& getHydrogenRegionColor(void) const;
+
 	//! Set the color used to draw the supernova remnant symbols.
 	//! @param c The color of the supernova remnant symbols
 	//! @code
@@ -198,6 +266,17 @@ public slots:
 	void setSupernovaRemnantColor(const Vec3f& c);
 	//! Get current value of the supernova remnant symbol color.
 	const Vec3f& getSupernovaRemnantColor(void) const;
+
+	//! Set the color used to draw the interstellar matter symbols.
+	//! @param c The color of the interstellar matter symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setInterstellarMatterColor(Vec3f(0.0,1.0,0.0));
+	//! @endcode
+	void setInterstellarMatterColor(const Vec3f& c);
+	//! Get current value of the interstellar matter symbol color.
+	const Vec3f& getInterstellarMatterColor(void) const;
+
 	//! Set the color used to draw the dark nebula symbols (gray boxes).
 	//! @param c The color of the dark nebula symbols
 	//! @code
@@ -207,6 +286,17 @@ public slots:
 	void setDarkNebulaColor(const Vec3f& c);
 	//! Get current value of the dark nebula color.
 	const Vec3f& getDarkNebulaColor(void) const;
+
+	//! Set the color used to draw the cluster associated with nebulosity symbols.
+	//! @param c The color of the cluster associated with nebulosity symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setClusterWithNebulosityColor(Vec3f(0.2,0.2,0.2));
+	//! @endcode
+	void setClusterWithNebulosityColor(const Vec3f& c);
+	//! Get current value of the cluster associated with nebulosity color.
+	const Vec3f& getClusterWithNebulosityColor(void) const;
+
 	//! Set the color used to draw the star cluster symbols (Open/Globular).
 	//! @param c The color of the cluster symbols
 	//! @code
@@ -214,9 +304,138 @@ public slots:
 	//! NebulaMgr.setClusterColor(Vec3f(1.0,1.0,0.0));
 	//! @endcode
 	void setClusterColor(const Vec3f& c);
-	//! Get current value of the nebula circle color.
+	//! Get current value of the star cluster symbol color.
 	const Vec3f& getClusterColor(void) const;
 
+	//! Set the color used to draw the open star cluster symbols.
+	//! @param c The color of the open star cluster symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setOpenClusterColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setOpenClusterColor(const Vec3f& c);
+	//! Get current value of the open star cluster symbol color.
+	const Vec3f& getOpenClusterColor(void) const;
+
+	//! Set the color used to draw the globular star cluster symbols.
+	//! @param c The color of the globular star cluster symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setGlobularClusterColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setGlobularClusterColor(const Vec3f& c);
+	//! Get current value of the globular star cluster symbol color.
+	const Vec3f& getGlobularClusterColor(void) const;
+
+	//! Set the color used to draw the stellar associations symbols.
+	//! @param c The color of the stellar associations symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setStellarAssociationColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setStellarAssociationColor(const Vec3f& c);
+	//! Get current value of the stellar association symbol color.
+	const Vec3f& getStellarAssociationColor(void) const;
+
+	//! Set the color used to draw the star clouds symbols.
+	//! @param c The color of the star clouds symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setStarCloudColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setStarCloudColor(const Vec3f& c);
+	//! Get current value of the star cloud symbol color.
+	const Vec3f& getStarCloudColor(void) const;
+
+	//! Set the color used to draw the emission objects symbols.
+	//! @param c The color of the emission objects symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setEmissionObjectColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setEmissionObjectColor(const Vec3f& c);
+	//! Get current value of the emission object symbol color.
+	const Vec3f& getEmissionObjectColor(void) const;
+
+	//! Set the color used to draw the BL Lac objects symbols.
+	//! @param c The color of the BL Lac objects symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setBlLacObjectColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setBlLacObjectColor(const Vec3f& c);
+	//! Get current value of the BL Lac object symbol color.
+	const Vec3f& getBlLacObjectColor(void) const;
+
+	//! Set the color used to draw the blazars symbols.
+	//! @param c The color of the blazars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setBlazarColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setBlazarColor(const Vec3f& c);
+	//! Get current value of the blazar symbol color.
+	const Vec3f& getBlazarColor(void) const;
+
+	//! Set the color used to draw the molecular clouds symbols.
+	//! @param c The color of the molecular clouds symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setMolecularCloudColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setMolecularCloudColor(const Vec3f& c);
+	//! Get current value of the molecular cloud symbol color.
+	const Vec3f& getMolecularCloudColor(void) const;
+
+	//! Set the color used to draw the young stellar objects symbols.
+	//! @param c The color of the young stellar objects symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setYoungStellarObjectColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setYoungStellarObjectColor(const Vec3f& c);
+	//! Get current value of the young stellar object symbol color.
+	const Vec3f& getYoungStellarObjectColor(void) const;
+
+	//! Set the color used to draw the possible quasars symbols.
+	//! @param c The color of the possible quasars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setPossibleQuasarColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setPossibleQuasarColor(const Vec3f& c);
+	//! Get current value of the possible quasar symbol color.
+	const Vec3f& getPossibleQuasarColor(void) const;
+
+	//! Set the color used to draw the possible planetary nebulae symbols.
+	//! @param c The color of the possible planetary nebulae symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setPossiblePlanetaryNebulaColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setPossiblePlanetaryNebulaColor(const Vec3f& c);
+	//! Get current value of the possible planetary nebula symbol color.
+	const Vec3f& getPossiblePlanetaryNebulaColor(void) const;
+
+	//! Set the color used to draw the protoplanetary nebulae symbols.
+	//! @param c The color of the protoplanetary nebulae symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setProtoplanetaryNebulaColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setProtoplanetaryNebulaColor(const Vec3f& c);
+	//! Get current value of the protoplanetary nebula symbol color.
+	const Vec3f& getProtoplanetaryNebulaColor(void) const;
+
+	//! Set the color used to draw the stars symbols.
+	//! @param c The color of the stars symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setStarColor(Vec3f(1.0,1.0,0.0));
+	//! @endcode
+	void setStarColor(const Vec3f& c);
+	//! Get current value of the star symbol color.
+	const Vec3f& getStarColor(void) const;
 
 	//! Set Nebulae Hints circle scale.
 	void setCircleScale(float scale);
