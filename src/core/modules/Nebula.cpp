@@ -557,8 +557,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 			Nebula::texOpenClusterWithNebulosity->bind();
 			color=clusterWithNebulosityColor;
 			break;
+		case NebEMO:
+			Nebula::texCircle->bind();
+			color=emissionObjectColor;
+			break;
 		default:
-			Nebula::texCircle->bind();			
+			Nebula::texCircle->bind();
 	}
 
 	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
