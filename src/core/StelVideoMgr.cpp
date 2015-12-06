@@ -51,7 +51,6 @@ StelVideoMgr::~StelVideoMgr()
 
 void StelVideoMgr::loadVideo(const QString& filename, const QString& id, const float x, const float y, const bool show, const float alpha)
 {
-	qDebug() << QApplication::libraryPaths();
 	if (videoObjects.contains(id))
 	{
 		qWarning() << "[StelVideoMgr] Video object with ID" << id << "already exists, dropping it";
