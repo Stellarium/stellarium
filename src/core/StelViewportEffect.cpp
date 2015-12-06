@@ -34,7 +34,7 @@
 void StelViewportEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
-	sPainter.setColor(.1,.1,1);
+	sPainter.setColor(1,1,1);
 	sPainter.enableTexture2d(true);
 	glBindTexture(GL_TEXTURE_2D, buf->texture());
 	sPainter.drawRect2d(0, 0, buf->size().width(), buf->size().height());
