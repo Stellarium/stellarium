@@ -199,10 +199,17 @@ void ViewService::getImpl(const QByteArray &operation, const APIParameters &para
 
 		response.writeJSON(QJsonDocument(obj));
 	}
+	else if (operation=="projectiondescription")
+	{
+		//returns the description of the current projection
+		QString str = core->getProjection(StelCore::FrameJ2000)->getHtmlSummary();
+		response.setHeader("Content-Type","text/html; charset=UTF-8");
+		response.setData(wrapHtml(str, core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey())).toUtf8());
+	}
 	else
 	{
 		//TODO some sort of service description?
-		response.writeRequestError("unsupported operation. GET: listlandscape,listskyculture,skyculturedescription/,listprojection");
+		response.writeRequestError("unsupported operation. GET: listlandscape,landscapedescription/,listskyculture,skyculturedescription/,listprojection,projectiondescription");
 	}
 }
 

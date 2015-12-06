@@ -251,6 +251,12 @@ define(["jquery", "api/search", "./combobox"], function($, searchApi) {
 		});
 
 		searchApi.loadObjectTypes(fillObjectTypes);
+
+		//setup quick select buttons
+		$("#quickselect").on("click", "button",function(evt){
+			console.log("selecting " + evt.target.value);
+			searchApi.selectObjectByName(evt.target.value);
+		});
 	}
 
 	$(searchApi).on("simbadStateChanged", function(evt, state) {

@@ -95,14 +95,14 @@ define(["jquery", "./remotecontrol"], function($, rc) {
                         fireActionChanged(actionName);
                     }
                 } else {
-                    alert(resp);
+                    alert(rc.tr("Action '%1' not accepted by server: ", actionName) + "\n" + resp);
                 }
             },
             error: function(xhr, status, errorThrown) {
                 console.log("Error posting action " + actionName);
                 console.log("Error: " + errorThrown.message);
                 console.log("Status: " + status);
-                alert(rc.tr("Error sending action to server: ") + errorThrown.message);
+                alert(rc.tr("Error sending action '%1' to server: ", actionName) + errorThrown.message);
             }
         });
     }

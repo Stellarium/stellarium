@@ -10,13 +10,26 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
     //keeps track of StelAction updates from server
     var lastActionId = -2;
 
-    /* Translates a string using Stellariums current locale. String must be present in translationdata.js */
+    // Translates a string using Stellariums current locale. 
+    // String must be present in translationdata.js
+    // All strings from tr() calls in the .js files will be written in translationdata.js when update_translationdata.py is executed
     function tr(str) {
+        //extract varargs if existing
+        var args = arguments;
+        var trStr = str;
         if (str in TranslationData) {
-            return TranslationData[str];
+            trStr = TranslationData[str];
+        } else {
+            console.log("Error: string '" + str + "' not present in translation data");
         }
-        console.log("Error: string '" + str + "' not present in translation data");
-        return str;
+
+        if (args.length > 1) {
+            //replace args, like QString::arg does (%1, %2,...)
+            trStr = trStr.replace(/%(\d+)/g, function(match, num) {
+                return typeof args[num] != 'undefined' ? args[num] : match;
+            });
+        }
+        return trStr;
     }
 
     //main update function, which is executed each second

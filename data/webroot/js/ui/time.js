@@ -1,4 +1,4 @@
-define(["jquery", "api/time", "jquery-ui"], function($, timeApi) {
+define(["jquery", "api/time", "api/actions", "jquery-ui"], function($, timeApi, actionApi) {
 	"use strict";
 
 	//controls
@@ -135,11 +135,10 @@ define(["jquery", "api/time", "jquery-ui"], function($, timeApi) {
 				console.log("inputprevented");
 				//return;
 			}
-			if (!val.match(/^\d+$/))
-			{
+			if (!val.match(/^\d+$/)) {
 				val = $this.data('prevData'); //we want only number, no alpha
 				console.log("value rolled back to " + val);
-			} 
+			}
 			val = parseFloat(val);
 			//this.value = val > max ? max : val < min ? min : val;
 			//for some obscure reason, this.value may be a string instead of a float, so use val directly!
@@ -189,6 +188,20 @@ define(["jquery", "api/time", "jquery-ui"], function($, timeApi) {
 		}).on("spin", function(evt, ui) {
 			setJDay(ui.value + 2400000.5);
 		});
+
+		initTimeJumpButtons();
+	}
+
+	function initTimeJumpButtons() {
+
+		var $items = $("#timejumplist li");
+		$items.each(function(){
+			var $this = $(this);
+			$this.prepend($("<button>",{value: $this.data("next"), class:"button32 icon32 btTimeForward"}));
+			$this.prepend($("<button>",{value: $this.data("prev"), class:"button32 icon32 btTimeRewind"}));
+		});
+
+		actionApi.connectActionContainer($("#timejumplist"));
 	}
 
 	function setDateTimeField(type, field, val) {
