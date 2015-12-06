@@ -34,7 +34,7 @@ define({
 		if i.group(1):
 			if not first:
 				jsfile.write(',\n\t');
-			jsfile.write('"'+i.group(1)+'" : \'<?= tr("'+i.group(1)+'")?>\'')
+			jsfile.write('"'+i.group(1).replace('"','\\"')+'" : \'<?= tr("'+i.group(1).replace("'","\\'")+'")?>\'')
 			first = False
 	jsfile.write("\n});");
 

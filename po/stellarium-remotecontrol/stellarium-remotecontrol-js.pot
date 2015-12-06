@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-27 23:53+0100\n"
+"POT-Creation-Date: 2015-12-06 22:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,8 +21,12 @@ msgstr ""
 msgid "Could not retrieve action list"
 msgstr ""
 
+#: data/webroot/js/api/actions.js:98
+msgid "Action '%1' not accepted by server: "
+msgstr ""
+
 #: data/webroot/js/api/actions.js:105
-msgid "Error sending action to server: "
+msgid "Error sending action '%1' to server: "
 msgstr ""
 
 #: data/webroot/js/api/location.js:33 data/webroot/js/api/location.js:61
@@ -38,7 +42,7 @@ msgstr ""
 msgid "Could not retrieve planet list"
 msgstr ""
 
-#: data/webroot/js/api/remotecontrol.js:115
+#: data/webroot/js/api/remotecontrol.js:128
 msgid "Error sending command to server: "
 msgstr ""
 
@@ -82,11 +86,11 @@ msgstr ""
 msgid "Could not retrieve landscape list"
 msgstr ""
 
-#: data/webroot/js/ui/actions.js:116 data/webroot/js/ui/actions.js:132
+#: data/webroot/js/ui/actions.js:115 data/webroot/js/ui/actions.js:131
 msgid "on"
 msgstr ""
 
-#: data/webroot/js/ui/actions.js:116 data/webroot/js/ui/actions.js:132
+#: data/webroot/js/ui/actions.js:115 data/webroot/js/ui/actions.js:131
 msgid "off"
 msgstr ""
 
@@ -98,7 +102,7 @@ msgstr ""
 msgid "Input did not match any item"
 msgstr ""
 
-#: data/webroot/js/ui/mainui.js:132
+#: data/webroot/js/ui/mainui.js:134
 msgid "No current selection"
 msgstr ""
 

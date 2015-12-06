@@ -16,12 +16,12 @@ define(["jquery", "api/viewcontrol", "api/viewoptions", "api/actions", "jquery-u
 		var val = Math.pow(((fov - minFov) / (maxFov - minFov)), 1 / 4);
 
 		var slVal = Math.round(val * fovSteps);
-		$view_fov.slider("value", slVal);
+		$view_fov.slider("value", fovSteps - slVal);
 	}
 
 	//convert fov slider to fov value and queue update
 	function handleFovSlide(val) {
-		var s = val / fovSteps;
+		var s = (fovSteps - val) / fovSteps;
 		var fov = minFov + Math.pow(s, 4) * (maxFov - minFov);
 
 		console.log(val + " / " + fov);

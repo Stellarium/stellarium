@@ -5,7 +5,8 @@
 
 define({
 	"Could not retrieve action list" : '<?= tr("Could not retrieve action list")?>',
-	"Error sending action to server: " : '<?= tr("Error sending action to server: ")?>',
+	"Action '%1' not accepted by server: " : '<?= tr("Action \'%1\' not accepted by server: ")?>',
+	"Error sending action '%1' to server: " : '<?= tr("Error sending action \'%1\' to server: ")?>',
 	"Error performing search" : '<?= tr("Error performing search")?>',
 	"Could not retrieve country list" : '<?= tr("Could not retrieve country list")?>',
 	"Could not retrieve planet list" : '<?= tr("Could not retrieve planet list")?>',

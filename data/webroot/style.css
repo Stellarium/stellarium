@@ -179,6 +179,14 @@ select {
 	font-size: small;
 }
 
+h1 {
+	font-size: 26px;
+}
+
+h2 {
+	font-size: 14px;
+}
+
 #wrapper {
 	border: 1px 
 	
@@ -211,8 +219,20 @@ select {
 	text-align: center;
 }
 
+.display-block {
+	display: block;
+}
+
 .inline-block {
 	display: inline-block;
+}
+
+.margin-auto {
+	margin: auto;
+}
+
+.margin-block {
+	margin: 10px;
 }
 
 .block {
@@ -241,9 +261,9 @@ select {
 }
 
 .block header h2 {
-	font-size: 14px;
+	/* font-size: 14px; */
 	margin: 0px;
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .innerblock {
@@ -330,6 +350,27 @@ select {
 	background-image: url("images/ajax-loader.gif");
 }
 
+#loadoverlay {
+	color: white;
+	font-size: xx-large;
+	background: #fff url("images/stars.png");
+	opacity: 1.0;
+	z-index: 50;
+	display: table;
+	/* position: absolute; */
+}
+
+.loadwrapper {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.loadinner {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
 header h1 {
 	margin-left: 1em;
 	display: inline-block;
@@ -383,77 +424,101 @@ header img {
 	width: 8em;
 }
 
-#mainbuttons ul {
-	display: block;
-	list-style: none;
+#timecontrols {
+	/* display: block; */
 	text-align: center;
 	margin-top: 10px;
 	padding: 6px;
 }
 
-#mainbuttons ul li {
-	vertical-align: middle;
+ul.button32list {
+	padding: 0px;
+	list-style: none;
+	/* text-align: center; */
 }
 
-.button32wrapper {
+ul.button32list > li,
+li.button32wrapper {
 	display: inline-block;
 	width: 32px;
 	height: 32px;
 	overflow: hidden;
+	vertical-align: middle;
 }
 
-.button32wrapper:hover {
-	background: url("images/icons.png") no-repeat top left;
+ul.button32list > li:hover,
+li.button32wrapper:hover {
+	background: url("images/icons.png") no-repeat;
 	background-position: -851px 0;
 }
 
+ul.button32list > li > button,
 button.button32 {
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 26px;
+	width: 32px;
+	height: 32px;
+	line-height: 32px;
+	vertical-align: middle;
+	overflow: hidden;
 	padding: 0px;
 	margin: 0px;
+	border-radius: 2px;
 	border: none;
-}
-
-.button32 {
-	background: url("images/icons.png") no-repeat top left;
-	cursor: pointer;
-	height: 32px;
-	width: 32px;
-	display: inline-block;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	-ms-user-select: none;
 }
 
-.button32.active {
+ul.button32list > li > button:active,
+button.button32:active {
+	background-color: rgb(180, 180, 183);
+}
+
+.icon32 {
+	background: url("images/icons.png") no-repeat;
+	height: 32px;
+	width: 32px;
+}
+
+.icon32.active {
 	background-image: url("images/icons-active.png");
 }
 
-.button32.btAtmosphere { background-position: 0 0; } 
-.button32.btAzimuthalGrid { background-position: -37px 0; } 
-.button32.btCardinalPoints { background-position: -74px 0; } 
-.button32.btConstellationArt { background-position: -111px 0; } 
-.button32.btConstellationLabels { background-position: -148px 0; } 
-.button32.btConstellationLines { background-position: -185px 0; } 
-.button32.btDSS { background-position: -222px 0; } 
-.button32.btFlipHorizontal { background-position: -259px 0; } 
-.button32.btEquatorialGrid { background-position: -296px 0; } 
-.button32.btEquatorialMount { background-position: -333px 0; } 
-.button32.btFlipVertical { background-position: -370px 0; } 
-.button32.btFullScreen { background-position: -407px 0; } 
-.button32.btGotoSelectedObject { background-position: -444px 0; } 
-.button32.btGround { background-position: -481px 0; } 
-.button32.btNebula { background-position: -518px 0; } 
-.button32.btNightView { background-position: -555px 0; } 
-.button32.btPlanets { background-position: -592px 0; } 
-.button32.btScriptRun { background-position: -629px 0; } 
-.button32.btTimeForward { background-position: -666px 0; } 
-.button32.btScriptStop { background-position: -703px 0; } 
-.button32.btTimeNow { background-position: -740px 0; } 
-.button32.btTimeRealtime { background-position: -777px 0; } 
-.button32.btTimeRewind { background-position: -814px 0; } 
-.button32.glow32x32 { background-position: -851px 0; } 
-.button32.btTimeRealtime.paused  { background-image: url("images/icons-active.png"); background-position: -851px 0; } 
+.icon32.btAtmosphere { background-position: 0 0; } 
+.icon32.btAzimuthalGrid { background-position: -37px 0; } 
+.icon32.btCardinalPoints { background-position: -74px 0; } 
+.icon32.btConstellationArt { background-position: -111px 0; } 
+.icon32.btConstellationLabels { background-position: -148px 0; } 
+.icon32.btConstellationLines { background-position: -185px 0; } 
+.icon32.btDSS { background-position: -222px 0; } 
+.icon32.btFlipHorizontal { background-position: -259px 0; } 
+.icon32.btEquatorialGrid { background-position: -296px 0; } 
+.icon32.btEquatorialMount { background-position: -333px 0; } 
+.icon32.btFlipVertical { background-position: -370px 0; } 
+.icon32.btFullScreen { background-position: -407px 0; } 
+.icon32.btGotoSelectedObject { background-position: -444px 0; } 
+.icon32.btGround { background-position: -481px 0; } 
+.icon32.btNebula { background-position: -518px 0; } 
+.icon32.btNightView { background-position: -555px 0; } 
+.icon32.btPlanets { background-position: -592px 0; } 
+.icon32.btScriptRun { background-position: -629px 0; } 
+.icon32.btTimeForward { background-position: -666px 0; } 
+.icon32.btScriptStop { background-position: -703px 0; } 
+.icon32.btTimeNow { background-position: -740px 0; } 
+.icon32.btTimeRealtime { background-position: -777px 0; } 
+.icon32.btTimeRewind { background-position: -814px 0; } 
+.icon32.glow32x32 { background-position: -851px 0; } 
+.icon32.btTimeRealtime.paused  { background-image: url("images/icons-active.png"); background-position: -851px 0; } 
+
+#timejumplist ul {
+	list-style: none;
+	padding: 0px;
+	display: inline-block;
+	vertical-align: top;
+}
 
 #activescript {
 	font-weight: bold;
@@ -462,7 +527,6 @@ button.button32 {
 .scrollselect {
 	padding: 1px 0px;
 	min-height: 12em;
-	/* display: block; */
 	/* margin-left: auto; */
 	/* margin-right: auto; */
 	box-sizing: border-box;
@@ -497,6 +561,7 @@ button.button32 {
 	vertical-align: top;
 	height: 240px;
 	width: 150px;
+	float: right;
 }
 
 #loc_searchlist > *{
@@ -623,6 +688,15 @@ button.button32 {
 	width: 90%;
 }
 
+#quickselect {
+	list-style: none;
+	font-weight: bold;
+}
+
+#quickselect li {
+	display: inline-block;
+}
+
 #selection {
 	position: relative;
 }
@@ -631,9 +705,9 @@ button.button32 {
 	text-align: left;
 	/* white-space: nowrap; */
 	/* overflow-x: hidden; */
-	overflow-y: auto;
+	/* overflow-y: auto; */
 	/* width: 20em; */
-	max-height: 22em;
+	/* max-height: 340px; */
 	/* max-width: 100%; */
 	display: inline-block;
 }
