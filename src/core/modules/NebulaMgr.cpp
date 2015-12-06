@@ -449,8 +449,8 @@ void NebulaMgr::setStelStyle(const QString& section)
 	}
 
 	// Set colors for markers
-	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/dso_label_color", "0.4,0.3,0.5").toString()));
-	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/dso_circle_color", "0.8,0.8,0.1").toString()));
+	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/dso_label_color", "0.2,0.6,0.7").toString()));
+	setCirclesColor(StelUtils::strToVec3f(conf->value(section+"/dso_circle_color", "1.0,0.7,0.2").toString()));
 
 	QString defaultGalaxyColor = conf->value(section+"/dso_galaxy_color", "1.0,0.2,0.2").toString();
 	setGalaxyColor(StelUtils::strToVec3f(defaultGalaxyColor));
@@ -477,14 +477,14 @@ void NebulaMgr::setStelStyle(const QString& section)
 	setPossiblePlanetaryNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_possible_planetary_nebula_color", defaultNebulaColor).toString()));
 	setProtoplanetaryNebulaColor(StelUtils::strToVec3f(conf->value(section+"/dso_protoplanetary_nebula_color", defaultNebulaColor).toString()));
 
-	QString defaultClusterColor = conf->value(section+"/dso_cluster_color", "0.8,0.8,0.1").toString();
+	QString defaultClusterColor = conf->value(section+"/dso_cluster_color", "1.0,1.0,0.1").toString();
 	setClusterColor(StelUtils::strToVec3f(defaultClusterColor));
 	setOpenClusterColor(StelUtils::strToVec3f(conf->value(section+"/dso_open_cluster_color", defaultClusterColor).toString()));
 	setGlobularClusterColor(StelUtils::strToVec3f(conf->value(section+"/dso_globular_cluster_color", defaultClusterColor).toString()));
 	setStellarAssociationColor(StelUtils::strToVec3f(conf->value(section+"/dso_stellar_association_color", defaultClusterColor).toString()));
 	setStarCloudColor(StelUtils::strToVec3f(conf->value(section+"/dso_star_cloud_color", defaultClusterColor).toString()));
 
-	QString defaultStellarColor = conf->value(section+"/dso_star_color", defaultClusterColor).toString();
+	QString defaultStellarColor = conf->value(section+"/dso_star_color", "1.0,0.7,0.2").toString();
 	setStarColor(StelUtils::strToVec3f(defaultStellarColor));
 	setEmissionObjectColor(StelUtils::strToVec3f(conf->value(section+"/dso_emission_object_color", defaultStellarColor).toString()));
 	setYoungStellarObjectColor(StelUtils::strToVec3f(conf->value(section+"/dso_young_stellar_object_color", defaultStellarColor).toString()));
