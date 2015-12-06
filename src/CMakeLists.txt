@@ -283,7 +283,6 @@ QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
-
 IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
      SET(stellarium_gui_SRCS
           gui/StelGui.hpp
@@ -430,36 +429,36 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
 ENDIF()
 
 IF(GENERATE_STELMAINLIB)
-    ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
-    TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-    QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets)
-    IF(ENABLE_MEDIA)
-        QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
-    ENDIF()
+     ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
+     TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+     QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets)
+     IF(ENABLE_MEDIA)
+         QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
+     ENDIF()
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stelMain SerialPort)
      ENDIF()
-    INSTALL(TARGETS stelMain DESTINATION lib)
-    ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
-    #stelMain should be after the plug-ins, otherwise the build crashes
-    TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
+     INSTALL(TARGETS stelMain DESTINATION lib)
+     ADD_EXECUTABLE(stellarium ${stellarium_exe_SRCS})
+     #stelMain should be after the plug-ins, otherwise the build crashes
+     TARGET_LINK_LIBRARIES(stellarium ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} stelMain ${extLinkerOption})
 ELSE()
-    ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
-    TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
-    # This will add the ANGLE lib if the Qt version supports it.
-    TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
+     ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+     TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+     # This will add the ANGLE lib if the Qt version supports it.
+     TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
-    QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets)
-    IF(ENABLE_MEDIA)
-        QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
-    ENDIF()
+     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets SerialPort)
+     IF(ENABLE_MEDIA)
+          QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
+     ENDIF()
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stellarium SerialPort)
      ENDIF()
 
-    IF(APPLE)
-        SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
-    ENDIF()
+     IF(APPLE)
+          SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
+     ENDIF()
 ENDIF()
 
 ADD_DEPENDENCIES(stellarium AllStaticPlugins)
