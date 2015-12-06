@@ -23,14 +23,16 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
+#ifdef ENABLE_MEDIA
 #include <QSize>
 #include <QSizeF>
 #include <QPoint>
 #include <QPointF>
 #include <QMediaContent>
 #include <QMediaPlayer>
-#include "StelModule.hpp"
 #include "StelFader.hpp"
+#endif
+#include "StelModule.hpp"
 
 class QGraphicsVideoItem;
 
@@ -197,6 +199,7 @@ public slots:
 	//! @note If video is not found, also returns @value false.
 	bool isVideoPlaying(const QString& id);
 
+#ifdef ENABLE_MEDIA
 private slots:
 	// Slots to handle QMediaPlayer signals. Never call them yourself!
 	// Some of them are useful to understand media handling and to get to crucial information like native resolution and duration during loading of media.
@@ -220,7 +223,7 @@ private slots:
 	void handleMetaDataChanged();
 	// This signal is not triggered on Windows, we must work around using handleMetaDataChanged()
 	//void handleMetaDataChanged(const QString & key, const QVariant & value);
-
+#endif
 
 
 private:

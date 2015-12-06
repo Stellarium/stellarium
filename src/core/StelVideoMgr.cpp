@@ -20,8 +20,8 @@
 #include "StelVideoMgr.hpp"
 #include "StelMainView.hpp"
 #include <QDebug>
+#include <QDir>
 #ifdef ENABLE_MEDIA
-	#include <QDir>
 	#include <QGraphicsVideoItem>
 	#include <QMediaPlayer>
 	#include <QTimer>
@@ -959,41 +959,27 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x
 	qWarning() << "[StelVideoMgr] This build of Stellarium does not support video - cannot load video" << QDir::toNativeSeparators(filename) << id << x << y << show << alpha;
 }
 StelVideoMgr::~StelVideoMgr() {;}
+void StelVideoMgr::update(double){;}
 void StelVideoMgr::playVideo(const QString&, const bool) {;}
 void StelVideoMgr::playVideoPopout(const QString&, float, float, float, float, float, float, float, bool){;}
 void StelVideoMgr::pauseVideo(const QString&) {;}
 void StelVideoMgr::stopVideo(const QString&) {;}
 void StelVideoMgr::dropVideo(const QString&) {;}
 void StelVideoMgr::seekVideo(const QString&, qint64, bool) {;}
-void StelVideoMgr::setVideoXY(const QString&, float, float) {;}
+void StelVideoMgr::setVideoXY(const QString&, float, float, const bool) {;}
 void StelVideoMgr::setVideoAlpha(const QString&, float) {;}
 void StelVideoMgr::resizeVideo(const QString&, float, float) {;}
 void StelVideoMgr::showVideo(const QString&, bool) {;}
 // New functions for 0.15
-int StelVideoMgr::getDuration(const QString&){return -1;}
-QSize StelVideoMgr::getResolution(const QString&){return QSize(0,0);}
-int StelVideoMgr::getWidth(const QString&){return -1;}
-int StelVideoMgr::getHeight(const QString&){return -1;}
-void StelVideoMgr::mute(const QString&, bool){;}
-void StelVideoMgr::setVolume(const QString&, int){;}
-int StelVideoMgr::getVolume(const QString&){return -1;}
-
-// New functions for QT5
-void StelVideoMgr::handleAudioAvailableChanged(bool available){;}
-void StelVideoMgr::handleBufferStatusChanged(int percentFilled){;}
-void StelVideoMgr::handleDurationChanged(qint64 duration){;}
-void StelVideoMgr::handleError(QMediaPlayer::Error error){;}
-void StelVideoMgr::handleMediaStatusChanged(QMediaPlayer::MediaStatus status){;}
-void StelVideoMgr::handleMutedChanged(bool muted){;}
-//void StelVideoMgr::handlePositionChanged(qint64){;}
-void StelVideoMgr::handleSeekableChanged(bool){;}
-void StelVideoMgr::handleStateChanged(QMediaPlayer::State){;}
-void StelVideoMgr::handleVideoAvailableChanged(bool){;}
-void StelVideoMgr::handleVolumeChanged(int){;}
-void StelVideoMgr::handleAvailabilityChanged(bool){;}
-void StelVideoMgr::handleAvailabilityChanged(QMultimedia::AvailabilityStatus){;}
-void StelVideoMgr::handleMetaDataChanged(){;}
-void StelVideoMgr::handleMetaDataChanged(const QString&, const QVariant&){;}
+qint64 StelVideoMgr::getVideoDuration(const QString&){return -1;}
+qint64 StelVideoMgr::getVideoPosition(const QString&){return -1;}
+QSize StelVideoMgr::getVideoResolution(const QString&){return QSize(0,0);}
+int StelVideoMgr::getVideoWidth(const QString&){return -1;}
+int StelVideoMgr::getVideoHeight(const QString&){return -1;}
+void StelVideoMgr::muteVideo(const QString&, bool){;}
+void StelVideoMgr::setVideoVolume(const QString&, int){;}
+int StelVideoMgr::getVideoVolume(const QString&){return -1;}
+bool StelVideoMgr::isVideoPlaying(const QString& id){return false;}
 
 #endif // ENABLE_MEDIA
 
