@@ -82,7 +82,7 @@ define(["jquery", "settings", "api/remotecontrol", "./time", "./actions", "./vie
 		var webStorageSupported = typeof(Storage) !== "undefined";
 
 		if (webStorageSupported) {
-			oldTabId = parseInt(sessionStorage.getItem(tabDataKey),10);
+			oldTabId = parseInt(sessionStorage.getItem(tabDataKey), 10);
 			if (isNaN(oldTabId))
 				oldTabId = 0;
 		} else {
@@ -121,6 +121,8 @@ define(["jquery", "settings", "api/remotecontrol", "./time", "./actions", "./vie
 		//start animation & update loop
 		animate();
 		rc.startUpdateLoop();
+
+		$("#loadoverlay").fadeOut();
 	});
 
 	//new server data

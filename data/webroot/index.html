@@ -9,7 +9,18 @@
   <script data-main="js/main" src="js/require.js" type="text/javascript"></script>
 </head>
 <body>
-  <div id="wrapper" class="ui-corner-all ui-widget-content">
+  <!-- initial loading overlay -->
+  <div id="loadoverlay" class="ui-widget-overlay">
+    <div class="loadwrapper">
+      <div class="loadinner textcenter">
+        <img src="images/stellariumlarge.png" alt="Stellarium logo" class="display-block margin-auto"/>
+        <div class="margin-auto">Please wait, loading</div>
+        <noscript><p class="ui-state-error">This remote control requires JavaScript and a reasonably modern browser.<br/>For further information, here are <a href="http://www.enable-javascript.com/" target="_blank">
+         instructions how to enable JavaScript in your web browser</a></p></noscript>
+       </div>
+     </div>
+   </div>
+   <div id="wrapper" class="ui-corner-all ui-widget-content">
     <header>
       <img src="images/stellarium.png" alt="Stellarium logo"/>
       <h1><?= tr("Stellarium remote control")?></h1>
@@ -17,14 +28,17 @@
     <div id="tabs">
       <ul>
         <li><a href="#tab_main"><?= tr("Main controls")?></a></li>
-        <li><a href="#tab_view"><?= tr("View")?></a></li>
+        <li><a href="#tab_selection"><?= tr("Selection")?></a></li>
+        <li><a href="#tab_view"><?= tr("Markings")?></a></li>
         <li><a href="#tab_landscape"><?= tr("Landscape")?></a></li>
         <li><a href="#tab_skyculture"><?= tr("Starlore")?></a></li>
         <li><a href="#tab_actions"><?= tr("Actions and scripts")?></a></li>
-        <li><a href="#tab_location_objects"><?= tr("Location and objects")?></a></li>
+        <li><a href="#tab_location"><?= tr("Location")?></a></li>
+        <li><a href="#tab_projection"><?= tr("Projection")?></a></li>
       </ul>
       <div id="tab_main">
         <div class="flex">
+          <!-- part of ui/time.js -->
           <section id="time" class="block flex-noshrink">
             <header><h2><?= tr("Time")?></h2></header>
             <div id="timewidget">
@@ -57,11 +71,46 @@
             </div>
             <p class="textcenter">&Delta;T = <span id="deltat"></span></p>
             <div id="mainbuttons">
-              <ul id="timecontrols" class="ui-corner-all ui-widget-content">
-                <li class="button32wrapper" title="Decrease time speed"><button id="bt_timerewind" class="button32 btTimeRewind"/></li><li class="button32wrapper" title="Pause"><button id="bt_timeplaypause" class="button32 btTimeRealtime"/></li><li class="button32wrapper" title="Set time to now"><button id="bt_timenow" class="button32 btTimeNow"/></li><li class="button32wrapper" title="Increase time speed"><button id="bt_timeforward" class="button32 btTimeForward"/></li>
+              <ul id="timecontrols" class="ui-corner-all ui-widget-content button32list">
+                <li title="Decrease time speed"><button id="bt_timerewind" class="icon32 btTimeRewind"></button></li><li title="Pause"><button id="bt_timeplaypause" class="icon32 btTimeRealtime"></button></li><li title="Set time to now"><button id="bt_timenow" class="icon32 btTimeNow"></button></li><li title="Increase time speed"><button id="bt_timeforward" class="icon32 btTimeForward"></button></li>
               </ul>
             </div>
           </section>
+          <section id="timejump" class="block">
+            <header><h2><?= tr("Time jumps")?></h2></header>
+            <div id="timejumplist">
+              <!-- buttons get created using JS code -->
+              <ul>
+                <li data-next="actionAdd_Solar_Hour" data-prev="actionSubtract_Solar_Hour"><?= tr("Solar hour")?></li>
+                <li data-next="actionAdd_Solar_Day" data-prev="actionSubtract_Solar_Day"><?= tr("Solar day")?></li>
+                <li data-next="actionAdd_Solar_Week" data-prev="actionSubtract_Solar_Week"><?= tr("Solar week")?></li>
+
+                <li data-next="actionAdd_Sidereal_Day" data-prev="actionSubtract_Sidereal_Day"><?= tr("Sidereal day")?></li>
+                <li data-next="actionAdd_Sidereal_Year" data-prev="actionSubtract_Sidereal_Year"><?= tr("Sidereal year")?></li>
+                <li data-next="actionAdd_Sidereal_Century" data-prev="actionSubtract_Sidereal_Century"><?= tr("Sidereal century")?></li>
+
+                <li data-next="actionAdd_Synodic_Month" data-prev="actionSubtract_Synodic_Month"><?= tr("Synodic month")?></li>
+                <li data-next="actionAdd_Draconic_Month" data-prev="actionSubtract_Draconic_Month"><?= tr("Draconic month")?></li>
+                <li data-next="actionAdd_Draconic_Year" data-prev="actionSubtract_Draconic_Year"><?= tr("Draconic year")?></li>
+
+                <li data-next="actionAdd_Gaussian_Year" data-prev="actionSubtract_Gaussian_Year"><?= tr("Gaussian year")?></li>
+              </ul>
+              <ul>
+                <li data-next="actionAdd_Anomalistic_Month" data-prev="actionSubtract_Anomalistic_Month"><?= tr("Anomalistic month")?></li>
+                <li data-next="actionAdd_Anomalistic_Year" data-prev="actionSubtract_Anomalistic_Year"><?= tr("Anomalistic year")?></li>
+                <li data-next="actionAdd_Anomalistic_Century" data-prev="actionSubtract_Anomalistic_Century"><?= tr("Anomalistic century")?></li>
+
+                <li data-next="actionAdd_Mean_Tropical_Month" data-prev="actionSubtract_Mean_Tropical_Month"><?= tr("Mean tropical month")?></li>
+                <li data-next="actionAdd_Mean_Tropical_Year" data-prev="actionSubtract_Mean_Tropical_Year"><?= tr("Mean tropical year")?></li>
+                <li data-next="actionAdd_Mean_Tropical_Century" data-prev="actionSubtract_Mean_Tropical_Century"><?= tr("Mean tropical century")?></li>
+
+                <li data-next="actionAdd_Tropical_Year" data-prev="actionSubtract_Tropical_Year"><?= tr("Tropical year")?></li>
+                <li data-next="actionAdd_Julian_Year" data-prev="actionSubtract_Julian_Year"><?= tr("Julian year")?></li>
+                <li data-next="actionAdd_Julian_Century" data-prev="actionSubtract_Julian_Century"><?= tr("Julian century")?></li>
+              </ul>
+            </div>
+          </section>
+          <!-- part of ui/viecontrol.js -->
           <section id="view" class="block textcenter">
             <header><h2><?= tr("View")?></h2></header>
             <div id="view_controls" class="ui-corner-all ui-widget-content">
@@ -69,19 +118,72 @@
             </div>
             <div id="view_wrapper">
               <div id="view_fov"></div>
-              <p>FOV: <span id="view_fov_text"></span></p>
+              <p title='<?= tr("Field of view")?>'>FOV: <span id="view_fov_text"></span></p>
               <p><?= tr("Projection")?>: <span id="view_projection"></span></p>
             </div>
           </section>
-          <section id="selection" class="block flex-expand">
-            <header><h2><?= tr("Selection")?></h2></header>
-            <div id="sel_infostring"></div>
-          </section>
         </div>
 
-        <ul id="autobuttons" class="ui-corner-all ui-widget-content">
+        <!-- part of ui/actions.js -->
+        <ul id="autobuttons" class="ui-corner-all ui-widget-content button32list margin-block">
         </ul>
       </div>
+      <div id="tab_selection">
+        <div class="flex flex-wrap">
+          <!-- part of ui/search.js -->
+          <section id="search" class="block flex-noshrink">
+            <header><h2><?= tr("Search")?></h2></header>
+            <div id="srch_tabs">
+              <ul>
+                <li><a href="#srch_tab_object"><?= tr("Object")?></a></li>
+                <li><a href="#srch_tab_list"><?= tr("Lists")?></a></li>
+              </ul>
+              <div id="srch_tab_object">
+                <form class="flex">
+                  <input id="srch_input" class="flex-expand" type="text" placeholder='<?= tr("Enter search term. Use TAB to navigate results.")?>' autocomplete="off"/>
+                  <button id="srch_button" type="submit"><?= tr("Select and focus")?></button>
+                </form>
+                <div>
+                  <div id="srch_results"></div>
+                </div>
+                <p id="srch_simbad_text">Simbad: <span id="srch_simbad"><?= tr("idle")?></span>
+                </p>
+                <div id="srch_greek">
+                  <div>
+                    <button>&alpha;</button><button>&beta;</button><button>&gamma;</button><button>&delta;</button><button>&epsilon;</button><button>&zeta;</button><button>&eta;</button><button>&theta;</button><button>&iota;</button><button>&kappa;</button><button>&lambda;</button><button>&mu;</button>
+                  </div>
+                  <div>
+                    <button>&nu;</button><button>&xi;</button><button>&omicron;</button><button>&pi;</button><button>&rho;</button><button>&sigma;</button><button>&tau;</button><button>&upsilon;</button><button>&phi;</button><button>&chi;</button><button>&psi;</button><button>&omega;</button>
+                  </div>
+                </div>
+              </div>
+              <div id="srch_tab_list">
+                <div class="flex flex-column" style="height: 100%">
+                  <div class="flex">
+                    <select id="srch_list_objecttype" class="flex-expand"></select>
+                    <input id="srch_list_english" type="checkbox" /><label for="srch_list_english"><?= tr("names in English")?></label>
+                  </div>
+                  <select id="srch_list_objectlist" class="scrollselect flex-expand" size="10"></select>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2>Quick select</h2>
+              <ul id="quickselect" class="ui-corner-all ui-widget-content button32list">
+                <!-- to add a new quick select button, simply add a new button with the english name of the object as value -->
+                <!-- try not to add whitespace between li items (inline-block layout uglyness) -->
+                <li><button title='<?= tr("Sun")?>' value="Sun">&#x2609;</button></li><li><button title='<?= tr("Mercury")?>' value="Mercury">&#x263F;</button></li><li><button title='<?= tr("Venus")?>' value="Venus">&#x2640;</button></li><li><button title='<?= tr("Earth")?>' value="Earth">&#x2641;</button></li><li><button title='<?= tr("Moon")?>' value="Moon">&#x263D;</button></li><li><button title='<?= tr("Mars")?>' value="Mars">&#x2642;</button></li><li><button title='<?= tr("Jupiter")?>' value="Jupiter">&#x2643;</button></li><li><button title='<?= tr("Saturn")?>' value="Saturn">&#x2644;</button></li><li><button title='<?= tr("Uranus")?>' value="Uranus">&#x2645;</button></li><li><button title='<?= tr("Neptune")?>' value="Neptune">&#x2646;</button></li><li><button title='<?= tr("Pluto")?>' value="Pluto">&#x2647;</button></li>
+              </ul>
+            </div>
+          </section>
+          <!-- part of ui/mainui.js -->
+          <section id="selection" class="block flex-expand">
+            <header><h2><?= tr("Current selection")?></h2></header>
+            <span id="sel_infostring"></span>
+          </section>
+        </div>
+      </div>
+      <!-- handled by ui/viewoptions.js -->
       <div id="tab_view">
         <div class="flex flex-wrap">
           <!-- checkboxes get automatically hooked up if the have a StelAction as value -->
@@ -127,21 +229,10 @@
                 <label><input type="checkbox" value="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
               </div>
             </div>
-            <div class="innerblock">
-              <h3><?= tr("Constellations")?></h3>
-              <label><input type="checkbox" value="actionShow_Constellation_Lines" /><?= tr("Show lines")?></label>
-              <label><input type="checkbox" value="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
-              <label><input type="checkbox" value="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
-              <label><input type="checkbox" value="actionShow_Constellation_Art" /><?= tr("Show art")?></label>
-            </div>
-            <div class="innerblock">
-              <h3><?= tr("Projection")?></h3>
-              <select id="vo_projectionlist" class="scrollselect" size="5">
-              </select>
-            </div>
           </div>
         </div>
       </div>
+      <!-- also handled by ui/viewoptions.js -->
       <div id="tab_landscape">
         <div class="smallblock">
           <h3><?= tr("Options")?></h3>
@@ -156,10 +247,15 @@
           <iframe id="vo_landscapeinfo" class="flex-expand" src="/api/view/landscapedescription/"></iframe>
         </div>
       </div>
+      <!-- also handled by ui/viewoptions.js -->
       <div id="tab_skyculture">
         <div class="smallblock">
           <h3><?= tr("Options")?></h3>
           <label><input type="checkbox" value="actionShow_Skyculture_Nativenames" /><?= tr("Use native names for planets from current culture")?></label>
+          <label><input type="checkbox" value="actionShow_Constellation_Lines" /><?= tr("Show lines")?></label>
+          <label><input type="checkbox" value="actionShow_Constellation_Labels" /><?= tr("Show labels")?></label>
+          <label><input type="checkbox" value="actionShow_Constellation_Boundaries" /><?= tr("Show boundaries")?></label>
+          <label><input type="checkbox" value="actionShow_Constellation_Art" /><?= tr("Show art")?></label>
         </div>
         <div class="smallblock flex landscapeblock">
           <h3><?= tr("Current sky culture")?></h3>
@@ -168,6 +264,7 @@
           <iframe id="vo_skycultureinfo" class="flex-expand" src="/api/view/skyculturedescription/"></iframe>
         </div>
       </div>
+      <!-- handled by ui/actions.js -->
       <div id="tab_actions">
         <div class="flex">
           <section id="scripts" class="block flex flex-column">
@@ -187,15 +284,16 @@
           </section>
         </div>
       </div>
-      <div id="tab_location_objects">
-        <div class="flex">
-          <section id="location" class="block flex-noshrink">
-            <header><h2><?= tr("Location")?></h2></header>
-            <div>
-              <div id="loc_map">
-                <img id="loc_mapimg" src="images/world.png" alt='<?= tr("Planet map")?>'/>
-                <img id="loc_mappointer" src="images/map-pointeur.png" alt='<?= tr("Planet map pointer")?>'/>
-              </div><div id="loc_searchlist" class="inline-flex flex-column" >
+      <!-- handled by ui/location.js -->
+      <div id="tab_location">
+        <section id="location" class="inline-block smallblock">
+          <h3><?= tr("Location")?></h3>
+          <div>
+            <div id="loc_map">
+              <img id="loc_mapimg" src="images/world.png" alt='<?= tr("Planet map")?>'/>
+              <img id="loc_mappointer" src="images/map-pointeur.png" alt='<?= tr("Planet map pointer")?>'/>
+            </div>
+            <div id="loc_searchlist" class="flex flex-column" >
               <select id="loc_list" size="10"></select>
               <input id="loc_search" placeholder='<?= tr("Type to search location")?>' autocomplete="off"/>
             </div>
@@ -213,50 +311,22 @@
             </div>
           </div>
         </section>
-        <section id="search" class="block">
-          <header><h2><?= tr("Search")?></h2></header>
-          <div id="srch_tabs">
-            <ul>
-              <li><a href="#srch_tab_object"><?= tr("Object")?></a></li>
-              <li><a href="#srch_tab_list"><?= tr("Lists")?></a></li>
-            </ul>
-            <div id="srch_tab_object">
-              <form class="flex">
-                <input id="srch_input" class="flex-expand" type="text" placeholder='<?= tr("Enter search term. Use TAB to navigate results.")?>' autocomplete="off"/>
-                <button id="srch_button" type="submit"><?= tr("Select and focus")?></button>
-              </form>
-              <div>
-                <div id="srch_results"></div>
-              </div>
-              <p id="srch_simbad_text">Simbad: <span id="srch_simbad"><?= tr("idle")?></span>
-              </p>
-              <div id="srch_greek">
-                <div>
-                  <button>&alpha;</button><button>&beta;</button><button>&gamma;</button><button>&delta;</button><button>&epsilon;</button><button>&zeta;</button><button>&eta;</button><button>&theta;</button><button>&iota;</button><button>&kappa;</button><button>&lambda;</button><button>&mu;</button>
-                </div>
-                <div>
-                  <button>&nu;</button><button>&xi;</button><button>&omicron;</button><button>&pi;</button><button>&rho;</button><button>&sigma;</button><button>&tau;</button><button>&upsilon;</button><button>&phi;</button><button>&chi;</button><button>&psi;</button><button>&omega;</button>
-                </div>
-              </div>
-            </div>
-            <div id="srch_tab_list">
-              <div class="flex flex-column" style="height: 100%">
-                <div class="flex">
-                  <select id="srch_list_objecttype" class="flex-expand"></select>
-                  <input id="srch_list_english" type="checkbox" /><label for="srch_list_english"><?= tr("names in English")?></label>
-                </div>
-                <select id="srch_list_objectlist" class="scrollselect flex-expand" size="10"></select>
-              </div>
-            </div>
-          </div>
-        </section>
+      </div>
+      <!-- also handled by ui/viewoptions.js -->
+      <div id="tab_projection">
+        <div class="smallblock flex landscapeblock">
+          <h3><?= tr("Projection")?></h3>
+          <select id="vo_projectionlist" class="scrollselect" size="5">
+          </select>
+          <iframe id="vo_projectioninfo" class="flex-expand" src="/api/view/projectiondescription"></iframe>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div id="noresponse" title='<?= tr("No response from server")?>'>
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server since %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>
-</div>
-<div id="loadindicator"></div>
+  <!-- handled by mainui.js -->
+  <div id="noresponse" title='<?= tr("No response from server")?>'>
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server since %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>
+  </div>
+  <div id="loadindicator"></div>
 </body>
 </html>

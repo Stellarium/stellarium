@@ -8,7 +8,7 @@ define(["jquery", "api/viewoptions", "api/actions"], function($, viewOptionApi, 
 	function fillProjectionList(data) {
 		var $projectionlist = $("#vo_projectionlist");
 		$projectionlist.empty();
-		var parent = $projectionlist.parent();
+		var prev = $projectionlist.prev();
 		$projectionlist.detach();
 
 		for (var val in data) {
@@ -18,7 +18,7 @@ define(["jquery", "api/viewoptions", "api/actions"], function($, viewOptionApi, 
 			$projectionlist.append(option);
 		}
 
-		$projectionlist.appendTo(parent);
+		prev.after($projectionlist);
 	}
 
 	function fillLandscapeList(data) {
@@ -104,6 +104,11 @@ define(["jquery", "api/viewoptions", "api/actions"], function($, viewOptionApi, 
 
 
 	$(viewOptionApi).on("projectionChanged", function(evt, proj) {
+		//this forces a reload of the iframe
+		$("#vo_projectioninfo").attr("src", function(i,val){
+			return val;
+		});
+
 		$vo_projectionlist.children('option.select_selected').removeClass('select_selected');
 		$vo_projectionlist.val(proj);
 		$vo_projectionlist.children("option[value='" + proj + "']").addClass('select_selected');

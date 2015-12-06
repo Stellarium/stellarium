@@ -3,6 +3,8 @@ requirejs.config({
 	paths: {
 		jquery: "jquery-1.11.3"
 	},
+	//prolong js timeout
+	waitSeconds: 60,
 	map:{
 		//add some fixes to jquery ui
 		"*":{

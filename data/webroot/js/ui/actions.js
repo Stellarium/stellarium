@@ -75,11 +75,10 @@ define(["jquery", "api/remotecontrol", "api/actions"], function($, rc, actionApi
 
 		buttonActions.forEach(function(val) {
 			var btn = document.createElement("button");
-			btn.className = "button32 " + val[1];
+			btn.className = "icon32 " + val[1];
 			btn.value = val[0];
 
 			var li = document.createElement("li");
-			li.className = "button32wrapper";
 			li.appendChild(btn);
 
 			$ul.append(li);
