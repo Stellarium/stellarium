@@ -258,6 +258,7 @@ StelApp::~StelApp()
 	qDebug() << qPrintable(QString("Downloaded %1 files (%2 kbytes) in a session of %3 sec (average of %4 kB/s + %5 files from cache (%6 kB)).").arg(nbDownloadedFiles).arg(totalDownloadedSize/1024).arg(getTotalRunTime()).arg((double)(totalDownloadedSize/1024)/getTotalRunTime()).arg(nbUsedCache).arg(totalUsedCacheSize/1024));
 
 	stelObjectMgr->unSelect();
+	moduleMgr->unloadModule("StelVideoMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelSkyLayerMgr", false);  // We need to delete it afterward
 	moduleMgr->unloadModule("StelObjectMgr", false);// We need to delete it afterward
 	StelModuleMgr* tmp = moduleMgr;
@@ -449,6 +450,8 @@ void StelApp::init(QSettings* conf)
 
 	// Init video manager
 	videoMgr = new StelVideoMgr();
+	videoMgr->init();
+	getModuleMgr().registerModule(videoMgr);
 
 	// Constellations
 	ConstellationMgr* asterisms = new ConstellationMgr(hip_stars);

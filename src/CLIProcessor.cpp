@@ -50,10 +50,12 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "  "
 		          << qPrintable(binName) << " [options]\n\n"
 		          << "Options:\n"
-		          << "--version (or -v)       : Print program name and version and exit.\n"
-		          << "--help (or -h)          : This cruft.\n"
-		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
-		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
+			  << "--version (or -v)       : Print program name and version and exit.\n"
+			  << "--help (or -h)          : This cruft.\n"
+			  << "--config-file (or -c)   : Use an alternative name for the config file\n"
+			  << "--user-dir (or -u)      : Use an alternative user data directory\n"
+			  << "--verbose               : Even more diagnostic output in logfile \n"
+			  << "                          (esp. multimedia handling)\n"
 			#ifdef Q_OS_WIN
 			  << "--angle-mode (or -a)    : Use ANGLE as OpenGL ES2 rendering engine (autodetect driver)\n"
 			  << "--angle-d3d9 (or -9)    : Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine\n"
@@ -65,14 +67,14 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile.\n"
 			  << "                          Use this is you have graphics problems\n"
 			  << "                          and want to send a bug report\n"
-		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
-		          << "                          the full screen setting in the config file\n"
-		          << "--screenshot-dir        : Specify directory to save screenshots\n"
-		          << "--startup-script        : Specify name of startup script\n"
-		          << "--home-planet           : Specify observer planet (English name)\n"
-		          << "--altitude              : Specify observer altitude in meters\n"
-		          << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
-		          << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
+			  << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
+			  << "                          the full screen setting in the config file\n"
+			  << "--screenshot-dir        : Specify directory to save screenshots\n"
+			  << "--startup-script        : Specify name of startup script\n"
+			  << "--home-planet           : Specify observer planet (English name)\n"
+			  << "--altitude              : Specify observer altitude in meters\n"
+			  << "--longitude             : Specify longitude, e.g. +53d58\\'16.65\\\"\n"
+			  << "--latitude              : Specify latitude, e.g. -1d4\\'27.48\\\"\n"
 			  << "--list-landscapes       : Print a list of valid landscape IDs\n"
 		          << "--landscape             : Start using landscape whose ID (dir name)\n"
 		          << "                          is passed as parameter to option\n"
@@ -84,6 +86,11 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--multires-image        : With filename / URL argument, specify a\n"
 		          << "                          multi-resolution image to load\n";
 		exit(0);
+	}
+
+	if (argsGetOption(argList, "", "--verbose"))
+	{
+		qApp->setProperty("verbose", true);
 	}
 
 	#ifdef Q_OS_WIN
