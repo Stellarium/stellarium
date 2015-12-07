@@ -8,7 +8,7 @@ INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/scripts
 
 
 # FIXME: A temporary solution for public testing of media support. Remove before building 0.15
-INSTALL(FILES videotest.ssc videotest_extended.ssc videotest_popout.ssc  DESTINATION share/${PACKAGE}/scripts/tests)
+INSTALL(FILES tests/videotest.ssc tests/videotest_extended.ssc tests/videotest_popout.ssc  DESTINATION share/${PACKAGE}/scripts/tests)
 INSTALL(FILES tests/media/stellarium.mp4 DESTINATION share/${PACKAGE}/scripts/tests/media)
 
 
