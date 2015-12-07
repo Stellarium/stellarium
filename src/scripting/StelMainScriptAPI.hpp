@@ -398,6 +398,12 @@ public slots:
 	//! @param b if true, sets the spherical mirror distortion effect for viewport on, else sets it off
 	void setSphericMirror(bool b);
 
+	//! Set viewport offset
+	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
+	//! @param x -0.5...0.5 horizontal offset. This is not available in the GUI, and it is recommended to keep it at 0.
+	//! @param y -0.5...0.5 vertical offset. This is available in the GUI.
+	void setViewportOffset(const float x, const float y);
+
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
 	QStringList getAllSkyCultureIDs();
