@@ -219,7 +219,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 		if (core->getCurrentPlanet()->getEnglishName()=="Earth")
 		{
-			ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0);
+			ecl = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
 
 			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 			StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);

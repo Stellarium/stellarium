@@ -53,6 +53,7 @@ protected:
 	Ui_telescopeConfigurationDialog* ui;
 	
 private:
+	QStringList* listSerialPorts();
 	void initConfigurationDialog();
 	
 private slots:

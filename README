@@ -210,7 +210,10 @@ for more details on the location of the user data directory for your OS.
 	1.5 An accurate long-time precession model compatible with P03:
 		J. Vondrak, N. Capitaine, P. Wallace: New precession expressions, valid for long time intervals.
 		Astronomy&Astrophysics 534, A22 (2011); DOI: 10.1051/0004-6361/201117274
-
+	1.6 Nutation: 
+		Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the Precession-Nutation of the Celestial Pole.
+		Celestial Mechanics and Dynamical Astronomy 85: 37-49, 2003.
+		This model provides accuracy better than 1 milli-arcsecond in the time 1995-2050. It is applied for years 1500..2500 only.
 
 2. Included source code
 	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
@@ -319,6 +322,7 @@ for more details on the location of the user data directory for your OS.
 	3.11 Morphological classification and magnitudes (partially) for Melotte catalogue was taken from
 		DeepSkyPedia
 		http://deepskypedia.com/wiki/List:Melotte
+
 
 4. Graphics
 	4.1 All graphics are copyrighted by the Stellarium's Team (GPL) except
@@ -446,11 +450,12 @@ for more details on the location of the user data directory for your OS.
 		from Peter Vasey, Plover Hill Observatory
 		http://www.madpc.co.uk/~peterv/
 	4.26 Image of IC434 from Marc Aragnou
+	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
 
 --------------------------------------------------------------------------------
 9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2004-2012 Fabien Chereau et al.
+   Copyright (C) 2004-2015 Fabien Chereau et al.
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License

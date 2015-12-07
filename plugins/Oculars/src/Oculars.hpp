@@ -100,6 +100,7 @@ public:
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual void update(double) {;}
+	double ccdRotationAngle() const;
 
 	QString getDimensionsString(double fovX, double fovY) const;
 	QString getFOVString(double fov) const;
@@ -253,10 +254,11 @@ private:
 	float magLimitStars;		//!< Value of limited magnitude for stars
 	bool flagLimitDSOs;		//!< Flag to track limit magnitude for DSOs
 	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
+	bool flagLimitPlanets;		//!< Flag to track limit magnitude for planets, asteroids, comets etc.
+	float magLimitPlanets;		//!< Value of limited magnitude for planets, asteroids, comets etc.
 
 	bool flagMoonScale;		//!< Flag to track of usage zooming of the Moon
 
-	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
 	bool flagLimitMagnitude;	//!< Read from the ini file, whether a magnitude is required to be limited.
