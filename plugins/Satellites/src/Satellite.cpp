@@ -65,7 +65,7 @@ Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2,0.2,0.2);
 QString Satellite::myText = "";
 #endif
 double Satellite::sunReflAngle = 180.;
-
+double Satellite::timeShift = 0.;
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
     : initialized(false),
@@ -612,7 +612,7 @@ void Satellite::update(double)
 	if (pSatWrapper && orbitValid)
 	{
 		StelCore* core = StelApp::getInstance().getCore();
-		epochTime = core->getJD(); // We have "true" JD from core, satellites don't need JDE!
+		epochTime = core->getJD() + timeShift; // We have "true" JD from core, satellites don't need JDE!
 
 		pSatWrapper->setEpoch(epochTime);
 		position                 = pSatWrapper->getTEMEPos();

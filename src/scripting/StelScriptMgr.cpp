@@ -426,6 +426,12 @@ void StelScriptMgr::output(const QString &msg)
 	emit(scriptOutput(msg));
 }
 
+void StelScriptMgr::resetOutput(void)
+{
+	StelScriptOutput::reset();
+	emit(scriptOutput(""));
+}
+
 void StelScriptMgr::scriptEnded()
 {
 	if (engine.hasUncaughtException())

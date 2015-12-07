@@ -23,17 +23,17 @@
 ADD_CUSTOM_TARGET(translations)
 
 IF(NOT MSVC)
-    # These packages are now used only to generate .pot and .po files
-    FIND_PACKAGE(Gettext)
-    FIND_PACKAGE(XGettext)
+     # These packages are now used only to generate .pot and .po files
+     FIND_PACKAGE(Gettext)
+     FIND_PACKAGE(XGettext)
 
-    IF(${XGETTEXT_FOUND})
-	ADD_CUSTOM_TARGET(generate-pot)
-    ENDIF()
+     IF(${XGETTEXT_FOUND})
+          ADD_CUSTOM_TARGET(generate-pot)
+     ENDIF()
 
-    IF(${GETTEXT_FOUND})
-	ADD_CUSTOM_TARGET(update-po)
-    ENDIF()
+     IF(${GETTEXT_FOUND})
+          ADD_CUSTOM_TARGET(update-po)
+     ENDIF()
 ENDIF()
 
 FIND_PACKAGE(Qt5LinguistTools REQUIRED)
@@ -59,64 +59,64 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations)
 #
 MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
 
-    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations/${_domain})
+     file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations/${_domain})
 
-    SET(_gmoFiles)
-    GET_FILENAME_COMPONENT(_absPotFile ${_domain}.pot ABSOLUTE)
+     SET(_gmoFiles)
+     GET_FILENAME_COMPONENT(_absPotFile ${_domain}.pot ABSOLUTE)
 
-    IF(${GETTEXT_FOUND})
-        # Update these PO files when building the "update-po-<DOMAIN>" and
-        # "update-po" targets.
-        ADD_CUSTOM_TARGET(update-po-${_domain})
-        ADD_DEPENDENCIES(update-po update-po-${_domain})
+     IF(${GETTEXT_FOUND})
+          # Update these PO files when building the "update-po-<DOMAIN>" and
+          # "update-po" targets.
+          ADD_CUSTOM_TARGET(update-po-${_domain})
+          ADD_DEPENDENCIES(update-po update-po-${_domain})
 
-        # Make sure the POT file is updated before updating the PO files.
-        ADD_DEPENDENCIES(update-po-${_domain} generate-pot-${_domain})
-    ENDIF()
+          # Make sure the POT file is updated before updating the PO files.
+          ADD_DEPENDENCIES(update-po-${_domain} generate-pot-${_domain})
+     ENDIF()
 
-    SET(_addToAll)
-    IF(${_firstLang} STREQUAL "DEFAULT_TARGET")
-        SET(_addToAll "ALL")
-        SET(_firstLang)
-    ENDIF(${_firstLang} STREQUAL "DEFAULT_TARGET")
+     SET(_addToAll)
+     IF(${_firstLang} STREQUAL "DEFAULT_TARGET")
+          SET(_addToAll "ALL")
+          SET(_firstLang)
+     ENDIF(${_firstLang} STREQUAL "DEFAULT_TARGET")
 
-    FOREACH (_lang ${ARGN})
-        GET_FILENAME_COMPONENT(_absFile ${_lang}.po ABSOLUTE)
-        FILE(RELATIVE_PATH _relFile ${PROJECT_SOURCE_DIR} ${_absFile})
-        SET(_gmoFile ${CMAKE_BINARY_DIR}/translations/${_domain}/${_lang}.qm)
+     FOREACH (_lang ${ARGN})
+          GET_FILENAME_COMPONENT(_absFile ${_lang}.po ABSOLUTE)
+          FILE(RELATIVE_PATH _relFile ${PROJECT_SOURCE_DIR} ${_absFile})
+          SET(_gmoFile ${CMAKE_BINARY_DIR}/translations/${_domain}/${_lang}.qm)
 
-        # Convert a PO file into a qm file.
-        ADD_CUSTOM_COMMAND(
-            OUTPUT ${_gmoFile} 
-            COMMAND ${lconvert_executable} -i ${_absFile} -o ${_gmoFile} 
-            DEPENDS ${_absFile}
-        )
+          # Convert a PO file into a qm file.
+          ADD_CUSTOM_COMMAND(
+               OUTPUT ${_gmoFile} 
+               COMMAND ${lconvert_executable} -i ${_absFile} -o ${_gmoFile} 
+               DEPENDS ${_absFile}
+          )
 
-        IF(GETTEXT_MSGMERGE_EXECUTABLE)
-			# Update the PO file unconditionally when building the
-			# "update-po-<DOMAIN>" target. Note that to see the file being
-			# processed, we have to run "cmake -E echo", because the
-			# COMMENT is not displayed by cmake...
-			ADD_CUSTOM_COMMAND(
-				TARGET update-po-${_domain}
-				POST_BUILD
-				COMMAND ${CMAKE_COMMAND} -E echo "** Updating ${_relFile}"
-				COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE}
-					--quiet --update -m --backup=none
-					${_absFile} ${_absPotFile}
-				VERBATIM
-			)
-		ENDIF()
+          IF(${GETTEXT_MSGMERGE_EXECUTABLE})
+               # Update the PO file unconditionally when building the
+               # "update-po-<DOMAIN>" target. Note that to see the file being
+               # processed, we have to run "cmake -E echo", because the
+               # COMMENT is not displayed by cmake...
+               ADD_CUSTOM_COMMAND(
+                    TARGET update-po-${_domain}
+                    POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E echo "** Updating ${_relFile}"
+                    COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE}
+                         --quiet --update -m --backup=none -s
+                         ${_absFile} ${_absPotFile}
+                    VERBATIM
+               )
+          ENDIF()
 
-        INSTALL(FILES ${_gmoFile} DESTINATION share/${PACKAGE}/translations/${_domain}/)
-        SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
+          INSTALL(FILES ${_gmoFile} DESTINATION share/${PACKAGE}/translations/${_domain}/)
+          SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 
-   ENDFOREACH (_lang)
+     ENDFOREACH (_lang)
 
-   # Create the .qm files when building the "translations-<DOMAIN>" and
-   # "translations" targets.
-   ADD_CUSTOM_TARGET(translations-${_domain} ${_addToAll} DEPENDS ${_gmoFiles})
-   ADD_DEPENDENCIES(translations translations-${_domain})
+     # Create the .qm files when building the "translations-<DOMAIN>" and
+     # "translations" targets.
+     ADD_CUSTOM_TARGET(translations-${_domain} ${_addToAll} DEPENDS ${_gmoFiles})
+     ADD_DEPENDENCIES(translations translations-${_domain})
 
 ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 

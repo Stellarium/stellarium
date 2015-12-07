@@ -134,7 +134,7 @@ void StoredViewDialog::loadView()
 	int idx = ui->listView->selectionModel()->currentIndex().row();
 	if(idx>=0)
 	{
-		mgr->setView(viewModel->getViewAtIdx(idx));
+		mgr->setView(viewModel->getViewAtIdx(idx), ui->useDateCheckBox->isChecked());
 	}
 }
 
@@ -152,6 +152,12 @@ void StoredViewDialog::addUserView()
 {
 	StoredView sv = mgr->getCurrentView();
 	sv.label = "New user view";
+	if (ui->useDateCheckBox->isChecked())
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		sv.jd=core->getJD();
+		sv.jdIsRelevant=true;
+	}
 
 	SceneInfo info = viewModel->getScene();
 	sv.description = QString(q_("Grid coordinates (%1): %2m, %3m, %4m")).arg(info.gridName)

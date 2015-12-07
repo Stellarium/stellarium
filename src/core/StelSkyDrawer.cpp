@@ -78,9 +78,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 	setFlagStarMagnitudeLimit((conf->value("astro/flag_star_magnitude_limit", false).toBool()));
 	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toFloat());
+	setFlagPlanetMagnitudeLimit((conf->value("astro/flag_planet_magnitude_limit", false).toBool()));
+	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toFloat());
 	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
 	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toFloat());
-	// qDebug() << "drawer: clampStellarMag: " << clampStellarMagnitude << " , clampDSOmagnitude: " << clampDSOMagnitude;
 
 	bool ok=true;
 
@@ -148,7 +149,8 @@ void StelSkyDrawer::init()
 	// Load star texture no mipmap:
 	texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/star16x16.png");
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/haloLune.png");
-	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");
+	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/halo.png");	
+	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/corona.png");
 
 	// Create shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
@@ -466,6 +468,22 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	return true;
 }
 
+// Draw's the Sun's corona during a solar eclipse on Earth.
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha)
+{
+	texSunCorona->bind();
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	painter->enableTexture2d(true);
+
+	Vec3f win;
+	painter->getProjector()->project(v, win);
+	// For some reason we must mix color with the given alpha as well, else mixing does not work.
+	painter->setColor(color[0]*alpha, color[1]*alpha, color[2]*alpha, alpha);
+	painter->drawSprite2dMode(win[0], win[1], radius);
+
+	postDrawPointSource(painter);
+}
 
 // Terminate drawing of a 3D model, draw the halo
 void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color)

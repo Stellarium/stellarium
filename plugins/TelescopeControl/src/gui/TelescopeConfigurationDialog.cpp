@@ -34,6 +34,9 @@
 #include <QCompleter>
 #include <QFrame>
 #include <QTimer>
+#include <QtSerialPort/QSerialPortInfo>
+#include <QFile>
+#include <QDir>
 
 TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	: configuredSlot(0)
@@ -48,7 +51,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	#ifdef Q_OS_WIN32
 	serialPortValidator = new QRegExpValidator (QRegExp("COM[0-9]+"), this);
 	#else
-	serialPortValidator = new QRegExpValidator (QRegExp("/dev/.*"), this);
+	serialPortValidator = new QRegExpValidator (QRegExp("/.*"), this);
 	#endif
 }
 
@@ -60,6 +63,44 @@ TelescopeConfigurationDialog::~TelescopeConfigurationDialog()
 	delete hostNameValidator;
 	delete circleListValidator;
 	delete serialPortValidator;
+}
+
+QStringList* TelescopeConfigurationDialog::listSerialPorts()
+{
+	// list real serial ports
+	QStringList *plist = new QStringList();
+	foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()) {
+		plist->append(serialPortInfo.systemLocation());
+	}
+
+// on linux find some virtual ports
+#ifdef Q_OS_LINUX
+	QStringList filters;
+	filters << "ttyNET*" << "ttynet*" << "Telescope*";
+	// look in /dev/*
+	QDir dev("/dev");
+	dev.setFilter(QDir::System);
+	dev.setSorting(QDir::Reversed);
+	dev.setNameFilters(filters);
+	QFileInfoList list = dev.entryInfoList();
+	for (int i = 0; i < list.size(); i ++) {
+		QFileInfo fileInfo = list.at(i);
+		plist->append(fileInfo.absoluteFilePath());
+	}
+	// look in /tmp/* for non-root virtual ports (append ttyS8 and ttyUSB*)
+	filters << "ttyS*" << "ttyUSB*";
+	QDir tmp("/tmp");
+	tmp.setFilter(QDir::System);
+	tmp.setSorting(QDir::Reversed);
+	tmp.setNameFilters(filters);
+	list = tmp.entryInfoList();
+	for (int i = 0; i < list.size(); i ++) {
+		QFileInfo fileInfo = list.at(i);
+		plist->append(fileInfo.absoluteFilePath());
+	}
+#endif
+
+	return plist;
 }
 
 void TelescopeConfigurationDialog::retranslate()
@@ -92,7 +133,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	ui->lineEditTelescopeName->setValidator(telescopeNameValidator);
 	ui->lineEditHostName->setValidator(hostNameValidator);
 	ui->lineEditCircleList->setValidator(circleListValidator);
-	ui->lineEditSerialPort->setValidator(serialPortValidator);
+	ui->comboSerialPort->setValidator(serialPortValidator);
 }
 
 //Set the configuration panel in a predictable state
@@ -109,11 +150,14 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 
 	//Connect at startup
 	ui->checkBoxConnectAtStartup->setChecked(false);
-	
+
 	//Serial port
-	ui->lineEditSerialPort->clear();
-	ui->lineEditSerialPort->setCompleter(new QCompleter(SERIAL_PORT_NAMES, this));
-	ui->lineEditSerialPort->setText(SERIAL_PORT_NAMES.value(0));
+	QStringList *plist = listSerialPorts();
+	ui->comboSerialPort->clear();
+	ui->comboSerialPort->addItems(*plist);
+	ui->comboSerialPort->activated(plist->value(0));
+	ui->comboSerialPort->setEditText(plist->value(0));
+	delete(plist);
 	
 	//Populating the list of available devices
 	ui->comboBoxDeviceModel->clear();
@@ -198,7 +242,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
 		}
 		//Initialize the serial port value
-		ui->lineEditSerialPort->setText(serialPortName);
+		ui->comboSerialPort->activated(serialPortName);
+		ui->comboSerialPort->setEditText(serialPortName);
 	}
 	else if (connectionType == ConnectionRemote)
 	{
@@ -248,7 +293,10 @@ void TelescopeConfigurationDialog::toggleTypeLocal(bool isChecked)
 	{
 		//Re-initialize values that may have been changed
 		ui->comboBoxDeviceModel->setCurrentIndex(0);
-		ui->lineEditSerialPort->setText(SERIAL_PORT_NAMES.value(0));
+		QStringList *plist = listSerialPorts();
+		ui->comboSerialPort->activated(plist->value(0));
+		ui->comboSerialPort->setEditText(plist->value(0));
+		delete(plist);
 		ui->lineEditHostName->setText("localhost");
 		ui->spinBoxTCPPort->setValue(DEFAULT_TCP_PORT_FOR_SLOT(configuredSlot));
 
@@ -340,7 +388,7 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	if(ui->radioButtonTelescopeLocal->isChecked())
 	{
 		//Read the serial port
-		QString serialPortName = ui->lineEditSerialPort->text();		
+		QString serialPortName = ui->comboSerialPort->currentText();
 		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX))
 			return;//TODO: Add more validation!
 		

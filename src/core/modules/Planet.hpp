@@ -109,7 +109,7 @@ public:
 	       int flagLighting,
 	       double radius,
 	       double oblateness,
-	       Vec3f color,
+	       Vec3f halocolor,
 	       float albedo,
 	       const QString& texMapName,
 	       const QString& normalMapName,
@@ -177,7 +177,7 @@ public:
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
-	// GZ: made that virtual for Comets.
+	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
@@ -291,6 +291,8 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
+	static bool permanentDrawingOrbits;
+
 	//! Return the list of planets which project some shadow on this planet
 	QVector<const Planet*> getCandidatesForShadow() const;
 	
@@ -324,7 +326,7 @@ protected:
 					 // centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
-	Vec3f color;                     // exclusively used for drawing the planet halo
+	Vec3f haloColor;                 // exclusively used for drawing the planet halo
 
 	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
 	Mat4d rotLocalToParent;          // GZ2015: was undocumented.
@@ -375,6 +377,7 @@ protected:
 		int shadowCount;
 		int shadowData;
 		int sunInfo;
+		int skyBrightness;
 		
 		void initLocations(QOpenGLShaderProgram*);
 	};

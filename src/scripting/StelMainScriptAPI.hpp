@@ -166,8 +166,8 @@ public slots:
 	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
-	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
-	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
 	//! - size: angular size in radians
@@ -189,15 +189,15 @@ public slots:
 	//! Fetch a map with data about an latest selected object's position, magnitude and so on
 	//! @return a map of object data.  Keys:
 	//! - altitude : apparent altitude angle in decimal degrees
-	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees	
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
-	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees	
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees	
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
-	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
-	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees	
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)	
 	//! - size: angular size in radians
@@ -325,7 +325,8 @@ public slots:
 	//! @param dir the path of the directory to save the screenshot in.  If
 	//! none is specified, the default screenshot directory will be used.
 	//! @param invert whether colors have to be inverted in the output image
-	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
+	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
+	void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false);
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
@@ -655,6 +656,9 @@ public slots:
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
 	void output(const QString& s);
+
+	//! Reset (clear) output file
+	void resetOutput(void);
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.

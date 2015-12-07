@@ -154,6 +154,7 @@ void SolarSystem::init()
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
+	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 
 	recreateTrails();
 
@@ -1742,4 +1743,83 @@ void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
 	return getEarth()->getApparentMagnitudeAlgorithmString();
+}
+
+void SolarSystem::setFlagPermanentOrbits(bool b)
+{
+	Planet::permanentDrawingOrbits=b;
+}
+
+double SolarSystem::getEclipseFactor(const StelCore* core) const
+{
+	Vec3d Lp = sun->getEclipticPos();
+	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
+	const double RS = sun->getRadius();
+
+	double final_illumination = 1.0;
+
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		if(planet == sun || planet == core->getCurrentPlanet())
+			continue;
+
+		Mat4d trans;
+		planet->computeModelMatrix(trans);
+
+		const Vec3d C = trans * Vec3d(0, 0, 0);
+		const double radius = planet->getRadius();
+
+		Vec3d v1 = Lp - P3;
+		Vec3d v2 = C - P3;
+
+		const double L = v1.length();
+		const double l = v2.length();
+
+		v1 = v1 / L;
+		v2 = v2 / l;
+
+		const double R = RS / L;
+		const double r = radius / l;
+		const double d = ( v1 - v2 ).length();
+
+		if(planet->englishName == "Moon")
+			v1 = planet->getHeliocentricEclipticPos();
+
+		double illumination;
+
+		// distance too far
+		if(d >= R + r)
+		{
+			illumination = 1.0;
+		}
+		// umbra
+		else if(r >= R + d)
+		{
+			illumination = 0.0;
+		}
+		// penumbra completely inside
+		else if(d + r <= R)
+		{
+			illumination = 1.0 - r * r / (R * R);
+		}
+		// penumbra partially inside
+		else
+		{
+			const double x = (R * R + d * d - r * r) / (2.0 * d);
+
+			const double alpha = std::acos(x / R);
+			const double beta = std::acos((d - x) / r);
+
+			const double AR = R * R * (alpha - 0.5 * std::sin(2.0 * alpha));
+			const double Ar = r * r * (beta - 0.5 * std::sin(2.0 * beta));
+			const double AS = R * R * 2.0 * std::asin(1.0);
+
+			illumination = 1.0 - (AR + Ar) / AS;
+		}
+
+		if(illumination < final_illumination)
+			final_illumination = illumination;
+	}
+
+	return final_illumination;
 }

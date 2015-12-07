@@ -296,7 +296,7 @@ void AstroCalcDialog::generateEphemeris()
 		{
 			double JD = firstJD + i*currentStep;
 			core->setJD(JD);
-			core->update(10); // force update to get new coordinates
+			core->update(0); // force update to get new coordinates
 			StelUtils::rectToSphe(&ra,&dec,obj->getJ2000EquatorialPos(core));
 			ACTreeWidgetItem *treeItem = new ACTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
@@ -434,8 +434,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 void AstroCalcDialog::setPhenomenaHeaderNames()
 {
 	QStringList headerStrings;
-	//TRANSLATORS: type of phenomena
-	headerStrings << q_("Type");
+	headerStrings << q_("Phenomenon");
 	headerStrings << q_("Date and Time");
 	headerStrings << q_("Object 1");
 	headerStrings << q_("Object 2");
@@ -574,7 +573,7 @@ void AstroCalcDialog::calculatePhenomena()
 		}
 
 		core->setJD(currentJD); // restore time
-		core->update(10);
+		core->update(0);
 	}
 
 	// adjust the column width
@@ -593,7 +592,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	for (it=list.constBegin(); it!=list.constEnd(); ++it)
 	{
 		core->setJD(it.key());
-		core->update(10);
+		core->update(0);
 
 		QString phenomenType = q_("Conjunction");
 		double separation = it.value();
@@ -732,7 +731,7 @@ bool AstroCalcDialog::findPrecise(QPair<double, double> *out, PlanetP object1, P
 double AstroCalcDialog::findDistance(double JD, PlanetP object1, PlanetP object2, bool opposition)
 {
 	core->setJD(JD);
-	core->update(10);
+	core->update(0);
 	Vec3d obj1 = object1->getJ2000EquatorialPos(core);
 	Vec3d obj2 = object2->getJ2000EquatorialPos(core);
 	double angle = obj1.angle(obj2);

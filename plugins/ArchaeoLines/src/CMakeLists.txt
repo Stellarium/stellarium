@@ -2,14 +2,14 @@ INCLUDE_DIRECTORIES(. gui)
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(ArchaeoLines_SRCS
-  ArchaeoLines.hpp
-  ArchaeoLines.cpp
-  gui/ArchaeoLinesDialog.hpp
-  gui/ArchaeoLinesDialog.cpp
+     ArchaeoLines.hpp
+     ArchaeoLines.cpp
+     gui/ArchaeoLinesDialog.hpp
+     gui/ArchaeoLinesDialog.cpp
 )
 
 SET(ArchaeoLines_UIS
-  gui/archaeoLinesDialog.ui
+     gui/archaeoLinesDialog.ui
 )
 
 QT5_WRAP_UI(ArchaeoLines_UIS_H ${ArchaeoLines_UIS})

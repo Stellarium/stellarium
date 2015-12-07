@@ -215,6 +215,11 @@ public slots:
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
 
+	//! Return the initial value of intensity of art of constellations.
+	double getInitConstellationIntensity() const {return initConstellationIntensity;}
+	//! Set the initial value of intensity of art of constellations.
+	void setInitConstellationIntensity(double v) {initConstellationIntensity=v; changeConstellationArtIntensity();}
+
 signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
@@ -222,11 +227,6 @@ signals:
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
-
-	//! Return the initial value of intensity of art of constellations.
-	double getInitConstellationIntensity() const {return initConstellationIntensity;}
-	//! Set the initial value of intensity of art of constellations.
-	void setInitConstellationIntensity(double v) {initConstellationIntensity=v;}
 	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
