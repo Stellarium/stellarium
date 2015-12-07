@@ -405,6 +405,10 @@ ENDIF()
 #############################################################################################
 
 SET(extLinkerOption ${extLinkerOption} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
+IF(ENABLE_MEDIA)
+    # Forced linkage to Qt5MultimediaWidgets library when media support is enabled
+    SET(extLinkerOption ${extLinkerOption} ${Qt5MultimediaWidgets_LIBRARIES})
+ENDIF()
 IF(WIN32 AND NOT MSVC)
 # TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
 # Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
@@ -428,8 +432,8 @@ IF(GENERATE_STELMAINLIB)
      ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
      QT5_USE_MODULES(stelMain Core Concurrent Gui Network OpenGL Script Widgets)
-     IF(ENABLE_SOUND)
-          QT5_USE_MODULES(stelMain Multimedia)
+     IF(ENABLE_MEDIA)
+         QT5_USE_MODULES(stelMain Multimedia MultimediaWidgets)
      ENDIF()
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stelMain SerialPort)
@@ -445,8 +449,8 @@ ELSE()
      TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
      QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets SerialPort)
-     IF(ENABLE_SOUND)
-          QT5_USE_MODULES(stellarium Multimedia)
+     IF(ENABLE_MEDIA)
+          QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
      ENDIF()
      IF(USE_PLUGIN_TELESCOPECONTROL)
           QT5_USE_MODULES(stellarium SerialPort)
