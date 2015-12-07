@@ -171,7 +171,7 @@ public:
 	//! Get the size of font
 	int getBaseFontSize() const { return baseFontSize; }
 	void setBaseFontSize(int s) { baseFontSize=s; }
-	
+
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI si currently being used.
@@ -292,7 +292,7 @@ private:
 	QNetworkAccessManager* networkAccessManager;
 
 	//! Get proxy settings from config file... if not set use http_proxy env var
-	void setupHttpProxy();
+	void setupNetworkProxy();
 
 	// The audio manager.  Must execute in the main thread.
 	StelAudioMgr* audioMgr;

@@ -249,6 +249,7 @@ private:
 	int	visibility;
 	double	phaseAngle; // phase angle for the satellite
 	static double sunReflAngle; // for Iridium satellites
+	static double timeShift; // for Iridium satellites
 
 	//Satellite Orbit Draw
 	QFont     font;
