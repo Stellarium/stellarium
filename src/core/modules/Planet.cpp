@@ -358,7 +358,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 //			oss << QString(q_("Eclipse Factor: %1 alpha: %2")).arg(eclipseFactor).arg(-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor))) << "<br>";
 			// Release version:
 			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
-			if (eclipseFactor>0.f)
+			if (eclipseFactor>1.e-7) // needed to avoid false display of 1e-14 or so.
 				oss << QString(q_("Eclipse Factor: %1%")).arg(eclipseFactor) << "<br>";
 
 		}
