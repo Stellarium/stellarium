@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-05 16:09+0600\n"
-"PO-Revision-Date: 2015-11-15 21:27+0000\n"
+"PO-Revision-Date: 2015-12-09 01:39+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-06 05:12+0000\n"
+"X-Launchpad-Export-Date: 2015-12-09 05:15+0000\n"
 "X-Generator: Launchpad (build 17862)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -97,15 +97,15 @@ msgstr "Даўгата С/З"
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
 #: src/ui_viewDialog.h:1780
 msgid "Prime Vertical"
-msgstr ""
+msgstr "Галоўная вэртыкаль"
 
 #: src/core/modules/GridLinesMgr.cpp:641
 msgid "Equinoctial Colure"
-msgstr ""
+msgstr "Колур раўнадзенства"
 
 #: src/core/modules/GridLinesMgr.cpp:645
 msgid "Solstitial Colure"
-msgstr ""
+msgstr "Колур сонцастаяньня"
 
 #: src/core/modules/GridLinesMgr.cpp:877
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
@@ -178,7 +178,7 @@ msgstr "Акружыны прэцэсіі"
 
 #: src/core/modules/GridLinesMgr.cpp:921
 msgid "Colure Lines"
-msgstr ""
+msgstr "Лініі колураў"
 
 #: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1607
 msgid "Atmosphere"
@@ -3052,7 +3052,7 @@ msgstr "Каталёґ Мэлота"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:155
 msgid "Dwarf galaxies"
-msgstr ""
+msgstr "Карлікавыя ґаляктыкі"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:160
@@ -5269,15 +5269,17 @@ msgstr "Паказваць лінію мэрыдыяну."
 
 #: src/ui_viewDialog.h:1778
 msgid "Show Prime (East-West) Vertical."
-msgstr ""
+msgstr "Паказваць галоўную (усход-захад) вэртыкаль."
 
 #: src/ui_viewDialog.h:1782
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
+"Паказваць колуры (вялікія акружыны праз палюсы й "
+"раўнадзенствы/сонцастаяньні)."
 
 #: src/ui_viewDialog.h:1784
 msgid "Colures"
-msgstr ""
+msgstr "Колуры"
 
 #: src/ui_viewDialog.h:1799
 msgid ""
@@ -5333,7 +5335,7 @@ msgstr "Паказваць ровень сьвятла (яркія вокны, �
 
 #: src/ui_viewDialog.h:1804
 msgid "Show illumination "
-msgstr ""
+msgstr "Паказваць асьвятленьне "
 
 #: src/ui_viewDialog.h:1810
 msgid "Use minimal brightness to leave landscape visible also in darkness"
@@ -5380,11 +5382,11 @@ msgstr "Выкарыстоўваць родныя назвы плянэт бяг
 
 #: src/ui_viewDialog.h:1827
 msgid "Use native names for planets"
-msgstr ""
+msgstr "Выкарыстоўваць родныя назвы плянэт"
 
 #: src/ui_viewDialog.h:1828
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Паказваць лініі з таўшчынёй"
 
 #: src/ui_viewDialog.h:1735
 msgid "Value in pixels"
@@ -5392,7 +5394,7 @@ msgstr "Значэньне ў піксалях"
 
 #: src/ui_viewDialog.h:1832
 msgid "Show art in brightness"
-msgstr ""
+msgstr "Паказваць выявы ў яркасьці"
 
 #: src/ui_viewDialog.h:1730
 msgid "Show boundaries"
