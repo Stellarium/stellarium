@@ -216,8 +216,8 @@ private:
 
 	SphericalRegionP pointRegion;
 
-	static StelTextureSP texCircle;   // The symbolic circle texture
-	static StelTextureSP texGalaxy;	                   // Type 0
+	static StelTextureSP texCircle;                    // The symbolic circle texture
+	static StelTextureSP texGalaxy;                    // Type 0
 	static StelTextureSP texOpenCluster;               // Type 1
 	static StelTextureSP texGlobularCluster;           // Type 2
 	static StelTextureSP texPlanetaryNebula;           // Type 3
@@ -226,10 +226,40 @@ private:
 	static StelTextureSP texOpenClusterWithNebulosity; // Type 7
 	static float hintsBrightness;
 
-	static Vec3f labelColor, circleColor, galaxyColor, radioGalaxyColor, activeGalaxyColor, interactingGalaxyColor,
-		     brightNebulaColor, darkNebulaColor, hydrogenRegionColor, supernovaRemnantColor, clusterColor;
-	static float circleScale;       // Define the scaling of the hints circle
-	static bool drawHintProportional; // scale hint with nebula size?
+	static Vec3f labelColor;			// The color of labels
+	static Vec3f circleColor;			// The color of the symbolic circle texture (default marker; NebUnknown)
+	static Vec3f galaxyColor;			// The color of galaxy marker texture (NebGx)
+	static Vec3f radioGalaxyColor;			// The color of radio galaxy marker texture (NebRGx)
+	static Vec3f activeGalaxyColor;			// The color of active galaxy marker texture (NebAGx)
+	static Vec3f interactingGalaxyColor;		// The color of interacting galaxy marker texture (NebIGx)
+	static Vec3f quasarColor;			// The color of quasar marker texture (NebQSO)
+	static Vec3f nebulaColor;			// The color of nebula marker texture (NebN)
+	static Vec3f planetaryNebulaColor;		// The color of planetary nebula marker texture (NebPn)
+	static Vec3f reflectionNebulaColor;		// The color of reflection nebula marker texture (NebRn)
+	static Vec3f bipolarNebulaColor;		// The color of bipolar nebula marker texture (NebBn)
+	static Vec3f emissionNebulaColor;		// The color of emission nebula marker texture (NebEn)
+	static Vec3f darkNebulaColor;			// The color of dark nebula marker texture (NebDn)
+	static Vec3f hydrogenRegionColor;		// The color of hydrogen region marker texture (NebHII)
+	static Vec3f supernovaRemnantColor;		// The color of supernova remnant marker texture (NebSNR)
+	static Vec3f interstellarMatterColor;		// The color of interstellar matter marker texture (NebISM)
+	static Vec3f clusterWithNebulosityColor;	// The color of cluster associated with nebulosity marker texture (NebCn)
+	static Vec3f clusterColor;			// The color of star cluster marker texture (NebCl)
+	static Vec3f openClusterColor;			// The color of open star cluster marker texture (NebOc)
+	static Vec3f globularClusterColor;		// The color of globular star cluster marker texture (NebGc)
+	static Vec3f stellarAssociationColor;		// The color of stellar association marker texture (NebSA)
+	static Vec3f starCloudColor;			// The color of star cloud marker texture (NebSC)
+	static Vec3f emissionObjectColor;		// The color of emission object marker texture (NebEMO)
+	static Vec3f blLacObjectColor;			// The color of BL Lac object marker texture (NebBLL)
+	static Vec3f blazarColor;			// The color of blazar marker texture (NebBLA)
+	static Vec3f molecularCloudColor;		// The color of molecular cloud marker texture (NebMolCld)
+	static Vec3f youngStellarObjectColor;		// The color of Young Stellar Object marker texture (NebYSO)
+	static Vec3f possibleQuasarColor;		// The color of possible quasar marker texture (NebPossQSO)
+	static Vec3f possiblePlanetaryNebulaColor;	// The color of possible planetary nebula marker texture (NebPossPN)
+	static Vec3f protoplanetaryNebulaColor;		// The color of protoplanetary nebula marker texture (NebPPN)
+	static Vec3f starColor;				// The color of star marker texture (NebStar)
+
+	static float circleScale;             // Define the scaling of the hints circle
+	static bool drawHintProportional;     // scale hint with nebula size?
 	static bool surfaceBrightnessUsage;
 
 	static bool flagUsageTypeFilter;
