@@ -248,9 +248,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	{
 		double longitude=core->getCurrentLocation().longitude;
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
+		sidereal=fmod(sidereal, 24.);
 		res += q_("Mean Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
-		sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
-		res += q_("Apparent Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
+		if (core->getUseNutation())
+		{
+			sidereal=(get_apparent_sidereal_time(core->getJD(), core->getJDE()) + longitude) / 15.;
+			sidereal=fmod(sidereal, 24.);
+			res += q_("Apparent Sidereal Time: %1").arg(StelUtils::hoursToHmsStr(sidereal)) + "<br>";
+		}
 	}
 
 	return res;
