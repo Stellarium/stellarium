@@ -64,7 +64,7 @@ SolarSystem::SolarSystem()
 	, moonScale(1.)
 	, labelsAmount(false)
 	, flagOrbits(false)
-	, flagLightTravelTime(false)
+	, flagLightTravelTime(true)
 	, flagShow(false)
 	, flagMarker(false)
 	, flagNativeNames(false)
@@ -145,7 +145,7 @@ void SolarSystem::init()
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
-	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
+	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
 	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
