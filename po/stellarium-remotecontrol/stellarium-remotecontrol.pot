@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-06 22:25+0100\n"
+"POT-Creation-Date: 2015-12-14 20:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/webroot/js/api/actions.js:71
@@ -42,7 +42,7 @@ msgstr ""
 msgid "Could not retrieve planet list"
 msgstr ""
 
-#: data/webroot/js/api/remotecontrol.js:128
+#: data/webroot/js/api/remotecontrol.js:119
 msgid "Error sending command to server: "
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "Error performing Simbad lookup"
 msgstr ""
 
-#: data/webroot/js/api/search.js:71 index.html:138
+#: data/webroot/js/api/search.js:71 index.html:150
 msgid "idle"
 msgstr ""
 
@@ -78,11 +78,11 @@ msgstr ""
 msgid "waiting"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:47
+#: data/webroot/js/api/viewoptions.js:61
 msgid "Could not retrieve projection list"
 msgstr ""
 
-#: data/webroot/js/api/viewoptions.js:60 data/webroot/js/api/viewoptions.js:73
+#: data/webroot/js/api/viewoptions.js:74 data/webroot/js/api/viewoptions.js:87
 msgid "Could not retrieve landscape list"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgstr ""
 msgid "No current selection"
 msgstr ""
 
-#: data/webroot/js/ui/scripts.js:51 index.html:263
+#: data/webroot/js/ui/scripts.js:51 index.html:351
 msgid "-none-"
 msgstr ""
 
@@ -114,218 +114,290 @@ msgstr ""
 msgid "Stellarium remote control plugin"
 msgstr ""
 
-#: index.html:15
+#: index.html:26
 msgid "Stellarium remote control"
 msgstr ""
 
-#: index.html:19
+#: index.html:30
 msgid "Main controls"
 msgstr ""
 
-#: index.html:20
+#: index.html:31
 msgid "Selection"
 msgstr ""
 
-#: index.html:24
+#: index.html:33
+msgid "DSO"
+msgstr ""
+
+#: index.html:36
 msgid "Actions and scripts"
 msgstr ""
 
-#: index.html:32
-msgid "Time"
-msgstr ""
-
-#: index.html:69
+#: index.html:81
 msgid "Time jumps"
 msgstr ""
 
-#: index.html:73
+#: index.html:85
 msgid "Solar hour"
 msgstr ""
 
-#: index.html:74
+#: index.html:86
 msgid "Solar day"
 msgstr ""
 
-#: index.html:75
+#: index.html:87
 msgid "Solar week"
 msgstr ""
 
-#: index.html:77
+#: index.html:89
 msgid "Sidereal day"
 msgstr ""
 
-#: index.html:78
+#: index.html:90
 msgid "Sidereal year"
 msgstr ""
 
-#: index.html:79
+#: index.html:91
 msgid "Sidereal century"
 msgstr ""
 
-#: index.html:81
+#: index.html:93
 msgid "Synodic month"
 msgstr ""
 
-#: index.html:82
+#: index.html:94
 msgid "Draconic month"
 msgstr ""
 
-#: index.html:83
+#: index.html:95
 msgid "Draconic year"
 msgstr ""
 
-#: index.html:85
+#: index.html:97
 msgid "Gaussian year"
 msgstr ""
 
-#: index.html:88
+#: index.html:100
 msgid "Anomalistic month"
 msgstr ""
 
-#: index.html:89
+#: index.html:101
 msgid "Anomalistic year"
 msgstr ""
 
-#: index.html:90
+#: index.html:102
 msgid "Anomalistic century"
 msgstr ""
 
-#: index.html:92
+#: index.html:104
 msgid "Mean tropical month"
 msgstr ""
 
-#: index.html:93
+#: index.html:105
 msgid "Mean tropical year"
 msgstr ""
 
-#: index.html:94
+#: index.html:106
 msgid "Mean tropical century"
 msgstr ""
 
-#: index.html:96
+#: index.html:108
 msgid "Tropical year"
 msgstr ""
 
-#: index.html:97
+#: index.html:109
 msgid "Julian year"
 msgstr ""
 
-#: index.html:98
+#: index.html:110
 msgid "Julian century"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Up/Left"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Up"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Up/Right"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Left"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Focus on selected object"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Focus on selection"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Right"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Down/Left"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Down"
 msgstr ""
 
-#: index.html:106
+#: index.html:118
 msgid "Down/Right"
 msgstr ""
 
-#: index.html:132
+#: index.html:144
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
 
-#: index.html:133
+#: index.html:145
 msgid "Select and focus"
 msgstr ""
 
-#: index.html:164
+#: index.html:176
 msgid "Earth"
 msgstr ""
 
-#: index.html:164
+#: index.html:176
 msgid "Pluto"
 msgstr ""
 
-#: index.html:170
+#: index.html:182
 msgid "Current selection"
 msgstr ""
 
-#: index.html:190
+#: index.html:195
+msgid "Show planets"
+msgstr ""
+
+#: index.html:202
 msgid "DSOs"
 msgstr ""
 
-#: index.html:230
-msgid "Show illumination layer"
+#: index.html:243
+msgid "M"
 msgstr ""
 
-#: index.html:233
-msgid "Current landscape"
+#: index.html:246
+msgid "IC"
 msgstr ""
 
-#: index.html:250
-msgid "Current sky culture"
+#: index.html:249
+msgid "VdB"
+msgstr ""
+
+#: index.html:252
+msgid "LDN"
+msgstr ""
+
+#: index.html:255
+msgid "PGC"
+msgstr ""
+
+#: index.html:260
+msgid "C"
 msgstr ""
 
 #: index.html:263
-msgid "Active script:"
+msgid "B"
 msgstr ""
 
-#: index.html:264
-msgid "Run selected script"
+#: index.html:266
+msgid "RCW"
 msgstr ""
 
-#: index.html:264
-msgid "Stop current script"
+#: index.html:269
+msgid "Cr"
 msgstr ""
 
-#: index.html:267
-msgid "Actions"
+#: index.html:272
+msgid "UGC"
 msgstr ""
 
-#: index.html:271
-msgid "Run/toggle action"
+#: index.html:277
+msgid "NGC"
 msgstr ""
 
-#: index.html:282
-msgid "Planet map"
+#: index.html:280
+msgid "Sh 2"
 msgstr ""
 
 #: index.html:283
-msgid "Planet map pointer"
+msgid "LBN"
 msgstr ""
 
 #: index.html:286
+msgid "Mel"
+msgstr ""
+
+#: index.html:289
+msgid "Ced"
+msgstr ""
+
+#: index.html:318
+msgid "Show illumination layer"
+msgstr ""
+
+#: index.html:321
+msgid "Current landscape"
+msgstr ""
+
+#: index.html:332
+msgid "Show lines"
+msgstr ""
+
+#: index.html:335
+msgid "Show art"
+msgstr ""
+
+#: index.html:338
+msgid "Current sky culture"
+msgstr ""
+
+#: index.html:351
+msgid "Active script:"
+msgstr ""
+
+#: index.html:352
+msgid "Run selected script"
+msgstr ""
+
+#: index.html:352
+msgid "Stop current script"
+msgstr ""
+
+#: index.html:355
+msgid "Actions"
+msgstr ""
+
+#: index.html:359
+msgid "Run/toggle action"
+msgstr ""
+
+#: index.html:370
+msgid "Planet map"
+msgstr ""
+
+#: index.html:371
+msgid "Planet map pointer"
+msgstr ""
+
+#: index.html:375
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:315
+#: index.html:404
 msgid "No response from server"
 msgstr ""
 
-#: index.html:316
+#: index.html:405
 msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""

@@ -97,10 +97,21 @@ define(["jquery", "api/viewoptions", "api/actions"], function($, viewOptionApi, 
 			}
 		});
 
+		actionApi.connectCheckbox($("#vo_dsotypefiltercheckbox"));
+
 		viewOptionApi.loadProjectionList(fillProjectionList);
 		viewOptionApi.loadLandscapeList(fillLandscapeList);
 		viewOptionApi.loadSkycultureList(fillSkycultureList);
+
+		viewOptionApi.registerCatalogFlags($("#vo_dsocatalog"));
+		viewOptionApi.registerTypeFlags($("#vo_dsotype > div")); //needs a stricter selector to prevent capturing the header checkbox
 	}
+
+	$(actionApi).on("stelActionChanged", function(evt, id, data){
+		if(id==="actionSet_Nebula_TypeFilterUsage"){
+			$("#vo_dsotype > div input[type='checkbox']").prop("disabled", !data.isChecked);
+		}
+	});
 
 
 	$(viewOptionApi).on("projectionChanged", function(evt, proj) {

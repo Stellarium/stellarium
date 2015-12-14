@@ -51,6 +51,10 @@ class NebulaMgr : public StelObjectModule
 	Q_PROPERTY(bool flagHintDisplayed
 		   READ getFlagHints
 		   WRITE setFlagHints)
+	Q_PROPERTY(bool flagTypeFiltersUsage
+		   READ getFlagTypeFiltersUsage
+		   WRITE setFlagTypeFiltersUsage
+		   )
 
 public:
 	NebulaMgr();
@@ -113,18 +117,18 @@ public:
 
 	//! Compute the maximum magntiude for which hints will be displayed.
 	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
-	
-	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
-	const Nebula::CatalogGroup& getCatalogFilters() const { return Nebula::catalogFilters; }
-
-	void setTypeFilters(const Nebula::TypeGroup& tflags) { Nebula::typeFilters=tflags; }
-	const Nebula::TypeGroup& getTypeFilters() const { return Nebula::typeFilters; }
 
 	bool objectInDisplayedCatalog(NebulaP n);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
+	void setCatalogFilters(const Nebula::CatalogGroup& cflags);
+	const Nebula::CatalogGroup& getCatalogFilters() const { return Nebula::catalogFilters; }
+
+	void setTypeFilters(const Nebula::TypeGroup& tflags);
+	const Nebula::TypeGroup& getTypeFilters() const { return Nebula::typeFilters; }
+
 	//! Set the default color used to draw the nebula symbols (default circles, etc).
 	//! @param c The color of the nebula symbols
 	//! @code
@@ -496,6 +500,11 @@ public slots:
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
 	float getHintsAmount(void) const {return hintsAmount;}
+signals:
+	//! Emitted when the catalog filter is changed
+	void catalogFiltersChanged(const Nebula::CatalogGroup& flags);
+	//! Emitted when the type filter is changed
+	void typeFiltersChanged(const Nebula::TypeGroup& flags);
 
 private slots:
 	//! Sets the colors of the Nebula labels and markers according to the

@@ -30,6 +30,7 @@
         <li><a href="#tab_main"><?= tr("Main controls")?></a></li>
         <li><a href="#tab_selection"><?= tr("Selection")?></a></li>
         <li><a href="#tab_view"><?= tr("Markings")?></a></li>
+        <li><a href="#tab_dso"><?= tr("DSO")?></a></li>
         <li><a href="#tab_landscape"><?= tr("Landscape")?></a></li>
         <li><a href="#tab_skyculture"><?= tr("Starlore")?></a></li>
         <li><a href="#tab_actions"><?= tr("Actions and scripts")?></a></li>
@@ -228,6 +229,82 @@
                 <label><input type="checkbox" value="actionShow_Meridian_Line" /><?= tr("Meridian")?></label>
                 <label><input type="checkbox" value="actionShow_Longitude_Line" /><?= tr("O./C. longitude")?></label>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="tab_dso">
+        <div class="flex flex-wrap">
+          <div id="vo_dsocatalog" class="smallblock">
+            <h3><?= tr("Display objects from catalogs")?></h3>
+            <!-- give the checkboxes the flag values -->
+            <div class="inline-block">
+              <label title='<?= tr("Messier Catalogue")?>'>
+                <input type="checkbox" value="0x0004" /><?= tr("M")?>
+              </label>
+              <label title='<?= tr("Index Catalogue of Nebulae and Clusters of Stars")?>'>
+                <input type="checkbox" value="0x0002" /><?= tr("IC")?>
+              </label>
+              <label title='<?= tr("Catalogue of Reflection Nebulae (Van den Bergh, 1966)")?>'>
+                <input type="checkbox" value="0x0200" /><?= tr("VdB")?>
+              </label>
+              <label title="<?= tr("Lynds' Catalogue of Dark Nebulae (Lynds, 1962)")?>">
+                <input type="checkbox" value="0x0080" /><?= tr("LDN")?>
+              </label>
+              <label title='<?= tr("Catalog of galaxies")?>'>
+                <input type="checkbox" value="0x1000" /><?= tr("PGC")?>
+              </label>
+            </div>
+            <div class="inline-block">
+              <label title='<?= tr("Caldwell Catalogue")?>'>
+                <input type="checkbox" value="0x0008" /><?= tr("C")?>
+              </label>
+              <label title="<?= tr("Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)")?>">
+                <input type="checkbox" value="0x0010" /><?= tr("B")?>
+              </label>
+              <label title='<?= tr("A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)")?>'>
+                <input type="checkbox" value="0x0100" /><?= tr("RCW")?>
+              </label>
+              <label title='<?= tr("Catalog of Open Galactic Clusters (Collinder, 1931)")?>'>
+                <input type="checkbox" value="0x0400" /><?= tr("Cr")?>
+              </label>
+              <label title='<?= tr("The Uppsala General Catalogue of Galaxies")?>'>
+                <input type="checkbox" value="0x2000" /><?= tr("UGC")?>
+              </label>
+            </div>
+            <div class="inline-block">
+              <label title='<?= tr("New General Catalogue of Nebulae and Clusters of Stars")?>'>
+                <input type="checkbox" value="0x0001" /><?= tr("NGC")?>
+              </label>
+              <label title='<?= tr("Catalogue of HII Regions (Sharpless, 1959)")?>'>
+                <input type="checkbox" value="0x0020" /><?= tr("Sh 2")?>
+              </label>
+              <label title="<?= tr("Lynds' Catalogue of Bright Nebulae (Lynds, 1965)")?>">
+                <input type="checkbox" value="0x0040" /><?= tr("LBN")?>
+              </label>
+              <label title='<?= tr("A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, 1915)")?>'>
+                <input type="checkbox" value="0x0800" /><?= tr("Mel")?>
+              </label>
+              <label title='<?= tr("Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)")?>'>
+                <input type="checkbox" value="0x4000" /><?= tr("Ced")?>
+              </label>
+            </div>
+          </div>
+          <div id="vo_dsotype" class="smallblock">
+            <h3><label><input id="vo_dsotypefiltercheckbox" type="checkbox" class="valign-middle" value="actionSet_Nebula_TypeFilterUsage"/><?= tr("Filter by type")?></label></h3>
+            <div class="inline-block">
+              <label><input type="checkbox" value="0x001"/><?= tr("Galaxies")?></label>
+              <label><input type="checkbox" value="0x002"/><?= tr("Active galaxies")?></label>
+              <label><input type="checkbox" value="0x004"/><?= tr("Interacting galaxies")?></label>
+              <label><input type="checkbox" value="0x008"/><?= tr("Star clusters")?></label>
+              <label><input type="checkbox" value="0x010"/><?= tr("Hydrogen regions")?></label>
+            </div>
+            <div class="inline-block">
+              <label><input type="checkbox" value="0x020"/><?= tr("Bright Nebulae")?></label>
+              <label><input type="checkbox" value="0x040"/><?= tr("Dark Nebulae")?></label>
+              <label><input type="checkbox" value="0x080"/><?= tr("Planetary Nebulae")?></label>
+              <label><input type="checkbox" value="0x100"/><?= tr("Supernova remnants")?></label>
+              <label><input type="checkbox" value="0x200"/><?= tr("Other")?></label>
             </div>
           </div>
         </div>

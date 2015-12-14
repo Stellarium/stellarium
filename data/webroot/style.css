@@ -188,8 +188,8 @@ h2 {
 }
 
 #wrapper {
-	border: 1px 
-	
+	border: 1px;
+	background: rgb(86, 87, 90);
 	solid #595959;
 	margin: 1em;
 	padding: 1em;
@@ -235,6 +235,10 @@ h2 {
 	margin: 10px;
 }
 
+.valign-middle {
+	vertical-align: middle;
+}
+
 .block {
 	position: relative;
 	padding: 15px;
@@ -277,7 +281,7 @@ h2 {
 	/* vertical-align: top; */
 }
 
-.innerblock h3 {
+.innerblock > h3 {
 	display: block;
 	position: absolute;
 	left: 10px;
@@ -303,14 +307,17 @@ h2 {
 	/* display: inline-block; */
 }
 
-.smallblock h3 {
+.smallblock > h3 {
+	/* vertical-align: middle; */
+	margin: 0px;
+	padding: 0px;
 	display: block;
 	position: absolute;
 	left: 10px;
-	top: 2px;
+	top: 4px;
 	font-size: 12px;
 	font-weight: bold;
-	line-height: 0px;
+	/* line-height: 0px; */
 }
 
 .relative {
@@ -753,8 +760,13 @@ button.button32:active {
 	margin-top: 10px;
 }
 
-#tab_view label {
+#tab_view label,
+#tab_dso label {
 	display: block;
+}
+
+#vo_dsocatalog label {
+	min-width: 150px;
 }
 
 .landscapeblock {

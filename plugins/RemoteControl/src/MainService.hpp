@@ -32,6 +32,7 @@
 class StelCore;
 class StelActionMgr;
 class LandscapeMgr;
+class NebulaMgr;
 class StelLocaleMgr;
 class StelMovementMgr;
 class StelObjectMgr;
@@ -72,6 +73,7 @@ private:
 	StelCore* core;
 	StelActionMgr* actionMgr;
 	LandscapeMgr* lsMgr;
+	NebulaMgr* nebMgr;
 	StelLocaleMgr* localeMgr;
 	StelMovementMgr* mvmgr;
 	StelObjectMgr* objMgr;

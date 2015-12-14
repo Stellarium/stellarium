@@ -26,6 +26,7 @@
 #include "StelSkyCultureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "LandscapeMgr.hpp"
+#include "NebulaMgr.hpp"
 
 #include <QFile>
 #include <QMimeDatabase>
@@ -36,6 +37,7 @@ ViewService::ViewService(const QByteArray &serviceName, QObject *parent) : Abstr
 {
 	core = StelApp::getInstance().getCore();
 	lsMgr = GETSTELMODULE(LandscapeMgr);
+	nebMgr = GETSTELMODULE(NebulaMgr);
 	skyCulMgr = &StelApp::getInstance().getSkyCultureMgr();
 }
 
@@ -44,11 +46,11 @@ QString ViewService::wrapHtml(QString &text, const QString &title) const
 	//because the html descriptions are often not compatible with "clean" HTML5 which is used for the main interface
 	//we explicitely set the doctype to 4.01 transitional for better results
 	const QString head = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n"
-			     "<html><head>\n"
-			     "<title>" + title + "</title>\n"
-			     "<link type=\"text/css\" rel=\"stylesheet\" href=\"/iframestyle.css\">\n"
-			     "<base target=\"_blank\">\n"
-			     "</head><body>\n";
+				"<html><head>\n"
+				"<title>" + title + "</title>\n"
+				"<link type=\"text/css\" rel=\"stylesheet\" href=\"/iframestyle.css\">\n"
+				"<base target=\"_blank\">\n"
+				"</head><body>\n";
 	const QString tail = "</body></html>";
 
 	return text.prepend(head).append(tail);
@@ -256,7 +258,7 @@ void ViewService::postImpl(const QByteArray &operation, const APIParameters &par
 		else
 			response.setData("error: skyculture not found");
 	}
-	else if(operation=="setprojection")
+	else if (operation=="setprojection")
 	{
 		QString type = QString::fromUtf8(parameters.value("type"));
 
@@ -271,8 +273,38 @@ void ViewService::postImpl(const QByteArray &operation, const APIParameters &par
 
 		response.setData("ok");
 	}
+	else if (operation=="setDso")
+	{
+		QString catStr = QString::fromUtf8(parameters.value("catalog"));
+		QString typeStr = QString::fromUtf8(parameters.value("type"));
+
+		bool ok = false, done = false;
+		int flags = catStr.toInt(&ok);
+		if(ok)
+		{
+			nebMgr->setCatalogFilters(Nebula::CatalogGroup(flags));
+			done = true;
+		}
+
+		flags = typeStr.toInt(&ok);
+		if(ok)
+		{
+			nebMgr->setTypeFilters(Nebula::TypeGroup(flags));
+			done = true;
+		}
+
+		if(!done)
+		{
+			response.writeRequestError("needs one or more integer parameters: catalog, type");
+		}
+		else
+		{
+			response.setData("ok");
+		}
+	}
 	else
 	{
-		response.writeRequestError("unsupported operation. POST: setprojection");
+		response.writeRequestError("unsupported operation. POST: setlandscape,setskyculture,setprojection,setDso");
 	}
 }
+
