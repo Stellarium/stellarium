@@ -23,6 +23,7 @@
 #include "StelActionMgr.hpp"
 #include "StelCore.hpp"
 #include "LandscapeMgr.hpp"
+#include "NebulaMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
@@ -48,6 +49,7 @@ MainService::MainService(const QByteArray &serviceName, QObject *parent)
 	core = StelApp::getInstance().getCore();
 	actionMgr =  StelApp::getInstance().getStelActionManager();
 	lsMgr = GETSTELMODULE(LandscapeMgr);
+	nebMgr = GETSTELMODULE(NebulaMgr);
 	localeMgr = &StelApp::getInstance().getLocaleMgr();
 	objMgr = &StelApp::getInstance().getStelObjectMgr();
 	mvmgr = GETSTELMODULE(StelMovementMgr);
@@ -208,6 +210,10 @@ void MainService::getImpl(const QByteArray& operation, const APIParameters &para
 			obj2.insert("projectionStr",core->projectionTypeKeyToNameI18n(str));
 			obj2.insert("landscape",lsMgr->getCurrentLandscapeID());
 			obj2.insert("skyculture",skyCulMgr->getCurrentSkyCultureID());
+
+			//DSO options
+			obj2.insert("dsoCatalog", static_cast<int>(nebMgr->getCatalogFilters()));
+			obj2.insert("dsoType", static_cast<int>(nebMgr->getTypeFilters()));
 
 			obj.insert("view",obj2);
 		}

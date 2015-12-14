@@ -71,7 +71,7 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	//the mutex here is to prevent a very strange crash I had, in which sv is an invalid pointer (but m_serviceMap is ok)
 	//probably caused by the foreach loop in update in the main thread?
 	mutex.lock();
-	QMap<QByteArray,AbstractAPIService*>::iterator it = m_serviceMap.find(serviceString);
+	ServiceMap::iterator it = m_serviceMap.find(serviceString);
 	if(it!=m_serviceMap.end())
 	{
 		AbstractAPIService* sv = *it;
@@ -130,7 +130,12 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	{
 		mutex.unlock();
 		response.setStatus(400,"Bad Request");
-		QString str(QStringLiteral("Unknown service: %1"));
-		response.write(str.arg(QString::fromUtf8(pathWithoutPrefix)).toUtf8(),true);
+		QString str(QStringLiteral("Unknown service: '%1'\n\nAvailable services:\n").arg(QString::fromUtf8(pathWithoutPrefix)));
+		for(ServiceMap::iterator it = m_serviceMap.begin();it!=m_serviceMap.end();++it)
+		{
+			str.append(QString::fromUtf8(it.key()));
+			str.append("\n");
+		}
+		response.write(str.toUtf8(),true);
 	}
 }

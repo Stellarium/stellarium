@@ -40,7 +40,8 @@ public:
 	void registerService(AbstractAPIService* service);
 private:
 	int m_prefixLength;
-	QMap<QByteArray,AbstractAPIService*> m_serviceMap;
+	typedef QMap<QByteArray,AbstractAPIService*> ServiceMap;
+	ServiceMap m_serviceMap;
 	QMutex mutex;
 };
 

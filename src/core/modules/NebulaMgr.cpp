@@ -264,6 +264,7 @@ void NebulaMgr::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
+	addAction("actionSet_Nebula_TypeFilterUsage", N_("Display Options"), N_("Toggle DSO type filter"), "flagTypeFiltersUsage");
 }
 
 struct DrawNebulaFuncObject
@@ -302,19 +303,33 @@ struct DrawNebulaFuncObject
 
 void NebulaMgr::setCatalogFilters(const Nebula::CatalogGroup &cflags)
 {
-	Nebula::catalogFilters = cflags;
+	if(static_cast<int>(cflags) != static_cast<int>(Nebula::catalogFilters))
+	{
+		Nebula::catalogFilters = cflags;
 
-	dsoArray.clear();
-	dsoIndex.clear();
-	nebGrid.clear();
-	bool status = getFlagShow();
+		dsoArray.clear();
+		dsoIndex.clear();
+		nebGrid.clear();
+		bool status = getFlagShow();
 
-	StelApp::getInstance().getStelObjectMgr().unSelect();
+		StelApp::getInstance().getStelObjectMgr().unSelect();
 
-	qWarning() << "Reloading DSO data...";
-	setFlagShow(false);
-	loadNebulaSet("default");
-	setFlagShow(status);
+		qWarning() << "Reloading DSO data...";
+		setFlagShow(false);
+		loadNebulaSet("default");
+		setFlagShow(status);
+
+		emit catalogFiltersChanged(cflags);
+	}
+}
+
+void NebulaMgr::setTypeFilters(const Nebula::TypeGroup &tflags)
+{
+	if(static_cast<int>(tflags) != static_cast<int>(Nebula::typeFilters))
+	{
+		Nebula::typeFilters = tflags;
+		emit typeFiltersChanged(tflags);
+	}
 }
 
 float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const

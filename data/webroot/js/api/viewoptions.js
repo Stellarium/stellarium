@@ -1,4 +1,4 @@
-define(["jquery", "./remotecontrol"], function($, rc) {
+define(["jquery", "./remotecontrol", "./flags"], function($, rc, Flags) {
     "use strict";
 
     //Private variables
@@ -6,9 +6,11 @@ define(["jquery", "./remotecontrol"], function($, rc) {
     var currentLandscape;
     var currentSkyculture;
 
+    var catalogFlags;
+    var typeFlags;
 
     //register server data handlers
-    $(rc).on("serverDataReceived", function(evt,data) {
+    $(rc).on("serverDataReceived", function(evt, data) {
         if (currentProjection !== data.view.projection) {
             currentProjection = data.view.projection;
             $(publ).trigger("projectionChanged", [currentProjection, data.view.projectionStr]);
@@ -23,18 +25,30 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             currentSkyculture = data.view.skyculture;
             $(publ).trigger("skycultureChanged", currentSkyculture);
         }
+
+        if(catalogFlags)
+            catalogFlags.setValue(data.view.dsoCatalog);
+
+        if(typeFlags)
+            typeFlags.setValue(data.view.dsoType);
+
     });
+
+
+    function setDSOCatalog(flags) {
+        rc.postCmd("/api/view/setDso", {
+            catalog: flags
+        });
+    }
+
+    function setDSOType(flags) {
+        rc.postCmd("/api/view/setDso", {
+            type: flags
+        });
+    }
 
     //Public stuff
     var publ = {
-        init: function() {
-
-            initControls();
-            fillProjectionList();
-            fillLandscapeList();
-            fillSkycultureList();
-
-        },
 
         loadProjectionList: function(callback) {
             $.ajax({
@@ -75,6 +89,14 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             });
         },
 
+        registerCatalogFlags: function(elem) {
+            catalogFlags = new Flags(elem, setDSOCatalog);
+        },
+
+        registerTypeFlags: function(elem) {
+            typeFlags = new Flags(elem,setDSOType);
+        },
+
         setProjection: function(proj) {
             rc.postCmd("/api/view/setprojection", {
                 type: proj
@@ -91,7 +113,10 @@ define(["jquery", "./remotecontrol"], function($, rc) {
             rc.postCmd("/api/view/setskyculture", {
                 id: skyculture
             });
-        }
+        },
+
+        setDSOCatalog: setDSOCatalog,
+        setDSOType: setDSOType
     };
 
     return publ;

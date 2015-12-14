@@ -107,6 +107,28 @@ define(["jquery", "./remotecontrol"], function($, rc) {
         });
     }
 
+    function connectCheckbox(elem) {
+        $(elem).each(function() {
+            if (this.value.lastIndexOf("action", 0) === 0) {
+                var newData = {};
+                newData[this.value] = {
+                    checkboxes: [this]
+                };
+                $.extend(true, actionData, newData);
+
+                //check if action has a checked value, apply it if it does
+                if ("isChecked" in actionData[this.value]) {
+                    this.checked = actionData[this.value].isChecked;
+                }
+            }
+        }).on("click", function(evt) {
+            //assume all values start with "action"
+            if (this.value.lastIndexOf("action", 0) === 0) {
+                executeAction(this.value);
+            }
+        });
+    }
+
     function connectActionContainer(elem) {
         //console.log("connecting container");
         var e = $(elem);
@@ -187,8 +209,9 @@ define(["jquery", "./remotecontrol"], function($, rc) {
         //Trigger an StelAction on the Server
         execute: executeAction,
 
-        //Connects all checkbox input elements below this container to the StelAction that corresponds to its value
-        connectActionContainer: connectActionContainer
+        //Connects all checkbox input elements and buttons below this container to the StelAction that corresponds to its value
+        connectActionContainer: connectActionContainer,
+        connectCheckbox: connectCheckbox
     };
 
     return publ;

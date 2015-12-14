@@ -139,11 +139,12 @@ void ViewDialog::createDialogContent()
 
 	// DSO
 	updateSelectedCatalogsCheckBoxes();
+	connect(nmgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(updateSelectedCatalogsCheckBoxes()));
 	connect(ui->buttonGroupDisplayedDSOCatalogs, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedCatalogsFromCheckBoxes()));
 	updateSelectedTypesCheckBoxes();
+	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
 	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
-	ui->groupBoxDSOTypeFilters->setChecked(nmgr->getFlagTypeFiltersUsage());
-	connect(ui->groupBoxDSOTypeFilters, SIGNAL(toggled(bool)), nmgr, SLOT(setFlagTypeFiltersUsage(bool)));
+	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
 	ui->checkBoxProportionalHints->setChecked(nmgr->getHintsProportional());
 	connect(ui->checkBoxProportionalHints, SIGNAL(toggled(bool)), nmgr, SLOT(setHintsProportional(bool)));
 	ui->checkBoxSurfaceBrightnessUsage->setChecked(nmgr->getFlagSurfaceBrightnessUsage());
