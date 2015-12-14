@@ -171,6 +171,24 @@ class GridLinesMgr : public StelModule
 			   WRITE setColorGalacticEquatorLine
 			   NOTIFY galacticEquatorLineColorChanged)
 
+	Q_PROPERTY(bool primeVerticalLineDisplayed
+			   READ getFlagPrimeVerticalLine
+			   WRITE setFlagPrimeVerticalLine
+			   NOTIFY primeVerticalLineDisplayedChanged)
+	Q_PROPERTY(Vec3f primeVerticalLineColor
+			   READ getColorPrimeVerticalLine
+			   WRITE setColorPrimeVerticalLine
+			   NOTIFY primeVerticalLineColorChanged)
+
+	Q_PROPERTY(bool colureLinesDisplayed
+			   READ getFlagColureLines
+			   WRITE setFlagColureLines
+			   NOTIFY colureLinesDisplayedChanged)
+	Q_PROPERTY(Vec3f colureLinesColor
+			   READ getColorColureLines
+			   WRITE setColorColureLines
+			   NOTIFY colureLinesColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -188,7 +206,7 @@ public:
 
 	//! Draw the grids and great circle lines.
 	//! Draws the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line, Equator Line,
-	//! Ecliptic Lines, Precession Circles, and Conjunction-Opposition Line according to the
+	//! Ecliptic Lines, Precession Circles, Conjunction-Opposition Line, east-west vertical and colures according to the
 	//! various flags which control their visibility.
 	virtual void draw(StelCore* core);
 
@@ -417,6 +435,35 @@ public slots:
 	//! GridLinesMgr.setColorGalacticEquatorLine(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorGalacticEquatorLine(const Vec3f& newColor);
+
+	//! Setter for displaying the Prime Vertical Line.
+	void setFlagPrimeVerticalLine(const bool displayed);
+	//! Accessor for displaying Prime Vertical Line.
+	bool getFlagPrimeVerticalLine(void) const;
+	//! Get the current color of the Prime Vertical Line.
+	Vec3f getColorPrimeVerticalLine(void) const;
+	//! Set the color of the Prime Vertical Line.
+	//! @param newColor The color of the Prime Vertical line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorPrimeVerticalLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorPrimeVerticalLine(const Vec3f& newColor);
+
+	//! Setter for displaying the Colure Lines.
+	void setFlagColureLines(const bool displayed);
+	//! Accessor for displaying the Colure Lines.
+	bool getFlagColureLines(void) const;
+	//! Get the current color of the Colure Lines.
+	Vec3f getColorColureLines(void) const;
+	//! Set the color of the Colure Lines.
+	//! @param newColor The color of the Colure lines
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorColureLines(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorColureLines(const Vec3f& newColor);
+
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
@@ -448,6 +495,10 @@ signals:
 	void horizonLineColorChanged(const Vec3f & newColor) const;
 	void galacticEquatorLineDisplayedChanged(const bool displayed) const;
 	void galacticEquatorLineColorChanged(const Vec3f & newColor) const;
+	void primeVerticalLineDisplayedChanged(const bool displayed) const;
+	void primeVerticalLineColorChanged(const Vec3f & newColor) const;
+	void colureLinesDisplayedChanged(const bool displayed) const;
+	void colureLinesColorChanged(const Vec3f & newColor) const;
 
 
 private slots:
@@ -475,6 +526,9 @@ private:
 	SkyLine * longitudeLine; 	// Opposition/conjunction longitude line
 	SkyLine * horizonLine;		// Horizon line
 	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
+	SkyLine * primeVerticalLine;	// Prime Vertical line
+	SkyLine * colureLine_1;		// First Colure line (0/12h)
+	SkyLine * colureLine_2;		// Second Colure line (6/18h)
 };
 
 #endif // _GRIDLINESMGR_HPP_

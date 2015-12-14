@@ -1,0 +1,41 @@
+// Name: Video Popout Test 
+// Author: Georg Zotti
+// License: Public Domain
+// Description: This script plays a video file with an interesting intro/exit.
+//              Note that video support is a build-time option and
+//              may not be supported for the version of Stellarium
+//              which you have.  Also, different platforms may
+//              support different video formats.
+//
+
+
+// API for loadVideo:("filename", "id", ULposX, ULposY, visible, alpha);
+// Note: having show=false causes an assert failure (crash) on Windows Debug builds. It is OK in release builds.  
+core.loadVideo("tests/media/stellarium.mp4", "grow", 100, 70, false, 0.5); // test with box visible before messages?
+
+lab = LabelMgr.labelScreen("Playing video file with special effect...", 100, 20, true, 20, "#ff0000");
+lab2 = LabelMgr.labelScreen("spawning from 0.4/0.9 towards 0.6/0.4 (sized -1/0.6) within transition time of 2 seconds", 100, 45, true, 15, "#ff0000");
+
+core.wait(4);
+
+// API is:
+//    void playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
+core.playVideoPopout("grow", 0.4, 0.9, 0.6, 0.4, -1, 0.6, 2, false);
+//core.showVideo("grow", true);
+// Unfortunately, duration is not known at start. We wait 2 secs in any case and try then to find duration.
+core.wait(2); 
+duration=core.getVideoDuration("grow");
+lab3 = LabelMgr.labelScreen("Video duration:"+duration, 100, 735, true, 15, "#ff0000");
+core.wait(duration/1000 - 2 +3);
+
+LabelMgr.setLabelText(lab2, "Now we play it again, this time it should be centered, distorted to (width/4|height/2) and paused during 3 sec of growing and shrinking.");
+core.playVideoPopout("grow", 0.9, 0.9, 0.5, 0.5, 0.25, 0.5, 3, true);
+core.wait(duration/1000 + 7); // duration + 2x3s transition time + 1 extra second
+LabelMgr.setLabelText(lab2, "If this was OK, we should now make sure there are no unwanted messages in the logfile.");
+core.wait(5);
+LabelMgr.deleteLabel(lab3);
+LabelMgr.deleteLabel(lab2);
+core.wait(1);
+LabelMgr.deleteLabel(lab);
+core.wait(0.4);
+core.dropVideo("grow");

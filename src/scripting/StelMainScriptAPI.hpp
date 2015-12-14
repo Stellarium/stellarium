@@ -166,8 +166,8 @@ public slots:
 	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
-	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
-	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
 	//! - size: angular size in radians
@@ -189,15 +189,15 @@ public slots:
 	//! Fetch a map with data about an latest selected object's position, magnitude and so on
 	//! @return a map of object data.  Keys:
 	//! - altitude : apparent altitude angle in decimal degrees
-	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees	
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
-	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees	
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees	
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
-	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
-	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees	
+	//! - glong : galactic longitude in decimal degrees
+	//! - glat : galactic latitude in decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)	
 	//! - size: angular size in radians
@@ -325,7 +325,8 @@ public slots:
 	//! @param dir the path of the directory to save the screenshot in.  If
 	//! none is specified, the default screenshot directory will be used.
 	//! @param invert whether colors have to be inverted in the output image
-	void screenshot(const QString& prefix, bool invert=false, const QString& dir="");
+	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
+	void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false);
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
@@ -396,6 +397,12 @@ public slots:
 	//! Set the viewport distortion effect
 	//! @param b if true, sets the spherical mirror distortion effect for viewport on, else sets it off
 	void setSphericMirror(bool b);
+
+	//! Set viewport offset
+	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
+	//! @param x -0.5...0.5 horizontal offset. This is not available in the GUI, and it is recommended to keep it at 0.
+	//! @param y -0.5...0.5 vertical offset. This is available in the GUI.
+	void setViewportOffset(const float x, const float y);
 
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
@@ -562,66 +569,97 @@ public slots:
 	void dropSound(const QString& id);
 
 	//! Load a video from a file.
-	//! @param filename the name of the file to load.
+	//! @param filename the name of the file to load, relative to the scripts directory.
 	//! @param id the identifier which will be used to refer to the video
-	//! when calling playVideo, pauseVideo, stopVideo and dropVideo.
-	//! @param x  the x-coordinate for the video widget.
-	//! @param y  the y-coordinate for the video widget.
-	//! @param show  the visibility state for the video.
-	//! @param alpha the initial alpha value of the video.
-	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
+	//! when calling playVideo(), pauseVideo(), stopVideo(), dropVideo() etc.
+	//! @param x  the x-coordinate (pixels from left) for the video frame.
+	//! @param y  the y-coordinate (pixels from top) for the video frame.
+	//! @param show  the visibility state for the video. (Optional since V0.15)
+	//! You should load a video with show=true (or leave default), to start it immediately in native size.
+	//! Else set show=false, and then call resizeVideo(), playVideo() or use playVideoPopout().
+	//! @param alpha the initial alpha value of the video, defaults to 1.
+	//! @bug With Qt5/V0.15+, @param alpha does not work properly (no semitransparency), only @param alpha=0 makes it invisible.
+	//! @bug With Qt5/V0.15+, @param show=false causes an assert failure (crash) on Windows. The responsible assert is not fired on release builds.
+	void loadVideo(const QString& filename, const QString& id, float x, float y, bool show=true, float alpha=1.0f);
 
 	//! Play a video which has previously been loaded with loadVideo
 	//! @param id the identifier used when loadVideo was called
-	void playVideo(const QString& id);
+	void playVideo(const QString& id, bool keepVisibleAtEnd=false);
 
-	//! Pause a video which is playing.  Subsequent playVideo calls will
-	//! resume playing from the position in the file when it was paused.
+	//! Play a video which has previously been loaded with loadVideo with a complex effect.
+	//! The video appears out of @param fromX/ @param fromY,
+	//! grows within @param popupDuration to size @param finalSizeX/@param finalSizeY, and
+	//! shrinks back towards @param fromX/@param fromY at the end during @param popdownDuration.
 	//! @param id the identifier used when loadVideo was called
+	//! @param fromX X position of starting point, counted from left of window. May be absolute (if >1) or relative (0<X<1)
+	//! @param fromY Y position of starting point, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
+	//! @param atCenterX X position of center of final video frame, counted from left of window. May be absolute (if >1) or relative (0<X<1)
+	//! @param atCenterY Y position of center of final video frame, counted from top of window. May be absolute (if >1) or relative (0<Y<1)
+	//! @param finalSizeX X size of final video frame. May be absolute (if >1) or relative to window size (0<X<1). If -1, scale proportional from @param finalSizeY.
+	//! @param finalSizeY Y size of final video frame. May be absolute (if >1) or relative to window size (0<Y<1). If -1, scale proportional from @param finalSizeX.
+	//! @param popupDuration duration of growing start transition (seconds)
+	//! @param frozenInTransition true if video should be paused during growing/shrinking transition.
+	void playVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
+
+	//! Pause a video which is playing.  Subsequent playVideo() calls will
+	//! resume playing from the position in the file when it was paused.
+	//! @param id the identifier used when loadVideo() was called
 	void pauseVideo(const QString& id);
 
 	//! Stop a video from playing.  This resets the position in the
-	//! video to the start so that subsequent playVideo calls will
+	//! video to the start so that subsequent playVideo() calls will
 	//! start from the beginning.
-	//! @param id the identifier used when loadVideo was called
+	//! @param id the identifier used when loadVideo() was called
 	void stopVideo(const QString& id);
 
 	//! Drop a video from memory.  You should do this before the end
 	//! of your script.
-	//! @param id the identifier used when loadVideo was called
+	//! @param id the identifier used when loadVideo() was called
 	void dropVideo(const QString& id);
 
-	//! Seeks a video to the requested time.
-	//! @param id the identifier used when loadVideo was called
+	//! Seeks a video to the requested time and either start playing or freeze there.
+	//! @param id the identifier used when loadVideo() was called
 	//! @param ms the time in milliseconds from the start of the media.
-        void seekVideo(const QString& id, qint64 ms);                                   
+	//! @param pause true if you want to pause at the requested position, keep it false to play from here.
+	void seekVideo(const QString& id, qint64 ms, bool pause=false);
 
 	//! Sets the position of the video widget.
-	//! @param id the identifier used when loadVideo was called
-	//! @param x the new x-coordinate for the video. 
-	//! @param y the new y-coordinate for the video. 
-        void setVideoXY(const QString& id, float x, float y);                           
+	//! @param id the identifier used when loadVideo() was called
+	//! @param x the new x-coordinate for the video. (if <1, relative to main view size)
+	//! @param y the new y-coordinate for the video. (if <1, relative to main view size)
+	//! @param relative true if you want to move in relative coordinates, not set absolutely
+	void setVideoXY(const QString& id, float x, float y, bool relative=false);
 
 	//! Set the alpha value of a video when visible.
-	//! @param id the identifier used when loadVideo was called
+	//! @param id the identifier used when loadVideo() was called
 	//! @param alpha the new alpha value to set.
-        void setVideoAlpha(const QString& id, float alpha);                             
+	//! @bug With Qt5/V0.13+, @param alpha does not work properly, only @param alpha=0 makes it invisible.
+	void setVideoAlpha(const QString& id, float alpha);
 
-	//! Resize the video widget to the specified width, height. 
-	//! @param id the identifier used when loadVideo was called
-	//! @param w the new width for the widget.
-	//! @param h the new height for the widget.
+	//! Resize the video widget to the specified width, height.
+	//! @param id the identifier used when loadVideo() was called
+	//! @param w the new width for the widget. (if <1, relative to main view size)
+	//! @param h the new height for the widget. (if <1, relative to main view size)
         void resizeVideo(const QString& id, float w, float h);
 
 	//! Set the visibility state of a video.
-	//! @param id the identifier used when loadVideo was called
+	//! @param id the identifier used when loadVideo() was called
 	//! @param show the new visible state of the video.
-        void showVideo(const QString& id, bool show);
+	//! @note You must call this if you called loadVideo() with its @param show=false, else video will be played hidden.
+	void showVideo(const QString& id, bool show=true);
+
+	//! Get the duration of a loaded video, or -1
+	//! @param id the identifier used when loadVideo() was called
+	qint64 getVideoDuration(const QString& id);
+
+	//! Get the current position of a loaded video, or -1
+	//! @param id the identifier used when loadVideo() was called
+	qint64 getVideoPosition(const QString& id);
 
 	//! Get the screen width in pixels.
-	//! @return The screen width in pixels
+	//! @return The screen width (actually, width of Stellarium main view) in pixels
 	int getScreenWidth();
-	//! Get the screen height in pixels.
+	//! Get the screen height (actually, height of Stellarium main view) in pixels.
 	//! @return The screen height in pixels
 	int getScreenHeight();
 
@@ -635,7 +673,7 @@ public slots:
 	void setScriptRate(double r);
 
 	//! Pause the currently running script. Note that you may need to use 
-	//! the key '6' or the GUI to resume script execution.
+	//! a key sequence like 'Ctrl-D,R' or the GUI to resume script execution.
 	void pauseScript();
 
 	//! Set the amount of selected object information to display
@@ -655,6 +693,9 @@ public slots:
 	//! print an output message from script
 	//! @param s the message to be displayed on the output file.
 	void output(const QString& s);
+
+	//! Reset (clear) output file
+	void resetOutput(void);
 
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
@@ -746,12 +787,13 @@ signals:
 	void requestStopSound(const QString& id);
 	void requestDropSound(const QString& id);
 	void requestLoadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha);
-	void requestPlayVideo(const QString& id);
+	void requestPlayVideo(const QString& id, const bool keepVisibleAtEnd);
+	void requestPlayVideoPopout(const QString& id, float fromX, float fromY, float atCenterX, float atCenterY, float finalSizeX, float finalSizeY, float popupDuration, bool frozenInTransition);
 	void requestPauseVideo(const QString& id);
 	void requestStopVideo(const QString& id);
 	void requestDropVideo(const QString& id);
-	void requestSeekVideo(const QString& id, qint64 ms);
-	void requestSetVideoXY(const QString& id, float x, float y);
+	void requestSeekVideo(const QString& id, qint64 ms, bool pause=false);
+	void requestSetVideoXY(const QString& id, float x, float y, bool relative=false);
 	void requestSetVideoAlpha(const QString& id, float alpha);
 	void requestResizeVideo(const QString& id, float w, float h);
 	void requestShowVideo(const QString& id, bool show);

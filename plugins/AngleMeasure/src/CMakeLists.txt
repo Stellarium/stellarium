@@ -2,14 +2,14 @@ INCLUDE_DIRECTORIES(. gui)
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(AngleMeasure_SRCS
-  AngleMeasure.hpp
-  AngleMeasure.cpp
-  gui/AngleMeasureDialog.hpp
-  gui/AngleMeasureDialog.cpp
+     AngleMeasure.hpp
+     AngleMeasure.cpp
+     gui/AngleMeasureDialog.hpp
+     gui/AngleMeasureDialog.cpp
 )
 
 SET(AngleMeasure_UIS
-  gui/angleMeasureDialog.ui
+     gui/angleMeasureDialog.ui
 )
 
 QT5_WRAP_UI(AngleMeasure_UIS_H ${AngleMeasure_UIS})

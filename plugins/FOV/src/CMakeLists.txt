@@ -1,21 +1,23 @@
 
 INCLUDE_DIRECTORIES(
-  ${CMAKE_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/plugins/FOV/src
-  ${CMAKE_BINARY_DIR}/plugins/FOV/src/gui
-  . gui)
+     .
+     gui
+     ${CMAKE_BINARY_DIR}
+     ${CMAKE_BINARY_DIR}/plugins/FOV/src
+     ${CMAKE_BINARY_DIR}/plugins/FOV/src/gui
+)
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(FOV_SRCS
-  FOV.hpp
-  FOV.cpp
-  gui/FOVWindow.hpp
-  gui/FOVWindow.cpp
-  )
+     FOV.hpp
+     FOV.cpp
+     gui/FOVWindow.hpp
+     gui/FOVWindow.cpp
+)
 
 SET(FOV_UIS
-  gui/fovWindow.ui
+     gui/fovWindow.ui
 )
 
 QT5_WRAP_UI(FOV_UIS_H ${FOV_UIS})

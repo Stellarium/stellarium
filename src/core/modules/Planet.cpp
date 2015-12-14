@@ -23,6 +23,7 @@
 #include "StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
+#include "LandscapeMgr.hpp"
 #include "Planet.hpp"
 #include "planetsephems/precession.h"
 #include "StelObserver.hpp"
@@ -50,6 +51,8 @@ Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
+
+bool Planet::permanentDrawingOrbits = false;
 
 QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
 Planet::PlanetShaderVars Planet::planetShaderVars;
@@ -199,6 +202,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	QTextStream oss(&str);
 	double az_app, alt_app;
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	Q_UNUSED(az_app);
 
 	if (flags&Name)
@@ -235,15 +239,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// For now: add to EclipticCoord
 	//if (flags&EclipticCoord)
 	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclipticPos[0], 'f', 3), QString::number(eclipticPos[1], 'f', 3), QString::number(eclipticPos[2], 'f', 3)) << "<br>";
-//	if (flags&Extra)
-//	{
-//		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-//		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
-//		if (core->getCurrentLocation().planetName=="Earth")
-//			oss << q_("Ecliptic obliquity (of date): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
-//		//if (englishName!="Sun")
-//		//	oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
-//	}
 
 	if (flags&Distance)
 	{
@@ -272,13 +267,21 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (rings)
 		{
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
-			oss << q_("Apparent diameter: %1, with rings: %2")
-			       .arg(StelUtils::radToDmsStr(withoutRings, true),
-			            StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDecDegStr(withoutRings,4,false,true),
+					    StelUtils::radToDecDegStr(angularSize,4,false,true));
+			else
+				oss << q_("Apparent diameter: %1, with rings: %2")
+				       .arg(StelUtils::radToDmsStr(withoutRings, true),
+					    StelUtils::radToDmsStr(angularSize, true));
 		}
 		else
 		{
-			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
+			if (withDecimalDegree)
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(angularSize,5,false,true));
+			else
+				oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(angularSize, true));
 		}
 		oss << "<br>";
 	}
@@ -322,8 +325,16 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			if (deg>=267.5 && deg<=272.5)
 				phase = q_("First Quarter");
 
-			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
-			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			if (withDecimalDegree)
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDecDegStr(getPhaseAngle(observerHelioPos),4,false,true)) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDecDegStr(elongation,4,false,true)) << "<br>";
+			}
+			else
+			{
+				oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
+				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
+			}
 
 			if (englishName=="Moon" && !phase.isEmpty())
 			{
@@ -347,7 +358,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 //			oss << QString(q_("Eclipse Factor: %1 alpha: %2")).arg(eclipseFactor).arg(-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor))) << "<br>";
 			// Release version:
 			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
-			if (eclipseFactor>0.f)
+			if (eclipseFactor>1.e-7) // needed to avoid false display of 1e-14 or so.
 				oss << QString(q_("Eclipse Factor: %1%")).arg(eclipseFactor) << "<br>";
 
 		}
@@ -502,7 +513,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 void Planet::computePosition(const double dateJDE)
 {
 	//qDebug() << "Planet::computePosition() for " << getEnglishName();
-	// Make sure the parent position is computed for the dateJD, otherwise
+	// Make sure the parent position is computed for the dateJDE, otherwise
 	// getHeliocentricPos() would return incorrect values.
 	if (parent)
 		parent->computePositionWithoutOrbits(dateJDE);
@@ -525,7 +536,7 @@ void Planet::computePosition(const double dateJDE)
 		}
 		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
 
-		//qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJDE, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
@@ -1164,9 +1175,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	float screenSz = getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
 	float viewport_left = prj->getViewportPosX();
 	float viewport_bottom = prj->getViewportPosY();
-	if (prj->project(Vec3d(0), screenPos)
-	    && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
-	    && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	if ((prj->project(Vec3d(0), screenPos)
+	     && screenPos[1]>viewport_bottom - screenSz && screenPos[1] < viewport_bottom + prj->getViewportHeight()+screenSz
+	     && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
+	     || permanentDrawingOrbits)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlapping (e.g. for Jupiter's satellites)
@@ -1215,11 +1227,12 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(shadowCount = p->uniformLocation("shadowCount"));
 	GL(shadowData = p->uniformLocation("shadowData"));
 	GL(sunInfo = p->uniformLocation("sunInfo"));
+	GL(skyBrightness = p->uniformLocation("skyBrightness"));
 }
 
 void Planet::initShader()
 {
-	qWarning() << "Intializing planets GL shaders... ";
+	qDebug() << "Initializing planets GL shaders... ";
 	
 	const char *vsrc =
 		"attribute highp vec3 vertex;\n"
@@ -1262,6 +1275,7 @@ void Planet::initShader()
 		"uniform mediump vec3 ambientLight;\n"
 		"uniform mediump vec3 diffuseLight;\n"
 		"uniform highp vec4 sunInfo;\n"
+		"uniform mediump float skyBrightness;\n"
 		"varying highp vec3 P;\n"
 		"\n"
 		"uniform int shadowCount;\n"
@@ -1387,15 +1401,17 @@ void Planet::initShader()
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0
-		"    lowp float roughness = 0.8;\n"
+		// GZ next 5 can be lowp instead of mediump. Roughness original 1.0, then 0.8 in 0.14.0.
+		"    lowp float roughness = 0.9;\n"
 		"    lowp float roughnessSquared = roughness * roughness;\n"
 		"    lowp float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
 		"    lowp float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
 		"    lowp float C = sin(alpha) * tan(beta);\n"
-		// GZ final number was 2, but this causes overly bright moon.
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
+		// GZ final number was 2, but this causes overly bright moon. was 1.5 in 0.14.0.
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.85;\n"
 		"#endif\n"
+		//Reduce lum if sky is bright, to avoid burnt-out look in daylight sky.
+		"    lum *= (1.0-0.4*skyBrightness);\n"
 		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
@@ -1508,11 +1524,20 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// Set the light parameters taking sun as the light source
 			light.diffuse = Vec4f(1.f,magFactorGreen*1.f,magFactorBlue*1.f);
 			light.ambient = Vec4f(0.02f,magFactorGreen*0.02f,magFactorBlue*0.02f);
+			// TODO: ambient for the moon should provide the Ashen light!
 
 			if (this==ssm->getMoon())
 			{
-				// Special case for the Moon (maybe better use 1.5,1.5,1.5,1.0 ?) Was 1.6, but this often is too bright.
-				light.diffuse = Vec4f(1.5f,magFactorGreen*1.5f,magFactorBlue*1.5f,1.f);
+				float fov=core->getProjection(transfo)->getFov();
+				float fovFactor=1.6f;
+				// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
+				if (fov<5.0f)
+				{
+					fovFactor -= 0.1f*(5.0f-qMax(2.0f, fov));
+				}
+				// Special case for the Moon. Was 1.6, but this often is too bright.
+				light.diffuse = Vec4f(fovFactor,magFactorGreen*fovFactor,magFactorBlue*fovFactor,1.f);
+
 			}
 		}
 		else
@@ -1793,6 +1818,9 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	projector->getModelViewTransform()->backward(eyePos);
 	eyePos.normalize();
 	//qDebug() << " -->" << eyePos[0] << " " << eyePos[1] << " " << eyePos[2];
+	LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
+	Q_ASSERT(lmgr);
+
 
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
 	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
@@ -1804,6 +1832,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shader->setUniformValue(shaderVars->shadowData, shadowCandidatesData));
 	GL(shader->setUniformValue(shaderVars->sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
 	GL(texMap->bind(1));
+	GL(shader->setUniformValue(shaderVars->skyBrightness, lmgr->getLuminance()));
+
 	
 	if (rings!=NULL)
 	{

@@ -145,15 +145,15 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->realisticGroup, SIGNAL(clicked(bool)),
 		plugin, SLOT(setFlagRelisticMode(bool)));
 
+	// Settings tab - populate all values
+	updateSettingsPage();
+
 	// Settings tab / orbit lines group
 	connect(ui->orbitLinesGroup, SIGNAL(clicked(bool)),
 	        plugin, SLOT(setOrbitLinesFlag(bool)));
 	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
-	
-	// Settings tab - populate all values
-	updateSettingsPage();
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);

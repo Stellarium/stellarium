@@ -1,11 +1,11 @@
 // Author: Qam1
 // Name: Solar System Screensaver
 // License: Public Domain
-// Version: 232-1
+// Version: 242-1
 // Shortcut: Ctrl+U,0
-// Description: Screensaver of various happenings in the Solar System. 232 events in all!
+// Description: Screensaver of various happenings in the Solar System. 248 events in all!
 
-// Made on Stellarium Version 12.4
+// Made on Stellarium Version 14.0
 
 
 
@@ -21,7 +21,7 @@ core.setDeltaTAlgorithm("WithoutCorrection");
 
 
 // Number of Events
-l = 232;
+l = 248;
 
 
 degstring = "\u00B0";
@@ -549,9 +549,9 @@ StelMovementMgr.zoomTo(14, 1);
 d = "Just a nice grouping of Venus, Jupiter, Saturn and the Pleiades 4/5/2060"
 txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#BD2CB0");
 LabelMgr.setLabelShow(txt1, true);
-
-
 }
+
+
 
 if (id[r] == 21)
 {
@@ -998,8 +998,8 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 36)
 {
 // Total Eclipse of the sun by Europa from Ganymede 
-core.setObserverLocation(-143.6015, -55.5, 26, 1, "", "Ganymede");
-core.setDate("2015-03-28T18:30:46", "utc");
+core.setObserverLocation(-79.25, -55.5, 26, 1, "", "Ganymede");
+core.setDate("2015-03-28T18:28:41", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
 core.selectObjectByName("Europa", pointer = true);
@@ -1163,7 +1163,7 @@ SolarSystem.setFlagOrbits(false);
 if (id[r] == 42)
 {
 // Earth from Pluto 
-core.setObserverLocation(83.71, 45.24, 30268000, 1, "", "Pluto");
+core.setObserverLocation(-83.71, 45.24, 30268000, 1, "", "Pluto");
 core.setDate("2237-08-05T04:31:00", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -2012,8 +2012,8 @@ LabelMgr.setLabelShow(txt1, true);
 
 if (id[r] == 73)
 {
-// Phobos from Deimos
-core.setObserverLocation(76.6, 37.5, 26, 1, "", "Deimos");
+// Phobos from Deimos //@#@
+core.setObserverLocation(26.6, 37.5, 26, 1, "", "Deimos");
 core.setDate("2017-04-26T18:54:55", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -2108,7 +2108,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 77)
 {
 // Sun through Saturn rings from Titan  02/06/2042
-core.setObserverLocation(-140.00, -66.24, 34, 1, "", "Titan");
+core.setObserverLocation(40.00, -66.24, 34, 1, "", "Titan");
 core.setDate("2039-01-13T04:58:08", "utc");
 
 core.selectObjectByName("Sun", pointer = false);
@@ -2247,9 +2247,9 @@ SolarSystem.setFlagOrbits(false);
 
 if (id[r] == 82)
 {
-// Jupiter from Saturn Gi
+// Jupiter from Saturn Gi (fixed ver.238)
 core.setObserverLocation(-13.5, 39.0, 200000, 1, "", "Saturn");
-core.setDate("2035-07-16T12:24:43", "utc");
+core.setDate("2035-07-08T12:24:43", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
 core.selectObjectByName("HIP 108036", pointer = true);
@@ -2261,7 +2261,7 @@ SolarSystem.setFlagOrbits(false);
 SolarSystem.setLabelsAmount(20);   
 core.selectObjectByName("Jupiter", pointer = true);
 
-d = "Jupiter Greatest 21st Century illumination from Saturn 7/16/2035"
+d = "Jupiter Greatest 21st Century illumination from Saturn 7/8/2035"
 txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
 LabelMgr.setLabelShow(txt1, true);
 
@@ -2601,7 +2601,7 @@ if (id[r] == 95)
 // Pluto Eclispe 02/01/2108
 
 core.setObserverLocation(0.36666, -0.3333, 36, 1, "", "Pluto");
-core.setDate("2108-02-01T12:45:59", "utc");
+core.setDate("2108-02-01T14:04:49", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
 core.selectObjectByName("Sun", pointer = true);
@@ -3084,7 +3084,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 112)
 {
 // Saturn in Orion
-core.setObserverLocation(-132.74, 56.92, 381, 1, "", "Iapetus");
+core.setObserverLocation(-42.74, 56.92, 381, 1, "", "Iapetus");
 core.setDate("2033-06-24T01:22:12", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -3104,8 +3104,8 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 113)
 {
 // Dione Eclipses
-core.setObserverLocation(-132.36666, -38.28333, 381, 1, "", "Titan");
-core.setDate("2025-04-21T05:07:42", "utc");
+core.setObserverLocation(-32.36666, -38.28333, 381, 1, "", "Titan");
+core.setDate("2025-04-21T05:05:04", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
 core.selectObjectByName("Dione", pointer = false);
@@ -3193,7 +3193,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 117)
 {
 // Jupiter/Sun from Titan
-core.setObserverLocation(-123.5, 40.5, 27, 1, "", "Titan");
+core.setObserverLocation(-23.5, 40.5, 27, 1, "", "Titan");
 core.setDate("7541-03-23T08:43:03", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -4712,7 +4712,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 173)
 {
 // Mars Transits Earth 12/2/2223
-core.setObserverLocation(-74.3, 56.50, 12, 1, "", "Callisto");
+core.setObserverLocation(124.77, 56.50, 12, 1, "", "Callisto");
 core.setDate("2223-12-02T06:49:11", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -4771,7 +4771,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 175)
 {
 // Jup Ple from Callisto 08/28/2017
-core.setObserverLocation(-120.5, 30, 0, 1, "", "Callisto");
+core.setObserverLocation(-10.5, 30, 0, 1, "", "Callisto");
 core.setDate("2017-08-28T22:57:37", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -4824,7 +4824,7 @@ SolarSystem.setFlagOrbits(false);
 if (id[r] == 177)
 {
 // Jup Ple from Callisto 08/25/2024
-core.setObserverLocation(159.5, 40, 0, 1, "", "Callisto");
+core.setObserverLocation(-30.5, 40, 0, 1, "", "Callisto");
 core.setDate("2024-08-25T09:04:37", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -4915,7 +4915,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 181)
 {
 // Saturn from Jupiter 2/6/2060
-core.setObserverLocation(-33.9, 30, 16, 1, "", "Callisto");
+core.setObserverLocation(153.9, 30, 16, 1, "", "Callisto");
 core.setDate("2060-02-01T06:20:07", "utc");
 
 core.selectObjectByName("Saturn", pointer = true);
@@ -4933,7 +4933,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 182)
 {
 // Saturn from Jupiter 11/2/2020
-core.setObserverLocation(153.9, 34.5, 1, 1, "", "Europa");
+core.setObserverLocation(163.9, 34.5, 1, 1, "", "Europa");
 core.setDate("2020-11-02T16:32:07", "utc");
 
 core.selectObjectByName("Saturn", pointer = true);
@@ -5024,7 +5024,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 186)
 {
 //  Neptune orion
-core.setObserverLocation(17.1, 35.25, 70, 1, "", "Pluto");
+core.setObserverLocation(17.1, 25.25, 70, 1, "", "Pluto");
 core.setDate("10169-12-25T12:20:00", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -5371,7 +5371,7 @@ if (id[r] == 199)
 {
 // Saturn from Jupiter 2064-05-12T20:03:09
 
-core.setObserverLocation(163.71, 4.24, 1126, 1, "", "Callisto");
+core.setObserverLocation(-3.71, 4.24, 1126, 1, "", "Callisto");
 core.setDate("2064-05-12T20:03:09", "utc");
 
 core.selectObjectByName("Saturn", pointer = true);
@@ -6060,7 +6060,7 @@ StelMovementMgr.zoomTo(pick);
 
 d = "A close 0.04" + degstring + " Earth-Moon Sirrus Conjuncton 4/17/2089 from Pallas"
 
-txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#0007F7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#07F4F7");
 LabelMgr.setLabelShow(txt1, true);
  	
 }
@@ -6242,7 +6242,7 @@ LabelMgr.setLabelShow(txt1, true);
 if (id[r] == 231)
 {
 // Earth Transit from Callisto
-core.setObserverLocation(160, 90, 4, 1, "", "Callisto");
+core.setObserverLocation(-10, 60, 4, 1, "", "Callisto");
 core.setDate("2595-01-06T18:25:30", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -6294,6 +6294,524 @@ LabelMgr.setLabelShow(txt1, true);
 
 
 }
+
+
+
+if (id[r] == 233)
+{
+// Jupiter/Sun from Titan
+var pick = Math.floor(Math.random()*170)-85;
+core.setObserverLocation(-0.5, pick, 27, 1, "", "Titan");
+core.setDate("2080-05-20T20:30:03", "utc");
+
+
+LandscapeMgr.setFlagAtmosphere(true);
+
+core.selectObjectByName("Jupiter", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+
+StelMovementMgr.zoomTo(.15, 1);
+SolarSystem.setFlagOrbits(false);
+
+d = "Jupiter partially Transits the Sun as seen from Titan 5/20/2080"; 
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#78FF17");
+LabelMgr.setLabelShow(txt1, true);
+}
+
+
+if (id[r] == 234)
+{
+// Nice Grouping 8/25/2038
+core.setObserverLocation(74.1, 14.25, 16, 1, "", "Earth");
+core.setDate("2038-08-25T00:15:07", "utc");
+
+core.selectObjectByName("Venus", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Jupiter", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Mercury", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(37, 1);
+
+d = "A nice line of Venus, Jupiter and Mercury 8/25/2038"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FD2CF0");
+LabelMgr.setLabelShow(txt1, true);
+}
+
+
+
+
+if (id[r] == 235)
+{
+// Nice Ceres Grouping 7/21/2018
+core.setObserverLocation(74.3, 40.5, 16, 1, "", "Ceres");
+core.setDate("2018-07-21T01:00:07", "utc");
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+core.selectObjectByName("Earth", pointer = true);
+var pick = Math.floor(Math.random()*4);
+if (pick == 0)
+{
+core.selectObjectByName("Venus", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Mercury", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Mars", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(37, 1);
+
+
+d = "A nice grouping of Mercury, Venus, Earth, Mars and Neptune"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF2222");
+LabelMgr.setLabelShow(txt1, true);
+
+d = "From Ceres 7/21/2018"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 50 * y, false, 20 * x, "#FF2222");
+LabelMgr.setLabelShow(txt1, true);
+
+
+}
+
+
+if (id[r] == 236)
+{
+// Jupiter - Antares from Ceres 01/28/2410
+core.setObserverLocation(118.33, 16.50, 126, 1, "", "Ceres");
+core.setDate("2410-01-28T20:41:07", "utc");
+
+core.selectObjectByName("Jupiter", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.random()*20+1;
+pick = pick/100 + .06;
+StelMovementMgr.zoomTo(pick, 1);
+
+d = "Jupiter close 0.03" + degstring + " Conjunction with Antares from Ceres 01/28/2410"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F1FFF8");
+LabelMgr.setLabelShow(txt1, true);
+
+
+}
+
+
+
+if (id[r] == 237)
+{
+// Nice Grouping 2/18/2080
+core.setObserverLocation(118.3, 8.5, 220, 1, "", "Earth");
+core.setDate("2080-02-18T21:23:07", "utc");
+
+LandscapeMgr.setFlagAtmosphere(true);
+
+
+core.selectObjectByName("Jupiter", pointer = true);
+var pick = Math.floor(Math.random()*4);
+if (pick == 0)
+{
+core.selectObjectByName("Venus", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Saturn", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Uranus", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+
+var pick = Math.random()*7+20;
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "A nice grouping of Venus, Jupiter, Saturn, Uranus and the Moon 2/18/2080"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF22FF");
+LabelMgr.setLabelShow(txt1, true);
+
+}
+
+
+
+if (id[r] == 238)
+{
+// Opposition Grouping 9/23/2022
+core.setObserverLocation(-175.1, 14.25, 26, 1, "", "Mercury");
+core.setDate("2022-09-23T10:15:07", "utc");
+
+core.selectObjectByName("Earth", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Jupiter", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Neptune", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+
+
+var pick = Math.random()*100+60;
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+
+
+d = "Earth, Jupiter and Neptune opposition with 24 hours"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FD2CF0");
+LabelMgr.setLabelShow(txt1, true);
+
+
+
+
+}
+
+
+
+
+if (id[r] == 239)
+{
+// Earth & & Venus & Jup & Saturn  6/11/2279
+core.setObserverLocation(133.6, 12.1, 6, 1, "", "Mercury");
+core.setDate("2279-06-11T17:49:20", "utc");
+
+core.selectObjectByName("Earth", pointer = true);
+var pick = Math.floor(Math.random()*4);
+
+if (pick == 0)
+{
+core.selectObjectByName("Jupiter", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Saturn", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Venus", pointer = true);
+}
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.random()*10+20;
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "Venus, Earth, Jupiter and Saturn all in Libra's Box";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AD2CF0");
+LabelMgr.setLabelShow(txt1, true);
+
+
+d = "From Mercury 6/11/2279"
+txt1 = LabelMgr.labelScreen(d, 320 * x, 50 * y, false, 20 * x, "#AD2CF0");
+LabelMgr.setLabelShow(txt1, true);
+
+}
+
+
+if (id[r] == 240)
+{
+// Double - Double
+core.setObserverLocation(116.2, 42.1, 6, 0, "", "Mercury");
+core.setDate("2031-07-26T15:54:20", "utc");
+
+core.selectObjectByName("HIP 100064", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+
+
+core.selectObjectByName("Earth", pointer = true);
+var pick = Math.floor(Math.random()*4);
+
+if (pick == 0)
+{
+core.selectObjectByName("Jupiter", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Mars", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Venus", pointer = true);
+}
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+
+var pick = Math.random()*4+121;
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "Double Double Conjunction: Venus & Earth + Mars & Jupiter";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFFFFF");
+LabelMgr.setLabelShow(txt1, true);
+
+
+d = "From Mercury 7/26/2031";
+txt1 = LabelMgr.labelScreen(d, 320 * x, 50 * y, false, 20 * x, "#FFFFFF");
+LabelMgr.setLabelShow(txt1, true);
+
+
+}
+
+
+if (id[r] == 241)
+{
+// Saturn - Earth from Jupiter   
+core.setObserverLocation(-134.1, -42.5, 50000, 1, "", "Jupiter");
+core.setDate("2904-07-06T18:50:51", "utc");
+
+core.selectObjectByName("Saturn", pointer = true);
+var pick = Math.floor(Math.random()*3);
+if (pick == 0)
+{
+core.selectObjectByName("Earth", pointer = true);
+}
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*2);
+StelMovementMgr.zoomTo(0.0101 * pick + 0.01,1);
+
+
+SolarSystem.setLabelsAmount(18);   	
+StelMovementMgr.setFlagTracking(true);
+
+d = "Earth Very Close 0.004" + degstring + " Saturn Conjunction from Jupiter 7/6/2904"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AAAAFF");
+LabelMgr.setLabelShow(txt1, true);
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+}
+
+
+
+if (id[r] == 242)
+{
+// Jupiter/Sun from Iapetus
+core.setObserverLocation(134.5, -7.7, 27, 1, "", "Iapetus");
+core.setDate("2080-05-19T10:03:03", "utc");
+
+
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Jupiter", pointer = false);
+StelMovementMgr.setFlagTracking(true);
+
+
+var pick = Math.floor(Math.random()*9)+1;
+
+pick = pick/10
+
+StelMovementMgr.zoomTo(pick, 1);
+SolarSystem.setFlagOrbits(false);
+
+d = "Jupiter Transits the Sun as seen from Iapetus 5/19/2080"; 
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#78FF17");
+LabelMgr.setLabelShow(txt1, true);
+}
+
+
+
+
+if (id[r] == 243)
+{
+// Earth Full - Venus New 
+core.setObserverLocation(90.12, 1.25, 7, 1, "", "Callisto");
+core.setDate("2065-11-22T11:14:36", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+
+core.selectObjectByName("Earth", pointer = true);
+var pick = Math.floor(Math.random()*2);
+if (pick == 0)
+{
+core.selectObjectByName("Venus", pointer = true);
+}
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*500)+500;
+
+pick = pick / 100000
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "A close Full Earth - New Venus Conjunction from Callisto 11/22/2065";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B59918");
+LabelMgr.setLabelShow(txt1, true);
+ 
+}
+
+
+
+
+
+if (id[r] == 244)
+{
+// Neptune so far 
+core.setObserverLocation(-126.12, 4.33, 7, 1, "", "Uranus");
+core.setDate("2084-03-06T19:37:36", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+
+core.selectObjectByName("Neptune", pointer = true);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*30)+5;
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "Neptune's farthest point (49.87909 AU) away from Uranus 03/06/2084";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#1899B6");
+LabelMgr.setLabelShow(txt1, true);
+ 
+}
+
+
+
+if (id[r] == 245)
+{
+// Pluto so far 
+core.setObserverLocation(116.12, 8.33, 7, 1, "", "Neptune");
+core.setDate("2131-09-19T06:13:00", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+
+core.selectObjectByName("Pluto", pointer = true);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*30)+5;
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "Pluto's farthest point (78.429 AU) away from Neptune 09/19/2131";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#18BBD9");
+LabelMgr.setLabelShow(txt1, true);
+ 
+}
+
+
+
+
+
+if (id[r] == 246)
+{
+// Mars so far 
+core.setObserverLocation(176.12, 8.33, 7, 1, "", "Earth");
+core.setDate("2066-08-25T00:21:00", "utc");
+LandscapeMgr.setFlagAtmosphere(true);
+
+
+
+core.selectObjectByName("Mars", pointer = true);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*30)+5;
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "Mars' farthest point (2.6763 AU) away from Earth of the 21st Century 08/25/2066";
+txt1 = LabelMgr.labelScreen(d, 200 * x, 20 * y, false, 20 * x, "#CBBBD9");
+LabelMgr.setLabelShow(txt1, true);
+ 
+}
+
+
+
+
+
+if (id[r] == 247)
+{
+// Fullest Neptune in Big Dipper 
+core.setObserverLocation(0.12, 34.33, 7, 1, "", "Triton");
+core.setDate("2090-11-09T04:51:08", "utc");
+LandscapeMgr.setFlagAtmosphere(true);
+
+
+
+core.selectObjectByName("Neptune", pointer = true);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*40)+20;
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "A Full Neptune in the Big Dipper from Triton 11/09/2090";
+txt1 = LabelMgr.labelScreen(d, 320 * x, 20 * y, false, 20 * x, "#ABBBFF");
+LabelMgr.setLabelShow(txt1, true);
+ 
+}
+
+
+
+
+if (id[r] == 248)
+{
+// Fullest Uranus in the Little Dipper 
+core.setObserverLocation(2.42, 34.33, 7, 1, "", "Oberon");
+core.setDate("2040-08-11T16:06:47", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+
+
+core.selectObjectByName("Uranus", pointer = true);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+var pick = Math.floor(Math.random()*40)+20;
+
+StelMovementMgr.zoomTo(pick, 1);
+
+
+d = "A Full (Well as full as it gets) Uranus in the Little Dipper from Oberon 08/11/2040";
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#ABFF99");
+LabelMgr.setLabelShow(txt1, true);
+ 
+}
+
 
 
 
