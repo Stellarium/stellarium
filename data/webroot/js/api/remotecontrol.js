@@ -46,15 +46,6 @@ define(["jquery", "settings", "translationdata"], function($, settings, Translat
                 //allow interested modules to react to the event
                 $(rc).trigger('serverDataReceived', data);
 
-                /*
-                //update modules with data
-                Time.updateFromServer(data.time);
-                Scripts.updateFromServer(data.script);
-                Locations.updateFromServer(data.location);
-                ViewControl.updateFromServer(data.view);
-                ViewOptions.updateFromServer(data.view);
-                */
-
                 if (data.actionChanges.id !== lastActionId) {
                     var evt = $.Event("stelActionsChanged");
                     $(rc).trigger(evt, data.actionChanges.changes, lastActionId);

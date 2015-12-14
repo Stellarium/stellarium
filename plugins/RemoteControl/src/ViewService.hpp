@@ -24,6 +24,7 @@
 
 class StelCore;
 class LandscapeMgr;
+class NebulaMgr;
 class StelSkyCultureMgr;
 
 class ViewService : public AbstractAPIService
@@ -42,6 +43,7 @@ private:
 	QString wrapHtml(QString& data,const QString& title) const;
 	StelCore* core;
 	LandscapeMgr* lsMgr;
+	NebulaMgr* nebMgr;
 	StelSkyCultureMgr* skyCulMgr;
 };
 

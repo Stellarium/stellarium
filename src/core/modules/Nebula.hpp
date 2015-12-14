@@ -59,13 +59,13 @@ public:
 	{
 		TypeGalaxies		= 0x00000001, //!< Galaxies
 		TypeActiveGalaxies	= 0x00000002, //!< Different Active Galaxies
-		TypeInteractingGalaxies	= 0x00000004, //!< Different Active Galaxies
+		TypeInteractingGalaxies	= 0x00000004, //!< Interacting Galaxies
 		TypeStarClusters	= 0x00000008, //!< Star Clusters
 		TypeHydrogenRegions	= 0x00000010, //!< Hydrogen Regions
 		TypeBrightNebulae	= 0x00000020, //!< Bright Nebulae
 		TypeDarkNebulae		= 0x00000040, //!< Dark Nebulae
 		TypePlanetaryNebulae	= 0x00000080, //!< Planetary Nebulae
-		TypeSupernovaRemnants	= 0x00000100, //!< Planetary Nebulae
+		TypeSupernovaRemnants	= 0x00000100, //!< Supernova Remnants
 		TypeOther		= 0x00000200  //!< Other objects
 	};
 
