@@ -122,7 +122,6 @@ Oculars::Oculars():
 	flagLimitPlanets(false),
 	magLimitPlanets(0.0),
 	flagMoonScale(false),
-	ccdRotationAngle(0.0),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
 	flagLimitMagnitude(false),	
@@ -793,7 +792,16 @@ void Oculars::updateLists()
 
 void Oculars::ccdRotationReset()
 {
-	ccdRotationAngle = 0.0;
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (ccd) ccd->setChipRotAngle(0.0);
+	emit(selectedCCDChanged());
+}
+
+double Oculars::ccdRotationAngle() const
+{
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (ccd) return ccd->chipRotAngle();
+	else return 0.0;
 }
 
 void Oculars::enableOcular(bool enableOcularMode)
@@ -1127,12 +1135,17 @@ void Oculars::disableLens()
 
 void Oculars::rotateCCD(QString amount)
 {
-	ccdRotationAngle += amount.toInt();
-	if (ccdRotationAngle >= 360) {
-		ccdRotationAngle -= 360;
-	} else if (ccdRotationAngle <= -360) {
-		ccdRotationAngle += 360;
+	CCD *ccd = ccds[selectedCCDIndex];
+	if (!ccd) return;
+	double angle = ccd->chipRotAngle();
+	angle += amount.toInt();
+	if (angle >= 360) {
+		angle -= 360;
+	} else if (angle <= -360) {
+		angle += 360;
 	}
+	ccd->setChipRotAngle(angle);
+	emit(selectedCCDChanged());
 }
 
 void Oculars::selectCCDAtIndex(QString indexString)
@@ -1407,10 +1420,25 @@ void Oculars::paintCCDBounds()
 			float width = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
 			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 
+			double polarAngle = 0;
+			// if the telescope is Equatorial derotate the field
+			if (telescope->isEquatorial()) {
+				Vec3d CPos;
+				Vec2f cpos = projector->getViewportCenter();
+				projector->unProject(cpos[0], cpos[1], CPos);
+				Vec3d CPrel(CPos);
+				CPrel[2]*=0.2;
+				Vec3d crel;
+				projector->project(CPrel, crel);
+				polarAngle = atan2(cpos[1] - crel[1], cpos[0] - crel[0]) * (-180.0)/M_PI; // convert to degrees
+				if (CPos[2] > 0) polarAngle += 90.0;
+				else polarAngle -= 90.0;
+			}
+
 			if (width > 0.0 && height > 0.0) {
 				QPoint a, b;
 				QTransform transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
-						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-ccdRotationAngle);
+						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle));
 				// bottom line
 				a = transform.map(QPoint(-width/2.0, -height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
@@ -1427,6 +1455,41 @@ void Oculars::paintCCDBounds()
 				a = transform.map(QPoint(width/2.0, height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+
+				if(ccd->hasOAG()) {
+					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
+					const double OuterOAGRatio = ccd->getOuterOAGRadius(telescope, lens) / screenFOV;
+					const double prismXRatio = ccd->getOAGActualFOVx(telescope, lens) / screenFOV;
+					float in_oag_r = params.viewportXywh[aspectIndex] * InnerOAGRatio * params.devicePixelsPerPixel;
+					float out_oag_r = params.viewportXywh[aspectIndex] * OuterOAGRatio * params.devicePixelsPerPixel;
+					float h_width = params.viewportXywh[aspectIndex] * prismXRatio * params.devicePixelsPerPixel / 2.0;
+
+					//painter.setColor(0.60f, 0.20f, 0.20f, .5f);
+					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							params.viewportCenter[1] * params.devicePixelsPerPixel, in_oag_r);
+					painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							params.viewportCenter[1] * params.devicePixelsPerPixel, out_oag_r);
+
+					QTransform oag_transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
+							params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-(ccd->chipRotAngle() + polarAngle + ccd->prismPosAngle()));
+
+					// bottom line
+					a = oag_transform.map(QPoint(-h_width, in_oag_r));
+					b = oag_transform.map(QPoint(h_width, in_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
+					// top line
+					a = oag_transform.map(QPoint(-h_width, out_oag_r));
+					b = oag_transform.map(QPoint(h_width, out_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
+					// left line
+					a = oag_transform.map(QPoint(-h_width, out_oag_r));
+					b = oag_transform.map(QPoint(-h_width, in_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
+					// right line
+					a = oag_transform.map(QPoint(h_width, out_oag_r));
+					b = oag_transform.map(QPoint(h_width, in_oag_r));
+					painter.drawLine2d(a.x(),a.y(), b.x(), b.y());
+				}
 
 				// Tool for planning a mosaic astrophotography: shows a small cross at center of CCD's
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
@@ -1463,7 +1526,7 @@ void Oculars::paintCCDBounds()
 					}
 					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
 					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
-					painter.drawText(a.x(), a.y(), coords, -ccdRotationAngle);
+					painter.drawText(a.x(), a.y(), coords, -(ccd->chipRotAngle() + polarAngle));
 				}
 			}
 		}
@@ -1530,7 +1593,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		glEnable(GL_BLEND);
 		painter.enableTexture2d(true);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(0.77, 0.14, 0.16, 1.0);		
+		painter.setColor(0.77, 0.14, 0.16, 1.0);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		reticleTexture->bind();
 

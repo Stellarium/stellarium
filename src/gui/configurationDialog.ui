@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>497</width>
-    <height>509</height>
+    <height>538</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -172,7 +172,7 @@
             <property name="title">
              <string>Language settings</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <layout class="QGridLayout" name="gridLayout_4">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -185,7 +185,7 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
+             <item row="0" column="0">
               <layout class="QGridLayout" name="languageGridLayout">
                <item row="0" column="0">
                 <widget class="QLabel" name="programLanguageLabel">
@@ -503,7 +503,7 @@
              <item row="3" column="0">
               <widget class="QCheckBox" name="checkBoxRaDecOfDate">
                <property name="toolTip">
-                <string>Geocentric equatorial coordinates, equinox of date</string>
+                <string>Equatorial coordinates, equinox of date</string>
                </property>
                <property name="text">
                 <string>Right ascension/Declination (of date)</string>
@@ -526,7 +526,7 @@
              <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxRaDecJ2000">
                <property name="toolTip">
-                <string>Geocentric equatorial coordinates, equinox of J2000.0</string>
+                <string>Equatorial coordinates, equinox of J2000.0</string>
                </property>
                <property name="text">
                 <string>Right ascension/Declination (J2000)</string>
@@ -608,7 +608,7 @@
              <item row="3" column="1">
               <widget class="QCheckBox" name="checkBoxHourAngle">
                <property name="toolTip">
-                <string>Topocentric equatorial coordinates</string>
+                <string>Equatorial coordinates, equinox of date</string>
                </property>
                <property name="text">
                 <string>Hour angle/Declination</string>
@@ -1092,6 +1092,9 @@
              </item>
              <item row="1" column="0">
               <widget class="QCheckBox" name="selectSingleConstellationButton">
+               <property name="toolTip">
+                <string>Hide other constellations when you click one</string>
+               </property>
                <property name="statusTip">
                 <string>Hide other constellations when you click one</string>
                </property>

@@ -289,7 +289,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 {
 	if (engine.isEvaluating())
 	{
-		QString msg = QString("ERROR: there is already a script running, please wait that it's over.");
+		QString msg = QString("ERROR: there is already a script running, please wait until it's over.");
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 		return false;
@@ -297,7 +297,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 	// Seed the PRNG so that script random numbers aren't always the same sequence
 	qsrand(QDateTime::currentDateTime().toTime_t());
 
-	// Make sure that the gui object have been completely initialized (there used to be problems with startup scripts).
+	// Make sure that the gui objects have been completely initialized (there used to be problems with startup scripts).
 	Q_ASSERT(StelApp::getInstance().getGui());
 
 	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
@@ -418,6 +418,12 @@ void StelScriptMgr::output(const QString &msg)
 	emit(scriptOutput(msg));
 }
 
+void StelScriptMgr::resetOutput(void)
+{
+	StelScriptOutput::reset();
+	emit(scriptOutput(""));
+}
+
 void StelScriptMgr::scriptEnded()
 {
 	if (engine.hasUncaughtException())
@@ -494,6 +500,19 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 		{
 			output += line;
 			output += '\n';
+		}
+	}
+
+	if (qApp->property("verbose")==true)
+	{
+		// Debug to find stupid errors. The line usually reported may be off due to the preprocess stage.
+		QStringList outputList=output.split('\n');
+		qDebug() << "Script after preprocessing:";
+		int lineIdx=0;
+		foreach (const QString& line, outputList)
+		{
+			qDebug() << lineIdx << ":" << line;
+			lineIdx++;
 		}
 	}
 	return true;

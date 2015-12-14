@@ -1,13 +1,13 @@
 INCLUDE_DIRECTORIES(
-    .
-    ${CMAKE_BINARY_DIR}/plugins/NavStars/src
+     .
+     ${CMAKE_BINARY_DIR}/plugins/NavStars/src
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(NavStars_SRCS
-  NavStars.hpp
-  NavStars.cpp
+     NavStars.hpp
+     NavStars.cpp
 )
 
 SET(NavStars_RES ../resources/NavStars.qrc)

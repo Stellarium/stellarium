@@ -562,22 +562,18 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
-	conf->setValue("astro/flag_star_magnitude_limit",
-	               skyd->getFlagStarMagnitudeLimit());
-	conf->setValue("astro/star_magnitude_limit",
-	               skyd->getCustomStarMagnitudeLimit());
-	conf->setValue("astro/flag_planet_magnitude_limit",
-		       skyd->getFlagPlanetMagnitudeLimit());
-	conf->setValue("astro/planet_magnitude_limit",
-		       skyd->getCustomPlanetMagnitudeLimit());
-	conf->setValue("astro/flag_nebula_magnitude_limit",
-	               skyd->getFlagNebulaMagnitudeLimit());
-	conf->setValue("astro/nebula_magnitude_limit",
-	               skyd->getCustomNebulaMagnitudeLimit());
+	conf->setValue("astro/flag_star_magnitude_limit", skyd->getFlagStarMagnitudeLimit());
+	conf->setValue("astro/star_magnitude_limit", skyd->getCustomStarMagnitudeLimit());
+	conf->setValue("astro/flag_planet_magnitude_limit", skyd->getFlagPlanetMagnitudeLimit());
+	conf->setValue("astro/planet_magnitude_limit", skyd->getCustomPlanetMagnitudeLimit());
+	conf->setValue("astro/flag_nebula_magnitude_limit", skyd->getFlagNebulaMagnitudeLimit());
+	conf->setValue("astro/nebula_magnitude_limit", skyd->getCustomNebulaMagnitudeLimit());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
 	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
+	conf->setValue("viewing/flag_isolated_trails", ssmgr->getFlagIsolatedTrails());
+	conf->setValue("viewing/flag_isolated_orbits", ssmgr->getFlagIsolatedOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
@@ -601,6 +597,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
 	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf->setValue("viewing/flag_prime_vertical_line", glmgr->getFlagPrimeVerticalLine());
+	conf->setValue("viewing/flag_colure_lines", glmgr->getFlagColureLines());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
 	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
@@ -610,7 +608,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
-	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
+	conf->setValue("viewing/constellation_art_intensity", mvmgr->getInitConstellationIntensity());
 	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
 	conf->setValue("viewing/constellation_line_thickness", cmgr->getConstellationLineThickness());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
@@ -1144,6 +1142,8 @@ void ConfigurationDialog::downloadStars()
 	progressBar->setValue(0);
 	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
+
+	qDebug() << "Downloading file" << nextStarCatalogToDownload.value("url").toString();
 }
 
 void ConfigurationDialog::de430ButtonClicked()
@@ -1260,6 +1260,8 @@ void ConfigurationDialog::starsDownloadFinished()
 		connect(downloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 		return;
 	}
+
+	Q_ASSERT(downloadReply->bytesAvailable()==0);
 
 	isDownloadingStarCatalog = false;
 	isDownloading = false;

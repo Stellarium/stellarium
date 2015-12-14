@@ -3,30 +3,31 @@ INCLUDE_DIRECTORIES(.)
 LINK_DIRECTORIES(/src)
 
 SET(TextUserInterface_SRCS
-	DummyDialog.hpp
-	DummyDialog.cpp
-	TuiNode.hpp
-	TuiNode.cpp
-	TuiNodeActivate.hpp
-	TuiNodeActivate.cpp
-	TuiNodeEditable.hpp
-	TuiNodeEditable.cpp
-	TuiNodeBool.hpp
-	TuiNodeBool.cpp
-	TuiNodeInt.hpp
-	TuiNodeInt.cpp
-	TuiNodeDouble.hpp
-	TuiNodeDouble.cpp
-	TuiNodeFloat.hpp
-	TuiNodeFloat.cpp
-	TuiNodeDateTime.hpp
-	TuiNodeDateTime.cpp
-	TuiNodeColor.hpp
-	TuiNodeColor.cpp
-	TuiNodeEnum.hpp
-	TuiNodeEnum.cpp
-	TextUserInterface.hpp
-	TextUserInterface.cpp)
+     DummyDialog.hpp
+     DummyDialog.cpp
+     TuiNode.hpp
+     TuiNode.cpp
+     TuiNodeActivate.hpp
+     TuiNodeActivate.cpp
+     TuiNodeEditable.hpp
+     TuiNodeEditable.cpp
+     TuiNodeBool.hpp
+     TuiNodeBool.cpp
+     TuiNodeInt.hpp
+     TuiNodeInt.cpp
+     TuiNodeDouble.hpp
+     TuiNodeDouble.cpp
+     TuiNodeFloat.hpp
+     TuiNodeFloat.cpp
+     TuiNodeDateTime.hpp
+     TuiNodeDateTime.cpp
+     TuiNodeColor.hpp
+     TuiNodeColor.cpp
+     TuiNodeEnum.hpp
+     TuiNodeEnum.cpp
+     TextUserInterface.hpp
+     TextUserInterface.cpp
+)
 
 SET(extLinkerOption ${OPENGL_LIBRARIES})
 

@@ -52,9 +52,8 @@ private slots:
 	void projectionChanged(const QString& projectionName);
 	void viewportVerticalShiftChanged(const int shift);
 	void landscapeChanged(QListWidgetItem* item);
-	void setZhrFromControls(int zhr);
+	void setZHR(int zhr);
 	void updateZhrDescription();
-	void updateZhrControls(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
 	void nebulasMarkersValueChanged(int);

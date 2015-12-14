@@ -76,7 +76,6 @@ void AngleMeasureDialog::createDialogContent()
 	ui->azAltEndOnSkyCheckBox->setChecked(am->isHorizontalEndSkylinked());
 	connect(ui->azAltEndOnSkyCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontalEndSkylinked(bool)));
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveAngleMeasureSettings()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetAngleMeasureSettings()));
 
 	setAboutHtml();
@@ -116,11 +115,6 @@ void AngleMeasureDialog::setAboutHtml(void)
 	}
 
 	ui->aboutTextBrowser->setHtml(html);
-}
-
-void AngleMeasureDialog::saveAngleMeasureSettings()
-{
-	am->saveSettings();
 }
 
 void AngleMeasureDialog::resetAngleMeasureSettings()
