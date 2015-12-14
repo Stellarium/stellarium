@@ -64,7 +64,7 @@ SolarSystem::SolarSystem()
 	, moonScale(1.)
 	, labelsAmount(false)
 	, flagOrbits(false)
-	, flagLightTravelTime(false)
+	, flagLightTravelTime(true)
 	, flagShow(false)
 	, flagMarker(false)
 	, flagNativeNames(false)
@@ -145,7 +145,7 @@ void SolarSystem::init()
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
-	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
+	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
 	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
@@ -154,6 +154,7 @@ void SolarSystem::init()
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
+	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
 
 	recreateTrails();
 
@@ -1737,6 +1738,11 @@ void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 {
 	return getEarth()->getApparentMagnitudeAlgorithmString();
+}
+
+void SolarSystem::setFlagPermanentOrbits(bool b)
+{
+	Planet::permanentDrawingOrbits=b;
 }
 
 double SolarSystem::getEclipseFactor(const StelCore* core) const

@@ -1,23 +1,23 @@
 INCLUDE_DIRECTORIES(
-    .
-    gui
-    ${CMAKE_BINARY_DIR}/plugins/Novae/src
-    ${CMAKE_BINARY_DIR}/plugins/Novae/src/gui
+     .
+     gui
+     ${CMAKE_BINARY_DIR}/plugins/Novae/src
+     ${CMAKE_BINARY_DIR}/plugins/Novae/src/gui
 )
 
 LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(Novae_SRCS
-    Novae.hpp
-    Novae.cpp
-    Nova.hpp
-    Nova.cpp
-    gui/NovaeDialog.hpp
-    gui/NovaeDialog.cpp
+     Novae.hpp
+     Novae.cpp
+     Nova.hpp
+     Nova.cpp
+     gui/NovaeDialog.hpp
+     gui/NovaeDialog.cpp
 )
 
 SET(NovaeDialog_UIS
-    gui/novaeDialog.ui
+     gui/novaeDialog.ui
 )
 
 QT5_WRAP_UI(NovaeDialog_UIS_H ${NovaeDialog_UIS})
