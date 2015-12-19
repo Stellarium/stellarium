@@ -196,6 +196,9 @@ void CompassMarks::setCompassMarks(bool b)
 		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(cardinalPointsState);
 	}
 	markFader = b;
+	// autosaving the state by default
+	displayedAtStartup = b;
+	conf->setValue("CompassMarks/enable_at_startup", displayedAtStartup);
 	emit compassMarksChanged(b);
 }
 
@@ -209,25 +212,13 @@ void CompassMarks::loadConfiguration()
 	conf->endGroup();
 }
 
-void CompassMarks::saveConfiguration()
-{
-	Q_ASSERT(conf);
-	conf->beginGroup("CompassMarks");
-	conf->setValue("font_size", font.pixelSize());
-	conf->setValue("enable_at_startup", displayedAtStartup);
-	// The rest is not saved!
-	conf->endGroup();
-}
-
 void CompassMarks::restoreDefaultConfiguration()
 {
 	Q_ASSERT(conf);
 	// Remove the whole section from the configuration file
 	conf->remove("CompassMarks");
 	// Load the default values...
-	loadConfiguration();
-	// ... then save them.
-	saveConfiguration();
+	loadConfiguration();	
 	// But this doesn't save the color, so...
 	conf->beginGroup("CompassMarks");
 	conf->setValue("mark_color", "1,0,0");

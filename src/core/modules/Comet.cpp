@@ -54,7 +54,7 @@ Comet::Comet(const QString& englishName,
 	     int flagLighting,
 	     double radius,
 	     double oblateness,
-	     Vec3f color,
+	     Vec3f halocolor,
 	     float albedo,
 	     const QString& atexMapName,
 	     posFuncType coordFunc,
@@ -70,7 +70,7 @@ Comet::Comet(const QString& englishName,
 		  flagLighting,
 		  radius,
 		  oblateness,
-		  color,
+		  halocolor,
 		  albedo,
 		  atexMapName,
 		  "",
@@ -89,10 +89,10 @@ Comet::Comet(const QString& englishName,
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
 {
 	texMapName = atexMapName;
-	lastOrbitJD =0;
-	deltaJD = StelCore::JD_SECOND;
-	deltaJDtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
-	lastJDtail=0.0;
+	lastOrbitJDE =0;
+	deltaJDE = StelCore::JD_SECOND;
+	deltaJDEtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
+	lastJDEtail=0.0;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
@@ -150,6 +150,9 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	//Mostly copied from Planet::getInfoString():
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	Q_UNUSED(az_app);
 
 	if (flags&Name)
 	{
@@ -175,7 +178,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 									    QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
@@ -314,27 +317,27 @@ void Comet::update(int deltaTime)
 {
 	Planet::update(deltaTime);
 
-	// The rest used to be in computePosition(), but is better in update(). Unfortunately we need date (JD).
+	// The rest deals with updating tail geometries and brightness
 	StelCore* core=StelApp::getInstance().getCore();
-	double date=core->getJDay();
+	double dateJDE=core->getJDE();
 
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDay())) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbit->objectDateValid(dateJDE)) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
 
 
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
 	//deltaJDtail=StelCore::JD_SECOND * qMax(1.0, qMin(eclipticPos.length(), 20.0));
 
-	if (fabs(lastJDtail-date)>deltaJDtail)
+	if (fabs(lastJDEtail-dateJDE)>deltaJDEtail)
 	{
-		lastJDtail=date;
+		lastJDEtail=dateJDE;
 
 		// The CometOrbit is in fact available in userDataPtr!
 		CometOrbit* orbit=(CometOrbit*)userDataPtr;
 		Q_ASSERT(orbit);
-		if (!orbit->objectDateValid(date)) return; // out of useful date range. This should allow having hundreds of comet elements.
+		if (!orbit->objectDateValid(dateJDE)) return; // out of useful date range. This should allow having hundreds of comet elements.
 
 		if (orbit->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
@@ -457,7 +460,7 @@ void Comet::update(int deltaTime)
 		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
 		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
 	}
-	//qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
+	//qDebug() << "Comet " << getEnglishName() <<  "JDE: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
 
 
@@ -465,6 +468,10 @@ void Comet::update(int deltaTime)
 void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
 {
 	if (hidden)
+		return;
+
+	// Exclude drawing if user set a hard limit magnitude.
+	if (core->getSkyDrawer()->getFlagPlanetMagnitudeLimit() && (getVMagnitude(core) > core->getSkyDrawer()->getCustomPlanetMagnitudeLimit()))
 		return;
 
 	if (getEnglishName() == core->getCurrentLocation().planetName)
@@ -483,7 +490,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDay())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
+	if (!orbit->objectDateValid(core->getJDE())) return; // don't draw at all if out of useful date range. This allows having hundreds of comet elements.
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	// This removed totally the Planet shaking bug!!!

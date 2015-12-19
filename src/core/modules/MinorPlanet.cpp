@@ -37,7 +37,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 int flagLighting,
 			 double radius,
 			 double oblateness,
-			 Vec3f color,
+			 Vec3f halocolor,
 			 float albedo,
 			 const QString& atexMapName,
 			 posFuncType coordFunc,
@@ -50,7 +50,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  flagLighting,
 		  radius,
 		  oblateness,
-		  color,
+		  halocolor,
 		  albedo,
 		  atexMapName,
 		  "",
@@ -64,8 +64,8 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  pTypeStr)
 {
 	texMapName = atexMapName;
-	lastOrbitJD =0;
-	deltaJD = StelCore::JD_SECOND;
+	lastOrbitJDE =0;
+	deltaJDE = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 	semiMajorAxis = 0.;
@@ -143,7 +143,7 @@ void MinorPlanet::setSemiMajorAxis(double value)
 {
 	semiMajorAxis = value;
 	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
-	deltaJD = 2.0*semiMajorAxis*StelCore::JD_SECOND;
+	deltaJDE = 2.0*semiMajorAxis*StelCore::JD_SECOND;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -181,6 +181,10 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	QString str;
 	QTextStream oss(&str);
+	double az_app, alt_app;
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+	Q_UNUSED(az_app);
 
 	if (flags&Name)
 	{
@@ -210,7 +214,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
@@ -257,7 +261,12 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	float aSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && aSize>1e-6)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+	{
+		if (withDecimalDegree)
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDecDegStr(aSize,5,false,true)) << "<br>";
+		else
+			oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(aSize, true)) << "<br>";
+	}
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();

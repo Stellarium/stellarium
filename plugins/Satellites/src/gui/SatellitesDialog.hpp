@@ -2,6 +2,7 @@
  * Stellarium Satellites Plug-in GUI
  * 
  * Copyright (C) 2010 Matthew Gates
+ * Copyright (C) 2015 Nick Fedoseev (Iridium flares)
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +24,8 @@
 
 #include <QObject>
 #include <QModelIndex>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 #include "StelDialog.hpp"
 #include "Satellites.hpp"
 
@@ -44,6 +47,17 @@ class SatellitesDialog : public StelDialog
 	Q_OBJECT
 
 public:
+	//! Defines the number and the order of the columns in the Iridium Flares table
+	//! @enum IridiumFlaresColumns
+	enum IridiumFlaresColumns {
+		IridiumFlaresDate,	//! date and time of Iridium flare
+		IridiumFlaresMagnitude,	//! magnitude of the flare
+		IridiumFlaresAltitude,	//! altitude of the flare
+		IridiumFlaresAzimuth,	//! azimuth of the flare
+		IridiumFlaresSatellite,	//! satellite name
+		IridiumFlaresCount	//! total number of columns
+	};
+
 	SatellitesDialog();
 	~SatellitesDialog();
 
@@ -94,7 +108,9 @@ private slots:
 	void trackSatellite(const QModelIndex & index);
 	void setOrbitParams(void);
 	void updateTLEs(void);
-	void repaintSourceList(void);
+
+	void predictIridiumFlares();
+	void selectCurrentIridiumFlare(const QModelIndex &modelIndex);
 
 private:
 	//! @todo find out if this is really necessary... --BM
@@ -116,6 +132,12 @@ private:
 	void addSpecialGroupItem();
 	//! Applies the changes in the group selector to the selected satellites.
 	void setGroups();
+
+	//! Update header names for Iridium flares table
+	void setIridiumFlaresHeaderNames();
+
+	//! Init header and list of Iridium flares
+	void initListIridiumFlares();
 	
 	Ui_satellitesDialog* ui;
 	bool satelliteModified;
@@ -128,6 +150,31 @@ private:
 	
 	//! Makes sure that newly added source lines are as checkable as the rest.
 	Qt::ItemDataRole checkStateRole;
+};
+
+// Reimplements the QTreeWidgetItem class to fix the sorting bug
+class SatPIFTreeWidgetItem : public QTreeWidgetItem
+{
+public:
+	SatPIFTreeWidgetItem(QTreeWidget* parent)
+		: QTreeWidgetItem(parent)
+	{
+	}
+
+private:
+	bool operator < (const QTreeWidgetItem &other) const
+	{
+		int column = treeWidget()->sortColumn();
+
+		if (column == SatellitesDialog::IridiumFlaresMagnitude)
+		{
+			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else
+		{
+			return text(column).toLower() < other.text(column).toLower();
+		}
+	}
 };
 
 #endif // _SATELLITESDIALOG_HPP_

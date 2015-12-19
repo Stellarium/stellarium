@@ -203,6 +203,7 @@ QByteArray StelJsonParserInstance::readString()
 		{
 			case '"':
 				return name;
+				break;
 			case '\\':
 			{
 				bool gotChar=getChar(&c);
@@ -214,8 +215,10 @@ QByteArray StelJsonParserInstance::readString()
 				if (c=='t') c='\t';
 				if (c=='u') {qWarning() << "don't support \\uxxxx char"; continue;}
 			}
+				break;
 			default:
 				name+=c;
+				break;
 		}
 	}
 	if (atEnd())

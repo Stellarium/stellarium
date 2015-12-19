@@ -43,9 +43,10 @@ class gVector : public br_stl::gVectorTempl<double>
 
 public:
 	gVector();
-	gVector(unsigned int ai_uiElementsNumber);
+	//gVector(unsigned int ai_uiElementsNumber);
+	gVector(size_t ai_uiElementsNumber);
 
-	virtual ~gVector() {};
+	virtual ~gVector() {}
 
 	//## Other Operations (specified)
 	//## Operation: operator*

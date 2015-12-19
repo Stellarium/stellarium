@@ -174,8 +174,8 @@ void TextUserInterface::init()
 	m1->setNextNode(m2);
 	TuiNode* m2_1 = new TuiNodeDateTime(N_("Current date/time"),
 	                                    core,
-	                                    SLOT(setJDay(double)),  
-	                                    core->getJDay(),
+					    SLOT(setJD(double)),
+					    core->getJD(),
 	                                    m2);
 	TuiNode* m2_2 = new TuiNode(N_("Set time zone"), m2, m2_1);
 	TuiNode* m2_3 = new TuiNode(N_("Day keys"), m2, m2_2);
@@ -605,7 +605,7 @@ void TextUserInterface::draw(StelCore* core)
 
 	if (tuiDateTime) 
 	{
-		double jd = core->getJDay();
+		double jd = core->getJD();
 		int text_x = x + xVc*2/3, text_y = y + pixOffset;
 
 		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) + "   "

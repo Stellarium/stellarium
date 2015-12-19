@@ -23,12 +23,14 @@
 
 #include "StelUtils.hpp"
 #include "StelGuiItems.hpp"
+#include "StelGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelMainView.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
+#include "StelObserver.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -188,10 +190,12 @@ void StelButton::updateIcon()
 	painter.setOpacity(opacity);
 	if (!pixBackground.isNull() && noBckground==false)
 		painter.drawPixmap(0, 0, pixBackground);
-		painter.drawPixmap(0, 0,
+
+	painter.drawPixmap(0, 0,
 		(isTristate_ && checked == ButtonStateNoChange) ? (pixNoChange) :
 		(checked == ButtonStateOn) ? (pixOn) :
 		/* (checked == ButtonStateOff) ? */ (pixOff));
+
 	if (hoverOpacity > 0)
 	{
 		painter.setOpacity(hoverOpacity * opacity);
@@ -536,56 +540,49 @@ void BottomStelBar::updateButtonsGroups()
 	updateText(true);
 }
 
+// create text elements and tooltips in bottom toolbar.
 // Make sure to avoid any change if not necessary to avoid triggering useless redraw
 void BottomStelBar::updateText(bool updatePos)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	double jd = core->getJDay();
-	double deltaT = 0.;
-	double sigma = -1.;
-	QString sigmaInfo = "";	
-	QString validRangeInfo = "";
-	bool displayDeltaT = false;
-	if (core->getCurrentLocation().planetName.contains("Earth"))
-	{
-		deltaT = core->getDeltaT(jd);
-		displayDeltaT = true;		
-		sigma = StelUtils::getDeltaTStandardError(jd);
-		core->getCurrentDeltaTAlgorithmValidRange(jd, &validRangeInfo);
-	}
+	double jd = core->getJD();
+	double deltaT = core->getDeltaT();
+	double sigma = StelUtils::getDeltaTStandardError(jd);
+	QString sigmaInfo = "";
+	QString validRangeMarker = "";
+	core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
 
 	const StelLocaleMgr& locmgr = StelApp::getInstance().getLocaleMgr();
-	double dt = deltaT/86400.; // A DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-	QString tz = locmgr.getPrintableTimeZoneLocal(jd-dt);
+	QString tz = locmgr.getPrintableTimeZoneLocal(jd);
 	QString newDateInfo = " ";
 	if (getFlagShowTime())
 	{
 		if (getFlagShowTz())
-			newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt)).arg(tz);
+			newDateInfo = QString("%1   %2 %3").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd)).arg(tz);
 		else
-			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd-dt)).arg(locmgr.getPrintableTimeLocal(jd-dt));
+			newDateInfo = QString("%1   %2").arg(locmgr.getPrintableDateLocal(jd)).arg(locmgr.getPrintableTimeLocal(jd));
 	}
-	QString newDateAppx = QString("JD %1").arg(jd-dt, 0, 'f', 5);
+	QString newDateAppx = QString("JD %1").arg(jd, 0, 'f', 5);
 	if (getFlagTimeJd())
 	{
 		newDateAppx = newDateInfo;
-		newDateInfo = QString("JD %1").arg(jd-dt, 0, 'f', 5);
+		newDateInfo = QString("JD %1").arg(jd, 0, 'f', 5);
 	}
 
 	if (datetime->text()!=newDateInfo)
 	{
 		updatePos = true;		
 		datetime->setText(newDateInfo);
-		if (displayDeltaT && core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
+		if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 		{
 			if (sigma>0)
 				sigmaInfo = QString("; %1(%2T) = %3s").arg(QChar(0x03c3)).arg(QChar(0x0394)).arg(sigma, 3, 'f', 1);
 
 			QString deltaTInfo = "";
 			if (qAbs(deltaT)>60.)
-				deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeInfo);
+				deltaTInfo = QString("%1 (%2s)%3").arg(StelUtils::hoursToHmsStr(deltaT/3600.)).arg(deltaT, 5, 'f', 2).arg(validRangeMarker);
 			else
-				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeInfo);
+				deltaTInfo = QString("%1s%2").arg(deltaT, 3, 'f', 3).arg(validRangeMarker);
 
 			datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n-dot @ -23.8946\"/cy%3%4]<br>%5</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx));
 		}
@@ -593,6 +590,7 @@ void BottomStelBar::updateText(bool updatePos)
 			datetime->setToolTip(QString("%1").arg(newDateAppx));
 	}
 
+	// build location tooltip
 	QString newLocation = "";
 	const StelLocation* loc = &core->getCurrentLocation();
 	const StelTranslator& trans = locmgr.getSkyTranslator();
@@ -604,7 +602,8 @@ void BottomStelBar::updateText(bool updatePos)
 	{
 		newLocation = trans.qtranslate(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
-	if (location->text()!=newLocation)
+	// TODO: When topocentric switch is toggled, this must be redrawn!
+	if (location->text()!=newLocation || updatePos)
 	{
 		updatePos = true;
 		location->setText(newLocation);
@@ -627,10 +626,18 @@ void BottomStelBar::updateText(bool updatePos)
 			lon *= -1;
 		}
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
-		location->setToolTip(QString("%1 %2").arg(latStr).arg(lonStr));
+		QString rho;
+		if (core->getUseTopocentricCoordinates())
+			rho = q_("planetocentric distance %1 km").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU);
+		else
+			rho = q_("planetocentric observer");
+
+		location->setToolTip(QString("%1 %2; %3").arg(latStr).arg(lonStr).arg(rho));
 	}
 
 	QString str;
+
+	// build fov tooltip
 	QTextStream wos(&str);
 	if (getFlagFovDms())
 	{
@@ -657,6 +664,8 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	str="";
+
+	// build fps tooltip
 	QTextStream wos2(&str);
 	wos2 << qSetRealNumberPrecision(3) << StelApp::getInstance().getFps() << " FPS";
 	if (fps->text()!=str)
@@ -804,6 +813,7 @@ QRectF StelProgressBarMgr::boundingRect() const
 
 void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 {
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	QProgressBar* pb = new QProgressBar();
 	pb->setFixedHeight(25);
 	pb->setFixedWidth(200);
@@ -812,10 +822,12 @@ void StelProgressBarMgr::addProgressBar(const StelProgressController* p)
 	pb->setMinimum(p->getMin());
 	pb->setMaximum(p->getMax());
 	pb->setFormat(p->getFormat());
+	if (gui!=NULL)
+		pb->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 	QGraphicsProxyWidget* pbProxy = new QGraphicsProxyWidget();
 	pbProxy->setWidget(pb);
 	pbProxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache);
-	pbProxy->setZValue(150);
+	pbProxy->setZValue(150);	
 	static_cast<QGraphicsLinearLayout*>(layout())->addItem(pbProxy);
 	allBars.insert(p, pb);
 	pb->setVisible(true);

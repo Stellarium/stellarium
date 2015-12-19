@@ -30,7 +30,7 @@ class ScriptConsole : public StelDialog
 {
 	Q_OBJECT
 public:
-	ScriptConsole();
+	ScriptConsole(QObject* parent);
 	virtual ~ScriptConsole();
 	//! Notify that the application style changed
 	void styleChanged();

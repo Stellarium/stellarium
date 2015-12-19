@@ -20,7 +20,7 @@
 #include "StelScriptOutput.hpp"
 #include <QDebug>
 
-// Init statics variables.
+// Init static variables.
 QFile StelScriptOutput::outputFile;
 QString StelScriptOutput::outputText;
 
@@ -28,7 +28,7 @@ void StelScriptOutput::init(const QString& outputFilePath)
 {
 	outputFile.setFileName(outputFilePath);
 	if (!outputFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
-		qDebug() << "ERROR: Cannot open output.txt file";
+		qDebug() << "ERROR: Cannot open file" << outputFilePath;
 }
 
 void StelScriptOutput::deinit()
@@ -41,4 +41,10 @@ void StelScriptOutput::writeLog(QString msg)
 	msg += "\n";
 	outputFile.write(qPrintable(msg), msg.size());
 	outputText += msg;
+}
+
+void StelScriptOutput::reset(void)
+{
+	outputFile.reset();
+	outputText.clear();
 }

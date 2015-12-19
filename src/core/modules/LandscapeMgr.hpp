@@ -92,6 +92,7 @@ public:
 	//! - Atmophere colour calculation based on location, position of sun
 	//!   and moon.
 	//! - updates adaptation luminescence based on visible bright objects.
+	//! - Landscape and lightscape brightness computations based on sun position and whether atmosphere is on or off.
 	virtual void update(double deltaTime);
 
 	//! Get the order in which this module will draw its objects relative to other modules.
@@ -343,6 +344,16 @@ public slots:
 	//! Forward opacity query to current landscape.
 	//! @param azalt direction of view line to sample in azaltimuth coordinates.
 	float getLandscapeOpacity(Vec3d azalt) const {return landscape->getOpacity(azalt);}
+	// This variant is required for scripting!
+	float getLandscapeOpacity(Vec3f azalt) const {return landscape->getOpacity(Vec3d(azalt[0], azalt[1], azalt[2]));}
+	//! Forward opacity query to current landscape.
+	//! @param azimuth in degrees
+	//! @param altitude in degrees
+	float getLandscapeOpacity(float azimuth, float altitude) const {
+		Vec3d azalt;
+		StelUtils::spheToRect((180.0f-azimuth)*M_PI/180.0, altitude*M_PI/180.0, azalt);
+		return landscape->getOpacity(azalt);
+	}
 
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);

@@ -194,7 +194,7 @@ LandscapeMgr::~LandscapeMgr()
 double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+20;
+		return StelApp::getInstance().getModuleMgr().getModule("SporadicMeteorMgr")->getCallOrder(actionName)+20;
 	if (actionName==StelModule::ActionUpdate)
 		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
 	// GZ The next 2 lines are only required to test landscape transparency. They should be commented away for releases.
@@ -232,12 +232,22 @@ void LandscapeMgr::update(double deltaTime)
 	Vec3d sunPos = ssystem->getSun()->getAltAzPosApparent(core);
 	// Compute the moon position in local coordinate
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
-	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
+	// GZ: First parameter in next call is used for particularly earth-bound computations in Schaefer's sky brightness model. Difference DeltaT makes no difference here.
+	atmosphere->computeColor(core->getJDE(), sunPos, moonPos,
 		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
 		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
+
+
+	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
+	if (core->getCurrentLocation().planetName.contains("Sun"))
+	{
+		landscape->setBrightness(1.0f, 1.0f);
+		return;
+	}
+
 
 	// Compute the ground luminance based on every planets around
 	// TBD: Reactivate and verify this code!? Source, reference?
@@ -280,11 +290,24 @@ void LandscapeMgr::update(double deltaTime)
 			landscapeBrightness = getDefaultMinimalBrightness();
 	}
 
-	// We define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
-	float sinSunAngle = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
-	if(sinSunAngle > -0.1/1.5 )
-		landscapeBrightness +=  1.5*(sinSunAngle+0.1/1.5);
+	// With atmosphere on, we define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
+	// The multiplier of 1.5 just looks better, it somehow represents illumination by scattered sunlight.
+	// Else, we should account for sun's diameter but else just apply Lambertian Cos-rule and check with landscape opacity.
+	float sinSunAngle = 0.0f;
+	if(atmosphere->getFlagShow())
+	{
+		sinSunAngle=sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+		if(sinSunAngle > -0.1/1.5 )
+			landscapeBrightness +=  1.5*(sinSunAngle+0.1/1.5);
+	}
+	else
+	{
+		// In case we have exceptionally deep horizons ("Little Prince planet"), the sun will rise somehow over that line and demand light on the landscape.
+		sinSunAngle=sin(qMin(M_PI_2, asin(sunPos[2]-landscape->getSinMinAltitudeLimit()) + (0.25f *M_PI/180.)));
+		if(sinSunAngle > 0.0f)
+			landscapeBrightness +=  (1.0f-landscape->getOpacity(sunPos))*sinSunAngle;
 
+	}
 
 	// GZ: 2013-09-25 Take light pollution into account!
 	StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
@@ -308,28 +331,30 @@ void LandscapeMgr::update(double deltaTime)
 	if (landscapeBrightness>0.95)
 		landscapeBrightness = 0.95;
 
-	if (core->getCurrentLocation().planetName.contains("Sun"))
+	// GZ's rules and intentions for lightscape brightness:
+	// lightscapeBrightness >0 makes sense only for sun below horizon.
+	// If atmosphere on, we mix it in with darkening twilight. If atmosphere off, we can switch on more apruptly.
+	// Note however that lightscape rendering does not per se depend on atmosphere on/off.
+	// This allows for illuminated windows or light panels on spaceships. If a landscape's lightscape
+	// contains light smog of a city, it should also be shown if atmosphere is switched off.
+	// (Configure another landscape without light smog to avoid, or just switch off lightscape.)
+	float lightscapeBrightness=0.0f;
+	float sinSunAlt = sunPos[2];
+	if (atmosphere->getFlagShow())
 	{
-		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
-		landscape->setBrightness(1.f, 0.0f);
+		// light pollution layer is mixed in at -3...-8 degrees.
+		if (sinSunAlt<-0.14f)
+			lightscapeBrightness=1.0f;
+		else if (sinSunAlt<-0.05f)
+			lightscapeBrightness = 1.0f-(sinSunAlt+0.14)/(-0.05+0.14);
 	}
 	else
 	{
-		float lightscapeBrightness=0.0f;
-		// light pollution layer is mixed in at -3...-8 degrees.
-		float sunAlt = sunPos[2];
-		if (sunAlt<-0.14f)
-			lightscapeBrightness=1.0f;
-		else
-		{
-			if (sunAlt<-0.05f)
-				lightscapeBrightness = 1.0f-(sunAlt+0.14)/(-0.05+0.14);
-		}
-		if (sunAlt<=0.f && !atmosphere->getFlagShow() && !getFlagLandscapeUseMinimalBrightness())
-			landscape->setBrightness(0.f, 0.f);
-		else
-			landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+		// If we have no atmosphere, we can assume windows and panels on spaceships etc. are switched on whenever the sun does not shine, i.e. when sun is blocked by landscape.
+		lightscapeBrightness= landscape->getOpacity(sunPos);
 	}
+
+	landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 }
 
 void LandscapeMgr::draw(StelCore* core)
@@ -431,45 +456,46 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 			delete oldLandscape;
 		oldLandscape = landscape; // keep old while transitioning!
 		landscape = newLandscape;
+
+		if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
+		{
+			StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
+			StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+
+			if (landscape->getDefaultFogSetting() >-1)
+			{
+				setFlagFog((bool) landscape->getDefaultFogSetting());
+				landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
+			}
+			if (landscape->getDefaultBortleIndex() > 0)
+			{
+				setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
+				drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
+			}
+			if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
+			{
+				drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
+			}
+			if (landscape->getDefaultAtmosphericTemperature() > -273.15)
+			{
+				drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
+			}
+			if (landscape->getDefaultAtmosphericPressure() >= 0.0)
+			{
+				drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
+			}
+			else if (landscape->getDefaultAtmosphericPressure() == -1.0)
+			{
+				// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
+				// International altitude formula found in Wikipedia.
+				double alt=landscape->getLocation().altitude;
+				double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
+				drawer->setAtmospherePressure(p);
+			}
+		}
 	}
 	currentLandscapeID = id;
 
-	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
-	{
-		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation(), changeLocationDuration);
-		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
-
-		if (landscape->getDefaultFogSetting() >-1)
-		{
-			setFlagFog((bool) landscape->getDefaultFogSetting());
-			landscape->setFlagShowFog((bool) landscape->getDefaultFogSetting());
-		}
-		if (landscape->getDefaultBortleIndex() > 0)
-		{
-			setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
-		}
-		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
-		{
-			drawer->setExtinctionCoefficient(landscape->getDefaultAtmosphericExtinction());
-		}
-		if (landscape->getDefaultAtmosphericTemperature() > -273.15)
-		{
-			drawer->setAtmosphereTemperature(landscape->getDefaultAtmosphericTemperature());
-		}
-		if (landscape->getDefaultAtmosphericPressure() >= 0.0)
-		{
-			drawer->setAtmospherePressure(landscape->getDefaultAtmosphericPressure());
-		}
-		else if (landscape->getDefaultAtmosphericPressure() == -1.0)
-		{
-			// compute standard pressure for standard atmosphere in given altitude if landscape.ini coded as atmospheric_pressure=-1
-			// International altitude formula found in Wikipedia.
-			double alt=landscape->getLocation().altitude;
-			double p=1013.25*std::pow(1-(0.0065*alt)/288.15, 5.255);
-			drawer->setAtmospherePressure(p);
-		}
-	}
 	// else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
 }

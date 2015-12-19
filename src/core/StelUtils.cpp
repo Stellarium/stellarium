@@ -47,12 +47,16 @@ QString getApplicationName()
 //! Return the version of stellarium, i.e. "0.9.0"
 QString getApplicationVersion()
 {
-#ifdef BZR_REVISION
-	return QString(PACKAGE_VERSION)+" (BZR r"+BZR_REVISION+")";
-#elif SVN_REVISION
-	return QString(PACKAGE_VERSION)+" (SVN r"+SVN_REVISION+")";
-#else
+#ifdef STELLARIUM_RELEASE_BUILD
 	return QString(PACKAGE_VERSION);
+#else
+	#ifdef BZR_REVISION
+	return QString(PACKAGE_VERSION)+" (BZR r"+BZR_REVISION+")";
+	#elif defined(STELLARIUM_VERSION)
+	return QString(STELLARIUM_VERSION);
+	#else
+	return QString(PACKAGE_VERSION)+QChar(0x03B2);
+	#endif
 #endif
 }
 
@@ -90,17 +94,15 @@ QString getOperatingSystemInfo()
 		case QSysInfo::WV_WINDOWS7:
 			OS = "Windows 7";
 			break;
-		#ifdef WV_WINDOWS8
 		case QSysInfo::WV_WINDOWS8:
 			OS = "Windows 8";
 			break;
-		#endif
-		#ifdef WV_WINDOWS8_1
+		#if QT_VERSION >= 0x050200
 		case QSysInfo::WV_WINDOWS8_1:
 			OS = "Windows 8.1";
 			break;
 		#endif
-		#ifdef WV_WINDOWS10
+		#if QT_VERSION >= 0x050500
 		case QSysInfo::WV_WINDOWS10:
 			OS = "Windows 10";
 			break;
@@ -135,9 +137,12 @@ QString getOperatingSystemInfo()
 		case QSysInfo::MV_MAVERICKS:
 			OS = "Mac OS X 10.9 series";
 			break;
-		#ifdef MV_YOSEMITE
 		case QSysInfo::MV_YOSEMITE:
 			OS = "Mac OS X 10.10 series";
+			break;
+		#if QT_VERSION >= 0x050500
+		case QSysInfo::MV_ELCAPITAN:
+			OS = "Mac OS X 10.11 series";
 			break;
 		#endif
 		default:
@@ -1229,7 +1234,7 @@ double getJulianDayFromISO8601String(const QString& iso8601Date, bool* ok)
 {
 	int y, m, d, h, min;
 	float s;
-	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);
+	*ok = getDateTimeFromISO8601String(iso8601Date, &y, &m, &d, &h, &min, &s);	
 	if (*ok)
 	{
 		double jd;

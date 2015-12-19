@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2007 Fabien Chereau
+ * Copyright (C) 2015 Georg Zotti (more grids to illustrate precession issues)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +28,9 @@ class SkyGrid;
 class SkyLine;
 
 //! @class GridLinesMgr
-//! The GridLinesMgr controls the drawing of the Azimuthal and Equatorial Grids,
-//! as well as the great circles: Meridian Line, Ecliptic Line and Equator Line.
+//! The GridLinesMgr controls the drawing of the Azimuthal, Equatorial, Ecliptical and Galactic Grids,
+//! as well as the great circles: Meridian Line, Ecliptic Lines of J2000.0 and date, Equator Line (of J2000.0 and date),
+//! Precession Circles, and a special line marking conjunction or opposition in ecliptical longitude (of date).
 class GridLinesMgr : public StelModule
 {
 	Q_OBJECT
@@ -40,6 +42,7 @@ class GridLinesMgr : public StelModule
 			   READ getColorAzimuthalGrid
 			   WRITE setColorAzimuthalGrid
 			   NOTIFY azimuthalGridColorChanged)
+
 	Q_PROPERTY(bool equatorGridDisplayed
 			   READ getFlagEquatorGrid
 			   WRITE setFlagEquatorGrid
@@ -48,18 +51,34 @@ class GridLinesMgr : public StelModule
 			   READ getColorEquatorGrid
 			   WRITE setColorEquatorGrid
 			   NOTIFY equatorGridColorChanged)
+
 	Q_PROPERTY(bool equatorJ2000GridDisplayed
 			   READ getFlagEquatorJ2000Grid
 			   WRITE setFlagEquatorJ2000Grid
 			   NOTIFY equatorJ2000GridDisplayedChanged)
-	Q_PROPERTY(bool eclipticJ2000GridDisplayed
-			   READ getFlagEclipticJ2000Grid
-			   WRITE setFlagEclipticJ2000Grid
-			   NOTIFY eclipticJ2000GridDisplayedChanged)
 	Q_PROPERTY(Vec3f equatorJ2000GridColor
 			   READ getColorEquatorJ2000Grid
 			   WRITE setColorEquatorJ2000Grid
 			   NOTIFY equatorJ2000GridColorChanged)
+
+	Q_PROPERTY(bool eclipticJ2000GridDisplayed
+			   READ getFlagEclipticJ2000Grid
+			   WRITE setFlagEclipticJ2000Grid
+			   NOTIFY eclipticJ2000GridDisplayedChanged)
+	Q_PROPERTY(Vec3f eclipticJ2000GridColor
+			   READ getColorEclipticJ2000Grid
+			   WRITE setColorEclipticJ2000Grid
+			   NOTIFY eclipticJ2000GridColorChanged)
+	// NEW
+	Q_PROPERTY(bool eclipticGridDisplayed
+			   READ getFlagEclipticGrid
+			   WRITE setFlagEclipticGrid
+			   NOTIFY eclipticGridDisplayedChanged)
+	Q_PROPERTY(Vec3f eclipticGridColor
+			   READ getColorEclipticGrid
+			   WRITE setColorEclipticGrid
+			   NOTIFY eclipticGridColorChanged)
+
 	Q_PROPERTY(bool galacticGridDisplayed
 			   READ getFlagGalacticGrid
 			   WRITE setFlagGalacticGrid
@@ -68,6 +87,7 @@ class GridLinesMgr : public StelModule
 			   READ getColorGalacticGrid
 			   WRITE setColorGalacticGrid
 			   NOTIFY galacticGridColorChanged)
+
 	Q_PROPERTY(bool equatorLineDisplayed
 			   READ getFlagEquatorLine
 			   WRITE setFlagEquatorLine
@@ -76,6 +96,17 @@ class GridLinesMgr : public StelModule
 			   READ getColorEquatorLine
 			   WRITE setColorEquatorLine
 			   NOTIFY equatorLineColorChanged)
+
+	Q_PROPERTY(bool equatorJ2000LineDisplayed
+			   READ getFlagEquatorJ2000Line
+			   WRITE setFlagEquatorJ2000Line
+			   NOTIFY equatorJ2000LineDisplayedChanged)
+	Q_PROPERTY(Vec3f equatorJ2000LineColor
+			   READ getColorEquatorJ2000Line
+			   WRITE setColorEquatorJ2000Line
+			   NOTIFY equatorJ2000LineColorChanged)
+
+	// This is now ecl. of date.
 	Q_PROPERTY(bool eclipticLineDisplayed
 			   READ getFlagEclipticLine
 			   WRITE setFlagEclipticLine
@@ -84,6 +115,26 @@ class GridLinesMgr : public StelModule
 			   READ getColorEclipticLine
 			   WRITE setColorEclipticLine
 			   NOTIFY eclipticLineColorChanged)
+
+	// new name, but replaces old ecliptic.
+	Q_PROPERTY(bool eclipticJ2000LineDisplayed
+			   READ getFlagEclipticJ2000Line
+			   WRITE setFlagEclipticJ2000Line
+			   NOTIFY eclipticJ2000LineDisplayedChanged)
+	Q_PROPERTY(Vec3f eclipticJ2000LineColor
+			   READ getColorEclipticJ2000Line
+			   WRITE setColorEclipticJ2000Line
+			   NOTIFY eclipticJ2000LineColorChanged)
+
+	Q_PROPERTY(bool precessionCirclesDisplayed
+			   READ getFlagPrecessionCircles
+			   WRITE setFlagPrecessionCircles
+			   NOTIFY precessionCirclesDisplayedChanged)
+	Q_PROPERTY(Vec3f precessionCirclesColor
+			   READ getColorPrecessionCircles
+			   WRITE setColorPrecessionCircles
+			   NOTIFY precessionCirclesColorChanged)
+
 	Q_PROPERTY(bool meridianLineDisplayed
 			   READ getFlagMeridianLine
 			   WRITE setFlagMeridianLine
@@ -92,6 +143,7 @@ class GridLinesMgr : public StelModule
 			   READ getColorMeridianLine
 			   WRITE setColorMeridianLine
 			   NOTIFY meridianLineColorChanged)
+
 	Q_PROPERTY(bool longitudeLineDisplayed
 			   READ getFlagLongitudeLine
 			   WRITE setFlagLongitudeLine
@@ -100,6 +152,7 @@ class GridLinesMgr : public StelModule
 			   READ getColorLongitudeLine
 			   WRITE setColorLongitudeLine
 			   NOTIFY longitudeLineColorChanged)
+
 	Q_PROPERTY(bool horizonLineDisplayed
 			   READ getFlagHorizonLine
 			   WRITE setFlagHorizonLine
@@ -108,6 +161,7 @@ class GridLinesMgr : public StelModule
 			   READ getColorHorizonLine
 			   WRITE setColorHorizonLine
 			   NOTIFY horizonLineColorChanged)
+
 	Q_PROPERTY(bool galacticEquatorLineDisplayed
 			   READ getFlagGalacticEquatorLine
 			   WRITE setFlagGalacticEquatorLine
@@ -117,6 +171,24 @@ class GridLinesMgr : public StelModule
 			   WRITE setColorGalacticEquatorLine
 			   NOTIFY galacticEquatorLineColorChanged)
 
+	Q_PROPERTY(bool primeVerticalLineDisplayed
+			   READ getFlagPrimeVerticalLine
+			   WRITE setFlagPrimeVerticalLine
+			   NOTIFY primeVerticalLineDisplayedChanged)
+	Q_PROPERTY(Vec3f primeVerticalLineColor
+			   READ getColorPrimeVerticalLine
+			   WRITE setColorPrimeVerticalLine
+			   NOTIFY primeVerticalLineColorChanged)
+
+	Q_PROPERTY(bool colureLinesDisplayed
+			   READ getFlagColureLines
+			   WRITE setFlagColureLines
+			   NOTIFY colureLinesDisplayedChanged)
+	Q_PROPERTY(Vec3f colureLinesColor
+			   READ getColorColureLines
+			   WRITE setColorColureLines
+			   NOTIFY colureLinesColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -125,17 +197,17 @@ public:
 	// Methods defined in the StelModule class
 	//! Initialize the GridLinesMgr. This process checks the values in the
 	//! application settings, and according to the settings there
-	//! sets the visibility of the Equatorial Grid, Azimuthal Grid, Meridian Line,
-	//! Equator Line and Ecliptic Line.
+	//! sets the visibility of the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line,
+	//! Equator Line and Ecliptic Lines.
 	virtual void init();
 
-	//! Get the module ID, returns, "gridlines".
+	//! Get the module ID, returns "GridLinesMgr".
 	virtual QString getModuleID() const {return "GridLinesMgr";}
 
 	//! Draw the grids and great circle lines.
-	//! Draws the Equatorial Grid, Azimuthal Grid, Meridian Line, Equator Line
-	//! and Ecliptic Line according to the various flags which control their
-	//! visibility.
+	//! Draws the Equatorial Grids, Ecliptical Grids, Azimuthal Grid, Meridian Line, Equator Line,
+	//! Ecliptic Lines, Precession Circles, Conjunction-Opposition Line, east-west vertical and colures according to the
+	//! various flags which control their visibility.
 	virtual void draw(StelCore* core);
 
 	//! Update time-dependent features.
@@ -176,9 +248,9 @@ public slots:
 	//! @endcode
 	void setColorEquatorGrid(const Vec3f& newColor);
 
-	//! Setter for displaying Equatorial Grid.
+	//! Setter for displaying Equatorial J2000 Grid.
 	void setFlagEquatorJ2000Grid(const bool displayed);
-	//! Accessor for displaying Equatorial Grid.
+	//! Accessor for displaying Equatorial J2000 Grid.
 	bool getFlagEquatorJ2000Grid(void) const;
 	//! Get the current color of the Equatorial J2000 Grid.
 	Vec3f getColorEquatorJ2000Grid(void) const;
@@ -190,7 +262,7 @@ public slots:
 	//! @endcode
 	void setColorEquatorJ2000Grid(const Vec3f& newColor);
 
-	//! Setter for displaying Ecliptic Grid.
+	//! Setter for displaying Ecliptic Grid of J2000.0.
 	void setFlagEclipticJ2000Grid(const bool displayed);
 	//! Accessor for displaying Ecliptic Grid.
 	bool getFlagEclipticJ2000Grid(void) const;
@@ -203,6 +275,20 @@ public slots:
 	//! GridLinesMgr.setColorEclipticJ2000Grid(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorEclipticJ2000Grid(const Vec3f& newColor);
+
+	//! Setter for displaying Ecliptic Grid of Date.
+	void setFlagEclipticGrid(const bool displayed);
+	//! Accessor for displaying Ecliptic Grid.
+	bool getFlagEclipticGrid(void) const;
+	//! Get the current color of the Ecliptic of Date Grid.
+	Vec3f getColorEclipticGrid(void) const;
+	//! Set the color of the Ecliptic Grid.
+	//! @param newColor The color of Ecliptic of Date grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEclipticGrid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorEclipticGrid(const Vec3f& newColor);
 
 	//! Setter for displaying Galactic Grid.
 	void setFlagGalacticGrid(const bool displayed);
@@ -232,6 +318,34 @@ public slots:
 	//! @endcode
 	void setColorEquatorLine(const Vec3f& newColor);
 
+	//! Setter for displaying J2000 Equatorial Line.
+	void setFlagEquatorJ2000Line(const bool displayed);
+	//! Accessor for displaying J2000 Equatorial Line.
+	bool getFlagEquatorJ2000Line(void) const;
+	//! Get the current color of the J2000 Equatorial Line.
+	Vec3f getColorEquatorJ2000Line(void) const;
+	//! Set the color of the J2000 Equator Line.
+	//! @param newColor The color of J2000 equator line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEquatorJ2000Line(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorEquatorJ2000Line(const Vec3f& newColor);
+
+	//! Setter for displaying Ecliptic of J2000 Line.
+	void setFlagEclipticJ2000Line(const bool displayed);
+	//! Accessor for displaying Ecliptic of J2000 Line.
+	bool getFlagEclipticJ2000Line(void) const;
+	//! Get the current color of the Ecliptic of J2000 Line.
+	Vec3f getColorEclipticJ2000Line(void) const;
+	//! Set the color of the Ecliptic of J2000 Line.
+	//! @param newColor The color of ecliptic 2000 line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEcliptic2000Line(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorEclipticJ2000Line(const Vec3f& newColor);
+
 	//! Setter for displaying Ecliptic Line.
 	void setFlagEclipticLine(const bool displayed);
 	//! Accessor for displaying Ecliptic Line.
@@ -245,6 +359,20 @@ public slots:
 	//! GridLinesMgr.setColorEclipticLine(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorEclipticLine(const Vec3f& newColor);
+
+	//! Setter for displaying precession circles.
+	void setFlagPrecessionCircles(const bool displayed);
+	//! Accessor for displaying precession circles.
+	bool getFlagPrecessionCircles(void) const;
+	//! Get the current color of the precession circles.
+	Vec3f getColorPrecessionCircles(void) const;
+	//! Set the color of the precession circles.
+	//! @param newColor The color of precession circles
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorPrecessionCircles(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorPrecessionCircles(const Vec3f& newColor);
 
 	//! Setter for displaying Meridian Line.
 	void setFlagMeridianLine(const bool displayed);
@@ -291,12 +419,12 @@ public slots:
 	//! Setter for displaying Galactic Equator Line.
 	void setFlagGalacticEquatorLine(const bool displayed);
 	//! @deprecated Setter for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
-	//! @note will be delete in version 0.14
+	//! @note will be deleted in version 0.14
 	void setFlagGalacticPlaneLine(const bool displayed) { setFlagGalacticEquatorLine(displayed); }
 	//! Accessor for displaying Galactic Equator Line.
 	bool getFlagGalacticEquatorLine(void) const;
 	//! @deprecated Accessor for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
-	//! @note will be delete in version 0.14
+	//! @note will be deleted in version 0.14
 	bool getFlagGalacticPlaneLine(void) const { return getFlagGalacticEquatorLine(); }
 	//! Get the current color of the Galactic Equator Line.
 	Vec3f getColorGalacticEquatorLine(void) const;
@@ -307,6 +435,35 @@ public slots:
 	//! GridLinesMgr.setColorGalacticEquatorLine(Vec3f(1.0,0.0,0.0));
 	//! @endcode
 	void setColorGalacticEquatorLine(const Vec3f& newColor);
+
+	//! Setter for displaying the Prime Vertical Line.
+	void setFlagPrimeVerticalLine(const bool displayed);
+	//! Accessor for displaying Prime Vertical Line.
+	bool getFlagPrimeVerticalLine(void) const;
+	//! Get the current color of the Prime Vertical Line.
+	Vec3f getColorPrimeVerticalLine(void) const;
+	//! Set the color of the Prime Vertical Line.
+	//! @param newColor The color of the Prime Vertical line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorPrimeVerticalLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorPrimeVerticalLine(const Vec3f& newColor);
+
+	//! Setter for displaying the Colure Lines.
+	void setFlagColureLines(const bool displayed);
+	//! Accessor for displaying the Colure Lines.
+	bool getFlagColureLines(void) const;
+	//! Get the current color of the Colure Lines.
+	Vec3f getColorColureLines(void) const;
+	//! Set the color of the Colure Lines.
+	//! @param newColor The color of the Colure lines
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorColureLines(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorColureLines(const Vec3f& newColor);
+
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
@@ -314,14 +471,22 @@ signals:
 	void equatorGridColorChanged(const Vec3f & newColor) const;
 	void equatorJ2000GridDisplayedChanged(const bool displayed) const;
 	void equatorJ2000GridColorChanged(const Vec3f & newColor) const;
+	void eclipticGridDisplayedChanged(const bool displayed) const;
+	void eclipticGridColorChanged(const Vec3f & newColor) const;
 	void eclipticJ2000GridDisplayedChanged(const bool displayed) const;
 	void eclipticJ2000GridColorChanged(const Vec3f & newColor) const;
 	void galacticGridDisplayedChanged(const bool displayed) const;
 	void galacticGridColorChanged(const Vec3f & newColor) const;
 	void equatorLineDisplayedChanged(const bool displayed) const;
 	void equatorLineColorChanged(const Vec3f & newColor) const;
+	void equatorJ2000LineDisplayedChanged(const bool displayed) const;
+	void equatorJ2000LineColorChanged(const Vec3f & newColor) const;
 	void eclipticLineDisplayedChanged(const bool displayed) const;
 	void eclipticLineColorChanged(const Vec3f & newColor) const;
+	void eclipticJ2000LineDisplayedChanged(const bool displayed) const;
+	void eclipticJ2000LineColorChanged(const Vec3f & newColor) const;
+	void precessionCirclesDisplayedChanged(const bool displayed) const;
+	void precessionCirclesColorChanged(const Vec3f & newColor) const;
 	void meridianLineDisplayedChanged(const bool displayed) const;
 	void meridianLineColorChanged(const Vec3f & newColor) const;
 	void longitudeLineDisplayedChanged(const bool displayed) const;
@@ -330,6 +495,10 @@ signals:
 	void horizonLineColorChanged(const Vec3f & newColor) const;
 	void galacticEquatorLineDisplayedChanged(const bool displayed) const;
 	void galacticEquatorLineColorChanged(const Vec3f & newColor) const;
+	void primeVerticalLineDisplayedChanged(const bool displayed) const;
+	void primeVerticalLineColorChanged(const Vec3f & newColor) const;
+	void colureLinesDisplayedChanged(const bool displayed) const;
+	void colureLinesColorChanged(const Vec3f & newColor) const;
 
 
 private slots:
@@ -344,14 +513,22 @@ private:
 	SkyGrid * equGrid;		// Equatorial grid
 	SkyGrid * equJ2000Grid;		// Equatorial J2000 grid
 	SkyGrid * galacticGrid;		// Galactic grid
+	SkyGrid * eclGrid;		// Ecliptic of Date grid
 	SkyGrid * eclJ2000Grid;		// Ecliptic J2000 grid
 	SkyGrid * aziGrid;		// Azimuthal grid
 	SkyLine * equatorLine;		// Celestial Equator line
+	SkyLine * equatorJ2000Line;	// Celestial Equator of J2000 line
 	SkyLine * eclipticLine;		// Ecliptic line
+	SkyLine * eclipticJ2000Line;	// Ecliptic line of J2000
+	SkyLine * precessionCircleN;	// Northern precession circle
+	SkyLine * precessionCircleS;	// Southern precession circle
 	SkyLine * meridianLine;		// Meridian line
 	SkyLine * longitudeLine; 	// Opposition/conjunction longitude line
 	SkyLine * horizonLine;		// Horizon line
 	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
+	SkyLine * primeVerticalLine;	// Prime Vertical line
+	SkyLine * colureLine_1;		// First Colure line (0/12h)
+	SkyLine * colureLine_2;		// Second Colure line (6/18h)
 };
 
 #endif // _GRIDLINESMGR_HPP_

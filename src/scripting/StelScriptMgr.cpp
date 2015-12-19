@@ -97,19 +97,23 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	engine.globalObject().setProperty("core", objectValue);
 
 	engine.evaluate("function mywait__(sleepDurationSec) {"
-					"if (sleepDurationSec<0) return;"
-					"var date = new Date();"
-					"var curDate = null;"
-					"do {curDate = new Date();}"
-					"    while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
+			"if (sleepDurationSec<0) return;"
+			"var date = new Date();"
+			"var curDate = null;"
+			"do {curDate = new Date();}"
+			"while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
 	engine.evaluate("core['wait'] = mywait__;");
 
-	engine.evaluate("function mywaitFor__(dt, spec) {if (!spec) spec=\"utc\";"
-	"	var JD = core.jdFromDateString(dt, spec);"
-	"	var timeSpeed = core.getTimeRate();"
-	"	if (timeSpeed == 0.) {core.debug(\"waitFor called with no time passing - would be infinite. not waiting!\"); return;}"
-	"	if (timeSpeed > 0) {core.wait((JD-core.getJDay())*timeSpeed);}"
-	"	else {core.wait((core.getJDay()-JD)*timeSpeed);}}");
+	engine.evaluate("function mywaitFor__(dt, spec) {"
+			"if (!spec) spec=\"utc\";"
+			"var deltaJD = core.jdFromDateString(dt, spec) - core.getJDay();"
+			"var timeSpeed = core.getTimeRate();"
+			"if (timeSpeed == 0.) {core.debug(\"waitFor called with no time passing - would be infinite. not waiting!\"); return;}"
+			"var date = new Date();"
+			"var curDate = null;"
+			"do {curDate = new Date();}"
+			"while(curDate-date < deltaJD*86400000/timeSpeed);}");
+
 	engine.evaluate("core['waitFor'] = mywaitFor__;");
 	
 	// Add other classes which we want to be directly accessible from scripts
@@ -285,7 +289,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 {
 	if (engine.isEvaluating())
 	{
-		QString msg = QString("ERROR: there is already a script running, please wait that it's over.");
+		QString msg = QString("ERROR: there is already a script running, please wait until it's over.");
 		emit(scriptDebug(msg));
 		qWarning() << msg;
 		return false;
@@ -293,7 +297,7 @@ bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)
 	// Seed the PRNG so that script random numbers aren't always the same sequence
 	qsrand(QDateTime::currentDateTime().toTime_t());
 
-	// Make sure that the gui object have been completely initialized (there used to be problems with startup scripts).
+	// Make sure that the gui objects have been completely initialized (there used to be problems with startup scripts).
 	Q_ASSERT(StelApp::getInstance().getGui());
 
 	engine.globalObject().setProperty("scriptRateReadOnly", 1.0);
@@ -414,6 +418,12 @@ void StelScriptMgr::output(const QString &msg)
 	emit(scriptOutput(msg));
 }
 
+void StelScriptMgr::resetOutput(void)
+{
+	StelScriptOutput::reset();
+	emit(scriptOutput(""));
+}
+
 void StelScriptMgr::scriptEnded()
 {
 	if (engine.hasUncaughtException())
@@ -490,6 +500,19 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 		{
 			output += line;
 			output += '\n';
+		}
+	}
+
+	if (qApp->property("verbose")==true)
+	{
+		// Debug to find stupid errors. The line usually reported may be off due to the preprocess stage.
+		QStringList outputList=output.split('\n');
+		qDebug() << "Script after preprocessing:";
+		int lineIdx=0;
+		foreach (const QString& line, outputList)
+		{
+			qDebug() << lineIdx << ":" << line;
+			lineIdx++;
 		}
 	}
 	return true;

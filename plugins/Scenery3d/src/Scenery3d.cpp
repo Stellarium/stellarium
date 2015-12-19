@@ -391,7 +391,7 @@ void Scenery3d::update(double deltaTime)
 				movement[2]);
 
 		//get current time
-		double curTime = core->getJDay();
+		double curTime = core->getJD();
 
 		if(lazyDrawing)
 		{
@@ -1542,7 +1542,7 @@ void Scenery3d::generateCubeMap()
 
 	if(needsCubemapUpdate)
 	{
-		lastCubemapUpdate = core->getJDay();
+		lastCubemapUpdate = core->getJD();
 		lastCubemapUpdateRealTime = QDateTime::currentMSecsSinceEpoch();
 	}
 }
@@ -1657,7 +1657,22 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     //set final rendering matrices
     modelViewMatrix = mvMatrix;
     projectionMatrix.setToIdentity();
-    projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
+
+    //without viewport offset, you could simply call this:
+    //projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
+    //these 2 lines replicate gluPerspective with glFrustum
+    float fH = qTan( fov / 360.0f * M_PI ) * currentScene.camNearZ;
+    float fW = fH * aspect;
+
+    //apply offset values
+    Vec2f vp = altAzProjector->getViewportCenterOffset();
+    float horizOffset = 2.0 * fW * vp[0];
+    float vertOffset = - 2.0 * fH * vp[1];
+
+    //final projection matrix
+    projectionMatrix.frustum(-fW + horizOffset, fW + horizOffset,
+			     -fH + vertOffset, fH + vertOffset,
+			     currentScene.camNearZ, currentScene.camFarZ);
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
@@ -1893,7 +1908,7 @@ void Scenery3d::drawDebug()
 	    str = QString("Last cubemap update: %1ms ago").arg(QDateTime::currentMSecsSinceEpoch() - lastCubemapUpdateRealTime);
 	    painter.drawText(screen_x, screen_y, str);
 	    screen_y -= 15.0f;
-	    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJDay()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
+	    str = QString("Last cubemap update JDAY: %1").arg(qAbs(core->getJD()-lastCubemapUpdate) * StelCore::ONE_OVER_JD_SECOND);
 	    painter.drawText(screen_x, screen_y, str);
     }
 

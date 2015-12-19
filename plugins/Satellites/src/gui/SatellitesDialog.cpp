@@ -2,6 +2,7 @@
  * Stellarium Satellites plugin config dialog
  *
  * Copyright (C) 2009, 2012 Matthew Gates
+ * Copyright (C) 2015 Nick Fedoseev (Iridium flares)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +26,10 @@
 #include <QStandardItemModel>
 #include <QTimer>
 #include <QUrl>
+#include <QTabWidget>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "ui_satellitesDialog.h"
 #include "SatellitesDialog.hpp"
 #include "SatellitesImportDialog.hpp"
@@ -42,6 +45,7 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "StelUtils.hpp"
 
 SatellitesDialog::SatellitesDialog()
 	: satelliteModified(false)
@@ -79,6 +83,7 @@ void SatellitesDialog::retranslate()
 		updateSettingsPage(); // For the button; also calls updateCountdown()
 		populateAboutPage();
 		populateFilterMenu();
+		initListIridiumFlares();
 	}
 }
 
@@ -140,15 +145,15 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->realisticGroup, SIGNAL(clicked(bool)),
 		plugin, SLOT(setFlagRelisticMode(bool)));
 
+	// Settings tab - populate all values
+	updateSettingsPage();
+
 	// Settings tab / orbit lines group
 	connect(ui->orbitLinesGroup, SIGNAL(clicked(bool)),
 	        plugin, SLOT(setOrbitLinesFlag(bool)));
 	connect(ui->orbitSegmentsSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitFadeSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
 	connect(ui->orbitDurationSpin, SIGNAL(valueChanged(int)), this, SLOT(setOrbitParams()));
-	
-	// Settings tab - populate all values
-	updateSettingsPage();
 
 	// Satellites tab
 	filterModel = new SatellitesListFilterModel(this);
@@ -207,20 +212,19 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSourceButton, SIGNAL(clicked()), this, SLOT(addSourceRow()));
 	connect(plugin, SIGNAL(settingsChanged()),
 	        this, SLOT(toggleCheckableSources()));
-	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), this, SLOT(repaintSourceList()));
+
+	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
+	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), ui->sourceList, SLOT(repaint()));
 
 	// About tab
 	populateAboutPage();
 
 	populateFilterMenu();
 	populateSourcesList();
-}
 
-void SatellitesDialog::repaintSourceList()
-{
-	// Enable force repaint sourceList to avoiding artifacts
-	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
-	ui->sourceList->repaint();
+	initListIridiumFlares();
+	connect(ui->pushButtonPredictIridiumFlares, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
+	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 }
 
 void SatellitesDialog::filterListByGroup(int index)
@@ -293,9 +297,8 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
 		ui->tleSecondLineEdit->setCursorPosition(0);
 	}
-	
-	// Enable force repaint satellitesList to avoiding artifacts
-	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+
+	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	ui->satellitesList->repaint();
 
 	// TODO: Fix the comms button...
@@ -401,9 +404,10 @@ void SatellitesDialog::populateAboutPage()
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Stellarium Satellites Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + "</strong></td><td>" + SATELLITES_PLUGIN_VERSION + "</td></td>";
-	html += "<tr><td rowspan=3><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
+	html += "<tr><td rowspan=4><strong>" + q_("Authors") + "</strong></td><td>Matthew Gates &lt;matthewg42@gmail.com&gt;</td></td>";
 	html += "<tr><td>Jose Luis Canales &lt;jlcanales.gasco@gmail.com&gt;</td></tr>";
-	html += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr></table>";
+	html += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt;</td></tr>";
+	html += "<tr><td>Nick Fedoseev &lt;nick.ut2uz@gmail.com&gt; (" + q_("Iridium flares") + ")</td></tr></table>";
 
 	html += "<p>" + q_("The Satellites plugin predicts the positions of artificial satellites in Earth orbit.") + "</p>";
 
@@ -928,4 +932,81 @@ void SatellitesDialog::enableSatelliteDataForm(bool enabled)
 	ui->displayedCheckbox->blockSignals(!enabled);
 	ui->orbitCheckbox->blockSignals(!enabled);
 	ui->userCheckBox->blockSignals(!enabled);
+}
+
+void SatellitesDialog::setIridiumFlaresHeaderNames()
+{
+	QStringList headerStrings;
+	headerStrings << q_("Time");
+	headerStrings << q_("Brightness");
+	headerStrings << q_("Altitude");
+	headerStrings << q_("Azimuth");
+	headerStrings << q_("Satellite");
+
+	ui->iridiumFlaresTreeWidget->setHeaderLabels(headerStrings);
+
+	// adjust the column width
+	for(int i = 0; i < IridiumFlaresCount; ++i)
+	{
+	    ui->iridiumFlaresTreeWidget->resizeColumnToContents(i);
+	}
+
+	// sort-by-date
+	ui->iridiumFlaresTreeWidget->sortItems(IridiumFlaresDate, Qt::AscendingOrder);
+}
+
+void SatellitesDialog::initListIridiumFlares()
+{
+	ui->iridiumFlaresTreeWidget->clear();
+	ui->iridiumFlaresTreeWidget->setColumnCount(IridiumFlaresCount);
+	setIridiumFlaresHeaderNames();
+	ui->iridiumFlaresTreeWidget->header()->setSectionsMovable(false);
+}
+
+void SatellitesDialog::predictIridiumFlares()
+{
+	IridiumFlaresPredictionList predictions = GETSTELMODULE(Satellites)->getIridiumFlaresPrediction();
+
+	ui->iridiumFlaresTreeWidget->clear();
+	foreach (const IridiumFlaresPrediction& flare, predictions)
+	{
+		SatPIFTreeWidgetItem *treeItem = new SatPIFTreeWidgetItem(ui->iridiumFlaresTreeWidget);
+		QString dt = flare.datetime;
+		treeItem->setText(IridiumFlaresDate, QString("%1 %2").arg(dt.left(10)).arg(dt.right(8)));
+		treeItem->setText(IridiumFlaresMagnitude, QString::number(flare.magnitude,'f',1));
+		treeItem->setTextAlignment(IridiumFlaresMagnitude, Qt::AlignRight);
+		treeItem->setText(IridiumFlaresAltitude, StelUtils::radToDmsStr(flare.altitude));
+		treeItem->setTextAlignment(IridiumFlaresAltitude, Qt::AlignRight);
+		treeItem->setText(IridiumFlaresAzimuth, StelUtils::radToDmsStr(flare.azimuth));
+		treeItem->setTextAlignment(IridiumFlaresAzimuth, Qt::AlignRight);
+		treeItem->setText(IridiumFlaresSatellite, flare.satellite);
+	}
+
+	for(int i = 0; i < IridiumFlaresCount; ++i)
+	{
+	    ui->iridiumFlaresTreeWidget->resizeColumnToContents(i);
+	}
+}
+
+void SatellitesDialog::selectCurrentIridiumFlare(const QModelIndex &modelIndex)
+{
+	// Find the object
+	QString name = modelIndex.sibling(modelIndex.row(), IridiumFlaresSatellite).data().toString();
+	QString date = modelIndex.sibling(modelIndex.row(), IridiumFlaresDate).data().toString();
+	bool ok;
+	double JD  = StelUtils::getJulianDayFromISO8601String(date.left(10) + "T" + date.right(8), &ok);
+	JD -= StelUtils::getGMTShiftFromQT(JD)/24.;
+
+	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
+	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
+	{
+		StelApp::getInstance().getCore()->setJD(JD);
+		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
+		if (!newSelected.empty())
+		{
+			StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+			mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+			mvmgr->setFlagTracking(true);
+		}
+	}
 }
