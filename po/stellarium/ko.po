@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-05 16:09+0600\n"
-"PO-Revision-Date: 2015-11-30 10:25+0000\n"
-"Last-Translator: SeokHwan Park <mints1324@gmail.com>\n"
+"PO-Revision-Date: 2015-12-19 11:19+0000\n"
+"Last-Translator: blueedu <blueedu@hanmail.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-06 05:19+0000\n"
-"X-Generator: Launchpad (build 17862)\n"
+"X-Launchpad-Export-Date: 2015-12-20 05:11+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
 #: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:176
+#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:176
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
@@ -123,7 +123,7 @@ msgstr "황도"
 
 #: src/core/modules/GridLinesMgr.cpp:880
 msgid "Ecliptic J2000 line"
-msgstr ""
+msgstr "황도(J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:881
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
@@ -132,7 +132,7 @@ msgstr "적도"
 
 #: src/core/modules/GridLinesMgr.cpp:882
 msgid "Equator J2000 line"
-msgstr ""
+msgstr "적도(J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:883
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
@@ -155,7 +155,7 @@ msgstr "황도좌표계 격자(J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:887
 msgid "Ecliptic grid"
-msgstr ""
+msgstr "황도좌표계 격자"
 
 #: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1761
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
@@ -223,7 +223,7 @@ msgstr ", %1 m"
 msgid "Celestial body:"
 msgstr "천체:"
 
-#: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:219
+#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:220
 #: src/core/modules/MinorPlanet.cpp:211 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
@@ -233,19 +233,19 @@ msgstr "천체:"
 msgid "Type: <b>%1</b>"
 msgstr "분류: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:170 src/core/modules/Comet.cpp:176
+#: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
 #: plugins/MeteorShowers/src/MeteorShower.cpp:545
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "종류: <b>%1</b>(%2)"
 
-#: src/core/modules/Nebula.cpp:177
+#: src/core/modules/Nebula.cpp:197
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr "불투명도: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:225
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:226
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
@@ -254,8 +254,8 @@ msgstr "불투명도: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "등급: <b>%1</b> (소광 후:  <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:185 src/core/modules/Nebula.cpp:190
-#: src/core/modules/Planet.cpp:228 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
+#: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:220
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -264,43 +264,43 @@ msgstr "등급: <b>%1</b> (소광 후:  <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "등급: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:191
+#: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
 msgstr " (측광계: B)"
 
-#: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
+#: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "색지수 (B-V): <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:204
+#: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "표면 밝기: <b>%1</b> (소광 후: <b>%2</b>)"
+msgstr "표면 광도: <b>%1</b> (소광 후: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:210
+#: src/core/modules/Nebula.cpp:230
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr "표면 밝기: <b>%1</b>"
+msgstr "표면 광도: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:219
+#: src/core/modules/Nebula.cpp:239
 #, qt-format
 msgid "Size: %1"
 msgstr "크기: %1"
 
-#: src/core/modules/Nebula.cpp:222
+#: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr "크기: %1 x %2"
 
-#: src/core/modules/Nebula.cpp:224
+#: src/core/modules/Nebula.cpp:244
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -308,492 +308,492 @@ msgid "Distance: %1 ly"
 msgstr "거리: %1 광년"
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:263
+#: src/core/modules/Nebula.cpp:283
 msgid "Mpc"
 msgstr "Mpc"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:268
+#: src/core/modules/Nebula.cpp:288
 msgid "kpc"
 msgstr "kpc"
 
-#: src/core/modules/Nebula.cpp:271
+#: src/core/modules/Nebula.cpp:291
 #, qt-format
 msgid "Distance: %1 %2"
 msgstr "거리: %1 %2"
 
-#: src/core/modules/Nebula.cpp:285
+#: src/core/modules/Nebula.cpp:305
 #, qt-format
 msgid "Redshift: %1"
 msgstr "적색편이: %1"
 
-#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:241
+#: src/core/modules/Nebula.cpp:316 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "시차: %1\""
 
-#: src/core/modules/Nebula.cpp:300
+#: src/core/modules/Nebula.cpp:320
 msgid "Morphological description: "
 msgstr "형태학적 설명: "
 
-#: src/core/modules/Nebula.cpp:752
+#: src/core/modules/Nebula.cpp:816
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:755
+#: src/core/modules/Nebula.cpp:819
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:758
+#: src/core/modules/Nebula.cpp:822
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:761
+#: src/core/modules/Nebula.cpp:825
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:766
+#: src/core/modules/Nebula.cpp:830
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:769
+#: src/core/modules/Nebula.cpp:833
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:772
+#: src/core/modules/Nebula.cpp:836
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:775
+#: src/core/modules/Nebula.cpp:839
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:778
+#: src/core/modules/Nebula.cpp:842
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:781
+#: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:784
+#: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:804
+#: src/core/modules/Nebula.cpp:868
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:807
+#: src/core/modules/Nebula.cpp:871
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:810
+#: src/core/modules/Nebula.cpp:874
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:813
+#: src/core/modules/Nebula.cpp:877
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:816
+#: src/core/modules/Nebula.cpp:880
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:822
+#: src/core/modules/Nebula.cpp:886
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:825
+#: src/core/modules/Nebula.cpp:889
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:828
+#: src/core/modules/Nebula.cpp:892
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:831
+#: src/core/modules/Nebula.cpp:895
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:837
+#: src/core/modules/Nebula.cpp:901
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:904
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:843
+#: src/core/modules/Nebula.cpp:907
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:846
+#: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:850
+#: src/core/modules/Nebula.cpp:914
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:935
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr "매우 밝음"
 
-#: src/core/modules/Nebula.cpp:874
+#: src/core/modules/Nebula.cpp:938
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr "밝음"
 
-#: src/core/modules/Nebula.cpp:877
+#: src/core/modules/Nebula.cpp:941
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr "보통 밝기"
 
-#: src/core/modules/Nebula.cpp:880
+#: src/core/modules/Nebula.cpp:944
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr "희미함"
 
-#: src/core/modules/Nebula.cpp:883
+#: src/core/modules/Nebula.cpp:947
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr "매우 희미함"
 
-#: src/core/modules/Nebula.cpp:886
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr "불확실한 밝기"
 
-#: src/core/modules/Nebula.cpp:889
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr "반사성운의 증명되지 않은 밝기"
 
-#: src/core/modules/Nebula.cpp:895
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:898
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:901
+#: src/core/modules/Nebula.cpp:965
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:904
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:907
+#: src/core/modules/Nebula.cpp:971
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:910
+#: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:997
 msgid "circular form"
 msgstr "원형"
 
-#: src/core/modules/Nebula.cpp:936
+#: src/core/modules/Nebula.cpp:1000
 msgid "elliptical form"
 msgstr "타원형"
 
-#: src/core/modules/Nebula.cpp:939
+#: src/core/modules/Nebula.cpp:1003
 msgid "irregular form"
 msgstr "불규칙한 형태"
 
-#: src/core/modules/Nebula.cpp:942
+#: src/core/modules/Nebula.cpp:1006
 msgid "undocumented form"
 msgstr "증명되지 않은 형태"
 
-#: src/core/modules/Nebula.cpp:948
+#: src/core/modules/Nebula.cpp:1012
 msgid "amorphous structure"
 msgstr "무정형 구조"
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:1015
 msgid "conventional structure"
 msgstr "평범한 구조"
 
-#: src/core/modules/Nebula.cpp:954
+#: src/core/modules/Nebula.cpp:1018
 msgid "filamentary structure"
 msgstr "필라멘트 구조"
 
-#: src/core/modules/Nebula.cpp:957
+#: src/core/modules/Nebula.cpp:1021
 msgid "undocumented structure"
 msgstr "증명되지 않은 구조"
 
-#: src/core/modules/Nebula.cpp:963
+#: src/core/modules/Nebula.cpp:1027
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr "희미함"
 
-#: src/core/modules/Nebula.cpp:966
+#: src/core/modules/Nebula.cpp:1030
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr "보통 밝기"
 
-#: src/core/modules/Nebula.cpp:969
+#: src/core/modules/Nebula.cpp:1033
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr "밝음"
 
-#: src/core/modules/Nebula.cpp:972
+#: src/core/modules/Nebula.cpp:1036
 msgid "undocumented brightness"
 msgstr "증명되지 않은 밝기"
 
-#: src/core/modules/Nebula.cpp:988
+#: src/core/modules/Nebula.cpp:1052
 msgid "galaxy"
 msgstr "은하"
 
-#: src/core/modules/Nebula.cpp:991
+#: src/core/modules/Nebula.cpp:1055
 msgid "active galaxy"
 msgstr "활성은하"
 
-#: src/core/modules/Nebula.cpp:994
+#: src/core/modules/Nebula.cpp:1058
 msgid "radio galaxy"
 msgstr "전파은하"
 
-#: src/core/modules/Nebula.cpp:997
+#: src/core/modules/Nebula.cpp:1061
 msgid "interacting galaxy"
 msgstr "상호작용은하"
 
-#: src/core/modules/Nebula.cpp:1000 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:1064 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr "퀘이사"
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1067
 msgid "star cluster"
 msgstr "성단"
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1070
 msgid "open star cluster"
-msgstr "개방성단"
+msgstr "산개성단"
 
-#: src/core/modules/Nebula.cpp:1009
+#: src/core/modules/Nebula.cpp:1073
 msgid "globular star cluster"
 msgstr "구상성단"
 
-#: src/core/modules/Nebula.cpp:1012
+#: src/core/modules/Nebula.cpp:1076
 msgid "nebula"
 msgstr "성운"
 
-#: src/core/modules/Nebula.cpp:1015
+#: src/core/modules/Nebula.cpp:1079
 msgid "planetary nebula"
 msgstr "행성상성운"
 
-#: src/core/modules/Nebula.cpp:1018
+#: src/core/modules/Nebula.cpp:1082
 msgid "dark nebula"
 msgstr "암흑성운"
 
-#: src/core/modules/Nebula.cpp:1021
+#: src/core/modules/Nebula.cpp:1085
 msgid "cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/core/modules/Nebula.cpp:1024
+#: src/core/modules/Nebula.cpp:1088
 msgid "bipolar nebula"
 msgstr "쌍극성운"
 
-#: src/core/modules/Nebula.cpp:1027
+#: src/core/modules/Nebula.cpp:1091
 msgid "emission nebula"
 msgstr "발광성운"
 
-#: src/core/modules/Nebula.cpp:1030
+#: src/core/modules/Nebula.cpp:1094
 msgid "HII region"
 msgstr "전리수소영역(HII region)"
 
-#: src/core/modules/Nebula.cpp:1033
+#: src/core/modules/Nebula.cpp:1097
 msgid "reflection nebula"
 msgstr "반사성운"
 
-#: src/core/modules/Nebula.cpp:1036
+#: src/core/modules/Nebula.cpp:1100
 msgid "supernova remnant"
 msgstr "초신성잔해"
 
-#: src/core/modules/Nebula.cpp:1039
+#: src/core/modules/Nebula.cpp:1103
 msgid "stellar association"
 msgstr "성협"
 
-#: src/core/modules/Nebula.cpp:1042
+#: src/core/modules/Nebula.cpp:1106
 msgid "star cloud"
 msgstr "별 구름"
 
-#: src/core/modules/Nebula.cpp:1045
+#: src/core/modules/Nebula.cpp:1109
 msgid "interstellar matter"
 msgstr "성간 물질"
 
-#: src/core/modules/Nebula.cpp:1048
+#: src/core/modules/Nebula.cpp:1112
 msgid "emission object"
 msgstr "방출 천체"
 
-#: src/core/modules/Nebula.cpp:1051
+#: src/core/modules/Nebula.cpp:1115
 msgid "BL Lac object"
 msgstr "BL Lac 천체"
 
-#: src/core/modules/Nebula.cpp:1054
+#: src/core/modules/Nebula.cpp:1118
 msgid "blazar"
 msgstr "blazar"
 
-#: src/core/modules/Nebula.cpp:1057
+#: src/core/modules/Nebula.cpp:1121
 msgid "molecular cloud"
 msgstr "분자구름"
 
-#: src/core/modules/Nebula.cpp:1060
+#: src/core/modules/Nebula.cpp:1124
 msgid "young stellar object"
 msgstr "젊은 항성체"
 
-#: src/core/modules/Nebula.cpp:1063
+#: src/core/modules/Nebula.cpp:1127
 msgid "possible quasar"
 msgstr "퀘이사일 가능성 있음"
 
-#: src/core/modules/Nebula.cpp:1066
+#: src/core/modules/Nebula.cpp:1130
 msgid "possible planetary nebula"
 msgstr "원시행성상성운일 가능성 있음"
 
-#: src/core/modules/Nebula.cpp:1069
+#: src/core/modules/Nebula.cpp:1133
 msgid "protoplanetary nebula"
 msgstr "원시행성상성운"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1072 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1136 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "항성"
 
-#: src/core/modules/Nebula.cpp:1075
+#: src/core/modules/Nebula.cpp:1139
 msgid "object of unknown nature"
 msgstr "알 수 없는 천체"
 
-#: src/core/modules/Nebula.cpp:1078
+#: src/core/modules/Nebula.cpp:1142
 msgid "undocumented type"
 msgstr "증명되지 않은 종류"
 
-#: src/core/modules/NebulaMgr.cpp:224
+#: src/core/modules/NebulaMgr.cpp:266
 msgid "Deep-sky objects"
 msgstr "딥스카이 천체"
 
-#: src/core/modules/Planet.cpp:231 src/core/modules/MinorPlanet.cpp:230
+#: src/core/modules/Planet.cpp:232 src/core/modules/MinorPlanet.cpp:230
 #: src/core/modules/MinorPlanet.cpp:234 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "절대등급: %1"
 
-#: src/core/modules/Planet.cpp:249 src/core/modules/MinorPlanet.cpp:247
+#: src/core/modules/Planet.cpp:250 src/core/modules/MinorPlanet.cpp:247
 #: src/core/modules/Comet.cpp:224
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "거리: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:256 src/core/modules/MinorPlanet.cpp:254
+#: src/core/modules/Planet.cpp:257 src/core/modules/MinorPlanet.cpp:254
 #: src/core/modules/Comet.cpp:231
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "거리: %1AU (%2 백만 km)"
 
-#: src/core/modules/Planet.cpp:270 src/core/modules/Planet.cpp:274
+#: src/core/modules/Planet.cpp:271 src/core/modules/Planet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "시직경: %1, 고리 포함: %2"
 
-#: src/core/modules/Planet.cpp:281 src/core/modules/Planet.cpp:283
+#: src/core/modules/Planet.cpp:282 src/core/modules/Planet.cpp:284
 #: src/core/modules/MinorPlanet.cpp:263
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "시직경: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:299 src/core/modules/MinorPlanet.cpp:270
+#: src/core/modules/Planet.cpp:300 src/core/modules/MinorPlanet.cpp:270
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "공전주기: %1일 (%2 율리우스년)"
 
-#: src/core/modules/Planet.cpp:302
+#: src/core/modules/Planet.cpp:303
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "항성일: %1"
 
-#: src/core/modules/Planet.cpp:303
+#: src/core/modules/Planet.cpp:304
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "평균태양일: %1"
 
-#: src/core/modules/Planet.cpp:307
+#: src/core/modules/Planet.cpp:308
 msgid "The period of rotation is chaotic"
 msgstr "회전 주기는 불규칙적"
 
-#: src/core/modules/Planet.cpp:319
+#: src/core/modules/Planet.cpp:320
 msgid "New Moon"
 msgstr "초승달"
 
-#: src/core/modules/Planet.cpp:321
+#: src/core/modules/Planet.cpp:322
 msgid "Last Quarter"
 msgstr "하현"
 
-#: src/core/modules/Planet.cpp:323
+#: src/core/modules/Planet.cpp:324
 msgid "Full Moon"
 msgstr "망"
 
-#: src/core/modules/Planet.cpp:325
+#: src/core/modules/Planet.cpp:326
 msgid "First Quarter"
 msgstr "상현"
 
-#: src/core/modules/Planet.cpp:329 src/core/modules/Planet.cpp:334
+#: src/core/modules/Planet.cpp:330 src/core/modules/Planet.cpp:335
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "위상각: %1"
 
-#: src/core/modules/Planet.cpp:330 src/core/modules/Planet.cpp:335
+#: src/core/modules/Planet.cpp:331 src/core/modules/Planet.cpp:336
 #, qt-format
 msgid "Elongation: %1"
 msgstr "이각: %1"
 
-#: src/core/modules/Planet.cpp:348
+#: src/core/modules/Planet.cpp:349
 #, qt-format
 msgid "Phase: %1"
 msgstr "위상: %1"
 
-#: src/core/modules/Planet.cpp:349
+#: src/core/modules/Planet.cpp:350
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "밝은 부분: %1%"
 
-#: src/core/modules/Planet.cpp:361
+#: src/core/modules/Planet.cpp:362
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr "위성식률: %1%"
@@ -1631,12 +1631,12 @@ msgstr "황도 경사"
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "은경/은위: %1/%2"
 
-#: src/core/StelObject.cpp:251
+#: src/core/StelObject.cpp:252
 #, qt-format
 msgid "Mean Sidereal Time: %1"
 msgstr "평균항성시: %1"
 
-#: src/core/StelObject.cpp:253
+#: src/core/StelObject.cpp:257
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
 msgstr "시항성시: %1"
@@ -4913,7 +4913,7 @@ msgstr "배율"
 
 #: src/ui_viewDialog.h:1638
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "태양계 천체의 한계등급"
 
 #: src/ui_viewDialog.h:1642
 msgid "Automatic change of landscape when planet is changed"
@@ -5035,11 +5035,11 @@ msgstr "강조"
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
-msgstr ""
+msgstr "딥스카이 천체의 이름표와 표식 표시에 표면광도 사용"
 
 #: src/ui_viewDialog.h:1718
 msgid "Use surface brightness"
-msgstr ""
+msgstr "표면광도 사용"
 
 #: src/ui_viewDialog.h:1720
 msgid "Use hints proportional to angular size of deep-sky objects"
@@ -5052,7 +5052,7 @@ msgstr "비례 강조 사용"
 #: src/ui_viewDialog.h:1724
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
-msgstr ""
+msgstr "딥스카이 천체의 한계등급(맨눈 또는 쌍안경 관측)"
 
 #: src/ui_viewDialog.h:1737
 msgid "Celestial Sphere"
@@ -6625,11 +6625,11 @@ msgstr "이미지 서클 크기 조정"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr "망원경의 구경마다 볼 수 있는 천체의 등급을 제한합니다."
+msgstr "망원경의 구경에 따라 볼 수 있는 천체의 한계등급을 다르게 설정합니다."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid "Limit stellar magnitude"
-msgstr "천체 등급"
+msgstr "별의 한계등급"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1164
 msgid "Key mappings"
@@ -9803,7 +9803,7 @@ msgstr "수평선 고도:"
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
-msgstr "최소 관측가능한 고도 (산과 빌딩 또는 제한된 망원경 가대로 인해)"
+msgstr "관측가능한 가장 낮은 고도 (산과 빌딩 또는 망원경 가대로 인한 제약 설정)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Today ephemeris:"
@@ -11028,21 +11028,21 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2096
+#: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2105
+#: plugins/Scenery3d/src/Scenery3d.cpp:2120
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2115
+#: plugins/Scenery3d/src/Scenery3d.cpp:2130
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2636
+#: plugins/Scenery3d/src/Scenery3d.cpp:2651
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
