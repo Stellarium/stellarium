@@ -514,7 +514,7 @@
 06910   73 81B    Transit 20 Rk   7.5  1.5 0.5 0.0 .69
 06920   73 86A    NOAA 3          6.0              3.2
 06921 t 73 86B    NOAA 3 DelDb B  5.0              3.8
-06939 h 73 84D    Cosmos 606 Rk   5.5              5.0
+06939 d 73 84D    Cosmos 606 Rk   5.5              5.0
 06965   73 98A    Cosmos 614      5.5              2.1
 06966   73 98B    Cosmos 614 Rk   4.0  7.4 2.4 0.0 4.9
 06987   73 104C   Cosmos 619      6.3              .70
@@ -985,7 +985,7 @@
 12054 d 80 89A    Cosmos 1220     2.5  6.0 0.0 0.0 8.6
 12069 d 80 87B    FltSatCom 4 Rk  2.0  8.6 3.0 0.0  17
 12071 d 80 93A    Cosmos 1222     4.0  5.0 1.5 0.0 8.8
-12072   80 93B    Cosmos 1222 Rk  3.5  2.8 2.6 0.0 4.6
+12072 d 80 93B    Cosmos 1222 Rk  3.5  2.8 2.6 0.0 4.6
 12078 h 80 95A    Cosmos 1223     4.5              6.3
 12086 h 80 95E    Cosmos 1223 Rk  4.5              4.9
 12087   80 97A    Cosmos 1225     5.0  2.1 2.0 0.0 2.4
@@ -1022,7 +1022,7 @@
 12371 g 81 25C    DSP F9 Rk2      4.5
 12376 h 81 31A    Cosmos 1261     4.0               11
 12388   81 33A    Cosmos 1263     5.5  1.8 1.5 0.0 3.0
-12389   81 33B    Cosmos 1263 Rk  3.0  7.4 2.4 0.0 5.0
+12389 d 81 33B    Cosmos 1263 Rk  3.0  7.4 2.4 0.0 5.0
 12409   81 37A    Cosmos 1266     5.0              2.8
 12442   81 41A    Cosmos 1269     5.5              2.1
 12443   81 41B    Cosmos 1269 Rk  4.0  7.4 2.4 0.0 4.7
@@ -1074,7 +1074,7 @@
 12887 d 81 100A   SME             5.5  1.7 2.2 0.0
 12889   81 100C   SME Rk          3.5  6.4 2.0 0.0 7.8
 12892 h 81 31E    Cosmos 1261 Db  5.5              2.2
-12903   81 103A   Cosmos 1315     4.0  5.0 1.5 0.0 8.5
+12903 d 81 103A   Cosmos 1315     4.0  5.0 1.5 0.0 8.5
 12904   81 103B   Cosmos 1315 Rk  3.5  2.8 2.6 0.0 5.7
 12908 d 78 16C    FltSatCom 1 Rk  2.5               20
 12940 h 81 108D   Cosmos 1317 Rk  4.5              5.1
@@ -1247,7 +1247,7 @@
 14452   83 109A   Meteor 2-10     4.0  4.2 1.4 0.0 5.3
 14453   83 109B   Meteor 2-10 Rk  3.5  2.8 2.6 0.0 6.0
 14483   83 111A   Cosmos 1508     6.0  1.8 1.5 0.0 2.9
-14484   83 111B   Cosmos 1508 Rk  3.5  7.4 2.4 0.0 4.4
+14484 d 83 111B   Cosmos 1508 Rk  3.5  7.4 2.4 0.0 4.4
 14506   83 113A   DMSP 2-2        4.0  6.4 1.7 0.0 4.6
 14516 d 83 114A   Molniya 1-59    4.0               14
 14521   83 115A   Cosmos 1510     3.5               10
@@ -1268,6 +1268,7 @@
 14679   84 10A    Cosmos 1535     5.5  2.1 2.0 0.0 2.2
 14680   84 10B    Cosmos 1535 Rk  4.0  7.4 2.4 0.0 4.4
 14690 c 84 12A    NOSS 6 (A)      5.5  2.0 0.0 0.0
+14691 c 84 12B    NOSS 6 P/S
 14693 d 84 11E    Palapa 4 Rk     5.5  2.3 1.5 0.0 2.3
 14694 d 84 11F    Westar 6 Rk     5.5  2.3 1.5 0.0 1.8
 14699   84 13A    Cosmos 1536     3.5  6.0 2.0 0.0 7.4
@@ -1477,7 +1478,7 @@
 16511   86 8B     Cosmos 1727 Rk  3.5  7.4 2.4 0.0 4.3
 16528 h 86 10B    PRC 18 Rk       3.5               10
 16591 c 86 14A    NOSS 7 (A)      6.0  2.0 0.0 0.0
-16592 c 86 14B    NOSS 7 Rk       5.5
+16592 c 86 14B    NOSS 7 P/S      5.5
 16593   86 15A    Cosmos 1732     4.5               10
 16594   86 15B    Cosmos 1732 Rk  4.5              5.2
 16600 d 86 16C    BS 2B PKM       5.5              2.0
@@ -2204,7 +2205,7 @@
 22015   92 39B    GPS 2 14 RK     3.5  5.9 2.4 0.0 8.2
 22016 d 92 39C    GPS 2 14 RK     6.0              3.4
 22017 h 92 40A    Cosmos 2196     3.5               12
-22020 h 92 40D    Cosmos 2196 Rk  4.5              6.2
+22020 d 92 40D    Cosmos 2196 Rk  4.5              6.2
 22032 h 92 41C    Insat 2A Ar Rk  2.5 11.4 2.6 0.0  44
 22033 d 92 41D    Insat 2A Splda  4.0               20
 22034   92 42A    Cosmos 2197     7.5  1.6 0.8 0.0 1.1
@@ -2261,7 +2262,7 @@
 22245 h 92 82A    Gorizont 27     5.0              5.7
 22250 d 92 82F    Gorznt 27 UllM  6.5              0.9
 22251 d 92 83A    USA 86          4.0 15.0 3.0 0.0
-22254 h 92 84B    Suprbird A1 Rk  2.5               20
+22254 d 92 84B    Suprbird A1 Rk  2.5               20
 22255 d 92 85A    Molniya 3-43    4.0               18
 22258 d 92 85D    Molnya 3-43 Rk  4.5              7.4
 22259 d 92 86A    STS 53          0.1 37.123.817.1
@@ -2869,7 +2870,7 @@
 25043   97 69E    Iridium 38 tum  5.5              5.0
 25051 d 97 71C    Sirius 2 A Rk   2.0               15
 25054 h 97 70F    Kupon AuxMtrF   5.5              .76
-25063   97 74A    TRMM            3.0               11
+25063 d 97 74A    TRMM            3.0               11
 25064 f 97 74B    ETS 7           3.5               11
 25065 d 97 74C    ETS 7 H-2 Rk    3.0               29
 25066 d 97 74D    ETS 7 H-2RkDeb  5.0               16
@@ -3430,7 +3431,7 @@
 27367 h 02 3A     MDS 1           5.5              3.0
 27368 h 02 3B     DASH            3.0               14
 27369 h 02 3C     MDS 1 H2A Rk    2.0               25
-27370 f 02 4A     HESSI           6.5              2.5
+27370 f 02 4A     RHESSI          6.5              2.5
 27371   02 4B     HESSI Peg Rk    6.0              .85
 27372   02 5A     Iridium 91      5.5              3.6
 27373   02 5B     Iridium 90 ?    5.5              3.8
@@ -3968,7 +3969,7 @@
 31702 c 07 27B    NOSS 3-4 Rk     2.0
 31708 c 07 27C    NOSS 3-4 (C)    3.0
 31789   07 28A    Genesis 2       5.0              5.1
-31790   07 28B    Genesis 2 Rk    5.5               10
+31790 d 07 28B    Genesis 2 Rk    5.5               10
 31791   07 28C    Genesis 2 Db    6.0              5.8
 31792   07 29A    Cosmos 2428     2.5              6.5
 31793   07 29B    Cosmos 2428 Rk  2.0              9.1
@@ -4142,13 +4143,13 @@
 34112 h 09 9B     Telstar 11N Rk  3.5               15
 34382   09 11C    Kepler Dl Rk    4.0               11
 34602 d 09 13A    GOCE            5.0              1.5
-34662 h 09 14B    GPS 63 PAM      5.5              2.2
+34662 d 09 14B    GPS 63 PAM      5.5              2.2
 34663 d 09 14C    GPS 63 Dl Rk    3.0               12
 34712 h 09 16C    Eutelsat W2ATk  3.0              6.7
 34713 g 09 17A    WGS 2           3.0              3.6
 34780 h 09 18B    Beidou G2 Rk    1.5               14
 34807   09 19A    RISat 2         6.5              1.4
-34809   09 19C    RISat 2 Rk      5.0              6.9
+34809 d 09 19C    RISat 2 Rk      5.0              6.9
 34811 h 09 20B    Sicral 1B DMRk  2.5               16
 34839   09 21A    Yaogan 6        3.5              3.6
 34903 c 09 23A    STSS-ATRR
@@ -4431,7 +4432,7 @@
 37946   11 72F    Yaogan 13 DbF
 37949 d 11 73B    BeidouIGSO5Rk   1.5
 37954 c 11 75A    IGS 7A
-37955 c 11 75B    IGS 7A Rk       3.5               24
+37955 d 11 75B    IGS 7A Rk       3.5               24
 38007 c 11 76A    Elisa W11                        1.0
 38008 c 11 76B    Elisa E24                        1.0
 38009 c 11 76C    Elisa W23                        1.0
@@ -4612,7 +4613,6 @@
 39255   13 49C    SPRINT A Rk                      2.2
 39260   13 52A    Fengyun 3C                       7.6
 39261   13 52B    Fengyun 3C Rk                    7.9
-39262   13 53A    Kuaizhou 1                       2.0
 39265   13 55A    Cassiope                         2.1
 39266   13 55B    CUSAT 1                          .41
 39267   13 55C    DANDE                            .27
@@ -4629,7 +4629,6 @@
 39381   13 64B    PHONESAT 2.4                     .02
 39383   13 64D    DRAGONSAT                        .02
 39384   13 64E    KYSAT II                         .09
-39385   13 64F    TJ3SAT                           .02
 39386   13 64G    StpSat 3 Rk                      1.4
 39389   13 64K    NPS-SCAT                         .05
 39390   13 64L    PROMETHEUS 1-4                   .16
@@ -4639,7 +4638,6 @@
 39394   13 64Q    PROMETHEUS 1-6                   .17
 39395   13 64R    COPPER                           .05
 39397   13 64T    ORS OBJECT T                     .08
-39398   13 64U    ORS OBJECT U                     .08
 39399   13 64V    ORS OBJECT V                     .17
 39400   13 64W    ORS OBJECT W                     .02
 39401   13 64X    ORS OBJECT X                     .16
@@ -4685,7 +4683,6 @@
 39445   13 66AF   HINCUBE                          .04
 39446   13 66AG   UWE-3                            .04
 39448   13 66AJ   BPA 3/SL-24 Rk                   6.5
-39449   13 66AK   Dnepr Rk Db AK                   7.6
 39450   13 66AL   Dnepr Rk Db AL                   5.2
 39451   13 67A    SWARM B                          2.7
 39452   13 67B    SWARM A                          2.6
@@ -4721,7 +4718,7 @@
 39624   14 14A    SJ-11-06                         2.5
 39625   14 14B    SJ-11-06 Rk                       10
 39630 c 14 15A    DMSP F19
-39634   14 16A    SENTINEL 1A                       11
+39634   14 16A    Sentinel 1A                       11
 39635   14 17A    IRNSS 1B                         3.6
 39636   14 17B    IRNSS 1B Rk                       14
 39650 c 14 19A    Ofeq 10                          2.8
@@ -4779,7 +4776,9 @@
 40044   14 33AL   LEMUR 1                          .08
 40045   14 33AM   AEROCUBE 6A                      .08
 40046   14 33AN   AEROCUBE 6B                      .08
-40049   14 33AR   SL-24 PLAT                       4.2
+40047   14 33AP   SL-24 r 33AP                     6.0
+40048   14 33AQ   SL-24 Db 33AQ                    5.8
+40049   14 33AR   SL-24 Plat 33AR                  4.2
 40053   14 34A    SPOT 7                           4.5
 40054   14 34B    AISAT                            .48
 40055   14 34C    NLS 7.1/CANX 4                   .11
@@ -4830,7 +4829,7 @@
 40130   14 50C    Galileo 5 Rk
 40136   14 51A    LING QIAO
 40137   14 51B    CHUANG XIN 1-04
-40138   14 51C    LING QIAO Rk    2.0
+40138 d 14 51C    LING QIAO Rk    2.0
 40139   98 67FE   FLOCK 1B 18
 40143   14 53A    Yaogan 21
 40144   14 53B    Tiantuo 2
@@ -4854,7 +4853,6 @@
 40289   14 66D    SJ-11-08 DbD
 40290   14 66E    SJ-11-08 DbE
 40291   14 66F    SJ-11-08 DbF
-40292   14 67A    Progress-M 25M
 40298   14 70A    Asnaro
 40299   14 70B    Hodoyoshi 1
 40300   14 70C    ChubuSat 1
@@ -4867,7 +4865,6 @@
 40309   14 71E    Yaogan 23 DbE
 40310   14 72A    Yaogan 24
 40311   14 73A    Kuaizhou 2
-40312   14 74A    SOYUZ-TMA 15M
 40314   98 67FL   SpinSat
 40336   14 79A    CBERS 4
 40337   14 79B    CBERS 4 Rk
@@ -4880,13 +4877,10 @@
 40344 c 14 81A    USA 259
 40353   14 84A    Kondor E
 40354   14 84B    Kondor E Rk     3.5
-40355   14 85A    OBJECT 85A
+40355   14 85A    Dummy Sat 2
 40358   14 86A    Cosmos 2502
-40359   14 86B    Cosmos 2502 Rk
 40360   14 87A    Resurs P2
 40362   14 88A    Yaogan 26
-40370   15 1A     OBJECT 1A
-40371   15 1B     OBJECT 1B
 40374 c 15 2A     MUOS 3
 40375 c 15 2B     MUOS 3 Rk
 40376   15 3A     SMAP
@@ -4895,42 +4889,139 @@
 40379   15 3D     GRIFEX
 40380   15 3E     EXOCUBE
 40381 c 15 4A     IGS 9
-40382 c 15 4B     H-2A R/B
-40383 c 15 4C     H-2A DEB
+40382 c 15 4B     IGS 9 Rk
+40383 c 15 4C     IGS 9 Db
 40389   98 67FM   AESP 14
-40392   15 8A     Progress-M 26M
 40420   15 9A     Cosmos 2503
 40421   15 9B     Cosmos 2503 Rk
 40422   98 67FN   FLOCK 1B 27
-40423   98 67FP   FLOCK 1B 28
 40427   98 67FQ   FLOCK 1B 21
-40428   98 67FR   FLOCK 1B 22
-40429   98 67FS   FLOCK 1B 10
-40430   98 67FT   FLOCK 1B 9
 40451   98 67FU   FLOCK 1D 1
 40452   98 67FV   FLOCK 1D 2
-40453   98 67FW   FLOCK 1B 5
 40454   98 67FX   FLOCK 1B 6
 40456   98 67FZ   GEARRS-1
-40457   98 67GA   MICROMAS
 40458   98 67GB   LAMBDASAT
-40459   98 67GC   FLOCK 1B 11
-40460   98 67GD   FLOCK 1B 12
 40536   15 14A    Kompsat 3A
 40537   15 14B    Kompsat 3A Db
 40538 c 15 15A    IGS OPT 5
 40539 c 15 15B    IGS OPT 5 Rk
-40540 c 15 15C    IGS OPT 5 Db
 40541   15 14C    Kompsat 3A Rk
-40542   15 16A    SOYUZ-TMA 16M
-40544   15 17A    Galileo 7
-40545   15 17B    Galileo 8
-40546   15 17C    Galileo 7 Rk
-40552   15 20A    Object 20A
-40553   15 20B    Object 20B
-40554   15 20C    Object 20C
-40555   15 20D    Object 20D
-40556   15 20E    Object 20E
+40552   15 20A    Gonets M11
+40553   15 20B    Gonets M12
+40554   15 20C    Gonets M13
+40555   15 20D    Cosmos 2504
+40556   15 20E    Gonets M11 Rk
+40651 c 15 25A    OTV 4           2.0
+40652 c 15 25B    USS LANGLEY
+40653 c 15 25C    OPTICUBE 01
+40654 c 15 25D    PSAT
+40655 c 15 25E    BRICSAT-P
+40656 c 15 25F    OPTICUBE 02
+40657 c 15 25G    GEARRS-2
+40658 c 15 25H    OPTICUBE 03
+40659 c 15 25J    AEROCUBE 8A
+40660 c 15 25K    AEROCUBE 8B
+40697   15 28A    Sentinel 2A
+40698   15 28B    Sentinel 2A Rk
+40699   15 29A    Cosmos 2506
+40701   15 30A    Gaofen 8
+40713   15 31A    Progress-M 28M
+40715   15 32A    DMC 3-FM1
+40716   15 32B    DMC 3-FM2
+40717   15 32C    DMC 3-FM3
+40718   15 32D    Carbonite 1
+40719   15 32E    DeorbitSail
+40720   15 32F    DMX 3-FM1 Rk
+40722   98 67GE   FLOCK 1E 2
+40723   98 67GF   FLOCK 1E 1
+40724   98 67GG   FLOCK 1E 4
+40725   98 67GH   FLOCK 1E 3
+40726   98 67GJ   FLOCK 1E 7
+40727   98 67GK   FLOCK 1E 8
+40728   98 67GL   FLOCK 1E 5
+40729   98 67GM   FLOCK 1E 6
+40736   98 67GN   FLOCK 1E 9
+40737   98 67GP   FLOCK 1E 10
+40738   98 67GQ   FLOCK 1E 11
+40739   98 67GR   FLOCK 1E 12
+40740   98 67GS   FLOCK 1E 13
+40741   98 67GT   FLOCK 1E 14
+40742   98 67GU   ARKYD-3R
+40743   98 67GV   CENTENNIAL 1
+40744   15 35A    Soyuz TMA 17M
+40878   15 40A    Yaogan 27
+40879   15 40B    Yaogan 27 Rk
+40885   15 43A    Soyuz-TMA 18M
+40894   15 47A    GAOFEN 9
+40897   98 67GX   SERPENS
+40898   98 67GY   S-CUBE
+40899   15 49A    OBJECT 49A
+40900   15 49B    NUDT-PHONESAT
+40901   15 49C    ZDPS 2A
+40902   15 49D    ZDPS 2B
+40903   15 49E    XW-2A
+40904   15 49F    KAITUO 1A
+40905   15 49G    OBJECT G
+40906   15 49H    XW-2C
+40907   15 49J    XW-2D
+40908   15 49K    LILACSAT 2
+40909   15 49L    XW-2E
+40910   15 49M    XW-2F
+40911   15 49N    XW-2B
+40912   15 49P    KAITUO 1B
+40913   15 49Q    CZ-6 R/B
+40920   15 50A    Cosmos 2507
+40921   15 50B    Cosmos 2508
+40922   15 50C    Cosmos 2509
+40923   15 50D    Cosmos 2507 Rk
+40925   15 51A    Pujiang 1
+40926   15 51B    Tianwang 1C
+40927   15 51C    Tianwang 1B
+40928   15 51D    Tianwang 1A
+40929   15 51E    Pujiang 1 Rk
+40930   15 52A    OBJECT 52A
+40931   15 52B    OBJECT 52B
+40932   15 52C    OBJECT 52C
+40933   15 52D    OBJECT 52D
+40934   15 52E    OBJECT 52E
+40935   15 52F    OBJECT 52F
+40936   15 52G    OBJECT 52G
+40937   15 52H    52H PSLV R/B
+40944   15 55A    PROGRESS-M 29M
+40948   98 67GZ   AAUSAT 5
+40949   98 67HA   GOMX 3
+40950   98 67HB   FLOCK 2B 1
+40951   98 67HC   FLOCK 2B 2
+40952   98 67HD   FLOCK 2B 3
+40953   98 67HE   FLOCK 2B 4
+40954   98 67HF   FLOCK 2B 5
+40955   98 67HG   FLOCK 2B 6
+40956   98 67HH   FLOCK 2B 7
+40957   98 67HJ   FLOCK 2B 8
+40958   15 57A    OBJECT 57A
+40959   15 57B    OBJECT 57B
+40960   15 57C    OBJECT 57C
+40961   15 57D    OBJECT 57D
+40962   98 67HK   FLOCK 2B 10
+40963   98 67HL   FLOCK 2B 9
+40964 c 15 58A    NOSS 3-7 (A)
+40965 c 15 58B    AEROCUBE 5C
+40966 c 15 58C    AEROCUBE 7
+40967 c 15 58D    FOX-1
+40968 c 15 58E    BISONSAT
+40969 c 15 58F    ARC-1
+40970 c 15 58G    SNAP-3 ALICE
+40971 c 15 58H    LMRST-SAT
+40972 c 15 58J    SNAP-3 EDDIE
+40973 c 15 58K    PROPCUBE 3
+40974 c 15 58L    SINOD-D 1
+40975 c 15 58M    SNAP-3 JIMI
+40976 c 15 58N    PROPCUBE 1
+40977 c 15 58P    SINOD-D 3
+40978 c 15 58Q    NOSS 3-7 Rk
+40979   98 67HM   FLOCK 2B 13
+40980   98 67HN   FLOCK 2B 14
+40981 c 15 58R    NOSS 3-7 (R)
 90004 h 99 750A   Unknown 990907  2.0
 90006 h 00 596A   Unknown 000405  4.0
 90007 g 00 653A   Unknown 000601  3.5
@@ -4979,6 +5070,8 @@
 90108 c 14 845A   ISON 47601
 90109 c 15 523A   ISON 54102
 90110 c 15 545A   ISON 20100
+90111 c 15 607A   ISON 60601
+90112 c 15 614A   ISON 62200
 96031 g 96 531A   Unknown 050612  2.0
 96058 g 96 558A   Unknown 050403  2.0
 96094 g 96 594A   Unknown 080911  3.0
