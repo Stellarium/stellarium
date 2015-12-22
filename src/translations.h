@@ -76,6 +76,8 @@ class Translations
 		N_("Scattered disc objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Oort cloud objects");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Constellations");
 
 		// =====================================================================
 		// List of deep-sky objects types
