@@ -1827,7 +1827,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 			validRangeAppendix = q_("with a mean error of less than one second, max. error 1.9s, and meaningless values outside this range");
 			break;
 		case ChaprontTouze:
-			// FIXME: It's valid range?
+			// FIXME: Is it valid range?
 			start	= -4000;
 			finish	= 8000;
 			break;
