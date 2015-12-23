@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-05 16:09+0600\n"
+"POT-Creation-Date: 2015-12-22 23:48+0600\n"
 "PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-06 05:26+0000\n"
-"X-Generator: Launchpad (build 17862)\n"
+"X-Launchpad-Export-Date: 2015-12-23 04:51+0000\n"
+"X-Generator: Launchpad (build 17865)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
-#: src/core/modules/GridLinesMgr.cpp:876 src/core/modules/LandscapeMgr.cpp:414
-#: src/core/modules/NebulaMgr.cpp:224 src/core/modules/SolarSystem.cpp:176
+#: src/core/modules/GridLinesMgr.cpp:904 src/core/modules/LandscapeMgr.cpp:414
+#: src/core/modules/NebulaMgr.cpp:266 src/core/modules/SolarSystem.cpp:176
 #: src/core/modules/MilkyWay.cpp:74 src/core/modules/ZodiacalLight.cpp:80
-#: src/core/StelApp.cpp:498 src/core/StelCore.cpp:201
+#: src/core/StelApp.cpp:501 src/core/StelCore.cpp:201
 #: src/core/StelSkyLayerMgr.cpp:88 src/StelMainView.cpp:557
 msgid "Display Options"
 msgstr "顯示選項"
@@ -46,7 +46,7 @@ msgstr "星座標示"
 msgid "Constellation boundaries"
 msgstr "星座邊界"
 
-#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1589
+#: src/core/modules/StarMgr.cpp:376 src/ui_viewDialog.h:1584
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "星星"
@@ -55,45 +55,45 @@ msgstr "星星"
 msgid "Stars labels"
 msgstr "星星標誌"
 
-#: src/core/modules/GridLinesMgr.cpp:596 src/ui_viewDialog.h:1797
+#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1778
 msgid "Meridian"
 msgstr "子午圈"
 
-#: src/core/modules/GridLinesMgr.cpp:600
+#: src/core/modules/GridLinesMgr.cpp:603
 msgid "Ecliptic of J2000.0"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:604
+#: src/core/modules/GridLinesMgr.cpp:607
 msgid "Ecliptic of Date"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:608
+#: src/core/modules/GridLinesMgr.cpp:611
 msgid "Equator of J2000.0"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:612
+#: src/core/modules/GridLinesMgr.cpp:615
 msgid "Equator"
 msgstr "赤道"
 
-#: src/core/modules/GridLinesMgr.cpp:617
+#: src/core/modules/GridLinesMgr.cpp:620
 msgid "Precession Circle"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:621 src/ui_viewDialog.h:1789
+#: src/core/modules/GridLinesMgr.cpp:624 src/ui_viewDialog.h:1766
 msgid "Horizon"
 msgstr "地平線"
 
-#: src/core/modules/GridLinesMgr.cpp:625
+#: src/core/modules/GridLinesMgr.cpp:628
 msgid "Galactic Equator"
 msgstr ""
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:630 src/ui_viewDialog.h:1801
+#: src/core/modules/GridLinesMgr.cpp:633 src/ui_viewDialog.h:1790
 msgid "O./C. longitude"
 msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
-#: src/ui_viewDialog.h:1780
+#: src/ui_viewDialog.h:1782
 msgid "Prime Vertical"
 msgstr ""
 
@@ -105,72 +105,72 @@ msgstr ""
 msgid "Solstitial Colure"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:877
+#: src/core/modules/GridLinesMgr.cpp:905
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial grid"
 msgstr "赤道座標柵格"
 
-#: src/core/modules/GridLinesMgr.cpp:878 src/ui_viewDialog.h:1757
+#: src/core/modules/GridLinesMgr.cpp:906 src/ui_viewDialog.h:1742
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "地平座標柵格"
 
-#: src/core/modules/GridLinesMgr.cpp:879
+#: src/core/modules/GridLinesMgr.cpp:907
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Ecliptic line"
 msgstr "黃道線"
 
-#: src/core/modules/GridLinesMgr.cpp:880
+#: src/core/modules/GridLinesMgr.cpp:908
 msgid "Ecliptic J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:881
+#: src/core/modules/GridLinesMgr.cpp:909
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equator line"
 msgstr "赤道線"
 
-#: src/core/modules/GridLinesMgr.cpp:882
+#: src/core/modules/GridLinesMgr.cpp:910
 msgid "Equator J2000 line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:883
+#: src/core/modules/GridLinesMgr.cpp:911
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Meridian line"
 msgstr "子午線"
 
-#: src/core/modules/GridLinesMgr.cpp:884
+#: src/core/modules/GridLinesMgr.cpp:912
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:377
 msgid "Horizon line"
 msgstr "地平線"
 
-#: src/core/modules/GridLinesMgr.cpp:885
+#: src/core/modules/GridLinesMgr.cpp:913
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equatorial J2000 grid"
 msgstr "赤道座標柵格 (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:886
+#: src/core/modules/GridLinesMgr.cpp:914
 msgid "Ecliptic J2000 grid"
 msgstr "黃道座標柵格 (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:887
+#: src/core/modules/GridLinesMgr.cpp:915
 msgid "Ecliptic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:888 src/ui_viewDialog.h:1761
+#: src/core/modules/GridLinesMgr.cpp:916 src/ui_viewDialog.h:1746
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Galactic grid"
 msgstr "銀河系柵格"
 
-#: src/core/modules/GridLinesMgr.cpp:889 src/ui_viewDialog.h:1793
+#: src/core/modules/GridLinesMgr.cpp:917 src/ui_viewDialog.h:1770
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:890
+#: src/core/modules/GridLinesMgr.cpp:918
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:891
+#: src/core/modules/GridLinesMgr.cpp:919
 msgid "Precession Circles"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Colure Lines"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1607
+#: src/core/modules/LandscapeMgr.cpp:415 src/ui_viewDialog.h:1602
 msgid "Atmosphere"
 msgstr "大氣"
 
@@ -186,7 +186,7 @@ msgstr "大氣"
 msgid "Fog"
 msgstr "霧"
 
-#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1765
+#: src/core/modules/LandscapeMgr.cpp:417 src/ui_viewDialog.h:1774
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
 msgstr "方向標示"
@@ -199,7 +199,7 @@ msgstr "地面"
 msgid "Illumination"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1713
+#: src/core/modules/LandscapeMgr.cpp:420 src/ui_viewDialog.h:1708
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Labels"
 msgstr "標記"
@@ -222,8 +222,8 @@ msgstr ", %1 公尺"
 msgid "Celestial body:"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:168 src/core/modules/Planet.cpp:219
-#: src/core/modules/MinorPlanet.cpp:211 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:188 src/core/modules/Planet.cpp:220
+#: src/core/modules/MinorPlanet.cpp:212 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:181 src/core/modules/StarWrapper.cpp:184
 #: plugins/Satellites/src/Satellite.cpp:270
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
@@ -232,20 +232,20 @@ msgstr ""
 msgid "Type: <b>%1</b>"
 msgstr "種類:<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:170 src/core/modules/Comet.cpp:176
+#: src/core/modules/Nebula.cpp:190 src/core/modules/Comet.cpp:176
 #: plugins/Novae/src/Nova.cpp:133 plugins/Pulsars/src/Pulsar.cpp:166
-#: plugins/MeteorShowers/src/MeteorShower.cpp:545
+#: plugins/MeteorShowers/src/MeteorShower.cpp:546
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "類型: <b>%1</b> (%2)"
 
-#: src/core/modules/Nebula.cpp:177
+#: src/core/modules/Nebula.cpp:197
 #, qt-format
 msgid "Opacity: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:182 src/core/modules/Planet.cpp:225
-#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:182
+#: src/core/modules/Nebula.cpp:202 src/core/modules/Planet.cpp:226
+#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:182
 #: src/core/modules/StarWrapper.cpp:59 src/core/modules/StarWrapper.cpp:191
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
@@ -253,8 +253,8 @@ msgstr ""
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等: <b>%1</b> (消光至: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:185 src/core/modules/Nebula.cpp:190
-#: src/core/modules/Planet.cpp:228 src/core/modules/MinorPlanet.cpp:220
+#: src/core/modules/Nebula.cpp:205 src/core/modules/Nebula.cpp:210
+#: src/core/modules/Planet.cpp:229 src/core/modules/MinorPlanet.cpp:221
 #: src/core/modules/Comet.cpp:185 src/core/modules/StarWrapper.cpp:63
 #: src/core/modules/StarWrapper.cpp:194
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
@@ -263,43 +263,43 @@ msgstr "星等: <b>%1</b> (消光至: <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "星等: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:191
+#: src/core/modules/Nebula.cpp:211
 msgid " (Photometric system: B)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:197 src/core/modules/StarWrapper.cpp:68
+#: src/core/modules/Nebula.cpp:217 src/core/modules/StarWrapper.cpp:68
 #: src/core/modules/StarWrapper.cpp:202 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "色指數 (B-V): <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:204
+#: src/core/modules/Nebula.cpp:224
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星雲表面光度: <b>%1</b> (消光至: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:210
+#: src/core/modules/Nebula.cpp:230
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "星雲表面光度: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:219
+#: src/core/modules/Nebula.cpp:239
 #, qt-format
 msgid "Size: %1"
 msgstr "大小: %1"
 
-#: src/core/modules/Nebula.cpp:222
+#: src/core/modules/Nebula.cpp:242
 #, qt-format
 msgid "Size: %1 x %2"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:224
+#: src/core/modules/Nebula.cpp:244
 #, qt-format
 msgid "Orientation angle: %1%2"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
-#: src/core/modules/Nebula.cpp:248 src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/Nebula.cpp:268 src/core/modules/StarWrapper.cpp:232
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
@@ -307,497 +307,481 @@ msgid "Distance: %1 ly"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - megaparsecs
-#: src/core/modules/Nebula.cpp:263
+#: src/core/modules/Nebula.cpp:283
 msgid "Mpc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:268
+#: src/core/modules/Nebula.cpp:288
 msgid "kpc"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:271
+#: src/core/modules/Nebula.cpp:291
 #, qt-format
 msgid "Distance: %1 %2"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:285
+#: src/core/modules/Nebula.cpp:305
 #, qt-format
 msgid "Redshift: %1"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:296 src/core/modules/StarWrapper.cpp:241
+#: src/core/modules/Nebula.cpp:316 src/core/modules/StarWrapper.cpp:241
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "視差: %1\""
 
-#: src/core/modules/Nebula.cpp:300
+#: src/core/modules/Nebula.cpp:320
 msgid "Morphological description: "
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:752
+#: src/core/modules/Nebula.cpp:816
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:755
+#: src/core/modules/Nebula.cpp:819
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "dense central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:758
+#: src/core/modules/Nebula.cpp:822
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "strong inner core of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:761
+#: src/core/modules/Nebula.cpp:825
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:766
+#: src/core/modules/Nebula.cpp:830
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:769
+#: src/core/modules/Nebula.cpp:833
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "rather loosely concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:772
+#: src/core/modules/Nebula.cpp:836
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:775
+#: src/core/modules/Nebula.cpp:839
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "loose concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:778
+#: src/core/modules/Nebula.cpp:842
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:781
+#: src/core/modules/Nebula.cpp:845
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:784
+#: src/core/modules/Nebula.cpp:848
 msgctxt "Shapley–Sawyer Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:804
+#: src/core/modules/Nebula.cpp:868
 msgctxt "Trumpler's Concentration Class"
 msgid "strong central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:807
+#: src/core/modules/Nebula.cpp:871
 msgctxt "Trumpler's Concentration Class"
 msgid "little central concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:810
+#: src/core/modules/Nebula.cpp:874
 msgctxt "Trumpler's Concentration Class"
 msgid "no noticeable concentration of stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:813
+#: src/core/modules/Nebula.cpp:877
 msgctxt "Trumpler's Concentration Class"
 msgid "a star field condensation"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:816
+#: src/core/modules/Nebula.cpp:880
 msgctxt "Trumpler's Concentration Class"
 msgid "undocumented concentration class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:822
+#: src/core/modules/Nebula.cpp:886
 msgctxt "Trumpler's Brightness Class"
 msgid "small brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:825
+#: src/core/modules/Nebula.cpp:889
 msgctxt "Trumpler's Brightness Class"
 msgid "medium brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:828
+#: src/core/modules/Nebula.cpp:892
 msgctxt "Trumpler's Brightness Class"
 msgid "large brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:831
+#: src/core/modules/Nebula.cpp:895
 msgctxt "Trumpler's Brightness Class"
 msgid "undocumented brightness range of cluster members"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:837
+#: src/core/modules/Nebula.cpp:901
 msgctxt "Trumpler's Number of Members Class"
 msgid "poor cluster with less than 50 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:840
+#: src/core/modules/Nebula.cpp:904
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:843
+#: src/core/modules/Nebula.cpp:907
 msgctxt "Trumpler's Number of Members Class"
 msgid "rich cluster with more than 100 stars"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:846
+#: src/core/modules/Nebula.cpp:910
 msgctxt "Trumpler's Number of Members Class"
 msgid "undocumented number of members class"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:850
+#: src/core/modules/Nebula.cpp:914
 msgctxt "nebulosity factor of open clusters"
 msgid "the cluster lies within nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:871
+#: src/core/modules/Nebula.cpp:935
 msgctxt "Reflection Nebulae Brightness"
 msgid "very bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:874
+#: src/core/modules/Nebula.cpp:938
 msgctxt "Reflection Nebulae Brightness"
 msgid "bright"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:877
+#: src/core/modules/Nebula.cpp:941
 msgctxt "Reflection Nebulae Brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:880
+#: src/core/modules/Nebula.cpp:944
 msgctxt "Reflection Nebulae Brightness"
 msgid "faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:883
+#: src/core/modules/Nebula.cpp:947
 msgctxt "Reflection Nebulae Brightness"
 msgid "very faint"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:886
+#: src/core/modules/Nebula.cpp:950
 msgctxt "Reflection Nebulae Brightness"
 msgid "uncertain brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:889
+#: src/core/modules/Nebula.cpp:953
 msgctxt "Reflection Nebulae Brightness"
 msgid "undocumented brightness of reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:895
+#: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:898
+#: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:901
+#: src/core/modules/Nebula.cpp:965
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:904
+#: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:907
+#: src/core/modules/Nebula.cpp:971
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:910
+#: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
 msgid "undocumented reflection nebulae"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:933
+#: src/core/modules/Nebula.cpp:997
 msgid "circular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:936
+#: src/core/modules/Nebula.cpp:1000
 msgid "elliptical form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:939
+#: src/core/modules/Nebula.cpp:1003
 msgid "irregular form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:942
+#: src/core/modules/Nebula.cpp:1006
 msgid "undocumented form"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:948
+#: src/core/modules/Nebula.cpp:1012
 msgid "amorphous structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:951
+#: src/core/modules/Nebula.cpp:1015
 msgid "conventional structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:954
+#: src/core/modules/Nebula.cpp:1018
 msgid "filamentary structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:957
+#: src/core/modules/Nebula.cpp:1021
 msgid "undocumented structure"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:963
+#: src/core/modules/Nebula.cpp:1027
 msgctxt "HII region brightness"
 msgid "faintest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:966
+#: src/core/modules/Nebula.cpp:1030
 msgctxt "HII region brightness"
 msgid "moderate brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:969
+#: src/core/modules/Nebula.cpp:1033
 msgctxt "HII region brightness"
 msgid "brightest"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:972
+#: src/core/modules/Nebula.cpp:1036
 msgid "undocumented brightness"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:988
+#: src/core/modules/Nebula.cpp:1052
 msgid "galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:991
+#: src/core/modules/Nebula.cpp:1055
 msgid "active galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:994
+#: src/core/modules/Nebula.cpp:1058
 msgid "radio galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:997
+#: src/core/modules/Nebula.cpp:1061
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1000 plugins/Quasars/src/Quasar.cpp:98
+#: src/core/modules/Nebula.cpp:1064 plugins/Quasars/src/Quasar.cpp:98
 msgid "quasar"
 msgstr "類星體"
 
-#: src/core/modules/Nebula.cpp:1003
+#: src/core/modules/Nebula.cpp:1067
 msgid "star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1006
+#: src/core/modules/Nebula.cpp:1070
 msgid "open star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1009
+#: src/core/modules/Nebula.cpp:1073
 msgid "globular star cluster"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1012
+#: src/core/modules/Nebula.cpp:1076
 msgid "nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1015
+#: src/core/modules/Nebula.cpp:1079
 msgid "planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1018
+#: src/core/modules/Nebula.cpp:1082
 msgid "dark nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1021
+#: src/core/modules/Nebula.cpp:1085
 msgid "cluster associated with nebulosity"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1024
+#: src/core/modules/Nebula.cpp:1088
 msgid "bipolar nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1027
+#: src/core/modules/Nebula.cpp:1091
 msgid "emission nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1030
+#: src/core/modules/Nebula.cpp:1094
 msgid "HII region"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1033
+#: src/core/modules/Nebula.cpp:1097
 msgid "reflection nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1036
+#: src/core/modules/Nebula.cpp:1100
 msgid "supernova remnant"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1039
+#: src/core/modules/Nebula.cpp:1103
 msgid "stellar association"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1042
+#: src/core/modules/Nebula.cpp:1106
 msgid "star cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1045
+#: src/core/modules/Nebula.cpp:1109
 msgid "interstellar matter"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1048
+#: src/core/modules/Nebula.cpp:1112
 msgid "emission object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1051
+#: src/core/modules/Nebula.cpp:1115
 msgid "BL Lac object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1054
+#: src/core/modules/Nebula.cpp:1118
 msgid "blazar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1057
+#: src/core/modules/Nebula.cpp:1121
 msgid "molecular cloud"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1060
+#: src/core/modules/Nebula.cpp:1124
 msgid "young stellar object"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1063
+#: src/core/modules/Nebula.cpp:1127
 msgid "possible quasar"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1066
+#: src/core/modules/Nebula.cpp:1130
 msgid "possible planetary nebula"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1069
+#: src/core/modules/Nebula.cpp:1133
 msgid "protoplanetary nebula"
 msgstr ""
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/Nebula.cpp:1072 src/core/modules/StarWrapper.cpp:53
+#: src/core/modules/Nebula.cpp:1136 src/core/modules/StarWrapper.cpp:53
 #: src/core/modules/StarWrapper.cpp:174 src/translations.h:42
 msgid "star"
 msgstr "星星"
 
-#: src/core/modules/Nebula.cpp:1075
+#: src/core/modules/Nebula.cpp:1139
 msgid "object of unknown nature"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1078
+#: src/core/modules/Nebula.cpp:1142
 msgid "undocumented type"
 msgstr ""
 
-#: src/core/modules/NebulaMgr.cpp:224
+#: src/core/modules/NebulaMgr.cpp:266
 msgid "Deep-sky objects"
 msgstr "深空天體"
 
-#: src/core/modules/Planet.cpp:231 src/core/modules/MinorPlanet.cpp:230
-#: src/core/modules/MinorPlanet.cpp:234 src/core/modules/Comet.cpp:194
+#: src/core/modules/Planet.cpp:232 src/core/modules/MinorPlanet.cpp:231
+#: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:194
 #: src/core/modules/StarWrapper.cpp:198 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "絕對星等: %1"
 
-#: src/core/modules/Planet.cpp:249 src/core/modules/MinorPlanet.cpp:247
+#: src/core/modules/Planet.cpp:250 src/core/modules/MinorPlanet.cpp:248
 #: src/core/modules/Comet.cpp:224
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "距離: %1地日距離 (%2 公里)"
 
-#: src/core/modules/Planet.cpp:256 src/core/modules/MinorPlanet.cpp:254
+#: src/core/modules/Planet.cpp:257 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/Comet.cpp:231
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "距離: %1AU (%2 Mio 公里)"
 
-#: src/core/modules/Planet.cpp:270 src/core/modules/Planet.cpp:274
+#: src/core/modules/Planet.cpp:271 src/core/modules/Planet.cpp:275
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "視直徑: %1, 包括光環: %2"
 
-#: src/core/modules/Planet.cpp:281 src/core/modules/Planet.cpp:283
-#: src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:282 src/core/modules/Planet.cpp:284
+#: src/core/modules/MinorPlanet.cpp:266 src/core/modules/MinorPlanet.cpp:268
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "視直徑: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:299 src/core/modules/MinorPlanet.cpp:270
+#: src/core/modules/Planet.cpp:300 src/core/modules/MinorPlanet.cpp:276
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "恆星週期: %1日 (%2 a)"
 
-#: src/core/modules/Planet.cpp:302
+#: src/core/modules/Planet.cpp:303
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "恆星日: %1"
 
-#: src/core/modules/Planet.cpp:303
+#: src/core/modules/Planet.cpp:304
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "平均太陽日: %1"
 
-#: src/core/modules/Planet.cpp:307
+#: src/core/modules/Planet.cpp:308
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:319
-msgid "New Moon"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:321
-msgid "Last Quarter"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:323
-msgid "Full Moon"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:325
-msgid "First Quarter"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:329 src/core/modules/Planet.cpp:334
+#: src/core/modules/Planet.cpp:318 src/core/modules/Planet.cpp:323
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "相角: %1"
 
-#: src/core/modules/Planet.cpp:330 src/core/modules/Planet.cpp:335
+#: src/core/modules/Planet.cpp:319 src/core/modules/Planet.cpp:324
 #, qt-format
 msgid "Elongation: %1"
 msgstr "距角: %1"
 
-#: src/core/modules/Planet.cpp:348
+#: src/core/modules/Planet.cpp:327
 #, qt-format
 msgid "Phase: %1"
 msgstr "相: %1"
 
-#: src/core/modules/Planet.cpp:349
+#: src/core/modules/Planet.cpp:328
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "被照亮: %1%"
 
-#: src/core/modules/Planet.cpp:361
+#: src/core/modules/Planet.cpp:340
 #, qt-format
 msgid "Eclipse Factor: %1%"
 msgstr ""
 
-#: src/core/modules/MinorPlanet.cpp:204
+#: src/core/modules/MinorPlanet.cpp:205
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "臨時編號: %1"
@@ -946,7 +930,7 @@ msgstr ""
 msgid "Zodiacal Light"
 msgstr ""
 
-#: src/core/StelApp.cpp:498
+#: src/core/StelApp.cpp:501
 msgid "Night mode"
 msgstr "夜間模式"
 
@@ -1596,12 +1580,12 @@ msgstr ""
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "銀河經度/緯度: %1/%2"
 
-#: src/core/StelObject.cpp:251
+#: src/core/StelObject.cpp:252
 #, qt-format
 msgid "Mean Sidereal Time: %1"
 msgstr ""
 
-#: src/core/StelObject.cpp:253
+#: src/core/StelObject.cpp:257
 #, qt-format
 msgid "Apparent Sidereal Time: %1"
 msgstr ""
@@ -1659,27 +1643,27 @@ msgstr "已找到"
 msgid "Select screenshot directory"
 msgstr "選擇儲存截圖資料夾"
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:790
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "啟動時視野大小:%1%2"
 
-#: src/gui/ConfigurationDialog.cpp:796
+#: src/gui/ConfigurationDialog.cpp:798
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:853
+#: src/gui/ConfigurationDialog.cpp:855
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid "Authors"
 msgstr "著作群"
 
-#: src/gui/ConfigurationDialog.cpp:854 src/gui/ViewDialog.cpp:669
+#: src/gui/ConfigurationDialog.cpp:856 src/gui/ViewDialog.cpp:675
 msgid "Contact"
 msgstr "聯繫"
 
-#: src/gui/ConfigurationDialog.cpp:856
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
+#: src/gui/ConfigurationDialog.cpp:858
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 #: plugins/Oculars/src/gui/OcularDialog.cpp:540
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
@@ -1693,8 +1677,8 @@ msgstr "聯繫"
 msgid "Version"
 msgstr "版本"
 
-#: src/gui/ConfigurationDialog.cpp:939
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
+#: src/gui/ConfigurationDialog.cpp:941
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:541
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
@@ -1707,23 +1691,23 @@ msgstr "版本"
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:945
 msgid "License"
 msgstr "授權條款"
 
-#: src/gui/ConfigurationDialog.cpp:947
+#: src/gui/ConfigurationDialog.cpp:949
 msgid "Shortcut"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:971
+#: src/gui/ConfigurationDialog.cpp:973
 msgid "Running script: "
 msgstr "執行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:978
+#: src/gui/ConfigurationDialog.cpp:980
 msgid "Running script: [none]"
 msgstr "執行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:1043
+#: src/gui/ConfigurationDialog.cpp:1045
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1731,23 +1715,23 @@ msgstr ""
 "新的星體資料庫經已下載完畢！\n"
 "請重新啟動 Stellarium 以使用新的星體資料庫。"
 
-#: src/gui/ConfigurationDialog.cpp:1047
+#: src/gui/ConfigurationDialog.cpp:1049
 msgid "All available star catalogs have been installed."
 msgstr "所有可用星體資料庫均已安裝"
 
-#: src/gui/ConfigurationDialog.cpp:1052
+#: src/gui/ConfigurationDialog.cpp:1054
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "取得星體資料庫 %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1059
+#: src/gui/ConfigurationDialog.cpp:1061
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "下載中 %1 ..."
 
-#: src/gui/ConfigurationDialog.cpp:1066
+#: src/gui/ConfigurationDialog.cpp:1068
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1758,7 +1742,7 @@ msgstr ""
 "星體數量:%2 百萬\n"
 "星等範圍: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1109 src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1111 src/gui/ConfigurationDialog.cpp:1147
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1767,11 +1751,11 @@ msgstr ""
 "錯誤！下載中 %1：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1198
+#: src/gui/ConfigurationDialog.cpp:1200
 msgid "Verifying file integrity..."
 msgstr "正在檢查檔案完整性..."
 
-#: src/gui/ConfigurationDialog.cpp:1202
+#: src/gui/ConfigurationDialog.cpp:1204
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1781,127 +1765,127 @@ msgstr ""
 "檔案損壞。"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1273
+#: src/gui/ConfigurationDialog.cpp:1275
 msgid "Algorithm of"
 msgstr "演算法"
 
-#: src/gui/ConfigurationDialog.cpp:1284
+#: src/gui/ConfigurationDialog.cpp:1286
 msgid "Without correction"
 msgstr "無修正"
 
-#: src/gui/ConfigurationDialog.cpp:1285
+#: src/gui/ConfigurationDialog.cpp:1287
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1286
+#: src/gui/ConfigurationDialog.cpp:1288
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1287
+#: src/gui/ConfigurationDialog.cpp:1289
 msgid "IAU (1952)"
 msgstr "國際天文聯會 IAU (19520"
 
-#: src/gui/ConfigurationDialog.cpp:1288
+#: src/gui/ConfigurationDialog.cpp:1290
 msgid "Astronomical Ephemeris (1960)"
 msgstr "天文星歷 (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1289
+#: src/gui/ConfigurationDialog.cpp:1291
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1290
+#: src/gui/ConfigurationDialog.cpp:1292
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1291
+#: src/gui/ConfigurationDialog.cpp:1293
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1292
+#: src/gui/ConfigurationDialog.cpp:1294
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1293
+#: src/gui/ConfigurationDialog.cpp:1295
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1294
+#: src/gui/ConfigurationDialog.cpp:1296
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1295
+#: src/gui/ConfigurationDialog.cpp:1297
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1296
+#: src/gui/ConfigurationDialog.cpp:1298
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1297
+#: src/gui/ConfigurationDialog.cpp:1299
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1298
+#: src/gui/ConfigurationDialog.cpp:1300
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1299
+#: src/gui/ConfigurationDialog.cpp:1301
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1300
+#: src/gui/ConfigurationDialog.cpp:1302
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1301
+#: src/gui/ConfigurationDialog.cpp:1303
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1303
+#: src/gui/ConfigurationDialog.cpp:1305
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (與 Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1304
+#: src/gui/ConfigurationDialog.cpp:1306
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1305
+#: src/gui/ConfigurationDialog.cpp:1307
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1306
+#: src/gui/ConfigurationDialog.cpp:1308
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1307
+#: src/gui/ConfigurationDialog.cpp:1309
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1308
+#: src/gui/ConfigurationDialog.cpp:1310
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1310
+#: src/gui/ConfigurationDialog.cpp:1312
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1313
+#: src/gui/ConfigurationDialog.cpp:1315
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1314
+#: src/gui/ConfigurationDialog.cpp:1316
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1315
+#: src/gui/ConfigurationDialog.cpp:1317
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1316
+#: src/gui/ConfigurationDialog.cpp:1318
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1317
+#: src/gui/ConfigurationDialog.cpp:1319
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "自定 %1T公式"
@@ -2062,7 +2046,7 @@ msgid "OSX Developer: %1"
 msgstr "OSX開發: %1"
 
 #: src/gui/HelpDialog.cpp:315
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:542
 msgid "Contributors"
 msgstr "貢獻者"
@@ -2185,111 +2169,111 @@ msgid "Frames per second"
 msgstr "每秒格數"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:538
+#: src/gui/ViewDialog.cpp:544
 msgid "Excellent dark-sky site"
 msgstr "極好黑暗星空地點"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:540
+#: src/gui/ViewDialog.cpp:546
 msgid "Typical truly dark site"
 msgstr "一般好黑暗星空地點"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:542
+#: src/gui/ViewDialog.cpp:548
 msgid "Rural sky"
 msgstr "鄉郊星空"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:544
+#: src/gui/ViewDialog.cpp:550
 msgid "Rural/suburban transition"
 msgstr "鄉郊/市郊過渡"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:546
+#: src/gui/ViewDialog.cpp:552
 msgid "Suburban sky"
 msgstr "市郊星空"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:548
+#: src/gui/ViewDialog.cpp:554
 msgid "Bright suburban sky"
 msgstr "光明市郊星空"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:550
+#: src/gui/ViewDialog.cpp:556
 msgid "Suburban/urban transition"
 msgstr "市郊/城市過渡"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:552
+#: src/gui/ViewDialog.cpp:558
 msgid "City sky"
 msgstr "城市星空"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:554
+#: src/gui/ViewDialog.cpp:560
 msgid "Inner-city sky"
 msgstr "市中心星空"
 
-#: src/gui/ViewDialog.cpp:568
+#: src/gui/ViewDialog.cpp:574
 msgid "The naked-eye limiting magnitude is"
 msgstr "肉眼可見最小星等是"
 
-#: src/gui/ViewDialog.cpp:592
+#: src/gui/ViewDialog.cpp:598
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:593
+#: src/gui/ViewDialog.cpp:599
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:594
+#: src/gui/ViewDialog.cpp:600
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:718
+#: src/gui/ViewDialog.cpp:724
 msgid "No description"
 msgstr "沒有資訊"
 
-#: src/gui/ViewDialog.cpp:811
+#: src/gui/ViewDialog.cpp:817
 msgid "No shooting stars"
 msgstr "無流星"
 
-#: src/gui/ViewDialog.cpp:819
+#: src/gui/ViewDialog.cpp:825
 msgid "Normal rate"
 msgstr "正常頻率"
 
-#: src/gui/ViewDialog.cpp:822
+#: src/gui/ViewDialog.cpp:828
 msgid "Standard Orionids rate"
 msgstr "標準獵戶座流星雨率"
 
-#: src/gui/ViewDialog.cpp:825
+#: src/gui/ViewDialog.cpp:831
 msgid "Standard Perseids rate"
 msgstr "標準英仙座流星雨頻率"
 
-#: src/gui/ViewDialog.cpp:828
+#: src/gui/ViewDialog.cpp:834
 msgid "Standard Geminids rate"
 msgstr "標準雙子座流星雨率"
 
-#: src/gui/ViewDialog.cpp:831
+#: src/gui/ViewDialog.cpp:837
 msgid "Exceptional Perseid rate"
 msgstr "特殊英仙座流星雨率"
 
-#: src/gui/ViewDialog.cpp:834
+#: src/gui/ViewDialog.cpp:840
 msgid "Meteor storm rate"
 msgstr "流星雨數量"
 
-#: src/gui/ViewDialog.cpp:837
+#: src/gui/ViewDialog.cpp:843
 msgid "Exceptional Draconid rate"
 msgstr "特殊天龍座流星雨率"
 
-#: src/gui/ViewDialog.cpp:840
+#: src/gui/ViewDialog.cpp:846
 msgid "Exceptional Leonid rate"
 msgstr "超量獅子座流星雨"
 
-#: src/gui/ViewDialog.cpp:843
+#: src/gui/ViewDialog.cpp:849
 msgid "Very high rate (1966 Leonids)"
 msgstr "非常高 (1966獅子座的流星雨)"
 
-#: src/gui/ViewDialog.cpp:846
+#: src/gui/ViewDialog.cpp:852
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "有史以來最高 (1833獅子座的流星雨)"
 
@@ -2745,582 +2729,587 @@ msgid "Moons"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:83
+#: src/translations.h:80
+msgid "Constellations"
+msgstr "星座"
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:85
 msgid "Bright galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:85
+#: src/translations.h:87
 msgid "Open star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:87
+#: src/translations.h:89
 msgid "Globular star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:89
+#: src/translations.h:91
 msgid "Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:91
+#: src/translations.h:93
 msgid "Planetary nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:93
+#: src/translations.h:95
 msgid "Dark nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:95
+#: src/translations.h:97
 msgid "Clusters associated with nebulosity"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:97
+#: src/translations.h:99
 msgid "HII regions"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:99
+#: src/translations.h:101
 msgid "Reflection nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:101 src/ui_viewDialog.h:1709
+#: src/translations.h:103 src/ui_viewDialog.h:1704
 msgid "Active galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:103
+#: src/translations.h:105
 msgid "Radio galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:105 src/ui_viewDialog.h:1703
+#: src/translations.h:107 src/ui_viewDialog.h:1698
 msgid "Interacting galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:107
+#: src/translations.h:109
 msgid "Bright quasars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109 src/ui_viewDialog.h:1706
+#: src/translations.h:111 src/ui_viewDialog.h:1701
 msgid "Star clusters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:111
+#: src/translations.h:113
 msgid "Stellar associations"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:113
+#: src/translations.h:115
 msgid "Star clouds"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:115
+#: src/translations.h:117
 msgid "Bipolar nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:117
+#: src/translations.h:119
 msgid "Emission nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:119 src/ui_viewDialog.h:1702
+#: src/translations.h:121 src/ui_viewDialog.h:1697
 msgid "Supernova remnants"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:121
+#: src/translations.h:123
 msgid "Interstellar matter"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:123
+#: src/translations.h:125
 msgid "Emission objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:125
+#: src/translations.h:127
 msgid "BL Lac objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:127
+#: src/translations.h:129
 msgid "Blazars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:129
+#: src/translations.h:131
 msgid "Molecular Clouds"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:131
+#: src/translations.h:133
 msgid "Young Stellar Objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:133
+#: src/translations.h:135
 msgid "Possible Quasars"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:135
+#: src/translations.h:137
 msgid "Possible Planetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:137
+#: src/translations.h:139
 msgid "Protoplanetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:139 src/ui_viewDialog.h:1666
+#: src/translations.h:141 src/ui_viewDialog.h:1661
 msgid "Messier Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:141 src/ui_viewDialog.h:1669
+#: src/translations.h:143 src/ui_viewDialog.h:1664
 msgid "Caldwell Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:143
+#: src/translations.h:145
 msgid "Barnard Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:145
+#: src/translations.h:147
 msgid "Sharpless Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:147
+#: src/translations.h:149
 msgid "Van den Bergh Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:149
+#: src/translations.h:151
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:151
+#: src/translations.h:153
 msgid "Collinder Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/translations.h:153
+#: src/translations.h:155
 msgid "Melotte Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:155
+#: src/translations.h:157
 msgid "Dwarf galaxies"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:160
+#: src/translations.h:162
 msgid "Interesting double stars"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:162
+#: src/translations.h:164
 msgid "Interesting variable stars"
 msgstr ""
 
-#: src/translations.h:166
+#: src/translations.h:168
 msgid "Arabic"
 msgstr "阿拉伯文"
 
-#: src/translations.h:167
+#: src/translations.h:169
 msgid "Arabic Moon Stations"
 msgstr ""
 
-#: src/translations.h:168
+#: src/translations.h:170
 msgid "Aztec"
 msgstr "阿茲特克"
 
-#: src/translations.h:169
+#: src/translations.h:171
 msgid "Boorong"
 msgstr ""
 
-#: src/translations.h:170
+#: src/translations.h:172
 msgid "Chinese"
 msgstr "中國"
 
-#: src/translations.h:171
+#: src/translations.h:173
 msgid "Egyptian"
 msgstr "埃及"
 
-#: src/translations.h:172
+#: src/translations.h:174
 msgid "Inuit"
 msgstr "因努伊特 (北極)"
 
-#: src/translations.h:173
+#: src/translations.h:175
 msgid "Indian Vedic"
 msgstr "印度吠陀占星學"
 
-#: src/translations.h:174
+#: src/translations.h:176
 msgid "Japanese Moon Stations"
 msgstr ""
 
-#: src/translations.h:175
+#: src/translations.h:177
 msgid "Korean"
 msgstr "韓語"
 
-#: src/translations.h:176
+#: src/translations.h:178
 msgid "Lakota"
 msgstr "拉科塔语"
 
-#: src/translations.h:177
+#: src/translations.h:179
 msgid "Maori"
 msgstr "毛利語"
 
-#: src/translations.h:178
+#: src/translations.h:180
 msgid "Mongolian"
 msgstr ""
 
-#: src/translations.h:179
+#: src/translations.h:181
 msgid "Navajo"
 msgstr "那瓦霍语"
 
-#: src/translations.h:180
+#: src/translations.h:182
 msgid "Norse"
 msgstr "挪威"
 
-#: src/translations.h:181
+#: src/translations.h:183
 msgid "Polynesian"
 msgstr "玻里尼亞人"
 
-#: src/translations.h:182
+#: src/translations.h:184
 msgid "Romanian"
 msgstr "羅馬尼亞"
 
-#: src/translations.h:183
+#: src/translations.h:185
 msgid "Sami"
 msgstr "薩米語"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:185
+#: src/translations.h:187
 msgid "Siberian"
 msgstr ""
 
-#: src/translations.h:186
+#: src/translations.h:188
 msgid "Tukano"
 msgstr ""
 
-#: src/translations.h:187
+#: src/translations.h:189
 msgid "Tupi-Guarani"
 msgstr "圖皮-瓜拉尼諸(南美)"
 
-#: src/translations.h:188
+#: src/translations.h:190
 msgid "Tongan"
 msgstr "東加王國"
 
-#: src/translations.h:189
+#: src/translations.h:191
 msgid "Western"
 msgstr "西方"
 
-#: src/translations.h:190
+#: src/translations.h:192
 msgid "Western (H.A.Rey)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:196
+#: src/translations.h:198
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:198
+#: src/translations.h:200
 msgid "Trees"
 msgstr "樹林"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:200 plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
+#: src/translations.h:202 plugins/ArchaeoLines/src/ArchaeoLines.cpp:779
 msgid "Moon"
 msgstr "月球"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:202
+#: src/translations.h:204
 msgid "Hurricane"
 msgstr "風雪"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:204
+#: src/translations.h:206
 msgid "Ocean"
 msgstr "海洋"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:206
+#: src/translations.h:208
 msgid "Garching"
 msgstr "花園"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:208 plugins/ArchaeoLines/src/ArchaeoLines.cpp:788
+#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:791
 msgid "Mars"
 msgstr "火星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210 plugins/ArchaeoLines/src/ArchaeoLines.cpp:791
+#: src/translations.h:212 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
 msgid "Jupiter"
 msgstr "木星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:212 plugins/ArchaeoLines/src/ArchaeoLines.cpp:794
+#: src/translations.h:214 plugins/ArchaeoLines/src/ArchaeoLines.cpp:797
 msgid "Saturn"
 msgstr "土星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:214
+#: src/translations.h:216
 msgid "Uranus"
 msgstr "天王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:216
+#: src/translations.h:218
 msgid "Neptune"
 msgstr "海王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218
+#: src/translations.h:220
 msgid "Geneva"
 msgstr "日內瓦"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:220
+#: src/translations.h:222
 msgid "Grossmugl"
 msgstr "奧地利大穆格爾市鎮"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:222
+#: src/translations.h:224
 msgid "Zero Horizon"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:227
+#: src/translations.h:229
 msgid "Vienna Sterngarten"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:229
+#: src/translations.h:231
 msgid "Testscene"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:234
+#: src/translations.h:236
 msgid "Landscape Tour"
 msgstr "地型嚮導"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:236
+#: src/translations.h:238
 msgid "Partial Lunar Eclipse"
 msgstr "月偏食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:238
+#: src/translations.h:240
 msgid "Total Lunar Eclipse"
 msgstr "月全食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:240
+#: src/translations.h:242
 msgid "Screensaver"
 msgstr "螢幕保護程式"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:242
+#: src/translations.h:244
 msgid "Solar Eclipse 2009"
 msgstr "2009日全食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:244
+#: src/translations.h:246
 msgid "Startup Script"
 msgstr "啟動時自動執行劇本"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:246
+#: src/translations.h:248
 msgid "Zodiac"
 msgstr "十二生肖"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:248
+#: src/translations.h:250
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "水星三重日出和日落"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:250
+#: src/translations.h:252
 msgid "Double eclipse from Deimos in 2017"
 msgstr "從火衛二在2017年雙食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:252
+#: src/translations.h:254
 msgid "Double eclipse from Deimos in 2031"
 msgstr "從火衛二在2031雙食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:254
+#: src/translations.h:256
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "從奧林帕斯山2068年1月10日日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:256
+#: src/translations.h:258
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "地球和木星2048掩星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:258
+#: src/translations.h:260
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "從火衛二2027的3凌和2食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:260
+#: src/translations.h:262
 msgid "Solar System Screensaver"
 msgstr "太陽系屏幕保護程式"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:262
+#: src/translations.h:264
 msgid "Constellations Tour"
 msgstr "星座之旅"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:264
+#: src/translations.h:266
 msgid "Sun from different planets"
 msgstr "從不同行星的太陽"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:266
+#: src/translations.h:268
 msgid "Earth best views from other bodies"
 msgstr "從其他天體望往地球"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:268
+#: src/translations.h:270
 msgid "Transit of Venus"
 msgstr "金星凌日"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:270
+#: src/translations.h:272
 msgid "Analemma"
 msgstr "日行跡"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:272
+#: src/translations.h:274
 msgid "Sky Culture Tour"
 msgstr "天空文化之旅"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:274
+#: src/translations.h:276
 msgid "Earth Events from Mercury"
 msgstr "從水星看地球活動"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:276
+#: src/translations.h:278
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:278
+#: src/translations.h:280
 msgid "Earth Events from Mars"
 msgstr "從火星看地球活動"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:280
+#: src/translations.h:282
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:282
+#: src/translations.h:284
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:284
+#: src/translations.h:286
 msgid "Tycho's Supernova"
 msgstr "第谷超新星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:286
+#: src/translations.h:288
 msgid "Earth and other Planets from Ceres"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:292
+#: src/translations.h:294
 msgid "Look around each installed landscape."
 msgstr "環顧每個已安裝的地型."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:294
+#: src/translations.h:296
 msgid "Look at each installed sky culture."
 msgstr "看看每個已安裝的星空文化."
 
-#: src/translations.h:295
+#: src/translations.h:297
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "展示一個月偏食的劇本."
 
-#: src/translations.h:296
+#: src/translations.h:298
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "展示一個日全食的劇本."
 
-#: src/translations.h:297
+#: src/translations.h:299
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "緩慢而永不完結天空之旅, 看隨機對象."
 
-#: src/translations.h:298
+#: src/translations.h:300
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "展示一個2009年日全食的劇本 (位置: 孟加拉國朗布爾)."
 
-#: src/translations.h:299
+#: src/translations.h:301
 msgid "Script which runs automatically at startup"
 msgstr "啟動時自動執行之劇本"
 
-#: src/translations.h:300
+#: src/translations.h:302
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr "此劇本顯示十二生肖星座. 這劇本會沿著太陽一年在天球經過的星座."
 
-#: src/translations.h:301
+#: src/translations.h:303
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr "由於水星怪異的軌道和圍著太陽某個點旋轉, 在一個水星日會有3個日出."
 
-#: src/translations.h:302
+#: src/translations.h:304
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr "就在火星食太陽一刻, 火衛一彈出從後面先食了. 發生天蠍座和射手座之間, 2017年4月26日."
 
-#: src/translations.h:303
+#: src/translations.h:305
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr "就在火星食太陽一刻, 火衛一彈出從後面先食了. 發生金牛座和雙子座之間, 2031年7月23日."
 
-#: src/translations.h:304
+#: src/translations.h:306
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "從奧林帕斯山看2068年1月10日火衛一食太陽."
 
-#: src/translations.h:305
+#: src/translations.h:307
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:306
+#: src/translations.h:308
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -3330,47 +3319,47 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:307
+#: src/translations.h:309
 msgid ""
 "Screensaver of various happenings in the Solar System. 248 events in all!"
 msgstr ""
 
-#: src/translations.h:308
+#: src/translations.h:310
 msgid "A tour of the western constellations."
 msgstr "西方星座漫遊"
 
-#: src/translations.h:309
+#: src/translations.h:311
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "從太陽系的大行星與冥王星看太陽."
 
-#: src/translations.h:310
+#: src/translations.h:312
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "在澳洲悉尼所見的金星凌日, 2012年6月6日"
 
-#: src/translations.h:312
+#: src/translations.h:314
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "日行跡演示 - 一年當中每天同一時刻太陽所在位置描出的軌跡."
 
-#: src/translations.h:313
+#: src/translations.h:315
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:314
+#: src/translations.h:316
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
 
-#: src/translations.h:315
+#: src/translations.h:317
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -3378,997 +3367,997 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:316
+#: src/translations.h:318
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-3000"
 msgstr ""
 
-#: src/translations.h:320
+#: src/translations.h:322
 msgid "Andorra"
 msgstr "安道爾"
 
-#: src/translations.h:321
+#: src/translations.h:323
 msgid "United Arab Emirates"
 msgstr "阿聯酋"
 
-#: src/translations.h:322
+#: src/translations.h:324
 msgid "Afghanistan"
 msgstr "阿富汗"
 
-#: src/translations.h:323
+#: src/translations.h:325
 msgid "Antigua and Barbuda"
 msgstr "安地卡及巴布達"
 
-#: src/translations.h:324
+#: src/translations.h:326
 msgid "Anguilla"
 msgstr "安圭拉"
 
-#: src/translations.h:325
+#: src/translations.h:327
 msgid "Albania"
 msgstr "阿爾巴尼亞"
 
-#: src/translations.h:326
+#: src/translations.h:328
 msgid "Armenia"
 msgstr "亞美尼亞"
 
-#: src/translations.h:327
+#: src/translations.h:329
 msgid "Netherlands Antilles"
 msgstr "荷屬安地列斯"
 
-#: src/translations.h:328
+#: src/translations.h:330
 msgid "Angola"
 msgstr "安哥拉"
 
-#: src/translations.h:329
+#: src/translations.h:331
 msgid "Antarctica"
 msgstr "南極洲"
 
-#: src/translations.h:330
+#: src/translations.h:332
 msgid "Argentina"
 msgstr "阿根廷"
 
-#: src/translations.h:331
+#: src/translations.h:333
 msgid "American Samoa"
 msgstr "美屬薩摩亞"
 
-#: src/translations.h:332
+#: src/translations.h:334
 msgid "Austria"
 msgstr "奧地利"
 
-#: src/translations.h:333
+#: src/translations.h:335
 msgid "Australia"
 msgstr "澳洲"
 
-#: src/translations.h:334
+#: src/translations.h:336
 msgid "Aruba"
 msgstr "阿魯巴"
 
-#: src/translations.h:335
+#: src/translations.h:337
 msgid "Azerbaijan"
 msgstr "亞塞拜然"
 
-#: src/translations.h:336
+#: src/translations.h:338
 msgid "Bosnia and Herzegowina"
 msgstr "波士尼亞赫塞哥維納"
 
-#: src/translations.h:337
+#: src/translations.h:339
 msgid "Barbados"
 msgstr "巴貝多"
 
-#: src/translations.h:338
+#: src/translations.h:340
 msgid "Bangladesh"
 msgstr "孟加拉"
 
-#: src/translations.h:339
+#: src/translations.h:341
 msgid "Belgium"
 msgstr "比利時"
 
-#: src/translations.h:340
+#: src/translations.h:342
 msgid "Burkina Faso"
 msgstr "布吉納法索"
 
-#: src/translations.h:341
+#: src/translations.h:343
 msgid "Bulgaria"
 msgstr "保加利亞"
 
-#: src/translations.h:342
+#: src/translations.h:344
 msgid "Bahrain"
 msgstr "巴林"
 
-#: src/translations.h:343
+#: src/translations.h:345
 msgid "Burundi"
 msgstr "蒲隆地"
 
-#: src/translations.h:344
+#: src/translations.h:346
 msgid "Benin"
 msgstr "貝南"
 
-#: src/translations.h:345
+#: src/translations.h:347
 msgid "Bermuda"
 msgstr "百慕達"
 
-#: src/translations.h:346
+#: src/translations.h:348
 msgid "Brunei Darussalam"
 msgstr "汶萊"
 
-#: src/translations.h:347
+#: src/translations.h:349
 msgid "Bolivia"
 msgstr "玻利維亞"
 
-#: src/translations.h:348
+#: src/translations.h:350
 msgid "Brazil"
 msgstr "巴西"
 
-#: src/translations.h:349
+#: src/translations.h:351
 msgid "Bahamas"
 msgstr "巴哈馬羣島"
 
-#: src/translations.h:350
+#: src/translations.h:352
 msgid "Bhutan"
 msgstr "不丹"
 
-#: src/translations.h:351
+#: src/translations.h:353
 msgid "Bouvet Island"
 msgstr "波維特島"
 
-#: src/translations.h:352
+#: src/translations.h:354
 msgid "Botswana"
 msgstr "波札那"
 
-#: src/translations.h:353
+#: src/translations.h:355
 msgid "Belarus"
 msgstr "白俄羅斯"
 
-#: src/translations.h:354
+#: src/translations.h:356
 msgid "Belize"
 msgstr "貝里斯"
 
-#: src/translations.h:355
+#: src/translations.h:357
 msgid "Canada"
 msgstr "加拿大"
 
-#: src/translations.h:356
+#: src/translations.h:358
 msgid "Cocos Islands"
 msgstr "科科斯羣島"
 
-#: src/translations.h:357
+#: src/translations.h:359
 msgid "Democratic Republic of the Congo"
 msgstr "剛果民主共和國"
 
-#: src/translations.h:358
+#: src/translations.h:360
 msgid "Central African Republic"
 msgstr "中非共和國"
 
-#: src/translations.h:359
+#: src/translations.h:361
 msgid "Republic of the Congo"
 msgstr "剛果共和國"
 
-#: src/translations.h:360
+#: src/translations.h:362
 msgid "Switzerland"
 msgstr "瑞士"
 
-#: src/translations.h:361
+#: src/translations.h:363
 msgid "Cote d'Ivoire"
 msgstr "象牙海岸"
 
-#: src/translations.h:362
+#: src/translations.h:364
 msgid "Cook Islands"
 msgstr "庫克羣島"
 
-#: src/translations.h:363
+#: src/translations.h:365
 msgid "Chile"
 msgstr "智利"
 
-#: src/translations.h:364
+#: src/translations.h:366
 msgid "Cameroon"
 msgstr "喀麥隆"
 
-#: src/translations.h:365
+#: src/translations.h:367
 msgid "China"
 msgstr "中國"
 
-#: src/translations.h:366
+#: src/translations.h:368
 msgid "Colombia"
 msgstr "哥倫比亞"
 
-#: src/translations.h:367
+#: src/translations.h:369
 msgid "Costa Rica"
 msgstr "哥斯達黎加"
 
-#: src/translations.h:368
+#: src/translations.h:370
 msgid "Serbia and Montenegro"
 msgstr "塞爾維亞和黑山"
 
-#: src/translations.h:369
+#: src/translations.h:371
 msgid "Cuba"
 msgstr "古巴"
 
-#: src/translations.h:370
+#: src/translations.h:372
 msgid "Cape Verde"
 msgstr "維德角"
 
-#: src/translations.h:371
+#: src/translations.h:373
 msgid "Christmas Island"
 msgstr "聖誕島"
 
-#: src/translations.h:372
+#: src/translations.h:374
 msgid "Cyprus"
 msgstr "賽普勒斯"
 
-#: src/translations.h:373
+#: src/translations.h:375
 msgid "Czech Republic"
 msgstr "捷克共和國"
 
-#: src/translations.h:374
+#: src/translations.h:376
 msgid "Germany"
 msgstr "德國"
 
-#: src/translations.h:375
+#: src/translations.h:377
 msgid "Djibouti"
 msgstr "吉布地"
 
-#: src/translations.h:376
+#: src/translations.h:378
 msgid "Denmark"
 msgstr "丹麥"
 
-#: src/translations.h:377
+#: src/translations.h:379
 msgid "Dominica"
 msgstr "多明尼加"
 
-#: src/translations.h:378
+#: src/translations.h:380
 msgid "Dominican Republic"
 msgstr "多明尼加共和國"
 
-#: src/translations.h:379
+#: src/translations.h:381
 msgid "Algeria"
 msgstr "阿爾及利亞"
 
-#: src/translations.h:380
+#: src/translations.h:382
 msgid "Ecuador"
 msgstr "厄瓜多爾"
 
-#: src/translations.h:381
+#: src/translations.h:383
 msgid "Estonia"
 msgstr "愛沙尼亞"
 
-#: src/translations.h:382
+#: src/translations.h:384
 msgid "Egypt"
 msgstr "埃及"
 
-#: src/translations.h:383
+#: src/translations.h:385
 msgid "Western Sahara"
 msgstr "西撒哈拉"
 
-#: src/translations.h:384
+#: src/translations.h:386
 msgid "Eritrea"
 msgstr "厄利垂亞"
 
-#: src/translations.h:385
+#: src/translations.h:387
 msgid "Spain"
 msgstr "西班牙"
 
-#: src/translations.h:386
+#: src/translations.h:388
 msgid "Ethiopia"
 msgstr "埃塞俄比亞"
 
-#: src/translations.h:387
+#: src/translations.h:389
 msgid "Finland"
 msgstr "芬蘭"
 
-#: src/translations.h:388
+#: src/translations.h:390
 msgid "Fiji"
 msgstr "斐濟"
 
-#: src/translations.h:389
+#: src/translations.h:391
 msgid "Falkland Islands"
 msgstr "福克蘭群島"
 
-#: src/translations.h:390
+#: src/translations.h:392
 msgid "Micronesia"
 msgstr "密克羅西尼亞"
 
-#: src/translations.h:391
+#: src/translations.h:393
 msgid "Faroe Islands"
 msgstr "法羅羣島"
 
-#: src/translations.h:392
+#: src/translations.h:394
 msgid "France"
 msgstr "法國"
 
-#: src/translations.h:393
+#: src/translations.h:395
 msgid "Gabon"
 msgstr "加彭"
 
-#: src/translations.h:394
+#: src/translations.h:396
 msgid "United Kingdom"
 msgstr "英國"
 
-#: src/translations.h:395
+#: src/translations.h:397
 msgid "Grenada"
 msgstr "格瑞那達"
 
-#: src/translations.h:396
+#: src/translations.h:398
 msgid "Georgia"
 msgstr "格魯吉亞"
 
-#: src/translations.h:397
+#: src/translations.h:399
 msgid "French Guiana"
 msgstr "法屬圭亞那"
 
-#: src/translations.h:398
+#: src/translations.h:400
 msgid "Ghana"
 msgstr "加納"
 
-#: src/translations.h:399
+#: src/translations.h:401
 msgid "Gibraltar"
 msgstr "直布羅陀"
 
-#: src/translations.h:400
+#: src/translations.h:402
 msgid "Greenland"
 msgstr "格陵蘭"
 
-#: src/translations.h:401
+#: src/translations.h:403
 msgid "Gambia"
 msgstr "岡比亞"
 
-#: src/translations.h:402
+#: src/translations.h:404
 msgid "Guinea"
 msgstr "畿內亞"
 
-#: src/translations.h:403
+#: src/translations.h:405
 msgid "Guadeloupe"
 msgstr "瓜德魯普島"
 
-#: src/translations.h:404
+#: src/translations.h:406
 msgid "Equatorial Guinea"
 msgstr "赤道畿內亞"
 
-#: src/translations.h:405
+#: src/translations.h:407
 msgid "Greece"
 msgstr "希臘"
 
-#: src/translations.h:406
+#: src/translations.h:408
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "南喬治亞島和南桑威奇羣島"
 
-#: src/translations.h:407
+#: src/translations.h:409
 msgid "Guatemala"
 msgstr "危地馬拉"
 
-#: src/translations.h:408
+#: src/translations.h:410
 msgid "Guam"
 msgstr "關島"
 
-#: src/translations.h:409
+#: src/translations.h:411
 msgid "Guinea-Bissau"
 msgstr "畿內亞比索"
 
-#: src/translations.h:410
+#: src/translations.h:412
 msgid "Guyana"
 msgstr "圭亞那"
 
-#: src/translations.h:411
+#: src/translations.h:413
 msgid "Hong Kong"
 msgstr "香港"
 
-#: src/translations.h:412
+#: src/translations.h:414
 msgid "Heard Island and McDonald Islands"
 msgstr "赫德島與麥當勞群島"
 
-#: src/translations.h:413
+#: src/translations.h:415
 msgid "Honduras"
 msgstr "洪都拉斯"
 
-#: src/translations.h:414
+#: src/translations.h:416
 msgid "Croatia"
 msgstr "克羅地亞"
 
-#: src/translations.h:415
+#: src/translations.h:417
 msgid "Haiti"
 msgstr "海地"
 
-#: src/translations.h:416
+#: src/translations.h:418
 msgid "Hungary"
 msgstr "匈牙利"
 
-#: src/translations.h:417
+#: src/translations.h:419
 msgid "Indonesia"
 msgstr "印度尼西亞"
 
-#: src/translations.h:418
+#: src/translations.h:420
 msgid "Ireland"
 msgstr "愛爾蘭"
 
-#: src/translations.h:419
+#: src/translations.h:421
 msgid "Israel"
 msgstr "以色列"
 
-#: src/translations.h:420
+#: src/translations.h:422
 msgid "India"
 msgstr "印度"
 
-#: src/translations.h:421
+#: src/translations.h:423
 msgid "British Indian Ocean Territory"
 msgstr "英屬印度洋領地"
 
-#: src/translations.h:422
+#: src/translations.h:424
 msgid "Iraq"
 msgstr "伊拉克"
 
-#: src/translations.h:423
+#: src/translations.h:425
 msgid "Iran"
 msgstr "伊朗"
 
-#: src/translations.h:424
+#: src/translations.h:426
 msgid "Iceland"
 msgstr "冰島"
 
-#: src/translations.h:425
+#: src/translations.h:427
 msgid "Italy"
 msgstr "意大利"
 
-#: src/translations.h:426
+#: src/translations.h:428
 msgid "Jamaica"
 msgstr "牙買加"
 
-#: src/translations.h:427
+#: src/translations.h:429
 msgid "Jordan"
 msgstr "約旦"
 
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "Japan"
 msgstr "日本"
 
-#: src/translations.h:429
+#: src/translations.h:431
 msgid "Kenya"
 msgstr "肯亞"
 
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "Kyrgyzstan"
 msgstr "吉爾吉斯"
 
-#: src/translations.h:431
+#: src/translations.h:433
 msgid "Cambodia"
 msgstr "柬埔寨"
 
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Kiribati"
 msgstr "基里巴斯"
 
-#: src/translations.h:433
+#: src/translations.h:435
 msgid "Comoros"
 msgstr "科摩羅"
 
-#: src/translations.h:434
+#: src/translations.h:436
 msgid "Saint Kitts and Nevis"
 msgstr "聖基茨和尼維斯聯邦"
 
-#: src/translations.h:435
+#: src/translations.h:437
 msgid "Democratic People's Republic of Korea"
 msgstr "北韓"
 
-#: src/translations.h:436
+#: src/translations.h:438
 msgid "Republic of Korea"
 msgstr "南韓"
 
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Kuwait"
 msgstr "科威特"
 
-#: src/translations.h:438
+#: src/translations.h:440
 msgid "Cayman Islands"
 msgstr "開曼群島"
 
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Kazakhstan"
 msgstr "哈薩克"
 
-#: src/translations.h:440
+#: src/translations.h:442
 msgid "Lao"
 msgstr "寮國"
 
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "Lebanon"
 msgstr "黎巴嫩"
 
-#: src/translations.h:442
+#: src/translations.h:444
 msgid "Saint Lucia"
 msgstr "聖盧西亞"
 
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Liechtenstein"
 msgstr "列支敦斯登"
 
-#: src/translations.h:444
+#: src/translations.h:446
 msgid "Sri Lanka"
 msgstr "斯里蘭卡"
 
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Liberia"
 msgstr "利比里亞"
 
-#: src/translations.h:446
+#: src/translations.h:448
 msgid "Lesotho"
 msgstr "萊索托"
 
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "Lithuania"
 msgstr "立陶宛"
 
-#: src/translations.h:448
+#: src/translations.h:450
 msgid "Luxembourg"
 msgstr "盧森堡"
 
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "Latvia"
 msgstr "拉脫維亞"
 
-#: src/translations.h:450
+#: src/translations.h:452
 msgid "Libyan Arab Jamahiriya"
 msgstr "利比亞"
 
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Morocco"
 msgstr "摩洛哥"
 
-#: src/translations.h:452
+#: src/translations.h:454
 msgid "Monaco"
 msgstr "摩納哥"
 
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "Moldova"
 msgstr "摩爾多瓦"
 
-#: src/translations.h:454
+#: src/translations.h:456
 msgid "Madagascar"
 msgstr "馬達加斯加"
 
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "Marshall Islands"
 msgstr "馬紹爾群島"
 
-#: src/translations.h:456
+#: src/translations.h:458
 msgid "Macedonia"
 msgstr "馬其頓"
 
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Mali"
 msgstr "馬里"
 
-#: src/translations.h:458
+#: src/translations.h:460
 msgid "Myanmar"
 msgstr "緬甸"
 
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Mongolia"
 msgstr "蒙古"
 
-#: src/translations.h:460
+#: src/translations.h:462
 msgid "Macau"
 msgstr "澳門"
 
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Northern Mariana Islands"
 msgstr "北馬里亞納群島"
 
-#: src/translations.h:462
+#: src/translations.h:464
 msgid "Martinique"
 msgstr "法屬馬丁尼克"
 
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Mauritania"
 msgstr "毛里塔尼亞"
 
-#: src/translations.h:464
+#: src/translations.h:466
 msgid "Montserrat"
 msgstr "蒙的塞拉特"
 
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Malta"
 msgstr "馬耳他"
 
-#: src/translations.h:466
+#: src/translations.h:468
 msgid "Mauritius"
 msgstr "毛里裘斯"
 
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Maldives"
 msgstr "馬爾代夫"
 
-#: src/translations.h:468
+#: src/translations.h:470
 msgid "Malawi"
 msgstr "馬拉威"
 
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Mexico"
 msgstr "墨西哥"
 
-#: src/translations.h:470
+#: src/translations.h:472
 msgid "Malaysia"
 msgstr "馬來西亞"
 
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Mozambique"
 msgstr "莫三比克"
 
-#: src/translations.h:472
+#: src/translations.h:474
 msgid "Namibia"
 msgstr "納米比亞"
 
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "New Caledonia"
 msgstr "新喀里多尼亞"
 
-#: src/translations.h:474
+#: src/translations.h:476
 msgid "Niger"
 msgstr "尼日爾"
 
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Norfolk Island"
 msgstr "諾福克羣島"
 
-#: src/translations.h:476
+#: src/translations.h:478
 msgid "Nigeria"
 msgstr "尼日利亞"
 
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Nicaragua"
 msgstr "尼加拉瓜"
 
-#: src/translations.h:478
+#: src/translations.h:480
 msgid "Netherlands"
 msgstr "荷蘭"
 
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Norway"
 msgstr "挪威"
 
-#: src/translations.h:480
+#: src/translations.h:482
 msgid "Nepal"
 msgstr "尼泊爾"
 
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Nauru"
 msgstr "瑙魯"
 
-#: src/translations.h:482
+#: src/translations.h:484
 msgid "Niue"
 msgstr "紐埃"
 
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "New Zealand"
 msgstr "新西蘭"
 
-#: src/translations.h:484
+#: src/translations.h:486
 msgid "Oman"
 msgstr "阿曼"
 
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Panama"
 msgstr "巴拿馬"
 
-#: src/translations.h:486
+#: src/translations.h:488
 msgid "Peru"
 msgstr "秘魯"
 
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "French Polynesia"
 msgstr "法屬玻利尼西亞"
 
-#: src/translations.h:488
+#: src/translations.h:490
 msgid "Papua New Guinea"
 msgstr "巴布亞新畿內亞"
 
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Philippines"
 msgstr "菲律賓"
 
-#: src/translations.h:490
+#: src/translations.h:492
 msgid "Pakistan"
 msgstr "巴基斯坦"
 
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Poland"
 msgstr "波蘭"
 
-#: src/translations.h:492
+#: src/translations.h:494
 msgid "Saint Pierre and Miquelon"
 msgstr "聖皮耶與密克隆羣島"
 
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Pitcairn"
 msgstr "皮特康島"
 
-#: src/translations.h:494
+#: src/translations.h:496
 msgid "Puerto Rico"
 msgstr "波多黎各"
 
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Palestinian Territories"
 msgstr "巴勒斯坦領土"
 
-#: src/translations.h:496
+#: src/translations.h:498
 msgid "Portugal"
 msgstr "葡萄牙"
 
-#: src/translations.h:497
+#: src/translations.h:499
 msgid "Palau"
 msgstr "帛琉"
 
-#: src/translations.h:498
+#: src/translations.h:500
 msgid "Paraguay"
 msgstr "巴拉圭"
 
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Qatar"
 msgstr "卡塔爾"
 
-#: src/translations.h:500
+#: src/translations.h:502
 msgid "Réunion"
 msgstr "留尼旺"
 
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Romania"
 msgstr "羅馬尼亞"
 
-#: src/translations.h:502
+#: src/translations.h:504
 msgid "Serbia"
 msgstr "塞爾維亞"
 
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Russian Federation"
 msgstr "俄羅斯"
 
-#: src/translations.h:504
+#: src/translations.h:506
 msgid "Rwanda"
 msgstr "盧安達"
 
-#: src/translations.h:505
+#: src/translations.h:507
 msgid "Saudi Arabia"
 msgstr "沙特阿拉伯"
 
-#: src/translations.h:506
+#: src/translations.h:508
 msgid "Solomon Islands"
 msgstr "所羅門羣島"
 
-#: src/translations.h:507
+#: src/translations.h:509
 msgid "Seychelles"
 msgstr "塞舌爾羣島"
 
-#: src/translations.h:508
+#: src/translations.h:510
 msgid "Sudan"
 msgstr "蘇丹"
 
-#: src/translations.h:509
+#: src/translations.h:511
 msgid "Sweden"
 msgstr "瑞典"
 
-#: src/translations.h:510
+#: src/translations.h:512
 msgid "Singapore"
 msgstr "新加坡"
 
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Saint Helena"
 msgstr "聖海倫拿島"
 
-#: src/translations.h:512
+#: src/translations.h:514
 msgid "Slovenia"
 msgstr "斯洛維尼亞"
 
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Svalbard and Jan Mayen"
 msgstr "斯瓦爾巴特和揚馬延島"
 
-#: src/translations.h:514
+#: src/translations.h:516
 msgid "Slovakia"
 msgstr "斯洛伐克"
 
-#: src/translations.h:515
+#: src/translations.h:517
 msgid "Sierra Leone"
 msgstr "塞拉里昂"
 
-#: src/translations.h:516
+#: src/translations.h:518
 msgid "San Marino"
 msgstr "聖馬利諾"
 
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Senegal"
 msgstr "塞內加爾"
 
-#: src/translations.h:518
+#: src/translations.h:520
 msgid "Somalia"
 msgstr "索馬里"
 
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Suriname"
 msgstr "蘇里南"
 
-#: src/translations.h:520
+#: src/translations.h:522
 msgid "Sao Tome and Principe"
 msgstr "聖多美普林西比"
 
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "El Salvador"
 msgstr "薩爾瓦多"
 
-#: src/translations.h:522
+#: src/translations.h:524
 msgid "Syrian Arab Republic"
 msgstr "敍利亞"
 
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Swaziland"
 msgstr "史瓦濟蘭"
 
-#: src/translations.h:524
+#: src/translations.h:526
 msgid "Turks and Caicos Islands"
 msgstr "特克斯和凱科斯羣島"
 
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Chad"
 msgstr "查德"
 
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "French Southern Territories"
 msgstr "法屬南方領土"
 
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Togo"
 msgstr "多哥"
 
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Thailand"
 msgstr "泰國"
 
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Tajikistan"
 msgstr "塔吉克"
 
-#: src/translations.h:530
+#: src/translations.h:532
 msgid "Tokelau"
 msgstr "托克勞群島"
 
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "East Timor"
 msgstr "東帝汶"
 
-#: src/translations.h:532
+#: src/translations.h:534
 msgid "Turkmenistan"
 msgstr "土庫曼"
 
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Tunisia"
 msgstr "突尼西亞"
 
-#: src/translations.h:534
+#: src/translations.h:536
 msgid "Tonga"
 msgstr "東加"
 
-#: src/translations.h:535
+#: src/translations.h:537
 msgid "Turkey"
 msgstr "土耳其"
 
-#: src/translations.h:536
+#: src/translations.h:538
 msgid "Trinidad and Tobago"
 msgstr "千里達"
 
-#: src/translations.h:537
+#: src/translations.h:539
 msgid "Tuvalu"
 msgstr "圖瓦盧"
 
-#: src/translations.h:538
+#: src/translations.h:540
 msgid "Taiwan"
 msgstr "台灣"
 
-#: src/translations.h:539
+#: src/translations.h:541
 msgid "Tanzania"
 msgstr "坦桑尼亞"
 
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Ukraine"
 msgstr "烏克蘭"
 
-#: src/translations.h:541
+#: src/translations.h:543
 msgid "Uganda"
 msgstr "烏干達"
 
-#: src/translations.h:542
+#: src/translations.h:544
 msgid "United States Minor Outlying Islands"
 msgstr "美屬邊疆群島"
 
-#: src/translations.h:543
+#: src/translations.h:545
 msgid "United States"
 msgstr "美國"
 
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Uruguay"
 msgstr "烏拉圭"
 
-#: src/translations.h:545
+#: src/translations.h:547
 msgid "Uzbekistan"
 msgstr "烏茲別克"
 
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Vatican City State"
 msgstr "梵蒂岡"
 
-#: src/translations.h:547
+#: src/translations.h:549
 msgid "Saint Vincent and the Grenadines"
 msgstr "聖文森特和格林納丁斯"
 
-#: src/translations.h:548
+#: src/translations.h:550
 msgid "Venezuela"
 msgstr "委內瑞拉"
 
-#: src/translations.h:549
+#: src/translations.h:551
 msgid "British Virgin Islands"
 msgstr "英屬維爾京羣島"
 
-#: src/translations.h:550
+#: src/translations.h:552
 msgid "United States Virgin Islands"
 msgstr "美屬維京群島"
 
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Viet Nam"
 msgstr "越南"
 
-#: src/translations.h:552
+#: src/translations.h:554
 msgid "Vanuatu"
 msgstr "瓦努阿圖"
 
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Wallis and Futuna"
 msgstr "瓦利斯及富圖納羣島"
 
-#: src/translations.h:554
+#: src/translations.h:556
 msgid "Samoa"
 msgstr "薩摩亞羣島"
 
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Yemen"
 msgstr "也門"
 
-#: src/translations.h:556
+#: src/translations.h:558
 msgid "Mayotte"
 msgstr "馬約特"
 
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "Yugoslavia"
 msgstr "南斯拉夫"
 
-#: src/translations.h:558
+#: src/translations.h:560
 msgid "South Africa"
 msgstr "南非"
 
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Zambia"
 msgstr "贊比亞"
 
-#: src/translations.h:560
+#: src/translations.h:562
 msgid "Zimbabwe"
 msgstr "津巴布韋"
 
-#: src/translations.h:564
+#: src/translations.h:566
 msgid "&Undo"
 msgstr "&還原"
 
-#: src/translations.h:565
+#: src/translations.h:567
 msgid "&Redo"
 msgstr "&重做"
 
-#: src/translations.h:566
+#: src/translations.h:568
 msgid "Cu&t"
 msgstr "剪&下"
 
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "&Copy"
 msgstr "&複製"
 
-#: src/translations.h:568
+#: src/translations.h:570
 msgid "&Paste"
 msgstr "&貼上"
 
-#: src/translations.h:569 src/ui_locationDialogGui.h:432
+#: src/translations.h:571 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1180
 #: plugins/Oculars/src/ui_ocularDialog.h:1190
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
@@ -4376,64 +4365,64 @@ msgstr "&貼上"
 msgid "Delete"
 msgstr "删除"
 
-#: src/translations.h:570
+#: src/translations.h:572
 msgid "Select All"
 msgstr "全選"
 
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Look in:"
 msgstr "搜尋於:"
 
-#: src/translations.h:572
+#: src/translations.h:574
 msgid "Directory:"
 msgstr "目錄:"
 
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Folder"
 msgstr "資料夾"
 
-#: src/translations.h:574
+#: src/translations.h:576
 msgid "&Choose"
 msgstr "&選擇"
 
-#: src/translations.h:575 src/ui_configurationDialog.h:1219
+#: src/translations.h:577 src/ui_configurationDialog.h:1219
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Cancel"
 msgstr "取消"
 
-#: src/translations.h:576
+#: src/translations.h:578
 msgid "Files of type:"
 msgstr "檔案類型:"
 
-#: src/translations.h:577
+#: src/translations.h:579
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: src/translations.h:578
+#: src/translations.h:580
 msgid "Directories"
 msgstr "目錄"
 
-#: src/translations.h:579
+#: src/translations.h:581
 msgid "Computer"
 msgstr "電腦"
 
-#: src/translations.h:580
+#: src/translations.h:582
 msgid "&Open"
 msgstr "&開啟"
 
-#: src/translations.h:581
+#: src/translations.h:583
 msgid "File &name:"
 msgstr "檔案&名稱"
 
-#: src/translations.h:582
+#: src/translations.h:584
 msgid "Copy &Link Location"
 msgstr "複製&連結位置"
 
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:584
+#: src/translations.h:586
 msgid "Ignore"
 msgstr ""
 
@@ -4716,528 +4705,528 @@ msgstr "搜尋設定"
 msgid "Use autofill only from the beginning of words"
 msgstr "只有從單詞開始使用自動填寫"
 
-#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1804
-#: src/ui_viewDialog.h:1823 src/ui_viewDialog.h:1831
+#: src/ui_searchDialogGui.h:716 src/ui_viewDialog.h:1797
+#: src/ui_viewDialog.h:1819 src/ui_viewDialog.h:1836
 #: src/ui_configurationDialog.h:1220 src/ui_configurationDialog.h:1231
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "選項"
 
-#: src/ui_viewDialog.h:1587
+#: src/ui_viewDialog.h:1582
 msgid "View"
 msgstr "顯示"
 
-#: src/ui_viewDialog.h:1590
+#: src/ui_viewDialog.h:1585
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
 msgstr "絕對大小:"
 
-#: src/ui_viewDialog.h:1591
+#: src/ui_viewDialog.h:1586
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
 msgstr "相對大小:"
 
-#: src/ui_viewDialog.h:1592
+#: src/ui_viewDialog.h:1587
 msgid "Milky Way brightness:"
 msgstr "銀河光度"
 
-#: src/ui_viewDialog.h:1593
+#: src/ui_viewDialog.h:1588
 msgid "Zodiacal Light brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1594
+#: src/ui_viewDialog.h:1589
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
 msgstr "閃爍:"
 
-#: src/ui_viewDialog.h:1596
+#: src/ui_viewDialog.h:1591
 msgid "Limit the magnitude of stars"
 msgstr "限制星等"
 
-#: src/ui_viewDialog.h:1591 src/ui_viewDialog.h:1633 src/ui_viewDialog.h:1719
+#: src/ui_viewDialog.h:1593 src/ui_viewDialog.h:1635 src/ui_viewDialog.h:1721
 msgid "Limit magnitude:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1600
+#: src/ui_viewDialog.h:1595
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "降低明亮天體附近其餘天體的亮度"
 
-#: src/ui_viewDialog.h:1602
+#: src/ui_viewDialog.h:1597
 msgid "Dynamic eye adaptation"
 msgstr "人眼動態視覺調適"
 
-#: src/ui_viewDialog.h:1603 src/ui_viewDialog.h:1645 src/ui_viewDialog.h:1712
+#: src/ui_viewDialog.h:1598 src/ui_viewDialog.h:1640 src/ui_viewDialog.h:1707
 msgid "Labels and Markers"
 msgstr "名稱及標記"
 
-#: src/ui_viewDialog.h:1605
+#: src/ui_viewDialog.h:1600
 msgid "Show atmosphere"
 msgstr "顯示大氣層"
 
-#: src/ui_viewDialog.h:1609
+#: src/ui_viewDialog.h:1604
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr "使用該地點在數據庫之光污染資訊, 並忽略下列之光污染設定"
 
-#: src/ui_viewDialog.h:1611
+#: src/ui_viewDialog.h:1606
 msgid "Light pollution data from locations database"
 msgstr "使用該地點在數據庫之光污染資訊"
 
-#: src/ui_viewDialog.h:1612
+#: src/ui_viewDialog.h:1607
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Light pollution:"
 msgstr "光污染:"
 
-#: src/ui_viewDialog.h:1614
+#: src/ui_viewDialog.h:1609
 msgid "pressure, temperature, extinction coefficient"
 msgstr "壓力, 溫度, 消光係數"
 
-#: src/ui_viewDialog.h:1616
+#: src/ui_viewDialog.h:1611
 msgid "Refraction/Extinction settings..."
 msgstr "折射/消光設置 ..."
 
-#: src/ui_viewDialog.h:1617
+#: src/ui_viewDialog.h:1612
 msgid "Planets and satellites"
 msgstr "行星及衛星"
 
-#: src/ui_viewDialog.h:1618
+#: src/ui_viewDialog.h:1613
 msgid "Show Solar System objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1619
+#: src/ui_viewDialog.h:1614
 msgid "Show planet markers"
 msgstr "顯示行星標記"
 
-#: src/ui_viewDialog.h:1620
+#: src/ui_viewDialog.h:1615
 msgid "Show planet orbits"
 msgstr "顯示行星軌道"
 
-#: src/ui_viewDialog.h:1622
+#: src/ui_viewDialog.h:1617
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
 
-#: src/ui_viewDialog.h:1624
+#: src/ui_viewDialog.h:1619
 msgid "Show orbit for selected planet"
 msgstr ""
 
-#: src/ui_viewDialog.h:1626
+#: src/ui_viewDialog.h:1621
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
 
-#: src/ui_viewDialog.h:1628
+#: src/ui_viewDialog.h:1623
 msgid "Show trail only for selected planet"
 msgstr ""
 
-#: src/ui_viewDialog.h:1630
+#: src/ui_viewDialog.h:1625
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1632
+#: src/ui_viewDialog.h:1627
 msgid "Simulate light speed"
 msgstr "模擬光速"
 
-#: src/ui_viewDialog.h:1626
+#: src/ui_viewDialog.h:1628
 msgid "Scale Moon:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1635
+#: src/ui_viewDialog.h:1630
 msgid "Scale factor"
 msgstr "比例係數"
 
-#: src/ui_viewDialog.h:1638
+#: src/ui_viewDialog.h:1633
 msgid "Limit the magnitude of solar system objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1642
+#: src/ui_viewDialog.h:1637
 msgid "Automatic change of landscape when planet is changed"
 msgstr "行星地點改變時自動改變地型"
 
-#: src/ui_viewDialog.h:1644
+#: src/ui_viewDialog.h:1639
 msgid "Auto select landscapes"
 msgstr "自動選擇地型"
 
-#: src/ui_viewDialog.h:1647
+#: src/ui_viewDialog.h:1642
 msgid "Settings for sporadic meteors"
 msgstr "偶發流星設定"
 
-#: src/ui_viewDialog.h:1649
+#: src/ui_viewDialog.h:1644
 msgid "Shooting Stars"
 msgstr "流星"
 
-#: src/ui_viewDialog.h:1651
+#: src/ui_viewDialog.h:1646
 msgid "Hourly zenith rate"
 msgstr "每小時天頂率"
 
-#: src/ui_viewDialog.h:1653
+#: src/ui_viewDialog.h:1648
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "每小時天頂流星數"
 
-#: src/ui_viewDialog.h:1655
+#: src/ui_viewDialog.h:1650
 msgid "Display objects from catalogs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1657
+#: src/ui_viewDialog.h:1652
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1660
+#: src/ui_viewDialog.h:1655
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1663
+#: src/ui_viewDialog.h:1658
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1672
+#: src/ui_viewDialog.h:1667
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1675
+#: src/ui_viewDialog.h:1670
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1678
+#: src/ui_viewDialog.h:1673
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1681
+#: src/ui_viewDialog.h:1676
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, 1960)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1684
+#: src/ui_viewDialog.h:1679
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1687
+#: src/ui_viewDialog.h:1682
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1690
+#: src/ui_viewDialog.h:1685
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1693
+#: src/ui_viewDialog.h:1688
 msgid "Catalog of galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1696
+#: src/ui_viewDialog.h:1691
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1699
+#: src/ui_viewDialog.h:1694
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1701
+#: src/ui_viewDialog.h:1696
 msgid "Filter by type"
 msgstr ""
 
-#: src/ui_viewDialog.h:1704
+#: src/ui_viewDialog.h:1699
 msgid "Hydrogen regions"
 msgstr ""
 
-#: src/ui_viewDialog.h:1705
+#: src/ui_viewDialog.h:1700
 msgid "Other"
 msgstr "其他"
 
-#: src/ui_viewDialog.h:1707
+#: src/ui_viewDialog.h:1702
 msgid "Planetary Nebulae"
 msgstr ""
 
-#: src/ui_viewDialog.h:1708
+#: src/ui_viewDialog.h:1703
 msgid "Galaxies"
 msgstr ""
 
-#: src/ui_viewDialog.h:1710
+#: src/ui_viewDialog.h:1705
 msgid "Dark Nebulae"
 msgstr ""
 
-#: src/ui_viewDialog.h:1711
+#: src/ui_viewDialog.h:1706
 msgid "Bright Nebulae"
 msgstr ""
 
-#: src/ui_viewDialog.h:1714
+#: src/ui_viewDialog.h:1709
 msgid "Hints"
 msgstr ""
 
-#: src/ui_viewDialog.h:1716
+#: src/ui_viewDialog.h:1711
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr ""
 
-#: src/ui_viewDialog.h:1718
+#: src/ui_viewDialog.h:1713
 msgid "Use surface brightness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1720
+#: src/ui_viewDialog.h:1715
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1722
+#: src/ui_viewDialog.h:1717
 msgid "Use proportional hints"
 msgstr ""
 
-#: src/ui_viewDialog.h:1724
+#: src/ui_viewDialog.h:1719
 msgid ""
 "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
 
-#: src/ui_viewDialog.h:1737
+#: src/ui_viewDialog.h:1722
 msgid "Celestial Sphere"
 msgstr "天球"
 
-#: src/ui_viewDialog.h:1739
+#: src/ui_viewDialog.h:1724
 msgid "Equatorial coordinates of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1741
+#: src/ui_viewDialog.h:1726
 msgid "Equatorial grid (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1743
+#: src/ui_viewDialog.h:1728
 msgid "Equatorial coordinates of current date and planet."
 msgstr ""
 
-#: src/ui_viewDialog.h:1745
+#: src/ui_viewDialog.h:1730
 msgid "Equatorial grid (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1747
+#: src/ui_viewDialog.h:1732
 msgid "Ecliptical coordinates for J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1749
+#: src/ui_viewDialog.h:1734
 msgid "Ecliptic grid (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1751
+#: src/ui_viewDialog.h:1736
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
 
-#: src/ui_viewDialog.h:1753
+#: src/ui_viewDialog.h:1738
 msgid "Ecliptic grid (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1755
+#: src/ui_viewDialog.h:1740
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1759
+#: src/ui_viewDialog.h:1744
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1771
+#: src/ui_viewDialog.h:1748
 msgid "Show celestial equator of J2000.0."
 msgstr ""
 
-#: src/ui_viewDialog.h:1773
+#: src/ui_viewDialog.h:1750
 msgid "Equator (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1775
+#: src/ui_viewDialog.h:1752
 msgid "Show celestial equator of current planet and date."
 msgstr ""
 
-#: src/ui_viewDialog.h:1777
+#: src/ui_viewDialog.h:1754
 msgid "Equator (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1779
+#: src/ui_viewDialog.h:1756
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1781
+#: src/ui_viewDialog.h:1758
 msgid "Ecliptic (J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1783
+#: src/ui_viewDialog.h:1760
 msgid "Show ecliptic line of current date."
 msgstr ""
 
-#: src/ui_viewDialog.h:1785
+#: src/ui_viewDialog.h:1762
 msgid "Ecliptic (of date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1787
+#: src/ui_viewDialog.h:1764
 msgid "Show horizon line."
 msgstr ""
 
-#: src/ui_viewDialog.h:1791
+#: src/ui_viewDialog.h:1768
 msgid "Show Galactic equator line."
 msgstr ""
 
-#: src/ui_viewDialog.h:1763
+#: src/ui_viewDialog.h:1772
 msgid "Labels for the Cardinal directions."
 msgstr ""
 
-#: src/ui_viewDialog.h:1795
+#: src/ui_viewDialog.h:1776
 msgid "Show meridian line."
 msgstr ""
 
-#: src/ui_viewDialog.h:1778
+#: src/ui_viewDialog.h:1780
 msgid "Show Prime (East-West) Vertical."
 msgstr ""
 
-#: src/ui_viewDialog.h:1782
+#: src/ui_viewDialog.h:1784
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 
-#: src/ui_viewDialog.h:1784
+#: src/ui_viewDialog.h:1786
 msgid "Colures"
 msgstr ""
 
-#: src/ui_viewDialog.h:1799
+#: src/ui_viewDialog.h:1788
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which "
 "passes through both ecliptic poles, the Sun and opposition point."
 msgstr ""
 
-#: src/ui_viewDialog.h:1767
+#: src/ui_viewDialog.h:1792
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles. "
 "Displayed on Earth only."
 msgstr ""
 
-#: src/ui_viewDialog.h:1769
+#: src/ui_viewDialog.h:1794
 msgid "Precession circles"
 msgstr ""
 
-#: src/ui_viewDialog.h:1802
+#: src/ui_viewDialog.h:1795
 msgid "Projection"
 msgstr "投影方式"
 
-#: src/ui_viewDialog.h:1803
+#: src/ui_viewDialog.h:1796
 msgid "Vertical viewport offset"
 msgstr ""
 
-#: src/ui_viewDialog.h:1808
+#: src/ui_viewDialog.h:1798
 msgid "Show ground"
 msgstr "顯示地面"
 
-#: src/ui_viewDialog.h:1805
+#: src/ui_viewDialog.h:1799
 msgid "Use this landscape as default"
 msgstr "將此地形設定為預設值"
 
-#: src/ui_viewDialog.h:1806
+#: src/ui_viewDialog.h:1800
 msgid "Use associated planet and position"
 msgstr "使用與此地景關聯的位置與行星"
 
-#: src/ui_viewDialog.h:1820
+#: src/ui_viewDialog.h:1801
 msgid "Show landscape labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1807
+#: src/ui_viewDialog.h:1802
 msgid "Show fog"
 msgstr "顯示霧氣"
 
-#: src/ui_viewDialog.h:1821
+#: src/ui_viewDialog.h:1804
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1804
+#: src/ui_viewDialog.h:1806
 msgid "Show illumination "
 msgstr ""
 
-#: src/ui_viewDialog.h:1810
+#: src/ui_viewDialog.h:1808
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1812
+#: src/ui_viewDialog.h:1810
 msgid "Minimal brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1814
+#: src/ui_viewDialog.h:1812
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1817
+#: src/ui_viewDialog.h:1815
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
 
-#: src/ui_viewDialog.h:1819
+#: src/ui_viewDialog.h:1817
 msgid "from landscape, if given"
 msgstr ""
 
-#: src/ui_viewDialog.h:1822
+#: src/ui_viewDialog.h:1818
 msgid "Add/remove landscapes..."
 msgstr "添加/移除地形..."
 
-#: src/ui_viewDialog.h:1824
+#: src/ui_viewDialog.h:1820
 msgid "Use this sky culture as default"
 msgstr "将此星空述语设为预设值"
 
-#: src/ui_viewDialog.h:1729
+#: src/ui_viewDialog.h:1821
 msgid "Show labels"
 msgstr "顯示星座名稱"
 
-#: src/ui_viewDialog.h:1827
+#: src/ui_viewDialog.h:1823
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 
-#: src/ui_viewDialog.h:1830
+#: src/ui_viewDialog.h:1827
 msgid "Use native names for planets from current culture"
 msgstr ""
 
-#: src/ui_viewDialog.h:1827
+#: src/ui_viewDialog.h:1829
 msgid "Use native names for planets"
 msgstr ""
 
-#: src/ui_viewDialog.h:1828
+#: src/ui_viewDialog.h:1830
 msgid "Show lines with thickness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1735
+#: src/ui_viewDialog.h:1832
 msgid "Value in pixels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1832
+#: src/ui_viewDialog.h:1834
 msgid "Show art in brightness"
 msgstr ""
 
-#: src/ui_viewDialog.h:1730
+#: src/ui_viewDialog.h:1835
 msgid "Show boundaries"
 msgstr "顯示星座界線"
 
-#: src/ui_viewDialog.h:1832
+#: src/ui_viewDialog.h:1837
 msgid "Visible"
 msgstr "可見的"
 
-#: src/ui_viewDialog.h:1837
+#: src/ui_viewDialog.h:1842
 msgid "Sky"
 msgstr "天空"
 
-#: src/ui_viewDialog.h:1839
+#: src/ui_viewDialog.h:1844
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr ""
 
-#: src/ui_viewDialog.h:1841
+#: src/ui_viewDialog.h:1846
 msgid "Deep-Sky Objects"
 msgstr ""
 
-#: src/ui_viewDialog.h:1844
+#: src/ui_viewDialog.h:1849
 msgid "Markings"
 msgstr "標示"
 
-#: src/ui_viewDialog.h:1846
+#: src/ui_viewDialog.h:1851
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Landscape"
 msgstr "地形"
 
-#: src/ui_viewDialog.h:1848
+#: src/ui_viewDialog.h:1853
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "星空術語"
@@ -5318,7 +5307,7 @@ msgid "Display no information"
 msgstr "不顯示任何資料"
 
 #: src/ui_configurationDialog.h:1064 plugins/Oculars/src/Oculars.cpp:2048
-#: plugins/Observability/src/Observability.cpp:206
+#: plugins/Observability/src/Observability.cpp:205
 msgid "None"
 msgstr "無"
 
@@ -5887,7 +5876,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:57
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:244
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Angle Measure"
 msgstr "量角器"
 
@@ -5900,44 +5889,44 @@ msgid "Angle measure"
 msgstr "量角器"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:511
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:527
 msgid "The Angle Measure is enabled:"
 msgstr "量角器已啟動"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:513
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:529
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "用左鍵拖曳測量, 左鍵單擊清除."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:515
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:531
 msgid "Right-clicking changes the end point only."
 msgstr "右鍵單擊改變終點."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:517
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:533
 msgid "PA="
 msgstr "方位角"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
 msgid "Angle Measure Plug-in"
 msgstr "角度測量插件"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 msgid ""
 "The Angle Measure plugin is a small tool which is used to measure the "
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr "角度測量插件用作測量在天上兩點之角距 (以及計算兩點之方位角)"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
 "Start and end points in horizontal mode can be linked to the rotating sky, "
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 msgid ""
 "*goes misty eyed* I recall measuring the size of the Cassini Division when I "
 "was a student. It was not the high academic glamor one might expect... It "
@@ -5946,7 +5935,7 @@ msgid ""
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:444
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
@@ -5958,7 +5947,7 @@ msgstr ""
 msgid "Links"
 msgstr "連結"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:445
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
@@ -5973,7 +5962,7 @@ msgid ""
 msgstr "支援由Launchpad提供. 記得在標題包含%1."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:101
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:448
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
@@ -5987,7 +5976,7 @@ msgid "If you have a question, you can %1get an answer here%2"
 msgstr "如果你有問題, 你可以%1在這取得答案%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
@@ -6001,7 +5990,7 @@ msgid "Bug reports can be made %1here%2."
 msgstr "錯誤報告可以由%1此處%2報告."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/Novae/src/gui/NovaeDialog.cpp:141
@@ -6016,61 +6005,61 @@ msgid ""
 msgstr "如果你有一個功能要求, 你可以新增一個錯誤報告, 並設置嚴重程度為“願望清單”."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr "如果你想閱讀這個插件的所有資料和它的歷史, 你可以%1在這裡取得%2."
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
 msgstr "脈衝星插件設定"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:218
 msgid "Angle Measure Plug-in Configuration"
 msgstr "量角器插件設定"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:220
 msgid "Show in Equatorial Coordinates"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:221
 msgid "Display with position angle"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:222
 msgid "Show in Horizontal Coordinates"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:224
 msgid "(e.g. for Dobson starhopping)"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:226
 msgid "Display with position angle "
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:227
 msgid "Attach start point to rotating sky"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 msgid "Attach end point to rotating sky"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:361
 msgid "Format"
 msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:230
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:362
 msgid "Use dms format for angles"
 msgstr "角度使用角分秒作格式"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 #: plugins/Satellites/src/ui_satellitesDialog.h:743
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
@@ -6083,7 +6072,7 @@ msgstr "角度使用角分秒作格式"
 msgid "Restore default settings"
 msgstr "回復預設設定"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:245
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1222
 #: plugins/Satellites/src/ui_satellitesDialog.h:793
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
@@ -7287,7 +7276,6 @@ msgstr "淡出長度:"
 msgid "Realistic mode for the artificial satellites"
 msgstr "人造衛星真實化顯示"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:243
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
@@ -8183,7 +8171,6 @@ msgid "Colors"
 msgstr "顏色"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1732
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
 msgstr "星座圖繪光度"
@@ -9114,7 +9101,7 @@ msgstr "質量"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:773
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:776
 msgid "Sun"
 msgstr "太陽"
 
@@ -9441,205 +9428,205 @@ msgstr ""
 "一個天體可被觀測是基於天體在夜晚某時高於地平線的前提下計算出來. 此插件亦會顯示最大與太陽距離以及日沒升/日沒落/偕日升/偕日落及其他設定. "
 "(名詞解釋在插件設定下 關於 中提供)"
 
-#: plugins/Observability/src/Observability.cpp:175
+#: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
 msgid "Jan"
 msgstr "一月"
 
-#: plugins/Observability/src/Observability.cpp:176
+#: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Feb"
 msgstr "二月"
 
-#: plugins/Observability/src/Observability.cpp:177
+#: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Mar"
 msgstr "三月"
 
-#: plugins/Observability/src/Observability.cpp:178
+#: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Apr"
 msgstr "四月"
 
-#: plugins/Observability/src/Observability.cpp:179
+#: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "May"
 msgstr "五月"
 
-#: plugins/Observability/src/Observability.cpp:180
+#: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "Jun"
 msgstr "六月"
 
-#: plugins/Observability/src/Observability.cpp:181
+#: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jul"
 msgstr "七月"
 
-#: plugins/Observability/src/Observability.cpp:182
+#: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Aug"
 msgstr "八月"
 
-#: plugins/Observability/src/Observability.cpp:183
+#: plugins/Observability/src/Observability.cpp:182
 msgctxt "short month name"
 msgid "Sep"
 msgstr "九月"
 
-#: plugins/Observability/src/Observability.cpp:184
+#: plugins/Observability/src/Observability.cpp:183
 msgctxt "short month name"
 msgid "Oct"
 msgstr "十月"
 
-#: plugins/Observability/src/Observability.cpp:185
+#: plugins/Observability/src/Observability.cpp:184
 msgctxt "short month name"
 msgid "Nov"
 msgstr "十一月"
 
-#: plugins/Observability/src/Observability.cpp:186
+#: plugins/Observability/src/Observability.cpp:185
 msgctxt "short month name"
 msgid "Dec"
 msgstr "十二月"
 
 #. TRANSLATORS: Short for "hours".
-#: plugins/Observability/src/Observability.cpp:189
+#: plugins/Observability/src/Observability.cpp:188
 msgid "h"
 msgstr "小時"
 
 #. TRANSLATORS: Short for "minutes".
-#: plugins/Observability/src/Observability.cpp:191
+#: plugins/Observability/src/Observability.cpp:190
 msgid "m"
 msgstr "分鐘"
 
 #. TRANSLATORS: Short for "seconds".
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:192
 msgid "s"
 msgstr "秒"
 
-#: plugins/Observability/src/Observability.cpp:194
+#: plugins/Observability/src/Observability.cpp:193
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "於%1從地平線落下 (還有%2)"
 
-#: plugins/Observability/src/Observability.cpp:195
+#: plugins/Observability/src/Observability.cpp:194
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "已於%1從地平線升起 (已過%2)"
 
-#: plugins/Observability/src/Observability.cpp:196
+#: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "於%1從地平線落下 (已過%2)"
 
-#: plugins/Observability/src/Observability.cpp:197
+#: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "在%1從地平線升起 (還有 %2)"
 
-#: plugins/Observability/src/Observability.cpp:198
+#: plugins/Observability/src/Observability.cpp:197
 msgid "Circumpolar."
 msgstr "天球極點附近."
 
-#: plugins/Observability/src/Observability.cpp:199
+#: plugins/Observability/src/Observability.cpp:198
 msgid "No rise."
 msgstr "沒有從地平線升起"
 
-#: plugins/Observability/src/Observability.cpp:200
+#: plugins/Observability/src/Observability.cpp:199
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "在%1達到最高 (還有 %2) 於 %3度"
 
-#: plugins/Observability/src/Observability.cpp:201
+#: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "在%1達到最高 (%2之前) 於 %3度"
 
-#: plugins/Observability/src/Observability.cpp:202
+#: plugins/Observability/src/Observability.cpp:201
 msgid "Source is not observable."
 msgstr "此星體是不可能在現時位置而被觀測得到"
 
-#: plugins/Observability/src/Observability.cpp:203
+#: plugins/Observability/src/Observability.cpp:202
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr "沒有日沒升/日沒落/偕日升/偕日落"
 
-#: plugins/Observability/src/Observability.cpp:204
+#: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
 msgstr "最大距角: %1 (在%2度.)"
 
-#: plugins/Observability/src/Observability.cpp:205
+#: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
 msgstr "與太陽最大分隔: %1 (在%2度.)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:208
+#: plugins/Observability/src/Observability.cpp:207
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:209
 msgid "No Heliacal rise/set. "
 msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:212
+#: plugins/Observability/src/Observability.cpp:211
 msgid "No Acronycal rise/set. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:213
+#: plugins/Observability/src/Observability.cpp:212
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:214
+#: plugins/Observability/src/Observability.cpp:213
 msgid "No Cosmical rise/set."
 msgstr "沒有偕日升/偕日落落."
 
-#: plugins/Observability/src/Observability.cpp:215
+#: plugins/Observability/src/Observability.cpp:214
 msgid "Observable during the whole year."
 msgstr "全年都可觀測"
 
-#: plugins/Observability/src/Observability.cpp:216
+#: plugins/Observability/src/Observability.cpp:215
 msgid "Not observable at dark night."
 msgstr "在夜間不可觀測."
 
-#: plugins/Observability/src/Observability.cpp:217
+#: plugins/Observability/src/Observability.cpp:216
 #, qt-format
 msgid "Nights above horizon: %1"
 msgstr "高於地平線的夜晚:%1"
 
-#: plugins/Observability/src/Observability.cpp:218
+#: plugins/Observability/src/Observability.cpp:217
 msgid "TODAY:"
 msgstr "今日"
 
-#: plugins/Observability/src/Observability.cpp:219
+#: plugins/Observability/src/Observability.cpp:218
 msgid "THIS YEAR:"
 msgstr "今年:"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:221
+#: plugins/Observability/src/Observability.cpp:220
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "上次滿月:  %1 %2 at %3:%4. "
 
-#: plugins/Observability/src/Observability.cpp:222
+#: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "下次滿月:  %1 %2 at %3:%4. "
 
+#: plugins/Observability/src/Observability.cpp:236
 #: plugins/Observability/src/Observability.cpp:237
-#: plugins/Observability/src/Observability.cpp:238
-#: plugins/Observability/src/Observability.cpp:242
+#: plugins/Observability/src/Observability.cpp:241
 msgid "Observability"
 msgstr "可觀測性分析插件"
 
-#: plugins/Observability/src/Observability.cpp:243
+#: plugins/Observability/src/Observability.cpp:242
 msgid "Observability configuration window"
 msgstr "可觀測性分析插件設定視𥦬"
 
@@ -10013,59 +10000,59 @@ msgstr ""
 msgid "Generic"
 msgstr "通用"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:519
+#: plugins/MeteorShowers/src/MeteorShower.cpp:520
 msgid "generic data"
 msgstr "通用數據"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:523
+#: plugins/MeteorShowers/src/MeteorShower.cpp:524
 msgid "confirmed data"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:527
+#: plugins/MeteorShowers/src/MeteorShower.cpp:528
 msgid "inactive"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:545
+#: plugins/MeteorShowers/src/MeteorShower.cpp:546
 msgid "meteor shower"
 msgstr "流星雨"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:554
+#: plugins/MeteorShowers/src/MeteorShower.cpp:563
 msgid "Radiant drift (per day)"
 msgstr "輻射點偏移 (每日)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:561
+#: plugins/MeteorShowers/src/MeteorShower.cpp:570
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "地心流星速度: %1 公里/秒"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:566
+#: plugins/MeteorShowers/src/MeteorShower.cpp:575
 #, qt-format
 msgid "The population index: %1"
 msgstr "光度比: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:571
+#: plugins/MeteorShowers/src/MeteorShower.cpp:580
 #, qt-format
 msgid "Parent body: %1"
 msgstr "母體: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:580
+#: plugins/MeteorShowers/src/MeteorShower.cpp:589
 msgid "Active"
 msgstr "活躍中"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:588
+#: plugins/MeteorShowers/src/MeteorShower.cpp:597
 msgid "Activity"
 msgstr "活動"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:593
+#: plugins/MeteorShowers/src/MeteorShower.cpp:602
 #, qt-format
 msgid "Maximum: %1"
 msgstr "高峰期: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:595
+#: plugins/MeteorShowers/src/MeteorShower.cpp:605
 msgid "Solar longitude"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:605
+#: plugins/MeteorShowers/src/MeteorShower.cpp:615
 msgid "variable"
 msgstr "可變的"
 
@@ -10921,21 +10908,21 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2096
+#: plugins/Scenery3d/src/Scenery3d.cpp:2111
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2105
+#: plugins/Scenery3d/src/Scenery3d.cpp:2120
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2115
+#: plugins/Scenery3d/src/Scenery3d.cpp:2130
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/Scenery3d.cpp:2636
+#: plugins/Scenery3d/src/Scenery3d.cpp:2651
 msgid ""
 "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
@@ -11389,48 +11376,48 @@ msgstr ""
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:749
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
 msgid "Equinox"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:752
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
 msgid "Solstice"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:755
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Crossquarter"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Major Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
 msgid "Minor Lunar Standstill"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:764
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:767
 msgid "Zenith Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:767
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:770
 msgid "Nadir Passage"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:770
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:773
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:360
 msgid "Selected Object"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:779
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
 msgid "error if you can read this"
 msgstr ""
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:785
 msgid "Mercury"
 msgstr "水星"
 
-#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:785
+#: plugins/ArchaeoLines/src/ArchaeoLines.cpp:788
 msgid "Venus"
 msgstr "金星"
 
@@ -11865,9 +11852,6 @@ msgstr ""
 
 #~ msgid "144000"
 #~ msgstr "144000"
-
-#~ msgid "Constellations"
-#~ msgstr "星座"
 
 #~ msgid "Show lines"
 #~ msgstr "顯示星座連線"
