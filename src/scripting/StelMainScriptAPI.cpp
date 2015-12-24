@@ -705,6 +705,11 @@ void StelMainScriptAPI::resetOutput(void)
 	StelApp::getInstance().getScriptMgr().resetOutput();
 }
 
+void StelMainScriptAPI::saveOutputAs(const QString &filename)
+{
+	StelApp::getInstance().getScriptMgr().saveOutputAs(filename);
+}
+
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
 	StelCore *core = StelApp::getInstance().getCore();
