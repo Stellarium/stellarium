@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2008 Matthew Gates
+ * Copyright (C) 2015 Georg Zotti (min/max limits)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +28,8 @@
 //! A spin box for displaying/entering angular values.
 //! This class can accept angles in various formats commonly used in astronomy
 //! including decimal degrees, DMS and HMS.
+//! You should set upper and lower limits (maximum, minimum) and
+//! decide whether the values wrap around or are blocked at the limits (wrapping).
 class AngleSpinBox : public QAbstractSpinBox
 {
 	Q_OBJECT
@@ -93,6 +96,25 @@ public:
 	//! Get the current display format.
 	//! @return the current DisplayFormat.
 	PrefixType prefixType() { return currentPrefixType; }
+
+	//! Set the minimum value.
+	//! @param min the new minimum value
+	//! @param isDegrees true if the new minimum value is given in degrees, else min is understood as radians.
+	void setMinimum(const double min, const bool isDegrees=false) {minRad = min * (isDegrees? M_PI/180.0 : 1.); }
+	//! Get the minimum value.
+	//! @return the current minimum value
+	//! @param isDegrees true if the minimum value is required in degrees, else min is returned as radians.
+	double getMinimum(const bool isDegrees) { return minRad * (isDegrees ? 180.0/M_PI : 1.0); }
+
+	//! Set the maximum value.
+	//! @param max the new maximum value
+	//! @param isDegrees true if the new maximum value is given in degrees, else max is understood as radians.
+	void setMaximum(const double max, const bool isDegrees=false) {maxRad = max * (isDegrees? M_PI/180.0 : 1.); }
+	//! Get the maximum value.
+	//! @return the current maximum value
+	//! @param isDegrees true if the maximum value is required in degrees, else max is returned as radians.
+	double getMaximum(const bool isDegrees) { return maxRad * (isDegrees ? 180.0/M_PI : 1.0); }
+
 	
 public slots:
 	//! Set the value to default 0 angle.
@@ -152,7 +174,10 @@ private:
 	PrefixType currentPrefixType;
 	int decimalPlaces;
 	double radAngle;
-
+	// min/max angles (radians), users should not be able to enter more/less.
+	// Use together with the wrapping() property!
+	double minRad;
+	double maxRad;
 };
 
 #endif // _ANGLESPINBOX_HPP_

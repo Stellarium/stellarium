@@ -1,5 +1,6 @@
 /***************************************************************************
  *   Copyright (C) 2008  Matthew Gates                                     *
+ *   Copyright (C) 2015 Georg Zotti (min/max limits)                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -25,16 +26,20 @@
 #include <QWidget>
 #include <QLocale>
 #include <cmath>
+#include <limits>
 
 AngleSpinBox::AngleSpinBox(QWidget* parent, DisplayFormat format, PrefixType prefix)
 	: QAbstractSpinBox(parent),
 	  angleSpinBoxFormat(format),
 	  currentPrefixType(prefix),
 	  decimalPlaces(2),
-	  radAngle(0.0)
+	  radAngle(0.0),
+	  minRad(-std::numeric_limits<double>::max()),
+	  maxRad( std::numeric_limits<double>::max())
 {
 	connect(this, SIGNAL(editingFinished()), this, SLOT(updateValue()));
 	formatText();
+	setWrapping(false); // but should be set true for longitudinal cycling
 }
 
 const QString AngleSpinBox::positivePrefix(PrefixType prefix)
@@ -122,7 +127,7 @@ AngleSpinBox::AngleSpinboxSection AngleSpinBox::getCurrentSection() const
 	
 void AngleSpinBox::stepBy (int steps)
 {
-	const int cusorPos = lineEdit()->cursorPosition();
+	const int cursorPos = lineEdit()->cursorPosition();
 	const AngleSpinBox::AngleSpinboxSection sec = getCurrentSection();
 	switch (sec)
 	{
@@ -164,8 +169,17 @@ void AngleSpinBox::stepBy (int steps)
 			return;
 		}
 	}
+	if (wrapping())
+	{
+		if (radAngle > maxRad)
+			radAngle=minRad+(radAngle-maxRad);
+		else if (radAngle < minRad)
+			radAngle=maxRad-(minRad-radAngle);
+	}
+	radAngle=qMin(radAngle, maxRad);
+	radAngle=qMax(radAngle, minRad);
 	formatText();
-	lineEdit()->setCursorPosition(cusorPos);
+	lineEdit()->setCursorPosition(cursorPos);
 	emit(valueChanged());
 }
 
@@ -196,7 +210,7 @@ double AngleSpinBox::valueRadians()
 
 double AngleSpinBox::valueDegrees()
 {
-	return (radAngle*360.)/(2.*M_PI);
+	return radAngle*(180./M_PI);
 } 
 
 double AngleSpinBox::stringToDouble(QString input, QValidator::State* state, PrefixType prefix) const
@@ -325,6 +339,17 @@ void AngleSpinBox::updateValue(void)
 	if (radAngle == a)
 		return;
 	radAngle = a;
+
+	if (wrapping())
+	{
+		if (radAngle > maxRad)
+			radAngle=minRad+(radAngle-maxRad);
+		else if (radAngle < minRad)
+			radAngle=maxRad-(minRad-radAngle);
+	}
+	radAngle=qMin(radAngle, maxRad);
+	radAngle=qMax(radAngle, minRad);
+
 	formatText();
 	emit(valueChanged());
 }
