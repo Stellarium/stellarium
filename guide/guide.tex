@@ -60,8 +60,7 @@
 \node at (current page.north west)
 {\begin{tikzpicture}[remember picture,overlay]
 \node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{bookcover}}; % Background image
-\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering Stellarium User Guide\\[15pt] % Book title
-%{\Large Version 0.15.0-1}\\[20pt] % Subtitle
+\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering Stellarium User Guide\\[20pt] % Book title
 {\Large Matthew Gates, Barry Gerdes, Alexander Wolf, Georg Zotti}}}; % Author name
 \end{tikzpicture}};
 \end{tikzpicture}
@@ -153,6 +152,19 @@
 %----------------------------------------------------------------------------------------
 
 \include{exercises}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Stellarium Reference)
+%----------------------------------------------------------------------------------------
+
+\include{reference}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Star Catalogue)
+%----------------------------------------------------------------------------------------
+
+\include{star_catalogue}
+
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER X (License)
