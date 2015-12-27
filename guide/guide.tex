@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Legrand Orange Book
+% LaTeX Template
+% Version 2.1 (14/11/15)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Mathias Legrand (legrand.mathias@gmail.com) with modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Compiling this template:
+% This template uses biber for its bibliography and makeindex for its index.
+% When you first open the template, compile it from the command line with the 
+% commands below to make sure your LaTeX distribution is configured correctly:
+%
+% 1) pdflatex main
+% 2) makeindex main.idx -s StyleInd.ist
+% 3) biber main
+% 4) pdflatex main x 2
+%
+% After this, when you wish to update the bibliography/index use the appropriate
+% command above and make sure to compile with pdflatex several times 
+% afterwards to propagate your changes to the document.
+%
+% This template also uses a number of packages which may need to be
+% updated to the newest versions for the template to compile. It is strongly
+% recommended you update your LaTeX distribution if you have any
+% compilation errors.
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt,fleqn]{book} % Default font size and left-justified equations
+
+%----------------------------------------------------------------------------------------
+
+\input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+\coordinate [below=12cm] (midpoint) at (current page.north);
+\node at (current page.north west)
+{\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{bookcover}}; % Background image
+\draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]{\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}{\centering Stellarium User Guide\\[15pt] % Book title
+%{\Large Version 0.15.0-1}\\[20pt] % Subtitle
+{\Large Matthew Gates, Barry Gerdes, Alexander Wolf, Georg Zotti}}}; % Author name
+\end{tikzpicture}};
+\end{tikzpicture}
+\vfill
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent Copyright \copyright\ 2006-2009 Matthew Gates.\\ % Copyright notice
+\noindent Copyright \copyright\ 2013-2014 Barry Gerdes.\\ % Copyright notice
+\noindent Copyright \copyright\ 2013-2015 Alexander Wolf.\\ % Copyright notice
+\noindent Copyright \copyright\ 2014-2015 Georg Zotti.\\ % Copyright notice
+
+\noindent \textsc{Version 0.15.0-1}\\ % Publisher
+
+\noindent \textsc{stellarium.org}\\ % URL
+
+\noindent Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled "GNU Free Documentation License".\\ % License information
+
+\noindent \textit{A first draft, December 2015} % Printing/edition date
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\chapterimage{chapter-bg.png} % Table of contents heading image
+
+\pagestyle{empty} % No headers
+
+\tableofcontents % Print the table of contents itself
+
+\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
+
+\pagestyle{fancy} % Print headers again
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 1 (Introduction)
+%----------------------------------------------------------------------------------------
+
+\include{introduction}
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 2 (Installation)
+%----------------------------------------------------------------------------------------
+
+\include{installation}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3 (Interface Guide)
+%----------------------------------------------------------------------------------------
+
+\include{interface_guide}
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 4 (Configuration)
+%----------------------------------------------------------------------------------------
+
+\include{configuration}
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Astronomical Concepts)
+%----------------------------------------------------------------------------------------
+
+\include{astronomical_concepts}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Astronomical Phenomena)
+%----------------------------------------------------------------------------------------
+
+\include{astronomical_phenomena}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Sky Guide)
+%----------------------------------------------------------------------------------------
+
+\include{sky_guide}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Exercises)
+%----------------------------------------------------------------------------------------
+
+\include{exercises}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (License)
+%----------------------------------------------------------------------------------------
+
+\include{license}
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER X (Acknowledgements)
+%----------------------------------------------------------------------------------------
+
+\include{acknowledgements}
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{\textcolor{ocre}{Bibliography}}
+\section*{Books}
+\addcontentsline{toc}{section}{Books}
+\printbibliography[heading=bibempty,type=book]
+\section*{Articles}
+\addcontentsline{toc}{section}{Articles}
+\printbibliography[heading=bibempty,type=article]
+
+
+\end{document}
