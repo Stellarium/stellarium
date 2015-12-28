@@ -1,8 +1,8 @@
 \chapterimage{chapter-bg.png} % Chapter heading image
 
-\chapter{Stellarium Reference}
+\chapter{Stellarium Reference}\label{stellarium-reference}
 
-\section{Configuration file}
+\section{Configuration File}\label{configuration-file}
 See \href{Advanced_Use\#The_Main_Configuration_File}{Advanced Use, The
 Main Configuration File} for information about this file, including its
 default installed location, name, and command line options that can
@@ -428,614 +428,623 @@ flag\_show\_ugc & bool & Set to \emph{true} to displaying The Uppsala General Ca
 \end{longtabu}
 
 \subsection{Section
-{[}dso\_type\_filters{]}}\label{section-dsoux5ftypeux5ffilters}
+\big[dso\_type\_filters\big]}\label{section-dsoux5ftypeux5ffilters}
 
-\begin{longtable}[c]{@{}lllll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Default value} & \emph{Version} &
-\emph{Description}\tabularnewline
-flag\_show\_galaxies & bool & \emph{true} & 0.14.0+ & Set to \emph{true}
-to displaying galaxies\tabularnewline
-flag\_show\_active\_galaxies & bool & \emph{true} & 0.14.0+ & Set to
-\emph{true} to displaying active galaxies\tabularnewline
-flag\_show\_interacting\_galaxies & bool & \emph{true} & 0.14.0+ & Set
-to \emph{true} to displaying interacting galaxies\tabularnewline
-flag\_show\_clusters & bool & \emph{true} & 0.14.0+ & Set to \emph{true}
-to displaying star clusters\tabularnewline
-flag\_show\_bright\_nebulae & bool & \emph{true} & 0.14.0+ & Set to
-\emph{true} to displaying bright nebulae\tabularnewline
-flag\_show\_dark\_nebulae & bool & \emph{true} & 0.14.0+ & Set to
-\emph{true} to displaying dark nebulae\tabularnewline
-flag\_show\_planetary\_nebulae & bool & \emph{true} & 0.14.0+ & Set to
-\emph{true} to displaying planetary nebulae\tabularnewline
-flag\_show\_hydrogen\_regions & bool & \emph{true} & 0.14.0+ & Set to
-\emph{true} to displaying hydrogen regions\tabularnewline
-flag\_show\_supernova\_remnants & bool & \emph{true} & 0.14.0+ & Set to
-\emph{true} to displaying supernovae remnants\tabularnewline
-flag\_show\_other & bool & \emph{true} & 0.14.0+ & Set to \emph{true} to
-displaying other deep-sky objects\tabularnewline
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+flag\_show\_galaxies & bool & Set to \emph{true}
+to displaying galaxies. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_active\_galaxies & bool & Set to
+\emph{true} to displaying active galaxies. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_interacting\_galaxies & bool & Set
+to \emph{true} to displaying interacting galaxies. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_clusters & bool & Set to \emph{true}
+to displaying star clusters. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_bright\_nebulae & bool & Set to
+\emph{true} to displaying bright nebulae. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_dark\_nebulae & bool & Set to
+\emph{true} to displaying dark nebulae. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_planetary\_nebulae & bool & Set to
+\emph{true} to displaying planetary nebulae. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_hydrogen\_regions & bool & Set to
+\emph{true} to displaying hydrogen regions. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_supernova\_remnants & bool & Set to
+\emph{true} to displaying supernovae remnants. Default value: \emph{true}. \tabularnewline
+\midrule
+flag\_show\_other & bool & Set to \emph{true} to
+displaying other deep-sky objects. Default value: \emph{true}. \tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}files{]}}\label{section-files}
+\subsection{Section \big[gui\big]}\label{section-gui}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-removable\_media\_path & string & 0.9.0-? & Path to removable
-mediaremovable media (CD/DVD). This is usually only used in Digitalis
-planetariums products.\tabularnewline
-scripts\_can\_write\_files & bool & 0.9.0-? & Some scripting commands
-will cause files to be written. Unless this option is set to true, these
-scripting commands will fail.\tabularnewline
-\bottomrule
-\end{longtable}
-
-\subsection{Section {[}gui{]}}\label{section-gui}
-
-\begin{longtable}[c]{@{}llll@{}}
-\toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-base\_font\_size & int & \emph{all} & Sets the font size. Typical value:
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+base\_font\_size & int & Sets the font size. Typical value:
 \emph{15}\tabularnewline
-base\_font\_name & string & 0.8.0-0.11.4 & Selects the name for font
-file, e.g. \emph{DejaVuSans.ttf}\tabularnewline
-0.12.0+ & Selects the name for base font, e.g. \emph{DejaVu
+\midrule
+base\_font\_name & string & Selects the name for base font, e.g. \emph{DejaVu
 Sans}\tabularnewline
-safe\_font\_name & string & 0.12.0+ & Selects the name for safe font,
+\midrule
+safe\_font\_name & string & Selects the name for safe font,
 e.g. \emph{Verdana}\tabularnewline
-base\_font\_file & string & 0.12.0+ & Selects the name for font file,
+\midrule
+base\_font\_file & string & Selects the name for font file,
 e.g. \emph{DejaVuSans.ttf}\tabularnewline
-flag\_show\_fps & bool & \emph{all} & Set to \emph{false} if you don't
+\midrule
+flag\_show\_fps & bool & Set to \emph{false} if you don't
 want to see at how many frames per second Stellarium is
 rendering\tabularnewline
-flag\_show\_fov & bool & \emph{all} & Set to \emph{false} if you don't
+\midrule
+flag\_show\_fov & bool & Set to \emph{false} if you don't
 want to see how many degrees your field of view is\tabularnewline
-flag\_show\_script\_bar & bool & 0.7.1-0.10.0 & Set to \emph{true} if
-you want to have access to the script bar\tabularnewline
-flag\_mouse\_cursor\_timeout & float & 0.8.0+ & set to \emph{0} if you
+\midrule
+flag\_mouse\_cursor\_timeout & float & Set to \emph{0} if you
 want to keep the mouse cursor visible at all times. non-0 values mean
 the cursor will be hidden after that many seconds of
 inactivity\tabularnewline
-flag\_script\_allow\_ui & bool & 0.8.0-0.10.0 & When set to false the
-normal movement controls will be disabled when a script is playing true
-enables them\tabularnewline
-flag\_show\_flip\_buttons & bool & 0.8.2+ & Enables/disables display of
+\midrule
+flag\_show\_flip\_buttons & bool & Enables/disables display of
 the image flipping buttons in the main toolbar (see section
-{[}sec:imageflipping{]})\tabularnewline
-flag\_show\_nebulae\_background\_button & bool & 0.10.1+ & Set to
+\ref{imageflipping})\tabularnewline
+\midrule
+flag\_show\_nebulae\_background\_button & bool & Set to
 \emph{true} if you want to have access to the button for
 enabling/disabling backgrounds for deep-sky objects\tabularnewline
-flag\_use\_degrees & bool & 0.12.2+ &\tabularnewline
-selected\_object\_info & string & 0.10.0+ & Values: \emph{all},
+\midrule
+flag\_use\_degrees & bool &\tabularnewline
+\midrule
+selected\_object\_info & string & Values: \emph{all},
 \emph{short} and \emph{none}. Value \emph{custom} added since version
 0.12.0.\tabularnewline
-auto\_hide\_horizontal\_toolbar & bool & 0.10.1+ & Set to \emph{true} if
+\midrule
+auto\_hide\_horizontal\_toolbar & bool & Set to \emph{true} if
 you want auto hide the horizontal toolbar.\tabularnewline
-auto\_hide\_vertical\_toolbar & bool & 0.10.1+ & Set to \emph{true} if
+\midrule
+auto\_hide\_vertical\_toolbar & bool & Set to \emph{true} if
 you want auto hide the vertical toolbar.\tabularnewline
-day\_key\_mode & string & 0.9.0+ & Specifies the amount of time which is
+\midrule
+day\_key\_mode & string & Specifies the amount of time which is
 added and subtracted when the {[} {]} - and = keys are pressed -
 calendar days, or sidereal days. This option only makes sense for
 Digitalis planetariums. Values: \emph{calendar} or
 \emph{sidereal}\tabularnewline
-flag\_menu & bool & 0.6.2-0.10.0 &\tabularnewline
-flag\_help & bool & 0.6.2-0.10.0 &\tabularnewline
-flag\_infos & bool & 0.6.2-0.10.0 &\tabularnewline
-flag\_show\_topbar & bool & 0.6.2-0.10.0 &\tabularnewline
-flag\_show\_time & bool & 0.6.2-0.10.0 &\tabularnewline
-flag\_show\_date & bool & 0.6.2-0.10.0 &\tabularnewline
-flag\_show\_appname & bool & 0.6.2-0.10.0 &\tabularnewline
-flag\_show\_selected\_object\_info & bool & 0.6.2-0.10.0
-&\tabularnewline
-gui\_base\_color & float R,G,B & 0.6.2-0.10.0 &\tabularnewline
-gui\_text\_color & float R,G,B & 0.6.2-0.10.0 &\tabularnewline
-flag\_use\_window\_transparency & bool & 0.13.0+ & Set to \emph{false}
+\midrule
+flag\_use\_window\_transparency & bool & Set to \emph{false}
 if you want see the opacity for bars\tabularnewline
-flag\_show\_datetime & bool & 0.13.1+ & Set to \emph{true} if you want
+\midrule
+flag\_show\_datetime & bool & Set to \emph{true} if you want
 display date and time in the bottom bar\tabularnewline
-flag\_time\_jd & bool & 0.13.1+ & Set to \emph{true} if you want using
+\midrule
+flag\_time\_jd & bool & Set to \emph{true} if you want using
 JD format for time in the bottom bar\tabularnewline
-flag\_show\_location & bool & 0.13.1+ & Set to \emph{true} if you want
+\midrule
+flag\_show\_location & bool & Set to \emph{true} if you want
 display location in the bottom bar\tabularnewline
-flag\_fov\_dms & bool & 0.13.1+ & Set to \emph{true} if you want using
+\midrule
+flag\_fov\_dms & bool & Set to \emph{true} if you want using
 DMS format for FOV in the bottom bar\tabularnewline
-flag\_show\_decimal\_degrees & bool & 0.13.1+ & Set to \emph{true} if
+\midrule
+flag\_show\_decimal\_degrees & bool & Set to \emph{true} if
 you want use decimal degrees for coordinates\tabularnewline
-flag\_use\_azimuth\_from\_south & bool & 0.14.0+ & Set to \emph{true} if
+\midrule
+flag\_use\_azimuth\_from\_south & bool & Set to \emph{true} if
 you want calculate azimuth from south towards west (as in old
 astronomical literature)\tabularnewline
-flag\_show\_gui & bool & 0.13.3+ & Set to \emph{true} if you want
+\midrule
+flag\_show\_gui & bool & Set to \emph{true} if you want
 display GUI\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
 \subsection{Section
-{[}init\_location{]}}\label{section-initux5flocation}
+\big[init\_location\big]}\label{section-init-location}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-name & string & 0.6.2-0.10.0 & Sets your location's name. This is an
-arbitrary string, For example, \emph{Paris}\tabularnewline
-latitude & DMS & 0.6.2-0.9.1 & Sets the latitude coordinate of the
-observer. Value is in degrees, minutes, seconds. Positive degree values
-mean North / negative South. e.g. \emph{+55d14'30.00"}\tabularnewline
-longitude & DMS & 0.6.2-0.9.1 & Sets the longitude coordinate of the
-observer. Value is in degrees, minutes, seconds. Positive degree values
-mean East / negative West. e.g. \emph{-01d37'6.00"}\tabularnewline
-altitude & float & 0.6.2-0.9.1 & Observer's altitude above mean sea
-level in meters, e.g. \emph{53}\tabularnewline
-landscape\_name & string & \emph{all} & sets the landscape you see.
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+landscape\_name & string & Sets the landscape you see.
 Other options are \emph{garching, guereins, trees, moon, ocean,
 hurricane, hogerielen}\tabularnewline
-time\_zone & string & 0.6.2-0.9.1 & Sets the time zonetime zone. Valid
-values: \emph{system\_default}, or some region/location combination,
-e.g. \emph{Pacific/Marquesas}\tabularnewline
-time\_display\_format & string & 0.6.2-0.9.1 & Set the time display
-formattime display format mode: can be \emph{system\_default},
-\emph{24h} or \emph{12h}.\tabularnewline
-date\_display\_format & string & 0.6.2-0.9.1 & Set the date display
-format mode: can be \emph{system\_default}, \emph{mddyyyy},
-\emph{ddmmyyyy} or \emph{yyyymmdd} (ISO8601).\tabularnewline
-home\_planet & string & 0.6.2-0.9.1 & Name of solar system body on which
-to start stellarium. This may be set at runtime from the TUI
-menu.\tabularnewline
-location & string & 0.10.1+ & Name of location on which to start
+\midrule
+location & string & Name of location on which to start
 stellarium.\tabularnewline
-last\_location & string & 0.13.1+ & Coordinates of last used location in
+\midrule
+last\_location & string & Coordinates of last used location in
 stellarium.\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}landscape{]}}\label{section-landscape}
+\subsection{Section \big[landscape\big]}\label{section-landscape}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-flag\_landscape & bool & \emph{all} & Set to false if you don't want to
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+flag\_landscape & bool & Set to false if you don't want to
 see the landscape at all\tabularnewline
-flag\_fog & bool & \emph{all} & Set to \emph{false} if you don't want to
+\midrule
+flag\_fog & bool & Set to \emph{false} if you don't want to
 see fog on start-up\tabularnewline
-flag\_atmosphere & bool & \emph{all} & Set to \emph{false} if you don't
+\midrule
+flag\_atmosphere & bool & Set to \emph{false} if you don't
 want to see atmosphere on start-up\tabularnewline
-flag\_landscape\_sets\_location & bool & \emph{all} & Set to \emph{true}
+\midrule
+flag\_landscape\_sets\_location & bool & Set to \emph{true}
 if you want Stellarium to modify the observer location when a new
 landscape is selected (changes planet and longitude/latitude/altitude if
 that data is available in the landscape.ini file)\tabularnewline
-initial\_brightness & float & 0.12.1-0.12.4 & Set initial brightness for
+\midrule
+minimal\_brightness & float & Set minimal brightness for
 landscapes. Typical value: \emph{0.01}\tabularnewline
-minimal\_brightness & float & 0.13.0+ & Set minimal brightness for
-landscapes. Typical value: \emph{0.01}\tabularnewline
-atmospheric\_extinction\_coefficient & float & 0.11.0+ & Set atmospheric
+\midrule
+atmospheric\_extinction\_coefficient & float & Set atmospheric
 extinction coefficient\tabularnewline
-temperature\_C & float & 0.11.0+ & Set atmospheric temperature
+\midrule
+temperature\_C & float & Set atmospheric temperature
 (Celsius)\tabularnewline
-pressure\_mbar & float & 0.11.0+ & Set atmospheric pressure
+\midrule
+pressure\_mbar & float & Set atmospheric pressure
 (mbar)\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}localization{]}}\label{section-localization}
+\subsection{Section \big[localization\big]}\label{section-localization}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-sky\_culture & string & \emph{all} & Sets the sky culture to use. E.g.
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+sky\_culture & string & Sets the sky culture to use. E.g.
 \emph{western, polynesian, egyptian, chinese, lakota, navajo, inuit,
 korean, norse, tupi, maori, aztec, sami}.\tabularnewline
-sky\_locale & string & \emph{all} & Sets language used for names of
+\midrule
+sky\_locale & string & Sets language used for names of
 objects in the sky (e.g. planets). The value is a short locale code,
 e.g. \emph{en, de, en\_GB}\tabularnewline
-app\_locale & string & \emph{all} & Sets language used for Stellarium's
+\midrule
+app\_locale & string & Sets language used for Stellarium's
 user interface. The value is a short locale code, e.g. \emph{en, de,
 en\_GB}.\tabularnewline
-time\_zone & string & 0.10.6+ & Sets the time zone. Valid values:
+\midrule
+time\_zone & string & Sets the time zone. Valid values:
 \emph{system\_default}, or some region/location combination, e.g.
 \emph{Pacific/Marquesas}\tabularnewline
-time\_display\_format & string & 0.10.6+ & Set the time display format
+\midrule
+time\_display\_format & string & Set the time display format
 mode: can be \emph{system\_default}, \emph{24h} or
 \emph{12h}.\tabularnewline
-date\_display\_format & string & 0.10.6+ & Set the date display format
+\midrule
+date\_display\_format & string & Set the date display format
 mode: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy} or
 \emph{yyyymmdd} (ISO8601).\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}main{]}}\label{section-main}
+\subsection{Section \big[main\big]}\label{section-main}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-invert\_screenshots\_colors & bool & 0.10.1+ & If \emph{true},
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+invert\_screenshots\_colors & bool & If \emph{true},
 Stellarium will saving the screenshorts with inverted
 colors.\tabularnewline
-restore\_defaults & bool & 0.10.1+ & If \emph{true}, Stellarium will be
+\midrule
+restore\_defaults & bool & If \emph{true}, Stellarium will be
 restore default settings at startup.\tabularnewline
-screenshot\_dir & string & 0.10.1+ & Path for saving
+\midrule
+screenshot\_dir & string & Path for saving
 screenshots\tabularnewline
-version & string & \emph{all} & Version of Stellarium. This parameter
+\midrule
+version & string & Version of Stellarium. This parameter
 using for updating config.ini file\tabularnewline
-use\_separate\_output\_file & bool & 0.13.1+ & Set to \emph{true} if you
+\midrule
+use\_separate\_output\_file & bool & Set to \emph{true} if you
 want to create a new file for output for each start of
 Stellarium\tabularnewline
-check\_requirements & bool & 0.13.2+ & Set to \emph{false} if you want
+\midrule
+check\_requirements & bool & Set to \emph{false} if you want
 to disable checking hardware requirements at startup. This options for
 developers only!\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}navigation{]}}\label{section-navigation}
+\subsection{Section \big[navigation\big]}\label{section-navigation}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-preset\_sky\_time & float & \emph{all} & Preset sky time used by the
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+preset\_sky\_time & float & Preset sky time used by the
 dome version. Unit is Julian Day. Typical value:
 \emph{2451514.250011573}\tabularnewline
-startup\_time\_mode & string & \emph{all} & Set the start-up time mode,
+\midrule
+startup\_time\_mode & string & Set the start-up time mode,
 can be \emph{actual} (start with current real world time), or
 \emph{Preset} (start at time defined by
 preset\_sky\_time)\tabularnewline
-flag\_enable\_zoom\_keys & bool & \emph{all} & Set to \emph{false} if
+\midrule
+flag\_enable\_zoom\_keys & bool & Set to \emph{false} if
 you want to disable the zoom\tabularnewline
-flag\_manual\_zoom & bool & \emph{all} & Set to'' false'' for normal
+\midrule
+flag\_manual\_zoom & bool & Set to'' false'' for normal
 zoom behaviour as described in this guide. When set to true, the auto
 zoom feature only moves in a small amount and must be pressed many
 times\tabularnewline
-flag\_enable\_move\_keys & bool & \emph{all} & Set to \emph{false} if
+\midrule
+flag\_enable\_move\_keys & bool & Set to \emph{false} if
 you want to disable the arrow keys\tabularnewline
-flag\_enable\_mouse\_navigation & bool & \emph{all} & Set to
+\midrule
+flag\_enable\_mouse\_navigation & bool & Set to
 \emph{false} if you want to disable the mouse navigation.\tabularnewline
-init\_fov & float & \emph{all} & Initial field of view, in degrees,
+\midrule
+init\_fov & float & Initial field of view, in degrees,
 typical value:'' 60''\tabularnewline
-init\_view\_pos & floats & \emph{all} & Initial viewing direction. This
+\midrule
+init\_view\_pos & floats & Initial viewing direction. This
 is a vector with x,y,z-coordinates. x being N-S (S +ve), y being E-W (E
 +ve), z being up-down (up +ve). Thus to look South at the horizon use
 \emph{1,0,0}. To look Northwest and up at $45\degree$, use \emph{-1,-1,1} and so
 on.\tabularnewline
-auto\_move\_duration & float & \emph{all} & Duration for the program to
+\midrule
+auto\_move\_duration & float & Duration for the program to
 move to point at an object when the space bar is pressed. Typical value:
 \emph{1.4}\tabularnewline
-mouse\_zoom & float & \emph{all} & Sets the mouse zoom amount
+\midrule
+mouse\_zoom & float & Sets the mouse zoom amount
 (mouse-wheel)\tabularnewline
-move\_speed & float & \emph{all} & Sets the speed of
+\midrule
+move\_speed & float & Sets the speed of
 movement\tabularnewline
-zoom\_speed & float & \emph{all} & Sets the zoom speed\tabularnewline
-viewing\_mode & string & \emph{all} & If set to \emph{horizon}, the
+\midrule
+zoom\_speed & float & Sets the zoom speed\tabularnewline
+\midrule
+viewing\_mode & string & If set to \emph{horizon}, the
 viewing mode simulate an alt/azi mount, if set to \emph{equator}, the
 viewing mode simulates an equatorial mount\tabularnewline
-flag\_manual\_zoom & bool & \emph{all} & Set to \emph{true} if you want
+\midrule
+flag\_manual\_zoom & bool & Set to \emph{true} if you want
 to auto-zoom in incrementally.\tabularnewline
-auto\_zoom\_out\_resets\_direction & bool & \emph{all} & Set to
+\midrule
+auto\_zoom\_out\_resets\_direction & bool & Set to
 \emph{true} if you want to auto-zoom restoring direction.\tabularnewline
-time\_correction\_algorithm & string & 0.12.1+ & Algorithm of DeltaT
+\midrule
+time\_correction\_algorithm & string & Algorithm of DeltaT
 correction.\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
 \subsection{Section
-{[}plugins\_load\_at\_startup{]}}\label{section-pluginsux5floadux5fatux5fstartup}
+\big[plugins\_load\_at\_startup\big]}\label{section-plugins-load-at-startup}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-AngleMeasure & bool & 0.10.3+ & If \emph{true}, Stellarium will be load
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+AngleMeasure & bool & If \emph{true}, Stellarium will be load
 Angle Measure plugin at startup.\tabularnewline
-CompassMarks & bool & 0.10.3+ & If \emph{true}, Stellarium will be load
+\midrule
+CompassMarks & bool & If \emph{true}, Stellarium will be load
 Compass Marks plugin at startup.\tabularnewline
-Exoplanets & bool & 0.11.4+ & If \emph{true}, Stellarium will be load
+\midrule
+Exoplanets & bool & If \emph{true}, Stellarium will be load
 Exoplanets plugin at startup.\tabularnewline
-Observability & bool & 0.11.4+ & If \emph{true}, Stellarium will be load
+\midrule
+Observability & bool & If \emph{true}, Stellarium will be load
 Observability Analysis plugin at startup.\tabularnewline
-Oculars & bool & 0.10.3+ & If \emph{true}, Stellarium will be load
+\midrule
+Oculars & bool & If \emph{true}, Stellarium will be load
 Oculars plugin at startup.\tabularnewline
-Pulsars & bool & 0.11.2+ & If \emph{true}, Stellarium will be load
+\midrule
+Pulsars & bool & If \emph{true}, Stellarium will be load
 Pulsars plugin at startup.\tabularnewline
-Quasars & bool & 0.11.2+ & If \emph{true}, Stellarium will be load
+\midrule
+Quasars & bool & If \emph{true}, Stellarium will be load
 Quasars plugin at startup.\tabularnewline
-Satellites & bool & 0.10.3+ & If \emph{true}, Stellarium will be load
+\midrule
+Satellites & bool & If \emph{true}, Stellarium will be load
 Satellites plugin at startup.\tabularnewline
-SolarSystemEditor & bool & 0.10.6+ & If \emph{true}, Stellarium will be
+\midrule
+SolarSystemEditor & bool & If \emph{true}, Stellarium will be
 load Solar System Editor plugin at startup.\tabularnewline
-Supernovae & bool & 0.11.0+ & If \emph{true}, Stellarium will be load
+\midrule
+Supernovae & bool & If \emph{true}, Stellarium will be load
 Historical Supernovae plugin at startup.\tabularnewline
-TelescopeControl & bool & 0.10.3+ & If \emph{true}, Stellarium will be
+\midrule
+TelescopeControl & bool & If \emph{true}, Stellarium will be
 load Telescope Control plugin at startup.\tabularnewline
-TextUserInterface & bool & 0.10.3+ & If \emph{true}, Stellarium will be
+\midrule
+TextUserInterface & bool & If \emph{true}, Stellarium will be
 load Text User Interface plugin at startup.\tabularnewline
-TimeZoneConfiguration & bool & 0.10.6+ & If \emph{true}, Stellarium will
+\midrule
+TimeZoneConfiguration & bool & If \emph{true}, Stellarium will
 be load Time Zone plugin at startup.\tabularnewline
-Novae & bool & 0.12.3+ & If \emph{true}, Stellarium will be load Bright
+\midrule
+Novae & bool & If \emph{true}, Stellarium will be load Bright
 Novae plugin at startup.\tabularnewline
-Scenery3dMgr & bool & 0.13.3+ & If \emph{true}, Stellarium will be load
+\midrule
+Scenery3dMgr & bool & If \emph{true}, Stellarium will be load
 Scenery 3D plugin at startup.\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}projection{]}}\label{section-projection}
+\subsection{Section \big[projection\big]}\label{section-projection}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-type & string & 0.8.0+ & Sets projection mode. Values:
-\emph{perspective, equal\_area, stereographic, fisheye, cylinder,
-mercator}, or \emph{orthographic}.\tabularnewline
-0.10.3+ & Sets projection mode. Values: \emph{ProjectionPerspective,
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+type & string & Sets projection mode. Values: \emph{ProjectionPerspective,
 ProjectionEqualArea, ProjectionStereographic, ProjectionFisheye,
 ProjectionHammer, ProjectionCylinder, ProjectionMercator} or
 \emph{ProjectionOrthographic}.\tabularnewline
-viewport & string & \emph{all} & How the view-port looks. Values:
+\midrule
+viewport & string & How the view-port looks. Values:
 \emph{none, disk}.\tabularnewline
-viewportMask & string & \emph{all} & How the view-port looks. Values:
+\midrule
+viewportMask & string & How the view-port looks. Values:
 \emph{none}.\tabularnewline
-flag\_use\_gl\_point\_sprite & bool & \emph{all} &\tabularnewline
-flip\_horz & bool & \emph{all} &\tabularnewline
-flip\_vert & bool & \emph{all} &\tabularnewline
+\midrule
+flag\_use\_gl\_point\_sprite & bool & \tabularnewline
+\midrule
+flip\_horz & bool & \tabularnewline
+\midrule
+flip\_vert & bool & \tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}proxy{]}}\label{section-proxy}
+\subsection{Section \big[proxy\big]}\label{section-proxy}
 
-\begin{longtable}[c]{@{}lllll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Default value} & \emph{Version} &
-\emph{Description}\tabularnewline
-host\_name & string & \emph{empty} & 0.10.3+ & Name of host for proxy.
-E.g. \emph{proxy.org}\tabularnewline
-port & int & 0 & 0.10.3+ & Port of proxy. E.g.
-\emph{8080}\tabularnewline
-user & string & \emph{empty} & 0.10.3+ & Username for proxy. E.g.
-\emph{michael\_knight}\tabularnewline
-password & string & \emph{empty} & 0.10.3+ & Password for proxy. E.g.
-\emph{xxxxx}\tabularnewline
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+host\_name & string & Name of host for proxy. E.g. \emph{proxy.org}\tabularnewline
+\midrule
+port & int & Port of proxy. E.g. \emph{8080}\tabularnewline
+\midrule
+user & string & Username for proxy. E.g. \emph{michael\_knight}\tabularnewline
+\midrule
+password & string & Password for proxy. E.g. \emph{xxxxx}\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}scripts{]}}\label{section-scripts}
+\subsection{Section \big[scripts\big]}\label{section-scripts}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-flag\_script\_allow\_ui & bool & 0.9.1+ &\tabularnewline
-scripting\_allow\_write\_files & bool & 0.9.1+ &\tabularnewline
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+flag\_script\_allow\_ui & bool &\tabularnewline
+\midrule
+scripting\_allow\_write\_files & bool &\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}search{]}}\label{section-search}
+\subsection{Section \big[search\big]}\label{section-search}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-flag\_search\_online & bool & 0.11.2+ & If \emph{true}, Stellarium will
-be use SIMBAD for search.\tabularnewline
-simbad\_server\_url & string & 0.11.2+ & URL for SIMBAD
-mirror\tabularnewline
-flag\_start\_words & bool & 0.12.3+ & If \emph{false}, Stellarium will
-be search phrase only from start of words\tabularnewline
-coordinate\_system & string & 0.13.1+ & Specifies the coordinate system.
-\emph{Possible values:} equatorialJ2000, equatorial, horizontal,
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+flag\_search\_online & bool & If \emph{true}, Stellarium will be use SIMBAD for search.\tabularnewline
+\midrule
+simbad\_server\_url & string & URL for SIMBAD mirror\tabularnewline
+\midrule
+flag\_start\_words & bool & If \emph{false}, Stellarium will be search phrase only from start of words\tabularnewline
+\midrule
+coordinate\_system & string & Specifies the coordinate system. \emph{Possible values:} equatorialJ2000, equatorial, horizontal,
 galactic. \emph{Default value:} equatorialJ2000.\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
 \subsection{Section
-{[}spheric\_mirror{]}}\label{section-sphericux5fmirror}
+\big[spheric\_mirror\big]}\label{section-sphericux5fmirror}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-distorter\_max\_fov & float & \emph{all} & Set the maximum field of view
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+distorter\_max\_fov & float & Set the maximum field of view
 for the spheric mirror distorter in degrees. Typical value,
 \emph{180}\tabularnewline
-flag\_use\_ext\_framebuffer\_object & bool & \emph{all} & Some video
+\midrule
+flag\_use\_ext\_framebuffer\_object & bool & Some video
 hardware incorrectly claims to support some GL extension,
 GL\_FRAMEBUFFER\_EXTEXT. If, when using the spheric mirror distorter the
 frame rate drops to a very low value (e.g. 0.1 FPS), set this parameter
 to false to tell Stellarium ignore the claim of the video driver that it
 can use this extension\tabularnewline
-flip\_horz & bool & \emph{all} & Flip the projection
-horizontally\tabularnewline
-flip\_vert & bool & \emph{all} & Flip the projection
-vertically\tabularnewline
-projector\_gamma & float & \emph{all} & This parameter controls the
+\midrule
+flip\_horz & bool & Flip the projection horizontally\tabularnewline
+\midrule
+flip\_vert & bool & Flip the projection vertically\tabularnewline
+\midrule
+projector\_gamma & float & This parameter controls the
 properties of the spheric mirror projection mode.\tabularnewline
-projector\_position\_x & float & \emph{all}\tabularnewline
-projector\_position\_y & float & \emph{all}\tabularnewline
-projector\_position\_z & float & \emph{all}\tabularnewline
-mirror\_position\_x & float & \emph{all}\tabularnewline
-mirror\_position\_y & float & \emph{all}\tabularnewline
-mirror\_position\_z & float & \emph{all}\tabularnewline
-mirror\_radius & float & \emph{all}\tabularnewline
-dome\_radius & float & \emph{all}\tabularnewline
-zenith\_y & float & \emph{all}\tabularnewline
-scaling\_factor & float & \emph{all}\tabularnewline
+\midrule
+projector\_position\_x & float & \tabularnewline
+\midrule
+projector\_position\_y & float & \tabularnewline
+\midrule
+projector\_position\_z & float & \tabularnewline
+\midrule
+mirror\_position\_x & float & \tabularnewline
+\midrule
+mirror\_position\_y & float & \tabularnewline
+\midrule
+mirror\_position\_z & float & \tabularnewline
+\midrule
+mirror\_radius & float & \tabularnewline
+\midrule
+dome\_radius & float & \tabularnewline
+\midrule
+zenith\_y & float & \tabularnewline
+\midrule
+scaling\_factor & float & \tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}stars{]}}\label{section-stars}
+\subsection{Section \big[stars\big]}\label{section-stars}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-relative\_scale & float & \emph{all} & Changes the relative size of
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+relative\_scale & float & Changes the relative size of
 bright and faint stars. Higher values mean that bright stars are
 comparitively larger when rendered. Typical value:
 \emph{1.0}\tabularnewline
-absolute\_scale & float & \emph{all} & Changes how large stars are
+\midrule
+absolute\_scale & float & Changes how large stars are
 rendered. larger value lead to larger depiction. Typical value:
 \emph{1.0}\tabularnewline
-star\_twinkle\_amount & float & \emph{all} & Sets the amount of
+\midrule
+star\_twinkle\_amount & float & Sets the amount of
 twinkling. Typical value: \emph{0.3}\tabularnewline
-flag\_star\_twinkle & bool & \emph{all} & Set to \emph{false} to turn
+\midrule
+flag\_star\_twinkle & bool & Set to \emph{false} to turn
 star twinkling off, \emph{true} to allow twinkling.\tabularnewline
-flag\_point\_star & bool & prior 0.13.0 & Set to \emph{false} to draw
-stars at a size that corresponds to their brightness. When set to true
-all stars are drawn at single pixel size\tabularnewline
-mag\_converter\_max\_fov & float & \emph{all} & Sets the maximum field
+\midrule
+mag\_converter\_max\_fov & float & Sets the maximum field
 of view for which the magnitude conversion routine is used. Typical
 value: \emph{90.0}.\tabularnewline
-mag\_converter\_min\_fov & float & \emph{all} & Sets the minimum field
+\midrule
+mag\_converter\_min\_fov & float & Sets the minimum field
 of view for which the magnitude conversion routine is used. Typical
 value: \emph{0.001}.\tabularnewline
-labels\_amount & float & \emph{all} & Sets the amount of labels. Typical
+\midrule
+labels\_amount & float & Sets the amount of labels. Typical
 value: \emph{3.0}\tabularnewline
-init\_bortle\_scale & int & \emph{all} & Sets the initial value of the
+\midrule
+init\_bortle\_scale & int & Sets the initial value of the
 bortle scale. Typical value: \emph{3}.\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}tui{]}}\label{section-tui}
+\subsection{Section \big[tui\big]}\label{section-tui}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-flag\_enable\_tui\_menu & bool & prior 0.9.1; 0.10.3+ & Enables or
-disables the TUI menu\tabularnewline
-flag\_show\_gravity\_ui & bool & prior 0.9.1; 0.10.3+ & Enables or
-disables gravity mode for UI\tabularnewline
-flag\_show\_tui\_datetime & bool & prior 0.9.1; 0.10.3+ & Set to
-\emph{true} if you want to see a date and time label suited for dome
-projections\tabularnewline
-flag\_show\_tui\_short\_obj\_info & bool & prior 0.9.1; 0.10.3+ & set to
-\emph{true} if you want to see object info suited for dome
-projections\tabularnewline
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+flag\_enable\_tui\_menu & bool & Enables or disables the TUI menu\tabularnewline
+\midrule
+flag\_show\_gravity\_ui & bool & Enables or disables gravity mode for UI\tabularnewline
+\midrule
+flag\_show\_tui\_datetime & bool & Set to \emph{true} if you want to see a date and time label suited for dome projections\tabularnewline
+\midrule
+flag\_show\_tui\_short\_obj\_info & bool & set to \emph{true} if you want to see object info suited for dome projections\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}video{]}}\label{section-video}
+\subsection{Section \big[video\big]}\label{section-video}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-fullscreen & bool & \emph{all} & If \emph{true}, Stellarium will start
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+fullscreen & bool & If \emph{true}, Stellarium will start
 up in full-screen mode. If \emph{false}, Stellarium will start in
 windowed mode\tabularnewline
-screen\_w & int & \emph{all} & Sets the display width when in windowed
-mode. Value in pixels, e.g. \emph{1024}\tabularnewline
-screen\_h & int & \emph{all} & Sets the display height when in windowed
-mode. Value in pixels, e.g. \emph{768}\tabularnewline
-screen\_x & int & \emph{all} & Value in pixels, e.g.
-\emph{0}\tabularnewline
-screen\_y & int & \emph{all} & Value in pixels, e.g.
-\emph{0}\tabularnewline
-horizontal\_offset & int & prior 0.9.0 & Value in pixels, e.g.
-\emph{0}\tabularnewline
-vertical\_offset & int & prior 0.9.0 & Value in pixels, e.g.
-\emph{0}\tabularnewline
-distorter & string & 0.8.0-0.10.2 & This is used when the spheric mirror
-display mode is activated. Values include \emph{none} and
-\emph{fisheye\_to\_spheric\_mirror}.\tabularnewline
-viewport\_effect & string & 0.10.3+ & This is used when the spheric
-mirror display mode is activated. Values include \emph{none} and
-\emph{sphericMirrorDistorter}.\tabularnewline
-minimum\_fps & int & \emph{all} & Sets the minimum number of frames per
-second to display at (hardware performance permitting)\tabularnewline
-maximum\_fps & int & \emph{all} & Sets the maximum number of frames per
-second to display at. This is useful to reduce power consumption in
-laptops.\tabularnewline
+\midrule
+screen\_w & int & Sets the display width when in windowed mode. Value in pixels, e.g. \emph{1024}\tabularnewline
+\midrule
+screen\_h & int & Sets the display height when in windowed mode. Value in pixels, e.g. \emph{768}\tabularnewline
+\midrule
+screen\_x & int & Value in pixels, e.g. \emph{0}\tabularnewline
+\midrule
+screen\_y & int & Value in pixels, e.g. \emph{0}\tabularnewline
+\midrule
+viewport\_effect & string & This is used when the spheric mirror display mode is activated. Values include \emph{none} and \emph{sphericMirrorDistorter}.\tabularnewline
+\midrule
+minimum\_fps & int & Sets the minimum number of frames per second to display at (hardware performance permitting)\tabularnewline
+\midrule
+maximum\_fps & int & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
-\subsection{Section {[}viewing{]}}\label{section-viewing}
+\subsection{Section \big[viewing\big]}\label{section-viewing}
 
-\begin{longtable}[c]{@{}llll@{}}
+\begin{longtabu} to \textwidth {l|l|X}
 \toprule
-\emph{ID} & \emph{Type} & \emph{Version} &
-\emph{Description}\tabularnewline
-atmosphere\_fade\_duration & float & 0.8.0+ & Sets the time it takes for
+\emph{ID} & \emph{Type} & \emph{Description}\tabularnewline
+\midrule
+atmosphere\_fade\_duration & float & Sets the time it takes for
 the atmosphere to fade when de-selected\tabularnewline
-flag\_constellation\_drawing & bool & \emph{all} & Set to \emph{true} if
-you want to see the constellation line drawing on
-start-up\tabularnewline
-flag\_constellation\_name & bool & \emph{all} & Set to \emph{true} if
-you want to see the constellation names on start-up\tabularnewline
-flag\_constellation\_art & bool & \emph{all} & Set to \emph{true} if you
-want to see the constellation art on start-up\tabularnewline
-flag\_constellation\_boundaries & bool & 0.8.0+ & Set to \emph{true} if
-you want to see the constellation boundaries on start-up\tabularnewline
-flag\_constellation\_isolate\_selected & bool & \emph{all} & When set to
-\emph{true}, constellation lines, boundaries and art will be limited to
-the constellation of the selected star, if that star is ''on'' one of
-the constellation lines.\tabularnewline
-flag\_constellation\_pick & bool & 0.6.2-0.7.1; 0.13.2+ & Set to
-\emph{true} if you only want to see the line drawing, art and name of
-the selected constellation star\tabularnewline
-flag\_isolated\_trails & bool & 0.13.2+ & Set to \emph{true} if you only
-want to see the tail line drawing of the selected planets (asteroids,
-comets, moons)\tabularnewline
-flag\_azimutal\_grid & bool & \emph{all} & Set to \emph{true} if you
-want to see the azimuthal grid on start-up\tabularnewline
-flag\_equatorial\_grid & bool & \emph{all} & Set to \emph{true} if you
-want to see the equatorial grid (on date) on start-up\tabularnewline
-flag\_equatorial\_J2000\_grid & bool & 0.10.2+ & Set to \emph{true} if
-you want to see the equatorial grid (J2000) on start-up\tabularnewline
-flag\_ecliptic\_J2000\_grid & bool & 0.11.3+ & Set to \emph{true} if you
-want to see the ecliptic grid (J2000) on start-up\tabularnewline
-flag\_galactic\_grid & bool & 0.10.4+ & Set to \emph{true} if you want
-to see the galactic grid on start-up\tabularnewline
-flag\_galactic\_plane\_line & bool & 0.11.2+ & Set to \emph{true} if you
-want to see the galactic plane line on start-up\tabularnewline
-flag\_equator\_line & bool & \emph{all} & Set to \emph{true} if you want
-to see the equator line on start-up\tabularnewline
-flag\_ecliptic\_line & bool & \emph{all} & Set to \emph{true} if you
-want to see the ecliptic line (J2000) on start-up\tabularnewline
-flag\_meridian\_line & bool & 0.8.0+ & Set to \emph{true} if you want to
-see the meridian line on start-up\tabularnewline
-flag\_cardinal\_points & bool & \emph{all} & Set to \emph{false} if you
-don't want to see the cardinal points\tabularnewline
-flag\_gravity\_labels & bool & \emph{all} & Set to \emph{true} if you
-want labels to undergo gravity (top side of text points toward
-zenithzenith). Useful with dome projection.\tabularnewline
-flag\_init\_moon\_scaled & bool & 0.6.2 & Change to \emph{false} if you
-want to see the real moon size on start-up\tabularnewline
-viewing\_mode & string & 0.6.2 &\tabularnewline
-flag\_moon\_scaled & bool & 0.7.1+ & Change to \emph{false} if you want
-to see the real moon size on start-up\tabularnewline
-moon\_scale & float & \emph{all} & Sets the moon scale factor, to
-correlate to our perception of the moon's size. Typical value:
-\emph{4}\tabularnewline
-constellation\_art\_intensity & float & \emph{all} & This number
-multiplies the brightness of the constellation art images. Typical
-value: \emph{0.5}\tabularnewline
-constellation\_art\_fade\_duration & float & \emph{all} & Sets the
-amount of time the constellation art takes to fade in or out, in
-seconds. Typical value: \emph{1.5}\tabularnewline
-constellation\_font\_size & int & \emph{all} & Set font size for
-constellation labels\tabularnewline
-constellation\_line\_thickness & float & 0.13.3+ & Set the thickness of
-lines of the constellations\tabularnewline
-flag\_chart & bool & 0.8.0 & Enable chart mode on startup\tabularnewline
-flag\_night & bool & \emph{all} & Enable night mode on
-startup\tabularnewline
-light\_pollution\_luminance & float & 0.9.0+ & Sets the level of the
-light pollution simulation\tabularnewline
-use\_luminance\_adaptation & bool & 0.9.0+ & Enable dynamic eye
-adaptation.\tabularnewline
-flag\_render\_solar\_shadows & bool & 0.12.0-0.12.4 & Enable render of
-the solar shadows.\tabularnewline
-flag\_isolated\_trails & float & 0.13.3+ & Change to \emph{false} if you
-want to see the trails for all celestial bodies from Solar
-system.\tabularnewline
-flag\_isolated\_orbits & float & 0.14.0+ & Change to \emph{false} if you
-want to see orbits for selected planet and their moons.\tabularnewline
+\midrule
+flag\_constellation\_drawing & bool & Set to \emph{true} if you want to see the constellation line drawing on start-up\tabularnewline
+\midrule
+flag\_constellation\_name & bool & Set to \emph{true} if you want to see the constellation names on start-up\tabularnewline
+\midrule
+flag\_constellation\_art & bool & Set to \emph{true} if you want to see the constellation art on start-up\tabularnewline
+\midrule
+flag\_constellation\_boundaries & bool & Set to \emph{true} if you want to see the constellation boundaries on start-up\tabularnewline
+\midrule
+flag\_constellation\_isolate\_selected & bool & When set to \emph{true}, constellation lines, boundaries and art will be limited to the constellation of the selected star, if that star is ''on'' one of the constellation lines.\tabularnewline
+\midrule
+flag\_constellation\_pick & bool & Set to \emph{true} if you only want to see the line drawing, art and name of the selected constellation star\tabularnewline
+\midrule
+flag\_isolated\_trails & bool & Set to \emph{true} if you only want to see the tail line drawing of the selected planets (asteroids, comets, moons)\tabularnewline
+\midrule
+flag\_azimutal\_grid & bool & Set to \emph{true} if you want to see the azimuthal grid on start-up\tabularnewline
+\midrule
+flag\_equatorial\_grid & bool & Set to \emph{true} if you want to see the equatorial grid (on date) on start-up\tabularnewline
+\midrule
+flag\_equatorial\_J2000\_grid & bool & Set to \emph{true} if you want to see the equatorial grid (J2000) on start-up\tabularnewline
+\midrule
+flag\_ecliptic\_J2000\_grid & bool & Set to \emph{true} if you want to see the ecliptic grid (J2000) on start-up\tabularnewline
+\midrule
+flag\_galactic\_grid & bool & Set to \emph{true} if you want to see the galactic grid on start-up\tabularnewline
+\midrule
+flag\_galactic\_plane\_line & bool & Set to \emph{true} if you want to see the galactic plane line on start-up\tabularnewline
+\midrule
+flag\_equator\_line & bool & Set to \emph{true} if you want to see the equator line on start-up\tabularnewline
+\midrule
+flag\_ecliptic\_line & bool & Set to \emph{true} if you want to see the ecliptic line (J2000) on start-up\tabularnewline
+\midrule
+flag\_meridian\_line & bool & Set to \emph{true} if you want to see the meridian line on start-up\tabularnewline
+\midrule
+flag\_cardinal\_points & bool & Set to \emph{false} if you don't want to see the cardinal points\tabularnewline
+\midrule
+flag\_gravity\_labels & bool & Set to \emph{true} if you want labels to undergo gravity (top side of text points toward zenithzenith). Useful with dome projection.\tabularnewline
+\midrule
+flag\_moon\_scaled & bool & Change to \emph{false} if you want to see the real moon size on start-up\tabularnewline
+\midrule
+moon\_scale & float & Sets the moon scale factor, to correlate to our perception of the moon's size. Typical value: \emph{4}\tabularnewline
+\midrule
+constellation\_art\_intensity & float & This number multiplies the brightness of the constellation art images. Typical value: \emph{0.5}\tabularnewline
+\midrule
+constellation\_art\_fade\_duration & float & Sets the amount of time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\tabularnewline
+\midrule
+constellation\_font\_size & int & Set font size for constellation labels\tabularnewline
+\midrule
+constellation\_line\_thickness & float & Set the thickness of lines of the constellations\tabularnewline
+\midrule
+flag\_night & bool & Enable night mode on startup\tabularnewline
+\midrule
+light\_pollution\_luminance & float & Sets the level of the light pollution simulation\tabularnewline
+\midrule
+use\_luminance\_adaptation & bool & Enable dynamic eye adaptation.\tabularnewline
+\midrule
+flag\_isolated\_trails & float & Change to \emph{false} if you want to see the trails for all celestial bodies from Solar system.\tabularnewline
+\midrule
+flag\_isolated\_orbits & float & Change to \emph{false} if you want to see orbits for selected planet and their moons.\tabularnewline
 \bottomrule
-\end{longtable}
+\end{longtabu}
 
 \section{Precision}
 Stellarium uses the
