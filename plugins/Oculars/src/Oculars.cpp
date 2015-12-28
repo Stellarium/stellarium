@@ -1975,7 +1975,7 @@ void Oculars::zoomOcular()
 	// We won't always have a selected object
 	if (StelApp::getInstance().getStelObjectMgr().getWasSelected()) {
 		StelObjectP selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0];
-		movementManager->moveToJ2000(selectedObject->getEquinoxEquatorialPos(core), 0.0, 1);
+		movementManager->moveToJ2000(selectedObject->getEquinoxEquatorialPos(core), movementManager->mountFrameToJ2000(Vec3d(0., 0., 1.)), 0.0, StelMovementMgr::ZoomIn);
 	}
 
 	// Set the screen display

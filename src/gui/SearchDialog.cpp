@@ -251,6 +251,14 @@ void SearchDialog::populateCoordinateAxis()
 	ui->AxisXSpinBox->setDecimals(2);
 	ui->AxisYSpinBox->setDecimals(2);
 
+	// Allow rotating through longitudinal coordinates, but stop at poles.
+	ui->AxisXSpinBox->setMinimum(  0., true);
+	ui->AxisXSpinBox->setMaximum(360., true);
+	ui->AxisXSpinBox->setWrapping(true);
+	ui->AxisYSpinBox->setMinimum(-90., true);
+	ui->AxisYSpinBox->setMaximum( 90., true);
+	ui->AxisYSpinBox->setWrapping(false);
+
 	switch (getCurrentCoordinateSystem()) {		
 		case equatorialJ2000:
 		case equatorial:
@@ -440,52 +448,90 @@ void SearchDialog::manualPositionChanged()
 	StelCore* core = StelApp::getInstance().getCore();
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
 	Vec3d pos;
+	Vec3d aimUp;
+	double spinLong=ui->AxisXSpinBox->valueRadians();
+	double spinLat=ui->AxisYSpinBox->valueRadians();
+
+	// Since 0.15: proper handling of aimUp vector. This does not depend on the searched coordinate system, but on the MovementManager's C.S.
+	// However, if those are identical, we have a problem when we want to look right into the pole. (e.g. zenith), which requires a special up vector.
+	// aimUp depends on MovementMgr::MountMode mvmgr->mountMode!
+	mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
+	aimUp=mvmgr->getViewUpVectorJ2000();
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+
 	switch (getCurrentCoordinateSystem()) {
 		case equatorialJ2000:
 		{
-			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			StelUtils::spheToRect(spinLong, spinLat, pos);
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				// Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
 			break;
 		}
 		case equatorial:
 		{
-			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->equinoxEquToJ2000(pos);
+
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
 			break;
 		}
 		case horizontal:
 		{
 			double cx;
-			cx = 3.*M_PI - ui->AxisXSpinBox->valueRadians(); // N is zero, E is 90 degrees
-			if (cx > M_PI*2)
-				cx -= M_PI*2;
-			StelUtils::spheToRect(cx, ui->AxisYSpinBox->valueRadians(), pos);
+			cx = 3.*M_PI - spinLong; // N is zero, E is 90 degrees
+			if (cx > 2.*M_PI)
+				cx -= 2.*M_PI;
+			StelUtils::spheToRect(cx, spinLat, pos);
 			pos = core->altAzToJ2000(pos);
+
+			if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(cx), -sin(cx), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
 			break;
 		}
 		case galactic:
 		{
-			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->galacticToJ2000(pos);
+			if ( (mountMode==StelMovementMgr::MountGalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			{
+				// make up vector more stable.
+				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
+				aimUp=mvmgr->getViewUpVectorJ2000();
+			}
 			break;
 		}
 		case eclipticJ2000:
 		{
 			double ra, dec;
-			StelUtils::eclToEqu(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), core->getCurrentPlanet()->getRotObliquity(2451545.0), &ra, &dec);
+			StelUtils::eclToEqu(spinLong, spinLat, core->getCurrentPlanet()->getRotObliquity(2451545.0), &ra, &dec);
 			StelUtils::spheToRect(ra, dec, pos);
 			break;
 		}
 		case ecliptic:
 		{
 			double ra, dec;
-			StelUtils::eclToEqu(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &ra, &dec);
+			StelUtils::eclToEqu(spinLong, spinLat, core->getCurrentPlanet()->getRotObliquity(core->getJDE()), &ra, &dec);
 			StelUtils::spheToRect(ra, dec, pos);
 			pos = core->equinoxEquToJ2000(pos);
 			break;
 		}
 	}
 	mvmgr->setFlagTracking(false);
-	mvmgr->moveToJ2000(pos, 0.05);
+	mvmgr->moveToJ2000(pos, aimUp, 0.05);
 }
 
 void SearchDialog::onSearchTextChanged(const QString& text)
@@ -619,8 +665,11 @@ void SearchDialog::gotoObject(const QString &nameI18n)
 	{
 		close();
 		Vec3d pos = simbadResults[nameI18n];
+		Vec3d aimUp;
 		objectMgr->unSelect();
-		mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
+		mvmgr->setViewUpVector(Vec3d(0., 0., 1.));
+		aimUp=mvmgr->getViewUpVectorJ2000();
+		mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
