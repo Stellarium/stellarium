@@ -23,6 +23,7 @@
 
 #include <QAbstractSpinBox>
 #include <QString>
+#include <cmath>
 
 //! @class AngleSpinBox
 //! A spin box for displaying/entering angular values.

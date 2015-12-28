@@ -25,7 +25,6 @@
 #include <QLineEdit>
 #include <QWidget>
 #include <QLocale>
-#include <cmath>
 #include <limits>
 
 AngleSpinBox::AngleSpinBox(QWidget* parent, DisplayFormat format, PrefixType prefix)
