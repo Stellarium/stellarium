@@ -74,7 +74,7 @@ StelCore::StelCore()
 	, deltaTCustomNDot(-26.0)
 	, deltaTCustomYear(1820.0)
 {
-	toneConverter = new StelToneReproducer();
+	toneReproducer = new StelToneReproducer();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	// Create and initialize the default projector params
@@ -108,7 +108,7 @@ StelCore::StelCore()
 
 StelCore::~StelCore()
 {
-	delete toneConverter; toneConverter=NULL;
+	delete toneReproducer; toneReproducer=NULL;
 	delete geodesicGrid; geodesicGrid=NULL;
 	delete skyDrawer; skyDrawer=NULL;
 	delete position; position=NULL;
@@ -354,12 +354,12 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 
 StelToneReproducer* StelCore::getToneReproducer()
 {
-	return toneConverter;
+	return toneReproducer;
 }
 
 const StelToneReproducer* StelCore::getToneReproducer() const
 {
-	return toneConverter;
+	return toneReproducer;
 }
 
 StelSkyDrawer* StelCore::getSkyDrawer()
