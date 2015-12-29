@@ -266,6 +266,23 @@ leftmargin=0cm,
 rightmargin=0cm,
 innerbottommargin=5pt]{tBox}
 
+% Config box
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+backgroundcolor=black!5,
+linecolor=ocre,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+innerbottommargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=1pt]{wBox}
+
 % Exercise box	  
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
@@ -322,6 +339,7 @@ innerbottommargin=5pt]{cBox}
 \newenvironment{definition}{\begin{dBox}\begin{definitionT}}{\end{definitionT}\end{dBox}}	
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}		
 \newenvironment{corollary}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}	
+\newenvironment{config}{\begin{wBox}}{\end{wBox}}
 
 %----------------------------------------------------------------------------------------
 %	REMARK ENVIRONMENT
