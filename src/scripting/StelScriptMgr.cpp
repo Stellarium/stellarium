@@ -424,6 +424,11 @@ void StelScriptMgr::resetOutput(void)
 	emit(scriptOutput(""));
 }
 
+void StelScriptMgr::saveOutputAs(const QString &filename)
+{
+	StelScriptOutput::saveOutputAs(filename);
+}
+
 void StelScriptMgr::scriptEnded()
 {
 	if (engine.hasUncaughtException())

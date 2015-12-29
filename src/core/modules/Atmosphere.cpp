@@ -45,6 +45,7 @@ Atmosphere::Atmosphere(void)
 	, colorGrid(NULL)
 	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
 	, averageLuminance(0.f)
+	, overrideAverageLuminance(false)
 	, eclipseFactor(1.f)
 	, lightPollutionLuminance(0)
 {
@@ -306,10 +307,25 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	colorGridBuffer.release();
 	
 	// Update average luminance
-	averageLuminance = sum_lum/((1+skyResolutionX)*(1+skyResolutionY));
+	if (!overrideAverageLuminance)
+		averageLuminance = sum_lum/((1+skyResolutionX)*(1+skyResolutionY));
 }
 
-
+// override computable luminance. This is for special operations only, e.g. for scripting of brightness-balanced image export.
+// To return to auto-computed values, set any negative value.
+void Atmosphere::setAverageLuminance(float overrideLum)
+{
+	if (overrideLum<0.f)
+	{
+		overrideAverageLuminance=false;
+		averageLuminance=0.f;
+	}
+	else
+	{
+		overrideAverageLuminance=true;
+		averageLuminance=overrideLum;
+	}
+}
 
 // Draw the atmosphere using the precalc values stored in tab_sky
 void Atmosphere::draw(StelCore* core)

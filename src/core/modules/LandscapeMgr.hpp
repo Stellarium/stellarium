@@ -98,15 +98,8 @@ public:
 	//! Get the order in which this module will draw its objects relative to other modules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
-
 	///////////////////////////////////////////////////////////////////////////
-	// Method specific to the landscape manager
-	//! Return the global landscape luminance [0..1], for being used e.g for setting eye adaptation.
-	//! It returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
-	//! The actual brightness is of no concern here. You may use getAtmosphereAverageLuminance() for this.
-	float getLuminance() const;
-	//! return average luminance [cd/m^2] of atmosphere. Around 10 at sunset, 6400 in daylight, >0 in dark night.
-	float getAtmosphereAverageLuminance() const;
+	// Methods specific to the landscape manager
 
 	//! Load a landscape based on a hash of parameters mirroring the landscape.ini
 	//! file and make it the current landscape.
@@ -132,7 +125,22 @@ public:
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
-	// Methods callable from script and GUI
+	// Methods callable from scripts and GUI
+	//! Return the global landscape luminance [0..1], for being used e.g for setting eye adaptation.
+	//! It returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
+	//! The actual brightness is of no concern here. You may use getAtmosphereAverageLuminance() for this.
+	float getLuminance() const;
+	//! return average luminance [cd/m^2] of atmosphere. Expect 10 at sunset, 6400 in daylight, >0 in dark night.
+	float getAtmosphereAverageLuminance() const;
+
+	//! Override autocomputed value and set average luminance [cd/m^2] of atmosphere.  This is around 10 at sunset, 6400 in daylight, >0 in dark night.
+	//! Usually there is no need to call this, the luminance is properly computed. This is a function which can be
+	//! useful in rare cases, e.g. in scripts when you want to create images of adjacent sky regions with the same brightness setting,
+	//! or for creation of a virtual camera which can deliberately show over- or underexposure.
+	//! For these cases, it is advisable to first center the brightest luminary (sun or moon), call getAtmosphereAverageLuminance() and then set
+	//! this value explicitly to freeze it during image export. To unfreeze, call this again with any negative value.
+	void setAtmosphereAverageLuminance(const float overrideLuminance);
+
 	//! Retrieve a list of the names of all the available landscapes in
 	//! the file search path sub-directories of the landscape area
 	//! @return the names of the landscapes, which are the values of the name parameter in the landscape.ini files
