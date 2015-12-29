@@ -47,6 +47,7 @@ following sections describe the locations for various operating systems.
 \texttt{\%HOME\%\textbackslash{}Stellarium\textbackslash{}}\\
 \texttt{Stellarium\textbackslash{}s~installation~directory}
 
+
 Thus, on a typical Windows XP system with user ``Bob Dobbs'', the user
 directory will be:
 
@@ -474,6 +475,7 @@ The \texttt{landscape.ini} file for a polygonal type landscape looks
 like this (this example is based on the Geneve landscape which was
 borrowed from Cartes du Ciel and comes with Stellarium):
 
+\begin{config}
 \texttt{{[}landscape{]}}\\
 \texttt{name~=~Geneve}\\
 \texttt{type~=~polygonal}\\
@@ -483,6 +485,7 @@ borrowed from Cartes du Ciel and comes with Stellarium):
 \texttt{polygonal\_angle\_rotatez~=~0}\\
 \texttt{ground\_color~=~.15,.45,.45}\\
 \texttt{horizon\_line\_color~=~~.75,.45,.45}
+\end{config}
 
 Where:
 
@@ -552,6 +555,7 @@ The \texttt{landscape.ini} file for a fish-eye type landscape looks like
 this (this example is based on the Trees landscape which comes with
 Stellarium):
 
+\begin{config}
 \texttt{{[}landscape{]}}\\
 \texttt{name~=~Trees}\\
 \texttt{type~=~fisheye}\\
@@ -564,6 +568,7 @@ Stellarium):
 \texttt{angle\_rotatez~=~17}\\
 \texttt{tesselate\_rows~=~28}\\
 \texttt{tesselate\_cols~=~60}
+\end{config}
 
 Where:
 
@@ -641,13 +646,16 @@ directory, and a \texttt{landscape.ini} file created. The \emph{Moon}
 landscape which comes with Stellarium provides a minimal example of the
 contents of a landscape.ini file for a spherical type landscape:
 
+\begin{config}
 \texttt{{[}landscape{]}}\\
 \texttt{name~=~Moon}\\
 \texttt{type~=~spherical}\\
 \texttt{maptex~=~apollo17.png}
+\end{config}
 
 A more elaborate example is found with the \emph{Grossmugl} landscape:
 
+\begin{config}
 \texttt{{[}landscape{]}}\\
 \texttt{name~=~Grossmugl}\\
 \texttt{type~=~spherical}\\
@@ -666,6 +674,7 @@ A more elaborate example is found with the \emph{Grossmugl} landscape:
 \texttt{polygonal\_angle\_rotatez=0}\\
 \texttt{horizon\_line\_color~=~~.75,.45,.45}\\
 \texttt{minimal\_altitude~=~-1}
+\end{config}
 
 Where:
 
@@ -793,6 +802,7 @@ landscape type is also somewhat more complicated than for other
 landscape types. Here is the \texttt{landscape.ini} file which describes
 the Guereins landscape:
 
+\begin{config}
 \texttt{{[}landscape{]}}\\
 \texttt{name~=~Guereins}\\
 \texttt{type~=~old\_style}\\
@@ -828,6 +838,7 @@ the Guereins landscape:
 \texttt{fog\_alt\_angle~=~20}\\
 \texttt{fog\_angle\_shift~=~-3}\\
 \texttt{draw\_ground\_first~=~1}
+\end{config}
 
 Where:
 
@@ -985,6 +996,7 @@ section}\label{landscape.ini-location-section}
 
 An example location section:
 
+\begin{config}
 \texttt{{[}location{]}}\\
 \texttt{planet~=~Earth}\\
 \texttt{latitude~=~+48d10'9.707"}\\
@@ -994,6 +1006,7 @@ An example location section:
 \texttt{atmospheric\_extinction\_coefficient=0.2}\\
 \texttt{atmospheric\_temperature=10}\\
 \texttt{atmospheric\_pressure=-1}
+\end{config}
 
 Where:
 
