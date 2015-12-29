@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-22 23:48+0600\n"
-"PO-Revision-Date: 2015-12-22 01:47+0000\n"
+"PO-Revision-Date: 2015-12-29 02:05+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-12-23 04:47+0000\n"
+"X-Launchpad-Export-Date: 2015-12-29 05:11+0000\n"
 "X-Generator: Launchpad (build 17865)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -3354,11 +3354,12 @@ msgstr "Zjawiska z Ziemią widzianą z Marsa"
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
+"Największe elongacje i opozycje Ziemi i innych planet widziane z Marsa"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
-msgstr ""
+msgstr "Największe elongacje i tranzyty Ziemi i Marsa widziane z Callisto"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:286
@@ -3515,6 +3516,8 @@ msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars 2000-"
 "3000"
 msgstr ""
+"Największe elongacje i opozycje Ziemi i innych planet widziane z Marsa 2000-"
+"3000"
 
 #: src/translations.h:317
 msgid ""
@@ -3523,6 +3526,10 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"Największe elongacje i tranzyty Ziemi widziane z Callisto 2000-3000. "
+"Dlaczego z Callisto? Spośród 4 księżyców galileuszowych tylko Callisto "
+"znajduje się poza pasem radiacyjnym Jowisza. W związku z tym, jeśli ludzie "
+"skolonizują kiedyś księżyc Jowisza, będzie nim Callisto."
 
 #: src/translations.h:318
 msgid ""
@@ -5194,7 +5201,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1740
 msgid "Altitudes and azimuth (counted from North towards East)."
-msgstr ""
+msgstr "Wysokości i azymut (liczone z północy na wschód)"
 
 #: src/ui_viewDialog.h:1744
 msgid "Galactic Coordinates, System II (IAU 1958)."
@@ -9047,6 +9054,8 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"Ten model jest oparty na czasie zaniku o %1 wielkości gwiazdowych w stosunku "
+"do wartości maksymalnej, gdzie %1 wynosi 2, 3, 6 i 9."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid ""
@@ -9964,7 +9973,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Największa elongacja: %1 (przy %2 st.)"
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
@@ -10379,7 +10388,7 @@ msgstr "Deszcze meteorów"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "Włącz/wyłącz deszcze meteorów"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Toggle radiant labels"
@@ -10392,7 +10401,7 @@ msgstr "Pokaż okno ustawień"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:154
 msgid "Show search dialog"
-msgstr ""
+msgstr "Pokaż okno wyszukiwania"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:260
 msgid "Using the default Meteor Showers catalog."
@@ -10893,19 +10902,19 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
-msgstr ""
+msgstr "Trwa aktualizacja..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:135
 msgid "Successfully updated!"
-msgstr ""
+msgstr "Aktualizacja ukończona!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:139
 msgid "Failed!"
-msgstr ""
+msgstr "Nie udało się!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:143
 msgid "Outdated!"
-msgstr ""
+msgstr "Nieaktualne!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:202
 msgid "Meteor Showers Plug-in"
@@ -10916,6 +10925,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"Ta wtyczka umożliwia symulowanie okresowych deszczów meteorów i wyświetlanie "
+"znacznika każdego radiantu aktywnego i nieaktywnego."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
 msgid ""
@@ -11067,6 +11078,8 @@ msgid ""
 "Support is provided via the Launchpad website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Pomoc jest dostępna poprzez stronę stronę WWW Launchpad. Zamieszczając swoją "
+"wypowiedź wpisz w temacie \"%1\"."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:105
 msgid "Start date greater than end date!"
@@ -11095,11 +11108,11 @@ msgstr "Konfiguracja Deszczów meteorów"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "Deszcze meteorów: Ustawienia"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "Ustawienia ogólne"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
@@ -11151,23 +11164,23 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "Włącz automatyczne aktualizacje"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "Następna aktualizacja:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "Ostatnia próba aktualizacji"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "Status:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "Aktualizuj"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
@@ -11216,7 +11229,7 @@ msgstr "RA/Dekl"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "Az/Wys"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:205
 msgctxt "abbreviated in the plugin"
@@ -11489,7 +11502,7 @@ msgstr ""
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 #, qt-format
 msgid "Lazy cubemapping: %1"
-msgstr "&quot;Leniwe&quot; mapowanie sześcienne: %1"
+msgstr "\"Leniwe\" mapowanie sześcienne: %1"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:716
 msgid "enabled"
@@ -11824,7 +11837,7 @@ msgstr "Pełne cienie mapy sześciennej"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:499
 msgid "Lazy cubemap re-rendering"
-msgstr "&quot;Leniwe&quot; powtórne renderowanie mapy sześciennej"
+msgstr "\"Leniwe\" powtórne renderowanie mapy sześciennej"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
