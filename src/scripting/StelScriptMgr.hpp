@@ -59,6 +59,10 @@ public:
 	QString runningScriptId();
 
 	// Pre-processor functions
+	//! Preprocess script, esp. process include instructions.
+	//! if the command line option --verbose has been given,
+	//! this dumps the preprocessed script with line numbers attached to log.
+	//! This helps to understand the line number given by the usual error message.
 	bool preprocessScript(const QString& input, QString& output, const QString& scriptDir);
 	bool preprocessScript(QFile &input, QString& output, const QString& scriptDir);
 	
@@ -106,7 +110,7 @@ public slots:
 	//! Empty string will be returned.
 	const QString getShortcut(const QString& s);
 
-	//! Run the prprocessed script
+	//! Run the preprocessed script
 	//! @param preprocessedScript the string containing the preprocessed script.
 	//! @return false if the given script could not be run, true otherwise
 	bool runPreprocessedScript(const QString& preprocessedScript);
@@ -160,6 +164,10 @@ public slots:
 
 	//! Reset output file and cause the emission of an (empty) scriptOutput signal.
 	void resetOutput(void);
+
+	//! Save output file to new file (in same directory as output.txt).
+	//! This is required to allow reading with other program on Windows while output.txt is still open.
+	void saveOutputAs(const QString &filename);
 
 	//! Pause a running script.
 	void pauseScript();

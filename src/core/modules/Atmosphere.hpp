@@ -62,7 +62,7 @@ public:
 	//! @return the display intensity ranging from 0 to 1
 	float getRealDisplayIntensityFactor() const {return fader.getInterstate()*eclipseFactor;}
 
-	// let's you know how far faded in or out the atm is (0-1)
+	// lets you know how far faded in or out the atmosphere is (0..1)
 	float getFadeIntensity() const {return fader.getInterstate();}
 
 	//! Get the average luminance of the atmosphere in cd/m2
@@ -71,6 +71,9 @@ public:
 	//! @return the last computed average luminance of the atmosphere in cd/m2.
 	float getAverageLuminance() const {return averageLuminance;}
 
+	//! override computable luminance. This is for special operations only, e.g. for scripting of brightness-balanced image export.
+	//! To return to auto-computed values, set any negative value at the end of the script.
+	void setAverageLuminance(float overrideLum);
 	//! Set the light pollution luminance in cd/m^2
 	void setLightPollutionLuminance(float f) { lightPollutionLuminance = f; }
 	//! Get the light pollution luminance in cd/m^2
@@ -90,6 +93,7 @@ private:
 
 	//! The average luminance of the atmosphere in cd/m2
 	float averageLuminance;
+	bool overrideAverageLuminance; // if true, don't compute but keep value set via setAverageLuminance(float)
 	float eclipseFactor;
 	LinearFader fader;
 	float lightPollutionLuminance;

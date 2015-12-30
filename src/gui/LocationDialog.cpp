@@ -78,8 +78,14 @@ void LocationDialog::createDialogContent()
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->longitudeSpinBox->setPrefixType(AngleSpinBox::Longitude);
+	ui->longitudeSpinBox->setMinimum(-180.0, true);
+	ui->longitudeSpinBox->setMaximum( 180.0, true);
+	ui->longitudeSpinBox->setWrapping(true);
 	ui->latitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->latitudeSpinBox->setPrefixType(AngleSpinBox::Latitude);
+	ui->latitudeSpinBox->setMinimum(-90.0, true);
+	ui->latitudeSpinBox->setMaximum( 90.0, true);
+	ui->latitudeSpinBox->setWrapping(false);
 
 	//initialize list model
 	allModel = new QStringListModel(this);
