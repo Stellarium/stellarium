@@ -228,6 +228,10 @@ public slots:
 	//! Set the initial value of intensity of art of constellations.
 	void setInitConstellationIntensity(double v) {initConstellationIntensity=v; changeConstellationArtIntensity();}
 
+	//! Function designed only for scripting context. Put the function into the startup.ssc of your planetarium setup,
+	//! this will avoid any unwanted tracking.
+	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
+
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
@@ -256,6 +260,8 @@ private:
 	void changeFov(double deltaFov);
 	void changeConstellationArtIntensity();
 
+	// Move (a bit) to selected/tracked object until move.coef reaches 1, or auto-follow (track) selected object.
+	// Does nothing if flagInhibitAllAutomoves=true
 	void updateVisionVector(double deltaTime);
 	void updateAutoZoom(double deltaTime); // Update autoZoom if activated
 
@@ -266,6 +272,7 @@ private:
 	class StelObjectMgr* objectMgr;
 	bool flagLockEquPos;     // Define if the equatorial position is locked
 	bool flagTracking;       // Define if the selected object is followed
+	bool flagInhibitAllAutomoves; // Required for special installations: If true, there is no automatic centering etc.
 
 	// Flags for mouse movements
 	bool isMouseMovingHoriz;
