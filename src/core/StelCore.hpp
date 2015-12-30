@@ -601,7 +601,7 @@ signals:
 	void timeRateChanged(double rate);
 
 private:
-	StelToneReproducer* toneConverter;		// Tones conversion between stellarium world and display device
+	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
 	StelSkyDrawer* skyDrawer;
 	StelMovementMgr* movementMgr;		// Manage vision movements
 

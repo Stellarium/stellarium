@@ -386,8 +386,17 @@ void Scenery3d::update(double deltaTime)
 		//if we were moving in the last update
 		bool wasMoving = moveVector.lengthSquared()>0.0;
 
-		moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
-				( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
+		//moveVector = Vec3d(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
+		//		( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
+		//		movement[2]);
+		//Bring move into world-grid space
+		//currentScene.zRotateMatrix.transfo(moveVector);
+		// GZ DON'T!: Rotating by zRotateMatrix will make a case of convergence_angle=180 (i.e. misconfigured model) very silly (inverted!). -->Just swap x/y.
+		// moveVector.set(-moveVector.v[1], moveVector.v[0], moveVector.v[2]);
+
+		// Better yet: immediately make it right.
+		moveVector.set( movement[1] * std::cos(az) - movement[0] * std::sin(az),
+				movement[0] * std::cos(az) + movement[1] * std::sin(az),
 				movement[2]);
 
 		//get current time
@@ -439,8 +448,6 @@ void Scenery3d::update(double deltaTime)
 
 		moveVector *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
-		//Bring move into world-grid space
-		currentScene.zRotateMatrix.transfo(moveVector);
 
 		absolutePosition.v[0] += moveVector.v[0];
 		absolutePosition.v[1] += moveVector.v[1];

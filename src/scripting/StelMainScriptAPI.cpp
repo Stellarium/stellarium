@@ -705,6 +705,11 @@ void StelMainScriptAPI::resetOutput(void)
 	StelApp::getInstance().getScriptMgr().resetOutput();
 }
 
+void StelMainScriptAPI::saveOutputAs(const QString &filename)
+{
+	StelApp::getInstance().getScriptMgr().saveOutputAs(filename);
+}
+
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -1222,6 +1227,7 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
+	StelCore* core = StelApp::getInstance().getCore();
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
@@ -1233,13 +1239,23 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 		dAzi -= M_PI;
 
 	StelUtils::spheToRect(dAzi,dAlt,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), duration);
+
+	// make up vector more stable:
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(dAlt)> (0.9*M_PI/2.0)) )
+		aimUp=core->altAzToJ2000(Vec3d(-cos(dAzi), -sin(dAzi), 0.) * (dAlt>0. ? 1. : -1. ), StelCore::RefractionOff);
+	else
+		aimUp=core->altAzToJ2000(Vec3d(0., 0., 1.), StelCore::RefractionOff);
+
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionOff), aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float duration)
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
+	StelCore* core = StelApp::getInstance().getCore();
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
@@ -1248,7 +1264,15 @@ void StelMainScriptAPI::moveToRaDec(const QString& ra, const QString& dec, float
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aim);
-	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), duration);
+	// make up vector more stable:
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
+		aimUp=core->equinoxEquToJ2000(Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. ));
+	else
+		aimUp=core->equinoxEquToJ2000(Vec3d(0., 0., 1.));
+
+	mvmgr->moveToJ2000(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim), aimUp, duration);
 }
 
 void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, float duration)
@@ -1263,7 +1287,15 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aimJ2000);	
-	mvmgr->moveToJ2000(aimJ2000, duration);
+	// make up vector more stable. Not sure if we have to set the up vector in this case though.
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
+		aimUp=Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. );
+	else
+		aimUp=Vec3d(0., 0., 1.);
+
+	mvmgr->moveToJ2000(aimJ2000, aimUp, duration);
 }
 
 QString StelMainScriptAPI::getAppLanguage()
