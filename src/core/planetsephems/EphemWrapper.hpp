@@ -1,6 +1,7 @@
 /*
 Copyright (C) 2003 Fabien Chereau
 Copyright (C) 2015 Holger Niessner
+Copyright (C) 2015 Georg Zotti
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -19,13 +20,13 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 /*
  * This class provides a wrapper to multiple methods to calculate ephemerides.
- * Depending on availability of extra files, the class uses:
- * - VSOP87
+ * Depending on availability of extra data files, the class uses:
+ * - VSOP87 and ELP82B
  * - DE430
  * - DE431
  *
  * Extending the old stellplanet-class, this updated version now
- * includes DE430 and DE430 for a more precise, yet storage-space intensive solution.
+ * includes access to DE430 and DE431 for a more precise, yet storage-space intensive solution.
  */
 
 #ifndef _EPHEMWRAPPER_HPP_
@@ -61,7 +62,7 @@ void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3]);
 void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3]);
 void get_pluto_helio_osculating_coords(double jd0,double jd,double xyz[3]);
 
-void get_lunar_parent_coordsv(double jd,double xyz[3], void*);
+void get_lunar_parent_coordsv(double jde, double xyz[3], void*);
 
 void get_phobos_parent_coordsv(double jd,double xyz[3], void*);
 void get_deimos_parent_coordsv(double jd,double xyz[3], void*);
