@@ -151,6 +151,10 @@ public slots:
 	//! Reset output file and cause the emission of an (empty) scriptOutput signal.
 	void resetOutput(void);
 
+	//! Save output file to new file (in same directory as output.txt).
+	//! This is required to allow reading with other program on Windows while output.txt is still open.
+	void saveOutputAs(const QString &filename);
+
 	//! Pause a running script.
 	void pauseScript();
 

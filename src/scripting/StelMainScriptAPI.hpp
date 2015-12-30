@@ -697,6 +697,10 @@ public slots:
 	//! Reset (clear) output file
 	void resetOutput(void);
 
+	//! Save output file to new file (in same directory as output.txt).
+	//! This is required to allow reading with other program on Windows while output.txt is still open.
+	void saveOutputAs(const QString &filename);
+
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
 	QString getAppLanguage();

@@ -252,9 +252,6 @@ void CometOrbit::positionAtTimevInVSOP87Coordinates(double JDE, double *v, bool 
 {
 	JDE -= t0;
 	double rCosNu,rSinNu;
-//	temporary solve freezes for near-parabolic comets - using (e < 0.9999) for elliptical orbits
-//	TODO: improve calculations orbits for near-parabolic comets --AW
-//	if (e < 0.9999) InitEll(q,n,e,JD,a1,a2);
 	if (e < 1.0) InitEll(q,n,e,JDE,rCosNu,rSinNu); // GZ: After solving with Laguerre-Conway, I dare to go for 1.0.
 	else if (e > 1.0)
 	{

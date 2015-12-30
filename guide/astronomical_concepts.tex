@@ -1,0 +1,417 @@
+\chapterimage{chapter-bg.png} % Chapter heading image
+
+\chapter{Astronomical Concepts}
+This section includes some general notes on astronomy in an effort to
+outline some concepts that are helpful to understand features of
+Stellarium. Material here is only an overview, and the reader is
+encouraged to get hold of a couple of good books on the subject. A good
+place to start is a compact guide and ephemeris such as the
+\href{http://www.amazon.com/National-Audubon-Society-Field-Series/dp/0679408525}{National
+Audubon Society Field Guide to the Night Sky}. Also recommended is a
+more complete textbook such as Universe{[}universe{]}. There are also
+some nice resources on the net, like the
+\href{http://en.wikibooks.org/wiki/Subject:Astronomy}{Wikibooks
+Astronomy book}.
+
+\section{The Celestial Sphere}\label{the-celestial-sphere}
+
+The \emph{Celestial Sphere} is a concept which helps us think about the
+positions of objects in the sky. Looking up at the sky, you might
+imagine that it is a huge dome or top half of a sphere, and the stars
+are points of light on that sphere. Visualising the sky in such a
+manner, it appears that the sphere moves, taking all the stars with it
+--- it seems to rotate. If watch the movement of the stars we can see
+that they seem to rotate around a static point about once a day.
+Stellarium is the perfect tool to demonstrate this!
+
+\begin{enumerate}
+\item
+  Open the configuration window, select the location tab. Set the
+  location to be somewhere in mid-Northern latitudes. The United Kingdom
+  is an ideal location for this demonstration.
+\item
+  Turn off atmospheric rendering and ensure cardinal points are turned
+  on. This will keep the sky dark so the Sun doesn't prevent us from
+  seeing the motion of the stars when it is above the horizon.
+\item
+  Pan round to point North, and make sure the field of view is about
+  $90\degree$.
+\item
+  Pan up so the `N' cardinal point on the horizon is at the bottom of
+  the screen.
+\item
+  Now increase the time rate. Press K, L, L, L, L - this should set the
+  time rate so the stars can be seen to rotate around a point in the sky
+  about once every ten seconds If you watch Stellarium's clock you'll
+  see this is the time it takes for one day to pass as this accelerated
+  rate.
+\end{enumerate}
+
+The point which the stars appear to move around is one of the
+\emph{Celestial Poles}.
+
+The apparent movement of the stars is due to the rotation of the Earth.
+The location of the observer on the surface of the Earth affects how she
+perceives the motion of the stars. To an observer standing at Earth's
+North Pole, the stars all seem to rotate around the \emph{zenith} (the
+point directly upward). As the observer moves South towards the equator,
+the location of the celestial pole moves down towards the horizon. At
+the Earth's equator, the North celestial pole appears to be on the
+Northern horizon.
+
+Similarly, observers in the Southern hemisphere see the Southern
+celestial pole at the zenith when they are at the South pole, and it
+moves to the horizon as the observer travels towards the equator.
+
+\begin{enumerate}
+\item
+  Leave time moving on nice and fast, and open the configuration window.
+  Go to the location tab and click on the map right at the top - i.e.
+  set your location to the North pole. See how the stars rotate around a
+  point right at the top of the screen. With the field of view set to
+  $90\degree$ and the horizon at the bottom of the screen, the top of the screen
+  is the zenith.
+\item
+  Now click on the map again, this time a little further South, You
+  should see the positions of the stars jump, and the centre of rotation
+  has moved a little further down the screen.
+\item
+  Click on the map even further towards and equator. You should see the
+  centre of rotation have moved down again.
+\end{enumerate}
+
+To help with the visualisation of the celestial sphere, turn on the
+equatorial grid by clicking the button on the main tool-bar or pressing
+the on the e key. Now you can see grid lines drawn on the sky. These
+lines are like lines of longitude and latitude on the Earth, but drawn
+for the celestial sphere.
+
+The \emph{Celestial Equator} is the line around the celestial sphere
+that is half way between the celestial poles - just as the Earth's
+equator is the line half way between the Earth's poles.
+
+\section{Coordinate Systems}\label{coordinate-systems}
+
+\subsection{Altitude/Azimuth
+Coordinates}\label{altitudeazimuth-coordinates}
+
+\begin{figure}[h]
+\centering\includegraphics[scale=1.8]{cs_azi}
+%\caption{Figure caption}
+\end{figure}
+
+The \emph{Altitude/Azimuth} coordinate system can be used to describe a
+direction of view (the azimuth angle) and a height in the sky (the
+altitude angle). The azimuth angle is measured clockwise round from due
+North. Hence North itself is $\degree$, East $90\degree$, Southwest is $225\degree$ and so on.
+The altitude angle is measured up from the horizon. Looking directly up
+(at the zenith) would be $90\degree$, half way between the zenith and the
+horizon is $45\degree$ and so on. The point opposite the zenith is called the
+nadir.
+
+The Altitude/Azimuth coordinate system is attractive in that it is
+intuitive - most people are familiar with azimuth angles from bearings
+in the context of navigation, and the altitude angle is something most
+people can visualise pretty easily.
+
+However, the altitude/azimuth coordinate system is not suitable for
+describing the general position of stars and other objects in the sky -
+the altitude and azimuth values for an object in the sky change with
+time and the location of the observer.
+
+Stellarium can draw grid lines for altitude/azimuth coordinates. Use the
+button on the main tool-bar to activate this grid, or press the Z key.
+
+\subsection{Right Ascension/Declination
+Coordinates}\label{right-ascensiondeclination-coordinates}
+
+\begin{figure}[h]
+\centering\includegraphics[scale=1.8]{cs_equ}
+%\caption{Figure caption}
+\end{figure}
+
+Like the Altitude/Azimuth system, the \emph{Right Ascension/Declination}
+(RA/Dec) coordinate system uses two angles to describe positions in the
+sky. These angles are measured from standard points on the celestial
+sphere. Right ascension and declination are to the celestial sphere what
+longitude and latitude are to terrestrial map makers.
+
+The Northern celestial pole has a declination of $90\degree$, the celestial
+equator has a declination of $\degree$, and the Southern celestial pole has a declination of $-90\degree$.
+
+Right ascension is measured as an angle round from a point in the sky
+known as the \emph{first point of Aries}, in the same way that longitude
+is measured around the Earth from Greenwich. Figure RA/Dec illustrates
+RA/Dec coordinates.
+
+Unlike Altitude/Azimuth coordinates, RA/Dec coordinates of a star do not
+change if the observer changes latitude, and do not change over the
+course of the day due to the rotation of the Earth (the story is
+complicated a little by precession and parallax - see sections
+\protect\hyperlink{Precession}{precession} and
+\protect\hyperlink{Parallax}{parallax} respectively for details). RA/Dec
+coordinates are frequently used in star catalogues such as the Hipparcos
+catalogue.
+
+Stellarium can draw grid lines for RA/Dec coordinates. Use the button on
+the main tool-bar to activate this grid, or press the e key.
+
+\section{Units}\label{units}
+
+\subsection{Distance}\label{distance}
+
+As Douglas Adams pointed out in the Hitchhiker's Guide to the
+Galaxy{[}hhg{]},
+
+Space is big. You just won't believe how vastly, hugely, mind-bogglingly
+big it is. I mean, you may think it's a long way down the road to the
+chemist's, but that's just peanuts to space.{[}hhg{]}
+
+Astronomers use a variety of units for distance that make sense in the
+context of the mind-boggling vastness of space.
+
+\textbf{Astronomical Unit} (\textbf{AU}) This is the mean Earth-Sun
+distance. Roughly 150 million kilometres
+(1.49598x10\textsuperscript{8}km). The AU is used mainly when discussing
+the solar system - for example the distance of various planets from the
+Sun.
+
+\textbf{Light year} A light year is not, as some people believe, a
+measure of time. It is the distance that light travels in a year. The
+speed of light being approximately 300,000 kilometres per second means a
+light year is a very large distance indeed, working out at about 9.5
+trillion kilometres (9.46073x10\textsuperscript{12} km). Light years are
+most frequently used when describing the distance of stars and galaxies
+or the sizes of large-scale objects like galaxies, nebulae etc.
+
+\textbf{Parsec} A parsec is defined as the distance of an object that
+has an annual parallax of 1 second of arc. This equates to 3.26156 light
+years (3.08568x10\textsuperscript{13} km). Parsecs are most frequently
+used when describing the distance of stars or the sizes of large-scale
+objects like galaxies, nebulae etc.
+
+\subsection{Time}\label{time}
+
+\begin{figure}[h]
+\centering\includegraphics[scale=2.2]{sidereal_day}
+%\caption{Figure caption}
+\end{figure}
+
+The length of a day is defined as the amount of time that it takes for
+the Sun to travel from the highest point in the sky at mid-day to the
+next high-point on the next day. In astronomy this is called a
+\emph{solar day}. The apparent motion of the Sun is caused by the
+rotation of the Earth. However, in this time, the Earth not only spins,
+it also moves slightly round it's orbit. Thus in one solar day the Earth
+does not spin exactly $360\degree$ on it's axis. Another way to measure day
+length is to consider how long it takes for the Earth to rotate exactly
+$360\degree$. This is known as one \emph{sidereal day}.
+
+Figure {[}fig:solarsiderealday{]} illustrates the motion of the Earth as
+seen looking down on the Earth orbiting the Sun. The red triangle on the
+Earth represents the location of an observer. The figure shows the Earth
+at four times:
+
+\begin{enumerate}
+\item
+  The Sun is directly overhead - it is mid-day.
+\item
+  Twelve hours have passed since 1. The Earth has rotated round and the
+  observer is on the opposite side of the Earth from the Sun. It is
+  mid-night. The Earth has also moved round in it's orbit a little.
+\item
+  The Earth has rotated exactly $360\degree$. Exactly one sidereal day has
+  passed since 1.
+\item
+  It is mid-day again - exactly one solar day since 1. Note that the
+  Earth has rotated more than $360\degree$ since 1.
+\end{enumerate}
+
+It should be noted that in figure {[}fig:solarsiderealday{]} the sizes
+of the Sun and Earth and not to scale. More importantly, the distance
+the Earth moves around it's orbit is much exaggerated. In one real solar
+day, the Earth takes a year to travel round the Sun -
+365\textsuperscript{1}/\textsubscript{4} solar days. The length of a
+sidereal day is about 23 hours, 56 minutes and 4 seconds.
+
+It takes exactly one sidereal day for the celestial sphere to make one
+revolution in the sky. Astronomers find sidereal time useful when
+observing. When visiting observatories, look out for doctored alarm
+clocks that have been set to run in sidereal time!
+
+\subsection{Angles}\label{angles}
+
+Astronomers typically use degrees to measure angles. Since many
+observations require very precise measurement, the degree is subdivided
+into sixty \emph{minutes of arc} also known as \emph{arc-minutes}. Each
+minute of arc is further subdivided into sixty \emph{seconds of arc}, or
+\emph{arc-seconds}. Thus one degree is equal to 3600 seconds of arc.
+Finer grades of precision are usually expressed using the SI prefixes
+with arc-seconds, e.g. \emph{milli arc-seconds} (one milli arc-second is
+one thousandth of an arc-second).
+
+\subsection{Notation}\label{notation}
+
+Degrees are denoted using the $\degree$ symbol after a number. Minutes of arc are denoted with a~$'$, and seconds of arc are denoted using~$''$. Angles are frequently given in two formats:
+
+\begin{enumerate}
+\item
+  DMS format --- degrees, minutes and seconds. For example $90\degree15'12''$.
+  When more precision is required, the seconds component may include a
+  decimal part, for example $90\degree15'12.432''$.
+\item
+  Decimal degrees, for example $90.2533\degree$
+\end{enumerate}
+
+\subsection{The Magnitude Scale}\label{the-magnitude-scale}
+
+\begin{longtable}[c]{@{}lll@{}}
+\toprule
+\emph{Object} & \emph{m} & \emph{M}\tabularnewline
+The Sun & -27 & 4.8\tabularnewline
+Vega & 0.05 & 0.6\tabularnewline
+Betelgeuse & 0.47 & -7.2\tabularnewline
+Sirius (the brightest star) & -1.5 & 1.4\tabularnewline
+Venus (at brightest) & -4.4 & ---\tabularnewline
+Full Moon (at brightest) & -12.6 & ---\tabularnewline
+\bottomrule
+\end{longtable}
+
+When astronomers talk about magnitude, they are referring to the
+brightness of an object. How bright an object appears to be depends on
+how much light it's giving out and how far it is from the observer.
+Astronomers separate these factors by using two measures: \emph{absolute
+magnitude} (\emph{M}) which is a measure of how much light is being
+given out by an object, and \emph{apparent magnitude} (\emph{m}) which
+is how bright something appears to be in the sky.
+
+For example, consider two 100 watt lamps, one which is a few meters
+away, and one which is a kilometre away. Both give out the same amount
+of light - they have the same absolute magnitude. However the nearby
+lamp seems much brighter - it has a much greater apparent magnitude.
+When astronomers talk about magnitude without specifying whether they
+mean apparent or absolute magnitude, they are usually referring to
+apparent magnitude.
+
+The magnitude scale has its roots in antiquity. The Greek astronomer
+Hipparchus defined the brightest stars in the sky to be \emph{first
+magnitude}, and the dimmest visible to the naked eye to be \emph{sixth
+magnitude}. In the 19th century British astronomer Norman Pogson
+quantified the scale more precisely, defining it as a logarithmic scale
+where a magnitude 1 object is 100 times as bright as a magnitude 6
+object (a difference of five magnitudes). The zero-point of the modern
+scale was originally defined as the brightness of the star Vega, however
+this was re-defined more formally in 1982{[}landolt{]}. Objects brighter
+than Vega are given negative magnitudes.
+
+The absolute magnitude of a star is defined as the magnitude a star
+would appear if it were 10 parsecs from the observer.
+
+Table {[}tab:magnitudeobjects{]} lists several objects that may be seen
+in the sky, their apparent magnitude and their absolute magnitude where
+applicable (only stars have an absolute magnitude value. The planets and
+the Moon don't give out light like a star does - they reflect the light
+from the Sun).
+
+\subsection{Luminosity}\label{luminosity}
+
+\emph{Luminosity} is an expression of the total energy radiated by a
+star. It may be measured in watts, however, astronomers tend to use
+another expression --- \emph{solar luminosities} where an object with
+twice the Sun's luminosity is considered to have two solar luminosities
+and so on. Luminosity is related to absolute magnitude.
+
+\section{Precession}\label{precession}
+
+\begin{figure}[h]
+\centering\includegraphics[scale=1.4]{obliquity_ecliptic}
+%\caption{Figure caption}
+\end{figure}
+
+As the Earth orbits the Sun throughout the year, the axis of rotation
+(the line running through the {[}rotational{]} poles of the Earth) seems
+to point towards the same position on the celestial sphere, as can be
+seen in figure {[}fig:obliquityecliptic{]}. The angle between the axis
+of rotation and the perpendicular of the orbital plane is called the
+\emph{obliquity of the ecliptic}. It is $23\degree27'$.
+
+Observed over very long periods of time the direction the axis of
+rotation points does actually change. The angle between the axis of
+rotation and the orbital plane stays constant, but the direction the
+axis points --- the position of the celestial pole transcribes a circle
+on the stars in the celestial sphere. This process is called
+\emph{precession}. The motion is similar to the way in which a gyroscope
+slowly twists as figure {[}fig:precession{]} illustrates.
+
+Precession is a slow process. The axis of rotation twists through a full
+$360\degree$ about once every 28,000 years.
+
+Precession has some important implications:
+
+\begin{enumerate}
+\item
+  RA/Dec coordinates change over time, albeit slowly. Measurements of
+  the positions of stars recorded using RA/Dec coordinates must also
+  include a date for those coordinates.
+\item
+  Polaris, the pole star won't stay a good indicator of the location of
+  the Northern celestial pole. In 14,000 years time Polaris will be
+  nearly $47\degree$ away from the celestial pole!
+\end{enumerate}
+
+\begin{figure}[h]
+\centering\includegraphics[scale=2.0]{precession}
+%\caption{Figure caption}
+\end{figure}
+
+\section{Parallax}\label{parallax}
+
+\begin{figure}[h]
+\centering\includegraphics[scale=2.0]{parallax}
+%\caption{Figure caption}
+\end{figure}
+
+Parallax is the change of angular position of two stationary points
+relative to each other as seen by an observer, due to the motion of said
+observer. Or more simply put, it is the apparent shift of an object
+against a background due to a change in observer position.
+
+This can be demonstrated by holding ones thumb up at arm's length.
+Closing one eye, note the position of the thumb against the background.
+After swapping which eye is open (without moving), the thumb appears to
+be in a different position against the background.
+
+A similar thing happens due to the Earth's motion around the Sun. Nearby
+stars appear to move against more distant background stars, as
+illustrated in figure \href{Astronomical_Concepts\#Parallax}{parallax}.
+The movement of nearby stars against the background is called
+\emph{stellar parallax}, or \emph{annual parallax}.
+
+Since we know the distance the radius of the Earth's orbit around the
+Sun from other methods, we can use simple geometry to calculate the
+distance of the nearby star if we measure annual parallax.
+
+In figure \href{Astronomical_Concepts\#Parallax}{parallax} the annual
+parallax p is half the angular distance between the apparent positions
+of the nearby star. The distance of the nearby object is d. Astronomers
+use a unit of distance called the parsec which is defined as the
+distance at which a nearby star has \emph{p} = $1''$.
+
+Even the nearest stars exhibit very small movement due to parallax. The
+closest star to the Earth other than the Sun is Proxima Centuri. It has
+an annual parallax of $0.77199''$, corresponding to a distance of 1.295
+parsecs (4.22 light years).
+
+Even with the most sensitive instruments for measuring the positions of
+the stars it is only possible to use parallax to determine the distance
+of stars up to about 1,600 light years from the Earth, after which the
+annual parallax is so small it cannot be measured accurately enough.
+
+\section{Proper Motion}\label{proper-motion}
+
+Proper motion is the change in the position of a star over time as a
+result of it's motion through space relative to the Sun. It does not
+include the apparent shift in position of star due to annular parallax.
+The star exhibiting the greatest proper motion is Barnard's Star which
+moves more then ten seconds of arc per year.
+
