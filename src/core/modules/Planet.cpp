@@ -312,18 +312,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 			const double elongation = getElongation(observerHelioPos);
-			QString phase = "";
-			double deg;
-			bool sign;
-			StelUtils::radToDecDeg(elongation, sign, deg);
-			if (deg>=357.5 && deg<=2.5)
-				phase = q_("New Moon");
-			if (deg>=87.5 && deg<=92.5)
-				phase = q_("Last Quarter");
-			if (deg>=177.5 && deg<=182.5)
-				phase = q_("Full Moon");
-			if (deg>=267.5 && deg<=272.5)
-				phase = q_("First Quarter");
 
 			if (withDecimalDegree)
 			{
@@ -336,17 +324,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(elongation)) << "<br>";
 			}
 
-			if (englishName=="Moon" && !phase.isEmpty())
-			{
-				if (qRound(deg)==180.f || qRound(deg)==90.f || qRound(deg)==270.f || qRound(deg)==0.f)
-					phase = QString("%1 (<b>%2</b>)").arg(getPhase(observerHelioPos), 0, 'f', 2).arg(phase);
-				else
-					phase = QString("%1 (%2)").arg(getPhase(observerHelioPos), 0, 'f', 2).arg(phase);
-			}
-			else
-				phase = QString("%1").arg(getPhase(observerHelioPos), 0, 'f', 2);
-
-			oss << QString(q_("Phase: %1")).arg(phase) << "<br>";
+			oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2) << "<br>";
 			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
 		}
 		if (englishName=="Sun")
