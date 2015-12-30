@@ -43,6 +43,12 @@ public:
 	//! Reset file, i.e., empty it. This may be useful to have repetitive output which may be read by other programs.
 	static void reset(void);
 
+	//! Save to new file, re-create output file.
+	//! This allows reading of results on Windows, where otherwise reading programs cannot access files opened for writing by Stellarium.
+	//! @param name new filename. It will be created in the same directory as output.txt
+	//! Normally you would call saveOutputAs(...), then reset().
+	static void saveOutputAs(const QString& name);
+
 private:
 	static QFile outputFile;
 	static QString outputText;
