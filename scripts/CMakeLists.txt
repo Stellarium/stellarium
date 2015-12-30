@@ -7,4 +7,3 @@ INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/scripts
         PATTERN "tests" EXCLUDE)
 
 
-
