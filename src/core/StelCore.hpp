@@ -534,7 +534,8 @@ public slots:
 	//! Add n Julian years to the simulation time.
 	void addJulianYears(float n=100.f);
 
-	//! Add one Gaussian year to the simulation time.
+	//! Add one Gaussian year to the simulation time. The Gaussian Year is 365.2568983 days, and is C.F.Gauss's value for the Sidereal Year.
+	//! Note that 1 GaussY=2 &pi;/k where k is the Gaussian gravitational constant. A massless body orbits one solar mass in 1AU distance in a Gaussian Year.
 	void addGaussianYear();
 
 	//! Subtract one synodic month to the simulation time.
