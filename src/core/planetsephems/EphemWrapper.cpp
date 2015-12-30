@@ -1,6 +1,7 @@
 /*
 Copyright (C) 2003 Fabien Chereau
 Copyright (C) 2015 Holger Niessner
+Copyright (C) 2015 Georg Zotti
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
@@ -40,11 +41,14 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define EPHEM_NEPTUNE_ID  7
 #define EPHEM_PLUTO_ID    8
 
-#define EPHEM_IMD_EARTH_ID 2
+// GZ No idea what IMD stands for?
+//#define EPHEM_IMD_EARTH_ID 2
 #define EPHEM_JPL_EARTH_ID 3
 #define EPHEM_JPL_PLUTO_ID 9
+#define EPHEM_JPL_MOON_ID 10
+#define EPHEM_JPL_SUN_ID 11
 
-/**   JPL PlANET ID LIST
+/**   JPL PLANET ID LIST
 **            1 = mercury           8 = neptune                             **
 **            2 = venus             9 = pluto                               **
 **            3 = earth            10 = moon                                **
@@ -72,13 +76,15 @@ bool jd_fits_de431(const double jd)
 	//return !(jd < -3027215.5 || jd > 7930192.5);
 	// GZ limits inside those where sun can jump between ecliptic of date and ecliptic2000.
 	// TODO: Behaviour at upper limit is totally whacko!
-	return !(jd < -3027188.25 || jd > 7930192.5);
+	//return !(jd < -3027188.25 || jd > 7930192.5);
+	return ((jd > -3027188.25 ) && (jd < 7930192.5));
 }
 
 bool jd_fits_de430(const double jd)
 {
 	//return !(jd < 2287184.5 || jd > 2688974.5);
-	return !(jd < 2287184.5 || jd > 2688976.5);
+	//return !(jd < 2287184.5 || jd > 2688976.5);
+	return ((jd > 2287184.5) && (jd < 2688976.5));
 }
 
 bool use_de430(double jd)
@@ -93,6 +99,7 @@ bool use_de431(double jd)
         jd_fits_de431(jd);
 }
 
+// planet_id is ONLY one of the #defined values 0..8 above.
 void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 {
 	if(!std::isfinite(jd))
@@ -115,6 +122,8 @@ void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 	}
 }
 
+// Osculating positions for time JDE in elements for JDE0, if possible by the theory used (e.g. VSOP87).
+// For ephemerides like DE4xx, JDE0 is irrelevant.
 void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], int planet_id)
 {
 	if(!(std::isfinite(jd) && std::isfinite(jd0)))
@@ -125,11 +134,11 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
 
 	if(use_de430(jd))
 	{
-		GetDe430OsculatingCoor(jd0, jd, planet_id + 1, xyz);
+		GetDe430Coor(jd, planet_id + 1, xyz);
 	}
 	else if(use_de431(jd))
 	{
-		GetDe431OsculatingCoor(jd0, jd, planet_id + 1, xyz);
+		GetDe431Coor(jd, planet_id + 1, xyz);
 	}
 	else //VSOP87 as fallback
 	{
@@ -281,9 +290,14 @@ void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
  * Michelle Chapront-Touze and Jean Chapront of the Bureau des Longitudes,
  * Paris. ELP 2000-82B theory
  * param jd Julian day, rect pos */
-void get_lunar_parent_coordsv(double jd,double xyz[3], void* unused)
+void get_lunar_parent_coordsv(double jde,double xyz[3], void* unused)
 {
-    GetElp82bCoor(jd,xyz);
+	if(use_de430(jde))
+		GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
+	else if(use_de431(jde))
+		GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
+	else
+		GetElp82bCoor(jde,xyz);
 }
 
 void get_phobos_parent_coordsv(double jd,double xyz[3], void* unused)

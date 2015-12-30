@@ -21,7 +21,6 @@ THE SOFTWARE.
 */
 
 #include "de430.hpp"
-#include "jpleph.h"
 #include "StelUtils.hpp"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
@@ -64,11 +63,11 @@ void TerminateDE430()
   jpl_close_ephemeris(ephem);
 }
 
-void GetDe430Coor(double jd, int planet_id, double * xyz)
+void GetDe430Coor(const double jde, const int planet_id, double * xyz, const int centralBody_id)
 {
     if(initDone)
     {
-        jpl_pleph(ephem, jd, planet_id, CENTRAL_PLANET_ID, tempXYZ, 0);
+	jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
 
         tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
         tempECL = StelCore::matJ2000ToVsop87 * tempICRF;
@@ -79,10 +78,10 @@ void GetDe430Coor(double jd, int planet_id, double * xyz)
     }
 }
 
-void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz)
-{
+//void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz, const int centralBody_id)
+//{
 	
-}
+//}
 
 #ifdef __cplusplus
   }
