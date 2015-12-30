@@ -23,13 +23,17 @@ THE SOFTWARE.
 #ifndef _DE431_H_
 #define _DE431_H_
 
+#include "jpleph.h"
+
 #ifdef __cplusplus
   extern "C" {
 #endif
 
 void InitDE431(const char* filepath);
-void GetDe431Coor(double jd, int planet_id, double * xyz);
-void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz);
+// most of the time centralBody_id likely is the Sun. However, for Moon, use centralBody_id=EPHEM_JPL_EARTH_ID=3
+void GetDe431Coor(const double jde, const int planet_id, double * xyz, const int centralBody_id=CENTRAL_PLANET_ID);
+// Not possible for a DE.
+//void GetDe431OsculatingCoor(double jd0, double jd, int planet_id, double *xyz, const int centralBody_id=CENTRAL_PLANET_ID);
 
 #ifdef __cplusplus
     }
