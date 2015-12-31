@@ -165,8 +165,8 @@ void SolarSystem::init()
 	connect(objectManager, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)),
 			this, SLOT(selectedObjectChange(StelModule::StelModuleSelectAction)));
 
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("/textures/pointeur4.png"));
-	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("/textures/planet-indicator.png"));
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("textures/pointeur4.png"));
+	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("textures/planet-indicator.png"));
 
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -1014,7 +1014,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	}
 
 	// special case: load earth shadow texture
-	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("/textures/earth-shadow.png"));
+	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("textures/earth-shadow.png"));
 
 	// Also comets just have static textures.
 	Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::findFile("textures/cometComa.png"), StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
