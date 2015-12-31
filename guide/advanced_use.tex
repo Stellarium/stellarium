@@ -1,8 +1,6 @@
-\chapterimage{chapter-bg.png} % Chapter heading image
+\chapterimage{chapter-t3-bg} % Chapter heading image
 
-\chapter{Advanced Use}\label{advanced-use}
-
-\section{Files and Directories}\label{files-and-directories}
+\chapter{Files and Directories}\label{advanced-use}
 
 Stellarium has many data files containing such things as star catalogue
 data, nebula images, button icons, font files and configuration files.
@@ -26,7 +24,7 @@ The locations of the user directory, installation directory,
 according to the operating system and installation options used. The
 following sections describe the locations for various operating systems.
 
-\subsection{Windows}\label{windows}
+\section{Windows}\label{windows}
 
 \begin{itemize}
 \item
@@ -41,31 +39,22 @@ following sections describe the locations for various operating systems.
   fails, the next in the list if tried).
 \end{itemize}
 
+\begin{config}
 \texttt{\%APPDATA\%\textbackslash{}Stellarium\textbackslash{}}\\
 \texttt{\%USERPROFILE\%\textbackslash{}Stellarium\textbackslash{}}\\
 \texttt{\%HOMEDRIVE\%\textbackslash{}\%HOMEPATH\%\textbackslash{}Stellarium\textbackslash{}}\\
 \texttt{\%HOME\%\textbackslash{}Stellarium\textbackslash{}}\\
 \texttt{Stellarium\textbackslash{}s~installation~directory}
-
-
-Thus, on a typical Windows XP system with user ``Bob Dobbs'', the user
-directory will be:
-
-\texttt{C:\textbackslash{}Documents~and~Settings\textbackslash{}Bob~Dobbs\textbackslash{}Application~Data\textbackslash{}Stellarium\textbackslash{}}
+\end{config}
 
 Thus, on a typical Windows Vista and Windows 7 systems with user ``Bob
 Dobbs'', the user directory will be:
 
+\begin{config}
 \texttt{C:\textbackslash{}Users\textbackslash{}Bob~Dobbs\textbackslash{}AppData\textbackslash{}Roaming\textbackslash{}Stellarium\textbackslash{}}
+\end{config}
 
-Stellarium version 0.9.0 did use the
-\texttt{\%APPDATA\%\textbackslash{}Stellarium} folder. Thus if a
-\texttt{config.ini} file exists in the
-\texttt{\%USERPROFILE\%\textbackslash{}Stellarium\textbackslash{}}
-directory, that will be used in preference to the
-\texttt{\%APPDATA\%\textbackslash{}Stellarium\textbackslash{}}
-directory. This is to prevent users of version 0.9.0 from losing their
-settings when they upgrade.
+
 
 \begin{itemize}
 \item
@@ -80,7 +69,7 @@ settings when they upgrade.
     directory.}).
 \end{itemize}
 
-\subsection{Mac OS X}\label{mac-os-x}
+\section{Mac OS X}\label{mac-os-x}
 
 \begin{itemize}
 \item
@@ -99,7 +88,7 @@ settings when they upgrade.
   Desktop.
 \end{itemize}
 
-\subsection{Linux}\label{linux}
+\section{Linux}\label{linux}
 
 \begin{itemize}
 \item
@@ -115,7 +104,7 @@ settings when they upgrade.
   home directory.
 \end{itemize}
 
-\subsection{Directory Structure}\label{directory-structure}
+\section{Directory Structure}\label{directory-structure}
 
 Within the \emph{installation directory} and \emph{user directory}
 (defined in section \href{Advanced_Use\#Files_and_Directories}{Files and
@@ -164,7 +153,7 @@ and directories within the user directory, leaving the installation
 directory unchanged. In this manner different users on a multi-user
 system can customise Stellarium without affecting the other users.
 
-\section{The Main Configuration
+\chapter{The Main Configuration
 File}\label{the-main-configuration-file}
 
 The main configuration file is read each time Stellarium starts up, and
@@ -198,7 +187,7 @@ modifications to the configuration file. A complete list of
 configuration file options and values may be found in the appendix,
 \href{Configuration_file}{Configuration file}.
 
-\section{Command Line Options}\label{command-line-options}
+\chapter{Command Line Options}\label{command-line-options}
 
 Stellarium's behaviour can be modified by providing parameters to the
 program when it is run, via the command line. See table for a full list:
@@ -297,7 +286,7 @@ engine.\footnotemark[4]\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Examples}\label{examples}
+\section{Examples}\label{examples}
 
 \begin{itemize}
 \item
@@ -318,37 +307,37 @@ engine.\footnotemark[4]\tabularnewline
 \texttt{stellarium~-\/-list-landscapes}\\
 \texttt{stellarium~-\/-landscape=ocean}
 
-\section{Getting Extra Star Data}\label{getting-extra-star-data}
+\chapter{Getting Extra Data}\label{getting-extra-star-data}
 
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
 using the tool which is in the \emph{Tools} tab of the
 \emph{Configuration} dialog.
 
-\section{Visual Effects}\label{visual-effects}
+\chapter{Visual Effects}\label{visual-effects}
 
-\subsection{Light Pollution}\label{light-pollution}
+\section{Light Pollution}\label{light-pollution}
 
 Stellarium can simulate light pollution, which is controlled from the
 light pollution section of the \emph{Sky} tab of the \emph{View} window.
 Light pollution levels are set using an numerical value between 1 and 9
 which corresponds to the \emph{Bortle Dark Sky Scale}.
 
-\subsubsection{Excellent dark sky site}
+\subsection{Excellent dark sky site}
 \textbf{Level:} 1 \\
 \textbf{Colour:} black \\
 \textbf{Limiting magnitude (eye):} 7.6 -- 8.0
 
 Zodiacal light, gegenschein, zodiacal band visible; M33 direct vision naked-eye object; Scorpius and Sagittarius regions of the Milky Way cast obvious shadows on the ground; Airglow is readily visible; Jupiter and Venus affect dark adaptation; surroundings basically invisible.
 
-\subsubsection{Typical truly dark site}
+\subsection{Typical truly dark site}
 \textbf{Level:} 2 \\
 \textbf{Colour:} grey \\
 \textbf{Limiting magnitude (eye):} 7.1 -- 7.5
 
 Airglow weakly visible near horizon; M33 easily seen with naked eye; highly structured Summer Milky Way; distinctly yellowish zodiacal light bright enough to cast shadows at dusk and dawn; clouds only visible as dark holes; surroundings still only barely visible silhouetted against the sky; many Messier globular clusters still distinct naked-eye objects.
 
-\subsubsection{Rural sky}
+\subsection{Rural sky}
 \textbf{Level:} 3 \\
 \textbf{Colour:} blue \\
 \textbf{Limiting magnitude (eye):} 6.6 -- 7.0
@@ -356,21 +345,21 @@ Airglow weakly visible near horizon; M33 easily seen with naked eye; highly stru
 Some light pollution evident at the horizon; clouds illuminated near horizon, dark overhead; Milky Way still appears complex; M15, M4, M5, M22 distinct naked-eye objects; M33 easily visible with averted vision; zodiacal light striking in spring and
 autumn, color still visible; nearer surroundings vaguely visible.
 
-\subsubsection{Rural/suburban transition}
+\subsection{Rural/suburban transition}
 \textbf{Level:} 4 \\
 \textbf{Colour:} green/yellow \\
 \textbf{Limiting magnitude (eye):} 6.1 -- 6.5
 
 Light pollution domes visible in various directions over the horizon; zodiacal light is still visible, but not even halfway extending to the zenith at dusk or dawn; Milky Way above the horizon still impressive, but lacks most of the finer details; M33 a difficult averted vision object, only visible when higher than 55$\degree$; clouds illuminated in the directions of the light sources, but still dark overhead; surroundings clearly visible, even at a distance.
 
-\subsubsection{Suburban sky}
+\subsection{Suburban sky}
 \textbf{Level:} 5 \\
 \textbf{Colour:} orange \\
 \textbf{Limiting magnitude (eye):} 5.6 -- 6.0
 
 Only hints of zodiacal light are seen on the best nights in autumn and spring; Milky Way is very weak or invisible near the horizon and looks washed out overhead; light sources visible in most, if not all, directions; clouds are noticeably brighter than the sky.
 
-\subsubsection{Bright suburban sky}
+\subsection{Bright suburban sky}
 \textbf{Level:} 6 \\
 \textbf{Colour:} red \\
 \textbf{Limiting magnitude (eye):} 5.1 -- 5.5
@@ -378,21 +367,21 @@ Only hints of zodiacal light are seen on the best nights in autumn and spring; M
 Zodiacal light is invisible; Milky Way only visible near the zenith; sky within 35$\degree$ from the horizon glows grayish white; clouds anywhere in the sky appear fairly bright; surroundings easily visible; M33 is impossible to see
 without at least binoculars, M31 is modestly apparent to the unaided eye.
 
-\subsubsection{Suburban/urban transition}
+\subsection{Suburban/urban transition}
 \textbf{Level:} 7 \\
 \textbf{Colour:} red \\
 \textbf{Limiting magnitude (eye):} 5.0 at best
 
 Entire sky has a grayish-white hue; strong light sources evident in all directions; Milky Way invisible; M31 and M44 may be glimpsed with the naked eye, but are very indistinct; clouds are brightly lit; even in moderate-sized telescopes the brightest Messier objects are only ghosts of their true selves.
 
-\subsubsection{City sky}
+\subsection{City sky}
 \textbf{Level:} 8 \\
 \textbf{Colour:} white \\
 \textbf{Limiting magnitude (eye):} 4.5 at best
 
 Sky glows white or orange --- you can easily read; M31 and M44 are barely glimpsed by an experienced observer on good nights; even with telescope, only bright Messier objects can be detected; stars forming familiar constellation patterns may be weak or completely invisible.
 
-\subsubsection{Inner City sky}
+\subsection{Inner City sky}
 \textbf{Level:} 9 \\
 \textbf{Colour:} white \\
 \textbf{Limiting magnitude (eye):} 4.0 at best
@@ -400,7 +389,7 @@ Sky glows white or orange --- you can easily read; M31 and M44 are barely glimps
 Sky is brilliantly lit with many stars forming constellations invisible and many weaker
 constellations invisible; aside from Pleiades, no Messier object is visible to the naked eye; only objects to provide fairly pleasant views are the Moon, the Planets and a few of the brightest star clusters.
 
-\section{Taking Screenshots}\label{taking-screenshots}
+\chapter{Taking Screenshots}\label{taking-screenshots}
 
 You can save what is on the screen to a file by pressing
 \textbf{Control-S}. Screenshots are taken in \emph{.png} format, and
@@ -412,7 +401,7 @@ Stellarium creates screenshots in different directories depending in
 your system type, see section
 \href{Advanced_Use\#Files_and_Directories}{Files and Directories}.
 
-\section{Customising Landscapes}\label{customising-landscapes}
+\chapter{Customising Landscapes}\label{customising-landscapes}
 
 It is possible to create your own landscapes for Stellarium. There are
 four types of landscape:
@@ -538,7 +527,7 @@ Where:
   V0.14)
 \end{itemize}
 
-\subsection{Single Fish-eye Method}\label{single-fish-eye-method}
+\section{Single Fish-eye Method}\label{single-fish-eye-method}
 
 The \emph{Trees} landscape that is provided with Stellarium is an
 example of the single fish-eye method, and provides a good illustration.
@@ -635,7 +624,7 @@ Where:
   V0.14)
 \end{itemize}
 
-\subsection{Single Panorama Method}\label{single-panorama-method}
+\section{Single Panorama Method}\label{single-panorama-method}
 
 This method uses a more usual type of panorama - the kind which is
 produced directly from software such as \emph{autostitch} or Hugin
@@ -774,7 +763,7 @@ easiest method to create perfectly aligned fog and illumination layers
 is with an image editor that supports layers like the GIMP or Photoshop.
 Fog and Light images should have black background.
 
-\subsection{Multiple Image Method}\label{multiple-image-method}
+\section{Multiple Image Method}\label{multiple-image-method}
 
 The multiple image method works by having a 360 panorama of the horizon
 (without wasting too much texture memory with the sky) split into a
@@ -991,7 +980,7 @@ Where:
   V0.14)
 \end{itemize}
 
-\subsection{landscape.ini {[}location{]}
+\section{landscape.ini {[}location{]}
 section}\label{landscape.ini-location-section}
 
 An example location section:
@@ -1061,7 +1050,7 @@ they are missing, the parameters do not change to defaults.
   declare ``no change''.
 \end{itemize}
 
-\subsection{Making a Multi panel
+\section{Making a Multi panel
 Panorama}\label{making-a-multi-panel-panorama}
 
 \begin{figure}[h]
@@ -1094,7 +1083,7 @@ background. To make this you will need the following:
   when you press the wrong key and lose an hours work)
 \end{itemize}
 
-\subsubsection{The Camera}\label{the-camera}
+\subsection{The Camera}\label{the-camera}
 
 Digital cameras are easy and cheaply available these days so whatever
 you have should do. One mega-pixel resolution is quite sufficient.
@@ -1110,7 +1099,7 @@ With a camera that takes 4:3 ratio pictures I found 14 evenly spaced
 pictures gave the best 360$\degree$ panorama in the program I used to produce
 it.
 
-\subsubsection{Processing into a
+\subsection{Processing into a
 Panorama}\label{processing-into-a-panorama}
 
 This is the most complicated part of the process of generating the
@@ -1148,7 +1137,7 @@ in.
 %\caption{Figure caption}
 \end{figure}
 
-\subsubsection{Removing the background to make it
+\subsection{Removing the background to make it
 transparent}\label{removing-the-background-to-make-it-transparent}
 
 This is the most complex part of the process and requires a program that
@@ -1211,7 +1200,7 @@ panorama.
 After re-starting Stellarium, your landscape will appear in the
 landscape folder of the main menu , and can be selected as required.
 
-\subsection{Making a Spherical
+\section{Making a Spherical
 Panorama}\label{making-a-spherical-panorama}
 
 A simpler method of making a panorama is to use the spherical method.
@@ -1241,7 +1230,7 @@ just get a white screen. With this problem I used the following
 procedure to make the spherical into a four panel multi-panel landscape
 with a very effective ground that matched well
 
-\subsubsection{Converting a Spherical Panorama into a Multi
+\subsection{Converting a Spherical Panorama into a Multi
 Panel}\label{converting-a-spherical-panorama-into-a-multi-panel}
 
 Most computers with standard video cards will not display spherical
@@ -1314,7 +1303,7 @@ just get a white screen. With this problem I used the following
 procedure to make the spherical into a four panel multi panel landscape
 with a very effective ground that matched well.
 
-\subsection{Making a Fish eye
+\section{Making a Fish eye
 Panorama}\label{making-a-fish-eye-panorama}
 
 This sort of panorama needs a very expensive fisheye lens on your
@@ -1341,7 +1330,7 @@ as making a ground from a spherical panorama but it is hardly worth the
 trouble as even a simple 2048 x 1024 pixel sperical will give a far
 better result.
 
-\section{Deep-Sky Objects}\label{deep-sky-objects}
+\chapter{Deep-Sky Objects}\label{deep-sky-objects}
 
 Extended objects are those which are external to the solar system, and
 are not point-sources like stars. Extended objects include galaxies,
@@ -1374,7 +1363,7 @@ side. If this requirement is not met, your textures may not be visible,
 or graphics performance may be seriously impacted. PNG or JPG formats
 are both supported.
 
-\subsection{GUI for manage by Deep-Sky
+\section{GUI for manage by Deep-Sky
 Objects}\label{gui-for-manage-by-deep-sky-objects}
 
 \begin{figure}[h]
@@ -1382,7 +1371,7 @@ Objects}\label{gui-for-manage-by-deep-sky-objects}
 %\caption{Figure caption}
 \end{figure}
 
-\subsection{Stellarium DSO Catalog}\label{stellarium-dso-catalog}
+\section{Stellarium DSO Catalog}\label{stellarium-dso-catalog}
 
 Stellarium DSO Catalog is contains over 1400 objects and he available
 for end users as collection of files:
@@ -1441,7 +1430,7 @@ follow catalogues:
   Cederblad Catalog of bright diffuse Galactic nebulae (Ced)
 \end{itemize}
 
-\subsection{Modifying catalog.dat}\label{modifying-catalog.dat}
+\section{Modifying catalog.dat}\label{modifying-catalog.dat}
 
 This section is described inner structure of files \texttt{catalog.dat}
 (has binary format) and \texttt{catalog.txt} (has ASCII format).
@@ -1501,7 +1490,7 @@ nebulae)\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsubsection{Types of Objects}\label{types-of-objects}
+\subsection{Types of Objects}\label{types-of-objects}
 
 Possible values for type of objects in the file \texttt{catalog.dat}.
 
@@ -1548,7 +1537,7 @@ Objects} etc.\tabularnewline
 \bottomrule
 \end{longtabu}
 
-\subsection{Modifying names.dat}\label{modifying-names.dat}
+\section{Modifying names.dat}\label{modifying-names.dat}
 
 Each line in the \texttt{names.dat} file contains one record. A record
 relates an extended object catalogue number (from \texttt{catalog.dat})
@@ -1570,7 +1559,7 @@ The record structure is as follows:
 If an object has more than one record in the \texttt{names.dat} file,
 the last record in the file will be used for the nebula label.
 
-\subsection{Modifying textures.json}\label{modifying-textures.json}
+\section{Modifying textures.json}\label{modifying-textures.json}
 
 This file is used to describe each nebula image. The file structure
 follows the JSON format, a detailed description of which may be found at
@@ -1671,10 +1660,10 @@ display will limit the size to about 1 degree before distortion becomes
 evident. Larger displays can be sectioned into a mosaic of smaller
 textures for a more accurate display
 
-\subsection{Adding Extra Nebulae
+\section{Adding Extra Nebulae
 Images}\label{adding-extra-nebulae-images}
 
-\subsubsection{\texorpdfstring{Preparing a photo for inclusion to the
+\subsection{\texorpdfstring{Preparing a photo for inclusion to the
 \texttt{textures.json}
 file}{Preparing a photo for inclusion to the textures.json file}}\label{preparing-a-photo-for-inclusion-to-the-textures.json-file}
 
@@ -1725,7 +1714,7 @@ Here is a second program written in Qb64(gl)that will perform the same
 task but allow manipulation of the epochs.
 \url{http://barry.sarcasmogerdes.com/stellarium/uploads/writejsoninsert.zip}
 
-\subsubsection{Plate Solving}\label{plate-solving}
+\subsection{Plate Solving}\label{plate-solving}
 
 Suitable programs that can accept your picture and calculate its corner
 coordinates are hard to find. I have only found one that suits our
@@ -1758,7 +1747,7 @@ see all the matched stars have overlaid the picture. You can now read
 off the corner coordinates from the status bar starting at the bottom
 (south) left and continuing counter clockwise to the top (north) left.
 
-\subsubsection{\texorpdfstring{Processing into a \texttt{textures.json}
+\subsection{\texorpdfstring{Processing into a \texttt{textures.json}
 insert}{Processing into a textures.json insert}}\label{processing-into-a-textures.json-insert}
 
 Place your image in the \texttt{*.png} format in the
