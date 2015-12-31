@@ -435,7 +435,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeL
 
 	// We want to lookup the landscape ID (dir) from the name.
 	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
-	
+
 	if (!newLandscape)
 	{
 		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini";
@@ -504,7 +504,7 @@ bool LandscapeMgr::setCurrentLandscapeName(const QString& name, const double cha
 {
 	if (name.isEmpty())
 		return false;
-	
+
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 	if (nameToDirMap.find(name)!=nameToDirMap.end())
 	{
@@ -1162,7 +1162,7 @@ QString LandscapeMgr::getDescription() const
 
 	// Check localized description for landscape
 	if (!locDescriptionFile.isEmpty() && QFileInfo(locDescriptionFile).exists())
-	{		
+	{
 		descFile = locDescriptionFile;
 	}
 	// OK. Localized description of landscape not exists. What about english description of its?

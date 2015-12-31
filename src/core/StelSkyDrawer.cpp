@@ -78,9 +78,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 	setFlagStarMagnitudeLimit((conf->value("astro/flag_star_magnitude_limit", false).toBool()));
 	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toFloat());
+	setFlagPlanetMagnitudeLimit((conf->value("astro/flag_planet_magnitude_limit", false).toBool()));
+	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toFloat());
 	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
 	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toFloat());
-	// qDebug() << "drawer: clampStellarMag: " << clampStellarMagnitude << " , clampDSOmagnitude: " << clampDSOMagnitude;
 
 	bool ok=true;
 
@@ -91,7 +92,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
 		setRelativeStarScale(1.0);
-	
+
 	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toFloat(&ok));
 	if (!ok)
 		setAbsoluteStarScale(1.0);
@@ -106,7 +107,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMirror);
 	else if (extinctionMode=="max")
 		extinction.setUndergroundExtinctionMode(Extinction::UndergroundExtinctionMax);
-	
+
 	setAtmosphereTemperature(conf->value("landscape/temperature_C",15.0).toDouble(&ok));
 	if (!ok)
 		setAtmosphereTemperature(15.0);
@@ -118,10 +119,10 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	// Initialize buffers for use by gl vertex array
 	nbPointSources = 0;
 	maxPointSources = 1000;
-	
-	
+
+
 	vertexArray = new StarVertex[maxPointSources*6];
-	
+
 	textureCoordArray = new unsigned char[maxPointSources*6*2];
 	for (unsigned int i=0;i<maxPointSources; ++i)
 	{
@@ -137,7 +138,7 @@ StelSkyDrawer::~StelSkyDrawer()
 	vertexArray = NULL;
 	delete[] textureCoordArray;
 	textureCoordArray = NULL;
-	
+
 	delete starShaderProgram;
 	starShaderProgram = NULL;
 }
@@ -149,6 +150,7 @@ void StelSkyDrawer::init()
 	texHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("textures/star16x16.png"));
 	texBigHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("textures/haloLune.png"));
 	texSunHalo = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("textures/halo.png"));
+	texSunCorona = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::findFile("textures/corona.png"));
 
 	// Create shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
@@ -189,7 +191,7 @@ void StelSkyDrawer::init()
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
 	starShaderVars.color = starShaderProgram->attributeLocation("color");
 	starShaderVars.texture = starShaderProgram->uniformLocation("tex");
-			
+
 	update(0);
 }
 
@@ -389,9 +391,9 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-	
+
 	Q_ASSERT(sizeof(StarVertex)==12);
-	
+
 	starShaderProgram->bind();
 	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, (GLfloat*)vertexArray, 2, 12);
 	starShaderProgram->enableAttributeArray(starShaderVars.pos);
@@ -400,14 +402,14 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	starShaderProgram->setUniformValue(starShaderVars.projectionMatrix, qMat);
 	starShaderProgram->setAttributeArray(starShaderVars.texCoord, GL_UNSIGNED_BYTE, (GLubyte*)textureCoordArray, 2, 0);
 	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
-	
+
 	glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
-	
+
 	starShaderProgram->disableAttributeArray(starShaderVars.pos);
 	starShaderProgram->disableAttributeArray(starShaderVars.color);
 	starShaderProgram->disableAttributeArray(starShaderVars.texCoord);
 	starShaderProgram->release();
-	
+
 	nbPointSources = 0;
 }
 
@@ -438,7 +440,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		texBigHalo->bind();
 		sPainter->enableTexture2d(true);
 		glBlendFunc(GL_ONE, GL_ONE);
-		glEnable(GL_BLEND);				
+		glEnable(GL_BLEND);
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
@@ -447,7 +449,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	starColor[0] = (unsigned char)std::min((int)(color[0]*tw*255+0.5f), 255);
 	starColor[1] = (unsigned char)std::min((int)(color[1]*tw*255+0.5f), 255);
 	starColor[2] = (unsigned char)std::min((int)(color[2]*tw*255+0.5f), 255);
-	
+
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
 	vx->pos.set(win[0]-radius,win[1]-radius); memcpy(vx->color, starColor, 3); ++vx;
@@ -466,6 +468,22 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	return true;
 }
 
+// Draw's the Sun's corona during a solar eclipse on Earth.
+void StelSkyDrawer::drawSunCorona(StelPainter* painter, const Vec3f& v, float radius, const Vec3f& color, const float alpha)
+{
+	texSunCorona->bind();
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	painter->enableTexture2d(true);
+
+	Vec3f win;
+	painter->getProjector()->project(v, win);
+	// For some reason we must mix color with the given alpha as well, else mixing does not work.
+	painter->setColor(color[0]*alpha, color[1]*alpha, color[2]*alpha, alpha);
+	painter->drawSprite2dMode(win[0], win[1], radius);
+
+	postDrawPointSource(painter);
+}
 
 // Terminate drawing of a 3D model, draw the halo
 void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, float illuminatedArea, float mag, const Vec3f& color)

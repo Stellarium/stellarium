@@ -109,10 +109,10 @@ void ConfigurationDialog::retranslate()
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
-		
+
 		//Initial FOV and direction on the "Main" page
 		updateConfigLabels();
-		
+
 		//Star catalog download button and info
 		updateStarCatalogControlsText();
 
@@ -125,7 +125,7 @@ void ConfigurationDialog::retranslate()
 		//Plug-in information
 		populatePluginsList();
 
-		populateDeltaTAlgorithmsList();		
+		populateDeltaTAlgorithmsList();
 	}
 }
 
@@ -190,7 +190,7 @@ void ConfigurationDialog::createDialogContent()
 	}
 	else if (gui->getInfoTextFilters() == StelObject::ShortInfo)
 	{
-		ui->briefSelectedInfoRadio->setChecked(true);	
+		ui->briefSelectedInfoRadio->setChecked(true);
 	}
 	else if (gui->getInfoTextFilters() == StelObject::AllInfo)
 	{
@@ -201,12 +201,12 @@ void ConfigurationDialog::createDialogContent()
 		ui->customSelectedInfoRadio->setChecked(true);
 	}
 	updateSelectedInfoCheckBoxes();
-	
+
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
 	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
-	
+
 	// Navigation tab
 	// Startup time
 	if (core->getStartupTimeMode()=="actual")
@@ -234,7 +234,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 
 	// Delta-T
-	populateDeltaTAlgorithmsList();	
+	populateDeltaTAlgorithmsList();
 	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
@@ -445,7 +445,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	// change the general mode to Custom.
 	if (!ui->customSelectedInfoRadio->isChecked())
 		ui->customSelectedInfoRadio->setChecked(true);
-	
+
 	StelObject::InfoStringGroup flags(0);
 
 	if (ui->checkBoxName->isChecked())
@@ -695,7 +695,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	else
 	{
 		conf->setValue("gui/selected_object_info", "custom");
-		
+
 		conf->beginGroup("custom_selected_info");
 		conf->setValue("flag_show_name", (bool) (flags & StelObject::Name));
 		conf->setValue("flag_show_catalognumber",
@@ -819,7 +819,7 @@ void ConfigurationDialog::populatePluginsList()
 
 	plugins->clear();
 	QString selectedPluginName = "";
-	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();	
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
 		QString label = q_(desc.info.displayedName);
@@ -850,7 +850,7 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 		if (item->data(Qt::UserRole).toString()==desc.info.id)
 		{
 			QString html = "<html><head></head><body>";
-			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";			
+			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";
 			QString d = desc.info.description;
 			d.replace("\n", "<br />");
 			html += "<p>" + q_(d) + "</p>";
@@ -914,10 +914,10 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 #ifndef DISABLE_SCRIPTING
 void ConfigurationDialog::populateScriptsList(void)
 {
-	int prevSel = ui->scriptListWidget->currentRow();	
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
-	ui->scriptListWidget->clear();	
-	ui->scriptListWidget->addItems(scriptMgr.getScriptList());	
+	int prevSel = ui->scriptListWidget->currentRow();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
+	ui->scriptListWidget->clear();
+	ui->scriptListWidget->addItems(scriptMgr.getScriptList());
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
 	if (prevSel >= 0 && prevSel < ui->scriptListWidget->count())
 		ui->scriptListWidget->setCurrentRow(prevSel);
@@ -928,8 +928,8 @@ void ConfigurationDialog::populateScriptsList(void)
 void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty())
-		return;	
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
+		return;
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
@@ -945,24 +945,24 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
 	{
 		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s) + "<br />";
-	}	
+	}
 	if (!scriptMgr.getShortcut(s).trimmed().isEmpty())
 	{
 		html += "<strong>" + q_("Shortcut") + "</strong>: " + scriptMgr.getShortcut(s);
 	}
 	html += "</p></body></html>";
-	ui->scriptInfoBrowser->setHtml(html);	
+	ui->scriptInfoBrowser->setHtml(html);
 }
 
 void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
-		this->close();	
+		this->close();
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
-	}	
+	}
 }
 
 void ConfigurationDialog::stopScriptClicked(void)
@@ -971,10 +971,10 @@ void ConfigurationDialog::stopScriptClicked(void)
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)
-{	
+{
 	ui->scriptStatusLabel->setText(q_("Running script: ") + StelApp::getInstance().getScriptMgr().runningScriptId());
 	ui->runScriptButton->setEnabled(false);
-	ui->stopScriptButton->setEnabled(true);	
+	ui->stopScriptButton->setEnabled(true);
 }
 
 void ConfigurationDialog::aScriptHasStopped(void)
@@ -1057,7 +1057,7 @@ void ConfigurationDialog::updateStarCatalogControlsText()
 		               .arg(nextStarCatalogToDownloadIndex)
 		               .arg(starCatalogsCount);
 		ui->getStarsButton->setText(text);
-		
+
 		if (isDownloadingStarCatalog)
 		{
 			QString text = QString(q_("Downloading %1...\n(You can close this window.)"))
@@ -1127,7 +1127,7 @@ void ConfigurationDialog::downloadStars()
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", userAgent.toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
+	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
@@ -1218,7 +1218,7 @@ void ConfigurationDialog::downloadFinished()
 void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 {
 	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
-	
+
 	ui->checkBoxName->setChecked(flags & StelObject::Name);
 	ui->checkBoxCatalogNumbers->setChecked(flags & StelObject::CatalogNumber);
 	ui->checkBoxVisualMag->setChecked(flags & StelObject::Magnitude);
@@ -1300,12 +1300,12 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
 	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
 	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
-	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
+	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");
 	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
 	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
 	// The dropdown label is too long for the string, and Meeus 1998 is very popular, this should be in the beginning of the tag.
 	algorithms->addItem(q_("Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"), "ChaprontMeeus");
-	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
+	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");
 	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
 	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
 	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");

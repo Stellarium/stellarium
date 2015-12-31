@@ -163,7 +163,7 @@ public slots:
 	//! @param changeLocationDuration the duration of the transition animation
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found).
 	bool setCurrentLandscapeID(const QString& id, const double changeLocationDuration = 1.0);
-	
+
 	//! Get the current landscape name.
 	QString getCurrentLandscapeName() const;
 	//! Change the current landscape to the landscape with the name specified.
@@ -196,7 +196,7 @@ public slots:
 	bool getIsLandscapeFullyVisible() const;
 	//! Get the sine of current landscape's minimal altitude. Useful to construct bounding caps.
 	float getLandscapeSinMinAltitudeLimit() const;
-	
+
 	//! Get flag for displaying Fog.
 	bool getFlagFog() const;
 	//! Set flag for displaying Fog.
@@ -405,7 +405,7 @@ private slots:
 	void setStelStyle(const QString& section);
 
 	//! Translate labels to new language settings.
-	void updateI18n();	
+	void updateI18n();
 
 private:
 	//! Get light pollution luminance level.

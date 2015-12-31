@@ -172,7 +172,7 @@ void NebulaMgr::init()
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
-	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());	
+	setCircleScale(conf->value("astro/nebula_scale",1.0f).toFloat());
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 
@@ -258,7 +258,7 @@ void NebulaMgr::init()
 	// loadNebulaSet("default");
 
 	updateI18n();
-	
+
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -356,7 +356,7 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");	
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -545,7 +545,7 @@ NebulaP NebulaMgr::search(const QString& name)
 void NebulaMgr::loadNebulaSet(const QString& setName)
 {
 	QString srcCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.txt");
-	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");	
+	QString dsoCatalogPath		= StelFileMgr::findFile("nebulae/" + setName + "/catalog.dat");
 	QString dsoNamesPath		= StelFileMgr::findFile("nebulae/" + setName + "/names.dat");
 
 	if (flagConverter)
@@ -553,7 +553,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		if (!srcCatalogPath.isEmpty())
 			convertDSOCatalog(srcCatalogPath, dsoCatalogPath, flagDecimalCoordinates);
 		else
-			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;			
+			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
 
 	}
 
@@ -563,7 +563,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 		return;
 	}
 
-	loadDSOCatalog(dsoCatalogPath);	
+	loadDSOCatalog(dsoCatalogPath);
 	loadDSONames(dsoNamesPath);
 }
 
@@ -820,7 +820,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			Mel			= list.at(27).toInt();	 // Mel number
 			PGC			= list.at(28).toInt();	 // PGC number (subset)
 			UGC			= list.at(29).toInt();	 // UGC number (subset)
-			Ced			= list.at(30).trimmed(); // Ced number			
+			Ced			= list.at(30).trimmed(); // Ced number
 
 			if (decimal)
 			{
@@ -892,7 +892,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 					break;
 				case 8:
 					nType = (unsigned int)Nebula::NebCn;
-					break;				
+					break;
 				case 10:
 				case 23:
 					nType = (unsigned int)Nebula::NebHII;
@@ -1088,7 +1088,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		nb = cdes.toInt();
 
-		QStringList catalogs;		
+		QStringList catalogs;
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
 			 << "NGC" << "PGC" << "UGC" << "CED";
 
@@ -1138,7 +1138,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 14:
 				e = searchCed(cdes);
-				break;			
+				break;
 			default:
 				e = searchDSO(nb);
 				break;
@@ -2176,7 +2176,7 @@ QStringList NebulaMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
 	foreach(const NebulaP& n, dsoArray)
-	{		
+	{
 		if (!n->getEnglishName().isEmpty())
 		{
 			if (inEnglish)
@@ -2329,4 +2329,3 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 	result.removeDuplicates();
 	return result;
 }
-

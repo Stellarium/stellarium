@@ -60,7 +60,7 @@ class StelGui : public QObject, public StelGuiBase
 
 public:
 	friend class ViewDialog;
-	
+
 	StelGui();
 	virtual ~StelGui();
 
@@ -71,25 +71,25 @@ public:
 	void update();
 
 	StelStyle getStelStyle() const {return currentStelStyle;}
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to the StelGui class
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
-	
+
 	//! Get the button bar at the bottom of the screen
 	BottomStelBar* getButtonBar() const;
-	
+
 	//! Get the button bar of the left of the screen
 	class LeftStelBar* getWindowsButtonBar() const;
 
 	//! Get the SkyGui instance (useful for adding other interface elements).
 	//! It will return a valid object only if called after init().
 	class SkyGui* getSkyGui() const;
-	
+
 	//! Get whether the buttons toggling image flip are visible
 	bool getFlagShowFlipButtons() const;
-	
+
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
@@ -102,20 +102,20 @@ public:
 
 	//! Used to force a refreshing of the GUI elements such as the button bars.
 	virtual void forceRefreshGui();
-	
+
 	virtual void setVisible(bool b);
 
 	virtual bool getVisible() const;
 
 	virtual bool isCurrentlyUsed() const;
-	
+
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags);
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 
 public slots:
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
-	
+
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
 
@@ -129,7 +129,7 @@ public slots:
 	//! remain on screen.
 	//! @param b to hide or not to hide
 	void setAutoHideHorizontalButtonBar(bool b);
-	
+
 	//! Get the auto-hide status of the vertical toolbar.
 	bool getAutoHideVerticalButtonBar() const;
 	//! Set the auto-hide status of the vertical toolbar.
@@ -151,7 +151,7 @@ public slots:
 #endif
 
 	//! Hide or show the GUI.  Public so it can be called from scripts.
-	void setGuiVisible(bool);	
+	void setGuiVisible(bool);
 
 private slots:
 	void reloadStyle();
@@ -161,7 +161,7 @@ private slots:
 #endif
 	//! Load color scheme from the given ini file and section name
 	void setStelStyle(const QString& section);
-	void quit();	
+	void quit();
 	void updateI18n();
 	void copySelectedObjectInfo(void);
 

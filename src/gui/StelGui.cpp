@@ -38,13 +38,13 @@
 #include "StelLocaleMgr.hpp"
 #include "StelActionMgr.hpp"
 
+#include "SporadicMeteorMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
 #include "SolarSystem.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyDrawer.hpp"
-#include "MeteorMgr.hpp"
 #ifdef ENABLE_SCRIPT_CONSOLE
 #include "ScriptConsole.hpp"
 #endif
@@ -61,6 +61,7 @@
 #include "SearchDialog.hpp"
 #include "ViewDialog.hpp"
 #include "ShortcutsDialog.hpp"
+#include "AstroCalcDialog.hpp"
 
 #include <QDebug>
 #include <QTimeLine>
@@ -96,6 +97,7 @@ StelGui::StelGui()
 #ifdef ENABLE_SCRIPT_CONSOLE
 	, scriptConsole(0)
 #endif
+	, astroCalcDialog(0)
 	, flagShowFlipButtons(false)
 	, flipVert(NULL)
 	, flipHoriz(NULL)
@@ -159,6 +161,11 @@ StelGui::~StelGui()
 		scriptConsole = 0;
 	}
 #endif
+	if (astroCalcDialog)
+	{
+		delete astroCalcDialog;
+		astroCalcDialog = NULL;
+	}
 }
 
 void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
@@ -177,8 +184,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
 	configurationDialog = new ConfigurationDialog(this, atopLevelGraphicsWidget);
 #ifdef ENABLE_SCRIPT_CONSOLE
-	scriptConsole = new ScriptConsole();
+	scriptConsole = new ScriptConsole(atopLevelGraphicsWidget);
 #endif
+	astroCalcDialog = new AstroCalcDialog(atopLevelGraphicsWidget);
 
 	///////////////////////////////////////////////////////////////////////
 	// Create all the main actions of the program, associated with shortcuts
@@ -211,6 +219,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
 	actionsMgr->addAction("actionShow_AddOn_Window_Global", windowsGroup, N_("Add-Ons Manager"), addonDialog, "visible", "F8", "", true);
+	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("AstroCalc window"), astroCalcDialog, "visible", "F10", "Alt+A", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -434,19 +443,8 @@ void StelGui::setStelStyle(const QString& section)
 		// Load the style sheets
 		currentStelStyle.confSectionName = section;
 
-		QString qtStyleFileName;
-		QString htmlStyleFileName;
-
-		if (section=="night_color")
-		{
-			qtStyleFileName = ":/graphicGui/nightStyle.css";
-			htmlStyleFileName = ":/graphicGui/nightHtml.css";
-		}
-		else if (section=="color")
-		{
-			qtStyleFileName = ":/graphicGui/normalStyle.css";
-			htmlStyleFileName = ":/graphicGui/normalHtml.css";
-		}
+		QString qtStyleFileName = ":/graphicGui/normalStyle.css";
+		QString htmlStyleFileName = ":/graphicGui/normalHtml.css";
 
 		// Load Qt style sheet
 		QFile styleFile(qtStyleFileName);
@@ -553,7 +551,7 @@ void StelGui::update()
 		forceRefreshGui();
 	}
 
-	dateTimeDialog->setDateTime(core->getJDay());
+	dateTimeDialog->setDateTime(core->getJD());
 }
 
 #ifndef DISABLE_SCRIPTING
@@ -668,7 +666,7 @@ void StelGui::setFlagShowDecimalDegrees(bool b)
 
 void StelGui::setVisible(bool b)
 {
-	skyGui->setVisible(b);	
+	skyGui->setVisible(b);
 }
 
 bool StelGui::getVisible() const

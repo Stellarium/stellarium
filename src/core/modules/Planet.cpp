@@ -63,7 +63,7 @@ Planet::MoonShaderVars Planet::moonShaderVars;
 
 QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
-	
+
 Planet::Planet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
@@ -449,21 +449,21 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 {
 	Vec3d thisPos = thisPlanet->getHeliocentricEclipticPos();
 	Vec3d planetPos = p->getHeliocentricEclipticPos();
-	
+
 	// If the planet p is farther from the sun than this planet, it can't cast shadow on it.
 	if (planetPos.lengthSquared()>thisPos.lengthSquared())
 		return false;
 
 	Vec3d ppVector = planetPos;
 	ppVector.normalize();
-	
+
 	double shadowDistance = ppVector * thisPos;
 	static const double sunRadius = 696000./AU;
 	double d = planetPos.length() / (p->getRadius()/sunRadius+1);
 	double penumbraRadius = (shadowDistance-d)/d*sunRadius;
-	
+
 	double penumbraCenterToThisPlanetCenterDistance = (ppVector*shadowDistance-thisPos).length();
-	
+
 	if (penumbraCenterToThisPlanetCenterDistance<penumbraRadius+thisPlanet->getRadius())
 		return true;
 	return false;
@@ -476,7 +476,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	const Planet* sun = ssystem->getSun().data();
 	if (this==sun || (parent.data()==sun && satellites.empty()))
 		return res;
-	
+
 	foreach (const PlanetP& planet, satellites)
 	{
 		if (willCastShadow(this, planet.data()))
@@ -484,7 +484,7 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	}
 	if (willCastShadow(this, parent.data()))
 		res.append(parent.data());
-	
+
 	return res;
 }
 
@@ -755,7 +755,7 @@ double Planet::getMeanSolarDay() const
 	if (englishName=="Sun")
 		return msd;
 
-	double sday = getSiderealDay();	
+	double sday = getSiderealDay();
 	double coeff = qAbs(sday/getSiderealPeriod());
 	float sign = 1;
 	// planets with retrograde rotation
@@ -1112,7 +1112,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		return;
 
 	// Try to improve speed for minor planets: test if visible at all.
-	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
+	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.
 	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
 	//      Maybe make another configurable flag for those interested?
 	// Problematic: Early-out here of course disables the wanted hint circles for dim asteroids.
@@ -1207,7 +1207,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 void Planet::initShader()
 {
 	qDebug() << "Initializing planets GL shaders... ";
-	
+
 	const char *vsrc =
 		"attribute highp vec3 vertex;\n"
 		"attribute highp vec3 unprojectedVertex;\n"
@@ -1242,7 +1242,7 @@ void Planet::initShader()
 		"    P = unprojectedVertex;\n"
 		"}\n"
 		"\n";
-	
+
 	const char *fsrc =
 		"varying mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
@@ -1399,12 +1399,12 @@ void Planet::initShader()
 		"        gl_FragColor = texture2D(tex, texc) * litColor;\n"
 		"    }\n"
 		"}\n";
-	
+
 	// Default planet shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
 	vshader.compileSourceCode(vsrc);
 	if (!vshader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling vshader: " << vshader.log(); }
-	
+
 	QOpenGLShader fshader(QOpenGLShader::Fragment);
 	fshader.compileSourceCode(fsrc);
 	if (!fshader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling fshader: " << fshader.log(); }
@@ -1416,7 +1416,7 @@ void Planet::initShader()
 	GL(planetShaderProgram->bind());
 	planetShaderVars.initLocations(planetShaderProgram);
 	GL(planetShaderProgram->release());
-	
+
 	// Planet with ring shader program
 	QByteArray arr = "#define RINGS_SUPPORT\n\n";
 	arr+=fsrc;
@@ -1436,14 +1436,14 @@ void Planet::initShader()
 	GL(ringPlanetShaderVars.innerRadius = ringPlanetShaderProgram->uniformLocation("innerRadius"));
 	GL(ringPlanetShaderVars.ringS = ringPlanetShaderProgram->uniformLocation("ringS"));
 	GL(ringPlanetShaderProgram->release());
-	
+
 	// Moon shader program
 	arr = "#define IS_MOON\n\n";
 	arr+=vsrc;
 	QOpenGLShader moonVertexShader(QOpenGLShader::Vertex);
 	moonVertexShader.compileSourceCode(arr.constData());
 	if (!moonVertexShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonVertexShader: " << moonVertexShader.log(); }
-	
+
 	arr = "#define IS_MOON\n\n";
 	arr+=fsrc;
 	QOpenGLShader moonFragmentShader(QOpenGLShader::Fragment);
@@ -1487,7 +1487,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
 		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
-		
+
 		if (flagLighting)
 		{
 			// Set the main source of light to be the sun
@@ -1526,7 +1526,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (rings)
 		{
-			// The planet has rings, we need to use depth buffer and adjust the clipping planes to avoid 
+			// The planet has rings, we need to use depth buffer and adjust the clipping planes to avoid
 			// reaching the maximum resolution of the depth buffer
 			const double dist = getEquinoxEquatorialPos(core).length();
 			double z_near = 0.9*(dist - rings->getSize());
@@ -1537,7 +1537,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			core->setClippingPlanes(z_near,z_far);
 
 			drawSphere(sPainter, screenSz, drawOnlyRing);
-			
+
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
 		else
@@ -1573,7 +1573,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		{
 			float eclipseFactor = ssm->getEclipseFactor(core);
 			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
-			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));			
+			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));
 			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha);
 		}
 	}
@@ -1591,14 +1591,14 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 	model->indiceArr.resize(0);
 	model->vertexArr.resize(0);
 	model->texCoordArr.resize(0);
-	
+
 	GLfloat x, y, z;
 	GLfloat s=0.f, t=1.f;
 	GLint i, j;
 
 	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	const float* cos_sin_theta =  StelUtils::ComputeCosSinTheta(slices);
-	
+
 	const float* cos_sin_rho_p;
 	const float *cos_sin_theta_p;
 
@@ -1648,7 +1648,7 @@ struct Ring3DModel
 void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, const int stacks)
 {
 	float x,y;
-	
+
 	const float dr = (rMax-rMin) / stacks;
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float* cos_sin_theta_p;
@@ -1715,14 +1715,14 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	// Generates the vertice
 	Planet3DModel model;
 	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-	
+
 	QVector<float> projectedVertexArr;
 	projectedVertexArr.resize(model.vertexArr.size());
 	for (int i=0;i<model.vertexArr.size()/3;++i)
 		painter->getProjector()->project(*((Vec3f*)(model.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
-	
+
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		
+
 	if (this==ssm->getSun())
 	{
 		texMap->bind();
@@ -1731,13 +1731,13 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
 		return;
 	}
-	
+
 	if (planetShaderProgram==NULL)
 		Planet::initShader();
 	Q_ASSERT(planetShaderProgram!=NULL);
 	Q_ASSERT(ringPlanetShaderProgram!=NULL);
 	Q_ASSERT(moonShaderProgram!=NULL);
-	
+
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
 	if (rings)
@@ -1751,10 +1751,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		shaderVars = &moonShaderVars;
 	}
 	GL(shader->bind());
-	
+
 	const Mat4f& m = painter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-	
+
 	Mat4d modelMatrix;
 	computeModelMatrix(modelMatrix);
 	// TODO explain this
@@ -1777,14 +1777,14 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		shadowCandidatesData(2, i) = position[2];
 		shadowCandidatesData(3, i) = shadowCandidates.at(i)->getRadius();
 	}
-	
+
 	const StelProjectorP& projector = painter->getProjector();
-	
+
 	Vec3f lightPos3(light.position[0], light.position[1], light.position[2]);
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
-	
-	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();	
+
+	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
 	//qDebug() << eyePos[0] << " " << eyePos[1] << " " << eyePos[2] << " --> ";
 	// Use refractionOff for avoiding flickering Moon. (Bug #1411958)
 	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform(StelCore::RefractionOff)->forward(eyePos);
@@ -1808,7 +1808,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(texMap->bind(1));
 	GL(shader->setUniformValue(shaderVars->skyBrightness, lmgr->getLuminance()));
 
-	
+
 	if (rings!=NULL)
 	{
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, false));
@@ -1843,7 +1843,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		glClear(GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 	}
-	
+
 	if (!drawOnlyRing)
 		GL(glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
 
@@ -1851,17 +1851,17 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	{
 		// Draw the rings just after the planet
 		glDepthMask(GL_FALSE);
-	
+
 		// Normal transparency mode
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
-	
+
 		Ring3DModel ringModel;
 		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
-		
+
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.texture, 2));
-		
+
 		computeModelMatrix(modelMatrix);
 		const Vec4d position = mTarget * modelMatrix.getColumn(3);
 		shadowCandidatesData(0, 0) = position[0];
@@ -1870,31 +1870,31 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		shadowCandidatesData(3, 0) = getRadius();
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowCount, 1));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowData, shadowCandidatesData));
-		
+
 		projectedVertexArr.resize(ringModel.vertexArr.size());
 		for (int i=0;i<ringModel.vertexArr.size()/3;++i)
 			painter->getProjector()->project(*((Vec3f*)(ringModel.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
-		
+
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.vertex));
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.unprojectedVertex, (const GLfloat*)ringModel.vertexArr.constData(), 3));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.unprojectedVertex));
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.texCoord, (const GLfloat*)ringModel.texCoordArr.constData(), 2));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.texCoord));
-		
+
 		if (eyePos[2]<0)
 			glCullFace(GL_FRONT);
-					
+
 		GL(glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
-		
+
 		if (eyePos[2]<0)
 			glCullFace(GL_BACK);
-		
+
 		glDisable(GL_DEPTH_TEST);
 	}
-	
+
 	GL(shader->release());
-	
+
 	glDisable(GL_CULL_FACE);
 }
 

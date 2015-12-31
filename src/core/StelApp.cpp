@@ -385,7 +385,7 @@ void StelApp::init(QSettings* conf)
 	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 
 	setBaseFontSize(confSettings->value("gui/base_font_size", 13).toInt());
-	
+
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
@@ -508,7 +508,7 @@ void StelApp::init(QSettings* conf)
 
 	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
 	setFlagOldAzimuthUsage(confSettings->value("gui/flag_use_azimuth_from_south", false).toBool());
-	
+
 	initialized = true;
 }
 
@@ -539,7 +539,7 @@ void StelApp::deinit()
 	QCoreApplication::processEvents();
 	getModuleMgr().unloadAllPlugins();
 	QCoreApplication::processEvents();
-	
+
 	StelPainter::deinitGLShaders();
 }
 
@@ -554,7 +554,7 @@ StelProgressController* StelApp::addProgressBar()
 
 void StelApp::removeProgressBar(StelProgressController* p)
 {
-	progressControllers.removeOne(p);	
+	progressControllers.removeOne(p);
 	emit(progressBarRemoved(p));
 	delete p;
 }
@@ -574,7 +574,7 @@ void StelApp::update(double deltaTime)
 		frame = 0;
 		timeBase+=1.;
 	}
-		
+
 	core->update(deltaTime);
 
 	moduleMgr->update();
@@ -657,7 +657,7 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 
 	QMouseEvent event(inputEvent->type(), QPoint(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 	event.setAccepted(false);
-	
+
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
 	{

@@ -6,12 +6,12 @@
 * modify it under the terms of the GNU General Public License
 * as published by the Free Software Foundation; either version 2
 * of the License, or (at your option) any later version.
-* 
+*
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU General Public License for more details.
-* 
+*
 * You should have received a copy of the GNU General Public License
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -58,15 +58,15 @@ public:
 	//! @param amoDirectory The directory where to look for the domain.mo translation files.
 	//! @param alangName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
 	StelTranslator(const QString& adomain, const QString& alangName);
-	
+
 	~StelTranslator();
-	
+
 	//! Translate input message and return it as a QString.
 	//! @param s input string in english.
 	//! @param c disambiguation string (gettext "context" string).
 	//! @return The translated QString
 	QString qtranslate(const QString& s, const QString& c = QString()) const;
-	
+
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
 	const QString& getTrueLocaleName() const
@@ -86,22 +86,22 @@ public:
 	//! Convert from ISO639-1 langage code to native language name
 	//! @param languageCode the code to look up
 	static QString iso639_1CodeToNativeName(const QString& languageCode);
-	
-	//! Convert from native language name to ISO639-1 2 letters langage code 
+
+	//! Convert from native language name to ISO639-1 2 letters langage code
 	static QString nativeNameToIso639_1Code(const QString& languageName);
-	
+
 	//! Initialize Translation
 	//! @param fileName file containing the list of language codes
 	static void init(const QString& fileName);
-	
+
 private:
 	StelTranslator(const StelTranslator& );
 	const StelTranslator& operator=(const StelTranslator&);
-	
+
 	//! Initialize the languages code list from the passed file
 	//! @param fileName file containing the list of language codes
 	static void initIso639_1LanguageCodes(const QString& fileName);
-	
+
 	//! Get available language codes from passed locales directory
 	QStringList getAvailableIso639_1Codes(const QString& localeDir="") const;
 
@@ -110,19 +110,18 @@ private:
 
 	//! The two letter string defining the current language name
 	QString langName;
-	
+
 	//! QTranslator instance
 	class QTranslator* translator;
 
 	//! Try to determine system language from system configuration
 	static void initSystemLanguage(void);
-	
+
 	//! Store the system default language name as taken from LANGUAGE environement variable
 	static QString systemLangName;
-	
+
 	//! Contains the list of all iso639 languages codes
 	static QMap<QString, QString> iso639codes;
 };
 
 #endif // _STELTRANSLATOR_HPP_
-

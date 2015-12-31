@@ -140,7 +140,7 @@ StarMgr::StarMgr(void)
 		qFatal("ERROR: StarMgr::StarMgr: no memory");
 	}
 	maxGeodesicGridLevel = -1;
-	lastMaxSearchLevel = -1;	
+	lastMaxSearchLevel = -1;
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -919,7 +919,7 @@ void StarMgr::draw(StelCore* core)
 
 	// Prepare a table for storing precomputed RCMag for all ZoneArrays
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
-	
+
 	// Draw all the stars of all the selected zones
 	foreach(const ZoneArray* z, gridLevels)
 	{
@@ -933,10 +933,10 @@ void StarMgr::draw(StelCore* core)
 			{
 				if (i==0)
 					goto exit_loop;
-				
+
 				// The last magnitude at which the star is visible
 				limitMagIndex = i-1;
-				
+
 				// We reached the point where stars are not visible anymore
 				// Fill the rest of the table with zero and leave.
 				for (;i<RCMAG_TABLE_SIZE;++i)
@@ -960,7 +960,7 @@ void StarMgr::draw(StelCore* core)
 				maxMagStarName = x;
 		}
 		int zone;
-		
+
 		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps);
 		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
@@ -1524,7 +1524,7 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
 	else
 		loadSciNames(fic);
-	
+
 	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
 	if (fic.isEmpty())
 		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";

@@ -220,7 +220,7 @@ private:
 
 	//! Used to store the application data directory
 	static QString installDir;
-	
+
 #ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.
 	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA

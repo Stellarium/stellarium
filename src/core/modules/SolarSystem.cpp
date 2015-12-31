@@ -134,7 +134,7 @@ void SolarSystem::init()
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
-	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)	
+	// for the first initialization Q_ASSERT that center is sun center (only impacts on light speed correction)
 	computePositions(StelUtils::getJDFromSystem());
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
@@ -303,7 +303,7 @@ void SolarSystem::drawPointer(const StelCore* core)
 		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
-		
+
 		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
 		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime()));
 
@@ -827,7 +827,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();		
+		QString type = pd.value(secname+"/type").toString();
 		PlanetP p;
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
@@ -845,7 +845,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    userDataPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", 0).toBool(),						    
+						    pd.value(secname+"/hidden", 0).toBool(),
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -1289,7 +1289,7 @@ QString SolarSystem::getPlanetHashString(void)
 		{
 			oss << p->getParent()->getEnglishName() << " : ";
 		}
-		oss << p->getEnglishName() << endl;		
+		oss << p->getEnglishName() << endl;
 	}
 	return str;
 }
@@ -1700,11 +1700,11 @@ void SolarSystem::reloadPlanets()
 	Comet::comaTexture.clear();
 
 	// Re-load the ssystem.ini file
-	loadPlanets();	
+	loadPlanets();
 	computePositions(StelUtils::getJDFromSystem());
 	setSelected("");
 	recreateTrails();
-	
+
 	// Restore observer location
 	core->moveObserverTo(loc, 0., 0.);
 

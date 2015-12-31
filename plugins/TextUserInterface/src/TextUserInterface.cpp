@@ -235,7 +235,7 @@ void TextUserInterface::init()
 	TuiNode* m3_2 = new TuiNodeEnum(N_("Language"),
 	                                this, 
 	                                SLOT(setAppLanguage(QString)), 
-									StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(),
+									StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
 	                                m3, m3_1);
 	m3_1->setNextNode(m3_2);

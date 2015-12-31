@@ -76,7 +76,7 @@ void StelFileMgr::init()
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
 
-	
+
 	// Determine install data directory location
 
 	// If we are running from the build tree, we use the files from the current directory
@@ -118,15 +118,15 @@ void StelFileMgr::init()
 		}
 		else
 		{
-			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:" << 
-				QDir::toNativeSeparators(installLocation.filePath()) << " (we checked for " << 
+			qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:" <<
+				QDir::toNativeSeparators(installLocation.filePath()) << " (we checked for " <<
 				QDir::toNativeSeparators(checkFile.filePath()) << ").";
 			qFatal("Couldn't find install directory location.");
 		}
 	}
 
 	// Then add the installation directory to the search path
-	fileLocations.append(installDir);	
+	fileLocations.append(installDir);
 }
 
 
@@ -138,7 +138,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 		return "";
 	}
 
-	
+
 	// Qt resource files
 	if (path.startsWith(":/"))
 		return path;
@@ -166,7 +166,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 			return "";
 		}
 	}
-	
+
 	foreach (const QString& i, fileLocations)
 	{
 		const QFileInfo finfo(i + "/" + path);
@@ -182,7 +182,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &flags)
 {
 	QStringList filePaths;
-	
+
 	if (path.isEmpty())
 		return filePaths;
 
@@ -316,7 +316,7 @@ QString StelFileMgr::baseName(const QString& path)
 bool StelFileMgr::fileFlagsCheck(const QFileInfo& thePath, const Flags& flags)
 {
 	const bool exists = thePath.exists();
-	
+
 	if (flags & New)
 	{
 		// if the file already exists, it is not a new file
@@ -335,7 +335,7 @@ bool StelFileMgr::fileFlagsCheck(const QFileInfo& thePath, const Flags& flags)
 	{
 		if (flags==0)
 			return true;
-		
+
 		if ((flags & Writable) && !thePath.isWritable())
 			return false;
 
@@ -363,7 +363,7 @@ QString StelFileMgr::getDesktopDir()
 	QString result = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
 	if (!QFileInfo(result).isDir())
 		return "";
-	
+
 	return result;
 }
 

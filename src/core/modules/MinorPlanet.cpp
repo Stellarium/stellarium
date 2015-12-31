@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
- 
+
 #include "MinorPlanet.hpp"
 
 #include "StelApp.hpp"
@@ -77,14 +77,14 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
 	absoluteMagnitude = 0;
-	slopeParameter = -1;//== uninitialized: used in getVMagnitude()	
+	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
 
 	//TODO: Fix the name
 	// - Detect numeric prefix and set number if any
 	// - detect provisional designation
 	// - create the HTML name
 	//Try to detect number
-	//TODO: Move this to the minor planet parse code in the plug-in?	
+	//TODO: Move this to the minor planet parse code in the plug-in?
 	/*
 	QString name = englishName;
 	QRegExp bracketedNumberPrefixPattern("^\\((\\d+)\\)\\s");
@@ -354,4 +354,3 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 		return QString();
 	}
 }
-

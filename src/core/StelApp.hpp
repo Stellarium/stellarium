@@ -166,7 +166,7 @@ public:
 	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
 	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
 	void setDevicePixelsPerPixel(float dppp);
-	
+
 	//! Get the scaling ratio to apply on all display elements, like GUI, text etc..
 	//! When this ratio is 1, all pixel sizes used in Stellarium will look OK on a regular
 	//! computer screen with 96 pixel per inch (reference for tuning sizes).
@@ -204,7 +204,7 @@ public:
 	void setViewportEffect(const QString& effectName);
 	//! Get the type of viewport effect currently used
 	QString getViewportEffect() const;
-	
+
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
@@ -223,7 +223,7 @@ public slots:
 	bool getFlagOldAzimuthUsage() const { return flagUseAzimuthFromSouth; }
 	//! Get flag for using calculation of azimuth from south towards west (as in old astronomical literature)
 	void setFlagOldAzimuthUsage(bool use) { flagUseAzimuthFromSouth=use; }
-	
+
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
@@ -318,14 +318,14 @@ private:
 	StelAddOnMgr* stelAddOnMgr;
 
 	StelGuiBase* stelGui;
-	
+
 	// Store the ratio between real device pixel in "Device Independent Pixel"
 	// Usually this value is 1, but for a mac with retina screen this will be value 2.
 	float devicePixelsPerPixel;
 
 	// The scaling ratio to apply on all display elements, like GUI, text etc..
 	float globalScalingRatio;
-	
+
 	// Used to collect wheel events
 	QTimer * wheelEventTimer;
 
@@ -369,7 +369,7 @@ private:
 	QOpenGLFramebufferObject* renderBuffer;
 
 	StelViewportEffect* viewportEffect;
-	
+
 	bool flagShowDecimalDegrees;
 	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
 	bool flagUseAzimuthFromSouth;

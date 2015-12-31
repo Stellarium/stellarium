@@ -194,7 +194,7 @@ void ViewDialog::createDialogContent()
 	// DSO
 	ui->nebulaLimitMagnitudeCheckBox->setChecked(drawer->getFlagNebulaMagnitudeLimit());
 	ui->nebulaLimitMagnitudeDoubleSpinBox->setValue(drawer->getCustomNebulaMagnitudeLimit());
-	
+
 	connect(ui->starLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
 	        drawer, SLOT(setFlagStarMagnitudeLimit(bool)));
 	connect(ui->planetLimitMagnitudeCheckBox, SIGNAL(toggled(bool)),
@@ -286,7 +286,7 @@ void ViewDialog::createDialogContent()
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
-	
+
 	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
 
@@ -610,7 +610,7 @@ void ViewDialog::populateLists()
 	cultureNamesStyleComboBox->setCurrentIndex(index);
 	cultureNamesStyleComboBox->blockSignals(false);
 
-	const StelCore* core = StelApp::getInstance().getCore();	
+	const StelCore* core = StelApp::getInstance().getCore();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
@@ -651,7 +651,7 @@ void ViewDialog::populateLists()
 			break;
 		}
 	}
-	l->blockSignals(false);	
+	l->blockSignals(false);
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
@@ -895,7 +895,7 @@ void ViewDialog::planetsLabelsValueChanged(int v)
 void ViewDialog::nebulasLabelsValueChanged(int v)
 {
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	float a= ((float)v)/10.f;	
+	float a= ((float)v)/10.f;
 	nmgr->setLabelsAmount(a);
 }
 

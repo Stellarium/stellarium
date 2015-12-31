@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
- 
+
 #include "Comet.hpp"
 #include "Orbit.hpp"
 
@@ -546,7 +546,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 }
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
-{	
+{
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo));
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -628,18 +628,18 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	if (createTailIndices) indices.clear();
 	if (createTailTextureCoords) texCoordArr.clear();
 	int i;
-	// The parabola has triangular faces with vertices on two circles that are rotated against each other. 
+	// The parabola has triangular faces with vertices on two circles that are rotated against each other.
 	float xa[2*COMET_TAIL_SLICES];
 	float ya[2*COMET_TAIL_SLICES];
 	float x, y, z;
-	
+
 	// fill xa, ya with sin/cosines. TBD: make more efficient with index mirroring etc.
 	float da=M_PI/COMET_TAIL_SLICES; // full circle/2slices
 	for (i=0; i<2*COMET_TAIL_SLICES; ++i){
 		xa[i]=-sin(i*da);
 		ya[i]=cos(i*da);
 	}
-	
+
 	vertexArr.replace(0, Vec3d(0.0, 0.0, zshift));
 	int vertexArrIndex=1;
 	if (createTailTextureCoords) texCoordArr << 0.5f << 0.5f;
