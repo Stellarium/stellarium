@@ -233,11 +233,11 @@ void TextUserInterface::init()
 	                                skyCultureMgr.getCurrentSkyCultureNameI18(),
 	                                m3);
 	TuiNode* m3_2 = new TuiNodeEnum(N_("Language"),
-	                                this, 
-	                                SLOT(setAppLanguage(QString)), 
-									StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
+					this,
+					SLOT(setAppLanguage(QString)),
+					StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
-	                                m3, m3_1);
+					m3, m3_1);
 	m3_1->setNextNode(m3_2);
 	m3_2->setNextNode(m3_1);
 	m3_1->loopToTheLast();
