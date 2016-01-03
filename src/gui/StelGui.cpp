@@ -74,6 +74,7 @@
 #include <QPalette>
 #include <QColor>
 #include <QAction>
+#include <QKeySequence>
 
 StelGui::StelGui()
 	: topLevelGraphicsWidget(NULL)
@@ -100,6 +101,11 @@ StelGui::StelGui()
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(NULL)
 	, initDone(false)
+#ifndef DISABLE_SCRIPTING
+	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
+	, scriptSaveSpeedbuttons()
+  #endif
+
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 }
@@ -527,23 +533,53 @@ void StelGui::update()
 #ifndef DISABLE_SCRIPTING
 void StelGui::setScriptKeys(bool b)
 {
+	// Allows use of buttons from conf! Bug LP:1530567 -- GZ
+	// The swap of keys happens first immediately after program start by execution of startup.ssc
+	// Allow different script keys if you properly configure them!
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
 	if (b)
 	{
+		scriptSaveSpeedbuttons.clear();
+		scriptSaveSpeedbuttons << getAction("actionDecrease_Time_Speed")->getShortcut().toString(QKeySequence::PortableText)
+				       << getAction("actionIncrease_Time_Speed")->getShortcut().toString(QKeySequence::PortableText)
+				       << getAction("actionSet_Real_Time_Speed")->getShortcut().toString(QKeySequence::PortableText);
+
+		// During script execution we disable normal time control.
+		// If script keys have not been configured, take those time control keys.
 		getAction("actionDecrease_Time_Speed")->setShortcut("");
 		getAction("actionIncrease_Time_Speed")->setShortcut("");
 		getAction("actionSet_Real_Time_Speed")->setShortcut("");
-		getAction("actionDecrease_Script_Speed")->setShortcut("J");
-		getAction("actionIncrease_Script_Speed")->setShortcut("L");
-		getAction("actionSet_Real_Script_Speed")->setShortcut("K");
+		QString str;
+		str=conf->value("shortcuts/actionDecrease_Script_Speed",scriptSaveSpeedbuttons.at(0)).toString();
+		getAction("actionDecrease_Script_Speed")->setShortcut(str);
+		str=conf->value("shortcuts/actionIncrease_Script_Speed",scriptSaveSpeedbuttons.at(1)).toString();
+		getAction("actionIncrease_Script_Speed")->setShortcut(str);
+		str=conf->value("shortcuts/actionSet_Real_Script_Speed",scriptSaveSpeedbuttons.at(2)).toString();
+		getAction("actionSet_Real_Script_Speed")->setShortcut(str);
 	}
 	else
 	{
-		getAction("actionDecrease_Script_Speed")->setShortcut("");
-		getAction("actionIncrease_Script_Speed")->setShortcut("");
-		getAction("actionSet_Real_Script_Speed")->setShortcut("");
-		getAction("actionDecrease_Time_Speed")->setShortcut("J");
-		getAction("actionIncrease_Time_Speed")->setShortcut("L");
-		getAction("actionSet_Real_Time_Speed")->setShortcut("K");
+		if (scriptSaveSpeedbuttons.length()<3)
+		{
+			scriptSaveSpeedbuttons.clear();
+			scriptSaveSpeedbuttons << "J" << "L" << "K";
+			qWarning() << "StelGui: Saved speed buttons reset to J/K/L";
+			qWarning() << "         This is very odd, should not happen.";
+		}
+		// It is only safe to clear the script speed keys if they are the same as the regular speed keys
+		// i.e. if they had been set before running the script.
+		if (getAction("actionDecrease_Script_Speed")->getShortcut().toString() == scriptSaveSpeedbuttons.at(0))
+			getAction("actionDecrease_Script_Speed")->setShortcut("");
+		if (getAction("actionIncrease_Script_Speed")->getShortcut().toString() == scriptSaveSpeedbuttons.at(1))
+			getAction("actionIncrease_Script_Speed")->setShortcut("");
+		if (getAction("actionSet_Real_Script_Speed")->getShortcut().toString() == scriptSaveSpeedbuttons.at(2))
+			getAction("actionSet_Real_Script_Speed")->setShortcut("");
+		getAction("actionDecrease_Time_Speed")->setShortcut(scriptSaveSpeedbuttons.at(0));
+		getAction("actionIncrease_Time_Speed")->setShortcut(scriptSaveSpeedbuttons.at(1));
+		getAction("actionSet_Real_Time_Speed")->setShortcut(scriptSaveSpeedbuttons.at(2));
 	}
 }
 
@@ -650,13 +686,13 @@ bool StelGui::isCurrentlyUsed() const
 	return skyGui->buttonBar->isUnderMouse() || skyGui->winBar->isUnderMouse();
 }
 
-void setScriptKeys()
-{
-}
+	//void setScriptKeys()
+	//{
+	//}
 
-void setNormalKeys()
-{
-}
+	//void setNormalKeys()
+	//{
+	//}
 
 void StelGui::setInfoTextFilters(const StelObject::InfoStringGroup& aflags)
 {
