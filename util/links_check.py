@@ -77,9 +77,10 @@ for url in urls:
         if s == 200: continue
     except Exception:
         s = u"err"
-    print url
+    print url.encode('utf-8')
     print s
     print "Found in:"
     for f in sources[url]:
         print f
     print
+    sys.stdout.flush()
