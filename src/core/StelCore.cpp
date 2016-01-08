@@ -1776,7 +1776,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 			break;
 		case IAU:
 			start	= 1681;
-			finish	= 1900;
+			finish	= 1936; // Details in http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
 			break;
 		case AstronomicalEphemeris:
 			// GZ: What is the source of "1681..1900"? Expl.Suppl.AE 1961-p87 says "...over periods extending back to ancient times"

@@ -1,4 +1,4 @@
-\chapterimage{chapter-bg.png} % Chapter heading image
+\chapterimage{chapter-t3-bg} % Chapter heading image
 
 \chapter{Plugins}\label{plugins}
 
@@ -58,13 +58,28 @@ backup copy. Leaving out the smallest detail (such as a comma or
 forgetting to close a curly bracket) will prevent Stellarium from
 starting.
 
-The path to the directory which contains \texttt{catalog.json} file is
+The path to the directory\footnote{This is a hidden folder, so in order to find it you may need to change your computer's settings to display hidden files and folders.} which contains \texttt{catalog.json} file is
 something like:
+
+\begin{itemize}
+\item
+  C:\textbackslash Users\textbackslash\textbf{UserName}\textbackslash AppData\textbackslash Roaming\textbackslash Stellarium\textbackslash modules\textbackslash \textit{PluginName}\\ (Windows)
+\item
+  \textbf{HomeDirectory}/Library/Preferences/Stellarium/modules/\textit{PluginName}\\ (Mac OS X)
+\item
+  \textasciitilde{}/.stellarium/modules/\textit{PluginName} (Linux and UNIX-like OS)
+\end{itemize}
 
 \section{How you can help}\label{how-you-can-help}
 
 We are welcome bug reports, feature requests and feedback through the
-usual channels (trackers, forums and so on).
+usual channels (trackers, forums and so on):
+\begin{itemize}
+\item Bug tracker --- \url{https://bugs.launchpad.net/stellarium}
+\item Questions for Stellarium --- \url{https://answers.launchpad.net/stellarium}
+\item Feedback forum --- \url{https://sourceforge.net/p/stellarium/discussion/278769/}
+\item Blueprints for Stellarium --- \url{https://blueprints.launchpad.net/stellarium}
+\end{itemize}
 
 \chapterimage{chapter-bg.png} % Chapter heading image
 
@@ -99,10 +114,6 @@ is worth a thousand words.
   To deactivate the angle measure tool, press the tool-bar button again,
   or press \textbf{control-A} on the keyboard.
 \end{enumerate}
-
-\subsection{Plugin's home page}\label{plugins-home-page}
-
-\url{http://www.stellarium.org/wiki/index.php/AngleMeasure_plugin}
 
 \section{Bright Novae Plugin}\label{bright-novae-plugin}
 
@@ -203,10 +214,6 @@ magnitudes from the maximum value, where \emph{N} is 2, 3, 6 and 9. If a
 nova has no values for decay of magnitude then this plugin will use
 generalized values for it.
 
-\subsection{Plugin's home page}\label{plugins-home-page-1}
-
-\url{http://www.stellarium.org/wiki/index.php/Bright_Novae_plugin}
-
 \section{Compass Marks Plugin}\label{compass-marks-plugin}
 
 %\url{http://porpoisehead.net/images/plugin-compass-marks.jpg}
@@ -226,10 +233,6 @@ Note that when you first enable compass marks, the cardinal points will
 be turned off. You can have both active at once, but there is a small
 bug which means you have to press \textbf{Q} \emph{two times} to
 re-enable cardinal points after enabling the compass markings.
-
-\subsection{Plugin's home page}\label{plugins-home-page-2}
-
-\url{http://www.stellarium.org/wiki/index.php/CompassMarks_plugin}
 
 \section{Text User Interface Plugin}\label{text-user-interface-plugin}
 
@@ -258,7 +261,4 @@ list of the commands for the TUI plugin you can read in the section
   on the keyboard.
 \end{enumerate}
 
-\subsection{Plugin's home page}\label{plugins-home-page-3}
-
-\url{http://www.stellarium.org/wiki/index.php/TextUserInterface_plugin}
 
