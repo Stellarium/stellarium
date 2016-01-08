@@ -40,7 +40,7 @@
 #include <QTcpSocket>
 #include <QTextStream>
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	#include <windows.h> // GetSystemTimeAsFileTime()
 #else
 	#include <sys/time.h>
@@ -147,7 +147,7 @@ qint64 getNow(void)
 // (QDateTime and QTime don't support microsecond precision)
 	qint64 t;
 	//StelCore *core = StelApp::getInstance().getCore();
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	FILETIME file_time;
 	GetSystemTimeAsFileTime(&file_time);
 	t = (*((__int64*)(&file_time))/10) - 86400000000LL*134774;

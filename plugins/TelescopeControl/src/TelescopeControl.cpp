@@ -232,7 +232,7 @@ void TelescopeControl::deinit()
 	while(iterator != telescopeServerProcess.constEnd())
 	{
 		int slotNumber = iterator.key();
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 		telescopeServerProcess[slotNumber]->close();
 #else
 		telescopeServerProcess[slotNumber]->terminate();
@@ -627,7 +627,7 @@ void TelescopeControl::loadConfiguration()
 	setFlagTelescopeCircles(settings->value("flag_telescope_circles", true).toBool());
 
 	//Load font size
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	setFontSize(settings->value("telescope_labels_font_size", 13).toInt()); //Windows Qt bug workaround
 #else
 	setFontSize(settings->value("telescope_labels_font_size", 12).toInt());
@@ -1248,7 +1248,7 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 			return false;
 		}
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 		QString serialPortName;
 		if(portSerial.right(portSerial.size() - SERIAL_PORT_PREFIX.size()).toInt() > 9)
 			serialPortName = "\\\\.\\" + portSerial;//"\\.\COMxx", not sure if it will work
@@ -1256,7 +1256,7 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 			serialPortName = portSerial;
 #else
 		QString serialPortName = portSerial;
-#endif //Q_OS_WIN32
+#endif //Q_OS_WIN
 		QStringList serverArguments;
 		serverArguments << QString::number(portTCP) << serialPortName;
 		if(useTelescopeServerLogs)
@@ -1286,11 +1286,11 @@ bool TelescopeControl::stopServerAtSlot(int slotNumber)
 		return false;
 
 	//Stop/close the process
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 	telescopeServerProcess[slotNumber]->close();
 #else
 	telescopeServerProcess[slotNumber]->terminate();
-#endif //Q_OS_WIN32
+#endif //Q_OS_WIN
 	telescopeServerProcess[slotNumber]->waitForFinished();
 
 	delete telescopeServerProcess[slotNumber];

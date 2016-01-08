@@ -48,7 +48,7 @@ TelescopeConfigurationDialog::TelescopeConfigurationDialog()
 	telescopeNameValidator = new QRegExpValidator (QRegExp("[^:\"]+"), this);//Test the update for JSON
 	hostNameValidator = new QRegExpValidator (QRegExp("[a-zA-Z0-9\\-\\.]+"), this);//TODO: Write a proper host/IP regexp?
 	circleListValidator = new QRegExpValidator (QRegExp("[0-9,\\.\\s]+"), this);
-	#ifdef Q_OS_WIN32
+	#ifdef Q_OS_WIN
 	serialPortValidator = new QRegExpValidator (QRegExp("COM[0-9]+"), this);
 	#else
 	serialPortValidator = new QRegExpValidator (QRegExp("/.*"), this);
@@ -389,8 +389,13 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	{
 		//Read the serial port
 		QString serialPortName = ui->comboSerialPort->currentText();
+		#ifdef Q_OS_WIN
+		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX) && !serialPortName.startsWith(SERIAL_PORT_PREFIX2))
+			return;//TODO: Add more validation!
+		#else
 		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX))
 			return;//TODO: Add more validation!
+		#endif
 		
 		type = ConnectionInternal;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
@@ -427,7 +432,7 @@ bool TelescopeConfigurationDialog::validateHost(QString hostName)
 {
     // Simple validation by ping
     int exitCode;
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
     // WTF? It's not working anymore!
     //exitCode = QProcess::execute("ping", QStringList() << "-n 1" << hostName);
     exitCode = 0;
