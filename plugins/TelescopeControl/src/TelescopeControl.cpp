@@ -868,7 +868,7 @@ void TelescopeControl::loadTelescopes()
 				continue;
 			}
 
-			if(portSerial.isEmpty() || !portSerial.startsWith(SERIAL_PORT_PREFIX))
+			if(portSerial.isEmpty())
 			{
 				qDebug() << "TelescopeControl: Unable to load telescope: No valid serial port specified at slot" << key;
 				map.remove(key);
@@ -1249,11 +1249,7 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 		}
 
 #ifdef Q_OS_WIN
-		QString serialPortName;
-		if(portSerial.right(portSerial.size() - SERIAL_PORT_PREFIX.size()).toInt() > 9)
-			serialPortName = "\\\\.\\" + portSerial;//"\\.\COMxx", not sure if it will work
-		else
-			serialPortName = portSerial;
+		QString serialPortName = "\\\\.\\" + portSerial;
 #else
 		QString serialPortName = portSerial;
 #endif //Q_OS_WIN
