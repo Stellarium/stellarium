@@ -389,14 +389,6 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	{
 		//Read the serial port
 		QString serialPortName = ui->comboSerialPort->currentText();
-		#ifdef Q_OS_WIN
-		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX) && !serialPortName.startsWith(SERIAL_PORT_PREFIX2))
-			return;//TODO: Add more validation!
-		#else
-		if(!serialPortName.startsWith(SERIAL_PORT_PREFIX))
-			return;//TODO: Add more validation!
-		#endif
-		
 		type = ConnectionInternal;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, ui->comboBoxDeviceModel->currentText(), serialPortName);
 	}
