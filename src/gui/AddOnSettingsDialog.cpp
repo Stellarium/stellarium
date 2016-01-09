@@ -28,7 +28,8 @@
 #include "StelTranslator.hpp"
 
 AddOnSettingsDialog::AddOnSettingsDialog(AddOnDialog* pAddOnDialog)
-	: m_pAddOnDialog(pAddOnDialog)
+	: StelDialog(pAddOnDialog->parent())
+	, m_pAddOnDialog(pAddOnDialog)
 	, m_pStelAddOnMgr(&StelApp::getInstance().getStelAddOnMgr())
 {
 	ui = new Ui_addonSettingsDialogForm;

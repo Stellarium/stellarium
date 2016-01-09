@@ -27,6 +27,7 @@
 class AddOnDialog;
 class Ui_addonSettingsDialogForm;
 
+//! @class AddOnSettingsDialog
 class AddOnSettingsDialog : public StelDialog
 {
 	Q_OBJECT
