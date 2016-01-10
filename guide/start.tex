@@ -1,0 +1,159 @@
+% Status info:
+% M. Gates	2006-2009
+% A. Wolf	2011-2015
+% Lee Carré	2011
+% ArdWar	2012
+% MisterE	2013
+% B. Gerdes	2013
+% G. Zotti	2014-2015
+% Additions inserted from wiki 2015-12-26
+% Content OK for 0.14+.
+% TODO: typo&grammar check
+
+
+\chapter{Getting Started}
+\label{ch:GettingStarted}
+
+\section{System Requirements}\index{System Requirements}
+\label{sec:GettingStarted:SystemRequirements}
+
+\subsection{Minimum}\index{Minimum}
+\begin{itemize}
+\item Linux/Unix; Windows 7 and later (It may run on Vista, but unsupported. A special version for XP is still available); OS X 10.7.4 and later
+\item 3D graphics card which supports OpenGL 3.0 and GLSL 1.3
+\item 512 MB RAM
+\item 250 MB free on disk
+\end{itemize}
+
+\subsection{Recommended}\index{Recommended}
+\begin{itemize}
+\item Linux/Unix; Windows 7 and later; OS X 10.8.5 and later
+\item 3D graphics card which supports OpenGL 3.3 and above and GLSL1.3 and later
+\item 1 GB RAM or more
+\item 1.5 GB free on disk. (About 3GB extra required for the optional DE431 files.)
+\end{itemize}
+ A dark room for realistic rendering --- details like the Milky Way, Zodiacal Light or
+star twinkling can't be seen in a bright room.
+
+\section{Downloading}\index{Downloading}
+\label{sec:GettingStarted:Downloading}
+
+Download the correct package for your operating system directly from the main page,
+\href{http://stellarium.org}{http://stellarium.org}.
+
+\section{Installation}\index{Installation}
+\label{sec:GettingStarted:Installation}
+
+\subsection{Windows}\index{Windows}
+
+\begin{enumerate}
+\item Double click on the installer file you downloaded:
+\begin{itemize}
+\item \file{stellarium-\StelVersion-win64.exe}
+\item \file{stellarium-\StelVersion-win32.exe} on Windows x86
+\item \file{stellarium-\StelVersion-classic-win32.exe} for XP
+\end{itemize}
+\item Follow the on-screen instructions.
+\end{enumerate}
+
+\subsection{OS X}\index{OS X}
+
+\begin{enumerate}
+\item
+  Locate the \file{Stellarium-\StelVersion.dmg} file in
+  Finder and double click on it or open it using the Disk Utility
+  application. Now, a new disk appears on your desktop and Stellarium is
+  in it.
+\item
+  Open the new disk and please take a moment to read the \file{ReadMe} file.
+  Then drag \file{Stellarium} to the Applications folder.
+\item
+  Note: You should copy Stellarium to the Applications folder before
+  running it --- some users have reported problems running it directly
+  from the disk image (\file{.dmg}).
+\end{enumerate}
+
+\subsection{Linux}\index{Linux}
+
+Check if your distribution has a package for Stellarium already --- if
+so you're probably best off using it. If not, you can download and build
+the source.
+
+For Ubuntu we provide a package repository with the latest stable
+releases. Open a terminal and type:
+
+\begin{commands}
+sudo add-apt-repository ppa:stellarium/stellarium-releases
+sudo apt-get update
+sudo apt-get install stellarium
+\end{commands}
+
+
+\section{Running Stellarium}\index{Running Stellarium}
+\label{sec:GettingStarted:Running}
+
+\begin{itemize}
+\item
+  \textbf{Windows} The Stellarium installer creates a whole list of items in the
+  \textbf{Start Menu} under the \textbf{Programs/Stellarium} section. Select one of these to
+  run Stellarium:
+  \begin{description}
+  \item[Stellarium] OpenGL version. This is the most efficient for
+    modern PCs and should be used when you have installed appropriate
+    OpenGL drivers.
+  \item[Stellarium (ANGLE mode)] Uses Direct3D translation of the
+    OpenGL rendering via ANGLE library. Lets the system decide which
+    version of Direct3D is available.
+  \item[Stellarium (ANGLE Direct3D 9 mode)] Uses Direct3D translation
+    of the OpenGL rendering via ANGLE library. Forces Direct3D
+    version~9. \emph{This should be used if you don't see buttons or have
+    trouble with other ANGLE modes.}
+  \item[Stellarium (ANGLE Direct3D 11 mode)] Uses Direct3D translation
+    of the OpenGL rendering via ANGLE library. Forces Direct3D
+    version~11.
+  \item[Stellarium (ANGLE WARP mode)] Uses DirectX3D 11 software rendering via ANGLE
+    library. This should work on any PC without dedicated graphics
+    card. However on many systems this fails, it is unclear why.
+  \item[Stellarium (MESA mode)] Uses software rendering via MESA
+    library. This should work on any PC without dedicated graphics
+    card. However on some systems this also fails, it is unclear why.
+  \end{description}
+  On startup, a diagnostic check is performed to test whether the
+  graphics hardware is capable of running. If all is fine, you will
+  see nothing of it.  Else you may see an error panel informing you
+  that your computer is not capable of running Stellarium (``No
+  OpenGL~2 found''), or that there is only OpenGL~2.1 support. The
+  latter means you will be able to see some graphics, but depending on
+  the type of issue you will have some bad graphics. For example, on
+  an Intel GMA4500 there is only a minor issue in Night Mode, while on
+  other systems we had reports of missing planets. If you see this,
+  try running in Direct3D~9 or MESA mode, or upgrade your system.
+\item
+  \textbf{MacOS X} Double click on the \emph{Stellarium} application.
+  Add it to your \textbf{Dock} for quick access.
+\item
+  \textbf{Linux} If your distribution had a package you'll probably
+  already have an item in the GNOME or KDE application menus. If not,
+  just use a open a terminal and type \texttt{stellarium}.
+\end{itemize}
+
+\subsection{Troubleshooting}
+\label{sec:GettingStarted:Running:Troubleshooting}
+
+Stellarium writes startup and other diagnostic messages into a
+logfile. Please see section~\ref{sec:FilesAndDirectories} where this
+file is located on your system. This file is \emph{essential} in case when
+you feel you need to report a problem with your system which has not
+been found before.
+
+If you don't succeed in running Stellarium, please see the online
+forum\footnote{\url{https://launchpad.net/stellarium}}.  It includes
+FAQ (Frequently Asked Questions)\index{FAQ} and a general question
+section which may include further hints. Please make sure you have
+read and understood the FAQ before asking the same questions again.
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 

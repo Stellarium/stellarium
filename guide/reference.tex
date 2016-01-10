@@ -1046,229 +1046,43 @@ flag\_isolated\_orbits & float & Change to \emph{false} if you want to see orbit
 \bottomrule
 \end{longtabu}
 
-\section{Precision}
-Stellarium uses the
-\href{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}{VSOP87}
-method to calculate the variation in position of the planets over time.
+\section{Accuracy}
+Stellarium uses the VSOP87
+method\footnote{\url{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}}
+to calculate the variation in position of the planets over time.
 
-As with other methods, the precision of the calculations vary according
+As with other methods, the accuracy of the calculations vary according
 to the planet and the time for which one makes the calculation. Reasons
 for these inaccuracies include the fact that the motion of the planet
 isn't as predictable as Newtonian mechanics would have us believe.
 
 As far as Stellarium is concerned, the user should bear in mind the
-following properties of the VSOP87 method. Precision values here are
+following properties of the VSOP87 method. Accuracy values here are
 positional as observed from Earth.
 
 \begin{longtabu} to \textwidth {X|l|X}
 \toprule
 \emph{Object(s)} & \emph{Method} & \emph{Notes}\tabularnewline
 \midrule
-Mercury, Venus, Earth-Moon barycenter, Mars & VSOP87 & Precision is 1
-arc-second from 2000 B.C. -- 6000 A.D.\tabularnewline
+Mercury, Venus, Earth-Moon barycenter, Mars & VSOP87 & Accuracy is 1 arc-second from 2000 B.C. -- 6000 A.D.\\
 \midrule
-Jupiter, Saturn & VSOP87 & Precision is 1 arc-second from 0 A.D. -- 4000
-A.D.\tabularnewline
+Jupiter, Saturn & VSOP87 & Accuracy is 1 arc-second from 0 A.D. -- 4000 A.D.\\
 \midrule
-Uranus, Neptune & VSOP87 & Precision is 1 arc-second from 4000 B.C --
-8000 A.D.\tabularnewline
+Uranus, Neptune & VSOP87 & Accuracy is 1 arc-second from 4000 B.C -- 8000 A.D.\\
 \midrule
-Pluto & ? & Pluto's position is valid from 1885 A.D. -- 2099
-A.D.\tabularnewline
+Pluto & ? & Pluto's position is valid only from 1885 A.D. -- 2099 A.D.\\
 \midrule
-Earth's Moon & ELP2000-82B & Unsure about interval of validity or
-precision at time of writing. Possibly valid from 1828 A.D. to 2047
-A.D.\tabularnewline
+Earth's Moon & ELP2000-82B & Unsure about interval of validity or accuracy at time of writing. Possibly valid from 1828 A.D. to 2047 A.D.\\
 \midrule
-Galilean satellites & L2 & Valid from 500 A.D -- 3500
-A.D.\tabularnewline
+Galilean satellites & L2 & Valid from 500 A.D -- 3500 A.D.\\
 \bottomrule
 \end{longtabu}
 
-\section{TUI Commands}
-\begin{longtabu} to \textwidth {l|l|X}
-\toprule
-1 & Set Location & (menu group)\tabularnewline
-\midrule
-1.1 & Latitude & Set the latitude of the observer in
-degrees\tabularnewline
-\midrule
-1.2 & Longitude & Set the longitude of the observer in
-degrees\tabularnewline
-\midrule
-1.3 & Altitude (m) & Set the altitude of the observer in
-meters\tabularnewline
-\midrule
-1.4 & Solar System Body & Select the solar system body on which the
-observer is\tabularnewline
-\midrule
-2 & Set Time & (menu group)\tabularnewline
-\midrule
-2.1 & Sky Time & Set the time and date for which Stellarium will
-generate the view\tabularnewline
-\midrule
-2.2 & Set Time Zone & Set the time zone. Zones are split into continent
-or region, and then by city or province\tabularnewline
-\midrule
-2.3 & Days keys & The setting ``Calendar'' makes the - = {[} {]} and
-keys change the date value by calendar days (multiples of 24 hours). The
-setting ``Sidereal day'' changes these keys to change the date by
-sidereal days\tabularnewline
-\midrule
-2.4 & Preset Sky Time & Select the time which Stellarium starts with (if
-the ``Sky Time At Start-up'' setting is ``Preset Time''\tabularnewline
-\midrule
-2.5 & Sky Time At Start-up & The setting ``Actual Time'' sets
-Stellarium's time to the computer clock when Stellarium runs. The
-setting ``Preset Time'' selects a time set in menu item ``Preset Sky
-Time''\tabularnewline
-\midrule
-2.6 & Time Display Format & Change how Stellarium formats time values.
-``system default'' takes the format from the computer settings, or it is
-possible to select 24 hour or 12 hour clock modes\tabularnewline
-\midrule
-2.7 & Date Display Format & Change how Stellarium formats date values.
-``system default'' takes the format from the computer settings, or it is
-possible to select ``yyyymmdd'', ``ddmmyyyy'' or ``mmddyyyy''
-modes\tabularnewline
-\midrule
-3 & General & (menu group)\tabularnewline
-\midrule
-3.1 & Sky Culture & Select the sky culture to use (changes constellation
-lines, names, artwork)\tabularnewline
-\midrule
-3.2 & Sky Language & Change the language used to describe objects in the
-sky\tabularnewline
-\midrule
-4 & Stars & (menu group)\tabularnewline
-\midrule
-4.1 & Show & Turn on/off star rendering\tabularnewline
-\midrule
-4.2 & Star Magnitude Multiplier & Can be used to change the brightness
-of the stars which are visible at a given zoom level. This may be used
-to simulate local seeing conditions - the lower the value, the less
-stars will be visible\tabularnewline
-\midrule
-4.3 & Maximum Magnitude to Label & Changes how many stars get labelled
-according to their apparent magnitude (if star labels are turned
-on)\tabularnewline
-\midrule
-4.4 & Twinkling & Sets how strong the star twinkling effect is - zero is
-off, the higher the value the more the stars will
-twinkle.\tabularnewline
-\midrule
-5 & Colors & (menu group)\tabularnewline
-\midrule
-5.1 & Constellation Lines & Changes the colour of the constellation
-lines\tabularnewline
-\midrule
-5.2 & Constellation Names & Changes the colour of the labels used to
-name stars\tabularnewline
-\midrule
-5.3 & Constellation Art Intensity & Changes the brightness of the
-constellation artconstellation art\tabularnewline
-\midrule
-5.4 & Constellation Boundaries & Changes the colour of the constellation
-boundary lines\tabularnewline
-\midrule
-5.5 & Cardinal Points & Changes the colour of the cardinal points
-markers\tabularnewline
-\midrule
-5.6 & Planet Names & Changes the colour of the labels for
-planets\tabularnewline
-\midrule
-5.7 & Planet Orbits & Changes the colour of the orbital guide lines for
-planets\tabularnewline
-\midrule
-5.8 & Planet Trails & Changes the colour of the planet trails
-lines\tabularnewline
-\midrule
-5.9 & Meridian Line & Changes the colour of the meridian
-line\tabularnewline
-\midrule
-5.10 & Azimuthal Grid & Changes the colour of the lines and labels for
-the azimuthal grid\tabularnewline
-\midrule
-5.11 & Equatorial Grid & Changes the colour of the lines and labels for
-the equatorial grid\tabularnewline
-\midrule
-5.12 & Equator Line & Changes the colour of the equator
-line\tabularnewline
-\midrule
-5.13 & Ecliptic Line & Changes the colour of the ecliptic
-line\tabularnewline
-\midrule
-5.14 & Nebula Names & Changes the colour of the labels for
-nebulae\tabularnewline
-\midrule
-5.15 & Nebula Circles & Changes the colour of the circles used to denote
-the positions of nebulae (only when enabled int he configuration file,
-note this feature is off by default)\tabularnewline
-\midrule
-6 & Effects & (menu group)\tabularnewline
-\midrule
-6.1 & Light Pollution Luminance & Changes the intensity of the light
-pollution simulation\tabularnewline
-\midrule
-6.2 & Landscape & Used to select the landscape which Stellarium draws
-when ground drawing is enabled\tabularnewline
-\midrule
-6.3 & Manual zoom & Changes the behaviour of the / and \textbackslash{}
-keys. When set to ``No'', these keys zoom all the way to a level defined
-by object type (auto zoom mode). When set to ``Yes'', these keys zoom in
-and out a smaller amount and multiple presses are
-required\tabularnewline
-\midrule
-6.4 & Object Sizing Rule & When set to ``Magnitude'', stars are drawn
-with a size based on their apparent magnitude. When set to ``Point'' all
-stars are drawn with the same size on the screen\tabularnewline
-\midrule
-6.5 & Magnitude Sizing Multiplier & Changes the size of the stars when
-``Object Sizing Rule'' is set to ``Magnitude''\tabularnewline
-\midrule
-6.6 & Milky Way intensity & Changes the brightness of the Milky Way
-texture\tabularnewline
-\midrule
-6.7 & Maximum Nebula Magnitude to Label & Changes the magnitude limit
-for labelling of nebulae\tabularnewline
-\midrule
-6.8 & Zoom Duration & Sets the time for zoom operations to take (in
-seconds)\tabularnewline
-\midrule
-6.9 & Cursor Timeout & Sets the number of seconds of mouse inactivity
-before the cursor vanishes\tabularnewline
-\midrule
-6.10 & Setting Landscape Sets Location & If ``Yes'' then changing the
-landscape will move the observer location to the location for that
-landscape (if one is known). Setting this to ``No'' means the observer
-location is not modified when the landscape is changed\tabularnewline
-\midrule
-7 & Scripts & (menu group)\tabularnewline
-\midrule
-7.1 & Local Script & Run a script from the scripts sub-directory of the
-User Directory or Installation Directory (see section
-\href{Advanced_Use\#Files_and_Directories}{Files and
-Directories})\tabularnewline
-\midrule
-7.2 & CD/DVD Script & Run a script from a CD or DVD (only used in
-planetarium set-ups)\tabularnewline
-\midrule
-8 & Administration & (menu group)\tabularnewline
-\midrule
-8.1 & Load Default Configuration & Reset all settings according to the
-main configuration file\tabularnewline
-\midrule
-8.2 & Save Current Configuration as Default & Save the current settings
-to the main configuration file\tabularnewline
-\midrule
-8.3 & Shutdown & Quit Stellarium\tabularnewline
-\midrule
-8.4 & Update me via Internet & Only used in planetarium
-set-ups\tabularnewline
-\midrule
-8.5 & Set UI Locale & Change the language used for the user
-interface\tabularnewline
-\bottomrule
-\end{longtabu}
 
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
 
