@@ -122,8 +122,8 @@ time and the location of the observer.
 Stellarium can draw grid lines for altitude/azimuth coordinates. Use the
 button on the main tool-bar to activate this grid, or press the Z key.
 
-\subsection{Right Ascension/Declination
-Coordinates}\label{right-ascensiondeclination-coordinates}
+\subsection{Right Ascension/Declination Coordinates}
+\label{right-ascensiondeclination-coordinates}
 
 \begin{figure}[h]
 \centering\includegraphics[scale=1.8]{cs_equ}
@@ -250,7 +250,7 @@ Finer grades of precision are usually expressed using the SI prefixes
 with arc-seconds, e.g. \emph{milli arc-seconds} (one milli arc-second is
 one thousandth of an arc-second).
 
-\subsection{Notation}\label{notation}
+\subsubsection{Notation}\label{notation}
 
 Degrees are denoted using the $\degree$ symbol after a number. Minutes of arc are denoted with a~$'$, and seconds of arc are denoted using~$''$. Angles are frequently given in two formats:
 
@@ -262,6 +262,46 @@ Degrees are denoted using the $\degree$ symbol after a number. Minutes of arc ar
 \item
   Decimal degrees, for example $90.2533\degree$
 \end{enumerate}
+
+\subsubsection{Handy Angles}
+\label{sec:concepts:units:angles:handyAngles}
+\index{Handy Angles}
+
+Being able to estimate angular distance can be very useful when trying
+to find objects from star maps in the sky. One way to do this with a
+device called a \emph{crossbow}.
+
+Crossbows are a nice way get an idea of angular distances, but carrying
+one about is a little cumbersome. A more convenient alternative is to
+hold up an object such as a pencil at arm's length. If you know the
+length of the pencil, d, and the distance of it from your eye, D, you
+can calculate it's angular size, $\theta$ using this formula:
+
+\begin{equation}
+\theta=2 \cdot \arctan{\left(\frac{d}{2 \cdot D}\right) }
+\end{equation}
+
+
+\noindent Another, more handy (ahem!) method is to use the size of your hand at
+arm's length:
+
+\begin{description}
+\item[Tip of little finger] About 1\degree 
+\item[Middle three fingers] About 4\degree 
+\item[Across the knuckles of the fist] About 10\degree 
+\item[Open hand] About 18\degree
+\end{description}
+
+Using you hand in this way is not very precise, but it's close enough to
+give you some way to translate an idea like ``Mars will be $45\degree$ above the
+Southeastern horizon at 21:30''. Of course, there is variation from
+person to person, but the variation is compensated for somewhat by the
+fact that people with long arms tend to have larger hands. In exercise
+%\href{Exercises\#Handy_Angles}{handy angles}, 
+\ref{sec:Exercises:handyAngles} 
+you will work out your own ``handy angles''.
+
+
 
 \subsection{The Magnitude Scale}\label{the-magnitude-scale}
 
@@ -415,3 +455,8 @@ include the apparent shift in position of star due to annular parallax.
 The star exhibiting the greatest proper motion is Barnard's Star which
 moves more then ten seconds of arc per year.
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
