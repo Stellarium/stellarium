@@ -224,7 +224,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
-	actionsMgr->addAction("actionShow_AddOn_Window_Global", windowsGroup, N_("Add-Ons Manager"), addonDialog, "visible", "F8", "", true);
+	actionsMgr->addAction("actionShow_AddOn_Window_Global", windowsGroup, N_("Add-ons Manager"), addonDialog, "visible", "F8", "", true);
 	actionsMgr->addAction("actionShow_AstroCalc_Window_Global", windowsGroup, N_("AstroCalc window"), astroCalcDialog, "visible", "F10", "Alt+A", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);
 

@@ -480,7 +480,7 @@ void StelApp::init(QSettings* conf)
 	skyLabels->init();
 	getModuleMgr().registerModule(skyLabels);
 
-	// Init Add-Ons Manager
+	// Init Add-ons Manager
 	stelAddOnMgr = new StelAddOnMgr();
 
 	skyCultureMgr->init();

@@ -127,13 +127,13 @@ void AddOnSettingsDialog::updateCatalog()
 void AddOnSettingsDialog::setAboutHtml()
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Add-Ons Manager") + "</h2><table width=\"90%\">";
+	html += "<h2>" + q_("Add-ons Manager") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ADDON_MANAGER_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Add-Ons Manager") + "</p>";
+	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Add-ons Manager") + "</p>";
 	html += "<ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";

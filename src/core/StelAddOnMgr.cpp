@@ -142,7 +142,7 @@ bool StelAddOnMgr::loadAddonJson(AddOn::Source source)
 	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
 	jsonFile.close();
 
-	if (json["name"].toString() != "Add-Ons Catalog" ||
+	if (json["name"].toString() != "Add-ons Catalog" ||
 		json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
 	{
 		qWarning()  << "Add-On Mgr: The current catalog is not compatible!";
@@ -753,7 +753,7 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 		attributes.insert("authors", authors);
 
 		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		json.insert("name", QString("Add-Ons Catalog"));
+		json.insert("name", QString("Add-ons Catalog"));
 		json.insert("format-version", ADDON_MANAGER_CATALOG_VERSION);
 
 		QJsonObject addons = json["add-ons"].toObject();
