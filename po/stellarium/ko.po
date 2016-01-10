@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-22 23:48+0600\n"
-"PO-Revision-Date: 2016-01-09 05:06+0000\n"
+"PO-Revision-Date: 2016-01-10 05:06+0000\n"
 "Last-Translator: SeokHwan Park <mints1324@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-09 05:08+0000\n"
+"X-Launchpad-Export-Date: 2016-01-10 05:08+0000\n"
 "X-Generator: Launchpad (build 17881)\n"
 "Language: ko\n"
 
@@ -91,7 +91,7 @@ msgstr "은하적도"
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:633 src/ui_viewDialog.h:1790
 msgid "O./C. longitude"
-msgstr ""
+msgstr "충/합 경도"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/core/modules/GridLinesMgr.cpp:920
 #: src/ui_viewDialog.h:1782
@@ -169,7 +169,7 @@ msgstr "은하적도"
 #: src/core/modules/GridLinesMgr.cpp:918
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:392
 msgid "Opposition/conjunction longitude line"
-msgstr ""
+msgstr "충/합 경도 선"
 
 #: src/core/modules/GridLinesMgr.cpp:919
 msgid "Precession Circles"
@@ -444,7 +444,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:904
 msgctxt "Trumpler's Number of Members Class"
 msgid "moderately rich cluster with 50-100 stars"
-msgstr ""
+msgstr "약 50-100개의 별을 적당히 가졌음"
 
 #: src/core/modules/Nebula.cpp:907
 msgctxt "Trumpler's Number of Members Class"
@@ -499,27 +499,27 @@ msgstr "반사성운의 증명되지 않은 밝기"
 #: src/core/modules/Nebula.cpp:959
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminating star is embedded in the nebulosity"
-msgstr ""
+msgstr "성운을 밝게하는 별이 포함되어있음"
 
 #: src/core/modules/Nebula.cpp:962
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated nebulosity"
-msgstr ""
+msgstr "별이 밝은 성운의 바깥쪽에 위치해있음"
 
 #: src/core/modules/Nebula.cpp:965
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located on the corner of the illuminated nebulosity"
-msgstr ""
+msgstr "별이 밝은 성운의 코너에 위치해있음"
 
 #: src/core/modules/Nebula.cpp:968
 msgctxt "Reflection Nebulae Classification"
 msgid "star is located outside the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "별이 밝고 독특한 성운의 바깥쪽에 위치해있음"
 
 #: src/core/modules/Nebula.cpp:971
 msgctxt "Reflection Nebulae Classification"
 msgid "the illuminated peculiar nebulosity"
-msgstr ""
+msgstr "밝고 독특한 성운"
 
 #: src/core/modules/Nebula.cpp:974
 msgctxt "Reflection Nebulae Classification"
@@ -3051,11 +3051,11 @@ msgstr "스칸디나비아"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:187
 msgid "Siberian"
-msgstr ""
+msgstr "시베리아"
 
 #: src/translations.h:188
 msgid "Tukano"
-msgstr ""
+msgstr "투카노"
 
 #: src/translations.h:189
 msgid "Tupi-Guarani"
@@ -3071,7 +3071,7 @@ msgstr "서양"
 
 #: src/translations.h:192
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "서양 (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:198
@@ -5922,7 +5922,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:376
 msgid "Maximum allowed separation:"
-msgstr ""
+msgstr "최대 허용 분리:"
 
 #: src/ui_astroCalcDialog.h:378
 msgid "Value in decimal degrees"
@@ -10134,7 +10134,7 @@ msgstr "유성우"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:563
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "복사점의 움직임(하루당)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:570
 #, qt-format
@@ -10157,16 +10157,16 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:597
 msgid "Activity"
-msgstr ""
+msgstr "활동"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:602
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "극대기: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:605
 msgid "Solar longitude"
-msgstr ""
+msgstr "태양 경도"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:615
 msgid "variable"
@@ -10751,7 +10751,7 @@ msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:185
 msgid "Data Type"
-msgstr ""
+msgstr "데이터 유형"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:186
 msgid "Peak"
