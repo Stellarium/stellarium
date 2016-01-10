@@ -197,6 +197,8 @@ class LandscapeMgr : public StelModule
 		   READ getDefaultLandscapeID
 		   WRITE setDefaultLandscapeID
 		   NOTIFY defaultLandscapeChanged)
+	// GZ new
+	Q_PROPERTY(float atmLumFactor READ getAtmLumFactor WRITE setAtmLumFactor NOTIFY atmLumFactorChanged)
 
 public:
 	LandscapeMgr();
@@ -270,6 +272,10 @@ public slots:
 
 	//! Return a map of landscape names to landscape IDs (directory names).
 	static QMap<QString,QString> getNameToDirMap();
+
+	// GZ additions... TODO: emit only if value has changed!
+	void setAtmLumFactor(double val){atmLumFactor=val; emit atmLumFactorChanged(val);}
+	double getAtmLumFactor(void) const {return atmLumFactor;}
 
 	//! Retrieve a list of the names of all the available landscapes in
 	//! the file search path sub-directories of the landscape area
@@ -441,6 +447,9 @@ public slots:
 	int getAtmosphereBortleLightPollution() const;
 	*/
 
+	// GZ Special purpose to be able to set parameters:
+	Atmosphere* getAtmosphere(void){return atmosphere;}
+
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
 	//! a vehicle which might change orientation over time (e.g. a ship).
@@ -566,6 +575,7 @@ signals:
 	void flagLandscapeSetsMinimalBrightnessChanged(const bool value);
 	void defaultMinimalBrightnessChanged(const double value);
 	void setFlagEnvironmentAutoEnableChanged(const bool enabled);
+	void atmLumFactorChanged(const float factor);
 
 	//! Emitted whenever the default landscape is changed
 	//! @param id the landscape id of the new default landscape
@@ -635,7 +645,10 @@ private:
 	//! @returns an empty string, if no such landscape was found.
 	static QString getLandscapePath(const QString landscapeID);
 
+	// Argl - we must make that a public thing!?
+public:
 	Atmosphere* atmosphere;			// Atmosphere
+private:
 	Cardinals* cardinalsPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
 	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
@@ -682,6 +695,10 @@ private:
 
 	//! Core current planet name, used to react to planet change.
 	QString currentPlanetName;
+
+	// GZ Luminance factor, allows tweaking via atmosphere detail GUI
+	float atmLumFactor;
+
 };
 
 #endif // LANDSCAPEMGR_HPP

@@ -1327,7 +1327,8 @@ void SolarSystem::draw(StelCore* core)
 	// Draw the elements
 	for (const auto& p : qAsConst(systemPlanets))
 	{
-		p->draw(core, maxMagLabel, planetNameFont);
+		//if (p->getEnglishName() != "Sun")
+			p->draw(core, maxMagLabel, planetNameFont);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagPointer())

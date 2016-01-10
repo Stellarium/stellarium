@@ -121,7 +121,7 @@ Atmosphere::~Atmosphere(void)
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude,
-							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity)
+							   StelCore* core, float latitude, float altitude, float temperature, float relativeHumidity, float extinctionCoefficient)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	if (viewport != prj->getViewport())
@@ -244,7 +244,32 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		return;
 	}
 
-	sky.setParamsv(sunPosF, 5.f);
+	// Calculate the atmosphere RGB for each point of the grid
+	float sunPos[3];
+	sunPos[0] = _sunPos[0];
+	sunPos[1] = _sunPos[1];
+	sunPos[2] = _sunPos[2];
+
+	float moon_pos[3];
+	moon_pos[0] = moonPos[0];
+	moon_pos[1] = moonPos[1];
+	moon_pos[2] = moonPos[2];
+
+	// GZ: This used a constant Preetham Turbidity of 5 which is already quite hazy.
+	// TODO: We should do something with the k value set in the atmosphere/extinction settings.
+	// Given that T=1 = Pure Air where k=0.16, and other values assumed in parallel, we come to an
+	// ad-hoc mapping function which should not look to bad: T=25(k-0.16)+1
+	//sky.setParamsv(sunPos, 5.f); // To reach the 5 we have k=0.32
+	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+
+
+	float turbidity= ( (skyDrawer->getFlagTfromK()) ?  25.f*(extinctionCoefficient-0.16f)+1.f   : skyDrawer->getT());
+	// Note that Preetham's model has some quirks for too low turbidities.
+	// A hard limit is some assert later, so must be technically at least 1.203.
+	// Also, Preetham has optimized to T in[2..6], which translates now to k in [0.2-0.36].
+	//sky.setParamsv(sunPos, qMax(2.f, qMin(6.f, turbidity)));
+	sky.setParamsv(sunPosF, qMax(2.f, qMin(16.f, turbidity)));
+
 	skyb.setLocation(latitude * M_PI_180f, altitude, temperature, relativeHumidity);
 	skyb.setSunMoon(moonPosF[2], sunPosF[2]);
 
@@ -272,6 +297,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		if (pointF[2]<=0.f)
 		{
 			pointF[2] *= -1.f;
+			moonPosF[2] *= -1.f;
 			// The sky below the ground is the symmetric of the one above :
 			// it looks nice and gives proper values for brightness estimation
 			// Use the Skybright.cpp 's models for brightness which gives better results.
@@ -401,7 +427,7 @@ void Atmosphere::draw(StelCore* core)
 	//const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 	//StelPainter painter(prj);
 	//painter.setFont(font);
-	//sPainter.setColor(0.7, 0.7, 0.7);
-	//sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
+	sPainter.setColor(0.7, 0.7, 0.7);
+	sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
 	//qDebug() << atmosphere->getAverageLuminance();
 }
