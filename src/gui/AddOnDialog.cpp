@@ -58,34 +58,34 @@ void AddOnDialog::styleChanged()
 
 void AddOnDialog::createDialogContent()
 {
-	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(updateTableViews()),
-		this, SLOT(populateTables()));
+//	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(updateTableViews()),
+//		this, SLOT(populateTables()));
 
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	// settings dialog
-	connect(ui->btnSettings, SIGNAL(clicked(bool)), this, SLOT(slotOpenSettings()));
+//	connect(ui->btnSettings, SIGNAL(clicked(bool)), this, SLOT(slotOpenSettings()));
 
 	// naming tables according to the category
-	ui->catalogsTableView->setCategory(AddOn::CATALOG);
-	ui->landscapeTableView->setCategory(AddOn::LANDSCAPE);
-	ui->languageTableView->setCategory(AddOn::LANGUAGEPACK);
-	ui->scriptsTableView->setCategory(AddOn::SCRIPT);
-	ui->starloreTableView->setCategory(AddOn::STARLORE);
-	ui->texturesTableView->setCategory(AddOn::TEXTURE);
+//	ui->updatesTableView->setCategory(AddOn::CATALOG);
+//	ui->landscapeTableView->setCategory(AddOn::LANDSCAPE);
+//	ui->languageTableView->setCategory(AddOn::LANGUAGEPACK);
+//	ui->scriptsTableView->setCategory(AddOn::SCRIPT);
+//	ui->starloreTableView->setCategory(AddOn::STARLORE);
+//	ui->texturesTableView->setCategory(AddOn::TEXTURE);
 
 	// hashing all tableViews
-	m_tableViews.insert(AddOn::CATALOG, ui->catalogsTableView);
-	m_tableViews.insert(AddOn::LANDSCAPE, ui->landscapeTableView);
-	m_tableViews.insert(AddOn::LANGUAGEPACK, ui->languageTableView);
-	m_tableViews.insert(AddOn::SCRIPT, ui->scriptsTableView);
-	m_tableViews.insert(AddOn::STARLORE, ui->starloreTableView);
-	m_tableViews.insert(AddOn::TEXTURE, ui->texturesTableView);
+//	m_tableViews.insert(AddOn::CATALOG, ui->catalogsTableView);
+//	m_tableViews.insert(AddOn::LANDSCAPE, ui->landscapeTableView);
+//	m_tableViews.insert(AddOn::LANGUAGEPACK, ui->languageTableView);
+//	m_tableViews.insert(AddOn::SCRIPT, ui->scriptsTableView);
+//	m_tableViews.insert(AddOn::STARLORE, ui->starloreTableView);
+//	m_tableViews.insert(AddOn::TEXTURE, ui->texturesTableView);
 
 	// build and populate all tableviews
-	populateTables();
+//	populateTables();
 
 	// catalog updates
 	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
@@ -98,10 +98,10 @@ void AddOnDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(AddOn::CATALOG);
 
 	// buttons: Install and Remove
-	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
-	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
-	ui->btnInstall->setEnabled(false);
-	ui->btnRemove->setEnabled(false);
+//	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
+//	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
+//	ui->btnInstall->setEnabled(false);
+//	ui->btnRemove->setEnabled(false);
 	for (int itab=0; itab<6; itab++) {
 		AddOn::Category tab = (AddOn::Category)itab;
 		AddOnTableView* view = m_tableViews.value(tab);
@@ -126,12 +126,12 @@ void AddOnDialog::slotOpenSettings()
 
 void AddOnDialog::slotUpdateButtons(int amountToInstall, int amountToRemove)
 {
-	ui->btnInstall->setEnabled(amountToInstall > 0);
-	ui->btnRemove->setEnabled(amountToRemove > 0);
+//	ui->btnInstall->setEnabled(amountToInstall > 0);
+//	ui->btnRemove->setEnabled(amountToRemove > 0);
 	QString txtInstall = QString("%1 (%2)").arg(q_("Install")).arg(amountToInstall);
 	QString txtRemove = QString("%1 (%2)").arg(q_("Remove")).arg(amountToRemove);
-	ui->btnInstall->setText(txtInstall);
-	ui->btnRemove->setText(txtRemove);
+//	ui->btnInstall->setText(txtInstall);
+//	ui->btnRemove->setText(txtRemove);
 }
 
 void AddOnDialog::slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg)

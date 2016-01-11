@@ -321,62 +321,22 @@
         </property>
         <item>
          <property name="text">
-          <string>Catalogs</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-star-catalogs-up.png</normalon>
-          </iconset>
+          <string>Updates</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Landscapes</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-landscapes-up.png</normalon>
-          </iconset>
+          <string>Available</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Languages</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-languages-up.png</normalon>
-          </iconset>
+          <string>Installed</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Scripts</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-scripts-up.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Starlores</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-starlore-up.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Textures</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-textures-up.png</normalon>
-          </iconset>
+          <string>Settings</string>
          </property>
         </item>
        </widget>
@@ -389,16 +349,19 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <widget class="QWidget" name="catalogs">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="updates">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="AddOnTableView" name="catalogsTableView">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="AddOnTableView" name="updatesTableView">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -406,19 +369,29 @@
              </sizepolicy>
             </property>
            </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="btnInstallUpdates">
+            <property name="text">
+             <string>Install (0)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QTextBrowser" name="updatesBrowser"/>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="landscape">
+        <widget class="QWidget" name="available">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="AddOnTableView" name="landscapeTableView">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="AddOnTableView" name="availableTableView">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -426,19 +399,29 @@
              </sizepolicy>
             </property>
            </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="btnInstallAvailable">
+            <property name="text">
+             <string>Install (0)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QTextBrowser" name="availableBrowser"/>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="language">
+        <widget class="QWidget" name="installed">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="AddOnTableView" name="languageTableView">
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="AddOnTableView" name="installedTableView">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -446,68 +429,27 @@
              </sizepolicy>
             </property>
            </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="btnUninstall">
+            <property name="text">
+             <string>Uninstall (0)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QTextBrowser" name="installedBrowser"/>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="scripts">
+        <widget class="QWidget" name="settings">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="AddOnTableView" name="scriptsTableView">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="starlore">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="AddOnTableView" name="starloreTableView">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="textures">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
-          <item>
-           <widget class="AddOnTableView" name="texturesTableView">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <layout class="QHBoxLayout" name="horizontalLayout_6"/>
         </widget>
        </widget>
       </item>
@@ -548,27 +490,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnInstallFromFile">
-           <property name="text">
-            <string>Install from File</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnInstall">
-           <property name="text">
-            <string>Install (0)</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="btnRemove">
-           <property name="text">
-            <string>Remove (0)</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </widget>
@@ -619,9 +540,9 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btnSettings">
+          <widget class="QPushButton" name="btnInstallFromFile">
            <property name="text">
-            <string>Settings</string>
+            <string>Install from File</string>
            </property>
           </widget>
          </item>
