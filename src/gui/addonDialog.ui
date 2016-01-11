@@ -262,13 +262,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>74</height>
+          <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>74</height>
+          <height>35</height>
          </size>
         </property>
         <property name="focusPolicy">
@@ -282,12 +282,6 @@
         </property>
         <property name="selectionMode">
          <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
         </property>
         <property name="movement">
          <enum>QListView::Static</enum>
@@ -306,9 +300,6 @@
         </property>
         <property name="spacing">
          <number>0</number>
-        </property>
-        <property name="viewMode">
-         <enum>QListView::IconMode</enum>
         </property>
         <property name="uniformItemSizes">
          <bool>false</bool>
