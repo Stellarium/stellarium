@@ -448,7 +448,7 @@ ELSE()
      # This will add the ANGLE lib if the Qt version supports it.
      TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
 
-     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets SerialPort)
+     QT5_USE_MODULES(stellarium Core Concurrent Gui Network OpenGL Script Widgets)
      IF(ENABLE_MEDIA)
           QT5_USE_MODULES(stellarium Multimedia MultimediaWidgets)
      ENDIF()
