@@ -23,62 +23,17 @@
 #include "AddOnTableModel.hpp"
 #include "StelTranslator.hpp"
 
-AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject* parent)
+AddOnTableModel::AddOnTableModel(QHash<QString, AddOn*> addons, QObject* parent)
 	: QAbstractTableModel(parent)
+	, m_addons(addons)
 {
-	switch (category) {
-		case AddOn::CATALOG:
-		{
-			QMap<QString, AddOn*> plugin = addons.value(AddOn::Plugin_Catalog);
-			QMap<QString, AddOn*> star = addons.value(AddOn::Star_Catalog);
-			m_addons = plugin.unite(star);
-			m_iColumns << Title << Type;
-			break;
-		}
-		case AddOn::LANDSCAPE:
-		{
-			m_addons = addons.value(AddOn::Landscape);
-			m_iColumns << Title;
-			break;
-		}
-		case AddOn::LANGUAGEPACK:
-		{
-			QMap<QString, AddOn*> stellarium = addons.value(AddOn::Language_Stellarium);
-			QMap<QString, AddOn*> skyculture = addons.value(AddOn::Language_SkyCulture);
-			m_addons = stellarium.unite(skyculture);
-			m_iColumns << Title << Type;
-			break;
-		}
-		case AddOn::SCRIPT:
-		{
-			m_addons = addons.value(AddOn::Script);
-			m_iColumns << Title << Version;
-			break;
-		}
-		case AddOn::STARLORE:
-		{
-			m_addons = addons.value(AddOn::Sky_Culture);
-			m_iColumns << Title;
-			break;
-		}
-		case AddOn::TEXTURE:
-		{
-			m_addons = addons.value(AddOn::Texture);
-			m_iColumns << Title << Version;
-			break;
-		}
-		default:
-		{
-			qWarning() << "AddOnTableModel : Invalid category!";
-		}
-	}
-	m_iColumns << Status << Checkbox;
+	m_iColumns << Title << Type << Checkbox;
 }
 
 int AddOnTableModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
-	return m_addons.size() * 2;
+	return m_addons.size();
 }
 
 int AddOnTableModel::columnCount(const QModelIndex &parent) const
@@ -96,14 +51,13 @@ QVariant AddOnTableModel::data(const QModelIndex &index, int role) const
 
 	if (!index.isValid() ||
 		index.row() < 0 ||
-		index.row() % 2 != 0 ||
 		role != Qt::DisplayRole)
 	{
 		return QVariant();
 	}
 
 	QVariant value;
-	AddOn* addon = m_addons.values().at(index.row() / 2);
+	AddOn* addon = m_addons.values().at(index.row());
 	Column column = m_iColumns.at(index.column());
 	switch (column) {
 		case Title:
@@ -139,7 +93,7 @@ QVariant AddOnTableModel::headerData(int section, Qt::Orientation orientation, i
 			value = q_("Title");
 			break;
 		case Type:
-			value = q_("Type");
+			value = q_("Category");
 			break;
 		case Version:
 			value = q_("Version");

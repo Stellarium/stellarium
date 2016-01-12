@@ -30,7 +30,7 @@ class AddOnTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject *parent=0);
+	AddOnTableModel(QHash<QString, AddOn*> addons, QObject *parent=0);
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -47,7 +47,7 @@ private:
 		Checkbox
 	};
 
-	QMap<QString, AddOn*> m_addons;
+	QHash<QString, AddOn*> m_addons;
 	QList<Column> m_iColumns;
 };
 
