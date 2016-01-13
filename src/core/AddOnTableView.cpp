@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2014-2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,57 +40,18 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	setEditTriggers(false);
 	setShowGrid(false);
 
-	connect(verticalScrollBar(), SIGNAL(valueChanged(int)),
-		this, SLOT(scrollValueChanged(int)));
-
 	m_pCheckboxGroup->setExclusive(false);
-	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
-		this, SIGNAL(rowChecked(int, bool)));
-	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
-		this, SLOT(slotRowChecked(int, bool)));
-
-	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(dataUpdated(AddOn*)),
-		this, SLOT(slotDataUpdated(AddOn*)));
+	connect(m_pCheckboxGroup, SIGNAL(buttonClicked(int)), this, SLOT(slotRowChecked(int)));
 }
 
 AddOnTableView::~AddOnTableView()
 {
-	int i = 0;
-	while (!m_widgets.isEmpty())
-	{
-		delete m_widgets.take(i);
-		i++;
-	}
-	m_widgets.clear();
-
 	m_pCheckboxGroup->deleteLater();
-}
-
-void AddOnTableView::slotDataUpdated(AddOn* addon) {
-	if (m_category == addon->getCategory())
-	{
-		QModelIndex top = ((AddOnTableModel*) model())->index(0, 0);
-		QModelIndex bottom = ((AddOnTableModel*) model())->index(model()->rowCount(), model()->columnCount());
-		((AddOnTableModel*) model())->dataChanged(top, bottom);
-		update();
-	}
-}
-
-void AddOnTableView::scrollValueChanged(int)
-{
-	// hack to ensure repaint
-	hide();
-	show();
 }
 
 void AddOnTableView::setModel(QAbstractItemModel* model)
 {
 	QTableView::setModel(model);
-
-	m_widgets.clear();
-	m_iSelectedAddOnsToInstall.clear();
-	m_iSelectedAddOnsToRemove.clear();
-	emit (selectedAddOns(0, 0));
 
 	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
@@ -103,7 +64,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 		this, SLOT(setAllChecked(bool)), Qt::UniqueConnection);
 
 	// Insert checkboxes to the checkboxgroup (rows)
-	for (int row=0; row < model->rowCount(); row=row+2)
+	for (int row=0; row < model->rowCount(); row++)
 	{
 		QCheckBox* cbox = new QCheckBox();
 		cbox->setStyleSheet("QCheckBox { margin-left: 8px; margin-right: 8px; margin-bottom: 2px; }");
@@ -111,173 +72,44 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 		setIndexWidget(model->index(row, lastColumn), cbox);
 		m_pCheckboxGroup->addButton(cbox, row);
 	}
-
-	// Hide and span empty rows
-	for (int row=1; row < model->rowCount(); row=row+2)
-	{
-		setSpan(row, 0, 1, model->columnCount());
-		hideRow(row);
-	}
 }
 
 void AddOnTableView::mouseDoubleClickEvent(QMouseEvent *e)
 {
 	QModelIndex index = indexAt(e->pos());
-	const int row = index.row();
-	if (index.isValid() && !(row%2))
+	if (index.isValid())
 	{
-		// toogle state
-		bool checked = getCheckBox(row)->checkState();
-		slotCheckRow(index.row(), checked?0:2);
-		emit(rowChecked(row, !checked));
+		getCheckBox(index.row())->toggle();
 	}
 }
 
 void AddOnTableView::mousePressEvent(QMouseEvent *e)
 {
 	QModelIndex index = indexAt(e->pos());
-	if (!index.isValid() || !isRowHidden(index.row() + 1))
+	if (!index.isValid())
 	{
 		clearSelection();
 		return;
 	}
 	selectRow(index.row());
+	emit(addonSelected(((AddOnTableModel*) index.model())->getAddOn(index.row())));
+}
+
+void AddOnTableView::setAllChecked(bool checked)
+{
+	for (int row=0; row < model()->rowCount(); row++)
+	{
+		getCheckBox(row)->setChecked(checked);
+	}
 }
 
 void AddOnTableView::clearSelection()
 {
 	QTableView::clearSelection();
-	m_iSelectedAddOnsToInstall.clear();
-	m_iSelectedAddOnsToRemove.clear();
 	setAllChecked(false);
 }
 
-void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+void AddOnTableView::slotRowChecked(int)
 {
-	int wRow; // addonwidget row
-	if (!deselected.isEmpty())
-	{
-		wRow = deselected.first().top() + 1;
-		if (wRow % 2)
-		{
-			hideRow(wRow);
-		}
-	}
-	if (!selected.isEmpty())
-	{
-		wRow = selected.first().top() + 1;
-		if (wRow % 2)
-		{
-			insertAddOnWidget(wRow);
-			showRow(wRow);
-		}
-	}
-	update();
-}
-
-AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
-{
-	if (m_widgets.contains(wRow))
-	{
-		return m_widgets.value(wRow);
-	}
-	AddOnTableModel* model = (AddOnTableModel*) this->model();
-	AddOnWidget* widget = new AddOnWidget(this, wRow, model->getAddOn(wRow-1));
-	setRowHeight(wRow, widget->height());
-	setIndexWidget(model->index(wRow, 0), widget);
-	widget->setVisible(false);
-	m_widgets.insert(wRow, widget);
-	if (m_category == AddOn::TEXTURE)
-	{
-		connect(widget, SIGNAL(checkRow(int, int)),
-			this, SLOT(slotCheckRow(int, int)));
-	}
-	return m_widgets.value(wRow);
-}
-
-void AddOnTableView::slotCheckRow(int pRow, int checked)
-{
-	m_pCheckboxGroup->blockSignals(true);
-	QCheckBox* cbox = getCheckBox(pRow);
-	cbox->setCheckState((Qt::CheckState) checked);
-	slotRowChecked(pRow, checked);
-	m_pCheckboxGroup->blockSignals(false);
-}
-
-void AddOnTableView::setAllChecked(bool checked)
-{
-	for (int row=0; row < model()->rowCount(); row=row+2)
-	{
-		slotCheckRow(row, checked?2:0);
-		emit(rowChecked(row, checked));
-	}
-}
-
-void AddOnTableView::slotRowChecked(int pRow, bool checked)
-{
-	AddOnWidget* widget = insertAddOnWidget(pRow+1);
-	AddOnTableModel* model = (AddOnTableModel*) this->model();
-	AddOn* addon = model->getAddOn(pRow);
-	if (checked)
-	{
-		QStringList selectedFilesToInstall = widget->getSelectedFilesToInstall();
-		QStringList selectedFilesToRemove = widget->getSelectedFilesToRemove();
-
-		if (addon->getStatus() == AddOn::FullyInstalled)
-		{
-			m_iSelectedAddOnsToRemove.insert(addon, selectedFilesToRemove);
-		}
-		else if (addon->getStatus() == AddOn::PartiallyInstalled)
-		{
-			if (selectedFilesToInstall.isEmpty())
-				m_iSelectedAddOnsToInstall.remove(addon);
-			else
-				m_iSelectedAddOnsToInstall.insert(addon, selectedFilesToInstall);
-
-			if (selectedFilesToRemove.isEmpty())
-				m_iSelectedAddOnsToRemove.remove(addon);
-			else
-				m_iSelectedAddOnsToRemove.insert(addon, selectedFilesToRemove);
-		}
-		else if (addon->getStatus() != AddOn::Restart)
-		{
-			m_iSelectedAddOnsToInstall.insert(addon, selectedFilesToInstall);
-		}
-	}
-	else
-	{
-		if (addon->getStatus() == AddOn::FullyInstalled)
-		{
-			m_iSelectedAddOnsToRemove.remove(addon);
-		}
-		else if (addon->getStatus() == AddOn::PartiallyInstalled)
-		{
-			m_iSelectedAddOnsToInstall.remove(addon);
-			m_iSelectedAddOnsToRemove.remove(addon);
-		}
-		else if (addon->getStatus() != AddOn::Restart)
-		{
-			m_iSelectedAddOnsToInstall.remove(addon);
-		}
-	}
-
-	emit (selectedAddOns(m_iSelectedAddOnsToInstall.size(), m_iSelectedAddOnsToRemove.size()));
-
-	// update checkbox header
-	if (m_pAddOnHeader)
-	{
-		int countChecked = 0;
-		foreach (QAbstractButton* cbox, m_pCheckboxGroup->buttons())
-		{
-			if (cbox->isChecked())
-				countChecked++;
-		}
-
-		if (countChecked == model->rowCount() / 2) // all rows checked ?
-		{
-			m_pAddOnHeader->setChecked(true);
-		} else if (countChecked == 0){
-			m_pAddOnHeader->setChecked(false);
-		}
-	}
+	//TODO
 }

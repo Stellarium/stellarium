@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2014 Marcos Cardinot
+ * Copyright (C) 2014-2016 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,39 +37,23 @@ public:
 
 	void mousePressEvent(QMouseEvent* e);
 	void mouseDoubleClickEvent(QMouseEvent* e);
-	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
-	void setCategory(AddOn::Category category) { m_category = category; }
-	AddOn::Category getCategory() { return m_category; }
 
-	QHash<AddOn*, QStringList> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
-	QHash<AddOn*, QStringList> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
 	QCheckBox* getCheckBox(int pRow) { return (QCheckBox*) m_pCheckboxGroup->button(pRow); }
 
 signals:
-	// useful to handle the status of the install/remove buttons
-	void selectedAddOns(int toInstall, int toRemove);
-	void rowChecked(int row, bool checked);
+	void addonSelected(AddOn* addon);
 
 public slots:
 	void clearSelection();
 	void setAllChecked(bool checked);
-	void slotDataUpdated(AddOn* addon);
 
 private slots:
-	void scrollValueChanged(int);
-	void slotCheckRow(int pRow, int checked);
-	void slotRowChecked(int pRow, bool checked);
+	void slotRowChecked(int);
 
 private:
-	AddOn::Category m_category;
 	AddOnHeader* m_pAddOnHeader;
 	QButtonGroup* m_pCheckboxGroup;
-	QHash<int, AddOnWidget*> m_widgets;
-	QHash<AddOn*, QStringList> m_iSelectedAddOnsToInstall;
-	QHash<AddOn*, QStringList> m_iSelectedAddOnsToRemove;
-	AddOnWidget* insertAddOnWidget(int wRow);
-	bool isCompatible(QString first, QString last);
 };
 
 #endif // _ADDONTABLEVIEW_HPP_
