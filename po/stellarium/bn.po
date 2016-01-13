@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-22 23:48+0600\n"
-"PO-Revision-Date: 2016-01-08 14:58+0000\n"
+"PO-Revision-Date: 2016-01-12 14:37+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-01-09 05:08+0000\n"
-"X-Generator: Launchpad (build 17881)\n"
+"X-Launchpad-Export-Date: 2016-01-13 05:10+0000\n"
+"X-Generator: Launchpad (build 17886)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:135 src/core/modules/StarMgr.cpp:375
@@ -651,7 +651,7 @@ msgstr "নক্ষত্র সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1106
 msgid "star cloud"
-msgstr ""
+msgstr "নক্ষত্র মেঘ"
 
 #: src/core/modules/Nebula.cpp:1109
 msgid "interstellar matter"
@@ -663,7 +663,7 @@ msgstr "উৎক্ষেপিত পদার্থ"
 
 #: src/core/modules/Nebula.cpp:1115
 msgid "BL Lac object"
-msgstr ""
+msgstr "ব্ল ল্যাকটারে বস্তু"
 
 #: src/core/modules/Nebula.cpp:1118
 msgid "blazar"
@@ -2938,7 +2938,7 @@ msgstr "নক্ষত্র সমাবেশ"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Star clouds"
-msgstr ""
+msgstr "নক্ষত্র মেঘ"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
@@ -2968,7 +2968,7 @@ msgstr "উৎক্ষেপিত পদার্থ"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "BL Lac objects"
-msgstr ""
+msgstr "ব্ল ল্যাকটারে বস্তু"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
@@ -2983,7 +2983,7 @@ msgstr "নক্ষত্র সৃষ্টিকারী গ্যাস ও
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Young Stellar Objects"
-msgstr ""
+msgstr "প্রাক নাক্ষত্রিক জ্যোতিষ্ক"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
@@ -5104,7 +5104,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1694
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
-msgstr ""
+msgstr "উজ্জ্বল ঝাপসা সীমাযুক্ত নিহারীকার তালিকা (সেডেরব্লাড, ১৯৪৬)"
 
 #: src/ui_viewDialog.h:1696
 msgid "Filter by type"
@@ -6935,7 +6935,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1210
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "ঘুর্নণ (ডিগ্রি) :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1212
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
@@ -6958,13 +6958,13 @@ msgstr "লম্বালম্বি উল্টানো"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Equatorial Mount"
-msgstr ""
+msgstr "ভূ-বিষুব বিচলন"
 
 #: plugins/Satellites/src/Satellites.cpp:68
 #: plugins/Satellites/src/Satellites.cpp:142
 #: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Satellites"
-msgstr "উপগ্রহ"
+msgstr "কৃত্রিম উপগ্রহ"
 
 #: plugins/Satellites/src/Satellites.cpp:71
 msgid ""
@@ -6984,7 +6984,7 @@ msgstr "উপগ্রহের নাম"
 
 #: plugins/Satellites/src/Satellites.cpp:145
 msgid "Satellites configuration window"
-msgstr "উপগ্রহ সংক্রান্ত তথ্য বিন্যাস"
+msgstr "কৃত্রিম উপগ্রহ সংক্রান্ত তথ্য বিন্যাস"
 
 #: plugins/Satellites/src/Satellites.cpp:177
 msgid ""
@@ -7165,7 +7165,7 @@ msgstr "%1 মেগাহার্জ (%2%3 কিলোহার্জ)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:405
 msgid "Stellarium Satellites Plugin"
-msgstr "উপগ্রহ সরঞ্জাম"
+msgstr "কৃত্রিম উপগ্রহ সরঞ্জাম"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:410
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
@@ -7224,8 +7224,8 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"উপগ্রহ সরঞ্জামটির এখনো  কাজ চলছে ।  তাই কিছু বৈশিষ্ট্য এখনও অসম্পূর্ণ, "
-"অনুপস্থিত বা ত্রুটিপূর্ণ ।"
+"কৃত্রিম উপগ্রহ সরঞ্জামটির এখনো  কাজ চলছে ।  তাই কিছু বৈশিষ্ট্য এখনও "
+"অসম্পূর্ণ, অনুপস্থিত বা ত্রুটিপূর্ণ ।"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:429
@@ -7238,7 +7238,7 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"ইন্টারনেট থেকে উপগ্রহ সরঞ্জামটি সরাসরি TLE তথ্য সংগ্রহ করে নেয়, তবে "
+"ইন্টারনেট থেকে কৃত্রিম উপগ্রহ সরঞ্জামটি সরাসরি TLE তথ্য সংগ্রহ করে নেয়, তবে "
 "স্বাভাবিক ভাবে তথ্যগুলি ৭২ ঘন্টার বেশি পুরানো না হলে কাজটি শুরু হয় না । "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:431
@@ -7263,7 +7263,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:435
 msgid "Adding new satellites"
-msgstr "নতুন উপগ্রহ যোগ করতে"
+msgstr "নতুন কৃত্রিম উপগ্রহ যোগ করতে"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:436
 msgid ""
@@ -7272,10 +7272,10 @@ msgid ""
 "to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
-"১. আপনি যে উপগ্রহ (গুলি) যোগ করতে ইচ্ছুক সেগুলি যেন এই অংশের অধীনে উত্স "
-"বিভাগের কোন একটি ঠিকানায় অন্তর্ভুক্ত থাকে, এ ব্যাপারে নিশ্চিত হোন । \n"
-"২.উপগ্রহ বিভাগে যান, + বোতামে ক্লিক করুন, যে উপগ্রহ (গুলি) যোগ করতে ইচ্ছুক "
-"সেগুলি নির্বাচন করুন । শেষে \"যোগ করুন\" বোতামে ক্লিক করুন"
+"১. আপনি যে কৃত্রিম উপগ্রহ (গুলি) যোগ করতে ইচ্ছুক সেগুলি যেন এই অংশের অধীনে "
+"উত্স বিভাগের কোন একটি ঠিকানায় অন্তর্ভুক্ত থাকে, এ ব্যাপারে নিশ্চিত হোন । \n"
+"২.কৃত্রিম উপগ্রহ বিভাগে যান, + বোতামে ক্লিক করুন, যে কৃত্রিম উপগ্রহ (গুলি) "
+"যোগ করতে ইচ্ছুক সেগুলি নির্বাচন করুন । শেষে \"যোগ করুন\" বোতামে ক্লিক করুন"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:438
 msgid "Technical notes"
@@ -7444,7 +7444,7 @@ msgstr "ঔজ্জ্বল্যতা"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:944
 msgid "Satellite"
-msgstr "উপগ্রহ"
+msgstr "কৃত্রিম উপগ্রহ"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:151
 msgid "Downloading data..."
@@ -7455,7 +7455,8 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"উত্স থেকে উপগ্রহ সংক্রান্ত তথ্য সংগ্রহ করা হচ্ছে । তাই একটু অপেক্ষা করুন..."
+"উত্স থেকে কৃত্রিম উপগ্রহ সংক্রান্ত তথ্য সংগ্রহ করা হচ্ছে । তাই একটু অপেক্ষা "
+"করুন..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:168
 msgid "Select TLE source file(s)..."
@@ -7480,7 +7481,7 @@ msgstr "তালিকা সংখ্যা : %1"
 #: plugins/Satellites/src/ui_satellitesDialog.h:708
 #: plugins/Satellites/src/ui_satellitesDialog.h:709
 msgid "Satellites Configuration"
-msgstr "উপগ্রহ সংক্রান্ত তথ্য বিন্যাস"
+msgstr "কৃত্রিম উপগ্রহ সংক্রান্ত তথ্য বিন্যাস"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:711
 msgid "Updates"
@@ -7488,7 +7489,7 @@ msgstr "সংশোধনী"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:712
 msgid "Update satellite data from Internet sources"
-msgstr "ইন্টারনেট উত্সগুলি থেকে উপগ্রহ তালিকা সংশোধন"
+msgstr "ইন্টারনেট উত্সগুলি থেকে কৃত্রিম উপগ্রহ তালিকা সংশোধন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -7501,13 +7502,13 @@ msgstr "সর্বশেষ সংশোধন :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr "সংশোধনের পর সমস্ত নতুন উপগ্রহ গুলির সংযুক্তি"
+msgstr "সংশোধনের পর সমস্ত নতুন কৃত্রিম উপগ্রহ গুলির সংযুক্তি"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
-msgstr "সংশোধনের পর তালিকায় না থাকা উপগ্রহ গুলির অপসারন"
+msgstr "সংশোধনের পর তালিকায় না থাকা কৃত্রিম উপগ্রহ গুলির অপসারন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:717
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
@@ -7580,11 +7581,11 @@ msgstr "অনুসরণ করতে কোন একটি উপগ্র�
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:750
 msgid "Add more satellites"
-msgstr "আরও উপগ্রহ যোগ করুন"
+msgstr "আরও কৃত্রিম উপগ্রহ যোগ করুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:753
 msgid "Remove the selected satellites"
-msgstr "নির্বাচিত উপগ্রহগুলি মুছুন"
+msgstr "নির্বাচিত কৃত্রিম উপগ্রহগুলি মুছুন"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:757
 msgid "Save changes"
@@ -7596,7 +7597,7 @@ msgstr "তালিকা সংখ্যা :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Display the selected satellite(s)"
-msgstr "নির্বাচিত উপগ্রহ (গুলি) দেখানো হবে"
+msgstr "নির্বাচিত কৃত্রিম উপগ্রহ (গুলি) দেখানো হবে"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:765
 msgid "Displayed"
@@ -7612,7 +7613,8 @@ msgstr "কক্ষপথ"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:771
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr "নির্বাচিত উপগ্রহগুলি সংশোধন করা হবে না (বা সংশোধনের পর মুছে যাবে)"
+msgstr ""
+"নির্বাচিত কৃত্রিম উপগ্রহগুলি সংশোধন করা হবে না (বা সংশোধনের পর মুছে যাবে)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:773
 msgid "Do not update"
@@ -7636,8 +7638,8 @@ msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
-"চিহ্নিত উত্সগুলির তালিকায় অবস্থিত উপগ্রহগুলি পরের সংশোধনের সময় স্বয়ংক্রিয় "
-"ভাবে য়ুক্ত হয়ে যাবে ।"
+"চিহ্নিত উত্সগুলির তালিকায় অবস্থিত কৃত্রিম উপগ্রহগুলি পরের সংশোধনের সময় "
+"স্বয়ংক্রিয় ভাবে য়ুক্ত হয়ে যাবে ।"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:780
 msgid ""
@@ -7665,7 +7667,7 @@ msgstr "উপগ্রহ (ইরিডিয়াম) ঝলকের পূর�
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
-msgstr "আরও উপগ্রহ"
+msgstr "আরও কৃত্রিম উপগ্রহ"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
@@ -7678,7 +7680,7 @@ msgstr "সংগ্রহ বাতিল করুন"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 msgid "New satellites"
-msgstr "নতুন উপগ্রহ"
+msgstr "নতুন কৃত্রিম উপগ্রহ"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
@@ -9955,11 +9957,11 @@ msgstr "সূর্যাস্তে উদয় / সূর্যোদয়ে �
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr ""
+msgstr "ভোরে উদয় / সন্ধ্যায় অস্ত : %1/%2 "
 
 #: plugins/Observability/src/Observability.cpp:209
 msgid "No Heliacal rise/set. "
-msgstr ""
+msgstr "ভোরে উদিত বা সন্ধ্যায় অস্তমিত হবে না । "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:211
@@ -10117,8 +10119,11 @@ msgstr ""
 "দিগন্তের নীচে নামা মাত্রই জ্যোতিষ্কটি দিগন্তের উপরে উঠে আসে ফলে "
 "জ্যোতিষ্কটিকে সারা রাত আকাশে থাকে । অপরপক্ষে সূর্যাস্তে অস্ত ও সূর্যোদয়ে "
 "উদয় বলতে, সূর্য ও জ্যোতিষ্কটির একসাথে উদয় ও অস্ত যাওয়া বোঝায় । তাই "
-"এক্ষেত্রে এই দুই সময়ের মাঝে বস্তুকে দেখতে পাওয়া সম্ভব নয় । তাছাড়া এগুলির "
-"দিনক্ষন পর্যবেক্ষন স্থানের উপর নির্ভর করে ।"
+"এক্ষেত্রে এই দুই দিনের মাঝে জ্যোতিষ্কটিকে দেখতে পাওয়া সম্ভব নয় । তাছাড়া "
+"এগুলির দিনক্ষন পর্যবেক্ষন স্থানের উপর নির্ভর করে । ভোরে উদয় বলতে সেই দিনটিকে "
+"বোঝায়, যেদিন পূর্বদিকে প্রথম জ্যোতিষ্কটিকে উদিত হতে দেখা যায় । অপরদিকে যে "
+"দিন শেষবারের মত পশ্চিমদিকে অস্ত যেতে দেখা যায় ষেদিনটি হল সন্ধ্যায় অস্ত "
+"যাওয়ার দিন ।"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -10339,7 +10344,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:97
 msgid "Show solution for Equation of Time"
-msgstr "সময় সমীকরণের সমাধান প্রদর্শণ"
+msgstr "সূর্যঘড়ি থেকে সময় পার্থক্য"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
@@ -10407,24 +10412,24 @@ msgstr "উল্কাবৃষ্টি"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:151
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "উল্কাবৃষ্টির উৎসবিন্দু"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:152
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "উৎসবিন্দুর নাম"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:153
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:233
 msgid "Show settings dialog"
-msgstr ""
+msgstr "তথ্য বিন্যাস বিভাগ"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:154
 msgid "Show search dialog"
-msgstr ""
+msgstr "উল্কাবৃষ্টি অনুসন্ধান বিভাগ"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:260
 msgid "Using the default Meteor Showers catalog."
-msgstr ""
+msgstr "প্রাথমিক তালিকা ব্যবহার করা হচ্ছে ।"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:573
 msgid ""
@@ -10442,24 +10447,34 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>এই সরঞ্জামটি নির্দিষ্ট সময় অন্তর হওয়া উল্কা বৃষ্টির পরিস্থিতি সৃষ্টি করে "
+"দেখায় ও বিভিন্ন সক্রিয় এবং নিষ্ক্রিয় উৎস বিন্দুগুলির অবস্থান দেখায় "
+"।</p><p>যে কোনো উৎস বিন্দুতে ক্লিক করলেই সেটির সমস্ত তথ্য দেখা যাবে, যার "
+"বেশিরভাগটাই <a href=\"http://imo.net\">International Meteor Organization</a> "
+"তালিকা থেকে নেওয়া ।</p><p>উৎসবিন্দুগুলি তিন রকমের :<ul><li><b>জ্ঞাত :</b> "
+"এটি আগে ঘটে যাওয়া কিংবা পূর্ব অনুমানিত কোনো উৎসবিন্দু, সুতরাং এটি সক্রিয় এবং "
+"সমস্ত তথ্যই এক্ষেত্রে জানা ।</li><li><b>অজ্ঞাত:</b> উৎসবিন্দুটি সক্রিয়, "
+"অর্থাৎ বাস্তবে উল্কাপাত ঘটতে পারে কিন্তু তা সম্পর্কে সঠিক কোনো উপলব্ধ নয় "
+"।</li><li><b>নিষ্ক্রিয় :</b> বর্তমানে এখান থেকে উল্কাপাতের কোনো সম্ভাবনা নেই "
+"।</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:128
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr "সুনিশ্চিত"
+msgstr "জ্ঞাত"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:132
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
 msgid "Generic"
-msgstr ""
+msgstr "অজ্ঞাত"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:520
 msgid "generic data"
-msgstr ""
+msgstr "অজ্ঞাত"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:524
 msgid "confirmed data"
-msgstr ""
+msgstr "জ্ঞাত"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:528
 msgid "inactive"
@@ -10481,7 +10496,7 @@ msgstr "পৃথিবী সাপেক্ষে উল্কার গতি
 #: plugins/MeteorShowers/src/MeteorShower.cpp:575
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "প্রভা সূচক : %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 #, qt-format
@@ -10494,7 +10509,7 @@ msgstr "সক্রিয়"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:597
 msgid "Activity"
-msgstr ""
+msgstr "সক্রিয়তা"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:602
 #, qt-format
@@ -10503,7 +10518,7 @@ msgstr "সর্বোচ্চ : %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:605
 msgid "Solar longitude"
-msgstr ""
+msgstr "সূর্যের অবস্থান দ্রাঘিমা"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:615
 msgid "variable"
@@ -10512,12 +10527,12 @@ msgstr "পরিবর্তনশীল"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:33
 msgid "Quadrantids"
-msgstr ""
+msgstr "প্রাক বাৎসরিক"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:35
 msgid "Lyrids"
-msgstr ""
+msgstr "লাইরিডস্"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
@@ -10537,7 +10552,7 @@ msgstr "η-অ্যাকোয়ারিডস্"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr ""
+msgstr "জুন মাসিক বুটিডস্"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
@@ -10872,7 +10887,7 @@ msgstr "৮পি/টাট্টেল ধূমকেতু"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:179
 msgid "Comet 3D/Biela"
-msgstr "৩ডি/বিযেলা ধূমকেতু"
+msgstr "৩ডি/বিয়েলা ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:181
@@ -10892,17 +10907,17 @@ msgstr "স্বোয়াশম্যান-ওয্যাচম্যান �
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:187
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "গৌন গ্রহ ২০০৩ ই এইচ ১ ও সি/১৪৯০ ধূমকেতু"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:189
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "গৌন গ্রহ (৪৪৫০) প্যান"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:191
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "গৌন গ্রহ ২০০৮ ই ডি ৬৯"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:193
@@ -10912,12 +10927,12 @@ msgstr "২পি/এনকে ধূমকেতু"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:195
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "গৌন গ্রহ ২০০৪ টি জি ১০"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:197
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "গৌন গ্রহ (৩২০০) ফেইথন"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:130
 msgid "Updating..."
@@ -10944,6 +10959,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a "
 "marker for each active and inactive radiant."
 msgstr ""
+"এই সরঞ্জামের সাহায্যে নির্দিষ্ট সময় অন্তর হওয়া উল্কাবৃষ্টি গুলি সমেত আকাশের "
+"পটভূমিতে বিভিন্ন সক্রিয় ও নিষ্ক্রিয় উৎসবিন্দুগুলির অবসথান দেখা যায় ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:221
 msgid ""
@@ -10952,6 +10969,9 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"উৎসবিন্দুতে ক্লিক করলেই সেটির অবস্থান, সক্রিয়তা সহ অন্যান্য তথ্য গুলি দেখা "
+"যায়, যার বেশিরভাগটাই <a href=\"http://imo.net\">International Meteor "
+"Organization</a> তালিকা থেকে নেওয়া ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:228
 msgid ""
@@ -10963,6 +10983,11 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>উৎসবিন্দুগুলি তিন রকমের :<ul><li><b>জ্ঞাত :</b> এটি আগে ঘটে যাওয়া কিংবা "
+"পূর্ব অনুমানিত কোনো উৎসবিন্দু, সুতরাং এটি সক্রিয় এবং সমস্ত তথ্যই এক্ষেত্রে "
+"জানা ।</li><li><b>অজ্ঞাত:</b> উৎসবিন্দুটি সক্রিয়, অর্থাৎ বাস্তবে উল্কাপাত "
+"ঘটতে পারে কিন্তু তা সম্পর্কে সঠিক কোনো উপলব্ধ নয় ।</li><li><b>নিষ্ক্রিয় "
+":</b> বর্তমানে এখান থেকে উল্কাপাতের কোনো সম্ভাবনা নেই ।</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:250
 msgid "Terms"
@@ -10983,11 +11008,16 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"উল্কাবৃষ্টি একটি অনন্য সুন্দর মহাজাগতিক ঘটনা । এই সময় আকাশের কোনো একটি ছোটো "
+"এলাকা থেকে অসংখ্য উল্কা ঝরে পড়তে দেখা যায় । সচরাচর এগুলি খুবই ছোটো হয়, বালির "
+"কনার মত । তাই এগুলি ভূপৃষ্ঠে আছড়ে পড়ার আগেই পুড়ে শেষ হয়ে যায় । এগুলির উৎস "
+"মহাকাশে ছড়িয়ে ছিটিয়ে থাকা নানা ধ্বংসাবশেষ । প্রবল এবং অস্বাভাবিক হারে "
+"উল্কাবৃষ্টির ক্ষেত্রে ঘন্টাতে ১০০০ এরও বেশি উল্কাপাত ঘটতে পারে ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:261
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
-msgstr "উৎপত্তি বিন্দু"
+msgstr "উৎস বিন্দু"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 msgid ""
@@ -10996,8 +11026,8 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
-"উৎপত্তি বিন্দু হল আকাশের এমন একটি কাল্পনিক বিন্দু যেদিক থেকে উল্কাগুলি ধেয়ে "
-"আসছে বলে মনে হয় । যেমন - পারসেইড উল্কাবৃষ্টি, এক্ষেত্রে উল্কাগুলিকে পারসিউস "
+"উৎস বিন্দু হল আকাশের এমন একটি কাল্পনিক বিন্দু যেদিক থেকে উল্কাগুলি ধেয়ে আসছে "
+"বলে মনে হয় । যেমন - পারসেইড উল্কাবৃষ্টি, এক্ষেত্রে উল্কাগুলিকে পারসিউস "
 "মন্ডলের একটি বিন্দু থেকে ধেয়ে আসছে বলে মনে হয় ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:269
@@ -11008,8 +11038,8 @@ msgid ""
 "and is not considered part of that shower."
 msgstr ""
 "আকাশের যেকোনো দিকেই উক্কাপাত দেখা যেতে পারে । তবে তার গতিপথ পর্যবেক্ষন করলে "
-"অনেক সময় দেখা যায় যে সেটি কোনো জানা উৎপত্তি বিন্দু থেকে আসছে । কিন্তু যদি তা "
-"কোনো উৎপত্তি বিন্দু থেকে না আসে তবে তাকে বিক্ষিপ্ত উল্কাপাত বলে, সেটি কোনো "
+"অনেক সময় দেখা যায় যে সেটি কোনো জানা উৎস বিন্দু থেকে আসছে । কিন্তু যদি তা "
+"কোনো উৎস বিন্দু থেকে না আসে তবে তাকে বিক্ষিপ্ত উল্কাপাত বলে, সেটি কোনো "
 "উল্কাবৃষ্টির অংশ নয় ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
@@ -11018,8 +11048,8 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
-"অনেক সময় উল্কাবৃষ্টির উৎপত্তি বিন্দু আাকাশে তারাদের পটভূমিতে তাদের স্থান "
-"পরিবর্তন করে থাকে । যেমন - ডেল্টা অরাইজিডস উল্কাবৃষ্টির উৎপত্তি বিন্দু প্রতি "
+"অনেক সময় উল্কাবৃষ্টির উৎস বিন্দু আাকাশে তারাদের পটভূমিতে তাদের স্থান "
+"পরিবর্তন করে থাকে । যেমন - ডেল্টা অরাইগিডস উল্কাবৃষ্টির উৎস বিন্দু প্রতি "
 "রাতে এক ডিগ্রিরও বেশি স্থান পরিবর্তন করে ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:278
@@ -11034,13 +11064,13 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
-"একদম ঝকঝকে পরিষ্কার আকাশে মধ্যগগনে অবস্থিত কোনো উৎপত্তি বিন্দু থেকে এক "
-"ঘন্টায় খালি চোখে (৬.৫ উজ্জ্বল্যতা পর্যন্ত) যতগুলি উল্কাপাত দেখা যায় তাকে "
-"উল্কাপাতের হার বলে ।"
+"একদম ঝকঝকে পরিষ্কার আকাশে মধ্যগগনে অবস্থিত কোনো উৎস বিন্দু থেকে এক ঘন্টায় "
+"খালি চোখে (৬.৫ উজ্জ্বল্যতা পর্যন্ত) যতগুলি উল্কাপাত দেখা যায় তাকে উল্কাপাতের "
+"হার বলে ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:286
 msgid "Population index"
-msgstr ""
+msgstr "প্রভা সূচক"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:288
 msgid ""
@@ -11049,6 +11079,9 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"প্রভা সূচক বলতে উল্কাবৃষ্টির উজ্জ্বল্যতা বন্টনের মানকে বোঝায় । এর মান ২.৫ এর "
+"কম হলে উজ্জ্বল উল্কার সংখ্যা বেশি থাকে । আবার ৩.০ এর বেশি হলে ম্লান উল্কার "
+"প্রাধান্য থাকে ।"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:293
 msgid "Notes"
@@ -11109,44 +11142,44 @@ msgstr "ধরণ"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:186
 msgid "Peak"
-msgstr ""
+msgstr "সর্বোচ্চ"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:188
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "উল্কাবৃষ্টি সংক্রান্ত  বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "উল্কাবৃষ্টি সংক্রান্ত তথ্য বিন্যাস"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "সাধারণ"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "শুরু থেকেই সক্রিয় থাকবে"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "টুলবারে উল্কাবৃষ্টি সরঞ্জামটি দেখানো হবে"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "টুলবারে উল্কাবৃষ্টি অনুসন্ধান সরঞ্জামটি দেখানো হবে"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
-msgstr ""
+msgstr "উৎসবিন্দুগুলির অবস্থান দেখা যাবে"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
-msgstr ""
+msgstr "উৎসবিন্দুগুলির নাম দেখা যাবে"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
-msgstr ""
+msgstr "শুধু সক্রিয় উৎসবিন্দুগুলি দেখা যাবে"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:437
 msgid "Label font size (pixels)"
@@ -11154,27 +11187,27 @@ msgstr "হরফের আকার (পিক্সেল) :"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
-msgstr ""
+msgstr "উৎসবিন্দুগুলির পছন্দসই রং"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "সক্রিয় উৎস কিন্তু তথ্য অজানা"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "নিষ্ক্রিয় উৎস"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Inactive"
-msgstr ""
+msgstr "নিষ্ক্রিয়"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "সক্রিয় ও তথ্য উপলব্ধ"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "সয়ংক্রিয় তথ্য সংশোধন"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
@@ -11182,11 +11215,11 @@ msgstr "পরবর্তী সংশোধন :"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "শেষ প্রচেষ্টা"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "পরিস্থিতি :"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
@@ -11194,7 +11227,7 @@ msgstr "সংশোধনী"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:189
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "উল্কাবৃষ্টি অনুসন্ধান"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
@@ -11319,7 +11352,7 @@ msgstr "টুলবারে সরঞ্জামটি দেখানো হ
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "বেছে নেওয়া ব্যবস্থায় স্থানাঙ্ক দেখাবে"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
@@ -11327,7 +11360,7 @@ msgstr "স্থানাঙ্ক ব্যবস্থা :"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "স্ক্রিনের যে অংশে স্থানাঙ্ক দেখাবে"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
@@ -11343,27 +11376,27 @@ msgstr "কোটি"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:166
 msgid "Loading model..."
-msgstr ""
+msgstr "প্রতিকৃতির তথ্য সংগ্রহ করা হচ্ছে..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:181
 msgid "Transforming model..."
-msgstr ""
+msgstr "প্রতিকৃতি গঠন করা হচ্ছে..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:193
 msgid "Loading ground..."
-msgstr ""
+msgstr "ভূমির তথ্য সংগ্রহ করা হচ্ছে..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:204
 msgid "Transforming ground..."
-msgstr ""
+msgstr "ভূমি গঠন করা হচ্ছে..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:232
 msgid "Calculating collision map..."
-msgstr ""
+msgstr "বিচরণ ক্ষেত্র নির্ধারণ করা হচ্ছে..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:247
 msgid "Finalizing load..."
-msgstr ""
+msgstr "গঠন সম্পূর্ণ করা হচ্ছে..."
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:680
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
@@ -11402,23 +11435,23 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:234
 msgid "Show viewpoint dialog"
-msgstr ""
+msgstr "দৃশ্যরূপ বিভাগ"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:235
 msgid "Toggle shadows"
-msgstr ""
+msgstr "ছায়া চালু বা বন্ধ করুন"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:236
 msgid "Toggle debug information"
-msgstr ""
+msgstr "ডিবাগ তথ্য চালু বা বন্ধ করুন"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:237
 msgid "Toggle location text"
-msgstr ""
+msgstr "ঠিকানার নাম চালু বা বন্ধ করুন"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:238
 msgid "Toggle torchlight"
-msgstr ""
+msgstr "টর্চ চালু বা বন্ধ করুন"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:239
 msgid "Reload shaders"
@@ -11430,24 +11463,25 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:335
 msgid "Loading scene. Please be patient!"
-msgstr ""
+msgstr "দৃশ্যরূপটি গঠন করা হচ্ছে । একটু অপেক্ষা করুন !"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:337
 #, qt-format
 msgid "Loading scene '%1'"
-msgstr ""
+msgstr "'%1' দৃশ্যরূপটি গঠন করা হচ্ছে"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:360
 msgid "Could not load scene, please check log for error messages!"
-msgstr ""
+msgstr "দৃশ্যরূপ গঠন করা যায় নি, ত্রুটি সম্পর্কে জানতে কার্যবিবরণী দেখুন !"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:364
 msgid "Scene successfully loaded."
-msgstr ""
+msgstr "দৃশ্যরূপ সফল ভাবে গঠন করা হয়েছে ।"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:423
 msgid "Could not load scene info, please check log for error messages!"
 msgstr ""
+"দৃশ্যরূপটির বিবরণ জানা যাচ্ছে না, ত্রুটি সম্পর্কে জানতে কার্যবিবরণী দেখুন ।"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:447
 #, qt-format
@@ -11456,7 +11490,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:480
 msgid "Please load a scene first!"
-msgstr ""
+msgstr "প্রথমে যে কোনো একটি দৃশ্যরূপ পছন্দ করুন!"
 
 #: plugins/Scenery3d/src/Scenery3dMgr.cpp:517
 #, qt-format
@@ -11691,41 +11725,41 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "ত্রিমাত্রিক ভূমিরূপ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "শুরর সময় এটি ব্যবহার করা হবে"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "দৃশ্যরূপ গঠন/সঞ্চয়"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "টর্চের ক্ষমতা :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "টর্চের ব্যাপ্তি :"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "টর্চ (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
 msgid "Show grid coordinates (%1)"
-msgstr ""
+msgstr "অবস্থান স্থানাঙ্ক (%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "দৃশ্যগত বৈশিষ্ট্য"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
-msgstr ""
+msgstr "পিক্সেল ধরে ধরে প্রতিকৃতি গঠন"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
@@ -11733,7 +11767,7 @@ msgstr "ছায়া"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "সরল ছায়া"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
@@ -11753,23 +11787,23 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "হার্ডওয়্যার"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "নিম্নমান"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "নিম্নমান + হার্ডওয়্যার"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "উচ্চমান (মন্থর)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "উচ্চমান + হার্ডওয়্যার (মন্থর)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
@@ -11801,37 +11835,37 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:503
 msgid "Quality/Performance settings"
-msgstr ""
+msgstr "গুণগত/কার্যগত বৈশিষ্ট্য"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
-msgstr ""
+msgstr "সঞ্চিত দৃশ্যরূপ"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
-msgstr ""
+msgstr "দৃশ্যরূপটি গঠন করুন"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Delete view"
-msgstr ""
+msgstr "দৃশ্যরূপটি মুছে ফেলুন"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Add current view"
-msgstr ""
+msgstr "বর্তমান দৃশ্যরূপটি যোগ করুন"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "তারিখ সহ দৃশ্যরূপটি গঠন বা যোগ"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
-msgstr ""
+msgstr "নাম :"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:59
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:191
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:364
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "ঘটনা রেখা"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:62
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
@@ -11847,7 +11881,7 @@ msgstr "সূর্যায়ণ"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:758
 msgid "Crossquarter"
-msgstr ""
+msgstr "মরশুমি সূচনা রেখা"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:761
 msgid "Major Lunar Standstill"
@@ -11872,7 +11906,7 @@ msgstr "পছন্দসই বস্তু"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:782
 msgid "error if you can read this"
-msgstr ""
+msgstr "ত্রুটি দেখা দিযেছে"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:785
 msgid "Mercury"
@@ -11884,13 +11918,16 @@ msgstr "শুক্র"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:182
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "ঘটনা রেখা সরঞ্জাম"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:188
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"ঘটনা রেখা সরঞ্জামটি আকাশের গায়ে কিছু অক্ষরেখাকে উদ্ভাসিত করে দেখায় । এই রেখা "
+"গুলি কিছু বিশিষ্ট্য মহাজাগতিক ঘটনার সঙ্গে যুক্ত এবং প্রাচীন কালে নানা "
+"জ্যোতির্বৈজ্ঞানিক গণনার জন্য এগুলি ব্যবহার করা হত ।"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:189
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
@@ -11900,7 +11937,7 @@ msgstr "বিষুবরেখা ও তার থেকে সূর্য�
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
-msgstr ""
+msgstr "মরশুমি সূচনা রেখা বা ত্রৈমাসিক বিভাজন রেখা"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:191
 msgid "Declinations of the Major Lunar Standstills"
@@ -11912,15 +11949,15 @@ msgstr "বিষুবরেখা থেকে চাঁদের সর্ব
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:193
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "সুবিন্দু রেখা"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:194
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "কুবিন্দু রেখা"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:195
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "বিষুবরেখা থেকে পছন্দসই বস্তুর সর্বোচ্চ চ্যুতি"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:196
 msgid "Current declination of the sun"
@@ -11932,7 +11969,7 @@ msgstr "চাঁদের বর্তমান বিষুবলম্ব"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:198
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "খালি চোখে দেখতে পাওয়া গ্রহগুলির বিষুবরেখা থেকে সর্বোচ্চ চ্যুতি"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:199
 msgid ""
@@ -11941,6 +11978,9 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is "
 "high in the sky due to parallax effects."
 msgstr ""
+"চাঁদ কাছে ও বড় হওয়ার জন্য এর অবস্থানে লম্বণ প্রভাব খুব বেশি । তাই একই সময়ে "
+"বিভিন্ন স্থান থেকে দেখলে এর অবস্থানের সামান্য হেরফের লক্ষ্য করা যায় । তাই "
+"প্রতিটি চন্দ্রায়ন রেখা আসলে খুব কাছাকাছি থাকা দুটি রেখার সমষ্টি ।"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Select color for equinox line"
@@ -11952,7 +11992,7 @@ msgstr "বিষুবরেখা থেকে সূর্যের সর্
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:305
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "মরশুমি সূচনা রেখার রং"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:317
 msgid "Select color for major standstill lines"
@@ -11984,19 +12024,19 @@ msgstr "বিষুবরেখা থেকে চাঁদের চ্যু
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:401
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "বিষুবরেখা থেকে পছন্দসই গ্রহের চ্যুতি রেখার রং"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:335
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "ঘটনা রেখার  বৈশিষ্ট্য বিন্যাস"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:336
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "ঘটনা রেখা দেখানোর সরঞ্জামের রূপরেখা"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:338
 msgid "To change colors you may have to leave fullscreen mode!"
-msgstr ""
+msgstr "রং পরিবর্তনের সময় ফুলস্ক্রীন অবস্থা থেকে বেরিয়ে যেতে হতে পারে !"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:339
 msgid "Equinox line (Equator)"
@@ -12008,7 +12048,7 @@ msgstr "সূর্যায়ন"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:341
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "মরশুমি সূচনা রেখা"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:343
 msgid "Change color"
