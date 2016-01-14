@@ -333,8 +333,6 @@ IF(STELLARIUM_GUI_MODE STREQUAL "Standard")
           gui/AstroCalcDialog.cpp
           gui/StelDialog.hpp
           gui/StelDialog.cpp
-          gui/AddOnHeader.hpp
-          gui/AddOnHeader.cpp
           gui/AddOnDialog.hpp
           gui/AddOnDialog.cpp
           gui/AddOnScanner.hpp

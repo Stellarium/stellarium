@@ -18,6 +18,7 @@
  */
 
 #include <QHeaderView>
+#include <QMouseEvent>
 #include <QScrollBar>
 #include <QStringBuilder>
 
@@ -28,7 +29,6 @@
 
 AddOnTableView::AddOnTableView(QWidget* parent)
 	: QTableView(parent)
-	, m_pAddOnHeader(NULL)
 	, m_pCheckboxGroup(new QButtonGroup(this))
 {
 	setAutoFillBackground(true);
@@ -53,15 +53,10 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 {
 	QTableView::setModel(model);
 
-	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
-	m_pAddOnHeader = new AddOnHeader(lastColumn, Qt::Horizontal, this);
-	setHorizontalHeader(m_pAddOnHeader);
 	horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 	horizontalHeader()->setVisible(true);
-	connect(m_pAddOnHeader, SIGNAL(toggled(bool)),
-		this, SLOT(setAllChecked(bool)), Qt::UniqueConnection);
 
 	// Insert checkboxes to the checkboxgroup (rows)
 	for (int row=0; row < model->rowCount(); row++)
