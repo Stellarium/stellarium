@@ -63,10 +63,43 @@ void TerminateDE430()
   jpl_close_ephemeris(ephem);
 }
 
-void GetDe430Coor(const double jde, const int planet_id, double * xyz, const int centralBody_id)
+bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int centralBody_id)
 {
     if(initDone)
     {
+	// This may return some error code!
+	int jplresult=jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
+
+	switch (jplresult)
+	{
+		case 0: // all OK.
+			break;
+		case JPL_EPH_OUTSIDE_RANGE:
+			qDebug() << "GetDe431Coor: JPL_EPH_OUTSIDE_RANGE at jde" << jde << "for planet" << planet_id;
+			return false;
+			break;
+		case JPL_EPH_READ_ERROR:
+			qDebug() << "GetDe431Coor: JPL_EPH_READ_ERROR at jde" << jde << "for planet" << planet_id;
+			return false;
+			break;
+		case JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS:
+			qDebug() << "GetDe431Coor: JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS at jde" << jde << "for planet" << planet_id;
+			return false;
+			break;
+		case JPL_EPH_INVALID_INDEX:
+			qDebug() << "GetDe431Coor: JPL_EPH_INVALID_INDEX at jde" << jde << "for planet" << planet_id;
+			return false;
+			break;
+		case JPL_EPH_FSEEK_ERROR:
+			qDebug() << "GetDe431Coor: JPL_EPH_FSEEK_ERROR at jde" << jde << "for planet" << planet_id;
+			return false;
+			break;
+		default: // Should never happen...
+			qDebug() << "GetDe431Coor: unknown error" << jplresult << "at jde" << jde << "for planet" << planet_id;
+			return false;
+			break;
+	}
+
 	jpl_pleph(ephem, jde, planet_id, centralBody_id, tempXYZ, 0);
 
         tempICRF = Vec3d(tempXYZ[0], tempXYZ[1], tempXYZ[2]);
@@ -75,7 +108,9 @@ void GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
         xyz[0] = tempECL[0];
         xyz[1] = tempECL[1];
         xyz[2] = tempECL[2];
+	return true;
     }
+    return false;
 }
 
 //void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz, const int centralBody_id)
