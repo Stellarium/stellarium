@@ -70,14 +70,11 @@ void EphemWrapper::init_de431(const char* filepath)
 
 bool jd_fits_de431(const double jd)
 {
-	// return !(jd < -3100015.5 || jd > 8000016.5);
-	// GZ Those limits lead to crash.
-	//    Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
+	//Correct limits found via jpl_get_double(). Limits hardcoded to avoid calls each time.
 	//return !(jd < -3027215.5 || jd > 7930192.5);
-	// GZ limits inside those where sun can jump between ecliptic of date and ecliptic2000.
-	// TODO: Behaviour at upper limit is totally whacko!
-	//return !(jd < -3027188.25 || jd > 7930192.5);
-	return ((jd > -3027188.25 ) && (jd < 7930192.5));
+	//This limits inside those where sun can jump between ecliptic of date and ecliptic2000.
+	// We lose a month in -13000 and a few months in +17000, this should not matter.
+	return ((jd > -3027188.25 ) && (jd < 7930056.87916));
 }
 
 bool jd_fits_de430(const double jd)
