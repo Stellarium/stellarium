@@ -87,21 +87,22 @@ bool jd_fits_de430(const double jd)
 	return ((jd > 2287184.5) && (jd < 2688976.5));
 }
 
-bool use_de430(double jd)
+bool use_de430(const double jd)
 {
     return StelApp::getInstance().getCore()->de430IsActive() &&
         jd_fits_de430(jd);
 }
 
-bool use_de431(double jd)
+bool use_de431(const double jd)
 {
     return StelApp::getInstance().getCore()->de431IsActive() &&
         jd_fits_de431(jd);
 }
 
 // planet_id is ONLY one of the #defined values 0..8 above.
-void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
+void get_planet_helio_coordsv(const double jd, double xyz[3], const int planet_id)
 {
+	bool deOk=false;
 	if(!std::isfinite(jd))
 	{
 		qDebug() << "get_planet_helio_coordsv(): SKIPPED CoordCalc, jd is infinite/nan: " << jd;
@@ -110,13 +111,13 @@ void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 
 	if(use_de430(jd))
 	{
-		GetDe430Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe430Coor(jd, planet_id + 1, xyz);
 	}
 	else if(use_de431(jd))
 	{
-		GetDe431Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe431Coor(jd, planet_id + 1, xyz);
 	}
-	else //VSOP87 as fallback
+	if (!deOk) //VSOP87 as fallback
 	{
 		GetVsop87Coor(jd, planet_id, xyz);
 	}
@@ -126,6 +127,7 @@ void get_planet_helio_coordsv(double jd, double xyz[3], int planet_id)
 // For ephemerides like DE4xx, JDE0 is irrelevant.
 void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], int planet_id)
 {
+	bool deOk=false;
 	if(!(std::isfinite(jd) && std::isfinite(jd0)))
 	{
 		qDebug() << "get_planet_helio_osculating_coordsv(): SKIPPED CoordCalc, jd0 or jd is infinite/nan. jd0:" << jd0 << "jd: "<< jd;
@@ -134,13 +136,13 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
 
 	if(use_de430(jd))
 	{
-		GetDe430Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe430Coor(jd, planet_id + 1, xyz);
 	}
 	else if(use_de431(jd))
 	{
-		GetDe431Coor(jd, planet_id + 1, xyz);
+		deOk=GetDe431Coor(jd, planet_id + 1, xyz);
 	}
-	else //VSOP87 as fallback
+	if (!deOk) //VSOP87 as fallback
 	{
 		GetVsop87OsculatingCoor(jd0, jd, planet_id, xyz);
 	}
@@ -154,6 +156,7 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], i
 void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 {
 	Q_UNUSED(unused);
+	bool deOk=false;
 	if(!std::isfinite(jd))
 	{
 		qDebug() << "get_pluto_helio_coordsv(): SKIPPED PlutoCoordCalc, jd is infinite/nan:" << jd;
@@ -162,15 +165,16 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], void* unused)
 
 	if(use_de430(jd))
 	{
-		GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+		deOk=GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
 	}
 	else if(use_de431(jd))
 	{
-		GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
+		deOk=GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz);
 	}
-	else // fallback to previous solution
-
+	if (!deOk) // fallback to previous solution
+	{
 		get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);
+	}
 }
 
 /* Return 0 for the sun */
@@ -190,6 +194,7 @@ void get_venus_helio_coordsv(double jd,double xyz[3], void* unused)
 
 void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused) 
 {
+	bool deOk=false;
 	if(!std::isfinite(jd))
 	{
 		qDebug() << "get_earth_helio_coordsv(): SKIPPED EarthCoordCalc, jd is infinite/nan:" << jd;
@@ -198,13 +203,13 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], void* unused)
 
 	if(use_de430(jd))
 	{
-		GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+		deOk=GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
 	}
 	else if(use_de431(jd))
 	{
-		GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
+		deOk=GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz);
 	}
-	else //VSOP87 as fallback
+	if (!deOk) //VSOP87 as fallback
 	{
 		double moon[3];
 		GetVsop87Coor(jd,EPHEM_EMB_ID,xyz);
@@ -292,11 +297,12 @@ void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
  * param jd Julian day, rect pos */
 void get_lunar_parent_coordsv(double jde,double xyz[3], void* unused)
 {
+	bool deOk=false;
 	if(use_de430(jde))
-		GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
+		deOk=GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
 	else if(use_de431(jde))
-		GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
-	else
+		deOk=GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz, EPHEM_JPL_EARTH_ID);
+	if (!deOk) // fallback...
 		GetElp82bCoor(jde,xyz);
 }
 
