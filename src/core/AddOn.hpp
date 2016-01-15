@@ -27,14 +27,6 @@ class AddOn : public QObject
 {
 	Q_OBJECT
 public:
-	//! @enum Source
-	enum Source
-	{
-		OficialCatalog,
-		UserCatalog,
-		Uncatalogued
-	};
-
 	AddOn(const QString addOnId, const QVariantMap& map);
 	virtual ~AddOn();
 
