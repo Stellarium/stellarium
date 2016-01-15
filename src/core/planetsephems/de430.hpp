@@ -31,7 +31,8 @@ THE SOFTWARE.
 
 void InitDE430(const char* filepath);
 // most of the time centralBody_id likely is the Sun. However, for Moon, use centralBody_id=EPHEM_JPL_EARTH_ID=3
-void GetDe430Coor(const double jde, const int planet_id, double * xyz, const int centralBody_id=CENTRAL_PLANET_ID);
+// GZ new: return true if OK, false if something was wrong with the JPL functions. In this case, see log for details.
+bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int centralBody_id=CENTRAL_PLANET_ID);
 // Not possible for a DE.
 //void GetDe430OsculatingCoor(double jd0, double jd, int planet_id, double *xyz, const int centralBody_id=CENTRAL_PLANET_ID);
 

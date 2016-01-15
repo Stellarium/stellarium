@@ -591,7 +591,11 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
       eph->curr_cache_loc = nr;
                   /* Read two blocks ahead to account for header: */
       if(fseek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
-         return(JPL_EPH_FSEEK_ERROR);
+      {
+	      // GZ: Make sure we will try again on next call...
+	      eph->curr_cache_loc=0;
+	      return(JPL_EPH_FSEEK_ERROR);
+      }
       if(fread(buf, sizeof(double), (size_t)eph->ncoeff, eph->ifile)
                                != (size_t)eph->ncoeff)
         return(JPL_EPH_READ_ERROR);
